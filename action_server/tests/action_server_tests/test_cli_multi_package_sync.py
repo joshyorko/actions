@@ -2,6 +2,8 @@ import asyncio
 import json
 from pathlib import Path
 
+import pytest
+
 from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 
@@ -45,6 +47,7 @@ def _start_sync(datadir: Path, cwd: Path, directories: tuple[Path, ...]):
         min_processes=0,
         max_processes=2,
         reuse_processes=False,
+        add_shutdown_api=True,
         additional_args=[f"--dir={directory}" for directory in directories],
         timeout=30,
     )
@@ -62,6 +65,29 @@ async def _call_mcp_tool(process: ActionServerProcess, tool_name: str) -> str:
         return result.content[0].text
 
 
+def _stop_naturally(process: ActionServerProcess) -> int:
+    from actions.server._common.wait_for import wait_for_condition
+
+    try:
+        if process.process.returncode is None:
+            response = ActionServerClient(process).post_get_response(
+                "api/shutdown/", {}, params={"timeout": 5}
+            )
+            assert response.status_code == 200
+            wait_for_condition(
+                lambda: process.process.returncode is not None,
+                msg="Action Server did not exit after HTTP shutdown",
+                timeout=10,
+                sleep=0.05,
+            )
+        return_code = process.process.returncode
+        assert return_code == 0
+        return return_code
+    finally:
+        process.stop()
+
+
+@pytest.mark.integration_test
 def test_start_sync_treats_repeated_dirs_as_one_desired_set(tmp_path):
     package_a = tmp_path / "package_a"
     package_b = tmp_path / "package_b"
@@ -122,7 +148,7 @@ def test_start_sync_treats_repeated_dirs_as_one_desired_set(tmp_path):
         assert asyncio.run(_call_mcp_tool(process, "package_a__do_it")) == "A-do_it"
         assert asyncio.run(_call_mcp_tool(process, "package_b__do_it")) == "B-do_it"
     finally:
-        process.stop()
+        _stop_naturally(process)
 
     # Restart with the reverse ordering, then repeat the same desired set.
     for directories in ((package_b, package_a), (package_a, package_b)):
@@ -148,7 +174,7 @@ def test_start_sync_treats_repeated_dirs_as_one_desired_set(tmp_path):
                     asyncio.run(_call_mcp_tool(process, tool_name)) == expected_result
                 )
         finally:
-            process.stop()
+            _stop_naturally(process)
 
     # A package-local change replaces its previous action without affecting B.
     _write_actions(package_a, {"from_package_a_v2": "A2", "do_it": "A-do_it-v2"})
@@ -179,7 +205,7 @@ def test_start_sync_treats_repeated_dirs_as_one_desired_set(tmp_path):
             },
         )
     finally:
-        process.stop()
+        _stop_naturally(process)
 
     # Omit B from the complete desired set: only B's action becomes disabled.
     process = _start_sync(datadir, tmp_path, (package_a,))
@@ -202,7 +228,7 @@ def test_start_sync_treats_repeated_dirs_as_one_desired_set(tmp_path):
             {"from_package_a_v2", "package_a__do_it"},
         )
     finally:
-        process.stop()
+        _stop_naturally(process)
 
     # Add C while retaining A; B remains disabled because it is outside the
     # entire desired set for this start invocation.
@@ -229,9 +255,10 @@ def test_start_sync_treats_repeated_dirs_as_one_desired_set(tmp_path):
             {"from_package_a_v2", "from_package_c", "package_a__do_it"},
         )
     finally:
-        process.stop()
+        _stop_naturally(process)
 
 
+@pytest.mark.integration_test
 def test_start_sync_rejects_bad_later_package_without_partial_database_update(
     tmp_path,
 ):
