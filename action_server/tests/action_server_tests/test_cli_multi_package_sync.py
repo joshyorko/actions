@@ -1,5 +1,6 @@
 import asyncio
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -8,7 +9,7 @@ from actions.server._selftest import ActionServerClient, ActionServerProcess
 
 
 @pytest.fixture(autouse=True)
-def _bypass_proxy_for_loopback(monkeypatch, tmp_path):
+def _bypass_proxy_for_loopback(monkeypatch, tmp_path_factory):
     # These integration tests address a server bound to localhost. Environment
     # proxy settings in hosted runners must not intercept that local traffic.
     for name in (
@@ -20,8 +21,10 @@ def _bypass_proxy_for_loopback(monkeypatch, tmp_path):
         "all_proxy",
     ):
         monkeypatch.delenv(name, raising=False)
-    isolated_home = tmp_path / "test-home"
-    isolated_home.mkdir()
+    # The Go wrapper caches its frozen executable under HOME. Share one empty
+    # home for this pytest invocation so each test does not extract another copy.
+    isolated_home = tmp_path_factory.getbasetemp() / "multi-package-test-home"
+    isolated_home.mkdir(exist_ok=True)
     monkeypatch.setenv("HOME", str(isolated_home))
     monkeypatch.setenv("LOCALAPPDATA", str(isolated_home))
 
@@ -37,6 +40,22 @@ def _bypass_proxy_for_loopback(monkeypatch, tmp_path):
 
 def _write_actions(package_dir: Path, action_results: dict[str, str]) -> None:
     package_dir.mkdir(exist_ok=True)
+    if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
+        # The frozen executable override also handles `import`; native acceptance
+        # therefore needs the same managed package contract as `start`.
+        (package_dir / "package.yaml").write_text(
+            "spec-version: v2\n"
+            f"name: {package_dir.name}\n"
+            "description: Disposable multi-package CLI acceptance fixture.\n"
+            "version: 0.0.1\n"
+            "dependencies:\n"
+            "  conda-forge:\n"
+            "    - python=3.12\n"
+            "    - uv=0.9.26\n"
+            "  pypi:\n"
+            "    - actions-core=1.0.2\n",
+            encoding="utf-8",
+        )
     source = ["from actions import action", ""]
     for function_name, result in action_results.items():
         source.extend(
@@ -410,6 +429,8 @@ def test_start_sync_rejects_bad_later_package_without_partial_database_update(
 
     _write_actions(package_a, {"from_package_a_v2": "A2"})
     package_c.mkdir()
+    if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
+        _write_actions(package_c, {})
     (package_c / "package_actions.py").write_text(
         "from actions import action\n"
         "@action\n"

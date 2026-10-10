@@ -667,7 +667,8 @@ The supported wire contract is MCP `2026-07-28`: discover, then make stateless
 per-request `/mcp` calls without `initialize`/`initialized` or
 `Mcp-Session-Id`; `/sse` is intentionally absent. SDK v2 catalog results carry
 `ttlMs: 0` and `cacheScope: private`, so they are immediately stale rather than
-indefinitely cacheable. Each tools/resources/resource-templates/prompts result
+indefinitely cacheable. Within one admitted catalog, each
+tools/resources/resource-templates/prompts result
 also carries the same `actions.catalogRevision` SHA-256 fingerprint, computed
 from the canonical sorted MCP surface. Tool names, resource URIs, resource
 template URIs, and prompt names must be unique; duplicate keys are rejected at
@@ -682,7 +683,22 @@ are reserved first. Package/action sorting, a SHA-256 suffix over the JSON-encod
 identity pair, and a numeric suffix on remaining collisions make aliases unique
 and independent of database order. `ActionPackage.name` has a database unique
 index and identifies package imports/updates; UUIDs and filesystem paths do not
-enter alias generation. HTTP paths, action display names, metadata, and dispatch
+enter alias generation.
+
+MCP tool names identify the current admitted catalog only. Adding, removing,
+disabling, or filtering colliding tools can change another tool's advertised
+name. A generated alias such as `package_a__do_it` can later identify a literal
+action with that name in another package; a stale call can execute that different
+action. Clients must rediscover the current catalog instead of retaining aliases
+across catalog changes. `actions.catalogRevision` supports rediscovery but is
+not a call precondition. It fingerprints advertised descriptors, so implementation
+changes with identical descriptors preserve it. Generated alias text is neither
+a durable action identity nor an authorization grant: serving whitelists match
+original package/action identities before alias resolution. Safe identity
+compatibility for previously discovered aliases across changing catalogs is not
+implemented; current-catalog determinism does not establish that guarantee.
+
+HTTP paths, action display names, metadata, and dispatch
 targets remain tied to their original package/action. Resource URI and prompt
 key checks remain unchanged. The regression in
 `action_server/tests/action_server_tests/mcp/test_setup_mcp_server.py` uses a real
@@ -1736,6 +1752,19 @@ embedded Runtime assets. The full acceptance remains the built-wrapper
 owned descendants after wrapper-directed SIGTERM. A source-only pass of that
 test verifies inner Runtime teardown, not wrapper forwarding.
 
+When `SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE` is set,
+`actions_server_run` routes CLI operations such as `import` through the frozen
+executable as well as using it for `ActionServerProcess`. Native CLI fixtures
+therefore need a valid managed `package.yaml` and a compatible pre-cached RCC
+environment; raw unmanaged action directories are rejected by frozen `import`.
+Keep that package metadata conditional in fixtures that also run against the
+source-installed Runtime, so the wheel/source boundary remains covered without
+changing its legacy fixture semantics. The multipackage sync boundary is
+`test_cli_multi_package_sync.py`; its installed-wheel and frozen-executable
+results are separate evidence. Reuse one empty test `HOME` for the module's
+pytest invocation: the Go wrapper extracts its frozen executable under
+`HOME/.actions/bin`, and a per-test home causes a full extraction for every test.
+
 Before reinstalling or restarting Action Server, inspect the process table and listening
 sockets. A `GET /mcp` SSE request can expose receive-wrapper event-loop starvation when
 buffer exhaustion is followed by an endlessly ready synthetic `http.request`; sustained
@@ -2283,6 +2312,11 @@ The assembled child test fixes `PYTHONIOENCODING=utf-8`, captures redirected
 stdout/stderr as bytes, and decodes those streams and the UTF-8 rotating log
 explicitly before checking for credentials. Do not rely on Windows' default
 text encoding or weaken the credential assertions with replacement decoding.
+When a pytest logging test calls the application root-logger setup functions,
+temporarily detach and later restore ambient root handlers, then flush only the
+handlers created by that test. Autouse logging fixtures can bind handlers to a
+pytest capture stream that is closed by fixture teardown; flushing every root
+handler can fail before the test reaches its credential assertions.
 Proxy redirects must replace only automatically generated Host headers for the
 new destination while retaining explicit caller Host intent and normal urllib3
 cross-host credential stripping, including 303 method changes.

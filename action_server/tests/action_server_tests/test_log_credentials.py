@@ -1,6 +1,7 @@
 import importlib
 import logging
 import secrets
+import tempfile
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -16,17 +17,29 @@ def test_configured_debug_handlers_redact_transport_credentials(
     from actions.server._cli_impl import _setup_logging, _setup_stderr_logging
 
     root = logging.getLogger()
+    closed_ambient_handler = None
+    if name == "Authorization":
+        closed_stream = tempfile.TemporaryFile(mode="w+")
+        closed_ambient_handler = logging.StreamHandler(closed_stream)
+        closed_ambient_handler.setLevel(logging.INFO)
+        closed_stream.close()
+        root.addHandler(closed_ambient_handler)
     previous_handlers = list(root.handlers)
     previous_level = root.level
     monkeypatch.setenv("NO_COLOR", "true")
     try:
+        for handler in previous_handlers:
+            root.removeHandler(handler)
         root.setLevel(logging.DEBUG)
         _setup_stderr_logging(logging.DEBUG)
         _setup_logging(tmp_path, logging.DEBUG)
+        configured_handlers = [
+            handler for handler in root.handlers if handler not in previous_handlers
+        ]
         logging.getLogger("uvicorn.error").debug(
             "< %s: %s", name, "SYNTHETIC-CREDENTIAL-SENTINEL"
         )
-        for handler in root.handlers:
+        for handler in configured_handlers:
             handler.flush()
         stderr = capsys.readouterr().err
         disk = (tmp_path / "server_log.txt").read_text()
@@ -39,7 +52,13 @@ def test_configured_debug_handlers_redact_transport_credentials(
             if handler not in previous_handlers:
                 root.removeHandler(handler)
                 handler.close()
+        for handler in previous_handlers:
+            if handler not in root.handlers:
+                root.addHandler(handler)
         root.setLevel(previous_level)
+        if closed_ambient_handler is not None:
+            root.removeHandler(closed_ambient_handler)
+            closed_ambient_handler.close()
 
 
 def test_debug_cli_arguments_never_include_api_key_values():
