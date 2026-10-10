@@ -2107,6 +2107,12 @@ non-reusable; an action finalizer retains its one semaphore token until the
 wrapper is reaped and no observed live descendant remains. Retry is in-band,
 and a genuinely free additional capacity slot remains usable.
 
+For lock-deadline tests, control the monotonic clock and use a recording lock to
+assert the exact remaining timeout, including zero after expiry. Keep real-lock
+contention as an outcome-only smoke test; hosted scheduler delay makes elapsed
+wall-clock ceilings unreliable and does not establish that the requested lock
+wait exceeded its deadline.
+
 The owner `Popen` alone waits and reaps the wrapper; `psutil.wait_procs` is
 used only for descendants so it cannot consume the wrapper's wait status or
 replace its recorded return code. Descendant identities found by successful
