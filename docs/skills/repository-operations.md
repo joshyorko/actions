@@ -953,8 +953,11 @@ to avoid treating a reused PID as the original child.
 Runtime release authority is one generated PyPI workflow for `actions-runtime-*`
 tags. It builds one sdist and the supported cp312/cp313 macOS arm64, manylinux
 x86_64, and Windows amd64 wheels into one retained artifact set. Poetry 2.1.1
-and the committed lock remain authoritative; cibuildwheel 2.23.1 must clean-test
+and the committed lock remain authoritative; cibuildwheel 2.23.4 must clean-test
 each wheel with `python -m pip check` and `python -m actions.server version`.
+Keep the 2.x patch line at or above 2.23.4: it replaces the rate-limited
+GitHub `get-virtualenv` blob URL with the supported `bootstrap.pypa.io` URL
+([upstream fix](https://github.com/pypa/cibuildwheel/pull/2775)).
 The clean-break distribution identity is `actions-runtime`; its package version,
 `actions.server.__version__`, Runtime changelog, and `actions-runtime-X.Y.Z` tag
 must agree. Native release notes come from
@@ -1773,7 +1776,10 @@ databases without legacy `run` columns or schedule indexes can upgrade. Because
 `create_db` seeds one row at `CURRENT_VERSION`, focused migration fixtures downgrade
 that row to represent an older database rather than inserting a duplicate ID. Xdist tests that acquire OS-level
 mutexes use process-qualified names so concurrent workers and repeated suites cannot
-share global lock state.
+share global lock state. Keep the same generated name among the participants inside
+one test when they must contend. Mirrored Action Server tests that exercise `_common`
+and `_robo_utils` must not reuse a fixed global key across modules: xdist can run the
+two copies on separate workers, causing one test to fail before its timeout assertion.
 
 `Lint` is fail-fast across package boundaries: report which packages completed and which
 were not reached whenever it fails. The shared package task must call the explicit
