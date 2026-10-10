@@ -43,6 +43,8 @@
 
 The `Actions Runtime Frozen Catalog Rollback` workflow is intended to run the duplicate public resource, template, and prompt-key rollback cases plus the watched malformed/recovery case against a hash-verified Linux frozen executable. The pinned artifact was built from synthetic merge `bf4f7dd1`; its Git build-source tree matches candidate `f7c6ed61` tree `6cb691b4`, and the workflow records both source identities. Until an uploaded workflow receipt reports all four expected cases passing, this remains pending acceptance. Its managed fixtures pin Python 3.12, uv 0.9.26, and actions-core 1.0.2; each case checks the actual frozen parent and the managed worker's interpreter and Core origin. This proof is separate from source-mode pytest and the real-RCC provider rollback workflow.
 
+This workflow invokes Poetry from a `uv run` tool environment. Remove the inherited `VIRTUAL_ENV` before invoking Poetry, or Poetry can install project dependencies into uv's temporary tool environment instead of the Action Server virtualenv. Keep the pytest module/interpreter preflight under `set -e`, then run the suite with `poetry run python -m pytest`; a missing test module is an invocation failure, not a reason to fall back to host pytest or source-only tests.
+
 Successful-generation drain is a separate source-mode test. It starts v2 while a v1 Run is blocked, proves the released old Run returns data from its immutable v1 snapshot, persists both Runs' results, and independently verifies natural child cleanup. Do not infer this behavior from malformed-reload rollback or from frozen catalog cases.
 
 ## Release process

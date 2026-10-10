@@ -91,7 +91,7 @@ jobs:
       env:
         ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD: '1'
       run: uv run --no-project --python 3.12 --with poetry==2.1.1 --with invoke==2.2.0
-        inv devinstall
+        env -u VIRTUAL_ENV inv devinstall
     - name: Run frozen managed rollback acceptance
       id: acceptance
       shell: bash
@@ -101,8 +101,11 @@ jobs:
         ROBOTS_HOME: ${{ runner.temp }}/frozen-robots-home
         TMPDIR: ${{ runner.temp }}/frozen-tmp
       run: "set -Eeuo pipefail\nmkdir -p \"$ACTIONS_HOME\" \"$ROBOTS_HOME\" \"$TMPDIR\"\
-        \nset +e\nuv run --no-project --python 3.12 --with poetry==2.1.1 poetry run\
-        \ pytest -m integration_test -n 0 -q -s \\\n  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good\
+        \nuv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV\
+        \ poetry run python -c 'import pytest, sys; print(f\"pytest={pytest.__file__};\
+        \ python={sys.executable}\")'\nset +e\nuv run --no-project --python 3.12 --with\
+        \ poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -m pytest -m integration_test\
+        \ -n 0 -q -s \\\n  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good\
         \ \\\n  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers\
         \ \\\n  --junitxml=\"$RUNNER_TEMP/frozen-catalog-junit.xml\" 2>&1 | tee \"\
         $RUNNER_TEMP/frozen-catalog-test.log\"\ntest_status=${PIPESTATUS[0]}\nif [\

@@ -2618,3 +2618,15 @@ successful-generation drain is separate proof: start the new generation while
 an old Run is blocked, verify the old Run reads its immutable source snapshot
 after release, persist both outcomes, and check natural child cleanup
 independently.
+
+When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
+`VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run
+the Poetry/Invoke command with `VIRTUAL_ENV` unset, then explicitly check the
+project interpreter and required test module with errexit still enabled. Invoke
+pytest as `poetry run python -m pytest` so module selection stays with that
+interpreter rather than depending on a `pytest` executable found on `PATH`.
+Do not treat a missing executable as permission to fall back to host tools or
+source-mode tests. In frozen catalog workflow run 38037036032, `inv devinstall`
+completed its Poetry install, but the subsequent `poetry run pytest` returned
+`Command not found: pytest`; the workflow now checks the selected pytest module
+and interpreter before execution.

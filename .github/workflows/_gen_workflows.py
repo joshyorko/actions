@@ -805,7 +805,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                 "name": "Install Action Server test dependencies",
                 "id": "dependencies",
                 "env": {"ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": "1"},
-                "run": "uv run --no-project --python 3.12 --with poetry==2.1.1 --with invoke==2.2.0 inv devinstall",
+                "run": "uv run --no-project --python 3.12 --with poetry==2.1.1 --with invoke==2.2.0 env -u VIRTUAL_ENV inv devinstall",
             },
             {
                 "name": "Run frozen managed rollback acceptance",
@@ -821,8 +821,9 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                     [
                         "set -Eeuo pipefail",
                         'mkdir -p "$ACTIONS_HOME" "$ROBOTS_HOME" "$TMPDIR"',
+                        "uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -c 'import pytest, sys; print(f\"pytest={pytest.__file__}; python={sys.executable}\")'",
                         "set +e",
-                        "uv run --no-project --python 3.12 --with poetry==2.1.1 poetry run pytest -m integration_test -n 0 -q -s \\",
+                        "uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -m pytest -m integration_test -n 0 -q -s \\",
                         "  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good \\",
                         "  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers \\",
                         '  --junitxml="$RUNNER_TEMP/frozen-catalog-junit.xml" 2>&1 | tee "$RUNNER_TEMP/frozen-catalog-test.log"',
