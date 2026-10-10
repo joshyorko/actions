@@ -1,0 +1,29 @@
+{
+  "pr": 289,
+  "url": "https://github.com/joshyorko/actions/pull/289",
+  "state": "OPEN_DRAFT",
+  "head": "c78288c3a0f07ba1013109c790f8e8b375a852d2",
+  "tree": "75a108db7d608e1316d59c96918213471409f31a",
+  "parents": [
+    "e13f9aab586612eed21690e04a37731283bf8792",
+    "c6d729f29167f04080ab5547955d6398a6ee49d0"
+  ],
+  "local_to_published": [
+    {
+      "local": "74205876adf362c7a9d7ef33d4e328c17a9e605b",
+      "published": "c78288c3a0f07ba1013109c790f8e8b375a852d2",
+      "tree": "75a108db7d608e1316d59c96918213471409f31a"
+    },
+    {
+      "local": "6eec6c6493cf029c5bba5d8189834349a26c0f67",
+      "published": "e13f9aab586612eed21690e04a37731283bf8792"
+    },
+    {
+      "local": "e789af7ce79ae0214ce216459a423e0ab9f0622f",
+      "published": "dbde11a7790ef786019001d12458d4ed3fa4d051"
+    }
+  ],
+  "verification": "Root verified remote commit, tree, blob identities and ancestry; no additional GitHub polling in this governance pass.",
+  "checks": "Hosted/native checks pending; draft, not integrated.",
+  "scope": "Exact namespace identity repair proposal only; distinct overlapping templates and cross-kind concrete resource URI overlap remain unresolved. No full #279 acceptance."
+}

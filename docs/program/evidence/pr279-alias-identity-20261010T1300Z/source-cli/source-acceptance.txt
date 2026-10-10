@@ -1,0 +1,18 @@
+MCP historical alias source CLI acceptance
+
+Candidate tested: docs-only HEAD 6eec6c6493cf029c5bba5d8189834349a26c0f67, tree 41a67489bd000b98971dab7db1652de2933c89f2. Its action_server/src/actions/server tree and test_cli_multi_package_sync.py are byte-identical to implementation commit e789af7ce79ae0214ce216459a423e0ab9f0622f. Runtime/test blobs: _api_robots.py git blob 1438c2bf2791c85924d0e88f056ec438985cef0e; _models.py 964d31c51e42dc285e5eb77e02d86e62adecd6bb; test module b0919a8b7508954976a8fab631a5fff219c2aeb8.
+
+Command (from action_server/):
+TMPDIR=/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f PYTHONPATH="$PWD/src:/workspace/actions/devutils/src" /tmp/work/multipackage-runtime-acceptance/venv-primary/bin/python -m pytest -m integration_test -q -s -p no:robocorp_log_pytest --basetemp=/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/pytest-tmp-4 --junitxml=/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/results-final.xml tests/action_server_tests/test_cli_multi_package_sync.py
+
+Result: 5 passed in 52.04s; JUnit tests=5, failures=0, errors=0, skipped=0. Cases: additive import/restart; repeated-directory desired-set sync; bad-later-package atomic rejection; failed sync retains last-good unmanaged sources; historical MCP alias capture rejection and rename recovery.
+
+Candidate module provenance (Python 3.12 prepared venv):
+actions.server: /tmp/work/actions-worktrees/mcp-alias-identity-20261010/action_server/src/actions/server/__init__.py; SHA-256 399f9e2ef2d67d7018d8ab7c6b9a65adf70aa33134d15c9840aedcf35a821576.
+actions.server._api_robots: candidate source; SHA-256 2b14db81705de4f2d4cf8f026626f4a39a77fc5fcf3d8b12db4f3bce5a3713d6.
+actions.server._models: candidate source; SHA-256 c66dfec0981443f01f8ff77ddf8cd9a7086a84cb94cca5a7b7596527830cd8eb.
+Core `actions`: /tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py; SHA-256 d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc; actions-core 1.0.2.
+
+CLI prerequisite: temporary ignored symlink at candidate src/actions/server/bin/rcc-18.19.3 targeted the pre-existing sibling-worktree binary. It reported v18.19.3, SHA-256 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428. The symlink was removed after testing; candidate worktree is clean. Fixtures had no package.yaml and created no managed package environments. No native override was set; native acceptance remains NOT RUN.
+
+Baseline red control: Runtime commit 822e21d526d9e2144a6c1c3f44f82a278e069099 from /tmp/work/actions-worktrees/frozen-generation-drain-20261010; same Python/Core 1.0.2; source origins confirmed in that worktree. The isolated source CLI sequence imported A+B, stopped, synchronized A+C where C declares literal `package_a__do_it`, then called that old MCP key. Output: `mcp_tool_names=do_it,package_a__do_it`, `literal_historical_alias_result=C-capture`, `baseline_alias_capture_reproduced=yes`. This reproduces the defect through actual CLI/import/sync and MCP execution without the 60-second expected-exit timeout.

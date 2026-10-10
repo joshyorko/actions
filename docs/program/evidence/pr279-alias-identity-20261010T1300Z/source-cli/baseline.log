@@ -1,0 +1,256 @@
+stderr: [2026-10-10 12:56:46] [actions.server._cli_impl: DEBUG] Arguments: /tmp/work/actions-worktrees/frozen-generation-drain-20261010/action_server/src/actions/server/__main__.py start --actions-sync=true --port=0 --datadir=/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data --db-file=shared.sqlite -v --skip-lint --min-processes=0 --max-processes=2 --dir=/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/package_a --dir=/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/package_b
+stderr: [2026-10-10 12:56:46] [actions.server._cli_impl: DEBUG] CWD: /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta
+stderr: [2026-10-10 12:56:46] [actions.server._cli_impl: INFO]
+stderr:   ⚡️ Starting Action Server... v1.0.3
+stderr: 
+stderr: [2026-10-10 12:56:46] [actions.server._settings: INFO] Using user-specified datadir: /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data
+stderr: [2026-10-10 12:56:46] [actions.server._cli_impl: INFO] Logs may be found at: /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data/server_log.txt.
+stderr: [2026-10-10 12:56:46] [actions.server._cli_impl: INFO] Database file does not exist. Creating it at: /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data/shared.sqlite
+stderr: [2026-10-10 12:56:46] [actions.server._cli_impl: DEBUG] Synchronize actions: True
+stderr: [2026-10-10 12:56:46] [actions.server._actions_import: DEBUG] Importing action package from: /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/package_a
+stderr: [2026-10-10 12:56:46] [robocorp.log._rewrite_filtering: DEBUG] Collecting default library roots.
+stderr: [2026-10-10 12:56:46] [robocorp.log._rewrite_filtering: DEBUG] LIBRARY_ROOTS ['/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/home/.local/lib/python3.12/site-packages', '/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12', '/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages', '/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12', '/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages', '/workspace/actions/action_server/.venv/lib/python3.12/site-packages']
+stderr: 
+stderr: [2026-10-10 12:56:46] [actions.server._action_package_handler: INFO] Adding action without a managed environment (package.yaml unavailable).
+stderr:     Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+stderr: [2026-10-10 12:56:46] [actions.server._actions_import: DEBUG] Collecting actions for Action Package: package_a.
+stderr: [2026-10-10 12:56:46] [actions.server._actions_import: DEBUG] Importing action package from: /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/package_b
+stderr: [2026-10-10 12:56:46] [actions.server._action_package_handler: INFO] Adding action without a managed environment (package.yaml unavailable).
+stderr:     Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+stderr: [2026-10-10 12:56:46] [actions.server._actions_import: DEBUG] Collecting actions for Action Package: package_b.
+stderr: [2026-10-10 12:56:46] [actions.server._actions_import: INFO] Found new action package: package_a
+stderr: [2026-10-10 12:56:46] [actions.server._actions_import: INFO] Found new action: do_it
+stderr: [2026-10-10 12:56:46] [actions.server._actions_import: INFO] Found new action package: package_b
+stderr: [2026-10-10 12:56:46] [actions.server._actions_import: INFO] Found new action: do_it
+stderr: [2026-10-10 12:56:47] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 12:56:47] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 12:56:47] [actions.server._mode: INFO] Operating mode: standard
+stderr: [2026-10-10 12:56:47] [actions.server._server: DEBUG] Starting server. Settings:
+stderr:     artifacts_dir = PosixPath('/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data/artifacts')
+stderr:     datadir = PosixPath('/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data')
+stderr:     artifact_storage_backend = 'local'
+stderr:     artifact_storage_root = PosixPath('/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data/artifacts')
+stderr:     title = 'Actions Runtime'
+stderr:     address = 'localhost'
+stderr:     port = 0
+stderr:     verbose = True
+stderr:     db_file = 'shared.sqlite'
+stderr:     database_url = None
+stderr:     expose_provider = 'auto'
+stderr:     server_url = 'http://localhost:0'
+stderr:     cors_allow_origins = ()
+stderr:     min_processes = 0
+stderr:     max_processes = 2
+stderr:     reuse_processes = False
+stderr:     full_openapi_spec = False
+stderr:     use_https = False
+stderr:     ssl_self_signed = False
+stderr:     ssl_keyfile = None
+stderr:     ssl_certfile = None
+stderr:     oauth2_settings = '/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/home/.actions/action-server/oauth2_config.yaml'
+stderr:     base_url = None
+stderr:     enable_scheduler = True
+stderr:     scheduler_check_interval = 10.0
+stderr:     scheduler_max_concurrent_global = 10
+stderr:     enable_triggers = True
+stderr:     trigger_webhook_base_url = None
+stderr:     smtp_host = None
+stderr:     smtp_port = 587
+stderr:     smtp_user = None
+stderr:     smtp_password = None
+stderr:     smtp_from = None
+stderr:     smtp_use_tls = True
+stderr:     redis_url = None
+stderr:     redis_password = None
+stderr:     worker_concurrency = 4
+stderr:     worker_poll_timeout = 30
+stderr: [2026-10-10 12:56:47] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 12:56:47] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 12:56:47] [actions.server._actions_process_pool: DEBUG] ACTIONS_RUNTIME_POST_RUN_CMD not set (post run will be skipped).
+stderr: [2026-10-10 12:56:47] [asyncio: DEBUG] Using selector: EpollSelector
+stderr: [2026-10-10 12:56:47] [uvicorn.error: INFO] Started server process [338462]
+stderr: [2026-10-10 12:56:47] [uvicorn.error: INFO] Waiting for application startup.
+stderr: [2026-10-10 12:56:47] [mcp.server.streamable_http_manager: INFO] StreamableHTTP session manager started
+stderr: [2026-10-10 12:56:47] [actions.server._server: DEBUG] Not exposing action server...
+stderr: [2026-10-10 12:56:47] [actions.server._server: INFO] Initializing scheduler engine...
+stderr: [2026-10-10 12:56:47] [actions.server._scheduler: INFO] Scheduler engine started (check_interval=10.0s, max_concurrent=10)
+stderr: [2026-10-10 12:56:47] [actions.server._server: INFO]   ⏰ Scheduler started (check interval: 10.0s)
+stderr: [2026-10-10 12:56:47] [uvicorn.error: INFO] Application startup complete.
+stderr: [2026-10-10 12:56:47] [actions.server._server: INFO]
+stderr:   ⚡️ Local MCP endpoint: http://localhost:36051/mcp
+stderr: [2026-10-10 12:56:47] [actions.server._server: INFO]
+stderr:   ⚡️ Local Action Server: http://localhost:36051
+stderr: [2026-10-10 12:56:47] [actions.server._server: INFO]      Public access: use --expose to expose (OpenAPI only)
+stderr: [2026-10-10 12:56:47] [uvicorn.access: INFO] 127.0.0.1:59050 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 12:56:47] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 12:56:47] [uvicorn.access: INFO] 127.0.0.1:59050 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 12:56:47] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 12:56:47] [uvicorn.access: INFO] 127.0.0.1:59066 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 12:56:47] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 12:56:47] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (338484).
+stderr: [2026-10-10 12:56:47] [actions.server._actions_run: INFO] Updating run run-000-f34d9101-8002-420e-9d2b-e73df95117ce with changes: 'status': 1 (see: http://localhost:36051/runs/run-000-f34d9101-8002-420e-9d2b-e73df95117ce)
+stderr: [2026-10-10 12:56:47] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'do_it', 'action_file': 'package_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 12:56:48] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 12:56:48] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 12:56:48] [actions.server._actions_run: INFO] Updating run run-000-f34d9101-8002-420e-9d2b-e73df95117ce with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.1538641840015771 (see: http://localhost:36051/runs/run-000-f34d9101-8002-420e-9d2b-e73df95117ce)
+stderr: [2026-10-10 12:56:48] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (338484) -- not reusing processes.
+stderr: [2026-10-10 12:56:48] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 12:56:48] [uvicorn.access: INFO] 127.0.0.1:59066 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 12:56:48] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 12:56:48] [uvicorn.access: INFO] 127.0.0.1:59066 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 12:56:48] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 12:56:48] [uvicorn.access: INFO] 127.0.0.1:59070 - "POST /api/shutdown/ HTTP/1.1" 200
+stderr: [2026-10-10 12:56:48] [uvicorn.error: INFO] Shutting down
+stderr: [2026-10-10 12:56:48] [uvicorn.error: INFO] Waiting for application shutdown.
+stderr: [2026-10-10 12:56:48] [actions.server._server: INFO] Stopping scheduler...
+stderr: [2026-10-10 12:56:48] [actions.server._scheduler: INFO] Scheduler engine stopped
+stderr: [2026-10-10 12:56:48] [actions.server._server: INFO] Stopping action server...
+stderr: [2026-10-10 12:56:48] [mcp.server.streamable_http_manager: INFO] StreamableHTTP session manager shutting down
+stderr: [2026-10-10 12:56:48] [uvicorn.error: INFO] Application shutdown complete.
+stderr: [2026-10-10 12:56:48] [uvicorn.error: INFO] Finished server process [338462]
+stderr: [2026-10-10 12:56:48] [actions.server._cli_impl: CRITICAL] Exiting action server...
+stderr: [2026-10-10 12:56:48] [actions.server._common.process: INFO] Killing processes:
+stderr: [2026-10-10 12:56:48] [actions.server._cli_impl: DEBUG] Arguments: /tmp/work/actions-worktrees/frozen-generation-drain-20261010/action_server/src/actions/server/__main__.py start --actions-sync=true --port=0 --datadir=/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data --db-file=shared.sqlite -v --skip-lint --min-processes=0 --max-processes=2 --dir=/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/package_a --dir=/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/package_c
+stderr: [2026-10-10 12:56:48] [actions.server._cli_impl: DEBUG] CWD: /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta
+stderr: [2026-10-10 12:56:48] [actions.server._cli_impl: INFO]
+stderr:   ⚡️ Starting Action Server... v1.0.3
+stderr: 
+stderr: [2026-10-10 12:56:48] [actions.server._settings: INFO] Using user-specified datadir: /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data
+stderr: [2026-10-10 12:56:48] [actions.server._cli_impl: INFO] Logs may be found at: /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data/server_log.txt.
+stderr: [2026-10-10 12:56:48] [actions.server.migrations: INFO] Checking migration status for database backend: sqlite
+stderr: [2026-10-10 12:56:48] [actions.server._database: DEBUG] sqlite version: 3.53.1
+stderr: [2026-10-10 12:56:48] [actions.server._cli_impl: DEBUG] Synchronize actions: True
+stderr: [2026-10-10 12:56:48] [actions.server._actions_import: DEBUG] Importing action package from: /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/package_a
+stderr: [2026-10-10 12:56:48] [robocorp.log._rewrite_filtering: DEBUG] Collecting default library roots.
+stderr: [2026-10-10 12:56:48] [robocorp.log._rewrite_filtering: DEBUG] LIBRARY_ROOTS ['/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/home/.local/lib/python3.12/site-packages', '/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12', '/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages', '/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12', '/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages', '/workspace/actions/action_server/.venv/lib/python3.12/site-packages']
+stderr: 
+stderr: [2026-10-10 12:56:48] [actions.server._action_package_handler: INFO] Adding action without a managed environment (package.yaml unavailable).
+stderr:     Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+stderr: [2026-10-10 12:56:48] [actions.server._actions_import: DEBUG] Collecting actions for Action Package: package_a.
+stderr: [2026-10-10 12:56:49] [actions.server._actions_import: DEBUG] Importing action package from: /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/package_c
+stderr: [2026-10-10 12:56:49] [actions.server._action_package_handler: INFO] Adding action without a managed environment (package.yaml unavailable).
+stderr:     Note: no virtual environment will be used for the imported actions, they'll be run in the same environment used to run the action server.
+stderr: [2026-10-10 12:56:49] [actions.server._actions_import: DEBUG] Collecting actions for Action Package: package_c.
+stderr: [2026-10-10 12:56:49] [actions.server._actions_import: DEBUG] Updating action package: package_a
+stderr: [2026-10-10 12:56:49] [actions.server._actions_import: DEBUG] Updating action: do_it
+stderr: [2026-10-10 12:56:49] [actions.server._actions_import: INFO] Found new action package: package_c
+stderr: [2026-10-10 12:56:49] [actions.server._actions_import: INFO] Found new action: package_a__do_it
+stderr: [2026-10-10 12:56:49] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 12:56:49] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 12:56:50] [actions.server._mode: INFO] Operating mode: standard
+stderr: [2026-10-10 12:56:50] [actions.server._server: DEBUG] Starting server. Settings:
+stderr:     artifacts_dir = PosixPath('/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data/artifacts')
+stderr:     datadir = PosixPath('/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data')
+stderr:     artifact_storage_backend = 'local'
+stderr:     artifact_storage_root = PosixPath('/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data/artifacts')
+stderr:     title = 'Actions Runtime'
+stderr:     address = 'localhost'
+stderr:     port = 0
+stderr:     verbose = True
+stderr:     db_file = 'shared.sqlite'
+stderr:     database_url = None
+stderr:     expose_provider = 'auto'
+stderr:     server_url = 'http://localhost:0'
+stderr:     cors_allow_origins = ()
+stderr:     min_processes = 0
+stderr:     max_processes = 2
+stderr:     reuse_processes = False
+stderr:     full_openapi_spec = False
+stderr:     use_https = False
+stderr:     ssl_self_signed = False
+stderr:     ssl_keyfile = None
+stderr:     ssl_certfile = None
+stderr:     oauth2_settings = '/dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/home/.actions/action-server/oauth2_config.yaml'
+stderr:     base_url = None
+stderr:     enable_scheduler = True
+stderr:     scheduler_check_interval = 10.0
+stderr:     scheduler_max_concurrent_global = 10
+stderr:     enable_triggers = True
+stderr:     trigger_webhook_base_url = None
+stderr:     smtp_host = None
+stderr:     smtp_port = 587
+stderr:     smtp_user = None
+stderr:     smtp_password = None
+stderr:     smtp_from = None
+stderr:     smtp_use_tls = True
+stderr:     redis_url = None
+stderr:     redis_password = None
+stderr:     worker_concurrency = 4
+stderr:     worker_poll_timeout = 30
+stderr: [2026-10-10 12:56:50] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 12:56:50] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 12:56:50] [actions.server._actions_process_pool: DEBUG] ACTIONS_RUNTIME_POST_RUN_CMD not set (post run will be skipped).
+stderr: [2026-10-10 12:56:50] [asyncio: DEBUG] Using selector: EpollSelector
+stderr: [2026-10-10 12:56:50] [uvicorn.error: INFO] Started server process [338498]
+stderr: [2026-10-10 12:56:50] [uvicorn.error: INFO] Waiting for application startup.
+stderr: [2026-10-10 12:56:50] [mcp.server.streamable_http_manager: INFO] StreamableHTTP session manager started
+stderr: [2026-10-10 12:56:50] [actions.server._server: DEBUG] Not exposing action server...
+stderr: [2026-10-10 12:56:50] [actions.server._server: INFO] Initializing scheduler engine...
+stderr: [2026-10-10 12:56:50] [actions.server._scheduler: INFO] Scheduler engine started (check_interval=10.0s, max_concurrent=10)
+stderr: [2026-10-10 12:56:50] [actions.server._server: INFO]   ⏰ Scheduler started (check interval: 10.0s)
+stderr: [2026-10-10 12:56:50] [uvicorn.error: INFO] Application startup complete.
+stderr: [2026-10-10 12:56:50] [actions.server._server: INFO]
+stderr:   ⚡️ Local MCP endpoint: http://localhost:43651/mcp
+stderr: [2026-10-10 12:56:50] [actions.server._server: INFO]
+stderr:   ⚡️ Local Action Server: http://localhost:43651
+stderr: [2026-10-10 12:56:50] [actions.server._server: INFO]      Public access: use --expose to expose (OpenAPI only)
+stderr: [2026-10-10 12:56:50] [uvicorn.access: INFO] 127.0.0.1:43808 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 12:56:50] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 12:56:50] [uvicorn.access: INFO] 127.0.0.1:43808 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 12:56:50] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 12:56:50] [uvicorn.access: INFO] 127.0.0.1:43820 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 12:56:50] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 12:56:50] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (338522).
+stderr: [2026-10-10 12:56:50] [actions.server._actions_run: INFO] Updating run run-000-0db86aa3-3284-45cf-ab63-feb7b20b34fd with changes: 'status': 1 (see: http://localhost:43651/runs/run-000-0db86aa3-3284-45cf-ab63-feb7b20b34fd)
+stderr: [2026-10-10 12:56:50] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'package_a__do_it', 'action_file': 'package_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 12:56:50] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 12:56:50] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 12:56:50] [actions.server._actions_run: INFO] Updating run run-000-0db86aa3-3284-45cf-ab63-feb7b20b34fd with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.14746672799810767 (see: http://localhost:43651/runs/run-000-0db86aa3-3284-45cf-ab63-feb7b20b34fd)
+stderr: [2026-10-10 12:56:50] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (338522) -- not reusing processes.
+stderr: [2026-10-10 12:56:50] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 12:56:50] [uvicorn.access: INFO] 127.0.0.1:43820 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 12:56:50] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 12:56:50] [uvicorn.access: INFO] 127.0.0.1:43820 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 12:56:50] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 12:56:50] [uvicorn.access: INFO] 127.0.0.1:43836 - "POST /api/shutdown/ HTTP/1.1" 200
+stderr: [2026-10-10 12:56:50] [uvicorn.error: INFO] Shutting down
+stderr: [2026-10-10 12:56:50] [uvicorn.error: INFO] Waiting for application shutdown.
+stderr: [2026-10-10 12:56:50] [actions.server._server: INFO] Stopping scheduler...
+stderr: [2026-10-10 12:56:50] [actions.server._scheduler: INFO] Scheduler engine stopped
+stderr: [2026-10-10 12:56:50] [actions.server._server: INFO] Stopping action server...
+stderr: [2026-10-10 12:56:50] [mcp.server.streamable_http_manager: INFO] StreamableHTTP session manager shutting down
+stderr: [2026-10-10 12:56:50] [uvicorn.error: INFO] Application shutdown complete.
+stderr: [2026-10-10 12:56:50] [uvicorn.error: INFO] Finished server process [338498]
+stderr: [2026-10-10 12:56:50] [actions.server._cli_impl: CRITICAL] Exiting action server...
+stderr: [2026-10-10 12:56:50] [actions.server._common.process: INFO] Killing processes:
+baseline_runtime_commit=822e21d526d9e2144a6c1c3f44f82a278e069099
+server_origin=/tmp/work/actions-worktrees/frozen-generation-drain-20261010/action_server/src/actions/server/__init__.py
+server_sha256=399f9e2ef2d67d7018d8ab7c6b9a65adf70aa33134d15c9840aedcf35a821576
+api_robots_origin=/tmp/work/actions-worktrees/frozen-generation-drain-20261010/action_server/src/actions/server/_api_robots.py
+api_robots_sha256=2b14db81705de4f2d4cf8f026626f4a39a77fc5fcf3d8b12db4f3bce5a3713d6
+models_origin=/tmp/work/actions-worktrees/frozen-generation-drain-20261010/action_server/src/actions/server/_models.py
+models_sha256=202f02b6bd3c2fcdd59e556bfc782f5b40bbce4dc8ec9187d762428f2f7d32d3
+core_actions_origin=/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py
+core_actions_sha256=d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc
+actions_core_version=1.0.2
+stdout: output (pid: 338484):
+stdout: output (pid: 338484): Pre-loading module: preload_actions
+stdout: output (pid: 338484):
+stdout: output (pid: 338484): Collecting action do_it from: package_actions.py
+stdout: output (pid: 338484): ================================ Running: [96mdo_it[0m ================================
+stdout: output (pid: 338484): [96mdo_it[0m status: PASS
+stdout: output (pid: 338484): ================================================================================
+stdout: output (pid: 338484): Log (html): /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data/artifacts/run-000-f34d9101-8002-420e-9d2b-e73df95117ce/log.html
+initial_A_B_started_stopped=yes
+replacement_A_C_started=yes
+mcp_tool_names=do_it,package_a__do_it
+literal_historical_alias_result=C-capture
+stdout: output (pid: 338522):
+stdout: output (pid: 338522): Pre-loading module: preload_actions
+stdout: output (pid: 338522):
+stdout: output (pid: 338522): Collecting action package_a__do_it from: package_actions.py
+stdout: output (pid: 338522): ========================== Running: [96mpackage_a__do_it[0m ===========================
+stdout: output (pid: 338522): [96mpackage_a__do_it[0m status: PASS
+stdout: output (pid: 338522): ================================================================================
+stdout: output (pid: 338522): Log (html): /dev/shm/actions-alias-cli-e789af7ce79ae0214ce216459a423e0ab9f0622f/actions-alias-baseline-5vx5ttta/runtime-data/artifacts/run-000-0db86aa3-3284-45cf-ab63-feb7b20b34fd/log.html
+baseline_alias_capture_reproduced=yes

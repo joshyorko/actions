@@ -1,0 +1,42 @@
+{
+  "review": "independent PostgreSQL acceptance for MCP catalog-name reservation",
+  "status": "PASS",
+  "tested_source_commit": "e789af7ce79ae0214ce216459a423e0ab9f0622f",
+  "tested_source_tree": "3107690386ac3a3c5a198b4b173fcdaa65376851",
+  "docs_only_successor": {
+    "commit": "6eec6c6493cf029c5bba5d8189834349a26c0f67",
+    "tree": "41a67489bd000b98971dab7db1652de2933c89f2",
+    "diff": "six added lines in docs/skills/repository-operations.md; production, migration, and tests unchanged"
+  },
+  "relevant_source_blobs": {
+    "action_server/src/actions/server/_api_action_routes.py": "1880245f3ff09cd2ef1fec47d08f3baa41207b4f",
+    "action_server/src/actions/server/_models.py": "964d31c51e42dc285e5eb77e02d86e62adecd6bb",
+    "action_server/src/actions/server/migrations/migration_add_mcp_catalog_names.py": "215cf04b0e177f6a0de4ca90e8585d5092b64905",
+    "action_server/tests/action_server_tests/mcp/test_alias_history.py": "a326d1dcb59829c78754d8668656680598690401"
+  },
+  "environment": {
+    "postgres": "17.11",
+    "image_digest": "sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+    "container_id": "94cd7141b1898c9c81711edd128d9d862f06e225e940b592a5f536615bf5121e",
+    "task_container_removed": true,
+    "service_receipts": "service-start-receipt.json; service-restart-receipt.json",
+    "sanitized_server_log_sha256": "b032beacd29e21117c1f100484bc79808b03fcca623fec2ea98feb862b2abff3"
+  },
+  "checks": [
+    {
+      "result": "PASS",
+      "cases": 11,
+      "description": "PostgreSQL-adapted exact source selectors: generated alias capture, collision/retirement reservations, resource/resource-template/prompt exact-key reassignment, namespace separation, 7KB URI fixed-size index and exact-key preservation, digest collision rejection, invalid-catalog rollback"
+    },
+    {
+      "result": "PASS",
+      "description": "fresh schema versus version-12 to 13 upgrade parity: columns and indexes identical; reservation table empty"
+    },
+    {
+      "result": "PASS",
+      "description": "two PostgreSQL processes blocked on reservation-table lock then competing admissions: exactly one winner, other rejected, one durable owner for contested alias"
+    }
+  ],
+  "scope_boundary": "DB-layer migration/reservation/rollback/concurrency acceptance only; not MCP server-runtime/worker/native or full release acceptance",
+  "upstream_and_documentation_disposition": "Cross-kind concrete resource URI overlap remains a known separate upstream policy gap; canonical guide follow-up accepted, documenting examples and the boundary of exact namespace reservations."
+}

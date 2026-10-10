@@ -2261,3 +2261,15 @@ suite establishes its tested database behavior; it does not prove the proposed
 Deployment schema or replace wheel, frozen, TLS or failure-recovery acceptance.
 Inspect the server log even when pytest passes: driver transaction warnings can
 expose a missing regression despite successful state assertions.
+
+For dynamic MCP tool names, durable exact namespace reservations can prevent a
+removed tool's literal alias from being captured by a later catalog. Treat
+overlapping templates and concrete resource URI collisions across kinds as
+separate local routing-policy questions; an exact-key reservation result does
+not prove those cases safe. Source-mode CLI tests may use a pre-existing pinned
+RCC binary through a temporary symlink when managed tool setup is unavailable.
+Record its version and digest, and report source CLI, managed package, hosted
+and native results as separate gates. In the October 10 alias-identity run,
+five source CLI tests passed and independent PostgreSQL review accepted only
+durable exact-key ownership/admission and concurrency behavior; hosted/native
+checks and broader overlap cases remained open.

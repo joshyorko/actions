@@ -1,0 +1,4 @@
+Attempt diagnostics
+- Normal configured pytest initially failed at setup because candidate `action_server/src/actions/server/bin/rcc-18.19.3` was absent.
+- A bounded --confcutdir fallback excluded tests/conftest.py and its autouse fixtures; CLI then attempted pinned RCC auto-download and got GitHub connection-refused retries. Interrupted after 79s; not counted as test evidence.
+- Final configured run used only the pre-existing pinned binary above, with no installation or network download.

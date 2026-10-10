@@ -145,6 +145,11 @@ docs/program/evidence/program-amendment-20261010T1241Z.json -text
 docs/program/evidence/pr279-alias-identity-20261010T1241Z/*.log -diff
 docs/program/evidence/pr288-published-ancestry-20261010T1243Z/** -text
 docs/program/evidence/program-amendment-20261010T1243Z.json -text
+docs/program/evidence/pr287-merge-20261010T1300Z/** -text
+docs/program/evidence/pr279-alias-identity-20261010T1300Z/** -text
+docs/program/evidence/pr289-alias-published-map-20261010T1300Z/** -text
 # Hash-bound captured test output is reviewed by digest and retained verbatim.
 docs/program/evidence/pr288-confined-read-20261010T1216Z/*.log -diff
 docs/program/evidence/pr288-cross-platform-20261010T1222Z/*.log -diff
+docs/program/evidence/pr279-alias-identity-20261010T1300Z/*.log -diff
+docs/program/evidence/pr279-alias-identity-20261010T1300Z/source-cli/*.log -diff
