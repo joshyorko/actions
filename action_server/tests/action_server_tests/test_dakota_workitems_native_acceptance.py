@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import hashlib
+import inspect
 import json
 import os
 import shlex
 import sqlite3
+import subprocess
 import tempfile
 import textwrap
 from datetime import datetime, timedelta, timezone
@@ -26,8 +28,23 @@ class CaseProof(TypedDict):
     api_state_readbacks: dict[str, dict[str, object]]
 
 
-PROCESSOR_ACTION = textwrap.dedent(
-    """
+def _local_wheel_path_from_file_url(source_url: str) -> Path:
+    """Resolve a local wheel URL using the target platform's path rules."""
+    from urllib.parse import urlparse
+    from urllib.request import url2pathname
+
+    parsed = urlparse(source_url)
+    if parsed.scheme != "file" or parsed.netloc not in {"", "localhost"}:
+        raise ValueError("candidate wheel install source is not a local file URL")
+    return Path(url2pathname(parsed.path)).resolve()
+
+
+PROCESSOR_ACTION = (
+    "from pathlib import Path\n\n"
+    + inspect.getsource(_local_wheel_path_from_file_url)
+    + "\n"
+    + textwrap.dedent(
+        """
     from actions import action
 
 
@@ -46,8 +63,6 @@ PROCESSOR_ACTION = textwrap.dedent(
         import json
         from importlib.metadata import distribution
         from pathlib import Path
-        from urllib.parse import unquote, urlparse
-
         import actions
 
         core_distribution = distribution("actions-core")
@@ -76,7 +91,7 @@ PROCESSOR_ACTION = textwrap.dedent(
             raise AssertionError("candidate actions-core install is absent from pip report")
         source = core_installs[0].get("download_info", {})
         source_url = source.get("url", "")
-        if Path(unquote(urlparse(source_url).path)).resolve() != wheel_path:
+        if _local_wheel_path_from_file_url(source_url) != wheel_path:
             raise AssertionError("actions-core was not installed from the candidate wheel")
         if source.get("archive_info", {}).get("hashes", {}).get("sha256") != wheel_digest:
             raise AssertionError("pip install report is not bound to candidate wheel bytes")
@@ -126,8 +141,15 @@ PROCESSOR_ACTION = textwrap.dedent(
         )
         adapter.release_input(item_id, State.DONE)
         return {"item_id": item_id, "output_id": output_id}
-    """
+        """
+    )
 )
+
+
+def _quote_shell_path(path: Path) -> str:
+    if os.name == "nt":
+        return subprocess.list2cmdline([path.as_posix()])
+    return shlex.quote(str(path))
 
 
 def consumer_package_yaml(core_wheel: Path, install_report: Path) -> str:
@@ -143,7 +165,7 @@ dependencies:
   pypi:
     - actions-work-items=0.4.4
 post-install:
-  - python -m pip install --force-reinstall --report {shlex.quote(str(report_path))} {shlex.quote(str(wheel_path))}
+  - python -m pip install --force-reinstall --report {_quote_shell_path(report_path)} {_quote_shell_path(wheel_path)}
 """
 
 

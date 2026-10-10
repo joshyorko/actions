@@ -12,6 +12,7 @@ from typing import Dict, List, Optional, Protocol, Union
 
 # Note: keep this import for backward compatibility
 from actions.server._common.process import kill_process_and_subprocesses
+from actions.server._common.process_logging import redact_sensitive_arguments
 from actions.server._preload_actions.preload_actions_autoexit import is_process_alive
 
 from .callback import Callback
@@ -107,7 +108,10 @@ class Process:
         )
         new_kwargs.update(kwargs)
         log.debug(
-            "Subprocess start [args=%s,cwd=%s,uid=%d]", self._args, self._cwd, self._uid
+            "Subprocess start [args=%s,cwd=%s,uid=%d]",
+            redact_sensitive_arguments(self._args),
+            self._cwd,
+            self._uid,
         )
         proc = self._proc = _popen_raise(self._args, **new_kwargs)
         log.debug("Subprocess started [pid=%s,uid=%d]", proc.pid, self._uid)
@@ -205,7 +209,9 @@ def _popen(cmdline, **kwargs):
         _stdin_write(popen, b"\n")
         return popen
     except Exception:
-        log.exception("Error running: %s", (" ".join(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         return None
 
 
@@ -220,7 +226,9 @@ def _popen_raise(cmdline, **kwargs):
         _stdin_write(popen, b"\n")
         return popen
     except Exception:
-        log.exception("Error running: %s", (" ".join(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         raise
 
 
@@ -255,7 +263,9 @@ def _call(cmdline, **kwargs):
     try:
         subprocess.check_call(cmdline, **kwargs)
     except Exception:
-        log.exception("Error running: %s", (" ".join(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         return None
 
 

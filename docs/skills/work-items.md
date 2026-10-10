@@ -155,13 +155,14 @@ any prior receipt, then atomically writes a fresh `IN_PROGRESS` receipt and
 attempt ID before artifact checks or pytest. Ordinary failures write `FAIL` and
 mark cases `NOT_VERIFIED`; abrupt termination can leave `IN_PROGRESS`, which is
 not a passing result. Source SHA and build version arguments are caller claims,
-not verified build provenance. Retained Linux artifacts do not establish
-current-source builds or Windows/macOS, distributed, service-backend or full
-browser acceptance.
-The credential-free native workflow runs process ownership, management/browser
-and history acceptance; it does not invoke this packaged-worker consumer gate.
-Its success therefore does not establish consumer lifecycle acceptance on that
-platform. Retain a separate receipt from this runner for each tested artifact.
+not verified build provenance. The credential-free native workflow runs this
+consumer gate on its Linux, macOS, and Windows matrix after the native artifact
+binding-lock tests. Keep a separate passing receipt for each platform and each
+frozen/Go executable; a Linux receipt does not establish Windows or macOS
+consumer acceptance, distributed or service-backend behavior, or full browser
+acceptance. The workflow also runs process ownership, management/browser and
+history acceptance; those checks do not replace this packaged-worker consumer
+gate.
 
 Dagger is intentionally absent from editor containers and those containers have no Docker access. Future Dagger automation may call `verify-work-items`, but it must not replace Poetry/package authority or add Docker access to the Dev Container.
 
@@ -350,39 +351,182 @@ the frozen executable and manifest in
 `action-server-native-provenance-<runner-os>-<run-id>-<attempt>`. The manifest
 checks Git `HEAD` against `github.sha`, records actual Python and Go versions
 plus platform/architecture, and measures executable hashes and package-relative
-paths. It does not attest a clean source tree or every build input. Ordinary
+paths. Each runtime entry also records the frozen onedir tree hash and its
+relative-file/content digest, the generated `go-wrapper/assets/assets.zip`
+hash, and a deterministic hash over `go-wrapper/main.go`, `go.mod`, and
+`go.sum`. These component values are read from the real build outputs after
+`build-executable --go-wrapper`; missing inputs fail manifest generation. The
+browser harness remeasures the checked-out archive and wrapper sources, the
+frozen tree, and extracted wrapper files before accepting UI behavior. The
+manifest does not attest a clean source tree or every build input. Ordinary
 path reads follow symlinks, so SHA-256 identifies bytes read through each named
 path without proving filesystem object identity. Artifact download entries
 identify the Go-wrapper artifact's root executable and the frozen artifact's
 `dist/action-server/...` path. This build does not supply a candidate Core wheel,
 so the manifest makes no Core-wheel provenance claim; the worker-consumer
-acceptance requires a separately measured task-local wheel. The manifest covers
-the checkout and named build outputs, not every dependency or the frozen
-executable's adjacent onedir files.
+acceptance requires a separately measured task-local wheel. The manifest binds
+the source revision and named build inputs, but does not hash every build
+dependency or attest a clean source tree.
 
-On Linux, the same workflow has a separate bounded Work Items consumer gate.
-It builds `actions-core` as a wheel into a fresh run-owned RCC home, then runs
-the real frozen and Go-wrapper executables against the synthetic API consumer
-test. The generated `spec-version: v2` package obtains
+On Linux, macOS, and Windows, the same workflow has a separate bounded Work
+Items consumer gate. Each matrix job builds `actions-core` as a wheel into a
+fresh runner-owned RCC home, then runs the real frozen and Go-wrapper
+executables against the synthetic API consumer test. The generated
+`spec-version: v2` package obtains
 `actions-work-items==0.4.4` from the public package registry and installs the
 exact candidate Core wheel with a supported `post-install` command after RCC
 creates the base environment. The consumer action checks the installed Core
 version and module ownership, then validates pip's install report against the
-candidate wheel path and SHA-256. No business-service credentials are used.
+candidate wheel path and SHA-256. File URLs in that report must be converted
+with the native platform's URL-to-path rules; Windows drive paths are not
+equivalent to a POSIX path formed directly from the URL's leading slash. The
+generated command quotes paths with native Windows command-line rules on
+Windows and POSIX shell rules elsewhere. No business-service credentials are
+used.
+The consumer test generates its action module from source fragments, so its
+regression test must execute a real module import: `compile()` alone does not
+evaluate module-level annotations or decorators. Keep every global referenced
+by an embedded helper in the generated module's own imports.
+
+For Action Server Python harness changes, `invoke lint` runs `ruff check src tests`
+using the package-discovered `action_server/ruff.toml`, then `ruff format --check`
+with the shared `devutils/ruff.toml` and the Action Server exclusions, then
+`isort --check src tests` using `action_server/pyproject.toml`. A Ruff rules
+check alone is not a complete lint receipt; scoped checks must preserve the
+same separate rules, formatting and import-sorting gates on the touched files.
+
 The runner hashes both executables and the wheel, requires fresh per-runtime
 API proofs, and accepts
 the optional native manifest only when its source SHA, platform, architecture,
 expected executable paths and measured executable hashes agree. Its receipt
-records the manifest hash and binding result. This is Linux-only acceptance;
-it does not establish Windows/macOS Work Items behavior, a clean-source
-attestation, wheel provenance inside the native build manifest, or live
-external-service behavior. The workflow retains a receipt even when the gate
-fails or is interrupted, then removes only its run-owned RCC home.
+records the manifest hash and binding result. This hosted matrix collects a
+separate receipt on each of the three platforms; only a passing receipt
+establishes consumer acceptance for that platform. The Action Server must
+create the action Run and bind its artifact metadata before the generated Work
+Items consumer action executes. The native workflow runs platform lock tests
+before consumer acceptance; a failure during Run creation is a platform
+artifact-storage failure, not Work Items consumer evidence. The gate does not
+establish a clean-source attestation, wheel provenance inside the native build
+manifest, or live external-service behavior. The workflow retains a receipt
+even when the gate fails or is interrupted, then removes only its run-owned RCC
+home.
 
 This harness proves creation and restart persistence, not worker-driven Work
 Item state transitions, attachment behavior, accessibility or other browsers.
 Those cells remain separate acceptance requirements. A workflow build/version
 check alone is not native Work Items acceptance.
+
+For packaged Work Items storage-failure UI checks, keep Action Server's own
+database (`--db-file=server.db`) separate from the management API database at
+`datadir/workitems.db`. After the test-owned browser closes and its requests
+finish, remove the Work Items database's SQLite sidecars and corrupt only
+`workitems.db`; reload the actual UI and verify its real
+`work_items_storage_unavailable` response and visible Retry guidance. The
+Action Server process may stay up because each adapter operation opens its own
+SQLite connection. Pointing `--db-file` at `workitems.db` instead corrupts the
+Action Server migration database and prevents the Runtime from reaching the
+Work Items error path.
+
+Keyboard acceptance for a Work Items dialog must verify both Escape dismissal
+and focus returning to the control that opened it; dialog closure alone is not
+a keyboard pass. A Chromium probe of the earlier Linux Go-wrapper artifact from
+run `37978256399` (manifest source `006232d13bf322755419d99b96e506edf16a4353`,
+wrapper SHA-256 `8f77988e3d305a232667037cabc55222e18f0af2b6d81d6b45832f45a338f0b5`)
+found that Escape closed Create Work Item but left `document.activeElement` on
+`BODY` while its trigger remained present. The source fix renders both create
+buttons as `DialogTrigger` children of their controlled Radix dialog root; source
+regressions cover the empty and populated page triggers.
+
+The packaged Linux Work Items browser gate runs
+`native-workitems-ui-acceptance.mjs` against the measured frozen executable. A
+PASS_BOUNDED receipt at source `fafd43ed7bbd06ba4f6d25aed85eb40e46653185`,
+frozen SHA-256 `b7031dcc0870a0e78cbf95f604675a5f23eea684c3829c404be8522687e22084`,
+Runtime 1.0.3, and Chromium 151.0.7922.34 verified empty and populated actual
+SQLite queue reads, keyboard open/Escape focus restoration, detail readback, no
+horizontal overflow at 320px, and the real storage-unavailable 503 with Retry
+and no raw path. The frozen executable hash does not bind its adjacent onedir
+files: a later run found stale UI bytes beside the same executable hash. Frozen
+UI receipts therefore also hash the full package tree before and after browser
+execution. The Go-wrapper Linux gate packages that same measured frozen tree
+with the repository's `zip_go_wrapper_assets` helper and verifies the wrapper's
+embedded archive hash plus the extracted file-set hash. For wrapper tests, set
+`HOME` (Linux/macOS) or `LOCALAPPDATA` (Windows) to the test-owned Runtime home
+before both the version probe and server start; `ACTIONS_HOME` and
+`ROBOCORP_HOME` alone do not isolate the wrapper's extraction directory.
+
+The Python browser harness must require both a zero Node exit and a `PASS`
+receipt while serializing the receipt to a string for assertion details. Passing
+the nested receipt dictionary directly as `assert`'s message can make pytest's
+assertion rewriting raise `TypeError: sequence item 0: expected str instance,
+dict found`, hiding the browser stage's original phase and state. Keep a
+regression that verifies a nonzero child exit preserves its nested JSON receipt.
+
+A Linux PASS_BOUNDED Go-wrapper receipt at the same source SHA records wrapper
+SHA-256 `79544d8e093c41ef7f2328efd2d0d4fd22acd8989fdc1f34b2a647f37fee6f24`,
+embedded archive SHA-256 `840eb3567e161df9738196c959a8f2acec98c95619b1d1a670036739c5849773`,
+wrapper-source SHA-256 `dd1fca74676c2c10531397e7ffe8bf5499b5ba75a6692334b16fd0e12f50b68d`,
+and extracted-file-set SHA-256 `0eccdeebceb4c8a7f6bf94b8f12e37f4f3302e8726daffc68d0198ee5fb9ad50`.
+It verified the same empty/populated queue, Escape focus restoration, detail,
+320px layout, and real storage-unavailable states as the frozen gate. These are
+Linux results only. The native workflow runs separate frozen and Go-wrapper
+browser gates on Ubuntu and Windows; their receipts bind the manifest path,
+executable hash, and (for frozen builds) the onedir package-tree hash. Windows
+manifest paths include `.exe` for both runtimes, which the harness validates.
+Those Windows gates still require passing hosted receipts; macOS browser
+acceptance is not configured. Authorization denial, missing bundled support,
+and generic HTTP 500 remain `NOT_RUN` until their separately owned or supported
+packaged fixtures run. Do not use response interception as backend evidence.
+The browser receipt may say `PASS_BOUNDED` only after the bounded process-tree
+cleanup result confirms that the Runtime wrapper was reaped, its descendant
+snapshot was complete, and no observed descendant remains live. A normal return
+from `ActionServerProcess.stop()` is insufficient: its underlying tree killer
+can suppress process-control errors and return without observing the final
+state. Keep the observed zombie-descendant count separate; this gate does not
+claim universal child reaping. Startup failure applies the same observation to
+the locally created Runtime even when the startup helper has not returned it to
+the caller. If both startup and cleanup fail, retain both exception class names
+and the bounded cleanup result in the sanitized receipt while preserving the
+startup exception as the primary failure. An incomplete cleanup result leaves
+the receipt at `FAIL`.
+
+If the manifest's frozen-tree digest differs at UI-gate startup, retain both the
+build-time inventory beside the manifest and the harness's pretest inventory.
+Compare their relative paths, entry kinds, permission modes, symlink targets,
+and file-content hashes before changing inventory normalization or gate order.
+The inventory is diagnostic evidence; never recompute the trusted manifest
+value from the later tree to make a mismatch pass. Hosted Linux and Windows
+inventories showed new preload-action bytecode files under the frozen
+`_internal` tree after manifest creation; Windows also gained a downloaded RCC
+executable under `_internal/actions/server/bin`. Place the Work Items browser
+gate before other packaged Runtime gates and set `PYTHONDONTWRITEBYTECODE=1` for
+its Runtime and version probes. Its hosted tree check must still pass before
+that ordering change counts as verified behavior.
+
+After cleanup, the frozen browser gate also retains a post-runtime per-path
+inventory and an added/removed/changed entry report, including when the tree
+digest differs. Preserve the initial manifest digest and require every original
+entry to remain unchanged. The Action Server's `_download_rcc.py` contract puts
+the pinned RCC executable at `_internal/actions/server/bin/rcc-<version>`; if
+absent from the frozen build, the harness records that exact runtime-created
+file and its content digest as separate runtime state. Other added entries,
+removed files, or changed build entries fail the gate. Do not recalculate the
+trusted manifest hash from the post-runtime tree.
+
+Run the frozen browser gate from a task-owned copy of the onedir package. Verify
+the copy's full tree and executable hashes against the immutable manifest before
+launch, and verify the original build tree remains unchanged afterward. The Go
+wrapper extracts into a test-owned home; verify that extraction against the
+embedded archive before Runtime startup and inventory its post-runtime changes
+separately. This prevents one Runtime probe from changing the build artifact
+used by the next probe. Hosted Windows results must still verify the copy
+behavior and both UI cells.
+
+Subprocess debug/error messages and string representations must redact
+sensitive command-line switches before formatting the argument list.
+Use the shared process-argument redactor so Action Server's common and
+RoboUtils process wrappers agree on `--api-key` and its accepted abbreviations.
+Tests must prove the key value is absent from captured logs without placing the
+value in the assertion failure message.
 
 On Windows, the harness assigns a waiting Python wrapper to a kill-on-close
 Job Object before releasing its three-byte stdin gate. Runtime, Node and their
@@ -403,8 +547,9 @@ Before deleting temporary native logs, acceptance rejects any occurrence of the
 synthetic API key using a phase-only failure message. This checks the native INFO
 startup path; verbose WebSocket credential redaction has separate transport
 tests. The frozen executable hash does not identify adjacent onedir files; retain
-that provenance limitation when using its receipt. The Go wrapper hash identifies
-its embedded archive as part of the executable.
+that provenance limitation when using its receipt. The Go wrapper executable
+contains its archive; measure the archive hash and verify the test-owned
+extraction's file set when binding it to browser behavior.
 
 Startup exits retain only the exit code and bounded exception-class/import-module
 identifiers parsed from the final 64 KiB of the temporary log. Raw log lines,
