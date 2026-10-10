@@ -182,6 +182,39 @@ Run lists, details, request-ID lookup, notifications, manifest fallback,
 artifact APIs and analytics exclude pinned Runs rather than infer public
 Workspace authorization.
 
+The optional server-only `RunOutputTransport` binding installs a bounded GET
+route at `/api/workspaces/{workspace_id}/outputs/{handle}` in the actual Runtime
+application. Without explicit trusted configuration that route is absent. The
+binding pairs the existing service with an authenticator that verifies its
+credential and returns a server-owned Actor; freezing the binding does not
+verify the authenticator or freeze its credential store. No CLI/environment
+mapping, default principal, browser/provider-OAuth session UUID, installation
+API token or caller-selected Actor ID supplies Workspace authority. When
+configured, installation-key authentication remains an outer gate. The trusted
+Actor authenticator and the shared resolver's current persisted read-grant
+checks are mandatory with or without an installation key and occur before
+provider acquisition. Present browser Origins must pass the existing trusted
+origin policy; an allowed Origin or a successful preflight never grants identity
+or access.
+
+This transport streams the measured opened descriptor in chunks of at most
+64 KiB and closes its resolver on completion, failure and disconnect. It serves
+`application/octet-stream` as an attachment using only the opaque handle as the
+filename, with `no-store` and `nosniff`; logical names/media types never enable
+inline active content. Handle-bearing headers are constructed only after shared
+resolution validates the canonical handle, so Unicode/control-character path
+inputs cannot turn a uniform denial into a header-encoding failure. Denied, revoked, cross-Workspace, malformed and unknown
+handles share an unavailable response before provider access. Storage acquisition
+failure returns 503; a failure after headers aborts the stream rather than
+claiming a complete artifact. Range requests return 416 explicitly and HEAD is
+not implemented. This is ASGI source evidence, not socket/native/CLI acceptance
+or the full #86 static-serving contract: HEAD, ETag, Last-Modified, single,
+suffix, multi and invalid Range behavior, Windows descriptor/reparse parity,
+shared/object providers, quotas and GC remain required. Production identity
+provider configuration and actual Canvas producer/consumer execution still need
+separate integration; a retrievable private-service output does not authorize
+changing a template's `artifact: null` without its own end-to-end proof.
+
 The private filesystem provider requires Linux descriptor features and trusted
 kernel procfs, borrows a verified service-owned root FD, and measures/seals actual
 bounded bytes. It rejects special objects through an O_PATH pin before any
@@ -191,8 +224,8 @@ runtime implementation. Initial bounds are 256 KiB inputs, 1 MiB result envelope
 64 output records per Run (including aborted records), 64 MiB per object,
 64 KiB chunks, leases up to one hour and retention up to one year. Full quotas,
 GC, output-secret policy, compiler/provider admission, production actor/provider
-wiring, adapters and Canvas transport remain separate gates; this private slice
-does not accept whole #83/#86/#129/#127.
+wiring, adapters and Canvas execution integration remain separate gates; this
+private slice does not accept whole #83/#86/#129/#127.
 
 ## Verification matrix
 
