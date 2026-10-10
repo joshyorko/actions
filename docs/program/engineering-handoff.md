@@ -1,6 +1,19 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
-## Current convergence — 2026-10-10T00:55:27Z
+## Current convergence — 2026-10-10T01:35:00Z
+
+The 27-PR cohort has 16 PRs integrated to their recorded targets, 11 open/blocked and 0 merge-ready. Community is `36b8192dbb8143e016af3351f7d25b22a35c9944`; main integration is `46a06485f776265e64e84629c468f26b4389d2bd`; Runtime candidate remains `6a53578fac029a0696834c30438c858f5f0003be`. The 54 retained issue records remain 53 open, #210 accepted/closed and 0 whole-issue review-ready. Execution graph stages remain `READY=0, ACTIVE=7, REVIEW=8, BLOCKED=29, INTEGRATED=9, COMPLETE=1`. See the [01:35 convergence receipt](evidence/convergence-followup-20261010T0135Z.json), [live PR audit](evidence/convergence-live-prs-20261010T0135Z.json), and the [previous 00:55 receipt](evidence/convergence-followup-20261010T0056Z.json).
+
+The open PR audit includes #215–218, #221 and #272–277. PRs215–217 are dirty/conflicting despite old green checks; #218 is clean with 16 successes and one skip but remains a bounded packaged-consumer checkpoint. PR221's current exact-head checks are 29 successes plus one publication skip. PR272 has 16 successes but remains under source review/combined validation. PR273's published head has three failed checks; root is composing reviewed fixes but that successor is not yet published. PR274 has accepted bounded source review and 12 required hosted checks pass, with full combined validation pending. PR275 and PR276 have bounded source review acceptance but hosted checks are still running. PR277's two-commit interpreter-selection/docs correction is source-accepted; its hosted checks are queued/running. Per-PR heads, bases, check rollups, owners and next actions are in the audit.
+
+Root reports configured Runtime validation exposing 21 Linux integration failures, 6 macOS portable failures, and Windows typing failures (6 Action Server/Core plus 19 Work Items). Root's local combined Win32 mypy over 301 files leaves 7 pre-existing Cloud/Core/stub errors while all 25 newly exposed Windows/Work Items errors are fixed; this is not a full typecheck pass. No combined candidate is admitted until it is published and the required gates pass on that exact source. Core1.0.2 and Helper1.0.3 remain published/verified; Runtime/native1.0.3 remains held and unpublished. No whole-issue acceptance changed.
+
+
+## Current evidence correction — 2026-10-10T01:40:00Z
+
+The 01:35 snapshot remains unchanged. The sanitized root-local Win32 mypy output it cited is now preserved at [the exact log](evidence/combined-e1e30ef-windows-typecheck.txt), byte-identical to source SHA-256 43e889d85131a79fb5c869dbda7c09c15cde0f70fd80722e11bfa64666a14277. The six Windows platform typing errors were Action Server Runtime errors, not Core errors; the separate Work Items set is distinct. Current GitHub readback shows PR276 head `bd10bb57` unchanged and its base now `integration/community-release-20261008`, following the root's normal base update. Its rollup is 27 success, 2 in progress, and 1 skipped; it is not merged and checks are not complete. See the [correction receipt](evidence/convergence-correction-20261010T0140Z.json).
+
+## Historical convergence snapshot — 2026-10-10T00:55:27Z (superseded by the 2026-10-10T01:33:00Z amendment)
 
 The 21-PR cohort is now 16 integrated to their recorded targets, 5 open/blocked, and 0 merge-ready. Community is `36b8192dbb8143e016af3351f7d25b22a35c9944`; integration is `c6b682012ae791e744cb7116600b3869d06c7b4d` (tree `7621ef2050941df416c1b7448859a8d3bb4ee443`); Runtime candidate is `6a53578fac029a0696834c30438c858f5f0003be`. The 54 issue records remain unchanged: 53 open, #210 accepted/closed, and 0 whole-issue review-ready. See the [00:55 convergence receipt](evidence/convergence-followup-20261010T0056Z.json).
 
@@ -9,6 +22,7 @@ PR256 merged at 00:54:25Z as `c6b6820`; its merge tree exactly matches the teste
 The live PR audit at 00:55:27Z contains five open drafts. PRs215–217 are dirty/conflicting despite their recorded green checks. PR218 is clean with 16 successes and one skip; remaining #208 acceptance is still open. PR221 now points at integration `c6b6820`; its new community-base checks are 4 success, 20 in progress and 4 queued, with merge state UNSTABLE. Root owns admission. No Runtime/native publication or release readiness is implied.
 
 RCC remains unadmitted. The remotely verified branch remains `6a0db09d2623d084ae0de43f7ec7737bd28ea157`. A separate c8 source review (`c8e661a44ade26016725cbfb2b30663d32012059`) is BLOCKED: standalone import can prune a snapshot still referenced by a live generation; no concurrent live Runtime regression has been run. Candidate cleanup, receipt binding and observed server exit are also still separate gates. See [the source review](evidence/rcc-c8-independent-snapshot-review-20261010T0048Z.json). Upstream disposition: none; finding is local Runtime lifecycle wiring. Existing repository-operations guidance covers these evidence and acceptance boundaries, so no duplicate rule was added.
+
 
 ## Historical convergence snapshot — 2026-10-10T00:51:29Z (superseded by the 2026-10-10T00:55:27Z amendment)
 
