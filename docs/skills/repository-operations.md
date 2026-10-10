@@ -2311,6 +2311,17 @@ transitions, rejection before callback, same-owner revisions, restart, capacity,
 malformed history, commit rollback, and serialized two-process SQLite admission.
 This read-time guard retains the existing matcher; it does not solve arbitrary
 template intersection or reauthorize a conflicting URI after rediscovery.
+`test_cli_mcp_resource_history.py` adds one real CLI/HTTP `resources/read`
+acceptance node spanning direct-to-template, template-to-direct, and
+template-to-template owner changes. It verifies that candidate routes can be
+listed while a protected concrete read fails before the new callback, then
+checks same-owner callback revision, direct-over-template precedence, rename
+recovery, retired-resource unavailability, malformed watched-reload last-good
+behavior, and persisted denial after restart. The one JUnit node contains all
+three transition classes; it is not three separately counted test cases. In a
+frozen run its managed package fixtures pin `actions-core=1.0.2` and verify the
+worker's Core origin and version. Source-mode evidence remains distinct from a
+run against the actual new frozen Runtime artifact.
 
 `test_cli_live_reload_multi_package.py` exercises actual unmanaged two-package
 watched failure and recovery. After malformed decorated B is rejected, it checks
