@@ -1,0 +1,139 @@
+{
+  "created_at_utc": "2026-10-10T04:59:30Z",
+  "purpose": "Root-authorized bounded same-thread continuation dispatch for #126 and #279; preflight and isolated worktree required.",
+  "target": "cas-worker-01",
+  "dispatches": [
+    {
+      "lane": "#126 installed-wheel template acceptance",
+      "thread_id": "01a12211-01b3-7850-b508-bd7959b8210c",
+      "prior_turn_id": "01a122ef-0b12-71f3-83f9-476e6e819ca2",
+      "verified_cwd": "/workspaces/actions-worktrees/devsy-native-distribution",
+      "request_id": "actions-sol-luna-126-template-20261010T0500Z-v2",
+      "model": "gpt-6.1-sol",
+      "effort": "medium",
+      "approval_policy": "never",
+      "sandbox": "danger-full-access",
+      "planned_at_utc": "2026-10-10T05:02:00Z"
+    },
+    {
+      "lane": "#279 packaged multi-package baseline",
+      "thread_id": "01a12224-8dc6-7dc1-9542-65d3a1de0955",
+      "prior_turn_id": "01a12410-9945-7321-9293-3bcec54c0592",
+      "verified_cwd": "/workspaces/actions-worktrees/devsy-rcc-local-acceptance",
+      "request_id": "actions-luna-279-packaged-baseline-20261010T0503Z-v2",
+      "model": "gpt-6-luna",
+      "effort": "medium",
+      "approval_policy": "never",
+      "sandbox": "danger-full-access",
+      "planned_at_utc": "2026-10-10T05:03:00Z",
+      "fixture_checkpoint": "4af4388 (resolve and verify full commit/tree/files; supersedes 9135/de4 for current baseline)"
+    }
+  ],
+  "preflight_snapshot_ids": {
+    "distribution_revision": "e03ad663464ab74d830817af1cfb74fe783052d570c1077530788a8c535ce895",
+    "rcc_revision": "6009ea6b1c2346dd75753cf4562ec113e96cb913f1032cd19033f9b1834495f6",
+    "auth_revision": "e72ba50d49433dff04f585c07bd8f930f88813f67fc4e07512ffd18296fc0457"
+  },
+  "preflight_worktree_facts": "Supervisor executed inventory command exec-b13f372d-7360-4e89-b381-2156f5511d66 at approx 04:59Z; distribution and RCC worktrees verified git worktree, correct origin, clean; see exact command output in native thread. Request IDs persisted before dispatch.",
+  "updated_at_utc": "2026-10-10T05:05Z",
+  "failed_attempts": [
+    {
+      "request_id": "actions-sol-luna-126-template-20261010T0500Z-v1",
+      "turn_id": "01a1242e-7ff8-75f3-9234-e027400a6fbb",
+      "status": "failed",
+      "error_code": "other",
+      "native_error": "HTTP 400 invalid_request_error: The 'gpt-6.1-luna' model is not supported when using Codex with a ChatGPT account."
+    },
+    {
+      "request_id": "actions-sol-luna-279-packaged-baseline-20261010T0501Z-v1",
+      "turn_id": "01a1242e-d1fa-7a73-b4dd-d9c66e029e55",
+      "status": "failed",
+      "error_code": "other",
+      "native_error": "HTTP 400 invalid_request_error: The 'gpt-6.1-luna' model is not supported when using Codex with a ChatGPT account."
+    }
+  ],
+  "model_catalog_observation": {
+    "observed_at_utc": "2026-10-10T05:02Z",
+    "native_tool": "codex.list_models",
+    "supported_ids": [
+      "gpt-6-luna",
+      "gpt-6.1-sol"
+    ],
+    "unsupported_requested_id": "gpt-6.1-luna"
+  },
+  "native_model_catalog": {
+    "observed_at_utc": "2026-10-10T05:02Z",
+    "source": "codex.list_models on cas-worker-01",
+    "supported_models": [
+      "gpt-6.1-sol",
+      "gpt-6-astra",
+      "gpt-6-sol",
+      "gpt-6-luna",
+      "gpt-5.6-sol",
+      "gpt-5.6-terra",
+      "gpt-5.6-luna"
+    ],
+    "note": "gpt-6.1-luna unsupported; advertised Luna ID is gpt-6-luna"
+  },
+  "dispatch_results": [
+    {
+      "scope": "#126",
+      "request_id": "actions-sol-luna-126-template-20261010T0500Z-v1",
+      "turn_id": "01a1242e-7ff8-75f3-9234-e027400a6fbb",
+      "status": "failed",
+      "error": "HTTP400 invalid_request_error: gpt-6.1-luna unsupported for ChatGPT account"
+    },
+    {
+      "scope": "#126",
+      "request_id": "actions-sol-luna-126-template-20261010T0500Z-v2",
+      "turn_id": "01a12430-e2f2-7361-8baf-786f433fce67",
+      "wrapper_state": "accepted/inProgress, replayed=false",
+      "model": "gpt-6.1-sol",
+      "native_snapshot": "KubernetesError; unknown whether active/effective settings null; do not duplicate"
+    },
+    {
+      "scope": "#279",
+      "request_id": "actions-sol-luna-279-packaged-baseline-20261010T0501Z-v1",
+      "turn_id": "01a1242e-d1fa-7a73-b4dd-d9c66e029e55",
+      "status": "failed",
+      "error": "HTTP400 invalid_request_error: gpt-6.1-luna unsupported for ChatGPT account"
+    },
+    {
+      "scope": "#279",
+      "request_id": "actions-luna-279-packaged-baseline-20261010T0503Z-v2",
+      "turn_id": null,
+      "wrapper_state": "unknown",
+      "error": "KubernetesError",
+      "reconciliation": "exact get_thread_snapshot failed closed KubernetesError; no retry/replay"
+    }
+  ],
+  "current_blocker": "cas-worker-01 pod is Failed; coordinator/native snapshot and thread item list fail closed with KubernetesError. All post-dispatch states unknown. No workspace lifecycle/provisioning/credential action authorized or taken; no request replay.",
+  "owner_workspace_status": {
+    "observed_at_utc": "2026-10-10T05:05Z",
+    "status": "completed",
+    "workspace_uid": "default-ca-0b24d",
+    "identity_verified": true,
+    "diagnostics_allowed": true,
+    "new_request_allowed": false
+  },
+  "owner_workspace_diagnostics": {
+    "observed_at_utc": "2026-10-10T05:05Z",
+    "pod_phase": "Failed",
+    "native_daemon": "unverified",
+    "capacity": null,
+    "codex_version": null,
+    "auth_status": null,
+    "active_setup_stages": null
+  },
+  "failed_steer_response": {
+    "projection_captured": {
+      "operation": null,
+      "turnId": null,
+      "error": null
+    },
+    "raw_response_retained": false,
+    "latest_thread_items_readback": "thread/items/list failed closed (KubernetesError); inspect target diagnostics",
+    "effect": "unknown",
+    "retry": "none"
+  }
+}

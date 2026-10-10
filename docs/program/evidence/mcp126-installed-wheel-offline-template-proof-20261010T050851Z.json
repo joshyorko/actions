@@ -1,0 +1,111 @@
+{
+  "commands": [
+    "python -m pip check",
+    "strace -f -e trace=network -o /tmp/work/mcp-showcase-new.network.log /tmp/work/runtime-clean-venv/bin/action-server new --name mcp-showcase --template mcp-v2-showcase",
+    "strace -f -e trace=network -o /tmp/work/basic-new.network.log /tmp/work/runtime-clean-venv/bin/action-server new --name basic-example --template basic"
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md, Repository-owned Action Server templates section",
+    "evidence": "This receipt records Runtime1.0.3 installed from exact GitHub Linux wheel bytes, successful no-network CLI creation, 7/7 Showcase files and 10/10 Basic files equal to the packaged archive; Basic devdata preserved.",
+    "proposed_delta": "Extend the existing clean-wheel verification note with one explicit acceptance step: from an empty temporary working directory and isolated home, run action-server new --template mcp-v2-showcase using the installed candidate wheel with HTTP(S) proxy pointed to an unavailable loopback port; assert the complete created file tree matches the embedded template archive byte-for-byte. Where a fixture template includes authored devdata, assert those entries survive too. This proves installed-wheel offline project creation and bundle fidelity, beyond source-embedded tests.",
+    "remaining_uncertainty": "No source change or upstream report; full #126 criteria are not complete.",
+    "stale_or_ambiguous_guidance": "Current guide describes embedded archive authority/offline creation and separately says clean wheel install is required, but does not join these into an installed-wheel project-creation test."
+  },
+  "embedded_templates": {
+    "basic_authored_devdata_preserved": true,
+    "basic_exact_created_tree": true,
+    "basic_files": {
+      ".gitignore": "a5a4da7018e030f2cac1fe07c0758c130fdf6cd2e026654b0efdb6692d649b9c",
+      "CHANGELOG.md": "a6e372c5ab600d08bc9214b93bd5cf52bd0acad7887620cc9fe43619d9c80e45",
+      "LICENSE": "5dd447f3a4dafdcf24b0b60cc4f130e778ed1edb4b1fe7994fe8e87ed6eb9497",
+      "README.md": "0ad332fe37b325f9508cbf96aa905514d48106c90bd8be1958aaccf462d4b25e",
+      "devdata/input_get_wikipedia_article_summary.json": "8dd6a628ae1ebd9efa220b9157129909d14bddf55e25f5f56f4b79b5ea8162d0",
+      "package.png": "e8831becf8f64607e1ce6887b4cca60492b057495d921591670220cac87bda2d",
+      "package.yaml": "f34d3cbc4c9a13927067639438bb42373189ed5b6a5d055947aa5bd66e256309",
+      "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests/test_template.py": "6a551bdbdb764176083a7663e4086abd4db7b50cc82e8c73cfd20865b3174e60",
+      "wikipedia_actions.py": "2be86283de59dbbfc8122296e49a0daa4883e256ff35505070e763ea6026eb70"
+    },
+    "embedded_bundle_sha256": "33b6ce2a6c1c9dab32eeca826baf8807ca7f0ac7419dcbc3d0c59a8274bbadff",
+    "mcp_v2_showcase_archive_sha256": "933c8f5e92c01e8d8987861f53d4057a9c2a9c9528f7ee94d273c35b5d473bc6",
+    "mcp_v2_showcase_exact_created_tree": true,
+    "mcp_v2_showcase_files": {
+      ".gitignore": "b555f50b78265dc0aee042c4836843cee6868d3f7dd86f8457f51c1a8d17bf44",
+      "README.md": "4e3dad7ba02e4453744e32f33d5358e6eec5f2ed73c5d34360d4b4189a519efd",
+      "examples/mcp_client.py": "589d3ae400592dd2f921c4ffa7a2c8d522301024157a271b9510ecacb9b450b6",
+      "examples/open_close_sse.py": "c14e5a33baebbd29c42c4aa73f9363711edf4a616b0a3715bfe619a67f2f22a7",
+      "package.yaml": "5696e1d7bf8d4ebfd08a902a590c3278918e4c52c9394749f25f7835346d3d0d",
+      "showcase_actions.py": "eecfea9117d1a9d2e5f617ae772bdb8cde32f106bb21ccf7a404289c9907d336",
+      "tests/test_showcase_actions.py": "ca165316a2bbad27277b90e30136ef0f68180a1baf035c2522131d744ca761c2"
+    },
+    "mcp_v2_showcase_has_devdata": false,
+    "metadata_hash_matches_bundle": true
+  },
+  "installation": {
+    "cwd_for_template_commands": "/tmp/work/offline-projects",
+    "dependency_resolution": "Published Core and Helper wheels explicitly supplied by local paths; other Runtime dependencies resolved from public package index satisfying wheel metadata; full resolved environment saved at /tmp/work/runtime-clean-pip-freeze.txt",
+    "import_origins": "actions, actions.mcp, actions.work_items, actions.server, actions_http all resolved under /tmp/work/runtime-clean-venv/lib/python3.12/site-packages",
+    "pip_check": "PASS: No broken requirements found.",
+    "python_version": "3.12.15",
+    "pythonpath": "unset",
+    "venv": "/tmp/work/runtime-clean-venv"
+  },
+  "instructions_read": [
+    "/workspace/actions/AGENTS.md",
+    "/workspace/actions/.agents/skills/actions-repository/SKILL.md",
+    "/workspace/actions/docs/skills/README.md",
+    "/workspace/work/community-resume/mcp-showcase-template/docs/skills/repository-operations.md#repository-owned-action-server-templates"
+  ],
+  "issue_disposition": {
+    "126": "NOT COMPLETE; evidence proves installed Linux wheel and offline project creation only, not the whole protocol showcase acceptance contract.",
+    "mcp_scope": "source template creation only; no Action Server start, MCP protocol round-trip, native app, Canvas, or SDK feature claim.",
+    "remote_distribution_turn_wrapper": "state remains unknown; no claim made."
+  },
+  "network": {
+    "http_https_all_proxy": "http://127.0.0.1:9 during CLI invocations",
+    "network_syscall_trace": "both traces contain only process-exit records and no socket/connect/DNS network syscall",
+    "no_proxy": "localhost,127.0.0.1,::1",
+    "result": "PASS offline execution with no network syscalls observed"
+  },
+  "observed_at_utc": "2026-10-10T05:08:51Z",
+  "published_dependencies": {
+    "actions-core": {
+      "version": "1.0.2",
+      "wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80"
+    },
+    "actions-http-helper": {
+      "version": "1.0.3",
+      "wheel_sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9"
+    },
+    "actions-work-items": {
+      "resolved_version": "0.4.4"
+    }
+  },
+  "purpose": "Read-only installed-wheel/offline template creation acceptance evidence for issue #126; this is one criterion only.",
+  "repository": "joshyorko/actions",
+  "runtime_wheel": {
+    "direct_url_installed_sha256": "9385343a783d368bd653e42265671e1001d3b701c42d0d01fd3648ed92a219d8",
+    "filename": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "metadata_name": "actions-runtime",
+    "metadata_version": "1.0.3",
+    "requires_core": ">=1.0.2,<2.0.0",
+    "requires_http_helper": ">=1.0.3,<2.0.0",
+    "requires_python": ">=3.12,<3.14",
+    "sha256": "9385343a783d368bd653e42265671e1001d3b701c42d0d01fd3648ed92a219d8"
+  },
+  "schema_version": 1,
+  "source_provenance": {
+    "actual_ci_checkout_sha": "2492f774841118496dbafd5e08b9066edaf170fa",
+    "actual_ci_tree_sha": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "artifact_id": 11659505948,
+    "artifact_name": "Linux-wheels",
+    "artifact_sha256": "8f2d477fd1797a75f685ac618697a3a0abd9410aafa81ee214398fdb214b36c0",
+    "artifact_size_bytes": 28220051,
+    "attempt": 2,
+    "base_sha": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "github_artifact_branch": "fix/runtime-tests-integration-triggers-20261010",
+    "github_artifact_head_sha": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "provenance_receipt": "/workspace/work/community-resume/evidence/pr273-final-ci-84b8c70a-20261010T0438Z.json",
+    "workflow_run_id": 38023233207
+  }
+}

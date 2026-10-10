@@ -1,0 +1,64 @@
+{
+  "id": "program-amendment-20261010T0514Z",
+  "observed_at_utc": "2026-10-10T05:08:51Z",
+  "assembled_at_utc": "2026-10-10T05:14:02Z",
+  "supersedes_current_worker_observation": "program-amendment-20261010T0509Z",
+  "summary": "The exact Linux installed-wheel/offline template-creation criterion for #126 is accepted: Runtime 1.0.3 CPython 3.12 wheel SHA-256 9385343a783d368bd653e42265671e1001d3b701c42d0d01fd3648ed92a219d8 created the Showcase and Basic project trees byte-for-byte from the embedded bundle; Basic authored devdata is preserved, pip check passes, and the loopback-proxied traces contain no socket/connect/DNS calls. This is one Linux criterion only; independent artifact verification and remaining #126 protocol/host acceptance remain separate. Whole #126 remains open. Latest underlying status inputs are time-bounded: 05:08:51Z installed-wheel proof, 05:06Z branch readback, and 05:05Z workspace/dispatch diagnostics. Devsy v2 outcomes remain unknown after KubernetesError and were not replayed.",
+  "accounting_boundary": {
+    "retained_issue_contract_count": 54,
+    "supplemental_issue_count": 1,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "issue_stage_counts_changed": false,
+    "raw_contracts_or_historical_archives_changed": false
+  },
+  "accepted_scoped_criteria": [
+    {
+      "criterion_id": "126:linux-installed-wheel-offline-project-creation",
+      "owner_issue": 126,
+      "status": "ACCEPTED_LINUX_INSTALLED_WHEEL_TEMPLATE_CREATION_ONLY",
+      "consumer_issue": 126,
+      "consumer_slice": "126-installed-wheel-offline",
+      "description": "With the exact Linux CPython 3.12 Actions Runtime 1.0.3 installed wheel outside the source checkout, create mcp-v2-showcase and Basic projects. The full created files match the embedded archive byte-for-byte, Basic authored devdata is preserved, pip check passes, and the loopback-proxied strace shows no socket/connect/DNS calls.",
+      "decision": "Root accepted only this bounded Linux installed-wheel/offline template-creation criterion. It does not establish Action Server start, MCP protocol/ChatGPT host behavior, other-platform acceptance, independent artifact readback, or whole #126 completion.",
+      "consumer_slice_description": "Linux installed-wheel offline template creation from the exact Runtime 1.0.3 wheel",
+      "consumer_slice_status": "ACCEPTED for Linux installed-wheel offline template creation only; separate artifact verification and remaining #126 acceptance stay open.",
+      "gate_scope": "Linux CPython 3.12 installed candidate wheel; template project creation and byte-fidelity only. Whole #126 remains open.",
+      "superseded_issue_level_prerequisites": [],
+      "consumer_issue_reason": "The exact Linux installed-wheel offline template-creation criterion is accepted. Independent artifact verification and remaining protocol/host criteria are separate; whole #126 remains open.",
+      "consumer_issue_next_action": "Continue independent artifact verification and remaining #126 protocol/host criteria; do not promote the Linux offline template proof to whole-issue acceptance.",
+      "evidence_path": "evidence/mcp126-installed-wheel-offline-template-proof-20261010T050851Z.json",
+      "evidence_sha256": "5f28fb2e544c834e65a055d77dbbfc270669a267d62e54194abdb5d4fd78334a"
+    }
+  ],
+  "status_receipt_path": "evidence/devsy-current-slice-status-20261010T0514Z.json",
+  "evidence": [
+    {
+      "path": "evidence/mcp126-installed-wheel-offline-template-proof-20261010T050851Z.json",
+      "size_bytes": 7511,
+      "sha256": "5f28fb2e544c834e65a055d77dbbfc270669a267d62e54194abdb5d4fd78334a"
+    },
+    {
+      "path": "evidence/cas-dispatch-20261010T0500Z.json",
+      "size_bytes": 5731,
+      "sha256": "ee54ddd8ad242584231d43606d5c5bef20d5dc006b7e7c2d2ed2e566e7863e77"
+    },
+    {
+      "path": "evidence/cas-owner-pod-failed-20261010T0505Z.json",
+      "size_bytes": 2328,
+      "sha256": "baf170e795e9ca6ef0b6552725b228327a11175ce09c8d60309dba9c3cca8ddb"
+    },
+    {
+      "path": "evidence/cas-evidence-branch-readback-20261010T0506Z.json",
+      "size_bytes": 1537,
+      "sha256": "83f4b8f20daccf5f88371efb59094ad01737bfbc60d4d54d1e8065789c97e724"
+    },
+    {
+      "path": "evidence/devsy-current-slice-status-20261010T0514Z.json",
+      "size_bytes": 3430,
+      "sha256": "5cd9dcbe3ca090ffab6d7652431ff04a15c9598be4809a8c46621de724e7dc10"
+    }
+  ],
+  "upstream_disposition": "none; no confirmed third-party defect is established by this bounded acceptance."
+}

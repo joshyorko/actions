@@ -1,0 +1,24 @@
+{
+  "observed_at_utc": "2026-10-10T05:06:00Z",
+  "source": "Read-only GitHub connector + public git ls-remote",
+  "repository": "joshyorko/actions",
+  "branch": "devsy/coordinator-20261009",
+  "branch_head": "655b044a7bbe464eeebccb1a61a2833992e12d8a",
+  "commit_message": "docs: preserve exact native convergence receipts",
+  "commit_url": "https://github.com/joshyorko/actions/commit/655b044a7bbe464eeebccb1a61a2833992e12d8a",
+  "paths": [
+    "docs/program/evidence/devsy-convergence-20261010/84b8-browser-results.json",
+    "docs/program/evidence/devsy-convergence-20261010/84b8-independent-summary.json",
+    "docs/program/evidence/devsy-convergence-20261010/84b8-linux-independent-gate-receipt.json",
+    "docs/program/evidence/devsy-convergence-20261010/84b8-other-os-review.json",
+    "docs/program/evidence/devsy-convergence-20261010/SHA256SUMS",
+    "docs/program/evidence/devsy-convergence-20261010/d8-browser-api-acceptance-receipt.json",
+    "docs/program/evidence/devsy-convergence-20261010/d8-lifecycle-receipt.json",
+    "docs/program/evidence/devsy-convergence-20261010/d8-receipt-amendment-correction.json",
+    "docs/program/evidence/devsy-convergence-20261010/d8-run.json",
+    "docs/program/evidence/devsy-convergence-20261010/macos-rcc-release-transform-independent-receipt.json",
+    "docs/program/evidence/devsy-convergence-20261010/root-reported-final84-CI-status.json"
+  ],
+  "scope": "Read-only confirmation of existing pushed evidence commit; no workspace/branch mutation.",
+  "upstream_disposition": "none"
+}

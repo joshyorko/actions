@@ -1298,7 +1298,19 @@ python templates/packaging/build_embedded_bundle.py \
 Action Server seeds its settings cache from these package-owned assets, validates the
 bundle hash and every archive member, and atomically installs only verified archives.
 The embedded bundle is the sole runtime authority: project creation performs no
-metadata or archive network request. The production inventory is `minimal`,
+metadata or archive network request. For installed-wheel acceptance, install the exact
+candidate Runtime wheel in a clean environment outside the checkout, run from an empty
+temporary working directory with an isolated home, and point HTTP(S) proxies at an
+unavailable loopback port. Compare the complete created tree byte-for-byte with the
+embedded archive, including any authored `devdata`; capture OS-level network syscalls
+as well, because proxy configuration alone does not prove an offline run. The 2026-10-10
+Linux CPython 3.12 receipt verifies Runtime 1.0.3 wheel SHA-256
+`9385343a783d368bd653e42265671e1001d3b701c42d0d01fd3648ed92a219d8` and offline
+creation of the Showcase and Basic templates, including Basic authored data. This is
+Linux installed-wheel/template-creation evidence only; it does not prove MCP protocol,
+ChatGPT, other-platform, or whole #126 acceptance. See
+[`mcp126-installed-wheel-offline-template-proof-20261010T050851Z.json`](../program/evidence/mcp126-installed-wheel-offline-template-proof-20261010T050851Z.json).
+The production inventory is `minimal`,
 `basic`, `advanced`, `workflow-producer-consumer`, and `mcp-v2-showcase`; the
 separate beta inventory remains a selected subset and is not a production
 generator input. The MCP v2 Showcase uses static public data and demonstrates

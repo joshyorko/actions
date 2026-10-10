@@ -83,6 +83,23 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
             receipt = (receipts / name).read_bytes()
             self.assertEqual(digest, hashlib.sha256(receipt).hexdigest(), name)
 
+        current_amendment_path = ROOT / "docs/program" / self.graph["current_program_amendment"]["path"]
+        current_amendment = json.loads(current_amendment_path.read_text(encoding="utf-8"))
+        for entry in current_amendment["evidence"]:
+            receipt_path = f"docs/program/{entry['path']}"
+            attributes = subprocess.run(
+                ["git", "check-attr", "text", "--", receipt_path],
+                cwd=ROOT,
+                check=True,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+            )
+            self.assertTrue(attributes.stdout.rstrip().endswith(": text: unset"), attributes.stdout)
+            payload = ROOT / receipt_path
+            self.assertEqual(entry["size_bytes"], payload.stat().st_size)
+            self.assertEqual(entry["sha256"], hashlib.sha256(payload.read_bytes()).hexdigest())
+
     def test_canvas_parent_cycle_is_removed_from_execution_dag(self) -> None:
         upgraded = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
         old_rows = {row["issue"]: row for row in upgraded["issues"]}
@@ -165,6 +182,18 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         self.assertNotIn(129, rows[130]["unresolved_open_issue_dependencies"])
         self.assertIn(129, rows[135]["unresolved_open_issue_dependencies"])
 
+    def test_126_installed_wheel_criterion_does_not_complete_whole_issue(self) -> None:
+        graph = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
+        model = graph["relationship_model"]
+        issue = next(row for row in graph["issues"] if row["issue"] == 126)
+        criterion = next(item for item in model["criteria"] if item["id"] == "126:linux-installed-wheel-offline-project-creation")
+        slice_row = next(item for item in model["execution_slices"] if item["id"] == "126-installed-wheel-offline")
+        self.assertEqual("ACTIVE", issue["classification"])
+        self.assertEqual("NOT_STARTED", issue["retained_state"])
+        self.assertEqual("ACCEPTED_LINUX_INSTALLED_WHEEL_TEMPLATE_CREATION_ONLY", criterion["status"])
+        self.assertIn("whole #126 remains open", issue["reason"])
+        self.assertIn("remaining #126 acceptance stay open", slice_row["status"])
+
     def test_projection_is_idempotent(self) -> None:
         once = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
         twice = upgrade_relationships(copy.deepcopy(once), self.ledger)
@@ -240,6 +269,12 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
             "docs/program/evidence/program-amendment-20261010T0503Z.json",
             "docs/program/evidence/program-amendment-20261010T0509Z.json",
             "docs/program/evidence/devsy-convergence-status-20261010T0508Z.json",
+            "docs/program/evidence/program-amendment-20261010T0514Z.json",
+            "docs/program/evidence/devsy-current-slice-status-20261010T0514Z.json",
+            "docs/program/evidence/mcp126-installed-wheel-offline-template-proof-20261010T050851Z.json",
+            "docs/program/evidence/cas-dispatch-20261010T0500Z.json",
+            "docs/program/evidence/cas-owner-pod-failed-20261010T0505Z.json",
+            "docs/program/evidence/cas-evidence-branch-readback-20261010T0506Z.json",
             "docs/skills/repository-operations.md",
         ):
             target = repo / relative

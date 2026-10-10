@@ -1,0 +1,67 @@
+{
+  "schema": "devsy-current-slice-status/v2",
+  "assembled_at_utc": "2026-10-10T05:14:02Z",
+  "latest_underlying_proof_utc": "2026-10-10T05:08:51Z",
+  "observed_times_are_not_refreshes": "The following facts preserve source receipt timestamps. No new native workspace/thread readback is claimed after the source receipts.",
+  "input_receipts": [
+    {
+      "path": "evidence/mcp126-installed-wheel-offline-template-proof-20261010T050851Z.json",
+      "size_bytes": 7511,
+      "sha256": "5f28fb2e544c834e65a055d77dbbfc270669a267d62e54194abdb5d4fd78334a"
+    },
+    {
+      "path": "evidence/cas-dispatch-20261010T0500Z.json",
+      "size_bytes": 5731,
+      "sha256": "ee54ddd8ad242584231d43606d5c5bef20d5dc006b7e7c2d2ed2e566e7863e77"
+    },
+    {
+      "path": "evidence/cas-owner-pod-failed-20261010T0505Z.json",
+      "size_bytes": 2328,
+      "sha256": "baf170e795e9ca6ef0b6552725b228327a11175ce09c8d60309dba9c3cca8ddb"
+    },
+    {
+      "path": "evidence/cas-evidence-branch-readback-20261010T0506Z.json",
+      "size_bytes": 1537,
+      "sha256": "83f4b8f20daccf5f88371efb59094ad01737bfbc60d4d54d1e8065789c97e724"
+    }
+  ],
+  "issue_126": {
+    "criterion": "Linux CPython 3.12 installed Runtime 1.0.3 wheel; pip check PASS; CLI created mcp-v2-showcase (7/7) and Basic (10/10) files matching embedded archive bytes; Basic authored devdata preserved; loopback HTTP/HTTPS proxy set and traces show process-exit only, no socket/connect/DNS calls.",
+    "wheel_sha256": "9385343a783d368bd653e42265671e1001d3b701c42d0d01fd3648ed92a219d8",
+    "scope": "One Linux installed-wheel/offline template-creation criterion only. The receipt does not establish Action Server start, protocol roundtrip, ChatGPT/MCP App, other OS, or whole #126 acceptance.",
+    "separate_artifact_verification": "Reported active as a distinct bounded task; no result included here.",
+    "Devsy_v2_dispatch": "wrapper accepted/in-progress at 05:05 receipt, but native thread snapshot failed closed with KubernetesError; completion/effective settings remain unknown."
+  },
+  "issue_279": {
+    "first_dispatch": "Failed before execution: requested gpt-6.1-luna unsupported; exact receipt records supported model IDs.",
+    "v2_dispatch": "wrapper state unknown after KubernetesError; no replay; do not count as active implementation.",
+    "source_status": "Root-reported candidate prefix b9e9722a plus WIP; full P0 remains pending test-retention."
+  },
+  "devsy_workspace": {
+    "observed_at_utc": "2026-10-10T05:05:00Z",
+    "workspace_uid": "default-ca-0b24d",
+    "pod_phase": "Failed",
+    "daemon": "unverified",
+    "new_request_allowed": false
+  },
+  "coordinator_evidence": {
+    "observed_at_utc": "2026-10-10T05:06:00Z",
+    "branch": "devsy/coordinator-20261009",
+    "head": "655b044a7bbe464eeebccb1a61a2833992e12d8a",
+    "receipt_commit_only": true
+  },
+  "issue_130": {
+    "supervisor_dispatch": "pending; scheduler state unknown; no implementation checkpoint"
+  },
+  "issue_99": {
+    "owner": "Cloud Luna",
+    "status": "bounded Canvas acceptance admitted after ownership preflight; no full issue completion"
+  },
+  "issue_134": {
+    "source_prefix_report": "66",
+    "tests_reported": "3 DB tests PASS, 1 opt-in skip",
+    "exact_sha": "not supplied",
+    "full_source_P0": "pending test-retention regression"
+  },
+  "whole_issue_status": "No whole issue completion inferred from these bounded proofs or coordination reports."
+}

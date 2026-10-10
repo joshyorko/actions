@@ -13,3 +13,10 @@ docs/program/evidence/canvas-execution-graph-amendment-20261009-v* -text
 
 # Native acceptance receipts are SHA256SUMS-bound evidence; preserve committed bytes.
 docs/program/evidence/devsy-convergence-20261010/** -text
+# Amendment pointers and receipts are checked byte-for-byte by their recorded digests.
+docs/program/evidence/program-amendment-20261010T*.json -text
+docs/program/evidence/devsy-current-slice-status-20261010T0514Z.json -text
+docs/program/evidence/mcp126-installed-wheel-offline-template-proof-20261010T050851Z.json -text
+docs/program/evidence/cas-dispatch-20261010T0500Z.json -text
+docs/program/evidence/cas-owner-pod-failed-20261010T0505Z.json -text
+docs/program/evidence/cas-evidence-branch-readback-20261010T0506Z.json -text

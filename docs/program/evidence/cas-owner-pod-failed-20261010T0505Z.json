@@ -1,0 +1,66 @@
+{
+  "observed_at_utc": "2026-10-10T05:05:00Z",
+  "target": "cas-worker-01",
+  "workspace_uid": "default-ca-0b24d",
+  "calls": [
+    {
+      "tool": "workspace_status_scoped",
+      "input": {"name": "cas-worker-01"},
+      "result": {
+        "operation": "create",
+        "status": "completed",
+        "workspace_uid": "default-ca-0b24d",
+        "identity_verified": true,
+        "diagnostics_allowed": true,
+        "new_request_allowed": false
+      }
+    },
+    {
+      "tool": "workspace_diagnostics",
+      "input": {"name": "cas-worker-01", "workspace_uid": "default-ca-0b24d"},
+      "result": {
+        "pod_phase": "Failed",
+        "native_daemon": "unverified",
+        "capacity": null,
+        "codex_version": null,
+        "auth_status": null,
+        "active_setup_stages": null
+      }
+    },
+    {
+      "tool": "tools.codex.list_thread_items",
+      "thread_id": "01a1222f-e720-7183-9634-2edb76d30326",
+      "cwd": "/workspaces/actions-worktrees/devsy-coordinator",
+      "result": "thread/items/list failed closed (KubernetesError); inspect target diagnostics",
+      "retried": false
+    },
+    {
+      "tool": "tools.codex.get_thread_snapshot",
+      "thread_ids": ["01a12211-01b3-7850-b508-bd7959b8210c", "01a12224-8dc6-7dc1-9542-65d3a1de0955"],
+      "result": "get_thread_snapshot failed closed (KubernetesError); inspect target diagnostics",
+      "retried_once_for_reconciliation": true
+    }
+  ],
+  "unresolved_dispatches": [
+    {
+      "scope": "#126",
+      "thread_id": "01a12211-01b3-7850-b508-bd7959b8210c",
+      "turn_id": "01a12430-e2f2-7361-8baf-786f433fce67",
+      "request_id": "actions-sol-luna-126-template-20261010T0500Z-v2",
+      "wrapper_result": "accepted/inProgress; native snapshot unavailable",
+      "model": "gpt-6.1-sol",
+      "effective_settings": null
+    },
+    {
+      "scope": "#279",
+      "thread_id": "01a12224-8dc6-7dc1-9542-65d3a1de0955",
+      "turn_id": null,
+      "request_id": "actions-luna-279-packaged-baseline-20261010T0503Z-v2",
+      "wrapper_result": "state=unknown; error_code=KubernetesError; replayed=false",
+      "model": "gpt-6-luna",
+      "effective_settings": null
+    }
+  ],
+  "policy": "No workspace lifecycle/infra/credential change, no thread start replay, preserve existing unknown turn states.",
+  "upstream_disposition": "none"
+}
