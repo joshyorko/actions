@@ -378,10 +378,12 @@ regression test must execute a real module import: `compile()` alone does not
 evaluate module-level annotations or decorators. Keep every global referenced
 by an embedded helper in the generated module's own imports.
 
-For Action Server Python harness changes, `ruff check` is only the rules check:
-the configured `invoke lint` task separately runs `ruff format --check` with
-`devutils/ruff.toml` and `isort --check` with the package configuration. A
-scoped lint receipt must run all three checks on the touched Python files.
+For Action Server Python harness changes, `invoke lint` runs `ruff check src tests`
+using the package-discovered `action_server/ruff.toml`, then `ruff format --check`
+with the shared `devutils/ruff.toml` and the Action Server exclusions, then
+`isort --check src tests` using `action_server/pyproject.toml`. A Ruff rules
+check alone is not a complete lint receipt; scoped checks must preserve the
+same separate rules, formatting and import-sorting gates on the touched files.
 
 The runner hashes both executables and the wheel, requires fresh per-runtime
 API proofs, and accepts

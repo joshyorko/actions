@@ -209,7 +209,9 @@ def _popen(cmdline, **kwargs):
         _stdin_write(popen, b"\n")
         return popen
     except Exception:
-        log.exception("Error running: %s", " ".join(redact_sensitive_arguments(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         return None
 
 
@@ -224,7 +226,9 @@ def _popen_raise(cmdline, **kwargs):
         _stdin_write(popen, b"\n")
         return popen
     except Exception:
-        log.exception("Error running: %s", " ".join(redact_sensitive_arguments(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         raise
 
 
@@ -259,7 +263,9 @@ def _call(cmdline, **kwargs):
     try:
         subprocess.check_call(cmdline, **kwargs)
     except Exception:
-        log.exception("Error running: %s", " ".join(redact_sensitive_arguments(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         return None
 
 

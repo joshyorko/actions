@@ -263,7 +263,9 @@ class Process:
 
     def __str__(self):
         args = subprocess.list2cmdline(redact_sensitive_arguments(self._args))
-        return f"Process [{args}, cwd={self._cwd}, pid={self._proc.pid}, uid={self._uid}]"
+        return (
+            f"Process [{args}, cwd={self._cwd}, pid={self._proc.pid}, uid={self._uid}]"
+        )
 
     def __repr__(self):
         return str(self)
@@ -330,7 +332,9 @@ def _popen(cmdline, **kwargs):
         _stdin_write(popen, b"\n")
         return popen
     except Exception:
-        log.exception("Error running: %s", " ".join(redact_sensitive_arguments(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         return None
 
 
@@ -345,7 +349,9 @@ def _popen_raise(cmdline, **kwargs):
         _stdin_write(popen, b"\n")
         return popen
     except Exception:
-        log.exception("Error running: %s", " ".join(redact_sensitive_arguments(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         raise
 
 
@@ -380,7 +386,9 @@ def _call(cmdline, **kwargs):
     try:
         subprocess.check_call(cmdline, **kwargs)
     except Exception:
-        log.exception("Error running: %s", " ".join(redact_sensitive_arguments(cmdline)))
+        log.exception(
+            "Error running: %s", " ".join(redact_sensitive_arguments(cmdline))
+        )
         return None
 
 

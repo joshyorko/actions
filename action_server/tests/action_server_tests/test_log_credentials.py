@@ -1,8 +1,8 @@
 import importlib
 import logging
 import secrets
-from types import SimpleNamespace
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -93,7 +93,9 @@ def test_subprocess_debug_diagnostics_redact_api_key_arguments(
     monkeypatch.setattr(process_module, "_start_reader_threads", lambda *_args: None)
     caplog.set_level(logging.DEBUG, logger=process_module.log.name)
 
-    child = process_module.Process(["action-server", "start", *key_arguments], cwd=tmp_path)
+    child = process_module.Process(
+        ["action-server", "start", *key_arguments], cwd=tmp_path
+    )
     child.start()
     diagnostics = caplog.text
     if module_name.endswith("_common.process"):
