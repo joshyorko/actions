@@ -441,6 +441,10 @@ new upload and never replace an existing tag or distribution file.
 Publish dependency releases before changing template pins. After publication,
 update the source templates and regenerate the embedded template ZIP and its
 SHA-256 metadata together; source YAML changes alone do not update shipped templates.
+When adding an embedded community template, update the exact inventory in
+`test_new_list_templates` too: check both its human-readable listing and the
+complete `action-server new list-templates --json` name set. Bundle integrity
+tests do not verify that the CLI inventory assertion includes the new template.
 Template tests are shipped in the template archive, so verify them from a fresh
 archive extraction and keep their inputs and dependencies inside that template.
 Comparisons against monorepo contracts or fixtures belong in repository-level
