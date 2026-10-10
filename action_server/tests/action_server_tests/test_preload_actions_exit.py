@@ -76,6 +76,48 @@ def test_bounded_writer_times_out_waiting_for_writer_lock():
         reader_socket.close()
 
 
+def test_bounded_writer_converts_socket_timeout_and_restores_state():
+    from actions.server._preload_actions.preload_actions_streams import (
+        JsonRpcStreamWriter,
+    )
+
+    class TimedOutSocket:
+        def __init__(self):
+            self.timeout = 2.0
+            self.set_timeouts = []
+            self.shutdown_how = None
+
+        def gettimeout(self):
+            return self.timeout
+
+        def settimeout(self, value):
+            self.set_timeouts.append(value)
+            self.timeout = value
+
+        def sendall(self, _data):
+            raise socket.timeout("synthetic bounded send timeout")
+
+        def shutdown(self, how):
+            self.shutdown_how = how
+
+        def fileno(self):
+            return 1
+
+    sock = TimedOutSocket()
+    writer = JsonRpcStreamWriter(io.BytesIO(), sort_keys=True)
+
+    with pytest.raises(TimeoutError, match="Timed out writing the JSON-RPC frame"):
+        writer.write_with_deadline({"method": "exit"}, sock, time.monotonic() + 1)
+
+    assert sock.set_timeouts[0] > 0
+    assert sock.set_timeouts[-1] == 2.0
+    assert sock.shutdown_how == socket.SHUT_RDWR
+
+
+@pytest.mark.skipif(
+    sys.platform == "win32",
+    reason="Kernel socketpair buffer saturation is verified on POSIX; timeout handling is tested portably",
+)
 def test_bounded_writer_times_out_on_saturated_socket():
     from actions.server._preload_actions.preload_actions_streams import (
         JsonRpcStreamReaderThread,

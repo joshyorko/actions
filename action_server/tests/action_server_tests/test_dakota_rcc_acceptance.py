@@ -316,7 +316,7 @@ def test_candidate_poetry_resolves_pinned_executable_under_rcc_home(
     )
 
 
-def test_evidence_is_retained_outside_run_temp_with_private_mode(tmp_path):
+def test_evidence_is_retained_outside_run_temp(tmp_path):
     harness = _harness()
     temp_root = tmp_path / "disposable"
     temp_root.mkdir()
@@ -326,11 +326,29 @@ def test_evidence_is_retained_outside_run_temp_with_private_mode(tmp_path):
     harness.write_evidence(receipt, evidence, temp_root=temp_root)
 
     assert json.loads(receipt.read_text(encoding="utf-8")) == evidence
-    assert receipt.stat().st_mode & 0o777 == 0o600
     with pytest.raises(FileExistsError):
         harness.write_evidence(receipt, evidence, temp_root=temp_root)
     with pytest.raises(ValueError, match="outside"):
         harness.write_evidence(temp_root / "inside.json", evidence, temp_root=temp_root)
+
+
+@pytest.mark.skipif(
+    os.name == "nt",
+    reason="POSIX permission bits do not establish Windows ACL isolation",
+)
+def test_evidence_receipt_uses_private_posix_mode(tmp_path):
+    harness = _harness()
+    temp_root = tmp_path / "disposable"
+    temp_root.mkdir()
+    receipt = tmp_path / "evidence.json"
+
+    harness.write_evidence(
+        receipt,
+        {"source_sha": "a" * 40, "candidate_wheel_sha256": "b" * 64},
+        temp_root=temp_root,
+    )
+
+    assert receipt.stat().st_mode & 0o777 == 0o600
 
 
 def test_failed_rcc_wrapper_exit_keeps_overall_acceptance_failed():
@@ -480,6 +498,10 @@ def test_supervisor_process_enumeration_errors_fail_closed(monkeypatch):
         harness._supervisor_children(psutil)
 
 
+@pytest.mark.skipif(
+    not hasattr(os, "fchmod"),
+    reason="Supervisor cleanup receipt permission update requires POSIX fchmod",
+)
 def test_supervisor_cleanup_failure_demotes_existing_receipt(tmp_path):
     harness = _harness()
     receipt = tmp_path / "receipt.json"

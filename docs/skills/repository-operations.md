@@ -146,6 +146,13 @@ Check both the affected Windows target and the native target, then run the
 existing platform behavior tests. A focused `mypy --platform win32` invocation
 is diagnostic unless the repository's configured CI runs that target.
 
+The Dakota RCC candidate acceptance script fails closed outside Linux. Its
+receipt cleanup uses POSIX `fchmod`; keep cleanup-demotion and permission-mode
+assertions limited to platforms that provide that contract. On Windows, retain
+checks for receipt contents, no-overwrite, and containment, but do not interpret
+`st_mode` bits as ACL isolation or add a `chmod` fallback that claims private
+Windows permissions. Native Windows ACL behavior remains unverified.
+
 ## Community program evidence
 
 The [community issue ledger](../program/community-program-ledger.md) retains
@@ -1739,6 +1746,13 @@ failed RCC receipts, or establish full #134 acceptance. No live RCC/provider or
 native-platform lifecycle proof is implied. Tests for the protocol boundary
 are in `test_preload_actions_exit.py` and
 `test_rcc_runtime_adapter.py`.
+
+The socketpair test that fills a send buffer is a kernel-buffer behavior check:
+it runs on POSIX runners and is skipped on Windows, where the same payload may
+not saturate the pair. Keep a deterministic `socket.timeout` test on all
+platforms to verify bounded-timeout conversion, socket shutdown, and timeout
+restoration independently of kernel buffering. This portable test does not
+establish native Windows send-buffer timeout behavior.
 
 The provisional adapter classifies reload inputs from normalized environment
 fields (`spec-version`, dependency sets, and post-install commands), not from
