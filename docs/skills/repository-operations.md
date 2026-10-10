@@ -589,7 +589,25 @@ also carries the same `actions.catalogRevision` SHA-256 fingerprint, computed
 from the canonical sorted MCP surface. Tool names, resource URIs, resource
 template URIs, and prompt names must be unique; duplicate keys are rejected at
 registration so each catalog's primary-key ordering is total without reordering
-semantic arrays inside schemas. Re-registering actions on reload therefore
+semantic arrays inside schemas. Runtime resolves tool names from the complete
+enabled, package-resolved, whitelist-accepted action set before registration.
+Unambiguous tools keep their exact bare action name. Colliding tools use
+`<package-name>__<action-name>`, with non-ASCII or unsupported characters replaced
+by `_`. Generated aliases use `[A-Za-z0-9_.-]` and at most 64 characters; this is
+an alias policy, not a new validation rule for existing bare names. Bare names
+are reserved first. Package/action sorting, a SHA-256 suffix over the JSON-encoded
+identity pair, and a numeric suffix on remaining collisions make aliases unique
+and independent of database order. `ActionPackage.name` has a database unique
+index and identifies package imports/updates; UUIDs and filesystem paths do not
+enter alias generation. HTTP paths, action display names, metadata, and dispatch
+targets remain tied to their original package/action. Resource URI and prompt
+key checks remain unchanged. The regression in
+`action_server/tests/action_server_tests/mcp/test_setup_mcp_server.py` uses a real
+in-memory database and ASGI HTTP/MCP routes, with worker execution stubbed, to
+prove two packages' `do_it` actions list and call separately. It also covers
+whitelist/disabled filtering, preserved bare names, qualification/sanitization/
+length collisions, and forced digest collisions in opposite action orders.
+Re-registering actions on reload therefore
 changes the revision when the surface changes. The independent-process
 acceptance starts separate Runtime processes with equivalent catalogs in
 opposite definition order and a third process with an extra tool, proving

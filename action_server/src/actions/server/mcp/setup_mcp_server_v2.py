@@ -1,7 +1,8 @@
 import json
 import logging
 import re
-from collections.abc import Callable
+from collections import Counter
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 from hashlib import sha256
 from typing import Any, Literal
@@ -374,6 +375,48 @@ class McpServerSetupHelper:
         match = re.match(f"^{pattern}$", uri)
         return match.groupdict() if match else None
 
+    @staticmethod
+    def resolve_tool_names(
+        actions: Iterable[tuple[Any, Any]],
+    ) -> dict[str, str]:
+        """Name a complete, filtered tool set independently of database order."""
+        tools = [
+            (package.name, action)
+            for package, action in actions
+            if (json.loads(action.options) if action.options else {}).get("kind")
+            not in ("resource", "prompt")
+        ]
+        counts = Counter(action.name for _, action in tools)
+        names = {
+            action.id: action.name for _, action in tools if counts[action.name] == 1
+        }
+        used = set(names.values())
+        identities: set[tuple[str, str]] = set()
+        for package_name, action in sorted(
+            tools, key=lambda item: (item[0], item[1].name)
+        ):
+            identity = (package_name, action.name)
+            if identity in identities:
+                raise ValueError(f"duplicate tool identity: {identity!r}")
+            identities.add(identity)
+            if counts[action.name] == 1:
+                continue
+            stem = re.sub(r"[^A-Za-z0-9_.-]", "_", f"{package_name}__{action.name}")
+            name = stem
+            if len(name) > 64 or name in used:
+                # JSON pair encoding distinguishes embedded qualification separators.
+                digest = sha256(json.dumps(identity).encode("utf-8")).hexdigest()[:16]
+                suffix = f"_{digest}"
+                name = stem[: 64 - len(suffix)] + suffix
+                index = 1
+                while name in used:
+                    suffix = f"_{digest}_{index}"
+                    name = stem[: 64 - len(suffix)] + suffix
+                    index += 1
+            names[action.id] = name
+            used.add(name)
+        return names
+
     def register_action(
         self,
         func: Callable,
@@ -381,6 +424,8 @@ class McpServerSetupHelper:
         action: Any,
         display_name: str,
         doc_desc: str,
+        *,
+        tool_name: str | None = None,
     ) -> None:
         catalog = self._catalog
         options = json.loads(action.options) if action.options else {}
@@ -450,8 +495,9 @@ class McpServerSetupHelper:
             catalog.prompts.sort(key=lambda item: item.name)
             return
 
-        if action.name in catalog.tool_name_to_action_info:
-            raise ValueError(f"duplicate tool name: {action.name}")
+        tool_name = action.name if tool_name is None else tool_name
+        if tool_name in catalog.tool_name_to_action_info:
+            raise ValueError(f"duplicate tool name: {tool_name}")
         output_schema = json.loads(action.output_schema)
         if output_schema.get("type") == "string":
             output_schema_kind: OutputSchemaKind = "string"
@@ -468,7 +514,7 @@ class McpServerSetupHelper:
             }
         catalog.tools.append(
             Tool(
-                name=action.name,
+                name=tool_name,
                 description=doc_desc,
                 input_schema=json.loads(action.input_schema),
                 output_schema=use_output_schema,
@@ -482,7 +528,7 @@ class McpServerSetupHelper:
                 _meta=mcp_meta,
             )
         )
-        catalog.tool_name_to_action_info[action.name] = ActionInfo(
+        catalog.tool_name_to_action_info[tool_name] = ActionInfo(
             func, action, display_name, doc_desc, output_schema_kind, mcp_meta
         )
         catalog.tools.sort(key=lambda item: item.name)
