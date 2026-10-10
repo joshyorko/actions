@@ -388,6 +388,12 @@ regression test must execute a real module import: `compile()` alone does not
 evaluate module-level annotations or decorators. Keep every global referenced
 by an embedded helper in the generated module's own imports.
 
+The Action Server `typecheck` task checks both `src` and `tests` with
+`mypy --follow-imports=silent --show-column-numbers --namespace-packages
+--explicit-package-bases src tests`. A source-only mypy run does not qualify
+the packaged Work Items harness; type its receipt structures and test doubles
+against the same process and cleanup contracts exercised at runtime.
+
 For Action Server Python harness changes, `invoke lint` runs `ruff check src tests`
 using the package-discovered `action_server/ruff.toml`, then `ruff format --check`
 with the shared `devutils/ruff.toml` and the Action Server exclusions, then
