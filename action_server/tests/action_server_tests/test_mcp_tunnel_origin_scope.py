@@ -169,6 +169,8 @@ async def test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth(
     """Exercise the verifier over TCP/TLS without contacting a tunnel provider."""
     import httpx2
     import uvicorn
+    from cryptography import x509
+    from cryptography.x509.oid import NameOID
     from starlette.applications import Starlette
     from starlette.authentication import (
         AuthCredentials,
@@ -212,7 +214,21 @@ async def test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth(
                 self.paths.append(scope["path"])
             await self.app(scope, receive, send)
 
+    # Keep every DNS label valid while exceeding the X.509 CN length limit.
+    hostname = f"runner{'a' * 56}.example.test"
+    assert len(hostname) > 64
+    monkeypatch.setattr(socket, "gethostname", lambda: hostname)
     certificate, private_key = gen_self_signed_certificate()
+    parsed_certificate = x509.load_pem_x509_certificate(certificate)
+    assert (
+        parsed_certificate.subject.get_attributes_for_oid(NameOID.COMMON_NAME)[0].value
+        == "localhost"
+    )
+    subject_alt_names = parsed_certificate.extensions.get_extension_for_class(
+        x509.SubjectAlternativeName
+    ).value
+    assert hostname in subject_alt_names.get_values_for_type(x509.DNSName)
+    assert "localhost" in subject_alt_names.get_values_for_type(x509.DNSName)
     trusted_certificate, _ = gen_self_signed_certificate()
     certfile = tmp_path / "localhost.pem"
     keyfile = tmp_path / "localhost-key.pem"

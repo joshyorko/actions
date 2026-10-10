@@ -1302,6 +1302,9 @@ The beta and production template deployment workflows change into
 Preserve that script's tracked executable mode (`100755`); a checkout that loses
 the mode fails before Python starts with shell exit 126. The active contract test
 checks both the executable bit and each workflow's direct invocation.
+
+### Action Server tunnel verification
+
 Community `--expose` startup tries the selected or available open-source tunnel
 providers, logs a bounded failure when all providers fail, and leaves the
 `TunnelManager` inactive; the wrapper boundary is covered separately from provider
@@ -1331,6 +1334,13 @@ rejected before HTTP reaches the app. This proves verified-TLS and
 authenticated-MCP probe plumbing; it does not prove provider routing, deployed
 certificate policy, public exposure, or native packaging. Those remain
 separate gates.
+
+The self-signed certificate helper keeps the machine hostname in the DNS SAN,
+which is the identity used for certificate verification. X.509 limits the
+commonName to 64 characters, so a longer hostname uses `localhost` for the
+subject and issuer CN while retaining the full hostname SAN and localhost SAN.
+The loopback TLS regression uses a valid multi-label hostname longer than 64
+characters and still checks both trusted and untrusted certificate behavior.
 
 Cloudflare quick-tunnel readers use nonblocking pipe descriptors with bounded
 4096-byte reads, a 64-entry startup queue, and a separate 512-byte overlap tail

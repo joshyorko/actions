@@ -21,12 +21,17 @@ def gen_self_signed_certificate() -> tuple[bytes, bytes]:
     private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
     public_key = private_key.public_key()
 
+    hostname = socket.gethostname()
+    # X.509 limits the commonName attribute to 64 characters. The SAN below
+    # remains the hostname identity used for certificate verification.
+    common_name = hostname if len(hostname) <= 64 else "localhost"
+
     builder = x509.CertificateBuilder()
     builder = builder.subject_name(
-        x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, socket.gethostname())])
+        x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, common_name)])
     )
     builder = builder.issuer_name(
-        x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, socket.gethostname())])
+        x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, common_name)])
     )
     builder = builder.not_valid_before(datetime.datetime.today() - one_day)
     builder = builder.not_valid_after(datetime.datetime.today() + (one_day * 365 * 5))
@@ -35,8 +40,8 @@ def gen_self_signed_certificate() -> tuple[bytes, bytes]:
     builder = builder.add_extension(
         x509.SubjectAlternativeName(
             [
-                x509.DNSName(socket.gethostname()),
-                x509.DNSName("*.%s" % socket.gethostname()),
+                x509.DNSName(hostname),
+                x509.DNSName("*.%s" % hostname),
                 x509.DNSName("localhost"),
                 x509.DNSName("*.localhost"),
                 x509.DNSName("127.0.0.1"),
