@@ -1952,6 +1952,14 @@ default path on Windows. A copied batch file without its `.cmd` suffix still
 fails Windows process creation. Keep the negative admission cases enabled;
 Linux fixture tests do not replace the native Windows toolkit matrix.
 
+With shell `pipefail`, do not validate a producer's version using a downstream
+`grep -q`: the early match can close the pipe before the producer finishes,
+causing SIGPIPE/status 141 despite a matching version. Capture the command's
+output only after successful completion, then match the expected complete line
+from that captured output. Keep nonzero producer exits fatal. A bootstrap
+failure before pytest is NOT RUN for the lifecycle test; retain its receipt
+separately from earlier successful runs.
+
 This is a cold preparation test, not a warm-cache or offline test: the fixture
 creates a fresh `ROBOCORP_HOME`, an empty temporary RCC `cache serve` provider,
 and a package environment requiring Python 3.12.15 and `actions-core=1.0.2`.

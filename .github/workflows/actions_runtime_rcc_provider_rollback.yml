@@ -102,9 +102,11 @@ jobs:
         \ 15 --max-time 180 \\\n  \"https://github.com/joshyorko/rcc/releases/download/v18.19.3/rcc-linux64\"\
         \ \\\n  --output \"$rcc.download\"\nprintf '%s  %s\\n' \"$RCC_SHA256\" \"\
         $rcc.download\" | sha256sum --check --status -\nmv \"$rcc.download\" \"$rcc\"\
-        \nchmod 700 \"$rcc\"\n\"$rcc\" --version 2>&1 | grep --fixed-strings --line-regexp\
-        \ --quiet \"v18.19.3\"\nprintf 'ACTIONS_RUNTIME_RCC_BINARY=%s\\n' \"$rcc\"\
-        \ >> \"$GITHUB_ENV\"\nprintf 'RCC_SHA256=%s\\n' \"$RCC_SHA256\" >> \"$GITHUB_ENV\"\
+        \nchmod 700 \"$rcc\"\nversion_output=\"$(\"$rcc\" --version 2>&1)\"\nif !\
+        \ grep --fixed-strings --line-regexp \"v18.19.3\" <<< \"$version_output\"\
+        \ >/dev/null; then\n  printf 'Unexpected RCC version output:\\n%s\\n' \"$version_output\"\
+        \ >&2\n  exit 1\nfi\nprintf 'ACTIONS_RUNTIME_RCC_BINARY=%s\\n' \"$rcc\" >>\
+        \ \"$GITHUB_ENV\"\nprintf 'RCC_SHA256=%s\\n' \"$RCC_SHA256\" >> \"$GITHUB_ENV\"\
         \n\"$rcc\" --version\nsha256sum \"$rcc\"\n"
     - name: Preseed and verify Action Server RCC
       shell: bash

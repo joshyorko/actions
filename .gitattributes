@@ -20,3 +20,7 @@ action_server/go-wrapper/main.go text eol=lf
 action_server/go-wrapper/process.go text eol=lf
 action_server/go-wrapper/go.mod text eol=lf
 action_server/go-wrapper/go.sum text eol=lf
+
+# Preserve the failed pre-test RCC bootstrap receipt byte-for-byte.
+docs/program/evidence/rcc-control-772-bootstrap-failure.json -text
+docs/program/evidence/rcc-control-772-bootstrap-failure.log -text

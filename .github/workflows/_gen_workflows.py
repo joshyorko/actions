@@ -1104,7 +1104,11 @@ curl --fail --location --silent --show-error --retry 2 --connect-timeout 15 --ma
 printf '%s  %s\\n' "$RCC_SHA256" "$rcc.download" | sha256sum --check --status -
 mv "$rcc.download" "$rcc"
 chmod 700 "$rcc"
-"$rcc" --version 2>&1 | grep --fixed-strings --line-regexp --quiet "v18.19.3"
+version_output="$("$rcc" --version 2>&1)"
+if ! grep --fixed-strings --line-regexp "v18.19.3" <<< "$version_output" >/dev/null; then
+  printf 'Unexpected RCC version output:\\n%s\\n' "$version_output" >&2
+  exit 1
+fi
 printf 'ACTIONS_RUNTIME_RCC_BINARY=%s\\n' "$rcc" >> "$GITHUB_ENV"
 printf 'RCC_SHA256=%s\\n' "$RCC_SHA256" >> "$GITHUB_ENV"
 "$rcc" --version

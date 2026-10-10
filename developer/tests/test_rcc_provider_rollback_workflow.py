@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import importlib.util
+import os
+import shlex
+import subprocess
+import sys
 from pathlib import Path
 
+import pytest
 import yaml
-
 
 ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW_RELATIVE_PATH = ".github/workflows/actions_runtime_rcc_provider_rollback.yml"
@@ -17,6 +21,35 @@ TEST_NODE = (
     "tests/action_server_tests/test_current_candidate_import_rollback.py::"
     "test_current_candidate_failed_reload_keeps_last_good_action_usable"
 )
+RCC_VERSION = "v18.19.3"
+
+
+def _synthetic_version_writer(tmp_path: Path) -> tuple[Path, Path]:
+    marker = tmp_path / "writer-completed"
+    writer = tmp_path / "synthetic-rcc-version.py"
+    version_line = f"{RCC_VERSION}\n".encode("utf-8")
+    writer.write_text(
+        "import os, signal, sys\n"
+        "from pathlib import Path\n"
+        "signal.signal(signal.SIGPIPE, signal.SIG_DFL)\n"
+        f"os.write(1, {version_line!r})\n"
+        "os.write(1, b'x' * 1048576)\n"
+        f"Path({str(marker)!r}).write_text('complete', encoding='utf-8')\n"
+        "sys.exit(int(os.environ.get('SYNTHETIC_RCC_EXIT_CODE', '0')))\n",
+        encoding="utf-8",
+    )
+    return writer, marker
+
+
+def _run_bash(
+    command: str, env: dict[str, str] | None = None
+) -> subprocess.CompletedProcess:
+    return subprocess.run(
+        ["bash", "-c", command],
+        check=False,
+        capture_output=True,
+        env=env,
+    )
 
 
 def test_generated_workflow_is_checkout_equivalent(tmp_path: Path) -> None:
@@ -101,6 +134,13 @@ def test_rcc_rollback_workflow_is_opt_in_pinned_and_secret_free() -> None:
     assert rcc_install["env"]["RCC_SHA256"] == RCC_SHA256
     assert "rcc-linux64" in rcc_install["run"]
     assert "sha256sum --check" in rcc_install["run"]
+    assert 'version_output="$("$rcc" --version 2>&1)"' in rcc_install["run"]
+    assert (
+        'grep --fixed-strings --line-regexp "v18.19.3" <<< "$version_output"'
+        in rcc_install["run"]
+    )
+    assert "--quiet" not in rcc_install["run"]
+    assert '"$rcc" --version 2>&1 | grep' not in rcc_install["run"]
 
     libc_check = next(
         step
@@ -170,3 +210,51 @@ def test_devinstall_uses_preverified_rcc_binary() -> None:
     assert "rcc-18.19.3" in steps[preseed]["run"]
     assert "sha256sum --check" in steps[preseed]["run"]
     assert devinstall["env"] == {"ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": "1"}
+
+
+@pytest.mark.skipif(os.name == "nt", reason="requires POSIX Bash SIGPIPE status")
+def test_quiet_grep_pipeline_can_terminate_version_writer_with_sigpipe(
+    tmp_path: Path,
+) -> None:
+    writer, completed = _synthetic_version_writer(tmp_path)
+    command = (
+        "set -Eeuo pipefail\n"
+        f"{shlex.quote(sys.executable)} {shlex.quote(str(writer))} | "
+        "grep --fixed-strings --line-regexp --quiet "
+        f"{shlex.quote(RCC_VERSION)}\n"
+    )
+
+    result = _run_bash(command)
+
+    assert result.returncode == 141, result.stderr.decode(errors="replace")
+    assert not completed.exists(), "the early-exit consumer terminated the writer"
+
+
+@pytest.mark.skipif(os.name == "nt", reason="requires POSIX Bash command substitution")
+def test_capture_then_match_waits_for_version_process_and_preserves_failure(
+    tmp_path: Path,
+) -> None:
+    writer, completed = _synthetic_version_writer(tmp_path)
+    quoted_writer = f"{shlex.quote(sys.executable)} {shlex.quote(str(writer))}"
+    safe_check = (
+        "set -Eeuo pipefail\n"
+        f'version_output="$({quoted_writer})"\n'
+        f"grep --fixed-strings --line-regexp {shlex.quote(RCC_VERSION)} "
+        '<<< "$version_output"\n'
+    )
+
+    success = _run_bash(safe_check)
+
+    assert success.returncode == 0, success.stderr.decode(errors="replace")
+    assert success.stdout.decode().strip() == RCC_VERSION
+    assert completed.read_text(encoding="utf-8") == "complete"
+
+    rejected_marker = tmp_path / "nonzero-writer-rejected"
+    nonzero_env = os.environ.copy()
+    nonzero_env["SYNTHETIC_RCC_EXIT_CODE"] = "23"
+    nonzero = _run_bash(
+        safe_check + f"touch {shlex.quote(str(rejected_marker))}\n", env=nonzero_env
+    )
+
+    assert nonzero.returncode == 23
+    assert not rejected_marker.exists(), "set -e must reject failed version commands"
