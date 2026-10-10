@@ -2710,9 +2710,16 @@ cases with output capture disabled when their successful provenance is printed,
 and validate JUnit names, modules, failures, errors, and skips before calling
 the gate passed. Source-mode tests do not establish frozen behavior. A
 successful-generation drain is separate proof: start the new generation while
-an old Run is blocked, verify the old Run reads its immutable source snapshot
-after release, persist both outcomes, and check natural child cleanup
-independently.
+an old Run is blocked, verify the new Run completes while the old one remains
+running, then verify the old Run reads its immutable source snapshot after
+release. Persist both outcomes, record the managed worker PID and creation time
+for each generation, and verify natural child cleanup independently. The
+frozen catalog workflow includes this as a fifth case and checks the actual
+frozen parent plus each worker's managed interpreter and Core 1.0.2 identity;
+source-mode success is not a substitute for the hosted native receipt. The
+current hosted receipt is still the historical four-case result, so frozen
+successful-generation drain remains **NOT RUN** until the updated five-case
+workflow produces its own receipt.
 
 When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
 `VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run
