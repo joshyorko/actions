@@ -2307,6 +2307,45 @@ identity, source and staging mutation coherence, and the staged inventory
 before making a trusted source or compiler claim. This proposal does not define
 a Package Revision identity or compiler output.
 
+`actions.server.deployments.source_read.read_selected_files` adds a private,
+Linux-only measurement boundary below a caller-verified directory descriptor.
+It borrows that descriptor by duplicating it, validates explicit selected and
+protected names through the supplied-inventory policy before content reads,
+and opens each directory component with `O_DIRECTORY | O_NOFOLLOW`. Selected
+leaves are first pinned with `O_PATH | O_NOFOLLOW`, then classified using
+`fstat`; non-regular files, hardlinks and privileged mode bits are rejected
+before any read-capable leaf open. The reader pins `/proc/self/fd` once per call,
+reopens each owned numeric leaf descriptor through that directory using
+`O_RDONLY | O_NONBLOCK | O_CLOEXEC`, and compares the readable handle with its
+pinned object before reading. It requires trusted Linux kernel procfs at that
+location and `O_PATH` support; an unavailable directory or failed descriptor
+reopening fails without a weaker pathname fallback. That procfs trust is a
+supported-environment assumption, not root authorization evidence. Both
+observed file sizes and incrementally read bytes use the same file/total/count
+policy. Owned root, procfs, traversal and leaf handles close on success and
+failure; the caller's descriptor remains owned by the caller.
+Resolve required Linux flags through checked attribute access after the platform
+gate. Reject missing, non-integer, boolean or non-positive flags rather than
+substitute weaker open modes. Linux-only private code is still checked by the
+Windows/macOS typecheck jobs; run configured mypy checks for Linux, `win32` and
+`darwin` before publishing this reader or its tests.
+
+The result separates measured root/directory/file metadata from the portable
+canonical inventory. Opened objects bind device, inode, file type, mode, size,
+mtime, ctime and link count. Before and after each read, the reader compares
+opened metadata and no-follow parent/name bindings, then reopens the selected
+paths for a final comparison. Linux filesystem tests exercise actual links,
+hardlinks, FIFOs and device descriptors, replacement and mutation, bounded reads,
+procfd reopening failure and descriptor cleanup. O_PATH classification prevents
+invoking a special-device driver's read-capable open before rejecting its type.
+These checks reject observed changes; they do not establish a complete-tree or
+globally atomic source snapshot against concurrent writers. The supplied root
+descriptor pins its object, not its original pathname, Workspace authorization,
+or selected-set completeness. This utility performs no staging, publication,
+compiler inspection or Package Revision creation, and does not change legacy
+Runtime or Robot imports. A stronger atomic snapshot contract remains a separate
+filesystem-level gate.
+
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
 Its authorized pinned-RCC proof did not reach the first Action: cold
@@ -2735,9 +2774,15 @@ for each generation, and verify natural child cleanup independently. The
 frozen catalog workflow includes this as a fifth case and checks the actual
 frozen parent plus each worker's managed interpreter and Core 1.0.2 identity;
 source-mode success is not a substitute for the hosted native receipt. The
-current hosted receipt is still the historical four-case result, so frozen
-successful-generation drain remains **NOT RUN** until the updated five-case
-workflow produces its own receipt.
+five-case hosted run [38050870256](https://github.com/joshyorko/actions/actions/runs/38050870256)
+passed all five cases without skips under control `4e5f8200`, against native
+candidate `31239cf9` and its verified same-tree build `056d3260`. Independent
+artifact review confirmed both managed workers, v2 completion while v1 was
+running, the original v1 result, and controlled natural shutdown. This is Linux
+frozen evidence for that candidate only. Later production changes, including the
+catalog-ownership migration, require a newly built artifact and acceptance run;
+the older receipt does not establish their native behavior, Go-wrapper execution,
+or full release acceptance.
 
 When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
 `VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run
