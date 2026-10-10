@@ -36,16 +36,15 @@ action-server start --datadir=<path to datadir>
 
 ## Serving actions from multiple directories
 
-In this case, instead of just using `action-server start`, one needs to
-import the actions saving the settings to a given datadir and then
-start the server pointing to that datadir asking the `action-server`
-not to synchronize the actions again when starting.
+For a one-time start, pass each package directory to the same
+`action-server start --actions-sync=true` invocation. The directories form
+one desired set: actions from every directory are synchronized together, and
+the result does not depend on argument order. If admission of any directory
+fails, the previous database catalog is kept.
 
-Known limitation: do not combine multiple `--dir` values with
-`start --actions-sync=true` yet. Synchronizing each directory currently
-disables actions imported from an earlier directory in the same invocation.
-Use the additive `import` commands below and start with
-`--actions-sync=false` to serve all of the imported directories.
+Use separate `import` commands followed by `start --actions-sync=false` when
+you want to add packages to the database without synchronizing a complete
+desired set on each start.
 
 Example:
 
@@ -59,6 +58,13 @@ Important: in this mode, each new import will add new actions to the database.
 If at some point some action needs to be removed, it's possible to use the
 `action-server datadir clear-actions` command to remove all actions from the database
 and then re-import the actions again.
+
+For packages without a managed environment, action code is loaded from the
+package directory at execution time. A failed synchronization can preserve
+the prior database catalog without preserving the prior source files: calls
+may execute edits made before the failed synchronization, or fail if the
+current source is invalid. Restore the last-good source before retrying when
+you need the last-good behavior.
 
 Example:
 
