@@ -1,0 +1,49 @@
+{
+  "reviewed_at_utc": "2026-10-10T09:48:57.449628+00:00",
+  "verdict": "ACCEPT bounded Windows static portability repair for publication/hosted checks",
+  "commit": "4587271c87f21d52985be67ffe60a46a0b96a01c",
+  "tree": "72257e07a78d33ec1d3d067fa0da83369eea0357",
+  "parent": "b4bfe1dd961e0195fdd6cf77a3124921773edad8",
+  "scope": "Single test module only; guarded getattr/callable/None selection for POSIX os.getpgid/os.killpg/signal.SIGKILL. Linux owned-group proof/cleanup flow otherwise preserved.",
+  "test_sha256": "f90d59df5be9748b12e16331fae8214efd1a439265692d236ab2caac72c99bbc",
+  "checks": {
+    "win32_mypy": {
+      "command": "cwd=action_server /workspace/work/community-resume/worker-exit/action_server/.venv/bin/mypy --config-file pyproject.toml --platform win32 --cache-dir /workspace/work/canvas-review-20261010-0945/mypy-cache tests/action_server_tests/mcp/test_canvas_query_template.py",
+      "result": "Success: no issues found in 1 source file",
+      "exit_code": 0
+    },
+    "parent_differential": {
+      "method": "Same configured mypy invocation, --shadow-file current target to git-show exact parent module in private evidence directory; no worktree source edits; shadow file removed in unconditional finally",
+      "result": "Exactly3 attr-defined errors: getpgid, killpg, SIGKILL",
+      "exit_code": 1,
+      "log_sha256": "e13af414fd5a41f1b2049310d968b1a40e4ffc1b857417ff72aabd73113ddbc1"
+    },
+    "focused_module": {
+      "command": "cwd=action_server PYTHONPATH=absolute reviewed action_server/src:tests TMPDIR=/tmp/work /tmp/work/multipackage-runtime-acceptance/venv-primary/bin/python runs pytest.main(['-q','-n','0','tests/action_server_tests/mcp/test_canvas_query_template.py','--tb=short','--basetemp=/tmp/work/canvas-review-4587271c']) inside probe-local Linux PR_SET_CHILD_SUBREAPER wrapper",
+      "result": "4 passed,2 skipped in1.12s",
+      "exit_code": 0,
+      "log_sha256": "296fc84455479657aa2d8f64a2bccd8b6bae64b1575e70573a90a91c70657c51",
+      "cleanup": "Unconditional finally captures only children owned/adopted by this private Python; PID/create_time checked before killing live processes; waitpid for captured identities. Captured1 adopted child, remaining=[] and pending_waitpid=[]."
+    },
+    "linux_mypy": {
+      "command": "cwd=action_server /workspace/work/community-resume/worker-exit/action_server/.venv/bin/mypy --config-file pyproject.toml --platform linux --cache-dir /workspace/work/canvas-review-20261010-0945/mypy-native-cache tests/action_server_tests/mcp/test_canvas_query_template.py",
+      "result": "Success: no issues found in 1 source file"
+    }
+  },
+  "preservation": "Diff is one test file only; production Runtime, dependency floor, template manifest/bundle, workflow and canonical guide unchanged. Clean worktree and git diff --check.",
+  "limits": [
+    "No actual Windows execution; --platform win32 is static checking only",
+    "No RCC/browser installation or candidate-browser run locally",
+    "Hosted candidate PASS38041682069 remains bound to synthetic92b46/tree80a6 and PRheadb020; it is not transferred to4587271c/tree72257",
+    "PR282 production admission remains blocked by unpublished Core1.0.3 template dependency and unchanged active template contract",
+    "Linux observed timeout/owned-child cleanup only, not a complete unknown-descendant census. Prior diagnostic zombie receipts remain historical."
+  ],
+  "canonical_disposition": {
+    "path": "docs/skills/repository-operations.md",
+    "existing_coverage": "Existing Windows type-checking paragraph states that Windows typeshed omits POSIX-only members even in platform-guarded branches and calls for platform API lookup plus Windows/native checks. Existing Canvas guidance bounds private-group ownership and POSIX-only regression. No cosmetic duplicate needed.",
+    "learning": "Actual configured Win32 mypy before/after check distinguishes portable attribute access from runtime platform gating; parent errors reproduced, repaired module passes.",
+    "stale_guidance_removed": "None; historical browser source binding and production blocker retained.",
+    "remaining_uncertainty": "Fresh hosted Windows checks and current-head browser evidence remain separate."
+  },
+  "upstream_disposition": "None. Actions-local test static portability repair; no confirmed maintained RCC defect or external report performed."
+}
