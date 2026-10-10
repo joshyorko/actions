@@ -84,11 +84,31 @@ def _fixture(tmp_path: Path):
         "runtime_adapter": candidate
         / "action_server/src/actions/server/_rcc_runtime_adapter.py",
     }
-    rcc_binary = tmp_path / "rcc"
-    rcc_binary.write_text("#!/bin/sh\nprintf '%s\\n' v18.19.3\n", encoding="utf-8")
-    rcc_binary.chmod(0o700)
+    if os.name == "nt":
+        # subprocess.run([path, "--version"]) dispatches batch files through
+        # cmd.exe on Windows; a POSIX shebang fixture is not executable there.
+        rcc_binary = tmp_path / "rcc.cmd"
+        rcc_binary.write_text(
+            "@echo off\r\n"
+            'if "%~1"=="--version" (\r\n'
+            "  echo v18.19.3\r\n"
+            "  exit /b 0\r\n"
+            ")\r\n"
+            "exit /b 2\r\n",
+            encoding="utf-8",
+            newline="",
+        )
+    else:
+        rcc_binary = tmp_path / "rcc"
+        rcc_binary.write_text("#!/bin/sh\nprintf '%s\\n' v18.19.3\n", encoding="utf-8")
+        rcc_binary.chmod(0o700)
     rcc_sha = hashlib.sha256(rcc_binary.read_bytes()).hexdigest()
-    default_rcc = tmp_path / "action-server-default-rcc"
+    default_name = (
+        "action-server-default-rcc.cmd"
+        if os.name == "nt"
+        else "action-server-default-rcc"
+    )
+    default_rcc = tmp_path / default_name
     default_rcc.write_bytes(rcc_binary.read_bytes())
     default_rcc.chmod(0o700)
     receipt = {

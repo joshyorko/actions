@@ -1945,6 +1945,13 @@ executes from the workspace root and uploads only sanitized evidence, so a
 skipped test, missing receipt, inconsistent JUnit counters, or failed checkout
 cannot appear green.
 
+The admission-summary tests execute both synthetic RCC paths to verify version
+and digest checks. These fixtures need a host-native executable format: a
+POSIX shebang script on Unix, and a `.cmd` file for both the primary and copied
+default path on Windows. A copied batch file without its `.cmd` suffix still
+fails Windows process creation. Keep the negative admission cases enabled;
+Linux fixture tests do not replace the native Windows toolkit matrix.
+
 This is a cold preparation test, not a warm-cache or offline test: the fixture
 creates a fresh `ROBOCORP_HOME`, an empty temporary RCC `cache serve` provider,
 and a package environment requiring Python 3.12.15 and `actions-core=1.0.2`.
