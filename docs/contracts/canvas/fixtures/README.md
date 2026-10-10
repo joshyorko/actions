@@ -17,13 +17,41 @@ per-workspace/app/revision artifact resolver; its legacy artifact API uses
 Runtime round-trip tests for this value prove serialization only, not artifact
 resolution or authorization.
 
-The React component tests exercise view states through a fake adapter. A
-separate local browser harness uses the published `@modelcontextprotocol/ext-apps`
-bridge and simulates the MCP Apps host protocol for this fixture. Its fixed
-`canvas_fixture_search` and `canvas_fixture_artifact_status` calls return the
-checked-in fixture values; they are not Action Server tools and do not prove
-real Action Server dispatch, Runtime authorization, host binding, artifact
-resolution, CSP policy in a host, or ChatGPT rendering.
+The React component tests exercise view states through a fake adapter. The
+default local browser harness uses the published
+`@modelcontextprotocol/ext-apps` bridge and simulates the MCP Apps host protocol
+for this fixture. Its fixed `canvas_fixture_search` and
+`canvas_fixture_artifact_status` calls return checked-in fixture values; that
+mode does not prove Action Server dispatch.
+
+The opt-in `real Runtime Action result` browser test is a separate acceptance
+path. Set `ACTIONS_CANVAS_RUNTIME_ACCEPTANCE=1` to run
+`test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge`;
+otherwise pytest skips it, which is not browser acceptance evidence. The test
+builds the Canvas HTML and an `actions-core` wheel from the exact checkout, then
+installs that wheel into an isolated RCC action environment. An ordinary Python
+action module declares the Canvas resource and tools through public MCP
+decorators. The test reads the built resource and tool metadata from the running
+Action Server, then the browser loads those exact HTML bytes and relays UI tool
+calls to the same Runtime's Streamable HTTP MCP endpoint. Its Playwright server
+uses a test-selected port and refuses to reuse an existing server.
+
+On success the test writes `canvas-bridge-acceptance-receipt.json` in its
+pytest temporary directory. The receipt binds the candidate wheel path and
+SHA-256 to the worker's `direct_url.json`, imported module path, and worker
+prefix. It records five observed successful MCP tool calls separately from
+five persisted SQLite Runtime Run records with their Run IDs, passed statuses,
+and action names. It also records the built resource digest, actual browser
+executable and version, and pinned-browser status. Preserve that receipt with
+the test output when recording acceptance; pytest may eventually remove its
+temporary directory.
+
+This verifies a candidate-source Runtime/worker bridge and a browser
+interaction with the real Action result; it does not prove published-wheel
+compatibility, a production host's policy or authorization, artifact resolution,
+ChatGPT rendering, or the pinned Playwright browser. When recording a run,
+identify the actual browser version and executable digest; a system-browser run
+is distinct from Playwright's pinned browser.
 
 `action_server/tests/action_server_tests/test_canvas_query_results_fixture.py`
 checks this exact JSON sample against the draft schema and verifies Python JSON
