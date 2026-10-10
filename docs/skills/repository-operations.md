@@ -376,6 +376,11 @@ SHA-256 metadata together; source YAML changes alone do not update shipped templ
 The Core clean-wheel verifier compares the installed version with the input wheel's
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
+For Core 1.0.3, the release verifier also exercises the public MCP Apps
+`actions.mcp.tool(meta=...)` and `actions.mcp.resource(meta=...)` APIs from the
+installed wheel, including metadata validation. Source tests or a private
+candidate wheel do not prove the registry-published Core version; verify the
+exact PyPI wheel in a fresh worker before admitting a template pin.
 A nonempty package-secret check proves presence only; it does not test PyPI
 authentication, token scope, upload, or publication. Keep those facts separate
 from a candidate wheel's index-resolution proof. For example, a fresh Core
