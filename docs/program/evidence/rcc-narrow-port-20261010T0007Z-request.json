@@ -1,0 +1,12 @@
+{
+  "payload": {
+    "target": "cas-worker-01",
+    "cwd": "/workspaces/actions-worktrees/devsy-rcc-local-acceptance",
+    "thread_id": "01a12224-8dc6-7dc1-9542-65d3a1de0955",
+    "approval_policy": "never",
+    "sandbox": "danger-full-access",
+    "request_id": "actions-root-rcc-narrow-port-20261010T0007Z-v1",
+    "wait_for_completion": false,
+    "text": "Continue the SAME RCC lane. Independent Cloud L source review ACCEPTED exact 6a0db09d2623d084ae0de43f7ec7737bd28ea157, and root verified its remote ref. Review found selected snapshot package.yaml drives fingerprint/publish/acquire; original path is cache identity only; ABA regression preserves pinned input. This clears the review prerequisite you reported. Do the already-authorized narrow port now in your prepared clean narrow worktree at approved main 77e67de36606ac4cb958874249a61ceff79dcd01. Create its distinct branch from that existing worktree, preserving the broad branch. Port only source-snapshot/failed-reload/lease correctness, ABA regression and required focused tests/guide; no unrelated #134 trust-carrier architecture. Current main already contains compute_source_generation, prepare_runtime(provider, previous_descriptor) and graceful retirement. Use its existing provider/real RCC test flags; do not import broad configured_trust_carrier scaffolding unnecessarily. Run focused real RCC execution and affected full suite/configured lint/type checks with existing prepared toolkit and bounded resources. Commit/push a reviewable narrow checkpoint; report exact head, diff scope, commands/results, historical SIGSEGV relevance and current missing gates. Stop if a genuinely new missing prerequisite prevents port, with source evidence, not the now-satisfied source review. Before completing improve the relevant canonical guide with durable verified knowledge; report exact delta/evidence. Follow docs/skills/upstream-reporting.md; joshyorko/rcc issue-only authority for confirmed owned defects, no speculative/public security reports. No merge/release or other lane writes. No resets, cleanup of other work, broad kills, provisioning or credential changes."
+  }
+}

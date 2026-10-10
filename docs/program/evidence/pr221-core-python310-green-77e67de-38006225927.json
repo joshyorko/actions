@@ -1,0 +1,21 @@
+{
+  "recorded_at": "2026-10-09T23:54:42Z",
+  "pr": 221,
+  "workflow": {"name": "Actions Core Tests", "path": ".github/workflows/actions_core_tests.yml", "run_id": 38006225927, "event": "pull_request"},
+  "head": {"branch": "integration/community-release-20261008", "sha": "77e67de36606ac4cb958874249a61ceff79dcd01"},
+  "result": "success",
+  "jobs": {
+    "ubuntu-py3.10-devmode": {"job_id": 114075532519, "Test": "success", "inv lint": "success", "inv typecheck": "success", "inv docs check": "success"},
+    "macos-py3.10-devmode": {"job_id": 114075532503, "Test": "success", "inv lint": "success", "inv typecheck": "success", "inv docs check": "success"},
+    "windows-py3.10-devmode": {"job_id": 114075532323, "Test": "success", "inv lint": "success", "inv typecheck": "success", "inv docs check": "success"}
+  },
+  "synthetic_checkout": {
+    "ref": "refs/pull/221/merge",
+    "sha": "0a5e33ca27c7728bc1620954b14908fd76dfdc56",
+    "parents": ["36b8192dbb8143e016af3351f7d25b22a35c9944", "77e67de36606ac4cb958874249a61ceff79dcd01"],
+    "tree": "a2c6e78d8b25d56d8028bc57e94d00bcbfb9e1d9",
+    "job_logs": "All three OS job logs show checkout of refs/remotes/pull/221/merge and short HEAD 0a5e33c; fetched merge ref independently confirmed SHA, parents, and tree."
+  },
+  "prior_failures": "Failures on head 4e8f8f1/run 38004253328 were at the old pre-format-fix head and remain recorded separately; not overwritten.",
+  "disposition": "Current exact Core three-OS Python3.10 gate is green at 77e67de. No source edits or reruns performed in this monitoring task."
+}

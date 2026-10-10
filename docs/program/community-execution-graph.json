@@ -2703,6 +2703,168 @@
   "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T2102Z.json",
   "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
   "current_program_refs": {
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "community_tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
+    "integration": "77e67de36606ac4cb958874249a61ceff79dcd01",
+    "integration_tree": "a2c6e78d8b25d56d8028bc57e94d00bcbfb9e1d9",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+    "release_ready": false
+  },
+  "current_pr_convergence": {
+    "observed_at_utc": "2026-10-10T00:16:55Z",
+    "path": "evidence/convergence-followup-20261010T0017Z.json",
+    "sha256": "0d140c66f578eca689ebc2c7f8a4e0c1198fbf40e0d9e1c7ff46e104e76cceda",
+    "cohort": {
+      "items": 21,
+      "target_integrated": 15,
+      "blocked_open": 6,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271
+      ],
+      "blocked_open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        256
+      ]
+    },
+    "open_pr_audit": {
+      "path": "evidence/convergence-followup-20261010T0017Z.json",
+      "sha256": "0d140c66f578eca689ebc2c7f8a4e0c1198fbf40e0d9e1c7ff46e104e76cceda",
+      "open_count": 6,
+      "all_drafts": true,
+      "exact_pr_heads": {
+        "215": "d07f79b355f976f97948720474fd050d0a32ea16",
+        "216": "d26fa423080cec22522402f2193b17a5f32b336a",
+        "217": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+        "218": "95ddbe88106be594ea9954bdb36909702c5e2869",
+        "221": "77e67de36606ac4cb958874249a61ceff79dcd01",
+        "256": "dc205182253794cdf5a1fb5546acb01b106b209f"
+      }
+    },
+    "branch_readback": {
+      "community": {
+        "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "ref": "refs/heads/community",
+        "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641"
+      },
+      "integration": {
+        "head": "77e67de36606ac4cb958874249a61ceff79dcd01",
+        "ref": "refs/heads/integration/community-release-20261008",
+        "tree": "a2c6e78d8b25d56d8028bc57e94d00bcbfb9e1d9"
+      },
+      "runtime_candidate": {
+        "head": "6a53578fac029a0696834c30438c858f5f0003be",
+        "ref": "refs/heads/integration/runtime-release-final-20261009",
+        "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d"
+      },
+      "source": "git ls-remote plus commit tree readback"
+    },
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "exact_pr221_status": {
+      "head": "77e67de36606ac4cb958874249a61ceff79dcd01",
+      "observed_at_utc": "2026-10-10T00:01:40Z",
+      "checks": {
+        "success": "all recorded required checks pass",
+        "skipped": "pull-request publication jobs/steps skipped"
+      },
+      "checkout_tree": "a2c6e78d8b25d56d8028bc57e94d00bcbfb9e1d9",
+      "admission": "Open draft candidate; checks do not publish Runtime/native 1.0.3 or establish issue acceptance.",
+      "receipt": "evidence/pr221-release-critical-checks-77e67de-20261010T0001Z.json",
+      "receipt_sha256": "7f199f9b9cb3aff778cde67eca0fef288e14be29df318cc8771fa3cafa9e818c"
+    },
+    "pr256_current_status": {
+      "head": "dc205182253794cdf5a1fb5546acb01b106b209f",
+      "run_id": 38007631113,
+      "observed_at_utc": "2026-10-10T00:15:00Z",
+      "source_review": "ACCEPT bounded source only",
+      "checks": {
+        "RCC_primary_n_minus_one": "6/6 PASS",
+        "coverage": "PASS",
+        "audit": "PASS",
+        "verify": "PASS",
+        "publication": "SKIPPED",
+        "Windows_frozen_UI": "PASS",
+        "Windows_Go_wrapper_UI": "FAIL",
+        "Linux_frozen_and_Go_wrapper_UI": "PASS",
+        "macOS_UI": "SKIPPED",
+        "macOS_consumer_storage_large_history": "PASS"
+      },
+      "failed_gate": "Windows Go-wrapper test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery: manifest frozen_package_tree_sha256 does not match build input; 1 failed, 20 passed.",
+      "owner": "Existing Work Items owner; narrow correction is being ported against the accepted 77e base. Root retains integration/admission authority.",
+      "next_action": "Focused tests reported PASS; full configured suite remains pending. Run the corrected exact-head Windows Go-wrapper gate and required configured matrix before integration admission.",
+      "limits": "No whole #208 acceptance, macOS UI proof, actual ChatGPT proof, or publication."
+    },
+    "release_state": {
+      "core": "1.0.2 published and verified",
+      "core_decorator_metadata_api": "Source remains unreleased and requires a separately versioned Core package.",
+      "helper": "1.0.3 published and verified",
+      "runtime_native": "1.0.3 held and unpublished"
+    },
+    "rcc_status": {
+      "broad_candidate_head": "6a0db09d2623d084ae0de43f7ec7737bd28ea157",
+      "dispatch_receipt": "evidence/rcc-narrow-port-20261010T0007Z-request.json",
+      "dispatch_receipt_limit": "These copied records prove the authorized existing-thread dispatch, settings and target branch/base; focused-test PASS and full-suite-pending are separate root-reported status, not proven by the dispatch response.",
+      "dispatch_response": "evidence/rcc-narrow-port-20261010T0007Z-response.json",
+      "remote_branch": "devsy/rcc-local-acceptance-20261009",
+      "scope_limit": "Dispatch establishes the authorized branch/base/work ownership; root reported the focused-test result. Neither that result nor the broad source head establishes #134 acceptance.",
+      "status": "Safely pushed/source checkpoint; not integrated/admitted. The same RCC owner is porting a narrow change against integration 77e. Focused tests are reported passing; full configured suite pending."
+    },
+    "upstream_disposition": "none",
+    "receipt_sha256": "0d140c66f578eca689ebc2c7f8a4e0c1198fbf40e0d9e1c7ff46e104e76cceda"
+  },
+  "prior_current_program_refs_20261009T2253Z": {
+    "community": "c30f953bae1a322e1d09549607ab42f1badce440",
+    "integration": "abe8640a137942bcf398668fe2093529ba53c38b",
+    "integration_tree": "c68d3499f556ea7be0cadbc32fda4050ab388feb",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+    "release_ready": false
+  },
+  "prior_current_pr_convergence_20261009T2253Z": {
+    "observed_at_utc": "2026-10-09T22:53:00Z",
+    "receipt": "evidence/convergence-followup-20261009T2253Z.json",
+    "sha256": "961080a91c8a8f53312cfda6c0ec30cff7724e064e29de2ffac918a4a3ba5711",
+    "pr_cohort": {
+      "target_integrated": 11,
+      "open_blocked": 8,
+      "merge_ready": 0
+    },
+    "issue_stage_counts_unchanged": true,
+    "whole_issue_acceptance_changed": false,
+    "open_pr_audit": "evidence/convergence-live-prs-20261009T2248Z.json",
+    "open_pr_audit_sha256": "ce259595523b6d0403dca62fbbafae8e1a4b2ac542f71ca1a261f0a1cea7437f",
+    "exact_head_ci_path": "evidence/convergence-targeted-check-refresh-20261009T2253Z.json",
+    "artifact_metadata_erratum": {
+      "path": "evidence/convergence-erratum-20261009T2234Z.json",
+      "sha256": "b2076904af96aec046efc8a1940bb724769c22d7ac9a59439bd75e9ccdc460f7"
+    },
+    "exact_head_ci_sha256": "a8668dd43118a5e07bad4013df909dccf5a96520dee7fe38c5bb53e114cfb3a0",
+    "current_failures": {
+      "PR221": 3,
+      "PR256": 1
+    }
+  },
+  "superseded_current_program_refs_20261009T2328Z": {
     "community": "d2741a18976f75467355282ad3caa5b99b4c505e",
     "community_tree": "5779fc5d634ac6e804fea4bce76e25d45cf56c67",
     "integration": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
@@ -2711,7 +2873,7 @@
     "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
     "release_ready": false
   },
-  "current_pr_convergence": {
+  "superseded_current_pr_convergence_20261009T2328Z": {
     "observed_at_utc": "2026-10-09T23:28:16Z",
     "receipt": "evidence/convergence-followup-20261009T2328Z.json",
     "sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360",
@@ -2745,36 +2907,19 @@
     "diagnosis_receipt": "evidence/pr221-core-python310-lint-blocker-38004253328.json",
     "diagnosis_receipt_sha256": "e30adc70a3bfc10b06dbed7eddec2763921dd1f85a3a77df79b779fbeae992c6"
   },
-  "prior_current_program_refs_20261009T2253Z": {
-    "community": "c30f953bae1a322e1d09549607ab42f1badce440",
-    "integration": "abe8640a137942bcf398668fe2093529ba53c38b",
-    "integration_tree": "c68d3499f556ea7be0cadbc32fda4050ab388feb",
-    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
-    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
-    "release_ready": false
-  },
-  "prior_current_pr_convergence_20261009T2253Z": {
-    "observed_at_utc": "2026-10-09T22:53:00Z",
-    "receipt": "evidence/convergence-followup-20261009T2253Z.json",
-    "sha256": "961080a91c8a8f53312cfda6c0ec30cff7724e064e29de2ffac918a4a3ba5711",
-    "pr_cohort": {
-      "target_integrated": 11,
-      "open_blocked": 8,
-      "merge_ready": 0
+  "current_next_action": {
+    "observed_at_utc": "2026-10-10T00:19:23Z",
+    "path": "evidence/convergence-pr256-next-action-20261010T0019Z.json",
+    "sha256": "28aff7271a640257fcb66919a6db3cbd5a6632e26fba99c0aaf62399ad02d0d7",
+    "pr": 256,
+    "head": "b676daf3d51de89b1bfc51c90a76c01ed24d8bfb",
+    "run_id": 38008430418,
+    "run_status": "in_progress",
+    "status_counts": {
+      "success": 6,
+      "in_progress": 6,
+      "skipped": 1
     },
-    "issue_stage_counts_unchanged": true,
-    "whole_issue_acceptance_changed": false,
-    "open_pr_audit": "evidence/convergence-live-prs-20261009T2248Z.json",
-    "open_pr_audit_sha256": "ce259595523b6d0403dca62fbbafae8e1a4b2ac542f71ca1a261f0a1cea7437f",
-    "exact_head_ci_path": "evidence/convergence-targeted-check-refresh-20261009T2253Z.json",
-    "artifact_metadata_erratum": {
-      "path": "evidence/convergence-erratum-20261009T2234Z.json",
-      "sha256": "b2076904af96aec046efc8a1940bb724769c22d7ac9a59439bd75e9ccdc460f7"
-    },
-    "exact_head_ci_sha256": "a8668dd43118a5e07bad4013df909dccf5a96520dee7fe38c5bb53e114cfb3a0",
-    "current_failures": {
-      "PR221": 3,
-      "PR256": 1
-    }
+    "scope": "Next action pointer only; predecessor dc205 failure remains in the 00:16:55Z checkpoint."
   }
 }

@@ -12648,7 +12648,7 @@
   "hosted_readback_at": "2026-10-08T22:15:42.516109+00:00",
   "evidence_archive": "evidence/community-20261009-convergence.zip",
   "evidence_archive_sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
-  "integration_head": "4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f",
+  "integration_head": "77e67de36606ac4cb958874249a61ceff79dcd01",
   "additional_compute": {
     "cloud": "Reused bounded Luna lanes plus one evidence-backed Sol review; no uncontrolled recursion or API fallback",
     "devsy": "WAITING FOR HIT THE GAS; pending request preserved without calls",
@@ -12669,8 +12669,8 @@
       "259": "PR259 at reported head prefix85f7 is independently accepted; hosted CI is running."
     }
   },
-  "checkpoint_status": "ACTIVE integration; 13/20 scoped PRs merged to named targets, 7 open/blocked, 0 merge-ready; PR221 has a confirmed Ruff format-only blocker with separate three-OS tests/docs/types passing; no issue closure or release publication admitted",
-  "checkpoint_observed_at": "2026-10-09T23:29:14Z",
+  "checkpoint_status": "ACTIVE integration; 15/21 scoped PRs integrated to their recorded targets, 6 open/blocked, 0 merge-ready. PR221 exact-head checks pass except skipped publication. PR256 source review is bounded ACCEPT but Windows Go-wrapper manifest/build-input validation fails on exact head dc205182; the same owner is porting a narrow correction to 77e, focused tests reported pass and full configured suite remains pending. Helper1.0.3/Core1.0.2 published; Runtime/native1.0.3 held and unpublished; no issue acceptance changed. Latest next-action pointer: #256 head b676daf3 has run 38008430418 in progress (6 success, 6 in progress, 1 skipped); no result inferred.",
+  "checkpoint_observed_at": "2026-10-10T00:16:55Z",
   "execution_graph": {
     "file": "community-execution-graph.json",
     "counts": {
@@ -12715,6 +12715,57 @@
     "receipt": "evidence/pr270-admission-readback-20261009.json"
   },
   "current_convergence_update": {
+    "path": "evidence/convergence-followup-20261010T0017Z.json",
+    "sha256": "0d140c66f578eca689ebc2c7f8a4e0c1198fbf40e0d9e1c7ff46e104e76cceda",
+    "cohort": {
+      "items": 21,
+      "target_integrated": 15,
+      "blocked_open": 6,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271
+      ],
+      "blocked_open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        256
+      ]
+    },
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "77e67de36606ac4cb958874249a61ceff79dcd01",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "issue_acceptance_changed": false,
+    "receipt_sha256": "0d140c66f578eca689ebc2c7f8a4e0c1198fbf40e0d9e1c7ff46e104e76cceda"
+  },
+  "prior_current_integration_checkpoint_pr258": {
+    "pr": 258,
+    "merge_sha": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+    "tested_candidate": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+    "tested_merge": "526f84813bb808d5a5dc2f7a26bed6467be79c3f",
+    "tree": "5c0b501cbc918426d49e053faaa22c85520081e6",
+    "tree_matches_tested_merge": true,
+    "merged_at": "2026-10-09T20:20:30Z",
+    "scope": "No issue closure or Runtime publication/readiness implied.",
+    "receipt": "evidence/integration-pr258-admission-20261009.json"
+  },
+  "prior_current_convergence_update_20261009T2328Z": {
     "path": "evidence/convergence-followup-20261009T2328Z.json",
     "sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360",
     "cohort": {
@@ -12744,15 +12795,19 @@
     "issue_acceptance_changed": false,
     "receipt_sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360"
   },
-  "prior_current_integration_checkpoint_pr258": {
-    "pr": 258,
-    "merge_sha": "ec86ea87340ceb4850c4563b97b93c90713d934f",
-    "tested_candidate": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
-    "tested_merge": "526f84813bb808d5a5dc2f7a26bed6467be79c3f",
-    "tree": "5c0b501cbc918426d49e053faaa22c85520081e6",
-    "tree_matches_tested_merge": true,
-    "merged_at": "2026-10-09T20:20:30Z",
-    "scope": "No issue closure or Runtime publication/readiness implied.",
-    "receipt": "evidence/integration-pr258-admission-20261009.json"
+  "current_next_action": {
+    "observed_at_utc": "2026-10-10T00:19:23Z",
+    "path": "evidence/convergence-pr256-next-action-20261010T0019Z.json",
+    "sha256": "28aff7271a640257fcb66919a6db3cbd5a6632e26fba99c0aaf62399ad02d0d7",
+    "pr": 256,
+    "head": "b676daf3d51de89b1bfc51c90a76c01ed24d8bfb",
+    "run_id": 38008430418,
+    "run_status": "in_progress",
+    "status_counts": {
+      "success": 6,
+      "in_progress": 6,
+      "skipped": 1
+    },
+    "scope": "Next action pointer only; predecessor dc205 failure remains in the 00:16:55Z checkpoint."
   }
 }

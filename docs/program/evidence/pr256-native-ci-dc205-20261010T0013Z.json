@@ -1,0 +1,82 @@
+{
+  "captured_at_utc": "2026-10-10T00:18Z",
+  "pr": 256,
+  "workflow": {
+    "name": "Action Server Build (Unauthenticated)",
+    "run_id": 38007631113,
+    "event": "pull_request",
+    "branch": "devsy/workitems-consumer-acceptance-20261009",
+    "head_sha": "dc205182253794cdf5a1fb5546acb01b106b209f",
+    "url": "https://github.com/joshyorko/actions/actions/runs/38007631113"
+  },
+  "synthetic_checkout": {
+    "sha": "adb8c8982a24a4451fefab65658c68246e80b85e",
+    "parents": [
+      "77e67de36606ac4cb958874249a61ceff79dcd01",
+      "dc205182253794cdf5a1fb5546acb01b106b209f"
+    ],
+    "tree": "e36577ca79c9520014f3f7c338a8546257788f7b",
+    "observed_by": [
+      "refs/pull/256/merge fetch",
+      "all three hosted checkout logs"
+    ]
+  },
+  "native_jobs": {
+    "macos-15": {
+      "job_id": 114079988976,
+      "conclusion": "success",
+      "frozen_ui": "skipped",
+      "go_wrapper_ui": "skipped",
+      "work_items_consumer": "success",
+      "browser_storage": "success",
+      "large_history": "success"
+    },
+    "ubuntu-22.04": {
+      "job_id": 114079989100,
+      "conclusion": "success",
+      "frozen_ui": "success",
+      "go_wrapper_ui": "success",
+      "work_items_consumer": "success",
+      "browser_storage": "success",
+      "large_history": "success"
+    },
+    "windows-2022": {
+      "job_id": 114079989198,
+      "conclusion": "failure",
+      "frozen_ui": "success",
+      "go_wrapper_ui": "failure",
+      "failure_test": "test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery",
+      "failure": "manifest field frozen_package_tree_sha256 does not match build input; assert recorded == measured; 1 failed, 20 passed",
+      "post_runtime_inventory_difference": "No per-path delta emitted in sanitized job log. The receipt/artifact was not downloaded, per instruction."
+    }
+  },
+  "other_checks": {
+    "audit_run": 38007631208,
+    "audit": "success",
+    "work_items_release_run": 38007631126,
+    "verify": "success",
+    "publish": "skipped",
+    "rcc_run": 38007631151,
+    "rcc_macos_primary_n1": "success",
+    "rcc_windows_primary_n1": "success",
+    "rcc_linux_primary_n1": "in_progress",
+    "coverage_run": 38007631087,
+    "coverage": "success; run 38007631087 completed 2026-10-10T00:18Z",
+    "rcc_run_status": "completed success; run 38007631151; six primary/N-1 jobs across Linux, macOS, Windows all success",
+    "native_workflow": "run 38007631113 completed failure only on Windows job; Mac and Ubuntu job success"
+  },
+  "prior_head_observation": {
+    "head_sha": "1225ecf70b1685107bc1fc25de5bc69d6f716866",
+    "run_id": 38007001240,
+    "windows_frozen_ui": "failure",
+    "failure": "post_runtime_package_tree hash differed from build input",
+    "failure_test": "test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery",
+    "ubuntu_frozen_and_go_wrapper_ui": "success",
+    "macos_ui_steps": "skipped"
+  },
+  "limitations": [
+    "No source edits, test reruns, installs, artifact downloads, or publication performed.",
+    "No changed-file inventory was inferred from hash mismatch alone.",
+    "CI and release publication are distinct; publish step was skipped."
+  ]
+}

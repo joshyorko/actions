@@ -1,6 +1,19 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
-## Current convergence — 2026-10-09T23:28Z
+## Current convergence — 2026-10-10T00:16:55Z
+
+Community is `36b8192dbb8143e016af3351f7d25b22a35c9944` (tree `5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641`); integration/PR221 is `77e67de36606ac4cb958874249a61ceff79dcd01` (tree `a2c6e78d8b25d56d8028bc57e94d00bcbfb9e1d9`). The 21-PR convergence cohort is 15 merged to recorded targets, 6 open/blocked, 0 merge-ready. Those PR counts do not change the 54 owning-issue contracts or acceptance states: 53 remain open, #210 is the one accepted/closed issue, and none is newly whole-issue review-ready. See the [00:17 convergence receipt](evidence/convergence-followup-20261010T0017Z.json).
+
+PR221 exact-head required checks pass on the same tree as the integration branch; pull-request publication steps were skipped. This is a candidate validation checkpoint, not Runtime/native publication. PR256 at `dc205182253794cdf5a1fb5546acb01b106b209f` has bounded source review ACCEPT. Linux frozen/Go-wrapper checks pass; Windows frozen UI passes but the Go-wrapper UI test fails because `frozen_package_tree_sha256` differs from the build input (1 failed, 20 passed). macOS UI checks are skipped. All six RCC primary/N-1 jobs, coverage, verification and audit pass; publication is skipped. The existing Work Items owner is porting a narrow correction against `77e67de`; focused tests are reported passing, and the configured full suite is pending. Root retains integration/admission authority. See the [native matrix receipt](evidence/pr256-native-ci-dc205-20261010T0013Z.json) and [source review](evidence/pr256-dc205-independent-source-review.json).
+
+PRs215–217 retain exact-head green checks but are draft checkpoints reported with merge conflicts; reconcile unique changes through PR221 or supersede them before merge. PR218 is cleanly mergeable but remains draft and its relevant packaged Work Items follow-through depends on PR256; neither state establishes whole #208 acceptance. The new Core decorator metadata API remains source-only and requires a separately versioned Core package. Helper1.0.3 and Core1.0.2 are published/verified; Runtime/native1.0.3 remains held and unpublished.
+
+Current follow-up at 2026-10-10T00:19:23Z: PR256 advanced to `b676daf3d51de89b1bfc51c90a76c01ed24d8bfb`; run38008430418 has 6 checks passed, 6 in progress and 1 publication skip. The source review is underway. The Windows Go-wrapper failure recorded on predecessor `dc205182` remains an observation of that predecessor only; no outcome is inferred for `b676daf3`. See [the next-action receipt](evidence/convergence-pr256-next-action-20261010T0019Z.json).
+
+The broader RCC source checkpoint `6a0db09d2623d084ae0de43f7ec7737bd28ea157` is remotely pushed, not integrated or admitted. Its existing owner is porting the narrow source correction to `77e67de`; focused tests are reported passing, with full configured suite pending. No #134 acceptance is inferred. Upstream disposition: none; no upstream defect is established.
+
+
+## Historical convergence snapshot — 2026-10-09T23:28Z (superseded by the 2026-10-10T00:16:55Z amendment)
 
 Remote refs are community `d2741a18976f75467355282ad3caa5b99b4c505e` (tree `5779fc5d`), integration `4e8f8f1ec4f16d1d7d95b6564d3c3bdb237bc95f` (tree `e706a9b9`), and Runtime candidate `6a53578fac029a0696834c30438c858f5f0003be`. The 20-PR cohort has 13 target-only merges, 7 open/blocked, 0 merge-ready. PR220 merged to community; PR270 merged to integration after exact tree/source review and 13 hosted checks passed. Publication steps were skipped; issue acceptance did not change. See the [23:28 convergence update](evidence/convergence-followup-20261009T2328Z.json).
 
