@@ -2800,7 +2800,14 @@ rejection/recovery. Its source-mode CLI result is separate from frozen
 acceptance: the ten-case control is pinned to a separately measured native
 artifact for candidate `c78288c3`; its independent byte receipt verifies the build
 tree, manifest, inventory, package tree, frozen executable, and wrapper artifact.
-Artifact provenance does not establish the ten frozen test outcomes. Before
+Hosted run [38055229055](https://github.com/joshyorko/actions/actions/runs/38055229055)
+on control `57ba99ee` passed the ten exact cases (zero failures/errors/skips,
+257.83s). Independent receipt review verified artifact `11671465182`, its
+SHA-256 `ca81fb7da1915cde6bb4052b2effc1c6d5a871ee132db3e8c6ee8ff7efe7a404`,
+the case set, managed Core 1.0.2 workers and successful generation drain. This is
+Linux frozen evidence only, not Go-wrapper execution or other-platform acceptance.
+Keep configured import sorting active for the standalone JUnit validator tests:
+passing pytest does not establish that the separate lint gate passed. Before
 using the artifact from a later test/docs-only control commit, verify the complete
 build tree and unchanged Runtime source/dependency inputs; rebuild if those inputs
 change. The five-case receipt above remains evidence only for candidate `31239cf9`

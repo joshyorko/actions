@@ -6,7 +6,6 @@ from pathlib import Path
 
 import pytest
 
-
 SCRIPT = Path(__file__).parents[2] / "scripts" / "verify_frozen_catalog_junit.py"
 SPEC = importlib.util.spec_from_file_location("verify_frozen_catalog_junit", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None
