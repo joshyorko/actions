@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="2.018" timestamp="2026-10-10T22:06:04.967211+00:00" hostname="e13229d8d59d"><testcase classname="tests.action_server_tests.test_dakota_workitems_native_ui_acceptance" name="test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery" time="1.940"><failure message="AssertionError: manifest field frozen_package_tree_sha256 does not match build input&#10;Failed: assert recorded == measured&#10;Variables:&#10;  recorded = '534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488'&#10;  measured = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'">tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py:1418: in test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery
+    ) = packaged_runtime_identity()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py:558: in packaged_runtime_identity
+    require_measured_digest(
+tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py:429: in require_measured_digest
+    assert recorded == measured, f"manifest field {field} does not match build input"
+E   AssertionError: manifest field frozen_package_tree_sha256 does not match build input
+E   Failed: assert recorded == measured
+E   Variables:
+E     recorded = '534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488'
+E     measured = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'</failure></testcase></testsuite></testsuites>

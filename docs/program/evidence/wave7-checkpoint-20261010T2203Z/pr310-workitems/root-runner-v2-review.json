@@ -1,0 +1,49 @@
+{
+  "execution_at_review": "NOT RUN",
+  "limitations": [
+    "No actual ChatGPT acceptance",
+    "No full issue 208 completion",
+    "No non-Chromium or accessibility proof"
+  ],
+  "process_helper_sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+  "reviewed_corrections": [
+    "PASS_BOUNDED return value",
+    "finite preflight subprocess timeouts",
+    "both API-key argv forms redacted"
+  ],
+  "reviewer": "root independent source review",
+  "runner_bundle_manifest_sha256": "ed1ae041c4082eccd157bf7c8ff72e8e1119cb3eaf39111754cefc138dd21968",
+  "scope": [
+    "Linux frozen native artifact only",
+    "actual normal / authorization-denied / storage-error stages",
+    "one selected pytest node and exact source/runtime/browser/assets hashes",
+    "full frozen tree validated before native launch by test helper",
+    "205-second owned child deadline with 6-second cleanup grace and external 300-second RCC bound"
+  ],
+  "source_head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+  "source_tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5",
+  "status": "GO_FOR_ONE_PREFLIGHT_AND_ONE_FROZEN_ATTEMPT",
+  "stop_condition": "Preserve any failure; no automatic retry or Go-wrapper attempt",
+  "verified_files": {
+    "correction-note.json": {
+      "sha256": "963468d6e2cc93dcea91f064e0957b29b1d15bcd23e7d5d218f1e13c2a754759",
+      "size_bytes": 1260
+    },
+    "launch_with_package_python.sh": {
+      "sha256": "a968dd25f3c1b524eb90818ec335f4bf74f7007f3787b006c479dce834da57da",
+      "size_bytes": 389
+    },
+    "run_workitems_native_ui_acceptance.py": {
+      "sha256": "0959fc3e1f3d506c7ebe904efb01fe203d5a7fbe05b06ddcfdf83f19382f2553",
+      "size_bytes": 19236
+    },
+    "runner-contract-v2.json": {
+      "sha256": "168f2d606866a0b6167da2dd21f70fa48c7a039ea814f0925123b54d2f55e843",
+      "size_bytes": 6728
+    },
+    "workitems_capture_plugin.py": {
+      "sha256": "fd2a8f94b86e920fe73dbf6c65406febcf71348b2bdbcceedb00d02d60d534d6",
+      "size_bytes": 4079
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "status": "GO formatting-only source; exact new-head CI required",
+  "head": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+  "tree": "7ab1ba4642ee41a6254c9a56e388ea63a1623a9f",
+  "ordered_parents": [
+    "76e7f64a67c7dd7d68419188190d839f2350b8b8"
+  ],
+  "clean": true,
+  "changed_files": [
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "AST_before_after_identical": true,
+  "observations": [
+    "Two formatter line wraps only in current-candidate wheel contract test; no semantic test/helper/source change",
+    "Canonical guide states actual configured Runtime ruff format --check --config ../devutils/ruff.toml gate; matches Runtime task definition",
+    "Owner canonical formatter RED/GREEN retained, readback hashes bound; no test/runtime/service rerun by reviewer"
+  ],
+  "evidence": {
+    "configured-format-green.log": {
+      "sha256": "dd8130d5a1e3d6c386b89c8869e36f1ac4064346fa832c3d3bc4ec5400a41c56",
+      "bytes": 3746
+    },
+    "format-gateway.sh": {
+      "sha256": "e6a8f004497369b95c74a75bc6d077edd025533891bb52b1b270e542a61eff03",
+      "bytes": 272
+    },
+    "configured-format-red.log": {
+      "sha256": "b36f360a15885451110f165fcadcc2cf260784e3560cfd3890b75bda83648ccd",
+      "bytes": 4174
+    },
+    "job-114316419980-lint-excerpt.log": {
+      "sha256": "b70cf9979f7cc9ecf281baf500659d0d091e2ce3e7b54546852873bc45a4bc0a",
+      "bytes": 1785
+    },
+    "configured-format-write.log": {
+      "sha256": "38d8f6b88229588a0add18fdf653d623be1815b94840dcadb9f5ad96976529c6",
+      "bytes": 3742
+    }
+  },
+  "canonical_doc_proposal": "Use the Runtime package configured formatter alongside Ruff lint for focused test changes; tests/lint rules do not establish formatter acceptance. Existing precise five-line guide delta satisfies this proposal.",
+  "commands": [
+    "git exact HEAD/tree/parents/status/diff; ast.parse before/after and ast.dump compare; read/hash retained owner formatter logs/wrapper; no execution"
+  ],
+  "upstream_disposition": "none"
+}

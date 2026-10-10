@@ -1,0 +1,12 @@
+{
+  "schema": "metadata-readiness-status/v1",
+  "observed_at_utc": "2026-10-10 22:07:47 UTC",
+  "runner_revision": "frozen-v2",
+  "status": "HOLD",
+  "independent_review_receipt": "metadata-frozen-v2-hold.json",
+  "independent_review_sha256": "290999301a0272c4390398ef413216d3f11a24af2d84649ed0d7438f64d12866",
+  "scope": "Core 1.0.2 controlled metadata fixture readiness only",
+  "actual_rcc_or_provider_inspection": "NOT_RUN",
+  "summary": "The frozen-v2 runner readiness review requires bounded harness corrections; no product or upstream defect was established.",
+  "frozen_v3": "separate candidate; readiness and any actual attempt are outside this v2 receipt"
+}

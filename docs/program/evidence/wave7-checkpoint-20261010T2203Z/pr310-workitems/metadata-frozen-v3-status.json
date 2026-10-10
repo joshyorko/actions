@@ -1,0 +1,9 @@
+{
+  "schema": "metadata-readiness-status/v1",
+  "observed_at_utc": "2026-10-10 22:07:47 UTC",
+  "runner_revision": "frozen-v3",
+  "review_receipt_sha256": "d4a556f8087ef5777a0ebd805af05dc4dd7b7ee776ad7985a2a0d9a2cf38300d",
+  "readiness": "GO_FOR_ONE_BOUNDED_ATTEMPT",
+  "actual_attempt": "IN_PROGRESS_WITH_CORE_WORKER; NO_RESULT_RECEIVED_AT_OBSERVATION",
+  "attempt_limits": "One controlled Core 1.0.2 metadata inspection; actual result must be retained separately. No acceptance beyond this bounded fixture is implied."
+}

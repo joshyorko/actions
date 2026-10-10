@@ -1,0 +1,36 @@
+{
+  "browser_launch": false,
+  "embedded_asset_zip_range": {
+    "end_exclusive": 79203674,
+    "entries": 1068,
+    "eocd_offset": 79203652,
+    "length": 73545306,
+    "matching_range_count": 1,
+    "sha256": "7bc14676074e5ee7b67fae23644652e91fcdfdba13866bc716f6f7e5d3dd9c7c",
+    "start_inclusive": 5658368,
+    "testzip_bad_member": null,
+    "zip64": false
+  },
+  "independent_range_review": {
+    "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/root-embedded-assets-range-review.json",
+    "sha256": "1c039617932f7786f37056846e483fa0483488a4d55f30887e902fd2acc25ed1"
+  },
+  "schema_version": 1,
+  "service_or_runtime_launch": false,
+  "source_archive": "/workspace/work/actions-mk3-evidence/pr304-artifact-readback/native-binary-11680772754.zip",
+  "source_archive_sha256": "65310919b0048615fbfb3dea1b1d95cf29aa773d68448f0c73fb889e89e4a237",
+  "source_changes": false,
+  "source_handling": "Copied exact original byte slice from the retained measured wrapper member; no ZIP rebuilding, network download, or wrapper execution.",
+  "source_member": "action-server",
+  "source_member_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+  "staged_file": {
+    "exclusive_no_follow_creation": true,
+    "ignored_by_git": true,
+    "mode_octal": "0o600",
+    "path": "/workspace/work/actions-mk3-workitems-ui-errors/action_server/go-wrapper/assets/assets.zip",
+    "regular_file": true,
+    "sha256": "7bc14676074e5ee7b67fae23644652e91fcdfdba13866bc716f6f7e5d3dd9c7c",
+    "size_bytes": 73545306
+  },
+  "status": "EXACT_BYTES_STAGED_AND_READBACK_VERIFIED"
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "source_sha": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+  "runtime_kind": "frozen",
+  "runtime_tree_kind": "task_owned_frozen_copy",
+  "platform": "Linux",
+  "executable_sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e",
+  "manifest_sha256": "738964dda8ccf202db4ce9dd3537abd5666badfe021ba9ecde0a2bb7850d5494",
+  "expected_runtime_tree_sha256": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+  "observed_package_tree_sha256": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+  "expected_immutable_build_tree_sha256": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+  "observed_immutable_build_tree_sha256": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+  "immutable_build_tree_unchanged": true,
+  "runtime_delta_valid": true,
+  "runtime_delta_failure_reason": null,
+  "runtime_generated_contract": {
+    "rcc_version": "18.19.3",
+    "rcc_path": "_internal/actions/server/bin/rcc-18.19.3"
+  },
+  "runtime_generated_state": [],
+  "added": [],
+  "removed": [],
+  "changed": []
+}

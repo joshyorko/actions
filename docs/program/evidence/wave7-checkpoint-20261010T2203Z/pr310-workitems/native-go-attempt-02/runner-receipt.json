@@ -1,0 +1,126 @@
+{
+  "browser_launch": {
+    "launch_pids": [],
+    "managed_browser_match": false,
+    "observed_executable": null,
+    "sha256": null,
+    "version": "Google Chrome for Testing 151.0.7922.34"
+  },
+  "browser_pid_state_after_test": [],
+  "browser_stages": null,
+  "cleanup_interpretation": {
+    "claims_complete_reaping": true,
+    "live_pids": [],
+    "supervisor_reaped_descendants": 0,
+    "unknown_observation_pids": [],
+    "zombie_pids": []
+  },
+  "elapsed_seconds": 4.523,
+  "identity": {
+    "assets_zip": {
+      "path": "/workspace/work/actions-mk3-workitems-ui-errors/action_server/go-wrapper/assets/assets.zip",
+      "sha256": "7bc14676074e5ee7b67fae23644652e91fcdfdba13866bc716f6f7e5d3dd9c7c"
+    },
+    "browser": {
+      "path": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "revision": "1234",
+      "sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+      "version": "Google Chrome for Testing 151.0.7922.34"
+    },
+    "checkout": {
+      "branch": "test/workitems-ui-errors-20261010",
+      "clean": true,
+      "head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+      "tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5"
+    },
+    "frontend_dependencies": {
+      "lock_path": "/workspace/work/actions-mk3-workitems-ui-errors/action_server/frontend/package-lock.json",
+      "lock_sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+      "node_modules_is_symlink": true,
+      "node_modules_resolved": "/workspace/work/actions-mk3-canvas-proof/action_server/frontend/node_modules"
+    },
+    "manifest": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-artifact-manifest-856c0a47.json",
+      "sha256": "738964dda8ccf202db4ce9dd3537abd5666badfe021ba9ecde0a2bb7850d5494",
+      "source_sha": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+      "workflow_run_id": "38081495661"
+    },
+    "node": {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+      "playwright_test_version": "1.62.1",
+      "version": "v20.19.3"
+    },
+    "python": {
+      "executable": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+      "prefix": "/workspace/work/actions-mk3-pr302/action_server/.venv",
+      "psutil_origin": "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/psutil/__init__.py",
+      "source_origins": {
+        "actions": "/workspace/work/actions-mk3-workitems-ui-errors/actions/src/actions/__init__.py",
+        "actions_server": "/workspace/work/actions-mk3-workitems-ui-errors/action_server/src/actions/server/__init__.py",
+        "mcp": "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/mcp/__init__.py",
+        "prefix": "/workspace/work/actions-mk3-pr302/action_server/.venv"
+      }
+    },
+    "selected_runtime": {
+      "kind": "go-wrapper",
+      "path": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/go-wrapper-38081495661-attempt01/action-server",
+      "sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b"
+    },
+    "test": {
+      "nodeid": "tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py::test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery",
+      "sha256": "e51eecacc70b6cd4bc381bdd3e488b1af730f620ce9f02fbdc5c3cb5cbaa1ba3"
+    }
+  },
+  "limitations": [
+    "Local packaged Linux UI test only; actual ChatGPT, production authorization/deployment, broad issue #208, crash recovery, missing support, generic HTTP 500, accessibility and non-Chromium are not established."
+  ],
+  "pytest": {
+    "command": [
+      "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-s",
+      "--tb=short",
+      "-m",
+      "integration_test",
+      "-p",
+      "workitems_capture_plugin",
+      "--basetemp",
+      "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-attempt-02/pytest-tmp",
+      "--junitxml",
+      "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-attempt-02/junit.xml",
+      "tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py::test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery"
+    ],
+    "junit": {
+      "errors": 0,
+      "failures": 1,
+      "skipped": 0,
+      "tests": 1
+    },
+    "returncode": 1,
+    "selection": {
+      "collected_count": 1,
+      "collected_nodeids": [
+        "tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py::test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery"
+      ]
+    },
+    "timed_out": false
+  },
+  "retained_log_sha256": {
+    "junit.xml": "677499a78df9d742ba44f3943dd015cf1d6fd7e623364e5ebc15a067d6efa2ab",
+    "pytest-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pytest-stdout.log": "272492f5a772092a6e2587016bc87ca07150413bef73df780221f8a40b5b7ee0"
+  },
+  "runtime_pid_state_after_test": [],
+  "runtime_process_at_ready": null,
+  "runtime_receipt": null,
+  "status": "FAIL",
+  "supervisor": {
+    "cleanup_grace_seconds": 6,
+    "disposition": "clean_no_descendants",
+    "implementation": "/workspace/work/actions-mk3-workitems-ui-errors/action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "reaped_descendants": 0,
+    "timeout_seconds": 205
+  }
+}

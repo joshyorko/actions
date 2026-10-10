@@ -1,0 +1,19 @@
+{
+  "schema": "native-attempt-status/v1",
+  "observed_at_utc": "2026-10-10 22:06:28 UTC",
+  "attempt_directory_identifier": "native-go-attempt-02",
+  "attempt_authorization": "root-go-attempt-authorization.json",
+  "authorization_sha256": "60a9bb96748f02f15ead204d75dc0f4c9592cf63b3781c624fa6979b7e1ffa31",
+  "source_head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+  "mode": "go-wrapper",
+  "state": "IN_PROGRESS",
+  "observed_from": "root owner status update",
+  "execution_contract": {
+    "one_selected_linux_packaged_work_items_browser_test": true,
+    "outer_deadline_seconds": 300,
+    "runner_preflight_rechecked_before_native_launch": true,
+    "separate_go_preflight_run": false
+  },
+  "retention_policy": "No active outputs copied; preserve terminal receipt/review additively when available; no retry or rebuild.",
+  "timestamp_note": "Directory name is an identifier, not an observation timestamp."
+}

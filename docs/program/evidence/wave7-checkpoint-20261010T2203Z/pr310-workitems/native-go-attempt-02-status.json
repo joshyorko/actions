@@ -1,0 +1,31 @@
+{
+  "schema": "native-attempt-status/v2",
+  "observed_at_utc": "2026-10-10 22:07:47 UTC",
+  "attempt_directory_identifier": "native-go-attempt-02",
+  "attempt_authorization": "root-go-attempt-authorization.json",
+  "authorization_sha256": "60a9bb96748f02f15ead204d75dc0f4c9592cf63b3781c624fa6979b7e1ffa31",
+  "source_head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+  "mode": "go-wrapper",
+  "state": "FAIL",
+  "pytest": {
+    "selected": 1,
+    "passed": 0,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0,
+    "elapsed_seconds": 4.523,
+    "failure": "packaged_runtime_identity rejected frozen_package_tree_sha256: expected 534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488, measured empty-tree e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "interpretation": "The Go-wrapper staging layout placed action-server under staged/go-wrapper-.../action-server, while the test derives a sibling action-server path from the executable; the expected sibling was absent. Root confirmed this is a staging-layout setup failure. The test stopped before native runtime or browser launch. This does not establish a product defect or acceptance.",
+  "runtime_or_browser_launched": false,
+  "cleanup": "No descendants remained; no retry or rebuild occurred.",
+  "retained_evidence": {
+    "runner_receipt": "native-go-attempt-02/runner-receipt.json",
+    "runner_receipt_sha256": "cea8eba269faedc4ddef84f378aedc1d3afe118d13673620e38979b0042c33e4",
+    "pytest_selection_sha256": "538b1b074a97a3c14a6bf3255668c9f457d1c4fb64326fa03ecc461a6cefb025",
+    "junit_sha256": "677499a78df9d742ba44f3943dd015cf1d6fd7e623364e5ebc15a067d6efa2ab",
+    "stdout_sha256": "272492f5a772092a6e2587016bc87ca07150413bef73df780221f8a40b5b7ee0",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "followup": "Root is preparing a corrected staging layout and separate inventory gate before any further authorized attempt; outcome pending and not part of this checkpoint."
+}

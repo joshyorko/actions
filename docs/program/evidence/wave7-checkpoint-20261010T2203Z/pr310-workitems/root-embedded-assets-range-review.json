@@ -1,0 +1,13 @@
+{
+  "reviewer": "root independent read-only byte-range verification",
+  "wrapper_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+  "wrapper_size": 82022274,
+  "archive_start": 5658368,
+  "archive_end_exclusive": 79203674,
+  "archive_size": 73545306,
+  "eocd_offset": 79203652,
+  "archive_sha256": "7bc14676074e5ee7b67fae23644652e91fcdfdba13866bc716f6f7e5d3dd9c7c",
+  "decision": "GO to copy exact original archive bytes into the ignored fixture path; no archive rebuild or native execution",
+  "artifact_source": "run38081495661, source856c0a47",
+  "limitation": "CRC/member parsing is owner-reported; root independently verified complete wrapper and exact archive digest plus EOCD offsets"
+}

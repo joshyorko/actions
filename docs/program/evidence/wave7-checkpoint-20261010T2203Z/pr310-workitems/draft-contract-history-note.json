@@ -1,0 +1,12 @@
+{
+  "bundle_manifest_sha256": "63361e3955ec7f125210639079b77dab8757234b4119c351f4dd46c4ec20259b",
+  "created_exclusively": true,
+  "current_contract_bundle": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/runner/frozen-v1/runner-contract.json",
+  "current_contract_sha256": "7e2983b9061a169428632de47a559bfbbf39ef58a8366438ea50345aa0f9b048",
+  "earlier_draft_bytes": "UNAVAILABLE",
+  "earlier_draft_sha256": "7d171358415f7ba285f2ce60c2132607719d540687b27d66ef4c7982eca674ac",
+  "handling": "The earlier bytes were not retained. They have not been reconstructed or represented as a preserved v1 contract.",
+  "kind": "runner-contract-draft-history-note",
+  "no_execution": true,
+  "schema_version": 1
+}

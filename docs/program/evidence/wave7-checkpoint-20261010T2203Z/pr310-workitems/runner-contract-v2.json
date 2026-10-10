@@ -1,0 +1,108 @@
+{
+  "artifact_selector": {
+    "current_kind": "frozen",
+    "full_distribution_root": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server",
+    "manifest": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-artifact-manifest-856c0a47.json",
+    "manifest_sha256": "738964dda8ccf202db4ce9dd3537abd5666badfe021ba9ecde0a2bb7850d5494",
+    "runtime": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server/action-server",
+    "runtime_sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e",
+    "source_tree_relation": "Artifact inputs are bound to 856c0a47; current checkout adds only test harness/guide changes over reviewed runtime inputs."
+  },
+  "blocking_input": {
+    "preflight_behavior": "Runner blocks before pytest/runtime/browser if the exact bytes are absent or differ.",
+    "readback_receipt": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/assets-zip-stage-readback.json",
+    "readback_receipt_sha256": "d4388529df96c060eab2bd443f7c40f27ce77d2df4a6836d2df7db249c12f475",
+    "required_source_assets_sha256": "7bc14676074e5ee7b67fae23644652e91fcdfdba13866bc716f6f7e5d3dd9c7c",
+    "staged_path": "/workspace/work/actions-mk3-workitems-ui-errors/action_server/go-wrapper/assets/assets.zip",
+    "staged_sha256": "7bc14676074e5ee7b67fae23644652e91fcdfdba13866bc716f6f7e5d3dd9c7c",
+    "staging_policy": "Exact bytes were copied from the reviewed EOCD-derived range with exclusive no-follow creation; no fixture assertion bypass."
+  },
+  "environment": {
+    "actions_and_actions_server_must_resolve_under_current_checkout": true,
+    "debug": "pw:browser",
+    "expected_sys_prefix": "/workspace/work/actions-mk3-pr302/action_server/.venv",
+    "managed_headless_shell": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+    "managed_headless_shell_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "node": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+    "node_version": "v20.19.3",
+    "package_python": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+    "playwright_lock_sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+    "playwright_test_version": "1.62.1",
+    "psutil_must_resolve_under_package_prefix": true,
+    "runtime_environment_kind": "DAKOTA_WORKITEMS_UI_RUNTIME_KIND=frozen"
+  },
+  "exact_asset_stage_receipt": {
+    "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/assets-zip-stage-readback.json",
+    "sha256": "d4388529df96c060eab2bd443f7c40f27ce77d2df4a6836d2df7db249c12f475"
+  },
+  "failed_static_attempt": "An initial runner-help invocation used an unavailable holotree/bin/python path; corrected to the prepared package Python. This did not invoke RCC, services, Runtime, or browser.",
+  "future_rcc_gateway_invocation": "source /workspace/actions-cloud/activate.sh && /workspace/actions-cloud/bin/rcc task script --no-build -r /workspace/work/actions-mk3-workitems-ui-errors/developer/toolkit.yaml -- /usr/bin/bash /workspace/work/actions-mk3-evidence/workitems-ui-errors/runner/launch_with_package_python.sh /workspace/work/actions-mk3-evidence/workitems-ui-errors/runner/run_workitems_native_ui_acceptance.py --kind frozen --binary /workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server/action-server --run-dir <fresh-run-dir> --preflight-only",
+  "review_corrections": [
+    {
+      "item": "Runner exits successfully only for PASS_BOUNDED, matching the acceptance test receipt status."
+    },
+    {
+      "item": "Finite timeouts added to git (10s), Python source-origin probe (15s), Node version (10s), and Playwright version (15s) preflight subprocess calls."
+    },
+    {
+      "item": "Runtime argv receipt redacts both --api-key VALUE and --api-key=VALUE forms."
+    }
+  ],
+  "runner_files": {
+    "plugin": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/runner/workitems_capture_plugin.py",
+      "sha256": "fd2a8f94b86e920fe73dbf6c65406febcf71348b2bdbcceedb00d02d60d534d6"
+    },
+    "runner": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/runner/run_workitems_native_ui_acceptance.py",
+      "sha256": "0959fc3e1f3d506c7ebe904efb01fe203d5a7fbe05b06ddcfdf83f19382f2553"
+    },
+    "wrapper": {
+      "path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/runner/launch_with_package_python.sh",
+      "sha256": "a968dd25f3c1b524eb90818ec335f4bf74f7007f3787b006c479dce834da57da"
+    }
+  },
+  "schema_version": 2,
+  "source_checkout": {
+    "branch": "test/workitems-ui-errors-20261010",
+    "clean": true,
+    "head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+    "test_nodeid": "tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py::test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery",
+    "test_sha256": "e51eecacc70b6cd4bc381bdd3e488b1af730f620ce9f02fbdc5c3cb5cbaa1ba3",
+    "tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5"
+  },
+  "static_checks": {
+    "bash_syntax": "PASS",
+    "browser_launched": false,
+    "exact_asset_stage_receipt": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/assets-zip-stage-readback.json",
+    "exact_asset_stage_receipt_sha256": "d4388529df96c060eab2bd443f7c40f27ce77d2df4a6836d2df7db249c12f475",
+    "failed_static_attempt": {
+      "corrected_with": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+      "log": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/runner/static-help-attempt-01.log",
+      "sha256": "f4d3ebf3de4cdbb6280e38e66ac37fb53e48912a4117589e2c889c2dfccf75fa"
+    },
+    "native_runtime_started": false,
+    "no_rcc_preflight_or_test_run": true,
+    "no_service_browser_or_native_launch": true,
+    "python_compile": "PASS",
+    "rcc_preflight_executed": false,
+    "runner_help": "PASS",
+    "runner_help_log": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/runner/help.log"
+  },
+  "status": "SCRATCH_RUNNER_V2_READY_STATIC_CHECKS_PASS__NO_EXECUTION",
+  "timeouts_seconds": {
+    "cleanup_grace": 6,
+    "pytest_child": 205,
+    "rcc_outer": 300
+  },
+  "v1_bundle_manifest_sha256": "63361e3955ec7f125210639079b77dab8757234b4119c351f4dd46c4ec20259b",
+  "v2_static_checks": {
+    "argv_redaction_assertion": "PASS",
+    "bash_syntax": "PASS",
+    "browser_launched": false,
+    "native_runtime_started": false,
+    "python_compile": "PASS",
+    "rcc_preflight_executed": false,
+    "runner_help": "PASS"
+  }
+}

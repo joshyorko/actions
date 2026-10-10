@@ -1,0 +1,28 @@
+{
+  "accepted_boundaries": [
+    "Combined per-command output retained <=1MiB; all drained chunks counted/hashed; overflow rejects success",
+    "Owned provider TERM/KILL escalation independent of leader liveness",
+    "Shared 180s total and 20s cleanup deadline",
+    "Exact Core1.0.2 fixture/source/RCC/provider/materialization assertions; no whole Package Revision or Runtime acceptance"
+  ],
+  "doc_proposal": "A frozen runner bundle must launch its bound runner bytes. A successful controlled inspection requires owned process groups absent, no remaining live or zombie members, and all output drains joined; recorded group absence cannot be merely informational.",
+  "findings": [
+    {
+      "finding": "Exec references mutable parent-directory runner instead of frozen-v2 candidate.",
+      "smallest_correction": "Launch immutable new bundle runner path or validate exact no-follow regular-file hash immediately before exec.",
+      "symbol": "run-one-shot.sh"
+    },
+    {
+      "finding": "closed predicate omits remaining zombie PIDs and process_group_gone; exited leader zombie-only group can pass cleanup.",
+      "smallest_correction": "Require empty zombie_pids and group_gone; fail observation on incomplete cleanup.",
+      "symbol": "ProviderProcess.close"
+    }
+  ],
+  "manifest_sha256": "faef5e1ca1b5cf1a82884f9a52b866bc7a6556bc975650a229760049c63420ef",
+  "runner_sha256": "220b3a92f5f41e1a1782b1aa0ee6500785512524481e95fbd95fc3a93b3b1e1f",
+  "schema_version": 1,
+  "scope": "Exact frozen-v2 Core 1.0.2 controlled metadata fixture readiness only; actual RCC/provider inspection NOT_RUN",
+  "status": "HOLD",
+  "upstream_disposition": "none; harness readiness corrections only",
+  "verification": "Read exact runner, wrapper, manifest; all seven file hashes match; frozen files regular root-owned 0444. No service or RCC command executed."
+}

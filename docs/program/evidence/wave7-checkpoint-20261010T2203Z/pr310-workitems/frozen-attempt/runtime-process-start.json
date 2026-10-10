@@ -1,0 +1,29 @@
+{
+  "process_tree_at_ready": [
+    {
+      "argv": [
+        "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-frozen-attempt-20261010T2207Z/pytest-tmp/test_packaged_work_items_ui_cr0/frozen-runtime-package/action-server",
+        "start",
+        "--actions-sync=false",
+        "--port=0",
+        "--datadir=/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-frozen-attempt-20261010T2207Z/pytest-tmp/test_packaged_work_items_ui_cr0/datadir",
+        "--db-file=server.db",
+        "-v",
+        "--skip-lint",
+        "--min-processes=0",
+        "--max-processes=1",
+        "--address=127.0.0.1",
+        "--api-key=[redacted-api-key]"
+      ],
+      "name": "action-server",
+      "pid": 53090,
+      "ppid": 53070,
+      "status": "sleeping"
+    },
+    {
+      "observation_error": "ZombieProcess",
+      "pid": 53093
+    }
+  ],
+  "root_pid": 53090
+}

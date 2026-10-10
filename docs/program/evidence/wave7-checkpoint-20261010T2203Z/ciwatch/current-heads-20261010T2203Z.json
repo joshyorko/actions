@@ -1,0 +1,250 @@
+{
+  "schema": "ci-head-status/v1",
+  "observed_at_utc": "2026-10-10 22:03:20 UTC",
+  "prs": {
+    "pr308": {
+      "number": 308,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "head": {
+        "sha": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+        "ref": "fix/rcc-candidate-wheel-identities-20261010"
+      },
+      "base": {
+        "sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "ref": "integration/community-release-20261008"
+      }
+    },
+    "pr310": {
+      "number": 310,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "head": {
+        "sha": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+        "ref": "test/workitems-ui-errors-20261010"
+      },
+      "base": {
+        "sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "ref": "integration/community-release-20261008"
+      }
+    },
+    "pr292": {
+      "number": 292,
+      "state": "open",
+      "merged": false,
+      "mergeable": true,
+      "head": {
+        "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "ref": "fix/mcp-resource-routing-history-20261010"
+      },
+      "base": {
+        "sha": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+        "ref": "integration/community-release-20261008"
+      }
+    }
+  },
+  "checks": {
+    "292": {
+      "total": 19,
+      "counts": {
+        "completed/success": 18,
+        "in_progress/none": 1
+      },
+      "failed": []
+    },
+    "308": {
+      "total": 18,
+      "counts": {
+        "queued/none": 18
+      },
+      "failed": []
+    },
+    "310": {
+      "total": 16,
+      "counts": {
+        "queued/none": 16
+      },
+      "failed": []
+    }
+  },
+  "workflow_runs": {
+    "292": [
+      {
+        "id": 38067347022,
+        "name": "Actions Runtime PYPI Release",
+        "head_sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38067347037,
+        "name": "Action Server Build (Unauthenticated)",
+        "head_sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38067347057,
+        "name": "Action Server Tests",
+        "head_sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 38067347087,
+        "name": "Measured Python coverage gate",
+        "head_sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38067347035,
+        "name": "RCC developer toolkit",
+        "head_sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38067347074,
+        "name": "AI audit evidence",
+        "head_sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "308": [
+      {
+        "id": 38089471185,
+        "name": "RCC developer toolkit",
+        "head_sha": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38089471158,
+        "name": "Measured Python coverage gate",
+        "head_sha": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38089471144,
+        "name": "Actions Runtime PYPI Release",
+        "head_sha": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38089471167,
+        "name": "AI audit evidence",
+        "head_sha": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38089471148,
+        "name": "Action Server Tests",
+        "head_sha": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38089471153,
+        "name": "Action Server Build (Unauthenticated)",
+        "head_sha": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+        "status": "queued",
+        "conclusion": null
+      }
+    ],
+    "310": [
+      {
+        "id": 38089058049,
+        "name": "Work Items Release",
+        "head_sha": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38089058129,
+        "name": "RCC developer toolkit",
+        "head_sha": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38089058159,
+        "name": "Action Server Build (Unauthenticated)",
+        "head_sha": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38089058102,
+        "name": "Action Server Tests",
+        "head_sha": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38089058180,
+        "name": "Measured Python coverage gate",
+        "head_sha": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38089058123,
+        "name": "AI audit evidence",
+        "head_sha": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38089058335,
+        "name": "Action Server Frontend tests",
+        "head_sha": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+        "status": "queued",
+        "conclusion": null
+      }
+    ]
+  },
+  "run292": {
+    "run_id": 38067347057,
+    "status": "in_progress",
+    "head_sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+    "updated_at": "2026-10-10T17:03:10Z",
+    "jobs_observed_at_utc": "2026-10-10 22:03:22 UTC",
+    "jobs": [
+      {
+        "id": 114257572069,
+        "name": "build (macos-py3.12-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": []
+      },
+      {
+        "id": 114257572255,
+        "name": "build (ubuntu-py3.12-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": []
+      },
+      {
+        "id": 114257572296,
+        "name": "build (windows-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null,
+        "steps": [
+          {
+            "name": "Test (integration)",
+            "status": "in_progress",
+            "conclusion": null,
+            "number": 17
+          }
+        ]
+      }
+    ]
+  }
+}

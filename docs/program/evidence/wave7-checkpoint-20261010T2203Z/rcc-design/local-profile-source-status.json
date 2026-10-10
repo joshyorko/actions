@@ -1,0 +1,46 @@
+{
+  "schema": "local-source-status/v2",
+  "recorded_at_utc": "2026-10-10 22:07:47 UTC",
+  "artifact_selector_design": {
+    "reviewed_candidate_head": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+    "tree": "7ab1ba4642ee41a6254c9a56e388ea63a1623a9f",
+    "design_receipt": "runtime-artifact-selector-design.json",
+    "source_implementation": "NOT_PRESENT_AT_REVIEWED_PR308_HEAD",
+    "native_acceptance": "NOT_RUN"
+  },
+  "local_detached_profile_implementation": {
+    "branch": "feat/rcc-local-detached-trust-20261010",
+    "reviewed_commit": "9a89126c025620921b67c8addf8a7d8dee6ebbbb",
+    "reviewed_tree": "6ce4c1395a50fad05a87ddb83b76540296632ccb",
+    "reviewed_worktree_state": "DIRTY_CORRECTIONS_IN_PROGRESS_AT_CURRENT_RECONCILIATION",
+    "publication_status": "LOCAL_ONLY_NOT_PUSHED",
+    "test_results": {
+      "status": "owner_reported_for_reviewed_commit_not_current_dirty_worktree",
+      "package_suite": "71 passed, 1 skipped",
+      "callers": "14 passed, 3 skipped"
+    },
+    "independent_source_review": "HOLD",
+    "independent_review_sha256": "8d2653ff16cb49691548239a59dbf12040c31ed0b85a52f1734e0ad18bd737b7",
+    "review_disposition": "generic_hold_only; detailed review remains private",
+    "actual_provider_execution": "NOT_RUN",
+    "actions_issue_134_acceptance": "HOLD"
+  },
+  "rcc_attempt_interpretation": {
+    "attempt": "provider-omitted-capability-attempt-20261010T2150Z",
+    "status": "FAILURE_FOR_RETAINED_B_REUSE",
+    "child_exit_code": 0,
+    "expected_materialization": "a2484ce_5a1fac3_e58fc530",
+    "observed_materialization": "c0cd756_5a1fac3_e58fc530",
+    "cause": "process HOME changed, producing a different HOME-derived controller/materialization scope",
+    "cacheHit": "provider",
+    "network_claim": "cacheHit alone does not establish provider traffic",
+    "content_corruption_claim": false,
+    "upstream_defect_claim": false,
+    "issue_134_acceptance": "HOLD"
+  },
+  "limits": [
+    "No source files copied from the local profile implementation.",
+    "No RCC provider execution was run for that local implementation.",
+    "Owner-reported tests do not substitute for independent source review or actual provider execution."
+  ]
+}

@@ -1,0 +1,1413 @@
+{
+  "schema": "ciwatch-snapshot/v1",
+  "observed_at_utc": "2026-10-10 21:48:19 UTC",
+  "heads": [
+    {
+      "pr": 302,
+      "head": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+      "base": "19380993febaa71238eaee3026b5c808773283ff",
+      "state": "open"
+    },
+    {
+      "pr": 282,
+      "head": "66cc132367be02b05bc08c981b900a68d156cd52",
+      "base": "19380993febaa71238eaee3026b5c808773283ff",
+      "state": "open"
+    },
+    {
+      "pr": 305,
+      "head": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+      "base": "19380993febaa71238eaee3026b5c808773283ff",
+      "state": "open"
+    },
+    {
+      "pr": 306,
+      "head": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "base": "19380993febaa71238eaee3026b5c808773283ff",
+      "state": "open"
+    },
+    {
+      "pr": 307,
+      "head": "729594fc04758502ec2ed985adb428e2863a3bb1",
+      "base": "19380993febaa71238eaee3026b5c808773283ff",
+      "state": "open"
+    },
+    {
+      "pr": 308,
+      "head": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+      "base": "19380993febaa71238eaee3026b5c808773283ff",
+      "state": "open"
+    },
+    {
+      "pr": 309,
+      "head": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+      "base": "19380993febaa71238eaee3026b5c808773283ff",
+      "state": "open"
+    }
+  ],
+  "trees": [
+    {
+      "pr": 302,
+      "head": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+      "tree": "bbc33916748d02e24fe37ce843594a1d8f67067d",
+      "parents": [
+        "e8e8a9db1c762b31fb4c4f625168dc7337235483",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ]
+    },
+    {
+      "pr": 282,
+      "head": "66cc132367be02b05bc08c981b900a68d156cd52",
+      "tree": "ca8685372e67ce07b55f9a830a60134582107873",
+      "parents": [
+        "f74341b03b1e0e554c1b0af8f88cfc0bdce5cdaf",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ]
+    },
+    {
+      "pr": 305,
+      "head": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+      "tree": "ab17a0cf3970273c86d3c4f1d26d3da852c9585f",
+      "parents": [
+        "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ]
+    },
+    {
+      "pr": 306,
+      "head": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "tree": "42f70afb88877335a71e9bc02ad2e85730d69442",
+      "parents": [
+        "1d742149b7341ebc5dd543aa8b7e446f7f9c8b5b",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ]
+    },
+    {
+      "pr": 307,
+      "head": "729594fc04758502ec2ed985adb428e2863a3bb1",
+      "tree": "1db860bf248e83aeedf521044633bbd221902282",
+      "parents": [
+        "bad6a44752438216c47ebab7fac520e174f9649a",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ]
+    },
+    {
+      "pr": 308,
+      "head": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+      "tree": "8471f44cc58f2dbe0226fbcf7d89445f440df2f0",
+      "parents": [
+        "284880ca80bb666de6ef1bd970b493435bb7a8a9",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ]
+    },
+    {
+      "pr": 309,
+      "head": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+      "tree": "9977652bc1e8d21a6e3b4f906031a68ab11b4c40",
+      "parents": [
+        "746030cb2ad8c4d116a45000a18d75ca15433182",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ]
+    }
+  ],
+  "integration": {
+    "sha": "19380993febaa71238eaee3026b5c808773283ff",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "parents": [
+      "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+      "73605934c1c948895410a5abaed6c225a396e038"
+    ]
+  },
+  "checks": {
+    "282": {
+      "total": 19,
+      "counts": {
+        "queued/none": 19
+      },
+      "checks": []
+    },
+    "302": {
+      "total": 18,
+      "counts": {
+        "queued/none": 18
+      },
+      "checks": []
+    },
+    "305": {
+      "total": 14,
+      "counts": {
+        "queued/none": 9,
+        "completed/success": 2,
+        "in_progress/none": 3
+      },
+      "checks": [
+        {
+          "id": 114316868893,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316868808,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316868749,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316868732,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316868725,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "in_progress",
+          "conclusion": null
+        }
+      ]
+    },
+    "306": {
+      "total": 18,
+      "counts": {
+        "queued/none": 16,
+        "in_progress/none": 1,
+        "completed/success": 1
+      },
+      "checks": [
+        {
+          "id": 114316872383,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316872178,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "307": {
+      "total": 23,
+      "counts": {
+        "queued/none": 6,
+        "completed/success": 16,
+        "in_progress/none": 1
+      },
+      "checks": [
+        {
+          "id": 114316417075,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316417048,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416917,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316416895,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416826,
+          "name": "candidate-wheel",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416747,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416649,
+          "name": "coverage",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416637,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416613,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416397,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416393,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416350,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416336,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416331,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416306,
+          "name": "build-wheels (macos-15)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416181,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316416162,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "308": {
+      "total": 19,
+      "counts": {
+        "queued/none": 4,
+        "in_progress/none": 4,
+        "completed/success": 10,
+        "completed/failure": 1
+      },
+      "checks": [
+        {
+          "id": 114316420992,
+          "name": "coverage",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316420766,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316420686,
+          "name": "build-wheels (macos-15)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316420672,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316420632,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316420481,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316420436,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316420304,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316420275,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316420265,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316420240,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316420207,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316420034,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316419980,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 114316419821,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        }
+      ]
+    },
+    "309": {
+      "total": 19,
+      "counts": {
+        "queued/none": 7,
+        "in_progress/none": 2,
+        "completed/success": 10
+      },
+      "checks": [
+        {
+          "id": 114316669192,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316669123,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316668773,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316668768,
+          "name": "build-wheels (macos-15)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316668758,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316668635,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316668621,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316668555,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316668443,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316668440,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316668358,
+          "name": "coverage",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316668216,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "integration": {
+      "total": 34,
+      "counts": {
+        "queued/none": 4,
+        "completed/skipped": 1,
+        "completed/success": 24,
+        "in_progress/none": 5
+      },
+      "checks": [
+        {
+          "id": 114316389882,
+          "name": "publish",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "id": 114316164725,
+          "name": "build (windows-latest)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164641,
+          "name": "build (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164611,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164608,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164601,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316164555,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164534,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164497,
+          "name": "build (macos-latest)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164486,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164480,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164476,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164451,
+          "name": "build (macos-py3.10-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316164438,
+          "name": "build (macos-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164399,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164388,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164342,
+          "name": "action-server-frontend-tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164332,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164314,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316164310,
+          "name": "build-wheels (macos-15)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164307,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164287,
+          "name": "verify",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164284,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164282,
+          "name": "candidate-wheel",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164249,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316164243,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164194,
+          "name": "lighthouse",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316164038,
+          "name": "coverage",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114316164029,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114316163902,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  },
+  "workflow_runs": {
+    "282": [
+      {
+        "id": 38087550158,
+        "name": "Actions Runtime PYPI Release",
+        "head_sha": "66cc132367be02b05bc08c981b900a68d156cd52",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087550167,
+        "name": "Measured Python coverage gate",
+        "head_sha": "66cc132367be02b05bc08c981b900a68d156cd52",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087550206,
+        "name": "Action Server Build (Unauthenticated)",
+        "head_sha": "66cc132367be02b05bc08c981b900a68d156cd52",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087550194,
+        "name": "Action Server Tests",
+        "head_sha": "66cc132367be02b05bc08c981b900a68d156cd52",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087550204,
+        "name": "AI audit evidence",
+        "head_sha": "66cc132367be02b05bc08c981b900a68d156cd52",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087550201,
+        "name": "RCC developer toolkit",
+        "head_sha": "66cc132367be02b05bc08c981b900a68d156cd52",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087550171,
+        "name": "Action Server Frontend tests",
+        "head_sha": "66cc132367be02b05bc08c981b900a68d156cd52",
+        "status": "queued",
+        "conclusion": null
+      }
+    ],
+    "302": [
+      {
+        "id": 38087548195,
+        "name": "RCC developer toolkit",
+        "head_sha": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087548207,
+        "name": "AI audit evidence",
+        "head_sha": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087548202,
+        "name": "Actions Runtime PYPI Release",
+        "head_sha": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087548216,
+        "name": "Measured Python coverage gate",
+        "head_sha": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087548201,
+        "name": "Action Server Tests",
+        "head_sha": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087548199,
+        "name": "Action Server Build (Unauthenticated)",
+        "head_sha": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+        "status": "queued",
+        "conclusion": null
+      }
+    ],
+    "305": [
+      {
+        "id": 38087470091,
+        "name": "Action Server Tests",
+        "head_sha": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087470104,
+        "name": "AI audit evidence",
+        "head_sha": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087470123,
+        "name": "Action Server Build (Unauthenticated)",
+        "head_sha": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087470110,
+        "name": "RCC developer toolkit",
+        "head_sha": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087470089,
+        "name": "Measured Python coverage gate",
+        "head_sha": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+        "status": "queued",
+        "conclusion": null
+      }
+    ],
+    "306": [
+      {
+        "id": 38087471283,
+        "name": "RCC developer toolkit",
+        "head_sha": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087471286,
+        "name": "Measured Python coverage gate",
+        "head_sha": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087471291,
+        "name": "Action Server Build (Unauthenticated)",
+        "head_sha": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087471281,
+        "name": "Action Server Tests",
+        "head_sha": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087471390,
+        "name": "Actions Runtime PYPI Release",
+        "head_sha": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087471288,
+        "name": "AI audit evidence",
+        "head_sha": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "307": [
+      {
+        "id": 38087317881,
+        "name": "Action Server Tests",
+        "head_sha": "729594fc04758502ec2ed985adb428e2863a3bb1",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087317764,
+        "name": "RCC developer toolkit",
+        "head_sha": "729594fc04758502ec2ed985adb428e2863a3bb1",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087317880,
+        "name": "Action Server Build (Unauthenticated)",
+        "head_sha": "729594fc04758502ec2ed985adb428e2863a3bb1",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087317927,
+        "name": "Actions Core Tests",
+        "head_sha": "729594fc04758502ec2ed985adb428e2863a3bb1",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087317863,
+        "name": "AI audit evidence",
+        "head_sha": "729594fc04758502ec2ed985adb428e2863a3bb1",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38087317775,
+        "name": "Actions Runtime PYPI Release",
+        "head_sha": "729594fc04758502ec2ed985adb428e2863a3bb1",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087317857,
+        "name": "Measured Python coverage gate",
+        "head_sha": "729594fc04758502ec2ed985adb428e2863a3bb1",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "308": [
+      {
+        "id": 38087319255,
+        "name": "RCC developer toolkit",
+        "head_sha": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087319375,
+        "name": "Action Server Build (Unauthenticated)",
+        "head_sha": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087319316,
+        "name": "AI audit evidence",
+        "head_sha": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38087319464,
+        "name": "Measured Python coverage gate",
+        "head_sha": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 38087319197,
+        "name": "Action Server Tests",
+        "head_sha": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 38087319352,
+        "name": "Actions Runtime PYPI Release",
+        "head_sha": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+        "status": "queued",
+        "conclusion": null
+      }
+    ],
+    "309": [
+      {
+        "id": 38087402532,
+        "name": "Action Server Tests",
+        "head_sha": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087402470,
+        "name": "Action Server Build (Unauthenticated)",
+        "head_sha": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087402475,
+        "name": "RCC developer toolkit",
+        "head_sha": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087402386,
+        "name": "AI audit evidence",
+        "head_sha": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38087402382,
+        "name": "Measured Python coverage gate",
+        "head_sha": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38087402503,
+        "name": "Actions Runtime PYPI Release",
+        "head_sha": "f23db9606f3801fd21a3e66adc0f9199fd115131",
+        "status": "queued",
+        "conclusion": null
+      }
+    ],
+    "integration": [
+      {
+        "id": 38087231106,
+        "name": "RCC developer toolkit",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087231120,
+        "name": "Action Server Tests",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087231071,
+        "name": "AI audit evidence",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38087231158,
+        "name": "Work Items Release",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38087231108,
+        "name": "Lighthouse CI",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38087231104,
+        "name": "Copilot Setup Steps",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38087231179,
+        "name": "Frontend Build",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38087231140,
+        "name": "HTTP Helper Tests",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38087231125,
+        "name": "Action Server Frontend tests",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 38087231092,
+        "name": "Actions Runtime PYPI Release",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "queued",
+        "conclusion": null
+      },
+      {
+        "id": 38087231088,
+        "name": "Action Server Build (Unauthenticated)",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 38087231079,
+        "name": "Actions Core Tests",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 38087231077,
+        "name": "Measured Python coverage gate",
+        "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+        "status": "in_progress",
+        "conclusion": null
+      }
+    ]
+  },
+  "jobs": {
+    "38087471288": [
+      {
+        "job_id": 114316872178,
+        "run_id": 38087471288,
+        "name": "audit",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087317863": [
+      {
+        "job_id": 114316416613,
+        "run_id": 38087317863,
+        "name": "audit",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087317857": [
+      {
+        "job_id": 114316416649,
+        "run_id": 38087317857,
+        "name": "coverage",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087319316": [
+      {
+        "job_id": 114316420275,
+        "run_id": 38087319316,
+        "name": "audit",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087319464": [
+      {
+        "job_id": 114316420992,
+        "run_id": 38087319464,
+        "name": "coverage",
+        "status": "in_progress",
+        "conclusion": null,
+        "failed_steps": []
+      }
+    ],
+    "38087319197": [
+      {
+        "job_id": 114316419821,
+        "run_id": 38087319197,
+        "name": "build (macos-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null,
+        "failed_steps": []
+      },
+      {
+        "job_id": 114316419980,
+        "run_id": 38087319197,
+        "name": "build (ubuntu-py3.12-devmode)",
+        "status": "completed",
+        "conclusion": "failure",
+        "failed_steps": [
+          {
+            "name": "`inv lint`, potentially fixed with `inv pretty`",
+            "number": 18
+          }
+        ]
+      },
+      {
+        "job_id": 114316420034,
+        "run_id": 38087319197,
+        "name": "build (windows-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null,
+        "failed_steps": []
+      }
+    ],
+    "38087402386": [
+      {
+        "job_id": 114316668216,
+        "run_id": 38087402386,
+        "name": "audit",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087402382": [
+      {
+        "job_id": 114316668358,
+        "run_id": 38087402382,
+        "name": "coverage",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087231071": [
+      {
+        "job_id": 114316163902,
+        "run_id": 38087231071,
+        "name": "audit",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087231158": [
+      {
+        "job_id": 114316164287,
+        "run_id": 38087231158,
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "job_id": 114316389882,
+        "run_id": 38087231158,
+        "name": "publish",
+        "status": "completed",
+        "conclusion": "skipped",
+        "failed_steps": []
+      }
+    ],
+    "38087231108": [
+      {
+        "job_id": 114316164194,
+        "run_id": 38087231108,
+        "name": "lighthouse",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087231104": [
+      {
+        "job_id": 114316164480,
+        "run_id": 38087231104,
+        "name": "copilot-setup-steps",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087231179": [
+      {
+        "job_id": 114316164497,
+        "run_id": 38087231179,
+        "name": "build (macos-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "job_id": 114316164641,
+        "run_id": 38087231179,
+        "name": "build (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "job_id": 114316164725,
+        "run_id": 38087231179,
+        "name": "build (windows-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087231140": [
+      {
+        "job_id": 114316164438,
+        "run_id": 38087231140,
+        "name": "build (macos-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "job_id": 114316164534,
+        "run_id": 38087231140,
+        "name": "build (windows-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "job_id": 114316164611,
+        "run_id": 38087231140,
+        "name": "build (ubuntu-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087231125": [
+      {
+        "job_id": 114316164342,
+        "run_id": 38087231125,
+        "name": "action-server-frontend-tests",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087231088": [
+      {
+        "job_id": 114316164249,
+        "run_id": 38087231088,
+        "name": "Build Action Server binary without credentials (macos-15)",
+        "status": "in_progress",
+        "conclusion": null,
+        "failed_steps": []
+      },
+      {
+        "job_id": 114316164307,
+        "run_id": 38087231088,
+        "name": "Build Action Server binary without credentials (windows-2022)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "job_id": 114316164332,
+        "run_id": 38087231088,
+        "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087231079": [
+      {
+        "job_id": 114316164282,
+        "run_id": 38087231079,
+        "name": "candidate-wheel",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "job_id": 114316164388,
+        "run_id": 38087231079,
+        "name": "build (windows-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "job_id": 114316164451,
+        "run_id": 38087231079,
+        "name": "build (macos-py3.10-devmode)",
+        "status": "in_progress",
+        "conclusion": null,
+        "failed_steps": []
+      },
+      {
+        "job_id": 114316164476,
+        "run_id": 38087231079,
+        "name": "build (ubuntu-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "38087231077": [
+      {
+        "job_id": 114316164038,
+        "run_id": 38087231077,
+        "name": "coverage",
+        "status": "in_progress",
+        "conclusion": null,
+        "failed_steps": []
+      }
+    ],
+    "38067347057": [
+      {
+        "job_id": 114257572069,
+        "run_id": 38067347057,
+        "name": "build (macos-py3.12-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "job_id": 114257572255,
+        "run_id": 38067347057,
+        "name": "build (ubuntu-py3.12-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "job_id": 114257572296,
+        "run_id": 38067347057,
+        "name": "build (windows-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null,
+        "failed_steps": []
+      }
+    ]
+  },
+  "watch_292": {
+    "run_id": 38067347057,
+    "head_sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+    "status": "in_progress",
+    "job_id": 114257572296,
+    "job_name": "build (windows-py3.12-devmode)",
+    "job_status": "in_progress",
+    "conclusion": null
+  }
+}

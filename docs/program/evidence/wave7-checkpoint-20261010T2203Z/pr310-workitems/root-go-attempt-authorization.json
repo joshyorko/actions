@@ -1,0 +1,14 @@
+{
+  "binary": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/go-wrapper-38081495661-attempt01/action-server",
+  "binary_sha256": "2d4913eae246409a7ff1814b01e56a050285cdbaa2312175063467e66b19b36b",
+  "binding": "Go wrapper executable and embedded assets are manifest-bound; test validates extracted frozen tree before Runtime service and checks post-execution immutable tree delta",
+  "deadline_seconds": 300,
+  "observed_at": "2026-10-10T22:06:01.021955+00:00",
+  "precondition": "Root independently accepted the preceding frozen result, receipt 8d4d47879787d09b639426213474623269a38bc1504cd24e35a16b462ba0fc18 and review 0c53c964d0b443f98493df2cf3177fd95986db20cb8429ff250dd9d6def68664; all measured PIDs absent",
+  "runner_bundle_manifest_sha256": "ed1ae041c4082eccd157bf7c8ff72e8e1119cb3eaf39111754cefc138dd21968",
+  "scope": "Exactly one selected packaged Work Items Linux browser test in Go-wrapper mode; source/default assertions unchanged",
+  "source_head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+  "status": "GO_FOR_ONE_GO_WRAPPER_PREFLIGHT_AND_ATTEMPT",
+  "stop_condition": "Preserve failure and state, no retry or rebuild",
+  "timestamp_correction": "Prior ...T2204Z and ...T2207Z directory names are identifiers only. Frozen receipt file mtime was 22:03:15 UTC. Prior root message estimating start at 22:07 UTC was inaccurate; no receipt timestamps are changed."
+}

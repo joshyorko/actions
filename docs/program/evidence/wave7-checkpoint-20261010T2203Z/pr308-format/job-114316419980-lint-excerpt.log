@@ -1,0 +1,19 @@
+2026-10-10T21:47:13.4958652Z [36;1muv run --no-project --python 3.12 inv lint[0m
+2026-10-10T21:47:13.5666040Z shell: /usr/bin/bash -e {0}
+2026-10-10T21:47:13.5666352Z env:
+2026-10-10T21:47:13.5666650Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-10-10T21:47:13.5667039Z ##[endgroup]
+2026-10-10T21:47:14.8547275Z [1;37mpoetry run ruff check src tests[0m
+2026-10-10T21:47:14.8549047Z [1;37mpoetry run ruff format --check --config /home/runner/work/actions/actions/devutils/ruff.toml --exclude=_static_contents.py,_oauth2_config.py src tests[0m
+2026-10-10T21:47:14.8550674Z Would reformat: [1mtests/action_server_tests/test_dakota_rcc_acceptance.py[0m
+2026-10-10T21:47:14.8551570Z 1 file would be reformatted, 293 files already formatted
+2026-10-10T21:47:14.8842477Z ##[error]Process completed with exit code 1.
+2026-10-10T21:47:14.8896141Z ##[group]Run uv run --no-project --python 3.12 inv typecheck
+2026-10-10T21:47:14.8896625Z [36;1muv run --no-project --python 3.12 inv typecheck[0m
+2026-10-10T21:47:14.8966408Z shell: /usr/bin/bash -e {0}
+2026-10-10T21:47:14.8966677Z env:
+2026-10-10T21:47:14.8966946Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-10-10T21:47:14.8967271Z ##[endgroup]
+2026-10-10T21:47:25.3681715Z [1;37mpoetry run mypy --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases src tests[0m
+2026-10-10T21:47:25.3684446Z src/actions/server/_community_expose.py:657:9: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]
+2026-10-10T21:47:27.8862272Z src/actions/server/_actions_run.py:847:25: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]

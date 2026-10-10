@@ -1,0 +1,35 @@
+{
+  "artifact_behavior": "env exec completed in new provider-cache materialization c0cd756_5a1fac3_e58fc530 rather than prebound B materialization a2484ce_5a1fac3_e58fc530; current ready.json now points to c0cd...; no retained-B reuse pass",
+  "attempt_invocation_clock_observed_before_launch_utc": "2026-10-10T21:50:10Z",
+  "attempt_label": "provider-omitted-capability-attempt-20261010T2150Z",
+  "attempt_status": "DIAGNOSTIC_FAILURE_FOR_RETAINED_B_REUSE",
+  "cleanup": {
+    "child_pid": 51049,
+    "cleanup_errors": [],
+    "port_free_after": true,
+    "probe_port": 38593,
+    "probe_self_test_only": true,
+    "probe_socket_closed": true,
+    "probe_thread_stopped": true,
+    "probe_total_requests": 1,
+    "process_group_gone": true,
+    "reaped": true,
+    "returncode": 0
+  },
+  "exec_receipt_file_mtime_utc": "2026-10-10T21:50:25.436926709Z",
+  "files_sha256": {
+    "final-receipt.json": "149cb407f08abb6d1e2babbbb7ec616863472e8d46517ca1cb5ba44e83c5d2bb",
+    "post-attempt-readonly-observation.json": "fd4c765654efb71d204838d60290612d0c2647fc98106e3324e6f0b622b9bd34",
+    "rcc-exec-receipt.json": "20e081c7996e1a5d60d05f81986cc55f3b93cc2f509cbd028b5928dc7228801a",
+    "stderr.log": "cbe8820e70679588348fffddf0c352be0e8498e1ae9fec3832e757fc65143398",
+    "stdout.log": "5627ac010ebbabcb45e43049ed0dea147e04142360457429697683fb56f45d5a"
+  },
+  "final_receipt_file_mtime_utc": "2026-10-10T21:50:25.492928152Z",
+  "launch_command": "/usr/bin/python3.13 -B <frozen reviewed runner> --task-root <unique attempt directory> --receipt <attempt directory>/final-receipt.json",
+  "retry_or_restore": "none",
+  "review_receipt_sha256": "12af28b8592a2965283464be288e2305495a4dfcf9bebba8b47f23019f9f15c8",
+  "reviewed_manifest_sha256": "eec00cb015503250520d69e8c3ee16cb54d2bb498820a268fbb5b07ff5ce8fc4",
+  "reviewed_runner_sha256": "6bade4b40f74871368709c201b557d5284325f7a20b0c99f0038cf3a3cd35e39",
+  "runner_duration_ms": 8749,
+  "schema_version": 1
+}

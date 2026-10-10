@@ -1,0 +1,118 @@
+{
+  "artifact_candidate": {
+    "embedded_files_sha256": "a8f53386f2a0572fb306b293998a33641a5474700d53708fa666133ef7c90c6d",
+    "executable": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server/action-server",
+    "executable_sha256": "08aa825cb3b6bc8ec0d3747f2323de89d18f5df42bc78d72c934579648e0a85e",
+    "full_staged_package_root": "/workspace/work/actions-mk3-evidence/pr304-browser-security/staged/linux-frozen-38081495661-attempt01/dist/action-server",
+    "manifest_path": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/native-artifact-manifest-856c0a47.json",
+    "manifest_sha256": "738964dda8ccf202db4ce9dd3537abd5666badfe021ba9ecde0a2bb7850d5494",
+    "manifest_source_sha": "856c0a47e27dda373d4e44aea2a5a26a1db287d0",
+    "package_tree_sha256": "534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488",
+    "runtime_kind": "Linux x86_64 frozen",
+    "source_binding_limit": "The candidate artifact was built from the previously reviewed source SHA. This checkout differs only in the three test/guide files listed above; relevant Runtime, frontend source, lock, and build inputs are unchanged. This is not a claim that the complete checkout trees are identical.",
+    "workflow_run": "38081495661"
+  },
+  "change": {
+    "authorization_denial_receipt_semantics": {
+      "attempted_failure": "remove from states_not_run, add states_failed entry, preserve browser_stages FAIL receipt",
+      "before_attempt": "authorization_denial_ui is in states_not_run",
+      "normal_stage_pass": "leave authorization_denial_ui in states_not_run",
+      "observed_backend_evidence": {
+        "body": "Invalid or missing API Key",
+        "http_status": 403
+      },
+      "pass": "remove from both states_not_run and states_failed"
+    },
+    "not_claimed": [
+      "native packaged browser execution",
+      "full Work Items issue #208 acceptance",
+      "actual crash recovery",
+      "missing-support or generic HTTP 500 behavior",
+      "accessibility acceptance",
+      "non-Chromium acceptance",
+      "actual ChatGPT acceptance",
+      "production authorization or deployment"
+    ],
+    "scope": [
+      "test harness",
+      "receipt assertions",
+      "Work Items guide"
+    ],
+    "upstream_disposition": "No confirmed defect; no issue or external report filed."
+  },
+  "checkout": {
+    "base_commit": "19380993",
+    "base_tree": "a8fe00",
+    "branch": "test/workitems-ui-errors-20261010",
+    "clean": true,
+    "difference_from_previous_artifact_source": [
+      "action_server/frontend/scripts/native-workitems-ui-acceptance.mjs",
+      "action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py",
+      "docs/skills/work-items.md"
+    ],
+    "head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+    "path": "/workspace/work/actions-mk3-workitems-ui-errors",
+    "previous_artifact_review_commit": "73605934c1c948895410a5abaed6c225a396e038",
+    "previous_artifact_review_tree": "a8fe00",
+    "runtime_build_inputs_unchanged": [
+      "action_server/src",
+      "actions/src",
+      "actions-http-helper/src",
+      "common/src",
+      "work-items/src",
+      "action_server/frontend/src",
+      "frontend package manifests and locks",
+      "go-wrapper",
+      "pyproject and lock files"
+    ],
+    "tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5"
+  },
+  "kind": "work-items-authorization-denial-ui-checkpoint-amendment",
+  "lightweight_checks": {
+    "diff_check": "PASS",
+    "failed_checks_preserved": [
+      {
+        "attempt": "Initial RCC task test before local RCC file was staged",
+        "disposition": "Earlier setup failure retained; subsequent check used exact local RCC file SHA 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428.",
+        "log": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/pytest-check.log"
+      },
+      {
+        "attempt": "RCC shell PATH ruff invocation",
+        "disposition": "Failed with command not found; prepared venv ruff invocation succeeded and is retained separately.",
+        "log": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/revision3-ruff.log"
+      },
+      {
+        "attempt": "RCC python -m ruff invocation",
+        "disposition": "Failed because RCC task Python has no ruff module; prepared venv ruff invocation succeeded and is retained separately.",
+        "log": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/revision3-ruff-python.log"
+      }
+    ],
+    "focused_pytest": {
+      "log": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/revision3-pytest.log",
+      "result": "PASS",
+      "sha256": "65c0953807427b5febcec9e924ee910f6cbee8984ec08c3210a610c893f1af9f",
+      "summary": "5 passed, 26 deselected in 1.10s"
+    },
+    "native_or_browser_tests_selected": false,
+    "node_syntax": {
+      "binary": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+      "binary_sha256": "924df2dac4fa23bbadafebae3423037798cf921a46b4542ed69c28488b8963dd",
+      "log": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/revision3-node.log",
+      "result": "PASS",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "version": "v20.19.3"
+    },
+    "ruff": {
+      "command": "RCC no-build task gateway invoking prepared action-server venv ruff",
+      "log": "/workspace/work/actions-mk3-evidence/workitems-ui-errors/revision3-ruff-prepared.log",
+      "result": "PASS",
+      "sha256": "6fb724a9f637a80c3ea62e26a8c29dfa972f1065c7f8cbd2d7c93509e340499b"
+    }
+  },
+  "no_browser_launch": true,
+  "no_native_executable_launch": true,
+  "no_service_execution": true,
+  "process_cleanup": "No task-owned service/browser/native process was started in this checkpoint.",
+  "schema_version": 1,
+  "status": "SOURCE_AND_LIGHTWEIGHT_CHECKS_PASS__NATIVE_EXECUTION_PENDING"
+}

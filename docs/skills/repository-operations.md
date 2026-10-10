@@ -1669,6 +1669,30 @@ fresh invocation-specific directory. Keep retained build claims separate from
 measured executable/wheel hashes and require final artifact checks before a
 PASS receipt; an interrupted check cannot admit earlier successful cases.
 
+For pinned RCC materialization comparisons, bind both the process `HOME` and
+`ROBOCORP_HOME` for each consumer across acquire, exec, lazy warm, reload, and
+restart, and record `ACTIONS_HOME` separately for Runtime worker isolation. RCC
+derives part of its controller/materialization scope from `HOME`; changing only
+that identity can cause a local cached Artifact to be materialized into a new
+scope and replace `ready.json`. Keep temporary capture directories separate
+without changing either consumer identity. A successful child and valid receipt
+in a new materialization do not prove reuse of the previously retained one.
+
+Treat RCC's generic `cacheHit` value as a materialization result, not a network
+trace. The value `provider` alone does not prove that an HTTP provider was
+contacted; bind the expected digest, materialization ID and path, and use
+bounded request observations or an explicit network-isolation check for network
+claims. Preserve command exit status separately from the acceptance gate: a
+child can exit zero while the retained-materialization identity check fails.
+
+When a required archive is embedded in a native wrapper, bind the complete
+wrapper digest and size, derive the archive's exact bounded byte range from its
+archive structure, and require a unique range with the expected length and
+digest. Stage and read back those exact bytes; do not rebuild or recompress the
+archive to make a fixture. Record range derivation and byte-readback evidence
+separately from native execution: staging exact bytes does not establish that
+the runtime or browser test launched.
+
 When Poetry is unavailable, report that limitation. A temporary `uv` environment may provide diagnostic evidence, but it does not replace the package's Poetry/CI release gate. When Docker is available, rebuild and use the repository Dev Container image for the Poetry release path rather than treating a host-tool fallback as terminal evidence.
 
 A Dev Container counts as release evidence only after its repository-owned configuration builds headlessly and the declared in-container Poetry gate passes. A mutable image reference or successful editor attachment alone is not verification. `.devcontainer/bin/smoke` is strict-shell, rejects root, checks the pinned Python 3.12, Node 22, uv 0.12.1, and Poetry 2.1.1 versions, then runs bootstrap and the Work Items release gate by repository-relative absolute path. uv 0.12.1 adds a platform suffix to its version output, so smoke compares its `uv 0.12.1` prefix fields exactly.

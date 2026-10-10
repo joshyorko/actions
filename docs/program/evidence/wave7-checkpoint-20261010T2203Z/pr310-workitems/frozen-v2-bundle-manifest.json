@@ -1,0 +1,36 @@
+{
+  "bundle": "work-items-native-ui-runner-frozen-v2",
+  "contract_source_sha256": "168f2d606866a0b6167da2dd21f70fa48c7a039ea814f0925123b54d2f55e843",
+  "created_by_exclusive_file_creation": true,
+  "files": {
+    "correction-note.json": {
+      "sha256": "963468d6e2cc93dcea91f064e0957b29b1d15bcd23e7d5d218f1e13c2a754759",
+      "size_bytes": 1260
+    },
+    "launch_with_package_python.sh": {
+      "sha256": "a968dd25f3c1b524eb90818ec335f4bf74f7007f3787b006c479dce834da57da",
+      "size_bytes": 389
+    },
+    "run_workitems_native_ui_acceptance.py": {
+      "sha256": "0959fc3e1f3d506c7ebe904efb01fe203d5a7fbe05b06ddcfdf83f19382f2553",
+      "size_bytes": 19236
+    },
+    "runner-contract-v2.json": {
+      "sha256": "168f2d606866a0b6167da2dd21f70fa48c7a039ea814f0925123b54d2f55e843",
+      "size_bytes": 6728
+    },
+    "workitems_capture_plugin.py": {
+      "sha256": "fd2a8f94b86e920fe73dbf6c65406febcf71348b2bdbcceedb00d02d60d534d6",
+      "size_bytes": 4079
+    }
+  },
+  "no_execution": {
+    "browser": false,
+    "native_runtime": false,
+    "rcc_preflight": false,
+    "service": false
+  },
+  "schema_version": 1,
+  "status": "FROZEN_EXCLUSIVE_COPIES_HASH_VERIFIED__ROOT_FOCUSED_REVIEW_PENDING",
+  "v1_bundle_manifest_sha256": "63361e3955ec7f125210639079b77dab8757234b4119c351f4dd46c4ec20259b"
+}

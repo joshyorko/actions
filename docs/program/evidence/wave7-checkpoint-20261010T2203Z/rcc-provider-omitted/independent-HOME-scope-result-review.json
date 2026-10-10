@@ -1,0 +1,186 @@
+{
+  "schema_version": 1,
+  "status": "Retained-B warm-reuse objective FAIL; narrower provider/carrier-omitted unsigned execution PASS in new HOME-derived scope;134HOLD; no RCC defect established",
+  "actual_inputs": {
+    "final-receipt.json": {
+      "sha256": "149cb407f08abb6d1e2babbbb7ec616863472e8d46517ca1cb5ba44e83c5d2bb",
+      "bytes": 10220,
+      "owned_regular_single_link": true
+    },
+    "rcc-exec-receipt.json": {
+      "sha256": "20e081c7996e1a5d60d05f81986cc55f3b93cc2f509cbd028b5928dc7228801a",
+      "bytes": 55152,
+      "owned_regular_single_link": true
+    },
+    "stdout.log": {
+      "sha256": "5627ac010ebbabcb45e43049ed0dea147e04142360457429697683fb56f45d5a",
+      "bytes": 756,
+      "owned_regular_single_link": true
+    },
+    "stderr.log": {
+      "sha256": "cbe8820e70679588348fffddf0c352be0e8498e1ae9fec3832e757fc65143398",
+      "bytes": 103,
+      "owned_regular_single_link": true
+    },
+    "post-attempt-readonly-observation.json": {
+      "sha256": "fd4c765654efb71d204838d60290612d0c2647fc98106e3324e6f0b622b9bd34",
+      "bytes": 472544,
+      "owned_regular_single_link": true
+    },
+    "attempt-timeline.json": {
+      "sha256": "b33540be4066408e85e14c47d9f8b0961ad738e7abf8aaf76d50f82c9845258a",
+      "bytes": 1955,
+      "owned_regular_single_link": true
+    }
+  },
+  "runner_review": {
+    "runner_sha256": "6bade4b40f74871368709c201b557d5284325f7a20b0c99f0038cf3a3cd35e39",
+    "readiness_review_sha256": "12af28b8592a2965283464be288e2305495a4dfcf9bebba8b47f23019f9f15c8",
+    "source_head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "source_tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  },
+  "native_result": {
+    "artifactDigest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+    "materializationId": "c0cd756_5a1fac3_e58fc530",
+    "path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/c0cd756_5a1fac3_e58fc530",
+    "cacheHit": "provider",
+    "exitCode": 0,
+    "leaseId": "c3a9c2ceb426ded1f4a64338e7a02d06",
+    "status": "completed"
+  },
+  "verification": {
+    "artifactDigest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+    "policyMode": "permissive-local",
+    "valid": true,
+    "code": "valid",
+    "verifiedAt": "2026-10-10T21:50:25Z"
+  },
+  "child_identity": {
+    "core_dist_info": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/c0cd756_5a1fac3_e58fc530/lib/python3.12/site-packages/actions_core-1.0.2.dist-info",
+    "core_version": "1.0.2",
+    "cwd": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/c0cd756_5a1fac3_e58fc530",
+    "executable": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/c0cd756_5a1fac3_e58fc530/bin/python3.12",
+    "prefix": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/c0cd756_5a1fac3_e58fc530",
+    "version": [
+      3,
+      12,
+      15
+    ]
+  },
+  "harness_failure": {
+    "status": "DIAGNOSTIC_FAILURE",
+    "fatal": "ValueError: retained B ready or manifest differs from reviewed identity",
+    "duration_ms": 8749,
+    "native_duration_ms": 8544,
+    "failed_checks": {
+      "actions_core_1_0_2": true,
+      "core_metadata": false,
+      "cwd": false,
+      "executable": false,
+      "passed": false,
+      "prefix": false,
+      "python_3_12_15": true
+    },
+    "ready_replaced_by_RCC": true,
+    "post_readback_retained": true,
+    "state_restore_retry": "none"
+  },
+  "HOME_derivation": {
+    "old_home": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-tmp/home",
+    "new_home": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/provider-omitted-capability-attempt-20261010T2150Z/tmp/home",
+    "same_ROBOCORP_HOME": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home",
+    "old_prefix": "a2484ce",
+    "new_prefix": "c0cd756",
+    "controller_hash_unchanged": "5a1fac3",
+    "artifact_tag_hash_unchanged": "e58fc530",
+    "method": "Independent pure-stdlib standard SipHash24 computation using pinned keys and exact recorded/path-derived HOME; standard empty-message testvector726fdb47dd0e0e31 verified; both prefixes match exactly",
+    "source_refs": [
+      {
+        "file": "htfs/library.go",
+        "line": 342,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/htfs/library.go#L342",
+        "sha256": "29a9771414b8ebbd31b687838ba62cccf4718f1e7f029e16720397ae9784e86d",
+        "meaning": "ControllerSpaceName prefixes UserHomeIdentity, controller Sipit hash and artifact tag Sipit hash"
+      },
+      {
+        "file": "common/variables.go",
+        "line": 401,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/common/variables.go#L401",
+        "sha256": "8ce23972affbbca0006436a6e35c03d7c05cf26bac41f163e62cbf4b7410ee6f",
+        "meaning": "SymbolicUserIdentity hashes os.UserHomeDir with keys9007799254740993/2147487647 and first7 hex chars"
+      },
+      {
+        "file": "common/algorithms.go",
+        "line": 60,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/common/algorithms.go#L60",
+        "sha256": "2ba6091fd652b0f95eaf33d709e40c82beaac5c978198db7e62eda9563850ad0",
+        "meaning": "Siphash is dchest/siphash.Hash (standard SipHash24)"
+      },
+      {
+        "file": "environmentlifecycle/materialize.go",
+        "line": 309,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/materialize.go#L309",
+        "sha256": "e633b399951bc0c7336fcd147a0fafaea79f7a24d51d448d405e13dc927b2833",
+        "meaning": "materializationID binds ControllerSpaceName(controller,D)"
+      },
+      {
+        "file": "environmentlifecycle/materialize.go",
+        "line": 313,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/materialize.go#L313",
+        "sha256": "e633b399951bc0c7336fcd147a0fafaea79f7a24d51d448d405e13dc927b2833",
+        "meaning": "warmMaterialization compares exact current worker target against readyrecord"
+      },
+      {
+        "file": "environmentlifecycle/materialize.go",
+        "line": 246,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/materialize.go#L246",
+        "sha256": "e633b399951bc0c7336fcd147a0fafaea79f7a24d51d448d405e13dc927b2833",
+        "meaning": "local manifest but target mismatch restores verified local content and materializes"
+      },
+      {
+        "file": "environmentlifecycle/materialize.go",
+        "line": 293,
+        "url": "https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/materialize.go#L293",
+        "sha256": "e633b399951bc0c7336fcd147a0fafaea79f7a24d51d448d405e13dc927b2833",
+        "meaning": "materialize returns CacheProvider regardless of local restoration path"
+      }
+    ]
+  },
+  "diagnosis": [
+    "The harness preserved ROBOCORP_HOME but changed OS HOME between originalB acquisition and probe execution. Pinned target identity depends on BOTH. The new controller space is expected under this change; warmMaterialization correctly rejects a ready record targeting a248 when current scope is c0cd",
+    "Native RCC reevaluated local permissive trust, restored materialization from local cached artifact data and completed the controlled Python/Core1.0.2 identity probe with valid receipt/lease at exactD. This is a narrower supported execution capability, not retained materialization reuse",
+    "CacheProvider is the generic materialize result even in the local fallback branch. cacheHit=provider does not identify HTTP source or prove provider traffic. Passive port38593 observed onlyself-test; no claim of universal network zero",
+    "Prior diagnosis statement that OS HOME does not redirect explicit RCC artifact/trust HOME remains true for store location but omitted its separate materialization identity effect. Earlier independent runner readiness also failed to compare phase HOME; this additive finding corrects that missed experiment-control assumption without overwriting historical GO/receipts",
+    "Neither controller scope change nor local restoration demonstrates a RCC warm-reuse defect. Existing trust negative stays expected; actual134 positive gates remain unchanged and blocked"
+  ],
+  "cleanup": {
+    "owner": {
+      "cleanup_errors": [],
+      "duration_ms": 8544,
+      "pgid": 51049,
+      "pid": 51049,
+      "process_group_gone": true,
+      "reaped": true,
+      "returncode": 0,
+      "run_error": null,
+      "spawn_error": null,
+      "timed_out": false
+    },
+    "probe": {
+      "probe_shutdown_thread_stopped": true,
+      "probe_socket_closed": true,
+      "probe_thread_stopped": true,
+      "probe_total_requests": 1
+    },
+    "independent_live_readback": "ps -o pid=,stat=,args= -p51049 no rows; ss -ltn sport=:38593 header only",
+    "scope": "owned harness group/threads/socket plus exact PID/listener checks; not production Runtime cleanup or all host process/network audit"
+  },
+  "next_design": "Stop standalone capability executions. Canonical controlled local-detached profile gate must bind stable OS HOME as well as ROBOCORP_HOME per consumer across acquire/exec/lazy warm/reload/restart; independent consumerA/B may have different explicit identities. Keep temporary directories/cwd separate without changing that consumer HOME identity. Record exact manifest/materialization/controller/HOME bindings before and after. Do not restore ready records or point old identity at new state; new actual positive gates must operate through normal production adapter path under declared profile.",
+  "canonical_doc_proposal": "Pinned RCC18.19.3 materialization identity includes an OS HOME-derived prefix as well as controller and artifact digest. Keep HOME and ROBOCORP_HOME stable for each consumer across acquire, exec and warm restart; changing only temporary/capture directories must not change HOME. A different HOME can cause local cached-content rematerialization and replace ready.json. The generic cacheHit=provider label alone does not prove HTTP access. Preserve the actual valid new-materialization receipt separately from a failed exact warm-reuse objective, and require observed zero-network positive gates under the intended stable consumer/profile.",
+  "commands": [
+    "Read/hash/size/ownership six exact actual files and verify timeline artifact hashbindings; parse complete RCC55152-byte receipt and bounded756/103-byte logs",
+    "Read pinned source htfs/library, common/variables/algorithms, materialize local/warm branches; independently compute both HOME hashes offline with SipHash testvector",
+    "Check exact child51049 and port38593 absence; no RCC/provider/nativeexecution/restore/retry/install/sourcepatch/publicreport"
+  ],
+  "upstream_disposition": "none; expected HOME-derived controller scope/local rematerialization, no novel confirmed maintained defect; earlier relevant open/closed trust/warm dedup retained in pinned-failure diagnosis-v2"
+}

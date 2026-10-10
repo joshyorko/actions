@@ -1,0 +1,48 @@
+{
+  "schema": "ciwatch-receipts/v1",
+  "watch_started_at_utc": "2026-10-10 21:47:25 UTC",
+  "stopped_at_utc": "2026-10-10 21:54:32 UTC",
+  "scope": "read-only GitHub Actions CI observation; exact PR heads and integration 19380993febaa71238eaee3026b5c808773283ff",
+  "receipts": [
+    {
+      "path": "snapshot-01-20261010T214819Z.json",
+      "sha256": "c444c2d6d135e3b6197312dc446ef904ee95e48d3af5b18b5c49c9f0ad405e55",
+      "observed_at_utc": "2026-10-10 21:48:19 UTC"
+    },
+    {
+      "path": "snapshot-02-20261010T215211Z.json",
+      "sha256": "9fac867a3679706001c3b8937574f735b52dbb03a85aab57b1871211a9a477e6",
+      "observed_at_utc": "2026-10-10 21:52:11 UTC"
+    },
+    {
+      "path": "snapshot-03-20261010T215425Z.json",
+      "sha256": "9c515ce0f355357bdb0c1ebb00d78a8d3692d83cfffaa9fcc9adb96af935960f",
+      "observed_at_utc": "2026-10-10 21:54:32 UTC"
+    }
+  ],
+  "result": {
+    "bound_pr_heads_unchanged": true,
+    "full_head_green": false,
+    "confirmed_failure": {
+      "pr": 308,
+      "head": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+      "run_id": 38087319197,
+      "job_id": 114316419980,
+      "job": "build (ubuntu-py3.12-devmode)",
+      "step": "inv lint",
+      "conclusion": "failure",
+      "completed_at": "2026-10-10T21:47:33Z"
+    },
+    "watch_292": {
+      "run_id": 38067347057,
+      "head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "job_id": 114257572296,
+      "status": "in_progress",
+      "last_observed_step": "Test (integration)",
+      "other_jobs": "macOS and Ubuntu success"
+    },
+    "other_failed_pr_checks": 0,
+    "canonical_doc_delta_proposed": false,
+    "upstream_disposition": "none; no confirmed dependency defect"
+  }
+}

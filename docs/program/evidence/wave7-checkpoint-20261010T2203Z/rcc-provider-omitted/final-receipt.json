@@ -1,0 +1,269 @@
+{
+  "artifact": {
+    "digest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+    "materialization_id": "a2484ce_5a1fac3_e58fc530",
+    "path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530"
+  },
+  "child": {
+    "cleanup_errors": [],
+    "duration_ms": 8544,
+    "pgid": 51049,
+    "pid": 51049,
+    "process_group_gone": true,
+    "reaped": true,
+    "returncode": 0,
+    "run_error": null,
+    "spawn_error": null,
+    "timed_out": false
+  },
+  "cleanup": {
+    "probe_shutdown_thread_stopped": true,
+    "probe_socket_closed": true,
+    "probe_thread_stopped": true,
+    "probe_total_requests": 1
+  },
+  "command": {
+    "argv": [
+      "/workspace/actions-cloud/bin/rcc",
+      "env",
+      "exec",
+      "--artifact",
+      "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+      "--permissive-local",
+      "--inherit-streams",
+      "--receipt-file",
+      "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/provider-omitted-capability-attempt-20261010T2150Z/rcc-exec-receipt.json",
+      "--",
+      "python",
+      "-c",
+      "import importlib.metadata as m,json,os,sys; d=m.distribution('actions-core'); print('RCC_CAPABILITY_IDENTITY='+json.dumps({'executable':sys.executable,'prefix':sys.prefix,'version':list(sys.version_info[:3]),'cwd':os.getcwd(),'core_version':d.version,'core_dist_info':str(d._path.resolve())},sort_keys=True))"
+    ],
+    "child_working_directory_expected": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530",
+    "invocation_cwd": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530",
+    "provider_argument_present": false,
+    "trust_carrier_argument_present": false
+  },
+  "duration_ms": 8749,
+  "exec_result": {
+    "checks": {
+      "artifactDigest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+      "cacheHit": "provider",
+      "exitCode": 0,
+      "lease_id_present": true,
+      "materializationId": "c0cd756_5a1fac3_e58fc530",
+      "passed": false,
+      "path_matches_B": false,
+      "status": "completed",
+      "verification_valid": true
+    },
+    "identity": {
+      "core_dist_info": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/c0cd756_5a1fac3_e58fc530/lib/python3.12/site-packages/actions_core-1.0.2.dist-info",
+      "core_version": "1.0.2",
+      "cwd": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/c0cd756_5a1fac3_e58fc530",
+      "executable": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/c0cd756_5a1fac3_e58fc530/bin/python3.12",
+      "prefix": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/c0cd756_5a1fac3_e58fc530",
+      "version": [
+        3,
+        12,
+        15
+      ]
+    },
+    "identity_checks": {
+      "actions_core_1_0_2": true,
+      "core_metadata": false,
+      "cwd": false,
+      "executable": false,
+      "passed": false,
+      "prefix": false,
+      "python_3_12_15": true
+    },
+    "passed": false,
+    "probe_after": {
+      "events": [
+        {
+          "method": "GET",
+          "sequence": 1,
+          "status": 503
+        }
+      ],
+      "total": 1,
+      "truncated": 0
+    },
+    "probe_zero_after_self_test": true,
+    "receipt": {
+      "complete_json": true,
+      "exists": true,
+      "sha256": "20e081c7996e1a5d60d05f81986cc55f3b93cc2f509cbd028b5928dc7228801a",
+      "size_bytes": 55152
+    },
+    "streams": {
+      "stderr": {
+        "captured_bytes": 103,
+        "full_stream": true,
+        "full_stream_sha256": "cbe8820e70679588348fffddf0c352be0e8498e1ae9fec3832e757fc65143398",
+        "path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/provider-omitted-capability-attempt-20261010T2150Z/stderr.log",
+        "source_bytes": 103,
+        "stored_sanitized_sha256": "cbe8820e70679588348fffddf0c352be0e8498e1ae9fec3832e757fc65143398"
+      },
+      "stdout": {
+        "captured_bytes": 756,
+        "full_stream": true,
+        "full_stream_sha256": "5627ac010ebbabcb45e43049ed0dea147e04142360457429697683fb56f45d5a",
+        "path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/provider-omitted-capability-attempt-20261010T2150Z/stdout.log",
+        "source_bytes": 756,
+        "stored_sanitized_sha256": "5627ac010ebbabcb45e43049ed0dea147e04142360457429697683fb56f45d5a"
+      }
+    }
+  },
+  "fatal": "ValueError: retained B ready or manifest differs from reviewed identity",
+  "issue_134_acceptance": false,
+  "launcher": {
+    "path": "/usr/bin/python3.13",
+    "script": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/provider-omitted-capability-runner-bundle-20261010T2154Z/prepare_provider_omitted_capability_probe.py",
+    "script_sha256": "6bade4b40f74871368709c201b557d5284325f7a20b0c99f0038cf3a3cd35e39",
+    "sha256": "17b78e0a93175e86f9ac03141924fd7a7f0c0c52e66b34bfa0de20ffef989df1",
+    "version": [
+      3,
+      13,
+      5
+    ]
+  },
+  "limits": {
+    "child_seconds": 25.0,
+    "cleanup_reserve_seconds": 20.0,
+    "overall_seconds": 120.0,
+    "receipt_cap_bytes": 1048576,
+    "stream_cap_bytes": 32768
+  },
+  "network_variables_forwarded": {
+    "ca_trust": [
+      "SSL_CERT_FILE",
+      "REQUESTS_CA_BUNDLE",
+      "NODE_EXTRA_CA_CERTS"
+    ],
+    "no_proxy": [
+      "NO_PROXY",
+      "no_proxy"
+    ],
+    "proxy": [
+      "HTTP_PROXY",
+      "HTTPS_PROXY",
+      "http_proxy",
+      "https_proxy"
+    ]
+  },
+  "probe": {
+    "baseline": {
+      "events": [
+        {
+          "method": "GET",
+          "sequence": 1,
+          "status": 503
+        }
+      ],
+      "total": 1,
+      "truncated": 0
+    },
+    "final": {
+      "events": [
+        {
+          "method": "GET",
+          "sequence": 1,
+          "status": 503
+        }
+      ],
+      "total": 1,
+      "truncated": 0
+    },
+    "host": "127.0.0.1",
+    "port": 38593,
+    "self_test": {
+      "host": "127.0.0.1",
+      "port": 38593,
+      "status": 503
+    },
+    "url_not_passed_to_RCC": true
+  },
+  "production_trust_acceptance": false,
+  "review_inputs": {
+    "gate_runner_sha256": "29eb560a24d300a1783ef44008eb165efa67d7fc5823878d34c039a26ae6ab8c",
+    "pinned_diagnosis_v2_sha256": "6ede7e31fd799201f60e25e4ce2e051839a28d56cf33ee8e0552cf0d384c6753",
+    "process_helper_sha256": "f4595ac56e6876760affe325a0551184b3dcb7f9564126941b2bef082c68df89"
+  },
+  "schema_version": 1,
+  "scope": "unsigned permissive-local RCC primitive only; omit provider and trust carrier",
+  "source_and_tool": {
+    "clean": true,
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  },
+  "source_expected": {
+    "head": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f"
+  },
+  "state_after": null,
+  "state_after_error": "ValueError: retained B ready or manifest differs from reviewed identity",
+  "state_before": {
+    "manifest": {
+      "canonical_artifact_digest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+      "sha256": "7d65e2b993743ff775230b72708e6c3ba73c4af86faa104393ed690875e403ee",
+      "size_bytes": 2175
+    },
+    "materialization": {
+      "id": "a2484ce_5a1fac3_e58fc530",
+      "path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530"
+    },
+    "metadata_objects": {
+      "catalog": {
+        "digest": "sha256:8934eadb8ef0081b951f81f65bd661c8649fbd0b136a3f5b8a4f365bff2ded61",
+        "sha256": "8934eadb8ef0081b951f81f65bd661c8649fbd0b136a3f5b8a4f365bff2ded61",
+        "size": 692107
+      },
+      "legacyBlueprint": {
+        "digest": "sha256:7acb91fd13d10fb88a00813df73d79bd1c8f902ccd4bedc33858c188272964aa",
+        "sha256": "7acb91fd13d10fb88a00813df73d79bd1c8f902ccd4bedc33858c188272964aa",
+        "size": 85
+      },
+      "objectIndex": {
+        "digest": "sha256:1f8b3d07b988905b9a4c49c320955c31c29e3b763cb8cd7f5dc7738f6ea77e8b",
+        "sha256": "1f8b3d07b988905b9a4c49c320955c31c29e3b763cb8cd7f5dc7738f6ea77e8b",
+        "size": 1469706
+      },
+      "specification": {
+        "digest": "sha256:d8c7ad5e4aa8b82a36ae0ce35dafd8d2949183e22a8316e46abb67a1d3c5d95d",
+        "sha256": "d8c7ad5e4aa8b82a36ae0ce35dafd8d2949183e22a8316e46abb67a1d3c5d95d",
+        "size": 1112
+      }
+    },
+    "python": {
+      "alias_target": "python3.12",
+      "sha256": "793024e6cfb0b81cbf615186396daa54604f87dccaee99aceb87962ba62fa53e",
+      "target_path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530/bin/python3.12"
+    },
+    "ready": {
+      "artifactDigest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+      "materializationId": "a2484ce_5a1fac3_e58fc530",
+      "path": "/workspace/work/actions-mk3-evidence/rcc-warm-readiness/attempt-20261010T2101Z/task-work/consumer-home/holotree/a2484ce_5a1fac3_e58fc530",
+      "sha256": "ea6c954caab0bf73a69d05e07396441e680f68bdd0fc48efda85aba24e482675",
+      "state": "ready"
+    },
+    "references": {
+      "manifest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+      "protected_count": 5459,
+      "sha256": "41955394e7219761308ca734f38a2c980b7c41418f687bcb7a8dbdd35b7385da",
+      "state": "live"
+    },
+    "verification": {
+      "artifactDigest": "sha256:d78a6bdc62558ab7d8b97df55fb3071eefe1c497bb8afe769490d8e324e86d16",
+      "code": "invalid",
+      "sha256": "9980a5e95319db43878c3627f893195055a782ed49696ec4127c9518579ce965",
+      "valid": false,
+      "verifiedAt": "2026-10-10T21:22:11Z"
+    },
+    "verified_content": {
+      "exists": false
+    }
+  },
+  "status": "DIAGNOSTIC_FAILURE"
+}

@@ -1,0 +1,20 @@
+F
+=================================== FAILURES ===================================
+___ test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery ____
+tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py:1418: in test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery
+    ) = packaged_runtime_identity()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py:558: in packaged_runtime_identity
+    require_measured_digest(
+tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py:429: in require_measured_digest
+    assert recorded == measured, f"manifest field {field} does not match build input"
+E   AssertionError: manifest field frozen_package_tree_sha256 does not match build input
+E   Failed: assert recorded == measured
+E   Variables:
+E     recorded = '534ffcf19ad49266287202a562d17cb2b5c6a4e2d8c136edd327cff5ecafc488'
+E     measured = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+- generated xml file: /workspace/work/actions-mk3-evidence/workitems-ui-errors/native-go-attempt-02/junit.xml -
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py::test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery
+1 failed in 2.02s
+Log (html): /workspace/work/actions-mk3-workitems-ui-errors/action_server/output/log.html

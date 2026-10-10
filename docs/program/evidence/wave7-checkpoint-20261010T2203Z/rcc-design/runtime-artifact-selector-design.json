@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "status": "read_only_design_proposal",
+  "repository": "joshyorko/actions",
+  "worktree": "/workspace/work/actions-mk3-rcc-candidate-version",
+  "branch": "mk3/rcc-candidate-version-20261010",
+  "commit": "76e7f64a67c7dd7d68419188190d839f2350b8b8",
+  "tree": "8471f44cc58f2dbe0226fbcf7d89445f440df2f0",
+  "parents": [
+    "284880ca80bb666de6ef1bd970b493435bb7a8a9",
+    "19380993febaa71238eaee3026b5c808773283ff"
+  ],
+  "checkout_clean": true,
+  "source_anchors": [
+    {"file": "action_server/scripts/verify_dakota_rcc_acceptance.py", "lines": "29-31", "fact": "2400-second proof timeout and bounded cleanup/watchdog budgets"},
+    {"file": "action_server/scripts/verify_dakota_rcc_acceptance.py", "lines": "32-56,70-79,119-168", "fact": "child environment filters selector; selector absent from safe extras"},
+    {"file": "action_server/scripts/verify_dakota_rcc_acceptance.py", "lines": "736-756", "fact": "parser supports candidate-wheel only"},
+    {"file": "action_server/scripts/verify_dakota_rcc_acceptance.py", "lines": "1235-1269", "fact": "candidate source revision and wheels come from checkout"},
+    {"file": "action_server/scripts/verify_dakota_rcc_acceptance.py", "lines": "1957-2004", "fact": "outer supervisor reconstructs worker argv and environment"},
+    {"file": "action_server/scripts/verify_dakota_rcc_acceptance.py", "lines": "1740,1748,1764-1765,1866,1874,1899-1900", "fact": "source receipt modes and offline positive cells"},
+    {"file": "action_server/src/actions/server/_selftest.py", "lines": "113-120,439-446", "fact": "ActionServerProcess and CLI route consult selector in process environment"},
+    {"file": "action_server/scripts/dakota_workitems_native_acceptance.py", "lines": "101-148,366-450", "fact": "native fixture selector, manifest and candidate Core patterns; executable validation is not full package binding"},
+    {"file": "action_server/scripts/write_native_artifact_manifest.py", "lines": "144-164,166-198", "fact": "manifest records frozen tree inventory and workflow identity; scope excludes clean-source attestation and candidate Core wheel"},
+    {"file": "action_server/scripts/archive_native_artifact_provenance.py", "lines": "59-94", "fact": "archive validator binds complete frozen inventory and digests"},
+    {"file": "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py", "lines": "169-199,202-318", "fact": "receipt/offline assertions and environment/candidate wheel tests"},
+    {"file": "docs/skills/repository-operations.md", "lines": "1954-1962,3001-3028", "fact": "selector routes CLI operations; current docs distinguish source and native evidence and build identities"}
+  ],
+  "design": {
+    "selector": "--action-server-mode {source,frozen,go-wrapper}; source default; native modes require explicit staged artifact and manifest/provenance inputs",
+    "environment_boundary": "propagate selector through supervised worker argv; never inherit ambient selector; set controlled env only after artifact validation",
+    "native_binding": "selected kind/path/platform/hash plus complete frozen package tree inventory; Go mode additionally binds wrapper/assets and verifies fresh-HOME extracted tree",
+    "version_contract": "derive generic candidate expected versions from checked-out metadata; require Core and Helper 1.0.3 for this milestone",
+    "receipt": "separate candidate-wheel runtime mode, source/frozen/go-wrapper action-server mode, candidate checkout/wheels, native build SHA/tree/run-attempt and artifact hashes",
+    "preserve": ["2400-second deadline", "owned process-tree supervision and bounded cleanup", "provider_backed_exec_fail_closed=PASS", "offline_warm_artifact_ready=PASS", "existing offline trust policy and cell meanings"]
+  },
+  "native_artifact_present_in_checkout": false,
+  "documentation": {
+    "target": "docs/skills/repository-operations.md",
+    "delta": "document selector filter and explicit validated forwarding; separate candidate and native receipt identities; full frozen tree binding; fresh HOME and extracted tree for Go wrapper; preserve source/native and offline distinction",
+    "stale_guidance_removed": "none; existing guide already says source-mode PASS is not native acceptance"
+  },
+  "upstream_disposition": "none; no upstream dependency defect established",
+  "corrected_selector_spelling": "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE",
+  "communication_correction": "Earlier coordination message typo SEMA4MAI corrected here; source spelling was verified."
+}
