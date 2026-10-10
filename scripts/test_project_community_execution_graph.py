@@ -22,6 +22,7 @@ from project_community_execution_graph import (
     render_markdown,
     sync_supplemental_amendment_note,
     upgrade_relationships,
+    _validate_current_git_binding_pairs,
     validate_graph,
 )
 
@@ -133,6 +134,31 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
     def test_real_execution_cycle_is_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "cycle"):
             _topological_order({1: {2}, 2: {1}}, {1, 2})
+
+    def test_current_git_binding_rejects_a_tree_sha_typo(self) -> None:
+        validate_graph(self.graph, self.ledger)
+        mutated_ledger = copy.deepcopy(self.ledger)
+        mutated_amendment = mutated_ledger["supplemental_program_amendments"][-1]
+        mutated_amendment["current_pr_heads"]["292"]["tree"] = "e584b8c6-typo"
+        mutated_graph = copy.deepcopy(self.graph)
+        mutated_graph["supplemental_program_amendments"] = copy.deepcopy(
+            mutated_ledger["supplemental_program_amendments"]
+        )
+        with self.assertRaisesRegex(ValueError, "head/tree pairs differ"):
+            validate_graph(mutated_graph, mutated_ledger)
+
+        bindings = {
+            "open_prs": {"292": {"sha": "commit-292", "tree": "tree-292"}},
+            "integration": {"sha": "integration-sha", "tree": "integration-tree"},
+        }
+        amendment = {
+            "current_pr_heads": {"292": {"sha": "commit-292", "tree": "tree-292"}},
+            "integration_checkpoint": {"head": "integration-sha", "tree": "integration-tree"},
+        }
+        _validate_current_git_binding_pairs(amendment, bindings)
+        amendment["current_pr_heads"]["292"]["tree"] = "e584b8c6-typo"
+        with self.assertRaisesRegex(ValueError, "head/tree pairs differ"):
+            _validate_current_git_binding_pairs(amendment, bindings)
 
     def test_projection_preserves_all_contracts_states_and_single_completion(self) -> None:
         upgraded = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)

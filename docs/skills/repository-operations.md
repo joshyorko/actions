@@ -1949,6 +1949,15 @@ Resolve both the local `origin` repository and any `upstream` repository before 
 
 For hosted pull-request validation, record the actual checkout SHA from the workflow log and, for `refs/pull/<number>/merge`, its two parents and tree. The PR head SHA alone does not identify the tested candidate. When the target base advances, generate the synthetic merge for that base and compare its tree with the tested tree before carrying results forward. A raw diff between divergent PR and base tips can misstate which workflow steps survive; inspect the actual three-way merge result and the executed workflow. A combined rollup must pass its focused, full, static, and hosted gates on its exact candidate tree before it replaces separate green PRs.
 
+In a dated checkpoint, list current open PR heads separately from merged integration commits. Do not label a merged PR head as open/current, and bind every check summary to its observed head and cutoff; queued or in-progress checks remain pending.
+
+For a machine-readable current-ref projection, capture the GitHub Git commit
+response for each current open PR head and the integration ref, then retain
+the commit SHA and tree SHA together in a hash-bound receipt. Validate the
+projection against that receipt before regenerating canonical ledger views.
+Keep replaced values in an explicitly historical field; never carry stale
+head/tree pairs forward as current. A tree SHA typo must fail validation.
+
 A check or workflow display name is a label, not a unique run identity; names are reused across workflow files and matrix variants. Record the repository, workflow path, run/job, event checkout SHA/tree, operating system, interpreter, and package/version when interpreting a result. A test count does not identify the Python version. An artifact ID is an identifier, not its size or digest: verify downloaded bytes and member hashes before claiming artifact contents, and distinguish workflow-reported metadata from independently verified bytes.
 
 When a hosted acceptance artifact contains only a sanitized summary, distinguish
@@ -2283,6 +2292,22 @@ later independent artifact review retrieves and verifies bytes despite an
 earlier download-failure note, retain that original receipt and add a dated
 correction binding the artifact ID, archive digest, manifest and source-tree
 comparison; do not infer registry publication or replace the historical note.
+
+On 2026-10-10, independent review also accepted the exact 11-case native and
+separate Go-wrapper artifacts from run `38067094994`: candidate
+`a47dc616069afdb0488aaed651abf0ceb9a82035`/tree
+`10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6`, source
+`0045d91b2b5010b4b3706f777325e04b8eda805d`, and control
+`fbd504a331acfeadf7fc64e013b4fefcda7412e4`. The native artifact
+`11675702008` has SHA-256
+`90b2ace4381199eb6f39a5f256972896a90faa5423599ba061aa95ee1a29ad30`; the
+Go-wrapper artifact `11676290980` has SHA-256
+`0bdae4a82bec1c1625bac490df6087795c14327ee55e0a560dfc621584c8d356`. Both
+archived JUnit files passed the exact 11-case validator. The wrapper receipt
+also verifies 25/25 process identity, direct-parent, natural-exit and stop
+records. This remains scoped to that tuple: PR290 is still blocked by separate
+current devmode failures and this result does not accept the current PR branch,
+other operating systems, the whole issue or a release.
 
 For private Run-output staging, retain the existing Run status/result as the sole
 lifecycle authority and publish a terminal result plus its output handle in one

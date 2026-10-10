@@ -1,0 +1,29 @@
+Evidence source: GitHub Actions job logs fetched read-only via GitHub connector.
+Repository: joshyorko/actions
+PR: 299
+PR head: a62d02a76eec2b1322a03d5d5f541951d9cc241b
+Workflow: 38062674207
+
+Ubuntu job 114243948591 (Build Action Server binary without credentials (ubuntu-22.04)):
+2026-10-10T15:37:15.7933248Z             global_runs_state = get_global_runs_state()
+2026-10-10T15:37:15.7933730Z >           if global_runs_state.is_scoped_run(run_id):
+2026-10-10T15:37:15.7934152Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-10T15:37:15.7934739Z E           AttributeError: 'MissingRunState' object has no attribute 'is_scoped_run'
+2026-10-10T15:37:15.7935421Z
+2026-10-10T15:37:15.7935628Z src/actions/server/_api_run.py:66: AttributeError
+2026-10-10T15:37:15.7937569Z FAILED tests/action_server_tests/test_artifact_storage.py::test_independent_storage_api_reads_durable_run_binding_and_range_file - AttributeError: 'MissingRunState' object has no attribute 'is_scoped_run'
+2026-10-10T15:37:15.7938846Z 1 failed, 58 passed, 2 skipped in 6.74s
+2026-10-10T15:37:16.0165704Z ##[error]Process completed with exit code 1.
+
+macOS job 114243948542 (Build Action Server binary without credentials (macos-15)):
+2026-10-10T15:38:16.9862250Z             global_runs_state = get_global_runs_state()
+2026-10-10T15:38:16.9862520Z >           if global_runs_state.is_scoped_run(run_id):
+2026-10-10T15:38:16.9862780Z                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-10T15:38:16.9863130Z E           AttributeError: 'MissingRunState' object has no attribute 'is_scoped_run'
+2026-10-10T15:38:16.9863380Z
+2026-10-10T15:38:16.9863490Z src/actions/server/_api_run.py:66: AttributeError
+2026-10-10T15:38:16.9864730Z FAILED tests/action_server_tests/test_artifact_storage.py::test_independent_storage_api_reads_durable_run_binding_and_range_file - AttributeError: 'MissingRunState' object has no attribute 'is_scoped_run'
+2026-10-10T15:38:16.9865460Z 1 failed, 58 passed, 2 skipped in 4.94s
+2026-10-10T15:38:17.1601770Z ##[error]Process completed with exit code 1.
+
+Classification: deterministic cross-platform failure in the same test and call site; not infrastructure. This is a bounded sanitized excerpt, not a full raw log.

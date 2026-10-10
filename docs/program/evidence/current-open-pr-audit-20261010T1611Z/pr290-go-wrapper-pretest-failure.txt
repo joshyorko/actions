@@ -1,0 +1,22 @@
+Read-only bounded failure excerpt
+Repository: joshyorko/actions
+PR290 current head: a77d3c8948ed2fd995102dd02de33cb8dfb7ee74
+Push workflow: 38066123986 (Actions Runtime Frozen Catalog Rollback)
+Job: 114254013835 (go_wrapper)
+
+2026-10-10T16:10:21.0441528Z uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -c 'import pytest, sys; print(f"pytest={pytest.__file__}; python={sys.executable}")'
+2026-10-10T16:10:21.0504454Z SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE: /home/runner/work/_temp/go-wrapper-native/action-server
+2026-10-10T16:10:21.0504872Z SEMA4AI_INTEGRATION_TEST_GO_WRAPPER: 1
+2026-10-10T16:10:22.1593477Z Traceback (most recent call last):
+2026-10-10T16:10:22.1600319Z   File "<string>", line 1, in <module>
+2026-10-10T16:10:22.1600769Z ModuleNotFoundError: No module named 'pytest'
+2026-10-10T16:10:22.1790497Z ##[error]Process completed with exit code 1.
+
+Step outcomes from job evidence assembly:
+ARTIFACT_OUTCOME=success
+RCC_OUTCOME=success
+DEPENDENCIES_OUTCOME=success
+ACCEPTANCE_OUTCOME=failure
+WRAPPER_RUNTIME_OUTCOME=skipped
+
+Interpretation: the wrapper-gated acceptance failed before tests ran because the fresh Poetry environment lacked pytest. This does not establish a wrapper process/lifecycle result. No retry or mutation performed.

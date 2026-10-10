@@ -1,0 +1,16 @@
+Read-only current-head inventory
+Captured at UTC: 2026-10-10 16:11:17
+Repository: joshyorko/actions
+Method: current PR metadata re-fetch and exact-head REST check runs; actual Actions runs endpoint for push-triggered #290 frozen workflow. PRs #300/#301 added per root direction.
+
+PR221 headf18058b6c614d065fe821d98b0039f1db736e5cb, base community36b8192dbb8143e016af3351f7d25b22a35c9944: 33 checks;5 success,1 skipped,3 in progress,24 queued,0 fail.
+PR282 headbab27a93664494965db8a86761ea5685a3be6618, base integration31239cf99c7b264a0eab89660e93b391532ac305:19 checks,13 success,6 historical failures.
+PR290 current heada77d3c8948ed2fd995102dd02de33cb8dfb7ee74, base c6d729f29167f04080ab5547955d6398a6ee49d0:24 PR checks;1 failure(go_wrapper114254013835),1 in progress(build114254013689),22 queued. Fresh push run38066123986 in progress. go_wrapper failed ModuleNotFoundError: pytest before wrapper tests ran; source-bound failure receipt companion SHA848a8d80f45dc4aadecaa8d5e15de2cfb419f156d4dc851e9b661d6e70742299. Previous 11-case evidence remains pinned to candidate a47dc616/tree10e4 via predecessor control8192; not yet transferred to a77.
+PR292 headdcff7150ebf30166a6e80b515f229d35abf2fc0e, base de2b9a884a7bf75320d0c3efb9294b8ec179c5c8:22 checks;11 success,6 in progress,5 queued,no failures.
+PR298 headfc582797cc754ae6dcf7602d98d6079f0004b29d, base de2b9a884a7bf75320d0c3efb9294b8ec179c5c8:24 checks;23 success,1 Windows py3.12 devmode job114242958528 in progress. Its current step is inv typecheck; all prior test/integration/lint steps succeeded. Start time unavailable via supported step summary; live job log body empty. No failure observed.
+PR299 head600fb4423dfdadb156840efd193e7522ecf35ec5, base de2b9a884a7bf75320d0c3efb9294b8ec179c5c8:23 checks;17 success,3 in progress,3 queued,no failures.
+PR300 head7e70a8df6711e7e5d1dfe067f70ff264fd4eabb2, base PR299 head600fb4423dfdadb156840efd193e7522ecf35ec5:10 checks;1 success,9 queued,no failures.
+PR301 head47d307c1fe1f55ca14b13425f2ce5c367d90210c, base integrationf18058b6c614d065fe821d98b0039f1db736e5cb:18 checks,all queued.
+PR289 and PR297 merged by root; last exact heads had all checks green. 
+
+Observation only; no issue completion/release claims. #290 predecessor artifact remains precisely scoped to its recorded candidate tree and is not declared equivalent to the new current head.

@@ -1,0 +1,328 @@
+{
+  "bindings": {
+    "observed_at_utc": "2026-10-10T16:24:00Z",
+    "source": "Root verified GitHub Git commit responses and exported full-tree mappings",
+    "integration": {
+      "sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7"
+    },
+    "open_prs": {
+      "221": {
+        "sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+        "tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7"
+      },
+      "282": {
+        "sha": "bab27a93664494965db8a86761ea5685a3be6618",
+        "tree": "72257e07a78d33ec1d3d067fa0da83369eea0357"
+      },
+      "290": {
+        "sha": "fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+        "tree": "0bddabdf6e6f85701b2b87f49e6c137cf48f532c"
+      },
+      "292": {
+        "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7"
+      },
+      "299": {
+        "sha": "25855955f1c58faf7d77161bbd3ef2d0be402e18",
+        "tree": "ac3811dea53bd63662421a8ea023ac683367c839"
+      },
+      "300": {
+        "sha": "2860bfd640945cbdcf467e44abbd8d5e4ddb8bcf",
+        "tree": "1927b15fb5a544795d0713c162af2040112b1d7c"
+      },
+      "301": {
+        "sha": "47d307c1fe1f55ca14b13425f2ce5c367d90210c",
+        "tree": "9e39f0b12078cc4de9510a3ab4d8844dc35f34a7"
+      }
+    },
+    "rcc_candidate": {
+      "sha": "2552a8c3419b213825294a51927843b2d61f662e",
+      "tree": "af7e419414261525c89db5511c5cbbc6f07981b0"
+    },
+    "boundaries": "Source/commit identities only; no transfer of prior CI or native proof to descendants."
+  },
+  "verified_git_responses": [
+    {
+      "key": "pr298MergedCommitResult",
+      "response": {
+        "sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+        "node_id": "C_kwDOOI-QjNoAKGU4ODZkMjZlYmFlZmFmYTkxODlhNjk1MTdmNjcwNzY5MWI1MzY2MmU",
+        "url": "https://api.github.com/repos/joshyorko/actions/git/commits/e886d26ebaefafa9189a69517f6707691b53662e",
+        "html_url": "https://github.com/joshyorko/actions/commit/e886d26ebaefafa9189a69517f6707691b53662e",
+        "author": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:14:59Z"
+        },
+        "committer": {
+          "name": "GitHub",
+          "email": "noreply@github.com",
+          "date": "2026-10-10T16:14:59Z"
+        },
+        "tree": {
+          "sha": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7",
+          "url": "https://api.github.com/repos/joshyorko/actions/git/trees/016664a8e0d01dec36accf4fe5d39cb0b7bebef7"
+        },
+        "message": "Merge PR #298: bounded source staging prerequisite\n\nfeat: stage selected source bytes beneath private directory descriptors",
+        "parents": [
+          {
+            "sha": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+            "url": "https://api.github.com/repos/joshyorko/actions/git/commits/f18058b6c614d065fe821d98b0039f1db736e5cb",
+            "html_url": "https://github.com/joshyorko/actions/commit/f18058b6c614d065fe821d98b0039f1db736e5cb"
+          },
+          {
+            "sha": "fc582797cc754ae6dcf7602d98d6079f0004b29d",
+            "url": "https://api.github.com/repos/joshyorko/actions/git/commits/fc582797cc754ae6dcf7602d98d6079f0004b29d",
+            "html_url": "https://github.com/joshyorko/actions/commit/fc582797cc754ae6dcf7602d98d6079f0004b29d"
+          }
+        ],
+        "verification": {
+          "verified": true,
+          "reason": "valid",
+          "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqymSDCRC1aQ7uu5UhlAAAXDIQAAfef3ERPiTuJErlfF1yh4FV\nvtNRyZlZ0xnFhfcd/WgTJUxsYznnfmeiir6VOWpkGlzP3A9DZ+ts4M5lSWkHDHO3\nFNr8gNsRDHjzPgxJkEKiyqUIumxOxyaLnI/mhlxuP8EBn1l6D14cLarXyFf2OrqZ\nbN8zya70kFb01p7Tsh6V9AEAgWSWFGzAdm4yeUFTQNQVt7pvCRWaK5jwXyLArPZf\nTcNsXixXg+iCcxBI85ADBZv3va5mCrxyF2owHlAT+dM2altiRYdUuYEBV+F94/yA\ntdWg9R+LdNyG6/J7V/OKHp8eaZIgUjPK6GJgrLaCNCbtQFViF3/JHcCZ1+8UHymd\nyifRVQ+nZkBE4EVfpbQl+MRZ6bG/PWAZI6Uqq8kO0hTCx4vY358KrD+jNlI+1UJE\n5UO6UvxM6RSiLAtuMJ9OutNnQp9B7XcbmXFI9zjQ63mfl1oL+U+jTlckpFZ62Ejk\nDCvxKc3Mg2RvF/bQFIcCxM+ytsevVlpy00ZGvGTlQLtFBSoQebWjxsO+69SokITr\n/ScAg0qmftzv9581CN7uBdz7YNK6/5dG2vKBQAVO/YwFNdpcvAu1iiacVjfYEONB\n7QBucV+Ifdp/SHvJENeenRP4CqQtJ8pY8gSyxsYnE/CcUE53ymTXchhlkQJw7k7B\n6Lr9Wxe3KjqBbggSt9ad\n=omKf\n-----END PGP SIGNATURE-----\n",
+          "payload": "tree 016664a8e0d01dec36accf4fe5d39cb0b7bebef7\nparent f18058b6c614d065fe821d98b0039f1db736e5cb\nparent fc582797cc754ae6dcf7602d98d6079f0004b29d\nauthor Josh Yorko <54248591+joshyorko@users.noreply.github.com> 1791648899 -0400\ncommitter GitHub <noreply@github.com> 1791648899 -0400\n\nMerge PR #298: bounded source staging prerequisite\n\nfeat: stage selected source bytes beneath private directory descriptors",
+          "verified_at": "2026-10-10T16:15:00Z"
+        }
+      }
+    },
+    {
+      "key": "goInterpreterCommitVerified",
+      "response": {
+        "sha": "fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+        "node_id": "C_kwDOOI-QjNoAKGZiZDUwNGEzMzFhY2ZlYWRmN2ZjNjRlMDEzYjRmZWZjZGE3NDEyZTQ",
+        "url": "https://api.github.com/repos/joshyorko/actions/git/commits/fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+        "html_url": "https://github.com/joshyorko/actions/commit/fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+        "author": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:17:58Z"
+        },
+        "committer": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:17:58Z"
+        },
+        "tree": {
+          "sha": "0bddabdf6e6f85701b2b87f49e6c137cf48f532c",
+          "url": "https://api.github.com/repos/joshyorko/actions/git/trees/0bddabdf6e6f85701b2b87f49e6c137cf48f532c"
+        },
+        "message": "Bind Go-wrapper acceptance to the installed test interpreter",
+        "parents": [
+          {
+            "sha": "a77d3c8948ed2fd995102dd02de33cb8dfb7ee74",
+            "url": "https://api.github.com/repos/joshyorko/actions/git/commits/a77d3c8948ed2fd995102dd02de33cb8dfb7ee74",
+            "html_url": "https://github.com/joshyorko/actions/commit/a77d3c8948ed2fd995102dd02de33cb8dfb7ee74"
+          }
+        ],
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      }
+    },
+    {
+      "key": "isort292Verified",
+      "response": {
+        "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "node_id": "C_kwDOOI-QjNoAKGQwZTEyYzFlMWEyNTY2NjRiNTA2Y2Q4YjAyNzI5MjA2MmM2ZTExMDk",
+        "url": "https://api.github.com/repos/joshyorko/actions/git/commits/d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "html_url": "https://github.com/joshyorko/actions/commit/d0e12c1e1a256664b506cd8b027292062c6e1109",
+        "author": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:21:37Z"
+        },
+        "committer": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:21:37Z"
+        },
+        "tree": {
+          "sha": "94f4b0dfae5bad8f7a356719210402b3d507e2f7",
+          "url": "https://api.github.com/repos/joshyorko/actions/git/trees/94f4b0dfae5bad8f7a356719210402b3d507e2f7"
+        },
+        "message": "Correct configured import ordering in resource-history test",
+        "parents": [
+          {
+            "sha": "dcff7150ebf30166a6e80b515f229d35abf2fc0e",
+            "url": "https://api.github.com/repos/joshyorko/actions/git/commits/dcff7150ebf30166a6e80b515f229d35abf2fc0e",
+            "html_url": "https://github.com/joshyorko/actions/commit/dcff7150ebf30166a6e80b515f229d35abf2fc0e"
+          }
+        ],
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      }
+    },
+    {
+      "key": "isort299Verified",
+      "response": {
+        "sha": "25855955f1c58faf7d77161bbd3ef2d0be402e18",
+        "node_id": "C_kwDOOI-QjNoAKDI1ODU1OTU1ZjFjNThmYWY3ZDc3MTYxYmJkM2VmMmQwYmU0MDJlMTg",
+        "url": "https://api.github.com/repos/joshyorko/actions/git/commits/25855955f1c58faf7d77161bbd3ef2d0be402e18",
+        "html_url": "https://github.com/joshyorko/actions/commit/25855955f1c58faf7d77161bbd3ef2d0be402e18",
+        "author": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:21:40Z"
+        },
+        "committer": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:21:40Z"
+        },
+        "tree": {
+          "sha": "ac3811dea53bd63662421a8ea023ac683367c839",
+          "url": "https://api.github.com/repos/joshyorko/actions/git/trees/ac3811dea53bd63662421a8ea023ac683367c839"
+        },
+        "message": "Merge reviewed resource-history test import ordering",
+        "parents": [
+          {
+            "sha": "600fb4423dfdadb156840efd193e7522ecf35ec5",
+            "url": "https://api.github.com/repos/joshyorko/actions/git/commits/600fb4423dfdadb156840efd193e7522ecf35ec5",
+            "html_url": "https://github.com/joshyorko/actions/commit/600fb4423dfdadb156840efd193e7522ecf35ec5"
+          },
+          {
+            "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+            "url": "https://api.github.com/repos/joshyorko/actions/git/commits/d0e12c1e1a256664b506cd8b027292062c6e1109",
+            "html_url": "https://github.com/joshyorko/actions/commit/d0e12c1e1a256664b506cd8b027292062c6e1109"
+          }
+        ],
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      }
+    },
+    {
+      "key": "isort300Verified",
+      "response": {
+        "sha": "2860bfd640945cbdcf467e44abbd8d5e4ddb8bcf",
+        "node_id": "C_kwDOOI-QjNoAKDI4NjBiZmQ2NDA5NDVjYmRjZjQ2N2U0NGFiYmQ4ZDVlNGRkYjhiY2Y",
+        "url": "https://api.github.com/repos/joshyorko/actions/git/commits/2860bfd640945cbdcf467e44abbd8d5e4ddb8bcf",
+        "html_url": "https://github.com/joshyorko/actions/commit/2860bfd640945cbdcf467e44abbd8d5e4ddb8bcf",
+        "author": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:21:44Z"
+        },
+        "committer": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:21:44Z"
+        },
+        "tree": {
+          "sha": "1927b15fb5a544795d0713c162af2040112b1d7c",
+          "url": "https://api.github.com/repos/joshyorko/actions/git/trees/1927b15fb5a544795d0713c162af2040112b1d7c"
+        },
+        "message": "Merge reviewed resource-history test import ordering",
+        "parents": [
+          {
+            "sha": "7e70a8df6711e7e5d1dfe067f70ff264fd4eabb2",
+            "url": "https://api.github.com/repos/joshyorko/actions/git/commits/7e70a8df6711e7e5d1dfe067f70ff264fd4eabb2",
+            "html_url": "https://github.com/joshyorko/actions/commit/7e70a8df6711e7e5d1dfe067f70ff264fd4eabb2"
+          },
+          {
+            "sha": "25855955f1c58faf7d77161bbd3ef2d0be402e18",
+            "url": "https://api.github.com/repos/joshyorko/actions/git/commits/25855955f1c58faf7d77161bbd3ef2d0be402e18",
+            "html_url": "https://github.com/joshyorko/actions/commit/25855955f1c58faf7d77161bbd3ef2d0be402e18"
+          }
+        ],
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      }
+    },
+    {
+      "key": "canvasApprovedCommitVerified",
+      "response": {
+        "sha": "47d307c1fe1f55ca14b13425f2ce5c367d90210c",
+        "node_id": "C_kwDOOI-QjNoAKDQ3ZDMwN2MxZmUxZjU1Y2ExNGIxMzQyNWYyY2U1YzM2N2Q5MDIxMGM",
+        "url": "https://api.github.com/repos/joshyorko/actions/git/commits/47d307c1fe1f55ca14b13425f2ce5c367d90210c",
+        "html_url": "https://github.com/joshyorko/actions/commit/47d307c1fe1f55ca14b13425f2ce5c367d90210c",
+        "author": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:06:23Z"
+        },
+        "committer": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:06:23Z"
+        },
+        "tree": {
+          "sha": "9e39f0b12078cc4de9510a3ab4d8844dc35f34a7",
+          "url": "https://api.github.com/repos/joshyorko/actions/git/trees/9e39f0b12078cc4de9510a3ab4d8844dc35f34a7"
+        },
+        "message": "Require Canvas Python-TypeScript fixture round trip in community CI",
+        "parents": [
+          {
+            "sha": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+            "url": "https://api.github.com/repos/joshyorko/actions/git/commits/f18058b6c614d065fe821d98b0039f1db736e5cb",
+            "html_url": "https://github.com/joshyorko/actions/commit/f18058b6c614d065fe821d98b0039f1db736e5cb"
+          }
+        ],
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      }
+    },
+    {
+      "key": "rccCandidateVerified",
+      "response": {
+        "sha": "2552a8c3419b213825294a51927843b2d61f662e",
+        "node_id": "C_kwDOOI-QjNoAKDI1NTJhOGMzNDE5YjIxMzgyNTI5NGE1MTkyNzg0M2IyZDYxZjY2MmU",
+        "url": "https://api.github.com/repos/joshyorko/actions/git/commits/2552a8c3419b213825294a51927843b2d61f662e",
+        "html_url": "https://github.com/joshyorko/actions/commit/2552a8c3419b213825294a51927843b2d61f662e",
+        "author": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:23:34Z"
+        },
+        "committer": {
+          "name": "Josh Yorko",
+          "email": "54248591+joshyorko@users.noreply.github.com",
+          "date": "2026-10-10T16:23:34Z"
+        },
+        "tree": {
+          "sha": "af7e419414261525c89db5511c5cbbc6f07981b0",
+          "url": "https://api.github.com/repos/joshyorko/actions/git/trees/af7e419414261525c89db5511c5cbbc6f07981b0"
+        },
+        "message": "Use complete catalog schema in staged RCC consumer acceptance fixture",
+        "parents": [
+          {
+            "sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+            "url": "https://api.github.com/repos/joshyorko/actions/git/commits/e886d26ebaefafa9189a69517f6707691b53662e",
+            "html_url": "https://github.com/joshyorko/actions/commit/e886d26ebaefafa9189a69517f6707691b53662e"
+          }
+        ],
+        "verification": {
+          "verified": false,
+          "reason": "unsigned",
+          "signature": null,
+          "payload": null,
+          "verified_at": null
+        }
+      }
+    }
+  ]
+}

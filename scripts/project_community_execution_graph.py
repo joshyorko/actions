@@ -404,6 +404,21 @@ def validate_graph(graph: dict, ledger: dict) -> list[int]:
                 raise ValueError("The supplemental #279 regression gate must retain its reviewed P0 priority")
 
     latest_amendment = amendments[-1] if amendments else {}
+    binding_receipt = latest_amendment.get("current_git_binding_receipt")
+    if binding_receipt:
+        relative_path = Path(binding_receipt["path"])
+        if relative_path.is_absolute() or ".." in relative_path.parts:
+            raise ValueError("Current Git binding receipt path must stay within the program evidence tree")
+        receipt_path = PROGRAM / relative_path
+        try:
+            receipt_path.resolve(strict=True).relative_to(PROGRAM.resolve())
+        except (OSError, ValueError) as error:
+            raise ValueError("Current Git binding receipt must resolve within the program evidence tree") from error
+        payload = receipt_path.read_bytes()
+        if hashlib.sha256(payload).hexdigest() != binding_receipt.get("sha256"):
+            raise ValueError("Current Git binding receipt hash mismatch")
+        verified = json.loads(payload)
+        _validate_current_git_binding_pairs(latest_amendment, verified.get("bindings", {}))
     expected_substages = latest_amendment.get("active_substages", [])
     if graph.get("active_substages", []) != expected_substages:
         raise ValueError("Current active substage overlay differs from the latest dated amendment")
@@ -528,6 +543,18 @@ def validate_graph(graph: dict, ledger: dict) -> list[int]:
         if set(by_id[issue]["unresolved_open_issue_dependencies"]) & whole_issue_prerequisites:
             raise ValueError(f"#{issue} must use scoped criterion gates instead of whole-issue prerequisites")
     return topo
+
+
+def _validate_current_git_binding_pairs(amendment: dict, bindings: dict) -> None:
+    """Reject current-ref projections that diverge from independent Git responses."""
+    observed_heads = {str(issue): ref for issue, ref in amendment.get("current_pr_heads", {}).items()}
+    verified_heads = {str(issue): ref for issue, ref in bindings.get("open_prs", {}).items()}
+    if observed_heads != verified_heads:
+        raise ValueError("Current PR head/tree pairs differ from independent Git bindings")
+    checkpoint = amendment.get("integration_checkpoint", {})
+    integration = bindings.get("integration", {})
+    if checkpoint.get("head") != integration.get("sha") or checkpoint.get("tree") != integration.get("tree"):
+        raise ValueError("Current integration head/tree differs from independent Git bindings")
 
 
 def _topological_order(dependencies: dict, nodes: set) -> list:

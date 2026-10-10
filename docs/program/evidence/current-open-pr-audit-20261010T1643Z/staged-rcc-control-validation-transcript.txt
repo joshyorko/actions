@@ -1,0 +1,30 @@
+Recorded independent validation transcript for control f103edc9015128bb5e6d3875208c4077644e8fe4
+Transcript source: captured exec_command outputs from the independent review; this is not a raw redirected stdout log.
+
+Command:
+PYTHONDONTWRITEBYTECODE=1 /workspace/work/community-resume/worker-exit/devutils/.venv/bin/python -m pytest -p no:cacheprovider -p no:robocorp_log_pytest --confcutdir=developer/tests --basetemp=/dev/shm/luna-rcc-control-review/f103-dev developer/tests/test_rcc_provider_rollback_workflow.py developer/tests/test_rcc_provider_rollback_summary.py -q
+Output:
+..................................                                       [100%]
+34 passed in 16.28s
+Positive and fail-closed inventory-path regressions are included in these 34 tests.
+
+Command:
+PYTHONDONTWRITEBYTECODE=1 /workspace/work/community-resume/worker-exit/devutils/.venv/bin/python -m pytest -p no:cacheprovider -p no:robocorp_log_pytest --confcutdir=developer/tests --basetemp=/dev/shm/luna-rcc-control-review/f103-admission developer/tests/test_rcc_provider_rollback_summary.py -q -k 'admits_complete_passing_receipt or duplicate_source_inventory_path or duplicate_staged_inventory_path'
+Output:
+...                                                                      [100%]
+3 passed, 26 deselected in 1.73s
+This explicitly covers a valid receipt plus duplicate paths in source and staged inventories.
+
+Command:
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="$PWD/action_server/src:$PWD/actions/src:$PWD/common/src:/tmp/work/deployment-values-deps/site-packages" /workspace/work/community-resume/worker-exit/action_server/.venv/bin/python -m pytest -p no:cacheprovider -p no:robocorp_log_pytest --confcutdir=action_server/tests/contract_tests --basetemp=/dev/shm/luna-rcc-control-review/f103-stage action_server/tests/contract_tests/test_source_staging.py -q
+Output:
+.........................                                                [100%]
+25 passed in 0.17s
+
+Commands and results:
+/workspace/work/community-resume/worker-exit/action_server/.venv/bin/ruff check --config action_server/ruff.toml .github/workflows/_gen_workflows.py developer/tests/test_rcc_provider_rollback_summary.py developer/tests/test_rcc_provider_rollback_workflow.py
+exit 0, no diagnostics
+/workspace/work/community-resume/worker-exit/action_server/.venv/bin/ruff format --check --config action_server/ruff.toml developer/tests/test_rcc_provider_rollback_summary.py developer/tests/test_rcc_provider_rollback_workflow.py
+exit 0: 2 files already formatted
+git diff --check 9cba2438117938e162ffffda885ba1cd45d9ca81..f103edc9015128bb5e6d3875208c4077644e8fe4
+exit 0, no diagnostics

@@ -1,0 +1,28 @@
+Read-only acceptance verification excerpt
+Repository: joshyorko/actions
+Current PR #290 head at metadata refresh: fbd504a331acfeadf7fc64e013b4fefcda7412e4
+Push workflow run: 38067094994
+Job: build, ID 114256839712, attempt 1, completed success
+Workflow artifact ID: 11675702008
+Artifact name: frozen-catalog-rollback-fbd504a331acfeadf7fc64e013b4fefcda7412e4
+Artifact bytes: 111828
+Artifact ZIP SHA-256: 90b2ace4381199eb6f39a5f256972896a90faa5423599ba061aa95ee1a29ad30
+
+Job log excerpt at 2026-10-10 16:33:57.602 UTC:
+11 passed in 262.51s (0:04:22)
+
+Embedded sanitized receipt evidence from the job log:
+- Candidate native SHA: a47dc616069afdb0488aaed651abf0ceb9a82035
+- Candidate tree: 10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6
+- Native build source SHA: 0045d91b2b5010b4b3706f777325e04b8eda805d; tree identical to candidate tree.
+- Native build workflow run: 38060994147, attempt 1.
+- Native byte-verification receipt SHA-256: dc7725c13c273fbca186539f18b43bc2d3701f9e2704dc9b8b596de3112aa951
+- Test harness runtime baseline: c78288c3a0f07ba1013109c790f8e8b375a852d2, tree 75a108db7d608e1316d59c96918213471409f31a
+- Resource-history test blob: 69e2a468916f9982206573e8f5b71c6f2db8c8e7
+- Candidate artifact ID 11673805091, size 59391509, SHA-256 26a60e999d62009ea83d70aac949a3c3bbf09895ea90119a7a39b2a05306e2f8
+- Receipt status expression is PASS only if all five step outcomes are success. Log shows artifact, frozen, RCC, dependencies, and acceptance outcomes all success.
+- The receipt explicitly says Go wrapper NOT_VERIFIED: separate wrapper artifact is not included in measured provenance TAR.
+
+The separate go_wrapper job 114256839804 was in progress on `Run the exact eleven Go-wrapper acceptance cases` at the last job-list observation. No wrapper result is inferred here. The native result applies to pinned candidate a47 only; it does not say the native code was built from current PR head fbd.
+
+Inventory interval: PR heads and PR workflows refreshed at 2026-10-10 16:37:57 UTC. Job logs and artifact metadata were re-read during 16:38 UTC. No retry, mutation, or artifact download was performed.

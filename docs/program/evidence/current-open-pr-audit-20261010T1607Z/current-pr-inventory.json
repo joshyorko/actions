@@ -1,0 +1,145 @@
+{
+  "captured_at_utc": "2026-10-10T16:07:53Z",
+  "source": "Root-supplied exact publication mapping plus current read-only PR/check observations in this task.",
+  "cohort": {
+    "items": 46,
+    "target_integrated": 34,
+    "open_blocked": 8,
+    "merge_ready": 0,
+    "target_integrated_prs": [
+      219,
+      220,
+      251,
+      256,
+      257,
+      259,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      272,
+      273,
+      274,
+      275,
+      276,
+      277,
+      278,
+      280,
+      281,
+      283,
+      284,
+      285,
+      286,
+      287,
+      288,
+      289,
+      291,
+      297
+    ],
+    "open_prs": [
+      221,
+      282,
+      290,
+      292,
+      298,
+      299,
+      300,
+      301
+    ],
+    "superseded": 4,
+    "superseded_prs": [
+      215,
+      216,
+      217,
+      218
+    ],
+    "scope": "Named-target outcomes only. PR289 and PR297 merged normally; community remains 36b. Four superseded PRs remain unmerged. No whole-issue acceptance, release readiness, or Devsy readiness is implied."
+  },
+  "open_pr_heads": {
+    "221": {
+      "head": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+      "tree": "762c50e6416815043adbd82fae36e9ab9e3393ff",
+      "base": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "status": "OPEN_BLOCKED; exact-head checks pending/in progress at cutoff.",
+      "prior_failure": "A prior native build on de2b9a expected Core 1.0.2 wheel name while integrated source built 1.0.3; failure remains bound to that historical run/head.",
+      "remaining_gates": [
+        "Fresh exact-head workflow completion.",
+        "Managed RCC/frozen executable, successful-generation retention, and controlled-exit proofs remain separate.",
+        "No release or whole-issue acceptance."
+      ]
+    },
+    "282": {
+      "head": "bab27a93664494965db8a86761ea5685a3be6618",
+      "base": "31239cf99c7b264a0eab89660e93b391532ac305",
+      "status": "OPEN_BLOCKED",
+      "checks": "Historical exact-head snapshot: 3 success, 3 failure; public Core remains 1.0.2 and shared-artifact contract remains a blocker. No Core 1.0.3 publication."
+    },
+    "290": {
+      "head": "a77d3c8948ed2fd995102dd02de33cb8dfb7ee74",
+      "tree": "bd9317937dbb6a8635f7ee897394ba4a41e20f46",
+      "status": "OPEN_BLOCKED; hosted Go checks pending at cutoff.",
+      "native_scope": "Prior Linux 10-case pass is exact older candidate/artifact only. Current frozen 11-case selector NOT RUN; do not transfer the native receipt."
+    },
+    "292": {
+      "head": "58b411f0ecf7f2ecf2be16308ae7c4991b6df1b2",
+      "tree": "8a08ef05f5514e70b9d2a13027010cbafe137c55",
+      "status": "OPEN_BLOCKED; current hosted/native artifact acceptance pending.",
+      "scope": "Published CLI evidence is one testcase over three catalog transitions, not the frozen 11-case selector."
+    },
+    "298": {
+      "head": "fc582797cc754ae6dcf7602d98d6079f0004b29d",
+      "tree": "419090496fe66a7339e74032d9d290f82b17592a",
+      "status": "OPEN_BLOCKED; exact-head hosted check set includes in-progress work.",
+      "scope": "Bounded source staging review only; RCC consumer/import remains NOT RUN."
+    },
+    "299": {
+      "head": "600fb4423dfdadb156840efd193e7522ecf35ec5",
+      "tree": "3bd9fad4e95beb20613ea81019358427ef15e89f",
+      "status": "OPEN_BLOCKED; fresh exact-head checks pending/in progress.",
+      "historical_failure": {
+        "run": 38062674207,
+        "receipt": "docs/program/evidence/current-open-pr-audit-20261010T1607Z/pr299-historical-failure.txt",
+        "sha256": "0acd53385f2b3bc4113aadf57319636af5398e077e9a95760b54cba3dfdd5360",
+        "finding": "Old artifact-storage fixture stub lacked is_scoped_run. The method exists in current published head; the old failing run remains historical and fresh checks are pending."
+      }
+    },
+    "300": {
+      "head": "7e70a8df6711e7e5d1dfe067f70ff264fd4eabb2",
+      "tree": "7bbc9851bd4858044e7f26a134e12d088f85ab0c",
+      "base_pr": 299,
+      "base_head": "600fb4423dfdadb156840efd193e7522ecf35ec5",
+      "status": "OPEN_BLOCKED; hosted checks pending.",
+      "scope": "Reviewed trusted-code transport integration only; not full #83/#86 authorization or production Canvas acceptance."
+    },
+    "301": {
+      "head": "47d307c1fe1f55ca14b13425f2ce5c367d90210c",
+      "tree": "9e39f0b12078cc4de9510a3ab4d8844dc35f34a7",
+      "base": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+      "status": "OPEN_BLOCKED; draft published, six exact-head workflow runs queued at cutoff.",
+      "scope": "Required Python↔TypeScript↔Python fixture bridge in the existing hosted frontend workflow. Review is scoped to bridge and workflow wiring; no hosted pass, renderer/runtime integration, or whole #100 acceptance."
+    }
+  },
+  "merged_prs": {
+    "289": {
+      "status": "MERGED",
+      "head": "7ca665aaa4b180a78f532a4419e4d17bf4ced801",
+      "tree": "97dcea6360926d0e30dbdbda2575dfd3be783570",
+      "merge_commit": "fdf9ee8f023d068c16e567a85defd7c0437f8117",
+      "reviewed_scope": "Narrow exact-key alias identity guard; overlapping templates/cross-kind URI cases remain unresolved."
+    },
+    "297": {
+      "status": "MERGED",
+      "head": "4d9c348a65365ef4e4c26baddada79c754bc8dd1",
+      "tree": "8d94180cec876100eecda458f4e82bb2570a7944",
+      "merge_commit": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+      "reviewed_scope": "Frontend timing-blocker repair only; no release or whole-issue acceptance."
+    }
+  },
+  "check_state_limit": "Exact-head checks that were queued or in progress at this cutoff are pending, not passes. Historical failures remain bound to their recorded earlier heads."
+}

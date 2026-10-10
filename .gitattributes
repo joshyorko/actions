@@ -183,3 +183,13 @@ docs/program/evidence/run-output-predecessor-20261010T1520Z/** -text
 docs/program/evidence/native-provenance-20261010T1520Z/** -text
 docs/program/evidence/resource-history-cli-20261010T1520Z/** -text
 docs/program/evidence/program-amendment-20261010T1520Z.json -text
+# 2026-10-10 16:07Z current governance cutoff receipts are hash-bound inputs.
+docs/program/evidence/current-open-pr-audit-20261010T1607Z/** -text
+docs/program/evidence/program-amendment-20261010T1607Z.json -text
+# 2026-10-10 16:11Z follow-up checks are hash-bound inputs.
+docs/program/evidence/current-open-pr-audit-20261010T1611Z/** -text
+docs/program/evidence/program-amendment-20261010T1611Z.json -text
+docs/program/evidence/current-open-pr-audit-20261010T1611Z/current-heads.txt -diff -whitespace
+# 2026-10-10 16:43Z verified current-ref bindings and receipts are hash-bound.
+docs/program/evidence/current-open-pr-audit-20261010T1643Z/** -text
+docs/program/evidence/program-amendment-20261010T1643Z.json -text

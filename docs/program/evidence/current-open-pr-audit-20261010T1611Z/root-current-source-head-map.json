@@ -1,0 +1,21 @@
+{
+  "pr292": {
+    "sha": "dcff7150ebf30166a6e80b515f229d35abf2fc0e",
+    "tree": "e58494a931cdfef30bec7da61326e1f6de22cc55",
+    "parent": "58b411f0ecf7f2ecf2be16308ae7c4991b6df1b2"
+  },
+  "pr299": {
+    "sha": "600fb4423dfdadb156840efd193e7522ecf35ec5",
+    "tree": "3bd9fad4e95beb20613ea81019358427ef15e89f",
+    "parents": [
+      "ffc45d2d57c4f1171676bcd60936b5d9a1daf81e",
+      "dcff7150ebf30166a6e80b515f229d35abf2fc0e"
+    ]
+  },
+  "fixture": {
+    "sha": "ffc45d2d57c4f1171676bcd60936b5d9a1daf81e",
+    "tree": "cd801e8ae33cb9bd9e6d4036c3e569e8cbd1d73f",
+    "parent": "a62d02a76eec2b1322a03d5d5f541951d9cc241b"
+  },
+  "status": "Git blobs/full trees/parents and branch ref readback verified; new exact CI pending"
+}

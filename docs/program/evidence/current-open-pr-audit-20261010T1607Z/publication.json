@@ -1,0 +1,42 @@
+{
+  "integration": {
+    "sha": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+    "tree": "762c50e6416815043adbd82fae36e9ab9e3393ff"
+  },
+  "merged_this_pass": [
+    {
+      "pr": 289,
+      "sha": "fdf9ee8f023d068c16e567a85defd7c0437f8117",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "pr": 297,
+      "sha": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    }
+  ],
+  "transport": {
+    "pr": 300,
+    "head": "7e70a8df6711e7e5d1dfe067f70ff264fd4eabb2",
+    "tree": "7bbc9851bd4858044e7f26a134e12d088f85ab0c",
+    "base_pr": 299,
+    "base_head": "600fb4423dfdadb156840efd193e7522ecf35ec5"
+  },
+  "go_control": {
+    "pr": 290,
+    "head": "a77d3c8948ed2fd995102dd02de33cb8dfb7ee74",
+    "tree": "bd9317937dbb6a8635f7ee897394ba4a41e20f46",
+    "source": "baf89eeb0f84904cb4592305fcd9696527e94578",
+    "hosted": "PENDING"
+  },
+  "canvas": {
+    "pr": 301,
+    "head": "47d307c1fe1f55ca14b13425f2ce5c367d90210c",
+    "tree": "9e39f0b12078cc4de9510a3ab4d8844dc35f34a7",
+    "review_source": "ca76d62ab206c9095d47384407ebb85821f02e73",
+    "source_combination_review": "Workflow/frontend/dependency blobs unchanged; Python blank-line correction only; existing accepted Runtime/browser README retained. Hosted PENDING."
+  },
+  "devsy": "HOLD user deleted old workspace; await new HIT THE GAS"
+}
