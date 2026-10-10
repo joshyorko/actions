@@ -2334,3 +2334,24 @@ candidate artifact is not the tag-triggered release artifact. Retain the tag
 run's `actions-core-dist` wheel, sdist and hash manifest with artifact ID,
 run/job, peeled commit and tree, then compare the published PyPI bytes to that
 manifest. The workflow publishes to PyPI; it does not create a GitHub Release.
+
+### Live reconciliation after a coordinator transfer
+
+A pull-request metadata response can retain an older `base.sha` after its named
+target branch advances. Resolve the live Git ref and inspect the prospective
+merge's ordered parents and complete tree. Bind CI evidence to the checkout
+recorded in job logs, not only the PR payload or mergeable flag. PR301's fresh
+review and local merge-tree computation independently confirmed this boundary.
+
+Fetch every page of the live issue collection with `state=all` and exclude objects
+with `pull_request`. Match the complete retained issue ID set, then compare
+current states and full UTF-8 body hashes separately from accepted criteria.
+Body differences are review candidates; a live read does not amend immutable
+contracts, historical hashes or acceptance. Resolve pointer freshness from
+observation times on amendments and substages, preserving older snapshots.
+
+The current Core publisher listens to `actions-core-*` tag pushes and has no
+manual-dispatch trigger. The generic `inv make-release` still requires `master`;
+it is not the community Core entrypoint. Verify accepted community ancestry,
+package version, and absence of both tag and registry version before an immutable
+tag push. Workflow success still requires registry-byte and installed-API readback.

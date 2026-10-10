@@ -1,0 +1,13 @@
+5d8247f5da531f7f98e046ae17fb9612ec7ee112
+100644 9905f71ee6883d6e361612bd8d217c4a83acc619 1	.github/workflows/_gen_workflows.py
+100644 a3176428177a83908271b1bd5e5c4c8d915c5da3 2	.github/workflows/_gen_workflows.py
+100644 f9d91fe67613c13cf8f738b77d6c87e7165670df 3	.github/workflows/_gen_workflows.py
+100644 0740f2f2c8426f8733057dc4f9d48a95cddbb03d 1	docs/skills/repository-operations.md
+100644 bbaa329910ddbe41f622ad08b90518c3252c004a 2	docs/skills/repository-operations.md
+100644 a85980bfb914c78dcaa5b6065a100aa401e42aa2 3	docs/skills/repository-operations.md
+
+Auto-merging .github/workflows/_gen_workflows.py
+CONFLICT (content): Merge conflict in .github/workflows/_gen_workflows.py
+Auto-merging .github/workflows/actions_core_tests.yml
+Auto-merging docs/skills/repository-operations.md
+CONFLICT (content): Merge conflict in docs/skills/repository-operations.md

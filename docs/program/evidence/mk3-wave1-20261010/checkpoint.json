@@ -1,0 +1,51 @@
+{
+  "observed_at_utc": "2026-10-10T19:41:45.742070+00:00",
+  "handoff_commit": "9fd9eaa70ef02727ed82ecd1d5a967ada4ddd4e5",
+  "retained_contracts": 54,
+  "accepted_whole_issues": [
+    210
+  ],
+  "community": "a70993fafc99a9f94041485542d5a720797ca394",
+  "integration": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+  "pr301": {
+    "status": "MERGED_SCOPED_SERIALIZATION_ONLY",
+    "head": "c734b9f850ec7b6bea8561b70312aca5c93dd6c1",
+    "merge": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
+    "tree": "1b582dd02b367e5216e60796a8da031e520aa12f",
+    "checks": {
+      "success": 20
+    }
+  },
+  "pr304": {
+    "status": "REVIEW_AND_CI_PENDING",
+    "head": "64de4dd1167183e7aa188d873ca463b14737b477",
+    "tree": "cc1d9c2f77dc696c004deb76843196129d2c8d69"
+  },
+  "pr302": {
+    "status": "LOCAL_REPAIR_VALIDATION_IN_PROGRESS",
+    "remote_head": "e31506239fd0260d708a11440762537334f8d2d1"
+  },
+  "pr292": {
+    "status": "WINDOWS_GATE_PENDING",
+    "run": 38067347057,
+    "job": 114257572296
+  },
+  "core": {
+    "status": "TAG_WORKFLOW_IN_PROGRESS_NOT_PUBLISHED",
+    "tag": "actions-core-1.0.3",
+    "tag_object": "2346af6d41f4a45d13ebaef0377b655774bc6cbc",
+    "source": "a70993fafc99a9f94041485542d5a720797ca394",
+    "run": 38080670608
+  },
+  "runtime_native_1_0_3": "NOT_PUBLISHED_NOT_RELEASE_READY",
+  "rcc_preparation": {
+    "head": "7eca36abce160b68f616eab9b7fdc9c4e7f2b053",
+    "source_review": "GO_PREPARATION_ONLY",
+    "actual_inspection": "NOT_RUN",
+    "types_and_final_union": "NOT_RUN"
+  },
+  "devsy": "DISABLED_NO_NEW_AUTHORIZATION",
+  "dakota": "UNCONFIRMED; read-only get_thread_snapshot target dakota failed closed ResolutionError; no dispatch/replay",
+  "worker_policy": "root sole integration owner; isolated Cloud worktrees; at most two implementation writers",
+  "upstream_disposition": "none"
+}

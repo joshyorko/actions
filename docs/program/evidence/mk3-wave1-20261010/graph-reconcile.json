@@ -1,0 +1,361 @@
+{
+  "kind": "bounded_read_only_full_graph_reconciliation",
+  "observed_at_utc": "2026-10-10T19:39:24Z",
+  "source": {
+    "repo": "joshyorko/actions",
+    "handoff_commit": "9fd9eaa70ef02727ed82ecd1d5a967ada4ddd4e5",
+    "handoff_path": "docs/handoffs/actions-swarm-20261010-cloud-handoff.md",
+    "evidence_checkout_commit": "5203ea848e14462f546da9c03e73beab406f5863",
+    "evidence_checkout_tree": "4b78bf27c4bcbb7425c851d2d7304da35f29e90a",
+    "isolated_worktree": "/workspace/work/actions-mk3-graph",
+    "branch": "mk3/graph-reconcile-20261010",
+    "worktree_source_status": "clean; no repository source edits",
+    "live_issue_source": "GitHub REST /repos/joshyorko/actions/issues?state=all&per_page=100&page=N",
+    "live_issue_pages_fetched": 4,
+    "live_issue_api_rows_including_pull_requests": 303,
+    "live_issue_snapshot_file": "/workspace/work/actions-mk3-evidence/github-issues-all-pages.json"
+  },
+  "retained_contract_reconciliation": {
+    "original_contract_ids": [
+      71,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      90,
+      91,
+      92,
+      93,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      125,
+      126,
+      127,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      151,
+      152,
+      153,
+      155,
+      162,
+      194,
+      195,
+      196,
+      208,
+      209,
+      210,
+      211,
+      212,
+      214
+    ],
+    "original_contract_count": 54,
+    "live_issue_objects_after_pr_exclusion": 105,
+    "matched_ids": 54,
+    "missing_ids": [],
+    "live_state_counts_for_original_contracts": {
+      "open": 53,
+      "closed": 1
+    },
+    "live_closed_ids": [
+      210
+    ],
+    "accepted_whole_issue": "#210 only, as specified by exact handoff and its retained acceptance record",
+    "recorded_acceptance_contract_exact_body_matches": 50,
+    "live_body_drift_candidates": [
+      {
+        "issue": 127,
+        "title": "feat: add a community Canvas template",
+        "recorded_acceptance_contract_sha256": "2774964a1beb023f33ce00b4ddd2836db0d15d2472fd1dad77a998eaeb5879d0",
+        "live_issue_body_sha256": "26693f41244e70da16eb75cf9ac240d384ba18db6b63787c06376fb608778db6",
+        "recorded_bytes": 1518,
+        "live_bytes": 4416,
+        "disposition": "historical contract preserved; semantic review required before any additive amendment"
+      },
+      {
+        "issue": 126,
+        "title": "feat: add an MCP v2 capabilities showcase template",
+        "recorded_acceptance_contract_sha256": "53600f63e66ab58a1281a9a43a85b8a9b431a16f86131a551cc974b87380214f",
+        "live_issue_body_sha256": "51a7d0e02335aa285a653becf942dcc55adc45322c4c665655c349d7f0e5a623",
+        "recorded_bytes": 1594,
+        "live_bytes": 4042,
+        "disposition": "historical contract preserved; semantic review required before any additive amendment"
+      },
+      {
+        "issue": 100,
+        "title": "Define Canvas authoring contracts in actions-core without package proliferation",
+        "recorded_acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
+        "live_issue_body_sha256": "7ecc079e380a695d8a8886bf175023c48b78819a32012650088ff4f5710fa995",
+        "recorded_bytes": 206,
+        "live_bytes": 6228,
+        "disposition": "historical contract preserved; semantic review required before any additive amendment"
+      },
+      {
+        "issue": 99,
+        "title": "Build the shared CanvasSpec renderer and MCP App View foundation",
+        "recorded_acceptance_contract_sha256": "172e91b203ab4b35ffd96a52bf7cd69a3faf08e050a960360246c20a9e24562e",
+        "live_issue_body_sha256": "957d1412f0cb1af0434ebb52eb99ac3be57f2fb42fdd4b4638b76f0426319b24",
+        "recorded_bytes": 173,
+        "live_bytes": 6662,
+        "disposition": "historical contract preserved; semantic review required before any additive amendment"
+      }
+    ],
+    "disposition": "issue state and live body comparison are separate from graph stage/acceptance; retain captured contract text and hashes as historical source pending semantic review.",
+    "unexpected_matching_ids": []
+  },
+  "graph_integrity": {
+    "issue_rows": 54,
+    "relationship_schema_version": 2,
+    "typed_relationship_counts": {
+      "execution_prerequisites": 86,
+      "scoped_execution_gates": 29,
+      "criteria": 19,
+      "coordination_parent_edges": 7,
+      "related_product_direction_edges": 12,
+      "full_acceptance_aggregation_edges": 19,
+      "superseded_untyped_edges": 111,
+      "execution_slices": 13,
+      "amendment_source": 128
+    },
+    "stage_counts_historical_snapshot": {
+      "READY": 0,
+      "ACTIVE": 8,
+      "REVIEW": 9,
+      "BLOCKED": 28,
+      "INTEGRATED": 8,
+      "COMPLETE": 1
+    },
+    "whole_issue_contracts": 54,
+    "accepted_closed": 1,
+    "open": 53,
+    "highest_direct_execution_prerequisite_fanout": [
+      {
+        "issue": 129,
+        "direct_consumers": 16
+      },
+      {
+        "issue": 143,
+        "direct_consumers": 13
+      },
+      {
+        "issue": 83,
+        "direct_consumers": 11
+      },
+      {
+        "issue": 84,
+        "direct_consumers": 8
+      },
+      {
+        "issue": 130,
+        "direct_consumers": 7
+      },
+      {
+        "issue": 134,
+        "direct_consumers": 6
+      },
+      {
+        "issue": 135,
+        "direct_consumers": 4
+      },
+      {
+        "issue": 144,
+        "direct_consumers": 4
+      }
+    ],
+    "canvas_typed_relationships": {
+      "71": {
+        "coordination_parents": [],
+        "related_product_direction": [
+          93
+        ],
+        "full_acceptance_aggregation": [
+          127
+        ]
+      },
+      "93": {
+        "coordination_parents": [
+          101
+        ],
+        "related_product_direction": [
+          71,
+          209
+        ],
+        "full_acceptance_aggregation": [
+          96,
+          97,
+          98,
+          99,
+          100,
+          126,
+          127,
+          208
+        ]
+      },
+      "99": {
+        "coordination_parent": [
+          93
+        ],
+        "related_product_direction": [
+          71
+        ],
+        "scoped_bounded_slice": "99-A system-Chromium Runtime bridge accepted; pinned Playwright, actual ChatGPT host, full #99 remain open"
+      },
+      "100": {
+        "coordination_parent": [
+          93
+        ],
+        "related_product_direction": [
+          71,
+          99
+        ],
+        "accepted_bounded_slices": [
+          "100-A public authoring",
+          "100-B single-fixture Python/JSON roundtrip"
+        ],
+        "scoped_dependency": {
+          "issue": 125,
+          "scope": "public authoring registration/serving; deferred until #125 acceptance; not blanket issue prerequisite"
+        }
+      },
+      "101": {
+        "full_acceptance_aggregation": [
+          93
+        ]
+      },
+      "126": {
+        "coordination_parents": [
+          93,
+          101
+        ],
+        "related_product_direction": [
+          71,
+          99,
+          100,
+          127
+        ]
+      },
+      "127": {
+        "coordination_parents": [
+          93,
+          101
+        ],
+        "related_product_direction": [
+          71
+        ]
+      },
+      "210": {
+        "classification": "whole-issue acceptance only"
+      }
+    }
+  },
+  "pointer_freshness": {
+    "current_program_amendment": {
+      "id": "program-amendment-20261010T1842Z",
+      "observed_at_utc": "2026-10-10T18:42:10Z",
+      "path": "evidence/program-amendment-20261010T1842Z.json",
+      "sha256": "8d55f380dbf723b924f3aab68b62f657f73a43d38972382263bdc454b60dcbc6"
+    },
+    "current_pr_convergence_observed_at_utc": "2026-10-10T18:42:10Z",
+    "resume_checkpoint_observed_at_utc": "2026-10-10T18:42:10Z",
+    "active_substages_observed_at_utc": "2026-10-10T18:42:10Z",
+    "historical_worker_stage_snapshot": "2026-10-10T07:53:20Z",
+    "stale_pointer_retained_as_historical": {
+      "graph.current_next_action_observed_at_utc": "2026-10-10T06:08:00Z",
+      "note": "06:08Z pointer predates 18:42Z current convergence/amendment; do not use as present dispatch instruction."
+    },
+    "post_cutoff_handoff_note": "At 18:47Z, #292 scoped native gate was satisfied through evidence byte equality; Windows check remained active and #292/#299 stayed gated."
+  },
+  "dependency_ready_scoped_successors": [
+    {
+      "slice": "Integrate PR301 exact accepted 100-B serialization criterion",
+      "state_at_handoff": "merge-ready; awaiting ordinary merge enforcement",
+      "next": "Recheck exact remote head/tree and normal merge state; on integration, consume only 100-B; then select next renderer/template scoped criterion."
+    },
+    {
+      "slice": "#99 remaining renderer acceptance (pinned Playwright and/or actual ChatGPT-host criterion)",
+      "state_at_handoff": "99-A system-Chromium Runtime bridge accepted; whole #99 open",
+      "dependency_note": "typed #93 parent and #71 product-direction edges do not block this slice; check its own browser/host availability and ownership."
+    },
+    {
+      "slice": "#292 MCP resource-routing Windows gate",
+      "state_at_handoff": "18 successful checks; Windows job in progress; post-cutoff native 11-case criterion satisfied by byte identity",
+      "next": "Observe actual Windows result; only then admit routing semantics and refresh #290 and #299/#300 in dependency order."
+    },
+    {
+      "slice": "#302 publication-details Windows portability repair",
+      "state_at_handoff": "separate Luna assignment; 1 Windows failure from POSIX Path string expectation",
+      "next": "Keep on assigned branch/owner; exact-head CI and independent review; separately review 7eca strict-preparation checkpoint before source-bound RCC inspection."
+    },
+    {
+      "slice": "#84 current PostgreSQL transaction repair acceptance review",
+      "state_at_handoff": "integrated partial foundation; whole contract open",
+      "next": "Exact-head source review and remaining wheel/native/TLS/multiprocess gates; high fanout makes this a candidate after ownership reconciliation."
+    },
+    {
+      "slice": "Core 1.0.3 publication preflight",
+      "state_at_handoff": "separate release work; PR303 only merged Core source to community, no publication",
+      "next": "Complete immutable preflight through normal authorized workflow; this unlocks #282 public Core-floor/template gates."
+    }
+  ],
+  "blocked_chains_and_program_bottlenecks": [
+    {
+      "chain": "Shared Run / database / Workspace / Package foundations",
+      "details": "#84/#129/#135 and #83/#130 feed 11+ typed consumers; #129 has 16 direct consumers, #83 11, #84 8. Partial integrations do not clear whole contracts."
+    },
+    {
+      "chain": "Adapters and worker execution",
+      "details": "#134 -> #143 real second-adapter admission is a major convergence point (13 direct consumers), then #133/#138/#139/#142/#144+."
+    },
+    {
+      "chain": "Canvas full acceptance",
+      "details": "#93 aggregates eight UI children; #101 coordinates it. Parent/related edges do not gate child implementation. Accepted 99-A/100-A/100-B/#125/#98 scoped criteria do not close any original contract."
+    },
+    {
+      "chain": "Current MCP shared outputs",
+      "details": "#292 Windows remains gate for #290/#299/#300 despite separate accepted native proof and passing ordinary checks; #300 production authenticator and Canvas wiring remain unproven."
+    },
+    {
+      "chain": "Release and distribution",
+      "details": "#221 community/Core promotion conflict and publication gates remain independent of #301/#292/#302; #282 remains dependent on actual Core 1.0.3 registry bytes/API, followed by package/template consumer proof. Full mission also includes workers, data, Robots/Work Items, Canvas host, native and distribution criteria."
+    }
+  ],
+  "verification": {
+    "command_projector_check": "python scripts/project_community_execution_graph.py --check",
+    "result_projector_check": "PASS: validated 54 issue projections; COMPLETE=1",
+    "command_graph_regressions": "python scripts/test_project_community_execution_graph.py",
+    "result_graph_regressions": "PASS: 20 tests, 1.929s, zero failures",
+    "install_or_bootstrap": "none; dependency-free diagnostic invocation"
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "For live graph reconciliation, fetch every GitHub issues API page and exclude PR objects; match the entire retained issue-number set; compare full live bodies with immutable captured acceptance contracts by exact UTF-8 bytes/hash; report current issue state separately; preserve drift, old stage snapshots, and stale pointers as historical until semantically reviewed and accepted in an additive amendment.",
+    "evidence": "Four-page public GitHub REST collection: 105 issue objects after excluding 198 PR objects; all 54 original issue IDs match; 53 open and #210 closed; 50 bodies exactly match and #99/#100/#126/#127 differ; graph projector check and 20 regression tests pass.",
+    "stale_or_ambiguous_guidance_removed": "No canonical file edited in this read-only lane. Proposal resolves ambiguity between historical exact-contract/stage snapshots and current API state, and between old graph.current_next_action (06:08Z) and current 18:42Z amendment/convergence pointers.",
+    "remaining_uncertainty": "The four body differences require semantic review before deciding whether each represents acceptance-contract revision, added explanation, or other drift. PR readiness and check status are bounded to the exact handoff observation; refresh PRs before acting.",
+    "exact_proposed_delta": "Insert after `## Community program evidence` in `docs/skills/repository-operations.md`:\n\n> For live issue reconciliation, fetch `/repos/{owner}/{repo}/issues` through every response page with `state=all` and exclude pull requests (objects with `pull_request`). Compare the full retained contract ID set and current issue states with the ledger. Compare each complete live issue `body` with its immutable captured acceptance contract byte-for-byte as UTF-8 (and record both SHA-256 digests); treat mismatches as review candidates. An API read alone does not amend acceptance contracts, historical hashes, graph stages, or work ownership. Resolve freshness from observation times on the current amendment, convergence, and substage pointers; retain older stage snapshots and stale `current_next_action` entries as historical evidence until an additive amendment is reviewed and accepted."
+  },
+  "upstream_disposition": "none; this reconciliation found no upstream defect candidate and made no issue report."
+}

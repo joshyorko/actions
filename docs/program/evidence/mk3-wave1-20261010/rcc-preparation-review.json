@@ -1,0 +1,37 @@
+{
+  "disposition": "HOLD for inspection acceptance or compiler advancement; GO for bounded preparation source semantics only",
+  "checkpoint": "7eca36abce160b68f616eab9b7fdc9c4e7f2b053",
+  "tree": "2890ce916a5a9ee9201239635a220f95ecfe9ee8",
+  "parent": "e31506239fd0260d708a11440762537334f8d2d1",
+  "private_compiler": "01ca087a8cb58798cbce729a107c55f4dab75cf1",
+  "private_compiler_tree": "ebaa89d28078ccd069584ea1f9238c0022ee0779",
+  "review_scope": "Complete three-file checkpoint delta, preparation/cache types and behavior, existing publication/acquisition runner, exact private compiler source via GitHub connector",
+  "commands": [
+    {"command": "git log -2 --format='%H %T %P %s'", "observation": "Exact checkpoint/tree/parent matched handoff."},
+    {"command": "git diff --stat e31506239fd0260d708a11440762537334f8d2d1 HEAD", "observation": "Adapter, adapter tests, canonical guide only; 300 additions, 21 deletions."},
+    {"command": "git diff --check e31506239fd0260d708a11440762537334f8d2d1 HEAD", "exit": 0},
+    {"command": "rg -n 'prepare_runtime_for_inspection|PreparedRccInspection|_prepared_runtime_cache' action_server/src action_server/tests", "observation": "New preparation API referenced only by adapter and two pure tests; no metadata inspection integration."}
+  ],
+  "source_findings": [
+    {"severity": "observation", "finding": "Same-publication pair is retained coherently; strict preparation republishes and acquires on absent/mismatched pair, never derives spec digest from environment fingerprint or acquire response."},
+    {"severity": "observation", "finding": "Cache key includes resolved environment identity, normalized environment fingerprint and provider. Changed source_generation with unchanged environment returns cached pair without another acquire. Caller-supplied generation is not measured-source evidence."},
+    {"severity": "boundary", "finding": "PreparedRccInspection is a frozen in-process value, not an authenticated inspection receipt; direct construction alone establishes no provenance. No new checked metadata discovery or executable ownership was implemented."},
+    {"severity": "boundary", "finding": "Existing publish/acquire runner uses subprocess.run with a configurable direct-child timeout and uncapped captured stdout/stderr. This unchanged helper does not prove bounded descendant cleanup for a future inspection process."},
+    {"severity": "observation", "finding": "Private compiler remains pure, takes SuppliedRccIdentity and SuppliedActionMetadata, and emits inspection_status not_run. Checkpoint adds no compiler caller or change of that boundary."}
+  ],
+  "blocking_source_regressions": [],
+  "gates_not_run": ["mypy on checkpoint or final union", "fresh pure-test replay", "actual source-bound RCC metadata inspection", "bounded inspection streams and owned process cleanup", "final union hosted and platform checks"],
+  "historical_test_boundary": "Handoff reports 75 adapter tests passed/1 skipped; not rerun, not actual RCC inspection evidence.",
+  "documentation_improvement": {
+    "file": "docs/skills/repository-operations.md",
+    "location": "After Controlled inspection preparation paragraph",
+    "exact_addition": "`prepare_runtime_for_inspection` keys its in-process cache by resolved environment identity, normalized environment fingerprint, and provider. With unchanged environment inputs, a source-generation change reuses the cached authoritative publication pair without another acquire. Treat `source_generation` as caller-supplied provenance, not measured-source evidence. A source-reuse preparation result does not establish current local artifact availability, package metadata discovery, source immutability, or descendant cleanup; those claims require a separately executed, source-bound inspection and its bounded lifecycle receipt.",
+    "evidence": "Adapter cache construction and source-reuse branch, two checkpoint tests, unchanged subprocess runner, and absence of production inspection caller.",
+    "ambiguity_removed": "Conflating cached publication-pair preparation with source-bound executable inspection or current acquire proof.",
+    "uncertainty": "No real inspection or mypy execution performed; future compiler integration remains proposed."
+  },
+  "upstream_disposition": "none",
+  "worktree": "/workspace/work/actions-mk3-rcc-review",
+  "branch": "mk3/rcc-preparation-review-20261010",
+  "mutations": "Only isolated local worktree and evidence receipts; no source edits, installs, remote mutation or compiler advancement."
+}

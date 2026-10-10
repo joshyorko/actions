@@ -1,0 +1,57 @@
+[
+  {
+    "path": "docs/program/evidence/mk3-wave1-20261010/checkpoint.json",
+    "bytes": 1823,
+    "sha256": "37ea93ed376e6f0004d07d84743cf4435f8a65d6b8c5d262127abdc975522b8e"
+  },
+  {
+    "path": "docs/program/evidence/mk3-wave1-20261010/core-tag-preflight.json",
+    "bytes": 280,
+    "sha256": "05040113b425740815b49e7ca77ca0e9dedc91c517ceb4f4c32218b07f357be2"
+  },
+  {
+    "path": "docs/program/evidence/mk3-wave1-20261010/core-tag-push.txt",
+    "bytes": 108,
+    "sha256": "bd44566e55fb393625fb0c077bf2f8d26a371dc60d3008d3525f3df5c20b012e"
+  },
+  {
+    "path": "docs/program/evidence/mk3-wave1-20261010/core-union-generator.log",
+    "bytes": 4479,
+    "sha256": "a8404f127d195853fc4f555eaefd63c2b316408090116fb4d23c965df8bfd63d"
+  },
+  {
+    "path": "docs/program/evidence/mk3-wave1-20261010/core-union-merge-tree.txt",
+    "bytes": 863,
+    "sha256": "8130b72eb02760db2b5912d009fcdeb90929d8d54082cce370c4f10e32a3d06e"
+  },
+  {
+    "path": "docs/program/evidence/mk3-wave1-20261010/core-union-release-tests.log",
+    "bytes": 3672,
+    "sha256": "eb5fbaebbcf3f0f7b25b6717b8200b8a0a4fcacef10b6a600a78b5a1428c57fc"
+  },
+  {
+    "path": "docs/program/evidence/mk3-wave1-20261010/graph-reconcile.json",
+    "bytes": 14859,
+    "sha256": "7ee3afb44f3fda2d1619dacc3614d9ad96834f8bb6459a8f37c06673baa8a96b"
+  },
+  {
+    "path": "docs/program/evidence/mk3-wave1-20261010/pr301-review.json",
+    "bytes": 3826,
+    "sha256": "b092eeef6ff9e9a94617d9633942d0da1533a39ed43f0884d2644a68b9c40b5d"
+  },
+  {
+    "path": "docs/program/evidence/mk3-wave1-20261010/pr301-review.md",
+    "bytes": 2354,
+    "sha256": "f5e79b5acb8d924fb50ea38daf4622ad11b6c7df45670f6986e5122a181246fb"
+  },
+  {
+    "path": "docs/program/evidence/mk3-wave1-20261010/rcc-preparation-review.json",
+    "bytes": 4548,
+    "sha256": "007c2bf30a98af3c02125b665d684c90bf2fe922db8a3a36b020b9699523ce6a"
+  },
+  {
+    "path": "docs/program/evidence/mk3-wave1-20261010/rcc-preparation-review.md",
+    "bytes": 2768,
+    "sha256": "93100b30add11304470cfd17e79fbcbedce52c89e51dbbaede0f6ca969fbdd94"
+  }
+]
