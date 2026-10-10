@@ -17,7 +17,7 @@ pytestmark = pytest.mark.skipif(
 
 @pytest.fixture
 def root_fd(tmp_path: Path):
-    fd = os.open(tmp_path, os.O_RDONLY | os.O_DIRECTORY)
+    fd = os.open(tmp_path, os.O_RDONLY | getattr(os, "O_DIRECTORY"))
     try:
         yield fd
     finally:
@@ -470,6 +470,16 @@ def test_procfd_failures_do_not_read_or_leak_descriptors(
 def test_missing_o_path_fails_without_fallback(root_fd, monkeypatch):
     reader = _reader()
     monkeypatch.delattr(reader.os, "O_PATH")
+    with pytest.raises(NotImplementedError, match="Linux|descriptor"):
+        reader.read_selected_files(root_fd, [], protected_input_names=[])
+
+
+@pytest.mark.parametrize("invalid_flag", [True, -1, "unsupported"])
+def test_invalid_linux_flag_fails_before_acquisition(
+    root_fd, monkeypatch, invalid_flag
+):
+    reader = _reader()
+    monkeypatch.setattr(reader.os, "O_PATH", invalid_flag)
     with pytest.raises(NotImplementedError, match="Linux|descriptor"):
         reader.read_selected_files(root_fd, [], protected_input_names=[])
 

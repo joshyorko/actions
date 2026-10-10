@@ -2313,6 +2313,11 @@ supported-environment assumption, not root authorization evidence. Both
 observed file sizes and incrementally read bytes use the same file/total/count
 policy. Owned root, procfs, traversal and leaf handles close on success and
 failure; the caller's descriptor remains owned by the caller.
+Resolve required Linux flags through checked attribute access after the platform
+gate. Reject missing, non-integer, boolean or non-positive flags rather than
+substitute weaker open modes. Linux-only private code is still checked by the
+Windows/macOS typecheck jobs; run configured mypy checks for Linux, `win32` and
+`darwin` before publishing this reader or its tests.
 
 The result separates measured root/directory/file metadata from the portable
 canonical inventory. Opened objects bind device, inode, file type, mode, size,

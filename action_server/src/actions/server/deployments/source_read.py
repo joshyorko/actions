@@ -128,16 +128,6 @@ def read_selected_files(
 def _require_linux_descriptors() -> None:
     if (
         sys.platform != "linux"
-        or any(
-            not getattr(os, name, 0)
-            for name in (
-                "O_DIRECTORY",
-                "O_NOFOLLOW",
-                "O_NONBLOCK",
-                "O_CLOEXEC",
-                "O_PATH",
-            )
-        )
         or os.open not in os.supports_dir_fd
         or os.stat not in os.supports_dir_fd
         or os.stat not in os.supports_follow_symlinks
@@ -145,12 +135,23 @@ def _require_linux_descriptors() -> None:
         raise NotImplementedError(
             "Linux no-follow directory descriptor support is required"
         )
+    for name in ("O_DIRECTORY", "O_NOFOLLOW", "O_NONBLOCK", "O_CLOEXEC", "O_PATH"):
+        _required_linux_flag(name)
 
 
 def _validated_names(names: Iterable[str], label: str) -> Iterator[str]:
     for name in source_manifest._bounded_values(names, label):
         source_manifest._validated_parts(name)
         yield name
+
+
+def _required_linux_flag(name: str) -> int:
+    value = getattr(os, name, None)
+    if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+        raise NotImplementedError(
+            "Linux no-follow directory descriptor support is required"
+        )
+    return value
 
 
 def _own_fd(handles: ExitStack, fd: int) -> int:
@@ -164,7 +165,10 @@ def _open_proc_directory(handles: ExitStack) -> int:
             handles,
             os.open(
                 "/proc/self/fd",
-                os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC,
+                os.O_RDONLY
+                | _required_linux_flag("O_DIRECTORY")
+                | _required_linux_flag("O_NOFOLLOW")
+                | _required_linux_flag("O_CLOEXEC"),
             ),
         )
     except OSError as exc:
@@ -193,7 +197,12 @@ def _opened_path(
     with ExitStack() as handles:
         directory_handles = [root_fd]
         directories = [_observation(os.fstat(root_fd))]
-        directory_flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC
+        directory_flags = (
+            os.O_RDONLY
+            | _required_linux_flag("O_DIRECTORY")
+            | _required_linux_flag("O_NOFOLLOW")
+            | _required_linux_flag("O_CLOEXEC")
+        )
         for part in parts[:-1]:
             fd = _own_fd(
                 handles, os.open(part, directory_flags, dir_fd=directory_handles[-1])
@@ -208,7 +217,9 @@ def _opened_path(
             handles,
             os.open(
                 parts[-1],
-                os.O_PATH | os.O_NOFOLLOW | os.O_CLOEXEC,
+                _required_linux_flag("O_PATH")
+                | _required_linux_flag("O_NOFOLLOW")
+                | _required_linux_flag("O_CLOEXEC"),
                 dir_fd=directory_handles[-1],
             ),
         )
@@ -224,7 +235,9 @@ def _opened_path(
                 handles,
                 os.open(
                     str(pinned_fd),
-                    os.O_RDONLY | os.O_NONBLOCK | os.O_CLOEXEC,
+                    os.O_RDONLY
+                    | _required_linux_flag("O_NONBLOCK")
+                    | _required_linux_flag("O_CLOEXEC"),
                     dir_fd=proc_fd,
                 ),
             )
