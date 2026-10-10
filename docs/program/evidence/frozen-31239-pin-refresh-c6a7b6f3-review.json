@@ -1,0 +1,72 @@
+{
+  "reviewed_at_utc": "2026-10-10",
+  "verdict": "ACCEPT for hosted launch only",
+  "control_commit": "c6a7b6f3b49fdf85622961dafae1b41bc35b1c65",
+  "control_tree": "0f14b7d4654d8aaf7af3171df10c5f7d883cdeae",
+  "candidate_commit": "31239cf99c7b264a0eab89660e93b391532ac305",
+  "candidate_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+  "native_build": {
+    "commit": "056d32601563a213643436e7df14e6ca0ea50516",
+    "tree": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+    "parents": [
+      "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "31239cf99c7b264a0eab89660e93b391532ac305"
+    ],
+    "relation": "Distinct synthetic build commit with exact candidate full-tree equality; independently Git API verified",
+    "run_id": 38039806634,
+    "attempt": 1
+  },
+  "receipt_paths": [
+    "/workspace/work/community-resume/evidence/native-31239-linux/native-31239-byte-verification.json",
+    "/workspace/work/community-resume/evidence/native-31239-linux/native-31239-wrapper-byte-verification.json"
+  ],
+  "receipt_sha256": [
+    "3afbc8e2f4fe6e46bdd03512e82794e27cca3c705ad28c4a7711fb26b7fb349a",
+    "1a87b8fac2810a5b7e8ce4916771ffe1d71e20494bd86562ad43666c79bb2896"
+  ],
+  "native_artifact": {
+    "id": 11664669288,
+    "size": 59369402,
+    "zip_sha256": "5db37991cde941ba1c541912d376b33cb0e397db7a427db3e3f627358f5c7286",
+    "manifest_sha256": "7b75b64d160fa73ca14728437a2cc07aebdccf58d450d83b9745245001a33538",
+    "inventory_sha256": "4e61388ef1ae7f2348391b28a42cf63427fdefcd3fbdda2703d6844c4fe6afca",
+    "package_tree_sha256": "ee7cdb5eae9a04042bc476034bb9ed327d51fa705cce70abf8426454fe3d6e6f",
+    "frozen_binary_sha256": "0509dfc3c193ba8ca0221603a9f2444091a558aabbb886a957e89a22cf073dc3"
+  },
+  "separate_wrapper_artifact": {
+    "id": 11665179231,
+    "size": 77776642,
+    "zip_sha256": "72c3451b5a9f1d54632d7bdeaf36aa0ab3b43e9fbf021497b53db372a00c80a8",
+    "binary_size": 81977186,
+    "binary_sha256": "28cf80cb1d2811236ed64595b8b9d03a54d1904d63497eb39f34fb9bd67978f3",
+    "execution_verified": false
+  },
+  "independent_checks": [
+    "11 verifier constants equal measured receipts",
+    "All summary artifact/size/hash/build/candidate/receipt/wrapper fields match measured receipts",
+    "Generator instantiated without writes; full object equals parsed generated frozen YAML",
+    "All unchanged setup/RCC/dependency/permissions/triggers/JUnit steps and actual pytest command preserved",
+    "Source/dependencies/test bodies/exact-four JUnit verifier byte-identical to parent",
+    "git diff --check passed; clean worktree",
+    "Prior verifier procedural guards preserved; candidate ancestor+tree+HEAD server subtree and build-source API tree guards retained, archive size added",
+    "Local bytes script reviewed, full1185-entry stream verification reused from immutable root receipt; no archive repeated"
+  ],
+  "owner_reported_checks": [
+    "Generator regeneration",
+    "py_compile",
+    "Ruff check",
+    "Verifier Ruff format",
+    "Exact receipt-to-pins consistency",
+    "Generator-wide formatting pre-existing failure confirmed on baseline; no unrelated formatting edits"
+  ],
+  "execution_status": "31239 frozen managed rollback NOT RUN; required new hosted4-case zero-skips receipt pending",
+  "historical_proof": "f7 run38037959456 remains historical scoped PASS; cannot validate31239. Earlier startup/invocation and RCC exit141 failures remain preserved.",
+  "canonical_disposition": {
+    "path": "docs/skills/repository-operations.md",
+    "existing_coverage": "Frozen Runtime acceptance section already requires candidate/build tree separation, exact artifact/inventory/executable hashes, worker origins and expected unskipped JUnit; no cosmetic duplicate proposed.",
+    "changed_companion": "action_server/docs/DEVELOPMENT.md current pin paragraph accurately describes31239/056d, separate measured wrapper not executed,1185 inventory entries and hosted acceptance still pending.",
+    "stale_guidance_removed": "Current workflow f7 pins replaced by31239; historical f7 proof retained explicitly as historical, not relabeled.",
+    "remaining_uncertainty": "Hosted actual4-case managed frozen execution and natural cleanup on31239 remain required. Manifest/source tree relation is not full clean-source attestation; wrapper not executed by this gate."
+  },
+  "upstream_disposition": "None. Actions-local acceptance control pin refresh; no confirmed maintained RCC defect or external report performed."
+}

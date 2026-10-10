@@ -1,0 +1,87 @@
+{
+  "browser": {
+    "path": "<runner-home>/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome",
+    "sha256": "0b20b130e7edd9dd51873be867761295fe0cfad490c2b9a64f95bd3cfc08fa71",
+    "status": "passed",
+    "version": "Google Chrome for Testing 151.0.7922.34"
+  },
+  "built_resource_sha256": "fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852",
+  "candidate_acceptance_manifest_sha256": "c29566ec013229cc3dd0cde2b7f3e7f353b8d3e406d6e84ab899aea24f70037a",
+  "candidate_core": {
+    "runtime_module_origin": "<checkout>/action_server/src/actions/server/__init__.py",
+    "runtime_module_sha256": "399f9e2ef2d67d7018d8ab7c6b9a65adf70aa33134d15c9840aedcf35a821576",
+    "runtime_process_args": [
+      "<runner-home>/.cache/pypoetry/virtualenvs/actions-runtime-2mfaTL5d-py3.12/bin/python",
+      "-m",
+      "actions.server",
+      "start",
+      "--actions-sync=true",
+      "--port=0",
+      "--datadir=<task-tmp>/pytest/test_canvas_template_candidate0/.sema4ai-test-action-server",
+      "--db-file=server.db",
+      "-v",
+      "--skip-lint",
+      "--min-processes=0",
+      "--max-processes=20"
+    ],
+    "sha256": "edb655d70e3e0cbd258f11f5a3fe1def1421e3f1786d412320ace9eaeee4b22f",
+    "source_blobs": {
+      "actions/pyproject.toml": "193a1423a94f3050ccbe8ba70bb9a0c287d0c2aa",
+      "actions/src/actions/mcp/__init__.py": "e997a62833877d9394365cfc261e15d9e9c0b7d1",
+      "actions/src/actions/mcp/_metadata.py": "e761a0608505c053532c807f81b888839fd1be06"
+    },
+    "source_revision": "92b46fcfef16af7b46882a3e08d5e95c056c1fed",
+    "source_tree": "80a6ef315411a446db00c234ff9a5a294d91fc00",
+    "version": "1.0.2",
+    "wheel_api_sources": {
+      "actions/mcp/__init__.py": {
+        "git_blob": "e997a62833877d9394365cfc261e15d9e9c0b7d1",
+        "sha256": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365"
+      },
+      "actions/mcp/_metadata.py": {
+        "git_blob": "e761a0608505c053532c807f81b888839fd1be06",
+        "sha256": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+      }
+    },
+    "wheel_path": "<task-tmp>/pytest/test_canvas_template_candidate0/candidate-core-wheel/actions_core-1.0.2-py3-none-any.whl",
+    "worker": {
+      "actions_core_version": "1.0.2",
+      "actions_module": "<actions-home>/holotree/62fb83f_a78733b_e3ece808/lib/python3.12/site-packages/actions/__init__.py",
+      "api_modules": {
+        "actions.mcp": {
+          "git_blob": "e997a62833877d9394365cfc261e15d9e9c0b7d1",
+          "path": "<actions-home>/holotree/62fb83f_a78733b_e3ece808/lib/python3.12/site-packages/actions/mcp/__init__.py",
+          "sha256": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365"
+        },
+        "actions.mcp._metadata": {
+          "git_blob": "e761a0608505c053532c807f81b888839fd1be06",
+          "path": "<actions-home>/holotree/62fb83f_a78733b_e3ece808/lib/python3.12/site-packages/actions/mcp/_metadata.py",
+          "sha256": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+        }
+      },
+      "direct_url_wheel": "<task-tmp>/pytest/test_canvas_template_candidate0/candidate-core-wheel/actions_core-1.0.2-py3-none-any.whl",
+      "source_blobs": {
+        "actions/pyproject.toml": "193a1423a94f3050ccbe8ba70bb9a0c287d0c2aa",
+        "actions/src/actions/mcp/__init__.py": "e997a62833877d9394365cfc261e15d9e9c0b7d1",
+        "actions/src/actions/mcp/_metadata.py": "e761a0608505c053532c807f81b888839fd1be06"
+      },
+      "source_revision": "92b46fcfef16af7b46882a3e08d5e95c056c1fed",
+      "source_tree": "80a6ef315411a446db00c234ff9a5a294d91fc00",
+      "wheel_sha256": "edb655d70e3e0cbd258f11f5a3fe1def1421e3f1786d412320ace9eaeee4b22f",
+      "worker_prefix": "<actions-home>/holotree/62fb83f_a78733b_e3ece808"
+    }
+  },
+  "candidate_registry_base": "actions-core=1.0.2",
+  "limits": [
+    "The production template's published actions-core=1.0.3 gate is separate and not run here.",
+    "artifact:null is a partial result and does not prove authorized artifact retrieval.",
+    "This local Runtime/browser gate does not claim ChatGPT rendering."
+  ],
+  "production_package_manifest_sha256": "eec63118246ceb1c6b96bf787d77cce64bced6f3a5341ca574f75f7f614da146",
+  "runtime_calls": [
+    "canvas_fixture_search",
+    "canvas_candidate_core_provenance"
+  ],
+  "scope": "candidate-source Runtime/browser acceptance only",
+  "template_zip_sha256": "1f18aa3a85711873498ef4b483aea4cce8f9b730a74d949d3058618898952ade"
+}

@@ -1,0 +1,21 @@
+{
+  "observed_at_utc": "2026-10-10 09:26:20 UTC",
+  "repository": "joshyorko/actions",
+  "pr": 285,
+  "head": "499f3f71a8f945baaffee3c6ad028b0a30479c7b",
+  "run_id": 38040249591,
+  "job_id": 114178880914,
+  "checkout": "750f130b8539d94f1e29df64e05df1438ced4916",
+  "tree": "a93a6618c5beb2483ef4f5e7233a318074d34c60",
+  "parents": [
+    "31239cf99c7b264a0eab89660e93b391532ac305",
+    "499f3f71a8f945baaffee3c6ad028b0a30479c7b"
+  ],
+  "result": "FAIL",
+  "failure": "Configured Ruff formatting rejected tests/action_server_tests/test_cli_mcp_catalog_rollback.py; behavioral integration and typecheck passed.",
+  "integration_test_result": "129 passed, 17 skipped, 947 deselected in 608.32s",
+  "typecheck_result": "Success: no issues found in 317 source files",
+  "source_scope": "Actual synthetic PR checkout tree equals published PR285 head tree. No publication or whole issue acceptance.",
+  "next_action": "Existing owner applies formatting only; root independently verifies AST equivalence and publishes after review.",
+  "log_excerpts": "2026-10-10T09:09:36.6416834Z \n2026-10-10T09:09:36.6417145Z HEAD is now at 750f130 Merge 499f3f71a8f945baaffee3c6ad028b0a30479c7b into 31239cf99c7b264a0eab89660e93b391532ac305\n2026-10-10T09:09:36.6420817Z ##[endgroup]\n2026-10-10T09:09:36.6457792Z [command]/usr/bin/git log -1 --format=%H\n2026-10-10T09:09:36.6420817Z ##[endgroup]\n2026-10-10T09:09:36.6457792Z [command]/usr/bin/git log -1 --format=%H\n2026-10-10T09:09:36.6482158Z 750f130b8539d94f1e29df64e05df1438ced4916\n2026-10-10T09:09:36.6723849Z ##[group]Run astral-sh/setup-uv@v5\n2026-10-10T09:24:04.8625640Z \n2026-10-10T09:24:04.8626260Z ========= 129 passed, 17 skipped, 947 deselected in 608.32s (0:10:08) ==========\n2026-10-10T09:24:04.8626768Z Log (html): /home/runner/work/actions/actions/action_server/tests/output/log.html\n2026-10-10T09:24:05.1904882Z ['/home/runner/.cache/pypoetry/virtualenvs/actions-runtime-2mfaTL5d-py3.12/bin/python', '-m', 'pytest', '-m', 'integration_test and not native_artifact_test', '-rfE', '-vv', '--force-regen', '-n', '0']\n2026-10-10T09:24:06.9291766Z \u001b[1;37mpoetry run ruff format --check --config /home/runner/work/actions/actions/devutils/ruff.toml --exclude=_static_contents.py,_oauth2_config.py src tests\u001b[0m\n2026-10-10T09:24:06.9292932Z Would reformat: \u001b[1mtests/action_server_tests/test_cli_mcp_catalog_rollback.py\u001b[0m\n2026-10-10T09:24:06.9293561Z 1 file would be reformatted, 286 files already formatted\n2026-10-10T09:24:06.9561568Z ##[error]Process completed with exit code 1.\n2026-10-10T09:24:06.9292932Z Would reformat: \u001b[1mtests/action_server_tests/test_cli_mcp_catalog_rollback.py\u001b[0m\n2026-10-10T09:24:06.9293561Z 1 file would be reformatted, 286 files already formatted\n2026-10-10T09:24:06.9561568Z ##[error]Process completed with exit code 1.\n2026-10-10T09:24:06.9605268Z ##[group]Run uv run --no-project --python 3.12 inv typecheck\n2026-10-10T09:24:17.7081865Z tests/action_server_tests/test_mcp_tunnel_origin_scope.py:279:5: note: By default the bodies of untyped functions are not checked, consider using --check-untyped-defs  [annotation-unchecked]\n2026-10-10T09:24:17.8481634Z Success: no issues found in 317 source files\n2026-10-10T09:24:17.9146679Z ##[group]Run uv run --no-project --python 3.12 inv docs --check\n2026-10-10T09:24:17.9147278Z \u001b[36;1muv run --no-project --python 3.12 inv docs --check\u001b[0m"
+}

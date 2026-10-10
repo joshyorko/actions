@@ -1,0 +1,82 @@
+{
+  "reviewed_at_utc": "2026-10-10",
+  "verdict": "ACCEPT candidate-source hosted gate; PR282 production admission BLOCKED",
+  "run_id": 38041682069,
+  "job_id": 114183013879,
+  "job_conclusion": "success",
+  "step": "Verify Canvas candidate-source Runtime and browser acceptance",
+  "artifact": {
+    "id": 11666217038,
+    "name": "canvas-query-candidate-38041682069-1",
+    "size": 2063,
+    "sha256": "f6012dca7c6520ab89aaf820b5f657acedcf7e53ec09328a89e503aa2948b5fa",
+    "receipt_sha256": "bbe5a7e919502c85f1006d0bce7e439c4f7ec3b95fac6eeb75b6553c6c37d897",
+    "junit_sha256": "044eb60fa3fc76e90a367259a160546d4cb5d1cd206c201de88fc72591fdf12d"
+  },
+  "source": {
+    "actual_synthetic_checkout": "92b46fcfef16af7b46882a3e08d5e95c056c1fed",
+    "tree": "80a6ef315411a446db00c234ff9a5a294d91fc00",
+    "parents": [
+      "31239cf99c7b264a0eab89660e93b391532ac305",
+      "b02054207b92630c61f8f4fe53785e359cd38f37"
+    ],
+    "accepted_local": "b4bfe1dd961e0195fdd6cf77a3124921773edad8",
+    "relation": "actual synthetic checkout has exact accepted b4 full tree; commit identities remain distinct"
+  },
+  "junit": {
+    "name": "test_canvas_template_candidate_source_runs_through_runtime_and_real_browser",
+    "classname": "tests.action_server_tests.mcp.test_canvas_query_template",
+    "tests": 1,
+    "passed": 1,
+    "skipped": 0,
+    "errors": 0,
+    "failures": 0,
+    "test_seconds": "39.980",
+    "suite_time_note": "sanitizer replaces suite time with0; testcase retains39.980"
+  },
+  "verified": [
+    "Actual GitHub job/step success and actual artifact API digest/size match downloaded ZIP",
+    "Receipt Core API blob IDs and measured module hashes match accepted Git blobs",
+    "Worker actions-core distribution owns imports; test requires direct_url and on-disk wheel SHA to match candidate build",
+    "Runtime module hash/source args and absolute checkout source pin",
+    "Template ZIP, resource HTML and unchanged production manifest hashes independently recomputed from accepted Git blobs",
+    "Actual Playwright spec reads real MCP resource and compares bundle HTML, bridges UI tools/call to real MCP client, asserts two search calls/results/no external requests",
+    "Browser receipt Google Chrome for Testing151.0.7922.34 with executable hash0b20b130e7edd9dd51873be867761295fe0cfad490c2b9a64f95bd3cfc08fa71"
+  ],
+  "candidate_wheel": {
+    "version": "1.0.2",
+    "sha256": "edb655d70e3e0cbd258f11f5a3fe1def1421e3f1786d412320ace9eaeee4b22f",
+    "distribution": "private source wheel post-installed over registry1.0.2 in disposable acceptance manifest",
+    "api_sha256": {
+      "actions/mcp/__init__.py": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+      "actions/mcp/_metadata.py": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+    }
+  },
+  "production_blocker": {
+    "test": "tests/contract_tests/test_active_contracts.py::test_template_manifests_pin_supported_worker_core",
+    "independent_result": "1 failed in0.04s",
+    "line": 396,
+    "fact": "templates/canvas-query/package.yaml and embedded Canvas manifest require unpublished actions-core1.0.3; active template contract requires supported published1.0.2",
+    "exposure": "_new_project_helpers._embedded_assets/_ensure_latest_templates and _new_project.handle_list_templates consume the embedded Canvas catalog; production new/list exposes it",
+    "decision": "Do not weaken contract or introduce template exception. PR282 production admission stays blocked until authorized separately versioned Core publication and exact registry-wheel compatibility verification. Candidate-only gate is useful evidence but cannot admit the current bundle."
+  },
+  "commands": {
+    "independent_contract": "cwd=/tmp/work/actions-worktrees/canvas-template-20261010/action_server PYTHONPATH=/tmp/work/actions-worktrees/canvas-template-20261010/action_server/src:/tmp/work/actions-worktrees/canvas-template-20261010/action_server/tests TMPDIR=/tmp/work /tmp/work/multipackage-runtime-acceptance/venv-primary/bin/python -m pytest -q -n0 tests/contract_tests/test_active_contracts.py::test_template_manifests_pin_supported_worker_core --confcutdir=tests/contract_tests --tb=short",
+    "hosted": "From action_server: uv-selected matrix Python runs Poetry with VIRTUAL_ENV unset; poetry run python -m pytest -n0 -q exact candidate test with opt-in flag, JUnit and receipt paths; subsequent embedded fail-closed validator requires expected module/name/counters and source/wheel/worker/browser receipt"
+  },
+  "limits": [
+    "No browser/RCC/install was executed locally in this review",
+    "Candidate whole-wheel and disposable manifest digests are test/receipt observed; actual wheel not independently downloaded",
+    "No published Core1.0.3 compatibility, authorized artifact binding, schema Success with artifact, actual ChatGPT/production-host rendering, or frozen/Go Runtime Canvas gate",
+    "No complete unknown-descendant census or universal orphan guarantee"
+  ],
+  "canonical_proposal": {
+    "path": "docs/skills/repository-operations.md",
+    "anchor": "Canvas Query candidate-source gate paragraph after published-Core gate statement",
+    "exact_delta": "The embedded Canvas template participates in the production `new` and `list-templates` catalog. Its candidate-source browser pass does not waive `test_template_manifests_pin_supported_worker_core` or admit an unpublished production dependency; keep template admission blocked until the separately authorized Core version is published and its exact registry wheel passes the production template gate.",
+    "existing_coverage": "Candidate/publication distinction, actual imported-module hashes, Linux timeout cleanup, exact opt-in JUnit and artifact:null limitations are already documented; retain them.",
+    "stale_guidance_removed": "No instructions removed. Supersede prior candidate-browser NOT RUN only in dated receipt; production gate remains pending.",
+    "uncertainty": "Production Core publication/version and artifact predecessor remain separate decisions."
+  },
+  "upstream_disposition": "None. Actions-local template admission dependency; no confirmed RCC defect or external report performed."
+}

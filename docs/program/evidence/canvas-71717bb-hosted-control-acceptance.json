@@ -1,0 +1,46 @@
+{
+  "canonical_docs_disposition": "Existing repaired guide accurately records shared browser cache, maintained direct-workflow ownership, Linux source-only gate and separate production requirements; no further acceptance expansion.",
+  "cheap_pytest_probe": {
+    "classname": "tests.action_server_tests.mcp.test_canvas_query_template",
+    "command": "PYTHONPATH=/tmp/work/actions-worktrees/canvas-template-20261010/action_server/src:/tmp/work/actions-worktrees/canvas-template-20261010/action_server/tests:/tmp/work/actions-worktrees/canvas-template-20261010/devutils/src TMPDIR=/tmp/work /tmp/work/multipackage-runtime-acceptance/venv-primary/bin/python -m pytest tests/action_server_tests/mcp/test_canvas_query_template.py::test_canvas_query_template_is_in_the_deterministic_offline_bundle -q -n 0 --basetemp=/tmp/work/canvas-control-review-pytest --junitxml=/workspace/work/rcc-review-38036869578/canvas-classname-probe.xml",
+    "cwd": "/tmp/work/actions-worktrees/canvas-template-20261010/action_server",
+    "junit_sha256": "b0cc0c37e864260c5ac28ed6aca3d137a713dc53c4aff9475013216a5b6696cf",
+    "result": "1PASS0.13s; no Runtime/browser/RCC"
+  },
+  "date": "2026-10-10",
+  "limits": [
+    "No actual candidate wheel materialization, managed Runtime/browser, public endpoint or ChatGPT test in this review.",
+    "Hosted outcome still required; control launch acceptance is not #127/#279 release or whole-issue acceptance.",
+    "Earlier process-diagnostic zombie limits remain in separate immutable receipts; no process diagnostic was repeated here."
+  ],
+  "parent": "ce760a7a8b967a484226bbcedf9462bd718d7aa2",
+  "reviewed_sha": "71717bb548858f4bc4b89257205cb1116ead932b",
+  "reviewed_tree": "cf5849dc08c31be0c82f99bf5f1b8f5862ce166f",
+  "scope": "Existing unauthenticated frontend workflow two Linux-only Canvas steps, explicit browser executable/receipt-path test extension and canonical guide. No production template/Core/artifact claim expansion.",
+  "upstream_disposition": "Actions-local hosted test/control corrections; no confirmed external repository defect or upstream issue filed.",
+  "validator_probe": {
+    "cleanup": "All direct validator children exited; temporary XML/receipt inputs removed. No background browser or RCC processes launched.",
+    "log_path": "/workspace/work/rcc-review-38036869578/canvas-71717bb-validator-probe.log",
+    "log_sha256": "3046b07d2b5758419ddc09825594829c2045d9ef8877319938ea6c0a1c6b4a46",
+    "method": "Extract actual embedded validator from current workflow YAML. Construct positive receipt by evaluating only the actual test outer receipt AST and embedded worker-return AST with synthetic source/wheel/browser facts and full Runtime argv; derive realHEAD/tree/sourceGitblobs. Execute7direct validator processes in TemporaryDirectory, verify sanitized receipt redaction and failed JUnit for negative cases. Synthetic fixture is not browser evidence.",
+    "results": [
+      "valid accepted",
+      "missingreceipt rejected",
+      "wrongsource tree rejected",
+      "browserfailed rejected",
+      "wrongmodule rejected",
+      "inconsistent suite count rejected",
+      "pytestnonzero rejected"
+    ]
+  },
+  "verdict": "ACCEPT for hosted candidate-source launch; actual Runtime/browser gate NOT RUN",
+  "verified_controls": [
+    "All30 existing steps, matrix and workflow attributes equal ac912033 after removing exactly2newCanvas steps. Default sharedPlaywright browser cache preserved for native/Windows/macOS consumers.",
+    "Poetry invoked through existing uv-selected matrixPython envelope with VIRTUAL_ENV unset; exact2.1.1 preflight, selected interpreter/module preflight remains fatal.",
+    "Expected test module confirmed by actual cheap pytest invocation; exact1case plus consistent raw counters and zero skips/fail/errors required.",
+    "Provenance receipt required, sourceHEAD/tree/browserpassed checks present; actual producer stores full Runtime argv in candidate_core and validator checks its correct prefix.",
+    "Uploads only sanitized JUnit and path-redacted verified receipt; failed verification writes a generic failed JUnit.",
+    "Actual workflow has no generated-file header; generator TARGETS omits this maintained direct-edit workflow.",
+    "Clean tree and git diff --check pass."
+  ]
+}

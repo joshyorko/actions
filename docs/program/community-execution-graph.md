@@ -210,3 +210,10 @@ PR283 is integrated at 31239cf9 with its exact independently reviewed and fully 
 
 | Supplemental gate | Status | Accounting | Scope and evidence |
 |---|---|---|---|
+
+### program-amendment-20261010T0944Z — 2026-10-10T09:44:39Z
+
+Existing isolated Cloud lanes cleared the Canvas integration conflict and obtained actual candidate Runtime/browser acceptance, then independently confirmed its production catalog is still blocked by unpublished Core1.0.3. The supported-worker contract remains enforced. Existing frozen lane corrected one AST-equivalent formatting failure, then refreshed the artifact pins after the old f7 source guard correctly rejected newer integration source. New31239 Linux native and wrapper artifact bytes are independently verified; fresh frozen execution remains required. CAS explicitly supports per-worktree cwd, but Owner diagnostics still show its existing pod Failed. Existing remote threads/worktrees and unknown effects are preserved. No community merge or release occurred, no additional whole issue was accepted, and all54 original contracts and historical archive hashes remain unchanged.
+
+| Supplemental gate | Status | Accounting | Scope and evidence |
+|---|---|---|---|

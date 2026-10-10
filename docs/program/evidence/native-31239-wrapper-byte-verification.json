@@ -1,0 +1,12 @@
+{
+  "artifact_id": 11665179231,
+  "artifact_size": 77776642,
+  "archive_sha256": "72c3451b5a9f1d54632d7bdeaf36aa0ab3b43e9fbf021497b53db372a00c80a8",
+  "binary_size": 81977186,
+  "binary_sha256": "28cf80cb1d2811236ed64595b8b9d03a54d1904d63497eb39f34fb9bd67978f3",
+  "source_sha": "056d32601563a213643436e7df14e6ca0ea50516",
+  "source_tree_api_verified": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+  "workflow_run_id": 38039806634,
+  "workflow_run_attempt": 1,
+  "result": "PASS: downloaded exact artifact ZIP, single wrapper executable hash equals independently retrieved native manifest. No wrapper execution in this receipt."
+}

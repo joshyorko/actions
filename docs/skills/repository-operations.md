@@ -1725,6 +1725,22 @@ old-generation workers non-reusable only after successful warmup, and restores
 the old routing/idle generation if preparation fails; old workers remain leased
 until their call completes and the wrapper is reaped.
 
+Runtime source generations are local executable-source cache objects. Their key
+binds the package name and included source signature; it is not a portable source
+artifact digest, Package Revision ID or Runtime Plan digest. Legacy snapshots
+retain confined file-link compatibility and supported permission bits. Package
+archive building separately honors authored `packaging.exclude`; do not infer
+portable inclusion rules from either cache behavior or archive selection.
+
+A portable source admission slice must reuse the existing snapshot/staging
+lifecycle under an explicit inclusion, link and mode policy. Repeated pathname
+hashes and no-replace rename alone do not prove confinement against concurrent
+replacement. Record whether executable inspection ran and which inputs were
+covered; external mutable Python paths are not covered merely because a local
+snapshot was verified. Source-only verification and canonical JSON primitives
+do not establish compiler digest preimages, Runtime Plan readiness, RCC provider
+support or Package/Deployment publication.
+
 Auto-reload prepares the process generation before changing HTTP/MCP action
 routes. Route and pool updates are serialized as one generation transition;
 each registered handler captures its process-generation token and package, so a
@@ -2210,6 +2226,15 @@ all four manifest IDs, complete archive inventories, source README/package bytes
 and nested versus standalone ZIP equality. A documentation-only source change does
 not reach newly generated projects until these resources are rebuilt. Keep dependency
 pins and legal/history files unchanged when only product guidance is being repaired.
+
+A private source-built Core wheel can prove an opt-in Runtime/browser path while
+sharing a version string with an older published wheel. Bind that proof to its
+source, wheel and loaded worker-module hashes; it is not registry compatibility
+evidence. Before exposing a template through the production or embedded
+`action-server new` catalog, verify that its declared dependency resolves to a
+published supported wheel with the required API. Do not waive the published-Core
+contract because a candidate preview passes. Update the supported floor only
+after the replacement registry artifact and its installed behavior are verified.
 
 For live PostgreSQL acceptance, use a fresh task-owned service pinned by immutable
 image digest and bind its randomly allocated port to loopback only. Keep generated

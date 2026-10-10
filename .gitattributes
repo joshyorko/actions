@@ -88,3 +88,20 @@ docs/program/evidence/canvas-75090058-acceptance-review.json -text
 docs/program/evidence/current-integration-refresh-review.json -text
 docs/program/evidence/cas-heartbeat-20261010T0905Z.json -text
 docs/program/evidence/program-amendment-20261010T0910Z.json -text
+
+# Immutable convergence receipts, recorded 20261010T0944Z.
+docs/program/evidence/pr285-ruff-failure-38040249591.json -text
+docs/program/evidence/native-31239-byte-verification.json -text
+docs/program/evidence/native-31239-wrapper-byte-verification.json -text
+docs/program/evidence/native-31239-manifest.json -text
+docs/program/evidence/canvas-candidate-38041682069-receipt.json -text
+docs/program/evidence/canvas-candidate-38041682069-junit.xml -text
+docs/program/evidence/canvas-71717bb-hosted-control-acceptance.json -text
+docs/program/evidence/canvas-b4bfe1d-refresh-review.json -text
+docs/program/evidence/local-source-prerequisite-review-31239.md -text
+docs/program/evidence/local-source-contract-bindings.json -text
+docs/program/evidence/frozen-31239-pin-refresh-c6a7b6f3-review.json -text
+docs/program/evidence/canvas-38041682069-independent-acceptance.json -text
+docs/program/evidence/canvas-282-production-floor.json -text
+docs/program/evidence/cas-heartbeat-20261010T0944Z.json -text
+docs/program/evidence/program-amendment-20261010T0944Z.json -text

@@ -1,0 +1,58 @@
+[
+  {
+    "body_sha256": "8b0b49ade2f5cd29dfa9dab0babc91c2fd7ebd36098ed3fad7ac32daaf9f7ff5",
+    "comments": [
+      {
+        "body_sha256": "dc386fe09658351770ace15cefb15a0f11e8c8457badc5122beb09af6b15e5ac",
+        "id": 6094862388,
+        "issue_url": "https://api.github.com/repos/joshyorko/actions/issues/129"
+      }
+    ],
+    "number": 129,
+    "title": "Define workspace-scoped capability deployments, runtime-plan selection, immutable revisions, and bindings",
+    "updated_at": "2026-10-10T06:55:00Z"
+  },
+  {
+    "body_sha256": "5fea0f4828c20faa32298d60083ca684b3b8225f0af6baea0d8fa4363dae4277",
+    "comments": [
+      {
+        "body_sha256": "883dc63fede6562596b692daa2b318cfd6cb7d5cfae44af4db7515bffae10d98",
+        "id": 5335430196,
+        "issue_url": "https://api.github.com/repos/joshyorko/actions/issues/130"
+      },
+      {
+        "body_sha256": "ede40dc3ded452994be8ff96872b0610d48486b6b00e28a0fe00e5ac80ed5cd0",
+        "id": 5374010203,
+        "issue_url": "https://api.github.com/repos/joshyorko/actions/issues/130"
+      },
+      {
+        "body_sha256": "2fab6ac37486581fc8d5550a399919ba5e96d294403c268974dc0fad9cbcf2bb",
+        "id": 6094007327,
+        "issue_url": "https://api.github.com/repos/joshyorko/actions/issues/130"
+      }
+    ],
+    "number": 130,
+    "title": "Design Package v3 as an immutable capability bundle with pluggable runtime plans and exposure projections",
+    "updated_at": "2026-10-10T05:00:48Z"
+  },
+  {
+    "body_sha256": "07b4524b30c0dabdf990a374a4c78ad6c9afdb2642796b8cb083be6eb866eaa7",
+    "comments": [
+      {
+        "body_sha256": "9748264ff9976198eacf5fbbf79d02e880e8260a7692ced36247dcc1469a4e03",
+        "id": 5374000307,
+        "issue_url": "https://api.github.com/repos/joshyorko/actions/issues/135"
+      }
+    ],
+    "number": 135,
+    "title": "Compile current package directories into deterministic Package Revisions and runtime plans",
+    "updated_at": "2026-09-07T14:44:15Z"
+  },
+  {
+    "body_sha256": "d43ca044e8ce9ce905a34470bb2f6568befb2622becb43074515d7550361c8f6",
+    "comments": [],
+    "number": 148,
+    "title": "Harden package import and compile Robot/runtime metadata into immutable Package Revisions",
+    "updated_at": "2026-09-07T14:40:37Z"
+  }
+]

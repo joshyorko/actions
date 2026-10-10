@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-10T09:41:48Z",
+  "pull_request": {
+    "number": 282,
+    "url": "https://github.com/joshyorko/actions/pull/282",
+    "head_sha": "b02054207b92630c61f8f4fe53785e359cd38f37",
+    "source_tree": "80a6ef315411a446db00c234ff9a5a294d91fc00",
+    "base_branch": "integration/community-release-20261008"
+  },
+  "hosted_candidate_source_browser_acceptance": {
+    "workflow": "Action Server Build (Unauthenticated)",
+    "event": "pull_request",
+    "run_id": 38041682069,
+    "job_id": 114183013879,
+    "job_name": "Build Action Server binary without credentials (ubuntu-22.04)",
+    "job_started_at_utc": "2026-10-10T09:31:21Z",
+    "job_completed_at_utc": "2026-10-10T09:37:28Z",
+    "checkout_merge_sha": "92b46fcfef16af7b46882a3e08d5e95c056c1fed",
+    "checkout_merge_parents": [
+      "31239cf99c7b264a0eab89660e93b391532ac305",
+      "b02054207b92630c61f8f4fe53785e359cd38f37"
+    ],
+    "checkout_tree": "80a6ef315411a446db00c234ff9a5a294d91fc00",
+    "steps": {
+      "Verify Canvas candidate-source Runtime and browser acceptance": "success",
+      "Upload Canvas candidate-source receipt": "success"
+    },
+    "test": {
+      "classname": "tests.action_server_tests.mcp.test_canvas_query_template",
+      "name": "test_canvas_template_candidate_source_runs_through_runtime_and_real_browser",
+      "tests": 1,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "candidate_core": {
+      "version": "1.0.2",
+      "release_state": "private source-built candidate wheel; not the published wheel",
+      "wheel_sha256": "edb655d70e3e0cbd258f11f5a3fe1def1421e3f1786d412320ace9eaeee4b22f",
+      "source_revision": "92b46fcfef16af7b46882a3e08d5e95c056c1fed",
+      "source_tree": "80a6ef315411a446db00c234ff9a5a294d91fc00",
+      "worker_direct_url_matches_candidate_wheel": true,
+      "worker_version": "1.0.2",
+      "mcp_module_git_blobs": {
+        "actions/src/actions/mcp/__init__.py": "e997a62833877d9394365cfc261e15d9e9c0b7d1",
+        "actions/src/actions/mcp/_metadata.py": "e761a0608505c053532c807f81b888839fd1be06"
+      },
+      "mcp_module_sha256": {
+        "actions.mcp": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+        "actions.mcp._metadata": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+      },
+      "runtime_source_sha256": "399f9e2ef2d67d7018d8ab7c6b9a65adf70aa33134d15c9840aedcf35a821576"
+    },
+    "browser": {
+      "status": "passed",
+      "version": "Google Chrome for Testing 151.0.7922.34",
+      "sha256": "0b20b130e7edd9dd51873be867761295fe0cfad490c2b9a64f95bd3cfc08fa71",
+      "execution": "Real Playwright browser against the Runtime test server"
+    },
+    "artifacts": {
+      "github_artifact_id": 11666217038,
+      "zip_sha256": "f6012dca7c6520ab89aaf820b5f657acedcf7e53ec09328a89e503aa2948b5fa",
+      "contents": [
+        "candidate-source-receipt.sanitized.json",
+        "junit.xml"
+      ],
+      "sanitized_receipt_sha256": "bbe5a7e919502c85f1006d0bce7e439c4f7ec3b95fac6eeb75b6553c6c37d897",
+      "junit_sha256": "044eb60fa3fc76e90a367259a160546d4cb5d1cd206c201de88fc72591fdf12d"
+    },
+    "scope_limits": [
+      "Candidate-source Runtime/browser acceptance only; not published Core compatibility.",
+      "Production template manifest remains actions-core=1.0.3 and is not verified against a published 1.0.3 wheel.",
+      "Canvas Query is present in the production template catalog, so the unresolved Core floor blocks normal production availability.",
+      "artifact:null remains partial and does not prove authorized artifact retrieval or shared Success-schema conformance.",
+      "No ChatGPT host rendering or user-facing artifact download was tested."
+    ]
+  },
+  "production_floor_findings": {
+    "template_manifest": "templates/canvas-query/package.yaml declares actions-core=1.0.3",
+    "production_distribution": "templates/packaging/templates-prod.json includes canvas-query",
+    "embedded_catalog": "action_server/src/actions/server/templates/action-templates.yaml includes canvas-query",
+    "normal_visibility": "action-server new list-templates loads embedded metadata and advertises catalog entries; standard creation also accepts --template canvas-query",
+    "contract_test": "action_server/tests/contract_tests/test_active_contracts.py::test_template_manifests_pin_supported_worker_core",
+    "contract_test_expected_floor": "actions-core=1.0.2 for every production template manifest",
+    "contract_test_observed_failure": "Canvas Query dependency set is {'actions-core=1.0.3'}",
+    "decision": "Keep the supported published-Core floor assertion unchanged and keep PR282 blocked for production until Core 1.0.3 is published and its exact wheel is verified. Do not publish this unsupported catalog entry or add a test exception."
+  },
+  "failed_checks": [
+    {
+      "workflow": "Action Server Tests",
+      "run_id": 38041682094,
+      "job_id": 114183014082,
+      "conclusion": "failure",
+      "failed_test": "contract_tests/test_active_contracts.py::test_template_manifests_pin_supported_worker_core",
+      "summary": "1 failed, 935 passed, 12 skipped; lint, typecheck, and docs steps passed"
+    },
+    {
+      "workflow": "coverage-gate.yml",
+      "run_id": 38041682061,
+      "job_id": 114183013755,
+      "conclusion": "failure",
+      "failed_test": "contract_tests/test_active_contracts.py::test_template_manifests_pin_supported_worker_core",
+      "summary": "The same unsupported production Core-floor assertion failed in the coverage gate"
+    },
+    {
+      "workflow": "RCC developer toolkit",
+      "run_id": 38041682074,
+      "job_id": 114183014205,
+      "job_name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64)",
+      "conclusion": "failure",
+      "failed_test": "contract_tests/test_active_contracts.py::test_template_manifests_pin_supported_worker_core",
+      "summary": "1 failed, 935 passed, 12 skipped; same 1.0.3-vs-1.0.2 production-floor assertion"
+    },
+    {
+      "workflow": "RCC developer toolkit",
+      "run_id": 38041682074,
+      "job_id": 114183014175,
+      "job_name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64)",
+      "conclusion": "failure",
+      "failed_test": "contract_tests/test_active_contracts.py::test_template_manifests_pin_supported_worker_core",
+      "summary": "1 failed, 935 passed, 12 skipped; same 1.0.3-vs-1.0.2 production-floor assertion"
+    }
+  ],
+  "upstream_disposition": "No upstream report. This is a repository production-dependency and catalog-admission blocker, not a confirmed third-party defect.",
+  "next_core_release_gate": {
+    "required_public_surface": {
+      "actions.mcp.tool": "public decorator accepts meta= JSON object and attaches validated metadata to MCP tool _meta",
+      "actions.mcp.resource": "public decorator accepts meta= JSON object and attaches validated metadata to MCP resource _meta",
+      "actions.mcp._metadata": "normalizes bounded JSON and validates MCP Apps ui.resourceUri, ui.visibility and CSP domain fields"
+    },
+    "consumer_source": "templates/canvas-query/canvas_query.py: uses meta= on both @resource and @tool; the tool metadata binds ui.resourceUri to the Canvas resource and includes model/app visibility.",
+    "candidate_proof": "The hosted gate installed the private wheel built from this source after creating the Runtime environment; its version metadata says 1.0.2 but SHA differs from published Core 1.0.2.",
+    "published_core_1_0_2": {
+      "pypi_wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+      "source_tag": "actions-core-1.0.2",
+      "source_commit": "011c5482285ea516f39292100c429a905e6e3e36",
+      "source_tree": "db3ecee9e9c2937a9912780a54bd5a1557562f50",
+      "published_surface_limit": "Does not include the newer MCP Apps meta= API used by Canvas."
+    },
+    "release_prerequisite": "Publish Core 1.0.3 containing the required public decorator and metadata-normalization modules, then resolve and test the registry-published 1.0.3 wheel in a fresh environment before treating the unchanged production manifest as supported.",
+    "installed_wheel_gate": [
+      "Record registry wheel filename, version, PyPI SHA-256 and build/source provenance.",
+      "In a fresh worker environment, assert installed actions-core metadata is 1.0.3 and verify loaded actions.mcp and actions.mcp._metadata module paths and bytes against the exact published wheel.",
+      "Exercise Runtime MCP tool/resource metadata emission from the installed wheel, not only source checkout or a private same-version wheel.",
+      "Then rerun normal template-list/create and package support contract checks with production catalog admission; no test exception or candidate-only result can stand in for this gate."
+    ],
+    "not_authorized_here": "No Core version bump, publication, new distribution channel, or catalog/manifest/test edits were made."
+  }
+}

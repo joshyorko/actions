@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-10T09:10:09Z",
-  "status": "PR283 is integrated at 31239cf9 with its exact independently reviewed and fully checked tree. Only #129 Slice1a canonical values and reference envelopes are source-accepted; no whole issue closes. Existing PR284/285 are refreshed by ordinary merges onto that integration head, preserving accepted test/control bytes and requiring fresh current-head CI. The cold frozen-startup deadline repair is independently reviewed, pushed and passed its fixed-f7 standalone gate; older failed runs remain preserved. Canvas candidate-only acceptance is independently reviewed and pushed, while its real hosted browser control is still under review. Linux Runtime wheel bytes and public Core/Helper pairing are independently verified for the earlier exact integration tree; Runtime1.0.3 remains unpublished. Devsy still reports a Failed pod, so existing worktrees and uncertain thread effects are preserved. All54 contracts and historical archive hashes remain unchanged.",
+  "observed_at": "2026-10-10T09:44:39Z",
+  "status": "Existing isolated Cloud lanes cleared the Canvas integration conflict and obtained actual candidate Runtime/browser acceptance, then independently confirmed its production catalog is still blocked by unpublished Core1.0.3. The supported-worker contract remains enforced. Existing frozen lane corrected one AST-equivalent formatting failure, then refreshed the artifact pins after the old f7 source guard correctly rejected newer integration source. New31239 Linux native and wrapper artifact bytes are independently verified; fresh frozen execution remains required. CAS explicitly supports per-worktree cwd, but Owner diagnostics still show its existing pod Failed. Existing remote threads/worktrees and unknown effects are preserved. No community merge or release occurred, no additional whole issue was accepted, and all54 original contracts and historical archive hashes remain unchanged.",
   "integration_head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
   "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
   "release_ready": false,
@@ -4330,13 +4330,13 @@
     }
   },
   "current_program_refs": {
-    "observed_at_utc": "2026-10-10T08:59:45Z",
+    "observed_at_utc": "2026-10-10T09:44:39Z",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "integration/community-release-20261008": "31239cf99c7b264a0eab89660e93b391532ac305",
     "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
     "release_ready": false,
-    "receipt": "evidence/pr283-integration-20261010.json",
-    "receipt_sha256": "7a0de129ec251ba3474d00712c52a8630c1c7e35da23b27f021048285e977b48"
+    "receipt": "evidence/program-amendment-20261010T0944Z.json",
+    "receipt_sha256": "a21b0df92585aa1dd07bc32091898da431cecc3ff302defc5e59bddfb27ff7c3"
   },
   "current_evidence_correction": {
     "observed_at_utc": "2026-10-10T01:40:00Z",
@@ -4344,8 +4344,8 @@
     "sha256": "8c2a9f9e13cb711b32e2416fb135e2f423d04528e60991792c940aa71ee9314a",
     "scope": "Adds the referenced sanitized Win32 mypy output and corrects the present PR276 base readback; the 01:35 snapshot remains immutable."
   },
-  "checkpoint_status": "PR283 is integrated at 31239cf9 with its exact independently reviewed and fully checked tree. Only #129 Slice1a canonical values and reference envelopes are source-accepted; no whole issue closes. Existing PR284/285 are refreshed by ordinary merges onto that integration head, preserving accepted test/control bytes and requiring fresh current-head CI. The cold frozen-startup deadline repair is independently reviewed, pushed and passed its fixed-f7 standalone gate; older failed runs remain preserved. Canvas candidate-only acceptance is independently reviewed and pushed, while its real hosted browser control is still under review. Linux Runtime wheel bytes and public Core/Helper pairing are independently verified for the earlier exact integration tree; Runtime1.0.3 remains unpublished. Devsy still reports a Failed pod, so existing worktrees and uncertain thread effects are preserved. All54 contracts and historical archive hashes remain unchanged.",
-  "checkpoint_observed_at": "2026-10-10T09:10:09Z",
+  "checkpoint_status": "Existing isolated Cloud lanes cleared the Canvas integration conflict and obtained actual candidate Runtime/browser acceptance, then independently confirmed its production catalog is still blocked by unpublished Core1.0.3. The supported-worker contract remains enforced. Existing frozen lane corrected one AST-equivalent formatting failure, then refreshed the artifact pins after the old f7 source guard correctly rejected newer integration source. New31239 Linux native and wrapper artifact bytes are independently verified; fresh frozen execution remains required. CAS explicitly supports per-worktree cwd, but Owner diagnostics still show its existing pod Failed. Existing remote threads/worktrees and unknown effects are preserved. No community merge or release occurred, no additional whole issue was accepted, and all54 original contracts and historical archive hashes remain unchanged.",
+  "checkpoint_observed_at": "2026-10-10T09:44:39Z",
   "current_convergence": {
     "observed_at_utc": "2026-10-10T06:04:13Z",
     "path": "evidence/convergence-followup-20261010T0604Z.json",
@@ -7107,13 +7107,334 @@
       },
       "upstream_disposition": "Actions-local harness corrections; no confirmed RCC/dependency defect. Download HTTP503 treated as bounded service failure, not speculative upstream bug.",
       "next_successor_boundary": "PR280 experimental schema and PR283 value primitives do not establish a production compiler. #135 local-source snapshot slice needs explicit format/inclusion/link/mode criteria and #148 helper reuse review; no speculative compiler writer dispatched."
+    },
+    {
+      "id": "program-amendment-20261010T0944Z",
+      "observed_at_utc": "2026-10-10T09:44:39Z",
+      "summary": "Existing isolated Cloud lanes cleared the Canvas integration conflict and obtained actual candidate Runtime/browser acceptance, then independently confirmed its production catalog is still blocked by unpublished Core1.0.3. The supported-worker contract remains enforced. Existing frozen lane corrected one AST-equivalent formatting failure, then refreshed the artifact pins after the old f7 source guard correctly rejected newer integration source. New31239 Linux native and wrapper artifact bytes are independently verified; fresh frozen execution remains required. CAS explicitly supports per-worktree cwd, but Owner diagnostics still show its existing pod Failed. Existing remote threads/worktrees and unknown effects are preserved. No community merge or release occurred, no additional whole issue was accepted, and all54 original contracts and historical archive hashes remain unchanged.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "raw_contracts_or_historical_archives_changed": false,
+        "whole_issue_acceptance_changed": false
+      },
+      "integration_checkpoint": {
+        "head": "31239cf99c7b264a0eab89660e93b391532ac305",
+        "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "refs_observed_at_utc": "2026-10-10T08:59:45Z",
+        "cohort": {
+          "items": 34,
+          "target_integrated": 26,
+          "open_blocked": 8,
+          "merge_ready": 0,
+          "target_integrated_prs": [
+            219,
+            220,
+            251,
+            256,
+            257,
+            259,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270,
+            271,
+            272,
+            273,
+            274,
+            275,
+            276,
+            277,
+            278,
+            280,
+            281,
+            283
+          ],
+          "open_prs": [
+            215,
+            216,
+            217,
+            218,
+            221,
+            282,
+            284,
+            285
+          ],
+          "scope": "Disjoint named-target PR outcomes, not whole-issue acceptance or publication."
+        }
+      },
+      "current_pr_heads": {
+        "285": {
+          "head": "04fa0feac3d5489096fd2959a6646edc442729cc",
+          "base": "integration/community-release-20261008",
+          "head_branch": "test/frozen-catalog-rollback-20261010"
+        },
+        "284": {
+          "head": "c7c18da18f2dfc1134773ea725c7b7de38c14e5c",
+          "base": "integration/community-release-20261008",
+          "head_branch": "test/rcc-provider-rollback-hosted-20261010"
+        },
+        "282": {
+          "head": "b02054207b92630c61f8f4fe53785e359cd38f37",
+          "base": "integration/community-release-20261008",
+          "head_branch": "feat/canvas-template-20261010"
+        },
+        "221": {
+          "head": "31239cf99c7b264a0eab89660e93b391532ac305",
+          "base": "community",
+          "head_branch": "integration/community-release-20261008"
+        },
+        "218": {
+          "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+          "base": "community",
+          "head_branch": "review/workitems-checkpoint-20261008"
+        },
+        "217": {
+          "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+          "base": "community",
+          "head_branch": "review/core-checkpoint-20261008"
+        },
+        "216": {
+          "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+          "base": "community",
+          "head_branch": "review/runtime-checkpoint-20261008"
+        },
+        "215": {
+          "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+          "base": "community",
+          "head_branch": "convergence/actions-full-graph-20261008"
+        }
+      },
+      "remaining_critical_path": [
+        {
+          "pr": 285,
+          "gate": "New31239 native bytes verified and source/artifact pins independently reviewed; fresh exact-control frozen execution and current-head matrix pending. Old lint and stale-artifact failures retained.",
+          "owner": "luna_worker_exit; root"
+        },
+        {
+          "pr": 284,
+          "gate": "Refreshed source/control merge independently reviewed; fresh current-head hosted checks remain required. Earlier managed/frozen receipts retain exact f7 scope.",
+          "owner": "root; luna_release_notes monitoring"
+        },
+        {
+          "pr": 282,
+          "gate": "Candidate Runtime/browser PASS. Production catalog remains BLOCKED by unpublishedCore1.0.3 and its failing supported-worker contract; authorized artifact binding and actual ChatGPT remain separate unaccepted criteria.",
+          "owner": "luna_canvas_acceptance"
+        },
+        {
+          "pr": 221,
+          "owner": "root integration; existing CI/release lanes",
+          "gate": "New31239 integration matrix, final native/registry release admission and externally retrieved artifacts. No community merge/tag/publication yet."
+        }
+      ],
+      "rcc_execution": {
+        "run": 38036869578,
+        "control": "06885e75f8d2054bb3273934c3cc38d5e9e8d4f2",
+        "candidate": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+        "status": "PASS_SCOPED",
+        "artifact_id": 11663538970,
+        "zip_sha256": "f2eb536604f16d76efb8b6976a0b47fea7adbe6933d2a469ae0b5305ed4c890c",
+        "limit": "Reviewed fail-closed summary and actual log; raw JUnit/full lifecycle receipt not uploaded; no frozen/managed-successful-switch/full-issue claim."
+      },
+      "frozen_execution": {
+        "failed_run": 38037036032,
+        "failed_control": "bca5ad8d8f1af7040dd3f9062dd890258304db97",
+        "failed_status": "PYTEST_INVOCATION_FAILURE_LIFECYCLE_NOT_RUN",
+        "corrected_control": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+        "new_status": "PASS_INDEPENDENTLY_ACCEPTED_SCOPED_GATE",
+        "review": "Accepted control correction; selector probe uses exact2.1.1 EnvManager code with cached2.5.1 support dependencies, not complete pinned CLI proof.",
+        "passed_run": 38037959456,
+        "passed_job": 114172258002,
+        "artifact_id": 11664661140,
+        "artifact_sha256": "10a7a62db7d38fd2110e8d036bd0c7660054fa706e68278e3a992b6673be3c8f",
+        "raw_junit_sha256": "7037e54da7e0c887a35964b02088083cf735932e9da23d7aa6ce889556a528b5",
+        "limits": "Linux frozen rollback only; no complete orphan inventory, managed successful-generation drain, other-platform collision proof, publication or whole-issue acceptance.",
+        "deadline_repair": {
+          "local": "e795ced84e96d876af76ddcf80391e0b7fcef160",
+          "published": "c00c7f6953b6370630885b7e9eacf8dddb6ec94c",
+          "passed_fixed_f7_run": 38039472339,
+          "scope": "90s only frozen startup with package roots;30s source/no-root preserved. Refreshed499 source validation remains pending."
+        }
+      },
+      "devsy": {
+        "observed_at_utc": "2026-10-10T09:34:59Z",
+        "target": "cas-worker-01",
+        "workspace_uid": "default-ca-0b24d",
+        "status": "BLOCKED_WORKSPACE_NOT_RUNNING",
+        "cause": "unknown; no reason field in diagnostics",
+        "supervisor_thread": "01a1222f-e720-7183-9634-2edb76d30326",
+        "supervisor_cwd": "/workspaces/actions-worktrees/devsy-coordinator",
+        "directory_contract": {
+          "repository": "/workspaces/actions",
+          "workers": "/workspaces/actions-worktrees/<worker>",
+          "protected_bootstrap": "/workspaces/cas-worker-01"
+        },
+        "guidance_commit": "3c305f5586b50bbaf1188a7c99b27abc269620c8",
+        "disposition": "No replacement, provisioning, replay or current cleanliness claim; reconcile existing thread effects after recovery."
+      },
+      "evidence": [
+        {
+          "path": "evidence/pr285-ruff-failure-38040249591.json",
+          "size_bytes": 3427,
+          "sha256": "4e132d5051f9a6da5a744c6a688e7a1dbec65c454746ae08ed9d9f8b704c56d2"
+        },
+        {
+          "path": "evidence/native-31239-byte-verification.json",
+          "size_bytes": 1920,
+          "sha256": "3afbc8e2f4fe6e46bdd03512e82794e27cca3c705ad28c4a7711fb26b7fb349a"
+        },
+        {
+          "path": "evidence/native-31239-wrapper-byte-verification.json",
+          "size_bytes": 630,
+          "sha256": "1a87b8fac2810a5b7e8ce4916771ffe1d71e20494bd86562ad43666c79bb2896"
+        },
+        {
+          "path": "evidence/native-31239-manifest.json",
+          "size_bytes": 3162,
+          "sha256": "7b75b64d160fa73ca14728437a2cc07aebdccf58d450d83b9745245001a33538"
+        },
+        {
+          "path": "evidence/canvas-candidate-38041682069-receipt.json",
+          "size_bytes": 4465,
+          "sha256": "bbe5a7e919502c85f1006d0bce7e439c4f7ec3b95fac6eeb75b6553c6c37d897"
+        },
+        {
+          "path": "evidence/canvas-candidate-38041682069-junit.xml",
+          "size_bytes": 339,
+          "sha256": "044eb60fa3fc76e90a367259a160546d4cb5d1cd206c201de88fc72591fdf12d"
+        },
+        {
+          "path": "evidence/canvas-71717bb-hosted-control-acceptance.json",
+          "size_bytes": 4282,
+          "sha256": "321e93f5d51bee63b2556a37a454631662bfddd488de5bbbdc719596d57c03ee"
+        },
+        {
+          "path": "evidence/canvas-b4bfe1d-refresh-review.json",
+          "size_bytes": 1197,
+          "sha256": "9e57f5cb6b7cc5579aed741f1c8080dc3307c2f310c65a85b86e744dbdc034d0"
+        },
+        {
+          "path": "evidence/local-source-prerequisite-review-31239.md",
+          "size_bytes": 6623,
+          "sha256": "fdd3d8065846076cccb5f44b6c8a8bceb7a64a378f9658cb63774446ee92a80e"
+        },
+        {
+          "path": "evidence/local-source-contract-bindings.json",
+          "size_bytes": 2251,
+          "sha256": "748ec624efb20ad1a3c74d337fabbfef815b16e30aceadbbed0986e2ad17a239"
+        },
+        {
+          "path": "evidence/frozen-31239-pin-refresh-c6a7b6f3-review.json",
+          "size_bytes": 4450,
+          "sha256": "7699653c78cea5a009f172c961e591e3b16584986dcfd744a17d2b9bddf4c26a"
+        },
+        {
+          "path": "evidence/canvas-38041682069-independent-acceptance.json",
+          "size_bytes": 6199,
+          "sha256": "649a8bb8962c123dbe071cbf5512e9668cf544b085e29b046182d27f995471e8"
+        },
+        {
+          "path": "evidence/canvas-282-production-floor.json",
+          "size_bytes": 8940,
+          "sha256": "a3fe3d9f47b28ab833691958110e6a6119a2a5fa439c7a0b96f41ca15d7f9842"
+        },
+        {
+          "path": "evidence/cas-heartbeat-20261010T0944Z.json",
+          "size_bytes": 1028,
+          "sha256": "e6912026f42b60e578e67af3ddb61ab86f83c99ee8d85b1c9e8902075f3f67dc"
+        }
+      ],
+      "accepted_scoped_criteria": [],
+      "issue_metadata_updates": {
+        "129": {
+          "owner": "root integration; luna_release_notes exact-head monitoring",
+          "checkpoint_pr": 283,
+          "next_bounded_action": "Slice1a is integrated and scoped-source accepted. Bind the next consumer to its exact canonical-value/reference criteria; production digest preimages, persistence, authorization and resolver contracts remain unaccepted."
+        },
+        "134": {
+          "owner": "root integration with source/frozen acceptance and independent Sol review",
+          "checkpoint_pr": 284,
+          "next_bounded_action": "Finish current refreshed-head toolkit gates and integrate reviewed RCC control; preserve managed/frozen exact-source limits and address remaining provider/lease/offline criteria."
+        }
+      },
+      "current_active_workers": {
+        "cloud_canvas": "luna_canvas_acceptance: candidate proof and true production-floor blocker; existing PR282 ownership preserved",
+        "cloud_ci": "luna_release_notes: bounded read-only exact-head hosted gates; root alone dispatches reruns",
+        "cloud_frozen": "luna_worker_exit: formatting and exact-current artifact pin refresh in existing PR285; root owns push/integration",
+        "cloud_review": "sol_p0_snapshot_review: independent artifact/control/Canvas acceptance and source-profile boundary review",
+        "cloud_cas_heartbeat": "luna_cas_heartbeat: bounded read-only diagnostics, no provisioning or native task replay",
+        "devsy_supervisor": "BLOCKED; last lane inventory historical, no current native progress claim"
+      },
+      "upstream_disposition": "Actions-local harness corrections; no confirmed RCC/dependency defect. Download HTTP503 treated as bounded service failure, not speculative upstream bug.",
+      "next_successor_boundary": "Root owns a concrete portable-source profile decision before #135 code: preservelegacy defaults, explicit inclusion/protectedinput/link/mode/confinedread rules; use existing Runtime/Robot staging, no parallelregistry/compiler. Full graph remainsin scope while release gates finish.",
+      "canvas_candidate_acceptance": {
+        "status": "PASS candidate-only",
+        "run": 38041682069,
+        "job": 114183013879,
+        "artifact": 11666217038,
+        "artifact_size": 2063,
+        "artifact_sha256": "f6012dca7c6520ab89aaf820b5f657acedcf7e53ec09328a89e503aa2948b5fa",
+        "head": "b02054207b92630c61f8f4fe53785e359cd38f37",
+        "actual_source": "92b46fcfef16af7b46882a3e08d5e95c056c1fed",
+        "tree": "80a6ef315411a446db00c234ff9a5a294d91fc00",
+        "junit": "1PASS0skip39.980s",
+        "scope": "Actual Runtime subprocess, managed worker with exact private candidateCore1.0.2 wheel and real Chromium; no publishedCore1.0.3 or authorized artifact/ChatGPT/foundry acceptance.",
+        "production_blocker": "Default new/list catalog advertises Canvas whose package requires unpublishedCore1.0.3; existing supported-worker contract legitimately fails. No exception or public-version change authorized by this receipt."
+      },
+      "frozen_current_artifact": {
+        "candidate": "31239cf99c7b264a0eab89660e93b391532ac305",
+        "build_source": "056d32601563a213643436e7df14e6ca0ea50516",
+        "matching_full_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+        "artifact": 11664669288,
+        "wrapper_artifact": 11665179231,
+        "byte_review": "PASS; streamed full tar inventory and independently downloaded wrapper ZIP",
+        "new_control": {
+          "local": "c6a7b6f3b49fdf85622961dafae1b41bc35b1c65",
+          "remote": "04fa0feac3d5489096fd2959a6646edc442729cc",
+          "tree": "0f14b7d4654d8aaf7af3171df10c5f7d883cdeae",
+          "parent": "7a2f74528665b21e8140ffd26c8f75267cc53ecb",
+          "branch": "test/frozen-catalog-rollback-20261010",
+          "review_sha256": "7699653c78cea5a009f172c961e591e3b16584986dcfd744a17d2b9bddf4c26a"
+        },
+        "execution": "PENDING exact-control hosted result",
+        "historical_guard_failure": {
+          "run": 38041466158,
+          "job": 114182402046,
+          "head": "7a2f74528665b21e8140ffd26c8f75267cc53ecb",
+          "reason": "Oldf7 source subtree differs from31239; fixed-artifact preflight correctly failed before acceptance."
+        }
+      },
+      "cas_worktree_dispatch": {
+        "target": "cas-worker-01",
+        "repository": "/workspaces/actions",
+        "worker_root": "/workspaces/actions-worktrees/<worker-name>",
+        "coordinator": "/workspaces/actions-worktrees/devsy-coordinator",
+        "protected_bootstrap": "/workspaces/cas-worker-01",
+        "rule": "Create/reconcile separate Gitworktree+branch, verifyorigin/root/HEAD/dirty state, then bindnative thread explicitcwd; cwd alone does not createworktree or repair Failedpod.",
+        "current_native_state": "BLOCKED workspace_not_running; current remote HEAD/dirty state and uncertain turn effects remain unknown."
+      },
+      "documentation_disposition": {
+        "source_profile_proposal": "Accepted concise canonical distinction between legacycache/archiveinclusion and portable sourceidentity; no compiler/profile implementation implied.",
+        "formatting_only_proposal": "No new paragraph: existing configured-format instructions already cover this one-line AST-equivalent correction.",
+        "canvas_gate": "Accepted actualbrowser versus productionfloor distinction; contract remains enforced.",
+        "upstream": "Actions-local harness and release dependency findings; no confirmed upstream defect or external issue mutation."
+      }
     }
   ],
   "current_program_amendment": {
-    "id": "program-amendment-20261010T0910Z",
-    "observed_at_utc": "2026-10-10T09:10:09Z",
-    "path": "evidence/program-amendment-20261010T0910Z.json",
-    "sha256": "41f28a1bb4696a375732e4e7917363aaa5a2f6830cef65ea0c8d57fa6fa8bbf2"
+    "id": "program-amendment-20261010T0944Z",
+    "observed_at_utc": "2026-10-10T09:44:39Z",
+    "path": "evidence/program-amendment-20261010T0944Z.json",
+    "sha256": "a21b0df92585aa1dd07bc32091898da431cecc3ff302defc5e59bddfb27ff7c3"
   },
   "prior_current_convergence_update_20261010T0441Z": {
     "observed_at_utc": "2026-10-10T04:41:32Z",
@@ -7283,7 +7604,7 @@
     "source": "Fresh git ls-remote origin readback."
   },
   "current_pr_convergence": {
-    "observed_at_utc": "2026-10-10T09:10:09Z",
+    "observed_at_utc": "2026-10-10T09:44:39Z",
     "cohort": {
       "items": 34,
       "target_integrated": 26,
@@ -7329,8 +7650,8 @@
       ],
       "scope": "Disjoint named-target PR outcomes, not whole-issue acceptance or publication."
     },
-    "path": "evidence/pr283-integration-20261010.json",
-    "sha256": "7a0de129ec251ba3474d00712c52a8630c1c7e35da23b27f021048285e977b48",
+    "path": "evidence/program-amendment-20261010T0944Z.json",
+    "sha256": "a21b0df92585aa1dd07bc32091898da431cecc3ff302defc5e59bddfb27ff7c3",
     "integration": "31239cf99c7b264a0eab89660e93b391532ac305",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
@@ -7539,6 +7860,75 @@
     "path": "evidence/pr273-integration-20261010.json",
     "sha256": "28aa08cd3d1cf11636a28e983af73a0c801b92072983ce558359f2341d6bae60",
     "integration": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "release_ready": false,
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "retained_original_contracts": 54,
+    "supplemental_issue_ids": [
+      279
+    ]
+  },
+  "prior_current_program_refs_20261010T0944Z": {
+    "observed_at_utc": "2026-10-10T08:59:45Z",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration/community-release-20261008": "31239cf99c7b264a0eab89660e93b391532ac305",
+    "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "release_ready": false,
+    "receipt": "evidence/pr283-integration-20261010.json",
+    "receipt_sha256": "7a0de129ec251ba3474d00712c52a8630c1c7e35da23b27f021048285e977b48"
+  },
+  "prior_current_pr_convergence_20261010T0944Z": {
+    "observed_at_utc": "2026-10-10T09:10:09Z",
+    "cohort": {
+      "items": 34,
+      "target_integrated": 26,
+      "open_blocked": 8,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        280,
+        281,
+        283
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        282,
+        284,
+        285
+      ],
+      "scope": "Disjoint named-target PR outcomes, not whole-issue acceptance or publication."
+    },
+    "path": "evidence/pr283-integration-20261010.json",
+    "sha256": "7a0de129ec251ba3474d00712c52a8630c1c7e35da23b27f021048285e977b48",
+    "integration": "31239cf99c7b264a0eab89660e93b391532ac305",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
     "release_ready": false,
