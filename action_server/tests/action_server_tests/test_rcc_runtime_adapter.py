@@ -67,11 +67,11 @@ def test_publish_artifact_details_preserves_one_pinned_rcc_payload_and_provider(
     )
     assert calls == [
         (
-            "/opt/rcc",
+            str(Path("/opt/rcc")),
             "env",
             "publish",
             "--environment",
-            "/package/package.yaml",
+            str(Path("/package/package.yaml")),
             "--json",
             "--provider",
             provider,
