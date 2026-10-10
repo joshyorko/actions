@@ -150,6 +150,25 @@ jobs:
         test -n "$wheel"
 
         python scripts/verify_clean_wheel.py "$wheel"'
+    - name: Record candidate artifact hashes and provenance
+      shell: bash
+      run: "set -Eeuo pipefail\nsha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##'\
+        \ | sort > dist/actions-core-manifest.sha256\ntest \"$(git rev-parse HEAD)\"\
+        \ = \"$GITHUB_SHA\"\npython - <<'PY'\nimport json, os, subprocess\nsource_sha\
+        \ = os.environ['GITHUB_SHA']\nsource_tree = subprocess.check_output(['git',\
+        \ 'rev-parse', f'{source_sha}^{{tree}}'], text=True).strip()\nreceipt = {\n\
+        \    'source_sha': source_sha,\n    'source_tree': source_tree,\n    'workflow_run_id':\
+        \ os.environ['GITHUB_RUN_ID'],\n    'workflow_run_attempt': int(os.environ['GITHUB_RUN_ATTEMPT']),\n\
+        \    'event_name': os.environ['GITHUB_EVENT_NAME'],\n    'ref': os.environ['GITHUB_REF'],\n\
+        }\nwith open('dist/actions-core-candidate-provenance.json', 'w', encoding='utf-8')\
+        \ as output:\n    json.dump(receipt, output, indent=2, sort_keys=True)\n \
+        \   output.write('\\n')\nPY"
+    - name: Upload verified Core candidate artifacts
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: actions-core-candidate-dist
+        path: actions/dist
+        if-no-files-found: error
 
 
 # Important!!

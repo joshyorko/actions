@@ -2688,6 +2688,42 @@ class ActionsTests(BaseTests):
                         ]
                     ),
                 },
+                {
+                    "name": "Record candidate artifact hashes and provenance",
+                    "shell": "bash",
+                    "run": "\n".join(
+                        [
+                            "set -Eeuo pipefail",
+                            "sha256sum dist/*.whl dist/*.tar.gz | sed 's#dist/##' | sort > dist/actions-core-manifest.sha256",
+                            'test "$(git rev-parse HEAD)" = "$GITHUB_SHA"',
+                            "python - <<'PY'",
+                            "import json, os, subprocess",
+                            "source_sha = os.environ['GITHUB_SHA']",
+                            "source_tree = subprocess.check_output(['git', 'rev-parse', f'{source_sha}^{{tree}}'], text=True).strip()",
+                            "receipt = {",
+                            "    'source_sha': source_sha,",
+                            "    'source_tree': source_tree,",
+                            "    'workflow_run_id': os.environ['GITHUB_RUN_ID'],",
+                            "    'workflow_run_attempt': int(os.environ['GITHUB_RUN_ATTEMPT']),",
+                            "    'event_name': os.environ['GITHUB_EVENT_NAME'],",
+                            "    'ref': os.environ['GITHUB_REF'],",
+                            "}",
+                            "with open('dist/actions-core-candidate-provenance.json', 'w', encoding='utf-8') as output:",
+                            "    json.dump(receipt, output, indent=2, sort_keys=True)",
+                            "    output.write('\\n')",
+                            "PY",
+                        ]
+                    ),
+                },
+                {
+                    "name": "Upload verified Core candidate artifacts",
+                    "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+                    "with": {
+                        "name": "actions-core-candidate-dist",
+                        "path": "actions/dist",
+                        "if-no-files-found": "error",
+                    },
+                },
             ],
         }
         return {"jobs": jobs}

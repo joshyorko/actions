@@ -66,7 +66,11 @@ the locked environment, builds the wheel and source archive, checks the exact
 artifact inventory and Twine metadata, then installs the wheel in a fresh
 environment and verifies the public API from outside the source tree. This is
 prepublication candidate evidence only: it does not prove that PyPI serves
-these bytes. Publication remains confined to the separately gated tag release.
+these bytes. After all checks pass, the gate retains the wheel and source
+archive with a SHA-256 manifest and source/run/attempt provenance as the
+`actions-core-candidate-dist` workflow artifact. That artifact supports exact
+candidate review; publication remains confined to the separately gated tag
+release.
 
 Core 1.0.1 does not contain `ActionContext`, `ActionsListActionTypedDict` or
 `actions.server_integration`; published Core 1.0.2 contains these public
