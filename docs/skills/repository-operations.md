@@ -42,10 +42,15 @@ The Runtime development group resolves the matching monorepo Core through a
 relative path. Poetry 2.1.1 generates the lock from that declared group; no
 unpublished registry file hashes are invented. Runtime wheel metadata must
 contain only the version floor, never a machine/source path. The clean-wheel
-contract builds with the pinned Poetry available from RCC, installs outside
-the checkout, checks dependencies and imports the public contracts before
-testing both uninstall orders. It does not download another Poetry through
-`uv --with poetry`. The Community base (`7c982360`) still pins templates to
+contract uses `ACTIONS_RUNTIME_TEST_PYTHON` when explicitly configured;
+otherwise it uses the active test process's `sys.executable` when that
+interpreter is Python 3.12 or 3.13. This keeps wheel building, clean venv
+creation, and probes on the same selected interpreter instead of letting a
+higher-version executable earlier on `PATH` change the wheel ABI. It builds
+with `uv run --no-project --python <selected-python> --with poetry poetry
+build`, installs outside the checkout, checks dependencies and imports the
+public contracts, then tests both uninstall orders. The Community base
+(`7c982360`) still pins templates to
 published Core 1.0.1. On the selected integration candidate (`3fee2792`), all
 four existing template manifests pin published Core 1.0.2. A template pin is
 therefore revision-specific; verify the target manifests before describing a

@@ -4,6 +4,7 @@ import os
 import shutil
 import stat
 import subprocess
+import sys
 import tomllib
 import zipfile
 from pathlib import Path
@@ -449,6 +450,11 @@ def _runtime_python() -> Path:
     candidate: Path | None
     if configured:
         candidate = Path(configured)
+    elif sys.version_info[:2] in {(3, 12), (3, 13)}:
+        # The contract runs under Poetry's selected package interpreter. Keep
+        # wheel creation and clean installation on that same ABI even when a
+        # newer supported interpreter also happens to be earlier on PATH.
+        candidate = Path(sys.executable)
     else:
         candidate = next(
             (
@@ -461,6 +467,25 @@ def _runtime_python() -> Path:
     if candidate is None or not candidate.exists():
         pytest.skip("Runtime wheel contract requires supported Python 3.13 or 3.12")
     return candidate
+
+
+def test_runtime_python_prefers_the_active_supported_interpreter(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    active_python = tmp_path / "python3.12"
+    path_python = tmp_path / "python3.13"
+    active_python.touch()
+    path_python.touch()
+    monkeypatch.delenv("ACTIONS_RUNTIME_TEST_PYTHON", raising=False)
+    monkeypatch.setattr(sys, "executable", str(active_python))
+    monkeypatch.setattr(sys, "version_info", (3, 12, 0, "final", 0))
+    monkeypatch.setattr(
+        shutil,
+        "which",
+        lambda name: str(path_python) if name == "python3.13" else None,
+    )
+
+    assert _runtime_python() == active_python
 
 
 def _install_and_probe(python: Path, wheels: list[Path]) -> None:
