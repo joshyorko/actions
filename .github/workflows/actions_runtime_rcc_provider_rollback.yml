@@ -46,15 +46,15 @@ jobs:
     - name: Checkout immutable Runtime candidate
       uses: actions/checkout@v5
       with:
-        ref: 2552a8c3419b213825294a51927843b2d61f662e
+        ref: 1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6
         path: candidate
         fetch-depth: 2
         persist-credentials: false
     - name: Verify immutable Runtime candidate revision
       shell: bash
       env:
-        CANDIDATE_SHA: 2552a8c3419b213825294a51927843b2d61f662e
-        CANDIDATE_TREE: af7e419414261525c89db5511c5cbbc6f07981b0
+        CANDIDATE_SHA: 1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6
+        CANDIDATE_TREE: cdd4d65d914df9be3eaa4cf979d6b224fde431c3
         CONTROL_SHA: ${{ github.sha }}
       run: 'set -Eeuo pipefail
 
@@ -269,8 +269,8 @@ jobs:
       env:
         EVIDENCE_DIR: ${{ runner.temp }}/rcc-provider-rollback-evidence
         JUNIT_PATH: ${{ runner.temp }}/rcc-provider-rollback-junit.xml
-        EXPECTED_CANDIDATE_SHA: 2552a8c3419b213825294a51927843b2d61f662e
-        EXPECTED_CANDIDATE_TREE: af7e419414261525c89db5511c5cbbc6f07981b0
+        EXPECTED_CANDIDATE_SHA: 1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6
+        EXPECTED_CANDIDATE_TREE: cdd4d65d914df9be3eaa4cf979d6b224fde431c3
         EXPECTED_CONTROL_SHA: ${{ github.sha }}
         EXPECTED_RCC_SHA256: 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428
         ACTION_SERVER_RCC_DEFAULT: ${{ github.workspace }}/candidate/action_server/src/actions/server/bin/rcc-18.19.3

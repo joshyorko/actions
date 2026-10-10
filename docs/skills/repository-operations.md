@@ -2521,15 +2521,25 @@ not eligible to run it, to `d376399f497fb98f47062e493219e063db8f08e1`
 (tree `fb04c136e5e1a7ce709649b13cf895d84ac93c1a`). The earlier local gated
 collection had no task-owned RCC provider configured and remains NOT RUN; the
 new pin does not retroactively change that result.
-The current candidate is `2552a8c3419b213825294a51927843b2d61f662e`
-(tree `af7e419414261525c89db5511c5cbbc6f07981b0`), a fixture-only child of
-the published PR #298 merge `e886d26ebaefafa9189a69517f6707691b53662e`
-(tree `016664a8e0d01dec36accf4fe5d39cb0b7bebef7`). Its custom database setup
-registers the complete current model registry and asserts the
-`mcp_catalog_name` table exists. The refreshed two-case hosted RCC gate remains
-NOT RUN until this exact candidate and its control commit are published and the
-gate passes. The earlier one-case rollback run does not prove the staged
-consumer.
+The previous consumer-gate candidate was `2552a8c3419b213825294a51927843b2d61f662e`
+(tree `af7e419414261525c89db5511c5cbbc6f07981b0`). Its published control
+revision `0ed580eabf2b74fa7b2530f03760b650565b2178` (tree
+`e2420f11d98ac92ab1c1918209a893a578cf0ce6`) ran as workflow `38068024443`,
+job `114259549777`. The rollback case passed, but the staged consumer failed
+before Action import because its test created `catalog.sqlite` under a missing
+`runtime-data` directory (`sqlite unable to open database file`). The candidate
+and RCC pins were verified; no managed Action execution occurred. Preserve this
+as a fixture-setup red baseline, not evidence of an RCC or consumer failure.
+
+The fixture repair is source child `1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6`
+(tree `cdd4d65d914df9be3eaa4cf979d6b224fde431c3`), parent
+`2552a8c3419b213825294a51927843b2d61f662e`. It creates the test-owned runtime
+directory before SQLite opens and registers `get_all_model_classes()`, including
+`mcp_catalog_name`; it changes no production source. The prepared control
+successor pins that exact source commit and tree. Hosted consumer acceptance is
+still NOT RUN until that control is published and its exact two JUnit cases
+pass without skips with a source/tree-bound staged-consumer receipt. The earlier
+one-case rollback run does not prove the staged consumer.
 The summary validator requires exactly one `action.py` and one `package.yaml`
 entry in each inventory before comparing digest maps; duplicate, missing, or
 unexpected paths fail closed. Its synthetic receipt regressions verify only

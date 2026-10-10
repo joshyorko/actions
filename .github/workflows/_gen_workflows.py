@@ -1277,8 +1277,8 @@ class ActionServerRccProviderRollback(BaseWorkflow):
     target = "actions_runtime_rcc_provider_rollback.yml"
     project_name = "action_server"
     rcc_sha256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
-    candidate_sha = "2552a8c3419b213825294a51927843b2d61f662e"
-    candidate_tree = "af7e419414261525c89db5511c5cbbc6f07981b0"
+    candidate_sha = "1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6"
+    candidate_tree = "cdd4d65d914df9be3eaa4cf979d6b224fde431c3"
 
     def __init__(self):
         super().__init__()
