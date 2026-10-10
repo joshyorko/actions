@@ -275,7 +275,9 @@ def test_consumer_resolves_candidate_wheel_file_url_on_native_platform(tmp_path:
     wheel = tmp_path / "wheel with spaces" / "actions_core-1.0.2.whl"
     wheel.parent.mkdir()
 
-    assert NATIVE_TEST._local_wheel_path_from_file_url(wheel.as_uri()) == wheel.resolve()
+    assert (
+        NATIVE_TEST._local_wheel_path_from_file_url(wheel.as_uri()) == wheel.resolve()
+    )
 
 
 def test_consumer_rejects_nonlocal_candidate_wheel_url():

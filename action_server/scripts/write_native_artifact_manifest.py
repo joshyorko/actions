@@ -33,7 +33,9 @@ def packaged_files_sha256(root: Path) -> str:
 
 def packaged_tree_inventory(root: Path) -> list[dict[str, str | int | None]]:
     inventory = []
-    for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
+    for path in sorted(
+        root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()
+    ):
         relative = path.relative_to(root).as_posix().encode("utf-8")
         metadata = path.lstat()
         mode = stat.S_IMODE(metadata.st_mode)
@@ -156,9 +158,9 @@ def write_manifest(
         encoding="utf-8",
     )
     for artifact in artifacts.values():
-        artifact["frozen_package_tree_inventory_path"] = (
-            "output/native-artifact-tree-inventory.json"
-        )
+        artifact[
+            "frozen_package_tree_inventory_path"
+        ] = "output/native-artifact-tree-inventory.json"
 
     manifest = {
         "schema_version": 1,

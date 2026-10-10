@@ -377,6 +377,12 @@ The consumer test generates its action module from source fragments, so its
 regression test must execute a real module import: `compile()` alone does not
 evaluate module-level annotations or decorators. Keep every global referenced
 by an embedded helper in the generated module's own imports.
+
+For Action Server Python harness changes, `ruff check` is only the rules check:
+the configured `invoke lint` task separately runs `ruff format --check` with
+`devutils/ruff.toml` and `isort --check` with the package configuration. A
+scoped lint receipt must run all three checks on the touched Python files.
+
 The runner hashes both executables and the wheel, requires fresh per-runtime
 API proofs, and accepts
 the optional native manifest only when its source SHA, platform, architecture,

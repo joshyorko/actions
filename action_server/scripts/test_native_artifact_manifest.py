@@ -61,7 +61,9 @@ class NativeArtifactManifestTests(unittest.TestCase):
                         output=output,
                     )
                 saved = json.loads(output.read_text(encoding="utf-8"))
-                tree_inventory_path = package / "output/native-artifact-tree-inventory.json"
+                tree_inventory_path = (
+                    package / "output/native-artifact-tree-inventory.json"
+                )
                 tree_inventory = json.loads(
                     tree_inventory_path.read_text(encoding="utf-8")
                 )

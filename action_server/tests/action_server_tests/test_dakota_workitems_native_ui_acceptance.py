@@ -70,7 +70,9 @@ def packaged_tree_inventory(
 ) -> list[dict[str, str | int | None]]:
     excluded = exclude_root_files or set()
     inventory = []
-    for path in sorted(root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()):
+    for path in sorted(
+        root.rglob("*"), key=lambda item: item.relative_to(root).as_posix()
+    ):
         relative = path.relative_to(root).as_posix()
         if "/" not in relative and relative in excluded and path.is_file():
             continue
@@ -193,9 +195,11 @@ def classify_runtime_tree_delta(
         reason = "runtime_rcc_directory_without_binary"
     elif executable_path in added_by_path:
         binary = added_by_path[executable_path]
-        if binary.get("kind") != "file" or re.fullmatch(
-            r"[0-9a-f]{64}", str(binary.get("content_sha256", ""))
-        ) is None:
+        if (
+            binary.get("kind") != "file"
+            or re.fullmatch(r"[0-9a-f]{64}", str(binary.get("content_sha256", "")))
+            is None
+        ):
             reason = "runtime_rcc_binary_identity_missing"
         elif bin_path not in added_by_path and bin_path not in {
             entry["path"] for entry in baseline
@@ -204,9 +208,7 @@ def classify_runtime_tree_delta(
     return {
         "valid": reason is None,
         "failure_reason": reason,
-        "runtime_generated_state": (
-            difference["added"] if reason is None else []
-        ),
+        "runtime_generated_state": (difference["added"] if reason is None else []),
         "rcc_version": RCC_VERSION,
         "expected_rcc_path": executable_path,
         **difference,
@@ -258,9 +260,7 @@ def record_postruntime_tree_observation(
     report_path = None
     if receipt_value:
         receipt_path = Path(receipt_value)
-        report = receipt_path.with_name(
-            f"{receipt_path.stem}-{stage}-tree-diff.json"
-        )
+        report = receipt_path.with_name(f"{receipt_path.stem}-{stage}-tree-diff.json")
         report.write_text(
             json.dumps(
                 {
@@ -339,9 +339,9 @@ def wrapper_source_sha256(root: Path, relative_paths: tuple[str, ...]) -> str:
 def require_measured_digest(artifact: dict, field: str, measured: str) -> None:
     recorded = artifact.get(field)
     assert isinstance(recorded, str), f"manifest field {field} is missing or invalid"
-    assert re.fullmatch(r"[0-9a-f]{64}", recorded), (
-        f"manifest field {field} is missing or invalid"
-    )
+    assert re.fullmatch(
+        r"[0-9a-f]{64}", recorded
+    ), f"manifest field {field} is missing or invalid"
     assert recorded == measured, f"manifest field {field} does not match build input"
 
 
@@ -831,15 +831,18 @@ def test_pretest_inventory_records_relative_entry_identity(tmp_path: Path) -> No
         package_root=package,
     )
 
-    inventory_path = tmp_path / "dakota-workitems-ui-frozen-test-pretest-tree-inventory.json"
+    inventory_path = (
+        tmp_path / "dakota-workitems-ui-frozen-test-pretest-tree-inventory.json"
+    )
     inventory = json.loads(inventory_path.read_text(encoding="utf-8"))
     assert inventory["source_sha"] == "a" * 40
     assert inventory["stage"] == "pretest"
     assert inventory["manifest_sha256"] == sha256(manifest_path)
     assert inventory["entries"] == packaged_tree_inventory(package)
-    assert inventory["entries"][-1]["content_sha256"] == hashlib.sha256(
-        b"measured content"
-    ).hexdigest()
+    assert (
+        inventory["entries"][-1]["content_sha256"]
+        == hashlib.sha256(b"measured content").hexdigest()
+    )
 
 
 def test_frozen_runtime_copy_preserves_measured_package_tree(tmp_path: Path) -> None:
@@ -1004,14 +1007,20 @@ def test_postruntime_tree_mismatch_retains_exact_inventory_diff(tmp_path: Path) 
         manifest_path=manifest_path,
     )
 
-    report_path = tmp_path / "dakota-workitems-ui-frozen-test-frozen-copy-post-runtime-tree-diff.json"
+    report_path = (
+        tmp_path
+        / "dakota-workitems-ui-frozen-test-frozen-copy-post-runtime-tree-diff.json"
+    )
     report = json.loads(report_path.read_text(encoding="utf-8"))
     assert report["runtime_delta_valid"] is False
-    assert report["runtime_delta_failure_reason"] == "unrecognized_runtime_generated_entry"
+    assert (
+        report["runtime_delta_failure_reason"] == "unrecognized_runtime_generated_entry"
+    )
     assert report["expected_runtime_tree_sha256"] == baseline_sha
-    assert report["observed_package_tree_sha256"] == receipt[
-        "frozen-copy-post-runtime_tree_sha256"
-    ]
+    assert (
+        report["observed_package_tree_sha256"]
+        == receipt["frozen-copy-post-runtime_tree_sha256"]
+    )
     assert report["immutable_build_tree_unchanged"] is True
     assert [entry["path"] for entry in report["added"]] == [
         "__pycache__",
@@ -1132,7 +1141,9 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         if runtime_kind == "frozen"
         else executable.parents[1] / "action-server"
     )
-    package_tree_sha = packaged_tree_sha256(package_root) if runtime_kind == "frozen" else None
+    package_tree_sha = (
+        packaged_tree_sha256(package_root) if runtime_kind == "frozen" else None
+    )
     embedded_files_sha = artifact.get("embedded_files_sha256")
     assets_zip_sha = artifact.get("assets_zip_sha256")
     wrapper_source_sha = artifact.get("wrapper_source_sha256")
@@ -1196,7 +1207,9 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                 runtime_baseline_tree_sha != package_tree_sha
                 or sha256(runtime_executable) != executable_sha
             ):
-                raise AssertionError("task-owned frozen package copy changed artifact bytes")
+                raise AssertionError(
+                    "task-owned frozen package copy changed artifact bytes"
+                )
             runtime_baseline_entries = packaged_tree_inventory(runtime_package_root)
             runtime_baseline_kind = "task_owned_frozen_copy"
             receipt["runtime_artifact_isolation"] = runtime_baseline_kind
@@ -1336,7 +1349,9 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                     source_sha=source_sha,
                     runtime_kind=runtime_kind,
                     executable_sha=executable_sha,
-                    manifest_path=Path(os.environ["DAKOTA_WORKITEMS_UI_BUILD_MANIFEST"]),
+                    manifest_path=Path(
+                        os.environ["DAKOTA_WORKITEMS_UI_BUILD_MANIFEST"]
+                    ),
                 )
             except BaseException as inventory_error:
                 receipt["post_runtime_inventory_failure_type"] = type(
@@ -1374,7 +1389,9 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
                     source_sha=source_sha,
                     runtime_kind=runtime_kind,
                     executable_sha=executable_sha,
-                    manifest_path=Path(os.environ["DAKOTA_WORKITEMS_UI_BUILD_MANIFEST"]),
+                    manifest_path=Path(
+                        os.environ["DAKOTA_WORKITEMS_UI_BUILD_MANIFEST"]
+                    ),
                 )
             except BaseException as error:
                 receipt["status"] = "FAIL"
