@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-10-10T00:48:00Z",
+  "source_sha": "c8e661a44ade26016725cbfb2b30663d32012059",
+  "branch": "devsy/rcc-narrow-acceptance-20261010",
+  "disposition": "BLOCKED",
+  "independent_reviewer": "/root/luna_release_notes",
+  "confirmed_call_path": [
+    "ActionPackageHandler.prune_runtime_source_snapshots is called after import when disable_not_imported is false.",
+    "_cli_impl.py standalone import passes disable_not_imported=False.",
+    "Stored ActionPackage.directory references the snapshot, and get_action_package_cwd requires it to exist.",
+    "No live-worker/datadir quiescence guard is present in the pruning path."
+  ],
+  "finding": "A new standalone import can prune an older snapshot still used by a live Runtime generation. Startup-only documentation is insufficient to enforce that lifecycle boundary.",
+  "verification_limit": "Call-graph/source evidence; live concurrent Runtime regression not yet executed by reviewer.",
+  "remediation_owner": {
+    "thread": "01a12224-8dc6-7dc1-9542-65d3a1de0955",
+    "turn": "01a12339-3ea2-73e1-8051-c95aad9627f3",
+    "steering": "Successfully delivered to existing producer and supervisor; no replacement writer."
+  },
+  "required_proof": "Retain snapshots until deletion can be proven safe for all referenced generations; regression for previous snapshot retention, accurate canonical guidance.",
+  "other_open_gates": [
+    "New candidate cleanup if snapshot selection fails before bootstrap.",
+    "Correct immutable receipt/source binding.",
+    "Observed actual Runtime exit status; previous test did not assert it."
+  ],
+  "upstream_disposition": "none; local Runtime lifecycle wiring"
+}

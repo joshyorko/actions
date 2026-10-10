@@ -1,0 +1,48 @@
+{
+  "observed_at": "2026-10-10T00:52:21.844Z",
+  "pr": 256,
+  "head": "524e503b384a56bf854326c1f7f03833c60e6c53",
+  "run": 38010164278,
+  "source": "54825acf84d1995c3f1c5242e8cf3b670dc122ad",
+  "tree": "7621ef2050941df416c1b7448859a8d3bb4ee443",
+  "reviewer": {
+    "thread": "01a1220f-944d-7f22-94a4-112dc13be035",
+    "turn": "01a12346-e04a-7841-b3f2-f09ba5a22f61",
+    "message": "msg_0cf06ff9ff58855a016ac98bf85b4c87d18c5ecc80bf96b8d4"
+  },
+  "disposition": "PASS_BOUNDED",
+  "verified_artifact_bytes": [
+    {
+      "platform": "Linux",
+      "id": 11652503476,
+      "size": 304313,
+      "sha256": "4f7b17dc39fe349b3dd6d2005dc8cd515e358d3a99146c33c6d600945e778ec8"
+    },
+    {
+      "platform": "Windows",
+      "id": 11652669811,
+      "size": 468927,
+      "sha256": "7081df2b3ea70216bf00dd73a72b1ed32e4ae396e162cb3431f6dc833c875d45"
+    }
+  ],
+  "checks": [
+    "ZIP metadata, CRC and safe paths verified",
+    "Four Linux/Windows frozen/Go UI receipts PASS_BOUNDED",
+    "Normal/storage-error browser stages PASS",
+    "Original build trees unchanged",
+    "Go extracted bytes match archive",
+    "Windows isolated runtime copies contain only pinned RCC additions",
+    "Complete cleanup observations pass"
+  ],
+  "receipt": {
+    "path": "/workspaces/actions-worker-state/devsy-native-auth/run38010164278-pr256-review/pr256-final-admission-receipt.json",
+    "size": 31404,
+    "sha256": "e666f6448fcde10f7fa17cab42f13eb2ce92142dbbbcce9d9fe41382cc92bda1"
+  },
+  "limits": [
+    "Artifact bytes independently read on Devsy; Cloud direct storage download returns403.",
+    "macOS UI not configured; other native CI passed.",
+    "No whole #208 acceptance or publication."
+  ],
+  "upstream_disposition": "none"
+}
