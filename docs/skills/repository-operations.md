@@ -31,6 +31,15 @@ contracts, so a Runtime importing them declares `actions-core ^1.0.2` in its
 production dependency metadata. This is release preparation, not publication.
 Core must be published and independently verified before that Runtime release;
 neither an editable source install nor an old published wheel proves pairing.
+Runtime-executed Action Server test packages must likewise pin the published
+`actions-core=1.0.2` wheel. The Runtime worker imports `EPManagedParameters`,
+`ManagedParameters`, and `PluginManager` from `actions.server_integration`.
+Verified PyPI metadata for 1.0.2 declares Python `>=3.10,<4`, and its wheel
+contains that module and all three exports. In the bounded RCC 18.19.3 run,
+legacy test pins to 1.0.0 bootstrapped an environment but the worker exited
+before writing its result; a fixture pin to 0.10.0 could not be resolved. The
+Runtime's explicit minimum-version error and those fixture inputs identify a
+test-fixture incompatibility, not an RCC defect.
 
 For a split package API promotion, verify the producer's public contract from
 the exact built wheel in an isolated installation. Assess consumer adoption
@@ -1694,11 +1703,15 @@ termination produces `status: failed`, `exitCode: -1`, and
 failure even when artifact identity, verification, and lease identity validate.
 For reload/recovery receipts, retain the Action Server `Popen` owner before
 requesting stop and record its bounded observed return code separately from RCC
-wrapper receipts. The Action Server CLI returns 0 after normal server return;
-the reload/recovery gate requires that observed 0 and records any nonzero or
-signal exit as cleanup failure even if Actions passed. A `stop()` return is not
-process-exit evidence, and a captured descendant set only reports that
-observation; it does not prove complete tree reaping.
+wrapper receipts. A normal `start_server` return produces CLI exit 0. The
+explicit `/api/shutdown/` endpoint instead calls `_thread.interrupt_main()`;
+`_main_retcode` catches that `KeyboardInterrupt` and returns 1. Count exit 1 as
+the expected controlled API-interrupt outcome only when the receipt also proves
+that shutdown request and its successful response. A forced
+`ActionServerProcess.stop()` result, even with code 0, is not natural-shutdown
+evidence; unexplained nonzero or signal exits such as -11 remain failures. A
+`stop()` return is not process-exit evidence, and a captured descendant set
+only reports that observation; it does not prove complete tree reaping.
 The bounded retirement result is one pool-lifecycle signal, separate from the
 Action execution result and RCC terminal receipt. Preserve failed wrapper
 receipts. Neither wrapper reaping nor stopped observed descendants establishes

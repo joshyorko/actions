@@ -583,7 +583,7 @@ dependencies:
   - python=3.10.14
   - uv=0.2.6
   pypi:
-  - actions-core=0.10.0
+  - actions-core=1.0.2
 
 packaging:
   # By default, all files and folders in this directory are packaged when uploaded.
