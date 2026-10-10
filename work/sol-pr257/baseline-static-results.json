@@ -1,0 +1,127 @@
+{
+  "baseline_sha": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+  "head_sha": "90c37991942aad12b1008bdb95ab8ee95e32d05c",
+  "baseline-ruff": {
+    "command": [
+      "/workspace/actions/devutils/.venv/bin/python",
+      "-m",
+      "ruff",
+      "check",
+      "/workspace/work/community-resume/sol-native-review/work/sol-pr257/baseline/.github/workflows/_gen_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/work/sol-pr257/baseline/devutils/tests/test_runtime_release_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/work/sol-pr257/baseline/devutils/tests/test_actions_runtime_release_line.py"
+    ],
+    "returncode": 1,
+    "log_sha256": "1061eb4c97a31d7d481a448093e5004d08fc329267efde531855fd20acddd57d"
+  },
+  "baseline-format": {
+    "command": [
+      "/workspace/actions/devutils/.venv/bin/python",
+      "-m",
+      "ruff",
+      "format",
+      "--check",
+      "--config",
+      "/workspace/work/community-resume/sol-native-review/devutils/ruff.toml",
+      "/workspace/work/community-resume/sol-native-review/work/sol-pr257/baseline/.github/workflows/_gen_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/work/sol-pr257/baseline/devutils/tests/test_runtime_release_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/work/sol-pr257/baseline/devutils/tests/test_actions_runtime_release_line.py"
+    ],
+    "returncode": 1,
+    "log_sha256": "f07e732b56bc2ef5e411581e63e08985df635755b5a0d9e1481053ae1ba07255"
+  },
+  "head-isort": {
+    "command": [
+      "/workspace/actions/devutils/.venv/bin/python",
+      "-m",
+      "isort",
+      "--check",
+      "--profile",
+      "black",
+      "/workspace/work/community-resume/sol-native-review/.github/workflows/_gen_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/devutils/tests/test_runtime_release_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/devutils/tests/test_actions_runtime_release_line.py"
+    ],
+    "returncode": 0,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "baseline-isort": {
+    "command": [
+      "/workspace/actions/devutils/.venv/bin/python",
+      "-m",
+      "isort",
+      "--check",
+      "--profile",
+      "black",
+      "/workspace/work/community-resume/sol-native-review/work/sol-pr257/baseline/.github/workflows/_gen_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/work/sol-pr257/baseline/devutils/tests/test_runtime_release_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/work/sol-pr257/baseline/devutils/tests/test_actions_runtime_release_line.py"
+    ],
+    "returncode": 0,
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "head-format-diff": {
+    "command": [
+      "/workspace/actions/devutils/.venv/bin/python",
+      "-m",
+      "ruff",
+      "format",
+      "--diff",
+      "--config",
+      "/workspace/work/community-resume/sol-native-review/devutils/ruff.toml",
+      "/workspace/work/community-resume/sol-native-review/.github/workflows/_gen_workflows.py"
+    ],
+    "returncode": 1,
+    "log_sha256": "0cf47e3076c84c028e7454ed01a2cb75c00b909e79f04542ba1dae8065ab3173"
+  },
+  "baseline-format-diff": {
+    "command": [
+      "/workspace/actions/devutils/.venv/bin/python",
+      "-m",
+      "ruff",
+      "format",
+      "--diff",
+      "--config",
+      "/workspace/work/community-resume/sol-native-review/devutils/ruff.toml",
+      "/workspace/work/community-resume/sol-native-review/work/sol-pr257/baseline/.github/workflows/_gen_workflows.py"
+    ],
+    "returncode": 1,
+    "log_sha256": "ab57c7e199cd6f14148af37cfde71cbbe12553a93b881edb93782b3cf1e2427d"
+  },
+  "baseline_duplicate_names": {
+    "run_shell_step": [
+      120,
+      1887
+    ],
+    "test_runtime_publisher_accepts_platform_tag_order_and_rejects_duplicate_slots": [
+      464,
+      1897
+    ],
+    "test_runtime_publisher_rejects_foreign_platform_or_build_tag": [
+      512,
+      1945
+    ],
+    "test_generated_runtime_inventory_uses_exact_tag_set_verifier": [
+      532,
+      1965
+    ]
+  },
+  "head_duplicate_names": {
+    "run_shell_step": [
+      121,
+      1940
+    ],
+    "test_runtime_publisher_accepts_platform_tag_order_and_rejects_duplicate_slots": [
+      465,
+      1950
+    ],
+    "test_runtime_publisher_rejects_foreign_platform_or_build_tag": [
+      513,
+      1998
+    ],
+    "test_generated_runtime_inventory_uses_exact_tag_set_verifier": [
+      533,
+      2018
+    ]
+  }
+}

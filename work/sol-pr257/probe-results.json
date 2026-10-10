@@ -1,0 +1,90 @@
+{
+  "focused": {
+    "command": [
+      "/workspace/actions/devutils/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp",
+      "/workspace/work/community-resume/sol-native-review/devutils/tests/test_runtime_release_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/devutils/tests/test_actions_runtime_release_line.py"
+    ],
+    "returncode": 0,
+    "log_sha256": "cdc96958f5fb6e5ef9d1fd52125648265ee90fbd6a2d0ecf7acaee3efdfdc238"
+  },
+  "ruff": {
+    "command": [
+      "/workspace/actions/devutils/.venv/bin/python",
+      "-m",
+      "ruff",
+      "check",
+      "/workspace/work/community-resume/sol-native-review/.github/workflows/_gen_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/devutils/tests/test_runtime_release_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/devutils/tests/test_actions_runtime_release_line.py"
+    ],
+    "returncode": 1,
+    "log_sha256": "8072ce9b648e2ad9eaf32f3c58b77330bf077c120764c29a9ea63571db67d627"
+  },
+  "format": {
+    "command": [
+      "/workspace/actions/devutils/.venv/bin/python",
+      "-m",
+      "ruff",
+      "format",
+      "--check",
+      "--config",
+      "/workspace/work/community-resume/sol-native-review/devutils/ruff.toml",
+      "/workspace/work/community-resume/sol-native-review/.github/workflows/_gen_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/devutils/tests/test_runtime_release_workflows.py",
+      "/workspace/work/community-resume/sol-native-review/devutils/tests/test_actions_runtime_release_line.py"
+    ],
+    "returncode": 1,
+    "log_sha256": "7f7df29716aa954e8fbe56f46d19ee39a94fb9f19690238473961c67f7a803f2"
+  },
+  "generator_semantic_equal": true,
+  "generator_byte_equal": true,
+  "inventory_probes": {
+    "valid": {
+      "returncode": 0,
+      "manifest_exists": true,
+      "stderr": "",
+      "download_names_check_returncode": 0,
+      "download_names_check_stdout": "actions-runtime-1.0.3-windows64.exe: OK\nactions-runtime-1.0.3-linux64: OK\nactions-runtime-1.0.3-macos-arm64: OK\n",
+      "manifest": "81a9c849e888f8e1c8e8823b2b58c7608e603a4b4778910ab8be4af2ec305b03  actions-runtime-1.0.3-windows64.exe\ne493e4fbbc5ce06f630feef679db26dc54ddd546018790c4ce7d4be17ec48466  actions-runtime-1.0.3-linux64\nf133470a72e8016f55a70c028f79393a8e49fa4e28f2ca9de1cfd16eba9e1f91  actions-runtime-1.0.3-macos-arm64\n"
+    },
+    "leaf-symlink": {
+      "returncode": 1,
+      "manifest_exists": false,
+      "stderr": ""
+    },
+    "directory-symlink": {
+      "returncode": 1,
+      "manifest_exists": false,
+      "stderr": ""
+    },
+    "extra-hidden": {
+      "returncode": 1,
+      "manifest_exists": false,
+      "stderr": ""
+    },
+    "extra-directory": {
+      "returncode": 1,
+      "manifest_exists": false,
+      "stderr": ""
+    },
+    "missing": {
+      "returncode": 1,
+      "manifest_exists": false,
+      "stderr": ""
+    },
+    "directory-leaf": {
+      "returncode": 1,
+      "manifest_exists": false,
+      "stderr": ""
+    }
+  },
+  "source_sha": "90c37991942aad12b1008bdb95ab8ee95e32d05c"
+}
