@@ -2,6 +2,41 @@
 
 ## MCP Apps public metadata
 
+## Canvas query-results fixture interchange
+
+The merged PR267 renderer decision uses a thin Actions-owned React view with
+the official `@modelcontextprotocol/ext-apps` 2.0.3 bridge. json-render and
+A2UI were inspected alternatives, not integrated. This accepts the bounded
+renderer choice for the one query-results fixture; the JSON Schema remains a
+fixture-only proposal, not a released CanvasSpec grammar. Keep richer renderer,
+Runtime authorization, real Action dispatch, and host acceptance as separate
+claims.
+
+`docs/contracts/canvas/fixtures/query-results-v0.1.schema.json` is the single
+Draft 2020-12 schema for this fixture. The Python interchange test validates
+and serializes the checked-in values. When the prepared frontend Node/Vitest
+workspace is present, it also sends compact Python JSON through the TypeScript
+test, validates and reserializes it there, then validates the returned JSON in
+Python and checks exact serialized-byte preservation. Local runs without Node or
+Vitest skip this bridge; the skip is NOT RUN, not a 100-B round-trip pass. The
+frontend PR workflow is configured for `community` and `integration/**` targets
+and runs the same Python test after `npm ci` with
+`ACTIONS_CANVAS_REQUIRE_ROUNDTRIP=1`, so a missing Node/Vitest bridge fails CI.
+Check event branch and path filters before treating backend/native green checks
+as complete frontend evidence: a required fixture round trip that never
+scheduled remains **NOT RUN**.
+
+The frontend test uses the directly pinned, test-only `ajv@8.17.1`
+Draft 2020-12 validator against that same JSON Schema. Its TypeScript dispatch
+checks retain fixed typed adapter methods and reject client-added tool/binding
+selectors; fixture binding labels remain descriptive and grant no authority.
+Ajv is not imported by the Canvas entrypoint. A clean Canvas build produced the
+same 416,292-byte HTML resource and SHA-256
+`fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852` after
+adding the test dependency. The local browser harness uses a test-only hash CSP
+and simulated host; Axe checks disable color-contrast, and neither is a
+production-host or ChatGPT acceptance claim.
+
 The Actions Core public `mcp.tool` and `mcp.resource` decorators accept `meta=`
 as a detached JSON object, bounded to 64 KiB and 16 nesting levels. They reject
 non-JSON values and validate the stable MCP Apps `ui.resourceUri`, `ui.visibility`
@@ -481,6 +516,15 @@ expiry/logout, while each inbound/outbound message is also reauthorized.
 Sign-out and expired-session status unmount providers, clear their query cache
 and disconnect browser subscriptions. The browser rechecks on protected HTTP
 403, focus, expiry and a 15-second interval for revocation in another tab.
+
+Community PRs touching `actions/**` run Actions Core Tests. Its non-publishing
+candidate-wheel job builds the exact-source wheel and sdist, checks their
+inventory, validates and clean-installs the wheel, and retains artifact hashes
+with source/run provenance. A passing candidate job is not PyPI publication or
+consumer acceptance. The tagged Core publisher also requires its source commit
+to be an ancestor of `origin/community`; an integration-only candidate cannot
+satisfy that gate. Verify the published wheel and installed public API before
+updating a template's supported dependency floor.
 
 The Actions Core tag release workflow admits exactly the version-matched
 `actions_core` universal wheel and source archive. Its Linux verify job rejects
@@ -1785,6 +1829,13 @@ checks through the same explicitly selected interpreter as the build instead
 of bare `python`; a workflow host interpreter can lack standard-library
 modules required by the check.
 
+Keep that registry-floor check deterministic when newer compatible dependencies
+are published: pass exact `actions-core==EXPECTED_CORE` and
+`actions-http-helper==EXPECTED_HELPER` requirements alongside the Runtime wheel
+in the isolated pip install. Keep pip-report URL/SHA validation and installed
+version/import-origin checks as separate gates. A newer compatible Core release
+does not change the minimum version this canary must exercise.
+
 The frozen Runtime packages RCC `v18.19.3` as a pinned executable under
 `_internal/actions/server/bin`. PyInstaller may report package-data destinations
 with native Windows backslashes; normalize both source and destination
@@ -2094,6 +2145,12 @@ run outside the pool lock. An incomplete retirement remains pending and
 non-reusable; an action finalizer retains its one semaphore token until the
 wrapper is reaped and no observed live descendant remains. Retry is in-band,
 and a genuinely free additional capacity slot remains usable.
+
+For lock-deadline tests, control the monotonic clock and use a recording lock to
+assert the exact remaining timeout, including zero after expiry. Keep real-lock
+contention as an outcome-only smoke test; hosted scheduler delay makes elapsed
+wall-clock ceilings unreliable and does not establish that the requested lock
+wait exceeded its deadline.
 
 The owner `Popen` alone waits and reaps the wrapper; `psutil.wait_procs` is
 used only for descendants so it cannot consume the wrapper's wait status or
@@ -3005,3 +3062,32 @@ regression criterion, not a statistically calibrated browser budget. A single
 jsdom wall-clock measurement cannot establish browser frame rate: hosted run
 38056869588 measured 34.13ms against the old 32ms assertion without a rendering
 correctness failure. Controlled browser performance remains a separate proof.
+
+### Live pull-request base identity
+
+A pull-request metadata response can retain an older `base.sha` after its named
+target branch advances. Resolve the live target Git ref separately and inspect
+the prospective merge's ordered parents and complete tree. Bind carried-forward
+CI evidence to the checkout actually recorded in job logs; neither the PR
+payload's base SHA nor a mergeable flag alone establishes the current tested union.
+
+When merging a package-only community promotion into Runtime integration, retain
+the integration target in the generated package test workflow's PR branch list.
+Regenerate from the combined workflow generator and compare its output, preserving
+the promoted candidate-artifact job and tag publisher's community-ancestry gate.
+Resolving a generator conflict without this check can omit integration CI even
+when the package source itself is identical in both parents.
+
+Core publication is triggered by pushing an unused `actions-core-<version>` tag
+whose commit is already merged to `community`. The current `Actions Release`
+workflow has no `workflow_dispatch` trigger. The generic `inv make-release`
+helper on the current Runtime integration requires `community`, canonical origin,
+and refreshed community ancestry. The accepted Core1.0.3 community checkout
+`a70993fa` still has the older `master` guard. Inspect the helper at the exact
+release source before choosing an entrypoint; identical Core package trees do
+not imply identical shared release helpers.
+Before a tag push, verify the exact accepted source, package version, community
+ancestry, and absence of both the remote tag and registry version. A successful
+tag workflow must still be followed by registry file/hash and installed public
+API verification. Never move a tag or replace a published distribution to recover
+a failed release.
