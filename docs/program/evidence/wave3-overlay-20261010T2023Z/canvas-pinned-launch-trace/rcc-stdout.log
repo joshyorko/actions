@@ -1,0 +1,50 @@
+Controlled PATH excludes every directory that exposes `chromium`.
+Command: /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python -m pytest -m integration_test -q -s action_server_tests/mcp/test_mcp_apps_authoring.py -k canvas_view_calls_public_action_through_runtime_bridge
+Test Python: /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+
+> actions-runtime-frontend@0.0.1 build:canvas
+> vite build --mode canvas --minify=esbuild && node scripts/inline-canvas-assets.mjs && node scripts/write-artifact-manifest.mjs dist-canvas canvas-mcp-app "text/html;profile=mcp-app" && npm run sbom:canvas
+
+vite v8.2.1 building client environment for canvas...
+[2Ktransforming...✓ 153 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-canvas/index.html                   0.48 kB │ gzip:   0.30 kB
+dist-canvas/assets/index-DpJOhFpt.css    3.67 kB │ gzip:   1.26 kB
+dist-canvas/assets/index-DR9pcP2r.js   412.23 kB │ gzip: 117.58 kB
+
+✓ built in 607ms
+
+> actions-runtime-frontend@0.0.1 sbom:canvas
+> cyclonedx-npm --package-lock-only --output-format json --output-reproducible --output-file dist-canvas/sbom.json
+
+
+> actions-runtime-frontend@0.0.1 test:canvas-harness
+> npm run build:canvas && playwright test --config playwright.canvas-harness.config.ts --grep real Runtime Action result
+
+
+> actions-runtime-frontend@0.0.1 build:canvas
+> vite build --mode canvas --minify=esbuild && node scripts/inline-canvas-assets.mjs && node scripts/write-artifact-manifest.mjs dist-canvas canvas-mcp-app "text/html;profile=mcp-app" && npm run sbom:canvas
+
+vite v8.2.1 building client environment for canvas...
+[2Ktransforming...✓ 153 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-canvas/index.html                   0.48 kB │ gzip:   0.30 kB
+dist-canvas/assets/index-DpJOhFpt.css    3.67 kB │ gzip:   1.26 kB
+dist-canvas/assets/index-DR9pcP2r.js   412.23 kB │ gzip: 117.58 kB
+
+✓ built in 625ms
+
+> actions-runtime-frontend@0.0.1 sbom:canvas
+> cyclonedx-npm --package-lock-only --output-format json --output-reproducible --output-file dist-canvas/sbom.json
+
+
+Running 1 test using 1 worker
+
+  ✓  1 apps/canvas-view/host-harness.spec.ts:85:1 › official bridge renders a real Runtime Action result (4.2s)
+
+  1 passed (6.3s)
+.
+1 passed, 2 deselected in 57.29s
+Log (html): /workspace/work/actions-mk3-canvas-proof/action_server/tests/output/log.html

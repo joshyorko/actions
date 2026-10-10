@@ -1,0 +1,647 @@
+"/workspace/work/actions-mk3-canvas-proof/developer/toolkit.yaml" as robot.yaml is:
+# Repository developer toolkit.
+#
+# RCC owns the reproducible toolchain and task boundary. Poetry remains the
+# dependency and package-release authority inside each package.
+
+tasks:
+  Doctor:
+    shell: python toolkit.py doctor
+
+devTasks:
+  Doctor:
+    shell: python toolkit.py doctor
+  Bootstrap:
+    shell: python toolkit.py bootstrap
+  Test:
+    shell: python toolkit.py test
+  ToolkitTest:
+    shell: python toolkit.py toolkit-test
+  Lint:
+    shell: python toolkit.py lint
+  Typecheck:
+    shell: python toolkit.py typecheck
+  Docs:
+    shell: python toolkit.py docs
+  CheckAll:
+    shell: python toolkit.py check-all
+  Coverage:
+    shell: python toolkit.py coverage
+  FrontendTest:
+    shell: python toolkit.py frontend-test
+  InstallCommunity:
+    shell: python toolkit.py install-community
+
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+
+artifactsDir: tmp
+
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
+
+Note! For now, resolved effective environment configuration file is "/workspace/work/actions-mk3-canvas-proof/developer/setup.yaml".
+####  Progress: 00/15  v18.19.3     0.014s  Context: "" <agent@e13229d8d59d> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+Note: 'no-build' setting is active. Only cached, prebuild, or imported environments are allowed!
+####  Progress: 01/15  v18.19.3     0.001s  Fresh [private mode] holotree environment 5598d290-c866-2ae4-a51d-5dad5ce3ff34. (parent/pid: 24934/24937)
+####  Progress: 02/15  v18.19.3     0.001s  Holotree blueprint is "318089d9095ad813" [linux_amd64 with 4 workers on 5 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+---
+####  Progress: 14/15  v18.19.3     0.393s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+Installation plan is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.3     0.612s  Fresh holotree done [with 4 workers on 5 CPUs].
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-canvas-proof/developer/tmp" already has "environment_linux_amd64_freeze.yaml" in it.
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-canvas-proof/developer/tmp" already has "stderr.log" in it.
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-canvas-proof/developer/tmp" already has "stdout.log" in it.
+Above notes mean, that there were files present in directory that was supposed to be empty!
+In robot development phase, it might be ok to have these files while building robot.
+In production robot/assistant, this might be a mistake, where development files were
+left inside robot.zip file. Report these to developer who made this robot/assistant.
+Building wheel...
+Successfully built /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl
+Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+TEST PROCESS: 2026-10-10 20:21:25,089 - actions.server._robo_utils.process - DEBUG - Subprocess start [args=['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'start', '--actions-sync=true', '--port=0', '--datadir=/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server', '--db-file=server.db', '-v', '--skip-lint', '--min-processes=0', '--max-processes=20'],cwd=/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0,uid=0]
+TEST PROCESS: 2026-10-10 20:21:25,091 - actions.server._robo_utils.process - DEBUG - Subprocess started [pid=25192,uid=0]
+stderr: [2026-10-10 20:21:25] [actions.server._cli_impl: DEBUG] Arguments: /workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/__main__.py start --actions-sync=true --port=0 --datadir=/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server --db-file=server.db -v --skip-lint --min-processes=0 --max-processes=20
+stderr: [2026-10-10 20:21:25] [actions.server._cli_impl: DEBUG] CWD: /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0
+stderr: [2026-10-10 20:21:25] [actions.server._cli_impl: INFO]
+stderr:   ⚡️ Starting Action Server... v1.0.3
+stderr: 
+stderr: [2026-10-10 20:21:25] [actions.server._settings: INFO] Using user-specified datadir: /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server
+stderr: [2026-10-10 20:21:25] [actions.server._cli_impl: INFO] Logs may be found at: /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/server_log.txt.
+stderr: [2026-10-10 20:21:25] [actions.server._cli_impl: INFO] Database file does not exist. Creating it at: /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/server.db
+stderr: [2026-10-10 20:21:25] [actions.server._cli_impl: DEBUG] Synchronize actions: True
+stderr: [2026-10-10 20:21:25] [actions.server._actions_import: DEBUG] Importing action package from: /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0
+stderr: [2026-10-10 20:21:25] [robocorp.log._rewrite_filtering: DEBUG] Collecting default library roots.
+stderr: [2026-10-10 20:21:25] [robocorp.log._rewrite_filtering: DEBUG] LIBRARY_ROOTS ['/home/agent/.local/lib/python3.12/site-packages', '/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12/site-packages']
+stderr: 
+stderr: [2026-10-10 20:21:25] [actions.server._action_package_handler: INFO] Action package seems ok. Bootstrapping RCC environment (please wait, this can take a long time).
+stderr: [2026-10-10 20:21:25] [actions.server._rcc: DEBUG] Running: /workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3 ht hash /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/.rcc-runtime-sources/bc5854a7a82cef50bd54c00c1a99c835f3cf9aa47fd12d7eab17bf3498e14c46/package.yaml --silent --no-temp-management --warranty-voided --controller action-server --bundled --robocorp
+stderr: [2026-10-10 20:21:25] [actions.server._rcc: INFO] Output from: /workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3 ht hash /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/.rcc-runtime-sources/bc5854a7a82cef50bd54c00c1a99c835f3cf9aa47fd12d7eab17bf3498e14c46/package.yaml --silent --no-temp-management --warranty-voided --controller action-server --bundled --robocorp (took: 0.02s): e635693158079d5b
+stderr: 
+stderr: [2026-10-10 20:21:25] [actions.server._rcc: DEBUG] Running: /workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3 holotree variables --space e635693158079d5b /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/.rcc-runtime-sources/bc5854a7a82cef50bd54c00c1a99c835f3cf9aa47fd12d7eab17bf3498e14c46/package.yaml --config /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/temp_dir0/.rcc_config/rcc.yaml --json --no-retry-build --no-pyc-management --controller action-server --bundled --robocorp
+stderr: ####  Progress: 00/15  v18.19.3     0.020s  Context: "" <agent@e13229d8d59d> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+stderr: ####  Progress: 01/15  v18.19.3     0.000s  Fresh [private mode] holotree environment 9b774ec7-4b70-4a0f-a4ee-52e5aceb0ef0. (parent/pid: 25192/25210)
+stderr: ####  Progress: 02/15  v18.19.3     0.000s  Holotree blueprint is "e635693158079d5b" [linux_amd64 with 4 workers on 5 CPUs from "e635693158079d5b"].
+stderr: FINAL unified conda environment descriptor:
+stderr: ---
+stderr: channels:
+stderr: - conda-forge
+stderr: dependencies:
+stderr: - python=3.12
+stderr: - uv=0.9.26
+stderr: - pip:
+stderr:   - actions-core==1.0.2
+stderr: rccPostInstall:
+stderr: - python -m pip install --no-deps --force-reinstall /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl
+stderr: ---
+stderr: ####  Progress: 03/15  v18.19.3     0.000s  Fill hololib from RCC_REMOTE_ORIGIN skipped. RCC_REMOTE_ORIGIN was not defined.
+stderr: ####  Progress: 04/15  v18.19.3     0.000s  Cleanup holotree stage for fresh install.
+stderr: ####  Progress: 05/15  v18.19.3     0.000s  Build environment into holotree stage "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/hc2fd1aa_493f813dad24d3t".
+stderr: ####  Progress: 06/15  v18.19.3     0.000s  Restore partial environment into holotree stage "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/hc2fd1aa_493f813dad24d3t".
+stderr: Note: Extracting micromamba binary from inside rcc.
+stderr: ####  Progress: 07/15  v18.19.3     0.151s  Running micromamba phase. (micromamba v2.5.0) [layer: bd45cc05be8b7e0a]
+stderr: ####  Progress: 08/15  v18.19.3    17.886s  Running uv install phase. (uv v0.9.26) [layer: 460c42919b8a21c5]
+stderr: ####  Progress: 09/15  v18.19.3     7.864s  Post install scripts phase started. [layer: e635693158079d5b]
+stderr: ####  Progress: 10/15  v18.19.3     1.576s  Activate environment started phase.
+stderr: Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.
+stderr: Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.
+stderr: ####  Progress: 11/15  v18.19.3     2.804s  Pip check skipped.
+stderr: ####  Progress: 12/15  v18.19.3     0.000s  Update installation plan.
+stderr: ####  Progress: 13/15  v18.19.3     0.000s  Record holotree stage to hololib [with 4 workers on 5 CPUs].
+stderr: ####  Progress: 14/15  v18.19.3     0.596s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+stderr: Installation plan is: /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d/rcc_plan.log
+stderr: Environment configuration descriptor is: /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d/identity.yaml
+stderr: ####  Progress: 15/15  v18.19.3     1.602s  Fresh holotree done [with 4 workers on 5 CPUs].
+stderr: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+stderr: @@@  From rcc "v18.19.3" (controller: "action-server") point of view, "environment creation" was SUCCESS. @@@
+stderr: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+stderr: [
+stderr:   {
+stderr:     "key": "PYTHON_EXE",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d/bin/python3"
+stderr:   },
+stderr:   {
+stderr:     "key": "TEMP",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/temp/a6248500c53e7b36"
+stderr:   },
+stderr:   {
+stderr:     "key": "TMP",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/temp/a6248500c53e7b36"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_DEFAULT_ENV",
+stderr:     "value": "rcc"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_PREFIX",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_PROMPT_MODIFIER",
+stderr:     "value": "(rcc)"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_SHLVL",
+stderr:     "value": "1"
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONHOME",
+stderr:     "value": ""
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONSTARTUP",
+stderr:     "value": ""
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONEXECUTABLE",
+stderr:     "value": ""
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONNOUSERSITE",
+stderr:     "value": "1"
+stderr:   },
+stderr:   {
+stderr:     "key": "ROBOCORP_HOME",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_ENVIRONMENT_HASH",
+stderr:     "value": "e635693158079d5b"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_INSTALLATION_ID",
+stderr:     "value": "9b774ec7-4b70-4a0f-a4ee-52e5aceb0ef0"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_HOLOTREE_SPACE_ROOT",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_TRACKING_ALLOWED",
+stderr:     "value": "false"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_EXE",
+stderr:     "value": "/workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_VERSION",
+stderr:     "value": "v18.19.3"
+stderr:   },
+stderr:   {
+stderr:     "key": "PATH",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d/bin:/workspace/work/actions-mk3-canvas-proof/developer:/workspace/actions-cloud/bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/override:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin:/opt/codex/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/fallback:/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/system-bin-without-chromium"
+stderr:   },
+stderr:   {
+stderr:     "key": "PWD",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/.rcc-runtime-sources/bc5854a7a82cef50bd54c00c1a99c835f3cf9aa47fd12d7eab17bf3498e14c46"
+stderr:   },
+stderr:   {
+stderr:     "key": "SHLVL",
+stderr:     "value": "3"
+stderr:   },
+stderr:   {
+stderr:     "key": "_",
+stderr:     "value": "/workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3"
+stderr:   },
+stderr:   {
+stderr:     "key": "MAMBA_ROOT_PREFIX",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home"
+stderr:   }
+stderr: ]
+stderr: [2026-10-10 20:21:58] [actions.server._rcc: INFO] Output from: /workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3 holotree variables --space e635693158079d5b /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/.rcc-runtime-sources/bc5854a7a82cef50bd54c00c1a99c835f3cf9aa47fd12d7eab17bf3498e14c46/package.yaml --config /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/temp_dir0/.rcc_config/rcc.yaml --json --no-retry-build --no-pyc-management --controller action-server --bundled --robocorp (took: 32.55s): [
+stderr:   {
+stderr:     "key": "PYTHON_EXE",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d/bin/python3"
+stderr:   },
+stderr:   {
+stderr:     "key": "TEMP",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/temp/a6248500c53e7b36"
+stderr:   },
+stderr:   {
+stderr:     "key": "TMP",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/temp/a6248500c53e7b36"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_DEFAULT_ENV",
+stderr:     "value": "rcc"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_PREFIX",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_PROMPT_MODIFIER",
+stderr:     "value": "(rcc)"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_SHLVL",
+stderr:     "value": "1"
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONHOME",
+stderr:     "value": ""
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONSTARTUP",
+stderr:     "value": ""
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONEXECUTABLE",
+stderr:     "value": ""
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONNOUSERSITE",
+stderr:     "value": "1"
+stderr:   },
+stderr:   {
+stderr:     "key": "ROBOCORP_HOME",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_ENVIRONMENT_HASH",
+stderr:     "value": "e635693158079d5b"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_INSTALLATION_ID",
+stderr:     "value": "9b774ec7-4b70-4a0f-a4ee-52e5aceb0ef0"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_HOLOTREE_SPACE_ROOT",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_TRACKING_ALLOWED",
+stderr:     "value": "false"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_EXE",
+stderr:     "value": "/workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_VERSION",
+stderr:     "value": "v18.19.3"
+stderr:   },
+stderr:   {
+stderr:     "key": "PATH",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d/bin:/workspace/work/actions-mk3-canvas-proof/developer:/workspace/actions-cloud/bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/override:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin:/opt/codex/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/fallback:/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/system-bin-without-chromium"
+stderr:   },
+stderr:   {
+stderr:     "key": "PWD",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/.rcc-runtime-sources/bc5854a7a82cef50bd54c00c1a99c835f3cf9aa47fd12d7eab17bf3498e14c46"
+stderr:   },
+stderr:   {
+stderr:     "key": "SHLVL",
+stderr:     "value": "3"
+stderr:   },
+stderr:   {
+stderr:     "key": "_",
+stderr:     "value": "/workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3"
+stderr:   },
+stderr:   {
+stderr:     "key": "MAMBA_ROOT_PREFIX",
+stderr:     "value": "/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home"
+stderr:   }
+stderr: ]
+stderr: 
+stderr: [2026-10-10 20:21:58] [actions.server._actions_import: INFO] Python interpreter path: /workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/holotree/c2fd1aa_a78733b_ac53ee8d/bin/python3
+stderr: [2026-10-10 20:21:58] [actions.server._actions_import: DEBUG] Collecting actions for Action Package: Canvas Runtime bridge acceptance.
+stderr: [2026-10-10 20:21:59] [actions.server._actions_import: INFO] Found new action package: Canvas Runtime bridge acceptance
+stderr: [2026-10-10 20:21:59] [actions.server._actions_import: INFO] Found new action: canvas_view
+stderr: [2026-10-10 20:21:59] [actions.server._actions_import: INFO] Found new action: canvas_fixture_search
+stderr: [2026-10-10 20:21:59] [actions.server._actions_import: INFO] Found new action: canvas_fixture_artifact_status
+stderr: [2026-10-10 20:21:59] [actions.server._actions_import: INFO] Found new action: canvas_fixture_worker_provenance
+stderr: [2026-10-10 20:22:00] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 20:22:00] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 20:22:00] [actions.server._mode: INFO] Operating mode: standard
+stderr: [2026-10-10 20:22:00] [actions.server._server: DEBUG] Starting server. Settings:
+stderr:     artifacts_dir = PosixPath('/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/artifacts')
+stderr:     datadir = PosixPath('/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server')
+stderr:     artifact_storage_backend = 'local'
+stderr:     artifact_storage_root = PosixPath('/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/artifacts')
+stderr:     title = 'Actions Runtime'
+stderr:     address = 'localhost'
+stderr:     port = 0
+stderr:     verbose = True
+stderr:     db_file = 'server.db'
+stderr:     database_url = None
+stderr:     expose_provider = 'auto'
+stderr:     server_url = 'http://localhost:0'
+stderr:     cors_allow_origins = ()
+stderr:     min_processes = 0
+stderr:     max_processes = 20
+stderr:     reuse_processes = False
+stderr:     full_openapi_spec = False
+stderr:     use_https = False
+stderr:     ssl_self_signed = False
+stderr:     ssl_keyfile = None
+stderr:     ssl_certfile = None
+stderr:     oauth2_settings = '/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/actions-home/action-server/oauth2_config.yaml'
+stderr:     base_url = None
+stderr:     enable_scheduler = True
+stderr:     scheduler_check_interval = 10.0
+stderr:     scheduler_max_concurrent_global = 10
+stderr:     enable_triggers = True
+stderr:     trigger_webhook_base_url = None
+stderr:     smtp_host = None
+stderr:     smtp_port = 587
+stderr:     smtp_user = None
+stderr:     smtp_password = None
+stderr:     smtp_from = None
+stderr:     smtp_use_tls = True
+stderr:     redis_url = None
+stderr:     redis_password = None
+stderr:     worker_concurrency = 4
+stderr:     worker_poll_timeout = 30
+stderr: [2026-10-10 20:22:00] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 20:22:00] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 20:22:00] [actions.server._actions_process_pool: DEBUG] ACTIONS_RUNTIME_POST_RUN_CMD not set (post run will be skipped).
+stderr: [2026-10-10 20:22:00] [asyncio: DEBUG] Using selector: EpollSelector
+stderr: [2026-10-10 20:22:00] [uvicorn.error: INFO] Started server process [25192]
+stderr: [2026-10-10 20:22:00] [uvicorn.error: INFO] Waiting for application startup.
+stderr: [2026-10-10 20:22:00] [mcp.server.streamable_http_manager: INFO] StreamableHTTP session manager started
+stderr: [2026-10-10 20:22:00] [actions.server._server: DEBUG] Not exposing action server...
+stderr: [2026-10-10 20:22:00] [actions.server._server: INFO] Initializing scheduler engine...
+stderr: [2026-10-10 20:22:00] [actions.server._scheduler: INFO] Scheduler engine started (check_interval=10.0s, max_concurrent=10)
+stderr: [2026-10-10 20:22:00] [actions.server._server: INFO]   ⏰ Scheduler started (check interval: 10.0s)
+stderr: [2026-10-10 20:22:00] [uvicorn.error: INFO] Application startup complete.
+stderr: [2026-10-10 20:22:00] [actions.server._server: INFO]
+stderr:   ⚡️ Local MCP endpoint: http://localhost:35869/mcp
+stderr: [2026-10-10 20:22:00] [actions.server._server: INFO]
+stderr:   ⚡️ Local Action Server: http://localhost:35869
+stderr: [2026-10-10 20:22:00] [actions.server._server: INFO]      Public access: use --expose to expose (OpenAPI only)
+TEST PROCESS: 2026-10-10 20:22:00,884 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-10 20:22:00,955 - mcp.client.streamable_http - DEBUG - Connecting to StreamableHTTP endpoint: http://localhost:35869/mcp
+TEST PROCESS: 2026-10-10 20:22:00,956 - mcp.client.streamable_http - DEBUG - Sending client message: jsonrpc='2.0' id=1 method='server/discover' params={'_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+TEST PROCESS: 2026-10-10 20:22:00,957 - httpcore2.connection - DEBUG - connect_tcp.started host='localhost' port=35869 local_address=None timeout=5.0 socket_options=None
+TEST PROCESS: 2026-10-10 20:22:00,961 - httpcore2.connection - DEBUG - connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x7f49c7f5f500>
+TEST PROCESS: 2026-10-10 20:22:00,962 - httpcore2.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:00,962 - httpcore2.http11 - DEBUG - send_request_headers.complete
+TEST PROCESS: 2026-10-10 20:22:00,962 - httpcore2.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:00,962 - httpcore2.http11 - DEBUG - send_request_body.complete
+TEST PROCESS: 2026-10-10 20:22:00,962 - httpcore2.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:22:00] [uvicorn.access: INFO] 127.0.0.1:36900 - "POST /mcp HTTP/1.1" 200
+TEST PROCESS: 2026-10-10 20:22:00,964 - httpcore2.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:22:00 GMT'), (b'server', b'uvicorn'), (b'content-length', b'343'), (b'content-type', b'application/json'), (b'x-request-id', b'b0d04f3d-82cb-48e0-b9db-f2d0909a28f1')])
+TEST PROCESS: 2026-10-10 20:22:00,964 - httpx2 - INFO - HTTP Request: POST http://localhost:35869/mcp "HTTP/1.1 200 OK"
+TEST PROCESS: 2026-10-10 20:22:00,964 - httpcore2.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:00,964 - httpcore2.http11 - DEBUG - receive_response_body.complete
+stderr: [2026-10-10 20:22:00] [actions.server._api_action_routes: INFO] MCP request
+TEST PROCESS: 2026-10-10 20:22:00,965 - httpcore2.http11 - DEBUG - response_closed.started
+TEST PROCESS: 2026-10-10 20:22:00,965 - httpcore2.http11 - DEBUG - response_closed.complete
+TEST PROCESS: 2026-10-10 20:22:00,965 - mcp.client.streamable_http - DEBUG - Sending client message: jsonrpc='2.0' id=2 method='tools/list' params={'_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+TEST PROCESS: 2026-10-10 20:22:00,966 - httpcore2.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:00,966 - httpcore2.http11 - DEBUG - send_request_headers.complete
+TEST PROCESS: 2026-10-10 20:22:00,966 - httpcore2.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:00,966 - httpcore2.http11 - DEBUG - send_request_body.complete
+TEST PROCESS: 2026-10-10 20:22:00,966 - httpcore2.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:22:00] [uvicorn.access: INFO] 127.0.0.1:36900 - "POST /mcp HTTP/1.1" 200
+TEST PROCESS: 2026-10-10 20:22:00,968 - httpcore2.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:22:00 GMT'), (b'server', b'uvicorn'), (b'content-length', b'1681'), (b'content-type', b'application/json'), (b'x-request-id', b'3da59287-360e-4c98-b41d-4df368a4938a')])
+TEST PROCESS: 2026-10-10 20:22:00,968 - httpx2 - INFO - HTTP Request: POST http://localhost:35869/mcp "HTTP/1.1 200 OK"
+TEST PROCESS: 2026-10-10 20:22:00,968 - httpcore2.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:00,968 - httpcore2.http11 - DEBUG - receive_response_body.complete
+stderr: [2026-10-10 20:22:00] [actions.server._api_action_routes: INFO] MCP request
+TEST PROCESS: 2026-10-10 20:22:00,968 - httpcore2.http11 - DEBUG - response_closed.started
+TEST PROCESS: 2026-10-10 20:22:00,969 - httpcore2.http11 - DEBUG - response_closed.complete
+TEST PROCESS: 2026-10-10 20:22:00,970 - mcp.client.streamable_http - DEBUG - Sending client message: jsonrpc='2.0' id=3 method='resources/read' params={'uri': 'ui://action-canvas/v1/canvas.html?query-fixture=0.1', '_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+TEST PROCESS: 2026-10-10 20:22:00,971 - httpcore2.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:00,971 - httpcore2.http11 - DEBUG - send_request_headers.complete
+TEST PROCESS: 2026-10-10 20:22:00,971 - httpcore2.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:00,971 - httpcore2.http11 - DEBUG - send_request_body.complete
+TEST PROCESS: 2026-10-10 20:22:00,971 - httpcore2.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:22:01] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (25862).
+stderr: [2026-10-10 20:22:01] [actions.server._actions_run: INFO] Updating run run-000-767ee5b7-5641-416c-abc2-f2da5aa95ddb with changes: 'status': 1 (see: http://localhost:35869/runs/run-000-767ee5b7-5641-416c-abc2-f2da5aa95ddb)
+stderr: [2026-10-10 20:22:01] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_view', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 20:22:01] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 20:22:01] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 20:22:01] [actions.server._actions_run: INFO] Updating run run-000-767ee5b7-5641-416c-abc2-f2da5aa95ddb with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.68650440600004 (see: http://localhost:35869/runs/run-000-767ee5b7-5641-416c-abc2-f2da5aa95ddb)
+stderr: [2026-10-10 20:22:01] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (25862) -- not reusing processes.
+stderr: [2026-10-10 20:22:01] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 20:22:02] [uvicorn.access: INFO] 127.0.0.1:36900 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 20:22:02] [actions.server._api_action_routes: INFO] MCP request
+TEST PROCESS: 2026-10-10 20:22:02,002 - httpcore2.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:22:00 GMT'), (b'server', b'uvicorn'), (b'content-length', b'425860'), (b'content-type', b'application/json'), (b'x-request-id', b'8abd2c7e-cd84-48f4-984f-a7073c2cdf87')])
+TEST PROCESS: 2026-10-10 20:22:02,003 - httpx2 - INFO - HTTP Request: POST http://localhost:35869/mcp "HTTP/1.1 200 OK"
+TEST PROCESS: 2026-10-10 20:22:02,004 - httpcore2.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:02,006 - httpcore2.http11 - DEBUG - receive_response_body.complete
+TEST PROCESS: 2026-10-10 20:22:02,007 - httpcore2.http11 - DEBUG - response_closed.started
+TEST PROCESS: 2026-10-10 20:22:02,007 - httpcore2.http11 - DEBUG - response_closed.complete
+TEST PROCESS: 2026-10-10 20:22:02,013 - mcp.client.streamable_http - DEBUG - Sending client message: jsonrpc='2.0' id=4 method='tools/call' params={'name': 'canvas_fixture_search', 'arguments': {'query': 'alpha'}, '_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+TEST PROCESS: 2026-10-10 20:22:02,014 - httpcore2.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:02,014 - httpcore2.http11 - DEBUG - send_request_headers.complete
+TEST PROCESS: 2026-10-10 20:22:02,018 - httpcore2.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:02,018 - httpcore2.http11 - DEBUG - send_request_body.complete
+TEST PROCESS: 2026-10-10 20:22:02,018 - httpcore2.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:22:02] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (25922).
+stderr: [2026-10-10 20:22:02] [actions.server._actions_run: INFO] Updating run run-001-01c3736b-bf8e-4b6c-884b-6192d917dfe5 with changes: 'status': 1 (see: http://localhost:35869/runs/run-001-01c3736b-bf8e-4b6c-884b-6192d917dfe5)
+stderr: [2026-10-10 20:22:02] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_fixture_search', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 20:22:02] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 20:22:02] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 20:22:02] [actions.server._actions_run: INFO] Updating run run-001-01c3736b-bf8e-4b6c-884b-6192d917dfe5 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.6528662579999036 (see: http://localhost:35869/runs/run-001-01c3736b-bf8e-4b6c-884b-6192d917dfe5)
+stderr: [2026-10-10 20:22:02] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (25922) -- not reusing processes.
+stderr: [2026-10-10 20:22:02] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 20:22:02] [uvicorn.access: INFO] 127.0.0.1:36900 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 20:22:02] [actions.server._api_action_routes: INFO] MCP request
+TEST PROCESS: 2026-10-10 20:22:02,986 - httpcore2.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:22:01 GMT'), (b'server', b'uvicorn'), (b'content-length', b'502'), (b'content-type', b'application/json'), (b'x-request-id', b'2c4f8e0f-f565-42e7-8e22-d03d71330712')])
+TEST PROCESS: 2026-10-10 20:22:02,987 - httpx2 - INFO - HTTP Request: POST http://localhost:35869/mcp "HTTP/1.1 200 OK"
+TEST PROCESS: 2026-10-10 20:22:02,988 - httpcore2.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:02,988 - httpcore2.http11 - DEBUG - receive_response_body.complete
+TEST PROCESS: 2026-10-10 20:22:02,989 - httpcore2.http11 - DEBUG - response_closed.started
+TEST PROCESS: 2026-10-10 20:22:02,990 - httpcore2.http11 - DEBUG - response_closed.complete
+TEST PROCESS: 2026-10-10 20:22:03,098 - mcp.client.streamable_http - DEBUG - Sending client message: jsonrpc='2.0' id=5 method='tools/call' params={'name': 'canvas_fixture_artifact_status', 'arguments': {'handle': 'art_7Wk3qN9pL2xD5mR8sV4cY1'}, '_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+TEST PROCESS: 2026-10-10 20:22:03,100 - httpcore2.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:03,101 - httpcore2.http11 - DEBUG - send_request_headers.complete
+TEST PROCESS: 2026-10-10 20:22:03,101 - httpcore2.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:03,101 - httpcore2.http11 - DEBUG - send_request_body.complete
+TEST PROCESS: 2026-10-10 20:22:03,101 - httpcore2.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:22:03] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (25962).
+stderr: [2026-10-10 20:22:03] [actions.server._actions_run: INFO] Updating run run-002-c1cc67b4-ecef-4bce-b1fd-2073c12cd547 with changes: 'status': 1 (see: http://localhost:35869/runs/run-002-c1cc67b4-ecef-4bce-b1fd-2073c12cd547)
+stderr: [2026-10-10 20:22:03] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_fixture_artifact_status', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 20:22:03] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 20:22:03] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 20:22:03] [actions.server._actions_run: INFO] Updating run run-002-c1cc67b4-ecef-4bce-b1fd-2073c12cd547 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.6161192630002006 (see: http://localhost:35869/runs/run-002-c1cc67b4-ecef-4bce-b1fd-2073c12cd547)
+stderr: [2026-10-10 20:22:03] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (25962) -- not reusing processes.
+stderr: [2026-10-10 20:22:03] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 20:22:04] [uvicorn.access: INFO] 127.0.0.1:36900 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 20:22:04] [actions.server._api_action_routes: INFO] MCP request
+TEST PROCESS: 2026-10-10 20:22:04,059 - httpcore2.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:22:02 GMT'), (b'server', b'uvicorn'), (b'content-length', b'308'), (b'content-type', b'application/json'), (b'x-request-id', b'818837ce-7fbd-4f48-b2ea-ea847aa33c47')])
+TEST PROCESS: 2026-10-10 20:22:04,059 - httpx2 - INFO - HTTP Request: POST http://localhost:35869/mcp "HTTP/1.1 200 OK"
+TEST PROCESS: 2026-10-10 20:22:04,059 - httpcore2.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:04,060 - httpcore2.http11 - DEBUG - receive_response_body.complete
+TEST PROCESS: 2026-10-10 20:22:04,060 - httpcore2.http11 - DEBUG - response_closed.started
+TEST PROCESS: 2026-10-10 20:22:04,061 - httpcore2.http11 - DEBUG - response_closed.complete
+TEST PROCESS: 2026-10-10 20:22:04,063 - mcp.client.streamable_http - DEBUG - Sending client message: jsonrpc='2.0' id=6 method='tools/call' params={'name': 'canvas_fixture_worker_provenance', 'arguments': {}, '_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+TEST PROCESS: 2026-10-10 20:22:04,064 - httpcore2.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:04,064 - httpcore2.http11 - DEBUG - send_request_headers.complete
+TEST PROCESS: 2026-10-10 20:22:04,064 - httpcore2.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:04,064 - httpcore2.http11 - DEBUG - send_request_body.complete
+TEST PROCESS: 2026-10-10 20:22:04,064 - httpcore2.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:22:04] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (25988).
+stderr: [2026-10-10 20:22:04] [actions.server._actions_run: INFO] Updating run run-003-9a6f92e3-af8f-4e5a-917d-a40063cf4a23 with changes: 'status': 1 (see: http://localhost:35869/runs/run-003-9a6f92e3-af8f-4e5a-917d-a40063cf4a23)
+stderr: [2026-10-10 20:22:04] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_fixture_worker_provenance', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 20:22:04] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 20:22:04] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 20:22:04] [actions.server._actions_run: INFO] Updating run run-003-9a6f92e3-af8f-4e5a-917d-a40063cf4a23 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.5567960970001877 (see: http://localhost:35869/runs/run-003-9a6f92e3-af8f-4e5a-917d-a40063cf4a23)
+stderr: [2026-10-10 20:22:04] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (25988) -- not reusing processes.
+stderr: [2026-10-10 20:22:04] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 20:22:04] [uvicorn.access: INFO] 127.0.0.1:36900 - "POST /mcp HTTP/1.1" 200
+TEST PROCESS: 2026-10-10 20:22:04,896 - httpcore2.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:22:03 GMT'), (b'server', b'uvicorn'), (b'content-length', b'795'), (b'content-type', b'application/json'), (b'x-request-id', b'd5d50a32-3d63-4890-af65-ccbdbc0465df')])
+TEST PROCESS: 2026-10-10 20:22:04,896 - httpx2 - INFO - HTTP Request: POST http://localhost:35869/mcp "HTTP/1.1 200 OK"
+stderr: [2026-10-10 20:22:04] [actions.server._api_action_routes: INFO] MCP request
+TEST PROCESS: 2026-10-10 20:22:04,897 - httpcore2.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:22:04,897 - httpcore2.http11 - DEBUG - receive_response_body.complete
+TEST PROCESS: 2026-10-10 20:22:04,897 - httpcore2.http11 - DEBUG - response_closed.started
+TEST PROCESS: 2026-10-10 20:22:04,897 - httpcore2.http11 - DEBUG - response_closed.complete
+TEST PROCESS: 2026-10-10 20:22:04,899 - httpcore2.connection - DEBUG - close.started
+TEST PROCESS: 2026-10-10 20:22:04,900 - httpcore2.connection - DEBUG - close.complete
+Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[WebServer] (node:26235) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+  pw:browser <launching> /workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=/workspace/work/actions-mk3-evidence/canvas-pinned-launch-trace/tmp/playwright_chromiumdev_profile-n9S3cr --remote-debugging-pipe --no-startup-window +0ms
+  pw:browser <launched> pid=26294 +3ms
+  pw:browser [pid=26294][err] [1010/202210.941486:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory +36ms
+  pw:browser [pid=26294][err] [1010/202210.942605:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory +1ms
+  pw:browser [pid=26294][err] [1010/202210.942803:ERROR:dbus/bus.cc:405] Failed to connect to the bus: Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory +0ms
+  pw:browser [pid=26294][err] [1010/202210.967535:WARNING:device/bluetooth/dbus/bluez_dbus_manager.cc:209] Floss manager service not available, cannot set Floss enable/disable. +24ms
+  pw:browser [pid=26294][err] [1010/202210.970359:WARNING:media/gpu/vaapi/vaapi_wrapper.cc:1655] drmGetDevices2() has not found any devices +6ms
+  pw:browser [pid=26294][err] [1010/202210.975458:WARNING:sandbox/policy/linux/sandbox_linux.cc:405] InitializeSandbox() called with multiple threads in process gpu-process. +2ms
+stderr: [2026-10-10 20:22:11] [mcp.server.streamable_http_manager: DEBUG] Stateless mode: Creating new transport for this request
+stderr: [2026-10-10 20:22:11] [uvicorn.access: INFO] 127.0.0.1:53014 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 20:22:11] [mcp.server.streamable_http: INFO] Terminating session: None
+stderr: [2026-10-10 20:22:11] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 20:22:11] [mcp.server.streamable_http: DEBUG] Read stream closed by client
+stderr: [2026-10-10 20:22:11] [mcp.server.streamable_http_manager: DEBUG] Stateless mode: Creating new transport for this request
+stderr: [2026-10-10 20:22:11] [uvicorn.access: INFO] 127.0.0.1:53030 - "POST /mcp HTTP/1.1" 202
+stderr: [2026-10-10 20:22:11] [mcp.server.streamable_http: INFO] Terminating session: None
+stderr: [2026-10-10 20:22:11] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 20:22:11] [mcp.server.runner: DEBUG] no handler for notification notifications/initialized
+stderr: [2026-10-10 20:22:11] [mcp.shared.jsonrpc_dispatcher: DEBUG] read stream closed by transport; treating as EOF
+stderr: [2026-10-10 20:22:11] [mcp.server.streamable_http_manager: DEBUG] Stateless mode: Creating new transport for this request
+stderr: [2026-10-10 20:22:11] [uvicorn.access: INFO] 127.0.0.1:53014 - "GET /mcp HTTP/1.1" 200
+stderr: [2026-10-10 20:22:11] [mcp.server.streamable_http_manager: DEBUG] Stateless mode: Creating new transport for this request
+stderr: [2026-10-10 20:22:11] [uvicorn.access: INFO] 127.0.0.1:53032 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 20:22:11] [mcp.server.streamable_http: INFO] Terminating session: None
+stderr: [2026-10-10 20:22:11] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 20:22:11] [mcp.server.streamable_http: DEBUG] Read stream closed by client
+stderr: [2026-10-10 20:22:11] [mcp.server.streamable_http_manager: DEBUG] Stateless mode: Creating new transport for this request
+stderr: [2026-10-10 20:22:11] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (26362).
+stderr: [2026-10-10 20:22:11] [actions.server._actions_run: INFO] Updating run run-004-531a8a14-3e42-4eee-b571-78485f925003 with changes: 'status': 1 (see: http://localhost:35869/runs/run-004-531a8a14-3e42-4eee-b571-78485f925003)
+stderr: [2026-10-10 20:22:11] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_view', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 20:22:12] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 20:22:12] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 20:22:12] [actions.server._actions_run: INFO] Updating run run-004-531a8a14-3e42-4eee-b571-78485f925003 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.5964153659997464 (see: http://localhost:35869/runs/run-004-531a8a14-3e42-4eee-b571-78485f925003)
+stderr: [2026-10-10 20:22:12] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (26362) -- not reusing processes.
+stderr: [2026-10-10 20:22:12] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 20:22:12] [uvicorn.access: INFO] 127.0.0.1:53030 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 20:22:12] [mcp.server.streamable_http: INFO] Terminating session: None
+stderr: [2026-10-10 20:22:12] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 20:22:12] [mcp.server.streamable_http: DEBUG] Read stream closed by client
+  pw:browser [pid=26294][err] [1010/202212.225560:INFO:CONSOLE:855] "[vite] connecting...", source: http://127.0.0.1:52721/@vite/client (855) +1s
+  pw:browser [pid=26294][err] [1010/202212.232653:INFO:CONSOLE:964] "[vite] connected.", source: http://127.0.0.1:52721/@vite/client (964) +9ms
+  pw:browser [pid=26294][err] [1010/202212.326764:INFO:CONSOLE:37] "Sending message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +94ms
+  pw:browser [pid=26294][err] [1010/202212.327973:INFO:CONSOLE:37] "Parsed message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +0ms
+  pw:browser [pid=26294][err] [1010/202212.328684:INFO:CONSOLE:37] "Sending message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +1ms
+  pw:browser [pid=26294][err] [1010/202212.333534:INFO:CONSOLE:37] "Parsed message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +4ms
+  pw:browser [pid=26294][err] [1010/202212.334751:INFO:CONSOLE:37] "Parsed message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +1ms
+  pw:browser [pid=26294][err] [1010/202212.343869:INFO:CONSOLE:37] "Sending message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +10ms
+  pw:browser [pid=26294][err] [1010/202212.451141:INFO:CONSOLE:37] "Sending message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +107ms
+  pw:browser [pid=26294][err] [1010/202212.453442:INFO:CONSOLE:37] "Sending message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +2ms
+stderr: [2026-10-10 20:22:12] [mcp.server.streamable_http_manager: DEBUG] Stateless mode: Creating new transport for this request
+stderr: [2026-10-10 20:22:12] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (26393).
+stderr: [2026-10-10 20:22:12] [actions.server._actions_run: INFO] Updating run run-005-f73545cd-ce1c-445b-a0ab-cc95a56bd2d5 with changes: 'status': 1 (see: http://localhost:35869/runs/run-005-f73545cd-ce1c-445b-a0ab-cc95a56bd2d5)
+stderr: [2026-10-10 20:22:12] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_fixture_search', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 20:22:13] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 20:22:13] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 20:22:13] [actions.server._actions_run: INFO] Updating run run-005-f73545cd-ce1c-445b-a0ab-cc95a56bd2d5 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.5765089510000507 (see: http://localhost:35869/runs/run-005-f73545cd-ce1c-445b-a0ab-cc95a56bd2d5)
+stderr: [2026-10-10 20:22:13] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (26393) -- not reusing processes.
+stderr: [2026-10-10 20:22:13] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 20:22:13] [uvicorn.access: INFO] 127.0.0.1:53030 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 20:22:13] [mcp.server.streamable_http: INFO] Terminating session: None
+stderr: [2026-10-10 20:22:13] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 20:22:13] [mcp.server.streamable_http: DEBUG] Read stream closed by client
+  pw:browser [pid=26294][err] [1010/202213.349514:INFO:CONSOLE:37] "Parsed message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +896ms
+  pw:browser [pid=26294][err] [1010/202213.363739:INFO:CONSOLE:37] "Sending message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +14ms
+  pw:browser [pid=26294][err] [1010/202213.839745:INFO:CONSOLE:37] "Sending message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +476ms
+stderr: [2026-10-10 20:22:13] [mcp.server.streamable_http_manager: DEBUG] Stateless mode: Creating new transport for this request
+stderr: [2026-10-10 20:22:14] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (26414).
+stderr: [2026-10-10 20:22:14] [actions.server._actions_run: INFO] Updating run run-006-fb1883d2-1c80-47c1-ac21-206f9a9d7e4c with changes: 'status': 1 (see: http://localhost:35869/runs/run-006-fb1883d2-1c80-47c1-ac21-206f9a9d7e4c)
+stderr: [2026-10-10 20:22:14] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_fixture_artifact_status', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 20:22:14] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 20:22:14] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 20:22:14] [actions.server._actions_run: INFO] Updating run run-006-fb1883d2-1c80-47c1-ac21-206f9a9d7e4c with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.5425349830002233 (see: http://localhost:35869/runs/run-006-fb1883d2-1c80-47c1-ac21-206f9a9d7e4c)
+stderr: [2026-10-10 20:22:14] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (26414) -- not reusing processes.
+stderr: [2026-10-10 20:22:14] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 20:22:14] [uvicorn.access: INFO] 127.0.0.1:53030 - "POST /mcp HTTP/1.1" 200
+stderr: [2026-10-10 20:22:14] [mcp.server.streamable_http: INFO] Terminating session: None
+stderr: [2026-10-10 20:22:14] [actions.server._api_action_routes: INFO] MCP request
+stderr: [2026-10-10 20:22:14] [mcp.server.streamable_http: DEBUG] Read stream closed by client
+  pw:browser [pid=26294][err] [1010/202214.669916:INFO:CONSOLE:37] "Parsed message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +831ms
+  pw:browser [pid=26294][err] [1010/202214.680340:INFO:CONSOLE:37] "Sending message [object Object]", source: http://127.0.0.1:52721/index.html?runtime=1 (37) +10ms
+stderr: [2026-10-10 20:22:15] [sse_starlette.sse: DEBUG] Got event: http.disconnect. Stop streaming.
+stderr: [2026-10-10 20:22:15] [mcp.server.streamable_http: DEBUG] Closing standalone SSE writer
+stderr: [2026-10-10 20:22:15] [mcp.server.streamable_http: INFO] Terminating session: None
+  pw:browser [pid=26294] <gracefully close start> +554ms
+  pw:browser [pid=26294] <process did exit: exitCode=0, signal=null> +28ms
+  pw:browser [pid=26294] starting temporary directories cleanup +0ms
+  pw:browser [pid=26294] finished temporary directories cleanup +3ms
+  pw:browser [pid=26294] <gracefully close end> +0ms
+TEST PROCESS: 2026-10-10 20:22:15,345 - actions.server._robo_utils.process - DEBUG - Subprocess kill [pid=25192,uid=0]
+TEST PROCESS: 2026-10-10 20:22:15,345 - actions.server._common.process - DEBUG - Killing process and subprocesses of: 25192
+stderr: [2026-10-10 20:22:15] [uvicorn.error: INFO] Shutting down
+stderr: [2026-10-10 20:22:15] [uvicorn.error: INFO] Waiting for application shutdown.
+stderr: [2026-10-10 20:22:15] [actions.server._server: INFO] Stopping scheduler...
+stderr: [2026-10-10 20:22:15] [actions.server._scheduler: INFO] Scheduler engine stopped
+stderr: [2026-10-10 20:22:15] [actions.server._server: INFO] Stopping action server...
+stderr: [2026-10-10 20:22:15] [mcp.server.streamable_http_manager: INFO] StreamableHTTP session manager shutting down
+stderr: [2026-10-10 20:22:15] [uvicorn.error: INFO] Application shutdown complete.
+stderr: [2026-10-10 20:22:15] [uvicorn.error: INFO] Finished server process [25192]
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.3" (controller: "user") point of view, "actual main robot run" was SUCCESS. @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Warning: "rcc" process 24937 (parent 24934) still has running migrated processes:
+Warning: + migrated process still running:
+Warning: | #25104  "esbuild" <leaf -> new parent PID: #1>
+Warning: | #26223  "npm run dev --m" <leaf -> new parent PID: #1>
+Warning: | #26234  "sh" <leaf -> new parent PID: #1>
+Warning: | #26235  "node" <leaf -> new parent PID: #1>
+Warning: | #26296  "chrome-headless" <leaf -> new parent PID: #1>
+Warning: | #26297  "chrome-headless" <leaf -> new parent PID: #1>
+Note: Depending on OS, above processes may prevent robot to close properly.
+Note: Few reasons why this might be happening are:
+Note: - robot is not properly releasing all resources that it is using
+Note: - robot is generating background processes that don't complete before robot tries to exit
+Note: - there was failure inside robot, which caused robot to exit without proper cleanup
+Note: - developer intentionally left processes running, which is not good for repeatable automation
+So if you see this message, and robot still seems to be running, it is not!
+You now have to take action and stop those processes that are preventing robot to complete.
+Example cleanup command: kill -9 25104 26223 26234 26235 26296 26297
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  11:611
+OK.
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.

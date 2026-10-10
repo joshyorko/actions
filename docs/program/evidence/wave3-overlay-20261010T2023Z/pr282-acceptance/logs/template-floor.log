@@ -1,0 +1,164 @@
+"/workspace/work/actions-mk3-pr282/work/pr282-checks.yaml" as robot.yaml is:
+artifactsDir: artifacts
+environmentConfigs:
+  - ../developer/setup.yaml
+tasks:
+  TemplateFloor:
+    shell: python run_package_pytest.py -q tests/contract_tests/test_active_contracts.py -k template_manifests_pin_supported_worker_core
+  TemplateBundles:
+    shell: python run_package_pytest.py -q tests/action_server_tests/test_template_bundle.py
+  CanvasRuntimeBrowser:
+    shell: python run_package_pytest.py --env ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1 --env ACTIONS_HOME=/workspace/work/actions-mk3-pr282/work/actions-home --env UV_CACHE_DIR=/workspace/work/actions-mk3-pr282/work/uv-cache -q -m integration_test tests/action_server_tests/mcp/test_canvas_query_template.py -k test_canvas_template_runs_through_runtime_and_real_browser
+
+Note! For now, resolved effective environment configuration file is "/workspace/work/actions-mk3-pr282/developer/setup.yaml".
+####  Progress: 00/15  v18.19.3     0.013s  Context: "" <agent@e13229d8d59d> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+####  Progress: 01/15  v18.19.3     0.001s  Fresh [private mode] holotree environment 5598d290-c866-2ae4-a51d-5dad5ce3ff34. (parent/pid: 14124/14127)
+####  Progress: 02/15  v18.19.3     0.000s  Holotree blueprint is "318089d9095ad813" [linux_amd64 with 4 workers on 5 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+---
+####  Progress: 14/15  v18.19.3     0.334s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+Installation plan is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.3     0.608s  Fresh holotree done [with 4 workers on 5 CPUs].
+Wanted  Version  Origin  |  No.  |  Available           Version       Origin       |  Status
+------  -------  ------  +  ---  +  ---------           -------       ------       +  ------
+-       -        -       |    1  |  CacheControl        0.14.4        pypi         |  N/A
+-       -        -       |    2  |  PyYAML              6.0.2         pypi         |  N/A
+-       -        -       |    3  |  RapidFuzz           3.14.6        pypi         |  N/A
+-       -        -       |    4  |  SecretStorage       3.5.0         pypi         |  N/A
+-       -        -       |    5  |  _go_select          2.3.0         conda-forge  |  N/A
+-       -        -       |    6  |  _openmp_mutex       4.5           conda-forge  |  N/A
+-       -        -       |    7  |  anyio               4.15.1        pypi         |  N/A
+-       -        -       |    8  |  build               1.6.1         pypi         |  N/A
+-       -        -       |    9  |  bzip2               1.0.8         conda-forge  |  N/A
+-       -        -       |   10  |  c-ares              1.34.8        conda-forge  |  N/A
+-       -        -       |   11  |  ca-certificates     2026.7.22     conda-forge  |  N/A
+-       -        -       |   12  |  certifi             2026.7.22     pypi         |  N/A
+-       -        -       |   13  |  cffi                2.1.1         pypi         |  N/A
+-       -        -       |   14  |  charset-normalizer  3.5.2         pypi         |  N/A
+-       -        -       |   15  |  cleo                2.1.0         pypi         |  N/A
+-       -        -       |   16  |  crashtest           0.4.1         pypi         |  N/A
+-       -        -       |   17  |  cryptography        50.0.2        pypi         |  N/A
+-       -        -       |   18  |  distlib             0.4.3         pypi         |  N/A
+-       -        -       |   19  |  dulwich             0.22.8        pypi         |  N/A
+-       -        -       |   20  |  fastjsonschema      2.22.2        pypi         |  N/A
+-       -        -       |   21  |  filelock            3.32.7        pypi         |  N/A
+-       -        -       |   22  |  findpython          0.6.3         pypi         |  N/A
+-       -        -       |   23  |  git                 2.46.0        conda-forge  |  N/A
+-       -        -       |   24  |  go                  1.23.6        conda-forge  |  N/A
+-       -        -       |   25  |  h11                 0.16.0        pypi         |  N/A
+-       -        -       |   26  |  httpcore            1.0.9         pypi         |  N/A
+-       -        -       |   27  |  httpx               0.28.1        pypi         |  N/A
+-       -        -       |   28  |  icu                 75.1          conda-forge  |  N/A
+-       -        -       |   29  |  idna                3.20          pypi         |  N/A
+-       -        -       |   30  |  iniconfig           2.3.1         pypi         |  N/A
+-       -        -       |   31  |  installer           0.7.0         pypi         |  N/A
+-       -        -       |   32  |  invoke              2.2.0         pypi         |  N/A
+-       -        -       |   33  |  jaraco.classes      3.4.0         pypi         |  N/A
+-       -        -       |   34  |  jaraco.context      6.1.2         pypi         |  N/A
+-       -        -       |   35  |  jaraco.functools    4.6.0         pypi         |  N/A
+-       -        -       |   36  |  jeepney             0.9.0         pypi         |  N/A
+-       -        -       |   37  |  jq                  1.7.1         conda-forge  |  N/A
+-       -        -       |   38  |  keyring             25.7.0        pypi         |  N/A
+-       -        -       |   39  |  keyutils            1.6.3         conda-forge  |  N/A
+-       -        -       |   40  |  krb5                1.22.2        conda-forge  |  N/A
+-       -        -       |   41  |  ld_impl_linux-64    2.46.1        conda-forge  |  N/A
+-       -        -       |   42  |  libcurl             8.21.0        conda-forge  |  N/A
+-       -        -       |   43  |  libedit             3.1.20260512  conda-forge  |  N/A
+-       -        -       |   44  |  libev               4.33          conda-forge  |  N/A
+-       -        -       |   45  |  libexpat            2.8.5         conda-forge  |  N/A
+-       -        -       |   46  |  libffi              3.7.0         conda-forge  |  N/A
+-       -        -       |   47  |  libgcc              16.2.0        conda-forge  |  N/A
+-       -        -       |   48  |  libgcc-ng           16.2.0        conda-forge  |  N/A
+-       -        -       |   49  |  libgfortran         16.2.0        conda-forge  |  N/A
+-       -        -       |   50  |  libgfortran5        16.2.0        conda-forge  |  N/A
+-       -        -       |   51  |  libgomp             16.2.0        conda-forge  |  N/A
+-       -        -       |   52  |  libiconv            1.18          conda-forge  |  N/A
+-       -        -       |   53  |  liblzma             5.8.3         conda-forge  |  N/A
+-       -        -       |   54  |  libnghttp2          1.68.1        conda-forge  |  N/A
+-       -        -       |   55  |  libnsl              2.0.1         conda-forge  |  N/A
+-       -        -       |   56  |  libpython           3.12.15       conda-forge  |  N/A
+-       -        -       |   57  |  libsqlite           3.53.4        conda-forge  |  N/A
+-       -        -       |   58  |  libssh2             1.11.1        conda-forge  |  N/A
+-       -        -       |   59  |  libstdcxx           16.2.0        conda-forge  |  N/A
+-       -        -       |   60  |  libstdcxx-ng        16.2.0        conda-forge  |  N/A
+-       -        -       |   61  |  libuuid             2.42.4        conda-forge  |  N/A
+-       -        -       |   62  |  libuv               1.52.1        conda-forge  |  N/A
+-       -        -       |   63  |  libxcrypt           4.4.38        conda-forge  |  N/A
+-       -        -       |   64  |  libzlib             1.3.2         conda-forge  |  N/A
+-       -        -       |   65  |  more-itertools      11.1.0        pypi         |  N/A
+-       -        -       |   66  |  msgpack             1.2.3         pypi         |  N/A
+-       -        -       |   67  |  ncurses             6.6           conda-forge  |  N/A
+-       -        -       |   68  |  nodejs              20.19.3       conda-forge  |  N/A
+-       -        -       |   69  |  oniguruma           6.9.10        conda-forge  |  N/A
+-       -        -       |   70  |  openssl             3.6.5         conda-forge  |  N/A
+-       -        -       |   71  |  packaging           26.3          conda-forge  |  N/A
+-       -        -       |   72  |  pbs-installer       2025.12.17    pypi         |  N/A
+-       -        -       |   73  |  pcre2               10.44         conda-forge  |  N/A
+-       -        -       |   74  |  perl                5.44.0        conda-forge  |  N/A
+-       -        -       |   75  |  pip                 25.0.1        conda-forge  |  N/A
+-       -        -       |   76  |  pkginfo             1.13          pypi         |  N/A
+-       -        -       |   77  |  platformdirs        4.12.4        pypi         |  N/A
+-       -        -       |   78  |  pluggy              1.6.0         pypi         |  N/A
+-       -        -       |   79  |  poetry              2.1.1         pypi         |  N/A
+-       -        -       |   80  |  poetry-core         2.1.1         pypi         |  N/A
+-       -        -       |   81  |  pycparser           3.1           pypi         |  N/A
+-       -        -       |   82  |  pyproject_hooks     1.3.3         pypi         |  N/A
+-       -        -       |   83  |  pytest              8.3.4         pypi         |  N/A
+-       -        -       |   84  |  python              3.12.15       conda-forge  |  N/A
+-       -        -       |   85  |  readline            8.3           conda-forge  |  N/A
+-       -        -       |   86  |  requests            2.34.2        pypi         |  N/A
+-       -        -       |   87  |  requests-toolbelt   1.0.0         pypi         |  N/A
+-       -        -       |   88  |  ruff                0.8.6         pypi         |  N/A
+-       -        -       |   89  |  setuptools          84.0.0        conda-forge  |  N/A
+-       -        -       |   90  |  shellingham         1.5.4         pypi         |  N/A
+-       -        -       |   91  |  tk                  8.6.13        conda-forge  |  N/A
+-       -        -       |   92  |  tomlkit             0.15.1        pypi         |  N/A
+-       -        -       |   93  |  trove-classifiers   2026.9.21.13  pypi         |  N/A
+-       -        -       |   94  |  typing_extensions   4.16.0        pypi         |  N/A
+-       -        -       |   95  |  tzdata              2026c         conda-forge  |  N/A
+-       -        -       |   96  |  urllib3             2.8.0         pypi         |  N/A
+-       -        -       |   97  |  uv                  0.9.26        conda-forge  |  N/A
+-       -        -       |   98  |  virtualenv          20.39.1       pypi         |  N/A
+-       -        -       |   99  |  wheel               0.48.0        conda-forge  |  N/A
+-       -        -       |  100  |  zlib                1.3.2         conda-forge  |  N/A
+-       -        -       |  101  |  zstandard           0.25.0        pypi         |  N/A
+-       -        -       |  102  |  zstd                1.5.7         conda-forge  |  N/A
+------  -------  ------  +  ---  +  ---------           -------       ------       +  ------
+Wanted  Version  Origin  |  No.  |  Available           Version       Origin       |  Status
+
+--
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-pr282/work/artifacts" already has "environment_linux_amd64_freeze.yaml" in it.
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-pr282/work/artifacts" already has "stderr.log" in it.
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-pr282/work/artifacts" already has "stdout.log" in it.
+Above notes mean, that there were files present in directory that was supposed to be empty!
+In robot development phase, it might be ok to have these files while building robot.
+In production robot/assistant, this might be a mistake, where development files were
+left inside robot.zip file. Report these to developer who made this robot/assistant.
+.                                                                        [100%]
+1 passed, 31 deselected in 0.11s
+Log (html): /workspace/work/actions-mk3-pr282/action_server/output/log.html
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.3" (controller: "user") point of view, "actual main robot run" was SUCCESS. @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  10:49
+OK.
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.

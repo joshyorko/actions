@@ -1,6 +1,6 @@
 {
   "observed_at_utc": "2026-10-10T20:23:55Z",
-  "source": "Current native collaboration roster captured at checkpoint plus root-reported lane assignments. Dakota status is only the exact native snapshot at 20:04:43/44Z; code progress is not inferred from worker liveness.",
+  "source": "Root-reconciled seven-agent roster and role assignments at this checkpoint. The private RCC lane is luna_pr302_portability, not another worker. Dakota status remains the exact earlier read-only native snapshot.",
   "active_workers": [
     {
       "name": "root",
@@ -15,32 +15,27 @@
     {
       "name": "luna_database_gate_audit",
       "status": "ACTIVE",
-      "scope": "Read-only #134 warm readiness plus SQLite savepoint diagnosis/fix lane; no acceptance claimed."
+      "scope": "Read-only #134 warm readiness; completed #84 migration API verification. No SQLite implementation ownership."
     },
     {
       "name": "luna_graph_reconcile",
       "status": "ACTIVE",
-      "scope": "Graph reconciliation lane."
+      "scope": "SQLite SAVEPOINT-start diagnosis and minimal fix; verification active and source fix uncommitted at cutoff."
     },
     {
       "name": "luna_pr282_template",
       "status": "ACTIVE",
-      "scope": "PR282 template source/body follow-up; scoped installed worker/browser evidence independently reviewed."
+      "scope": "Work Items readiness audit after completing scoped PR282 installed-worker/browser evidence."
     },
     {
       "name": "luna_pr302_portability",
       "status": "ACTIVE",
-      "scope": "PR302 portability follow-up; exact Windows canary refresh awaits accepted PR304 union."
+      "scope": "Private f441 RCC inspection implementation; fake-RCC harness contracts only, actual metadata execution NOT RUN. PR302 portability source checkpoint complete; hosted floor refresh remains root-owned."
     },
     {
       "name": "sol_pr301_review",
       "status": "ACTIVE",
       "scope": "Independent scoped reviews; latest PR282/PR305/database gate reviews are archived in this checkpoint."
-    },
-    {
-      "name": "luna302_rcc_inspection",
-      "status": "ACTIVE",
-      "scope": "Root-assigned private f441 RCC inspection implementation; contract fake-RCC only; actual metadata execution NOT RUN."
     }
   ],
   "dakota": {

@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-evidence/database-gates/pg_migration_two_process.py", line 507, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/work/actions-mk3-evidence/database-gates/pg_migration_two_process.py", line 146, in main
+    with probe.connect():
+         ^^^^^^^^^^^^^^^
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/_database.py", line 493, in connect
+    conn = psycopg.connect(cast(str, self._db_path), autocommit=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/psycopg/connection.py", line 122, in connect
+    raise last_ex.with_traceback(None)
+psycopg.OperationalError: connection failed: connection to server at "127.0.0.1", port 32768 failed: FATAL:  unrecognized configuration parameter "+statement_timeout"
+connection to server at "127.0.0.1", port 32768 failed: FATAL:  unrecognized configuration parameter "+statement_timeout"

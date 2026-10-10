@@ -1,0 +1,537 @@
+Controlled PATH excludes every directory that exposes `chromium`.
+Command: /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python -m pytest -m integration_test -q action_server_tests/mcp/test_mcp_apps_authoring.py -k canvas_view_calls_public_action_through_runtime_bridge
+Test Python: /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________ test_canvas_view_calls_public_action_through_runtime_bridge __________
+
+self = <actions.server._selftest.ActionServerProcess object at 0x7f8101242810>
+
+    def start(
+        self,
+        *,
+        timeout: int = 10,
+        db_file=":memory:",
+        actions_sync=False,
+        cwd: Optional[Path | str] = None,
+        add_shutdown_api: bool = False,
+        min_processes: int = 0,
+        max_processes: int = 20,
+        reuse_processes: bool = False,
+        lint: bool = False,
+        additional_args: Optional[list[str]] = None,
+        env: Optional[Dict[str, str]] = None,
+        port=0,
+        verbose="-v",
+        use_https: bool = False,
+    ) -> None:
+        from actions.server._robo_utils.process import Process
+        from actions.server._settings import is_frozen
+    
+        if self.started:
+            raise RuntimeError("The action process was already started.")
+    
+        self.started = True
+        from concurrent.futures import Future
+    
+        if actions_sync:
+            assert cwd, "cwd must be passed when synchronizing the actions."
+    
+        if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
+            executable = os.environ["SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE"]
+            assert os.path.isfile(
+                executable
+            ), f"Expected executable to exist: {executable}"
+            base_args = [executable]
+        elif is_frozen():
+            base_args = [sys.executable]
+        else:
+            base_args = [
+                sys.executable,
+                "-m",
+                "actions.server",
+            ]
+        new_args = base_args + [
+            "start",
+            "--actions-sync=false" if not actions_sync else "--actions-sync=true",
+            f"--port={port}",
+            f"--datadir={str(self._datadir)}",
+            f"--db-file={db_file}",
+        ]
+    
+        if verbose:
+            new_args.append(verbose)
+    
+        if use_https:
+            new_args.append("--https")
+    
+        if not lint:
+            new_args.append("--skip-lint")
+    
+        new_args.append(f"--min-processes={min_processes}")
+        new_args.append(f"--max-processes={max_processes}")
+        if reuse_processes:
+            new_args.append("--reuse-processes")
+    
+        if additional_args:
+            new_args = new_args + additional_args
+    
+        use_env: Dict[str, str] = {}
+        if add_shutdown_api:
+            use_env["RC_ADD_SHUTDOWN_API"] = "1"
+        if env:
+            use_env.update(env)
+        process = self._process = Process(new_args, cwd=cwd, env=use_env)
+    
+        if use_https:
+            compiled = re.compile(r"Local Action Server: https://([\w.-]+):(\d+)")
+        else:
+            compiled = re.compile(r"Local Action Server: http://([\w.-]+):(\d+)")
+        future: Future[Tuple[str, str]] = Future()
+    
+        def collect_port_from_stdout(line):
+            # Note: this is called in a thread.
+            matches = re.findall(compiled, line)
+    
+            if matches:
+                host, port = matches[0]
+                future.set_result((host, port))
+    
+        def on_stdout(line):
+            self._stdout.write(line)
+            if self.SHOW_OUTPUT:
+                sys.stdout.write(f"stdout: {line.rstrip()}\n")
+    
+        def on_stderr(line):
+            self._stderr.write(line)
+            # Note: this is called in a thread.
+            sys.stderr.write(f"stderr: {line.rstrip()}\n")
+    
+        process.on_stderr.register(on_stderr)
+        process.on_stdout.register(on_stdout)
+    
+        with process.on_stderr.register(collect_port_from_stdout):
+            process.start()
+            if timeout > 1:
+                initial_time = time.monotonic()
+                while True:
+                    try:
+>                       host, port = future.result(1)
+                                     ^^^^^^^^^^^^^^^^
+
+../src/actions/server/_selftest.py:192: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = None, timeout = 1
+
+    def result(self, timeout=None):
+        """Return the result of the call that the future represents.
+    
+        Args:
+            timeout: The number of seconds to wait for the result if the future
+                isn't done. If None, then there is no limit on the wait time.
+    
+        Returns:
+            The result of the call that the future represents.
+    
+        Raises:
+            CancelledError: If the future was cancelled.
+            TimeoutError: If the future didn't finish executing before the given
+                timeout.
+            Exception: If the call raised then that exception will be raised.
+        """
+        try:
+            with self._condition:
+                if self._state in [CANCELLED, CANCELLED_AND_NOTIFIED]:
+                    raise CancelledError()
+                elif self._state == FINISHED:
+                    return self.__get_result()
+    
+                self._condition.wait(timeout)
+    
+                if self._state in [CANCELLED, CANCELLED_AND_NOTIFIED]:
+                    raise CancelledError()
+                elif self._state == FINISHED:
+                    return self.__get_result()
+                else:
+>                   raise TimeoutError()
+E                   TimeoutError
+
+/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/concurrent/futures/_base.py:458: TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+action_server_process = <actions.server._selftest.ActionServerProcess object at 0x7f8101242810>
+tmp_path = PosixPath('/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0')
+
+    @pytest.mark.integration_test
+    @pytest.mark.skipif(
+        os.environ.get("ACTIONS_CANVAS_RUNTIME_ACCEPTANCE") != "1",
+        reason="Set ACTIONS_CANVAS_RUNTIME_ACCEPTANCE=1 to run the RCC/browser acceptance.",
+    )
+    def test_canvas_view_calls_public_action_through_runtime_bridge(
+        action_server_process: ActionServerProcess, tmp_path
+    ) -> None:
+        repository_root = Path(__file__).resolve().parents[4]
+        frontend_root = repository_root / "action_server" / "frontend"
+        candidate_core_wheel_dir = tmp_path / "candidate-core"
+        candidate_core_wheel_dir.mkdir()
+        build_env = os.environ.copy()
+        build_env["UV_CACHE_DIR"] = str(tmp_path / "uv-cache")
+        build_env["TMPDIR"] = str(tmp_path)
+        subprocess.run(
+            [
+                shutil.which("uv") or "uv",
+                "build",
+                "--wheel",
+                "--out-dir",
+                str(candidate_core_wheel_dir),
+                str(repository_root / "actions"),
+            ],
+            env=build_env,
+            check=True,
+            timeout=120,
+        )
+        candidate_core_wheel = next(candidate_core_wheel_dir.glob("actions_core-*.whl"))
+        candidate_core_wheel_sha256 = hashlib.sha256(
+            candidate_core_wheel.read_bytes()
+        ).hexdigest()
+        if os.name == "nt":
+            quoted_wheel_path = subprocess.list2cmdline([str(candidate_core_wheel)])
+        else:
+            quoted_wheel_path = shlex.quote(str(candidate_core_wheel))
+        package_yaml = tmp_path / "package.yaml"
+        package_yaml.write_text(
+            "spec-version: v2\n"
+            "name: Canvas Runtime bridge acceptance\n"
+            "description: Isolated fixture using the exact candidate Core wheel.\n"
+            "version: 0.0.1\n"
+            "dependencies:\n"
+            "  conda-forge:\n"
+            "    - python=3.12\n"
+            "    - uv=0.9.26\n"
+            "  pypi:\n"
+            "    - actions-core=1.0.2\n"
+            "post-install:\n"
+            "  - python -m pip install --no-deps --force-reinstall "
+            f"{quoted_wheel_path}\n",
+            encoding="utf-8",
+        )
+        subprocess.run(["npm", "run", "build:canvas"], cwd=frontend_root, check=True)
+        canvas_html = (frontend_root / "dist-canvas" / "index.html").read_text(
+            encoding="utf-8"
+        )
+        (tmp_path / "canvas.html").write_text(canvas_html, encoding="utf-8")
+        action_source = """
+    import hashlib
+    import json
+    import sys
+    from importlib.metadata import distribution
+    from pathlib import Path
+    from urllib.parse import urlsplit
+    from urllib.request import url2pathname
+    
+    from actions import mcp
+    
+    EXPECTED_CORE_WHEEL = Path("__EXPECTED_CORE_WHEEL__")
+    EXPECTED_CORE_WHEEL_SHA256 = "__EXPECTED_CORE_WHEEL_SHA256__"
+    UI_URI = "ui://action-canvas/v1/canvas.html?query-fixture=0.1"
+    
+    @mcp.resource(
+        UI_URI,
+        mime_type="text/html;profile=mcp-app",
+        meta={"ui": {"csp": {}}},
+    )
+    def canvas_view() -> str:
+        return Path(__file__).with_name("canvas.html").read_text(encoding="utf-8")
+    
+    @mcp.tool(
+        read_only_hint=True,
+        destructive_hint=False,
+        idempotent_hint=True,
+        open_world_hint=False,
+        meta={"ui": {"resourceUri": UI_URI, "visibility": ["model", "app"]}},
+    )
+    def canvas_fixture_search(query: str) -> dict[str, object]:
+        if query.casefold() == "alpha":
+            return {
+                "rows": [
+                    {"id": "record-001", "title": "Alpha guide", "category": "Guide"},
+                    {"id": "record-002", "title": "Alpha checklist", "category": "Checklist"},
+                ],
+                "artifact": {"handle": "art_7Wk3qN9pL2xD5mR8sV4cY1"},
+                "error": None,
+            }
+        return {
+            "rows": [],
+            "artifact": None,
+            "error": {
+                "code": "no_matches",
+                "message": "No records matched that query.",
+            },
+        }
+    
+    @mcp.tool(
+        read_only_hint=True,
+        destructive_hint=False,
+        idempotent_hint=True,
+        open_world_hint=False,
+        meta={"ui": {"resourceUri": UI_URI, "visibility": ["app"]}},
+    )
+    def canvas_fixture_artifact_status(handle: str) -> dict[str, str]:
+        if handle != "art_7Wk3qN9pL2xD5mR8sV4cY1":
+            raise ValueError("Unknown fixture artifact handle.")
+        return {"status": "ready"}
+    
+    @mcp.tool(read_only_hint=True, destructive_hint=False, idempotent_hint=True, open_world_hint=False)
+    def canvas_fixture_worker_provenance() -> dict[str, str]:
+        core_distribution = distribution("actions-core")
+        actions_module = Path(__import__("actions").__file__).resolve()
+        installed_files = {
+            Path(core_distribution.locate_file(file)).resolve()
+            for file in (core_distribution.files or [])
+        }
+        if actions_module not in installed_files:
+            raise AssertionError("worker actions module is not owned by actions-core")
+    
+        direct_url_value = core_distribution.read_text("direct_url.json")
+        if not direct_url_value:
+            raise AssertionError("worker actions-core has no direct_url.json")
+        direct_url = json.loads(direct_url_value)
+        source = urlsplit(direct_url.get("url", ""))
+        if source.scheme != "file" or source.netloc not in {"", "localhost"}:
+            raise AssertionError("worker actions-core was not installed from a local wheel")
+        installed_wheel = Path(url2pathname(source.path)).resolve()
+        if installed_wheel != EXPECTED_CORE_WHEEL.resolve():
+            raise AssertionError("worker actions-core direct_url differs from the candidate wheel")
+    
+        archive = direct_url.get("archive_info", {})
+        installed_sha256 = archive.get("hashes", {}).get("sha256")
+        if installed_sha256 is None:
+            hash_value = archive.get("hash", "")
+            if hash_value.startswith("sha256="):
+                installed_sha256 = hash_value.removeprefix("sha256=")
+        candidate_sha256 = hashlib.sha256(installed_wheel.read_bytes()).hexdigest()
+        if installed_sha256 != EXPECTED_CORE_WHEEL_SHA256 or candidate_sha256 != EXPECTED_CORE_WHEEL_SHA256:
+            raise AssertionError("worker actions-core wheel SHA-256 differs from the candidate")
+        return {
+            "worker_prefix": sys.prefix,
+            "actions_module": str(actions_module),
+            "actions_core_version": core_distribution.version,
+            "direct_url_wheel": str(installed_wheel),
+            "wheel_sha256": candidate_sha256,
+        }
+    """
+        action_source = action_source.replace(
+            '"__EXPECTED_CORE_WHEEL__"', repr(str(candidate_core_wheel))
+        ).replace('"__EXPECTED_CORE_WHEEL_SHA256__"', repr(candidate_core_wheel_sha256))
+        (tmp_path / "canvas_actions.py").write_text(action_source, encoding="utf-8")
+    
+>       action_server_process.start(
+            cwd=tmp_path,
+            db_file="server.db",
+            actions_sync=True,
+            timeout=120,
+        )
+
+action_server_tests/mcp/test_mcp_apps_authoring.py:406: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <actions.server._selftest.ActionServerProcess object at 0x7f8101242810>
+
+    def start(
+        self,
+        *,
+        timeout: int = 10,
+        db_file=":memory:",
+        actions_sync=False,
+        cwd: Optional[Path | str] = None,
+        add_shutdown_api: bool = False,
+        min_processes: int = 0,
+        max_processes: int = 20,
+        reuse_processes: bool = False,
+        lint: bool = False,
+        additional_args: Optional[list[str]] = None,
+        env: Optional[Dict[str, str]] = None,
+        port=0,
+        verbose="-v",
+        use_https: bool = False,
+    ) -> None:
+        from actions.server._robo_utils.process import Process
+        from actions.server._settings import is_frozen
+    
+        if self.started:
+            raise RuntimeError("The action process was already started.")
+    
+        self.started = True
+        from concurrent.futures import Future
+    
+        if actions_sync:
+            assert cwd, "cwd must be passed when synchronizing the actions."
+    
+        if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
+            executable = os.environ["SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE"]
+            assert os.path.isfile(
+                executable
+            ), f"Expected executable to exist: {executable}"
+            base_args = [executable]
+        elif is_frozen():
+            base_args = [sys.executable]
+        else:
+            base_args = [
+                sys.executable,
+                "-m",
+                "actions.server",
+            ]
+        new_args = base_args + [
+            "start",
+            "--actions-sync=false" if not actions_sync else "--actions-sync=true",
+            f"--port={port}",
+            f"--datadir={str(self._datadir)}",
+            f"--db-file={db_file}",
+        ]
+    
+        if verbose:
+            new_args.append(verbose)
+    
+        if use_https:
+            new_args.append("--https")
+    
+        if not lint:
+            new_args.append("--skip-lint")
+    
+        new_args.append(f"--min-processes={min_processes}")
+        new_args.append(f"--max-processes={max_processes}")
+        if reuse_processes:
+            new_args.append("--reuse-processes")
+    
+        if additional_args:
+            new_args = new_args + additional_args
+    
+        use_env: Dict[str, str] = {}
+        if add_shutdown_api:
+            use_env["RC_ADD_SHUTDOWN_API"] = "1"
+        if env:
+            use_env.update(env)
+        process = self._process = Process(new_args, cwd=cwd, env=use_env)
+    
+        if use_https:
+            compiled = re.compile(r"Local Action Server: https://([\w.-]+):(\d+)")
+        else:
+            compiled = re.compile(r"Local Action Server: http://([\w.-]+):(\d+)")
+        future: Future[Tuple[str, str]] = Future()
+    
+        def collect_port_from_stdout(line):
+            # Note: this is called in a thread.
+            matches = re.findall(compiled, line)
+    
+            if matches:
+                host, port = matches[0]
+                future.set_result((host, port))
+    
+        def on_stdout(line):
+            self._stdout.write(line)
+            if self.SHOW_OUTPUT:
+                sys.stdout.write(f"stdout: {line.rstrip()}\n")
+    
+        def on_stderr(line):
+            self._stderr.write(line)
+            # Note: this is called in a thread.
+            sys.stderr.write(f"stderr: {line.rstrip()}\n")
+    
+        process.on_stderr.register(on_stderr)
+        process.on_stdout.register(on_stdout)
+    
+        with process.on_stderr.register(collect_port_from_stdout):
+            process.start()
+            if timeout > 1:
+                initial_time = time.monotonic()
+                while True:
+                    try:
+                        host, port = future.result(1)
+                        break
+                    except TimeoutError:
+                        if is_debugger_active():
+                            continue
+                        if time.monotonic() - initial_time >= timeout:
+                            raise TimeoutError()
+                        if not process.is_alive():
+>                           raise ActionServerExitedError(
+                                f"The process already exited with returncode: "
+                                f"{process.returncode}\n"
+                                f"Args: {new_args}\n"
+                                f"Elapsed time: {time.monotonic() - initial_time:.2f}s\n"
+                                f"Stdout: {self.get_stdout()}\n"
+                                f"Stderr: {self.get_stderr()}\n"
+                            )
+E                           actions.server._selftest.ActionServerExitedError: The process already exited with returncode: 1
+E                           Args: ['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'start', '--actions-sync=true', '--port=0', '--datadir=/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server', '--db-file=server.db', '-v', '--skip-lint', '--min-processes=0', '--max-processes=20']
+E                           Elapsed time: 1.00s
+E                           Stdout: 
+E                           Stderr: [2026-10-10 19:52:22] [actions.server._cli_impl: DEBUG] Arguments: /workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/__main__.py start --actions-sync=true --port=0 --datadir=/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server --db-file=server.db -v --skip-lint --min-processes=0 --max-processes=20
+E                           [2026-10-10 19:52:22] [actions.server._cli_impl: DEBUG] CWD: /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0
+E                           [2026-10-10 19:52:22] [actions.server._cli_impl: INFO] 
+E                             ⚡️ Starting Action Server... v1.0.3
+E                           
+E                           [2026-10-10 19:52:22] [actions.server._settings: INFO] Using user-specified datadir: /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server
+E                           [2026-10-10 19:52:22] [actions.server._cli_impl: INFO] Logs may be found at: /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/server_log.txt.
+E                           [2026-10-10 19:52:22] [actions.server._cli_impl: INFO] Database file does not exist. Creating it at: /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/server.db
+E                           [2026-10-10 19:52:22] [actions.server._cli_impl: DEBUG] Synchronize actions: True
+E                           [2026-10-10 19:52:22] [actions.server._actions_import: DEBUG] Importing action package from: /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0
+E                           [2026-10-10 19:52:22] [robocorp.log._rewrite_filtering: DEBUG] Collecting default library roots.
+E                           [2026-10-10 19:52:22] [robocorp.log._rewrite_filtering: DEBUG] LIBRARY_ROOTS ['/home/agent/.local/lib/python3.12/site-packages', '/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12/site-packages']
+E                           
+E                           [2026-10-10 19:52:22] [actions.server._cli_impl: CRITICAL] 
+E                           Unable to import action. Please fix the error below and retry.
+E                           Unable to preserve the last-good Action package source: RCC source snapshots do not support directory symlinks
+
+../src/actions/server/_selftest.py:200: ActionServerExitedError
+----------------------------- Captured stdout call -----------------------------
+
+> actions-runtime-frontend@0.0.1 build:canvas
+> vite build --mode canvas --minify=esbuild && node scripts/inline-canvas-assets.mjs && node scripts/write-artifact-manifest.mjs dist-canvas canvas-mcp-app "text/html;profile=mcp-app" && npm run sbom:canvas
+
+vite v8.2.1 building client environment for canvas...
+[2Ktransforming...✓ 153 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-canvas/index.html                   0.48 kB │ gzip:   0.30 kB
+dist-canvas/assets/index-DpJOhFpt.css    3.67 kB │ gzip:   1.26 kB
+dist-canvas/assets/index-DR9pcP2r.js   412.23 kB │ gzip: 117.58 kB
+
+✓ built in 704ms
+
+> actions-runtime-frontend@0.0.1 sbom:canvas
+> cyclonedx-npm --package-lock-only --output-format json --output-reproducible --output-file dist-canvas/sbom.json
+
+----------------------------- Captured stderr call -----------------------------
+Building wheel...
+Successfully built /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl
+Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+TEST PROCESS: 2026-10-10 19:52:21,999 - actions.server._robo_utils.process - DEBUG - Subprocess start [args=['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'start', '--actions-sync=true', '--port=0', '--datadir=/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server', '--db-file=server.db', '-v', '--skip-lint', '--min-processes=0', '--max-processes=20'],cwd=/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0,uid=0]
+TEST PROCESS: 2026-10-10 19:52:22,000 - actions.server._robo_utils.process - DEBUG - Subprocess started [pid=10943,uid=0]
+stderr: [2026-10-10 19:52:22] [actions.server._cli_impl: DEBUG] Arguments: /workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/__main__.py start --actions-sync=true --port=0 --datadir=/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server --db-file=server.db -v --skip-lint --min-processes=0 --max-processes=20
+stderr: [2026-10-10 19:52:22] [actions.server._cli_impl: DEBUG] CWD: /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0
+stderr: [2026-10-10 19:52:22] [actions.server._cli_impl: INFO]
+stderr:   ⚡️ Starting Action Server... v1.0.3
+stderr: 
+stderr: [2026-10-10 19:52:22] [actions.server._settings: INFO] Using user-specified datadir: /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server
+stderr: [2026-10-10 19:52:22] [actions.server._cli_impl: INFO] Logs may be found at: /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/server_log.txt.
+stderr: [2026-10-10 19:52:22] [actions.server._cli_impl: INFO] Database file does not exist. Creating it at: /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/server.db
+stderr: [2026-10-10 19:52:22] [actions.server._cli_impl: DEBUG] Synchronize actions: True
+stderr: [2026-10-10 19:52:22] [actions.server._actions_import: DEBUG] Importing action package from: /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0
+stderr: [2026-10-10 19:52:22] [robocorp.log._rewrite_filtering: DEBUG] Collecting default library roots.
+stderr: [2026-10-10 19:52:22] [robocorp.log._rewrite_filtering: DEBUG] LIBRARY_ROOTS ['/home/agent/.local/lib/python3.12/site-packages', '/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12/site-packages']
+stderr: 
+stderr: [2026-10-10 19:52:22] [actions.server._cli_impl: CRITICAL]
+stderr: Unable to import action. Please fix the error below and retry.
+stderr: Unable to preserve the last-good Action package source: RCC source snapshots do not support directory symlinks
+------------------------------ Captured log call -------------------------------
+DEBUG    actions.server._robo_utils.process:process.py:110 Subprocess start [args=['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'actions.server', 'start', '--actions-sync=true', '--port=0', '--datadir=/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server', '--db-file=server.db', '-v', '--skip-lint', '--min-processes=0', '--max-processes=20'],cwd=/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0,uid=0]
+DEBUG    actions.server._robo_utils.process:process.py:117 Subprocess started [pid=10943,uid=0]
+=========================== short test summary info ============================
+FAILED action_server_tests/mcp/test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge
+1 failed, 2 deselected in 7.81s
+Log (html): /workspace/work/actions-mk3-canvas-proof/action_server/tests/output/log.html

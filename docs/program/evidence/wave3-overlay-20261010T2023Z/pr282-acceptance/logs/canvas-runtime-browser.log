@@ -1,0 +1,851 @@
+"/workspace/work/actions-mk3-pr282/work/pr282-checks.yaml" as robot.yaml is:
+artifactsDir: artifacts
+environmentConfigs:
+  - ../developer/setup.yaml
+tasks:
+  TemplateFloor:
+    shell: python run_package_pytest.py -q tests/contract_tests/test_active_contracts.py -k template_manifests_pin_supported_worker_core
+  TemplateBundles:
+    shell: python run_package_pytest.py -q tests/action_server_tests/test_template_bundle.py
+  CanvasRuntimeBrowser:
+    shell: python run_package_pytest.py --env ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1 --env ACTIONS_HOME=/workspace/work/actions-mk3-pr282/work/actions-home --env UV_CACHE_DIR=/workspace/work/actions-mk3-pr282/work/uv-cache -q -m integration_test tests/action_server_tests/mcp/test_canvas_query_template.py -k test_canvas_template_runs_through_runtime_and_real_browser
+
+Note! For now, resolved effective environment configuration file is "/workspace/work/actions-mk3-pr282/developer/setup.yaml".
+####  Progress: 00/15  v18.19.3     0.016s  Context: "" <agent@e13229d8d59d> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+####  Progress: 01/15  v18.19.3     0.000s  Fresh [private mode] holotree environment 5598d290-c866-2ae4-a51d-5dad5ce3ff34. (parent/pid: 14339/14343)
+####  Progress: 02/15  v18.19.3     0.001s  Holotree blueprint is "318089d9095ad813" [linux_amd64 with 4 workers on 5 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+---
+####  Progress: 14/15  v18.19.3     0.376s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+Installation plan is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.3     0.578s  Fresh holotree done [with 4 workers on 5 CPUs].
+Wanted  Version  Origin  |  No.  |  Available           Version       Origin       |  Status
+------  -------  ------  +  ---  +  ---------           -------       ------       +  ------
+-       -        -       |    1  |  CacheControl        0.14.4        pypi         |  N/A
+-       -        -       |    2  |  PyYAML              6.0.2         pypi         |  N/A
+-       -        -       |    3  |  RapidFuzz           3.14.6        pypi         |  N/A
+-       -        -       |    4  |  SecretStorage       3.5.0         pypi         |  N/A
+-       -        -       |    5  |  _go_select          2.3.0         conda-forge  |  N/A
+-       -        -       |    6  |  _openmp_mutex       4.5           conda-forge  |  N/A
+-       -        -       |    7  |  anyio               4.15.1        pypi         |  N/A
+-       -        -       |    8  |  build               1.6.1         pypi         |  N/A
+-       -        -       |    9  |  bzip2               1.0.8         conda-forge  |  N/A
+-       -        -       |   10  |  c-ares              1.34.8        conda-forge  |  N/A
+-       -        -       |   11  |  ca-certificates     2026.7.22     conda-forge  |  N/A
+-       -        -       |   12  |  certifi             2026.7.22     pypi         |  N/A
+-       -        -       |   13  |  cffi                2.1.1         pypi         |  N/A
+-       -        -       |   14  |  charset-normalizer  3.5.2         pypi         |  N/A
+-       -        -       |   15  |  cleo                2.1.0         pypi         |  N/A
+-       -        -       |   16  |  crashtest           0.4.1         pypi         |  N/A
+-       -        -       |   17  |  cryptography        50.0.2        pypi         |  N/A
+-       -        -       |   18  |  distlib             0.4.3         pypi         |  N/A
+-       -        -       |   19  |  dulwich             0.22.8        pypi         |  N/A
+-       -        -       |   20  |  fastjsonschema      2.22.2        pypi         |  N/A
+-       -        -       |   21  |  filelock            3.32.7        pypi         |  N/A
+-       -        -       |   22  |  findpython          0.6.3         pypi         |  N/A
+-       -        -       |   23  |  git                 2.46.0        conda-forge  |  N/A
+-       -        -       |   24  |  go                  1.23.6        conda-forge  |  N/A
+-       -        -       |   25  |  h11                 0.16.0        pypi         |  N/A
+-       -        -       |   26  |  httpcore            1.0.9         pypi         |  N/A
+-       -        -       |   27  |  httpx               0.28.1        pypi         |  N/A
+-       -        -       |   28  |  icu                 75.1          conda-forge  |  N/A
+-       -        -       |   29  |  idna                3.20          pypi         |  N/A
+-       -        -       |   30  |  iniconfig           2.3.1         pypi         |  N/A
+-       -        -       |   31  |  installer           0.7.0         pypi         |  N/A
+-       -        -       |   32  |  invoke              2.2.0         pypi         |  N/A
+-       -        -       |   33  |  jaraco.classes      3.4.0         pypi         |  N/A
+-       -        -       |   34  |  jaraco.context      6.1.2         pypi         |  N/A
+-       -        -       |   35  |  jaraco.functools    4.6.0         pypi         |  N/A
+-       -        -       |   36  |  jeepney             0.9.0         pypi         |  N/A
+-       -        -       |   37  |  jq                  1.7.1         conda-forge  |  N/A
+-       -        -       |   38  |  keyring             25.7.0        pypi         |  N/A
+-       -        -       |   39  |  keyutils            1.6.3         conda-forge  |  N/A
+-       -        -       |   40  |  krb5                1.22.2        conda-forge  |  N/A
+-       -        -       |   41  |  ld_impl_linux-64    2.46.1        conda-forge  |  N/A
+-       -        -       |   42  |  libcurl             8.21.0        conda-forge  |  N/A
+-       -        -       |   43  |  libedit             3.1.20260512  conda-forge  |  N/A
+-       -        -       |   44  |  libev               4.33          conda-forge  |  N/A
+-       -        -       |   45  |  libexpat            2.8.5         conda-forge  |  N/A
+-       -        -       |   46  |  libffi              3.7.0         conda-forge  |  N/A
+-       -        -       |   47  |  libgcc              16.2.0        conda-forge  |  N/A
+-       -        -       |   48  |  libgcc-ng           16.2.0        conda-forge  |  N/A
+-       -        -       |   49  |  libgfortran         16.2.0        conda-forge  |  N/A
+-       -        -       |   50  |  libgfortran5        16.2.0        conda-forge  |  N/A
+-       -        -       |   51  |  libgomp             16.2.0        conda-forge  |  N/A
+-       -        -       |   52  |  libiconv            1.18          conda-forge  |  N/A
+-       -        -       |   53  |  liblzma             5.8.3         conda-forge  |  N/A
+-       -        -       |   54  |  libnghttp2          1.68.1        conda-forge  |  N/A
+-       -        -       |   55  |  libnsl              2.0.1         conda-forge  |  N/A
+-       -        -       |   56  |  libpython           3.12.15       conda-forge  |  N/A
+-       -        -       |   57  |  libsqlite           3.53.4        conda-forge  |  N/A
+-       -        -       |   58  |  libssh2             1.11.1        conda-forge  |  N/A
+-       -        -       |   59  |  libstdcxx           16.2.0        conda-forge  |  N/A
+-       -        -       |   60  |  libstdcxx-ng        16.2.0        conda-forge  |  N/A
+-       -        -       |   61  |  libuuid             2.42.4        conda-forge  |  N/A
+-       -        -       |   62  |  libuv               1.52.1        conda-forge  |  N/A
+-       -        -       |   63  |  libxcrypt           4.4.38        conda-forge  |  N/A
+-       -        -       |   64  |  libzlib             1.3.2         conda-forge  |  N/A
+-       -        -       |   65  |  more-itertools      11.1.0        pypi         |  N/A
+-       -        -       |   66  |  msgpack             1.2.3         pypi         |  N/A
+-       -        -       |   67  |  ncurses             6.6           conda-forge  |  N/A
+-       -        -       |   68  |  nodejs              20.19.3       conda-forge  |  N/A
+-       -        -       |   69  |  oniguruma           6.9.10        conda-forge  |  N/A
+-       -        -       |   70  |  openssl             3.6.5         conda-forge  |  N/A
+-       -        -       |   71  |  packaging           26.3          conda-forge  |  N/A
+-       -        -       |   72  |  pbs-installer       2025.12.17    pypi         |  N/A
+-       -        -       |   73  |  pcre2               10.44         conda-forge  |  N/A
+-       -        -       |   74  |  perl                5.44.0        conda-forge  |  N/A
+-       -        -       |   75  |  pip                 25.0.1        conda-forge  |  N/A
+-       -        -       |   76  |  pkginfo             1.13          pypi         |  N/A
+-       -        -       |   77  |  platformdirs        4.12.4        pypi         |  N/A
+-       -        -       |   78  |  pluggy              1.6.0         pypi         |  N/A
+-       -        -       |   79  |  poetry              2.1.1         pypi         |  N/A
+-       -        -       |   80  |  poetry-core         2.1.1         pypi         |  N/A
+-       -        -       |   81  |  pycparser           3.1           pypi         |  N/A
+-       -        -       |   82  |  pyproject_hooks     1.3.3         pypi         |  N/A
+-       -        -       |   83  |  pytest              8.3.4         pypi         |  N/A
+-       -        -       |   84  |  python              3.12.15       conda-forge  |  N/A
+-       -        -       |   85  |  readline            8.3           conda-forge  |  N/A
+-       -        -       |   86  |  requests            2.34.2        pypi         |  N/A
+-       -        -       |   87  |  requests-toolbelt   1.0.0         pypi         |  N/A
+-       -        -       |   88  |  ruff                0.8.6         pypi         |  N/A
+-       -        -       |   89  |  setuptools          84.0.0        conda-forge  |  N/A
+-       -        -       |   90  |  shellingham         1.5.4         pypi         |  N/A
+-       -        -       |   91  |  tk                  8.6.13        conda-forge  |  N/A
+-       -        -       |   92  |  tomlkit             0.15.1        pypi         |  N/A
+-       -        -       |   93  |  trove-classifiers   2026.9.21.13  pypi         |  N/A
+-       -        -       |   94  |  typing_extensions   4.16.0        pypi         |  N/A
+-       -        -       |   95  |  tzdata              2026c         conda-forge  |  N/A
+-       -        -       |   96  |  urllib3             2.8.0         pypi         |  N/A
+-       -        -       |   97  |  uv                  0.9.26        conda-forge  |  N/A
+-       -        -       |   98  |  virtualenv          20.39.1       pypi         |  N/A
+-       -        -       |   99  |  wheel               0.48.0        conda-forge  |  N/A
+-       -        -       |  100  |  zlib                1.3.2         conda-forge  |  N/A
+-       -        -       |  101  |  zstandard           0.25.0        pypi         |  N/A
+-       -        -       |  102  |  zstd                1.5.7         conda-forge  |  N/A
+------  -------  ------  +  ---  +  ---------           -------       ------       +  ------
+Wanted  Version  Origin  |  No.  |  Available           Version       Origin       |  Status
+
+--
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-pr282/work/artifacts" already has "environment_linux_amd64_freeze.yaml" in it.
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-pr282/work/artifacts" already has "stderr.log" in it.
+Note: [Before run] Artifact dir "/workspace/work/actions-mk3-pr282/work/artifacts" already has "stdout.log" in it.
+Above notes mean, that there were files present in directory that was supposed to be empty!
+In robot development phase, it might be ok to have these files while building robot.
+In production robot/assistant, this might be a mistake, where development files were
+left inside robot.zip file. Report these to developer who made this robot/assistant.
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________ test_canvas_template_runs_through_runtime_and_real_browser __________
+
+action_server_process = <actions.server._selftest.ActionServerProcess object at 0x7fc848d9c920>
+tmp_path = PosixPath('/workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0')
+
+    @pytest.mark.integration_test
+    @pytest.mark.skipif(
+        os.environ.get("ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE") != "1",
+        reason="Set ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1 for the Runtime/browser gate.",
+    )
+    def test_canvas_template_runs_through_runtime_and_real_browser(
+        action_server_process: ActionServerProcess, tmp_path: Path
+    ) -> None:
+        project = _create_project(tmp_path, "canvas-query-runtime")
+        (project / "published_core_probe.py").write_text(
+            """from importlib.metadata import distribution
+    import hashlib
+    from pathlib import Path
+    import sys
+    
+    import actions
+    import actions.mcp
+    import actions.mcp._metadata
+    from actions.mcp import tool
+    
+    PUBLISHED_CORE_WHEEL_SHA256 = (
+        "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265"
+    )
+    PUBLISHED_CORE_MODULE_SHA256 = {
+        "actions": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+        "actions.mcp": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+        "actions.mcp._metadata": (
+            "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+        ),
+    }
+    
+    
+    @tool
+    def published_core_identity() -> dict[str, str]:
+        core = distribution("actions-core")
+        modules = {
+            "actions": Path(actions.__file__).resolve(),
+            "actions.mcp": Path(actions.mcp.__file__).resolve(),
+            "actions.mcp._metadata": Path(actions.mcp._metadata.__file__).resolve(),
+        }
+        installed_files = {
+            Path(core.locate_file(item)).resolve() for item in (core.files or [])
+        }
+        if any(module not in installed_files for module in modules.values()):
+            raise AssertionError("an Actions module is not owned by installed actions-core")
+        if any(not module.is_relative_to(sys.prefix) for module in modules.values()):
+            raise AssertionError("an Actions module is outside the managed environment")
+        module_hashes = {
+            name: hashlib.sha256(module.read_bytes()).hexdigest()
+            for name, module in modules.items()
+        }
+        if core.version != "1.0.3" or module_hashes != PUBLISHED_CORE_MODULE_SHA256:
+            raise AssertionError(
+                "installed actions-core differs from the independently verified "
+                f"published wheel {PUBLISHED_CORE_WHEEL_SHA256}"
+            )
+        return {"version": core.version, **module_hashes}
+    """,
+            encoding="utf-8",
+        )
+        action_server_process.start(
+            cwd=project,
+            db_file="server.db",
+            actions_sync=True,
+            timeout=120,
+        )
+    
+        async def check_runtime_contract() -> None:
+            async with action_server_process.mcp_client() as session:
+                listed = await session.list_tools()
+                core_tool = next(
+                    tool for tool in listed.tools if tool.name == "published_core_identity"
+                )
+                core_identity = await session.call_tool(core_tool.name, {})
+                assert core_identity.structured_content == {
+                    "version": "1.0.3",
+                    **PUBLISHED_CORE_MODULE_SHA256,
+                }, (
+                    "Worker module bytes must match published Core wheel "
+                    f"{PUBLISHED_CORE_WHEEL_SHA256}."
+                )
+    
+                search_tool = next(
+                    tool for tool in listed.tools if tool.name == "canvas_fixture_search"
+                )
+                assert search_tool.meta is not None
+                assert search_tool.meta["ui"] == {
+                    "resourceUri": "ui://action-canvas/v1/canvas.html?query-fixture=0.1",
+                    "visibility": ["model", "app"],
+                }
+    
+                resource = await session.read_resource(
+                    "ui://action-canvas/v1/canvas.html?query-fixture=0.1"
+                )
+                content = resource.contents[0]
+                assert isinstance(content, TextResourceContents)
+                assert content.mime_type == "text/html;profile=mcp-app"
+                assert content.text == (project / "canvas.html").read_text(encoding="utf-8")
+    
+                match = await session.call_tool("canvas_fixture_search", {"query": "alpha"})
+                assert match.structured_content == {
+                    "rows": [
+                        {"id": "record-001", "title": "Alpha guide", "category": "Guide"},
+                        {
+                            "id": "record-002",
+                            "title": "Alpha checklist",
+                            "category": "Checklist",
+                        },
+                    ],
+                    "artifact": None,
+                    "error": None,
+                }
+                miss = await session.call_tool(
+                    "canvas_fixture_search", {"query": "unmatched-query"}
+                )
+                assert miss.structured_content == {
+                    "rows": [],
+                    "artifact": None,
+                    "error": {
+                        "code": "no_matches",
+                        "message": "No records matched that query.",
+                    },
+                }
+    
+        from action_server_tests.fixtures import run_async_in_new_thread
+    
+        assert run_async_in_new_thread(check_runtime_contract) is None
+    
+        repository_root = Path(__file__).resolve().parents[4]
+        frontend_root = repository_root / "action_server" / "frontend"
+        playwright_cli = frontend_root / "node_modules" / "@playwright" / "test" / "cli.js"
+        node = shutil.which("node")
+        assert (
+            node is not None
+        ), "Node must be available in the prepared frontend toolchain."
+>       assert (
+        
+            playwright_cli.is_file()
+        ), "Install frontend dependencies through the configured toolchain."
+E       AssertionError: Install frontend dependencies through the configured toolchain.
+E       Failed: assert playwright_cli.is_file()
+E       Variables:
+E         playwright_cli.is_file() = False
+
+tests/action_server_tests/mcp/test_canvas_query_template.py:922: AssertionError
+----------------------------- Captured stderr call -----------------------------
+TEST PROCESS: 2026-10-10 20:01:00,166 - actions.server._robo_utils.process - DEBUG - Subprocess start [args=['/workspace/work/actions-mk3-pr282/action_server/.venv/bin/python', '-m', 'actions.server', 'start', '--actions-sync=true', '--port=0', '--datadir=/workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server', '--db-file=server.db', '-v', '--skip-lint', '--min-processes=0', '--max-processes=20'],cwd=/workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/canvas-query-runtime,uid=0]
+TEST PROCESS: 2026-10-10 20:01:00,167 - actions.server._robo_utils.process - DEBUG - Subprocess started [pid=14364,uid=0]
+stderr: [2026-10-10 20:01:00] [actions.server._cli_impl: DEBUG] Arguments: /workspace/work/actions-mk3-pr282/action_server/src/actions/server/__main__.py start --actions-sync=true --port=0 --datadir=/workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server --db-file=server.db -v --skip-lint --min-processes=0 --max-processes=20
+stderr: [2026-10-10 20:01:00] [actions.server._cli_impl: DEBUG] CWD: /workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/canvas-query-runtime
+stderr: [2026-10-10 20:01:00] [actions.server._cli_impl: INFO]
+stderr:   ⚡️ Starting Action Server... v1.0.3
+stderr: 
+stderr: [2026-10-10 20:01:00] [actions.server._settings: INFO] Using user-specified datadir: /workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server
+stderr: [2026-10-10 20:01:00] [actions.server._cli_impl: INFO] Logs may be found at: /workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server/server_log.txt.
+stderr: [2026-10-10 20:01:00] [actions.server._cli_impl: INFO] Database file does not exist. Creating it at: /workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server/server.db
+stderr: [2026-10-10 20:01:00] [actions.server._cli_impl: DEBUG] Synchronize actions: True
+stderr: [2026-10-10 20:01:00] [actions.server._actions_import: DEBUG] Importing action package from: /workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/canvas-query-runtime
+stderr: [2026-10-10 20:01:00] [robocorp.log._rewrite_filtering: DEBUG] Collecting default library roots.
+stderr: [2026-10-10 20:01:00] [robocorp.log._rewrite_filtering: DEBUG] LIBRARY_ROOTS ['/home/agent/.local/lib/python3.12/site-packages', '/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12', '/workspace/work/actions-mk3-pr282/action_server/.venv/lib/python3.12', '/workspace/work/actions-mk3-pr282/action_server/.venv/lib/python3.12/site-packages']
+stderr: 
+stderr: [2026-10-10 20:01:00] [actions.server._action_package_handler: INFO] Action package seems ok. Bootstrapping RCC environment (please wait, this can take a long time).
+stderr: [2026-10-10 20:01:00] [actions.server._rcc: DEBUG] Running: /workspace/work/actions-mk3-pr282/action_server/src/actions/server/bin/rcc-18.19.3 ht hash /workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server/.rcc-runtime-sources/1bc2b3cd8d01b436a7767cfaf4f2a214b63875d1408e05610e88f6f562ec7f5e/package.yaml --silent --no-temp-management --warranty-voided --controller action-server --bundled --robocorp
+stderr: [2026-10-10 20:01:00] [actions.server._rcc: INFO] Output from: /workspace/work/actions-mk3-pr282/action_server/src/actions/server/bin/rcc-18.19.3 ht hash /workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server/.rcc-runtime-sources/1bc2b3cd8d01b436a7767cfaf4f2a214b63875d1408e05610e88f6f562ec7f5e/package.yaml --silent --no-temp-management --warranty-voided --controller action-server --bundled --robocorp (took: 0.01s): e7aef3a56bce252d
+stderr: 
+stderr: [2026-10-10 20:01:00] [actions.server._rcc: DEBUG] Running: /workspace/work/actions-mk3-pr282/action_server/src/actions/server/bin/rcc-18.19.3 holotree variables --space e7aef3a56bce252d /workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server/.rcc-runtime-sources/1bc2b3cd8d01b436a7767cfaf4f2a214b63875d1408e05610e88f6f562ec7f5e/package.yaml --config /workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/temp_dir0/.rcc_config/rcc.yaml --json --no-retry-build --no-pyc-management --controller action-server --bundled --robocorp
+stderr: ####  Progress: 00/15  v18.19.3     0.012s  Context: "" <agent@e13229d8d59d> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+stderr: ####  Progress: 01/15  v18.19.3     0.000s  Fresh [private mode] holotree environment 1925b77f-b828-92ae-d295-86bd4477fd8f. (parent/pid: 14364/14376)
+stderr: ####  Progress: 02/15  v18.19.3     0.000s  Holotree blueprint is "e7aef3a56bce252d" [linux_amd64 with 4 workers on 5 CPUs from "e7aef3a56bce252d"].
+stderr: FINAL unified conda environment descriptor:
+stderr: ---
+stderr: channels:
+stderr: - conda-forge
+stderr: dependencies:
+stderr: - python=3.12.12
+stderr: - uv=0.9.26
+stderr: - pip:
+stderr:   - actions-core==1.0.3
+stderr: ---
+stderr: ####  Progress: 03/15  v18.19.3     0.000s  Fill hololib from RCC_REMOTE_ORIGIN skipped. RCC_REMOTE_ORIGIN was not defined.
+stderr: ####  Progress: 04/15  v18.19.3     0.000s  Cleanup holotree stage for fresh install.
+stderr: ####  Progress: 05/15  v18.19.3     0.000s  Build environment into holotree stage "/workspace/work/actions-mk3-pr282/work/actions-home/holotree/hc2fd1aa_493f813dad24d3t".
+stderr: ####  Progress: 06/15  v18.19.3     0.000s  Restore partial environment into holotree stage "/workspace/work/actions-mk3-pr282/work/actions-home/holotree/hc2fd1aa_493f813dad24d3t".
+stderr: Note: Extracting micromamba binary from inside rcc.
+stderr: ####  Progress: 07/15  v18.19.3     0.137s  Running micromamba phase. (micromamba v2.5.0) [layer: b16d9352be3f8eaf]
+stderr: ####  Progress: 08/15  v18.19.3    17.367s  Running uv install phase. (uv v0.9.26) [layer: e7aef3a56bce252d]
+stderr: ####  Progress: 09/15  v18.19.3     6.243s  Post install scripts phase skipped -- no scripts.
+stderr: ####  Progress: 10/15  v18.19.3     0.000s  Activate environment started phase.
+stderr: Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.
+stderr: Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.
+stderr: ####  Progress: 11/15  v18.19.3     3.094s  Pip check skipped.
+stderr: ####  Progress: 12/15  v18.19.3     0.000s  Update installation plan.
+stderr: ####  Progress: 13/15  v18.19.3     0.000s  Record holotree stage to hololib [with 4 workers on 5 CPUs].
+stderr: ####  Progress: 14/15  v18.19.3     0.967s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+stderr: Installation plan is: /workspace/work/actions-mk3-pr282/work/actions-home/holotree/c2fd1aa_a78733b_bdfa0780/rcc_plan.log
+stderr: Environment configuration descriptor is: /workspace/work/actions-mk3-pr282/work/actions-home/holotree/c2fd1aa_a78733b_bdfa0780/identity.yaml
+stderr: ####  Progress: 15/15  v18.19.3     1.478s  Fresh holotree done [with 4 workers on 5 CPUs].
+stderr: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+stderr: @@@  From rcc "v18.19.3" (controller: "action-server") point of view, "environment creation" was SUCCESS. @@@
+stderr: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+stderr: [
+stderr:   {
+stderr:     "key": "PYTHON_EXE",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home/holotree/c2fd1aa_a78733b_bdfa0780/bin/python3"
+stderr:   },
+stderr:   {
+stderr:     "key": "TEMP",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home/temp/fbb55136f306133d"
+stderr:   },
+stderr:   {
+stderr:     "key": "TMP",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home/temp/fbb55136f306133d"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_DEFAULT_ENV",
+stderr:     "value": "rcc"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_PREFIX",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home/holotree/c2fd1aa_a78733b_bdfa0780"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_PROMPT_MODIFIER",
+stderr:     "value": "(rcc)"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_SHLVL",
+stderr:     "value": "1"
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONHOME",
+stderr:     "value": ""
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONSTARTUP",
+stderr:     "value": ""
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONEXECUTABLE",
+stderr:     "value": ""
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONNOUSERSITE",
+stderr:     "value": "1"
+stderr:   },
+stderr:   {
+stderr:     "key": "ROBOCORP_HOME",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_ENVIRONMENT_HASH",
+stderr:     "value": "e7aef3a56bce252d"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_INSTALLATION_ID",
+stderr:     "value": "1925b77f-b828-92ae-d295-86bd4477fd8f"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_HOLOTREE_SPACE_ROOT",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home/holotree/c2fd1aa_a78733b_bdfa0780"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_TRACKING_ALLOWED",
+stderr:     "value": "false"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_EXE",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/action_server/src/actions/server/bin/rcc-18.19.3"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_VERSION",
+stderr:     "value": "v18.19.3"
+stderr:   },
+stderr:   {
+stderr:     "key": "PATH",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home/holotree/c2fd1aa_a78733b_bdfa0780/bin:/workspace/actions-cloud/bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/override:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin:/opt/codex/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/fallback"
+stderr:   },
+stderr:   {
+stderr:     "key": "_",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/action_server/src/actions/server/bin/rcc-18.19.3"
+stderr:   },
+stderr:   {
+stderr:     "key": "PWD",
+stderr:     "value": "/workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server/.rcc-runtime-sources/1bc2b3cd8d01b436a7767cfaf4f2a214b63875d1408e05610e88f6f562ec7f5e"
+stderr:   },
+stderr:   {
+stderr:     "key": "SHLVL",
+stderr:     "value": "3"
+stderr:   },
+stderr:   {
+stderr:     "key": "MAMBA_ROOT_PREFIX",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home"
+stderr:   }
+stderr: ]
+stderr: [2026-10-10 20:01:30] [actions.server._rcc: INFO] Output from: /workspace/work/actions-mk3-pr282/action_server/src/actions/server/bin/rcc-18.19.3 holotree variables --space e7aef3a56bce252d /workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server/.rcc-runtime-sources/1bc2b3cd8d01b436a7767cfaf4f2a214b63875d1408e05610e88f6f562ec7f5e/package.yaml --config /workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/temp_dir0/.rcc_config/rcc.yaml --json --no-retry-build --no-pyc-management --controller action-server --bundled --robocorp (took: 29.32s): [
+stderr:   {
+stderr:     "key": "PYTHON_EXE",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home/holotree/c2fd1aa_a78733b_bdfa0780/bin/python3"
+stderr:   },
+stderr:   {
+stderr:     "key": "TEMP",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home/temp/fbb55136f306133d"
+stderr:   },
+stderr:   {
+stderr:     "key": "TMP",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home/temp/fbb55136f306133d"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_DEFAULT_ENV",
+stderr:     "value": "rcc"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_PREFIX",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home/holotree/c2fd1aa_a78733b_bdfa0780"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_PROMPT_MODIFIER",
+stderr:     "value": "(rcc)"
+stderr:   },
+stderr:   {
+stderr:     "key": "CONDA_SHLVL",
+stderr:     "value": "1"
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONHOME",
+stderr:     "value": ""
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONSTARTUP",
+stderr:     "value": ""
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONEXECUTABLE",
+stderr:     "value": ""
+stderr:   },
+stderr:   {
+stderr:     "key": "PYTHONNOUSERSITE",
+stderr:     "value": "1"
+stderr:   },
+stderr:   {
+stderr:     "key": "ROBOCORP_HOME",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_ENVIRONMENT_HASH",
+stderr:     "value": "e7aef3a56bce252d"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_INSTALLATION_ID",
+stderr:     "value": "1925b77f-b828-92ae-d295-86bd4477fd8f"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_HOLOTREE_SPACE_ROOT",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home/holotree/c2fd1aa_a78733b_bdfa0780"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_TRACKING_ALLOWED",
+stderr:     "value": "false"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_EXE",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/action_server/src/actions/server/bin/rcc-18.19.3"
+stderr:   },
+stderr:   {
+stderr:     "key": "RCC_VERSION",
+stderr:     "value": "v18.19.3"
+stderr:   },
+stderr:   {
+stderr:     "key": "PATH",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home/holotree/c2fd1aa_a78733b_bdfa0780/bin:/workspace/actions-cloud/bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/override:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin:/opt/codex/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/fallback"
+stderr:   },
+stderr:   {
+stderr:     "key": "_",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/action_server/src/actions/server/bin/rcc-18.19.3"
+stderr:   },
+stderr:   {
+stderr:     "key": "PWD",
+stderr:     "value": "/workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server/.rcc-runtime-sources/1bc2b3cd8d01b436a7767cfaf4f2a214b63875d1408e05610e88f6f562ec7f5e"
+stderr:   },
+stderr:   {
+stderr:     "key": "SHLVL",
+stderr:     "value": "3"
+stderr:   },
+stderr:   {
+stderr:     "key": "MAMBA_ROOT_PREFIX",
+stderr:     "value": "/workspace/work/actions-mk3-pr282/work/actions-home"
+stderr:   }
+stderr: ]
+stderr: 
+stderr: [2026-10-10 20:01:30] [actions.server._actions_import: INFO] Python interpreter path: /workspace/work/actions-mk3-pr282/work/actions-home/holotree/c2fd1aa_a78733b_bdfa0780/bin/python3
+stderr: [2026-10-10 20:01:30] [actions.server._actions_import: DEBUG] Collecting actions for Action Package: Canvas Query.
+stderr: [2026-10-10 20:01:31] [actions.server._actions_import: INFO] Found new action package: Canvas Query
+stderr: [2026-10-10 20:01:31] [actions.server._actions_import: INFO] Found new action: canvas_view
+stderr: [2026-10-10 20:01:31] [actions.server._actions_import: INFO] Found new action: canvas_fixture_search
+stderr: [2026-10-10 20:01:31] [actions.server._actions_import: INFO] Found new action: published_core_identity
+stderr: [2026-10-10 20:01:32] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 20:01:32] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 20:01:32] [actions.server._mode: INFO] Operating mode: standard
+stderr: [2026-10-10 20:01:32] [actions.server._server: DEBUG] Starting server. Settings:
+stderr:     artifacts_dir = PosixPath('/workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server/artifacts')
+stderr:     datadir = PosixPath('/workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server')
+stderr:     artifact_storage_backend = 'local'
+stderr:     artifact_storage_root = PosixPath('/workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server/artifacts')
+stderr:     title = 'Actions Runtime'
+stderr:     address = 'localhost'
+stderr:     port = 0
+stderr:     verbose = True
+stderr:     db_file = 'server.db'
+stderr:     database_url = None
+stderr:     expose_provider = 'auto'
+stderr:     server_url = 'http://localhost:0'
+stderr:     cors_allow_origins = ()
+stderr:     min_processes = 0
+stderr:     max_processes = 20
+stderr:     reuse_processes = False
+stderr:     full_openapi_spec = False
+stderr:     use_https = False
+stderr:     ssl_self_signed = False
+stderr:     ssl_keyfile = None
+stderr:     ssl_certfile = None
+stderr:     oauth2_settings = '/workspace/work/actions-mk3-pr282/work/actions-home/action-server/oauth2_config.yaml'
+stderr:     base_url = None
+stderr:     enable_scheduler = True
+stderr:     scheduler_check_interval = 10.0
+stderr:     scheduler_max_concurrent_global = 10
+stderr:     enable_triggers = True
+stderr:     trigger_webhook_base_url = None
+stderr:     smtp_host = None
+stderr:     smtp_port = 587
+stderr:     smtp_user = None
+stderr:     smtp_password = None
+stderr:     smtp_from = None
+stderr:     smtp_use_tls = True
+stderr:     redis_url = None
+stderr:     redis_password = None
+stderr:     worker_concurrency = 4
+stderr:     worker_poll_timeout = 30
+stderr: [2026-10-10 20:01:32] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 20:01:32] [mcp.server.lowlevel.server: DEBUG] Initializing server 'Action Server'
+stderr: [2026-10-10 20:01:32] [actions.server._actions_process_pool: DEBUG] ACTIONS_RUNTIME_POST_RUN_CMD not set (post run will be skipped).
+stderr: [2026-10-10 20:01:32] [asyncio: DEBUG] Using selector: EpollSelector
+stderr: [2026-10-10 20:01:32] [uvicorn.error: INFO] Started server process [14364]
+stderr: [2026-10-10 20:01:32] [uvicorn.error: INFO] Waiting for application startup.
+stderr: [2026-10-10 20:01:32] [mcp.server.streamable_http_manager: INFO] StreamableHTTP session manager started
+stderr: [2026-10-10 20:01:32] [actions.server._server: DEBUG] Not exposing action server...
+stderr: [2026-10-10 20:01:32] [actions.server._server: INFO] Initializing scheduler engine...
+stderr: [2026-10-10 20:01:32] [actions.server._scheduler: INFO] Scheduler engine started (check_interval=10.0s, max_concurrent=10)
+stderr: [2026-10-10 20:01:32] [actions.server._server: INFO]   ⏰ Scheduler started (check interval: 10.0s)
+stderr: [2026-10-10 20:01:32] [uvicorn.error: INFO] Application startup complete.
+stderr: [2026-10-10 20:01:32] [actions.server._server: INFO]
+stderr:   ⚡️ Local MCP endpoint: http://localhost:45471/mcp
+stderr: [2026-10-10 20:01:32] [actions.server._server: INFO]
+stderr:   ⚡️ Local Action Server: http://localhost:45471
+stderr: [2026-10-10 20:01:32] [actions.server._server: INFO]      Public access: use --expose to expose (OpenAPI only)
+TEST PROCESS: 2026-10-10 20:01:32,616 - asyncio - DEBUG - Using selector: EpollSelector
+TEST PROCESS: 2026-10-10 20:01:32,694 - mcp.client.streamable_http - DEBUG - Connecting to StreamableHTTP endpoint: http://localhost:45471/mcp
+TEST PROCESS: 2026-10-10 20:01:32,696 - mcp.client.streamable_http - DEBUG - Sending client message: jsonrpc='2.0' id=1 method='server/discover' params={'_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+TEST PROCESS: 2026-10-10 20:01:32,697 - httpcore2.connection - DEBUG - connect_tcp.started host='localhost' port=45471 local_address=None timeout=5.0 socket_options=None
+TEST PROCESS: 2026-10-10 20:01:32,701 - httpcore2.connection - DEBUG - connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x7fc849b1e7b0>
+TEST PROCESS: 2026-10-10 20:01:32,702 - httpcore2.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:32,702 - httpcore2.http11 - DEBUG - send_request_headers.complete
+TEST PROCESS: 2026-10-10 20:01:32,702 - httpcore2.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:32,702 - httpcore2.http11 - DEBUG - send_request_body.complete
+TEST PROCESS: 2026-10-10 20:01:32,702 - httpcore2.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:01:32] [uvicorn.access: INFO] 127.0.0.1:53120 - "POST /mcp HTTP/1.1" 200
+TEST PROCESS: 2026-10-10 20:01:32,704 - httpcore2.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:01:32 GMT'), (b'server', b'uvicorn'), (b'content-length', b'343'), (b'content-type', b'application/json'), (b'x-request-id', b'8b9d4b5f-d047-44ac-a9cd-ccd7e95ff901')])
+stderr: [2026-10-10 20:01:32] [actions.server._api_action_routes: INFO] MCP request
+TEST PROCESS: 2026-10-10 20:01:32,704 - httpx2 - INFO - HTTP Request: POST http://localhost:45471/mcp "HTTP/1.1 200 OK"
+TEST PROCESS: 2026-10-10 20:01:32,704 - httpcore2.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:32,704 - httpcore2.http11 - DEBUG - receive_response_body.complete
+TEST PROCESS: 2026-10-10 20:01:32,704 - httpcore2.http11 - DEBUG - response_closed.started
+TEST PROCESS: 2026-10-10 20:01:32,704 - httpcore2.http11 - DEBUG - response_closed.complete
+TEST PROCESS: 2026-10-10 20:01:32,705 - mcp.client.streamable_http - DEBUG - Sending client message: jsonrpc='2.0' id=2 method='tools/list' params={'_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+TEST PROCESS: 2026-10-10 20:01:32,706 - httpcore2.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:32,706 - httpcore2.http11 - DEBUG - send_request_headers.complete
+TEST PROCESS: 2026-10-10 20:01:32,706 - httpcore2.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:32,706 - httpcore2.http11 - DEBUG - send_request_body.complete
+TEST PROCESS: 2026-10-10 20:01:32,706 - httpcore2.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:01:32] [uvicorn.access: INFO] 127.0.0.1:53120 - "POST /mcp HTTP/1.1" 200
+TEST PROCESS: 2026-10-10 20:01:32,707 - httpcore2.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:01:32 GMT'), (b'server', b'uvicorn'), (b'content-length', b'1437'), (b'content-type', b'application/json'), (b'x-request-id', b'c35a9cbb-f27d-4e47-9592-7056a7a317b6')])
+TEST PROCESS: 2026-10-10 20:01:32,708 - httpx2 - INFO - HTTP Request: POST http://localhost:45471/mcp "HTTP/1.1 200 OK"
+TEST PROCESS: 2026-10-10 20:01:32,708 - httpcore2.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:32,708 - httpcore2.http11 - DEBUG - receive_response_body.complete
+stderr: [2026-10-10 20:01:32] [actions.server._api_action_routes: INFO] MCP request
+TEST PROCESS: 2026-10-10 20:01:32,708 - httpcore2.http11 - DEBUG - response_closed.started
+TEST PROCESS: 2026-10-10 20:01:32,708 - httpcore2.http11 - DEBUG - response_closed.complete
+TEST PROCESS: 2026-10-10 20:01:32,710 - mcp.client.streamable_http - DEBUG - Sending client message: jsonrpc='2.0' id=3 method='tools/call' params={'name': 'published_core_identity', 'arguments': {}, '_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+TEST PROCESS: 2026-10-10 20:01:32,710 - httpcore2.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:32,711 - httpcore2.http11 - DEBUG - send_request_headers.complete
+TEST PROCESS: 2026-10-10 20:01:32,711 - httpcore2.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:32,711 - httpcore2.http11 - DEBUG - send_request_body.complete
+TEST PROCESS: 2026-10-10 20:01:32,711 - httpcore2.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:01:32] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (14745).
+stderr: [2026-10-10 20:01:32] [actions.server._actions_run: INFO] Updating run run-000-7e26dc5f-5207-4da6-8482-6d63949abd8f with changes: 'status': 1 (see: http://localhost:45471/runs/run-000-7e26dc5f-5207-4da6-8482-6d63949abd8f)
+stderr: [2026-10-10 20:01:32] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'published_core_identity', 'action_file': 'published_core_probe.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 20:01:33] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 20:01:33] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 20:01:33] [actions.server._actions_run: INFO] Updating run run-000-7e26dc5f-5207-4da6-8482-6d63949abd8f with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.48118354400003227 (see: http://localhost:45471/runs/run-000-7e26dc5f-5207-4da6-8482-6d63949abd8f)
+stderr: [2026-10-10 20:01:33] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (14745) -- not reusing processes.
+stderr: [2026-10-10 20:01:33] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 20:01:33] [uvicorn.access: INFO] 127.0.0.1:53120 - "POST /mcp HTTP/1.1" 200
+TEST PROCESS: 2026-10-10 20:01:33,482 - httpcore2.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:01:32 GMT'), (b'server', b'uvicorn'), (b'content-length', b'462'), (b'content-type', b'application/json'), (b'x-request-id', b'e19bf2d7-7af3-44b6-b2b1-6981c6894d7c')])
+TEST PROCESS: 2026-10-10 20:01:33,482 - httpx2 - INFO - HTTP Request: POST http://localhost:45471/mcp "HTTP/1.1 200 OK"
+TEST PROCESS: 2026-10-10 20:01:33,482 - httpcore2.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:33,482 - httpcore2.http11 - DEBUG - receive_response_body.complete
+stderr: [2026-10-10 20:01:33] [actions.server._api_action_routes: INFO] MCP request
+TEST PROCESS: 2026-10-10 20:01:33,483 - httpcore2.http11 - DEBUG - response_closed.started
+TEST PROCESS: 2026-10-10 20:01:33,483 - httpcore2.http11 - DEBUG - response_closed.complete
+TEST PROCESS: 2026-10-10 20:01:33,487 - mcp.client.streamable_http - DEBUG - Sending client message: jsonrpc='2.0' id=4 method='resources/read' params={'uri': 'ui://action-canvas/v1/canvas.html?query-fixture=0.1', '_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+TEST PROCESS: 2026-10-10 20:01:33,488 - httpcore2.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:33,488 - httpcore2.http11 - DEBUG - send_request_headers.complete
+TEST PROCESS: 2026-10-10 20:01:33,488 - httpcore2.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:33,488 - httpcore2.http11 - DEBUG - send_request_body.complete
+TEST PROCESS: 2026-10-10 20:01:33,488 - httpcore2.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:01:33] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (14763).
+stderr: [2026-10-10 20:01:33] [actions.server._actions_run: INFO] Updating run run-001-d427fd9f-1502-4117-af00-c90aa6b1fdd3 with changes: 'status': 1 (see: http://localhost:45471/runs/run-001-d427fd9f-1502-4117-af00-c90aa6b1fdd3)
+stderr: [2026-10-10 20:01:33] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_view', 'action_file': 'canvas_query.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 20:01:34] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 20:01:34] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 20:01:34] [actions.server._actions_run: INFO] Updating run run-001-d427fd9f-1502-4117-af00-c90aa6b1fdd3 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.466214157999957 (see: http://localhost:45471/runs/run-001-d427fd9f-1502-4117-af00-c90aa6b1fdd3)
+stderr: [2026-10-10 20:01:34] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (14763) -- not reusing processes.
+stderr: [2026-10-10 20:01:34] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 20:01:34] [uvicorn.access: INFO] 127.0.0.1:53120 - "POST /mcp HTTP/1.1" 200
+TEST PROCESS: 2026-10-10 20:01:34,243 - httpcore2.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:01:32 GMT'), (b'server', b'uvicorn'), (b'content-length', b'425860'), (b'content-type', b'application/json'), (b'x-request-id', b'db4ce92d-f148-4458-a4b8-b0bd3ea17c66')])
+TEST PROCESS: 2026-10-10 20:01:34,243 - httpx2 - INFO - HTTP Request: POST http://localhost:45471/mcp "HTTP/1.1 200 OK"
+TEST PROCESS: 2026-10-10 20:01:34,244 - httpcore2.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:01:34] [actions.server._api_action_routes: INFO] MCP request
+TEST PROCESS: 2026-10-10 20:01:34,247 - httpcore2.http11 - DEBUG - receive_response_body.complete
+TEST PROCESS: 2026-10-10 20:01:34,247 - httpcore2.http11 - DEBUG - response_closed.started
+TEST PROCESS: 2026-10-10 20:01:34,247 - httpcore2.http11 - DEBUG - response_closed.complete
+TEST PROCESS: 2026-10-10 20:01:34,252 - mcp.client.streamable_http - DEBUG - Sending client message: jsonrpc='2.0' id=5 method='tools/call' params={'name': 'canvas_fixture_search', 'arguments': {'query': 'alpha'}, '_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+TEST PROCESS: 2026-10-10 20:01:34,252 - httpcore2.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:34,253 - httpcore2.http11 - DEBUG - send_request_headers.complete
+TEST PROCESS: 2026-10-10 20:01:34,253 - httpcore2.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:34,253 - httpcore2.http11 - DEBUG - send_request_body.complete
+TEST PROCESS: 2026-10-10 20:01:34,253 - httpcore2.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:01:34] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (14778).
+stderr: [2026-10-10 20:01:34] [actions.server._actions_run: INFO] Updating run run-002-ffd12c91-94e0-4dcb-9813-acc67379e840 with changes: 'status': 1 (see: http://localhost:45471/runs/run-002-ffd12c91-94e0-4dcb-9813-acc67379e840)
+stderr: [2026-10-10 20:01:34] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_fixture_search', 'action_file': 'canvas_query.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 20:01:34] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 20:01:34] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 20:01:34] [actions.server._actions_run: INFO] Updating run run-002-ffd12c91-94e0-4dcb-9813-acc67379e840 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.46291352399998686 (see: http://localhost:45471/runs/run-002-ffd12c91-94e0-4dcb-9813-acc67379e840)
+stderr: [2026-10-10 20:01:34] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (14778) -- not reusing processes.
+stderr: [2026-10-10 20:01:34] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 20:01:34] [uvicorn.access: INFO] 127.0.0.1:53120 - "POST /mcp HTTP/1.1" 200
+TEST PROCESS: 2026-10-10 20:01:34,987 - httpcore2.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:01:33 GMT'), (b'server', b'uvicorn'), (b'content-length', b'467'), (b'content-type', b'application/json'), (b'x-request-id', b'fc21d06f-cbe4-4468-85c1-79a7c2488e5c')])
+TEST PROCESS: 2026-10-10 20:01:34,988 - httpx2 - INFO - HTTP Request: POST http://localhost:45471/mcp "HTTP/1.1 200 OK"
+TEST PROCESS: 2026-10-10 20:01:34,988 - httpcore2.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:34,988 - httpcore2.http11 - DEBUG - receive_response_body.complete
+stderr: [2026-10-10 20:01:34] [actions.server._api_action_routes: INFO] MCP request
+TEST PROCESS: 2026-10-10 20:01:34,989 - httpcore2.http11 - DEBUG - response_closed.started
+TEST PROCESS: 2026-10-10 20:01:34,989 - httpcore2.http11 - DEBUG - response_closed.complete
+TEST PROCESS: 2026-10-10 20:01:34,990 - mcp.client.streamable_http - DEBUG - Sending client message: jsonrpc='2.0' id=6 method='tools/call' params={'name': 'canvas_fixture_search', 'arguments': {'query': 'unmatched-query'}, '_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+TEST PROCESS: 2026-10-10 20:01:34,991 - httpcore2.http11 - DEBUG - send_request_headers.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:34,991 - httpcore2.http11 - DEBUG - send_request_headers.complete
+TEST PROCESS: 2026-10-10 20:01:34,991 - httpcore2.http11 - DEBUG - send_request_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:34,991 - httpcore2.http11 - DEBUG - send_request_body.complete
+TEST PROCESS: 2026-10-10 20:01:34,991 - httpcore2.http11 - DEBUG - receive_response_headers.started request=<Request [b'POST']>
+stderr: [2026-10-10 20:01:35] [actions.server._actions_process_pool: DEBUG] Process Pool: Created process (14792).
+stderr: [2026-10-10 20:01:35] [actions.server._actions_run: INFO] Updating run run-003-03d514c6-d360-4b91-8c03-2ea91b6de455 with changes: 'status': 1 (see: http://localhost:45471/runs/run-003-03d514c6-d360-4b91-8c03-2ea91b6de455)
+stderr: [2026-10-10 20:01:35] [actions.server._preload_actions.preload_actions_streams: DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_fixture_search', 'action_file': 'canvas_query.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+stderr: [2026-10-10 20:01:35] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: {"returncode": 0}
+stderr: [2026-10-10 20:01:35] [actions.server._actions_process_pool: DEBUG] Not running post run command.
+stderr: [2026-10-10 20:01:35] [actions.server._actions_run: INFO] Updating run run-003-03d514c6-d360-4b91-8c03-2ea91b6de455 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.4509293449998495 (see: http://localhost:45471/runs/run-003-03d514c6-d360-4b91-8c03-2ea91b6de455)
+stderr: [2026-10-10 20:01:35] [actions.server._actions_process_pool: DEBUG] Process Pool: Exited process (14792) -- not reusing processes.
+stderr: [2026-10-10 20:01:35] [actions.server._preload_actions.preload_actions_streams: DEBUG] Read: None
+stderr: [2026-10-10 20:01:35] [uvicorn.access: INFO] 127.0.0.1:53120 - "POST /mcp HTTP/1.1" 200
+TEST PROCESS: 2026-10-10 20:01:35,715 - httpcore2.http11 - DEBUG - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:01:34 GMT'), (b'server', b'uvicorn'), (b'content-length', b'398'), (b'content-type', b'application/json'), (b'x-request-id', b'c4fbc57c-e8e0-4346-90d4-dce1eaea1ca5')])
+stderr: [2026-10-10 20:01:35] [actions.server._api_action_routes: INFO] MCP request
+TEST PROCESS: 2026-10-10 20:01:35,715 - httpx2 - INFO - HTTP Request: POST http://localhost:45471/mcp "HTTP/1.1 200 OK"
+TEST PROCESS: 2026-10-10 20:01:35,715 - httpcore2.http11 - DEBUG - receive_response_body.started request=<Request [b'POST']>
+TEST PROCESS: 2026-10-10 20:01:35,715 - httpcore2.http11 - DEBUG - receive_response_body.complete
+TEST PROCESS: 2026-10-10 20:01:35,716 - httpcore2.http11 - DEBUG - response_closed.started
+TEST PROCESS: 2026-10-10 20:01:35,716 - httpcore2.http11 - DEBUG - response_closed.complete
+TEST PROCESS: 2026-10-10 20:01:35,717 - httpcore2.connection - DEBUG - close.started
+TEST PROCESS: 2026-10-10 20:01:35,718 - httpcore2.connection - DEBUG - close.complete
+------------------------------ Captured log call -------------------------------
+DEBUG    actions.server._robo_utils.process:process.py:110 Subprocess start [args=['/workspace/work/actions-mk3-pr282/action_server/.venv/bin/python', '-m', 'actions.server', 'start', '--actions-sync=true', '--port=0', '--datadir=/workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/.sema4ai-test-action-server', '--db-file=server.db', '-v', '--skip-lint', '--min-processes=0', '--max-processes=20'],cwd=/workspace/actions-cloud/robocorp/temp/3568ccaf3ce2a653/pytest-of-agent/pytest-0/test_canvas_template_runs_thro0/canvas-query-runtime,uid=0]
+DEBUG    actions.server._robo_utils.process:process.py:117 Subprocess started [pid=14364,uid=0]
+DEBUG    asyncio:selector_events.py:64 Using selector: EpollSelector
+DEBUG    mcp.client.streamable_http:streamable_http.py:673 Connecting to StreamableHTTP endpoint: http://localhost:45471/mcp
+DEBUG    mcp.client.streamable_http:streamable_http.py:562 Sending client message: jsonrpc='2.0' id=1 method='server/discover' params={'_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+DEBUG    httpcore2.connection:_trace.py:85 connect_tcp.started host='localhost' port=45471 local_address=None timeout=5.0 socket_options=None
+DEBUG    httpcore2.connection:_trace.py:85 connect_tcp.complete return_value=<httpcore2._backends.anyio.AnyIOStream object at 0x7fc849b1e7b0>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_headers.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_headers.complete
+DEBUG    httpcore2.http11:_trace.py:85 send_request_body.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_body.complete
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_headers.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:01:32 GMT'), (b'server', b'uvicorn'), (b'content-length', b'343'), (b'content-type', b'application/json'), (b'x-request-id', b'8b9d4b5f-d047-44ac-a9cd-ccd7e95ff901')])
+INFO     httpx2:_client.py:1930 HTTP Request: POST http://localhost:45471/mcp "HTTP/1.1 200 OK"
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_body.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_body.complete
+DEBUG    httpcore2.http11:_trace.py:85 response_closed.started
+DEBUG    httpcore2.http11:_trace.py:85 response_closed.complete
+DEBUG    mcp.client.streamable_http:streamable_http.py:562 Sending client message: jsonrpc='2.0' id=2 method='tools/list' params={'_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+DEBUG    httpcore2.http11:_trace.py:85 send_request_headers.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_headers.complete
+DEBUG    httpcore2.http11:_trace.py:85 send_request_body.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_body.complete
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_headers.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:01:32 GMT'), (b'server', b'uvicorn'), (b'content-length', b'1437'), (b'content-type', b'application/json'), (b'x-request-id', b'c35a9cbb-f27d-4e47-9592-7056a7a317b6')])
+INFO     httpx2:_client.py:1930 HTTP Request: POST http://localhost:45471/mcp "HTTP/1.1 200 OK"
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_body.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_body.complete
+DEBUG    httpcore2.http11:_trace.py:85 response_closed.started
+DEBUG    httpcore2.http11:_trace.py:85 response_closed.complete
+DEBUG    mcp.client.streamable_http:streamable_http.py:562 Sending client message: jsonrpc='2.0' id=3 method='tools/call' params={'name': 'published_core_identity', 'arguments': {}, '_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+DEBUG    httpcore2.http11:_trace.py:85 send_request_headers.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_headers.complete
+DEBUG    httpcore2.http11:_trace.py:85 send_request_body.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_body.complete
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_headers.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:01:32 GMT'), (b'server', b'uvicorn'), (b'content-length', b'462'), (b'content-type', b'application/json'), (b'x-request-id', b'e19bf2d7-7af3-44b6-b2b1-6981c6894d7c')])
+INFO     httpx2:_client.py:1930 HTTP Request: POST http://localhost:45471/mcp "HTTP/1.1 200 OK"
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_body.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_body.complete
+DEBUG    httpcore2.http11:_trace.py:85 response_closed.started
+DEBUG    httpcore2.http11:_trace.py:85 response_closed.complete
+DEBUG    mcp.client.streamable_http:streamable_http.py:562 Sending client message: jsonrpc='2.0' id=4 method='resources/read' params={'uri': 'ui://action-canvas/v1/canvas.html?query-fixture=0.1', '_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+DEBUG    httpcore2.http11:_trace.py:85 send_request_headers.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_headers.complete
+DEBUG    httpcore2.http11:_trace.py:85 send_request_body.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_body.complete
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_headers.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:01:32 GMT'), (b'server', b'uvicorn'), (b'content-length', b'425860'), (b'content-type', b'application/json'), (b'x-request-id', b'db4ce92d-f148-4458-a4b8-b0bd3ea17c66')])
+INFO     httpx2:_client.py:1930 HTTP Request: POST http://localhost:45471/mcp "HTTP/1.1 200 OK"
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_body.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_body.complete
+DEBUG    httpcore2.http11:_trace.py:85 response_closed.started
+DEBUG    httpcore2.http11:_trace.py:85 response_closed.complete
+DEBUG    mcp.client.streamable_http:streamable_http.py:562 Sending client message: jsonrpc='2.0' id=5 method='tools/call' params={'name': 'canvas_fixture_search', 'arguments': {'query': 'alpha'}, '_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+DEBUG    httpcore2.http11:_trace.py:85 send_request_headers.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_headers.complete
+DEBUG    httpcore2.http11:_trace.py:85 send_request_body.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_body.complete
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_headers.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:01:33 GMT'), (b'server', b'uvicorn'), (b'content-length', b'467'), (b'content-type', b'application/json'), (b'x-request-id', b'fc21d06f-cbe4-4468-85c1-79a7c2488e5c')])
+INFO     httpx2:_client.py:1930 HTTP Request: POST http://localhost:45471/mcp "HTTP/1.1 200 OK"
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_body.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_body.complete
+DEBUG    httpcore2.http11:_trace.py:85 response_closed.started
+DEBUG    httpcore2.http11:_trace.py:85 response_closed.complete
+DEBUG    mcp.client.streamable_http:streamable_http.py:562 Sending client message: jsonrpc='2.0' id=6 method='tools/call' params={'name': 'canvas_fixture_search', 'arguments': {'query': 'unmatched-query'}, '_meta': {'io.modelcontextprotocol/protocolVersion': '2026-07-28', 'io.modelcontextprotocol/clientInfo': {'name': 'mcp', 'version': '0.1.0'}, 'io.modelcontextprotocol/clientCapabilities': {}}}
+DEBUG    httpcore2.http11:_trace.py:85 send_request_headers.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_headers.complete
+DEBUG    httpcore2.http11:_trace.py:85 send_request_body.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 send_request_body.complete
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_headers.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Sat, 10 Oct 2026 20:01:34 GMT'), (b'server', b'uvicorn'), (b'content-length', b'398'), (b'content-type', b'application/json'), (b'x-request-id', b'c4fbc57c-e8e0-4346-90d4-dce1eaea1ca5')])
+INFO     httpx2:_client.py:1930 HTTP Request: POST http://localhost:45471/mcp "HTTP/1.1 200 OK"
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_body.started request=<Request [b'POST']>
+DEBUG    httpcore2.http11:_trace.py:85 receive_response_body.complete
+DEBUG    httpcore2.http11:_trace.py:85 response_closed.started
+DEBUG    httpcore2.http11:_trace.py:85 response_closed.complete
+DEBUG    httpcore2.connection:_trace.py:85 close.started
+DEBUG    httpcore2.connection:_trace.py:85 close.complete
+--------------------------- Captured stderr teardown ---------------------------
+TEST PROCESS: 2026-10-10 20:01:35,761 - actions.server._robo_utils.process - DEBUG - Subprocess kill [pid=14364,uid=0]
+TEST PROCESS: 2026-10-10 20:01:35,761 - actions.server._common.process - DEBUG - Killing process and subprocesses of: 14364
+stderr: [2026-10-10 20:01:35] [uvicorn.error: INFO] Shutting down
+stderr: [2026-10-10 20:01:35] [uvicorn.error: INFO] Waiting for application shutdown.
+stderr: [2026-10-10 20:01:35] [actions.server._server: INFO] Stopping scheduler...
+stderr: [2026-10-10 20:01:35] [actions.server._scheduler: INFO] Scheduler engine stopped
+stderr: [2026-10-10 20:01:35] [actions.server._server: INFO] Stopping action server...
+stderr: [2026-10-10 20:01:35] [mcp.server.streamable_http_manager: INFO] StreamableHTTP session manager shutting down
+stderr: [2026-10-10 20:01:35] [uvicorn.error: INFO] Application shutdown complete.
+stderr: [2026-10-10 20:01:35] [uvicorn.error: INFO] Finished server process [14364]
+---------------------------- Captured log teardown -----------------------------
+DEBUG    actions.server._robo_utils.process:process.py:143 Subprocess kill [pid=14364,uid=0]
+DEBUG    actions.server._common.process:process.py:396 Killing process and subprocesses of: 14364
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/mcp/test_canvas_query_template.py::test_canvas_template_runs_through_runtime_and_real_browser
+1 failed, 7 deselected in 36.78s
+Log (html): /workspace/work/actions-mk3-pr282/action_server/output/log.html
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-pr282/work/run_package_pytest.py", line 21, in <module>
+    subprocess.run(
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['poetry', 'run', 'pytest', '-q', '-m', 'integration_test', 'tests/action_server_tests/mcp/test_canvas_query_template.py', '-k', 'test_canvas_template_runs_through_runtime_and_real_browser']' returned non-zero exit status 1.
+Process 14350: exit status 1, command: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 [run_package_pytest.py --env ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1 --env ACTIONS_HOME=/workspace/work/actions-mk3-pr282/work/actions-home --env UV_CACHE_DIR=/workspace/work/actions-mk3-pr282/work/uv-cache -q -m integration_test tests/action_server_tests/mcp/test_canvas_query_template.py -k test_canvas_template_runs_through_runtime_and_real_browser] [v18.19.3/14343]
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.3" (controller: "user") point of view, "actual main robot run" was FAILURE, reason: "exit status 1". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  2:83
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.
+Error: exit status 1 (robot run exit)
+[rcc] exit status will be: 10!

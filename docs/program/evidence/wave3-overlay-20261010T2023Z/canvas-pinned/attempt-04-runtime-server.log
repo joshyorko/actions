@@ -1,0 +1,284 @@
+[2026-10-10 20:04:41] [INFO] Database file does not exist. Creating it at: /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/server.db
+[2026-10-10 20:04:41] [DEBUG] Synchronize actions: True
+[2026-10-10 20:04:41] [DEBUG] Importing action package from: /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0
+[2026-10-10 20:04:41] [DEBUG] Collecting default library roots.
+[2026-10-10 20:04:41] [DEBUG] LIBRARY_ROOTS ['/home/agent/.local/lib/python3.12/site-packages', '/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12', '/workspace/work/actions-mk3-canvas-proof/action_server/.venv/lib/python3.12/site-packages']
+
+[2026-10-10 20:04:41] [INFO] Action package seems ok. Bootstrapping RCC environment (please wait, this can take a long time).
+[2026-10-10 20:04:41] [DEBUG] Running: /workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3 ht hash /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/.rcc-runtime-sources/2e96dcdda662a82f9fae38e780e8d39e0d5bbc8dbdbe01202b25927ada3cad20/package.yaml --silent --no-temp-management --warranty-voided --controller action-server --bundled --robocorp
+[2026-10-10 20:04:41] [INFO] Output from: /workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3 ht hash /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/.rcc-runtime-sources/2e96dcdda662a82f9fae38e780e8d39e0d5bbc8dbdbe01202b25927ada3cad20/package.yaml --silent --no-temp-management --warranty-voided --controller action-server --bundled --robocorp (took: 0.01s): 9614d6ca478b8fcf
+
+[2026-10-10 20:04:41] [DEBUG] Running: /workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3 holotree variables --space 9614d6ca478b8fcf /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/.rcc-runtime-sources/2e96dcdda662a82f9fae38e780e8d39e0d5bbc8dbdbe01202b25927ada3cad20/package.yaml --config /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/temp_dir0/.rcc_config/rcc.yaml --json --no-retry-build --no-pyc-management --controller action-server --bundled --robocorp
+[2026-10-10 20:05:13] [INFO] Output from: /workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3 holotree variables --space 9614d6ca478b8fcf /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/.rcc-runtime-sources/2e96dcdda662a82f9fae38e780e8d39e0d5bbc8dbdbe01202b25927ada3cad20/package.yaml --config /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/temp_dir0/.rcc_config/rcc.yaml --json --no-retry-build --no-pyc-management --controller action-server --bundled --robocorp (took: 32.03s): [
+  {
+    "key": "PYTHON_EXE",
+    "value": "/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home/holotree/c2fd1aa_a78733b_d7d2174a/bin/python3"
+  },
+  {
+    "key": "TEMP",
+    "value": "/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home/temp/d49fd9f71baa4f91"
+  },
+  {
+    "key": "TMP",
+    "value": "/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home/temp/d49fd9f71baa4f91"
+  },
+  {
+    "key": "CONDA_DEFAULT_ENV",
+    "value": "rcc"
+  },
+  {
+    "key": "CONDA_PREFIX",
+    "value": "/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home/holotree/c2fd1aa_a78733b_d7d2174a"
+  },
+  {
+    "key": "CONDA_PROMPT_MODIFIER",
+    "value": "(rcc)"
+  },
+  {
+    "key": "CONDA_SHLVL",
+    "value": "1"
+  },
+  {
+    "key": "PYTHONHOME",
+    "value": ""
+  },
+  {
+    "key": "PYTHONSTARTUP",
+    "value": ""
+  },
+  {
+    "key": "PYTHONEXECUTABLE",
+    "value": ""
+  },
+  {
+    "key": "PYTHONNOUSERSITE",
+    "value": "1"
+  },
+  {
+    "key": "ROBOCORP_HOME",
+    "value": "/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home"
+  },
+  {
+    "key": "RCC_ENVIRONMENT_HASH",
+    "value": "9614d6ca478b8fcf"
+  },
+  {
+    "key": "RCC_INSTALLATION_ID",
+    "value": "9c99a16e-e979-e90f-f49b-f5f3b351935f"
+  },
+  {
+    "key": "RCC_HOLOTREE_SPACE_ROOT",
+    "value": "/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home/holotree/c2fd1aa_a78733b_d7d2174a"
+  },
+  {
+    "key": "RCC_TRACKING_ALLOWED",
+    "value": "false"
+  },
+  {
+    "key": "RCC_EXE",
+    "value": "/workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3"
+  },
+  {
+    "key": "RCC_VERSION",
+    "value": "v18.19.3"
+  },
+  {
+    "key": "PATH",
+    "value": "/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home/holotree/c2fd1aa_a78733b_d7d2174a/bin:/workspace/work/actions-mk3-canvas-proof/developer:/workspace/actions-cloud/bin:/run/codex-environment/codex-home/tmp/arg0/codex-arg0o0cXs6:/opt/codex/codex-path:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/override:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin:/opt/codex/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/fallback:/workspace/work/actions-mk3-evidence/canvas-pinned/system-bin-without-chromium"
+  },
+  {
+    "key": "_",
+    "value": "/workspace/work/actions-mk3-canvas-proof/action_server/src/actions/server/bin/rcc-18.19.3"
+  },
+  {
+    "key": "PWD",
+    "value": "/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/.rcc-runtime-sources/2e96dcdda662a82f9fae38e780e8d39e0d5bbc8dbdbe01202b25927ada3cad20"
+  },
+  {
+    "key": "SHLVL",
+    "value": "3"
+  },
+  {
+    "key": "MAMBA_ROOT_PREFIX",
+    "value": "/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home"
+  }
+]
+
+[2026-10-10 20:05:13] [INFO] Python interpreter path: /workspace/work/actions-mk3-evidence/canvas-pinned/actions-home/holotree/c2fd1aa_a78733b_d7d2174a/bin/python3
+[2026-10-10 20:05:13] [DEBUG] Collecting actions for Action Package: Canvas Runtime bridge acceptance.
+[2026-10-10 20:05:14] [INFO] Found new action package: Canvas Runtime bridge acceptance
+[2026-10-10 20:05:14] [INFO] Found new action: canvas_view
+[2026-10-10 20:05:14] [INFO] Found new action: canvas_fixture_search
+[2026-10-10 20:05:14] [INFO] Found new action: canvas_fixture_artifact_status
+[2026-10-10 20:05:14] [INFO] Found new action: canvas_fixture_worker_provenance
+[2026-10-10 20:05:15] [DEBUG] Initializing server 'Action Server'
+[2026-10-10 20:05:15] [DEBUG] Initializing server 'Action Server'
+[2026-10-10 20:05:15] [INFO] Operating mode: standard
+[2026-10-10 20:05:15] [DEBUG] Starting server. Settings:
+    artifacts_dir = PosixPath('/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/artifacts')
+    datadir = PosixPath('/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server')
+    artifact_storage_backend = 'local'
+    artifact_storage_root = PosixPath('/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/.sema4ai-test-action-server/artifacts')
+    title = 'Actions Runtime'
+    address = 'localhost'
+    port = 0
+    verbose = True
+    db_file = 'server.db'
+    database_url = None
+    expose_provider = 'auto'
+    server_url = 'http://localhost:0'
+    cors_allow_origins = ()
+    min_processes = 0
+    max_processes = 20
+    reuse_processes = False
+    full_openapi_spec = False
+    use_https = False
+    ssl_self_signed = False
+    ssl_keyfile = None
+    ssl_certfile = None
+    oauth2_settings = '/workspace/work/actions-mk3-evidence/canvas-pinned/actions-home/action-server/oauth2_config.yaml'
+    base_url = None
+    enable_scheduler = True
+    scheduler_check_interval = 10.0
+    scheduler_max_concurrent_global = 10
+    enable_triggers = True
+    trigger_webhook_base_url = None
+    smtp_host = None
+    smtp_port = 587
+    smtp_user = None
+    smtp_password = None
+    smtp_from = None
+    smtp_use_tls = True
+    redis_url = None
+    redis_password = None
+    worker_concurrency = 4
+    worker_poll_timeout = 30
+[2026-10-10 20:05:15] [DEBUG] Initializing server 'Action Server'
+[2026-10-10 20:05:15] [DEBUG] Initializing server 'Action Server'
+[2026-10-10 20:05:15] [DEBUG] ACTIONS_RUNTIME_POST_RUN_CMD not set (post run will be skipped).
+[2026-10-10 20:05:15] [DEBUG] Using selector: EpollSelector
+[2026-10-10 20:05:15] [INFO] Started server process [16718]
+[2026-10-10 20:05:15] [INFO] Waiting for application startup.
+[2026-10-10 20:05:15] [INFO] StreamableHTTP session manager started
+[2026-10-10 20:05:15] [DEBUG] Not exposing action server...
+[2026-10-10 20:05:15] [INFO] Initializing scheduler engine...
+[2026-10-10 20:05:15] [INFO] Scheduler engine started (check_interval=10.0s, max_concurrent=10)
+[2026-10-10 20:05:15] [INFO]   ⏰ Scheduler started (check interval: 10.0s)
+[2026-10-10 20:05:15] [INFO] Application startup complete.
+[2026-10-10 20:05:15] [INFO] 
+  ⚡️ Local MCP endpoint: http://localhost:44351/mcp
+[2026-10-10 20:05:15] [INFO] 
+  ⚡️ Local Action Server: http://localhost:44351
+[2026-10-10 20:05:15] [INFO]      Public access: use --expose to expose (OpenAPI only)
+[2026-10-10 20:05:15] [INFO] 127.0.0.1:46504 - "POST /mcp HTTP/1.1" 200
+[2026-10-10 20:05:15] [INFO] MCP request
+[2026-10-10 20:05:15] [INFO] 127.0.0.1:46504 - "POST /mcp HTTP/1.1" 200
+[2026-10-10 20:05:15] [INFO] MCP request
+[2026-10-10 20:05:15] [DEBUG] Process Pool: Created process (17028).
+[2026-10-10 20:05:15] [INFO] Updating run run-000-d73db3f8-75b6-4585-ae5e-46c18fc63ab7 with changes: 'status': 1 (see: http://localhost:44351/runs/run-000-d73db3f8-75b6-4585-ae5e-46c18fc63ab7)
+[2026-10-10 20:05:15] [DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_view', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+[2026-10-10 20:05:16] [DEBUG] Read: {"returncode": 0}
+[2026-10-10 20:05:16] [DEBUG] Not running post run command.
+[2026-10-10 20:05:16] [INFO] Updating run run-000-d73db3f8-75b6-4585-ae5e-46c18fc63ab7 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.5518960160000006 (see: http://localhost:44351/runs/run-000-d73db3f8-75b6-4585-ae5e-46c18fc63ab7)
+[2026-10-10 20:05:16] [DEBUG] Process Pool: Exited process (17028) -- not reusing processes.
+[2026-10-10 20:05:16] [DEBUG] Read: None
+[2026-10-10 20:05:16] [INFO] 127.0.0.1:46504 - "POST /mcp HTTP/1.1" 200
+[2026-10-10 20:05:16] [INFO] MCP request
+[2026-10-10 20:05:16] [DEBUG] Process Pool: Created process (17042).
+[2026-10-10 20:05:16] [INFO] Updating run run-001-eeac54e4-50d4-47be-b739-9d0fe2d24d9a with changes: 'status': 1 (see: http://localhost:44351/runs/run-001-eeac54e4-50d4-47be-b739-9d0fe2d24d9a)
+[2026-10-10 20:05:16] [DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_fixture_search', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+[2026-10-10 20:05:17] [DEBUG] Read: {"returncode": 0}
+[2026-10-10 20:05:17] [DEBUG] Not running post run command.
+[2026-10-10 20:05:17] [INFO] Updating run run-001-eeac54e4-50d4-47be-b739-9d0fe2d24d9a with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.5584786240001449 (see: http://localhost:44351/runs/run-001-eeac54e4-50d4-47be-b739-9d0fe2d24d9a)
+[2026-10-10 20:05:17] [DEBUG] Process Pool: Exited process (17042) -- not reusing processes.
+[2026-10-10 20:05:17] [DEBUG] Read: None
+[2026-10-10 20:05:17] [INFO] 127.0.0.1:46504 - "POST /mcp HTTP/1.1" 200
+[2026-10-10 20:05:17] [INFO] MCP request
+[2026-10-10 20:05:17] [DEBUG] Process Pool: Created process (17056).
+[2026-10-10 20:05:17] [INFO] Updating run run-002-5ef72390-dc87-46ed-9e53-3af9b8ebbce6 with changes: 'status': 1 (see: http://localhost:44351/runs/run-002-5ef72390-dc87-46ed-9e53-3af9b8ebbce6)
+[2026-10-10 20:05:17] [DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_fixture_artifact_status', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+[2026-10-10 20:05:18] [DEBUG] Read: {"returncode": 0}
+[2026-10-10 20:05:18] [DEBUG] Not running post run command.
+[2026-10-10 20:05:18] [INFO] Updating run run-002-5ef72390-dc87-46ed-9e53-3af9b8ebbce6 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.562279609000143 (see: http://localhost:44351/runs/run-002-5ef72390-dc87-46ed-9e53-3af9b8ebbce6)
+[2026-10-10 20:05:18] [DEBUG] Process Pool: Exited process (17056) -- not reusing processes.
+[2026-10-10 20:05:18] [DEBUG] Read: None
+[2026-10-10 20:05:18] [INFO] 127.0.0.1:46504 - "POST /mcp HTTP/1.1" 200
+[2026-10-10 20:05:18] [INFO] MCP request
+[2026-10-10 20:05:18] [DEBUG] Process Pool: Created process (17074).
+[2026-10-10 20:05:18] [INFO] Updating run run-003-7a98a8cc-e942-43d6-b3e0-f86822391d21 with changes: 'status': 1 (see: http://localhost:44351/runs/run-003-7a98a8cc-e942-43d6-b3e0-f86822391d21)
+[2026-10-10 20:05:18] [DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_fixture_worker_provenance', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+[2026-10-10 20:05:19] [DEBUG] Read: {"returncode": 0}
+[2026-10-10 20:05:19] [DEBUG] Not running post run command.
+[2026-10-10 20:05:19] [INFO] Updating run run-003-7a98a8cc-e942-43d6-b3e0-f86822391d21 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.5875612760000877 (see: http://localhost:44351/runs/run-003-7a98a8cc-e942-43d6-b3e0-f86822391d21)
+[2026-10-10 20:05:19] [DEBUG] Process Pool: Exited process (17074) -- not reusing processes.
+[2026-10-10 20:05:19] [DEBUG] Read: None
+[2026-10-10 20:05:19] [INFO] 127.0.0.1:46504 - "POST /mcp HTTP/1.1" 200
+[2026-10-10 20:05:19] [INFO] MCP request
+[2026-10-10 20:05:25] [DEBUG] Stateless mode: Creating new transport for this request
+[2026-10-10 20:05:25] [INFO] 127.0.0.1:51892 - "POST /mcp HTTP/1.1" 200
+[2026-10-10 20:05:25] [INFO] Terminating session: None
+[2026-10-10 20:05:25] [INFO] MCP request
+[2026-10-10 20:05:25] [DEBUG] Read stream closed by client
+[2026-10-10 20:05:25] [DEBUG] Stateless mode: Creating new transport for this request
+[2026-10-10 20:05:25] [INFO] 127.0.0.1:51902 - "POST /mcp HTTP/1.1" 202
+[2026-10-10 20:05:25] [INFO] Terminating session: None
+[2026-10-10 20:05:25] [INFO] MCP request
+[2026-10-10 20:05:25] [DEBUG] no handler for notification notifications/initialized
+[2026-10-10 20:05:25] [DEBUG] read stream closed by transport; treating as EOF
+[2026-10-10 20:05:25] [DEBUG] Stateless mode: Creating new transport for this request
+[2026-10-10 20:05:25] [INFO] 127.0.0.1:51892 - "GET /mcp HTTP/1.1" 200
+[2026-10-10 20:05:25] [DEBUG] Stateless mode: Creating new transport for this request
+[2026-10-10 20:05:25] [INFO] 127.0.0.1:51912 - "POST /mcp HTTP/1.1" 200
+[2026-10-10 20:05:25] [INFO] Terminating session: None
+[2026-10-10 20:05:25] [INFO] MCP request
+[2026-10-10 20:05:25] [DEBUG] Read stream closed by client
+[2026-10-10 20:05:25] [DEBUG] Stateless mode: Creating new transport for this request
+[2026-10-10 20:05:25] [DEBUG] Process Pool: Created process (17342).
+[2026-10-10 20:05:25] [INFO] Updating run run-004-33be7ced-7913-4889-9586-f215f9e891fb with changes: 'status': 1 (see: http://localhost:44351/runs/run-004-33be7ced-7913-4889-9586-f215f9e891fb)
+[2026-10-10 20:05:25] [DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_view', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+[2026-10-10 20:05:26] [DEBUG] Read: {"returncode": 0}
+[2026-10-10 20:05:26] [DEBUG] Not running post run command.
+[2026-10-10 20:05:26] [INFO] Updating run run-004-33be7ced-7913-4889-9586-f215f9e891fb with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.5824692510000204 (see: http://localhost:44351/runs/run-004-33be7ced-7913-4889-9586-f215f9e891fb)
+[2026-10-10 20:05:26] [DEBUG] Process Pool: Exited process (17342) -- not reusing processes.
+[2026-10-10 20:05:26] [DEBUG] Read: None
+[2026-10-10 20:05:26] [INFO] 127.0.0.1:51902 - "POST /mcp HTTP/1.1" 200
+[2026-10-10 20:05:26] [INFO] Terminating session: None
+[2026-10-10 20:05:26] [INFO] MCP request
+[2026-10-10 20:05:26] [DEBUG] Read stream closed by client
+[2026-10-10 20:05:26] [DEBUG] Stateless mode: Creating new transport for this request
+[2026-10-10 20:05:26] [DEBUG] Process Pool: Created process (17367).
+[2026-10-10 20:05:26] [INFO] Updating run run-005-5630edde-1996-494c-b8b6-65d04c885237 with changes: 'status': 1 (see: http://localhost:44351/runs/run-005-5630edde-1996-494c-b8b6-65d04c885237)
+[2026-10-10 20:05:26] [DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_fixture_search', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+[2026-10-10 20:05:27] [DEBUG] Read: {"returncode": 0}
+[2026-10-10 20:05:27] [DEBUG] Not running post run command.
+[2026-10-10 20:05:27] [INFO] Updating run run-005-5630edde-1996-494c-b8b6-65d04c885237 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.5376103490000332 (see: http://localhost:44351/runs/run-005-5630edde-1996-494c-b8b6-65d04c885237)
+[2026-10-10 20:05:27] [DEBUG] Process Pool: Exited process (17367) -- not reusing processes.
+[2026-10-10 20:05:27] [DEBUG] Read: None
+[2026-10-10 20:05:27] [INFO] 127.0.0.1:51902 - "POST /mcp HTTP/1.1" 200
+[2026-10-10 20:05:27] [INFO] Terminating session: None
+[2026-10-10 20:05:27] [INFO] MCP request
+[2026-10-10 20:05:27] [DEBUG] Read stream closed by client
+[2026-10-10 20:05:27] [DEBUG] Stateless mode: Creating new transport for this request
+[2026-10-10 20:05:28] [DEBUG] Process Pool: Created process (17381).
+[2026-10-10 20:05:28] [INFO] Updating run run-006-140ba77d-fbfa-429c-a868-30fae864e676 with changes: 'status': 1 (see: http://localhost:44351/runs/run-006-140ba77d-fbfa-429c-a868-30fae864e676)
+[2026-10-10 20:05:28] [DEBUG] Writing message: 'command': 'run_action', 'action_name': 'canvas_fixture_artifact_status', 'action_file': 'canvas_actions.py', 'reuse_process': False. All keys: ('command', 'action_name', 'action_file', 'input_json', 'robot_artifacts', 'result_json', 'headers', 'cookies', 'reuse_process', 'cwd')
+[2026-10-10 20:05:28] [DEBUG] Read: {"returncode": 0}
+[2026-10-10 20:05:28] [DEBUG] Not running post run command.
+[2026-10-10 20:05:28] [INFO] Updating run run-006-140ba77d-fbfa-429c-a868-30fae864e676 with changes: 'result': <redacted>, 'status': 2, 'run_time': 0.5396793860002163 (see: http://localhost:44351/runs/run-006-140ba77d-fbfa-429c-a868-30fae864e676)
+[2026-10-10 20:05:28] [DEBUG] Process Pool: Exited process (17381) -- not reusing processes.
+[2026-10-10 20:05:28] [DEBUG] Read: None
+[2026-10-10 20:05:28] [INFO] 127.0.0.1:51902 - "POST /mcp HTTP/1.1" 200
+[2026-10-10 20:05:28] [INFO] Terminating session: None
+[2026-10-10 20:05:28] [INFO] MCP request
+[2026-10-10 20:05:28] [DEBUG] Read stream closed by client
+[2026-10-10 20:05:29] [DEBUG] Got event: http.disconnect. Stop streaming.
+[2026-10-10 20:05:29] [DEBUG] Closing standalone SSE writer
+[2026-10-10 20:05:29] [INFO] Terminating session: None
+[2026-10-10 20:05:29] [INFO] Shutting down
+[2026-10-10 20:05:29] [INFO] Waiting for application shutdown.
+[2026-10-10 20:05:29] [INFO] Stopping scheduler...
+[2026-10-10 20:05:29] [INFO] Scheduler engine stopped
+[2026-10-10 20:05:29] [INFO] Stopping action server...
+[2026-10-10 20:05:29] [INFO] StreamableHTTP session manager shutting down
+[2026-10-10 20:05:29] [INFO] Application shutdown complete.
+[2026-10-10 20:05:29] [INFO] Finished server process [16718]

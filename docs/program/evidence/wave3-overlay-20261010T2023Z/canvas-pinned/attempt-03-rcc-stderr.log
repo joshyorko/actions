@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-evidence/canvas-pinned/run_canvas_proof.py", line 82, in <module>
+    subprocess.run(command, cwd=checkout / "action_server" / "tests", env=env, check=True, timeout=1800)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python', '-m', 'pytest', '-m', 'integration_test', '-q', 'action_server_tests/mcp/test_mcp_apps_authoring.py', '-k', 'canvas_view_calls_public_action_through_runtime_bridge']' returned non-zero exit status 1.

@@ -46,12 +46,11 @@
   "current_active_workers": {
     "root": "ACTIVE; Integration, release admission and external publication authority.",
     "luna_core_release_preflight": "ACTIVE; This isolated wave3 governance evidence/graph/guidance checkpoint.",
-    "luna_database_gate_audit": "ACTIVE; Read-only #134 warm readiness plus SQLite savepoint diagnosis/fix lane; no acceptance claimed.",
-    "luna_graph_reconcile": "ACTIVE; Graph reconciliation lane.",
-    "luna_pr282_template": "ACTIVE; PR282 template source/body follow-up; scoped installed worker/browser evidence independently reviewed.",
-    "luna_pr302_portability": "ACTIVE; PR302 portability follow-up; exact Windows canary refresh awaits accepted PR304 union.",
+    "luna_database_gate_audit": "ACTIVE; Read-only #134 warm readiness; completed #84 migration API verification. No SQLite implementation ownership.",
+    "luna_graph_reconcile": "ACTIVE; SQLite SAVEPOINT-start diagnosis and minimal fix; verification active and source fix uncommitted at cutoff.",
+    "luna_pr282_template": "ACTIVE; Work Items readiness audit after completing scoped PR282 installed-worker/browser evidence.",
+    "luna_pr302_portability": "ACTIVE; Private f441 RCC inspection implementation; fake-RCC harness contracts only, actual metadata execution NOT RUN. PR302 portability source checkpoint complete; hosted floor refresh remains root-owned.",
     "sol_pr301_review": "ACTIVE; Independent scoped reviews; latest PR282/PR305/database gate reviews are archived in this checkpoint.",
-    "luna302_rcc_inspection": "ACTIVE; Root-assigned private f441 RCC inspection implementation; contract fake-RCC only; actual metadata execution NOT RUN.",
     "Dakota": "Last exact native snapshots: WorkItems completed and RCC interrupted with no active flags at 20:04:43/44Z; no resume/create.",
     "Devsy": "DISABLED; no discovery/dispatch/calls.",
     "Astra": "NOT USED; no assignment/calls."
@@ -2852,7 +2851,7 @@
     "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
     "release_ready": false,
     "receipt": "evidence/wave3-overlay-20261010T2023Z/program-amendment-20261010T2023Z.json",
-    "receipt_sha256": "588b60a5bed8d439cf83b13f13370a90f374425d95d82bb379e3bd11982ae3ed",
+    "receipt_sha256": "a8d0ba1e001d508f21b30365b72d93626fada96d3a960705404cbb331b684fd8",
     "integration": "4e8a26296608c232ce3dbd1f250ddb709b9459c9"
   },
   "prior_current_program_refs_20261009T2253Z": {
@@ -3387,7 +3386,7 @@
     },
     "observed_at_utc": "2026-10-10T20:23:55Z",
     "path": "evidence/wave3-overlay-20261010T2023Z/program-amendment-20261010T2023Z.json",
-    "sha256": "588b60a5bed8d439cf83b13f13370a90f374425d95d82bb379e3bd11982ae3ed",
+    "sha256": "a8d0ba1e001d508f21b30365b72d93626fada96d3a960705404cbb331b684fd8",
     "integration": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
     "release_ready": false,
     "issue_acceptance_changed": false,
@@ -3395,13 +3394,10 @@
     "retained_original_contracts": 54
   },
   "current_next_action": {
-    "observed_at_utc": "2026-10-10T06:08:00Z",
-    "path": "evidence/convergence-followup-20261010T0608Z.json",
-    "sha256": "18439634ff16015537b69c75b2c19c8be20d9e0d98223ebffd9c18e1c37d4510",
-    "status": "Obtain exact-head hosted checks for published PR280 0357585b and current PR281 13db703; refresh PR273 only from a new exact-head read. Keep PR273 as the current combined runtime candidate and do not infer release or whole-issue acceptance from bounded component receipts.",
-    "owner": "Root owns integration/admission; existing owners retain PR273, PR280, PR281 and supplemental #279 workstreams.",
-    "pending": "Wait for exact-head required hosted checks and root admission review. Previous-head results remain historical. No issue state, acceptance, or publication change is made by this snapshot.",
-    "scope": "Preserve original 54 issue contracts and historic archives; #279 remains supplemental. #126/#129 are bounded criteria only."
+    "observed_at_utc": "2026-10-10T20:23:55Z",
+    "owner": "Root retains integration, release and external publication authority.",
+    "status": "Accept PR304 exact-head checks and normal union, then refresh PR302; retain PR292 Windows and ordered PR290/299/300 successors. Complete Runtime-scoped #134 warm and #153 security/browser gates, release-note repair, final source checks, publication and registry/native readbacks; then prove #211 owning Homebrew installation/upgrade. Continue PR282/305 and private RCC source-inspection work as separate scoped graph successors. Review the SQLite fix independently.",
+    "scope": "No merge, tag, release, registry/tap write, issue closure or whole-issue acceptance by this overlay."
   },
   "prior_current_program_refs_20261010T0136Z": {
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
@@ -21323,77 +21319,31 @@
       },
       "prior_current_pointers": {
         "previous_overlay": {
-          "id": "program-amendment-20261010T1958Z",
-          "path": "evidence/wave2-overlay-20261010T195827Z/program-amendment-20261010T1958Z.json",
-          "sha256": "05bd5b71e8094871171c504a90d106dfd865b8fda1ba01ff5db6f13320fe5d71",
-          "observed_at_utc": "2026-10-10T19:58:27Z"
+          "id": "program-amendment-20261010T2005Z",
+          "path": "evidence/wave2-overlay-20261010T2005Z/program-amendment-20261010T2005Z.json",
+          "sha256": "af2677f0cde30527bc835c02a6766d00b941933e1c5ce976c464323361b43f14",
+          "observed_at_utc": "2026-10-10T20:05:39Z"
         },
         "previous_binding": {
-          "observed_at_utc": "2026-10-10T19:58:27Z",
-          "path": "evidence/wave2-overlay-20261010T195827Z/current-git-bindings.json",
-          "sha256": "2036fca8dfd5537762cc4529e9562104644c38786472552be94334ab3d72ff5f"
+          "observed_at_utc": "2026-10-10T20:05:39Z",
+          "path": "evidence/wave2-overlay-20261010T2005Z/current-git-bindings.json",
+          "sha256": "ed21f5fa0a05dcef0c92e002ed52cbc637ca47d969a37f564ecf6f918a999b02"
         },
         "previous_worker_inventory": {
-          "observed_at_utc": "2026-10-10T19:58:27Z",
-          "source": "Current collaboration roster at overlay cutoff; root status updates. This is agent liveness/assigned work, not proof of repository source progress.",
-          "workers": [
-            {
-              "name": "root",
-              "status": "ACTIVE",
-              "scope": "Integration owner; PR/release admission and current GitHub check observation."
-            },
-            {
-              "name": "luna_core_release_preflight",
-              "status": "ACTIVE",
-              "scope": "Governance overlay author; this bounded task."
-            },
-            {
-              "name": "luna_database_gate_audit",
-              "status": "ACTIVE",
-              "scope": "Bounded database gate audit."
-            },
-            {
-              "name": "luna_graph_reconcile",
-              "status": "ACTIVE",
-              "scope": "Current reconciliation task; source status not inferred from liveness."
-            },
-            {
-              "name": "luna_pr282_template",
-              "status": "ACTIVE",
-              "scope": "PR282 template floor/generation gate."
-            },
-            {
-              "name": "sol_pr301_review",
-              "status": "ACTIVE",
-              "scope": "PR301 serialization slice review."
-            },
-            {
-              "name": "luna_pr302_portability",
-              "status": "COMPLETED",
-              "scope": "PR302 portability evidence delivered."
-            },
-            {
-              "name": "Devsy",
-              "status": "DISABLED",
-              "scope": "No dispatch, discovery, or calls."
-            },
-            {
-              "name": "Dakota",
-              "status": "UNKNOWN",
-              "scope": "Ownership clarification pending; no dispatch."
-            }
-          ],
-          "limitations": "Does not revive the older luna worker-name map or infer progress from active-agent status."
+          "observed_at_utc": "2026-10-10T20:05:39Z",
+          "path": "evidence/wave2-overlay-20261010T2005Z/current-workers.json",
+          "sha256": "866f95c8489d59700d5116551705989e75d0d1c745c575d193efb63bbd9120d2",
+          "source": "Current live collaboration roster plus exact Dakota native snapshots; code status is not inferred from liveness."
         },
         "previous_status": {
-          "observed_at_utc": "2026-10-10T19:58:27Z",
-          "path": "evidence/wave2-overlay-20261010T195827Z/live-status-observation.json",
-          "sha256": "9b162461a8700e48b63bba48af0f25578a1e857d101c812e4b5f74de120ffb12",
-          "scope": "Root-reported current exact-head check counts; only bounded current PR observations, not a full branch/release gate inventory."
+          "observed_at_utc": "2026-10-10T20:05:39Z",
+          "path": "evidence/wave2-overlay-20261010T2005Z/live-status-observation.json",
+          "sha256": "8122988d27f371bf739e18ff883c7cd4a5043813d0e8fa640c9a2aa1de2d64e9",
+          "scope": "Bounded root-reported PR302 Windows result and PR282/PR305 lane notes. 19:58 full check counts are historical; no new full census."
         },
         "previous_release_readiness": {
           "status": "RUNTIME_RELEASE_NOT_READY",
-          "observed_at_utc": "2026-10-10T19:58:27Z",
+          "observed_at_utc": "2026-10-10T20:05:39Z",
           "community": "a70993fafc99a9f94041485542d5a720797ca394",
           "integration": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
           "actions_core": "1.0.3 PUBLISHED_AND_BYTE/API/INSTALLED_CONSUMER_VERIFIED",
@@ -21402,23 +21352,23 @@
           "actions_work_items": "0.4.4 unchanged",
           "declared_runtime_core_floor": "^1.0.2; PR304 canary requirement remains exactly 1.0.2",
           "remaining_gates": [
-            "PR304 exact-head checks/review/merge",
-            "PR302 exact-head Windows floor-canary failure must be refreshed against accepted PR304 union; Windows adapter devmode remains active",
-            "PR282 managed Runtime/browser consumer run",
-            "PR305 corrected actual Runtime/browser fixture rerun",
-            "PR292 Windows check; #290/#299/#300 blocked",
+            "PR304 exact-head checks/review/merge; source GO only, with floor fix not accepted",
+            "PR302 exact-head Windows floor-canary failure must be refreshed after accepted PR304 union; adapter devmode active; Windows native and both RCC toolkit jobs pass",
+            "PR282 installed Runtime/browser pass is worker-reported but requires independent durable receipt readback; not full issue acceptance",
+            "PR305/#99 actual browser fixture rerun in progress; no acceptance receipt",
+            "PR292 Windows check; #290/#299/#300 remain blocked; last complete census was 19:58Z",
             "7eca actual RCC metadata inspection remains NOT_RUN",
-            "Current Actions Runtime PyPI and native release artifact/tag/registry readback",
-            "Required Homebrew install/upgrade proof in owning joshyorko/homebrew-tools tap/workflow; not run in this overlay",
-            "Exact latest Runtime workflow/tag source review and named platform/security/registry gates not established by this scoped overlay"
+            "Actions Runtime 1.0.3 tag/PyPI/native artifact readback",
+            "Required Homebrew install/upgrade proof in owning joshyorko/homebrew-tools tap/workflow",
+            "Exact latest Runtime workflow/tag source review and named platform/security/registry gates remain unestablished by this scoped overlay"
           ],
-          "source": "runtime-readiness-corrected receipt plus exact current PR source/review and root 19:58 check status observation."
+          "source": "Exact current Git refs plus bounded 20:05Z follow-up status; PR302 failure is bound to run/job receipt. The prior complete CI census is explicitly historical."
         },
         "previous_next_action": {
-          "observed_at_utc": "2026-10-10T19:58:27Z",
+          "observed_at_utc": "2026-10-10T20:05:39Z",
           "owner": "Root retains integration, release and external publication authority.",
-          "status": "Wait for exact-head PR304/302/282/305 gates; keep PR292 Windows active and #290/#299/#300 blocked; after accepted head update, separately run the managed Runtime/browser consumer and remaining owning Runtime release gates.",
-          "scope": "No tag, dispatch, merge, issue closure or whole-issue acceptance authorized by this overlay."
+          "status": "Wait for PR304 exact-head gates/acceptance; refresh PR302 against accepted union. Independently read back PR282 durable receipt before counting its worker-reported pass. Await PR305/#99 browser rerun receipt. Maintain remaining Runtime release and Homebrew gates.",
+          "scope": "No merge, tag, dispatch, issue closure or whole-issue acceptance authorized by this overlay."
         }
       },
       "previous_current_state": {
@@ -21781,18 +21731,17 @@
       "current_worker_inventory": {
         "observed_at_utc": "2026-10-10T20:23:55Z",
         "path": "evidence/wave3-overlay-20261010T2023Z/current-worker-inventory.json",
-        "sha256": "ba1f86964180f5c07627d665b426e6cbeabdf55f9cf403257d1d58c75ab2eb4a",
-        "source": "Current native collaboration roster captured at checkpoint plus root-reported lane assignments. Dakota status is only the exact native snapshot at 20:04:43/44Z; code progress is not inferred from worker liveness."
+        "sha256": "95e3fe3dda132254c4925ddeb8eac33a46eb4af2d5b52e013c981cbdc8c56cab",
+        "source": "Root-reconciled seven-agent roster and role assignments at this checkpoint. The private RCC lane is luna_pr302_portability, not another worker. Dakota status remains the exact earlier read-only native snapshot."
       },
       "current_active_workers": {
         "root": "ACTIVE; Integration, release admission and external publication authority.",
         "luna_core_release_preflight": "ACTIVE; This isolated wave3 governance evidence/graph/guidance checkpoint.",
-        "luna_database_gate_audit": "ACTIVE; Read-only #134 warm readiness plus SQLite savepoint diagnosis/fix lane; no acceptance claimed.",
-        "luna_graph_reconcile": "ACTIVE; Graph reconciliation lane.",
-        "luna_pr282_template": "ACTIVE; PR282 template source/body follow-up; scoped installed worker/browser evidence independently reviewed.",
-        "luna_pr302_portability": "ACTIVE; PR302 portability follow-up; exact Windows canary refresh awaits accepted PR304 union.",
+        "luna_database_gate_audit": "ACTIVE; Read-only #134 warm readiness; completed #84 migration API verification. No SQLite implementation ownership.",
+        "luna_graph_reconcile": "ACTIVE; SQLite SAVEPOINT-start diagnosis and minimal fix; verification active and source fix uncommitted at cutoff.",
+        "luna_pr282_template": "ACTIVE; Work Items readiness audit after completing scoped PR282 installed-worker/browser evidence.",
+        "luna_pr302_portability": "ACTIVE; Private f441 RCC inspection implementation; fake-RCC harness contracts only, actual metadata execution NOT RUN. PR302 portability source checkpoint complete; hosted floor refresh remains root-owned.",
         "sol_pr301_review": "ACTIVE; Independent scoped reviews; latest PR282/PR305/database gate reviews are archived in this checkpoint.",
-        "luna302_rcc_inspection": "ACTIVE; Root-assigned private f441 RCC inspection implementation; contract fake-RCC only; actual metadata execution NOT RUN.",
         "Dakota": "Last exact native snapshots: WorkItems completed and RCC interrupted with no active flags at 20:04:43/44Z; no resume/create.",
         "Devsy": "DISABLED; no discovery/dispatch/calls.",
         "Astra": "NOT USED; no assignment/calls."
@@ -21914,10 +21863,7 @@
         "release_blocking_or_required_gates": [
           "PR304 exact-head 73605934 source review is GO; 20:21:09Z rollup was 16 success, 2 in progress, 4 queued. Exact checks/review and merge remain pending.",
           "PR302 exact-head e8e8 has the Windows published-wheel floor canary failure (run 38081239175/job 114298417674 installed Core 1.0.3 then asserted 1.0.2); Windows adapter devmode is active, native binary and both RCC toolkit jobs passed. Refresh against accepted PR304 union before disposition.",
-          "PR282 scoped independent installed-worker/system-Chromium receipt is GO; exact-head CI remains in progress/queued with retained earlier failures/cancellations, and the PR body still has a stale readback-pending phrase for root to refresh.",
-          "PR305 source and local browser proof are GO at f9c424; direct launch trace proves lock-matched headless-shell revision 1234 SHA e11fc9ce. At 20:21:09Z hosted rollup had 8 in progress, 3 success, 3 queued; these are not merge/whole-issue acceptance.",
           "PR292 Windows check remains active (18 success, 1 active at 20:21:09Z); PR290/299/300 are blocked by separate stack/dependency gates despite green returned rollups.",
-          "The private RCC baseline f441afb/tree086277 includes reviewed preparation but only fake-RCC contract for active implementation; actual metadata inspection is NOT RUN and compiler admission is not accepted.",
           "Issue #134 provider-backed warm path remains a separate read-only audit with HTTP 503 failure; selected-provider 503 negative does not prove warm reuse.",
           "Issue #153 real browser/security acceptance remains required and is not established by local #282/#305 fixtures.",
           "Issue #211 requires native release handoff evidence, including owning joshyorko/homebrew-tools install and upgrade proof; none is established in this checkpoint.",
@@ -21927,13 +21873,18 @@
         ],
         "non_gates_scoped_observations": "#84 migration API, #282 installed worker/browser, and #99 local cache/browser fixture proof satisfy only their exact recorded slices and may be used by their narrow successors. They do not move whole-issue counts or release readiness.",
         "source": "Exact Git ref + point-in-time native PR status snapshot and the source/evidence reviews in this checkpoint; root-supplied bounded runtime/status updates through 20:23:55Z.",
-        "scope": "No tag, release, registry/tap write, merge, issue closure or whole-issue acceptance was performed or requested by this overlay."
+        "scope": "No tag, release, registry/tap write, merge, issue closure or whole-issue acceptance was performed or requested by this overlay. Canvas template/fixture work and private Package source inspection are parallel graph successors; they become release conditions only if explicitly included in the chosen release scope. #211 installation/upgrade proof follows publication and is required for distribution completion, not before native assets exist.",
+        "parallel_graph_successors_not_blanket_release_prerequisites": [
+          "PR282 scoped independent installed-worker/system-Chromium receipt is GO; exact-head CI remains in progress/queued with retained earlier failures/cancellations, and the PR body still has a stale readback-pending phrase for root to refresh.",
+          "PR305 source and local browser proof are GO at f9c424; direct launch trace proves lock-matched headless-shell revision 1234 SHA e11fc9ce. At 20:21:09Z hosted rollup had 8 in progress, 3 success, 3 queued; these are not merge/whole-issue acceptance.",
+          "The private RCC baseline f441afb/tree086277 includes reviewed preparation but only fake-RCC contract for active implementation; actual metadata inspection is NOT RUN and compiler admission is not accepted."
+        ]
       },
       "release_ready": false,
       "current_next_action": {
         "observed_at_utc": "2026-10-10T20:23:55Z",
         "owner": "Root retains integration, release and external publication authority.",
-        "status": "Finish/accept exact PR304 checks then re-evaluate PR302 on union; close PR282 hosted gates and correct body; complete PR305 hosted gates; retain PR292 Windows and dependency stack; review required actual RCC/#134 warm, #153 security/browser, #211 owning Homebrew install/upgrade and native Runtime publication/readback gates; verify release-note workflow fix on final source. Keep current SQLite fix and RCC implementation under separate review.",
+        "status": "Accept PR304 exact-head checks and normal union, then refresh PR302; retain PR292 Windows and ordered PR290/299/300 successors. Complete Runtime-scoped #134 warm and #153 security/browser gates, release-note repair, final source checks, publication and registry/native readbacks; then prove #211 owning Homebrew installation/upgrade. Continue PR282/305 and private RCC source-inspection work as separate scoped graph successors. Review the SQLite fix independently.",
         "scope": "No merge, tag, release, registry/tap write, issue closure or whole-issue acceptance by this overlay."
       },
       "upstream_disposition": "none; the release-note override and source defects reviewed here are Actions-owned. No upstream issue/report opened.",
@@ -22115,8 +22066,8 @@
         },
         {
           "path": "evidence/wave3-overlay-20261010T2023Z/current-worker-inventory.json",
-          "size_bytes": 2330,
-          "sha256": "bd4632daf56e7f89d73c0892bb9e20642095442b8e36006eb7221f4c226c5bef"
+          "size_bytes": 2311,
+          "sha256": "95e3fe3dda132254c4925ddeb8eac33a46eb4af2d5b52e013c981cbdc8c56cab"
         },
         {
           "path": "evidence/wave3-overlay-20261010T2023Z/dakota-native-snapshots-20261010T200444Z.json",
@@ -22455,8 +22406,8 @@
         },
         {
           "path": "evidence/wave3-overlay-20261010T2023Z/previous-pointer-audit.json",
-          "size_bytes": 5680,
-          "sha256": "c9a7a14510c1ca9c67d344061a49d5b082c86bea9a03264ead1f571d9677d253"
+          "size_bytes": 1196,
+          "sha256": "5027b690eb2a5c2ecfbe648d75dc224356a60e0f7a694701d36b094562a4f3aa"
         },
         {
           "path": "evidence/wave3-overlay-20261010T2023Z/rcc-private-composition-review.json",
@@ -22516,7 +22467,7 @@
         {
           "path": "evidence/wave3-overlay-20261010T2023Z/manifest.json",
           "size_bytes": 21388,
-          "sha256": "131fc0d6ca31d62ad82aff7e523dd0784f2c50089504bf2e7711894fa8c4f281"
+          "sha256": "de8c7a4cb5ec71ff9e1c1056a4e1f6d1dbd2d3e3c010a4c479f6f921e660a916"
         }
       ],
       "scoped_gate_observations": [
@@ -22685,7 +22636,7 @@
       "worker_stage_snapshot": "2026-10-10T07:53:20Z",
       "evidence_manifest": {
         "path": "evidence/wave3-overlay-20261010T2023Z/manifest.json",
-        "sha256": "131fc0d6ca31d62ad82aff7e523dd0784f2c50089504bf2e7711894fa8c4f281",
+        "sha256": "de8c7a4cb5ec71ff9e1c1056a4e1f6d1dbd2d3e3c010a4c479f6f921e660a916",
         "file_count": 114
       }
     }
@@ -22695,7 +22646,7 @@
     "path": "evidence/wave3-overlay-20261010T2023Z/program-amendment-20261010T2023Z.json",
     "observed_at_utc": "2026-10-10T20:23:55Z",
     "summary": "Wave3 active checkpoint: independently reviewed, narrowly scoped migration API, installed Runtime/browser, and Canvas local browser observations are accepted only at those boundaries. PR305 managed-browser identity was resolved by a fresh direct launch trace. PR304/302/282 and Runtime release gates remain pending. SQLite savepoint fix and private RCC implementation remain active/unaccepted. All 54 original issue rows, states, classifications, typed relationships and 16 historical archives are preserved; #210 remains the sole whole-issue completion.",
-    "sha256": "588b60a5bed8d439cf83b13f13370a90f374425d95d82bb379e3bd11982ae3ed"
+    "sha256": "a8d0ba1e001d508f21b30365b72d93626fada96d3a960705404cbb331b684fd8"
   },
   "prior_current_pr_convergence_20261010T0441Z": {
     "observed_at_utc": "2026-10-10T04:41:32Z",
@@ -23341,13 +23292,13 @@
   "current_worker_inventory": {
     "observed_at_utc": "2026-10-10T20:23:55Z",
     "path": "evidence/wave3-overlay-20261010T2023Z/current-worker-inventory.json",
-    "sha256": "ba1f86964180f5c07627d665b426e6cbeabdf55f9cf403257d1d58c75ab2eb4a",
-    "source": "Current native collaboration roster captured at checkpoint plus root-reported lane assignments. Dakota status is only the exact native snapshot at 20:04:43/44Z; code progress is not inferred from worker liveness."
+    "sha256": "95e3fe3dda132254c4925ddeb8eac33a46eb4af2d5b52e013c981cbdc8c56cab",
+    "source": "Root-reconciled seven-agent roster and role assignments at this checkpoint. The private RCC lane is luna_pr302_portability, not another worker. Dakota status remains the exact earlier read-only native snapshot."
   },
   "projection_freshness": {
     "current_overlay_observed_at_utc": "2026-10-10T20:23:55Z",
     "current_overlay_receipt": "evidence/wave3-overlay-20261010T2023Z/program-amendment-20261010T2023Z.json",
-    "current_overlay_sha256": "588b60a5bed8d439cf83b13f13370a90f374425d95d82bb379e3bd11982ae3ed",
+    "current_overlay_sha256": "a8d0ba1e001d508f21b30365b72d93626fada96d3a960705404cbb331b684fd8",
     "worker_stage_snapshot": {
       "observed_at_utc": "2026-10-10T07:53:20Z",
       "meaning": "Historical whole-issue classification snapshot; current bounded work appears in active_substages and current_active_workers."

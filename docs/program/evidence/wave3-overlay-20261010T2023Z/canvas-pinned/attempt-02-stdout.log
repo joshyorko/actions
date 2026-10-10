@@ -1,0 +1,164 @@
+Controlled PATH excludes every directory that exposes `chromium`.
+Command: /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python -m pytest -m integration_test -q action_server_tests/mcp/test_mcp_apps_authoring.py -k canvas_view_calls_public_action_through_runtime_bridge
+Test Python: /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________ test_canvas_view_calls_public_action_through_runtime_bridge __________
+
+action_server_process = <actions.server._selftest.ActionServerProcess object at 0x7ff794f94500>
+tmp_path = PosixPath('/workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0')
+
+    @pytest.mark.integration_test
+    @pytest.mark.skipif(
+        os.environ.get("ACTIONS_CANVAS_RUNTIME_ACCEPTANCE") != "1",
+        reason="Set ACTIONS_CANVAS_RUNTIME_ACCEPTANCE=1 to run the RCC/browser acceptance.",
+    )
+    def test_canvas_view_calls_public_action_through_runtime_bridge(
+        action_server_process: ActionServerProcess, tmp_path
+    ) -> None:
+        repository_root = Path(__file__).resolve().parents[4]
+        frontend_root = repository_root / "action_server" / "frontend"
+        candidate_core_wheel_dir = tmp_path / "candidate-core"
+        candidate_core_wheel_dir.mkdir()
+        build_env = os.environ.copy()
+        build_env["UV_CACHE_DIR"] = str(tmp_path / "uv-cache")
+        build_env["TMPDIR"] = str(tmp_path)
+        subprocess.run(
+            [
+                shutil.which("uv") or "uv",
+                "build",
+                "--wheel",
+                "--out-dir",
+                str(candidate_core_wheel_dir),
+                str(repository_root / "actions"),
+            ],
+            env=build_env,
+            check=True,
+            timeout=120,
+        )
+        candidate_core_wheel = next(candidate_core_wheel_dir.glob("actions_core-*.whl"))
+        candidate_core_wheel_sha256 = hashlib.sha256(
+            candidate_core_wheel.read_bytes()
+        ).hexdigest()
+        if os.name == "nt":
+            quoted_wheel_path = subprocess.list2cmdline([str(candidate_core_wheel)])
+        else:
+            quoted_wheel_path = shlex.quote(str(candidate_core_wheel))
+        package_yaml = tmp_path / "package.yaml"
+        package_yaml.write_text(
+            "spec-version: v2\n"
+            "name: Canvas Runtime bridge acceptance\n"
+            "description: Isolated fixture using the exact candidate Core wheel.\n"
+            "version: 0.0.1\n"
+            "dependencies:\n"
+            "  conda-forge:\n"
+            "    - python=3.12\n"
+            "    - uv=0.9.26\n"
+            "  pypi:\n"
+            "    - actions-core=1.0.2\n"
+            "post-install:\n"
+            "  - python -m pip install --no-deps --force-reinstall "
+            f"{quoted_wheel_path}\n",
+            encoding="utf-8",
+        )
+>       subprocess.run(["npm", "run", "build:canvas"], cwd=frontend_root, check=True)
+
+action_server_tests/mcp/test_mcp_apps_authoring.py:296: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+input = None, capture_output = False, timeout = None, check = True
+popenargs = (['npm', 'run', 'build:canvas'],)
+kwargs = {'cwd': PosixPath('/workspace/work/actions-mk3-canvas-proof/action_server/frontend')}
+process = <Popen: returncode: 254 args: ['npm', 'run', 'build:canvas']>
+stdout = None, stderr = None, retcode = 254
+
+    def run(*popenargs,
+            input=None, capture_output=False, timeout=None, check=False, **kwargs):
+        """Run command with arguments and return a CompletedProcess instance.
+    
+        The returned instance will have attributes args, returncode, stdout and
+        stderr. By default, stdout and stderr are not captured, and those attributes
+        will be None. Pass stdout=PIPE and/or stderr=PIPE in order to capture them,
+        or pass capture_output=True to capture both.
+    
+        If check is True and the exit code was non-zero, it raises a
+        CalledProcessError. The CalledProcessError object will have the return code
+        in the returncode attribute, and output & stderr attributes if those streams
+        were captured.
+    
+        If timeout (seconds) is given and the process takes too long,
+         a TimeoutExpired exception will be raised.
+    
+        There is an optional argument "input", allowing you to
+        pass bytes or a string to the subprocess's stdin.  If you use this argument
+        you may not also use the Popen constructor's "stdin" argument, as
+        it will be used internally.
+    
+        By default, all communication is in bytes, and therefore any "input" should
+        be bytes, and the stdout and stderr will be bytes. If in text mode, any
+        "input" should be a string, and stdout and stderr will be strings decoded
+        according to locale encoding, or by "encoding" if set. Text mode is
+        triggered by setting any of text, encoding, errors or universal_newlines.
+    
+        The other arguments are the same as for the Popen constructor.
+        """
+        if input is not None:
+            if kwargs.get('stdin') is not None:
+                raise ValueError('stdin and input arguments may not both be used.')
+            kwargs['stdin'] = PIPE
+    
+        if capture_output:
+            if kwargs.get('stdout') is not None or kwargs.get('stderr') is not None:
+                raise ValueError('stdout and stderr arguments may not be used '
+                                 'with capture_output.')
+            kwargs['stdout'] = PIPE
+            kwargs['stderr'] = PIPE
+    
+        with Popen(*popenargs, **kwargs) as process:
+            try:
+                stdout, stderr = process.communicate(input, timeout=timeout)
+            except TimeoutExpired as exc:
+                process.kill()
+                if _mswindows:
+                    # Windows accumulates the output in a single blocking
+                    # read() call run on child threads, with the timeout
+                    # being done in a join() on those threads.  communicate()
+                    # _after_ kill() is required to collect that and add it
+                    # to the exception.
+                    exc.stdout, exc.stderr = process.communicate()
+                else:
+                    # POSIX _communicate already populated the output so
+                    # far into the TimeoutExpired exception.
+                    process.wait()
+                raise
+            except:  # Including KeyboardInterrupt, communicate handled that.
+                process.kill()
+                # We don't call process.wait() as .__exit__ does that for us.
+                raise
+            retcode = process.poll()
+            if check and retcode:
+>               raise CalledProcessError(retcode, process.args,
+                                         output=stdout, stderr=stderr)
+E               subprocess.CalledProcessError: Command '['npm', 'run', 'build:canvas']' returned non-zero exit status 254.
+
+/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py:571: CalledProcessError
+----------------------------- Captured stdout call -----------------------------
+
+> actions-runtime-frontend@0.0.1 build:canvas
+> vite build --mode canvas --minify=esbuild && node scripts/inline-canvas-assets.mjs && node scripts/write-artifact-manifest.mjs dist-canvas canvas-mcp-app "text/html;profile=mcp-app" && npm run sbom:canvas
+
+----------------------------- Captured stderr call -----------------------------
+Building wheel...
+Successfully built /workspace/work/actions-mk3-evidence/canvas-pinned/pytest-tmp/test_canvas_view_calls_public_0/candidate-core/actions_core-1.0.3-py3-none-any.whl
+npm error code ENOENT
+npm error syscall spawn sh
+npm error path /workspace/work/actions-mk3-canvas-proof/action_server/frontend
+npm error errno -2
+npm error enoent spawn sh ENOENT
+npm error enoent This is related to npm not being able to find a file.
+npm error enoent
+npm error A complete log of this run can be found in: /workspace/actions-cloud/cache/npm/_logs/2026-10-10T19_51_26_420Z-debug-0.log
+=========================== short test summary info ============================
+FAILED action_server_tests/mcp/test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge
+1 failed, 2 deselected in 3.35s
+Log (html): /workspace/work/actions-mk3-canvas-proof/action_server/tests/output/log.html

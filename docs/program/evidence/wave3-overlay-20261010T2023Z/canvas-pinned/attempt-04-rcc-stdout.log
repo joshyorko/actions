@@ -1,0 +1,6 @@
+Controlled PATH excludes every directory that exposes `chromium`.
+Command: /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python -m pytest -m integration_test -q action_server_tests/mcp/test_mcp_apps_authoring.py -k canvas_view_calls_public_action_through_runtime_bridge
+Test Python: /workspace/work/actions-mk3-canvas-proof/action_server/.venv/bin/python
+.                                                                        [100%]
+1 passed, 2 deselected in 54.80s
+Log (html): /workspace/work/actions-mk3-canvas-proof/action_server/tests/output/log.html

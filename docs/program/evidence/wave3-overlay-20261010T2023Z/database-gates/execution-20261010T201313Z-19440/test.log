@@ -1,0 +1,40 @@
+Error. Rolling back database
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/_database.py", line 1092, in execute_query
+    cursor.execute(sql, values)
+  File "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.ProgrammingError: only '%s', '%b', '%t' are allowed as placeholders, got '%''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/_database.py", line 652, in transaction
+    yield
+  File "/workspace/work/actions-mk3-evidence/database-gates/pg_migration_two_process.py", line 252, in main
+    observer.execute_query(
+  File "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/_database.py", line 1098, in execute_query
+    self._raise_execute_error(
+  File "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/_database.py", line 1038, in _raise_execute_error
+    raise DBError(msg)
+actions.server._database.DBError: Error running sql query: "SELECT application_name, pid, pg_blocking_pids(pid)\n                                   FROM pg_stat_activity\n                                   WHERE application_name IN (%s, %s)\n                                     AND datname=current_database()\n                                     AND state='active'\n                                     AND wait_event_type='Lock'\n                                     AND wait_event='advisory'\n                                     AND query LIKE 'SELECT pg_advisory_xact_lock%'" with values: ['actions84_4d64ffea1954_0', 'actions84_4d64ffea1954_1']
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/_database.py", line 1092, in execute_query
+    cursor.execute(sql, values)
+  File "/workspace/work/actions-mk3-pr302/action_server/.venv/lib/python3.12/site-packages/psycopg/cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.ProgrammingError: only '%s', '%b', '%t' are allowed as placeholders, got '%''
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-evidence/database-gates/pg_migration_two_process.py", line 517, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/workspace/work/actions-mk3-evidence/database-gates/pg_migration_two_process.py", line 252, in main
+    observer.execute_query(
+  File "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/_database.py", line 1098, in execute_query
+    self._raise_execute_error(
+  File "/workspace/work/actions-mk3-database-gates/action_server/src/actions/server/_database.py", line 1038, in _raise_execute_error
+    raise DBError(msg)
+actions.server._database.DBError: Error running sql query: "SELECT application_name, pid, pg_blocking_pids(pid)\n                                   FROM pg_stat_activity\n                                   WHERE application_name IN (%s, %s)\n                                     AND datname=current_database()\n                                     AND state='active'\n                                     AND wait_event_type='Lock'\n                                     AND wait_event='advisory'\n                                     AND query LIKE 'SELECT pg_advisory_xact_lock%'" with values: ['actions84_4d64ffea1954_0', 'actions84_4d64ffea1954_1']

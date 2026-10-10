@@ -175,8 +175,8 @@
     },
     {
       "path": "current-worker-inventory.json",
-      "bytes": 2330,
-      "sha256": "bd4632daf56e7f89d73c0892bb9e20642095442b8e36006eb7221f4c226c5bef"
+      "bytes": 2311,
+      "sha256": "95e3fe3dda132254c4925ddeb8eac33a46eb4af2d5b52e013c981cbdc8c56cab"
     },
     {
       "path": "dakota-native-snapshots-20261010T200444Z.json",
@@ -515,8 +515,8 @@
     },
     {
       "path": "previous-pointer-audit.json",
-      "bytes": 5680,
-      "sha256": "c9a7a14510c1ca9c67d344061a49d5b082c86bea9a03264ead1f571d9677d253"
+      "bytes": 1196,
+      "sha256": "5027b690eb2a5c2ecfbe648d75dc224356a60e0f7a694701d36b094562a4f3aa"
     },
     {
       "path": "rcc-private-composition-review.json",
