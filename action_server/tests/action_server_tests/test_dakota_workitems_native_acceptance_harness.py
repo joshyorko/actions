@@ -201,6 +201,7 @@ def test_native_workflow_builds_candidate_version_without_reusing_wheel_output()
         / "frontend-build-unauthenticated.yml"
     ).read_text(encoding="utf-8")
 
+    assert workflow.count("uv run --no-project --python 3.12 python - <<'PY'") == 2
     assert "wheel_dir.mkdir(parents=True, exist_ok=False)" in workflow
     assert 'expected_version = package["tool"]["poetry"]["version"]' in workflow
     assert "assert len(entries) == len(wheels) == 1" in workflow
