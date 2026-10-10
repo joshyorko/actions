@@ -1,4 +1,5 @@
 import ast
+import hashlib
 import json
 import os
 import shutil
@@ -222,6 +223,225 @@ def _private_core_imports(source: str) -> list[int]:
 
 def _private_core_imports_in_file(path: Path) -> list[int]:
     return _private_core_imports(path.read_text(encoding="utf-8"))
+
+
+def _private_core_imports_in_tree(root: Path) -> list[str]:
+    violations = []
+    for path in sorted(root.rglob("*.py")):
+        relative = path.relative_to(root).as_posix()
+        violations.extend(
+            f"{relative}:{line}" for line in _private_core_imports_in_file(path)
+        )
+    return violations
+
+
+def _assert_runtime_wheel_python_members_match(
+    wheel: Path, installed_members: dict[str, Path]
+) -> list[tuple[str, Path, str]]:
+    with zipfile.ZipFile(wheel) as archive:
+        wheel_members = sorted(
+            name for name in archive.namelist() if name.endswith(".py")
+        )
+        assert set(installed_members) == set(wheel_members), (
+            "installed Runtime Python member inventory differs from selected wheel: "
+            f"missing={sorted(set(wheel_members) - set(installed_members))}, "
+            f"unexpected={sorted(set(installed_members) - set(wheel_members))}"
+        )
+        result = []
+        for member in wheel_members:
+            installed_path = installed_members[member].resolve()
+            installed_bytes = installed_path.read_bytes()
+            wheel_bytes = archive.read(member)
+            installed_digest = hashlib.sha256(installed_bytes).hexdigest()
+            wheel_digest = hashlib.sha256(wheel_bytes).hexdigest()
+            assert installed_digest == wheel_digest, (
+                f"installed Runtime member differs from selected wheel: {member} "
+                f"installed={installed_digest} wheel={wheel_digest}"
+            )
+            result.append((member, installed_path, installed_digest))
+    return result
+
+
+def _assert_wheel_digest(
+    wheel: Path, observed_digest: str, package_name: str
+) -> None:
+    expected_digest = hashlib.sha256(wheel.read_bytes()).hexdigest()
+    assert observed_digest == expected_digest, (
+        f"{package_name} wheel SHA-256 differs for {wheel}: "
+        f"observed={observed_digest} expected={expected_digest}"
+    )
+
+
+def _assert_installed_runtime_wheel_has_no_private_core_imports(
+    wheel: Path,
+    installed_members: dict[str, Path],
+    *,
+    prefix: Path,
+    checkout: Path,
+) -> list[tuple[str, Path, str]]:
+    environment_root = prefix.resolve()
+    checkout_root = checkout.resolve()
+    resolved_members = {}
+    for member, path in installed_members.items():
+        resolved = path.resolve()
+        assert resolved.is_relative_to(environment_root), (
+            f"installed Runtime module is outside the clean environment: {resolved}"
+        )
+        assert not resolved.is_relative_to(checkout_root), (
+            f"installed Runtime module resolved into the checkout: {resolved}"
+        )
+        resolved_members[member] = resolved
+    bound_members = _assert_runtime_wheel_python_members_match(
+        wheel, resolved_members
+    )
+    violations = []
+    for member, path, _ in bound_members:
+        violations.extend(
+            f"{member}:{line}" for line in _private_core_imports_in_file(path)
+        )
+    assert not violations, "Runtime imports Core-private modules:\n" + "\n".join(
+        violations
+    )
+    return bound_members
+
+
+def test_installed_runtime_tree_scan_catches_unimported_private_core_modules(
+    tmp_path: Path,
+):
+    installed_runtime = tmp_path / "site-packages"
+    (installed_runtime / "actions/server").mkdir(parents=True)
+    (installed_runtime / "actions/server/public.py").write_text(
+        "from actions import ActionContext\n", encoding="utf-8"
+    )
+    (installed_runtime / "actions/server/unimported_direct.py").write_text(
+        "from actions._protocols import JSONValue\n", encoding="utf-8"
+    )
+    (installed_runtime / "actions/server/unimported_alias.py").write_text(
+        "import actions._action_context as context\n", encoding="utf-8"
+    )
+    (installed_runtime / "actions/server/unimported_dynamic.py").write_text(
+        "import importlib as loader\n"
+        "loader.import_module('actions.' + '_request')\n",
+        encoding="utf-8",
+    )
+    (installed_runtime / "actions/server/_protocols.py").write_text(
+        "JSONValue = object\n", encoding="utf-8"
+    )
+
+    assert _private_core_imports_in_tree(installed_runtime) == [
+        "actions/server/unimported_alias.py:1",
+        "actions/server/unimported_direct.py:1",
+        "actions/server/unimported_dynamic.py:2",
+    ]
+
+
+def test_runtime_wheel_member_binding_rejects_installed_byte_mismatch(tmp_path: Path):
+    wheel = tmp_path / "actions_runtime-1.0.0-py3-none-any.whl"
+    with zipfile.ZipFile(wheel, "w") as archive:
+        archive.writestr("actions/server/kept.py", "value = 1\n")
+        archive.writestr("actions/server/extra.py", "value = 2\n")
+    installed = tmp_path / "site-packages/actions/server"
+    installed.mkdir(parents=True)
+    (installed / "kept.py").write_text("value = 1\n", encoding="utf-8")
+    (installed / "extra.py").write_text("value = 3\n", encoding="utf-8")
+
+    with pytest.raises(AssertionError, match="installed Runtime member differs"):
+        _assert_runtime_wheel_python_members_match(
+            wheel,
+            {
+                "actions/server/kept.py": installed / "kept.py",
+                "actions/server/extra.py": installed / "extra.py",
+            },
+        )
+
+
+def test_runtime_wheel_member_binding_rejects_incomplete_inventory(tmp_path: Path):
+    wheel = tmp_path / "actions_runtime-1.0.0-py3-none-any.whl"
+    with zipfile.ZipFile(wheel, "w") as archive:
+        archive.writestr("actions/server/one.py", "value = 1\n")
+        archive.writestr("actions/server/two.py", "value = 2\n")
+    installed = tmp_path / "site-packages/actions/server/one.py"
+    installed.parent.mkdir(parents=True)
+    installed.write_text("value = 1\n", encoding="utf-8")
+
+    with pytest.raises(AssertionError, match="member inventory differs"):
+        _assert_runtime_wheel_python_members_match(
+            wheel, {"actions/server/one.py": installed}
+        )
+
+
+def test_runtime_wheel_digest_binding_reports_selected_artifact_mismatch(
+    tmp_path: Path,
+):
+    wheel = tmp_path / "actions_runtime-1.0.0-py3-none-any.whl"
+    with zipfile.ZipFile(wheel, "w") as archive:
+        archive.writestr("actions/server/module.py", "value = 1\n")
+
+    with pytest.raises(AssertionError, match="Runtime wheel SHA-256 differs"):
+        _assert_wheel_digest(wheel, "0" * 64, "Runtime")
+
+
+def test_installed_runtime_wheel_scan_rejects_unimported_private_core_import(
+    tmp_path: Path,
+):
+    wheel = tmp_path / "actions_runtime-1.0.0-py3-none-any.whl"
+    members = {
+        "actions/server/public.py": "from actions import ActionContext\n",
+        "actions/server/unimported.py": "from actions._protocols import JSONValue\n",
+        "actions/server/_protocols.py": "JSONValue = object\n",
+    }
+    with zipfile.ZipFile(wheel, "w") as archive:
+        for name, content in members.items():
+            archive.writestr(name, content)
+    environment = tmp_path / "venv"
+    site_packages = environment / "lib/python3.12/site-packages"
+    installed_members = {}
+    for name, content in members.items():
+        path = site_packages / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+        installed_members[name] = path
+
+    with pytest.raises(
+        AssertionError,
+        match=r"Runtime imports Core-private modules:\n.*unimported.py:1",
+    ):
+        _assert_installed_runtime_wheel_has_no_private_core_imports(
+            wheel,
+            installed_members,
+            prefix=environment,
+            checkout=tmp_path / "checkout",
+        )
+
+
+def test_installed_runtime_wheel_scan_allows_public_core_and_runtime_json_modules(
+    tmp_path: Path,
+):
+    wheel = tmp_path / "actions_runtime-1.0.0-py3-none-any.whl"
+    members = {
+        "actions/server/public_api.py": "from actions import ActionContext\n",
+        "actions/server/_protocols.py": "JSONValue = object\n",
+    }
+    with zipfile.ZipFile(wheel, "w") as archive:
+        for name, content in members.items():
+            archive.writestr(name, content)
+    environment = tmp_path / "venv"
+    site_packages = environment / "lib/python3.12/site-packages"
+    installed_members = {}
+    for name, content in members.items():
+        path = site_packages / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+        installed_members[name] = path
+
+    result = _assert_installed_runtime_wheel_has_no_private_core_imports(
+        wheel,
+        installed_members,
+        prefix=environment,
+        checkout=tmp_path / "checkout",
+    )
+
+    assert [member for member, _, _ in result] == sorted(members)
 
 
 @pytest.mark.parametrize(
@@ -527,24 +747,36 @@ def _install_and_probe(python: Path, wheels: list[Path]) -> None:
     )
     subprocess.run([str(python), "-m", "pip", "check"], check=True, env=environment)
     checkout = str(REPO.resolve())
+    core_wheel = next(path for path in wheels if path.name.startswith("actions_core-"))
+    runtime_wheel = next(
+        path for path in wheels if path.name.startswith("actions_runtime-")
+    )
     probe = f"""
 import base64
+import hashlib
 import importlib
+import importlib.metadata
 import inspect
 import json
 import pathlib
+import sys
 import tempfile
 
+environment_root = pathlib.Path(sys.prefix).resolve()
+checkout_root = pathlib.Path({checkout!r}).resolve()
 for name in ("actions", "actions.mcp", "actions.work_items", "actions.server", "actions_http"):
     module = importlib.import_module(name)
     origin = pathlib.Path(module.__file__).resolve()
-    assert not str(origin).startswith({checkout!r}), origin
+    assert origin.is_relative_to(environment_root), origin
+    assert not origin.is_relative_to(checkout_root), origin
 
 from actions import ActionContext, ActionsListActionTypedDict, Request
+from actions.server._protocols import JSONValue
 assert ActionsListActionTypedDict.__required_keys__ == {{
     "name", "line", "file", "docs", "input_schema", "output_schema",
     "managed_params_schema", "options",
 }}
+assert JSONValue is not None
 encoded_context = base64.b64encode(
     json.dumps({{"secrets": {{"token": "kept"}}}}).encode("utf-8")
 ).decode("ascii")
@@ -607,8 +839,98 @@ for name in (
     "actions.server.package._package_metadata",
 ):
     importlib.import_module(name)
+
+runtime_distribution = importlib.metadata.distribution("actions-runtime")
+runtime_modules = []
+for distribution_file in runtime_distribution.files or ():
+    member = distribution_file.as_posix()
+    if member.endswith(".py"):
+        path = pathlib.Path(
+            runtime_distribution.locate_file(distribution_file)
+        ).resolve()
+        runtime_modules.append({{
+            "member": member,
+            "path": str(path),
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        }})
+assert runtime_modules, "installed Runtime distribution has no Python modules"
+wheel_path = pathlib.Path({str(runtime_wheel.resolve())!r})
+wheel_sha256 = hashlib.sha256(wheel_path.read_bytes()).hexdigest()
+core_wheel_path = pathlib.Path({str(core_wheel.resolve())!r})
+core_wheel_sha256 = hashlib.sha256(core_wheel_path.read_bytes()).hexdigest()
+print("RUNTIME_WHEEL_MEMBER_INVENTORY=" + json.dumps({{
+    "environment_prefix": str(pathlib.Path(sys.prefix).resolve()),
+    "wheel_path": str(wheel_path),
+    "wheel_sha256": wheel_sha256,
+    "core_wheel_path": str(core_wheel_path),
+    "core_wheel_sha256": core_wheel_sha256,
+    "modules": runtime_modules,
+}}, sort_keys=True))
 """
-    subprocess.run([str(python), "-c", probe], check=True, env=environment)
+    probe_result = subprocess.run(
+        [str(python), "-c", probe],
+        check=True,
+        capture_output=True,
+        text=True,
+        env=environment,
+    )
+    inventory_prefix = "RUNTIME_WHEEL_MEMBER_INVENTORY="
+    inventory_lines = [
+        line
+        for line in probe_result.stdout.splitlines()
+        if line.startswith(inventory_prefix)
+    ]
+    assert len(inventory_lines) == 1, (
+        "clean Runtime probe did not emit exactly one wheel inventory; "
+        f"stdout={probe_result.stdout!r} stderr={probe_result.stderr!r}"
+    )
+    inventory = json.loads(inventory_lines[0][len(inventory_prefix) :])
+    assert inventory["wheel_path"] == str(runtime_wheel.resolve()), (
+        f"Runtime probe selected a different wheel: {inventory['wheel_path']}"
+    )
+    assert inventory["core_wheel_path"] == str(core_wheel.resolve()), (
+        f"Runtime probe selected a different Core wheel: {inventory['core_wheel_path']}"
+    )
+    _assert_wheel_digest(runtime_wheel, inventory["wheel_sha256"], "Runtime")
+    _assert_wheel_digest(core_wheel, inventory["core_wheel_sha256"], "Core")
+    environment_prefix = Path(inventory["environment_prefix"]).resolve()
+    installed_members = {
+        item["member"]: Path(item["path"]) for item in inventory["modules"]
+    }
+    assert len(installed_members) == len(inventory["modules"]), (
+        "installed Runtime distribution contains duplicate Python member paths"
+    )
+    bound_members = _assert_installed_runtime_wheel_has_no_private_core_imports(
+        runtime_wheel,
+        installed_members,
+        prefix=environment_prefix,
+        checkout=REPO,
+    )
+    assert len(bound_members) == len(inventory["modules"])
+    for member, path, digest in bound_members:
+        observed = next(
+            item for item in inventory["modules"] if item["member"] == member
+        )
+        assert observed["path"] == str(path)
+        assert observed["sha256"] == digest
+    print(
+        "RUNTIME_WHEEL_PRIVATE_IMPORT_SCAN="
+        + json.dumps(
+            {
+                "environment_prefix": str(environment_prefix),
+                "runtime_wheel_path": str(runtime_wheel.resolve()),
+                "runtime_wheel_sha256": inventory["wheel_sha256"],
+                "core_wheel_path": str(core_wheel.resolve()),
+                "core_wheel_sha256": inventory["core_wheel_sha256"],
+                "members": [
+                    {"path": member, "installed_path": str(path), "sha256": digest}
+                    for member, path, digest in bound_members
+                ],
+            },
+            sort_keys=True,
+        ),
+        flush=True,
+    )
     subprocess.run(
         [str(python), "-m", "actions.server", "--help"], check=True, env=environment
     )
