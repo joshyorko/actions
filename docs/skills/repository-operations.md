@@ -126,6 +126,15 @@ attributing them, and do not remove the proxy or weaken server authorization
 to make tests pass. Local mock-server connectivity is distinct from a real
 provider or authenticated product-browser contract.
 
+Keep ordinary CLI request coverage independent from hosted-service credentials
+when the transport contract can be tested locally. The Action Server's
+`cloud list-organizations` regression invokes the public CLI and replaces only
+the HTTP client boundary with a deterministic response, checking its URL,
+HMAC authorization header, and JSON output. This preserves CLI and
+request-signing coverage without requiring a Control Room secret or claiming
+hosted-service acceptance; use a separate explicitly configured acceptance
+test when the real provider behavior is the subject.
+
 The locked MCP Python SDK 2.0.0 validates authorization-server issuer URLs as
 HTTPS, allowing HTTP only for localhost and loopback IPs, and rejects issuer
 queries and fragments. Its CIMD URL helper accepts HTTPS URLs with a non-root
