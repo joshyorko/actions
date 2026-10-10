@@ -2341,10 +2341,45 @@ invoking a special-device driver's read-capable open before rejecting its type.
 These checks reject observed changes; they do not establish a complete-tree or
 globally atomic source snapshot against concurrent writers. The supplied root
 descriptor pins its object, not its original pathname, Workspace authorization,
-or selected-set completeness. This utility performs no staging, publication,
+or selected-set completeness. The reader performs no staging, publication,
 compiler inspection or Package Revision creation, and does not change legacy
 Runtime or Robot imports. A stronger atomic snapshot contract remains a separate
 filesystem-level gate.
+
+`actions.server.deployments.source_staging.stage_selected_files` is a separate
+consumer boundary for that measured selection. The caller supplies an empty,
+owner-private destination directory descriptor; source and destination
+descriptors remain caller-owned. The helper reopens each selected source through
+the confined reader, compares its observations with the measured inventory,
+creates only descriptor-relative no-follow directories and exclusive files,
+normalizes file modes, enforces the same byte bounds while copying, then
+re-reads the staged files and checks the final source bindings before returning
+an inventory derived from the staged bytes. It requires exclusive write access
+to the owner-private destination for the duration of staging. Directory
+creation and the following no-follow identity observation are not atomic, so a
+hostile concurrent writer with the caller's effective UID is outside this
+boundary; the observed identity checks do not claim race-proof binding against
+such a writer. On failure it removes only identity-matched files and
+directories created by that call; an unexpected unowned entry is preserved. If
+file or directory identity could not be observed or cleanup cannot verify
+ownership, the original error is retained with a note naming the unresolved
+entry. This binds the
+proposed inventory to bytes observed in the staged tree, but still does not
+prove complete selection, authorization, trust, or a globally atomic source
+snapshot. It is not a compiler or Package
+Revision API and does not modify the legacy Robot ZIP/import path. The bounded
+Linux contract suite exercises successful mode normalization, invalid and
+non-empty destinations, links/special files, source/staged-byte mutation, and
+failure cleanup; it does not establish an RCC consumer/import proof.
+The staging failure tests inject errors after mkdir at identity observation,
+directory open, and fstat; when identity cannot be established they require the
+original exception to survive with an explicit unresolved-cleanup note.
+The same behavior is tested when initial fstat of an exclusive leaf-file
+descriptor fails: its path remains unresolved rather than being unlinked
+without an identity.
+The filesystem tests are Linux-only and skip on other platforms. Separate
+configured Mypy runs check this module and its tests for Linux, Win32, and
+Darwin; those type checks do not claim staging runtime support outside Linux.
 
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
