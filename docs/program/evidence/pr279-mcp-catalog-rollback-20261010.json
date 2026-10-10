@@ -1,0 +1,377 @@
+{
+  "contract": "actions-local-mcp-complete-batch-rollback/source-subprocess-v1",
+  "scope": "Real unmanaged CLI/Runtime with public actions.mcp decorators and installed Core1.0.2. Reject duplicate resource URI, resource-template URI, and prompt name across desired packages A+C while omitting previous B; preserve old DB, included source, catalog and executable callbacks. No production edits or release/publication authority.",
+  "baseline": {
+    "sha": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "runtime_origin": "/tmp/work/p0-mcp-catalog-rollback-baseline/action_server/src/actions/server/__init__.py",
+    "production_file_sha256": {
+      "action_server/src/actions/server/_action_package_handler.py": "d4505685cf274ea7ecd8f6b7b3ac47908943738624966c64359e643a6953ffba",
+      "action_server/src/actions/server/_actions_import.py": "c7b02a7fd33c6672cbee01c16820d7812c9fa1d3bedc211e5f424bc4f2332c71",
+      "action_server/src/actions/server/_cli_impl.py": "5e0e0746113845ee760b2bfc7559bf5c8ffcf064f56b7d3118c8abb29339b05b",
+      "action_server/src/actions/server/_server.py": "18566e1d519e38237c7f125a56e5f92e7685b295114aa57e7505dd0e004b1a52",
+      "action_server/src/actions/server/mcp/setup_mcp_server_from_actions.py": "dae504d72caeb9063b851d30044e2496d9aa50c8a32af9725410c573ff26856a"
+    },
+    "cwd": "/tmp/work/p0-mcp-catalog-rollback-baseline/action_server",
+    "command": "PYTHONPATH=src:tests TMPDIR=/tmp/work /tmp/work/multipackage-runtime-acceptance/venv-primary/bin/python -m pytest tests/action_server_tests/test_cli_mcp_catalog_rollback.py -q --tb=short -p no:cacheprovider -p no:robocorp_log_pytest --basetemp=/tmp/work/p0-mcp-rollback-baseline-three-proof > /workspace/work/p0-mcp-catalog-rollback-evidence/baseline-three-case-pytest.log 2>&1",
+    "summary": "3 failed in 101.91s",
+    "log_sha256": "80eb5fbb6d040d68d10836fe78f264d3dfa907d4fccf67f5a00b1c41f6952167"
+  },
+  "source": {
+    "published_base_sha": "3d077296d1469b99e9fe50327e98c03a6f0aa58f",
+    "published_base_tree": "b6ee7d0fb7d5e669c78929da4ca08055866d3353",
+    "test_checkpoint": "01c5d0b15d037a53bf0542753f9b25a4252f5132",
+    "test_checkpoint_tree": "3774f216d3482d455c495bdcb879958ea6365323",
+    "runtime_origin": "/tmp/work/p0-mcp-catalog-rollback/action_server/src/actions/server/__init__.py",
+    "production_file_sha256": {
+      "action_server/src/actions/server/_action_package_handler.py": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64",
+      "action_server/src/actions/server/_actions_import.py": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3",
+      "action_server/src/actions/server/_cli_impl.py": "adb0caf0a207abc130386a0fdaf1fc88e09dc87d9d125e16a1ae4290ea3d92bb",
+      "action_server/src/actions/server/_server.py": "3be0ce254252211270fecf2906da2cec5d438b3203fefd68ad3d0731cf4d42bb",
+      "action_server/src/actions/server/mcp/setup_mcp_server_from_actions.py": "dae504d72caeb9063b851d30044e2496d9aa50c8a32af9725410c573ff26856a"
+    }
+  },
+  "core": {
+    "version": "1.0.2",
+    "loaded_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+    "loaded_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc"
+  },
+  "regression": {
+    "path": "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+    "sha256": "e9d40db8fde507f3c586ed5a5893e1daa06da27ae3373d2d82b11dd78963733a",
+    "patch_sha256": "08371396ef1d5dd388338aab6561b709d8a8f75b9d90fce5140bc2ec058ec11d",
+    "baseline_and_root_identical": true
+  },
+  "worker_run": {
+    "cwd": "/tmp/work/p0-mcp-catalog-rollback/action_server",
+    "command": "PYTHONPATH=src:tests TMPDIR=/tmp/work /tmp/work/multipackage-runtime-acceptance/venv-primary/bin/python -m pytest tests/action_server_tests/test_cli_mcp_catalog_rollback.py -q -p no:cacheprovider -p no:robocorp_log_pytest --basetemp=/tmp/work/p0-mcp-rollback-three-proof > /workspace/work/p0-mcp-catalog-rollback-evidence/three-case-pytest.log 2>&1",
+    "summary": "3 passed in 25.35s",
+    "log_sha256": "11430c8862aa6b5091944945e219bf083086f08bf8e094c578c8fb131c4c0262"
+  },
+  "root_independent_run": {
+    "cwd": "/workspace/work/community-resume/workitems-ci/action_server",
+    "command": "PYTHONPATH=src:tests:../actions/src:../devutils/src TMPDIR=/tmp/work /tmp/work/multipackage-runtime-acceptance/venv-primary/bin/python -m pytest -p action_server_tests.test_cli_multi_package_sync -q tests/action_server_tests/test_cli_mcp_catalog_rollback.py --tb=short > /tmp/work/actions-p0-evidence/independent-mcp-catalog-rollback.log 2>&1",
+    "summary": "3 passed in 27.48s",
+    "log_sha256": "bad4a6043579776dbe8f4414f53d584d74c47e6c7fa30c9f36665d306548238e",
+    "source_binding": "b6ee7d0 production plus identical new test and docs delta",
+    "resulting_local_checkpoint": "0fc30830fd520ca183f9a765bad9d9cd83ae59e3",
+    "resulting_local_tree": "3c26d276323b30ecce50106b7f7a9f2ff5236d29",
+    "publication_status_at_receipt": "unpublished local checkpoint; parent owns connector publication"
+  },
+  "before_baseline_and_source_facts": {
+    "enabled_capabilities": [
+      "package_a/retained_tool",
+      "package_a/retained_resource",
+      "package_a/retained_template",
+      "package_a/retained_prompt",
+      "package_b/sibling_tool"
+    ],
+    "actual_callbacks_passed": [
+      "MCP retained tool=last-good-tool",
+      "MCP sibling tool=last-good-sibling",
+      "MCP direct resource=last-good-resource",
+      "MCP template(alpha)=last-good-template-alpha",
+      "MCP prompt(alpha)=last-good-prompt-alpha",
+      "HTTP prompt(alpha)=last-good-prompt-alpha"
+    ],
+    "four_catalogs": "tools/list, resources/list, resources/templates/list, prompts/list: shared actions.catalogRevision; ttlMs=0; cacheScope=private"
+  },
+  "cases": [
+    {
+      "collision": "resource",
+      "baseline_result": "FAIL: duplicate candidate started instead of rejection; subprocess.TimeoutExpired after 30 seconds at test line 251. Initial catalogs and real callbacks passed.",
+      "worker_result": "PASS",
+      "root_result": "PASS",
+      "after_baseline_catalog_rows": [
+        {
+          "package": "package_a",
+          "action": "retained_prompt",
+          "enabled": false,
+          "source_location_kind": "live original package"
+        },
+        {
+          "package": "package_a",
+          "action": "retained_resource",
+          "enabled": false,
+          "source_location_kind": "live original package"
+        },
+        {
+          "package": "package_a",
+          "action": "retained_template",
+          "enabled": false,
+          "source_location_kind": "live original package"
+        },
+        {
+          "package": "package_a",
+          "action": "retained_tool",
+          "enabled": false,
+          "source_location_kind": "live original package"
+        },
+        {
+          "package": "package_b",
+          "action": "sibling_tool",
+          "enabled": false,
+          "source_location_kind": "snapshot"
+        },
+        {
+          "package": "package_c",
+          "action": "conflicting_resource",
+          "enabled": true,
+          "source_location_kind": "live original package"
+        }
+      ],
+      "baseline_server_log_sha256": "dcd28aedd5d0cb9b6fe831ab4019b045ac53e9579308a78ba49a37b0415accd8",
+      "sanitized_baseline_log_excerpts": [
+        "[2026-10-10 06:10:20] [INFO] Found new action package: package_a",
+        "[2026-10-10 06:10:20] [INFO] Found new action: retained_tool",
+        "[2026-10-10 06:10:20] [INFO] Found new action: retained_resource",
+        "[2026-10-10 06:10:20] [INFO] Found new action: retained_template",
+        "[2026-10-10 06:10:20] [INFO] Found new action: retained_prompt",
+        "[2026-10-10 06:10:20] [INFO] Found new action package: package_b",
+        "[2026-10-10 06:10:20] [INFO] Found new action: sibling_tool",
+        "[2026-10-10 06:10:21] [INFO] Application startup complete.",
+        "  \u26a1\ufe0f Local MCP endpoint: http://127.0.0.1:41197/mcp",
+        "[2026-10-10 06:10:24] [INFO] Disabling action: sibling_tool",
+        "[2026-10-10 06:10:24] [INFO] Found new action package: package_c",
+        "[2026-10-10 06:10:24] [INFO] Found new action: conflicting_resource",
+        "[2026-10-10 06:10:24] [INFO] Disabling action: retained_tool",
+        "[2026-10-10 06:10:24] [INFO] Disabling action: retained_resource",
+        "[2026-10-10 06:10:24] [INFO] Disabling action: retained_template",
+        "[2026-10-10 06:10:24] [INFO] Disabling action: retained_prompt",
+        "[2026-10-10 06:10:24] [INFO] Disabling action: sibling_tool",
+        "[2026-10-10 06:10:25] [INFO] Application startup complete.",
+        "  \u26a1\ufe0f Local MCP endpoint: http://127.0.0.1:39959/mcp"
+      ],
+      "cleanup": {
+        "candidate_and_seed_startup_complete": true,
+        "server_pids": [
+          {
+            "pid": 274237,
+            "exists": false
+          },
+          {
+            "pid": 274416,
+            "exists": false
+          }
+        ],
+        "loopback_ports": [
+          {
+            "port": 39959,
+            "connect_ex": 111
+          },
+          {
+            "port": 41197,
+            "connect_ex": 111
+          }
+        ]
+      }
+    },
+    {
+      "collision": "template",
+      "baseline_result": "FAIL: duplicate candidate started instead of rejection; subprocess.TimeoutExpired after 30 seconds at test line 251. Initial catalogs and real callbacks passed.",
+      "worker_result": "PASS",
+      "root_result": "PASS",
+      "after_baseline_catalog_rows": [
+        {
+          "package": "package_a",
+          "action": "retained_prompt",
+          "enabled": false,
+          "source_location_kind": "live original package"
+        },
+        {
+          "package": "package_a",
+          "action": "retained_resource",
+          "enabled": false,
+          "source_location_kind": "live original package"
+        },
+        {
+          "package": "package_a",
+          "action": "retained_template",
+          "enabled": false,
+          "source_location_kind": "live original package"
+        },
+        {
+          "package": "package_a",
+          "action": "retained_tool",
+          "enabled": false,
+          "source_location_kind": "live original package"
+        },
+        {
+          "package": "package_b",
+          "action": "sibling_tool",
+          "enabled": false,
+          "source_location_kind": "snapshot"
+        },
+        {
+          "package": "package_c",
+          "action": "conflicting_template",
+          "enabled": true,
+          "source_location_kind": "live original package"
+        }
+      ],
+      "baseline_server_log_sha256": "2c1d1add757d1450c7f0a97faec1b5faca4d27c3eb5e7593fb269687057025d2",
+      "sanitized_baseline_log_excerpts": [
+        "[2026-10-10 06:10:54] [INFO] Found new action package: package_a",
+        "[2026-10-10 06:10:54] [INFO] Found new action: retained_tool",
+        "[2026-10-10 06:10:54] [INFO] Found new action: retained_resource",
+        "[2026-10-10 06:10:54] [INFO] Found new action: retained_template",
+        "[2026-10-10 06:10:54] [INFO] Found new action: retained_prompt",
+        "[2026-10-10 06:10:54] [INFO] Found new action package: package_b",
+        "[2026-10-10 06:10:54] [INFO] Found new action: sibling_tool",
+        "[2026-10-10 06:10:55] [INFO] Application startup complete.",
+        "  \u26a1\ufe0f Local MCP endpoint: http://127.0.0.1:35207/mcp",
+        "[2026-10-10 06:10:58] [INFO] Disabling action: sibling_tool",
+        "[2026-10-10 06:10:58] [INFO] Found new action package: package_c",
+        "[2026-10-10 06:10:58] [INFO] Found new action: conflicting_template",
+        "[2026-10-10 06:10:58] [INFO] Disabling action: retained_tool",
+        "[2026-10-10 06:10:58] [INFO] Disabling action: retained_resource",
+        "[2026-10-10 06:10:58] [INFO] Disabling action: retained_template",
+        "[2026-10-10 06:10:58] [INFO] Disabling action: retained_prompt",
+        "[2026-10-10 06:10:58] [INFO] Disabling action: sibling_tool",
+        "[2026-10-10 06:10:59] [INFO] Application startup complete.",
+        "  \u26a1\ufe0f Local MCP endpoint: http://127.0.0.1:35703/mcp"
+      ],
+      "cleanup": {
+        "candidate_and_seed_startup_complete": true,
+        "server_pids": [
+          {
+            "pid": 274828,
+            "exists": false
+          },
+          {
+            "pid": 274928,
+            "exists": false
+          }
+        ],
+        "loopback_ports": [
+          {
+            "port": 35207,
+            "connect_ex": 111
+          },
+          {
+            "port": 35703,
+            "connect_ex": 111
+          }
+        ]
+      }
+    },
+    {
+      "collision": "prompt",
+      "baseline_result": "FAIL: duplicate candidate started instead of rejection; subprocess.TimeoutExpired after 30 seconds at test line 251. Initial catalogs and real callbacks passed.",
+      "worker_result": "PASS",
+      "root_result": "PASS",
+      "after_baseline_catalog_rows": [
+        {
+          "package": "package_a",
+          "action": "retained_prompt",
+          "enabled": false,
+          "source_location_kind": "live original package"
+        },
+        {
+          "package": "package_a",
+          "action": "retained_resource",
+          "enabled": false,
+          "source_location_kind": "live original package"
+        },
+        {
+          "package": "package_a",
+          "action": "retained_template",
+          "enabled": false,
+          "source_location_kind": "live original package"
+        },
+        {
+          "package": "package_a",
+          "action": "retained_tool",
+          "enabled": false,
+          "source_location_kind": "live original package"
+        },
+        {
+          "package": "package_b",
+          "action": "sibling_tool",
+          "enabled": false,
+          "source_location_kind": "snapshot"
+        },
+        {
+          "package": "package_c",
+          "action": "retained_prompt",
+          "enabled": true,
+          "source_location_kind": "live original package"
+        }
+      ],
+      "baseline_server_log_sha256": "aba7be0e78a1d4193dedcff44e21ef24aa21fe0bb739afaba0fb81ea3030759f",
+      "sanitized_baseline_log_excerpts": [
+        "[2026-10-10 06:11:28] [INFO] Found new action package: package_a",
+        "[2026-10-10 06:11:28] [INFO] Found new action: retained_tool",
+        "[2026-10-10 06:11:28] [INFO] Found new action: retained_resource",
+        "[2026-10-10 06:11:28] [INFO] Found new action: retained_template",
+        "[2026-10-10 06:11:28] [INFO] Found new action: retained_prompt",
+        "[2026-10-10 06:11:28] [INFO] Found new action package: package_b",
+        "[2026-10-10 06:11:28] [INFO] Found new action: sibling_tool",
+        "[2026-10-10 06:11:29] [INFO] Application startup complete.",
+        "  \u26a1\ufe0f Local MCP endpoint: http://127.0.0.1:40527/mcp",
+        "[2026-10-10 06:11:31] [INFO] Disabling action: sibling_tool",
+        "[2026-10-10 06:11:32] [INFO] Found new action package: package_c",
+        "[2026-10-10 06:11:32] [INFO] Found new action: retained_prompt",
+        "[2026-10-10 06:11:32] [INFO] Disabling action: retained_tool",
+        "[2026-10-10 06:11:32] [INFO] Disabling action: retained_resource",
+        "[2026-10-10 06:11:32] [INFO] Disabling action: retained_template",
+        "[2026-10-10 06:11:32] [INFO] Disabling action: retained_prompt",
+        "[2026-10-10 06:11:32] [INFO] Disabling action: sibling_tool",
+        "[2026-10-10 06:11:33] [INFO] Application startup complete.",
+        "  \u26a1\ufe0f Local MCP endpoint: http://127.0.0.1:33901/mcp"
+      ],
+      "cleanup": {
+        "candidate_and_seed_startup_complete": true,
+        "server_pids": [
+          {
+            "pid": 275074,
+            "exists": false
+          },
+          {
+            "pid": 275204,
+            "exists": false
+          }
+        ],
+        "loopback_ports": [
+          {
+            "port": 33901,
+            "connect_ex": 111
+          },
+          {
+            "port": 40527,
+            "connect_ex": 111
+          }
+        ]
+      }
+    }
+  ],
+  "source_after_rejection_assertions": [
+    "ActionPackage and Action rows exactly equal before state",
+    "snapshot-store entries exactly equal before state",
+    "all previously included catalog_actions.py bytes unchanged",
+    "sync-free restarted four catalogs exactly equal before responses including revision",
+    "all six old HTTP/MCP callback results execute again",
+    "catalog DB rows remain unchanged after restarted calls"
+  ],
+  "cleanup_summary": {
+    "remaining_baseline_processes": [],
+    "all_six_runtime_pids_absent": true,
+    "all_six_loopback_ports_connection_refused": true,
+    "scope": "Observed owned processes/ports only. subprocess.run timeout kills its owned candidate; zero minimum workers and no candidate calls, no candidate worker launches in logs. Seed/restart owners use scoped cleanup. No broad process kills."
+  },
+  "limits": [
+    "The baseline erased duplicate conflict by disabling A, so this is not evidence that duplicate-key helper accepts a duplicate.",
+    "Test skips when frozen executable override is set: source-only proof; not frozen/managed-RCC or hosted Windows duplicate-key acceptance.",
+    "Restart-based rejection proof does not prove failed live watched reload compensation or in-flight worker draining.",
+    "Safe identity compatibility of stale tool aliases remains open.",
+    "No ad-hoc toolchain mutation, RCC environment preparation or large build; existing cached RCC used for ordinary CLI local bootstrap/configuration/feedback."
+  ],
+  "documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_delta_file": "documentation-proposal.md in original rollback evidence directory; parent integrates accepted delta",
+    "learning": "Complete-catalog admission must precede package replacement and omission commits; helper collision correctness alone does not prove executable last-good preservation.",
+    "ambiguity_removed": "Separate deterministic current catalog, complete CLI rollback, failed live reload, historical alias safety and packaged execution evidence.",
+    "upstream_disposition": "none; Actions-local"
+  },
+  "hosted_targeted_gate_receipt": "pr279-hosted-targeted-gates-20261010.json"
+}

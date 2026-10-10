@@ -3821,7 +3821,7 @@
       "title": "feat: add a community Canvas template",
       "url": "https://github.com/joshyorko/actions/issues/127",
       "issue_updated_at": "2026-09-07T19:18:38Z",
-      "owner": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner": "Assigned #127 template implementation worktree; root integration owner",
       "owning_pr": null,
       "wave": "F",
       "state": "NOT_STARTED",
@@ -3937,7 +3937,7 @@
         128
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Build community Canvas template only after renderer/authoring contracts are proven.",
+      "next_bounded_action": "Review/publish local template checkpoint e10e9f60, then resolve TypeScript, opt-in Runtime/browser, Core 1.0.3 fresh-project dependency, and caller-authorized artifact resolver gates. Whole #127 remains open.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -8063,7 +8063,7 @@
         99
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Keep PR254 in REVIEW only; user is preparing Canvas/MCP issue revisions. Reconcile its proposal against the revised contract before any integration; public MCP Apps authoring remains scoped to #125.",
+      "next_bounded_action": "The bounded 100-A public-authoring and 100-B single-fixture Python/JSON roundtrip criteria are accepted. Keep Runtime dispatch, Workspace authorization, generalized CanvasSpec and whole-issue #100 acceptance open.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -8167,7 +8167,7 @@
         98
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Implement the versioned semantic CanvasSpec renderer after the #97/#98 acceptance gates are complete.",
+      "next_bounded_action": "The bounded 99-A system-Chromium/Runtime bridge criterion is accepted from the same-resource receipt. Preserve pinned Playwright, actual ChatGPT host and remaining whole-issue #99 criteria as separate open gates; #127 may consume the accepted slice.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -12648,7 +12648,7 @@
   "hosted_readback_at": "2026-10-08T22:15:42.516109+00:00",
   "evidence_archive": "evidence/community-20261009-convergence.zip",
   "evidence_archive_sha256": "0040cdd1a8e0cce22185179905349f01a0839b575a087f6d85128f37e061b237",
-  "integration_head": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+  "integration_head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
   "additional_compute": {
     "cloud": "Reused bounded Luna lanes plus one evidence-backed Sol review; no uncontrolled recursion or API fallback",
     "devsy": "WAITING FOR HIT THE GAS; pending request preserved without calls",
@@ -12669,15 +12669,15 @@
       "259": "PR259 at reported head prefix85f7 is independently accepted; hosted CI is running."
     }
   },
-  "checkpoint_status": "The exact Linux installed-wheel/offline template-creation criterion for #126 is accepted: Runtime 1.0.3 CPython 3.12 wheel SHA-256 9385343a783d368bd653e42265671e1001d3b701c42d0d01fd3648ed92a219d8 created the Showcase and Basic project trees byte-for-byte from the embedded bundle; Basic authored devdata is preserved, pip check passes, and the loopback-proxied traces contain no socket/connect/DNS calls. This is one Linux criterion only; independent artifact verification and remaining #126 protocol/host acceptance remain separate. Whole #126 remains open. Latest underlying status inputs are time-bounded: 05:08:51Z installed-wheel proof, 05:06Z branch readback, and 05:05Z workspace/dispatch diagnostics. Devsy v2 outcomes remain unknown after KubernetesError and were not replayed.",
-  "checkpoint_observed_at": "2026-10-10T05:08:51Z",
+  "checkpoint_status": "Sol accepted the scoped #279 production source contract, and root ran the composed pinned live-catalog tests: 4 passed in 34.56s. This is source/local evidence only; the reviewed staging tree has no exact published PR head yet, so current-head hosted admission remains open. The #279 baseline correction and #127 local template limits remain as recorded in the preceding dated amendments.",
+  "checkpoint_observed_at": "2026-10-10T06:42:00Z",
   "execution_graph": {
     "file": "community-execution-graph.json",
     "counts": {
       "READY": 0,
-      "ACTIVE": 7,
+      "ACTIVE": 8,
       "REVIEW": 8,
-      "BLOCKED": 29,
+      "BLOCKED": 28,
       "INTEGRATED": 9,
       "COMPLETE": 1
     },
@@ -12705,15 +12705,15 @@
     "manifest": "evidence/canvas-execution-graph-amendment-20261009-v4.manifest.json"
   },
   "current_integration_checkpoint": {
-    "pr": 277,
-    "source_head": "bf435498de94acc5e64f89dfe3dcd3916b5046f3",
-    "merge_sha": "6d438feb6c92f8bb01428f665ac423fb101b4017",
-    "tree": "92e79c92f2f64585cbe66f068f5757f205fbe976",
-    "merged_at": "2026-10-10T03:07:51Z",
-    "checks": "16 exact-head checks passed; normal guarded merge with root-confirmed current-ref and conflict-free/disjoint delta checks. The immediately preceding PR276 merge is recorded in the dated receipt.",
-    "scope_limit": "Bounded wheel/interpreter checkpoint; not full combined candidate validation or whole #208 acceptance.",
-    "receipt": "evidence/convergence-followup-20261010T0310Z.json",
-    "receipt_sha256": "83ddc07d6f0ebe387d2d54e2de57dca54bc6d7c8fc233185c24e2c8b74d36267"
+    "pr": 280,
+    "source_head": "0357585b51864e158f50c7479af001ba6daf5b06",
+    "merge_sha": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+    "merged_at": "2026-10-10T06:29Z",
+    "checks": "The PR head had 11 successful hosted checks before current-base validation; the reviewed merge tree matched the staged tested tree, and 33 schema tests passed locally after the pinned ignored RCC cache was restored.",
+    "scope_limit": "Bounded schema/fixture checkpoint; no production compiler, publication, or whole #130 acceptance.",
+    "receipt": "evidence/program-amendment-20261010T0629Z.json",
+    "receipt_sha256": "26652a8af24345c15cf0e41cb847c24fc51c464f74a866cb0664ec749c14eb38"
   },
   "prior_current_integration_checkpoint_pr258": {
     "pr": 258,
@@ -14155,24 +14155,612 @@
         }
       ],
       "upstream_disposition": "none; no confirmed third-party defect is established by this bounded acceptance."
+    },
+    {
+      "id": "program-amendment-20261010T0625Z",
+      "observed_at_utc": "2026-10-10T06:25:00Z",
+      "summary": "Root accepted five bounded Canvas producer criteria for template work: 100-A public authoring, 100-B one shared fixture roundtrip, 99-A same-resource Actions Runtime plus system Chromium, 98 consumed-resource artifact only, and 125 public-package authoring boundary only. #127-template is ACTIVE and implementation is NOT_COMPLETE in the assigned isolated template worktree. PR281’s exact source head is now merged at 9afa0b22; its 16 checks were green before merge. The original 54 issue contracts/states remain unchanged and no whole #99/#100/#98/#125/#127 acceptance is claimed. PR273 head 6a852ed remains a separate P0/CI candidate with 12 checks successful, 8 in progress, and one skipped at the 06:25Z readback.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": true,
+        "raw_contracts_or_historical_archives_changed": false,
+        "whole_issue_acceptance_changed": false,
+        "scope": "Only the operational graph classifications/slice criteria changed; all retained raw issue states and acceptance contract bytes remain unchanged."
+      },
+      "template_implementation": {
+        "issue": 127,
+        "slice": "127-template",
+        "status": "ACTIVE_IMPLEMENTATION_NOT_COMPLETE",
+        "worktree": "/tmp/work/actions-worktrees/canvas-template-20261010",
+        "branch": "feat/canvas-template-20261010",
+        "base_head": "13db7030416f7b64f9a577b800a629549e23903e",
+        "observed_dirty_paths": [
+          "templates/canvas-query/",
+          "action_server/src/actions/server/templates/action-templates.yaml",
+          "action_server/src/actions/server/templates/action-templates.zip",
+          "action_server/src/actions/server/templates/zips/canvas-query.zip",
+          "action_server/tests/action_server_tests/test_template_bundle.py",
+          "action_server/tests/action_server_tests/mcp/test_canvas_query_template.py",
+          "action_server/frontend/apps/canvas-view/canvas-template-runtime.spec.ts",
+          "action_server/frontend/playwright.canvas-template.config.ts",
+          "templates/packaging/templates-prod.json"
+        ],
+        "scope_limit": "New packaged template and tests only; no shared renderer/API edits. Files are in progress and whole #127 remains open."
+      },
+      "canvas_acceptance_basis": {
+        "runtime_bridge_source": "PR281 head 13db7030416f7b64f9a577b800a629549e23903e was merged normally into integration at 9afa0b22b856a8047fa7774044d403c28b328fb5. It carries the reviewed PR263/266/267 source and merged PR270 metadata fix.",
+        "runtime_bridge_receipt": "The test used an exact candidate Core wheel labeled 1.0.2, bound by direct_url/module/prefix; it is not proof against the registry-published 1.0.2 artifact. The same resource URI/MIME/SHA ran through Python MCP and system Chromium, with five persisted Runtime Runs. Pinned Playwright browser NOT_RUN; actual ChatGPT host NOT_RUN.",
+        "authoring_log_summary": "3 passed in 22.88s; receipt log is only 161 bytes and records test summary; not whole package/full host acceptance.",
+        "source_test_work": "The #127 template implementation began from the exact PR281 head; current untracked/modified template files show active work, not a completed or reviewed implementation.",
+        "version_boundary": "The public metadata API used by the template work is not in the published Core 1.0.2 artifact. Core 1.0.3 is unpublished; no registry publication or fresh-install compatibility claim is made."
+      },
+      "current_pull_requests": [
+        {
+          "pr": 281,
+          "head": "13db7030416f7b64f9a577b800a629549e23903e",
+          "merge_commit": "9afa0b22b856a8047fa7774044d403c28b328fb5",
+          "base": "integration/community-release-20261008",
+          "state": "MERGED",
+          "captured_checks": {
+            "success": 16,
+            "in_progress": 0,
+            "failure": 0
+          },
+          "checks_completed_before_merge": true,
+          "capture": "evidence/pr281-checkpoint-13db703-20261010T0625Z.json",
+          "whole_issue_acceptance": "not claimed"
+        },
+        {
+          "pr": 280,
+          "head": "0357585b51864e158f50c7479af001ba6daf5b06",
+          "tree": "01966c6360aafdca7b04291f43bb1c32dfb9d553",
+          "state": "OPEN",
+          "mergeability": "CLEAN",
+          "captured_checks": {
+            "success": 11,
+            "in_progress": 0,
+            "failure": 0
+          },
+          "capture": "evidence/pr280-checkpoint-0357585-20261010T0625Z.json",
+          "checks_completed_before_pr281_merge": true,
+          "next_gate": "Revalidate on the target after PR281 advanced integration; review and current-base admission remain separate.",
+          "scope_limit": "not production compiler, no full #130 acceptance"
+        },
+        {
+          "pr": 273,
+          "head": "6a852ed27c1a6c1ac6d2923c43ff9ae14fb064e3",
+          "tree": "66f5ff44ad917cec9b48eb681e4d6c3fc39ab102",
+          "base": "integration/community-release-20261008",
+          "state": "OPEN",
+          "mergeability": "UNKNOWN at 06:25Z",
+          "captured_checks": {
+            "success": 12,
+            "in_progress": 8,
+            "failure": 0,
+            "skipped": 1
+          },
+          "capture": "evidence/pr273-checkpoint-6a852ed-20261010T0625Z.json",
+          "scope_limit": "P0 rollback regression is a bounded candidate gate; this captured PR-wide CI is not complete."
+        }
+      ],
+      "supplemental_issue_gates": [
+        {
+          "issue": 279,
+          "title": "Preserve sibling packages during multi-directory actions-sync startup",
+          "status": "OPEN",
+          "priority": "P0",
+          "url": "https://github.com/joshyorko/actions/issues/279",
+          "accounting_position": "outside_original_54_issue_accounting",
+          "parent_issue": 101,
+          "parent_relationship": "coordination only; no execution prerequisite",
+          "scope": "Three public resource/template/prompt duplicate-admission cases; preserve prior catalog and callbacks on rejection. Does not prove broader managed-RCC rollback, whole issue, or all platform acceptance.",
+          "implementation_status": "Three public resource/template/prompt duplicate-admission cases passed in Sol’s bounded receipt on production source 3d077 (tree b6ee7d0), with baseline 84b8 failing all three. PR273 head 6a852ed is the current candidate; at 06:25Z its check readback was 12 success, 8 in progress, 1 skipped. No whole #279 or platform-wide acceptance is claimed.",
+          "evidence_path": "evidence/pr279-mcp-catalog-rollback-20261010.json",
+          "evidence_sha256": "abaf0faa531906cd1b8ab3f19e5a2d4ed1fa74cf52a7c6608932d3cd7477491b"
+        }
+      ],
+      "accepted_scoped_criteria": [
+        {
+          "criterion_id": "100-A:bounded-public-authoring",
+          "owner_issue": 100,
+          "status": "ACCEPTED_BOUNDED_SLICE",
+          "consumer_issue": 100,
+          "consumer_slice": "100-A",
+          "description": "Public MCP App decorator and candidate-wheel authoring seam for the shared Canvas fixture; this is not full #100 or deployed authorization acceptance.",
+          "decision": "Root accepted the bounded 100-A source criterion after LunaCanvas reviewed the exact Runtime/browser receipt and authoring test log. Whole #100 and deployment authorization remain open.",
+          "consumer_slice_description": "Public tool UI metadata and ui:// resource authoring/serving",
+          "consumer_slice_status": "ACCEPTED_BOUNDED_SLICE; not whole #100 acceptance.",
+          "gate_scope": "Public decorator/authoring seam only; excludes full #100 production, host acceptance, and package publication.",
+          "consumer_issue_reason": "The bounded public authoring slice 100-A is accepted. The single shared fixture roundtrip 100-B is also accepted; Runtime dispatch, Workspace authorization and whole #100 acceptance remain open.",
+          "consumer_issue_next_action": "Preserve the shared fixture as the only 100-B interchange target; leave Runtime dispatch, Workspace authorization and whole-issue #100 acceptance as separate open gates.",
+          "evidence_path": "evidence/canvas-authoring-final-v2.log",
+          "evidence_sha256": "53a2768f84bbca9f76afad721ef831f9a89222b8441d5d652c751fa869b74a4d",
+          "superseded_issue_level_prerequisites": []
+        },
+        {
+          "criterion_id": "100-B:single-fixture-python-json-roundtrip",
+          "owner_issue": 100,
+          "status": "ACCEPTED_SINGLE_FIXTURE_ROUNDTRIP_ONLY",
+          "consumer_issue": 100,
+          "consumer_slice": "100-B",
+          "description": "Python/JSON roundtrip for the one shared Canvas fixture and its schema; this does not establish a generalized CanvasSpec contract.",
+          "decision": "Root accepted only the single-fixture 100-B slice based on the bounded authoring test receipt; generalized CanvasSpec and whole #100 remain open.",
+          "consumer_slice_description": "Versioned CanvasSpec interchange and Python/JSON/TypeScript fixture",
+          "consumer_slice_status": "ACCEPTED_SINGLE_FIXTURE_ROUNDTRIP_ONLY; generalized CanvasSpec and whole #100 remain open.",
+          "gate_scope": "One fixture and Python/JSON roundtrip only; no generalized interchange schema or whole #100 acceptance.",
+          "consumer_issue_reason": "The bounded public authoring 100-A and single-fixture Python/JSON roundtrip 100-B are accepted. Runtime dispatch, Workspace authorization, generalized CanvasSpec and whole #100 remain open.",
+          "consumer_issue_next_action": "Keep the accepted roundtrip bound to the shared fixture; pursue any broader schema only through a separately reviewed criterion.",
+          "evidence_path": "evidence/canvas-authoring-final-v2.log",
+          "evidence_sha256": "53a2768f84bbca9f76afad721ef831f9a89222b8441d5d652c751fa869b74a4d",
+          "superseded_issue_level_prerequisites": []
+        },
+        {
+          "criterion_id": "99-A:system-chromium-runtime-bridge",
+          "owner_issue": 99,
+          "status": "ACCEPTED_SYSTEM_CHROMIUM_RUNTIME_SLICE",
+          "consumer_issue": 99,
+          "consumer_slice": "99-A",
+          "description": "The same built MCP App resource was exercised through Actions Runtime and the public bridge with system Chromium, with five persisted Runtime runs. Pinned Playwright browser, actual ChatGPT host, and whole #99 are not proven.",
+          "decision": "Root accepted bounded 99-A evidence after independent Canvas review. The exact receipt binds wheel, installed module, resource hash, system Chromium and five persisted runs; pinned Playwright and actual host remain unverified.",
+          "consumer_slice_description": "Portable MCP App View renderer/resource bridge using the agreed fixture",
+          "consumer_slice_status": "ACCEPTED_SYSTEM_CHROMIUM_RUNTIME_SLICE; pinned Playwright, actual ChatGPT host and whole #99 remain open.",
+          "gate_scope": "Same resource through Runtime and system Chromium only; not pinned Playwright, ChatGPT host, full renderer acceptance, or whole #99.",
+          "consumer_issue_reason": "The bounded 99-A Runtime/resource/browser slice is accepted on the shared fixture. Pinned Playwright, actual ChatGPT host and remaining whole-issue #99 criteria remain open.",
+          "consumer_issue_next_action": "Proceed with #127 using the accepted system-Chromium slice; retain pinned Playwright, actual ChatGPT host and whole #99 criteria as separate gates.",
+          "evidence_path": "evidence/canvas-runtime-bridge-receipt-final-v2.json",
+          "evidence_sha256": "441dadb7ddab6b72da423b2b8767398d5a01449261bc013ac16e408511192e2c",
+          "superseded_issue_level_prerequisites": []
+        },
+        {
+          "criterion_id": "98:canvas-artifact-consumed-resource-127",
+          "owner_issue": 98,
+          "status": "ACCEPTED_CONSUMED_RESOURCE_SLICE",
+          "consumer_issue": 127,
+          "consumer_slice": "127-template",
+          "description": "The template can consume the exact Canvas resource artifact and its recorded MIME/URI/SHA; this does not accept full #98 artifact inventory, frozen package, or reproducibility requirements.",
+          "decision": "Root accepted the consumed-resource criterion for starting the bounded template slice; whole #98 remains open.",
+          "consumer_slice_description": "Packaged Canvas query template using accepted authoring and renderer slices",
+          "consumer_slice_status": "READY_FOR_BOUNDED_TEMPLATE_IMPLEMENTATION; implementation is ACTIVE and NOT_COMPLETE.",
+          "gate_scope": "Consume the proven resource artifact only; excludes whole #98 artifact inventory, frozen-package, and reproducibility acceptance.",
+          "consumer_issue_reason": "#127-template is ACTIVE after bounded authoring, single-fixture roundtrip, system-Chromium Runtime bridge, consumed-resource and public-package-boundary criteria were accepted. Template implementation is in progress and NOT_COMPLETE.",
+          "consumer_issue_next_action": "Complete and validate the isolated Canvas query template against only the accepted slices; do not edit common renderer/API scope or promote this work to whole #127/#98/#125 acceptance.",
+          "consumer_issue_classification": "ACTIVE",
+          "evidence_path": "evidence/canvas-runtime-bridge-receipt-final-v2.json",
+          "evidence_sha256": "441dadb7ddab6b72da423b2b8767398d5a01449261bc013ac16e408511192e2c",
+          "superseded_issue_level_prerequisites": []
+        },
+        {
+          "criterion_id": "125:public-package-boundary-template-127",
+          "owner_issue": 125,
+          "status": "ACCEPTED_TEMPLATE_PUBLIC_BOUNDARY_ONLY",
+          "consumer_issue": 127,
+          "consumer_slice": "127-template",
+          "description": "Use the public decorator/candidate-wheel authoring boundary for this template. No Canvas package archive or full #125 acceptance is established.",
+          "decision": "Root accepted the bounded public-package boundary consumed by #127 after source review; whole #125 and Canvas package archive remain open.",
+          "consumer_slice_description": "Packaged Canvas query template using accepted authoring and renderer slices",
+          "consumer_slice_status": "READY_FOR_BOUNDED_TEMPLATE_IMPLEMENTATION; implementation is ACTIVE and NOT_COMPLETE.",
+          "gate_scope": "Relevant public decorator/candidate-wheel authoring boundary only; no Canvas package archive or whole #125 acceptance.",
+          "consumer_issue_reason": "#127-template is ACTIVE after bounded authoring, single-fixture roundtrip, system-Chromium Runtime bridge, consumed-resource and public-package-boundary criteria were accepted. Template implementation is in progress and NOT_COMPLETE.",
+          "consumer_issue_next_action": "Complete and validate the isolated Canvas query template against only the accepted slices; do not edit common renderer/API scope or promote this work to whole #127/#98/#125 acceptance.",
+          "consumer_issue_classification": "ACTIVE",
+          "evidence_path": "evidence/canvas-runtime-bridge-receipt-final-v2.json",
+          "evidence_sha256": "441dadb7ddab6b72da423b2b8767398d5a01449261bc013ac16e408511192e2c",
+          "superseded_issue_level_prerequisites": []
+        }
+      ],
+      "evidence": [
+        {
+          "path": "evidence/canvas-authoring-final-v2.log",
+          "size_bytes": 161,
+          "sha256": "53a2768f84bbca9f76afad721ef831f9a89222b8441d5d652c751fa869b74a4d"
+        },
+        {
+          "path": "evidence/canvas-runtime-bridge-receipt-final-v2.json",
+          "size_bytes": 2858,
+          "sha256": "441dadb7ddab6b72da423b2b8767398d5a01449261bc013ac16e408511192e2c"
+        },
+        {
+          "path": "evidence/pr279-mcp-catalog-rollback-20261010.json",
+          "size_bytes": 18416,
+          "sha256": "abaf0faa531906cd1b8ab3f19e5a2d4ed1fa74cf52a7c6608932d3cd7477491b"
+        },
+        {
+          "path": "evidence/pr279-mcp-catalog-rollback-20261010.md",
+          "size_bytes": 4555,
+          "sha256": "347f47493813a5ecb51fdc54030aa39f43688f74000970d176a7eb97769292c1"
+        },
+        {
+          "path": "evidence/pr273-checkpoint-6a852ed-20261010T0625Z.json",
+          "size_bytes": 7292,
+          "sha256": "df247262ddf63092bf21fc9ed2c549bfb0126f8a4f2e663ecad277ce3b2708e4"
+        },
+        {
+          "path": "evidence/pr280-checkpoint-0357585-20261010T0625Z.json",
+          "size_bytes": 4229,
+          "sha256": "80bdba59610e06cb41b6159dd80d7254a363fc14b0c830bb62114d612c17aa3f"
+        },
+        {
+          "path": "evidence/pr281-checkpoint-13db703-20261010T0625Z.json",
+          "size_bytes": 5820,
+          "sha256": "0322b744b98a88c3264cfe872148d05ae1092aeda8331bcfebc71f272b8e32b3"
+        }
+      ],
+      "upstream_disposition": "none; all bounded criteria and the P0 rollback regression concern the maintained Actions repository, with no confirmed third-party defect.",
+      "current_active_workers": {
+        "127": "Assigned template owner is implementing #127 in /tmp/work/actions-worktrees/canvas-template-20261010, branch feat/canvas-template-20261010, based at 13db7030416f7b64f9a577b800a629549e23903e. At 2026-10-10T06:22Z, template sources/tests and bundle metadata were modified or untracked; implementation and review are incomplete.",
+        "99": "No current worker activity is asserted. Bounded 99-A system-Chromium/Runtime criterion accepted from PR281 evidence; pinned Playwright, actual ChatGPT host and whole #99 remain open.",
+        "100": "No current worker activity is asserted. Bounded 100-A authoring and 100-B single-fixture roundtrip criteria accepted from PR281 evidence; Runtime dispatch, Workspace authorization, generalized CanvasSpec and whole #100 remain open."
+      },
+      "worker_stage_snapshot": "2026-10-10T06:22:05Z",
+      "issue_metadata_updates": {
+        "99": {
+          "next_bounded_action": "The bounded 99-A system-Chromium/Runtime bridge criterion is accepted from the same-resource receipt. Preserve pinned Playwright, actual ChatGPT host and remaining whole-issue #99 criteria as separate open gates; #127 may consume the accepted slice."
+        },
+        "100": {
+          "next_bounded_action": "The bounded 100-A public-authoring and 100-B single-fixture Python/JSON roundtrip criteria are accepted. Keep Runtime dispatch, Workspace authorization, generalized CanvasSpec and whole-issue #100 acceptance open."
+        },
+        "127": {
+          "owner": "Assigned #127 template implementation worktree; root integration owner",
+          "next_bounded_action": "Complete the assigned isolated Canvas query template and focused validation using only the accepted 100-A/100-B/99-A and relevant 98/125 criteria. Preserve the single fixture and system-Chromium limits; do not broaden to shared renderer/API or claim whole #127 acceptance."
+        }
+      }
+    },
+    {
+      "id": "program-amendment-20261010T0629Z",
+      "observed_at_utc": "2026-10-10T06:29:20Z",
+      "summary": "PR280 merged normally at 35b32e76 into integration; its merge tree matches the tested current-base tree. PR281 remains merged at 9afa0b22. The five accepted bounded Canvas criteria remain valid; #127 has a local template implementation checkpoint at 963d300e, but publication, independent review, and browser/Runtime acceptance remain pending. PR273 remains an open candidate; its 06:25 check snapshot predates the new integration head and must not be treated as current-base admission.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "raw_contracts_or_historical_archives_changed": false,
+        "whole_issue_acceptance_changed": false,
+        "scope": "Dated convergence update only. No retained issue contract/state/comment/dependency or historical ZIP was rewritten; the earlier accepted scoped criteria remain in the 06:25 amendment."
+      },
+      "integration_readback": {
+        "verified_by_root": "2026-10-10T06:29Z",
+        "merge_commit": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+        "merge_tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+        "reviewed_current_base_tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+        "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "cohort_counts": {
+          "integrated": 22,
+          "open_blocked": 8,
+          "merge_ready": 0
+        },
+        "pr280_tests": "33 schema tests passed in 1.29s after restoring the exact pinned ignored RCC cache; the earlier setup-error run is retained as a separate failed attempt.",
+        "test_log_sha256": "0aa35806f74ad78d104f14e827f4ae9c0f67335f4fc6212d8d54f7193ab495f4"
+      },
+      "pr_status": [
+        {
+          "pr": 280,
+          "head": "0357585b51864e158f50c7479af001ba6daf5b06",
+          "merge_commit": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+          "tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+          "state": "MERGED",
+          "scope_limit": "Schema/fixture checkpoint only; no full #130 acceptance or production compiler claim."
+        },
+        {
+          "pr": 281,
+          "head": "13db7030416f7b64f9a577b800a629549e23903e",
+          "merge_commit": "9afa0b22b856a8047fa7774044d403c28b328fb5",
+          "state": "MERGED",
+          "captured_checks": {
+            "success": 16,
+            "failure": 0
+          },
+          "scope_limit": "Bounded authoring/runtime bridge criteria only; whole #99/#100 remain open."
+        },
+        {
+          "pr": 273,
+          "head": "6a852ed27c1a6c1ac6d2923c43ff9ae14fb064e3",
+          "tree": "66f5ff44ad917cec9b48eb681e4d6c3fc39ab102",
+          "state": "OPEN",
+          "last_captured_checks_at": "2026-10-10T06:25:00Z",
+          "last_captured_checks": {
+            "success": 12,
+            "in_progress": 8,
+            "failure": 0,
+            "skipped": 1
+          },
+          "capture": "evidence/pr273-checkpoint-6a852ed-20261010T0625Z.json",
+          "current_gate": "The captured checks predate PR280 advancing integration; current-base merge-tree checks and review remain outstanding."
+        }
+      ],
+      "template_checkpoint": {
+        "issue": 127,
+        "slice": "127-template",
+        "local_commit": "963d300edf6197caca59a901c2058a78536c700c",
+        "tree": "ef758e2d77fbfa575651beafdaf8855ac026f906",
+        "parent": "13db7030416f7b64f9a577b800a629549e23903e",
+        "branch": "feat/canvas-template-20261010",
+        "state": "LOCAL_UNPUSHED_UNREVIEWED",
+        "reported_validation": {
+          "template_unit_tests": "3 passed",
+          "fresh_extraction_and_resource_digest": "passed",
+          "bundle_membership_and_inventory": "passed",
+          "deterministic_packager_comparison": "passed",
+          "ruff_prettier": "passed",
+          "typescript": "blocked: existing frontend cache lacks @modelcontextprotocol/client",
+          "opt_in_runtime_browser": "NOT_RUN",
+          "full_diff_check": "verbatim HTML trailing spaces remain in embedded resource"
+        },
+        "remaining_gates": [
+          "Root source review and publication of the checkpoint",
+          "Resolve or provide the declared frontend dependency for TypeScript validation",
+          "Run the opt-in Runtime/browser acceptance when the required environment is available",
+          "Core 1.0.3 dependency must be published before fresh-project resolution; no publication is claimed"
+        ],
+        "scope_limit": "New Canvas query template only. No common renderer/API change, artifact resolver, whole #127 acceptance, ChatGPT acceptance, or registry-published Core compatibility proof."
+      },
+      "pr279_windows_receipt": {
+        "source_tree": "b6ee7d0fb7d5e669c78929da4ca08055866d3353",
+        "source_head": "3d077296d1469b99e9fe50327e98c03a6f0aa58f",
+        "receipt": "evidence/pr279-windows-hosted-final-20261010.json",
+        "sha256": "ad4dccd90ec2d3143a03a8e0209f5b8cbf2b8e23ba8f410b5126ea4d2f83e015",
+        "size_bytes": 1417,
+        "scope_limit": "Windows hosted result bound to the earlier 3d077 source/tree; it does not establish current 6a852ed combined PR acceptance or whole #279 acceptance."
+      },
+      "issue_metadata_updates": {
+        "127": {
+          "next_bounded_action": "Review and publish the local 963d300e Canvas query-template checkpoint, then close its focused packaging/Runtime/browser gates. The local template tests and extraction checks are reported passing; TypeScript and opt-in Runtime/browser remain unverified, and fresh projects still require Core 1.0.3 publication. Do not claim whole #127 acceptance."
+        }
+      },
+      "evidence": [
+        {
+          "path": "evidence/pr279-windows-hosted-final-20261010.json",
+          "sha256": "ad4dccd90ec2d3143a03a8e0209f5b8cbf2b8e23ba8f410b5126ea4d2f83e015",
+          "size_bytes": 1417
+        },
+        {
+          "path": "evidence/pr273-checkpoint-6a852ed-20261010T0625Z.json",
+          "sha256": "df247262ddf63092bf21fc9ed2c549bfb0126f8a4f2e663ecad277ce3b2708e4",
+          "size_bytes": 7292
+        }
+      ],
+      "upstream_disposition": "none; no confirmed third-party defect was identified."
+    },
+    {
+      "id": "program-amendment-20261010T0639Z",
+      "observed_at_utc": "2026-10-10T06:39:51Z",
+      "summary": "A source-origin correction narrows the earlier #279 baseline claim: the 101.91s run was mixed-seed candidate-admission evidence, not a fully isolated 84b8 lifecycle run. Exact-origin 84b8 fails earlier at initial A MCP lookup before duplicate admission; exact-origin repaired three-cell and watched failure/recovery tests pass on production source 3d077. The latest template checkpoint is local e10e9f60; it remains unpushed and incomplete. PR273 is still not admitted on the updated integration base.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "raw_contracts_or_historical_archives_changed": false,
+        "whole_issue_acceptance_changed": false,
+        "scope": "Adds dated corrections and bounded local checkpoint facts only. The 06:25/06:29 records and source receipts are preserved; no original issue contract, state, comment, dependency, or historical ZIP is rewritten."
+      },
+      "supersedes_or_clarifies": {
+        "prior_amendment": "program-amendment-20261010T0625Z",
+        "prior_receipt_sha256": "abaf0faa531906cd1b8ab3f19e5a2d4ed1fa74cf52a7c6608932d3cd7477491b",
+        "clarification": "The earlier 101.91s baseline is a mixed-seed candidate-admission observation only. Relative PYTHONPATH plus changed child cwd selected the prepared editable production runtime during initial seed; the candidate CLI command later selected 84b8. The exact-origin 84b8 run fails before candidate mutation at initial healthy retained_tool MCP lookup, so it is not a duplicate-admission rollback baseline. Preserve all earlier logs and positives with these narrowed source-origin labels."
+      },
+      "pr279_exact_origin_evidence": {
+        "checkpoint": "508175cb2f07243f2bd337965fc9a612b87d193d",
+        "tree": "5b65129512c876c55119edcfdd9457930850782c",
+        "status": "LOCAL_TEST_ONLY_UNPUBLISHED",
+        "production_source": "Five Runtime production files byte-match published 3d077296/tree b6ee7d0; no Runtime production edits in the checkpoint.",
+        "three_cell_repaired": "3 passed in 27.65s; child Runtime source pinned by absolute path.",
+        "three_cell_baseline": "Exact 84b8c70a/tree b2d4a195; 3 failed in 7.66s at initial healthy retained_tool lookup with -32603/KeyError after per-package startup disabled A. No duplicate-candidate stage was reached.",
+        "watched_failure_recovery": "1 passed in 9.94s: actual two-package watcher rejects malformed decorated B without changing admitted state, then admits valid B2; actual A/B MCP calls and restart preserved.",
+        "runtime_provenance": "All 16 persisted worker results record installed Core 1.0.2 origin, version and module hash d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc; owned children expose absolute isolated Runtime PYTHONPATH.",
+        "limitations": [
+          "Local test-only checkpoint is not yet published or exact-head CI validated.",
+          "No provider-specific real-RCC rollback acceptance; opt-in real-RCC skip remains.",
+          "No frozen-package duplicate rollback proof or in-flight worker draining.",
+          "The supported catalog policy is current-catalog identity with rediscovery after changes; stable aliases/list-to-call fencing are not implemented.",
+          "No third-party defect is established; upstream disposition none."
+        ],
+        "evidence": [
+          {
+            "path": "evidence/pr279-origin-correction-live-reload-20261010.json",
+            "size_bytes": 20291,
+            "sha256": "fb0ab983802e664393717462f8e364f3576cbb4c28ecec71908978dcd8aa21e8"
+          },
+          {
+            "path": "evidence/pr279-origin-correction-live-reload-20261010.md",
+            "size_bytes": 6967,
+            "sha256": "e3975d69695f273caa5cfb40d23554f1e279f63b88e6322805009f193e750aff"
+          }
+        ]
+      },
+      "template_checkpoint": {
+        "issue": 127,
+        "slice": "127-template",
+        "commit": "e10e9f60bdfe215b5783df0b719d80169e0e1a0c",
+        "tree": "e9d8ee72440ed086bb01d14ed8d2d14e84c2db60",
+        "branch": "feat/canvas-template-20261010",
+        "base": "13db7030416f7b64f9a577b800a629549e23903e",
+        "state": "LOCAL_UNPUSHED_UNREVIEWED",
+        "reported_validation": "3 template tests plus 2 offline-bundle/deterministic-generation tests passed; exact resource whitespace is preserved. TypeScript/Prettier remain blocked by the shared frontend cache/lockfile mismatch.",
+        "remaining": [
+          "Opt-in Runtime/browser test NOT_RUN.",
+          "Core 1.0.3 is unpublished; fresh project resolution is blocked.",
+          "A caller-authorized artifact resolver is not implemented, so artifact retrieval remains blocked.",
+          "Root source review and publication remain outstanding."
+        ],
+        "scope_limit": "Template example only; no whole #127 acceptance, pinned ChatGPT, package publication, or generalized artifact resolver."
+      },
+      "pr273_status": {
+        "head": "6a852ed27c1a6c1ac6d2923c43ff9ae14fb064e3",
+        "tree": "66f5ff44ad917cec9b48eb681e4d6c3fc39ab102",
+        "state": "OPEN",
+        "last_captured_checks_at": "2026-10-10T06:25:00Z",
+        "last_captured_checks": {
+          "success": 12,
+          "in_progress": 8,
+          "failure": 0,
+          "skipped": 1
+        },
+        "next_gate": "Checks predate integration 35b32e76 and the planned test-only P0 checkpoint addition; root owns publication/current-base full-head validation. No current-base pass is claimed."
+      },
+      "integration_checkpoint": {
+        "head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+        "tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+        "pr280": "Merged normally; exact merge tree matched reviewed staged tree and 33 schema tests passed after restoring the pinned ignored RCC cache.",
+        "pr281": "Merged normally at 9afa0b22b856a8047fa7774044d403c28b328fb5; 16 checks were successful before merge.",
+        "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "cohort": {
+          "integrated": 22,
+          "open_blocked": 8,
+          "merge_ready": 0
+        }
+      },
+      "issue_metadata_updates": {
+        "127": {
+          "next_bounded_action": "Review/publish the local e10e9f60 template checkpoint, then resolve TypeScript, opt-in Runtime/browser, Core 1.0.3 fresh-project dependency, and caller-authorized artifact resolver gates. Do not claim whole #127 acceptance."
+        }
+      },
+      "evidence": [
+        {
+          "path": "evidence/pr279-origin-correction-live-reload-20261010.json",
+          "size_bytes": 20291,
+          "sha256": "fb0ab983802e664393717462f8e364f3576cbb4c28ecec71908978dcd8aa21e8"
+        },
+        {
+          "path": "evidence/pr279-origin-correction-live-reload-20261010.md",
+          "size_bytes": 6967,
+          "sha256": "e3975d69695f273caa5cfb40d23554f1e279f63b88e6322805009f193e750aff"
+        }
+      ],
+      "upstream_disposition": "none; the observed defects and proof limits are in the maintained Actions repository."
+    },
+    {
+      "id": "program-amendment-20261010T0642Z",
+      "observed_at_utc": "2026-10-10T06:42:00Z",
+      "summary": "Sol accepted the scoped #279 production source contract, and root ran the composed pinned live-catalog tests: 4 passed in 34.56s. This is source/local evidence only; the reviewed staging tree has no exact published PR head yet, so current-head hosted admission remains open. The #279 baseline correction and #127 local template limits remain as recorded in the preceding dated amendments.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "raw_contracts_or_historical_archives_changed": false,
+        "whole_issue_acceptance_changed": false,
+        "scope": "Adds review and focused local test evidence only. No retained issue record or historical ZIP was changed; no whole issue is accepted."
+      },
+      "pr279_review": {
+        "decision": "ACCEPT_SCOPED_PRODUCTION_SOURCE_CONTRACT",
+        "review_source_head": "0377bd84f95ee25504f987433e4cf1638d982870",
+        "review_tree": "66f5ff44ad917cec9b48eb681e4d6c3fc39ab102",
+        "production_basis": "Five production files match the published 3d077/6a852 production line; no Runtime production edits in the test-only checkpoint.",
+        "root_local_tests": "4 passed in 34.56s on the composed pinned live-catalog test set.",
+        "test_log": {
+          "path": "evidence/pr279-composed-pinned-live-catalog-20261010.log",
+          "size_bytes": 187,
+          "sha256": "d1dfe7bbcb585ae4aab123b1cec3cafb0ec677df143cde5eb6adb4ab25112ce8"
+        },
+        "review_receipt": {
+          "path": "evidence/pr279-final-source-review-20261010.md",
+          "size_bytes": 4887,
+          "sha256": "b41c63b86bb4e17df4fde3138e766f4f38d9b2cf2f532cb0c58c721ea333d31e"
+        },
+        "published_head": "NOT_YET_PUBLISHED_AT_OBSERVATION",
+        "limits": [
+          "No exact published head or exact-head hosted CI attached yet.",
+          "Opt-in real-RCC provider rollback remains separate and skipped in generic hosted suite.",
+          "Frozen override rollback and in-flight worker draining remain open.",
+          "Current-catalog naming plus rediscovery is the accepted policy; no stable alias history or atomic list-to-call fencing is claimed.",
+          "This review is not release approval or whole #279 acceptance."
+        ]
+      },
+      "origin_correction": {
+        "supersedes": "program-amendment-20261010T0625Z baseline interpretation; see exact correction evidence in program-amendment-20261010T0639Z.",
+        "101_91_second_mixed_seed": "Keep as mixed-seed candidate-admission observation only.",
+        "exact_84b8": "Fails at initial healthy retained_tool MCP lookup after A capabilities were disabled; duplicate candidate admission is not reached.",
+        "exact_repaired": "Three duplicate-candidate cells pass on pinned child source; actual watched failure/recovery pass confirms same-package provenance and natural exits.",
+        "receipts": [
+          {
+            "path": "evidence/pr279-origin-correction-live-reload-20261010.json",
+            "size_bytes": 20291,
+            "sha256": "fb0ab983802e664393717462f8e364f3576cbb4c28ecec71908978dcd8aa21e8"
+          },
+          {
+            "path": "evidence/pr279-origin-correction-live-reload-20261010.md",
+            "size_bytes": 6967,
+            "sha256": "e3975d69695f273caa5cfb40d23554f1e279f63b88e6322805009f193e750aff"
+          }
+        ]
+      },
+      "canvas_template_checkpoint": {
+        "issue": 127,
+        "commit": "e10e9f60bdfe215b5783df0b719d80169e0e1a0c",
+        "tree": "e9d8ee72440ed086bb01d14ed8d2d14e84c2db60",
+        "state": "LOCAL_UNPUSHED_UNREVIEWED",
+        "limits": "3 template tests plus 2 offline-bundle/deterministic-generation tests passed. TypeScript remains blocked by dependency/cache mismatch; browser/Runtime NOT_RUN; Core 1.0.3 unpublished; caller-authorized artifact resolver is not implemented; no whole #127 acceptance."
+      },
+      "pr273_status": {
+        "head": "6a852ed27c1a6c1ac6d2923c43ff9ae14fb064e3",
+        "last_snapshot": "2026-10-10T06:25Z",
+        "captured_checks": {
+          "success": 12,
+          "in_progress": 8,
+          "failure": 0,
+          "skipped": 1
+        },
+        "state": "OPEN",
+        "current_head_admission": "Pending; the cited rollup predates integration 35b32 and planned test-only updates."
+      },
+      "integration_checkpoint": {
+        "head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+        "tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+        "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "cohort": {
+          "integrated": 22,
+          "open_blocked": 8,
+          "merge_ready": 0
+        }
+      },
+      "issue_metadata_updates": {
+        "127": {
+          "next_bounded_action": "Review/publish local template checkpoint e10e9f60, then resolve TypeScript, opt-in Runtime/browser, Core 1.0.3 fresh-project dependency, and caller-authorized artifact resolver gates. Whole #127 remains open."
+        }
+      },
+      "evidence": [
+        {
+          "path": "evidence/pr279-final-source-review-20261010.md",
+          "size_bytes": 4887,
+          "sha256": "b41c63b86bb4e17df4fde3138e766f4f38d9b2cf2f532cb0c58c721ea333d31e"
+        },
+        {
+          "path": "evidence/pr279-composed-pinned-live-catalog-20261010.log",
+          "size_bytes": 187,
+          "sha256": "d1dfe7bbcb585ae4aab123b1cec3cafb0ec677df143cde5eb6adb4ab25112ce8"
+        },
+        {
+          "path": "evidence/pr279-origin-correction-live-reload-20261010.json",
+          "size_bytes": 20291,
+          "sha256": "fb0ab983802e664393717462f8e364f3576cbb4c28ecec71908978dcd8aa21e8"
+        },
+        {
+          "path": "evidence/pr279-origin-correction-live-reload-20261010.md",
+          "size_bytes": 6967,
+          "sha256": "e3975d69695f273caa5cfb40d23554f1e279f63b88e6322805009f193e750aff"
+        }
+      ],
+      "upstream_disposition": "none; no confirmed third-party defect found."
     }
   ],
   "current_program_amendment": {
-    "observed_at_utc": "2026-10-10T05:08:51Z",
-    "path": "evidence/program-amendment-20261010T0514Z.json",
-    "sha256": "4dabba3d8411b3fdf456b8321fd605f555cb149715fbd4dbf56c758f3233f0e3",
-    "supplemental_issue_ids": [
-      279
-    ],
-    "accepted_scoped_criteria": [
-      "129:deployment-reference-envelope -> 130-schema",
-      "126:linux-installed-wheel-offline-project-creation -> 126-installed-wheel-offline"
-    ],
-    "retired_hosted_gate_source": "42f9b8ef6575a8b955763d0000a6cdab4b8bf5eb",
-    "hosted_acceptance": "NOT_RUN",
-    "recovered_evidence_commit": "655b044a7bbe464eeebccb1a61a2833992e12d8a"
+    "id": "program-amendment-20261010T0642Z",
+    "observed_at_utc": "2026-10-10T06:42:00Z",
+    "path": "evidence/program-amendment-20261010T0642Z.json",
+    "sha256": "2dfb1245d8d33f783cd6b6f9280179a50554f13cdabc5c8136cec4b479c89de5"
   },
-  "status": "The exact Linux installed-wheel/offline template-creation criterion for #126 is accepted: Runtime 1.0.3 CPython 3.12 wheel SHA-256 9385343a783d368bd653e42265671e1001d3b701c42d0d01fd3648ed92a219d8 created the Showcase and Basic project trees byte-for-byte from the embedded bundle; Basic authored devdata is preserved, pip check passes, and the loopback-proxied traces contain no socket/connect/DNS calls. This is one Linux criterion only; independent artifact verification and remaining #126 protocol/host acceptance remain separate. Whole #126 remains open. Latest underlying status inputs are time-bounded: 05:08:51Z installed-wheel proof, 05:06Z branch readback, and 05:05Z workspace/dispatch diagnostics. Devsy v2 outcomes remain unknown after KubernetesError and were not replayed.",
+  "status": "Sol accepted the scoped #279 production source contract, and root ran the composed pinned live-catalog tests: 4 passed in 34.56s. This is source/local evidence only; the reviewed staging tree has no exact published PR head yet, so current-head hosted admission remains open. The #279 baseline correction and #127 local template limits remain as recorded in the preceding dated amendments.",
   "prior_current_pr_convergence_20261010T0441Z": {
     "path": "evidence/convergence-followup-20261010T0441Z.json",
     "sha256": "1c0b218c1771903e47deb4729d53b979847f4f0aa7ed285b545137243cad153e",
@@ -14402,5 +14990,17 @@
     "owner": "Root owns integration/admission; owners continue the existing PR273, PR280, PR281, and #279 workstreams. This read does not infer lane activity from control-plane intent.",
     "pending": "Finish exact-head PR273 checks and preserve any failures with source/run binding. Obtain exact current-head review and checks for PR281; do not carry over 1b681a07 results. Correct/re-review PR280 on its existing branch. Treat PR272/278 as stacked within PR273; no duplicate cherry-pick. No acceptance, issue-state or publication change is made by this snapshot.",
     "scope": "Original 54 issue records/contracts/states and archive hashes remain unchanged; #279 is supplemental. #126/#129 criteria remain bounded; no whole issue or release acceptance is implied."
-  }
+  },
+  "prior_current_integration_checkpoint_pr277_20261010T0629Z": {
+    "pr": 277,
+    "source_head": "bf435498de94acc5e64f89dfe3dcd3916b5046f3",
+    "merge_sha": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "tree": "92e79c92f2f64585cbe66f068f5757f205fbe976",
+    "merged_at": "2026-10-10T03:07:51Z",
+    "checks": "16 exact-head checks passed; normal guarded merge with root-confirmed current-ref and conflict-free/disjoint delta checks. The immediately preceding PR276 merge is recorded in the dated receipt.",
+    "scope_limit": "Bounded wheel/interpreter checkpoint; not full combined candidate validation or whole #208 acceptance.",
+    "receipt": "evidence/convergence-followup-20261010T0310Z.json",
+    "receipt_sha256": "83ddc07d6f0ebe387d2d54e2de57dca54bc6d7c8fc233185c24e2c8b74d36267"
+  },
+  "observed_at": "2026-10-10T06:42:00Z"
 }

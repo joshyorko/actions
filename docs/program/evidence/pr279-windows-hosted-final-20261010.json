@@ -1,0 +1,29 @@
+{
+  "read_at_utc": "2026-10-10 06:27 UTC",
+  "head_sha": "3d077296d1469b99e9fe50327e98c03a6f0aa58f",
+  "tested_merge_sha": "07864b6ca4ff347af077d8e3c63b498b362a31f2",
+  "tree": "b6ee7d0fb7d5e669c78929da4ca08055866d3353",
+  "workflow_run": 38029294077,
+  "job_id": 114146665360,
+  "platform": "Windows Server 2022",
+  "conclusion": "success",
+  "steps": {
+    "build_binary": "success",
+    "non_integration_tests": "success",
+    "playwright_chromium_install": "success",
+    "integration_tests": "success",
+    "lint": "success",
+    "typecheck": "success",
+    "docs": "success"
+  },
+  "multi_package_cli_cases": {
+    "test_additive_import_serves_duplicate_action_names_across_restart": "passed",
+    "test_start_sync_treats_repeated_dirs_as_one_desired_set": "passed",
+    "test_start_sync_rejects_bad_later_package_without_partial_database_update": "passed",
+    "test_failed_sync_keeps_last_good_unmanaged_package_sources": "passed"
+  },
+  "integration_selector_summary": "124 passed, 16 skipped, 887 deselected in 1037.83s",
+  "prior_non_integration_summary": "862 passed, 22 skipped, 14 warnings in 390.72s",
+  "log_handling": "Decoded job log was inspected for checkout SHA, target cases and summaries; raw full log was not persisted. No credentials copied into this receipt.",
+  "scope_limit": "Hosted proof binds to the 3d077 source/tree and its tested merge. It is not evidence for descendant 6a852ed."
+}

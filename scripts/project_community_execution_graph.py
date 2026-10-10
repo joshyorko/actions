@@ -64,6 +64,9 @@ def apply_named_scoped_criteria(graph: dict, ledger: dict) -> dict:
     """Apply owner-accepted criterion gates without promoting whole issues."""
     amendments = ledger.get("supplemental_program_amendments", [])
     for amendment in amendments:
+        graph.setdefault("current_active_workers", {}).update(amendment.get("current_active_workers", {}))
+        if amendment.get("worker_stage_snapshot"):
+            graph["worker_stage_snapshot"] = amendment["worker_stage_snapshot"]
         for decision in amendment.get("accepted_scoped_criteria", []):
             model = graph["relationship_model"]
             issue = decision["owner_issue"]
@@ -110,6 +113,12 @@ def apply_named_scoped_criteria(graph: dict, ledger: dict) -> dict:
             model["scoped_execution_gates"].append(gate)
             issue_row["reason"] = decision["consumer_issue_reason"]
             issue_row["next_bounded_action"] = decision["consumer_issue_next_action"]
+            if decision.get("consumer_issue_classification"):
+                issue_row["classification"] = decision["consumer_issue_classification"]
+    graph["counts"] = {
+        stage: sum(row["classification"] == stage for row in graph["issues"])
+        for stage in ["READY", "ACTIVE", "REVIEW", "BLOCKED", "INTEGRATED", "COMPLETE"]
+    }
     return graph
 
 
@@ -610,7 +619,7 @@ def sync_supplemental_amendment_note(path: Path, anchor: str, amendments: list[d
             )
         for criterion in amendment.get("accepted_scoped_criteria", []):
             sections.append(
-                f"- `{criterion['criterion_id']}` enables only `{criterion['consumer_slice']}` for bounded schema/fixture work. "
+                f"- `{criterion['criterion_id']}` enables only the recorded bounded `{criterion['consumer_slice']}` slice. "
                 f"{criterion['decision']} Evidence: [{criterion['evidence_path']}]({criterion['evidence_path']}) "
                 f"(SHA-256 `{criterion['evidence_sha256']}`)."
             )
@@ -660,6 +669,11 @@ def label_superseded_convergence_snapshots() -> None:
         "## Previous convergence snapshot — 2026-10-10T04:41:32Z (superseded by the 05:01 amendment)",
         1,
     )
+    handoff_text = handoff_text.replace(
+        "## Current convergence — 2026-10-10T06:08:00Z",
+        "## Previous convergence snapshot — 2026-10-10T06:08:00Z (superseded by the 06:25 amendment)",
+        1,
+    )
     HANDOFF_PATH.write_text(handoff_text, encoding="utf-8")
 
 
@@ -683,6 +697,8 @@ def update_graph_metadata(path: Path, graph: dict) -> None:
         data["status"] = amendment["summary"]
         data["checkpoint_status"] = amendment["summary"]
         data["checkpoint_observed_at"] = current["observed_at_utc"]
+        if path == RESUME_PATH:
+            data["observed_at"] = current["observed_at_utc"]
     archive = PROGRAM / "evidence" / "canvas-execution-graph-amendment-20261009-v4.zip"
     manifest = PROGRAM / "evidence" / "canvas-execution-graph-amendment-20261009-v4.manifest.json"
     if archive.is_file() and manifest.is_file():
@@ -692,7 +708,18 @@ def update_graph_metadata(path: Path, graph: dict) -> None:
             "size_bytes": archive.stat().st_size,
             "manifest": "evidence/" + manifest.name,
         }
-    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def apply_issue_metadata_updates(graph: dict, ledger: dict) -> None:
+    """Apply dated, explicitly scoped operational metadata to both projections."""
+    for amendment in ledger.get("supplemental_program_amendments", []):
+        for issue, updates in amendment.get("issue_metadata_updates", {}).items():
+            for document in (graph, ledger):
+                row = next((item for item in document["issues"] if str(item["issue"]) == str(issue)), None)
+                if row is None:
+                    raise ValueError(f"metadata update references unknown issue #{issue}")
+                row.update(updates)
 
 
 def main() -> None:
@@ -706,8 +733,10 @@ def main() -> None:
         graph["supplemental_program_amendments"] = copy.deepcopy(ledger.get("supplemental_program_amendments", []))
         graph["current_program_amendment"] = copy.deepcopy(ledger.get("current_program_amendment"))
         graph = upgrade_relationships(graph, ledger)
-        GRAPH_PATH.write_text(json.dumps(graph, indent=2) + "\n", encoding="utf-8")
+        apply_issue_metadata_updates(graph, ledger)
+        GRAPH_PATH.write_text(json.dumps(graph, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         MARKDOWN_PATH.write_text(render_markdown(graph), encoding="utf-8")
+        LEDGER_PATH.write_text(json.dumps(ledger, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         update_graph_metadata(LEDGER_PATH, graph)
         update_graph_metadata(RESUME_PATH, graph)
         sync_markdown_note(LEDGER_MARKDOWN_PATH, "| Issue | Wave | Retained state | Owner / PR | Next bounded action |")
@@ -727,6 +756,15 @@ def main() -> None:
             )
     elif args.check:
         validate_graph(graph, ledger)
+        expected_metadata = {}
+        for amendment in ledger.get("supplemental_program_amendments", []):
+            for issue, updates in amendment.get("issue_metadata_updates", {}).items():
+                expected_metadata.setdefault(str(issue), {}).update(updates)
+        for issue, updates in expected_metadata.items():
+            for document_name, document in (("community-execution-graph.json", graph), ("community-program-ledger.json", ledger)):
+                row = next((item for item in document["issues"] if str(item["issue"]) == issue), None)
+                if row is None or any(row.get(key) != value for key, value in updates.items()):
+                    raise SystemExit(f"{document_name} has stale metadata for issue #{issue}")
         if MARKDOWN_PATH.read_text(encoding="utf-8") != render_markdown(graph):
             raise SystemExit("community-execution-graph.md is stale; run with --apply")
         for path in (LEDGER_PATH, RESUME_PATH):

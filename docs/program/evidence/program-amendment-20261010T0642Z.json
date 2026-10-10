@@ -1,0 +1,116 @@
+{
+  "id": "program-amendment-20261010T0642Z",
+  "observed_at_utc": "2026-10-10T06:42:00Z",
+  "summary": "Sol accepted the scoped #279 production source contract, and root ran the composed pinned live-catalog tests: 4 passed in 34.56s. This is source/local evidence only; the reviewed staging tree has no exact published PR head yet, so current-head hosted admission remains open. The #279 baseline correction and #127 local template limits remain as recorded in the preceding dated amendments.",
+  "accounting_boundary": {
+    "retained_issue_contract_count": 54,
+    "supplemental_issue_count": 1,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "issue_stage_counts_changed": false,
+    "raw_contracts_or_historical_archives_changed": false,
+    "whole_issue_acceptance_changed": false,
+    "scope": "Adds review and focused local test evidence only. No retained issue record or historical ZIP was changed; no whole issue is accepted."
+  },
+  "pr279_review": {
+    "decision": "ACCEPT_SCOPED_PRODUCTION_SOURCE_CONTRACT",
+    "review_source_head": "0377bd84f95ee25504f987433e4cf1638d982870",
+    "review_tree": "66f5ff44ad917cec9b48eb681e4d6c3fc39ab102",
+    "production_basis": "Five production files match the published 3d077/6a852 production line; no Runtime production edits in the test-only checkpoint.",
+    "root_local_tests": "4 passed in 34.56s on the composed pinned live-catalog test set.",
+    "test_log": {
+      "path": "evidence/pr279-composed-pinned-live-catalog-20261010.log",
+      "size_bytes": 187,
+      "sha256": "d1dfe7bbcb585ae4aab123b1cec3cafb0ec677df143cde5eb6adb4ab25112ce8"
+    },
+    "review_receipt": {
+      "path": "evidence/pr279-final-source-review-20261010.md",
+      "size_bytes": 4887,
+      "sha256": "b41c63b86bb4e17df4fde3138e766f4f38d9b2cf2f532cb0c58c721ea333d31e"
+    },
+    "published_head": "NOT_YET_PUBLISHED_AT_OBSERVATION",
+    "limits": [
+      "No exact published head or exact-head hosted CI attached yet.",
+      "Opt-in real-RCC provider rollback remains separate and skipped in generic hosted suite.",
+      "Frozen override rollback and in-flight worker draining remain open.",
+      "Current-catalog naming plus rediscovery is the accepted policy; no stable alias history or atomic list-to-call fencing is claimed.",
+      "This review is not release approval or whole #279 acceptance."
+    ]
+  },
+  "origin_correction": {
+    "supersedes": "program-amendment-20261010T0625Z baseline interpretation; see exact correction evidence in program-amendment-20261010T0639Z.",
+    "101_91_second_mixed_seed": "Keep as mixed-seed candidate-admission observation only.",
+    "exact_84b8": "Fails at initial healthy retained_tool MCP lookup after A capabilities were disabled; duplicate candidate admission is not reached.",
+    "exact_repaired": "Three duplicate-candidate cells pass on pinned child source; actual watched failure/recovery pass confirms same-package provenance and natural exits.",
+    "receipts": [
+      {
+        "path": "evidence/pr279-origin-correction-live-reload-20261010.json",
+        "size_bytes": 20291,
+        "sha256": "fb0ab983802e664393717462f8e364f3576cbb4c28ecec71908978dcd8aa21e8"
+      },
+      {
+        "path": "evidence/pr279-origin-correction-live-reload-20261010.md",
+        "size_bytes": 6967,
+        "sha256": "e3975d69695f273caa5cfb40d23554f1e279f63b88e6322805009f193e750aff"
+      }
+    ]
+  },
+  "canvas_template_checkpoint": {
+    "issue": 127,
+    "commit": "e10e9f60bdfe215b5783df0b719d80169e0e1a0c",
+    "tree": "e9d8ee72440ed086bb01d14ed8d2d14e84c2db60",
+    "state": "LOCAL_UNPUSHED_UNREVIEWED",
+    "limits": "3 template tests plus 2 offline-bundle/deterministic-generation tests passed. TypeScript remains blocked by dependency/cache mismatch; browser/Runtime NOT_RUN; Core 1.0.3 unpublished; caller-authorized artifact resolver is not implemented; no whole #127 acceptance."
+  },
+  "pr273_status": {
+    "head": "6a852ed27c1a6c1ac6d2923c43ff9ae14fb064e3",
+    "last_snapshot": "2026-10-10T06:25Z",
+    "captured_checks": {
+      "success": 12,
+      "in_progress": 8,
+      "failure": 0,
+      "skipped": 1
+    },
+    "state": "OPEN",
+    "current_head_admission": "Pending; the cited rollup predates integration 35b32 and planned test-only updates."
+  },
+  "integration_checkpoint": {
+    "head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "cohort": {
+      "integrated": 22,
+      "open_blocked": 8,
+      "merge_ready": 0
+    }
+  },
+  "issue_metadata_updates": {
+    "127": {
+      "next_bounded_action": "Review/publish local template checkpoint e10e9f60, then resolve TypeScript, opt-in Runtime/browser, Core 1.0.3 fresh-project dependency, and caller-authorized artifact resolver gates. Whole #127 remains open."
+    }
+  },
+  "evidence": [
+    {
+      "path": "evidence/pr279-final-source-review-20261010.md",
+      "size_bytes": 4887,
+      "sha256": "b41c63b86bb4e17df4fde3138e766f4f38d9b2cf2f532cb0c58c721ea333d31e"
+    },
+    {
+      "path": "evidence/pr279-composed-pinned-live-catalog-20261010.log",
+      "size_bytes": 187,
+      "sha256": "d1dfe7bbcb585ae4aab123b1cec3cafb0ec677df143cde5eb6adb4ab25112ce8"
+    },
+    {
+      "path": "evidence/pr279-origin-correction-live-reload-20261010.json",
+      "size_bytes": 20291,
+      "sha256": "fb0ab983802e664393717462f8e364f3576cbb4c28ecec71908978dcd8aa21e8"
+    },
+    {
+      "path": "evidence/pr279-origin-correction-live-reload-20261010.md",
+      "size_bytes": 6967,
+      "sha256": "e3975d69695f273caa5cfb40d23554f1e279f63b88e6322805009f193e750aff"
+    }
+  ],
+  "upstream_disposition": "none; no confirmed third-party defect found."
+}

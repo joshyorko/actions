@@ -20,3 +20,16 @@ docs/program/evidence/mcp126-installed-wheel-offline-template-proof-20261010T050
 docs/program/evidence/cas-dispatch-20261010T0500Z.json -text
 docs/program/evidence/cas-owner-pod-failed-20261010T0505Z.json -text
 docs/program/evidence/cas-evidence-branch-readback-20261010T0506Z.json -text
+# Current evidence payloads are hash-bound by the 2026-10-10T0625Z amendment.
+docs/program/evidence/canvas-authoring-final-v2.log -text
+docs/program/evidence/canvas-runtime-bridge-receipt-final-v2.json -text
+docs/program/evidence/pr279-mcp-catalog-rollback-20261010.json -text
+docs/program/evidence/pr279-mcp-catalog-rollback-20261010.md -text
+docs/program/evidence/pr273-checkpoint-6a852ed-20261010T0625Z.json -text
+docs/program/evidence/pr280-checkpoint-0357585-20261010T0625Z.json -text
+docs/program/evidence/pr281-checkpoint-13db703-20261010T0625Z.json -text
+docs/program/evidence/pr279-windows-hosted-final-20261010.json -text
+docs/program/evidence/pr279-origin-correction-live-reload-20261010.json -text
+docs/program/evidence/pr279-origin-correction-live-reload-20261010.md -text
+docs/program/evidence/pr279-final-source-review-20261010.md -text
+docs/program/evidence/pr279-composed-pinned-live-catalog-20261010.log -text

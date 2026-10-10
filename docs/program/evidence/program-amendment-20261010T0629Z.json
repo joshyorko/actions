@@ -1,0 +1,118 @@
+{
+  "id": "program-amendment-20261010T0629Z",
+  "observed_at_utc": "2026-10-10T06:29:20Z",
+  "summary": "PR280 merged normally at 35b32e76 into integration; its merge tree matches the tested current-base tree. PR281 remains merged at 9afa0b22. The five accepted bounded Canvas criteria remain valid; #127 has a local template implementation checkpoint at 963d300e, but publication, independent review, and browser/Runtime acceptance remain pending. PR273 remains an open candidate; its 06:25 check snapshot predates the new integration head and must not be treated as current-base admission.",
+  "accounting_boundary": {
+    "retained_issue_contract_count": 54,
+    "supplemental_issue_count": 1,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "issue_stage_counts_changed": false,
+    "raw_contracts_or_historical_archives_changed": false,
+    "whole_issue_acceptance_changed": false,
+    "scope": "Dated convergence update only. No retained issue contract/state/comment/dependency or historical ZIP was rewritten; the earlier accepted scoped criteria remain in the 06:25 amendment."
+  },
+  "integration_readback": {
+    "verified_by_root": "2026-10-10T06:29Z",
+    "merge_commit": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "merge_tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+    "reviewed_current_base_tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+    "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "cohort_counts": {
+      "integrated": 22,
+      "open_blocked": 8,
+      "merge_ready": 0
+    },
+    "pr280_tests": "33 schema tests passed in 1.29s after restoring the exact pinned ignored RCC cache; the earlier setup-error run is retained as a separate failed attempt.",
+    "test_log_sha256": "0aa35806f74ad78d104f14e827f4ae9c0f67335f4fc6212d8d54f7193ab495f4"
+  },
+  "pr_status": [
+    {
+      "pr": 280,
+      "head": "0357585b51864e158f50c7479af001ba6daf5b06",
+      "merge_commit": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+      "state": "MERGED",
+      "scope_limit": "Schema/fixture checkpoint only; no full #130 acceptance or production compiler claim."
+    },
+    {
+      "pr": 281,
+      "head": "13db7030416f7b64f9a577b800a629549e23903e",
+      "merge_commit": "9afa0b22b856a8047fa7774044d403c28b328fb5",
+      "state": "MERGED",
+      "captured_checks": {
+        "success": 16,
+        "failure": 0
+      },
+      "scope_limit": "Bounded authoring/runtime bridge criteria only; whole #99/#100 remain open."
+    },
+    {
+      "pr": 273,
+      "head": "6a852ed27c1a6c1ac6d2923c43ff9ae14fb064e3",
+      "tree": "66f5ff44ad917cec9b48eb681e4d6c3fc39ab102",
+      "state": "OPEN",
+      "last_captured_checks_at": "2026-10-10T06:25:00Z",
+      "last_captured_checks": {
+        "success": 12,
+        "in_progress": 8,
+        "failure": 0,
+        "skipped": 1
+      },
+      "capture": "evidence/pr273-checkpoint-6a852ed-20261010T0625Z.json",
+      "current_gate": "The captured checks predate PR280 advancing integration; current-base merge-tree checks and review remain outstanding."
+    }
+  ],
+  "template_checkpoint": {
+    "issue": 127,
+    "slice": "127-template",
+    "local_commit": "963d300edf6197caca59a901c2058a78536c700c",
+    "tree": "ef758e2d77fbfa575651beafdaf8855ac026f906",
+    "parent": "13db7030416f7b64f9a577b800a629549e23903e",
+    "branch": "feat/canvas-template-20261010",
+    "state": "LOCAL_UNPUSHED_UNREVIEWED",
+    "reported_validation": {
+      "template_unit_tests": "3 passed",
+      "fresh_extraction_and_resource_digest": "passed",
+      "bundle_membership_and_inventory": "passed",
+      "deterministic_packager_comparison": "passed",
+      "ruff_prettier": "passed",
+      "typescript": "blocked: existing frontend cache lacks @modelcontextprotocol/client",
+      "opt_in_runtime_browser": "NOT_RUN",
+      "full_diff_check": "verbatim HTML trailing spaces remain in embedded resource"
+    },
+    "remaining_gates": [
+      "Root source review and publication of the checkpoint",
+      "Resolve or provide the declared frontend dependency for TypeScript validation",
+      "Run the opt-in Runtime/browser acceptance when the required environment is available",
+      "Core 1.0.3 dependency must be published before fresh-project resolution; no publication is claimed"
+    ],
+    "scope_limit": "New Canvas query template only. No common renderer/API change, artifact resolver, whole #127 acceptance, ChatGPT acceptance, or registry-published Core compatibility proof."
+  },
+  "pr279_windows_receipt": {
+    "source_tree": "b6ee7d0fb7d5e669c78929da4ca08055866d3353",
+    "source_head": "3d077296d1469b99e9fe50327e98c03a6f0aa58f",
+    "receipt": "evidence/pr279-windows-hosted-final-20261010.json",
+    "sha256": "ad4dccd90ec2d3143a03a8e0209f5b8cbf2b8e23ba8f410b5126ea4d2f83e015",
+    "size_bytes": 1417,
+    "scope_limit": "Windows hosted result bound to the earlier 3d077 source/tree; it does not establish current 6a852ed combined PR acceptance or whole #279 acceptance."
+  },
+  "issue_metadata_updates": {
+    "127": {
+      "next_bounded_action": "Review and publish the local 963d300e Canvas query-template checkpoint, then close its focused packaging/Runtime/browser gates. The local template tests and extraction checks are reported passing; TypeScript and opt-in Runtime/browser remain unverified, and fresh projects still require Core 1.0.3 publication. Do not claim whole #127 acceptance."
+    }
+  },
+  "evidence": [
+    {
+      "path": "evidence/pr279-windows-hosted-final-20261010.json",
+      "sha256": "ad4dccd90ec2d3143a03a8e0209f5b8cbf2b8e23ba8f410b5126ea4d2f83e015",
+      "size_bytes": 1417
+    },
+    {
+      "path": "evidence/pr273-checkpoint-6a852ed-20261010T0625Z.json",
+      "sha256": "df247262ddf63092bf21fc9ed2c549bfb0126f8a4f2e663ecad277ce3b2708e4",
+      "size_bytes": 7292
+    }
+  ],
+  "upstream_disposition": "none; no confirmed third-party defect was identified."
+}

@@ -1,0 +1,110 @@
+{
+  "id": "program-amendment-20261010T0639Z",
+  "observed_at_utc": "2026-10-10T06:39:51Z",
+  "summary": "A source-origin correction narrows the earlier #279 baseline claim: the 101.91s run was mixed-seed candidate-admission evidence, not a fully isolated 84b8 lifecycle run. Exact-origin 84b8 fails earlier at initial A MCP lookup before duplicate admission; exact-origin repaired three-cell and watched failure/recovery tests pass on production source 3d077. The latest template checkpoint is local e10e9f60; it remains unpushed and incomplete. PR273 is still not admitted on the updated integration base.",
+  "accounting_boundary": {
+    "retained_issue_contract_count": 54,
+    "supplemental_issue_count": 1,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "issue_stage_counts_changed": false,
+    "raw_contracts_or_historical_archives_changed": false,
+    "whole_issue_acceptance_changed": false,
+    "scope": "Adds dated corrections and bounded local checkpoint facts only. The 06:25/06:29 records and source receipts are preserved; no original issue contract, state, comment, dependency, or historical ZIP is rewritten."
+  },
+  "supersedes_or_clarifies": {
+    "prior_amendment": "program-amendment-20261010T0625Z",
+    "prior_receipt_sha256": "abaf0faa531906cd1b8ab3f19e5a2d4ed1fa74cf52a7c6608932d3cd7477491b",
+    "clarification": "The earlier 101.91s baseline is a mixed-seed candidate-admission observation only. Relative PYTHONPATH plus changed child cwd selected the prepared editable production runtime during initial seed; the candidate CLI command later selected 84b8. The exact-origin 84b8 run fails before candidate mutation at initial healthy retained_tool MCP lookup, so it is not a duplicate-admission rollback baseline. Preserve all earlier logs and positives with these narrowed source-origin labels."
+  },
+  "pr279_exact_origin_evidence": {
+    "checkpoint": "508175cb2f07243f2bd337965fc9a612b87d193d",
+    "tree": "5b65129512c876c55119edcfdd9457930850782c",
+    "status": "LOCAL_TEST_ONLY_UNPUBLISHED",
+    "production_source": "Five Runtime production files byte-match published 3d077296/tree b6ee7d0; no Runtime production edits in the checkpoint.",
+    "three_cell_repaired": "3 passed in 27.65s; child Runtime source pinned by absolute path.",
+    "three_cell_baseline": "Exact 84b8c70a/tree b2d4a195; 3 failed in 7.66s at initial healthy retained_tool lookup with -32603/KeyError after per-package startup disabled A. No duplicate-candidate stage was reached.",
+    "watched_failure_recovery": "1 passed in 9.94s: actual two-package watcher rejects malformed decorated B without changing admitted state, then admits valid B2; actual A/B MCP calls and restart preserved.",
+    "runtime_provenance": "All 16 persisted worker results record installed Core 1.0.2 origin, version and module hash d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc; owned children expose absolute isolated Runtime PYTHONPATH.",
+    "limitations": [
+      "Local test-only checkpoint is not yet published or exact-head CI validated.",
+      "No provider-specific real-RCC rollback acceptance; opt-in real-RCC skip remains.",
+      "No frozen-package duplicate rollback proof or in-flight worker draining.",
+      "The supported catalog policy is current-catalog identity with rediscovery after changes; stable aliases/list-to-call fencing are not implemented.",
+      "No third-party defect is established; upstream disposition none."
+    ],
+    "evidence": [
+      {
+        "path": "evidence/pr279-origin-correction-live-reload-20261010.json",
+        "size_bytes": 20291,
+        "sha256": "fb0ab983802e664393717462f8e364f3576cbb4c28ecec71908978dcd8aa21e8"
+      },
+      {
+        "path": "evidence/pr279-origin-correction-live-reload-20261010.md",
+        "size_bytes": 6967,
+        "sha256": "e3975d69695f273caa5cfb40d23554f1e279f63b88e6322805009f193e750aff"
+      }
+    ]
+  },
+  "template_checkpoint": {
+    "issue": 127,
+    "slice": "127-template",
+    "commit": "e10e9f60bdfe215b5783df0b719d80169e0e1a0c",
+    "tree": "e9d8ee72440ed086bb01d14ed8d2d14e84c2db60",
+    "branch": "feat/canvas-template-20261010",
+    "base": "13db7030416f7b64f9a577b800a629549e23903e",
+    "state": "LOCAL_UNPUSHED_UNREVIEWED",
+    "reported_validation": "3 template tests plus 2 offline-bundle/deterministic-generation tests passed; exact resource whitespace is preserved. TypeScript/Prettier remain blocked by the shared frontend cache/lockfile mismatch.",
+    "remaining": [
+      "Opt-in Runtime/browser test NOT_RUN.",
+      "Core 1.0.3 is unpublished; fresh project resolution is blocked.",
+      "A caller-authorized artifact resolver is not implemented, so artifact retrieval remains blocked.",
+      "Root source review and publication remain outstanding."
+    ],
+    "scope_limit": "Template example only; no whole #127 acceptance, pinned ChatGPT, package publication, or generalized artifact resolver."
+  },
+  "pr273_status": {
+    "head": "6a852ed27c1a6c1ac6d2923c43ff9ae14fb064e3",
+    "tree": "66f5ff44ad917cec9b48eb681e4d6c3fc39ab102",
+    "state": "OPEN",
+    "last_captured_checks_at": "2026-10-10T06:25:00Z",
+    "last_captured_checks": {
+      "success": 12,
+      "in_progress": 8,
+      "failure": 0,
+      "skipped": 1
+    },
+    "next_gate": "Checks predate integration 35b32e76 and the planned test-only P0 checkpoint addition; root owns publication/current-base full-head validation. No current-base pass is claimed."
+  },
+  "integration_checkpoint": {
+    "head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+    "pr280": "Merged normally; exact merge tree matched reviewed staged tree and 33 schema tests passed after restoring the pinned ignored RCC cache.",
+    "pr281": "Merged normally at 9afa0b22b856a8047fa7774044d403c28b328fb5; 16 checks were successful before merge.",
+    "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "cohort": {
+      "integrated": 22,
+      "open_blocked": 8,
+      "merge_ready": 0
+    }
+  },
+  "issue_metadata_updates": {
+    "127": {
+      "next_bounded_action": "Review/publish the local e10e9f60 template checkpoint, then resolve TypeScript, opt-in Runtime/browser, Core 1.0.3 fresh-project dependency, and caller-authorized artifact resolver gates. Do not claim whole #127 acceptance."
+    }
+  },
+  "evidence": [
+    {
+      "path": "evidence/pr279-origin-correction-live-reload-20261010.json",
+      "size_bytes": 20291,
+      "sha256": "fb0ab983802e664393717462f8e364f3576cbb4c28ecec71908978dcd8aa21e8"
+    },
+    {
+      "path": "evidence/pr279-origin-correction-live-reload-20261010.md",
+      "size_bytes": 6967,
+      "sha256": "e3975d69695f273caa5cfb40d23554f1e279f63b88e6322805009f193e750aff"
+    }
+  ],
+  "upstream_disposition": "none; the observed defects and proof limits are in the maintained Actions repository."
+}

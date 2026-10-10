@@ -1,0 +1,500 @@
+{
+  "receipt_version": "actions-p0-proof-origin-amendment/live-unmanaged-v1",
+  "checkpoint": {
+    "sha": "508175cb2f07243f2bd337965fc9a612b87d193d",
+    "tree": "5b65129512c876c55119edcfdd9457930850782c",
+    "parent_merge_sha": "8ffee094bf0f7175b86c77597e7cfaff2a882d0e",
+    "published_merged_ancestor": "6a852ed",
+    "preserved_original_test_commit": "01c5d0b15d037a53bf0542753f9b25a4252f5132",
+    "patch_sha256": "f81f3ea4cf0770249dd06d268f969297a13c4f5cca9809039042c86ed2c26a42",
+    "clean": true
+  },
+  "production_source": "The five production files match published3d077296/treeb6ee7d0; no Runtime production edits occurred. New watched fixture explicitly pins absolute isolated Runtime source and observes each owned child PYTHONPATH. CLI argument logs also identify isolated __main__.py.",
+  "file_sha256": {
+    "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": "7d4e472965c1a4a5717e90db06a3f516bd5d52df1dc44a18d47dc09782ce4e6f",
+    "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": "9cbce15f32d98e881c5d5287d26bccc964537c9e472bf00a014838a341d1875b",
+    "action_server/src/actions/server/_action_package_handler.py": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64",
+    "action_server/src/actions/server/_actions_import.py": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3",
+    "action_server/src/actions/server/_server.py": "3be0ce254252211270fecf2906da2cec5d438b3203fefd68ad3d0731cf4d42bb",
+    "action_server/src/actions/server/_watcher.py": "c8de55da89d3e752197a89a4e0b2efc6cdce5df60a2476e764ecdd214df691ca"
+  },
+  "original_proof_correction": {
+    "original_test_sha256": "e9d40db8fde507f3c586ed5a5893e1daa06da27ae3373d2d82b11dd78963733a",
+    "mixed_seed_baseline_log_sha256": "80eb5fbb6d040d68d10836fe78f264d3dfa907d4fccf67f5a00b1c41f6952167",
+    "mixed_seed_result": "3 failures101.91s; initial seed used corrected editable root production, candidate-admission actions_server_run selected baseline84 via absolute pytest sys.path. Keep as mixed-seed candidate-admission observation only.",
+    "cause": "ActionServerProcess inherits os.environ PYTHONPATH and changes cwd. Relative src:tests selected prepared editable Runtime rather than isolated checkout. Parent pytest import path did not prove child origin.",
+    "positive_original_scope": "3PASS25.35s and root3PASS27.48s remain repaired production behavior evidence via matching production hashes, not isolated child-origin receipts.",
+    "superseded_original_receipt_sha256": "abaf0faa531906cd1b8ab3f19e5a2d4ed1fa74cf52a7c6608932d3cd7477491b",
+    "original_logs_preserved": true
+  },
+  "exact_three_cell_positive": {
+    "cwd": "/tmp/work/p0-mcp-catalog-rollback/action_server",
+    "command": "PYTHONPATH=/tmp/work/p0-mcp-catalog-rollback/action_server/src:/tmp/work/p0-mcp-catalog-rollback/action_server/tests TMPDIR=/tmp/work /tmp/work/multipackage-runtime-acceptance/venv-primary/bin/python -m pytest tests/action_server_tests/test_cli_mcp_catalog_rollback.py -q --tb=short -p no:cacheprovider -p no:robocorp_log_pytest --basetemp=/tmp/work/p0-mcp-rollback-exact-proof",
+    "result": "3 passed27.65s",
+    "log_sha256": "a480a06c0142453e11c1b6c169cf294c197ea82f3291b7cf8413c7f74f6e5d0e"
+  },
+  "exact_three_cell_baseline": {
+    "sha": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "cwd": "/tmp/work/p0-mcp-catalog-rollback-baseline/action_server",
+    "command": "PYTHONPATH=/tmp/work/p0-mcp-catalog-rollback-baseline/action_server/src:/tmp/work/p0-mcp-catalog-rollback-baseline/action_server/tests TMPDIR=/tmp/work /tmp/work/multipackage-runtime-acceptance/venv-primary/bin/python -m pytest tests/action_server_tests/test_cli_mcp_catalog_rollback.py -q --tb=short -p no:cacheprovider -p no:robocorp_log_pytest --basetemp=/tmp/work/p0-mcp-rollback-baseline-exact-proof",
+    "result": "3 failed7.66s",
+    "log_sha256": "4208746e2ad5775ab1162b42e5fcd49c9e251fc8776833e4df58e66c2c40c49e",
+    "cases": [
+      {
+        "collision_cell": "resource",
+        "earliest_failure": "Initial healthy retained_tool MCP call: JSON-RPC error -32603, server KeyError retained_tool. Earlier sync disabled all package A capabilities; no duplicate-candidate stage was reached.",
+        "after_seed_rows": [
+          {
+            "package": "package_a",
+            "action": "retained_prompt",
+            "enabled": false
+          },
+          {
+            "package": "package_a",
+            "action": "retained_resource",
+            "enabled": false
+          },
+          {
+            "package": "package_a",
+            "action": "retained_template",
+            "enabled": false
+          },
+          {
+            "package": "package_a",
+            "action": "retained_tool",
+            "enabled": false
+          },
+          {
+            "package": "package_b",
+            "action": "sibling_tool",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "collision_cell": "template",
+        "earliest_failure": "Initial healthy retained_tool MCP call: JSON-RPC error -32603, server KeyError retained_tool. Earlier sync disabled all package A capabilities; no duplicate-candidate stage was reached.",
+        "after_seed_rows": [
+          {
+            "package": "package_a",
+            "action": "retained_prompt",
+            "enabled": false
+          },
+          {
+            "package": "package_a",
+            "action": "retained_resource",
+            "enabled": false
+          },
+          {
+            "package": "package_a",
+            "action": "retained_template",
+            "enabled": false
+          },
+          {
+            "package": "package_a",
+            "action": "retained_tool",
+            "enabled": false
+          },
+          {
+            "package": "package_b",
+            "action": "sibling_tool",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "collision_cell": "prompt",
+        "earliest_failure": "Initial healthy retained_tool MCP call: JSON-RPC error -32603, server KeyError retained_tool. Earlier sync disabled all package A capabilities; no duplicate-candidate stage was reached.",
+        "after_seed_rows": [
+          {
+            "package": "package_a",
+            "action": "retained_prompt",
+            "enabled": false
+          },
+          {
+            "package": "package_a",
+            "action": "retained_resource",
+            "enabled": false
+          },
+          {
+            "package": "package_a",
+            "action": "retained_template",
+            "enabled": false
+          },
+          {
+            "package": "package_a",
+            "action": "retained_tool",
+            "enabled": false
+          },
+          {
+            "package": "package_b",
+            "action": "sibling_tool",
+            "enabled": true
+          }
+        ]
+      }
+    ],
+    "scope": "All Runtime children isolated to baseline. Fails before duplicate-candidate admission because initial desired-set seed disables A; no separate duplicate rollback baseline proof is claimed."
+  },
+  "watched_failure_recovery": {
+    "cwd": "/tmp/work/p0-mcp-catalog-rollback/action_server",
+    "command": "PYTHONPATH=/tmp/work/p0-mcp-catalog-rollback/action_server/src:/tmp/work/p0-mcp-catalog-rollback/action_server/tests TMPDIR=/tmp/work /tmp/work/multipackage-runtime-acceptance/venv-primary/bin/python -m pytest tests/action_server_tests/test_cli_live_reload_multi_package.py -q -s --tb=short -p no:cacheprovider -p no:robocorp_log_pytest --basetemp=/tmp/work/p0-live-reload-provenance-final-proof",
+    "result": "1 passed9.94s",
+    "log_sha256": "faa743fd7f90ac8d8a3ffbee29071f9a182c9d2e4c6a18c86d56224c16b8b614",
+    "selected_log_excerpts": [
+      "stderr: SyntaxError: invalid syntax",
+      "stderr: [2026-10-10 06:35:40] [actions.server._server: INFO] Unable to do auto-reload (actions could not be imported).",
+      "SELECTED_RUNTIME_SOURCE /tmp/work/p0-mcp-catalog-rollback/action_server/src {\"_action_package_handler.py\": \"a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64\", \"_actions_import.py\": \"57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3\", \"_server.py\": \"3be0ce254252211270fecf2906da2cec5d438b3203fefd68ad3d0731cf4d42bb\", \"_watcher.py\": \"c8de55da89d3e752197a89a4e0b2efc6cdce5df60a2476e764ecdd214df691ca\"}",
+      "EXPECTED_CORE_WORKER {\"core_init_sha256\": \"d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc\", \"core_origin\": \"/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py\", \"core_version\": \"1.0.2\"}",
+      "OBSERVED_WATCHED_RUNTIME_CHILD 281698 PYTHONPATH /tmp/work/p0-mcp-catalog-rollback/action_server/src",
+      "WATCHED_FAILURE_LAST_GOOD_PASS A=A1 B=B1",
+      "WATCHED_RECOVERY_PASS A=A1 B=B2 natural_exit=1",
+      "OBSERVED_RESTARTED_RUNTIME_CHILD 281894 PYTHONPATH /tmp/work/p0-mcp-catalog-rollback/action_server/src",
+      "WATCHED_RESTART_PASS A=A1 B=B2 natural_exit=1 elapsed=9.83s"
+    ],
+    "phases": [
+      "Healthy A1/B1 HTTP+MCP",
+      "Actual supported watcher observes malformed decorated B and reports rejection",
+      "Same live process retains exact prior Action/ActionPackage rows, four catalogs/revision, snapshot entries and source bytes; actual HTTP+MCP A1/B1",
+      "Valid B2 source admitted by watcher; names unchanged, advertised docs/revision changed, HTTP+MCP A1/B2",
+      "Controlled HTTP shutdown with natural exit1; sync-free restart identical accepted catalogs/DB and HTTP+MCP A1/B2; natural exit1"
+    ],
+    "actual_persisted_worker_results": [
+      {
+        "status": 2,
+        "value": "A1",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "A1",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "B1",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "B1",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "A1",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "A1",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "B1",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "B1",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "A1",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "A1",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "B2",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "B2",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "A1",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "A1",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "B2",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      },
+      {
+        "status": 2,
+        "value": "B2",
+        "core_origin": "/tmp/work/multipackage-runtime-acceptance/venv-primary/lib/python3.12/site-packages/actions/__init__.py",
+        "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2"
+      }
+    ],
+    "accepted_packages": [
+      {
+        "name": "package_a",
+        "source_generation": "25cd5482503dcc685f447845da9ce81ced4825dc5539323ff29e8d55ce16bbda",
+        "included_source_sha256": "e1368be51be8dcdec753ff8b9ea12f938d994c4597b138a57382953b78357fdc"
+      },
+      {
+        "name": "package_b",
+        "source_generation": "bb5f2bb1ba29dd1cfd6c274bf87e781fbba8b12e40549c38365ce3b9a59226fd",
+        "included_source_sha256": "f558095ea545480b8e18c6594db7466a49b5a14168614c60335ce42d79364764"
+      }
+    ]
+  },
+  "cleanup": [
+    {
+      "case": "/tmp/work/p0-live-reload-provenance-final-proof/test_failed_watched_reload_keecurrent",
+      "pids": [
+        {
+          "pid": 281698,
+          "exists": false
+        },
+        {
+          "pid": 281894,
+          "exists": false
+        }
+      ],
+      "ports": [
+        {
+          "port": 35989,
+          "connect_ex": 111
+        },
+        {
+          "port": 44147,
+          "connect_ex": 111
+        }
+      ]
+    },
+    {
+      "case": "/tmp/work/p0-live-reload-provenance-final-proof/test_failed_watched_reload_kee0",
+      "pids": [
+        {
+          "pid": 281698,
+          "exists": false
+        },
+        {
+          "pid": 281894,
+          "exists": false
+        }
+      ],
+      "ports": [
+        {
+          "port": 35989,
+          "connect_ex": 111
+        },
+        {
+          "port": 44147,
+          "connect_ex": 111
+        }
+      ]
+    },
+    {
+      "case": "/tmp/work/p0-mcp-rollback-exact-proof/test_duplicate_mcp_key_rejectscurrent",
+      "pids": [
+        {
+          "pid": 280938,
+          "exists": false
+        },
+        {
+          "pid": 281065,
+          "exists": false
+        }
+      ],
+      "ports": [
+        {
+          "port": 41557,
+          "connect_ex": 111
+        },
+        {
+          "port": 43133,
+          "connect_ex": 111
+        }
+      ]
+    },
+    {
+      "case": "/tmp/work/p0-mcp-rollback-exact-proof/test_duplicate_mcp_key_rejects2",
+      "pids": [
+        {
+          "pid": 280938,
+          "exists": false
+        },
+        {
+          "pid": 281065,
+          "exists": false
+        }
+      ],
+      "ports": [
+        {
+          "port": 41557,
+          "connect_ex": 111
+        },
+        {
+          "port": 43133,
+          "connect_ex": 111
+        }
+      ]
+    },
+    {
+      "case": "/tmp/work/p0-mcp-rollback-exact-proof/test_duplicate_mcp_key_rejects1",
+      "pids": [
+        {
+          "pid": 280690,
+          "exists": false
+        },
+        {
+          "pid": 280826,
+          "exists": false
+        }
+      ],
+      "ports": [
+        {
+          "port": 42583,
+          "connect_ex": 111
+        },
+        {
+          "port": 42977,
+          "connect_ex": 111
+        }
+      ]
+    },
+    {
+      "case": "/tmp/work/p0-mcp-rollback-exact-proof/test_duplicate_mcp_key_rejects0",
+      "pids": [
+        {
+          "pid": 280486,
+          "exists": false
+        },
+        {
+          "pid": 280596,
+          "exists": false
+        }
+      ],
+      "ports": [
+        {
+          "port": 40881,
+          "connect_ex": 111
+        },
+        {
+          "port": 46555,
+          "connect_ex": 111
+        }
+      ]
+    },
+    {
+      "case": "/tmp/work/p0-mcp-rollback-baseline-exact-proof/test_duplicate_mcp_key_rejectscurrent",
+      "pids": [
+        {
+          "pid": 281434,
+          "exists": false
+        }
+      ],
+      "ports": [
+        {
+          "port": 36975,
+          "connect_ex": 111
+        }
+      ]
+    },
+    {
+      "case": "/tmp/work/p0-mcp-rollback-baseline-exact-proof/test_duplicate_mcp_key_rejects2",
+      "pids": [
+        {
+          "pid": 281434,
+          "exists": false
+        }
+      ],
+      "ports": [
+        {
+          "port": 36975,
+          "connect_ex": 111
+        }
+      ]
+    },
+    {
+      "case": "/tmp/work/p0-mcp-rollback-baseline-exact-proof/test_duplicate_mcp_key_rejects1",
+      "pids": [
+        {
+          "pid": 281416,
+          "exists": false
+        }
+      ],
+      "ports": [
+        {
+          "port": 36447,
+          "connect_ex": 111
+        }
+      ]
+    },
+    {
+      "case": "/tmp/work/p0-mcp-rollback-baseline-exact-proof/test_duplicate_mcp_key_rejects0",
+      "pids": [
+        {
+          "pid": 281389,
+          "exists": false
+        }
+      ],
+      "ports": [
+        {
+          "port": 41255,
+          "connect_ex": 111
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Unmanaged source subprocesses only. Frozen executable override explicitly skips these cells; no RCC environment was prepared.",
+    "No stubbed collector, worker, routes, DB, or watcher in watched proof. Cached RCC only ordinary local CLI preflight/configuration/feedback.",
+    "Source import failure/recovery with fresh workers is proved; injected SQLite commit compensation and in-flight generation draining remain distinct evidence cells.",
+    "Real-RCC opted-in provider-specific failed reload remains independently scoped and skipped in current generic hosted suite.",
+    "No baseline watched-failure assertion: actual whole-baseline initial desired-set admission fails first.",
+    "Core provenance is returned by actual public decorated callbacks and checked against installed distribution path/hash/version, not inferred from fixture dependency pins."
+  ],
+  "quality": "Ruff lint/format, Isort, Mypy2files and whitespace check PASS",
+  "upstream_disposition": "none; Actions-local; no confirmed dependency defect"
+}

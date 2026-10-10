@@ -149,7 +149,7 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         graph = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
         self.assertEqual(54, len(self.ledger["issues"]))
         self.assertEqual(54, len(graph["issues"]))
-        self.assertEqual({"READY": 0, "ACTIVE": 7, "REVIEW": 8, "BLOCKED": 29, "INTEGRATED": 9, "COMPLETE": 1}, graph["counts"])
+        self.assertEqual({"READY": 0, "ACTIVE": 8, "REVIEW": 8, "BLOCKED": 28, "INTEGRATED": 9, "COMPLETE": 1}, graph["counts"])
         amendment = self.ledger["supplemental_program_amendments"][0]
         gate = amendment["supplemental_issue_gates"][0]
         self.assertEqual(279, gate["issue"])
@@ -181,6 +181,27 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         self.assertEqual("BLOCKED", rows[130]["classification"])
         self.assertNotIn(129, rows[130]["unresolved_open_issue_dependencies"])
         self.assertIn(129, rows[135]["unresolved_open_issue_dependencies"])
+
+    def test_canvas_template_slice_acceptance_does_not_complete_issues(self) -> None:
+        graph = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
+        rows = {row["issue"]: row for row in graph["issues"]}
+        slices = {row["id"]: row for row in graph["relationship_model"]["execution_slices"]}
+        criteria = {row["id"]: row for row in graph["relationship_model"]["criteria"]}
+        self.assertEqual("ACTIVE", rows[127]["classification"])
+        self.assertEqual("NOT_STARTED", rows[127]["retained_state"])
+        self.assertIn("NOT_COMPLETE", rows[127]["reason"])
+        self.assertEqual("2026-10-10T06:22:05Z", graph["worker_stage_snapshot"])
+        self.assertTrue(slices["100-A"]["status"].startswith("ACCEPTED_BOUNDED_SLICE"))
+        self.assertIn("SINGLE_FIXTURE", slices["100-B"]["status"])
+        self.assertIn("SYSTEM_CHROMIUM", slices["99-A"]["status"])
+        self.assertIn("whole-issue #99", rows[99]["reason"])
+        self.assertIn("whole #100", rows[100]["reason"])
+        self.assertEqual("ACCEPTED_CONSUMED_RESOURCE_SLICE", criteria["98:canvas-artifact-consumed-resource-127"]["status"])
+        self.assertEqual("ACCEPTED_TEMPLATE_PUBLIC_BOUNDARY_ONLY", criteria["125:public-package-boundary-template-127"]["status"])
+        template_gates = graph["relationship_model"]["scoped_execution_gates"]
+        self.assertTrue(any(edge["prerequisite"] == "98:canvas-artifact-consumed-resource-127" and edge["consumer_slice"] == "127-template" for edge in template_gates))
+        self.assertTrue(any(edge["prerequisite"] == "125:public-package-boundary-template-127" and edge["consumer_slice"] == "127-template" for edge in template_gates))
+        self.assertEqual([210], [issue for issue, row in rows.items() if row["classification"] == "COMPLETE"])
 
     def test_126_installed_wheel_criterion_does_not_complete_whole_issue(self) -> None:
         graph = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
@@ -275,6 +296,23 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
             "docs/program/evidence/cas-dispatch-20261010T0500Z.json",
             "docs/program/evidence/cas-owner-pod-failed-20261010T0505Z.json",
             "docs/program/evidence/cas-evidence-branch-readback-20261010T0506Z.json",
+            "docs/program/evidence/program-amendment-20261010T0625Z.json",
+            "docs/program/evidence/program-amendment-20261010T0629Z.json",
+            "docs/program/evidence/program-amendment-20261010T0639Z.json",
+            "docs/program/evidence/program-amendment-20261010T0642Z.json",
+            "docs/program/evidence/canvas-authoring-final-v2.log",
+            "docs/program/evidence/canvas-authoring-final-v2.log",
+            "docs/program/evidence/canvas-runtime-bridge-receipt-final-v2.json",
+            "docs/program/evidence/pr279-mcp-catalog-rollback-20261010.json",
+            "docs/program/evidence/pr279-mcp-catalog-rollback-20261010.md",
+            "docs/program/evidence/pr273-checkpoint-6a852ed-20261010T0625Z.json",
+            "docs/program/evidence/pr280-checkpoint-0357585-20261010T0625Z.json",
+            "docs/program/evidence/pr281-checkpoint-13db703-20261010T0625Z.json",
+            "docs/program/evidence/pr279-windows-hosted-final-20261010.json",
+            "docs/program/evidence/pr279-origin-correction-live-reload-20261010.json",
+            "docs/program/evidence/pr279-origin-correction-live-reload-20261010.md",
+            "docs/program/evidence/pr279-final-source-review-20261010.md",
+            "docs/program/evidence/pr279-composed-pinned-live-catalog-20261010.log",
             "docs/skills/repository-operations.md",
         ):
             target = repo / relative
@@ -302,6 +340,17 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
 
         command = [sys.executable, str(repo / "scripts/project_community_execution_graph.py"), "--apply"]
         run_cli(command, repo)
+        handoff = (repo / "docs/program/engineering-handoff.md").read_text(encoding="utf-8")
+        self.assertIn("Previous convergence snapshot — 2026-10-10T06:08:00Z", handoff)
+        self.assertNotIn("## Current convergence — 2026-10-10T06:08:00Z", handoff)
+        resume = json.loads((repo / "docs/program/community-resume-20261009.json").read_text(encoding="utf-8"))
+        self.assertEqual(
+            resume["current_program_amendment"]["observed_at_utc"],
+            resume["observed_at"],
+        )
+        ledger = json.loads((repo / "docs/program/community-program-ledger.json").read_text(encoding="utf-8"))
+        row127 = next(row for row in ledger["issues"] if row["issue"] == 127)
+        self.assertIn("e10e9f60", row127["next_bounded_action"])
         outputs = [
             (repo / relative).read_bytes()
             for relative in (

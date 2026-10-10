@@ -1,0 +1,253 @@
+{
+  "id": "program-amendment-20261010T0625Z",
+  "observed_at_utc": "2026-10-10T06:25:00Z",
+  "summary": "Root accepted five bounded Canvas producer criteria for template work: 100-A public authoring, 100-B one shared fixture roundtrip, 99-A same-resource Actions Runtime plus system Chromium, 98 consumed-resource artifact only, and 125 public-package authoring boundary only. #127-template is ACTIVE and implementation is NOT_COMPLETE in the assigned isolated template worktree. PR281’s exact source head is now merged at 9afa0b22; its 16 checks were green before merge. The original 54 issue contracts/states remain unchanged and no whole #99/#100/#98/#125/#127 acceptance is claimed. PR273 head 6a852ed remains a separate P0/CI candidate with 12 checks successful, 8 in progress, and one skipped at the 06:25Z readback.",
+  "accounting_boundary": {
+    "retained_issue_contract_count": 54,
+    "supplemental_issue_count": 1,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "issue_stage_counts_changed": true,
+    "raw_contracts_or_historical_archives_changed": false,
+    "whole_issue_acceptance_changed": false,
+    "scope": "Only the operational graph classifications/slice criteria changed; all retained raw issue states and acceptance contract bytes remain unchanged."
+  },
+  "template_implementation": {
+    "issue": 127,
+    "slice": "127-template",
+    "status": "ACTIVE_IMPLEMENTATION_NOT_COMPLETE",
+    "worktree": "/tmp/work/actions-worktrees/canvas-template-20261010",
+    "branch": "feat/canvas-template-20261010",
+    "base_head": "13db7030416f7b64f9a577b800a629549e23903e",
+    "observed_dirty_paths": [
+      "templates/canvas-query/",
+      "action_server/src/actions/server/templates/action-templates.yaml",
+      "action_server/src/actions/server/templates/action-templates.zip",
+      "action_server/src/actions/server/templates/zips/canvas-query.zip",
+      "action_server/tests/action_server_tests/test_template_bundle.py",
+      "action_server/tests/action_server_tests/mcp/test_canvas_query_template.py",
+      "action_server/frontend/apps/canvas-view/canvas-template-runtime.spec.ts",
+      "action_server/frontend/playwright.canvas-template.config.ts",
+      "templates/packaging/templates-prod.json"
+    ],
+    "scope_limit": "New packaged template and tests only; no shared renderer/API edits. Files are in progress and whole #127 remains open."
+  },
+  "canvas_acceptance_basis": {
+    "runtime_bridge_source": "PR281 head 13db7030416f7b64f9a577b800a629549e23903e was merged normally into integration at 9afa0b22b856a8047fa7774044d403c28b328fb5. It carries the reviewed PR263/266/267 source and merged PR270 metadata fix.",
+    "runtime_bridge_receipt": "The test used an exact candidate Core wheel labeled 1.0.2, bound by direct_url/module/prefix; it is not proof against the registry-published 1.0.2 artifact. The same resource URI/MIME/SHA ran through Python MCP and system Chromium, with five persisted Runtime Runs. Pinned Playwright browser NOT_RUN; actual ChatGPT host NOT_RUN.",
+    "authoring_log_summary": "3 passed in 22.88s; receipt log is only 161 bytes and records test summary; not whole package/full host acceptance.",
+    "source_test_work": "The #127 template implementation began from the exact PR281 head; current untracked/modified template files show active work, not a completed or reviewed implementation.",
+    "version_boundary": "The public metadata API used by the template work is not in the published Core 1.0.2 artifact. Core 1.0.3 is unpublished; no registry publication or fresh-install compatibility claim is made."
+  },
+  "current_pull_requests": [
+    {
+      "pr": 281,
+      "head": "13db7030416f7b64f9a577b800a629549e23903e",
+      "merge_commit": "9afa0b22b856a8047fa7774044d403c28b328fb5",
+      "base": "integration/community-release-20261008",
+      "state": "MERGED",
+      "captured_checks": {
+        "success": 16,
+        "in_progress": 0,
+        "failure": 0
+      },
+      "checks_completed_before_merge": true,
+      "capture": "evidence/pr281-checkpoint-13db703-20261010T0625Z.json",
+      "whole_issue_acceptance": "not claimed"
+    },
+    {
+      "pr": 280,
+      "head": "0357585b51864e158f50c7479af001ba6daf5b06",
+      "tree": "01966c6360aafdca7b04291f43bb1c32dfb9d553",
+      "state": "OPEN",
+      "mergeability": "CLEAN",
+      "captured_checks": {
+        "success": 11,
+        "in_progress": 0,
+        "failure": 0
+      },
+      "capture": "evidence/pr280-checkpoint-0357585-20261010T0625Z.json",
+      "checks_completed_before_pr281_merge": true,
+      "next_gate": "Revalidate on the target after PR281 advanced integration; review and current-base admission remain separate.",
+      "scope_limit": "not production compiler, no full #130 acceptance"
+    },
+    {
+      "pr": 273,
+      "head": "6a852ed27c1a6c1ac6d2923c43ff9ae14fb064e3",
+      "tree": "66f5ff44ad917cec9b48eb681e4d6c3fc39ab102",
+      "base": "integration/community-release-20261008",
+      "state": "OPEN",
+      "mergeability": "UNKNOWN at 06:25Z",
+      "captured_checks": {
+        "success": 12,
+        "in_progress": 8,
+        "failure": 0,
+        "skipped": 1
+      },
+      "capture": "evidence/pr273-checkpoint-6a852ed-20261010T0625Z.json",
+      "scope_limit": "P0 rollback regression is a bounded candidate gate; this captured PR-wide CI is not complete."
+    }
+  ],
+  "supplemental_issue_gates": [
+    {
+      "issue": 279,
+      "title": "Preserve sibling packages during multi-directory actions-sync startup",
+      "status": "OPEN",
+      "priority": "P0",
+      "url": "https://github.com/joshyorko/actions/issues/279",
+      "accounting_position": "outside_original_54_issue_accounting",
+      "parent_issue": 101,
+      "parent_relationship": "coordination only; no execution prerequisite",
+      "scope": "Three public resource/template/prompt duplicate-admission cases; preserve prior catalog and callbacks on rejection. Does not prove broader managed-RCC rollback, whole issue, or all platform acceptance.",
+      "implementation_status": "Three public resource/template/prompt duplicate-admission cases passed in Sol’s bounded receipt on production source 3d077 (tree b6ee7d0), with baseline 84b8 failing all three. PR273 head 6a852ed is the current candidate; at 06:25Z its check readback was 12 success, 8 in progress, 1 skipped. No whole #279 or platform-wide acceptance is claimed.",
+      "evidence_path": "evidence/pr279-mcp-catalog-rollback-20261010.json",
+      "evidence_sha256": "abaf0faa531906cd1b8ab3f19e5a2d4ed1fa74cf52a7c6608932d3cd7477491b"
+    }
+  ],
+  "accepted_scoped_criteria": [
+    {
+      "criterion_id": "100-A:bounded-public-authoring",
+      "owner_issue": 100,
+      "status": "ACCEPTED_BOUNDED_SLICE",
+      "consumer_issue": 100,
+      "consumer_slice": "100-A",
+      "description": "Public MCP App decorator and candidate-wheel authoring seam for the shared Canvas fixture; this is not full #100 or deployed authorization acceptance.",
+      "decision": "Root accepted the bounded 100-A source criterion after LunaCanvas reviewed the exact Runtime/browser receipt and authoring test log. Whole #100 and deployment authorization remain open.",
+      "consumer_slice_description": "Public tool UI metadata and ui:// resource authoring/serving",
+      "consumer_slice_status": "ACCEPTED_BOUNDED_SLICE; not whole #100 acceptance.",
+      "gate_scope": "Public decorator/authoring seam only; excludes full #100 production, host acceptance, and package publication.",
+      "consumer_issue_reason": "The bounded public authoring slice 100-A is accepted. The single shared fixture roundtrip 100-B is also accepted; Runtime dispatch, Workspace authorization and whole #100 acceptance remain open.",
+      "consumer_issue_next_action": "Preserve the shared fixture as the only 100-B interchange target; leave Runtime dispatch, Workspace authorization and whole-issue #100 acceptance as separate open gates.",
+      "evidence_path": "evidence/canvas-authoring-final-v2.log",
+      "evidence_sha256": "53a2768f84bbca9f76afad721ef831f9a89222b8441d5d652c751fa869b74a4d",
+      "superseded_issue_level_prerequisites": []
+    },
+    {
+      "criterion_id": "100-B:single-fixture-python-json-roundtrip",
+      "owner_issue": 100,
+      "status": "ACCEPTED_SINGLE_FIXTURE_ROUNDTRIP_ONLY",
+      "consumer_issue": 100,
+      "consumer_slice": "100-B",
+      "description": "Python/JSON roundtrip for the one shared Canvas fixture and its schema; this does not establish a generalized CanvasSpec contract.",
+      "decision": "Root accepted only the single-fixture 100-B slice based on the bounded authoring test receipt; generalized CanvasSpec and whole #100 remain open.",
+      "consumer_slice_description": "Versioned CanvasSpec interchange and Python/JSON/TypeScript fixture",
+      "consumer_slice_status": "ACCEPTED_SINGLE_FIXTURE_ROUNDTRIP_ONLY; generalized CanvasSpec and whole #100 remain open.",
+      "gate_scope": "One fixture and Python/JSON roundtrip only; no generalized interchange schema or whole #100 acceptance.",
+      "consumer_issue_reason": "The bounded public authoring 100-A and single-fixture Python/JSON roundtrip 100-B are accepted. Runtime dispatch, Workspace authorization, generalized CanvasSpec and whole #100 remain open.",
+      "consumer_issue_next_action": "Keep the accepted roundtrip bound to the shared fixture; pursue any broader schema only through a separately reviewed criterion.",
+      "evidence_path": "evidence/canvas-authoring-final-v2.log",
+      "evidence_sha256": "53a2768f84bbca9f76afad721ef831f9a89222b8441d5d652c751fa869b74a4d",
+      "superseded_issue_level_prerequisites": []
+    },
+    {
+      "criterion_id": "99-A:system-chromium-runtime-bridge",
+      "owner_issue": 99,
+      "status": "ACCEPTED_SYSTEM_CHROMIUM_RUNTIME_SLICE",
+      "consumer_issue": 99,
+      "consumer_slice": "99-A",
+      "description": "The same built MCP App resource was exercised through Actions Runtime and the public bridge with system Chromium, with five persisted Runtime runs. Pinned Playwright browser, actual ChatGPT host, and whole #99 are not proven.",
+      "decision": "Root accepted bounded 99-A evidence after independent Canvas review. The exact receipt binds wheel, installed module, resource hash, system Chromium and five persisted runs; pinned Playwright and actual host remain unverified.",
+      "consumer_slice_description": "Portable MCP App View renderer/resource bridge using the agreed fixture",
+      "consumer_slice_status": "ACCEPTED_SYSTEM_CHROMIUM_RUNTIME_SLICE; pinned Playwright, actual ChatGPT host and whole #99 remain open.",
+      "gate_scope": "Same resource through Runtime and system Chromium only; not pinned Playwright, ChatGPT host, full renderer acceptance, or whole #99.",
+      "consumer_issue_reason": "The bounded 99-A Runtime/resource/browser slice is accepted on the shared fixture. Pinned Playwright, actual ChatGPT host and remaining whole-issue #99 criteria remain open.",
+      "consumer_issue_next_action": "Proceed with #127 using the accepted system-Chromium slice; retain pinned Playwright, actual ChatGPT host and whole #99 criteria as separate gates.",
+      "evidence_path": "evidence/canvas-runtime-bridge-receipt-final-v2.json",
+      "evidence_sha256": "441dadb7ddab6b72da423b2b8767398d5a01449261bc013ac16e408511192e2c",
+      "superseded_issue_level_prerequisites": []
+    },
+    {
+      "criterion_id": "98:canvas-artifact-consumed-resource-127",
+      "owner_issue": 98,
+      "status": "ACCEPTED_CONSUMED_RESOURCE_SLICE",
+      "consumer_issue": 127,
+      "consumer_slice": "127-template",
+      "description": "The template can consume the exact Canvas resource artifact and its recorded MIME/URI/SHA; this does not accept full #98 artifact inventory, frozen package, or reproducibility requirements.",
+      "decision": "Root accepted the consumed-resource criterion for starting the bounded template slice; whole #98 remains open.",
+      "consumer_slice_description": "Packaged Canvas query template using accepted authoring and renderer slices",
+      "consumer_slice_status": "READY_FOR_BOUNDED_TEMPLATE_IMPLEMENTATION; implementation is ACTIVE and NOT_COMPLETE.",
+      "gate_scope": "Consume the proven resource artifact only; excludes whole #98 artifact inventory, frozen-package, and reproducibility acceptance.",
+      "consumer_issue_reason": "#127-template is ACTIVE after bounded authoring, single-fixture roundtrip, system-Chromium Runtime bridge, consumed-resource and public-package-boundary criteria were accepted. Template implementation is in progress and NOT_COMPLETE.",
+      "consumer_issue_next_action": "Complete and validate the isolated Canvas query template against only the accepted slices; do not edit common renderer/API scope or promote this work to whole #127/#98/#125 acceptance.",
+      "consumer_issue_classification": "ACTIVE",
+      "evidence_path": "evidence/canvas-runtime-bridge-receipt-final-v2.json",
+      "evidence_sha256": "441dadb7ddab6b72da423b2b8767398d5a01449261bc013ac16e408511192e2c",
+      "superseded_issue_level_prerequisites": []
+    },
+    {
+      "criterion_id": "125:public-package-boundary-template-127",
+      "owner_issue": 125,
+      "status": "ACCEPTED_TEMPLATE_PUBLIC_BOUNDARY_ONLY",
+      "consumer_issue": 127,
+      "consumer_slice": "127-template",
+      "description": "Use the public decorator/candidate-wheel authoring boundary for this template. No Canvas package archive or full #125 acceptance is established.",
+      "decision": "Root accepted the bounded public-package boundary consumed by #127 after source review; whole #125 and Canvas package archive remain open.",
+      "consumer_slice_description": "Packaged Canvas query template using accepted authoring and renderer slices",
+      "consumer_slice_status": "READY_FOR_BOUNDED_TEMPLATE_IMPLEMENTATION; implementation is ACTIVE and NOT_COMPLETE.",
+      "gate_scope": "Relevant public decorator/candidate-wheel authoring boundary only; no Canvas package archive or whole #125 acceptance.",
+      "consumer_issue_reason": "#127-template is ACTIVE after bounded authoring, single-fixture roundtrip, system-Chromium Runtime bridge, consumed-resource and public-package-boundary criteria were accepted. Template implementation is in progress and NOT_COMPLETE.",
+      "consumer_issue_next_action": "Complete and validate the isolated Canvas query template against only the accepted slices; do not edit common renderer/API scope or promote this work to whole #127/#98/#125 acceptance.",
+      "consumer_issue_classification": "ACTIVE",
+      "evidence_path": "evidence/canvas-runtime-bridge-receipt-final-v2.json",
+      "evidence_sha256": "441dadb7ddab6b72da423b2b8767398d5a01449261bc013ac16e408511192e2c",
+      "superseded_issue_level_prerequisites": []
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/canvas-authoring-final-v2.log",
+      "size_bytes": 161,
+      "sha256": "53a2768f84bbca9f76afad721ef831f9a89222b8441d5d652c751fa869b74a4d"
+    },
+    {
+      "path": "evidence/canvas-runtime-bridge-receipt-final-v2.json",
+      "size_bytes": 2858,
+      "sha256": "441dadb7ddab6b72da423b2b8767398d5a01449261bc013ac16e408511192e2c"
+    },
+    {
+      "path": "evidence/pr279-mcp-catalog-rollback-20261010.json",
+      "size_bytes": 18416,
+      "sha256": "abaf0faa531906cd1b8ab3f19e5a2d4ed1fa74cf52a7c6608932d3cd7477491b"
+    },
+    {
+      "path": "evidence/pr279-mcp-catalog-rollback-20261010.md",
+      "size_bytes": 4555,
+      "sha256": "347f47493813a5ecb51fdc54030aa39f43688f74000970d176a7eb97769292c1"
+    },
+    {
+      "path": "evidence/pr273-checkpoint-6a852ed-20261010T0625Z.json",
+      "size_bytes": 7292,
+      "sha256": "df247262ddf63092bf21fc9ed2c549bfb0126f8a4f2e663ecad277ce3b2708e4"
+    },
+    {
+      "path": "evidence/pr280-checkpoint-0357585-20261010T0625Z.json",
+      "size_bytes": 4229,
+      "sha256": "80bdba59610e06cb41b6159dd80d7254a363fc14b0c830bb62114d612c17aa3f"
+    },
+    {
+      "path": "evidence/pr281-checkpoint-13db703-20261010T0625Z.json",
+      "size_bytes": 5820,
+      "sha256": "0322b744b98a88c3264cfe872148d05ae1092aeda8331bcfebc71f272b8e32b3"
+    }
+  ],
+  "upstream_disposition": "none; all bounded criteria and the P0 rollback regression concern the maintained Actions repository, with no confirmed third-party defect.",
+  "current_active_workers": {
+    "127": "Assigned template owner is implementing #127 in /tmp/work/actions-worktrees/canvas-template-20261010, branch feat/canvas-template-20261010, based at 13db7030416f7b64f9a577b800a629549e23903e. At 2026-10-10T06:22Z, template sources/tests and bundle metadata were modified or untracked; implementation and review are incomplete.",
+    "99": "No current worker activity is asserted. Bounded 99-A system-Chromium/Runtime criterion accepted from PR281 evidence; pinned Playwright, actual ChatGPT host and whole #99 remain open.",
+    "100": "No current worker activity is asserted. Bounded 100-A authoring and 100-B single-fixture roundtrip criteria accepted from PR281 evidence; Runtime dispatch, Workspace authorization, generalized CanvasSpec and whole #100 remain open."
+  },
+  "worker_stage_snapshot": "2026-10-10T06:22:05Z",
+  "issue_metadata_updates": {
+    "99": {
+      "next_bounded_action": "The bounded 99-A system-Chromium/Runtime bridge criterion is accepted from the same-resource receipt. Preserve pinned Playwright, actual ChatGPT host and remaining whole-issue #99 criteria as separate open gates; #127 may consume the accepted slice."
+    },
+    "100": {
+      "next_bounded_action": "The bounded 100-A public-authoring and 100-B single-fixture Python/JSON roundtrip criteria are accepted. Keep Runtime dispatch, Workspace authorization, generalized CanvasSpec and whole-issue #100 acceptance open."
+    },
+    "127": {
+      "owner": "Assigned #127 template implementation worktree; root integration owner",
+      "next_bounded_action": "Complete the assigned isolated Canvas query template and focused validation using only the accepted 100-A/100-B/99-A and relevant 98/125 criteria. Preserve the single fixture and system-Chromium limits; do not broaden to shared renderer/API or claim whole #127 acceptance."
+    }
+  }
+}
