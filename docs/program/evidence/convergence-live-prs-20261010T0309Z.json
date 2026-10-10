@@ -1,0 +1,143 @@
+{
+  "observed_at_utc": "2026-10-10T03:09:10Z",
+  "source": "GitHub REST via gh api repos/joshyorko/actions/pulls?state=open&per_page=100",
+  "repository": "joshyorko/actions",
+  "pull_requests": [
+    {
+      "number": 215,
+      "state": "open",
+      "draft": true,
+      "title": "WIP: checkpoint community release safeguards for adversarial review",
+      "head": {
+        "ref": "convergence/actions-full-graph-20261008",
+        "sha": "d07f79b355f976f97948720474fd050d0a32ea16"
+      },
+      "base": {
+        "ref": "community",
+        "sha": "7c98236069171f57031218f938963238986293bd"
+      },
+      "mergeable": null,
+      "updated_at": "2026-10-08T21:12:55Z",
+      "html_url": "https://github.com/joshyorko/actions/pull/215"
+    },
+    {
+      "number": 216,
+      "state": "open",
+      "draft": true,
+      "title": "WIP: checkpoint bounded Runtime history and WebSocket repairs",
+      "head": {
+        "ref": "review/runtime-checkpoint-20261008",
+        "sha": "d26fa423080cec22522402f2193b17a5f32b336a"
+      },
+      "base": {
+        "ref": "community",
+        "sha": "7c98236069171f57031218f938963238986293bd"
+      },
+      "mergeable": null,
+      "updated_at": "2026-10-08T21:12:57Z",
+      "html_url": "https://github.com/joshyorko/actions/pull/216"
+    },
+    {
+      "number": 217,
+      "state": "open",
+      "draft": true,
+      "title": "WIP: checkpoint Core public contracts and regression tests",
+      "head": {
+        "ref": "review/core-checkpoint-20261008",
+        "sha": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2"
+      },
+      "base": {
+        "ref": "community",
+        "sha": "7c98236069171f57031218f938963238986293bd"
+      },
+      "mergeable": null,
+      "updated_at": "2026-10-08T21:12:58Z",
+      "html_url": "https://github.com/joshyorko/actions/pull/217"
+    },
+    {
+      "number": 218,
+      "state": "open",
+      "draft": true,
+      "title": "WIP: checkpoint native Work Items packaging and recovery",
+      "head": {
+        "ref": "review/workitems-checkpoint-20261008",
+        "sha": "95ddbe88106be594ea9954bdb36909702c5e2869"
+      },
+      "base": {
+        "ref": "community",
+        "sha": "7c98236069171f57031218f938963238986293bd"
+      },
+      "mergeable": null,
+      "updated_at": "2026-10-08T21:13:00Z",
+      "html_url": "https://github.com/joshyorko/actions/pull/218"
+    },
+    {
+      "number": 221,
+      "state": "open",
+      "draft": true,
+      "title": "Integrate Actions Runtime 1.0.3 security, execution, and native acceptance work",
+      "head": {
+        "ref": "integration/community-release-20261008",
+        "sha": "6d438feb6c92f8bb01428f665ac423fb101b4017"
+      },
+      "base": {
+        "ref": "community",
+        "sha": "36b8192dbb8143e016af3351f7d25b22a35c9944"
+      },
+      "mergeable": null,
+      "updated_at": "2026-10-10T03:07:53Z",
+      "html_url": "https://github.com/joshyorko/actions/pull/221"
+    },
+    {
+      "number": 272,
+      "state": "open",
+      "draft": true,
+      "title": "fix: retain last-good RCC source generations",
+      "head": {
+        "ref": "devsy/rcc-narrow-acceptance-20261010",
+        "sha": "969219e7aa398f61b11466a2dc16ac3143568ff5"
+      },
+      "base": {
+        "ref": "integration/community-release-20261008",
+        "sha": "ce6b3cef5316302ed065619a52eddbc8e5d44e1b"
+      },
+      "mergeable": null,
+      "updated_at": "2026-10-10T03:09:19Z",
+      "html_url": "https://github.com/joshyorko/actions/pull/272"
+    },
+    {
+      "number": 273,
+      "state": "open",
+      "draft": true,
+      "title": "fix: reconcile Runtime acceptance and integration gates",
+      "head": {
+        "ref": "fix/runtime-tests-integration-triggers-20261010",
+        "sha": "7b7cb0a9cd870d86c07ef2d82364e40ec479c23c"
+      },
+      "base": {
+        "ref": "integration/community-release-20261008",
+        "sha": "46a06485f776265e64e84629c468f26b4389d2bd"
+      },
+      "mergeable": null,
+      "updated_at": "2026-10-10T02:36:48Z",
+      "html_url": "https://github.com/joshyorko/actions/pull/273"
+    },
+    {
+      "number": 278,
+      "state": "open",
+      "draft": true,
+      "title": "fix: keep RCC acceptance CLI portable",
+      "head": {
+        "ref": "fix/rcc-harness-portability-20261010",
+        "sha": "c1c33ce77895d7b522f2229524d386ed72f8ba3b"
+      },
+      "base": {
+        "ref": "integration/community-release-20261008",
+        "sha": "46a06485f776265e64e84629c468f26b4389d2bd"
+      },
+      "mergeable": null,
+      "updated_at": "2026-10-10T01:44:18Z",
+      "html_url": "https://github.com/joshyorko/actions/pull/278"
+    }
+  ]
+}

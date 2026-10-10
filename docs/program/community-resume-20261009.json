@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-10T02:11:20Z",
-  "status": "ACTIVE engineering checkpoint at 2026-10-10T02:11:20Z: 16 of 28 scoped PRs are integrated to their recorded targets; 12 remain open/blocked and 0 are merge-ready. Community is 36b8192d; main integration is 46a06485; Runtime candidate is 6a53578f. PR273 is the current combined validation candidate at 7f233e2a. Its native build/Work Items browser workflow and six RCC toolkit jobs passed, but configured Runtime run 38015195327 has a Linux integration failure (7 failed, 112 passed, 15 skipped) while macOS and Windows jobs remain in progress. No whole-issue acceptance or publication changed.",
-  "integration_head": "46a06485f776265e64e84629c468f26b4389d2bd",
+  "observed_at": "2026-10-10T03:10:33Z",
+  "status": "ACTIVE engineering checkpoint at 2026-10-10T03:10:33Z: 20 of 28 scoped PRs are integrated to recorded targets; 8 remain open/blocked and 0 are merge-ready. Community 36b8192d, integration 6d438feb, Runtime candidate 6a53578f. PR276 and PR277 are bounded component merges with exact-head checks, normal guarded integration and disjoint reviewed base deltas; they do not complete owning issues. PR273 remains conflicting and blocked by recorded credential/Windows test failures and independent archive review. RCC natural cleanup remains blocked after exit -11. No issue acceptance or publication changed.",
+  "integration_head": "d54687003b865bf2ea520d7cacf54e4badbbf8cf",
   "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
   "release_ready": false,
   "community_merge": true,
@@ -3203,13 +3203,13 @@
   },
   "release_candidate_head": "6a53578fac029a0696834c30438c858f5f0003be",
   "current_convergence_update": {
-    "observed_at_utc": "2026-10-10T01:35:00Z",
-    "path": "evidence/convergence-followup-20261010T0135Z.json",
-    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
+    "observed_at_utc": "2026-10-10T03:10:33Z",
+    "path": "evidence/convergence-followup-20261010T0310Z.json",
+    "sha256": "83ddc07d6f0ebe387d2d54e2de57dca54bc6d7c8fc233185c24e2c8b74d36267",
     "cohort": {
-      "items": 27,
-      "target_integrated": 16,
-      "open_blocked": 11,
+      "items": 28,
+      "target_integrated": 20,
+      "open_blocked": 8,
       "merge_ready": 0,
       "target_integrated_prs": [
         219,
@@ -3227,7 +3227,11 @@
         268,
         269,
         270,
-        271
+        271,
+        274,
+        275,
+        276,
+        277
       ],
       "open_prs": [
         215,
@@ -3237,61 +3241,35 @@
         221,
         272,
         273,
-        274,
-        275,
-        276,
-        277
+        278
       ]
     },
     "open_pr_audit": {
-      "path": "evidence/convergence-live-prs-20261010T0135Z.json",
-      "sha256": "56e647f20c93698e901bf641e52826f53d3f3c4052852c4e917caf6387c64107",
-      "open_count": 11,
-      "all_drafts": false,
+      "path": "evidence/convergence-live-prs-20261010T0310Z.json",
+      "sha256": "d41dfac713df9176280dc80e5e2d50d117b85da07f417d5b2b70ca25db8bcf32",
+      "open_count": 8,
+      "all_drafts": true,
       "exact_pr_heads": {
         "215": "d07f79b355f976f97948720474fd050d0a32ea16",
         "216": "d26fa423080cec22522402f2193b17a5f32b336a",
         "217": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
         "218": "95ddbe88106be594ea9954bdb36909702c5e2869",
-        "221": "46a06485f776265e64e84629c468f26b4389d2bd",
-        "272": "2def236adf76f6731c88c29d9d27e5181de6275f",
-        "273": "f30aed327adcf148d69f45c71b742dd89bb6f617",
-        "274": "a0d727eb7831f855e284d005f3048755cbfdc1be",
-        "275": "dc610f3ba14b9a64b7fd4b4bcb6ec1fccb00beab",
-        "276": "bd10bb575a7327563892ce29623a5afc327fd82e",
-        "277": "417c9c0222dfd57b2537ef51b8ace50bfac6187b"
+        "221": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+        "272": "969219e7aa398f61b11466a2dc16ac3143568ff5",
+        "273": "7b7cb0a9cd870d86c07ef2d82364e40ec479c23c",
+        "278": "c1c33ce77895d7b522f2229524d386ed72f8ba3b"
       }
     },
     "branch_readback": {
-      "community": {
-        "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
-        "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
-        "ref": "refs/heads/community"
-      },
-      "integration": {
-        "head": "46a06485f776265e64e84629c468f26b4389d2bd",
-        "tree": "be7d58f57a645aa07e1bbfd6ed773bd402c1acf9",
-        "ref": "refs/heads/integration/community-release-20261008"
-      },
-      "runtime_candidate": {
-        "head": "6a53578fac029a0696834c30438c858f5f0003be",
-        "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
-        "ref": "refs/heads/integration/runtime-release-final-20261009"
-      }
+      "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be"
     },
-    "branch_readback_at": "2026-10-10T01:36:00Z",
-    "branch_readback_receipt": "evidence/convergence-refs-20261010T0136Z.txt",
-    "branch_readback_receipt_sha256": "839a6e50c1680fa4348f5783d40fc5352bd2e1e172675a5448b6cacfc66a0033",
+    "branch_readback_receipt": "evidence/convergence-refs-20261010T0310Z.json",
+    "branch_readback_sha256": "47aaa6aea04b6bcdc534039e369c0fad2f51c803a86b3e08438a5d9a93632529",
     "issue_acceptance_changed": false,
     "stage_counts_unchanged": true,
-    "release_state": {
-      "core": "1.0.2 published and verified",
-      "helper": "1.0.3 published and verified",
-      "runtime_native": "1.0.3 held and unpublished",
-      "publication": "No publication performed in this checkpoint."
-    },
-    "upstream_disposition": "none",
-    "receipt_sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc"
+    "release_ready": false
   },
   "latest_artifact_metadata_erratum": {
     "observed_at_utc": "2026-10-09T22:34:00Z",
@@ -3744,20 +3722,15 @@
     "receipt_sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360"
   },
   "current_next_action": {
-    "observed_at_utc": "2026-10-10T01:35:00Z",
-    "path": "evidence/convergence-followup-20261010T0135Z.json",
-    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
+    "observed_at_utc": "2026-10-10T03:10:33Z",
+    "path": "evidence/convergence-followup-20261010T0310Z.json",
+    "sha256": "83ddc07d6f0ebe387d2d54e2de57dca54bc6d7c8fc233185c24e2c8b74d36267",
     "pr": 273,
-    "head": "f30aed327adcf148d69f45c71b742dd89bb6f617",
-    "status_counts": {
-      "FAILURE": 3,
-      "SUCCESS": 10,
-      "IN_PROGRESS": 2
-    },
-    "owner": "Root integration",
-    "source_review": "Component PRs274\u2013277 have bounded source reviews accepted; PR273 itself remains at its published head with three failed checks.",
-    "pending": "Push a single composed candidate and run configured combined Runtime/Work Items/native gates on that exact head.",
-    "scope": "No combined full-gate PASS, whole issue acceptance, Runtime/native publication, or release readiness is established."
+    "head": "7b7cb0a9cd870d86c07ef2d82364e40ec479c23c",
+    "status": "OPEN_DRAFT; GitHub reports CONFLICTING. Tested tree equality persists, but recorded combined Runtime failures and independent archive fidelity review block admission. A separate root-local 22-test result is focused only and not current hosted PR evidence.",
+    "owner": "Root owns combined integration; Cloud TLS owns Windows fixes; missing external credential remains NOT_RUN; native artifact review and RCC natural-exit diagnosis remain outstanding.",
+    "pending": "Complete exact-source full gates, independent archive-byte review and natural cleanup proof; do not infer admission from focused tests.",
+    "scope": "PR integration remains distinct from all owning-issue acceptance and publication."
   },
   "superseded_status_20261010T0016Z": "ACTIVE engineering checkpoint at 2026-10-10T00:16:55Z: 15 of 21 scoped PRs are integrated to their recorded targets; 6 remain open/blocked and 0 are merge-ready. Community is 36b8192d and integration/PR221 is 77e67de3. PR221 exact-head checks pass except publication steps skipped. PR256 source review is bounded ACCEPT at dc205182; Linux frozen/Go-wrapper and Windows frozen pass, Windows Go-wrapper fails its manifest/build-input hash check, and macOS UI steps are skipped. The existing owner is porting a narrow correction against 77e; focused tests are reported pass, configured full suite pending. Helper1.0.3/Core1.0.2 are published; Runtime/native1.0.3 is held and unpublished. No whole-issue acceptance changed. Current next-action pointer only: PR256 head b676daf3 run38008430418 is in progress; the earlier dc205 Windows Go-wrapper failure remains bound to that predecessor.",
   "prior_current_convergence_update_20261010T0016Z": {
@@ -4324,17 +4297,17 @@
     }
   },
   "current_program_refs": {
+    "observed_at_utc": "2026-10-10T03:10:33Z",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
-    "community_tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
-    "integration": "46a06485f776265e64e84629c468f26b4389d2bd",
-    "integration_tree": "be7d58f57a645aa07e1bbfd6ed773bd402c1acf9",
+    "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
     "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "community_tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
+    "integration_tree": "92e79c92f2f64585cbe66f068f5757f205fbe976",
     "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
     "release_ready": false,
-    "source": "git ls-remote and local commit-tree readback",
-    "observed_at_utc": "2026-10-10T01:36:00Z",
-    "receipt": "evidence/convergence-refs-20261010T0136Z.txt",
-    "receipt_sha256": "839a6e50c1680fa4348f5783d40fc5352bd2e1e172675a5448b6cacfc66a0033"
+    "receipt": "evidence/convergence-refs-20261010T0310Z.json",
+    "receipt_sha256": "47aaa6aea04b6bcdc534039e369c0fad2f51c803a86b3e08438a5d9a93632529",
+    "source": "git ls-remote plus local exact commit tree readback"
   },
   "current_evidence_correction": {
     "observed_at_utc": "2026-10-10T01:40:00Z",
@@ -4342,9 +4315,23 @@
     "sha256": "8c2a9f9e13cb711b32e2416fb135e2f423d04528e60991792c940aa71ee9314a",
     "scope": "Adds the referenced sanitized Win32 mypy output and corrects the present PR276 base readback; the 01:35 snapshot remains immutable."
   },
-  "checkpoint_status": "ACTIVE engineering checkpoint at 2026-10-10T02:11:20Z: 16 of 28 scoped PRs are integrated to their recorded targets; 12 remain open/blocked and 0 are merge-ready. Community is 36b8192d; main integration is 46a06485; Runtime candidate is 6a53578f. PR273 is the current combined validation candidate at 7f233e2a. Its native build/Work Items browser workflow and six RCC toolkit jobs passed, but configured Runtime run 38015195327 has a Linux integration failure (7 failed, 112 passed, 15 skipped) while macOS and Windows jobs remain in progress. No whole-issue acceptance or publication changed.",
-  "checkpoint_observed_at": "2026-10-10T02:11:20Z",
+  "checkpoint_status": "ACTIVE engineering checkpoint at 2026-10-10T03:10:33Z: 20 of 28 scoped PRs are integrated to recorded targets; 8 remain open/blocked and 0 are merge-ready. Community 36b8192d, integration 6d438feb, Runtime candidate 6a53578f. PR276 and PR277 are bounded component merges with exact-head checks, normal guarded integration and disjoint reviewed base deltas; they do not complete owning issues. PR273 remains conflicting and blocked by recorded credential/Windows test failures and independent archive review. RCC natural cleanup remains blocked after exit -11. No issue acceptance or publication changed.",
+  "checkpoint_observed_at": "2026-10-10T03:10:33Z",
   "current_convergence": {
+    "path": "evidence/convergence-followup-20261010T0305Z.json",
+    "sha256": "34b9e8b640e0bf837b276d21293ad3b79d087982fbbab0a032f4a4f73f89ea96",
+    "observed_at_utc": "2026-10-10T03:05:30Z",
+    "cohort_items": 28,
+    "target_integrated": 18,
+    "open_blocked": 10,
+    "merge_ready": 0,
+    "runtime_candidate_head": "7b7cb0a9cd870d86c07ef2d82364e40ec479c23c",
+    "release_ready": false,
+    "whole_issue_acceptance_changed": false,
+    "live_pr_audit": "evidence/convergence-live-prs-20261010T0305Z.json",
+    "live_pr_audit_sha256": "8c28c612684ce8afb2eb9530dfbc236407384980beaf9642fa056aa54fa0cee6"
+  },
+  "prior_current_convergence_20261010T0211Z": {
     "path": "evidence/convergence-followup-20261010T0211Z.json",
     "sha256": "128e332ea91bbc0efb16d4319c4e0f8703a9c8a10ee87bddc4bf0c8d182f33d6",
     "observed_at_utc": "2026-10-10T02:11:20Z",
@@ -4357,5 +4344,244 @@
     "whole_issue_acceptance_changed": false,
     "live_pr_audit": "evidence/convergence-live-prs-20261010T0211Z.json",
     "live_pr_audit_sha256": "bccec098d85a09f08210d475abe92b5ab743b9f0cd9542c2878fd1d96e455582"
+  },
+  "prior_current_next_action_20261010T0135Z": {
+    "observed_at_utc": "2026-10-10T01:35:00Z",
+    "path": "evidence/convergence-followup-20261010T0135Z.json",
+    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
+    "pr": 273,
+    "head": "f30aed327adcf148d69f45c71b742dd89bb6f617",
+    "status_counts": {
+      "FAILURE": 3,
+      "SUCCESS": 10,
+      "IN_PROGRESS": 2
+    },
+    "owner": "Root integration",
+    "source_review": "Component PRs274\u2013277 have bounded source reviews accepted; PR273 itself remains at its published head with three failed checks.",
+    "pending": "Push a single composed candidate and run configured combined Runtime/Work Items/native gates on that exact head.",
+    "scope": "No combined full-gate PASS, whole issue acceptance, Runtime/native publication, or release readiness is established."
+  },
+  "prior_current_program_refs_20261010T0136Z": {
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "community_tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
+    "integration": "46a06485f776265e64e84629c468f26b4389d2bd",
+    "integration_tree": "be7d58f57a645aa07e1bbfd6ed773bd402c1acf9",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+    "release_ready": false,
+    "source": "git ls-remote and local commit-tree readback",
+    "observed_at_utc": "2026-10-10T01:36:00Z",
+    "receipt": "evidence/convergence-refs-20261010T0136Z.txt",
+    "receipt_sha256": "839a6e50c1680fa4348f5783d40fc5352bd2e1e172675a5448b6cacfc66a0033"
+  },
+  "prior_current_convergence_update_20261010T0305Z": {
+    "observed_at_utc": "2026-10-10T01:35:00Z",
+    "path": "evidence/convergence-followup-20261010T0135Z.json",
+    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
+    "cohort": {
+      "items": 27,
+      "target_integrated": 16,
+      "open_blocked": 11,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277
+      ]
+    },
+    "open_pr_audit": {
+      "path": "evidence/convergence-live-prs-20261010T0135Z.json",
+      "sha256": "56e647f20c93698e901bf641e52826f53d3f3c4052852c4e917caf6387c64107",
+      "open_count": 11,
+      "all_drafts": false,
+      "exact_pr_heads": {
+        "215": "d07f79b355f976f97948720474fd050d0a32ea16",
+        "216": "d26fa423080cec22522402f2193b17a5f32b336a",
+        "217": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+        "218": "95ddbe88106be594ea9954bdb36909702c5e2869",
+        "221": "46a06485f776265e64e84629c468f26b4389d2bd",
+        "272": "2def236adf76f6731c88c29d9d27e5181de6275f",
+        "273": "f30aed327adcf148d69f45c71b742dd89bb6f617",
+        "274": "a0d727eb7831f855e284d005f3048755cbfdc1be",
+        "275": "dc610f3ba14b9a64b7fd4b4bcb6ec1fccb00beab",
+        "276": "bd10bb575a7327563892ce29623a5afc327fd82e",
+        "277": "417c9c0222dfd57b2537ef51b8ace50bfac6187b"
+      }
+    },
+    "branch_readback": {
+      "community": {
+        "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
+        "ref": "refs/heads/community"
+      },
+      "integration": {
+        "head": "46a06485f776265e64e84629c468f26b4389d2bd",
+        "tree": "be7d58f57a645aa07e1bbfd6ed773bd402c1acf9",
+        "ref": "refs/heads/integration/community-release-20261008"
+      },
+      "runtime_candidate": {
+        "head": "6a53578fac029a0696834c30438c858f5f0003be",
+        "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+        "ref": "refs/heads/integration/runtime-release-final-20261009"
+      }
+    },
+    "branch_readback_at": "2026-10-10T01:36:00Z",
+    "branch_readback_receipt": "evidence/convergence-refs-20261010T0136Z.txt",
+    "branch_readback_receipt_sha256": "839a6e50c1680fa4348f5783d40fc5352bd2e1e172675a5448b6cacfc66a0033",
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "release_state": {
+      "core": "1.0.2 published and verified",
+      "helper": "1.0.3 published and verified",
+      "runtime_native": "1.0.3 held and unpublished",
+      "publication": "No publication performed in this checkpoint."
+    },
+    "upstream_disposition": "none",
+    "receipt_sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc"
+  },
+  "prior_current_next_action_20261010T0305Z": {
+    "observed_at_utc": "2026-10-10T03:05:30Z",
+    "path": "evidence/convergence-followup-20261010T0305Z.json",
+    "sha256": "34b9e8b640e0bf837b276d21293ad3b79d087982fbbab0a032f4a4f73f89ea96",
+    "pr": 273,
+    "head": "7b7cb0a9cd870d86c07ef2d82364e40ec479c23c",
+    "tested_merge": "c5c003a2d3d9dc9006be7221c61d8c25d3530201",
+    "tree": "9bc3bbffcf41fcc7442c6113187809b3181b2167",
+    "status": "OPEN_DRAFT; Runtime CI has a missing credential failure on Linux/macOS and five actionable Windows test failures; independent archive provenance review BLOCKED.",
+    "owner": "Root owns combined integration and artifact-order fix; Cloud TLS lane owns five Windows harness failures; existing Devsy native reviewer owns archive-byte disposition; original RCC producer owns natural cleanup fix.",
+    "pending": "Preserve the missing credential test as NOT_RUN; repair the five Windows harness failures, complete full-tree archive fidelity review and resolve RCC natural exit -11 before admission. Re-run only the affected gates on the reviewed source.",
+    "scope": "Current synthetic tree matches tested tree, but PR mergeability is false and source is not admitted. No whole issue acceptance, Runtime/native publication, or release readiness."
+  },
+  "prior_current_program_refs_20261010T0305Z": {
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "community_tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
+    "integration": "d54687003b865bf2ea520d7cacf54e4badbbf8cf",
+    "integration_tree": "e10b0c54d26d00b7b51c27b115327530da0edc61",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+    "release_ready": false,
+    "source": "Fresh git ls-remote and local exact tree readback.",
+    "observed_at_utc": "2026-10-10T03:05:30Z",
+    "receipt": "evidence/convergence-refs-20261010T0305Z.txt",
+    "receipt_sha256": "4e7a8ba73c1948eaa417c7734dae65a4e55998be34c607f0040bb6ad7060da1a"
+  },
+  "prior_current_convergence_update_20261010T0309Z": {
+    "observed_at_utc": "2026-10-10T03:09:10Z",
+    "path": "evidence/convergence-followup-20261010T0309Z.json",
+    "sha256": "4c77b80e3b59c52c9bc62cccf74188166bb53b7cfa21a2b1af559e9287910db3",
+    "cohort": {
+      "items": 28,
+      "target_integrated": 20,
+      "open_blocked": 8,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        274,
+        275,
+        276,
+        277
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        278
+      ]
+    },
+    "open_pr_audit": {
+      "path": "evidence/convergence-live-prs-20261010T0309Z.json",
+      "sha256": "4fc0f274a06bdd43180b63c3ad53d77d78b328326a5434c435272381f6f88c9d",
+      "open_count": 8,
+      "all_drafts": true,
+      "exact_pr_heads": {
+        "278": "c1c33ce77895d7b522f2229524d386ed72f8ba3b",
+        "273": "7b7cb0a9cd870d86c07ef2d82364e40ec479c23c",
+        "272": "969219e7aa398f61b11466a2dc16ac3143568ff5",
+        "221": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+        "218": "95ddbe88106be594ea9954bdb36909702c5e2869",
+        "217": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+        "216": "d26fa423080cec22522402f2193b17a5f32b336a",
+        "215": "d07f79b355f976f97948720474fd050d0a32ea16"
+      }
+    },
+    "branch_readback": {
+      "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+      "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be"
+    },
+    "branch_readback_receipt": "evidence/convergence-refs-20261010T0309Z.json",
+    "branch_readback_sha256": "45c6a6bd3328e426208df53ecfcbd27a067fe61e51de1509fbd2dbea55713190",
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "release_ready": false
+  },
+  "prior_current_next_action_20261010T0309Z": {
+    "observed_at_utc": "2026-10-10T03:09:10Z",
+    "path": "evidence/convergence-followup-20261010T0309Z.json",
+    "sha256": "4c77b80e3b59c52c9bc62cccf74188166bb53b7cfa21a2b1af559e9287910db3",
+    "pr": 273,
+    "head": "7b7cb0a9cd870d86c07ef2d82364e40ec479c23c",
+    "status": "OPEN_DRAFT; GitHub reports CONFLICTING. The tested code tree still matches the synthetic merge tree, but runtime credential/harness failures and independent archive fidelity block admission.",
+    "owner": "Root owns combined integration; Cloud TLS owns the five Windows harness fixes; external credential remains NOT_RUN; native artifact review remains blocked; RCC producer owns natural exit investigation.",
+    "pending": "Resolve five Windows harness failures, keep missing credential explicit, complete independent archive-byte review and resolve RCC natural exit -11; then rerun exact combined-source gates.",
+    "scope": "PR target integration does not change whole-issue acceptance or publication; only #210 is complete."
+  },
+  "prior_current_program_refs_20261010T0309Z": {
+    "observed_at_utc": "2026-10-10T03:09:10Z",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "community_tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
+    "integration_tree": "92e79c92f2f64585cbe66f068f5757f205fbe976",
+    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+    "release_ready": false,
+    "receipt": "evidence/convergence-refs-20261010T0309Z.json",
+    "receipt_sha256": "45c6a6bd3328e426208df53ecfcbd27a067fe61e51de1509fbd2dbea55713190",
+    "source": "git ls-remote plus local exact commit tree readback"
   }
 }
