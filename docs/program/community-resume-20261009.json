@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-10T16:43:42Z",
-  "status": "Dated current projection after normal integration of PRs #289, #297, and #298. The published integration is e886d26/tree 016664a8; the 46-item cohort is 35 integrated, 7 blocked, 4 superseded-unmerged, and 0 merge-ready. All 54 retained issue states/contracts, whole-issue acceptance, and 16 historical ZIP hashes are unchanged (53 open; only #210 accepted/closed). Current open-PR commit/tree pairs are bound to the independent GitHub response receipt. The repaired staged-RCC control rejects duplicated, missing, or unexpected inventory paths; its summary tests pass, while the actual two-case RCC consumer remains NOT RUN. Independent review accepted separate native and Go-wrapper 11-case artifacts for the exact older a47 candidate tuple, including 25 verified wrapper process records. PR290 remains blocked by current devmode failures; the narrow frozen acceptance does not clear those checks or imply release/issue acceptance. Devsy remains deleted by the user and on HOLD pending a new explicit HIT THE GAS.",
+  "observed_at": "2026-10-10T17:09:00Z",
+  "status": "Dated 17:09Z current-ref checkpoint. The published integration remains e886d26/tree 016664a8 and the named cohort remains 46: 35 integrated, 7 blocked, 4 superseded-unmerged, 0 merge-ready. Exact current PR head/tree/parent bindings were independently checked from read-only GitHub pull refs and immutable Git commit objects; all seven current PRs are open. The 54 retained issue contracts, raw states, whole-issue classifications, and 16 historical ZIP hashes remain unchanged. Frozen native and Go-wrapper 11-case acceptance remains valid only for its pinned prior candidate/source/control tuple. The newly repinned staged-RCC source/control pair has not run the actual two-case consumer. PR292 has a recorded PyPI connection reset with one retry reported queued/running and no retry result at cutoff. Devsy remains deleted by user and HOLD.",
   "integration_head": "e886d26ebaefafa9189a69517f6707691b53662e",
   "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
   "release_ready": false,
@@ -4330,13 +4330,13 @@
     }
   },
   "current_program_refs": {
-    "observed_at_utc": "2026-10-10T16:43:42Z",
+    "observed_at_utc": "2026-10-10T17:09:00Z",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "integration/community-release-20261008": "e886d26ebaefafa9189a69517f6707691b53662e",
     "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
     "release_ready": false,
-    "receipt": "evidence/program-amendment-20261010T1643Z.json",
-    "receipt_sha256": "64bbe1a3add66e78f4d0f51fdc078a228bf6e75c82ff6bb724db8de0bad22c3d",
+    "receipt": "evidence/program-amendment-20261010T1709Z.json",
+    "receipt_sha256": "74ee2c494bc4e7ccc892ecbf251c22c239436a613f19795ddf72524064b71ef5",
     "integration": "e886d26ebaefafa9189a69517f6707691b53662e"
   },
   "current_evidence_correction": {
@@ -4345,8 +4345,8 @@
     "sha256": "8c2a9f9e13cb711b32e2416fb135e2f423d04528e60991792c940aa71ee9314a",
     "scope": "Adds the referenced sanitized Win32 mypy output and corrects the present PR276 base readback; the 01:35 snapshot remains immutable."
   },
-  "checkpoint_status": "Dated current projection after normal integration of PRs #289, #297, and #298. The published integration is e886d26/tree 016664a8; the 46-item cohort is 35 integrated, 7 blocked, 4 superseded-unmerged, and 0 merge-ready. All 54 retained issue states/contracts, whole-issue acceptance, and 16 historical ZIP hashes are unchanged (53 open; only #210 accepted/closed). Current open-PR commit/tree pairs are bound to the independent GitHub response receipt. The repaired staged-RCC control rejects duplicated, missing, or unexpected inventory paths; its summary tests pass, while the actual two-case RCC consumer remains NOT RUN. Independent review accepted separate native and Go-wrapper 11-case artifacts for the exact older a47 candidate tuple, including 25 verified wrapper process records. PR290 remains blocked by current devmode failures; the narrow frozen acceptance does not clear those checks or imply release/issue acceptance. Devsy remains deleted by the user and on HOLD pending a new explicit HIT THE GAS.",
-  "checkpoint_observed_at": "2026-10-10T16:43:42Z",
+  "checkpoint_status": "Dated 17:09Z current-ref checkpoint. The published integration remains e886d26/tree 016664a8 and the named cohort remains 46: 35 integrated, 7 blocked, 4 superseded-unmerged, 0 merge-ready. Exact current PR head/tree/parent bindings were independently checked from read-only GitHub pull refs and immutable Git commit objects; all seven current PRs are open. The 54 retained issue contracts, raw states, whole-issue classifications, and 16 historical ZIP hashes remain unchanged. Frozen native and Go-wrapper 11-case acceptance remains valid only for its pinned prior candidate/source/control tuple. The newly repinned staged-RCC source/control pair has not run the actual two-case consumer. PR292 has a recorded PyPI connection reset with one retry reported queued/running and no retry result at cutoff. Devsy remains deleted by user and HOLD.",
+  "checkpoint_observed_at": "2026-10-10T17:09:00Z",
   "current_convergence": {
     "observed_at_utc": "2026-10-10T06:04:13Z",
     "path": "evidence/convergence-followup-20261010T0604Z.json",
@@ -16355,13 +16355,753 @@
           "corrected_by": "The current_ref_authority receipt and current_pr_heads in this 16:43 amendment."
         }
       ]
+    },
+    {
+      "id": "program-amendment-20261010T1709Z",
+      "observed_at_utc": "2026-10-10T17:09:00Z",
+      "summary": "Dated 17:09Z current-ref checkpoint. The published integration remains e886d26/tree 016664a8 and the named cohort remains 46: 35 integrated, 7 blocked, 4 superseded-unmerged, 0 merge-ready. Exact current PR head/tree/parent bindings were independently checked from read-only GitHub pull refs and immutable Git commit objects; all seven current PRs are open. The 54 retained issue contracts, raw states, whole-issue classifications, and 16 historical ZIP hashes remain unchanged. Frozen native and Go-wrapper 11-case acceptance remains valid only for its pinned prior candidate/source/control tuple. The newly repinned staged-RCC source/control pair has not run the actual two-case consumer. PR292 has a recorded PyPI connection reset with one retry reported queued/running and no retry result at cutoff. Devsy remains deleted by user and HOLD.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "open_issues": 53,
+        "accepted_closed_issues": [
+          210
+        ],
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "issue_stage_counts": {
+          "READY": 0,
+          "ACTIVE": 8,
+          "REVIEW": 9,
+          "BLOCKED": 28,
+          "INTEGRATED": 8,
+          "COMPLETE": 1
+        },
+        "whole_issue_acceptance_changed": false,
+        "raw_contracts_or_historical_archives_changed": false,
+        "historical_zip_count": 16,
+        "cohort_items": 46,
+        "target_integrated_prs": 35,
+        "superseded_unmerged_prs": 4,
+        "open_blocked_prs": 7,
+        "merge_ready_prs": 0,
+        "live_issue_state_refresh": {
+          "matched": 54,
+          "open": 53,
+          "closed": [
+            210
+          ],
+          "closed_but_unaccepted": [],
+          "acceptance_or_stage_changes": false,
+          "receipt": "evidence/issue-state-refresh-20261010T1516Z/retained-issue-states.json",
+          "observed_at_utc": "2026-10-10T15:16:00Z",
+          "current_cutoff_note": "No new 54-issue API refresh was performed for this checkpoint; the latest retained read remains 15:16Z. No new acceptance or raw-state change is claimed."
+        }
+      },
+      "integration_checkpoint": {
+        "head": "e886d26ebaefafa9189a69517f6707691b53662e",
+        "tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7",
+        "parents": [
+          "f18058b6c614d065fe821d98b0039f1db736e5cb",
+          "fc582797cc754ae6dcf7602d98d6079f0004b29d"
+        ],
+        "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "source_base": "31239cf99c7b264a0eab89660e93b391532ac305",
+        "observed_at_utc": "2026-10-10T17:09:00Z",
+        "cohort": {
+          "items": 46,
+          "target_integrated": 35,
+          "open_blocked": 7,
+          "merge_ready": 0,
+          "target_integrated_prs": [
+            219,
+            220,
+            251,
+            256,
+            257,
+            259,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270,
+            271,
+            272,
+            273,
+            274,
+            275,
+            276,
+            277,
+            278,
+            280,
+            281,
+            283,
+            284,
+            285,
+            286,
+            287,
+            288,
+            289,
+            291,
+            297,
+            298
+          ],
+          "open_prs": [
+            221,
+            282,
+            290,
+            292,
+            299,
+            300,
+            301
+          ],
+          "superseded": 4,
+          "superseded_prs": [
+            215,
+            216,
+            217,
+            218
+          ],
+          "scope": "Named-target outcomes only. No whole-issue acceptance, release readiness, or Devsy readiness is implied."
+        },
+        "merged_prs_in_integration_ancestry": [
+          289,
+          297,
+          298
+        ],
+        "latest_merge_commit": {
+          "pr": 298,
+          "sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+          "tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7",
+          "parents": [
+            "f18058b6c614d065fe821d98b0039f1db736e5cb",
+            "fc582797cc754ae6dcf7602d98d6079f0004b29d"
+          ]
+        },
+        "scope": "Integration identity and cohort classification only; release and whole-issue acceptance unchanged.",
+        "merge_bindings": [
+          {
+            "pr": 289,
+            "merge_commit": "fdf9ee8f023d068c16e567a85defd7c0437f8117",
+            "merge_tree": "97dcea6360926d0e30dbdbda2575dfd3be783570",
+            "parents": [
+              "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+              "7ca665aaa4b180a78f532a4419e4d17bf4ced801"
+            ],
+            "pr_head_tree": "97dcea6360926d0e30dbdbda2575dfd3be783570",
+            "pr_head_commit": "7ca665aaa4b180a78f532a4419e4d17bf4ced801"
+          },
+          {
+            "pr": 297,
+            "merge_commit": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+            "merge_tree": "762c50e6416815043adbd82fae36e9ab9e3393ff",
+            "parents": [
+              "fdf9ee8f023d068c16e567a85defd7c0437f8117",
+              "4d9c348a65365ef4e4c26baddada79c754bc8dd1"
+            ],
+            "pr_head_tree": "8d94180cec876100eecda458f4e82bb2570a7944",
+            "pr_head_commit": "4d9c348a65365ef4e4c26baddada79c754bc8dd1"
+          },
+          {
+            "pr": 298,
+            "merge_commit": "e886d26ebaefafa9189a69517f6707691b53662e",
+            "merge_tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7",
+            "parents": [
+              "f18058b6c614d065fe821d98b0039f1db736e5cb",
+              "fc582797cc754ae6dcf7602d98d6079f0004b29d"
+            ],
+            "pr_head_tree": "419090496fe66a7339e74032d9d290f82b17592a",
+            "pr_head_commit": "fc582797cc754ae6dcf7602d98d6079f0004b29d"
+          }
+        ],
+        "merge_bindings_source": "Separate read-only GitHub PR API head_sha values for merged PRs from their actual integration merge commits. Exact Git objects independently confirm both head trees and merge trees; the recorded merge commit parents are retained."
+      },
+      "current_pr_inventory": {
+        "captured_at_utc": "2026-10-10T17:09:00Z",
+        "cohort_counts": {
+          "items": 46,
+          "target_integrated": 35,
+          "superseded_unmerged": 4,
+          "open_blocked": 7,
+          "merge_ready": 0
+        },
+        "binding_receipt": {
+          "path": "evidence/current-open-pr-audit-20261010T1709Z/current-git-bindings.json",
+          "sha256": "626f315b0315284e80874514645e4fe619da75b2e3c84b408892afc89768ae6b",
+          "observed_at_utc": "2026-10-10T17:09:00Z"
+        },
+        "open_pr_heads": {
+          "221": {
+            "head": "e886d26ebaefafa9189a69517f6707691b53662e",
+            "tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7",
+            "status": "OPEN_BLOCKED",
+            "scope": "Current head is the integration merge commit. Exact-head hosted checks and separate managed RCC/frozen lifecycle, successful-generation retention, and controlled-exit evidence remain required."
+          },
+          "282": {
+            "head": "421fac66e265de619eef7d4f9d171a6095f4a907",
+            "tree": "4bfe827f2e4fd502f31722121946d697aeaa5521",
+            "status": "OPEN_BLOCKED",
+            "scope": "The published minimum Core version remains 1.0.2. The unpublished Core 1.0.3 candidate and shared artifact predecessor remain release blockers; this checkpoint does not raise the declared floor or accept the issue."
+          },
+          "290": {
+            "head": "9e1059a12456faba64d11313d6dd8f943ad28912",
+            "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097",
+            "status": "OPEN_BLOCKED",
+            "scope": "Current PR head 9e1059a12456faba64d11313d6dd8f943ad28912/tree 03e6aa898081e6d4fe0df4d147d2c5242fdeb097 contains independently reviewed source fixes and the source guard; its exact current hosted controls remain PENDING at this cutoff. The 18 typing errors and Windows executable-mode/Bash assumptions, plus the resource-history dependency, describe historical failing head fbd504a331acfeadf7fc64e013b4fefcda7412e4/tree 0bddabdf6e6f85701b2b87f49e6c137cf48f532c (run 38067098336), not current 9e1059. PR292 remains an unmerged dependency for resource-history behavior. The previously accepted frozen 11-case tuple is independent and does not accept current PR290."
+          },
+          "292": {
+            "head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+            "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7",
+            "status": "OPEN_BLOCKED",
+            "scope": "Resource-history CLI evidence is scoped. A prior PyPI connection reset affected one uv setup test; a single retry was reported queued/running with no result available by this cutoff. This is not classified as a product failure or whole-issue acceptance."
+          },
+          "299": {
+            "head": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+            "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0",
+            "status": "OPEN_BLOCKED",
+            "scope": "Private shared Run-output implementation remains a bounded predecessor. Full production authorization, exact current hosted gates, and whole issue remain unaccepted; no new check-list refresh was performed."
+          },
+          "300": {
+            "head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+            "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1",
+            "status": "OPEN_BLOCKED",
+            "scope": "Trusted-code output transport remains bounded integration only; it does not establish full #83/#86 authorization or production Canvas acceptance."
+          },
+          "301": {
+            "head": "47d307c1fe1f55ca14b13425f2ce5c367d90210c",
+            "tree": "9e39f0b12078cc4de9510a3ab4d8844dc35f34a7",
+            "status": "OPEN_BLOCKED",
+            "scope": "Python-to-TypeScript-to-Python bridge is required in the hosted workflow; exact current hosted completion and renderer/runtime integration remain pending."
+          }
+        },
+        "inventory_limits": "Commit/tree/parents are bound by the receipt. PR API states were read for these seven refs. No full current hosted-check inventory was refreshed; only explicitly stated run/job observations are current. Historical check results remain tied to their recorded heads.",
+        "staged_rcc_control": {
+          "published_head": "0ed580eabf2b74fa7b2530f03760b650565b2178",
+          "tree": "e2420f11d98ac92ab1c1918209a893a578cf0ce6",
+          "parent": "2552a8c3419b213825294a51927843b2d61f662e",
+          "candidate_tree": "af7e419414261525c89db5511c5cbbc6f07981b0",
+          "local_reviewed_control": "f103edc9015128bb5e6d3875208c4077644e8fe4",
+          "scope": "Corrected duplicate/missing/unexpected staged inventory path admission; source/control contract tests pass. Actual two-case RCC consumer execution remains NOT RUN."
+        },
+        "staged_rcc": {
+          "source_head": "1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6",
+          "source_tree": "cdd4d65d914df9be3eaa4cf979d6b224fde431c3",
+          "source_parent": "2552a8c3419b213825294a51927843b2d61f662e",
+          "control_head": "473e42ec8f7a9f3fed623efc135b550ac3c08190",
+          "control_tree": "6f1a2d42b6d93c912c56efa3e9e6ac72729404a8",
+          "control_parent": "0ed580eabf2b74fa7b2530f03760b650565b2178",
+          "exact_two_case_consumer": "NOT_RUN"
+        }
+      },
+      "documentation_disposition": "No upstream defect was established by these bounded observations. Preserve the existing release and repository-operation guidance; the PyPI reset, RCC fixture directory failure, and managed CLI binary download are recorded as bounded environmental/fixture observations, not external dependency reports.",
+      "upstream_disposition": "No new external defect report. The prior RCC failure is a local test fixture directory prerequisite; PyPI reset is an observed network failure, with one retry reported queued/running and no result at cutoff.",
+      "active_substages": [
+        {
+          "id": "135-source-policy-a",
+          "owner_issue": 135,
+          "related_issue": 148,
+          "title": "SOURCE-POLICY-A: deterministic validation/canonical inventory of explicitly supplied portable source entries",
+          "shared_scope": "One cross-issue substage. #135 owns the active implementation work; #148 reuses the same portable path policy as a prerequisite, not a second implementation lane.",
+          "status": "INTEGRATED",
+          "implementation_status": "MERGED_AT_21064B1; 19_EXACT_HEAD_CHECKS_PASS; INDEPENDENT_REVIEW_APPROVED; PURE_POLICY_SCOPE_ONLY; NO_WHOLE_ISSUE_ACCEPTANCE",
+          "scope": "Pure validation and canonical inventory of explicitly supplied source entries: selected/protected paths; Unicode NFC; case and prefix collisions; portable path rules; regular files and directories only; 0644/0755 without privilege; empty directories do not define identity; limits of 10000 entries, 50 MiB per file, 500 MiB total, depth 64, path length 4096, and component length 255.",
+          "limits": "This is an integrated pure policy/inventory prerequisite only. It does not physically acquire or compile source, establish filesystem admission, or accept a public source-admission API contract. Whole #135/#148 acceptance remains open.",
+          "whole_issue_effect": "#135 remains BLOCKED by confined measurement/snapshot, RCC inspection/adapter/runtime compiler, capability identity, and generation proof. #148 retains its existing BLOCKED whole-issue stage. The integrated scoped prerequisite changes no whole-issue classification or graph stage count.",
+          "evidence_basis": "PR #286 exact reviewed head e7c42e94196beba04dbae85d8a38da78efd9767f/tree 16c81059bff80b6d85606d45ac7d46a88cdce597 was merged as 21064b1ad1e28d3e73749b7be19b98c79a98b93f with 19/19 exact-head checks passing and independent review approved (evidence/pr286-merge-20261010T1222Z/pr286-merge-receipt.json; comment 6097428470). Scope is the pure inventory prerequisite only; no filesystem acquisition, compiler, or issue-wide acceptance.",
+          "owner": "root integration review; pure-policy implementation lane complete",
+          "writer_boundary": "New helper/module/tests and behavior-preserving extraction of the existing Robot portable-path predicate on an isolated branch; no filesystem-admission behavior.",
+          "required_choices": [
+            "Keep legacy defaults and behavior unchanged.",
+            "Validate only explicitly supplied portable entries and protected paths.",
+            "Apply NFC, case/prefix collision, portable-path, entry-kind, and non-privileged mode rules.",
+            "Do not treat empty directories as source identity.",
+            "Enforce the stated entry, byte, depth, path, and component bounds."
+          ]
+        },
+        {
+          "id": "135-source-read-a",
+          "owner_issue": 135,
+          "related_issue": 148,
+          "title": "SOURCE-READ: bounded measurement of explicitly selected source files under a caller-supplied verified root descriptor",
+          "shared_scope": "One bounded reader stage for #135, reusable by #148 as a prerequisite; distinct from whole-tree snapshot, staging, and RCC/compiler acceptance.",
+          "status": "INTEGRATED",
+          "implementation_status": "MERGED_AT_5E3B611; EXACT_HEAD_375614E; 19/19_CHECKS_PASS; INDEPENDENT_COMBINED_REVIEW_APPROVED; BOUNDED_READER_SLICE_INTEGRATED; NO_WHOLE_ISSUE_ACCEPTANCE",
+          "scope": "Preflight explicit portable selected/protected file names with accepted SOURCE-POLICY-A; traverse beneath a caller-owned verified directory descriptor; pin selected leaves using Linux O_PATH/O_NOFOLLOW before fstat classification, then reopen via a pinned trusted procfd and compare handles; incrementally measure declared file and total byte bounds; compare parent/name and opened object observations before/after and revalidate selected paths.",
+          "limits": "Linux trusted procfs is an explicit supported-environment assumption and failure is closed without fallback. This does not establish an atomic full-tree snapshot, selected-set completeness, original root pathname, Workspace authorization, staging coherence, compiler inspection, Package Revision, Runtime Plan, or provider acceptance. The accepted reader/source test receipt is narrow; current published PR288 merged, but later staging/RCC consumer remains NOT RUN.",
+          "whole_issue_effect": "#135 remains BLOCKED by atomic/coherent snapshot and selected-set/global admission proof, staging and RCC inspection/adapter/runtime compiler plus capability identity/generation proof. #148 remains BLOCKED. No whole-issue stage/count/acceptance changes.",
+          "evidence_basis": "PR288 source-reader head 375614e53f3120c74caf3b732306b13eab99ffee/tree ede73323c44225ec4d7187aac1f261be0cd21375 merged at 5e3b61125bc17aafe6d7ee92db6b9f14a34b82fa with 19/19 exact-head checks and independent combined-tree review. See evidence/pr288-merge-20261010T1350Z/pr288-merge-receipt.json. This is only private Linux selected-file measurement for #135/#148; full issues remain BLOCKED.",
+          "owner": "Sol/source-confined-read existing lane; no duplicate source reader assigned.",
+          "required_choices": [
+            "Measure only explicitly selected entries supplied by the caller.",
+            "Classify a pinned object before content-readable open; fail closed without required Linux O_PATH/procfd support.",
+            "Keep policy inventory separate from measured object facts.",
+            "Do not claim atomic snapshot, completeness, authorization, staging, or compiler identity from this bounded measurement."
+          ]
+        },
+        {
+          "id": "135-source-staging-a",
+          "owner_issue": 135,
+          "related_issue": 148,
+          "title": "SOURCE-STAGING: stage measured selected files under a borrowed private destination descriptor",
+          "shared_scope": "One proposed Linux staging consumer for the accepted #135/#148 source-read slice; not a second reader or whole-issue implementation.",
+          "status": "ACTIVE",
+          "scope": "Copy only measured selected regular files via descriptor-relative no-follow/exclusive creation into an empty caller-owned private directory; compare source observations, enforce byte limits, re-read and hash staged bytes, and clean only identity-matched entries.",
+          "limits": "Independent review approved exact Linux source 1531460594941e64c8025e220b1409e2401f77b8; the checkpoint receipt records 20 staging tests PASS and a zero-leak failure probe. A subsequent Win32 type audit found direct geteuid/fchmod typing assumptions needing owner repair before publication. RCC consumer/import, atomic full snapshot, source completeness, authorization, compiler, Package Revision, Runtime Plan and whole #135/#148 acceptance remain NOT RUN/open.",
+          "whole_issue_effect": "#135 and #148 remain BLOCKED; this is a proposed bounded implementation substage and does not change the original 54 issue rows, issue stage counts, or accepted issue set.",
+          "evidence_basis": "Independent review receipt evidence/source-confined-staging-20261010T1410Z/receipt.md (SHA-256 d5768f6b91bfc5a3226596358461faa63c404b0b40d6b4a1c6fdcf1ba36a805b). The Win32 type audit and repair status are root-reported at 2026-10-10T14:15Z and remain pending.",
+          "current_followup": {
+            "status": "PREPARATION_ONLY",
+            "owner": "luna_source_profile",
+            "candidate_integration": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+            "source_pr_head": "fc582797cc754ae6dcf7602d98d6079f0004b29d",
+            "scope": "Preparing a current-source/current-registry consumer fixture with source/control two-case pins.",
+            "limits": "Older RCC control c7 uses stale f7 pins and a one-case fixture. No current RCC consumer execution, source acceptance, or full #135/#148 acceptance is claimed."
+          }
+        },
+        {
+          "id": "83-run-output-private-predecessor",
+          "owner_issue": 83,
+          "related_issues": [
+            86,
+            129
+          ],
+          "title": "Private Run-output state/fencing/staging predecessor",
+          "status": "ACTIVE",
+          "scope": "Private service/provider and database transactions for currentAttempt/epoch fencing, current grant checks, existing Run status/result authority, terminal output attachment and identity-checked staged cleanup.",
+          "evidence_basis": "Published draft PR299 head a62d02a76eec2b1322a03d5d5f541951d9cc241b/tree d01b7493e44d6c4f97ab054059c551a4c719a3d0; source/combined and PostgreSQL receipts are pinned to earlier exact ancestors and copied under evidence/run-output-predecessor-20261010T1520Z.",
+          "limits": "Hosted exact-head checks queued at cutoff. No public transport/Canvas wiring, external provider, RCC/compiler, native/frozen, full #83/#86/#129 acceptance or issue-stage change.",
+          "whole_issue_effect": "#83/#86/#129 remain governed by their unchanged original issue contracts; this private predecessor changes no whole-issue stage or acceptance."
+        },
+        {
+          "id": "100-canvas-python-typescript-roundtrip",
+          "owner_issue": 100,
+          "related_issue": 267,
+          "title": "Canvas Python↔TypeScript↔Python fixture bridge in hosted frontend workflow",
+          "shared_scope": "One bounded cross-language fixture/API substage; the existing thin renderer lane remains separately scoped.",
+          "status": "REVIEW",
+          "implementation_status": "PR301_PUBLISHED; INDEPENDENT_REVIEW_APPROVED_FOR_FIXTURE_AND_WORKFLOW_WIRING; HOSTED_CHECKS_PENDING; NO_WHOLE_ISSUE_ACCEPTANCE",
+          "scope": "Run the existing Python-to-TypeScript-to-Python fixture through required bridge mode in the community frontend workflow; fail if bridge evidence is absent.",
+          "limits": "Does not accept renderer behavior, typed runtime integration, ChatGPT/Canvas production behavior, hosted pass, or whole #100.",
+          "whole_issue_effect": "No retained issue stage/acceptance count changes.",
+          "evidence_basis": "PR301 head 47d307c1fe1f55ca14b13425f2ce5c367d90210c/tree 9e39f0b12078cc4de9510a3ab4d8844dc35f34a7; independent review receipt evidence/current-open-pr-audit-20261010T1607Z/pr301-canvas-review.md; hosted checks queued at cutoff.",
+          "owner": "source_profile workflow author; independent review complete; root integration/publish owner."
+        }
+      ],
+      "evidence": [
+        {
+          "path": "evidence/current-open-pr-audit-20261010T1709Z/current-git-bindings.json",
+          "size_bytes": 3451,
+          "sha256": "626f315b0315284e80874514645e4fe619da75b2e3c84b408892afc89768ae6b"
+        },
+        {
+          "path": "evidence/current-open-pr-audit-20261010T1709Z/rcc-failed-baseline-run38068024443.txt",
+          "size_bytes": 1472,
+          "sha256": "218a4719f82b6d9bac95d521992e25115abfbe26c1b1704892d0415c3b2c5d2b"
+        },
+        {
+          "path": "evidence/current-open-pr-audit-20261010T1709Z/pr292-pypi-reset-run38067347087.txt",
+          "size_bytes": 999,
+          "sha256": "eac89d56f38bdc63cc4d66095bc10cee514fc90198e8c5d13b2bdb6a6c27db7c"
+        },
+        {
+          "path": "evidence/current-open-pr-audit-20261010T1709Z/staged-rcc-control-prior-review.md",
+          "size_bytes": 3470,
+          "sha256": "790aa526c4bed3322d8db39156d7fa82170797853d4b1ba56127676c6a87872a"
+        },
+        {
+          "path": "evidence/current-open-pr-audit-20261010T1709Z/staged-rcc-control-repin-independent-review.md",
+          "size_bytes": 4419,
+          "sha256": "7a26de2729657c2656577fbfe79294d5411b852cebd49c2e2349532e9ec3b6f2"
+        },
+        {
+          "path": "evidence/current-open-pr-audit-20261010T1709Z/d10-samefile-initial-probe.json",
+          "size_bytes": 3111,
+          "sha256": "98493f5f9f6440ba1514741660da0f4aeab3749e58b9062389534fe465b1897d"
+        },
+        {
+          "path": "evidence/current-open-pr-audit-20261010T1709Z/staged-rcc-fixture-independent-review.md",
+          "size_bytes": 4807,
+          "sha256": "08bf4edef936b26ae123e2cb8aa340e2aeffe6d8a392bda0f40d2b230a8eeec5"
+        }
+      ],
+      "current_active_workers": {
+        "root": "Integration and current CI coordination.",
+        "luna_cas_receipt_audit": "Governance checkpoint writer; no remote writes.",
+        "luna_ci_convergence": "Current PR CI follow-up.",
+        "luna_source_profile": "Canvas/source workflow lane.",
+        "devsy": "Deleted by user; HOLD pending a new explicit HIT THE GAS; no calls."
+      },
+      "current_worker_inventory": {
+        "observed_at_utc": "2026-10-10T16:43:00Z",
+        "observation_source": "Root-reported read-only Cloud roster and immutable worktree inventory; neither is a native-device census or worker-liveness proof.",
+        "cloud_agents_reported_active": 7,
+        "worktree_inventory": {
+          "total": 90,
+          "with_unfinished_paths": 10,
+          "status_errors": 0,
+          "receipt": "evidence/current-open-pr-audit-20261010T1643Z/cloud-worktree-inventory.json",
+          "sha256": "db6cf9d5692360d7e9beeb80afddc0326757cca3fc13181d7e5ab55ca7a92947"
+        },
+        "active_work_roles": [
+          "root integration/CI coordination",
+          "governance checkpoint writer",
+          "current PR CI follow-up",
+          "frozen receipt review",
+          "source staging/RCC control repair",
+          "Canvas workflow lane"
+        ],
+        "native_cas": "Devsy deleted by user. HOLD pending new explicit HIT THE GAS. No readiness or dispatch calls made."
+      },
+      "issue_acceptance_changed": false,
+      "current_pr_heads": {
+        "221": {
+          "sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+          "tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7"
+        },
+        "282": {
+          "sha": "421fac66e265de619eef7d4f9d171a6095f4a907",
+          "tree": "4bfe827f2e4fd502f31722121946d697aeaa5521"
+        },
+        "290": {
+          "sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+          "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097"
+        },
+        "292": {
+          "sha": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+          "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7"
+        },
+        "299": {
+          "sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+          "tree": "5154dfbbff12e85b75e85d6138bfb6ff8eef27d0"
+        },
+        "300": {
+          "sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+          "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1"
+        },
+        "301": {
+          "sha": "47d307c1fe1f55ca14b13425f2ce5c367d90210c",
+          "tree": "9e39f0b12078cc4de9510a3ab4d8844dc35f34a7"
+        }
+      },
+      "prior_pr_head_observations": {
+        "289": {
+          "observation_as_of_earlier_checkpoint": "program-amendment-20261010T1421Z",
+          "historical_observation": {
+            "head": "2116a36e2015070d3b7e08a5362ed8442aee8331",
+            "tree": "5f486a7542fb4630234b0798f7bd760468c2d0ec",
+            "parents": [
+              "d3c27137d2dbee37a6823663f8db2c3a681f76d3"
+            ],
+            "status": "OPEN_BLOCKED at published head 2116a36e; latest exact-head check snapshot shows 13 success, 4 failure, 1 cancelled and 1 skipped.",
+            "target": "integration/community-release-20261008",
+            "url": "https://github.com/joshyorko/actions/pull/289",
+            "published_mapping": "evidence/pr289-alias-published-map-20261010T1300Z/pr289-published-map.json",
+            "local_mapping": {
+              "combined": "74205876adf362c7a9d7ef33d4e328c17a9e605b",
+              "docs": "6eec6c6493cf029c5bba5d8189834349a26c0f67",
+              "source": "e789af7ce79ae0214ce216459a423e0ab9f0622f"
+            },
+            "review": "Implementation plus docs/source CLI and PostgreSQL scoped receipts retained; no overall issue acceptance.",
+            "limits": "Distinct overlapping templates and cross-kind concrete resource URI overlap remain unresolved; hosted/native gates pending.",
+            "source_docs_commit": "e13f9aab586612eed21690e04a37731283bf8792",
+            "check_snapshot": "evidence/pr289-current-ci-20261010T1332Z/current-head-checks.json",
+            "failure_excerpt": "evidence/pr289-current-ci-20261010T1332Z/pr289-windows-successor-failure-run38054932342-job114221324264-attempt1.txt",
+            "failure_excerpt_sha256": "5a177f53edf89881f2707db894347e02597adfc0c73502e3a76d65a975a3a57b",
+            "remote_mapping": "evidence/pr289-diagnostic-head-20261010T1350Z/remote-mapping.json",
+            "scope": "Alias identity PR remains draft; exact-key source/DB/CLI evidence is narrow. Current Windows concurrency-startup failure unresolved, hosted checks unfinished, native other-platform/full issue gates open.",
+            "failure_cause": "UNKNOWN; original child stdout/stderr were captured inside the test and not emitted in workflow log. Do not infer environmental or product cause.",
+            "current_unpublished_followups": "Source repair for Windows drive-letter path handling and guard-correct rename fixture are under review but are not published on PR289. The c7f9 review found its last-good database snapshot omitted persisted columns; owner is expanding it. No repair is counted as merged or passing.",
+            "rename_review": "evidence/pr289-followup-20261010T1415Z/package-rename-review-c7f9.json",
+            "last_checks": "evidence/current-open-pr-audit-20261010T1415Z/last-checks-refresh-141019Z.json"
+          }
+        },
+        "290": {
+          "observation_as_of_earlier_checkpoint": "program-amendment-20261010T1421Z",
+          "historical_observation": {
+            "head": "a337d0b9bbb6c4babda712b39368273d77e610a9",
+            "tree": "576e7421714d17614f854eae17737bb15b30fd6c",
+            "base": "c6d729f29167f04080ab5547955d6398a6ee49d0",
+            "status": "OPEN_BLOCKED at a337d0b; last exact-head inventory reports 14 success, 4 failure, 1 cancelled and 1 skipped. Earlier native Linux ten-case acceptance remains scoped to its exact artifact tuple; no Windows/full-PR acceptance.",
+            "frozen_ten_case_execution": {
+              "run": 38055229055,
+              "job_id": 114222201396,
+              "artifact_id": 11671465182,
+              "artifact_size_bytes": 88333,
+              "artifact_sha256": "ca81fb7da1915cde6bb4052b2effc1c6d5a871ee132db3e8c6ee8ff7efe7a404",
+              "tests": 10,
+              "passed": 10,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0,
+              "duration_seconds": 257.83,
+              "review_receipt": "evidence/pr290-frozen-ten-case-20261010T1332Z/independent-acceptance-review.json",
+              "review_sha256": "6b6ffc8e778ea587b778911759366e9c4eced61c2295344fe64b9c095c29281d",
+              "candidate": "c78288c3a0f07ba1013109c790f8e8b375a852d2",
+              "candidate_tree": "75a108db7d608e1316d59c96918213471409f31a",
+              "native_source_tree": "75a108db7d608e1316d59c96918213471409f31a",
+              "scope": "Selected frozen Linux cases for this artifact/candidate/runtime-input tuple only. Not PR-wide acceptance, cross-platform coverage, Go-wrapper execution, full process census, full issue completion, or release acceptance."
+            },
+            "published_mapping": "evidence/pr290-frozen-ten-case-20261010T1332Z/remote-mapping.json",
+            "parents": [
+              "57ba99ee4e504281cf08384f07fc2a74bea029a2"
+            ],
+            "remote_mapping": "evidence/pr290-windows-and-guide-20261010T1350Z/remote-mapping.json",
+            "windows_excerpt": "evidence/pr290-windows-and-guide-20261010T1350Z/pr290-windows-failure-run38055261042-job114222298153-attempt1.txt",
+            "windows_excerpt_sha256": "6f09abd9ad710f622b0889127caf58a2b1a92f699dd728a3d23490f4cf3c6891",
+            "linux_frozen_ten_case_scope": "Prior native Linux ten-case gate remains independently accepted only on its exact c782 candidate/artifact tuple; no transfer to Windows or full PR acceptance.",
+            "current_fix": {
+              "head": "a337d0b9bbb6c4babda712b39368273d77e610a9",
+              "tree": "576e7421714d17614f854eae17737bb15b30fd6c",
+              "scope": "Configured import formatting plus two documentation/guidance updates; no production fix for Windows concurrency startup behavior. New exact-head Windows/hosted result pending."
+            },
+            "last_checks": "evidence/current-open-pr-audit-20261010T1415Z/last-checks-refresh-141019Z.json"
+          }
+        },
+        "292": {
+          "observation_as_of_earlier_checkpoint": "program-amendment-20261010T1421Z",
+          "historical_observation": {
+            "head": "5ebc97c12e99ae98dacacfe8ace170620d581649",
+            "tree": "768ec7bb91f0636c17440d2920c0db1d84a93ec4",
+            "parents": [
+              "2f84fd25c814b4ceba0be0a29265461b5754b003",
+              "2116a36e2015070d3b7e08a5362ed8442aee8331"
+            ],
+            "author_head": "2f84fd25c814b4ceba0be0a29265461b5754b003",
+            "author_tree": "d9174bfa29397f5c1a1ad25e2b936f5cc3dd377a",
+            "status": "OPEN_BLOCKED at 5ebc97c; source and PostgreSQL review remain narrowly accepted. Last exact-head hosted snapshot reports 12 success, 3 failure, 1 in progress, 2 cancelled and 1 skipped.",
+            "url": "https://github.com/joshyorko/actions/pull/292",
+            "review": "Independent PostgreSQL 17 review PASS 7 tests (migration13→14 parity; exact key/long key; bounded history capacities; SQLite admission serialization); source and combined review approved. Narrow resource-routing history only.",
+            "review_receipt": "evidence/pr292-resource-history-20261010T1350Z/pg17-independent-review.json",
+            "proposal_receipt": "evidence/pr292-resource-history-20261010T1350Z/design-receipt.md",
+            "remote_mapping": "evidence/pr292-resource-history-20261010T1350Z/remote-mapping.json",
+            "owner_comments": {
+              "issue_279": "6098098124",
+              "issue_101": "6098098233"
+            },
+            "dependency_prs": [
+              289
+            ],
+            "scope": "Durable current-vs-historical resource route winner projection and reject-before-invocation; no complete #279 or release acceptance; direct-vs-template/overlap and migration prehistory limitations remain.",
+            "hosted_failures": "Windows four concurrency cases reject C:\\ rooted database paths; macOS rename fixture conflicts with reserved calculator_sum; macOS wheels dependency fetch returned HTTP 503.",
+            "native_artifact_review": "evidence/pr292-native-build-20261010T1405Z/native-artifact-source-review.json",
+            "native_boundary": "Build artifact was measured and source-bound; native alias acceptance was NOT RUN.",
+            "last_checks": "evidence/current-open-pr-audit-20261010T1415Z/last-checks-refresh-141019Z.json",
+            "windows_excerpt": "evidence/pr292-native-build-20261010T1405Z/windows-failure-excerpt.txt"
+          }
+        },
+        "297": {
+          "observation_as_of_earlier_checkpoint": "program-amendment-20261010T1421Z",
+          "historical_observation": {
+            "head": "45a9d7468ebb24b45f65ded294b8ba3bc1ec1ed4",
+            "tree": "c947c60d6b6f71fb857a1d0e3c146f32ef9779ca",
+            "base": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+            "status": "OPEN; reviewed frontend timing-blocker repair. Root reports full/focused local checks plus configured types and lint PASS; hosted exact-head checks pending.",
+            "scope": "Frontend Table.perf CI blocker only; not a release PR or issue acceptance.",
+            "mapping_provenance": "Root-reported live read-only PR audit at 14:15Z. Local export metadata shares tree c947c60 but has a different commit SHA; do not treat tree equality as ancestry equality."
+          }
+        }
+      },
+      "frozen_ten_case_execution": {
+        "current_gate": "PASS for exact prior frozen native and Go-wrapper tuple; no current PR-wide/source-descendant acceptance",
+        "previously_accepted_native_run": {
+          "run": 38063969431,
+          "job_id": 114247745630,
+          "candidate": "a47dc616069afdb0488aaed651abf0ceb9a82035",
+          "candidate_tree": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6",
+          "control": "8192bb8b8ae68764bdefcc95fbd7fe878ef3552f",
+          "artifact_id": 11675035673,
+          "artifact_sha256": "6e8e5063a15c9424a1a8186115d7f0f12fd9dec94bbbd2f9e823910db3566b57",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "independent_review_sha256": "3b3125186e961149fc7ff18671073e02966fd03a9c47c644c96d91ccabb0d513"
+        },
+        "latest_independently_reviewed_run": {
+          "run": 38067094994,
+          "attempt": 1,
+          "control": "fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+          "control_tree": "0bddabdf6e6f85701b2b87f49e6c137cf48f532c",
+          "candidate": "a47dc616069afdb0488aaed651abf0ceb9a82035",
+          "candidate_tree": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6",
+          "native_source": "0045d91b2b5010b4b3706f777325e04b8eda805d",
+          "native_source_tree": "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6",
+          "native": {
+            "job_id": 114256839712,
+            "artifact_id": 11675702008,
+            "size_bytes": 111828,
+            "sha256": "90b2ace4381199eb6f39a5f256972896a90faa5423599ba061aa95ee1a29ad30",
+            "tests": 11,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0
+          },
+          "go_wrapper": {
+            "job_id": 114256839804,
+            "artifact_id": 11676290980,
+            "size_bytes": 118027,
+            "sha256": "0bdae4a82bec1c1625bac490df6087795c14327ee55e0a560dfc621584c8d356",
+            "tests": 11,
+            "failures": 0,
+            "errors": 0,
+            "skipped": 0,
+            "verified_process_records": 25,
+            "identity_verified": 25,
+            "direct_parent_pid_verified": 25,
+            "natural_exit": 25,
+            "stop_observed": 25,
+            "stop_failure": 0
+          },
+          "independent_review": "evidence/current-open-pr-audit-20261010T1643Z/pr290-frozen-independent-review-38067094994.md",
+          "review_sha256": "510bcf352aad0815a1ffd34998eda8483833bb0adf26326b1e7fe5bd669467c8",
+          "limits": "Selected frozen cases and the exact candidate/source/control/artifact tuple only. Does not accept current PR290 head 9e1059 hosted controls, other OS targets, the whole issue, or release. Historical fbd504a failures are separately attributed to that old head."
+        },
+        "current_pr290_blockers": {
+          "status": "CURRENT_EXACT_HEAD_CONTROLS_PENDING_AT_17:09Z",
+          "current_head": "9e1059a12456faba64d11313d6dd8f943ad28912",
+          "current_tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097",
+          "current_observation": "Source fixes and the source guard on this head were independently reviewed; exact current hosted controls had not completed at this cutoff.",
+          "historical_failure": {
+            "head": "fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+            "tree": "0bddabdf6e6f85701b2b87f49e6c137cf48f532c",
+            "run": 38067098336,
+            "failures": [
+              "resource-history behavior supplied by PR292 was absent on that historical control",
+              "18 typing errors",
+              "Windows executable-mode and Bash-syntax test assumptions"
+            ],
+            "attribution_limit": "These failures are preserved historical observations and are not attributed to current head 9e1059."
+          },
+          "remaining_dependency": "PR292 resource-history production change remains unmerged; new current controls are pending. No post-17:09 frozen push run is included in this cutoff."
+        },
+        "historical_environment_failure": {
+          "run": 38066123986,
+          "job_id": 114254013835,
+          "result": "FAILED_BEFORE_TESTS",
+          "receipt": "evidence/current-open-pr-audit-20261010T1611Z/pr290-go-wrapper-pretest-failure.txt",
+          "sha256": "848a8d80f45dc4aadecaa8d5e15de2cfb419f156d4dc851e9b661d6e70742299",
+          "note": "Preserved historical setup failure; not the later successful exact wrapper run."
+        },
+        "not_accepted": [
+          "Windows/macOS lifecycle",
+          "latest descendant full-input acceptance",
+          "complete owning issue",
+          "merge",
+          "release publication",
+          "current PR290 exact-head hosted controls and full-PR acceptance"
+        ]
+      },
+      "source_followup": {
+        "status": "SOURCE_AND_CONTROL_PUBLISHED; EXACT_RCC_CONSUMER_NOT_RUN",
+        "owner": "source/RCC workflow lane",
+        "integration": "e886d26ebaefafa9189a69517f6707691b53662e",
+        "source_candidate": "1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6",
+        "source_tree": "cdd4d65d914df9be3eaa4cf979d6b224fde431c3",
+        "source_parent": "2552a8c3419b213825294a51927843b2d61f662e",
+        "published_control": "473e42ec8f7a9f3fed623efc135b550ac3c08190",
+        "control_tree": "6f1a2d42b6d93c912c56efa3e9e6ac72729404a8",
+        "control_parent": "0ed580eabf2b74fa7b2530f03760b650565b2178",
+        "reviewed_contract": "Source/control pins and exact two JUnit identities are enforced; source staging and summary contract tests plus independent fixture/control reviews pass. The actual exact-pinned RCC consumer has not run.",
+        "preserved_failure": {
+          "run": 38068024443,
+          "job_id": 114259549777,
+          "result": "FAILED; no consumer acceptance",
+          "root_cause": "Test fixture did not create runtime-data parent before SQLite connect; this test-owned directory setup failure is not provider/provenance acceptance.",
+          "receipt": "evidence/current-open-pr-audit-20261010T1709Z/rcc-failed-baseline-run38068024443.txt",
+          "sha256": "218a4719f82b6d9bac95d521992e25115abfbe26c1b1704892d0415c3b2c5d2b"
+        },
+        "pinned_rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        "limits": "Actual staged-RCC acceptance remains NOT RUN; no compiler/provider/runtime acceptance is claimed."
+      },
+      "current_git_binding_receipt": {
+        "path": "evidence/current-open-pr-audit-20261010T1709Z/current-git-bindings.json",
+        "sha256": "626f315b0315284e80874514645e4fe619da75b2e3c84b408892afc89768ae6b",
+        "observed_at_utc": "2026-10-10T17:09:00Z"
+      },
+      "current_ref_authority": {
+        "status": "AUTHORITATIVE_FOR_CURRENT_PROJECTION",
+        "observed_at_utc": "2026-10-10T17:09:00Z",
+        "binding_receipt": {
+          "path": "evidence/current-open-pr-audit-20261010T1709Z/current-git-bindings.json",
+          "sha256": "626f315b0315284e80874514645e4fe619da75b2e3c84b408892afc89768ae6b",
+          "observed_at_utc": "2026-10-10T17:09:00Z"
+        },
+        "scope": "Current PR head/tree pairs and integration identity are bound to read-only fetched pull refs and exact immutable Git commit objects; PR API state reads confirm the listed refs are open. Merge commits carry separately named merge_tree values; PR head trees are never presented as merge trees. No current check inventory is implied."
+      },
+      "prior_draft_validity_annotations": [
+        {
+          "id": "program-amendment-20261010T1607Z",
+          "path": "evidence/program-amendment-20261010T1607Z.json",
+          "status": "NOT_ACCEPTED_DIAGNOSTIC_ONLY",
+          "known_limit": "Unpublished retained draft. Its current PR/tree and integration tree associations were not validated against the final independent GitHub commit-response map and have ambiguous head-versus-merge semantics. Preserve the bytes; do not treat its current_pr_inventory or frozen 11-case NOT RUN wording as authoritative current facts.",
+          "corrected_by": "The current_ref_authority receipt and current_pr_heads in this 16:43 amendment."
+        },
+        {
+          "id": "program-amendment-20261010T1611Z",
+          "path": "evidence/program-amendment-20261010T1611Z.json",
+          "status": "NOT_ACCEPTED_DIAGNOSTIC_ONLY",
+          "known_invalid_field": {
+            "json_pointer": "/current_pr_inventory/open_pr_heads/292/tree",
+            "draft_value": "e584b8c6b0e4809571f7b1e88aa2efb0d8a33e39",
+            "reason": "Conflicts with the same draft current_pr_heads #292 tree and the independent GitHub binding receipt, both e58494a931cdfef30bec7da61326e1f6de22cc55."
+          },
+          "other_limits": "Its copied head/tree and merge-versus-PR-head fields are not current authorities. The draft frozen_ten_case_execution NOT RUN wording is superseded by the exact independently reviewed native and Go-wrapper 11-case receipt recorded here; it must not be treated as evidence that no 11-case acceptance existed.",
+          "corrected_by": "The current_ref_authority receipt and current_pr_heads in this 16:43 amendment."
+        }
+      ],
+      "pr292_pypi_observation": {
+        "run": 38067347087,
+        "job_id": 114257572237,
+        "historical_result": "One uv setup test failed after external PyPI connection reset; 1088 passed, 12 skipped; coverage report missing.",
+        "receipt": "evidence/current-open-pr-audit-20261010T1709Z/pr292-pypi-reset-run38067347087.txt",
+        "sha256": "eac89d56f38bdc63cc4d66095bc10cee514fc90198e8c5d13b2bdb6a6c27db7c",
+        "retry_at_cutoff": "One single-job retry was reported queued/running; no result was available at cutoff. This is an infrastructure observation, not a classified product defect."
+      },
+      "d10_current_source_observation": {
+        "status": "ONE_BOUNDED_LINUX_SOURCE_CLI_PROBE_PASS",
+        "receipt": "evidence/current-open-pr-audit-20261010T1709Z/d10-samefile-initial-probe.json",
+        "sha256": "98493f5f9f6440ba1514741660da0f4aeab3749e58b9062389534fe465b1897d",
+        "source_commit": "e886d26ebaefafa9189a69517f6707691b53662e",
+        "source_tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7",
+        "result": "Import from inside datadir with a path containing spaces exited 0 and persisted a datadir-owned runtime-source snapshot. This is one source CLI observation only.",
+        "not_run": [
+          "historical wheel/current 1.0.2 reproduction",
+          "current wheel acceptance",
+          "frozen executable",
+          "current start/restart lifecycle",
+          "non-Linux platforms"
+        ],
+        "unexpected_pinned_binary_download": {
+          "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+          "bytes": 22282402,
+          "note": "CLI auto-downloaded the pinned RCC binary during this unmanaged source probe; it matched the verified warm RCC. No later CLI invocation was made."
+        },
+        "issue_scope": {
+          "related_issue": 148,
+          "boundary": "This single Linux source CLI observation belongs to the existing #148 same-file/path scenario. It is not #135 acceptance and does not establish any whole-issue gate."
+        }
+      },
+      "worker_inventory_cutoff_note": "No new Cloud roster/worktree liveness census was performed for this checkpoint; the latest retained inventory remains the 16:43Z snapshot. The older inventory is not evidence of current liveness.",
+      "historical_preservation_check": {
+        "retained_raw_issue_rows_verified_identical_to_base_tree": "2a12d303209fc6c63fd15d07a32a7432c0982eba",
+        "raw_issue_rows": 54,
+        "historical_zip_count": 16,
+        "historical_zip_manifest": "evidence/convergence-followup-20261010T0342Z.json#/accounting/historical_archives",
+        "result": "Each archive matched recorded byte length and SHA-256, and each ZIP byte stream matched the base tree. No historical archive, retained contract body, or raw issue state was rewritten."
+      }
     }
   ],
   "current_program_amendment": {
-    "id": "program-amendment-20261010T1643Z",
-    "observed_at_utc": "2026-10-10T16:43:42Z",
-    "path": "evidence/program-amendment-20261010T1643Z.json",
-    "sha256": "64bbe1a3add66e78f4d0f51fdc078a228bf6e75c82ff6bb724db8de0bad22c3d"
+    "id": "program-amendment-20261010T1709Z",
+    "observed_at_utc": "2026-10-10T17:09:00Z",
+    "path": "evidence/program-amendment-20261010T1709Z.json",
+    "sha256": "74ee2c494bc4e7ccc892ecbf251c22c239436a613f19795ddf72524064b71ef5"
   },
   "prior_current_convergence_update_20261010T0441Z": {
     "observed_at_utc": "2026-10-10T04:41:32Z",
@@ -16539,7 +17279,7 @@
     ],
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "source_base": "31239cf99c7b264a0eab89660e93b391532ac305",
-    "observed_at_utc": "2026-10-10T16:43:42Z",
+    "observed_at_utc": "2026-10-10T17:09:00Z",
     "cohort": {
       "items": 46,
       "target_integrated": 35,
@@ -16598,7 +17338,7 @@
         217,
         218
       ],
-      "scope": "Named-target outcomes only. PR289, PR297, and PR298 merged normally. Four superseded PRs remain unmerged. No whole-issue acceptance, release readiness, or Devsy readiness is implied."
+      "scope": "Named-target outcomes only. No whole-issue acceptance, release readiness, or Devsy readiness is implied."
     },
     "merged_prs_in_integration_ancestry": [
       289,
@@ -16615,8 +17355,44 @@
       ]
     },
     "scope": "Integration identity and cohort classification only; release and whole-issue acceptance unchanged.",
-    "path": "evidence/program-amendment-20261010T1643Z.json",
-    "sha256": "64bbe1a3add66e78f4d0f51fdc078a228bf6e75c82ff6bb724db8de0bad22c3d",
+    "merge_bindings": [
+      {
+        "pr": 289,
+        "merge_commit": "fdf9ee8f023d068c16e567a85defd7c0437f8117",
+        "merge_tree": "97dcea6360926d0e30dbdbda2575dfd3be783570",
+        "parents": [
+          "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+          "7ca665aaa4b180a78f532a4419e4d17bf4ced801"
+        ],
+        "pr_head_tree": "97dcea6360926d0e30dbdbda2575dfd3be783570",
+        "pr_head_commit": "7ca665aaa4b180a78f532a4419e4d17bf4ced801"
+      },
+      {
+        "pr": 297,
+        "merge_commit": "f18058b6c614d065fe821d98b0039f1db736e5cb",
+        "merge_tree": "762c50e6416815043adbd82fae36e9ab9e3393ff",
+        "parents": [
+          "fdf9ee8f023d068c16e567a85defd7c0437f8117",
+          "4d9c348a65365ef4e4c26baddada79c754bc8dd1"
+        ],
+        "pr_head_tree": "8d94180cec876100eecda458f4e82bb2570a7944",
+        "pr_head_commit": "4d9c348a65365ef4e4c26baddada79c754bc8dd1"
+      },
+      {
+        "pr": 298,
+        "merge_commit": "e886d26ebaefafa9189a69517f6707691b53662e",
+        "merge_tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7",
+        "parents": [
+          "f18058b6c614d065fe821d98b0039f1db736e5cb",
+          "fc582797cc754ae6dcf7602d98d6079f0004b29d"
+        ],
+        "pr_head_tree": "419090496fe66a7339e74032d9d290f82b17592a",
+        "pr_head_commit": "fc582797cc754ae6dcf7602d98d6079f0004b29d"
+      }
+    ],
+    "merge_bindings_source": "Separate read-only GitHub PR API head_sha values for merged PRs from their actual integration merge commits. Exact Git objects independently confirm both head trees and merge trees; the recorded merge commit parents are retained.",
+    "path": "evidence/program-amendment-20261010T1709Z.json",
+    "sha256": "74ee2c494bc4e7ccc892ecbf251c22c239436a613f19795ddf72524064b71ef5",
     "integration": "e886d26ebaefafa9189a69517f6707691b53662e",
     "release_ready": false,
     "issue_acceptance_changed": false,
@@ -16991,7 +17767,7 @@
       "owner": "source_profile workflow author; independent review complete; root integration/publish owner."
     }
   ],
-  "active_substages_observed_at_utc": "2026-10-10T16:43:42Z",
+  "active_substages_observed_at_utc": "2026-10-10T17:09:00Z",
   "current_active_workers": {
     "root": "Integration and current CI coordination.",
     "luna_cas_receipt_audit": "Governance checkpoint writer; no remote writes.",
@@ -17026,11 +17802,11 @@
       "status": "historical; superseded by the dated current integration overlay"
     }
   },
-  "integration_head_observed_at_utc": "2026-10-10T16:43:42Z",
+  "integration_head_observed_at_utc": "2026-10-10T17:09:00Z",
   "projection_freshness": {
-    "current_overlay_observed_at_utc": "2026-10-10T16:43:42Z",
-    "current_overlay_receipt": "evidence/program-amendment-20261010T1643Z.json",
-    "current_overlay_sha256": "64bbe1a3add66e78f4d0f51fdc078a228bf6e75c82ff6bb724db8de0bad22c3d",
+    "current_overlay_observed_at_utc": "2026-10-10T17:09:00Z",
+    "current_overlay_receipt": "evidence/program-amendment-20261010T1709Z.json",
+    "current_overlay_sha256": "74ee2c494bc4e7ccc892ecbf251c22c239436a613f19795ddf72524064b71ef5",
     "worker_stage_snapshot": {
       "observed_at_utc": "2026-10-10T07:53:20Z",
       "meaning": "Historical whole-issue classification snapshot; current bounded work appears in active_substages and current_active_workers."

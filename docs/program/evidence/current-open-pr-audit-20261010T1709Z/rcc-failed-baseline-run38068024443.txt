@@ -1,0 +1,21 @@
+Read-only sanitized exact-head failure excerpt
+Repository joshyorko/actions
+Push control commit: 0ed580eabf2b74fa7b2530f03760b650565b2178
+Workflow run38068024443, build job114259549777, completed failure.
+
+Pinned candidate/source: commit2552a8c3419b213825294a51927843b2d61f662e, treeaf7e419414261525c89db5511c5cbbc6f07981b0.
+Expected control:0ed580eabf2b74fa7b2530f03760b650565b2178.
+Pinned RCC v18.19.3 SHA-256 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428.
+The candidate/control/RCC pin assertions passed.
+
+Consumer tests: test_staged_package_executes_in_managed_rcc_runtime failed with 1 failed,1 passed in61.33s. At test_source_staging_rcc_consumer.py:179, test sets data_dir=tmp_path/'runtime-data', constructs Database(data_dir/'catalog.sqlite'), then calls connect before creating data_dir. sqlite3.connect raises sqlite3.OperationalError: unable to open database file at actions/server/_database.py:495. Test should create its runtime-data parent; do not interpret this as provider/RCC provenance failure.
+
+Because the staged consumer test exited1 and produced no consumer receipt, validator reports:
+admission_passed=False
+admission_issues=test_result_not_exactly_two_passes,test_process_exit_not_zero,staged_consumer_receipt_missing_or_invalid
+pytest_exit_code=1
+receipt_status=PASS
+natural_exit_status=PASS
+
+The exact two named JUnit cases and staging/source provenance acceptance did not pass. No merge/consumer acceptance claim. No retry.
+

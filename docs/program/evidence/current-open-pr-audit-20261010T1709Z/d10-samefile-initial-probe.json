@@ -1,0 +1,62 @@
+{
+  "evidenceKind": "actual-source-cli-observation",
+  "scope": "Linux source checkout only; not a wheel, frozen binary, or cross-platform result",
+  "sourceCommit": "e886d26ebaefafa9189a69517f6707691b53662e",
+  "sourceTree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7",
+  "moduleOrigins": {
+    "actions.server._actions_import": {
+      "path": "/workspace/work/d10-samefile-repro-20261010/action_server/src/actions/server/_actions_import.py",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    "actions.server._action_package_handler": {
+      "path": "/workspace/work/d10-samefile-repro-20261010/action_server/src/actions/server/_action_package_handler.py",
+      "sha256": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64"
+    }
+  },
+  "command": [
+    "/workspace/work/community-resume/admission/action_server/.venv/bin/python",
+    "-m",
+    "actions.server",
+    "import",
+    "--dir",
+    "/dev/shm/d10-initial-px0p1k9e/runtime data/inside package",
+    "--datadir",
+    "/dev/shm/d10-initial-px0p1k9e/runtime data",
+    "--skip-lint"
+  ],
+  "workingDirectory": "/dev/shm/d10-initial-px0p1k9e/launcher cwd",
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/workspace/work/d10-samefile-repro-20261010/action_server/src"
+  },
+  "exitCode": 0,
+  "observedConsole": [
+    "⚡️ Starting Action Server... v1.0.3",
+    "Using user-specified datadir: /dev/shm/d10-initial-px0p1k9e/runtime data",
+    "Database file does not exist. Creating it at: /dev/shm/d10-initial-px0p1k9e/runtime data/server.db",
+    "Adding action without a managed environment (package.yaml unavailable).",
+    "Found new action package: inside package",
+    "Found new action: greet"
+  ],
+  "persistedActionPackage": {
+    "name": "inside package",
+    "directory": "/dev/shm/d10-initial-px0p1k9e/runtime data/.rcc-runtime-sources/106b8bd6161e00cf0b09c1b92a8967c3f0281aaed42123f0ec04a4a9a7d20d4a",
+    "condaHash": "<unmanaged>"
+  },
+  "currentSourceExplanation": "ActionPackageHandler.uses_runtime_source_snapshots is true; successful import persists the datadir-owned absolute snapshot path, taking the _actions_import.py:229-231 branch before the historical relative samefile branch.",
+  "conclusion": "The historical D10 failure was not reproduced on current e886 source. This result does not establish the historical failure is fixed in its original 1.0.2 source or frozen/wheel artifacts.",
+  "notRun": [
+    "outside-datadir control",
+    "wheel",
+    "frozen binary",
+    "non-Linux platforms"
+  ],
+  "unexpectedRccDownload": {
+    "path": "/workspace/work/d10-samefile-repro-20261010/action_server/src/actions/server/bin/rcc-18.19.3",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "bytes": 22282402,
+    "matchesVerifiedWarmRcc": true,
+    "note": "CLI auto-downloaded the pinned executable despite the unmanaged package; preserved in the task-owned worktree. No later CLI invocation was made."
+  },
+  "historicalFinding": "https://github.com/joshyorko/actions/issues/148#issuecomment-6099409869"
+}

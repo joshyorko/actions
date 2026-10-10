@@ -1,0 +1,14 @@
+Read-only sanitized exact-head failure excerpt
+Repository joshyorko/actions; PR #292 head d0e12c1e1a256664b506cd8b027292062c6e1109
+Workflow run38067347087, coverage job114257572237, completed failure.
+
+2026-10-10T16:48:42Z RCC-managed uv environment creation failed while fetching https://pypi.org/simple/pydantic/:
+error: Failed to fetch: https://pypi.org/simple/pydantic/
+Caused by: request or response body error
+Caused by: error reading a body from connection
+Caused by: connection reset
+
+Only failing test: tests/action_server_tests/test_server.py::test_import_action_server_strategies[package.yaml:uv]
+The test uses import strategy package.yaml:uv and fails because managed environment cannot resolve/install dependencies after the connection reset. Summary: 1 failed, 1088 passed, 12 skipped, 15 warnings in177.29s.
+Coverage gate also reports package coverage report missing; no complete coverage receipt is available. This is a visible external PyPI connection reset; no retry was started.
+
