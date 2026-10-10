@@ -2623,3 +2623,6 @@ separate from this stricter accepted-input domain. The dependency wheel SHA-256,
 Apache-2.0 license, matching upstream-tag source hashes, and the limitation that
 PyPI exposed no signed provenance attestation are recorded in
 [`deployment-canonical-values-slice1a-20261010.md`](../program/evidence/deployment-canonical-values-slice1a-20261010.md).
+Read non-ASCII JSON golden fixtures with an explicit `encoding="utf-8"` rather
+than `Path.read_text()`'s locale default so expected Unicode values are stable
+across Windows and POSIX test runners.
