@@ -128,7 +128,7 @@ def _route_policy(shutdown_enabled: bool) -> dict[_RouteIdentity, str]:
     if shutdown_enabled:
         add("protected-api", _identity("APIRoute", "/api/shutdown/", "POST"))
     add(
-        "bearer-only-oauth",
+        "protected-oauth",
         _identity("APIRoute", "/oauth2/logout", "GET"),
         _identity("APIRoute", "/oauth2/status", "GET"),
         _identity("APIRoute", "/oauth2/create-reference-id", "GET"),
