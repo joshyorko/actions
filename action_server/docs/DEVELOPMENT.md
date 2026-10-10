@@ -39,6 +39,12 @@
 - The `cloud list-organizations` CLI regression uses a deterministic HTTP-client response and synthetic credentials. It does not require a hosted Control Room account; use real credentials only when manually exercising a configured Control Room.
 - To run individual tests: `python -m pytest tests/action_server_tests/mcp/test_mcp_integration.py::test_mcp_integration_with_actions_in_no_conda_mcp -v`
 
+### Frozen managed catalog rollback acceptance
+
+The `Actions Runtime Frozen Catalog Rollback` workflow is intended to run the duplicate public resource, template, and prompt-key rollback cases plus the watched malformed/recovery case against a hash-verified Linux frozen executable. The pinned artifact was built from synthetic merge `bf4f7dd1`; its Git build-source tree matches candidate `f7c6ed61` tree `6cb691b4`, and the workflow records both source identities. Until an uploaded workflow receipt reports all four expected cases passing, this remains pending acceptance. Its managed fixtures pin Python 3.12, uv 0.9.26, and actions-core 1.0.2; each case checks the actual frozen parent and the managed worker's interpreter and Core origin. This proof is separate from source-mode pytest and the real-RCC provider rollback workflow.
+
+Successful-generation drain is a separate source-mode test. It starts v2 while a v1 Run is blocked, proves the released old Run returns data from its immutable v1 snapshot, persists both Runs' results, and independently verifies natural child cleanup. Do not infer this behavior from malformed-reload rollback or from frozen catalog cases.
+
 ## Release process
 
 To release a new version use `inv` commands (in the `/action_server` directory):

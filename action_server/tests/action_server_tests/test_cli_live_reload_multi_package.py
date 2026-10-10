@@ -24,10 +24,24 @@ from actions.server._selftest import ActionServerProcess
 
 def _write_tool(package: Path, suffix: str, result: str) -> None:
     package.mkdir(exist_ok=True)
+    if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
+        (package / "package.yaml").write_text(
+            "spec-version: v2\n"
+            f"name: {package.name}\n"
+            "description: Managed frozen watched-reload fixture.\n"
+            "version: 0.0.1\n"
+            "dependencies:\n"
+            "  conda-forge:\n"
+            "    - python=3.12\n"
+            "    - uv=0.9.26\n"
+            "  pypi:\n"
+            "    - actions-core=1.0.2\n",
+            encoding="utf-8",
+        )
     source = package / "watched_actions.py"
     temporary = package / "next-source.tmp"
     temporary.write_text(
-        "import hashlib, json\n"
+        "import hashlib, json, sys\n"
         "from importlib.metadata import version\n"
         "from pathlib import Path\n"
         "import actions\n"
@@ -40,6 +54,7 @@ def _write_tool(package: Path, suffix: str, result: str) -> None:
         "        'core_origin': str(Path(actions.__file__).resolve()),\n"
         "        'core_init_sha256': hashlib.sha256(Path(actions.__file__).read_bytes()).hexdigest(),\n"
         "        'core_version': version('actions-core'),\n"
+        "        'python_executable': str(Path(sys.executable).resolve()),\n"
         "    })\n",
         encoding="utf-8",
     )
@@ -64,6 +79,37 @@ def _assert_calls(
         }
 
 
+def _managed_worker_identity(client: httpx.Client, suffix: str) -> dict[str, str]:
+    response = client.post(
+        f"/api/actions/package-{suffix}/from-package-{suffix}/run", json={}
+    )
+    assert response.status_code == 200, response.text
+    identity = json.loads(response.json())
+    holotree = (Path(os.environ["ACTIONS_HOME"]) / "holotree").resolve()
+    assert Path(identity["python_executable"]).is_relative_to(holotree)
+    assert Path(identity["core_origin"]).is_relative_to(holotree)
+    assert identity["core_version"] == "1.0.2"
+    return {
+        key: identity[key]
+        for key in (
+            "core_origin",
+            "core_init_sha256",
+            "core_version",
+            "python_executable",
+        )
+    }
+
+
+def _assert_frozen_parent(process: ActionServerProcess) -> None:
+    import psutil
+
+    expected = Path(
+        os.environ["SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE"]
+    ).resolve()
+    actual = Path(psutil.Process(process.process.pid).exe()).resolve()
+    assert actual == expected
+
+
 def _shutdown(client: httpx.Client, process: ActionServerProcess) -> None:
     from actions.server._common.wait_for import wait_for_condition
 
@@ -84,61 +130,72 @@ def test_failed_watched_reload_keeps_both_packages_and_recovers(
 ) -> None:
     from actions.server._common.wait_for import wait_for_condition
 
-    if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
-        pytest.skip("Unmanaged source-subprocess proof; no managed RCC environment")
+    native_executable = os.environ.get(
+        "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE"
+    )
     monkeypatch.setenv("ACTIONS_HOME", str(tmp_path / "actions-home"))
     monkeypatch.setenv("ROBOTS_HOME", str(tmp_path / "robots-home"))
     # Runtime children change cwd; relative PYTHONPATH would select an unrelated
     # editable installation instead of this checkout's production source.
     runtime_src = Path(__file__).resolve().parents[2] / "src"
-    monkeypatch.setenv("PYTHONPATH", str(runtime_src))
+    monkeypatch.setenv("PYTHONPATH", "" if native_executable else str(runtime_src))
     # Resolve imports with the Runtime child's cwd and environment. The pytest
     # process may intentionally import a different in-tree Core; metadata file
     # locations also need not identify the imported file in an editable install.
-    selected_imports = json.loads(
-        subprocess.check_output(
-            [
-                sys.executable,
-                "-c",
-                "import hashlib, json; from importlib.metadata import version; "
-                "from pathlib import Path; import actions, actions.server; "
-                "print(json.dumps({'runtime_origin': "
-                "str(Path(actions.server.__file__).resolve()), 'core': {"
-                "'core_origin': str(Path(actions.__file__).resolve()), "
-                "'core_init_sha256': hashlib.sha256("
-                "Path(actions.__file__).read_bytes()).hexdigest(), "
-                "'core_version': version('actions-core')}}))",
-            ],
-            cwd=tmp_path,
-            env=os.environ.copy(),
-            text=True,
-            timeout=10,
+    if native_executable:
+        assert Path(native_executable).is_file()
+        selected_imports = None
+        expected_core = None
+        runtime_files = None
+    else:
+        selected_imports = json.loads(
+            subprocess.check_output(
+                [
+                    sys.executable,
+                    "-c",
+                    "import hashlib, json, sys; from importlib.metadata import version; "
+                    "from pathlib import Path; import actions, actions.server; "
+                    "print(json.dumps({'runtime_origin': "
+                    "str(Path(actions.server.__file__).resolve()), 'core': {"
+                    "'core_origin': str(Path(actions.__file__).resolve()), "
+                    "'core_init_sha256': hashlib.sha256("
+                    "Path(actions.__file__).read_bytes()).hexdigest(), "
+                    "'core_version': version('actions-core'), "
+                    "'python_executable': str(Path(sys.executable).resolve())}}))",
+                ],
+                cwd=tmp_path,
+                env=os.environ.copy(),
+                text=True,
+                timeout=10,
+            )
         )
-    )
-    assert selected_imports["runtime_origin"] == str(
-        (runtime_src / "actions/server/__init__.py").resolve()
-    )
-    expected_core = selected_imports["core"]
-    print(
-        "WORKER_EQUIVALENT_IMPORT_PROBE", json.dumps(selected_imports, sort_keys=True)
-    )
-    runtime_files = {
-        name: hashlib.sha256(
-            (runtime_src / "actions/server" / name).read_bytes()
-        ).hexdigest()
-        for name in (
-            "_action_package_handler.py",
-            "_actions_import.py",
-            "_server.py",
-            "_watcher.py",
+        # Keep the source-only control path explicit. The frozen case gets
+        # worker provenance from a package action after RCC has admitted it.
+        assert selected_imports["runtime_origin"] == str(
+            (runtime_src / "actions/server/__init__.py").resolve()
         )
-    }
-    print(
-        "SELECTED_RUNTIME_SOURCE",
-        runtime_src,
-        json.dumps(runtime_files, sort_keys=True),
-    )
-    print("EXPECTED_CORE_WORKER", json.dumps(expected_core, sort_keys=True))
+        expected_core = selected_imports["core"]
+        print(
+            "WORKER_EQUIVALENT_IMPORT_PROBE",
+            json.dumps(selected_imports, sort_keys=True),
+        )
+        runtime_files = {
+            name: hashlib.sha256(
+                (runtime_src / "actions/server" / name).read_bytes()
+            ).hexdigest()
+            for name in (
+                "_action_package_handler.py",
+                "_actions_import.py",
+                "_server.py",
+                "_watcher.py",
+            )
+        }
+        print(
+            "SELECTED_RUNTIME_SOURCE",
+            runtime_src,
+            json.dumps(runtime_files, sort_keys=True),
+        )
+        print("EXPECTED_CORE_WORKER", json.dumps(expected_core, sort_keys=True))
     runtime_tmp = tmp_path / "subprocess-tmp"
     runtime_tmp.mkdir()
     monkeypatch.setenv("TMPDIR", str(runtime_tmp))
@@ -158,7 +215,11 @@ def test_failed_watched_reload_keeps_both_packages_and_recovers(
             max_processes=2,
             reuse_processes=False,
             add_shutdown_api=True,
-            env={"NO_PROXY": "*", "no_proxy": "*"},
+            env={
+                "NO_PROXY": "*",
+                "no_proxy": "*",
+                "PYTHONPATH": "" if native_executable else str(runtime_src),
+            },
             additional_args=[
                 "--address=127.0.0.1",
                 "--auto-reload",
@@ -169,14 +230,18 @@ def test_failed_watched_reload_keeps_both_packages_and_recovers(
         )
         import psutil
 
-        assert psutil.Process(process.process.pid).environ()["PYTHONPATH"] == str(
-            runtime_src
-        )
+        if native_executable:
+            _assert_frozen_parent(process)
+            assert psutil.Process(process.process.pid).environ()["PYTHONPATH"] == ""
+        else:
+            assert psutil.Process(process.process.pid).environ()["PYTHONPATH"] == str(
+                runtime_src
+            )
         print(
             "OBSERVED_WATCHED_RUNTIME_CHILD",
             process.process.pid,
             "PYTHONPATH",
-            runtime_src,
+            runtime_src if not native_executable else "frozen executable",
         )
         with httpx.Client(
             base_url=f"http://127.0.0.1:{process.port}", timeout=30, trust_env=False
@@ -186,6 +251,12 @@ def test_failed_watched_reload_keeps_both_packages_and_recovers(
                 "from_package_a",
                 "from_package_b",
             }
+            if native_executable:
+                expected_core = _managed_worker_identity(client, "a")
+                print(
+                    "MANAGED_PACKAGE_WORKER", json.dumps(expected_core, sort_keys=True)
+                )
+            assert expected_core is not None
             _assert_calls(client, "B1", expected_core)
             before_rows = _catalog_rows(database)
             with sqlite3.connect(database) as connection:
@@ -279,18 +350,26 @@ def test_failed_watched_reload_keeps_both_packages_and_recovers(
             max_processes=2,
             reuse_processes=False,
             add_shutdown_api=True,
-            env={"NO_PROXY": "*", "no_proxy": "*"},
+            env={
+                "NO_PROXY": "*",
+                "no_proxy": "*",
+                "PYTHONPATH": "" if native_executable else str(runtime_src),
+            },
             additional_args=["--address=127.0.0.1"],
             timeout=30,
         )
-        assert psutil.Process(restarted.process.pid).environ()["PYTHONPATH"] == str(
-            runtime_src
-        )
+        if native_executable:
+            _assert_frozen_parent(restarted)
+            assert psutil.Process(restarted.process.pid).environ()["PYTHONPATH"] == ""
+        else:
+            assert psutil.Process(restarted.process.pid).environ()["PYTHONPATH"] == str(
+                runtime_src
+            )
         print(
             "OBSERVED_RESTARTED_RUNTIME_CHILD",
             restarted.process.pid,
             "PYTHONPATH",
-            runtime_src,
+            runtime_src if not native_executable else "frozen executable",
         )
         with httpx.Client(
             base_url=f"http://127.0.0.1:{restarted.port}", timeout=30, trust_env=False
@@ -304,9 +383,10 @@ def test_failed_watched_reload_keeps_both_packages_and_recovers(
             )
     finally:
         restarted.stop()
-    assert runtime_files == {
-        name: hashlib.sha256(
-            (runtime_src / "actions/server" / name).read_bytes()
-        ).hexdigest()
-        for name in runtime_files
-    }
+    if runtime_files is not None:
+        assert runtime_files == {
+            name: hashlib.sha256(
+                (runtime_src / "actions/server" / name).read_bytes()
+            ).hexdigest()
+            for name in runtime_files
+        }

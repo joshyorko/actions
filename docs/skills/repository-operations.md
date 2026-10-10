@@ -2604,3 +2604,17 @@ suite establishes its tested database behavior; it does not prove the proposed
 Deployment schema or replace wheel, frozen, TLS or failure-recovery acceptance.
 Inspect the server log even when pytest passes: driver transaction warnings can
 expose a missing regression despite successful state assertions.
+
+For frozen Runtime acceptance, bind the candidate commit and tree separately
+from the native build commit and tree. If the binary was built from a synthetic
+merge whose tree matches the candidate, record both identities and verify the
+tree equality; do not describe the binary as built from the candidate commit.
+Also retain the artifact and full package inventory digests, executable hash,
+and actual managed worker interpreter/Core origins. Run the exact expected
+cases with output capture disabled when their successful provenance is printed,
+and validate JUnit names, modules, failures, errors, and skips before calling
+the gate passed. Source-mode tests do not establish frozen behavior. A
+successful-generation drain is separate proof: start the new generation while
+an old Run is blocked, verify the old Run reads its immutable source snapshot
+after release, persist both outcomes, and check natural child cleanup
+independently.

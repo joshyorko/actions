@@ -314,7 +314,15 @@ class BaseWorkflow:
     def generate(self):
         contents = yaml.safe_dump(self.full, sort_keys=False)
         path = CURDIR / self.target
-        final_header = AUTO_GEN_HEADER.rstrip("\n") if self.target == "actions_runtime_recovery.yml" else AUTO_GEN_HEADER
+        final_header = (
+            AUTO_GEN_HEADER.rstrip("\n")
+            if self.target
+            in {
+                "actions_runtime_recovery.yml",
+                "actions_runtime_frozen_catalog_rollback.yml",
+            }
+            else AUTO_GEN_HEADER
+        )
         print("Writing to ", path)
         path.write_text(
             f"""{AUTO_GEN_HEADER}
@@ -680,6 +688,190 @@ class ActionServerTests(BaseTests):
                     "CI_ENDPOINT": "${{ secrets.CI_ENDPOINT }}",
                 },
                 "run": f"{run_in_env}poetry run inv test-binary --jobs 0",
+            },
+        ]
+
+
+class ActionServerFrozenCatalogRollback(BaseWorkflow):
+    """Run managed duplicate-key rollback against an immutable Linux binary."""
+
+    name = "Actions Runtime Frozen Catalog Rollback"
+    target = "actions_runtime_frozen_catalog_rollback.yml"
+    project_name = "action_server"
+
+    @override
+    def __init__(self):
+        super().__init__()
+        self.full["permissions"] = {"contents": "read", "actions": "read"}
+
+    @override
+    def on_part(self, dep_paths):
+        return {
+            "on": {
+                "push": {
+                    "branches": ["test/frozen-catalog-rollback-20261010"],
+                    "paths": [
+                        ".github/workflows/_gen_workflows.py",
+                        ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+                        "action_server/scripts/verify_frozen_catalog_artifact.py",
+                        "action_server/scripts/verify_frozen_catalog_junit.py",
+                        "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+                        "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
+                        "action_server/docs/DEVELOPMENT.md",
+                    ],
+                }
+            }
+        }
+
+    @override
+    def runs_on_and_strategy_part(self):
+        return {"runs-on": "ubuntu-24.04", "timeout-minutes": 45}
+
+    @override
+    def build_steps(self) -> list[dict]:
+        checkout = self.checkout_repo(pinned=True)
+        checkout["with"] = {"fetch-depth": 0}
+        return [
+            checkout,
+            *self.setup_python(pinned=True),
+            {
+                "name": "Initialize frozen acceptance evidence directory",
+                "run": 'mkdir -p "$RUNNER_TEMP/frozen-catalog-evidence"',
+            },
+            {
+                "name": "Fetch and hash-check the fixed native artifact",
+                "id": "artifact",
+                "shell": "bash",
+                "env": {
+                    "GITHUB_TOKEN": "${{ github.token }}",
+                    "ARTIFACT_ID": "11662342341",
+                    "EXPECTED_ARCHIVE_SHA256": "18acd5e0fee3c93aed5cdeee404557417cc1964c0c93b7950065a7add5325cf6",
+                },
+                "run": "\n".join(
+                    [
+                        "set -Eeuo pipefail",
+                        "git merge-base --is-ancestor f7c6ed61f24fd9e98d1465c83042c5446466311b HEAD",
+                        "test \"$(git rev-parse f7c6ed61f24fd9e98d1465c83042c5446466311b^{tree})\" = 6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+                        'build_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/bf4f7dd180e3e408acff41fdb093b57eee8cc0f4" | jq -er .commit.tree.sha)"',
+                        'test "$build_tree" = "$(git rev-parse f7c6ed61f24fd9e98d1465c83042c5446466311b^{tree})"',
+                        'printf "%s\\n" "$build_tree" > "$RUNNER_TEMP/frozen-catalog-native-build-source-tree.txt"',
+                        "test \"$(git rev-parse HEAD:action_server/src/actions/server)\" = \"$(git rev-parse f7c6ed61f24fd9e98d1465c83042c5446466311b:action_server/src/actions/server)\"",
+                        "git diff --quiet f7c6ed61f24fd9e98d1465c83042c5446466311b HEAD -- action_server/src/actions/server",
+                        'archive="$RUNNER_TEMP/f7-native.zip"',
+                        "curl --fail --silent --show-error --location \\",
+                        '  --header "Authorization: Bearer $GITHUB_TOKEN" \\',
+                        "  --header 'Accept: application/vnd.github+json' \\",
+                        '  "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" \\',
+                        '  --output "$archive"',
+                        'echo "$EXPECTED_ARCHIVE_SHA256  $archive" | sha256sum --check --status',
+                        'mkdir -p "$RUNNER_TEMP/f7-native-download"',
+                        'unzip -q "$archive" -d "$RUNNER_TEMP/f7-native-download"',
+                    ]
+                ),
+            },
+            {
+                "name": "Verify full package provenance and frozen executable",
+                "id": "frozen",
+                "run": "\n".join(
+                    [
+                        "set -Eeuo pipefail",
+                        "uv run --no-project --python 3.12 python scripts/verify_frozen_catalog_artifact.py \\",
+                        '  --provenance-tar "$RUNNER_TEMP/f7-native-download/native-artifact-provenance.tar" \\',
+                        '  --destination "$RUNNER_TEMP/f7-native-package" \\',
+                        '  --output "$RUNNER_TEMP/frozen-catalog-artifact-verification.json"',
+                    ]
+                ),
+            },
+            {
+                "name": "Install checksum-pinned RCC",
+                "id": "rcc",
+                "run": "\n".join(
+                    [
+                        "set -Eeuo pipefail",
+                        "destination=src/actions/server/bin/rcc-18.19.3",
+                        'mkdir -p "$(dirname "$destination")"',
+                        "curl --fail --silent --show-error --location \\",
+                        "  https://github.com/joshyorko/rcc/releases/download/v18.19.3/rcc-linux64 \\",
+                        '  --output "$destination"',
+                        "echo '7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428  '"
+                        + '"$destination" | sha256sum --check --status',
+                        'chmod 755 "$destination"',
+                        'sha256sum "$destination" > "$RUNNER_TEMP/frozen-catalog-rcc-sha256.txt"',
+                        '"$destination" version | tee "$RUNNER_TEMP/frozen-catalog-rcc-version.txt"',
+                    ]
+                ),
+            },
+            {
+                "name": "Install Action Server test dependencies",
+                "id": "dependencies",
+                "env": {"ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": "1"},
+                "run": "uv run --no-project --python 3.12 --with poetry==2.1.1 --with invoke==2.2.0 inv devinstall",
+            },
+            {
+                "name": "Run frozen managed rollback acceptance",
+                "id": "acceptance",
+                "shell": "bash",
+                "env": {
+                    "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE": "${{ runner.temp }}/f7-native-package/dist/action-server/action-server",
+                    "ACTIONS_HOME": "${{ runner.temp }}/frozen-actions-home",
+                    "ROBOTS_HOME": "${{ runner.temp }}/frozen-robots-home",
+                    "TMPDIR": "${{ runner.temp }}/frozen-tmp",
+                },
+                "run": "\n".join(
+                    [
+                        "set -Eeuo pipefail",
+                        'mkdir -p "$ACTIONS_HOME" "$ROBOTS_HOME" "$TMPDIR"',
+                        "set +e",
+                        "uv run --no-project --python 3.12 --with poetry==2.1.1 poetry run pytest -m integration_test -n 0 -q -s \\",
+                        "  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good \\",
+                        "  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers \\",
+                        '  --junitxml="$RUNNER_TEMP/frozen-catalog-junit.xml" 2>&1 | tee "$RUNNER_TEMP/frozen-catalog-test.log"',
+                        "test_status=${PIPESTATUS[0]}",
+                        'if [ "$test_status" -eq 0 ]; then uv run --no-project --python 3.12 python scripts/verify_frozen_catalog_junit.py \\',
+                        '  "$RUNNER_TEMP/frozen-catalog-junit.xml" "$RUNNER_TEMP/frozen-catalog-junit-summary.json" || test_status=$?; fi',
+                        'exit "$test_status"',
+                    ]
+                ),
+            },
+            {
+                "name": "Write final sanitized evidence receipt",
+                "if": "always()",
+                "shell": "bash",
+                "working-directory": "${{ runner.temp }}",
+                "env": {
+                    "ARTIFACT_OUTCOME": "${{ steps.artifact.outcome }}",
+                    "FROZEN_OUTCOME": "${{ steps.frozen.outcome }}",
+                    "RCC_OUTCOME": "${{ steps.rcc.outcome }}",
+                    "DEPENDENCIES_OUTCOME": "${{ steps.dependencies.outcome }}",
+                    "ACCEPTANCE_OUTCOME": "${{ steps.acceptance.outcome }}",
+                },
+                "run": "\n".join(
+                    [
+                        "python - <<'PY'",
+                        "import json, os",
+                        "from pathlib import Path",
+                        'root = Path(os.environ["RUNNER_TEMP"])',
+                        'steps = {name: os.environ.get(name + "_OUTCOME", "not-run") for name in ("ARTIFACT", "FROZEN", "RCC", "DEPENDENCIES", "ACCEPTANCE")}',
+                        'receipt = {"candidate_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b", "candidate_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0", "native_build_source_sha": "bf4f7dd180e3e408acff41fdb093b57eee8cc0f4", "native_build_source_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0", "control_sha": os.environ["GITHUB_SHA"], "artifact_id": "11662342341", "artifact_sha256": "18acd5e0fee3c93aed5cdeee404557417cc1964c0c93b7950065a7add5325cf6", "step_outcomes": steps, "status": "PASS" if all(value == "success" for value in steps.values()) else "FAIL_OR_NOT_RUN"}',
+                        'source_tree = root / "frozen-catalog-native-build-source-tree.txt"',
+                        'if source_tree.is_file(): receipt["native_build_source_tree_api_readback"] = source_tree.read_text(encoding="utf-8").strip()',
+                        'junit = root / "frozen-catalog-junit-summary.json"',
+                        'if junit.is_file(): receipt["junit"] = json.loads(junit.read_text(encoding="utf-8"))',
+                        '(root / "frozen-catalog-summary.json").write_text(json.dumps(receipt, indent=2) + "\\n", encoding="utf-8")',
+                        "PY",
+                    ]
+                ),
+            },
+            {
+                "name": "Upload frozen acceptance evidence",
+                "if": "always()",
+                "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+                "with": {
+                    "name": "frozen-catalog-rollback-${{ github.sha }}",
+                    "path": "${{ runner.temp }}/frozen-catalog-*",
+                    "if-no-files-found": "warn",
+                    "retention-days": 30,
+                },
             },
         ]
 
@@ -1801,6 +1993,7 @@ TARGETS = [
     ActionServerPyPiRelease(),
     ActionServerBinaryRelease(),
     ActionServerRuntimeRecovery(),
+    ActionServerFrozenCatalogRollback(),
 ]
 
 
