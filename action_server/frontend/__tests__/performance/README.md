@@ -15,7 +15,7 @@ The `Table.perf.test.tsx` file contains comprehensive performance tests for the 
   - 500 rows: < 1500ms
   - 1000 rows: < 2000ms
 - Checks consistency across multiple renders
-- Note: Real browser performance is typically much faster (20-300ms range)
+- These synchronous jsdom measurements do not establish real-browser timing.
 - Thresholds are conservative to catch severe regressions, not measure exact performance
 
 #### 2. DOM Structure Efficiency
@@ -25,7 +25,9 @@ The `Table.perf.test.tsx` file contains comprehensive performance tests for the 
 
 #### 3. Re-render Performance
 - Measures update performance when data changes
-- Ensures re-renders complete within frame budget (32ms for 60fps)
+- Uses five fixed paired mount/update samples with deterministic data, retains every duration, and compares medians (update/mount < 1.25).
+- Verifies every updated value, cell count and retained row DOM identity.
+- The mount median retains the existing 1000ms severe-regression limit. jsdom has no browser layout/frame scheduler, so this gate does not establish 60fps. Real-browser performance needs separate controlled acceptance.
 
 #### 4. Scroll Performance
 - Validates overflow-auto container for scrolling
@@ -68,16 +70,15 @@ const PERF_THRESHOLDS = {
   SMALL_RENDER: 1000,   // 100 rows: < 1000ms (very conservative for CI)
   MEDIUM_RENDER: 1500,  // 500 rows: < 1500ms
   LARGE_RENDER: 2000,   // 1000 rows: < 2000ms
-  FRAME_TIME: 16,       // 60fps target (16.67ms per frame)
-  SCROLL_THRESHOLD: 32, // Allow up to 2 frames for scroll operations
+  UPDATE_TO_MOUNT_RATIO: 1.25, // Five paired jsdom mount/update samples
 };
 ```
 
-**Important**: These thresholds are intentionally very conservative to ensure test stability across different CI environments. They are designed to catch severe performance regressions (10x+ slower), not to measure exact performance. In practice, renders typically complete in 20-300ms in the test environment and even faster in real browsers.
+**Important**: These thresholds are intentionally very conservative to ensure test stability across different CI environments. They are designed to catch severe performance regressions (10x+ slower), not to measure exact performance. They do not establish a real-browser frame-rate target.
 
 ### Test Results
 
-Recent test results show excellent performance:
+Illustrative jsdom output (not an acceptance receipt):
 
 ```
 === Table Performance Baseline ===
@@ -89,7 +90,7 @@ Recent test results show excellent performance:
 Performance scale factor (1000/100): ~7-8x
 ```
 
-This indicates near-linear scaling, which is excellent for a React component without virtualization.
+Release acceptance requires attributable measurements on the candidate and environment.
 
 ### Notes
 
