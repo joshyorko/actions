@@ -60,7 +60,7 @@
         "task.exec"
       ],
       "runtimeKind": "rcc",
-      "schemaVersion": "actions.runtime-plan/v1-draft"
+      "schemaVersion": 1
     }
   ],
   "schemaVersion": "actions.package-revision/v1-draft",

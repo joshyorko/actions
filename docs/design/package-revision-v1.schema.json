@@ -40,7 +40,8 @@
           "maxLength": 128
         },
         "revisionDigest": {
-          "$ref": "#/$defs/sha256"
+          "$ref": "#/$defs/sha256",
+          "description": "The complete immutable PackageRevisionId called revision_id in the #129 domain draft; distinct from sourceArtifact.digest and Runtime Plan digests."
         },
         "compilerNormalizationVersion": {
           "type": "string",
@@ -238,9 +239,9 @@
           "$ref": "#/$defs/sha256"
         },
         "schemaVersion": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 64
+          "type": "integer",
+          "minimum": 1,
+          "description": "Positive PlanSchemaVersion, matching runtimePlanRef.planSchemaVersion in the scoped-reference schema."
         },
         "runtimeKind": {
           "enum": ["rcc", "uv", "python", "robot-framework"]
