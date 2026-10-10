@@ -165,8 +165,10 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
         from actions.server._models import (
             Action,
             ActionPackage,
+            McpCatalogName,
             Run,
             RunStatus,
+            get_all_model_classes,
             get_model_db_rules,
         )
         from actions.server._rcc_runtime_adapter import load_descriptor
@@ -175,8 +177,11 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
         data_dir = tmp_path / "runtime-data"
         database = Database(data_dir / "catalog.sqlite")
         with database.connect():
-            database.initialize([ActionPackage, Action])
+            model_classes = get_all_model_classes()
+            assert McpCatalogName in model_classes
+            database.initialize(model_classes)
             database.create_tables(get_model_db_rules())
+            assert "mcp_catalog_name" in database.list_table_names()
             models._global_db = database
             try:
                 import_action_package(
