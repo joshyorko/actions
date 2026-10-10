@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "verdict": "ACCEPT current-control Linux frozen managed four-case rollback/recovery gate",
+  "reviewed_at_utc": "2026-10-10T12:01:42+00:00",
+  "run_id": 38049645421,
+  "job_id": 114206015392,
+  "job_conclusion": "success",
+  "control": {
+    "sha": "8ef0cce463d1eb9f3228d7658c113ceb6a18d554",
+    "tree": "857c2a93fe4b422a2e5258475c57b0a295d1df95",
+    "branch": "test/frozen-catalog-rollback-20261010",
+    "local_same_tree_commit": "1e4493bf339bb910fd4e886dcc33f5bb67e02f51"
+  },
+  "candidate": {
+    "sha": "31239cf99c7b264a0eab89660e93b391532ac305",
+    "tree": "d2ef7229651b6120db5cfa5995c65942ef768da8"
+  },
+  "native_build": {
+    "sha": "056d32601563a213643436e7df14e6ca0ea50516",
+    "tree": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+    "workflow_run_id": "38039806634",
+    "attempt": "1",
+    "relation": "Distinct synthetic build commit with exact candidate tree equality"
+  },
+  "artifact": {
+    "id": 11669705093,
+    "name": "frozen-catalog-rollback-8ef0cce463d1eb9f3228d7658c113ceb6a18d554",
+    "bytes": 48758,
+    "sha256": "32d13465fcb2d53267b061e2f8bf2e221251c6ba346a67774c081af61f23642a",
+    "api_digest": "sha256:32d13465fcb2d53267b061e2f8bf2e221251c6ba346a67774c081af61f23642a",
+    "entries": {
+      "frozen-catalog-artifact-verification.json": "5d3a3741e00219384740d7d5b6e3da5c683b1a4d6bc7c41e222044147771399d",
+      "frozen-catalog-junit-summary.json": "54e4985d2a766561d4299853d470e3004f240c45fb94b29bd921f47a4f7207ea",
+      "frozen-catalog-junit.xml": "67eba2dbd8f1043a7d8292cea524cf645c40e52d499d4c955ed9db33edabce29",
+      "frozen-catalog-native-build-source-tree.txt": "8183613f1160de62abe5a8d68ca6a48a19ca08e5c2385a8804ca4c0462cbe80b",
+      "frozen-catalog-rcc-sha256.txt": "f82f2794a59445d60d1bcd0153b30495eb6005bd077a8879426d32ea1ce81877",
+      "frozen-catalog-rcc-version.txt": "57ba3c9c038ed6497b5f04e5064d74548a6947a34a0c018ce59b3f6e40bea199",
+      "frozen-catalog-summary.json": "3a0a313861aca52f972fe972eaa94e99a5627af298d14249690409e7d9bb2836",
+      "frozen-catalog-test.log": "ef7146eaeac99eba5ded1cb43e70077c86256924a1b1493d36d2d03a2b64c8f1"
+    },
+    "local_archive": "/workspace/work/frozen-review-38049645421/acceptance-artifact.zip"
+  },
+  "native_artifact": {
+    "id": "11664669288",
+    "bytes": 59369402,
+    "zip_sha256": "5db37991cde941ba1c541912d376b33cb0e397db7a427db3e3f627358f5c7286",
+    "manifest_sha256": "7b75b64d160fa73ca14728437a2cc07aebdccf58d450d83b9745245001a33538",
+    "inventory_sha256": "4e61388ef1ae7f2348391b28a42cf63427fdefcd3fbdda2703d6844c4fe6afca",
+    "package_tree_sha256": "ee7cdb5eae9a04042bc476034bb9ed327d51fa705cce70abf8426454fe3d6e6f",
+    "executable_sha256": "0509dfc3c193ba8ca0221603a9f2444091a558aabbb886a957e89a22cf073dc3",
+    "verification_receipt_sha256": "3afbc8e2f4fe6e46bdd03512e82794e27cca3c705ad28c4a7711fb26b7fb349a",
+    "redownloaded": false
+  },
+  "junit": {
+    "tests": 4,
+    "passed": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "suite_seconds": "147.593",
+    "cases": [
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+        "seconds": "37.077"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+        "seconds": "36.925"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]",
+        "seconds": "35.972"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_live_reload_multi_package",
+        "name": "test_failed_watched_reload_keeps_both_packages_and_recovers",
+        "seconds": "37.411"
+      }
+    ],
+    "raw_xml_sha256": "67eba2dbd8f1043a7d8292cea524cf645c40e52d499d4c955ed9db33edabce29",
+    "summary_sha256": "54e4985d2a766561d4299853d470e3004f240c45fb94b29bd921f47a4f7207ea"
+  },
+  "managed_workers": {
+    "count": 4,
+    "core_version": "1.0.2",
+    "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+    "all_origins_and_interpreters_under_task_local_holotree": true
+  },
+  "frozen_parent_and_shutdown": {
+    "evidence": "Exact-head tests assert process executable equals SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE; tests completed, logs label watched/restarted runtime as frozen executable; controlled shutdown requires API 200 and natural process returncode 1 before cleanup helper.",
+    "log_markers": [
+      "OBSERVED_WATCHED_RUNTIME_CHILD",
+      "OBSERVED_RESTARTED_RUNTIME_CHILD",
+      "WATCHED_RECOVERY_PASS A=A1 B=B2 natural_exit=1",
+      "WATCHED_RESTART_PASS A=A1 B=B2 natural_exit=1"
+    ],
+    "source_files": [
+      "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+      "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py"
+    ]
+  },
+  "source_tree_guard": "Current-control job step `Fetch and hash-check the fixed native artifact` succeeded; exact workflow source checks action_server/src/actions/server tree and git diff against candidate before executing the frozen tests.",
+  "limitations": [
+    "Linux four-case frozen managed rollback/recovery gate only",
+    "No complete orphan census",
+    "No frozen successful-generation drain proof",
+    "Separate Go wrapper execution remains unverified",
+    "No release or whole-PR acceptance claim"
+  ],
+  "upstream_disposition": "None. Actions-local acceptance proof; no confirmed maintained RCC defect or external report.",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "disposition": "Existing exact-timeout guidance is consistent; no new delta required for this receipt.",
+    "durable_learning": "This run confirms the exact current-control 90-second initial native startup allowance executes the frozen four-case suite; source and watcher/restart limits remain separate.",
+    "evidence": "Run 38049645421, exact control SHA/tree above; raw JUnit and test log hashes in receipt."
+  },
+  "sanitized_excerpt_sha256": "2735413c4dd3f240fc1889d584d5696f65e994ff6c7d9b1d7d52974ae0662baa"
+}

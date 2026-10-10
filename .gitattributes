@@ -122,3 +122,21 @@ docs/program/evidence/pr285-frozen-review-20261010T1139Z/frozen-catalog-summary.
 docs/program/evidence/program-amendment-20261010T1150Z.json -text
 docs/program/evidence/pr285-remote-commit-map-20261010T1150Z.json -text
 docs/program/evidence/pr286-source-policy-review-20261010T1150Z/independent-review-receipt.md -text
+docs/program/evidence/pr287-frozen-drain-20261010T1216Z/independent-review-receipt.json -text
+docs/program/evidence/pr285-current-control-20261010T1216Z/independent-review-receipt.json -text
+docs/program/evidence/pr288-confined-read-20261010T1216Z/confined-read-receipt.md -text
+docs/program/evidence/pr288-confined-read-20261010T1216Z/device-guard-red-c9.log -text
+docs/program/evidence/pr288-confined-read-20261010T1216Z/device-guard-green-29c.log -text
+docs/program/evidence/pr288-confined-read-20261010T1216Z/mypy-win32-red.log -text
+docs/program/evidence/pr288-confined-read-20261010T1216Z/mypy-darwin-red.log -text
+docs/program/evidence/release-registry-observation-20261010T1216Z.json -text
+docs/program/evidence/pr-check-run-snapshot-20261010T1216Z.json -text
+docs/program/evidence/program-amendment-20261010T1216Z.json -text
+docs/program/evidence/pr-check-run-snapshot-20261010T1222Z.json -text
+docs/program/evidence/program-amendment-20261010T1222Z.json -text
+docs/program/evidence/pr286-merge-20261010T1222Z/** -text
+docs/program/evidence/pr288-cross-platform-20261010T1222Z/** -text
+docs/program/evidence/pr279-alias-gate-20261010T1222Z/** -text
+# Hash-bound captured test output is reviewed by digest and retained verbatim.
+docs/program/evidence/pr288-confined-read-20261010T1216Z/*.log -diff
+docs/program/evidence/pr288-cross-platform-20261010T1222Z/*.log -diff

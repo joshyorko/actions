@@ -415,7 +415,7 @@ def validate_graph(graph: dict, ledger: dict) -> list[int]:
         if substage.get("id") in substage_ids:
             raise ValueError(f"Duplicate active substage id: {substage.get('id')}")
         substage_ids.add(substage.get("id"))
-        if substage.get("owner_issue") not in retained_issue_ids or substage.get("status") != "ACTIVE":
+        if substage.get("owner_issue") not in retained_issue_ids or substage.get("status") not in {"ACTIVE", "REVIEW", "INTEGRATED"}:
             raise ValueError(f"Invalid active substage owner or status: {substage}")
         required_fields = ("title", "scope", "limits", "whole_issue_effect", "evidence_basis")
         if not all(substage.get(key) for key in required_fields):
@@ -596,7 +596,7 @@ def render_markdown(graph: dict) -> str:
     if substages:
         amendments = [
             "",
-            "## Current active bounded substages",
+            "## Current bounded substage overlays",
             "",
             f"Observed {graph['active_substages_observed_at_utc']}. These work records are separate from whole-issue classification and acceptance.",
             "",
@@ -622,6 +622,13 @@ def render_markdown(graph: dict) -> str:
             proof = f"{evidence.get('description', '')} Source `{evidence.get('source_commit', '')}`; [receipt]({evidence.get('path', '')}) (SHA-256 `{evidence.get('sha256', '')}`). Implementation observation: {progress}"
             amendments.append(
                 f"| [#{gate['issue']}]({gate['url']}) {gate['title']} | {gate['status']} | outside original 54 | {gate['scope']} {proof} |"
+            )
+        p0_gate = amendment.get("remaining_p0_acceptance_gate")
+        if p0_gate:
+            amendments.append(
+                f"| [#{p0_gate['issue_context']}] Historical tool-alias identity capture | {p0_gate['status']} | outside original 54; no new graph contract | "
+                f"{p0_gate['verified_behavior']} Required acceptance: {p0_gate['required_acceptance']} "
+                f"Owner: {p0_gate['owner']}. Evidence: [{p0_gate['evidence']}]({p0_gate['evidence']}). {p0_gate['boundary']} |"
             )
         for gate in amendment.get("retired_hosted_gates", []):
             amendments.append(
@@ -649,7 +656,7 @@ def sync_supplemental_amendment_note(path: Path, anchor: str, amendments: list[d
         sections.extend(["", f"Observed {amendment['observed_at_utc']}. {amendment['summary']}"])
         for substage in amendment.get("active_substages", []):
             sections.append(
-                f"- Active bounded substage `{substage['id']}` for #{substage['owner_issue']}: {substage['title']}. "
+                f"- Bounded substage overlay `{substage['id']}` for #{substage['owner_issue']} ({substage['status']}): {substage['title']}. "
                 f"{substage['scope']} Limits: {substage['limits']} Whole-issue effect: {substage['whole_issue_effect']} "
                 f"Evidence: {substage['evidence_basis']}"
             )
@@ -665,6 +672,14 @@ def sync_supplemental_amendment_note(path: Path, anchor: str, amendments: list[d
                 f"outside the original 54 issue contracts. {gate['scope']} Reproduction: "
                 f"[source-backed receipt]({evidence.get('path', '')}) (SHA-256 `{evidence.get('sha256', '')}`). "
                 f"Implementation: {gate.get('implementation_status', 'not reported')}."
+            )
+        p0_gate = amendment.get("remaining_p0_acceptance_gate")
+        if p0_gate:
+            sections.append(
+                f"- Verified separate P0 gate in #{p0_gate['issue_context']}: **{p0_gate['title']}** "
+                f"({p0_gate['status']}). {p0_gate['verified_behavior']} Required acceptance: "
+                f"{p0_gate['required_acceptance']} Owner: {p0_gate['owner']}. Evidence: "
+                f"[{p0_gate['evidence']}]({p0_gate['evidence']}). {p0_gate['boundary']}"
             )
         for gate in amendment.get("retired_hosted_gates", []):
             sections.append(

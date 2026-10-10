@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-10T11:50:20Z",
-  "status": "PR285 cold-start repair is pushed as 8ef0cce on target 2286d8e2; exact-head hosted CI remains pending. The four-case frozen PASS remains only the earlier 31239/04fa control. PR286 proposes the reviewed pure source inventory policy at remote head e7c42e94 (tree shared with independently reviewed local commit e5f44050); its hosted CI is pending and physical acquisition/compile remain NOT RUN. The #135/#148 shared substage remains ACTIVE for root integration review only; no issue stage or acceptance changes. The tracked cohort is now 35 named PRs: 27 integrated, 8 open/blocked, 0 ready. Retained 54 contracts stay 53 open/one accepted with unchanged stage counts. User steering now records old Devsy as DELETED_BY_USER and blocks replacement readiness/actions until a new explicit HIT THE GAS; old pod/dispatch receipts remain historical.",
-  "integration_head": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+  "observed_at": "2026-10-10T12:22:00Z",
+  "status": "Integration advanced to PR286 merge 21064b1ad1e28d3e73749b7be19b98c79a98b93f (tree 16c81059bff80b6d85606d45ac7d46a88cdce597), with all 19 exact-head checks and independent review accepted. The named 37-PR cohort is now 28 integrated, 9 open/blocked, 0 ready. PR285 current exact-head checks are 21/21 success; PR287 frozen managed five-case drain remains independently accepted while overall PR checks retain a macOS wheel failure and pending jobs. PR288 cross-platform typing repair is independently reviewed on head 579c5e754de22308d552dad288be33323256f810/tree 3758146f4f3478f6a84d9d38b96483e5b37d1e6e (82 source tests, 11 Robot checks, and Linux/Win32/Darwin mypy passed), with hosted exact-head CI still pending. #135 SOURCE-POLICY-A scoped substage is integrated; #135 SOURCE-READ is in review. Whole issue states and all 54 contracts remain unchanged. A separate verified P0 gap is historical tool-alias identity capture under #279; Sol has an isolated repair task, no PR exists, and no new graph contract or whole-issue acceptance is added.",
+  "integration_head": "21064b1ad1e28d3e73749b7be19b98c79a98b93f",
   "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
   "release_ready": false,
   "community_merge": true,
@@ -4330,14 +4330,14 @@
     }
   },
   "current_program_refs": {
-    "observed_at_utc": "2026-10-10T11:50:20Z",
+    "observed_at_utc": "2026-10-10T12:22:00Z",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
-    "integration/community-release-20261008": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+    "integration/community-release-20261008": "21064b1ad1e28d3e73749b7be19b98c79a98b93f",
     "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
     "release_ready": false,
-    "receipt": "evidence/program-amendment-20261010T1150Z.json",
-    "receipt_sha256": "02798e510e32e25f0a04037c5e9b31e3ee2f2d1753000f4e7f9d49b287fb8605",
-    "integration": "2286d8e21f73a704b1fe8acd1127e09a160efd64"
+    "receipt": "evidence/program-amendment-20261010T1222Z.json",
+    "receipt_sha256": "40cde01da2183796caad75f3404fb0239c750c9139983db7a46c6cdb36b586cc",
+    "integration": "21064b1ad1e28d3e73749b7be19b98c79a98b93f"
   },
   "current_evidence_correction": {
     "observed_at_utc": "2026-10-10T01:40:00Z",
@@ -4345,8 +4345,8 @@
     "sha256": "8c2a9f9e13cb711b32e2416fb135e2f423d04528e60991792c940aa71ee9314a",
     "scope": "Adds the referenced sanitized Win32 mypy output and corrects the present PR276 base readback; the 01:35 snapshot remains immutable."
   },
-  "checkpoint_status": "PR285 cold-start repair is pushed as 8ef0cce on target 2286d8e2; exact-head hosted CI remains pending. The four-case frozen PASS remains only the earlier 31239/04fa control. PR286 proposes the reviewed pure source inventory policy at remote head e7c42e94 (tree shared with independently reviewed local commit e5f44050); its hosted CI is pending and physical acquisition/compile remain NOT RUN. The #135/#148 shared substage remains ACTIVE for root integration review only; no issue stage or acceptance changes. The tracked cohort is now 35 named PRs: 27 integrated, 8 open/blocked, 0 ready. Retained 54 contracts stay 53 open/one accepted with unchanged stage counts. User steering now records old Devsy as DELETED_BY_USER and blocks replacement readiness/actions until a new explicit HIT THE GAS; old pod/dispatch receipts remain historical.",
-  "checkpoint_observed_at": "2026-10-10T11:50:20Z",
+  "checkpoint_status": "Integration advanced to PR286 merge 21064b1ad1e28d3e73749b7be19b98c79a98b93f (tree 16c81059bff80b6d85606d45ac7d46a88cdce597), with all 19 exact-head checks and independent review accepted. The named 37-PR cohort is now 28 integrated, 9 open/blocked, 0 ready. PR285 current exact-head checks are 21/21 success; PR287 frozen managed five-case drain remains independently accepted while overall PR checks retain a macOS wheel failure and pending jobs. PR288 cross-platform typing repair is independently reviewed on head 579c5e754de22308d552dad288be33323256f810/tree 3758146f4f3478f6a84d9d38b96483e5b37d1e6e (82 source tests, 11 Robot checks, and Linux/Win32/Darwin mypy passed), with hosted exact-head CI still pending. #135 SOURCE-POLICY-A scoped substage is integrated; #135 SOURCE-READ is in review. Whole issue states and all 54 contracts remain unchanged. A separate verified P0 gap is historical tool-alias identity capture under #279; Sol has an isolated repair task, no PR exists, and no new graph contract or whole-issue acceptance is added.",
+  "checkpoint_observed_at": "2026-10-10T12:22:00Z",
   "current_convergence": {
     "observed_at_utc": "2026-10-10T06:04:13Z",
     "path": "evidence/convergence-followup-20261010T0604Z.json",
@@ -8106,13 +8106,944 @@
         ],
         "native_cas": "Separate native inventory; cas-worker-01 remains Failed, active-turn count at failure unknown."
       }
+    },
+    {
+      "id": "program-amendment-20261010T1216Z",
+      "observed_at_utc": "2026-10-10T12:16:10Z",
+      "summary": "The current integration head remains 2286d8e2. The 37-PR cohort is 27 integrated, 10 open/blocked, 0 ready. PR285 exact-head checks are 20/21 success; the Windows devmode check remains in progress. PR286 is 18/19 success with the same Windows check in progress. PR287 frozen managed five-case drain passed and independent review accepted run38050870256; PR287 overall checks still have one macOS wheel failure and other checks in progress. PR288 Linux source-reader review passed on tree 1455af7d, while cross-platform mypy typing repair and exact-head checks remain in progress. The shared #135/#148 policy and new #135 SOURCE-READ substages are bounded ACTIVE overlays; whole issue stages and all 54 contracts remain unchanged. PyPI still lists Core1.0.2 and Runtime1.0.2; GitHub Runtime release remains1.0.1. No publication, whole-issue acceptance, or release is claimed.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "open_issues": 53,
+        "accepted_closed_issues": [
+          210
+        ],
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "issue_stage_counts": {
+          "READY": 0,
+          "ACTIVE": 8,
+          "REVIEW": 9,
+          "BLOCKED": 28,
+          "INTEGRATED": 8,
+          "COMPLETE": 1
+        },
+        "whole_issue_acceptance_changed": false,
+        "raw_contracts_or_historical_archives_changed": false,
+        "historical_zip_count": 16
+      },
+      "integration_checkpoint": {
+        "head": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+        "tree": "a3d627658f116525c96e0da83aafa37b2ec59413",
+        "parents": [
+          "31239cf99c7b264a0eab89660e93b391532ac305",
+          "c7c18da18f2dfc1134773ea725c7b7de38c14e5c"
+        ],
+        "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "source_base": "31239cf99c7b264a0eab89660e93b391532ac305",
+        "observed_at_utc": "2026-10-10T12:16:10Z",
+        "cohort": {
+          "items": 37,
+          "target_integrated": 27,
+          "open_blocked": 10,
+          "merge_ready": 0,
+          "target_integrated_prs": [
+            219,
+            220,
+            251,
+            256,
+            257,
+            259,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270,
+            271,
+            272,
+            273,
+            274,
+            275,
+            276,
+            277,
+            278,
+            280,
+            281,
+            283,
+            284
+          ],
+          "open_prs": [
+            215,
+            216,
+            217,
+            218,
+            221,
+            282,
+            285,
+            286,
+            287,
+            288
+          ],
+          "scope": "Named-target PR outcomes only. PR287 scoped frozen managed drain is accepted; PR287 overall CI still has a macOS wheel failure and pending checks. PR288 is open with portability repair/exact-head checks pending; not whole-issue acceptance or release readiness."
+        },
+        "issue_acceptance_changed": false,
+        "issue_stage_counts_changed": false,
+        "release_ready": false
+      },
+      "current_pr_heads": {
+        "282": {
+          "head": "bab27a93664494965db8a86761ea5685a3be6618",
+          "base": "integration/community-release-20261008",
+          "status": "OPEN_BLOCKED",
+          "checks": "Action Server Tests, RCC toolkit, and coverage fail on six instances of the same supported-Core floor assertion at test_active_contracts.py:396: expected 1.0.2, while Canvas package declares unpublished Core 1.0.3.",
+          "production_blockers": [
+            "Keep published-Core floor test unchanged; public PyPI latest actions-core is 1.0.2, not 1.0.3.",
+            "Candidate-source browser acceptance belongs to earlier b020/92b46 tree; do not transfer to current bab27 tree. Current tree needs exact-head candidate Runtime/browser acceptance.",
+            "artifact:null does not satisfy shared artifact-bearing result schema; authorized retrievable artifact requires common #129/#83 contract, not candidate-only wheel."
+          ],
+          "registry_observation": "evidence/release-registry-observation-20261010T1216Z.json"
+        },
+        "285": {
+          "head": "8ef0cce463d1eb9f3228d7658c113ceb6a18d554",
+          "tree": "857c2a93fe4b422a2e5258475c57b0a295d1df95",
+          "base": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+          "status": "OPEN; exact-head check runs 20/21 success with only build (windows-py3.12-devmode) in progress.",
+          "changes": "90s is limited to first native-executable startup; source startup and watcher/restart remain 30s.",
+          "review": "Current-control frozen four-case gate is independently accepted on run38049645421; this is separate from PR287 five-case evidence.",
+          "current_ci": "evidence/pr-check-run-snapshot-20261010T1216Z.json"
+        },
+        "221": {
+          "head": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+          "base": "community",
+          "base_sha": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+          "status": "OPEN; PR draft; current-head Action Server Tests in progress (12 other current-head workflow runs succeeded).",
+          "remaining_gates": [
+            "PR285 exact-head hosted checks and current-control frozen receipt independent review (frozen 5-case managed-drain receipt now accepted; Windows exact-head PR285 check still in progress).",
+            "Complete applicable source, managed RCC, frozen executable and Go-wrapper successful-generation old-Run retention/controlled-exit proof separately.",
+            "All configured final-source security/browser/protocol/wheel/platform checks and release acceptance.",
+            "Only then follow authorized publication: verify external packages and native downloadable artifacts/checksums, update Homebrew cask, and prove installation/upgrade."
+          ],
+          "publication": "Actions Runtime 1.0.3 not published; Runtime 1.0.2 latest on PyPI and 1.0.1 latest GitHub release per 12:00 registry observation."
+        },
+        "215": {
+          "status": "OPEN_BLOCKED"
+        },
+        "216": {
+          "status": "OPEN_BLOCKED"
+        },
+        "217": {
+          "status": "OPEN_BLOCKED"
+        },
+        "218": {
+          "status": "OPEN_BLOCKED"
+        },
+        "286": {
+          "head": "e7c42e94196beba04dbae85d8a38da78efd9767f",
+          "tree": "16c81059bff80b6d85606d45ac7d46a88cdce597",
+          "base": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+          "status": "OPEN; exact-head check runs 18/19 success with only build (windows-py3.12-devmode) in progress. Independent pure inventory review remains scoped; root integration review active.",
+          "current_ci": "evidence/pr-check-run-snapshot-20261010T1216Z.json"
+        },
+        "287": {
+          "head": "4e5f8200628572d5308b0d3abd5ff16353600036",
+          "tree": "4c27206bf784a05269320f16df0993eb1b04b48e",
+          "base": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+          "status": "OPEN; standalone frozen managed five-case acceptance PASS and independently ACCEPTED; overall PR checks still incomplete.",
+          "frozen_managed_drain": {
+            "workflow_run_id": 38050870256,
+            "job_id": 114209562038,
+            "artifact_id": 11669058260,
+            "artifact_size_bytes": 53685,
+            "artifact_sha256": "2a52bf4aa4cd8c75089424bbd9f14497dea8a803096aba993200e1b9a9f53ef2",
+            "review_receipt_sha256": "5cee4d74de7a959f84a3d19bfd98fb7d9a4635703c3d93b6945e21ce178924d5",
+            "raw_junit_sha256": "6eebcd1aa036ee3e37f1adeb78c4337404913f2d85e986f3ff85c74bf72e5ddb",
+            "tests": 5,
+            "passed": 5,
+            "skipped": 0,
+            "failures": 0,
+            "errors": 0,
+            "duration_seconds": 178.698,
+            "scope": "Frozen managed successful-generation old-Run retention and controlled-exit proof only. No Go-wrapper evidence, complete process census, platform matrix, whole-issue acceptance, or release acceptance."
+          },
+          "overall_ci": "20 checks: 11 success, 1 failure (macOS wheel build), 5 in progress, 2 cancelled, 1 skipped (publish). See exact-head CI summary receipt.",
+          "comment_id": "6097382372",
+          "target": "integration/community-release-20261008",
+          "current_ci": "evidence/pr-check-run-snapshot-20261010T1216Z.json"
+        },
+        "288": {
+          "head": "64cb6816ba68b53c633f11f87ae9e3bde6e297f5",
+          "tree": "1455af7d032573e1478ddd5e910bbb777e4cad01",
+          "base": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+          "reviewed_tree_equivalent_local_commit": "29c245d3ff899e41f298915c7f44a1980c5ffaa4",
+          "status": "OPEN; cross-platform typing repair active; current exact-head checks 5 success and 13 in progress.",
+          "linux_review": "79 focused tests and six independent adversarial cases pass on tree-identical review commit; scoped Linux reader review accepted, not cross-platform CI or whole issue.",
+          "known_portability_blocker": "Win32 mypy reports missing O_DIRECTORY/O_NOFOLLOW/O_CLOEXEC/O_PATH/O_NONBLOCK attributes; Darwin mypy reports missing O_PATH. Owner is correcting flags typing; this head may advance.",
+          "source_receipt": "evidence/pr288-confined-read-20261010T1216Z/confined-read-receipt.md",
+          "current_ci": "evidence/pr-check-run-snapshot-20261010T1216Z.json"
+        }
+      },
+      "remaining_critical_path": [
+        {
+          "pr": 221,
+          "gate": "On final combined source: finish PR285 exact-head Windows check; finish applicable source/managed/frozen successful-generation old-Run retention and controlled exit, keeping evidence modes separate; complete final configured checks/release acceptance; only then execute authorized publication and native/Homebrew installation gates.",
+          "owner": "root; existing frozen/managed successor and CI/review owners"
+        },
+        {
+          "pr": 282,
+          "gate": "Do not weaken supported-Core floor. Resolve the unpublished Core1.0.3 public API/version prerequisite and common authorized artifact retrieval/result contract; then require exact-head runtime/browser test on bab27 descendant and fresh templates.",
+          "owner": "existing Canvas acceptance owner; root"
+        },
+        {
+          "pr": 285,
+          "gate": "Finish exact-head Windows devmode check and retain platform-specific cold startup evidence. Frozen four-case current-control and PR287 frozen five-case gates are separate scoped receipts.",
+          "owner": "existing CI monitor; frozen platform owner"
+        },
+        {
+          "pr": 286,
+          "gate": "Finish only remaining Windows devmode check; root decides admission of pure inventory substage separately from issue acceptance.",
+          "owner": "existing CI monitor; root integration review"
+        },
+        {
+          "pr": 287,
+          "gate": "Frozen five-case controlled drain PASS independently accepted; resolve overall macOS wheel failure and remaining exact-head CI before PR integration. Do not infer wrapper or complete orphan census.",
+          "owner": "existing CI monitor and PR287 owner"
+        },
+        {
+          "pr": 288,
+          "gate": "Complete active Win32/Darwin flag typing repair, push/read exact new head and finish exact-head cross-platform CI; preserve bounded Linux-reader limits and do not claim full snapshot/compiler admission.",
+          "owner": "existing source-confined-read owner; existing review lane"
+        }
+      ],
+      "rcc_execution": {
+        "run": 38036869578,
+        "control": "06885e75f8d2054bb3273934c3cc38d5e9e8d4f2",
+        "candidate": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+        "status": "PASS_SCOPED",
+        "artifact_id": 11663538970,
+        "zip_sha256": "f2eb536604f16d76efb8b6976a0b47fea7adbe6933d2a469ae0b5305ed4c890c",
+        "limit": "Reviewed fail-closed summary and actual log; raw JUnit/full lifecycle receipt not uploaded; no frozen/managed-successful-switch/full-issue claim."
+      },
+      "frozen_execution": {
+        "run": 38042374430,
+        "control": "04fa0feac3d5489096fd2959a6646edc442729cc",
+        "candidate": "31239cf99c7b264a0eab89660e93b391532ac305",
+        "status": "PASS_INDEPENDENTLY_REACCEPTED_SCOPED_GATE",
+        "junit": {
+          "tests": 4,
+          "passed": 4,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "review": "Luna independently rechecked all nine source hashes and parsed the raw four-case JUnit; prior Sol acceptance retained.",
+        "review_files": [
+          {
+            "path": "evidence/pr285-frozen-review-20261010T1139Z/independent-review-receipt.json",
+            "size_bytes": 9918,
+            "sha256": "09419a01f1decb4eb3fa474710ad6e3cf720f4a2775d0d7bfff1190e04755baa"
+          },
+          {
+            "path": "evidence/pr285-frozen-review-20261010T1139Z/frozen-catalog-junit.xml",
+            "size_bytes": 970,
+            "sha256": "0e96a5e9ea9bc6e4aeac1f4c083ec793f75a28c0f9a3e829070ff8158ab9934a"
+          },
+          {
+            "path": "evidence/pr285-frozen-review-20261010T1139Z/frozen-catalog-junit-summary.json",
+            "size_bytes": 859,
+            "sha256": "54e4985d2a766561d4299853d470e3004f240c45fb94b29bd921f47a4f7207ea"
+          },
+          {
+            "path": "evidence/pr285-frozen-review-20261010T1139Z/frozen-catalog-summary.json",
+            "size_bytes": 3220,
+            "sha256": "6d2b468ef9b983c2f066679dbbc20dd6ae67063cd1d04e1a08055da3711540ec"
+          }
+        ],
+        "limits": "Linux frozen managed four-case rollback/recovery only. Does not establish Windows/macOS frozen acceptance, RCC provider startup repair, successful-generation old-Run drain, full orphan census, wrapper execution, release pairing, or whole issue acceptance."
+      },
+      "frozen_generation_drain_execution": {
+        "workflow_run_id": 38050870256,
+        "job_id": 114209562038,
+        "artifact_id": 11669058260,
+        "artifact_size_bytes": 53685,
+        "artifact_sha256": "2a52bf4aa4cd8c75089424bbd9f14497dea8a803096aba993200e1b9a9f53ef2",
+        "review_receipt_sha256": "5cee4d74de7a959f84a3d19bfd98fb7d9a4635703c3d93b6945e21ce178924d5",
+        "raw_junit_sha256": "6eebcd1aa036ee3e37f1adeb78c4337404913f2d85e986f3ff85c74bf72e5ddb",
+        "tests": 5,
+        "passed": 5,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0,
+        "duration_seconds": 178.698,
+        "scope": "Frozen managed successful-generation old-Run retention and controlled-exit proof only. No Go-wrapper evidence, complete process census, platform matrix, whole-issue acceptance, or release acceptance."
+      },
+      "devsy": {
+        "observed_at_utc": "2026-10-10T11:51:16Z",
+        "status": "DELETED_BY_USER",
+        "next_state": "WAITING_FOR_NEW_HIT_THE_GAS",
+        "user_steering": "User explicitly deleted old Devsy worker and will prepare replacement. Do not assume a replacement/device is READY.",
+        "replacement_identity": null,
+        "replacement_cwd": null,
+        "replacement_worktree_uid": null,
+        "readiness_inheritance": "Do not inherit readiness from old alias cas-worker-01; replacement identity, cwd and worktree UID are unknown.",
+        "prohibited_until_new_trigger": [
+          "Devsy readiness polling",
+          "provisioning/start/create-resume",
+          "approval replay",
+          "remote branching",
+          "swarm/dispatch"
+        ],
+        "remote_checkpoint_preservation": "Preserve published remote checkpoints, Cloud copies, and historical #126/#279 unknown dispatch receipts. Do not claim unpushed remote changes are recoverable until later verified.",
+        "campaign_status": "Cloud campaign continues independently.",
+        "historical_old_worker_observation": {
+          "observed_at_utc": "2026-10-10T11:29:00Z",
+          "target": "cas-worker-01",
+          "workspace_uid": "default-ca-0b24d",
+          "pod_uid": "c08aeecd-3aa4-4077-947a-04ac381625e1",
+          "pod_phase": "Failed",
+          "native_daemon": "unverified",
+          "new_request_allowed": false,
+          "native_state": "Existing #126/#279 effects remain unknown; exact active count at the 05:05 failure is unknowable from the last healthy snapshot.",
+          "disposition": "No replay, provisioning, workspace lifecycle mutation, credential action, or current cleanliness claim. Preserve existing worktrees and threads.",
+          "receipt": "evidence/cas-continuation-current-state-20261010T1139Z.json"
+        },
+        "historical_receipts": "Old failed-pod observations and dispatch uncertainty remain historical and byte-preserved; this steering does not rewrite them."
+      },
+      "evidence": [
+        {
+          "path": "evidence/pr287-frozen-drain-20261010T1216Z/independent-review-receipt.json",
+          "size_bytes": 4257,
+          "sha256": "5cee4d74de7a959f84a3d19bfd98fb7d9a4635703c3d93b6945e21ce178924d5"
+        },
+        {
+          "path": "evidence/pr285-current-control-20261010T1216Z/independent-review-receipt.json",
+          "size_bytes": 6350,
+          "sha256": "129861d62ec6255246d2fb906adde35b8723344d0fe00b7df2fc1c716dc8ffe1"
+        },
+        {
+          "path": "evidence/pr288-confined-read-20261010T1216Z/confined-read-receipt.md",
+          "size_bytes": 11496,
+          "sha256": "e97cf0a66ef562e3b91a9ec9eb9cb55a4cec599ca72ee296df54882b71184ccc"
+        },
+        {
+          "path": "evidence/pr288-confined-read-20261010T1216Z/device-guard-red-c9.log",
+          "size_bytes": 8438,
+          "sha256": "fa0118d7cf20a73aab7c008e3a34ccb578f9d9e4e325f1a4d42d88c1d4760fa9"
+        },
+        {
+          "path": "evidence/pr288-confined-read-20261010T1216Z/device-guard-green-29c.log",
+          "size_bytes": 199,
+          "sha256": "fdda4bbc9653dd50164a8d78ec165c8d46194fd327b379e3c96b8994f6aa5e1e"
+        },
+        {
+          "path": "evidence/pr288-confined-read-20261010T1216Z/mypy-win32-red.log",
+          "size_bytes": 1373,
+          "sha256": "19ee00540460f1bb603613728e2e73b0a5043110b219828256c7d8350a3efe06"
+        },
+        {
+          "path": "evidence/pr288-confined-read-20261010T1216Z/mypy-darwin-red.log",
+          "size_bytes": 156,
+          "sha256": "92319251bfc84208d3f041f52e2115696662d4b656bfb9cdde6444716d214fc9"
+        },
+        {
+          "path": "evidence/release-registry-observation-20261010T1216Z.json",
+          "size_bytes": 645,
+          "sha256": "cbf5dee70ae8cd0dd090ab6ac7d063fae8fd96ccb1fe22ca85f09442197eb7b1"
+        },
+        {
+          "path": "evidence/pr-check-run-snapshot-20261010T1216Z.json",
+          "size_bytes": 1725,
+          "sha256": "96f294d700b82e0ba0b89e31c14f79d7a01cfe39be7ff32f877361b47d3fd3ec"
+        }
+      ],
+      "accepted_scoped_criteria": [],
+      "issue_metadata_updates": {},
+      "current_active_workers": {
+        "root": "Campaign coordinator; PR221 integration/release gates.",
+        "luna_cas_receipt_audit": "Read-only ledger refresh and checkpoint writer.",
+        "luna_ci_convergence": "Current exact-head CI monitor for PR285/286.",
+        "luna_frozen_platform_fix": "PR285/PR287 frozen and managed acceptance successor.",
+        "sol_source_profile_review": "#135/#148 source-confined-read independent review and portability repair coordination."
+      },
+      "upstream_disposition": "None. No new maintained RCC/runtime dependency defect established by this evidence.",
+      "next_successor_boundary": [
+        "Wait for the current PR288 Win32/Darwin typing repair to produce a new remote head before finalizing this checkpoint; current head 64cb is the observation at 12:16Z.",
+        "Do not use Devsy: old worker remains DELETED_BY_USER and held for new explicit HIT THE GAS.",
+        "Use already assigned writers only; no duplicate source-read, CI, frozen drain, or review lanes."
+      ],
+      "release_ready": false,
+      "community_merge": false,
+      "active_substages": [
+        {
+          "id": "135-source-policy-a",
+          "owner_issue": 135,
+          "related_issue": 148,
+          "title": "SOURCE-POLICY-A: deterministic validation/canonical inventory of explicitly supplied portable source entries",
+          "shared_scope": "One cross-issue substage. #135 owns the active implementation work; #148 reuses the same portable path policy as a prerequisite, not a second implementation lane.",
+          "status": "ACTIVE",
+          "implementation_status": "INDEPENDENT_SOURCE_REVIEW_APPROVED_ON_TREE_16c81059; ROOT_INTEGRATION_REVIEW_ACTIVE; HOSTED_WINDOWS_CHECK_PENDING; NOT_MERGED; NO_WHOLE_ISSUE_ACCEPTANCE",
+          "scope": "Pure validation and canonical inventory of explicitly supplied source entries: selected/protected paths; Unicode NFC; case and prefix collisions; portable path rules; regular files and directories only; 0644/0755 without privilege; empty directories do not define identity; limits of 10000 entries, 50 MiB per file, 500 MiB total, depth 64, path length 4096, and component length 255.",
+          "limits": "No filesystem admission, filesystem snapshot or measurement, compiler digest, RCC inspection/adapter/runtime compiler, capability identity, generation proof, provider, or new registry. No actual source-admission/API contract is accepted until independent code and tests are reviewed. Source inventory proposal is not physically acquired or compiled; exact-head hosted CI is pending, and whole #135/#148 acceptance remains open.",
+          "whole_issue_effect": "#135 remains BLOCKED by confined measurement/snapshot, RCC inspection/adapter/runtime compiler, capability identity, and generation proof. #148 retains its existing BLOCKED whole-issue stage. The active substage changes no whole-issue classification or graph stage count.",
+          "evidence_basis": "Root admitted only this pure portable manifest-policy validation successor at 2026-10-10T11:36Z after reading current #135/#148 bodies and #135 comment 5374000307 and adopting the documented choices in the independent review. Root selection is not accepted implementation. The implementation branch review receipt approves reviewed tree 16c81059bff80b6d85606d45ac7d46a88cdce597 (evidence/pr286-source-policy-review-20261010T1150Z/independent-review-receipt.md; SHA-256 0a5639883b193a719ad541cb45bdb21c7050217aca03cc13abd6f4f7fc63e54f); PR #286 remote head is e7c42e94196beba04dbae85d8a38da78efd9767f on that tree and hosted CI remains pending.",
+          "owner": "root integration review; pure-policy implementation lane complete",
+          "writer_boundary": "New helper/module/tests and behavior-preserving extraction of the existing Robot portable-path predicate on an isolated branch; no filesystem-admission behavior.",
+          "required_choices": [
+            "Keep legacy defaults and behavior unchanged.",
+            "Validate only explicitly supplied portable entries and protected paths.",
+            "Apply NFC, case/prefix collision, portable-path, entry-kind, and non-privileged mode rules.",
+            "Do not treat empty directories as source identity.",
+            "Enforce the stated entry, byte, depth, path, and component bounds."
+          ]
+        },
+        {
+          "id": "135-source-read-a",
+          "owner_issue": 135,
+          "related_issue": 148,
+          "title": "SOURCE-READ: bounded measurement of explicitly selected source files under a caller-supplied verified root descriptor",
+          "shared_scope": "One bounded reader stage for #135, reusable by #148 as a prerequisite; distinct from whole-tree snapshot, staging, and RCC/compiler acceptance.",
+          "status": "ACTIVE",
+          "implementation_status": "Linux reader independently reviewed on tree 1455af7d; cross-platform mypy portability repair active; remote PR #288 remains at 64cb6816 pending exact-head hosted CI.",
+          "scope": "Preflight explicit portable selected/protected file names with accepted SOURCE-POLICY-A; traverse beneath a caller-owned verified directory descriptor; pin selected leaves using Linux O_PATH/O_NOFOLLOW before fstat classification, then reopen via a pinned trusted procfd and compare handles; incrementally measure declared file and total byte bounds; compare parent/name and opened object observations before/after and revalidate selected paths.",
+          "limits": "Linux trusted procfs is an explicit supported-environment assumption and failure is closed without fallback. This does not establish an atomic full-tree snapshot, selected-set completeness, original root pathname, Workspace authorization, staging coherence, compiler inspection, Package Revision, Runtime Plan, or provider acceptance.",
+          "whole_issue_effect": "#135 remains BLOCKED by atomic/coherent snapshot and selected-set/global admission proof, staging and RCC inspection/adapter/runtime compiler plus capability identity/generation proof. #148 remains BLOCKED. No whole-issue stage/count/acceptance changes.",
+          "evidence_basis": "PR #288 remote head 64cb6816ba68b53c633f11f87ae9e3bde6e297f5 has tree 1455af7d032573e1478ddd5e910bbb777e4cad01; independent Linux review approved tree-identical local commit 29c245d3ff899e41f298915c7f44a1980c5ffaa4. Its receipt reports 79 tests passed, six independent adversarial cases passed, and the device-open-before-classification finding fixed. Win32/Darwin mypy still reports unavailable os O_* attributes on this tree; owner is correcting typing, so merge/exact-head CI not yet accepted.",
+          "owner": "Sol/source-confined-read existing lane; no duplicate source reader assigned.",
+          "required_choices": [
+            "Measure only explicitly selected entries supplied by the caller.",
+            "Classify a pinned object before content-readable open; fail closed without required Linux O_PATH/procfd support.",
+            "Keep policy inventory separate from measured object facts.",
+            "Do not claim atomic snapshot, completeness, authorization, staging, or compiler identity from this bounded measurement."
+          ]
+        }
+      ],
+      "corrections": [
+        {
+          "record_type": "dated_current_projection_correction",
+          "prior_amendment": "evidence/program-amendment-20261010T1150Z.json",
+          "field": "active_substages[0].evidence_basis",
+          "incorrect_tree_value": "16c81059fe4b422a2e5258475c57b0a295d1df95",
+          "correct_tree_value": "16c81059bff80b6d85606d45ac7d46a88cdce597",
+          "reason": "The prior amendment text has a tree-hash transcription typo. The copied independent review receipt and PR286 remote head/tree bind the correct tree; prior JSON/evidence bytes are preserved unchanged."
+        }
+      ],
+      "documentation_disposition": {
+        "canonical_file": "action_server/docs/DEVELOPMENT.md (Actions source repository; not a file in this governance checkout)",
+        "status": "Accepted scoped documentation proposal; local governance checkpoint records it, but this checkout does not edit the Actions product guide.",
+        "exact_replacement": "Frozen managed successful-generation drain passed on 2026-10-10 in run 38050870256 (five expected cases, 5 PASS, 0 skipped/failures/errors; independently accepted artifact 11669058260 SHA-256 2a52bf4aa4cd8c75089424bbd9f14497dea8a803096aba993200e1b9a9f53ef2). This proves only the recorded frozen managed drain cases; it does not establish Go-wrapper execution, a complete process census, cross-platform acceptance, whole-issue completion, or release readiness.",
+        "basis": "Independent reviewer flagged the prior “frozen drain NOT RUN” statement as stale; replace only that current guidance sentence while retaining the historical four-case receipt and all limitations."
+      },
+      "current_worker_inventory": {
+        "observed_at_utc": "2026-10-10T12:16:10Z",
+        "observation_source": "collaboration agent list snapshot at checkpoint preparation; transient Cloud status, separate from native worker inventory.",
+        "active_cloud_agents": [
+          "root",
+          "luna_cas_receipt_audit",
+          "luna_ci_convergence",
+          "luna_frozen_platform_fix",
+          "sol_source_profile_review"
+        ],
+        "completed_since_prior": [
+          "luna_frozen_receipt_review accepted PR287 run38050870256",
+          "luna_source_profile implementation completed at PR286 tree"
+        ],
+        "native_cas": "No calls made; previous Devsy delete-and-hold steering remains in force."
+      }
+    },
+    {
+      "id": "program-amendment-20261010T1222Z",
+      "observed_at_utc": "2026-10-10T12:22:00Z",
+      "summary": "Integration advanced to PR286 merge 21064b1ad1e28d3e73749b7be19b98c79a98b93f (tree 16c81059bff80b6d85606d45ac7d46a88cdce597), with all 19 exact-head checks and independent review accepted. The named 37-PR cohort is now 28 integrated, 9 open/blocked, 0 ready. PR285 current exact-head checks are 21/21 success; PR287 frozen managed five-case drain remains independently accepted while overall PR checks retain a macOS wheel failure and pending jobs. PR288 cross-platform typing repair is independently reviewed on head 579c5e754de22308d552dad288be33323256f810/tree 3758146f4f3478f6a84d9d38b96483e5b37d1e6e (82 source tests, 11 Robot checks, and Linux/Win32/Darwin mypy passed), with hosted exact-head CI still pending. #135 SOURCE-POLICY-A scoped substage is integrated; #135 SOURCE-READ is in review. Whole issue states and all 54 contracts remain unchanged. A separate verified P0 gap is historical tool-alias identity capture under #279; Sol has an isolated repair task, no PR exists, and no new graph contract or whole-issue acceptance is added.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "open_issues": 53,
+        "accepted_closed_issues": [
+          210
+        ],
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "issue_stage_counts": {
+          "READY": 0,
+          "ACTIVE": 8,
+          "REVIEW": 9,
+          "BLOCKED": 28,
+          "INTEGRATED": 8,
+          "COMPLETE": 1
+        },
+        "whole_issue_acceptance_changed": false,
+        "raw_contracts_or_historical_archives_changed": false,
+        "historical_zip_count": 16
+      },
+      "integration_checkpoint": {
+        "head": "21064b1ad1e28d3e73749b7be19b98c79a98b93f",
+        "tree": "16c81059bff80b6d85606d45ac7d46a88cdce597",
+        "parents": [
+          "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+          "e7c42e94196beba04dbae85d8a38da78efd9767f"
+        ],
+        "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "source_base": "31239cf99c7b264a0eab89660e93b391532ac305",
+        "observed_at_utc": "2026-10-10T12:22:00Z",
+        "cohort": {
+          "items": 37,
+          "target_integrated": 28,
+          "open_blocked": 9,
+          "merge_ready": 0,
+          "target_integrated_prs": [
+            219,
+            220,
+            251,
+            256,
+            257,
+            259,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270,
+            271,
+            272,
+            273,
+            274,
+            275,
+            276,
+            277,
+            278,
+            280,
+            281,
+            283,
+            284,
+            286
+          ],
+          "open_prs": [
+            215,
+            216,
+            217,
+            218,
+            221,
+            282,
+            285,
+            287,
+            288
+          ],
+          "scope": "Named-target PR outcomes only. PR286 merged and exact-head accepted. PR285 exact-head checks pass, but its remaining evidence/dependency gates remain separate; PR287 scoped frozen drain is accepted while overall CI still has a macOS wheel failure and pending checks; PR288 cross-platform source review is accepted but exact-head hosted CI is pending. No whole-issue acceptance or release readiness is claimed."
+        },
+        "issue_acceptance_changed": false,
+        "issue_stage_counts_changed": false,
+        "release_ready": false
+      },
+      "current_pr_heads": {
+        "282": {
+          "head": "bab27a93664494965db8a86761ea5685a3be6618",
+          "base": "integration/community-release-20261008",
+          "status": "OPEN_BLOCKED",
+          "checks": "Action Server Tests, RCC toolkit, and coverage fail on six instances of the same supported-Core floor assertion at test_active_contracts.py:396: expected 1.0.2, while Canvas package declares unpublished Core 1.0.3.",
+          "production_blockers": [
+            "Keep published-Core floor test unchanged; public PyPI latest actions-core is 1.0.2, not 1.0.3.",
+            "Candidate-source browser acceptance belongs to earlier b020/92b46 tree; do not transfer to current bab27 tree. Current tree needs exact-head candidate Runtime/browser acceptance.",
+            "artifact:null does not satisfy shared artifact-bearing result schema; authorized retrievable artifact requires common #129/#83 contract, not candidate-only wheel."
+          ],
+          "registry_observation": "evidence/release-registry-observation-20261010T1216Z.json"
+        },
+        "285": {
+          "head": "8ef0cce463d1eb9f3228d7658c113ceb6a18d554",
+          "tree": "857c2a93fe4b422a2e5258475c57b0a295d1df95",
+          "base": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+          "status": "OPEN; current exact-head check runs 21/21 success. Scoped current-control frozen four-case gate independently accepted; other release evidence remains separate.",
+          "changes": "90s is limited to first native-executable startup; source startup and watcher/restart remain 30s.",
+          "review": "Current-control frozen four-case gate is independently accepted on run38049645421; this is separate from PR287 five-case evidence.",
+          "current_ci": "evidence/pr-check-run-snapshot-20261010T1222Z.json"
+        },
+        "221": {
+          "head": "21064b1ad1e28d3e73749b7be19b98c79a98b93f",
+          "base": "community",
+          "base_sha": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+          "status": "OPEN; current head is merged integration checkpoint 21064b1a on community; exact-head status snapshot has 3 in progress and 28 queued at 12:22Z.",
+          "remaining_gates": [
+            "On the final combined source, complete applicable source, managed RCC, frozen executable and Go-wrapper successful-generation old-Run retention/controlled-exit proof separately.",
+            "Complete all configured final-source security/browser/protocol/wheel/platform checks and release acceptance.",
+            "Only then follow authorized publication: verify external packages and native downloadable artifacts/checksums, update Homebrew cask, and prove installation/upgrade."
+          ],
+          "publication": "Actions Runtime 1.0.3 not published; Runtime 1.0.2 latest on PyPI and 1.0.1 latest GitHub release per 12:00 registry observation.",
+          "current_ci": "evidence/pr-check-run-snapshot-20261010T1222Z.json"
+        },
+        "215": {
+          "status": "OPEN_BLOCKED"
+        },
+        "216": {
+          "status": "OPEN_BLOCKED"
+        },
+        "217": {
+          "status": "OPEN_BLOCKED"
+        },
+        "218": {
+          "status": "OPEN_BLOCKED"
+        },
+        "286": {
+          "head": "e7c42e94196beba04dbae85d8a38da78efd9767f",
+          "tree": "16c81059bff80b6d85606d45ac7d46a88cdce597",
+          "base": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+          "status": "MERGED; exact tested/reviewed head; 19/19 checks passed and independent review approved.",
+          "merge_commit": "21064b1ad1e28d3e73749b7be19b98c79a98b93f",
+          "merge_tree": "16c81059bff80b6d85606d45ac7d46a88cdce597",
+          "merge_parents": [
+            "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+            "e7c42e94196beba04dbae85d8a38da78efd9767f"
+          ],
+          "admission_comment_id": "6097428470",
+          "scope": "Pure supplied-source inventory prerequisite only; no whole-issue acceptance or release claim.",
+          "receipt": "evidence/pr286-merge-20261010T1222Z/pr286-merge-receipt.json"
+        },
+        "287": {
+          "head": "4e5f8200628572d5308b0d3abd5ff16353600036",
+          "tree": "4c27206bf784a05269320f16df0993eb1b04b48e",
+          "base": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+          "status": "OPEN; standalone frozen managed five-case acceptance PASS and independently ACCEPTED; overall PR checks still incomplete.",
+          "frozen_managed_drain": {
+            "workflow_run_id": 38050870256,
+            "job_id": 114209562038,
+            "artifact_id": 11669058260,
+            "artifact_size_bytes": 53685,
+            "artifact_sha256": "2a52bf4aa4cd8c75089424bbd9f14497dea8a803096aba993200e1b9a9f53ef2",
+            "review_receipt_sha256": "5cee4d74de7a959f84a3d19bfd98fb7d9a4635703c3d93b6945e21ce178924d5",
+            "raw_junit_sha256": "6eebcd1aa036ee3e37f1adeb78c4337404913f2d85e986f3ff85c74bf72e5ddb",
+            "tests": 5,
+            "passed": 5,
+            "skipped": 0,
+            "failures": 0,
+            "errors": 0,
+            "duration_seconds": 178.698,
+            "scope": "Frozen managed successful-generation old-Run retention and controlled-exit proof only. No Go-wrapper evidence, complete process census, platform matrix, whole-issue acceptance, or release acceptance."
+          },
+          "overall_ci": "20 check runs at 12:22Z: 13 success, 1 macOS wheel failure, 3 in progress, 2 cancelled, 1 skipped (publish). Frozen five-case managed drain is independently accepted as a narrow scoped gate; overall PR CI is not complete.",
+          "comment_id": "6097382372",
+          "target": "integration/community-release-20261008",
+          "current_ci": "evidence/pr-check-run-snapshot-20261010T1222Z.json"
+        },
+        "288": {
+          "head": "579c5e754de22308d552dad288be33323256f810",
+          "tree": "3758146f4f3478f6a84d9d38b96483e5b37d1e6e",
+          "parent": "64cb6816ba68b53c633f11f87ae9e3bde6e297f5",
+          "base": "21064b1ad1e28d3e73749b7be19b98c79a98b93f",
+          "status": "OPEN; independent source review ACCEPTED; hosted exact-head checks pending (5 success, 8 in progress, 5 queued at 12:22Z).",
+          "linux_review": "82 focused source-reader/policy tests, 11 Robot checks, and configured mypy on Linux, Win32 and Darwin passed on the typing-follow-up tree; independent reviewer accepted the bounded source-reader scope.",
+          "source_scope": "Bounded measurement of explicitly selected source files under a caller-supplied verified directory descriptor, using fail-closed typed flag checks and Linux O_PATH/procfd behavior. No atomic full-tree snapshot, selected-set completeness, original root pathname, Workspace authorization, staging coherence, compiler inspection, Package Revision, Runtime Plan, or provider acceptance.",
+          "receipt": "evidence/pr288-cross-platform-20261010T1222Z/confined-read-receipt.md",
+          "remote_head_map": "evidence/pr288-cross-platform-20261010T1222Z/remote-head-map.json",
+          "current_ci": "evidence/pr-check-run-snapshot-20261010T1222Z.json"
+        }
+      },
+      "remaining_critical_path": [
+        {
+          "pr": 221,
+          "gate": "On final combined source: finish PR285 exact-head Windows check; finish applicable source/managed/frozen successful-generation old-Run retention and controlled exit, keeping evidence modes separate; complete final configured checks/release acceptance; only then execute authorized publication and native/Homebrew installation gates.",
+          "owner": "root; existing frozen/managed successor and CI/review owners"
+        },
+        {
+          "pr": 282,
+          "gate": "Do not weaken supported-Core floor. Resolve the unpublished Core1.0.3 public API/version prerequisite and common authorized artifact retrieval/result contract; then require exact-head runtime/browser test on bab27 descendant and fresh templates.",
+          "owner": "existing Canvas acceptance owner; root"
+        },
+        {
+          "pr": 285,
+          "gate": "Exact-head checks now pass 21/21. Retain platform-specific cold-start evidence and complete remaining separate release dependencies; frozen four-case current-control and PR287 five-case frozen drain remain scoped distinct receipts.",
+          "owner": "existing CI monitor; frozen platform owner"
+        },
+        {
+          "pr": 286,
+          "gate": "Merged at 21064b1ad1e28d3e73749b7be19b98c79a98b93f after all 19 exact-head checks passed and independent review approved; pure inventory prerequisite only, with no #135/#148 whole-issue acceptance.",
+          "owner": "existing CI monitor; root integration review"
+        },
+        {
+          "pr": 287,
+          "gate": "Frozen five-case controlled drain PASS independently accepted; resolve the overall macOS wheel failure and remaining exact-head CI before integration. Do not infer wrapper execution or a complete orphan census.",
+          "owner": "existing CI monitor and PR287 owner"
+        },
+        {
+          "pr": 288,
+          "gate": "Independent bounded source-reader review and 82 tests, 11 Robot checks, and Linux/Win32/Darwin mypy pass on head 579c5e754de22308d552dad288be33323256f810; finish its exact-head hosted CI. Preserve limits: no full atomic snapshot, completeness, authorization, staging, or compiler admission.",
+          "owner": "existing source-confined-read owner; existing review lane"
+        }
+      ],
+      "rcc_execution": {
+        "run": 38036869578,
+        "control": "06885e75f8d2054bb3273934c3cc38d5e9e8d4f2",
+        "candidate": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+        "status": "PASS_SCOPED",
+        "artifact_id": 11663538970,
+        "zip_sha256": "f2eb536604f16d76efb8b6976a0b47fea7adbe6933d2a469ae0b5305ed4c890c",
+        "limit": "Reviewed fail-closed summary and actual log; raw JUnit/full lifecycle receipt not uploaded; no frozen/managed-successful-switch/full-issue claim."
+      },
+      "frozen_execution": {
+        "run": 38042374430,
+        "control": "04fa0feac3d5489096fd2959a6646edc442729cc",
+        "candidate": "31239cf99c7b264a0eab89660e93b391532ac305",
+        "status": "PASS_INDEPENDENTLY_REACCEPTED_SCOPED_GATE",
+        "junit": {
+          "tests": 4,
+          "passed": 4,
+          "skipped": 0,
+          "failures": 0,
+          "errors": 0
+        },
+        "review": "Luna independently rechecked all nine source hashes and parsed the raw four-case JUnit; prior Sol acceptance retained.",
+        "review_files": [
+          {
+            "path": "evidence/pr285-frozen-review-20261010T1139Z/independent-review-receipt.json",
+            "size_bytes": 9918,
+            "sha256": "09419a01f1decb4eb3fa474710ad6e3cf720f4a2775d0d7bfff1190e04755baa"
+          },
+          {
+            "path": "evidence/pr285-frozen-review-20261010T1139Z/frozen-catalog-junit.xml",
+            "size_bytes": 970,
+            "sha256": "0e96a5e9ea9bc6e4aeac1f4c083ec793f75a28c0f9a3e829070ff8158ab9934a"
+          },
+          {
+            "path": "evidence/pr285-frozen-review-20261010T1139Z/frozen-catalog-junit-summary.json",
+            "size_bytes": 859,
+            "sha256": "54e4985d2a766561d4299853d470e3004f240c45fb94b29bd921f47a4f7207ea"
+          },
+          {
+            "path": "evidence/pr285-frozen-review-20261010T1139Z/frozen-catalog-summary.json",
+            "size_bytes": 3220,
+            "sha256": "6d2b468ef9b983c2f066679dbbc20dd6ae67063cd1d04e1a08055da3711540ec"
+          }
+        ],
+        "limits": "Linux frozen managed four-case rollback/recovery only. Does not establish Windows/macOS frozen acceptance, RCC provider startup repair, successful-generation old-Run drain, full orphan census, wrapper execution, release pairing, or whole issue acceptance."
+      },
+      "frozen_generation_drain_execution": {
+        "workflow_run_id": 38050870256,
+        "job_id": 114209562038,
+        "artifact_id": 11669058260,
+        "artifact_size_bytes": 53685,
+        "artifact_sha256": "2a52bf4aa4cd8c75089424bbd9f14497dea8a803096aba993200e1b9a9f53ef2",
+        "review_receipt_sha256": "5cee4d74de7a959f84a3d19bfd98fb7d9a4635703c3d93b6945e21ce178924d5",
+        "raw_junit_sha256": "6eebcd1aa036ee3e37f1adeb78c4337404913f2d85e986f3ff85c74bf72e5ddb",
+        "tests": 5,
+        "passed": 5,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0,
+        "duration_seconds": 178.698,
+        "scope": "Frozen managed successful-generation old-Run retention and controlled-exit proof only. No Go-wrapper evidence, complete process census, platform matrix, whole-issue acceptance, or release acceptance."
+      },
+      "devsy": {
+        "observed_at_utc": "2026-10-10T11:51:16Z",
+        "status": "DELETED_BY_USER",
+        "next_state": "WAITING_FOR_NEW_HIT_THE_GAS",
+        "user_steering": "User explicitly deleted old Devsy worker and will prepare replacement. Do not assume a replacement/device is READY.",
+        "replacement_identity": null,
+        "replacement_cwd": null,
+        "replacement_worktree_uid": null,
+        "readiness_inheritance": "Do not inherit readiness from old alias cas-worker-01; replacement identity, cwd and worktree UID are unknown.",
+        "prohibited_until_new_trigger": [
+          "Devsy readiness polling",
+          "provisioning/start/create-resume",
+          "approval replay",
+          "remote branching",
+          "swarm/dispatch"
+        ],
+        "remote_checkpoint_preservation": "Preserve published remote checkpoints, Cloud copies, and historical #126/#279 unknown dispatch receipts. Do not claim unpushed remote changes are recoverable until later verified.",
+        "campaign_status": "Cloud campaign continues independently.",
+        "historical_old_worker_observation": {
+          "observed_at_utc": "2026-10-10T11:29:00Z",
+          "target": "cas-worker-01",
+          "workspace_uid": "default-ca-0b24d",
+          "pod_uid": "c08aeecd-3aa4-4077-947a-04ac381625e1",
+          "pod_phase": "Failed",
+          "native_daemon": "unverified",
+          "new_request_allowed": false,
+          "native_state": "Existing #126/#279 effects remain unknown; exact active count at the 05:05 failure is unknowable from the last healthy snapshot.",
+          "disposition": "No replay, provisioning, workspace lifecycle mutation, credential action, or current cleanliness claim. Preserve existing worktrees and threads.",
+          "receipt": "evidence/cas-continuation-current-state-20261010T1139Z.json"
+        },
+        "historical_receipts": "Old failed-pod observations and dispatch uncertainty remain historical and byte-preserved; this steering does not rewrite them."
+      },
+      "evidence": [
+        {
+          "path": "evidence/pr287-frozen-drain-20261010T1216Z/independent-review-receipt.json",
+          "size_bytes": 4257,
+          "sha256": "5cee4d74de7a959f84a3d19bfd98fb7d9a4635703c3d93b6945e21ce178924d5"
+        },
+        {
+          "path": "evidence/pr285-current-control-20261010T1216Z/independent-review-receipt.json",
+          "size_bytes": 6350,
+          "sha256": "129861d62ec6255246d2fb906adde35b8723344d0fe00b7df2fc1c716dc8ffe1"
+        },
+        {
+          "path": "evidence/pr286-merge-20261010T1222Z/pr286-merge-receipt.json",
+          "size_bytes": 412,
+          "sha256": "c68384b575db813cc4a43add4141b7306f9a4d4830e749951e5aa193687d0c8a"
+        },
+        {
+          "path": "evidence/pr288-cross-platform-20261010T1222Z/confined-read-receipt.md",
+          "size_bytes": 13088,
+          "sha256": "77dea6eaaa4984fc364712ca9a2257d526893f7fe131589ababbcc281549ef3e"
+        },
+        {
+          "path": "evidence/pr288-cross-platform-20261010T1222Z/remote-head-map.json",
+          "size_bytes": 207,
+          "sha256": "025bb1256dd937362572eff5356696ee3ba724406857be45377867c6fd715bdd"
+        },
+        {
+          "path": "evidence/pr288-cross-platform-20261010T1222Z/typing-fixed-source-tests.log",
+          "size_bytes": 265,
+          "sha256": "113120c5fb3e07b70b2fff7ba0fd1528d7648b66f3cb44f91f3a79a96fabfa7a"
+        },
+        {
+          "path": "evidence/pr288-cross-platform-20261010T1222Z/typing-fixed-robot-tests.log",
+          "size_bytes": 200,
+          "sha256": "279bac966fdfb9261bae6663d60aa95a43d229bd0817742c7bf94658014bca43"
+        },
+        {
+          "path": "evidence/pr288-cross-platform-20261010T1222Z/typing-fixed-linux.log",
+          "size_bytes": 43,
+          "sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8"
+        },
+        {
+          "path": "evidence/pr288-cross-platform-20261010T1222Z/typing-fixed-win32.log",
+          "size_bytes": 43,
+          "sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8"
+        },
+        {
+          "path": "evidence/pr288-cross-platform-20261010T1222Z/typing-fixed-darwin.log",
+          "size_bytes": 43,
+          "sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8"
+        },
+        {
+          "path": "evidence/pr-check-run-snapshot-20261010T1222Z.json",
+          "size_bytes": 7506,
+          "sha256": "ffda10cc4da93f73941d801dc04805baf53aad78ec4d6d8937c2b86337dfe2d8"
+        },
+        {
+          "path": "evidence/pr279-alias-gate-20261010T1222Z/remaining-gates.md",
+          "size_bytes": 7170,
+          "sha256": "ed7111559fc313ca2c292d118aabe9d2b115dca271423e00c1aa5009add17a2d"
+        }
+      ],
+      "accepted_scoped_criteria": [],
+      "issue_metadata_updates": {},
+      "current_active_workers": {
+        "root": "Campaign coordinator; integration/release decisions and bounded #279 alias identity repair review.",
+        "luna_cas_receipt_audit": "Governance checkpoint writer; local-only canonical amendment/projection update.",
+        "luna_ci_convergence": "Current exact-head CI monitor for open convergence PRs.",
+        "sol_source_profile_review": "Isolated #279 historical MCP alias identity capture reproduction/repair task; no PR yet."
+      },
+      "upstream_disposition": "None. No new maintained RCC/runtime dependency defect established by this evidence.",
+      "next_successor_boundary": [
+        "PR288 bounded source reader has independent review and cross-platform static/unit evidence; wait for exact-head hosted CI before considering that scoped stage complete.",
+        "Retain the verified historical tool-alias identity capture as a separate P0 gate; Sol has an isolated repair task with no PR yet. Do not create a new graph contract or infer issue-wide acceptance.",
+        "PR287 frozen managed five-case acceptance is separate from the current full PR CI failure/pending checks and does not establish wrapper execution or complete process census.",
+        "Do not use Devsy: old worker remains DELETED_BY_USER and held for new explicit HIT THE GAS.",
+        "Use already assigned writers only; no duplicate source-read, CI, frozen drain, or review lanes."
+      ],
+      "release_ready": false,
+      "community_merge": false,
+      "active_substages": [
+        {
+          "id": "135-source-policy-a",
+          "owner_issue": 135,
+          "related_issue": 148,
+          "title": "SOURCE-POLICY-A: deterministic validation/canonical inventory of explicitly supplied portable source entries",
+          "shared_scope": "One cross-issue substage. #135 owns the active implementation work; #148 reuses the same portable path policy as a prerequisite, not a second implementation lane.",
+          "status": "INTEGRATED",
+          "implementation_status": "MERGED_AT_21064B1; 19_EXACT_HEAD_CHECKS_PASS; INDEPENDENT_REVIEW_APPROVED; PURE_POLICY_SCOPE_ONLY; NO_WHOLE_ISSUE_ACCEPTANCE",
+          "scope": "Pure validation and canonical inventory of explicitly supplied source entries: selected/protected paths; Unicode NFC; case and prefix collisions; portable path rules; regular files and directories only; 0644/0755 without privilege; empty directories do not define identity; limits of 10000 entries, 50 MiB per file, 500 MiB total, depth 64, path length 4096, and component length 255.",
+          "limits": "This is an integrated pure policy/inventory prerequisite only. It does not physically acquire or compile source, establish filesystem admission, or accept a public source-admission API contract. Whole #135/#148 acceptance remains open.",
+          "whole_issue_effect": "#135 remains BLOCKED by confined measurement/snapshot, RCC inspection/adapter/runtime compiler, capability identity, and generation proof. #148 retains its existing BLOCKED whole-issue stage. The integrated scoped prerequisite changes no whole-issue classification or graph stage count.",
+          "evidence_basis": "PR #286 exact reviewed head e7c42e94196beba04dbae85d8a38da78efd9767f/tree 16c81059bff80b6d85606d45ac7d46a88cdce597 was merged as 21064b1ad1e28d3e73749b7be19b98c79a98b93f with 19/19 exact-head checks passing and independent review approved (evidence/pr286-merge-20261010T1222Z/pr286-merge-receipt.json; comment 6097428470). Scope is the pure inventory prerequisite only; no filesystem acquisition, compiler, or issue-wide acceptance.",
+          "owner": "root integration review; pure-policy implementation lane complete",
+          "writer_boundary": "New helper/module/tests and behavior-preserving extraction of the existing Robot portable-path predicate on an isolated branch; no filesystem-admission behavior.",
+          "required_choices": [
+            "Keep legacy defaults and behavior unchanged.",
+            "Validate only explicitly supplied portable entries and protected paths.",
+            "Apply NFC, case/prefix collision, portable-path, entry-kind, and non-privileged mode rules.",
+            "Do not treat empty directories as source identity.",
+            "Enforce the stated entry, byte, depth, path, and component bounds."
+          ]
+        },
+        {
+          "id": "135-source-read-a",
+          "owner_issue": 135,
+          "related_issue": 148,
+          "title": "SOURCE-READ: bounded measurement of explicitly selected source files under a caller-supplied verified root descriptor",
+          "shared_scope": "One bounded reader stage for #135, reusable by #148 as a prerequisite; distinct from whole-tree snapshot, staging, and RCC/compiler acceptance.",
+          "status": "REVIEW",
+          "implementation_status": "INDEPENDENT_SOURCE_REVIEW_APPROVED_ON_HEAD_579c5e75; 82_SOURCE_TESTS_11_ROBOT_3_PLATFORM_MYPY_PASS; HOSTED_EXACT_HEAD_CI_PENDING; NO_WHOLE_ISSUE_ACCEPTANCE",
+          "scope": "Preflight explicit portable selected/protected file names with accepted SOURCE-POLICY-A; traverse beneath a caller-owned verified directory descriptor; pin selected leaves using Linux O_PATH/O_NOFOLLOW before fstat classification, then reopen via a pinned trusted procfd and compare handles; incrementally measure declared file and total byte bounds; compare parent/name and opened object observations before/after and revalidate selected paths.",
+          "limits": "Linux trusted procfs is an explicit supported-environment assumption and failure is closed without fallback. This does not establish an atomic full-tree snapshot, selected-set completeness, original root pathname, Workspace authorization, staging coherence, compiler inspection, Package Revision, Runtime Plan, or provider acceptance.",
+          "whole_issue_effect": "#135 remains BLOCKED by atomic/coherent snapshot and selected-set/global admission proof, staging and RCC inspection/adapter/runtime compiler plus capability identity/generation proof. #148 remains BLOCKED. No whole-issue stage/count/acceptance changes.",
+          "evidence_basis": "PR #288 head 579c5e754de22308d552dad288be33323256f810/tree 3758146f4f3478f6a84d9d38b96483e5b37d1e6e follows parent 64cb6816ba68b53c633f11f87ae9e3bde6e297f5. The independent review receipt reports 82 source tests, 11 Robot tests, and configured mypy pass on Linux, Win32 and Darwin. Exact-head hosted CI remains pending (evidence/pr-check-run-snapshot-20261010T1222Z.json); no whole #135/#148 acceptance.",
+          "owner": "Sol/source-confined-read existing lane; no duplicate source reader assigned.",
+          "required_choices": [
+            "Measure only explicitly selected entries supplied by the caller.",
+            "Classify a pinned object before content-readable open; fail closed without required Linux O_PATH/procfd support.",
+            "Keep policy inventory separate from measured object facts.",
+            "Do not claim atomic snapshot, completeness, authorization, staging, or compiler identity from this bounded measurement."
+          ]
+        }
+      ],
+      "corrections": [
+        {
+          "record_type": "dated_current_projection_correction",
+          "prior_amendment": "evidence/program-amendment-20261010T1150Z.json",
+          "field": "active_substages[0].evidence_basis",
+          "incorrect_tree_value": "16c81059fe4b422a2e5258475c57b0a295d1df95",
+          "correct_tree_value": "16c81059bff80b6d85606d45ac7d46a88cdce597",
+          "reason": "The prior amendment text has a tree-hash transcription typo. The copied independent review receipt and PR286 remote head/tree bind the correct tree; prior JSON/evidence bytes are preserved unchanged.",
+          "current_projection_disposition": "Current projection corrected; historical 11:50Z amendment remains byte-preserved."
+        }
+      ],
+      "documentation_disposition": {
+        "canonical_file": "action_server/docs/DEVELOPMENT.md (Actions source repository; not a file in this governance checkout)",
+        "status": "Accepted scoped documentation proposal; local governance checkpoint records it, but this checkout does not edit the Actions product guide.",
+        "exact_replacement": "Frozen managed successful-generation drain passed on 2026-10-10 in run 38050870256 (five expected cases, 5 PASS, 0 skipped/failures/errors; independently accepted artifact 11669058260 SHA-256 2a52bf4aa4cd8c75089424bbd9f14497dea8a803096aba993200e1b9a9f53ef2). This proves only the recorded frozen managed drain cases; it does not establish Go-wrapper execution, a complete process census, cross-platform acceptance, whole-issue completion, or release readiness.",
+        "basis": "Independent reviewer flagged the prior “frozen drain NOT RUN” statement as stale; the bounded replacement proposal is retained. PR287 full CI is still incomplete. Historical four-case evidence and all limitations remain."
+      },
+      "current_worker_inventory": {
+        "observed_at_utc": "2026-10-10T12:21:46Z",
+        "observation_source": "Collaboration agent list snapshot; transient Cloud task statuses, not native worker state.",
+        "active_cloud_agents": [
+          "root",
+          "luna_cas_receipt_audit",
+          "luna_ci_convergence",
+          "sol_source_profile_review"
+        ],
+        "completed_since_prior": [
+          "luna_frozen_receipt_review accepted PR287 run38050870256",
+          "PR286 merged after 19/19 checks and independent approval"
+        ],
+        "native_cas": "No calls made; prior Devsy delete-and-hold steering remains in force."
+      },
+      "remaining_p0_acceptance_gate": {
+        "issue_context": 279,
+        "title": "Historical tool-alias identity capture",
+        "status": "VERIFIED_OPEN; isolated repair work assigned; no PR yet",
+        "verified_behavior": "A previously advertised generated alias can later become a literal bare-name tool in another package and dispatch there; catalog TTL/revision and deterministic sorting do not prevent capture, and calls lack a revision precondition.",
+        "required_acceptance": "Cover collision arrival and removal plus literal-name capture, with restart and historical scope stated. Do not claim an internal authorization bypass based on current evidence.",
+        "owner": "Sol in isolated worktree fix/mcp-alias-identity-20261010; root review",
+        "evidence": "evidence/pr279-alias-gate-20261010T1222Z/remaining-gates.md",
+        "boundary": "No new graph contract or issue-wide status change; distinct from the accepted frozen five-case drain and outside narrow #279 startup criteria."
+      }
     }
   ],
   "current_program_amendment": {
-    "id": "program-amendment-20261010T1150Z",
-    "observed_at_utc": "2026-10-10T11:50:20Z",
-    "path": "evidence/program-amendment-20261010T1150Z.json",
-    "sha256": "02798e510e32e25f0a04037c5e9b31e3ee2f2d1753000f4e7f9d49b287fb8605"
+    "id": "program-amendment-20261010T1222Z",
+    "observed_at_utc": "2026-10-10T12:22:00Z",
+    "path": "evidence/program-amendment-20261010T1222Z.json",
+    "sha256": "40cde01da2183796caad75f3404fb0239c750c9139983db7a46c6cdb36b586cc"
   },
   "prior_current_convergence_update_20261010T0441Z": {
     "observed_at_utc": "2026-10-10T04:41:32Z",
@@ -8282,19 +9213,19 @@
     "source": "Fresh git ls-remote origin readback."
   },
   "current_pr_convergence": {
-    "head": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
-    "tree": "a3d627658f116525c96e0da83aafa37b2ec59413",
+    "head": "21064b1ad1e28d3e73749b7be19b98c79a98b93f",
+    "tree": "16c81059bff80b6d85606d45ac7d46a88cdce597",
     "parents": [
-      "31239cf99c7b264a0eab89660e93b391532ac305",
-      "c7c18da18f2dfc1134773ea725c7b7de38c14e5c"
+      "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+      "e7c42e94196beba04dbae85d8a38da78efd9767f"
     ],
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "source_base": "31239cf99c7b264a0eab89660e93b391532ac305",
-    "observed_at_utc": "2026-10-10T11:50:20Z",
+    "observed_at_utc": "2026-10-10T12:22:00Z",
     "cohort": {
-      "items": 35,
-      "target_integrated": 27,
-      "open_blocked": 8,
+      "items": 37,
+      "target_integrated": 28,
+      "open_blocked": 9,
       "merge_ready": 0,
       "target_integrated_prs": [
         219,
@@ -8323,7 +9254,8 @@
         280,
         281,
         283,
-        284
+        284,
+        286
       ],
       "open_prs": [
         215,
@@ -8333,16 +9265,17 @@
         221,
         282,
         285,
-        286
+        287,
+        288
       ],
-      "scope": "Named-target integration outcomes; PR285 and PR286 are open with exact-head hosted CI pending. This is not whole-issue acceptance or release readiness."
+      "scope": "Named-target PR outcomes only. PR286 merged and exact-head accepted. PR285 exact-head checks pass, but its remaining evidence/dependency gates remain separate; PR287 scoped frozen drain is accepted while overall CI still has a macOS wheel failure and pending checks; PR288 cross-platform source review is accepted but exact-head hosted CI is pending. No whole-issue acceptance or release readiness is claimed."
     },
     "issue_acceptance_changed": false,
     "issue_stage_counts_changed": false,
     "release_ready": false,
-    "path": "evidence/program-amendment-20261010T1150Z.json",
-    "sha256": "02798e510e32e25f0a04037c5e9b31e3ee2f2d1753000f4e7f9d49b287fb8605",
-    "integration": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+    "path": "evidence/program-amendment-20261010T1222Z.json",
+    "sha256": "40cde01da2183796caad75f3404fb0239c750c9139983db7a46c6cdb36b586cc",
+    "integration": "21064b1ad1e28d3e73749b7be19b98c79a98b93f",
     "stage_counts_unchanged": true,
     "retained_original_contracts": 54
   },
@@ -8629,13 +9562,13 @@
       "related_issue": 148,
       "title": "SOURCE-POLICY-A: deterministic validation/canonical inventory of explicitly supplied portable source entries",
       "shared_scope": "One cross-issue substage. #135 owns the active implementation work; #148 reuses the same portable path policy as a prerequisite, not a second implementation lane.",
-      "status": "ACTIVE",
-      "implementation_status": "INDEPENDENT_REVIEW_APPROVED_ON_PROPOSED_SOURCE_TREE; ROOT_INTEGRATION_REVIEW_ACTIVE; NOT_MERGED; NO_WHOLE_ISSUE_ACCEPTANCE",
+      "status": "INTEGRATED",
+      "implementation_status": "MERGED_AT_21064B1; 19_EXACT_HEAD_CHECKS_PASS; INDEPENDENT_REVIEW_APPROVED; PURE_POLICY_SCOPE_ONLY; NO_WHOLE_ISSUE_ACCEPTANCE",
       "scope": "Pure validation and canonical inventory of explicitly supplied source entries: selected/protected paths; Unicode NFC; case and prefix collisions; portable path rules; regular files and directories only; 0644/0755 without privilege; empty directories do not define identity; limits of 10000 entries, 50 MiB per file, 500 MiB total, depth 64, path length 4096, and component length 255.",
-      "limits": "No filesystem admission, filesystem snapshot or measurement, compiler digest, RCC inspection/adapter/runtime compiler, capability identity, generation proof, provider, or new registry. No actual source-admission/API contract is accepted until independent code and tests are reviewed. Source inventory proposal is not physically acquired or compiled; exact-head hosted CI is pending, and whole #135/#148 acceptance remains open.",
-      "whole_issue_effect": "#135 remains BLOCKED by confined measurement/snapshot, RCC inspection/adapter/runtime compiler, capability identity, and generation proof. #148 retains its existing BLOCKED whole-issue stage. The active substage changes no whole-issue classification or graph stage count.",
-      "evidence_basis": "Root admitted only this pure portable manifest-policy validation successor at 2026-10-10T11:36Z after reading current #135/#148 bodies and #135 comment 5374000307 and adopting the documented choices in the independent review. Root selection is not accepted implementation. The implementation branch review receipt approves reviewed tree 16c81059fe4b422a2e5258475c57b0a295d1df95 (evidence/pr286-source-policy-review-20261010T1150Z/independent-review-receipt.md; SHA-256 0a5639883b193a719ad541cb45bdb21c7050217aca03cc13abd6f4f7fc63e54f); PR #286 remote head is e7c42e94196beba04dbae85d8a38da78efd9767f on that tree and hosted CI remains pending.",
-      "owner": "root integration review (source implementation lane completed independent review)",
+      "limits": "This is an integrated pure policy/inventory prerequisite only. It does not physically acquire or compile source, establish filesystem admission, or accept a public source-admission API contract. Whole #135/#148 acceptance remains open.",
+      "whole_issue_effect": "#135 remains BLOCKED by confined measurement/snapshot, RCC inspection/adapter/runtime compiler, capability identity, and generation proof. #148 retains its existing BLOCKED whole-issue stage. The integrated scoped prerequisite changes no whole-issue classification or graph stage count.",
+      "evidence_basis": "PR #286 exact reviewed head e7c42e94196beba04dbae85d8a38da78efd9767f/tree 16c81059bff80b6d85606d45ac7d46a88cdce597 was merged as 21064b1ad1e28d3e73749b7be19b98c79a98b93f with 19/19 exact-head checks passing and independent review approved (evidence/pr286-merge-20261010T1222Z/pr286-merge-receipt.json; comment 6097428470). Scope is the pure inventory prerequisite only; no filesystem acquisition, compiler, or issue-wide acceptance.",
+      "owner": "root integration review; pure-policy implementation lane complete",
       "writer_boundary": "New helper/module/tests and behavior-preserving extraction of the existing Robot portable-path predicate on an isolated branch; no filesystem-admission behavior.",
       "required_choices": [
         "Keep legacy defaults and behavior unchanged.",
@@ -8644,28 +9577,49 @@
         "Do not treat empty directories as source identity.",
         "Enforce the stated entry, byte, depth, path, and component bounds."
       ]
+    },
+    {
+      "id": "135-source-read-a",
+      "owner_issue": 135,
+      "related_issue": 148,
+      "title": "SOURCE-READ: bounded measurement of explicitly selected source files under a caller-supplied verified root descriptor",
+      "shared_scope": "One bounded reader stage for #135, reusable by #148 as a prerequisite; distinct from whole-tree snapshot, staging, and RCC/compiler acceptance.",
+      "status": "REVIEW",
+      "implementation_status": "INDEPENDENT_SOURCE_REVIEW_APPROVED_ON_HEAD_579c5e75; 82_SOURCE_TESTS_11_ROBOT_3_PLATFORM_MYPY_PASS; HOSTED_EXACT_HEAD_CI_PENDING; NO_WHOLE_ISSUE_ACCEPTANCE",
+      "scope": "Preflight explicit portable selected/protected file names with accepted SOURCE-POLICY-A; traverse beneath a caller-owned verified directory descriptor; pin selected leaves using Linux O_PATH/O_NOFOLLOW before fstat classification, then reopen via a pinned trusted procfd and compare handles; incrementally measure declared file and total byte bounds; compare parent/name and opened object observations before/after and revalidate selected paths.",
+      "limits": "Linux trusted procfs is an explicit supported-environment assumption and failure is closed without fallback. This does not establish an atomic full-tree snapshot, selected-set completeness, original root pathname, Workspace authorization, staging coherence, compiler inspection, Package Revision, Runtime Plan, or provider acceptance.",
+      "whole_issue_effect": "#135 remains BLOCKED by atomic/coherent snapshot and selected-set/global admission proof, staging and RCC inspection/adapter/runtime compiler plus capability identity/generation proof. #148 remains BLOCKED. No whole-issue stage/count/acceptance changes.",
+      "evidence_basis": "PR #288 head 579c5e754de22308d552dad288be33323256f810/tree 3758146f4f3478f6a84d9d38b96483e5b37d1e6e follows parent 64cb6816ba68b53c633f11f87ae9e3bde6e297f5. The independent review receipt reports 82 source tests, 11 Robot tests, and configured mypy pass on Linux, Win32 and Darwin. Exact-head hosted CI remains pending (evidence/pr-check-run-snapshot-20261010T1222Z.json); no whole #135/#148 acceptance.",
+      "owner": "Sol/source-confined-read existing lane; no duplicate source reader assigned.",
+      "required_choices": [
+        "Measure only explicitly selected entries supplied by the caller.",
+        "Classify a pinned object before content-readable open; fail closed without required Linux O_PATH/procfd support.",
+        "Keep policy inventory separate from measured object facts.",
+        "Do not claim atomic snapshot, completeness, authorization, staging, or compiler identity from this bounded measurement."
+      ]
     }
   ],
-  "active_substages_observed_at_utc": "2026-10-10T11:50:20Z",
+  "active_substages_observed_at_utc": "2026-10-10T12:22:00Z",
   "current_active_workers": {
-    "root": "Campaign coordinator; #135 integration review and PR/CAS coordination.",
-    "luna_cas_receipt_audit": "Bounded governance writer, completing this amendment."
+    "root": "Campaign coordinator; integration/release decisions and bounded #279 alias identity repair review.",
+    "luna_cas_receipt_audit": "Governance checkpoint writer; local-only canonical amendment/projection update.",
+    "luna_ci_convergence": "Current exact-head CI monitor for open convergence PRs.",
+    "sol_source_profile_review": "Isolated #279 historical MCP alias identity capture reproduction/repair task; no PR yet."
   },
   "current_worker_inventory": {
-    "observed_at_utc": "2026-10-10T11:50:20Z",
-    "observation_source": "collaboration agent inventory at 2026-10-10T11:50Z; point-in-time Cloud-agent list, not native CAS state.",
+    "observed_at_utc": "2026-10-10T12:21:46Z",
+    "observation_source": "Collaboration agent list snapshot; transient Cloud task statuses, not native worker state.",
     "active_cloud_agents": [
       "root",
-      "luna_cas_receipt_audit"
-    ],
-    "completed_agents": [
+      "luna_cas_receipt_audit",
       "luna_ci_convergence",
-      "luna_frozen_platform_fix",
-      "luna_frozen_receipt_review",
-      "luna_source_profile",
       "sol_source_profile_review"
     ],
-    "native_cas": "Separate native inventory; cas-worker-01 remains Failed, active-turn count at failure unknown."
+    "completed_since_prior": [
+      "luna_frozen_receipt_review accepted PR287 run38050870256",
+      "PR286 merged after 19/19 checks and independent approval"
+    ],
+    "native_cas": "No calls made; prior Devsy delete-and-hold steering remains in force."
   },
   "historical_projection_fields": {
     "integration_head_before_current_overlay": {
@@ -8673,11 +9627,11 @@
       "status": "historical; superseded by the dated current integration overlay"
     }
   },
-  "integration_head_observed_at_utc": "2026-10-10T11:50:20Z",
+  "integration_head_observed_at_utc": "2026-10-10T12:22:00Z",
   "projection_freshness": {
-    "current_overlay_observed_at_utc": "2026-10-10T11:50:20Z",
-    "current_overlay_receipt": "evidence/program-amendment-20261010T1150Z.json",
-    "current_overlay_sha256": "02798e510e32e25f0a04037c5e9b31e3ee2f2d1753000f4e7f9d49b287fb8605",
+    "current_overlay_observed_at_utc": "2026-10-10T12:22:00Z",
+    "current_overlay_receipt": "evidence/program-amendment-20261010T1222Z.json",
+    "current_overlay_sha256": "40cde01da2183796caad75f3404fb0239c750c9139983db7a46c6cdb36b586cc",
     "worker_stage_snapshot": {
       "observed_at_utc": "2026-10-10T07:53:20Z",
       "meaning": "Historical whole-issue classification snapshot; current bounded work appears in active_substages and current_active_workers."

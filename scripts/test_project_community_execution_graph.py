@@ -181,6 +181,21 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         self.assertEqual("BLOCKED", next(row["classification"] for row in graph["issues"] if row["issue"] == 135))
         self.assertEqual("BLOCKED", next(row["classification"] for row in graph["issues"] if row["issue"] == 148))
         validate_graph(graph, ledger)
+        for status in ("REVIEW", "INTEGRATED"):
+            lifecycle_ledger = copy.deepcopy(ledger)
+            lifecycle_ledger["supplemental_program_amendments"][-1]["active_substages"][0]["status"] = status
+            lifecycle_graph = copy.deepcopy(graph)
+            lifecycle_graph["supplemental_program_amendments"] = copy.deepcopy(lifecycle_ledger["supplemental_program_amendments"])
+            lifecycle_graph["active_substages"][0]["status"] = status
+            validate_graph(lifecycle_graph, lifecycle_ledger)
+            self.assertEqual("BLOCKED", next(row["classification"] for row in lifecycle_graph["issues"] if row["issue"] == 135))
+        invalid_status = copy.deepcopy(ledger)
+        invalid_status["supplemental_program_amendments"][-1]["active_substages"][0]["status"] = "COMPLETE"
+        invalid_status_graph = copy.deepcopy(graph)
+        invalid_status_graph["supplemental_program_amendments"] = copy.deepcopy(invalid_status["supplemental_program_amendments"])
+        invalid_status_graph["active_substages"][0]["status"] = "COMPLETE"
+        with self.assertRaisesRegex(ValueError, "owner or status"):
+            validate_graph(invalid_status_graph, invalid_status)
         invalid_owner = copy.deepcopy(ledger)
         invalid_owner["supplemental_program_amendments"][-1]["active_substages"][0]["owner_issue"] = 999
         invalid_graph = copy.deepcopy(graph)

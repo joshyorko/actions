@@ -1,0 +1,14 @@
+{
+  "observed_at": "2026-10-10T12:00:00Z",
+  "method": "Read public PyPI package JSON and GitHub releases collection; no authentication or publication attempted.",
+  "pypi_latest": {
+    "actions-http-helper": "1.0.3",
+    "actions-core": "1.0.2",
+    "actions-runtime": "1.0.2",
+    "actions-work-items": "0.4.4"
+  },
+  "runtime_1_0_3_pypi_release_has_files": false,
+  "latest_github_runtime_release": "actions-runtime-1.0.1",
+  "latest_github_runtime_release_published_at": "2026-09-07T18:10:51Z",
+  "scope": "Registry metadata observation only; does not reverify historical downloaded artifacts or establish credentials/upload permission."
+}

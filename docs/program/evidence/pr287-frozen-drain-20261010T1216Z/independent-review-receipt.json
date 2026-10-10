@@ -1,0 +1,80 @@
+{
+  "artifact_id": 11669058260,
+  "artifact_member_sha256": {
+    "frozen-catalog-artifact-verification.json": "5d3a3741e00219384740d7d5b6e3da5c683b1a4d6bc7c41e222044147771399d",
+    "frozen-catalog-junit-summary.json": "717d0f8b5d80fcf63df826e13a69953a92cb5acc656e975cb71becdd441e5f2b",
+    "frozen-catalog-junit.xml": "6eebcd1aa036ee3e37f1adeb78c4337404913f2d85e986f3ff85c74bf72e5ddb",
+    "frozen-catalog-native-build-source-tree.txt": "8183613f1160de62abe5a8d68ca6a48a19ca08e5c2385a8804ca4c0462cbe80b",
+    "frozen-catalog-rcc-sha256.txt": "f82f2794a59445d60d1bcd0153b30495eb6005bd077a8879426d32ea1ce81877",
+    "frozen-catalog-rcc-version.txt": "57ba3c9c038ed6497b5f04e5064d74548a6947a34a0c018ce59b3f6e40bea199",
+    "frozen-catalog-summary.json": "04b68f36603152b4940a8f9c3ba55afb2ebff7127bea959328a29582f30d008d",
+    "frozen-catalog-test.log": "74f331ff272920a8b056e3f050a7293058c44576463d1d5674f70dc0fef9e6c4"
+  },
+  "artifact_name": "frozen-catalog-rollback-4e5f8200628572d5308b0d3abd5ff16353600036",
+  "artifact_sha256": "2a52bf4aa4cd8c75089424bbd9f14497dea8a803096aba993200e1b9a9f53ef2",
+  "artifact_size_bytes": 53685,
+  "candidate_sha": "31239cf99c7b264a0eab89660e93b391532ac305",
+  "candidate_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+  "docs_note": "The committed development guide still calls the four-case run historical and says frozen drain is NOT RUN; after this exact five-case receipt, that statement is stale. Recommend updating the guide to record this receipt as frozen managed drain proof, retaining the separate limitation that this is not full release acceptance.",
+  "drain_evidence": {
+    "controlled_shutdown_status": 200,
+    "frozen_parent_executable_basename": "action-server",
+    "marker": "SUCCESSFUL_GENERATION_DRAIN_PASS",
+    "natural_parent_returncode": 1,
+    "new_generation": "v2",
+    "new_run_id": "run-001-d40d3018-0d4c-4db3-99db-b86e44f812b3",
+    "new_worker_identity": {
+      "create_time": 1791634313.59,
+      "pid": 4836
+    },
+    "old_generation": "v1",
+    "old_run_id": "run-000-a09444c2-4a3b-48ea-bf41-6767b2c15844",
+    "old_snapshot_retained_until_drain": true,
+    "old_worker_identity": {
+      "create_time": 1791634312.87,
+      "pid": 4817
+    },
+    "owned_worker_identities": [
+      [
+        4817,
+        1791634312.87
+      ],
+      [
+        4836,
+        1791634313.59
+      ]
+    ],
+    "worker_runtime": "managed RCC holotree Python 3.12, actions-core 1.0.2"
+  },
+  "expected_case_names": [
+    "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+    "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+    "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]",
+    "test_failed_watched_reload_keeps_both_packages_and_recovers",
+    "test_successful_generation_switch_drains_old_run_on_its_source_snapshot"
+  ],
+  "fixed_native_artifact_id": "11664669288",
+  "fixed_native_artifact_sha256": "5db37991cde941ba1c541912d376b33cb0e397db7a427db3e3f627358f5c7286",
+  "fixed_native_artifact_size_bytes": 59369402,
+  "head_sha": "4e5f8200628572d5308b0d3abd5ff16353600036",
+  "job_conclusion": "success",
+  "job_id": 114209562038,
+  "junit_summary_sha256": "717d0f8b5d80fcf63df826e13a69953a92cb5acc656e975cb71becdd441e5f2b",
+  "native_build_source_sha": "056d32601563a213643436e7df14e6ca0ea50516",
+  "native_build_source_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+  "native_build_workflow_run_id": "38039806634",
+  "raw_junit_counts": {
+    "duration_seconds": 178.698,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 5
+  },
+  "raw_junit_sha256": "6eebcd1aa036ee3e37f1adeb78c4337404913f2d85e986f3ff85c74bf72e5ddb",
+  "review": "independent hosted frozen managed generation-drain acceptance",
+  "scope_limit": "Exact Linux hosted frozen 5-case acceptance only; not full release acceptance, cross-platform coverage, or wrapper-binary execution evidence.",
+  "test_log_sha256": "74f331ff272920a8b056e3f050a7293058c44576463d1d5674f70dc0fef9e6c4",
+  "upstream_defect_disposition": "No new upstream/runtime defect established by this acceptance review.",
+  "verdict": "ACCEPT bounded five-case hosted acceptance evidence",
+  "workflow_run_id": 38050870256
+}

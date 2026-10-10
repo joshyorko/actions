@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-10T12:16:10Z",
+  "scope": "Read-only GitHub exact-head checks; checks remain live and can change.",
+  "pull_requests": {
+    "221": {
+      "head": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+      "base": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+      "workflow_runs": {
+        "total": 13,
+        "success": 12,
+        "in_progress": 1,
+        "in_progress_names": [
+          "Action Server Tests"
+        ]
+      }
+    },
+    "285": {
+      "head": "8ef0cce463d1eb9f3228d7658c113ceb6a18d554",
+      "check_runs": {
+        "total": 21,
+        "success": 20,
+        "in_progress": 1,
+        "in_progress_names": [
+          "build (windows-py3.12-devmode)"
+        ]
+      }
+    },
+    "286": {
+      "head": "e7c42e94196beba04dbae85d8a38da78efd9767f",
+      "check_runs": {
+        "total": 19,
+        "success": 18,
+        "in_progress": 1,
+        "in_progress_names": [
+          "build (windows-py3.12-devmode)"
+        ]
+      }
+    },
+    "287": {
+      "head": "4e5f8200628572d5308b0d3abd5ff16353600036",
+      "check_runs": {
+        "total": 20,
+        "success": 11,
+        "failure": 1,
+        "failure_names": [
+          "build-wheels (macos-15)"
+        ],
+        "in_progress": 5,
+        "cancelled": 2,
+        "skipped": 1,
+        "skipped_names": [
+          "publish"
+        ]
+      }
+    },
+    "288": {
+      "head": "64cb6816ba68b53c633f11f87ae9e3bde6e297f5",
+      "check_runs": {
+        "total": 18,
+        "success": 5,
+        "in_progress": 13,
+        "queued": 0
+      }
+    }
+  },
+  "provenance": "GitHub PR metadata, exact-head commit check-runs, and workflow-run readbacks; no CI reruns or workflow mutations."
+}

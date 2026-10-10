@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-10T12:22:00Z",
+  "scope": "Read-only GitHub exact-head status readback. Check states are live and may change; no reruns or workflow mutation.",
+  "pull_requests": {
+    "221": {
+      "head": "21064b1ad1e28d3e73749b7be19b98c79a98b93f",
+      "base": "community",
+      "state": "OPEN",
+      "check_run_count": 31,
+      "check_counts": {
+        "QUEUED": 28,
+        "IN_PROGRESS": 3
+      },
+      "check_names_by_state": {
+        "QUEUED": [
+          "audit",
+          "Build Action Server binary without credentials (ubuntu-22.04)",
+          "action-server-frontend-tests",
+          "build (ubuntu-py3.12-devmode)",
+          "build (ubuntu-py3.10-devmode)",
+          "build-sdist (ubuntu-py3.12)",
+          "copilot-setup-steps",
+          "build (ubuntu-py3.10-devmode)",
+          "lighthouse",
+          "coverage",
+          "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "Build Action Server binary without credentials (windows-2022)",
+          "build (windows-py3.12-devmode)",
+          "build (windows-py3.10-devmode)",
+          "build (macos-latest)",
+          "build (windows-py3.10-devmode)",
+          "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "Build Action Server binary without credentials (macos-15)",
+          "build (macos-py3.12-devmode)",
+          "build (macos-py3.10-devmode)",
+          "build (windows-latest)",
+          "build (macos-py3.10-devmode)",
+          "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "build-wheels (ubuntu-22.04)",
+          "build-wheels (macos-15)"
+        ],
+        "IN_PROGRESS": [
+          "build (ubuntu-latest)",
+          "verify",
+          "build-wheels (windows-2022)"
+        ]
+      }
+    },
+    "285": {
+      "head": "8ef0cce463d1eb9f3228d7658c113ceb6a18d554",
+      "base": "integration/community-release-20261008",
+      "state": "OPEN",
+      "check_run_count": 21,
+      "check_counts": {
+        "SUCCESS": 21
+      },
+      "check_names_by_state": {
+        "SUCCESS": [
+          "audit",
+          "Build Action Server binary without credentials (ubuntu-22.04)",
+          "build (ubuntu-py3.12-devmode)",
+          "build",
+          "build-sdist (ubuntu-py3.12)",
+          "copilot-setup-steps",
+          "coverage",
+          "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "Build Action Server binary without credentials (windows-2022)",
+          "build (windows-py3.12-devmode)",
+          "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "Build Action Server binary without credentials (macos-15)",
+          "build (macos-py3.12-devmode)",
+          "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "build-wheels (ubuntu-22.04)",
+          "build-wheels (windows-2022)",
+          "build-wheels (macos-15)",
+          "publish (3.12)"
+        ]
+      }
+    },
+    "287": {
+      "head": "4e5f8200628572d5308b0d3abd5ff16353600036",
+      "base": "integration/community-release-20261008",
+      "state": "OPEN",
+      "check_run_count": 20,
+      "check_counts": {
+        "IN_PROGRESS": 3,
+        "SUCCESS": 13,
+        "CANCELLED": 2,
+        "FAILURE": 1,
+        "SKIPPED": 1
+      },
+      "check_names_by_state": {
+        "IN_PROGRESS": [
+          "build (ubuntu-py3.12-devmode)",
+          "build (windows-py3.12-devmode)",
+          "build (macos-py3.12-devmode)"
+        ],
+        "SUCCESS": [
+          "audit",
+          "Build Action Server binary without credentials (ubuntu-22.04)",
+          "build",
+          "build-sdist (ubuntu-py3.12)",
+          "coverage",
+          "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "Build Action Server binary without credentials (windows-2022)",
+          "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "Build Action Server binary without credentials (macos-15)",
+          "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83..."
+        ],
+        "CANCELLED": [
+          "build-wheels (ubuntu-22.04)",
+          "build-wheels (windows-2022)"
+        ],
+        "FAILURE": [
+          "build-wheels (macos-15)"
+        ],
+        "SKIPPED": [
+          "publish"
+        ]
+      }
+    },
+    "288": {
+      "head": "579c5e754de22308d552dad288be33323256f810",
+      "base": "integration/community-release-20261008",
+      "state": "OPEN",
+      "check_run_count": 18,
+      "check_counts": {
+        "IN_PROGRESS": 8,
+        "SUCCESS": 5,
+        "QUEUED": 5
+      },
+      "check_names_by_state": {
+        "IN_PROGRESS": [
+          "Build Action Server binary without credentials (ubuntu-22.04)",
+          "build (ubuntu-py3.12-devmode)",
+          "coverage",
+          "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "Build Action Server binary without credentials (windows-2022)",
+          "build (macos-py3.12-devmode)",
+          "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984..."
+        ],
+        "SUCCESS": [
+          "audit",
+          "build-sdist (ubuntu-py3.12)",
+          "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "build-wheels (ubuntu-22.04)"
+        ],
+        "QUEUED": [
+          "build (windows-py3.12-devmode)",
+          "Build Action Server binary without credentials (macos-15)",
+          "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "build-wheels (windows-2022)",
+          "build-wheels (macos-15)"
+        ]
+      }
+    }
+  },
+  "provenance": "GitHub PR metadata and exact-head statusCheckRollup via gh; PR286 merge independently read back by commit SHA."
+}

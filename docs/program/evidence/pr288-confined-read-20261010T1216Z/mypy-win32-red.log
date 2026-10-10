@@ -1,0 +1,13 @@
+src/actions/server/deployments/source_read.py:167: error: Module has no attribute "O_DIRECTORY"  [attr-defined]
+src/actions/server/deployments/source_read.py:167: error: Module has no attribute "O_NOFOLLOW"  [attr-defined]
+src/actions/server/deployments/source_read.py:167: error: Module has no attribute "O_CLOEXEC"  [attr-defined]
+src/actions/server/deployments/source_read.py:196: error: Module has no attribute "O_DIRECTORY"  [attr-defined]
+src/actions/server/deployments/source_read.py:196: error: Module has no attribute "O_NOFOLLOW"  [attr-defined]
+src/actions/server/deployments/source_read.py:196: error: Module has no attribute "O_CLOEXEC"  [attr-defined]
+src/actions/server/deployments/source_read.py:211: error: Module has no attribute "O_PATH"  [attr-defined]
+src/actions/server/deployments/source_read.py:211: error: Module has no attribute "O_NOFOLLOW"  [attr-defined]
+src/actions/server/deployments/source_read.py:211: error: Module has no attribute "O_CLOEXEC"  [attr-defined]
+src/actions/server/deployments/source_read.py:227: error: Module has no attribute "O_NONBLOCK"  [attr-defined]
+src/actions/server/deployments/source_read.py:227: error: Module has no attribute "O_CLOEXEC"  [attr-defined]
+tests/contract_tests/test_source_read.py:20: error: Module has no attribute "O_DIRECTORY"  [attr-defined]
+Found 12 errors in 2 files (checked 2 source files)

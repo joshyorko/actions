@@ -1,0 +1,165 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_____ test_device_is_classified_before_any_readable_open[existing_device] ______
+
+tmp_path = PosixPath('/workspace/work/source-profile-review/tmp/c9-device-proof/test_device_is_classified_befo0')
+root_fd = 12
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fab62d43b30>
+acquisition = 'existing_device'
+
+    @pytest.mark.parametrize("acquisition", ["existing_device", "replacement_device"])
+    def test_device_is_classified_before_any_readable_open(
+        tmp_path, root_fd, monkeypatch, acquisition
+    ):
+        reader = _reader()
+        (tmp_path / "input").write_bytes(b"regular")
+        real_open = os.open
+        device_root = real_open("/dev", os.O_RDONLY | os.O_DIRECTORY)
+        requested = []
+    
+        def guard_device_open(path, flags, *args, **kwargs):
+            if path in {"null", "input"}:
+                requested.append(flags)
+                assert flags & os.O_PATH, "device acquisition attempted a read-capable open"
+                if acquisition == "replacement_device":
+                    # Model the leaf changing to an actual device at the open syscall.
+                    # The returned descriptor really pins /dev/null without driver open.
+                    return real_open("null", flags, dir_fd=device_root)
+            return real_open(path, flags, *args, **kwargs)
+    
+        def forbidden_read(*args):
+            raise AssertionError("device reached content read")
+    
+        monkeypatch.setattr(reader.os, "open", guard_device_open)
+        monkeypatch.setattr(
+            reader.os, "supports_dir_fd", reader.os.supports_dir_fd | {guard_device_open}
+        )
+        monkeypatch.setattr(reader.os, "read", forbidden_read)
+        try:
+            with pytest.raises(ValueError, match="regular file"):
+>               reader.read_selected_files(
+                    device_root if acquisition == "existing_device" else root_fd,
+                    ["null" if acquisition == "existing_device" else "input"],
+                    protected_input_names=[],
+                )
+
+action_server/tests/contract_tests/test_source_read.py:424: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/workspace/work/source-profile-review/source_read_c9.py:106: in read_selected_files
+    inventory = source_manifest.validate_proposed_inventory(
+action_server/src/actions/server/deployments/source_manifest.py:119: in validate_proposed_inventory
+    for entry in _bounded_values(entries, "entries"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+action_server/src/actions/server/deployments/source_manifest.py:196: in _bounded_values
+    for count, value in enumerate(values):
+                        ^^^^^^^^^^^^^^^^^
+/workspace/work/source-profile-review/source_read_c9.py:98: in measured_entries
+    with _opened_path(owned_root, parts) as opened:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+/workspace/work/source-profile-review/source_read_c9.py:180: in _opened_path
+    os.open(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = 'null', flags = 657408, args = (), kwargs = {'dir_fd': 14}
+@ctx = <robocorp.log._lifecycle_hooks.MethodLifecycleContext object at 0x7fab62d43cb0>
+@tmp_22 = 2097152
+
+    def guard_device_open(path, flags, *args, **kwargs):
+        if path in {"null", "input"}:
+            requested.append(flags)
+>           assert flags & os.O_PATH, "device acquisition attempted a read-capable open"
+            
+E           AssertionError: device acquisition attempted a read-capable open
+E           Failed: assert flags & os.O_PATH
+E           Variables:
+E             flags = 657408
+E             os.O_PATH = 2097152
+
+action_server/tests/contract_tests/test_source_read.py:407: AssertionError
+____ test_device_is_classified_before_any_readable_open[replacement_device] ____
+
+tmp_path = PosixPath('/workspace/work/source-profile-review/tmp/c9-device-proof/test_device_is_classified_befo1')
+root_fd = 12
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fab62d65dc0>
+acquisition = 'replacement_device'
+
+    @pytest.mark.parametrize("acquisition", ["existing_device", "replacement_device"])
+    def test_device_is_classified_before_any_readable_open(
+        tmp_path, root_fd, monkeypatch, acquisition
+    ):
+        reader = _reader()
+        (tmp_path / "input").write_bytes(b"regular")
+        real_open = os.open
+        device_root = real_open("/dev", os.O_RDONLY | os.O_DIRECTORY)
+        requested = []
+    
+        def guard_device_open(path, flags, *args, **kwargs):
+            if path in {"null", "input"}:
+                requested.append(flags)
+                assert flags & os.O_PATH, "device acquisition attempted a read-capable open"
+                if acquisition == "replacement_device":
+                    # Model the leaf changing to an actual device at the open syscall.
+                    # The returned descriptor really pins /dev/null without driver open.
+                    return real_open("null", flags, dir_fd=device_root)
+            return real_open(path, flags, *args, **kwargs)
+    
+        def forbidden_read(*args):
+            raise AssertionError("device reached content read")
+    
+        monkeypatch.setattr(reader.os, "open", guard_device_open)
+        monkeypatch.setattr(
+            reader.os, "supports_dir_fd", reader.os.supports_dir_fd | {guard_device_open}
+        )
+        monkeypatch.setattr(reader.os, "read", forbidden_read)
+        try:
+            with pytest.raises(ValueError, match="regular file"):
+>               reader.read_selected_files(
+                    device_root if acquisition == "existing_device" else root_fd,
+                    ["null" if acquisition == "existing_device" else "input"],
+                    protected_input_names=[],
+                )
+
+action_server/tests/contract_tests/test_source_read.py:424: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/workspace/work/source-profile-review/source_read_c9.py:106: in read_selected_files
+    inventory = source_manifest.validate_proposed_inventory(
+action_server/src/actions/server/deployments/source_manifest.py:119: in validate_proposed_inventory
+    for entry in _bounded_values(entries, "entries"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+action_server/src/actions/server/deployments/source_manifest.py:196: in _bounded_values
+    for count, value in enumerate(values):
+                        ^^^^^^^^^^^^^^^^^
+/workspace/work/source-profile-review/source_read_c9.py:98: in measured_entries
+    with _opened_path(owned_root, parts) as opened:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+/workspace/work/source-profile-review/source_read_c9.py:180: in _opened_path
+    os.open(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = 'input', flags = 657408, args = (), kwargs = {'dir_fd': 14}
+@ctx = <robocorp.log._lifecycle_hooks.MethodLifecycleContext object at 0x7fab62d64bc0>
+@tmp_22 = 2097152
+
+    def guard_device_open(path, flags, *args, **kwargs):
+        if path in {"null", "input"}:
+            requested.append(flags)
+>           assert flags & os.O_PATH, "device acquisition attempted a read-capable open"
+            
+E           AssertionError: device acquisition attempted a read-capable open
+E           Failed: assert flags & os.O_PATH
+E           Variables:
+E             flags = 657408
+E             os.O_PATH = 2097152
+
+action_server/tests/contract_tests/test_source_read.py:407: AssertionError
+=========================== short test summary info ============================
+FAILED action_server/tests/contract_tests/test_source_read.py::test_device_is_classified_before_any_readable_open[existing_device]
+FAILED action_server/tests/contract_tests/test_source_read.py::test_device_is_classified_before_any_readable_open[replacement_device]
+2 failed, 42 deselected in 0.09s
+Log (html): /tmp/work/actions-worktrees/source-confined-read-20261010/output/log.html
