@@ -1,0 +1,344 @@
+{
+  "limitation": "The workflow-runs endpoint is PR-event-only and first-page only. Do not treat this inventory as a full required-check census. Exact runs below bind by commit SHA as requested; specialized artifact/control receipts are separate.",
+  "observed_at_utc": "2026-10-10T18:39:06Z",
+  "prs": {
+    "221": {
+      "head": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "workflow_runs": [
+        {
+          "conclusion": "success",
+          "name": "Actions Core Tests",
+          "run_id": 38066894337
+        },
+        {
+          "conclusion": "success",
+          "name": "Copilot Setup Steps",
+          "run_id": 38066894395
+        },
+        {
+          "conclusion": "success",
+          "name": "Measured Python coverage gate",
+          "run_id": 38066894500
+        },
+        {
+          "conclusion": "success",
+          "name": "Action Server Frontend tests",
+          "run_id": 38066894359
+        },
+        {
+          "conclusion": "success",
+          "name": "AI audit evidence",
+          "run_id": 38066894334
+        },
+        {
+          "conclusion": "success",
+          "name": "Work Items Release",
+          "run_id": 38066894314
+        },
+        {
+          "conclusion": "success",
+          "name": "Frontend Build",
+          "run_id": 38066894433
+        },
+        {
+          "conclusion": "success",
+          "name": "Lighthouse CI",
+          "run_id": 38066894297
+        },
+        {
+          "conclusion": "success",
+          "name": "Action Server Tests",
+          "run_id": 38066894280
+        },
+        {
+          "conclusion": "success",
+          "name": "Action Server Build (Unauthenticated)",
+          "run_id": 38066894409
+        },
+        {
+          "conclusion": "success",
+          "name": "Actions Runtime PYPI Release",
+          "run_id": 38066894394
+        },
+        {
+          "conclusion": "success",
+          "name": "HTTP Helper Tests",
+          "run_id": 38066894339
+        },
+        {
+          "conclusion": "success",
+          "name": "RCC developer toolkit",
+          "run_id": 38066894467
+        }
+      ]
+    },
+    "282": {
+      "head": "691b9c8687d721b4769ab7719ced68bff18b002f",
+      "workflow_runs": [
+        {
+          "conclusion": "failure",
+          "name": "RCC developer toolkit",
+          "run_id": 38072440033
+        },
+        {
+          "conclusion": "success",
+          "name": "Actions Runtime PYPI Release",
+          "run_id": 38072440034
+        },
+        {
+          "conclusion": "failure",
+          "name": "Measured Python coverage gate",
+          "run_id": 38072440010
+        },
+        {
+          "conclusion": "success",
+          "name": "Action Server Build (Unauthenticated)",
+          "run_id": 38072440134
+        },
+        {
+          "conclusion": "failure",
+          "name": "Action Server Tests",
+          "run_id": 38072440057
+        },
+        {
+          "conclusion": "success",
+          "name": "AI audit evidence",
+          "run_id": 38072440011
+        }
+      ]
+    },
+    "290": {
+      "head": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "workflow_runs": [
+        {
+          "conclusion": "success",
+          "name": "Measured Python coverage gate",
+          "run_id": 38070414514
+        },
+        {
+          "conclusion": "success",
+          "name": "Action Server Tests",
+          "run_id": 38070414469
+        },
+        {
+          "conclusion": "success",
+          "name": "RCC developer toolkit",
+          "run_id": 38070414513
+        },
+        {
+          "conclusion": "success",
+          "name": "Action Server Build (Unauthenticated)",
+          "run_id": 38070414533
+        },
+        {
+          "conclusion": "success",
+          "name": "Actions Runtime PYPI Release",
+          "run_id": 38070414475
+        },
+        {
+          "conclusion": "success",
+          "name": "AI audit evidence",
+          "run_id": 38070414425
+        },
+        {
+          "conclusion": "success",
+          "name": "Actions Core Tests",
+          "run_id": 38070414423
+        }
+      ]
+    },
+    "292": {
+      "head": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "workflow_runs": [
+        {
+          "conclusion": "success",
+          "name": "AI audit evidence",
+          "run_id": 38067347074
+        },
+        {
+          "conclusion": "success",
+          "name": "Actions Runtime PYPI Release",
+          "run_id": 38067347022
+        },
+        {
+          "conclusion": "success",
+          "name": "Action Server Build (Unauthenticated)",
+          "run_id": 38067347037
+        },
+        {
+          "conclusion": "in_progress",
+          "name": "Action Server Tests",
+          "run_id": 38067347057
+        },
+        {
+          "conclusion": "success",
+          "name": "Measured Python coverage gate",
+          "run_id": 38067347087
+        },
+        {
+          "conclusion": "success",
+          "name": "RCC developer toolkit",
+          "run_id": 38067347035
+        }
+      ]
+    },
+    "299": {
+      "head": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "workflow_runs": [
+        {
+          "conclusion": "success",
+          "name": "Action Server Tests",
+          "run_id": 38069465004
+        },
+        {
+          "conclusion": "success",
+          "name": "Actions Runtime PYPI Release",
+          "run_id": 38069465009
+        },
+        {
+          "conclusion": "success",
+          "name": "RCC developer toolkit",
+          "run_id": 38069465013
+        },
+        {
+          "conclusion": "success",
+          "name": "AI audit evidence",
+          "run_id": 38069465032
+        },
+        {
+          "conclusion": "success",
+          "name": "Measured Python coverage gate",
+          "run_id": 38069465061
+        },
+        {
+          "conclusion": "success",
+          "name": "Action Server Build (Unauthenticated)",
+          "run_id": 38069465015
+        }
+      ]
+    },
+    "300": {
+      "head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "workflow_runs": [
+        {
+          "conclusion": "success",
+          "name": "Action Server Build (Unauthenticated)",
+          "run_id": 38069518534
+        },
+        {
+          "conclusion": "success",
+          "name": "RCC developer toolkit",
+          "run_id": 38069518406
+        },
+        {
+          "conclusion": "success",
+          "name": "AI audit evidence",
+          "run_id": 38069518346
+        }
+      ]
+    },
+    "301": {
+      "head": "c734b9f850ec7b6bea8561b70312aca5c93dd6c1",
+      "workflow_runs": [
+        {
+          "conclusion": "success",
+          "name": "AI audit evidence",
+          "run_id": 38074235866
+        },
+        {
+          "conclusion": "success",
+          "name": "Action Server Frontend tests",
+          "run_id": 38074235916
+        },
+        {
+          "conclusion": "success",
+          "name": "Actions Runtime PYPI Release",
+          "run_id": 38074235886
+        },
+        {
+          "conclusion": "success",
+          "name": "RCC developer toolkit",
+          "run_id": 38074235862
+        },
+        {
+          "conclusion": "success",
+          "name": "Measured Python coverage gate",
+          "run_id": 38074235841
+        },
+        {
+          "conclusion": "success",
+          "name": "Action Server Build (Unauthenticated)",
+          "run_id": 38074235845
+        },
+        {
+          "conclusion": "success",
+          "name": "Action Server Tests",
+          "run_id": 38074235894
+        }
+      ]
+    },
+    "302": {
+      "head": "e31506239fd0260d708a11440762537334f8d2d1",
+      "workflow_runs": [
+        {
+          "conclusion": "success",
+          "name": "AI audit evidence",
+          "run_id": 38073317367
+        },
+        {
+          "conclusion": "success",
+          "name": "Measured Python coverage gate",
+          "run_id": 38073317355
+        },
+        {
+          "conclusion": "success",
+          "name": "Actions Runtime PYPI Release",
+          "run_id": 38073317461
+        },
+        {
+          "conclusion": "success",
+          "name": "RCC developer toolkit",
+          "run_id": 38073317467
+        },
+        {
+          "conclusion": "success",
+          "name": "Action Server Build (Unauthenticated)",
+          "run_id": 38073317395
+        },
+        {
+          "conclusion": "failure",
+          "name": "Action Server Tests",
+          "run_id": 38073317520
+        }
+      ]
+    }
+  },
+  "scoped_results": {
+    "pr290_frozen_eleven_case": {
+      "go_wrapper_job_id": 114256839804,
+      "independent_review_receipt": "pr290-frozen-eleven-case-independent-review.md",
+      "native_cases": "11 exact PASS",
+      "native_job_id": 114256839712,
+      "run_id": 38067094994,
+      "scope": "Pinned frozen control only, not current PR head/general release",
+      "wrapper_cases": "11 exact PASS",
+      "wrapper_exit_code": 1
+    },
+    "pr302_published_artifact_details": {
+      "artifact_id": 11678565491,
+      "artifact_sha256": "e707181077953c6f5728592a19ac9544223024f4e08b51b076b6e4fc9f6f7dfb",
+      "artifact_size_bytes": 5443,
+      "case_count": 3,
+      "control_commit": "20bfbfd14fd554a594517dc567f7342da7ce7022",
+      "control_tree": "2baf532ce58a3dd2bc8ac5bd6395e2682a421dc6",
+      "independent_review_receipt": "pr302-rcc-three-case-independent-review.json",
+      "job_id": 114282580676,
+      "known_limit": "Raw lifecycle operations were not retained; reviewer verified sanitized lifecycle summary and producer PASS attestation and reconstructed local origin/binary-path evidence rather than reparsing original raw lifecycle operations. Natural cleanup was observed. Wrapper process return code 1 is not a zero-exit claim.",
+      "run_id": 38075869631,
+      "source_commit": "e31506239fd0260d708a11440762537334f8d2d1",
+      "source_tree": "c6569803d1338541809cd349f440b69977155446",
+      "tests": "3/3 PASS; 0 failures, errors, skips"
+    }
+  },
+  "source": "GitHub Actions workflow-runs first-page response per exact PR head SHA; this is not a complete checks API"
+}

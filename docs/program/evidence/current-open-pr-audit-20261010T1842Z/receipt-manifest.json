@@ -1,0 +1,50 @@
+{
+  "files": [
+    {
+      "path": "cloud-agent-roster.json",
+      "sha256": "9e2a7a7b3f1ac16d9fd558107abdde1e4ec32fa12614a89f7d3a95b3d38f1bf1",
+      "size_bytes": 1069
+    },
+    {
+      "path": "compiler-predecessor-review-not-current-01ca.md",
+      "sha256": "bef4b62dd5252f6105a8cfed051861047772a71920e6342ba21f577f22fee6c9",
+      "size_bytes": 4506
+    },
+    {
+      "path": "current-git-bindings.json",
+      "sha256": "bccbdeb716ce4eec903a6905bb89912aad973dd74a9e553e1feb43b64b580b31",
+      "size_bytes": 5762
+    },
+    {
+      "path": "hosted-run-observations.json",
+      "sha256": "80553d57bbcb7ff5da4bfb1dbd8e71c61df245f6ccf00691d39d82a8c512e2ad",
+      "size_bytes": 10045
+    },
+    {
+      "path": "pr282-readiness-repair-independent-receipt.json",
+      "sha256": "b0de42142b15644f6cc0e994ee607b2f054ef1bbebbf17fd833c1043f6f80728",
+      "size_bytes": 6193
+    },
+    {
+      "path": "pr290-frozen-eleven-case-independent-review.md",
+      "sha256": "510bcf352aad0815a1ffd34998eda8483833bb0adf26326b1e7fe5bd669467c8",
+      "size_bytes": 5375
+    },
+    {
+      "path": "pr299-dependency-independent-review.md",
+      "sha256": "080bbed05a6622e7861491764a60e62c0aaba25909e40d4b4f3c383319919375",
+      "size_bytes": 8725
+    },
+    {
+      "path": "pr302-rcc-three-case-independent-review.json",
+      "sha256": "e84df4a77a3c0fb6a14391f68e8cecf5faa2067b76b71fd50649d7ad8d117faa",
+      "size_bytes": 4128
+    },
+    {
+      "path": "pr303-integration-receipt.json",
+      "sha256": "abeccd0efd9accaf018084364d162c5028bc6a1feb87536522c00df8064c69b8",
+      "size_bytes": 1237
+    }
+  ],
+  "observed_at_utc": "2026-10-10T18:42:10Z"
+}

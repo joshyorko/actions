@@ -1,0 +1,78 @@
+{
+  "artifact": {
+    "github_digest_sha256": "e707181077953c6f5728592a19ac9544223024f4e08b51b076b6e4fc9f6f7dfb",
+    "id": 11678565491,
+    "member_sha256": {
+      "rcc-provider-rollback-evidence/acceptance-summary.json": "511fcc2a41c36fce126055cde9cf7905e1182cbfc68e65d3800d7635e744e14d",
+      "rcc-provider-rollback-evidence/acceptance-summary.log": "c97096d8ee362c942b2ee400886fb5f5a997d5f4714afbb483645d4e92092483",
+      "rcc-provider-rollback-evidence/lifecycle-summary.json": "db87c1296c14c367ca13e910f11ddaa980f2068df52618de719d6ae81221602e",
+      "rcc-provider-rollback-evidence/published-details-receipt.json": "7494f28843266aa934c42cbb23ca351aa065792d3a00299dcdeff5cd2e0a9c3c",
+      "rcc-provider-rollback-evidence/staged-consumer-receipt.json": "92b14b0db868756cee64fd83b65b65626deb0ae3abbfeb1df0a1210bfe819278",
+      "rcc-provider-rollback-junit.xml": "809c8d5deda359977f48c59cd457f2a57663b33d6f7c059ccfaf8b642db93818"
+    },
+    "size_bytes": 5443,
+    "zip_sha256": "e707181077953c6f5728592a19ac9544223024f4e08b51b076b6e4fc9f6f7dfb"
+  },
+  "checks": {
+    "candidate_source_file_hashes_recomputed": true,
+    "hosted_acceptance_summary_pass": true,
+    "lifecycle_summary_natural_shutdown_sanitized_fields_verified": true,
+    "raw_publication_receipt_source_control_rcc_provider_args_and_pair_verified": true,
+    "raw_response_digest_verified": true,
+    "staged_inventory_and_managed_worker_origins_verified": true,
+    "strict_validator_replay_pass": true
+  },
+  "junit": {
+    "errors": 0,
+    "exact_identities": [
+      {
+        "class": "test_current_candidate_import_rollback",
+        "name": "test_current_candidate_failed_reload_keeps_last_good_action_usable"
+      },
+      {
+        "class": "test_source_staging_rcc_consumer",
+        "name": "test_published_artifact_details_preserves_one_rcc_identity_pair"
+      },
+      {
+        "class": "test_source_staging_rcc_consumer",
+        "name": "test_staged_package_executes_in_managed_rcc_runtime"
+      }
+    ],
+    "failures": 0,
+    "skipped": 0,
+    "tests": 3
+  },
+  "managed_consumer": {
+    "core_version": "1.0.2",
+    "forced_stop_used": false,
+    "natural_exit_status": "PASS",
+    "natural_return_code_before_cleanup": 1,
+    "same_owned_descendants_remaining_after_stop": 0,
+    "worker_core_origin": "/home/runner/work/_temp/rcc-provider-rollback-tmp/pytest-of-runner/pytest-0/test_staged_package_executes_i0/managed-home/holotree/62fb83f_5a1fac3_ad7d5c4d/lib/python3.12/site-packages/actions/__init__.py",
+    "worker_python_executable": "/home/runner/work/_temp/rcc-provider-rollback-tmp/pytest-of-runner/pytest-0/test_staged_package_executes_i0/managed-home/holotree/62fb83f_5a1fac3_ad7d5c4d/bin/python3.12"
+  },
+  "published_details": {
+    "artifact_digest": "sha256:159d9228d33e366b11dadb4b00da3a4fc816b28cd478b761b4959ff2e7c81ee6",
+    "invocation_count": 1,
+    "provider": "http://127.0.0.1:34377",
+    "raw_json_sha256": "5b7eefa3240ac10b2da338aec46e52be8f30842c5ddaf43a18d3159e76bc82d9",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "rcc_version": "v18.19.3",
+    "specification_digest": "sha256:5e7dcfdb9f4ca5cc19ca6b2e93cad75a3fd60f598d4a71fd10451bffc1ddc56f"
+  },
+  "replay_limit": "The artifact does not retain lifecycle-receipt.json. The strict validator was replayed from a reconstructed lifecycle receipt using the archived sanitized lifecycle summary and summary-attested host module-origin check; the original raw lifecycle receipt and raw provider operation objects could not be independently re-parsed.",
+  "run": {
+    "attempt": 1,
+    "conclusion": "success",
+    "control_sha": "20bfbfd14fd554a594517dc567f7342da7ce7022",
+    "control_tree": "2baf532ce58a3dd2bc8ac5bd6395e2682a421dc6",
+    "event": "push",
+    "id": 38075869631,
+    "job_id": 114282580676,
+    "source_sha": "e31506239fd0260d708a11440762537334f8d2d1",
+    "source_tree": "c6569803d1338541809cd349f440b69977155446"
+  },
+  "schema_version": 1,
+  "status": "PASS_WITH_REPLAY_LIMITATION",
+  "upstream_disposition": "none; this is local Actions acceptance evidence, not an upstream defect"
+}

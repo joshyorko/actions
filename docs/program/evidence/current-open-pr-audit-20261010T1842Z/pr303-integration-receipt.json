@@ -1,0 +1,32 @@
+{
+  "observed_utc": "2026-10-10T18:35Z",
+  "pr": 303,
+  "repository": "joshyorko/actions",
+  "intended_target": "community",
+  "source_head": "c2733957b047a2acf3d38c1cad7704a4bc69f15b",
+  "source_tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+  "integration_sha": "a70993fafc99a9f94041485542d5a720797ca394",
+  "integration_tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+  "ordered_parents": [
+    "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "c2733957b047a2acf3d38c1cad7704a4bc69f15b"
+  ],
+  "exact_head_latest_check_runs": {
+    "success": 16,
+    "pending": 0,
+    "failed": 0
+  },
+  "candidate_artifact": {
+    "id": 11677329133,
+    "run": 38074887213,
+    "sha256": "129cdf34cd685c8e1141d83d1694479cffe4d19fe5232f6878f4832e2ef34db1"
+  },
+  "verified_remote_commit_ordered_parents_and_tree": true,
+  "verified_remote_target_ref": true,
+  "verified_pr_closed_and_merged": true,
+  "authority": "normal authorized source integration after independent review and exact-head gates",
+  "publication": "NOT RUN; publication-like PR check success is not registry proof",
+  "release_blocker_cleared": "Core 1.0.3 source now has community ancestry",
+  "whole_issue_acceptance": "NOT ESTABLISHED",
+  "upstream_disposition": "none"
+}

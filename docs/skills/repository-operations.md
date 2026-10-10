@@ -1951,6 +1951,8 @@ For hosted pull-request validation, record the actual checkout SHA from the work
 
 In a dated checkpoint, list current open PR heads separately from merged integration commits. Do not label a merged PR head as open/current, and bind every check summary to its observed head and cutoff; queued or in-progress checks remain pending.
 
+A dependent PR's green ordinary CI does not satisfy a separate specialized prerequisite declared by one of its source dependencies. Carry that gate forward until evidence proves it on the relevant implementation and test bodies, or record an explicit owner decision that re-scopes the dependency. Keep the dependent PR blocked even when its own checks pass; do not infer that its union tree executed a gate omitted from its workflows.
+
 For a machine-readable current-ref projection, capture the GitHub Git commit
 response for each current open PR head and the integration ref, then retain
 the commit SHA and tree SHA together in a hash-bound receipt. Validate the

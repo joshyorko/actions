@@ -202,3 +202,8 @@ docs/program/evidence/program-amendment-20261010T1709Z.json -text
 # Preserve source bytes of immutable historical failure receipts with trailing blank lines.
 docs/program/evidence/current-open-pr-audit-20261010T1709Z/pr292-pypi-reset-run38067347087.txt whitespace=-blank-at-eof
 docs/program/evidence/current-open-pr-audit-20261010T1709Z/rcc-failed-baseline-run38068024443.txt whitespace=-blank-at-eof
+# 2026-10-10 18:42Z governance cutoff receipts are immutable hash-bound inputs.
+docs/program/evidence/current-open-pr-audit-20261010T1842Z/** -text
+docs/program/evidence/current-worker-inventory-20261010T1842Z.json -text
+docs/program/evidence/program-amendment-20261010T1842Z.json -text
+docs/program/evidence/shared-run-output-20261010T1420Z/first-concurrency-run.log -text whitespace=-blank-at-eof

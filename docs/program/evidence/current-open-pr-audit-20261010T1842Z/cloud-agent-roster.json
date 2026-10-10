@@ -1,0 +1,41 @@
+{
+  "agents": [
+    {
+      "name": "root",
+      "status": "running"
+    },
+    {
+      "name": "luna_cas_receipt_audit",
+      "role": "canonical governance checkpoint writer, no remote writes",
+      "status": "running"
+    },
+    {
+      "name": "luna_ci_convergence",
+      "role": "exact-head CI follow-up",
+      "status": "running"
+    },
+    {
+      "name": "luna_frozen_platform_fix",
+      "role": "PR282 readiness repair; integration review receipt provided",
+      "status": "completed"
+    },
+    {
+      "name": "luna_frozen_receipt_review",
+      "role": "frozen artifact review",
+      "status": "running"
+    },
+    {
+      "name": "luna_source_profile",
+      "role": "PR303 candidate review completed",
+      "status": "completed"
+    },
+    {
+      "name": "luna_sol_source_profile_review",
+      "role": "source/compiler architecture review",
+      "status": "running"
+    }
+  ],
+  "devsy": "DELETED_BY_USER / HOLD; no readiness checks or calls.",
+  "observed_at_utc": "2026-10-10T18:39:06Z",
+  "source": "collaboration.list_agents live roster"
+}

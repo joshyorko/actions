@@ -1,0 +1,76 @@
+{
+  "repository": "joshyorko/actions",
+  "base_head": "421fac66e265de619eef7d4f9d171a6095f4a907",
+  "base_tree": "4bfe827f2e4fd502f31722121946d697aeaa5521",
+  "preserved_parent_checkpoint": "027dcb68383c053b0b284c3c6a39d9bd18481d56",
+  "preserved_parent_tree": "3ceb3fdce6e6909e9fe36bc6da708f11ff1741bf",
+  "successor_commit": "a35a8ab436c4ac90f033acb0b9cca4459ab508cd",
+  "successor_tree": "ad7c3076a4c6b7c663c60d2d4759098dec8cf91",
+  "scope": [
+    "action_server/tests/action_server_tests/mcp/test_canvas_query_template.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "diagnosis": "When the launched leader exited before publishing readiness, unbounded communicate() waited for inherited stdout/stderr pipes to close; a live descendant kept them open, delaying finally cleanup. The readiness loop now rechecks the atomic marker after observing leader exit, uses a 50ms bounded output drain, and reaches identity-checked cleanup. It captures descendants after readiness as well; the test fixture keeps its leader alive briefly after publishing the child PID so cleanup identity capture is deterministic.",
+  "baseline_regression": {
+    "checkpoint": "027dcb68383c053b0b284c3c6a39d9bd18481d56 source/helper with new regression test",
+    "exit_code": 1,
+    "observed_elapsed_seconds": 2.0791630530002294,
+    "expected_bound_seconds": 1.5,
+    "log": "/workspace/work/pr282-owned-process-timeout-20261010/communicate-red.log",
+    "log_sha256": "84d42f97bc4a366ffb0c4df29534ed0ed73214054b493be314f29ac7d0572551",
+    "exit_code_file": "/workspace/work/pr282-owned-process-timeout-20261010/communicate-red-exit-code.txt",
+    "command": "env TMPDIR=/dev/shm/pr282-owned-process-repro PYTHONPATH=action_server/tests:action_server/src PYTHONDONTWRITEBYTECODE=1 <prepared-python> -m pytest -p no:robocorp_log_pytest --confcutdir=action_server/tests/action_server_tests/mcp --basetemp=/dev/shm/pr282-owned-process-repro/communicate-red -q action_server/tests/action_server_tests/mcp/test_canvas_query_template.py::test_owned_process_exit_before_readiness_cleans_descendant_promptly"
+  },
+  "focused_fixed_tests": {
+    "exit_code": 0,
+    "result": "3 passed in 3.00s",
+    "log": "/workspace/work/pr282-owned-process-timeout-20261010/communicate-green-final.log",
+    "log_sha256": "3ae87052952b38ffd11bd0a63f0a64f513981db442fae05b3fedc0688096e947",
+    "exit_code_file": "/workspace/work/pr282-owned-process-timeout-20261010/communicate-green-final-exit-code.txt",
+    "command": "env -u PR282_SLOW_CHILD_START TMPDIR=/dev/shm/pr282-owned-process-repro PYTHONPATH=action_server/tests:action_server/src PYTHONDONTWRITEBYTECODE=1 /workspace/work/community-resume/worker-exit/action_server/.venv/bin/python -m pytest -p no:robocorp_log_pytest --basetemp=/dev/shm/pr282-owned-process-repro/final-child-green-final5 -q action_server/tests/action_server_tests/mcp/test_canvas_query_template.py::test_owned_process_timeout_stops_its_descendant action_server/tests/action_server_tests/mcp/test_canvas_query_template.py::test_owned_process_readiness_fails_if_command_exits_before_ready action_server/tests/action_server_tests/mcp/test_canvas_query_template.py::test_owned_process_exit_before_readiness_cleans_descendant_promptly"
+  },
+  "slow_start_readiness_control": {
+    "exit_code": 0,
+    "result": "1 passed in 3.12s",
+    "log": "/workspace/work/pr282-owned-process-timeout-20261010/readiness-slow-start-green.log",
+    "log_sha256": "efd82ce3b5ad31657e7eb28c8e129cb14185c784f4d957bb4b0e70170268b09a",
+    "exit_code_file": "/workspace/work/pr282-owned-process-timeout-20261010/readiness-slow-start-green-exit-code.txt",
+    "command": "env TMPDIR=/dev/shm/pr282-owned-process-repro PYTHONPATH=/dev/shm/pr282-owned-process-repro:action_server/tests:action_server/src PR282_SLOW_CHILD_START=1 PYTHONDONTWRITEBYTECODE=1 /workspace/work/community-resume/worker-exit/action_server/.venv/bin/python -m pytest -p no:robocorp_log_pytest --basetemp=/dev/shm/pr282-owned-process-repro/readiness-slow-green -q action_server/tests/action_server_tests/mcp/test_canvas_query_template.py::test_owned_process_timeout_stops_its_descendant"
+  },
+  "descendant_cleanup": {
+    "pid_from_marker": 410938,
+    "post_test_state": "zombie",
+    "accepted_by_existing_cleanup_assertion": true,
+    "marker": "/dev/shm/pr282-owned-process-repro/final-child-green-final5/test_owned_process_exit_before0/descendant.pid"
+  },
+  "toolchain": {
+    "pytest_python": "/workspace/work/community-resume/worker-exit/action_server/.venv/bin/python",
+    "configured_rcc_version": "18.19.3",
+    "configured_rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "rcc_source_path": "/workspace/work/actions-worktrees/shared-output-transport-20261010/action_server/src/actions/server/bin/rcc-18.19.3",
+    "task_owned_ignored_symlink_removed": true
+  },
+  "checks": {
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "isort_check": "PASS",
+    "mypy_targeted": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "delta": "Extends the owned-process readiness procedure: recheck the atomic marker on leader exit and use only bounded output draining because descendants can inherit the pipes and otherwise block identity-checked cleanup.",
+    "upstream_disposition": "None; repository test harness and guidance only."
+  },
+  "export": {
+    "aggregate_patch_vs_base": "/workspace/work/pr282-owned-process-timeout-20261010/aggregate-vs-421fac.patch",
+    "aggregate_patch_sha256": "48f8f6800bb540d2545e70839886f5035b865bc6ad2e0b4e28ce82b59a7c88ab",
+    "successor_commit_patch": "/workspace/work/pr282-owned-process-timeout-20261010/a35a8ab4.patch",
+    "successor_commit_patch_sha256": "5e477a62de9e6eef0261ed15f3e2b54e793902e4179acfb46b8696f071669955"
+  },
+  "historical_ci_failure_receipt": {
+    "path": "/workspace/work/ci-current-readonly/pr282-coverage-failure-run38069462357-job114263732509-20261010T1710Z.txt",
+    "sha256": "ab12da1c4ae72d843163c21bbe8b7abfceb7d3bac0d495d122d1efe65fb507e1"
+  },
+  "scope_limit": "The separate unpublished Core 1.0.3 dependency-floor gate remains unchanged."
+}

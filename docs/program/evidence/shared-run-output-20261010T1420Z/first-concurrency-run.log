@@ -1,0 +1,124 @@
+F..............................                                          [100%]
+=================================== FAILURES ===================================
+________________ test_two_process_claims_have_one_current_owner ________________
+
+tmp_path = PosixPath('/dev/shm/actions-run-output-tests/test_two_process_claims_have_o0')
+
+    def test_two_process_claims_have_one_current_owner(tmp_path):
+        database = tmp_path / "runs.db"
+        snap = snapshot()
+        actor = Actor(principal_id=uid())
+        with create_db(database) as db:
+            control = RunOutputControlPlane(db)
+            insert_action(db, snap)
+            control.register(snap)
+            control.grant(actor, snap.deployment, {"execute"})
+            run = RunOutputService(db, {}).admit(actor, snap, {}, "key")
+        script = """
+    import json,sys,time
+    from pathlib import Path
+    from uuid import uuid4
+    from actions.server._database import Database
+    from actions.server._models import get_all_model_classes
+    from actions.server.run_outputs.service import RunOutputService,FenceRejected
+    ready,go=Path(sys.argv[3]),Path(sys.argv[4])
+    ready.write_text("ready")
+    deadline=time.monotonic()+10
+    while not go.exists():
+        if time.monotonic()>deadline: raise TimeoutError("start barrier")
+        time.sleep(.005)
+    db=Database(Path(sys.argv[1]))
+    with db.connect():
+        db.initialize(get_all_model_classes())
+        try:
+            fence=RunOutputService(db,{}).claim(sys.argv[2],str(uuid4()),lease_seconds=30)
+            print(json.dumps({"claimed":fence.model_dump()}),flush=True)
+        except FenceRejected:
+            print(json.dumps({"rejected":True}),flush=True)
+    """
+        go = tmp_path / "go"
+        children = []
+        try:
+            for index in range(2):
+                ready = tmp_path / f"ready-{index}"
+                child = subprocess.Popen(
+                    [
+                        sys.executable,
+                        "-c",
+                        script,
+                        str(database),
+                        run.id,
+                        str(ready),
+                        str(go),
+                    ],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True,
+                    env=child_env(),
+                )
+                children.append((child, ready))
+            deadline = time.monotonic() + 10
+            while not all(marker.exists() for child, marker in children):
+                for child, marker in children:
+                    if child.poll() is not None:
+                        stdout, stderr = child.communicate(timeout=5)
+                        raise AssertionError(f"child exited before readiness: {child.returncode}; {stderr[-4000:]}; {stdout[-1000:]}")
+                assert time.monotonic() < deadline, "bounded readiness timeout"
+                time.sleep(0.005)
+            go.touch()
+            results = []
+            for child, marker in children:
+                stdout, stderr = child.communicate(timeout=15)
+>               assert child.returncode == 0, stderr[-4000:]
+E               AssertionError: Error. Rolling back database
+E                 Traceback (most recent call last):
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/_database.py", line 1115, in execute_update_returning
+E                     cursor.execute(sql, values)
+E                 sqlite3.OperationalError: database is locked
+E                 
+E                 During handling of the above exception, another exception occurred:
+E                 
+E                 Traceback (most recent call last):
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/_database.py", line 650, in transaction
+E                     yield
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/run_outputs/service.py", line 418, in claim
+E                     _lock_workspace(self.db, pin.workspace_id)
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/run_outputs/service.py", line 131, in _lock_workspace
+E                     if not _returning(
+E                            ^^^^^^^^^^^
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/run_outputs/service.py", line 126, in _returning
+E                     db.execute_update_returning(cursor, sql, values)
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/_database.py", line 1121, in execute_update_returning
+E                     self._raise_execute_error(
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/_database.py", line 1032, in _raise_execute_error
+E                     raise DBError(msg)
+E                 actions.server._database.DBError: Error running sql: "UPDATE workspace SET lock_version=lock_version WHERE id=? AND state='active' RETURNING id" with values: ['8d283a4a-233b-453b-bb5c-8a7e72c7e85c']
+E                 Traceback (most recent call last):
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/_database.py", line 1115, in execute_update_returning
+E                     cursor.execute(sql, values)
+E                 sqlite3.OperationalError: database is locked
+E                 
+E                 During handling of the above exception, another exception occurred:
+E                 
+E                 Traceback (most recent call last):
+E                   File "<string>", line 18, in <module>
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/run_outputs/service.py", line 418, in claim
+E                     _lock_workspace(self.db, pin.workspace_id)
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/run_outputs/service.py", line 131, in _lock_workspace
+E                     if not _returning(
+E                            ^^^^^^^^^^^
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/run_outputs/service.py", line 126, in _returning
+E                     db.execute_update_returning(cursor, sql, values)
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/_database.py", line 1121, in execute_update_returning
+E                     self._raise_execute_error(
+E                   File "/tmp/work/actions-worktrees/shared-run-output-20261010/action_server/src/actions/server/_database.py", line 1032, in _raise_execute_error
+E                     raise DBError(msg)
+E                 actions.server._database.DBError: Error running sql: "UPDATE workspace SET lock_version=lock_version WHERE id=? AND state='active' RETURNING id" with values: ['8d283a4a-233b-453b-bb5c-8a7e72c7e85c']
+E                 
+E               assert 1 == 0
+E                +  where 1 = <Popen: returncode: 1 args: ['/tmp/work/multipackage-runtime-acceptance/venv...>.returncode
+
+action_server/tests/action_server_tests/run_outputs/test_concurrency.py:94: AssertionError
+=========================== short test summary info ============================
+FAILED action_server/tests/action_server_tests/run_outputs/test_concurrency.py::test_two_process_claims_have_one_current_owner
+1 failed, 30 passed in 1.65s

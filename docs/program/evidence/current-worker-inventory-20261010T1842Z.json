@@ -1,0 +1,1003 @@
+{
+  "limitations": "Git worktree presence/dirty paths do not establish active worker liveness or recoverability; this census does not include the separate governance checkout.",
+  "observed_at_utc": "2026-10-10T18:42:10Z",
+  "source": "git worktree list --porcelain plus per-worktree git status --porcelain=v1 -z, /workspace/actions only",
+  "status_errors": 0,
+  "with_unfinished_paths": 10,
+  "worktree_count": 104,
+  "worktrees": [
+    {
+      "branch": "refs/heads/work",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "7c98236069171f57031218f938963238986293bd",
+      "path": "/workspace/actions",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feat/controlled-v2-compilation-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "991ebf41f74a05ba130ec01d002cfff419ee8adf",
+      "path": "/dev/shm/actions-controlled-v2-compilation-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feat/rcc-inspection-preparation-20261010",
+      "changed_path_count": 1,
+      "detached": false,
+      "dirty": true,
+      "head": "e94882cde4f5688885b35c77a18e78d317242ad3",
+      "path": "/dev/shm/actions-rcc-inspection-preparation-20261010",
+      "paths": [
+        " M action_server/tests/action_server_tests/test_rcc_runtime_adapter.py"
+      ]
+    },
+    {
+      "branch": "refs/heads/release/core-1.0.3-community-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "6af08c939f3385c76de12a266e78677063dd707a",
+      "path": "/dev/shm/core-only-community-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/pr301-retirement-deadline-test-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "ad885e68fc9447fa64c018146f0a96ac7945aa62",
+      "path": "/dev/shm/pr301-retirement-deadline-20261010",
+      "paths": []
+    },
+    {
+      "branch": null,
+      "changed_path_count": 0,
+      "detached": true,
+      "dirty": false,
+      "head": "2293b1a9490e3d3e846651803b68300319a3e1a3",
+      "path": "/dev/shm/root-pr301-ci-trigger-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/windows-alias-history-startup-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "082691e0c7fc646fd0d8a142ffcaea82b950bec7",
+      "path": "/tmp/work/actions-worktrees/alias-history-startup-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feat/canvas-template-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "4587271c87f21d52985be67ffe60a46a0b96a01c",
+      "path": "/tmp/work/actions-worktrees/canvas-template-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/dakota-native-core-wheel-version-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "401d9dde38812bcff2de2d57311adf5c02f239e7",
+      "path": "/tmp/work/actions-worktrees/dakota-core-wheel-version-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feat/deployment-values-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "66b68325435b300bc04f338e6bdf97f5a479b890",
+      "path": "/tmp/work/actions-worktrees/deployment-values-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/review/deployment-values-ci-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "4c4f2daa94370118a29cccb2a05c48c23a0e6a9e",
+      "path": "/tmp/work/actions-worktrees/deployment-values-ci-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/deployment-values-ci-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "ab189865167336035ed311910055ea08403ac37f",
+      "path": "/tmp/work/actions-worktrees/deployment-values-ci-fix-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/frozen-catalog-rollback-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "1e4493bf339bb910fd4e886dcc33f5bb67e02f51",
+      "path": "/tmp/work/actions-worktrees/frozen-catalog-rollback-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/frozen-control-a47-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "5514911b9b854670d2a3af41bf035f6d30cc2641",
+      "path": "/tmp/work/actions-worktrees/frozen-control-a47-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/frozen-control-resource-history-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "4c37fb7aa5414c0c64df530e1ed3b969881cdf04",
+      "path": "/tmp/work/actions-worktrees/frozen-control-resource-history-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/frozen-generation-drain-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "822e21d526d9e2144a6c1c3f44f82a278e069099",
+      "path": "/tmp/work/actions-worktrees/frozen-generation-drain-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/mcp-alias-commit-compensation-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "85d144b6364db0ea833fd5d9bf497baa3b5bd881",
+      "path": "/tmp/work/actions-worktrees/mcp-alias-compensation-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/mcp-alias-frozen-control-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "571e555612412fc1ba4c7f49eb360c286bf8bfc0",
+      "path": "/tmp/work/actions-worktrees/mcp-alias-identity-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/mcp-resource-routing-history-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "444349e576e52ed5164e71e6e2843f65fb4f530f",
+      "path": "/tmp/work/actions-worktrees/mcp-resource-history-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/mcp-resource-history-cli-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "2334e8fab49e9696a3149cd815f8a2090f4bc315",
+      "path": "/tmp/work/actions-worktrees/mcp-resource-history-cli-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/p0-generation-drain-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "af36a46df41caa9676b6a0968c5e60a59bf8f9c9",
+      "path": "/tmp/work/actions-worktrees/p0-generation-drain-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/package-rename-owner-protection-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "ddcccb9d3eb04e438b0e4aa576be9068b7703b1c",
+      "path": "/tmp/work/actions-worktrees/package-rename-owner-protection-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/parallel-system-mutex-test-names-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "bc4740a642527aa2fa0f368900ff55f5a21c9550",
+      "path": "/tmp/work/actions-worktrees/parallel-system-mutex-test-names-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/rcc-proof-tests-portability-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "5d06c0d7d8bdb242247f71f23bc0889b770cb48a",
+      "path": "/tmp/work/actions-worktrees/rcc-control-portability-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/rcc-provider-rollback-hosted-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "43b800f0dc8b763da16189b7fce8df35d53f1c07",
+      "path": "/tmp/work/actions-worktrees/rcc-provider-ci-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/rcc-published-artifact-details-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "e94882cde4f5688885b35c77a18e78d317242ad3",
+      "path": "/tmp/work/actions-worktrees/rcc-published-artifact-details-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/rcc-published-details-control-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "0744b176c191d0249312289e9d03ac9e4fa34840",
+      "path": "/tmp/work/actions-worktrees/rcc-published-details-control-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feat/shared-run-output-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "c931b31f7b258e3eec93369c4c5cd64885d0e5b6",
+      "path": "/tmp/work/actions-worktrees/shared-run-output-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/integration/shared-run-output-reviewed-292-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "4a2d3cdd5cd81d7fe61e2691e86e8b27698d54a3",
+      "path": "/tmp/work/actions-worktrees/shared-run-output-integration-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feat/source-confined-read-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "ddac2b72977ab05ef784bf38ffab60abd4f3268f",
+      "path": "/tmp/work/actions-worktrees/source-confined-read-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feat/portable-source-policy-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "e5f4405017d29647c19fa43e909678c56de9be13",
+      "path": "/tmp/work/actions-worktrees/source-policy-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/windows-sqlite-path-url-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "633f5de99c4e6f26664566699222cde1e9f97509",
+      "path": "/tmp/work/actions-worktrees/windows-sqlite-path-url-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/canvas-runtime-bridge-acceptance-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "13db7030416f7b64f9a577b800a629549e23903e",
+      "path": "/tmp/work/canvas-runtime-bridge",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/p0-mcp-catalog-rollback-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "508175cb2f07243f2bd337965fc9a612b87d193d",
+      "path": "/tmp/work/p0-mcp-catalog-rollback",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/p0-mcp-catalog-rollback-baseline-20261010",
+      "changed_path_count": 1,
+      "detached": false,
+      "dirty": true,
+      "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+      "path": "/tmp/work/p0-mcp-catalog-rollback-baseline",
+      "paths": [
+        "?? action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py"
+      ]
+    },
+    {
+      "branch": "refs/heads/fix/runtime-log-credentials-test-xdist-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "14510a8aa9dc8d96a448f3cae8d79223cb7feb17",
+      "path": "/tmp/work/runtime-log-credentials",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/review/p0-snapshot-reload-sol",
+      "changed_path_count": 9,
+      "detached": false,
+      "dirty": true,
+      "head": "d0285027cec5367601aa524f6bc42d101d017b3d",
+      "path": "/tmp/work/sol-p0-snapshot-review",
+      "paths": [
+        " M action_server/src/actions/server/_action_package_handler.py",
+        " M action_server/src/actions/server/_actions_import.py",
+        " M action_server/src/actions/server/_api_action_routes.py",
+        " M action_server/src/actions/server/_cli_impl.py",
+        " M action_server/src/actions/server/_database.py",
+        " M action_server/src/actions/server/_server.py",
+        " M action_server/src/actions/server/mcp/setup_mcp_server_v2.py",
+        " M action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+        "?? work/"
+      ]
+    },
+    {
+      "branch": "refs/heads/release/actions-core-1.0.3-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "84124f240aa3a464d4c7a4336be80bb4288c8336",
+      "path": "/workspace/work/actions-worktrees/core-1.0.3-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/frontend-update-benchmark-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "4c750c7b8416c655784d103cc0a78fc7421b7f64",
+      "path": "/workspace/work/actions-worktrees/frontend-update-benchmark-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/pr282-owned-process-timeout-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "a35a8ab436c4ac90f033acb0b9cca4459ab508cd",
+      "path": "/workspace/work/actions-worktrees/pr282-owned-process-timeout-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/integration/pr290-controls-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "588918b0a63966ebc275393f15acc5aec6476cf3",
+      "path": "/workspace/work/actions-worktrees/pr290-convergence-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/pr290-windows-contract-tests-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "49bf5b4b01490c7a553bbadb3cb4c0b9be08daa1",
+      "path": "/workspace/work/actions-worktrees/pr290-windows-contract-tests-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/pr299-legacy-artifact-fixture-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "da56d4cb6729143e8d61a966f3aef0c428146091",
+      "path": "/workspace/work/actions-worktrees/pr299-legacy-artifact-fixture-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feat/shared-output-transport-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "f984e03359bdd88a51365effc260965f4ab02931",
+      "path": "/workspace/work/actions-worktrees/shared-output-transport-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feat/source-confined-staging-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "aaa103c43d0180ec7b4fdd4047e13d0eb8324808",
+      "path": "/workspace/work/actions-worktrees/source-confined-staging-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feat/staged-rcc-consumer-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "dcf916e10919915d6e20b9c611cb0196e14ec4aa",
+      "path": "/workspace/work/actions-worktrees/staged-rcc-consumer-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feat/canvas-100b-typescript-roundtrip-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "ca76d62ab206c9095d47384407ebb85821f02e73",
+      "path": "/workspace/work/canvas-100b-typescript-roundtrip-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/integration/cloud-convergence-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "e032e95d38c91aead08d30b42ec7620b8ea726a4",
+      "path": "/workspace/work/community-resume/admission",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/docs/api-source-links-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "25026da07d6d8cb01ef2badbc21c059380bf6060",
+      "path": "/workspace/work/community-resume/api-doc-source-links",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/windows-artifact-binding-lock-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "653e1dc9597a120a4b3a7a21645f8a1e731c6695",
+      "path": "/workspace/work/community-resume/artifact-lock-portability",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feature/issue-100a-public-mcp-app-authoring-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+      "path": "/workspace/work/community-resume/canvas-authoring",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/docs/issue-100-authoring-decision-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+      "path": "/workspace/work/community-resume/canvas-decision",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/issue-100b-fixture-roundtrip-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "feeffc29a33fad20b5497d3e8f5e1f06cd8c8369",
+      "path": "/workspace/work/community-resume/canvas-fixture-python",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feature/issue-99a-query-renderer-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+      "path": "/workspace/work/community-resume/canvas-renderer",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/integration/community-release-20261008",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "path": "/workspace/work/community-resume/convergence",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/release/http-helper-credential-check-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "1abafea4e08766a71a4f4fe8173101af1e368428",
+      "path": "/workspace/work/community-resume/credential-check",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/docs/upstream-reporting-policy-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "57399b60496b98fea020f26e576d47bcb0d440bf",
+      "path": "/workspace/work/community-resume/deployment-admission",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/review/design-checkpoints-20261008",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "65bbc11f2d1ea9a3521d3af5ee908f151861cf25",
+      "path": "/workspace/work/community-resume/design-checkpoint-refresh",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/frozen-parent-pid-test-topology-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "96da42fcfbb62f98f31ec11ab8871b55da422c05",
+      "path": "/workspace/work/community-resume/frozen-parent-pid",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/resume/community-evidence-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "55b1e077cb24c3c0f8a734ec9c6401ee35cd8c15",
+      "path": "/workspace/work/community-resume/governance",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/resume/community-evidence-20261010T1835Z",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "30a80d857a6f3315521acf7ee2f3f58bf325f535",
+      "path": "/workspace/work/community-resume/governance-20261010T1835Z",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/resume/community-blockers-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
+      "path": "/workspace/work/community-resume/integration",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/retire-robocorp-cloud-gate-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "42f9b8ef6575a8b955763d0000a6cdab4b8bf5eb",
+      "path": "/workspace/work/community-resume/legacy-cloud-gate",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/list-templates-contract-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "553e20c45d7e5f49ac71876c97a35579acb33c73",
+      "path": "/workspace/work/community-resume/list-templates-contract",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/mcp-colliding-action-names-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "d506a53f12c231bcc5902b6562c3de2c7ca6591f",
+      "path": "/workspace/work/community-resume/mcp-colliding-action-names",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/core-overload-format-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "961a813d34c39dc6b3820420f83268c0e708f319",
+      "path": "/workspace/work/community-resume/mcp-metadata-lint-fix",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/mcp-v2-showcase-protocol-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+      "path": "/workspace/work/community-resume/mcp-showcase-proof",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feature/mcp-v2-showcase-template-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "9193989985de15dc6d5fecfd655042957cf9926c",
+      "path": "/workspace/work/community-resume/mcp-showcase-template",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/devsy/native-auth-acceptance-20261009",
+      "changed_path_count": 1,
+      "detached": false,
+      "dirty": true,
+      "head": "a63f714baf6bedb22dbadb65017c0a0a658e892e",
+      "path": "/workspace/work/community-resume/native-auth-proof",
+      "paths": [
+        "?? work/"
+      ]
+    },
+    {
+      "branch": "refs/heads/release/package-credential-availability-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "7501198b3cbd834a79c132d398abb5e05c852582",
+      "path": "/workspace/work/community-resume/package-credential-check",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/resume/rcc-review-20261009",
+      "changed_path_count": 1,
+      "detached": false,
+      "dirty": true,
+      "head": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+      "path": "/workspace/work/community-resume/rcc",
+      "paths": [
+        "?? work/"
+      ]
+    },
+    {
+      "branch": "refs/heads/integration/runtime-release-final-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "6a53578fac029a0696834c30438c858f5f0003be",
+      "path": "/workspace/work/community-resume/release-final",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/resume/robot-native-gates-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "b690b262c564ed9f085e2df3863af500ff29fddf",
+      "path": "/workspace/work/community-resume/robot",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/repair/robot-cleanup-ownership-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "72a60344c40e6f153dab0f71b30b073e9b259226",
+      "path": "/workspace/work/community-resume/robot-cleanup",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/robot-filesystem-identity-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "path": "/workspace/work/community-resume/robot-filesystem-identity",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/robot-package-yaml-admission-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "711165f31fe1b463cd0ca73353c2e6666847a7ec",
+      "path": "/workspace/work/community-resume/robot-final-copy",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/repair/robot-private-staging-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+      "path": "/workspace/work/community-resume/robot-staging",
+      "paths": []
+    },
+    {
+      "branch": null,
+      "changed_path_count": 0,
+      "detached": true,
+      "dirty": false,
+      "head": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+      "path": "/workspace/work/community-resume/runtime-combined-validation",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/release/runtime-registry-compatibility-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "85f7c91252a49d454a47983d88c942163ff030ba",
+      "path": "/workspace/work/community-resume/runtime-registry-canary",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/docs/runtime-1.0.3-release-notes-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "526c8cf4736213b85e8aeda95e9837cc8cd80096",
+      "path": "/workspace/work/community-resume/runtime-release-notes",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/multipackage-import-repro-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "78969ac65cea0576f9584d6a136cec6bebe0032b",
+      "path": "/workspace/work/community-resume/runtime-wheel-test-interpreter",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/sqlite-commit-admission-regression-20261010",
+      "changed_path_count": 1,
+      "detached": false,
+      "dirty": true,
+      "head": "9c2f0df6f54a78d98842082c311f130c6d809797",
+      "path": "/workspace/work/community-resume/runtime-wrapper-exit-code",
+      "paths": [
+        "?? work/"
+      ]
+    },
+    {
+      "branch": "refs/heads/integration/native-checksum-admission-20261009",
+      "changed_path_count": 1,
+      "detached": false,
+      "dirty": true,
+      "head": "29decdcb4ac6712f278b61e3722e0ad9217c60ba",
+      "path": "/workspace/work/community-resume/sol-native-review",
+      "paths": [
+        "?? work/"
+      ]
+    },
+    {
+      "branch": "refs/heads/fix/tls-long-hostname-certificate-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "54dae1c0a8383797fa99ba5c50e2a2cf2d829302",
+      "path": "/workspace/work/community-resume/tls-long-hostname",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/tls-windows-proactor-teardown-20261010",
+      "changed_path_count": 32,
+      "detached": false,
+      "dirty": true,
+      "head": "b67b99c15d77b213d0ea34eda0444b6a18b1c3d3",
+      "path": "/workspace/work/community-resume/tls-windows-teardown",
+      "paths": [
+        " D .coverage-thresholds.json",
+        " D .coveragerc",
+        " D .editorconfig",
+        " D .eslintignore",
+        " D .gitignore",
+        " D .prettierignore",
+        " D .project",
+        " D .pydevproject",
+        " D AGENTS.md",
+        " D CLAUDE.md",
+        " D CONTRIBUTING.md",
+        " D LICENSE",
+        " D NOTICE.md",
+        " D README.md",
+        " D action_server/.gitignore",
+        " D action_server/README.md",
+        " D action_server/action-server.spec",
+        " D action_server/build.py",
+        " D action_server/poetry.lock",
+        " D action_server/poetry.toml",
+        " D action_server/pyproject.toml",
+        " D action_server/ruff.toml",
+        " D action_server/tasks.py",
+        " D action_server/tasks_cdn.py",
+        " D action_server/tests/conftest.py"
+      ]
+    },
+    {
+      "branch": "refs/heads/resume/tunnel-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "554630899c6eab23b922ba6558347e7f2c439c00",
+      "path": "/workspace/work/community-resume/tunnel",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feature/tunnel-edge-verification-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+      "path": "/workspace/work/community-resume/tunnel-edge",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/tunnel-tls-acceptance-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "274042cd555d0340dc07e86f651986ab49ba85a7",
+      "path": "/workspace/work/community-resume/tunnel-tls-acceptance",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/release/actions-core-1.0.2-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "71f55ddd1ce34720db0e13433a2f1f5c9eed70a0",
+      "path": "/workspace/work/community-resume/wheel-inventory",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/windows-runtime-contract-tests-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "c6af71b8e3880b9d99f351ac4d17a99744114365",
+      "path": "/workspace/work/community-resume/windows-contract-tests",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/windows-runtime-typecheck-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "dc610f3ba14b9a64b7fd4b4bcb6ec1fccb00beab",
+      "path": "/workspace/work/community-resume/windows-runtime-typecheck",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/repair/rcc-trust-context-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "290e469c35447c7472bcb8ab3241bfa5a63a850d",
+      "path": "/workspace/work/community-resume/worker-exit",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/release/http-helper-redirect-fix-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "f2dd54cc35798f7b689f0855b5e3d81263b1b24e",
+      "path": "/workspace/work/community-resume/workitems",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/feature/workitems-native-artifact-manifest-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+      "path": "/workspace/work/community-resume/workitems-artifacts",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/runtime-tests-integration-triggers-20261010",
+      "changed_path_count": 3,
+      "detached": false,
+      "dirty": true,
+      "head": "511cc3863a58165a9e61e87a258348b50126aca0",
+      "path": "/workspace/work/community-resume/workitems-ci",
+      "paths": [
+        " M LICENSE",
+        " M tasks.py",
+        " M verify_t026a.py"
+      ]
+    },
+    {
+      "branch": "refs/heads/fix/workitems-reservation-test-barrier-20261009",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "5000fac1b43f7318cbbcccc470597d4c2ba1a298",
+      "path": "/workspace/work/community-resume/workitems-reservation-fix",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/d10-samefile-repro-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "path": "/workspace/work/d10-samefile-repro-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/review/pr282-integration-doc-resolution-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "e18b3d5931946969dcc29b825ca902f10d9f8b78",
+      "path": "/workspace/work/pr282-integration-doc-resolution-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/pr292-resource-history-test-typing-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "22bd1371adf559db36c32942c235f0aaf77f1cf4",
+      "path": "/workspace/work/pr292-resource-history-typing-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/rcc-control-source-fixture-repin-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "345df52bf73e0049c83ba345d1ed593c0abe68cd",
+      "path": "/workspace/work/rcc-control-source-fixture-repin-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/source-staged-rcc-control-20261010",
+      "changed_path_count": 4,
+      "detached": false,
+      "dirty": true,
+      "head": "922223a330003ec64808e25843ae448bfae6dc4a",
+      "path": "/workspace/work/source-staged-rcc-control-20261010",
+      "paths": [
+        " M .github/workflows/_gen_workflows.py",
+        " M .github/workflows/actions_runtime_rcc_provider_rollback.yml",
+        " M developer/tests/test_rcc_provider_rollback_workflow.py",
+        " M docs/skills/repository-operations.md"
+      ]
+    },
+    {
+      "branch": "refs/heads/feat/source-staged-rcc-current-candidate-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "922223a330003ec64808e25843ae448bfae6dc4a",
+      "path": "/workspace/work/source-staged-rcc-current-candidate-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/test/staged-rcc-control-current-candidate-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "f103edc9015128bb5e6d3875208c4077644e8fe4",
+      "path": "/workspace/work/staged-rcc-current-integration-candidate-20261010",
+      "paths": []
+    },
+    {
+      "branch": "refs/heads/fix/staged-rcc-consumer-dbdir-20261010",
+      "changed_path_count": 0,
+      "detached": false,
+      "dirty": false,
+      "head": "1284310db62220534977e8db52fd33351e59a4a1",
+      "path": "/workspace/work/staged-rcc-dbdir-repair-20261010",
+      "paths": []
+    }
+  ]
+}
