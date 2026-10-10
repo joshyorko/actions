@@ -787,23 +787,46 @@ guarantees tracked by issue #82. Do not add Canvas behavior merely to maintain
 this adapter seam.
 
 The proposed [ADR 0100 MCP App authoring contract](../adr/0100-mcp-app-authoring-contract.md)
-records evidence, not an implemented public API. On its cited source revision,
-`actions.mcp.@tool` accepts title and safety hints, while `@resource` accepts
-URI, MIME type, and size; neither decorator publicly attaches MCP Apps
-`_meta.ui.resourceUri`. Runtime tests that construct `Action.options["_meta"]`
-directly prove the internal server can preserve metadata, not that package
-authors can declare it through a supported API. Keep the public authoring
-gap distinct from the broader CanvasSpec schema and renderer work. The latest
-#100 contract permits a bounded 100-A authoring slice without waiting for
-unrelated #125 rows; verify the consumed dependency, package, template, and
-security criteria on the exact candidate. A public `meta` decorator input is
-bounded JSON: reject cycles, non-finite values, non-string keys, and excessive
-depth/size; validate supported MCP Apps URI/visibility/CSP fields while
-preserving unrelated namespaced metadata. Runtime must resolve the UI URI to an
-exact `ui://` resource with `text/html;profile=mcp-app` before atomically
-publishing the new catalog. Serve it through `resources/read`; do not require
-UI-only entries in `resources/list`. App-only visibility is host/catalog
-routing, never backend authorization.
+was merged by PR #254 (commit `a7eec7b1644183dc81e37e1ed9b7be20fa20c87e`);
+that PR was documentation only. The bounded 100-A public authoring API was
+implemented separately by PR #263 (commit
+`948df916ebe8750caebc71cc821bb5b76f16c273`): ordinary packages can attach
+bounded MCP Apps metadata through `actions.mcp.tool(meta=...)` and
+`actions.mcp.resource(meta=...)`, and a real Action Server process exercised
+discovery, `resources/read`, and public tool calls with a candidate Core wheel.
+This is source/candidate evidence, not a claim that published Core 1.0.2 has
+the API or that #100 is complete. Keep 100-A separate from the broader
+CanvasSpec interchange (100-B), shared renderer/bridge (#99-A), and optional
+actual-host proof (#99-B).
+
+PR #291 merged a non-publishing Core 1.0.3 candidate-wheel gate at commit
+`3c5278bbc0d12efa7b9108c713bdc6c982fc54d9`. Its candidate run
+38055636255 passed and retained artifact 11671500340; the verified wheel SHA-256
+is `8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265`.
+The PR records that no tag or PyPI publication occurred. Candidate-wheel
+evidence therefore does not clear a template dependency on `actions-core=1.0.3`:
+verify the published registry wheel with a clean install before advancing the
+supported-worker Core floor. Do not weaken the existing floor test or infer
+registry compatibility from the source checkout or retained candidate artifact.
+
+The current PR #282 head `bab27a93664494965db8a86761ea5685a3be6618` (tree
+`72257e07a78d33ec1d3d067fa0da83369eea0357`) declares that 1.0.3 dependency,
+while Action Server Tests run 38042719836 and RCC toolkit run 38042719804
+still require 1.0.2; refresh and rerun against the current integration after
+the registry prerequisite is met. The earlier candidate Runtime/browser PASS
+(run 38041682069) is bound to predecessor tree
+`80a6ef315411a446db00c234ff9a5a294d91fc00`, not this head. PR #282 also returns
+`artifact: null`; authorized replica-readable output and retrieval remain
+dependent on the shared #86/#83/#129 contracts. Actual ChatGPT operation is
+separate host evidence and has not been established by the MCP Apps harness.
+
+For any accepted public metadata API, keep the boundary strict: reject cycles,
+non-finite values, non-string keys, and excessive depth/size; validate supported
+MCP Apps URI/visibility/CSP fields while preserving unrelated namespaced
+metadata. Runtime must resolve the UI URI to an exact `ui://` resource with
+`text/html;profile=mcp-app` before atomically publishing the new catalog. Serve
+it through `resources/read`; do not require UI-only entries in `resources/list`.
+App-only visibility is host/catalog routing, never backend authorization.
 
 This metadata API accepts only exact built-in `bool`, `int`, and `float` values
 (plus strings and null); it rejects numeric subclasses. A finite-number check
