@@ -89,18 +89,77 @@ def _source_evidence() -> dict[str, object]:
     }
 
 
-def _action_server_exit_failure(returncode: int | None, observed: bool) -> str | None:
-    if not observed:
-        return "Action Server return code was not observed within the bounded wait"
-    if returncode != 0:
-        return f"Action Server exited abnormally with return code {returncode}"
+def _action_server_exit_failure(
+    returncode_before_forced_cleanup: int | None,
+    shutdown_http_status: int | None,
+) -> str | None:
+    shutdown_succeeded = (
+        shutdown_http_status is not None and 200 <= shutdown_http_status < 300
+    )
+    if not shutdown_succeeded:
+        return "controlled shutdown request did not succeed"
+    if returncode_before_forced_cleanup is None:
+        return (
+            "Action Server natural return code was not observed before forced cleanup"
+        )
+    if returncode_before_forced_cleanup not in (0, 1):
+        return (
+            "Action Server exited abnormally before forced cleanup with return code "
+            f"{returncode_before_forced_cleanup}"
+        )
     return None
 
 
-def test_action_server_exit_receipt_rejects_abnormal_returncode() -> None:
-    assert _action_server_exit_failure(0, observed=True) is None
-    assert "-11" in (_action_server_exit_failure(-11, observed=True) or "")
-    assert _action_server_exit_failure(None, observed=False) is not None
+def _action_server_exit_receipt(
+    returncode_before_forced_cleanup: int | None,
+    shutdown_http_status: int | None,
+    returncode_after_forced_cleanup: int | None,
+) -> dict[str, int | str | bool | None]:
+    shutdown_succeeded = (
+        shutdown_http_status is not None and 200 <= shutdown_http_status < 300
+    )
+    natural_exit_failure = _action_server_exit_failure(
+        returncode_before_forced_cleanup, shutdown_http_status
+    )
+
+    return {
+        "shutdown_http_status": shutdown_http_status,
+        "shutdown_request_succeeded": shutdown_succeeded,
+        "returncode_before_forced_cleanup": returncode_before_forced_cleanup,
+        "natural_exit_status": "PASS" if natural_exit_failure is None else "FAIL",
+        "natural_exit_failure": natural_exit_failure,
+        "returncode_after_forced_cleanup": returncode_after_forced_cleanup,
+        "returncode_after_forced_cleanup_is_natural_evidence": False,
+    }
+
+
+def test_forced_cleanup_poll_cannot_prove_natural_server_exit() -> None:
+    receipt = _action_server_exit_receipt(None, 200, 0)
+
+    assert receipt["natural_exit_status"] == "FAIL"
+    assert receipt["returncode_before_forced_cleanup"] is None
+    assert receipt["returncode_after_forced_cleanup"] == 0
+    assert receipt["returncode_after_forced_cleanup_is_natural_evidence"] is False
+
+
+@pytest.mark.parametrize(
+    ("returncode", "shutdown_status", "expected_status"),
+    [
+        (None, 200, "FAIL"),
+        (1, None, "FAIL"),
+        (1, 500, "FAIL"),
+        (1, 200, "PASS"),
+        (0, 200, "PASS"),
+        (-11, 200, "FAIL"),
+    ],
+)
+def test_action_server_natural_exit_receipt_contract(
+    returncode: int | None, shutdown_status: int | None, expected_status: str
+) -> None:
+    receipt = _action_server_exit_receipt(returncode, shutdown_status, 0)
+
+    assert receipt["natural_exit_status"] == expected_status
+    assert receipt["returncode_after_forced_cleanup_is_natural_evidence"] is False
 
 
 @pytest.mark.real_rcc
@@ -207,7 +266,9 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
     Path(provider_environment["TMPDIR"]).mkdir()
     provider = None
     started_server = False
-    server_exit_observed = False
+    shutdown_http_status = None
+    natural_returncode_before_forced_cleanup = None
+    forced_stop_used = False
     server_cleanup_failure = None
     primary_failure = False
     cleanup_failures: list[str] = []
@@ -232,6 +293,7 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
             env=runtime_env,
             port=0,
             verbose="",
+            add_shutdown_api=True,
         )
         started_server = True
         runtime_row = _wait_for(
@@ -376,6 +438,27 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
         assert (
             evidence["status"] == "PASS"
         ), f"watcher did not recover after the failed reload: {recovered_run}"
+        import requests
+
+        shutdown_response = requests.post(
+            client.build_full_url("api/shutdown/"),
+            params={"timeout": 5},
+            timeout=10,
+        )
+        shutdown_http_status = shutdown_response.status_code
+        evidence["shutdown_http_status"] = shutdown_http_status
+        assert 200 <= shutdown_http_status < 300, (
+            "controlled Action Server shutdown failed with HTTP "
+            f"{shutdown_http_status}"
+        )
+        owned_server_process = action_server_process.process
+        natural_exit_deadline = time.monotonic() + 10
+        while (
+            owned_server_process.returncode is None
+            and time.monotonic() < natural_exit_deadline
+        ):
+            time.sleep(0.05)
+        natural_returncode_before_forced_cleanup = owned_server_process.returncode
     except Exception as exc:
         primary_failure = True
         evidence["status"] = "FAIL"
@@ -386,7 +469,10 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
         if started_server:
             owned_server_process = action_server_process.process
             server_pid = owned_server_process.pid
-            server_returncode_before_stop = owned_server_process.returncode
+            if natural_returncode_before_forced_cleanup is None:
+                natural_returncode_before_forced_cleanup = (
+                    owned_server_process.returncode
+                )
             try:
                 import psutil
 
@@ -397,17 +483,28 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
             except psutil.Error:
                 server_tree_before_stop = []
             stop_failure = None
-            try:
-                action_server_process.stop()
-            except Exception as exc:
-                stop_failure = f"Action Server stop failed: {type(exc).__name__}: {exc}"
-            exit_deadline = time.monotonic() + 10
-            while (
-                owned_server_process.returncode is None
-                and time.monotonic() < exit_deadline
+            shutdown_succeeded = (
+                shutdown_http_status is not None and 200 <= shutdown_http_status < 300
+            )
+            if (
+                not shutdown_succeeded
+                or natural_returncode_before_forced_cleanup is None
             ):
-                time.sleep(0.05)
-            server_exit_observed = owned_server_process.returncode is not None
+                forced_stop_used = True
+                try:
+                    action_server_process.stop()
+                except Exception as exc:
+                    stop_failure = (
+                        f"Action Server forced-stop fallback failed: "
+                        f"{type(exc).__name__}: {exc}"
+                    )
+                exit_deadline = time.monotonic() + 10
+                while (
+                    owned_server_process.returncode is None
+                    and time.monotonic() < exit_deadline
+                ):
+                    time.sleep(0.05)
+            returncode_after_forced_cleanup = owned_server_process.returncode
             remaining_descendants = []
             for descendant in server_tree_before_stop:
                 try:
@@ -418,9 +515,14 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
                     pass
             evidence["action_server_process_exit"] = {
                 "pid": server_pid,
-                "returncode_before_stop": server_returncode_before_stop,
-                "returncode_after_stop": owned_server_process.returncode,
-                "bounded_exit_observed": server_exit_observed,
+                **_action_server_exit_receipt(
+                    natural_returncode_before_forced_cleanup,
+                    shutdown_http_status,
+                    returncode_after_forced_cleanup,
+                ),
+                "forced_stop_used": forced_stop_used,
+                "forced_cleanup_returncode_observed": returncode_after_forced_cleanup
+                is not None,
                 "owned_descendants_before_stop": server_tree_before_stop,
                 "same_owned_descendants_remaining_after_stop": remaining_descendants,
                 "descendant_observation_scope": "captured tree only; not a complete descendant-reaping claim",
@@ -429,8 +531,16 @@ def test_current_candidate_failed_reload_keeps_last_good_action_usable(
                 "pythonpath": runtime_env.get("PYTHONPATH"),
             }
             server_cleanup_failure = _action_server_exit_failure(
-                owned_server_process.returncode, server_exit_observed
+                natural_returncode_before_forced_cleanup, shutdown_http_status
             )
+            if (
+                server_cleanup_failure is None
+                and returncode_after_forced_cleanup is None
+            ):
+                server_cleanup_failure = (
+                    "Action Server forced cleanup return code was not observed "
+                    "within the bounded wait"
+                )
             if server_cleanup_failure:
                 evidence["status"] = "FAIL"
                 evidence["cleanup_failure"] = server_cleanup_failure
