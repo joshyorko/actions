@@ -1,0 +1,132 @@
+{
+  "review_status": "PASS",
+  "scope": "Hosted frozen ten-case MCP catalog control acceptance; not full release acceptance",
+  "run": {
+    "id": 38055229055,
+    "attempt": 1,
+    "head_sha": "57ba99ee4e504281cf08384f07fc2a74bea029a2",
+    "tree": "b207543a9cba881ae1ec076844beace4b48a21b1",
+    "job_id": 114222201396,
+    "job_conclusion": "success"
+  },
+  "candidate": {
+    "sha": "c78288c3a0f07ba1013109c790f8e8b375a852d2",
+    "tree": "75a108db7d608e1316d59c96918213471409f31a"
+  },
+  "native_build": {
+    "run_id": "38053977419",
+    "attempt": "1",
+    "source_sha": "7421c8a40f7b086204a8ff2bf909b1ea71e528a0",
+    "source_tree": "75a108db7d608e1316d59c96918213471409f31a",
+    "api_tree_readback": "75a108db7d608e1316d59c96918213471409f31a",
+    "manifest_sha256": "bb240e5d684cd194776b2da9945b606f27748e8e7f1f28ceaa389d2c0846c85e",
+    "inventory_sha256": "f69699db1e671d328118e1c11f1bb30911b5203866d46635733841a9cde67544",
+    "package_tree_sha256": "7641947a041c12d91e2248b05ce68175478391caa5d8e3351413189c291171ae",
+    "binary_sha256": "0e054d52dc56a2743874a49530745dd89b19c4342a8652ab3899e37822c66d7a",
+    "byte_measurement_receipt_sha256": "1ea75cefe71a5c45388b0696daabed804c748e8045c1499dab49d756593fc9d0"
+  },
+  "workflow_artifact": {
+    "id": 11671465182,
+    "name": "frozen-catalog-rollback-57ba99ee4e504281cf08384f07fc2a74bea029a2",
+    "size_bytes": 88333,
+    "sha256": "ca81fb7da1915cde6bb4052b2effc1c6d5a871ee132db3e8c6ee8ff7efe7a404"
+  },
+  "files": {
+    "junit_xml_sha256": "038529ede4d2733756e177874ee79b8ce37994753dbb00ad202489a8851523d8",
+    "junit_summary_sha256": "5a7ed30bebfd0d7ef27ff8d9507480e9354c781e24f26409291170959e153c93",
+    "sanitized_run_receipt_sha256": "b95e49074db2dfd03cdaf585c3864e980dcebd68031d4cc8839e1951562ca0aa",
+    "test_log_sha256": "0a7902905d965b264ac7e7240e2a48ab672a0dd7f9442ff8e928a4512743cb47",
+    "test_log_bytes": 916084
+  },
+  "tests": {
+    "count": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "validator": "independently rerun against archived JUnit; PASS",
+    "exact_cases": [
+      {
+        "classname": "tests.action_server_tests.test_cli_live_reload_multi_package",
+        "name": "test_failed_watched_reload_keeps_both_packages_and_recovers"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_multi_package_sync",
+        "name": "test_additive_import_serves_duplicate_action_names_across_restart"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_multi_package_sync",
+        "name": "test_failed_sync_keeps_last_good_unmanaged_package_sources"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_multi_package_sync",
+        "name": "test_start_sync_rejects_bad_later_package_without_partial_database_update"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_multi_package_sync",
+        "name": "test_start_sync_treats_repeated_dirs_as_one_desired_set"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_multi_package_sync",
+        "name": "test_sync_rejects_historical_mcp_alias_capture_and_rename_recovers"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_successful_generation_drain",
+        "name": "test_successful_generation_switch_drains_old_run_on_its_source_snapshot"
+      }
+    ]
+  },
+  "managed_runtime": {
+    "rcc_version": "v18.19.3",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "managed_worker_observations": 4,
+    "actions_core_version": "1.0.2",
+    "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+    "core_origin_and_python_under_managed_holotree": true,
+    "runtime_inputs_verified": "action_server/src actions/src actions-http-helper/src action_server/pyproject.toml action_server/poetry.lock actions/pyproject.toml actions/poetry.lock actions-http-helper/pyproject.toml actions-http-helper/poetry.lock"
+  },
+  "natural_shutdown": {
+    "parent_executable_is_pinned_frozen_binary": true,
+    "parent_pid": 4573,
+    "parent_create_time": 1791638509.59,
+    "natural_parent_returncode": 1,
+    "controlled_shutdown_http_status": 200,
+    "old_worker": {
+      "create_time": 1791638537.38,
+      "pid": 4800
+    },
+    "new_worker": {
+      "create_time": 1791638538.1,
+      "pid": 4818
+    },
+    "old_snapshot_retained_until_drain": true,
+    "old_result_v1_after_drain": true,
+    "new_result_v2_before_release": true,
+    "owned_worker_identities": [
+      [
+        4800,
+        1791638537.38
+      ],
+      [
+        4818,
+        1791638538.1
+      ]
+    ]
+  },
+  "limits": [
+    "This proves the ten selected cases against this frozen artifact/candidate/runtime-input tuple.",
+    "It does not prove wrapper execution, complete orphan census, PR-wide/full release acceptance, or behavior outside the selected cases.",
+    "No upstream dependency issue is implicated; this is an Actions-local catalog ownership defect."
+  ]
+}

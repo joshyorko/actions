@@ -1,0 +1,27 @@
+{
+  "captured_at_utc": "2026-10-10 13:10:36 UTC",
+  "pr": 289,
+  "exact_head": "c78288c3a0f07ba1013109c790f8e8b375a852d2",
+  "workflow_run_id": 38053977523,
+  "run_attempt": 1,
+  "workflow_run_started_at": "2026-10-10T12:59:12Z",
+  "failures": [
+    {
+      "job_id": 114218573887,
+      "platform": "ubuntu",
+      "excerpt_file": "pr289-ubuntu-failure-run38053977523-job114218573887-attempt1.txt",
+      "sha256": "be8a6aa3207d461f3360f5ab88efd1661018c7a7eb03d9f8e48273bafa43924f",
+      "test": "action_server_tests/test_p0_snapshot_reload_boundaries.py::test_actual_reload_closure_compensates_nondurable_sqlite_commit",
+      "signature": "sqlite3.OperationalError: no such table: mcp_catalog_name; compensation raises DBError for UPDATE mcp_catalog_name SET id=id WHERE 0"
+    },
+    {
+      "job_id": 114218573800,
+      "platform": "macos",
+      "excerpt_file": "pr289-macos-failure-run38053977523-job114218573800-attempt1.txt",
+      "sha256": "10dadccb28c9007ec84823263ad653fa1a206462b190f11f43352ae5059a2612",
+      "test": "action_server_tests/test_p0_snapshot_reload_boundaries.py::test_actual_reload_closure_compensates_nondurable_sqlite_commit",
+      "signature": "sqlite3.OperationalError: no such table: mcp_catalog_name; compensation raises DBError for UPDATE mcp_catalog_name SET id=id WHERE 0"
+    }
+  ],
+  "scope": "Bounded sanitized excerpts from the pytest failure section through the final test totals; no full logs or secrets included."
+}

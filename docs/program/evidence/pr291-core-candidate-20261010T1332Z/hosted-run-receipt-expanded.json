@@ -1,0 +1,58 @@
+{
+  "archive_entries_verified": [
+    "actions_core-1.0.3-py3-none-any.whl",
+    "actions_core-1.0.3.tar.gz",
+    "actions-core-manifest.sha256",
+    "actions-core-candidate-provenance.json"
+  ],
+  "artifact": {
+    "created_at": "2026-10-10T13:26:09Z",
+    "digest": "sha256:6d0817466e1d5b7c8e22177ef3041f45bed1b8100d644db3d4a5fd233f194b6f",
+    "expires_at": "2027-01-08T13:25:09Z",
+    "head_branch": "release/actions-core-1.0.3-20261010",
+    "head_sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+    "id": 11671500340,
+    "name": "actions-core-candidate-dist",
+    "size_in_bytes": 185506
+  },
+  "artifact_contents_downloaded_and_verified": true,
+  "artifact_download": "The artifact is retained on GitHub. Local gh run download returned Azure Forbidden; archive contents and in-archive wheel/sdist hashes were not independently inspected in this lane.",
+  "artifact_zip_sha256": "6d0817466e1d5b7c8e22177ef3041f45bed1b8100d644db3d4a5fd233f194b6f",
+  "candidate_gate_steps": [
+    "Install Poetry",
+    "Synchronize Core dependencies",
+    "Build Core candidate artifacts",
+    "Verify exact Core artifact inventory",
+    "Install Twine 6.2.0",
+    "Verify Core candidate artifacts",
+    "Verify clean installed Core candidate wheel",
+    "Record candidate artifact hashes and provenance",
+    "Upload verified Core candidate artifacts"
+  ],
+  "candidate_job_conclusion": "success",
+  "candidate_job_id": 114223412722,
+  "manifest_verification": "sha256sum -c passed for wheel and sdist",
+  "provenance_source_tree_verified_via_github_api": true,
+  "publication": "No tag or registry publication was performed.",
+  "pull_request": 291,
+  "pull_request_base": "integration/community-release-20261008",
+  "repository": "joshyorko/actions",
+  "sdist_sha256": "1df0ac65bf75103da654d7b3abe0c66da590af07bb24399613f83f20a24f0691",
+  "source_sha": "f4890b43ae055f6427f96b55ace4065dad3dcdcb",
+  "source_tree": "1478813b41aaa2c3dd2e74a6c84b67223242fd32",
+  "synthetic_merge_parents": [
+    "c6d729f29167f04080ab5547955d6398a6ee49d0",
+    "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9"
+  ],
+  "wheel_metadata": {
+    "actions_version_constant": "1.0.3",
+    "name": "actions-core",
+    "version": "1.0.3"
+  },
+  "wheel_sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+  "workflow": "Actions Core Tests",
+  "workflow_event": "pull_request",
+  "workflow_ref": "refs/pull/291/merge",
+  "workflow_run_attempt": 1,
+  "workflow_run_id": 38055636255
+}

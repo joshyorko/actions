@@ -1,0 +1,26 @@
+{
+  "branch": "release/actions-core-1.0.3-20261010",
+  "mappings": [
+    {
+      "local": "f1568100bb8499d21c262812ffc0e8df53c50395",
+      "remote": "878d1076223daaf5d5cee623ddb271bc413e2e61",
+      "tree": "88ad5539bfe4a2117d7272f79fb3771e341fc54d"
+    },
+    {
+      "local": "7091e3e2510af726d6de6a44da69b31c1a65a177",
+      "remote": "92dfa13fff6367f27adbdc4f42fe5c40d6dac111",
+      "tree": "5a3cf2a0796261736e3f73643d3e1d9e60d08db2"
+    },
+    {
+      "local": "41268d292f55f4638758d253d2372d9449faa6cc",
+      "remote": "cdef9dc2b3b5380d801edbea65a804b6dde80a1e",
+      "tree": "b9af17efbf15ae6e07000dd7be7dae7c07817bfe"
+    },
+    {
+      "local": "84124f240aa3a464d4c7a4336be80bb4288c8336",
+      "remote": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+      "tree": "1478813b41aaa2c3dd2e74a6c84b67223242fd32"
+    }
+  ],
+  "status": "candidate; no tag or publication"
+}

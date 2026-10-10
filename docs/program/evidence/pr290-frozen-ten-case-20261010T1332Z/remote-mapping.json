@@ -1,0 +1,28 @@
+{
+  "pr": 290,
+  "branch": "test/mcp-alias-frozen-control-20261010",
+  "run": 38055229055,
+  "dependency_pr": 289,
+  "mappings": [
+    {
+      "local": "802a616069131c2f4fd36c6f4ddbb9a78b762c51",
+      "remote": "e979862b8d4104204eab7362877fc6c5bd5b8842",
+      "tree": "b553bd3a228ba2b7e649823dc7f13e8e72f287f6"
+    },
+    {
+      "local": "2cb8663d9cc80158df5f6228573c12651a08e552",
+      "remote": "b9051b44fc86a784f74be2b643b9ef47f126a277",
+      "tree": "30b92bb67641526759e61e1344cef05e8aee7cc5"
+    },
+    {
+      "local": "a21b26acef83224299c4a92d1fdb3b51b82bcf74",
+      "remote": "5930dbb6ed8811096386b04334491145042156a9",
+      "tree": "fa1595d3a32aa4b3eba1ebee45f8f99e75865ecc"
+    },
+    {
+      "local": "2ac6556859320b6d94ca4a5d63f116c5e1a0ac4d",
+      "remote": "57ba99ee4e504281cf08384f07fc2a74bea029a2",
+      "tree": "b207543a9cba881ae1ec076844beace4b48a21b1"
+    }
+  ]
+}

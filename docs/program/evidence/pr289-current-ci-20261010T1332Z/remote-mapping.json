@@ -1,0 +1,35 @@
+{
+  "local": "85d144b6364db0ea833fd5d9bf497baa3b5bd881",
+  "remote": "d3c27137d2dbee37a6823663f8db2c3a681f76d3",
+  "tree": "f6d1e8856bc29ffd90aa7094c9caa6fcc8d42c91",
+  "parent": "c78288c3a0f07ba1013109c790f8e8b375a852d2",
+  "independent_review": "APPROVED fixture correction; no production changes",
+  "root_test": "1 passed, 2 marker-registration warnings with confcutdir diagnostic isolation; full hosted gate remains required",
+  "root_log_sha256": "90199a002d8e36ad0d598200d9ead88295babff8b96e5c33906b6f518243da7e",
+  "identity_pairs": {
+    "action_server/src/actions/server": {
+      "native_source": "0294bc0602a6c8a5eeb9174625c664754a63da98",
+      "fixed_source": "0294bc0602a6c8a5eeb9174625c664754a63da98"
+    },
+    "actions/src/actions": {
+      "native_source": "70a26f7f19e9fe10510e4f07cec1376ed3067761",
+      "fixed_source": "70a26f7f19e9fe10510e4f07cec1376ed3067761"
+    },
+    "action_server/pyproject.toml": {
+      "native_source": "021ab546f04306dcff615e3e31a8395110e78703",
+      "fixed_source": "021ab546f04306dcff615e3e31a8395110e78703"
+    },
+    "action_server/poetry.lock": {
+      "native_source": "ca8438a2e772a9195be251ab85c7048960bf0952",
+      "fixed_source": "ca8438a2e772a9195be251ab85c7048960bf0952"
+    },
+    "actions/pyproject.toml": {
+      "native_source": "193a1423a94f3050ccbe8ba70bb9a0c287d0c2aa",
+      "fixed_source": "193a1423a94f3050ccbe8ba70bb9a0c287d0c2aa"
+    },
+    "action_server/go-wrapper": {
+      "native_source": "7fb80c3f8dcb46a60205c440ac1022254591deb2",
+      "fixed_source": "7fb80c3f8dcb46a60205c440ac1022254591deb2"
+    }
+  }
+}

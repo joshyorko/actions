@@ -1,0 +1,154 @@
+PR #289 exact head: d3c27137d2dbee37a6823663f8db2c3a681f76d3
+Workflow run: 38054932342, attempt: 1, started 2026-10-10T13:14:02Z
+Job: 114221324264 (Windows py3.12 devmode)
+Source: GitHub Actions job log; bounded sanitized excerpt from pytest failure section
+
+2026-10-10T13:23:27.2268148Z ================================== FAILURES ===================================
+2026-10-10T13:23:27.2269042Z _____ test_concurrent_processes_serialize_empty_history_allocation[True] ______
+2026-10-10T13:23:27.2270136Z [gw0] win32 -- Python 3.12.15 C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\actions-runtime-io13l0E4-py3.12\Scripts\python.exe
+2026-10-10T13:23:27.2270682Z 
+2026-10-10T13:23:27.2271268Z tmp_path = WindowsPath('C:/Users/runneradmin/AppData/Local/Temp/pytest-of-runneradmin/pytest-0/popen-gw0/test_concurrent_processes_seri0')
+2026-10-10T13:23:27.2271921Z same_catalog = True
+2026-10-10T13:23:27.2272057Z 
+2026-10-10T13:23:27.2272310Z     @pytest.mark.parametrize("same_catalog", [True, False])
+2026-10-10T13:23:27.2272859Z     def test_concurrent_processes_serialize_empty_history_allocation(
+2026-10-10T13:23:27.2273298Z         tmp_path, same_catalog
+2026-10-10T13:23:27.2273553Z     ):
+2026-10-10T13:23:27.2274094Z         from actions.server._models import ActionPackage, McpCatalogName, create_db, load_db
+2026-10-10T13:23:27.2274524Z     
+2026-10-10T13:23:27.2274793Z         path = tmp_path / "actions.db"
+2026-10-10T13:23:27.2275360Z         with create_db(path) as db:
+2026-10-10T13:23:27.2275708Z             with db.transaction():
+2026-10-10T13:23:27.2276161Z                 for package in ("package1", "package2"):
+2026-10-10T13:23:27.2276853Z                     db.insert(ActionPackage(package, package, ".", "hash", "{}"))
+2026-10-10T13:23:27.2277436Z                     db.insert(_action(package, "do_it"))
+2026-10-10T13:23:27.2277753Z         children = []
+2026-10-10T13:23:27.2278060Z         environment = dict(os.environ)
+2026-10-10T13:23:27.2278486Z         environment["PYTHONPATH"] = os.pathsep.join(
+2026-10-10T13:23:27.2278815Z             [
+2026-10-10T13:23:27.2279255Z                 str(Path(__file__).resolve().parents[3] / "src"),
+2026-10-10T13:23:27.2279736Z                 environment.get("PYTHONPATH", ""),
+2026-10-10T13:23:27.2280047Z             ]
+2026-10-10T13:23:27.2280241Z         )
+2026-10-10T13:23:27.2280425Z         try:
+2026-10-10T13:23:27.2280924Z             # Both child processes reach catalog preparation while a real SQLite
+2026-10-10T13:23:27.2281592Z             # writer holds the empty table. Neither may observe/allocate history
+2026-10-10T13:23:27.2282240Z             # until the previous writer's reservation transaction finishes.
+2026-10-10T13:23:27.2282797Z             with sqlite3.connect(path, timeout=10) as blocker:
+2026-10-10T13:23:27.2283274Z                 blocker.execute("BEGIN IMMEDIATE")
+2026-10-10T13:23:27.2283753Z                 for package in ("package1", "package2"):
+2026-10-10T13:23:27.2284210Z                     marker = tmp_path / package
+2026-10-10T13:23:27.2284616Z                     children.append(
+2026-10-10T13:23:27.2285031Z                         subprocess.Popen(
+2026-10-10T13:23:27.2285378Z                             [
+2026-10-10T13:23:27.2285806Z                                 sys.executable,
+2026-10-10T13:23:27.2286211Z                                 "-c",
+2026-10-10T13:23:27.2286607Z                                 _CHILD,
+2026-10-10T13:23:27.2287036Z                                 str(path),
+2026-10-10T13:23:27.2287704Z                                 ("" if same_catalog else f"{package}/do_it"),
+2026-10-10T13:23:27.2288213Z                                 str(marker),
+2026-10-10T13:23:27.2288573Z                             ],
+2026-10-10T13:23:27.2288977Z                             env=environment,
+2026-10-10T13:23:27.2289468Z                             stdout=subprocess.PIPE,
+2026-10-10T13:23:27.2289984Z                             stderr=subprocess.PIPE,
+2026-10-10T13:23:27.2290404Z                             text=True,
+2026-10-10T13:23:27.2290852Z                         )
+2026-10-10T13:23:27.2291125Z                     )
+2026-10-10T13:23:27.2291500Z                 deadline = time.monotonic() + 20
+2026-10-10T13:23:27.2291863Z                 while not all(
+2026-10-10T13:23:27.2292516Z                     (tmp_path / package).exists() for package in ("package1", "package2")
+2026-10-10T13:23:27.2292943Z                 ):
+2026-10-10T13:23:27.2293346Z                     assert time.monotonic() < deadline
+2026-10-10T13:23:27.2293783Z >                   assert all(child.poll() is None for child in children)
+2026-10-10T13:23:27.2294163Z                     
+2026-10-10T13:23:27.2294645Z E                   AssertionError: Failed: assert all((child.poll() is None for child in children))
+2026-10-10T13:23:27.2295115Z E                   Variables:
+2026-10-10T13:23:27.2295390Z E                     all(...) = False
+2026-10-10T13:23:27.2295563Z 
+2026-10-10T13:23:27.2295818Z action_server_tests\mcp\test_alias_history.py:500: AssertionError
+2026-10-10T13:23:27.2296394Z _____ test_concurrent_processes_serialize_empty_history_allocation[False] _____
+2026-10-10T13:23:27.2297295Z [gw0] win32 -- Python 3.12.15 C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\actions-runtime-io13l0E4-py3.12\Scripts\python.exe
+2026-10-10T13:23:27.2297828Z 
+2026-10-10T13:23:27.2298406Z tmp_path = WindowsPath('C:/Users/runneradmin/AppData/Local/Temp/pytest-of-runneradmin/pytest-0/popen-gw0/test_concurrent_processes_seri1')
+2026-10-10T13:23:27.2299168Z same_catalog = False
+2026-10-10T13:23:27.2299364Z 
+2026-10-10T13:23:27.2299591Z     @pytest.mark.parametrize("same_catalog", [True, False])
+2026-10-10T13:23:27.2300113Z     def test_concurrent_processes_serialize_empty_history_allocation(
+2026-10-10T13:23:27.2300548Z         tmp_path, same_catalog
+2026-10-10T13:23:27.2300785Z     ):
+2026-10-10T13:23:27.2301314Z         from actions.server._models import ActionPackage, McpCatalogName, create_db, load_db
+2026-10-10T13:23:27.2301740Z     
+2026-10-10T13:23:27.2302005Z         path = tmp_path / "actions.db"
+2026-10-10T13:23:27.2302347Z         with create_db(path) as db:
+2026-10-10T13:23:27.2302683Z             with db.transaction():
+2026-10-10T13:23:27.2303133Z                 for package in ("package1", "package2"):
+2026-10-10T13:23:27.2303791Z                     db.insert(ActionPackage(package, package, ".", "hash", "{}"))
+2026-10-10T13:23:27.2304376Z                     db.insert(_action(package, "do_it"))
+2026-10-10T13:23:27.2304705Z         children = []
+2026-10-10T13:23:27.2305000Z         environment = dict(os.environ)
+2026-10-10T13:23:27.2305404Z         environment["PYTHONPATH"] = os.pathsep.join(
+2026-10-10T13:23:27.2305715Z             [
+2026-10-10T13:23:27.2306150Z                 str(Path(__file__).resolve().parents[3] / "src"),
+2026-10-10T13:23:27.2306642Z                 environment.get("PYTHONPATH", ""),
+2026-10-10T13:23:27.2306945Z             ]
+2026-10-10T13:23:27.2307192Z         )
+2026-10-10T13:23:27.2307388Z         try:
+2026-10-10T13:23:27.2307888Z             # Both child processes reach catalog preparation while a real SQLite
+2026-10-10T13:23:27.2308563Z             # writer holds the empty table. Neither may observe/allocate history
+2026-10-10T13:23:27.2309198Z             # until the previous writer's reservation transaction finishes.
+2026-10-10T13:23:27.2309763Z             with sqlite3.connect(path, timeout=10) as blocker:
+2026-10-10T13:23:27.2310256Z                 blocker.execute("BEGIN IMMEDIATE")
+2026-10-10T13:23:27.2310734Z                 for package in ("package1", "package2"):
+2026-10-10T13:23:27.2311197Z                     marker = tmp_path / package
+2026-10-10T13:23:27.2311589Z                     children.append(
+2026-10-10T13:23:27.2312010Z                         subprocess.Popen(
+2026-10-10T13:23:27.2312376Z                             [
+2026-10-10T13:23:27.2312808Z                                 sys.executable,
+2026-10-10T13:23:27.2313320Z                                 "-c",
+2026-10-10T13:23:27.2313735Z                                 _CHILD,
+2026-10-10T13:23:27.2314158Z                                 str(path),
+2026-10-10T13:23:27.2314826Z                                 ("" if same_catalog else f"{package}/do_it"),
+2026-10-10T13:23:27.2315320Z                                 str(marker),
+2026-10-10T13:23:27.2315672Z                             ],
+2026-10-10T13:23:27.2316075Z                             env=environment,
+2026-10-10T13:23:27.2316559Z                             stdout=subprocess.PIPE,
+2026-10-10T13:23:27.2317059Z                             stderr=subprocess.PIPE,
+2026-10-10T13:23:27.2317466Z                             text=True,
+2026-10-10T13:23:27.2317775Z                         )
+2026-10-10T13:23:27.2318024Z                     )
+2026-10-10T13:23:27.2318386Z                 deadline = time.monotonic() + 20
+2026-10-10T13:23:27.2318742Z                 while not all(
+2026-10-10T13:23:27.2319377Z                     (tmp_path / package).exists() for package in ("package1", "package2")
+2026-10-10T13:23:27.2319786Z                 ):
+2026-10-10T13:23:27.2320180Z                     assert time.monotonic() < deadline
+2026-10-10T13:23:27.2320610Z >                   assert all(child.poll() is None for child in children)
+2026-10-10T13:23:27.2320981Z                     
+2026-10-10T13:23:27.2321438Z E                   AssertionError: Failed: assert all((child.poll() is None for child in children))
+2026-10-10T13:23:27.2321989Z E                   Variables:
+2026-10-10T13:23:27.2322256Z E                     all(...) = False
+2026-10-10T13:23:27.2322435Z 
+2026-10-10T13:23:27.2322681Z action_server_tests\mcp\test_alias_history.py:500: AssertionError
+2026-10-10T13:23:27.2323166Z ============================== warnings summary ===============================
+2026-10-10T13:23:27.2323912Z tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth
+2026-10-10T13:23:27.2325643Z   C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\actions-runtime-io13l0E4-py3.12\Lib\site-packages\websockets\legacy\__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+2026-10-10T13:23:27.2326993Z     warnings.warn(  # deprecated in 14.0 - 2024-11-09
+2026-10-10T13:23:27.2327221Z 
+2026-10-10T13:23:27.2327760Z tests/action_server_tests/test_mcp_tunnel_origin_scope.py::test_tunnel_verification_uses_verified_loopback_tls_and_mcp_auth
+2026-10-10T13:23:27.2329262Z   C:\Users\runneradmin\AppData\Local\pypoetry\Cache\virtualenvs\actions-runtime-io13l0E4-py3.12\Lib\site-packages\uvicorn\protocols\websockets\websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+2026-10-10T13:23:27.2330432Z     from websockets.server import WebSocketServerProtocol
+2026-10-10T13:23:27.2330679Z 
+2026-10-10T13:23:27.2331012Z tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py: 1 warning
+2026-10-10T13:23:27.2331632Z tests/action_server_tests/test_rcc_runtime_source_snapshots.py: 7 warnings
+2026-10-10T13:23:27.2332167Z tests/action_server_tests/test_rcc_runtime_adapter.py: 4 warnings
+2026-10-10T13:23:27.2333073Z   D:\a\actions\actions\action_server\src\actions\server\_action_package_handler.py:90: DeprecationWarning: The 'warn' method is deprecated, use 'warning' instead
+2026-10-10T13:23:27.2333746Z     log.warn(
+2026-10-10T13:23:27.2333860Z 
+2026-10-10T13:23:27.2334132Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-10-10T13:23:27.2334645Z =========================== short test summary info ===========================
+2026-10-10T13:23:27.2335733Z FAILED action_server_tests\mcp\test_alias_history.py::test_concurrent_processes_serialize_empty_history_allocation[True] - AssertionError: Failed: assert all((child.poll() is None for child in children))
+2026-10-10T13:23:27.2336550Z Variables:
+2026-10-10T13:23:27.2337519Z   all(...) = False
+2026-10-10T13:23:27.2338525Z FAILED action_server_tests\mcp\test_alias_history.py::test_concurrent_processes_serialize_empty_history_allocation[False] - AssertionError: Failed: assert all((child.poll() is None for child in children))
+2026-10-10T13:23:27.2339355Z Variables:
+2026-10-10T13:23:27.2339549Z   all(...) = False
+2026-10-10T13:23:27.5010835Z ===== 2 failed, 973 passed, 22 skipped, 14 warnings in 342.81s (0:05:42) ======

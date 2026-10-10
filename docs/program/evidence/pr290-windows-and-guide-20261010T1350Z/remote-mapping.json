@@ -1,0 +1,9 @@
+{
+  "local_commit": "571e555612412fc1ba4c7f49eb360c286bf8bfc0",
+  "remote_commit": "a337d0b9bbb6c4babda712b39368273d77e610a9",
+  "tree": "576e7421714d17614f854eae17737bb15b30fd6c",
+  "remote_parent": "57ba99ee4e504281cf08384f07fc2a74bea029a2",
+  "review": "/workspace/work/pr290-lint-doc-review-20261010.md",
+  "scope": "configured import gate fixed; ten-case Linux receipt documented; alias Windows startup still blocked",
+  "pr": 290
+}

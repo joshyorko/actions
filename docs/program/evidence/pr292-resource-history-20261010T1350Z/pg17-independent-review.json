@@ -1,0 +1,70 @@
+{
+  "review": "independent bounded PostgreSQL acceptance; read-only source review",
+  "verdict": "PASS",
+  "source": {
+    "commit": "444349e576e52ed5164e71e6e2843f65fb4f530f",
+    "tree": "d9174bfa29397f5c1a1ad25e2b936f5cc3dd377a",
+    "parent": "d3c27137d2dbee37a6823663f8db2c3a681f76d3",
+    "worktree": "/tmp/work/actions-worktrees/mcp-resource-history-20261010",
+    "clean": true
+  },
+  "environment": {
+    "postgres_major": 17,
+    "image": "postgres@sha256:aa90e97ee862e558111d34cfb8b2c4bec768c2b039fb791341686928560263b3",
+    "container": "mcp-resource-history-pg-20261010",
+    "host_bind": "127.0.0.1:32771",
+    "memory_bytes": 1073741824,
+    "cpus": 1,
+    "pgdata": "tmpfs size=192m",
+    "tests": "prepared Python venv; no installs or image pulls"
+  },
+  "checks": [
+    {
+      "name": "migration13_to14_fresh_schema_parity_and_exact-key_preservation",
+      "result": "PASS"
+    },
+    {
+      "name": "long_2800_character_key_reservation_dedup_runtime_conflict_and_outer_transaction_rollback",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity_projection_count_duplicate_noop_and_rejection_rollback",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity_route_row_bound_duplicate_noop_and_rejection_rollback",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity_payload_byte_bound_duplicate_noop_and_rejection_rollback",
+      "result": "PASS"
+    },
+    {
+      "name": "two_real_processes_same_candidate_serialized_and_deduplicated",
+      "result": "PASS"
+    },
+    {
+      "name": "two_real_processes_distinct_candidates_serialized_and_both_recorded",
+      "result": "PASS"
+    }
+  ],
+  "test_result": "7 passed in 4.16s",
+  "source_review": {
+    "transaction": "prepare_actions acquires the preexisting MCP catalog admission lock before reads; resource reservation uses the same transaction; existing import flow commits before publication",
+    "history": "versioned canonical projection, domain-separated SHA-256 IDs, full payload verification, no eviction, absent/corrupt/over-capacity fail closed",
+    "matching": "current direct route then current ordered template winner is compared against each historical projection's identical precedence before request headers or callback; same owner uses current callback",
+    "findings": []
+  },
+  "acceptance_boundary": "Accept source checkpoint for this PostgreSQL schema/migration/admission/history lane only. No claim for native/hosted suite, whole product/release, post-upgrade prehistory, or regex CPU bound.",
+  "canonical_documentation": "Accepted: docs/skills/repository-operations.md now records matcher precedence, transactional durable history, bounds/no-eviction/fail-closed behavior, direct-vs-template residual gaps and upgrade boundary. No further delta evidenced.",
+  "upstream_disposition": "Local Actions implementation gap; no maintained upstream defect identified.",
+  "artifacts": {
+    "test_harness": "/dev/shm/test_pg_resource_history.py",
+    "test_harness_sha256": "57078fdb15c0caeddc5770d38b4a3102745b475447c4820d4002ca9ff5860625",
+    "test_log": "/dev/shm/mcp-resource-history-pg17-tests.log",
+    "test_log_sha256": "361dd2c616a6d0d6a755193635d5f2d56e6d5a10940b047d7b57f55294cf3f61",
+    "postgres_log": "/workspace/work/mcp-resource-routing-review-20261010/postgres-server.log",
+    "postgres_log_sha256": "56ef9bbf4cb4eed17bf8a0322b951e8f1161e58ae3c90d2775ab3ad6986411d4"
+  },
+  "cleanup": "Only task-owned container stopped and removed after test completion and log capture; no matching container remains. Ephemeral credential files were zeroed and unlinked."
+}

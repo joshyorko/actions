@@ -2273,3 +2273,23 @@ and native results as separate gates. In the October 10 alias-identity run,
 five source CLI tests passed and independent PostgreSQL review accepted only
 durable exact-key ownership/admission and concurrency behavior; hosted/native
 checks and broader overlap cases remained open.
+
+A hosted frozen ten-case run later passed against the identified Linux frozen
+artifact and alias-identity candidate/runtime-input tuple. Keep that selected
+case acceptance separate from overall PR checks, other operating systems,
+Go-wrapper execution, a complete process census, and release acceptance. If a
+later independent artifact review retrieves and verifies bytes despite an
+earlier download-failure note, retain that original receipt and add a dated
+correction binding the artifact ID, archive digest, manifest and source-tree
+comparison; do not infer registry publication or replace the historical note.
+
+The Core release workflow runs verification on `actions-core-*` tag pushes;
+its publish job requires the peeled tag commit to be an ancestor of
+`origin/community` and the tag version to match package metadata. Integrate the
+reviewed source into `community` before creating an immutable release tag. In
+preflight, confirm the local and remote tag are absent and the version is not
+already on PyPI; never move, force, or reuse a published tag/version. A PR
+candidate artifact is not the tag-triggered release artifact. Retain the tag
+run's `actions-core-dist` wheel, sdist and hash manifest with artifact ID,
+run/job, peeled commit and tree, then compare the published PyPI bytes to that
+manifest. The workflow publishes to PyPI; it does not create a GitHub Release.

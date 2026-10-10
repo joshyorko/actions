@@ -1,0 +1,17 @@
+{
+  "pr": 288,
+  "merged_into": "integration/community-release-20261008",
+  "merge_sha": "5e3b61125bc17aafe6d7ee92db6b9f14a34b82fa",
+  "tree": "ede73323c44225ec4d7187aac1f261be0cd21375",
+  "parents": [
+    "c6d729f29167f04080ab5547955d6398a6ee49d0",
+    "375614e53f3120c74caf3b732306b13eab99ffee"
+  ],
+  "verified_head": "375614e53f3120c74caf3b732306b13eab99ffee",
+  "exact_head_checks": {
+    "success": 19
+  },
+  "independent_review": "current combined tree root and Luna APPROVE, reader/test bytes unchanged",
+  "issue_scope": "private Linux selected-file measurement prerequisite #135/#148; no whole issue acceptance",
+  "community": "36b8192dbb8143e016af3351f7d25b22a35c9944"
+}

@@ -148,8 +148,21 @@ docs/program/evidence/program-amendment-20261010T1243Z.json -text
 docs/program/evidence/pr287-merge-20261010T1300Z/** -text
 docs/program/evidence/pr279-alias-identity-20261010T1300Z/** -text
 docs/program/evidence/pr289-alias-published-map-20261010T1300Z/** -text
+docs/program/evidence/pr288-published-guide-20261010T1332Z/** -text
+docs/program/evidence/pr289-current-ci-20261010T1332Z/** -text
+docs/program/evidence/pr290-frozen-ten-case-20261010T1332Z/** -text
+docs/program/evidence/pr291-core-candidate-20261010T1332Z/** -text
+docs/program/evidence/program-amendment-20261010T1332Z.json -text
+docs/program/evidence/pr288-merge-20261010T1350Z/** -text
+docs/program/evidence/pr289-diagnostic-head-20261010T1350Z/** -text
+docs/program/evidence/pr290-windows-and-guide-20261010T1350Z/** -text
+docs/program/evidence/pr292-resource-history-20261010T1350Z/** -text
+docs/program/evidence/shared-run-output-predecessor-20261010T1350Z/** -text
+docs/program/evidence/program-amendment-20261010T1350Z.json -text
 # Hash-bound captured test output is reviewed by digest and retained verbatim.
 docs/program/evidence/pr288-confined-read-20261010T1216Z/*.log -diff
 docs/program/evidence/pr288-cross-platform-20261010T1222Z/*.log -diff
 docs/program/evidence/pr279-alias-identity-20261010T1300Z/*.log -diff
 docs/program/evidence/pr279-alias-identity-20261010T1300Z/source-cli/*.log -diff
+docs/program/evidence/pr289-current-ci-20261010T1332Z/*.txt -diff
+docs/program/evidence/pr290-windows-and-guide-20261010T1350Z/*.txt -diff

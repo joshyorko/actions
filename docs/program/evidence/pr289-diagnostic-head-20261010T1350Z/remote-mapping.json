@@ -1,0 +1,8 @@
+{
+  "local_commit": "082691e0c7fc646fd0d8a142ffcaea82b950bec7",
+  "remote_commit": "2116a36e2015070d3b7e08a5362ed8442aee8331",
+  "tree": "5f486a7542fb4630234b0798f7bd760468c2d0ec",
+  "parent": "d3c27137d2dbee37a6823663f8db2c3a681f76d3",
+  "pr": 289,
+  "scope": "Test diagnostics only; original Windows child exception remains unknown. Root reviewed barrier/assertions/owned cleanup retained; Linux two cases and lint PASS."
+}

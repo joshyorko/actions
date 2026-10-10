@@ -1,0 +1,27 @@
+{
+  "reviewer": "root independent archive review",
+  "result": "PASS",
+  "source_tree": "1478813b41aaa2c3dd2e74a6c84b67223242fd32",
+  "artifact_id": 11671500340,
+  "source_python_files_compared": 48,
+  "zip_sha256": "6d0817466e1d5b7c8e22177ef3041f45bed1b8100d644db3d4a5fd233f194b6f",
+  "manifest": {
+    "actions_core-1.0.3.tar.gz": "1df0ac65bf75103da654d7b3abe0c66da590af07bb24399613f83f20a24f0691",
+    "actions_core-1.0.3-py3-none-any.whl": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265"
+  },
+  "checks": [
+    "archive digest",
+    "wheel and sdist manifest hashes",
+    "all wheel RECORD digests and lengths",
+    "wheel source Python bytes vs immutable commit",
+    "sdist source Python bytes vs immutable commit",
+    "distribution name/version",
+    "candidate provenance tree"
+  ],
+  "limits": [
+    "hosted clean install executed by workflow, not repeated in this review",
+    "no PyPI publication or registry byte equivalence",
+    "full exact-head CI remains pending"
+  ],
+  "receipt_correction": "Expanded author receipt retains stale artifact_download sentence; local archive content verification above supersedes only that observation, historical receipt unchanged."
+}
