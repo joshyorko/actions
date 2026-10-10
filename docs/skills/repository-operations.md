@@ -1295,7 +1295,10 @@ The embedded bundle is the sole runtime authority: project creation performs no
 metadata or archive network request. The production inventory is `minimal`,
 `basic`, `advanced`, `workflow-producer-consumer`, and `mcp-v2-showcase`; the
 separate beta inventory remains a selected subset and is not a production
-generator input. The MCP v2 Showcase uses static public data and demonstrates
+generator input. The CLI `new list-templates --json` regression asserts this
+exact five-ID inventory and human-readable showcase entry. Regenerate the
+embedded catalog and update that assertion together when the registry changes.
+The MCP v2 Showcase uses static public data and demonstrates
 core stateless MCP only; its GET/SSE example proves channel open/close, not tool
 progress, MCP Apps, Canvas, or durable Tasks. A cache hash mismatch, byte mismatch, traversal path, duplicate member,
 or symlink causes reseeding from the embedded bundle. A symlinked cache directory is
