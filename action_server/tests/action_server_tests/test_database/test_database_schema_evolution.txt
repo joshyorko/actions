@@ -76,6 +76,19 @@ CREATE UNIQUE INDEX mcp_catalog_name_id_index ON mcp_catalog_name(id);
 
 
 '''
+CREATE TABLE IF NOT EXISTS mcp_resource_routing(
+    id TEXT NOT NULL PRIMARY KEY,
+    routing_json TEXT NOT NULL
+)
+''',
+
+
+'''
+CREATE UNIQUE INDEX mcp_resource_routing_id_index ON mcp_resource_routing(id);
+''',
+
+
+'''
 CREATE TABLE IF NOT EXISTS run(
     id TEXT NOT NULL PRIMARY KEY,
     status INTEGER NOT NULL,

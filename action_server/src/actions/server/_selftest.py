@@ -35,6 +35,9 @@ class ActionServerExitedError(RuntimeError):
     pass
 
 
+STARTUP_FAILURE_CLEANUP_SECONDS = 20.0
+
+
 class ActionServerProcess:
     SHOW_OUTPUT = True
 
@@ -183,34 +186,58 @@ class ActionServerProcess:
         process.on_stderr.register(on_stderr)
         process.on_stdout.register(on_stdout)
 
-        with process.on_stderr.register(collect_port_from_stdout):
-            process.start()
-            if timeout > 1:
-                initial_time = time.monotonic()
-                while True:
-                    try:
-                        host, port = future.result(1)
-                        break
-                    except TimeoutError:
-                        if is_debugger_active():
-                            continue
-                        if time.monotonic() - initial_time >= timeout:
-                            raise TimeoutError()
-                        if not process.is_alive():
-                            raise ActionServerExitedError(
-                                f"The process already exited with returncode: "
-                                f"{process.returncode}\n"
-                                f"Args: {new_args}\n"
-                                f"Elapsed time: {time.monotonic() - initial_time:.2f}s\n"
-                                f"Stdout: {self.get_stdout()}\n"
-                                f"Stderr: {self.get_stderr()}\n"
-                            )
-            else:
-                host, port = future.result(timeout)
-        assert host
-        self._host = host
-        assert int(port) > 0, f"Expected port to be > 0. Found: {port}"
-        self._port = int(port)
+        try:
+            with process.on_stderr.register(collect_port_from_stdout):
+                process.start()
+                if timeout > 1:
+                    initial_time = time.monotonic()
+                    while True:
+                        try:
+                            host, port = future.result(1)
+                            break
+                        except TimeoutError:
+                            if is_debugger_active():
+                                continue
+                            if time.monotonic() - initial_time >= timeout:
+                                raise TimeoutError()
+                            if not process.is_alive():
+                                raise ActionServerExitedError(
+                                    f"The process already exited with returncode: "
+                                    f"{process.returncode}\n"
+                                    f"Args: {new_args}\n"
+                                    f"Elapsed time: "
+                                    f"{time.monotonic() - initial_time:.2f}s\n"
+                                    f"Stdout: {self.get_stdout()}\n"
+                                    f"Stderr: {self.get_stderr()}\n"
+                                )
+                else:
+                    host, port = future.result(timeout)
+            assert host
+            self._host = host
+            assert int(port) > 0, f"Expected port to be > 0. Found: {port}"
+            self._port = int(port)
+        except BaseException as startup_error:
+            try:
+                cleanup_result, active_readers = process._stop_and_reap_until(
+                    time.monotonic() + STARTUP_FAILURE_CLEANUP_SECONDS
+                )
+                if cleanup_result is None:
+                    cleanup_complete = True
+                else:
+                    cleanup_complete = cleanup_result.execution_stopped
+                if not cleanup_complete or active_readers:
+                    startup_error.add_note(
+                        "Action Server startup cleanup did not fully complete "
+                        "within its 20-second deadline."
+                    )
+            except BaseException as cleanup_error:
+                # Cleanup diagnostics must not replace the original startup error.
+                startup_error.add_note(
+                    "Action Server startup cleanup raised while handling the "
+                    f"original startup error ({type(cleanup_error).__name__}: "
+                    f"{cleanup_error})."
+                )
+            raise
 
     def stop(self):
         """
