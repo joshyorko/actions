@@ -635,12 +635,23 @@ def record_browser_stage(
     script_exit_code = browser_stage.get("script_exit_code")
     if not isinstance(script_exit_code, int):
         raise AssertionError("browser receipt script_exit_code is not an integer")
-    validate_browser_stage_result(script_exit_code, browser_stage)
     if browser_stage.get("stage") == "authorization-denied":
         states_not_run = acceptance_receipt.get("states_not_run")
         if not is_string_keyed_object(states_not_run):
             raise AssertionError("acceptance receipt states_not_run is not an object")
         states_not_run.pop("authorization_denial_ui", None)
+        states_failed = acceptance_receipt.get("states_failed")
+        if not is_string_keyed_object(states_failed):
+            raise AssertionError("acceptance receipt states_failed is not an object")
+        if script_exit_code == 0 and browser_stage.get("status") == "PASS":
+            states_failed.pop("authorization_denial_ui", None)
+        else:
+            states_failed["authorization_denial_ui"] = {
+                "stage": "authorization-denied",
+                "status": "FAIL",
+                "script_exit_code": script_exit_code,
+            }
+    validate_browser_stage_result(script_exit_code, browser_stage)
 
 
 def run_browser_stage(
@@ -709,10 +720,11 @@ def test_browser_stage_is_recorded_before_failure_is_raised() -> None:
     assert acceptance_receipt["browser_stages"] == [browser_stage]
 
 
-def test_failed_authorization_denial_stage_remains_not_run() -> None:
+def test_failed_authorization_denial_stage_is_failed_not_not_run() -> None:
     acceptance_receipt: dict[str, object] = {
         "browser_stages": [],
         "states_not_run": dict(STATES_NOT_RUN),
+        "states_failed": {},
     }
     browser_stage = {
         "status": "FAIL",
@@ -730,13 +742,27 @@ def test_failed_authorization_denial_stage_remains_not_run() -> None:
         record_browser_stage(acceptance_receipt, browser_stage)
 
     assert acceptance_receipt["browser_stages"] == [browser_stage]
-    assert "authorization_denial_ui" in acceptance_receipt["states_not_run"]
+    assert "authorization_denial_ui" not in acceptance_receipt["states_not_run"]
+    assert acceptance_receipt["states_failed"] == {
+        "authorization_denial_ui": {
+            "stage": "authorization-denied",
+            "status": "FAIL",
+            "script_exit_code": 1,
+        }
+    }
 
 
 def test_successful_authorization_denial_stage_clears_not_run() -> None:
     acceptance_receipt: dict[str, object] = {
         "browser_stages": [],
         "states_not_run": dict(STATES_NOT_RUN),
+        "states_failed": {
+            "authorization_denial_ui": {
+                "stage": "authorization-denied",
+                "status": "FAIL",
+                "script_exit_code": 1,
+            }
+        },
     }
     browser_stage = {
         "status": "PASS",
@@ -753,12 +779,14 @@ def test_successful_authorization_denial_stage_clears_not_run() -> None:
     record_browser_stage(acceptance_receipt, browser_stage)
 
     assert "authorization_denial_ui" not in acceptance_receipt["states_not_run"]
+    assert "authorization_denial_ui" not in acceptance_receipt["states_failed"]
 
 
 def test_normal_stage_does_not_clear_authorization_denial_not_run() -> None:
     acceptance_receipt: dict[str, object] = {
         "browser_stages": [],
         "states_not_run": dict(STATES_NOT_RUN),
+        "states_failed": {},
     }
     browser_stage = {
         "status": "PASS",
@@ -1444,6 +1472,7 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
         "storage_fault_fixture": "test-owned datadir/workitems.db; Action Server DB remains server.db",
         "browser_stages": [],
         "states_not_run": dict(STATES_NOT_RUN),
+        "states_failed": {},
     }
     process: ActionServerProcess | None = None
     runtime_package_root: Path | None = None
