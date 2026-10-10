@@ -28,12 +28,12 @@ Counts: READY=0, ACTIVE=8, REVIEW=9, BLOCKED=28, INTEGRATED=8, COMPLETE=1.
 | [#125](https://github.com/joshyorko/actions/issues/125) | INTEGRATED | None | None | None | None | #128 | Retain verified template guidance/archive cleanup while completing the remaining active product-surface, build and MCP contract. |
 | [#126](https://github.com/joshyorko/actions/issues/126) | ACTIVE | None | #93, #101 | #71, #99, #100, #127 | None | #219 | Continue independent artifact verification and remaining #126 protocol/host criteria; do not promote the Linux offline template proof to whole-issue acceptance. |
 | [#127](https://github.com/joshyorko/actions/issues/127) | REVIEW | None | #93, #101 | #71 | None | #282 | Clear fresh dependency resolution, TypeScript and opt-in Runtime/browser gates; route authorized-artifact dependency through #129/#83 common contracts, not a private resolver. |
-| [#129](https://github.com/joshyorko/actions/issues/129) | ACTIVE | None | None | None | None | #283 | Integrate reviewed Slice1a after PR273 and final required checks; preserve strict canonical-value contracts. |
+| [#129](https://github.com/joshyorko/actions/issues/129) | ACTIVE | None | None | None | None | #283 | Finish the remaining exact-head N-1 macOS toolkit gate and integrate reviewed Slice1a; PR273 prerequisite is integrated. Preserve strict canonical-value contracts. |
 | [#130](https://github.com/joshyorko/actions/issues/130) | BLOCKED | None | None | None | None | See ledger | Await the existing Devsy coordinator supervisor dispatch, then implement the bounded immutable Package Revision schema and deterministic fixtures against accepted criterion 129:deployment-reference-envelope; keep full #129 production, #130 acceptance and the #135/#136 order unchanged. |
 | [#131](https://github.com/joshyorko/actions/issues/131) | BLOCKED | #125, #129, #130 | None | None | None | See ledger | Define provider data/knowledge references and authorized operations without product-tier coupling. |
 | [#132](https://github.com/joshyorko/actions/issues/132) | BLOCKED | #83, #90, #129 | None | None | None | See ledger | Implement durable business queue/review/lease semantics separately from Run ownership. |
 | [#133](https://github.com/joshyorko/actions/issues/133) | BLOCKED | #129, #130, #134, #143 | None | None | None | See ledger | Extend proven RCC adapter to worker execution using released provider/lease/exec contract. |
-| [#134](https://github.com/joshyorko/actions/issues/134) | ACTIVE | None | None | None | None | #284 | Complete current toolkit matrix and PR273/frozen gates; retain exact managed failed-reload proof, then address remaining provider/lease/offline criteria. |
+| [#134](https://github.com/joshyorko/actions/issues/134) | ACTIVE | None | None | None | None | #284 | Finish current macOS toolkit cells and integrate reviewed control; preserve executed managed/frozen scope boundaries, then address remaining provider/lease/offline criteria. |
 | [#135](https://github.com/joshyorko/actions/issues/135) | BLOCKED | #129, #130 | None | None | None | See ledger | Compile deterministic Package Revisions and plans from current sources without machine-local identities. |
 | [#136](https://github.com/joshyorko/actions/issues/136) | BLOCKED | #135 | None | None | None | See ledger | Implement verified immutable source provider and worker-local cache with corruption rejection. |
 | [#138](https://github.com/joshyorko/actions/issues/138) | BLOCKED | #83, #84, #90, #129, #130, #143 | None | None | None | See ledger | Version worker protocol carrying exact pinned plans and explicit decline/cancel/recovery. |
@@ -193,6 +193,13 @@ PR273 f7 has passed current-head Runtime and native validation on all three oper
 ### program-amendment-20261010T0828Z — 2026-10-10T08:28:38Z
 
 PR283 exact-head Runtime/native checks now pass across all three OS; PR273 remains its merge prerequisite. PR284 actual managed RCC failed-reload recovery passed run38036869578; its attributes-only f7 merge preserves that scoped execution evidence and current toolkit checks continue. PR285 now owns the frozen four-case gate: the first hosted invocation failed before pytest; reviewed project-interpreter correction385f1e is pushed and new hosted execution remains pending. Source successful-generation drain passed separately. Canvas candidate Core wheel is reproducible and its four extracted-template tests pass, but published dependency, Runtime/browser and authorized-artifact gates remain distinct. Devsy remains Failed/workspace_not_running at08:25:24Z; explicit CAS cwd worktree guidance is pushed. No integration, release or whole-issue acceptance in this checkpoint; all54 original contracts remain.
+
+| Supplemental gate | Status | Accounting | Scope and evidence |
+|---|---|---|---|
+
+### program-amendment-20261010T0841Z — 2026-10-10T08:41:26Z
+
+PR273 is integrated at 1c8585d5 with the exact tested f7 Git tree. GitHub also marked included PR272 and PR278 merged; no duplicate merges were performed. Independent review accepted the actual Linux frozen four-case receipt from run38037959456 with zero skips. Source, managed RCC and frozen scopes remain distinct. PR284 is retargeted to integration; PR283/284/285 each merge cleanly with trees unchanged from their current heads. Their remaining current-head checks still gate integration. Canvas candidate-source acceptance is under independent review, with published Core and authorized-artifact requirements preserved. All54 original contracts and historical archives remain; no whole-issue closure, community merge or Runtime publication occurred. Devsy remains blocked by its failed workspace.
 
 | Supplemental gate | Status | Accounting | Scope and evidence |
 |---|---|---|---|

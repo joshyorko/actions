@@ -1,0 +1,43 @@
+{
+  "candidate_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+  "candidate_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+  "native_build_source_sha": "bf4f7dd180e3e408acff41fdb093b57eee8cc0f4",
+  "native_build_source_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+  "control_sha": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+  "artifact_id": "11662342341",
+  "artifact_sha256": "18acd5e0fee3c93aed5cdeee404557417cc1964c0c93b7950065a7add5325cf6",
+  "step_outcomes": {
+    "ARTIFACT": "success",
+    "FROZEN": "success",
+    "RCC": "success",
+    "DEPENDENCIES": "success",
+    "ACCEPTANCE": "success"
+  },
+  "status": "PASS",
+  "native_build_source_tree_api_readback": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+  "junit": {
+    "expected_test_cases": [
+      {
+        "classname": "tests.action_server_tests.test_cli_live_reload_multi_package",
+        "name": "test_failed_watched_reload_keeps_both_packages_and_recovers"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]"
+      }
+    ],
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "status": "PASS"
+  }
+}

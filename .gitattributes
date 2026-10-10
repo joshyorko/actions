@@ -63,3 +63,14 @@ docs/program/evidence/rcc-provider-rollback-38036869578/acceptance-summary.log -
 docs/program/evidence/frozen-poetry-selector-review-20261010.json -text
 docs/program/evidence/cas-heartbeat-20261010T0825Z.json -text
 docs/program/evidence/program-amendment-20261010T0828Z.json -text
+
+# Immutable frozen acceptance and integration receipts, recorded 20261010T0841Z.
+docs/program/evidence/pr273-integration-20261010.json -text
+docs/program/evidence/frozen-catalog-38037959456/review-receipt.json -text
+docs/program/evidence/frozen-catalog-38037959456/frozen-catalog-artifact-verification.json -text
+docs/program/evidence/frozen-catalog-38037959456/frozen-catalog-junit.xml -text
+docs/program/evidence/frozen-catalog-38037959456/frozen-catalog-junit-summary.json -text
+docs/program/evidence/frozen-catalog-38037959456/frozen-catalog-summary.json -text
+docs/program/evidence/frozen-catalog-38037959456/sanitized-test-excerpts.log -text
+docs/program/evidence/cas-heartbeat-20261010T0835Z.json -text
+docs/program/evidence/program-amendment-20261010T0841Z.json -text

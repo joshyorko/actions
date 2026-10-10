@@ -1,0 +1,13 @@
+MANAGED_PACKAGE_WORKER {"core_origin": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-0/test_duplicate_mcp_key_rejects0/actions-home/holotree/62fb83f_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py", "core_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc", "core_version": "1.0.2", "python": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-0/test_duplicate_mcp_key_rejects0/actions-home/holotree/62fb83f_a78733b_2a94c46e/bin/python3.12"}
+COMPLETE_CLI_MCP_ROLLBACK_PASS collision=resource
+MANAGED_PACKAGE_WORKER {"core_origin": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-0/test_duplicate_mcp_key_rejects1/actions-home/holotree/62fb83f_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py", "core_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc", "core_version": "1.0.2", "python": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-0/test_duplicate_mcp_key_rejects1/actions-home/holotree/62fb83f_a78733b_2a94c46e/bin/python3.12"}
+COMPLETE_CLI_MCP_ROLLBACK_PASS collision=template
+MANAGED_PACKAGE_WORKER {"core_origin": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-0/test_duplicate_mcp_key_rejects2/actions-home/holotree/62fb83f_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py", "core_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc", "core_version": "1.0.2", "python": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-0/test_duplicate_mcp_key_rejects2/actions-home/holotree/62fb83f_a78733b_2a94c46e/bin/python3.12"}
+COMPLETE_CLI_MCP_ROLLBACK_PASS collision=prompt
+OBSERVED_WATCHED_RUNTIME_CHILD 4057 PYTHONPATH frozen executable
+MANAGED_PACKAGE_WORKER {"core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc", "core_origin": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-0/test_failed_watched_reload_kee0/actions-home/holotree/62fb83f_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py", "core_version": "1.0.2", "python_executable": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-0/test_failed_watched_reload_kee0/actions-home/holotree/62fb83f_a78733b_2a94c46e/bin/python3.12"}
+WATCHED_FAILURE_LAST_GOOD_PASS A=A1 B=B1
+WATCHED_RECOVERY_PASS A=A1 B=B2 natural_exit=1
+OBSERVED_RESTARTED_RUNTIME_CHILD 4502 PYTHONPATH frozen executable
+WATCHED_RESTART_PASS A=A1 B=B2 natural_exit=1 elapsed=38.23s
+4 passed in 149.77s (0:02:29)

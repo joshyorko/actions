@@ -1,0 +1,25 @@
+{
+  "expected_test_cases": [
+    {
+      "classname": "tests.action_server_tests.test_cli_live_reload_multi_package",
+      "name": "test_failed_watched_reload_keeps_both_packages_and_recovers"
+    },
+    {
+      "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+      "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]"
+    },
+    {
+      "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+      "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]"
+    },
+    {
+      "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+      "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]"
+    }
+  ],
+  "tests": 4,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "status": "PASS"
+}

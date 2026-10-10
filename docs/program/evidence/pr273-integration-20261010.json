@@ -1,0 +1,93 @@
+{
+  "observed_at_utc": "2026-10-10T08:37:06Z",
+  "repository": "joshyorko/actions",
+  "integration": {
+    "branch": "integration/community-release-20261008",
+    "head": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+    "tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+    "parents": [
+      "35b32e76b3704dc47d856103ae62221c9a9f0789",
+      "f7c6ed61f24fd9e98d1465c83042c5446466311b"
+    ],
+    "matches_tested_candidate_tree": true
+  },
+  "prs_integrated": [
+    {
+      "number": 273,
+      "method": "explicit authorized merge",
+      "head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "merge_commit": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+      "merged": true
+    },
+    {
+      "number": 272,
+      "method": "GitHub automatically marked included history merged after PR273 integration",
+      "head": "969219e7aa398f61b11466a2dc16ac3143568ff5",
+      "api_merge_commit": "b9ccc184aee6575fb39c7f57c9845a3da6d1e089",
+      "merged_at": "2026-10-10T08:36:34Z",
+      "merged": true
+    },
+    {
+      "number": 278,
+      "method": "GitHub automatically marked included history merged after PR273 integration",
+      "head": "c1c33ce77895d7b522f2229524d386ed72f8ba3b",
+      "api_merge_commit": "ef2b32b33799b10c09f1b0c002687c2f7ff21ab5",
+      "merged_at": "2026-10-10T08:36:34Z",
+      "merged": true
+    }
+  ],
+  "admission": {
+    "checks_success": 20,
+    "checks_intentionally_skipped": 1,
+    "unresolved_review_threads": 0,
+    "branch_protected": false,
+    "rulesets": [],
+    "bypass_used": false,
+    "independent_frozen_review_sha256": "5771a213f79f85e82fd5cafa42ea1b330e0eb9f64b0ac17d0843808eafcd43ad",
+    "gate_run": 38037959456,
+    "gate_job": 114172258002,
+    "actual_binary_source": "bf4f7dd180e3e408acff41fdb093b57eee8cc0f4",
+    "actual_binary_source_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0"
+  },
+  "downstream_reconciliation": {
+    "observed_at_utc": "2026-10-10T08:37:32Z",
+    "pr284_retargeted_to": "integration/community-release-20261008",
+    "merge_trees": [
+      {
+        "pr": 283,
+        "head": "58a7dcabb94ce7012f99446902bd4e5128cadb79",
+        "tree": "d2ef7229651b6120db5cfa5995c65942ef768da8"
+      },
+      {
+        "pr": 284,
+        "head": "9fd092ba0e8a61a9d90ceb7b033977beed0d5989",
+        "tree": "1e40b265bd117097f9dd5477af05b5222a17ae36"
+      },
+      {
+        "pr": 285,
+        "head": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+        "tree": "ed98acc3561a83a6b9feaed64fb928211b868049"
+      }
+    ],
+    "trees_match_published_heads": true,
+    "tests_not_reexecuted_by_merge_tree_check": true
+  },
+  "cohort": {
+    "total": 34,
+    "target_integrated": 25,
+    "blocked_open": 9,
+    "merge_ready": 0,
+    "remaining_open": [
+      215,
+      216,
+      217,
+      218,
+      221,
+      282,
+      283,
+      284,
+      285
+    ]
+  },
+  "scope": "Source integration into named target only. Community and Runtime release not advanced; no original issue contract accepted or closed by this receipt."
+}

@@ -1925,6 +1925,12 @@ explicitly stage only the reviewed receipt and verify its committed blob.
 
 Classify a merge against the PR's named target. A stacked PR merged into its feature or repair base is integrated only into that branch; source containment or exact merge-tree identity does not mean the change reached `integration` or `community`, and neither proves whole-issue acceptance or release admission. Record the target branch, merge commit and tree separately from downstream refs and issue status. Likewise, a native worker reported `ACTIVE` or an accepted turn proves control-plane state, not current implementation progress. Record progress from timestamped worktree HEAD/diff and exact test evidence; treat source transfer/readback as source availability only.
 
+When an integration merge contains other open PR histories, GitHub may mark
+those PRs merged automatically. Read each PR's merged state and verify its head
+is an ancestor of the current target ref before counting it as integrated;
+do not issue duplicate merges. A closed PR's stored base SHA may still describe
+an earlier checkpoint, so read the target ref directly for current state.
+
 ## MCP gateway metadata
 
 The `/mcp` metadata middleware forwards any valid JSON-RPC method, but stores

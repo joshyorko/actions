@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-10-10 08:35:52 UTC",
+  "decision": "ACCEPT_BOUNDED_LINUX_FROZEN_CATALOG_PREMERGE_GATE",
+  "repository": "joshyorko/actions",
+  "run_id": 38037959456,
+  "job_id": 114172258002,
+  "run_attempt": 1,
+  "control_sha": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+  "control_tree": "ed98acc3561a83a6b9feaed64fb928211b868049",
+  "reviewed_local_control_sha": "0f3d60acbe74c0d272f0dc1bb887cb0cb408fc6a",
+  "control_tree_matches_reviewed_local": true,
+  "source": {
+    "candidate_sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "candidate_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+    "native_build_source_sha": "bf4f7dd180e3e408acff41fdb093b57eee8cc0f4",
+    "native_build_source_tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+    "build_source_git_api": {
+      "sha": "bf4f7dd180e3e408acff41fdb093b57eee8cc0f4",
+      "tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+      "parents": [
+        "35b32e76b3704dc47d856103ae62221c9a9f0789",
+        "f7c6ed61f24fd9e98d1465c83042c5446466311b"
+      ]
+    },
+    "candidate_git_api": {
+      "sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+      "tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+      "parents": [
+        "73ea6797ff27bafdcc722242fd843272a99411ca"
+      ]
+    },
+    "full_git_source_trees_equal": true
+  },
+  "native_package": {
+    "original_build_run": 38032640853,
+    "artifact_id": 11662342341,
+    "archive_sha256": "18acd5e0fee3c93aed5cdeee404557417cc1964c0c93b7950065a7add5325cf6",
+    "manifest_sha256": "498faf30d759e9ac24d334200f6b5d0448184c7ff2774f13a3e73f6a4081e279",
+    "inventory_sha256": "d7a2de80761ad42cd84c90d0da2be0dedd8af621979a3954ace2749338b8d5a4",
+    "frozen_package_tree_sha256": "88c290b0e8377d6ae6a25ccf654b123a04774bd1d093dcc726cac4932b0621f0",
+    "frozen_executable_sha256": "ea4eadf5c05608a1b0ec8d17b63f94773b070e18dcc7466166b4bb68bd660342",
+    "binary_path": "/home/runner/work/_temp/f7-native-package/dist/action-server/action-server",
+    "verification_scope": "Previously independently verified immutable native archive; this reviewed control re-downloads its hash-bound bytes and verifies full canonical inventory/tree/manifest/executable before test execution. No duplicate native ZIP download by this reviewer."
+  },
+  "acceptance_artifact": {
+    "id": 11664661140,
+    "name": "frozen-catalog-rollback-385f1e2385b80f4c2ddbc5f534032c186db09de5",
+    "bytes": 48335,
+    "sha256": "10a7a62db7d38fd2110e8d036bd0c7660054fa706e68278e3a992b6673be3c8f",
+    "reviewer_download_measured_hash_matches_api": true,
+    "files": {
+      "frozen-catalog-artifact-verification.json": "4c7b757b4bc84fd20563d9ae8e8192baeb20ddc6df0beef77ba3f0c68e2abd60",
+      "frozen-catalog-junit.xml": "7037e54da7e0c887a35964b02088083cf735932e9da23d7aa6ce889556a528b5",
+      "frozen-catalog-junit-summary.json": "54e4985d2a766561d4299853d470e3004f240c45fb94b29bd921f47a4f7207ea",
+      "frozen-catalog-summary.json": "cfe7714eeba8661e09834dcbc6c9327607fa2d8ba8800bb15330b8beaf428bec",
+      "frozen-catalog-test.log": "b82f8168c6470f470906bba5410f3f06718353a9c4a539ff924373017e07e13f"
+    }
+  },
+  "junit": {
+    "actual_tests": 4,
+    "actual_failures": 0,
+    "actual_errors": 0,
+    "actual_skips": 0,
+    "actual_testcase_children": 0,
+    "elapsed_seconds": 149.77,
+    "exact_module_name_pairs_verified": true,
+    "cases": [
+      "tests.action_server_tests.test_cli_mcp_catalog_rollback::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+      "tests.action_server_tests.test_cli_mcp_catalog_rollback::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+      "tests.action_server_tests.test_cli_mcp_catalog_rollback::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]",
+      "tests.action_server_tests.test_cli_live_reload_multi_package::test_failed_watched_reload_keeps_both_packages_and_recovers"
+    ]
+  },
+  "execution": {
+    "pytest_command": "uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -m pytest -m integration_test -n 0 -q -s tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers --junitxml=\"$RUNNER_TEMP/frozen-catalog-junit.xml\"",
+    "runtime_override": "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE=$RUNNER_TEMP/f7-native-package/dist/action-server/action-server",
+    "runtime_source_fallback": false,
+    "rcc_version": "v18.19.3",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "worker_core_version": "1.0.2",
+    "worker_core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+    "worker_origin_evidence": "Four actual measured worker identities, each Python and Core module within its unique actions-home/holotree; three collision cases and watched case retain path/version/module hash in test log.",
+    "frozen_parent_evidence": "Reviewed exact-tree test asserts psutil parent executable equals immutable frozen binary on healthy/restarted parents; successful four testcase outcomes establish assertions executed.",
+    "loopback_only": true,
+    "temporary_isolated_homes": true
+  },
+  "established": [
+    "Three actual public decorator collision cases each reject the complete candidate batch, preserving previously admitted A+B catalog/DB rows/source bytes/snapshot-store set.",
+    "After rejection and natural restart, actual HTTP and MCP tool/resource/template/prompt callbacks execute last-good source and catalogs/revisions remain truthful.",
+    "Two-package actual frozen watcher rejects malformed B while A and B last-good stay callable, then admits corrected B2 and persists truthful accepted state across natural restart.",
+    "Natural parent shutdown returns1 under the existing explicit test contract before final owned stop helper; successful test outcomes require shutdown assertions."
+  ],
+  "limits": [
+    "Linux x86_64 frozen executable only; no new macOS/Windows managed collision proof.",
+    "The captured natural shutdown assertions do not establish a complete orphan/remaining-worker inventory. Separate RCC receipt proves its captured descendants; do not import that scope into these frozen cases.",
+    "No blocked old Run crosses a successful frozen generation replacement in these four cases. The accepted af36 test is separate unmanaged/source-mode successful-switch draining proof.",
+    "Actual measured Core module origin/version/hash is retained; this is not clean publisher-wheel attestation or a release pairing/promotion.",
+    "No warm/offline provider, sandbox/security boundary, automatic snapshot collection, production host auth, shared artifact retrieval, release publication, or whole #279/#101 acceptance."
+  ],
+  "historical_failures_preserved": [
+    {
+      "run": 38037036032,
+      "outcome": "Frozen lifecycle NOT_RUN; dependency invocation failed with pytest not found."
+    },
+    {
+      "run": 38035543627,
+      "outcome": "RCC lifecycle NOT_RUN; pre-pytest bootstrap exit141. Distinct control workflow."
+    }
+  ],
+  "local_evidence_directory": "/workspace/work/frozen-review-38037959456",
+  "canonical_docs_delta": "Add this exact passing receipt and narrow Linux frozen scope to the existing pending gate record. Preserve source, managed RCC failure/recovery, and frozen successful-switch limits separately. Do not convert the earlier invocation failure into a passing case.",
+  "upstream_disposition": "Actions-local acceptance/control evidence; no confirmed other-repository defect and no upstream issue filed.",
+  "reviewer_actions": "Read-only review plus 48KiB acceptance artifact download and stdlib XML/hash checks; no Runtime process, new environment, binary execution, source edit, merge or publication."
+}

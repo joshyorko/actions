@@ -3131,7 +3131,7 @@
         144
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Complete current toolkit matrix and PR273/frozen gates; retain exact managed failed-reload proof, then address remaining provider/lease/offline criteria.",
+      "next_bounded_action": "Finish current macOS toolkit cells and integrate reviewed control; preserve executed managed/frozen scope boundaries, then address remaining provider/lease/offline criteria.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -3787,7 +3787,7 @@
         144
       ],
       "criticality": "roadmap",
-      "next_bounded_action": "Integrate reviewed Slice1a after PR273 and final required checks; preserve strict canonical-value contracts.",
+      "next_bounded_action": "Finish the remaining exact-head N-1 macOS toolkit gate and integrate reviewed Slice1a; PR273 prerequisite is integrated. Preserve strict canonical-value contracts.",
       "required_tests_platforms": {
         "contract": "Full acceptance_contract is authoritative; no default matrix waives platform-specific criteria.",
         "base_gates": [
@@ -12672,8 +12672,8 @@
       "259": "PR259 at reported head prefix85f7 is independently accepted; hosted CI is running."
     }
   },
-  "checkpoint_status": "PR283 exact-head Runtime/native checks now pass across all three OS; PR273 remains its merge prerequisite. PR284 actual managed RCC failed-reload recovery passed run38036869578; its attributes-only f7 merge preserves that scoped execution evidence and current toolkit checks continue. PR285 now owns the frozen four-case gate: the first hosted invocation failed before pytest; reviewed project-interpreter correction385f1e is pushed and new hosted execution remains pending. Source successful-generation drain passed separately. Canvas candidate Core wheel is reproducible and its four extracted-template tests pass, but published dependency, Runtime/browser and authorized-artifact gates remain distinct. Devsy remains Failed/workspace_not_running at08:25:24Z; explicit CAS cwd worktree guidance is pushed. No integration, release or whole-issue acceptance in this checkpoint; all54 original contracts remain.",
-  "checkpoint_observed_at": "2026-10-10T08:28:38Z",
+  "checkpoint_status": "PR273 is integrated at 1c8585d5 with the exact tested f7 Git tree. GitHub also marked included PR272 and PR278 merged; no duplicate merges were performed. Independent review accepted the actual Linux frozen four-case receipt from run38037959456 with zero skips. Source, managed RCC and frozen scopes remain distinct. PR284 is retargeted to integration; PR283/284/285 each merge cleanly with trees unchanged from their current heads. Their remaining current-head checks still gate integration. Canvas candidate-source acceptance is under independent review, with published Core and authorized-artifact requirements preserved. All54 original contracts and historical archives remain; no whole-issue closure, community merge or Runtime publication occurred. Devsy remains blocked by its failed workspace.",
+  "checkpoint_observed_at": "2026-10-10T08:41:26Z",
   "execution_graph": {
     "file": "community-execution-graph.json",
     "counts": {
@@ -13298,13 +13298,13 @@
     "receipt_sha256": "9d6e96e382bb2b35273d9d78a407578c52cffeea75d0eb3e2a64092a100ffbde"
   },
   "current_program_refs": {
-    "observed_at_utc": "2026-10-10T08:24:59Z",
+    "observed_at_utc": "2026-10-10T08:37:06Z",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
-    "integration/community-release-20261008": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "integration/community-release-20261008": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
     "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
     "release_ready": false,
-    "receipt": "evidence/convergence-live-20261010T0828Z.json",
-    "receipt_sha256": "c14abd3b81b54cc67289cf4fb77e2bd2d7c89c0bac75b4c14d9449676117ee61"
+    "receipt": "evidence/pr273-integration-20261010.json",
+    "receipt_sha256": "28aa08cd3d1cf11636a28e983af73a0c801b92072983ce558359f2341d6bae60"
   },
   "prior_current_convergence_update_20261010T0310Z": {
     "path": "evidence/convergence-followup-20261010T0309Z.json",
@@ -13640,11 +13640,11 @@
     "receipt_sha256": "6ef0a61fd51b46190499700472f817e1a5fd74593c0e60c154a23767d89961c2"
   },
   "current_pr_convergence": {
-    "observed_at_utc": "2026-10-10T08:28:38Z",
+    "observed_at_utc": "2026-10-10T08:41:26Z",
     "cohort": {
       "items": 34,
-      "target_integrated": 22,
-      "open_blocked": 12,
+      "target_integrated": 25,
+      "open_blocked": 9,
       "merge_ready": 0,
       "target_integrated_prs": [
         219,
@@ -13663,10 +13663,13 @@
         269,
         270,
         271,
+        272,
+        273,
         274,
         275,
         276,
         277,
+        278,
         280,
         281
       ],
@@ -13676,9 +13679,6 @@
         217,
         218,
         221,
-        272,
-        273,
-        278,
         282,
         283,
         284,
@@ -13686,9 +13686,9 @@
       ],
       "scope": "Disjoint named-target PR outcomes, not whole-issue acceptance or publication."
     },
-    "path": "evidence/convergence-live-20261010T0828Z.json",
-    "sha256": "c14abd3b81b54cc67289cf4fb77e2bd2d7c89c0bac75b4c14d9449676117ee61",
-    "integration": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "path": "evidence/pr273-integration-20261010.json",
+    "sha256": "28aa08cd3d1cf11636a28e983af73a0c801b92072983ce558359f2341d6bae60",
+    "integration": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
     "release_ready": false,
@@ -15368,15 +15368,252 @@
         "devsy_supervisor": "BLOCKED; last lane inventory historical, no current native progress claim"
       },
       "upstream_disposition": "Actions-local test environment and attributes repairs; no confirmed new upstream defect."
+    },
+    {
+      "id": "program-amendment-20261010T0841Z",
+      "observed_at_utc": "2026-10-10T08:41:26Z",
+      "summary": "PR273 is integrated at 1c8585d5 with the exact tested f7 Git tree. GitHub also marked included PR272 and PR278 merged; no duplicate merges were performed. Independent review accepted the actual Linux frozen four-case receipt from run38037959456 with zero skips. Source, managed RCC and frozen scopes remain distinct. PR284 is retargeted to integration; PR283/284/285 each merge cleanly with trees unchanged from their current heads. Their remaining current-head checks still gate integration. Canvas candidate-source acceptance is under independent review, with published Core and authorized-artifact requirements preserved. All54 original contracts and historical archives remain; no whole-issue closure, community merge or Runtime publication occurred. Devsy remains blocked by its failed workspace.",
+      "accounting_boundary": {
+        "retained_issue_contract_count": 54,
+        "supplemental_issue_count": 1,
+        "supplemental_issue_ids": [
+          279
+        ],
+        "issue_stage_counts_changed": false,
+        "raw_contracts_or_historical_archives_changed": false,
+        "whole_issue_acceptance_changed": false
+      },
+      "integration_checkpoint": {
+        "head": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+        "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "refs_observed_at_utc": "2026-10-10T08:37:06Z",
+        "cohort": {
+          "items": 34,
+          "target_integrated": 25,
+          "open_blocked": 9,
+          "merge_ready": 0,
+          "target_integrated_prs": [
+            219,
+            220,
+            251,
+            256,
+            257,
+            259,
+            262,
+            263,
+            264,
+            265,
+            266,
+            267,
+            268,
+            269,
+            270,
+            271,
+            272,
+            273,
+            274,
+            275,
+            276,
+            277,
+            278,
+            280,
+            281
+          ],
+          "open_prs": [
+            215,
+            216,
+            217,
+            218,
+            221,
+            282,
+            283,
+            284,
+            285
+          ],
+          "scope": "Disjoint named-target PR outcomes, not whole-issue acceptance or publication."
+        }
+      },
+      "current_pr_heads": {
+        "285": {
+          "head": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+          "base": "integration/community-release-20261008",
+          "head_branch": "test/frozen-catalog-rollback-20261010"
+        },
+        "284": {
+          "head": "9fd092ba0e8a61a9d90ceb7b033977beed0d5989",
+          "base": "integration/community-release-20261008",
+          "head_branch": "test/rcc-provider-rollback-hosted-20261010"
+        },
+        "283": {
+          "head": "58a7dcabb94ce7012f99446902bd4e5128cadb79",
+          "base": "integration/community-release-20261008",
+          "head_branch": "feat/deployment-values-20261010"
+        },
+        "282": {
+          "head": "92fe3fe6136e56998982ff1989e3e73fcbe58e48",
+          "base": "integration/community-release-20261008",
+          "head_branch": "feat/canvas-template-20261010"
+        },
+        "221": {
+          "head": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+          "base": "community",
+          "head_branch": "integration/community-release-20261008"
+        },
+        "218": {
+          "head": "95ddbe88106be594ea9954bdb36909702c5e2869",
+          "base": "community",
+          "head_branch": "review/workitems-checkpoint-20261008"
+        },
+        "217": {
+          "head": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+          "base": "community",
+          "head_branch": "review/core-checkpoint-20261008"
+        },
+        "216": {
+          "head": "d26fa423080cec22522402f2193b17a5f32b336a",
+          "base": "community",
+          "head_branch": "review/runtime-checkpoint-20261008"
+        },
+        "215": {
+          "head": "d07f79b355f976f97948720474fd050d0a32ea16",
+          "base": "community",
+          "head_branch": "convergence/actions-full-graph-20261008"
+        }
+      },
+      "remaining_critical_path": [
+        {
+          "pr": 285,
+          "gate": "Frozen gate independently accepted; remaining normal exact-head PR checks before control/test integration. PR273 prerequisite met.",
+          "owner": "luna_worker_exit; root"
+        },
+        {
+          "pr": 284,
+          "gate": "Remaining current9fd macOS primary/N-1 toolkit cells. PR273 prerequisite met and retargeted to integration; exact merge tree unchanged.",
+          "owner": "root; luna_release_notes monitoring"
+        },
+        {
+          "pr": 283,
+          "gate": "Remaining exact58a7 N-1 macOS toolkit cell. Runtime/native/other checks pass; PR273 prerequisite met and exact merge tree unchanged.",
+          "owner": "root; luna_release_notes monitoring"
+        },
+        {
+          "pr": 282,
+          "gate": "Published Core floor, explicit Runtime/browser acceptance, authorized retrievable artifact. Candidate-only wheel proof cannot waive production manifest or artifact requirements.",
+          "owner": "luna_canvas_acceptance"
+        }
+      ],
+      "rcc_execution": {
+        "run": 38036869578,
+        "control": "06885e75f8d2054bb3273934c3cc38d5e9e8d4f2",
+        "candidate": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+        "status": "PASS_SCOPED",
+        "artifact_id": 11663538970,
+        "zip_sha256": "f2eb536604f16d76efb8b6976a0b47fea7adbe6933d2a469ae0b5305ed4c890c",
+        "limit": "Reviewed fail-closed summary and actual log; raw JUnit/full lifecycle receipt not uploaded; no frozen/managed-successful-switch/full-issue claim."
+      },
+      "frozen_execution": {
+        "failed_run": 38037036032,
+        "failed_control": "bca5ad8d8f1af7040dd3f9062dd890258304db97",
+        "failed_status": "PYTEST_INVOCATION_FAILURE_LIFECYCLE_NOT_RUN",
+        "corrected_control": "385f1e2385b80f4c2ddbc5f534032c186db09de5",
+        "new_status": "PASS_INDEPENDENTLY_ACCEPTED_SCOPED_GATE",
+        "review": "Accepted control correction; selector probe uses exact2.1.1 EnvManager code with cached2.5.1 support dependencies, not complete pinned CLI proof.",
+        "passed_run": 38037959456,
+        "passed_job": 114172258002,
+        "artifact_id": 11664661140,
+        "artifact_sha256": "10a7a62db7d38fd2110e8d036bd0c7660054fa706e68278e3a992b6673be3c8f",
+        "raw_junit_sha256": "7037e54da7e0c887a35964b02088083cf735932e9da23d7aa6ce889556a528b5",
+        "limits": "Linux frozen rollback only; no complete orphan inventory, managed successful-generation drain, other-platform collision proof, publication or whole-issue acceptance."
+      },
+      "devsy": {
+        "observed_at_utc": "2026-10-10T08:35:18Z",
+        "target": "cas-worker-01",
+        "workspace_uid": "default-ca-0b24d",
+        "status": "BLOCKED_WORKSPACE_NOT_RUNNING",
+        "cause": "unknown; no reason field in diagnostics",
+        "supervisor_thread": "01a1222f-e720-7183-9634-2edb76d30326",
+        "supervisor_cwd": "/workspaces/actions-worktrees/devsy-coordinator",
+        "directory_contract": {
+          "repository": "/workspaces/actions",
+          "workers": "/workspaces/actions-worktrees/<worker>",
+          "protected_bootstrap": "/workspaces/cas-worker-01"
+        },
+        "guidance_commit": "3c305f5586b50bbaf1188a7c99b27abc269620c8",
+        "disposition": "No replacement, provisioning, replay or current cleanliness claim; reconcile existing thread effects after recovery."
+      },
+      "evidence": [
+        {
+          "path": "evidence/pr273-integration-20261010.json",
+          "size_bytes": 2991,
+          "sha256": "28aa08cd3d1cf11636a28e983af73a0c801b92072983ce558359f2341d6bae60"
+        },
+        {
+          "path": "evidence/frozen-catalog-38037959456/review-receipt.json",
+          "size_bytes": 7995,
+          "sha256": "5771a213f79f85e82fd5cafa42ea1b330e0eb9f64b0ac17d0843808eafcd43ad"
+        },
+        {
+          "path": "evidence/frozen-catalog-38037959456/frozen-catalog-artifact-verification.json",
+          "size_bytes": 798,
+          "sha256": "4c7b757b4bc84fd20563d9ae8e8192baeb20ddc6df0beef77ba3f0c68e2abd60"
+        },
+        {
+          "path": "evidence/frozen-catalog-38037959456/frozen-catalog-junit.xml",
+          "size_bytes": 970,
+          "sha256": "7037e54da7e0c887a35964b02088083cf735932e9da23d7aa6ce889556a528b5"
+        },
+        {
+          "path": "evidence/frozen-catalog-38037959456/frozen-catalog-junit-summary.json",
+          "size_bytes": 859,
+          "sha256": "54e4985d2a766561d4299853d470e3004f240c45fb94b29bd921f47a4f7207ea"
+        },
+        {
+          "path": "evidence/frozen-catalog-38037959456/frozen-catalog-summary.json",
+          "size_bytes": 1644,
+          "sha256": "cfe7714eeba8661e09834dcbc6c9327607fa2d8ba8800bb15330b8beaf428bec"
+        },
+        {
+          "path": "evidence/frozen-catalog-38037959456/sanitized-test-excerpts.log",
+          "size_bytes": 2503,
+          "sha256": "8ff0d28778eb03a0b1d7bb7d710808576e14fbf4feabf9c36bb775a2dee949ea"
+        },
+        {
+          "path": "evidence/cas-heartbeat-20261010T0835Z.json",
+          "size_bytes": 1084,
+          "sha256": "05712bc3911e3b16be5445072446c56e81ab9fcad06e872028fa4f23917b94ee"
+        }
+      ],
+      "accepted_scoped_criteria": [],
+      "issue_metadata_updates": {
+        "129": {
+          "owner": "root integration; luna_release_notes exact-head monitoring",
+          "checkpoint_pr": 283,
+          "next_bounded_action": "Finish the remaining exact-head N-1 macOS toolkit gate and integrate reviewed Slice1a; PR273 prerequisite is integrated. Preserve strict canonical-value contracts."
+        },
+        "134": {
+          "owner": "root integration with source/frozen acceptance and independent Sol review",
+          "checkpoint_pr": 284,
+          "next_bounded_action": "Finish current macOS toolkit cells and integrate reviewed control; preserve executed managed/frozen scope boundaries, then address remaining provider/lease/offline criteria."
+        }
+      },
+      "current_active_workers": {
+        "cloud_canvas": "luna_canvas_acceptance: candidate-only Runtime/browser predecessor in existing Canvas worktree; production manifest/artifact gates unchanged",
+        "cloud_ci": "luna_release_notes: exact-head checks and immutable failure evidence",
+        "cloud_frozen": "luna_worker_exit: frozen control accepted and gate executed; now audits remaining native/registry release gates without publication",
+        "cloud_review": "sol_p0_snapshot_review: frozen receipt accepted; Canvas candidate-source gate review active",
+        "cloud_cas_heartbeat": "luna_cas_heartbeat: bounded read-only checks",
+        "devsy_supervisor": "BLOCKED; last lane inventory historical, no current native progress claim"
+      },
+      "upstream_disposition": "Actions-local test environment and attributes repairs; no confirmed new upstream defect."
     }
   ],
   "current_program_amendment": {
-    "id": "program-amendment-20261010T0828Z",
-    "observed_at_utc": "2026-10-10T08:28:38Z",
-    "path": "evidence/program-amendment-20261010T0828Z.json",
-    "sha256": "4bfe82e69ede20827555478de94a70c3dac5f2575ca4420de2e1d7ebf8f7ade1"
+    "id": "program-amendment-20261010T0841Z",
+    "observed_at_utc": "2026-10-10T08:41:26Z",
+    "path": "evidence/program-amendment-20261010T0841Z.json",
+    "sha256": "d6be9c288482897e005d1de550827e3b5e8d1b060e8c8a19a6639727c6eb2ee3"
   },
-  "status": "PR283 exact-head Runtime/native checks now pass across all three OS; PR273 remains its merge prerequisite. PR284 actual managed RCC failed-reload recovery passed run38036869578; its attributes-only f7 merge preserves that scoped execution evidence and current toolkit checks continue. PR285 now owns the frozen four-case gate: the first hosted invocation failed before pytest; reviewed project-interpreter correction385f1e is pushed and new hosted execution remains pending. Source successful-generation drain passed separately. Canvas candidate Core wheel is reproducible and its four extracted-template tests pass, but published dependency, Runtime/browser and authorized-artifact gates remain distinct. Devsy remains Failed/workspace_not_running at08:25:24Z; explicit CAS cwd worktree guidance is pushed. No integration, release or whole-issue acceptance in this checkpoint; all54 original contracts remain.",
+  "status": "PR273 is integrated at 1c8585d5 with the exact tested f7 Git tree. GitHub also marked included PR272 and PR278 merged; no duplicate merges were performed. Independent review accepted the actual Linux frozen four-case receipt from run38037959456 with zero skips. Source, managed RCC and frozen scopes remain distinct. PR284 is retargeted to integration; PR283/284/285 each merge cleanly with trees unchanged from their current heads. Their remaining current-head checks still gate integration. Canvas candidate-source acceptance is under independent review, with published Core and authorized-artifact requirements preserved. All54 original contracts and historical archives remain; no whole-issue closure, community merge or Runtime publication occurred. Devsy remains blocked by its failed workspace.",
   "prior_current_pr_convergence_20261010T0441Z": {
     "path": "evidence/convergence-followup-20261010T0441Z.json",
     "sha256": "1c0b218c1771903e47deb4729d53b979847f4f0aa7ed285b545137243cad153e",
@@ -15754,6 +15991,75 @@
     },
     "path": "evidence/convergence-live-20261010T0800Z.json",
     "sha256": "4cd3bfeaa1e706ebcd7d8001a1e363f8349d6891a4546b0e626d592dd56ea6cf",
+    "integration": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "release_ready": false,
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "retained_original_contracts": 54,
+    "supplemental_issue_ids": [
+      279
+    ]
+  },
+  "prior_current_program_refs_20261010T0841Z": {
+    "observed_at_utc": "2026-10-10T08:24:59Z",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration/community-release-20261008": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "release_ready": false,
+    "receipt": "evidence/convergence-live-20261010T0828Z.json",
+    "receipt_sha256": "c14abd3b81b54cc67289cf4fb77e2bd2d7c89c0bac75b4c14d9449676117ee61"
+  },
+  "prior_current_pr_convergence_20261010T0841Z": {
+    "observed_at_utc": "2026-10-10T08:28:38Z",
+    "cohort": {
+      "items": 34,
+      "target_integrated": 22,
+      "open_blocked": 12,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        274,
+        275,
+        276,
+        277,
+        280,
+        281
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        278,
+        282,
+        283,
+        284,
+        285
+      ],
+      "scope": "Disjoint named-target PR outcomes, not whole-issue acceptance or publication."
+    },
+    "path": "evidence/convergence-live-20261010T0828Z.json",
+    "sha256": "c14abd3b81b54cc67289cf4fb77e2bd2d7c89c0bac75b4c14d9449676117ee61",
     "integration": "35b32e76b3704dc47d856103ae62221c9a9f0789",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
     "candidate_head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
