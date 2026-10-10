@@ -1,0 +1,177 @@
+{
+  "id": "program-amendment-20261010T0713Z",
+  "observed_at_utc": "2026-10-10T07:13:00Z",
+  "summary": "PR273 f7c6ed61 includes the accepted integration and narrow Windows canonical-fixture checkout repair; current-head Runtime CI remains pending. Canvas #127 draft PR282 preserves reviewed offline template work. Approved #129 Slice 1a has a local pure-value implementation under independent review. Real RCC provider rollback hosted admission is under review. All 54 original contracts remain: 53 open, only #210 accepted/closed. Devsy native reads fail with KubernetesError; existing worktrees/threads are preserved.",
+  "accounting_boundary": {
+    "retained_issue_contract_count": 54,
+    "supplemental_issue_count": 1,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "issue_stage_counts_changed": true,
+    "raw_contracts_or_historical_archives_changed": false,
+    "whole_issue_acceptance_changed": false,
+    "scope": "#127 ACTIVE to REVIEW; #129 design-only INTEGRATED to ACTIVE implementation. No whole-issue acceptance."
+  },
+  "worker_stage_snapshot": "2026-10-10T07:13:00Z",
+  "integration_checkpoint": {
+    "head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "cohort": {
+      "integrated": 22,
+      "open_blocked": 9,
+      "merge_ready": 0
+    },
+    "cohort_definition": "Previous 30 PR cohort plus newly opened draft PR282; source containment is not target integration."
+  },
+  "pr273_status": {
+    "head": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+    "state": "OPEN",
+    "exact_head_runs": [
+      38032640874,
+      38032640853,
+      38032640841,
+      38032640839,
+      38032640836,
+      38032640905
+    ],
+    "limits": "Runtime exact-head CI pending at observation; RCC matrix/native builds/coverage passed. Publication steps skipped. Real RCC provider last-good rollback requires separate opt-in hosted proof. Older 73ea Windows CRLF failure is retained; f7 applies text eol=lf only to canonical fixture JSON."
+  },
+  "canvas_template_checkpoint": {
+    "issue": 127,
+    "pr": 282,
+    "branch": "feat/canvas-template-20261010",
+    "head": "92fe3fe6136e56998982ff1989e3e73fcbe58e48",
+    "local_equivalent": "b79404c6218929dfe7de9b0126749689f7235050",
+    "tree": "ad8c7ae9328175930d81e7b009932b602eaa1182",
+    "state": "PUSHED_DRAFT_REVIEW",
+    "verification": "Root 22 passed, 1 skipped; fresh extracted shipped-project tests 4 passed. No outside-repository schema dependency in shipped tests.",
+    "limits": "Core 1.0.3 is provisional and unpublished, not release version authorization; fresh dependency resolution, current template Runtime/browser, TypeScript and caller-authorized artifact resolver remain blocked/not run. artifact:null is honest partial output, not schema-complete artifact success. No ChatGPT or whole #127 acceptance."
+  },
+  "deployment_values_checkpoint": {
+    "issue": 129,
+    "slice": "129-1a",
+    "owner": "luna_canvas_acceptance",
+    "worktree": "/tmp/work/actions-worktrees/deployment-values-20261010",
+    "branch": "feat/deployment-values-20261010",
+    "base": "73ea6797ff27bafdcc722242fd843272a99411ca",
+    "local_head": "66b68325435b300bc04f338e6bdf97f5a479b890",
+    "state": "LOCAL_REVIEW_PENDING",
+    "verification": "27 focused tests passed; independent review found a Pydantic copied-instance validation gap at530047. Owner added strict revalidation and negative tests at66b683; independent final review pending.",
+    "limits": "Pure canonical JSON and typed references only; no DB/API/resolver/idempotency/adapter/registry implementation or full #129 acceptance."
+  },
+  "rcc_hosted_checkpoint": {
+    "owner": "luna_worker_exit",
+    "branch": "test/rcc-provider-rollback-hosted-20261010",
+    "local_head": "5c6187e7840297a885b8484d964181a64ad07ff1",
+    "candidate": "f7c6ed61f24fd9e98d1465c83042c5446466311b",
+    "state": "INDEPENDENT_REVIEW_PENDING_NOT_PUSHED",
+    "limits": "10 workflow/admission tests pass locally; actual hosted RCC acceptance NOT RUN. No local fresh RCC build because of measured disk floor."
+  },
+  "devsy": {
+    "target": "cas-worker-01",
+    "repository": "/workspaces/actions",
+    "worker_root": "/workspaces/actions-worktrees",
+    "protected_bootstrap": "/workspaces/cas-worker-01",
+    "supervisor_thread": "01a1222f-e720-7183-9634-2edb76d30326",
+    "supervisor_cwd": "/workspaces/actions-worktrees/devsy-coordinator",
+    "observed_at_utc": "2026-10-10T07:05:38Z",
+    "owner_pod_uid": "c08aeecd-3aa4-4077-947a-04ac381625e1",
+    "owner_phase": "Failed",
+    "native_discovery": "thread/list failed closed (KubernetesError); inspect target diagnostics",
+    "native_rate_limits": "read_account_rate_limits failed closed (KubernetesError); inspect target diagnostics",
+    "disposition": "BLOCKED; preserve remote threads/worktrees and unknown #126/#279 dispatch effects. No provisioning, retry, replacement or mutation."
+  },
+  "evidence": [
+    {
+      "path": "evidence/issue-129-slice1a-approval-20261010.json",
+      "size_bytes": 6563,
+      "sha256": "3c869281a7ebc84061520c1f4b7ced0f76875fa35dd3c08bb82a6b13525376f5"
+    },
+    {
+      "path": "evidence/original-54-live-state-20261010T0705Z.json",
+      "size_bytes": 9540,
+      "sha256": "4f198a054815463d792a3cda8d7a98c0b6434340e36bf2582ec24f801dfea51f"
+    },
+    {
+      "path": "evidence/pr273-73ea-windows-red-20261010.json",
+      "size_bytes": 1361,
+      "sha256": "9c3cfc889f5921e295a6a528c5f9909c24a994847f5e635bc1ba6643c36a3c46"
+    },
+    {
+      "path": "evidence/pr273-f7-fixture-checkout-fix.log",
+      "size_bytes": 173,
+      "sha256": "3d805f912b0494ab8039bbddd57686058e637a157b35768fbb8fa433e3f9c4f6"
+    },
+    {
+      "path": "evidence/canvas-b794-root-final-review.log",
+      "size_bytes": 191,
+      "sha256": "d7b8be751022b0a1e160ab361d3a9530776dba5a533e064b8bd36e896df3db50"
+    },
+    {
+      "path": "evidence/canvas-b794-root-fresh-extracted.log",
+      "size_bytes": 1793,
+      "sha256": "66bffb6b5f6482bc3c51ce61247f6ac7fd399a390d7a25bb3da4412814d85087"
+    }
+  ],
+  "upstream_disposition": "none; observed source and infrastructure findings remain in existing owning lanes.",
+  "accepted_scoped_criteria": [
+    {
+      "criterion_id": "129:canonical-values-design-1a",
+      "owner_issue": 129,
+      "consumer_issue": 129,
+      "consumer_slice": "129-1a",
+      "description": "Owner-approved pure canonical values and typed reference Slice1a",
+      "status": "ACCEPTED_DESIGN_FOR_IMPLEMENTATION_ONLY",
+      "decision": "Owner approved only Slice1a; implementation is active and independently reviewed, with final copied-instance verification pending.",
+      "consumer_slice_description": "Owner-approved pure canonical values and typed reference Slice1a",
+      "consumer_slice_status": "ACTIVE; NOT_COMPLETE",
+      "gate_scope": "Named bounded scope only; no parent/whole-issue acceptance or unrelated prerequisite removal.",
+      "consumer_issue_reason": "Owner approved only Slice1a; implementation is active and independently reviewed, with final copied-instance verification pending. NOT_COMPLETE.",
+      "consumer_issue_next_action": "Complete independent review of66b683, push recoverable checkpoint, then run exact-head gates; do not implement persistence/API/resolver under this slice.",
+      "consumer_issue_classification": "ACTIVE",
+      "superseded_issue_level_prerequisites": [],
+      "evidence_path": "evidence/issue-129-slice1a-approval-20261010.json",
+      "evidence_sha256": "3c869281a7ebc84061520c1f4b7ced0f76875fa35dd3c08bb82a6b13525376f5"
+    },
+    {
+      "criterion_id": "127:offline-template-checkpoint",
+      "owner_issue": 127,
+      "consumer_issue": 127,
+      "consumer_slice": "127-template",
+      "description": "Reviewed offline template and fresh extracted project checkpoint",
+      "status": "ACCEPTED_OFFLINE_CHECKPOINT_ONLY",
+      "decision": "Draft PR282 preserves reviewed offline template implementation; full template acceptance still requires compatible published Core, Runtime/browser and authorized artifact semantics.",
+      "consumer_slice_description": "Reviewed offline template and fresh extracted project checkpoint",
+      "consumer_slice_status": "REVIEW; NOT_COMPLETE",
+      "gate_scope": "Named bounded scope only; no parent/whole-issue acceptance or unrelated prerequisite removal.",
+      "consumer_issue_reason": "Draft PR282 preserves reviewed offline template implementation; full template acceptance still requires compatible published Core, Runtime/browser and authorized artifact semantics. NOT_COMPLETE.",
+      "consumer_issue_next_action": "Clear fresh dependency resolution, TypeScript and opt-in Runtime/browser gates; route authorized-artifact dependency through #129/#83 common contracts, not a private resolver.",
+      "consumer_issue_classification": "REVIEW",
+      "superseded_issue_level_prerequisites": [],
+      "evidence_path": "evidence/canvas-b794-root-final-review.log",
+      "evidence_sha256": "d7b8be751022b0a1e160ab361d3a9530776dba5a533e064b8bd36e896df3db50"
+    }
+  ],
+  "issue_metadata_updates": {
+    "129": {
+      "owner": "Cloud luna_canvas_acceptance; independent Sol review; root integration",
+      "next_bounded_action": "Complete independent review of66b683, push recoverable checkpoint, then run exact-head gates; do not implement persistence/API/resolver under this slice."
+    },
+    "127": {
+      "owner": "Cloud root integration / PR282; prior writer reused on #129",
+      "checkpoint_pr": 282,
+      "next_bounded_action": "Clear fresh dependency resolution, TypeScript and opt-in Runtime/browser gates; route authorized-artifact dependency through #129/#83 common contracts, not a private resolver."
+    }
+  },
+  "current_active_workers": {
+    "cloud_deployment_values": "luna_canvas_acceptance:129-1a active review repair; isolated deployment-values-20261010",
+    "cloud_rcc_hosted": "luna_worker_exit:hosted provider acceptance control; isolated rcc-provider-ci-20261010",
+    "cloud_independent_review": "sol_p0_snapshot_review:RCC workflow and #129 value validation",
+    "cloud_release_ci": "luna_release_notes:exact f7 CI read-only",
+    "cloud_cas_heartbeat": "luna_cas_heartbeat:bounded read-only readiness, no remote replacement",
+    "devsy_supervisor": "BLOCKED: native KubernetesError, recorded worker state is historical"
+  }
+}

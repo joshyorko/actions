@@ -1,0 +1,25 @@
+{
+  "read_at_utc": "2026-10-10 06:52 UTC",
+  "head_sha": "73ea6797ff27bafdcc722242fd843272a99411ca",
+  "workflow_run": 38031957994,
+  "tested_merge_sha": "e8e9690b45631ff803a43dfe419fc789141d0c31",
+  "job_id": 114154592430,
+  "platform": "Windows Server 2022",
+  "failed_step": "Test (not integration)",
+  "result": "failure",
+  "failures": [
+    {
+      "test": "contract_tests/test_package_revision_schema.py::test_portable_fixture_is_stably_serialized",
+      "line": 170,
+      "cause": "raw fixture bytes contain CRLF (including trailing CRLF), canonical bytes use LF (including trailing LF)."
+    },
+    {
+      "test": "contract_tests/test_package_revision_schema.py::test_consumer_reference_fixture_is_stably_serialized",
+      "line": 181,
+      "cause": "raw fixture bytes contain CRLF (including trailing CRLF), canonical bytes use LF (including trailing LF)."
+    }
+  ],
+  "summary": "2 failed, 893 passed, 22 skipped, 14 warnings in 260.71s",
+  "other_status": "Native binaries and RCC work are separate workflows; this failure occurred before Runtime integration/lint/typecheck/docs steps. The job log binds checkout to merge e8e9690b45631ff803a43dfe419fc789141d0c31. No source was modified by this reviewer.",
+  "log_handling": "The decoded log was inspected in memory; full log was not persisted and no secrets were copied into this receipt."
+}

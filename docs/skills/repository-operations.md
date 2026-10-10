@@ -185,6 +185,11 @@ not relabel red-before evidence with the repaired head. For authenticated
 HTTP/browser comparisons, record whether each request supplied a synthetic
 bearer; a successful bearer probe and an unauthorized browser request are
 different subjects.
+When adding a dated program amendment, regenerate the current graph, ledger,
+resume record and handoff through `scripts/project_community_execution_graph.py`.
+The CLI regression fixture must copy the current amendment and its declared
+evidence from the pointer, so a new checkpoint cannot silently omit its own
+hash-bound inputs. Keep historical receipts and retained contract text unchanged.
 Before committing an evidence archive, verify each selected receipt's bytes
 against its ledger SHA-256 and reject absolute or parent-traversal archive
 paths. Preserve running and skipped CI states separately from passing results.

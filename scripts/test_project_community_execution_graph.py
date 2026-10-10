@@ -149,7 +149,7 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         graph = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
         self.assertEqual(54, len(self.ledger["issues"]))
         self.assertEqual(54, len(graph["issues"]))
-        self.assertEqual({"READY": 0, "ACTIVE": 8, "REVIEW": 8, "BLOCKED": 28, "INTEGRATED": 9, "COMPLETE": 1}, graph["counts"])
+        self.assertEqual({"READY": 0, "ACTIVE": 8, "REVIEW": 9, "BLOCKED": 28, "INTEGRATED": 8, "COMPLETE": 1}, graph["counts"])
         amendment = self.ledger["supplemental_program_amendments"][0]
         gate = amendment["supplemental_issue_gates"][0]
         self.assertEqual(279, gate["issue"])
@@ -187,10 +187,13 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         rows = {row["issue"]: row for row in graph["issues"]}
         slices = {row["id"]: row for row in graph["relationship_model"]["execution_slices"]}
         criteria = {row["id"]: row for row in graph["relationship_model"]["criteria"]}
-        self.assertEqual("ACTIVE", rows[127]["classification"])
+        self.assertEqual("REVIEW", rows[127]["classification"])
         self.assertEqual("NOT_STARTED", rows[127]["retained_state"])
         self.assertIn("NOT_COMPLETE", rows[127]["reason"])
-        self.assertEqual("2026-10-10T06:22:05Z", graph["worker_stage_snapshot"])
+        self.assertEqual("2026-10-10T07:13:00Z", graph["worker_stage_snapshot"])
+        self.assertEqual("ACTIVE", rows[129]["classification"])
+        self.assertEqual("ACCEPTED_DESIGN_FOR_IMPLEMENTATION_ONLY", criteria["129:canonical-values-design-1a"]["status"])
+        self.assertEqual("ACCEPTED_OFFLINE_CHECKPOINT_ONLY", criteria["127:offline-template-checkpoint"]["status"])
         self.assertTrue(slices["100-A"]["status"].startswith("ACCEPTED_BOUNDED_SLICE"))
         self.assertIn("SINGLE_FIXTURE", slices["100-B"]["status"])
         self.assertIn("SYSTEM_CHROMIUM", slices["99-A"]["status"])
@@ -318,6 +321,15 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
             target = repo / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / relative, target)
+        # New dated amendments must be exercised by the CLI fixture without
+        # extending a historical hard-coded receipt list for every checkpoint.
+        current = self.ledger["current_program_amendment"]
+        current_path = ROOT / "docs/program" / current["path"]
+        current_payload = json.loads(current_path.read_text(encoding="utf-8"))
+        for relative in [current["path"]] + [item["path"] for item in current_payload["evidence"]]:
+            target = repo / "docs/program" / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(ROOT / "docs/program" / relative, target)
         source_evidence = ROOT / "docs/program/evidence/devsy-convergence-20261010"
         destination_evidence = repo / "docs/program/evidence/devsy-convergence-20261010"
         destination_evidence.mkdir(parents=True, exist_ok=True)
@@ -350,7 +362,8 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         )
         ledger = json.loads((repo / "docs/program/community-program-ledger.json").read_text(encoding="utf-8"))
         row127 = next(row for row in ledger["issues"] if row["issue"] == 127)
-        self.assertIn("e10e9f60", row127["next_bounded_action"])
+        self.assertEqual(282, row127["checkpoint_pr"])
+        self.assertIn("authorized-artifact", row127["next_bounded_action"])
         outputs = [
             (repo / relative).read_bytes()
             for relative in (

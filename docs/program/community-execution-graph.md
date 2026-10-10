@@ -1,10 +1,10 @@
 # Actions operational execution graph
 
-Worker-stage observation: 2026-10-10T06:22:05Z. All 54 retained contracts remain unfinished except accepted whole issue #210; this overlay does not change their raw states.
+Worker-stage observation: 2026-10-10T07:13:00Z. All 54 retained contracts remain unfinished except accepted whole issue #210; this overlay does not change their raw states.
 
 Relationship semantics: execution prerequisites gate only the identified implementation slice; parent/coordination and product/related edges never block execution; aggregation edges contribute to full parent acceptance. Only execution edges enter cycle/topological validation.
 
-Counts: READY=0, ACTIVE=8, REVIEW=8, BLOCKED=28, INTEGRATED=9, COMPLETE=1.
+Counts: READY=0, ACTIVE=8, REVIEW=9, BLOCKED=28, INTEGRATED=8, COMPLETE=1.
 
 | Issue | Stage | Execution prerequisites | Parent / coordination | Related / product direction | Full-acceptance aggregation | Partial checkpoint | Next bounded action |
 |---|---|---|---|---|---|---|---|
@@ -27,8 +27,8 @@ Counts: READY=0, ACTIVE=8, REVIEW=8, BLOCKED=28, INTEGRATED=9, COMPLETE=1.
 | [#101](https://github.com/joshyorko/actions/issues/101) | ACTIVE | None | None | None | #93 | #220 | Preserve all 54 contracts, exact worker ownership, failed publication and warm-restart evidence; no completion from checkpoint counts. |
 | [#125](https://github.com/joshyorko/actions/issues/125) | INTEGRATED | None | None | None | None | #128 | Retain verified template guidance/archive cleanup while completing the remaining active product-surface, build and MCP contract. |
 | [#126](https://github.com/joshyorko/actions/issues/126) | ACTIVE | None | #93, #101 | #71, #99, #100, #127 | None | #219 | Continue independent artifact verification and remaining #126 protocol/host criteria; do not promote the Linux offline template proof to whole-issue acceptance. |
-| [#127](https://github.com/joshyorko/actions/issues/127) | ACTIVE | None | #93, #101 | #71 | None | See ledger | Review/publish local template checkpoint e10e9f60, then resolve TypeScript, opt-in Runtime/browser, Core 1.0.3 fresh-project dependency, and caller-authorized artifact resolver gates. Whole #127 remains open. |
-| [#129](https://github.com/joshyorko/actions/issues/129) | INTEGRATED | None | None | None | None | #250 | Continue only after verifying the merged contract and its prerequisites; keep production migration, revision admission, and full Deployment acceptance open. |
+| [#127](https://github.com/joshyorko/actions/issues/127) | REVIEW | None | #93, #101 | #71 | None | #282 | Clear fresh dependency resolution, TypeScript and opt-in Runtime/browser gates; route authorized-artifact dependency through #129/#83 common contracts, not a private resolver. |
+| [#129](https://github.com/joshyorko/actions/issues/129) | ACTIVE | None | None | None | None | #250 | Complete independent review of66b683, push recoverable checkpoint, then run exact-head gates; do not implement persistence/API/resolver under this slice. |
 | [#130](https://github.com/joshyorko/actions/issues/130) | BLOCKED | None | None | None | None | See ledger | Await the existing Devsy coordinator supervisor dispatch, then implement the bounded immutable Package Revision schema and deterministic fixtures against accepted criterion 129:deployment-reference-envelope; keep full #129 production, #130 acceptance and the #135/#136 order unchanged. |
 | [#131](https://github.com/joshyorko/actions/issues/131) | BLOCKED | #125, #129, #130 | None | None | None | See ledger | Define provider data/knowledge references and authorized operations without product-tier coupling. |
 | [#132](https://github.com/joshyorko/actions/issues/132) | BLOCKED | #83, #90, #129 | None | None | None | See ledger | Implement durable business queue/review/lease semantics separately from Run ownership. |
@@ -83,6 +83,8 @@ Counts: READY=0, ACTIVE=8, REVIEW=8, BLOCKED=28, INTEGRATED=9, COMPLETE=1.
 | 99-A:system-chromium-runtime-bridge | #99 | ACCEPTED_SYSTEM_CHROMIUM_RUNTIME_SLICE | The same built MCP App resource was exercised through Actions Runtime and the public bridge with system Chromium, with five persisted Runtime runs. Pinned Playwright browser, actual ChatGPT host, and whole #99 are not proven. Evidence: Root accepted bounded 99-A evidence after independent Canvas review. The exact receipt binds wheel, installed module, resource hash, system Chromium and five persisted runs; pinned Playwright and actual host remain unverified. |
 | 98:canvas-artifact-consumed-resource-127 | #98 | ACCEPTED_CONSUMED_RESOURCE_SLICE | The template can consume the exact Canvas resource artifact and its recorded MIME/URI/SHA; this does not accept full #98 artifact inventory, frozen package, or reproducibility requirements. Evidence: Root accepted the consumed-resource criterion for starting the bounded template slice; whole #98 remains open. |
 | 125:public-package-boundary-template-127 | #125 | ACCEPTED_TEMPLATE_PUBLIC_BOUNDARY_ONLY | Use the public decorator/candidate-wheel authoring boundary for this template. No Canvas package archive or full #125 acceptance is established. Evidence: Root accepted the bounded public-package boundary consumed by #127 after source review; whole #125 and Canvas package archive remain open. |
+| 129:canonical-values-design-1a | #129 | ACCEPTED_DESIGN_FOR_IMPLEMENTATION_ONLY | Owner-approved pure canonical values and typed reference Slice1a Evidence: Owner approved only Slice1a; implementation is active and independently reviewed, with final copied-instance verification pending. |
+| 127:offline-template-checkpoint | #127 | ACCEPTED_OFFLINE_CHECKPOINT_ONLY | Reviewed offline template and fresh extracted project checkpoint Evidence: Draft PR282 preserves reviewed offline template implementation; full template acceptance still requires compatible published Core, Runtime/browser and authorized artifact semantics. |
 
 ## Canvas implementation slices
 
@@ -98,7 +100,8 @@ Counts: READY=0, ACTIVE=8, REVIEW=8, BLOCKED=28, INTEGRATED=9, COMPLETE=1.
 | 100-A: Public tool UI metadata and ui:// resource authoring/serving | #100 | ACCEPTED_BOUNDED_SLICE; not whole #100 acceptance. | 125:public-package-boundary, 100-A:bounded-public-authoring |
 | 100-B: Versioned CanvasSpec interchange and Python/JSON/TypeScript fixture | #100 | ACCEPTED_SINGLE_FIXTURE_ROUNDTRIP_ONLY; generalized CanvasSpec and whole #100 remain open. | 100-B:single-fixture-python-json-roundtrip |
 | 99-A: Portable MCP App View renderer/resource bridge using the agreed fixture | #99 | ACCEPTED_SYSTEM_CHROMIUM_RUNTIME_SLICE; pinned Playwright, actual ChatGPT host and whole #99 remain open. | 97:ui-foundation, 98:canvas-artifact, 99-A:system-chromium-runtime-bridge |
-| 127-template: Packaged Canvas query template using accepted authoring and renderer slices | #127 | READY_FOR_BOUNDED_TEMPLATE_IMPLEMENTATION; implementation is ACTIVE and NOT_COMPLETE. | 100-A, 100-B, 99-A, 125:public-package-boundary, 98:canvas-artifact, 98:canvas-artifact-consumed-resource-127, 125:public-package-boundary-template-127 |
+| 129-1a: Owner-approved pure canonical values and typed reference Slice1a | #129 | ACTIVE; NOT_COMPLETE | 129:canonical-values-design-1a |
+| 127-template: Reviewed offline template and fresh extracted project checkpoint | #127 | REVIEW; NOT_COMPLETE | 100-A, 100-B, 99-A, 125:public-package-boundary, 98:canvas-artifact, 98:canvas-artifact-consumed-resource-127, 125:public-package-boundary-template-127, 127:offline-template-checkpoint |
 
 ## Supplemental program amendments (outside the retained 54 issue contracts)
 
@@ -167,3 +170,12 @@ Sol accepted the scoped #279 production source contract, and root ran the compos
 
 | Supplemental gate | Status | Accounting | Scope and evidence |
 |---|---|---|---|
+
+### program-amendment-20261010T0713Z — 2026-10-10T07:13:00Z
+
+PR273 f7c6ed61 includes the accepted integration and narrow Windows canonical-fixture checkout repair; current-head Runtime CI remains pending. Canvas #127 draft PR282 preserves reviewed offline template work. Approved #129 Slice 1a has a local pure-value implementation under independent review. Real RCC provider rollback hosted admission is under review. All 54 original contracts remain: 53 open, only #210 accepted/closed. Devsy native reads fail with KubernetesError; existing worktrees/threads are preserved.
+
+| Supplemental gate | Status | Accounting | Scope and evidence |
+|---|---|---|---|
+| `#129` 129:canonical-values-design-1a → `129-1a` | ACCEPTED_DESIGN_FOR_IMPLEMENTATION_ONLY | scoped criterion only | Owner-approved pure canonical values and typed reference Slice1a Decision: Owner approved only Slice1a; implementation is active and independently reviewed, with final copied-instance verification pending. Evidence: [evidence/issue-129-slice1a-approval-20261010.json](evidence/issue-129-slice1a-approval-20261010.json) (SHA-256 `3c869281a7ebc84061520c1f4b7ced0f76875fa35dd3c08bb82a6b13525376f5`).
+| `#127` 127:offline-template-checkpoint → `127-template` | ACCEPTED_OFFLINE_CHECKPOINT_ONLY | scoped criterion only | Reviewed offline template and fresh extracted project checkpoint Decision: Draft PR282 preserves reviewed offline template implementation; full template acceptance still requires compatible published Core, Runtime/browser and authorized artifact semantics. Evidence: [evidence/canvas-b794-root-final-review.log](evidence/canvas-b794-root-final-review.log) (SHA-256 `d7b8be751022b0a1e160ab361d3a9530776dba5a533e064b8bd36e896df3db50`).
