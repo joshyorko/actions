@@ -1610,6 +1610,16 @@ cases on Linux, Windows, and macOS; never make missing executable or manifest
 variables a skip. Keep the separate generic Runtime gate for non-native
 integration coverage.
 
+The frozen Runtime packages RCC `v18.19.3` as a pinned executable under
+`_internal/actions/server/bin`. PyInstaller may report package-data destinations
+with native Windows backslashes; normalize both source and destination
+separators when selecting RCC data in the spec. Native artifact acceptance must
+find the platform-specific pinned RCC file in the frozen-package inventory
+before starting the Runtime server (or after the Go wrapper's version-only
+extraction, which returns before RCC initialization). A later runtime download
+may be recorded as a separate tree delta, but cannot establish that RCC shipped
+in the artifact.
+
 The real-browser Origin and ambient-session acceptance in
 `test_browser_origin_acceptance.py` runs Chromium against the actual Runtime
 HTTP server. Its Node HTTP requests and browser `fetch` calls have independent
