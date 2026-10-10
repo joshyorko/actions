@@ -7,6 +7,7 @@ import json
 import platform
 import subprocess
 import stat
+import tarfile
 import zipfile
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath, PureWindowsPath
@@ -17,6 +18,65 @@ from write_native_artifact_manifest import (
     packaged_tree_sha256,
     sha256,
 )
+
+MAX_NATIVE_TREE_ENTRIES = 100_000
+MAX_NATIVE_FILE_BYTES = 2 * 1024**3
+MAX_NATIVE_TOTAL_BYTES = 8 * 1024**3
+MAX_NATIVE_MANIFEST_BYTES = 4 * 1024**2
+MAX_NATIVE_INVENTORY_BYTES = 64 * 1024**2
+MAX_NATIVE_PROVENANCE_BYTES = 2 * 1024**3
+MAX_NATIVE_ASSETS_ZIP_BYTES = 8 * 1024**3
+
+
+def _check_bounded_tree(root: Path) -> None:
+    count = 0
+    total_bytes = 0
+    for path in root.rglob("*"):
+        count += 1
+        if count > MAX_NATIVE_TREE_ENTRIES:
+            raise ValueError("native package exceeds the entry-count limit")
+        metadata = path.lstat()
+        if stat.S_ISREG(metadata.st_mode):
+            size = metadata.st_size
+        elif stat.S_ISLNK(metadata.st_mode):
+            try:
+                target = path.resolve(strict=True)
+            except (OSError, RuntimeError) as error:
+                raise ValueError("native package symlink target is invalid") from error
+            size = target.stat().st_size if target.is_file() else 0
+        elif stat.S_ISDIR(metadata.st_mode):
+            size = 0
+        else:
+            raise ValueError("native package contains an unsupported filesystem entry")
+        if size > MAX_NATIVE_FILE_BYTES:
+            raise ValueError("native package file exceeds the per-file size limit")
+        total_bytes += size
+        if total_bytes > MAX_NATIVE_TOTAL_BYTES:
+            raise ValueError("native package exceeds the aggregate size limit")
+
+
+def _check_tar_member_limit(path: Path) -> None:
+    if path.stat().st_size > MAX_NATIVE_PROVENANCE_BYTES:
+        raise ValueError("native provenance archive exceeds the size limit")
+    try:
+        with tarfile.open(path, "r:*") as archive:
+            declared_bytes = 0
+            for count, member in enumerate(archive, start=1):
+                if count > MAX_NATIVE_TREE_ENTRIES + 2:
+                    raise ValueError(
+                        "native provenance archive exceeds the member limit"
+                    )
+                if member.size < 0 or member.size > MAX_NATIVE_FILE_BYTES:
+                    raise ValueError(
+                        "native provenance member exceeds the per-file size limit"
+                    )
+                declared_bytes += member.size
+                if declared_bytes > MAX_NATIVE_TOTAL_BYTES:
+                    raise ValueError(
+                        "native provenance exceeds the aggregate size limit"
+                    )
+    except (OSError, tarfile.TarError) as error:
+        raise ValueError("native provenance archive is invalid") from error
 
 
 @dataclass(frozen=True)
@@ -65,7 +125,17 @@ def validate_native_artifact(
     manifest_path = manifest_path.resolve(strict=True)
     inventory_path = inventory_path.resolve(strict=True)
     provenance_path = provenance_path.resolve(strict=True)
-    frozen_tree = package_root / "dist" / "action-server"
+    frozen_tree = (package_root / "dist" / "action-server").resolve(strict=True)
+    if not frozen_tree.is_relative_to(package_root) or not frozen_tree.is_dir():
+        raise ValueError("native frozen package root escapes selected bundle")
+    for path, limit, label in (
+        (manifest_path, MAX_NATIVE_MANIFEST_BYTES, "manifest"),
+        (inventory_path, MAX_NATIVE_INVENTORY_BYTES, "inventory"),
+    ):
+        if path.stat().st_size > limit:
+            raise ValueError(f"native provenance {label} exceeds the size limit")
+    _check_bounded_tree(frozen_tree)
+    _check_tar_member_limit(provenance_path)
     manifest, entries, manifest_bytes, inventory_bytes = provenance._measure(
         frozen_tree, manifest_path, inventory_path
     )
@@ -136,13 +206,12 @@ def validate_native_artifact(
         if assets_zip_path is None:
             raise ValueError("Go-wrapper mode requires its measured assets archive")
         assets_zip_path = assets_zip_path.resolve(strict=True)
+        if assets_zip_path.stat().st_size > MAX_NATIVE_ASSETS_ZIP_BYTES:
+            raise ValueError("Go-wrapper assets archive exceeds the size limit")
         if sha256(assets_zip_path) != assets_sha:
             raise ValueError("Go-wrapper assets archive hash does not match manifest")
         try:
             with zipfile.ZipFile(assets_zip_path) as assets:
-                bad_member = assets.testzip()
-                if bad_member is not None:
-                    raise ValueError("Go-wrapper assets archive is corrupt")
                 expected_files = {
                     str(entry["path"]): str(entry["content_sha256"])
                     for entry in entries
@@ -150,7 +219,27 @@ def validate_native_artifact(
                     or (entry["kind"] == "symlink" and entry["content_sha256"])
                 }
                 observed_files = {}
-                for member in assets.infolist():
+                members = assets.infolist()
+                if len(members) > MAX_NATIVE_TREE_ENTRIES:
+                    raise ValueError(
+                        "Go-wrapper assets archive exceeds the member limit"
+                    )
+                total_uncompressed = 0
+                total_read = 0
+                for member in members:
+                    if (
+                        member.file_size > MAX_NATIVE_FILE_BYTES
+                        or member.file_size < 0
+                        or member.compress_size < 0
+                    ):
+                        raise ValueError(
+                            "Go-wrapper assets archive member exceeds size limits"
+                        )
+                    total_uncompressed += member.file_size
+                    if total_uncompressed > MAX_NATIVE_TOTAL_BYTES:
+                        raise ValueError(
+                            "Go-wrapper assets archive exceeds aggregate size limit"
+                        )
                     path = PurePosixPath(member.filename)
                     windows_path = PureWindowsPath(member.filename)
                     if (
@@ -167,8 +256,26 @@ def validate_native_artifact(
                         raise ValueError(
                             "Go-wrapper assets archive member path is invalid"
                         )
-                    digest = hashlib.sha256(assets.read(member)).hexdigest()
-                    observed_files[path.as_posix()] = digest
+                    digest = hashlib.sha256()
+                    member_read = 0
+                    try:
+                        with assets.open(member, "r") as stream:
+                            while chunk := stream.read(1024 * 1024):
+                                member_read += len(chunk)
+                                total_read += len(chunk)
+                                if (
+                                    member_read > MAX_NATIVE_FILE_BYTES
+                                    or total_read > MAX_NATIVE_TOTAL_BYTES
+                                ):
+                                    raise ValueError(
+                                        "Go-wrapper assets archive exceeds observed size limits"
+                                    )
+                                digest.update(chunk)
+                    except (OSError, zipfile.BadZipFile, RuntimeError) as error:
+                        raise ValueError(
+                            "Go-wrapper assets archive member is corrupt"
+                        ) from error
+                    observed_files[path.as_posix()] = digest.hexdigest()
                 if observed_files != expected_files:
                     raise ValueError(
                         "Go-wrapper assets archive files do not match inventory"
@@ -221,6 +328,9 @@ def validate_go_extraction(
     extracted = versions[0].resolve(strict=True)
     if not extracted.is_relative_to(internal_root.resolve(strict=True)):
         raise ValueError("Go-wrapper extracted package escapes its task-owned home")
+    if inventory_path.stat().st_size > MAX_NATIVE_INVENTORY_BYTES:
+        raise ValueError("native package inventory exceeds the size limit")
+    _check_bounded_tree(extracted)
     app_hash = extracted / "app_hash"
     if (
         not app_hash.is_file()

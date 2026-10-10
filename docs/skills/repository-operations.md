@@ -3050,6 +3050,15 @@ preserve the frozen tree's symlink and directory metadata. Receipts keep
 `runtime_mode=candidate-wheel` and identify the separately selected
 `action_server_mode`; source-mode success does not establish native execution.
 The offline positive cells retain their existing meanings for every mode.
+The verifier is also imported by path from existing browser-origin and source-
+staging harnesses, so helper loading must use exact sibling files without
+adding the scripts directory to global `sys.path`. Native tree, provenance TAR,
+and ZIP measurement belongs inside the existing owned worker watchdog and the
+same proof deadline. Bound entry counts and declared/observed bytes before
+building inventories, stream ZIP member hashes in fixed-size chunks, and
+require the resolved frozen companion tree to remain inside the selected
+package root. These checks bound validation work and prevent an external
+symlinked companion from being accepted as part of a selected bundle.
 
 When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
 `VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run

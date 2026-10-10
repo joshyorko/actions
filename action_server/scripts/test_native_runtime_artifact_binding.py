@@ -11,12 +11,23 @@ from pathlib import Path
 import pytest
 
 SCRIPT_DIR = Path(__file__).parent
-if str(SCRIPT_DIR) not in sys.path:
-    sys.path.insert(0, str(SCRIPT_DIR))
 
-import archive_native_artifact_provenance as archive_writer  # noqa: E402
-import write_native_artifact_manifest as manifest_writer  # noqa: E402
-import native_runtime_artifact_binding as binding  # noqa: E402
+
+def _sibling(name: str):
+    existing = sys.modules.get(name)
+    if existing is not None:
+        return existing
+    spec = importlib.util.spec_from_file_location(name, SCRIPT_DIR / f"{name}.py")
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+manifest_writer = _sibling("write_native_artifact_manifest")
+archive_writer = _sibling("archive_native_artifact_provenance")
+binding = _sibling("native_runtime_artifact_binding")
 
 VERIFIER_PATH = SCRIPT_DIR / "verify_dakota_rcc_acceptance.py"
 
@@ -119,6 +130,20 @@ def test_native_mode_requires_complete_bound_package_and_exact_selector(tmp_path
     assert str(result.selector_path) == str(
         (package / "dist/action-server/action-server").resolve()
     )
+
+
+def test_native_binding_rejects_companion_tree_outside_selected_bundle(tmp_path):
+    package, manifest, inventory, provenance, _, _ = _fixture(tmp_path)
+    frozen = package / "dist/action-server"
+    external = tmp_path / "external/action-server"
+    external.parent.mkdir(parents=True)
+    frozen.rename(external)
+    frozen.symlink_to(external, target_is_directory=True)
+
+    with pytest.raises(ValueError, match="escapes selected bundle"):
+        binding.validate_native_artifact(
+            "frozen", package, manifest, inventory, provenance
+        )
 
 
 def test_go_wrapper_requires_exact_embedded_zip_and_binds_extraction(tmp_path):
@@ -275,10 +300,9 @@ def test_supervisor_forwards_only_explicit_native_artifact_inputs(tmp_path):
             str(receipt),
         ]
     )
-    native_binding = verifier._native_binding_from_args(args)
-    assert native_binding is not None
+    verifier._validate_native_argument_shape(args)
 
-    command = verifier._worker_command(args, native_binding)
+    command = verifier._worker_command(args)
 
     assert command[command.index("--action-server-mode") + 1] == "frozen"
     assert command[command.index("--native-package-root") + 1] == str(package)
@@ -292,10 +316,35 @@ def test_source_supervisor_command_does_not_forward_native_artifacts(tmp_path):
     verifier = _verifier()
     args = verifier._parser().parse_args(["--receipt", str(tmp_path / "receipt.json")])
 
-    command = verifier._worker_command(args, None)
+    command = verifier._worker_command(args)
 
     assert command[command.index("--action-server-mode") + 1] == "source"
     assert not any(argument.startswith("--native-") for argument in command)
+
+
+def test_verifier_and_helpers_import_by_path_without_scripts_sys_path(tmp_path):
+    code = (
+        "import importlib.util,sys; "
+        f"script={str(VERIFIER_PATH)!r}; "
+        f"scripts={str(SCRIPT_DIR)!r}; "
+        "assert scripts not in sys.path; "
+        "spec=importlib.util.spec_from_file_location('isolated_verifier',script); "
+        "module=importlib.util.module_from_spec(spec); "
+        "spec.loader.exec_module(module); "
+        "assert scripts not in sys.path; "
+        "assert module._native_binding.__file__ == scripts + '/native_runtime_artifact_binding.py'; "
+        "assert sys.modules['archive_native_artifact_provenance'].__file__ == scripts + '/archive_native_artifact_provenance.py'; "
+        "print('isolated sibling import PASS')"
+    )
+    result = subprocess.run(
+        [sys.executable, "-c", code],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        timeout=10,
+    )
+    assert result.returncode == 0, result.stderr
+    assert result.stdout.strip() == "isolated sibling import PASS"
 
 
 def test_verifier_has_explicit_go_wrapper_mode(tmp_path):

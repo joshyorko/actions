@@ -24,9 +24,6 @@ CURRENT_RECEIPT = (
 
 
 def _harness():
-    scripts_path = str(SCRIPT.parent)
-    if scripts_path not in sys.path:
-        sys.path.insert(0, scripts_path)
     spec = importlib.util.spec_from_file_location("dakota_rcc_acceptance", SCRIPT)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)

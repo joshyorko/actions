@@ -8,6 +8,7 @@ import ctypes
 from email.parser import Parser
 import hashlib
 import http.server
+import importlib.util
 import json
 import math
 import os
@@ -23,11 +24,38 @@ from pathlib import Path
 from typing import NamedTuple
 from urllib.parse import urlsplit
 
-from native_runtime_artifact_binding import (
-    ValidatedNativeArtifact,
-    validate_go_extraction,
-    validate_native_artifact,
-)
+
+def _load_sibling_module(name: str):
+    """Load a verifier helper from this directory without changing sys.path."""
+
+    helper_path = Path(__file__).resolve().with_name(f"{name}.py")
+    module = sys.modules.get(name)
+    if module is not None:
+        loaded_path = getattr(module, "__file__", None)
+        if loaded_path is None or Path(loaded_path).resolve() != helper_path:
+            raise ImportError(f"unexpected module already registered for {name}")
+        return module
+    spec = importlib.util.spec_from_file_location(name, helper_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"unable to load verifier helper {name}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    try:
+        spec.loader.exec_module(module)
+    except BaseException:
+        sys.modules.pop(name, None)
+        raise
+    return module
+
+
+# These helpers have existing sibling imports. Register each exact sibling
+# before loading its consumer; importlib-by-path callers need no scripts path.
+_load_sibling_module("write_native_artifact_manifest")
+_load_sibling_module("archive_native_artifact_provenance")
+_native_binding = _load_sibling_module("native_runtime_artifact_binding")
+ValidatedNativeArtifact = _native_binding.ValidatedNativeArtifact
+validate_go_extraction = _native_binding.validate_go_extraction
+validate_native_artifact = _native_binding.validate_native_artifact
 
 RCC_VERSION = "v18.19.3"
 RCC_SHA256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
@@ -1317,8 +1345,9 @@ def _run(
     *,
     action_server_mode: str = "source",
     native_binding: ValidatedNativeArtifact | None = None,
+    deadline: Deadline | None = None,
 ) -> dict[str, object]:
-    deadline = Deadline.after(PROOF_TIMEOUT_SECONDS)
+    deadline = deadline or Deadline.after(PROOF_TIMEOUT_SECONDS)
     source_env = dict(os.environ)
     repo_root = Path(__file__).resolve().parents[2]
     if receipt_path.expanduser().resolve().exists():
@@ -2083,7 +2112,7 @@ def require_supported_platform() -> None:
         raise RuntimeError("Dakota RCC acceptance cleanup is verified on Linux only")
 
 
-def _native_binding_from_args(args) -> ValidatedNativeArtifact | None:
+def _validate_native_argument_shape(args) -> None:
     native_values = (
         args.native_package_root,
         args.native_build_manifest,
@@ -2094,13 +2123,21 @@ def _native_binding_from_args(args) -> ValidatedNativeArtifact | None:
     if args.action_server_mode == "source":
         if any(value is not None for value in native_values):
             raise ValueError("source mode does not accept native artifact inputs")
-        return None
+        return
     if any(value is None for value in native_values[:4]):
         raise ValueError(
             "native mode requires package, manifest, inventory, and provenance"
         )
     if args.action_server_mode == "frozen" and args.native_assets_zip is not None:
         raise ValueError("frozen mode does not accept Go-wrapper asset inputs")
+    if args.action_server_mode == "go-wrapper" and args.native_assets_zip is None:
+        raise ValueError("Go-wrapper mode requires its measured assets archive")
+
+
+def _native_binding_from_args(args) -> ValidatedNativeArtifact | None:
+    _validate_native_argument_shape(args)
+    if args.action_server_mode == "source":
+        return None
     return validate_native_artifact(
         args.action_server_mode,
         args.native_package_root,
@@ -2119,7 +2156,7 @@ def _receipt_native_binding(
     return binding.receipt
 
 
-def _worker_command(args, native_binding: ValidatedNativeArtifact | None) -> list[str]:
+def _worker_command(args) -> list[str]:
     command = [
         sys.executable,
         str(Path(__file__).resolve()),
@@ -2128,7 +2165,7 @@ def _worker_command(args, native_binding: ValidatedNativeArtifact | None) -> lis
         "--receipt",
         str(args.receipt.expanduser().resolve()),
     ]
-    if native_binding is not None:
+    if args.action_server_mode != "source":
         command.extend(
             [
                 "--native-package-root",
@@ -2176,7 +2213,7 @@ def main(argv: list[str] | None = None) -> int:
     if not _cli_platform_is_supported():
         return 2
     try:
-        native_binding = _native_binding_from_args(args)
+        _validate_native_argument_shape(args)
     except Exception as exc:
         print(
             f"Dakota RCC acceptance failed: {type(exc).__name__}: {exc}",
@@ -2200,7 +2237,7 @@ def main(argv: list[str] | None = None) -> int:
                 extra=extra,
             )
             completed = run_owned_process(
-                _worker_command(args, native_binding),
+                _worker_command(args),
                 timeout_seconds=CLI_WATCHDOG_SECONDS,
                 env=worker_env,
             )
@@ -2230,10 +2267,16 @@ def main(argv: list[str] | None = None) -> int:
             sys.stderr.write(completed.stderr)
         return completed.returncode
     try:
+        # Native tree, tar, and ZIP measurements are potentially large. Keep
+        # them inside this worker, under the parent's owned-process watchdog,
+        # and charge them against the same total proof deadline.
+        deadline = Deadline.after(PROOF_TIMEOUT_SECONDS)
+        native_binding = _native_binding_from_args(args)
         result = _run(
             args.receipt,
             action_server_mode=args.action_server_mode,
             native_binding=native_binding,
+            deadline=deadline,
         )
     except Exception as exc:
         print(
