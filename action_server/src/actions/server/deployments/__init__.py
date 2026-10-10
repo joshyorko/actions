@@ -1,0 +1,67 @@
+"""Pure typed values for deployment revision contracts.
+
+These values validate identity syntax and explicit scope only. They do not
+establish that referenced objects exist or that a caller may use them.
+"""
+
+from .canonical import CanonicalJSONError, canonicalize_json, parse_canonical_json
+from .ids import (
+    BindingRequirementId,
+    BindingRequirementRef,
+    CapabilityId,
+    CapabilityRef,
+    DeploymentId,
+    DeploymentRevisionId,
+    DeploymentRevisionRef,
+    PackageId,
+    PackageScopedRef,
+    PackageRevisionId,
+    PackageRevisionRef,
+    PlanDigest,
+    PolicyRevisionId,
+    PolicyId,
+    ProviderProfileId,
+    ProviderProfileRevisionId,
+    ProviderProfileRevisionRef,
+    RuntimePlanRef,
+    WorkerProfileId,
+    WorkerProfileRevisionId,
+    WorkerProfileRevisionRef,
+    WorkspaceId,
+    WorkspaceScopedRef,
+    WorkspacePolicyRevisionRef,
+    require_package_scope,
+    require_workspace_scope,
+)
+
+__all__ = [
+    "BindingRequirementId",
+    "BindingRequirementRef",
+    "CanonicalJSONError",
+    "CapabilityId",
+    "CapabilityRef",
+    "DeploymentId",
+    "DeploymentRevisionId",
+    "DeploymentRevisionRef",
+    "PackageId",
+    "PackageScopedRef",
+    "PackageRevisionId",
+    "PackageRevisionRef",
+    "PlanDigest",
+    "PolicyRevisionId",
+    "PolicyId",
+    "ProviderProfileId",
+    "ProviderProfileRevisionId",
+    "ProviderProfileRevisionRef",
+    "RuntimePlanRef",
+    "WorkerProfileId",
+    "WorkerProfileRevisionId",
+    "WorkerProfileRevisionRef",
+    "WorkspaceId",
+    "WorkspaceScopedRef",
+    "WorkspacePolicyRevisionRef",
+    "canonicalize_json",
+    "parse_canonical_json",
+    "require_package_scope",
+    "require_workspace_scope",
+]
