@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-10T11:28:52.907901379Z",
+  "pull_request": 285,
+  "head": "04fa0feac3d5489096fd2959a6646edc442729cc",
+  "base": "31239cf99c7b264a0eab89660e93b391532ac305",
+  "check_count": {
+    "total": 20,
+    "success": 18,
+    "failure": 2
+  },
+  "failed_jobs": [
+    {
+      "platform": "Windows",
+      "run_id": 38042377995,
+      "job_id": 114185019296
+    },
+    {
+      "platform": "macOS",
+      "run_id": 38042377995,
+      "job_id": 114185019428
+    }
+  ],
+  "shared_failure": {
+    "test": "action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+    "failure": "TimeoutError at actions/server/_selftest.py:198",
+    "command": "rcc holotree variables --no-retry-build",
+    "configured_timeout": "approximately 30 seconds",
+    "last_completed_phase": "Action Server started; package_a import and bundled RCC 18.19.3 hash succeeded; initial holotree environment bootstrap then timed out before reload/recovery assertions.",
+    "behavioral_result": "The test did not reach its reload/recovery assertions; those assertions remain unverified on these two jobs."
+  },
+  "owner_action": "luna_frozen_platform_fix owns the preserved worktree, normally merged with 2286, for a bounded cold-start deadline fix. A local origin read at 385f was stale and did not change remote PR head 04fa0fe.",
+  "source_ci_inventory": "evidence/convergence-ci-inventory-20261010T1139Z.json",
+  "source_ci_inventory_sha256": "c992023c48a86c982763a2e2b0c17afa5319ddc1647f3acd3c77a609512242fb",
+  "independent_linux_acceptance": {
+    "run_id": 38042374430,
+    "candidate": "31239cf99c7b264a0eab89660e93b391532ac305",
+    "tests": 4,
+    "passed": 4,
+    "skipped": 0,
+    "verdict": "Independently accepted current-source Linux frozen managed four-case rollback/recovery gate.",
+    "review_copy": "evidence/pr285-frozen-review-20261010T1139Z/independent-review-receipt.json"
+  },
+  "upstream_disposition": "No upstream issue was filed; the observed timeout occurs during this repository’s initial managed-RCC bootstrap before the tested behavior."
+}

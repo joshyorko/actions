@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-10T11:39:23Z",
+  "pull_request": 284,
+  "status": "MERGED",
+  "head": "c7c18da18f2dfc1134773ea725c7b7de38c14e5c",
+  "merge_commit": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+  "merge_tree": "a3d627658f116525c96e0da83aafa37b2ec59413",
+  "parents": [
+    "31239cf99c7b264a0eab89660e93b391532ac305",
+    "c7c18da18f2dfc1134773ea725c7b7de38c14e5c"
+  ],
+  "admission_comment_id": "6097077908",
+  "github_readback": "Root verified the GitHub merge result. This governance writer did not call a remote mutation or alter GitHub.",
+  "exact_head_checks": {
+    "total": 14,
+    "success": 14,
+    "failure": 0,
+    "source_ci_inventory": "evidence/convergence-ci-inventory-20261010T1139Z.json",
+    "source_ci_inventory_sha256": "c992023c48a86c982763a2e2b0c17afa5319ddc1647f3acd3c77a609512242fb",
+    "run_ids": [
+      38040253315,
+      38040253316,
+      38040253344,
+      38040253360,
+      38040253364
+    ],
+    "checks": [
+      {
+        "name": "publish (3.12)",
+        "conclusion": "success"
+      },
+      {
+        "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+        "conclusion": "success"
+      },
+      {
+        "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+        "conclusion": "success"
+      },
+      {
+        "name": "build-wheels (windows-2022)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build-wheels (ubuntu-22.04)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build-wheels (macos-15)",
+        "conclusion": "success"
+      },
+      {
+        "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+        "conclusion": "success"
+      },
+      {
+        "name": "coverage",
+        "conclusion": "success"
+      },
+      {
+        "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+        "conclusion": "success"
+      },
+      {
+        "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+        "conclusion": "success"
+      },
+      {
+        "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+        "conclusion": "success"
+      },
+      {
+        "name": "audit",
+        "conclusion": "success"
+      },
+      {
+        "name": "build-sdist (ubuntu-py3.12)",
+        "conclusion": "success"
+      },
+      {
+        "name": "copilot-setup-steps",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "independent_refresh_review": {
+    "path": "evidence/current-integration-refresh-review.json",
+    "sha256": "93b1d7452c5d73de184595cfda2a1570bbf64f983011133339a38630e445893a",
+    "verdict": "ACCEPT refresh for publication and current-head PR CI",
+    "scope": "PR284 normal merge refresh and unchanged accepted RCC control; historical narrow receipts retain their original exact source scope."
+  },
+  "prior_ci_inventory_metadata_limit": "The 2026-10-10T11:28:52.907901379Z inventory was collected before the merge and still lists PR284 open; its exact c7c18da checks remain valid. This root-verified merge receipt supersedes only the PR state.",
+  "upstream_disposition": "No upstream issue was filed in this governance task."
+}

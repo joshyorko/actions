@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-10T11:28:52.907901379Z",
+  "pull_request": 282,
+  "head": "bab27a93664494965db8a86761ea5685a3be6618",
+  "base": "31239cf99c7b264a0eab89660e93b391532ac305",
+  "check_count": {
+    "total": 19,
+    "success": 13,
+    "failure": 6
+  },
+  "failed_job_ids": [
+    114186015017,
+    114186014929,
+    114186014668,
+    114186014917,
+    114186014813,
+    114186014516
+  ],
+  "shared_failure": {
+    "test": "contract_tests/test_active_contracts.py::test_template_manifests_pin_supported_worker_core",
+    "line": 396,
+    "expected": "actions-core=1.0.2",
+    "observed": "templates/canvas-query/package.yaml declares actions-core=1.0.3",
+    "cause": "The production template catalog exposes a template requiring unpublished Actions Core 1.0.3, below the supported published-Core floor."
+  },
+  "attribution": "All six failures share this same contract assertion across OS devmode, Ubuntu toolkit, and coverage jobs; there are no additional platform-specific failures in this snapshot.",
+  "scope": "Candidate Runtime/browser pass remains separate from production availability. Keep the published-Core assertion unchanged; do not add a test exception or claim whole #282 acceptance.",
+  "source_ci_inventory": "evidence/convergence-ci-inventory-20261010T1139Z.json",
+  "source_ci_inventory_sha256": "c992023c48a86c982763a2e2b0c17afa5319ddc1647f3acd3c77a609512242fb",
+  "prior_production_floor_receipt": {
+    "path": "evidence/canvas-282-production-floor.json",
+    "sha256": "a3fe3d9f47b28ab833691958110e6a6119a2a5fa439c7a0b96f41ca15d7f9842"
+  },
+  "upstream_disposition": "No upstream issue was filed; the observed floor failure is in this repository’s supported-worker contract."
+}

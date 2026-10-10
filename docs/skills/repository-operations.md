@@ -196,6 +196,15 @@ Before committing an evidence archive, verify each selected receipt's bytes
 against its ledger SHA-256 and reject absolute or parent-traversal archive
 paths. Preserve running and skipped CI states separately from passing results.
 
+When platform, toolkit, or coverage jobs fail at the same test node and
+assertion, retain each job receipt and group the failures under their shared
+cause. For a process timeout, record the child command, configured timeout, and
+last completed phase; a bootstrap timeout cannot establish behavior that the
+test did not reach. Keep authorized bounded work in a separate active-substage
+overlay when its owning issue remains BLOCKED: scope admission is not accepted
+implementation, and must not change whole-issue classifications or stage
+counts.
+
 When transferring Git blobs through Python and JavaScript, compare the same
 units: Python string length counts Unicode code points, while JavaScript
 `string.length` counts UTF-16 code units. Non-BMP fixture characters can make

@@ -1,0 +1,67 @@
+{
+  "candidate_sha": "31239cf99c7b264a0eab89660e93b391532ac305",
+  "candidate_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+  "native_build_source_sha": "056d32601563a213643436e7df14e6ca0ea50516",
+  "native_build_source_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+  "native_build_workflow_run_id": "38039806634",
+  "native_build_workflow_run_attempt": "1",
+  "native_byte_verification_receipt_sha256": "3afbc8e2f4fe6e46bdd03512e82794e27cca3c705ad28c4a7711fb26b7fb349a",
+  "control_sha": "04fa0feac3d5489096fd2959a6646edc442729cc",
+  "artifact_id": "11664669288",
+  "artifact_size": 59369402,
+  "artifact_sha256": "5db37991cde941ba1c541912d376b33cb0e397db7a427db3e3f627358f5c7286",
+  "wrapper_binary_artifact_id": "11665179231",
+  "wrapper_binary_artifact_size": 77776642,
+  "wrapper_binary_artifact_sha256": "72c3451b5a9f1d54632d7bdeaf36aa0ab3b43e9fbf021497b53db372a00c80a8",
+  "wrapper_binary_size": 81977186,
+  "wrapper_binary_sha256": "28cf80cb1d2811236ed64595b8b9d03a54d1904d63497eb39f34fb9bd67978f3",
+  "wrapper_binary_verification_receipt_sha256": "1a87b8fac2810a5b7e8ce4916771ffe1d71e20494bd86562ad43666c79bb2896",
+  "wrapper_execution_verified": false,
+  "step_outcomes": {
+    "ARTIFACT": "success",
+    "FROZEN": "success",
+    "RCC": "success",
+    "DEPENDENCIES": "success",
+    "ACCEPTANCE": "success"
+  },
+  "status": "PASS",
+  "native_build_source_tree_api_readback": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+  "frozen_artifact_verification": {
+    "candidate_sha": "31239cf99c7b264a0eab89660e93b391532ac305",
+    "candidate_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+    "native_build_source_sha": "056d32601563a213643436e7df14e6ca0ea50516",
+    "native_build_source_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+    "workflow_run_id": "38039806634",
+    "workflow_run_attempt": "1",
+    "manifest_sha256": "7b75b64d160fa73ca14728437a2cc07aebdccf58d450d83b9745245001a33538",
+    "inventory_sha256": "4e61388ef1ae7f2348391b28a42cf63427fdefcd3fbdda2703d6844c4fe6afca",
+    "package_tree_sha256": "ee7cdb5eae9a04042bc476034bb9ed327d51fa705cce70abf8426454fe3d6e6f",
+    "binary_sha256": "0509dfc3c193ba8ca0221603a9f2444091a558aabbb886a957e89a22cf073dc3",
+    "binary_path": "/home/runner/work/_temp/frozen-native-package/dist/action-server/action-server"
+  },
+  "junit": {
+    "expected_test_cases": [
+      {
+        "classname": "tests.action_server_tests.test_cli_live_reload_multi_package",
+        "name": "test_failed_watched_reload_keeps_both_packages_and_recovers"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]"
+      },
+      {
+        "classname": "tests.action_server_tests.test_cli_mcp_catalog_rollback",
+        "name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]"
+      }
+    ],
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "status": "PASS"
+  }
+}

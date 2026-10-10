@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-10T11:39:23Z",
+  "historical_lane_count": {
+    "last_healthy_native_observation_utc": "2026-10-10T04:52:47.879Z",
+    "last_healthy_thread": "01a1222f-e720-7183-9634-2edb76d30326",
+    "last_healthy_turn": "01a123da-fafe-73e3-ab2d-3a2a43e683a8",
+    "confirmed_active": 1,
+    "confirmed_active_lane": "supervisor/coordinator",
+    "producer_turns_completed_by_2026-10-10T04:46:52Z": [
+      {
+        "lane": "review",
+        "thread": "01a12224-e0a2-7b73-8825-8ddd5b1fdb6e",
+        "turn": "01a1240e-211c-7143-9e03-b34792062e46",
+        "completed_at_utc": "2026-10-10T04:29:36.342Z"
+      },
+      {
+        "lane": "rcc",
+        "thread": "01a12224-8dc6-7dc1-9542-65d3a1de0955",
+        "turn": "01a12410-9945-7321-9293-3bcec54c0592",
+        "completed_at_utc": "2026-10-10T04:30:01.234Z"
+      },
+      {
+        "lane": "auth",
+        "thread": "01a1220f-944d-7f22-94a4-112dc13be035",
+        "turn": "01a1241e-0bf5-7513-b71a-c8e11e510d1a",
+        "completed_at_utc": "2026-10-10T04:46:52.641Z"
+      }
+    ],
+    "other_historical_lane_states": "Distribution and Work Items had no same-window native status receipt and remain stale/unconfirmed.",
+    "at_failure": "Unknown. The last healthy observation does not establish a whole-campaign count at the subsequent pod failure."
+  },
+  "dispatches": [
+    {
+      "lane": "#126 installed-wheel template acceptance",
+      "thread": "01a12211-01b3-7850-b508-bd7959b8210c",
+      "turn": "01a12430-e2f2-7361-8baf-786f433fce67",
+      "wrapper": "accepted/inProgress",
+      "native_state": "unknown; get_thread_snapshot failed KubernetesError"
+    },
+    {
+      "lane": "#279 packaged multi-package baseline",
+      "thread": "01a12224-8dc6-7dc1-9542-65d3a1de0955",
+      "turn": null,
+      "wrapper": "unknown; KubernetesError",
+      "native_state": "unknown; no replay"
+    }
+  ],
+  "failure_observed_at_utc": "2026-10-10T05:05:00Z",
+  "current_owner_observation_at_utc": "2026-10-10T11:29:00Z",
+  "target": "cas-worker-01",
+  "workspace_uid": "default-ca-0b24d",
+  "pod_uid": "c08aeecd-3aa4-4077-947a-04ac381625e1",
+  "pod_phase": "Failed",
+  "native_daemon": "unverified",
+  "new_request_allowed": false,
+  "policy": "No native replay, workspace lifecycle mutation, or provisioning was performed. Preserve existing worktrees, threads, and uncertain effects.",
+  "source_receipts": [
+    {
+      "path": "evidence/cas-dispatch-20261010T0500Z.json",
+      "sha256": "ee54ddd8ad242584231d43606d5c5bef20d5dc006b7e7c2d2ed2e566e7863e77"
+    },
+    {
+      "path": "evidence/cas-owner-pod-failed-20261010T0505Z.json",
+      "sha256": "baf170e795e9ca6ef0b6552725b228327a11175ce09c8d60309dba9c3cca8ddb"
+    },
+    {
+      "path": "evidence/cas-heartbeat-20261010T0944Z.json",
+      "sha256": "e6912026f42b60e578e67af3ddb61ab86f83c99ee8d85b1c9e8902075f3f67dc"
+    }
+  ],
+  "upstream_disposition": "No upstream defect or issue was identified in this native-state audit."
+}

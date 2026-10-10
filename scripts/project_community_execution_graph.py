@@ -122,10 +122,20 @@ def apply_named_scoped_criteria(graph: dict, ledger: dict) -> dict:
     return graph
 
 
+def apply_active_substages(graph: dict, ledger: dict) -> dict:
+    """Project latest bounded work without changing retained issue stages."""
+    amendments = ledger.get("supplemental_program_amendments", [])
+    latest = amendments[-1] if amendments else {}
+    graph["active_substages"] = copy.deepcopy(latest.get("active_substages", []))
+    graph["active_substages_observed_at_utc"] = latest.get("observed_at_utc") if graph["active_substages"] else None
+    return graph
+
+
 def upgrade_relationships(graph: dict, ledger: dict) -> dict:
     """Migrate one legacy projection; schema-v2 data is authoritative thereafter."""
     if graph.get("relationship_schema_version") == 2 and graph.get("relationship_amendment") == "canvas-execution-graph-20261009-v4":
         graph = apply_named_scoped_criteria(graph, ledger)
+        graph = apply_active_substages(graph, ledger)
         validate_graph(graph, ledger)
         return graph
     if graph.get("relationship_schema_version") == 2 and graph.get("relationship_amendment") not in (None, "canvas-execution-graph-20261009-v1", "canvas-execution-graph-20261009-v2", "canvas-execution-graph-20261009-v3"):
@@ -343,6 +353,7 @@ def upgrade_relationships(graph: dict, ledger: dict) -> dict:
     }
     graph["scope"] = "Typed operational relationships; retained issue contracts and raw states remain unchanged. Only execution prerequisites participate in cycle/topological validation."
     graph = apply_named_scoped_criteria(graph, ledger)
+    graph = apply_active_substages(graph, ledger)
     validate_graph(graph, ledger)
     return graph
 
@@ -391,6 +402,24 @@ def validate_graph(graph: dict, ledger: dict) -> list[int]:
                 raise ValueError("Supplemental issue gate must declare its separate accounting position")
             if gate.get("issue") == 279 and gate.get("priority") != "P0":
                 raise ValueError("The supplemental #279 regression gate must retain its reviewed P0 priority")
+
+    latest_amendment = amendments[-1] if amendments else {}
+    expected_substages = latest_amendment.get("active_substages", [])
+    if graph.get("active_substages", []) != expected_substages:
+        raise ValueError("Current active substage overlay differs from the latest dated amendment")
+    expected_substage_time = latest_amendment.get("observed_at_utc") if expected_substages else None
+    if graph.get("active_substages_observed_at_utc") != expected_substage_time:
+        raise ValueError("Current active substage timestamp differs from its dated amendment")
+    substage_ids = set()
+    for substage in expected_substages:
+        if substage.get("id") in substage_ids:
+            raise ValueError(f"Duplicate active substage id: {substage.get('id')}")
+        substage_ids.add(substage.get("id"))
+        if substage.get("owner_issue") not in retained_issue_ids or substage.get("status") != "ACTIVE":
+            raise ValueError(f"Invalid active substage owner or status: {substage}")
+        required_fields = ("title", "scope", "limits", "whole_issue_effect", "evidence_basis")
+        if not all(substage.get(key) for key in required_fields):
+            raise ValueError(f"Incomplete active substage record: {substage}")
 
     model = graph["relationship_model"]
     ids = set(by_id)
@@ -536,7 +565,7 @@ def render_markdown(graph: dict) -> str:
     header = [
         "# Actions operational execution graph",
         "",
-        f"Worker-stage observation: {graph['worker_stage_snapshot']}. All 54 retained contracts remain unfinished except accepted whole issue #210; this overlay does not change their raw states.",
+        f"Worker-stage observation: {graph['worker_stage_snapshot']} (historical whole-issue classification snapshot). All 54 retained contracts remain unfinished except accepted whole issue #210; current active-substage overlays do not change raw states or stage counts.",
         "",
         "Relationship semantics: execution prerequisites gate only the identified implementation slice; parent/coordination and product/related edges never block execution; aggregation edges contribute to full parent acceptance. Only execution edges enter cycle/topological validation.",
         "",
@@ -563,6 +592,23 @@ def render_markdown(graph: dict) -> str:
         gates = [edge["prerequisite"] for edge in model["scoped_execution_gates"] if edge["consumer_slice"] == item["id"]]
         slices.append(f"| {item['id']}: {item['description']} | #{item['issue']} | {item['status']} | {', '.join(gates) if gates else 'None recorded'} |")
     amendments = ["", "## Supplemental program amendments (outside the retained 54 issue contracts)", ""]
+    substages = graph.get("active_substages", [])
+    if substages:
+        amendments = [
+            "",
+            "## Current active bounded substages",
+            "",
+            f"Observed {graph['active_substages_observed_at_utc']}. These work records are separate from whole-issue classification and acceptance.",
+            "",
+        ] + amendments
+        for item in substages:
+            related = f", related issue #{item['related_issue']}" if item.get("related_issue") else ""
+            amendments.insert(
+                len(amendments) - 3,
+                f"- `{item['id']}` — {item['status']}, owner issue #{item['owner_issue']}{related}: "
+                f"{item['title']}. Scope: {item['scope']} Limits: {item['limits']} "
+                f"Whole-issue effect: {item['whole_issue_effect']} Evidence basis: {item['evidence_basis']}",
+            )
     for amendment in graph.get("supplemental_program_amendments", []):
         amendments.append(f"### {amendment['id']} — {amendment['observed_at_utc']}")
         amendments.append("")
@@ -601,6 +647,17 @@ def sync_supplemental_amendment_note(path: Path, anchor: str, amendments: list[d
     sections = [start, "", "## Supplemental program amendment"]
     for amendment in amendments:
         sections.extend(["", f"Observed {amendment['observed_at_utc']}. {amendment['summary']}"])
+        for substage in amendment.get("active_substages", []):
+            sections.append(
+                f"- Active bounded substage `{substage['id']}` for #{substage['owner_issue']}: {substage['title']}. "
+                f"{substage['scope']} Limits: {substage['limits']} Whole-issue effect: {substage['whole_issue_effect']} "
+                f"Evidence: {substage['evidence_basis']}"
+            )
+        workers = amendment.get("current_worker_inventory", {}).get("workers", [])
+        if workers:
+            sections.append("- Current native/cloud worker inventory: " + ", ".join(
+                f"{worker.get('name')} ({worker.get('status')})" for worker in workers
+            ) + ".")
         for gate in amendment.get("supplemental_issue_gates", []):
             evidence = gate.get("reproduction", {})
             sections.append(
@@ -697,6 +754,53 @@ def update_graph_metadata(path: Path, graph: dict) -> None:
         data["status"] = amendment["summary"]
         data["checkpoint_status"] = amendment["summary"]
         data["checkpoint_observed_at"] = current["observed_at_utc"]
+        checkpoint = amendment.get("integration_checkpoint", {})
+        data["active_substages"] = copy.deepcopy(graph.get("active_substages", []))
+        data["active_substages_observed_at_utc"] = graph.get("active_substages_observed_at_utc")
+        data["current_active_workers"] = copy.deepcopy(amendment.get("current_active_workers", {}))
+        data["current_worker_inventory"] = copy.deepcopy(amendment.get("current_worker_inventory", {}))
+        if checkpoint.get("head"):
+            old_head = data.get("integration_head")
+            if old_head and old_head != checkpoint["head"]:
+                data.setdefault("historical_projection_fields", {}).setdefault(
+                    "integration_head_before_current_overlay",
+                    {"value": old_head, "status": "historical; superseded by the dated current integration overlay"},
+                )
+            data["integration_head"] = checkpoint["head"]
+            data["integration_head_observed_at_utc"] = current["observed_at_utc"]
+            refs = copy.deepcopy(data.get("current_program_refs", {}))
+            refs.update(
+                observed_at_utc=current["observed_at_utc"],
+                community=checkpoint.get("community"),
+                integration=checkpoint["head"],
+                release_ready=amendment.get("release_ready", False),
+                receipt=current["path"],
+                receipt_sha256=current["sha256"],
+            )
+            refs["integration/community-release-20261008"] = checkpoint["head"]
+            data["current_program_refs"] = refs
+            convergence = copy.deepcopy(checkpoint)
+            convergence.update(
+                observed_at_utc=current["observed_at_utc"],
+                path=current["path"],
+                sha256=current["sha256"],
+                integration=checkpoint["head"],
+                community=checkpoint.get("community"),
+                release_ready=amendment.get("release_ready", False),
+                issue_acceptance_changed=False,
+                stage_counts_unchanged=True,
+                retained_original_contracts=54,
+            )
+            data["current_pr_convergence"] = convergence
+        data["projection_freshness"] = {
+            "current_overlay_observed_at_utc": current["observed_at_utc"],
+            "current_overlay_receipt": current["path"],
+            "current_overlay_sha256": current["sha256"],
+            "worker_stage_snapshot": {
+                "observed_at_utc": data.get("execution_graph", {}).get("worker_stage_snapshot"),
+                "meaning": "Historical whole-issue classification snapshot; current bounded work appears in active_substages and current_active_workers.",
+            },
+        }
         if path == RESUME_PATH:
             data["observed_at"] = current["observed_at_utc"]
     archive = PROGRAM / "evidence" / "canvas-execution-graph-amendment-20261009-v4.zip"
@@ -734,6 +838,53 @@ def main() -> None:
         graph["current_program_amendment"] = copy.deepcopy(ledger.get("current_program_amendment"))
         graph = upgrade_relationships(graph, ledger)
         apply_issue_metadata_updates(graph, ledger)
+        amendments = ledger.get("supplemental_program_amendments", [])
+        current = ledger.get("current_program_amendment")
+        if not amendments or not current:
+            GRAPH_PATH.write_text(json.dumps(graph, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            MARKDOWN_PATH.write_text(render_markdown(graph), encoding="utf-8")
+            return
+        latest_amendment = amendments[-1]
+        old_workers = graph.get("current_active_workers", {})
+        if old_workers and not graph.get("historical_current_active_workers"):
+            graph["historical_current_active_workers"] = {
+                "observed_at_utc": graph.get("worker_stage_snapshot"),
+                "workers": copy.deepcopy(old_workers),
+            }
+        graph["current_active_workers"] = copy.deepcopy(latest_amendment.get("current_active_workers", {}))
+        graph["current_worker_inventory"] = copy.deepcopy(latest_amendment.get("current_worker_inventory", {}))
+        graph["projection_freshness"] = {
+            "current_overlay_observed_at_utc": ledger["current_program_amendment"]["observed_at_utc"],
+            "current_overlay_receipt": ledger["current_program_amendment"]["path"],
+            "current_overlay_sha256": ledger["current_program_amendment"]["sha256"],
+            "worker_stage_snapshot": {
+                "observed_at_utc": graph.get("worker_stage_snapshot"),
+                "meaning": "Historical whole-issue classification snapshot; current bounded work appears in active_substages and current_active_workers.",
+            },
+        }
+        graph["current_program_refs"] = {
+            **graph.get("current_program_refs", {}),
+            "observed_at_utc": ledger["current_program_amendment"]["observed_at_utc"],
+            "community": latest_amendment["integration_checkpoint"]["community"],
+            "integration": latest_amendment["integration_checkpoint"]["head"],
+            "integration/community-release-20261008": latest_amendment["integration_checkpoint"]["head"],
+            "receipt": ledger["current_program_amendment"]["path"],
+            "receipt_sha256": ledger["current_program_amendment"]["sha256"],
+        }
+        graph["current_pr_convergence"] = {
+            **latest_amendment["integration_checkpoint"],
+            "observed_at_utc": ledger["current_program_amendment"]["observed_at_utc"],
+            "path": ledger["current_program_amendment"]["path"],
+            "sha256": ledger["current_program_amendment"]["sha256"],
+            "integration": latest_amendment["integration_checkpoint"]["head"],
+            "community": latest_amendment["integration_checkpoint"]["community"],
+            "release_ready": latest_amendment.get("release_ready", False),
+            "issue_acceptance_changed": False,
+            "stage_counts_unchanged": True,
+            "retained_original_contracts": 54,
+        }
+        graph["active_substages"] = copy.deepcopy(latest_amendment.get("active_substages", []))
+        graph["active_substages_observed_at_utc"] = latest_amendment.get("observed_at_utc") if graph["active_substages"] else None
         GRAPH_PATH.write_text(json.dumps(graph, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         MARKDOWN_PATH.write_text(render_markdown(graph), encoding="utf-8")
         LEDGER_PATH.write_text(json.dumps(ledger, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

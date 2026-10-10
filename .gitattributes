@@ -106,3 +106,16 @@ docs/program/evidence/canvas-282-production-floor.json -text
 docs/program/evidence/cas-heartbeat-20261010T0944Z.json -text
 docs/program/evidence/program-amendment-20261010T0944Z.json -text
 docs/program/evidence/canvas-4587271c-portability-review.json -text
+
+# Convergence evidence receipts recorded 2026-10-10T1139Z.
+docs/program/evidence/convergence-ci-inventory-20261010T1139Z.json -text
+docs/program/evidence/pr284-merge-readback-20261010T1139Z.json -text
+docs/program/evidence/pr284-full-diff-check-correction-20261010T1139Z.json -text
+docs/program/evidence/pr282-production-floor-current-20261010T1139Z.json -text
+docs/program/evidence/pr285-current-ci-diagnosis-20261010T1139Z.json -text
+docs/program/evidence/portable-source-policy-admission-20261010T1139Z.json -text
+docs/program/evidence/cas-continuation-current-state-20261010T1139Z.json -text
+docs/program/evidence/pr285-frozen-review-20261010T1139Z/independent-review-receipt.json -text
+docs/program/evidence/pr285-frozen-review-20261010T1139Z/frozen-catalog-junit.xml -text
+docs/program/evidence/pr285-frozen-review-20261010T1139Z/frozen-catalog-junit-summary.json -text
+docs/program/evidence/pr285-frozen-review-20261010T1139Z/frozen-catalog-summary.json -text

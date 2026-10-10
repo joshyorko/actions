@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-10T11:39:23Z",
+  "subject": "PR284 refreshed full diff whitespace check",
+  "correction": "The earlier current-integration-refresh-review receipt states both git diff --check commands passed. Root later observed one trailing-whitespace finding in an immutable preserved log in the PR284 full diff. That earlier combined pass statement is inaccurate for the PR284 full diff and is superseded only by this correction.",
+  "preserved_log_sha256_prefix": "167a7246",
+  "disposition": "Keep the evidence log byte-for-byte unchanged. Every other path in the checked PR284 diff passed the whitespace check. This correction does not invalidate the refresh review conclusions about exact parent/tree, source/control preservation, or accepted review.",
+  "prior_receipt": {
+    "path": "evidence/current-integration-refresh-review.json",
+    "sha256": "93b1d7452c5d73de184595cfda2a1570bbf64f983011133339a38630e445893a"
+  },
+  "verification_source": "Root read-only full-diff review; exact log path and complete digest were not included in the parent receipt."
+}

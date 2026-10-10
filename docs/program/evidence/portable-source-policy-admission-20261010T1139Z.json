@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-10T11:39:23Z",
+  "decision_at_utc": "2026-10-10T11:36:00Z",
+  "decision_owner": "Root",
+  "decision_basis": {
+    "current_issue_bodies": [
+      135,
+      148
+    ],
+    "issue_135_comment_id": "5374000307",
+    "prior_independent_review": "evidence/local-source-prerequisite-review-31239.md",
+    "prior_independent_review_sha256": "fdd3d8065846076cccb5f44b6c8a8bceb7a64a378f9658cb63774446ee92a80e"
+  },
+  "shared_substage": {
+    "id": "135-source-policy-a",
+    "owner_issue": 135,
+    "related_issue": 148,
+    "title": "SOURCE-POLICY-A: deterministic validation/canonical inventory of explicitly supplied portable source entries",
+    "shared_scope": "One cross-issue substage. #135 owns the active implementation work; #148 reuses the same portable path policy as a prerequisite, not a second implementation lane.",
+    "status": "ACTIVE",
+    "implementation_status": "NOT_YET_INDEPENDENTLY_ACCEPTED",
+    "scope": "Pure validation and canonical inventory of explicitly supplied source entries: selected/protected paths; Unicode NFC; case and prefix collisions; portable path rules; regular files and directories only; 0644/0755 without privilege; empty directories do not define identity; limits of 10000 entries, 50 MiB per file, 500 MiB total, depth 64, path length 4096, and component length 255.",
+    "limits": "No filesystem admission, filesystem snapshot or measurement, compiler digest, RCC inspection/adapter/runtime compiler, capability identity, generation proof, provider, or new registry. No actual source-admission/API contract is accepted until independent code and tests are reviewed.",
+    "whole_issue_effect": "#135 remains BLOCKED by confined measurement/snapshot, RCC inspection/adapter/runtime compiler, capability identity, and generation proof. #148 retains its existing BLOCKED whole-issue stage. The active substage changes no whole-issue classification or graph stage count.",
+    "evidence_basis": "Root admitted only this pure portable manifest-policy validation successor at 2026-10-10T11:36Z after reading current #135/#148 bodies and #135 comment 5374000307 and adopting the documented choices in the independent review. Root selection is not accepted implementation.",
+    "owner": "luna_source_profile",
+    "writer_boundary": "New helper/module/tests and behavior-preserving extraction of the existing Robot portable-path predicate on an isolated branch; no filesystem-admission behavior.",
+    "required_choices": [
+      "Keep legacy defaults and behavior unchanged.",
+      "Validate only explicitly supplied portable entries and protected paths.",
+      "Apply NFC, case/prefix collision, portable-path, entry-kind, and non-privileged mode rules.",
+      "Do not treat empty directories as source identity.",
+      "Enforce the stated entry, byte, depth, path, and component bounds."
+    ]
+  },
+  "upstream_disposition": "No upstream defect was established in this governance update and no issue was filed. The broader campaign has explicit issue-only scope for confirmed joshyorko/rcc findings; this scope does not authorize a change here."
+}

@@ -1,6 +1,6 @@
 # Actions operational execution graph
 
-Worker-stage observation: 2026-10-10T07:53:20Z. All 54 retained contracts remain unfinished except accepted whole issue #210; this overlay does not change their raw states.
+Worker-stage observation: 2026-10-10T07:53:20Z (historical whole-issue classification snapshot). All 54 retained contracts remain unfinished except accepted whole issue #210; current active-substage overlays do not change raw states or stage counts.
 
 Relationship semantics: execution prerequisites gate only the identified implementation slice; parent/coordination and product/related edges never block execution; aggregation edges contribute to full parent acceptance. Only execution edges enter cycle/topological validation.
 
@@ -33,7 +33,7 @@ Counts: READY=0, ACTIVE=8, REVIEW=9, BLOCKED=28, INTEGRATED=8, COMPLETE=1.
 | [#131](https://github.com/joshyorko/actions/issues/131) | BLOCKED | #125, #129, #130 | None | None | None | See ledger | Define provider data/knowledge references and authorized operations without product-tier coupling. |
 | [#132](https://github.com/joshyorko/actions/issues/132) | BLOCKED | #83, #90, #129 | None | None | None | See ledger | Implement durable business queue/review/lease semantics separately from Run ownership. |
 | [#133](https://github.com/joshyorko/actions/issues/133) | BLOCKED | #129, #130, #134, #143 | None | None | None | See ledger | Extend proven RCC adapter to worker execution using released provider/lease/exec contract. |
-| [#134](https://github.com/joshyorko/actions/issues/134) | ACTIVE | None | None | None | None | #284 | Finish current refreshed-head toolkit gates and integrate reviewed RCC control; preserve managed/frozen exact-source limits and address remaining provider/lease/offline criteria. |
+| [#134](https://github.com/joshyorko/actions/issues/134) | ACTIVE | None | None | None | None | #284 | PR284 is merged with 14/14 exact-head checks. Preserve its one scoped RCC case and correction receipts; complete current PR285 Linux/Windows/macOS and provider/lease/offline gates before any full #134 acceptance. |
 | [#135](https://github.com/joshyorko/actions/issues/135) | BLOCKED | #129, #130 | None | None | None | See ledger | Compile deterministic Package Revisions and plans from current sources without machine-local identities. |
 | [#136](https://github.com/joshyorko/actions/issues/136) | BLOCKED | #135 | None | None | None | See ledger | Implement verified immutable source provider and worker-local cache with corruption rejection. |
 | [#138](https://github.com/joshyorko/actions/issues/138) | BLOCKED | #83, #84, #90, #129, #130, #143 | None | None | None | See ledger | Version worker protocol carrying exact pinned plans and explicit decline/cancel/recovery. |
@@ -104,6 +104,12 @@ Counts: READY=0, ACTIVE=8, REVIEW=9, BLOCKED=28, INTEGRATED=8, COMPLETE=1.
 | 129-1a: Owner-approved pure canonical values and typed reference Slice1a | #129 | ACTIVE; NOT_COMPLETE | 129:canonical-values-design-1a |
 | 127-template: Reviewed offline template and fresh extracted project checkpoint | #127 | REVIEW; NOT_COMPLETE | 100-A, 100-B, 99-A, 125:public-package-boundary, 98:canvas-artifact, 98:canvas-artifact-consumed-resource-127, 125:public-package-boundary-template-127, 127:offline-template-checkpoint |
 | 134-managed-rollback: Actual managed RCC failed-reload preservation and subsequent source-only recovery | #134 | PASS; FULL_134_NOT_COMPLETE | 134:managed-failed-reload-recovery-f7 |
+
+## Current active bounded substages
+
+Observed 2026-10-10T11:39:23Z. These work records are separate from whole-issue classification and acceptance.
+
+- `135-source-policy-a` — ACTIVE, owner issue #135, related issue #148: SOURCE-POLICY-A: deterministic validation/canonical inventory of explicitly supplied portable source entries. Scope: Pure validation and canonical inventory of explicitly supplied source entries: selected/protected paths; Unicode NFC; case and prefix collisions; portable path rules; regular files and directories only; 0644/0755 without privilege; empty directories do not define identity; limits of 10000 entries, 50 MiB per file, 500 MiB total, depth 64, path length 4096, and component length 255. Limits: No filesystem admission, filesystem snapshot or measurement, compiler digest, RCC inspection/adapter/runtime compiler, capability identity, generation proof, provider, or new registry. No actual source-admission/API contract is accepted until independent code and tests are reviewed. Whole-issue effect: #135 remains BLOCKED by confined measurement/snapshot, RCC inspection/adapter/runtime compiler, capability identity, and generation proof. #148 retains its existing BLOCKED whole-issue stage. The active substage changes no whole-issue classification or graph stage count. Evidence basis: Root admitted only this pure portable manifest-policy validation successor at 2026-10-10T11:36Z after reading current #135/#148 bodies and #135 comment 5374000307 and adopting the documented choices in the independent review. Root selection is not accepted implementation.
 
 ## Supplemental program amendments (outside the retained 54 issue contracts)
 
@@ -214,6 +220,13 @@ PR283 is integrated at 31239cf9 with its exact independently reviewed and fully 
 ### program-amendment-20261010T0944Z — 2026-10-10T09:44:39Z
 
 Existing isolated Cloud lanes cleared the Canvas integration conflict and obtained actual candidate Runtime/browser acceptance, then independently confirmed its production catalog is still blocked by unpublished Core1.0.3. The supported-worker contract remains enforced. Existing frozen lane corrected one AST-equivalent formatting failure, then refreshed the artifact pins after the old f7 source guard correctly rejected newer integration source. New31239 Linux native and wrapper artifact bytes are independently verified; fresh frozen execution remains required. CAS explicitly supports per-worktree cwd, but Owner diagnostics still show its existing pod Failed. Existing remote threads/worktrees and unknown effects are preserved. No community merge or release occurred, no additional whole issue was accepted, and all54 original contracts and historical archive hashes remain unchanged.
+
+| Supplemental gate | Status | Accounting | Scope and evidence |
+|---|---|---|---|
+
+### program-amendment-20261010T1139Z — 2026-10-10T11:39:23Z
+
+PR284 is merged at 2286d8e2 on the 31239 integration base, with its exact c7c18da head and all 14 checks passing; the prior refresh review remains, with a dated correction for one immutable whitespace-bearing log. The 34-PR cohort is 27 integrated, 7 open/blocked, and 0 merge-ready. PR282 remains blocked by the six shared failures of the unpublished Core 1.0.3 production floor. PR285 has a newly independently accepted four-case Linux frozen receipt; two other CI jobs timed out during initial managed-RCC bootstrap before their assertions. One bounded #135 source-policy substage is active and shared with #148; neither whole issue stage changes. The retained 54 issue contracts remain 53 open and one accepted; no full issue acceptance, community merge, publication, or release is claimed. The last confirmed active CAS lane was its supervisor at 04:52:47Z; exact active count at the 05:05 pod failure remains unknown. Owner diagnostics at 11:29Z still show the same CAS pod Failed.
 
 | Supplemental gate | Status | Accounting | Scope and evidence |
 |---|---|---|---|

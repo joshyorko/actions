@@ -150,6 +150,9 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         self.assertEqual(54, len(self.ledger["issues"]))
         self.assertEqual(54, len(graph["issues"]))
         self.assertEqual({"READY": 0, "ACTIVE": 8, "REVIEW": 9, "BLOCKED": 28, "INTEGRATED": 8, "COMPLETE": 1}, graph["counts"])
+        issue_stages = {row["issue"]: row["classification"] for row in graph["issues"]}
+        self.assertEqual("BLOCKED", issue_stages[135])
+        self.assertEqual("BLOCKED", issue_stages[148])
         amendment = self.ledger["supplemental_program_amendments"][0]
         gate = amendment["supplemental_issue_gates"][0]
         self.assertEqual(279, gate["issue"])
@@ -160,6 +163,43 @@ class ExecutionGraphProjectionTests(unittest.TestCase):
         self.assertIn("Supplemental program amendments (outside the retained 54 issue contracts)", markdown)
         self.assertIn("#279", markdown)
         self.assertIn("RETIRED_BY_EXPLICIT_USER_STEERING", str(amendment))
+
+    def test_active_substage_is_overlay_only_and_validated(self) -> None:
+        ledger = copy.deepcopy(self.ledger)
+        amendment = ledger["supplemental_program_amendments"][-1]
+        substage = {
+            "id": "135-source-policy-a", "owner_issue": 135, "related_issues": [148],
+            "status": "ACTIVE", "title": "Portable source policy", "scope": "Validate selected paths.",
+            "limits": "10,000 entries", "whole_issue_effect": "No whole-issue state change.",
+            "evidence_basis": "admission record",
+        }
+        amendment["active_substages"] = [substage]
+        fixture_graph = copy.deepcopy(self.graph)
+        fixture_graph["supplemental_program_amendments"] = copy.deepcopy(ledger["supplemental_program_amendments"])
+        graph = upgrade_relationships(fixture_graph, ledger)
+        self.assertEqual(135, graph["active_substages"][0]["owner_issue"])
+        self.assertEqual("BLOCKED", next(row["classification"] for row in graph["issues"] if row["issue"] == 135))
+        self.assertEqual("BLOCKED", next(row["classification"] for row in graph["issues"] if row["issue"] == 148))
+        validate_graph(graph, ledger)
+        invalid_owner = copy.deepcopy(ledger)
+        invalid_owner["supplemental_program_amendments"][-1]["active_substages"][0]["owner_issue"] = 999
+        invalid_graph = copy.deepcopy(graph)
+        invalid_graph["supplemental_program_amendments"] = copy.deepcopy(invalid_owner["supplemental_program_amendments"])
+        invalid_graph["active_substages"][0]["owner_issue"] = 999
+        with self.assertRaisesRegex(ValueError, "owner"):
+            validate_graph(invalid_graph, invalid_owner)
+        duplicate = copy.deepcopy(ledger)
+        duplicate["supplemental_program_amendments"][-1]["active_substages"].append(copy.deepcopy(substage))
+        duplicate_graph = copy.deepcopy(graph)
+        duplicate_graph["supplemental_program_amendments"] = copy.deepcopy(duplicate["supplemental_program_amendments"])
+        duplicate_graph["active_substages"].append(copy.deepcopy(substage))
+        with self.assertRaisesRegex(ValueError, "Duplicate"):
+            validate_graph(duplicate_graph, duplicate)
+        no_overlay = copy.deepcopy(ledger)
+        no_overlay["supplemental_program_amendments"][-1].pop("active_substages")
+        no_overlay_graph = copy.deepcopy(self.graph)
+        no_overlay_graph["supplemental_program_amendments"] = copy.deepcopy(no_overlay["supplemental_program_amendments"])
+        self.assertEqual([], upgrade_relationships(no_overlay_graph, no_overlay)["active_substages"])
 
     def test_supplemental_issue_cannot_be_added_to_retained_contract_projection(self) -> None:
         graph = upgrade_relationships(copy.deepcopy(self.graph), self.ledger)
