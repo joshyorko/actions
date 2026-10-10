@@ -1,0 +1,33 @@
+{
+  "task": "PR292 startup cleanup documentation precision correction",
+  "repository": "/workspace/work/actions-mk3-wave8-pr292",
+  "branch": "mk3/wave8-pr292-startup-cleanup-20261010",
+  "source_review": {
+    "reviewed_commit": "ea3182c5ae9a0cf4fe602df2589dc334003cd4e8",
+    "verdict": "GO_SOURCE_ONLY",
+    "receipt": "/workspace/work/actions-mk3-evidence/wave8/pr292/independent-source-review-ea3182c5.json",
+    "receipt_sha256": "55d0efa32c1125dce7f7859b1bd05448c723fe9f7d6e39bb238cf5ab21668f86"
+  },
+  "candidate": {
+    "commit": "ddc62d11d1e38116e529cde713d00f71fd81b28a",
+    "tree": "c37ecfc9e412a6d9b4426fa38011a718b463e30d",
+    "parent": "ea3182c5ae9a0cf4fe602df2589dc334003cd4e8",
+    "working_tree_clean": true,
+    "changed_path": "docs/skills/repository-operations.md",
+    "docs_sha256": "842d73f156423ebf7f72a67ec9cffeea5fa3cbc4c4bb345910abdf0f77837f18"
+  },
+  "source_equivalence": {
+    "reviewed_source_blobs_unchanged": true,
+    "action_server/src/actions/server/_robo_utils/process.py": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+    "action_server/src/actions/server/_selftest.py": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": "672875e8f2c628b13ef4a14f271e7c7a7a6f444170530c4aaef58b3524b903e8"
+  },
+  "documentation_delta": "Clarifies direct-child Popen ownership, limits descendant language to the captured point-in-time snapshot, distinguishes stopped execution from descendant-reap completeness, and explicitly retains uncertainty about universal descendant discovery/adoption and native Windows startup.",
+  "verification": "git diff --check passed; exact diff contains only docs/skills/repository-operations.md. No tests rerun for this docs-only correction; all source/test blobs are unchanged from the reviewed commit.",
+  "remaining_gates": [
+    "Windows 90-second readiness / 300-second outer diagnostic NOT RUN.",
+    "Full Action Server suite, typecheck, and docs gate not established.",
+    "Native watcher/RCC/provider execution NOT RUN."
+  ],
+  "upstream_disposition": "No separate upstream issue; confirmed defect is being repaired directly in the maintained repository. No external writes."
+}

@@ -1,0 +1,127 @@
+{
+  "schema": "actions-wave8-followup/v1",
+  "files": [
+    {
+      "source": "/workspace/work/actions-mk3-evidence/wave8/pr292/startup-cleanup-receipt-ea3182c5.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/startup-cleanup-receipt-ea3182c5.json",
+      "bytes": 7496,
+      "sha256": "98d45fe0aaa6e98c69611fc657fe7a77618e6efeb206b1b118593bfecc9b47d7"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/wave8/pr292/independent-source-review-ea3182c5.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/independent-source-review-ea3182c5.json",
+      "bytes": 7133,
+      "sha256": "55d0efa32c1125dce7f7859b1bd05448c723fe9f7d6e39bb238cf5ab21668f86"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/wave8/pr292/docs-correction-receipt-ddc62d11.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/docs-correction-receipt-ddc62d11.json",
+      "bytes": 2266,
+      "sha256": "544ac4b6bc0ebcc6995787e1fce514d7c643de9cba6e2b043a95d36fb854a508"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/implementation-checkpoint-receipt.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/implementation-checkpoint-receipt.json",
+      "bytes": 11644,
+      "sha256": "1c5b4fc29982e7d09e3374b74df347facd153724698f7be47d932e46190b8332"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/independent-source-and-heavy-plan-review-8eb2e6f.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/independent-source-and-heavy-plan-review-8eb2e6f.json",
+      "bytes": 9771,
+      "sha256": "cebc81e6644bda2e9837e401d08278f9eeb7d51adcf9f8887a414490dab26d9d"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-wave8-evidence/ledger-pr311-readback.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/ledger-pr311-readback.json",
+      "bytes": 28006,
+      "sha256": "56e0bb66ae67b8e7772cd694646426c2ecb139924c73602fbbbb484e0d02c098"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-wave8-evidence/followup-ci-readback.json",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/followup-ci-readback.json",
+      "bytes": 194072,
+      "sha256": "1c0a1499398a83f97664046033fd7b3cd85db741b89261902e15a1b0d139643a"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/wave8/pr292/startup-cleanup-red.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/pr292_startup-cleanup-red.log",
+      "bytes": 7863,
+      "sha256": "603a051e9825437cac9e392f81af58fcd31cad4df1dd0535ee57afb1eaeabdcc"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/wave8/pr292/startup-cleanup-green-final.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/pr292_startup-cleanup-green-final.log",
+      "bytes": 5931,
+      "sha256": "d79362bf3581bb0ae71ec96ed507cafb67896e4d3d46c8c8ea5eb750a7c5d0b8"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/wave8/pr292/process-contract-final.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/pr292_process-contract-final.log",
+      "bytes": 4807,
+      "sha256": "8a49b6a78c970a781d8fabab41871d395449dfd300d36d5fdb6cc9ca78d13fcf"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/wave8/pr292/format-final.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/pr292_format-final.log",
+      "bytes": 4105,
+      "sha256": "e4d9492ce85da38a873a000a40a5e4a96af8baae1d1112a2f3ee96d82d394180"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/wave8/pr292/lint-final.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/pr292_lint-final.log",
+      "bytes": 4320,
+      "sha256": "59a147924b97f5ba1dc025b185051b34de2165c2a2317037602ed8a8a3b85bce"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/red-stderr.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/pr195_red-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/red-stdout.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/pr195_red-stdout.log",
+      "bytes": 2152,
+      "sha256": "49678a3c38dddd022b6c02f81287a622cc54de8f3970bb526f6bb8549da1a74b"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/stderr.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/pr195_stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/stdout.log",
+      "path": "docs/program/evidence/wave8-convergence-20261010/followup-receipts-20261010T2352Z/pr195_stdout.log",
+      "bytes": 133,
+      "sha256": "c02c7e1c64a8e0368c3e6012683f5699ed0f255369f767829eea92dcafa29fcf"
+    }
+  ],
+  "source_heads": {
+    "pr292": "ddc62d11d1e38116e529cde713d00f71fd81b28a",
+    "pr309": "6cdf7c3158227d93ed57e46220204a08e4595142",
+    "draft_pr311": "8eb2e6f92109bcbd51e4925ebe703074ee28c6ac"
+  },
+  "open_issues": 58,
+  "open_prs": 14,
+  "close_ready_recommendations": 4,
+  "admitted_integration_ready_prs": 0,
+  "automatic_closures": "UNKNOWN; zero observed in audited221 snapshot",
+  "native_writers": 0,
+  "devsy": "DISABLED",
+  "remaining": [
+    "PR292 exact-head Windows/full acceptance and dependency-order stack convergence",
+    "PR311 supervisorHOLD: new immutable all-path cleanup/census/capture/identity revision required, then actual installed-wheel proof",
+    "Current RCC composed-source inspection/native artifacts not accepted; oldCore1.0.2fixture not current proof",
+    "Runtime1.0.3 actual publication/download/checksums/ownedHomebrewinstall+upgrade not complete",
+    "Authenticated221closure relationships and finalunion admission remain unproved"
+  ],
+  "documentation_receipt_disposition": {
+    "pr292": "Source guide corrected in additive source-identical ddc62d11; root verified docs-only difference beforepush",
+    "pr195": "Source guard accepted only; heavy-planHOLD fixes and source guide preserved, actualproofNOTRUN",
+    "rcc_union_plan": "Conditional localcomposition plan retained locally SHA8dd4470f1c70b8428b1b9d495cc743f2ebed12d2f4c02fedbf788847c5373a93; private composition specifics excluded from public payload; currentexecutionHOLD",
+    "root_recoverability": "Canonical guide now requires Gitindex/committedblob verification and explicit hash-bound ignoredlog staging before publication"
+  },
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,43 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___ test_installed_runtime_wheel_scan_rejects_unimported_private_core_import ___
+
+tmp_path = PosixPath('/workspace/actions-cloud/robocorp/temp/c1ebf96f01c1351e/pytest-of-agent/pytest-0/test_installed_runtime_wheel_s0')
+
+    def test_installed_runtime_wheel_scan_rejects_unimported_private_core_import(
+        tmp_path: Path,
+    ):
+        wheel = tmp_path / "actions_runtime-1.0.0-py3-none-any.whl"
+        members = {
+            "actions/server/public.py": "from actions import ActionContext\n",
+            "actions/server/unimported.py": "from actions._protocols import JSONValue\n",
+            "actions/server/_protocols.py": "JSONValue = object\n",
+        }
+        with zipfile.ZipFile(wheel, "w") as archive:
+            for name, content in members.items():
+                archive.writestr(name, content)
+        environment = tmp_path / "venv"
+        site_packages = environment / "lib/python3.12/site-packages"
+        installed_members = {}
+        for name, content in members.items():
+            path = site_packages / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(content, encoding="utf-8")
+            installed_members[name] = path
+    
+        with pytest.raises(
+            AssertionError,
+            match=r"Runtime imports Core-private modules:\\n.*unimported.py:1",
+        ):
+>           _assert_installed_runtime_wheel_has_no_private_core_imports(
+                wheel,
+                installed_members,
+                prefix=environment,
+                checkout=tmp_path / "checkout",
+            )
+E           NameError: name '_assert_installed_runtime_wheel_has_no_private_core_imports' is not defined
+
+tests/contract_tests/test_active_contracts.py:340: NameError
+=========================== short test summary info ============================
+FAILED tests/contract_tests/test_active_contracts.py::test_installed_runtime_wheel_scan_rejects_unimported_private_core_import
+1 failed, 34 deselected in 0.04s

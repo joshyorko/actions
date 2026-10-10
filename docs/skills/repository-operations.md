@@ -204,6 +204,13 @@ Before committing an evidence archive, verify each selected receipt's bytes
 against its ledger SHA-256 and reject absolute or parent-traversal archive
 paths. Preserve running and skipped CI states separately from passing results.
 
+After staging a manifest-bound evidence payload, read every member from the Git
+index and compare its bytes, size, and digest before committing. Repository
+ignore rules may omit admitted log files even when they exist on disk; stage
+only the explicitly hash-bound missing members. Enforce a failed verification
+exit status before commit or push, then verify committed blobs and the remote
+head. Filesystem presence alone does not establish a recoverable Git checkpoint.
+
 For a PostgreSQL failed-SAVEPOINT case, distinguish a healthy transaction
 permission denial from a statement that first aborts the outer transaction.
 PostgreSQL then rejects the later nested SAVEPOINT with SQLSTATE `25P02`;
@@ -2621,3 +2628,13 @@ original output is missing. Keep that attribution explicit and use subsequent
 exact-head CI as separate evidence. If a removed temporary configuration was
 printed in retained logs, state that recovery source rather than claiming the
 original file survived.
+
+For RCC acceptance, freeze the actual composed source SHA/tree and imported
+module origins. Separate source reviews of publication and detached-profile
+slices do not prove their union: reconcile shared publish helpers, preserve
+provider argument order and same-response specification/artifact pairs, and
+verify that the selected profile reaches every required interface. A native
+artifact selector proves packaging identity, not trust-profile propagation or
+offline lifecycle acceptance. Controlled Core1.0.2 fixture measurements remain
+scoped to that fixture; current Core/Runtime acceptance needs current source
+and rebuilt or proven equivalent artifacts.

@@ -1,0 +1,68 @@
+{
+  "canonical_doc_delta": {
+    "evidence": "Exact source ProcessTreeCleanupResult.execution_stopped vs descendant_reap_complete and retained3 syntheticGREEN; removes ambiguous claim that all descendants are reaped.",
+    "exact_replacement": "ActionServerProcess.start() owns its direct child and registered stdout/stderr readers before readiness. Keep post-spawn startup work inside a failure-cleanup boundary: stop the captured descendants, wait/reap the direct Popen child, then join registered readers within one finite deadline. Preserve the original startup exception and attach cleanup errors or incomplete observations as notes. The cleanup result distinguishes stopped execution from descendant reap completeness; a point-in-time snapshot does not prove universal descendant discovery or adoption. Successful startup and readiness timeouts remain unchanged. The synthetic timeout regression proves direct-child reap and both-reader closure; native Windows startup remains a separate gate.",
+    "target": "docs/skills/repository-operations.md new ActionServerProcess.start paragraph at2139",
+    "uncertainty": "Unobserved/orphaned descendants and native Windows behavior remain unproved; no behavior-policy relaxation proposed."
+  },
+  "clean": true,
+  "commands_observations": [
+    "git show exact head/tree/parent; git status; complete four-file parent diff; git diff --check; all source files equal committed bytes and owner hashes.",
+    "Hash owner receipt, five retained logs and run_checks.py; exact bindings match. Read RED1failure live child returncodeNone, GREEN3pass, adjacent redaction4pass/17deselected; configured lintRuff/format296/isortPASS, Markdownlinter unavailable.",
+    "Read complete Process.start/_stop_and_reap_until, shared force_kill_process_tree_until/result and all ActionServerProcess.start controlflow; inspect reader-thread helper callers and pytest monkeypatch. No helper call-site break found; extra thread registration callback is optional and existing monkeypatch accepts*args.",
+    "Compare Runtime pyproject/lock to prepared PR302 environment: both byte-identical. Retained runner enforces metadata hashes, strips conflicting Python/toolchain variables and asserts subject import origin. Runtime Python>=3.12,<3.14 supports BaseException.add_note and current type syntax; psutil is declared."
+  ],
+  "head": "ea3182c5ae9a0cf4fe602df2589dc334003cd4e8",
+  "mutations": "Only this new immutable independent receipt; no source edits, tests, native workers or remote writes",
+  "observed_at_utc": "2026-10-10T23:43:03.267115+00:00",
+  "owner_receipt_sha256": "98d45fe0aaa6e98c69611fc657fe7a77618e6efeb206b1b118593bfecc9b47d7",
+  "parent": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+  "required_remaining_gates": [
+    "Configured full Action Server suite/typecheck/docs not established by focused--noconftest tests; Markdown lint unavailable is NOT RUN.",
+    "No actual native watcher/RCC/provider or Windows startup execution. Preserve original six integration failures and6h cancellation evidence; one separately owned finite Windows diagnostic with unchanged readiness/argv/provider and retained cleanup proof is still needed before Windows acceptance or stack refresh.",
+    "New exact-head hosted gates/independent admission remain separate; sourceGO is not merge/push authority."
+  ],
+  "retained_evidence": [
+    {
+      "log": "/workspace/work/actions-mk3-evidence/wave8/pr292/startup-cleanup-red.log",
+      "result": "1 failed: process.returncode remained None after startup TimeoutError; test finally reaped the child to bound the red run.",
+      "sha256": "603a051e9825437cac9e392f81af58fcd31cad4df1dd0535ee57afb1eaeabdcc"
+    },
+    {
+      "log": "/workspace/work/actions-mk3-evidence/wave8/pr292/startup-cleanup-green-final.log",
+      "result": "3 passed in 1.34s: actual synthetic spawned child was reaped and both output-reader threads stopped; cleanup exception did not mask TimeoutError; pre-spawn OSError was preserved with no process/readers.",
+      "sha256": "d79362bf3581bb0ae71ec96ed507cafb67896e4d3d46c8c8ea5eb750a7c5d0b8"
+    },
+    {
+      "log": "/workspace/work/actions-mk3-evidence/wave8/pr292/process-contract-final.log",
+      "result": "4 passed, 17 deselected in 0.25s; checks credential-argument redaction through common and robo utility process helpers.",
+      "sha256": "8a49b6a78c970a781d8fabab41871d395449dfd300d36d5fdb6cc9ca78d13fcf"
+    },
+    {
+      "log": "/workspace/work/actions-mk3-evidence/wave8/pr292/format-final.log",
+      "result": "Ruff formatter: 1 file left unchanged.",
+      "sha256": "e4d9492ce85da38a873a000a40a5e4a96af8baae1d1112a2f3ee96d82d394180"
+    },
+    {
+      "log": "/workspace/work/actions-mk3-evidence/wave8/pr292/lint-final.log",
+      "result": "RCC task completed successfully; Ruff check, Ruff format check (296 files), and isort check passed. Markdown lint executable was unavailable in PATH.",
+      "sha256": "59a147924b97f5ba1dc025b185051b34de2165c2a2317037602ed8a8a3b85bce"
+    }
+  ],
+  "review_kind": "Independent exact-head read-only source/log review; no test execution or service/native/RCC launch",
+  "source_assessment": [
+    "Cleanup boundary begins around actual child start and covers reader-start failures, readiness exception and host/port validation. It targets the same Process._proc Popen through existing helper; descendant snapshot has psutil PID/create-time identity and no broad process-group or unrelated PID kill.",
+    "Popen remains exclusive direct-child wait owner. Existing helper gets deadline20s minus2s reader reserve; joins consume one remaining absolute deadline rather than20s each. Missing/unstarted thread is guarded by ident; failed spawn has no child/readers.",
+    "Original startup exception is re-raised; incomplete observed cleanup or cleanup BaseException is recorded via supported add_note. No cleanup result changes readiness/API/argv/provider or successful start/stop/pool lifecycle. Native resource-history readiness remains90s/source30s.",
+    "Receipt accurately limits descendants to observed snapshot. execution_stopped deliberately excludes zombie-reap completeness: source does not establish universal descendant discovery, adoption/reaping or native Windows cleanup. A pre-exited owner produces incomplete snapshot diagnostic rather than a false successful execution-stopped result."
+  ],
+  "source_hashes": {
+    "action_server/src/actions/server/_robo_utils/process.py": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+    "action_server/src/actions/server/_selftest.py": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": "672875e8f2c628b13ef4a14f271e7c7a7a6f444170530c4aaef58b3524b903e8",
+    "docs/skills/repository-operations.md": "411c279dfe23edb74c10cd087ff533faa53b4d37944654276f2c47512328c08d"
+  },
+  "tree": "7a93ec688178a63fad0475b50522475f767b4091",
+  "upstream_disposition": "none; bounded Actions-owned startup-helper repair reviewed locally, no external upstream defect or report",
+  "verdict": "GO_SOURCE_ONLY"
+}

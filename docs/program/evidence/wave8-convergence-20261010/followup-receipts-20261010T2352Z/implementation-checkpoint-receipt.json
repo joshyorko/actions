@@ -1,0 +1,131 @@
+{
+  "acceptance_state": "NOT CLOSED. Local source checkpoint is reviewable; only static/synthetic fast checks passed. The installed Runtime wheel compatibility test is NOT RUN.",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md (changed in this same commit)",
+    "durable_learning_captured": "Checkout AST and Core clean-wheel evidence do not establish installed Runtime wheel compatibility; require complete installed actions-runtime .py inventory, clean-environment ownership, exact selected wheel/member byte binding, all-member AST scan, and retained public Core compatibility checks.",
+    "evidence": "Contract review SHA 4690bdabd0148734834c1deba2874fe7968933c5a3e1eed4bc9b9893cf84f099; clarification SHA 906e43b8253f10d8d34db6748633e52d24c6ad6a4f80ae229d46c570cf3b5320; implementation commit 8eb2e6f92109bcbd51e4925ebe703074ee28c6ac.",
+    "remaining_uncertainty": "The full wheel-build/install gate and exact hashes have not been observed; #195 remains pending until the reviewed canonical heavy gate passes and the logs/member inventory receive independent readback.",
+    "stale_or_ambiguous_guidance_removed": "None; the new paragraph draws the source-checkout/Core-wheel/installed-Runtime boundary explicitly."
+  },
+  "fast_verification": {
+    "command": "source /workspace/actions-cloud/activate.sh; /workspace/actions-cloud/bin/rcc task run -r developer/.runtime-wheel-private-import-fast-check.yaml -t FocusedContractTests --dev --no-build --minutes 15",
+    "diff_check": "git diff --check passed before local commit.",
+    "gateway": "Canonical RCC v18.19.3 task run with --dev --no-build using cached blueprint 318089d9095ad813; Python 3.12.15, pytest 8.3.4, Ruff 0.8.6.",
+    "green": "Ruff: All checks passed. Pytest: 26 passed, 12 deselected in 0.45 seconds. This includes old AST regressions, checkout source guard, and new synthetic installed-wheel/tree cases.",
+    "logs": {
+      "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/environment_linux_amd64_freeze.yaml": {
+        "bytes": 2008,
+        "sha256": "90fc0205b1cf24c39ac0ea41cf3def46fcc1a2a000481413a191427ef601dc22"
+      },
+      "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/fast-robot.yaml": {
+        "bytes": 519,
+        "sha256": "3f5ecb231fe1c7f0a4a0cc20bb87930c0beaa3327be3b910daa28f44efaf5e62"
+      },
+      "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/journal.run": {
+        "bytes": 2015,
+        "sha256": "e1d2c64807399c3d115f7b4c5b78a70b77c19c7cfa51132919bf579885758523"
+      },
+      "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/red-stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/red-stdout.log": {
+        "bytes": 2152,
+        "sha256": "49678a3c38dddd022b6c02f81287a622cc54de8f3970bb526f6bb8549da1a74b"
+      },
+      "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/stdout.log": {
+        "bytes": 133,
+        "sha256": "c02c7e1c64a8e0368c3e6012683f5699ed0f255369f767829eea92dcafa29fcf"
+      },
+      "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan/robot.yaml": {
+        "bytes": 562,
+        "sha256": "a0e56b2f2027feae15d191981ec17ab130b887304938ec2d1547fb872cdf2e68"
+      },
+      "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan/run_wheel_acceptance.py": {
+        "bytes": 1319,
+        "sha256": "05c323872dca4ff1874385b60f272393861aa5a939272ac2ab9f046cdfea0040"
+      },
+      "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan/supervise_heavy_gate.py": {
+        "bytes": 7079,
+        "sha256": "c6e6dd40c184e4da07bb35c8780590f9c7e4476c1027ba43b5aeb87b187ea713"
+      }
+    },
+    "red": "The new combined installed-wheel test failed before helper implementation with NameError: _assert_installed_runtime_wheel_has_no_private_core_imports is not defined; retained red stdout hash-bound below.",
+    "runner": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/rcc-fast-check/run_pytest.py (Ruff check on the changed test file, then focused contract tests with --confcutdir=tests/contract_tests)."
+  },
+  "heavy_gate_plan": {
+    "exact_target": "tests/contract_tests/test_active_contracts.py::test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders",
+    "expected_positive_readback": "RUNTIME_WHEEL_PRIVATE_IMPORT_SCAN JSON lines include exact Core/Runtime wheel path/SHA-256, clean venv prefix, and complete installed Runtime member path/SHA-256 inventory for both uninstall-order venvs.",
+    "not_run": [
+      "No wheel build or install; no Core/Runtime actual member hash readback; no full clean-wheel test.",
+      "No native/browser/service/provider/ChatGPT gate, publication, release, merge, remote issue write, or source push."
+    ],
+    "rcc_task": "RCC task run with --dev --no-build and pinned setup.yaml/setup_windows_amd64.yaml; task is no-build and uses current cached shared manifest, Python 3.12.15.",
+    "runner": {
+      "cleanup_readback": "Supervisor records process-group PID/state census; distinguishes CLEAN, ZOMBIES_REMAIN, LIVE_PROCESSES_REMAIN, UNKNOWN; only claims CLEAN with available census and no remaining process entries. RCC stdout/stderr and task artifact logs are retained outside the checkout; pytest wheelhouse/venvs remain under the unique evidence run directory for review.",
+      "command": "/workspace/actions-cloud/bin/rcc task run -r developer/.runtime-wheel-private-import-heavy.yaml -t InstalledRuntimeWheelBoundary --dev --no-build --minutes 30",
+      "fresh_paths": "Supervisor refuses existing attempt directory, task config, and RCC artifact directory; pytest basetemp is unique outside the checkout.",
+      "hard_deadline": "1200 seconds for the RCC task. Supervisor sends SIGTERM to the owned process group, waits at most 15 seconds, then SIGKILL and boundedly waits.",
+      "managed_interpreter": "Driver asserts RCC sys.prefix is /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534 and Python is exactly 3.12.15; ACTIONS_RUNTIME_TEST_PYTHON is set to that sys.executable and PYTHONPATH is cleared.",
+      "pytest_driver": {
+        "path": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan/run_wheel_acceptance.py",
+        "sha256": "05c323872dca4ff1874385b60f272393861aa5a939272ac2ab9f046cdfea0040"
+      },
+      "source_identity_preflight": "Supervisor refuses unless HEAD/tree exactly match this receipt and git status is clean; writes the RCC YAML into developer/ with exclusive creation, then removes only its byte-identical file after run.",
+      "supervisor": {
+        "path": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan/supervise_heavy_gate.py",
+        "sha256": "c6e6dd40c184e4da07bb35c8780590f9c7e4476c1027ba43b5aeb87b187ea713"
+      },
+      "task_config": {
+        "path": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan/robot.yaml",
+        "sha256": "a0e56b2f2027feae15d191981ec17ab130b887304938ec2d1547fb872cdf2e68"
+      }
+    },
+    "status": "NOT RUN; requires independent source/runner review and explicit root gate grant.",
+    "task": "One selected clean-wheel compatibility test builds exact Core, Runtime, Helper, and Work Items wheels; installs the explicit local wheel files into two fresh venvs; verifies pip consistency/public API behavior and full Runtime source scan in each; runs both uninstall orders."
+  },
+  "implementation": {
+    "acceptance_test": "action_server/tests/contract_tests/test_active_contracts.py::test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders",
+    "artifact_binding": "Checks the exact selected Runtime and Core wheel paths and SHA-256 values, checks the installed Runtime .py member inventory equals all .py wheel members, and checks every installed member byte hash equals the corresponding selected wheel ZIP member before running the scanner.",
+    "environment_ownership": "The clean probe requires all imported public Runtime/Core modules and every installed Runtime .py file to resolve inside the fresh venv and outside the checkout.",
+    "negative_coverage": [
+      "Synthetic installed tree detects direct, aliased, and statically resolvable dynamic private actions._* imports in unimported modules.",
+      "Synthetic wheel tests reject missing installed-member inventory entries, installed-vs-wheel member byte mismatches, and selected-wheel digest mismatches with diagnostics."
+    ],
+    "positive_coverage": "Keeps public actions.ActionContext compatibility and Runtime-owned actions.server._protocols JSONValue import valid; existing two clean-wheel environments still run both Core/Runtime uninstall orders.",
+    "product_scope": "No production/runtime/schema/package-lock/template/floor changes; Work Items stays 0.4.4.",
+    "scanner": "Reuses _private_core_imports; scans every .py path from installed importlib.metadata.distribution(\"actions-runtime\").files, including unimported modules."
+  },
+  "issue": 195,
+  "receipt_type": "implementation_checkpoint_and_heavy_gate_plan",
+  "source": {
+    "base_head": "19380993febaa71238eaee3026b5c808773283ff",
+    "base_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "blobs": {
+      "action_server/tests/contract_tests/test_active_contracts.py": {
+        "git_blob": "bece80f1254a4f954a91c8b1c6075900fef8c43d",
+        "sha256": "abc9fa5acecfc8332aff68eecb81ba9e11cd65404837373f84dc081647ca885f"
+      },
+      "docs/skills/repository-operations.md": {
+        "git_blob": "53bcd1ccea6e4d46c221e92edde91ca8418def5c",
+        "sha256": "f659f2d1bd16d72825b72f3b893ba03ecdb9a1ac0a75d390291d748662fb21d2"
+      }
+    },
+    "branch": "mk3/wave8-installed-wheel-boundary-20261010",
+    "changed_source_paths": [
+      "action_server/tests/contract_tests/test_active_contracts.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "commit_subject": "test(runtime): guard installed wheel Core imports",
+    "head": "8eb2e6f92109bcbd51e4925ebe703074ee28c6ac",
+    "repository": "/workspace/work/actions-mk3-wave8-wheel-boundary",
+    "tree": "1a5350219c8bfa1715eb6c4c20c9fcbecd9788b3",
+    "worktree_clean": true
+  },
+  "status": "LOCAL_SOURCE_CHECKPOINT_FROZEN_HEAVY_GATE_NOT_RUN",
+  "upstream_disposition": "None. This is a missing local acceptance proof; the migrated source uses public Core ActionContext and Runtime-owned JSONValue. No confirmed upstream defect was reproduced."
+}

@@ -1,0 +1,156 @@
+"/workspace/work/actions-mk3-wave8-pr292/developer/toolkit.yaml" as robot.yaml is:
+# Repository developer toolkit.
+#
+# RCC owns the reproducible toolchain and task boundary. Poetry remains the
+# dependency and package-release authority inside each package.
+
+tasks:
+  Doctor:
+    shell: python toolkit.py doctor
+
+devTasks:
+  Doctor:
+    shell: python toolkit.py doctor
+  Bootstrap:
+    shell: python toolkit.py bootstrap
+  Test:
+    shell: python toolkit.py test
+  ToolkitTest:
+    shell: python toolkit.py toolkit-test
+  Lint:
+    shell: python toolkit.py lint
+  Typecheck:
+    shell: python toolkit.py typecheck
+  Docs:
+    shell: python toolkit.py docs
+  CheckAll:
+    shell: python toolkit.py check-all
+  Coverage:
+    shell: python toolkit.py coverage
+  FrontendTest:
+    shell: python toolkit.py frontend-test
+  InstallCommunity:
+    shell: python toolkit.py install-community
+
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+
+artifactsDir: tmp
+
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
+
+Note! For now, resolved effective environment configuration file is "/workspace/work/actions-mk3-wave8-pr292/developer/setup.yaml".
+####  Progress: 00/15  v18.19.3     0.016s  Context: "" <agent@e13229d8d59d> [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]].
+Note: 'no-build' setting is active. Only cached, prebuild, or imported environments are allowed!
+####  Progress: 01/15  v18.19.3     0.000s  Fresh [private mode] holotree environment 5598d290-c866-2ae4-a51d-5dad5ce3ff34. (parent/pid: 68113/68116)
+####  Progress: 02/15  v18.19.3     0.001s  Holotree blueprint is "318089d9095ad813" [linux_amd64 with 4 workers on 5 CPUs from "setup.yaml"].
+FINAL unified conda environment descriptor:
+---
+channels:
+- conda-forge
+dependencies:
+- python=3.12
+- git=2.46.0
+- nodejs=20.19.3
+- go=1.23.6
+- jq=1.7.1
+- uv=0.9.26
+- pip=25.0
+- pip:
+  - invoke==2.2.0
+  - poetry==2.1.1
+  - pyyaml==6.0.2
+  - pytest==8.3.4
+  - ruff==0.8.6
+---
+####  Progress: 14/15  v18.19.3     0.345s  Restore space from library [with 4 workers on 5 CPUs; with compression: true].
+Installation plan is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/rcc_plan.log
+Environment configuration descriptor is: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/identity.yaml
+####  Progress: 15/15  v18.19.3     0.594s  Fresh holotree done [with 4 workers on 5 CPUs].
+PYTHON=/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python
+ACTIONS=/workspace/work/actions-mk3-wave8-pr292/action_server/src/actions/server/__init__.py
+COMMAND=/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python -m pytest --noconftest -q -vv tests/action_server_tests/test_cli_mcp_resource_history.py::test_action_server_start_timeout_reaps_child_and_output_readers
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-8.4.2, pluggy-1.6.0 -- /workspace/work/actions-mk3-pr302/action_server/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /workspace/work/actions-mk3-wave8-pr292/action_server
+configfile: pyproject.toml
+plugins: anyio-4.14.2, xdist-3.8.0, cov-5.0.0, robocorp-log-pytest-0.0.5, regressions-1.0.6, datadir-1.8.0
+collecting ... collected 1 item
+
+tests/action_server_tests/test_cli_mcp_resource_history.py::test_action_server_start_timeout_reaps_child_and_output_readers FAILED [100%]
+
+=================================== FAILURES ===================================
+_______ test_action_server_start_timeout_reaps_child_and_output_readers ________
+
+tmp_path = PosixPath('/workspace/actions-cloud/robocorp/temp/2c63d356cdeffca3/pytest-of-agent/pytest-0/test_action_server_start_timeo0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7efe96a27170>
+
+    def test_action_server_start_timeout_reaps_child_and_output_readers(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        from actions.server._robo_utils import process as process_module
+    
+        base_process = process_module.Process
+    
+        class SleepingProcess(base_process):
+            def __init__(self, _args, cwd=None, env=None):
+                super().__init__(
+                    [sys.executable, "-c", "import time; time.sleep(60)"],
+                    cwd=cwd,
+                    env=env,
+                )
+    
+        monkeypatch.setattr(process_module, "Process", SleepingProcess)
+        existing_threads = {thread.ident for thread in threading.enumerate()}
+        server = ActionServerProcess(tmp_path)
+        with pytest.raises(TimeoutError):
+            server.start(timeout=0)
+    
+        process = server.process
+        readers = [
+            thread
+            for thread in threading.enumerate()
+            if thread.ident not in existing_threads
+            and thread.name in {"stream_reader_stdout", "stream_reader_stderr"}
+        ]
+        try:
+>           assert process.returncode is not None, "startup timeout left its child running"
+            
+E           AssertionError: startup timeout left its child running
+E           Failed: assert process.returncode is not None
+E           Variables:
+E             process.returncode = None
+
+tests/action_server_tests/test_cli_mcp_resource_history.py:443: AssertionError
+=============================== warnings summary ===============================
+tests/action_server_tests/test_cli_mcp_resource_history.py:457
+  /workspace/work/actions-mk3-wave8-pr292/action_server/tests/action_server_tests/test_cli_mcp_resource_history.py:457: PytestUnknownMarkWarning: Unknown pytest.mark.integration_test - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration_test
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/action_server_tests/test_cli_mcp_resource_history.py::test_action_server_start_timeout_reaps_child_and_output_readers
+========================= 1 failed, 1 warning in 1.60s =========================
+Log (html): /workspace/work/actions-mk3-wave8-pr292/action_server/output/log.html
+Traceback (most recent call last):
+  File "/workspace/work/actions-mk3-evidence/wave8/pr292/run_checks.py", line 61, in <module>
+    subprocess.run(command, cwd=PACKAGE, env=child_env, check=True)
+  File "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python', '-m', 'pytest', '--noconftest', '-q', '-vv', 'tests/action_server_tests/test_cli_mcp_resource_history.py::test_action_server_start_timeout_reaps_child_and_output_readers']' returned non-zero exit status 1.
+Process 68123: exit status 1, command: /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12 [/workspace/work/actions-mk3-evidence/wave8/pr292/run_checks.py startup-cleanup] [v18.19.3/68116]
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@  From rcc "v18.19.3" (controller: "user") point of view, "actual main robot run" was FAILURE, reason: "exit status 1". See details above.  @@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  |  "Build/Pre-run"  relative time allocation ratio:  1:0
+  |  "Setup/Run"  relative time allocation ratio:  10:47
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.
+Error: exit status 1 (robot run exit)
+[rcc] exit status will be: 10!

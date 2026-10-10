@@ -1,0 +1,104 @@
+{
+  "acceptance_scope": "After a reviewed one-shot runner PASS and independent installed inventory/wheel/log readback, this can close the narrow missing#195 installedRuntime privateCore import boundary. No fullRuntime/native/browser/auth/artifact/release acceptance and no publication.",
+  "canonical_doc_delta": {
+    "evidence": "Exact8eb source guard and frozen supervisor failure-path/output/census analysis; current actual wheel gate NOT RUN.",
+    "exact_text": "The one-shot wheel boundary gate must retain its selected wheel hashes and complete installed member scan, including both uninstall orders. Freeze the task and driver against the exact source and pinned prepared toolchain before launch. Reserve bounded cleanup time outside the work deadline, and run owned-child termination/reaping and failure receipt persistence on every exit path. Treat an unreadable process census as unknown, not an empty group. Bound and sanitize retained output and copy only owned regular artifact files; a truncated inventory or incomplete cleanup cannot establish acceptance.",
+    "stale_guidance_removed": "Source paragraph is accurate. Correct runner readiness claim only; do not rewrite old receipt.",
+    "target": "docs/skills/repository-operations.md after new installed Runtime/Core wheel boundary paragraph around165",
+    "uncertainty": "No actual installed wheel or new revised runner evidence;#195 remains open pending that finite gate."
+  },
+  "checked_file_bindings": {
+    "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/environment_linux_amd64_freeze.yaml": {
+      "bytes": 2008,
+      "sha256": "90fc0205b1cf24c39ac0ea41cf3def46fcc1a2a000481413a191427ef601dc22"
+    },
+    "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/fast-robot.yaml": {
+      "bytes": 519,
+      "sha256": "3f5ecb231fe1c7f0a4a0cc20bb87930c0beaa3327be3b910daa28f44efaf5e62"
+    },
+    "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/journal.run": {
+      "bytes": 2015,
+      "sha256": "e1d2c64807399c3d115f7b4c5b78a70b77c19c7cfa51132919bf579885758523"
+    },
+    "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/red-stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/red-stdout.log": {
+      "bytes": 2152,
+      "sha256": "49678a3c38dddd022b6c02f81287a622cc54de8f3970bb526f6bb8549da1a74b"
+    },
+    "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/fast-rcc-final/stdout.log": {
+      "bytes": 133,
+      "sha256": "c02c7e1c64a8e0368c3e6012683f5699ed0f255369f767829eea92dcafa29fcf"
+    },
+    "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan/robot.yaml": {
+      "bytes": 562,
+      "sha256": "a0e56b2f2027feae15d191981ec17ab130b887304938ec2d1547fb872cdf2e68"
+    },
+    "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan/run_wheel_acceptance.py": {
+      "bytes": 1319,
+      "sha256": "05c323872dca4ff1874385b60f272393861aa5a939272ac2ab9f046cdfea0040"
+    },
+    "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan/supervise_heavy_gate.py": {
+      "bytes": 7079,
+      "sha256": "c6e6dd40c184e4da07bb35c8780590f9c7e4476c1027ba43b5aeb87b187ea713"
+    }
+  },
+  "clean": true,
+  "head": "8eb2e6f92109bcbd51e4925ebe703074ee28c6ac",
+  "heavy_gate_verdict": "HOLD_CURRENT_FROZEN_RUNNER",
+  "kind": "Independent exact source and proposed one-shot heavy runner review; no tests/services/builds/installs/remote mutation",
+  "observed_at_utc": "2026-10-10T23:47:57.615602+00:00",
+  "owner_receipt_sha256": "1c5b4fc29982e7d09e3374b74df347facd153724698f7be47d932e46190b8332",
+  "parent": "19380993febaa71238eaee3026b5c808773283ff",
+  "required_no_service_checks_for_revised_runner": [
+    "Static syntax and service-free fake controls for interrupt/early creation/Popen failure, exited leader plus child, census unknown/malformed, bounded overflow/sanitization and cleanup receipt persistence.",
+    "New exclusive immutable bundle/hash manifest. Existing failed/unexecuted plan retained unchanged; root heavy-slot grant only after exact revised-runnerGO."
+  ],
+  "review_commands_observations": [
+    "Exact git head/tree/parent/status and complete two-file diff; git diff --check PASS. Source blobs and SHA equal committed contents.",
+    "Read existing scanner, wheel build/install/probe/uninstall flow and complete new helpers/regressions; selected interpreter invokes fresh venvs, clears PYTHONPATH, and imports are asserted to installed environment.",
+    "All10 owner retained artifact/log/config bindings byte/hash verified; fast stdout shows All checks passed and26 passed/12deselected. Runtime pyproject/lock and developer/setup.yaml equal preparedPR302 manifests.",
+    "Read exact pinned robot/template/driver/supervisor; fresh run_dir/taskfile/artifactdir currently absent. No launch performed."
+  ],
+  "runner_hold_findings": [
+    {
+      "evidence": "Popen.wait/clean_group/artifact copy are inside try, but finally only removes byte-identical robot file. KeyboardInterrupt, second wait timeout, census/copy exceptions bypass group termination/reap and final receipt; taskfile creation is before try.",
+      "file": "supervise_heavy_gate.py",
+      "id": "H1",
+      "smallest_required_correction": "Establish ownership/cleanup before first created resource; put unconditional bounded owned-group TERM/KILL/direct leader wait and failure receipt in finally for every post-creation/post-spawn exit. Use one total deadline with explicit cleanup reserve. Preserve original error; report unresolved children rather than success."
+    },
+    {
+      "evidence": "PermissionError and malformed /proc stat rows are silently skipped; clean_group treats None census as[] within loops. These can classify inaccessible or incomplete state as CLEAN.",
+      "file": "supervise_heavy_gate.py process_group_members/clean_group",
+      "id": "H2",
+      "smallest_required_correction": "Distinguish vanished PID from unreadable/parse/unknown census; make unknown/error state fail cleanup classification. Require leader reaped and trustworthy empty final census; handle lingering zombies explicitly rather than infer absence."
+    },
+    {
+      "evidence": "RCC writes directly to uncapped stdout/stderr files; no sanitization; shutil.copytree(...symlinks=False) follows artifact links. This does not implement the requested bounded sanitized/private evidence capture.",
+      "file": "supervise_heavy_gate.py output/artifact capture",
+      "id": "H3",
+      "smallest_required_correction": "Bound retained bytes while draining pipes, hash/count overflow and fail evidence on truncation when complete acceptance JSON cannot be retained. Keep credentials/proxy/CA values private with sanitization, mode0700/0600 evidence and raw removal. Limit copied artifact count/bytes; reject links or validate their owned containment, retaining no foreign/private files."
+    },
+    {
+      "evidence": "Exact source head/tree guard exists, but launch does not validate frozen template/driver/RCC executable hashes, Poetry version or prepared metadata equality; receipt does not bind those observed launch identities.",
+      "file": "supervise_heavy_gate.py preflight/run_wheel_acceptance.py",
+      "id": "H4",
+      "smallest_required_correction": "Before any gate launch enforce frozen template/driver/current supervisor and pinned regular RCC18.19.3 SHA. Record actual launcher/Poetry2.1.1/prepared metadata and candidate test-module origin; reject drift. Preserve fresh-path refusal and no-overwrite discipline."
+    }
+  ],
+  "source_assertions": [
+    "All installed actions-runtime distribution.files .py entries are enumerated by clean child; duplicate installed entries rejected; nonempty inventory required.",
+    "Inventory path set equals complete selected Runtime wheel .py member set; every resolved installed file is inside clean sys.prefix and outside checkout; all memberSHA values match selected ZIP member and child-observed digest. Runtime and Core selected paths and whole-wheel SHA are bound.",
+    "Private-Core AST guard runs over every bound Runtime Python member, including unimported modules; public actions.ActionContext and Runtime-owned actions.server._protocols JSONValue remain allowed. Existing publicAPI/functionality probes and two uninstall orders remain.",
+    "No production/version/lock/template/default changes; synthetic26PASS/12deselected and Ruff retained, actual installed-wheel gate NOT RUN. Scanner covers the existing declared direct/aliased/statically resolved dynamic imports, not arbitrary runtime import computation or a security sandbox."
+  ],
+  "source_verdict": "GO_SOURCE_ONLY",
+  "tree": "1a5350219c8bfa1715eb6c4c20c9fcbecd9788b3",
+  "upstream_disposition": "none; source proof addition and scratch-runner findings are local, no confirmed maintained upstream defect"
+}

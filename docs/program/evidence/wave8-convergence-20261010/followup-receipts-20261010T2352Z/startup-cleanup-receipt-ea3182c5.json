@@ -1,0 +1,95 @@
+{
+  "task": "PR292 ActionServerProcess startup-failure cleanup",
+  "repository": "/workspace/work/actions-mk3-wave8-pr292",
+  "branch": "mk3/wave8-pr292-startup-cleanup-20261010",
+  "base": {
+    "commit": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+    "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7"
+  },
+  "candidate": {
+    "commit": "ea3182c5ae9a0cf4fe602df2589dc334003cd4e8",
+    "tree": "7a93ec688178a63fad0475b50522475f767b4091",
+    "parent": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+    "working_tree_clean": true,
+    "changed_paths": [
+      "action_server/src/actions/server/_robo_utils/process.py",
+      "action_server/src/actions/server/_selftest.py",
+      "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+      "docs/skills/repository-operations.md"
+    ]
+  },
+  "implementation_boundary": {
+    "owned_wrapper": "The Process instance's direct subprocess.Popen in self._proc; no unrelated process is targeted.",
+    "descendants": "On startup failure, force_kill_process_tree_until snapshots current descendants of the owned wrapper and terminates captured descendants before the wrapper; cleanup result reports wrapper reap and observed live descendants. No process-group-wide claim is made.",
+    "deadline": "20 seconds total for failure cleanup; process-tree operation is given all but the final 2 seconds, which are reserved for joining registered stdout/stderr readers.",
+    "error_behavior": "The original startup exception is re-raised. Cleanup failures or incomplete cleanup are attached as exception notes; cleanup exceptions do not replace the startup failure.",
+    "unchanged_behavior": ["successful start API", "readiness timeout duration", "Process.stop behavior", "server/runtime lifecycle and pooling"]
+  },
+  "regression": {
+    "red": {
+      "result": "1 failed: process.returncode remained None after startup TimeoutError; test finally reaped the child to bound the red run.",
+      "log": "/workspace/work/actions-mk3-evidence/wave8/pr292/startup-cleanup-red.log",
+      "sha256": "603a051e9825437cac9e392f81af58fcd31cad4df1dd0535ee57afb1eaeabdcc"
+    },
+    "green": {
+      "result": "3 passed in 1.34s: actual synthetic spawned child was reaped and both output-reader threads stopped; cleanup exception did not mask TimeoutError; pre-spawn OSError was preserved with no process/readers.",
+      "log": "/workspace/work/actions-mk3-evidence/wave8/pr292/startup-cleanup-green-final.log",
+      "sha256": "d79362bf3581bb0ae71ec96ed507cafb67896e4d3d46c8c8ea5eb750a7c5d0b8"
+    }
+  },
+  "related_process_contract": {
+    "result": "4 passed, 17 deselected in 0.25s; checks credential-argument redaction through common and robo utility process helpers.",
+    "log": "/workspace/work/actions-mk3-evidence/wave8/pr292/process-contract-final.log",
+    "sha256": "8a49b6a78c970a781d8fabab41871d395449dfd300d36d5fdb6cc9ca78d13fcf"
+  },
+  "configured_checks": {
+    "format": {
+      "result": "Ruff formatter: 1 file left unchanged.",
+      "log": "/workspace/work/actions-mk3-evidence/wave8/pr292/format-final.log",
+      "sha256": "e4d9492ce85da38a873a000a40a5e4a96af8baae1d1112a2f3ee96d82d394180"
+    },
+    "lint": {
+      "result": "RCC task completed successfully; Ruff check, Ruff format check (296 files), and isort check passed. Markdown lint executable was unavailable in PATH.",
+      "log": "/workspace/work/actions-mk3-evidence/wave8/pr292/lint-final.log",
+      "sha256": "59a147924b97f5ba1dc025b185051b34de2165c2a2317037602ed8a8a3b85bce"
+    },
+    "diff_check": "git diff --check passed before commit."
+  },
+  "commands": {
+    "gateway_prefix": "set -o pipefail; source /workspace/actions-cloud/activate.sh && rcc task script --no-build -r developer/toolkit.yaml -- python /workspace/work/actions-mk3-evidence/wave8/pr292/run_checks.py",
+    "modes": ["startup-cleanup", "process-contract", "format", "lint"],
+    "pytest_startup_command": "python -m pytest --noconftest -q -vv tests/action_server_tests/test_cli_mcp_resource_history.py::test_action_server_start_timeout_reaps_child_and_output_readers tests/action_server_tests/test_cli_mcp_resource_history.py::test_action_server_start_preserves_error_when_cleanup_raises tests/action_server_tests/test_cli_mcp_resource_history.py::test_action_server_start_failure_before_spawn_keeps_original_error",
+    "pytest_process_command": "python -m pytest --noconftest -q tests/action_server_tests/test_log_credentials.py -k subprocess_debug_diagnostics_redact_api_key_arguments"
+  },
+  "toolchain_and_source_binding": {
+    "rcc": {"version": "18.19.3", "path": "/workspace/actions-cloud/bin/rcc", "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"},
+    "prepared_python": {"version": "3.12.15", "path": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python"},
+    "pytest": "8.4.2",
+    "configured_ruff": "0.8.6",
+    "candidate_import_origin": "/workspace/work/actions-mk3-wave8-pr292/action_server/src/actions/server/__init__.py",
+    "candidate_prepared_pyproject_sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+    "candidate_prepared_lock_sha256": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+    "runner_sha256": "196136b996a528317cdc5b08e97a9684b76377e5d7e6f46475f5e0fdf3861bc5"
+  },
+  "source_sha256": {
+    "action_server/src/actions/server/_robo_utils/process.py": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+    "action_server/src/actions/server/_selftest.py": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": "672875e8f2c628b13ef4a14f271e7c7a7a6f444170530c4aaef58b3524b903e8",
+    "docs/skills/repository-operations.md": "411c279dfe23edb74c10cd087ff533faa53b4d37944654276f2c47512328c08d"
+  },
+  "scope_limitations": {
+    "windows_startup_90s_and_outer_300s_diagnostic": "NOT RUN",
+    "native_watcher_or_RCC_provider_execution": "NOT RUN",
+    "full_action_server_test_suite": "NOT RUN",
+    "evidence_source": "Synthetic child lifecycle only; the retained hosted Windows failures/diagnosis are at /workspace/work/actions-mk3-evidence/wave8/pr292-windows-independent-diagnosis.json (sha256 8441d2e6a0095044242cf52c52d1651769f3a1ff725cc8e840938379b4fa962a)."
+  },
+  "documentation_improvement": {
+    "file": "docs/skills/repository-operations.md",
+    "delta": "Records that ActionServerProcess.start owns its child and stdout/stderr readers before readiness, and that failure cleanup must terminate/reap the owned tree, join readers within one finite deadline, and preserve the startup exception; clarifies successful start and readiness timeout are unchanged.",
+    "evidence": "The red/green synthetic child regression plus implementation in _selftest.py and _robo_utils/process.py.",
+    "stale_guidance": "No stale guidance found; this adds a missing test-helper lifecycle rule adjacent to the existing process cleanup guidance.",
+    "uncertainty": "Descendant cleanup observes a point-in-time process-tree snapshot and does not claim universal descendant discovery or native Windows acceptance."
+  },
+  "upstream_disposition": "Confirmed repository-local test-helper cleanup defect. Fix is prepared directly in the maintained repository for review; no separate upstream issue was filed. Root should deduplicate/reassess after review if the fix will not be carried in this change.",
+  "external_writes": "None; local commit only."
+}
