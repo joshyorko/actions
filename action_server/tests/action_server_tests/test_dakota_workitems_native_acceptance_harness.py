@@ -11,6 +11,7 @@ import subprocess
 import sys
 import textwrap
 import time
+import zipfile
 from pathlib import Path
 
 import pytest
@@ -38,6 +39,7 @@ assert NATIVE_TEST_SPEC is not None and NATIVE_TEST_SPEC.loader is not None
 NATIVE_TEST = importlib.util.module_from_spec(NATIVE_TEST_SPEC)
 NATIVE_TEST_SPEC.loader.exec_module(NATIVE_TEST)
 UI_TEST_PATH = Path(__file__).with_name("test_dakota_workitems_native_ui_acceptance.py")
+CORE_VERSION = "1.0.2"
 
 
 def _collect_nodeids(test_path: Path, *, marker: str | None = None):
@@ -115,14 +117,16 @@ def reports_for(
     return reports
 
 
-def proof_record(kind: str, executable_hash: str, wheel_hash: str) -> dict:
+def proof_record(
+    kind: str, executable_hash: str, wheel_hash: str, core_version: str = CORE_VERSION
+) -> dict:
     return {
         "schema_version": 2,
         "runtime_kind": kind,
         "executable_sha256": executable_hash,
         "actions_core_wheel_sha256": wheel_hash,
         "actions_core_installation": {
-            "actions_core_version": "1.0.2",
+            "actions_core_version": core_version,
             "actions_module_owned_by_distribution": True,
             "install_source_matches_candidate": True,
             "wheel_sha256": wheel_hash,
@@ -134,13 +138,74 @@ def proof_record(kind: str, executable_hash: str, wheel_hash: str) -> dict:
 
 
 def write_proofs(
-    directory: Path, executable_hashes: dict[str, str], wheel_hash: str
+    directory: Path,
+    executable_hashes: dict[str, str],
+    wheel_hash: str,
+    core_version: str = CORE_VERSION,
 ) -> None:
     for kind in RUNNER.CASE_ENV:
         (directory / f"{kind}.json").write_text(
-            json.dumps(proof_record(kind, executable_hashes[kind], wheel_hash)),
+            json.dumps(
+                proof_record(kind, executable_hashes[kind], wheel_hash, core_version)
+            ),
             encoding="utf-8",
         )
+
+
+def write_core_wheel(wheel: Path, version: str) -> None:
+    wheel.parent.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(wheel, "w") as archive:
+        archive.writestr(
+            f"actions_core-{version}.dist-info/METADATA",
+            f"Metadata-Version: 2.1\nName: actions-core\nVersion: {version}\n",
+        )
+
+
+def test_candidate_wheel_inventory_uses_metadata_version_and_rejects_stale_entries(
+    tmp_path: Path,
+):
+    wheel_dir = tmp_path / "wheels"
+    wheel_dir.mkdir()
+    wheel = wheel_dir / "actions_core-1.0.3-py3-none-any.whl"
+    write_core_wheel(wheel, "1.0.3")
+
+    selected, version = RUNNER.inspect_core_wheel(wheel_dir)
+    assert selected == wheel
+    assert version == "1.0.3"
+
+    proof_dir = tmp_path / "proofs"
+    proof_dir.mkdir()
+    executable_hashes = {"frozen": "a" * 64, "go-wrapper": "b" * 64}
+    wheel_hash = RUNNER.sha256(wheel)
+    write_proofs(proof_dir, executable_hashes, wheel_hash, version)
+    assert set(
+        RUNNER.validate_case_proofs(proof_dir, executable_hashes, wheel_hash, version)
+    ) == set(RUNNER.CASE_ENV)
+    write_proofs(proof_dir, executable_hashes, wheel_hash, CORE_VERSION)
+    with pytest.raises(
+        RUNNER.AcceptanceFailure,
+        match="proof_core_installation_invalid_frozen",
+    ):
+        RUNNER.validate_case_proofs(proof_dir, executable_hashes, wheel_hash, version)
+
+    (wheel_dir / "actions_core-1.0.2-py3-none-any.whl").write_bytes(b"stale")
+    with pytest.raises(RUNNER.AcceptanceFailure, match="core_wheel_inventory_invalid"):
+        RUNNER.inspect_core_wheel(wheel_dir)
+
+
+def test_native_workflow_builds_candidate_version_without_reusing_wheel_output():
+    workflow = (
+        NATIVE_TEST_PATH.parents[3]
+        / ".github"
+        / "workflows"
+        / "frontend-build-unauthenticated.yml"
+    ).read_text(encoding="utf-8")
+
+    assert "wheel_dir.mkdir(parents=True, exist_ok=False)" in workflow
+    assert 'expected_version = package["tool"]["poetry"]["version"]' in workflow
+    assert "assert len(entries) == len(wheels) == 1" in workflow
+    assert 'assert metadata.get("Version") == expected_version' in workflow
+    assert "actions_core-1.0.2-py3-none-any.whl" not in workflow
 
 
 def test_rejects_a_single_selected_native_case():
@@ -193,14 +258,14 @@ def test_rejects_missing_or_duplicate_proof_files(tmp_path: Path):
     with pytest.raises(
         RUNNER.AcceptanceFailure, match="proof_file_set_incomplete_or_duplicate"
     ):
-        RUNNER.validate_case_proofs(tmp_path, hashes, wheel_hash)
+        RUNNER.validate_case_proofs(tmp_path, hashes, wheel_hash, CORE_VERSION)
 
     write_proofs(tmp_path, hashes, wheel_hash)
     (tmp_path / "frozen-copy.json").write_text("{}", encoding="utf-8")
     with pytest.raises(
         RUNNER.AcceptanceFailure, match="proof_file_set_incomplete_or_duplicate"
     ):
-        RUNNER.validate_case_proofs(tmp_path, hashes, wheel_hash)
+        RUNNER.validate_case_proofs(tmp_path, hashes, wheel_hash, CORE_VERSION)
 
 
 @pytest.mark.parametrize(
@@ -227,7 +292,7 @@ def test_rejects_mismatched_proof_binding(
     proof_path.write_text(json.dumps(proof), encoding="utf-8")
 
     with pytest.raises(RUNNER.AcceptanceFailure, match=failure):
-        RUNNER.validate_case_proofs(tmp_path, hashes, wheel_hash)
+        RUNNER.validate_case_proofs(tmp_path, hashes, wheel_hash, CORE_VERSION)
 
 
 def test_rejects_core_install_proof_bound_to_different_candidate(tmp_path: Path):
@@ -242,7 +307,7 @@ def test_rejects_core_install_proof_bound_to_different_candidate(tmp_path: Path)
     with pytest.raises(
         RUNNER.AcceptanceFailure, match="proof_core_installation_invalid_frozen"
     ):
-        RUNNER.validate_case_proofs(tmp_path, hashes, wheel_hash)
+        RUNNER.validate_case_proofs(tmp_path, hashes, wheel_hash, CORE_VERSION)
 
 
 def test_incomplete_pytest_run_cannot_finalize_pass(tmp_path: Path):
@@ -262,6 +327,7 @@ def test_incomplete_pytest_run_cannot_finalize_pass(tmp_path: Path):
             tmp_path,
             hashes,
             wheel_hash,
+            CORE_VERSION,
         )
 
     assert receipt["status"] != "PASS"
@@ -269,7 +335,7 @@ def test_incomplete_pytest_run_cannot_finalize_pass(tmp_path: Path):
 
 
 def test_acceptance_claims_are_not_presented_as_build_provenance():
-    receipt = RUNNER.initial_receipt("a" * 40, "dakota-local")
+    receipt = RUNNER.initial_receipt("a" * 40, "dakota-local", CORE_VERSION)
 
     assert receipt["source_sha_claim"] == "a" * 40
     assert receipt["build_version_claim"] == "dakota-local"
@@ -446,7 +512,7 @@ def test_abrupt_process_termination_invalidates_previous_pass(tmp_path: Path):
     rcc_home = tmp_path / "rcc"
     wheel = rcc_home / "wheels" / "actions_core-1.0.2-py3-none-any.whl"
     wheel.parent.mkdir(parents=True)
-    wheel.write_bytes(b"wheel artifact")
+    write_core_wheel(wheel, CORE_VERSION)
 
     receipt_path = tmp_path / "receipt.json"
     receipt_path.write_text(
@@ -554,7 +620,7 @@ def test_receipt_requires_completed_final_artifact_checks(
     wrapper.write_bytes(b"wrapper artifact")
     wheel = tmp_path / "rcc" / "wheels" / "actions_core-1.0.2-py3-none-any.whl"
     wheel.parent.mkdir(parents=True)
-    wheel.write_bytes(b"wheel artifact")
+    write_core_wheel(wheel, CORE_VERSION)
     receipt_path = tmp_path / "receipt.json"
     hashes = {"frozen": RUNNER.sha256(frozen), "go-wrapper": RUNNER.sha256(wrapper)}
     wheel_hash = RUNNER.sha256(wheel)
