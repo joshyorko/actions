@@ -126,6 +126,15 @@ jobs:
           --build-command "uv run --no-project --python ${{ matrix.python }} poetry run inv build-executable --go-wrapper"
           --output output/native-artifact-manifest.json
 
+      - name: Upload frozen executable and provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: action-server-native-provenance-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            action_server/dist/action-server/
+            action_server/output/native-artifact-manifest.json
+          retention-days: 7
+
       - name: Install Chromium for native acceptance
         working-directory: action_server/frontend
         run: npx playwright install chromium
@@ -240,15 +249,6 @@ jobs:
             action_server/output/native-artifact-manifest.json
             action_server/output/native-artifact-tree-inventory.json
           if-no-files-found: ignore
-          retention-days: 7
-      
-      - name: Upload frozen executable and provenance
-        uses: actions/upload-artifact@v4
-        with:
-          name: action-server-native-provenance-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
-          path: |
-            action_server/dist/action-server/
-            action_server/output/native-artifact-manifest.json
           retention-days: 7
 
       - name: Upload binary artifact
