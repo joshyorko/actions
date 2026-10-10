@@ -165,6 +165,19 @@ four existing template manifests pin published Core 1.0.2. A template pin is
 therefore revision-specific; verify the target manifests before describing a
 release's template state.
 
+For the Runtime/Core private-module boundary, a checkout-only AST guard and a
+clean Core-wheel probe are separate evidence from a clean installed Runtime
+wheel check. The Runtime wheel contract must enumerate every `.py` member in
+the installed `actions-runtime` distribution, verify each installed file is
+inside the fresh environment and outside the checkout, and compare every file
+byte-for-byte with the corresponding member of the exact selected Runtime
+wheel. Bind that scan to the wheel SHA-256, then run the private-Core import
+AST guard over every member, including modules not imported by the smoke test.
+Keep the public Core API compatibility checks in those same clean installs;
+Runtime-owned modules such as `actions.server._protocols` remain valid. Report
+this boundary as passed only when the installed-member inventory is complete,
+all member bytes match the selected wheel, and the full scan succeeds.
+
 Poetry merges the matching Core source into the main/dev lock entry: a
 `poetry install --only main` using this checkout lock still selects local Core.
 That is a monorepo development/install contract, not a production registry
