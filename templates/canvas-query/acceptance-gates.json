@@ -18,8 +18,8 @@
   },
   "core_dependency": {
     "declared_version": "1.0.3",
-    "state": "provisional-unpublished-prerequisite",
-    "required_gate": "Publish Core 1.0.3, then verify fresh dependency resolution and published-wheel compatibility before exposing this production template.",
-    "evidence_limit": "Current source-based acceptance does not prove the published wheel or packaged/frozen Action Server."
+    "state": "published-wheel-verified; template-runtime-consumer-pending",
+    "required_gate": "Run the Canvas template Runtime/browser gate with a fresh install of published Core 1.0.3 before claiming this template's installed-consumer compatibility.",
+    "evidence_limit": "The independent Core receipt verifies the published wheel's public metadata API with an external Actions CLI consumer. It does not prove this template's Runtime/browser consumer, a packaged/frozen Action Server, authorized artifact retrieval, or ChatGPT rendering."
   }
 }

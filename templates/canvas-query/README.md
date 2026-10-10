@@ -51,9 +51,9 @@ handle in the shared fixture is not an access grant, so this template neither
 creates a fake handle nor reports a simulated artifact status. See
 `acceptance-gates.json` for the recorded contract gap and release gate.
 
-The project provisionally declares `actions-core=1.0.3`, the version required
-for the public `meta` decorator arguments used here. This is an unpublished
-prerequisite, not a release approval. Do not expose this production template to
-users until that Core version is published and a fresh dependency resolution
-passes. The source-based acceptance path does not establish published-wheel
-compatibility or a packaged/frozen Action Server.
+The project declares `actions-core=1.0.3`, the published version required for
+the public `meta` decorator arguments used here. An independent clean install
+verified the published wheel's public metadata API with an external Actions CLI
+consumer. This template's Runtime/browser gate remains separate and must use a
+fresh install of the published dependency; the source-based acceptance path
+does not establish that consumer path or a packaged/frozen Action Server.

@@ -783,6 +783,27 @@ def test_canvas_template_runs_through_runtime_and_real_browser(
     action_server_process: ActionServerProcess, tmp_path: Path
 ) -> None:
     project = _create_project(tmp_path, "canvas-query-runtime")
+    (project / "published_core_probe.py").write_text(
+        """from importlib.metadata import distribution
+from pathlib import Path
+
+import actions.mcp
+from actions.mcp import tool
+
+
+@tool
+def published_core_identity() -> dict[str, str]:
+    core = distribution("actions-core")
+    module = Path(actions.mcp.__file__).resolve()
+    installed_files = {
+        Path(core.locate_file(item)).resolve() for item in (core.files or [])
+    }
+    if module not in installed_files:
+        raise AssertionError("actions.mcp is not owned by installed actions-core")
+    return {"version": core.version}
+""",
+        encoding="utf-8",
+    )
     action_server_process.start(
         cwd=project,
         db_file="server.db",
@@ -793,6 +814,12 @@ def test_canvas_template_runs_through_runtime_and_real_browser(
     async def check_runtime_contract() -> None:
         async with action_server_process.mcp_client() as session:
             listed = await session.list_tools()
+            core_tool = next(
+                tool for tool in listed.tools if tool.name == "published_core_identity"
+            )
+            core_identity = await session.call_tool(core_tool.name, {})
+            assert core_identity.structured_content == {"version": "1.0.3"}
+
             search_tool = next(
                 tool for tool in listed.tools if tool.name == "canvas_fixture_search"
             )
