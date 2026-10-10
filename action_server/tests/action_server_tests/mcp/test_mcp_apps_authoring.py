@@ -6,6 +6,7 @@ import os
 import shlex
 import shutil
 import socket
+import sqlite3
 import subprocess
 from collections.abc import Callable
 from functools import partial
@@ -20,7 +21,6 @@ from mcp.client.streamable_http import streamable_http_client
 from mcp.types import ReadResourceResult, TextContent, TextResourceContents
 
 from actions.server._selftest import ActionServerProcess
-
 
 CANVAS_RESOURCE_URI = "ui://action-canvas/v1/canvas.html?query-fixture=0.1"
 
@@ -196,6 +196,7 @@ def object_result() -> dict[str, str]:
         actions_sync=True,
         timeout=120,
     )
+
     async def check_routes() -> None:
         async with action_server_process.mcp_client() as session:
             listed = await session.list_tools()
@@ -297,7 +298,7 @@ def test_canvas_view_calls_public_action_through_runtime_bridge(
         encoding="utf-8"
     )
     (tmp_path / "canvas.html").write_text(canvas_html, encoding="utf-8")
-    action_source = '''
+    action_source = """
 import hashlib
 import json
 import sys
@@ -396,12 +397,10 @@ def canvas_fixture_worker_provenance() -> dict[str, str]:
         "direct_url_wheel": str(installed_wheel),
         "wheel_sha256": candidate_sha256,
     }
-'''
+"""
     action_source = action_source.replace(
         '"__EXPECTED_CORE_WHEEL__"', repr(str(candidate_core_wheel))
-    ).replace(
-        '"__EXPECTED_CORE_WHEEL_SHA256__"', repr(candidate_core_wheel_sha256)
-    )
+    ).replace('"__EXPECTED_CORE_WHEEL_SHA256__"', repr(candidate_core_wheel_sha256))
     (tmp_path / "canvas_actions.py").write_text(action_source, encoding="utf-8")
 
     action_server_process.start(
@@ -410,7 +409,7 @@ def canvas_fixture_worker_provenance() -> dict[str, str]:
         actions_sync=True,
         timeout=120,
     )
-    runtime_rows: list[dict[str, str]] = []
+    runtime_call_observations: list[dict[str, str]] = []
     worker_provenance: dict[str, str] = {}
 
     async def check_runtime_contract() -> None:
@@ -446,8 +445,12 @@ def canvas_fixture_worker_provenance() -> dict[str, str]:
                 "artifact": {"handle": "art_7Wk3qN9pL2xD5mR8sV4cY1"},
                 "error": None,
             }
-            runtime_rows.append(
-                {"caller": "python-mcp-client", "tool": "canvas_fixture_search", "result": "passed"}
+            runtime_call_observations.append(
+                {
+                    "caller": "python-mcp-client",
+                    "tool": "canvas_fixture_search",
+                    "result": "passed",
+                }
             )
 
             artifact_status = await session.call_tool(
@@ -455,7 +458,7 @@ def canvas_fixture_worker_provenance() -> dict[str, str]:
                 {"handle": "art_7Wk3qN9pL2xD5mR8sV4cY1"},
             )
             assert artifact_status.structured_content == {"status": "ready"}
-            runtime_rows.append(
+            runtime_call_observations.append(
                 {
                     "caller": "python-mcp-client",
                     "tool": "canvas_fixture_artifact_status",
@@ -463,14 +466,12 @@ def canvas_fixture_worker_provenance() -> dict[str, str]:
                 }
             )
 
-            provenance = await session.call_tool(
-                "canvas_fixture_worker_provenance", {}
-            )
+            provenance = await session.call_tool("canvas_fixture_worker_provenance", {})
             assert provenance.structured_content is not None
             worker_provenance.update(provenance.structured_content)
             assert worker_provenance["wheel_sha256"] == candidate_core_wheel_sha256
             assert Path(worker_provenance["worker_prefix"]).is_dir()
-            runtime_rows.append(
+            runtime_call_observations.append(
                 {
                     "caller": "python-mcp-client",
                     "tool": "canvas_fixture_worker_provenance",
@@ -486,9 +487,7 @@ def canvas_fixture_worker_provenance() -> dict[str, str]:
         env["CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH"] = playwright_executable
     else:
         env = os.environ.copy()
-    env["CANVAS_RUNTIME_MCP_URL"] = (
-        f"http://127.0.0.1:{action_server_process.port}/mcp"
-    )
+    env["CANVAS_RUNTIME_MCP_URL"] = f"http://127.0.0.1:{action_server_process.port}/mcp"
     with socket.socket() as port_probe:
         port_probe.bind(("127.0.0.1", 0))
         env["CANVAS_HARNESS_PORT"] = str(port_probe.getsockname()[1])
@@ -506,7 +505,7 @@ def canvas_fixture_worker_provenance() -> dict[str, str]:
         check=True,
         timeout=180,
     )
-    runtime_rows.extend(
+    runtime_call_observations.extend(
         [
             {
                 "caller": "playwright-browser",
@@ -520,6 +519,40 @@ def canvas_fixture_worker_provenance() -> dict[str, str]:
             },
         ]
     )
+    action_call_counts = {
+        "canvas_fixture_search": 2,
+        "canvas_fixture_artifact_status": 2,
+        "canvas_fixture_worker_provenance": 1,
+    }
+    action_names = tuple(action_call_counts)
+    placeholders = ", ".join("?" for _ in action_names)
+    with sqlite3.connect(action_server_process.datadir / "server.db") as connection:
+        run_records = connection.execute(
+            f"""
+            SELECT run.id, run.status, action.name
+            FROM run
+            JOIN action ON action.id = run.action_id
+            WHERE action.name IN ({placeholders})
+            ORDER BY run.numbered_id
+            """,
+            action_names,
+        ).fetchall()
+    recorded_counts = {name: 0 for name in action_call_counts}
+    for _, status, action_name in run_records:
+        assert (
+            status == 2
+        ), f"Expected successful Runtime Run for {action_name}: {status}"
+        recorded_counts[action_name] += 1
+    assert recorded_counts == action_call_counts
+    persisted_run_records = [
+        {
+            "run_id": run_id,
+            "status": "passed",
+            "status_code": status,
+            "action_name": action_name,
+        }
+        for run_id, status, action_name in run_records
+    ]
     if playwright_executable:
         browser_version = subprocess.run(
             [playwright_executable, "--version"],
@@ -557,7 +590,8 @@ def canvas_fixture_worker_provenance() -> dict[str, str]:
                 "playwright_pinned_browser": "not-run"
                 if playwright_executable
                 else "used",
-                "runtime_rows": runtime_rows,
+                "runtime_call_observations": runtime_call_observations,
+                "persisted_run_records": persisted_run_records,
             },
             indent=2,
         )
