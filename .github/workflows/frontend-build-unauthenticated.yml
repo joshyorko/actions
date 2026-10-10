@@ -429,12 +429,41 @@ jobs:
 
       - name: Build candidate Core wheel for native Work Items acceptance
         working-directory: ./actions
+        shell: bash
         env:
           DAKOTA_WORKITEMS_RCC_HOME: ${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
         run: |
-          python -c "import os; from pathlib import Path; (Path(os.environ['DAKOTA_WORKITEMS_RCC_HOME']) / 'wheels').mkdir(parents=True, exist_ok=True)"
+          uv run --no-project --python 3.12 python - <<'PY'
+          import os
+          from pathlib import Path
+
+          wheel_dir = Path(os.environ["DAKOTA_WORKITEMS_RCC_HOME"]) / "wheels"
+          wheel_dir.mkdir(parents=True, exist_ok=False)
+          PY
           uv run --no-project --python 3.12 poetry build --format wheel --output "${{ runner.temp }}/dakota-workitems-rcc-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}/wheels"
-          python -c "import os; from pathlib import Path; assert (Path(os.environ['DAKOTA_WORKITEMS_RCC_HOME']) / 'wheels' / 'actions_core-1.0.2-py3-none-any.whl').is_file()"
+          uv run --no-project --python 3.12 python - <<'PY'
+          import email
+          import os
+          import tomllib
+          import zipfile
+          from pathlib import Path
+
+          package = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))
+          expected_name = package["tool"]["poetry"]["name"]
+          expected_version = package["tool"]["poetry"]["version"]
+          wheel_dir = Path(os.environ["DAKOTA_WORKITEMS_RCC_HOME"]) / "wheels"
+          entries = list(wheel_dir.iterdir())
+          wheels = [path for path in entries if path.suffix == ".whl"]
+          assert len(entries) == len(wheels) == 1 and not wheels[0].is_symlink()
+          wheel = wheels[0]
+          assert wheel.name == f"actions_core-{expected_version}-py3-none-any.whl"
+          with zipfile.ZipFile(wheel) as archive:
+              metadata_paths = [name for name in archive.namelist() if name.endswith(".dist-info/METADATA")]
+              assert len(metadata_paths) == 1
+              metadata = email.message_from_bytes(archive.read(metadata_paths[0]))
+          assert metadata.get("Name", "").lower().replace("_", "-") == expected_name
+          assert metadata.get("Version") == expected_version
+          PY
 
       - name: Verify Work Items consumer through frozen and Go runtimes
         timeout-minutes: 20

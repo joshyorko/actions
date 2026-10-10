@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import sqlite3
 from contextlib import contextmanager
@@ -16,6 +17,20 @@ from actions.server._selftest import ActionServerProcess, actions_server_run
 
 def _write_retained_package(package: Path, generation: str) -> None:
     package.mkdir(exist_ok=True)
+    if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
+        (package / "package.yaml").write_text(
+            "spec-version: v2\n"
+            f"name: {package.name}\n"
+            "description: Managed frozen MCP rollback fixture.\n"
+            "version: 0.0.1\n"
+            "dependencies:\n"
+            "  conda-forge:\n"
+            "    - python=3.12\n"
+            "    - uv=0.9.26\n"
+            "  pypi:\n"
+            "    - actions-core=1.0.2\n",
+            encoding="utf-8",
+        )
     (package / "catalog_actions.py").write_text(
         f'''from actions import mcp
 
@@ -38,7 +53,23 @@ def retained_template(item: str) -> str:
 def retained_prompt(subject: str) -> str:
     """{generation} prompt."""
     return f"{generation}-prompt-{{subject}}"
-''',
+'''
+        + (
+            "\nimport hashlib, json, sys\n"
+            "from importlib.metadata import version\n"
+            "from pathlib import Path\n"
+            "import actions\n"
+            "@mcp.tool()\n"
+            "def managed_worker_identity() -> str:\n"
+            "    return json.dumps({\n"
+            "        'python': str(Path(sys.executable).resolve()),\n"
+            "        'core_origin': str(Path(actions.__file__).resolve()),\n"
+            "        'core_sha256': hashlib.sha256(Path(actions.__file__).read_bytes()).hexdigest(),\n"
+            "        'core_version': version('actions-core'),\n"
+            "    }, sort_keys=True)\n"
+            if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ
+            else ""
+        ),
         encoding="utf-8",
     )
 
@@ -126,6 +157,19 @@ def _assert_retained_callbacks(client: httpx.Client) -> None:
     assert response.json() == "last-good-prompt-alpha"
 
 
+def _managed_worker_identity(client: httpx.Client) -> dict[str, str]:
+    response = client.post(
+        "/api/actions/package-a/managed-worker-identity/run", json={}
+    )
+    assert response.status_code == 200, response.text
+    identity = json.loads(response.json())
+    holotree = (Path(os.environ["ACTIONS_HOME"]) / "holotree").resolve()
+    assert Path(identity["python"]).is_relative_to(holotree)
+    assert Path(identity["core_origin"]).is_relative_to(holotree)
+    assert identity["core_version"] == "1.0.2"
+    return identity
+
+
 @contextmanager
 def _runtime(
     datadir: Path, cwd: Path, directories: tuple[Path, ...] = ()
@@ -147,12 +191,32 @@ def _runtime(
                 "no_proxy": "*",
                 # The Runtime changes cwd; select this checkout even when the
                 # parent was launched with relative PYTHONPATH entries.
-                "PYTHONPATH": str(Path(__file__).resolve().parents[2] / "src"),
+                "PYTHONPATH": (
+                    ""
+                    if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ
+                    else str(Path(__file__).resolve().parents[2] / "src")
+                ),
             },
             additional_args=["--address=127.0.0.1"]
             + [f"--dir={directory}" for directory in directories],
-            timeout=30,
+            # A fresh frozen-test ACTIONS_HOME may need to create the managed
+            # package environment before the server reports its ready port.
+            # Keep source-mode startup's shorter deadline unchanged.
+            timeout=(
+                90
+                if directories
+                and "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ
+                else 30
+            ),
         )
+        if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
+            import psutil
+
+            expected = Path(
+                os.environ["SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE"]
+            ).resolve()
+            actual = Path(psutil.Process(process.process.pid).exe()).resolve()
+            assert actual == expected
         with httpx.Client(
             base_url=f"http://127.0.0.1:{process.port}", timeout=30, trust_env=False
         ) as client:
@@ -213,9 +277,9 @@ def test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good(
     diagnostic: str,
 ) -> None:
     if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
-        pytest.skip(
-            "Unmanaged source-subprocess proof; native managed packages are separate"
-        )
+        assert Path(
+            os.environ["SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE"]
+        ).is_file()
     monkeypatch.setenv("ACTIONS_HOME", str(tmp_path / "actions-home"))
     monkeypatch.setenv("ROBOTS_HOME", str(tmp_path / "robots-home"))
     package_a = tmp_path / "package_a"
@@ -224,6 +288,20 @@ def test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good(
     datadir = tmp_path / "runtime-data"
     _write_retained_package(package_a, "last-good")
     package_b.mkdir()
+    if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
+        (package_b / "package.yaml").write_text(
+            "spec-version: v2\n"
+            f"name: {package_b.name}\n"
+            "description: Managed frozen MCP rollback fixture.\n"
+            "version: 0.0.1\n"
+            "dependencies:\n"
+            "  conda-forge:\n"
+            "    - python=3.12\n"
+            "    - uv=0.9.26\n"
+            "  pypi:\n"
+            "    - actions-core=1.0.2\n",
+            encoding="utf-8",
+        )
     (package_b / "catalog_actions.py").write_text(
         "from actions import mcp\n@mcp.tool()\n"
         'def sibling_tool() -> str:\n    return "last-good-sibling"\n',
@@ -232,6 +310,9 @@ def test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good(
     with _runtime(datadir, tmp_path, (package_a, package_b)) as client:
         before_catalogs = _catalogs(client)
         _assert_retained_callbacks(client)
+        if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
+            initial_worker = _managed_worker_identity(client)
+            print("MANAGED_PACKAGE_WORKER", json.dumps(initial_worker, sort_keys=True))
 
     database = datadir / "catalog.sqlite"
     before_rows = _catalog_rows(database)
@@ -249,6 +330,20 @@ def test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good(
 
     _write_retained_package(package_a, "candidate")
     package_c.mkdir()
+    if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
+        (package_c / "package.yaml").write_text(
+            "spec-version: v2\n"
+            f"name: {package_c.name}\n"
+            "description: Managed frozen MCP rollback fixture.\n"
+            "version: 0.0.1\n"
+            "dependencies:\n"
+            "  conda-forge:\n"
+            "    - python=3.12\n"
+            "    - uv=0.9.26\n"
+            "  pypi:\n"
+            "    - actions-core=1.0.2\n",
+            encoding="utf-8",
+        )
     (package_c / "catalog_actions.py").write_text(
         "from actions import mcp\n" + declaration, encoding="utf-8"
     )
@@ -270,7 +365,15 @@ def test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good(
         returncode=1,
         cwd=tmp_path,
         timeout=30,
-        additional_env={"NO_PROXY": "*", "no_proxy": "*"},
+        additional_env={
+            "NO_PROXY": "*",
+            "no_proxy": "*",
+            "PYTHONPATH": (
+                ""
+                if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ
+                else os.environ.get("PYTHONPATH", "")
+            ),
+        },
     )
     assert diagnostic in result.stdout + result.stderr
     assert _catalog_rows(database) == before_rows
@@ -281,5 +384,7 @@ def test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good(
     with _runtime(datadir, tmp_path) as client:
         assert _catalogs(client) == before_catalogs
         _assert_retained_callbacks(client)
+        if "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" in os.environ:
+            assert _managed_worker_identity(client) == initial_worker
     assert _catalog_rows(database) == before_rows
     print(f"COMPLETE_CLI_MCP_ROLLBACK_PASS collision={collision}")

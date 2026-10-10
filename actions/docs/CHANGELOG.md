@@ -1,11 +1,18 @@
 # Changelog
 
-## Unreleased
+## 1.0.3 candidate (unpublished)
 
-- Prepare Core 1.0.2 with public `ActionContext`,
-  `ActionsListActionTypedDict` and the versioned `actions.server_integration`
-  boundary. Core 1.0.1 does not provide these APIs. This candidate is not a
-  published release; publish Core before a Runtime requiring this boundary.
+- Add validated `meta=` support to public `actions.mcp.tool` and
+  `actions.mcp.resource` decorators for MCP Apps metadata, including UI resource
+  identity, visibility, and CSP fields.
+
+This candidate has not been published. A local version bump, source-built wheel,
+or passing candidate workflow is not proof that PyPI serves Core 1.0.3.
+
+## 1.0.2 - 2026-10-09
+
+- Add public `ActionContext`, `ActionsListActionTypedDict` and the versioned
+  `actions.server_integration` boundary.
 - Cover active variable-scope mutation, exact exports and private-import
   aliases, including statically identifiable dynamic imports.
 

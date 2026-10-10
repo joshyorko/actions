@@ -222,9 +222,25 @@ class _ActionRoutes:
         self.actions = actions
         self.registered_route_names = names
 
-    def prepare_actions(self):
-        """Build and validate routes without changing the published catalog."""
+    def prepare_actions(self) -> tuple:
+        """Validate the catalog and transactionally reserve its exact public keys."""
+        from ._models import get_db
+
+        db = get_db()
+        with db.transaction():
+            # Acquire the database writer before reading the catalog/history.
+            # SQLite's zero-row UPDATE promotes even an empty history table;
+            # PostgreSQL needs a table lock to serialize an empty table too.
+            if db.backend_name == "postgresql":
+                db.execute("LOCK TABLE mcp_catalog_name IN SHARE ROW EXCLUSIVE MODE")
+            else:
+                db.execute("UPDATE mcp_catalog_name SET id=id WHERE 0")
+            return self._prepare_actions()
+
+    def _prepare_actions(self) -> tuple:
+        """Build routes without changing the published catalog."""
         import json
+        from hashlib import sha256
 
         from fastapi import APIRouter
 
@@ -234,7 +250,7 @@ class _ActionRoutes:
         )
 
         from . import _actions_run
-        from ._models import Action, ActionPackage, get_db
+        from ._models import Action, ActionPackage, McpCatalogName, get_db
         from .mcp.setup_mcp_server_from_actions import McpServerSetupHelper
 
         db = get_db()
@@ -275,6 +291,7 @@ class _ActionRoutes:
                     continue
             actions_to_register.append((action_package, action))
 
+        reserved_names = {binding.id: binding for binding in db.all(McpCatalogName)}
         tool_names = next_mcp_server_setup_helper.resolve_tool_names(
             actions_to_register
         )
@@ -346,6 +363,45 @@ class _ActionRoutes:
         next_mcp_server_setup_helper._validate_ui_resource_references(
             next_mcp_server_setup_helper._catalog
         )
+        catalog = next_mcp_server_setup_helper._catalog
+        candidate_names: dict[str, McpCatalogName] = {}
+        for namespace, mapping in (
+            ("tool", catalog.tool_name_to_action_info),
+            ("resource", catalog.resource_to_action_info),
+            ("resource-template", catalog.resource_template_to_action_info),
+            ("prompt", catalog.prompt_name_to_action_info),
+        ):
+            for name, info in sorted(mapping.items()):
+                package = action_package_id_to_action_package[
+                    info.action.action_package_id
+                ]
+                identity = (package.name, info.action.name)
+                encoded_key = json.dumps([namespace, name]).encode("utf-8")
+                key = sha256(b"actions.mcp.catalog-key.v1\0" + encoded_key).hexdigest()
+                previous = reserved_names.get(key) or candidate_names.get(key)
+                if previous is not None and (previous.namespace, previous.name) != (
+                    namespace,
+                    name,
+                ):
+                    raise ValueError(
+                        "MCP catalog key digest collision; admission rejected."
+                    )
+                previous_identity = (
+                    (previous.package_name, previous.action_name) if previous else None
+                )
+                if previous_identity is not None and previous_identity != identity:
+                    raise ValueError(
+                        f"MCP {namespace} key {name!r} is reserved for {previous_identity!r}; "
+                        f"the candidate would assign it to {identity!r}. "
+                        "Rename the conflicting action or public key before retrying "
+                        "admission. Clients must rediscover the current MCP catalog."
+                    )
+                if previous is None:
+                    candidate_names[key] = McpCatalogName(
+                        key, namespace, name, *identity
+                    )
+        for binding in candidate_names.values():
+            db.insert(binding)
         return (
             router.routes,
             next_mcp_server_setup_helper,

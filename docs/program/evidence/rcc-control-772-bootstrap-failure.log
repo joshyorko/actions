@@ -1,0 +1,30 @@
+2026-10-10T07:48:08.2329187Z     Found existing installation: pip 26.2.1
+2026-10-10T07:48:08.2640167Z     Uninstalling pip-26.2.1:
+2026-10-10T07:48:08.2694682Z       Successfully uninstalled pip-26.2.1
+2026-10-10T07:48:10.4806760Z 
+2026-10-10T07:48:10.4847620Z Successfully installed SecretStorage-3.5.0 anyio-4.15.1 build-1.6.1 cachecontrol-0.14.4 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.2 cleo-2.1.0 crashtest-0.4.1 cryptography-50.0.2 distlib-0.4.3 dulwich-0.22.8 fastjsonschema-2.22.2 filelock-3.32.7 findpython-0.6.3 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 installer-0.7.0 invoke-2.2.1 jaraco.classes-3.4.0 jaraco.context-6.1.2 jaraco.functools-4.6.0 jeepney-0.9.0 keyring-25.7.0 more-itertools-11.1.0 msgpack-1.2.3 packaging-26.3 pbs-installer-2025.12.17 pip-25.3 pkginfo-1.13 platformdirs-4.12.4 poetry-2.1.1 poetry-core-2.1.1 pycparser-3.11 pyproject-hooks-1.3.3 rapidfuzz-3.14.6 requests-2.34.2 requests-toolbelt-1.0.0 semver-3.0.4 shellingham-1.5.4 tomlkit-0.12.5 trove-classifiers-2026.9.21.13 typing_extensions-4.16.0 urllib3-2.8.0 virtualenv-20.39.1 zstandard-0.25.0
+2026-10-10T07:48:10.6433392Z ##[group]Run set -Eeuo pipefail
+2026-10-10T07:48:10.6433927Z set -Eeuo pipefail
+2026-10-10T07:48:10.6434400Z mkdir -p "$RUNNER_TEMP/actions-rcc"
+2026-10-10T07:48:10.6434944Z rcc="$RUNNER_TEMP/actions-rcc/rcc"
+2026-10-10T07:48:10.6435787Z curl --fail --location --silent --show-error --retry 2 --connect-timeout 15 --max-time 180 \
+2026-10-10T07:48:10.6437372Z   "https://github.com/joshyorko/rcc/releases/download/v18.19.3/rcc-linux64" \
+2026-10-10T07:48:10.6438137Z   --output "$rcc.download"
+2026-10-10T07:48:10.6438814Z printf '%s  %s\n' "$RCC_SHA256" "$rcc.download" | sha256sum --check --status -
+2026-10-10T07:48:10.6439522Z mv "$rcc.download" "$rcc"
+2026-10-10T07:48:10.6439951Z chmod 700 "$rcc"
+2026-10-10T07:48:10.6440561Z "$rcc" --version 2>&1 | grep --fixed-strings --line-regexp --quiet "v18.19.3"
+2026-10-10T07:48:10.6441478Z printf 'ACTIONS_RUNTIME_RCC_BINARY=%s\n' "$rcc" >> "$GITHUB_ENV"
+2026-10-10T07:48:10.6442251Z printf 'RCC_SHA256=%s\n' "$RCC_SHA256" >> "$GITHUB_ENV"
+2026-10-10T07:48:10.6442823Z "$rcc" --version
+2026-10-10T07:48:10.6443201Z sha256sum "$rcc"
+2026-10-10T07:48:10.6524432Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-10T07:48:10.6525021Z env:
+2026-10-10T07:48:10.6525512Z   RCC_ROLLBACK_CANDIDATE_SHA: f7c6ed61f24fd9e98d1465c83042c5446466311b
+2026-10-10T07:48:10.6526315Z   RCC_ROLLBACK_CONTROL_SHA: 772b73d9e7f9da6c3ea939faff8ae76d37982da7
+2026-10-10T07:48:10.6527283Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+2026-10-10T07:48:10.6527829Z   RCC_WORKER_LIBC_NAME: glibc
+2026-10-10T07:48:10.6528254Z   RCC_WORKER_LIBC_VERSION: 2.39
+2026-10-10T07:48:10.6528890Z   RCC_SHA256: 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428
+2026-10-10T07:48:10.6529577Z ##[endgroup]
+2026-10-10T07:48:12.4062296Z ##[error]Process completed with exit code 141.
