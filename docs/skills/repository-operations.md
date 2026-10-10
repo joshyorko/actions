@@ -15,6 +15,41 @@ resolves to a resource with that MIME type before replacing the active catalog,
 so a failed catalog admission leaves the previous catalog in place.
 `visibility: ["app"]` is a host projection hint, never backend authorization.
 
+Canvas acceptance separates the component suite, the fixture-only simulated
+browser host, and a real Runtime bridge. The bounded bridge test is explicitly
+opt-in (`ACTIONS_CANVAS_RUNTIME_ACCEPTANCE=1`); an ordinary integration-suite
+run skips it and provides no browser acceptance evidence. Run it with an
+isolated RCC home and temporary caches, for example:
+
+```sh
+ACTIONS_CANVAS_RUNTIME_ACCEPTANCE=1 \
+ACTIONS_HOME=/tmp/canvas-runtime-actions-home \
+UV_CACHE_DIR=/tmp/canvas-runtime-uv-cache \
+TMPDIR=/tmp \
+python -m pytest -m integration_test -q action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py -k canvas_view_calls_public_action_through_runtime_bridge
+```
+
+The bounded bridge test is
+`test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge`:
+it builds the Canvas HTML and an exact-checkout `actions-core` wheel, installs
+that wheel into the isolated RCC worker after environment creation, reads the
+resource and public decorator metadata from a running Action Server, and drives
+the same built view through browser calls to that Runtime's Streamable HTTP MCP
+endpoint. Do not replace this with a fabricated tool response or a direct
+component test. The browser test allocates a test-selected port and refuses to
+reuse an existing server. It accepts an explicit local Chromium executable for
+environments without Playwright's pinned browser; record its version and
+SHA-256 separately, and report the pinned Playwright browser as not run. This
+candidate-source integration does not prove published-wheel compatibility,
+production-host authorization/CSP, artifact resolution, or ChatGPT rendering.
+On success it writes `canvas-bridge-acceptance-receipt.json` under pytest's
+temporary test directory, binding the candidate wheel SHA and `direct_url.json`
+to the worker prefix and imported module and recording the built resource digest
+and browser identity. It separates five observed successful MCP calls from five
+SQLite-persisted Runtime Run records containing Run IDs, passed statuses, and
+action names. Preserve this receipt before reusing the pytest `--basetemp`
+directory or allowing pytest to prune old temporary trees.
+
 The focused source tests exercise public decorators through the Runtime
 Streamable HTTP route. The process-level fixture additionally installs the
 exact candidate Core wheel into an isolated test environment before importing an
@@ -622,7 +657,7 @@ task-entrypoint regression that rejects injected removed-product imports.
 
 The HTTP helper is the independently publishable `actions-http-helper`
 distribution, imported as `actions_http`. Its release workflow expects tags of
-the form `actions_http-<version>` and the repository secret
+the form `actions_http-<version>` and the secret available to its `pypi` environment,
 `PYPI_TOKEN_ACTIONS_HTTP_HELPER`; neither publishing nor secret discovery is
 performed by local verification. The helper reads network settings from
 `~/.actions/network-settings.yaml` on Linux/macOS and
@@ -2107,14 +2142,41 @@ Its candidate changes package A and adds colliding C while omitting previously
 admitted B. Each case checks unchanged Action/ActionPackage rows, old included
 source bytes, and snapshot-store contents, then restarts without synchronization
 and checks identical tools/resources/templates/prompts catalogs and revisions
-plus old HTTP/MCP execution. On the affected baseline, per-package synchronization
-disabled A and B before the final catalog was built, erased the duplicate, and
-started a server instead of rejecting the batch. Duplicate-key checks must run
+plus old HTTP/MCP execution. With every Runtime child pinned to affected baseline
+`84b8c70a`, startup disables A while importing B, so the initial A call fails before
+duplicate admission is reached. The earlier retained baseline receipt seeded the
+catalog through a repaired editable installation, then ran the candidate command
+on affected source: that mixed-seed observation disabled A and B, erased the
+duplicate, and started a server instead of rejecting the batch. Preserve that
+receipt as candidate-admission evidence, not an isolated baseline lifecycle.
+Duplicate-key checks must run
 against the complete desired catalog before committing replacements or omissions;
 helper-only collision tests do not prove that boundary. This source-subprocess
-proof uses installed Core 1.0.2; frozen and managed-RCC acceptance remain separate.
-Compatibility for previously discovered tool aliases across catalog changes
-remains open.
+proof was executed with installed Core 1.0.2; frozen and managed-RCC acceptance
+remain separate. Tool aliases identify capabilities within the current catalog;
+clients must rediscover after catalog changes. Deterministic current names,
+TTL-zero/private catalogs and the shared descriptor fingerprint support this
+policy, but do not preserve historical alias identity or fence a call against a
+concurrent catalog revision. A formerly qualified alias can become a literal
+action's name. External alias-keyed authorization grants are not covered.
+
+`test_cli_live_reload_multi_package.py` exercises actual unmanaged two-package
+watched failure and recovery. After malformed decorated B is rejected, it checks
+unchanged admitted DB/source/catalog and fresh HTTP/MCP execution of both old
+packages, then checks a valid B update and natural shutdown/restart. It measures
+the actual worker Core module origin/hash/version. This proof is separate from
+opted-in real-RCC provider rollback and from in-flight generation draining.
+
+Pin an absolute Runtime source path in each CLI child's `PYTHONPATH` when its cwd
+differs from pytest's. Relative entries can silently select an editable install;
+the parent module origin does not prove the child's origin. Check import
+resolution with the child's interpreter, cwd and environment; compare actual
+worker origins with that result rather than a fixed Core version or an editable
+distribution's metadata file location. Preserve public decorator markers in
+malformed collection fixtures: a file without a marker is skipped and may
+represent intentional removal. During watched convergence, poll one catalog
+response; separate list requests can straddle a valid generation change, so
+compare shared revisions only after the admitted surface is stable.
 
 Additive reimports that omit an enabled action fail before publication: retaining
 its old catalog record while replacing its source would advertise an

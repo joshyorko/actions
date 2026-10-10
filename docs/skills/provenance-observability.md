@@ -29,6 +29,29 @@ Runtime Plan. A parent/child Run, workflow fan-out/fan-in, Work Item, and
 interaction link uses an explicit typed link with its source and destination
 Workspace checks.
 
+Portable Package Revision content is separate from its consumer-side scoped
+references. The manifest may declare logical Package identity, capability and
+environment requirements, Runtime Plans, and logical binding requirements;
+Workspace IDs, Deployment binding references/values, credentials, provider
+URLs, Worker Profiles, and host-local paths do not belong in that portable
+content. A consumer-side `PackageRevisionRef` carries Workspace, logical
+Package, and immutable revision identity; a `RuntimePlanRef` additionally
+identifies its owning Package Revision and immutable plan digest/schema/
+compatibility identity. The experimental schema and fixtures in
+`docs/design/package-revision-v1-schema-draft.md` exercise only these structural
+boundaries. Their example digests are not production digest calculations, and
+schema validation does not prove cross-reference resolution or Run pinning.
+The reference experiment has one authoritative owning package reference at
+`runtimePlanRef.packageRevisionRef`; an outer duplicate is forbidden even if
+it matches. Its `revisionDigest` is the complete `PackageRevisionId` called
+`revision_id` in the #129 domain draft, separate from source artifact and plan
+digests. Plan schema versions are positive JSON integers in both portable plan
+headers and scoped references. The registry's supported versions and the
+reference's match to an immutable manifest still require consumer validation.
+The field mapping and regression cases are documented in the experimental
+schema draft; they do not approve the paused #129 production API or identifier
+syntax.
+
 ## Admission and execution receipt
 
 Run creation stores one immutable `AdmissionSnapshot` containing the schema

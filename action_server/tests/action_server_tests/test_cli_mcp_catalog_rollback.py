@@ -142,7 +142,13 @@ def _runtime(
             max_processes=2,
             reuse_processes=True,
             add_shutdown_api=True,
-            env={"NO_PROXY": "*", "no_proxy": "*"},
+            env={
+                "NO_PROXY": "*",
+                "no_proxy": "*",
+                # The Runtime changes cwd; select this checkout even when the
+                # parent was launched with relative PYTHONPATH entries.
+                "PYTHONPATH": str(Path(__file__).resolve().parents[2] / "src"),
+            },
             additional_args=["--address=127.0.0.1"]
             + [f"--dir={directory}" for directory in directories],
             timeout=30,

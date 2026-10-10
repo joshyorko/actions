@@ -11,6 +11,9 @@ const frame = document.querySelector("#canvas-view") as unknown as HarnessFrame;
 const protocol = document.querySelector("#host-protocol")!;
 const origin = window.location.origin;
 let initialized = false;
+const useRuntimeTools = new window.URLSearchParams(window.location.search).has(
+    "runtime",
+);
 
 function send(method: string, params: unknown): void {
     const target = frame.contentWindow;
@@ -59,6 +62,43 @@ window.addEventListener("message", (event) => {
             name?: string;
             arguments?: Record<string, unknown>;
         };
+        if (useRuntimeTools && params.name) {
+            void window
+                .fetch("/__runtime_tool_call", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({
+                        name: params.name,
+                        arguments: params.arguments ?? {},
+                    }),
+                })
+                .then(async (response) => {
+                    if (!response.ok) {
+                        throw new Error("Runtime tool call failed.");
+                    }
+                    return response.json();
+                })
+                .then((result) => {
+                    frame.contentWindow?.postMessage(
+                        { jsonrpc: "2.0", id: message.id, result },
+                        origin,
+                    );
+                })
+                .catch(() => {
+                    frame.contentWindow?.postMessage(
+                        {
+                            jsonrpc: "2.0",
+                            id: message.id,
+                            error: {
+                                code: -32603,
+                                message: "Runtime tool call failed.",
+                            },
+                        },
+                        origin,
+                    );
+                });
+            return;
+        }
         const query = params.arguments?.query;
         let structuredContent: unknown;
         if (params.name === "canvas_fixture_search") {
@@ -103,9 +143,12 @@ document.querySelector("#replace-context")?.addEventListener("click", () => {
 });
 document.querySelector("#remount")?.addEventListener("click", () => {
     initialized = false;
-    frame.src = "/index.html?remount=" + Date.now();
+    frame.src =
+        "/index.html?remount=" +
+        Date.now() +
+        (useRuntimeTools ? "&runtime=1" : "");
 });
 
 // Install the message listener before loading the iframe so the initialize
 // request cannot race the harness's module-script startup.
-frame.src = "/index.html";
+frame.src = useRuntimeTools ? "/index.html?runtime=1" : "/index.html";
