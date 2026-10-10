@@ -157,6 +157,24 @@ class RccRuntimeDescriptor:
             raise RccRuntimeError("descriptor", "invalid descriptor JSON") from exc
 
 
+@dataclass(frozen=True)
+class RccPublishedArtifactDetails:
+    """The two canonical identities returned by one RCC publish operation."""
+
+    specification_digest: str
+    artifact_digest: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.specification_digest, str) or not _DIGEST_RE.fullmatch(
+            self.specification_digest
+        ):
+            raise RccRuntimeError("publish", "invalid sha256 specification digest")
+        if not isinstance(self.artifact_digest, str) or not _DIGEST_RE.fullmatch(
+            self.artifact_digest
+        ):
+            raise RccRuntimeError("publish", "invalid sha256 artifact digest")
+
+
 def parse_artifact_digest(payload: object) -> str:
     """Extract exactly one canonical digest from an RCC JSON result."""
 
@@ -181,6 +199,61 @@ def parse_artifact_digest(payload: object) -> str:
     if len(values) != 1 or len(candidates) == 0:
         raise RccRuntimeError("artifact", "missing or malformed artifact identity")
     return values[0]
+
+
+def parse_published_artifact_details(payload: object) -> RccPublishedArtifactDetails:
+    """Require RCC's canonical publish fields and reject identity conflicts."""
+
+    if not isinstance(payload, dict):
+        raise RccRuntimeError("publish", "RCC publish details are not an object")
+
+    specification_digest = payload.get("specificationDigest")
+    artifact_digest = payload.get("artifactDigest")
+    if not isinstance(specification_digest, str) or not _DIGEST_RE.fullmatch(
+        specification_digest
+    ):
+        raise RccRuntimeError("publish", "missing or malformed specification digest")
+    if not isinstance(artifact_digest, str) or not _DIGEST_RE.fullmatch(
+        artifact_digest
+    ):
+        raise RccRuntimeError("publish", "missing or malformed artifact digest")
+
+    # RCC v18.19.3 emits these camel-case fields. If older artifact aliases are
+    # also present, require them to identify the same artifact.
+    artifact_values: list[object] = []
+    for key in ("artifact_digest", "digest"):
+        if key in payload:
+            artifact_values.append(payload[key])
+    if "artifact" in payload:
+        value = payload["artifact"]
+        if isinstance(value, dict) and "digest" in value:
+            artifact_values.append(value["digest"])
+        else:
+            artifact_values.append(value)
+    if "environment_artifact" in payload:
+        value = payload["environment_artifact"]
+        if isinstance(value, dict) and "digest" in value:
+            artifact_values.append(value["digest"])
+        else:
+            artifact_values.append(value)
+    if any(
+        not isinstance(value, str)
+        or not _DIGEST_RE.fullmatch(value)
+        or value != artifact_digest
+        for value in artifact_values
+    ):
+        raise RccRuntimeError("publish", "conflicting or malformed artifact identities")
+
+    if (
+        "specification_digest" in payload
+        and payload["specification_digest"] != specification_digest
+    ):
+        raise RccRuntimeError("publish", "conflicting specification identities")
+
+    return RccPublishedArtifactDetails(
+        specification_digest=specification_digest,
+        artifact_digest=artifact_digest,
+    )
 
 
 Runner = Callable[..., tuple[int, str, str]]
@@ -273,13 +346,13 @@ def _run_json(
     return loaded
 
 
-def publish_artifact(
+def _publish_artifact_payload(
     environment: Path,
     rcc_location: Path,
     *,
-    provider: str | None = None,
-    runner: Runner = _subprocess_runner,
-) -> str:
+    provider: str | None,
+    runner: Runner,
+) -> dict:
     provider = _validate_provider_reference(provider)
     args = [
         str(rcc_location),
@@ -291,7 +364,37 @@ def publish_artifact(
     ]
     if provider:
         args.extend(["--provider", provider])
-    return parse_artifact_digest(_run_json("publish", args, runner))
+    return _run_json("publish", args, runner)
+
+
+def publish_artifact(
+    environment: Path,
+    rcc_location: Path,
+    *,
+    provider: str | None = None,
+    runner: Runner = _subprocess_runner,
+) -> str:
+    return parse_artifact_digest(
+        _publish_artifact_payload(
+            environment, rcc_location, provider=provider, runner=runner
+        )
+    )
+
+
+def publish_artifact_details(
+    environment: Path,
+    rcc_location: Path,
+    *,
+    provider: str | None = None,
+    runner: Runner = _subprocess_runner,
+) -> RccPublishedArtifactDetails:
+    """Publish once and return RCC's unmodified specification/artifact digests."""
+
+    return parse_published_artifact_details(
+        _publish_artifact_payload(
+            environment, rcc_location, provider=provider, runner=runner
+        )
+    )
 
 
 def acquire_artifact(

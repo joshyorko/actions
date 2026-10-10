@@ -2249,6 +2249,23 @@ it is reacquired by Artifact digest and never by a persisted executable or
 materialization path. RCC acquire results must include exact identity and
 `verification.valid == true`; missing or invalid verification fails closed.
 
+RCC v18.19.3 `env publish --json` returns the canonical `specificationDigest`
+and `artifactDigest` together. Code that needs both must preserve them from that
+single response through `publish_artifact_details()`; do not substitute the
+Actions-local environment fingerprint for RCC's specification identity. The
+legacy `publish_artifact()` API intentionally continues to parse artifact-only
+responses for existing callers; use the details API when specification identity
+is required, and fail closed if either canonical digest is absent, malformed,
+or conflicts with another identity in the same payload.
+The details API preserves RCC-reported metadata; it does not verify complete
+package-source selection or compile a Package Revision. A real-RCC receipt for
+this API must pin a source containing the details implementation; earlier
+artifact-only receipts do not exercise it. The managed publication-details
+case records the candidate and control commit/tree, RCC version and binary
+hash, one invocation, and the exact JSON response alongside both parsed
+digests. This proves the metadata returned by that publication only; it is not
+evidence that the complete source tree was selected or compiled.
+
 The gated real proof is run with the released RCC binary and explicit gate:
 
 ```bash
@@ -2572,6 +2589,11 @@ skipped because no task-owned managed provider is configured is NOT RUN, not
 acceptance evidence. This exercises one selected package through the current
 Runtime consumer; it does not prove complete source selection, source
 authorization, compiler/admission trust, or any package identity API.
+The consumer's test-only SQLite catalog creates its private data directory
+before opening the database and registers `get_all_model_classes()` so schema
+additions such as `McpCatalogName` are included. Keep a service-free SQLite
+fixture test for this setup separate from the RCC-managed action execution
+proof, so missing fixture prerequisites fail without provisioning RCC.
 On 2026-10-10 the immutable consumer-gate candidate advanced from
 `f7c6ed61f24fd9e98d1465c83042c5446466311b`, which predates this test and is
 not eligible to run it, to `d376399f497fb98f47062e493219e063db8f08e1`

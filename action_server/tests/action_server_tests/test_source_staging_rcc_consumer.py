@@ -6,12 +6,185 @@ import hashlib
 import importlib.util
 import json
 import os
+import sqlite3
 import stat
 import subprocess
 import sys
 from pathlib import Path
 
 import pytest
+
+
+def _create_runtime_catalog_database(data_dir: Path):
+    """Create the consumer test catalog using the complete Runtime registry."""
+    from actions.server._database import Database
+    from actions.server._models import get_all_model_classes, get_model_db_rules
+
+    data_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
+    database = Database(data_dir / "catalog.sqlite")
+    database.initialize(get_all_model_classes())
+    database.create_tables(get_model_db_rules())
+    return database
+
+
+def test_runtime_catalog_database_fixture_creates_directory_and_current_schema(
+    tmp_path: Path,
+):
+    """Exercise the SQLite consumer fixture without an RCC-managed environment."""
+    database = _create_runtime_catalog_database(tmp_path / "runtime-data")
+
+    assert database.db_path.is_file()
+    with sqlite3.connect(database.db_path) as connection:
+        # This table is part of the current registry and must be available to
+        # the real staged-source consumer before package admission begins.
+        table = connection.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+            ("mcp_catalog_name",),
+        ).fetchone()
+    assert table == ("mcp_catalog_name",)
+
+
+@pytest.mark.integration_test
+@pytest.mark.real_rcc
+@pytest.mark.skipif(
+    sys.platform != "linux", reason="RCC publication proof requires Linux"
+)
+def test_published_artifact_details_preserves_one_rcc_identity_pair(tmp_path: Path):
+    """Capture both canonical digests from one real RCC environment publication."""
+    if os.environ.get("ACTIONS_REAL_RCC_ARTIFACT_TEST") != "1":
+        pytest.skip("set ACTIONS_REAL_RCC_ARTIFACT_TEST=1 for RCC publication proof")
+
+    from actions.server import _rcc_runtime_adapter
+    from actions.server._rcc_runtime_adapter import publish_artifact_details
+
+    rcc_value = os.environ.get("ACTIONS_RUNTIME_RCC_BINARY")
+    if not rcc_value:
+        pytest.fail("ACTIONS_RUNTIME_RCC_BINARY is required for RCC publication proof")
+    rcc_binary = Path(rcc_value).resolve(strict=True)
+    rcc_sha256 = hashlib.sha256(rcc_binary.read_bytes()).hexdigest()
+    assert (
+        rcc_sha256 == "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    )
+    rcc_version = subprocess.run(
+        [str(rcc_binary), "--version"], capture_output=True, text=True, check=True
+    ).stdout.strip()
+    assert rcc_version == "v18.19.3"
+
+    package_dir = tmp_path / "minimal-package"
+    package_dir.mkdir(mode=0o700)
+    environment = package_dir / "package.yaml"
+    environment.write_text(
+        "version: 0.1\nspec-version: v2\ndependencies:\n"
+        "  conda-forge:\n    - python=3.12.15\n",
+        encoding="utf-8",
+    )
+
+    helper_path = (
+        Path(__file__).resolve().parents[2] / "scripts/verify_dakota_rcc_acceptance.py"
+    )
+    helper_spec = importlib.util.spec_from_file_location(
+        "rcc_details_provider_harness", helper_path
+    )
+    assert helper_spec is not None and helper_spec.loader is not None
+    provider_harness = importlib.util.module_from_spec(helper_spec)
+    helper_spec.loader.exec_module(provider_harness)
+    provider_tmp = tmp_path / "provider-tmp"
+    provider_home = tmp_path / "provider-home"
+    provider_tmp.mkdir(mode=0o700)
+    provider_home.mkdir(mode=0o700)
+    provider_environment = os.environ.copy()
+    provider_environment.update(
+        {
+            "ACTIONS_HOME": str(provider_home),
+            "ROBOCORP_HOME": str(provider_home),
+            "TMPDIR": str(provider_tmp),
+        }
+    )
+    provider, provider_url = provider_harness.start_provider(
+        str(rcc_binary),
+        tmp_path / "selected-provider",
+        provider_environment,
+        deadline=provider_harness.Deadline.after(900),
+    )
+
+    invocations: list[dict[str, object]] = []
+
+    def recording_runner(*args: str) -> tuple[int, str, str]:
+        result = _rcc_runtime_adapter._subprocess_runner(*args)
+        invocations.append(
+            {
+                "args": list(args),
+                "returncode": result[0],
+                "stdout": result[1],
+                "stderr": result[2],
+            }
+        )
+        return result
+
+    try:
+        details = publish_artifact_details(
+            environment, rcc_binary, provider=provider_url, runner=recording_runner
+        )
+        assert len(invocations) == 1
+        invocation = invocations[0]
+        assert invocation["args"] == [
+            str(rcc_binary),
+            "env",
+            "publish",
+            "--environment",
+            str(environment),
+            "--json",
+            "--provider",
+            provider_url,
+        ]
+        assert invocation["returncode"] == 0
+        raw_json = invocation["stdout"]
+        assert isinstance(raw_json, str)
+        payload = json.loads(raw_json)
+        assert payload["specificationDigest"] == details.specification_digest
+        assert payload["artifactDigest"] == details.artifact_digest
+    finally:
+        provider_harness.terminate_process_tree(provider)
+        assert provider.poll() is not None
+
+    repository_root = Path(__file__).resolve().parents[3]
+    source_commit = subprocess.check_output(
+        ["git", "-C", str(repository_root), "rev-parse", "HEAD"], text=True
+    ).strip()
+    source_tree = subprocess.check_output(
+        ["git", "-C", str(repository_root), "rev-parse", "HEAD^{tree}"], text=True
+    ).strip()
+    assert source_commit == os.environ.get("RCC_ROLLBACK_CANDIDATE_SHA")
+    assert source_tree == os.environ.get("RCC_ROLLBACK_CANDIDATE_TREE")
+    control_commit = os.environ.get("RCC_ROLLBACK_CONTROL_SHA")
+    control_tree = os.environ.get("RCC_ROLLBACK_CONTROL_TREE")
+    assert control_commit and len(control_commit) == 40
+    assert control_tree and len(control_tree) == 40
+
+    receipt_path_value = os.environ.get("ACTIONS_RUNTIME_PUBLISHED_DETAILS_RECEIPT")
+    if not receipt_path_value:
+        pytest.fail("ACTIONS_RUNTIME_PUBLISHED_DETAILS_RECEIPT is required")
+    receipt = {
+        "schema_version": 1,
+        "status": "PASS",
+        "source": {"commit": source_commit, "tree": source_tree},
+        "control": {"commit": control_commit, "tree": control_tree},
+        "rcc": {"version": rcc_version, "sha256": rcc_sha256},
+        "publication": {
+            "invocation_count": len(invocations),
+            "provider": provider_url,
+            "args": invocation["args"],
+            "specification_digest": details.specification_digest,
+            "artifact_digest": details.artifact_digest,
+            "raw_json": raw_json,
+            "raw_json_sha256": hashlib.sha256(raw_json.encode("utf-8")).hexdigest(),
+        },
+    }
+    receipt_path = Path(receipt_path_value)
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    receipt_path.write_text(
+        json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
 
 
 @pytest.mark.integration_test
@@ -161,22 +334,13 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
         import actions.server._models as models
         from actions.server._actions_import import import_action_package
         from actions.server._actions_process_pool import ActionsProcessPool
-        from actions.server._database import Database
-        from actions.server._models import (
-            Action,
-            ActionPackage,
-            Run,
-            RunStatus,
-            get_model_db_rules,
-        )
+        from actions.server._models import Action, ActionPackage, Run, RunStatus
         from actions.server._rcc_runtime_adapter import load_descriptor
         from actions.server._settings import Settings
 
         data_dir = tmp_path / "runtime-data"
-        database = Database(data_dir / "catalog.sqlite")
+        database = _create_runtime_catalog_database(data_dir)
         with database.connect():
-            database.initialize([ActionPackage, Action])
-            database.create_tables(get_model_db_rules())
             models._global_db = database
             try:
                 import_action_package(
