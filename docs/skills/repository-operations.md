@@ -1141,6 +1141,20 @@ candidate gate.
 6. Update the relevant canonical guide with the durable learning and evidence.
 7. Commit one logical change with a Conventional Commit prefix.
 
+### Action Server OpenAPI golden snapshots
+
+When an OpenAPI snapshot fails, compare parsed expected and observed JSON before
+refreshing it. Reconcile new paths and schemas against mounted routers and
+existing API tests; verify removed paths, HTTP methods, and security
+requirements separately. For existing responses, preserve tested validation,
+privacy, and size bounds. Snapshot refreshes record the current source contract;
+they do not authorize Runtime API changes. The full-spec fixture is covered by
+`test_server_full_openapi_flag`, while
+`test_run_api_openapi_distinguishes_legacy_summary_and_detail_contracts`,
+`test_run_summary_fields_have_a_finite_page_budget`, and
+`test_configured_api_key_protects_assembled_surfaces` guard response shape,
+bounded summary data, and configured authentication.
+
 ### Action Server shared database
 
 Action Server keeps SQLite as the default datadir-local backend. A shared
