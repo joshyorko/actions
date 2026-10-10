@@ -755,18 +755,52 @@ and independent of database order. `ActionPackage.name` has a database unique
 index and identifies package imports/updates; UUIDs and filesystem paths do not
 enter alias generation.
 
-MCP tool names identify the current admitted catalog only. Adding, removing,
-disabling, or filtering colliding tools can change another tool's advertised
-name. A generated alias such as `package_a__do_it` can later identify a literal
-action with that name in another package; a stale call can execute that different
-action. Clients must rediscover the current catalog instead of retaining aliases
-across catalog changes. `actions.catalogRevision` supports rediscovery but is
-not a call precondition. It fingerprints advertised descriptors, so implementation
-changes with identical descriptors preserve it. Generated alias text is neither
-a durable action identity nor an authorization grant: serving whitelists match
-original package/action identities before alias resolution. Safe identity
-compatibility for previously discovered aliases across changing catalogs is not
-implemented; current-catalog determinism does not establish that guarantee.
+MCP names remain deterministic functions of the complete admitted action set;
+reservation history never changes an advertised alias or descriptor fingerprint.
+Before admission, Runtime checks durable ownership of exact public tool names,
+resource URIs, resource-template strings, and prompt names in the existing
+catalog database. Each namespace/key belongs to its original
+`(ActionPackage.name, Action.name)` pair. Disabled, omitted, filtered, or deleted
+actions leave reservations behind. A candidate that would reassign a reserved
+key to another pair is rejected before publication. Rename the conflicting
+action or public key and retry the complete update; transactional import/reload
+failure retains the previous database, catalog, and executable generation.
+This deliberately rejects unsafe updates rather than assigning history-dependent
+fallback names, preserving equivalent admitted catalogs across replicas.
+
+The `mcp_catalog_name` table is part of the existing database and migration
+lifecycle. Admission acquires the SQLite writer or PostgreSQL table lock before
+reading the catalog/history, validates the complete candidate, and persists new
+reservations in the same transaction. Indexed IDs are fixed-size SHA-256 digests
+of domain-separated JSON namespace/key pairs; exact namespace/key text is also
+stored and a digest collision fails admission. No public-key length limit is
+introduced. The four namespaces are separate. Restart or another process using
+the same database retains ownership; a fresh/replaced database has no such
+history. Migration 13 starts with empty history and cannot reconstruct unknown
+pre-upgrade advertisements. Clients must rediscover on upgrade and after catalog
+changes. This guarantee covers recorded admissions, not arbitrary earlier names.
+
+Retired keys do not forward calls to hidden or disabled actions. Unavailable
+tools return `isError` with `tools/list` guidance; unavailable resources/prompts
+return protocol errors naming their discovery methods. `actions.catalogRevision`
+is a descriptor fingerprint, not a call precondition or authorization grant;
+identical descriptors preserve it, and a call already admitted against an old
+catalog can finish on that generation. Serving whitelists and authentication
+still apply to original package/action identities. External alias-keyed grants
+are not established by reservations.
+
+Exact template-string ownership does not prevent different templates from
+matching the same concrete URI. For example, `example://{tenant}/item` and
+`example://acme/{resource}` both match `example://acme/item`; retiring one and
+admitting the other can change that concrete read's target. This observed
+cross-template matching ambiguity remains outside the exact-key guard and needs
+separate policy before claiming durable identity for every concrete resource URI.
+Cross-kind matching also remains unguarded: a prior direct resource
+`example://cross/new` can later match `example://cross/{item}`, while a prior
+`example://cross-old/{item}` read can later hit a new direct resource at
+`example://cross-old/item`. Direct URI lookup takes precedence over template
+matching. Exact namespace reservations therefore do not preserve concrete URI
+identity across namespaces or overlapping patterns.
 
 HTTP paths, action display names, metadata, and dispatch
 targets remain tied to their original package/action. Resource URI and prompt
@@ -930,8 +964,11 @@ to avoid treating a reused PID as the original child.
 Runtime release authority is one generated PyPI workflow for `actions-runtime-*`
 tags. It builds one sdist and the supported cp312/cp313 macOS arm64, manylinux
 x86_64, and Windows amd64 wheels into one retained artifact set. Poetry 2.1.1
-and the committed lock remain authoritative; cibuildwheel 2.23.1 must clean-test
+and the committed lock remain authoritative; cibuildwheel 2.23.4 must clean-test
 each wheel with `python -m pip check` and `python -m actions.server version`.
+Keep the 2.x patch line at or above 2.23.4: it replaces the rate-limited
+GitHub `get-virtualenv` blob URL with the supported `bootstrap.pypa.io` URL
+([upstream fix](https://github.com/pypa/cibuildwheel/pull/2775)).
 The clean-break distribution identity is `actions-runtime`; its package version,
 `actions.server.__version__`, Runtime changelog, and `actions-runtime-X.Y.Z` tag
 must agree. Native release notes come from
@@ -1414,6 +1451,12 @@ validation rejects missing PostgreSQL hosts, malformed authorities, and ports
 outside `1..65535` before connection or SQLite fallback. CLI argument, datadir,
 and new migration diagnostics must use the database URL redactor, which removes
 userinfo, query, and fragment data without changing the connection value.
+Before URL scheme detection, preserve rooted Windows drive paths in either
+`C:\...` or `C:/...` form as SQLite filesystem paths: `urlsplit` otherwise
+interprets the drive letter as a URL scheme. UNC paths remain filesystem paths,
+while other unsupported schemes, including single-letter forms such as
+`x://host/db`, still fail instead of falling back to SQLite. Drive-relative
+spellings such as `C:relative.db` remain outside the supported exception.
 Scheme detection and redaction are case-insensitive, while the validated
 connection string passed to psycopg retains its original bytes. New migration
 status and CLI diagnostics use the redactor; the byte-immutable legacy
@@ -1709,6 +1752,15 @@ acceptance tests and their marker contract. Run its frozen and Go-wrapper UI
 cases on Linux, Windows, and macOS; never make missing executable or manifest
 variables a skip. Keep the separate generic Runtime gate for non-native
 integration coverage.
+The native Work Items consumer step builds the candidate Core wheel from
+`actions/pyproject.toml`; derive its version from the built wheel metadata and
+require exactly one wheel in a newly created task directory before installing
+it. Do not pin this candidate filename to the published Runtime floor: the
+candidate can advance independently, while `verify_published_runtime_floor.py`
+continues to verify the exact published Core 1.0.2 contract. Run inline Python
+checks through the same explicitly selected interpreter as the build instead
+of bare `python`; a workflow host interpreter can lack standard-library
+modules required by the check.
 
 The frozen Runtime packages RCC `v18.19.3` as a pinned executable under
 `_internal/actions/server/bin`. PyInstaller may report package-data destinations
@@ -1741,7 +1793,10 @@ databases without legacy `run` columns or schedule indexes can upgrade. Because
 `create_db` seeds one row at `CURRENT_VERSION`, focused migration fixtures downgrade
 that row to represent an older database rather than inserting a duplicate ID. Xdist tests that acquire OS-level
 mutexes use process-qualified names so concurrent workers and repeated suites cannot
-share global lock state.
+share global lock state. Keep the same generated name among the participants inside
+one test when they must contend. Mirrored Action Server tests that exercise `_common`
+and `_robo_utils` must not reuse a fixed global key across modules: xdist can run the
+two copies on separate workers, causing one test to fail before its timeout assertion.
 
 `Lint` is fail-fast across package boundaries: report which packages completed and which
 were not reached whenever it fails. The shared package task must call the explicit
@@ -2088,6 +2143,15 @@ reload. The reload lock alone does not provide this request-level pinning. The i
 compensation closure after nondurable SQLite commit failure with
 `min_processes=0`; it does not prove warmed RCC worker compensation or
 external-service rollback.
+When a reload test constructs a partial `Database` directly, register
+`McpCatalogName` alongside `ActionPackage` and `Action` before creating tables.
+`create_tables(get_model_db_rules())` creates only registered models; the rules
+do not add missing tables. Otherwise catalog admission fails before the injected
+commit failure, and the test never exercises generation compensation. Preserve
+the original commit-error identity, rollback event order, and last-good catalog
+ownership assertions when extending this fixture. Use a candidate-only public
+key to prove its reservation exists before the failed commit and disappears
+after rollback; reusing the same logical identity would add no reservation.
 
 Scheduled executions capture the current process-pool object, generation token,
 and ActionPackage before dispatching their worker thread; a reload that replaces
@@ -2241,12 +2305,27 @@ Duplicate-key checks must run
 against the complete desired catalog before committing replacements or omissions;
 helper-only collision tests do not prove that boundary. This source-subprocess
 proof was executed with installed Core 1.0.2; frozen and managed-RCC acceptance
-remain separate. Tool aliases identify capabilities within the current catalog;
-clients must rediscover after catalog changes. Deterministic current names,
-TTL-zero/private catalogs and the shared descriptor fingerprint support this
-policy, but do not preserve historical alias identity or fence a call against a
-concurrent catalog revision. A formerly qualified alias can become a literal
-action's name. External alias-keyed authorization grants are not covered.
+remain separate. The historical-identity regression in
+`mcp/test_alias_history.py` covers exact public keys with mounted MCP calls,
+retirement diagnostics, transactional rejection/rename recovery, restart,
+unchanged descriptor revisions across unrelated histories, and two real SQLite
+processes allocating an initially empty history. The same transition has a CLI
+case in `test_cli_multi_package_sync.py` that honors
+`SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE`; run it against the actual
+new candidate artifact, since older frozen artifacts cannot prove this repair.
+The permanent exact-key admission guard above preserves historical ownership
+without changing deterministic current-set names. It does not fence calls by
+catalog revision or solve overlapping resource-template matching.
+The legacy `test_action_package_rename` makes the ownership boundary explicit:
+renaming `calculator` while retaining its `calculator_sum` MCP key is rejected,
+and the test compares every persisted column in the package, action, and owner
+tables before and after that failed sync. This includes package environment and
+hash fields and action docs, source locations, schemas, consequence flags,
+managed parameters, and options. A sync-free restart must still serve the
+original HTTP route and MCP tool. Renaming the package with a fresh action key
+then proves HTTP/MCP dispatch and another synchronized restart. Source-mode
+results do not replace acceptance against the newly built frozen Runtime after
+this guard changes.
 
 `test_cli_live_reload_multi_package.py` exercises actual unmanaged two-package
 watched failure and recovery. After malformed decorated B is rejected, it checks

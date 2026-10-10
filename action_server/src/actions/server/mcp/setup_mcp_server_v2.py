@@ -8,7 +8,9 @@ from hashlib import sha256
 from typing import Any, Literal
 from urllib.parse import urlsplit
 
+from mcp import MCPError
 from mcp.types import (
+    INVALID_PARAMS,
     CallToolResult,
     GetPromptResult,
     ListPromptsResult,
@@ -199,7 +201,18 @@ class McpServerSetupHelper:
             from actions.server._actions_run import IInternalFuncAPI
 
             headers, cookies = self._request_values(ctx)
-            action_info = catalog.tool_name_to_action_info[params.name]
+            action_info = catalog.tool_name_to_action_info.get(params.name)
+            if action_info is None:
+                return CallToolResult(
+                    content=[
+                        TextContent(
+                            type="text",
+                            text="Tool name is unavailable. Call tools/list to rediscover "
+                            "the current catalog before retrying.",
+                        )
+                    ],
+                    is_error=True,
+                )
             func: IInternalFuncAPI = action_info.func
             result = await func(
                 response_handler=McpResponseHandler(),
@@ -271,7 +284,11 @@ class McpServerSetupHelper:
                     ]
                     break
         if not action_info:
-            raise ValueError(f"No resource found for URI: {uri}")
+            raise MCPError(
+                INVALID_PARAMS,
+                f"No resource found for URI: {uri}. Rediscover with resources/list "
+                "and resources/templates/list before retrying.",
+            )
         headers, cookies = self._request_values(ctx)
         result = await action_info.func(
             response_handler=McpResponseHandler(),
@@ -350,7 +367,13 @@ class McpServerSetupHelper:
 
     async def _get_prompt(self, ctx: Any, params: Any) -> GetPromptResult:
         catalog = self._catalog
-        action_info = catalog.prompt_name_to_action_info[params.name]
+        action_info = catalog.prompt_name_to_action_info.get(params.name)
+        if action_info is None:
+            raise MCPError(
+                INVALID_PARAMS,
+                f"No prompt found for name: {params.name}. "
+                "Rediscover with prompts/list before retrying.",
+            )
         headers, cookies = self._request_values(ctx)
         result = await action_info.func(
             response_handler=McpResponseHandler(),

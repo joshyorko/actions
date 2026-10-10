@@ -56,6 +56,7 @@ PROCESSOR_ACTION = (
         scenario: str,
         expected_core_wheel: str,
         expected_core_wheel_sha256: str,
+        expected_core_version: str,
         core_install_report: str,
         core_install_proof: str,
     ) -> dict[str, str]:
@@ -66,7 +67,7 @@ PROCESSOR_ACTION = (
         import actions
 
         core_distribution = distribution("actions-core")
-        if core_distribution.version != "1.0.2":
+        if core_distribution.version != expected_core_version:
             raise AssertionError("candidate actions-core version is not installed")
         module_path = Path(actions.__file__).resolve()
         distribution_files = {
@@ -235,7 +236,8 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
     assert executable_hash == expected_executable_hash
     core_wheel_value = os.environ.get("DAKOTA_WORKITEMS_CORE_WHEEL")
     expected_core_wheel_hash = os.environ.get("DAKOTA_WORKITEMS_CORE_WHEEL_SHA256")
-    assert core_wheel_value and expected_core_wheel_hash
+    expected_core_version = os.environ.get("DAKOTA_WORKITEMS_CORE_VERSION")
+    assert core_wheel_value and expected_core_wheel_hash and expected_core_version
     core_wheel_hash = _sha256(Path(core_wheel_value))
     assert core_wheel_hash == expected_core_wheel_hash
 
@@ -293,6 +295,7 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
                 "scenario": scenario,
                 "expected_core_wheel": str(core_wheel),
                 "expected_core_wheel_sha256": expected_core_wheel_hash,
+                "expected_core_version": expected_core_version,
                 "core_install_report": str(core_install_report),
                 "core_install_proof": str(core_install_proof),
             },
@@ -305,7 +308,7 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
     assert success_run.status_code == 200
     installed_core_proof = json.loads(core_install_proof.read_text(encoding="utf-8"))
     assert installed_core_proof == {
-        "actions_core_version": "1.0.2",
+        "actions_core_version": expected_core_version,
         "actions_module_owned_by_distribution": True,
         "install_source_matches_candidate": True,
         "wheel_sha256": core_wheel_hash,
@@ -343,6 +346,7 @@ def test_packaged_runtime_executes_work_item_consumer_lifecycle(
             "scenario": "fail",
             "expected_core_wheel": str(core_wheel),
             "expected_core_wheel_sha256": expected_core_wheel_hash,
+            "expected_core_version": expected_core_version,
             "core_install_report": str(core_install_report),
             "core_install_proof": str(core_install_proof),
         },

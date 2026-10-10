@@ -69,11 +69,16 @@ def test_actual_reload_closure_compensates_nondurable_sqlite_commit(
     from actions.server._actions_process_pool import ActionsProcessPool
     from actions.server._api_action_routes import _ActionRoutes
     from actions.server._database import Database
-    from actions.server._models import Action, ActionPackage, get_model_db_rules
+    from actions.server._models import (
+        Action,
+        ActionPackage,
+        McpCatalogName,
+        get_model_db_rules,
+    )
     from actions.server._settings import Settings
 
     db = Database(tmp_path / "catalog.db")
-    db.initialize([ActionPackage, Action])
+    db.initialize([ActionPackage, Action, McpCatalogName])
     monkeypatch.setattr(_models, "get_db", lambda: db)
     app = FastAPI()
     monkeypatch.setattr(_app, "get_app", lambda: app)
@@ -100,7 +105,7 @@ def test_actual_reload_closure_compensates_nondurable_sqlite_commit(
     candidate_action = Action(
         "candidate-action-id",
         candidate_package.id,
-        "do_it",
+        "candidate_do_it",
         "candidate docs",
         "my_actions.py",
         1,
@@ -157,6 +162,7 @@ def test_actual_reload_closure_compensates_nondurable_sqlite_commit(
             db.insert(package)
             db.insert(action)
         routes.register_actions()
+        old_catalog_names = db.all(McpCatalogName)
         old_routes = app.router.routes
         old_schema = app.openapi()
         old_catalog = routes.mcp_server_setup_helper._catalog
@@ -175,6 +181,10 @@ def test_actual_reload_closure_compensates_nondurable_sqlite_commit(
             assert pool.actions[0].docs == "candidate docs"
             assert routes.mcp_server_setup_helper._catalog is old_catalog
             assert app.openapi_schema is old_schema
+            assert any(
+                binding.namespace == "tool" and binding.name == "candidate_do_it"
+                for binding in db.all(McpCatalogName)
+            )
             return closures
 
         try:
@@ -190,6 +200,7 @@ def test_actual_reload_closure_compensates_nondurable_sqlite_commit(
             assert caught.value is failure
             assert db.all(ActionPackage)[0].directory == str(old_root)
             assert db.all(Action)[0].docs == "last-good docs"
+            assert db.all(McpCatalogName) == old_catalog_names
             assert not connection.in_transaction
             assert not db.in_transaction()
             assert routes.mcp_server_setup_helper._catalog == old_catalog

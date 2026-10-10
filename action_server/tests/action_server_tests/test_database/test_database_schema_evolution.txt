@@ -60,6 +60,22 @@ CREATE INDEX action_action_package_id_non_unique_index ON action(action_package_
 
 
 '''
+CREATE TABLE IF NOT EXISTS mcp_catalog_name(
+    id TEXT NOT NULL PRIMARY KEY,
+    namespace TEXT NOT NULL,
+    name TEXT NOT NULL,
+    package_name TEXT NOT NULL,
+    action_name TEXT NOT NULL
+)
+''',
+
+
+'''
+CREATE UNIQUE INDEX mcp_catalog_name_id_index ON mcp_catalog_name(id);
+''',
+
+
+'''
 CREATE TABLE IF NOT EXISTS run(
     id TEXT NOT NULL PRIMARY KEY,
     status INTEGER NOT NULL,

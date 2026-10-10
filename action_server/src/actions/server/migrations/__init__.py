@@ -45,6 +45,7 @@ MIGRATION_ID_TO_NAME: Dict[int, str] = {
     11: "align_schema_indexes",
     # we'll look for a 'migration_reconcile_run_columns' module based on this.
     12: "reconcile_run_columns",
+    13: "add_mcp_catalog_names",
 }
 
 CURRENT_VERSION: int = max(MIGRATION_ID_TO_NAME.keys())
