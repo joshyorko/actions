@@ -1,0 +1,21 @@
+{
+  "candidate_artifact_source": "a47dc616069afdb0488aaed651abf0ceb9a82035",
+  "pr292_exact_source": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+  "paths": [
+    "action_server/src/actions/server",
+    "actions/src/actions/core",
+    "actions-http-helper/src",
+    "action_server/pyproject.toml",
+    "action_server/poetry.lock",
+    "actions/pyproject.toml",
+    "actions/poetry.lock",
+    "actions-http-helper/pyproject.toml",
+    "actions-http-helper/poetry.lock"
+  ],
+  "exact_diff_exit": 0,
+  "cli_test_path": "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+  "pr292_cli_blob": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+  "pr290_proved_cli_blob": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+  "same_cli_bytes": true,
+  "scope": "Native/Go acceptance applicability for PR292 only. Does not waive current Windows checks or accept PR299 private output."
+}

@@ -1,0 +1,116 @@
+{
+  "captured_at_utc": "2026-10-10T19:08:39.767496+00:00",
+  "packages": [
+    {
+      "name": "actions-core",
+      "latest": "1.0.2",
+      "has_1_0_3": false,
+      "latest_files": [
+        {
+          "filename": "actions_core-1.0.2-py3-none-any.whl",
+          "sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+          "size": 101410,
+          "url": "https://files.pythonhosted.org/packages/b6/ed/33c5999ac5e932434fcc5b392420efdf9b25922ca02a76622b856759ea16/actions_core-1.0.2-py3-none-any.whl"
+        },
+        {
+          "filename": "actions_core-1.0.2.tar.gz",
+          "sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73",
+          "size": 82556,
+          "url": "https://files.pythonhosted.org/packages/f3/9b/9122506a1daef59b876c703e9db0c4b60b38c4ae138f9a3bfedb7d6bdc2f/actions_core-1.0.2.tar.gz"
+        }
+      ]
+    },
+    {
+      "name": "actions-runtime",
+      "latest": "1.0.2",
+      "has_1_0_3": false,
+      "latest_files": [
+        {
+          "filename": "actions_runtime-1.0.2-cp312-cp312-macosx_12_0_arm64.whl",
+          "sha256": "a35c80e87098b7ce2c470200b884f003689e4b95e6dbe2e42ab6a42f19a17685",
+          "size": 13191383,
+          "url": "https://files.pythonhosted.org/packages/d6/fe/9e55acb5a0168af62cdfe5a6cb7b5ae62b4facffd2ebdaef51abb127b101/actions_runtime-1.0.2-cp312-cp312-macosx_12_0_arm64.whl"
+        },
+        {
+          "filename": "actions_runtime-1.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+          "sha256": "9aef9ec55c17d90ec11a32d8d4da694def92502ba46a73621c35267f230873d3",
+          "size": 14095731,
+          "url": "https://files.pythonhosted.org/packages/26/98/478b1568cd91e2c17317289682813a843cf3a4bd12893322518f7140c356/actions_runtime-1.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl"
+        },
+        {
+          "filename": "actions_runtime-1.0.2-cp312-cp312-win_amd64.whl",
+          "sha256": "b89354733eee403b5aa2e6827cf869164323c27dbdf677a9dd76e3bd4d80ac99",
+          "size": 11549580,
+          "url": "https://files.pythonhosted.org/packages/47/96/b42f70761c3b8f45ba1f4c05c6ce9e4146b54b03fe60301d996cde8b7c61/actions_runtime-1.0.2-cp312-cp312-win_amd64.whl"
+        },
+        {
+          "filename": "actions_runtime-1.0.2-cp313-cp313-macosx_12_0_arm64.whl",
+          "sha256": "10b233797ea8a7e5163c1eb64fbac07cfb030db32efd4ddb4039192061bf3dae",
+          "size": 13191382,
+          "url": "https://files.pythonhosted.org/packages/cb/0e/249cbf276bd9fd68a8c081ac24b9f2c1a333ab7f474039684f061f975c1a/actions_runtime-1.0.2-cp313-cp313-macosx_12_0_arm64.whl"
+        },
+        {
+          "filename": "actions_runtime-1.0.2-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+          "sha256": "c3b4c796241e5e03774931b5c3a4b9829e645f0088132c3be63233e77283aca2",
+          "size": 14095730,
+          "url": "https://files.pythonhosted.org/packages/cf/b7/75a2b9959782c120f0503a9f397f26afe6ff293eccbffb635f3c941bc57d/actions_runtime-1.0.2-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl"
+        },
+        {
+          "filename": "actions_runtime-1.0.2-cp313-cp313-win_amd64.whl",
+          "sha256": "6117d8a4aace61e1b6cc3f574d8cbcce03b75d0786a7982121ae8654af92c7d5",
+          "size": 11549580,
+          "url": "https://files.pythonhosted.org/packages/71/7c/76cbb815949c170a17798ef35adf5254b2c389833f9bdc345e08327412f1/actions_runtime-1.0.2-cp313-cp313-win_amd64.whl"
+        },
+        {
+          "filename": "actions_runtime-1.0.2.tar.gz",
+          "sha256": "289afb72273fb06b9790d5cd19d1be114cd3ad5c6a7c15d508f848d07993e5c2",
+          "size": 947016,
+          "url": "https://files.pythonhosted.org/packages/7a/e5/8ebb0ca2e2c449428e363617d2838ed5a0a5e035c6b19dec674889f6976b/actions_runtime-1.0.2.tar.gz"
+        }
+      ]
+    },
+    {
+      "name": "actions-work-items",
+      "latest": "0.4.4",
+      "has_1_0_3": false,
+      "latest_files": [
+        {
+          "filename": "actions_work_items-0.4.4-py3-none-any.whl",
+          "sha256": "488163817f3a2cb969744c1ad7332dc775318d0e755029639fd51d0bffe4ffc0",
+          "size": 62717,
+          "url": "https://files.pythonhosted.org/packages/87/0b/8f417d65e6e1fd85c158847f8858a1015c31042b24905cfb147d0a5d68b0/actions_work_items-0.4.4-py3-none-any.whl"
+        },
+        {
+          "filename": "actions_work_items-0.4.4.tar.gz",
+          "sha256": "5a4452f8982f0ecce1ad1bd6d54714d17115dca09c3aa3e9aa02ed28d87bf5e5",
+          "size": 53713,
+          "url": "https://files.pythonhosted.org/packages/77/a8/864fc2d2c62202c8e8dfd924fa30067991af7d0e2856d3ba6b786372823d/actions_work_items-0.4.4.tar.gz"
+        }
+      ]
+    },
+    {
+      "name": "actions-http-helper",
+      "latest": "1.0.3",
+      "latest_files": [
+        {
+          "filename": "actions_http_helper-1.0.3-py3-none-any.whl",
+          "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+          "size": 14690,
+          "url": "https://files.pythonhosted.org/packages/53/3b/cefc0608e6ec71697c60c68ede2efa306fd7d50b1736c4b6b094b3424dc6/actions_http_helper-1.0.3-py3-none-any.whl"
+        },
+        {
+          "filename": "actions_http_helper-1.0.3.tar.gz",
+          "sha256": "b8e4e8efb181d5748264f25f1803f47731cd4947fc015f009934d51cd7a78945",
+          "size": 15302,
+          "url": "https://files.pythonhosted.org/packages/c8/81/6891b118b1381db98d8a6b656ee9461b7ed2f2dafbae4f5407ecc4e3cd62/actions_http_helper-1.0.3.tar.gz"
+        }
+      ]
+    }
+  ],
+  "wrong_name_probe": [
+    {
+      "name": "actions-http",
+      "error": "HTTPError: HTTP Error 404: Not Found"
+    }
+  ]
+}

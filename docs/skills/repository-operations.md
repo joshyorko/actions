@@ -2334,3 +2334,50 @@ candidate artifact is not the tag-triggered release artifact. Retain the tag
 run's `actions-core-dist` wheel, sdist and hash manifest with artifact ID,
 run/job, peeled commit and tree, then compare the published PyPI bytes to that
 manifest. The workflow publishes to PyPI; it does not create a GitHub Release.
+
+
+## Controlled Cloud coordinator handoff
+
+Freeze new dispatches before retiring a coordinator. Read the native agent tree,
+all checkout/worktree identities and current GitHub refs; a UI count or an old
+ledger roster is not a live execution observation. Let identified writers finish
+their scoped commits before copying state. Never reset or clean another owner's
+checkout to manufacture a clean handoff.
+
+Preserve unfinished working bytes on separate recovery branches and verify their
+remote heads, full trees and ordered parents. The structured Git API can create a
+different server-authored commit ID from a local commit with the same complete
+tree. Record both identities. A Git bundle committed under a verified recovery
+ref can protect original local commits, detached heads and reflogs without
+rewriting active branch history. Test recovery in a fresh public clone, including
+the bundle's public prerequisites. Local RAM, an unreferenced Git blob or an
+expiring CI artifact alone is not a durable checkpoint. Exclude credentials,
+private keys, test databases, temporary configuration and process/cache state.
+
+Large evidence archives may be split into ordered parts with per-part and full
+archive SHA-256/byte-length manifests. Validate every restored member in a fresh
+scratch directory. Do not execute archived probes or auto-apply stale deletion
+patches. Keep commands, source identities, failed receipts and unknown outcomes;
+do not serialize binary/base64 data, giant logs or complete issue histories into
+the coordinator transcript.
+
+A dependent PR's ordinary green CI does not establish a specialized prerequisite
+omitted from those workflows. Compare exact production, dependency and test
+inputs before applying an earlier artifact result to a new head. Preserve a
+dated correction beside the earlier failure or WAIT receipt. Windows expected
+argv paths must use the platform's actual Path string representation while
+retaining exact argument order and provider assertions.
+
+Run-output TestClient evidence covers in-process routing. TCP streaming and
+disconnect claims require an actual loopback socket test. A test-supplied
+credential-to-Actor resolver proves only that injected authorization boundary;
+it does not prove production authentication, Canvas integration or public
+exposure. Likewise, replaying an RCC receipt with reconstructed module origins
+and a locally rebound executable is not independent reparse of original raw
+lifecycle operations when those raw bytes were not retained.
+
+Conditional compiler inspection proposals remain proposals until a source-bound
+subprocess, authoritative same-publication specification/artifact pair, bounded
+streams and owned cleanup have actually run. Preserving a proposed guide delta
+does not document that feature as implemented. Report source acceptance, executed
+acceptance, graph acceptance, integration and external publication separately.

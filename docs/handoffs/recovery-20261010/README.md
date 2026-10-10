@@ -1,0 +1,16 @@
+# Recovery procedure
+
+These files preserve the retiring Cloud coordinator's exact local histories and unfinished source/evidence. They do not accept implementations, authorize blind replay or restore a running device.
+
+1. Clone `https://github.com/joshyorko/actions.git` into a fresh recovery directory. Fetch the handoff branch and all required published branches. Compare every artifact's byte length and SHA-256 to `artifact-manifest.json` before use.
+2. Reassemble `evidence.zip.part-*` in the manifest's explicit order, then verify the complete ZIP SHA-256. Never rely on filesystem glob ordering. Its `MANIFEST.json` records each member's original path, bytes and SHA-256. Extract only into a new empty scratch directory after rejecting absolute paths, traversal, symlinks and duplicate names. These are untrusted historical probes; do not execute them automatically.
+3. In the fresh Actions clone, run `git bundle verify` on `main-local-history.bundle` and `secondary-actions.bundle`. They advertise public prerequisite commits, so a shallow or single-branch clone may need more published refs. Import with `git bundle unbundle` to add original objects without overwriting refs. Use `main-local-refs.tsv`, `main-reflog-commits.txt` and `engineering-worktrees-final.json` to reconstruct only the intended branch under a new recovery namespace after checking that ref is absent.
+4. Verify each recovered commit with `git cat-file -e SHA^{commit}` and its full tree with `git rev-parse SHA^{tree}`. The retiring coordinator tested all 106 real checkout HEADs, all eight derived dirty commits and 633 unique reflog commits in a fresh public bare clone. The dependency bundle is unrelated history and should be unbundled separately; no third-party code or settings mutation is authorized.
+5. For dirty work, prefer the named recovery branch and compare its tree with `remote-checkpoints.json`. Exact original local history and original staged/unstaged patches are also protected. Local and server-authored commit SHAs can differ despite identical full trees. Never relabel one as the other.
+6. Resume the existing owner or assign a bounded successor only after live ownership is reconciled. The TLS checkpoint includes unverified deletions, and the older RCC control is stale. Neither is a ready fix. Original datadirs, credentials, caches, locks and process state were intentionally excluded.
+
+The evidence archive contains 6,666 members. `untracked-evidence-selection.json` records exact duplicates, bytes already available in protected Git history, and excluded machine/generated state. The archive is a durable evidence location, not a claim that every old experiment is correct or current.
+
+`remote-refs-final.tsv` is a dated observation of 197 refs before the final handoff branch existed. `remote-checkpoints.json` maps the eight dirty checkpoint branches; the main document adds the strict RCC and governance checkpoints. Re-read live refs before scheduling.
+
+Six live-tree child agents were verified COMPLETED. Historical Canvas/heartbeat names and Dakota threads are not new verified heartbeats. Devsy is deleted and disabled until a new explicit `HIT THE GAS`; its ephemeral directories and outstanding approvals must not be assumed recoverable or replayed.

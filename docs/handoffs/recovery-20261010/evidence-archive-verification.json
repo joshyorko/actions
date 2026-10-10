@@ -1,0 +1,10 @@
+{
+  "path": "/dev/shm/actions-cloud-handoff-evidence-20261010.zip",
+  "size": 36251688,
+  "sha256": "0108792f065c1c2a78b0f60991a7e161dc6a0008b535cbedd4844a24e994c46a",
+  "git_blob": "ae13f745bb5dcdf3887aefc0d1b7d6f9eb74b908",
+  "members": 6666,
+  "crc_and_all_member_hashes": "PASS",
+  "private_or_credential_pattern_exclusions": 0,
+  "scope": "Source/review receipts and uncommitted patches only; generated test datadirs, credentials, caches, executables and machine state excluded. No acceptance implied."
+}

@@ -1,0 +1,41 @@
+{
+  "captured_at_utc": "2026-10-10T19:05:24.656369+00:00",
+  "bundles": [
+    {
+      "name": "main",
+      "path": "/dev/shm/actions-cloud-handoff-local-history-final.bundle",
+      "size": 1249201,
+      "sha256": "f011a7e92cae1f2ad85ed9cec78cf90ddaa91304f728047a65713c130994c892",
+      "git_blob": "e7266e210a56a5a93f3ad88b91d626e55f5c7eaf",
+      "advertised_heads": 141,
+      "verify": "PASS",
+      "fresh_remote_import": "PASS"
+    },
+    {
+      "name": "secondary",
+      "path": "/dev/shm/actions-cloud-handoff-secondary-actions.bundle",
+      "size": 10835,
+      "sha256": "f3c614a844341b80839559dab553fc4325b2f082130c5d7200479bc3a780dead",
+      "git_blob": "7a12e8685cf1c2682230382439d9654246823b45",
+      "advertised_heads": 5,
+      "verify": "PASS",
+      "fresh_remote_import": "PASS"
+    },
+    {
+      "name": "rfc8785",
+      "path": "/dev/shm/actions-cloud-handoff-rfc8785.bundle",
+      "size": 18384,
+      "sha256": "2f5eaaf4cd43743a216289fc1031c4c8c7a085180a6e1bd06a2ac79fe797c550",
+      "git_blob": "389828a89d6c27cc626216ed08424494cb9ed0ec",
+      "advertised_heads": 2,
+      "verify": "PASS",
+      "fresh_remote_import": "PASS"
+    }
+  ],
+  "real_checkouts": 106,
+  "actions_checkouts": 105,
+  "dirty_checkouts": 9,
+  "all_exact_worktree_heads_recovered": true,
+  "all_eight_derived_dirty_commits_recovered": true,
+  "unique_reflog_commits_recovered": 633
+}

@@ -1,0 +1,22 @@
+{
+  "verified_native_children_completed": [
+    "/root/luna_cas_receipt_audit",
+    "/root/luna_ci_convergence",
+    "/root/luna_frozen_platform_fix",
+    "/root/luna_frozen_receipt_review",
+    "/root/luna_source_profile",
+    "/root/sol_source_profile_review"
+  ],
+  "verified_running_child_count": 0,
+  "unreachable_in_live_tree_count": 0,
+  "historical_context_only_unverified": [
+    "/root/luna_canvas_acceptance",
+    "/root/luna_cas_heartbeat"
+  ],
+  "external": {
+    "devsy": "DELETED_BY_USER / DISABLED until NEW explicit HIT THE GAS",
+    "dakota": "Execution status unconfirmed; no claim of stop",
+    "hosted_ci": "PR292 Windows run38067347057/job114257572296 in progress at final read"
+  },
+  "retiring_coordinator": "No further engineering dispatch planned; final preservation verification only"
+}

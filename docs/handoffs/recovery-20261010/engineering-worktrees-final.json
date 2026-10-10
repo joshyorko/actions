@@ -1,0 +1,3858 @@
+[
+  {
+    "path": "/dev/shm/actions-controlled-v2-compilation-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "991ebf41f74a05ba130ec01d002cfff419ee8adf",
+    "tree": "ebaa89d28078ccd069584ea1f9238c0022ee0779",
+    "branch": "feat/controlled-v2-compilation-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "01ca087a8cb58798cbce729a107c55f4dab75cf1",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/dev/shm/actions-rcc-inspection-preparation-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "d114c3bb80e49f9c043c2f98b2f051da9827fb5b",
+    "tree": "2890ce916a5a9ee9201239635a220f95ecfe9ee8",
+    "branch": "feat/rcc-inspection-preparation-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "7eca36abce160b68f616eab9b7fdc9c4e7f2b053",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/dev/shm/core-only-community-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "6af08c939f3385c76de12a266e78677063dd707a",
+    "tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+    "branch": "release/core-1.0.3-community-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "a70993fafc99a9f94041485542d5a720797ca394",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/dev/shm/pr301-retirement-deadline-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "ad885e68fc9447fa64c018146f0a96ac7945aa62",
+    "tree": "246f3185f936f8d9104e92b583ea8dd1ba34878a",
+    "branch": "fix/pr301-retirement-deadline-test-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "c734b9f850ec7b6bea8561b70312aca5c93dd6c1",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/dev/shm/root-pr301-ci-trigger-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "2293b1a9490e3d3e846651803b68300319a3e1a3",
+    "tree": "202ea161ae1c7ad31383cbb5101c61ae25803fa0",
+    "branch": "DETACHED",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "37283a400be9448b378eaf5caa9ff1e718a95d24",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/alias-history-startup-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "082691e0c7fc646fd0d8a142ffcaea82b950bec7",
+    "tree": "5f486a7542fb4630234b0798f7bd760468c2d0ec",
+    "branch": "test/windows-alias-history-startup-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "2116a36e2015070d3b7e08a5362ed8442aee8331",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/canvas-template-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "4587271c87f21d52985be67ffe60a46a0b96a01c",
+    "tree": "72257e07a78d33ec1d3d067fa0da83369eea0357",
+    "branch": "feat/canvas-template-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "bab27a93664494965db8a86761ea5685a3be6618",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/dakota-core-wheel-version-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "401d9dde38812bcff2de2d57311adf5c02f239e7",
+    "tree": "edc9f27ffec562cff9e1cc9ce13563854a47ee52",
+    "branch": "fix/dakota-native-core-wheel-version-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "a378c1a71bc768c4279389e65e4b4bed74e142b5",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/deployment-values-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "66b68325435b300bc04f338e6bdf97f5a479b890",
+    "tree": "5afc9d2a6c45c8f5f5cfe85c4cec947f4e750722",
+    "branch": "feat/deployment-values-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "4102960c3dd491388dd09c20df4f6d208e1f5f8b",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/deployment-values-ci-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "4c4f2daa94370118a29cccb2a05c48c23a0e6a9e",
+    "tree": "14ec7c59fc307b76cbc1da7fd2bcec722739ef39",
+    "branch": "review/deployment-values-ci-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "d03b0490be231b0b58a7e21b670ea6b3166b7170",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/deployment-values-ci-fix-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "ab189865167336035ed311910055ea08403ac37f",
+    "tree": "d2ef7229651b6120db5cfa5995c65942ef768da8",
+    "branch": "fix/deployment-values-ci-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "31239cf99c7b264a0eab89660e93b391532ac305",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/frozen-catalog-rollback-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "1e4493bf339bb910fd4e886dcc33f5bb67e02f51",
+    "tree": "857c2a93fe4b422a2e5258475c57b0a295d1df95",
+    "branch": "test/frozen-catalog-rollback-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "8ef0cce463d1eb9f3228d7658c113ceb6a18d554",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/frozen-control-a47-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "5514911b9b854670d2a3af41bf035f6d30cc2641",
+    "tree": "0bddabdf6e6f85701b2b87f49e6c137cf48f532c",
+    "branch": "test/frozen-control-a47-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "fbd504a331acfeadf7fc64e013b4fefcda7412e4",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/frozen-control-resource-history-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "4c37fb7aa5414c0c64df530e1ed3b969881cdf04",
+    "tree": "69e986b765dc14ca26a2b3ef76998f39f7447bbc",
+    "branch": "test/frozen-control-resource-history-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "a3e25b7306eea360aa4cbe76e2263657b4abe373",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/frozen-generation-drain-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "822e21d526d9e2144a6c1c3f44f82a278e069099",
+    "tree": "4c27206bf784a05269320f16df0993eb1b04b48e",
+    "branch": "test/frozen-generation-drain-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "4e5f8200628572d5308b0d3abd5ff16353600036",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/mcp-alias-compensation-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "85d144b6364db0ea833fd5d9bf497baa3b5bd881",
+    "tree": "f6d1e8856bc29ffd90aa7094c9caa6fcc8d42c91",
+    "branch": "fix/mcp-alias-commit-compensation-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "d3c27137d2dbee37a6823663f8db2c3a681f76d3",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/mcp-alias-identity-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "571e555612412fc1ba4c7f49eb360c286bf8bfc0",
+    "tree": "576e7421714d17614f854eae17737bb15b30fd6c",
+    "branch": "test/mcp-alias-frozen-control-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "a337d0b9bbb6c4babda712b39368273d77e610a9",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/mcp-resource-history-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "444349e576e52ed5164e71e6e2843f65fb4f530f",
+    "tree": "d9174bfa29397f5c1a1ad25e2b936f5cc3dd377a",
+    "branch": "fix/mcp-resource-routing-history-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "2f84fd25c814b4ceba0be0a29265461b5754b003",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/mcp-resource-history-cli-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "2334e8fab49e9696a3149cd815f8a2090f4bc315",
+    "tree": "4742761080bb6e92a5d3bee2d1b41cf1e1136017",
+    "branch": "test/mcp-resource-history-cli-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "5158f61dfe40c18af9f5cb083ae9bb43c3fc2948",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/p0-generation-drain-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "af36a46df41caa9676b6a0968c5e60a59bf8f9c9",
+    "tree": "1751a5d7c5e71613bdcd4c765b2ea5e6777e04b6",
+    "branch": "test/p0-generation-drain-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": null,
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/package-rename-owner-protection-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "ddcccb9d3eb04e438b0e4aa576be9068b7703b1c",
+    "tree": "2fb9f9ee09177e6d1a347176397d4bd3a0cc9f1d",
+    "branch": "test/package-rename-owner-protection-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "acc473c2cb8ef73d768289789fff0ed4d17a42a2",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/parallel-system-mutex-test-names-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "bc4740a642527aa2fa0f368900ff55f5a21c9550",
+    "tree": "60434c7e5ab6b04bb421b8285d6b85096c89c8f4",
+    "branch": "fix/parallel-system-mutex-test-names-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "077a2736c23cc5332ae9f8277de4ede1c5c8ae8e",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/rcc-control-portability-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "5d06c0d7d8bdb242247f71f23bc0889b770cb48a",
+    "tree": "a3d627658f116525c96e0da83aafa37b2ec59413",
+    "branch": "fix/rcc-proof-tests-portability-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "2286d8e21f73a704b1fe8acd1127e09a160efd64",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/rcc-provider-ci-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "43b800f0dc8b763da16189b7fce8df35d53f1c07",
+    "tree": "a96701ec234cec2d0c26f0e60f6fe85ebe444d86",
+    "branch": "test/rcc-provider-rollback-hosted-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "e4f2f92292971408c48885e3e0a869cac9036630",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/rcc-published-artifact-details-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "e94882cde4f5688885b35c77a18e78d317242ad3",
+    "tree": "c6569803d1338541809cd349f440b69977155446",
+    "branch": "fix/rcc-published-artifact-details-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "e31506239fd0260d708a11440762537334f8d2d1",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/rcc-published-details-control-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "0744b176c191d0249312289e9d03ac9e4fa34840",
+    "tree": "2baf532ce58a3dd2bc8ac5bd6395e2682a421dc6",
+    "branch": "test/rcc-published-details-control-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "20bfbfd14fd554a594517dc567f7342da7ce7022",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/shared-run-output-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "c931b31f7b258e3eec93369c4c5cd64885d0e5b6",
+    "tree": "a6980fc434b49eecd734c192abe375589ebfeb69",
+    "branch": "feat/shared-run-output-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "dc71670443150924ff139a1a480d559332e43cac",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/shared-run-output-integration-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "4a2d3cdd5cd81d7fe61e2691e86e8b27698d54a3",
+    "tree": "c1113df759cee73bc0d451e0543b0d99692304f5",
+    "branch": "integration/shared-run-output-reviewed-292-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "4eaa4fa9f5e7f6e2a5fba01fda14d214b89b2af2",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/source-confined-read-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "ddac2b72977ab05ef784bf38ffab60abd4f3268f",
+    "tree": "01854b9433e6a47e477b82f3af379444a6e0be7d",
+    "branch": "feat/source-confined-read-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "69786ef577ea28955906511a2c62b2846ca56952",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/source-policy-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "e5f4405017d29647c19fa43e909678c56de9be13",
+    "tree": "16c81059bff80b6d85606d45ac7d46a88cdce597",
+    "branch": "feat/portable-source-policy-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "21064b1ad1e28d3e73749b7be19b98c79a98b93f",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/windows-sqlite-path-url-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "633f5de99c4e6f26664566699222cde1e9f97509",
+    "tree": "24e2a5d39e1564073540bc332de20499dba249be",
+    "branch": "fix/windows-sqlite-path-url-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "f35d7d90fbc11a038a679e85370dee11ba98c547",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/canvas-runtime-bridge",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "13db7030416f7b64f9a577b800a629549e23903e",
+    "tree": "61742362c598fba02407f3e876c11c0cda90ec69",
+    "branch": "test/canvas-runtime-bridge-acceptance-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "9afa0b22b856a8047fa7774044d403c28b328fb5",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/p0-mcp-catalog-rollback",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "508175cb2f07243f2bd337965fc9a612b87d193d",
+    "tree": "5b65129512c876c55119edcfdd9457930850782c",
+    "branch": "test/p0-mcp-catalog-rollback-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": null,
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/p0-mcp-catalog-rollback-baseline",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "branch": "test/p0-mcp-catalog-rollback-baseline-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [
+      {
+        "status": "??",
+        "path": "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+        "size": 9545,
+        "sha256": "7d4e472965c1a4a5717e90db06a3f516bd5d52df1dc44a18d47dc09782ce4e6f"
+      }
+    ],
+    "status_now": [
+      "?? action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py"
+    ],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/runtime-log-credentials",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "14510a8aa9dc8d96a448f3cae8d79223cb7feb17",
+    "tree": "f7bece3ec34318a78611c355e1a5f9eb02dd8af0",
+    "branch": "fix/runtime-log-credentials-test-xdist-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": null,
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/sol-p0-snapshot-review",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "d0285027cec5367601aa524f6bc42d101d017b3d",
+    "tree": "290546705113f8f1b8a528a89e312d3185dca8fe",
+    "branch": "review/p0-snapshot-reload-sol",
+    "upstream": "",
+    "status_error": null,
+    "changes": [
+      {
+        "status": " M",
+        "path": "action_server/src/actions/server/_action_package_handler.py",
+        "size": 24092,
+        "sha256": "edaa04e89d08ec5a59813f90534e0c6c26f5fae82ee02d46609efc153769ebad"
+      },
+      {
+        "status": " M",
+        "path": "action_server/src/actions/server/_actions_import.py",
+        "size": 27692,
+        "sha256": "5d25bdfbe0e0509809ad6d94c0e285533975e32d9e043378dc70f09ad5202f18"
+      },
+      {
+        "status": " M",
+        "path": "action_server/src/actions/server/_api_action_routes.py",
+        "size": 13431,
+        "sha256": "b77948419ebd88a8abc42fb26d01a6defbede5e4bd6ed7d7e5160c248fda484a"
+      },
+      {
+        "status": " M",
+        "path": "action_server/src/actions/server/_cli_impl.py",
+        "size": 37906,
+        "sha256": "adb0caf0a207abc130386a0fdaf1fc88e09dc87d9d125e16a1ae4290ea3d92bb"
+      },
+      {
+        "status": " M",
+        "path": "action_server/src/actions/server/_database.py",
+        "size": 43558,
+        "sha256": "827bacf01f710e74fefa34c7af7f75816294b9c0477071da7d2fef16341e2973"
+      },
+      {
+        "status": " M",
+        "path": "action_server/src/actions/server/_server.py",
+        "size": 34736,
+        "sha256": "3be0ce254252211270fecf2906da2cec5d438b3203fefd68ad3d0731cf4d42bb"
+      },
+      {
+        "status": " M",
+        "path": "action_server/src/actions/server/mcp/setup_mcp_server_v2.py",
+        "size": 25144,
+        "sha256": "3c42e6a0ab37a353f221c040616e8f18261f6c09acf7b8f0f1f13b3ef8c59b60"
+      },
+      {
+        "status": " M",
+        "path": "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+        "size": 61315,
+        "sha256": "546c94fa52d108253c57cdebff04d7889fca9f9d2ce9657f96d1937443932cd3"
+      },
+      {
+        "status": "??",
+        "path": "work/documentation-proposal.md",
+        "size": 2747,
+        "sha256": "1c4197e62a114f48a7a0bf9788c5f215205615c852f961811a9d60510ca2b2bb"
+      },
+      {
+        "status": "??",
+        "path": "work/review-frozen-0528.patch",
+        "size": 38313,
+        "sha256": "c825af72f25df7fcc94ae3ce634d9d64cd4480edd2263d41fecb63e55792b2e4"
+      },
+      {
+        "status": "??",
+        "path": "work/review-production-0528.patch",
+        "size": 35881,
+        "sha256": "ff99729de1ab205103e0e2cb59cbaea6df45e3304065fb66cea94ee9f9f75b63"
+      },
+      {
+        "status": "??",
+        "path": "work/test_independent_p0.py",
+        "size": 15893,
+        "sha256": "6bbd069a81351c23c0e63a08d439769d9d1dff7cfba5aca0e9d89e929012bc69"
+      }
+    ],
+    "status_now": [
+      " M action_server/src/actions/server/_action_package_handler.py",
+      " M action_server/src/actions/server/_actions_import.py",
+      " M action_server/src/actions/server/_api_action_routes.py",
+      " M action_server/src/actions/server/_cli_impl.py",
+      " M action_server/src/actions/server/_database.py",
+      " M action_server/src/actions/server/_server.py",
+      " M action_server/src/actions/server/mcp/setup_mcp_server_v2.py",
+      " M action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "?? work/documentation-proposal.md",
+      "?? work/review-frozen-0528.patch",
+      "?? work/review-production-0528.patch",
+      "?? work/test_independent_p0.py"
+    ],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": null,
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/actions",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "7c98236069171f57031218f938963238986293bd",
+    "tree": "7442a02ea3ec895f470f231820d9739c75778080",
+    "branch": "work",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "7c98236069171f57031218f938963238986293bd",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/actions-worktrees/core-1.0.3-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "84124f240aa3a464d4c7a4336be80bb4288c8336",
+    "tree": "1478813b41aaa2c3dd2e74a6c84b67223242fd32",
+    "branch": "release/actions-core-1.0.3-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/actions-worktrees/frontend-update-benchmark-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "4c750c7b8416c655784d103cc0a78fc7421b7f64",
+    "tree": "c947c60d6b6f71fb857a1d0e3c146f32ef9779ca",
+    "branch": "test/frontend-update-benchmark-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "45a9d7468ebb24b45f65ded294b8ba3bc1ec1ed4",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/actions-worktrees/pr282-owned-process-timeout-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "a35a8ab436c4ac90f033acb0b9cca4459ab508cd",
+    "tree": "ad7c3076a4c6b7c663c60d2d4759098dec8cf91b",
+    "branch": "fix/pr282-owned-process-timeout-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "691b9c8687d721b4769ab7719ced68bff18b002f",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/actions-worktrees/pr290-convergence-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "588918b0a63966ebc275393f15acc5aec6476cf3",
+    "tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097",
+    "branch": "integration/pr290-controls-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "9e1059a12456faba64d11313d6dd8f943ad28912",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/actions-worktrees/pr290-windows-contract-tests-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "49bf5b4b01490c7a553bbadb3cb4c0b9be08daa1",
+    "tree": "baf4081e690977ae5b74080da737446a87859dae",
+    "branch": "fix/pr290-windows-contract-tests-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": null,
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/actions-worktrees/pr299-legacy-artifact-fixture-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "da56d4cb6729143e8d61a966f3aef0c428146091",
+    "tree": "cd801e8ae33cb9bd9e6d4036c3e569e8cbd1d73f",
+    "branch": "fix/pr299-legacy-artifact-fixture-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "ffc45d2d57c4f1171676bcd60936b5d9a1daf81e",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/actions-worktrees/shared-output-transport-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "f984e03359bdd88a51365effc260965f4ab02931",
+    "tree": "93f97b6426f46677a8f135f5a81470a5c26bb0d8",
+    "branch": "feat/shared-output-transport-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "8e50ba8514759dfb323de4064f021f2c933440ef",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/actions-worktrees/source-confined-staging-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "aaa103c43d0180ec7b4fdd4047e13d0eb8324808",
+    "tree": "44dd60aebcd7f6deb5bd0e9c0f6e85d51397aec0",
+    "branch": "feat/source-confined-staging-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "c01ec117fb054c2efbf1e5170e083661e401e7cd",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/actions-worktrees/staged-rcc-consumer-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "dcf916e10919915d6e20b9c611cb0196e14ec4aa",
+    "tree": "461aeaf4426a109b13783ae60a456a14e88b3af9",
+    "branch": "feat/staged-rcc-consumer-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "07e9fd6e28e58ef40a01f609cc471b3afa651966",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/canvas-100b-typescript-roundtrip-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "ca76d62ab206c9095d47384407ebb85821f02e73",
+    "tree": "599e617bd2e230c24b7e49a4f5b14fabb1e3af02",
+    "branch": "feat/canvas-100b-typescript-roundtrip-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": null,
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/admission",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "e032e95d38c91aead08d30b42ec7620b8ea726a4",
+    "tree": "2b42e6b499f58e07546d4e6c9c7443de9d7095cc",
+    "branch": "integration/cloud-convergence-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "3ed98ddbac3354c59414b8411b295db2e15d3545",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/api-doc-source-links",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "25026da07d6d8cb01ef2badbc21c059380bf6060",
+    "tree": "c6a2a657bde5af05f8bff659dc33ffee2db8d1e3",
+    "branch": "docs/api-source-links-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "c30f953bae1a322e1d09549607ab42f1badce440",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/artifact-lock-portability",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "653e1dc9597a120a4b3a7a21645f8a1e731c6695",
+    "tree": "117b20a6277bc1fed37061c658fd68342e297333",
+    "branch": "fix/windows-artifact-binding-lock-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "653e1dc9597a120a4b3a7a21645f8a1e731c6695",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/canvas-authoring",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+    "tree": "4797a2b994b7ce18737653d2807a26850eb1262a",
+    "branch": "feature/issue-100a-public-mcp-app-authoring-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "948df916ebe8750caebc71cc821bb5b76f16c273",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/canvas-decision",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+    "tree": "ea989c2d8dae93be7c714cbde979eecee219afc2",
+    "branch": "docs/issue-100-authoring-decision-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/canvas-fixture-python",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "feeffc29a33fad20b5497d3e8f5e1f06cd8c8369",
+    "tree": "924939e3637373cfc08832aa5099742b286dda81",
+    "branch": "test/issue-100b-fixture-roundtrip-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "feeffc29a33fad20b5497d3e8f5e1f06cd8c8369",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/canvas-renderer",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+    "tree": "d2d9777a28dc32031e99660530925de464054f51",
+    "branch": "feature/issue-99a-query-renderer-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/convergence",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "tree": "bcb95a810450179b689b7c2920a1d5a90fe49e35",
+    "branch": "integration/community-release-20261008",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "35b32e76b3704dc47d856103ae62221c9a9f0789",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/credential-check",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "1abafea4e08766a71a4f4fe8173101af1e368428",
+    "tree": "11e494bb4e00fdc2f91d8ace93cce4bae04e9f3f",
+    "branch": "release/http-helper-credential-check-20261009",
+    "upstream": "origin/community",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "1abafea4e08766a71a4f4fe8173101af1e368428",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/deployment-admission",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "57399b60496b98fea020f26e576d47bcb0d440bf",
+    "tree": "ca7d34ec90407dcb61013a745b377f94868e23c3",
+    "branch": "docs/upstream-reporting-policy-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "ab9b1aaa95aacc3b40c23e4fcd4749c79e3fae47",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/design-checkpoint-refresh",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "65bbc11f2d1ea9a3521d3af5ee908f151861cf25",
+    "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
+    "branch": "review/design-checkpoints-20261008",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/frozen-parent-pid",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "96da42fcfbb62f98f31ec11ab8871b55da422c05",
+    "tree": "bb15a546f5fe1a83d0359e177f898ff99021b3b2",
+    "branch": "fix/frozen-parent-pid-test-topology-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "96da42fcfbb62f98f31ec11ab8871b55da422c05",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/governance",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "55b1e077cb24c3c0f8a734ec9c6401ee35cd8c15",
+    "tree": "d5fc1c45f94716d72c7ded666b0de62b4ebc8074",
+    "branch": "resume/community-evidence-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "30a80d857a6f3315521acf7ee2f3f58bf325f535",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/governance-20261010T1835Z",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "5da3841017ac8dc8c82ec9506f4d40b74214cf88",
+    "tree": "4b78bf27c4bcbb7425c851d2d7304da35f29e90a",
+    "branch": "resume/community-evidence-20261010T1835Z",
+    "upstream": "",
+    "status_error": null,
+    "changes": [
+      {
+        "status": " M",
+        "path": "docs/skills/repository-operations.md",
+        "size": 163604,
+        "sha256": "9b11eadcd9ba1c11feed235bec16bc1dee07af6d4da6638032a9f14b9abd13e4"
+      },
+      {
+        "status": "??",
+        "path": "docs/program/evidence/current-open-pr-audit-20261010T1842Z/cloud-agent-roster.json",
+        "size": 1069,
+        "sha256": "9e2a7a7b3f1ac16d9fd558107abdde1e4ec32fa12614a89f7d3a95b3d38f1bf1"
+      },
+      {
+        "status": "??",
+        "path": "docs/program/evidence/current-open-pr-audit-20261010T1842Z/compiler-predecessor-review-not-current-01ca.md",
+        "size": 4506,
+        "sha256": "bef4b62dd5252f6105a8cfed051861047772a71920e6342ba21f577f22fee6c9"
+      },
+      {
+        "status": "??",
+        "path": "docs/program/evidence/current-open-pr-audit-20261010T1842Z/current-git-bindings.json",
+        "size": 4440,
+        "sha256": "597e326fab1cf0fe515b752891496b51c513688869e706611de801c5cff6846c"
+      },
+      {
+        "status": "??",
+        "path": "docs/program/evidence/current-open-pr-audit-20261010T1842Z/hosted-run-observations.json",
+        "size": 10045,
+        "sha256": "80553d57bbcb7ff5da4bfb1dbd8e71c61df245f6ccf00691d39d82a8c512e2ad"
+      },
+      {
+        "status": "??",
+        "path": "docs/program/evidence/current-open-pr-audit-20261010T1842Z/pr282-readiness-repair-independent-receipt.json",
+        "size": 6193,
+        "sha256": "b0de42142b15644f6cc0e994ee607b2f054ef1bbebbf17fd833c1043f6f80728"
+      },
+      {
+        "status": "??",
+        "path": "docs/program/evidence/current-open-pr-audit-20261010T1842Z/pr290-frozen-eleven-case-independent-review.md",
+        "size": 5375,
+        "sha256": "510bcf352aad0815a1ffd34998eda8483833bb0adf26326b1e7fe5bd669467c8"
+      },
+      {
+        "status": "??",
+        "path": "docs/program/evidence/current-open-pr-audit-20261010T1842Z/pr299-dependency-independent-review.md",
+        "size": 8725,
+        "sha256": "080bbed05a6622e7861491764a60e62c0aaba25909e40d4b4f3c383319919375"
+      },
+      {
+        "status": "??",
+        "path": "docs/program/evidence/current-open-pr-audit-20261010T1842Z/pr302-rcc-three-case-independent-review.json",
+        "size": 4128,
+        "sha256": "e84df4a77a3c0fb6a14391f68e8cecf5faa2067b76b71fd50649d7ad8d117faa"
+      },
+      {
+        "status": "??",
+        "path": "docs/program/evidence/current-open-pr-audit-20261010T1842Z/pr303-integration-receipt.json",
+        "size": 1237,
+        "sha256": "abeccd0efd9accaf018084364d162c5028bc6a1feb87536522c00df8064c69b8"
+      },
+      {
+        "status": "??",
+        "path": "docs/program/evidence/current-open-pr-audit-20261010T1842Z/receipt-manifest.json",
+        "size": 1654,
+        "sha256": "77a060b0b666f5ca97108c60fab99251ce016ea8b66445de11fa7c8e80b27bac"
+      },
+      {
+        "status": "??",
+        "path": "docs/program/evidence/current-worker-inventory-20261010T1839Z.json",
+        "size": 34416,
+        "sha256": "85bbf716be6f31a7fa9c1de685bb5417c5c53f2e7f0e5e27d2580c98e1c595ff"
+      }
+    ],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "5203ea848e14462f546da9c03e73beab406f5863",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/integration",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "a8eb7b46f536202f71484d3933d7ed70be103e5c",
+    "tree": "bab37cd13c1c28f6effa82c6219bc5f6ec917b1d",
+    "branch": "resume/community-blockers-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "12b387ec42ec6c5ef24d37ec04bbf338d2265e14",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/legacy-cloud-gate",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "42f9b8ef6575a8b955763d0000a6cdab4b8bf5eb",
+    "tree": "f99ff2b3927aa8fa093beae67c031e3444d0d47e",
+    "branch": "fix/retire-robocorp-cloud-gate-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "508be9fb93a5df9c97cc8cca3f1fb425f6d12adb",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/list-templates-contract",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "553e20c45d7e5f49ac71876c97a35579acb33c73",
+    "tree": "79b6362cdd841842e9c26b5c68c718ec6adecf7d",
+    "branch": "fix/list-templates-contract-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "553e20c45d7e5f49ac71876c97a35579acb33c73",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/mcp-colliding-action-names",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "d506a53f12c231bcc5902b6562c3de2c7ca6591f",
+    "tree": "0ea6884f82b6cc171036ce2fb04c4c6c732bb0b5",
+    "branch": "fix/mcp-colliding-action-names-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "d506a53f12c231bcc5902b6562c3de2c7ca6591f",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/mcp-metadata-lint-fix",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "961a813d34c39dc6b3820420f83268c0e708f319",
+    "tree": "273e2b6eda329d0f63c1529bcfdc94f18ce0c973",
+    "branch": "fix/core-overload-format-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "0999bb1de5f2be4190635da127090cfbbd741705",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/mcp-showcase-proof",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+    "tree": "c55eecf66a434abfd1ae3067490dceae9a62f411",
+    "branch": "test/mcp-v2-showcase-protocol-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/mcp-showcase-template",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "9193989985de15dc6d5fecfd655042957cf9926c",
+    "tree": "774cde3bb6d4f282e933c820b45ad06f9d6bc726",
+    "branch": "feature/mcp-v2-showcase-template-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "9193989985de15dc6d5fecfd655042957cf9926c",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/native-auth-proof",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "a63f714baf6bedb22dbadb65017c0a0a658e892e",
+    "tree": "a9221a1d2f1f155d25d0e6ca3789b267ad1dd5f8",
+    "branch": "devsy/native-auth-acceptance-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest-racefix/temp_dir0/.rcc_config/rcc.yaml",
+        "size": 61,
+        "sha256": "8dbdded28374526ddab972230263147cc8c6b185b148a7f964bfe81c37b99652"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest-racefix/temp_dir0/.rcc_config/rcc.yaml.lck",
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest-racefix/temp_dir0/.sema4ai_home/rcccache.yaml",
+        "size": 42,
+        "sha256": "d18c1020bd589a672fd4e835a35b33f63164663ebdea4f24c24ddf94b836a81f"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest-racefix/temp_dir0/.sema4ai_home/rcccache.yaml.lck",
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest-racefix/temp_dircurrent",
+        "symlink_target": "/workspace/work/community-resume/native-auth-proof/work/native-auth-proof-tmp/pytest-racefix/temp_dir0"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest-racefix/test_browser_harness_deadline_0/child.pid",
+        "size": 6,
+        "sha256": "b65f86eef5ea6a82d66258a1f3c85dc2889f484e7cb33be1f4428f0624cb98ed"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest-racefix/test_browser_harness_deadline_current",
+        "symlink_target": "/workspace/work/community-resume/native-auth-proof/work/native-auth-proof-tmp/pytest-racefix/test_browser_harness_deadline_0"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest-racefix/test_live_runtime_browser_orig0/.sema4ai-test-action-server/action_server.lock",
+        "size": 978,
+        "sha256": "20903ce2ef9890efd178b46a58af625d89bc32dfe4a512595d8476ad75e52f44"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest-racefix/test_live_runtime_browser_orig0/.sema4ai-test-action-server/browser-origin.db",
+        "size": 229376,
+        "sha256": "6b4cbc5521bb51c32523e0c2a728e2926bf24f6158143ef0dbc8a302100f1793"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest-racefix/test_live_runtime_browser_orig0/.sema4ai-test-action-server/server_log.txt",
+        "size": 8532,
+        "sha256": "f3056e74aabdd15e58cfb65263b4058cd7a0fde7ee125acc3767888c9abf3217"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest-racefix/test_live_runtime_browser_orig0/.sema4ai-test-action-server/workitems.db",
+        "size": 40960,
+        "sha256": "af690f3cd003c430b5acc3b4d27e34a661c692c16bdd6e7df7df8156e2713641"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest-racefix/test_live_runtime_browser_origcurrent",
+        "symlink_target": "/workspace/work/community-resume/native-auth-proof/work/native-auth-proof-tmp/pytest-racefix/test_live_runtime_browser_orig0"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest/temp_dir0/.rcc_config/rcc.yaml",
+        "size": 61,
+        "sha256": "13a1b8365ad9882bac702e0ac07c8512b9c259e1f8c9a70efb2e170f7c556ef0"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest/temp_dir0/.rcc_config/rcc.yaml.lck",
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest/temp_dir0/.sema4ai_home/rcccache.yaml",
+        "size": 42,
+        "sha256": "d18c1020bd589a672fd4e835a35b33f63164663ebdea4f24c24ddf94b836a81f"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest/temp_dir0/.sema4ai_home/rcccache.yaml.lck",
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest/temp_dircurrent",
+        "symlink_target": "/workspace/work/community-resume/native-auth-proof/work/native-auth-proof-tmp/pytest/temp_dir0"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest/test_browser_harness_deadline_0/child.pid",
+        "size": 6,
+        "sha256": "d222f4eaffcfecddb23f1516025ee7f955e93eb2c16402e1011a1ab959526601"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest/test_browser_harness_deadline_current",
+        "symlink_target": "/workspace/work/community-resume/native-auth-proof/work/native-auth-proof-tmp/pytest/test_browser_harness_deadline_0"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest/test_live_runtime_browser_orig0/.sema4ai-test-action-server/action_server.lock",
+        "size": 978,
+        "sha256": "642fe6f18b5ac49bd6c8c28c15e793f4df95f59772181d136bc6524c32cdf8f1"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest/test_live_runtime_browser_orig0/.sema4ai-test-action-server/browser-origin.db",
+        "size": 229376,
+        "sha256": "d68f953ef08b15b8034846c1072a6510eb344f628b862d51ed6348c144c08f97"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest/test_live_runtime_browser_orig0/.sema4ai-test-action-server/server_log.txt",
+        "size": 8500,
+        "sha256": "62a60537326ea5772827d7e19ae38d0ac1a1018b15bd18b18d2ad0944130ed55"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest/test_live_runtime_browser_orig0/.sema4ai-test-action-server/workitems.db",
+        "size": 40960,
+        "sha256": "d6272c2aefc22cbb07d5e994cfb30cc313f19e85a6708695a6cbd9296b391995"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/pytest/test_live_runtime_browser_origcurrent",
+        "symlink_target": "/workspace/work/community-resume/native-auth-proof/work/native-auth-proof-tmp/pytest/test_live_runtime_browser_orig0"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/verification-racefix.txt",
+        "size": 2405,
+        "sha256": "73324920798ace624756e1cb8d5abd98a021bd6bdb7d507557d073f511d6e49a"
+      },
+      {
+        "status": "??",
+        "path": "work/native-auth-proof-tmp/verification.txt",
+        "size": 2222,
+        "sha256": "70543f19fb64ccb8c2fb21ceb3ff79babe50ab500bcf1f8eb054609a06336ca1"
+      }
+    ],
+    "status_now": [
+      "?? work/native-auth-proof-tmp/pytest-racefix/temp_dir0/.rcc_config/rcc.yaml",
+      "?? work/native-auth-proof-tmp/pytest-racefix/temp_dir0/.rcc_config/rcc.yaml.lck",
+      "?? work/native-auth-proof-tmp/pytest-racefix/temp_dir0/.sema4ai_home/rcccache.yaml",
+      "?? work/native-auth-proof-tmp/pytest-racefix/temp_dir0/.sema4ai_home/rcccache.yaml.lck",
+      "?? work/native-auth-proof-tmp/pytest-racefix/temp_dircurrent",
+      "?? work/native-auth-proof-tmp/pytest-racefix/test_browser_harness_deadline_0/child.pid",
+      "?? work/native-auth-proof-tmp/pytest-racefix/test_browser_harness_deadline_current",
+      "?? work/native-auth-proof-tmp/pytest-racefix/test_live_runtime_browser_orig0/.sema4ai-test-action-server/action_server.lock",
+      "?? work/native-auth-proof-tmp/pytest-racefix/test_live_runtime_browser_orig0/.sema4ai-test-action-server/browser-origin.db",
+      "?? work/native-auth-proof-tmp/pytest-racefix/test_live_runtime_browser_orig0/.sema4ai-test-action-server/server_log.txt",
+      "?? work/native-auth-proof-tmp/pytest-racefix/test_live_runtime_browser_orig0/.sema4ai-test-action-server/workitems.db",
+      "?? work/native-auth-proof-tmp/pytest-racefix/test_live_runtime_browser_origcurrent",
+      "?? work/native-auth-proof-tmp/pytest/temp_dir0/.rcc_config/rcc.yaml",
+      "?? work/native-auth-proof-tmp/pytest/temp_dir0/.rcc_config/rcc.yaml.lck",
+      "?? work/native-auth-proof-tmp/pytest/temp_dir0/.sema4ai_home/rcccache.yaml",
+      "?? work/native-auth-proof-tmp/pytest/temp_dir0/.sema4ai_home/rcccache.yaml.lck",
+      "?? work/native-auth-proof-tmp/pytest/temp_dircurrent",
+      "?? work/native-auth-proof-tmp/pytest/test_browser_harness_deadline_0/child.pid",
+      "?? work/native-auth-proof-tmp/pytest/test_browser_harness_deadline_current",
+      "?? work/native-auth-proof-tmp/pytest/test_live_runtime_browser_orig0/.sema4ai-test-action-server/action_server.lock",
+      "?? work/native-auth-proof-tmp/pytest/test_live_runtime_browser_orig0/.sema4ai-test-action-server/browser-origin.db",
+      "?? work/native-auth-proof-tmp/pytest/test_live_runtime_browser_orig0/.sema4ai-test-action-server/server_log.txt",
+      "?? work/native-auth-proof-tmp/pytest/test_live_runtime_browser_orig0/.sema4ai-test-action-server/workitems.db",
+      "?? work/native-auth-proof-tmp/pytest/test_live_runtime_browser_origcurrent",
+      "?? work/native-auth-proof-tmp/verification-racefix.txt",
+      "?? work/native-auth-proof-tmp/verification.txt"
+    ],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "a63f714baf6bedb22dbadb65017c0a0a658e892e",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/package-credential-check",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "7501198b3cbd834a79c132d398abb5e05c852582",
+    "tree": "8b5de5c40211821bfc4e3638720255cb5e340686",
+    "branch": "release/package-credential-availability-20261009",
+    "upstream": "origin/community",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "7501198b3cbd834a79c132d398abb5e05c852582",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/rcc",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+    "tree": "1f62323c00b7d3aed389bcec45b123f70c71bd00",
+    "branch": "resume/rcc-review-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [
+      {
+        "status": "??",
+        "path": "work/pr235-body.md",
+        "size": 2108,
+        "sha256": "2088b0260d22e260d99b7eae3e82598e30d472212b68adfd1c13968a30a9f735"
+      }
+    ],
+    "status_now": [
+      "?? work/pr235-body.md"
+    ],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "3dbfb1bed23834353f5fa7b7b69ca0447898c847",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/release-final",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "6a53578fac029a0696834c30438c858f5f0003be",
+    "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+    "branch": "integration/runtime-release-final-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "6a53578fac029a0696834c30438c858f5f0003be",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/robot",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "b690b262c564ed9f085e2df3863af500ff29fddf",
+    "tree": "651bfd172574b21396288684dbc16c4b59f7e1a6",
+    "branch": "resume/robot-native-gates-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "ea08faf39e107113ae50a529770ce1ca1a422d05",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/robot-cleanup",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "72a60344c40e6f153dab0f71b30b073e9b259226",
+    "tree": "65c21c119dbb932605326fd457d0dd8579f4393e",
+    "branch": "repair/robot-cleanup-ownership-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "376ed4c15c76ccf1b5e3b70985e681946bffd249",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/robot-filesystem-identity",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+    "tree": "5c0b501cbc918426d49e053faaa22c85520081e6",
+    "branch": "test/robot-filesystem-identity-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/robot-final-copy",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "711165f31fe1b463cd0ca73353c2e6666847a7ec",
+    "tree": "a6d06145e341d8c456d8c8a4c3a55453b46cc853",
+    "branch": "test/robot-package-yaml-admission-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "711165f31fe1b463cd0ca73353c2e6666847a7ec",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/robot-staging",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+    "tree": "81244193702d8f42a3e35e846714482b47272ffb",
+    "branch": "repair/robot-private-staging-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "5f3fbbb5d6b486373032f6136090eeb89434844e",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/runtime-combined-validation",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "3fee279256e674c9cbe0eaeaf2f98e01f51cd08d",
+    "tree": "5c0b501cbc918426d49e053faaa22c85520081e6",
+    "branch": "DETACHED",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "ec86ea87340ceb4850c4563b97b93c90713d934f",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/runtime-registry-canary",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "85f7c91252a49d454a47983d88c942163ff030ba",
+    "tree": "739e6efc0828cbbfee66c46b4c281fb2b7bd47b7",
+    "branch": "release/runtime-registry-compatibility-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "85f7c91252a49d454a47983d88c942163ff030ba",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/runtime-release-notes",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "526c8cf4736213b85e8aeda95e9837cc8cd80096",
+    "tree": "764d5d8ebb50445645147302f18117b5ea13e43a",
+    "branch": "docs/runtime-1.0.3-release-notes-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "3bb8b9139ead08bdc332131b121d40f8fd3eb22e",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/runtime-wheel-test-interpreter",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "78969ac65cea0576f9584d6a136cec6bebe0032b",
+    "tree": "bd3e96ed7f4853c830352de23de0a6138d25d040",
+    "branch": "fix/multipackage-import-repro-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "78969ac65cea0576f9584d6a136cec6bebe0032b",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/runtime-wrapper-exit-code",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "9c2f0df6f54a78d98842082c311f130c6d809797",
+    "tree": "0edfa771ed26ac17460018c833b45ee3eba4e87a",
+    "branch": "test/sqlite-commit-admission-regression-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [
+      {
+        "status": "??",
+        "path": "work/review_native_archive_repro.py",
+        "size": 6120,
+        "sha256": "f816c8820bb11c5665b0fe2948b83e4a91905f1ab398607873848e73a6bb0277"
+      },
+      {
+        "status": "??",
+        "path": "work/sqlite_commit_admission_three_red.txt",
+        "size": 10340,
+        "sha256": "8f9c36b906071bf5db8011b20fc8c4a6078a8164e31b211dd6706274e9db8a79"
+      },
+      {
+        "status": "??",
+        "path": "work/sqlite_commit_admission_three_red_receipt.json",
+        "size": 1489,
+        "sha256": "6dca3e2a1ca8f2901298a20309afb156dabccd092ea881f436cf02d42578606a"
+      },
+      {
+        "status": "??",
+        "path": "work/sqlite_commit_failure_bindings.txt",
+        "size": 792,
+        "sha256": "1d0d190f56a5ab9d531f08050a7a972a11dd56f43d97e3fd9d62579afda64e21"
+      },
+      {
+        "status": "??",
+        "path": "work/sqlite_commit_failure_red.txt",
+        "size": 8779,
+        "sha256": "f70135e5f7cb5fdc0d46ebc6efd5dbdf6ac04524319bb8fb27776b593cc78013"
+      },
+      {
+        "status": "??",
+        "path": "work/sqlite_commit_failure_red_receipt.json",
+        "size": 1466,
+        "sha256": "08e5b40354df337525134282b3be9bbc9df5e6cdd6c43b54d7d5b5691a743aec"
+      },
+      {
+        "status": "??",
+        "path": "work/test_sqlite_batch_commit_failure.py",
+        "size": 6978,
+        "sha256": "fef04a212bf9015a6c015da2810aa6cd12a52492c3219fc604b09908e981f7de"
+      }
+    ],
+    "status_now": [
+      "?? work/review_native_archive_repro.py",
+      "?? work/sqlite_commit_admission_three_red.txt",
+      "?? work/sqlite_commit_admission_three_red_receipt.json",
+      "?? work/sqlite_commit_failure_bindings.txt",
+      "?? work/sqlite_commit_failure_red.txt",
+      "?? work/sqlite_commit_failure_red_receipt.json",
+      "?? work/test_sqlite_batch_commit_failure.py"
+    ],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "9c2f0df6f54a78d98842082c311f130c6d809797",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/sol-native-review",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "29decdcb4ac6712f278b61e3722e0ad9217c60ba",
+    "tree": "e50f0b4c64cfd5fc38ae28250550fc8b9b49c884",
+    "branch": "integration/native-checksum-admission-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [
+      {
+        "status": "??",
+        "path": "work/sol-pr257/baseline-static-results.json",
+        "size": 4552,
+        "sha256": "e0a6b0fef1b63c177662488843c032d990e722feaeeb46db956c846b9180e23b"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/baseline/.github/workflows/_gen_workflows.py",
+        "size": 75768,
+        "sha256": "179ee9515ff2959afd24c00c6a99fcc054dad9ece502c18583d1756dd580f822"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/baseline/devutils/tests/test_actions_runtime_release_line.py",
+        "size": 8002,
+        "sha256": "35f7dc13dfbf3ad8a4f4c6ad5a5a04f9679a87a241511a22adffaa9ad0372428"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/baseline/devutils/tests/test_runtime_release_workflows.py",
+        "size": 73087,
+        "sha256": "c6cf9382dc7e5e68ad18c82b19eff62e4f01d35e476c012a64712353f3f97cec"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/baseline_static.py",
+        "size": 2443,
+        "sha256": "5c518f1064418c5cd634cef16c9185a7da77cd83984dc3d2640b4245be6e6233"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/homebrew-README-ff879e20.md",
+        "size": 35303,
+        "sha256": "4420f5ba3b2b364aaec4c22ca09ac1e55fb3a869703e0772ce8910c789655df9"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/homebrew-head.txt",
+        "size": 41,
+        "sha256": "e362336260075a623d369f957b05c7fc62298979a2dc433f2f07fc30a7ea37cf"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/independent-pr257-review.md",
+        "size": 9530,
+        "sha256": "51e9242ac779bb51e75bea7de3374b46547fe80c320deefd0d2b18892d9b6fb4"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/probe-results.json",
+        "size": 3241,
+        "sha256": "fc11c20e6376d99eabf14640629bccbeb3fe2a95b74386b0fd9eba412c1b79de"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_binary_release_publishes_0/actions-runtime-1.0.3-sha256.txt",
+        "size": 298,
+        "sha256": "88587d46e0338fce4e1712f35657687b521598e752f010c20f6514dd80ee3927"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_binary_release_publishes_0/linux64/action-server",
+        "size": 21,
+        "sha256": "fa6f17af084527b6f7109e13c455e501210cffd87310c621de1ebcb2080fd062"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_binary_release_publishes_0/macos-arm64/action-server",
+        "size": 25,
+        "sha256": "c1e63390a168e8fec8f20198db216d629fb349db26c35fe007f06edee8552150"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_binary_release_publishes_0/windows64/action-server.exe",
+        "size": 27,
+        "sha256": "730f9fee6cb2dfa956bfbf72ede4aa30e59210480d9fe5e08937cd821b575c86"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_binary_release_publishes_current",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_binary_release_publishes_0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_generated_recovery_is_ren0/actions_runtime_recovery.yml",
+        "size": 43844,
+        "sha256": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_generated_recovery_is_rencurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_generated_recovery_is_ren0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_generated_runtime_invento0/repo/action_server/scripts/publish_verified_runtime.py",
+        "size": 18453,
+        "sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_generated_runtime_inventocurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_generated_runtime_invento0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/HEAD",
+        "size": 26,
+        "sha256": "f56af9eb3a6c63ec5bb2bd6a92a41f3075b4ab64d1e8339630a0cf9aed7b3eef"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/config",
+        "size": 205,
+        "sha256": "5e86781094fabc81905f622bc34943ca186d762c66c8d7433e72901aed33e037"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/description",
+        "size": 73,
+        "sha256": "85ab6c163d43a17ea9cf7788308bca1466f1b0a8d1cc92e26e9bf63da4062aee"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/applypatch-msg.sample",
+        "size": 478,
+        "sha256": "0223497a0b8b033aa58a3a521b8629869386cf7ab0e2f101963d328aa62193f7"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/commit-msg.sample",
+        "size": 896,
+        "sha256": "1f74d5e9292979b573ebd59741d46cb93ff391acdd083d340b94370753d92437"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/fsmonitor-watchman.sample",
+        "size": 4726,
+        "sha256": "e0549964e93897b519bd8e333c037e51fff0f88ba13e086a331592bf801fa1d0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/post-update.sample",
+        "size": 189,
+        "sha256": "81765af2daef323061dcbc5e61fc16481cb74b3bac9ad8a174b186523586f6c5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-applypatch.sample",
+        "size": 424,
+        "sha256": "e15c5b469ea3e0a695bea6f2c82bcf8e62821074939ddd85b77e0007ff165475"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-commit.sample",
+        "size": 1649,
+        "sha256": "57185b7b9f05239d7ab52db045f5b89eb31348d7b2177eab214f5eb872e1971b"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-merge-commit.sample",
+        "size": 416,
+        "sha256": "d3825a70337940ebbd0a5c072984e13245920cdf8898bd225c8d27a6dfc9cb53"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-push.sample",
+        "size": 1374,
+        "sha256": "ecce9c7e04d3f5dd9d8ada81753dd1d549a9634b26770042b58dda00217d086a"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-rebase.sample",
+        "size": 4961,
+        "sha256": "993e99be047909faaf42a839857fcfbf9ed42c70b77e1c07c34fa9743c9425ac"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-receive.sample",
+        "size": 544,
+        "sha256": "a4c3d2b9c7bb3fd8d1441c31bd4ee71a595d66b44fcf49ddb310252320169989"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/prepare-commit-msg.sample",
+        "size": 1681,
+        "sha256": "f079f29a5f4c881c08ad087a5b1461cfdacb2784b08cb6711ff9b0d8e677ab95"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/push-to-checkout.sample",
+        "size": 2783,
+        "sha256": "a53d0741798b287c6dd7afa64aee473f305e65d3f49463bb9d7408ec3b12bf5f"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/sendemail-validate.sample",
+        "size": 2308,
+        "sha256": "44ebfc923dc5466bc009602f0ecf067b9c65459abfe8868ddc49b78e6ced7a92"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/update.sample",
+        "size": 3650,
+        "sha256": "8d5f2fa83e103cf08b57eaa67521df9194f45cbdbcb37da52ad586097a14d106"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/info/exclude",
+        "size": 240,
+        "sha256": "6671fe83b7a07c8932ee89164d1f2793b2318058eb8b98dc5c06ee0a5a3b0ec1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/0a/d765aa5a06c4660a27cda4c0dcc91dd0e8079d",
+        "size": 31,
+        "sha256": "0a9d8b0f66aa8a29620a8fa08e64b4b8c5ff868a8c453551b01b22f9c1f79c4b"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/3d/b12bbbcbc99f2003ccf394a4d830cf9e150698",
+        "size": 154,
+        "sha256": "487212f803b7193e15d983a02db6a6d3cdb642837781751c26bd542d5b974ab2"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/5b/87de17f5e9cd2da9570611276c5bd3f6c40aed",
+        "size": 53,
+        "sha256": "07503c9fa22d59fd0ebbc415f85c024b590c880f8480b4530633b2b1058e6f23"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/5e/4274539bb4305af910efaec8f3839eb3731bfd",
+        "size": 141,
+        "sha256": "b4b7a3ca6bd989fc66af28c1b0b05c0d2f8c9e689e301726774d5201272f0eba"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/6e/00c329f75cb50f21812dc7c3c4db14f56cc042",
+        "size": 35,
+        "sha256": "d6928fdb5b41767fe0576fef5c9fc17240285e1ebc9622773811d1c79dd52ea1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/a5/d3f065c6d70f098e8d023b00239a072e0dcf39",
+        "size": 177,
+        "sha256": "c7be8e196d96e2cc0e7b90ee7b5b7d0c544244f8d47e3f8a55f4ee28a0bd2baf"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/bc/b829b3cab37545a00bf8736b0ab2195d121422",
+        "size": 86,
+        "sha256": "081fa5fa2e5a7e9fe151826b4bec2c20bdb00bd31a09d3eaf6d468ac322f2b7f"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/packed-refs",
+        "size": 223,
+        "sha256": "447586c6889a6bf72a0b8ae3fb9be94c4eb95da263f2437975dc945b489fc82a"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/repo/"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_accepts_tacurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/HEAD",
+        "size": 26,
+        "sha256": "f56af9eb3a6c63ec5bb2bd6a92a41f3075b4ab64d1e8339630a0cf9aed7b3eef"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/config",
+        "size": 205,
+        "sha256": "e807aa22316c0c8c7e6034f571ea6b18f24bb5ab5a2b36ba60e2ef3912f05ecf"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/description",
+        "size": 73,
+        "sha256": "85ab6c163d43a17ea9cf7788308bca1466f1b0a8d1cc92e26e9bf63da4062aee"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/applypatch-msg.sample",
+        "size": 478,
+        "sha256": "0223497a0b8b033aa58a3a521b8629869386cf7ab0e2f101963d328aa62193f7"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/commit-msg.sample",
+        "size": 896,
+        "sha256": "1f74d5e9292979b573ebd59741d46cb93ff391acdd083d340b94370753d92437"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/fsmonitor-watchman.sample",
+        "size": 4726,
+        "sha256": "e0549964e93897b519bd8e333c037e51fff0f88ba13e086a331592bf801fa1d0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/post-update.sample",
+        "size": 189,
+        "sha256": "81765af2daef323061dcbc5e61fc16481cb74b3bac9ad8a174b186523586f6c5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-applypatch.sample",
+        "size": 424,
+        "sha256": "e15c5b469ea3e0a695bea6f2c82bcf8e62821074939ddd85b77e0007ff165475"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-commit.sample",
+        "size": 1649,
+        "sha256": "57185b7b9f05239d7ab52db045f5b89eb31348d7b2177eab214f5eb872e1971b"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-merge-commit.sample",
+        "size": 416,
+        "sha256": "d3825a70337940ebbd0a5c072984e13245920cdf8898bd225c8d27a6dfc9cb53"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-push.sample",
+        "size": 1374,
+        "sha256": "ecce9c7e04d3f5dd9d8ada81753dd1d549a9634b26770042b58dda00217d086a"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-rebase.sample",
+        "size": 4961,
+        "sha256": "993e99be047909faaf42a839857fcfbf9ed42c70b77e1c07c34fa9743c9425ac"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-receive.sample",
+        "size": 544,
+        "sha256": "a4c3d2b9c7bb3fd8d1441c31bd4ee71a595d66b44fcf49ddb310252320169989"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/prepare-commit-msg.sample",
+        "size": 1681,
+        "sha256": "f079f29a5f4c881c08ad087a5b1461cfdacb2784b08cb6711ff9b0d8e677ab95"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/push-to-checkout.sample",
+        "size": 2783,
+        "sha256": "a53d0741798b287c6dd7afa64aee473f305e65d3f49463bb9d7408ec3b12bf5f"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/sendemail-validate.sample",
+        "size": 2308,
+        "sha256": "44ebfc923dc5466bc009602f0ecf067b9c65459abfe8868ddc49b78e6ced7a92"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/update.sample",
+        "size": 3650,
+        "sha256": "8d5f2fa83e103cf08b57eaa67521df9194f45cbdbcb37da52ad586097a14d106"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/info/exclude",
+        "size": 240,
+        "sha256": "6671fe83b7a07c8932ee89164d1f2793b2318058eb8b98dc5c06ee0a5a3b0ec1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/0a/d765aa5a06c4660a27cda4c0dcc91dd0e8079d",
+        "size": 31,
+        "sha256": "0a9d8b0f66aa8a29620a8fa08e64b4b8c5ff868a8c453551b01b22f9c1f79c4b"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/3d/b12bbbcbc99f2003ccf394a4d830cf9e150698",
+        "size": 154,
+        "sha256": "487212f803b7193e15d983a02db6a6d3cdb642837781751c26bd542d5b974ab2"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/5b/87de17f5e9cd2da9570611276c5bd3f6c40aed",
+        "size": 53,
+        "sha256": "07503c9fa22d59fd0ebbc415f85c024b590c880f8480b4530633b2b1058e6f23"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/5e/4274539bb4305af910efaec8f3839eb3731bfd",
+        "size": 141,
+        "sha256": "b4b7a3ca6bd989fc66af28c1b0b05c0d2f8c9e689e301726774d5201272f0eba"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/6e/00c329f75cb50f21812dc7c3c4db14f56cc042",
+        "size": 35,
+        "sha256": "d6928fdb5b41767fe0576fef5c9fc17240285e1ebc9622773811d1c79dd52ea1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/a5/d3f065c6d70f098e8d023b00239a072e0dcf39",
+        "size": 177,
+        "sha256": "c7be8e196d96e2cc0e7b90ee7b5b7d0c544244f8d47e3f8a55f4ee28a0bd2baf"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/bc/b829b3cab37545a00bf8736b0ab2195d121422",
+        "size": 86,
+        "sha256": "081fa5fa2e5a7e9fe151826b4bec2c20bdb00bd31a09d3eaf6d468ac322f2b7f"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/packed-refs",
+        "size": 223,
+        "sha256": "447586c6889a6bf72a0b8ae3fb9be94c4eb95da263f2437975dc945b489fc82a"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/repo/"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_focurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/HEAD",
+        "size": 26,
+        "sha256": "f56af9eb3a6c63ec5bb2bd6a92a41f3075b4ab64d1e8339630a0cf9aed7b3eef"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/config",
+        "size": 205,
+        "sha256": "4881f17327a7a830e713ba244a604737e995901d8d86f32c617c311f35dbeb53"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/description",
+        "size": 73,
+        "sha256": "85ab6c163d43a17ea9cf7788308bca1466f1b0a8d1cc92e26e9bf63da4062aee"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/applypatch-msg.sample",
+        "size": 478,
+        "sha256": "0223497a0b8b033aa58a3a521b8629869386cf7ab0e2f101963d328aa62193f7"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/commit-msg.sample",
+        "size": 896,
+        "sha256": "1f74d5e9292979b573ebd59741d46cb93ff391acdd083d340b94370753d92437"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/fsmonitor-watchman.sample",
+        "size": 4726,
+        "sha256": "e0549964e93897b519bd8e333c037e51fff0f88ba13e086a331592bf801fa1d0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/post-update.sample",
+        "size": 189,
+        "sha256": "81765af2daef323061dcbc5e61fc16481cb74b3bac9ad8a174b186523586f6c5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-applypatch.sample",
+        "size": 424,
+        "sha256": "e15c5b469ea3e0a695bea6f2c82bcf8e62821074939ddd85b77e0007ff165475"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-commit.sample",
+        "size": 1649,
+        "sha256": "57185b7b9f05239d7ab52db045f5b89eb31348d7b2177eab214f5eb872e1971b"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-merge-commit.sample",
+        "size": 416,
+        "sha256": "d3825a70337940ebbd0a5c072984e13245920cdf8898bd225c8d27a6dfc9cb53"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-push.sample",
+        "size": 1374,
+        "sha256": "ecce9c7e04d3f5dd9d8ada81753dd1d549a9634b26770042b58dda00217d086a"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-rebase.sample",
+        "size": 4961,
+        "sha256": "993e99be047909faaf42a839857fcfbf9ed42c70b77e1c07c34fa9743c9425ac"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-receive.sample",
+        "size": 544,
+        "sha256": "a4c3d2b9c7bb3fd8d1441c31bd4ee71a595d66b44fcf49ddb310252320169989"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/prepare-commit-msg.sample",
+        "size": 1681,
+        "sha256": "f079f29a5f4c881c08ad087a5b1461cfdacb2784b08cb6711ff9b0d8e677ab95"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/push-to-checkout.sample",
+        "size": 2783,
+        "sha256": "a53d0741798b287c6dd7afa64aee473f305e65d3f49463bb9d7408ec3b12bf5f"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/sendemail-validate.sample",
+        "size": 2308,
+        "sha256": "44ebfc923dc5466bc009602f0ecf067b9c65459abfe8868ddc49b78e6ced7a92"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/update.sample",
+        "size": 3650,
+        "sha256": "8d5f2fa83e103cf08b57eaa67521df9194f45cbdbcb37da52ad586097a14d106"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/info/exclude",
+        "size": 240,
+        "sha256": "6671fe83b7a07c8932ee89164d1f2793b2318058eb8b98dc5c06ee0a5a3b0ec1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/0a/d765aa5a06c4660a27cda4c0dcc91dd0e8079d",
+        "size": 31,
+        "sha256": "0a9d8b0f66aa8a29620a8fa08e64b4b8c5ff868a8c453551b01b22f9c1f79c4b"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/3d/b12bbbcbc99f2003ccf394a4d830cf9e150698",
+        "size": 154,
+        "sha256": "487212f803b7193e15d983a02db6a6d3cdb642837781751c26bd542d5b974ab2"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/5b/87de17f5e9cd2da9570611276c5bd3f6c40aed",
+        "size": 53,
+        "sha256": "07503c9fa22d59fd0ebbc415f85c024b590c880f8480b4530633b2b1058e6f23"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/5e/4274539bb4305af910efaec8f3839eb3731bfd",
+        "size": 141,
+        "sha256": "b4b7a3ca6bd989fc66af28c1b0b05c0d2f8c9e689e301726774d5201272f0eba"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/6e/00c329f75cb50f21812dc7c3c4db14f56cc042",
+        "size": 35,
+        "sha256": "d6928fdb5b41767fe0576fef5c9fc17240285e1ebc9622773811d1c79dd52ea1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/a5/d3f065c6d70f098e8d023b00239a072e0dcf39",
+        "size": 177,
+        "sha256": "c7be8e196d96e2cc0e7b90ee7b5b7d0c544244f8d47e3f8a55f4ee28a0bd2baf"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/bc/b829b3cab37545a00bf8736b0ab2195d121422",
+        "size": 86,
+        "sha256": "081fa5fa2e5a7e9fe151826b4bec2c20bdb00bd31a09d3eaf6d468ac322f2b7f"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/packed-refs",
+        "size": 223,
+        "sha256": "447586c6889a6bf72a0b8ae3fb9be94c4eb95da263f2437975dc945b489fc82a"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/repo/"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_native_release_rejects_tacurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_optional_native_signing_e0/output",
+        "size": 13,
+        "sha256": "967243130ccb7d096e95077b96f0ee52848f381ae77dbf28f1bf5e92a944caa2"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_optional_native_signing_e1/output",
+        "size": 13,
+        "sha256": "967243130ccb7d096e95077b96f0ee52848f381ae77dbf28f1bf5e92a944caa2"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_optional_native_signing_e2/output",
+        "size": 12,
+        "sha256": "a2d4c4e85e50825e57a3438ca3768b43a9601672d106613db72d12864df8cad6"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_optional_native_signing_e3/output",
+        "size": 12,
+        "sha256": "a2d4c4e85e50825e57a3438ca3768b43a9601672d106613db72d12864df8cad6"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_optional_native_signing_ecurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_optional_native_signing_e5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/bin/uv",
+        "size": 43,
+        "sha256": "cb52c1d13c8b7683dbedd5243838bc9f35f29dab740a6a9911a788141eff4b61"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/HEAD",
+        "size": 26,
+        "sha256": "f56af9eb3a6c63ec5bb2bd6a92a41f3075b4ab64d1e8339630a0cf9aed7b3eef"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/config",
+        "size": 205,
+        "sha256": "158b558800e61873490a170cf51de8df6213cd88d4eab1e0665c37b890471665"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/description",
+        "size": 73,
+        "sha256": "85ab6c163d43a17ea9cf7788308bca1466f1b0a8d1cc92e26e9bf63da4062aee"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/applypatch-msg.sample",
+        "size": 478,
+        "sha256": "0223497a0b8b033aa58a3a521b8629869386cf7ab0e2f101963d328aa62193f7"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/commit-msg.sample",
+        "size": 896,
+        "sha256": "1f74d5e9292979b573ebd59741d46cb93ff391acdd083d340b94370753d92437"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/fsmonitor-watchman.sample",
+        "size": 4726,
+        "sha256": "e0549964e93897b519bd8e333c037e51fff0f88ba13e086a331592bf801fa1d0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/post-update.sample",
+        "size": 189,
+        "sha256": "81765af2daef323061dcbc5e61fc16481cb74b3bac9ad8a174b186523586f6c5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-applypatch.sample",
+        "size": 424,
+        "sha256": "e15c5b469ea3e0a695bea6f2c82bcf8e62821074939ddd85b77e0007ff165475"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-commit.sample",
+        "size": 1649,
+        "sha256": "57185b7b9f05239d7ab52db045f5b89eb31348d7b2177eab214f5eb872e1971b"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-merge-commit.sample",
+        "size": 416,
+        "sha256": "d3825a70337940ebbd0a5c072984e13245920cdf8898bd225c8d27a6dfc9cb53"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-push.sample",
+        "size": 1374,
+        "sha256": "ecce9c7e04d3f5dd9d8ada81753dd1d549a9634b26770042b58dda00217d086a"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-rebase.sample",
+        "size": 4961,
+        "sha256": "993e99be047909faaf42a839857fcfbf9ed42c70b77e1c07c34fa9743c9425ac"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-receive.sample",
+        "size": 544,
+        "sha256": "a4c3d2b9c7bb3fd8d1441c31bd4ee71a595d66b44fcf49ddb310252320169989"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/prepare-commit-msg.sample",
+        "size": 1681,
+        "sha256": "f079f29a5f4c881c08ad087a5b1461cfdacb2784b08cb6711ff9b0d8e677ab95"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/push-to-checkout.sample",
+        "size": 2783,
+        "sha256": "a53d0741798b287c6dd7afa64aee473f305e65d3f49463bb9d7408ec3b12bf5f"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/sendemail-validate.sample",
+        "size": 2308,
+        "sha256": "44ebfc923dc5466bc009602f0ecf067b9c65459abfe8868ddc49b78e6ced7a92"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/update.sample",
+        "size": 3650,
+        "sha256": "8d5f2fa83e103cf08b57eaa67521df9194f45cbdbcb37da52ad586097a14d106"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/info/exclude",
+        "size": 240,
+        "sha256": "6671fe83b7a07c8932ee89164d1f2793b2318058eb8b98dc5c06ee0a5a3b0ec1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/0a/d765aa5a06c4660a27cda4c0dcc91dd0e8079d",
+        "size": 31,
+        "sha256": "0a9d8b0f66aa8a29620a8fa08e64b4b8c5ff868a8c453551b01b22f9c1f79c4b"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/3d/b12bbbcbc99f2003ccf394a4d830cf9e150698",
+        "size": 154,
+        "sha256": "487212f803b7193e15d983a02db6a6d3cdb642837781751c26bd542d5b974ab2"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/5b/87de17f5e9cd2da9570611276c5bd3f6c40aed",
+        "size": 53,
+        "sha256": "07503c9fa22d59fd0ebbc415f85c024b590c880f8480b4530633b2b1058e6f23"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/5e/4274539bb4305af910efaec8f3839eb3731bfd",
+        "size": 141,
+        "sha256": "b4b7a3ca6bd989fc66af28c1b0b05c0d2f8c9e689e301726774d5201272f0eba"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/6e/00c329f75cb50f21812dc7c3c4db14f56cc042",
+        "size": 35,
+        "sha256": "d6928fdb5b41767fe0576fef5c9fc17240285e1ebc9622773811d1c79dd52ea1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/a5/d3f065c6d70f098e8d023b00239a072e0dcf39",
+        "size": 177,
+        "sha256": "c7be8e196d96e2cc0e7b90ee7b5b7d0c544244f8d47e3f8a55f4ee28a0bd2baf"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/bc/b829b3cab37545a00bf8736b0ab2195d121422",
+        "size": 86,
+        "sha256": "081fa5fa2e5a7e9fe151826b4bec2c20bdb00bd31a09d3eaf6d468ac322f2b7f"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/packed-refs",
+        "size": 223,
+        "sha256": "447586c6889a6bf72a0b8ae3fb9be94c4eb95da263f2437975dc945b489fc82a"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/repo/"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ancecurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/calls",
+        "size": 755,
+        "sha256": "9804fe9a1f715727c832cf2230cee8f90d9926ebe0bc08d4df5758f7a2983844"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/gh",
+        "size": 1084,
+        "sha256": "9f1951d8f87354783bc5da8669b54c19984517bf9324b97ae24c3464ce0879f5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/native-signing/linux/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/native-signing/macos/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/native-signing/windows/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/release-assets/runtime-linux",
+        "size": 5,
+        "sha256": "caf90169eefa5f807d577486b9f795ab86ae2983c5c20806cff959117e90af18"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/release-assets/runtime-macos",
+        "size": 5,
+        "sha256": "a0c0485eff9c817deee7190edf264622b1677fc992920657411b36a6aed48f83"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/release-assets/runtime-windows",
+        "size": 7,
+        "sha256": "340d600392818df2413382dc7d8325c360d83ea49a262d31760348484bbc10b5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/state.json",
+        "size": 477,
+        "sha256": "700522fad433eddf14f8424a444fb4925c77ad7f1825941b303a0c9bbe4f9852"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/calls",
+        "size": 343,
+        "sha256": "309925b513ddaa60fdd459d2cdf147e146dc719241a1561552120f4537e25057"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/gh",
+        "size": 1084,
+        "sha256": "9f1951d8f87354783bc5da8669b54c19984517bf9324b97ae24c3464ce0879f5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/native-signing/linux/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/native-signing/macos/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/native-signing/windows/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/release-assets/runtime-linux",
+        "size": 5,
+        "sha256": "caf90169eefa5f807d577486b9f795ab86ae2983c5c20806cff959117e90af18"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/release-assets/runtime-macos",
+        "size": 5,
+        "sha256": "a0c0485eff9c817deee7190edf264622b1677fc992920657411b36a6aed48f83"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/release-assets/runtime-windows",
+        "size": 7,
+        "sha256": "340d600392818df2413382dc7d8325c360d83ea49a262d31760348484bbc10b5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/state.json",
+        "size": 477,
+        "sha256": "700522fad433eddf14f8424a444fb4925c77ad7f1825941b303a0c9bbe4f9852"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/calls",
+        "size": 82,
+        "sha256": "5c9ee803aaff68ef4d9f703dd5e3381842e572ed735004e74bd7a9573544c488"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/gh",
+        "size": 1084,
+        "sha256": "9f1951d8f87354783bc5da8669b54c19984517bf9324b97ae24c3464ce0879f5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/native-signing/linux/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/native-signing/macos/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/native-signing/windows/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/release-assets/runtime-linux",
+        "size": 5,
+        "sha256": "caf90169eefa5f807d577486b9f795ab86ae2983c5c20806cff959117e90af18"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/release-assets/runtime-macos",
+        "size": 5,
+        "sha256": "a0c0485eff9c817deee7190edf264622b1677fc992920657411b36a6aed48f83"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/release-assets/runtime-windows",
+        "size": 7,
+        "sha256": "340d600392818df2413382dc7d8325c360d83ea49a262d31760348484bbc10b5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/state.json",
+        "size": 477,
+        "sha256": "700522fad433eddf14f8424a444fb4925c77ad7f1825941b303a0c9bbe4f9852"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/calls",
+        "size": 82,
+        "sha256": "5c9ee803aaff68ef4d9f703dd5e3381842e572ed735004e74bd7a9573544c488"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/gh",
+        "size": 1084,
+        "sha256": "9f1951d8f87354783bc5da8669b54c19984517bf9324b97ae24c3464ce0879f5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/list-error",
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/native-signing/linux/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/native-signing/macos/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/native-signing/windows/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/release-assets/runtime-linux",
+        "size": 5,
+        "sha256": "caf90169eefa5f807d577486b9f795ab86ae2983c5c20806cff959117e90af18"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/release-assets/runtime-macos",
+        "size": 5,
+        "sha256": "a0c0485eff9c817deee7190edf264622b1677fc992920657411b36a6aed48f83"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/release-assets/runtime-windows",
+        "size": 7,
+        "sha256": "340d600392818df2413382dc7d8325c360d83ea49a262d31760348484bbc10b5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/state.json",
+        "size": 476,
+        "sha256": "d4c2d4e4c761b6f35c1f1a00ef13acf4e3c7ddfa1d9e4a6f3cd8b469a2057ffc"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/calls",
+        "size": 82,
+        "sha256": "5c9ee803aaff68ef4d9f703dd5e3381842e572ed735004e74bd7a9573544c488"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/gh",
+        "size": 1084,
+        "sha256": "9f1951d8f87354783bc5da8669b54c19984517bf9324b97ae24c3464ce0879f5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/native-signing/linux/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/native-signing/macos/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/native-signing/windows/signing-status.txt",
+        "size": 6,
+        "sha256": "2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/release-assets/runtime-linux",
+        "size": 5,
+        "sha256": "caf90169eefa5f807d577486b9f795ab86ae2983c5c20806cff959117e90af18"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/release-assets/runtime-macos",
+        "size": 5,
+        "sha256": "a0c0485eff9c817deee7190edf264622b1677fc992920657411b36a6aed48f83"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/release-assets/runtime-windows",
+        "size": 7,
+        "sha256": "340d600392818df2413382dc7d8325c360d83ea49a262d31760348484bbc10b5"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/state.json",
+        "size": 476,
+        "sha256": "27a646e88d80482149f27b4cd650598aad70326551351e92c2cec104b8312d57"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_recovery_publication_outscurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_recovery_publication_outs4"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_release_workflow_files_ar0/actions_runtime_binary_release.yml",
+        "size": 12155,
+        "sha256": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_release_workflow_files_ar0/actions_runtime_pypi_release.yml",
+        "size": 12858,
+        "sha256": "476c9659e6af9433d1da9820a4b7274135353475dbcc72fa79c06d58938269b3"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_release_workflow_files_ar0/actions_runtime_recovery.yml",
+        "size": 43844,
+        "sha256": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_release_workflow_files_arcurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_release_workflow_files_ar0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts0/actions-runtime-manifest.sha256",
+        "size": 939,
+        "sha256": "490425d3f7865f46bf5dfadc71afa4667e3492c667bcacbe606cf3301ffa21b3"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts0/actions_runtime-1.0.0.tar.gz",
+        "size": 28,
+        "sha256": "e9dc97cd159afd955c132d28b38901e7cd6c7bbdda160b813f6bc30307bf05e1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts1/actions-runtime-manifest.sha256",
+        "size": 939,
+        "sha256": "94f730b7e8563727bc211762f2611bf02a702d19f8e33c62bc21c41d24ed8e2c"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts1/actions_runtime-1.0.0.tar.gz",
+        "size": 28,
+        "sha256": "e9dc97cd159afd955c132d28b38901e7cd6c7bbdda160b813f6bc30307bf05e1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_acceptscurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts2"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_injectscurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_runtime_publisher_injects0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_parses_current",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_runtime_publisher_parses_0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_proceedcurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_runtime_publisher_proceed0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects0/actions_runtime-1.0.0.tar.gz",
+        "size": 28,
+        "sha256": "e9dc97cd159afd955c132d28b38901e7cd6c7bbdda160b813f6bc30307bf05e1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects1/actions_runtime-1.0.0.tar.gz",
+        "size": 28,
+        "sha256": "e9dc97cd159afd955c132d28b38901e7cd6c7bbdda160b813f6bc30307bf05e1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects2/actions_runtime-1.0.0.tar.gz",
+        "size": 28,
+        "sha256": "e9dc97cd159afd955c132d28b38901e7cd6c7bbdda160b813f6bc30307bf05e1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects3/actions_runtime-1.0.0.tar.gz",
+        "size": 28,
+        "sha256": "e9dc97cd159afd955c132d28b38901e7cd6c7bbdda160b813f6bc30307bf05e1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects4/actions_runtime-1.0.0.tar.gz",
+        "size": 28,
+        "sha256": "e9dc97cd159afd955c132d28b38901e7cd6c7bbdda160b813f6bc30307bf05e1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects5/actions_runtime-1.0.0.tar.gz",
+        "size": 28,
+        "sha256": "e9dc97cd159afd955c132d28b38901e7cd6c7bbdda160b813f6bc30307bf05e1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_rejectscurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects6"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_requirecurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_runtime_publisher_require0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_verifie0/actions-runtime-manifest.sha256",
+        "size": 939,
+        "sha256": "490425d3f7865f46bf5dfadc71afa4667e3492c667bcacbe606cf3301ffa21b3"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_verifie0/actions_runtime-1.0.0.tar.gz",
+        "size": 28,
+        "sha256": "e9dc97cd159afd955c132d28b38901e7cd6c7bbdda160b813f6bc30307bf05e1"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_verifie0/unexpected.txt",
+        "size": 5,
+        "sha256": "c8dee78f8c7b466c881847accc196998bad00e2b96c5ef913dfbe454d3807c96"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/pytest-tmp/test_runtime_publisher_verifiecurrent",
+        "symlink_target": "/workspace/work/community-resume/sol-native-review/work/sol-pr257/pytest-tmp/test_runtime_publisher_verifie0"
+      },
+      {
+        "status": "??",
+        "path": "work/sol-pr257/review_probe.py",
+        "size": 4939,
+        "sha256": "df41f585f86233ee106ec361aafbd0aee6954b8b971c39a85da09f133e6989e6"
+      }
+    ],
+    "status_now": [
+      "?? work/sol-pr257/baseline-static-results.json",
+      "?? work/sol-pr257/baseline/.github/workflows/_gen_workflows.py",
+      "?? work/sol-pr257/baseline/devutils/tests/test_actions_runtime_release_line.py",
+      "?? work/sol-pr257/baseline/devutils/tests/test_runtime_release_workflows.py",
+      "?? work/sol-pr257/baseline_static.py",
+      "?? work/sol-pr257/homebrew-README-ff879e20.md",
+      "?? work/sol-pr257/homebrew-head.txt",
+      "?? work/sol-pr257/independent-pr257-review.md",
+      "?? work/sol-pr257/probe-results.json",
+      "?? work/sol-pr257/pytest-tmp/test_binary_release_publishes_0/actions-runtime-1.0.3-sha256.txt",
+      "?? work/sol-pr257/pytest-tmp/test_binary_release_publishes_0/linux64/action-server",
+      "?? work/sol-pr257/pytest-tmp/test_binary_release_publishes_0/macos-arm64/action-server",
+      "?? work/sol-pr257/pytest-tmp/test_binary_release_publishes_0/windows64/action-server.exe",
+      "?? work/sol-pr257/pytest-tmp/test_binary_release_publishes_current",
+      "?? work/sol-pr257/pytest-tmp/test_generated_recovery_is_ren0/actions_runtime_recovery.yml",
+      "?? work/sol-pr257/pytest-tmp/test_generated_recovery_is_rencurrent",
+      "?? work/sol-pr257/pytest-tmp/test_generated_runtime_invento0/repo/action_server/scripts/publish_verified_runtime.py",
+      "?? work/sol-pr257/pytest-tmp/test_generated_runtime_inventocurrent",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/HEAD",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/config",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/description",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/applypatch-msg.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/commit-msg.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/fsmonitor-watchman.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/post-update.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-applypatch.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-commit.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-merge-commit.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-push.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-rebase.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/pre-receive.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/prepare-commit-msg.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/push-to-checkout.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/sendemail-validate.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/hooks/update.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/info/exclude",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/0a/d765aa5a06c4660a27cda4c0dcc91dd0e8079d",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/3d/b12bbbcbc99f2003ccf394a4d830cf9e150698",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/5b/87de17f5e9cd2da9570611276c5bd3f6c40aed",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/5e/4274539bb4305af910efaec8f3839eb3731bfd",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/6e/00c329f75cb50f21812dc7c3c4db14f56cc042",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/a5/d3f065c6d70f098e8d023b00239a072e0dcf39",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/objects/bc/b829b3cab37545a00bf8736b0ab2195d121422",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/origin.git/packed-refs",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_ta0/repo/",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_accepts_tacurrent",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/HEAD",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/config",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/description",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/applypatch-msg.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/commit-msg.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/fsmonitor-watchman.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/post-update.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-applypatch.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-commit.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-merge-commit.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-push.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-rebase.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/pre-receive.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/prepare-commit-msg.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/push-to-checkout.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/sendemail-validate.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/hooks/update.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/info/exclude",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/0a/d765aa5a06c4660a27cda4c0dcc91dd0e8079d",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/3d/b12bbbcbc99f2003ccf394a4d830cf9e150698",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/5b/87de17f5e9cd2da9570611276c5bd3f6c40aed",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/5e/4274539bb4305af910efaec8f3839eb3731bfd",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/6e/00c329f75cb50f21812dc7c3c4db14f56cc042",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/a5/d3f065c6d70f098e8d023b00239a072e0dcf39",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/objects/bc/b829b3cab37545a00bf8736b0ab2195d121422",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/origin.git/packed-refs",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_fo0/repo/",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_focurrent",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/HEAD",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/config",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/description",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/applypatch-msg.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/commit-msg.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/fsmonitor-watchman.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/post-update.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-applypatch.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-commit.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-merge-commit.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-push.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-rebase.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/pre-receive.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/prepare-commit-msg.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/push-to-checkout.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/sendemail-validate.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/hooks/update.sample",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/info/exclude",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/0a/d765aa5a06c4660a27cda4c0dcc91dd0e8079d",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/3d/b12bbbcbc99f2003ccf394a4d830cf9e150698",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/5b/87de17f5e9cd2da9570611276c5bd3f6c40aed",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/5e/4274539bb4305af910efaec8f3839eb3731bfd",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/6e/00c329f75cb50f21812dc7c3c4db14f56cc042",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/a5/d3f065c6d70f098e8d023b00239a072e0dcf39",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/objects/bc/b829b3cab37545a00bf8736b0ab2195d121422",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/origin.git/packed-refs",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_ta0/repo/",
+      "?? work/sol-pr257/pytest-tmp/test_native_release_rejects_tacurrent",
+      "?? work/sol-pr257/pytest-tmp/test_optional_native_signing_e0/output",
+      "?? work/sol-pr257/pytest-tmp/test_optional_native_signing_e1/output",
+      "?? work/sol-pr257/pytest-tmp/test_optional_native_signing_e2/output",
+      "?? work/sol-pr257/pytest-tmp/test_optional_native_signing_e3/output",
+      "?? work/sol-pr257/pytest-tmp/test_optional_native_signing_ecurrent",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/bin/uv",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/HEAD",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/config",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/description",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/applypatch-msg.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/commit-msg.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/fsmonitor-watchman.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/post-update.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-applypatch.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-commit.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-merge-commit.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-push.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-rebase.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/pre-receive.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/prepare-commit-msg.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/push-to-checkout.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/sendemail-validate.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/hooks/update.sample",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/info/exclude",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/0a/d765aa5a06c4660a27cda4c0dcc91dd0e8079d",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/3d/b12bbbcbc99f2003ccf394a4d830cf9e150698",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/5b/87de17f5e9cd2da9570611276c5bd3f6c40aed",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/5e/4274539bb4305af910efaec8f3839eb3731bfd",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/6e/00c329f75cb50f21812dc7c3c4db14f56cc042",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/a5/d3f065c6d70f098e8d023b00239a072e0dcf39",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/objects/bc/b829b3cab37545a00bf8736b0ab2195d121422",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/origin.git/packed-refs",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ance0/repo/",
+      "?? work/sol-pr257/pytest-tmp/test_pypi_release_accepts_ancecurrent",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/calls",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/gh",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/native-signing/linux/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/native-signing/macos/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/native-signing/windows/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/release-assets/runtime-linux",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/release-assets/runtime-macos",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/release-assets/runtime-windows",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs0/state.json",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/calls",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/gh",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/native-signing/linux/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/native-signing/macos/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/native-signing/windows/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/release-assets/runtime-linux",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/release-assets/runtime-macos",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/release-assets/runtime-windows",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs1/state.json",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/calls",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/gh",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/native-signing/linux/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/native-signing/macos/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/native-signing/windows/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/release-assets/runtime-linux",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/release-assets/runtime-macos",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/release-assets/runtime-windows",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs2/state.json",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/calls",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/gh",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/list-error",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/native-signing/linux/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/native-signing/macos/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/native-signing/windows/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/release-assets/runtime-linux",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/release-assets/runtime-macos",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/release-assets/runtime-windows",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs3/state.json",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/calls",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/gh",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/native-signing/linux/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/native-signing/macos/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/native-signing/windows/signing-status.txt",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/release-assets/runtime-linux",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/release-assets/runtime-macos",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/release-assets/runtime-windows",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outs4/state.json",
+      "?? work/sol-pr257/pytest-tmp/test_recovery_publication_outscurrent",
+      "?? work/sol-pr257/pytest-tmp/test_release_workflow_files_ar0/actions_runtime_binary_release.yml",
+      "?? work/sol-pr257/pytest-tmp/test_release_workflow_files_ar0/actions_runtime_pypi_release.yml",
+      "?? work/sol-pr257/pytest-tmp/test_release_workflow_files_ar0/actions_runtime_recovery.yml",
+      "?? work/sol-pr257/pytest-tmp/test_release_workflow_files_arcurrent",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts0/actions-runtime-manifest.sha256",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts0/actions_runtime-1.0.0.tar.gz",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts1/actions-runtime-manifest.sha256",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_accepts1/actions_runtime-1.0.0.tar.gz",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_acceptscurrent",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_injectscurrent",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_parses_current",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_proceedcurrent",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects0/actions_runtime-1.0.0.tar.gz",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects1/actions_runtime-1.0.0.tar.gz",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects2/actions_runtime-1.0.0.tar.gz",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects3/actions_runtime-1.0.0.tar.gz",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects4/actions_runtime-1.0.0.tar.gz",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_rejects5/actions_runtime-1.0.0.tar.gz",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_rejectscurrent",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_requirecurrent",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_verifie0/actions-runtime-manifest.sha256",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_verifie0/actions_runtime-1.0.0.tar.gz",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_verifie0/unexpected.txt",
+      "?? work/sol-pr257/pytest-tmp/test_runtime_publisher_verifiecurrent",
+      "?? work/sol-pr257/review_probe.py"
+    ],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "29decdcb4ac6712f278b61e3722e0ad9217c60ba",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/tls-long-hostname",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "54dae1c0a8383797fa99ba5c50e2a2cf2d829302",
+    "tree": "ca7c7fc077bf726562d948b956dc7fb0d3702fa5",
+    "branch": "fix/tls-long-hostname-certificate-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "54dae1c0a8383797fa99ba5c50e2a2cf2d829302",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/tls-windows-teardown",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "b67b99c15d77b213d0ea34eda0444b6a18b1c3d3",
+    "tree": "ca400692e7ec9e8a6b4e59784dd404a4c838cae2",
+    "branch": "fix/tls-windows-proactor-teardown-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [
+      {
+        "status": " D",
+        "path": ".coverage-thresholds.json"
+      },
+      {
+        "status": " D",
+        "path": ".coveragerc"
+      },
+      {
+        "status": " D",
+        "path": ".editorconfig"
+      },
+      {
+        "status": " D",
+        "path": ".eslintignore"
+      },
+      {
+        "status": " D",
+        "path": ".gitignore"
+      },
+      {
+        "status": " D",
+        "path": ".prettierignore"
+      },
+      {
+        "status": " D",
+        "path": ".project"
+      },
+      {
+        "status": " D",
+        "path": ".pydevproject"
+      },
+      {
+        "status": " D",
+        "path": "AGENTS.md"
+      },
+      {
+        "status": " D",
+        "path": "CLAUDE.md"
+      },
+      {
+        "status": " D",
+        "path": "CONTRIBUTING.md"
+      },
+      {
+        "status": " D",
+        "path": "LICENSE"
+      },
+      {
+        "status": " D",
+        "path": "NOTICE.md"
+      },
+      {
+        "status": " D",
+        "path": "README.md"
+      },
+      {
+        "status": " D",
+        "path": "action_server/.gitignore"
+      },
+      {
+        "status": " D",
+        "path": "action_server/README.md"
+      },
+      {
+        "status": " D",
+        "path": "action_server/action-server.spec"
+      },
+      {
+        "status": " D",
+        "path": "action_server/build.py"
+      },
+      {
+        "status": " D",
+        "path": "action_server/poetry.lock"
+      },
+      {
+        "status": " D",
+        "path": "action_server/poetry.toml"
+      },
+      {
+        "status": " D",
+        "path": "action_server/pyproject.toml"
+      },
+      {
+        "status": " D",
+        "path": "action_server/ruff.toml"
+      },
+      {
+        "status": " D",
+        "path": "action_server/tasks.py"
+      },
+      {
+        "status": " D",
+        "path": "action_server/tasks_cdn.py"
+      },
+      {
+        "status": " D",
+        "path": "action_server/tests/conftest.py"
+      },
+      {
+        "status": " D",
+        "path": "docs/BUILD_INSTRUCTIONS.md"
+      },
+      {
+        "status": " D",
+        "path": "docs/ai-ops-runbook.md"
+      },
+      {
+        "status": " D",
+        "path": "docs/metrics.md"
+      },
+      {
+        "status": " D",
+        "path": "docs/review-rubric.md"
+      },
+      {
+        "status": " D",
+        "path": "env.json"
+      },
+      {
+        "status": " D",
+        "path": "tasks.py"
+      },
+      {
+        "status": " D",
+        "path": "verify_t026a.py"
+      }
+    ],
+    "status_now": [
+      " D .coverage-thresholds.json",
+      " D .coveragerc",
+      " D .editorconfig",
+      " D .eslintignore",
+      " D .gitignore",
+      " D .prettierignore",
+      " D .project",
+      " D .pydevproject",
+      " D AGENTS.md",
+      " D CLAUDE.md",
+      " D CONTRIBUTING.md",
+      " D LICENSE",
+      " D NOTICE.md",
+      " D README.md",
+      " D action_server/.gitignore",
+      " D action_server/README.md",
+      " D action_server/action-server.spec",
+      " D action_server/build.py",
+      " D action_server/poetry.lock",
+      " D action_server/poetry.toml",
+      " D action_server/pyproject.toml",
+      " D action_server/ruff.toml",
+      " D action_server/tasks.py",
+      " D action_server/tasks_cdn.py",
+      " D action_server/tests/conftest.py",
+      " D docs/BUILD_INSTRUCTIONS.md",
+      " D docs/ai-ops-runbook.md",
+      " D docs/metrics.md",
+      " D docs/review-rubric.md",
+      " D env.json",
+      " D tasks.py",
+      " D verify_t026a.py"
+    ],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "b67b99c15d77b213d0ea34eda0444b6a18b1c3d3",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/tunnel",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "554630899c6eab23b922ba6558347e7f2c439c00",
+    "tree": "2999eb3791f58465f50db6035b3390a1413249ab",
+    "branch": "resume/tunnel-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "554630899c6eab23b922ba6558347e7f2c439c00",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/tunnel-edge",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+    "tree": "43fe6318944a1b9049f46c9e96d2885c56068bde",
+    "branch": "feature/tunnel-edge-verification-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "82f526efc741781b0a08649cd1ecf0f8d2579f0c",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/tunnel-tls-acceptance",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "274042cd555d0340dc07e86f651986ab49ba85a7",
+    "tree": "da866ec20bd5edc35dc69a6c24368c0d8291d7f2",
+    "branch": "test/tunnel-tls-acceptance-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "274042cd555d0340dc07e86f651986ab49ba85a7",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/wheel-inventory",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "71f55ddd1ce34720db0e13433a2f1f5c9eed70a0",
+    "tree": "db3ecee9e9c2937a9912780a54bd5a1557562f50",
+    "branch": "release/actions-core-1.0.2-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "011c5482285ea516f39292100c429a905e6e3e36",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/windows-contract-tests",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "c6af71b8e3880b9d99f351ac4d17a99744114365",
+    "tree": "cccb76db0d558e18f3b1b516d9475ed6564b370b",
+    "branch": "fix/windows-runtime-contract-tests-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "c6af71b8e3880b9d99f351ac4d17a99744114365",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/windows-runtime-typecheck",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "dc610f3ba14b9a64b7fd4b4bcb6ec1fccb00beab",
+    "tree": "d37254343e5db0c13318c33b8d093a175bddd318",
+    "branch": "fix/windows-runtime-typecheck-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "ce6b3cef5316302ed065619a52eddbc8e5d44e1b",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/worker-exit",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "290e469c35447c7472bcb8ab3241bfa5a63a850d",
+    "tree": "227e950994c52e629fe1fcd65effb7421f92aeb5",
+    "branch": "repair/rcc-trust-context-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "26b0194590e14656bff92dce3665dccab09837a3",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/workitems",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "f2dd54cc35798f7b689f0855b5e3d81263b1b24e",
+    "tree": "3f619de87ad8f82bb5c8a5998a232d95309b89c2",
+    "branch": "release/http-helper-redirect-fix-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "167378509ca33450d4478021214e2e74a0b46dda",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/workitems-artifacts",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+    "tree": "eba75d90bf40a337201b9f4f175c974f8fa5acc4",
+    "branch": "feature/workitems-native-artifact-manifest-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "8013d17256f4b4c20cc4d36141c08bca2c964354",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/workitems-ci",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "511cc3863a58165a9e61e87a258348b50126aca0",
+    "tree": "6cb691b44666347f3e0de68c9830bd6824a4a0a0",
+    "branch": "fix/runtime-tests-integration-triggers-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [
+      {
+        "status": " M",
+        "path": "LICENSE",
+        "size": 11344,
+        "sha256": "5dd447f3a4dafdcf24b0b60cc4f130e778ed1edb4b1fe7994fe8e87ed6eb9497"
+      },
+      {
+        "status": " M",
+        "path": "tasks.py",
+        "size": 3547,
+        "sha256": "b9d8fc44392003c3eac7503c2c8cff237f8896c95d5eccb97f6e75cf55eb4b1c"
+      },
+      {
+        "status": " M",
+        "path": "verify_t026a.py",
+        "size": 1963,
+        "sha256": "76a2937ee56c91ecaa276b15db322cfd9cb05e61d4a3f2b0352c71686ff20065"
+      }
+    ],
+    "status_now": [
+      " M LICENSE",
+      " M tasks.py",
+      " M verify_t026a.py"
+    ],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "1c8585d5d78d35db67a490cd4a0a35e7028ca82e",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/community-resume/workitems-reservation-fix",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "5000fac1b43f7318cbbcccc470597d4c2ba1a298",
+    "tree": "6a035bb4e7a8358ec444656aa7c66915e1b89e15",
+    "branch": "fix/workitems-reservation-test-barrier-20261009",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "cb2668a82c6d414dd094b02e075f3ac298ac8228",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/d10-samefile-repro-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "e886d26ebaefafa9189a69517f6707691b53662e",
+    "tree": "016664a8e0d01dec36accf4fe5d39cb0b7bebef7",
+    "branch": "test/d10-samefile-repro-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "e886d26ebaefafa9189a69517f6707691b53662e",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/pr282-integration-doc-resolution-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "e18b3d5931946969dcc29b825ca902f10d9f8b78",
+    "tree": "4bfe827f2e4fd502f31722121946d697aeaa5521",
+    "branch": "review/pr282-integration-doc-resolution-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "421fac66e265de619eef7d4f9d171a6095f4a907",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/pr292-resource-history-typing-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "22bd1371adf559db36c32942c235f0aaf77f1cf4",
+    "tree": "94f4b0dfae5bad8f7a356719210402b3d507e2f7",
+    "branch": "fix/pr292-resource-history-test-typing-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/rcc-control-source-fixture-repin-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "345df52bf73e0049c83ba345d1ed593c0abe68cd",
+    "tree": "6f1a2d42b6d93c912c56efa3e9e6ac72729404a8",
+    "branch": "test/rcc-control-source-fixture-repin-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "473e42ec8f7a9f3fed623efc135b550ac3c08190",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/source-staged-rcc-control-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "922223a330003ec64808e25843ae448bfae6dc4a",
+    "tree": "af7e419414261525c89db5511c5cbbc6f07981b0",
+    "branch": "test/source-staged-rcc-control-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [
+      {
+        "status": " M",
+        "path": ".github/workflows/_gen_workflows.py",
+        "size": 128344,
+        "sha256": "0fdc2c5d05e4fdb2783af2704381529edf2f70c69a452e0d8680b3140f525b73"
+      },
+      {
+        "status": " M",
+        "path": ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+        "size": 36244,
+        "sha256": "96327f3da6eedd3d50408b91151a167d244655497092f5617a566f883cc56bde"
+      },
+      {
+        "status": " M",
+        "path": "developer/tests/test_rcc_provider_rollback_workflow.py",
+        "size": 10742,
+        "sha256": "9c0385146cfca513194e1bdc64744e6d0be75c43de92d3109cb6de4fd750afc9"
+      },
+      {
+        "status": " M",
+        "path": "docs/skills/repository-operations.md",
+        "size": 207659,
+        "sha256": "9ce88297846b003011ae7823ebcad337aaba2e75797ce810d210e51cd799519a"
+      }
+    ],
+    "status_now": [
+      " M .github/workflows/_gen_workflows.py",
+      " M .github/workflows/actions_runtime_rcc_provider_rollback.yml",
+      " M developer/tests/test_rcc_provider_rollback_workflow.py",
+      " M docs/skills/repository-operations.md"
+    ],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "2552a8c3419b213825294a51927843b2d61f662e",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/source-staged-rcc-current-candidate-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "922223a330003ec64808e25843ae448bfae6dc4a",
+    "tree": "af7e419414261525c89db5511c5cbbc6f07981b0",
+    "branch": "feat/source-staged-rcc-current-candidate-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "2552a8c3419b213825294a51927843b2d61f662e",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/staged-rcc-current-integration-candidate-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "f103edc9015128bb5e6d3875208c4077644e8fe4",
+    "tree": "e2420f11d98ac92ab1c1918209a893a578cf0ce6",
+    "branch": "test/staged-rcc-control-current-candidate-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "0ed580eabf2b74fa7b2530f03760b650565b2178",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/workspace/work/staged-rcc-dbdir-repair-20261010",
+    "common_dir": "/workspace/actions/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "1284310db62220534977e8db52fd33351e59a4a1",
+    "tree": "cdd4d65d914df9be3eaa4cf979d6b224fde431c3",
+    "branch": "fix/staged-rcc-consumer-dbdir-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/actions-worktrees/package-revision-schema",
+    "common_dir": "/tmp/work/actions-worktrees/package-revision-schema/.git",
+    "remotes": [
+      "github.com/joshyorko/actions.git"
+    ],
+    "head": "72193c8cf7c5e4fd5a235e0784b6b330a7c429cc",
+    "tree": "01966c6360aafdca7b04291f43bb1c32dfb9d553",
+    "branch": "feat/package-revision-schema-20261010",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": "0357585b51864e158f50c7479af001ba6daf5b06",
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  },
+  {
+    "path": "/tmp/work/deployment-values-deps/rfc8785-source",
+    "common_dir": "/tmp/work/deployment-values-deps/rfc8785-source/.git",
+    "remotes": [
+      "github.com/trailofbits/rfc8785.py.git"
+    ],
+    "head": "4d9b161f6054301d98d0566e813d020fb019ee10",
+    "tree": "36765f30f7f48f61271d051cb257d5a4ba59511d",
+    "branch": "DETACHED",
+    "upstream": "",
+    "status_error": null,
+    "changes": [],
+    "status_now": [],
+    "fresh_remote_plus_bundle_exact_head_recovery": "PASS",
+    "same_complete_tree_public_commit": null,
+    "durable_method": "Public Git plus SHA-verified main/secondary bundle in handoff ref"
+  }
+]

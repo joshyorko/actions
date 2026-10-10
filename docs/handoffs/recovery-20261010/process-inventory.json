@@ -1,0 +1,70 @@
+{
+  "captured_at_utc": "2026-10-10T19:05:11.099187+00:00",
+  "live": [
+    {
+      "pid": 1,
+      "ppid": 0,
+      "state": "S",
+      "name": "tail",
+      "cwd": "/workspace"
+    },
+    {
+      "pid": 2,
+      "ppid": 1,
+      "state": "S",
+      "name": "caas-prefix-tra",
+      "cwd": "/workspace"
+    },
+    {
+      "pid": 200,
+      "ppid": 1,
+      "state": "S",
+      "name": "dockerd",
+      "cwd": null
+    },
+    {
+      "pid": 253,
+      "ppid": 200,
+      "state": "S",
+      "name": "containerd",
+      "cwd": null
+    },
+    {
+      "pid": 521,
+      "ppid": 0,
+      "state": "S",
+      "name": "codex",
+      "cwd": "/workspace"
+    },
+    {
+      "pid": 440230,
+      "ppid": 521,
+      "state": "S",
+      "name": "python",
+      "cwd": "/workspace"
+    },
+    {
+      "pid": 440231,
+      "ppid": 521,
+      "state": "S",
+      "name": "bash",
+      "cwd": "/workspace"
+    },
+    {
+      "pid": 440234,
+      "ppid": 521,
+      "state": "R",
+      "name": "python",
+      "cwd": "/workspace"
+    },
+    {
+      "pid": 440237,
+      "ppid": 440231,
+      "state": "R",
+      "name": "python",
+      "cwd": "/workspace"
+    }
+  ],
+  "zombie_count": 4482,
+  "note": "Read-only PID/name/state/cwd census; no process arguments, environment or credentials. Zombies are not live workers."
+}
