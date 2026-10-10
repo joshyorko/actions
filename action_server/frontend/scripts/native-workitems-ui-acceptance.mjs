@@ -256,9 +256,102 @@ async function storageUnavailable() {
     return evidence;
 }
 
+async function authorizationDenied() {
+    phase = "browser_launch";
+    browserContext = await chromium.launchPersistentContext(input.profile, {
+        headless: true,
+        viewport: { width: 320, height: 640 },
+    });
+    phase = "browser_page_setup";
+    const page = browserContext.pages()[0] || (await browserContext.newPage());
+    page.setDefaultTimeout(15_000);
+    await signIn(page);
+
+    phase = "authorization_session_fixture";
+    const cookiesBefore = await browserContext.cookies(target.origin);
+    const hadBrowserSessionCookie = cookiesBefore.some(
+        (cookie) => cookie.name === "actions_browser_session",
+    );
+    assert.equal(hadBrowserSessionCookie, true);
+    await browserContext.clearCookies({ name: "actions_browser_session" });
+    const cookiesAfter = await browserContext.cookies(target.origin);
+    evidence.browserSessionCookieRemoved = !cookiesAfter.some(
+        (cookie) => cookie.name === "actions_browser_session",
+    );
+    assert.equal(evidence.browserSessionCookieRemoved, true);
+
+    phase = "authorization_denied_request";
+    const denied = await page.evaluate(async () => {
+        const response = await fetch("/api/work-items");
+        return { status: response.status, body: await response.text() };
+    });
+    lastStatus = denied.status;
+    assert.equal(denied.status, 403);
+    assert.equal(denied.body, "Invalid or missing API Key");
+
+    phase = "authorization_sign_in_recovery";
+    await page.getByLabel("API key", { exact: true }).waitFor();
+    evidence.protectedWorkItemsHidden =
+        (await page
+            .getByRole("heading", { name: "Work Items", exact: true })
+            .count()) === 0;
+    assert.equal(evidence.protectedWorkItemsHidden, true);
+    evidence.signInRecoveryVisible =
+        (await page
+            .getByRole("button", { name: "Sign in", exact: true })
+            .count()) === 1;
+    assert.equal(evidence.signInRecoveryVisible, true);
+    evidence.packageYamlInstructionVisible = /package\.yaml/i.test(
+        await page.locator("body").innerText(),
+    );
+    assert.equal(evidence.packageYamlInstructionVisible, false);
+
+    await page.getByLabel("API key", { exact: true }).fill(input.api_key);
+    await page.getByRole("button", { name: "Sign in", exact: true }).click();
+    await page.getByRole("button", { name: "Sign out", exact: true }).waitFor();
+    await page
+        .getByRole("heading", { name: "Work Items", exact: true })
+        .waitFor();
+
+    phase = "authorization_reauthenticated_readback";
+    const recovered = await page.evaluate(async () => {
+        const response = await fetch("/api/work-items");
+        return { status: response.status, body: await response.json() };
+    });
+    lastStatus = recovered.status;
+    assert.equal(recovered.status, 200);
+    assert.equal(recovered.body.total, 1);
+    assert.equal(recovered.body.items[0].state, "PENDING");
+    assert.deepEqual(recovered.body.items[0].payload, {
+        synthetic: "native-workitems-ui",
+    });
+    evidence.reauthenticatedQueueReadback = {
+        httpStatus: recovered.status,
+        total: recovered.body.total,
+        state: recovered.body.items[0].state,
+        payload: recovered.body.items[0].payload,
+    };
+    evidence.responses = responses.slice(-8);
+    evidence.narrowWidth = await narrowViewport(page);
+    assert.ok(evidence.narrowWidth.documentWidth <= 320);
+
+    evidence.browserVersion = browserContext.browser()?.version() || "unknown";
+    await browserContext.close();
+    browserContext = undefined;
+    return evidence;
+}
+
 try {
-    const states =
-        input.stage === "normal" ? await normal() : await storageUnavailable();
+    let states;
+    if (input.stage === "normal") {
+        states = await normal();
+    } else if (input.stage === "storage-error") {
+        states = await storageUnavailable();
+    } else if (input.stage === "authorization-denied") {
+        states = await authorizationDenied();
+    } else {
+        throw new Error("unknown acceptance stage");
+    }
     process.stdout.write(
         `${JSON.stringify({ status: "PASS", stage: input.stage, states })}\n`,
     );

@@ -26,7 +26,6 @@ PACKAGE = Path(__file__).resolve().parents[2]
 FRONTEND = PACKAGE / "frontend"
 BROWSER_SCRIPT = FRONTEND / "scripts" / "native-workitems-ui-acceptance.mjs"
 STATES_NOT_RUN = {
-    "authorization_denial_ui": "separate #153 authentication ownership",
     "missing_runtime_support": "cannot be induced without mutating the package",
     "generic_http_500": "no supported native backend fault fixture",
 }
@@ -1507,6 +1506,15 @@ def test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery(
             origin,
         )
         record_browser_stage(receipt, normal)
+
+        authorization_denied = run_browser_stage(
+            node,
+            "authorization-denied",
+            tmp_path / "browser-profile-authorization-denied",
+            api_key,
+            origin,
+        )
+        record_browser_stage(receipt, authorization_denied)
 
         work_items_db = datadir / "workitems.db"
         assert work_items_db.is_file()
