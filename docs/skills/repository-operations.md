@@ -2515,6 +2515,22 @@ skipped because no task-owned managed provider is configured is NOT RUN, not
 acceptance evidence. This exercises one selected package through the current
 Runtime consumer; it does not prove complete source selection, source
 authorization, compiler/admission trust, or any package identity API.
+
+The private controlled-v2 compiler serializes proposed artifacts for one
+explicitly declared fixture. A trusted fixture harness must own the complete
+authored input set and call the confined reader/stager; supplied inventories
+and metadata are inputs, not proof of acquisition or executable discovery.
+The proposal reports inspection as `not_run` and neither admits nor publishes
+a Package Revision. Source content and the complete ZIP envelope have separate
+64 MiB limits, checked before archive construction, including UTF-8 filename
+and fixed-header overhead. Source identity hashes exact ZIP bytes with fixed
+metadata; capability, RCC-plan and revision identities hash canonical JSON
+preimages with distinct domain and version fields. Provider URLs, RCC artifact
+identity, interpreter/cache paths, workspace state and process/time state stay
+outside portable identity. Supplied RCC specification identity does not prove
+source-bound RCC inspection, arbitrary package completeness or an atomic
+filesystem snapshot.
+
 On 2026-10-10 the immutable consumer-gate candidate advanced from
 `f7c6ed61f24fd9e98d1465c83042c5446466311b`, which predates this test and is
 not eligible to run it, to `d376399f497fb98f47062e493219e063db8f08e1`
