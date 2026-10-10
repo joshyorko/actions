@@ -91,7 +91,7 @@
     },
     "previous_release_readiness": {
       "status": "RUNTIME_RELEASE_NOT_READY",
-      "observed_at_utc": "2026-10-10T20:05:39Z",
+      "observed_at_utc": "2026-10-10T19:58:27Z",
       "community": "a70993fafc99a9f94041485542d5a720797ca394",
       "integration": "4e8a26296608c232ce3dbd1f250ddb709b9459c9",
       "actions_core": "1.0.3 PUBLISHED_AND_BYTE/API/INSTALLED_CONSUMER_VERIFIED",
@@ -100,17 +100,17 @@
       "actions_work_items": "0.4.4 unchanged",
       "declared_runtime_core_floor": "^1.0.2; PR304 canary requirement remains exactly 1.0.2",
       "remaining_gates": [
-        "PR304 exact-head checks/review/merge; source GO only, with floor fix not accepted",
-        "PR302 exact-head Windows floor-canary failure must be refreshed after accepted PR304 union; adapter devmode active; Windows native and both RCC toolkit jobs pass",
-        "PR282 installed Runtime/browser pass is worker-reported but requires independent durable receipt readback; not full issue acceptance",
-        "PR305/#99 actual browser fixture rerun in progress; no acceptance receipt",
-        "PR292 Windows check; #290/#299/#300 remain blocked; last complete census was 19:58Z",
+        "PR304 exact-head checks/review/merge",
+        "PR302 exact-head Windows floor-canary failure must be refreshed against accepted PR304 union; Windows adapter devmode remains active",
+        "PR282 managed Runtime/browser consumer run",
+        "PR305 corrected actual Runtime/browser fixture rerun",
+        "PR292 Windows check; #290/#299/#300 blocked",
         "7eca actual RCC metadata inspection remains NOT_RUN",
-        "Actions Runtime 1.0.3 tag/PyPI/native artifact readback",
-        "Required Homebrew install/upgrade proof in owning joshyorko/homebrew-tools tap/workflow",
-        "Exact latest Runtime workflow/tag source review and named platform/security/registry gates remain unestablished by this scoped overlay"
+        "Current Actions Runtime PyPI and native release artifact/tag/registry readback",
+        "Required Homebrew install/upgrade proof in owning joshyorko/homebrew-tools tap/workflow; not run in this overlay",
+        "Exact latest Runtime workflow/tag source review and named platform/security/registry gates not established by this scoped overlay"
       ],
-      "source": "Exact current Git refs plus bounded 20:05Z follow-up status; PR302 failure is bound to run/job receipt. The prior complete CI census is explicitly historical."
+      "source": "runtime-readiness-corrected receipt plus exact current PR source/review and root 19:58 check status observation."
     },
     "previous_next_action": {
       "observed_at_utc": "2026-10-10T19:58:27Z",
@@ -658,6 +658,11 @@
       "path": "evidence/wave2-overlay-20261010T2005Z/preservation-check.json",
       "sha256": "1fc8264ce54c2c232bf8b98c3b9137f9845ae8b2fcbb4d5e19c255be10b205dc",
       "size_bytes": 4230
+    },
+    {
+      "path": "evidence/wave2-overlay-20261010T2005Z/previous-pointer-audit.json",
+      "sha256": "d2666a8963c70ecf4e1ffc15cf35ec57eb3c6c6a58e2d66e6f06eba1850928f0",
+      "size_bytes": 2257
     },
     {
       "path": "evidence/wave2-overlay-20261010T2005Z/rcc-preparation-types.json",

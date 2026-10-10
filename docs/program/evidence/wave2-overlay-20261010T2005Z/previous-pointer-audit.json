@@ -1,0 +1,47 @@
+{
+  "schema": "actions-prior-overlay-pointer-audit/v1",
+  "observed_at_utc": "2026-10-10T20:05:39Z",
+  "prior_amendment": {
+    "id": "program-amendment-20261010T1958Z",
+    "path": "evidence/wave2-overlay-20261010T195827Z/program-amendment-20261010T1958Z.json",
+    "sha256": "05bd5b71e8094871171c504a90d106dfd865b8fda1ba01ff5db6f13320fe5d71"
+  },
+  "checks": [
+    {
+      "prior_pointer": "previous_binding",
+      "source_field_in_immutable_prior_amendment": "current_git_binding_receipt",
+      "equal_to_prior": true,
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "sha256_canonical_json": "dcb16c24b4c6574efec16eb4f19f2da63611748023abb4e56aeb37d161443aa6"
+    },
+    {
+      "prior_pointer": "previous_worker_inventory",
+      "source_field_in_immutable_prior_amendment": "current_worker_inventory",
+      "equal_to_prior": true,
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "sha256_canonical_json": "322c27c74ff65ccbb4953aab463df4af6f0aaf2b1cc3253b8060f05c869e8dc5"
+    },
+    {
+      "prior_pointer": "previous_status",
+      "source_field_in_immutable_prior_amendment": "current_hosted_run_observations",
+      "equal_to_prior": true,
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "sha256_canonical_json": "a3c46b2d0e66d49434a8c61414068b6281d77fc4d2a803e22cbcbf018e212065"
+    },
+    {
+      "prior_pointer": "previous_release_readiness",
+      "source_field_in_immutable_prior_amendment": "current_release_readiness",
+      "equal_to_prior": true,
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "sha256_canonical_json": "7bae6562133698e84422abb44f9a6c5b895892cd757573437b626889eaed0719"
+    },
+    {
+      "prior_pointer": "previous_next_action",
+      "source_field_in_immutable_prior_amendment": "current_next_action",
+      "equal_to_prior": true,
+      "observed_at_utc": "2026-10-10T19:58:27Z",
+      "sha256_canonical_json": "67ce9ebb6787f97000117dddbe0d76f59a02492db83e2c6f2efac2d9d86e6fa9"
+    }
+  ],
+  "result": "PASS: all previous pointer values are deep copies of the immutable 19:58 amendment; previous_release_readiness restored to its 19:58 observed_at_utc, correcting an alias to the new 20:05 value. PR282 receipt created after this overlay cutoff and is not included in its accepted status."
+}
