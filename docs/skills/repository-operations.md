@@ -1747,6 +1747,25 @@ replace it with a cache descriptor bound to that policy, and direct execution
 fails clearly until that context is established. The unit boundary is covered
 by `test_rcc_runtime_adapter.py`.
 
+For explicit spec-v2 RCC provider mode, Action Server snapshots the package
+source before metadata import. RCC receives the selected snapshot's
+`package.yaml` for environment fingerprinting and publish; the original
+absolute `package.yaml` path is passed separately as `environment_identity` for
+cache reuse. RCC therefore reads the same package configuration paired with the
+selected source snapshot even if the live package changes during publish.
+Relative `pythonpath` entries resolve against the snapshot package root. Snapshot
+identity binds included relative paths, supported permission mode bits, and file
+bytes, and both newly copied and reused destinations are checked. Failed
+metadata import discards only a new candidate and retains the last-good
+ActionPackage/source generation. The regression tests
+`test_snapshot_pins_environment_yaml_across_aba_edit`,
+`test_snapshot_environment_input_preserves_original_cache_identity`, and
+`test_snapshot_identity_changes_when_executable_mode_changes` cover the ABA
+boundary, unchanged-environment reuse, relative `pythonpath`, and mode identity.
+The real-RCC failed-reload test separately checks persisted last-good execution
+and recovery; its receipt is revision-specific. These Linux results do not
+establish Windows ACL, frozen, strict-remote, or descendant-cleanup behavior.
+
 The source checkpoint `2c7ec2ded7d25fc406598dc2c0675eaae55cd611` passed its
 focused adapter suite (57 passed, 1 skipped), Ruff check and Ruff format check.
 Its authorized pinned-RCC proof did not reach the first Action: cold
