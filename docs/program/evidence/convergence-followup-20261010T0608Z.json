@@ -1,0 +1,51 @@
+{
+  "observed_at_utc": "2026-10-10T06:08:00Z",
+  "repository": "joshyorko/actions",
+  "scope": "Dated convergence amendment; no issue acceptance, release, publication, or stage count changed.",
+  "pr281": {
+    "head": "13db7030416f7b64f9a577b800a629549e23903e",
+    "receipt_sha256": "441dadb7ddab6b72da423b2b8767398d5a01449261bc013ac16e408511192e2c",
+    "bounded_result": "3 PASS in 22.88 seconds; five actual SQLite Run rows plus separate call observations.",
+    "scope_limit": "This is the final source-level bounded receipt supplied by the owner. Do not carry prior-head CI or candidate-wheel/browser evidence forward; exact hosted checks for this head remain pending/unverified in this checkpoint."
+  },
+  "pr280": {
+    "source_head": "72193",
+    "source_tree": "01966c6360aafdca7b04291f43bb1c32dfb9d553",
+    "published_head": "0357585b51864e158f50c7479af001ba6daf5b06",
+    "published_tree": "01966c6360aafdca7b04291f43bb1c32dfb9d553",
+    "branch": "feat/package-revision-schema-20261010",
+    "remote_readback": "Root verified non-force ref advance from 77070ef6055ae793beb3527f3c07e53f44b837b9 to 0357585b51864e158f50c7479af001ba6daf5b06; all seven Git blobs match the independently reviewed local tree.",
+    "independent_review": "ACCEPT bounded schema/fixture source repair; 33 tests passed.",
+    "exact_head_hosted_checks": "Pending; earlier 77070ef checks are historical and do not apply to 0357585b.",
+    "scope_limit": "Experimental portable schema and fixtures only; no production compiler, whole #130 acceptance, or release readiness."
+  },
+  "pr273_last_observation": {
+    "head": "3d077296d1469b99e9fe50327e98c03a6f0aa58f",
+    "tree": "b6ee7d0fb7d5e669c78929da4ca08055866d3353",
+    "check_observation_at_utc": "2026-10-10T06:04:13Z",
+    "checks": {
+      "success": 13,
+      "in_progress": 7,
+      "queued": 0,
+      "skipped": 1,
+      "failure": 0
+    },
+    "note": "This remains the last captured rollup in the preceding 06:04 audit; no newer rollup is asserted here."
+  },
+  "program": {
+    "named_pr_cohort": 30,
+    "target_integrated": 20,
+    "open_not_admitted": 10,
+    "merge_ready": 0,
+    "issue_acceptance_changed": false,
+    "stage_counts_changed": false,
+    "release_ready": false,
+    "publication": false,
+    "retained_original_contracts": 54,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "historical_archives_rewritten": false
+  },
+  "upstream_disposition": "None; these are Actions-owned changes and no external dependency defect is confirmed."
+}

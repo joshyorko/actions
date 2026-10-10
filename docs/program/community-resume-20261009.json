@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-10T05:01:12Z",
-  "status": "The exact Linux installed-wheel/offline template-creation criterion for #126 is accepted: Runtime 1.0.3 CPython 3.12 wheel SHA-256 9385343a783d368bd653e42265671e1001d3b701c42d0d01fd3648ed92a219d8 created the Showcase and Basic project trees byte-for-byte from the embedded bundle; Basic authored devdata is preserved, pip check passes, and the loopback-proxied traces contain no socket/connect/DNS calls. This is one Linux criterion only; independent artifact verification and remaining #126 protocol/host acceptance remain separate. Whole #126 remains open. Latest underlying status inputs are time-bounded: 05:08:51Z installed-wheel proof, 05:06Z branch readback, and 05:05Z workspace/dispatch diagnostics. Devsy v2 outcomes remain unknown after KubernetesError and were not replayed.",
+  "observed_at": "2026-10-10T06:08:00Z",
+  "status": "PR280 is published at 0357585b (tree 01966c63), matching the reviewed local schema/fixture repair; bounded review accepted after 33 tests, exact-head hosted checks pending. PR281 is at 13db703 with an owner-provided bounded receipt of 3 PASS in 22.88s and five actual SQLite Run rows; exact-head hosted checks remain pending/unverified. PR273 check counts remain the last captured 06:04 rollup. Cohort remains 30 named-target PRs: 20 integrated, 10 open/not admitted, 0 merge-ready. No issue acceptance, stage, publication, or release state changed.",
   "integration_head": "6d438feb6c92f8bb01428f665ac423fb101b4017",
   "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
   "release_ready": false,
@@ -1136,7 +1136,7 @@
       "sha256": "641c7b2c70d71580f771e2d85082a00b871fa87c8f63b29655aec9972ab82d48"
     }
   ],
-  "inventory_scope": "Root refreshed PR/integration facts at20:21:15Z; native checkout identity still comes from the20:10 heartbeat and remains abbreviated. The same remote thread\u2019s new turn was last confirmed inProgress at20:19 with items notLoaded; no newer completion/worktree status was observed. Current PR254/259/262 facts and PR258 admission are recorded in the current inventory.",
+  "inventory_scope": "Root refreshed PR/integration facts at20:21:15Z; native checkout identity still comes from the20:10 heartbeat and remains abbreviated. The same remote thread’s new turn was last confirmed inProgress at20:19 with items notLoaded; no newer completion/worktree status was observed. Current PR254/259/262 facts and PR258 admission are recorded in the current inventory.",
   "documentation_receipts": [
     {
       "lane": "Windows/RCC lifecycle review",
@@ -1268,7 +1268,7 @@
     },
     {
       "lane": "Current release/native worker reconciliation",
-      "disposition": "Refreshed Core publication/PyPI hashes, PR253 integration, current PR254\u2013257 heads/checks and five native worker assignments. Preserved active worker status separately from exact per-tree HEAD/dirty observations; added verified pre-dispatch identity and conditional Git bundle handoff guidance. Evidence files are listed in this checkpoint."
+      "disposition": "Refreshed Core publication/PyPI hashes, PR253 integration, current PR254–257 heads/checks and five native worker assignments. Preserved active worker status separately from exact per-tree HEAD/dirty observations; added verified pre-dispatch identity and conditional Git bundle handoff guidance. Evidence files are listed in this checkpoint."
     }
   ],
   "post_archive_observations": [
@@ -1371,7 +1371,7 @@
     },
     {
       "observed_at": "2026-10-09T19:36:24Z",
-      "event": "Core1.0.2 PyPI publication/run37979108120 verified; PR253 merged into integration26b019 (tree227e950) with four hosted checks PASS; PR254 remains review-only pending user Canvas/MCP revisions; PR255\u2013257 current heads/checks/follow-ups inventoried; five native bounded work lanes ACTIVE. #210 remains the single accepted whole issue. Local and native state boundaries are recorded separately."
+      "event": "Core1.0.2 PyPI publication/run37979108120 verified; PR253 merged into integration26b019 (tree227e950) with four hosted checks PASS; PR254 remains review-only pending user Canvas/MCP revisions; PR255–257 current heads/checks/follow-ups inventoried; five native bounded work lanes ACTIVE. #210 remains the single accepted whole issue. Local and native state boundaries are recorded separately."
     },
     {
       "event": "Existing RCC ToolkitTest command now discovers the graph regression wrapper: v18.19.3 local run exited 0, Ruff developer passed, pytest 26/26 passed; receipt evidence/community-graph-toolkit-test-20261009.json. No hosted workflow result is inferred; the immutable graph amendment ZIP is unchanged."
@@ -1446,7 +1446,7 @@
     },
     {
       "observed_at": "2026-10-09T22:23:22Z",
-      "event": "Read-only CAS heartbeat now records the same coordinator thread notLoaded/latest turn completed; the final-answer body was not present in the heartbeat receipt. Earlier 22:07\u201322:11 read errors remain historical. No worker-lane progress is inferred."
+      "event": "Read-only CAS heartbeat now records the same coordinator thread notLoaded/latest turn completed; the final-answer body was not present in the heartbeat receipt. Earlier 22:07–22:11 read errors remain historical. No worker-lane progress is inferred."
     }
   ],
   "admission_checkpoint": {
@@ -2673,7 +2673,7 @@
     "native_status": "completed",
     "bootstrap_request": "actions-bootstrap-20261009-1832",
     "native_permission_limitation": "Superseded: authorized native request/settings supplied approvalPolicy=never and sandbox.type=dangerFullAccess, confirmed from native response/settings-updated event. Do not infer from null aggregate effective configuration.",
-    "final_receipt": "**Checkpoint preserved; work is paused.** Doctor finished successfully; no process remains running. I made no changes in `/workspaces/cas-worker-01`.\n\n| Directory | Branch | HEAD | Status |\n|---|---|---|---|\n| `/workspaces/actions` | `community` | `00c207fe1ebae20804056e2b17982476ee75386a` | Clean |\n| `/workspaces/actions-worktrees/devsy-native-auth` | `devsy/native-auth-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-workitems-consumer` | `devsy/workitems-consumer-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-canvas-contract` | `devsy/core-canvas-contract-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n\nThe checkout\u2019s `origin` is `https://github.com/joshyorko/actions.git`. Fetched refs: `community` at `00c207fe\u2026`, integration base at `3ed98dd\u2026`, upstream reporting docs at `57399b60\u2026`, and Actions Core release at `df7b0d66\u2026`. The docs ref advanced during the explicit fetch; the worker base stayed at the coordinator-approved SHA.\n\nWorker scratch directories exist under `/workspaces/actions-worker-state/{devsy-native-auth,devsy-workitems-consumer,devsy-canvas-contract}`. Doctor\u2019s log is at [doctor.log](/workspaces/actions-worker-state/devsy-native-auth/doctor.log). It passed using RCC `v18.19.3` and the pinned Python, Poetry, Invoke, Node, and Go toolchain. No package bootstrap or tests were run.\n\nThe launcher also installed Homebrew RCC `v18.19.5` before falling back to pinned RCC `v18.19.3`; both binaries remain untouched. Upstream disposition: none.",
+    "final_receipt": "**Checkpoint preserved; work is paused.** Doctor finished successfully; no process remains running. I made no changes in `/workspaces/cas-worker-01`.\n\n| Directory | Branch | HEAD | Status |\n|---|---|---|---|\n| `/workspaces/actions` | `community` | `00c207fe1ebae20804056e2b17982476ee75386a` | Clean |\n| `/workspaces/actions-worktrees/devsy-native-auth` | `devsy/native-auth-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-workitems-consumer` | `devsy/workitems-consumer-acceptance-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n| `/workspaces/actions-worktrees/devsy-canvas-contract` | `devsy/core-canvas-contract-20261009` | `3ed98ddbac3354c59414b8411b295db2e15d3545` | Clean |\n\nThe checkout’s `origin` is `https://github.com/joshyorko/actions.git`. Fetched refs: `community` at `00c207fe…`, integration base at `3ed98dd…`, upstream reporting docs at `57399b60…`, and Actions Core release at `df7b0d66…`. The docs ref advanced during the explicit fetch; the worker base stayed at the coordinator-approved SHA.\n\nWorker scratch directories exist under `/workspaces/actions-worker-state/{devsy-native-auth,devsy-workitems-consumer,devsy-canvas-contract}`. Doctor’s log is at [doctor.log](/workspaces/actions-worker-state/devsy-native-auth/doctor.log). It passed using RCC `v18.19.3` and the pinned Python, Poetry, Invoke, Node, and Go toolchain. No package bootstrap or tests were run.\n\nThe launcher also installed Homebrew RCC `v18.19.5` before falling back to pinned RCC `v18.19.3`; both binaries remain untouched. Upstream disposition: none.",
     "engineering_threads_dispatched": 5,
     "old_approvals_resumed": false,
     "workspace_recreated": false,
@@ -2844,7 +2844,7 @@
     "scope_limit": "Bounded packaged Work Items cross-platform/browser checkpoint integrated to the named integration branch; no whole #208 acceptance or publication implied.",
     "receipt": "evidence/pr256-524-integration-readback-20261010T0054Z.json"
   },
-  "observed_at_utc": "2026-10-10T04:41:32Z",
+  "observed_at_utc": "2026-10-10T06:04:13Z",
   "runtime_candidate_head": "6a53578fac029a0696834c30438c858f5f0003be",
   "worker_inventory_receipt": "evidence/current-worker-inventory-20261009T2102Z.json",
   "worker_inventory_sha256": "7b0f0b6a69ebe08414f48163fb578ba08406a01854416c4392961193c2f29116",
@@ -3002,19 +3002,13 @@
     "base_ref_readback_at": "2026-10-09T21:46:56Z"
   },
   "current_convergence_followup": {
-    "observed_at_utc": "2026-10-10T01:35:00Z",
-    "path": "evidence/convergence-followup-20261010T0135Z.json",
-    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
-    "scope": "Current 27-PR cohort, exact live PR status, and remote ref/tree readback; issue states unchanged."
-  },
-  "latest_convergence_update": {
-    "observed_at_utc": "2026-10-10T01:35:00Z",
-    "path": "evidence/convergence-followup-20261010T0135Z.json",
-    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
+    "observed_at_utc": "2026-10-10T06:04:13Z",
+    "path": "evidence/convergence-followup-20261010T0604Z.json",
+    "sha256": "4a2c9dc1e05c4ef553825d315b852bc400209fc76c35bee26bdf059a83e2114a",
     "cohort": {
-      "items": 27,
-      "target_integrated": 16,
-      "open_blocked": 11,
+      "items": 30,
+      "target_integrated": 20,
+      "open_blocked": 10,
       "merge_ready": 0,
       "target_integrated_prs": [
         219,
@@ -3032,7 +3026,11 @@
         268,
         269,
         270,
-        271
+        271,
+        274,
+        275,
+        276,
+        277
       ],
       "open_prs": [
         215,
@@ -3042,68 +3040,106 @@
         221,
         272,
         273,
+        278,
+        280,
+        281
+      ],
+      "scope": "Named PR target integration only; source containment, whole-issue acceptance, community release and publication are separate."
+    },
+    "live_pr_audit": {
+      "path": "evidence/convergence-live-prs-20261010T0604Z.json",
+      "sha256": "11be269f04b8fc4bdfe183542b40ad10d0965a4f2c18732fdb5aad12bea9ee27"
+    },
+    "refs_receipt": {
+      "path": "evidence/convergence-refs-20261010T0604Z.txt",
+      "sha256": "9a2c103dfdcdf8888508b0e8a38e6f42f21f37cdee3b45eb4c9c24970bfd0f21"
+    },
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "candidate_head": "3d077296d1469b99e9fe50327e98c03a6f0aa58f",
+    "candidate_tree": "b6ee7d0fb7d5e669c78929da4ca08055866d3353",
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "retained_original_contracts": 54,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "historical_archives_rewritten": false,
+    "release_ready": false
+  },
+  "latest_convergence_update": {
+    "observed_at_utc": "2026-10-10T06:04:13Z",
+    "path": "evidence/convergence-followup-20261010T0604Z.json",
+    "sha256": "4a2c9dc1e05c4ef553825d315b852bc400209fc76c35bee26bdf059a83e2114a",
+    "cohort": {
+      "items": 30,
+      "target_integrated": 20,
+      "open_blocked": 10,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
         274,
         275,
         276,
         277
-      ]
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        278,
+        280,
+        281
+      ],
+      "scope": "Named PR target integration only; source containment, whole-issue acceptance, community release and publication are separate."
     },
-    "open_pr_audit": {
-      "path": "evidence/convergence-live-prs-20261010T0135Z.json",
-      "sha256": "56e647f20c93698e901bf641e52826f53d3f3c4052852c4e917caf6387c64107",
-      "open_count": 11,
-      "all_drafts": false,
-      "exact_pr_heads": {
-        "215": "d07f79b355f976f97948720474fd050d0a32ea16",
-        "216": "d26fa423080cec22522402f2193b17a5f32b336a",
-        "217": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
-        "218": "95ddbe88106be594ea9954bdb36909702c5e2869",
-        "221": "46a06485f776265e64e84629c468f26b4389d2bd",
-        "272": "2def236adf76f6731c88c29d9d27e5181de6275f",
-        "273": "f30aed327adcf148d69f45c71b742dd89bb6f617",
-        "274": "a0d727eb7831f855e284d005f3048755cbfdc1be",
-        "275": "dc610f3ba14b9a64b7fd4b4bcb6ec1fccb00beab",
-        "276": "bd10bb575a7327563892ce29623a5afc327fd82e",
-        "277": "417c9c0222dfd57b2537ef51b8ace50bfac6187b"
-      }
+    "live_pr_audit": {
+      "path": "evidence/convergence-live-prs-20261010T0604Z.json",
+      "sha256": "11be269f04b8fc4bdfe183542b40ad10d0965a4f2c18732fdb5aad12bea9ee27"
     },
-    "branch_readback": {
-      "community": {
-        "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
-        "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
-        "ref": "refs/heads/community"
-      },
-      "integration": {
-        "head": "46a06485f776265e64e84629c468f26b4389d2bd",
-        "tree": "be7d58f57a645aa07e1bbfd6ed773bd402c1acf9",
-        "ref": "refs/heads/integration/community-release-20261008"
-      },
-      "runtime_candidate": {
-        "head": "6a53578fac029a0696834c30438c858f5f0003be",
-        "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
-        "ref": "refs/heads/integration/runtime-release-final-20261009"
-      }
+    "refs_receipt": {
+      "path": "evidence/convergence-refs-20261010T0604Z.txt",
+      "sha256": "9a2c103dfdcdf8888508b0e8a38e6f42f21f37cdee3b45eb4c9c24970bfd0f21"
     },
-    "branch_readback_at": "2026-10-10T01:36:00Z",
-    "branch_readback_receipt": "evidence/convergence-refs-20261010T0136Z.txt",
-    "branch_readback_receipt_sha256": "839a6e50c1680fa4348f5783d40fc5352bd2e1e172675a5448b6cacfc66a0033",
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "candidate_head": "3d077296d1469b99e9fe50327e98c03a6f0aa58f",
+    "candidate_tree": "b6ee7d0fb7d5e669c78929da4ca08055866d3353",
     "issue_acceptance_changed": false,
     "stage_counts_unchanged": true,
-    "release_state": {
-      "core": "1.0.2 published and verified",
-      "helper": "1.0.3 published and verified",
-      "runtime_native": "1.0.3 held and unpublished",
-      "publication": "No publication performed in this checkpoint."
-    },
-    "upstream_disposition": "none",
-    "receipt_sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc"
+    "retained_original_contracts": 54,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "historical_archives_rewritten": false,
+    "release_ready": false
   },
   "latest_open_pr_audit": {
-    "observed_at_utc": "2026-10-10T01:35:00Z",
-    "path": "evidence/convergence-live-prs-20261010T0135Z.json",
-    "sha256": "56e647f20c93698e901bf641e52826f53d3f3c4052852c4e917caf6387c64107",
-    "summary_path": "evidence/convergence-followup-20261010T0135Z.json",
-    "summary_sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc"
+    "observed_at_utc": "2026-10-10T06:04:13Z",
+    "path": "evidence/convergence-live-prs-20261010T0604Z.json",
+    "sha256": "11be269f04b8fc4bdfe183542b40ad10d0965a4f2c18732fdb5aad12bea9ee27",
+    "open_pr_count": 10
   },
   "prior_remote_ref_observation_20261009T2146Z": {
     "observed_at_utc": "2026-10-09T21:46:56Z",
@@ -3203,31 +3239,71 @@
   },
   "release_candidate_head": "6a53578fac029a0696834c30438c858f5f0003be",
   "current_convergence_update": {
-    "observed_at_utc": "2026-10-10T04:41:32Z",
-    "path": "evidence/convergence-followup-20261010T0441Z.json",
-    "sha256": "1c0b218c1771903e47deb4729d53b979847f4f0aa7ed285b545137243cad153e",
-    "cohort_items": 28,
-    "target_integrated": 20,
-    "open_blocked": 8,
-    "merge_ready": 0,
-    "runtime_candidate_head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
-    "release_ready": false,
-    "whole_issue_acceptance_changed": false,
-    "live_pr_audit": "evidence/convergence-live-prs-20261010T0441Z.json",
-    "live_pr_audit_sha256": "95555faaa394c24132def2d0693fc1c986a6e0f6293a4d5241f3b897edbd01fb",
-    "candidate_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
-    "synthetic_tree_matches": true,
-    "check_receipt": {
-      "path": "evidence/pr273-final-ci-84b8c70a-20261010T0438Z.json",
-      "sha256": "41de56ae65550adf26070c17bbe3fd2af25191e37a90475fe6656259acff4920"
+    "observed_at_utc": "2026-10-10T06:04:13Z",
+    "path": "evidence/convergence-followup-20261010T0604Z.json",
+    "sha256": "4a2c9dc1e05c4ef553825d315b852bc400209fc76c35bee26bdf059a83e2114a",
+    "cohort": {
+      "items": 30,
+      "target_integrated": 20,
+      "open_blocked": 10,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        274,
+        275,
+        276,
+        277
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        278,
+        280,
+        281
+      ],
+      "scope": "Named PR target integration only; source containment, whole-issue acceptance, community release and publication are separate."
     },
-    "configuration_correction": {
-      "path": "evidence/pr273-legacy-configuration-20261010T0440Z.json",
-      "sha256": "89712b689100136d7384e960021d69996964a863c8231cca276b30a7e5e550b5"
+    "live_pr_audit": {
+      "path": "evidence/convergence-live-prs-20261010T0604Z.json",
+      "sha256": "11be269f04b8fc4bdfe183542b40ad10d0965a4f2c18732fdb5aad12bea9ee27"
     },
+    "refs_receipt": {
+      "path": "evidence/convergence-refs-20261010T0604Z.txt",
+      "sha256": "9a2c103dfdcdf8888508b0e8a38e6f42f21f37cdee3b45eb4c9c24970bfd0f21"
+    },
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "candidate_head": "3d077296d1469b99e9fe50327e98c03a6f0aa58f",
+    "candidate_tree": "b6ee7d0fb7d5e669c78929da4ca08055866d3353",
     "issue_acceptance_changed": false,
     "stage_counts_unchanged": true,
-    "bounded_d8_rcc_consumer": "PASS after exact readback of producer receipts; env/Core origin unrecorded; older -11 unexplained."
+    "retained_original_contracts": 54,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "historical_archives_rewritten": false,
+    "release_ready": false
   },
   "latest_artifact_metadata_erratum": {
     "observed_at_utc": "2026-10-09T22:34:00Z",
@@ -3680,13 +3756,13 @@
     "receipt_sha256": "ac6988a8d9e57971a00f84206bdec49561d92a91e14a4e9d700f91aaf95b5360"
   },
   "current_next_action": {
-    "observed_at_utc": "2026-10-10T05:01:12Z",
-    "path": "evidence/program-amendment-20261010T0501Z.json",
-    "sha256": "fc5acdfc5b421f027e80e3eaaceb4d306321368e9e5b54939720c082f321c2fc",
-    "status": "Supplemental amendment: #279 is an OPEN P0 gate outside the original 54 contracts; its implementation turn is accepted/in progress, with no source checkpoint or test result in this snapshot. The 84b 17/21 result remains historical; its unused Robocorp credential prerequisite was retired by user steering. Source replacement 42f9b8ef is pushed, with integration/current-head CI NOT_RUN. Criterion 129:deployment-reference-envelope is accepted for bounded #130 schema/fixture work only; supervisor dispatch is pending.",
-    "owner": "Root owns integration/coordination; the #279 implementation turn is accepted/in progress but has no checkpoint reported here. The existing Devsy coordinator owns #130; supervisor dispatch remains pending.",
-    "pending": "Continue the focused #279 correction preserving additive imports and disabling only packages omitted from the complete desired set. Separately admit source 42f9b8ef through the current integration tree and run exact-head checks; do not restore the retired external credential prerequisite. Await supervisor dispatch for 130-schema.",
-    "scope": "Original 54 issue states/stages/contracts unchanged; #279 is supplemental. #129 production and full #130 acceptance remain open."
+    "observed_at_utc": "2026-10-10T06:08:00Z",
+    "path": "evidence/convergence-followup-20261010T0608Z.json",
+    "sha256": "18439634ff16015537b69c75b2c19c8be20d9e0d98223ebffd9c18e1c37d4510",
+    "status": "Obtain exact-head hosted checks for published PR280 0357585b and current PR281 13db703; refresh PR273 only from a new exact-head read. Keep PR273 as the current combined runtime candidate and do not infer release or whole-issue acceptance from bounded component receipts.",
+    "owner": "Root owns integration/admission; existing owners retain PR273, PR280, PR281 and supplemental #279 workstreams.",
+    "pending": "Wait for exact-head required hosted checks and root admission review. Previous-head results remain historical. No issue state, acceptance, or publication change is made by this snapshot.",
+    "scope": "Preserve original 54 issue contracts and historic archives; #279 remains supplemental. #126/#129 are bounded criteria only."
   },
   "superseded_status_20261010T0016Z": "ACTIVE engineering checkpoint at 2026-10-10T00:16:55Z: 15 of 21 scoped PRs are integrated to their recorded targets; 6 remain open/blocked and 0 are merge-ready. Community is 36b8192d and integration/PR221 is 77e67de3. PR221 exact-head checks pass except publication steps skipped. PR256 source review is bounded ACCEPT at dc205182; Linux frozen/Go-wrapper and Windows frozen pass, Windows Go-wrapper fails its manifest/build-input hash check, and macOS UI steps are skipped. The existing owner is porting a narrow correction against 77e; focused tests are reported pass, configured full suite pending. Helper1.0.3/Core1.0.2 are published; Runtime/native1.0.3 is held and unpublished. No whole-issue acceptance changed. Current next-action pointer only: PR256 head b676daf3 run38008430418 is in progress; the earlier dc205 Windows Go-wrapper failure remains bound to that predecessor.",
   "prior_current_convergence_update_20261010T0016Z": {
@@ -4253,17 +4329,14 @@
     }
   },
   "current_program_refs": {
-    "observed_at_utc": "2026-10-10T04:41:32Z",
+    "observed_at_utc": "2026-10-10T06:04:13Z",
     "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
-    "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
-    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
-    "community_tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
-    "integration_tree": "92e79c92f2f64585cbe66f068f5757f205fbe976",
-    "runtime_candidate_tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+    "integration/community-release-20261008": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "integration/runtime-release-final-20261009": "6a53578fac029a0696834c30438c858f5f0003be",
     "release_ready": false,
-    "receipt": "evidence/convergence-refs-20261010T0441Z.json",
-    "receipt_sha256": "87fcc499548f4cda7c9cdd211c44e537e9023e581e42c7935538a86994447037",
-    "source": "Fresh git ls-remote and commit-tree readback."
+    "receipt": "evidence/convergence-refs-20261010T0604Z.txt",
+    "receipt_sha256": "9a2c103dfdcdf8888508b0e8a38e6f42f21f37cdee3b45eb4c9c24970bfd0f21",
+    "source": "Fresh git ls-remote origin readback."
   },
   "current_evidence_correction": {
     "observed_at_utc": "2026-10-10T01:40:00Z",
@@ -4274,18 +4347,71 @@
   "checkpoint_status": "The exact Linux installed-wheel/offline template-creation criterion for #126 is accepted: Runtime 1.0.3 CPython 3.12 wheel SHA-256 9385343a783d368bd653e42265671e1001d3b701c42d0d01fd3648ed92a219d8 created the Showcase and Basic project trees byte-for-byte from the embedded bundle; Basic authored devdata is preserved, pip check passes, and the loopback-proxied traces contain no socket/connect/DNS calls. This is one Linux criterion only; independent artifact verification and remaining #126 protocol/host acceptance remain separate. Whole #126 remains open. Latest underlying status inputs are time-bounded: 05:08:51Z installed-wheel proof, 05:06Z branch readback, and 05:05Z workspace/dispatch diagnostics. Devsy v2 outcomes remain unknown after KubernetesError and were not replayed.",
   "checkpoint_observed_at": "2026-10-10T05:08:51Z",
   "current_convergence": {
-    "path": "evidence/convergence-followup-20261010T0441Z.json",
-    "sha256": "1c0b218c1771903e47deb4729d53b979847f4f0aa7ed285b545137243cad153e",
-    "observed_at_utc": "2026-10-10T04:41:32Z",
-    "cohort_items": 28,
-    "target_integrated": 20,
-    "open_blocked": 8,
-    "merge_ready": 0,
-    "runtime_candidate_head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
-    "release_ready": false,
-    "whole_issue_acceptance_changed": false,
-    "live_pr_audit": "evidence/convergence-live-prs-20261010T0441Z.json",
-    "live_pr_audit_sha256": "95555faaa394c24132def2d0693fc1c986a6e0f6293a4d5241f3b897edbd01fb"
+    "observed_at_utc": "2026-10-10T06:04:13Z",
+    "path": "evidence/convergence-followup-20261010T0604Z.json",
+    "sha256": "4a2c9dc1e05c4ef553825d315b852bc400209fc76c35bee26bdf059a83e2114a",
+    "cohort": {
+      "items": 30,
+      "target_integrated": 20,
+      "open_blocked": 10,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        274,
+        275,
+        276,
+        277
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        278,
+        280,
+        281
+      ],
+      "scope": "Named PR target integration only; source containment, whole-issue acceptance, community release and publication are separate."
+    },
+    "live_pr_audit": {
+      "path": "evidence/convergence-live-prs-20261010T0604Z.json",
+      "sha256": "11be269f04b8fc4bdfe183542b40ad10d0965a4f2c18732fdb5aad12bea9ee27"
+    },
+    "refs_receipt": {
+      "path": "evidence/convergence-refs-20261010T0604Z.txt",
+      "sha256": "9a2c103dfdcdf8888508b0e8a38e6f42f21f37cdee3b45eb4c9c24970bfd0f21"
+    },
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "runtime_candidate": "6a53578fac029a0696834c30438c858f5f0003be",
+    "candidate_head": "3d077296d1469b99e9fe50327e98c03a6f0aa58f",
+    "candidate_tree": "b6ee7d0fb7d5e669c78929da4ca08055866d3353",
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "retained_original_contracts": 54,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "historical_archives_rewritten": false,
+    "release_ready": false
   },
   "prior_current_convergence_20261010T0211Z": {
     "path": "evidence/convergence-followup-20261010T0211Z.json",
@@ -4313,7 +4439,7 @@
       "IN_PROGRESS": 2
     },
     "owner": "Root integration",
-    "source_review": "Component PRs274\u2013277 have bounded source reviews accepted; PR273 itself remains at its published head with three failed checks.",
+    "source_review": "Component PRs274–277 have bounded source reviews accepted; PR273 itself remains at its published head with three failed checks.",
     "pending": "Push a single composed candidate and run configured combined Runtime/Work Items/native gates on that exact head.",
     "scope": "No combined full-gate PASS, whole issue acceptance, Runtime/native publication, or release readiness is established."
   },
@@ -5288,5 +5414,152 @@
     "retired_hosted_gate_source": "42f9b8ef6575a8b955763d0000a6cdab4b8bf5eb",
     "hosted_acceptance": "NOT_RUN",
     "recovered_evidence_commit": "655b044a7bbe464eeebccb1a61a2833992e12d8a"
+  },
+  "prior_current_convergence_update_20261010T0441Z": {
+    "observed_at_utc": "2026-10-10T04:41:32Z",
+    "path": "evidence/convergence-followup-20261010T0441Z.json",
+    "sha256": "1c0b218c1771903e47deb4729d53b979847f4f0aa7ed285b545137243cad153e",
+    "cohort_items": 28,
+    "target_integrated": 20,
+    "open_blocked": 8,
+    "merge_ready": 0,
+    "runtime_candidate_head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "release_ready": false,
+    "whole_issue_acceptance_changed": false,
+    "live_pr_audit": "evidence/convergence-live-prs-20261010T0441Z.json",
+    "live_pr_audit_sha256": "95555faaa394c24132def2d0693fc1c986a6e0f6293a4d5241f3b897edbd01fb",
+    "candidate_tree": "b2d4a1956770a37d714cc43a23a863abf23fa089",
+    "synthetic_tree_matches": true,
+    "check_receipt": {
+      "path": "evidence/pr273-final-ci-84b8c70a-20261010T0438Z.json",
+      "sha256": "41de56ae65550adf26070c17bbe3fd2af25191e37a90475fe6656259acff4920"
+    },
+    "configuration_correction": {
+      "path": "evidence/pr273-legacy-configuration-20261010T0440Z.json",
+      "sha256": "89712b689100136d7384e960021d69996964a863c8231cca276b30a7e5e550b5"
+    },
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "bounded_d8_rcc_consumer": "PASS after exact readback of producer receipts; env/Core origin unrecorded; older -11 unexplained."
+  },
+  "prior_current_convergence_20261010T0441Z": {
+    "path": "evidence/convergence-followup-20261010T0441Z.json",
+    "sha256": "1c0b218c1771903e47deb4729d53b979847f4f0aa7ed285b545137243cad153e",
+    "observed_at_utc": "2026-10-10T04:41:32Z",
+    "cohort_items": 28,
+    "target_integrated": 20,
+    "open_blocked": 8,
+    "merge_ready": 0,
+    "runtime_candidate_head": "84b8c70a412db9594dfa2a6c5fcb3e8184db019b",
+    "release_ready": false,
+    "whole_issue_acceptance_changed": false,
+    "live_pr_audit": "evidence/convergence-live-prs-20261010T0441Z.json",
+    "live_pr_audit_sha256": "95555faaa394c24132def2d0693fc1c986a6e0f6293a4d5241f3b897edbd01fb"
+  },
+  "prior_current_convergence_followup_20261010T0135": {
+    "observed_at_utc": "2026-10-10T01:35:00Z",
+    "path": "evidence/convergence-followup-20261010T0135Z.json",
+    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
+    "scope": "Current 27-PR cohort, exact live PR status, and remote ref/tree readback; issue states unchanged."
+  },
+  "prior_latest_convergence_update_20261010T0135": {
+    "observed_at_utc": "2026-10-10T01:35:00Z",
+    "path": "evidence/convergence-followup-20261010T0135Z.json",
+    "sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc",
+    "cohort": {
+      "items": 27,
+      "target_integrated": 16,
+      "open_blocked": 11,
+      "merge_ready": 0,
+      "target_integrated_prs": [
+        219,
+        220,
+        251,
+        256,
+        257,
+        259,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271
+      ],
+      "open_prs": [
+        215,
+        216,
+        217,
+        218,
+        221,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277
+      ]
+    },
+    "open_pr_audit": {
+      "path": "evidence/convergence-live-prs-20261010T0135Z.json",
+      "sha256": "56e647f20c93698e901bf641e52826f53d3f3c4052852c4e917caf6387c64107",
+      "open_count": 11,
+      "all_drafts": false,
+      "exact_pr_heads": {
+        "215": "d07f79b355f976f97948720474fd050d0a32ea16",
+        "216": "d26fa423080cec22522402f2193b17a5f32b336a",
+        "217": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2",
+        "218": "95ddbe88106be594ea9954bdb36909702c5e2869",
+        "221": "46a06485f776265e64e84629c468f26b4389d2bd",
+        "272": "2def236adf76f6731c88c29d9d27e5181de6275f",
+        "273": "f30aed327adcf148d69f45c71b742dd89bb6f617",
+        "274": "a0d727eb7831f855e284d005f3048755cbfdc1be",
+        "275": "dc610f3ba14b9a64b7fd4b4bcb6ec1fccb00beab",
+        "276": "bd10bb575a7327563892ce29623a5afc327fd82e",
+        "277": "417c9c0222dfd57b2537ef51b8ace50bfac6187b"
+      }
+    },
+    "branch_readback": {
+      "community": {
+        "head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "tree": "5c51bd27c1fb6c34f3cf54ca2d00ae93e2f5c641",
+        "ref": "refs/heads/community"
+      },
+      "integration": {
+        "head": "46a06485f776265e64e84629c468f26b4389d2bd",
+        "tree": "be7d58f57a645aa07e1bbfd6ed773bd402c1acf9",
+        "ref": "refs/heads/integration/community-release-20261008"
+      },
+      "runtime_candidate": {
+        "head": "6a53578fac029a0696834c30438c858f5f0003be",
+        "tree": "52fa64b1eecc8373362b8dba612f71ecd9d8c84d",
+        "ref": "refs/heads/integration/runtime-release-final-20261009"
+      }
+    },
+    "branch_readback_at": "2026-10-10T01:36:00Z",
+    "branch_readback_receipt": "evidence/convergence-refs-20261010T0136Z.txt",
+    "branch_readback_receipt_sha256": "839a6e50c1680fa4348f5783d40fc5352bd2e1e172675a5448b6cacfc66a0033",
+    "issue_acceptance_changed": false,
+    "stage_counts_unchanged": true,
+    "release_state": {
+      "core": "1.0.2 published and verified",
+      "helper": "1.0.3 published and verified",
+      "runtime_native": "1.0.3 held and unpublished",
+      "publication": "No publication performed in this checkpoint."
+    },
+    "upstream_disposition": "none",
+    "receipt_sha256": "56fe9824ad4d04e404bf60792f978cff58b5f25aed18d6bf1609673359cb79fc"
+  },
+  "prior_current_next_action_20261010T0604Z": {
+    "observed_at_utc": "2026-10-10T06:04:13Z",
+    "path": "evidence/convergence-followup-20261010T0604Z.json",
+    "sha256": "4a2c9dc1e05c4ef553825d315b852bc400209fc76c35bee26bdf059a83e2114a",
+    "status": "PR273 remains at 3d077296; its exact-head rollup now has 13 success, 7 in progress, 1 skipped, 0 queued and 0 failed. The 06:03 PR PyPI staging/verification job is separate from tag-gated upload; no publication is reported. PR281 moved from 1b681a07 to 3f3f1c49; its current head has 2 checks queued and 13 in progress. The prior-head 3-test candidate-wheel/system-Chromium result is not current-head proof. PR280 has 11/11 green hosted checks but remains a draft with version-type/reference-consistency review findings. Cohort remains 30 named-target PRs: 20 integrated, 10 open/not admitted, 0 merge-ready. #279 remains supplemental/open/P0 outside the 54.",
+    "owner": "Root owns integration/admission; owners continue the existing PR273, PR280, PR281, and #279 workstreams. This read does not infer lane activity from control-plane intent.",
+    "pending": "Finish exact-head PR273 checks and preserve any failures with source/run binding. Obtain exact current-head review and checks for PR281; do not carry over 1b681a07 results. Correct/re-review PR280 on its existing branch. Treat PR272/278 as stacked within PR273; no duplicate cherry-pick. No acceptance, issue-state or publication change is made by this snapshot.",
+    "scope": "Original 54 issue records/contracts/states and archive hashes remain unchanged; #279 is supplemental. #126/#129 criteria remain bounded; no whole issue or release acceptance is implied."
   }
 }

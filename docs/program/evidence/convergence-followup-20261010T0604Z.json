@@ -1,0 +1,116 @@
+{
+  "observed_at_utc": "2026-10-10T06:04:13Z",
+  "repository": "joshyorko/actions",
+  "cohort": {
+    "items": 30,
+    "target_integrated": 20,
+    "open_blocked": 10,
+    "merge_ready": 0,
+    "target_integrated_prs": [
+      219,
+      220,
+      251,
+      256,
+      257,
+      259,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      274,
+      275,
+      276,
+      277
+    ],
+    "open_prs": [
+      215,
+      216,
+      217,
+      218,
+      221,
+      272,
+      273,
+      278,
+      280,
+      281
+    ],
+    "scope": "Named PR target integration only; source containment, whole-issue acceptance, community release and publication are separate."
+  },
+  "refs": {
+    "community": "36b8192dbb8143e016af3351f7d25b22a35c9944",
+    "integration/community-release-20261008": "6d438feb6c92f8bb01428f665ac423fb101b4017",
+    "integration/runtime-release-final-20261009": "6a53578fac029a0696834c30438c858f5f0003be"
+  },
+  "live_pr_audit": {
+    "path": "evidence/convergence-live-prs-20261010T0604Z.json",
+    "sha256": "11be269f04b8fc4bdfe183542b40ad10d0965a4f2c18732fdb5aad12bea9ee27"
+  },
+  "ref_readback": {
+    "path": "evidence/convergence-refs-20261010T0604Z.txt",
+    "sha256": "9a2c103dfdcdf8888508b0e8a38e6f42f21f37cdee3b45eb4c9c24970bfd0f21"
+  },
+  "runtime_candidate": {
+    "pr": 273,
+    "head": "3d077296d1469b99e9fe50327e98c03a6f0aa58f",
+    "tree": "b6ee7d0fb7d5e669c78929da4ca08055866d3353",
+    "target": "integration/community-release-20261008"
+  },
+  "pr273_exact_head_checks": {
+    "total": 21,
+    "success": 13,
+    "in_progress": 7,
+    "queued": 0,
+    "skipped": 1,
+    "failure": 0,
+    "runs": [
+      38029294071,
+      38029294077,
+      38029294069,
+      38029294099,
+      38029294074,
+      38029294083,
+      38029294076
+    ],
+    "source": "Live PR rollup, exact head 3d077296; PR publish job is staging/verification only and tag-gated PyPI upload remains skipped."
+  },
+  "pr273_local_validation": {
+    "source": "root-reported exact-source receipt",
+    "focused_tests": "108 passed, 1 skipped; 62.22s",
+    "credential_test_file": "21 passed; 2.61s",
+    "ruff_isort": "PASS",
+    "mypy": "308 source files PASS with lock-hash-verified cached types-pyinstaller"
+  },
+  "pr281_current_head": {
+    "head": "3f3f1c49f4e1d1f6da1a7e26f329982d578ba69f",
+    "checks": {
+      "total": 15,
+      "queued": 2,
+      "in_progress": 13
+    },
+    "prior_head": "1b681a07d9012d17ae5c106b8bb305a3c4500f8b",
+    "prior_result": "16/16 checks and 3 candidate-wheel/system-Chromium authoring tests were for prior head only; no acceptance receipt for current head."
+  },
+  "previous_pr273_release_readiness_snapshot": {
+    "path": "evidence/pr273-current-release-readiness-3d077-20261010.md",
+    "sha256": "57b231b4913da34a9500ef8fc9762147cfa74ab92c034bcd6f7dda944ce07fc4",
+    "observed_at_utc": "2026-10-10T06:02:00Z",
+    "scope": "Preserved earlier read; includes 06:03 workflow correction. Superseded for current check counts by this 06:04:13 audit."
+  },
+  "program": {
+    "retained_original_issue_contracts": 54,
+    "supplemental_issue_ids": [
+      279
+    ],
+    "issue_stage_counts_changed": false,
+    "whole_issue_acceptance_changed": false,
+    "historical_archives_rewritten": false,
+    "release_ready": false
+  },
+  "upstream_disposition": "none; observed test fixes are Actions-owned, with no confirmed external dependency defect."
+}

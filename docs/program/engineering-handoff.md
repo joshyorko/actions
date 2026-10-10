@@ -1,5 +1,12 @@
 # Actions Community engineering handoff — active Cloud checkpoint
 
+
+## Current convergence — 2026-10-10T06:08:00Z
+
+The 06:08 amendment updates the source checkpoints for PR280 and PR281. PR280 was published non-force at `0357585b51864e158f50c7479af001ba6daf5b06`; its tree `01966c6360aafdca7b04291f43bb1c32dfb9d553` matches the reviewed local source tree, with all seven blobs verified. The bounded source review accepted the schema/fixture repair after 33 tests passed; exact-head hosted checks are pending, and older checks on `77070ef` remain historical. PR281 is at `13db7030416f7b64f9a577b800a629549e23903e`; its owner-provided receipt records three passes in 22.88 seconds and five actual SQLite Run rows. Exact-head hosted checks remain pending/unverified here. PR273's last captured rollup is still the 06:04 observation (13 success, 7 in progress, 1 skipped). The cohort remains 30 named-target PRs: 20 integrated, 10 open/not admitted, 0 merge-ready. No whole-issue acceptance, publication, or release readiness is inferred.
+
+See the [dated amendment](evidence/convergence-followup-20261010T0608Z.json) (SHA-256 `18439634ff16015537b69c75b2c19c8be20d9e0d98223ebffd9c18e1c37d4510`).
+
 <!-- supplemental-program-amendment:start -->
 
 ## Supplemental program amendment
