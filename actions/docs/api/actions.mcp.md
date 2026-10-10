@@ -32,6 +32,8 @@ Decorator for tools which can be used by AI agents to perform actions.
 
 If False, the tool's domain of interaction is closed. For example, the world of a web search tool is open, whereas that of a memory tool is not.
 
+- <b>`meta`</b>: Optional JSON metadata to include in the MCP tool's `_meta` field.
+
 **Example:**
 
 ```python
@@ -57,7 +59,7 @@ Note that a tool needs sema4ai actions to be executed. The command line to execu
 
 actions run actions.py -a assign_ticket
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L90)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L93)
 
 ```python
 tool(*args, **kwargs)
@@ -74,8 +76,12 @@ Resources may be simple or templates. Templates are resources with `{placeholder
 **Args:**
 
 - <b>`uri`</b>: The URI of the resource (may be a template or a simple resource). If not provided, a uri such as `resource://read/<function_name>/{arg_name1}/{arg_name2}` will be created automatically (arguments are optional).
+
 - <b>`mime_type`</b>: The MIME type of the resource. If not provided, it's based on the type of the result (if it's a string, it's `text/plain`, if it's a bytes, it's `application/octet-stream`, if it's another type dict, it's converted to json and then `application/json` is used as the mime type).
+
 - <b>`size`</b>: The size of the raw resource content, in bytes (i.e., before base64 encoding or any tokenization), if known. This can be used by Hosts to display file sizes and estimate context window usage.
+
+- <b>`meta`</b>: Optional JSON metadata to include in the MCP resource's `_meta` field.
 
 Note: the name is the name of the function and the description is gotten from the docstring.
 
@@ -106,7 +112,7 @@ actions run actions.py -a get_ticket
 
 See: https://modelcontextprotocol.io/docs/concepts/resources
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L205)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L217)
 
 ```python
 resource(*args, **kwargs) → Callable
@@ -144,7 +150,7 @@ Note that a prompt needs sema4ai actions to be executed. The command line to exe
 
 actions run actions.py -a make_a_summary
 
-[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L317)
+[**Link to source**](https://github.com/joshyorko/actions/blob/community/actions/src/actions/mcp/__init__.py#L340)
 
 ```python
 prompt(*args, **kwargs)

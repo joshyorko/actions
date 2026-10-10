@@ -137,6 +137,15 @@ availability probe first reported empty, then reported nonempty on attempt 2; ne
 Use the admitted release workflow for publication and verify registry artifacts
 afterward. Evidence: `docs/program/evidence/independent-core-pr248-admission-and-credential-probe-20261009.md`.
 
+Community PRs touching `actions/**` run Actions Core Tests. Its non-publishing
+candidate-wheel job builds the exact-source wheel and sdist, checks their
+inventory, validates and clean-installs the wheel, and retains artifact hashes
+with source/run provenance. A passing candidate job is not PyPI publication or
+consumer acceptance. The tagged Core publisher also requires its source commit
+to be an ancestor of `origin/community`; an integration-only candidate cannot
+satisfy that gate. Verify the published wheel and installed public API before
+updating a template's supported dependency floor.
+
 The Actions Core tag release workflow admits exactly the version-matched
 `actions_core` universal wheel and source archive. Its Linux verify job rejects
 extra entries and symlinked artifacts, records SHA-256 digests, and uploads the
