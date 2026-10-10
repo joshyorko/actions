@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "repository": "joshyorko/actions",
-  "observed_at": "2026-10-10T01:35:00Z",
-  "status": "ACTIVE engineering checkpoint at 2026-10-10T01:35:00Z: 16 of 27 scoped PRs are integrated to their recorded targets; 11 remain open/blocked and 0 are merge-ready. Community is 36b8192d; main integration is 46a06485. PR256 remains the latest newly integrated bounded Work Items checkpoint from the preceding snapshot. PRs272\u2013277 are open; combined full Runtime validation is pending and no whole-issue acceptance changed.",
+  "observed_at": "2026-10-10T02:11:20Z",
+  "status": "ACTIVE engineering checkpoint at 2026-10-10T02:11:20Z: 16 of 28 scoped PRs are integrated to their recorded targets; 12 remain open/blocked and 0 are merge-ready. Community is 36b8192d; main integration is 46a06485; Runtime candidate is 6a53578f. PR273 is the current combined validation candidate at 7f233e2a. Its native build/Work Items browser workflow and six RCC toolkit jobs passed, but configured Runtime run 38015195327 has a Linux integration failure (7 failed, 112 passed, 15 skipped) while macOS and Windows jobs remain in progress. No whole-issue acceptance or publication changed.",
   "integration_head": "46a06485f776265e64e84629c468f26b4389d2bd",
   "community_head": "36b8192dbb8143e016af3351f7d25b22a35c9944",
   "release_ready": false,
@@ -4341,5 +4341,21 @@
     "path": "evidence/convergence-correction-20261010T0140Z.json",
     "sha256": "8c2a9f9e13cb711b32e2416fb135e2f423d04528e60991792c940aa71ee9314a",
     "scope": "Adds the referenced sanitized Win32 mypy output and corrects the present PR276 base readback; the 01:35 snapshot remains immutable."
+  },
+  "checkpoint_status": "ACTIVE engineering checkpoint at 2026-10-10T02:11:20Z: 16 of 28 scoped PRs are integrated to their recorded targets; 12 remain open/blocked and 0 are merge-ready. Community is 36b8192d; main integration is 46a06485; Runtime candidate is 6a53578f. PR273 is the current combined validation candidate at 7f233e2a. Its native build/Work Items browser workflow and six RCC toolkit jobs passed, but configured Runtime run 38015195327 has a Linux integration failure (7 failed, 112 passed, 15 skipped) while macOS and Windows jobs remain in progress. No whole-issue acceptance or publication changed.",
+  "checkpoint_observed_at": "2026-10-10T02:11:20Z",
+  "current_convergence": {
+    "path": "evidence/convergence-followup-20261010T0211Z.json",
+    "sha256": "128e332ea91bbc0efb16d4319c4e0f8703a9c8a10ee87bddc4bf0c8d182f33d6",
+    "observed_at_utc": "2026-10-10T02:11:20Z",
+    "cohort_items": 28,
+    "target_integrated": 16,
+    "open_blocked": 12,
+    "merge_ready": 0,
+    "runtime_candidate_head": "7f233e2a9a18866f3bb04aca1f3f9155b96e889b",
+    "release_ready": false,
+    "whole_issue_acceptance_changed": false,
+    "live_pr_audit": "evidence/convergence-live-prs-20261010T0211Z.json",
+    "live_pr_audit_sha256": "bccec098d85a09f08210d475abe92b5ab743b9f0cd9542c2878fd1d96e455582"
   }
 }
