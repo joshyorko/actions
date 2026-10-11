@@ -1,0 +1,47 @@
+{
+  "schema": "actions.final-ledger-manifest/v2",
+  "created_at_utc": "2026-10-11T01:22:37.931391+00:00",
+  "original_manifest_preserved_sha256": "c4bf92798ad88f8b6e5f1bf7ae28805b5c633410aa9dffb51a8c881d02b8b2b0",
+  "files": [
+    {
+      "path": "docs/program/evidence/wave9/final-ledger-20261011T011916Z/README.md",
+      "bytes": 1357,
+      "sha256": "410e718b6293647f28c06a21f8c7424e7c5ffd3b13ec2853d8791250115fb4d7"
+    },
+    {
+      "path": "docs/program/evidence/wave9/final-ledger-20261011T011916Z/history-segment-observation-addendum.json",
+      "bytes": 1121,
+      "sha256": "c3f4a35265e87f3d5e53c7eb64b5337ed5a483ab0fc47c211e7a675b57ffca45"
+    },
+    {
+      "path": "docs/program/evidence/wave9/final-ledger-20261011T011916Z/history-unit-clarification.json",
+      "bytes": 575,
+      "sha256": "32cc42ec843357adeb48afc972f4b42d1f1f738536d36a2ca638887d0522f498"
+    },
+    {
+      "path": "docs/program/evidence/wave9/final-ledger-20261011T011916Z/independent-review/README.md",
+      "bytes": 1699,
+      "sha256": "2675787d548bf991f8c5af961c30ff33fa0f798de291ba16edbe22b6e39671cd"
+    },
+    {
+      "path": "docs/program/evidence/wave9/final-ledger-20261011T011916Z/independent-review/ledger-review.json",
+      "bytes": 3388,
+      "sha256": "b4d448e86f0dd041446d778c6bce108a4040e9d79dbdddb6d231b6e783d207f6"
+    },
+    {
+      "path": "docs/program/evidence/wave9/final-ledger-20261011T011916Z/issue-matrix.json",
+      "bytes": 94440,
+      "sha256": "0fd5d2bc4e11d75f93dda5d96a7e0969dcb4194318961d30027cd2e9668522aa"
+    },
+    {
+      "path": "docs/program/evidence/wave9/final-ledger-20261011T011916Z/ledger-readback.json",
+      "bytes": 745,
+      "sha256": "18cdec80ce1e8806c5c0fa396768d48c66cc7fc103802c2f9d7f2cd8fe69ed50"
+    },
+    {
+      "path": "docs/program/evidence/wave9/final-ledger-20261011T011916Z/payload-manifest.json",
+      "bytes": 1423,
+      "sha256": "c4bf92798ad88f8b6e5f1bf7ae28805b5c633410aa9dffb51a8c881d02b8b2b0"
+    }
+  ]
+}

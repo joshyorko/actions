@@ -1,0 +1,16 @@
+{
+  "schema": "actions.history-segment-observation-addendum/v1",
+  "created_at_utc": "2026-10-11T01:22:37.928204+00:00",
+  "full_issue_utf8_sha256": "e9eefac96131cfa3efa8ce39378e3d91f8c2edb14349f7022536bc1810cca36d",
+  "root_preserved_tail_scope": "First<details> through complete body end, including one trailing LF",
+  "root_tail_unicode_code_points": 23355,
+  "root_tail_utf16_code_units": 23355,
+  "root_tail_utf8_bytes": 23430,
+  "root_tail_utf8_sha256": "2e7dc264b55836f7fd261d5ee61d6cc9d3d7671fa4a0700716b1253a94cacbba",
+  "independent_outer_details_scope": "Outer<details>...</details> segment, excludes trailing LF",
+  "independent_outer_unicode_code_points": 23354,
+  "independent_outer_utf8_bytes": 23429,
+  "independent_outer_utf8_sha256": "a2ec51eb07fc20541b278e15cca18cb87cb510832e1d341cede828ec3bc92f79",
+  "result": "PASS; same fullbody, same exact archive plus explicit1LFscope difference",
+  "mailbox_summary_precision": "Earlier independent mailbox unit counts were inaccurate; authoritative immutable independent JSON and directly verified measurements above apply. No original artifact rewritten."
+}

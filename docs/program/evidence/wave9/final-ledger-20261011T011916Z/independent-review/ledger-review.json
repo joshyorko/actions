@@ -1,0 +1,71 @@
+{
+  "schema": "actions-ledger-independent-readonly-review/v1",
+  "observed_at_utc": "2026-10-11T01:19:01Z",
+  "issue": {
+    "number": 101,
+    "state": "open",
+    "updated_at": "2026-10-11T01:16:25Z",
+    "body_utf8_bytes": 27889,
+    "body_utf16_code_units": 27801,
+    "body_sha256": "e9eefac96131cfa3efa8ce39378e3d91f8c2edb14349f7022536bc1810cca36d"
+  },
+  "history_preservation": {
+    "outer_details_segment_unicode_codepoints": 23354,
+    "outer_details_segment_utf16_code_units": 23354,
+    "outer_details_segment_utf8_bytes": 23429,
+    "outer_details_segment_sha256": "a2ec51eb07fc20541b278e15cca18cb87cb510832e1d341cede828ec3bc92f79",
+    "prior_captured_issue_body_sha256": "c62913f5aea92a03d5f39394be66a4ad529240d63dc60bb7c7ea06b2a028e240",
+    "prior_captured_issue_body_utf8_bytes": 15163,
+    "prior_captured_body_exactly_present_in_live_archive": true,
+    "live_archive_offset_codepoints": 12648,
+    "older_rendered_markdown_sha256": "ffeec890364a3c90e34754879f69a726611704dace4ddf0d27b151143a949929",
+    "older_rendered_markdown_exactly_present": false
+  },
+  "counts": {
+    "open_issues": 58,
+    "primary_buckets": {
+      "close_ready_recommendations": 4,
+      "integrated_foundation_whole_issue_unaccepted": 9,
+      "awaiting_scoped_review_integration_acceptance": 9,
+      "scoped_source_acceptance_hold": 1,
+      "successor_architecture_scopes": 27,
+      "release_distribution_gated": 1,
+      "retained_advisory_contracts": 2,
+      "human_determination_no_dispatch": 4,
+      "coordination_ledger": 1
+    },
+    "primary_bucket_sum": 58,
+    "active_source_implementation_writers": 0,
+    "overlay_prior_active_source_lanes": 2,
+    "refreshed_ci_heads_active": 3,
+    "retained_graph_contracts": 54,
+    "retained_graph_open": 53,
+    "retained_graph_closed": [
+      210
+    ],
+    "pr_ready": "UNKNOWN; 5 scoped candidates, 9 held scopes, 0 admitted",
+    "automatic_closure_on_221_merge": "UNKNOWN; 0 observed, not proof of zero"
+  },
+  "classification_checks": {
+    "issue_195_whole_issue_closed": false,
+    "issue_195_bounded_installed_wheel_evidence_may_be_reported": true,
+    "later_root_reclassification_additive_not_rewrite": "The current 0-writer/1-HOLD/9-review classification supersedes the earlier 2-active-lane overlay; preserve both timestamps and meanings.",
+    "private_finding_or_code_payload_in_current_public_body": false,
+    "basis": "Current body contains generic private-gate status and a short artifact identifier, but no detailed private finding or code payload."
+  },
+  "provenance": {
+    "current_issue_body_retrieved_via": "GitHub API GET issue #101",
+    "latest_durable_handoff_commit": "1a8c16a038ad7f43743eef723e10d48bd6d9fdcb",
+    "prior_packet_prefix": "fb2de691",
+    "history_source": "/workspace/work/actions-closure-audit/ledger101-original.json",
+    "live_body_scratch_sha256": "e9eefac96131cfa3efa8ce39378e3d91f8c2edb14349f7022536bc1810cca36d"
+  },
+  "canonical_documentation": {
+    "disposition": "NO NEW DELTA",
+    "reason": "The live ledger and retained operational guidance already distinguish disjoint primary buckets from overlays, scoped evidence from whole-issue acceptance, and UNKNOWN from 0 observed; this review found no new durable operational lesson."
+  },
+  "upstream": {
+    "disposition": "NONE",
+    "reason": "No new confirmed upstream defect; no external mutation performed."
+  }
+}

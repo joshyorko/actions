@@ -1,0 +1,10 @@
+{
+  "schema": "actions.ledger-history-unit-clarification/v1",
+  "representation": "Normalized issue body encoded UTF-8, not unmeasured transport bytes",
+  "historical_tail_utf16_code_units": 23355,
+  "historical_tail_unicode_code_points": 23355,
+  "historical_tail_utf8_bytes": 23430,
+  "historical_tail_sha256_utf8": "2e7dc264b55836f7fd261d5ee61d6cc9d3d7671fa4a0700716b1253a94cacbba",
+  "exact_preimage_tail_equality": "PASS",
+  "note": "Earlier23555-character wording meant UTF16code units; independent/readback units are explicit here. Original body text is unchanged."
+}

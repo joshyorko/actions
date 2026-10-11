@@ -1,0 +1,16 @@
+{
+  "schema": "actions.ledger-readback-preservation/v1",
+  "readback_end_utc": "2026-10-11 01:17:53 UTC",
+  "issue": 101,
+  "url": "https://github.com/joshyorko/actions/issues/101",
+  "body_sha256_utf8": "e9eefac96131cfa3efa8ce39378e3d91f8c2edb14349f7022536bc1810cca36d",
+  "prefix_sha256_utf8": "ae6141c7a2b7d2a766b1b014c7ee1998bc8e361231f7f00d8e8ec85b67e06b48",
+  "historical_tail_sha256_utf8": "2e7dc264b55836f7fd261d5ee61d6cc9d3d7671fa4a0700716b1253a94cacbba",
+  "historical_tail_chars": 23355,
+  "exact_preimage_tail_equality": "PASS",
+  "updated_body_readback_equality": "PASS",
+  "primary_buckets_sum": 58,
+  "distinct_issue_ids": 58,
+  "private_finding_payloads_published": false,
+  "no_issue_closure_or_PR_merge_or_publication": true
+}
