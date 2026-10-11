@@ -16,8 +16,8 @@ ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW_RELATIVE_PATH = ".github/workflows/actions_runtime_rcc_provider_rollback.yml"
 WORKFLOW_NAME = "actions_runtime_rcc_provider_rollback.yml"
 RCC_SHA256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
-CANDIDATE_SHA = "d642a3ac24f8da85101538bdfdf59b509fd74bfb"
-CANDIDATE_TREE = "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4"
+CANDIDATE_SHA = "7eb5bce946750555ab009f77592862920a901506"
+CANDIDATE_TREE = "3ff76037779763d0461ff3a755b900c9ed83dcf8"
 TEST_NODE = (
     "tests/action_server_tests/test_current_candidate_import_rollback.py::"
     "test_current_candidate_failed_reload_keeps_last_good_action_usable"
@@ -91,6 +91,7 @@ def test_rcc_rollback_workflow_is_opt_in_pinned_and_secret_free() -> None:
     assert workflow["on"]["push"]["branches"] == [
         "test/rcc-provider-rollback-hosted-20261010",
         "fix/rcc-published-artifact-details-20261010",
+        "fix/rcc-candidate-wheel-identities-20261010",
     ]
     assert workflow["on"]["push"]["paths"] == [
         "developer/tests/test_rcc_provider_rollback_workflow.py",
