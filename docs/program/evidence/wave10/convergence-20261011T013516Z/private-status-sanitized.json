@@ -1,0 +1,20 @@
+{
+  "schema": "actions.sanitized-private-source-status/v1",
+  "head": "01f1a98c6e91ae8192248553eef7a5ac4a4e6d9a",
+  "tree": "95d64fe7f9b4af7a01df80e872f1e930b310d6a3",
+  "parent": "fafb4548540727ddb227a94dc1f88c460c992a9e",
+  "component_status": "GO_COMPONENT",
+  "owner_receipt_sha256": "9b05cdb947dcd236b281445bf59e723903f057a00e3b90c71c896b81c1f5b68c",
+  "independent_receipt_sha256": "14598b2dcf3ecf66f3060bb700c9f91d2599f6bc7737b2c26a22fd77bc0843f7",
+  "verification_scope": "Six focused fake contracts, configured Mypy331 files and lint; no full129-suite claim",
+  "actual_metadata": "NOT RUN",
+  "supervisor": "Frozen-v6 PREPARATION_HOLD; external-parent deadline controller/control tests not implemented",
+  "source_and_findings": "PRIVATE LOCAL ONLY; no private code or evidence payload included",
+  "recovery": {
+    "incremental_bundle_sha256": "884c1589d431ea3ccb3d3a39f483de527e641738602e9d944e770d2d2686a1ca",
+    "bytes": 25375,
+    "manifest_sha256": "6513d4e8ddf0b07fbfe3249e418bb7156cd6027a9cb731aa2810a8e097f1a2b2",
+    "bundle_verify_restore_and_connectivity": "PASS",
+    "remote_durability": "NOT PROVEN"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "created_at_utc": "2026-10-11T01:22:42.610192Z",
+  "members": [
+    {
+      "bytes": 25519,
+      "path": "round-1.json",
+      "sha256": "03beed88fae8c3d265199c1720b8aeddb288392d92ea5ef280a242cf7b83e79c"
+    },
+    {
+      "bytes": 3959,
+      "path": "pr311-failed-job-detail.json",
+      "sha256": "97ace09d5caa4e215b54354c64fa4e0c387977eb40d15248eb07e9867848b18a"
+    },
+    {
+      "bytes": 4312,
+      "path": "watch-summary.json",
+      "sha256": "60e31984e0a7fc5ff70c02f4f83880f5d62adc339fd2073e143bcc6734f01a5f"
+    },
+    {
+      "bytes": 1986,
+      "path": "README.md",
+      "sha256": "bc5bdf511ec195c180aab6e4ec759f1e5d01c4dc7044bb0bbdc6c132163df45d"
+    }
+  ],
+  "schema": "post-ledger-ci-watch-manifest-v1"
+}

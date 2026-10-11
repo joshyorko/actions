@@ -2691,6 +2691,11 @@ An unchanged test that times out does not prove an infrastructure cause or
 exclude a changed production path; retain the timeout as unresolved until
 diagnostic evidence distinguishes them.
 
+When a later attempt passes, retain earlier failed or cancelled receipts and
+name the exact gate that the new result clears. Verify that the job checkout
+matches the accepted merge's ordered parents and complete tree. That result
+does not clear checks for a different head in a stacked successor.
+
 Refresh registry versions, native release and tag endpoints, and the owning
 Homebrew Cask independently. A measured public 404 records absence at that
 observation time; an inaccessible endpoint remains UNKNOWN. Registry artifact

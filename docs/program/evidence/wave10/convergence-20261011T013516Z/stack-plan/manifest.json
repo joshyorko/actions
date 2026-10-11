@@ -1,0 +1,41 @@
+{
+  "created_utc": "2026-10-11",
+  "inputs": {
+    "AGENTS": {
+      "bytes": 7190,
+      "path": "/workspace/work/actions-mk3-wave8-pr299/AGENTS.md",
+      "sha256": "c7980454a13763bf49430a4e8f8ed56b10b754392fb295adac92ff0e3e6b1f4d"
+    },
+    "canonical_repository_operations_guide": {
+      "bytes": 220723,
+      "path": "/workspace/work/actions-mk3-wave8-pr299/docs/skills/repository-operations.md",
+      "sha256": "99eb0a988c168a7abe41bc835b4d96d36f31faa34a372bcf98eb6a35d9149bca"
+    },
+    "pr292_independent_review": {
+      "bytes": 27604,
+      "path": "/workspace/work/actions-mk3-evidence/wave9/pr292-final-scope-review-2f631e54/independent-review.json",
+      "sha256": "1bc7578f2341fec3884ecc08da1c895a4ae40a84b41e9e671fc15b717c366cc9"
+    },
+    "pr299_local_union_independent_review": {
+      "bytes": 5835,
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/independent-local-merge-review-10dcfcef.json",
+      "sha256": "4eff29d4e2c34c0bb05cca496772be3a858a1e02a0d62acb93032a3e42fccf6f"
+    },
+    "pr299_local_union_owner_receipt": {
+      "bytes": 6578,
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/merge-preparation-receipt.json",
+      "sha256": "74f5ed37fabfcdcf84696d53ee50311d468930d7ae705e9a8dedb674cf276034"
+    },
+    "upstream_reporting_guide": {
+      "bytes": 8711,
+      "path": "/workspace/work/actions-mk3-wave8-pr299/docs/skills/upstream-reporting.md",
+      "sha256": "5f3b4f816ba609c56f5ce7a07e902b9b9e0df975b21a191291446edca54065f7"
+    }
+  },
+  "live_ref_readback": {
+    "command": "git ls-remote https://github.com/joshyorko/actions.git refs/heads/integration/community-release-20261008 refs/heads/test/mcp-alias-frozen-control-20261010 refs/heads/feat/shared-run-output-20261010 refs/heads/feat/run-output-transport-20261010",
+    "output": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5 refs/heads/feat/run-output-transport-20261010\n4cad04ca0e70d219f53452fa5911c6d61192fd0d refs/heads/feat/shared-run-output-20261010\n19380993febaa71238eaee3026b5c808773283ff refs/heads/integration/community-release-20261008\n9e1059a12456faba64d11313d6dd8f943ad28912 refs/heads/test/mcp-alias-frozen-control-20261010\n"
+  },
+  "mode": "read-only convergence planning; no source/ref/PR mutation or test execution",
+  "schema": "mk3-wave10-stack-convergence-manifest/v1"
+}

@@ -1,0 +1,75 @@
+{
+  "schema": "ci-failure-triage/v1",
+  "observed_at_utc": "2026-10-11T01:27:06Z",
+  "scope": "read-only single-pass diagnosis; no rerun, source edit, PR mutation, or upstream report",
+  "run": {
+    "id": 38099013706,
+    "attempt": 1,
+    "workflow": ".github/workflows/actions_runtime_tests.yml",
+    "event": "pull_request",
+    "pr": 311,
+    "head_sha": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+    "base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+    "merge_checkout_sha": "07c2091b33e13a4f5a8699355a2b0f8a2f4db740",
+    "merge_tree_sha": "34f967cc9b753e8b0497221cf77ec53925cdf9eb",
+    "merge_parents": ["19380993febaa71238eaee3026b5c808773283ff", "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca"],
+    "merge_verified": true,
+    "started_at_utc": "2026-10-11T00:36:39Z",
+    "updated_at_utc": "2026-10-11T01:14:48Z",
+    "run_conclusion": "failure"
+  },
+  "matrix": {
+    "job_id": 114350853595,
+    "job_name": "build (windows-py3.12-devmode)",
+    "failed_step": {"number": 17, "name": "Test (integration)"},
+    "same_workflow_jobs_observed": {
+      "windows-py3.12-devmode": "failure",
+      "ubuntu-py3.12-devmode": "success",
+      "macos-py3.12-devmode": "success"
+    },
+    "other_steps": "all completed non-skipped steps passed; step 6 Install project (not dev) was skipped by workflow logic"
+  },
+  "failure_evidence": {
+    "command": "python -m pytest -m 'integration_test and not native_artifact_test' -rfE -vv --force-regen -n 0",
+    "summary": "2 failed, 128 passed, 18 skipped, 1092 deselected in 1603.73s",
+    "failed_tests": [
+      "action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+      "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]"
+    ],
+    "common_observed_failure": "Both tests raised TimeoutError while ActionServerProcess.start waited for the server port future; traceback identifies action_server/src/actions/server/_selftest.py:198.",
+    "minimal_excerpt": "TimeoutError raised at future.result wait timeout; test run summary reports the two tests above. Captured process output begins server startup and RCC holotree hash/variables commands; no terminal RCC/server error or underlying cause is present in retained excerpt.",
+    "related_matrix_observation": "The template and prompt parameterizations of the duplicate-MCP rollback test passed in the same Windows job."
+  },
+  "source_binding": {
+    "local_inspection_worktree": "/workspace/work/actions-mk3-wave8-postgres",
+    "worktree_head": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+    "exact_pr_head_object_available": true,
+    "pr_head_parent": "8eb2e6f92109bcbd51e4925ebe703074ee28c6ac",
+    "local_base_is_ancestor_of_pr_head": true,
+    "diff_base_to_pr_head": [
+      "action_server/tests/contract_tests/test_active_contracts.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "failing_test_and_wait_source_blobs_unchanged_from_base": {
+      "action_server/src/actions/server/_selftest.py": "bc32bccf7e238bb625e6cea87a2e1f141c3d80d4",
+      "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6",
+      "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022"
+    },
+    "interpretation_limit": "PR changes neither failing test file nor the shared wait source, so direct ownership by those hunks is not established. This does not rule out indirect interactions or a defect elsewhere in the merge."
+  },
+  "cause": {
+    "classification": "UNKNOWN",
+    "supported_observation": "Windows integration server readiness timed out in two test cases while RCC bootstrap-related commands had started.",
+    "not_established": ["RCC/provider failure", "Windows infrastructure outage", "product regression", "root cause"],
+    "reason": "The log excerpt contains neither a terminal bootstrap/server error nor enough evidence to distinguish slow startup, readiness behavior, or another cause. No rerun or additional investigation was authorized."
+  },
+  "preservation": "This single Windows matrix-cell failure does not overturn or broaden the separately accepted controlled Linux installed-wheel proof for issue #195; that proof was not replayed or re-evaluated here.",
+  "documentation": {
+    "current_guide": "/workspace/work/actions-mk3-wave8-postgres/docs/skills/repository-operations.md",
+    "current_guide_sha256": "151038d640694d95390ad34a2142c2b1f6feac27a6cac82384feeeda159d36b3",
+    "existing_coverage": "Section 'Live pull-request base identity' already says bind CI evidence to the checkout in job logs and warns PR base.sha/mergeable metadata alone is insufficient.",
+    "proposed_delta_only_not_applied": "Extend that section to require recording the failed job step, per-platform/test summary, PR head plus merge checkout SHA/base from logs, and comparing relevant test/source blobs across parents. State that a readiness TimeoutError names the timed-out wait but does not identify why the child failed to become ready; classify cause UNKNOWN unless logs show terminal evidence. Do not generalize one platform cell to the whole gate."
+  },
+  "upstream_disposition": "none; no confirmed defect, no issue draft, no external mutation",
+  "privacy": "Full workflow logs were reviewed through the read-only GitHub log endpoint and are not included in this receipt. Only the minimal failure facts above are retained."
+}

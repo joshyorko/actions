@@ -1,0 +1,166 @@
+{
+  "conclusion": "failure",
+  "head_sha": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+  "html_url": "https://github.com/joshyorko/actions/actions/runs/38099013706/job/114350853595",
+  "http_status": 200,
+  "job_id": 114350853595,
+  "name": "build (windows-py3.12-devmode)",
+  "observed_at_utc": "2026-10-11T01:22:01.636719Z",
+  "response_bytes": 5115,
+  "response_sha256": "0c0cfef8c256cc392bb3a115c4620f375f84e87983101add9fbf6eda6962429a",
+  "run_id": 38099013706,
+  "status": "completed",
+  "steps": [
+    {
+      "conclusion": "success",
+      "name": "Set up job",
+      "number": 1,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Checkout repository and submodules",
+      "number": 2,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Install the latest version of uv",
+      "number": 3,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Install Python 3.12",
+      "number": 4,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Install devutils requirements",
+      "number": 5,
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Install project (not dev)",
+      "number": 6,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Install project (dev)",
+      "number": 7,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Setup go",
+      "number": 8,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Setup node",
+      "number": 9,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Build frontend",
+      "number": 10,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Build OAuth2 config",
+      "number": 11,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Test Go wrapper child lifecycle",
+      "number": 12,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Build binary",
+      "number": 13,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Upload artifact: action_server/dist/final/",
+      "number": 14,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Test (not integration)",
+      "number": 15,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Install Playwright Chromium for Runtime browser acceptance",
+      "number": 16,
+      "status": "completed"
+    },
+    {
+      "conclusion": "failure",
+      "name": "Test (integration)",
+      "number": 17,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "`inv lint`, potentially fixed with `inv pretty`",
+      "number": 18,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "`inv typecheck`",
+      "number": 19,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "`inv docs` with checking on files changed",
+      "number": 20,
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Post Setup node",
+      "number": 37,
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Post Setup go",
+      "number": 38,
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Post Install the latest version of uv",
+      "number": 39,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Post Checkout repository and submodules",
+      "number": 40,
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Complete job",
+      "number": 41,
+      "status": "completed"
+    }
+  ],
+  "url": "https://api.github.com/repos/joshyorko/actions/actions/jobs/114350853595"
+}

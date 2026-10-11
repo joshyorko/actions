@@ -1,0 +1,103 @@
+{
+  "current_conflicts_and_unknowns": [
+    "PR290 ordinary prospective merge simulation against 193 returned tree c7a27263... and no conflict text; this was not a real merge and does not prove hosted gates or acceptance.",
+    "PR299 old checkpoint 58b is an ancestor of its current branch; current #292 head 2f is not integrated at 193. Its local candidate 10dc is based on [4cad,193], so dependency-refresh and post-integration source equivalence remain unproved.",
+    "PR300 is stacked directly on old #299 head 4cad; it cannot be considered current until #299 is refreshed and integrated.",
+    "PR292 source head is not yet integrated; independent bounded acceptance is not merge/publication authorization. Live target must be checked again at any future action.",
+    "Current required/advisory status policy and any repository branch-protection/admission policy were not established. Combined-status API returned an empty statuses list for the three stack heads; this is not evidence that no required checks exist.",
+    "No exact new PR290/299/300 workflow logs or post-refresh CI were fetched in this bounded pass; historical receipts retain their explicit scope."
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "disposition": "Proposal only because this task forbids source/document edits. Existing \u201cLive pull-request base identity\u201d already requires resolving live target ref and inspecting ordered parents/full tree; the additive learning is dependency freshness for stacked PRs.",
+    "evidence": "PR290\u2019s declared #289 prerequisite is merged and present in 19380993; #299 still contains old #292 checkpoint 58b while current accepted #292 source 2f is absent from 19380993; local #299 merge 10dc has parents [4cad,193] and is reviewed local-only; #300 is based on #299 head4cad.",
+    "exact_delta": "Before refreshing a dependent pull request, confirm that the dependency\u2019s accepted source is present in the current target ref; an older dependency commit in the PR branch or a previously reviewed local union is not sufficient. Rebuild the prospective union from the live target, preserve its ordered parents and complete tree, and advance descendant branches only after the parent is integrated. Bind each carried-forward check to the exact source and merge tree it tested.",
+    "stale_guidance_removed": "None; repository guide already correctly requires live-ref and exact-tree admission."
+  },
+  "execution_disclosure": {
+    "PR_or_ref_mutations": false,
+    "note": "A local `git merge-tree --write-tree` structure simulation created only an unreachable tree object; it did not modify branch refs, index, or worktree. No merge, refresh, or hosted dispatch occurred.",
+    "source_changes": false,
+    "tests_run": false
+  },
+  "live_refs": {
+    "PR290 test/mcp-alias-frozen-control-20261010": "9e1059a12456faba64d11313d6dd8f943ad28912",
+    "PR299 feat/shared-run-output-20261010": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+    "PR300 feat/run-output-transport-20261010": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+    "integration/community-release-20261008": "19380993febaa71238eaee3026b5c808773283ff"
+  },
+  "manifest": {
+    "bytes": 2384,
+    "path": "/workspace/work/actions-mk3-evidence/wave10-stack-convergence-20261011/manifest.json",
+    "sha256": "c72c6e175d24c9a47461ec816054541105be5021522e137de87a769b5bfe24dd"
+  },
+  "observed_utc": "2026-10-11",
+  "schema": "mk3-wave10-stack-convergence-plan/v1",
+  "scope": "Read-only dependency/order reconciliation after independent PR292 bounded-scope acceptance. No source edit, branch refresh, push, merge, retarget, rewrite, or heavy/test execution.",
+  "source_identity_and_dependencies": [
+    {
+      "evidence": "GitHub PR metadata says merged; local ancestry check confirms merge commit is ancestor of integration 19380993.",
+      "merge_commit": "fdf9ee8f023d068c16e567a85defd7c0437f8117",
+      "pr": 289,
+      "state": "merged"
+    },
+    {
+      "dependency": "#289 only per PR body; #289 is integrated at current target. Current combined-status endpoint returned no statuses; exact-head CI/readiness is not established by this readback. PR body records one Linux frozen artifact proof and explicitly leaves exact-head hosted checks open. A read-only merge-tree simulation against current integration returned tree c7a27263e2b4c754f01a77fec86ecb71cb57c927 without conflict output; it wrote no ref/worktree state. This is prospective structure only, not a refreshed branch or acceptance.",
+      "head": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "payload_base": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "pr": 290,
+      "state": "open_draft"
+    },
+    {
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "head_tree": "35ad4b9f4c6cb47997ba826b91d3a88d69fff25c",
+      "pr": 292,
+      "review_receipt_sha256": "1bc7578f2341fec3884ecc08da1c895a4ae40a84b41e9e671fc15b717c366cc9",
+      "state": "open_draft_bounded_scope_accepted",
+      "state_note": "Independent reviewer accepted bounded scope with 19 exact-head checks, configured 331-file mypy and three-OS native/resource-history evidence. The PR is still open and its source head is not an ancestor of current integration 19380993; integration must happen before dependent #299 refresh. PR payload base is stale (de2b...), so resolve live ref when acting.",
+      "tested_merge": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+      "tested_ordered_parents": [
+        "19380993febaa71238eaee3026b5c808773283ff",
+        "2f631e5403ae3ff0b37af2416dc19a98bdc04a84"
+      ],
+      "tested_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f"
+    },
+    {
+      "declared_dependency": "#292 at old checkpoint 58b411f0ecf7f2ecf2be16308ae7c4991b6df1b2",
+      "head": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "limits": "Candidate is locally reviewed only and does not include current #292 head 2f in its base; do not push it as dependency delivery. It resolves the guide conflict and reports 88 RCC developer workflow tests, not package/native/final-head acceptance. Refresh only after #292 is integrated, then re-resolve the live base and review the complete ordered-parent/tree union.",
+      "local_candidate_parents": [
+        "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+        "19380993febaa71238eaee3026b5c808773283ff"
+      ],
+      "local_candidate_tree": "ac686670b04ae4308a4143c66ea314514658e0fa",
+      "local_only_candidate": "10dcfcefe0be8b32033015ed313c9e033a8d5c74",
+      "payload_base": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "pr": 299,
+      "state": "open_draft"
+    },
+    {
+      "base_pr299_head": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "depends_on": "#299",
+      "head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "limits": "Current source parent is unintegrated #299. Prior focused 73-test/author checks are source-specific; exact-head hosted checks remain pending. Refresh only after refreshed #299 is integrated and then bind all evidence to new #300 source/merge tree.",
+      "pr": 300,
+      "state": "open_draft"
+    }
+  ],
+  "three_step_plan": [
+    {
+      "action": "After root authorizes ordinary branch maintenance, refresh #290 against the live integration ref 19380993; its stated #289 prerequisite is satisfied. Preserve the existing Linux artifact proof as only its measured artifact/revision evidence. Review exact source/artifact binding and new prospective ordered parents/tree, then require fresh exact-head CI and independent readback before scope acceptance.",
+      "step": 1
+    },
+    {
+      "action": "Integrate the already independently accepted #292 through normal repository governance, then independently read back the new live integration ref and required checks. Only after the current #292 source is actually present in integration, refresh #299 as an ordinary two-parent update; inspect the full tree and documentation conflict resolution, bind new checks to that exact union, and obtain independent review. Existing local 10dc is a prior-base review artifact, not a pushable substitute.",
+      "step": 2
+    },
+    {
+      "action": "After the refreshed #299 is integrated, refresh #300 onto that resulting live target in stack order, verify exact parent/tree and transport/API test contracts, run required exact-head CI, and obtain independent review. Preserve prior 73-test evidence under its old source identity; do not carry it forward as current-head proof.",
+      "step": 3
+    }
+  ],
+  "upstream_disposition": "none; no upstream defect identified or investigated; no external mutation."
+}

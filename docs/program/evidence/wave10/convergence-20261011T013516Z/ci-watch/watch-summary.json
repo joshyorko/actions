@@ -1,0 +1,96 @@
+{
+  "documentation_improvement": {
+    "disposition": "No new canonical guide delta proposed.",
+    "reason": "This watch found only time-bound check state. Repository operations already requires recording exact verification commands/results and treats skipped/unavailable gates as unverified; durable test-typing guidance is captured in the separate PR310 repair commit. This snapshot is evidence, not durable operating guidance."
+  },
+  "heads": [
+    {
+      "check_run_count": 19,
+      "counts": {
+        "completed_failure": 0,
+        "completed_skipped": 0,
+        "completed_success": 19,
+        "in_progress": 0
+      },
+      "endpoint": "https://api.github.com/repos/joshyorko/actions/commits/2f631e5403ae3ff0b37af2416dc19a98bdc04a84/check-runs?per_page=100",
+      "failures": [],
+      "head_sha": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "nonterminal": [],
+      "observed_at_utc": "2026-10-11T01:21:20.078389Z",
+      "pr": 292,
+      "response_sha256": "b20268481bee6c7a149987da6d830180df769528034411c57388afa60d5b4aee"
+    },
+    {
+      "check_run_count": 22,
+      "counts": {
+        "completed_failure": 0,
+        "completed_skipped": 1,
+        "completed_success": 18,
+        "in_progress": 3
+      },
+      "endpoint": "https://api.github.com/repos/joshyorko/actions/commits/7c98534ad4eece6d892e3bb2957471d0f1ad76e6/check-runs?per_page=100",
+      "failures": [],
+      "head_sha": "7c98534ad4eece6d892e3bb2957471d0f1ad76e6",
+      "nonterminal": [
+        {
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress",
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704276/job/114355869990"
+        },
+        {
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704276/job/114355869976"
+        },
+        {
+          "name": "build (macos-py3.12-devmode)",
+          "status": "in_progress",
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704276/job/114355869797"
+        }
+      ],
+      "observed_at_utc": "2026-10-11T01:21:21.798361Z",
+      "pr": 310,
+      "response_sha256": "d95948fac5b1e8b94200f7f03f867399932811a4b580ce33d4c39108a5aa9dea"
+    },
+    {
+      "check_run_count": 19,
+      "counts": {
+        "completed_failure": 1,
+        "completed_skipped": 0,
+        "completed_success": 18,
+        "in_progress": 0
+      },
+      "endpoint": "https://api.github.com/repos/joshyorko/actions/commits/c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca/check-runs?per_page=100",
+      "failures": [
+        {
+          "conclusion": "failure",
+          "name": "build (windows-py3.12-devmode)",
+          "status": "completed",
+          "url": "https://github.com/joshyorko/actions/actions/runs/38099013706/job/114350853595"
+        }
+      ],
+      "head_sha": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+      "nonterminal": [],
+      "observed_at_utc": "2026-10-11T01:21:23.542272Z",
+      "pr": 311,
+      "response_sha256": "2143e0f262cd39866964876c325629bc7adc993ccff9fe6afe78ce342c678538"
+    }
+  ],
+  "independent_scoped_proof_vs_combined_acceptance": "These are exact-head hosted check observations only. PR292 green checks and the PR310 scoped fix checks do not establish combined-tree, full issue/union, or release closure.",
+  "observation_rounds": 1,
+  "observation_window_utc": [
+    "2026-10-11T01:21:20.078376Z",
+    "2026-10-11T01:21:24.369599Z"
+  ],
+  "pr311_failed_job_detail": {
+    "failure_step": "Test (integration); setup/build/artifact upload/non-integration tests/lint/typecheck/docs were success; no job logs inspected.",
+    "head_sha": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+    "job_url": "https://github.com/joshyorko/actions/actions/runs/38099013706/job/114350853595",
+    "observed_at_utc": "2026-10-11T01:22:01.636719Z",
+    "path": "/workspace/work/actions-mk3-evidence/wave9/post-ledger-ci-watch-20261011/pr311-failed-job-detail.json",
+    "sha256": "97ace09d5caa4e215b54354c64fa4e0c387977eb40d15248eb07e9867848b18a"
+  },
+  "schema": "post-ledger-ci-watch-summary-v1",
+  "stopped_early": "Material completed failure on exact PR311 head; no second or third polling round.",
+  "upstream_disposition": "none; no upstream defect identified."
+}

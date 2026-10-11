@@ -1,0 +1,97 @@
+{
+  "schema": "actions.public-checkpoint-manifest/v1",
+  "created_at_utc": "2026-10-11T01:35:16.902664+00:00",
+  "members": [
+    {
+      "path": "README.md",
+      "sha256": "b902fdc16ed2e7019eed1c8bb3aff65f92130571183c485ad4bf066f9356068b",
+      "bytes": 1427
+    },
+    {
+      "path": "ci-watch/README.md",
+      "sha256": "bc5bdf511ec195c180aab6e4ec759f1e5d01c4dc7044bb0bbdc6c132163df45d",
+      "bytes": 1986
+    },
+    {
+      "path": "ci-watch/manifest.json",
+      "sha256": "2a36cd689f696009abb8e837ab714787b78dcfdbc834324048a9257e3d1e54cf",
+      "bytes": 729
+    },
+    {
+      "path": "ci-watch/pr311-failed-job-detail.json",
+      "sha256": "97ace09d5caa4e215b54354c64fa4e0c387977eb40d15248eb07e9867848b18a",
+      "bytes": 3959
+    },
+    {
+      "path": "ci-watch/round-1.json",
+      "sha256": "03beed88fae8c3d265199c1720b8aeddb288392d92ea5ef280a242cf7b83e79c",
+      "bytes": 25519
+    },
+    {
+      "path": "ci-watch/watch-summary.json",
+      "sha256": "60e31984e0a7fc5ff70c02f4f83880f5d62adc339fd2073e143bcc6734f01a5f",
+      "bytes": 4312
+    },
+    {
+      "path": "closure-residual-audit.json",
+      "sha256": "8736bab2f7a70db7f6146c7c646f9691a52e553a83807b34f06f556031c2e61f",
+      "bytes": 5044
+    },
+    {
+      "path": "documentation-dispositions.json",
+      "sha256": "23fa35b4cf25e44eeab98dcd12219f08737552f0303d94cc3a8ff7a57ac33be6",
+      "bytes": 789
+    },
+    {
+      "path": "issue-matrix.json",
+      "sha256": "0edd76bf97f4b94fb5b968953545fe6a6f3e20005bf63b130c250953d82a7bcc",
+      "bytes": 95809
+    },
+    {
+      "path": "live-observation.json",
+      "sha256": "f4251f43c066934447069ac97de4a7f58eb0689b3e912de6baedf462825d9748",
+      "bytes": 31241
+    },
+    {
+      "path": "pr292-review/independent-review.json",
+      "sha256": "1bc7578f2341fec3884ecc08da1c895a4ae40a84b41e9e671fc15b717c366cc9",
+      "bytes": 27604
+    },
+    {
+      "path": "pr292-review/manifest.json",
+      "sha256": "66a38ca45121a15bd1bea943e11eb190a7739ccf4d3c0346f2793f6891f92c55",
+      "bytes": 179
+    },
+    {
+      "path": "pr311-triage/manifest.json",
+      "sha256": "7de0fd3bcefa15a370ef195c99b7a2491ba7dcd41ba58bd6077876c0fd5bfe40",
+      "bytes": 1540
+    },
+    {
+      "path": "pr311-triage/triage.json",
+      "sha256": "6dea505e69af243ba585228182f8a984027469049edfe14ef35bd4a88c6919d5",
+      "bytes": 5546
+    },
+    {
+      "path": "pr311-triage/triage.md",
+      "sha256": "6c82fca9c83f7bd6b8d3e9bef28485aac366e312034be45ef5f0f58c03d4ac5d",
+      "bytes": 2523
+    },
+    {
+      "path": "private-status-sanitized.json",
+      "sha256": "0d723e819ded0bc8255cca55dda44965034b40ad948384f5e1b97aa2f02d7b80",
+      "bytes": 1133
+    },
+    {
+      "path": "stack-plan/manifest.json",
+      "sha256": "c72c6e175d24c9a47461ec816054541105be5021522e137de87a769b5bfe24dd",
+      "bytes": 2384
+    },
+    {
+      "path": "stack-plan/stack-convergence-plan.json",
+      "sha256": "6d9f98ec2560fde1ecb542e7058c7bae778457b295a03a5af4904c666b072579",
+      "bytes": 8644
+    }
+  ],
+  "privacy": "Selected public-safe evidence only; privateRCCcode/findings/bundles and full raw workflow logs excluded"
+}

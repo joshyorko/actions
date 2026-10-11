@@ -1,0 +1,794 @@
+{
+  "schema": "independent-pr292-final-scope-review/v1",
+  "status": "GO_PR292_BOUNDED_SCOPE",
+  "observed_at_utc": "2026-10-11T01:28:36.117810+00:00",
+  "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+  "head_tree": "35ad4b9f4c6cb47997ba826b91d3a88d69fff25c",
+  "live_base_ref": "integration/community-release-20261008",
+  "live_base": "19380993febaa71238eaee3026b5c808773283ff",
+  "stale_payload_base": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+  "actual_merge_ref": "refs/pull/292/merge",
+  "prospective_merge": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "prospective_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "ordered_parents": [
+    "19380993febaa71238eaee3026b5c808773283ff",
+    "2f631e5403ae3ff0b37af2416dc19a98bdc04a84"
+  ],
+  "checks": [
+    {
+      "name": "publish (3.12)",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225241/job/114352346287"
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225245/job/114348512810"
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225245/job/114348512804"
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225245/job/114348512791"
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225245/job/114348512782"
+    },
+    {
+      "name": "build-wheels (ubuntu-22.04)",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225241/job/114348512770"
+    },
+    {
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225250/job/114348512758"
+    },
+    {
+      "name": "build-wheels (macos-15)",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225241/job/114348512749"
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225245/job/114348512748"
+    },
+    {
+      "name": "build-wheels (windows-2022)",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225241/job/114348512731"
+    },
+    {
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225250/job/114348512709"
+    },
+    {
+      "name": "build (macos-py3.12-devmode)",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225220/job/114348512688"
+    },
+    {
+      "name": "build (ubuntu-py3.12-devmode)",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225220/job/114348512650"
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225245/job/114348512641"
+    },
+    {
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225250/job/114348512634"
+    },
+    {
+      "name": "build-sdist (ubuntu-py3.12)",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225241/job/114348512620"
+    },
+    {
+      "name": "audit",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225208/job/114348512599"
+    },
+    {
+      "name": "coverage",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225221/job/114348512546"
+    },
+    {
+      "name": "build (windows-py3.12-devmode)",
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38098225220/job/114348512491"
+    }
+  ],
+  "count": 19,
+  "all_exact_head_success": true,
+  "required_advisory_policy": "UNKNOWN",
+  "jobs": [
+    {
+      "job_id": 114348512491,
+      "decoded_log_characters": 556405,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Install the latest version of uv",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Install devutils requirements",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Install project (not dev)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6
+        },
+        {
+          "name": "Install project (dev)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Setup go",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Setup node",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Build frontend",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Build OAuth2 config",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Test Go wrapper child lifecycle",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Build binary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Upload artifact: action_server/dist/final/",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Test (not integration)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Install Playwright Chromium for Runtime browser acceptance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Test (integration)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "`inv lint`, potentially fixed with `inv pretty`",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "`inv typecheck`",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        },
+        {
+          "name": "`inv docs` with checking on files changed",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20
+        }
+      ],
+      "excerpts": [
+        "2026-10-11T00:23:00.4977663Z HEAD is now at 92498af Merge 2f631e5403ae3ff0b37af2416dc19a98bdc04a84 into 19380993febaa71238eaee3026b5c808773283ff",
+        "2026-10-11T00:24:56.2842327Z ok  \tcommand-line-arguments\t0.015s",
+        "2026-10-11T00:30:31.7727696Z ========== 1015 passed, 94 skipped, 14 warnings in 287.08s (0:04:47) ==========",
+        "2026-10-11T00:39:12.8146688Z action_server_tests\\test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart PASSED [ 28%]",
+        "2026-10-11T00:51:39.9879702Z ======== 131 passed, 18 skipped, 1112 deselected in 1255.69s (0:20:55) ========",
+        "2026-10-11T00:51:58.0718516Z Success: no issues found in 331 source files"
+      ],
+      "bounded_excerpt_sha256": "db0c78e263e83df95d25c477db21b9a90e4acb3278abd6f89c17f707a9270c53",
+      "full_log_sha256": "NOT_RETAINED; complete approved connector log read in session only",
+      "checkout_bound": true
+    },
+    {
+      "job_id": 114348512650,
+      "decoded_log_characters": 1229760,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Install the latest version of uv",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Install devutils requirements",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Install project (not dev)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6
+        },
+        {
+          "name": "Install project (dev)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Setup go",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Setup node",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Build frontend",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Build OAuth2 config",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Test Go wrapper child lifecycle",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Build binary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Upload artifact: action_server/dist/final/",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Test (not integration)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Install Playwright Chromium for Runtime browser acceptance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Test (integration)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "`inv lint`, potentially fixed with `inv pretty`",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "`inv typecheck`",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        },
+        {
+          "name": "`inv docs` with checking on files changed",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20
+        }
+      ],
+      "excerpts": [
+        "2026-10-11T00:22:57.4923949Z HEAD is now at 92498af Merge 2f631e5403ae3ff0b37af2416dc19a98bdc04a84 into 19380993febaa71238eaee3026b5c808773283ff",
+        "2026-10-11T00:23:48.5134031Z ok  \tcommand-line-arguments\t0.006s",
+        "2026-10-11T00:26:06.3690936Z ========== 1097 passed, 12 skipped, 15 warnings in 100.11s (0:01:40) ===========",
+        "2026-10-11T00:30:07.5521964Z action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart PASSED [ 28%]",
+        "2026-10-11T00:34:38.2431753Z ========= 132 passed, 17 skipped, 1112 deselected in 502.01s (0:08:22) =========",
+        "2026-10-11T00:34:46.9614358Z Success: no issues found in 331 source files"
+      ],
+      "bounded_excerpt_sha256": "12f9731af9c84f671569aa732534ee63c99cd5eab6aa54d48f77def6d03a9d43",
+      "full_log_sha256": "NOT_RETAINED; complete approved connector log read in session only",
+      "checkout_bound": true
+    },
+    {
+      "job_id": 114348512688,
+      "decoded_log_characters": 1110675,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Install the latest version of uv",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Install devutils requirements",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Install project (not dev)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6
+        },
+        {
+          "name": "Install project (dev)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Setup go",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Setup node",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Build frontend",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Build OAuth2 config",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Test Go wrapper child lifecycle",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Build binary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Upload artifact: action_server/dist/final/",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Test (not integration)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Install Playwright Chromium for Runtime browser acceptance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Test (integration)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "`inv lint`, potentially fixed with `inv pretty`",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "`inv typecheck`",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        },
+        {
+          "name": "`inv docs` with checking on files changed",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20
+        }
+      ],
+      "excerpts": [
+        "2026-10-11T00:56:56.1092650Z HEAD is now at 92498af Merge 2f631e5403ae3ff0b37af2416dc19a98bdc04a84 into 19380993febaa71238eaee3026b5c808773283ff",
+        "2026-10-11T00:58:40.5952930Z ok  \tcommand-line-arguments\t0.037s",
+        "2026-10-11T01:02:33.6819420Z ========== 1021 passed, 88 skipped, 15 warnings in 168.07s (0:02:48) ===========",
+        "2026-10-11T01:08:50.8599510Z action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart PASSED [ 28%]",
+        "2026-10-11T01:16:57.9964370Z ========= 132 passed, 17 skipped, 1112 deselected in 852.51s (0:14:12) =========",
+        "2026-10-11T01:17:14.3217930Z Success: no issues found in 331 source files"
+      ],
+      "bounded_excerpt_sha256": "934e217c4892b73cdc5c66f7ce33d554aafb5a4dc80122536a506d0ea58c16b7",
+      "full_log_sha256": "NOT_RETAINED; complete approved connector log read in session only",
+      "checkout_bound": true
+    }
+  ],
+  "workflow_run": 38098225220,
+  "workflow_conclusion": "success",
+  "complete_union_inventory": {
+    "truncated": false,
+    "entries": 1686,
+    "leaves": 1390,
+    "base_leaves": 1385,
+    "delta": [
+      {
+        "path": "action_server/src/actions/server/_api_action_routes.py",
+        "base": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1880245f3ff09cd2ef1fec47d08f3baa41207b4f"
+        },
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7e5ad63318ea9073ad2ef806ff95e18495c5eca7"
+        }
+      },
+      {
+        "path": "action_server/src/actions/server/_models.py",
+        "base": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "964d31c51e42dc285e5eb77e02d86e62adecd6bb"
+        },
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb"
+        }
+      },
+      {
+        "path": "action_server/src/actions/server/_robo_utils/process.py",
+        "base": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cc35194f88ec6aac5718dcaeadab588ab18d380d"
+        },
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "5c10630a44bdee21f570ebbbd199c188e0837994"
+        }
+      },
+      {
+        "path": "action_server/src/actions/server/_selftest.py",
+        "base": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "bc32bccf7e238bb625e6cea87a2e1f141c3d80d4"
+        },
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "ee3268ae80b424f42f341770afad86bf72ee717f"
+        }
+      },
+      {
+        "path": "action_server/src/actions/server/mcp/resource_routing.py",
+        "base": null,
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "82792a02bdc87982cf739ca8a725a4d79731cb3d"
+        }
+      },
+      {
+        "path": "action_server/src/actions/server/mcp/setup_mcp_server_v2.py",
+        "base": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "382e2ee9877e4c4f9304e01e8d75adbe996e1314"
+        },
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9961a2064dede78f12e21295081b8702ecbe08f8"
+        }
+      },
+      {
+        "path": "action_server/src/actions/server/migrations/__init__.py",
+        "base": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "757bba4dc814abdadcd7a12614f2585cf36b0f66"
+        },
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cb68bcb4a2e41ecefcb5a409ce5c26065a505d05"
+        }
+      },
+      {
+        "path": "action_server/src/actions/server/migrations/migration_add_mcp_resource_routing.py",
+        "base": null,
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4fc4bc5abfbb34bb016072c29209d7e2263d99c7"
+        }
+      },
+      {
+        "path": "action_server/tests/action_server_tests/mcp/test_alias_history.py",
+        "base": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "35b1ff36cd39ee9a5f076b91d180562f53be7774"
+        },
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "a4fd23572341439b38164b20171120836848f459"
+        }
+      },
+      {
+        "path": "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+        "base": null,
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1b1f5d07c90112f1d971652bedc77852064a3502"
+        }
+      },
+      {
+        "path": "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+        "base": null,
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92"
+        }
+      },
+      {
+        "path": "action_server/tests/action_server_tests/test_database.py",
+        "base": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4fb9d29d6b6150edd4b99c78736e9e4b93f81d67"
+        },
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "758514fbb123e3c2bdebee6c6b317751aca8f885"
+        }
+      },
+      {
+        "path": "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt",
+        "base": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c4c5f19267d815986f141812527e97587fda6d62"
+        },
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f44efc6c01736ecead0e48e510d5f1c68587ef05"
+        }
+      },
+      {
+        "path": "action_server/tests/action_server_tests/test_p0_snapshot_reload_boundaries.py",
+        "base": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cad772f366c805c4f0fb88d18b481fdc3a9ccdab"
+        },
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "b2d3bd36293ccc05cf600337dbe56d014563d2fd"
+        }
+      },
+      {
+        "path": "docs/program/evidence/mcp-resource-history-cli-20261010.json",
+        "base": null,
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "74749d705d5318674a774946177f86689bbba29d"
+        }
+      },
+      {
+        "path": "docs/skills/repository-operations.md",
+        "base": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "66bef06142d4e3ceb9e90f2ea55d5f9bb19bfadb"
+        },
+        "merge": {
+          "mode": "100644",
+          "type": "blob",
+          "sha": "ef4dc288030e3683a479e1a424597de8559a30fb"
+        }
+      }
+    ],
+    "integration_scope_equal": {
+      "actions/": true,
+      "tasks/": true,
+      ".github/workflows/": true,
+      "action_server/frontend/": true
+    },
+    "note": "Git quoted non-ASCII path normalized; same mode/type/blob confirmed."
+  },
+  "scope_acceptance": "GO for reviewed PR292 concrete-resource owner-history correctness repair plus bounded startup-failure cleanup/test type correction against exact live prospective union. All three native/Go resource-history reload/restart cases and configured331-file gates pass; all19 exact-head checks and six workflows succeed. Prior reviewed source/PostgreSQL evidence remains retained. Historical failed/cancelled jobs remain unchanged.",
+  "limits": [
+    "PR open/draft; no reviewer merge, retarget, publication or close. Root must recheck live refs before normal merge.",
+    "Full #126/Runtime release/authorization/Package v3/#134 acceptance separate; no whole-issue completion.",
+    "Native build/upload success is workflow proof, not independently authenticated full downloaded artifact identity or publication.",
+    "History does not reconstruct unknown pre-upgrade routing or forward old callbacks; unchanged regex policy means storage/iteration bounds do not bound regex CPU.",
+    "Required/advisory policy UNKNOWN. Full #126 contract not audited here.",
+    "Full approved connector logs read only in session; bounded public-safe excerpts retained/hash-bound. No tests/services/native workers executed by reviewer."
+  ],
+  "documentation_improvement": {
+    "target": "docs/skills/repository-operations.md",
+    "exact_proposed_delta": "When PR payload base.sha is stale, bind admission to the live target Git ref and prospective merge ordered parents/tree. Verify tested workflow checkout names that exact union. Preserve prior failed or cancelled attempts; a later successful exact-union gate supersedes only the corresponding open gate, not unrelated issue or publication criteria.",
+    "evidence": "Live base193/ref-pull292-merge924 parents/tree; all three OS checkout924 and configured331 PASS; historical Windows failure receipt unchanged.",
+    "uncertainty": "Required policy and unrelated whole-issue gates outside scope."
+  },
+  "upstream_disposition": "none; no new confirmed defect/external mutation",
+  "commands": [
+    "Approved GitHub read-only PR/live refs/immutable commit/check-runs/workflowruns/threejoblogs/steps/recursive-tree",
+    "Local read-only git status/show/ls-tree and canonical/prior review reads",
+    "Standard-library excerpt/receipt SHA256; no raw logs retained"
+  ]
+}

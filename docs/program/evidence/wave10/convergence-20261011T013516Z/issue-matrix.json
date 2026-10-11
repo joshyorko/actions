@@ -1,0 +1,1533 @@
+{
+  "schema": "actions.operational-issue-matrix/v2",
+  "created_at_utc": "2026-10-11T01:35:16.902664+00:00",
+  "supersedes": {
+    "commit": "168013150d5e1718d07978d1e9b4c8c917e9fa3f",
+    "path": "docs/program/evidence/wave9/final-ledger-20261011T011916Z/issue-matrix.json",
+    "sha256": "0fd5d2bc4e11d75f93dda5d96a7e0969dcb4194318961d30027cd2e9668522aa",
+    "scope": "Operational state only; contracts, historical evidence and typed relationships preserved"
+  },
+  "classification_delta": {
+    "134": "Reviewed private source correction GO_COMPONENT; actual metadata remains NOT RUN and supervisor/controller prerequisite remains HOLD. This is an acceptance-prerequisite bucket, not a source defect completion claim."
+  },
+  "primary_buckets": {
+    "close_ready": [
+      162,
+      194,
+      209,
+      279
+    ],
+    "integrated_unaccepted": [
+      84,
+      91,
+      96,
+      97,
+      98,
+      125,
+      129,
+      151,
+      152
+    ],
+    "review": [
+      99,
+      100,
+      126,
+      127,
+      153,
+      195,
+      208,
+      212,
+      214
+    ],
+    "successors": [
+      71,
+      82,
+      83,
+      85,
+      86,
+      87,
+      90,
+      92,
+      93,
+      130,
+      131,
+      132,
+      133,
+      135,
+      136,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      196
+    ],
+    "release": [
+      211
+    ],
+    "advisory": [
+      149,
+      155
+    ],
+    "human": [
+      293,
+      294,
+      295,
+      296
+    ],
+    "coord": [
+      101
+    ],
+    "acceptance_prerequisites_blocked": [
+      134
+    ]
+  },
+  "rows": [
+    {
+      "issue": 71,
+      "title": "Add Action Canvas: a native MCP App foundry inside Action Server",
+      "contract_url": "https://github.com/joshyorko/actions/issues/71",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Native foundry boot/immutable revision lifecycle and actual host acceptance; consume named renderer/authoring/Run/Deployment/compiler slices, not whole parent closure.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 71,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "813ccb6edbe5c9fb7e71e5a12c215fbf5a7cb5f3066b7f35a071e2d1c4ceea2b",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 82,
+      "title": "Evolve Actions Runtime into a pluggable MCP-native capability runtime and lightweight control room",
+      "contract_url": "https://github.com/joshyorko/actions/issues/82",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Collapsed, split and genuine second-adapter verticals, immutable identity and complete architecture acceptance; release milestones cover only part of the roadmap.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 82,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "34581397b7cfa3c1bfae34e00ba2cf69808193381bc2d06c7d5d35543cc19dcd",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 83,
+      "title": "Make capability Run and Attempt ownership replica-safe across runtime adapters",
+      "contract_url": "https://github.com/joshyorko/actions/issues/83",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "open #299@4cad04ca, open #300@3cad4fd6",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Epoch-fenced Run/Attempt claims, crash/retry/cancel recovery and replica control; output-service PRs are partial. Latest proposed discrete slice is pending human review.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 83,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "1298aa79f3f97b620b657c08bd5eea2a8dcec0c82e84fbe4cc2125e846f80066",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 84,
+      "title": "Support one shared SQLite/PostgreSQL Database abstraction in actions-runtime",
+      "contract_url": "https://github.com/joshyorko/actions/issues/84",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "#109 foundation; open #306 SAVEPOINT fix",
+      "actual_state": "Integrated foundation; whole issue unaccepted",
+      "remaining_gate": "Full SQLite/PostgreSQL and packaged database matrix, TLS and failure paths. Actual PostgreSQL two-process migration passed; failed-SAVEPOINT PostgreSQL proof remains NOT RUN.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 84,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "17ae88bde7fa1006dd181d3ade0c8aefd87ffbf777ca31174674e4ddb46a62e6",
+        "unchanged": true
+      },
+      "primary_category": "integrated_unaccepted",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 85,
+      "title": "Back MCP Tasks with pinned capability Runs and runtime plans",
+      "contract_url": "https://github.com/joshyorko/actions/issues/85",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Long-running Action and Robot Tasks backed by one durable pinned Run model; cancellation, restart and cross-replica resume proof.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 85,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "7be3c40e2573938c1cf45e8c15e98bacb4ab56740c552b07ee90696551abb72b",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 86,
+      "title": "Make capability artifacts and large-result handles replica-safe",
+      "contract_url": "https://github.com/joshyorko/actions/issues/86",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "open #299@4cad04ca, open #300@3cad4fd6",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Authorized replica-readable opaque output handles, fenced sealing/cleanup and provider failure proof; PR299/300 are scoped foundations.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 86,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "b6e41d5fd4a6477cc176545a7f75dee33ba5b4b74f6b9478272a3324553eadc9",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 87,
+      "title": "Separate request context from Workspace-scoped bindings and runtime grants",
+      "contract_url": "https://github.com/joshyorko/actions/issues/87",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Request identity separated from immutable Workspace bindings/grants; cross-replica resolution and RCC plus second-adapter proof.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 87,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "e22809c4dd9d6b4504f7a1a91b01da2cf14e709ec595e67e3f22a7345100424e",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 90,
+      "title": "Separate capability execution ownership from Runtime request handling across adapters and placements",
+      "contract_url": "https://github.com/joshyorko/actions/issues/90",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Worker-owned execution independent of request lifetime, pinned plans and cross-replica stop/recovery across adapters/placements.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 90,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "a5ba8d028a061a1412bd70aaf2d68565fd288a3b31bbd2d2b990d55eeaa66a58",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 91,
+      "title": "Add MCP-native authorization and CIMD support",
+      "contract_url": "https://github.com/joshyorko/actions/issues/91",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "#250 design-only SDK/auth probe",
+      "actual_state": "Integrated foundation; whole issue unaccepted",
+      "remaining_gate": "Actual modern MCP client authorization/CIMD/issuer validation, negative cases and replica-safe auth. Merged SDK probe is design-only.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 91,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "b4c0d0313994dcd6e7c8bc0c37a0f8efd73e61bf0c5bf2edb7970d09f72137d6",
+        "unchanged": true
+      },
+      "primary_category": "integrated_unaccepted",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 92,
+      "title": "Implement durable capability interaction and human-review flows",
+      "contract_url": "https://github.com/joshyorko/actions/issues/92",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Durable authorized human-interaction transitions, disconnect/resume and cross-replica review ownership.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 92,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "bfceb5112808c598ea83bd4456491fcebe37b21fdf9a06c69c919582bee6c6b9",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 93,
+      "title": "Run the Actions Runtime frontend and product factory",
+      "contract_url": "https://github.com/joshyorko/actions/issues/93",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Aggregate UI child contracts and functioning packaged-backend journeys; this umbrella does not block child execution.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 93,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "170c3a3a09b949fe5ad344b5ffe9355459ae3b982f61750e453b7851f1ac99f6",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 96,
+      "title": "Refresh the Actions Runtime product shell and overview",
+      "contract_url": "https://github.com/joshyorko/actions/issues/96",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "#112 shell foundation",
+      "actual_state": "Integrated foundation; whole issue unaccepted",
+      "remaining_gate": "Packaged standalone route/deep-link families, mobile navigation and truthful degraded overview; merged shell is a foundation.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 96,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "95f3a6926f1c808ce2bfacf77dd6e8562138df82c53f7cc99956a58afbf0a095",
+        "unchanged": true
+      },
+      "primary_category": "integrated_unaccepted",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 97,
+      "title": "Establish the Actions UI system and offline visual quality gates",
+      "contract_url": "https://github.com/joshyorko/actions/issues/97",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "#114/#119 UI foundations",
+      "actual_state": "Integrated foundation; whole issue unaccepted",
+      "remaining_gate": "Actual responsive, keyboard/accessibility, offline/CSP, visual/performance and recovery journeys against packaged Runtime APIs.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 97,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "9a404411dcc26dcb377e0b127d4579f1db3eb6f1fa3bcf16b09df6eb595224e1",
+        "unchanged": true
+      },
+      "primary_category": "integrated_unaccepted",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 98,
+      "title": "Modernize the frontend toolchain and multi-artifact build pipeline",
+      "contract_url": "https://github.com/joshyorko/actions/issues/98",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "#115 toolchain foundation",
+      "actual_state": "Integrated foundation; whole issue unaccepted",
+      "remaining_gate": "Separate Runtime/Canvas inventories, deterministic multi-artifact builds, failure cases and actual packaged-browser acceptance.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 98,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "e5d6366ca768bcd85aa66a2be438c50e202c9927c06e8305c845b7d417a46924",
+        "unchanged": true
+      },
+      "primary_category": "integrated_unaccepted",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 99,
+      "title": "Build the shared CanvasSpec renderer and MCP App View foundation",
+      "contract_url": "https://github.com/joshyorko/actions/issues/99",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "accepted renderer slice; open #305 fixture correction",
+      "actual_state": "Awaiting scoped review/integration/acceptance",
+      "remaining_gate": "Full renderer/resource/bridge conformance and actual production host; one pinned browser proof and PR305 fixture correction are scoped evidence.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 99,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "957d1412f0cb1af0434ebb52eb99ac3be57f2fb42fdd4b4638b76f0426319b24",
+        "unchanged": true
+      },
+      "primary_category": "review",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 100,
+      "title": "Define Canvas authoring contracts in actions-core without package proliferation",
+      "contract_url": "https://github.com/joshyorko/actions/issues/100",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "#254 ADR, accepted public authoring and #301 serialization; Core1.0.3 published",
+      "actual_state": "Awaiting scoped review/integration/acceptance",
+      "remaining_gate": "Public authoring boundary and serialization slices are accepted; full rich-result, packaging and consumed schema/renderer contract still needs criterion-level acceptance.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "PR301 serialization slice merged at 4e8a26296608c232ce3dbd1f250ddb709b9459c9; this does not accept whole #100",
+      "publication_state": {
+        "state": "ACTIONS_CORE_1_0_3_PUBLISHED_VERIFIED",
+        "evidence": "/workspace/work/actions-mk3-evidence/core-publication/publication-readback.json",
+        "sha256": "59e553c61ae82bfcc29d89c5aafec5bcee7f30539d2b73c33ef86ca286748c39",
+        "note": "Separate component publication; no whole #100 acceptance."
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 100,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "7ecc079e380a695d8a8886bf175023c48b78819a32012650088ff4f5710fa995",
+        "unchanged": true
+      },
+      "primary_category": "review",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 101,
+      "title": "Run the Actions Runtime product, runtime-adapter, and control-room factory",
+      "contract_url": "https://github.com/joshyorko/actions/issues/101",
+      "owner": "Root coordinator/release owner",
+      "delivery": "open #221@19380993",
+      "actual_state": "Active coordination; full campaign remains open",
+      "remaining_gate": "Maintain the entire campaign and closure/residual audit; no completion from a release or merged child checkpoint.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 101,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "c62913f5aea92a03d5f39394be66a4ad529240d63dc60bb7c7ea06b2a028e240",
+        "unchanged": true
+      },
+      "primary_category": "coord",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 125,
+      "title": "cleanup: remove Data Server and private-tier product surfaces",
+      "contract_url": "https://github.com/joshyorko/actions/issues/125",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "#128 cleanup foundation",
+      "actual_state": "Integrated foundation; whole issue unaccepted",
+      "remaining_gate": "Finish active product/template/build/MCP surface acceptance; merged cleanup is retained and should not be reimplemented.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 125,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "84c024b2fe240e3e0f01f914bdba3ffd9613a69e04cea7f81a4b84512fa49238",
+        "unchanged": true
+      },
+      "primary_category": "integrated_unaccepted",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 126,
+      "title": "feat: add an MCP v2 capabilities showcase template",
+      "contract_url": "https://github.com/joshyorko/actions/issues/126",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "#262 protocol/#265 template checkpoints",
+      "actual_state": "Scoped PR292 native history repair accepted; whole showcase contract still unaccepted",
+      "remaining_gate": "Public capabilities showcase template: reviewed design, deterministic generated bundle, clean installed-wheel/template and real demonstration proof.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 126,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "51a7d0e02335aa285a653becf942dcc55adc45322c4c665655c349d7f0e5a623",
+        "unchanged": true
+      },
+      "primary_category": "review",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json",
+      "evidence": "PR292 head2f631e54 checked merge92498aff/tree80e5c775, all19 checks and three-OS native/history/typecheck proof; independent receipt1bc7578f2341fec3884ecc08da1c895a4ae40a84b41e9e671fc15b717c366cc9"
+    },
+    {
+      "issue": 127,
+      "title": "feat: add a community Canvas template",
+      "contract_url": "https://github.com/joshyorko/actions/issues/127",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "open #282 at66cc1323",
+      "actual_state": "Awaiting scoped review/integration/acceptance",
+      "remaining_gate": "Core1.0.3 is published; production resolver/template/workspace/private-output gates and actual ChatGPT template acceptance remain.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 127,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "26693f41244e70da16eb75cf9ac240d384ba18db6b63787c06376fb608778db6",
+        "unchanged": true
+      },
+      "primary_category": "review",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 129,
+      "title": "Define workspace-scoped capability deployments, runtime-plan selection, immutable revisions, and bindings",
+      "contract_url": "https://github.com/joshyorko/actions/issues/129",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "#250 design probe; open #299 partial grants",
+      "actual_state": "Integrated foundation; whole issue unaccepted",
+      "remaining_gate": "Production immutable Deployment identities, bindings/policy and migration/rolling-revision/replica proof; merged probe and output grants are partial.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 129,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "8b0b49ade2f5cd29dfa9dab0babc91c2fd7ebd36098ed3fad7ac32daaf9f7ff5",
+        "unchanged": true
+      },
+      "primary_category": "integrated_unaccepted",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 130,
+      "title": "Design Package v3 as an immutable capability bundle with pluggable runtime plans and exposure projections",
+      "contract_url": "https://github.com/joshyorko/actions/issues/130",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Package Revision schema/fixture boundary acceptance remains separate from production integration; resolve consumed Deployment identity criteria and complete portable runtime-plan/exposure contract.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 130,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "5fea0f4828c20faa32298d60083ca684b3b8225f0af6baea0d8fa4363dae4277",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 131,
+      "title": "Define an open provider-based data and knowledge plane for Actions",
+      "contract_url": "https://github.com/joshyorko/actions/issues/131",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Authorized local/offline and service-backed data/knowledge provider proof over immutable Package/Deployment identities.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 131,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "4aaf54cce742b4133a45ee948148a22c313df8097e22ad65485b0a865a99d1ae",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 132,
+      "title": "Define durable Work Item queue, lease, review, and workflow semantics over capability Runs",
+      "contract_url": "https://github.com/joshyorko/actions/issues/132",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Durable business Work Item queue/lease/review semantics over canonical Runs; independent from existing Work Items0.4.4 repair.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 132,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "1db3e8aee4c298fc35aee568eb5f142005fd9393919aea947e8818caa69056ee",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 133,
+      "title": "Use RCC/Holotree as the first full environment and execution adapter for Actions workers",
+      "contract_url": "https://github.com/joshyorko/actions/issues/133",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Worker RCC inspection/acquire/exec lifecycle and provider/lease proof over admitted immutable plans.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 133,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "7cfcdb618fc35203a0cacf64e37fc2696ad003f133c4391abbf3ec8b034d4c4c",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 134,
+      "title": "Integrate RCC Environment Artifacts and execution as the first local Runtime Adapter",
+      "contract_url": "https://github.com/joshyorko/actions/issues/134",
+      "owner": "Existing luna_pr302_portability, sourceHOLD; Sol private independent review",
+      "delivery": "Public source44afd960 retained; private source01f1a98c independently GO_COMPONENT, local only",
+      "actual_state": "Reviewed source component; actual acceptance prerequisites blocked",
+      "remaining_gate": "Actual metadata NOT RUN. Frozen-v6 supervisory deadline controller and its control tests remain unimplemented/HOLD; then independent pre-run admission and actual source-bound provider/artifact matrix.",
+      "closure_readiness": "MUST_REMAIN_OPEN",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 134,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "d4160af19d7a80b467f101d7414134406fa051d6ed4ad935accd1fe51252369d",
+        "unchanged": true
+      },
+      "primary_category": "acceptance_prerequisites_blocked",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json",
+      "current_delta_ref": "../convergence-followup-20261011T011425Z/README.md",
+      "evidence": "Private independent source receipt14598b2dcf3ecf66f3060bb700c9f91d2599f6bc7737b2c26a22fd77bc0843f7; no private payload published"
+    },
+    {
+      "issue": 135,
+      "title": "Compile current package directories into deterministic Package Revisions and runtime plans",
+      "contract_url": "https://github.com/joshyorko/actions/issues/135",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Deterministic package-to-revision/plan compiler, stable digests and metadata/import admission without machine-local identity.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 135,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "07b4524b30c0dabdf990a374a4c78ad6c9afdb2642796b8cb083be6eb866eaa7",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 136,
+      "title": "Define an immutable Package Revision registry/provider and worker-local source cache",
+      "contract_url": "https://github.com/joshyorko/actions/issues/136",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Immutable source registry/provider and worker-local cache, exact identity and corruption/mismatch rejection.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 136,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "8812f36639e9ead075dc7fe826ada97d0026ae1690f6c8e06de758d03d1f8a7f",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 138,
+      "title": "Define a versioned Runtime-to-worker protocol for pinned runtime plans, adapters, and placements",
+      "contract_url": "https://github.com/joshyorko/actions/issues/138",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Versioned worker protocol carrying exact plans, explicit decline/cancel/recovery and replica-safe control.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 138,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "9afdd59ce5c4203be48761ea82304282b75596bf792a92d2ea7b730f00d45edf",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 139,
+      "title": "Build exact-subject capability, runtime-adapter, admission, Deployment, and worker conformance",
+      "contract_url": "https://github.com/joshyorko/actions/issues/139",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Exact-subject conformance receipts from real operations, invalidation and no-fallback rejection, including a genuine second adapter.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 139,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "f522d635575963ab26eaf73c66bbdd438cb199a9a2d92820e374dd8e9da73d21",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 140,
+      "title": "Package and operate collapsed and split capability Runtime deployments safely",
+      "contract_url": "https://github.com/joshyorko/actions/issues/140",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Collapsed/split packaging and operation: backup, upgrade, health, worker and authorization acceptance.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 140,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "a83da2aee36817f0851bdee6bfc3673351c2be82e192b8c21fca8f385d39c2cc",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 141,
+      "title": "Define deterministic capability workflows over pinned runtime plans and Work Items",
+      "contract_url": "https://github.com/joshyorko/actions/issues/141",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Deterministic pinned workflow nodes, durable lineage, Work Item ownership and recovery.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 141,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "b5c29cba880f014805832ef598f28264d7e9902126d13dcef109b42b6f73a993",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 142,
+      "title": "Prove Robot Task execution across runtime adapters and local, container, and worker placements",
+      "contract_url": "https://github.com/joshyorko/actions/issues/142",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Real Robot adapter-by-placement matrix with explicit unsupported cells and process-tree proof.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 142,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "33cbac7943a286bf33d76ede684e83d46c39e33d87befdeac0e9f1e0bb6ca7e1",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 143,
+      "title": "Define pluggable capability runtime adapters, shared admission, execution requirements, and preflight",
+      "contract_url": "https://github.com/joshyorko/actions/issues/143",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Shared admission/preflight adapter contract from real RCC plus genuine second-adapter implementation and conformance.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 143,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "a7a0bbc131ae212e7cd1c0cc7a8a37249ad26e65d2ea553857fb565bc1431959",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 144,
+      "title": "Make Robot Tasks a first-class capability kind independent of runtime adapter",
+      "contract_url": "https://github.com/joshyorko/actions/issues/144",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Normal multi-task robot.yaml compiled into first-class immutable capabilities; common Run identity independent of adapter.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 144,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "f590b8962d8668fdcfebd556fbdfdc5a967d9e2495be3520264f607fde5a6032",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 145,
+      "title": "Evolve Actions Runtime into a lightweight control room with a unified Run Composer",
+      "contract_url": "https://github.com/joshyorko/actions/issues/145",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Unified Run Composer/Control Room consumes authoritative capability admission and real Robot/Run/Work Item evidence.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 145,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "7ab0e82f0774b0a96cb2050ef6ef326f3920cf07e554e7acf1a892f77f9dc610",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 146,
+      "title": "Add one adapter-aware Actions Runtime CLI for capabilities, Robots, and development tasks",
+      "contract_url": "https://github.com/joshyorko/actions/issues/146",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "One authoritative CLI for capability/Robot/dev tasks, automatic RCC provisioning and standalone Robot execution.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 146,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "eefac147b16763e4802dbbd16df770d4b651aa38f0a400b9d49551db6b2b400a",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 147,
+      "title": "Add typed internal capability invocation with pinned runtime plans and parent-child Runs",
+      "contract_url": "https://github.com/joshyorko/actions/issues/147",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Typed internal invocation, exact child plans/Runs and authorization/parent-child lineage across adapters.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 147,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "93ca82e88727777675017c6711b7dbbc237f7704e8101863ede6b4f6fe6d3fb9",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 148,
+      "title": "Harden package import and compile Robot/runtime metadata into immutable Package Revisions",
+      "contract_url": "https://github.com/joshyorko/actions/issues/148",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Complete secure acquisition and immutable package compiler integration; selected-source confinement is partial. Latest proposed slice remains pending human review.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 148,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "d43ca044e8ce9ce905a34470bb2f6568befb2622becb43074515d7550361c8f6",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 149,
+      "title": "🐝 Hive Advisory Report",
+      "contract_url": "https://github.com/joshyorko/actions/issues/149",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Advisory/quality contract; acceptance unproved",
+      "remaining_gate": "Living advisory record; human determination of disposition. No blanket execution labels or implementation completion inferred.",
+      "closure_readiness": "Requires human determination",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 149,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "7f339f2e3378bf0572f6535738aba3029f51554dbd65d749ce4a433038ce4513",
+        "unchanged": true
+      },
+      "primary_category": "advisory",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 151,
+      "title": "[security] Reject unsafe Robot ZIP package-root selection and bound archive staging",
+      "contract_url": "https://github.com/joshyorko/actions/issues/151",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "#200/#250 bounded importer/staging",
+      "actual_state": "Integrated foundation; whole issue unaccepted",
+      "remaining_gate": "Remaining archive root/source identity, actual network/publication and Windows permission/ACL proof; bounded merged staging does not prove full contract.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 151,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "e8f594671959e82db87ed8ea7de966295c827f3cb39daadf240fe8a0127b2d03",
+        "unchanged": true
+      },
+      "primary_category": "integrated_unaccepted",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 152,
+      "title": "[security] Enforce configured API-key authorization across admin routers and artifact delivery",
+      "contract_url": "https://github.com/joshyorko/actions/issues/152",
+      "owner": "Root acceptance/integration; original implementation lane retained",
+      "delivery": "#199 foundation; open #309 census",
+      "actual_state": "Integrated foundation; whole issue unaccepted",
+      "remaining_gate": "Complete assembled request/mount authorization matrix with missing/wrong/valid keys and zero side effects. PR309 census is partial and currently has isort CI failures.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 152,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "c58dd4c2ac0b665f6cd67ad51f0629f30670bf0c0df603823b68d462fd222970",
+        "unchanged": true
+      },
+      "primary_category": "integrated_unaccepted",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 153,
+      "title": "[security] Constrain browser origins and credentialed CORS with explicit deployment policy",
+      "contract_url": "https://github.com/joshyorko/actions/issues/153",
+      "owner": "Root acceptance/integration; original implementation lane retained",
+      "delivery": "#201 policy foundation; actual Linux native browser evidence",
+      "actual_state": "Awaiting scoped review/integration/acceptance",
+      "remaining_gate": "Actual Linux frozen/Go Origin browser cases passed; remaining auth modes, platform/deployment policy, CORS and full owning contract remain unaccepted.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 153,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "f87bd84a74eef446e1a67cbcc5e067aca5bb1080d1e21fb76463f6a7ed8f111a",
+        "unchanged": true
+      },
+      "primary_category": "review",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 155,
+      "title": "[strategist] Establish a release and compatibility roadmap for the expanding runtime architecture",
+      "contract_url": "https://github.com/joshyorko/actions/issues/155",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Advisory/quality contract; acceptance unproved",
+      "remaining_gate": "Independent public roadmap/compatibility review and truthful dated registry/native claims; scanner origin does not waive roadmap acceptance.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 155,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "3ba8fdca26f2761fcaa820a22a10d9c23367393f36735c95c376adcda318e395",
+        "unchanged": true
+      },
+      "primary_category": "advisory",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 162,
+      "title": "[ACMM L0] Add Coverage gate",
+      "contract_url": "https://github.com/joshyorko/actions/issues/162",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "merged #227 real coverage gate",
+      "actual_state": "Accepted narrow contract; integrated",
+      "remaining_gate": "Explicit owner closure action recommended; no further technical gate found in the narrow contract.",
+      "closure_readiness": "Close-ready recommendation; no closure action taken",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 162,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "09725e2a6edb5b7b9c0773df8eaa1bf49508b546898b6a7fcee8a8f5022c77ad",
+        "unchanged": true
+      },
+      "primary_category": "close_ready",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 194,
+      "title": "[quality] Add coverage for command dispatch and variable-scope error paths",
+      "contract_url": "https://github.com/joshyorko/actions/issues/194",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "integrated command/scope regressions; current Core/coverage CI",
+      "actual_state": "Accepted narrow contract; integrated",
+      "remaining_gate": "Explicit owner closure action recommended; no further technical gate found in the narrow contract.",
+      "closure_readiness": "Close-ready recommendation; no closure action taken",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 194,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "43496e2b9e8e7c8b9e1d9fceff7fc3be1ed3f9a79677552811ab6e27c391f4f5",
+        "unchanged": true
+      },
+      "primary_category": "close_ready",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 195,
+      "title": "[architect] Action Server depends on private actions-core modules across a versioned package boundary",
+      "contract_url": "https://github.com/joshyorko/actions/issues/195",
+      "owner": "Existing luna_pr282_template, actual proof complete; Sol independent GO, PR311 CI/integration gate",
+      "delivery": "integrated public Core/server-owned JSON migration and source guard",
+      "actual_state": "Bounded installed-wheel proof accepted; awaiting failing current-head CI and normal integration",
+      "remaining_gate": "PR311 c888fb4a Windows integration failed two readiness waits; cause UNKNOWN. Preserve accepted Linux installed-wheel proof; remaining current-head CI/normal integration required.",
+      "closure_readiness": "MUST_REMAIN_OPEN",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 195,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "5dc53629cfcf1348b2cfafff5c4ee09ba50a5a1e8acde0292b2f61f16da24274",
+        "unchanged": true
+      },
+      "primary_category": "review",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json",
+      "current_delta_ref": "../convergence-followup-20261011T011425Z/README.md",
+      "evidence": "Public independent actual-wheel receipt273a7876ca58f1e027dad11e92473d1c9943f72f855338992b6d2d3f7e267a31; current triage inpr311-triage/triage.json"
+    },
+    {
+      "issue": 196,
+      "title": "Make Actions Runtime a one-click host for the RCC Environment Artifact provider",
+      "contract_url": "https://github.com/joshyorko/actions/issues/196",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked/scoped successor; full implementation not established",
+      "remaining_gate": "Real managed RCC provider start/status/stop/readiness and auth/tunnel lifecycle acceptance after consumed safety criteria.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 196,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "13ec0d086e569fc55992151a649debcf3ad6eac3492991b9acb5be3489f2a6d7",
+        "unchanged": true
+      },
+      "primary_category": "successors",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 208,
+      "title": "fix(work-items): restore standalone loading and truthful Work Items error UX",
+      "contract_url": "https://github.com/joshyorko/actions/issues/208",
+      "owner": "Existing luna_core_release_preflight, reviewed typing repair pushed; PR310 CI gate",
+      "delivery": "#256 integrated consumer repair; open #310 UI acceptance",
+      "actual_state": "SCOPED_TYPING_REPAIR_REVIEWED_PUSHED_HOSTED_CI_PENDING",
+      "remaining_gate": "Reviewed PR3107c98534a:20success,1publishskip,1Windows devmode in progress at01:28:37; full generic500/missingSupport/crash/accessibility/nonChromium and actualChatGPT remain NOT RUN.",
+      "closure_readiness": "MUST_REMAIN_OPEN",
+      "integration_state": "PR304 was merged as integration commit 19380993febaa71238eaee3026b5c808773283ff; the tested three-OS subgate is integrated evidence, not full #208 acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 208,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "25cada9cee4ac8ca8aad7e47df4fbe58b010239d88dc3bd64f40cc2c97d26b9c",
+        "unchanged": true
+      },
+      "primary_category": "review",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json",
+      "current_delta_ref": "../convergence-followup-20261011T011425Z/README.md"
+    },
+    {
+      "issue": 209,
+      "title": "fix(ci): diagnose unexpected disconnect in assembled WebSocket Origin test",
+      "contract_url": "https://github.com/joshyorko/actions/issues/209",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "integrated fixture cause/repair; exact a8fe hosted primary proof",
+      "actual_state": "Accepted narrow contract; integrated",
+      "remaining_gate": "Explicit owner closure action recommended; no further technical gate found in the narrow contract.",
+      "closure_readiness": "Close-ready recommendation; no closure action taken",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 209,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "c9cbf271124d20fac773f4203ba474cc167341e5d33aae0cbfa2966c9676ce92",
+        "unchanged": true
+      },
+      "primary_category": "close_ready",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 211,
+      "title": "fix(release): align Actions-side native handoffs with community distribution",
+      "contract_url": "https://github.com/joshyorko/actions/issues/211",
+      "owner": "Root coordinator/release owner",
+      "delivery": "integrated community release safeguards; open #307 changelog fix",
+      "actual_state": "Release/distribution gated",
+      "remaining_gate": "Core1.0.3/Helper1.0.3 registry artifacts verified. Runtime1.0.3 publication, three native binaries/checksums/downloads and owning Homebrew install/upgrade proof remain.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "publication_state": {
+        "state": "CORE_1.0.3_PUBLISHED_VERIFIED; ACTIONS_RUNTIME_1.0.3_ABSENT; NATIVE_HOMEBREW_GATED",
+        "evidence": [
+          "/workspace/work/actions-mk3-evidence/core-publication/publication-readback.json",
+          "/workspace/work/actions-mk3-evidence/core-release-readiness/runtime-readiness-corrected.json"
+        ],
+        "note": "Component publication is separate from #211 Actions Runtime distribution acceptance."
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 211,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4",
+        "unchanged": true
+      },
+      "primary_category": "release",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 212,
+      "title": "bug(ui): Runtime 1.0.1 Runs fails JSON parsing; oversized run list and same-origin WebSocket 403",
+      "contract_url": "https://github.com/joshyorko/actions/issues/212",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Awaiting scoped review/integration/acceptance",
+      "remaining_gate": "Final large/legacy stored-run history and WebSocket/JSON journeys on released/assembled artifacts across supported OS; summary/benchmark slices are partial.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 212,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "5d7d93486a73760e299fb77de1eb2f69f282b8253603b02cc7708373cb307a31",
+        "unchanged": true
+      },
+      "primary_category": "review",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 214,
+      "title": "feat(expose): make tunnel providers a first-class Runtime lifecycle",
+      "contract_url": "https://github.com/joshyorko/actions/issues/214",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Awaiting scoped review/integration/acceptance",
+      "remaining_gate": "Inspectable standalone exposure lifecycle, side-effect-free discovery, real provider/TLS and remote-edge cleanup/failure proof.",
+      "closure_readiness": "Must remain open",
+      "integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 214,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "408f3eae150a25fc660b5b4b86e283a47c66e30dd8b13ddbe62ba269be08f347",
+        "unchanged": true
+      },
+      "primary_category": "review",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 279,
+      "title": "Preserve sibling packages during multi-directory actions-sync startup",
+      "contract_url": "https://github.com/joshyorko/actions/issues/279",
+      "owner": "Root acceptance/integration; original implementation lane retained",
+      "delivery": "merged #273 at1c8585d5; current three-OS tests",
+      "actual_state": "Accepted narrow contract; integrated",
+      "remaining_gate": "Explicit owner closure action recommended; no further technical gate found in the narrow contract.",
+      "closure_readiness": "Close-ready recommendation; no closure action taken",
+      "integration_state": "PR273 source/test/docs integrated at 1c8585d5; related PRs may add broader independent scope",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 279,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "9266780c5e193f6ce09bdb33524e6ccda367566d89398e7be432abf07482fcf8",
+        "unchanged": true
+      },
+      "primary_category": "close_ready",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 293,
+      "title": "Acknowledge successful 2xx asynchronous callback responses",
+      "contract_url": "https://github.com/joshyorko/actions/issues/293",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked by explicit human review",
+      "remaining_gate": "Explicit pending human review; no implementation dispatch. Callback acknowledgement/retry contract remains open.",
+      "closure_readiness": "Requires human determination",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 293,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "d01401f8b3b096e6192d24e6b4672608116a3c9d108b77b71aac91b426292b86",
+        "unchanged": true
+      },
+      "primary_category": "human",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 294,
+      "title": "Preserve socket constructor failures in worker listener setup",
+      "contract_url": "https://github.com/joshyorko/actions/issues/294",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked by explicit human review",
+      "remaining_gate": "Explicit pending human review; no implementation dispatch. Original socket error and cleanup/native startup proof remain open.",
+      "closure_readiness": "Requires human determination",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 294,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "b9d1e61de63d006f5aac99a5e934b4a2f4e412f6235883dba575e8be752d05d0",
+        "unchanged": true
+      },
+      "primary_category": "human",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 295,
+      "title": "Clear the process-pool reference after exceptional context exit",
+      "contract_url": "https://github.com/joshyorko/actions/issues/295",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked by explicit human review",
+      "remaining_gate": "Explicit pending human review; no implementation dispatch. Pool cleanup/global ownership proof remains open.",
+      "closure_readiness": "Requires human determination",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 295,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "fc4406aa4ec3b59e378aa8822cf653cd91e4245ca4ce532d3c4a9dd9e34ccac3",
+        "unchanged": true
+      },
+      "primary_category": "human",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    },
+    {
+      "issue": 296,
+      "title": "Deliver completion callbacks whenever the client receives an async response",
+      "contract_url": "https://github.com/joshyorko/actions/issues/296",
+      "owner": "Recorded coordinator: Root; current implementation worker unconfirmed",
+      "delivery": "No current direct delivery verified; references/history retained in JSON",
+      "actual_state": "Blocked by explicit human review",
+      "remaining_gate": "Explicit pending human review; no implementation dispatch. Async callback decision/race controls remain open.",
+      "closure_readiness": "Requires human determination",
+      "integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "acceptance_and_typed_relationship_authority": {
+        "source": "docs/program/evidence/issue-closure-audit-20261010/operator-issue-matrix.json",
+        "row_issue": 296,
+        "matrix_sha256": "20b3f7961c5a16920622b2c9479ab83d8207fb909237b88d22fb6bfadd75f941",
+        "original_contract_sha256": "4e8554a8ad9738fd94d35f56503cd7a57b23d2c7bf48a6410940936189045740",
+        "unchanged": true
+      },
+      "primary_category": "human",
+      "source_evidence_ref": "../convergence-20261011T010854Z/issue-status-overlay.json"
+    }
+  ],
+  "primary_count": 58,
+  "active_source_writers": {
+    "observed_at_utc": "2026-10-11T01:33:00Z",
+    "count": 1,
+    "owner": "existing Luna template lane",
+    "scope": "PR290 ordinary source refresh; no PR merge/retarget; #299/#300 still blocked by normal predecessor integration"
+  },
+  "current_head_ci_lanes": {
+    "count": 1,
+    "scope": "PR310 Windows devmode still in progress at01:28:37; PR292 completed green, PR311 completed failed"
+  },
+  "automatic_closures": "UNKNOWN",
+  "premature_closure_risks": "UNKNOWN",
+  "distinct_blockers": "UNKNOWN",
+  "actual_integration_ready_prs": "UNKNOWN",
+  "scoped_candidates": [
+    282,
+    292,
+    302,
+    305,
+    307,
+    309
+  ],
+  "observed_held_pr_scopes": [
+    221,
+    290,
+    299,
+    300,
+    306,
+    308,
+    310,
+    311
+  ],
+  "root_admitted_prs": 0,
+  "worker_state": "Bounded existing Cloud lanes continue. No new coordinator/implementation threads; 0 Dakota writers, Devsy DISABLED.",
+  "upstream_disposition": "none"
+}

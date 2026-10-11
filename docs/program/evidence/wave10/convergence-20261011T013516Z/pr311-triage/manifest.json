@@ -1,0 +1,24 @@
+{
+  "schema": "ci-triage-manifest/v1",
+  "created_at_utc": "2026-10-11T01:27:06Z",
+  "directory": "/workspace/work/actions-mk3-evidence/wave9/ci-pr311-windows-devmode-triage-20261011T0127Z",
+  "artifacts": {
+    "triage.json": {"sha256": "6dea505e69af243ba585228182f8a984027469049edfe14ef35bd4a88c6919d5", "mode": "0600"},
+    "triage.md": {"sha256": "6c82fca9c83f7bd6b8d3e9bef28485aac366e312034be45ef5f0f58c03d4ac5d", "mode": "0600"}
+  },
+  "read_only_sources": [
+    "GET https://api.github.com/repos/joshyorko/actions/actions/runs/38099013706",
+    "GET https://api.github.com/repos/joshyorko/actions/actions/runs/38099013706/jobs",
+    "GET workflow job logs for 114350853595",
+    "GET https://api.github.com/repos/joshyorko/actions/commits/07c2091",
+    "local git object inspection for base 19380993febaa71238eaee3026b5c808773283ff and PR head c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca"
+  ],
+  "source_commands": [
+    "git show -s --format='%H%n%P%n%s' c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+    "git diff --name-status 19380993febaa71238eaee3026b5c808773283ff...c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+    "git merge-base --is-ancestor 19380993febaa71238eaee3026b5c808773283ff c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+    "git rev-parse <head>:<path> <base>:<path> for _selftest.py and the two failing test files",
+    "git status --porcelain=v1"
+  ],
+  "limitations": ["No rerun or reproduction", "No infrastructure or product-cause attribution", "Documentation delta proposed only", "No upstream issue/report created"]
+}
