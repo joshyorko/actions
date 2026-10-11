@@ -1,4 +1,4 @@
-"""Verify the fixed Linux frozen artifact used by catalog rollback acceptance."""
+"""Verify the measured Linux frozen artifact used by catalog acceptance."""
 
 from __future__ import annotations
 
@@ -17,17 +17,23 @@ from archive_native_artifact_provenance import (
     _verify_tar,
 )
 
-EXPECTED_BUILD_SOURCE = "056d32601563a213643436e7df14e6ca0ea50516"
-EXPECTED_BUILD_TREE = "d2ef7229651b6120db5cfa5995c65942ef768da8"
-EXPECTED_CANDIDATE = "31239cf99c7b264a0eab89660e93b391532ac305"
-EXPECTED_CANDIDATE_TREE = "d2ef7229651b6120db5cfa5995c65942ef768da8"
-EXPECTED_RUN = "38039806634"
+EXPECTED_BUILD_SOURCE = "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e"
+EXPECTED_BUILD_TREE = "80e5c77513f6abf5d07005ee3aee47d49efd927f"
+EXPECTED_CANDIDATE = "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+EXPECTED_CANDIDATE_TREE = "80e5c77513f6abf5d07005ee3aee47d49efd927f"
+EXPECTED_RUN = "38098225250"
 EXPECTED_RUN_ATTEMPT = "1"
-EXPECTED_TREE = "ee7cdb5eae9a04042bc476034bb9ed327d51fa705cce70abf8426454fe3d6e6f"
-EXPECTED_BINARY = "0509dfc3c193ba8ca0221603a9f2444091a558aabbb886a957e89a22cf073dc3"
-EXPECTED_WRAPPER = "28cf80cb1d2811236ed64595b8b9d03a54d1904d63497eb39f34fb9bd67978f3"
-EXPECTED_MANIFEST = "7b75b64d160fa73ca14728437a2cc07aebdccf58d450d83b9745245001a33538"
-EXPECTED_INVENTORY = "4e61388ef1ae7f2348391b28a42cf63427fdefcd3fbdda2703d6844c4fe6afca"
+EXPECTED_ARTIFACT_ID = "11686643166"
+EXPECTED_ARCHIVE_SIZE = 59410740
+EXPECTED_ARCHIVE_SHA256 = "0905c4734d6b636a5a465e0a958cf8bc4521b5047a68da473830b95821b7c8c0"
+EXPECTED_MEASUREMENT_RECEIPT = "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff"
+EXPECTED_TREE = "739838962d9d29f873932e13d2598d51ebba58b0f97c2c52fff8550004f06ae0"
+EXPECTED_BINARY = "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb"
+EXPECTED_EMBEDDED_FILES = "576d6cb8e5a8637dcfd82f675384d638736509541a0e10877420151b61c4786b"
+EXPECTED_MANIFEST = "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44"
+EXPECTED_INVENTORY = "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf"
+EXPECTED_INVENTORY_ENTRIES = 1192
+RESOURCE_HISTORY_TEST_BLOB = "534e51afbc75b4d3ce473dee37d7ac00d52dbc92"
 
 
 def _sha256(path: Path) -> str:
@@ -64,7 +70,10 @@ def verify(provenance_tar: Path, destination: Path, output: Path) -> Path:
         ):
             raise ValueError("native provenance metadata hashes do not match candidate")
         inventory = json.loads(inventory_bytes)
-        if not isinstance(inventory, list):
+        if (
+            not isinstance(inventory, list)
+            or len(inventory) != EXPECTED_INVENTORY_ENTRIES
+        ):
             raise ValueError("native provenance inventory is invalid")
         archive.extractall(destination, filter="data")
 
@@ -107,7 +116,8 @@ def verify(provenance_tar: Path, destination: Path, output: Path) -> Path:
         or _sha256(tree / "action-server") != EXPECTED_BINARY
         or manifest["artifacts"]["frozen"].get("frozen_package_tree_sha256")
         != EXPECTED_TREE
-        or manifest["artifacts"]["go-wrapper"].get("sha256") != EXPECTED_WRAPPER
+        or manifest["artifacts"]["frozen"].get("embedded_files_sha256")
+        != EXPECTED_EMBEDDED_FILES
     ):
         raise ValueError("frozen catalog artifact provenance does not match candidate")
 
@@ -118,11 +128,18 @@ def verify(provenance_tar: Path, destination: Path, output: Path) -> Path:
         "native_build_source_tree": EXPECTED_BUILD_TREE,
         "workflow_run_id": EXPECTED_RUN,
         "workflow_run_attempt": EXPECTED_RUN_ATTEMPT,
+        "native_artifact_id": EXPECTED_ARTIFACT_ID,
+        "native_artifact_size": EXPECTED_ARCHIVE_SIZE,
+        "native_artifact_sha256": EXPECTED_ARCHIVE_SHA256,
+        "native_artifact_archive_hash_checked": True,
+        "native_byte_verification_receipt_sha256": EXPECTED_MEASUREMENT_RECEIPT,
+        "resource_history_test_blob": RESOURCE_HISTORY_TEST_BLOB,
         "manifest_sha256": EXPECTED_MANIFEST,
         "inventory_sha256": EXPECTED_INVENTORY,
         "package_tree_sha256": manifest["artifacts"]["frozen"][
             "frozen_package_tree_sha256"
         ],
+        "embedded_files_sha256": EXPECTED_EMBEDDED_FILES,
         "binary_sha256": EXPECTED_BINARY,
         "binary_path": str((tree / "action-server").resolve()),
     }

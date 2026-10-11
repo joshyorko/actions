@@ -417,8 +417,10 @@ def test_v12_migration_creates_empty_history_matching_fresh_schema(tmp_path):
         expected_indexes = db.list_indexes()
         with db.transaction():
             db.execute("DROP TABLE mcp_catalog_name")
+            db.execute("DROP TABLE mcp_resource_routing")
             db.execute(
-                "UPDATE migration SET id=12, name='reconcile_run_columns' WHERE id=13"
+                "UPDATE migration SET id=12, name='reconcile_run_columns' WHERE id=?",
+                [CURRENT_VERSION],
             )
     assert migrate_db(path, CURRENT_VERSION)
     with load_db(path) as db:
