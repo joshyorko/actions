@@ -357,6 +357,15 @@ packaged-browser and published-artifact receipts separate, recording the exact
 candidate SHA and PASS, FAIL, BLOCKED or NOT_RUN. Skipped publication is not
 publication success. Recheck dependency sequencing against each retained
 contract before implementation; a cross-reference alone is not a blocking edge.
+
+A sanitized private checkpoint containing commit/tree identities, receipt
+hashes and historical bundle-verification results does not contain recoverable
+source. Before resuming that lane in another workspace, verify the actual
+required bundle chain and prerequisites, exact restored commit/tree, and
+separately frozen runner/specification bytes. If those bytes are absent and
+remote private durability was not established, keep implementation and
+execution on HOLD. A newly authorized replacement policy needs a new identity;
+do not represent it as recovery of the prior frozen policy.
 For a stacked PR, review the full diff from its actual merge base rather than
 relying on its title or last commit. When a reviewed component is integrated
 separately from a combined candidate, compare the candidate's synthetic merge
@@ -2260,24 +2269,82 @@ commit from being mistaken for the source under test. The test
 `test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable`
 requires `ACTIONS_REAL_RCC_ARTIFACT_TEST=1` and an
 `ACTIONS_RUNTIME_RCC_BINARY` whose RCC v18.19.3 bytes match the pinned SHA-256.
-The workflow selects that one test with xdist disabled, uses the normal Action
-Server developer install path, and uploads a sanitized receipt/source-hash
-summary even if the test fails. Its ordinary-suite skip is not acceptance
-evidence.
+The generated workflow selects rollback, publication-details and staged-consumer
+tests with xdist disabled and uses the normal Action Server developer install
+path. It preserves raw lifecycle and publication receipts alongside sanitized
+summaries and JUnit evidence even if a test fails. An ordinary-suite skip is
+not acceptance evidence.
 
-The admission summary fails closed unless JUnit records exactly one passed,
-non-skipped test, with suite totals matching the actual testcase result
-elements and the expected rollback test name/module; the lifecycle receipt is
-`PASS` and binds to the checked-out
+A retained specialized RCC workflow can pin an older candidate and case set
+than the latest accepted hosted proof. Before scheduling it, inspect the exact
+generator/control revision, immutable candidate commit/tree, selected case
+identities and retained receipt inventory. Inheriting that workflow in a newer
+engineering branch does not make it test that branch. Keep earlier execution
+evidence under its original candidate/control identities; a refreshed gate
+needs its own reviewed tuple and receipt. Retained three-case run `38106813502`
+used control `ff6842223068bb34811990a417aa280331acbb6a` and candidate
+`665468112f1593249449278cf2113c155a6ec6e3`, tree
+`d729a43127c048c7fb35133d2a4b07bc53635402`. Preserve that execution under
+those identities. After the accepted target advances, commit and review the
+ordinary source union on the existing PR branch before creating a separate
+control child that pins that source commit and tree. A newer control that still
+checks out the old candidate does not establish execution of the new union.
+Keep the three case identities, RCC bytes, summary predicates, raw uploads and
+branch permissions unchanged. Record a new hosted execution for the new tuple
+and require full CI on its exact tested merge. Production input changes also
+require new frozen-artifact qualification; compare the retained producer
+inventory without excluding changed files. The control permits only pushes to
+the original opt-in branch
+`test/rcc-provider-rollback-hosted-20261010` and the existing reviewed PR branch
+`fix/rcc-published-artifact-details-20261010`, subject to the retained path filter.
+Local service-free control tests establish admission behavior, not an actual
+RCC artifact execution. Record a new hosted run before claiming acceptance of
+this candidate, and retain earlier receipts under their original identities.
+
+The three-case admission summary fails closed unless JUnit records exactly
+three passed, non-skipped tests, with suite totals matching the actual testcase
+result elements and the expected rollback/publication-details/staged-consumer
+names and modules; the lifecycle receipt is `PASS` and binds to the checked-out
 candidate commit/tree; imported runtime modules originate from and hash-match
 that candidate; both the runtime RCC and Action Server's default RCC path match
 the pinned version and digest; provider-operation snapshots and expected
 persisted Run results agree; and natural shutdown has an observed pre-cleanup
 return code of 0 or 1, followed by an observed cleanup return code, without
 forced stop or observed surviving owned descendants. The always-run summary
-executes from the workspace root and uploads only sanitized evidence, so a
-skipped test, missing receipt, inconsistent JUnit counters, or failed checkout
-cannot appear green.
+executes from the workspace root. Publication admission binds the source and
+control commit/tree, one RCC invocation, a credential-free loopback provider,
+the raw JSON hash and the specification/artifact digest pair. Retain the original
+`lifecycle-receipt.json` as well as `lifecycle-summary.json`: a reconstructed
+summary cannot establish the exact original receipt bytes. A skipped test,
+missing receipt, inconsistent JUnit counters or failed checkout cannot appear
+green.
+
+Independent admission review must hash the original artifact ZIP and compare
+retained lifecycle, publication, staged-consumer and JUnit bytes with its members
+before relying on a sanitized summary. The single-invocation guarantee binds
+the specification/artifact digests in the publication-details case; the rollback
+lifecycle and staged-consumer cases own separate environments and providers.
+This staged consumer pins published Core 1.0.2 and does not establish a Core
+1.0.3 consumer gate. An empty captured descendant snapshot proves only that no
+captured process survived, not complete descendant reaping.
+
+The three-case summary authenticates nine named source files under its recorded
+candidate commit and tree. Compare those hashes to the immutable candidate,
+not to the control checkout. They do not replace review of the complete resolved
+source union or the full native producer inventory: a changed production input
+outside that sample still requires new artifact qualification. Keep the full
+suite's tested merge identity separate from both source and control, even when
+its tree equals the control tree. Checks attached to an older control, and raw
+receipts naming its older candidate, do not qualify a later target union.
+
+The public Linux three-case receipt establishes scoped rollback,
+publication-details and staged-consumer acceptance only. It does not complete
+the retained #134/#135 contracts, prove Core 1.0.3 consumption, or qualify
+Windows RCC. The original private `01f1a98c`/`fafb` bundle chain and frozen-v6
+specification/runner remain required and unavailable; private metadata stays
+NOT_RUN/HOLD. Retain each earlier receipt with its original candidate, control
+and artifact identities while the new source union and separate control gate
+await their own results.
 
 The admission-summary tests execute both synthetic RCC paths to verify version
 and digest checks. These fixtures need a host-native executable format: a
@@ -2444,6 +2511,23 @@ environment fingerprint exactly matches the current normalized package inputs;
 it is reacquired by Artifact digest and never by a persisted executable or
 materialization path. RCC acquire results must include exact identity and
 `verification.valid == true`; missing or invalid verification fails closed.
+
+RCC v18.19.3 `env publish --json` returns the canonical `specificationDigest`
+and `artifactDigest` together. Code that needs both must preserve them from that
+single response through `publish_artifact_details()`; do not substitute the
+Actions-local environment fingerprint for RCC's specification identity. The
+legacy `publish_artifact()` API intentionally continues to parse artifact-only
+responses for existing callers; use the details API when specification identity
+is required, and fail closed if either canonical digest is absent, malformed,
+or conflicts with another identity in the same payload.
+The details API preserves RCC-reported metadata; it does not verify complete
+package-source selection or compile a Package Revision. A real-RCC receipt for
+this API must pin a source containing the details implementation; earlier
+artifact-only receipts do not exercise it. The managed publication-details
+case records the candidate and control commit/tree, RCC version and binary
+hash, one invocation, and the exact JSON response alongside both parsed
+digests. This proves the metadata returned by that publication only; it is not
+evidence that the complete source tree was selected or compiled.
 
 The gated real proof is run with the released RCC binary and explicit gate:
 
@@ -2784,6 +2868,11 @@ skipped because no task-owned managed provider is configured is NOT RUN, not
 acceptance evidence. This exercises one selected package through the current
 Runtime consumer; it does not prove complete source selection, source
 authorization, compiler/admission trust, or any package identity API.
+The consumer's test-only SQLite catalog creates its private data directory
+before opening the database and registers `get_all_model_classes()` so schema
+additions such as `McpCatalogName` are included. Keep a service-free SQLite
+fixture test for this setup separate from the RCC-managed action execution
+proof, so missing fixture prerequisites fail without provisioning RCC.
 On 2026-10-10 the immutable consumer-gate candidate advanced from
 `f7c6ed61f24fd9e98d1465c83042c5446466311b`, which predates this test and is
 not eligible to run it, to `d376399f497fb98f47062e493219e063db8f08e1`
