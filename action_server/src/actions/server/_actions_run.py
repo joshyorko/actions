@@ -3,6 +3,7 @@ import json
 import logging
 import time
 import typing
+from dataclasses import replace
 from typing import Any, Callable, Dict, Protocol, Tuple
 
 from fastapi import HTTPException, Request, Response
@@ -118,7 +119,6 @@ def _update_run(run: "Run", initial_time: float, run_finished: bool, **changes):
     db = get_db()
     changes_repr = []
     for k, v in changes.items():
-        setattr(run, k, v)
         if k == "result":
             changes_repr.append(f"{k!r}: <redacted>")
         else:
@@ -130,7 +130,23 @@ def _update_run(run: "Run", initial_time: float, run_finished: bool, **changes):
 
     log.info(f"Updating run {run.id} with changes: {changes_str} (see: {url})")
     with db.transaction():
-        db.update(run, *fields_changed)
+        # Legacy execution cannot bypass the common scoped Run/Attempt fence.
+        from .run_outputs.service import FenceRejected
+
+        with db.cursor() as cursor:
+            db.execute_update_returning(
+                cursor,
+                "UPDATE run SET status=status WHERE id=? AND NOT EXISTS "
+                "(SELECT 1 FROM run_pin WHERE run_pin.run_id=run.id) RETURNING id",
+                [run.id],
+            )
+            if not cursor.fetchall():
+                raise FenceRejected("scoped Run requires common Attempt fencing")
+        updated = replace(run, **changes)
+        db.update(updated, *fields_changed)
+
+    for key, value in changes.items():
+        setattr(run, key, value)
 
     # Ok, transaction finished properly. Let's update our in-memory cache.
     global_runs_state = get_global_runs_state()
