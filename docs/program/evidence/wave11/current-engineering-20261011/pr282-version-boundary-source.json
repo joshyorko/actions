@@ -1,0 +1,200 @@
+{
+  "actual_gate_or_rerun_performed": false,
+  "base": "811c826addf662c3a7de23d27c5f1014ecd3c6a3",
+  "branch": "feat/canvas-template-20261010",
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md",
+    "Durable_learning": "Use receipt-equivalent checked/text/captured/10s subprocess stdout.strip at expectedversion measurement boundary; full brandedversion equality is unchanged. Reasoncode identifiespredicate only, not unavailable comparisonvalues orcause. PytestcasePASS andsyntheticJUnitadmissionFAIL distinct.",
+    "Evidence": "retainedlocal observation901a/raw2d44, corrected actualshellRED, unchangedvalidatorGREEN83 andfinalToolkit145; existing9635 diagnostic38PASS/1FAIL; byte/ASTproof",
+    "Remaining_uncertainty": "Hostedcomparedvalues/sourceCI/native/fullconsumer admission pending; local mechanism is not provenhostedcause; no priorproof relabel",
+    "Stale_ambiguity_removed": "Bash newline removal equals stdout.strip; matching binarydigest explains version strings; latestnamedpredicate identifiesolder0d failure; pytestPASS meansreceiptadmission",
+    "exact_delta": {
+      "bytes": 2078,
+      "path": "/workspace/engineering/pr282-version-canonical-delta.patch",
+      "sha256": "17adcb01cb0b57668a3fba734550558cd65558cb1ad864dda93a7d6c70dea2d7"
+    }
+  },
+  "head": "a0b8816a17b50aae5af1372cf89f71640fa10d3b",
+  "hosted_current_diagnostic": {
+    "independent_receipt": {
+      "bytes": 8102,
+      "path": "/workspace/engineering/pr282-current-811-failure-review/independent-current-failure-review.json",
+      "sha256": "9635a7dcdad8658639b8cf977216aacd93d678df3308c410d765873110faa25b"
+    },
+    "meaning": "9635 failure code browser_version only,38other checksPASS; hosted compared strings/cause unavailable. Original0d failed predicate/rawpresence remainUNKNOWN."
+  },
+  "implementation_commit": "2c8dc4afbc97539777e29059e5e6a95f8453282d",
+  "local_observation": {
+    "meaning": "Existing local fullChrome stdout41B ends SPACE+LF; Bash40chars vs receipt strip39chars. No new browser invocation by this writer.",
+    "receipt": {
+      "bytes": 614,
+      "path": "/workspace/engineering/pr282-browser-version-owned/version-observation.json",
+      "sha256": "901a31d63f8465cd69ead965ea7982bf917c55e2bd5c2e2f72a4aaa34e091467"
+    },
+    "stderr": {
+      "bytes": 0,
+      "path": "/workspace/engineering/pr282-browser-version-owned/original-version-stderr.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 41,
+      "path": "/workspace/engineering/pr282-browser-version-owned/original-version-stdout.bin",
+      "sha256": "2d44e8c7507ca1c7cefc2fff277ee234d5d87be645dd56bee1b3ffca6564e529"
+    }
+  },
+  "logs": {
+    "doctor": {
+      "bytes": 13485,
+      "path": "/workspace/engineering/pr282-version-doctor.log",
+      "sha256": "c47ac37cfdcd604111759dd8f1da0cf99835a879cfaac3778fc9098655a8180e"
+    },
+    "final-green": {
+      "bytes": 4811,
+      "path": "/workspace/engineering/pr282-version-final-green.log",
+      "sha256": "cadd4e265bf684e3acb4446482e3e20133c3ef30ea80e9fe0d6438e639b15556"
+    },
+    "final-proof": {
+      "bytes": 7036,
+      "path": "/workspace/engineering/pr282-version-final-proof.log",
+      "sha256": "5ad1bb23c6e98c89481265e31db069a9d388ee7e3f5b2bec6b21f3823c00bdd1"
+    },
+    "final-toolkit": {
+      "bytes": 14423,
+      "path": "/workspace/engineering/pr282-version-final-toolkit.log",
+      "sha256": "1b7f92f2c5bacde08272de55f07ded7943d6d22d25cb3f1e97ac4785863d02fb"
+    },
+    "frozen-proof": {
+      "bytes": 7145,
+      "path": "/workspace/engineering/pr282-version-frozen-proof.log",
+      "sha256": "b0c2efc35998c0a9834c4eb1c1133aaa17c1469267b374e31a9d94339d8dc7ce"
+    },
+    "frozen-toolkit": {
+      "bytes": 14425,
+      "path": "/workspace/engineering/pr282-version-frozen-toolkit.log",
+      "sha256": "47deaef17b1259a9785fdd3c6e144cf83b418ac3d477f131c7562d0a44e307f2"
+    },
+    "green": {
+      "bytes": 4809,
+      "path": "/workspace/engineering/pr282-version-green.log",
+      "sha256": "01c24e93c59318b6340859fcf6171d412029eb8270bad7bd77da33430f06a581"
+    },
+    "proof": {
+      "bytes": 7036,
+      "path": "/workspace/engineering/pr282-version-proof.log",
+      "sha256": "17087660a9a85259e1d7fb785f04ee454dca203dc3460fb6a2dbe5c46225fb29"
+    },
+    "red": {
+      "bytes": 10684,
+      "path": "/workspace/engineering/pr282-version-red.log",
+      "sha256": "1f079a6a3ab4f2ba25d6773a61f30bde497ef3d4ccd254e687bda99228d367cb"
+    },
+    "red-corrected": {
+      "bytes": 8036,
+      "path": "/workspace/engineering/pr282-version-red-corrected.log",
+      "sha256": "a35995726f4bc4c5a755719131b05c8ffc38068361d45fbe061cd5b6796f2718"
+    },
+    "static": {
+      "bytes": 5694,
+      "path": "/workspace/engineering/pr282-version-static.log",
+      "sha256": "0b4d36471dca9b67d5ec8830c2c1cf74564fbd7e172642f3eea3df94c0790a53"
+    },
+    "toolkit": {
+      "bytes": 14424,
+      "path": "/workspace/engineering/pr282-version-toolkit.log",
+      "sha256": "ab07101c65de90287faa1267270858d0a26a0bf7470753cc9742bf38d7ad19f6"
+    }
+  },
+  "parents": [
+    "2c8dc4afbc97539777e29059e5e6a95f8453282d"
+  ],
+  "preservation": {
+    "all39_predicates_unchanged": true,
+    "all_other_tracked_leaves_preserved_by_diff": 1400,
+    "base": "811c826addf662c3a7de23d27c5f1014ecd3c6a3",
+    "bootstrap_reuse": {
+      "all_input_bytes_equal": true,
+      "input_paths": [
+        "action_server/poetry.lock",
+        "action_server/pyproject.toml",
+        "action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml",
+        "actions-http-helper/poetry.lock",
+        "actions-http-helper/pyproject.toml",
+        "actions/poetry.lock",
+        "actions/pyproject.toml",
+        "actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml",
+        "build_common/poetry.lock",
+        "common/poetry.lock",
+        "developer/setup.yaml",
+        "developer/setup_windows_amd64.yaml",
+        "developer/toolkit.py",
+        "developer/toolkit.yaml",
+        "devutils/bin/develop.bat",
+        "devutils/bin/develop.sh",
+        "devutils/poetry.lock",
+        "devutils/pyproject.toml",
+        "mcp/poetry.lock",
+        "tasks.py",
+        "templates/advanced/pyproject.toml",
+        "work-items/poetry.lock",
+        "work-items/pyproject.toml"
+      ],
+      "inputs_count": 23,
+      "log": "/workspace/actions-cloud/receipts/pr282-writer/bootstrap.log",
+      "log_sha256": "e21cf7c8b2b5f3be97f05f99728e96c2b5c1c3fb2e563f70feca0a4bdff58e3c",
+      "source": "71f60ee8b931cb968866db5a8f45ba2056d18ed8",
+      "source_receipt": "/workspace/actions-cloud/receipts/pr282-writer/source-checkpoint-receipt.json",
+      "source_receipt_sha256": "c42dd6954ca86280fd79c14220aeac597a0a493788373cab77017f664f3a2494"
+    },
+    "dependabot_byte_equal": true,
+    "expected_preflight": "browser_version=\"$(poetry_cmd run python -c 'import os, subprocess; browser_version = subprocess.run([os.environ[\"CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH\"], \"--version\"], check=True, capture_output=True, text=True, timeout=10).stdout.strip(); assert browser_version, \"Browser version is empty\"; print(browser_version)')\"",
+    "full_generated_YAML_policy_only_expected_measurement_change": true,
+    "generator_AST_only_one_expected_version_measurement_change": true,
+    "head": "a0b8816a17b50aae5af1372cf89f71640fa10d3b",
+    "helper_sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e",
+    "no_native_or_browser_gate_execution": true,
+    "seven_other_outputs_byte_equal": {
+      "actions_core_tests.yml": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296",
+      "actions_runtime_binary_release.yml": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64",
+      "actions_runtime_frozen_catalog_rollback.yml": "518e370eb63213ca70a684102dfcf4c7a6c98733744b82dfb0fb2afedf9ff175",
+      "actions_runtime_pypi_release.yml": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+      "actions_runtime_rcc_provider_rollback.yml": "066adce2531a5223720661afce2f6485d7493243c10156eb1d84e624e252ac92",
+      "actions_runtime_recovery.yml": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f",
+      "http_helper_tests.yml": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8"
+    },
+    "shared305_frozen_helper_sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e",
+    "tracked_changed_paths": [
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_tests.yml",
+      "developer/tests/test_canvas_published_workflow.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "tree": "83fbb11a942f99c2dea8f6ca3d56f88604e3de38",
+    "validator_and_failure_diagnostics_byte_equal": true,
+    "validator_sha256": "b627e9d4409ce0db4b0568c26e78dcfbb6326054957cd5316fc9ae344e7205c2"
+  },
+  "push_performed": false,
+  "source_proof": {
+    "bytes": 3625,
+    "path": "/workspace/engineering/pr282-version-frozen-source-proof.json",
+    "sha256": "bc7be8b8e70bd90adf746f3ff8b543a74751ebabc438bc40aa1e2bc8cac247b5"
+  },
+  "status": "FROZEN_SOURCE_MEASUREMENT_FIX_PENDING_INDEPENDENT_REVIEW_NO_PUSH",
+  "tests": {
+    "Bootstrap": "authorizedreuse original successful71f log and23 byteequal inputs",
+    "Doctor": "PASS freshcanonicalRCC18.19.3",
+    "clean_RED": "actual generated old shellpreflight + unchanged validator:3FAIL/3PASS/76deselect; SPACE+LF/SPACE+CRLF andempty failed expected",
+    "final_Toolkit": "145PASS including83 scoped tests andnumeric-only poison withfullbrandpreserved",
+    "full_configured_static": "invoke lint Ruffcheck/format299+IsortPASS; invoke typecheck331PASS; Markdownlintunavailable",
+    "initial_RED": "5FAIL/1PASS included2 test diagnostic-key errors, correctedbeforeimplementation; retainedlog",
+    "limitations": "No actualnative/browser/registry gate, no hostedrerun/fullRuntime acceptance; current source/CI/native admission remainsHOLD",
+    "roundtrip": "all8 workflows generated; other7 anddependabot byteidentical; affectedparsedYAML onlypreflightexpectedmeasurementdelta",
+    "scoped_GREEN": "83PASS including all39 unchanged predicate anddiagnostic poisons"
+  },
+  "tree": "83fbb11a942f99c2dea8f6ca3d56f88604e3de38",
+  "upstream_disposition": "none; local measurement-contract mismatch, no established upstream defect",
+  "verification_script": {
+    "bytes": 4529,
+    "path": "/workspace/engineering/pr282-version-frozen-verify.py",
+    "sha256": "ae3e1b9b28c1c34e50404a5c4327b35b69adbf53156b12d349539e02b79db42b"
+  }
+}

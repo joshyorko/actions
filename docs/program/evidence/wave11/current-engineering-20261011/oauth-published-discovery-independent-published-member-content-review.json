@@ -1,0 +1,88 @@
+{
+  "verdict": "GO_SCOPED_HISTORICAL_PUBLIC_WHEEL_CONTENT_DISCOVERY; HOLD_OAUTH_FALLBACK_SOURCE_AUTHORITY_AND_RUNTIME_PUBLICATION",
+  "scope": "read-only original local metadata/wholewheel/member bytes and safe AST; no redownload/install/import/execute/source mutation or release action",
+  "public_metadata": {
+    "path": "/workspace/engineering/oauth-released-source-discovery/runtime-102-public-metadata.json",
+    "bytes": 13731,
+    "sha256": "8d68488a53daef12a611dbbf1ca3cd0e7dfeb8f62e1b5cc5c84a65d45978a706"
+  },
+  "selected_candidate_record": {
+    "filename": "actions_runtime-1.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+    "size": 14095731,
+    "sha256": "9aef9ec55c17d90ec11a32d8d4da694def92502ba46a73621c35267f230873d3",
+    "packagetype": "bdist_wheel",
+    "python_version": "cp312",
+    "yanked": false,
+    "url_class": "HTTPS files.pythonhosted.org public distribution; no credentials/query/fragment"
+  },
+  "original_whole_wheel": {
+    "path": "/workspace/engineering/oauth-released-source-discovery/actions_runtime-1.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+    "bytes": 14095731,
+    "sha256": "9aef9ec55c17d90ec11a32d8d4da694def92502ba46a73621c35267f230873d3"
+  },
+  "internal_distribution_metadata": {
+    "name": "actions-runtime",
+    "version": "1.0.2"
+  },
+  "generated_member": {
+    "path": "actions/server/_oauth2_config.py",
+    "bytes": 287,
+    "sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe",
+    "single_unique_zip_member": true,
+    "AST_schema": "one Assign to FILE_CONTENTS mapping, no executable member evaluation",
+    "payloads": {
+      "actions_config": {
+        "type": "str",
+        "bytes": 0,
+        "blank": true,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "default_user_config": {
+        "type": "str",
+        "bytes": 0,
+        "blank": true,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "existing103_comparison": {
+    "selected_whole_wheel": {
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/linux-cp312-input/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14165635,
+      "sha256": "0f366268f7590e2c0002b8f7e67325810d0d5374775c657b19195c80da48eaaa"
+    },
+    "generated_member_byte_for_byte_equal": true,
+    "historical103_producer": "12340bb17/tree80e5 retained38105853105 artifact11690296318; not relabeled as published"
+  },
+  "original_discovery_receipt": {
+    "path": "/workspace/engineering/oauth-released-source-discovery/generated-member-discovery.json",
+    "bytes": 1153,
+    "sha256": "9f2e498ccd7c7a744d2d486c15b6bd0a3bd93c61437f8da38daed497fc910f06"
+  },
+  "original_candidate_selection": {
+    "path": "/workspace/engineering/oauth-released-source-discovery/linux-cp312-candidates.json",
+    "bytes": 495,
+    "sha256": "fd556834806570b73ab4b120a3ed3a521288e991f74476ae53c737a38d449436"
+  },
+  "limits": [
+    "Retained public metadata digest binds observed wheel bytes, not source authority, source revision, clean build or approved providers.",
+    "Selected Linuxcp3121.0.2 member only; no claim for all predecessor platforms/native binaries or full published release.",
+    "Both expected config strings empty: no valid nonblank structurally admitted OAuth source pair can be recovered here.",
+    "Identical historical empty member bytes do not establish why acquisition failed or how1.0.2 was produced.",
+    "No fallback, guessed repository/provider/disabled mode, successful skip, private metadata substitution or publication waiver.",
+    "Existing narrow Runtime1.0.3 installed-wheel/floor GO remains unchanged and separate from generated-content HOLD."
+  ],
+  "canonical_documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_proposed_delta": {
+      "path": "/workspace/engineering/oauth-released-source-independent-review/canonical-published-content-recovery-proposal.md",
+      "bytes": 2363,
+      "sha256": "5802a929e0c05fad5a06ad4daee2d164f93fbd0311cb0a199af7d42304c25a5b"
+    },
+    "disposition": "PROPOSED read-only scoped recovery lesson; no repo mutation",
+    "evidence": "retained PyPI metadata, measured9aef wholewheel, unique287-byte f79d generated member/safe AST and byte-equal existing0f366wheel",
+    "stale_ambiguity": "published content is approved source/fallback; published version implies complete generated configuration; incorrect assumed assignment schema",
+    "remaining_uncertainty": "owner-approved source pair/revision/provider requirements and other platform/release qualification",
+    "upstream": "none"
+  }
+}

@@ -1,0 +1,285 @@
+{
+  "verdict": "HOLD_RECEIPT_ADMISSION",
+  "source": {
+    "head": "811c826addf662c3a7de23d27c5f1014ecd3c6a3",
+    "tested_merge": "cd1f9b2552104d90ccd8cb57bcafc860c949f4c1",
+    "tree": "5faa4af62f31e9a467c670dfe71391c3699aabf7",
+    "ordered_parents": [
+      "fbde0d3a248c47c9964851355f96575c89a87329",
+      "811c826addf662c3a7de23d27c5f1014ecd3c6a3"
+    ]
+  },
+  "run": 38110901705,
+  "attempt": 1,
+  "job": 114386072523,
+  "artifact": {
+    "id": 11691279905,
+    "original_zip_bytes": 1093,
+    "original_zip_sha256": "eb2825bf898cb895af0f662d47bb935d14a9efde32c2432f7fff669f37f2f7fd",
+    "members": [
+      {
+        "name": "published-core-failure-diagnostics.json",
+        "bytes": 4369,
+        "sha256": "08a3f546255767fdffeaaa4bfa909427e51d8bf2aac6f0bbfdc3c89689609f1b"
+      },
+      {
+        "name": "junit.xml",
+        "bytes": 390,
+        "sha256": "acdd5f8d5162f443daf42f3bf21c035285233ff5ddc28b5e51ed0e2d6e0382dd"
+      }
+    ]
+  },
+  "diagnostics": {
+    "admission": {
+      "junit": "PASS",
+      "pytest": "PASS",
+      "receipt": "FAIL"
+    },
+    "checks": [
+      {
+        "code": "scope",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "source_identity",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "declared_core_version",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "registry_wheel_digest",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "worker_core_version",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "worker_module_hashes",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "worker_prefix_absolute",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "worker_module_inventory",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "worker_modules_contained",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_origin",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_module_digest",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_args_list",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_args_count",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_interpreter_absolute",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_module_entry",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_wrapper_reaped",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_live_descendants_empty",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_readers_empty",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_zombies_empty",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_snapshot_complete",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_reap_complete",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_cleanup_errors_empty",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "runtime_calls",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "template_digest",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "package_manifest_digest",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "resource_digest",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "browser_status",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "browser_explicit_selection",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "browser_version",
+        "failure_class": "NONE",
+        "status": "FAIL"
+      },
+      {
+        "code": "browser_preflight_digest_valid",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "browser_digest",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "browser_selected_path",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "browser_temp_removed",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "browser_temp_absolute",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "browser_temp_absent",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "browser_playwright_version",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "browser_lock_digest",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "limits_list",
+        "failure_class": "NONE",
+        "status": "PASS"
+      },
+      {
+        "code": "limits_count",
+        "failure_class": "NONE",
+        "status": "PASS"
+      }
+    ],
+    "counts": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 1
+    },
+    "receipt_read": {
+      "code": "NONE",
+      "status": "PARSED"
+    },
+    "status": "FAIL"
+  },
+  "verification": {
+    "all_39_codes_order_match_exact_source": true,
+    "pass": 38,
+    "fail": 1,
+    "unavailable": 0,
+    "raw_receipt_read": "PARSED",
+    "original_pytest_exit": 0,
+    "original_case_counts": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 1
+    },
+    "sanitized_junit_synthetic_admission_failures": 1,
+    "raw_receipt_uploaded": false,
+    "cause": "UNKNOWN: compared version strings absent; failed equality identified only",
+    "historical_0d_failed_predicate": "UNKNOWN; no relabel",
+    "browser_source_comparison": "Workflow captures selected executable --version stdout using shell command substitution; test records stdout.strip(). This static representation difference does not establish the actual compared strings or a measured cause."
+  },
+  "log": {
+    "path": "/workspace/engineering/current-admission-review/original-job-logs/282_runtime_linux_failure.log",
+    "sha256": "3daf1d4f7148e9ababd12ce029c3ed283ecd889d137e04d3113721e9af49b576"
+  },
+  "limits": [
+    "No native fix, retry, cleanup/hash/source waiver or full Canvas/ChatGPT/frozen acceptance.",
+    "The38PASS rows are independent observations after rejection, not proof of original short-circuit order.",
+    "Test success does not clear strict receipt admission."
+  ],
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "exact_patch": "/workspace/engineering/pr282-current-811-failure-review/canonical-failure-predicate-proposed.patch",
+    "patch_sha256": "85895762e06f9406b17a343fffd280aa5a45bf40fcb389d9e02158bedbc26631",
+    "durable_learning": "Distinguish parsed version-equality rejection from absent raw evidence, and original test success from synthetic JUnit admission failure.",
+    "evidence": "Original artifact11691279905/run38110901705/job114386072523 and exact811 validator/test source; immutable ZIP/member hashes above.",
+    "stale_or_ambiguous_guidance_removed": "Generic unknown-only reasoning is refined for a newly measured code without transferring it to older failures or attributing an unavailable cause.",
+    "remaining_uncertainty": "Actual compared version strings, source of mismatch, historical0d failed predicate, and fresh current whole-CI admission remain open."
+  },
+  "upstream_disposition": "none"
+}

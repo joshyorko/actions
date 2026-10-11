@@ -1,0 +1,308 @@
+{
+  "verdict": "GO_NORMAL_PUSH_EXACT80BA_CURRENT_UNION_SOURCE_CONTROL; HOLD_FRESH_HOSTED_MERGE_REAL_NATIVE_BACKEND_ARTIFACT_AND_RELEASE_ACCEPTANCE",
+  "scope": "read-only ordinary refresh/source preservation/evidence review; no gate rerun/native/provider/browser/build/PR300/source mutation",
+  "source": {
+    "head": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+    "tree": "3c78f95d814fe2603f40169783fc3c4a84cd6315",
+    "parent": "a99c21df257949006f0e55e14243e2fcac27c138",
+    "merge_tree": "8f078167da6aa2308f01b828409b6502123f4f14",
+    "ordinary_merge_ordered_parents": [
+      "9cb61c52fce35201221b55707d73da9e9b0840a6",
+      "fbde0d3a248c47c9964851355f96575c89a87329"
+    ],
+    "same_original_branch": "feat/shared-run-output-20261010",
+    "clean": true
+  },
+  "independent_union": {
+    "common_ancestor": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+    "nonconflicting_parent_leaves_checked": 1415,
+    "only_conflict": [
+      "docs/skills/repository-operations.md"
+    ],
+    "complete_non_guide_tree_matches_existing_auto_merge_tree": true,
+    "both_parent_guide_additions_retained": true,
+    "original_changed_nondoc_paths": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py",
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py",
+      "action_server/tests/action_server_tests/mcp/test_alias_history.py",
+      "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+      "action_server/tests/action_server_tests/run_outputs/test_concurrency.py",
+      "action_server/tests/action_server_tests/run_outputs/test_filesystem.py",
+      "action_server/tests/action_server_tests/run_outputs/test_migration.py",
+      "action_server/tests/action_server_tests/run_outputs/test_service.py",
+      "action_server/tests/action_server_tests/test_artifact_storage.py",
+      "action_server/tests/action_server_tests/test_database.py",
+      "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt",
+      "action_server/tests/action_server_tests/test_database_shared.py",
+      "action_server/tests/action_server_tests/test_server_websockets.py"
+    ],
+    "original23_mode_blob_pairs_preserved": true,
+    "final_only_novel_delta": "20 canonical guide lines",
+    "followup_unchanged_blob_mode_pairs": 1415
+  },
+  "artifact_producer_scope": {
+    "retained_inventories_independently_mode_blob_sha_compared": [
+      {
+        "inventory": "producer-input-inventory.json",
+        "entries": 268,
+        "matches": 262,
+        "differences": [
+          {
+            "path": "action_server/src/actions/server/_actions_run.py",
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "3637cfcd94e5d91f0bf5b9b2fc4b3e94d4562826",
+              "sha256": "4e6d1c0be66939a3e87719f52f47083822506d1936a6c036d0f73ed522b5b702"
+            },
+            "current_original299_preserved": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "24fc844ad99c658d70f6f5069f0df250bb72ad87",
+              "sha256": "945fa1ce70ee4834410c8d37fd92372e6772aa8a1a0d128f4cada3035ddbd301"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/_api_analytics.py",
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "7f82f03353940b457fb5057e22e02a5c6f962197",
+              "sha256": "86df893f425a5910e4e9a242a3ee21a9e709600f3a6e45968fba76878cc0dcc7"
+            },
+            "current_original299_preserved": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "8b3177b995500ec111fbc79b8e7c8589319b1cd2",
+              "sha256": "7e18d7142655607645b526d3e3bde397f22fee874e21c789104a3cad0ca25bfb"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/_api_run.py",
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "424094841a29bd11d6bc7fb0f3b9e528573353d9",
+              "sha256": "0e4ff75583d1754b1c4e2bceb8e1b411718cf7ce3c4a066588ab25744f04a9c6"
+            },
+            "current_original299_preserved": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24",
+              "sha256": "be672635fc9cc000dc3d573a4a0e182d3e42f2d2f48f469b2b1ab27dd2dfc872"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/_models.py",
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb",
+              "sha256": "530cdbfe913495b9eaff54bc029ef1340840d1598aff205d3e6047ea4d296a73"
+            },
+            "current_original299_preserved": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "405304f2e593fdfe949b431851eb0dae39c6ab96",
+              "sha256": "bc9ad180099414005575b2d034741176f8d86b1b758f6bbf1c3e3b5497aadbf9"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/_runs_state_cache.py",
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "6428a201a110b8d1073fc3b5265d9282723de944",
+              "sha256": "0f5714321d4bb1af809b565efd48d4a96a7d66e93bb3967bc1cb3c5bed6cb73c"
+            },
+            "current_original299_preserved": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "3774e9a0e77d43e63a18733a4ff5652454ef06ce",
+              "sha256": "4b7fea14ad672f7f039ff63fc9b75b7195c4f7cb44f79d81b5dc8f3069f4ca7c"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/migrations/__init__.py",
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "cb68bcb4a2e41ecefcb5a409ce5c26065a505d05",
+              "sha256": "0bfc8983263177242f12a32824d88596f665fabcd08c96344709c9e00e1ce37e"
+            },
+            "current_original299_preserved": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "7889794dd3db1019bf4cdc179fa892c05943dc79",
+              "sha256": "c3001c1c3fa605c315b04c43b8dfd845495e3dc3773a0098be60d0d5efe931f6"
+            }
+          }
+        ]
+      },
+      {
+        "inventory": "selected-test-inventory.json",
+        "entries": 5,
+        "matches": 5,
+        "differences": []
+      }
+    ],
+    "additional_original299_production_paths_outside_historical268_inventory": [
+      {
+        "path": "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+        "blob_mode_kind": "100644 blob 3629ef55d42815acc7c1701bdd5b6949d3394ec6",
+        "sha256": "ebb773140f650555ac85628b9599363d6ec6b180841c86200a0fee622d4b9de4"
+      },
+      {
+        "path": "action_server/src/actions/server/run_outputs/__init__.py",
+        "blob_mode_kind": "100644 blob 6787c69b364901f1a1eed93e553ae8cfe4d194ef",
+        "sha256": "4c29ad35ab314ea4472025d453703b124a08262cfa24a51baf3a1a2ffb58ae38"
+      },
+      {
+        "path": "action_server/src/actions/server/run_outputs/filesystem.py",
+        "blob_mode_kind": "100644 blob 89170173dd0f1771e1a9923bb8532f2b28448dd1",
+        "sha256": "db8daf79dc0d2a06ecec9a2c3ab67319d6df420c2a44578948d46f2b558c5606"
+      },
+      {
+        "path": "action_server/src/actions/server/run_outputs/models.py",
+        "blob_mode_kind": "100644 blob ae75ceee659776fd51e1dda36528a22640afba19",
+        "sha256": "c69318f6893484156fba1002f8372711fc83e32e56d0e29c54e985cc26196065"
+      },
+      {
+        "path": "action_server/src/actions/server/run_outputs/service.py",
+        "blob_mode_kind": "100644 blob 55f5c09aeb0a3e9199b56916bb7fee41708b35c6",
+        "sha256": "46174068c6d5fb1609a38630fd460983c071a51a48bec4bb6ecdeff42446fe62"
+      },
+      {
+        "path": "action_server/src/actions/server/run_outputs/types.py",
+        "blob_mode_kind": "100644 blob cac30880373c26f648bb1c835fb74449f567cb22",
+        "sha256": "9195c6986edee9b2821e5e75c88a556ab4ef747eb065adb05b72b415165767d3"
+      }
+    ],
+    "old_frozen_artifact_carry": "NOT_QUALIFIED_FOR299; six changed plus six added producer inputs",
+    "selected_test_mode_blob_sha_matches": 5
+  },
+  "current_source_validation": {
+    "configured_nonintegration_pass": 1182,
+    "existing_skips": 13,
+    "warnings": 15,
+    "configured_lint": "PASS;308formatted",
+    "configured_typecheck_source_files": 344,
+    "focused_servicefree_pass": 189,
+    "existing_Windows_only_skip": 1,
+    "integration_deselected": 12,
+    "toolkit_pass": 69,
+    "all_generated_roundtrip_exact": 8,
+    "tested_source": "a99 ordinary merge with final20doc lines in workingtree; frozen80ba changes only guide and preserves all other1415mode/blobpairs",
+    "required_real_acceptance": "NOT_RUN",
+    "optional_Markdownlint": "unavailable as recorded by configured gate"
+  },
+  "worker_successor_receipt": {
+    "path": "/workspace/engineering/pr299-refresh-owned/successor-receipt.json",
+    "size": 22519,
+    "sha256": "0982b641af073a82c4105aa02538f7e21b219faf35e89d3f2818b9c96c5f5d52"
+  },
+  "verified_original_raw_evidence": {
+    "doctor.log": {
+      "path": "/workspace/engineering/pr299-refresh-owned/doctor.log",
+      "size": 13485,
+      "sha256": "d158025c10c9e01c6ed4804ec3067eef1267ec40170e4ae67fbc7f4e3366189e"
+    },
+    "bootstrap.log": {
+      "path": "/workspace/engineering/pr299-refresh-owned/bootstrap.log",
+      "size": 14145,
+      "sha256": "8bdeac2f153ad303d8c3b68743517072374630ef3af2b488fb52824a006fab69"
+    },
+    "toolkit-test.log": {
+      "path": "/workspace/engineering/pr299-refresh-owned/toolkit-test.log",
+      "size": 14342,
+      "sha256": "855363aed61bce507b7afa42761d97ce8fc5194cd26e426b46ecdf212b98c38a"
+    },
+    "scoped-shared-run.log": {
+      "path": "/workspace/engineering/pr299-refresh-owned/scoped-shared-run.log",
+      "size": 4318,
+      "sha256": "53e72540f2117809755290b7444fdec6f9e26439be8b9d2487849fd912664bb3"
+    },
+    "configured-gates.log": {
+      "path": "/workspace/engineering/pr299-refresh-owned/configured-gates.log",
+      "size": 305948,
+      "sha256": "76f0c22250dce74654d6d2be32703822720c6f366569b5b60f69d0a8c5becbf4"
+    },
+    "union-receipt.json": {
+      "path": "/workspace/engineering/pr299-refresh-owned/union-receipt.json",
+      "size": 8687,
+      "sha256": "594929a11d6a19058208c8110d93a2607d12b72b2c34270b06d34d5a31110297"
+    },
+    "preservation-receipt.json": {
+      "path": "/workspace/engineering/pr299-refresh-owned/preservation-receipt.json",
+      "size": 349,
+      "sha256": "4c34f7974028ae1d09210622513bdf6dc99fab3eb72bdd7c3a8f7ee4c3ea9658"
+    },
+    "frozen-producer-comparison.json": {
+      "path": "/workspace/engineering/pr299-refresh-owned/frozen-producer-comparison.json",
+      "size": 6113,
+      "sha256": "3774d1b2d0798ab2ee35fe182b8a3c1ae2994bae245d1ac6e38229b8cb976045"
+    },
+    "workflow-roundtrip.log": {
+      "path": "/workspace/engineering/pr299-refresh-owned/workflow-roundtrip.log",
+      "size": 4463,
+      "sha256": "25d2741904f0ab09f98f23b7f381c66cc4e396b6949adde7031e6ab2dd39e16b"
+    },
+    "workflow-roundtrip-receipt.json": {
+      "path": "/workspace/engineering/pr299-refresh-owned/workflow-roundtrip-receipt.json",
+      "size": 1806,
+      "sha256": "e1af148596cf24f950fa9aa66cdd238a68267612f90a4d6cf35acf1ebf287bbf"
+    }
+  },
+  "historical_windows_receipts_preserved": {
+    "299": {
+      "path": "/workspace/engineering/pr299-windows-independent-diagnosis.json",
+      "size": 7249,
+      "sha256": "4eef69f680caf8891a6c2749b345f753cf5b9d71bc3f4e8e4b3301e9bff406b8"
+    },
+    "311_original": {
+      "path": "/workspace/engineering/pr311-original-windows-independent-review/original-hosted-diagnostic-review.json",
+      "size": 18731,
+      "sha256": "81b819b9eb7a4d25bb46e0517b27bc303f78b80c32c7df89a6da4198967afe95"
+    }
+  },
+  "held_gates": [
+    "Fresh exact80ba complete hosted checks/reviews/merge gates; no prior green carry.",
+    "Old2999cb FIRSTnative startup90timeout/89.28variables/89.259previous-mark sum and incomplete20cleanup remain historical; current311d75pass is separate and does not clear299.",
+    "Original3111151sixFIRSTstartupfailures/two samplednodes remain separate; historical cause/cleanup dimensions not proven.",
+    "Current299 has six changed and six added production inputs relative to retained frozenartifact, so source/nativeartifact qualification requires actual new tuple.",
+    "Real PostgreSQL/backend/currentnative/browser/provider/private acceptance remains unqualified.",
+    "PR300 dependent refresh/integration must retain its accepted dependency order; this source review does not change300.",
+    "Private01f/fafb and frozenv6spec/runner release gates remain HOLD; no publication claim."
+  ],
+  "canonical_documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "canonical_binding": {
+      "path": "/workspace/engineering/pr299/docs/skills/repository-operations.md",
+      "size": 232072,
+      "sha256": "7d132e0bc9db3c844db3ed82b0867b27d5556b5ec11bf2eac04a1995d1411538"
+    },
+    "exact_integrated_delta": {
+      "path": "/workspace/engineering/pr299-independent-current-review/canonical-current-union-source-scope.patch",
+      "size": 2019,
+      "sha256": "38126051092f739693008a78af0e8281bb656ad9490471bb3ab609cebfce0d76"
+    },
+    "disposition": "INTEGRATED exact80ba doconly20line followup retaining both parent lessons",
+    "durable_learning": "RCC18.19.3 elapsed fields are previous-mark intervals; preserve complete series/caller/owned cleanup dimensions and source-bound failures through ordinary refresh",
+    "evidence": "immutable4148 semantics; retained4eef/81b historical sourcebound diagnoses; independently preserved23source/testpaths and current1182/13+189/69+8configured source gates",
+    "stale_ambiguity": "finalinterval-as-total;66.491-as-UV-duration;incompletecleanup-note-as-specificleak;branchrefresh-or-current311pass-as-299failure-clearance;unchangedselectedtests-as-producerartifactparity",
+    "remaining_uncertainty": "fresh exactunion CI/native/backend/currentartifact acceptance, historical Windows cause/cleanup dimensions, private/full issue/release graph",
+    "upstream": "none"
+  },
+  "setup_py_disposition": "absent at reviewerfreeze; no generic cleanup/deletion by reviewer; worker says initialreadback/freeze absent",
+  "no_actual_rerun_source_mutation_or_infrastructure": true
+}

@@ -1,0 +1,14 @@
+{
+  "phase": "COLLECTION_ONLY_NO_TEST_EXECUTION",
+  "items": [
+    {
+      "nodeid": "tests/action_server_tests/mcp/test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge",
+      "collected_module": "test_mcp_apps_authoring",
+      "collected_file": "/workspace/engineering/pr305/action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+      "preimport_module": "action_server_tests.mcp.test_mcp_apps_authoring",
+      "same_object": false,
+      "preimport_hook_callable": true,
+      "collected_hook_callable": false
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "status": "READ_ONLY_PUBLIC_RELEASE_DISCOVERY_NOT_SOURCE_AUTHORITY",
+  "version": "1.0.2",
+  "wheel": {
+    "filename": "actions_runtime-1.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+    "bytes": 14095731,
+    "sha256": "9aef9ec55c17d90ec11a32d8d4da694def92502ba46a73621c35267f230873d3"
+  },
+  "member": {
+    "path": "actions/server/_oauth2_config.py",
+    "bytes": 287,
+    "sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe"
+  },
+  "schema": "FILE_CONTENTS mapping",
+  "payloads": {
+    "actions_config": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "blank": true,
+      "json_parse": false
+    },
+    "default_user_config": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "blank": true,
+      "json_parse": false
+    }
+  },
+  "limits": [
+    "Published artifact content is not approval for a replacement configuration source",
+    "No generated source/configuration mutation",
+    "No provider-policy or publication admission"
+  ]
+}

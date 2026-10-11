@@ -1,0 +1,20 @@
+{
+  "verdict": "GO_EXACT_COMMITTED_AND_REMOTE_DURABLE_EVIDENCE_READBACK",
+  "head": "702bd9b9487c2500f595e25c9cc5749f1ed1c786",
+  "tree": "1f75917eb6bd52f07fb3edb07fda244234369f7b",
+  "parents": [
+    "a72b95d091ba8e35354cc12e3a16907d1aae8160"
+  ],
+  "remote_branch": "handoff/actions-swarm-mk3-wave8-20261010",
+  "remote_head": "702bd9b9487c2500f595e25c9cc5749f1ed1c786",
+  "all89_manifest_members_read_from_committed_Git_blobs_hash_length_verified": true,
+  "prior_independent_review_copy": "current-actual-evidence-independent-prepush-review.json",
+  "review_sha256": "5cead67f2918b3b5e6c6411cfeb9476618265ce0f6e400a9dd92b97bef9ddd0c",
+  "authored_guides_README_bytes_unchanged_from_exact_review": true,
+  "ignored_log_correction": "additive commit retains exact686-byte sanitized302summary only; no raw311log",
+  "no_rewrite_or_normalization": "all original copied hashes retained",
+  "scope": "durable docs/evidence only, no source or acceptance-gate expansion",
+  "canonical_disposition": "accepted bounded307gateway/OAuthauthorityHOLD,311six/two/hostcleanup limits,310historicalplatform scope,declaredCIjob inventory retained as reviewed",
+  "remaining_uncertainty": "all engineering acceptance limits in original review remain unchanged",
+  "upstream": "none"
+}

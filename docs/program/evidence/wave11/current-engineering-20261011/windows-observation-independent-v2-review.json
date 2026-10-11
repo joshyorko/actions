@@ -1,0 +1,231 @@
+{
+  "verdict": "GO_V2_BOUNDED_TEST_ONLY_OBSERVATION_DESIGN; HOLD_IMPLEMENTATION_NATIVE_EXECUTION_CHILD_BOUNDARY_AND_ROOT_CAUSE",
+  "scope": "independent read-only review of exact immutable design and existing source/evidence; no source edit, tests/native run, cancellation, retry or infrastructure",
+  "proposal_bindings": [
+    {
+      "path": "/workspace/engineering/windows-next-observation-owned/design.md",
+      "size": 12813,
+      "sha256": "3a22e015f95dc8e3297e0793f479f224e17c9033262e620e03c3304182d1086c"
+    },
+    {
+      "path": "/workspace/engineering/windows-next-observation-owned/design-receipt.json",
+      "size": 16077,
+      "sha256": "2d1824429334c375051110ec6b5c10754b458f93e6ff31f9102a08128e95569f"
+    },
+    {
+      "path": "/workspace/engineering/windows-next-observation-owned/canonical-guide-proposed.patch",
+      "size": 2018,
+      "sha256": "bef15c13e9bb844ca64a89d5c17b9933a02804f844e8f7024b985967abf23f5c"
+    },
+    {
+      "path": "/workspace/engineering/windows-next-observation-owned/design-v2.md",
+      "size": 13875,
+      "sha256": "a23775765d3295a8019a2d88ddaea571049b8a55ed988a9b10635c7bcf28257c"
+    },
+    {
+      "path": "/workspace/engineering/windows-next-observation-owned/design-v2-receipt.json",
+      "size": 16761,
+      "sha256": "7c9e9f36c299e382f783865c84e4057d1170d8ce723b7225f5f98f37654bebe8"
+    },
+    {
+      "path": "/workspace/engineering/windows-next-observation-owned/canonical-guide-v2-proposed.patch",
+      "size": 2267,
+      "sha256": "d7c816ddc2d8ab467e1975a0012117d40cb860e2ccfa37e5abc6f7d2a0554993"
+    }
+  ],
+  "current_source": {
+    "head": "d75b25fb4c354e5c95bc0f639b426d6ff402104b",
+    "tree": "22c984ea5ce5275803308790c519263e7027b40c",
+    "parents": [
+      "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9"
+    ],
+    "files": {
+      "action_server/src/actions/server/_rcc.py": {
+        "path": "/workspace/engineering/pr311/action_server/src/actions/server/_rcc.py",
+        "size": 17149,
+        "sha256": "74a0646de66d3bfb5a30339080a37c5dc0f79b2e0ab46b7c16a6c19717e6d41b"
+      },
+      "action_server/src/actions/server/_selftest.py": {
+        "path": "/workspace/engineering/pr311/action_server/src/actions/server/_selftest.py",
+        "size": 25371,
+        "sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af"
+      },
+      "action_server/src/actions/server/_robo_utils/process.py": {
+        "path": "/workspace/engineering/pr311/action_server/src/actions/server/_robo_utils/process.py",
+        "size": 14197,
+        "sha256": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7"
+      },
+      "action_server/src/actions/server/_robo_utils/callback.py": {
+        "path": "/workspace/engineering/pr311/action_server/src/actions/server/_robo_utils/callback.py",
+        "size": 1526,
+        "sha256": "5b60f8b5906ef2714f630004d0913a24be2421c917dd51126ea73767450b6d85"
+      },
+      "action_server/src/actions/server/_common/process.py": {
+        "path": "/workspace/engineering/pr311/action_server/src/actions/server/_common/process.py",
+        "size": 31134,
+        "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+      },
+      "action_server/src/actions/server/_server.py": {
+        "path": "/workspace/engineering/pr311/action_server/src/actions/server/_server.py",
+        "size": 34736,
+        "sha256": "3be0ce254252211270fecf2906da2cec5d438b3203fefd68ad3d0731cf4d42bb"
+      },
+      "action_server/tests/action_server_tests/native_startup_diagnostics.py": {
+        "path": "/workspace/engineering/pr311/action_server/tests/action_server_tests/native_startup_diagnostics.py",
+        "size": 13009,
+        "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c"
+      },
+      "action_server/tests/action_server_tests/test_native_startup_diagnostics.py": {
+        "path": "/workspace/engineering/pr311/action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+        "size": 9053,
+        "sha256": "503eb72a44049c19952c3294c98a36ccbe72525e6bcfe248b7f474e2825ff926"
+      },
+      "docs/skills/repository-operations.md": {
+        "path": "/workspace/engineering/pr311/docs/skills/repository-operations.md",
+        "size": 221538,
+        "sha256": "386d4fde2a4923520ce6045df1a76bdda13f9d8e4da82a561761d8f44a5a66d5"
+      }
+    },
+    "clean": true
+  },
+  "independent_grounding": {
+    "original311_review_sha256": "81b819b9eb7a4d25bb46e0517b27bc303f78b80c32c7df89a6da4198967afe95",
+    "original311": "six first90-second readiness failures; only two instrumented activeCPU/IO80/88 snapshots; no rawProgress; five incomplete20-secondcleanup notes; host-onlyfinal fields cannot prove descendantreap",
+    "original299_rawlog_binding": {
+      "path": "/workspace/actions-cloud/receipts/merge-review-pr299-9cb/windows-job-114372237761.log",
+      "size": 631082,
+      "sha256": "ee8ebfe4aa64d82f026a8f0cb4ba563cb0d4645fd741ddcc8a698116891bf0fa"
+    },
+    "original299_numeric_marks": [
+      {
+        "step": 0,
+        "since_previous_seconds": 0.028
+      },
+      {
+        "step": 1,
+        "since_previous_seconds": 0.001
+      },
+      {
+        "step": 2,
+        "since_previous_seconds": 0.002
+      },
+      {
+        "step": 3,
+        "since_previous_seconds": 0.0
+      },
+      {
+        "step": 4,
+        "since_previous_seconds": 0.0
+      },
+      {
+        "step": 5,
+        "since_previous_seconds": 0.0
+      },
+      {
+        "step": 6,
+        "since_previous_seconds": 0.0
+      },
+      {
+        "step": 7,
+        "since_previous_seconds": 0.556
+      },
+      {
+        "step": 8,
+        "since_previous_seconds": 66.491
+      },
+      {
+        "step": 9,
+        "since_previous_seconds": 1.615
+      },
+      {
+        "step": 10,
+        "since_previous_seconds": 0.0
+      },
+      {
+        "step": 11,
+        "since_previous_seconds": 1.746
+      },
+      {
+        "step": 12,
+        "since_previous_seconds": 0.0
+      },
+      {
+        "step": 13,
+        "since_previous_seconds": 0.001
+      },
+      {
+        "step": 14,
+        "since_previous_seconds": 3.132
+      },
+      {
+        "step": 15,
+        "since_previous_seconds": 15.687
+      }
+    ],
+    "original299_sum_seconds": 89.259,
+    "original299_caller_seconds": 89.28,
+    "immutable_RCC_source": {
+      "conda/workflows.go": {
+        "commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+        "local_path": "/workspace/engineering/rcc-conda-workflows.go",
+        "sha256": "0e0390bf4930645a1d3819fd5ecb99aa9892c281846923c0952d0b19ed93e694"
+      },
+      "htfs/commands.go": {
+        "commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+        "local_path": "/workspace/engineering/rcc-htfs-commands.go",
+        "sha256": "e210cdd9d7978c530212b0bba8db0f5eb59fb437eaa19dce70b85c0135fc9b03"
+      },
+      "pretty/functions.go": {
+        "commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+        "local_path": "/workspace/engineering/rcc-pretty-functions.go",
+        "sha256": "04eb4b94cff48868d743de47e7b9f9f9bb5737ce4d51b282ac29d8f8d5279b32"
+      }
+    },
+    "previous_mark_semantics_independently_verified": true,
+    "historical299_timing_is_not311_timing": true
+  },
+  "accepted_design_boundaries": [
+    "Change only existing test observer/test/guide after root assigns a source lane; retain exactly first native actions_sync start of the two selected nodes.",
+    "Reuse existing completed-line callback delivery only; no new pipe consumer, reader thread, flush, logging mode, file IO in callbacks or production bytes.",
+    "Strict8192-character line bound and32 numeric marks with16KiB state/65535 saturating counts; fixed categorical output only, no raw suffix/config/environment/args/URL or exception text.",
+    "Exact18.19.3 unique ordered0..15 sequence alone may provide previous-mark interval sum; any loss/drop/overflow/cap/parser-invariant/version error latches sum unavailable permanently.",
+    "Diagnostic failures are caught internally before existing Callback logger.exception can expose exception text; negative secret-bearing callback failure test required.",
+    "Readiness compares exact existing HTTP/HTTPS regex and stderr channel without ANSI/acceptance normalization; startup return timestamp is a conservative lower bound for the actual wait origin, Future state unavailable.",
+    "Scoped owned Process start/cleanup wrapper immediately delegates other objects, passes exact original deadline, returns same tuple/result or raises identical original exception, and unregisters only probe callbacks.",
+    "Observe actual cleanup result scalar predicates/counts, including snapshot and zombie distinction, without an extra kill/wait/traversal or raw errors/PIDs/names.",
+    "Keep90-second readiness,20-second cleanup,80/88 samples and50ms samplerjoin unchanged; OS query overrun and pending daemon remain explicit unavailable/late-drop limits.",
+    "Current d75 hosted result is root-owned evidence to read before any newly authorized source/execution wave."
+  ],
+  "required_implementation_proofs": [
+    "Meaningful baseline then per-invariant negative progress tests including later valid16marks after loss/overflow; no sum recovery.",
+    "Existing capture/readiness callbacks receive original line once; no kwargs/Future/port/pipe/env or original acceptance changes.",
+    "Exact-channel/matcher/timing/HTTPS/late/over-limit cases preserve source acceptance and original TimeoutError object/notes.",
+    "Each cleanup failed disjunction and separate zombie state tested against real result type; same returned object/deadline and no extra process action.",
+    "Secret-bearing probe exception caught internally without Callback logger/output leak, while delegated original exceptions still propagate unchanged.",
+    "Disabled/source-mode/other-node/second-start/other-process paths install no callbacks; owned cleanup and registration ordering protected.",
+    "Current frozen source tuple, configured source/static/Toolkit checks and exact production/workflow/protected-input parity before root authorizes any actual gate."
+  ],
+  "remaining_uncertainty": [
+    "This host-only design cannot observe RCC internal pipe arrival, actual unbuffered/buffered forwarding state, native ready-log emitter or Future state.",
+    "Complete delivered RCC marks do not prove process exit, environment JSON admission, action import or native readiness.",
+    "Absent host lines do not identify internal inactivity or propagation failure; no root cause or#299-specific regression established.",
+    "Original cleanup returned result flags remain absent from historical reports; prospective observations cannot retroactively fill them.",
+    "Future child-side instrumentation/transport/source/artifact qualification is deferred and not approved by this GO.",
+    "Current d75 CI outcome, future source implementation and actual Windows execution remain separate gates."
+  ],
+  "canonical_documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_proposed_delta": {
+      "path": "/workspace/engineering/windows-next-observation-owned/canonical-guide-v2-proposed.patch",
+      "size": 2267,
+      "sha256": "d7c816ddc2d8ab467e1975a0012117d40cb860e2ccfa37e5abc6f7d2a0554993"
+    },
+    "disposition": "PROPOSED V2 accepted for bounded test-only next source design; V1 retained unchanged; no repository mutation",
+    "durable_learning": "casecensus vsobservercoverage, previousmark intervals vselapsed, hostdelivery vsnative stage, actualcleanup result vshost-onlypoll/readers, secretproof callback exceptions, irrevocable loss invalidation",
+    "evidence": "original31181b, original2994eef/rawee8e+immutable4148 source and exactd75 current callback/process/Rcc/selftest/server sourcebindings",
+    "stale_ambiguity": "two observed cases represent allsix; finalstep is total; missinglines prove idle/forwardinggap; callback exception logging is automatically safe; dropped marks may still qualify sum; rc15/readersfalse prove fullcleanup",
+    "remaining_uncertainty": "invisible native/RCC phases,currentCI/source/actualacceptance gates above",
+    "upstream": "none; no maintained upstream defect or authorized external target"
+  },
+  "private_metadata_release_policy": "unchanged HOLD; no private metadata substitution or Runtime publication admission"
+}

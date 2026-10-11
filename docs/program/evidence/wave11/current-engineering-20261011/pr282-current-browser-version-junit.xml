@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="canvas-template-published-core" tests="1" skipped="0" failures="1" errors="0">
+  <testcase classname="tests.action_server_tests.mcp.test_canvas_query_template" name="test_canvas_template_runs_through_runtime_and_real_browser">
+    <failure message="Published Core/browser acceptance failed verification." />
+  </testcase>
+</testsuite>

@@ -1,0 +1,355 @@
+{
+  "status": "GO_FOR_TEST_ONLY_OBSERVATION_DESIGN_REVIEW; HOLD_ROOT_CAUSE_IMPLEMENTATION_AND_NATIVE_RUN",
+  "scope": "read-only source/evidence analysis; owned proposal files only; no repository mutation or CLI/provider/cache/network invocation",
+  "current_source": {
+    "head": "d75b25fb4c354e5c95bc0f639b426d6ff402104b",
+    "tree": "22c984ea5ce5275803308790c519263e7027b40c",
+    "parents": [
+      "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9"
+    ],
+    "files": {
+      "action_server/src/actions/server/_rcc.py": {
+        "path": "/workspace/engineering/pr311/action_server/src/actions/server/_rcc.py",
+        "size": 17149,
+        "sha256": "74a0646de66d3bfb5a30339080a37c5dc0f79b2e0ab46b7c16a6c19717e6d41b"
+      },
+      "action_server/src/actions/server/_selftest.py": {
+        "path": "/workspace/engineering/pr311/action_server/src/actions/server/_selftest.py",
+        "size": 25371,
+        "sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af"
+      },
+      "action_server/src/actions/server/_robo_utils/process.py": {
+        "path": "/workspace/engineering/pr311/action_server/src/actions/server/_robo_utils/process.py",
+        "size": 14197,
+        "sha256": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7"
+      },
+      "action_server/src/actions/server/_robo_utils/callback.py": {
+        "path": "/workspace/engineering/pr311/action_server/src/actions/server/_robo_utils/callback.py",
+        "size": 1526,
+        "sha256": "5b60f8b5906ef2714f630004d0913a24be2421c917dd51126ea73767450b6d85"
+      },
+      "action_server/src/actions/server/_common/process.py": {
+        "path": "/workspace/engineering/pr311/action_server/src/actions/server/_common/process.py",
+        "size": 31134,
+        "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+      },
+      "action_server/src/actions/server/_server.py": {
+        "path": "/workspace/engineering/pr311/action_server/src/actions/server/_server.py",
+        "size": 34736,
+        "sha256": "3be0ce254252211270fecf2906da2cec5d438b3203fefd68ad3d0731cf4d42bb"
+      },
+      "action_server/tests/action_server_tests/native_startup_diagnostics.py": {
+        "path": "/workspace/engineering/pr311/action_server/tests/action_server_tests/native_startup_diagnostics.py",
+        "size": 13009,
+        "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c"
+      },
+      "action_server/tests/action_server_tests/test_native_startup_diagnostics.py": {
+        "path": "/workspace/engineering/pr311/action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+        "size": 9053,
+        "sha256": "503eb72a44049c19952c3294c98a36ccbe72525e6bcfe248b7f474e2825ff926"
+      },
+      "docs/skills/repository-operations.md": {
+        "path": "/workspace/engineering/pr311/docs/skills/repository-operations.md",
+        "size": 221538,
+        "sha256": "386d4fde2a4923520ce6045df1a76bdda13f9d8e4da82a561761d8f44a5a66d5"
+      }
+    },
+    "clean": true
+  },
+  "design": {
+    "path": "/workspace/engineering/windows-next-observation-owned/design.md",
+    "size": 12813,
+    "sha256": "3a22e015f95dc8e3297e0793f479f224e17c9033262e620e03c3304182d1086c"
+  },
+  "canonical_delta": {
+    "path": "/workspace/engineering/windows-next-observation-owned/canonical-guide-proposed.patch",
+    "size": 2018,
+    "sha256": "bef15c13e9bb844ca64a89d5c17b9933a02804f844e8f7024b985967abf23f5c"
+  },
+  "original311": {
+    "independent": {
+      "path": "/workspace/engineering/pr311-original-windows-independent-review/original-hosted-diagnostic-review.json",
+      "size": 18731,
+      "sha256": "81b819b9eb7a4d25bb46e0517b27bc303f78b80c32c7df89a6da4198967afe95"
+    },
+    "control": {
+      "sha": "c4794ac6d8312866a2dac92b52185fca912046bb",
+      "tree": "1b742a1bac55d9dee96a1f70bbf2ad0735edf356",
+      "parents": [
+        "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+        "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9"
+      ]
+    },
+    "original_head": "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9",
+    "actual_integration_counters": {
+      "failed": 6,
+      "passed": 125,
+      "skipped": 18,
+      "deselected": 1130
+    },
+    "instrumented_case_count": 2,
+    "raw_json": [
+      {
+        "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/7d0f2e912f58600f-1.json",
+        "size": 1559,
+        "sha256": "ce067a9e4dd7860184a5c9448685110709343c6f6702fcd49c3a2948509108b9"
+      },
+      {
+        "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/7d0f2e912f58600f-2.json",
+        "size": 1917,
+        "sha256": "18c9d44bcf00cb36879fdd2c2156b8090177a18e74c87c0de50309cc0478b910"
+      },
+      {
+        "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/7d0f2e912f58600f-3.json",
+        "size": 1917,
+        "sha256": "e12f9f76d47c8e60edac807f3d7bbfa0d685ebce7cfdfac1d45f26435e38bcba"
+      },
+      {
+        "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/7d0f2e912f58600f-4.json",
+        "size": 330,
+        "sha256": "b57a6dd931c9f1c79dfd0c91c854c01bc71ea57bc9066c46fb2f595daa8891b7"
+      },
+      {
+        "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/34ec97696df8d90c-1.json",
+        "size": 1578,
+        "sha256": "83e4f7193a1348dec1b41086766c41db0db21f42932d663f1a3e19d13eeba1fb"
+      },
+      {
+        "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/34ec97696df8d90c-2.json",
+        "size": 1913,
+        "sha256": "fbbed8206f4f28d14c21a975fa4077fc1645852f8bc1bf4efbdcf53616e46a56"
+      },
+      {
+        "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/34ec97696df8d90c-3.json",
+        "size": 1912,
+        "sha256": "22ffb25652c68fff3f8d66ff4d0b348ab293fa01927597a0462a243e1c582ef7"
+      },
+      {
+        "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/34ec97696df8d90c-4.json",
+        "size": 330,
+        "sha256": "b57a6dd931c9f1c79dfd0c91c854c01bc71ea57bc9066c46fb2f595daa8891b7"
+      }
+    ],
+    "original_zip": {
+      "path": "/workspace/attachments/b854d2e5-b5fc-4b18-ab27-9b7f64879752/pr311-original-1151-windows-startup-diagnostics.zip",
+      "size": 6083,
+      "sha256": "0115d2e19118f7946734f14952338d97e7982b43d5d79835c75e1179b41e793d"
+    },
+    "private_decoded_log_identity_only": {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/job114376917743-original-decoded.log",
+      "size": 762594,
+      "sha256": "8e1e283aec983b2784ef5062685ae3c4877a9c362cca88b883c4add6ebfd3d10"
+    },
+    "raw_log_content_not_published": true,
+    "raw_progress_marks_available": false,
+    "sample_findings": [
+      {
+        "case": "failed_watched_reload",
+        "nodeid": "tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+        "sample_elapsed_seconds": [
+          80.063,
+          88.031
+        ],
+        "interval_seconds": 7.9680000000000035,
+        "process_count": 3,
+        "measured_process_name_counts": "unavailable: names are not emitted",
+        "identity_and_parent_links_stable": true,
+        "deltas": [
+          {
+            "position": 0,
+            "command_operation": "unavailable",
+            "cpu_seconds_delta": 0.0,
+            "read_bytes_delta": 0,
+            "write_bytes_delta": 0,
+            "handles_delta": 0
+          },
+          {
+            "position": 1,
+            "command_operation": "unavailable",
+            "cpu_seconds_delta": 0.0,
+            "read_bytes_delta": 0,
+            "write_bytes_delta": 0,
+            "handles_delta": 0
+          },
+          {
+            "position": 2,
+            "command_operation": "holotree variables",
+            "cpu_seconds_delta": 3.9375,
+            "read_bytes_delta": 63794795,
+            "write_bytes_delta": 162976242,
+            "handles_delta": -1
+          }
+        ],
+        "final_observation": {
+          "after_start_returned": {
+            "host_readers_alive": [
+              false,
+              false
+            ],
+            "observation": "host_only",
+            "returncode": 15
+          },
+          "exception": "TimeoutError",
+          "native_executable": {
+            "sha256": "45e6de407f12101d04d2d7e4972c563c5dafb48fafa4a2183d1136bc987566f0",
+            "size": 57692160
+          },
+          "outcome": "failed",
+          "sampler_alive": false,
+          "sampler_cancelled": true
+        },
+        "cache_exists_at_both_samples": false
+      },
+      {
+        "case": "catalog_resource_collision",
+        "nodeid": "tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+        "sample_elapsed_seconds": [
+          80.063,
+          88.031
+        ],
+        "interval_seconds": 7.9680000000000035,
+        "process_count": 3,
+        "measured_process_name_counts": "unavailable: names are not emitted",
+        "identity_and_parent_links_stable": true,
+        "deltas": [
+          {
+            "position": 0,
+            "command_operation": "unavailable",
+            "cpu_seconds_delta": 0.0,
+            "read_bytes_delta": 0,
+            "write_bytes_delta": 0,
+            "handles_delta": 0
+          },
+          {
+            "position": 1,
+            "command_operation": "unavailable",
+            "cpu_seconds_delta": 0.0,
+            "read_bytes_delta": 0,
+            "write_bytes_delta": 0,
+            "handles_delta": 0
+          },
+          {
+            "position": 2,
+            "command_operation": "holotree variables",
+            "cpu_seconds_delta": 4.859375,
+            "read_bytes_delta": 61391993,
+            "write_bytes_delta": 156130489,
+            "handles_delta": -1
+          }
+        ],
+        "final_observation": {
+          "after_start_returned": {
+            "host_readers_alive": [
+              false,
+              false
+            ],
+            "observation": "host_only",
+            "returncode": 15
+          },
+          "exception": "TimeoutError",
+          "native_executable": {
+            "sha256": "45e6de407f12101d04d2d7e4972c563c5dafb48fafa4a2183d1136bc987566f0",
+            "size": 57692160
+          },
+          "outcome": "failed",
+          "sampler_alive": false,
+          "sampler_cancelled": true
+        },
+        "cache_exists_at_both_samples": false
+      }
+    ]
+  },
+  "prior299": {
+    "receipt": {
+      "path": "/workspace/engineering/pr299-windows-independent-diagnosis.json",
+      "size": 7249,
+      "sha256": "4eef69f680caf8891a6c2749b345f753cf5b9d71bc3f4e8e4b3301e9bff406b8"
+    },
+    "source": "9cb61c52fce35201221b55707d73da9e9b0840a6",
+    "tested_merge": "fb306a886d6bb1f8edcf8c512d2d27cd25a069f7",
+    "tree": "6d1104d9f6c2372cb7fa41dfcb4f7e6b7074140d",
+    "job": 114372237761,
+    "run": 38106229594,
+    "progress_sum_seconds": 89.259,
+    "caller_seconds": 89.28,
+    "interpretation": {
+      "1.615_seconds": "UV-start to postinstall-start interval",
+      "15.687_seconds": "library-restore-start to deferred final mark, including externally-managed marker and staging cleanup; not total preparation duration",
+      "66.491_seconds": "interval after micromamba start to UV start, including layer recording and UV setup; not UV install duration",
+      "confidence": "high for phase/budget exhaustion, unresolved for slow phase cause and cleanup status",
+      "forwarding_gap": "not supported: summed intervals89.259 vs caller89.28"
+    },
+    "immutable_rcc_source": {
+      "conda/workflows.go": {
+        "commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+        "local_path": "/workspace/engineering/rcc-conda-workflows.go",
+        "sha256": "0e0390bf4930645a1d3819fd5ecb99aa9892c281846923c0952d0b19ed93e694"
+      },
+      "htfs/commands.go": {
+        "commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+        "local_path": "/workspace/engineering/rcc-htfs-commands.go",
+        "sha256": "e210cdd9d7978c530212b0bba8db0f5eb59fb437eaa19dce70b85c0135fc9b03"
+      },
+      "pretty/functions.go": {
+        "commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+        "local_path": "/workspace/engineering/rcc-pretty-functions.go",
+        "sha256": "04eb4b94cff48868d743de47e7b9f9f9bb5737ce4d51b282ac29d8f8d5279b32"
+      }
+    }
+  },
+  "rcc_binding": {
+    "version": "18.19.3",
+    "immutable_source_commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+    "windows_measured_four_samples": {
+      "size": 19985408,
+      "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+    },
+    "binary_observation_is_not_separate_whole_native_artifact_admission": true
+  },
+  "recommended_source_scope": [
+    "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+    "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "protected": {
+    "production_native_Rcc_Process_selftest_server_bytes": "unchanged",
+    "readiness_seconds": 90,
+    "cleanup_seconds": 20,
+    "samples_seconds": [
+      80,
+      88
+    ],
+    "sampler_join_seconds": 0.05,
+    "pipe_consumers": "existing only",
+    "first_start_two_nodes_only": true,
+    "no_preparation_retry_or_config_change": true,
+    "no_additional_kill_wait": true,
+    "no_unknown_raw_fields": true
+  },
+  "observation_limits": {
+    "characters_per_completed_line": 8192,
+    "max_numeric_marks": 32,
+    "summary_bytes": 16384,
+    "saturating_count": 65535,
+    "probe_lock": "nonblocking drop",
+    "event_threads_or_file_io": "none added to callbacks",
+    "progress_duration_seconds_range": [
+      0,
+      3600
+    ],
+    "progress_sum": "only exact ordered unique0..15 version18.19.3 sequence",
+    "future_state": "unavailable; no acceptance mutation",
+    "cleanup": "summarize actual return predicates and counts, not error strings or PID tuples"
+  },
+  "future_child_boundary": "deferred and not authorized: a host-only probe cannot see child Rcc internal reader arrival or native ready-log emission; source/artifact and bounded transport/lifecycle design would require independent review before such a follow-up",
+  "service_free_tdd": "Exact six meaningful baseline/poison/deadline/cleanup/exception/gating contract groups in design.md; proposed RED/GREEN only, not implemented or executed",
+  "fresh_d75_windows_ci": "owned by root; not queried/acquired/retried here; must read existing result before assigning new observation execution",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "Proposed exact patch to docs/skills/repository-operations.md; repository unchanged",
+    "Durable learning captured": "Failure census differs from observer coverage. RCC numeric durations are previous-mark intervals; full sequence needed for sum. No raw host progress plus unflushed interactive forwarding leaves internal emission unknown. Readiness channel/matcher/deadline matter; actual cleanup result predicates differ from host return/reader observations.",
+    "Evidence": "Independent original31181b receipt, unchanged safe8reports and private log hash;2994eef previous-mark receipt and immutable4148 RCC three source hashes; current d75 Rcc/Process/selftest/callback/server source bindings",
+    "Stale or ambiguous guidance removed": "Proposes removing inference from two observed cases to all failures, final-step-as-total, missing-lines-as-idle, host rc15/readersfalse-as-complete-cleanup; historical receipts remain distinct",
+    "Remaining uncertainty": "Exact slow RCC mechanism, internal pipe arrival/forwarding flush and native ready emitter timing, original cleanup result fields, fresh d75 Windows outcome; test-only observation cannot fill invisible child fields"
+  },
+  "Upstream disposition": "none: no confirmed maintained upstream defect; no authorized external issue target; root cause remains HOLD"
+}

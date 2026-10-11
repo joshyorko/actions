@@ -1,0 +1,16 @@
+{
+  "browser_path": "/workspace/actions-cloud/cache/playwright/chromium-1234/chrome-linux64/chrome",
+  "browser_sha256": "0b20b130e7edd9dd51873be867761295fe0cfad490c2b9a64f95bd3cfc08fa71",
+  "stdout_bytes": 41,
+  "stdout_sha256": "2d44e8c7507ca1c7cefc2fff277ee234d5d87be645dd56bee1b3ffca6564e529",
+  "stderr_bytes": 0,
+  "exitcode": 0,
+  "lf_count": 1,
+  "cr_count": 0,
+  "shell_chars": 40,
+  "python_chars": 39,
+  "values_equal": false,
+  "shell_leading_whitespace": 0,
+  "shell_trailing_whitespace": 1,
+  "scope": "one existing local browser --version observation, not hosted compared values/native execution"
+}

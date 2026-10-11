@@ -1,0 +1,30 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -172,6 +172,27 @@
+ 50 ms join. A pending OS query may leave that daemon alive; late observations
+ are discarded after cancellation. Neither field proves Runtime process or
+ stream cleanup, which remains owned by the unchanged starter.
++Keep the failure census separate from observer coverage. The retained original
++Windows #311 run has six failed initial ready-port waits but only two instrumented
++starts. Active owned RCC CPU and disk counters during the 80/88-second samples
++exclude complete inactivity during those intervals; they do not identify an
++internal preparation phase, cache defect or later semantic failure. The original
++reports contain no raw RCC progress marks.
++
++RCC 18.19.3 progress durations measure time since the previous Progress call.
++Only a complete ordered mark sequence supports its interval sum. The prior
++Windows sequence sums to 89.259 seconds against its 89.28-second caller timing;
++its final 15.687-second field is not total preparation time. Keep that producer's
++timing separate from later runs without marks. Runtime interactive forwarding
++writes RCC bytes without an explicit flush, so missing captured lines cannot
++identify internal RCC emission or host propagation. A ready-marker observation
++must retain channel and its match against the starter's existing regex; stdout
++alone cannot satisfy the stderr readiness Future. Host-only return codes and
++reader state cannot establish process-tree cleanup. Inspect the actual returned
++cleanup result's wrapper reap, live descendants, errors and snapshot completeness,
++and keep zombie reap state separate. Unknown fields remain unavailable; preserve
++the 90-second readiness and 20-second cleanup gates.
++
+ These synthetic observer checks do not establish Windows native acceptance
+ or fix the original failure. Compare the next exact-head reports before
+ changing production code; do not warm caches, retry RCC, or enlarge deadlines

@@ -1,0 +1,156 @@
+{
+  "verdict": "GO_CURRENT_CI_SOURCE_SCOPE_ONLY",
+  "pr": 309,
+  "head": "41d4ee41190d7d3f3969212471863c70852295ba",
+  "tested_merge": "08f051e750dd97c920463dd55f0f166da92010a2",
+  "tested_tree": "211cea442440baf18ad270e5530ad8467b50176f",
+  "ordered_parents": [
+    "fbde0d3a248c47c9964851355f96575c89a87329",
+    "41d4ee41190d7d3f3969212471863c70852295ba"
+  ],
+  "checks": [
+    {
+      "id": 114387111652,
+      "name": "publish (3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383218026,
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217956,
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217937,
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217921,
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217910,
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217900,
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217877,
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217862,
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217847,
+      "name": "build-wheels (macos-15)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217826,
+      "name": "build-wheels (windows-2022)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217812,
+      "name": "build-sdist (ubuntu-py3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217800,
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217796,
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217688,
+      "name": "build (macos-py3.12-devmode)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217680,
+      "name": "build (ubuntu-py3.12-devmode)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217609,
+      "name": "audit",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217546,
+      "name": "build (windows-py3.12-devmode)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383217541,
+      "name": "coverage",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114383207890,
+      "name": "copilot-setup-steps",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "declared_inventory": "20 = Runtime3 + RuntimePyPI5 + native3 + Toolkit6 + coverage1 + audit1 + current auxiliary PUSH Copilot1",
+  "policy": {
+    "draft": false,
+    "reviews": [],
+    "review_threads": [],
+    "branch": "fbde0d3a248c47c9964851355f96575c89a87329",
+    "protected": false,
+    "enforcement": "off",
+    "required_contexts": [],
+    "required_checks": [],
+    "rulesets": [],
+    "admin_protection_endpoint": "Previously403; hidden external configuration not claimed known"
+  },
+  "source_scope": "Only test_auth_route_inventory.py plus canonical guide differ from currentfbde; source-only assembled-route classification before startup, not authentication enforcement or full issue acceptance.",
+  "remaining_gate": "Root's prescribed310 then302 order remains. New prospective union after prerequisite integration needs fresh review/CI if changed; current20green does not admit a different tree.",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Final inventory includes dependent Runtime PR publish validation and distinguishes current push auxiliary Copilot from nonexistent extra PR package gates.",
+    "evidence": "Exact41 workflow filters/matrices/conditions, live7runs/event inventory and20terminal checks; Windows original job+publish-validation logs bind08f checkout.",
+    "stale_or_ambiguous_guidance_removed": "Early19-check subset as completeCI; tag publication confused with PR artifact validation; route census overstated as auth enforcement.",
+    "remaining_uncertainty": "Next actual target union after310/302, full auth issue/release scopes; hidden external policy unknown."
+  },
+  "upstream_disposition": "none"
+}

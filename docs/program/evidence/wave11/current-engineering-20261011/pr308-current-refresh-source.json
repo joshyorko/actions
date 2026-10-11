@@ -1,0 +1,203 @@
+{
+  "status": "LOCAL_SOURCE_REFRESH_GO; INDEPENDENT_REVIEW_REQUIRED_BEFORE_ROOT_NORMAL_PUSH; FRESH_CI_REQUIRED",
+  "source": {
+    "branch": "fix/rcc-candidate-wheel-identities-20261010",
+    "head": "483e3e735c268b08acba1fd3930a9a34e0deaa91",
+    "tree": "9b69d78117e0e5cade3f59fcacc6db56a747b61f",
+    "parents": [
+      "493ecbd2c9163786675cc0cc9b3853e6e75ca196"
+    ],
+    "ordinary_merge": {
+      "original": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+      "target": "fbde0d3a248c47c9964851355f96575c89a87329",
+      "merge": "493ecbd2c9163786675cc0cc9b3853e6e75ca196",
+      "tree": "6d9eb45a2c7e031915cb72bee88cd54cdbcf96cd",
+      "ordered_parents": [
+        "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+        "fbde0d3a248c47c9964851355f96575c89a87329"
+      ],
+      "exact_ordinary_merge_tree": true,
+      "candidate_source_and_formatter_test_blobs_preserved": [
+        {
+          "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+          "original": "100644 blob 57905333b9dedc0886666ab90d705149506652c9\taction_server/scripts/verify_dakota_rcc_acceptance.py",
+          "union": "100644 blob 57905333b9dedc0886666ab90d705149506652c9\taction_server/scripts/verify_dakota_rcc_acceptance.py",
+          "unchanged": true
+        },
+        {
+          "path": "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+          "original": "100644 blob d20d0252f088089596bb958ea6a07a626e4e379d\taction_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+          "union": "100644 blob d20d0252f088089596bb958ea6a07a626e4e379d\taction_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+          "unchanged": true
+        }
+      ],
+      "unrelated_master_not_integrated": true
+    },
+    "candidate_verifier_and_formatter_test_original_preserved": {
+      "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+        "path": "/workspace/engineering/pr308/action_server/scripts/verify_dakota_rcc_acceptance.py",
+        "size": 77398,
+        "sha256": "8c3c84f0f417e12d68049938088b57a61e0140b2d6a303e35eb0f05c1a843235"
+      },
+      "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": {
+        "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+        "size": 30949,
+        "sha256": "065f7596ea87dd0f02ca6e9ca926a7f2926190955381b874a545eb18fb344eab"
+      }
+    },
+    "only_novel_change": "11 canonical guide lines after exact ordinary merge",
+    "preservation": {
+      "parent": "493ecbd2c9163786675cc0cc9b3853e6e75ca196",
+      "staged_tree": "9b69d78117e0e5cade3f59fcacc6db56a747b61f",
+      "only_novel_path": "docs/skills/repository-operations.md",
+      "all_other_blob_mode_pairs_preserved": 1405,
+      "all_source_generator_workflow_version_lock_template_bytes_unchanged": true,
+      "candidate_verifier_and_formatter_test_original94716_unchanged": true,
+      "working_tree_clean_except_exact_owned_doc": true
+    },
+    "clean": true,
+    "unrelated_master_not_integrated": true,
+    "authority_target": "integration/community-release-20261008 exactfbde;310 not integrated when refreshed"
+  },
+  "candidate_identity": {
+    "checked_out_poetry_metadata_versions": {
+      "actions": "1.0.3",
+      "actions-http-helper": "1.0.3",
+      "action_server": "1.0.3"
+    },
+    "implementation_preserved": "pinnedPoetry version read -> selectedfilename -> uniqueUTF8METADATA Name/Version -> CandidateWheel -> fixture/result/receipt versions and filename/hash",
+    "service_free_fixture": "synthetic Core/Helper1.0.3 wheelZIP pair; metadata-version1.0.2 poison rejected; actual Poetry build calls replaced by test fake",
+    "production_floors_and_lockfiles_unchanged_by_lane": true
+  },
+  "validation": {
+    "doctor": "PASS",
+    "bootstrap": "PASS; installer serialized with305 lane",
+    "toolkit": "69PASS",
+    "scoped_verifier": "37PASS / 1 realRCC integration test deselected",
+    "configured_package": "1134PASS / 13existingSKIP / 15warnings; configured lint and Mypy334PASS",
+    "configured_markdown_lint": "optional tool absent, task reports warning; canonical delta passes git diff --check",
+    "generator": "all8 exact byte roundtrip, generator/workflow unchanged",
+    "producer_parity": "all268 producerinputs plus5 selectedtests match retained blob/mode/SHA256 inventory at frozen head",
+    "gate_source": "ran on exact ordinary merge493ecbd2 with docworkingtree delta; final483e3e73 only commits those11doclines and preserves all1405 otherblob/modepairs",
+    "actual_RCC_test": "NOT_RUN; ACTIONS_REAL_RCC_ACCEPTANCE unset and realRCC marker explicitly deselected; full source excludesintegration_test",
+    "acceptance_CLI_provider_cache_jobs": "NOT_RUN; parser/help/no-side-effect admission unit tests are service-free controlled source tests"
+  },
+  "evidence": {
+    "doctor.log": {
+      "path": "/workspace/engineering/pr308-refresh-owned/doctor.log",
+      "size": 12786,
+      "sha256": "0146faf5b712aeba28c74eca4bfad41b159d925f769474e6c29a24203a020b49"
+    },
+    "bootstrap.log": {
+      "path": "/workspace/engineering/pr308-refresh-owned/bootstrap.log",
+      "size": 27575,
+      "sha256": "8812f8f47f040dee39b872299c8cc91d5380fcca9831b646647c7654c525b756"
+    },
+    "toolkit-test.log": {
+      "path": "/workspace/engineering/pr308-refresh-owned/toolkit-test.log",
+      "size": 14344,
+      "sha256": "e2bdf8574b713a478920b5e8a939e6ca941d2a83fa3c11e0450b7092538f672e"
+    },
+    "scoped-verifier.log": {
+      "path": "/workspace/engineering/pr308-refresh-owned/scoped-verifier.log",
+      "size": 3945,
+      "sha256": "e449cc9a68d7162c16ae286782aeb6b81196c4e9c2bcbfc457c903f8a2d77df3"
+    },
+    "configured-gates.log": {
+      "path": "/workspace/engineering/pr308-refresh-owned/configured-gates.log",
+      "size": 294138,
+      "sha256": "65f7d32b8f2906e89eb6e82288ff230b77dc6f716b2543a077aa679df4a5d5f4"
+    },
+    "union-receipt.json": {
+      "path": "/workspace/engineering/pr308-refresh-owned/union-receipt.json",
+      "size": 1266,
+      "sha256": "63a35b33e6f3e5705a48f0d21282b129f3b6a9778371cbcf3d1a9f633a0ff359"
+    },
+    "preservation-receipt.json": {
+      "path": "/workspace/engineering/pr308-refresh-owned/preservation-receipt.json",
+      "size": 433,
+      "sha256": "a515180c42bf775f8a424ebfd566ef6f1a3b06ab959203a81c72e3ee19e0dea8"
+    },
+    "producer-parity-receipt.json": {
+      "path": "/workspace/engineering/pr308-refresh-owned/producer-parity-receipt.json",
+      "size": 638,
+      "sha256": "1ba9bd09bdc42a3517ec20c08d69ddf889b45bb6d988f445c49350adb4443118"
+    },
+    "frozen-producer-parity-receipt.json": {
+      "path": "/workspace/engineering/pr308-refresh-owned/frozen-producer-parity-receipt.json",
+      "size": 835,
+      "sha256": "56488a89398a7df2fb5928a8308f5ff38fb3e291c85a1d5966995cb3038c7b8e"
+    },
+    "workflow-roundtrip.log": {
+      "path": "/workspace/engineering/pr308-refresh-owned/workflow-roundtrip.log",
+      "size": 4463,
+      "sha256": "8227d54e0bf6ce29e5ac65123fdbb3e7d0f16a1ce88d004e725fdce10ed5b963"
+    },
+    "workflow-roundtrip-receipt.json": {
+      "path": "/workspace/engineering/pr308-refresh-owned/workflow-roundtrip-receipt.json",
+      "size": 1806,
+      "sha256": "e1af148596cf24f950fa9aa66cdd238a68267612f90a4d6cf35acf1ebf287bbf"
+    },
+    "generated-setup-disposition.json": {
+      "path": "/workspace/engineering/pr308-refresh-owned/generated-setup-disposition.json",
+      "size": 514,
+      "sha256": "5918488056672d57b158c442ab7afe0cae2abd6c265dc4d459bf73808ea135b4"
+    }
+  },
+  "prior_live_inventory": {
+    "path": "/workspace/engineering/pr308-live-inventory.json",
+    "size": 9632,
+    "sha256": "a87c7df907c9914a851a97057bab5906ba535e3605a3acd05ee5510765defe8f"
+  },
+  "historical_receipts": [
+    {
+      "file": {
+        "path": "/workspace/engineering/pr308/action_server/tests/acceptance_evidence/candidate-wheel-67e82ef7.json",
+        "size": 1371,
+        "sha256": "66b0b864ac03a5ddd96cc9839911073cf553cfe88e574bfdaccc6752ebbbacbf"
+      },
+      "original_source": "67e82ef7c2bfd529f36d756c2c97c466bd3952e4",
+      "wrapper_exitCode": -1,
+      "retained_unchanged": true
+    },
+    {
+      "file": {
+        "path": "/workspace/engineering/pr308/action_server/tests/acceptance_evidence/candidate-wheel-e33987b6.json",
+        "size": 1687,
+        "sha256": "78bd13f05aab66a354d25b0e7a95afbc786f28afa9ccf9e626a6cedbbbcca964"
+      },
+      "original_source": "e33987b6224fbc0b444c9b8f26908b3040447223",
+      "wrapper_exitCode": -1,
+      "retained_unchanged": true
+    }
+  ],
+  "held_gates": [
+    "fresh hostedCI for483e3e73 union",
+    "actual sourceRuntime RCC wrapper/admission/provider-unavailable warmreuse",
+    "private134 missing originalsource/spec and fullacceptance",
+    "native frozen/Go qualification remains separately producer/sourcebound; no broad issue/release completion",
+    "no standalone acceptanceCLI/provider/cache invocation or publication/merge in this lane"
+  ],
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "Changed docs/skills/repository-operations.md in483e3e73",
+    "Durable learning captured": "Controlled synthetic candidate ZIPs qualify checked-source version/filename/METADATA identity behavior, not an actual packagebuild/RCC/provider/warmreuse result. Candidate refreshes must check full producer/test inventories and preserve older receipt source/wrapperfailure identities.",
+    "Evidence": "original94716 verifier/test blob+mode pairs unchanged; scoped37 with explicitrealRCCdeselection; current1134/13 configured gates;69Toolkit;8exact outputs;268+5 frozen parity; retained historical67e82/e339 failedwrapper receipts",
+    "Stale or ambiguous guidance removed": "Clarifies that candidateversion regression is a synthetic producer control and that preserved producerbytes do not relabel previous actualcandidate receipts; no historical guidance/receipts removed",
+    "Remaining uncertainty": "New483e3e73 hostedCI pending; actualRCC/provider-unavailable/native/private134 and wholeissue/release gates are not established by source checks."
+  },
+  "windows_design_disposition": {
+    "V2": "read-only designGO, originalV1 retained; no311 edits",
+    "receipt": {
+      "path": "/workspace/engineering/windows-next-observation-owned/design-v2-receipt.json",
+      "size": 16761,
+      "sha256": "7c9e9f36c299e382f783865c84e4057d1170d8ce723b7225f5f98f37654bebe8"
+    },
+    "independent": {
+      "path": "/workspace/engineering/windows-next-observation-independent-review/independent-v2-design-review.json",
+      "size": 12370,
+      "sha256": "95f44464acd56e278a87890e0c5f24da9b38cbfb044f925f48bbf1c2221355e3"
+    },
+    "next_source_slot": "root queues minimaltest-only observation only afterd75terminal readback still lacksneededfields and explicitwriter assignment; no299/311 mutations authorized here"
+  },
+  "Upstream disposition": "none; no maintained upstream defect established and no authorized external issue target"
+}

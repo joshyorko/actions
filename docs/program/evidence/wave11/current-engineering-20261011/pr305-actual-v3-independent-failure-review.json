@@ -1,0 +1,155 @@
+{
+  "status": "HOLD_ACTUAL_V3_PLAYWRIGHT_NO_TESTS_FOUND; PARTIAL_RUNTIME_PROVENANCE_AND_CLEANUP_VERIFIED",
+  "checkpoint": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v3-failed-checkpoint.json",
+    "size": 14899,
+    "sha256": "18ebad580803103351a4c3f7a684f7e9f302a602182c699ef06450eadab29614"
+  },
+  "source": {
+    "head": "14c1c1965314b192c4118c3281f5539d29f0aa6f",
+    "ordered_merge_parents": [
+      "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+      "fbde0d3a248c47c9964851355f96575c89a87329"
+    ],
+    "ordinary_merge_tree": "d7d21a0f25c69d28728231b6e238b85d93d0cffe",
+    "parent": "71aab046754ae0e0837f223fd0ba6b8513e63a62",
+    "producer_entries": 268,
+    "selected_test_entries": 5,
+    "source_independent_review": {
+      "path": "/workspace/engineering/pr305-independent-public-review/independent-source-review.json",
+      "sha256": "b1737888384c60a1c6694e0c2567eac85515cf775ba49425f5c039ff6efaa676"
+    },
+    "tree": "b95b352dd20cec016ea5dac204b81eeb331a8b3d"
+  },
+  "runner": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v3.py",
+    "sha256": "d7650dc023ddc714fb67fb05e336c906c6156baa5d2bbceca00ae7b07361afba"
+  },
+  "proposal": {
+    "bytes": 18686,
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v3.json",
+    "sha256": "5aafa519d1af3b288b9e1da858392faaa2a45df1f800d8dc7893d0320fb90de4"
+  },
+  "review_script": {
+    "path": "/workspace/engineering/pr305-v3-independent-runner-review/review_actual_v3.py",
+    "size": 10305,
+    "sha256": "7c5f232a9d62d07f4e9b54f8fc95450ae7159e349516178c59b256b6a9c027bb"
+  },
+  "actual_counts": {
+    "pytest": 1,
+    "failure": 1,
+    "error": 0,
+    "skip": 0,
+    "suite_seconds": 45.631,
+    "Playwright_suites": 0,
+    "Playwright_expected": 0,
+    "browser_launch": "NOT_RUN; No tests found before test execution; empty stderr, no launchtrace",
+    "combined_five_Runtime_Run_gate": "NOT_REACHED"
+  },
+  "primary": "Playwright exact selector returned No tests found with zero selected cases; preserve failed testcase and outputs",
+  "partial_Runtime": {
+    "startup": "ready; sampler final exceptionnull",
+    "known_fixture_Run_names": [
+      "canvas_fixture_artifact_status",
+      "canvas_fixture_search",
+      "canvas_fixture_worker_provenance"
+    ],
+    "persisted_passed_known_tool_Run_count": 3,
+    "other_resource_Run_count": 1,
+    "unique_Run_count": 3,
+    "public_core_version": "1.0.3",
+    "private_owned_DB_evidence": {
+      "sha256": "3ac37efe058736f0f648a05e224fb1790d7491449e56997429c7abdddb9a0ae8",
+      "size": 679936,
+      "path": "withheld; existing owned suffix2 fixture Runtime DB"
+    },
+    "installed_distribution_METADATA_sha256": "f50156dd4869504ee4e73f536641e5b69c8f7c4553d0b07f34dc177abcc4789a",
+    "installed_distribution_RECORD_sha256": "59533aa88151392ea9b5041fc8493e5c1d373aa00d3212d341f2e81e155755cc",
+    "three_measured_modules": {
+      "actions": {
+        "sha256": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+        "inside_worker_prefix": true,
+        "owned_by_actions_core_RECORD": true,
+        "RECORD_sha256_matches": true
+      },
+      "actions.mcp": {
+        "sha256": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+        "inside_worker_prefix": true,
+        "owned_by_actions_core_RECORD": true,
+        "RECORD_sha256_matches": true
+      },
+      "actions.mcp._metadata": {
+        "sha256": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c",
+        "inside_worker_prefix": true,
+        "owned_by_actions_core_RECORD": true,
+        "RECORD_sha256_matches": true
+      }
+    },
+    "worker_prefix_owned_by_attempt_actions_home": true,
+    "whole_wheel_authenticated": false,
+    "cold_registry_acquisition": false,
+    "fixture_artifact_status": "not production artifact resolution"
+  },
+  "cleanup": {
+    "Runtime_case_status": "failed because testcase failed",
+    "strict_Runtime_cleanup_fields": "PASS all3 flagsTrue/all4 listsEmpty",
+    "finite_observed_descendants": 0,
+    "natural_Runtime_exit": "NOT_PROVEN; existing forced owned cleanup",
+    "observer_final": {
+      "exception": null,
+      "outcome": "ready",
+      "sampler_alive": false,
+      "sampler_cancelled": true
+    },
+    "outer_disposition": "reaped_exited_descendants",
+    "outer_reaped_descendants": 4,
+    "outer_returned_worker_code": 1,
+    "ownership_scope": "outer result does not replace internal Runtime cleanup; no universal adoption claim"
+  },
+  "postconditions": {
+    "all18_raw_receipt_hashes_checked": true,
+    "all7_frozen_posthashes_checked": true,
+    "original_and_actual1192_inventory_identical": true,
+    "browser_e11f_unchanged": true,
+    "historical14c_source_binding_preserved": true,
+    "current_head": "14c1c1965314b192c4118c3281f5539d29f0aa6f",
+    "new_source_changes": "not qualified by this historical actual run"
+  },
+  "retained_V2": "Separate0.164s controller module-binding failure before startup, not relabeled by this V3 partial run",
+  "no_retry_or_product_execution_by_reviewer": true,
+  "raw_private_data_policy": "Only known fixture Run status/action names and publicmodule digest/ownership booleans exported; no raw DB, inputs/results, worker paths, logs, environments, profile/datadir or API keys published",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "Exact supplemental proposed docs/skills/repository-operations.md delta in canonical-actual-v3-proposed.patch, collection patch7e244 remains proposed/reused",
+    "Durable learning captured": "Qualify Playwright selection with list-only exactCLI discovery before browser execution; no tests found is not a browser test result. Overall failed Runtime receipt can retain passing measured cleanup fields. Three persisted Python fixture Runs and actualpublic3member provenance do not qualify combined fiveRun/browser gate.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr305-v3-independent-runner-review/canonical-actual-v3-proposed.patch",
+        "size": 1643,
+        "sha256": "5dbf490d781451fefc400cacd9adccdf0402af16962863a73ec33975b4ae468a"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/junit.xml",
+        "size": 2211,
+        "sha256": "8d15034deea2cedae3eb0bdeddaed2096610713c4224cf2bb137635784d4e155"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/command-3-stdout.log",
+        "size": 2238,
+        "sha256": "da48d0c33362e981ef5484d2c1efca28b5b51a396b0d7d870bd28a15135fbc61"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/runtime-cleanup.json",
+        "size": 699,
+        "sha256": "68b6653af69a415bb8e9c5e197e9e9b22a5236c6541c7c1ad865dd559f69cb51"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/outer-cleanup.json",
+        "size": 518,
+        "sha256": "a8958c855344cfa85be51fde47bd92f0347d8814027d1935a1fa3b0c35196b6c"
+      }
+    ],
+    "Stale or ambiguous guidance removed": "Historical V3 proposal NOT_RUN language remains historical; successor review now records actual partial Runtime execution, absent browser execution, strictcleanup dimensions separate from failed testcase status. No browserlaunch or combinedfiveRun acceptance inferred.",
+    "Remaining uncertainty": "Exact source selector repair needs list-only RED/GREEN and independent source/runner review; a later actual requires separate root authorization. WholeCorewheel/coldregistry, productionhost/artifactresolver/OAuthrelease/private134 remain HOLD."
+  },
+  "Upstream disposition": "none; no maintained upstream defect established"
+}

@@ -1,0 +1,391 @@
+{
+  "verdict": "GO_EXACT_D75_E3C52_FBDE_OBSERVED_SOURCE_UNION_AND_COMPLETE23_CURRENT_CI; HOLD_MERGE_PENDING310_TARGET_DEPENDENCY_AND_DRAFT_FRESH_ADMISSION",
+  "scope": "read-only complete source/CI/readiness review and future minimal samebranch refresh proposal; no writer/implementation/native rerun/merge/review submission",
+  "exact_tuple": {
+    "source_head": "d75b25fb4c354e5c95bc0f639b426d6ff402104b",
+    "source_tree": "22c984ea5ce5275803308790c519263e7027b40c",
+    "actual_control": "e3c52c5cf3f2a4437a54af137f59264cc77d91ae",
+    "actual_tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78",
+    "ordered_actual_parents": [
+      "fbde0d3a248c47c9964851355f96575c89a87329",
+      "d75b25fb4c354e5c95bc0f639b426d6ff402104b"
+    ],
+    "named_target": "integration/community-release-20261008",
+    "live_target": "fbde0d3a248c47c9964851355f96575c89a87329",
+    "stale_PR_payload_base": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+  },
+  "complete_current_CI": {
+    "checks": 23,
+    "all_success": true,
+    "workflow_runs": 7,
+    "no_legacy_commit_statuses": true,
+    "declared_job_inventory": [
+      {
+        "run": 38110132825,
+        "workflow": ".github/workflows/ai-audit.yml",
+        "suite": 103255243444,
+        "jobs": [
+          {
+            "id": 114383803726,
+            "name": "audit",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "run": 38110132846,
+        "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+        "suite": 103255243496,
+        "jobs": [
+          {
+            "id": 114383803814,
+            "name": "Build Action Server binary without credentials (macos-15)",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383803931,
+            "name": "Build Action Server binary without credentials (windows-2022)",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383803938,
+            "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "run": 38110132823,
+        "workflow": ".github/workflows/coverage-gate.yml",
+        "suite": 103255243423,
+        "jobs": [
+          {
+            "id": 114383803680,
+            "name": "coverage",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "run": 38110132838,
+        "workflow": ".github/workflows/actions_core_tests.yml",
+        "suite": 103255243469,
+        "jobs": [
+          {
+            "id": 114383803829,
+            "name": "build (ubuntu-py3.10-devmode)",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383803869,
+            "name": "build (macos-py3.10-devmode)",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383803880,
+            "name": "build (windows-py3.10-devmode)",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383803935,
+            "name": "candidate-wheel",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "run": 38110132836,
+        "workflow": ".github/workflows/actions_runtime_tests.yml",
+        "suite": 103255243465,
+        "jobs": [
+          {
+            "id": 114383803754,
+            "name": "build (macos-py3.12-devmode)",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383803907,
+            "name": "build (windows-py3.12-devmode)",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383804077,
+            "name": "build (ubuntu-py3.12-devmode)",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "run": 38110132855,
+        "workflow": ".github/workflows/developer_toolkit.yml",
+        "suite": 103255243525,
+        "jobs": [
+          {
+            "id": 114383803922,
+            "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383804023,
+            "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383804030,
+            "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383804054,
+            "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383804080,
+            "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383804111,
+            "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "run": 38110132845,
+        "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+        "suite": 103255243492,
+        "jobs": [
+          {
+            "id": 114383803906,
+            "name": "build-sdist (ubuntu-py3.12)",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383803984,
+            "name": "build-wheels (macos-15)",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383804032,
+            "name": "build-wheels (ubuntu-22.04)",
+            "conclusion": "success"
+          },
+          {
+            "id": 114383804033,
+            "name": "build-wheels (windows-2022)",
+            "conclusion": "success"
+          },
+          {
+            "id": 114386954900,
+            "name": "publish (3.12)",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ],
+    "scope": "all7triggered workflows fulldeclared matrix shapes matched actualauthenticated workflow blobs/checksuites; no optional manual/private acceptance assumed",
+    "publish_job_registry_upload": "push-only upload skipped on actualpullrequest, artifact verifier/canary jobgreen is not registrypublication"
+  },
+  "complete_source_union": {
+    "actual_authenticated_leaves": 1409,
+    "nonconflicting_leaf_modes_blobs_verified": 1407,
+    "both_parent_changed_paths": [
+      ".github/workflows/_gen_workflows.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "combined_generator_matches_external_clean_git_merge_file": true,
+    "both_parent_canonical_guide_additions_retained": true,
+    "source_checkpoint_d75_and_original1151_ancestry_preserved": true
+  },
+  "reviews_threads_policy": {
+    "isDraft": true,
+    "submitted_reviews": 0,
+    "review_threads": 0,
+    "unresolved_threads": 0,
+    "pagination_complete": true,
+    "reviewDecision": null,
+    "mergeable": "MERGEABLE",
+    "mergeStateStatus": "CLEAN",
+    "live_target_rules": [],
+    "GraphQL_branchProtectionRule": null,
+    "REST_protection": "403Resource not accessible by integration; do not infer waivedpolicies",
+    "repository_AGENTS": "required relevant source/static/hosted gates and durable operational guidance; campaign requires accepted source/reviews/exacttarget admission"
+  },
+  "current_windows_readback": {
+    "path": "/workspace/engineering/pr311-current-d75-windows-independent-review/independent-current-terminal-readback.json",
+    "size": 17020,
+    "sha256": "3b4e84132a7be9e36892e41f4f31120ddd359a794acaff576f6b1b56334f97ed"
+  },
+  "retained_windows_V2_design_only": {
+    "path": "/workspace/engineering/windows-next-observation-independent-review/independent-v2-design-review.json",
+    "size": 12370,
+    "sha256": "95f44464acd56e278a87890e0c5f24da9b38cbfb044f925f48bbf1c2221355e3"
+  },
+  "V2_disposition": "DEFER_IMPLEMENTATION_AND_ACTUAL_RUN current6formerlyfailednodesPASS; preserve approveddesign95f for later scopedneed without inferring rootcause/cleanup",
+  "minimal_after310_refresh": {
+    "pr_and_branch": "samePR311/test/runtime-installed-wheel-import-guard-20261010",
+    "starts_from": "d75b25fb4c354e5c95bc0f639b426d6ff402104b",
+    "dependency_barrier": "310actualintegrationfirst; no mergewhile310pending",
+    "target": "readactual namedtarget commit/tree AFTER accepted310integration, do not guess futuretuple",
+    "operation": "ordinary merge actualtarget INTO existingd75branch, retain d75/1151 history; no replacementbranch/squash/acceptedimplementationduplication",
+    "preserve": [
+      "production behavior/90readiness20cleanup",
+      "installedwheel guard acceptance",
+      "original1151eightJSON/81breceipt",
+      "currentd75fourJSON/3b4receipt",
+      "approvedWindowsV2design95f remainsdeferred"
+    ],
+    "required_beforepush": [
+      "exactorderedparents/completeuniontree/leafmode preservation review",
+      "combined canonicalgenerator/eightoutputs exactroundtrip",
+      "scopedmeaningful guard/diagnostic controls and relevantfullconfiguredtests/lint/typechecks; sourcechanges assessedagainstnewtarget",
+      "canonicalguidance preserves limits and exactnewreceipt"
+    ],
+    "required_beforemerge": [
+      "freshfullcurrentunionhostedexpectedjobs/checks includingWindowsintegration",
+      "exacthead/source/control/tree/targetreadback; nocurrentd75green relabeling",
+      "draftready/review/thread/policy admission underrootexistingauthorization",
+      "artifactproducer scope recomputed againstcurrenttarget if claimingretainednative or wheel qualification"
+    ]
+  },
+  "held_limits": [
+    "No rootcause/completecleanup/coldrepeatability claim from currentpass.",
+    "Older2999cb and original1151 failures remain historical, not repaired by otherbranchpass.",
+    "No acceptanceoflater310target or full311 merge now.",
+    "Private01f/fafb/frozenv6spec-runner/fullissue/releasegraph remain separateHOLD.",
+    "PolicyREST403 disclosed; rules[]/GraphQLnull are observations, not campaigngatewaivers."
+  ],
+  "authenticated_raw_bindings": [
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/acquisition.json",
+      "size": 2038,
+      "sha256": "ed118b5813c8d8d7d09b8378b591f14308bc41dcd8e9761959f8764a82885a41"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/actual-base-branch.json",
+      "size": 5413,
+      "sha256": "7141ae86aa632e8fbbc3dd762d049b769a6b019b8f372415eb9bdfd258859b88"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/actual-base-protection.json",
+      "size": 167,
+      "sha256": "e2373c984773dfee141aed6665a6497c3d7ae4022e643d1c860ab01b710aa23a"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/actual-base-rules.json",
+      "size": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/actual-control-source-admission.json",
+      "size": 3474,
+      "sha256": "93a5e83be0d075338c0f87aa2fc3e727ea72b824d9e941435a277ac5f082bebf"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/actual-control-tree.json",
+      "size": 445063,
+      "sha256": "367b2ed467ad11fe285e736e2572df2d649efdb432d6a7765f58f0edc7697f28"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/all-head-runs.json",
+      "size": 88658,
+      "sha256": "35a16c3e44f4d63d0f55e9a532e3a31b585ebcf7b7750956add09aa802c1a1c1"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/checks.json",
+      "size": 83203,
+      "sha256": "9ea1521d9733f2ad7fabb2e0a5a21407c379896d600bc16fecf76d1881b35c8d"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/graphql-admission.json",
+      "size": 752,
+      "sha256": "90bc372005f13856de524bc415d11d037f83dd26392ed1eee9e490666b6e54ae"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/jobs.json",
+      "size": 15916,
+      "sha256": "39298a49db7dbc18ea6a148fd0a1a0e6c0d876593515d4369b26f925e2afa466"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/pr.json",
+      "size": 21704,
+      "sha256": "0458b9af9d06b6a7d81a1c41d298184fb620d6f305fb7e1deb3a0e918187a19d"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/protection.json",
+      "size": 167,
+      "sha256": "e2373c984773dfee141aed6665a6497c3d7ae4022e643d1c860ab01b710aa23a"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/reviews.json",
+      "size": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/rules.json",
+      "size": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/run-38110132823-jobs.json",
+      "size": 3125,
+      "sha256": "072053292e234e30060940a9026d53d9b7a9bb2e732e73f6fafcffbaa825ba4a"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/run-38110132825-jobs.json",
+      "size": 1931,
+      "sha256": "27d94f1a2bcefef9445028518a304aea4b516ba93ffc08c083e71430d245bc1c"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/run-38110132836-jobs.json",
+      "size": 15916,
+      "sha256": "39298a49db7dbc18ea6a148fd0a1a0e6c0d876593515d4369b26f925e2afa466"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/run-38110132838-jobs.json",
+      "size": 14283,
+      "sha256": "1a23aa332a1b02a3460d2cfd4c9631235526f3a9c91489cd32ddfd248b1237f7"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/run-38110132845-jobs.json",
+      "size": 23166,
+      "sha256": "37951887f3fc68e79c5db1d6a97b7d5ab8a4674eac6d345e71468b15423b3e8a"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/run-38110132846-jobs.json",
+      "size": 22695,
+      "sha256": "01ed2905408c7b85aa364ddc8164ca7ea1c502dff8d80de249a400702d06a040"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/run-38110132855-jobs.json",
+      "size": 20034,
+      "sha256": "d9c45bf5623fa7c77a1102da1ea599770a0944ef886207ad61d2f5612232a742"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/run.json",
+      "size": 12656,
+      "sha256": "a2371f88eb03b049f828bacba16df80a7c9931273afe691a8fb1500b8d568301"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-owned/statuses.json",
+      "size": 4492,
+      "sha256": "c6e6d3a48c4cd59b2440ea53920f976bba52d82be4257e4a4273c54519b89b1b"
+    }
+  ],
+  "canonical_documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_proposed_delta": {
+      "path": "/workspace/engineering/pr311-current-full-admission-review/canonical-full-admission-and-dependency-refresh-proposed.patch",
+      "size": 1515,
+      "sha256": "caae3f92c32948f0bb29c93302b1ae85f5c4cc3c3671100690cd95dad5d52671"
+    },
+    "disposition": "PROPOSED to integrationagent; nosource mutation; historical/currentreadbackproposals retained",
+    "durable_learning": "declared completeCI and policy surfaces admit actualtuple; dependencytargetrefresh requires samebranch sourceunion andfreshgates; PRpublishjob is not registryupload; greenWindows can deferdesign withoutcauseclaim",
+    "evidence": "23exactheadchecks/7declaredworkflowmatrices/complete1409leafcontrol/reviews0threads0/draft/policyresponses/3b4Windowsreadback/95fdesign",
+    "stale_ambiguity": "greenrolluporCLEAN permitslaterbase merge; PRpublishjobmeanspublished; noobservedprotection grantsgatewaiver; design-onlyGOrequiresimplementationaftercurrentpass",
+    "remaining_uncertainty": "future310integrationtuple/newuniongates/draftadmission/protectionRESTsurface/historicalcause/fullcleanup/private-releaseacceptance",
+    "upstream": "none"
+  }
+}

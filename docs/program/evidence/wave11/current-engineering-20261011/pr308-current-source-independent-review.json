@@ -1,0 +1,165 @@
+{
+  "verdict": "GO_NORMAL_PUSH_EXACT483E_CURRENT_UNION_SOURCE_CONTROL; HOLD_CURRENT_HOSTED_MERGE_AND_REAL_CANDIDATE_RCC_ACCEPTANCE",
+  "scope": "read-only current source/control/evidence review; no reviewer actual test/RCC/native/provider/cache execution or source mutation",
+  "source": {
+    "head": "483e3e735c268b08acba1fd3930a9a34e0deaa91",
+    "tree": "9b69d78117e0e5cade3f59fcacc6db56a747b61f",
+    "parent": "493ecbd2c9163786675cc0cc9b3853e6e75ca196",
+    "ordinary_merge_ordered_parents": [
+      "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+      "fbde0d3a248c47c9964851355f96575c89a87329"
+    ],
+    "merge_tree": "6d9eb45a2c7e031915cb72bee88cd54cdbcf96cd",
+    "clean": true
+  },
+  "independent_union": {
+    "common_ancestor": "19380993febaa71238eaee3026b5c808773283ff",
+    "nonconflicting_parent_leaves_checked": 1405,
+    "conflicted_guide_paths": [
+      "docs/skills/repository-operations.md"
+    ],
+    "both_parent_guide_additions_retained": true,
+    "original_verifier_and_candidate_control_blobs_modes_preserved": true,
+    "only_followup_delta": "11 canonical guide lines",
+    "followup_unchanged_blob_mode_pairs": 1405,
+    "native_producer_inputs_mode_blob_sha_verified": 268,
+    "selected_test_inputs_mode_blob_sha_verified": 5,
+    "production_versions_locks_Rcc_process_selftest_fixtures_workflows_preserved": true
+  },
+  "source_behavior_review": [
+    "PinnedPoetry reads actual checkedout package versions before building both owned candidate wheels; no hardcodedCore1.0.2 relabeling.",
+    "Expected distribution/version determine selected wheel filename and exactName/Version admission from uniqueMETADATA member; mismatch stops use.",
+    "Candidate records bind actual wheel filename/version/digest and expected managed-action results to the same candidate versions.",
+    "Original synthetic baseline verifies source/filename/METADATA tuple; independent metadata-version poison meaningfully rejects mismatch.",
+    "No Runtime/Core/Helper production, publicfloor, releasepin, nativefixture or workflow policy changed in this refresh."
+  ],
+  "current_validation": {
+    "configured_test_not_integration_pass": 1134,
+    "existing_skips": 13,
+    "configured_lint": "PASS",
+    "configured_typecheck_source_files": 334,
+    "scoped_source_controls_pass": 37,
+    "real_RCC_optin_test_deselected": 1,
+    "toolkit_pass": 69,
+    "all_generated_roundtrip_exact": 8,
+    "tests_source_tuple": "493 ordinary union; frozen483 only docs, all1405 otherblob/modepairs unchanged",
+    "optional_markdownlint": "unavailable; required implemented task warnings retained; canonicaldiffcheckPASS"
+  },
+  "original_worker_receipt": {
+    "path": "/workspace/engineering/pr308-refresh-owned/successor-receipt.json",
+    "size": 11026,
+    "sha256": "87f2252e89bdc9f1368a2ea2a0b9b55095606567517e3f378a3a0ce23a5f7f1d"
+  },
+  "raw_evidence_hashes_verified": {
+    "doctor.log": {
+      "path": "/workspace/engineering/pr308-refresh-owned/doctor.log",
+      "size": 12786,
+      "sha256": "0146faf5b712aeba28c74eca4bfad41b159d925f769474e6c29a24203a020b49"
+    },
+    "bootstrap.log": {
+      "path": "/workspace/engineering/pr308-refresh-owned/bootstrap.log",
+      "size": 27575,
+      "sha256": "8812f8f47f040dee39b872299c8cc91d5380fcca9831b646647c7654c525b756"
+    },
+    "toolkit-test.log": {
+      "path": "/workspace/engineering/pr308-refresh-owned/toolkit-test.log",
+      "size": 14344,
+      "sha256": "e2bdf8574b713a478920b5e8a939e6ca941d2a83fa3c11e0450b7092538f672e"
+    },
+    "scoped-verifier.log": {
+      "path": "/workspace/engineering/pr308-refresh-owned/scoped-verifier.log",
+      "size": 3945,
+      "sha256": "e449cc9a68d7162c16ae286782aeb6b81196c4e9c2bcbfc457c903f8a2d77df3"
+    },
+    "configured-gates.log": {
+      "path": "/workspace/engineering/pr308-refresh-owned/configured-gates.log",
+      "size": 294138,
+      "sha256": "65f7d32b8f2906e89eb6e82288ff230b77dc6f716b2543a077aa679df4a5d5f4"
+    },
+    "union-receipt.json": {
+      "path": "/workspace/engineering/pr308-refresh-owned/union-receipt.json",
+      "size": 1266,
+      "sha256": "63a35b33e6f3e5705a48f0d21282b129f3b6a9778371cbcf3d1a9f633a0ff359"
+    },
+    "preservation-receipt.json": {
+      "path": "/workspace/engineering/pr308-refresh-owned/preservation-receipt.json",
+      "size": 433,
+      "sha256": "a515180c42bf775f8a424ebfd566ef6f1a3b06ab959203a81c72e3ee19e0dea8"
+    },
+    "producer-parity-receipt.json": {
+      "path": "/workspace/engineering/pr308-refresh-owned/producer-parity-receipt.json",
+      "size": 638,
+      "sha256": "1ba9bd09bdc42a3517ec20c08d69ddf889b45bb6d988f445c49350adb4443118"
+    },
+    "frozen-producer-parity-receipt.json": {
+      "path": "/workspace/engineering/pr308-refresh-owned/frozen-producer-parity-receipt.json",
+      "size": 835,
+      "sha256": "56488a89398a7df2fb5928a8308f5ff38fb3e291c85a1d5966995cb3038c7b8e"
+    },
+    "workflow-roundtrip.log": {
+      "path": "/workspace/engineering/pr308-refresh-owned/workflow-roundtrip.log",
+      "size": 4463,
+      "sha256": "8227d54e0bf6ce29e5ac65123fdbb3e7d0f16a1ce88d004e725fdce10ed5b963"
+    },
+    "workflow-roundtrip-receipt.json": {
+      "path": "/workspace/engineering/pr308-refresh-owned/workflow-roundtrip-receipt.json",
+      "size": 1806,
+      "sha256": "e1af148596cf24f950fa9aa66cdd238a68267612f90a4d6cf35acf1ebf287bbf"
+    },
+    "generated-setup-disposition.json": {
+      "path": "/workspace/engineering/pr308-refresh-owned/generated-setup-disposition.json",
+      "size": 514,
+      "sha256": "5918488056672d57b158c442ab7afe0cae2abd6c265dc4d459bf73808ea135b4"
+    }
+  },
+  "historical_receipts_retained": [
+    {
+      "file": {
+        "path": "/workspace/engineering/pr308/action_server/tests/acceptance_evidence/candidate-wheel-67e82ef7.json",
+        "size": 1371,
+        "sha256": "66b0b864ac03a5ddd96cc9839911073cf553cfe88e574bfdaccc6752ebbbacbf"
+      },
+      "original_source": "67e82ef7c2bfd529f36d756c2c97c466bd3952e4",
+      "wrapper_exitCode": -1,
+      "retained_unchanged": true
+    },
+    {
+      "file": {
+        "path": "/workspace/engineering/pr308/action_server/tests/acceptance_evidence/candidate-wheel-e33987b6.json",
+        "size": 1687,
+        "sha256": "78bd13f05aab66a354d25b0e7a95afbc786f28afa9ccf9e626a6cedbbbcca964"
+      },
+      "original_source": "e33987b6224fbc0b444c9b8f26908b3040447223",
+      "wrapper_exitCode": -1,
+      "retained_unchanged": true
+    }
+  ],
+  "held_gates": [
+    "Fresh exact483 hosted complete job/check/review gates are required before merge; no oldgreen carry.",
+    "Servicefree synthetic candidateversion controls do not prove actualPoetrywheel/RCC/provider/coldorwarmreuse/native/private acceptance.",
+    "Older candidate67e82/e339 receipt source/version identities and failedwrapperexit-1 remain historical; sourceparity does not repair or relabel them.",
+    "Unchanged268native producer inputs support scoped retainedartifact sourceparity only, not currentcandidatewheel or latermerged source qualification.",
+    "Original private01f/fafb chain and frozenv6spec/runner/publication gates remain HOLD; no infrastructure substitution.",
+    "Generated setup.py was absent atfreeze; worker discloses no retained bytes/digest and no manual/generic cleanup claim."
+  ],
+  "canonical_documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "canonical_binding": {
+      "path": "/workspace/engineering/pr308/docs/skills/repository-operations.md",
+      "size": 227248,
+      "sha256": "6d00c782f62e13b188053d79f94850949d603e954aff71a0d5d2f96b994329a6"
+    },
+    "exact_integrated_delta": {
+      "path": "/workspace/engineering/pr308-independent-current-review/canonical-current-version-source-scope.patch",
+      "size": 1432,
+      "sha256": "6efd2c2a814dba6c9b9ca22cacb7368a19cc4b89d2a8fc2511d795b968cee698"
+    },
+    "disposition": "INTEGRATED exact483 doconly followup, both parent sourceguidance retained",
+    "durable_learning": "synthetic checkedversion tuple controls are source admission, not realcandidateRCC/warmprovider/native execution; preserve previous failed receipt tuple",
+    "evidence": "preserved94716implementation/controls;37sourcecontrols1liveDESELECT;1134/13configured334type/69Toolkit/8roundtrip;268+5inventory;67e82/e339historicalfailures",
+    "stale_ambiguity": "passing mock version control proves realPoetrybuild or nativewarmreuse; unchanged producerbytes relabel olderactualsource/failedwrapper",
+    "remaining_uncertainty": "freshhosted/fullrealcandidate/privateissue/releasegates",
+    "upstream": "none"
+  },
+  "windows_design": "previous95f V2 designonlyGO remains separate; freshd75 readback ongoing; no implementation/run authorized"
+}

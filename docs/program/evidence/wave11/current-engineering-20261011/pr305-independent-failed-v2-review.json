@@ -1,0 +1,59 @@
+{
+  "status": "CONFIRMED_CONTROLLER_MODULE_BINDING_FAILURE_BEFORE_CONSUMER",
+  "actual_attempts": 1,
+  "checkpoint": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v2-failed-checkpoint.json",
+    "size": 9334,
+    "sha256": "989584cfeaab8a9eb26ca3cd436c594cf3b6cf322c3f17c1bc51c6d00784e79a"
+  },
+  "retained_v2_tuple": {
+    "canvas-native-public-runner-v2.py": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v2.py",
+      "size": 28284,
+      "sha256": "f16f5ebefe6ac74d3259b1bbc5af6054a4aedd563e24eef7a1dfebcb0e0f2454"
+    },
+    "test_runner_admission_v2.py": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v2.py",
+      "size": 13928,
+      "sha256": "5f30c9d49a806639b9ce01de62e2f61fec98db9349483c94267e4ea662619a28"
+    },
+    "immutable-runner-proposal-v2.json": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v2.json",
+      "size": 14351,
+      "sha256": "5b183508588d3d58ae433447c8c35acb80c55b94e757f2d92106a78a6e8c3743"
+    }
+  },
+  "actual_source": "14c1c1965314b192c4118c3281f5539d29f0aa6f",
+  "suite": {
+    "tests": "1",
+    "failures": "1",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.164"
+  },
+  "diagnosis": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/collected-module-diagnosis.json",
+    "size": 581,
+    "sha256": "9196e01407067c616e446eccb69f4e76f6b4186c71e3a2b3312707095b61ba19"
+  },
+  "observed_identity": {
+    "nodeid": "tests/action_server_tests/mcp/test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge",
+    "collected_module": "test_mcp_apps_authoring",
+    "collected_file": "/workspace/engineering/pr305/action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+    "preimport_module": "action_server_tests.mcp.test_mcp_apps_authoring",
+    "same_object": false,
+    "preimport_hook_callable": true,
+    "collected_hook_callable": false
+  },
+  "primary": "Public-mode ownership hook installed on qualified preimport module, but pytest collected a distinct module object from the same source file; actual collected hook unset",
+  "boundary": "Test body fails in _canvas_core_mode before preparation/build/start/browser; fixture constructor does not start Runtime",
+  "secondary": "Runtime cleanup refused zero started owned Runtime objects; cleanup fields remain unavailable/null, never fabricated",
+  "outer_cleanup": "Returned owner cleanup fields were not retained before check_returncode raised; cannot infer per-kind cleanup or counts",
+  "native_post_inventory": "both original and owned extracted1192 inventories equal immutable measured inventory",
+  "no_Runtime_leak_classification": "Failure is controller boundary before startup; unavailable Runtime cleanup does not establish a leak or universal negative process proof",
+  "source_clean": true,
+  "all11_retained_reference_hashes_checked": true,
+  "raw_logs_read_policy": "No raw environments, profiles, datadirs, credentials or product payloads published; only fixed failure category and measured metadata retained",
+  "next": "V3 must qualify exact pytest collected item.module and preserve returned outer cleanup before nonzero; fresh immutable review and root authorization required",
+  "Upstream disposition": "none; Actions external controller binding, no RCC/provider defect established"
+}

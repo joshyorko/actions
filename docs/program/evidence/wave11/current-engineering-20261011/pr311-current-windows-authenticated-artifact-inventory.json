@@ -1,0 +1,37 @@
+{
+  "total_count": 4,
+  "artifacts": [
+    {
+      "id": 11691860432,
+      "name": "action-server-macos-15",
+      "size_in_bytes": 58686163,
+      "digest": "sha256:d5093551064c3c4c02bebb02796b4ad89e4386ba8ac373b8c95bb70803120b42",
+      "expired": false,
+      "created_at": "2026-10-11T04:15:46Z"
+    },
+    {
+      "id": 11691314969,
+      "name": "native-startup-diagnostics-38110132836-1",
+      "size_in_bytes": 2582,
+      "digest": "sha256:0cd288b83a80bddb29e0add0c5f26f16aa6649c0c1582bcd1a8c7a332c6354e7",
+      "expired": false,
+      "created_at": "2026-10-11T04:39:49Z"
+    },
+    {
+      "id": 11691237742,
+      "name": "action-server-ubuntu-22.04",
+      "size_in_bytes": 77832835,
+      "digest": "sha256:b237e8f7ff42cbb6268def608012178c570a80c39a68ca3562532aa1465d2fbe",
+      "expired": false,
+      "created_at": "2026-10-11T04:07:54Z"
+    },
+    {
+      "id": 11690418592,
+      "name": "action-server-windows-2022",
+      "size_in_bytes": 53565375,
+      "digest": "sha256:5438f53d4eebc0a1e37561ba57855b79da286f239e5ef24eb394fe196b2032c7",
+      "expired": false,
+      "created_at": "2026-10-11T04:03:38Z"
+    }
+  ]
+}

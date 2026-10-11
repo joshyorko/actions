@@ -1,0 +1,494 @@
+{
+  "verdict": "GO_EXACT_CURRENT_D75_WINDOWS_JOB_AND_BOUNDED_DIAGNOSTIC_READBACK; HOLD_TIMEOUT_ROOTCAUSE_FULL_CLEANUP_WHOLE_PR_AND_RELEASE",
+  "scope": "existing terminal artifacts/log acquired once; read-only source/evidence review; no rerun,cancel,implementation or infrastructure",
+  "run": {
+    "id": 38110132836,
+    "head_sha": "d75b25fb4c354e5c95bc0f639b426d6ff402104b",
+    "event": "pull_request",
+    "status": "completed",
+    "conclusion": "success",
+    "run_attempt": 1,
+    "created_at": "2026-10-11T03:59:22Z",
+    "updated_at": "2026-10-11T04:40:45Z"
+  },
+  "job": {
+    "id": 114383803907,
+    "run_id": 38110132836,
+    "head_sha": "d75b25fb4c354e5c95bc0f639b426d6ff402104b",
+    "name": "build (windows-py3.12-devmode)",
+    "status": "completed",
+    "conclusion": "success",
+    "started_at": "2026-10-11T03:59:27Z",
+    "completed_at": "2026-10-11T04:40:44Z",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Checkout repository and submodules",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Install the latest version of uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Install Python 3.12",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Install devutils requirements",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Install project (not dev)",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 6
+      },
+      {
+        "name": "Install project (dev)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7
+      },
+      {
+        "name": "Setup go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8
+      },
+      {
+        "name": "Setup node",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9
+      },
+      {
+        "name": "Build frontend",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10
+      },
+      {
+        "name": "Build OAuth2 config",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11
+      },
+      {
+        "name": "Test Go wrapper child lifecycle",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12
+      },
+      {
+        "name": "Build binary",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13
+      },
+      {
+        "name": "Upload artifact: action_server/dist/final/",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14
+      },
+      {
+        "name": "Test (not integration)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15
+      },
+      {
+        "name": "Install Playwright Chromium for Runtime browser acceptance",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16
+      },
+      {
+        "name": "Test (integration)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17
+      },
+      {
+        "name": "Retain Windows native startup diagnostics",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18
+      },
+      {
+        "name": "`inv lint`, potentially fixed with `inv pretty`",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19
+      },
+      {
+        "name": "`inv typecheck`",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20
+      },
+      {
+        "name": "`inv docs` with checking on files changed",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21
+      },
+      {
+        "name": "Post Setup node",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 39
+      },
+      {
+        "name": "Post Setup go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 40
+      },
+      {
+        "name": "Post Install the latest version of uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 41
+      },
+      {
+        "name": "Post Checkout repository and submodules",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 42
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 43
+      }
+    ]
+  },
+  "actual_control": {
+    "sha": "e3c52c5cf3f2a4437a54af137f59264cc77d91ae",
+    "tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78",
+    "parents": [
+      "fbde0d3a248c47c9964851355f96575c89a87329",
+      "d75b25fb4c354e5c95bc0f639b426d6ff402104b"
+    ]
+  },
+  "authenticated_identity_bindings": [
+    {
+      "path": "/workspace/engineering/pr311-current-d75-windows-diagnostics-owned/authenticated-run.json",
+      "bytes": 261,
+      "sha256": "0f799080deafd255b35e55b6b52ec809d1fde2ad9d27075b9f5437a07a357076"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-d75-windows-diagnostics-owned/authenticated-job.json",
+      "bytes": 3818,
+      "sha256": "7b250cb6a70ee750337040a154d730d3155a84f078a00b149b800fed22c4f014"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-d75-windows-diagnostics-owned/authenticated-control.json",
+      "bytes": 225,
+      "sha256": "13e5f4e875e5f4b2cac551409faebc3b1a4902da63f816c43d1f08e962a3c64a"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-d75-windows-diagnostics-owned/authenticated-artifact-inventory.json",
+      "bytes": 1142,
+      "sha256": "514c777fb9a4c290376ff77307d7e9821a2513cb0c9afc14f9dc08da5d857dd4"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-d75-windows-diagnostics-owned/authenticated-source-leaf-admission.json",
+      "bytes": 48255,
+      "sha256": "97fd2b0072f2a2238ff2f15239928812873e5d85e51cc239c693e5207ee17c14"
+    }
+  ],
+  "original_artifact": {
+    "id": 11691314969,
+    "name": "native-startup-diagnostics-38110132836-1",
+    "size_in_bytes": 2582,
+    "digest": "sha256:0cd288b83a80bddb29e0add0c5f26f16aa6649c0c1582bcd1a8c7a332c6354e7",
+    "expired": false,
+    "created_at": "2026-10-11T04:39:49Z"
+  },
+  "original_zip": {
+    "path": "/workspace/attachments/33e695fb-7000-461b-88c5-f7623b15ea0d/pr311-current-d75-windows-startup-diagnostics.zip",
+    "bytes": 2582,
+    "sha256": "0cd288b83a80bddb29e0add0c5f26f16aa6649c0c1582bcd1a8c7a332c6354e7"
+  },
+  "original_four_json": [
+    {
+      "path": "/workspace/engineering/pr311-current-d75-windows-diagnostics-owned/reports/34ec97696df8d90c-1.json",
+      "bytes": 1578,
+      "sha256": "ca18d44d8965a07428720a7fe9d1fb9072b2bbc03cafbe3e843b0ac50441afaa"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-d75-windows-diagnostics-owned/reports/34ec97696df8d90c-2.json",
+      "bytes": 319,
+      "sha256": "92d58a4b1bc701747045babace337cd164b808d1b611af5b3a678059a45835f8"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-d75-windows-diagnostics-owned/reports/7d0f2e912f58600f-2.json",
+      "bytes": 319,
+      "sha256": "92d58a4b1bc701747045babace337cd164b808d1b611af5b3a678059a45835f8"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-d75-windows-diagnostics-owned/reports/7d0f2e912f58600f-1.json",
+      "bytes": 1559,
+      "sha256": "20515eb3aaf80154fa09d474089b4bd2521f598b099b1f5964c5cdd3a5a0e201"
+    }
+  ],
+  "all_actual_report_fields_allowlisted": true,
+  "windows_crlf_source_bindings": [
+    {
+      "case": "34ec97696df8d90c",
+      "path": "src/actions/server/_rcc.py",
+      "windows_crlf": {
+        "sha256": "36ea643613cd17028160f79e3646f4e48d4b271c94bfaf5ac488bcca60d347da",
+        "size": 17638
+      }
+    },
+    {
+      "case": "34ec97696df8d90c",
+      "path": "src/actions/server/_robo_utils/process.py",
+      "windows_crlf": {
+        "sha256": "94c1ebe15ee8e2971da5056858b2c9726e4297a99f3b80cfae17f5b74d2a8721",
+        "size": 14638
+      }
+    },
+    {
+      "case": "34ec97696df8d90c",
+      "path": "src/actions/server/_selftest.py",
+      "windows_crlf": {
+        "sha256": "d07e6877c858d8ea51f3b8e4730dbb2014a7ef8b67038971474aa61b65cfb420",
+        "size": 26204
+      }
+    },
+    {
+      "case": "34ec97696df8d90c",
+      "path": "tests/action_server_tests/fixtures.py",
+      "windows_crlf": {
+        "sha256": "7e75dc6b39c6bcd99c24ddd122b180b787780cfe15d97e6f7089518af0272ebd",
+        "size": 13575
+      }
+    },
+    {
+      "case": "34ec97696df8d90c",
+      "path": "tests/action_server_tests/native_startup_diagnostics.py",
+      "windows_crlf": {
+        "sha256": "6dfcdf9338978146dc016c181a7c03bdb90207357b15dca6da1e2212f10e3c73",
+        "size": 13345
+      }
+    },
+    {
+      "case": "34ec97696df8d90c",
+      "path": "tests/action_server_tests/test_cli_live_reload_multi_package.py",
+      "windows_crlf": {
+        "sha256": "a1bc4c378c3afce4c89f54ed1b27784db86ce98b27c03dbc8a0e72049a2eccdd",
+        "size": 15492
+      }
+    },
+    {
+      "case": "34ec97696df8d90c",
+      "path": "tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+      "windows_crlf": {
+        "sha256": "9414dbfd31a49619005dc5417e36e421d60406fd9a3385ab9b6968760eba902f",
+        "size": 14354
+      }
+    },
+    {
+      "case": "7d0f2e912f58600f",
+      "path": "src/actions/server/_rcc.py",
+      "windows_crlf": {
+        "sha256": "36ea643613cd17028160f79e3646f4e48d4b271c94bfaf5ac488bcca60d347da",
+        "size": 17638
+      }
+    },
+    {
+      "case": "7d0f2e912f58600f",
+      "path": "src/actions/server/_robo_utils/process.py",
+      "windows_crlf": {
+        "sha256": "94c1ebe15ee8e2971da5056858b2c9726e4297a99f3b80cfae17f5b74d2a8721",
+        "size": 14638
+      }
+    },
+    {
+      "case": "7d0f2e912f58600f",
+      "path": "src/actions/server/_selftest.py",
+      "windows_crlf": {
+        "sha256": "d07e6877c858d8ea51f3b8e4730dbb2014a7ef8b67038971474aa61b65cfb420",
+        "size": 26204
+      }
+    },
+    {
+      "case": "7d0f2e912f58600f",
+      "path": "tests/action_server_tests/fixtures.py",
+      "windows_crlf": {
+        "sha256": "7e75dc6b39c6bcd99c24ddd122b180b787780cfe15d97e6f7089518af0272ebd",
+        "size": 13575
+      }
+    },
+    {
+      "case": "7d0f2e912f58600f",
+      "path": "tests/action_server_tests/native_startup_diagnostics.py",
+      "windows_crlf": {
+        "sha256": "6dfcdf9338978146dc016c181a7c03bdb90207357b15dca6da1e2212f10e3c73",
+        "size": 13345
+      }
+    },
+    {
+      "case": "7d0f2e912f58600f",
+      "path": "tests/action_server_tests/test_cli_live_reload_multi_package.py",
+      "windows_crlf": {
+        "sha256": "a1bc4c378c3afce4c89f54ed1b27784db86ce98b27c03dbc8a0e72049a2eccdd",
+        "size": 15492
+      }
+    },
+    {
+      "case": "7d0f2e912f58600f",
+      "path": "tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+      "windows_crlf": {
+        "sha256": "9414dbfd31a49619005dc5417e36e421d60406fd9a3385ab9b6968760eba902f",
+        "size": 14354
+      }
+    }
+  ],
+  "source_admission": "authenticated untruncated synthetic-control tree validates seven reported leaves plus268tracked producer/five selected-test modes/blobs; source hash identity not artifact equivalence",
+  "actual_integration_counters": {
+    "passed": 131,
+    "failed": 0,
+    "skipped": 18,
+    "deselected": 1166,
+    "seconds": 1682.5
+  },
+  "actual_nonintegration_counters": {
+    "passed": 1069,
+    "failed": 0,
+    "skipped": 94,
+    "warnings": 14,
+    "seconds": 463.97
+  },
+  "six_former_failure_nodes": [
+    {
+      "test_name": "test_failed_watched_reload_keeps_both_packages_and_recovers",
+      "actual_log_status": "PASS"
+    },
+    {
+      "test_name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+      "actual_log_status": "PASS"
+    },
+    {
+      "test_name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+      "actual_log_status": "PASS"
+    },
+    {
+      "test_name": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]",
+      "actual_log_status": "PASS"
+    },
+    {
+      "test_name": "test_cli_resource_owner_history_across_reload_and_restart",
+      "actual_log_status": "PASS"
+    },
+    {
+      "test_name": "test_successful_generation_switch_drains_old_run_on_its_source_snapshot",
+      "actual_log_status": "PASS"
+    }
+  ],
+  "initial_start_observations": [
+    {
+      "nodeid": "tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+      "final_initial_start_report": {
+        "after_start_returned": {
+          "host_readers_alive": [
+            true,
+            true
+          ],
+          "observation": "host_only",
+          "returncode": null
+        },
+        "exception": null,
+        "native_executable": {
+          "sha256": "f24c34ff4a65d477a524f21f44122517bb4a85462b1ca3e653232e5df9450be5",
+          "size": 57695232
+        },
+        "outcome": "ready",
+        "sampler_alive": false,
+        "sampler_cancelled": true
+      }
+    },
+    {
+      "nodeid": "tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+      "final_initial_start_report": {
+        "after_start_returned": {
+          "host_readers_alive": [
+            true,
+            true
+          ],
+          "observation": "host_only",
+          "returncode": null
+        },
+        "exception": null,
+        "native_executable": {
+          "sha256": "f24c34ff4a65d477a524f21f44122517bb4a85462b1ca3e653232e5df9450be5",
+          "size": 57695232
+        },
+        "outcome": "ready",
+        "sampler_alive": false,
+        "sampler_cancelled": true
+      }
+    }
+  ],
+  "retained_80_88_samples": 0,
+  "reported_startup_duration_seconds": "unavailable; no timing inferred from missing samples",
+  "raw_RCC_progress_marks": 0,
+  "actual_cleanup_return_predicates": "unavailable; initial ready report is not final cleanup",
+  "full_decoded_job_log_private": {
+    "path": "/workspace/engineering/pr311-current-d75-windows-diagnostics-owned/job114383803907-original-decoded.log",
+    "bytes": 580306,
+    "sha256": "518f4d4a2cb8d28bcbb8a90f37747fe8248fb36b90f97b62f54db5fbc4f95fbb"
+  },
+  "observed_current_vs_historical_bytes": {
+    "current_native_executable": {
+      "sha256": "f24c34ff4a65d477a524f21f44122517bb4a85462b1ca3e653232e5df9450be5",
+      "size": 57695232
+    },
+    "historical1151_native_sha256": "45e6de407f12101d04d2d7e4972c563c5dafb48fafa4a2183d1136bc987566f0",
+    "current_RCC_config_sha256": "1ad9ed9323e1e9250f60aad72598d1231cd861e93c15d41ad1ea568c3fbb0500",
+    "historical_RCC_config_sha256": "e3ad189fdb6b833fca5f3411078f3b7ead993dbfc42f7330dbb8111bd8b1d6b0",
+    "not_relabelled": true,
+    "current_RCC_executable_actual_digest": "not observed; no process sample, historical binary digest not carried"
+  },
+  "windows_V2_design_disposition": "DEFER_IMPLEMENTATION_AND_ACTUAL_RUN_NOW; retained95f design-onlyGO remains available if a later exact failure needs discrimination; no current Windows failure demonstrated here",
+  "limits": [
+    "No retained native JUnit fabricated from original log counters.",
+    "Initial READY/livewrapper/livereaders is normal active-service observation, not full cleanup or a leak.",
+    "No raw Progress/80or88sample/actualcleanup flags; rootcause/internalphase/precise startup duration remain unknown.",
+    "One passing current run does not prove cold-cache repeatability or timeout fix and does not repair2999cb/original1151 failures.",
+    "Current finalnative digest is observer-measured only, not independent wholearchive/nativeartifact comparison.",
+    "Full exact-head merge gates/reviews/otherjobs and private/release acceptance remain root-owned and separate."
+  ],
+  "canonical_documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_proposed_delta": {
+      "path": "/workspace/engineering/pr311-current-d75-windows-independent-review/canonical-current-windows-readback-proposal.md",
+      "bytes": 3107,
+      "sha256": "f605e7561b8537540ed8617bcec12312b40c2806d1b01e92e08520f312afb712"
+    },
+    "disposition": "PROPOSED current exact scoped readback; original81b/2994eef histories untouched",
+    "evidence": "currentauthenticated identities/four safe originalJSON/268+5+7source leafs/private518f rawlog counters",
+    "stale_ambiguity": "historic6 failures are current; missing80/88 proves duration; initialREADY proves cleanup; currentpass repairs oldbranch or establishescause",
+    "remaining_uncertainty": "rootcause/nativephase/fullcleanup/complete merge/private/release gates",
+    "upstream": "none"
+  }
+}

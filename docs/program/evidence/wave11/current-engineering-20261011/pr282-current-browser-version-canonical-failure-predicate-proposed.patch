@@ -1,0 +1,18 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -1046,6 +1046,15 @@
+ reason-code evidence before identifying the failed predicate. Earlier failures
+ without those diagnostics retain unknown failed-predicate identity and unknown
+ raw-receipt presence.
++A parsed failure report with `browser_version` FAIL records rejection of the
++receipt/preflight version equality for that invocation. Matching executable
++path and digest predicates do not identify the compared version strings or
++establish browser byte drift. The report omits those values, so preserve the
++failed code and unavailable comparison inputs without attributing a cause.
++Sanitized JUnit can contain a synthetic admission failure after the original
++pytest case passed; retain those two outcomes separately. A new measured reason
++code does not identify an earlier failure that lacked diagnostics or waive any
++source, browser, hash or cleanup predicate.
+ A service-free test may relocate paths in an earlier measured receipt to test this
+ validator, but it must preserve that receipt's executed source identity and must
+ not relabel it as execution of a later workflow commit. When a measured receipt

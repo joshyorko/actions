@@ -1,0 +1,309 @@
+{
+  "actual_attempts_this_runner": 1,
+  "actual_retry_authorized": false,
+  "bounds": {
+    "activate": "source /workspace/actions-cloud/activate.sh",
+    "command_seconds": 600,
+    "cwd": "/workspace/engineering/pr305",
+    "exact_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "660s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import toolkit; toolkit.poetry(\"action_server\", \"run\", \"python\", \"/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v3.py\", \"--execute-reviewed-proposal\")"
+    ],
+    "independent_parent_seconds": 645,
+    "inherited_supervisor_cleanup_grace_seconds": 10,
+    "meaning": "660 includes preflight/ownedcopy/gateway/worker/supervisor/receipt I/O;600 is consumer command budget only. Outer hard cutoff can curtail later stages if preparation unexpectedly runs long; no claim600 overall.",
+    "outer_gateway_seconds": 660,
+    "outer_term_kill_grace_seconds": 10
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md source14c changed; runner-only followup exactproposal",
+    "Durable_learning": "self-launched immutablehelper execution bytes, distinct bounds, strict per-kind cleanup flags and precise launch evidence; ownership must bind actual collected module, restore after errors; retain outer result before worker nonzero; no owner is unavailable not leak",
+    "Evidence": "unchanged acceptedhelpers + 1192/268+5 preflight +50 controls + v2 failedattempt/independent review/actualcollect-only RED-GREEN; v3 consumer notexecuted",
+    "Remaining_uncertainty": "v2 failed before consumer; successor v3 actual14c/native92498 consumer and cleanupawaitreview/authorization; no later302 proof, fullCore/coldinstall, realartifactresolver, productionhost/ChatGPT/OAuth release qualification",
+    "Stale_guidance_removed": "importhash/commandbudget/cancellation/outerreap silently establish laterbytes/wholebound/allcleanup; preimport object is collected object; absent startupowner proves native leak; returned outer cleanup may be discarded on nonzero",
+    "exact_delta": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v3-proposed-delta.md",
+      "sha256": "da9d38c7809b292e243b5092878b44b4af1de4eadb758d20bdbc465f65765482"
+    },
+    "reviewer_collection_proposal_reused": {
+      "path": "/workspace/engineering/pr305-v3-independent-runner-review/canonical-collected-module-proposed.patch",
+      "sha256": "7e244ee6986c68e7b8244f667044629fa6be661a968b99be45f1680507e78bee"
+    },
+    "reviewer_proposal_reused": {
+      "path": "/workspace/engineering/pr305-independent-public-review/canonical-proposed-delta.md",
+      "sha256": "14f779c2c891eccb44da33485554a37c9059e4cbbb874fd514af84834975397d"
+    }
+  },
+  "frozen_posthashes": [
+    {
+      "bytes": 30332,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v3.py",
+      "sha256": "d7650dc023ddc714fb67fb05e336c906c6156baa5d2bbceca00ae7b07361afba"
+    },
+    {
+      "bytes": 20133,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v3.py",
+      "sha256": "384ea6b542aec522424d4fbb0ed3b3006230795794b48966dae6dda881d91b74"
+    },
+    {
+      "bytes": 18686,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v3.json",
+      "sha256": "5aafa519d1af3b288b9e1da858392faaa2a45df1f800d8dc7893d0320fb90de4"
+    },
+    {
+      "bytes": 51505,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/test_canvas_query_template.py",
+      "sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e"
+    },
+    {
+      "bytes": 8499,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/write_native_artifact_manifest.py",
+      "sha256": "aaa6855bc6c0bccc41933703fbdb2e58d9f25a118a651d254a7dce34e5fd113b"
+    },
+    {
+      "bytes": 74274,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    {
+      "bytes": 13009,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/native_startup_diagnostics.py",
+      "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c"
+    }
+  ],
+  "gateway_exit_code": 10,
+  "independent_review": {
+    "bytes": 13043,
+    "path": "/workspace/engineering/pr305-v3-independent-runner-review/independent-v3-runner-qualification.json",
+    "sha256": "2942405cc8520c35f4adcd28b401605cfd53ad5916ad6db1620a559f3fb499dc"
+  },
+  "junit": {
+    "errors": "0",
+    "failures": "1",
+    "skipped": "0",
+    "tests": "1",
+    "time": "45.631",
+    "timestamp": "2026-10-11T04:55:37.335790+00:00"
+  },
+  "native": {
+    "artifact": 11686643166,
+    "assets_sha256": "c85862c9b4dba354953c02cbb80e520052f07cb6d506600bf4a07d2f755135e0",
+    "embedded_sha256": "576d6cb8e5a8637dcfd82f675384d638736509541a0e10877420151b61c4786b",
+    "frozen_sha256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb",
+    "inventory": {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json",
+      "sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf"
+    },
+    "inventory_entries": 1192,
+    "kind": "frozen only",
+    "layout": "/workspace/engineering/pr310-runner-qualification-owned",
+    "manifest": {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-manifest.json",
+      "sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44"
+    },
+    "policy": "fresh complete1192-entry owned copy, full before/after inventory equality; no binary build/wrapper repeat/source relabel.14c exact historical source only; later302union not qualified.",
+    "producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "run": 38098225250,
+    "tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+    "tree_sha256": "739838962d9d29f873932e13d2598d51ebba58b0f97c2c52fff8550004f06ae0"
+  },
+  "outer_cleanup": {
+    "cleanup_disposition": "reaped_exited_descendants",
+    "command": [
+      "/workspace/engineering/pr305/action_server/.venv/bin/python",
+      "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v3.py",
+      "--worker",
+      "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2"
+    ],
+    "command_returncode": 1,
+    "reaped_descendants": 4,
+    "scope": "outer supervisor observed adopted command descendants only; not Runtime internal cleanup admission"
+  },
+  "playwright": {
+    "actual_selected_case_title": "official bridge renders a real Runtime Action result",
+    "actual_source_grep": "^official bridge renders a real Runtime Action result$",
+    "browser_launched": false,
+    "errors": [
+      {
+        "message": "Error: No tests found",
+        "stack": "Error: No tests found"
+      }
+    ],
+    "stats": {
+      "duration": 1234.271,
+      "expected": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-10-11T04:56:20.999Z",
+      "unexpected": 0
+    },
+    "suites_count": 0
+  },
+  "postconditions": {
+    "browser_hash": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "owned_native_inventory_entries": 1192,
+    "owned_native_inventory_equals_original": true,
+    "source_clean": true,
+    "source_head": "14c1c1965314b192c4118c3281f5539d29f0aa6f"
+  },
+  "primary": "Playwright exactpublicsource selector produced No tests found, zero cases; Runtime ready and PythonMCP/provenance passed before it, no browser launch/combined5Run result admitted",
+  "proposal": {
+    "bytes": 18686,
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v3.json",
+    "sha256": "5aafa519d1af3b288b9e1da858392faaa2a45df1f800d8dc7893d0320fb90de4"
+  },
+  "raw_receipts": [
+    {
+      "bytes": 60943,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/actual-admission.json",
+      "sha256": "98c7a0ae4e63d552682e7022bf54e32f318cf0ce43a1bd59b9471b70a70a8d8f"
+    },
+    {
+      "bytes": 192,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/command-1-stderr.log",
+      "sha256": "31268753892853abc32ea1862c718e2d5bf63d563acba1ef293d63cb70c7e59d"
+    },
+    {
+      "bytes": 790,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/command-1-stdout.log",
+      "sha256": "9dc49fa718ed4665d766925c881e63694878332166c137ca138766248558674f"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/command-2-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 40,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/command-2-stdout.log",
+      "sha256": "d75fc32089eefc512b00ce4d792475a993ba56dcb863b971a4c13bcd17b3629f"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/command-3-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2238,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/command-3-stdout.log",
+      "sha256": "da48d0c33362e981ef5484d2c1efca28b5b51a396b0d7d870bd28a15135fbc61"
+    },
+    {
+      "bytes": 1832,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/command-receipts.json",
+      "sha256": "eee414df32e4f6ff156510c18620c22f4bd28291318d8174e7a0247b0f87ccc1"
+    },
+    {
+      "bytes": 42938,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/failure-stderr.log",
+      "sha256": "e6576e730e63ad5f54058bc922e9c8ad364ae6570c5a6e26a89d609c97ee3b2f"
+    },
+    {
+      "bytes": 14033,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/failure-stdout.log",
+      "sha256": "863dde00bdd0b0781287d2cc3acbb5dd0a79baeed031e22032ac3606a8d6d2d1"
+    },
+    {
+      "bytes": 2211,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/junit.xml",
+      "sha256": "8d15034deea2cedae3eb0bdeddaed2096610713c4224cf2bb137635784d4e155"
+    },
+    {
+      "bytes": 518,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/outer-cleanup.json",
+      "sha256": "a8958c855344cfa85be51fde47bd92f0347d8814027d1935a1fa3b0c35196b6c"
+    },
+    {
+      "bytes": 699,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/runtime-cleanup.json",
+      "sha256": "68b6653af69a415bb8e9c5e197e9e9b22a5236c6541c7c1ad865dd559f69cb51"
+    },
+    {
+      "bytes": 792,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/runtime-start-final-snapshot.json",
+      "sha256": "6e533816edc48a78846936b4746e916dcfd4d6dd1763f70d0843e52bf693c6d9"
+    },
+    {
+      "bytes": 3009,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/startup-observations.json",
+      "sha256": "dfd17a405034afb60c80f1858655714a23d7481fff0711e0d1cbadfaa6ed140d"
+    },
+    {
+      "bytes": 42938,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/worker-stderr.log",
+      "sha256": "e6576e730e63ad5f54058bc922e9c8ad364ae6570c5a6e26a89d609c97ee3b2f"
+    },
+    {
+      "bytes": 14033,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/worker-stdout.log",
+      "sha256": "863dde00bdd0b0781287d2cc3acbb5dd0a79baeed031e22032ac3606a8d6d2d1"
+    },
+    {
+      "bytes": 62966,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v3-gateway.log",
+      "sha256": "a5f1a7d170e120f777b67f94c0d0c1ffac66afb72e3521508af1cf755dc69a63"
+    }
+  ],
+  "remaining_uncertainty": "No realbrowser/publiccombinedCanvas/crosscachefiveRun qualification; source/publicselectorfix and review needed before separatelyauthorized immutable successor actual. No later302/native relabel, fullCore/coldregistry/realartifact/OAuth proof.",
+  "runner": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v3.py",
+    "sha256": "d7650dc023ddc714fb67fb05e336c906c6156baa5d2bbceca00ae7b07361afba"
+  },
+  "runtime_cleanup": {
+    "cleanup": {
+      "active_readers": [],
+      "cleanup_errors": [],
+      "descendant_reap_complete": true,
+      "descendant_snapshot_complete": true,
+      "natural_runtime_exit": "NOT_PROVEN; fixture/owned supervisor forced cleanup",
+      "observed_live_children": [],
+      "observed_zombie_children": [],
+      "wrapper_reaped": true
+    },
+    "finite_observed_descendants": 0,
+    "mechanism": "measured Runtime owned cleanup; false internal reap predicate remains failure regardless of outer subreaper",
+    "observer_cancelled_and_joined": true,
+    "observer_final_report": {
+      "exception": null,
+      "outcome": "ready",
+      "sampler_alive": false,
+      "sampler_cancelled": true
+    },
+    "status": "failed"
+  },
+  "source": {
+    "head": "14c1c1965314b192c4118c3281f5539d29f0aa6f",
+    "ordered_merge_parents": [
+      "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+      "fbde0d3a248c47c9964851355f96575c89a87329"
+    ],
+    "ordinary_merge_tree": "d7d21a0f25c69d28728231b6e238b85d93d0cffe",
+    "parent": "71aab046754ae0e0837f223fd0ba6b8513e63a62",
+    "producer_entries": 268,
+    "selected_test_entries": 5,
+    "source_independent_review": {
+      "path": "/workspace/engineering/pr305-independent-public-review/independent-source-review.json",
+      "sha256": "b1737888384c60a1c6694e0c2567eac85515cf775ba49425f5c039ff6efaa676"
+    },
+    "tree": "b95b352dd20cec016ea5dac204b81eeb331a8b3d"
+  },
+  "startup_observations": {
+    "bytes": 3009,
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-2/startup-observations.json",
+    "sha256": "dfd17a405034afb60c80f1858655714a23d7481fff0711e0d1cbadfaa6ed140d"
+  },
+  "status": "HOLD_PLAYWRIGHT_COLLECTION_FAILURE",
+  "upstream_disposition": "none",
+  "worker_exit_code": 1
+}

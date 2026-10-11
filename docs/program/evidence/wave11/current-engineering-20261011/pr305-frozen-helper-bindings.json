@@ -1,0 +1,22 @@
+{
+  "browser_owner": {
+    "original_path": "/workspace/engineering/pr282/action_server/tests/action_server_tests/mcp/test_canvas_query_template.py",
+    "sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e",
+    "snapshot_path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/test_canvas_query_template.py"
+  },
+  "native_inventory": {
+    "original_path": "/workspace/engineering/pr305/action_server/scripts/write_native_artifact_manifest.py",
+    "sha256": "aaa6855bc6c0bccc41933703fbdb2e58d9f25a118a651d254a7dce34e5fd113b",
+    "snapshot_path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/write_native_artifact_manifest.py"
+  },
+  "outer_owner": {
+    "original_path": "/workspace/engineering/pr310/action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+    "snapshot_path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py"
+  },
+  "startup_observer": {
+    "original_path": "/workspace/engineering/pr311/action_server/tests/action_server_tests/native_startup_diagnostics.py",
+    "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c",
+    "snapshot_path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/native_startup_diagnostics.py"
+  }
+}

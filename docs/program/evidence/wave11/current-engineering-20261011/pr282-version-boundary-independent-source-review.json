@@ -1,0 +1,58 @@
+{
+  "verdict": "GO_SOURCE_REFRESH_FOR_PUSH_ONLY",
+  "head": "a0b8816a17b50aae5af1372cf89f71640fa10d3b",
+  "tree": "83fbb11a942f99c2dea8f6ca3d56f88604e3de38",
+  "parent": "2c8dc4afbc97539777e29059e5e6a95f8453282d",
+  "implementation_parent": "811c826addf662c3a7de23d27c5f1014ecd3c6a3",
+  "source_preservation": {
+    "1400_unrelated_blob_modes_unchanged": true,
+    "all1404_leaves_retained": true,
+    "only_four_changed_paths": [
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_tests.yml",
+      "developer/tests/test_canvas_published_workflow.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "entire_validator_bytes_unchanged": "b627e9d4409ce0db4b0568c26e78dcfbb6326054957cd5316fc9ae344e7205c2",
+    "all39_predicates_and_diagnostics_unchanged": true,
+    "whole_generator_equal_after_reversing_one_measurement_line": true,
+    "full_parsed_workflow_equal_after_reversing_one_measurement_line": true,
+    "generated_bash_syntax": "PASS",
+    "seven_other_outputs_dependabot_unchanged": true,
+    "production_browser_helper_unchanged": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e",
+    "305_frozen_helper_same": true,
+    "Bootstrap23_inputs_equal_original71f": true
+  },
+  "verification": {
+    "corrected_RED": "3 failed/3 passed/76 deselected: actual old Bash SPACE+LF/SPACE+CRLF and empty output behavior; earlier key-error run retained but not relied upon",
+    "current_scoped_GREEN": "83 passed; generated Python preflight executes with only synthetic binary observation substituted; strict unchanged validator receives that result; original poisons remain",
+    "current_Toolkit": "145 passed including all scoped controls",
+    "configured_lint_types": "Ruff/format299+Isort passed; Mypy331 passed; optional Markdown lint unavailable",
+    "failure_controls": "Empty/nonzero/TimeoutExpired propagate rejection; different full brand or numeric version rejected by unchanged browser_version equality.",
+    "writer_receipt_sha256": "9eee971f3eaeb1dd6e2628a925dd2fa098d1cc12a627a96ef508a0931acc116e",
+    "15_log_and_local_observation_hashes_independently_checked": true
+  },
+  "actual_evidence_scope": {
+    "old_current811_failure_review_sha256": "9635a7dcdad8658639b8cf977216aacd93d678df3308c410d765873110faa25b",
+    "old_current811": "38 reobserved predicates PASS; browser_version FAIL; actual compared hosted strings unavailable. Historical0d predicate/raw-presence UNKNOWN.",
+    "local_reproduction": "Existing local Chrome0b20 stdout41bytes/SHA2d44e8c7507ca1c7cefc2fff277ee234d5d87be645dd56bee1b3ffca6564e529; Bash LF removal40chars vs existing receipt stdout.strip39chars; proves local mechanism, not hosted cause.",
+    "historical_actual71f": "Preserved identity; not relabeled as a0 execution.",
+    "new_native_or_hosted_gate": "NOT_RUN",
+    "new_CI_admission": "PENDING; no old positive carry"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md by source writer",
+    "Durable_learning_captured": "Expected preflight uses the existing checked/captured/text/10s stdout.strip receipt contract; full branded equality remains strict. Separate original pytest pass from synthetic JUnit admission failure; measured code does not identify unavailable cause or historical unreported predicate.",
+    "Evidence": "Immutable original811 artifact/log review9635; retained local observation901a/stdout2d44; corrected meaningful RED and final83/145; complete Git object/blob-mode and validator-byte checks.",
+    "Stale_or_ambiguous_guidance_removed": "Shell LF removal assumed equal to stdout.strip; matching browser bytes equated with version representation; test pass equated with receipt admission.",
+    "Remaining_uncertainty": "Hosted compared version strings/cause, historical0d rejection identity, current a0 CI/hosted admission and full issue release scopes remain open.",
+    "exact_delta_patch": {
+      "bytes": 2078,
+      "path": "/workspace/engineering/pr282-version-canonical-delta.patch",
+      "sha256": "17adcb01cb0b57668a3fba734550558cd65558cb1ad864dda93a7d6c70dea2d7"
+    },
+    "reviewer_exact858957_proposal_integrated": true
+  },
+  "upstream_disposition": "none; no established upstream defect",
+  "operations": "Read-only source review; outside-checkout owned review receipts and Bash syntax input only. No source edit, push, merge or executable/browser rerun."
+}

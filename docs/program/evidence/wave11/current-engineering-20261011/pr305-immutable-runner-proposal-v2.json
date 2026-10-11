@@ -1,0 +1,206 @@
+{
+  "actual_consumer_executed": false,
+  "actual_expected": [
+    "onepytestPASS/0skip/error/fail",
+    "onePlaywrightexactnamedcasePASS/0skip/retry/error",
+    "exact manifest/actionSource/RuntimeHTML bytes/digests retained; singleCanvasbuild only",
+    "exact3Python+2browser realMCP calls and five unique persistedRunIDs/status2 with2search+2fixturestatus+1provenance",
+    "realRuntime resource MIME and public decorator metadata and blocked external browser requests",
+    "publicCore1.0.3 three-member provenance+ownedprefix; no candidatefields",
+    "callerUV and sourcebuild cache paths remain outside synchronized package; containment directory-link rejection unchanged",
+    "strict measuredRuntime flags/list admission plus ownouter cleanup+sampler cancellation/aliveness",
+    "native1192tree/binary unchanged, source/native identities separate"
+  ],
+  "attempt_root_created": false,
+  "controls": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v2.py",
+    "sha256": "5f30c9d49a806639b9ce01de62e2f61fec98db9349483c94267e4ea662619a28"
+  },
+  "core_scope": "Public worker manifest Core1.0.3 with no candidatebuild/postinstall/localwheel receipt. Exact three named module digest/origin sample against independent registry wheel8e088...; wholewheel/coldregistryfalse limits. Candidate default/source scope preserved separately.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md source14c changed; runner-only followup exactproposal",
+    "Durable_learning": "self-launched immutablehelper execution bytes, distinct bounds, strict per-kind cleanup flags and precise launch evidence",
+    "Evidence": "unchanged acceptedhelpers + measured preflight +42controls including actual oldassert RED and successor guardGREEN; no consumer yet",
+    "Remaining_uncertainty": "actual14c/native92498 consumer and cleanupawaitreview/authorization; no later302 proof, fullCore/coldinstall, realartifactresolver, productionhost/ChatGPT/OAuth release qualification",
+    "Stale_guidance_removed": "importhash/commandbudget/cancellation/outerreap silently establish laterbytes/wholebound/allcleanup",
+    "exact_delta": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v2-proposed-delta.md",
+      "sha256": "9adb8bd75ecffee773dc2d14dd4593fb9448a291214f5949531077a887c9d0fd"
+    },
+    "reviewer_proposal_reused": {
+      "path": "/workspace/engineering/pr305-independent-public-review/canonical-proposed-delta.md",
+      "sha256": "14f779c2c891eccb44da33485554a37c9059e4cbbb874fd514af84834975397d"
+    }
+  },
+  "driver": {
+    "accepted_selection_receipt": {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/headless-selection.json",
+      "sha256": "a800c30a70cc5fc3564d5fd243888de646c54dcb42243a138af0c0eafee42152"
+    },
+    "actual_gate": "explicit selector reaches unchanged JSconfig launchOptions.executablePath; require actual Playwright DEBUG launching path matching pinnedbinary, oneJSONcasepassed/no skips/retries; DEBUG path is not live PID identity.",
+    "browser": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+    "browser_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "browser_version": "151.0.7922.34",
+    "frontend_lock": {
+      "path": "/workspace/engineering/pr305/action_server/frontend/package-lock.json",
+      "sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a"
+    },
+    "node": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+    "node_version": "v20.19.3",
+    "playwright_version": "1.62.1",
+    "prepared_node_modules": "/workspace/engineering/pr310/action_server/frontend/node_modules",
+    "reuse": "exact locked versions/integrities/coreBundle/browsers.json admitted before use; create ignored pr305/node_modules link only during authorized execution. No npm install or cold registry claim."
+  },
+  "gateway": {
+    "activate": "source /workspace/actions-cloud/activate.sh",
+    "command_seconds": 600,
+    "cwd": "/workspace/engineering/pr305",
+    "exact_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "660s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import toolkit; toolkit.poetry(\"action_server\", \"run\", \"python\", \"/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v2.py\", \"--execute-reviewed-proposal\")"
+    ],
+    "independent_parent_seconds": 645,
+    "inherited_supervisor_cleanup_grace_seconds": 10,
+    "meaning": "660 includes preflight/ownedcopy/gateway/worker/supervisor/receipt I/O;600 is consumer command budget only. Outer hard cutoff can curtail later stages if preparation unexpectedly runs long; no claim600 overall.",
+    "outer_gateway_seconds": 660,
+    "outer_term_kill_grace_seconds": 10
+  },
+  "helper_bindings": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helper-bindings.json",
+    "sha256": "79b0b9478ef826e0c668ac6a92f3605fbb9f4ad0cdb2262fde1fb8783fcec3dc"
+  },
+  "helpers": {
+    "browser_owner": {
+      "original_path": "/workspace/engineering/pr282/action_server/tests/action_server_tests/mcp/test_canvas_query_template.py",
+      "sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e",
+      "snapshot_path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/test_canvas_query_template.py"
+    },
+    "native_inventory": {
+      "original_path": "/workspace/engineering/pr305/action_server/scripts/write_native_artifact_manifest.py",
+      "sha256": "aaa6855bc6c0bccc41933703fbdb2e58d9f25a118a651d254a7dce34e5fd113b",
+      "snapshot_path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/write_native_artifact_manifest.py"
+    },
+    "outer_owner": {
+      "original_path": "/workspace/engineering/pr310/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+      "snapshot_path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py"
+    },
+    "startup_observer": {
+      "original_path": "/workspace/engineering/pr311/action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c",
+      "snapshot_path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/native_startup_diagnostics.py"
+    }
+  },
+  "native": {
+    "artifact": 11686643166,
+    "assets_sha256": "c85862c9b4dba354953c02cbb80e520052f07cb6d506600bf4a07d2f755135e0",
+    "embedded_sha256": "576d6cb8e5a8637dcfd82f675384d638736509541a0e10877420151b61c4786b",
+    "frozen_sha256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb",
+    "inventory": {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json",
+      "sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf"
+    },
+    "inventory_entries": 1192,
+    "kind": "frozen only",
+    "layout": "/workspace/engineering/pr310-runner-qualification-owned",
+    "manifest": {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-manifest.json",
+      "sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44"
+    },
+    "policy": "fresh complete1192-entry owned copy, full before/after inventory equality; no binary build/wrapper repeat/source relabel.14c exact historical source only; later302union not qualified.",
+    "producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "run": 38098225250,
+    "tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+    "tree_sha256": "739838962d9d29f873932e13d2598d51ebba58b0f97c2c52fff8550004f06ae0"
+  },
+  "one_attempt_root": "/workspace/actions-cloud/receipts/pr305-runner/actual-14c1c1965314b192c4118c3281f5539d29f0aa6f-1",
+  "ownership": {
+    "browser": "unchanged accepted282 helper exact list/cwd/env/timeout returns CompletedProcess; source checks args/result;180s command then5s helper cleanup. No replacement owner. It does not expose all per-browser cleanup fields; outer adopted-child reap is distinct evidence.",
+    "errors": "primary stdout/stderr and exception identity retained; cleanup/posthash secondary failures attach notes. Final admission remains pending until postconditions finish; any failure must leave statusfailed and preserve provisional evidence.",
+    "observer_final": "Unchanged accepted observer schema: exactly one final marker, last observation, exact outcome/exception/sampler_cancelled/sampler_alive fields; sampler_cancelled isTrue and sampler_alive isFalse. Reject missing/wrongtype/duplicate/stale. Offset-only reports may omit finalfields. Cancellation request and post-join liveness are separate observations, not Runtime cleanup proof.",
+    "outer": "unchanged accepted310 Linux subreaper helper; fixed hash-verified snapshot __file__ child path; verify rawbuffer import plus pre/post child helper bytes. Allow only clean_no_descendants/reaped_exited_descendants and preserve reaped_descendants count; unexpected live children rejected by helper.",
+    "runtime": "existing source/native120s initial-start deadline retained; existing failure cleanup20s retained. External startup observer delegates unchanged kwargs/result/errors and offsets20/80/110, cancellable Event joins0.05s. Final finite-owned5s cleanup uses existing production force_kill_process_tree_until; all measured flags mustTrue and all lists empty; falseRuntime predicate is failure even after outer reaping.",
+    "temporary": "source browser owns short mode700 /tmp/cv305-* only and removes it after helper completes/cleans on success/failure. Native/worker/pytest/RCC roots owned under fresh attempt and retained as evidence; do not erase unrelated caches."
+  },
+  "phase": "IMMUTABLE_RUNNER_REVIEW_READY_NOT_AUTHORIZED_NOT_EXECUTED",
+  "preparation": {
+    "cause_and_fix": "External file does not load package test conftest import path; explicit source-controller-only action_server/tests import path fixes ModuleNotFoundError. Worker Core still measured in separate Runtime-managed process.",
+    "command": "activated RCC gateway delegates action_server Poetry Ruff format/check, pytest -c pyproject.toml /workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v2.py -q -n0 --tb=short, then python canvas-native-public-runner-v2.py without execute flag",
+    "log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v2-final-controls.log",
+      "sha256": "93f2de3579cd0785364ba63561248c4f9e1c06db6ec5031f95fa6cce008f7e3a"
+    },
+    "negative_controls": [
+      "strictRuntime falseflags/nonemptyerrors/readers/live/zombies",
+      "JUnit skipped/count/name/failure",
+      "publicmode/candidate/localwheel/Core/sample/origin/caller/browser/cache/Run/resource",
+      "sourcewrongSHA",
+      "verifiedhelperpoison before execution",
+      "actual helper self-launch pinned snapshot and CompletedProcess forwarding",
+      "worker primary failure plus failed cleanup receipt",
+      "actualownedcallback primary stdout/stderr preserved when helper posthash also fails",
+      "observer exactlyonefinal explicitbool cancellation and alive; missing/alive/false/wrongtype/duplicate/stale/malformedfinal rejected",
+      "compile retained predecessor actualworker2asserts: four missing/wrongtype/duplicate/stale receipt poisons admit there, reject by successor actualadmit_observer"
+    ],
+    "prior_failures_preserved": [
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/runner-controls-final.log",
+        "sha256": "5932b6026418c32530e29b1a0d6e0c3edda4b76b0164ce13ab988961af2aab94"
+      }
+    ],
+    "result": "42service-freeactual-validator/helper controlsPASS/0skip; Ruffformat/checkPASS; currentpreflightPASS; actualconsumerNOTRUN",
+    "warnings": "4 PytestUnknownMarkWarning for integration markers in imported test-only helper/harness; no skips or executions of those nodes"
+  },
+  "runner": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v2.py",
+    "sha256": "f16f5ebefe6ac74d3259b1bbc5af6054a4aedd563e24eef7a1dfebcb0e0f2454"
+  },
+  "source": {
+    "head": "14c1c1965314b192c4118c3281f5539d29f0aa6f",
+    "ordered_merge_parents": [
+      "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+      "fbde0d3a248c47c9964851355f96575c89a87329"
+    ],
+    "ordinary_merge_tree": "d7d21a0f25c69d28728231b6e238b85d93d0cffe",
+    "parent": "71aab046754ae0e0837f223fd0ba6b8513e63a62",
+    "producer_entries": 268,
+    "selected_test_entries": 5,
+    "source_independent_review": {
+      "path": "/workspace/engineering/pr305-independent-public-review/independent-source-review.json",
+      "sha256": "b1737888384c60a1c6694e0c2567eac85515cf775ba49425f5c039ff6efaa676"
+    },
+    "tree": "b95b352dd20cec016ea5dac204b81eeb331a8b3d"
+  },
+  "source_mutated_after14c": false,
+  "supersedes_without_overwrite": {
+    "controls": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission.py",
+      "sha256": "a3415fefc1a58ad2424318acd44bebc2386bb1cb7ca480a21ab69f21eef11731"
+    },
+    "preparation": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-controls.log",
+      "sha256": "9dc16e3203f416526f7365b6ecdcd00a83dd60fc8da8c4561e46ddd851db3a24"
+    },
+    "proposal": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal.json",
+      "sha256": "7ba9410efaeaa9c144634cc76ec98a50e2f023d3bdef1e45f53c145acc1d1bca"
+    },
+    "reason": "Independent observer-final HOLD: predecessor treated missing sampler_alive asFalse and admitted duplicate/stalefinals. Retained old bytes and28PASSlog unchanged; new actual callable strict last-final predicate + controls only, no source/ownership/helper change.",
+    "runner": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner.py",
+      "sha256": "0feee8b8c911f94496323d10dc4a92cf93cfe2ce566b54efc29e3b771b8e56d5"
+    }
+  },
+  "upstream_disposition": "none"
+}

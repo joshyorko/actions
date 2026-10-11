@@ -1,0 +1,490 @@
+{
+  "status": "SOURCE_REFRESH_GO; INDEPENDENT_REVIEW_REQUIRED_BEFORE_ROOT_NORMAL_PUSH; FRESH_CI_REQUIRED",
+  "branch": "feat/shared-run-output-20261010",
+  "source": {
+    "head": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+    "tree": "3c78f95d814fe2603f40169783fc3c4a84cd6315",
+    "parents": [
+      "a99c21df257949006f0e55e14243e2fcac27c138"
+    ],
+    "ordinary_merge": {
+      "original": "9cb61c52fce35201221b55707d73da9e9b0840a6",
+      "target": "fbde0d3a248c47c9964851355f96575c89a87329",
+      "merge": "a99c21df257949006f0e55e14243e2fcac27c138",
+      "tree": "8f078167da6aa2308f01b828409b6502123f4f14",
+      "ordered_parents": [
+        "9cb61c52fce35201221b55707d73da9e9b0840a6",
+        "fbde0d3a248c47c9964851355f96575c89a87329"
+      ],
+      "auto_merge_tree_with_guide_conflict": "ce235efe2f1a0984011a5b4ca3c8d94b6c397181",
+      "all_non_guide_entries_match_auto_union": true,
+      "original_changed_nondoc_entries_preserved": [
+        {
+          "path": "action_server/src/actions/server/_actions_run.py",
+          "blob_mode_kind": "100644 blob 24fc844ad99c658d70f6f5069f0df250bb72ad87"
+        },
+        {
+          "path": "action_server/src/actions/server/_api_analytics.py",
+          "blob_mode_kind": "100644 blob 8b3177b995500ec111fbc79b8e7c8589319b1cd2"
+        },
+        {
+          "path": "action_server/src/actions/server/_api_run.py",
+          "blob_mode_kind": "100644 blob 9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24"
+        },
+        {
+          "path": "action_server/src/actions/server/_models.py",
+          "blob_mode_kind": "100644 blob 405304f2e593fdfe949b431851eb0dae39c6ab96"
+        },
+        {
+          "path": "action_server/src/actions/server/_runs_state_cache.py",
+          "blob_mode_kind": "100644 blob 3774e9a0e77d43e63a18733a4ff5652454ef06ce"
+        },
+        {
+          "path": "action_server/src/actions/server/migrations/__init__.py",
+          "blob_mode_kind": "100644 blob 7889794dd3db1019bf4cdc179fa892c05943dc79"
+        },
+        {
+          "path": "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+          "blob_mode_kind": "100644 blob 3629ef55d42815acc7c1701bdd5b6949d3394ec6"
+        },
+        {
+          "path": "action_server/src/actions/server/run_outputs/__init__.py",
+          "blob_mode_kind": "100644 blob 6787c69b364901f1a1eed93e553ae8cfe4d194ef"
+        },
+        {
+          "path": "action_server/src/actions/server/run_outputs/filesystem.py",
+          "blob_mode_kind": "100644 blob 89170173dd0f1771e1a9923bb8532f2b28448dd1"
+        },
+        {
+          "path": "action_server/src/actions/server/run_outputs/models.py",
+          "blob_mode_kind": "100644 blob ae75ceee659776fd51e1dda36528a22640afba19"
+        },
+        {
+          "path": "action_server/src/actions/server/run_outputs/service.py",
+          "blob_mode_kind": "100644 blob 55f5c09aeb0a3e9199b56916bb7fee41708b35c6"
+        },
+        {
+          "path": "action_server/src/actions/server/run_outputs/types.py",
+          "blob_mode_kind": "100644 blob cac30880373c26f648bb1c835fb74449f567cb22"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/mcp/test_alias_history.py",
+          "blob_mode_kind": "100644 blob 2ff3159d6dd04e583a903fb5b913a7491a3ce9c8"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+          "blob_mode_kind": "100644 blob ef1f0d0c14afd7895c268e817699113f7325679f"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/run_outputs/test_concurrency.py",
+          "blob_mode_kind": "100644 blob 6aff0138011bc1e5bce88e70ba542044601292ff"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/run_outputs/test_filesystem.py",
+          "blob_mode_kind": "100644 blob b10f3ede197762836b043df60101a95f02bbd62d"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/run_outputs/test_migration.py",
+          "blob_mode_kind": "100644 blob 91d10765b9d3441c76817735790c9a318eb94e3c"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/run_outputs/test_service.py",
+          "blob_mode_kind": "100644 blob 4fcd73a8764c52f2681ba909541d578ddd2457cf"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/test_artifact_storage.py",
+          "blob_mode_kind": "100644 blob 3dc769d5b5372af72e8991140135cd652cea0bdf"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/test_database.py",
+          "blob_mode_kind": "100644 blob fbca68efd3222f2b40ed6db6799ef4edad513796"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt",
+          "blob_mode_kind": "100644 blob 41ad231369f0d38413ca0749ea865bfca9a23d7d"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/test_database_shared.py",
+          "blob_mode_kind": "100644 blob 6836bef3d56d454ec0d2a90b5bd530a3ad51a5b3"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/test_server_websockets.py",
+          "blob_mode_kind": "100644 blob c4f6fc5a04d380a6bb7ac3b0874dfd0286dd77e4"
+        }
+      ],
+      "only_conflict": "canonical guide append; both parent lessons retained",
+      "retained_frozen_inventory_comparison": [
+        {
+          "inventory": "producer-input-inventory.json",
+          "entries": 268,
+          "changed": [
+            {
+              "path": "action_server/src/actions/server/_actions_run.py",
+              "retained": {
+                "mode": "100644",
+                "kind": "blob",
+                "blob": "3637cfcd94e5d91f0bf5b9b2fc4b3e94d4562826",
+                "sha256": "4e6d1c0be66939a3e87719f52f47083822506d1936a6c036d0f73ed522b5b702"
+              },
+              "union": {
+                "mode": "100644",
+                "kind": "blob",
+                "blob": "24fc844ad99c658d70f6f5069f0df250bb72ad87",
+                "sha256": "945fa1ce70ee4834410c8d37fd92372e6772aa8a1a0d128f4cada3035ddbd301"
+              },
+              "matches_original299": true
+            },
+            {
+              "path": "action_server/src/actions/server/_api_analytics.py",
+              "retained": {
+                "mode": "100644",
+                "kind": "blob",
+                "blob": "7f82f03353940b457fb5057e22e02a5c6f962197",
+                "sha256": "86df893f425a5910e4e9a242a3ee21a9e709600f3a6e45968fba76878cc0dcc7"
+              },
+              "union": {
+                "mode": "100644",
+                "kind": "blob",
+                "blob": "8b3177b995500ec111fbc79b8e7c8589319b1cd2",
+                "sha256": "7e18d7142655607645b526d3e3bde397f22fee874e21c789104a3cad0ca25bfb"
+              },
+              "matches_original299": true
+            },
+            {
+              "path": "action_server/src/actions/server/_api_run.py",
+              "retained": {
+                "mode": "100644",
+                "kind": "blob",
+                "blob": "424094841a29bd11d6bc7fb0f3b9e528573353d9",
+                "sha256": "0e4ff75583d1754b1c4e2bceb8e1b411718cf7ce3c4a066588ab25744f04a9c6"
+              },
+              "union": {
+                "mode": "100644",
+                "kind": "blob",
+                "blob": "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24",
+                "sha256": "be672635fc9cc000dc3d573a4a0e182d3e42f2d2f48f469b2b1ab27dd2dfc872"
+              },
+              "matches_original299": true
+            },
+            {
+              "path": "action_server/src/actions/server/_models.py",
+              "retained": {
+                "mode": "100644",
+                "kind": "blob",
+                "blob": "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb",
+                "sha256": "530cdbfe913495b9eaff54bc029ef1340840d1598aff205d3e6047ea4d296a73"
+              },
+              "union": {
+                "mode": "100644",
+                "kind": "blob",
+                "blob": "405304f2e593fdfe949b431851eb0dae39c6ab96",
+                "sha256": "bc9ad180099414005575b2d034741176f8d86b1b758f6bbf1c3e3b5497aadbf9"
+              },
+              "matches_original299": true
+            },
+            {
+              "path": "action_server/src/actions/server/_runs_state_cache.py",
+              "retained": {
+                "mode": "100644",
+                "kind": "blob",
+                "blob": "6428a201a110b8d1073fc3b5265d9282723de944",
+                "sha256": "0f5714321d4bb1af809b565efd48d4a96a7d66e93bb3967bc1cb3c5bed6cb73c"
+              },
+              "union": {
+                "mode": "100644",
+                "kind": "blob",
+                "blob": "3774e9a0e77d43e63a18733a4ff5652454ef06ce",
+                "sha256": "4b7fea14ad672f7f039ff63fc9b75b7195c4f7cb44f79d81b5dc8f3069f4ca7c"
+              },
+              "matches_original299": true
+            },
+            {
+              "path": "action_server/src/actions/server/migrations/__init__.py",
+              "retained": {
+                "mode": "100644",
+                "kind": "blob",
+                "blob": "cb68bcb4a2e41ecefcb5a409ce5c26065a505d05",
+                "sha256": "0bfc8983263177242f12a32824d88596f665fabcd08c96344709c9e00e1ce37e"
+              },
+              "union": {
+                "mode": "100644",
+                "kind": "blob",
+                "blob": "7889794dd3db1019bf4cdc179fa892c05943dc79",
+                "sha256": "c3001c1c3fa605c315b04c43b8dfd845495e3dc3773a0098be60d0d5efe931f6"
+              },
+              "matches_original299": true
+            }
+          ],
+          "matches": 262
+        },
+        {
+          "inventory": "selected-test-inventory.json",
+          "entries": 5,
+          "changed": [],
+          "matches": 5
+        }
+      ],
+      "actual_artifact_carry": "NOT_QUALIFIED; producer differences measured, no artifact/native/provider execution"
+    },
+    "preservation": {
+      "tested_merge": "a99c21df257949006f0e55e14243e2fcac27c138",
+      "final_head": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+      "final_tree": "3c78f95d814fe2603f40169783fc3c4a84cd6315",
+      "only_novel_path": [
+        "docs/skills/repository-operations.md"
+      ],
+      "other_blob_mode_pairs_preserved": 1415,
+      "original23_source_test_paths_preserved": true
+    },
+    "source_clean": true,
+    "authorized_target": "fbde0d3a248c47c9964851355f96575c89a87329",
+    "310_not_integrated": true
+  },
+  "validation": {
+    "Doctor": "PASS",
+    "Bootstrap": "PASS; installer coordinated",
+    "Toolkit": "69PASS",
+    "scoped_shared_run": "189PASS / 1 existing native-Windows path test SKIP on Linux / 12 integrationDESELECTED",
+    "configured_tests": "1182 passed, 13 skipped, 15 warnings in 134.20s (0:02:14) ===========",
+    "configured_lint": "PASS; optional Markdownlint absent",
+    "configured_typecheck": "Success: no issues found in 344 source files",
+    "workflow_roundtrip": "8 exact generated outputs",
+    "actual_native_provider_browser_build": "NOT_RUN; ACTIONS_REAL_RCC_ACCEPTANCE unset; configured full test excludes integration_test",
+    "tested_source": "exact mergea99c21df with20docsworkingtree lines; finalcommit only docs, all other blobs/modes identical",
+    "setup.py": "absent at initial source readback and freeze; no generic clean or untracked deletion"
+  },
+  "producer_comparison": {
+    "head": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+    "tree": "3c78f95d814fe2603f40169783fc3c4a84cd6315",
+    "retained_inventory_comparison": [
+      {
+        "inventory": {
+          "path": "/workspace/engineering/pr299/docs/program/evidence/runtime-frozen-current-source-20261011/producer-input-inventory.json",
+          "size": 66239,
+          "sha256": "544566c0d61547c1f9cd5e4c30b770b8a5d0d122760ad78e5596351788276d76"
+        },
+        "entries": 268,
+        "matches": 262,
+        "differences": [
+          {
+            "path": "action_server/src/actions/server/_actions_run.py",
+            "observed": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "24fc844ad99c658d70f6f5069f0df250bb72ad87",
+              "sha256": "945fa1ce70ee4834410c8d37fd92372e6772aa8a1a0d128f4cada3035ddbd301"
+            },
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "3637cfcd94e5d91f0bf5b9b2fc4b3e94d4562826",
+              "sha256": "4e6d1c0be66939a3e87719f52f47083822506d1936a6c036d0f73ed522b5b702"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/_api_analytics.py",
+            "observed": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "8b3177b995500ec111fbc79b8e7c8589319b1cd2",
+              "sha256": "7e18d7142655607645b526d3e3bde397f22fee874e21c789104a3cad0ca25bfb"
+            },
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "7f82f03353940b457fb5057e22e02a5c6f962197",
+              "sha256": "86df893f425a5910e4e9a242a3ee21a9e709600f3a6e45968fba76878cc0dcc7"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/_api_run.py",
+            "observed": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24",
+              "sha256": "be672635fc9cc000dc3d573a4a0e182d3e42f2d2f48f469b2b1ab27dd2dfc872"
+            },
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "424094841a29bd11d6bc7fb0f3b9e528573353d9",
+              "sha256": "0e4ff75583d1754b1c4e2bceb8e1b411718cf7ce3c4a066588ab25744f04a9c6"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/_models.py",
+            "observed": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "405304f2e593fdfe949b431851eb0dae39c6ab96",
+              "sha256": "bc9ad180099414005575b2d034741176f8d86b1b758f6bbf1c3e3b5497aadbf9"
+            },
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb",
+              "sha256": "530cdbfe913495b9eaff54bc029ef1340840d1598aff205d3e6047ea4d296a73"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/_runs_state_cache.py",
+            "observed": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "3774e9a0e77d43e63a18733a4ff5652454ef06ce",
+              "sha256": "4b7fea14ad672f7f039ff63fc9b75b7195c4f7cb44f79d81b5dc8f3069f4ca7c"
+            },
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "6428a201a110b8d1073fc3b5265d9282723de944",
+              "sha256": "0f5714321d4bb1af809b565efd48d4a96a7d66e93bb3967bc1cb3c5bed6cb73c"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/migrations/__init__.py",
+            "observed": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "7889794dd3db1019bf4cdc179fa892c05943dc79",
+              "sha256": "c3001c1c3fa605c315b04c43b8dfd845495e3dc3773a0098be60d0d5efe931f6"
+            },
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "cb68bcb4a2e41ecefcb5a409ce5c26065a505d05",
+              "sha256": "0bfc8983263177242f12a32824d88596f665fabcd08c96344709c9e00e1ce37e"
+            }
+          }
+        ]
+      },
+      {
+        "inventory": {
+          "path": "/workspace/engineering/pr299/docs/program/evidence/runtime-frozen-current-source-20261011/selected-test-inventory.json",
+          "size": 1333,
+          "sha256": "8a87d39c2f197234da0de0535d6fd2e249d29b0a20943f1f31da47248970ade6"
+        },
+        "entries": 5,
+        "matches": 5,
+        "differences": []
+      }
+    ],
+    "original299_added_producer_paths_absent_from_historical_inventory": [
+      {
+        "path": "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+        "blob_mode_kind": "100644 blob 3629ef55d42815acc7c1701bdd5b6949d3394ec6",
+        "sha256": "ebb773140f650555ac85628b9599363d6ec6b180841c86200a0fee622d4b9de4"
+      },
+      {
+        "path": "action_server/src/actions/server/run_outputs/__init__.py",
+        "blob_mode_kind": "100644 blob 6787c69b364901f1a1eed93e553ae8cfe4d194ef",
+        "sha256": "4c29ad35ab314ea4472025d453703b124a08262cfa24a51baf3a1a2ffb58ae38"
+      },
+      {
+        "path": "action_server/src/actions/server/run_outputs/filesystem.py",
+        "blob_mode_kind": "100644 blob 89170173dd0f1771e1a9923bb8532f2b28448dd1",
+        "sha256": "db8daf79dc0d2a06ecec9a2c3ab67319d6df420c2a44578948d46f2b558c5606"
+      },
+      {
+        "path": "action_server/src/actions/server/run_outputs/models.py",
+        "blob_mode_kind": "100644 blob ae75ceee659776fd51e1dda36528a22640afba19",
+        "sha256": "c69318f6893484156fba1002f8372711fc83e32e56d0e29c54e985cc26196065"
+      },
+      {
+        "path": "action_server/src/actions/server/run_outputs/service.py",
+        "blob_mode_kind": "100644 blob 55f5c09aeb0a3e9199b56916bb7fee41708b35c6",
+        "sha256": "46174068c6d5fb1609a38630fd460983c071a51a48bec4bb6ecdeff42446fe62"
+      },
+      {
+        "path": "action_server/src/actions/server/run_outputs/types.py",
+        "blob_mode_kind": "100644 blob cac30880373c26f648bb1c835fb74449f567cb22",
+        "sha256": "9195c6986edee9b2821e5e75c88a556ab4ef747eb065adb05b72b415165767d3"
+      }
+    ],
+    "artifact_proof": "NOT_QUALIFIED for refreshed299; six changed plus six added producer inputs relative to frozen build"
+  },
+  "evidence": {
+    "doctor.log": {
+      "path": "/workspace/engineering/pr299-refresh-owned/doctor.log",
+      "size": 13485,
+      "sha256": "d158025c10c9e01c6ed4804ec3067eef1267ec40170e4ae67fbc7f4e3366189e"
+    },
+    "bootstrap.log": {
+      "path": "/workspace/engineering/pr299-refresh-owned/bootstrap.log",
+      "size": 14145,
+      "sha256": "8bdeac2f153ad303d8c3b68743517072374630ef3af2b488fb52824a006fab69"
+    },
+    "toolkit-test.log": {
+      "path": "/workspace/engineering/pr299-refresh-owned/toolkit-test.log",
+      "size": 14342,
+      "sha256": "855363aed61bce507b7afa42761d97ce8fc5194cd26e426b46ecdf212b98c38a"
+    },
+    "scoped-shared-run.log": {
+      "path": "/workspace/engineering/pr299-refresh-owned/scoped-shared-run.log",
+      "size": 4318,
+      "sha256": "53e72540f2117809755290b7444fdec6f9e26439be8b9d2487849fd912664bb3"
+    },
+    "configured-gates.log": {
+      "path": "/workspace/engineering/pr299-refresh-owned/configured-gates.log",
+      "size": 305948,
+      "sha256": "76f0c22250dce74654d6d2be32703822720c6f366569b5b60f69d0a8c5becbf4"
+    },
+    "union-receipt.json": {
+      "path": "/workspace/engineering/pr299-refresh-owned/union-receipt.json",
+      "size": 8687,
+      "sha256": "594929a11d6a19058208c8110d93a2607d12b72b2c34270b06d34d5a31110297"
+    },
+    "preservation-receipt.json": {
+      "path": "/workspace/engineering/pr299-refresh-owned/preservation-receipt.json",
+      "size": 349,
+      "sha256": "4c34f7974028ae1d09210622513bdf6dc99fab3eb72bdd7c3a8f7ee4c3ea9658"
+    },
+    "frozen-producer-comparison.json": {
+      "path": "/workspace/engineering/pr299-refresh-owned/frozen-producer-comparison.json",
+      "size": 6113,
+      "sha256": "3774d1b2d0798ab2ee35fe182b8a3c1ae2994bae245d1ac6e38229b8cb976045"
+    },
+    "workflow-roundtrip.log": {
+      "path": "/workspace/engineering/pr299-refresh-owned/workflow-roundtrip.log",
+      "size": 4463,
+      "sha256": "25d2741904f0ab09f98f23b7f381c66cc4e396b6949adde7031e6ab2dd39e16b"
+    },
+    "workflow-roundtrip-receipt.json": {
+      "path": "/workspace/engineering/pr299-refresh-owned/workflow-roundtrip-receipt.json",
+      "size": 1806,
+      "sha256": "e1af148596cf24f950fa9aa66cdd238a68267612f90a4d6cf35acf1ebf287bbf"
+    }
+  },
+  "historical_windows": {
+    "299": {
+      "path": "/workspace/engineering/pr299-windows-independent-diagnosis.json",
+      "size": 7249,
+      "sha256": "4eef69f680caf8891a6c2749b345f753cf5b9d71bc3f4e8e4b3301e9bff406b8"
+    },
+    "311_original": {
+      "path": "/workspace/engineering/pr311-original-windows-independent-review/original-hosted-diagnostic-review.json",
+      "size": 18731,
+      "sha256": "81b819b9eb7a4d25bb46e0517b27bc303f78b80c32c7df89a6da4198967afe95"
+    },
+    "299_first_resource_native_startup": "90s readiness timeout; variables89.28s / complete16 RCC previous-mark intervals89.259s;20s cleanup incomplete unknown dimension",
+    "311_original_scope": "six FIRSTstartup failures; onlytwo nodes activeRCC CPU/IO80/88, no rawprogress series; no cause inferred",
+    "failure_disposition": "PRESERVED; source refresh does not clear failures or waive deadlines, no new retry"
+  },
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md,20 new lines in final source commit; sole ordinarymerge doc conflict retained both parent lessons",
+    "Durable learning captured": "RCC18.19.3 progress fields measure previous-mark intervals; preserve whole series and caller timing. First-startup failure and actual cleanup result dimensions must remain source-bound, and observed CPU/IO is limited to measured nodes. Source union needs fresh CI and separate artifact qualification.",
+    "Evidence": "immutableRCC4148 source and independentlyretained299/311 diagnoses; all23 original non-doc path preservation and current source gates",
+    "Stale or ambiguous guidance removed": "Avoids finalinterval-as-total,66.491-as-UV-duration, cleanup-note-as-leak and branchrefresh-as-failure-clearance interpretations; both parent operational lessons retained",
+    "Remaining uncertainty": "Windows slow phase/cause, actual cleanup missing dimensions, fresh exact-unionCI and actualbackend/artifact acceptance"
+  },
+  "holds": [
+    "fresh exact source CI",
+    "retained299 Windowsstartup failure",
+    "original311 diagnostic unknownphase/cleanup dims",
+    "PostgreSQL realbackend unverified",
+    "current299 frozen artifact qualification:6 changed plus6 added productioninputs",
+    "300 dependent refresh until actual accepted299 integration",
+    "private/full134 acceptance not qualified"
+  ],
+  "Upstream disposition": "none; no confirmed maintained upstream defect or authorized issue target"
+}

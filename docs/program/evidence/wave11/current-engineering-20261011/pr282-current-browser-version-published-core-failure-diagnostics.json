@@ -1,0 +1,215 @@
+{
+  "admission": {
+    "junit": "PASS",
+    "pytest": "PASS",
+    "receipt": "FAIL"
+  },
+  "checks": [
+    {
+      "code": "scope",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "source_identity",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "declared_core_version",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "registry_wheel_digest",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "worker_core_version",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "worker_module_hashes",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "worker_prefix_absolute",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "worker_module_inventory",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "worker_modules_contained",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_origin",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_module_digest",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_args_list",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_args_count",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_interpreter_absolute",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_module_entry",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_wrapper_reaped",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_live_descendants_empty",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_readers_empty",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_zombies_empty",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_snapshot_complete",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_reap_complete",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_cleanup_errors_empty",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "runtime_calls",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "template_digest",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "package_manifest_digest",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "resource_digest",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "browser_status",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "browser_explicit_selection",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "browser_version",
+      "failure_class": "NONE",
+      "status": "FAIL"
+    },
+    {
+      "code": "browser_preflight_digest_valid",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "browser_digest",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "browser_selected_path",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "browser_temp_removed",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "browser_temp_absolute",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "browser_temp_absent",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "browser_playwright_version",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "browser_lock_digest",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "limits_list",
+      "failure_class": "NONE",
+      "status": "PASS"
+    },
+    {
+      "code": "limits_count",
+      "failure_class": "NONE",
+      "status": "PASS"
+    }
+  ],
+  "counts": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 1
+  },
+  "receipt_read": {
+    "code": "NONE",
+    "status": "PARSED"
+  },
+  "status": "FAIL"
+}

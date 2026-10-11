@@ -1,0 +1,26 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -114,6 +114,23 @@
+ case without skips or retries and the existing five persisted Runtime Run
+ records. These are implemented admission controls; an actual native/public-Core
+ bridge receipt still requires a separately reviewed immutable runner and run.
++
++Qualify the exact Playwright CLI selection with `--list` before browser execution;
++Python collection and an expected leaf title do not prove that the configured
++Playwright command discovers that case. A JSON report with no suites, zero
++expected cases and `No tests found` is a discovery failure, not a browser result.
++Preserve the primary report and keep the combined bridge gate failed.
++
++Read the Runtime testcase outcome and its cleanup measurements separately. A
++failed testcase can retain true wrapper/snapshot/reap flags, empty error/reader/
++live/zombie lists and a stopped final sampler; those measured fields qualify
++only their ownership scope. Returned outer reaping counts are separate, and
++forced cleanup does not prove natural Runtime exit. Partial Python MCP calls
++and three measured public Core members do not establish the later browser calls
++or five-tool-Run gate. Count those tool Runs by the fixture's declared action
++names; a resource read can create an additional persisted Run. Keep whole-wheel
++authentication, cold registry acquisition and production artifact resolution
++outside this partial evidence.
+ 
+ Compare retained native producer inputs to the resolved ordinary merge tree,
+ then repeat at the committed harness checkpoint. Divergent tips can omit later

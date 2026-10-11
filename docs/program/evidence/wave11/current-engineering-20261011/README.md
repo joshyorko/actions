@@ -1,5 +1,9 @@
 # Current engineering receipts
 
+Entries below retain successive historical checkpoints, including their original
+pending states. The latest checkpoint is recorded at the end; historical statuses
+must not be read as the current admission decision.
+
 This checkpoint preserves original source and execution identities from the active engineering wave. #292 is integrated at `ba85aac7324ea4463bfba8c5f8586e27706dc2fe`, tree `80e5c77513f6abf5d07005ee3aee47d49efd927f`. Other retained PRs are still governed by their complete exact-head/current-target merge gates. These files do not constitute whole issue closure or Runtime publication.
 
 - #290 exact `5c8084c6` controls independently passed eleven Linux frozen and eleven wrapper cases. Workflow head `2f631e54`, producer `92498aff` and accepted target `ba85aac7` remain distinct.
@@ -73,3 +77,52 @@ frozen-only attempt is authorized. No candidate wheel may be relabeled public Co
 The declared-job inventory proposal is adapted into operations guidance: late needs
 jobs and Runtime PR artifact validation cannot be omitted from complete CI.
 Upstream disposition: none. No release, issue closure or infrastructure change.
+
+
+Current convergence checkpoint: #292 and #290 are integrated; target is now
+`1c7585fe8bb3cb9476c3997570bd3f04466f2bbc` after normal #311 integration.
+#310 exact4b Windows integration failed; no merge is admitted. #30941d has20 successful checks; #311d75 has23
+successful checks, including all six historical failing Windows nodes. Its normal
+merge tree35a exactly equals the independently reviewed tested treee3c52, with
+parentsfbde/d75. Other current source/CI remains separate from changed-target
+admission. Original311
+readiness failures and unknown cause remain preserved. The reviewed Windows V2
+observation is design-only, with implementation explicitly deferred now that the
+current cases passed; neither V1 nor V2 is discarded or represented as implemented.
+
+#29980ba and #308483 are normally pushed after independent source review, with
+fresh complete CI required. #300 remains dependent on actual accepted299 merge.
+#282 current811 hosted diagnostic has38 passing predicates and onlybrowser_version
+failing, with unavailable compared strings. Source successora0b is independently
+reviewed and normally pushed: expected-version measurement changes, all39 strict
+predicates and diagnostic code stay byte-identical. Local formatting reproduction
+is retained as a mechanism, not the established hosted cause.
+
+#30514c is pushed; its frozen V2 actual attempt failed at pytest module binding
+before startup. Independently qualified V3 fixed the controller binding and one
+authorized actual attempt reached Runtime readiness and three Python MCP calls,
+but Playwright collected zero tests. No browser launched. Its strict recorded
+Runtime cleanup passed; outer owner separately reaped four exited descendants.
+The V3 product attempt remains failed. Existing source selector correction is
+authorized with service-free collection controls, but no further actual retry is
+authorized. Original runner/control/proposal versions and both failed checkpoints
+are copied unchanged. Full logs, package trees and raw executable archives remain
+outside Git. This checkpoint does not qualify a consumer, real artifact resolution
+or the full Canvas/ChatGPT graph.
+
+#30787 seven original hosted failures are independently classified as first-input
+checked acquisition failures: five exit4 and two exit1. The first guard fails
+before replacement or downstream execution. Authentication/transport/repository
+cause and postfailure module cleanup are not established. The source guard remains accepted locally,
+with owner-approved source pair/revision and release content unresolved. Read-only
+published Runtime1.0.2 Linux cp312 inspection found the same empty generated module
+as the measured1.0.3 candidate, so it supplies no fallback. #221 remains draft,
+with publication/tag/native install-upgrade/OAuth/release gates retained.
+
+The new canonical guidance adapts accepted299/308 source-scope,311 READY-boundary,
+282 diagnostic/measurement,305 collection/immutable-helper/sampler/cleanup and
+published-OAuth recovery proposals. Windows V2 instrumentation implementation is
+explicitly deferred; its design and independent review are retained. Full OAuth
+manifest/source-authority architecture remains deferred pending owner input. No
+issue closure, publication, infrastructure change, Devsy or Dakota writer occurred.
+Upstream disposition: none.

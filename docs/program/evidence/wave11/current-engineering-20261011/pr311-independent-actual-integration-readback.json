@@ -1,0 +1,80 @@
+{
+  "verdict": "GO_AUTHENTICATED_NORMAL311_INTEGRATION_READBACK_EXACT_REVIEWED_TREE; NOT_FULL_CAMPAIGN_OR_RELEASE_COMPLETION",
+  "actualmerge": {
+    "sha": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+    "tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78",
+    "parents": [
+      "fbde0d3a248c47c9964851355f96575c89a87329",
+      "d75b25fb4c354e5c95bc0f639b426d6ff402104b"
+    ],
+    "matches_reviewed_e3c52_complete_tree_and_orderedparents": true
+  },
+  "PR": {
+    "merged": true,
+    "closed": true,
+    "draft": false,
+    "head": "d75b25fb4c354e5c95bc0f639b426d6ff402104b"
+  },
+  "current_live_target": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+  "exact_source_checks": {
+    "count": 23,
+    "all_success": true
+  },
+  "root_actual_record": {
+    "path": "/workspace/engineering/pr311-actual-integration.json",
+    "size": 358,
+    "sha256": "480b74e476793b1da99efc8ed370a2cb4a04023a3e97b53c80c3d1693fa059de"
+  },
+  "authenticated_readback_raw_bindings": [
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-review/actual-merge-readback-owned/base.json",
+      "size": 5419,
+      "sha256": "2c47c15a1a4747d7590f9b09c1d9f41c94bcbf2d722b87447f6a9d597dd84550"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-review/actual-merge-readback-owned/checks.json",
+      "size": 71496,
+      "sha256": "56272065e3a21a2a95db2683bc1126a6e7fd628b0098d17fc42298359e0848e5"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-review/actual-merge-readback-owned/merge.json",
+      "size": 2754,
+      "sha256": "66ef9d1dfd006e10d0129ceb72b55968e6d967ac86aca3a218e0d883c2d87298"
+    },
+    {
+      "path": "/workspace/engineering/pr311-current-full-admission-review/actual-merge-readback-owned/pr.json",
+      "size": 23951,
+      "sha256": "ebab1d59fba0249f5394bc3edeee127d62c3ec57c4a4d94ac207531b588daadb"
+    }
+  ],
+  "readiness_and_source_review": {
+    "path": "/workspace/engineering/pr311-current-full-admission-review/independent-current-full-admission-review.json",
+    "size": 16320,
+    "sha256": "160cf2e3302d9bc302cdf370c6989caabb29b35b50bc5ac5ed928f210aafd9f4"
+  },
+  "priority_correction": {
+    "path": "/workspace/engineering/pr311-current-full-admission-review/independent-priority-disposition-correction.json",
+    "size": 3155,
+    "sha256": "a2b818644f5c49700fc0eb7b52686cda97606992a29dd752e1fcad2095ef9767"
+  },
+  "sequencing_disposition": "Previous310firstpriority supersededbyroot;311 hasno310source prerequisite.310failure retained;310-before302adapter actualacceptance prerequisite preserved. OtherPRprospectiveCI witholdfbde invalidated unlessnewactualunion fullyqualified.",
+  "canonical_documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_proposed_delta": {
+      "path": "/workspace/engineering/pr311-current-full-admission-review/canonical-independent-integration-priority-proposed.patch",
+      "size": 793,
+      "sha256": "f25c42da132befd90f086ac60f8ba426a673cb7a10d760a2b1b069bf6ff6985e"
+    },
+    "disposition": "PROPOSED additivepriorityvsactualdependency lesson; original160cf/a2b/3b4/95f bytespreserved; rootcanretainactualmerge receipt",
+    "durable_learning": "normalmerge actualcommit differssyntheticbut complete reviewedtree/orderedparents identical; priorityreordering isseparatefromsource/acceptance prerequisites andnewtargetrequiresfreshotheruniongates",
+    "evidence": "authenticatedmerged311/draftready/sourcehead23SUCCESS/live1c758/tree35a/parentsfbde-d75; priorindependent160cf/a2b;rootnewsequencing",
+    "stale_ambiguity": "310firsttemporarypriority blocks independent311forever;311mergeaccepts310orinvalidoldCIofotherbranches; syntheticandactualcommitmustbeidenticaldespitesametree",
+    "remaining_uncertainty": "historicaltimeoutcause/fullcleanup;310failedintegration/newotherbranch unions/private/fullreleasegraph",
+    "upstream": "none"
+  },
+  "limits": [
+    "311integrationintoRuntimeintegration branch doesnot imply communitypromotion/publication or fullissueclosure",
+    "Source/artifact acceptance requirements not waived;currentprivate/frozenv6/releaseHOLD untouched",
+    "WindowsV2design deferred;no implementation/rerun"
+  ]
+}

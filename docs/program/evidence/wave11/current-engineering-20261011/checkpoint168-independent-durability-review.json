@@ -1,0 +1,61 @@
+{
+  "verdict": "GO_FROZEN168_DURABILITY_COMMIT_AND_NORMAL_PUSH_TO_EXISTING_HANDOFF_BRANCH_ONLY",
+  "scope": "Read-only manifest/source/content/safety review; no engineering admission, source execution or issue closure",
+  "checkpoint_parent": "702bd9b9487c2500f595e25c9cc5749f1ed1c786",
+  "file_inventory": {
+    "manifest_records": 168,
+    "new": 79,
+    "prior": 89,
+    "all_destination_bytes_and_sha256_match": true,
+    "all_prior_records_unchanged": true,
+    "available_original_sources_byte_equal": 167,
+    "unavailable_original": "pr290-actual-integration.json: prior record and prior committed copy unchanged; existing independent readback retained",
+    "no_destination_symlinks_or_unlisted_files": true
+  },
+  "frozen_documents": {
+    "docs/program/evidence/wave11/current-engineering-20261011/manifest.json": {
+      "bytes": 43562,
+      "sha256": "71cfa5ea0a0773e0ca3cb24836662bc444630eff97f201f08a8ff18810dbe518"
+    },
+    "docs/program/evidence/wave11/current-engineering-20261011/README.md": {
+      "bytes": 13943,
+      "sha256": "315ab2a160b66d41dabb9e7e2a085d87a4582e21bb914926a4830464b059a44c"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 207334,
+      "sha256": "ae061740cc6e9e579facee1232b445ba30b7aa0d7b489b870a8041927d8bfae9"
+    },
+    "docs/skills/work-items.md": {
+      "bytes": 52996,
+      "sha256": "6a95b639c4c221d541821d5d5e3959cedfd97f490e06263ac55889751d1bf240"
+    }
+  },
+  "content_review": {
+    "latest_target": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+    "target_tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78",
+    "311_actual_and_tested_commit_distinct_same_tree_parents": true,
+    "310_windows_failure_and_no_admission_preserved": true,
+    "305_v2_binding_failure_v3_zero_playwright_failure_preserved": true,
+    "305_runtime_cleanup_and_outer_reaping_separate": true,
+    "282_predicate_diagnostic_unknown_compared_strings_and_local_mechanism_preserved": true,
+    "published_runtime_102_empty_generated_content_no_fallback": true,
+    "307_first_checked_acquisition_failure_no_auth_cause_inference": true,
+    "windows_v2_design_deferred_not_implemented": true,
+    "no_historical_receipt_identity_relabeling_observed": true
+  },
+  "safety": {
+    "new_full_private_logs_archives_wheels_executables_databases_excluded": true,
+    "credential_private_key_signed_query_pattern_scan_findings": [],
+    "two_browser_version_bin_files_are_41_byte_stdout_and_empty_stderr": true,
+    "raw_patch_context_whitespace_hash_exception_preserved": true,
+    "authored_canonical_and_README_whitespace_check": "PASS"
+  },
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md and accepted prior work-items.md proposals; integrated by root in this frozen checkpoint",
+    "Durable learning captured": "Separate observed source/control/publication/browser/cleanup and first-acquisition scopes; changed target invalidates other prospective gates; sequencing priority is separate from source prerequisites",
+    "Evidence": "Immutable copied79 receipts/proposals plus prior89; current31123-check admission and exact actual integration; current2829635 failure/106356 source review; reviewed305V3 failure; first-input307 classification",
+    "Stale or ambiguous guidance removed": "Pending current311/310 summary corrected; READY readers are live service observations; local formatting is not hosted cause; tool Runs and resource Runs distinct; public empty predecessor is not a release fallback",
+    "Remaining uncertainty": "310 initial-readiness failure cause and explicit cleanup census; fresh actual-target unions; failed305 browser collection; approved OAuth source pair; full release/private/native contracts remain held"
+  },
+  "Upstream disposition": "none"
+}

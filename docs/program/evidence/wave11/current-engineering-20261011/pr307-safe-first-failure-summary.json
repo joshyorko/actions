@@ -1,0 +1,398 @@
+{
+  "source_head": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+  "actual_control": "5c3013a1b02cc1f239c19b9db5f08bbacaafcf6f",
+  "actual_tree": "638b960a3700bbbba3026874efb158fa6e95117f",
+  "ordered_parents": [
+    "fbde0d3a248c47c9964851355f96575c89a87329",
+    "87e412f89b201c697d3e6bd4bd34031cdbd14df3"
+  ],
+  "seven_completed_actual_failed_jobs": [
+    {
+      "job": 114387165270,
+      "name": "build (macos-py3.12-devmode)",
+      "run": 38111270885,
+      "exact_head": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+      "actual_checkout_full_sha_in_private_log": true,
+      "first_failed_step": {
+        "name": "Build OAuth2 config",
+        "number": 11
+      },
+      "preceding_installs_frontend": [
+        {
+          "name": "Install project (not dev)",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Install project (dev)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build frontend",
+          "conclusion": "success"
+        }
+      ],
+      "subsequent_build_test_not_executed": [
+        {
+          "name": "Test Go wrapper child lifecycle",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Build binary",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Test (not integration)",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Test (integration)",
+          "conclusion": "skipped"
+        }
+      ],
+      "safe_guard_reason": {
+        "category": "ACQUISITION_FAILED",
+        "input": "actions-oauth-config.yaml",
+        "gh_exit": 4
+      },
+      "original_full_job_log_private": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165270-original-decoded.log",
+        "size": 650828,
+        "sha256": "0b97e091733f14de495f6db7a8a221fd01413608531c1091d7a287654d840562"
+      },
+      "authenticated_job_metadata": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165270.json",
+        "size": 5107,
+        "sha256": "114c3bb3d982ec74c5ce00af111232432132f4356334f180ea0fd9d409ebdca2"
+      }
+    },
+    {
+      "job": 114387165388,
+      "name": "build (ubuntu-py3.12-devmode)",
+      "run": 38111270885,
+      "exact_head": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+      "actual_checkout_full_sha_in_private_log": true,
+      "first_failed_step": {
+        "name": "Build OAuth2 config",
+        "number": 11
+      },
+      "preceding_installs_frontend": [
+        {
+          "name": "Install project (not dev)",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Install project (dev)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build frontend",
+          "conclusion": "success"
+        }
+      ],
+      "subsequent_build_test_not_executed": [
+        {
+          "name": "Test Go wrapper child lifecycle",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Build binary",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Test (not integration)",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Test (integration)",
+          "conclusion": "skipped"
+        }
+      ],
+      "safe_guard_reason": {
+        "category": "ACQUISITION_FAILED",
+        "input": "actions-oauth-config.yaml",
+        "gh_exit": 4
+      },
+      "original_full_job_log_private": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165388-original-decoded.log",
+        "size": 805860,
+        "sha256": "15f4b06e8e1597e4a17ce48865b8b04aa06babbf05f4af7b40ca46aa64398dfd"
+      },
+      "authenticated_job_metadata": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165388.json",
+        "size": 5112,
+        "sha256": "481c8767c47bce28771ddb4f64dd10732a49a0842a45db1a062d603cce948569"
+      }
+    },
+    {
+      "job": 114387165437,
+      "name": "build (windows-py3.12-devmode)",
+      "run": 38111270885,
+      "exact_head": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+      "actual_checkout_full_sha_in_private_log": true,
+      "first_failed_step": {
+        "name": "Build OAuth2 config",
+        "number": 11
+      },
+      "preceding_installs_frontend": [
+        {
+          "name": "Install project (not dev)",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Install project (dev)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build frontend",
+          "conclusion": "success"
+        }
+      ],
+      "subsequent_build_test_not_executed": [
+        {
+          "name": "Test Go wrapper child lifecycle",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Build binary",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Test (not integration)",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Test (integration)",
+          "conclusion": "skipped"
+        }
+      ],
+      "safe_guard_reason": {
+        "category": "ACQUISITION_FAILED",
+        "input": "actions-oauth-config.yaml",
+        "gh_exit": 4
+      },
+      "original_full_job_log_private": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165437-original-decoded.log",
+        "size": 68747,
+        "sha256": "51ed88882426be212ce4030690df48bc0be27101ab4f685c4663e8b0cbb6ae3e"
+      },
+      "authenticated_job_metadata": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165437.json",
+        "size": 5113,
+        "sha256": "a3b85f23cebffa82844fa4daf9466ac33fd4a8b10263421261e0ee0ed30aeaa1"
+      }
+    },
+    {
+      "job": 114387165627,
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "run": 38111270957,
+      "exact_head": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+      "actual_checkout_full_sha_in_private_log": true,
+      "first_failed_step": {
+        "name": "Build OAuth2 config",
+        "number": 14
+      },
+      "preceding_installs_frontend": [
+        {
+          "name": "Install project",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build frontend from public dependencies",
+          "conclusion": "success"
+        }
+      ],
+      "subsequent_build_test_not_executed": [
+        {
+          "name": "Build binary (unsigned, with Go wrapper)",
+          "conclusion": "skipped"
+        }
+      ],
+      "safe_guard_reason": {
+        "category": "ACQUISITION_FAILED",
+        "input": "actions-oauth-config.yaml",
+        "gh_exit": 1
+      },
+      "original_full_job_log_private": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165627-original-decoded.log",
+        "size": 102157,
+        "sha256": "b64bc4302470c0a12440b97668325b2081a56a3af9a7a5c82937e083deee0ba3"
+      },
+      "authenticated_job_metadata": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165627.json",
+        "size": 7556,
+        "sha256": "5ebe0731f8fa263131d515fea5f7fd39567f14ab95fbbf87b9f4c70af6a5d257"
+      }
+    },
+    {
+      "job": 114387165649,
+      "name": "build-sdist (ubuntu-py3.12)",
+      "run": 38111270933,
+      "exact_head": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+      "actual_checkout_full_sha_in_private_log": true,
+      "first_failed_step": {
+        "name": "Build OAuth2 config (PR)",
+        "number": 13
+      },
+      "preceding_installs_frontend": [
+        {
+          "name": "Install project (not dev)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install project (dev)",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Build frontend",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Build frontend (PR)",
+          "conclusion": "success"
+        }
+      ],
+      "subsequent_build_test_not_executed": [
+        {
+          "name": "Build sdist",
+          "conclusion": "skipped"
+        }
+      ],
+      "safe_guard_reason": {
+        "category": "ACQUISITION_FAILED",
+        "input": "actions-oauth-config.yaml",
+        "gh_exit": 4
+      },
+      "original_full_job_log_private": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165649-original-decoded.log",
+        "size": 752770,
+        "sha256": "c30321790c2f77c78d02bc7ea221e9df636eaf0b3257c9c7201f2aead08c77e0"
+      },
+      "authenticated_job_metadata": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165649.json",
+        "size": 4068,
+        "sha256": "74eb886c4d52f45a5007e3f1a74dd10a8acc98cbce90f6570b457c235cbef26c"
+      }
+    },
+    {
+      "job": 114387165656,
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "run": 38111270957,
+      "exact_head": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+      "actual_checkout_full_sha_in_private_log": true,
+      "first_failed_step": {
+        "name": "Build OAuth2 config",
+        "number": 14
+      },
+      "preceding_installs_frontend": [
+        {
+          "name": "Install project",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build frontend from public dependencies",
+          "conclusion": "success"
+        }
+      ],
+      "subsequent_build_test_not_executed": [
+        {
+          "name": "Build binary (unsigned, with Go wrapper)",
+          "conclusion": "skipped"
+        }
+      ],
+      "safe_guard_reason": {
+        "category": "ACQUISITION_FAILED",
+        "input": "actions-oauth-config.yaml",
+        "gh_exit": 1
+      },
+      "original_full_job_log_private": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165656-original-decoded.log",
+        "size": 847619,
+        "sha256": "6a96473343500188830bbb77b63c408a967ea0f0696d71bcec5f7c9c1784e5ab"
+      },
+      "authenticated_job_metadata": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165656.json",
+        "size": 7556,
+        "sha256": "2bf0d9e7929eedb116b0ff1fabc0b195f2161d82dc445a997c46de76b7e236d8"
+      }
+    },
+    {
+      "job": 114387165731,
+      "name": "build-wheels (macos-15)",
+      "run": 38111270933,
+      "exact_head": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+      "actual_checkout_full_sha_in_private_log": true,
+      "first_failed_step": {
+        "name": "Build OAuth2 config (PR)",
+        "number": 13
+      },
+      "preceding_installs_frontend": [
+        {
+          "name": "Install project (not dev)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install project (dev)",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Build frontend",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Build frontend (PR)",
+          "conclusion": "success"
+        }
+      ],
+      "subsequent_build_test_not_executed": [],
+      "safe_guard_reason": {
+        "category": "ACQUISITION_FAILED",
+        "input": "actions-oauth-config.yaml",
+        "gh_exit": 4
+      },
+      "original_full_job_log_private": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165731-original-decoded.log",
+        "size": 661744,
+        "sha256": "c710d7e85df96e37f628d86da6c1dae7b4430eb50929681105ab2264bdd4fd01"
+      },
+      "authenticated_job_metadata": {
+        "path": "/workspace/engineering/pr307-current-hosted-failure-owned/job-114387165731.json",
+        "size": 5012,
+        "sha256": "180a422b7957dd21cd6db0866d0a445842a35be72c059ecea2b9ff6ff0219e51"
+      }
+    }
+  ],
+  "other_observed_statuses": [
+    {
+      "id": 114389865728,
+      "name": "publish",
+      "status": "completed",
+      "conclusion": "skipped"
+    },
+    {
+      "id": 114387165764,
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "status": "queued",
+      "conclusion": null
+    },
+    {
+      "id": 114387165625,
+      "name": "build-wheels (windows-2022)",
+      "status": "completed",
+      "conclusion": "cancelled"
+    },
+    {
+      "id": 114387165549,
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "status": "queued",
+      "conclusion": null
+    },
+    {
+      "id": 114387165468,
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "cancelled"
+    }
+  ],
+  "fixed_reason_only": true,
+  "no_raw_stderr_env_config_URL_payload": true
+}
