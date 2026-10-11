@@ -1,0 +1,210 @@
+{
+  "classification": "bounded PR311 fixture/type/docs source verification; not accepted #195 installed-wheel gate",
+  "created_utc": "2026-10-11T00:34:22.029558+00:00",
+  "incident_boundary": {
+    "approved_standalone_195_gate": "NOT RUN",
+    "candidate06_heavy_plan": "NOT RUN",
+    "independent_incident_reconciliation_sha256": "f805fa8e5ea15dd9645c52ad695df53576e86f63b45df9bf6c0a292c4d00fcbe",
+    "prior_incident_sha256": "cedb7cf90b43a1a64a2e97e6c0b5a4ca77dcbee61946bde42255e030325c068c",
+    "prior_unplanned_full_module_incident_receipt": "/workspace/work/actions-mk3-evidence/wave9/311-windows-fixture-repair-20261011-incident/incident-receipt.json"
+  },
+  "launch": {
+    "fresh_artifact_path": "/workspace/work/actions-mk3-wave8-wheel-boundary/developer/tmp/wave9-311-exact38-20261011-05",
+    "outer_exit": 0,
+    "outer_timeout_seconds": 180,
+    "prelaunch_hashes": {
+      "command.txt": "84eb2417b7999ac219f697897b4e24fa5fd73479b00dc0f469a26ce29fc0b6a6",
+      "prelaunch.json": "70d027dd0f186a1f8e48837bad254d0ea456b63d6e906a92dd232121d410e6ed",
+      "runner.py": "2297dfecdaa45d13dd08a63bd03421ee476e8f5b901f58f9420cff1a45b8b240",
+      "task.yaml": "b9c4b675b5a30498958ec898b261ccab78450f350c98c08b37ae52cb46ebac9d",
+      "test-selection.json": "bb5b3da4f1fc5eb159dbaa14f832ca0550f613f5ad4d43a9578ec6de550dd7eb"
+    },
+    "prepared_package_python": {
+      "path": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/python",
+      "resolved_target": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "sys_prefix": "/workspace/work/actions-mk3-pr302/action_server/.venv",
+      "version": "3.12.15"
+    },
+    "rcc_command": "source /workspace/actions-cloud/activate.sh; timeout --signal=TERM --kill-after=10s 180s /workspace/actions-cloud/bin/rcc task run --dev --no-build -r /workspace/work/actions-mk3-wave8-wheel-boundary/developer/wave9_311_exact38_20261011_05.yaml -t Checks",
+    "rcc_mode": "developer task (`devTasks`) simple run; no RCC environment-build event in journal",
+    "rcc_task_started_utc": "2026-10-11T00:32:25Z",
+    "rcc_task_stopped_utc": "2026-10-11T00:32:37Z",
+    "rcc_version": "18.19.3",
+    "runner_shared_subprocess_deadline_seconds": 150,
+    "source_and_environment_pins": {
+      "developer_setup": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a",
+      "developer_setup_windows": "86a36910ad271616626e019e02e6c7b21fdb32eaa1e1717c2a654673504a8001",
+      "poetry_lock": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+      "pyproject": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+      "rcc": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    "task_orchestrator": {
+      "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "prefix": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python",
+      "version": "3.12.14"
+    },
+    "tooling": {
+      "mypy": {
+        "path": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/mypy",
+        "sha256": "c54d860a9c12b273931de71ba095020e63f46ede9ae477049c4b95023ce79c60",
+        "version": "1.20.2 (compiled: yes)"
+      },
+      "ruff": {
+        "path": "/workspace/work/actions-mk3-pr302/action_server/.venv/bin/ruff",
+        "sha256": "01330d499829a450228cf386b6132966c7c5304d5569c661d148d501161936ce",
+        "version": "0.1.15"
+      }
+    }
+  },
+  "preserved_outputs": {
+    "mypy_stdout": {
+      "bytes": 1484,
+      "sha256": "3cff125a819717bea5d65597f4a3cf6a0310cc64f7882e9dd41b129015c9e658"
+    },
+    "outer.stderr.log": {
+      "bytes": 837,
+      "sha256": "c83cead6dbf004054a1cb51a5cf2c93045dc9a2e0622f430d69dc8c5b5a82dbb"
+    },
+    "outer.stdout.log": {
+      "bytes": 4617,
+      "sha256": "8f85ab61402a8b22ef9f8c5cab7111aa446db081fd37d01bb1d0ce3d1fab0149"
+    },
+    "outer_control.log": {
+      "bytes": 67,
+      "sha256": "11fbf2fca37dd67c74b91c8d050de9322bd62f9a88943d21c6648a2a118a08af"
+    },
+    "pytest_html_log": {
+      "bytes": 933565,
+      "sha256": "07d7d30bfaff994ceac5726f4b073540b9606f6a440487d4f9727d28c5445b31"
+    },
+    "pytest_output_worktree_note": "Ignored action_server/output artifacts were copied to evidence; they remain in the worktree because their contents may predate this bounded task.",
+    "pytest_robolog": {
+      "bytes": 205949,
+      "sha256": "3100fb9e8056a45175e29bd5d69db39ad64aaa3261741577eafe5ce5348eda12"
+    },
+    "pytest_stdout": {
+      "bytes": 190,
+      "sha256": "583b33682fbe6bfdd67614f0ae89168b9570ef002138b74b67683f2c4ed0e963"
+    },
+    "rcc_journal": {
+      "bytes": 516,
+      "sha256": "849a186c8a89bf32be23c762cd671e185a5e7566f95cd620b628d9ad91a39ad6"
+    },
+    "rcc_stdout": {
+      "bytes": 4617,
+      "sha256": "8f85ab61402a8b22ef9f8c5cab7111aa446db081fd37d01bb1d0ce3d1fab0149"
+    },
+    "ruff_stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner_result.json": {
+      "bytes": 4414,
+      "sha256": "23f58ea16308d244407c01442cae6905125406f6d322afa5ec7d9ac057268d55"
+    }
+  },
+  "prior_attempts": [
+    {
+      "candidate": "01",
+      "result": "RCC task config shell multiline was treated as executable `set`; exit 6 before runner/tests."
+    },
+    {
+      "candidate": "02",
+      "result": "Prepared runner draft had output-directory precreation conflict; not launched."
+    },
+    {
+      "candidate": "03",
+      "result": "Prepared runner draft manifest omitted selector list; not launched."
+    },
+    {
+      "candidate": "04",
+      "result": "RCC task runner system Python did not match mistaken holotree-prefix assertion; failed before tests. This established the need to record task orchestrator separately and launch pytest through prepared package Python."
+    }
+  ],
+  "processes": {
+    "cleanup_claim": "New bounded task exited normally; the three prior adopted zombies were not signaled, reaped, or claimed clean.",
+    "new_task_pids_seen": [
+      "77574 outer bash",
+      "77578 timeout",
+      "77579 rcc",
+      "77584 task runner",
+      "77597 mypy"
+    ],
+    "new_task_processes_postrun": "No listed run PID remained in the post-run census.",
+    "prior_incident_zombies_still_present": [
+      {
+        "comm": "rcc",
+        "pgid": 75476,
+        "pid": 75479,
+        "stat": "Z"
+      },
+      {
+        "comm": "dash",
+        "pgid": 75476,
+        "pid": 75485,
+        "stat": "Z"
+      },
+      {
+        "comm": "mypy",
+        "pgid": 75476,
+        "pid": 75661,
+        "stat": "Z"
+      }
+    ]
+  },
+  "results": {
+    "aggregate_task": "PASS",
+    "mypy": {
+      "command": "mypy --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases src tests",
+      "result": "Success: no issues found in 326 source files",
+      "returncode": 0
+    },
+    "no_build_install_effects": "Selected AST closure excluded wheel build/install helpers; the bounded task performed no wheel builds, pip installs, package reinstalls, provider work, or installed-wheel acceptance.",
+    "pytest": {
+      "result": "38 passed in 0.59s",
+      "returncode": 0,
+      "stderr_empty": true
+    },
+    "ruff": {
+      "command": "ruff check src tests",
+      "returncode": 0,
+      "stderr_empty": true,
+      "stdout_empty": true
+    },
+    "task_elapsed_seconds": 11.951
+  },
+  "review": {
+    "candidate06_rebind": "blocked on independent source review and root authorization",
+    "independent_source_review": "requested from Sol; pending at receipt creation",
+    "push": "none"
+  },
+  "schema": "codex.bounded-source-verification/v1",
+  "selection": {
+    "excluded_exact_node": "test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders",
+    "expanded_test_cases": 39,
+    "method": "AST parse of test module without importing or calling tests",
+    "only_selected_subprocess": "read-only git ls-files --stage -- <relative_script>",
+    "selected_expanded_cases": 38,
+    "selected_function_selectors": 21,
+    "selected_helper_closure_excludes": [
+      " _build_wheels",
+      "_install_and_probe"
+    ],
+    "selection_sha256": "bb5b3da4f1fc5eb159dbaa14f832ca0550f613f5ad4d43a9578ec6de550dd7eb",
+    "test_definitions": 22
+  },
+  "source": {
+    "branch": "mk3/wave8-installed-wheel-boundary-20261010",
+    "change_summary": "Fixture writers now write the exact UTF-8 bytes represented by synthetic wheel members; a focused LF/CRLF regression protects Windows behavior; two violations locals have explicit list[str] annotations; the canonical guide records byte identity and safe AST-selected subsets for unmarked heavy tests.",
+    "changed_paths": {
+      "action_server/tests/contract_tests/test_active_contracts.py": "b76ec605e343e8bec7dea6e230dad3f516eabc4fd90a2769638b0d9111a6ade0",
+      "docs/skills/repository-operations.md": "0efd8b26d90621b9014c25e8d3c1a5c01a82c5d2b98ae4365d6c744110f81408"
+    },
+    "commit": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+    "commit_message": "Fix Windows wheel fixture byte preservation",
+    "push": "none",
+    "tree": "34f967cc9b753e8b0497221cf77ec53925cdf9eb",
+    "worktree": "/workspace/work/actions-mk3-wave8-wheel-boundary",
+    "worktree_clean": true
+  }
+}

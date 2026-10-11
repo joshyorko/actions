@@ -1,0 +1,7 @@
+{
+  "applies_to": "completion-receipt.json SHA256 0023f9843c8b82cf958b34356438d449ab811f0d51fd094c47e67dfb7ef3d944",
+  "correction": "The selected_helper_closure_excludes list in the receipt contains a leading space before `_build_wheels`; the intended name is `_build_wheels`. The runner asserted the exact helper name absent from the selected helper closure, and the AST selection manifest independently records the closure and excluded node. The original receipt bytes are unchanged.",
+  "created_utc": "2026-10-11T00:34:27.063012+00:00",
+  "schema": "codex.receipt-erratum/v1",
+  "supersedes_nothing": true
+}

@@ -1,0 +1,36 @@
+{
+  "created_at_utc": "2026-10-11T01:04:55.326188Z",
+  "members": [
+    {
+      "bytes": 4877,
+      "path": "repair-receipt.json",
+      "sha256": "3f4235579b453703270da5eeae5e6d3922cdfb77b3d56e59981967cea9af0d9e"
+    },
+    {
+      "bytes": 914,
+      "path": "README.md",
+      "sha256": "ee0d370b0f8c66ec9b4dc1ff38c2bad779e5acbeb56af72c478cab51da704b2a"
+    },
+    {
+      "bytes": 1113,
+      "path": "run-focused-checks.sh",
+      "sha256": "d2eea1f1cd85554b9f4052fbb6b34cab394dd361879d9e4305b182598c92cd55"
+    },
+    {
+      "bytes": 250,
+      "path": "command.txt",
+      "sha256": "88dcb116ed0e7b574e5c28f6cc653b5fc436209c0289b229614b25b340c86842"
+    },
+    {
+      "bytes": 5098,
+      "path": "stdout.log",
+      "sha256": "ac47ad4d61146d3bd0a75762d171445bad4c3a78748450c9dbcd7f3b04dfbf68"
+    },
+    {
+      "bytes": 2,
+      "path": "exit-code.txt",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    }
+  ],
+  "schema": "pr310-test-typing-repair-manifest-v1"
+}

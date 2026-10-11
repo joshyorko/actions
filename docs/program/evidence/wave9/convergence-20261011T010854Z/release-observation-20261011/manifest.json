@@ -1,0 +1,15 @@
+{
+  "members": [
+    {
+      "bytes": 8956,
+      "path": "release-observation.json",
+      "sha256": "7644f05ce5885bb72e3bee148538e098c49ea47046f7d49ea1a6eb9217ab5254"
+    },
+    {
+      "bytes": 2860,
+      "path": "README.md",
+      "sha256": "6c939ed7af6e26874c59f07ae4524dee86156c55a139489fcdf1b2d9c42892ce"
+    }
+  ],
+  "schema": "release-observation-manifest-v1"
+}

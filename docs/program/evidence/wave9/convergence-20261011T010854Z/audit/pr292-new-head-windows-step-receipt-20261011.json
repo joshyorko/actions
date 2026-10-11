@@ -1,0 +1,172 @@
+{
+  "schema": "actions.pr292-new-head-windows-steps/v1",
+  "observed_readback_utc": "2026-10-11 01:00:12 UTC",
+  "repository": "joshyorko/actions",
+  "pr": 292,
+  "source_head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+  "run": 38098225220,
+  "job": 114348512491,
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 1
+    },
+    {
+      "name": "Checkout repository and submodules",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 2
+    },
+    {
+      "name": "Install the latest version of uv",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 3
+    },
+    {
+      "name": "Install Python 3.12",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 4
+    },
+    {
+      "name": "Install devutils requirements",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 5
+    },
+    {
+      "name": "Install project (not dev)",
+      "status": "completed",
+      "conclusion": "skipped",
+      "number": 6
+    },
+    {
+      "name": "Install project (dev)",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 7
+    },
+    {
+      "name": "Setup go",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 8
+    },
+    {
+      "name": "Setup node",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 9
+    },
+    {
+      "name": "Build frontend",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 10
+    },
+    {
+      "name": "Build OAuth2 config",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 11
+    },
+    {
+      "name": "Test Go wrapper child lifecycle",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 12
+    },
+    {
+      "name": "Build binary",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 13
+    },
+    {
+      "name": "Upload artifact: action_server/dist/final/",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 14
+    },
+    {
+      "name": "Test (not integration)",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 15
+    },
+    {
+      "name": "Install Playwright Chromium for Runtime browser acceptance",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 16
+    },
+    {
+      "name": "Test (integration)",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 17
+    },
+    {
+      "name": "`inv lint`, potentially fixed with `inv pretty`",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 18
+    },
+    {
+      "name": "`inv typecheck`",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 19
+    },
+    {
+      "name": "`inv docs` with checking on files changed",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 20
+    },
+    {
+      "name": "Post Setup node",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 37
+    },
+    {
+      "name": "Post Setup go",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 38
+    },
+    {
+      "name": "Post Install the latest version of uv",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 39
+    },
+    {
+      "name": "Post Checkout repository and submodules",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 40
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success",
+      "number": 41
+    }
+  ],
+  "scope": "Authoritative per-job step status, not raw test counts or whole release/combined-tree acceptance",
+  "metadata_limitation": "Public fetch rejects jobs endpoint; workflow run metadata fetched separately.",
+  "workflow_run_binding": {
+    "head_sha": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+    "head_branch": "fix/mcp-resource-routing-history-20261010",
+    "event": "pull_request",
+    "run_status": "in_progress",
+    "run_conclusion": null,
+    "pr_base_reported_sha": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+    "limitation": "Workflow PR-reported base is not a live integration-ref measurement; actual synthetic checkout SHA is not independently established by these step summaries. Final union acceptance remains open."
+  }
+}

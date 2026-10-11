@@ -1,0 +1,227 @@
+{
+  "schema": "actions.public-convergence-payload-manifest/v1",
+  "created_at_utc": "2026-10-11T01:08:54.609292+00:00",
+  "files": [
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/native/dakota-status.json",
+      "bytes": 2165,
+      "sha256": "4a686e6dcc3ecfbdfc6018abf151b95232e52d27ff2d2b874e1e1fa1c55e23f1",
+      "source": "/workspace/work/actions-mk3-wave8-evidence/dakota-status-20261011T0035Z.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/prs/current-open-pr-delta.json",
+      "bytes": 14571,
+      "sha256": "0ed464caa1cbc9c335ec32085d6d2506ee844103a6c3b0f9105331e02430a569",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/open-pr-delta-20261011/current-open-pr-delta.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/prs/current-open-pr-delta.md",
+      "bytes": 3041,
+      "sha256": "facced8dbc3e12cc12690bcf58ee672d5ada029206b1e35342e4e49e2f62f439",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/open-pr-delta-20261011/current-open-pr-delta.md"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/prs/current-open-pr-integrated-ancestry-v3.json",
+      "bytes": 2573,
+      "sha256": "496061bf0173f46d089922c22bec745b91290dde5a9f552b92690dc6e1819d1a",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/open-pr-delta-20261011/current-open-pr-integrated-ancestry-v3.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/prs/provenance-addendum-v2/addendum.json",
+      "bytes": 5687,
+      "sha256": "b4036a30afe421f6295ed7c71045e7a667dace750c3f19c07fb32795cb3246da",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/open-pr-delta-20261011/provenance-addendum-v2/addendum.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/prs/provenance-addendum-v2/addendum.md",
+      "bytes": 1766,
+      "sha256": "c259864b52becb5376e7d9f4b0f2a4b1981b41a5a5dfd6996fc1577d36f57478",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/open-pr-delta-20261011/provenance-addendum-v2/addendum.md"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/audit/current-221-closure-text-rescan-20261011.json",
+      "bytes": 651,
+      "sha256": "123598d016690bc7650e0f463d7a3a38652c9edd820fe7d125253072f282d010",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/current-221-closure-text-rescan-20261011.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/audit/current-221-closure-text-rescan-20261011-v2.json",
+      "bytes": 1119,
+      "sha256": "344924631d7f0e6c27cd21911a4d2a9ab2f3b27d2c5cecb745260072105d438a",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/current-221-closure-text-rescan-20261011-v2.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/audit/pr-body-status-corrections-20261011.json",
+      "bytes": 2258,
+      "sha256": "4d0ac58dedd8182dbb2727be7e7bdf12f8b76404fa00d6630fd4c4d451d69754",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/pr-body-status-corrections-20261011.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/audit/pr292-new-head-windows-step-receipt-20261011.json",
+      "bytes": 4399,
+      "sha256": "20693a9f6f14317cd7669621dd01369003135c64eb0a4c60f61de4bfb6afc8b8",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/pr292-new-head-windows-step-receipt-20261011.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/scoped-pr-readiness-20261011/check-runs-census.json",
+      "bytes": 13952,
+      "sha256": "e5b5eff3474221d3bb5f3a4182bb252da50b58d3bdf90528af5feb7715cd07c1",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/scoped-pr-readiness-20261011/check-runs-census.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/scoped-pr-readiness-20261011/readiness.json",
+      "bytes": 21147,
+      "sha256": "0401feb69f575dee348a9646a348610439314dc5585e7bfbdbef6cdb32d49ed3",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/scoped-pr-readiness-20261011/readiness.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/scoped-pr-readiness-20261011/README.md",
+      "bytes": 4553,
+      "sha256": "a8b5b66e802580da6f3a16c49d58288b418a1de30718a6c0a29ec7e21b9c3056",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/scoped-pr-readiness-20261011/README.md"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/scoped-pr-readiness-20261011/manifest.json",
+      "bytes": 568,
+      "sha256": "5949083264bd02c3aa59e09ab1884952107bfad506003ad659a471b035e32d0b",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/scoped-pr-readiness-20261011/manifest.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/release-observation-20261011/release-observation.json",
+      "bytes": 8956,
+      "sha256": "7644f05ce5885bb72e3bee148538e098c49ea47046f7d49ea1a6eb9217ab5254",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/release-observation-20261011/release-observation.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/release-observation-20261011/README.md",
+      "bytes": 2860,
+      "sha256": "6c939ed7af6e26874c59f07ae4524dee86156c55a139489fcdf1b2d9c42892ce",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/release-observation-20261011/README.md"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/release-observation-20261011/manifest.json",
+      "bytes": 372,
+      "sha256": "937e5fa499e07725c77994b6daf55cd422463171e66f144a364d8aee89da3901",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/release-observation-20261011/manifest.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/ci-failure-triage-20261011/ci-failure-triage-v1.json",
+      "bytes": 7946,
+      "sha256": "752656a76812b09f7e8b8062dcca7babfe559616c38654d38de97d0a5db0bce1",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/ci-failure-triage-20261011/ci-failure-triage-v1.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/ci-failure-triage-20261011/ci-failure-triage-v1.md",
+      "bytes": 2352,
+      "sha256": "254b365ad25f7a988b16a9d1b61e68b9ff363ba5dfdba45cb223fb2d509cc505",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/ci-failure-triage-20261011/ci-failure-triage-v1.md"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/ci-failure-triage-20261011/repository-operations-proposed-delta-v1.md",
+      "bytes": 1537,
+      "sha256": "60e02d1b166d785fd84ae91295a65edc0b28ac47f4e959cedbaab96e3987aa38",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/ci-failure-triage-20261011/repository-operations-proposed-delta-v1.md"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/311-windows-fixture-repair-311-exact38-20261011-05/completion-receipt.json",
+      "bytes": 9280,
+      "sha256": "0023f9843c8b82cf958b34356438d449ab811f0d51fd094c47e67dfb7ef3d944",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/311-windows-fixture-repair-311-exact38-20261011-05/completion-receipt.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/311-windows-fixture-repair-311-exact38-20261011-05/completion-receipt-erratum.json",
+      "bytes": 613,
+      "sha256": "01184f32852c61cd78aba69b97044169ac1a4b28d392597900d4cebfa8765a9e",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/311-windows-fixture-repair-311-exact38-20261011-05/completion-receipt-erratum.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/311-windows-fixture-repair-311-exact38-20261011-05/independent-source-review-c888fb4a.json",
+      "bytes": 6572,
+      "sha256": "c4a371862f627847cf3f09c0db7b6aeb9df90dea44e4d6a2d294480cf185f78c",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/311-windows-fixture-repair-311-exact38-20261011-05/independent-source-review-c888fb4a.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/pr310-test-typing-repair/repair-receipt.json",
+      "bytes": 4877,
+      "sha256": "3f4235579b453703270da5eeae5e6d3922cdfb77b3d56e59981967cea9af0d9e",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/repair-receipt.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/pr310-test-typing-repair/README.md",
+      "bytes": 914,
+      "sha256": "ee0d370b0f8c66ec9b4dc1ff38c2bad779e5acbeb56af72c478cab51da704b2a",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/README.md"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/pr310-test-typing-repair/run-focused-checks.sh",
+      "bytes": 1113,
+      "sha256": "d2eea1f1cd85554b9f4052fbb6b34cab394dd361879d9e4305b182598c92cd55",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/run-focused-checks.sh"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/pr310-test-typing-repair/command.txt",
+      "bytes": 250,
+      "sha256": "88dcb116ed0e7b574e5c28f6cc653b5fc436209c0289b229614b25b340c86842",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/command.txt"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/pr310-test-typing-repair/stdout.log",
+      "bytes": 5098,
+      "sha256": "ac47ad4d61146d3bd0a75762d171445bad4c3a78748450c9dbcd7f3b04dfbf68",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/stdout.log"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/pr310-test-typing-repair/exit-code.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/exit-code.txt"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/pr310-test-typing-repair/manifest.json",
+      "bytes": 1013,
+      "sha256": "98c49cac5d157a3aa8b9336dd567c8295c46231172c1a6f7a2ebfccb5a764512",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/manifest.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/pr310-test-typing-repair/independent-source-review-7c98534a.json",
+      "bytes": 4937,
+      "sha256": "9475f3e3acd1d2bb6a97e11f91c1061e3c20147e933f01657d256d88b5811211",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/independent-source-review-7c98534a.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/installed-wheel/independent-actual-review.json",
+      "bytes": 13772,
+      "sha256": "273a7876ca58f1e027dad11e92473d1c9943f72f855338992b6d2d3f7e267a31",
+      "source": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/independent-actual-wheel-review-candidate-06-c888-r3.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/installed-wheel/actual-run-interpretation.json",
+      "bytes": 5810,
+      "sha256": "02d9c73dfb26d99b71ac4ee63e933346b344e69fac6fcbb9f4f1a9475f80e7e0",
+      "source": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan-v2-candidate-06-c888-r3/runs/attempt06-20261011T005937Z-81161-6d293bb4/actual-run-interpretation.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/issue-status-overlay.json",
+      "bytes": 80235,
+      "sha256": "c2aada7317a821880c13d691dea5ad98012e6a81d68e452ea271e4973c708b1d",
+      "source": "root-generated additive snapshot"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/checkpoint.json",
+      "bytes": 5383,
+      "sha256": "9974689f279d372012cbb7a6a6f2e03da63697cc47547f15f178726fdd193357",
+      "source": "root-generated additive snapshot"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-20261011T010854Z/README.md",
+      "bytes": 2939,
+      "sha256": "12057eb8df28dcc7f92f08873ffecb2641dd1e258983dd73830a0e13c9ce800f",
+      "source": "root-generated additive snapshot"
+    }
+  ],
+  "exclusions": [
+    "binary/wheels/raw large logs/private RCC source or harness/security payloads",
+    "Complete historical matrix is referenced by immutable source/hash, not replaced"
+  ],
+  "claim": "Selected payloads only; all selected original bytes retained, prior missing original bytes explicitly disclosed."
+}

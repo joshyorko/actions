@@ -1,0 +1,434 @@
+{
+  "schema": "scoped-pr-check-runs-census/v1",
+  "repository": "joshyorko/actions",
+  "observed_start_utc": "2026-10-11T00:53:31.214255+00:00",
+  "observed_end_utc": "2026-10-11T00:53:34.270860+00:00",
+  "source_file": "/workspace/work/actions-mk3-evidence/wave9/open-pr-delta-20261011/current-open-pr-delta.json",
+  "source_file_sha256": "0ed464caa1cbc9c335ec32085d6d2506ee844103a6c3b0f9105331e02430a569",
+  "source_observed_at_utc": "2026-10-11T00:34:49Z",
+  "head_override": {
+    "pr": 311,
+    "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+    "validated_by": "GitHub pull request readback"
+  },
+  "method": "One GitHub REST check-runs request per exact head, independently batched; first page only, per_page=100. No logs fetched. Required/advisory policy not determined by check-runs endpoint and remains UNKNOWN.",
+  "head_count": 14,
+  "results": [
+    {
+      "number": 221,
+      "head": "19380993febaa71238eaee3026b5c808773283ff",
+      "api_status": "OK",
+      "total_count": 34,
+      "returned_count": 34,
+      "counts": {
+        "success": 33,
+        "failure": 0,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 1,
+        "queued": 0,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [
+        {
+          "name": "publish",
+          "status": "completed",
+          "conclusion": "skipped",
+          "url": "https://github.com/joshyorko/actions/actions/runs/38087231158/job/114316389882"
+        }
+      ],
+      "command": "gh api repos/joshyorko/actions/commits/19380993febaa71238eaee3026b5c808773283ff/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 282,
+      "head": "66cc132367be02b05bc08c981b900a68d156cd52",
+      "api_status": "OK",
+      "total_count": 20,
+      "returned_count": 20,
+      "counts": {
+        "success": 20,
+        "failure": 0,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 0,
+        "queued": 0,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [],
+      "command": "gh api repos/joshyorko/actions/commits/66cc132367be02b05bc08c981b900a68d156cd52/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 290,
+      "head": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "api_status": "OK",
+      "total_count": 26,
+      "returned_count": 26,
+      "counts": {
+        "success": 26,
+        "failure": 0,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 0,
+        "queued": 0,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [],
+      "command": "gh api repos/joshyorko/actions/commits/9e1059a12456faba64d11313d6dd8f943ad28912/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 292,
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "api_status": "OK",
+      "total_count": 19,
+      "returned_count": 19,
+      "counts": {
+        "success": 16,
+        "failure": 0,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 0,
+        "queued": 3,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [
+        {
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "queued",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38098225245/job/114348512810"
+        },
+        {
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "queued",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38098225245/job/114348512804"
+        },
+        {
+          "name": "build (macos-py3.12-devmode)",
+          "status": "queued",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38098225220/job/114348512688"
+        }
+      ],
+      "command": "gh api repos/joshyorko/actions/commits/2f631e5403ae3ff0b37af2416dc19a98bdc04a84/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 299,
+      "head": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "api_status": "OK",
+      "total_count": 20,
+      "returned_count": 20,
+      "counts": {
+        "success": 20,
+        "failure": 0,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 0,
+        "queued": 0,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [],
+      "command": "gh api repos/joshyorko/actions/commits/4cad04ca0e70d219f53452fa5911c6d61192fd0d/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 300,
+      "head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "api_status": "OK",
+      "total_count": 11,
+      "returned_count": 11,
+      "counts": {
+        "success": 11,
+        "failure": 0,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 0,
+        "queued": 0,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [],
+      "command": "gh api repos/joshyorko/actions/commits/3cad4fd6d9fb386451b3b76d7b1103256eec54e5/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 302,
+      "head": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+      "api_status": "OK",
+      "total_count": 19,
+      "returned_count": 19,
+      "counts": {
+        "success": 19,
+        "failure": 0,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 0,
+        "queued": 0,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [],
+      "command": "gh api repos/joshyorko/actions/commits/d649c90112ee03c46f8b88c973849d7203f7e64a/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 305,
+      "head": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+      "api_status": "OK",
+      "total_count": 14,
+      "returned_count": 14,
+      "counts": {
+        "success": 14,
+        "failure": 0,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 0,
+        "queued": 0,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [],
+      "command": "gh api repos/joshyorko/actions/commits/ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 306,
+      "head": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "api_status": "OK",
+      "total_count": 19,
+      "returned_count": 19,
+      "counts": {
+        "success": 18,
+        "failure": 1,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 0,
+        "queued": 0,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [
+        {
+          "name": "build (windows-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/joshyorko/actions/actions/runs/38087471281/job/114316872435"
+        }
+      ],
+      "command": "gh api repos/joshyorko/actions/commits/1421fcf85c1b681aef1fe58fe2902f776f208167/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 307,
+      "head": "729594fc04758502ec2ed985adb428e2863a3bb1",
+      "api_status": "OK",
+      "total_count": 23,
+      "returned_count": 23,
+      "counts": {
+        "success": 23,
+        "failure": 0,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 0,
+        "queued": 0,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [],
+      "command": "gh api repos/joshyorko/actions/commits/729594fc04758502ec2ed985adb428e2863a3bb1/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 308,
+      "head": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+      "api_status": "OK",
+      "total_count": 19,
+      "returned_count": 19,
+      "counts": {
+        "success": 18,
+        "failure": 0,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 0,
+        "queued": 1,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [
+        {
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "queued",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38089471185/job/114322756492"
+        }
+      ],
+      "command": "gh api repos/joshyorko/actions/commits/94716b90d85a171872e46b1efa8a1fb419e8a0c7/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 309,
+      "head": "6cdf7c3158227d93ed57e46220204a08e4595142",
+      "api_status": "OK",
+      "total_count": 19,
+      "returned_count": 19,
+      "counts": {
+        "success": 19,
+        "failure": 0,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 0,
+        "queued": 0,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [],
+      "command": "gh api repos/joshyorko/actions/commits/6cdf7c3158227d93ed57e46220204a08e4595142/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 310,
+      "head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+      "api_status": "OK",
+      "total_count": 17,
+      "returned_count": 17,
+      "counts": {
+        "success": 13,
+        "failure": 3,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 1,
+        "queued": 0,
+        "in_progress": 0,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [
+        {
+          "name": "publish",
+          "status": "completed",
+          "conclusion": "skipped",
+          "url": "https://github.com/joshyorko/actions/actions/runs/38089058049/job/114329558387"
+        },
+        {
+          "name": "build (windows-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/joshyorko/actions/actions/runs/38089058102/job/114321547217"
+        },
+        {
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/joshyorko/actions/actions/runs/38089058102/job/114321547172"
+        },
+        {
+          "name": "build (macos-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "failure",
+          "url": "https://github.com/joshyorko/actions/actions/runs/38089058102/job/114321547057"
+        }
+      ],
+      "command": "gh api repos/joshyorko/actions/commits/ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d/check-runs?per_page=100 --cache 0s"
+    },
+    {
+      "number": 311,
+      "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+      "api_status": "OK",
+      "total_count": 18,
+      "returned_count": 18,
+      "counts": {
+        "success": 11,
+        "failure": 0,
+        "cancelled": 0,
+        "timed_out": 0,
+        "action_required": 0,
+        "neutral": 0,
+        "skipped": 0,
+        "queued": 3,
+        "in_progress": 4,
+        "pending_or_requested": 0,
+        "other": 0
+      },
+      "nonpassing": [
+        {
+          "name": "build-wheels (macos-15)",
+          "status": "queued",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38099013710/job/114350853927"
+        },
+        {
+          "name": "build (macos-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38099013706/job/114350853783"
+        },
+        {
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38099013706/job/114350853764"
+        },
+        {
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "queued",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38099013705/job/114350853729"
+        },
+        {
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "queued",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38099013709/job/114350853713"
+        },
+        {
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38099013705/job/114350853652"
+        },
+        {
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38099013706/job/114350853595"
+        }
+      ],
+      "command": "gh api repos/joshyorko/actions/commits/c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca/check-runs?per_page=100 --cache 0s"
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "commands_and_endpoints": {
+    "github_read_endpoints": [
+      "GitHub GET workflow-run summaries for IDs 38087471281 and 38089058102",
+      "GitHub GET job step summaries for jobs 114316872435, 114321547217, 114321547172, 114321547057, 114348512491, and 114348512650",
+      "GitHub GET decoded job logs for the four failing jobs; only bounded error excerpts retained",
+      "GitHub GET pull request 292 metadata and commit workflow runs for 2f631e5403ae3ff0b37af2416dc19a98bdc04a84"
+    ],
+    "local_read_commands": [
+      "git status --short --branch",
+      "git merge-base ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d 19380993febaa71238eaee3026b5c808773283ff",
+      "git rev-parse <revision>:<test-file>",
+      "git diff --quiet 19380993febaa71238eaee3026b5c808773283ff 1421fcf85c1b681aef1fe58fe2902f776f208167 -- action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+      "git blame -L 740,803 ec8bea13 -- action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py",
+      "git blame -L 198,198 1421fcf85c1b681aef1fe58fe2902f776f208167 -- action_server/src/actions/server/_selftest.py",
+      "git diff --stat 19380993febaa71238eaee3026b5c808773283ff 1421fcf85c1b681aef1fe58fe2902f776f208167"
+    ]
+  },
+  "documentation": {
+    "branch": "mk3/wave8-postgres-savepoint-proof-20261010",
+    "canonical_file": "docs/skills/repository-operations.md",
+    "checkout": "/workspace/work/actions-mk3-wave8-postgres",
+    "disposition": "Proposal only for read-only lane; guide already explains that Action Server Mypy includes tests and platform checks, but does not spell out ancestry-based CI failure attribution.",
+    "file_sha256": "151038d640694d95390ad34a2142c2b1f6feac27a6cac82384feeeda159d36b3",
+    "head": "1421fcf85c1b681aef1fe58fe2902f776f208167"
+  },
+  "observed_at_utc": "2026-10-11T01:01:47Z",
+  "runs": [
+    {
+      "bounded_failure": {
+        "behavior": "ActionServerProcess.start waited for its configured 90-second readiness/port-detection bound. The log shows the packaged server subprocess started and imported an action shortly before timeout; no startup-ready port was observed by the test helper.",
+        "branch_delta_stat": [
+          "action_server/src/actions/server/_database.py",
+          "action_server/tests/action_server_tests/test_database.py",
+          "docs/skills/repository-operations.md"
+        ],
+        "classification": "Observed Windows-only readiness timeout in an unchanged test. The run does not establish infrastructure cause or a PR306 product regression; changed database startup behavior remains a possible confound. No evidence ties it to the failed-SAVEPOINT behavior.",
+        "exception": "TimeoutError",
+        "minimal_excerpt": [
+          "_selftest.py:198: TimeoutError",
+          "FAILED ...test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template] - TimeoutError",
+          "=== 1 failed, 129 passed, 18 skipped, 1086 deselected in 1564.90s ==="
+        ],
+        "source_anchor": "action_server/src/actions/server/_selftest.py:198",
+        "summary": "1 failed, 129 passed, 18 skipped, 1086 deselected; integration step exit 1",
+        "test": "action_server_tests\\test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+        "test_file_source": {
+          "base_blob": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+          "head_blob": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+          "path": "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+          "unchanged_from_base_to_tested_head": true
+        }
+      },
+      "conclusion": "failure",
+      "head_sha": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "jobs": [
+        {
+          "failed_step": "Test (integration)",
+          "id": 114316872435,
+          "matrix": "windows-py3.12-devmode",
+          "step_number": 17
+        },
+        {
+          "conclusion": "success",
+          "id": 114316872234,
+          "matrix": "ubuntu-py3.12-devmode"
+        },
+        {
+          "conclusion": "success",
+          "id": 114316872431,
+          "matrix": "macos-py3.12-devmode"
+        }
+      ],
+      "pr": 306,
+      "run_id": 38087471281,
+      "tested_merge_base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38087471281",
+      "workflow": ".github/workflows/actions_runtime_tests.yml"
+    },
+    {
+      "base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "bounded_failure": {
+        "classification": "Branch-introduced test typing regression in PR310, not an inherited PR292 Mypy failure. PR310's integration steps passed on all three matrix jobs; lint/docs passed.",
+        "diagnostic": "4 mypy errors: Unsupported right operand type for in (object)",
+        "lines": [
+          745,
+          781,
+          782,
+          800
+        ],
+        "minimal_excerpt": [
+          "test_dakota_workitems_native_ui_acceptance.py:745:12: error: Unsupported right operand type for in (\"object\") [operator]",
+          "test_dakota_workitems_native_ui_acceptance.py:781:12: error: Unsupported right operand type for in (\"object\") [operator]",
+          "test_dakota_workitems_native_ui_acceptance.py:782:12: error: Unsupported right operand type for in (\"object\") [operator]",
+          "test_dakota_workitems_native_ui_acceptance.py:800:12: error: Unsupported right operand type for in (\"object\") [operator]"
+        ],
+        "source": "action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py",
+        "source_ancestry": {
+          "changed_lines_by_commit": {
+            "1b534c5905169c2fc56ef292bedb32bd81d4c973": [
+              781,
+              800
+            ],
+            "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d": [
+              745,
+              782
+            ]
+          },
+          "commit_1b534c5905169c2fc56ef292bedb32bd81d4c973": "Introduced the mutable dict[str, object] test receipt shape in the same PR310 branch lineage.",
+          "commit_ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d": "Introduced failing assertions at lines 745, 782 and 800; line 781 is also in the changed authorization-denial assertion block.",
+          "comparison_pr292": {
+            "head_sha": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+            "macos_typecheck": "in_progress at observation",
+            "run_id": 38098225220,
+            "ubuntu_typecheck": "success",
+            "windows_typecheck": "success"
+          },
+          "merge_base_blob": "335e7ed84418e902a0d238f5ec7841e466b1b5e9",
+          "tested_head_blob": "6d97c8ec7235a5d5b98c1ce64ab796266b1983ee"
+        }
+      },
+      "conclusion": "failure",
+      "head_sha": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+      "jobs": [
+        {
+          "failed_step": "inv typecheck",
+          "id": 114321547217,
+          "matrix": "windows-py3.12-devmode",
+          "step_number": 19
+        },
+        {
+          "failed_step": "inv typecheck",
+          "id": 114321547172,
+          "matrix": "ubuntu-py3.12-devmode",
+          "step_number": 19
+        },
+        {
+          "failed_step": "inv typecheck",
+          "id": 114321547057,
+          "matrix": "macos-py3.12-devmode",
+          "step_number": 19
+        }
+      ],
+      "pr": 310,
+      "run_id": 38089058102,
+      "tested_merge_sha": "33c936be57c7d567a5841d93e6fc8b3a07f3457c",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38089058102",
+      "workflow": ".github/workflows/actions_runtime_tests.yml"
+    }
+  ],
+  "schema": "actions-ci-failure-triage-v1",
+  "scope": "Read-only examination of failing GitHub Actions job summaries and bounded failure excerpts; no replay or source edits.",
+  "upstream_disposition": "none; both findings concern Actions test/CI evidence, and the Windows timeout is unattributed."
+}

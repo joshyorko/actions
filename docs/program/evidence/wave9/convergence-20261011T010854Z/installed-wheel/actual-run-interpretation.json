@@ -1,0 +1,138 @@
+{
+  "acceptance_boundary": "Worker supervisor result only; independent actual receipt and wheel-byte readback required before marking #195 accepted.",
+  "artifact_root": {
+    "artifact_copy": {
+      "errors": [],
+      "files": [],
+      "status": "COPIED",
+      "total_bytes": 0
+    },
+    "identity": {
+      "device": 27,
+      "inode": 1235760
+    },
+    "note": "RCC selected no allowlisted report files (zero copied bytes); the retained pytest wheelhouse remains under this run directory.",
+    "verified": true
+  },
+  "attempt": {
+    "finished_utc": "2026-10-11T01:00:41.357077+00:00",
+    "output_pipe_hang": false,
+    "return_code": 0,
+    "run_dir": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan-v2-candidate-06-c888-r3/runs/attempt06-20261011T005937Z-81161-6d293bb4",
+    "run_dir_timestamp_utc": "2026-10-11T00:59:37Z",
+    "status": "PASS_BOUNDED",
+    "timed_out": false
+  },
+  "cleanup": {
+    "errors": [],
+    "final": {
+      "errors": [],
+      "members": [],
+      "status": "KNOWN"
+    },
+    "initial": {
+      "errors": [],
+      "members": [],
+      "status": "KNOWN"
+    },
+    "post_reap_census": {
+      "errors": [],
+      "members": [],
+      "status": "KNOWN"
+    },
+    "status": "CLEAN",
+    "termination": null
+  },
+  "core_scan": {
+    "both_scan_records_bind_same_archive": true,
+    "sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+    "version": "1.0.3"
+  },
+  "log_streams": {
+    "stderr": {
+      "invalid_scan_records": 0,
+      "log_errors": [],
+      "raw_bytes": 12969,
+      "saved_sanitized_bytes": 12969,
+      "scan_record_count": 0,
+      "sha256_raw_stream": "18edc12331a01ca5b537283181b1d768adffc9e05c6f2205734dc99a307cff9c",
+      "truncated_or_omitted": false
+    },
+    "stdout": {
+      "invalid_scan_records": 0,
+      "log_errors": [],
+      "raw_bytes": 240535,
+      "saved_sanitized_bytes": 240535,
+      "scan_record_count": 2,
+      "sha256_raw_stream": "c4b9ce518a46020f40e48168ae41162d8b083426adb3948686d14e941bba74b5",
+      "truncated_or_omitted": false
+    }
+  },
+  "receipt_field_clarification": {
+    "execution_state": "RUNNING",
+    "interpretation": "informational fields are inconsistent with terminal status; do not rewrite the receipt. `status=PASS_BOUNDED`, return_code=0, exact test result and clean cleanup/postflight represent recorded outcome.",
+    "started_utc": null
+  },
+  "runtime_scan": {
+    "both_scan_records_bind_same_archive": true,
+    "python_members": 193,
+    "sha256": "1afadeb4e36d6f9c4dbadf675240d6eb7c14f1c0a4ed9ce2712c5908af7c6194",
+    "two_scan_records": 2,
+    "version": "1.0.3",
+    "zip_member_count": 211
+  },
+  "schema": "actions.runtime-wheel-private-import.actual-run-interpretation.v1",
+  "source": {
+    "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+    "status": "CLEAN",
+    "status_porcelain": "",
+    "tree": "34f967cc9b753e8b0497221cf77ec53925cdf9eb"
+  },
+  "source_receipt": {
+    "path": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan-v2-candidate-06-c888-r3/runs/attempt06-20261011T005937Z-81161-6d293bb4/supervisor-receipt.json",
+    "sha256": "5cab9896cf2cff747510d56934df6accac04b65185fae26cb1d01d16a9a70003"
+  },
+  "test": {
+    "collected": 1,
+    "failed": [],
+    "passed": [
+      "tests/contract_tests/test_active_contracts.py::test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders"
+    ],
+    "pytest_exit_code": 0,
+    "skipped": []
+  },
+  "wheelhouse": [
+    {
+      "name": "actions_core-1.0.3-py3-none-any.whl",
+      "path": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan-v2-candidate-06-c888-r3/runs/attempt06-20261011T005937Z-81161-6d293bb4/pytest-tmp/test_runtime_clean_wheels_inst0/wheelhouse/actions_core-1.0.3-py3-none-any.whl",
+      "python_members": 48,
+      "sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+      "size_bytes": 103809,
+      "zip_files": 54
+    },
+    {
+      "name": "actions_http_helper-1.0.3-py3-none-any.whl",
+      "path": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan-v2-candidate-06-c888-r3/runs/attempt06-20261011T005937Z-81161-6d293bb4/pytest-tmp/test_runtime_clean_wheels_inst0/wheelhouse/actions_http_helper-1.0.3-py3-none-any.whl",
+      "python_members": 2,
+      "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "size_bytes": 14690,
+      "zip_files": 7
+    },
+    {
+      "name": "actions_runtime-1.0.3-cp312-cp312-linux_x86_64.whl",
+      "path": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan-v2-candidate-06-c888-r3/runs/attempt06-20261011T005937Z-81161-6d293bb4/pytest-tmp/test_runtime_clean_wheels_inst0/wheelhouse/actions_runtime-1.0.3-cp312-cp312-linux_x86_64.whl",
+      "python_members": 193,
+      "sha256": "1afadeb4e36d6f9c4dbadf675240d6eb7c14f1c0a4ed9ce2712c5908af7c6194",
+      "size_bytes": 1094628,
+      "zip_files": 211
+    },
+    {
+      "name": "actions_work_items-0.4.4-py3-none-any.whl",
+      "path": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan-v2-candidate-06-c888-r3/runs/attempt06-20261011T005937Z-81161-6d293bb4/pytest-tmp/test_runtime_clean_wheels_inst0/wheelhouse/actions_work_items-0.4.4-py3-none-any.whl",
+      "python_members": 22,
+      "sha256": "488163817f3a2cb969744c1ad7332dc775318d0e755029639fd51d0bffe4ffc0",
+      "size_bytes": 62717,
+      "zip_files": 27
+    }
+  ]
+}

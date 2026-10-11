@@ -1,0 +1,7 @@
+Proposed addition to `docs/skills/repository-operations.md`, near the generated Action Server PR gate guidance:
+
+> When triaging a failed Actions workflow, retain the exact run attempt, tested merge SHA, PR head/base, matrix platform, failed job step, and the smallest useful log excerpt. Before deciding a test or type error is inherited, compare the tested merge tree with its base and inspect blame at the failing expression; an old fixture can contain new branch-added assertions. For a startup/readiness timeout, record the observed timeout site and configured bound. A single-platform timeout does not by itself establish either a runner infrastructure fault or a product regression.
+
+Evidence: Run 38089058102 on PR310 introduced four Mypy errors in new `dict[str, object]` assertions across commits `1b534c59` and `ec8bea13`; the Windows and Ubuntu `inv typecheck` steps on PR292 run 38098225220 passed at head `2f631e5`. Run 38087471281 on PR306 failed only Windows integration on an unchanged test file after a 90-second readiness timeout at `_selftest.py:198`; Linux/macOS jobs passed. PR306 changes only the database implementation/test and this guide, so the Windows event remains unattributed.
+
+The guide already says Action Server Mypy covers ordinary tests and that configured type checks run on platform-specific jobs. This proposal adds ancestry-based attribution and conservative timeout classification; it does not duplicate the existing Mypy scope rule. Read-only triage lane: proposal only, no canonical file edit.

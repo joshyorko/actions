@@ -1,0 +1,288 @@
+{
+  "schema": "actions.open-pr-delta/v1",
+  "observed_at_utc": "2026-10-11T00:34:49Z",
+  "repository": "joshyorko/actions",
+  "open_pr_count": 14,
+  "live_refs": {
+    "community": "a70993fafc99a9f94041485542d5a720797ca394",
+    "integration/community-release-20261008": "19380993febaa71238eaee3026b5c808773283ff",
+    "feat/shared-run-output-20261010": "4cad04ca0e70d219f53452fa5911c6d61192fd0d"
+  },
+  "rows": [
+    {
+      "number": 221,
+      "title": "Integrate Actions Runtime 1.0.3 security, execution, and native acceptance work",
+      "draft": true,
+      "mergeable": true,
+      "base_branch": "community",
+      "reported_base_sha": "a70993fafc99a9f94041485542d5a720797ca394",
+      "live_target_sha": "a70993fafc99a9f94041485542d5a720797ca394",
+      "head_branch": "integration/community-release-20261008",
+      "head_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "classification": "promotion still required; open draft",
+      "relationship": "Integration promotion, not an implementation prerequisite. No body close keyword found.",
+      "state": "open"
+    },
+    {
+      "number": 282,
+      "title": "feat(templates): checkpoint Canvas Query packaging for #127",
+      "draft": true,
+      "mergeable": true,
+      "base_branch": "integration/community-release-20261008",
+      "reported_base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "live_target_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "head_branch": "feat/canvas-template-20261010",
+      "head_sha": "66cc132367be02b05bc08c981b900a68d156cd52",
+      "classification": "independent integration candidate; still required",
+      "relationship": "PR308 source is not an ancestor dependency per retained ancestry audit; no authoritative closing relation observed.",
+      "state": "open"
+    },
+    {
+      "number": 290,
+      "title": "test: verify catalog ownership in the frozen Runtime lifecycle",
+      "draft": true,
+      "mergeable": true,
+      "base_branch": "integration/community-release-20261008",
+      "reported_base_sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "live_target_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "head_branch": "test/mcp-alias-frozen-control-20261010",
+      "head_sha": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "classification": "scoped candidate; refresh against current #292 prerequisite required",
+      "relationship": "Current #292 head is not an ancestor. Compare 2f631... → 9e1059: diverged, merge base d0e12c1e; 26 commits ahead/4 behind.",
+      "state": "open"
+    },
+    {
+      "number": 292,
+      "title": "fix: preserve concrete MCP resource owners across catalog changes",
+      "draft": true,
+      "mergeable": true,
+      "base_branch": "integration/community-release-20261008",
+      "reported_base_sha": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+      "live_target_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "head_branch": "fix/mcp-resource-routing-history-20261010",
+      "head_sha": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "classification": "scoped predecessor candidate; still required",
+      "relationship": "New head has four commits beyond prior d0e12c1e; current head is not included in PR290 or PR299. Root snapshot: 7 passed, 11 pending on exact head.",
+      "state": "open"
+    },
+    {
+      "number": 299,
+      "title": "Add fenced shared Run-output foundations and verified abort cleanup",
+      "draft": true,
+      "mergeable": false,
+      "base_branch": "integration/community-release-20261008",
+      "reported_base_sha": "e886d26ebaefafa9189a69517f6707691b53662e",
+      "live_target_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "head_branch": "feat/shared-run-output-20261010",
+      "head_sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "classification": "local-only candidate; not mergeable",
+      "relationship": "Current #292 head is not an ancestor (diverged from common d0e12c1e). Mergeability false; exact retained conflict is docs/skills/repository-operations.md. Prior local candidate is not remote acceptance.",
+      "state": "open"
+    },
+    {
+      "number": 300,
+      "title": "Add trusted Runtime transport for authorized shared Run output retrieval",
+      "draft": true,
+      "mergeable": true,
+      "base_branch": "feat/shared-run-output-20261010",
+      "reported_base_sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "live_target_sha": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "head_branch": "feat/run-output-transport-20261010",
+      "head_sha": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "classification": "stacked on PR299; still required",
+      "relationship": "Compare confirms PR299 head is ancestor; PR300 is four commits ahead. PR300's mergeable flag is against PR299 base and does not clear PR299's blocker.",
+      "state": "open"
+    },
+    {
+      "number": 302,
+      "title": "feat(rcc): preserve authoritative publication specification identity",
+      "draft": true,
+      "mergeable": true,
+      "base_branch": "integration/community-release-20261008",
+      "reported_base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "live_target_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "head_branch": "fix/rcc-published-artifact-details-20261010",
+      "head_sha": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+      "classification": "independent integration candidate; still required",
+      "relationship": "No stack dependency established in this metadata audit.",
+      "state": "open"
+    },
+    {
+      "number": 305,
+      "title": "Keep Canvas acceptance build caches outside synchronized package source",
+      "draft": false,
+      "mergeable": true,
+      "base_branch": "integration/community-release-20261008",
+      "reported_base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "live_target_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "head_branch": "test/canvas-runtime-cache-isolation-20261010",
+      "head_sha": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+      "classification": "independent integration candidate; still required",
+      "relationship": "Body contains 'close #99'; retrieved PR timeline has no cross-reference/closed event for #99. Treat issue-closing relation as UNKNOWN, not established.",
+      "state": "open"
+    },
+    {
+      "number": 306,
+      "title": "fix: preserve database state when nested SAVEPOINT creation fails",
+      "draft": false,
+      "mergeable": true,
+      "base_branch": "integration/community-release-20261008",
+      "reported_base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "live_target_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "head_branch": "fix/database-savepoint-admission-20261010",
+      "head_sha": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "classification": "independent integration candidate; still required",
+      "relationship": "Body contains 'close #84'; retrieved PR timeline has no cross-reference/closed event for #84. Closing relation UNKNOWN.",
+      "state": "open"
+    },
+    {
+      "number": 307,
+      "title": "fix: select dedicated Runtime changelog for native release notes",
+      "draft": false,
+      "mergeable": true,
+      "base_branch": "integration/community-release-20261008",
+      "reported_base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "live_target_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "head_branch": "fix/runtime-release-changelog-selection-20261010",
+      "head_sha": "729594fc04758502ec2ed985adb428e2863a3bb1",
+      "classification": "independent integration candidate; still required",
+      "relationship": "No body close keyword or typed stack relationship observed.",
+      "state": "open"
+    },
+    {
+      "number": 308,
+      "title": "fix: bind RCC acceptance fixtures to current candidate wheel versions",
+      "draft": false,
+      "mergeable": true,
+      "base_branch": "integration/community-release-20261008",
+      "reported_base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "live_target_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "head_branch": "fix/rcc-candidate-wheel-identities-20261010",
+      "head_sha": "94716b90d85a171872e46b1efa8a1fb419e8a0c7",
+      "classification": "independent integration candidate; still required",
+      "relationship": "Not a PR282 source dependency in retained ancestry audit.",
+      "state": "open"
+    },
+    {
+      "number": 309,
+      "title": "test: inventory assembled Runtime routes beyond OpenAPI",
+      "draft": false,
+      "mergeable": true,
+      "base_branch": "integration/community-release-20261008",
+      "reported_base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "live_target_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "head_branch": "test/auth-route-census-20261010",
+      "head_sha": "6cdf7c3158227d93ed57e46220204a08e4595142",
+      "classification": "independent integration candidate; still required",
+      "relationship": "Route-inventory scope. Root snapshot: 16 passed, 2 pending on exact head; no stack dependency established.",
+      "state": "open"
+    },
+    {
+      "number": 310,
+      "title": "test(work-items): cover packaged browser session denial and recovery",
+      "draft": false,
+      "mergeable": true,
+      "base_branch": "integration/community-release-20261008",
+      "reported_base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "live_target_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "head_branch": "test/workitems-ui-errors-20261010",
+      "head_sha": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+      "classification": "independent integration candidate; still required",
+      "relationship": "Body contains 'close #208'; retrieved PR timeline has no cross-reference/closed event for #208. Closing relation UNKNOWN.",
+      "state": "open"
+    },
+    {
+      "number": 311,
+      "title": "test: guard every installed Runtime wheel Core import",
+      "draft": true,
+      "mergeable": true,
+      "base_branch": "integration/community-release-20261008",
+      "reported_base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "live_target_sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "head_branch": "test/runtime-installed-wheel-import-guard-20261010",
+      "head_sha": "8eb2e6f92109bcbd51e4925ebe703074ee28c6ac",
+      "classification": "independent integration candidate; still required; draft",
+      "relationship": "Cross-reference event to #195 and #101 observed. No close event. Head/base identity verified in metadata. Latest linked comment 6103641963: Windows synthetic merge failed 2 tests + 2 mypy errors; installed-wheel acceptance NOT RUN. No confirmed product defect.",
+      "state": "open",
+      "latest_linked_windows_run": "38096394555",
+      "latest_linked_windows_job": "114343060346",
+      "latest_linked_comment": "6103641963"
+    }
+  ],
+  "relationship_limits": {
+    "pr221_timeline": "First 100 events only; no closure completeness claim.",
+    "other_timelines": "Fetched first timeline page; no closed events observed. Body close keywords are not treated as authoritative issue relationships.",
+    "native_graphql_closes_edges": "Unavailable; final PR-to-issue closes relationship remains UNKNOWN where not independently visible.",
+    "mergeability": "PR API mergeable fields are point-in-time hints. A mergeable PR300 does not clear an unresolved stacked predecessor."
+  },
+  "ancestry_refresh": {
+    "prior_receipt": {
+      "path": "/workspace/work/actions-closure-audit/open-pr-dependency-head-ancestry.json",
+      "sha256": "f725c05717d89d7790129fdc648f4db84b955c8812d239d4956655126aaa40e4",
+      "previous_292_head": "d0e12c1e1a256664b506cd8b027292062c6e1109"
+    },
+    "current_292_to_290": {
+      "status": "diverged",
+      "base": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "head": "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "merge_base": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "ahead_by": 26,
+      "behind_by": 4
+    },
+    "current_292_to_299": {
+      "status": "diverged",
+      "base": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "head": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "merge_base": "d0e12c1e1a256664b506cd8b027292062c6e1109",
+      "ahead_by": 24,
+      "behind_by": 4
+    },
+    "299_to_300": {
+      "status": "ahead",
+      "base": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+      "head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "ahead_by": 4,
+      "behind_by": 0
+    },
+    "interpretation": "Prior ancestry verified only old 292 d0 head. Current 2f631 head has four newer commits and must be carried into consumers that declare this predecessor; no relationship is inferred from shared issue references."
+  },
+  "ci": {
+    "source": "Parent-provided exact-head snapshot; no new broad CI fetch.",
+    "pr292": {
+      "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "passed": 7,
+      "pending": 11
+    },
+    "pr309": {
+      "head": "6cdf7c3158227d93ed57e46220204a08e4595142",
+      "passed": 16,
+      "pending": 2
+    },
+    "other_pr_current_gate_state": "Not refreshed here; consult exact-head workflow snapshot before treating any gate as complete."
+  },
+  "input_receipts": [
+    {
+      "path": "/workspace/work/actions-closure-audit/open-pr-live-union-audit.json",
+      "sha256": "523a0416c106032303857c21d820abeb814e7e14e1cf607fe2c5f2734bb4f03c",
+      "note": "Prior 13-PR union audit; has obsolete #292 head d0e12c1e."
+    },
+    {
+      "path": "/workspace/work/actions-mk3-wave8-evidence-tree/docs/program/evidence/issue-closure-audit-20261010/open-pr-reconciliation.json",
+      "sha256": "9a16bbe014d82baa64346aee66bbec59d5783882d7f0460340f50244c22ee279"
+    },
+    {
+      "path": "/workspace/work/actions-mk3-evidence/pr299-normal-merge-preparation-20261010/merge-preparation-receipt.json",
+      "sha256": "74f5ed37fabfcdcf84696d53ee50311d468930d7ae705e9a8dedb674cf276034",
+      "note": "Local-only two-parent candidate; no remote PR state changed."
+    },
+    {
+      "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/docs-precision-2f631e54.json",
+      "sha256": "661eadb99e6d07376614b19ab09e4b73e07539c7caca6d5c8826e583c0bfca88"
+    }
+  ],
+  "canonical_documentation": {
+    "decision": "NONE",
+    "reason": "Existing repository-operations live-target-ref and ordered-parent guidance already covers stale base metadata and ancestry refresh. No new durable operational rule."
+  },
+  "upstream_disposition": "None; no confirmed upstream defect."
+}

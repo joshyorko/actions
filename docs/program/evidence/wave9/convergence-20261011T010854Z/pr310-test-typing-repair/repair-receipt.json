@@ -1,0 +1,85 @@
+{
+  "change": "The existing receipt_section helper now runtime-validates states_not_run/states_failed sections as string-keyed objects before membership assertions. Provider-denial fixture values, exact receipt contents, assertions, status/argv/order/security behavior are unchanged; no cast, ignore, or production changes.",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "delta": "For dict[str, object] receipts, runtime-narrow nested values using an assertion-backed mapping helper or string-key TypeGuard before mapping operations; avoid casts/type ignores.",
+    "evidence": "The configured Action Server Mypy gate checks source and ordinary tests; the supplied PR310 CI triage binds four errors to membership checks on un-narrowed object values. Existing receipt_section validates map shape and string keys.",
+    "line": "1898 (verify with nl -ba at review)",
+    "removed_ambiguity": "Clarifies the safe typed access pattern for dynamic receipt sections; does not claim any native runtime acceptance."
+  },
+  "recorded_at_utc": "2026-10-11T01:04:55.326188Z",
+  "schema": "pr310-test-typing-repair-v1",
+  "source": {
+    "base_commit": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+    "base_tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5",
+    "branch": "mk3/wave9-pr310-typing-20261011",
+    "changed_files": {
+      "action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py": {
+        "bytes": 63339,
+        "sha256": "673fb08fc8bfb21e9ee573afd82fd28cdf9a8bbad4a0fd060000ec7e1c102db3"
+      },
+      "docs/skills/repository-operations.md": {
+        "bytes": 212767,
+        "sha256": "1c5bf23cd6e4d79b91b9bc1135a13dcebd02f91b27098404255472436f3795f1"
+      }
+    },
+    "commit": "7c98534ad4eece6d892e3bb2957471d0f1ad76e6",
+    "repo": "joshyorko/actions",
+    "tree": "a3ff2b20fd057d44550d374f611cfa4278e2ebe1",
+    "worktree_clean": true
+  },
+  "triage": {
+    "classification": "branch-introduced test typing issue, four Mypy object-membership errors at lines 745, 781, 782, 800; production code unchanged",
+    "path": "/workspace/work/actions-mk3-evidence/wave9/ci-failure-triage-20261011/ci-failure-triage-v1.json",
+    "reported_head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+    "sha256": "752656a76812b09f7e8b8062dcca7babfe559616c38654d38de97d0a5db0bce1",
+    "tested_merge": "33c936be57c7d567a5841d93e6fc8b3a07f3457c"
+  },
+  "upstream_disposition": "none",
+  "verification": {
+    "checks": [
+      {
+        "command": "python -m pytest tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py -k \"failed_authorization_denial_stage_is_failed_not_not_run or successful_authorization_denial_stage_clears_not_run or normal_stage_does_not_clear_authorization_denial_not_run\" -q",
+        "result": "3 passed, 28 deselected"
+      },
+      {
+        "command": "python -m mypy --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases src tests",
+        "result": "success; no issues found in 326 source files"
+      },
+      {
+        "command": "python -m ruff check src tests",
+        "result": "success"
+      },
+      {
+        "command": "python -m ruff format --check --config ruff.toml --exclude=_static_contents.py,_oauth2_config.py src tests",
+        "result": "success; 294 files already formatted"
+      },
+      {
+        "command": "python -m isort --check src tests",
+        "result": "success"
+      }
+    ],
+    "commands_file": {
+      "path": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/command.txt",
+      "sha256": "88dcb116ed0e7b574e5c28f6cc653b5fc436209c0289b229614b25b340c86842"
+    },
+    "excluded": "No full acceptance module, native/browser/build/service, full release, or hosted CI run.",
+    "exit_code": 0,
+    "gateway": "RCC v18.19.3 task script --no-build -r developer/toolkit.yaml; activated /workspace/actions-cloud; targeted commands ran with prepared /workspace/work/actions-mk3-pr302/action_server/.venv after current action_server pyproject.toml and poetry.lock matched prepared bytes exactly.",
+    "output": {
+      "bytes": 5098,
+      "path": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/stdout.log",
+      "sha256": "ac47ad4d61146d3bd0a75762d171445bad4c3a78748450c9dbcd7f3b04dfbf68"
+    },
+    "prepared_env": {
+      "path": "/workspace/work/actions-mk3-pr302/action_server/.venv",
+      "poetry_lock_sha256": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+      "pyproject_sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+      "python": "3.12.15"
+    },
+    "runner": {
+      "path": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/run-focused-checks.sh",
+      "sha256": "d2eea1f1cd85554b9f4052fbb6b34cab394dd361879d9e4305b182598c92cd55"
+    }
+  }
+}

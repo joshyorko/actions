@@ -1,0 +1,111 @@
+{
+  "schema": "actions.convergence-checkpoint/v1",
+  "created_at_utc": "2026-10-11T01:08:54.609292+00:00",
+  "handoff_source_commit": "9fd9eaa70ef02727ed82ecd1d5a967ada4ddd4e5",
+  "handoff_source_tree": "5cb890f705a4eef9488eadbbd4dbf00b9f5c64c3",
+  "authoritative_remote_refs": {
+    "refs/heads/community": "a70993fafc99a9f94041485542d5a720797ca394",
+    "refs/heads/integration/community-release-20261008": "19380993febaa71238eaee3026b5c808773283ff",
+    "refs/heads/test/workitems-ui-errors-20261010": "7c98534ad4eece6d892e3bb2957471d0f1ad76e6"
+  },
+  "counts": {
+    "open_issues": 58,
+    "open_prs": 14,
+    "close_ready_recommendations": 4,
+    "integrated_foundations_whole_issue_unaccepted": 9,
+    "active_issue_scopes": 2,
+    "scoped_pr_candidates_at_0053_census": 5,
+    "held_prs_at_0053_census": 9,
+    "root_admitted_prs": 0,
+    "integration_ready_actual": "UNKNOWN",
+    "automatic_closures": "UNKNOWN",
+    "observed_closing_keywords": 0,
+    "premature_automatic_closure_risks": "UNKNOWN",
+    "distinct_remaining_blockers": "UNKNOWN"
+  },
+  "current_deltas": {
+    "195": {
+      "bounded_installed_wheel_proof": "INDEPENDENT_GO",
+      "close_ready": "HOLD",
+      "source": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+      "remaining": "PR311 exact-head hosted CI and normal reviewed integration. No Runtime release claim."
+    },
+    "208": {
+      "typing_repair": "7c98534ad4eece6d892e3bb2957471d0f1ad76e6",
+      "status": "SOURCE_GO_PUSHED_NEW_HEAD_CI_PENDING",
+      "prior_native_proof": "Linux frozen and Go-wrapper scope preserved at ec8/build856c; full issue open"
+    },
+    "134": {
+      "public_source_union": "44afd960ad01f83eeef7773b334ccde3683c022d",
+      "private_declared_core_source": "d103b9af34ed590450a10c41cb30556414ea7339",
+      "private_declared_core_review_sha256": "39adbfe99fba5a92047a0e61400f09a1945b80852f51aaa528743d660b56210e",
+      "child_context_checkpoint": "10ade52a008da0b60b2a10d3b84a98cac3ff06fa",
+      "child_context_status": "PRIVATE_HOLD_CORRECTION_ACTIVE",
+      "actual_metadata": "NOT_RUN",
+      "supervisor": "FROZEN_V6_ACTUAL_LAUNCH_HOLD",
+      "private_payloads": "LOCAL_ONLY_NOT_IN_THIS_PACKET"
+    },
+    "211": {
+      "Core_Helper_1_0_3": "PUBLISHED_ARTIFACT_API_PROOF_RETAINED",
+      "Runtime_PyPI_latest": "1.0.2",
+      "Runtime_1_0_3": "NOT_PUBLISHED",
+      "native_latest": "1.0.1",
+      "owning_Homebrew_Cask": "1.0.1",
+      "Homebrew_install_upgrade": "NOT_RUN"
+    }
+  },
+  "stack": {
+    "292": "New2f Windows job114348512491 steps PASS; full new-head/combined-tree/macOS gates remain separate",
+    "order": [
+      292,
+      290,
+      299,
+      300
+    ],
+    "299": "Reviewed local10dc candidate88tests unpublished; remote4cad docs conflict remains"
+  },
+  "closure_audit": {
+    "221": "OPEN_DRAFT_UNMERGED_19380993",
+    "complete_new_commit_count": 449,
+    "full_ancestry_count": 2119,
+    "keyword_matches": 0,
+    "authenticated_closing_relationships": "UNKNOWN",
+    "accepted_candidates": [
+      162,
+      194,
+      209,
+      279
+    ],
+    "accepted_candidates_closure_mechanism": "UNKNOWN; recommend evidence-backed explicit closure after final relationship audit",
+    "other_54": "Remain open including human holds and coordination ledger",
+    "final_admission": "Issue Closure and Residual Work Audit REQUIRED before merge readiness"
+  },
+  "native": {
+    "Dakota_writers_launched": 0,
+    "ownership": "Read-only snapshots notLoaded; WorkItems completed, RCC interrupted, preflight completed",
+    "boundary": "GitHub fetch blocked under workspace-write; scoped execution-boundary question pending",
+    "Devsy": "DISABLED"
+  },
+  "preservation": {
+    "original_handoff_preservation": "105 HEADs/3 bundles/8 dirty checkpoints/633 reflog commits/6680 members retained; do not bulk-merge recovery",
+    "private_complete_local_bundle_sha256": "8be36fc060b662d6281d646bb63a0702c933834460af16305d77d8fa5a60e012",
+    "private_incremental_d103_bundle_sha256": "1afa9761c2484acc1c55a7361abe11726fa11ad137b0088e94f6364cbd976ad6",
+    "private_remote_durability": "NOT_PROVEN",
+    "announced_artifact_overwrite": "Original graph a6a2/24bb bytes NOT_RETAINED; additive provenance correction preserved",
+    "timestamp_erratum": "Closure v1 fixed timestamp superseded by v2 measured readback; preserve both"
+  },
+  "documentation_dispositions": {
+    "root": "Accepted immutable-artifact, uninstall-time/member-byte, helper-tool, final-state/receipt, CI ancestry/timeout and independent release observations lessons in canonical guide",
+    "PR310": "Exact source guide accepted via independently reviewed source commit7c",
+    "private_RCC": "Declared-Core guide accepted atd103; child-context guide stays HOLD with source",
+    "database_v6_broad_gateway": "DEFERRED until external controller implementation and independent deadline tests; general deadline lesson already accepted",
+    "graph_readiness_NO_NEW_DELTA": "Rejected duplication with reason: existing typed criteria and scoped/whole issue guide already covers it"
+  },
+  "nonclaims": [
+    "No issue closures, PR merges/retargets/deletions, publication or release tags",
+    "Work Items remains0.4.4",
+    "Browser evidence is not actual ChatGPT",
+    "Remaining whole platform graph continues after Runtime1.0.3"
+  ],
+  "upstream_disposition": "none; local/private corrections, no new upstream report"
+}

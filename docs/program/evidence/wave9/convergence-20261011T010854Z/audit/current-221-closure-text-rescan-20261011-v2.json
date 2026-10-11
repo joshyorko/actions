@@ -1,0 +1,21 @@
+{
+  "schema": "actions-current-integration-closure-text-rescan-v1",
+  "observed_at_utc": "2026-10-11T00:41:14Z",
+  "community": "a70993fafc99a9f94041485542d5a720797ca394",
+  "integration": "19380993febaa71238eaee3026b5c808773283ff",
+  "complete_new_commit_count": 449,
+  "complete_ancestry_count": 2119,
+  "new_ids_sha256": "2fa9e35632652f80a4e34c01a69f200f89da913386b769f1f16a834d04796436",
+  "closing_keyword_hits": [],
+  "automatic_closures": "UNKNOWN",
+  "limits": [
+    "No authenticated closingIssuesReferences/manual relationship projection available.",
+    "A complete textual scan is not an authoritative automatic-closure projection."
+  ],
+  "timestamp_correction": {
+    "original_file": "current-221-closure-text-rescan-20261011.json",
+    "original_sha256": "123598d016690bc7650e0f463d7a3a38652c9edd820fe7d125253072f282d010",
+    "original_observation_label": "2026-10-11T00:42:00Z",
+    "disposition": "Original used an incorrect fixed future label; preserved unchanged. Corrected timestamp is clock tool readback immediately after the deterministic exact-commit scan, not an inferred launch time."
+  }
+}

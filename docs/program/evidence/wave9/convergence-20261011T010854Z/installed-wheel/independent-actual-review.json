@@ -1,0 +1,242 @@
+{
+  "schema": "independent-installed-runtime-wheel-result-review/v1",
+  "status": "GO_BOUNDED_INSTALLED_WHEEL_PROOF",
+  "closure_recommendation": "HOLD_CLOSE_READY_PENDING_PR311_EXACT_HEAD_CI_AND_NORMAL_INTEGRATION",
+  "observed_utc": "2026-10-11T01:03:44.333451+00:00",
+  "source_head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+  "source_tree": "34f967cc9b753e8b0497221cf77ec53925cdf9eb",
+  "source_postflight": {
+    "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+    "status": "CLEAN",
+    "status_porcelain": "",
+    "tree": "34f967cc9b753e8b0497221cf77ec53925cdf9eb"
+  },
+  "source_production_equivalence_to_integration": "All production/Core/workflows/config/locks match19380993/treea8fe; only contract test and canonical guide differ. This does not make c888 the integration head.",
+  "review_commands": [
+    "Read-only git/hash/stat/ZIP member reads and full retained bounded logs; no test/RCC execution or imports of artifact modules",
+    "Approved GitHub issue195/body+twoownercomments/PR311/head check-runs reads",
+    "Read-only PyPI actions-core1.0.3 JSON digest lookup",
+    "Read-only current procfs owned group/old incident PID census"
+  ],
+  "actual_attempt": {
+    "receipt_sha256": "5cab9896cf2cff747510d56934df6accac04b65185fae26cb1d01d16a9a70003",
+    "launch_contract_sha256": "7c676e76bb6ea19ddada4d1a5b746b342033885c7e2d672f6982ef1537d9e652",
+    "manifest_sha256": "47f259b9203ffd6dca0b47570ea080b29cfb77ed977f3092353ec4c97b540a7c",
+    "supervisor_sha256": "ac0aed08b55d25f3dcdc594cabf75d605da8b58438a40bededc49d2157103349",
+    "driver_sha256": "c9bd0e067305a6d4ba3fafa368e6cacc20cf828cf86c6e5709a45bde7d1cff64",
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "canonical_gateway": "RCC18.19.3 task run --dev --no-build --minutes19, exact frozen selected node; reviewed launch argv unchanged",
+    "tool_identity": "All14 manifest/current launch pins matched; prepared Python3.12.15 and Poetry2.1.1 executable SHA/origins exact",
+    "return_code": 0,
+    "exact_result": {
+      "collected": 1,
+      "failed": [],
+      "passed": [
+        "tests/contract_tests/test_active_contracts.py::test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders"
+      ],
+      "pytest_exit_code": 0,
+      "skipped": []
+    },
+    "timed_out": false,
+    "output_pipe_hang": false,
+    "stdout": {
+      "sha256": "c4b9ce518a46020f40e48168ae41162d8b083426adb3948686d14e941bba74b5",
+      "bytes": 240535
+    },
+    "stderr": {
+      "sha256": "18edc12331a01ca5b537283181b1d768adffc9e05c6f2205734dc99a307cff9c",
+      "bytes": 12969
+    },
+    "logs_complete": "Actual saved SHA/bytes equal raw-stream receipts; no truncation/invalid capture/log errors, two scan records before exact result. No raw logs or env copied into this review."
+  },
+  "installed_scan_proof": {
+    "orders": [
+      [
+        "actions-runtime",
+        "actions-core"
+      ],
+      [
+        "actions-core",
+        "actions-runtime"
+      ]
+    ],
+    "scans": 2,
+    "runtime_python_members_each": 193,
+    "runtime_total_zip_file_members": 211,
+    "runtime_wheel_filename": "actions_runtime-1.0.3-cp312-cp312-linux_x86_64.whl",
+    "runtime_wheel_sha256": "1afadeb4e36d6f9c4dbadf675240d6eb7c14f1c0a4ed9ce2712c5908af7c6194",
+    "runtime_wheel_bytes": 1094628,
+    "independent_artifact_readback": "Full retained Runtime ZIP non-directory size/SHA inventory equals receipt211 members; each scan193 unique Python paths/hash set equals wheel. Both distinct lexical prefixes outside checkout and within owned run directory. Exact source guard resolves/rehashes installed bytes and scans all members including unimported modules before emitting marker/uninstall; exact pytest pass confirms assertions. No reinstall or resolve/read of deleted installed modules.",
+    "runtime_files_removed_after_uninstall_each": 193,
+    "public_API_and_migration": "Exact production sources expose public Core ActionContext, server-owned JSONValue and migrated callsites. Installed exact test exercises public Core/server integration APIs and rejects private actions._* static imports across all installed Runtime.py bytes. This is the issue requested compatibility assertion, not arbitrary runtime-computed import analysis."
+  },
+  "core_provenance": {
+    "distribution": "actions-core",
+    "version": "1.0.3",
+    "wheel_filename": "actions_core-1.0.3-py3-none-any.whl",
+    "wheel_sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+    "bytes": 103809,
+    "full_zip_file_members": 54,
+    "built_or_published": "Built locally by one of four checked source-bound Poetry builds, then installed as exact file in each clean venv. The measured full archive SHA and size equal the live PyPI1.0.3 registry wheel digest and size; equality verified, not inferred from version or sampled modules.",
+    "published_digest_source": "https://pypi.org/pypi/actions-core/1.0.3/json",
+    "published_wheel_url": "https://files.pythonhosted.org/packages/25/b9/86adaaf08f60deb47c749f8dc2b59a0c672b9278daf917304bffd613ba90/actions_core-1.0.3-py3-none-any.whl",
+    "installed_proof_scope": "Pinned clean probe imports resolve inside each venv/outsidecheckout and pip logs confirm exact Core1.0.3 installs/uninstalls. Distribution no longer installed after intended uninstalls; no late origin/version reopening claim."
+  },
+  "retention_and_cleanup": {
+    "wheel_retention": "Actual four wheels remain in owned run-relative pytest-tmp/test_runtime_clean_wheels_inst0/wheelhouse; Core and Runtime measured directly. Receipt artifact_keep files0 bytes0 describes separate allowlisted RCC report copy, not wheel absence.",
+    "artifact_root": "Original real700 ownedUID1000 directory device/inode matches launch receipt; retained ownership checkPASS",
+    "owned_process_group": 81169,
+    "actual_receipt_cleanup": "CLEAN; initial/final/post-reap KNOWN empty census; no errors",
+    "independent_current_census": "No owned PGID81169 processes and no supervisorPID81161; procfs enumeration produced no unknown/error rows",
+    "temporary_robot_config": "Removed and independently absent",
+    "earlier_incident": "Unrelated PIDs75479/75485/75661 remain zombies underPID1. They are preserved separate from this completed owned run; no signaling/restoration or full historical reaping claim."
+  },
+  "immutable_label_erratum": {
+    "execution_state": "Frozen receipt still says RUNNING. Logical actual terminal state is completed based on exit0, finishedUTC, exact test result, persisted finalPASS_BOUNDED and cleanup. Preserve original bytes; use this additive interpretation.",
+    "artifact_keep": "COPIED/files[]/0bytes is not a full acceptance artifact manifest. The actual retained wheelhouse and bounded logs are independently bound above."
+  },
+  "whole_issue_contract": {
+    "issue": 195,
+    "body_sha256": "5dc53629cfcf1348b2cfafff5c4ee09ba50a5a1e8acde0292b2f61f16da24274",
+    "owner_comments": [
+      {
+        "id": 6103058908,
+        "body_sha256": "fe759739527db90a14c304968748a652d08f718ef4bf8fb61119d22c121249c9"
+      },
+      {
+        "id": 6103477406,
+        "body_sha256": "1077cf38a66cf7e425fd6dc3e4c3ba58bd59afeb429fe42be498614c736ce2ee"
+      }
+    ],
+    "criteria": "Public required Core surface/server-owned JSON migration, migrated callsites and clean-wheel test rejecting private Core imports. Owner comment6103058908 specific missing complete installed-byte rejection proof is now supplied by this reviewed actual run. Comment6103477406 also retains hosted exact-headCI/integration/whole reconciliation gates.",
+    "bounded_acceptance": "Missing installed Runtime-wheel proof achieved on c888; source acceptance and public integration migration were previously established.",
+    "remaining_gate": "PR311 remains draft/open/unmerged. Current exact-head18-check snapshot contains queued/in-progress checks; required/advisory branch-policy status UNKNOWN. Do not close until owner final CI and normal integration gate reconciliation. No fullRuntime release/publication/metadata/native acceptance implied.",
+    "current_pr": {
+      "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+      "base": "integration/community-release-20261008",
+      "state": "open",
+      "draft": true,
+      "merged": false
+    },
+    "current_ci": {
+      "total": 18,
+      "checks": [
+        {
+          "name": "build-wheels (macos-15)",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "build-wheels (ubuntu-22.04)",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "build (macos-py3.12-devmode)",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "name": "build-wheels (windows-2022)",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "build (ubuntu-py3.12-devmode)",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "build-sdist (ubuntu-py3.12)",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "audit",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "coverage",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "build (windows-py3.12-devmode)",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  },
+  "documentation_improvement": {
+    "path": "docs/skills/repository-operations.md",
+    "proposed_exact_delta": "A complete installed-wheel import guard must bind every installed Runtime Python member to exact retained wheel bytes before uninstall, including modules not otherwise imported. Preserve both uninstall orders, then validate scan-time inventory against the retained full ZIP rather than reopening removed modules. Compare any published-wheel claim using the measured full archive SHA, not a version or sampled files. Terminal result and current owned-process census must determine completion; a stale execution-state label or an empty report-copy manifest does not establish artifact absence or invalidate separately retained wheel evidence. Keep earlier incident cleanup uncertainty separate.",
+    "evidence": "Actual single canonical source-bound run1test0skip,2x193 installed inventories, full211 Runtime ZIP and54 Core ZIP direct hash readback, live matching PyPI fullCore digest, exactownedgroup absence; immutable historical receipts retained.",
+    "uncertainty": "Current exact-headCI/integration admission remains pending; this source-equivalent Linux compatibility result does not claim broader acceptance."
+  },
+  "upstream_disposition": "none; requested existingActions issue proof, no new defect report or mutation"
+}

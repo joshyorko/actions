@@ -1,0 +1,76 @@
+{
+  "schema": "independent-pr310-test-typing-review/v1",
+  "status": "GO_SOURCE_ONLY",
+  "head": "7c98534ad4eece6d892e3bb2957471d0f1ad76e6",
+  "tree": "a3ff2b20fd057d44550d374f611cfa4278e2ebe1",
+  "parent": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+  "source_clean": true,
+  "owner_receipt_sha256": "3f4235579b453703270da5eeae5e6d3922cdfb77b3d56e59981967cea9af0d9e",
+  "owner_manifest_sha256": "98c49cac5d157a3aa8b9336dd567c8295c46231172c1a6f7a2ebfccb5a764512",
+  "commands": [
+    "Read-only git HEAD/tree/parent/status/complete two-file diff",
+    "Standard-library source AST/hash and all6manifest/log/runner/command/triage/source/prepared metadata bindings; no tests/RCC/services/native/browser execution"
+  ],
+  "observations": [
+    "Exactly four object-membership accesses at original745/781/782/800 changed to assertion-backed receipt_section values. Existing helper and TypeGuard verify dict and string keys; no casts/type ignores or assertion removal.",
+    "All other definitions/imports and production files unchanged. Three tests retain exact status/failed-vs-not_run/browser-stage assertions and fixture/provider/security values.",
+    "Configured retained source-bound RCC18.19.3 no-build result3pure pass/28deselected,326configured Mypy files pass,294formatter files and Ruff/isort pass. This is branch-head scope, not future union or full native/browser proof.",
+    "All owner receipt/manifest/source/runner/command/log/triage/prepared pyproject+lock bytes/hash bindings verified. Source cwd is exact review worktree; prepared Python/tool origins are recorded in retained output."
+  ],
+  "verification": {
+    "checks": [
+      {
+        "command": "python -m pytest tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py -k \"failed_authorization_denial_stage_is_failed_not_not_run or successful_authorization_denial_stage_clears_not_run or normal_stage_does_not_clear_authorization_denial_not_run\" -q",
+        "result": "3 passed, 28 deselected"
+      },
+      {
+        "command": "python -m mypy --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases src tests",
+        "result": "success; no issues found in 326 source files"
+      },
+      {
+        "command": "python -m ruff check src tests",
+        "result": "success"
+      },
+      {
+        "command": "python -m ruff format --check --config ruff.toml --exclude=_static_contents.py,_oauth2_config.py src tests",
+        "result": "success; 294 files already formatted"
+      },
+      {
+        "command": "python -m isort --check src tests",
+        "result": "success"
+      }
+    ],
+    "commands_file": {
+      "path": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/command.txt",
+      "sha256": "88dcb116ed0e7b574e5c28f6cc653b5fc436209c0289b229614b25b340c86842"
+    },
+    "excluded": "No full acceptance module, native/browser/build/service, full release, or hosted CI run.",
+    "exit_code": 0,
+    "gateway": "RCC v18.19.3 task script --no-build -r developer/toolkit.yaml; activated /workspace/actions-cloud; targeted commands ran with prepared /workspace/work/actions-mk3-pr302/action_server/.venv after current action_server pyproject.toml and poetry.lock matched prepared bytes exactly.",
+    "output": {
+      "bytes": 5098,
+      "path": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/stdout.log",
+      "sha256": "ac47ad4d61146d3bd0a75762d171445bad4c3a78748450c9dbcd7f3b04dfbf68"
+    },
+    "prepared_env": {
+      "path": "/workspace/work/actions-mk3-pr302/action_server/.venv",
+      "poetry_lock_sha256": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+      "pyproject_sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+      "python": "3.12.15"
+    },
+    "runner": {
+      "path": "/workspace/work/actions-mk3-evidence/wave9/pr310-test-typing-repair/run-focused-checks.sh",
+      "sha256": "d2eea1f1cd85554b9f4052fbb6b34cab394dd361879d9e4305b182598c92cd55"
+    }
+  },
+  "documentation_improvement": {
+    "disposition": "Canonical lesson already integrated in same exact commit; no additional cosmetic delta",
+    "path": "docs/skills/repository-operations.md",
+    "line": 1898,
+    "exact_lesson": "For dict[str, object] receipts, narrow nested values with assertion-backed string-keyed mapping helper or TypeGuard before mapping operations; do not replace runtime validation with casts/type ignores.",
+    "evidence": "Four exact CI diagnostics, existing receipt_section/TypeGuard, configured326-file gate and3same behavior controls.",
+    "uncertainty": "New exact-head/prospective-union hosted CI and full Work Items/native gates remain separate; no acceptance carried from this typing check."
+  },
+  "scope": "Test-only source admission; no remote push/merge/CI restart issued by reviewer",
+  "upstream_disposition": "none; branch test typing correction, no public defect report"
+}

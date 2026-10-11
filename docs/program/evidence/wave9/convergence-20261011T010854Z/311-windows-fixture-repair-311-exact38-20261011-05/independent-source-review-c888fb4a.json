@@ -1,0 +1,135 @@
+{
+  "schema": "codex.independent-source-review/v1",
+  "observed_at_utc": "2026-10-11T00:36:08.402121+00:00",
+  "disposition": "GO_SOURCE_ONLY",
+  "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+  "tree": "34f967cc9b753e8b0497221cf77ec53925cdf9eb",
+  "ordered_parents": [
+    "8eb2e6f92109bcbd51e4925ebe703074ee28c6ac"
+  ],
+  "worktree": "/workspace/work/actions-mk3-wave8-wheel-boundary",
+  "owner_receipt_sha256": "0023f9843c8b82cf958b34356438d449ab811f0d51fd094c47e67dfb7ef3d944",
+  "owner_erratum_sha256": "01184f32852c61cd78aba69b97044169ac1a4b28d392597900d4cebfa8765a9e",
+  "verified_artifacts": {
+    "task-logs/mypy.stdout.log": {
+      "bytes": 1484,
+      "sha256": "3cff125a819717bea5d65597f4a3cf6a0310cc64f7882e9dd41b129015c9e658"
+    },
+    "outer.stderr.log": {
+      "bytes": 837,
+      "sha256": "c83cead6dbf004054a1cb51a5cf2c93045dc9a2e0622f430d69dc8c5b5a82dbb"
+    },
+    "outer.stdout.log": {
+      "bytes": 4617,
+      "sha256": "8f85ab61402a8b22ef9f8c5cab7111aa446db081fd37d01bb1d0ce3d1fab0149"
+    },
+    "outer-control.log": {
+      "bytes": 67,
+      "sha256": "11fbf2fca37dd67c74b91c8d050de9322bd62f9a88943d21c6648a2a118a08af"
+    },
+    "pytest-output/log.html": {
+      "bytes": 933565,
+      "sha256": "07d7d30bfaff994ceac5726f4b073540b9606f6a440487d4f9727d28c5445b31"
+    },
+    "pytest-output/output.robolog": {
+      "bytes": 205949,
+      "sha256": "3100fb9e8056a45175e29bd5d69db39ad64aaa3261741577eafe5ce5348eda12"
+    },
+    "task-logs/pytest.stdout.log": {
+      "bytes": 190,
+      "sha256": "583b33682fbe6bfdd67614f0ae89168b9570ef002138b74b67683f2c4ed0e963"
+    },
+    "rcc-output/journal.run": {
+      "bytes": 516,
+      "sha256": "849a186c8a89bf32be23c762cd671e185a5e7566f95cd620b628d9ad91a39ad6"
+    },
+    "rcc-output/stdout.log": {
+      "bytes": 4617,
+      "sha256": "8f85ab61402a8b22ef9f8c5cab7111aa446db081fd37d01bb1d0ce3d1fab0149"
+    },
+    "task-logs/ruff.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "task-logs/result.json": {
+      "bytes": 4414,
+      "sha256": "23f58ea16308d244407c01442cae6905125406f6d322afa5ec7d9ac057268d55"
+    },
+    "command.txt": {
+      "sha256": "84eb2417b7999ac219f697897b4e24fa5fd73479b00dc0f469a26ce29fc0b6a6"
+    },
+    "prelaunch.json": {
+      "sha256": "70d027dd0f186a1f8e48837bad254d0ea456b63d6e906a92dd232121d410e6ed"
+    },
+    "runner.py": {
+      "sha256": "2297dfecdaa45d13dd08a63bd03421ee476e8f5b901f58f9420cff1a45b8b240"
+    },
+    "task.yaml": {
+      "sha256": "b9c4b675b5a30498958ec898b261ccab78450f350c98c08b37ae52cb46ebac9d"
+    },
+    "test-selection.json": {
+      "sha256": "bb5b3da4f1fc5eb159dbaa14f832ca0550f613f5ad4d43a9578ec6de550dd7eb"
+    }
+  },
+  "source_hashes": {
+    "action_server/tests/contract_tests/test_active_contracts.py": "b76ec605e343e8bec7dea6e230dad3f516eabc4fd90a2769638b0d9111a6ade0",
+    "docs/skills/repository-operations.md": "0efd8b26d90621b9014c25e8d3c1a5c01a82c5d2b98ae4365d6c744110f81408"
+  },
+  "selection": {
+    "functions": 21,
+    "expanded": 38,
+    "total": 39,
+    "excluded_heavy": "test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders",
+    "closure_excludes_build_install": true,
+    "existing_heavy_and_strict_wheel_helpers_unchanged_AST": {
+      "test_runtime_clean_wheels_install_outside_checkout_in_both_uninstall_orders": true,
+      "_build_wheels": true,
+      "_install_and_probe": true,
+      "_assert_runtime_wheel_python_members_match": true,
+      "_assert_wheel_digest": true
+    }
+  },
+  "verification": {
+    "pytest": "38 passed0.59s",
+    "ruff": "configured src/tests PASS",
+    "mypy": "configured src/tests326files PASS",
+    "gateway": "RCC18.19.3 task run --dev --no-build;12s normal task stop/outer0",
+    "interpreter": "preparedPython3.12.15 and metadata-equivalent Runtime; orchestratorPython3.12.14 recorded separately",
+    "attribution": "Executed at parent8eb with modified test/guide hashes, then committed unchangedc888; source-byte equivalence, not test execution at committedc888 HEAD."
+  },
+  "source_review": [
+    "Only2test annotations, synthetic UTF8 byte writer and LF/CRLF regression plus guide changed; no production/strict-byte/AST/import/complete-inventory/uninstall-order weakening.",
+    "AST21explicit selectors exclude unmarked heavy node; selected closure only read-only git ls-files subprocess, no wheel/venv/Poetry build/pip/provider call.",
+    "Exact21selectors in actual runner-result pytestargv match source-derived38expanded count; config/runner/selection/current source/metadata/log hashes verified."
+  ],
+  "process_readback": {
+    "listed_new_pids_present": [],
+    "prior_adopted_zombies": [
+      "75479       1   75476 Z    rcc",
+      "75485       1   75476 Z    dash",
+      "75661       1   75476 Z    mypy"
+    ],
+    "scope": "point-time listed-PID absence only, no retroactive full-reaping claim"
+  },
+  "admission_limits": [
+    "No Windows new-head or prospectiveunion hosted acceptance.",
+    "Prior incidental39-pass heavy incident/lost artifacts remain unchanged; no #195 installed-wheel acceptance or controlled candidate06 run.",
+    "Candidate06 may be re-prepared with exactc888 full source/helper/tool/config/driver/manifest pins then receive separate independent pre-run review/root grant; no heavy GO here.",
+    "Pytest HTML/robolog copied from output may predate task; current stdout/explicit runnerselection are authoritative for38pure proof.",
+    "This retrospective successful finite task does not admit this runner generically for timeout/descendant/output failure paths.",
+    "No new independent test/service/RCC/native execution."
+  ],
+  "canonical_doc_delta": {
+    "path": "docs/skills/repository-operations.md",
+    "status": "already integrated in exactc888 guide",
+    "verified_lesson": "Write identical encoded bytes to wheel/installed-tree fixtures; preserve strict comparisons. Explicit AST node selection and helper call closure exclude unmarked heavy tests; marker-only or wholemodule selection does not.",
+    "uncertainty": "Actual Windows current-head CI and full installed-wheel acceptance remain open."
+  },
+  "upstream_disposition": "none; existing reviewed fixture/type repair, no new confirmed product defect",
+  "commands": [
+    "read exactparent two-file diff",
+    "AST paramcount/selected helperclosure/heavy and strict helper equivalence",
+    "sha256/size retained source/config/selector/runner/output; package metadata equality",
+    "git head/tree/parent/cleanstatus and point-time PID census"
+  ]
+}

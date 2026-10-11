@@ -1,0 +1,44 @@
+{
+  "authorization": "User-authorized correction of obsolete/contradictory status text and accidental closure wording; body only. No base/state/merge/title changes.",
+  "closure_limits": "These PRs target integration, not default community. No authoritative closingIssuesReferences/manual relation inference; automatic closure count remains UNKNOWN.",
+  "schema": "actions-pr-body-status-correction-v1",
+  "observed_at_utc": "2026-10-11T00:45:55.316111+00:00",
+  "changes": [
+    {
+      "pr": 305,
+      "head": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+      "base": "integration/community-release-20261008",
+      "old_phrase": "This does not close #99.",
+      "new_phrase": "Whole #99 acceptance remains open.",
+      "body_matches": true,
+      "before_body_sha256": "c22510ce26c1170ec4a2047dd5fb9cef9031a4581703de086efb5bb5b00e4ae4",
+      "after_body_sha256": "5b82f4511774480e85b151e34c6b79fbb4d9cc8f59a8cf4d416f58143677d0aa",
+      "new_closing_keywords_added": false,
+      "other_status_correction": null
+    },
+    {
+      "pr": 306,
+      "head": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "base": "integration/community-release-20261008",
+      "old_phrase": "this does not close #84.",
+      "new_phrase": "full #84 acceptance remains open.",
+      "body_matches": true,
+      "before_body_sha256": "ec2ca2d69f736ff8f53469a3f4caef3bed03c0e2df64828fee7a5ca99ba5df32",
+      "after_body_sha256": "08252257084a35cf07ef9ca054d226a0e34cba5fef3035a25e6ed9cb55cc7ad1",
+      "new_closing_keywords_added": false,
+      "other_status_correction": "PR306 now links independently reviewed actual PostgreSQL failed-SAVEPOINT evidence; healthy-transaction denial/full84 remain unproven."
+    },
+    {
+      "pr": 310,
+      "head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+      "base": "integration/community-release-20261008",
+      "old_phrase": "does not close #208.",
+      "new_phrase": "leaves whole #208 acceptance open.",
+      "body_matches": true,
+      "before_body_sha256": "0d2996c432aca0ebac46cefa0bc70e06f6e6adb77ca70ac1ba89f2aa6ad5acb1",
+      "after_body_sha256": "9e75a64bedaf74a00fbcabe3edca9b24b648c87f9b134192f2e203d441c54fa9",
+      "new_closing_keywords_added": false,
+      "other_status_correction": null
+    }
+  ]
+}

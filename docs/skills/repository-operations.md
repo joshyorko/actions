@@ -2666,3 +2666,32 @@ artifact selector proves packaging identity, not trust-profile propagation or
 offline lifecycle acceptance. Controlled Core1.0.2 fixture measurements remain
 scoped to that fixture; current Core/Runtime acceptance needs current source
 and rebuilt or proven equivalent artifacts.
+
+Once an evidence file's digest has been announced, preserve those exact bytes.
+Create checkpoint destinations exclusively and reject an existing path even
+when it is a dangling symlink. Put corrections in a new, explicitly linked
+artifact. If original bytes were overwritten or deleted, retain their announced
+identity and report the loss; do not recreate purported original evidence.
+
+For installed-wheel tests that uninstall before returning, capture installed
+paths and byte hashes before uninstall. Validate the captured records against
+retained wheels and their complete member inventories afterward, without
+reopening removed files. Bind both uninstall orders to distinct environment
+prefixes, the same wheel identities and scan markers before the test result.
+Measure indirect helper tools, including the selected Poetry executable,
+version and digest. Artifact-root identity and archive/marker validation errors
+must participate in the persisted nonpassing result.
+Derive terminal completion from the exact exit/result, persistence and current
+owned-process census. Preserve contradictory phase labels with an additive
+interpretation; an empty report-copy list does not measure a separate wheelhouse.
+
+Attribute a CI error using the tested commit, changed lines and complete source
+ancestry. Passing adjacent branches cannot clear an introduced typing error.
+An unchanged test that times out does not prove an infrastructure cause or
+exclude a changed production path; retain the timeout as unresolved until
+diagnostic evidence distinguishes them.
+
+Refresh registry versions, native release and tag endpoints, and the owning
+Homebrew Cask independently. A measured public 404 records absence at that
+observation time; an inaccessible endpoint remains UNKNOWN. Registry artifact
+proof does not establish native downloads or actual installation and upgrade.
