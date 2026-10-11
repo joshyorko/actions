@@ -1022,6 +1022,17 @@ reader closure while preserving an earlier failure. Point-in-time descendant
 observations do not establish universal discovery or adoption. A receipt alone
 does not establish passing pytest teardown; retain an executed zero-skip JUnit
 result alongside it. Keep candidate and published consumer receipts separate.
+The generated Runtime Tests Linux job runs the exact published consumer after its
+existing Poetry, Node, and Chromium setup. Admit a receipt only when its current
+source identity and measured Core/browser values match, its one named JUnit case
+passes with consistent counters and zero skips, and Runtime cleanup records
+`wrapper_reaped`, `descendant_snapshot_complete`, and `descendant_reap_complete`
+as true with empty errors, readers, and observed live/zombie descendant lists.
+Checking only boolean or list types would admit failed cleanup. Upload sanitized
+JUnit even after failure; upload a sanitized receipt only after admission. A
+service-free test may relocate paths in an earlier measured receipt to test this
+validator, but it must preserve that receipt's executed source identity and must
+not relabel it as execution of a later workflow commit.
 
 PR #282 still returns `artifact: null`, which fails the shared artifact-bearing
 Success schema. Caller-owned Workspace/application/revision binding and

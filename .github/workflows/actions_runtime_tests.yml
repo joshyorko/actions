@@ -147,6 +147,180 @@ jobs:
     - name: Install Playwright Chromium for Runtime browser acceptance
       working-directory: action_server/frontend
       run: npx playwright install chromium
+    - name: Verify Canvas published-Core Runtime and browser acceptance
+      if: matrix.os == 'ubuntu-22.04'
+      timeout-minutes: 15
+      env:
+        ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE: '1'
+        ACTIONS_HOME: ${{ runner.temp }}/canvas-query-published-actions-${{ github.run_id
+          }}-${{ github.run_attempt }}
+        TMPDIR: ${{ runner.temp }}/canvas-query-published-tmp-${{ github.run_id }}-${{
+          github.run_attempt }}
+        UV_CACHE_DIR: ${{ runner.temp }}/canvas-query-published-uv-${{ github.run_id
+          }}-${{ github.run_attempt }}
+        CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH: ${{ runner.temp }}/canvas-query-published-acceptance-${{
+          github.run_id }}-${{ github.run_attempt }}/published-core-receipt.json
+      shell: bash
+      run: "set -Eeuo pipefail\nunset SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE\
+        \ ACTIONS_RUNTIME_RCC_PROVIDER VIRTUAL_ENV PYTHONPATH PYTHONHOME CONDA_PREFIX\
+        \ POETRY_ACTIVE\nmkdir -p \"$ACTIONS_HOME\" \"$TMPDIR\" \"$UV_CACHE_DIR\"\
+        \ \"$(dirname \"$CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH\")\"\npoetry_cmd()\
+        \ {\n  uv run --no-project --python \"${{ matrix.python }}\" env -u VIRTUAL_ENV\
+        \ poetry \"$@\"\n}\ntest \"$(poetry_cmd --version)\" = \"Poetry (version 2.1.1)\"\
+        \ntest -x \"$(command -v node)\"\ntest -x \"$(command -v uv)\"\ntest -f frontend/node_modules/@playwright/test/cli.js\n\
+        export CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=\"$(node -p 'require(\"\
+        ./frontend/node_modules/@playwright/test\").chromium.executablePath()')\"\n\
+        test -x \"$CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH\"\nbrowser_sha256=\"\
+        $(poetry_cmd run python -c 'import hashlib, os; from pathlib import Path;\
+        \ print(hashlib.sha256(Path(os.environ[\"CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH\"\
+        ]).read_bytes()).hexdigest())')\"\nbrowser_version=\"$(\"$CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH\"\
+        \ --version)\"\npoetry_cmd run python -c \"import actions.server, pytest\"\
+        \njunit_raw=\"$TMPDIR/canvas-query-published-core-junit.xml\"\njunit_safe=\"\
+        $(dirname \"$CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH\")/junit.xml\"\nreceipt_safe=\"\
+        $(dirname \"$CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH\")/published-core-receipt.sanitized.json\"\
+        \nset +e\npoetry_cmd run python -m pytest \\\n  tests/action_server_tests/mcp/test_canvas_query_template.py::test_canvas_template_runs_through_runtime_and_real_browser\
+        \ \\\n  -q -n 0 \\\n  --basetemp \"$TMPDIR/pytest\" \\\n  --junitxml \"$junit_raw\"\
+        \ >\"$TMPDIR/pytest.log\" 2>&1\npytest_status=$?\nset -e\nsource_sha=\"$(git\
+        \ rev-parse HEAD)\"\nsource_tree=\"$(git rev-parse 'HEAD^{tree}')\"\nsource_parents=\"\
+        $(git show -s --format=%P HEAD)\"\npoetry_cmd run python - \"$junit_raw\"\
+        \ \"$junit_safe\" \"$pytest_status\" \\\n  \"$CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH\"\
+        \ \"$receipt_safe\" \\\n  \"$source_sha\" \"$source_tree\" \"$source_parents\"\
+        \ \"$browser_sha256\" \"$browser_version\" <<'PY'\nimport copy\nimport hashlib\n\
+        import json\nimport re\nimport sys\nimport xml.etree.ElementTree as ET\nimport\
+        \ zipfile\nimport os\nfrom pathlib import Path\n\nraw_path, safe_path, status_text,\
+        \ receipt_path, receipt_safe, source_sha, source_tree, source_parents, browser_sha256,\
+        \ browser_version = sys.argv[1:]\npytest_status = int(status_text)\nif not\
+        \ Path(raw_path).is_file():\n    raise SystemExit(\"pytest did not produce\
+        \ JUnit XML\")\nraw_root = ET.parse(raw_path).getroot()\ncases = list(raw_root.iter(\"\
+        testcase\"))\nexpected = \"test_canvas_template_runs_through_runtime_and_real_browser\"\
+        \nexpected_class = \"tests.action_server_tests.mcp.test_canvas_query_template\"\
+        \nsuites = list(raw_root.iter(\"testsuite\"))\nskipped = sum(len(case.findall(\"\
+        skipped\")) for case in cases)\nfailures = sum(len(case.findall(\"failure\"\
+        )) for case in cases)\nerrors = sum(len(case.findall(\"error\")) for case\
+        \ in cases)\nexpected_counts = {\n    \"tests\": str(len(cases)),\n    \"\
+        skipped\": str(skipped),\n    \"failures\": str(failures),\n    \"errors\"\
+        : str(errors),\n}\nreported_counts = (\n    suites[0].get(\"tests\"),\n  \
+        \  suites[0].get(\"skipped\"),\n    suites[0].get(\"failures\"),\n    suites[0].get(\"\
+        errors\"),\n) if len(suites) == 1 else ()\ncounter_nodes = [raw_root, *suites]\n\
+        counters_match = all(\n    node.get(key) == value\n    for node in counter_nodes\n\
+        \    for key, value in expected_counts.items()\n    if key in node.attrib\n\
+        ) and reported_counts == tuple(expected_counts[key] for key in (\n    \"tests\"\
+        ,\n    \"skipped\",\n    \"failures\",\n    \"errors\",\n))\nsafe_root = ET.Element(\n\
+        \    \"testsuite\",\n    {\n        \"name\": \"canvas-template-published-core\"\
+        ,\n        \"tests\": str(len(cases)),\n        \"skipped\": str(skipped),\n\
+        \        \"failures\": str(failures),\n        \"errors\": str(errors),\n\
+        \        \"time\": raw_root.get(\"time\", \"0\"),\n    },\n)\nfor case in\
+        \ cases:\n    case_class = case.get(\"classname\", \"\")\n    case_name =\
+        \ case.get(\"name\", \"\")\n    safe_case = ET.SubElement(\n        safe_root,\n\
+        \        \"testcase\",\n        {\n            \"classname\": case_class,\n\
+        \            \"name\": case_name,\n            \"time\": case.get(\"time\"\
+        , \"0\"),\n        },\n    )\n    for tag in (\"skipped\", \"failure\", \"\
+        error\"):\n        for _ in case.findall(tag):\n            ET.SubElement(\n\
+        \                safe_case,\n                tag,\n                {\"message\"\
+        : \"Details withheld; inspect the workflow run.\"},\n            )\nET.indent(safe_root)\n\
+        ET.ElementTree(safe_root).write(\n    safe_path, encoding=\"utf-8\", xml_declaration=True\n\
+        )\njunit_ok = (\n    len(suites) == 1\n    and len(cases) == 1\n    and cases[0].get(\"\
+        classname\") == expected_class\n    and cases[0].get(\"name\") == expected\n\
+        \    and not skipped\n    and not failures\n    and not errors\n    and counters_match\n\
+        \    and reported_counts == (\"1\", \"0\", \"0\", \"0\")\n)\nis_sha256 = lambda\
+        \ value: isinstance(value, str) and re.fullmatch(r\"[0-9a-f]{64}\", value)\
+        \ is not None\nis_git_blob = lambda value: isinstance(value, str) and re.fullmatch(r\"\
+        [0-9a-f]{40}\", value) is not None\nexpected_hashes = {\n    \"actions\":\
+        \ \"790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2\",\n\
+        \    \"actions.mcp\": \"c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365\"\
+        ,\n    \"actions.mcp._metadata\": \"c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c\"\
+        ,\n}\nexpected_parents = source_parents.split()\nwith zipfile.ZipFile(\"src/actions/server/templates/zips/canvas-query.zip\"\
+        ) as templates:\n    expected_resource_sha256 = hashlib.sha256(templates.read(\"\
+        canvas.html\")).hexdigest()\nreceipt_ok = False\nif Path(receipt_path).is_file():\n\
+        \    try:\n        receipt = json.loads(Path(receipt_path).read_text(encoding=\"\
+        utf-8\"))\n        core = receipt.get(\"published_core\", {})\n        worker\
+        \ = core.get(\"measured_worker\", {})\n        runtime = receipt.get(\"runtime\"\
+        , {})\n        browser = receipt.get(\"browser\", {})\n        prefix = Path(worker.get(\"\
+        worker_prefix\", \"\"))\n        modules = worker.get(\"modules\", {})\n \
+        \       runtime_args = runtime.get(\"process_args\", [])\n        receipt_ok\
+        \ = (\n            receipt.get(\"scope\") == \"published-core Runtime/browser\
+        \ acceptance only\"\n            and receipt.get(\"source\") == {\"commit\"\
+        : source_sha, \"tree\": source_tree, \"parents\": expected_parents}\n    \
+        \        and core.get(\"declared_version\") == \"1.0.3\"\n            and\
+        \ core.get(\"independently_verified_registry_wheel_sha256\") == \"8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265\"\
+        \n            and worker.get(\"version\") == \"1.0.3\"\n            and worker.get(\"\
+        module_hashes\") == expected_hashes\n            and prefix.is_absolute()\n\
+        \            and set(modules) == set(expected_hashes)\n            and all(Path(path).is_absolute()\
+        \ and Path(path).is_relative_to(prefix) for path in modules.values())\n  \
+        \          and Path(runtime.get(\"module_origin\", \"\")).resolve() == Path(\"\
+        src/actions/server/__init__.py\").resolve()\n            and runtime.get(\"\
+        module_sha256\") == hashlib.sha256(Path(\"src/actions/server/__init__.py\"\
+        ).read_bytes()).hexdigest()\n            and isinstance(runtime_args, list)\
+        \ and len(runtime_args) >= 3\n            and Path(runtime_args[0]).is_absolute()\
+        \ and runtime_args[1:3] == [\"-m\", \"actions.server\"]\n            and runtime.get(\"\
+        wrapper_reaped\") is True\n            and runtime.get(\"live_descendant_pids\"\
+        ) == []\n            and runtime.get(\"active_readers\") == []\n         \
+        \   and runtime.get(\"zombie_descendant_pids\") == []\n            and runtime.get(\"\
+        descendant_snapshot_complete\") is True\n            and runtime.get(\"descendant_reap_complete\"\
+        ) is True\n            and runtime.get(\"cleanup_errors\") == []\n       \
+        \     and receipt.get(\"runtime_calls\") == [\"published_core_identity\",\
+        \ \"canvas_fixture_search:alpha\", \"canvas_fixture_search:unmatched-query\"\
+        ]\n            and receipt.get(\"template_zip_sha256\") == hashlib.sha256(Path(\"\
+        src/actions/server/templates/zips/canvas-query.zip\").read_bytes()).hexdigest()\n\
+        \            and receipt.get(\"production_package_manifest_sha256\") == hashlib.sha256(Path(\"\
+        ../templates/canvas-query/package.yaml\").read_bytes()).hexdigest()\n    \
+        \        and receipt.get(\"built_resource_sha256\") == expected_resource_sha256\n\
+        \            and browser.get(\"status\") == \"passed\" and browser.get(\"\
+        selection\") == \"explicit\"\n            and browser.get(\"version\") ==\
+        \ browser_version\n            and is_sha256(browser_sha256) and browser.get(\"\
+        sha256\") == browser_sha256\n            and Path(browser.get(\"path\", \"\
+        \")).resolve() == Path(os.environ[\"CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH\"\
+        ]).resolve()\n            and browser.get(\"temporary_root_removed\") is True\n\
+        \            and Path(browser.get(\"temporary_root\", \"\")).is_absolute()\n\
+        \            and not Path(browser[\"temporary_root\"]).exists()\n        \
+        \    and browser.get(\"playwright_version\") == json.loads(Path(\"frontend/package-lock.json\"\
+        ).read_text())[\"packages\"][\"node_modules/@playwright/test\"][\"version\"\
+        ]\n            and browser.get(\"frontend_lock_sha256\") == hashlib.sha256(Path(\"\
+        frontend/package-lock.json\").read_bytes()).hexdigest()\n            and isinstance(receipt.get(\"\
+        limits\"), list) and len(receipt[\"limits\"]) == 4\n        )\n    except\
+        \ (OSError, TypeError, ValueError, AttributeError, KeyError):\n        receipt_ok\
+        \ = False\nif not junit_ok or pytest_status or not receipt_ok:\n    failure_root\
+        \ = ET.Element(\n        \"testsuite\",\n        {\n            \"name\":\
+        \ \"canvas-template-published-core\",\n            \"tests\": \"1\",\n   \
+        \         \"skipped\": \"0\",\n            \"failures\": \"1\",\n        \
+        \    \"errors\": \"0\",\n        },\n    )\n    failure_case = ET.SubElement(\n\
+        \        failure_root,\n        \"testcase\",\n        {\"classname\": expected_class,\
+        \ \"name\": expected},\n    )\n    ET.SubElement(\n        failure_case,\n\
+        \        \"failure\",\n        {\"message\": \"Published Core/browser acceptance\
+        \ failed verification.\"},\n    )\n    ET.indent(failure_root)\n    ET.ElementTree(failure_root).write(\n\
+        \        safe_path, encoding=\"utf-8\", xml_declaration=True\n    )\n    raise\
+        \ SystemExit(\n        f\"Published Core acceptance did not produce one verified\
+        \ pass \"\n        f\"(pytest={pytest_status}, tests={len(cases)}, skipped={skipped},\
+        \ \"\n        f\"failures={failures}, errors={errors}, receipt_valid={receipt_ok})\"\
+        \n    )\n\nredactions = [\n    (os.environ.get(\"GITHUB_WORKSPACE\"), \"<checkout>\"\
+        ),\n    (os.environ.get(\"RUNNER_TEMP\"), \"<runner-temp>\"),\n    (os.environ.get(\"\
+        ACTIONS_HOME\"), \"<actions-home>\"),\n    (os.environ.get(\"TMPDIR\"), \"\
+        <task-tmp>\"),\n    (os.environ.get(\"UV_CACHE_DIR\"), \"<uv-cache>\"),\n\
+        \    (str(Path.home()), \"<runner-home>\"),\n]\nredactions = sorted(\n   \
+        \ ((prefix, replacement) for prefix, replacement in redactions if prefix),\n\
+        \    key=lambda item: len(item[0]),\n    reverse=True,\n)\n\ndef redact(value):\n\
+        \    if isinstance(value, str):\n        for prefix, replacement in redactions:\n\
+        \            value = value.replace(prefix, replacement)\n        return value\n\
+        \    if isinstance(value, list):\n        return [redact(item) for item in\
+        \ value]\n    if isinstance(value, dict):\n        return {key: redact(item)\
+        \ for key, item in value.items()}\n    return value\n\nPath(receipt_safe).write_text(\n\
+        \    json.dumps(redact(copy.deepcopy(receipt)), indent=2, sort_keys=True)\
+        \ + \"\\n\",\n    encoding=\"utf-8\",\n)\nPY\n"
+    - name: Upload Canvas published-Core receipt
+      if: always() && matrix.os == 'ubuntu-22.04'
+      uses: actions/upload-artifact@v4
+      with:
+        name: canvas-query-published-core-${{ github.run_id }}-${{ github.run_attempt
+          }}
+        path: '${{ runner.temp }}/canvas-query-published-acceptance-${{ github.run_id
+          }}-${{ github.run_attempt }}/published-core-receipt.sanitized.json
+
+          ${{ runner.temp }}/canvas-query-published-acceptance-${{ github.run_id }}-${{
+          github.run_attempt }}/junit.xml
+
+          '
+        if-no-files-found: error
+        retention-days: 7
     - name: Test (integration)
       env:
         GITHUB_ACTIONS_MATRIX_NAME: ${{ matrix.name }}
