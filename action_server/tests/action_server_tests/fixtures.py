@@ -16,6 +16,22 @@ BUILD_ENV_IN_TESTS_TIMEOUT = 600
 
 
 @pytest.fixture(autouse=True)
+def native_startup_diagnostics(request, monkeypatch, rcc_config_location):
+    import sys
+
+    from action_server_tests.native_startup_diagnostics import enabled, install
+
+    if enabled(request.node.nodeid, sys.platform, os.environ):
+        install(
+            monkeypatch,
+            Path(os.environ["ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR"]),
+            request.node.nodeid,
+            os.environ,
+            rcc_config_location,
+        )
+
+
+@pytest.fixture(autouse=True)
 def setup_logging():
     import logging
 
