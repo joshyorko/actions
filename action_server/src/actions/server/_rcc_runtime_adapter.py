@@ -913,7 +913,9 @@ def verify_rcc_version(rcc_location: Path, runner: Runner = _subprocess_runner) 
     """Require the selected executable to be the released RCC contract."""
 
     if os.environ.get("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY") is not None:
-        compatibility = verify_rcc_compatibility(rcc_location, runner=runner)
+        compatibility = verify_rcc_compatibility(
+            rcc_location, runner=None if runner is _subprocess_runner else runner
+        )
         assert compatibility is not None
         return compatibility.version
     code, stdout, stderr = runner(str(rcc_location), "--version")

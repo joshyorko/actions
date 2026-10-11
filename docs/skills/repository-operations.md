@@ -2464,7 +2464,10 @@ unknown selections fail closed. Acquisition provenance is data-only approval,
 not an operational feature pass or a production compatibility claim. The
 released 18.19.5 executable reports a modified source tree at its embedded
 revision; its source equivalence and modification cause remain unknown.
-Measure selected bytes before the bounded version probe and again before use.
+Measure selected bytes before the isolated ten-second version probe and again
+before use. Default location and version wrappers must select that same probe;
+the general command runner's 900-second budget is a separate operation limit.
+Injected runners are test seams, not native timeout evidence.
 Fresh descriptors and process-local cache keys bind the actual version, source,
 platform, binary, provenance and required contract surface. Changing selection
 rejects stale descriptors until explicit re-preparation; an artifact digest
