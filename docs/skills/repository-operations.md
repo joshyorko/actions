@@ -523,9 +523,16 @@ and artifact registrations. The callback returns `False` to stop before
 process-pool or Uvicorn startup. Its explicit route-class, path, method, and
 mount inventory includes hidden routes and the registered dynamic action; the
 local `StaticFiles` mount is recorded as a terminal mount because it exposes no
-nested route list. A new unclassified route fails the inventory. This checks
-registration coverage, not authorization behavior: CORS preflight and request
-authorization remain covered by their existing request-level tests.
+nested route list. A new unclassified route fails the inventory. Since the
+callback stops startup, this proves route registration and classification only.
+Authorization acceptance requires a separate missing/wrong/valid credential
+request matrix for protected routes and terminal mounts, including GET/HEAD,
+downloads, WebSockets, streaming, and rejection before side effects. CORS
+preflight and request authorization retain their separate request-level tests.
+When trusted configuration enables an optional transport, inventory its enabled
+routes too; default-off absence does not cover that configuration. Keep route
+registration, request authorization, and packaged/native execution evidence
+separate in acceptance receipts.
 
 Community PRs touching `actions/**` run Actions Core Tests. Its non-publishing
 candidate-wheel job builds the exact-source wheel and sdist, checks their
