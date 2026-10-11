@@ -1895,6 +1895,12 @@ use targeted module overrides rather than a global missing-import exemption. MCP
 model constructors use Python field names such as `structured_content`; camelCase aliases
 remain wire-format names.
 
+When a test receipt is typed as `dict[str, object]`, narrow nested values before using
+them as mappings. Reuse an assertion-backed section helper or a `TypeGuard` that checks
+string keys; do not use casts or type ignores to make membership checks compile. This
+keeps malformed test receipts failing at runtime while satisfying the configured Mypy
+checks that include ordinary tests.
+
 Action Server keeps deprecation warnings actionable: repository-owned Pydantic models
 use `ConfigDict`, and build timestamps are timezone-aware UTC values. Pytest suppresses
 no deprecation-warning category globally. `robocorp-log-pytest` 0.0.5 permits

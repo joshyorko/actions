@@ -742,7 +742,8 @@ def test_failed_authorization_denial_stage_is_failed_not_not_run() -> None:
         record_browser_stage(acceptance_receipt, browser_stage)
 
     assert acceptance_receipt["browser_stages"] == [browser_stage]
-    assert "authorization_denial_ui" not in acceptance_receipt["states_not_run"]
+    states_not_run = receipt_section(acceptance_receipt, "states_not_run")
+    assert "authorization_denial_ui" not in states_not_run
     assert acceptance_receipt["states_failed"] == {
         "authorization_denial_ui": {
             "stage": "authorization-denied",
@@ -778,8 +779,10 @@ def test_successful_authorization_denial_stage_clears_not_run() -> None:
 
     record_browser_stage(acceptance_receipt, browser_stage)
 
-    assert "authorization_denial_ui" not in acceptance_receipt["states_not_run"]
-    assert "authorization_denial_ui" not in acceptance_receipt["states_failed"]
+    states_not_run = receipt_section(acceptance_receipt, "states_not_run")
+    states_failed = receipt_section(acceptance_receipt, "states_failed")
+    assert "authorization_denial_ui" not in states_not_run
+    assert "authorization_denial_ui" not in states_failed
 
 
 def test_normal_stage_does_not_clear_authorization_denial_not_run() -> None:
@@ -797,7 +800,8 @@ def test_normal_stage_does_not_clear_authorization_denial_not_run() -> None:
 
     record_browser_stage(acceptance_receipt, browser_stage)
 
-    assert "authorization_denial_ui" in acceptance_receipt["states_not_run"]
+    states_not_run = receipt_section(acceptance_receipt, "states_not_run")
+    assert "authorization_denial_ui" in states_not_run
 
 
 def wrapper_home_environment(runtime_home: Path) -> dict[str, str]:
