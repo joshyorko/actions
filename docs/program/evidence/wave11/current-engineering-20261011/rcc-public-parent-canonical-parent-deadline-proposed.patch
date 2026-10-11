@@ -1,0 +1,24 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2736,6 +2736,21 @@
+ subreaper and drains exited children through `ECHILD` on successful completion.
+ Unexpected live descendants, failed ownership inspection, or incomplete cleanup
+ remain failures; cleanup escalation cannot silently preserve an earlier PASS.
++The worker acceptance receipt remains provisional until its external parent
++returns successfully. In the current parent, a watchdog timeout follows the
++generic exception path and returns failure without changing a receipt already
++written by the worker. A retained worker `PASS` therefore cannot establish a
++successful parent deadline or overall acceptance. Require both outcomes; do
++not infer failed Runtime cleanup from a parent timeout when the worker measured
++cleanup separately. Keep those measured cells and the original failed attempt.
++
++A parent-deadline receipt guard is a separate source change requiring controls
++for absent, malformed, failed and passing worker receipts plus atomic-write
++failure. It must mark overall acceptance failed using a fixed deadline reason,
++preserve worker measurements, and retain the primary timeout if receipt
++persistence also fails. Existing-root refusal remains authoritative. Public
++checkpoint recovery and service-free controls do not recover a missing private
++inspector/specification or qualify provider, metadata or native execution.
+ The wrapper cell accepts only terminal `completed` with an integer zero exit
+ code, excluding booleans, missing status and nonterminal states. Focused tests
+ exercise detached live writers and fast-exiting adopted children, but source

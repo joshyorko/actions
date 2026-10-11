@@ -1,0 +1,73 @@
+{
+  "schema": "actions.existing-workspace-lossless-scratch-recovery/v1",
+  "utc": "2026-10-11T05:56:41.284648+00:00",
+  "recovery_records": [
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/3d174634c64f152e",
+      "archive": "/tmp/actions-completed-scratch-recovery/3d174634c64f152e.tar.gz",
+      "archive_bytes": 248925896,
+      "archive_sha256": "5dd438501df39ee6edbbdc46bee00090a57e95341db2ae6ec79f9c304f7e8282",
+      "verified_members": 14847,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/7a04f45fb27be3b6",
+      "archive": "/tmp/actions-completed-scratch-recovery/7a04f45fb27be3b6.tar.gz",
+      "archive_bytes": 248923469,
+      "archive_sha256": "c4c1368fade7afb8da019ad2f294e355bb6de1d201ff91df1dd742f1d523cb6e",
+      "verified_members": 14847,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/8aa2e3957e764668",
+      "archive": "/tmp/actions-completed-scratch-recovery/8aa2e3957e764668.tar.gz",
+      "archive_bytes": 248938309,
+      "archive_sha256": "c4375dfbd04f52b19b96891afca22e03a733b2090c289aa3ddf51d197ac74fc7",
+      "verified_members": 14847,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/951775692f8bd2fb",
+      "archive": "/tmp/actions-completed-scratch-recovery/951775692f8bd2fb.tar.gz",
+      "archive_bytes": 248928930,
+      "archive_sha256": "261ab38dadcca5fa23dbff535a51f4b19cc5e5c9bccf8c3e02e0079cb3f17465",
+      "verified_members": 14880,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/af9dc5c3f054cf5b",
+      "archive": "/tmp/actions-completed-scratch-recovery/af9dc5c3f054cf5b.tar.gz",
+      "archive_bytes": 251827769,
+      "archive_sha256": "2e93344dffffe25654771c36dc285ae931036ce3e4a082abe544ed44e27b80f6",
+      "verified_members": 15309,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/cef17bfd48644013",
+      "archive": "/tmp/actions-completed-scratch-recovery/cef17bfd48644013.tar.gz",
+      "archive_bytes": 248928591,
+      "archive_sha256": "9c3113d1efd1fb5de01c1e630d72ebe02dda264192a69756baa4608ec1a5cf9e",
+      "verified_members": 14876,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    }
+  ],
+  "complete_private_inventory": {
+    "path": "/tmp/actions-completed-scratch-recovery/private-complete-inventory-and-recovery.json",
+    "bytes": 37387430,
+    "sha256": "154be7388533bfed541d9613f60095fe3cf7e12abbd681a9c1d7018469593e71"
+  },
+  "existing_mounts_only": true,
+  "replacement_infrastructure": false,
+  "source_receipt_native_consumer_cache_venv_paths_untouched": true,
+  "failed_282_namespace_563d_untouched": true,
+  "preconditions": "Exact completed recycle.now=True namespaces, no live process cwd/fd handles, immutable inventories rechecked before removal; originalbytes/modes/uidgid/symlinks/internalhardlink contents verified from private archives before expanded-copy removal.",
+  "workspace_free_bytes": 3623333888,
+  "resume": "Newlog replays required; ENOSPC gates remain failed. Original source/actual acceptance not relabeled.",
+  "first_archive_verification": "Initial regular-only check rejected TAR hardlink header; no original removed. Corrected verifier resolves internal hardlink data, hashes and bytecounts before allowing removal."
+}

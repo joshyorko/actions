@@ -1,0 +1,191 @@
+{
+  "status": "LOCAL_SOURCE_CHECKPOINT_PASS_REVIEW_PENDING_NOT_PUSHED",
+  "head": "1e9c462fc16534f1a6153ef666ae60a9ac9560d6",
+  "tree": "4d72bd113397900be41b720282736f6ab4999fb2",
+  "ordered_parents": [
+    "3ec9d0acbe30ad94d02e4c24fef2587127964495"
+  ],
+  "branch": "test/canvas-runtime-cache-isolation-20261010",
+  "working_tree_clean": true,
+  "changed_files_only": [
+    "action_server/tests/action_server_tests/mcp/test_canvas_runtime_admission.py",
+    "action_server/tests/action_server_tests/test_browser_origin_acceptance.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "history_preserved_normal_descendant": true,
+  "source_delta": {
+    "synthetic_Core_fixture": "Authenticated git show HEAD:<path> raw committed three samples; checkout CRLF controls for each member across baseline/member/version/ownership/prefix; installed worker probe and constants unchanged",
+    "PID_handoff": "Exclusive same-directory Node temp JSON actualPID +rename; bounded reader accepts only one positive nonboolinteger pid; original deadline/child/cleanup assertions unchanged",
+    "production_frontend_manifest_lock_template_helpers": "unchanged"
+  },
+  "gates": {
+    "Doctor": "passed prefixture current original source",
+    "Bootstrap": "REUSE_VERIFIED_19inputs_5envs_no_install",
+    "ToolkitTest": {
+      "passed": 69
+    },
+    "scoped_source": {
+      "passed": 46,
+      "integration_deselected": 2
+    },
+    "portable_original_RED_CONTROLLERS_GREEN": {
+      "passed": 18
+    },
+    "full_configured_invoke_test_not_integration": {
+      "passed": 1197,
+      "skipped": 12,
+      "warnings": 15,
+      "seconds": 135.09,
+      "workers": 2
+    },
+    "configured_invoke_lint": "PASS_Ruff302_format_Isort",
+    "configured_invoke_typecheck": {
+      "passed_source_files": 338
+    },
+    "regeneration": "eight workflow outputs and dependabot unchanged",
+    "git_diff_check": "PASS",
+    "markdown_lint": "not installed; configured task disclosed skip"
+  },
+  "RED_evidence": {
+    "CRLF": "15 expected digest failures before probe, immutable previous source",
+    "PID": "3 expected empty/incomplete/partial-publication failures after recovery, no browser launched",
+    "prePython_ENOSPC": "initial atomic-PID-handoff-RED.log retained; recovery owned by root",
+    "initial_formatter_failure": "E721 retained; corrected strict nonbool integer logic"
+  },
+  "unverified_gates": [
+    "new exact-head hosted Windows and Mac checks",
+    "real forced-hang browser cleanup for changed fixture",
+    "new actual combined Canvas execution at successor source",
+    "whole Core wheel authentication or cold registry acquisition"
+  ],
+  "historical_actual_V5": {
+    "source": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca",
+    "checkpoint_sha256": "28b2af71d1ac7b5dd0bbd7bf7518845a2c3d208c6700fd102914cffaf449dca3",
+    "independent_actual_review_sha256": "1848613d69513e20039cee94efe960a3609fff451a582c7a33552c8fa4df1108",
+    "scope_preserved_not_relabelled": true,
+    "new_actual_rerun": false
+  },
+  "producer_parity": "all268+5 current working bytes/Git modes exact92498; original1192 native inventory unchanged; helpers/browser unchanged",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Durable_learning": [
+      "Synthetic registry sample fixtures bind committed Git bytes while actual installed members stay raw-exact",
+      "Complete atomic PID publication precedes live process identity observations; pending parse is not cleanup failure",
+      "Retain completed raw output before postconditions; locked named-case stderr can contain DEBUG path, which is not livePID/natural shutdown proof"
+    ],
+    "Evidence": [
+      "15CRLF RED and15matching GREEN plus allpoisons",
+      "3PID RED and3matching GREEN, source12new readiness/publication controls",
+      "actual V4 missing output HOLD and immutable V5 actual narrow GO1848613d"
+    ],
+    "Stale_guidance_removed": "Replaced checkout-byte equality comment; clarified file existence/publication and outer-stderr-only/exception-fallback ambiguities. No stale actual failure upgraded.",
+    "Remaining_uncertainty": "Hosted Windows/Mac successor execution and real forced-hang gate pending; V5 proves only historical source3ec narrow scope; no wholewheel/cold registry/platform/epic closure",
+    "accepted_proposal_disposition": [
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v5-proposed.patch",
+        "sha256": "e84eb7659efef7f349231b1b8b5a80ef5c0d8a2f20e9dc2e1a9d59eea8c3e0b0",
+        "disposition": "integrated verbatim V5 output/reporter lesson or adapted PID lesson with verified atomic implementation"
+      },
+      {
+        "path": "/workspace/engineering/current-live-admission-20261011/canonical-PID-handoff-evidence-proposed.patch",
+        "sha256": "72ce742e46d6c764322f637968a47f9b0e0cc4619c885a45b7e79940b941ee66",
+        "disposition": "integrated verbatim V5 output/reporter lesson or adapted PID lesson with verified atomic implementation"
+      }
+    ]
+  },
+  "Upstream_disposition": "none",
+  "evidence_files": {
+    "full-configured-source.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/full-configured-source.log",
+      "sha256": "e0b0467f2b42a268a49a2cd60355129f11732e23c9fceca19c38d9d7bc4b2947",
+      "bytes": 308978
+    },
+    "ToolkitTest.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/ToolkitTest.log",
+      "sha256": "8e985784cad5147847e546687ec4be10c20e0fd23459fd25b1b8864c2898eea9",
+      "bytes": 14346
+    },
+    "Doctor.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/Doctor.log",
+      "sha256": "1fb8effed592671f256672274b2e15312eccd798cc25711e451e77f31229675d",
+      "bytes": 13486
+    },
+    "bootstrap-reuse-verified.json": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/bootstrap-reuse-verified.json",
+      "sha256": "1b36ec8a3d55d62d383f42d8efce62d85a68e58cf63cb76bbbef4d4d4e548e82",
+      "bytes": 2870
+    },
+    "atomic-PID-handoff-RED.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/atomic-PID-handoff-RED.log",
+      "sha256": "e2546944b57f8fe4437e62db6ad9165d6d959237650b38a0422c92065c2965d9",
+      "bytes": 4129
+    },
+    "portable-CRLF-RED.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/portable-CRLF-RED.log",
+      "sha256": "1d43d7497ccd2db95fec44fff3b3d49b111499786cd52adbddfc1f8a9ca14f37",
+      "bytes": 7926
+    },
+    "source-fixtures-GREEN.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/source-fixtures-GREEN.log",
+      "sha256": "86be0fd6b0905ad41a17c6dd6483c7bff6ccf891d64c3107f594abc44c0b476d",
+      "bytes": 3940
+    },
+    "test_pid_handoff_current_RED.py": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/test_pid_handoff_current_RED.py",
+      "sha256": "b2e4b97527777ba93d660a74d128332503017018b27a66b3ed8ea6a25ed8d12f",
+      "bytes": 2421
+    },
+    "test_committed_fixture_crlf_RED.py": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/test_committed_fixture_crlf_RED.py",
+      "sha256": "e0f21fc21c00df61538347d927667f8ea002ee9f4ce93b604b26f8d10a57bf55",
+      "bytes": 1571
+    },
+    "configured-format-static.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/configured-format-static.log",
+      "sha256": "9a5fd195f37587ce8b6e120384e70232ebfa48fe617c6bfcee2cd601b6d885b5",
+      "bytes": 4953
+    },
+    "source-preservation-proof.json": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/source-preservation-proof.json",
+      "sha256": "8b40ad31b1379412cf3e0327c2214180ff9b71af53cbe5ed2e853de0108aee98",
+      "bytes": 49815
+    },
+    "portable-actual-boundaries-GREEN-regeneration.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/portable-actual-boundaries-GREEN-regeneration.log",
+      "sha256": "55c681e2c409ef6769cda2353e4150f1623fb21efa58f9ff98a9ea27ad0bbf79",
+      "bytes": 9150
+    },
+    "configured-format-static-corrected.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/configured-format-static-corrected.log",
+      "sha256": "4ddfdbd18e55963219838579d493a4f680347aa7e7eb3e9340f23806009b090e",
+      "bytes": 6052
+    },
+    "retained-native-helper-browser-verification.json": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/retained-native-helper-browser-verification.json",
+      "sha256": "db4f27e5937fe4b8a5084665d9ec72fc00caba19311bcd3ae0581152a571e460",
+      "bytes": 1029
+    },
+    "atomic-PID-handoff-RED-after-recovery.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/atomic-PID-handoff-RED-after-recovery.log",
+      "sha256": "25a7829c5fd9f6b63ae2a90f95fdc39462211746e3ce899009b8005dc9dfa75c",
+      "bytes": 17829
+    },
+    "portable-CRLF-RED-corrected.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/portable-CRLF-RED-corrected.log",
+      "sha256": "186c5f9953cc5f36e6e891dd27bd6a3885134d8db57f08ed1bd5bab658530096",
+      "bytes": 63306
+    },
+    "canonical-fixture-and-output-preservation.patch": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/canonical-fixture-and-output-preservation.patch",
+      "sha256": "58c62090aa0f290f75f96aa17e6926aa5430ce6230378375fd2b731df89b0793",
+      "bytes": 3937
+    },
+    "verify-source-preservation.py": {
+      "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/verify-source-preservation.py",
+      "sha256": "bf7bf618375ee1864a8f73961099ba76dd7010ccdf57677cc50577129afeb597",
+      "bytes": 4238
+    }
+  },
+  "capacity_available_bytes": 2322874368
+}

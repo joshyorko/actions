@@ -1,0 +1,13 @@
+{
+  "phase": "SERVICE_FREE_PINNED_PARENT_AST_CONTROL_ONLY",
+  "head": "44afd960ad01f83eeef7773b334ccde3683c022d",
+  "verifier_sha256": "05bd886e452515509c4e5fd81cff0be6c512e0659665262ab7d20e5c5dd91ba9",
+  "outcome": "CONFIRMED_EXISTING_PARENT_TIMEOUT_RETURNS_FAILURE_WITH_UNCHANGED_EARLIER_WORKER_PASS_RECEIPT",
+  "parent_returncode": 1,
+  "worker_receipt_acceptance_status": "PASS",
+  "worker_measured_cleanup_status_preserved": "PASS",
+  "source_timer_unchanged": 2465,
+  "spawned_processes_services_RCC_Runtime_provider_metadata": false,
+  "real_gate_qualification": false,
+  "purpose": "Ready existing parent/receipt control seam; no private specification/policy reconstruction"
+}

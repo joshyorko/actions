@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "test": "test_staged_bytes_are_rechecked_and_mutation_cleans_owned_tree",
+  "every_outer_statement_and_assertion_exact_original_AST": true,
+  "only_original_function_inner_read_callback_changed": true,
+  "scope": "AST inspector; package tests independently gate behavior"
+}

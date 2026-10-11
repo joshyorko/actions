@@ -2233,6 +2233,22 @@ starting its acceptance work. Its dedicated supervisor adopts descendants as a
 subreaper and drains exited children through `ECHILD` on successful completion.
 Unexpected live descendants, failed ownership inspection, or incomplete cleanup
 remain failures; cleanup escalation cannot silently preserve an earlier PASS.
+The worker acceptance receipt remains provisional until its external parent
+returns successfully. In the retained public parent at `44afd960`, a timeout follows
+the generic exception path and returns failure without changing a receipt already
+written by the worker. A retained worker `PASS` therefore cannot establish a
+successful parent deadline or overall acceptance. Require both outcomes; do
+not infer failed Runtime cleanup from a parent timeout when the worker measured
+cleanup separately. Keep those measured cells and the original failed attempt.
+
+A parent-deadline receipt guard is a separate source change requiring controls
+for absent, malformed, failed and passing worker receipts plus atomic-write
+failure. It must mark overall acceptance failed using a fixed deadline reason,
+preserve worker measurements and original worker acceptance status, and retain
+the primary timeout if receipt persistence also fails. Existing-root refusal
+remains authoritative. Public checkpoint recovery and service-free controls do
+not recover a missing private inspector/specification or qualify provider,
+metadata or native execution.
 The wrapper cell accepts only terminal `completed` with an integer zero exit
 code, excluding booleans, missing status and nonterminal states. Focused tests
 exercise detached live writers and fast-exiting adopted children, but source
@@ -3000,8 +3016,12 @@ cleanup results separately. Missing report or launch evidence keeps the combined
 browser gate unaccepted even when the command returned zero and persisted tool
 Runs succeeded. Search retained command, worker and supervisor evidence for an
 authoritative copy; a last-run marker cannot reconstruct the missing report.
-Any later reporter-channel parser must bind the locked schema and measured
-launch path; a DEBUG path does not establish live PID identity.
+The qualified external reader can admit worker stderr from the validated named
+case's `result.stderr`, as well as outer stderr. Decode only the locked reporter's
+recognized text or base64 chunks after the exact-case/result gate succeeds;
+unknown fields, another case or the wrong measured launch path remain failures.
+Parser qualification does not recover missing earlier bytes or establish actual
+browser acceptance. A DEBUG path does not establish live PID identity.
 
 After a target advances, a PR payload can retain its old base SHA and synthetic
 merge commit. Authenticate their ordered parents and complete tree against the
@@ -3022,3 +3042,60 @@ whose `Name` and `Version` match the expected distribution and checked-out versi
 reported by pinned Poetry. Filename selection alone does not admit the archive.
 Keep member identity separate from the whole-wheel digest, which binds bytes but
 does not prove installation or a provider-backed run.
+
+The RCC three-case summary authenticates nine named source files under its
+recorded candidate commit and tree. Compare those hashes to the immutable
+candidate, not the control checkout. This sample does not replace the complete
+resolved source union or full native producer inventory; changed production
+inputs still require new artifact qualification. Keep the full suite's tested
+merge identity separate from source and control even when their trees match.
+Older control checks and raw receipts naming an older candidate do not qualify
+a later target union.
+
+The private Run output resolver locks its Workspace, checks the actor's grant
+and acquires the provider reader within one transaction, then yields the reader
+after the transaction exits. Revocation denies future acquisitions; reads on an
+already authorized reader do not recheck the grant. The existing denial test
+uses a failing provider-open sentinel for a denied principal, wrong Workspace
+and revoked grant. This proves denial before reader acquisition, not active-stream
+revocation, public authenticated transport or HTTP Range/HEAD acceptance.
+
+Public-wheel sample controls require accepted member bytes. A checkout can
+convert committed LF to CRLF, so build the synthetic fixture from the recorded
+Git blob or authenticated wheel member and verify its fixed digest. Establish a
+valid baseline before each member/version/ownership/prefix poison. Keep actual
+installed-worker digest checks on raw bytes; fixture setup failures exercise none
+of those rejection predicates.
+
+Mutation rejection controls must establish that injection ran at the intended
+read stage. Record the changed bytes and descriptor identity separately from the
+expected exception. A post-raises assertion supplies no observation when the
+raises-block fails. Returning the old buffer before a same-sized mutation tests
+metadata detection, not changed-byte hashing; record an explicit metadata change
+for that control and test re-read byte rejection independently of timestamps.
+The corrected staging regression identifies the destination descriptor by device
+and inode and poisons it before the underlying read. Its valid baseline and
+mutation case retain constant timestamp observations. The separate after-read
+case forces and measures descriptor mtime advancement before requiring rejection
+and owned-tree cleanup. Keep exclusive destination-writer and non-atomic snapshot
+limits; these controls do not establish a universal concurrent-writer guarantee.
+An incomplete hosted failure record cannot establish its timestamp cause or a
+production bypass.
+
+A PID-file handoff is complete only after valid, nonempty positive-PID contents
+are published and the identified process is verified. File existence alone can
+expose an empty file before its writer finishes. Bound observation polling and
+preserve parsing failures separately from unreached timeout and cleanup
+assertions. Cleanup code is not an observed cleanup receipt; missing returned
+census fields remain unavailable.
+
+When workspace capacity is exhausted, preserve completed scratch before removing
+its expanded copy. Limit recovery to named invocation namespaces with the
+recorded completed-recycle marker and no observed live process handles. Archive
+on an existing mount, verify every recorded member's bytes, mode, owner and
+symlink target, and resolve internal TAR hardlinks before rechecking the original
+inventory and removing only that namespace. A hardlink header is not missing
+regular-file data. Keep private archives and complete inventories outside Git;
+retain their hashes and scoped verification receipts. State unrecorded metadata
+and historical observation limits. Recovered capacity does not turn an ENOSPC
+gate green; rerun its required checks with new logs.

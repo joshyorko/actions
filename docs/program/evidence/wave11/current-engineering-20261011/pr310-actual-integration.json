@@ -1,0 +1,20 @@
+{
+  "schema": "actions-pr310-normal-integration-readback/v1",
+  "sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "tree": "17c1afa7fbaa6ae817830d85226b41f67dd8b820",
+  "parents": [
+    "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+    "dfca3f8e63465595acff421f37f34d2a9d0a1b39"
+  ],
+  "live_target_ref": "refs/heads/integration/community-release-20261008",
+  "live_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "message": "Merge pull request #310 from joshyorko/test/workitems-ui-errors-20261010\n\ntest(work-items): cover packaged browser session denial and recovery",
+  "merge_method": "normal expected-head merge; no policy bypass/force/rewrite",
+  "source_and_CI_GO": {
+    "path": "/workspace/engineering/current-live-admission-20261011/310-current-final-scoped-merge-GO.json",
+    "sha256": "27f4bd75da3a4ec30cf5e033c003e73994d108f4402ad2f5af659605542c7191"
+  },
+  "tested_synthetic": "d07c0d1d322249c60760735ed94715798faea4dc",
+  "actual_tree_equals_independently_reviewed_tested_tree": true,
+  "scope": "Narrow integration only. Full208/backend/browser/private/OAuth/release gates retained. OtherPR old1c75 tested controls cannot qualify new774 target without exactreconciliation."
+}

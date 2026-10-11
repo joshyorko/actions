@@ -1,0 +1,67 @@
+{
+  "verdict": "HOLD_EXACT305_HOSTED_RUNTIME_MAC_INTEGRATION; GO_BOUNDED_PID_HANDOFF_FAILURE_CENSUS_ONLY",
+  "head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+  "tested_merge": "8e9436faf78eff31aa5f60699db01a51815bfc84",
+  "tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca",
+  "ordered_parents": [
+    "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+    "3ec9d0acbe30ad94d02e4c24fef2587127964495"
+  ],
+  "run": 38114004651,
+  "job": 114395155613,
+  "failed_step": "Test (integration)",
+  "failed_node": "action_server_tests/test_browser_origin_acceptance.py::test_browser_harness_deadline_reaps_owned_descendant",
+  "exception": "ValueError: invalid literal for int() with base10: ''",
+  "location": "test_browser_origin_acceptance.py:72",
+  "counts": {
+    "portable": {
+      "pass": 1094,
+      "skip": 88,
+      "warnings": 15,
+      "seconds": 157.48
+    },
+    "integration": {
+      "fail": 1,
+      "pass": 131,
+      "skip": 17,
+      "deselect": 1185,
+      "seconds": 756.16
+    },
+    "subsequent_configured_typecheck": "PASS339files"
+  },
+  "observed_stage": "Forced-browser-hang deadline regression polls PID-file existence, then int(read_text()) observes empty contents. No parsedNodePID or Chromium descendant observation was retained before failure.",
+  "source_order": "JSawaits chromium.launch then writeFileSync publishes Node PID and forces hang. Python15s owner runs concurrently, reader10s poll expects live Chromium, then future.result25s expectedTimeoutExpired and final3s descendant assertions. Reader failed before those expected assertions.",
+  "source_unchanged_live_target_and_3ec": {
+    "action_server/tests/action_server_tests/test_browser_origin_acceptance.py": {
+      "mode_blob": "100644 blob 5006634def56b0977ca3318540db603576e9d8cd\taction_server/tests/action_server_tests/test_browser_origin_acceptance.py",
+      "sha256": "89125fd628e5e2e8c7492c86ff236f1c84087a6402ed8c31fce998c93599663c"
+    },
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "mode_blob": "100644 blob 4f155d2f63e86b38697c12557dd8a6550b9d36a3\taction_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    }
+  },
+  "classification": "Local integration test handoff failure; not Runtime FIRST startup, reload/catalog semantics or combined CanvasV5 product testcase",
+  "cause_gap": "Empty string directly observed. Non-atomic creation/write exposure is source-supported mechanism; no exact writer/read scheduling, file byte/pid identity or cause of this invocation measured. No browser drift or ownership implementation failure inferred.",
+  "cleanup": "UNKNOWN: ThreadPool context exits and helper has source timeout/tree cleanup path, but future result and final descendant assertions are unreached and no actual returned cleanup/census receipt emitted. No success inferred from sourcefinally, job completion or other passing tests.",
+  "actual_product_scope": "Root V5 native92498/harness3ec product measurement remains separate and pending independentreadback; hostedCI admission stillHOLD. PreviousV4failure not relabeled.",
+  "raw_original_private_log": {
+    "path": "/workspace/engineering/current-live-admission-20261011/305-mac-3ec-original-private.log",
+    "bytes": 1092546,
+    "sha256": "e749f266eb62cf03e24b9068496ba088664cb58330b3fe25a8d4962fd06662ab"
+  },
+  "scope": "One exact original terminal acquisition; no rerun/build/source edit/process control or waiver",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md exact additive PIDhandoff paragraph",
+    "Exact delta": {
+      "path": "/workspace/engineering/current-live-admission-20261011/canonical-PID-handoff-evidence-proposed.patch",
+      "bytes": 1000,
+      "sha256": "72ce742e46d6c764322f637968a47f9b0e0cc4619c885a45b7e79940b941ee66"
+    },
+    "Durable learning captured": "Existence is not completedPIDpublication; readerparse failure precedes cleanupassertions and cleanuphelper code is not actual receipt",
+    "Evidence": "ExactMac log emptystring/site72; unchanged JSwriteFileSync/source reader and processowner; expectedtimeout/finalassertions not reached",
+    "Stale or ambiguous guidance removed": "ExistingPIDfile proves valididentity or completed browser observation; source timeoutcleanup proves actual cleanuppass; differentactualV5 admits failedCI",
+    "Remaining uncertainty": "Writer/reader scheduling and exactPID/livebrowser/cleanup observations; freshcorrected currentunion gates; fullrelease/native/private contracts"
+  },
+  "Upstream disposition": "none; no maintained upstream defect established"
+}

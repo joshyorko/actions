@@ -1,0 +1,15 @@
+{
+  "native_original_1192_bytes_modes_links_exact": true,
+  "inventory": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json",
+  "inventory_sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf",
+  "original_native_producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "frozen_helpers_0444_unchanged": {
+    "test_canvas_query_template.py": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e",
+    "verify_dakota_rcc_acceptance.py": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+    "native_startup_diagnostics.py": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c"
+  },
+  "browser": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+  "browser_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+  "historical_actual_V5_source": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+  "no_actual_rerun": true
+}

@@ -1,0 +1,173 @@
+{
+  "status": "GO_NARROW_ACTUAL_V5_CURRENT3EC_NATIVE92498",
+  "checkpoint": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-passed-checkpoint-corrected.json",
+    "size": 33914,
+    "sha256": "28b2af71d1ac7b5dd0bbd7bf7518845a2c3d208c6700fd102914cffaf449dca3"
+  },
+  "runner": {
+    "bytes": 35497,
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v5.py",
+    "sha256": "09cdc6b19f5d3d9cc94fadca23373108868521e0378d33960146b1a8522e88ad"
+  },
+  "proposal": {
+    "bytes": 28665,
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v5.json",
+    "sha256": "f915a178adfa23833fe7a2e047e9c0b98f995fdd4b95730e1bb522e5f48fe7ee"
+  },
+  "source": {
+    "head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "native_producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "producer_entries": 268,
+    "selected_entries": 5,
+    "tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca"
+  },
+  "review_script": {
+    "path": "/workspace/engineering/pr305-v5-independent-runner-review/review_actual_v5.py",
+    "size": 13762,
+    "sha256": "bf5d0382ac19e95a69dbeea7510fa1b6a7295038298fbbf8e0ed84dde08e7c02"
+  },
+  "counts": {
+    "pytest_pass": 1,
+    "pytest_skip_failure_error": 0,
+    "pytest_suite_seconds": 46.049,
+    "browser_pass": 1,
+    "browser_skip_retry_error": 0,
+    "browser_report_duration_ms": 6364.833,
+    "owned_commands_returned0": 3,
+    "declared_tool_Runs": 5,
+    "unique_declared_tool_Run_ids": 5,
+    "python_client_observations": 3,
+    "browser_tool_observations": 2,
+    "separate_resource_Runs": 2,
+    "all_measured_Run_status_code": 2
+  },
+  "public_Core": {
+    "version": "1.0.3",
+    "three_modules": {
+      "actions": {
+        "sha256": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+        "inside_worker_prefix": true,
+        "owned_by_actions_core_RECORD": true,
+        "RECORD_sha256_matches": true
+      },
+      "actions.mcp": {
+        "sha256": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+        "inside_worker_prefix": true,
+        "owned_by_actions_core_RECORD": true,
+        "RECORD_sha256_matches": true
+      },
+      "actions.mcp._metadata": {
+        "sha256": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c",
+        "inside_worker_prefix": true,
+        "owned_by_actions_core_RECORD": true,
+        "RECORD_sha256_matches": true
+      }
+    },
+    "installed_METADATA_sha256": "f50156dd4869504ee4e73f536641e5b69c8f7c4553d0b07f34dc177abcc4789a",
+    "installed_RECORD_sha256": "6a66f26c4ccd30d4fddab8f3e25dbea3a35c9794eab9b102f9e9b218642c4a9c",
+    "inside_attempt_worker_prefix": true,
+    "whole_wheel_authenticated": false,
+    "cold_registry_acquisition": false
+  },
+  "executed_browser": {
+    "exact_case": "official bridge renders a real Runtime Action result",
+    "file": "host-harness.spec.ts",
+    "report": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-3-stdout.log",
+      "size": 11643,
+      "sha256": "6d85a8593dfffa4df876442b02c2b74235cb32fe2845d8223bbbd176ea1d6d82"
+    },
+    "actual_launch_path_channel": "named_case_result_stderr",
+    "measured_browser_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "launch_path_admitted": true,
+    "live_browser_PID_identity": "NOT_PROVEN"
+  },
+  "cleanup": {
+    "Runtime_flags_all3_true_and_lists_all4_empty": true,
+    "finite_observed_descendants": 0,
+    "final_sampler": {
+      "exception": null,
+      "outcome": "ready",
+      "sampler_alive": false,
+      "sampler_cancelled": true
+    },
+    "outer_returned_worker_code": 0,
+    "separate_outer_reaped_exited_descendants": 6,
+    "browser_short_private_temp_removed": true,
+    "natural_exit": "NOT_PROVEN; forced cleanup",
+    "universal_adoption": "NOT_PROVEN"
+  },
+  "postconditions": {
+    "raw_refs_verified": 18,
+    "frozen_refs_verified": 50,
+    "source273_frozen_Git_and_pre_successor_working_parity": true,
+    "initial_source_binding": {
+      "path": "/workspace/engineering/pr305-v5-independent-runner-review/actual-v5-initial-source-binding.json",
+      "size": 497,
+      "sha256": "9e792768b64773ec783ba7b39005d021e44094b9e4f327a2c9ac320f0b83d6b8"
+    },
+    "working273_binding": {
+      "path": "/workspace/engineering/pr305-v5-independent-runner-review/actual-v5-working273-binding.json",
+      "size": 46388,
+      "sha256": "cdc42448cf5862347d3559ac80c2c889f5befd9e89c761929b95b91d37e94e3a"
+    },
+    "original_and_owned_native1192_exact": true,
+    "browser_helpers_assets_unchanged": true,
+    "prepared_frontend_link_exact": true,
+    "historical_V2_V3_V4_preserved": true,
+    "summary_correction_only": [
+      "bridge",
+      "superseded_summary_checkpoint"
+    ]
+  },
+  "private_DB_hash_size_only": {
+    "sha256": "0a982b0f2cd9b47eae015837af2a2077891ab4d7345313ab4eba70f2d5c5e6c7",
+    "size": 1114112
+  },
+  "limits": [
+    "Exact historical3ec/native92498 combined Linux public-sample/browser/five-tool-Run gate only; no successor305/302 source relabel",
+    "Windows five-fixture b915 failure remains separate; no PR305 merge qualification",
+    "Fixture artifact status only; no real artifact/ChatGPT/host/OAuth/release/full private134 qualification",
+    "Three installed Core members and RECORD ownership only; no whole wheel or cold registry claim",
+    "Measured launch path/finite forced cleanup only; no live browser PID, natural exit or universal adoption claim",
+    "Original V4 report channel UNKNOWN and raw unavailable; later V5 PASS does not rewrite earlier failures"
+  ],
+  "no_actual_execution_retry_or_source_edit_by_reviewer": true,
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md exact external canonical-actual-v5-proposed.patch; source unchanged by reviewer",
+    "Durable learning captured": "Retain returned raw streams before postguards; measured launch belongs to exact validated named-case result.stderr in this locked reporter. Separate five declared tool Runs from two resource Runs and Runtime cleanup from outer reaping.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr305-v5-independent-runner-review/canonical-actual-v5-proposed.patch",
+        "size": 2010,
+        "sha256": "e84eb7659efef7f349231b1b8b5a80ef5c0d8a2f20e9dc2e1a9d59eea8c3e0b0"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-3-stdout.log",
+        "size": 11643,
+        "sha256": "6d85a8593dfffa4df876442b02c2b74235cb32fe2845d8223bbbd176ea1d6d82"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/runtime-cleanup.json",
+        "size": 699,
+        "sha256": "118af76bb047bc1c3b501f7c3e2493aa8a95248259503ea64ec37aa5cdde85a2"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/outer-cleanup.json",
+        "size": 518,
+        "sha256": "658e58dbf4f5668c826b572cd2789a186f7a391bf66c2a33b4a89c8439a26fb9"
+      }
+    ],
+    "Stale or ambiguous guidance removed": "All DEBUG is outer stderr; command0 or last-run marker authenticates case; later PASS repairs earlier lost evidence; five tools means totalDBrows5",
+    "Remaining uncertainty": "Windows fixture failure; whole-wheel/cold-registry, future source/native producers, real artifact/OAuth/ChatGPT/private134 remain unqualified; original V4 channel remains UNKNOWN",
+    "Proposal disposition": "Exact accepted e84/ce3 guide patch retained as proposed for root integration; source3ec already integrates collected-module/tool-vs-resource/finite cleanup lessons"
+  },
+  "Upstream disposition": "none",
+  "read_only_review_gateway": {
+    "path": "/workspace/engineering/pr305-v5-independent-runner-review/actual-review.log",
+    "sha256": "65f1a76c2bb69c8fdb457d95ac794e28cf148807231bc1752692ab3044846616",
+    "exit_code": 0,
+    "product_execution": false
+  }
+}

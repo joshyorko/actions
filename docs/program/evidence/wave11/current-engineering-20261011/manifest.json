@@ -1143,5 +1143,315 @@
     "source": "/workspace/engineering/current-309-308-verified-push-readback.json",
     "bytes": 873,
     "sha256": "1fc6cd33b0f1a834eebc355bd39bf1ce94dcced14a05e78fcffc22a17223bd4c"
+  },
+  "handoff229-independent-exact-batch-review.json": {
+    "source": "/workspace/engineering/checkpoint-229-independent-review/independent-exact-batch-review.json",
+    "bytes": 14236,
+    "sha256": "58d32dcdc1a92e90a30023ff546de48429cf9d795764a4343c10c90577531804"
+  },
+  "handoff229-verified-manifest-source-bindings.json": {
+    "source": "/workspace/engineering/checkpoint-229-independent-review/verified-manifest-source-bindings.json",
+    "bytes": 73303,
+    "sha256": "38c8a723441a22333ca674e3d6c3d54efbec28f3d2d5bc0367a368420b3ecd35"
+  },
+  "handoff229-independent-committed-remote-readback.json": {
+    "source": "/workspace/engineering/checkpoint-229-independent-review/independent-committed-remote-readback.json",
+    "bytes": 2303,
+    "sha256": "cc1ea7704d61c903c8aa9abe2fe92c8bf789ae571dd6214a83746278e20573ce"
+  },
+  "handoff229-canonical-exact-followup-proposed.patch": {
+    "source": "/workspace/engineering/checkpoint-229-independent-review/canonical-exact-followup-proposed.patch",
+    "bytes": 1926,
+    "sha256": "4cd7a4227faef0159698e379f6f1326be75d12e4c06f131c389869ca22db51dd"
+  },
+  "pr299-actual311-refresh-frozen-source-receipt.json": {
+    "source": "/workspace/engineering/pr299-actual311-refresh/frozen-source-receipt.json",
+    "bytes": 15059,
+    "sha256": "9fd78d3a30c666e6da12e9aef3bc870c8cb654d3f43d1d1d02d92db405729829"
+  },
+  "pr299-actual311-refresh-source-union-proof.json": {
+    "source": "/workspace/engineering/pr299-actual311-refresh/source-union-proof.json",
+    "bytes": 90872,
+    "sha256": "3b6a9d14f50b23d785eed89f176fdddca1f8e8edd2b0048aca0ea0a646081b2a"
+  },
+  "pr299-actual311-refresh-bootstrap-reuse.json": {
+    "source": "/workspace/engineering/pr299-actual311-refresh/bootstrap-reuse.json",
+    "bytes": 2734,
+    "sha256": "e4bd2d1144a002eeebbf5fdad0c72166a0fa2d41d1adeec41319a24351647ee4"
+  },
+  "pr299-actual311-refresh-generator-roundtrip.json": {
+    "source": "/workspace/engineering/pr299-actual311-refresh/generator-roundtrip.json",
+    "bytes": 6211,
+    "sha256": "d5a8e400e35af2c927077c326088be4e18d47976ac544254ba68c3590ac45dc6"
+  },
+  "pr299-actual311-refresh-canonical-actual-delta.patch": {
+    "source": "/workspace/engineering/pr299-actual311-refresh/canonical-actual-delta.patch",
+    "bytes": 1203,
+    "sha256": "b2331e6946e7c276dcf71d1ce98292c8ef4783931628f2c665e752357a26a4a3"
+  },
+  "pr299-actual311-independent-independent-frozen-source-review.json": {
+    "source": "/workspace/engineering/pr299-actual311-independent-review/independent-frozen-source-review.json",
+    "bytes": 10865,
+    "sha256": "0f304bfebd49208c7bd5fce0244b9951a5d0d68dac2af449435873462adff97a"
+  },
+  "pr299-actual311-independent-canonical-integrated-actual311-delta.patch": {
+    "source": "/workspace/engineering/pr299-actual311-independent-review/canonical-integrated-actual311-delta.patch",
+    "bytes": 1203,
+    "sha256": "b2331e6946e7c276dcf71d1ce98292c8ef4783931628f2c665e752357a26a4a3"
+  },
+  "pr305-actual-v5-passed-checkpoint.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-passed-checkpoint.json",
+    "bytes": 33337,
+    "sha256": "b475110024aceae1e7e3bf9a9b808793c565afbf2026597c905f3ab6172a83a0"
+  },
+  "pr305-actual-v5-passed-checkpoint-corrected.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-passed-checkpoint-corrected.json",
+    "bytes": 33914,
+    "sha256": "28b2af71d1ac7b5dd0bbd7bf7518845a2c3d208c6700fd102914cffaf449dca3"
+  },
+  "pr305-actual-v5-prelaunch-reverify.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-prelaunch-reverify.json",
+    "bytes": 597,
+    "sha256": "1fe6dc81bc7bcfe9f753a6e4ae5239e28825083f08e30f33b3779c568d7bd6f0"
+  },
+  "pr305-v5-independent-independent-actual-v5-review.json": {
+    "source": "/workspace/engineering/pr305-v5-independent-runner-review/independent-actual-v5-review.json",
+    "bytes": 8129,
+    "sha256": "1848613d69513e20039cee94efe960a3609fff451a582c7a33552c8fa4df1108"
+  },
+  "pr305-v5-independent-actual-v5-initial-source-binding.json": {
+    "source": "/workspace/engineering/pr305-v5-independent-runner-review/actual-v5-initial-source-binding.json",
+    "bytes": 497,
+    "sha256": "9e792768b64773ec783ba7b39005d021e44094b9e4f327a2c9ac320f0b83d6b8"
+  },
+  "pr305-v5-independent-actual-v5-working273-binding.json": {
+    "source": "/workspace/engineering/pr305-v5-independent-runner-review/actual-v5-working273-binding.json",
+    "bytes": 46388,
+    "sha256": "cdc42448cf5862347d3559ac80c2c889f5befd9e89c761929b95b91d37e94e3a"
+  },
+  "pr305-v5-independent-canonical-actual-v5-proposed.patch": {
+    "source": "/workspace/engineering/pr305-v5-independent-runner-review/canonical-actual-v5-proposed.patch",
+    "bytes": 2010,
+    "sha256": "e84eb7659efef7f349231b1b8b5a80ef5c0d8a2f20e9dc2e1a9d59eea8c3e0b0"
+  },
+  "current-hosted-failure-282-a0-test-subject-authenticated.json": {
+    "source": "/workspace/engineering/current-live-admission-20261011/282-a0-test-subject-authenticated.json",
+    "bytes": 225,
+    "sha256": "74c9f68f92d04a3c566d7a0227f42ff726791c4d0bba908cb9546db7702a088a"
+  },
+  "current-hosted-failure-282-current-Linux-Toolkit-independent-failure-review.json": {
+    "source": "/workspace/engineering/current-live-admission-20261011/282-current-Linux-Toolkit-independent-failure-review.json",
+    "bytes": 4591,
+    "sha256": "9aca002b0f9644884e3cbb7cee3efbeee081dea8aafde3a39eab051f7671d64a"
+  },
+  "current-hosted-failure-305-current-Windows-independent-failure-review.json": {
+    "source": "/workspace/engineering/current-live-admission-20261011/305-current-Windows-independent-failure-review.json",
+    "bytes": 4531,
+    "sha256": "b9159b6068ca844309c61a31870204d3ba4b92d9a0a568f59abef68f2bd6b56c"
+  },
+  "current-hosted-failure-305-current-Mac-independent-failure-review.json": {
+    "source": "/workspace/engineering/current-live-admission-20261011/305-current-Mac-independent-failure-review.json",
+    "bytes": 4673,
+    "sha256": "20a26b875f8a9193410a5beebf399453b98bcb582305091b4f53a96e31c56bc0"
+  },
+  "current-hosted-failure-current-310-306-305-independent-admission-HOLD.json": {
+    "source": "/workspace/engineering/current-live-admission-20261011/current-310-306-305-independent-admission-HOLD.json",
+    "bytes": 29784,
+    "sha256": "bb395d6dec9a7f05d584d7fe49c0ad2b65d28f62a7cac008f1077f0859729ed5"
+  },
+  "current-hosted-failure-current-authenticated-safe-inventory.json": {
+    "source": "/workspace/engineering/current-live-admission-20261011/current-authenticated-safe-inventory.json",
+    "bytes": 32314,
+    "sha256": "b900a9e2dcc39acb5e35a050e68d5f622a075c0d58495d753c2591fa69e14891"
+  },
+  "current-hosted-failure-canonical-fixture-and-mutation-evidence-proposed.patch": {
+    "source": "/workspace/engineering/current-live-admission-20261011/canonical-fixture-and-mutation-evidence-proposed.patch",
+    "bytes": 2019,
+    "sha256": "4f29ae54111aeadbf5c99443f2cdb51ab5d875024bd0c0427c0e7e846317c62d"
+  },
+  "current-hosted-failure-canonical-PID-handoff-evidence-proposed.patch": {
+    "source": "/workspace/engineering/current-live-admission-20261011/canonical-PID-handoff-evidence-proposed.patch",
+    "bytes": 1000,
+    "sha256": "72ce742e46d6c764322f637968a47f9b0e0cc4619c885a45b7e79940b941ee66"
+  },
+  "rcc-public-parent-public-parent-timeout-control.json": {
+    "source": "/workspace/engineering/rcc-public-checkpoint-preparation/public-parent-timeout-control.json",
+    "bytes": 685,
+    "sha256": "23253e1b01460a3bcf12407184b3af19266cbd595c7dfb38d99387e8c18ef409"
+  },
+  "rcc-public-parent-public-parent-deadline-source-proposal.json": {
+    "source": "/workspace/engineering/rcc-public-checkpoint-preparation/public-parent-deadline-source-proposal.json",
+    "bytes": 16627,
+    "sha256": "fe101551972a404dc6d13e7590b5a302bb010d4d775120731d59f48b4a30869a"
+  },
+  "rcc-public-parent-public-parent-deadline-source-proposal-v2.json": {
+    "source": "/workspace/engineering/rcc-public-checkpoint-preparation/public-parent-deadline-source-proposal-v2.json",
+    "bytes": 17620,
+    "sha256": "ccec587871845e8ee9fbf60a07fb606a30e700e7dfe664d3232a323c488b5fc4"
+  },
+  "rcc-public-parent-canonical-parent-deadline-proposed.patch": {
+    "source": "/workspace/engineering/rcc-public-checkpoint-preparation/canonical-parent-deadline-proposed.patch",
+    "bytes": 1680,
+    "sha256": "7933b5f7241227a022c3600e1efb1fcf2747f12a0380f60dab381beaac1e3da4"
+  },
+  "rcc-public-parent-canonical-parent-deadline-proposed-v2.patch": {
+    "source": "/workspace/engineering/rcc-public-checkpoint-preparation/canonical-parent-deadline-proposed-v2.patch",
+    "bytes": 1732,
+    "sha256": "1581a99017e37314d1c6c5737b51616fa458f25e833356fa7c89e21606aab9e0"
+  },
+  "rcc-public-parent-independent-independent-source-task-proposal-review-v2.json": {
+    "source": "/tmp/actions-rcc-parent-deadline-independent-review/independent-source-task-proposal-review-v2.json",
+    "bytes": 13281,
+    "sha256": "246ec9092193a7597e1bc374442703f64f8541b7b2ecc161b0769e07aeea4fc7"
+  },
+  "rcc-public-parent-independent-canonical-parent-deadline-proposed-v2.patch": {
+    "source": "/tmp/actions-rcc-parent-deadline-independent-review/canonical-parent-deadline-proposed-v2.patch",
+    "bytes": 1732,
+    "sha256": "1581a99017e37314d1c6c5737b51616fa458f25e833356fa7c89e21606aab9e0"
+  },
+  "existing-workspace-scratch-capacity-recovery.json": {
+    "source": "/workspace/engineering/existing-workspace-scratch-capacity-recovery.json",
+    "bytes": 3794,
+    "sha256": "bc18bca235d00e9d7ca0f618653ba1c004f6c27afbbf535894cf6d4977cc3c71"
+  },
+  "capacity-independent-independent-archive-preservation-review-v2.json": {
+    "source": "/workspace/engineering/capacity-recovery-independent-review/independent-archive-preservation-review-v2.json",
+    "bytes": 9595,
+    "sha256": "918485892e6663cedd3bb595824ef181a1ac87f8172a0bc4f026065941b214f6"
+  },
+  "capacity-independent-canonical-completed-scratch-preservation-proposed.patch": {
+    "source": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+    "bytes": 1068,
+    "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+  },
+  "pr282-staging-source-refresh-frozen-source-receipt.json": {
+    "source": "/workspace/engineering/pr282-staging-source-refresh/frozen-source-receipt.json",
+    "bytes": 14460,
+    "sha256": "1b59d89f584616772ed4881a3c0ae2baea9ea253529dfe1b445b1ef5d856fd74"
+  },
+  "pr282-staging-source-refresh-independent-frozen-source-review.json": {
+    "source": "/workspace/engineering/pr282-staging-source-refresh/independent-frozen-source-review.json",
+    "bytes": 3786,
+    "sha256": "235df4d71ecf79cce044747b99b2f19644bc51177d4972a584b82f03f1577f2a"
+  },
+  "pr282-staging-source-refresh-source-union-proof.json": {
+    "source": "/workspace/engineering/pr282-staging-source-refresh/source-union-proof.json",
+    "bytes": 44095,
+    "sha256": "b47f7724d3f720dc656b9d8eeca86fea3fc6117ef00f6a5af59d416e9a37148b"
+  },
+  "pr282-staging-source-refresh-outer-test-contract-proof.json": {
+    "source": "/workspace/engineering/pr282-staging-source-refresh/outer-test-contract-proof.json",
+    "bytes": 298,
+    "sha256": "ba945e5b288c94794eac93da07f6ae0438ba1fb8303cd0d2f8b9674f84c867ba"
+  },
+  "pr282-staging-source-refresh-bootstrap-reuse.json": {
+    "source": "/workspace/engineering/pr282-staging-source-refresh/bootstrap-reuse.json",
+    "bytes": 2738,
+    "sha256": "947d0419fe49f291005766f8343d46ec4e24a0d2ffcec2012251be645109d4cc"
+  },
+  "pr282-staging-source-refresh-generator-roundtrip.json": {
+    "source": "/workspace/engineering/pr282-staging-source-refresh/generator-roundtrip.json",
+    "bytes": 10286,
+    "sha256": "feb56b0b7f6a3a70f9ec0c944677e3146fa6e70b4df923a7add7768e5b6e60a7"
+  },
+  "pr282-staging-source-refresh-canonical-actual-delta.patch": {
+    "source": "/workspace/engineering/pr282-staging-source-refresh/canonical-actual-delta.patch",
+    "bytes": 1549,
+    "sha256": "6b406306548394847d9ea37e18d170da93f714e4ef736648e695d8f22373958f"
+  },
+  "pr305-fixture-source-frozen-test-fixture-source-checkpoint.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/frozen-test-fixture-source-checkpoint.json",
+    "bytes": 9810,
+    "sha256": "b5be5088acf921984bac61ac6a39a4be3e1a0152d7168566b08509a07e8a76a0"
+  },
+  "pr305-fixture-source-source-preservation-proof.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/source-preservation-proof.json",
+    "bytes": 49815,
+    "sha256": "8b40ad31b1379412cf3e0327c2214180ff9b71af53cbe5ed2e853de0108aee98"
+  },
+  "pr305-fixture-source-bootstrap-reuse-verified.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/bootstrap-reuse-verified.json",
+    "bytes": 2870,
+    "sha256": "1b36ec8a3d55d62d383f42d8efce62d85a68e58cf63cb76bbbef4d4d4e548e82"
+  },
+  "pr305-fixture-source-retained-native-helper-browser-verification.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/retained-native-helper-browser-verification.json",
+    "bytes": 1029,
+    "sha256": "db4f27e5937fe4b8a5084665d9ec72fc00caba19311bcd3ae0581152a571e460"
+  },
+  "pr305-fixture-source-canonical-fixture-and-output-preservation.patch": {
+    "source": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/canonical-fixture-and-output-preservation.patch",
+    "bytes": 3937,
+    "sha256": "58c62090aa0f290f75f96aa17e6926aa5430ce6230378375fd2b731df89b0793"
+  },
+  "pr305-fixture-independent-independent-frozen-fixture-source-review.json": {
+    "source": "/workspace/engineering/pr305-fixture-independent-source-review/independent-frozen-fixture-source-review.json",
+    "bytes": 6846,
+    "sha256": "1fc31354ae289b0c00e851048c772854c21ef8444b24eef319f46226af7da419"
+  },
+  "capacity-batch2-independent-independent-batch2-archive-preservation-review-v2.json": {
+    "source": "/workspace/engineering/capacity-recovery-batch2-independent-review/independent-batch2-archive-preservation-review-v2.json",
+    "bytes": 8000,
+    "sha256": "70951f62ce8ecab772976827522c64fd38f7eb2e469421a26256bc2723106ecd"
+  },
+  "pr302-next-refresh-current-evidence-and-bounded-refresh-proposal.json": {
+    "source": "/workspace/engineering/pr302-next-refresh-readonly/current-evidence-and-bounded-refresh-proposal.json",
+    "bytes": 8509,
+    "sha256": "ee2f462a3f49fbe695b7dd66e3f2ae7f713ccd2af250b59b4c3328ea90362070"
+  },
+  "pr302-next-refresh-canonical-nine-source-bindings-proposed.patch": {
+    "source": "/workspace/engineering/pr302-next-refresh-readonly/canonical-nine-source-bindings-proposed.patch",
+    "bytes": 1110,
+    "sha256": "fef37515784cbf9fbb003ecca90ec0acb78d8e319bf2fd0ce2c2c1805ff955e6"
+  },
+  "pr302-retained-control-retained-control-terminal-CI-inventory.json": {
+    "source": "/workspace/engineering/pr302-current-S-C-actual-review/retained-control-terminal-CI-inventory.json",
+    "bytes": 9674,
+    "sha256": "3e218d16141177ad70c9bb0f24d226e5b83ceffe222f7825a530712b2e5556b0"
+  },
+  "existing-workspace-scratch-capacity-recovery-batch2.json": {
+    "source": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch2.json",
+    "bytes": 2403,
+    "sha256": "30bcb73c25914e33eb0705cdb5367cc1a07cfba5f0890eaf8d365876186f3537"
+  },
+  "current-282-299-verified-push-readback.json": {
+    "source": "/workspace/engineering/current-282-299-verified-push-readback.json",
+    "bytes": 2412,
+    "sha256": "1f96e2e6297b864d299141c3fbafbd5decbe09da74ce370fa98d3959a2e48716"
+  },
+  "pr305-fixture-verified-push-readback.json": {
+    "source": "/workspace/engineering/pr305-fixture-verified-push-readback.json",
+    "bytes": 1157,
+    "sha256": "d0beaa15c5fa3f3992809b210bf1abd5e75c21a8bd8d0ee97260ba126748dc1e"
+  },
+  "current-310-integration-310-current-final-scoped-merge-GO.json": {
+    "source": "/workspace/engineering/current-live-admission-20261011/310-current-final-scoped-merge-GO.json",
+    "bytes": 15065,
+    "sha256": "27f4bd75da3a4ec30cf5e033c003e73994d108f4402ad2f5af659605542c7191"
+  },
+  "current-310-integration-310-independent-actual-integration-readback.json": {
+    "source": "/workspace/engineering/current-live-admission-20261011/310-independent-actual-integration-readback.json",
+    "bytes": 3314,
+    "sha256": "da5ff947f4bb8601a9a9b944613a193a77b8ae6c09d41596bb9b4c590cb611bd"
+  },
+  "current-310-integration-new774-remaining-PR-safe-CI-snapshot.json": {
+    "source": "/workspace/engineering/current-live-admission-20261011/new774-remaining-PR-safe-CI-snapshot.json",
+    "bytes": 62820,
+    "sha256": "0161a9d04c35af6d1bc3d276f28b1783220a19bdadb7b73636f2966542e78970"
+  },
+  "current-310-integration-new774-prospective-299-308-309-union-review.json": {
+    "source": "/workspace/engineering/current-live-admission-20261011/new774-prospective-299-308-309-union-review.json",
+    "bytes": 6235,
+    "sha256": "a96af432c5d58f8395a79597bda4357e2e7a38c6561945c3f43b8c784bfe02a5"
+  },
+  "pr310-actual-integration.json": {
+    "source": "/workspace/engineering/pr310-actual-integration.json",
+    "bytes": 1202,
+    "sha256": "65173ddf46de071b072c1eacd6dd7dbc1205eaca86a0af87eb625701f2306d38"
+  },
+  "pr221-authenticated-closures-after310.json": {
+    "source": "/workspace/engineering/pr221-authenticated-closures-after310.json",
+    "bytes": 366,
+    "sha256": "3b819438b7c3ddf1c3bdcfcbe4a99af19dd31ce0c273ca5fb227024e7e553278"
   }
 }

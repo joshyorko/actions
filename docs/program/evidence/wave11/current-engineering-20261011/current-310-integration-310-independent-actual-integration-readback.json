@@ -1,0 +1,51 @@
+{
+  "schema": "actions-pr310-independent-actual-integration-readback/v1",
+  "observed_utc": "2026-10-11 06:13:35 UTC",
+  "verdict": "CONFIRMED_REVIEWED_NORMAL_INTEGRATION_ONLY",
+  "actual_merge": {
+    "sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "tree": "17c1afa7fbaa6ae817830d85226b41f67dd8b820",
+    "ordered_parents": [
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "dfca3f8e63465595acff421f37f34d2a9d0a1b39"
+    ]
+  },
+  "live_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "pr310": {
+    "state": "closed",
+    "merged": true,
+    "merged_at": "2026-10-11T06:12:35Z",
+    "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+    "merge_commit_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "base_snapshot": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+  },
+  "reviewed_tested_merge": "d07c0d1d322249c60760735ed94715798faea4dc",
+  "reviewed_tree": "17c1afa7fbaa6ae817830d85226b41f67dd8b820",
+  "root_actual_receipt": {
+    "path": "/workspace/engineering/pr310-actual-integration.json",
+    "sha256": "65173ddf46de071b072c1eacd6dd7dbc1205eaca86a0af87eb625701f2306d38"
+  },
+  "independent_merge_GO": {
+    "path": "/workspace/engineering/current-live-admission-20261011/310-current-final-scoped-merge-GO.json",
+    "sha256": "27f4bd75da3a4ec30cf5e033c003e73994d108f4402ad2f5af659605542c7191"
+  },
+  "source_freeze": {
+    "path": "/workspace/engineering/pr310-current-refresh/independent-source-freeze-review.json",
+    "sha256": "6282ffab3862700e9b0279de029a7cfd64ebb59909dd3b860463a5ec43cc1fed"
+  },
+  "all_exact_bindings_verified": true,
+  "issue221": {
+    "state": "open",
+    "title": "Integrate Actions Runtime 1.0.3 security, execution, and native acceptance work"
+  },
+  "scope": "Integration only. Original4b/de533 failure and actualnativeLinuxf506/92498 versus original65c MacWin/c600 distinct tuples retained. Whole208/backend/browser/private/OAuth/release remainsHOLD, no issue closure or publication. Remaining PR historical1c75 CI cannot qualify new774 unions.",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md and docs/skills/work-items.md exact tuple/admission guidance already accepted in dfca; no additional cosmetic delta proposed",
+    "Durable learning captured": "Actual normal merge is independently bound to reviewed source, synthetic ordered parents and tree; historical qualified CI remains scoped to its original target when the live integration branch advances.",
+    "Evidence": "GO27f4/source6282, actual774 authenticated branch/Git/PR reads, root65173 bytehash, issue221 remainsOPEN; six exact remaining old1c75 synthetics and current gate inventory.",
+    "Stale or ambiguous guidance removed": "Actual merge identity treated as synthetic ID; PR cached base snapshot treated as live target; prior source-head green checks carried to new target without tested-tree review.",
+    "Remaining uncertainty": "Remaining six PR new-target unions, fresh source/control CI/native gates and newly failing306 cause; full208/backend/browser/private/OAuth/release acceptance remainsHOLD."
+  },
+  "documentation_delta_disposition": "ACCEPT existing exacttuple/actual-versus-synthetic admission guidance already integrated; no cosmetic duplication required.",
+  "upstream_disposition": "none"
+}

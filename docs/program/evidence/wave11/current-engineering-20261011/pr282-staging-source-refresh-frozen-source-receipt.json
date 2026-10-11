@@ -1,0 +1,321 @@
+{
+  "schema": "actions-pr282-staged-mutation-source-refresh/v1",
+  "status": "FROZEN_SOURCE_FOR_INDEPENDENT_REVIEW_NO_PUSH",
+  "branch": "feat/canvas-template-20261010",
+  "head": "9c8f1c95caeded6495877280ed1465fd9850b254",
+  "tree": "f67cba808205189b4e54318b2a62bada739178c2",
+  "source_parent": "5cadafaf3d93e9bcc9b7f98a5f4b095d8f1b8898",
+  "ordinary_union": {
+    "head": "5cadafaf3d93e9bcc9b7f98a5f4b095d8f1b8898",
+    "tree": "a485467ed429d8f5ea0e64d1598644cb13b6980a",
+    "ordered_parents": [
+      "a0b8816a17b50aae5af1372cf89f71640fa10d3b",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ]
+  },
+  "changes": "Only owned staging tests and canonical guide; all production bytes and ordinary-union workflow bytes retained",
+  "source_proof": {
+    "path": "/workspace/engineering/pr282-staging-source-refresh/source-union-proof.json",
+    "bytes": 44095,
+    "sha256": "b47f7724d3f720dc656b9d8eeca86fea3fc6117ef00f6a5af59d416e9a37148b"
+  },
+  "source_inspector": {
+    "path": "/workspace/engineering/pr282-staging-source-refresh/verify_source.py",
+    "bytes": 7238,
+    "sha256": "6be788de6aea04250ba2be2aaa5aa508e1a21cfc55281c3e31dc103f7c409df1"
+  },
+  "original_outer_test_contract": {
+    "path": "/workspace/engineering/pr282-staging-source-refresh/outer-test-contract-proof.json",
+    "bytes": 298,
+    "sha256": "ba945e5b288c94794eac93da07f6ae0438ba1fb8303cd0d2f8b9674f84c867ba"
+  },
+  "preservation": {
+    "all269_current_producer_inputs_exact_original282": true,
+    "all5_selectors_exact_original_actual_target_native": true,
+    "production_staging_read_unchanged": {
+      "action_server/src/actions/server/deployments/source_read.py": "4ae8cbe57aa5c924585f4257a1be1700aa49baa63d6150efba20935045f7a8a5",
+      "action_server/src/actions/server/deployments/source_staging.py": "fda3f2c045414a9cae21cc0765a3eb7c72db2ddd2f5d74e567a04a0513baf620"
+    },
+    "canvas_helper_edc7_unchanged": true,
+    "whole_original_canvas_admission_step_39predicates_diagnostics_preflight_unchanged": true,
+    "whole_github_exact_ordinary_union": true
+  },
+  "native_producer_parity": {
+    "producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "historical_input_count": 268,
+    "current_input_count": 269,
+    "changed": [
+      "action_server/src/actions/server/templates/action-templates.yaml",
+      "action_server/src/actions/server/templates/action-templates.zip"
+    ],
+    "added": [
+      "action_server/src/actions/server/templates/zips/canvas-query.zip"
+    ],
+    "matching": 266,
+    "qualification": "NOT_QUALIFIED_COMPLETE_CURRENT_INVENTORY_DIFFERS; historical Canvas gates retain their original tuples"
+  },
+  "gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "Verified24 exact inputs, original successful log and five own prepared package environments; no installer",
+    "Toolkit": {
+      "pass": 152
+    },
+    "TDD_RED": {
+      "fail": 1,
+      "pass": 3,
+      "deselect": 24,
+      "failed_case": "constant_timestamp_mutation"
+    },
+    "TDD_GREEN": {
+      "pass": 4,
+      "deselect": 24
+    },
+    "source_staging_and_read": {
+      "pass": 75
+    },
+    "full_configured_source": {
+      "pass": 1164,
+      "skip": 12,
+      "warnings": 15,
+      "seconds": 132.34,
+      "workers": 2
+    },
+    "full_configured_lint": "Ruff rules/format302files/Isort PASS",
+    "typecheck": {
+      "files": 338,
+      "status": "PASS"
+    },
+    "generator": {
+      "generated_workflows": 8,
+      "workflow_yaml": 25,
+      "dependabot": 1,
+      "all_tracked_yaml_parsed_and_unchanged": 30,
+      "other4_not_generated": true
+    }
+  },
+  "bootstrap_reuse": {
+    "path": "/workspace/engineering/pr282-staging-source-refresh/bootstrap-reuse.json",
+    "bytes": 2738,
+    "sha256": "947d0419fe49f291005766f8343d46ec4e24a0d2ffcec2012251be645109d4cc"
+  },
+  "original_bootstrap": {
+    "path": "/workspace/actions-cloud/receipts/pr282-writer/bootstrap.log",
+    "bytes": 27574,
+    "sha256": "e21cf7c8b2b5f3be97f05f99728e96c2b5c1c3fb2e563f70feca0a4bdff58e3c"
+  },
+  "generator": {
+    "path": "/workspace/engineering/pr282-staging-source-refresh/generator-roundtrip.json",
+    "bytes": 10286,
+    "sha256": "feb56b0b7f6a3a70f9ec0c944677e3146fa6e70b4df923a7add7768e5b6e60a7"
+  },
+  "generator_inspector": {
+    "path": "/workspace/engineering/pr282-staging-source-refresh/generator_roundtrip.py",
+    "bytes": 1805,
+    "sha256": "59f79fe5d85d422c63551b5bb5296eacdde58a1b68a51cf6995a6ae249853478"
+  },
+  "tool": {
+    "path": "/workspace/actions-cloud/bin/rcc",
+    "version": "18.19.3",
+    "identity": {
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "bytes": 22282402,
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    }
+  },
+  "logs": {
+    "doctor.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/doctor.log",
+      "bytes": 13487,
+      "sha256": "913d4d4fadad7ac6e114b9cb050c12b039d803b03fb6b9360611f794c99afd8e"
+    },
+    "full-source-replay.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/full-source-replay.log",
+      "bytes": 299550,
+      "sha256": "fd81fae80aa3d040692cc5f19d60fabe7b21092c41e09e9d802b298c45548a48"
+    },
+    "full-source.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/full-source.log",
+      "bytes": 6856462,
+      "sha256": "ca99c959f97484d04917490896c82592ed134534a4fdba84643673634cb19817"
+    },
+    "generator-roundtrip-complete.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/generator-roundtrip-complete.log",
+      "bytes": 4565,
+      "sha256": "ef59b5ff21736d83db4ba8e349e3f58734a6a94373de40c5880a5b3d8488bba0"
+    },
+    "generator-roundtrip-final.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/generator-roundtrip-final.log",
+      "bytes": 4565,
+      "sha256": "04ee803c94645f4e391b889c98a334f0248000e3cfe22e8ede54d05c7c5c5554"
+    },
+    "generator-roundtrip-replay.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/generator-roundtrip-replay.log",
+      "bytes": 5144,
+      "sha256": "0270d7453dd0991807aaeb162288223356d2b05f3284a8a8c01cc21227a60f06"
+    },
+    "generator-roundtrip.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/generator-roundtrip.log",
+      "bytes": 4129,
+      "sha256": "f60edc66ed9279c061138b9240878c43004693d119c30506851808c15600d7b7"
+    },
+    "green-focused.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/green-focused.log",
+      "bytes": 3914,
+      "sha256": "9a63181d323d4d54236460fa2be8dbfddb45145c8099fa9b913b73ddf6e76983"
+    },
+    "red.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/red.log",
+      "bytes": 8332,
+      "sha256": "bfe471abf6be61efde66af93b9439fb589d3ff612898db2c75ed1b3d13cd64eb"
+    },
+    "scoped-format-replay.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/scoped-format-replay.log",
+      "bytes": 3658,
+      "sha256": "44ef77f1c1197d3253745bc2dabc88de7ab7c087f4a375b41f6769adca3d4641"
+    },
+    "scoped-format.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/scoped-format.log",
+      "bytes": 4115,
+      "sha256": "19f14f5f0580f7894af1ac244456aa5379dd9b49fda8d55ad2a3f58aa7c0ce61"
+    },
+    "scoped.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/scoped.log",
+      "bytes": 4269,
+      "sha256": "f876fb2cf3b0f4e2fc59a408e41c83eb151a57e3a2c9790589683c994f92b9e9"
+    },
+    "source-union-proof-final.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/source-union-proof-final.log",
+      "bytes": 3624,
+      "sha256": "92cc23a28f5894c351a79b88cef90d549ad2fe19bf9b2a101383157d20712b2b"
+    },
+    "source-union-proof-replay.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/source-union-proof-replay.log",
+      "bytes": 4204,
+      "sha256": "69760095bc9d4acd2a6f981b027ad1722b5432a26d67009c28a986e2ab1b2b61"
+    },
+    "source-union-proof.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/source-union-proof.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "static-replay.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/static-replay.log",
+      "bytes": 5694,
+      "sha256": "28bfcc6b10051bd9c3efa6c5d52eb94ce8b8821f27c19484c00564422a45341c"
+    },
+    "static.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/static.log",
+      "bytes": 4115,
+      "sha256": "83d5363a1a3e7940f3c1afbae2d06bdf754872ead8238b91452cc269288214bf"
+    },
+    "toolkit.log": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/toolkit.log",
+      "bytes": 14507,
+      "sha256": "ba369db87648e1cebf27986f1f3ff562e6f76b93c2aff332fc59851f6bfa9f0b"
+    }
+  },
+  "diagnostic_predecessor": {
+    "actual-pr-ref-before-source.json": {
+      "path": "/workspace/engineering/pr282-staged-read-diagnosis/actual-pr-ref-before-source.json",
+      "bytes": 159,
+      "sha256": "425aa8ac291650307110c8aa5a0d3d7e2bae6ca99dd3dcd67695d84f360b1921"
+    },
+    "bootstrap-reuse.json": {
+      "path": "/workspace/engineering/pr282-staged-read-diagnosis/bootstrap-reuse.json",
+      "bytes": 1340,
+      "sha256": "f300dae780d513e4f17d261da52d70cbfcfe6418544e9d538098c4d0d7aab14e"
+    },
+    "digest-boundary-control-receipt.json": {
+      "path": "/workspace/engineering/pr282-staged-read-diagnosis/digest-boundary-control-receipt.json",
+      "bytes": 1924,
+      "sha256": "02c24cfa21780f0da353a93bc2caaa7ec9ed7d9384a0b2e0d1a56d8912ecdac7"
+    },
+    "digest-boundary-controls.log": {
+      "path": "/workspace/engineering/pr282-staged-read-diagnosis/digest-boundary-controls.log",
+      "bytes": 3825,
+      "sha256": "ebb6e0a613476edd28a3560a89f6f8ca21addf0cf09a7d75fbe36dbb56767183"
+    },
+    "digest_boundary_controls.py": {
+      "path": "/workspace/engineering/pr282-staged-read-diagnosis/digest_boundary_controls.py",
+      "bytes": 2966,
+      "sha256": "12eedfe33676acd259c3691310711221f384c805c327d9234f3b403c8fef9370"
+    },
+    "explicit-metadata-measurement.json": {
+      "path": "/workspace/engineering/pr282-staged-read-diagnosis/explicit-metadata-measurement.json",
+      "bytes": 2024,
+      "sha256": "ce9f9a1e62011d48f4376534c721d7fc8b9a28b1578b9ee6d7da9f04aa4d4824"
+    },
+    "explicit-metadata-probe.log": {
+      "path": "/workspace/engineering/pr282-staged-read-diagnosis/explicit-metadata-probe.log",
+      "bytes": 3765,
+      "sha256": "c1177f593aa4167650bd4acb175e04d614e28e775c6117b5a38938316f664aa1"
+    },
+    "measurement.json": {
+      "path": "/workspace/engineering/pr282-staged-read-diagnosis/measurement.json",
+      "bytes": 29421,
+      "sha256": "dceb64c55e7bac8d4976e0457e8182d197d1c3df36f6e46811e31340238925f1"
+    },
+    "original-node-once.log": {
+      "path": "/workspace/engineering/pr282-staged-read-diagnosis/original-node-once.log",
+      "bytes": 3881,
+      "sha256": "7824262d067eb488b10340d321c57d82cf486e06afc7cbbd33237665c6d795f8"
+    },
+    "probe.log": {
+      "path": "/workspace/engineering/pr282-staged-read-diagnosis/probe.log",
+      "bytes": 3872,
+      "sha256": "2c209b8de38a931f72bdf405238c81222423d3fadf63d1e71ee33424fc9bc0cd"
+    },
+    "probe_explicit_metadata.py": {
+      "path": "/workspace/engineering/pr282-staged-read-diagnosis/probe_explicit_metadata.py",
+      "bytes": 4463,
+      "sha256": "774d8bf50aec7f644cf5af9d17c9d2791d82f15bcfb96c893990e75a54d51b36"
+    },
+    "probe_original_test.py": {
+      "path": "/workspace/engineering/pr282-staged-read-diagnosis/probe_original_test.py",
+      "bytes": 4194,
+      "sha256": "8e0b6f859d48c3934920e027359911cf5867e8b181deb24bffa7c29b1fdb13f6"
+    }
+  },
+  "original_hosted_failure": {
+    "head": "a0b8816a17b50aae5af1372cf89f71640fa10d3b",
+    "run": 38113263905,
+    "job": 114393029554,
+    "tested_merge": "de8916137a1af05688033af5c8a6fcd625cab305",
+    "tested_tree": "08168e31260ae09cd1be7ba4bbb627e24dbd9a60",
+    "ordered_parents": [
+      "fbde0d3a248c47c9964851355f96575c89a87329",
+      "a0b8816a17b50aae5af1372cf89f71640fa10d3b"
+    ],
+    "review": {
+      "path": "/workspace/engineering/current-live-admission-20261011/282-current-Linux-Toolkit-independent-failure-review.json",
+      "bytes": 4591,
+      "sha256": "9aca002b0f9644884e3cbb7cee3efbeee081dea8aafde3a39eab051f7671d64a"
+    },
+    "injection_and_metadata_observations": "UNKNOWN; no hosted timestamp cause established"
+  },
+  "preserved_failed_attempts": {
+    "full_source_before_recovery": "ENOSPC:1FAIL674PASS8SKIP493ERROR; latest563d namespace kept intact",
+    "format_static_gen_before_recovery": "ENOSPC before package startup; not passing gates",
+    "generator_count_draft": "Failed inspector included4issue/change-tier YAMLs while expecting26; final proof explicitly parses/preserves30 and distinguishes26workflow+dependabot",
+    "native_equality_draft": "Fail-closed on original2template differences; complete corrected inventory explicitly retains2changed+1added and withholds native qualification"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/canonical-actual-delta.patch",
+      "bytes": 1549,
+      "sha256": "6b406306548394847d9ea37e18d170da93f714e4ef736648e695d8f22373958f"
+    },
+    "Durable_learning_captured": "Before-read same-sized mutation tests re-read digest independently of timestamps; after-read metadata rejection is a separate measured signal. Match destination descriptor by device and inode.",
+    "Evidence": "Actual baseline/mutation/explicit-metadata controls, RED/GREEN, scoped75 and full1164; unchanged production code and original outer assertions",
+    "Stale_or_ambiguous_guidance_removed": "Distinguishes staged byte mutation from writes after bytes are returned; neither implies a hosted timestamp cause or atomic snapshot guarantee",
+    "Remaining_uncertainty": "Original hosted injection/stats/read snapshots unavailable; new hosted tuple pending. No universal concurrent after-read immutability, consumer/native/browser/provider or complete Canvas acceptance claim."
+  },
+  "not_run": [
+    "Fresh hosted CI",
+    "Actual native/browser/provider/PostgreSQL gate",
+    "Installer/rebuild",
+    "Remote push or merge"
+  ],
+  "upstream_disposition": "none"
+}

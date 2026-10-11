@@ -1,0 +1,236 @@
+{
+  "status": "DEPENDENCY_READY_PUBLIC_PARENT_DEADLINE_CONTROL_PROPOSAL_ONLY",
+  "read_only": true,
+  "repository": "joshyorko/actions",
+  "existing_branch": "mk3/wave9-rcc-public-source-union-20261010",
+  "public_source": {
+    "head": "44afd960ad01f83eeef7773b334ccde3683c022d",
+    "tree": "2960c688fa2a2420f8915edbf0817fd3dd818b98",
+    "ordered_parents": [
+      "052bd852783a7c2b5533a6732adb17008b04dc31",
+      "7c0b6fdcf49bd9c5cc663326a30d7df37a5fb203"
+    ],
+    "source_only_historical_review_sha256": "7fbd5bd3684f88b36e8d6b880814bd43553c790e8bb0b4a6fe7637777c876cae",
+    "original11_body_blob_identities": [
+      {
+        "git_blob": "7ab99778b25806ff80ab22a9d0d52479a7e1a211",
+        "path": "action_server/scripts/native_runtime_artifact_binding.py",
+        "sha256": "efbac7fdaf558728281da2338017bdb3e83bb68b9165b43222dd4e460319d08e",
+        "preserved": true,
+        "current_target_blob": null
+      },
+      {
+        "git_blob": "6ece62af001c0f059630d8e4b5e96a0c95760988",
+        "path": "action_server/scripts/test_native_runtime_artifact_binding.py",
+        "sha256": "cb215a746009982b021abcdca101e2e538f90adb54aac534cc4c365033401173",
+        "preserved": true,
+        "current_target_blob": null
+      },
+      {
+        "git_blob": "77a7a4c3be9a9f7c21086366b2f52b2dea9f6ab1",
+        "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+        "sha256": "05bd886e452515509c4e5fd81cff0be6c512e0659665262ab7d20e5c5dd91ba9",
+        "preserved": true,
+        "current_target_blob": "4f155d2f63e86b38697c12557dd8a6550b9d36a3"
+      },
+      {
+        "git_blob": "4b036d64b5a69305681d96faa340d424ed4d5461",
+        "path": "action_server/src/actions/server/_action_package_handler.py",
+        "sha256": "d003b916b550a866321c0e110b525774cb2369aaf672d0336d4c50b2b13fb425",
+        "preserved": true,
+        "current_target_blob": "a306eb11038f8cd4114415fb978321eb2ac51a0f"
+      },
+      {
+        "git_blob": "d7b0212e07741d03339b4edb44e698871423e33b",
+        "path": "action_server/src/actions/server/_actions_import.py",
+        "sha256": "628560ea5e45b245a3b85d50b5935f98bb58ef94c50cc5477a4e846e3929255e",
+        "preserved": true,
+        "current_target_blob": "50f72e8c95dcc4455a8225eb19c8d3309faada58"
+      },
+      {
+        "git_blob": "c6dca66b1be24c923347c43528e036b7beabd7ed",
+        "path": "action_server/src/actions/server/_actions_process_pool.py",
+        "sha256": "e3a682cacf1f58ccadba71b1ce05fac9238d5e6cef44be0d7350b88de8108d50",
+        "preserved": true,
+        "current_target_blob": "af261b4d40870ecf5415980ae1b3e2923f0734b1"
+      },
+      {
+        "git_blob": "5f0b5186bed910ddb35a2c8544b19e1c0082b90a",
+        "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+        "sha256": "1cbff1830f2bac1695a4f597f2d5facc464d39c8672193c5a280787400576815",
+        "preserved": true,
+        "current_target_blob": "2184e9edb95683822c323d0e27d73d6d207d3492"
+      },
+      {
+        "git_blob": "53061837cf15729a3c12312deb8f0bcff85b2400",
+        "path": "action_server/src/actions/server/rcc_trust_profile.py",
+        "sha256": "27b2e1de96ab7a684d6885b07e80c7f1d6fa9b41feb59fcfb36200f0b7f685ac",
+        "preserved": true,
+        "current_target_blob": null
+      },
+      {
+        "git_blob": "ac907316af20acc08461b692c34f60f1643d484f",
+        "path": "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+        "sha256": "3d34119a606d6dc82e78fef54b1e9c5dc750c3d1123dc2289b0474b56de75d73",
+        "preserved": true,
+        "current_target_blob": "cfdef3f02dac51404b68ea250086d1140db2192a"
+      },
+      {
+        "git_blob": "1f56f2054338fb23a0bf3af7ae982448232b58d7",
+        "path": "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+        "sha256": "d26b40f4eabd51faa3ac877d37a710ea59ff0a8a9634684f67ff36eae33e6335",
+        "preserved": true,
+        "current_target_blob": "6e81aeda234154fb1b02303c67836e69997d5aba"
+      },
+      {
+        "git_blob": "844efa2ef6578b6cc8dce1f94031e060de168454",
+        "path": "docs/skills/repository-operations.md",
+        "sha256": "e80fca1baf43c3de510719f232f76e50e46c998fe70984c0f1648625fdffc986",
+        "preserved": true,
+        "current_target_blob": "6fd5e19122f944e1362b2aa45ca3d0841e5fa0e0"
+      }
+    ],
+    "live_recovery": {
+      "path": "/workspace/engineering/rcc-public-checkpoint-live-recovery.json",
+      "sha256": "91a74396931a4336182cdc79d4226c01f6b6a394376c12856b3def5c8776f5a4",
+      "bytes": 4809
+    }
+  },
+  "current_target_at_review": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+  "source_owner_scope": [
+    "action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "existing_implementation_preserved": [
+    "Detached filesystem trust-profile profile14a7810c/tree75be9f56 and native selector7c0b6fdc/tree0fc2e7fa already composed in44afd; no reimplementation",
+    "Original PR302 publication-response identity + original PR308 candidate-wheel version controls preserved",
+    "run_owned_process and record_supervisor_cleanup_failure AST exact current1c75; reuse existing owner/subreaper/cleanup and atomic-write idiom"
+  ],
+  "confirmed_seam": {
+    "source_sha256": "05bd886e452515509c4e5fd81cff0be6c512e0659665262ab7d20e5c5dd91ba9",
+    "control": {
+      "path": "/workspace/engineering/rcc-public-checkpoint-preparation/public-parent-timeout-control.json",
+      "sha256": "23253e1b01460a3bcf12407184b3af19266cbd595c7dfb38d99387e8c18ef409",
+      "bytes": 685
+    },
+    "control_script": {
+      "path": "/workspace/engineering/rcc-public-checkpoint-preparation/static_parent_control_probe.py",
+      "sha256": "2ba1832593eb6ff1291469b79296d190432513d2439fe65107d84c57da2187b7",
+      "bytes": 3024
+    },
+    "observation": "Exact pinned main AST/fake same-invocation worker receipt PASS then TimeoutExpired produces parent rc1 but receipt remains PASS. No process/service/provider/RCC/private execution.",
+    "scope": "Only explicit TimeoutExpired receipt consistency; generic non-timeout errors and completed nonzero paths deferred/unchanged in minimal proposal"
+  },
+  "minimal_contract": [
+    "Materialize SAME existing public branch only after root grants source writer. Ordinary merge then-current accepted integration target; no reset/rebase/new branch, immutable44afd originals and full union parent/blob/mode proof required.",
+    "Add dedicated TimeoutExpired parent handling. Retain primary timeout/return failure; keep returned/exception raw streams if already measured in private owned evidence, do not print arbitrary command/error bodies as a sanitized reason.",
+    "For existing same-invocation owned valid JSON mapping receipt with mapping cells, preserve all worker measurements, cell values and unknown fields. Set acceptance_status FAIL and add only supervisor_deadline fixed reason category watchdog_timeout plus explicit cleanup_state unknown; never change worker process_cleanup solely because timeout.",
+    "Absent receipt: return primary failure and fixed unavailable state, do not fabricate worker evidence. Malformed/nonmapping/cells-wrong-type or write failure: preserve original bytes and primary failure, retain fixed secondary receipt-failure category privately; no raw exception bodies in sanitized annotations.",
+    "Use same-directory0600 temporary file +flush/fsync/os.replace; cleanup only own temp; retain original receipt on encode/write/replace failure. Existing-root refusal before starting worker unchanged.",
+    "Do not touch ProcessTreeCleanupError demotion, successful completion, ordinary non-timeout failures, trust-profile/candidate/native/publication logic, private source/spec, deadlines, owner helpers or provision infrastructure."
+  ],
+  "meaningful_RED_GREEN": [
+    "Current pinned AST demonstrates valid workerPASS+measuredcleanupPASS followed TimeoutExpired leaves old PASS while parent fails (RED); new parent overallFAIL/fixed deadline annotation while exact worker cells and unknown fields remain (GREEN).",
+    "Same synthetic owned controller: workerFAIL staysFAIL with prior cells unchanged; missing receipt causes no synthetic receipt; existing-root refusal spawns nothing/does not overwrite; valid baseline successful completed0 leaves bytes unchanged.",
+    "Malformed JSON/list/null/cells-list/cells-null remain byte-exact with fixed unavailable secondary state; unknown fields retained on valid mapping; malformed paths do not qualify Runtime cleanup.",
+    "Atomic serialization/write/fsync/replace failures preserve original bytes and primary timeout, clean only owned same-dir temp; a secret-bearing secondary exception cannot appear in sanitized diagnostic.",
+    "Existing ProcessTreeCleanupError controls still mark actual cleanupFAIL; completed nonzero/nontimeout behavior unchanged; all owners/bounds/source/publication/profile/native selectors preserved."
+  ],
+  "source_writer_verification_before_push": [
+    "Canonical18.19.3 Doctor\u2192coordinatedBootstrap\u2192ToolkitTest",
+    "Existing acceptance verifier/service-free adapter/native/candidate controls with actualRCC deselected",
+    "Affected Runtime full configured suite+lint/typecheck; scripts Ruff/format/Isort; all8 generated workflow roundtrips/unrelated outputs",
+    "Exact parent/body/mode union and original11 preservation; note new production-profile source cannot borrow old92498 native proof",
+    "Independent frozen-source review then root normal push; actual provider/metadata/private gate separately HOLD"
+  ],
+  "original_runner_spec_recovery": {
+    "retained_identities": [
+      {
+        "archive_commit": "5f2d7e3dec953f9dbb8a5b61bcd30373a51b032b",
+        "path": "docs/handoffs/actions-swarm-mk3-20261011-ledger-verified.md",
+        "git_blob": "051427a097f175a63b0fc7a3171b62df94c337ba",
+        "sha256": "160ca8b19c4b133a2c355139557bcff67b094b9efd73eddc32959041c5345885",
+        "local_exact_bytes": "/workspace/engineering/rcc-public-checkpoint-preparation/retained-actions-swarm-mk3-20261011-ledger-verified.md"
+      },
+      {
+        "archive_commit": "5f2d7e3dec953f9dbb8a5b61bcd30373a51b032b",
+        "path": "docs/program/evidence/wave5-correction-20261010T2112Z/rcc-warm-attempt-2/frozen-runner.py",
+        "git_blob": "6cb9d8140bf291d59cca521ef4c4e7f7f48daddc",
+        "sha256": "f4595ac56e6876760affe325a0551184b3dcb7f9564126941b2bef082c68df89",
+        "local_exact_bytes": "/workspace/engineering/rcc-public-checkpoint-preparation/retained-frozen-runner.py"
+      },
+      {
+        "archive_commit": "5f2d7e3dec953f9dbb8a5b61bcd30373a51b032b",
+        "path": "docs/program/evidence/wave6-checkpoint-20261010T212704Z/rcc-followup/followup-exec-runner-independent-final-review-29eb.json",
+        "git_blob": "11ef842b1d4af76e2463709c856ab4d9e206c706",
+        "sha256": "a271667d09dab0e1108d664985ecdd01b3fec39280423054c488abe16b659b6a",
+        "local_exact_bytes": "/workspace/engineering/rcc-public-checkpoint-preparation/retained-followup-exec-runner-independent-final-review-29eb.json"
+      },
+      {
+        "archive_commit": "5f2d7e3dec953f9dbb8a5b61bcd30373a51b032b",
+        "path": "docs/program/evidence/wave6-checkpoint-20261010T212704Z/rcc-followup/interpretation-correction.md",
+        "git_blob": "0ee12d76ad73338996d3b6fa677bcfb05295ed87",
+        "sha256": "7db3f6cac050ccceaca1e09165264b08900c63b91bd11b19dd4723ffb6cebaa6",
+        "local_exact_bytes": "/workspace/engineering/rcc-public-checkpoint-preparation/retained-interpretation-correction.md"
+      },
+      {
+        "archive_commit": "5f2d7e3dec953f9dbb8a5b61bcd30373a51b032b",
+        "path": "docs/program/evidence/wave6-checkpoint-20261010T212704Z/rcc-followup/final-receipt.json",
+        "git_blob": "de547fd399a3094b0208b8dc77872eec9cb7a34b",
+        "sha256": "60351ad071d07c28b89d7e5eb0feab6fdd7a29b9da61bf4046b471721f09a64b",
+        "local_exact_bytes": "/workspace/engineering/rcc-public-checkpoint-preparation/retained-final-receipt.json"
+      },
+      {
+        "archive_commit": "5f2d7e3dec953f9dbb8a5b61bcd30373a51b032b",
+        "path": "docs/program/evidence/wave6-checkpoint-20261010T212704Z/rcc-followup/post-run-readback.json",
+        "git_blob": "5f28e2b0acc1e55db6b70541984db3b789d2d315",
+        "sha256": "2703f4e83c7840fe639b2426e8f7938bf46db3d07f8036b8ab15955f905c6b6c",
+        "local_exact_bytes": "/workspace/engineering/rcc-public-checkpoint-preparation/retained-post-run-readback.json"
+      },
+      {
+        "archive_commit": "5f2d7e3dec953f9dbb8a5b61bcd30373a51b032b",
+        "path": "docs/program/evidence/wave9/current-convergence-20261011/payloads/current-ledger-issue-101-20261011T0009Z.json",
+        "git_blob": "695d61bb3666d59bae9efd718e42cd920c55ff06",
+        "sha256": "859876838eea905d24a6c62b8c6ebe7016fbba18f6643e540508378b5cf3160e",
+        "local_exact_bytes": "/workspace/engineering/rcc-public-checkpoint-preparation/retained-current-ledger-issue-101-20261011T0009Z.json"
+      }
+    ],
+    "wave5": "Exact public frozen-runner bytes recovered Git blob unchanged to owned evidence; SHAf4595ac56e6876760affe325a0551184b3dcb7f9564126941b2bef082c68df89; historic300s diagnostic failure, old Core1.0.2, no new execution",
+    "wave6": "Only public reviewed runner29eb560a24d300a1783ef44008eb165efa67d7fc5823878d34c039a26ae6ab8c/proposalb5b856bb/manifest691b957 spec+actual failure/readback retained. Full original29eb runner bytes NOT recovered; never reconstruct/relabel. Historic120overall100work20cleanup/25child controls only.",
+    "current_generic_owners": "Existing measured282 browser/310 outerowner/311 startupobserver remain reusable qualified primitives; this task modifies existing public parent seam, does not duplicate owner implementations",
+    "private": "Original RCC01f1a98c/private frozen-v6 source/spec bytes absent in this Cloud workspace; full private supervisor/metadata remains HOLD. Public wave5/29eb metadata is not private recovery."
+  },
+  "historical_failure_interpretation": "RCC18.19.3 default absent explicit trust-carrier uses provider as HTTP trust carrier; retained503 rejected trust verification before warm lookup. Source interpretation-correction preserves this as intended negative condition, not missing-cache/artifact-corruption bug or reason to retry/provision.",
+  "no_actual_execution_source_edit_push_merge_or_retry": true,
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md exact canonical-parent-deadline-proposed.patch based original44afd; merge-aware integration required",
+    "Durable learning captured": "Parent timeout rc1 can coexist with earlier provisional workerPASS. Overall parent outcome and measured Runtime cleanup must remain separate. Original public runner bytes differ from retained review/spec identities and private recovery.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/rcc-public-checkpoint-preparation/canonical-parent-deadline-proposed.patch",
+        "sha256": "7933b5f7241227a022c3600e1efb1fcf2747f12a0380f60dab381beaac1e3da4",
+        "bytes": 1680
+      },
+      {
+        "path": "/workspace/engineering/rcc-public-checkpoint-preparation/public-parent-timeout-control.json",
+        "sha256": "23253e1b01460a3bcf12407184b3af19266cbd595c7dfb38d99387e8c18ef409",
+        "bytes": 685
+      },
+      {
+        "path": "/workspace/engineering/rcc-public-checkpoint-live-recovery.json",
+        "sha256": "91a74396931a4336182cdc79d4226c01f6b6a394376c12856b3def5c8776f5a4",
+        "bytes": 4809
+      },
+      {
+        "path": "/workspace/engineering/rcc-public-checkpoint-preparation/retained-source-identities.json",
+        "sha256": "6f2e875723048f8fdd7fa1c781e777099279a7d3c233d228fe07339c2c119e34",
+        "bytes": 3177
+      }
+    ],
+    "Stale or ambiguous guidance removed": "Earlier worker receiptPASS establishes whole watchdog success; a parent timeout necessarily proves failed Runtimecleanup; public checkpoint/review metadata reconstructs private supervisor",
+    "Remaining uncertainty": "Current ordinary source union/gates not yet run; original private01f/frozen-v6 and full29eb runner bytes unavailable; no current provider/metadata/profile-bearing native proof",
+    "Proposal disposition": "Exact delta proposed for root integration after independent design review; no canonical tracked edit in this read-only lane"
+  },
+  "Upstream disposition": "none; local public harness receipt consistency gap, no demonstrated maintained upstream defect; no upstream target authorized"
+}

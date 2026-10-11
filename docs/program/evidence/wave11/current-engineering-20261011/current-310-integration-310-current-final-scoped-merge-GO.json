@@ -1,0 +1,373 @@
+{
+  "schema": "actions-pr310-independent-final-scoped-merge-admission/v1",
+  "verdict": "GO_NORMAL_PINNED_MERGE_TO_INTEGRATION_ONLY",
+  "observed_utc": "2026-10-11 06:10:48 UTC",
+  "source_head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+  "current_target": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+  "tested_merge": {
+    "sha": "d07c0d1d322249c60760735ed94715798faea4dc",
+    "tree": "17c1afa7fbaa6ae817830d85226b41f67dd8b820",
+    "ordered_parents": [
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "dfca3f8e63465595acff421f37f34d2a9d0a1b39"
+    ]
+  },
+  "normal_merge_expectations": "Root must use normal merge with expected source head dfca; target must remain1c75 or re-review the new union. Verify actual merged ordered parents and tree17c1 afterward. No bypass, force, squash or rebase substitution.",
+  "pr": {
+    "state": "open",
+    "draft": false,
+    "mergeable": true,
+    "mergeable_state": "clean",
+    "reviews": 0,
+    "unresolved_threads": 0
+  },
+  "policy": {
+    "live_branch_protected": false,
+    "branch_protection": {
+      "enabled": false,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "rulesets": [],
+    "dedicated_protection_read": "403 on prior authorized normal read; administrator-only surface unverified. Normal API enforces policy; no bypass inferred."
+  },
+  "declared_complete_inventory": "22 PR jobs across8 workflows: Runtime3+RuntimePyPI5(including late publish)+native3+frontend1+coverage1+Toolkit6+audit1+WorkItems2. WorkItems publish tag-only skip expected. No current auxiliary Copilot event; historical duplicates not substituted.",
+  "check_summary": {
+    "registered": 22,
+    "success": 21,
+    "expected_skip": 1,
+    "pending": 0,
+    "failure": 0
+  },
+  "checks": [
+    {
+      "id": 114399509046,
+      "name": "publish",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518919/job/114399509046"
+    },
+    {
+      "id": 114399292530,
+      "name": "publish (3.12)",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518934/job/114399292530"
+    },
+    {
+      "id": 114396647092,
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518918/job/114396647092"
+    },
+    {
+      "id": 114396647091,
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518943/job/114396647091"
+    },
+    {
+      "id": 114396647063,
+      "name": "action-server-frontend-tests",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518989/job/114396647063"
+    },
+    {
+      "id": 114396647051,
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518943/job/114396647051"
+    },
+    {
+      "id": 114396647023,
+      "name": "build-wheels (ubuntu-22.04)",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518934/job/114396647023"
+    },
+    {
+      "id": 114396646995,
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518943/job/114396646995"
+    },
+    {
+      "id": 114396646985,
+      "name": "build-sdist (ubuntu-py3.12)",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518934/job/114396646985"
+    },
+    {
+      "id": 114396646984,
+      "name": "verify",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518919/job/114396646984"
+    },
+    {
+      "id": 114396646974,
+      "name": "build-wheels (macos-15)",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518934/job/114396646974"
+    },
+    {
+      "id": 114396646925,
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518918/job/114396646925"
+    },
+    {
+      "id": 114396646923,
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518918/job/114396646923"
+    },
+    {
+      "id": 114396646918,
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518918/job/114396646918"
+    },
+    {
+      "id": 114396646894,
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518918/job/114396646894"
+    },
+    {
+      "id": 114396646842,
+      "name": "build-wheels (windows-2022)",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518934/job/114396646842"
+    },
+    {
+      "id": 114396646718,
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518918/job/114396646718"
+    },
+    {
+      "id": 114396646675,
+      "name": "audit",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518886/job/114396646675"
+    },
+    {
+      "id": 114396646652,
+      "name": "build (windows-py3.12-devmode)",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518840/job/114396646652"
+    },
+    {
+      "id": 114396646635,
+      "name": "build (ubuntu-py3.12-devmode)",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518840/job/114396646635"
+    },
+    {
+      "id": 114396646571,
+      "name": "coverage",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518873/job/114396646571"
+    },
+    {
+      "id": 114396646481,
+      "name": "build (macos-py3.12-devmode)",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/joshyorko/actions/actions/runs/38114518840/job/114396646481"
+    }
+  ],
+  "workflows": [
+    {
+      "id": 38114518919,
+      "name": "Work Items Release",
+      "event": "pull_request",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 38114518934,
+      "name": "Actions Runtime PYPI Release",
+      "event": "pull_request",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 38114518989,
+      "name": "Action Server Frontend tests",
+      "event": "pull_request",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 38114518943,
+      "name": "Action Server Build (Unauthenticated)",
+      "event": "pull_request",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 38114518918,
+      "name": "RCC developer toolkit",
+      "event": "pull_request",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 38114518886,
+      "name": "AI audit evidence",
+      "event": "pull_request",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 38114518873,
+      "name": "Measured Python coverage gate",
+      "event": "pull_request",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 38114518840,
+      "name": "Action Server Tests",
+      "event": "pull_request",
+      "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "pagination": {
+    "checks_page2_empty": true,
+    "runs_page2_empty": true,
+    "reviews_page2_empty": true,
+    "legacy_statuses_empty": true,
+    "legacy_statuses_boundary": "Zero legacy statuses is not a fabricated required context; complete declared checks independently verified."
+  },
+  "independent_source_review": {
+    "path": "/workspace/engineering/pr310-current-refresh/independent-source-freeze-review.json",
+    "sha256": "6282ffab3862700e9b0279de029a7cfd64ebb59909dd3b860463a5ec43cc1fed",
+    "boundary": "1409leaves complete union; all268 producer and5 selectors exact original92498/current target/old4b; onlycanonical docs novel after ordinary merge, all8workflow generator roundtrips and local source gates retained"
+  },
+  "runtime_original_logs_private_only": [
+    {
+      "role": "Windows",
+      "job": 114396646652,
+      "path": "/workspace/engineering/current-live-admission-20261011/310-dfca-windows-original-private.log",
+      "sha256": "1d5ad710ad7899a975cef94a29547f9f28a08ab948c8318ebf31a72258ef341b",
+      "bytes": 581750,
+      "portable": {
+        "passed": 1072,
+        "skipped": 94
+      },
+      "integration": {
+        "passed": 131,
+        "skipped": 18,
+        "deselected": 1169
+      },
+      "types_files": 338
+    },
+    {
+      "role": "Linux",
+      "job": 114396646635,
+      "path": "/workspace/engineering/current-live-admission-20261011/310-dfca-linux-original-private.log",
+      "sha256": "d9070a35afbcec93e71d72da12414815eaf05ea84a0eb06808490c1ba8dcd27d",
+      "bytes": 1285857,
+      "portable": {
+        "passed": 1154,
+        "skipped": 12
+      },
+      "integration": {
+        "passed": 132,
+        "skipped": 17,
+        "deselected": 1169
+      },
+      "types_files": 338
+    },
+    {
+      "role": "Mac",
+      "job": 114396646481,
+      "path": "/workspace/engineering/current-live-admission-20261011/310-dfca-mac-original-private.log",
+      "sha256": "05ba62ccdb3ee92385c7124b2b4d04c752a2bcdae146b557d8213acc88ea3583",
+      "bytes": 1209031,
+      "portable": {
+        "passed": 1078,
+        "skipped": 88
+      },
+      "integration": {
+        "passed": 132,
+        "skipped": 17,
+        "deselected": 1169
+      },
+      "types_files": 338
+    }
+  ],
+  "actual_test_subject_in_all_three_logs": "d07c0d1d322249c60760735ed94715798faea4dc",
+  "non_claims": "Current full configured Runtime checks succeed, without same-head rerun or old fbde CI carry. Original4b/de533 three FIRST-readiness failures, progress intervals and cleanup/causeUNKNOWN remain immutable. Success after ordinary target refresh/test-only observer import does not prove production cause repair or universal cleanup. Original owned Linux f506/92498 pair and65c hosted Mac/Windows c600 tuple remain distinct; selected native modules/browser/PID/public-Core limits retained. Whole208/backend/browser/private/OAuth/full release acceptance remains HOLD.",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md and docs/skills/work-items.md integrated in exactdfca; separate282 exactguide delta6b406 independently accepted",
+    "Durable learning captured": "Complete current workflow/job/event inventory, expected tag skip, original failure separate from fresh union success; producer parity and receipt content hashes separate from actual source ancestry/platform acceptance.",
+    "Evidence": "Source freeze6282; current8workflows/22jobs/d07c exact orderedparents/tree; three current Runtime original logs; retained de533/e95/4d5/c600 tuples.",
+    "Stale or ambiguous guidance removed": "Historical CI or selected native success admitting a different failing union; expected tag skip treated as missing gate; absent historical duplicate treated as required current event; successful fresh source run relabeling previous failure/cause/cleanup.",
+    "Remaining uncertainty": "Actual root merge/readback not yet performed; administrator-only policy surface unavailable; full208/private/backend/browser/provider/release contracts remain open."
+  },
+  "documentation_delta_disposition": "ACCEPT existing verified dfca canonical corrections; no additional source/documentation mutation needed for this read-only final review.",
+  "upstream_disposition": "none"
+}

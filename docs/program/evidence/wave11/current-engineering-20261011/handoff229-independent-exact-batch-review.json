@@ -1,0 +1,328 @@
+{
+  "verdict": "GO_EXACT_229_MANIFEST_BATCH_DURABLE_REVIEWED_EVIDENCE_AND_AUTHORED_GUIDANCE; NOT_SOURCE_OR_ACTUAL_ACCEPTANCE",
+  "repository": "/workspace/engineering/campaign-checkpoint",
+  "preserved_parent": "ef91a8c4da5cb5002ca57d950c3f3f753212e27a",
+  "review_boundary": {
+    "manifest": {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-20261011/manifest.json",
+      "bytes": 60035,
+      "sha256": "4bfac2f7e63b5cfca1bce8aa4c3af9d881acc06bdbd7b0995689b82890e6ace1"
+    },
+    "README": {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-20261011/README.md",
+      "bytes": 16642,
+      "sha256": "70bd5cfdf30cff9783075a94095f395a38bcf180d0b8f042f0e237c01759d5fd"
+    },
+    "canonical_guide": {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+      "bytes": 210848,
+      "sha256": "5c1b93500052f5c0752d7ef406596055f9f67a0a2c6909fbacac2ae5f8c7fe44"
+    }
+  },
+  "byte_verification": {
+    "manifest_count": 229,
+    "prior169_Git_blobs_and_manifest_records_exact": true,
+    "new60_exact_original_source_length_SHA_bytes": true,
+    "descriptive_source_exception": "Prior pr290-actual-integration.json source labels authenticated GitHub merge/readback rather than local path; exact prior committed bytes and manifest unchanged",
+    "all_verified_binding_receipt": {
+      "path": "/workspace/engineering/checkpoint-229-independent-review/verified-manifest-source-bindings.json",
+      "bytes": 73303,
+      "sha256": "38c8a723441a22333ca674e3d6c3d54efbec28f3d2d5bc0367a368420b3ecd35"
+    }
+  },
+  "safety_review": {
+    "new_extensions": {
+      ".json": 44,
+      ".patch": 9,
+      ".md": 3,
+      ".py": 4
+    },
+    "credential_privatekey_signedURL_bearer_patterns": 0,
+    "new_url_hosts": {
+      "github.com": 1,
+      "127.0.0.1": 5
+    },
+    "full_raw_job_logs_binaries_wheels_private_cache_indices_copied": false,
+    "private_hash_refs_only": "V4 scoped checkpoint retains path/hash pointer to exhaustive private index and selected raw receipts, not their contents; no provider payload/config/environment values admitted",
+    "Playwright_reports": "List-only configs/report describe loopback webserver and fixed test inventory; unexecuted/skipped state preserved",
+    "Git_leaf_manifests": "Mode/blob metadata only, no tracked config/provider payloads or raw contents",
+    "runner_sources": "Existing immutable qualified controller/test source contains intended environment-name references and public local paths; no captured environment or token values",
+    "prior_content": "169 original members byte-identical to prior independently reviewed committed/remote checkpoint; existing public pip METADATA and two historical generated-member .bin bytes unchanged"
+  },
+  "claims_review": {
+    "309_308": "Exact independent source receipts/canonical Counter and METADATA patches retained. Authenticated push readback records exact actual heads and refs; old GraphQL cache disclosed; no fresh hosted merge admission or full152/134 claim",
+    "306": "Source c38 preserves one changed database producer and already-aborted PostgreSQL recovery scope, older native artifact not qualified, ephemeral setup bytes unavailable stated honestly",
+    "310": "Source dfca current-target union and original first-readiness failures separately preserved; source observation is not production fix or complete208/platform/publicCore acceptance",
+    "305_V4": "Original combined actual failure remains HOLD despite command exit0/five persisted tools/two resources/three sampledCoremembers/strict scoped cleanup; overwritten original report unavailable; exhaustive private index stays out of Git",
+    "305_V5": "Immutable independent controller qualification only retained; actual execution currently separate and no actualV5 receipt or outcome included in229 batch",
+    "target_CI": "Actual1c75 prospective complete leaves and workflow filter19-job expectation retained; no cachedfbde CI carry or implied current native qualification. Late publisher and separate Copilot scope recorded",
+    "push_reference": "Correction preserves reviewed accepted commit on actual existing PR branch, owned accidentalref deletion only after no-other-work/noPR/exacthead checks; safe evidence does not grant general ref deletion authority"
+  },
+  "whitespace": {
+    "authored_guide_README_manifest_diffcheck": "PASS",
+    "all_evidence_blanket_diffcheck": "NOT_CLAIMED; original unified-context spaces and other historical raw evidence preserved by exact hash",
+    "original_patch_exceptions": [
+      {
+        "file": "pr310-canonical-guide-proposed.patch",
+        "sha256": "2915ac45c5140032ca613c48fa42b99b02bcaf5e995ec10872a002e1f40c12c8",
+        "preserved_lines": [
+          {
+            "line": 6,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "oauth-canonical-proposed.patch",
+        "sha256": "ac884e1e46d5be3e8307ce23a747422c265a736b8430a1e0fd368a5c4f7bf55c",
+        "preserved_lines": [
+          {
+            "line": 34,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr310-platform-guide-proposed.patch",
+        "sha256": "57fe12e38b696e32de01046b1497e34f7eab3072269fd1cf592d010c55ee7cbe",
+        "preserved_lines": [
+          {
+            "line": 6,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr310-platform-gate-clarification.patch",
+        "sha256": "5e38c68583aa8cac5700a0ad0fe42dc425fd8ce0fb252d8cd76b694638061a7e",
+        "preserved_lines": [
+          {
+            "line": 6,
+            "kind": "blank unified-context line"
+          },
+          {
+            "line": 16,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr307-canonical-exact-delta.patch",
+        "sha256": "1f09c93bb40c75b87cb4576a3fc251b3b999d3eaeeeb96581df0cb5f24bde044",
+        "preserved_lines": [
+          {
+            "line": 19,
+            "kind": "blank unified-context line"
+          },
+          {
+            "line": 62,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr299-current-union-source-scope.patch",
+        "sha256": "38126051092f739693008a78af0e8281bb656ad9490471bb3ab609cebfce0d76",
+        "preserved_lines": [
+          {
+            "line": 6,
+            "kind": "blank unified-context line"
+          },
+          {
+            "line": 8,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr308-current-version-source-scope.patch",
+        "sha256": "6efd2c2a814dba6c9b9ca22cacb7368a19cc4b89d2a8fc2511d795b968cee698",
+        "preserved_lines": [
+          {
+            "line": 8,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr305-canonical-collected-module-proposed.patch",
+        "sha256": "7e244ee6986c68e7b8244f667044629fa6be661a968b99be45f1680507e78bee",
+        "preserved_lines": [
+          {
+            "line": 25,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr311-full-admission-canonical.patch",
+        "sha256": "caae3f92c32948f0bb29c93302b1ae85f5c4cc3c3671100690cd95dad5d52671",
+        "preserved_lines": [
+          {
+            "line": 4,
+            "kind": "blank unified-context line"
+          },
+          {
+            "line": 6,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr305-actual-v3-canonical.patch",
+        "sha256": "5dbf490d781451fefc400cacd9adccdf0402af16962863a73ec33975b4ae468a",
+        "preserved_lines": [
+          {
+            "line": 24,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr307-hosted-acquisition-canonical.patch",
+        "sha256": "dd5396a28768f5b1eb841dbdf02991ec79870cdd8c938681d6f1dc0c3a29d0d3",
+        "preserved_lines": [
+          {
+            "line": 24,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr311-independent-integration-priority-canonical.patch",
+        "sha256": "f25c42da132befd90f086ac60f8ba426a673cb7a10d760a2b1b069bf6ff6985e",
+        "preserved_lines": [
+          {
+            "line": 4,
+            "kind": "blank unified-context line"
+          },
+          {
+            "line": 6,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr310-actual311-refresh-canonical-actual-delta.patch",
+        "sha256": "c3b1ef94af5dd54132b4f771be3ce413f8d244695dcbfa2455848578253bc8ad",
+        "preserved_lines": [
+          {
+            "line": 8,
+            "kind": "blank unified-context line"
+          },
+          {
+            "line": 43,
+            "kind": "blank unified-context line"
+          },
+          {
+            "line": 74,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr310-original-first-readiness-310-initial-readiness-canonical-proposed.patch",
+        "sha256": "b4b32085a6adb9e1a0f9c531245267d12d50d41d7ddbadbe343f9ed9c647c0e7",
+        "preserved_lines": [
+          {
+            "line": 23,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr306-actual311-refresh-canonical-actual-delta.patch",
+        "sha256": "cac89fd92340ccb2e3bf41a415881450f1b65bb5a7de6892121bb8d2195a3ee6",
+        "preserved_lines": [
+          {
+            "line": 8,
+            "kind": "blank unified-context line"
+          },
+          {
+            "line": 26,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr305-actual311-selector-canonical-current-union.patch",
+        "sha256": "c5e79cc6cef79c65c6e870431df654d7a39d96381e7e6b6ee9e9e7bc479d2f97",
+        "preserved_lines": [
+          {
+            "line": 28,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr305-v4-independent-canonical-actual-v4-proposed.patch",
+        "sha256": "ce3ddb4458c87cb3a61e39fb77378c19f62303d92b7f422a5ab86ce0e83d6f9a",
+        "preserved_lines": [
+          {
+            "line": 18,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "next-actual311-union-canonical-prospective-source-and-CI-filter-proposed.patch",
+        "sha256": "8e91bc5395e01d6e02347a6597f452e6a7251d1a66464a45f359a4273b8610ed",
+        "preserved_lines": [
+          {
+            "line": 4,
+            "kind": "blank unified-context line"
+          },
+          {
+            "line": 6,
+            "kind": "blank unified-context line"
+          }
+        ]
+      },
+      {
+        "file": "pr305-canonical-runner-v5-proposed.patch",
+        "sha256": "e84eb7659efef7f349231b1b8b5a80ef5c0d8a2f20e9dc2e1a9d59eea8c3e0b0",
+        "preserved_lines": [
+          {
+            "line": 28,
+            "kind": "blank unified-context line"
+          }
+        ]
+      }
+    ]
+  },
+  "canonical_documentation": {
+    "file": "docs/skills/repository-operations.md",
+    "exact_reviewed_integrated_root_delta": {
+      "path": "/workspace/engineering/checkpoint-229-independent-review/canonical-reviewed-root-delta.patch",
+      "bytes": 4118,
+      "sha256": "2e318671afc4ff92b64399c77adfc2eb83bbff2761b6085ebd0d656bbe239db5"
+    },
+    "disposition": "GO_INTEGRATED exact root adaptation of completed-stream preservation, executed dependency path, list-vs-executed admission/deadline, receipt-vs-commit identity, actual PR reference, current-target CI filters, Counter and METADATA lessons. Earlier PostgreSQL/WorkItems scope retained, no duplicate needed. Qualified V5 reporter-specific schema and newly independently accepted299 reader-boundary remain exact additive proposal below; no actualV5 claim.",
+    "additional_exact_proposal": {
+      "path": "/workspace/engineering/checkpoint-229-independent-review/canonical-exact-followup-proposed.patch",
+      "bytes": 1926,
+      "sha256": "4cd7a4227faef0159698e379f6f1326be75d12e4c06f131c389869ca22db51dd"
+    },
+    "proposal_evidence": [
+      {
+        "source": "Retained pr305-independent-v5-runner-qualification.json",
+        "scope": "Locked reporter schema/result.stderr parser controls; not actual browser case outcome"
+      },
+      {
+        "source": "/workspace/engineering/pr299-actual311-independent-review/independent-frozen-source-review.json",
+        "sha256": "0f304bfebd49208c7bd5fce0244b9951a5d0d68dac2af449435873462adff97a",
+        "scope": "Direct resolver transaction/yield/read AST and three provider-open denial sentinel cases"
+      }
+    ],
+    "stale_ambiguity": "Raw streams cannot be replaced by empty assertion fallback; measured ignored dependency elsewhere cannot authenticate executed CLI; list skipped inventory is not executed case; receipt hashes are not Git ancestry; old cached CI and imported identical generator do not dictate current workflow filters; durable reader/restart is not active-stream revocation. V5 schema mechanism is qualified separately from actual run.",
+    "remaining_uncertainty": "Fresh hosted merge gates/current target and complete retained acceptance graph remain open. V5 actual proof not in reviewed batch; original V4 bytes cannot be reconstructed; current299 native/backend/public transport/private134/Runtime publication remain HOLD.",
+    "upstream": "none"
+  },
+  "no_actions": [
+    "No repository/evidence mutation by reviewer",
+    "No actual native/provider/browser/source gate execution",
+    "No push/merge/publication/infrastructure/issue closure"
+  ],
+  "next_root_checks": "Before commit stage only manifest-bound reviewed members including ignored files as needed; verify all229 from index, enforce failure status, then committed and remote exact bytes. New299 receipt or V5actual belongs additive independently reviewed batch.",
+  "upstream": "none"
+}

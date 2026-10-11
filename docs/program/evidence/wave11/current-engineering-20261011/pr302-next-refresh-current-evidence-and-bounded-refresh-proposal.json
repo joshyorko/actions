@@ -1,0 +1,154 @@
+{
+  "status": "READ_ONLY_NEXT_REFRESH_PREPARATION_NO_SOURCE_OR_ACTUAL_AUTHORITY",
+  "S": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+  "S_tree": "e05141d122b7245b626c5d0389cf9b653c8ad300",
+  "C": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+  "C_tree": "6e8af78b3386b870191d559535519f90bc4b0b8a",
+  "C_parent_S": true,
+  "review_path": "/workspace/engineering/pr302-current-S-C-actual-review/independent-current-three-case-review.json",
+  "review_sha256": "b8acf687480874184fce59bdb43be123ab5820e664aa9fa98a49905a55c039ba",
+  "artifact_original_tuple": {
+    "id": 11691074610,
+    "size": 7437,
+    "sha256": "b25afa9eb55320bf6b851ef49586cd2870952956eecc942a0f22080b898de1d1",
+    "local_path": "/workspace/engineering/pr302-current-S-C-actual-review/original-artifact-11691074610.zip",
+    "members": [
+      {
+        "member": "rcc-provider-rollback-evidence/acceptance-summary.json",
+        "size": 3067,
+        "sha256": "47a5a26178a405164611280c319278a865db1b8f1cf7af80fbbb137841b97f92"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/acceptance-summary.log",
+        "size": 686,
+        "sha256": "40e206ae7d74417ce430e121ceaf6f5638ac903e430d532ee02025434b45d734"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/lifecycle-receipt.json",
+        "size": 7603,
+        "sha256": "cc86ef7939d9f243e021a9a0676e97a0849b28b556b78fc07a0b736bec8ede7b"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/lifecycle-summary.json",
+        "size": 1221,
+        "sha256": "2f2230b71760e46884a263f5c03524f100275b6be95aad6bfde1ba8ce2ce9020"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/published-details-receipt.json",
+        "size": 1483,
+        "sha256": "a3e4b61ca3fcf1043ca50770caabfc8b31ff85b4de22a6e848e480d84f4b4052"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/staged-consumer-receipt.json",
+        "size": 2393,
+        "sha256": "7f0a0c7c86052d94beb28fdebb493ca86c4779326c74353894e9ba8ad2cfe092"
+      },
+      {
+        "member": "rcc-provider-rollback-junit.xml",
+        "size": 752,
+        "sha256": "01dd302d04c21569e427a3eb9a380b926be30904782bc112ad28c4b3b7836724"
+      }
+    ]
+  },
+  "original_ZIP_and7member_bindings_recomputed": true,
+  "source_nine_bindings": {
+    "action_package_handler": {
+      "path": "action_server/src/actions/server/_action_package_handler.py",
+      "sha256": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64",
+      "S_C_bytes_equal": true
+    },
+    "actions_import": {
+      "path": "action_server/src/actions/server/_actions_import.py",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3",
+      "S_C_bytes_equal": true
+    },
+    "runtime_adapter": {
+      "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "sha256": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a",
+      "S_C_bytes_equal": true
+    },
+    "rollback_test": {
+      "path": "action_server/tests/action_server_tests/test_current_candidate_import_rollback.py",
+      "sha256": "60d81fabaa2ba0446ff888109e050c883ee944553794636fd527a6fe27d4691b",
+      "S_C_bytes_equal": true
+    },
+    "staged_consumer_test": {
+      "path": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "sha256": "0edc5d092dba9415f552ee1f666edac8f3ce9e833bea1ef73f8370ed2d446e6a",
+      "S_C_bytes_equal": true
+    },
+    "source_staging": {
+      "path": "action_server/src/actions/server/deployments/source_staging.py",
+      "sha256": "fda3f2c045414a9cae21cc0765a3eb7c72db2ddd2f5d74e567a04a0513baf620",
+      "S_C_bytes_equal": true
+    },
+    "source_read": {
+      "path": "action_server/src/actions/server/deployments/source_read.py",
+      "sha256": "4ae8cbe57aa5c924585f4257a1be1700aa49baa63d6150efba20935045f7a8a5",
+      "S_C_bytes_equal": true
+    },
+    "source_manifest": {
+      "path": "action_server/src/actions/server/deployments/source_manifest.py",
+      "sha256": "4fb8d376d1b4aa06d301dedaeee67a2916561c7d10b8f1dadd657870b37b2b43",
+      "S_C_bytes_equal": true
+    },
+    "acceptance_helper": {
+      "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+      "S_C_bytes_equal": true
+    }
+  },
+  "JUnit_exact_3_no_fail_error_skip": true,
+  "source_pin_S_not_C": {
+    "candidate_sha": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+    "candidate_tree": "e05141d122b7245b626c5d0389cf9b653c8ad300"
+  },
+  "old_exact_head_checks": {
+    "count": 26,
+    "all_SUCCESS": true,
+    "retained_json": "/workspace/engineering/pr302-next-refresh-readonly/current-ba04-26-checks.json",
+    "scope": "originalba04 only; not laterunion"
+  },
+  "native_producer_inventory_count": 268,
+  "native_producer_mismatch": [
+    {
+      "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "native_92498_sha256": "65abc1efe7879ffc325f84841b9630f05b8a5b11cdc3a32728daf7df7091edcb",
+      "S43a_sha256": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a"
+    }
+  ],
+  "producer_reuse": "92498qualificationINVALID for302 changed adapter; noexclusion/newbuild",
+  "new_target": "WAIT_ROOT_ACTUAL310_MERGE_IDENTITY",
+  "next_source_plan": [
+    "ordinary existing302branch merge exactrootannouncedactualtarget into currentCba04; preserveallsource/commits",
+    "resolve canonicalgenerator/docs union without duplicateprofileimplementation; measureallleafunion and source9/producer268+selected5 against bothparents",
+    "commitSprime/sourceunion retainingoldS pin until independentSprime review",
+    "then normalchildCprime changesonlyRccProvider two candidatepins/testconstants/generatedoneworkflow to reviewedSprimecommit/tree, never Cprime self",
+    "meaningfulservicefree oldpinRED/newpinGREEN; allthree originalactualselectors/assertions/pinnedRCC/provider/source/Core1.0.2/upload/permissions retained",
+    "canonicalDoctor/verifiedBootstrapreuse or serializedBootstrap/Toolkit/scoped/fullconfiguredsource/lint/type/regeneration; immutableSprimeandCprimereceipts for independentreview/rootpush",
+    "fresh exactcontrol hostedthree-case receipt plus exacttestedmergefullCI; no localactual/native/provider authorized now"
+  ],
+  "Upstream_disposition": "none",
+  "original_full_CI_tested_merge": {
+    "sha": "63cf2baaf71884c65f7dbc357004f73176193f38",
+    "tree": "6e8af78b3386b870191d559535519f90bc4b0b8a",
+    "ordered_parents": [
+      "fbde0d3a248c47c9964851355f96575c89a87329",
+      "ba04dff7c932b963f2d7a60529fbc3c325bbee1d"
+    ],
+    "retained_terminal26_inventory": "/workspace/engineering/pr302-current-S-C-actual-review/retained-control-terminal-CI-inventory.json",
+    "retained_terminal26_inventory_sha256": "3e218d16141177ad70c9bb0f24d226e5b83ceffe222f7825a530712b2e5556b0",
+    "original_job_logs_inventory": "/workspace/engineering/current-admission-review/terminal-log-inventory.json",
+    "job_logs_inventory_sha256": "0d38cbd12e0f98794a763fd61d2a5e652315eb455d46c7c786f970310160a669"
+  },
+  "all_five_selected_inputs_equal_native92498": true,
+  "publication_profile_selector_contracts": "Preserve existing one envpublish invocation/--environment/--json/optional --provider argv; publish_artifact str compatibility and strict two-digest details share payload helper; loopback/profile selection and provider-operation assertions unchanged. Public RCC44profile union is separate source owner; no duplicatedimplementation.",
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "/workspace/engineering/pr302-next-refresh-readonly/canonical-nine-source-bindings-proposed.patch",
+    "Durable_learning": "Nine measured source samples bind recordedS, notC; full resolvedunion/full nativeproducer and fullsuite testedmerge identities remain separate evidence gates even tree-equal",
+    "Evidence": "Original ZIP11691074610 seven member hashes, nine measuredS Gitblob hashes, source/control rawtuple and threecaseJUnit; terminal26 testedmerge63cf orderedfbde/ba04; 268producer mismatch onlyadapter",
+    "Stale_guidance_removed": "Proposed clarification removes ambiguity that nine summary hashes/fullCI onC qualify later union or full nativeproducer",
+    "Remaining_uncertainty": "Actual310merge not announced; newtarget S\u2032/C\u2032 source unions/checks/actual3case notrun; private134135/Core1.0.3/WindowsRCC gates remainHOLD",
+    "patch_sha256": "fef37515784cbf9fbb003ecca90ec0acb78d8e319bf2fd0ce2c2c1805ff955e6"
+  }
+}

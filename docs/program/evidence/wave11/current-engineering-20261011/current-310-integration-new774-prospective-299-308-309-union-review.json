@@ -1,0 +1,108 @@
+{
+  "schema": "actions-new774-three-prospective-readonly-union/v1",
+  "actual_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "target_tree": "17c1afa7fbaa6ae817830d85226b41f67dd8b820",
+  "target_delta": [
+    "action_server/frontend/scripts/native-workitems-ui-acceptance.mjs",
+    "action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py",
+    "docs/skills/repository-operations.md",
+    "docs/skills/work-items.md"
+  ],
+  "scope": "Read-only Git object analysis only; no worktree/index/source commit or source/native/gateway test; computed prospective trees are not actual tested or committed unions.",
+  "subjects": {
+    "299": {
+      "source_head": "2ad0fd6a899d26aa92d719390f639a76b89fb6f3",
+      "merge_base": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "prospective_tree": "758f098dd846437b0d69d246d112fbdb89caf363",
+      "automatic_merge_success": true,
+      "source_leaves": 1419,
+      "target_leaves": 1409,
+      "prospective_leaves": 1419,
+      "all_parent_paths_retained": true,
+      "novel_union_leaf_paths": [
+        "docs/skills/repository-operations.md"
+      ],
+      "novel_nondoc_paths": [],
+      "two_target_ownedUI_mode_blob_exact": true,
+      "producer_inputs": 274,
+      "native92498_changed_inputs": [
+        "action_server/src/actions/server/_actions_run.py",
+        "action_server/src/actions/server/_api_analytics.py",
+        "action_server/src/actions/server/_api_run.py",
+        "action_server/src/actions/server/_models.py",
+        "action_server/src/actions/server/_runs_state_cache.py",
+        "action_server/src/actions/server/migrations/__init__.py"
+      ],
+      "native92498_added_inputs": [
+        "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+        "action_server/src/actions/server/run_outputs/__init__.py",
+        "action_server/src/actions/server/run_outputs/filesystem.py",
+        "action_server/src/actions/server/run_outputs/models.py",
+        "action_server/src/actions/server/run_outputs/service.py",
+        "action_server/src/actions/server/run_outputs/types.py"
+      ],
+      "Runtime_producer_inputs_exact_original_source": true,
+      "prospective_github_exact_original_source": true,
+      "expected_PR_job_matrix": "19 across6PR workflows: Runtime3+RuntimePyPI5+native3+coverage1+Toolkit6+audit1; include late PyPI publish. Future actual PUSH auxiliary events must be reconciled separately, never carried from old source.",
+      "verdict": "READY_FOR_OWNING_ORDINARY_SOURCE_REFRESH_REVIEW_ONLY"
+    },
+    "308": {
+      "source_head": "9025a1e44bb05992e9f220842bfaf16a99ebd04f",
+      "merge_base": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "prospective_tree": "3726baf58c5b7caac1fbb1339e17b9d083b40fa4",
+      "automatic_merge_success": true,
+      "source_leaves": 1409,
+      "target_leaves": 1409,
+      "prospective_leaves": 1409,
+      "all_parent_paths_retained": true,
+      "novel_union_leaf_paths": [
+        "docs/skills/repository-operations.md"
+      ],
+      "novel_nondoc_paths": [],
+      "two_target_ownedUI_mode_blob_exact": true,
+      "producer_inputs": 268,
+      "native92498_changed_inputs": [],
+      "native92498_added_inputs": [],
+      "Runtime_producer_inputs_exact_original_source": true,
+      "prospective_github_exact_original_source": true,
+      "expected_PR_job_matrix": "19 across6PR workflows: Runtime3+RuntimePyPI5+native3+coverage1+Toolkit6+audit1; include late PyPI publish. Future actual PUSH auxiliary events must be reconciled separately, never carried from old source.",
+      "verdict": "READY_FOR_OWNING_ORDINARY_SOURCE_REFRESH_REVIEW_ONLY"
+    },
+    "309": {
+      "source_head": "0d947f839628cc902bd409a7be93dcb49bc0aa02",
+      "merge_base": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "prospective_tree": "481723a9ffb8528709a6c4e437ac5ad0dc40092c",
+      "automatic_merge_success": true,
+      "source_leaves": 1410,
+      "target_leaves": 1409,
+      "prospective_leaves": 1410,
+      "all_parent_paths_retained": true,
+      "novel_union_leaf_paths": [
+        "docs/skills/repository-operations.md"
+      ],
+      "novel_nondoc_paths": [],
+      "two_target_ownedUI_mode_blob_exact": true,
+      "producer_inputs": 268,
+      "native92498_changed_inputs": [],
+      "native92498_added_inputs": [],
+      "Runtime_producer_inputs_exact_original_source": true,
+      "prospective_github_exact_original_source": true,
+      "expected_PR_job_matrix": "19 across6PR workflows: Runtime3+RuntimePyPI5+native3+coverage1+Toolkit6+audit1; include late PyPI publish. Future actual PUSH auxiliary events must be reconciled separately, never carried from old source.",
+      "verdict": "READY_FOR_OWNING_ORDINARY_SOURCE_REFRESH_REVIEW_ONLY"
+    }
+  },
+  "priority_proposal": [
+    "Retain active302/publicRCC lanes; no third sourcewriter.",
+    "309 and308 have no Runtimeproducer mismatch versus92498; ordinary target refresh remains required and their source-only scopes do not satisfy broader OAuth/private/wheel-native gates.",
+    "299 requires complete274input inventory (six historical sourcechanges +six additions), preserves299\u2192300 dependency and remainsdraft; current native qualification is not inherited from92498.",
+    "306 Windows integration failure diagnosis remainsrcc_acceptance-owned before refresh; no blind rerun.282/305 current sourcecontrols and original actualproof identities staydistinct across nextrefresh."
+  ],
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "Existing docs/skills/repository-operations.md and docs/skills/work-items.md guidance accepted; no cosmetic duplication.",
+    "Durable learning captured": "Exact new-target prospective tree/blob preservation is separate from old-target CI and actual source/native admission.",
+    "Evidence": "Authenticated actual774 readback plus read-only source/native/git merge-tree inventories.",
+    "Stale or ambiguous guidance removed": "Green old1c75 checks or matching Runtimeproducer inputs alone qualify a new774 union.",
+    "Remaining uncertainty": "Actual committed ordinary refresh, configured sourcechecks/full freshCI and scoped native/provider/private gates."
+  },
+  "upstream_disposition": "none"
+}

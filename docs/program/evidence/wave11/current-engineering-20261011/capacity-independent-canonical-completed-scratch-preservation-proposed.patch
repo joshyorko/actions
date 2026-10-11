@@ -1,0 +1,17 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3057,3 +3057,14 @@
+ preserve parsing failures separately from unreached timeout and cleanup
+ assertions. Cleanup code is not an observed cleanup receipt; missing returned
+ census fields remain unavailable.
++
++When workspace capacity is exhausted, preserve completed scratch before removing
++its expanded copy. Limit recovery to named invocation namespaces with the
++recorded completed-recycle marker and no observed live process handles. Archive
++on an existing mount, verify every recorded member's bytes, mode, owner and
++symlink target, and resolve internal TAR hardlinks before rechecking the original
++inventory and removing only that namespace. A hardlink header is not missing
++regular-file data. Keep private archives and complete inventories outside Git;
++retain their hashes and scoped verification receipts. State unrecorded metadata
++and historical observation limits. Recovered capacity does not turn an ENOSPC
++gate green; rerun its required checks with new logs.

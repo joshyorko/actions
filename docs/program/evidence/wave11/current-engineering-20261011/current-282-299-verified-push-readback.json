@@ -1,0 +1,48 @@
+{
+  "schema": "actions-current-pr282-pr299-normal-push-readback/v1",
+  "checked_at": "2026-10-11T06:08:02.231634+00:00",
+  "named_target": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+  "pull_requests": [
+    {
+      "number": 282,
+      "state": "open",
+      "head": "9c8f1c95caeded6495877280ed1465fd9850b254",
+      "head_ref": "feat/canvas-template-20261010",
+      "named_head_ref": "9c8f1c95caeded6495877280ed1465fd9850b254",
+      "reported_base": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "synthetic": "e8a4a45b63f2fcd9ab62f3e386fdf5a7d698b972",
+      "tree": "f67cba808205189b4e54318b2a62bada739178c2",
+      "ordered_parents": [
+        "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+        "9c8f1c95caeded6495877280ed1465fd9850b254"
+      ],
+      "independent_source_review": {
+        "path": "/workspace/engineering/pr282-staging-source-refresh/independent-frozen-source-review.json",
+        "bytes": 3786,
+        "sha256": "235df4d71ecf79cce044747b99b2f19644bc51177d4972a584b82f03f1577f2a"
+      },
+      "push_method": "normal existing branch, queried actual headRefName and clean accepted localHEAD before push; no rewrite/newbranch"
+    },
+    {
+      "number": 299,
+      "state": "open",
+      "head": "2ad0fd6a899d26aa92d719390f639a76b89fb6f3",
+      "head_ref": "feat/shared-run-output-20261010",
+      "named_head_ref": "2ad0fd6a899d26aa92d719390f639a76b89fb6f3",
+      "reported_base": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "synthetic": "61089cbaa2335b2675c5ff5f5a9019b1c57ca576",
+      "tree": "ae973b037c3370ce605c8b7b0db813e0ff48a6fa",
+      "ordered_parents": [
+        "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+        "2ad0fd6a899d26aa92d719390f639a76b89fb6f3"
+      ],
+      "independent_source_review": {
+        "path": "/workspace/engineering/pr299-actual311-independent-review/independent-frozen-source-review.json",
+        "bytes": 10865,
+        "sha256": "0f304bfebd49208c7bd5fce0244b9951a5d0d68dac2af449435873462adff97a"
+      },
+      "push_method": "normal existing branch, queried actual headRefName and clean accepted localHEAD before push; no rewrite/newbranch"
+    }
+  ],
+  "scope": "Existing source pushes only. Fresh exactsource/control hostedadmission remainsrequired; no native/product/release gate waiver. Initial immediate282 RESTcache returneda0/ba85; liveGitref wasnew9c8; subsequentREST+Gitref+actualsynthetic authenticate newtuple."
+}

@@ -1,0 +1,66 @@
+{
+  "verdict": "HOLD_CURRENT305_COMPLETE_CI; GO_BOUNDED_SYNTHETIC_FIXTURE_REPRESENTATION_DIAGNOSIS",
+  "head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+  "tested_merge": "8e9436faf78eff31aa5f60699db01a51815bfc84",
+  "tested_tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca",
+  "ordered_parents": [
+    "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+    "3ec9d0acbe30ad94d02e4c24fef2587127964495"
+  ],
+  "run": 38114004651,
+  "job": 114395155610,
+  "failed_step": "Test (not integration)",
+  "failed_nodes": [
+    "action_server_tests\\mcp\\test_canvas_runtime_admission.py::test_public_probe_admits_exact_sample_and_rejects_boundary_poisons[None]",
+    "action_server_tests\\mcp\\test_canvas_runtime_admission.py::test_public_probe_admits_exact_sample_and_rejects_boundary_poisons[member]",
+    "action_server_tests\\mcp\\test_canvas_runtime_admission.py::test_public_probe_admits_exact_sample_and_rejects_boundary_poisons[version]",
+    "action_server_tests\\mcp\\test_canvas_runtime_admission.py::test_public_probe_admits_exact_sample_and_rejects_boundary_poisons[ownership]",
+    "action_server_tests\\mcp\\test_canvas_runtime_admission.py::test_public_probe_admits_exact_sample_and_rejects_boundary_poisons[prefix]"
+  ],
+  "counts": {
+    "failed": 5,
+    "passed": 1083,
+    "skipped": 94,
+    "warnings": 14,
+    "seconds": 445.88,
+    "later_typecheck": "PASS339files"
+  },
+  "stage": "Synthetic sample setup at test_canvas_runtime_admission.py:82 before generated worker probe execution and baseline/poison assertions",
+  "source_sample_measurements": {
+    "actions/src/actions/__init__.py": {
+      "Git_blob_sha256": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+      "LF_to_CRLF_data_transform_sha256": "93e2fd8677315fe4fa8672a5f88fe7834c6b3bf06609c39810c01bfb03ce91cc"
+    },
+    "actions/src/actions/mcp/__init__.py": {
+      "Git_blob_sha256": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+      "LF_to_CRLF_data_transform_sha256": "c4a9645a7f3031509b8bceba30bdc2e1b1baea12e0969803fa922155223e130d"
+    },
+    "actions/src/actions/mcp/_metadata.py": {
+      "Git_blob_sha256": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c",
+      "LF_to_CRLF_data_transform_sha256": "c1cf078a51e130b58dc3495bff1655fd060e5677955e128552f8b95b997355c7"
+    }
+  },
+  "observed_first_member_digest": "93e2fd8677315fe4fa8672a5f88fe7834c6b3bf06609c39810c01bfb03ce91cc",
+  "source_attribution": "Actual observed first-member hash exactly equals CRLF-transformed committedLF actions.__init__ bytes; source fixture reads working-tree bytes. No checkout config/whole worker receipt measured. Public sample constants and Git blobs match the retained published samples.",
+  "test_mode_blob": "100644 blob 21ee42546dc5257ddfdb3f9e7f319c9f1f9c34cf\taction_server/tests/action_server_tests/mcp/test_canvas_runtime_admission.py",
+  "actual_Runtime_browser_provenance_cleanup": "NOT_EXERCISED by these five failed controls; V4 product browser HOLD is separate",
+  "raw_original_private_log": {
+    "path": "/workspace/engineering/current-live-admission-20261011/305-windows-3ec-original-private.log",
+    "bytes": 584263,
+    "sha256": "816287fab7c10cbc77c03189fcea22c972bb7deba527da6a5340f28ebf855282"
+  },
+  "scope": "No source edits/test rerun/acquisition/install/runtime execution; LFtoCRLF is an in-memory read-only byte comparison, not hosted rerun",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md exact owned patch",
+    "Exact delta": {
+      "path": "/workspace/engineering/current-live-admission-20261011/canonical-fixture-and-mutation-evidence-proposed.patch",
+      "bytes": 2019,
+      "sha256": "4f29ae54111aeadbf5c99443f2cdb51ab5d875024bd0c0427c0e7e846317c62d"
+    },
+    "Durable learning captured": "Fixed public digest fixture bytes must be committed/authenticated bytes; require valid baseline before poison assertions; retain actual worker strict checks",
+    "Evidence": "Current5-node failure, exact observed93e digest and committed790b LF/CRLF byte comparison",
+    "Stale or ambiguous guidance removed": "Checkout bytes necessarily equal public member bytes; failed fixture poisons prove boundary rejection or public browser failure",
+    "Remaining uncertainty": "Fresh corrected source/CRLF controls/currentCI; no actual full public wheel/coldregistry or V4 browser acceptance"
+  },
+  "Upstream disposition": "none; local test fixture attribution, no maintained upstream defect established"
+}

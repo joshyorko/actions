@@ -1,0 +1,84 @@
+{
+  "verdict": "GO_SOURCE_REFRESH_FOR_NORMAL_PUSH_ONLY",
+  "head": "9c8f1c95caeded6495877280ed1465fd9850b254",
+  "tree": "f67cba808205189b4e54318b2a62bada739178c2",
+  "ordinary_union": {
+    "head": "5cadafaf3d93e9bcc9b7f98a5f4b095d8f1b8898",
+    "tree": "a485467ed429d8f5ea0e64d1598644cb13b6980a",
+    "ordered_parents": [
+      "a0b8816a17b50aae5af1372cf89f71640fa10d3b",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ]
+  },
+  "clean": true,
+  "source_receipt_sha256": "1b59d89f584616772ed4881a3c0ae2baea9ea253529dfe1b445b1ef5d856fd74",
+  "verified_nested_bindings": 40,
+  "leaf_counts": {
+    "old": 1404,
+    "target": 1409,
+    "union": 1423,
+    "head": 1423
+  },
+  "exact_changed_paths": [
+    "action_server/tests/contract_tests/test_source_staging.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "all_parent_paths_preserved": true,
+  "whole_github_equal_union": true,
+  "all_other_original_test_function_AST_equal": true,
+  "original_mutation_test_outer_AST_equal": true,
+  "production_staging_and_read_equal_old_target": [
+    "action_server/src/actions/server/deployments/source_read.py",
+    "action_server/src/actions/server/deployments/source_staging.py"
+  ],
+  "native_inventory": {
+    "count": 269,
+    "all_exact_original282": true,
+    "changed_vs92498": [
+      "action_server/src/actions/server/templates/action-templates.yaml",
+      "action_server/src/actions/server/templates/action-templates.zip"
+    ],
+    "added_vs92498": [
+      "action_server/src/actions/server/templates/zips/canvas-query.zip"
+    ],
+    "matching": 266,
+    "qualification": "NOT_QUALIFIED"
+  },
+  "evidence_summaries": {
+    "red.log": [
+      "1 failed, 3 passed, 24 deselected in 0.25s"
+    ],
+    "green-focused.log": [
+      "4 passed, 24 deselected in 1.21s"
+    ],
+    "scoped.log": [
+      "75 passed in 1.63s"
+    ],
+    "full-source-replay.log": [
+      "========== 1164 passed, 12 skipped, 15 warnings in 132.34s (0:02:12) ==========="
+    ],
+    "toolkit.log": [
+      "All checks passed!",
+      "============================= 152 passed in 25.00s ============================="
+    ],
+    "static-replay.log": [
+      "302 files already formatted",
+      "Success: no issues found in 338 source files"
+    ]
+  },
+  "source_only_boundary": "No fresh hosted/native/browser/provider execution, no original hosted timestamp cause established, historical failure retained",
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr282-staging-source-refresh/canonical-actual-delta.patch",
+      "bytes": 1549,
+      "sha256": "6b406306548394847d9ea37e18d170da93f714e4ef736648e695d8f22373958f"
+    },
+    "Durable_learning_captured": "Before-read same-sized mutation tests re-read digest independently of timestamps; after-read metadata rejection is a separate measured signal. Match destination descriptor by device and inode.",
+    "Evidence": "Actual baseline/mutation/explicit-metadata controls, RED/GREEN, scoped75 and full1164; unchanged production code and original outer assertions",
+    "Stale_or_ambiguous_guidance_removed": "Distinguishes staged byte mutation from writes after bytes are returned; neither implies a hosted timestamp cause or atomic snapshot guarantee",
+    "Remaining_uncertainty": "Original hosted injection/stats/read snapshots unavailable; new hosted tuple pending. No universal concurrent after-read immutability, consumer/native/browser/provider or complete Canvas acceptance claim."
+  },
+  "documentation_delta_disposition": "ACCEPTED exact 10-line guide delta, technically supported by unchanged production/read-stage controls, preserves exclusive-writer and non-atomic-snapshot limits",
+  "upstream_disposition": "none"
+}

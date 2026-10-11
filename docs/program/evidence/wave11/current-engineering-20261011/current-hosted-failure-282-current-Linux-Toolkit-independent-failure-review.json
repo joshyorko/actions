@@ -1,0 +1,66 @@
+{
+  "verdict": "HOLD_CURRENT282_COMPLETE_CI; GO_BOUNDED_EXECUTED_STAGING_CONTRACT_FAILURE_CENSUS",
+  "head": "a0b8816a17b50aae5af1372cf89f71640fa10d3b",
+  "tested": {
+    "sha": "de8916137a1af05688033af5c8a6fcd625cab305",
+    "tree": "08168e31260ae09cd1be7ba4bbb627e24dbd9a60",
+    "parents": [
+      "fbde0d3a248c47c9964851355f96575c89a87329",
+      "a0b8816a17b50aae5af1372cf89f71640fa10d3b"
+    ]
+  },
+  "live_target": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+  "stale_REST_PR_base_snapshot": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe; not authoritative live target",
+  "tested_target_is_prior_fbde_not_live1c75": true,
+  "run": 38113263905,
+  "job": 114393029554,
+  "only_failed_step": "Package task smoke (Linux)",
+  "failed_node": "contract_tests/test_source_staging.py::test_staged_bytes_are_rechecked_and_mutation_cleans_owned_tree",
+  "location": "test_source_staging.py:516",
+  "counts": {
+    "failed": 1,
+    "passed": 1141,
+    "skipped": 13,
+    "warnings": 15,
+    "seconds": 120.91
+  },
+  "primary": "Failed: DID NOT RAISE ValueError from expected staged-change rejection",
+  "classification": "Executed Runtime source-contract failure after successful gateway preparation/Toolkit; not environment/control-plane acquisition",
+  "observed_control_flow": "Hook obtains original chunk then conditionally mutates same-sized staged file; mutated assertion follows raises-block and was not reached. No injection flag/readstage/stat/timestamp/digest observations emitted.",
+  "unresolved_cause": "Whether intended mutation fired and actual before/after file observations are UNKNOWN; no proven production mutation bypass, timestamp precision or nondeterminism cause",
+  "preserved_guard": "Production rechecks staged digest,size,descriptor/name observations including mtime_ns and ctime_ns; no waiver, cleanup/provenance observations unavailable for this failed testcase",
+  "source_modules_and_test_exact292": {
+    "action_server/src/actions/server/deployments/source_staging.py": {
+      "mode_blob": "100644 blob b475fd6688b7afc6606cde2cba9a1294d771a64c\taction_server/src/actions/server/deployments/source_staging.py",
+      "sha256": "fda3f2c045414a9cae21cc0765a3eb7c72db2ddd2f5d74e567a04a0513baf620"
+    },
+    "action_server/src/actions/server/deployments/source_read.py": {
+      "mode_blob": "100644 blob 7ec910a2ef7aecd2be73c6a7b786d42ea78c81af\taction_server/src/actions/server/deployments/source_read.py",
+      "sha256": "4ae8cbe57aa5c924585f4257a1be1700aa49baa63d6150efba20935045f7a8a5"
+    },
+    "action_server/tests/contract_tests/test_source_staging.py": {
+      "mode_blob": "100644 blob d167deb6ac671ef49ee87197ad9bd9e45850105c\taction_server/tests/contract_tests/test_source_staging.py",
+      "sha256": "55e688589768618cde4a65e71bc6060ece0999db5196eb8039c18f69f8d62464"
+    }
+  },
+  "browser_scope": "All39 strict browser predicates unchanged; separate passing Runtime/browser cells do not erase required source-contract failure or relabel prior tested target",
+  "raw_original_private_log": {
+    "path": "/workspace/engineering/current-live-admission-20261011/282-a0-primary-linux-toolkit-original-private.log",
+    "bytes": 1797273,
+    "sha256": "c04c7f8c92975551463f89da3ffb9228fd8dbceafa1dce00c78116e4ede8d0b7"
+  },
+  "delegated_diagnosis": "windows_311 reuses original acquisition for authorized bounded diagnosis; no source fix/rerun by this reviewer",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md mutation-evidence paragraph in exact owned patch",
+    "Exact delta": {
+      "path": "/workspace/engineering/current-live-admission-20261011/canonical-fixture-and-mutation-evidence-proposed.patch",
+      "bytes": 2019,
+      "sha256": "4f29ae54111aeadbf5c99443f2cdb51ab5d875024bd0c0427c0e7e846317c62d"
+    },
+    "Durable learning captured": "DIDNOTRAISE alone does not establish injection or production verifier failure; source-contract vs acquisition/currenttarget scopes distinct",
+    "Evidence": "Exact Toolkit failedstep/node/log plus unchanged staging/read/test Git bytes and control flow; live1c75 versus failed syntheticfbde/a0",
+    "Stale or ambiguous guidance removed": "Assertions after failed raises-block report successful injection; successful gateway/browser admission admits whole Toolkit; stale PRbase is true target",
+    "Remaining uncertainty": "Precise mutation/read-stage/metadata cause, currenttarget refresh/configuredCI, actual browser tuples and full release contracts"
+  },
+  "Upstream disposition": "none; no maintained upstream defect established"
+}

@@ -1,0 +1,19 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3224,6 +3224,16 @@
+ than `Path.read_text()`'s locale default so expected Unicode values are stable
+ across Windows and POSIX test runners.
+ 
++Treat a PID-file handoff as complete only after valid nonempty positive-PID
++contents are observed; file existence alone is not publication completion or
++process identity. Creation or truncation can expose empty contents before the
++writer finishes. Keep observation polling bounded and verify the identified
++process separately. A parsing failure while waiting for that handoff precedes
++the expected timeout and descendant-cleanup assertions, so it neither qualifies
++nor disproves their result. Preserve the primary failure and mark absent returned
++cleanup/census observations unavailable; the helper's cleanup code is not an
++actual cleanup receipt.
++
+ ## Frozen Runtime acceptance
+ 
+ For frozen Runtime acceptance, bind the candidate commit and tree separately

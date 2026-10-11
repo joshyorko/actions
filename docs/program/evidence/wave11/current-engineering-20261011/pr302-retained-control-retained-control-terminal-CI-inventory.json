@@ -1,0 +1,231 @@
+{
+  "schema": "actions-pr302-retained-current-C-CI-readback/v1",
+  "observed_utc": "2026-10-11 06:07:07 UTC",
+  "scope": "READ_ONLY terminal check inventory for retained ba04 control head, historical tested fbde union; not current target integration admission",
+  "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+  "candidate": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+  "candidate_tree": "e05141d122b7245b626c5d0389cf9b653c8ad300",
+  "tested_merge": {
+    "sha": "63cf2baaf71884c65f7dbc357004f73176193f38",
+    "tree": "6e8af78b3386b870191d559535519f90bc4b0b8a",
+    "parents": [
+      "fbde0d3a248c47c9964851355f96575c89a87329",
+      "ba04dff7c932b963f2d7a60529fbc3c325bbee1d"
+    ]
+  },
+  "total": 26,
+  "checks": [
+    {
+      "id": 114390218115,
+      "name": "publish (3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373523/job/114390218115"
+    },
+    {
+      "id": 114384495867,
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373554/job/114384495867"
+    },
+    {
+      "id": 114384495840,
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373554/job/114384495840"
+    },
+    {
+      "id": 114384495834,
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373554/job/114384495834"
+    },
+    {
+      "id": 114384495826,
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373549/job/114384495826"
+    },
+    {
+      "id": 114384495817,
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373554/job/114384495817"
+    },
+    {
+      "id": 114384495783,
+      "name": "build (macos-py3.10-devmode)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373537/job/114384495783"
+    },
+    {
+      "id": 114384495775,
+      "name": "build (ubuntu-py3.10-devmode)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373537/job/114384495775"
+    },
+    {
+      "id": 114384495773,
+      "name": "build-sdist (ubuntu-py3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373523/job/114384495773"
+    },
+    {
+      "id": 114384495752,
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373549/job/114384495752"
+    },
+    {
+      "id": 114384495742,
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373554/job/114384495742"
+    },
+    {
+      "id": 114384495741,
+      "name": "build (windows-py3.10-devmode)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373537/job/114384495741"
+    },
+    {
+      "id": 114384495703,
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373554/job/114384495703"
+    },
+    {
+      "id": 114384495674,
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373549/job/114384495674"
+    },
+    {
+      "id": 114384495657,
+      "name": "build-wheels (windows-2022)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373523/job/114384495657"
+    },
+    {
+      "id": 114384495647,
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373523/job/114384495647"
+    },
+    {
+      "id": 114384495590,
+      "name": "coverage",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373530/job/114384495590"
+    },
+    {
+      "id": 114384495543,
+      "name": "candidate-wheel",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373537/job/114384495543"
+    },
+    {
+      "id": 114384495527,
+      "name": "build-wheels (macos-15)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373523/job/114384495527"
+    },
+    {
+      "id": 114384495518,
+      "name": "copilot-setup-steps",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373524/job/114384495518"
+    },
+    {
+      "id": 114384495517,
+      "name": "audit",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373557/job/114384495517"
+    },
+    {
+      "id": 114384495497,
+      "name": "build (ubuntu-py3.12-devmode)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373534/job/114384495497"
+    },
+    {
+      "id": 114384495491,
+      "name": "build (macos-py3.12-devmode)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373534/job/114384495491"
+    },
+    {
+      "id": 114384495442,
+      "name": "build (windows-py3.12-devmode)",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110373534/job/114384495442"
+    },
+    {
+      "id": 114384488800,
+      "name": "build",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110371338/job/114384488800"
+    },
+    {
+      "id": 114384488576,
+      "name": "copilot-setup-steps",
+      "status": "completed",
+      "conclusion": "success",
+      "head": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "details_url": "https://github.com/joshyorko/actions/actions/runs/38110371310/job/114384488576"
+    }
+  ],
+  "prior_subject_and_declared_inventory": "/workspace/engineering/current-admission-review/current-reconciliation-snapshot.json",
+  "actual_three_case_review": "/workspace/engineering/pr302-current-S-C-actual-review/independent-current-three-case-review.json",
+  "boundary": "26 success records are not transferable to a new target/source/candidate/control. Future ordinary S-prime unions actual integration target, then separate C-prime pins S-prime/tree, requires full new CI plus strict three-case receipt. Retained adapter differs native92498, no exclusions.",
+  "upstream_disposition": "none"
+}

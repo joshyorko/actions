@@ -1,0 +1,47 @@
+{
+  "schema": "actions-existing-workspace-lossless-completed-scratch-recovery/v2",
+  "status": "TWO_EXACT_COMPLETED_SCRATCH_NAMESPACES_ARCHIVED_VERIFIED_EXPANDED_REMOVED",
+  "original_batch_summary": {
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery.json",
+    "bytes": 3794,
+    "sha256": "bc18bca235d00e9d7ca0f618653ba1c004f6c27afbbf535894cf6d4977cc3c71"
+  },
+  "algorithm": {
+    "path": "/tmp/actions-capacity-recovery-batch2.py",
+    "bytes": 5256,
+    "sha256": "11f36736acf7d3901cf3253d779f458ba0e1b9aa7bf43f14859a200ff812d751"
+  },
+  "private_inventory_binding": {
+    "path": "/tmp/actions-completed-scratch-recovery-batch2/private-complete-inventory-and-recovery.json",
+    "bytes": 12519881,
+    "sha256": "29a908b32ef01a4d93ad22f0404403886610f72a1f1c97f1ea48045c19f6bbe8"
+  },
+  "archives": [
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/6b455050c1f6a22d",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch2/6b455050c1f6a22d.tar.gz",
+      "archive_bytes": 249433326,
+      "archive_sha256": "ca21746a2183928b38016ec4697a8d3ed06faa5ad4a8d5b78add54286972451b",
+      "verified_members": 15003,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/ce8f66eb0879d4bc",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch2/ce8f66eb0879d4bc.tar.gz",
+      "archive_bytes": 249424815,
+      "archive_sha256": "1d32f631b13a64742ff7fbc8198172f6cd1c285db74bd4b95405f714902ee043",
+      "verified_members": 15075,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    }
+  ],
+  "workspace_free_bytes": 3613122560,
+  "existing_tmp_free_bytes": 6901178368,
+  "scope": "Only6b455050c1f6a22d/ce8f66eb0879d4bc completed marked scratch; each archive content/hash/recordedmetadata verified before original removal, no livecwd/fd pre/postinventory. No source/receipts/native/consumer/venvs/cache/failed563d namespace removal. No new infrastructure. Original private89k index/sixarchives unchanged.",
+  "limitations": [
+    "Inventory metadata scope excludes originalinode-equivalence/rootmetadata/ACL/xattrs/precise TARmtime roundtrip",
+    "Livehandle census historical observations only",
+    "Failed ENOSPC gates unchanged; fresh requiredsource checks separate"
+  ]
+}

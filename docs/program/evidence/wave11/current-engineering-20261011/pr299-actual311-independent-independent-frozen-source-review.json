@@ -1,0 +1,243 @@
+{
+  "verdict": "GO_NORMAL_GUARDED_EXISTING_REF_PUSH_EXACT_2ad0fd6a; HOLD_FRESH_HOSTED_MERGE_NATIVE_BACKEND_TRANSPORT_FULL_ACCEPTANCE",
+  "scope": "Read-only frozen source and evidence inspection; no source mutation or actual gate execution",
+  "source": {
+    "head": "2ad0fd6a899d26aa92d719390f639a76b89fb6f3",
+    "tree": "ae973b037c3370ce605c8b7b0db813e0ff48a6fa",
+    "parent": "a5b389269fcfb363fdfafbfe91a2f3172d410326",
+    "ordinary_merge_tree": "0f5a438ef06a22a1efabe155aba471f68a44c537",
+    "ordered_parents": [
+      "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ],
+    "existing_branch": "feat/shared-run-output-20261010",
+    "clean": true
+  },
+  "independent_preservation": {
+    "complete_prospective_leafset_exact": {
+      "path": "/workspace/engineering/next-current-union-independent-preparation/pr299-prospective-complete-leaf-modes-blobs.json",
+      "bytes": 236942,
+      "sha256": "5b3666d2923f769e4dcd5cc94b76213c7c78e0afa95a043a3ee0f70cc0acfa14"
+    },
+    "final_leaf_count": 1419,
+    "ordinary_nonconflicting_threeway_paths_verified": 1418,
+    "both_parent_guides_retained": true,
+    "original23_modes_blobs_exact9cb80ba": true,
+    "final_1418_non_doc_modes_blobs_exact_tested_union": true,
+    "complete_github_exact_actual_target": true
+  },
+  "native_inputs": {
+    "current274_exact_original299": true,
+    "historical268_matching": 262,
+    "changed6": {
+      "action_server/src/actions/server/_actions_run.py": [
+        "100644",
+        "blob",
+        "24fc844ad99c658d70f6f5069f0df250bb72ad87"
+      ],
+      "action_server/src/actions/server/_api_analytics.py": [
+        "100644",
+        "blob",
+        "8b3177b995500ec111fbc79b8e7c8589319b1cd2"
+      ],
+      "action_server/src/actions/server/_api_run.py": [
+        "100644",
+        "blob",
+        "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24"
+      ],
+      "action_server/src/actions/server/_models.py": [
+        "100644",
+        "blob",
+        "405304f2e593fdfe949b431851eb0dae39c6ab96"
+      ],
+      "action_server/src/actions/server/_runs_state_cache.py": [
+        "100644",
+        "blob",
+        "3774e9a0e77d43e63a18733a4ff5652454ef06ce"
+      ],
+      "action_server/src/actions/server/migrations/__init__.py": [
+        "100644",
+        "blob",
+        "7889794dd3db1019bf4cdc179fa892c05943dc79"
+      ]
+    },
+    "added6": {
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py": [
+        "100644",
+        "blob",
+        "3629ef55d42815acc7c1701bdd5b6949d3394ec6"
+      ],
+      "action_server/src/actions/server/run_outputs/__init__.py": [
+        "100644",
+        "blob",
+        "6787c69b364901f1a1eed93e553ae8cfe4d194ef"
+      ],
+      "action_server/src/actions/server/run_outputs/filesystem.py": [
+        "100644",
+        "blob",
+        "89170173dd0f1771e1a9923bb8532f2b28448dd1"
+      ],
+      "action_server/src/actions/server/run_outputs/models.py": [
+        "100644",
+        "blob",
+        "ae75ceee659776fd51e1dda36528a22640afba19"
+      ],
+      "action_server/src/actions/server/run_outputs/service.py": [
+        "100644",
+        "blob",
+        "55f5c09aeb0a3e9199b56916bb7fee41708b35c6"
+      ],
+      "action_server/src/actions/server/run_outputs/types.py": [
+        "100644",
+        "blob",
+        "cac30880373c26f648bb1c835fb74449f567cb22"
+      ]
+    },
+    "selected5_exact": true,
+    "qualification": "HOLD: no old92498 native/artifact qualification from 262 matches or selector parity"
+  },
+  "behavior_review": {
+    "resolver": "Workspace locking, actor authorization, publication/output checks and provider reader acquisition occur in same transaction; yield is after transaction exit but inside owned ExitStack; read delegates without grant recheck. Revocation affects future resolutions, not an already acquired reader.",
+    "meaningful_negative": "Existing real service test replaces provider.open with fail sentinel; denied principal, wrong Workspace and revoked grant each raise AccessDenied before provider access. No active-stream revocation test or public transport qualification claimed."
+  },
+  "fresh_source_gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "REUSED exact24 inputs plus five own prepared package environments; no installer",
+    "Toolkit": 69,
+    "scoped_shared_run_output": {
+      "pass": 189,
+      "integration_deselect": 12,
+      "skip": 1
+    },
+    "full_configured_Runtime_source": {
+      "pass": 1200,
+      "skip": 13,
+      "workers": 2
+    },
+    "full_configured_lint": "Ruff check/format/Isort PASS",
+    "typecheck_files": 347,
+    "all_workflow_and_dependabot_roundtrip": "PASS"
+  },
+  "verified_owner_receipt": {
+    "path": "/workspace/engineering/pr299-actual311-refresh/frozen-source-receipt.json",
+    "bytes": 15059,
+    "sha256": "9fd78d3a30c666e6da12e9aef3bc870c8cb654d3f43d1d1d02d92db405729829"
+  },
+  "verified_gate_logs": {
+    "diff-check": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "doctor": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/doctor.log",
+      "bytes": 13487,
+      "sha256": "fdbd3016959c4813c117e3a3efdc87fe1d116545fada56dd30b8006e608b85ea"
+    },
+    "full-source": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/full-source.log",
+      "bytes": 308725,
+      "sha256": "cce5029e2d51951e0751b4f9a142a63765a0269e2c49b44e2db676173b111575"
+    },
+    "generator-roundtrip": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/generator-roundtrip.log",
+      "bytes": 4565,
+      "sha256": "df710675e7254774d730c0c823e3613ed3669ca27c9674d632adc9dd4e6f1fda"
+    },
+    "scoped": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/scoped.log",
+      "bytes": 4564,
+      "sha256": "0164433d74b90578b474acf5917bda23be1ee76d979a2bdda166d3febb44df1d"
+    },
+    "source-union-proof": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/source-union-proof.log",
+      "bytes": 64,
+      "sha256": "aa9494812772b91c6a5314cf87a7a85dfd41167107d5b5d09914fbfb0bc47173"
+    },
+    "static": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/static.log",
+      "bytes": 5694,
+      "sha256": "81d0568ad1acaca220cb50f3b8c1b6945d04539a417eeeef4dbaa7e3792f97c2"
+    },
+    "toolkit": {
+      "path": "/workspace/engineering/pr299-actual311-refresh/toolkit.log",
+      "bytes": 14346,
+      "sha256": "f49c48d6226fdfa9576f269d049be8f42c5209e2c2f3ccbe0c9811225623f959"
+    }
+  },
+  "verified_source_proof": {
+    "path": "/workspace/engineering/pr299-actual311-refresh/source-union-proof.json",
+    "bytes": 90872,
+    "sha256": "3b6a9d14f50b23d785eed89f176fdddca1f8e8edd2b0048aca0ea0a646081b2a"
+  },
+  "verified_bootstrap_reuse": {
+    "path": "/workspace/engineering/pr299-actual311-refresh/bootstrap-reuse.json",
+    "bytes": 2734,
+    "sha256": "e4bd2d1144a002eeebbf5fdad0c72166a0fa2d41d1adeec41319a24351647ee4"
+  },
+  "verified_original_bootstrap": {
+    "path": "/workspace/engineering/pr299-refresh-owned/bootstrap.log",
+    "bytes": 14145,
+    "sha256": "8bdeac2f153ad303d8c3b68743517072374630ef3af2b488fb52824a006fab69"
+  },
+  "historical_receipts_preserved": [
+    {
+      "path": "/workspace/engineering/pr299-refresh-owned/successor-receipt.json",
+      "bytes": 22519,
+      "sha256": "0982b641af073a82c4105aa02538f7e21b219faf35e89d3f2818b9c96c5f5d52"
+    },
+    {
+      "path": "/workspace/engineering/pr299-independent-current-review/independent-current-source-review.json",
+      "bytes": 15206,
+      "sha256": "8604a06969f760f9343e427f564c5e4527337cfa3aa39c37fa3698dcb9a78929"
+    },
+    {
+      "path": "/workspace/engineering/pr299-windows-independent-diagnosis.json",
+      "bytes": 7249,
+      "sha256": "4eef69f680caf8891a6c2749b345f753cf5b9d71bc3f4e8e4b3301e9bff406b8"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-independent-review/original-hosted-diagnostic-review.json",
+      "bytes": 18731,
+      "sha256": "81b819b9eb7a4d25bb46e0517b27bc303f78b80c32c7df89a6da4198967afe95"
+    },
+    {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_owner.json",
+      "bytes": 6578,
+      "sha256": "74f5ed37fabfcdcf84696d53ee50311d468930d7ae705e9a8dedb674cf276034"
+    },
+    {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave8-convergence-20261010/results-receipts/pr299_review.json",
+      "bytes": 5835,
+      "sha256": "4eff29d4e2c34c0bb05cca496772be3a858a1e02a0d62acb93032a3e42fccf6f"
+    }
+  ],
+  "canonical_documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_integrated_delta": {
+      "path": "/workspace/engineering/pr299-actual311-independent-review/canonical-integrated-actual311-delta.patch",
+      "bytes": 1203,
+      "sha256": "b2331e6946e7c276dcf71d1ce98292c8ef4783931628f2c665e752357a26a4a3"
+    },
+    "disposition": "GO_INTEGRATED: exact source-backed reader-acquisition versus active-stream revocation clarification; no duplicate implementation needed",
+    "evidence": "Direct unchanged resolver/reader AST and existing provider sentinel test; exact original23 preservation; logged189 scoped/1200 configured source checks; all26 workflows unchanged",
+    "stale_ambiguity": "Durable handles and restart/read success do not qualify active-stream revocation or public authenticated transport",
+    "remaining_uncertainty": "Real PostgreSQL lock/BIGINT ordering, authenticated public transport/HTTP Range HEAD, Windows provider and complete multi-adapter native/lifecycle gates remain open; fullprivate134 and Runtime release gates unchanged",
+    "upstream": "none"
+  },
+  "held_gates": [
+    "Fresh exact-head current-target complete19 declared hosted jobs plus reviews/threads/draft/policies before merge; old fbde80ba green is historical. Recompute ordinary union and gates if actual target advances.",
+    "Actual native producer/build/provider/browser gates; old92498 has6 changed+6 added production leaves and is unqualified.",
+    "No source union clears original29990s FIRST startup failure or historical311six failures; original receipts source-bound, cause and cleanup dimensions remain limited.",
+    "Real PostgreSQL and public authenticated transport, HTTP Range/HEAD, full multi-adapter lifecycle, private metadata chain remain HOLD.",
+    "PR300 must wait actual299 accepted integration; no refresh/retarget authorized by this source GO.",
+    "No whole acceptance graph or Runtime publication claim."
+  ],
+  "not_run": [
+    "Tests/gates by independent reviewer",
+    "Native/provider/backend/browser/artifact acceptance",
+    "Push/merge/publication",
+    "PR300 refresh"
+  ],
+  "upstream": "none"
+}

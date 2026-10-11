@@ -1,0 +1,13 @@
+{
+  "phase": "READ_ONLY_ACTUAL_SOURCE_BINDING_BEFORE_SUCCESSOR_MUTATION",
+  "source": {
+    "head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "native_producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "producer_entries": 268,
+    "selected_entries": 5,
+    "tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca"
+  },
+  "checkpoint_sha256": "28b2af71d1ac7b5dd0bbd7bf7518845a2c3d208c6700fd102914cffaf449dca3",
+  "all18_raw_and50_frozen_references_verified": true,
+  "source_clean": true
+}
