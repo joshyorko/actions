@@ -2150,6 +2150,12 @@ discovery or adoption. Successful startup and readiness timeouts remain
 unchanged. The synthetic timeout regression proves direct-child reap and both
 reader closures; native Windows startup remains a separate gate.
 
+When a test replaces `process.Process` with a subclass, import `Process` itself
+for the subclass declaration and patch the module attribute separately. A
+runtime module attribute is not a valid static base class for the configured
+Mypy check. Access private fields through a base-typed process handle with
+`getattr` while keeping the assertions on those fields.
+
 The socketpair test that fills a send buffer is a kernel-buffer behavior check:
 it runs on POSIX runners and is skipped on Windows, where the same payload may
 not saturate the pair. Keep a deterministic `socket.timeout` test on all

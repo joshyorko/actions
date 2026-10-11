@@ -415,10 +415,9 @@ def test_action_server_start_timeout_reaps_child_and_output_readers(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     from actions.server._robo_utils import process as process_module
+    from actions.server._robo_utils.process import Process as BaseProcess
 
-    base_process = process_module.Process
-
-    class SleepingProcess(base_process):
+    class SleepingProcess(BaseProcess):
         def __init__(self, _args, cwd=None, env=None):
             super().__init__(
                 [sys.executable, "-c", "import time; time.sleep(60)"],
@@ -463,10 +462,9 @@ def test_action_server_start_preserves_error_when_cleanup_raises(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     from actions.server._robo_utils import process as process_module
+    from actions.server._robo_utils.process import Process as BaseProcess
 
-    base_process = process_module.Process
-
-    class CleanupFailureProcess(base_process):
+    class CleanupFailureProcess(BaseProcess):
         def __init__(self, _args, cwd=None, env=None):
             super().__init__(
                 [sys.executable, "-c", "import time; time.sleep(60)"],
@@ -492,7 +490,7 @@ def test_action_server_start_preserves_error_when_cleanup_raises(
         if process.returncode is None:
             process.stop()
             process.join()
-        for reader in process._reader_threads:
+        for reader in getattr(process, "_reader_threads"):
             reader.join(timeout=1)
 
 
@@ -500,10 +498,9 @@ def test_action_server_start_failure_before_spawn_keeps_original_error(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     from actions.server._robo_utils import process as process_module
+    from actions.server._robo_utils.process import Process as BaseProcess
 
-    base_process = process_module.Process
-
-    class SpawnFailureProcess(base_process):
+    class SpawnFailureProcess(BaseProcess):
         def start(self, *args, **kwargs):
             raise OSError("synthetic spawn failure")
 
@@ -512,8 +509,8 @@ def test_action_server_start_failure_before_spawn_keeps_original_error(
     with pytest.raises(OSError, match="synthetic spawn failure"):
         server.start(timeout=0)
 
-    assert server.process._proc is None
-    assert server.process._reader_threads == []
+    assert getattr(server.process, "_proc") is None
+    assert getattr(server.process, "_reader_threads") == []
 
 
 @pytest.mark.integration_test
