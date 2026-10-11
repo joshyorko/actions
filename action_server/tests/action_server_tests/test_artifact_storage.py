@@ -325,11 +325,18 @@ def test_independent_storage_api_reads_durable_run_binding_and_range_file(
     monkeypatch.setattr(_artifact_storage, "get_artifact_storage", lambda: reader)
 
     class MissingRunState:
+        """Legacy-only cache stub: its fixture Run has no durable scoped pin."""
+
         semaphore = type(
             "Semaphore",
             (),
             {"__enter__": lambda self: self, "__exit__": lambda *args: None},
         )()
+
+        def is_scoped_run(self, run_id):
+            # This fixture models only the legacy manifest path for run-a.
+            assert run_id == run.id
+            return False
 
         def get_run_from_id(self, run_id):
             raise KeyError(run_id)

@@ -1,0 +1,83 @@
+{
+  "browser": {
+    "frontend_lock_sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+    "path": "<browser>",
+    "playwright_version": "1.62.1",
+    "selection": "explicit",
+    "sha256": "0b20b130e7edd9dd51873be867761295fe0cfad490c2b9a64f95bd3cfc08fa71",
+    "status": "passed",
+    "temporary_root": "<removed-browser-temp>",
+    "temporary_root_removed": true,
+    "version": "Google Chrome for Testing 151.0.7922.34"
+  },
+  "built_resource_sha256": "fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852",
+  "limits": [
+    "Three measured worker members do not authenticate the complete wheel or prove cold registry acquisition.",
+    "artifact:null is a partial result and does not prove authorized artifact retrieval.",
+    "This source Runtime/browser gate does not claim frozen Runtime or ChatGPT acceptance.",
+    "Cleanup records point-in-time descendant observations, not universal descendant discovery or adoption."
+  ],
+  "production_package_manifest_sha256": "eec63118246ceb1c6b96bf787d77cce64bced6f3a5341ca574f75f7f614da146",
+  "provenance_fixture": {
+    "junit_sha256": "b258c5cca3c0aa6a9499f75a672b2a1c2540a3e6c6ce6320c1a72c7f8c0e7e1a",
+    "purpose": "Measured71f60 consumer proof; only paths relocated by service-free admission tests. New workflow commit does not relabel actual Runtime source.",
+    "raw_receipt_sha256": "387915157b68d339a0bca151868c706cfc8e62e6c03609e9c96fdf11ecd3d727"
+  },
+  "published_core": {
+    "declared_version": "1.0.3",
+    "independently_verified_registry_wheel_sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+    "measured_worker": {
+      "module_hashes": {
+        "actions": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+        "actions.mcp": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+        "actions.mcp._metadata": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c"
+      },
+      "modules": {
+        "actions": "<actions-home>/holotree/c2fd1aa_a78733b_bdfa0780/lib/python3.12/site-packages/actions/__init__.py",
+        "actions.mcp": "<actions-home>/holotree/c2fd1aa_a78733b_bdfa0780/lib/python3.12/site-packages/actions/mcp/__init__.py",
+        "actions.mcp._metadata": "<actions-home>/holotree/c2fd1aa_a78733b_bdfa0780/lib/python3.12/site-packages/actions/mcp/_metadata.py"
+      },
+      "version": "1.0.3",
+      "worker_prefix": "<actions-home>/holotree/c2fd1aa_a78733b_bdfa0780"
+    }
+  },
+  "runtime": {
+    "active_readers": [],
+    "cleanup_errors": [],
+    "descendant_reap_complete": true,
+    "descendant_snapshot_complete": true,
+    "live_descendant_pids": [],
+    "module_origin": "<checkout>/action_server/src/actions/server/__init__.py",
+    "module_sha256": "399f9e2ef2d67d7018d8ab7c6b9a65adf70aa33134d15c9840aedcf35a821576",
+    "process_args": [
+      "<checkout>/action_server/.venv/bin/python",
+      "-m",
+      "actions.server",
+      "start",
+      "--actions-sync=true",
+      "--port=0",
+      "--datadir=<runner-temp>/pytest/test_canvas_template_runs_thro0/.sema4ai-test-action-server",
+      "--db-file=server.db",
+      "-v",
+      "--skip-lint",
+      "--min-processes=0",
+      "--max-processes=2"
+    ],
+    "wrapper_reaped": true,
+    "zombie_descendant_pids": []
+  },
+  "runtime_calls": [
+    "published_core_identity",
+    "canvas_fixture_search:alpha",
+    "canvas_fixture_search:unmatched-query"
+  ],
+  "scope": "published-core Runtime/browser acceptance only",
+  "source": {
+    "commit": "71f60ee8b931cb968866db5a8f45ba2056d18ed8",
+    "parents": [
+      "9724a8fbc49ff4119b0af49ad16dd0dbc97e6a5b"
+    ],
+    "tree": "30e880f0640a446a3db2b6e555e6801ee6dc92fc"
+  },
+  "template_zip_sha256": "7500becb402d09c8adcf938c0cc6c6b69d817007c79951b97fbeee75162b943a"
+}

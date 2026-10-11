@@ -20,6 +20,8 @@ from ._protocols import ArgumentsNamespaceStart, IBeforeStartCallback
 if typing.TYPE_CHECKING:
     from asyncio.events import AbstractEventLoop
 
+    from .run_outputs.transport import RunOutputTransport
+
 log = logging.getLogger(__name__)
 
 
@@ -452,6 +454,8 @@ def start_server(
     start_args: ArgumentsNamespaceStart,
     api_key: str | None,
     before_start: Sequence[IBeforeStartCallback],
+    *,
+    run_output_transport: "RunOutputTransport | None" = None,
 ) -> None:
     import threading
     from dataclasses import asdict
@@ -460,6 +464,7 @@ def start_server(
 
     import uvicorn
     from fastapi import (
+        BackgroundTasks,
         Depends,
         HTTPException,
         Security,
@@ -550,19 +555,25 @@ def start_server(
 
     websocket_dependencies.append(Depends(verify_websocket_origin))
 
+    if run_output_transport is not None:
+        from .run_outputs.transport import install_run_output_transport
+
+        install_run_output_transport(app, run_output_transport, endpoint_dependencies)
+
     action_routes = _ActionRoutes(whitelist, endpoint_dependencies)
     action_routes.setup_mcp_server(api_key)
     action_routes.register_actions()
 
     if os.getenv("RC_ADD_SHUTDOWN_API", "").lower() in ("1", "true"):
 
-        def shutdown(timeout: int = -1):
+        def shutdown(background_tasks: BackgroundTasks, timeout: int = -1):
             # Note: timeout no longer used (the timeout to kill is
             # now handled by the timeout_graceful_shutdown parameter
             # of uvicorn.Config).
             import _thread
 
-            _thread.interrupt_main()
+            # Complete the response send before requesting process interruption.
+            background_tasks.add_task(_thread.interrupt_main)
 
         app.add_api_route(
             "/api/shutdown/",

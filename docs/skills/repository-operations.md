@@ -85,6 +85,55 @@ SQLite-persisted Runtime Run records containing Run IDs, passed statuses, and
 action names. Preserve this receipt before reusing the pytest `--basetemp`
 directory or allowing pytest to prune old temporary trees.
 
+The Canvas Query template has a separate opt-in candidate-source gate:
+`ACTIONS_CANVAS_TEMPLATE_CANDIDATE_ACCEPTANCE=1` runs
+`test_canvas_template_candidate_source_runs_through_runtime_and_real_browser`.
+It leaves the embedded bundle and production `actions-core=1.0.3` manifest
+unchanged, then adjusts only a disposable extracted project's manifest to use
+published Core 1.0.2 as the resolvable base and installs an exact wheel built
+from the checked-out Core source after environment creation. The Runtime worker
+must report a matching local-wheel `direct_url.json`, archive SHA-256, imported
+module ownership, and source revision/tree/blob IDs; the same built view is
+then exercised in a real browser against Runtime. This proves the candidate
+source path only. The production template's exact published-Core 1.0.3 gate
+remains separate and blocked until that dependency is published and verified.
+Pin `PYTHONPATH` to the absolute Runtime source path for this source-mode gate
+and probe the child interpreter from the extracted project's working directory;
+a relative path can silently select another checkout's editable Runtime. The
+worker must report the loaded `actions.mcp` and metadata-module paths and hashes,
+which are checked against both candidate wheel bytes and source blobs. Browser
+execution is currently a Linux hosted gate: launch Node in a fresh POSIX session
+and capture descendant PID/create-time identities while it runs. Signal the
+process group only while the original leader is still unreaped or a captured
+identity confirms that the original group remains; after the leader exits, its
+numeric group ID can be reused. Clean captured identities on completion or
+timeout, and skip this POSIX-specific regression on Windows. This also covers a
+Node parent that exits while a browser child keeps inherited output pipes open;
+killing only the Node PID is insufficient.
+The hosted candidate-source control belongs in
+`.github/workflows/frontend-build-unauthenticated.yml` on its Linux job: it
+already installs the lockfile-selected Chromium through the frontend's
+`node_modules`. From the `action_server` working directory, resolve the
+executable through `./frontend/node_modules/@playwright/test`, set its
+absolute path explicitly, and run only the opt-in candidate test with the
+checkout's Python Runtime source. Unset the frozen-executable selector and
+`VIRTUAL_ENV`, use task-local `ACTIONS_HOME`, `TMPDIR` and `UV_CACHE_DIR`,
+and reuse the same-job Playwright browser cache because later native browser
+checks consume it. Require JUnit to
+contain exactly that one test with no skips, failures, or errors before
+uploading its sanitized summary and provenance receipt. This workflow has no
+generated-file header, and `.github/workflows/_gen_workflows.py`'s `TARGETS`
+omits it, so a direct workflow edit is maintained.
+The default integration suite skips both opt-in Runtime/browser gates, so a
+skip is not browser evidence. The fixture's `artifact: null` response is
+deliberately partial: it is not a successful shared-schema result and does not
+prove authorized artifact retrieval or user-facing download behavior.
+Keep tests shipped inside the template self-contained: run them from a fresh
+`action-server new` extraction and read only files included in that extracted
+project. Tests that compare a packaged example with repository contract
+fixtures belong in the repository's test suite, since those fixtures are not
+present for a template user after extraction.
+
 The focused source tests exercise public decorators through the Runtime
 Streamable HTTP route. The process-level fixture additionally installs the
 exact candidate Core wheel into an isolated test environment before importing an
@@ -128,6 +177,13 @@ before writing its result; a fixture pin to 0.10.0 could not be resolved. The
 Runtime's explicit minimum-version error and those fixture inputs identify a
 test-fixture incompatibility, not an RCC defect.
 
+Version metadata alone is not source provenance: a source-built candidate can
+have the same `1.0.2` version as the registry wheel while containing different
+API bytes. Bind candidate acceptance to its source revision/tree and wheel
+SHA-256, then verify that exact wheel through the worker's `direct_url.json`;
+keep its result distinct from a test of the unchanged manifest against the
+published wheel.
+
 Frozen integration fixtures that synchronize packages with `package.yaml` may
 need a cold RCC-managed environment before the server emits its ready-port
 line. In `test_cli_live_reload_multi_package.py`, CI run 38042377995 showed
@@ -136,8 +192,70 @@ terminated at the 30-second startup deadline on both Windows and macOS,
 before the watched-reload assertions began. Keep the 90-second allowance
 limited to the initial native-executable startup; this reuses the existing
 native acceptance startup budget. Source-mode startup remains at 30 seconds,
-as do the watcher and restart deadlines. Inspect child stderr before
-treating a timeout as an RCC or Runtime failure.
+as do the watcher and restart deadlines.
+
+For a native first-readiness timeout, bind the failed Runtime job separately
+from passing selected native UI jobs. A timeout in `process.start()` precedes
+watched reload or catalog collision assertions and does not establish a failure
+of those semantics. RCC v18.19.3 Progress values measure the interval since the
+previous mark; retain the complete sequence and compare its sum with the caller's
+duration. The value printed beside the final holotree message is not the total,
+and the interval printed when UV starts includes the preceding micromamba and
+layer setup work. A completed environment close to the startup deadline does not
+measure the remaining ready-port work or prove a cache, provider or forwarding
+cause. Absence of a startup-cleanup exception note is not an explicit wrapper,
+reader or descendant census. Preserve unavailable cleanup fields, original failed
+tuples and unchanged readiness/cleanup deadlines; a passing different tuple or
+matching producer inputs does not explain the failure. A subsequent ordinary
+target refresh can import reviewed observation hooks without claiming a production
+fix, but requires its own complete union review and fresh gates.
+
+Verify receipt preservation by hashing its exact recorded file bytes. A
+receipt's SHA-256 identifies content; it is not a Git commit. Test ancestry with
+full recorded Git source identities and bind those checks separately from
+receipt digests. A prefix match in commit history does not substitute for either
+proof. A historical synthetic build commit may have the accepted source tree
+without being an ancestor of the current branch; retain those identities and
+compare the production inputs separately.
+
+At #311 head `c888fb4a`, Windows run `38099013706`, job `114350853595`,
+timed out at the initial native startup in the watched-reload and resource
+catalog-rollback nodes. Both had completed `ht hash` and logged `holotree
+variables --no-retry-build` before the unchanged 90-second deadline. The
+same test and RCC source bytes passed those nodes in accepted #292 run
+`38098225220`, job `114348512491`. This evidence identifies the bootstrap
+stage, not its root cause. RCC's `Running:` log follows acquisition of the
+Python mutex; it does not establish successful RCC spawn or internal-lock
+progress. Captured stderr is line-oriented, and RCC's interactive forwarding
+does not explicitly flush, so absent captured lines do not establish inactivity.
+
+The Windows Runtime test workflow now sets an explicit
+`ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR` and attempts to retain its bounded JSON
+reports with `always()` even when integration fails. Upload is best effort:
+`if-no-files-found: warn` permits a successful upload step with no reports, and
+job cancellation or infrastructure failure may prevent the step from running.
+Verify the artifact inventory and report bytes before claiming observations.
+The test-owned observer enables
+only those two native nodes, samples pending initial startup at 80 and 88
+seconds, and delegates unchanged startup and its existing 20-second failure
+cleanup. Reports contain source/executable/config byte identities, an
+allowlisted RCC operation/space/flags summary, owned descendant CPU/I/O state,
+cache-file existence and effective-home equality, and registered host-reader
+and pipe-closure state. They contain no raw commands, stderr, URLs, paths,
+environment maps or environment-cache contents. Access denial, vanished
+processes, unobserved RCC identity, and the frozen child's internal readers
+remain explicitly unavailable. The probe limits traversal to 64 processes
+and a one-second traversal budget; individual OS queries may outlast that
+budget, so cancellation never waits on a pending query before startup cleanup.
+The final report's `sampler_cancelled: true` means cancellation was requested,
+not that the sampler stopped. Check `sampler_alive` separately after its bounded
+50 ms join. A pending OS query may leave that daemon alive; late observations
+are discarded after cancellation. Neither field proves Runtime process or
+stream cleanup, which remains owned by the unchanged starter.
+These synthetic observer checks do not establish Windows native acceptance
+or fix the original failure. Compare the next exact-head reports before
+changing production code; do not warm caches, retry RCC, or enlarge deadlines
+to obtain a passing result.
 
 For a split package API promotion, verify the producer's public contract from
 the exact built wheel in an isolated installation. Assess consumer adoption
@@ -164,6 +282,24 @@ published Core 1.0.1. On the selected integration candidate (`3fee2792`), all
 four existing template manifests pin published Core 1.0.2. A template pin is
 therefore revision-specific; verify the target manifests before describing a
 release's template state.
+
+For the Runtime/Core private-module boundary, a checkout-only AST guard and a
+clean Core-wheel probe are separate evidence from a clean installed Runtime
+wheel check. The Runtime wheel contract must enumerate every `.py` member in
+the installed `actions-runtime` distribution, verify each installed file is
+inside the fresh environment and outside the checkout, and compare every file
+byte-for-byte with the corresponding member of the exact selected Runtime
+wheel. Bind that scan to the wheel SHA-256, then run the private-Core import
+AST guard over every member, including modules not imported by the smoke test.
+Keep the public Core API compatibility checks in those same clean installs;
+Runtime-owned modules such as `actions.server._protocols` remain valid. Report
+this boundary as passed only when the installed-member inventory is complete,
+all member bytes match the selected wheel, and the full scan succeeds. Tests that
+construct a wheel ZIP and a matching installed-tree fixture must write the same
+encoded payload bytes to both: `Path.write_text` performs platform newline
+translation on Windows, so it can turn a valid LF wheel member into CRLF in the
+fixture and create a false byte-mismatch failure. Preserve the exact-byte
+comparison; fix the fixture writer instead of normalizing installed bytes.
 
 Poetry merges the matching Core source into the main/dev lock entry: a
 `poetry install --only main` using this checkout lock still selects local Core.
@@ -277,6 +413,15 @@ packaged-browser and published-artifact receipts separate, recording the exact
 candidate SHA and PASS, FAIL, BLOCKED or NOT_RUN. Skipped publication is not
 publication success. Recheck dependency sequencing against each retained
 contract before implementation; a cross-reference alone is not a blocking edge.
+
+A sanitized private checkpoint containing commit/tree identities, receipt
+hashes and historical bundle-verification results does not contain recoverable
+source. Before resuming that lane in another workspace, verify the actual
+required bundle chain and prerequisites, exact restored commit/tree, and
+separately frozen runner/specification bytes. If those bytes are absent and
+remote private durability was not established, keep implementation and
+execution on HOLD. A newly authorized replacement policy needs a new identity;
+do not represent it as recovery of the prior frozen policy.
 For a stacked PR, review the full diff from its actual merge base rather than
 relying on its title or last commit. When a reviewed component is integrated
 separately from a combined candidate, compare the candidate's synthetic merge
@@ -420,6 +565,18 @@ new upload and never replace an existing tag or distribution file.
 Publish dependency releases before changing template pins. After publication,
 update the source templates and regenerate the embedded template ZIP and its
 SHA-256 metadata together; source YAML changes alone do not update shipped templates.
+When adding an embedded community template, update the exact inventory in
+`test_new_list_templates` too: check both its human-readable listing and the
+complete `action-server new list-templates --json` name set. Bundle integrity
+tests do not verify that the CLI inventory assertion includes the new template.
+Template tests are shipped in the template archive, so verify them from a fresh
+archive extraction and keep their inputs and dependencies inside that template.
+Comparisons against monorepo contracts or fixtures belong in repository-level
+tests; an extracted template must not reach outside its files to load them.
+Keep unpublished Core pins explicitly provisional and do not present the
+dependent production template to users before publication and fresh resolution.
+For Canvas results, `artifact: null` is a deliberately partial local result,
+not a match for the shared `Success` schema's required artifact handle.
 The Core clean-wheel verifier compares the installed version with the input wheel's
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
@@ -445,10 +602,27 @@ Python 3.12. The contract failed with the unpinned host interpreter and passed
 with RCC Python 3.12. Record that interpreter's version in the receipt; do not
 install host tooling or falsify version discovery to make this boundary pass.
 
+Verify prepared package environments through each package's Poetry process,
+binding `sys.prefix` to its own `.venv` and a file-backed module to its checkout's
+`src`. A namespace package can have `__file__ = None`; this leaves its file
+identity unavailable rather than proving a stale environment. Inspect a concrete
+submodule such as `devutils.invoke_utils` instead. Run dependency-sensitive
+preflights as separate checked calls or stop the command sequence on failure.
+Preserve failed probes and named successors, and distinguish observations made
+after a gate starts from evidence checked before that gate.
+
+Verified reuse of package environments does not populate a new checkout's
+ignored Runtime RCC fixture asset. Before tests, bind `get_default_rcc_location()`
+to the package pin and verify the owned binary's digest and mode. A matching
+already prepared Bootstrap output can be copied with its source and byte identity
+retained; this is reuse, not a new Bootstrap run or binary build. Do not bypass
+the fixture, download a substitute, or borrow unrelated generated inputs to
+clear a missing-asset failure.
+
 When running Action Server source tests from a detached checkout with a prepared
 Runtime virtualenv, put that checkout's `action_server/src`, `actions/src`,
 `actions-http-helper/src`, and `devutils/src` first on `PYTHONPATH`, and confirm
-the imported modules' `__file__` paths point into the checkout. The Runtime
+the imported file-backed modules' `__file__` paths point into the checkout. The Runtime
 virtualenv can contain an older installed `actions` package that otherwise
 shadows the checkout's Core source. The Action Server test fixture also
 requires the package-pinned RCC binary at
@@ -516,6 +690,58 @@ expiry/logout, while each inbound/outbound message is also reauthorized.
 Sign-out and expired-session status unmount providers, clear their query cache
 and disconnect browser subscriptions. The browser rechecks on protected HTTP
 403, focus, expiry and a 15-second interval for revocation in another tab.
+
+`test_auth_route_inventory.py` captures the assembled FastAPI route objects
+through `start_server()`'s `before_start` callback, after HTTP, WebSocket, UI,
+and artifact registrations. The callback returns `False` to stop before
+process-pool or Uvicorn startup. Its explicit route-class, path, method, and
+mount inventory includes hidden routes and the registered dynamic action; the
+local `StaticFiles` mount is recorded as a terminal mount because it exposes no
+nested route list. Route identity uses the route class, normalized
+`path_format`, and complete sorted method set. The classifier compares counters,
+so removed or duplicate registrations fail as well as new routes; changing a
+method or route class is also an inventory change. Preserve multiplicity when
+reviewing the census rather than reducing it to a set of URL strings. Since the
+callback stops startup, this proves route registration and classification only.
+Authorization acceptance requires a separate missing/wrong/valid credential
+request matrix for protected routes and terminal mounts, including GET/HEAD,
+downloads, WebSockets, streaming, and rejection before side effects. CORS
+preflight and request authorization retain their separate request-level tests.
+When trusted configuration enables an optional transport, inventory its enabled
+routes too; default-off absence does not cover that configuration. Keep route
+registration, request authorization, and packaged/native execution evidence
+separate in acceptance receipts.
+
+An assembled authorization-request fixture can capture `start_server()`'s real
+application in a `before_start` callback and return `False` before pool and
+Uvicorn startup. Keep its real `create_db()` context alive through requests and
+use an owned file-backed SQLite database: `Database.connect()` opens a separate
+thread-local connection, so the registration-only census's `:memory:` database
+is not a shared request database for TestClient worker threads.
+Snapshot logical SQL rows and owned files after legitimate fixture seeding,
+then compare them after each denied request. Include Run records, counters,
+artifact bindings and directories, Work Item attachments, schedules and the
+in-memory secret store. Observe `Database.connect()` as well as `get_db()`:
+handlers can retain imported database aliases, so replacing only the defining
+module attribute does not observe every read boundary. Robot dispatch creates
+Run/counter/artifact state
+before entering its RCC background task; a zero-RCC-call assertion alone does
+not prove rejection before side effects. Exercise valid-key controls through
+real handlers for the deterministic subset. Keep a valid-key validation error
+or dispatch sentinel separate from successful import or execution acceptance.
+The configured server key and browser session do not identify a Workspace
+principal: `APIKeyAuthBackend` returns a generic authenticated user. Keep that
+boundary separate from Workspace ownership and binding contracts.
+
+The public `/artifacts/{run_id}` UI fallback is registered before the protected
+artifact mount. A one-segment path can therefore return the UI shell rather
+than exercise file delivery. Use two-segment paths for mounted storage-internal
+refusal controls, including the dot-prefixed binding manifest, and retain exact
+404, no private bytes and unchanged-state assertions. Native ASGI WebSocket
+denial sends `websocket.close` with code `1008` and no `reason` field; match
+that source-defined shape rather than invent an empty-reason requirement.
+Bounded native ASGI echo and close still do not qualify network or browser
+acceptance.
 
 Community PRs touching `actions/**` run Actions Core Tests. Its non-publishing
 candidate-wheel job builds the exact-source wheel and sdist, checks their
@@ -914,16 +1140,106 @@ verify the published registry wheel with a clean install before advancing the
 supported-worker Core floor. Do not weaken the existing floor test or infer
 registry compatibility from the source checkout or retained candidate artifact.
 
-The current PR #282 head `bab27a93664494965db8a86761ea5685a3be6618` (tree
-`72257e07a78d33ec1d3d067fa0da83369eea0357`) declares that 1.0.3 dependency,
-while Action Server Tests run 38042719836 and RCC toolkit run 38042719804
-still require 1.0.2; refresh and rerun against the current integration after
-the registry prerequisite is met. The earlier candidate Runtime/browser PASS
-(run 38041682069) is bound to predecessor tree
-`80a6ef315411a446db00c234ff9a5a294d91fc00`, not this head. PR #282 also returns
-`artifact: null`; authorized replica-readable output and retrieval remain
-dependent on the shared #86/#83/#129 contracts. Actual ChatGPT operation is
-separate host evidence and has not been established by the MCP Apps harness.
+Core 1.0.3 was published from `actions-core-1.0.3` at
+`a70993fafc99a9f94041485542d5a720797ca394`. The release readback verifies the
+PyPI wheel SHA-256
+`8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265`
+and its public metadata decorators in a clean installed CLI consumer. That
+producer proof clears the published dependency prerequisite; template Runtime
+consumer acceptance remains separate.
+
+Name the executed Canvas template acceptance path. The candidate-source gate
+uses an acceptance manifest with Core 1.0.2 and then installs its own candidate
+wheel, so its receipt cannot establish consumption of the production template's
+published Core 1.0.3 wheel. The published consumer gate preserves the production
+manifest and checks installed version, distribution ownership, interpreter-prefix
+containment, and three recorded module hashes. Those sampled hashes do not
+authenticate all wheel members or prove cold registry acquisition.
+
+The published consumer gate requires a clean committed checkout and an explicit
+`CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`; a system Chromium found on PATH
+cannot replace that selection. It checks the installed Playwright version against
+the frontend lock and records the selected browser's version and digest. Run it
+with `ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1` and retain the receipt selected by
+`CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH`. The exact test is
+`mcp/test_canvas_query_template.py::test_canvas_template_runs_through_runtime_and_real_browser`
+under `action_server/tests/action_server_tests`. It owns temporary Runtime and
+cache roots, rejects a configured artifact provider and a frozen Runtime override,
+and caps Runtime worker processes at two. It records the source commit/tree,
+worker imports, resource and template digests, and bounded Runtime cleanup only
+after the MCP and browser checks pass. The browser launcher stops its owned
+process tree before removing its private browser temporary directory. On POSIX,
+the browser alone receives a short mode-0700 `/tmp/cv-*` root through `TMPDIR`,
+`TMP`, and `TEMP`; Chromium creates a Unix-domain `SingletonSocket` below that
+root, so inheriting a long receipt or pytest path can abort launch before any
+page check. Keep Runtime, cache, and receipt roots separate from this browser
+pathname constraint. Remove only the browser-owned root after bounded process
+cleanup on both success and failure; Windows uses its native temporary root.
+Runtime cleanup reports direct-child reap, observed descendants and
+reader closure while preserving an earlier failure. Point-in-time descendant
+observations do not establish universal discovery or adoption. A receipt alone
+does not establish passing pytest teardown; retain an executed zero-skip JUnit
+result alongside it. Keep candidate and published consumer receipts separate.
+The generated Runtime Tests Linux job runs the exact published consumer after its
+existing Poetry, Node, and Chromium setup. Admit a receipt only when its current
+source identity and measured Core/browser values match, its one named JUnit case
+passes with consistent counters and zero skips, and Runtime cleanup records
+`wrapper_reaped`, `descendant_snapshot_complete`, and `descendant_reap_complete`
+as true with empty errors, readers, and observed live/zombie descendant lists.
+Checking only boolean or list types would admit failed cleanup. Upload sanitized
+JUnit even after failure; upload a sanitized receipt only after admission.
+On receipt rejection, the validator independently observes each existing
+receipt predicate and writes failure-only diagnostics with fixed reason codes,
+PASS/FAIL/UNAVAILABLE statuses, fixed read/parse exception classes and JUnit
+counts. It emits no receipt values, exception messages, paths, URLs, providers,
+environment maps or test output. These are observations after rejection, not
+proof of the original short-circuit position. A failed predicate and an
+unavailable observation are distinct; neither waives admission or cleanup.
+The always-run upload also
+retains this diagnostic file when written. A failure before validator execution
+or an unsuccessful diagnostic write may still leave it unavailable.
+One passing pytest case does not establish receipt admission, and an artifact
+containing only JUnit does not prove that the raw receipt was missing: rejection
+happens before the successful sanitized receipt is written. Require actual
+reason-code evidence before identifying the failed predicate. Earlier failures
+without those diagnostics retain unknown failed-predicate identity and unknown
+raw-receipt presence.
+A parsed failure report with `browser_version` FAIL records rejection of the
+receipt/preflight version equality for that invocation. Matching executable
+path and digest predicates do not identify the compared version strings or
+establish browser byte drift. The report omits those values, so preserve the
+failed code and unavailable comparison inputs without attributing a cause.
+Sanitized JUnit can contain a synthetic admission failure after the original
+pytest case passed; retain those two outcomes separately. A new measured reason
+code does not identify an earlier failure that lacked diagnostics or waive any
+source, browser, hash or cleanup predicate.
+
+Measure the expected browser version with the receipt's checked subprocess
+contract: the selected executable's `--version`, captured text output, a
+10-second bound and `stdout.strip()`. Reject nonzero, empty or timed-out
+measurements before admission. Shell command substitution removes trailing
+newlines but retains trailing spaces, so it can disagree with that receipt
+measurement even when executable bytes match. Normalize at the measurement
+boundary and keep the full branded version equality unchanged in admission.
+A local formatting reproduction establishes that mechanism; it does not
+identify unavailable version strings from an earlier hosted failure.
+A service-free test may relocate paths in an earlier measured receipt to test this
+validator, but it must preserve that receipt's executed source identity and must
+not relabel it as execution of a later workflow commit. When a measured receipt
+contains Linux byte hashes, materialize the validator's input files from the
+current committed Git blobs into an isolated admission checkout. Windows Git
+checkout can convert the Runtime module, package manifest, and frontend lock to
+CRLF, which changes their raw-byte hashes even when their Git blobs are unchanged.
+Keep the measured fixture and its hashes immutable; do not normalize bytes or
+ignore mismatches in the production validator. Test each CRLF working-file case,
+require a valid baseline before poison tests, and reject altered isolated inputs.
+This is service-free admission coverage, not Windows Runtime/browser execution;
+the actual consumer gate continues hashing its own working-tree bytes.
+
+PR #282 still returns `artifact: null`, which fails the shared artifact-bearing
+Success schema. Caller-owned Workspace/application/revision binding and
+authorized retrieval require the shared ownership and Run-output contracts.
+Actual ChatGPT operation needs separate host evidence.
 
 For any accepted public metadata API, keep the boundary strict: reject cycles,
 non-finite values, non-string keys, and excessive depth/size; validate supported
@@ -1118,6 +1434,22 @@ release job's environment. If a CLI wrapper drops stdin while setting a secret,
 use native `gh` and repeat the safe check; never print or transfer the value to
 an agent. Follow the [upstream reporting procedure](upstream-reporting.md)
 before attributing a tooling failure to a dependency.
+
+When qualifying generated Runtime frontend content, decode `_static_contents.py`
+as data and bind each asset's bytes to its builder checkout. The encoder reads
+`dist/index.html` as bytes and writes their representation; setting the generated
+module's newline to LF does not normalize the embedded asset. Keep outer module
+CRLF differences, decoded asset CR differences and semantic equivalence separate.
+A carriage-return-removal comparison is diagnostic evidence, not a source or
+content waiver. If the original frontend input and effective checkout newline
+setting were not retained, keep checkout-versus-compiler causation unknown.
+
+Include tracked non-Python package text in checkout-byte qualification. A
+Python-only rule leaves packaged README, HTML, YAML and other text differences
+unresolved; keep binary archives and intentional platform-specific line-ending
+fixtures outside any proposed text rule. A checkout-byte fix must also appear
+in affected builder and test workflow path filters. A passing census that
+excluded those workflows does not qualify its distribution bytes.
 
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
@@ -1323,6 +1655,12 @@ checks alone does not prove this complete lint gate; run all three in order and
 address the first failure before treating lint as green. The configured
 `devutils` gates in `developer/toolkit.py` run `pytest tests` and `ruff check
 src tests`.
+
+Action Server's `invoke lint` also runs Ruff check, Ruff format, and isort for
+`src` and `tests`; its `pyproject.toml` sets isort's Black profile. Isort checks
+imports nested inside test functions as well as module-level imports. When a
+test edit only reorders imports, use this package gate and verify the route or
+contract assertions remain unchanged.
 
 For `devutils`, regenerate from that package directory with
 `uvx --from poetry==2.1.1 poetry lock --no-interaction`, then run
@@ -1727,6 +2065,17 @@ The beta and production template deployment workflows change into
 Preserve that script's tracked executable mode (`100755`); a checkout that loses
 the mode fails before Python starts with shell exit 126. The active contract test
 checks both the executable bit and each workflow's direct invocation.
+The Canvas Query acceptance test that times out an owned process tree waits for
+a readiness marker published only after its grandchild starts before starting
+the short runtime-timeout clock. Keep readiness separately bounded and atomic:
+otherwise interpreter startup latency can expire the cleanup timeout before a
+descendant exists, producing a missing-PID fixture failure rather than testing
+descendant cleanup. The marker proves setup only; retain the process-tree
+identity checks and require the captured descendant to be gone or zombie after
+timeout cleanup. If the leader exits while the marker is being published,
+recheck the atomic marker before reporting early exit. Drain captured output
+with a short bound only: a descendant may inherit the pipes, so unbounded
+`communicate()` can block before identity-checked cleanup runs.
 
 ### Action Server tunnel verification
 
@@ -1999,6 +2348,12 @@ use targeted module overrides rather than a global missing-import exemption. MCP
 model constructors use Python field names such as `structured_content`; camelCase aliases
 remain wire-format names.
 
+When a test receipt is typed as `dict[str, object]`, narrow nested values before using
+them as mappings. Reuse an assertion-backed section helper or a `TypeGuard` that checks
+string keys; do not use casts or type ignores to make membership checks compile. This
+keeps malformed test receipts failing at runtime while satisfying the configured Mypy
+checks that include ordinary tests.
+
 Action Server keeps deprecation warnings actionable: repository-owned Pydantic models
 use `ConfigDict`, and build timestamps are timezone-aware UTC values. Pytest suppresses
 no deprecation-warning category globally. `robocorp-log-pytest` 0.0.5 permits
@@ -2187,24 +2542,82 @@ commit from being mistaken for the source under test. The test
 `test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable`
 requires `ACTIONS_REAL_RCC_ARTIFACT_TEST=1` and an
 `ACTIONS_RUNTIME_RCC_BINARY` whose RCC v18.19.3 bytes match the pinned SHA-256.
-The workflow selects that one test with xdist disabled, uses the normal Action
-Server developer install path, and uploads a sanitized receipt/source-hash
-summary even if the test fails. Its ordinary-suite skip is not acceptance
-evidence.
+The generated workflow selects rollback, publication-details and staged-consumer
+tests with xdist disabled and uses the normal Action Server developer install
+path. It preserves raw lifecycle and publication receipts alongside sanitized
+summaries and JUnit evidence even if a test fails. An ordinary-suite skip is
+not acceptance evidence.
 
-The admission summary fails closed unless JUnit records exactly one passed,
-non-skipped test, with suite totals matching the actual testcase result
-elements and the expected rollback test name/module; the lifecycle receipt is
-`PASS` and binds to the checked-out
+A retained specialized RCC workflow can pin an older candidate and case set
+than the latest accepted hosted proof. Before scheduling it, inspect the exact
+generator/control revision, immutable candidate commit/tree, selected case
+identities and retained receipt inventory. Inheriting that workflow in a newer
+engineering branch does not make it test that branch. Keep earlier execution
+evidence under its original candidate/control identities; a refreshed gate
+needs its own reviewed tuple and receipt. Retained three-case run `38106813502`
+used control `ff6842223068bb34811990a417aa280331acbb6a` and candidate
+`665468112f1593249449278cf2113c155a6ec6e3`, tree
+`d729a43127c048c7fb35133d2a4b07bc53635402`. Preserve that execution under
+those identities. After the accepted target advances, commit and review the
+ordinary source union on the existing PR branch before creating a separate
+control child that pins that source commit and tree. A newer control that still
+checks out the old candidate does not establish execution of the new union.
+Keep the three case identities, RCC bytes, summary predicates, raw uploads and
+branch permissions unchanged. Record a new hosted execution for the new tuple
+and require full CI on its exact tested merge. Production input changes also
+require new frozen-artifact qualification; compare the retained producer
+inventory without excluding changed files. The control permits only pushes to
+the original opt-in branch
+`test/rcc-provider-rollback-hosted-20261010` and the existing reviewed PR branch
+`fix/rcc-published-artifact-details-20261010`, subject to the retained path filter.
+Local service-free control tests establish admission behavior, not an actual
+RCC artifact execution. Record a new hosted run before claiming acceptance of
+this candidate, and retain earlier receipts under their original identities.
+
+The three-case admission summary fails closed unless JUnit records exactly
+three passed, non-skipped tests, with suite totals matching the actual testcase
+result elements and the expected rollback/publication-details/staged-consumer
+names and modules; the lifecycle receipt is `PASS` and binds to the checked-out
 candidate commit/tree; imported runtime modules originate from and hash-match
 that candidate; both the runtime RCC and Action Server's default RCC path match
 the pinned version and digest; provider-operation snapshots and expected
 persisted Run results agree; and natural shutdown has an observed pre-cleanup
 return code of 0 or 1, followed by an observed cleanup return code, without
 forced stop or observed surviving owned descendants. The always-run summary
-executes from the workspace root and uploads only sanitized evidence, so a
-skipped test, missing receipt, inconsistent JUnit counters, or failed checkout
-cannot appear green.
+executes from the workspace root. Publication admission binds the source and
+control commit/tree, one RCC invocation, a credential-free loopback provider,
+the raw JSON hash and the specification/artifact digest pair. Retain the original
+`lifecycle-receipt.json` as well as `lifecycle-summary.json`: a reconstructed
+summary cannot establish the exact original receipt bytes. A skipped test,
+missing receipt, inconsistent JUnit counters or failed checkout cannot appear
+green.
+
+Independent admission review must hash the original artifact ZIP and compare
+retained lifecycle, publication, staged-consumer and JUnit bytes with its members
+before relying on a sanitized summary. The single-invocation guarantee binds
+the specification/artifact digests in the publication-details case; the rollback
+lifecycle and staged-consumer cases own separate environments and providers.
+This staged consumer pins published Core 1.0.2 and does not establish a Core
+1.0.3 consumer gate. An empty captured descendant snapshot proves only that no
+captured process survived, not complete descendant reaping.
+
+The three-case summary authenticates nine named source files under its recorded
+candidate commit and tree. Compare those hashes to the immutable candidate,
+not to the control checkout. They do not replace review of the complete resolved
+source union or the full native producer inventory: a changed production input
+outside that sample still requires new artifact qualification. Keep the full
+suite's tested merge identity separate from both source and control, even when
+its tree equals the control tree. Checks attached to an older control, and raw
+receipts naming its older candidate, do not qualify a later target union.
+
+The public Linux three-case receipt establishes scoped rollback,
+publication-details and staged-consumer acceptance only. It does not complete
+the retained #134/#135 contracts, prove Core 1.0.3 consumption, or qualify
+Windows RCC. The original private `01f1a98c`/`fafb` bundle chain and frozen-v6
+specification/runner remain required and unavailable; private metadata stays
+NOT_RUN/HOLD. Retain each earlier receipt with its original candidate, control
+and artifact identities while the new source union and separate control gate
+await their own results.
 
 The admission-summary tests execute both synthetic RCC paths to verify version
 and digest checks. These fixtures need a host-native executable format: a
@@ -2372,6 +2785,23 @@ it is reacquired by Artifact digest and never by a persisted executable or
 materialization path. RCC acquire results must include exact identity and
 `verification.valid == true`; missing or invalid verification fails closed.
 
+RCC v18.19.3 `env publish --json` returns the canonical `specificationDigest`
+and `artifactDigest` together. Code that needs both must preserve them from that
+single response through `publish_artifact_details()`; do not substitute the
+Actions-local environment fingerprint for RCC's specification identity. The
+legacy `publish_artifact()` API intentionally continues to parse artifact-only
+responses for existing callers; use the details API when specification identity
+is required, and fail closed if either canonical digest is absent, malformed,
+or conflicts with another identity in the same payload.
+The details API preserves RCC-reported metadata; it does not verify complete
+package-source selection or compile a Package Revision. A real-RCC receipt for
+this API must pin a source containing the details implementation; earlier
+artifact-only receipts do not exercise it. The managed publication-details
+case records the candidate and control commit/tree, RCC version and binary
+hash, one invocation, and the exact JSON response alongside both parsed
+digests. This proves the metadata returned by that publication only; it is not
+evidence that the complete source tree was selected or compiled.
+
 The gated real proof is run with the released RCC binary and explicit gate:
 
 ```bash
@@ -2400,7 +2830,8 @@ separately from RCC wrapper receipts. `ActionServerProcess.stop()` delegates to
 can consume the direct child's wait status, so a later `Popen.poll()` value of 0
 is not natural-exit evidence. A normal `start_server` return produces CLI exit
 0. The
-explicit `/api/shutdown/` endpoint instead calls `_thread.interrupt_main()`;
+explicit `/api/shutdown/` endpoint schedules `_thread.interrupt_main()` as a
+response background task, after the final ASGI response-body send completes;
 `_main_retcode` catches that `KeyboardInterrupt` and returns 1. Count exit 1 as
 the expected controlled API-interrupt outcome only when the receipt also proves
 that shutdown request and its successful 2xx response. An observed natural exit
@@ -2412,6 +2843,13 @@ the captured natural result. Preserve any post-stop `Popen.poll()` value as
 forced-cleanup-only evidence, never as natural exit. A `stop()` return is not
 process-exit evidence, and a captured descendant set only reports that
 observation; it does not prove complete tree reaping.
+The assembled route's service-free ordering controls require completed response
+start and final body sends before interruption; denied requests and failed
+sends must not interrupt. A server access-log status 200 does not prove that
+the client received the response. Keep client response delivery, natural exit
+and cleanup predicates separate; passing checkout-byte tests establishes no
+shutdown cause. ASGI send ordering still requires fresh platform client and
+natural-exit acceptance, and does not guarantee network delivery.
 The bounded retirement result is one pool-lifecycle signal, separate from the
 Action execution result and RCC terminal receipt. Preserve failed wrapper
 receipts. Neither wrapper reaping nor stopped observed descendants establishes
@@ -2686,6 +3124,16 @@ Revision API and does not modify the legacy Robot ZIP/import path. The bounded
 Linux contract suite exercises successful mode normalization, invalid and
 non-empty destinations, links/special files, source/staged-byte mutation, and
 failure cleanup; it does not establish an RCC consumer/import proof.
+The staged-byte regression matches the destination descriptor by device and
+inode and writes the same-sized poison before the underlying read. A positive
+baseline and mutation control with constant timestamp observations verify that
+the re-read digest rejects changed bytes without relying on clock advancement.
+The separate after-read control returns the prior bytes, then forces and checks
+an actual metadata change before requiring rejection and owned-tree cleanup.
+Keep these two signals distinct: a write after a read cannot change the digest
+of the bytes already returned. An unrecorded injection or metadata observation
+does not identify a hosted failure's timestamp cause. These controls retain the
+exclusive destination-writer and non-atomic snapshot limits above.
 The staging failure tests inject errors after mkdir at identity observation,
 directory open, and fstat; when identity cannot be established they require the
 original exception to survive with an explicit unresolved-cleanup note.
@@ -2711,6 +3159,11 @@ skipped because no task-owned managed provider is configured is NOT RUN, not
 acceptance evidence. This exercises one selected package through the current
 Runtime consumer; it does not prove complete source selection, source
 authorization, compiler/admission trust, or any package identity API.
+The consumer's test-only SQLite catalog creates its private data directory
+before opening the database and registers `get_all_model_classes()` so schema
+additions such as `McpCatalogName` are included. Keep a service-free SQLite
+fixture test for this setup separate from the RCC-managed action execution
+proof, so missing fixture prerequisites fail without provisioning RCC.
 On 2026-10-10 the immutable consumer-gate candidate advanced from
 `f7c6ed61f24fd9e98d1465c83042c5446466311b`, which predates this test and is
 not eligible to run it, to `d376399f497fb98f47062e493219e063db8f08e1`
@@ -2887,6 +3340,14 @@ tests under distinct names. Compare complete function bodies and parameterizatio
 before consolidation, and capture `pytest --collect-only -q` counts before and
 after so collection changes are explicit. Then run the complete combined suite
 and lint.
+
+Test modules can contain expensive integration cases without an integration
+marker. Before running a bounded subset, enumerate test definitions and their
+parameterizations from the source AST, inspect the selected tests' helper call
+paths for build, install, service, or provider effects, and invoke only explicit
+test-node selectors. A marker-only filter or a whole-module invocation does
+not bound unmarked tests; record the exact selected nodes and excluded heavy
+node in the task receipt.
 
 Credential redaction must cover argparse-accepted long-option abbreviations
 for `--api-key`, in both separate and equals forms. HTTP header names are
@@ -3285,6 +3746,108 @@ jsdom wall-clock measurement cannot establish browser frame rate: hosted run
 38056869588 measured 34.13ms against the old 32ms assertion without a rendering
 correctness failure. Controlled browser performance remains a separate proof.
 
+## Common Run-output migration and verification
+
+Refreshing the common Run-output branch preserves its service and regression
+controls but creates a new source union requiring fresh CI. The retained Windows
+failure at `9cb61c52` occurred on the resource catalog test's **first** native
+startup, before rollback/collision assertions: readiness exhausted its 90-second
+budget while the RCC variables call took 89.28 seconds. RCC 18.19.3 source
+`4148c2b7` reports elapsed time **since the previous progress mark**; the complete
+16-mark series sums to 89.259 seconds. Neither the final 15.687-second interval
+nor the 66.491-second mark identifies total preparation time or UV install time.
+The separate 20-second cleanup reported an incomplete condition without enough
+evidence to identify a survivor, reader, or observation failure.
+
+The original `1151a0c8` Windows diagnostic branch retained six first-startup
+readiness failures; only two test nodes sampled owned RCC CPU/IO at 80 and 88
+seconds. Their activity proves those observed processes were doing work, not
+which preparation phase caused the timeout. No raw progress series was retained
+for that run. Preserve both failures and their source identities: a later source
+refresh or another branch's result does not establish their cause or waive the
+90/20-second readiness/cleanup boundaries. Actual returned cleanup fields and
+delivered-stream timing require separately reviewed observations.
+
+The private common Run-output service depends on migration 15, stacked after
+the MCP ownership and routing-history migrations 13/14. Register every model
+through `get_all_model_classes()` in fixtures that exercise Run reads or updates;
+partial custom schemas must include the normalized Run models. Missing tables
+fail closed and must not trigger a legacy authorization fallback. Upgrading
+creates no synthetic pins or grants for historical Runs and preserves their
+status, result, inputs and artifact directory.
+
+Legacy Run API tests that replace the in-memory `RunsState` must implement
+`is_scoped_run(run_id)` explicitly. A legacy-only fixture may return false only
+for the known Run it models as having no persisted `RunPin`; keep the production
+check intact so a real scoped Run cannot fall through to a legacy cache or
+durable artifact manifest. The durable-binding regression should still restart
+the storage object, recover legacy Run metadata, and verify the existing binary
+Range response.
+Historical fixtures built with the current `create_db()` must remove tables and
+indexes owned by later migrations before backdating the migration version.
+Changing only the version leaves future schema behind and can make forward
+migration repeat existing indexes. Preserve populated legacy-output archive
+assertions while restoring the intended historical schema boundary.
+
+Use independent processes to verify claim and conflicting terminal publication,
+and a real connection commit failure to verify rollback. SQLite must acquire
+its writer before reading the Run pin: a deferred read followed by a write can
+deadlock two interprocess lock upgrades even with an in-process Python lock.
+Run claim/resolve/publication uses the existing installation counter lock first
+on SQLite and Workspace row locks on PostgreSQL. Registration and numbered
+admission both take Counter before Workspace on either backend; reversing
+those two locks creates a PostgreSQL registration/admission deadlock cycle. Lease
+and retention milliseconds use decimal TEXT with BIGINT casts rather than the
+facade's PostgreSQL INTEGER mapping. PostgreSQL behavior requires an actual
+backend receipt; SQLite results do not establish it.
+
+The service rejects mutable raw-bind `Database.verbose` diagnostics instead of
+disabling global logging. It sanitizes SQL body errors before the Database
+transaction logs rollback, while preserving nonsensitive commit exception
+types. Verify both actual caplog and exception traceback with private-input or
+result sentinels. This is a narrow SQL-bind boundary, not general output or
+provider diagnostic redaction. Linux-only filesystem proofs skip elsewhere,
+while configured Linux/Windows/macOS type checks still apply. Required flags
+and callable capabilities use strict getters with no weaker fallback.
+
+Before exposing scoped Runs, audit every legacy SQL read, cache update, websocket
+subscription, request-ID lookup, artifact/manifest fallback and analytics query.
+Those paths exclude pins; the private resolver supplies current scoped access
+checks. Keep provider roots outside legacy/static serving, and do not treat the
+existing global API token or a typed reference as a Workspace grant. Native,
+public authenticated transport, HTTP Range/HEAD, Windows provider and complete
+multi-adapter lifecycle acceptance need their own measured gates.
+
+The private resolver authorizes the actor and acquires the provider reader inside
+the Workspace transaction lock, then yields the stream after that transaction
+exits. Revocation denies later resolutions; it does not recall an already
+authorized open reader. The revocation regression replaces `provider.open` with
+a failure sentinel to prove that a denied actor, wrong Workspace or revoked grant
+never reaches the provider. Keep reader-acquisition authorization separate from
+active-stream revocation; a durable handle or successful restart is not evidence
+for the latter.
+
+
+A stage failure after provider sealing must retain actual seal metadata in the
+aborted output record before any cleanup. The private provider's transient owned
+seal includes issuer and object identity evidence; only ref/digest/size enter the
+DB. Discard validates that ownership, actual integrity and the current no-follow
+name binding. A byte-identical replacement or another provider's seal must not
+be deleted. Missing owned objects allow idempotent discard. Metadata commitment
+and deletion are separate: abort commit uncertainty skips deletion, and discard
+failure leaves a measured receipt for later reconciliation while preserving the
+original failure. Successful publication or another referencing record prevents
+discard. No protective metadata is erased after cleanup.
+
+The filesystem root requires an exclusive trusted writer for each generated
+object name. POSIX does not provide atomic inode-conditional unlink against a
+hostile same-euid writer after the final identity check; do not claim that
+protection. A crash between sealing and recording the abort, a malformed seal
+or a DB outage can still leave an unindexed orphan. General reconciliation/GC,
+crash-safe provider staging and automatic external-effect retry remain separate
+gates. Verify real cancel-during-stage, rolled-back seal writes, ambiguous
+commits, cleanup failures and successful-publication/replay safety.
+
 ### Live pull-request base identity
 
 Reconcile the complete exact-head check-run inventory, commit statuses and
@@ -3302,6 +3865,12 @@ target branch advances. Resolve the live target Git ref separately and inspect
 the prospective merge's ordered parents and complete tree. Bind carried-forward
 CI evidence to the checkout actually recorded in job logs; neither the PR
 payload's base SHA nor a mergeable flag alone establishes the current tested union.
+
+For an ordinary stacked-branch refresh whose only conflict is an append to
+canonical guidance, retain each parent's evidence-backed lesson. Compare every
+non-documentation blob in the resolved tree with the ordered parents before
+committing; a docs-only conflict does not establish source-tree identity or
+transfer old test results to the new union.
 
 Before refreshing a dependent pull request, confirm that its dependency's
 accepted source is present in the current target ref. An older dependency commit
