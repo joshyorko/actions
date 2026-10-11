@@ -1,4 +1,4 @@
-"""Fail closed unless all frozen catalog rollback and drain cases passed."""
+"""Fail closed unless all eleven frozen catalog, drain, sync, and history cases passed."""
 
 from __future__ import annotations
 
@@ -28,6 +28,30 @@ EXPECTED_CASES = {
         "tests.action_server_tests.test_cli_successful_generation_drain",
         "test_successful_generation_switch_drains_old_run_on_its_source_snapshot",
     ),
+    (
+        "tests.action_server_tests.test_cli_multi_package_sync",
+        "test_additive_import_serves_duplicate_action_names_across_restart",
+    ),
+    (
+        "tests.action_server_tests.test_cli_multi_package_sync",
+        "test_start_sync_treats_repeated_dirs_as_one_desired_set",
+    ),
+    (
+        "tests.action_server_tests.test_cli_multi_package_sync",
+        "test_start_sync_rejects_bad_later_package_without_partial_database_update",
+    ),
+    (
+        "tests.action_server_tests.test_cli_multi_package_sync",
+        "test_failed_sync_keeps_last_good_unmanaged_package_sources",
+    ),
+    (
+        "tests.action_server_tests.test_cli_multi_package_sync",
+        "test_sync_rejects_historical_mcp_alias_capture_and_rename_recovers",
+    ),
+    (
+        "tests.action_server_tests.test_cli_mcp_resource_history",
+        "test_cli_resource_owner_history_across_reload_and_restart",
+    ),
 }
 
 
@@ -45,9 +69,9 @@ def main() -> int:
     failures = sum(len(case.findall("failure")) for case in cases)
     errors = sum(len(case.findall("error")) for case in cases)
     skipped = sum(len(case.findall("skipped")) for case in cases)
-    if names != EXPECTED_CASES or len(cases) != 5 or failures or errors or skipped:
+    if names != EXPECTED_CASES or len(cases) != 11 or failures or errors or skipped:
         raise SystemExit(
-            "frozen catalog JUnit result did not contain exactly five passing expected cases"
+            "frozen catalog JUnit result did not contain exactly eleven passing expected cases"
         )
     args.output.write_text(
         json.dumps(
