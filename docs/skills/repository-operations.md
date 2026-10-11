@@ -136,8 +136,37 @@ terminated at the 30-second startup deadline on both Windows and macOS,
 before the watched-reload assertions began. Keep the 90-second allowance
 limited to the initial native-executable startup; this reuses the existing
 native acceptance startup budget. Source-mode startup remains at 30 seconds,
-as do the watcher and restart deadlines. Inspect child stderr before
-treating a timeout as an RCC or Runtime failure.
+as do the watcher and restart deadlines.
+
+At #311 head `c888fb4a`, Windows run `38099013706`, job `114350853595`,
+timed out at the initial native startup in the watched-reload and resource
+catalog-rollback nodes. Both had completed `ht hash` and logged `holotree
+variables --no-retry-build` before the unchanged 90-second deadline. The
+same test and RCC source bytes passed those nodes in accepted #292 run
+`38098225220`, job `114348512491`. This evidence identifies the bootstrap
+stage, not its root cause. RCC's `Running:` log follows acquisition of the
+Python mutex; it does not establish successful RCC spawn or internal-lock
+progress. Captured stderr is line-oriented, and RCC's interactive forwarding
+does not explicitly flush, so absent captured lines do not establish inactivity.
+
+The Windows Runtime test workflow now sets an explicit
+`ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR` and retains its bounded JSON reports
+with `always()` even when integration fails. The test-owned observer enables
+only those two native nodes, samples pending initial startup at 80 and 88
+seconds, and delegates unchanged startup and its existing 20-second failure
+cleanup. Reports contain source/executable/config byte identities, an
+allowlisted RCC operation/space/flags summary, owned descendant CPU/I/O state,
+cache-file existence and effective-home equality, and registered host-reader
+and pipe-closure state. They contain no raw commands, stderr, URLs, paths,
+environment maps or environment-cache contents. Access denial, vanished
+processes, unobserved RCC identity, and the frozen child's internal readers
+remain explicitly unavailable. The probe limits traversal to 64 processes
+and a one-second traversal budget; individual OS queries may outlast that
+budget, so cancellation never waits on a pending query before startup cleanup.
+These synthetic observer checks do not establish Windows native acceptance
+or fix the original failure. Compare the next exact-head reports before
+changing production code; do not warm caches, retry RCC, or enlarge deadlines
+to obtain a passing result.
 
 For a split package API promotion, verify the producer's public contract from
 the exact built wheel in an isolated installation. Assess consumer adoption
