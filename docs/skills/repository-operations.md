@@ -2150,10 +2150,11 @@ discovery or adoption. Successful startup and readiness timeouts remain
 unchanged. The synthetic timeout regression proves direct-child reap and both
 reader closures; native Windows startup remains a separate gate.
 
-When a test replaces `process.Process` with a subclass, import `Process` itself
-for the subclass declaration and patch the module attribute separately. A
-runtime module attribute is not a valid static base class for the configured
-Mypy check. Access private fields through a base-typed process handle with
+When a test subclasses a process implementation read into a local runtime
+alias (such as `base_process = process_module.Process`), Mypy cannot use that
+alias as a class base. Import `Process` directly for the subclass declaration
+and patch `process_module.Process` separately so runtime substitution remains
+intact. Access private fields through a base-typed process handle with
 `getattr` while keeping the assertions on those fields.
 
 The socketpair test that fills a send buffer is a kernel-buffer behavior check:
