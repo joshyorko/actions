@@ -834,9 +834,11 @@ def _prepare_owned_rcc_test_package_cache(
     assert (
         client.is_dir() and not client.is_symlink() and client.resolve() == client
     ), "PACKAGE_CACHE_CLIENT_LINK"
+    client_metadata = client.stat()
     assert (
-        stat.S_IMODE(client.stat().st_mode) == 0o700
-        and client.stat().st_uid == os.getuid()
+        stat.S_IMODE(client_metadata.st_mode) in (0o700, 0o750)
+        and client_metadata.st_uid == os.getuid()
+        and client_metadata.st_gid == os.getgid()
     ), "PACKAGE_CACHE_CLIENT_MODE_OWNER"
     assert all(
         Path(os.environ.get(key, "")).resolve() == client
@@ -1264,3 +1266,119 @@ def test_owned_rcc_package_cache_rejects_wrong_owner(
         )
     assert calls == []
     assert not (managed / "pkgs").is_symlink()
+
+
+@pytest.mark.parametrize("mode", [0o700, 0o750])
+def test_owned_rcc_package_cache_native_home_mode_preserves_cold_and_warm(
+    owned_rcc_package_cache_control, owned_rcc_package_cache_mount_spy, mode
+):
+    (
+        root,
+        case,
+        managed,
+        value,
+        configure,
+        publication,
+        published,
+    ) = owned_rcc_package_cache_control
+    client = root / "actions-home"
+    client.chmod(mode)
+    calls = owned_rcc_package_cache_mount_spy()
+    result = _prepare_owned_rcc_test_package_cache(
+        case, "v18.19.3", value["binary_sha256"]
+    )
+    assert result["cold_first_publication"] is True
+    assert calls == []
+    assert stat.S_IMODE(client.stat().st_mode) == mode
+    published()
+    result = _prepare_owned_rcc_test_package_cache(
+        case, "v18.19.3", value["binary_sha256"], managed_home=managed
+    )
+    assert result["cold_first_publication"] is False
+    assert calls == [
+        (managed / "pkgs", (client / "pkgs",), {"target_is_directory": True})
+    ]
+    assert stat.S_IMODE(client.stat().st_mode) == mode
+    assert stat.S_IMODE(root.stat().st_mode) == 0o700
+    assert stat.S_IMODE((client / "pkgs").stat().st_mode) == 0o700
+    assert stat.S_IMODE((root / "rcc-package-cache-owner.json").stat().st_mode) == 0o600
+
+
+@pytest.mark.parametrize("mode", [0o701, 0o710, 0o740, 0o751, 0o760, 0o770, 0o777])
+def test_owned_rcc_package_cache_native_home_rejects_other_modes_before_mount(
+    owned_rcc_package_cache_control, owned_rcc_package_cache_mount_spy, mode
+):
+    (
+        root,
+        case,
+        managed,
+        value,
+        configure,
+        publication,
+        published,
+    ) = owned_rcc_package_cache_control
+    assert (
+        _prepare_owned_rcc_test_package_cache(case, "v18.19.3", value["binary_sha256"])[
+            "cold_first_publication"
+        ]
+        is True
+    )
+    published()
+    client = root / "actions-home"
+    client.chmod(mode)
+    calls = owned_rcc_package_cache_mount_spy()
+    with pytest.raises(AssertionError, match="PACKAGE_CACHE_CLIENT_MODE_OWNER"):
+        _prepare_owned_rcc_test_package_cache(
+            case, "v18.19.3", value["binary_sha256"], managed_home=managed
+        )
+    assert calls == []
+    assert not (managed / "pkgs").exists()
+    assert stat.S_IMODE(client.stat().st_mode) == mode
+
+
+@pytest.mark.parametrize("mode", [0o700, 0o750])
+@pytest.mark.parametrize("identity", ["uid", "gid"])
+def test_owned_rcc_package_cache_native_home_rejects_foreign_owner_or_group(
+    owned_rcc_package_cache_control,
+    owned_rcc_package_cache_mount_spy,
+    monkeypatch,
+    mode,
+    identity,
+):
+    (
+        root,
+        case,
+        managed,
+        value,
+        configure,
+        publication,
+        published,
+    ) = owned_rcc_package_cache_control
+    client = root / "actions-home"
+    client.chmod(mode)
+    assert (
+        _prepare_owned_rcc_test_package_cache(case, "v18.19.3", value["binary_sha256"])[
+            "cold_first_publication"
+        ]
+        is True
+    )
+    published()
+    original_stat = Path.stat
+
+    def controlled_stat(path, *args, **kwargs):
+        metadata = original_stat(path, *args, **kwargs)
+        if path == client:
+            fields = list(metadata)
+            fields[4 if identity == "uid" else 5] += 1
+            return os.stat_result(fields)
+        return metadata
+
+    monkeypatch.setattr(Path, "stat", controlled_stat)
+    calls = owned_rcc_package_cache_mount_spy()
+    with pytest.raises(AssertionError, match="PACKAGE_CACHE_CLIENT_MODE_OWNER"):
+        _prepare_owned_rcc_test_package_cache(
+            case, "v18.19.3", value["binary_sha256"], managed_home=managed
+        )
+    assert calls == []
+    assert not (managed / "pkgs").exists()
+    assert stat.S_IMODE(client.stat().st_mode) == mode
