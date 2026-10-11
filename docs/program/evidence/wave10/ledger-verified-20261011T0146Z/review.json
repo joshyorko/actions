@@ -1,0 +1,71 @@
+{
+  "schema": "actions-wave10-ledger-independent-review/v1",
+  "observed_at_utc": "2026-10-11T01:44:22Z",
+  "live_issue": {
+    "number": 101,
+    "state": "open",
+    "updated_at": "2026-10-11T01:43:39Z",
+    "body_utf8_bytes": 28119,
+    "body_utf16_code_units": 28035,
+    "body_sha256": "27584392d03674bd0a640d050550dbc091b62487f96709fff1b3bd5c1c9f1a72",
+    "matches_saved_input_exactly": true
+  },
+  "history": {
+    "utf16_code_units": 23355,
+    "utf8_bytes": 23430,
+    "sha256": "2e7dc264b55836f7fd261d5ee61d6cc9d3d7671fa4a0700716b1253a94cacbba",
+    "matches_preserved_reference_sha256": true,
+    "sha256_reference": "2e7dc264b55836f7fd261d5ee61d6cc9d3d7671fa4a0700716b1253a94cacbba"
+  },
+  "primary_buckets": {
+    "close_ready_recommendations": 4,
+    "integrated_foundations_whole_issue_unaccepted": 9,
+    "awaiting_scoped_review_integration_acceptance": 9,
+    "acceptance_prerequisites_blocked_issue_134": 1,
+    "successor_architecture_contracts": 27,
+    "release_distribution_gated": 1,
+    "retained_advisory_contracts": 2,
+    "human_determination_no_dispatch": 4,
+    "coordination_ledger": 1,
+    "sum": 58
+  },
+  "overlays": {
+    "open_issues": 58,
+    "open_prs": 14,
+    "current_source_writers": 0,
+    "hosted_ci_gates_active": 2,
+    "scoped_candidates": 6,
+    "held_scopes": 8,
+    "root_merge_admissions": 0,
+    "actual_integration_ready": "UNKNOWN",
+    "automatic_closures": "UNKNOWN; 0 observed, not proven zero",
+    "retained_graph_contracts": 54,
+    "retained_graph_open": 53,
+    "retained_graph_closed": [
+      210
+    ]
+  },
+  "scope_checks": {
+    "issue_134": "Private source has GO_COMPONENT only; actual metadata NOT RUN; frozen supervisor/controller controls HOLD. No full issue completion inferred.",
+    "issue_195": "Bounded Linux installed-wheel proof GO; issue remains open because CI/integration and residual criteria remain.",
+    "issue_292": "Bounded scope accepted at 2f631e54; tested union 92498aff with all 19 checks passed, not integrated; #126 stays open.",
+    "issue_221": "Draft/unmerged; prospective clean tree a8fe00af; 33 checks passed and publication skipped; final admission HOLD. Authenticated closing relationships unavailable.",
+    "history": "Current summary is separate from preserved archival snapshots; prior history hash matches exactly."
+  },
+  "public_boundary": "Fetched public body has generic private-gate status only; no detailed private finding or code payload.",
+  "source_refs": {
+    "durable_commit": "c94eb4f0b28f9f5946ce8ab832b72f8a59f430bf",
+    "handoff_path": "docs/handoffs/actions-swarm-mk3-20261011-wave10-source-checkpoint.md",
+    "handoff_sha256": "7feed0bc49fde32f1b29c93a50d32fc63a780f72f8c5db793fbfa6a6b6f16d24",
+    "operator_path": "docs/program/evidence/wave10/source-followup-20261011T014027Z/OPERATOR.md",
+    "operator_sha256": "cf76d567f103e4a823d081788d64ed5cb59dc364e334f026b6674b788f5e4e4b"
+  },
+  "canonical_documentation": {
+    "disposition": "NO NEW DELTA",
+    "reason": "Current ledger/handoff already separates primary buckets from overlays, scoped evidence from whole-issue acceptance, 0 observed from proven zero, and private gate status from public detail."
+  },
+  "upstream": {
+    "disposition": "NONE",
+    "reason": "No newly confirmed upstream defect; no external mutation."
+  }
+}

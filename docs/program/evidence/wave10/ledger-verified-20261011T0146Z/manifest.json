@@ -1,0 +1,11 @@
+{
+  "schema": "actions-wave10-ledger-review-manifest/v1",
+  "observed_at_utc": "2026-10-11T01:44:22Z",
+  "files": [
+    {
+      "path": "review.json",
+      "bytes": 3314,
+      "sha256": "77ad7e6c7998bcdced321dac3d12d11aa154158a2ada493fad74e610c9b110dc"
+    }
+  ]
+}

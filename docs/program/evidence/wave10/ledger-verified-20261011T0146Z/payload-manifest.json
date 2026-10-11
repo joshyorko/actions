@@ -1,0 +1,25 @@
+{
+  "members": [
+    {
+      "path": "README.md",
+      "sha256": "6098545e12ee089458a30d5566ea5f28858c3044342ed588b6d5cd8687cd1806",
+      "bytes": 1300
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "688c272d2e6a9c8ea1a29fbf95cff87bfecd501e88761d97ccb65045e390c5ee",
+      "bytes": 267
+    },
+    {
+      "path": "review.json",
+      "sha256": "77ad7e6c7998bcdced321dac3d12d11aa154158a2ada493fad74e610c9b110dc",
+      "bytes": 3314
+    },
+    {
+      "path": "root-readback.json",
+      "sha256": "0eee5006cf6349a7133c547550f75a83fb9b2ee4c270e3158a5b5f3e2297df45",
+      "bytes": 2315
+    }
+  ],
+  "privacy": "Readback hashes/counts and public-safe independent review only; no privateRCCpayload or full histories"
+}

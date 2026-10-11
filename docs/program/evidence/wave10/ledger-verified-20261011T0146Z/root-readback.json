@@ -1,0 +1,54 @@
+{
+  "schema": "actions.final-ledger-readback/v1",
+  "observed_at_utc": "2026-10-11T01:45:33Z",
+  "source_evidence_commit": "c94eb4f0b28f9f5946ce8ab832b72f8a59f430bf",
+  "ledger": "https://github.com/joshyorko/actions/issues/101",
+  "update_at_utc": "2026-10-11T01:43:39Z",
+  "body": {
+    "sha256": "27584392d03674bd0a640d050550dbc091b62487f96709fff1b3bd5c1c9f1a72",
+    "UTF8_bytes": 28119,
+    "UTF16_units": 28035,
+    "exact_live_readback": "PASS"
+  },
+  "history": {
+    "scope": "From first <details> through exact end of body, including trailingLF",
+    "sha256": "2e7dc264b55836f7fd261d5ee61d6cc9d3d7671fa4a0700716b1253a94cacbba",
+    "UTF8_bytes": 23430,
+    "UTF16_units": 23355,
+    "exact_preservation": "PASS"
+  },
+  "counts": {
+    "open_issues": 58,
+    "close_ready_recommendations": 4,
+    "integrated_foundations_but_whole_contract_unaccepted": 9,
+    "source_writers": 0,
+    "current_head_CI_gates": 2,
+    "scoped_PR_candidates": 6,
+    "observed_held_PR_scopes": 8,
+    "actual_ready_PRs": "UNKNOWN",
+    "actual_automatic_closures": "UNKNOWN",
+    "observed_textual_targets": 0,
+    "premature_closure_risks": "UNKNOWN",
+    "distinct_blockers": "UNKNOWN"
+  },
+  "independent_review": {
+    "sha256": "77ad7e6c7998bcdced321dac3d12d11aa154158a2ada493fad74e610c9b110dc",
+    "manifest_sha256": "688c272d2e6a9c8ea1a29fbf95cff87bfecd501e88761d97ccb65045e390c5ee"
+  },
+  "mutation": {
+    "scope": "Ledger body only and authorized evidence comments; no issues/PRs closed/merged/retargeted",
+    "comments": {
+      "PR292": 6104257755,
+      "PR311": 6104258688,
+      "issue195": 6104259622,
+      "PR290": 6104310104,
+      "issue134": 6104310927
+    }
+  },
+  "documentation_disposition": {
+    "final_independent_graph_review": "Receipt integrated; no additional prose: canonical reconciliation/typed acceptance rules already cover its verified distinctions",
+    "root_verified_delta": "Exact text segment/trailingLF/UTF8-byte vs character/code-unit measurement recorded in canonical repository-operations.md; bound by retained one-LF scope addendum at16801315 and current readback",
+    "prior_lanes": "Every previous receipt integrated or rejected as duplicate with reason in9cdd1545/c94eb4f0 dispositions"
+  },
+  "upstream_disposition": "none; no new report/defect or private disclosure"
+}

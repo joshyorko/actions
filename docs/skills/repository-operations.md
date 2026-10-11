@@ -2673,6 +2673,11 @@ when it is a dangling symlink. Put corrections in a new, explicitly linked
 artifact. If original bytes were overwritten or deleted, retain their announced
 identity and report the loss; do not recreate purported original evidence.
 
+For a text receipt's digest, name the exact segment and hash its UTF-8 bytes.
+State whether the trailing newline is included, and report byte counts
+separately from character or code-unit counts. Compare segment boundaries and
+exact bytes before treating two different substring hashes as evidence loss.
+
 For installed-wheel tests that uninstall before returning, capture installed
 paths and byte hashes before uninstall. Validate the captured records against
 retained wheels and their complete member inventories afterward, without
