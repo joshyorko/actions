@@ -1,0 +1,76 @@
+{
+  "harness_sha": "f506a04e240feba048bf10e32bccebf591674f9e",
+  "harness_tree": "782ff78fa4bfc751b6d02004f665da84fc79c81b",
+  "artifact_source_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "artifact_build_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "artifact_workflow_run": "38098225250",
+  "runtime_kind": "go-wrapper",
+  "command": [
+    "/workspace/engineering/pr310/action_server/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-n",
+    "0",
+    "-q",
+    "--tb=short",
+    "-rA",
+    "-m",
+    "integration_test and native_artifact_test",
+    "/workspace/engineering/pr310/action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py::test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery",
+    "--basetemp=/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/pytest-owned",
+    "--junitxml=/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/junit.xml"
+  ],
+  "command_timeout_seconds": 600,
+  "cleanup_grace_seconds": 10,
+  "supervisor_parent_timeout_seconds": 645,
+  "browser_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+  "browser_selection": {
+    "name": "chromium-headless-shell",
+    "path": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+    "version": "151.0.7922.34",
+    "revision": "1234"
+  },
+  "browser_launch_trace_scope": "last attempted browser stage; installed DEBUG_FILE stream is recreated by each Node subprocess",
+  "binary_sha256": "214548879a4eb74ccd94998dcd6250b712b2bdfe7a07ab803e2e2e37f679c04b",
+  "browser_temp_root": "/tmp/wiui-igqexypg",
+  "status": "PASS_BOUNDED",
+  "returncode": 0,
+  "cleanup_disposition": "reaped_exited_descendants",
+  "reaped_descendants": 6,
+  "observed_browser_launch": {
+    "paths": [
+      "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell"
+    ],
+    "launched_pids": [
+      20364
+    ],
+    "executable_file_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "trace_sha256": "050822c91c9220685a40c40a0f354876763a8039ff220f94ae348267243df699",
+    "measurement": "actual pw:browser launch command and PID, executable file bytes measured before/after; no live /proc identity sample"
+  },
+  "receipt_sha256": "94a26bc14f64fb7cd219b94cf3278c19a3962e1b5e85782c6c758e893c2b4781",
+  "observed_zombie_descendant_count": 0,
+  "retained_browser_trace": {
+    "path": "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/pw-browser-launch.log",
+    "sha256": "050822c91c9220685a40c40a0f354876763a8039ff220f94ae348267243df699",
+    "launch_paths": [
+      "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell"
+    ],
+    "launched_pids": [
+      20364
+    ]
+  },
+  "browser_temp_cleanup": "REMOVED_AFTER_SUPERVISOR_COMPLETED",
+  "elapsed_seconds": 43.37171053200018,
+  "files": {
+    "native-ui-receipt-pretest-tree-inventory.json": "195e3982ebbd7d9d6d097f5c02339681f9f28779a2997ef47e3019ee88202c8c",
+    "native-ui-receipt-go-wrapper-pretest-tree-inventory.json": "e6e9f12d5f03e05213e30fa633a73e9a34982593fa8fb20f55e1fd63a19b52fe",
+    "test-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "native-ui-receipt-go-wrapper-post-runtime-tree-diff.json": "988148318e0051f0ff9f85abd23efcb1291c0b3326c01a07858f344477dc72d9",
+    "pw-browser-launch.log": "050822c91c9220685a40c40a0f354876763a8039ff220f94ae348267243df699",
+    "test-stdout.log": "a3f308746e875fb43773b3ae77cc3f7bd422c2a6df7159283fd2ed9c39e7c53f",
+    "native-ui-receipt.json": "94a26bc14f64fb7cd219b94cf3278c19a3962e1b5e85782c6c758e893c2b4781",
+    "native-ui-receipt-go-wrapper-post-runtime-tree-inventory.json": "48efffea912c82514e278c826e39a2fe5de69850fe63f15e57abcece2d84728f",
+    "junit.xml": "e0d4df39503f6490cb683d18be59bc5403d3072bd17056258ce9183e93429f92"
+  }
+}

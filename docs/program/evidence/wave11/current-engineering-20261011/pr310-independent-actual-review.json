@@ -1,0 +1,120 @@
+{
+  "assets_original_embedded_range": {
+    "end": 79214819,
+    "exact_original_bytes": true,
+    "sha256": "c85862c9b4dba354953c02cbb80e520052f07cb6d506600bf4a07d2f755135e0",
+    "start": 5658368
+  },
+  "browser": {
+    "file_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "live_proc_identity": "NOT_OBSERVED",
+    "revision": "1234",
+    "selector": "chromium-headless-shell",
+    "trace_scope": "last attempted stage only",
+    "version": "151.0.7922.34"
+  },
+  "documentation_improvement": {
+    "accepted_existing_proposal": "/workspace/engineering/pr310-runner-qualification-owned/canonical-guide-final-proposed.patch",
+    "canonical_file_proposed": "docs/skills/work-items.md",
+    "durable_learning": "Preserve harness/build identity, original archive bytes, actual headless selector and distinct cleanup/natural exit/trace scopes.",
+    "evidence": "Independently checked raw receipts/envelopes/JUnits, all recorded hashes,1390Gitpaths and post-runtime file bytes for both actual kinds.",
+    "exact_additional_delta": "After the proposed sentence separating supervisor and Runtime cleanup counts, add: \"These UI receipts observe bounded forced cleanup; they do not establish natural Runtime shutdown. The final Playwright debug file covers the last attempted browser stage only, so earlier stage PASS evidence comes from the original native receipt rather than that one launch trace.\"",
+    "proposal_sha256": "2915ac45c5140032ca613c48fa42b99b02bcaf5e995ec10872a002e1f40c12c8",
+    "remaining_uncertainty": "Other platforms, unsupported error states, final combined acceptance, private metadata and release publication remain unproved.",
+    "stale_or_ambiguous_guidance_removed": "Do not equate forced zero-survivor cleanup with natural shutdown or final debug stream with all browser-stage launch traces."
+  },
+  "immutable_runner_sha256": "cbbb61581274a6caa830c8c400386735e738d28f3ea0700577a0926293693368",
+  "limits": [
+    "Linux frozen and Go-wrapper UI pair only; no #208 closure/publication/Windows/macOS acceptance.",
+    "Runtime cleanup is forced bounded reap observation, not natural shutdown proof. Supervisor reaped6 count is separate.",
+    "Missing runtime support and genericHTTP500 remain NOT_RUN; crash/accessibility/non-Chromium/fullUX gates remain retained.",
+    "Manifest Git HEAD provenance is not clean-build attestation or independent bundled dependency/Core wheel provenance.",
+    "Private RCC/frozen-v6 metadata remains NOT_RUN/HOLD."
+  ],
+  "raw_proofs": {
+    "frozen": {
+      "actual_launch_file_and_pid_bound": true,
+      "baseline_post_entries_equal": 1192,
+      "browser_final_stage_trace_sha256": "149ec58332072c263a29b80a67ab2f1f49d35ef5afc80272652db7b89e100bb9",
+      "browser_live_proc_identity_claimed": false,
+      "envelope_sha256": "0bb5435725cc16e8ebed76b0c2a23586b7aea129f6825583754361f19a815485",
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skips": 0,
+        "tests": 1
+      },
+      "not_run": {
+        "generic_http_500": "no supported native backend fault fixture",
+        "missing_runtime_support": "cannot be induced without mutating the package"
+      },
+      "original_build_identity_preserved": true,
+      "raw_receipt_sha256": "32df0a8501d08318b2106fd27d385e8d1c06c464057538f4e1db9b7c9a32f643",
+      "runtime_cleanup": {
+        "control_error_count": 0,
+        "descendant_snapshot_complete": true,
+        "live_descendant_count": 0,
+        "snapshot_failure_type": null,
+        "stop_failure_type": null,
+        "wrapper_reaped": true,
+        "wrapper_started": true,
+        "zombie_descendant_count": 0
+      },
+      "runtime_file_bytes_rehashed": 1054,
+      "supervisor_reaped_exited_descendants": 6,
+      "three_actual_browser_stages": true
+    },
+    "go-wrapper": {
+      "actual_launch_file_and_pid_bound": true,
+      "baseline_post_entries_equal": 1192,
+      "browser_final_stage_trace_sha256": "050822c91c9220685a40c40a0f354876763a8039ff220f94ae348267243df699",
+      "browser_live_proc_identity_claimed": false,
+      "envelope_sha256": "bb8b8e2e8c50f88aa5a06882b67176377027e3702a606edcf547fa2bc1e003e8",
+      "junit": {
+        "errors": 0,
+        "failures": 0,
+        "skips": 0,
+        "tests": 1
+      },
+      "not_run": {
+        "generic_http_500": "no supported native backend fault fixture",
+        "missing_runtime_support": "cannot be induced without mutating the package"
+      },
+      "original_build_identity_preserved": true,
+      "raw_receipt_sha256": "94a26bc14f64fb7cd219b94cf3278c19a3962e1b5e85782c6c758e893c2b4781",
+      "runtime_cleanup": {
+        "control_error_count": 0,
+        "descendant_snapshot_complete": true,
+        "live_descendant_count": 0,
+        "snapshot_failure_type": null,
+        "stop_failure_type": null,
+        "wrapper_reaped": true,
+        "wrapper_started": true,
+        "zombie_descendant_count": 0
+      },
+      "runtime_file_bytes_rehashed": 1070,
+      "supervisor_reaped_exited_descendants": 6,
+      "three_actual_browser_stages": true
+    }
+  },
+  "schema_version": 1,
+  "source": {
+    "complete_tracked_paths": 1390,
+    "harness_sha": "f506a04e240feba048bf10e32bccebf591674f9e",
+    "harness_tree": "782ff78fa4bfc751b6d02004f665da84fc79c81b",
+    "only_four_harness_docs_paths_differ": [
+      "action_server/frontend/scripts/native-workitems-ui-acceptance.mjs",
+      "action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py",
+      "docs/skills/repository-operations.md",
+      "docs/skills/work-items.md"
+    ],
+    "producer_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "producer_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+    "worktree_clean": true
+  },
+  "successor_receipt_sha256": "e95abb8f7024148019085d630f5755c8472290eabc3ad51537331f95e50b8b64",
+  "upstream_disposition": "none",
+  "verdict": "GO_CURRENT_HARNESS_LINUX_NATIVE_PAIR_BOUNDED_ACCEPTANCE",
+  "verified_retained_hash_count": 29,
+  "whole_issue_or_publication_verdict": "HOLD_RETAINED_CONTRACTS_UNSATISFIED"
+}

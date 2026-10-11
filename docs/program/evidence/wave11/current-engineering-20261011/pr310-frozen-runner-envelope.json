@@ -1,0 +1,76 @@
+{
+  "harness_sha": "f506a04e240feba048bf10e32bccebf591674f9e",
+  "harness_tree": "782ff78fa4bfc751b6d02004f665da84fc79c81b",
+  "artifact_source_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "artifact_build_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "artifact_workflow_run": "38098225250",
+  "runtime_kind": "frozen",
+  "command": [
+    "/workspace/engineering/pr310/action_server/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-n",
+    "0",
+    "-q",
+    "--tb=short",
+    "-rA",
+    "-m",
+    "integration_test and native_artifact_test",
+    "/workspace/engineering/pr310/action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py::test_packaged_work_items_ui_create_keyboard_narrow_and_storage_recovery",
+    "--basetemp=/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/pytest-owned",
+    "--junitxml=/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/junit.xml"
+  ],
+  "command_timeout_seconds": 600,
+  "cleanup_grace_seconds": 10,
+  "supervisor_parent_timeout_seconds": 645,
+  "browser_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+  "browser_selection": {
+    "name": "chromium-headless-shell",
+    "path": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+    "version": "151.0.7922.34",
+    "revision": "1234"
+  },
+  "browser_launch_trace_scope": "last attempted browser stage; installed DEBUG_FILE stream is recreated by each Node subprocess",
+  "binary_sha256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb",
+  "browser_temp_root": "/tmp/wiui-uofjw9ws",
+  "status": "PASS_BOUNDED",
+  "returncode": 0,
+  "cleanup_disposition": "reaped_exited_descendants",
+  "reaped_descendants": 6,
+  "observed_browser_launch": {
+    "paths": [
+      "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell"
+    ],
+    "launched_pids": [
+      19207
+    ],
+    "executable_file_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "trace_sha256": "149ec58332072c263a29b80a67ab2f1f49d35ef5afc80272652db7b89e100bb9",
+    "measurement": "actual pw:browser launch command and PID, executable file bytes measured before/after; no live /proc identity sample"
+  },
+  "receipt_sha256": "32df0a8501d08318b2106fd27d385e8d1c06c464057538f4e1db9b7c9a32f643",
+  "observed_zombie_descendant_count": 0,
+  "retained_browser_trace": {
+    "path": "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/pw-browser-launch.log",
+    "sha256": "149ec58332072c263a29b80a67ab2f1f49d35ef5afc80272652db7b89e100bb9",
+    "launch_paths": [
+      "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell"
+    ],
+    "launched_pids": [
+      19207
+    ]
+  },
+  "browser_temp_cleanup": "REMOVED_AFTER_SUPERVISOR_COMPLETED",
+  "elapsed_seconds": 35.64857058899997,
+  "files": {
+    "native-ui-receipt-pretest-tree-inventory.json": "08d8c246e5fd7fcf982f7f1aedd446f1563648e66f0b75f8a9ca0d15fd584659",
+    "test-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pw-browser-launch.log": "149ec58332072c263a29b80a67ab2f1f49d35ef5afc80272652db7b89e100bb9",
+    "test-stdout.log": "8f505596918d9290d9f262ae60affab1ca3de489974add5686f8a73ec057e8ca",
+    "native-ui-receipt-frozen-post-runtime-tree-inventory.json": "3528676ec30753c5487f27a019a264d7d672b63e5dbac5bfa2dd32fcc58398d6",
+    "native-ui-receipt-frozen-post-runtime-tree-diff.json": "6e18014feed9e00853147b2cb547f3b35bdfa3ff552fdbc26267df76fe6b9cd5",
+    "native-ui-receipt.json": "32df0a8501d08318b2106fd27d385e8d1c06c464057538f4e1db9b7c9a32f643",
+    "native-ui-receipt-frozen-copy-pretest-tree-inventory.json": "640964ce3f2faef0626b8e968f6915e0d6bfa1486fc0f4f8885e1f2ba16b0415",
+    "junit.xml": "caca3f3dc05f32800b4bb919eb3f63349d8f976f0d149a7c3847141aa3071c31"
+  }
+}

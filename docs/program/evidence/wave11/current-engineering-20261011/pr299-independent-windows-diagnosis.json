@@ -1,0 +1,173 @@
+{
+  "head": "9cb61c52fce35201221b55707d73da9e9b0840a6",
+  "immutable_rcc_source": {
+    "conda/workflows.go": {
+      "commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "local_path": "/workspace/engineering/rcc-conda-workflows.go",
+      "sha256": "0e0390bf4930645a1d3819fd5ecb99aa9892c281846923c0952d0b19ed93e694"
+    },
+    "htfs/commands.go": {
+      "commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "local_path": "/workspace/engineering/rcc-htfs-commands.go",
+      "sha256": "e210cdd9d7978c530212b0bba8db0f5eb59fb437eaa19dce70b85c0135fc9b03"
+    },
+    "pretty/functions.go": {
+      "commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "local_path": "/workspace/engineering/rcc-pretty-functions.go",
+      "sha256": "04eb4b94cff48868d743de47e7b9f9f9bb5737ce4d51b282ac29d8f8d5279b32"
+    }
+  },
+  "interpretation": {
+    "1.615_seconds": "UV-start to postinstall-start interval",
+    "15.687_seconds": "library-restore-start to deferred final mark, including externally-managed marker and staging cleanup; not total preparation duration",
+    "66.491_seconds": "interval after micromamba start to UV start, including layer recording and UV setup; not UV install duration",
+    "confidence": "high for phase/budget exhaustion, unresolved for slow phase cause and cleanup status",
+    "forwarding_gap": "not supported: summed intervals89.259 vs caller89.28"
+  },
+  "job": 114372237761,
+  "log": {
+    "path": "/workspace/actions-cloud/receipts/merge-review-pr299-9cb/windows-job-114372237761.log",
+    "sha256": "ee8ebfe4aa64d82f026a8f0cb4ba563cb0d4645fd741ddcc8a698116891bf0fa"
+  },
+  "next_diagnostic": "consume already-running current#311 identical resource node80/88 owned-processCPU/IO/reader reports; no newrun/retry/budget change",
+  "observations": {
+    "failure_cleanup_seconds": 20,
+    "interpreter_and_metadata_selection_utc_second": "03:04:43",
+    "progress_interval_sum_seconds": 89.259,
+    "progress_intervals": [
+      {
+        "since_previous_seconds": 0.028,
+        "step": 0
+      },
+      {
+        "since_previous_seconds": 0.001,
+        "step": 1
+      },
+      {
+        "since_previous_seconds": 0.002,
+        "step": 2
+      },
+      {
+        "since_previous_seconds": 0.0,
+        "step": 3
+      },
+      {
+        "since_previous_seconds": 0.0,
+        "step": 4
+      },
+      {
+        "since_previous_seconds": 0.0,
+        "step": 5
+      },
+      {
+        "since_previous_seconds": 0.0,
+        "step": 6
+      },
+      {
+        "since_previous_seconds": 0.556,
+        "step": 7
+      },
+      {
+        "since_previous_seconds": 66.491,
+        "step": 8
+      },
+      {
+        "since_previous_seconds": 1.615,
+        "step": 9
+      },
+      {
+        "since_previous_seconds": 0.0,
+        "step": 10
+      },
+      {
+        "since_previous_seconds": 1.746,
+        "step": 11
+      },
+      {
+        "since_previous_seconds": 0.0,
+        "step": 12
+      },
+      {
+        "since_previous_seconds": 0.001,
+        "step": 13
+      },
+      {
+        "since_previous_seconds": 3.132,
+        "step": 14
+      },
+      {
+        "since_previous_seconds": 15.687,
+        "step": 15
+      }
+    ],
+    "rcc_variables_caller_seconds": 89.28,
+    "readiness_seconds": 90,
+    "wrapper_pid": 4700,
+    "wrapper_spawn_utc": "03:03:14.115"
+  },
+  "primary": "TimeoutError at initial native startup before rollback/collision assertions",
+  "proposed_documentation": {
+    "delta": "RCC Progress elapsed fields are deltas since the previous mark, not total or duration of the printed next phase. Sum the series and compare caller timing; interpret66.491 at08 as micromamba/layer-record/setup interval and15.687 at15 as restore/cleanup interval. Cleanup incomplete notes combine execution-stop and reader conditions and do not identify a survivor or prove a leak. Preserve the primary readiness error and unknown observations.",
+    "evidence": [
+      "immutable RCC source4148c2b",
+      "exact hosted log",
+      "current/accepted source parity"
+    ],
+    "file": "docs/skills/repository-operations.md",
+    "stale_guidance_removed": "Replace any final-step-as-total, UV66s, unexplained forwarding gap, or cleanup-note-as-leak attribution.",
+    "uncertainty": "exact micromamba/record/restore resource bottleneck and incomplete cleanup condition"
+  },
+  "repository": "joshyorko/actions",
+  "run": 38106229594,
+  "schema": 1,
+  "secondary": "cleanup incomplete disjunction; survivor/reader/observation cause unavailable",
+  "sole_failure": "test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+  "source_blobs": {
+    "action_server/src/actions/server/_rcc.py": {
+      "292_accepted": "1a310407efe52091194e4d121ac7bece15ea5b70",
+      "299_head": "1a310407efe52091194e4d121ac7bece15ea5b70",
+      "299_tested_merge": "1a310407efe52091194e4d121ac7bece15ea5b70",
+      "311_current": "1a310407efe52091194e4d121ac7bece15ea5b70",
+      "311_original": "1a310407efe52091194e4d121ac7bece15ea5b70"
+    },
+    "action_server/src/actions/server/_robo_utils/process.py": {
+      "292_accepted": "5c10630a44bdee21f570ebbbd199c188e0837994",
+      "299_head": "5c10630a44bdee21f570ebbbd199c188e0837994",
+      "299_tested_merge": "5c10630a44bdee21f570ebbbd199c188e0837994",
+      "311_current": "5c10630a44bdee21f570ebbbd199c188e0837994",
+      "311_original": "cc35194f88ec6aac5718dcaeadab588ab18d380d"
+    },
+    "action_server/src/actions/server/_selftest.py": {
+      "292_accepted": "ee3268ae80b424f42f341770afad86bf72ee717f",
+      "299_head": "ee3268ae80b424f42f341770afad86bf72ee717f",
+      "299_tested_merge": "ee3268ae80b424f42f341770afad86bf72ee717f",
+      "311_current": "ee3268ae80b424f42f341770afad86bf72ee717f",
+      "311_original": "bc32bccf7e238bb625e6cea87a2e1f141c3d80d4"
+    },
+    "action_server/tests/action_server_tests/fixtures.py": {
+      "292_accepted": "cf4095eadaf244aa89f22bada50a5bda4ebb18eb",
+      "299_head": "cf4095eadaf244aa89f22bada50a5bda4ebb18eb",
+      "299_tested_merge": "cf4095eadaf244aa89f22bada50a5bda4ebb18eb",
+      "311_current": "8e5d743e77508592250bba702f05163a0efe86f0",
+      "311_original": "cf4095eadaf244aa89f22bada50a5bda4ebb18eb"
+    },
+    "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": {
+      "292_accepted": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6",
+      "299_head": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6",
+      "299_tested_merge": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6",
+      "311_current": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6",
+      "311_original": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6"
+    },
+    "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": {
+      "292_accepted": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+      "299_head": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+      "299_tested_merge": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+      "311_current": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+      "311_original": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022"
+    }
+  },
+  "source_mutation": false,
+  "tested_merge": "fb306a886d6bb1f8edcf8c512d2d27cd25a069f7",
+  "tree": "6d1104d9f6c2372cb7fa41dfcb4f7e6b7074140d",
+  "upstream_disposition": "none; no confirmed upstream defect"
+}

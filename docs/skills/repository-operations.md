@@ -2726,3 +2726,12 @@ Refresh registry versions, native release and tag endpoints, and the owning
 Homebrew Cask independently. A measured public 404 records absence at that
 observation time; an inaccessible endpoint remains UNKNOWN. Registry artifact
 proof does not establish native downloads or actual installation and upgrade.
+
+
+RCC Progress durations measure intervals since the preceding mark. Sum the
+series before comparing it with caller timing; the final mark is not total
+environment preparation. An incomplete startup-cleanup note combines
+execution-stop and reader conditions and does not identify a survivor or
+establish a leak. Preserve the primary readiness failure and unavailable
+observations. These semantics are verified against RCC v18.19.3 commit
+`4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`, `pretty/functions.go`.

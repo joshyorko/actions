@@ -1,0 +1,121 @@
+{
+  "actual_release_build": {
+    "actual_publish": "SKIPPED",
+    "checkout": "12340bb17c0707ed8c7e0ecdf6659826b4549b75",
+    "completed_source_gates": [
+      "one sdist and cp312/cp313 wheels for Linuxx86_64/macOSarm64/Windowsamd64",
+      "published Core1.0.2/HTTPHelper1.0.3 floor smoke",
+      "strict sevenartifact inventory and manifest",
+      "Twine6.2.0 strict artifact checks"
+    ],
+    "decoded_linux_and_verified_set_logs_read": true,
+    "event": "pull_request",
+    "linux_wheel_job": 114371116614,
+    "ordered_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+    ],
+    "publish_credential": "SKIPPED",
+    "run_id": 38105853105,
+    "tag_provenance": "SKIPPED",
+    "tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+    "verified_set_job": 114372071736,
+    "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+    "workflow_head": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+  },
+  "community": "a70993fafc99a9f94041485542d5a720797ca394",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Separate PRartifact retrieval/installedconsumer qualification from immutable taggedrelease provenance; reuse original artifact and guard without rebuild or duplicate helpers.",
+    "evidence": "Actual38105853105 job logs/API checkout12340bb17/tree80e5; independently rehashed artifact11690296318 and7manifest member bindings; publication validator mode inspection; current311 wholememberguard signature/source.",
+    "exact_delta": "In the Runtime retained-artifact publication guidance, add: \"A PR-generated `actions-runtime-dist` set can support nonpublishing inventory and clean-consumer admission when its original ZIP digest, seven member digests and actual checkout/tree are retained. This is predecessor or candidate evidence only: `--run-id` publication provenance rejects a PR event even with `--dry-run`, while `--dist-dir --dry-run` checks file inventory without establishing tagged provenance. Reuse the installed Runtime wheel-member/private-Core guard against the independently retrieved bytes; neither a successful inventory check nor an installed consumer waives final-source, tag/community, credential or registry-publication gates.\"",
+    "remaining_uncertainty": "New cleanconsumer/privateimport gate has not run; final source pending integration and all retained release/publication gates remain.",
+    "stale_or_ambiguous_guidance_removed": "Avoid treating PR releasejob success as release or assuming --run-id dry-run relaxes tagged provenance."
+  },
+  "next_gate": {
+    "candidate_or_predecessor_scope": "If #299 or another admitted change alters Runtime inputs, retain this result under80e5 and require the final admitted build/artifact/consumer gate anew.",
+    "implementation_reuse": [
+      "action_server/scripts/publish_verified_runtime.py --dist-dir OWNED_DIR --dry-run",
+      "action_server/scripts/verify_published_runtime_floor.py for unchanged public Core1.0.2/Helper1.0.3 exact URL/hash/origin rules",
+      "existing PR311 test_active_contracts.py::_assert_installed_runtime_wheel_has_no_private_core_imports(wheel, installed_members, prefix=clean_environment, checkout=source_checkout)"
+    ],
+    "no_actual_execution_by_this_reviewer": true,
+    "owner": "stack_299",
+    "policy_limit": "--run-id mode validates a tagged release event and therefore rejects this PR run even under dry-run. Inventory-only --dist-dir mode admits file bytes only; separately retained checkout identity does not waive tagged provenance/community/credential/publication gates.",
+    "qualification_required": [
+      "retain exact downloaded bytes and metadata/run/checkouttree",
+      "safeextract to taskowned directory with exact7members+manifest",
+      "immutable runner independently reviewed before execution",
+      "RCC toolkit owns outer command and Poetry environment; no ad hoc replacement infrastructure",
+      "fresh environment outside checkout; collect exact wholeRuntimewheel Python member paths/hashes and reject checkout origins",
+      "guard rejects privateCore import in any installed module even when unimported; retain zero skips/clearfailures and bounded cleanup receipt"
+    ],
+    "ready_prerequisites": [
+      "original artifact exists and original bytes independently rehashed",
+      "actualcheckouttree equals current admitted integration tree80e5",
+      "published dependencies and existing wholemember guard available",
+      "public nonpublishing wheel qualification does not require absent private metadata controller"
+    ],
+    "scope": "Review immutable nonpublishing proposal, then one Linuxcp312 clean consumer of retained Runtime1.0.3 wheel with installed-member/privateCore-import admission."
+  },
+  "pr221_observed_head": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+  "retained_release_gaps": [
+    "final accepted integration source plus complete exactunion CI/review and full retained contracts",
+    "Windows311 bootstrapcause/diagnostic+native acceptance",
+    "public RCC/provider/workspace/privateoutput full contracts, original private01f/fafb chain and frozenv6 metadata runner/spec HOLD",
+    "productionCanvas/template Core1.0.3 consumer+actual host acceptance separately owned",
+    "whole208 missing support/generic500/crash/accessibility/nonChromium/platform UX acceptance",
+    "Runtime1.0.3 unused immutable tag with source/version/changelog agreement and community ancestry",
+    "PyPI credential/readiness and actual immutable Runtime registry publication",
+    "verified three native releaseassets plus checksum manifest, external download/readback",
+    "owning Homebrew cask update and actual install/upgrade proof",
+    "final authenticated issue closure target/fullcontract rescan"
+  ],
+  "schema_version": 1,
+  "shared_original_artifact": {
+    "acquisition_owner": "stack_299",
+    "all_member_hashes_equal_retained_manifest": true,
+    "duplicate_acquisition_by_reviewer": false,
+    "id": 11690296318,
+    "members": {
+      "actions-runtime-manifest.sha256": {
+        "sha256": "e81b277e5646b49f8427332ade67bbe7d9c5afeaed2d254477d535878182b17e",
+        "size": 939
+      },
+      "actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl": {
+        "sha256": "779c7f0b929786f40607757e3f8517acc631ec68c40001064184922da759d3cc",
+        "size": 13261289
+      },
+      "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+        "sha256": "0f366268f7590e2c0002b8f7e67325810d0d5374775c657b19195c80da48eaaa",
+        "size": 14165635
+      },
+      "actions_runtime-1.0.3-cp312-cp312-win_amd64.whl": {
+        "sha256": "db7496b943fe0f8478cd9987515b1fc809d10b9b6a523269d8133feb6d9554e2",
+        "size": 11619598
+      },
+      "actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl": {
+        "sha256": "f44114fd3fa157b76fadcf144e9b250a60fdbdfa6f33e5db07d8a7d633c928cd",
+        "size": 13261288
+      },
+      "actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl": {
+        "sha256": "1e3b2238faa4513437be291263342115d3488192f32ea8c0a09a0b6e9a30e5f8",
+        "size": 14165635
+      },
+      "actions_runtime-1.0.3-cp313-cp313-win_amd64.whl": {
+        "sha256": "9e868a9ed48b261f29791fbc7fae3844b825564ba9bb175536f8ce75e6f9820f",
+        "size": 11619598
+      },
+      "actions_runtime-1.0.3.tar.gz": {
+        "sha256": "62fcd6623fac3f3c4e45c6158dcfec50b8ca74aff7d90c19dee0f9af5af0fcce",
+        "size": 1008711
+      }
+    },
+    "name": "actions-runtime-dist",
+    "zip_path": "/workspace/actions-cloud/receipts/runtime-103-preflight/actions-runtime-dist-11690296318.zip",
+    "zip_sha256": "809a7272c9d64bea1a2b456d42c93a22d199f588bfe27f26e982b31a6b1522a3",
+    "zip_size": 78863429
+  },
+  "upstream_disposition": "none",
+  "verdict": "NEXT_DEPENDENCY_READY_BOUNDED_NONPUBLISHING_INSTALLED_WHEEL_GATE_IDENTIFIED"
+}
