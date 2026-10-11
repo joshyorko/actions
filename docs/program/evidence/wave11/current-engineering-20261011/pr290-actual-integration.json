@@ -1,0 +1,19 @@
+{
+  "pr": 290,
+  "head": "5c8084c61389e293eb992c24bc0f2962f705378e",
+  "merge": "fbde0d3a248c47c9964851355f96575c89a87329",
+  "parents": [
+    "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+    "5c8084c61389e293eb992c24bc0f2962f705378e"
+  ],
+  "tree": "65954e87147645985ee44f82de9907e937892112",
+  "tested_merge": "7176fc8f8f5b0c867a4b334e99dd3375826373c6",
+  "checks": {
+    "success": 27,
+    "pending": 0,
+    "failure": 0
+  },
+  "merged_at": "2026-10-11T03:52:03Z",
+  "method": "normal pinned-head merge, no bypass",
+  "acceptance": "bounded source/control merge; no full issue closure or publication"
+}

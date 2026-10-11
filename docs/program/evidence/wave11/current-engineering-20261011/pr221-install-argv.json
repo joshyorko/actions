@@ -1,0 +1,16 @@
+[
+  "/tmp/rt103-l41qrh97/venv/bin/python",
+  "-m",
+  "pip",
+  "install",
+  "--isolated",
+  "--no-cache-dir",
+  "--index-url",
+  "https://pypi.org/simple",
+  "--only-binary=:all:",
+  "--report",
+  "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/pip-install-report.json",
+  "/workspace/actions-cloud/receipts/runtime-103-preflight/linux-cp312-input/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+  "actions-core==1.0.2",
+  "actions-http-helper==1.0.3"
+]

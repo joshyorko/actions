@@ -1,0 +1,133 @@
+{
+  "scope": "PR282 test-only Windows receipt-admission portability correction; local immutable checkpoint, not pushed",
+  "checkpoint": {
+    "commit": "0d8d0803a954faefd53e5cdb92d08c2a1275a820",
+    "tree": "e822d50f15e27cb24ba1205fd2eeddc3fc1bb47d",
+    "parent": "7ad9a7f15f46fa302bf7f5015100dbf2c3d1b3cd",
+    "branch": "feat/canvas-template-20261010",
+    "clean": true
+  },
+  "hosted_failure": {
+    "run": 38108207164,
+    "job": 114378101791,
+    "checkout": "81dc9efef6d45408a1413602896cc900e737e279",
+    "head_source": "7ad9a7f15f46fa302bf7f5015100dbf2c3d1b3cd",
+    "target": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+    "platform": "Windows2022",
+    "rcc": "18.18.1",
+    "result": "1 failed,93 passed,2 skipped",
+    "failure": "test_measured_published_consumer_receipt_admitted; receipt_valid=False",
+    "connector": "github_fetch_workflow_job_logs",
+    "original_decoded_sha256": "33d92fedc92cbe3a59810dcba27183e3f5810f823f7b56f67895040522c71296"
+  },
+  "diagnosis": {
+    "mechanism": "Fixed Linux receipt hashes match current committed LF bytes; CRLF checkout conversions change Runtime module,frontend lock,package manifest raw-byte hashes. Original validator rejects each independently in controlled reproduction.",
+    "limits": "Hosted log does not expose the three Windows working-file digests; per-field mismatch was independently reproduced with exact committed inputs and only one CRLF conversion at a time.",
+    "correction": "Use exact current HEAD Git blobs for4isolated admission inputs, preserve measured fixture/hash/source tuple and unchanged production raw-byte validator."
+  },
+  "verification": {
+    "Doctor": "PASS",
+    "Bootstrap": "PASS",
+    "RED_original_helper": "1 failed exact receipt_valid=False before correction",
+    "RED_controlled_original_behavior": "3 failed independently,one CRLF input each; external original-behavior variant retained",
+    "GREEN_focused": "41 passed;3CRLF valid baselines,4altered copied-byte inputs rejected,32receipt/JUnit poisons depend on valid module baseline",
+    "ToolkitTest": "103 passed; developer Ruff passed",
+    "format": "PASS",
+    "diff_check": "PASS",
+    "Windows_current_source_Toolkit": "NOT_RUN after correction",
+    "Windows_actual_native_browser": "NOT_RUN",
+    "actual_runtime_browser_rerun": "NOT_RUN; original71f60 proof identity retained"
+  },
+  "preservation": {
+    "base_commit": "7ad9a7f15f46fa302bf7f5015100dbf2c3d1b3cd",
+    "base_tree": "c352d18e172049e40f3c41ea29b6c51ae3d5bb8f",
+    "candidate_tree": "e822d50f15e27cb24ba1205fd2eeddc3fc1bb47d",
+    "changed_paths": [
+      "developer/tests/test_canvas_published_workflow.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "unchanged_blob_and_mode_paths": 1402,
+    "unrelated_blob_or_mode_mismatches": 0,
+    "fixture": {
+      "path": "developer/tests/fixtures/canvas-published-71f60-receipt.json",
+      "git_blob": "100644 blob f23e2256483d6932aa37be4340e345864ace7f02",
+      "sha256": "3a9dc83fc6d2b82b3de4d56ab8e31547dbcabc9b878261acd6ee7e9426e27b68",
+      "source": {
+        "commit": "71f60ee8b931cb968866db5a8f45ba2056d18ed8",
+        "parents": [
+          "9724a8fbc49ff4119b0af49ad16dd0dbc97e6a5b"
+        ],
+        "tree": "30e880f0640a446a3db2b6e555e6801ee6dc92fc"
+      }
+    },
+    "generator_and_all_workflows": "exactly unchanged blob and mode",
+    "production_templates_manifests_locks": "exactly unchanged blob and mode"
+  },
+  "Documentation improvement": {
+    "Canonical file changed": "docs/skills/repository-operations.md",
+    "Durable learning captured": "Strict measured-byte admission needs canonical current Git-blob fixture inputs when platform checkout line endings differ; keep production raw-byte verification and immutable proof identity; valid baseline before negative cases.",
+    "Evidence": "Hosted Windows1/93/2 log; controlled3RED;41GREEN;103Toolkit; preservation1402unchangedpaths.",
+    "Stale or ambiguous guidance removed": "Replaced paths-only relocation guidance with explicit byte representation contract and service-free versus actual execution scope.",
+    "Remaining uncertainty": "Hosted Windows correction still needs fresh source CI; no Windows native actual proof established."
+  },
+  "upstream_disposition": "none; repository-local fixture portability defect, no external messages",
+  "evidence_files": {
+    "red.log": {
+      "sha256": "dc879a32928f04d5be2735102f5e26a98cb9384c9dd2399e2fe40cd83dea8b31",
+      "bytes": 7459
+    },
+    "toolkit.log": {
+      "sha256": "b89c784590bce59f85dff9d8f6b0f7ad761d2ac42eefa9f8985a85eacbe975e7",
+      "bytes": 14425
+    },
+    "job114378101791-connector.json": {
+      "sha256": "db5351b28d5d19746eb579f43bf653aa0b299dc351442352c78d3aee4c342bd4",
+      "bytes": 66803
+    },
+    "red-per-input.log": {
+      "sha256": "cbd833e8eaa9a06043d1050c4d81af021d9fc769f4625ee832c4929cd17e123a",
+      "bytes": 12738
+    },
+    "job114378101791-original-decoded.log": {
+      "sha256": "33d92fedc92cbe3a59810dcba27183e3f5810f823f7b56f67895040522c71296",
+      "bytes": 64094
+    },
+    "format.log": {
+      "sha256": "f55a2d05730131881dad1e05a756ef65c16e5a8232593fd84451fd24be888e77",
+      "bytes": 3834
+    },
+    "original-7ad9-test_canvas_published_workflow.py": {
+      "sha256": "499b8c5ec34b32c0775ce5aafb63b24240f28fb2e62f0f976c9869707de9868b",
+      "bytes": 8326
+    },
+    "committed.patch": {
+      "sha256": "9f275f9be6633c22294f18cb4e4a1ea45220f1cb917968b67234281deb5d2dfa",
+      "bytes": 7344
+    },
+    "job114378101791.log": {
+      "sha256": "ba162f7976828d90b6921855989422fd0f72c2b97b2f06b6a4f8f0e0bc8d2924",
+      "bytes": 63365
+    },
+    "test_before_git_blob_fix.py": {
+      "sha256": "1e07c031cd06b2f6a9a901424821e0c5ac12b02d6c1d170b6836abb1aad580e0",
+      "bytes": 10880
+    },
+    "doctor.log": {
+      "sha256": "986e0dd1d4006631e5b674d72ef7edfc8a56e94719e29b8faa19b5d7ad1a53ca",
+      "bytes": 13485
+    },
+    "preservation-before-commit.json": {
+      "sha256": "7920e95a112032c27baba3ce4619af0737e53ec830a8f4ba71b9f8e32c37decf",
+      "bytes": 1009
+    },
+    "bootstrap.log": {
+      "sha256": "1fce3e0838188aca9365477cc1ee5baa50237399f6694052d362c0d14642c2af",
+      "bytes": 14146
+    },
+    "green.log": {
+      "sha256": "f105f8f7211646da5c5d8a0ed568622fa5f8c39ec49285bc1e82e703cafdcec9",
+      "bytes": 4102
+    }
+  },
+  "review_disposition": "Pending root independent immutable source review; no push authorized to this worker"
+}

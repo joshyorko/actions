@@ -1,0 +1,60 @@
+{
+  "argv": [
+    "/workspace/engineering/pr282/action_server/.venv/bin/python",
+    "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-consumer-runner.py",
+    "--worker",
+    "/tmp/rt103-l41qrh97"
+  ],
+  "cleanup_seconds": 5,
+  "overall_process_deadline_seconds": 600,
+  "producer": {
+    "api_head": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+    "artifact_id": 11690296318,
+    "artifact_zip_bytes": 78863429,
+    "artifact_zip_sha256": "809a7272c9d64bea1a2b456d42c93a22d199f588bfe27f26e982b31a6b1522a3",
+    "attempt": 1,
+    "checkout": "12340bb17c0707ed8c7e0ecdf6659826b4549b75",
+    "event": "pull_request",
+    "parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+    ],
+    "publication": false,
+    "run_id": 38105853105,
+    "tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f"
+  },
+  "runner_sha256": "8ac20b20442a0e599e038664e76f4acc8779bcdebaa4340c319f43580a1133a9",
+  "source_bindings": {
+    "artifact_review": {
+      "path": "/workspace/engineering/pr221-next-gate-review/bounded-release-gaps-and-next-gate.json",
+      "sha256": "110e5d03388a4d8117be8cd12b4910322e6f71cf2ea1dc197b89fd6873c29bf5"
+    },
+    "floor": {
+      "path": "/workspace/engineering/pr282/action_server/scripts/verify_published_runtime_floor.py",
+      "sha256": "f1ad142a6cd83ca1a71ed0a6183d558a6d72f00f073b492ce0d18e563a067193"
+    },
+    "guard": {
+      "path": "/workspace/engineering/pr311/action_server/tests/contract_tests/test_active_contracts.py",
+      "sha256": "b76ec605e343e8bec7dea6e230dad3f516eabc4fd90a2769638b0d9111a6ade0"
+    },
+    "process": {
+      "path": "/workspace/engineering/pr282/action_server/src/actions/server/_common/process.py",
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    "publisher": {
+      "path": "/workspace/engineering/pr282/action_server/scripts/publish_verified_runtime.py",
+      "sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c"
+    },
+    "rcc": {
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    }
+  },
+  "supervisor_python": "/workspace/engineering/pr282/action_server/.venv/bin/python",
+  "temporary_root": "/tmp/rt103-l41qrh97",
+  "worker": {
+    "create_time": 1791689929.37,
+    "pid": 27125
+  },
+  "worker_deadline_seconds": 595
+}

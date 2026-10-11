@@ -1,0 +1,208 @@
+{
+  "case_counters": {
+    "cases": 1,
+    "errors": 0,
+    "failures": 0,
+    "framework": "one direct installed-consumer assertion case; no JUnit file generated",
+    "passed": 1,
+    "skips": 0
+  },
+  "cleanup": {
+    "active_readers": [],
+    "cleanup_errors": [],
+    "descendant_reap_complete": true,
+    "descendant_snapshot_complete": true,
+    "elapsed_seconds": 19.5945187719999,
+    "limits": [
+      "point-in-time captured descendants; no universal adoption proof"
+    ],
+    "observed_descendants": [
+      {
+        "create_time": 1791689929.91,
+        "pid": 27126
+      },
+      {
+        "create_time": 1791689930.07,
+        "pid": 27127
+      },
+      {
+        "create_time": 1791689930.27,
+        "pid": 27128
+      },
+      {
+        "create_time": 1791689932.24,
+        "pid": 27136
+      },
+      {
+        "create_time": 1791689945.52,
+        "pid": 27166
+      },
+      {
+        "create_time": 1791689945.6,
+        "pid": 27167
+      },
+      {
+        "create_time": 1791689946.25,
+        "pid": 27175
+      },
+      {
+        "create_time": 1791689946.63,
+        "pid": 27176
+      },
+      {
+        "create_time": 1791689947.01,
+        "pid": 27177
+      },
+      {
+        "create_time": 1791689947.97,
+        "pid": 27178
+      }
+    ],
+    "observed_live_children": [],
+    "observed_zombie_children": [],
+    "status": "passed",
+    "temporary_removed": true,
+    "wrapper_reaped": true
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact proposed delta in canonical-documentation-proposal.md; root owns integration",
+    "durable_learning": "Dry-run validates seven retained artifacts and returns before Twine; tag-push run admission rejects PR provenance; actual synthetic producer differs from API head; host-only cp312 staging and complete wheel-derived installed member scan are separate from loaded public-floor smoke",
+    "evidence": "existing publisher/floor/#311 source hashes; exact retained ZIP/member hashes and seven-artifact dry-run; selector readback; reviewed one real public install/196-member proof with import origin and cleanup receipts",
+    "proposal_sha256": "4cfc8e79ea57fd027eb933265dbe92a8f42170439a71f1a791b715384a49d526",
+    "remaining_uncertainty": "Only original PR-produced Linuxcp312 wheel qualified; other platforms/cp313/current-union/tag/credentials/publication and private service gates remain separate",
+    "stale_guidance_removed": "Proposes replacing unconditional before-running-Twine wording that incorrectly implied dry-run executes Twine"
+  },
+  "envelope": {
+    "cleanup_reserved_max_seconds": 5,
+    "measured_supervisor_seconds": 19.5945187719999,
+    "outer_gateway_seconds": 645,
+    "outer_term_to_kill_seconds": 10,
+    "process_cleanup_deadline_seconds": 600,
+    "worker_seconds": 595
+  },
+  "execution_count": 1,
+  "frozen_proposal": {
+    "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/clean-consumer-proposal.json",
+    "sha256": "579ed95e600ff002e9486a866b5df1f92a2c7dad075653ecb695ec1a819214b1"
+  },
+  "gateway_exit_code": 0,
+  "gateway_log": {
+    "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/actual-gateway.log",
+    "sha256": "5fa7ff5ee3cce5ad6a77dc8c48db999090c79760a78e4d235d39024d9b1b6b96"
+  },
+  "harness": {
+    "meaning": "gateway/helper harness only; not Runtime wheel producer",
+    "ordered_parents": [
+      "7ad9a7f15f46fa302bf7f5015100dbf2c3d1b3cd"
+    ],
+    "sha": "0d8d0803a954faefd53e5cdb92d08c2a1275a820",
+    "tree": "e822d50f15e27cb24ba1205fd2eeddc3fc1bb47d"
+  },
+  "limits": [
+    "Linux cp312 only",
+    "retained PR producer only; no later source qualification",
+    "no tag provenance, upload, publication or Runtime service/browser proof",
+    "Core1.0.2 public floor; historical Core1.0.3/193-member proof remains separate",
+    "point-in-time captured descendants; no universal adoption proof",
+    "No mutable source helper replacement or checkout edits; source bytes stayed bound to reviewed hashes",
+    "Forty service-free preparation tests are separate from the one real installed consumer",
+    "No universal descendant adoption, graceful Runtime service shutdown, browser or release publication claim"
+  ],
+  "observed_versions": {
+    "actions-core": "1.0.2",
+    "actions-http-helper": "1.0.3",
+    "actions-runtime": "1.0.3",
+    "actions-work-items": "0.4.4"
+  },
+  "preexecution_review": {
+    "path": "/workspace/engineering/pr221-clean-consumer-independent-review/immutable-runner-preexecution-review.json",
+    "sha256": "195ba97f0ffefb42cc53ba11544cefd65b4cc1c288753e810417a3f1c3aa36fe"
+  },
+  "producer": {
+    "api_head": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+    "artifact_id": 11690296318,
+    "artifact_zip_bytes": 78863429,
+    "artifact_zip_sha256": "809a7272c9d64bea1a2b456d42c93a22d199f588bfe27f26e982b31a6b1522a3",
+    "attempt": 1,
+    "checkout": "12340bb17c0707ed8c7e0ecdf6659826b4549b75",
+    "event": "pull_request",
+    "parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+    ],
+    "publication": false,
+    "run_id": 38105853105,
+    "tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f"
+  },
+  "public_dependencies": {
+    "actions-core": {
+      "sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+      "url": "https://files.pythonhosted.org/packages/b6/ed/33c5999ac5e932434fcc5b392420efdf9b25922ca02a76622b856759ea16/actions_core-1.0.2-py3-none-any.whl",
+      "version": "1.0.2"
+    },
+    "actions-http-helper": {
+      "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "url": "https://files.pythonhosted.org/packages/53/3b/cefc0608e6ec71697c60c68ede2efa306fd7d50b1736c4b6b094b3424dc6/actions_http_helper-1.0.3-py3-none-any.whl",
+      "version": "1.0.3"
+    }
+  },
+  "raw_files": {
+    "attempt-identity.json": {
+      "bytes": 2416,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/attempt-identity.json",
+      "sha256": "c56d2766463c5f6d5c710388a15f65a94c1304ca1f05d213d83bb98993445a7e"
+    },
+    "cli-version.stderr.log": {
+      "bytes": 0,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/cli-version.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cli-version.stdout.log": {
+      "bytes": 6,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/cli-version.stdout.log",
+      "sha256": "f5e5c9534532840fcd45bb002e69ed85c61dba2753450e26b448b7df1481e24d"
+    },
+    "consumer-proof.json": {
+      "bytes": 55818,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/consumer-proof.json",
+      "sha256": "9f1f2947797bbc159c57b47da827383513fe498583e53395c4ff53843193ce57"
+    },
+    "execution-cleanup-receipt.json": {
+      "bytes": 1109,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/execution-cleanup-receipt.json",
+      "sha256": "9789eecc3e7b904ad260c56e90d14f0017bfa0820ce9b5eebbfd7d2313ca1739"
+    },
+    "install-argv.json": {
+      "bytes": 564,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/install-argv.json",
+      "sha256": "4134aa92dfca9e3c3f5d86b125c9dc0ceb4702fed9f6f28f2979c71efe662c8c"
+    },
+    "installed-inventory-raw.json": {
+      "bytes": 30860,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/installed-inventory-raw.json",
+      "sha256": "cd3bf8423037071543f0900322a4698ac378c6c2501ebd5ca6ed8ce2db78c902"
+    },
+    "pip-install-report.json": {
+      "bytes": 864906,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/pip-install-report.json",
+      "sha256": "c9f134feedb243623faf689aa481f01ee16fd2b85b8cba5909e1980a14ea3ca4"
+    },
+    "worker.stderr.log": {
+      "bytes": 123,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/worker.stderr.log",
+      "sha256": "8ddbb80a6850c11f8d5c5bf6e832f7eded1113c309fa7f04e6f1348eaeeb3da1"
+    },
+    "worker.stdout.log": {
+      "bytes": 18362,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/worker.stdout.log",
+      "sha256": "0b7b7ff7101663c358725ae8706210d0882b1586ff52518cee7734eb36ca9c77"
+    }
+  },
+  "runtime_wheel": {
+    "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/linux-cp312-input/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "python_member_count": 196,
+    "sha256": "0f366268f7590e2c0002b8f7e67325810d0d5374775c657b19195c80da48eaaa"
+  },
+  "status": "scoped_actual_pass_pending_independent_result_admission",
+  "upstream_disposition": "none"
+}

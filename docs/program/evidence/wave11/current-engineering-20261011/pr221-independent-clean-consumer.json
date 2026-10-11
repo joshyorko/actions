@@ -1,0 +1,257 @@
+{
+  "actual_receipt": {
+    "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/actual-clean-consumer-receipt.json",
+    "sha256": "7704cbac814064ba4d341f99c576b7ee36ab646b72c07e79a50d5dee186ac938"
+  },
+  "checks": {
+    "actual_whole_installed_member_guard_source_bound": true,
+    "all196_inventory_names_equal_wheel_python_set": true,
+    "all196_receipted_installed_member_digests_equal_original_wheel_bytes": true,
+    "all_origins_under_fresh_prefix_and_known_checkouts_excluded": true,
+    "cli_stderr_empty": true,
+    "cli_stdout_exact": "1.0.3\n",
+    "four_module_origins": {
+      "actions": "/tmp/rt103-l41qrh97/venv/lib/python3.12/site-packages/actions/__init__.py",
+      "actions.mcp": "/tmp/rt103-l41qrh97/venv/lib/python3.12/site-packages/actions/mcp/__init__.py",
+      "actions.server": "/tmp/rt103-l41qrh97/venv/lib/python3.12/site-packages/actions/server/__init__.py",
+      "actions_http": "/tmp/rt103-l41qrh97/venv/lib/python3.12/site-packages/actions_http/__init__.py"
+    },
+    "observed_public_floor_dependencies": {
+      "actions-core": {
+        "is_direct": false,
+        "requested": true,
+        "sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+        "url": "https://files.pythonhosted.org/packages/b6/ed/33c5999ac5e932434fcc5b392420efdf9b25922ca02a76622b856759ea16/actions_core-1.0.2-py3-none-any.whl",
+        "version": "1.0.2"
+      },
+      "actions-http-helper": {
+        "is_direct": false,
+        "requested": true,
+        "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+        "url": "https://files.pythonhosted.org/packages/53/3b/cefc0608e6ec71697c60c68ede2efa306fd7d50b1736c4b6b094b3424dc6/actions_http_helper-1.0.3-py3-none-any.whl",
+        "version": "1.0.3"
+      },
+      "actions-runtime": {
+        "is_direct": true,
+        "requested": true,
+        "sha256": "0f366268f7590e2c0002b8f7e67325810d0d5374775c657b19195c80da48eaaa",
+        "url": "file:///workspace/actions-cloud/receipts/runtime-103-preflight/linux-cp312-input/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "version": "1.0.3"
+      },
+      "actions-work-items": {
+        "is_direct": false,
+        "requested": false,
+        "sha256": "488163817f3a2cb969744c1ad7332dc775318d0e755029639fd51d0bffe4ffc0",
+        "url": "https://files.pythonhosted.org/packages/87/0b/8f417d65e6e1fd85c158847f8858a1015c31042b24905cfb147d0a5d68b0/actions_work_items-0.4.4-py3-none-any.whl",
+        "version": "0.4.4"
+      }
+    },
+    "only_generated_member": "actions/server/_oauth2_config.py",
+    "original_runner_and_helper_hashes_unchanged": true,
+    "pip_check_raw_stdout_pass": true,
+    "private_core_imports_in_original_wheel_using_exact_retained_ast_scanner": [],
+    "producer_git_tree_byte_equal_members": 195,
+    "raw_sys_path": [
+      "/tmp/rt103-l41qrh97",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python312.zip",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12",
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/lib-dynload",
+      "/tmp/rt103-l41qrh97/venv/lib/python3.12/site-packages"
+    ],
+    "work_items_limit": "Observed transitive public0.4.4 floor; unchanged floor installer explicitly pins Core/Helper only.",
+    "work_items_registry_wheel_matches_retained_public_metadata": true
+  },
+  "cleanup_limits": [
+    "Direct smoke process cleanup only; no Runtime service natural shutdown proof.",
+    "Ten point-in-time descendant PID/create-time identities; no universal adoption proof.",
+    "Installed environment was removed after original guard; independent review reconciles retained installed-member hash receipts to original wheel, not absent installed files."
+  ],
+  "cleanup_observed": {
+    "active_readers": [],
+    "cleanup_errors": [],
+    "descendant_reap_complete": true,
+    "descendant_snapshot_complete": true,
+    "elapsed_seconds": 19.5945187719999,
+    "limits": [
+      "point-in-time captured descendants; no universal adoption proof"
+    ],
+    "observed_descendants": [
+      {
+        "create_time": 1791689929.91,
+        "pid": 27126
+      },
+      {
+        "create_time": 1791689930.07,
+        "pid": 27127
+      },
+      {
+        "create_time": 1791689930.27,
+        "pid": 27128
+      },
+      {
+        "create_time": 1791689932.24,
+        "pid": 27136
+      },
+      {
+        "create_time": 1791689945.52,
+        "pid": 27166
+      },
+      {
+        "create_time": 1791689945.6,
+        "pid": 27167
+      },
+      {
+        "create_time": 1791689946.25,
+        "pid": 27175
+      },
+      {
+        "create_time": 1791689946.63,
+        "pid": 27176
+      },
+      {
+        "create_time": 1791689947.01,
+        "pid": 27177
+      },
+      {
+        "create_time": 1791689947.97,
+        "pid": 27178
+      }
+    ],
+    "observed_live_children": [],
+    "observed_zombie_children": [],
+    "status": "passed",
+    "temporary_removed": true,
+    "wrapper_reaped": true
+  },
+  "direct_smoke_counters": {
+    "cases": 1,
+    "errors": 0,
+    "failures": 0,
+    "framework": "one direct installed-consumer assertion case; no JUnit file generated",
+    "passed": 1,
+    "skips": 0
+  },
+  "documentation_improvement": {
+    "additional_exact_delta_path": "/workspace/actions-cloud/receipts/runtime-103-preflight/canonical-documentation-proposal-followup.md",
+    "additional_exact_delta_proposed": "Canonical file proposed: `docs/skills/repository-operations.md`, immediately after the selected-wheel member binding paragraph in the original proposal.\n\n> Installed-member byte equality proves the installed files match the selected\n> wheel; it does not prove that build-generated payloads are complete. Bind tracked\n> Python members to the producer tree and record generated members separately.\n> Check each generator's acquisition exit status and the resulting payload in the\n> retained wheel. A successful wheel build, import smoke and private-Core scan can\n> all coexist with an empty generated configuration when the acquisition command\n> fails and its return code is ignored. Keep generated-payload/source admission\n> separate from installed-wheel identity and dependency-floor admission.\n\nDocumentation improvement:\n- Canonical file changed or proposed: proposed `docs/skills/repository-operations.md`; integration remains owned by root.\n- Durable learning captured: complete installed Python-member binding and successful public import checks do not establish nonempty generated build payloads or source-to-generated-content provenance.\n- Evidence: original producer `12340bb17c0707ed8c7e0ecdf6659826b4549b75`, tree `80e5c77513f6abf5d07005ee3aee47d49efd927f`; independently inspected retained Linux wheel `0f366268f7590e2c0002b8f7e67325810d0d5374775c657b19195c80da48eaaa` contains `actions/server/_oauth2_config.py` with both `FILE_CONTENTS` entries empty. Retained Linux job log lines 5394\u20135399 reports missing `GH_TOKEN` for the two `gh` calls. `action_server/tasks.py::build_oauth2_config` captures stdout without `check=True` and writes it into the generated module. The reviewed actual consumer scanned all 196 wheel Python members successfully; the empty module also passes that narrower guard.\n- Stale or ambiguous guidance removed: avoids treating installed-wheel identity or public-floor import success as full build-generated configuration qualification.\n- Remaining uncertainty: current supported OAuth configuration authority and payload contract need source/release owner review; this read-only lane does not change acquisition, rebuild the artifact, or imply an upstream defect.\n\nUpstream disposition: none. The observed acquisition/error-handling boundary belongs to Actions build code; no external issue authority or upstream defect is established.\n",
+    "additional_exact_delta_sha256": "b07cfdc9379bf41864e7f536fc2c1711c6aa13a1b2609d03b22bbbf6218e4bd2",
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "disposition": "GO original and followup exact durable guidance deltas for root integration; update original proposal evidence-status metadata to actual consumer passed and retain generated-config uncertainty.",
+    "evidence": "Original ZIP/manifest/source metadata; actual direct smoke raw pip report196-member/origin/CLI/cleanup and gateway log hashes;195 source-tree comparisons; generated config AST and actual build failure logs.",
+    "exact_delta_path": "/workspace/actions-cloud/receipts/runtime-103-preflight/canonical-documentation-proposal.md",
+    "exact_delta_sha256": "4cfc8e79ea57fd027eb933265dbe92a8f42170439a71f1a791b715384a49d526",
+    "exact_delta_text": "Canonical file proposed: `docs/skills/repository-operations.md`.\n\nReplace the sentence beginning \u201cIt verifies the exact seven artifacts and retained\u201d in the approved-local-publication paragraph with:\n\n> It verifies the exact seven artifacts and retained\n> `actions-runtime-manifest.sha256`. `--dry-run` then returns without running\n> Twine or reading publication credentials; retain a separate strict Twine\n> result when admitting metadata. The publishing path requires Twine 6.2.0.\n\nInsert after the paragraph that binds the canonical PyPI workflow, selected run, tag-push provenance, and retained artifact:\n\n> The `--run-id` provenance gate also applies to dry runs and rejects pull-request\n> producers. Keep that policy intact. For nonpublishing admission of independently\n> verified PR artifacts, measure the downloaded ZIP and every manifest member,\n> retain the repository/workflow/run/artifact identity and actual checkout SHA,\n> tree and ordered parents, then use `--dist-dir DIRECTORY --dry-run`. This proves\n> the seven-artifact byte inventory; it does not grant tag or publication\n> provenance. A run's API head can differ from its actual synthetic merge\n> checkout, so record both instead of attributing the build to the API head.\n>\n> Stage only the selected host cp312 wheel when calling\n> `verify_published_runtime_floor.py`: the complete release inventory contains\n> three cp312 platform wheels and its selector requires exactly one. Use its\n> unchanged isolated public install and import/report verification together with\n> the installed-wheel contract's full Python-member byte and private-Core import\n> guard when qualifying independently retrieved Runtime bytes. The public-floor\n> smoke checks loaded imports and exact public dependency URLs/digests; it does\n> not scan every unimported Runtime module. Derive the member inventory from the\n> selected wheel, retain it before removing the clean environment, and bind each\n> receipt to that wheel and producer. An older wheel's count, source or passing\n> receipt cannot qualify a newer artifact, even when the versions agree.\n\nDocumentation improvement:\n- Canonical file changed or proposed: proposed `docs/skills/repository-operations.md`; no repository document edited in this read-only lane.\n- Durable learning captured: dry-run returns before Twine; PR run provenance remains excluded; API head and actual producer differ; host-only selector staging and full installed-member admission complement the public-floor smoke.\n- Evidence: retained seven-artifact CLI dry-run, selector readback, decoded Linux wheel job, independently measured artifact tuple, existing publisher/floor/#311 guard source, and service-free runner admission regressions.\n- Stale or ambiguous guidance removed: unconditional \u201cbefore running Twine\u201d wording falsely implies dry-run includes Twine. Loaded public import checks are explicitly distinguished from the existing full-member guard.\n- Remaining uncertainty: the fresh installed consumer has not run at this proposal checkpoint; this artifact remains a PR predecessor, with no tag/publication proof or qualification of later source.\n\nUpstream disposition: none. No upstream defect was established.\n",
+    "remaining_uncertainty": "Actual scoped smoke now passed. Generated OAuth contents, final source/platform/native/service/private metadata and all publication gates remain.",
+    "stale_or_ambiguous_guidance_removed": "Dry-run falsely implied Twine; API head confused with producer; historical193-member receipt confused with196-member wheel; summary/import smoke confused with generated-config qualification."
+  },
+  "execution_harness_only": {
+    "meaning": "gateway/helper harness only; not Runtime wheel producer",
+    "ordered_parents": [
+      "7ad9a7f15f46fa302bf7f5015100dbf2c3d1b3cd"
+    ],
+    "sha": "0d8d0803a954faefd53e5cdb92d08c2a1275a820",
+    "tree": "e822d50f15e27cb24ba1205fd2eeddc3fc1bb47d"
+  },
+  "gateway_log": {
+    "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/actual-gateway.log",
+    "sha256": "5fa7ff5ee3cce5ad6a77dc8c48db999090c79760a78e4d235d39024d9b1b6b96"
+  },
+  "new_retained_release_gap": {
+    "behavior_limit": "No OAuth provider/default config functional acceptance; loaded imports and private-Core scan cannot qualify generated content.",
+    "bytes": 287,
+    "config_value_lengths": {
+      "actions_config": 0,
+      "default_user_config": 0
+    },
+    "member": "actions/server/_oauth2_config.py",
+    "next_bounded_engineering_gate": "Use existing community source/checkpoints to define and validate OAuth/default configuration and fail release generation on incomplete/failed retrieval, while making PR canary behavior explicit; no infrastructure replacement.",
+    "original_build_evidence": "Linux114371116614 log contains two missing-gh-auth failures followed by generated config/copy; task ignores return codes.",
+    "sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe",
+    "source": "action_server/tasks.py::build_oauth2_config still fetches Sema4AI/oauth-public-configs via subprocess.run without check=True; current PR canary removes GH_TOKEN."
+  },
+  "no_actual_rerun_by_reviewer": true,
+  "no_junit_generated_or_claimed": true,
+  "original_producer": {
+    "api_head": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+    "artifact_id": 11690296318,
+    "artifact_zip_bytes": 78863429,
+    "artifact_zip_sha256": "809a7272c9d64bea1a2b456d42c93a22d199f588bfe27f26e982b31a6b1522a3",
+    "attempt": 1,
+    "checkout": "12340bb17c0707ed8c7e0ecdf6659826b4549b75",
+    "event": "pull_request",
+    "parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+    ],
+    "publication": false,
+    "run_id": 38105853105,
+    "tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f"
+  },
+  "original_runtime_wheel": {
+    "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/linux-cp312-input/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "python_member_count": 196,
+    "sha256": "0f366268f7590e2c0002b8f7e67325810d0d5374775c657b19195c80da48eaaa"
+  },
+  "raw_files_independently_rehashed": {
+    "attempt-identity.json": {
+      "bytes": 2416,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/attempt-identity.json",
+      "sha256": "c56d2766463c5f6d5c710388a15f65a94c1304ca1f05d213d83bb98993445a7e"
+    },
+    "cli-version.stderr.log": {
+      "bytes": 0,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/cli-version.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cli-version.stdout.log": {
+      "bytes": 6,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/cli-version.stdout.log",
+      "sha256": "f5e5c9534532840fcd45bb002e69ed85c61dba2753450e26b448b7df1481e24d"
+    },
+    "consumer-proof.json": {
+      "bytes": 55818,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/consumer-proof.json",
+      "sha256": "9f1f2947797bbc159c57b47da827383513fe498583e53395c4ff53843193ce57"
+    },
+    "execution-cleanup-receipt.json": {
+      "bytes": 1109,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/execution-cleanup-receipt.json",
+      "sha256": "9789eecc3e7b904ad260c56e90d14f0017bfa0820ce9b5eebbfd7d2313ca1739"
+    },
+    "install-argv.json": {
+      "bytes": 564,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/install-argv.json",
+      "sha256": "4134aa92dfca9e3c3f5d86b125c9dc0ceb4702fed9f6f28f2979c71efe662c8c"
+    },
+    "installed-inventory-raw.json": {
+      "bytes": 30860,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/installed-inventory-raw.json",
+      "sha256": "cd3bf8423037071543f0900322a4698ac378c6c2501ebd5ca6ed8ce2db78c902"
+    },
+    "pip-install-report.json": {
+      "bytes": 864906,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/pip-install-report.json",
+      "sha256": "c9f134feedb243623faf689aa481f01ee16fd2b85b8cba5909e1980a14ea3ca4"
+    },
+    "worker.stderr.log": {
+      "bytes": 123,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/worker.stderr.log",
+      "sha256": "8ddbb80a6850c11f8d5c5bf6e832f7eded1113c309fa7f04e6f1348eaeeb3da1"
+    },
+    "worker.stdout.log": {
+      "bytes": 18362,
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/worker.stdout.log",
+      "sha256": "0b7b7ff7101663c358725ae8706210d0882b1586ff52518cee7734eb36ca9c77"
+    }
+  },
+  "retained_holds": [
+    "Final accepted/current-union source and complete CI/native Windows/platform acceptance.",
+    "Other cp313/macOS/Windows/service/browser/full208 contracts.",
+    "Final Runtime version/tag/community/credential/actual PyPI/three native assets/checksums/Homebrew publication.",
+    "Original private01f/fafb chain and frozen-v6 spec/runner absent; no full134/135 closure.",
+    "Generated OAuth configuration contents and retired upstream build dependency remain unqualified."
+  ],
+  "schema_version": 1,
+  "upstream_disposition": "none",
+  "verdict": "GO_ACTUAL_ONE_LINUX_CP312_RETAINED_RUNTIME_WHEEL_PUBLIC_FLOOR_AND_FULL_MEMBER_PRIVATE_CORE_ACCEPTANCE"
+}

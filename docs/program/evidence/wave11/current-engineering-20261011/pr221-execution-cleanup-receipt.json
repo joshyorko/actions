@@ -1,0 +1,57 @@
+{
+  "active_readers": [],
+  "cleanup_errors": [],
+  "descendant_reap_complete": true,
+  "descendant_snapshot_complete": true,
+  "elapsed_seconds": 19.5945187719999,
+  "limits": [
+    "point-in-time captured descendants; no universal adoption proof"
+  ],
+  "observed_descendants": [
+    {
+      "create_time": 1791689929.91,
+      "pid": 27126
+    },
+    {
+      "create_time": 1791689930.07,
+      "pid": 27127
+    },
+    {
+      "create_time": 1791689930.27,
+      "pid": 27128
+    },
+    {
+      "create_time": 1791689932.24,
+      "pid": 27136
+    },
+    {
+      "create_time": 1791689945.52,
+      "pid": 27166
+    },
+    {
+      "create_time": 1791689945.6,
+      "pid": 27167
+    },
+    {
+      "create_time": 1791689946.25,
+      "pid": 27175
+    },
+    {
+      "create_time": 1791689946.63,
+      "pid": 27176
+    },
+    {
+      "create_time": 1791689947.01,
+      "pid": 27177
+    },
+    {
+      "create_time": 1791689947.97,
+      "pid": 27178
+    }
+  ],
+  "observed_live_children": [],
+  "observed_zombie_children": [],
+  "status": "passed",
+  "temporary_removed": true,
+  "wrapper_reaped": true
+}

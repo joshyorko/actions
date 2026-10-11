@@ -1,0 +1,35 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -1204,9 +1204,29 @@
+ The verifier accepts cibuildwheel's interpreter-plus-ABI wheel names for the
+ cp312/cp313 manylinux x86_64, macOS 12 arm64, and Windows amd64 set while
+ rejecting mismatched ABI tags. The sdist and wheel build steps expose only
+-`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR builds run equivalent frontend and
+-OAuth generation without credentials; PAT-bearing variants are limited to tag
+-pushes. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
++`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR frontend and OAuth steps omit release credentials, but the OAuth step
++still invokes the same external acquisition task. Secret isolation does not prove
++equivalent generated configuration: the current task ignores acquisition exit
++codes and embeds stdout, so authentication failure can yield empty strings and
++a GitHub API error response can yield nonempty YAML mappings. PAT-bearing PyPI
++build variants are limited to tag pushes; that condition does not qualify their
++configuration source or payload.
++
++Installed-wheel member equality and successful CLI imports do not establish
++generated OAuth content. Qualify `actions_config` and `default_user_config`
++separately against an owner-approved immutable source pair. The consumer expects
++`oauth2Config.providers` mappings; default user provider selection also requires
++`mode` (`actions` or `custom`), and selected settings require `clientId` plus valid
++authorization/token endpoints after defaults are resolved. An empty string, or an
++API error mapping with `message`, `documentation_url`, and `status`, does not meet
++that contract. Retain source identities, acquisition status and content digests
++without publishing configuration or credentials. Missing source or failed
++admission keeps OAuth/release qualification on hold even when a narrower wheel
++consumer passes. A repository metadata 404 establishes only that the current
++connection could not resolve it; it does not establish private, missing, retired,
++or replacement-source status. Recovery executes build tasks from immutable
++`release-source`, so a current task fix does not repair an older release target
++without a separately reviewed acquisition/admission boundary. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
+ from the child environment, while upload receives only the exact PyPI token.
+ 
+ The source migration PR contains the helper and its direct consumers together;

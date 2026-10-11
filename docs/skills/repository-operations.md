@@ -959,7 +959,9 @@ is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
 repository, immutable ref, and full SHA, or accepts an already downloaded directory; it
 never rebuilds. It verifies the exact seven artifacts and retained
-`actions-runtime-manifest.sha256` before running Twine 6.2.0. With `--publish`,
+`actions-runtime-manifest.sha256`. `--dry-run` then returns without running
+Twine or reading publication credentials; retain a separate strict Twine
+result when admitting metadata. The publishing path requires Twine 6.2.0. With `--publish`,
 the script reads only `PYPI` from the process environment or ignored repo-root
 `.env`, never prints or puts the token in arguments, and injects it only into
 Twine's child environment. Example commands are:
@@ -980,6 +982,36 @@ not an identity binding. Binary signing selection is split into expression-gated
 and unsigned steps so POSIX test syntax is never sent to the Windows PowerShell shell.
 Binary release names use GitHub expressions containing `${{ github.ref_name }}`; shell
 literals such as `$tag-linux64` are not valid action inputs.
+
+The `--run-id` provenance gate also applies to dry runs and rejects pull-request
+producers. Keep that policy intact. For nonpublishing admission of independently
+verified PR artifacts, measure the downloaded ZIP and every manifest member,
+retain the repository/workflow/run/artifact identity and actual checkout SHA,
+tree and ordered parents, then use `--dist-dir DIRECTORY --dry-run`. This proves
+the seven-artifact byte inventory; it does not grant tag or publication
+provenance. A run's API head can differ from its actual synthetic merge
+checkout, so record both instead of attributing the build to the API head.
+
+Stage only the selected host cp312 wheel when calling
+`verify_published_runtime_floor.py`: the complete release inventory contains
+three cp312 platform wheels and its selector requires exactly one. Use its
+unchanged isolated public install and import/report verification together with
+the installed-wheel contract's full Python-member byte and private-Core import
+guard when qualifying independently retrieved Runtime bytes. The public-floor
+smoke checks loaded imports and exact public dependency URLs/digests; it does
+not scan every unimported Runtime module. Derive the member inventory from the
+selected wheel, retain it before removing the clean environment, and bind each
+receipt to that wheel and producer. An older wheel's count, source or passing
+receipt cannot qualify a newer artifact, even when the versions agree.
+
+Installed-member byte equality proves the installed files match the selected
+wheel; it does not prove that build-generated payloads are complete. Bind tracked
+Python members to the producer tree and record generated members separately.
+Check each generator's acquisition exit status and the resulting payload in the
+retained wheel. A successful wheel build, import smoke and private-Core scan can
+all coexist with an empty generated configuration when the acquisition command
+fails and its return code is ignored. Keep generated-payload/source admission
+separate from installed-wheel identity and dependency-floor admission.
 
 The generated `actions_runtime_recovery.yml` workflow is the only recovery lane for an
 immutable Runtime tag. Its required `release_ref` and full 40-hex `release_sha` inputs
@@ -1045,9 +1077,29 @@ after manifest creation and Twine checking, before artifact retention or upload.
 The verifier accepts cibuildwheel's interpreter-plus-ABI wheel names for the
 cp312/cp313 manylinux x86_64, macOS 12 arm64, and Windows amd64 set while
 rejecting mismatched ABI tags. The sdist and wheel build steps expose only
-`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR builds run equivalent frontend and
-OAuth generation without credentials; PAT-bearing variants are limited to tag
-pushes. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
+`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR frontend and OAuth steps omit release credentials, but the OAuth step
+still invokes the same external acquisition task. Secret isolation does not prove
+equivalent generated configuration: the current task ignores acquisition exit
+codes and embeds stdout, so authentication failure can yield empty strings and
+a GitHub API error response can yield nonempty YAML mappings. PAT-bearing PyPI
+build variants are limited to tag pushes; that condition does not qualify their
+configuration source or payload.
+
+Installed-wheel member equality and successful CLI imports do not establish
+generated OAuth content. Qualify `actions_config` and `default_user_config`
+separately against an owner-approved immutable source pair. The consumer expects
+`oauth2Config.providers` mappings; default user provider selection also requires
+`mode` (`actions` or `custom`), and selected settings require `clientId` plus valid
+authorization/token endpoints after defaults are resolved. An empty string, or an
+API error mapping with `message`, `documentation_url`, and `status`, does not meet
+that contract. Retain source identities, acquisition status and content digests
+without publishing configuration or credentials. Missing source or failed
+admission keeps OAuth/release qualification on hold even when a narrower wheel
+consumer passes. A repository metadata 404 establishes only that the current
+connection could not resolve it; it does not establish private, missing, retired,
+or replacement-source status. Recovery executes build tasks from immutable
+`release-source`, so a current task fix does not repair an older release target
+without a separately reviewed acquisition/admission boundary. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
 from the child environment, while upload receives only the exact PyPI token.
 
 The source migration PR contains the helper and its direct consumers together;
@@ -2186,6 +2238,8 @@ the wrong, valid-shaped target SHA; service-free string inspection alone can
 miss this mismatch. The current frozen-catalog control established this with a
 failed metadata-only wrapper job followed by exact eleven-case frozen and wrapper
 passes; its selected lifecycle cases do not prove unselected startup-reader cleanup.
+
+Review actual targeted acceptance from the original receipt ZIPs, exact-case JUnit, raw test output and wrapper lifecycle records together. Every selected node must have a verified measured wrapper/direct-frozen-child lifecycle; a green summary cannot replace missing records. Keep this scope separate from startup-failure reader-reaping regressions: the eleven catalog cases do not select those three tests, and the wrapper lifecycle JSON has no explicit reader termination fields. Managed Core version and module hashes establish the observed worker identity, not independent whole-wheel provenance or a Core 1.0.3 consumer gate.
 
 A stacked PR targeting a feature branch can omit package workflows whose
 pull-request branch filters cover only master, community and integration

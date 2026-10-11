@@ -1,0 +1,149 @@
+{
+  "verdict": "GO_BOUNDED_SOURCE_DIAGNOSIS_AND_DESIGN; HOLD_AUTHORITATIVE_SOURCE_PAIR_AND_ACTUAL_OAUTH_RELEASE",
+  "scope": "read-only; evidence files only, no repository/source changes, gh acquisition/network source-body execution or provider payload invention",
+  "owning_pr": {
+    "number": 307,
+    "branch": "fix/runtime-release-changelog-selection-20261010",
+    "commit": "729594fc04758502ec2ed985adb428e2863a3bb1",
+    "tree": "1db860bf248e83aeedf521044633bbd221902282",
+    "target": "integration/community-release-20261008",
+    "worktree_present": false,
+    "tasks_blob": "905cc8e106194c1a984138e3a0bd27b384f5a4d4",
+    "oauth_cli_blob": "0c5a7b9daaf2ad14b910c5f341791c7e26653841",
+    "consumer_blob": "b5c2c3f99e5836ae9867a24da8e006e9ef6cd9d5"
+  },
+  "wheel": {
+    "sha256": "0f366268f7590e2c0002b8f7e67325810d0d5374775c657b19195c80da48eaaa",
+    "generated_module": {
+      "member": "actions/server/_oauth2_config.py",
+      "sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe",
+      "bytes": 287,
+      "value_lengths": {
+        "actions_config": 0,
+        "default_user_config": 0
+      }
+    },
+    "independent_review": "/workspace/engineering/pr221-clean-consumer-independent-review/actual-one-consumer-review.json",
+    "narrow_original_GO": "retained unchanged"
+  },
+  "diagnosis": {
+    "source_sha256": "b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791",
+    "cases": [
+      {
+        "case": "nonzero_empty_stdout",
+        "mocked_exit": 17,
+        "gh_call_count": 2,
+        "generated_despite_failure": true,
+        "value_lengths": {
+          "actions_config": 0,
+          "default_user_config": 0
+        },
+        "module_sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe"
+      },
+      {
+        "case": "nonzero_api_error_stdout",
+        "mocked_exit": 1,
+        "gh_call_count": 2,
+        "generated_despite_failure": true,
+        "value_lengths": {
+          "actions_config": 89,
+          "default_user_config": 89
+        },
+        "module_sha256": "ae2275016161c4b60e808d6991c62c6568e7d3c9f09f932774c645d6597e996c"
+      }
+    ],
+    "no_network_or_repository_writes": true
+  },
+  "native_generated_config": {
+    "module_sha256": "4bddd9086d001ed9c86e47faa2bbd89c861ccdaaf09612515dba069c018c5533",
+    "each_value_bytes": 127,
+    "each_value_sha256": "e45906ce02e79f16fb87a838d86bb4e497e37a9591f97608fa013bbcd8b9cbc2",
+    "root_keys": [
+      "message",
+      "documentation_url",
+      "status"
+    ],
+    "has_oauth2Config": false,
+    "not_recovery_source": true
+  },
+  "source_authority": {
+    "configured_repository": "Sema4AI/oauth-public-configs",
+    "configured_paths": [
+      "actions-oauth-config.yaml",
+      "oauth-config.yaml"
+    ],
+    "immutable_revision_pin": null,
+    "current_connector_metadata_result": 404,
+    "parent_reported_joshyorko_probe_result": 404,
+    "inference": "availability/ownership unresolved; no replacement-source authorization",
+    "local_verified_complete_pair": null,
+    "tracked_pair_in_available_Git_history": null,
+    "authoritative_release_source": "HOLD"
+  },
+  "design": "design.md",
+  "documentation_improvement": {
+    "Canonical file proposed": "docs/skills/repository-operations.md",
+    "Exact delta": "canonical-guide-proposed.patch",
+    "Durable learning captured": "Credential separation does not prove equivalent config; empty and parseable API-error payloads survive current build; generated payload/source acceptance separate from installed member equality; immutable recovery uses old tasks.",
+    "Evidence": "Ignored acquisition mock yields exact wheel module hash; native error shape; producer inventory; authority404; verified task/consumer blobs.",
+    "Stale or ambiguous guidance removed": "PR builds described as equivalent OAuth generation without credentials.",
+    "Remaining uncertainty": "Actual approved pair, owner/revision, provider policy and current OAuth functional/platform/release acceptance."
+  },
+  "upstream_disposition": "none; local Actions acquisition/admission defect, no confirmed upstream defect",
+  "files": {
+    "ignored-acquisition-probe.log": {
+      "path": "/workspace/engineering/oauth-config-design-owned/ignored-acquisition-probe.log",
+      "sha256": "6b106a9d38cfda8068336406b4d5af93c34c9ca1bb7deec89196ef2f693a657c",
+      "bytes": 4528
+    },
+    "oauth-config-retained-shape.log": {
+      "path": "/workspace/engineering/oauth-config-design-owned/oauth-config-retained-shape.log",
+      "sha256": "1c4f53ef3ca7398c9baac74c382bb8b84151e166c0b034e280f2730b1e2d3206",
+      "bytes": 4061
+    },
+    "design.md": {
+      "path": "/workspace/engineering/oauth-config-design-owned/design.md",
+      "sha256": "f9e9cfe603bfdb0b0f32d32a181b2ab03b1268091492fbd00d1fc3634ef0a304",
+      "bytes": 9223
+    },
+    "probe_ignored_acquisition.py": {
+      "path": "/workspace/engineering/oauth-config-design-owned/probe_ignored_acquisition.py",
+      "sha256": "71a293512ad1201e782f85e0292d6eb0929d190aa38080a4d9568b919129567e",
+      "bytes": 1872
+    },
+    "ignored-acquisition-probe.json": {
+      "path": "/workspace/engineering/oauth-config-design-owned/ignored-acquisition-probe.json",
+      "sha256": "9282f52bb4ec7d3501ab658149ba87945e1ebfafd1539f3a8259ffe4ba4a5178",
+      "bytes": 813
+    },
+    "canonical-guide-proposed.patch": {
+      "path": "/workspace/engineering/oauth-config-design-owned/canonical-guide-proposed.patch",
+      "sha256": "ac884e1e46d5be3e8307ce23a747422c265a736b8430a1e0fd368a5c4f7bf55c",
+      "bytes": 2549
+    },
+    "pr307-tasks.py": {
+      "path": "/workspace/engineering/oauth-config-design-owned/pr307-tasks.py",
+      "sha256": "b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791",
+      "bytes": 27099
+    },
+    "original-source-metadata.json": {
+      "path": "/workspace/engineering/oauth-config-design-owned/original-source-metadata.json",
+      "sha256": "0ab317b343ee263129e7ca6e131fae56545d2550142f01429699f5161da79c80",
+      "bytes": 549
+    },
+    "oauth-config-generator-owners.log": {
+      "path": "/workspace/engineering/oauth-config-design-owned/oauth-config-generator-owners.log",
+      "sha256": "8920df2e6d075344b54e32e9c64122480586802da28cebc10e7f1538b5fb4605",
+      "bytes": 5926
+    },
+    "pr307-generator.py": {
+      "path": "/workspace/engineering/oauth-config-design-owned/pr307-generator.py",
+      "sha256": "7be6c43b3928c136dfa36b0cb8a2ca82c22963ca4426dfdd95c4a0ba586b4b0f",
+      "bytes": 128200
+    }
+  },
+  "repository_status": {
+    "/workspace/engineering/pr282": "",
+    "/workspace/engineering/pr311": ""
+  }
+}

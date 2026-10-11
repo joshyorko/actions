@@ -98,5 +98,85 @@
     "source": "/workspace/engineering/pr299-windows-independent-diagnosis.json",
     "bytes": 7249,
     "sha256": "4eef69f680caf8891a6c2749b345f753cf5b9d71bc3f4e8e4b3301e9bff406b8"
+  },
+  "pr282-windows-source-checkpoint.json": {
+    "source": "/workspace/engineering/pr282-windows-owned/successor-receipt.json",
+    "bytes": 6450,
+    "sha256": "03c111382848683e15bb5ea74014ce3e756193fb6066793ee77a6ced699475cd"
+  },
+  "pr221-actual-clean-consumer.json": {
+    "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/actual-clean-consumer-receipt.json",
+    "bytes": 9008,
+    "sha256": "7704cbac814064ba4d341f99c576b7ee36ab646b72c07e79a50d5dee186ac938"
+  },
+  "pr221-independent-clean-consumer.json": {
+    "source": "/workspace/engineering/pr221-clean-consumer-independent-review/actual-one-consumer-review.json",
+    "bytes": 18432,
+    "sha256": "00d1b3c51f2e250e07bed48df92ff5f0e688c86525440e5109ebad525c681f63"
+  },
+  "pr221-clean-consumer-runner.py": {
+    "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-consumer-runner.py",
+    "bytes": 16652,
+    "sha256": "8ac20b20442a0e599e038664e76f4acc8779bcdebaa4340c319f43580a1133a9"
+  },
+  "pr221-clean-consumer-runner-tests.py": {
+    "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/test_installed_consumer_runner.py",
+    "bytes": 5192,
+    "sha256": "9ded078557289c471f3c0e9372ac71e90bccf1b3f9474c3b0067897f10416eea"
+  },
+  "pr221-clean-consumer-proposal.json": {
+    "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/clean-consumer-proposal.json",
+    "bytes": 16385,
+    "sha256": "579ed95e600ff002e9486a866b5df1f92a2c7dad075653ecb695ec1a819214b1"
+  },
+  "oauth-build-design.json": {
+    "source": "/workspace/engineering/oauth-config-design-owned/design-receipt.json",
+    "bytes": 6634,
+    "sha256": "2b309514a1ae3b8dd4c2c9d2580a854651c38792f2d84b306aab36908c60df51"
+  },
+  "oauth-build-design.md": {
+    "source": "/workspace/engineering/oauth-config-design-owned/design.md",
+    "bytes": 9223,
+    "sha256": "f9e9cfe603bfdb0b0f32d32a181b2ab03b1268091492fbd00d1fc3634ef0a304"
+  },
+  "oauth-canonical-proposed.patch": {
+    "source": "/workspace/engineering/oauth-config-design-owned/canonical-guide-proposed.patch",
+    "bytes": 2549,
+    "sha256": "ac884e1e46d5be3e8307ce23a747422c265a736b8430a1e0fd368a5c4f7bf55c"
+  },
+  "pr221-consumer-proof.json": {
+    "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/consumer-proof.json",
+    "bytes": 55818,
+    "sha256": "9f1f2947797bbc159c57b47da827383513fe498583e53395c4ff53843193ce57"
+  },
+  "pr221-execution-cleanup-receipt.json": {
+    "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/execution-cleanup-receipt.json",
+    "bytes": 1109,
+    "sha256": "9789eecc3e7b904ad260c56e90d14f0017bfa0820ce9b5eebbfd7d2313ca1739"
+  },
+  "pr221-pip-install-report.json": {
+    "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/pip-install-report.json",
+    "bytes": 864906,
+    "sha256": "c9f134feedb243623faf689aa481f01ee16fd2b85b8cba5909e1980a14ea3ca4"
+  },
+  "pr221-installed-inventory-raw.json": {
+    "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/installed-inventory-raw.json",
+    "bytes": 30860,
+    "sha256": "cd3bf8423037071543f0900322a4698ac378c6c2501ebd5ca6ed8ce2db78c902"
+  },
+  "pr221-attempt-identity.json": {
+    "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/attempt-identity.json",
+    "bytes": 2416,
+    "sha256": "c56d2766463c5f6d5c710388a15f65a94c1304ca1f05d213d83bb98993445a7e"
+  },
+  "pr221-install-argv.json": {
+    "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/install-argv.json",
+    "bytes": 564,
+    "sha256": "4134aa92dfca9e3c3f5d86b125c9dc0ceb4702fed9f6f28f2979c71efe662c8c"
+  },
+  "pr290-actual-integration.json": {
+    "source": "authenticated GitHub merge and readback",
+    "bytes": 605,
+    "sha256": "4c5314fead37ef489c94f33be43fe2b5688a9c3e70f1198695cc5211a7ee07db"
   }
 }
