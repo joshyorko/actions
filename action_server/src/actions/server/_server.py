@@ -460,6 +460,7 @@ def start_server(
 
     import uvicorn
     from fastapi import (
+        BackgroundTasks,
         Depends,
         HTTPException,
         Security,
@@ -556,13 +557,14 @@ def start_server(
 
     if os.getenv("RC_ADD_SHUTDOWN_API", "").lower() in ("1", "true"):
 
-        def shutdown(timeout: int = -1):
+        def shutdown(background_tasks: BackgroundTasks, timeout: int = -1):
             # Note: timeout no longer used (the timeout to kill is
             # now handled by the timeout_graceful_shutdown parameter
             # of uvicorn.Config).
             import _thread
 
-            _thread.interrupt_main()
+            # Complete the response send before requesting process interruption.
+            background_tasks.add_task(_thread.interrupt_main)
 
         app.add_api_route(
             "/api/shutdown/",

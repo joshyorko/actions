@@ -2582,7 +2582,8 @@ separately from RCC wrapper receipts. `ActionServerProcess.stop()` delegates to
 can consume the direct child's wait status, so a later `Popen.poll()` value of 0
 is not natural-exit evidence. A normal `start_server` return produces CLI exit
 0. The
-explicit `/api/shutdown/` endpoint instead calls `_thread.interrupt_main()`;
+explicit `/api/shutdown/` endpoint schedules `_thread.interrupt_main()` as a
+response background task, after the final ASGI response-body send completes;
 `_main_retcode` catches that `KeyboardInterrupt` and returns 1. Count exit 1 as
 the expected controlled API-interrupt outcome only when the receipt also proves
 that shutdown request and its successful 2xx response. An observed natural exit
@@ -2594,6 +2595,13 @@ the captured natural result. Preserve any post-stop `Popen.poll()` value as
 forced-cleanup-only evidence, never as natural exit. A `stop()` return is not
 process-exit evidence, and a captured descendant set only reports that
 observation; it does not prove complete tree reaping.
+The assembled route's service-free ordering controls require completed response
+start and final body sends before interruption; denied requests and failed
+sends must not interrupt. A server access-log status 200 does not prove that
+the client received the response. Keep client response delivery, natural exit
+and cleanup predicates separate; passing checkout-byte tests establishes no
+shutdown cause. ASGI send ordering still requires fresh platform client and
+natural-exit acceptance, and does not guarantee network delivery.
 The bounded retirement result is one pool-lifecycle signal, separate from the
 Action execution result and RCC terminal receipt. Preserve failed wrapper
 receipts. Neither wrapper reaping nor stopped observed descendants establishes
