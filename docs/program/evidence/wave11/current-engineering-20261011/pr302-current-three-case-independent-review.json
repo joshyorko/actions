@@ -1,0 +1,130 @@
+{
+  "verdict": "GO_EXACT_PUBLIC_LINUX_SOURCE_S_THREE_CASE_ACCEPTANCE",
+  "workflow_run": 38110371338,
+  "attempt": 1,
+  "event": "push",
+  "job": 114384488800,
+  "job_status": "completed/success",
+  "workflow_control_commit": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+  "workflow_control_tree": "6e8af78b3386b870191d559535519f90bc4b0b8a",
+  "executed_candidate_source": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+  "candidate_tree": "e05141d122b7245b626c5d0389cf9b653c8ad300",
+  "checkout_identity": "Push control checkout isba04; separate immutable candidate checkoutS43a73 executes tests. CurrentfullCI synthetic testedmerge63cf2baa orderedfbde/ba04 is separate; no identity relabel.",
+  "original_artifact": {
+    "id": 11691074610,
+    "size": 7437,
+    "sha256": "b25afa9eb55320bf6b851ef49586cd2870952956eecc942a0f22080b898de1d1",
+    "local_path": "/workspace/engineering/pr302-current-S-C-actual-review/original-artifact-11691074610.zip",
+    "members": [
+      {
+        "member": "rcc-provider-rollback-evidence/acceptance-summary.json",
+        "size": 3067,
+        "sha256": "47a5a26178a405164611280c319278a865db1b8f1cf7af80fbbb137841b97f92"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/acceptance-summary.log",
+        "size": 686,
+        "sha256": "40e206ae7d74417ce430e121ceaf6f5638ac903e430d532ee02025434b45d734"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/lifecycle-receipt.json",
+        "size": 7603,
+        "sha256": "cc86ef7939d9f243e021a9a0676e97a0849b28b556b78fc07a0b736bec8ede7b"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/lifecycle-summary.json",
+        "size": 1221,
+        "sha256": "2f2230b71760e46884a263f5c03524f100275b6be95aad6bfde1ba8ce2ce9020"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/published-details-receipt.json",
+        "size": 1483,
+        "sha256": "a3e4b61ca3fcf1043ca50770caabfc8b31ff85b4de22a6e848e480d84f4b4052"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/staged-consumer-receipt.json",
+        "size": 2393,
+        "sha256": "7f0a0c7c86052d94beb28fdebb493ca86c4779326c74353894e9ba8ad2cfe092"
+      },
+      {
+        "member": "rcc-provider-rollback-junit.xml",
+        "size": 752,
+        "sha256": "01dd302d04c21569e427a3eb9a380b926be30904782bc112ad28c4b3b7836724"
+      }
+    ]
+  },
+  "original_job_local_only": {
+    "path": "/workspace/engineering/pr302-current-S-C-actual-review/original-job-114384488800.log",
+    "sha256": "49db3a03ef375999311e123c1c8ac8472cbbc9b0a7e32361e8c7ec8cdb64945b"
+  },
+  "independent_verification": [
+    "OriginalAPIartifact ZIP bytes/size/digest exact; safe extraction no links/traversal; all7raw member hashes retained.",
+    "All3exactJUnit identities, counters3/0fail/0error/0skip; successful summary admission issues[]; raw lifecycle/publication/staged receipt statusesPASS.",
+    "Nine summarized source SHA256 equal actualS Git blobs. Lifecycle source tuple exactS/treee051 clean dirty_paths[];3Runtime module origin suffixes resolve candidate source, hashes match; parentguide delta SHA matchesS.",
+    "Publication raw JSON hash exact and artifact/specification digests from same single publish invocation; command/providertuple loopback bound. Lifecycle and staging providers/envartifact identities separate, not one operation across all3cases.",
+    "Lifecycle beforefailure/afterfailure/afterrecovery provider operations exactunchanged2 phasespublish/acquire. Last-good descriptor and first/second actions preserved; recovery executesnew source with source-reuse artifact and changedsourcegeneration; statuses2/results last-good,last-good,recovered; unique3runIDs. RCC trace1publish1acquire9exec calls.",
+    "Staged source/staged2entry inventory and hashes equal; typedaction origin contained .rcc-runtime-sources; managedinterpreter and Core module within managedroot, Core1.0.2. This is mapped origin evidence, not wholewheel provenance/Core1.0.3.",
+    "CanonicalRCC18.19.3/Linux7e588c SHA sharedrawreceipts/summary and measured CLI; glibc2.39 accepted.",
+    "Shutdown HTTP200; natural return1 captured before forcedcleanup, forced_stop_usedfalse; capturedbefore/after descendant lists empty. Postcleanup return explicitlynot natural evidence; no complete/universal descendant-reaping claim."
+  ],
+  "source_nine_hashes": {
+    "acceptance_helper": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+    "action_package_handler": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64",
+    "actions_import": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3",
+    "rollback_test": "60d81fabaa2ba0446ff888109e050c883ee944553794636fd527a6fe27d4691b",
+    "runtime_adapter": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a",
+    "source_manifest": "4fb8d376d1b4aa06d301dedaeee67a2916561c7d10b8f1dadd657870b37b2b43",
+    "source_read": "4ae8cbe57aa5c924585f4257a1be1700aa49baa63d6150efba20935045f7a8a5",
+    "source_staging": "fda3f2c045414a9cae21cc0765a3eb7c72db2ddd2f5d74e567a04a0513baf620",
+    "staged_consumer_test": "0edc5d092dba9415f552ee1f666edac8f3ce9e833bea1ef73f8370ed2d446e6a"
+  },
+  "exact_JUnit": [
+    {
+      "classname": "tests.action_server_tests.test_current_candidate_import_rollback",
+      "name": "test_current_candidate_failed_reload_keeps_last_good_action_usable",
+      "seconds": "71.700"
+    },
+    {
+      "classname": "tests.action_server_tests.test_source_staging_rcc_consumer",
+      "name": "test_staged_package_executes_in_managed_rcc_runtime",
+      "seconds": "60.680"
+    },
+    {
+      "classname": "tests.action_server_tests.test_source_staging_rcc_consumer",
+      "name": "test_published_artifact_details_preserves_one_rcc_identity_pair",
+      "seconds": "31.788"
+    }
+  ],
+  "JUnit": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 3
+  },
+  "public_publication_identity": {
+    "artifact_digest": "sha256:3f6f70055487190cfabd6be3f0c60b32eae88ec93baf0027e07e8771b30d3322",
+    "specification_digest": "sha256:5e7dcfdb9f4ca5cc19ca6b2e93cad75a3fd60f598d4a71fd10451bffc1ddc56f",
+    "raw_json_sha256": "6413cf0ed895ed980edb6a5138558efccb6e145a3c42d1dad3b84f71d1136a30",
+    "invocation_count": 1
+  },
+  "cleanup_scope": {
+    "natural_exit_status": "PASS",
+    "natural_return_before_cleanup": 1,
+    "forced_stop_used": false,
+    "captured_descendants_before": 0,
+    "same_captured_descendants_after": 0,
+    "complete_reaping": "NOT_PROVED"
+  },
+  "merge": "HOLD all freshfullCI pending and310first integration order. Later target/sourceunion requires newreview/currentgates; this proof isS/C only.",
+  "full134_135_release": "HOLD public3case Linux only; private01f/fafb/frozenv6 originals unavailable, WindowsRCC/Core1.0.3/fullrelease not established; produceradapterdelta prevents92498 qualification reuse.",
+  "historical_proof": "Older run38106813502 ff/665 retained exactoriginalidentity; no reuse/relabel.",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md existingS32added4removed delta independentlyverified, currentC byteidentical",
+    "durable_learning_captured": "Reviewed sourceunion before child immutablecontrol; compare originalZIP/rawmembers before summarizedadmission; one publicationpair separate lifecycle/staging identities; mappedCore1.0.2/capturedshutdown boundaries and privateHOLD preserved.",
+    "evidence": "New originalartifact11691074610b25afa9e, raw7 memberhashes, source9 hashes, exact3JUnit and beforecleanupnatural1 proof above directlyvalidateexisting generic guide instructions.",
+    "stale_or_ambiguous_guidance_removed": "S removed665current-control wording; oldgreen sourceidentity cannot carry newsourceunion; no extra canonical amendment required beyondintegrateddurable rules.",
+    "remaining_uncertainty": "Fresh fullCI/currenttestedmerge pending, nextactualtargetunion after310, privateoriginals absent, full134135/Core1.0.3/WindowsRCC unaccepted."
+  },
+  "upstream_disposition": "none",
+  "mutations": "Owned original downloads/reviewreceipt only; no source edits/push/merge/native rerun/build"
+}

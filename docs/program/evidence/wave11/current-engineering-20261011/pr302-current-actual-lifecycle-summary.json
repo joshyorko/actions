@@ -1,0 +1,40 @@
+{
+  "action_server_process_exit": {
+    "forced_cleanup_returncode_observed": true,
+    "forced_stop_used": false,
+    "natural_exit_status": "PASS",
+    "pid": 2888,
+    "returncode_before_forced_cleanup": 1,
+    "shutdown_request_succeeded": true
+  },
+  "owned_descendants_before_stop": [],
+  "provider_operation_phases_after_recovery": [
+    "publish",
+    "acquire"
+  ],
+  "provider_operation_phases_before_failure": [
+    "publish",
+    "acquire"
+  ],
+  "rcc": {
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "v18.19.3"
+  },
+  "run_statuses": {
+    "first_run": 2,
+    "recovered_run": 2,
+    "second_run": 2
+  },
+  "same_owned_descendants_remaining_after_stop": [],
+  "schema_version": 1,
+  "source": {
+    "commit": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+    "runtime_module_sha256": {
+      "action_package_handler": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64",
+      "actions_import": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3",
+      "runtime_adapter": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a"
+    },
+    "tree": "e05141d122b7245b626c5d0389cf9b653c8ad300"
+  },
+  "status": "PASS"
+}

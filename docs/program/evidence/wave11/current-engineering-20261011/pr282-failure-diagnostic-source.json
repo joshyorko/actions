@@ -1,0 +1,168 @@
+{
+  "disposition": "LOCAL_FAILURE_DIAGNOSTIC_CHECKPOINT_FOR_INDEPENDENT_REVIEW_NO_PUSH",
+  "branch": "feat/canvas-template-20261010",
+  "head": "811c826addf662c3a7de23d27c5f1014ecd3c6a3",
+  "tree": "c2b3f214a6ea850c48421303fef2a68ec0b3422a",
+  "parent": "0d8d0803a954faefd53e5cdb92d08c2a1275a820",
+  "allowed_delta": "M\t.github/workflows/_gen_workflows.py\nM\t.github/workflows/actions_runtime_tests.yml\nM\tdeveloper/tests/test_canvas_published_workflow.py\nM\tdocs/skills/repository-operations.md",
+  "source_control_proof": {
+    "path": "/workspace/engineering/pr282-diagnostics-source-proof.json",
+    "sha256": "06385be08485bbdfaf3cfaf227805ca0002bc3a13a3e59c78065b42c5fb0b410",
+    "content": {
+      "base": "0d8d0803a954faefd53e5cdb92d08c2a1275a820",
+      "39_original_receipt_predicates_AST_unchanged": true,
+      "39_diagnostic_predicates_AST_exact": true,
+      "whole_original_validator_AST_unchanged_after_removing_diagnostic_additions": true,
+      "whole_generator_AST_unchanged_except_published_canvas_acceptance": true,
+      "workflow_semantics_unchanged_except_diagnostic_validator_and_upload_path": true,
+      "other7_outputs_byte_identical": {
+        ".github/workflows/actions_runtime_rcc_provider_rollback.yml": {
+          "blob": "3ad07ba08084476d0103ba305a2a582cbb991966",
+          "sha256": "066adce2531a5223720661afce2f6485d7493243c10156eb1d84e624e252ac92"
+        },
+        ".github/workflows/actions_runtime_frozen_catalog_rollback.yml": {
+          "blob": "557dab1b4b85bea79bc6f6337ea6068a3d4209cb",
+          "sha256": "518e370eb63213ca70a684102dfcf4c7a6c98733744b82dfb0fb2afedf9ff175"
+        },
+        ".github/workflows/actions_core_tests.yml": {
+          "blob": "1c855355d6e5fc7a196ceea7bf83c1af952957a8",
+          "sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296"
+        },
+        ".github/workflows/http_helper_tests.yml": {
+          "blob": "960c81f7faa38acd3726c716b9297ea36cc5ea4b",
+          "sha256": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8"
+        },
+        ".github/workflows/actions_runtime_pypi_release.yml": {
+          "blob": "8a6c70171fca53059f4da2b1be0cb657890c20e2",
+          "sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f"
+        },
+        ".github/workflows/actions_runtime_binary_release.yml": {
+          "blob": "1fce9c558943fffab5c264bcc0599095162aa3ee",
+          "sha256": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64"
+        },
+        ".github/workflows/actions_runtime_recovery.yml": {
+          "blob": "b84289aefb5d5c164fac25e9492a17f07dcd819b",
+          "sha256": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f"
+        }
+      },
+      "all_production_browser_template_test_and_source_inputs_unchanged": true,
+      "allowed_changed_paths": [
+        ".github/workflows/_gen_workflows.py",
+        ".github/workflows/actions_runtime_tests.yml",
+        "developer/tests/test_canvas_published_workflow.py",
+        "docs/skills/repository-operations.md"
+      ]
+    },
+    "verification_script_sha256": "8dd4ff9f0f579d46d89f2c0bf042faf12314d61b4af2990f25fc6677d6b5c4fc"
+  },
+  "original_failure": {
+    "job": 114380503419,
+    "log_path": "/workspace/engineering/ci-job-114380503419.log",
+    "log_sha256": "3a70ed53cffbeadde0ae38b9326fb26c6ae92325d4a966b3e8b7f74bdd0a8633",
+    "observed": "pytest0 tests1 skipped0 failures0 errors0 receipt_validFalse",
+    "JUnit_only_artifact": 11690817837,
+    "failed_predicate": "UNKNOWN",
+    "raw_receipt_presence": "UNKNOWN",
+    "root_cause_fixed": "NO CLAIM"
+  },
+  "prior_readonly_proposal": {
+    "path": "/workspace/engineering/pr282-windows-owned/hosted-linux-admission-diagnostic-proposal.json",
+    "sha256": "ace0991fbdd664142c077a4e8097803e7afdabece5edebf338f5115693ce6052"
+  },
+  "diagnostic_contract": {
+    "failure_only_file": "published-core-failure-diagnostics.json",
+    "fixed_predicate_codes": 39,
+    "statuses": [
+      "PASS",
+      "FAIL",
+      "UNAVAILABLE"
+    ],
+    "exception_classes": [
+      "NONE",
+      "IO_ERROR",
+      "TEXT_ERROR",
+      "JSON_ERROR",
+      "TYPE_ERROR",
+      "VALUE_ERROR",
+      "ATTRIBUTE_ERROR",
+      "KEY_ERROR",
+      "OTHER_ERROR"
+    ],
+    "values": "fixedkeys/codes/statuses/counts ONLY",
+    "input_values_or_paths_env_urls_provider_raw_output": "NOT EMITTED",
+    "meaning": "Independent observations after rejection, not original shortcircuit position; no acceptance waiver",
+    "retention": "existing always-run Linuxupload addsfailurefile; pre-validator or writefailure may leave diagnostics unavailable"
+  },
+  "validation": {
+    "Doctor": "PASS",
+    "Bootstrap": "REUSED verified receipt explicitlyauthorized unchanged toolchain",
+    "TDD_RED": "32 FAIL41 DESELECTED missing failurediagnostics; valid baseline passed before poisons",
+    "initial_GREEN": "73 PASS",
+    "final_contract_and_replay": "76 PASS alloldpoisons/newsecretpoison/readparseclasses/39predicateASTsync/JUnitpytestdiagnosticchecks",
+    "final_ToolkitTest": "138 PASS",
+    "configured_invoke_lint": "PASS Ruff check/format299files and Isort src/tests; optional mdl absent",
+    "configured_invoke_typecheck": "PASS331files Linux; annotation-unchecked notes retained",
+    "developer_generator_Ruff": "PASS2files; testRuffformatPASS",
+    "source_AST_and_output_proof": "PASS whole originalvalidator AST exact after removingdiagnostic additions; generatorotherAST and7outputbytes unchanged",
+    "git_diff_check": "PASS",
+    "new_actual_Runtime_browser_CI": "NOT RUN no rebuild/rerun/push"
+  },
+  "logs": {
+    "doctor": {
+      "path": "/workspace/engineering/pr282-diagnostics-doctor.log",
+      "size": 13485,
+      "sha256": "2e123869a8e50823d229bbc2320d48cba4f0ce445985398269d9392379f6bb0f"
+    },
+    "red": {
+      "path": "/workspace/engineering/pr282-diagnostics-red.log",
+      "size": 83324,
+      "sha256": "688e64c77d7803e2df2a523c0e9f2e0ba0672c6370037bddef25ea7fc5c532c0"
+    },
+    "green": {
+      "path": "/workspace/engineering/pr282-diagnostics-green.log",
+      "size": 3893,
+      "sha256": "40f363a36eed71aaa9f9bc145b10fb8b51cee1bedc4c91764dc15d43306ae2a9"
+    },
+    "final-contract": {
+      "path": "/workspace/engineering/pr282-diagnostics-final-contract.log",
+      "size": 4080,
+      "sha256": "ce2938e917e717f4e6c4fa8432f21eab3f382bb2991ba54a0d2fc200200a2e44"
+    },
+    "final-replay": {
+      "path": "/workspace/engineering/pr282-diagnostics-final-replay.log",
+      "size": 4092,
+      "sha256": "d7cf528ea7adc9b2cae106790dc6e12c83e1672d60ad0e9d593d5571a330c215"
+    },
+    "final-toolkit": {
+      "path": "/workspace/engineering/pr282-diagnostics-final-toolkit.log",
+      "size": 14424,
+      "sha256": "131a6ef38d0b7fdb85f974ac914313ea0ae91cff9b7308e18466a7bfa60f6bc5"
+    },
+    "static": {
+      "path": "/workspace/engineering/pr282-diagnostics-static.log",
+      "size": 5694,
+      "sha256": "2ff6ed7d85baac862d18f0b632b2474015c64aa1b4885f31bcb379c5009f0f3e"
+    },
+    "source-proof": {
+      "path": "/workspace/engineering/pr282-diagnostics-source-proof.log",
+      "size": 3695,
+      "sha256": "b4d3dcc1b515df5f6c6a4a7ba0bc4fdf321580311efb6ec36a19a748d42df4da"
+    },
+    "reused_bootstrap": {
+      "path": "/workspace/engineering/pr282-windows-owned/bootstrap.log",
+      "size": 14146,
+      "sha256": "1fce3e0838188aca9365477cc1ee5baa50237399f6694052d362c0d14642c2af",
+      "authorization": "root explicitly authorized reuse unchanged prepared282 toolkit/locks/pins/setup; no installer concurrency"
+    }
+  },
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/repository-operations.md",
+    "durable_learning": "pytest pass separate receiptadmission; JUnitonly upload cannot establish missingrawreceipt; failurediagnostics reobservefixedchecks with unavailable/error classes, not originalshortcircuitposition; retainunknownoldfailurepredicate/rawpresence",
+    "exact_delta": "failure-onlyfixed39predicate/status/class/count diagnostics, alwaysuploadwhenwritten, no rawvalues, unavailablevsfailed distinction, preservestrictcleanup, best-effortexecution/write limits, no oldfailure inferred fromJUnit-only artifact",
+    "evidence": "original0dlog negativeafter1PASS; sourceproof ASTexactoriginalstrictvalidator;76 actualgeneratedvalidator syntheticcases and138Toolkit",
+    "stale_or_ambiguous_guidance_removed": "qualified failure retention; explicitly rejects pytestpass=receiptadmission andJUnitonly=missingrawreceipt; names oldunknownpredicate andrawpresence precisely",
+    "remaining_uncertainty": "originalactualfailedpredicate/rawreceiptpresence unresolved; nextactual diagnosticCI may identify observations but no rootcausefixed claim"
+  },
+  "upstream_disposition": "none",
+  "push": "NONE root owns after independentGO"
+}

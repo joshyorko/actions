@@ -1,0 +1,34 @@
+{
+  "control": {
+    "commit": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+    "tree": "6e8af78b3386b870191d559535519f90bc4b0b8a"
+  },
+  "publication": {
+    "args": [
+      "/home/runner/work/_temp/actions-rcc/rcc",
+      "env",
+      "publish",
+      "--environment",
+      "/home/runner/work/_temp/rcc-provider-rollback-tmp/pytest-of-runner/pytest-0/test_published_artifact_detail0/minimal-package/package.yaml",
+      "--json",
+      "--provider",
+      "http://127.0.0.1:39269"
+    ],
+    "artifact_digest": "sha256:3f6f70055487190cfabd6be3f0c60b32eae88ec93baf0027e07e8771b30d3322",
+    "invocation_count": 1,
+    "provider": "http://127.0.0.1:39269",
+    "raw_json": "{\"artifactDigest\":\"sha256:3f6f70055487190cfabd6be3f0c60b32eae88ec93baf0027e07e8771b30d3322\",\"specificationDigest\":\"sha256:5e7dcfdb9f4ca5cc19ca6b2e93cad75a3fd60f598d4a71fd10451bffc1ddc56f\",\"legacyBlueprintKey\":\"78316451726c603b\",\"objectCount\":4960,\"uploadedBytes\":76127469,\"reusedBytes\":0}\n",
+    "raw_json_sha256": "6413cf0ed895ed980edb6a5138558efccb6e145a3c42d1dad3b84f71d1136a30",
+    "specification_digest": "sha256:5e7dcfdb9f4ca5cc19ca6b2e93cad75a3fd60f598d4a71fd10451bffc1ddc56f"
+  },
+  "rcc": {
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "v18.19.3"
+  },
+  "schema_version": 1,
+  "source": {
+    "commit": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+    "tree": "e05141d122b7245b626c5d0389cf9b653c8ad300"
+  },
+  "status": "PASS"
+}

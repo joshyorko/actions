@@ -1079,7 +1079,7 @@ cp312/cp313 manylinux x86_64, macOS 12 arm64, and Windows amd64 set while
 rejecting mismatched ABI tags. The sdist and wheel build steps expose only
 `ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR frontend and OAuth steps omit release credentials, but the OAuth step
 still invokes the same external acquisition task. Secret isolation does not prove
-equivalent generated configuration: the current task ignores acquisition exit
+equivalent generated configuration: the pre-guard task ignored acquisition exit
 codes and embeds stdout, so authentication failure can yield empty strings and
 a GitHub API error response can yield nonempty YAML mappings. PAT-bearing PyPI
 build variants are limited to tag pushes; that condition does not qualify their
@@ -1101,6 +1101,42 @@ or replacement-source status. Recovery executes build tasks from immutable
 `release-source`, so a current task fix does not repair an older release target
 without a separately reviewed acquisition/admission boundary. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
 from the child environment, while upload receives only the exact PyPI token.
+
+The reviewed PR307 guard has the following source contract; current integration
+and hosted admission remain separate gates until it is accepted.
+
+`inv build-oauth2-config` delegates to Runtime's installed Poetry environment.
+Generated and manual OAuth artifact producers install Runtime through `inv install`
+or `inv devinstall` before invoking the task. PyYAML is a Runtime dependency;
+repository-root devutils requirements do not guarantee it in the outer Invoke
+interpreter. The task removes outer virtualenv, Conda and Python activation hints
+from the replacement child environment so Poetry selects Runtime's environment.
+Removing only `VIRTUAL_ENV` leaves an active RCC `CONDA_PREFIX` able to select the
+toolchain interpreter. Verify the actual
+Invoke-to-Poetry boundary with controlled acquisition, including failure, rather
+than qualifying only direct helper calls.
+
+The OAuth build guard checks each binary acquisition's exit status and bounds it
+to 30 seconds. It rejects invalid UTF-8, blank bodies, malformed safe YAML and
+documents lacking mapping root, `oauth2Config` and `providers` values. Both inputs
+must pass before a same-directory atomic module replacement. The module retains
+the original strings, including their line endings; failure preserves the previous
+module and primary exception while attempting to remove only task-owned temporary
+files. A cleanup failure is reported separately without replacing the primary error.
+CLI failures expose fixed input names and reason categories, never raw acquisition
+stdout, stderr, configuration or credentials.
+
+These checks establish acquisition and consumer-compatible structural shape only.
+They do not establish an approved source pair or revision, supported provider
+policy, or actual OAuth behavior. An empty providers mapping is structurally
+admissible, without qualifying it as release content. The existing unpinned
+`Sema4AI/oauth-public-configs` authority remains unchanged; full OAuth and release
+source admission remain on hold until the owner identifies the authoritative pair.
+Do not replace unavailable input with a guessed repository, provider stub,
+successful skip or disabled-provider policy. Recovery invokes the task from
+immutable `release-source/action_server`, so the installed environment and task
+version belong to that source; a current helper fix does not repair an older
+release target.
 
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The
@@ -2789,3 +2825,29 @@ execution-stop and reader conditions and does not identify a survivor or
 establish a leak. Preserve the primary readiness failure and unavailable
 observations. These semantics are verified against RCC v18.19.3 commit
 `4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`, `pretty/functions.go`.
+
+
+Derive the expected CI job set from the exact workflow revision, branch/path
+filters, matrices, job conditions and dependencies. A dependent job can appear
+only after its `needs` finish; an early check count is not final. Runtime PyPI's
+`publish` job validates and collects artifacts on pull requests, while its
+publishing steps are push-only. Work Items publication has a tag-only job
+condition, so its PR job skip is expected. Keep run event and job identity for
+repeated Copilot checks. Empty commit statuses do not imply absent Actions checks.
+
+For native readiness timeouts, separate the first ready-port wait from later
+reload, catalog and drain semantics. A failure before readiness does not exercise
+those later assertions. In original PR3111151 Windows, all six failures were in
+the first90-second wait; only two nodes had80/88-second observations. Active RCC
+CPU/IO while `holotree variables` runs rejects complete inactivity in those
+sampled intervals, but does not identify its internal phase, a cache defect or
+a shared-output regression. Missing cache files and unmeasured reader state stay
+explicit. No raw Progress was retained there; separate observed elapsed time from
+previous-mark intervals available in other immutable logs.
+
+Host returncode, stopped host reader threads and a cancelled sampler do not
+report descendant cleanup. Original311 has five explicit incomplete20-second
+cleanup notes; the sixth failure's absent note is not a cleanup pass. Preserve
+the primary startup exception and unchanged90-second readiness/20-second cleanup
+gates. A diagnostic result does not authorize prewarming, retries, replacement
+configuration or acceptance of an unproven timeout fix.

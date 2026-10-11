@@ -1,0 +1,18 @@
+--- a/docs/skills/work-items.md
++++ b/docs/skills/work-items.md
+@@ -486,10 +486,11 @@
+ of the Windows byte difference is unmeasured. Seeded stale reservations remain
+ a recovery fixture, not a process crash.
+ 
+-This harness proves creation and restart persistence, not worker-driven Work
+-Item state transitions, attachment behavior, accessibility or other browsers.
+-Those cells remain separate acceptance requirements. A workflow build/version
+-check alone is not native Work Items acceptance.
++The browser gate proves UI creation and backend readback. The separate native
++consumer cases establish their recorded worker-driven transitions and restart
++persistence. Attachment behavior, accessibility and other browsers remain
++separate acceptance requirements. A workflow build/version check alone is not
++native Work Items acceptance.
+ 
+ For packaged Work Items storage-failure UI checks, keep Action Server's own
+ database (`--db-file=server.db`) separate from the management API database at

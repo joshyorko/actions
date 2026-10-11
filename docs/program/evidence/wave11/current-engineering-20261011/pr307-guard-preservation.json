@@ -1,0 +1,14 @@
+{
+  "parent": "0df315284ec7ddc5d8be47c07874522b52d7e9b4",
+  "staged_tree": "638b960a3700bbbba3026874efb158fa6e95117f",
+  "exact_changed_paths": [
+    "action_server/scripts/build_oauth2_config.py",
+    "action_server/tasks.py",
+    "action_server/tests/build_system_tests/test_oauth2_config_build.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "unchanged_blob_and_mode_count": 1404,
+  "all_unrelated_blobs_and_modes_preserved": true,
+  "original_pr307_changelog_preserved": true,
+  "generator_and_all_workflow_blobs_and_modes_preserved": true
+}

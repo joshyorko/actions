@@ -1,0 +1,61 @@
+{
+  "actual_execution_approved": false,
+  "added": [
+    "action_server/tests/action_server_tests/mcp/test_canvas_runtime_admission.py"
+  ],
+  "all_logs_hash_verified": {
+    "admission-green.log": "0251d01128f06c367b63fac1d2dc1fbc1afc4739af69e5e576eefcb1617ec569",
+    "admission-red.log": "17f4cb4ab532bb54dc6206888345849245b47a6162d3a82600148bb3651b55a1",
+    "bootstrap.log": "1c556a0f55684fbe7be59187a1aa5dd1bb864f89ee599f27a35d56a1d65ec5ab",
+    "doctor.log": "79141936889ce9d1d8bb4cb4d7393d83a0eaf4061297f2f45eb5a8e5fcc337a6",
+    "final-source-gates.log": "7c867fa3a9d248e023a9379bc39b2798a71fea8021aa14fa043589afca470928",
+    "original-boundary-red.log": "ba7638486df4823b1e63f8f0f827bc73b14ef197f730be9a2e40682dec606ac7",
+    "scoped-green.log": "1e71a4e5db139b343841219db90e66220ef0a06e276d39da9738b6434022f0b5",
+    "static-gates.log": "2211ff3628ade0a505879c8287fd6d09e4bde969b045cd93fbb0f5145953be60",
+    "toolkit-test.log": "f77450d5447d3f01b59a3797f0db1ac1987e957ddfd5fac8fe39f764cd108a94"
+  },
+  "all_other_test_function_AST_equal": true,
+  "base_leaves": 1406,
+  "changed_from_merge": [
+    "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "deleted": [],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md (writer exact source delta verified); additional proposal: helper byte identity across self-launch",
+    "durable_learning": "Hash-checked import alone does not bind Linux helper subprocess self-launch; distinguish command/supervisor/gateway budgets and observer request/liveness from Runtime cleanup",
+    "evidence": "verify_dakota_rcc_acceptance.py run_owned_process launches Path(__file__).resolve() --_supervisor; source SHA60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659; observer SHA943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c",
+    "exact_proposed_delta": {
+      "path": "/workspace/engineering/pr305-independent-public-review/canonical-proposed-delta.md",
+      "sha256": "14f779c2c891eccb44da33485554a37c9059e4cbbb874fd514af84834975397d"
+    },
+    "remaining_uncertainty": "Immutable external runner, actual browser path/runtime receipt, current hosted gates, full public Core/cold acquisition and production host remain unverified",
+    "stale_ambiguity_removed": "An import digest alone proves later subprocess bytes; 600s command limit means entire gateway is 600s; sampler_cancelled proves sampler exited"
+  },
+  "execution_or_push_performed": false,
+  "existing_resource_search_status_assertions_AST_equal": true,
+  "five_Run_count_database_and_records_AST_equal": true,
+  "head": "14c1c1965314b192c4118c3281f5539d29f0aa6f",
+  "head_leaves": 1407,
+  "merge_parents": [
+    "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+    "fbde0d3a248c47c9964851355f96575c89a87329"
+  ],
+  "mismatches": [],
+  "native_start_AST_equal": true,
+  "opt_in_decorators_AST_equal": true,
+  "parent": "71aab046754ae0e0837f223fd0ba6b8513e63a62",
+  "producer_entries": 268,
+  "review_script": {
+    "path": "/workspace/engineering/pr305-independent-public-review/review_source.py",
+    "sha256": "39a950e06d7fc705c9e3e69dcb6c2ace60b2c5a71dd7840b2ca7f3b044e032a8"
+  },
+  "selected_entries": 5,
+  "sibling_cache_allocations_AST_equal": true,
+  "source_receipt_sha256": "d68e265a2bbbb28cc54cfed511d2e0bbc3cdaeb71a93ac08ef1d7c74aeaae60e",
+  "status": "GO_SOURCE_PUBLIC_MODE_ONLY_RUNNER_NOT_REVIEWED",
+  "tests": "RED11FAIL1PASS +2 actual immutable old seam failures; GREEN18controls/24scoped4deselected; Toolkit69; full configured lint PASS/type335PASS",
+  "tree": "b95b352dd20cec016ea5dac204b81eeb331a8b3d",
+  "unchanged_frontend_all_leaves": true,
+  "upstream_disposition": "none"
+}

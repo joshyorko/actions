@@ -1,0 +1,272 @@
+{
+  "action_server_process_exit": {
+    "argv": [
+      "/home/runner/.cache/pypoetry/virtualenvs/actions-runtime-8_OrLCCa-py3.12/bin/python",
+      "-m",
+      "actions.server",
+      "start",
+      "--actions-sync=true",
+      "--port=0",
+      "--datadir=/home/runner/work/_temp/rcc-provider-rollback-tmp/pytest-of-runner/pytest-0/test_current_candidate_failed_0/.sema4ai-test-action-server",
+      "--db-file=server.db",
+      "--skip-lint",
+      "--min-processes=0",
+      "--max-processes=1",
+      "--reuse-processes",
+      "--auto-reload"
+    ],
+    "descendant_observation_scope": "captured tree only; not a complete descendant-reaping claim",
+    "forced_cleanup_returncode_observed": true,
+    "forced_stop_used": false,
+    "interpreter": "/home/runner/.cache/pypoetry/virtualenvs/actions-runtime-8_OrLCCa-py3.12/bin/python",
+    "natural_exit_failure": null,
+    "natural_exit_status": "PASS",
+    "owned_descendants_before_stop": [],
+    "pid": 2888,
+    "pythonpath": "/home/runner/work/actions/actions/candidate/action_server/src:/home/runner/work/actions/actions/candidate/actions/src",
+    "returncode_after_forced_cleanup": 1,
+    "returncode_after_forced_cleanup_is_natural_evidence": false,
+    "returncode_before_forced_cleanup": 1,
+    "same_owned_descendants_remaining_after_stop": [],
+    "shutdown_http_status": 200,
+    "shutdown_request_succeeded": true
+  },
+  "descriptor_preserved_after_failure": true,
+  "final_runtime": {
+    "artifact_digest": "sha256:e117d84c7984b6aa6fae23ce37b1339d362ec4510f7f3bc95473c6017489aa82",
+    "contract_version": "rcc-runtime/v1",
+    "environment_fingerprint": "887ce08653a10d5025284ba2373baeb98c34e0a20be2eae4ff8dc79b5e8a08dc",
+    "kind": "rcc",
+    "preparation_class": "local",
+    "provider_context_bound": true,
+    "provider_reference": "http://127.0.0.1:42589",
+    "rcc_version": "v18.19.3",
+    "source_generation": "379f6992cf1d02d88583e376965d4c747245cae3ac41027b7ab21fc64c47ccb0",
+    "source_hash": "379f6992cf1d02d88583e376965d4c747245cae3ac41027b7ab21fc64c47ccb0"
+  },
+  "first_run": {
+    "error_message": null,
+    "id": "run-000-fd449e38-87ba-4b25-a786-668c45d6fdaf",
+    "result": "last-good",
+    "status": 2
+  },
+  "initial_runtime": {
+    "artifact_digest": "sha256:e117d84c7984b6aa6fae23ce37b1339d362ec4510f7f3bc95473c6017489aa82",
+    "contract_version": "rcc-runtime/v1",
+    "environment_fingerprint": "887ce08653a10d5025284ba2373baeb98c34e0a20be2eae4ff8dc79b5e8a08dc",
+    "kind": "rcc",
+    "preparation_class": "local",
+    "provider_context_bound": true,
+    "provider_reference": "http://127.0.0.1:42589",
+    "rcc_version": "v18.19.3",
+    "source_generation": "379f6992cf1d02d88583e376965d4c747245cae3ac41027b7ab21fc64c47ccb0",
+    "source_hash": "379f6992cf1d02d88583e376965d4c747245cae3ac41027b7ab21fc64c47ccb0"
+  },
+  "provider": "http://127.0.0.1:42589",
+  "provider_ops_after_failure": [
+    {
+      "phase": "publish",
+      "pid": 2903,
+      "provider": "http://127.0.0.1:42589"
+    },
+    {
+      "artifact": "sha256:e117d84c7984b6aa6fae23ce37b1339d362ec4510f7f3bc95473c6017489aa82",
+      "phase": "acquire",
+      "pid": 3121,
+      "provider": "http://127.0.0.1:42589"
+    }
+  ],
+  "provider_ops_after_recovery": [
+    {
+      "phase": "publish",
+      "pid": 2903,
+      "provider": "http://127.0.0.1:42589"
+    },
+    {
+      "artifact": "sha256:e117d84c7984b6aa6fae23ce37b1339d362ec4510f7f3bc95473c6017489aa82",
+      "phase": "acquire",
+      "pid": 3121,
+      "provider": "http://127.0.0.1:42589"
+    }
+  ],
+  "provider_ops_before_failure": [
+    {
+      "phase": "publish",
+      "pid": 2903,
+      "provider": "http://127.0.0.1:42589"
+    },
+    {
+      "artifact": "sha256:e117d84c7984b6aa6fae23ce37b1339d362ec4510f7f3bc95473c6017489aa82",
+      "phase": "acquire",
+      "pid": 3121,
+      "provider": "http://127.0.0.1:42589"
+    }
+  ],
+  "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+  "rcc_trace": [
+    {
+      "phase": [],
+      "pid": 2897
+    },
+    {
+      "phase": [
+        "publish"
+      ],
+      "pid": 2903
+    },
+    {
+      "phase": [
+        "acquire"
+      ],
+      "pid": 3121
+    },
+    {
+      "phase": [],
+      "pid": 3153
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 3159
+    },
+    {
+      "phase": [],
+      "pid": 3175
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 3181
+    },
+    {
+      "phase": [],
+      "pid": 3205
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 3212
+    },
+    {
+      "phase": [],
+      "pid": 3234
+    },
+    {
+      "phase": [],
+      "pid": 3240
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 3246
+    },
+    {
+      "phase": [],
+      "pid": 3261
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 3267
+    },
+    {
+      "phase": [],
+      "pid": 3288
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 3295
+    },
+    {
+      "phase": [],
+      "pid": 3322
+    },
+    {
+      "phase": [],
+      "pid": 3328
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 3334
+    },
+    {
+      "phase": [],
+      "pid": 3349
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 3355
+    },
+    {
+      "phase": [],
+      "pid": 3371
+    },
+    {
+      "phase": [
+        "exec"
+      ],
+      "pid": 3378
+    }
+  ],
+  "rcc_version": "v18.19.3",
+  "recovered_run": {
+    "error_message": null,
+    "id": "run-002-a701a4d6-5c17-45ef-a4f8-fa29ee02fc88",
+    "result": "recovered",
+    "status": 2
+  },
+  "recovered_runtime": {
+    "artifact_digest": "sha256:e117d84c7984b6aa6fae23ce37b1339d362ec4510f7f3bc95473c6017489aa82",
+    "contract_version": "rcc-runtime/v1",
+    "environment_fingerprint": "887ce08653a10d5025284ba2373baeb98c34e0a20be2eae4ff8dc79b5e8a08dc",
+    "kind": "rcc",
+    "preparation_class": "source-reuse",
+    "provider_context_bound": true,
+    "provider_reference": "http://127.0.0.1:42589",
+    "rcc_version": "v18.19.3",
+    "source_generation": "a5eba7155571bf36dad29e663e9e99c53f59e7af65f3080966fb90f2723cb6a9",
+    "source_hash": "a5eba7155571bf36dad29e663e9e99c53f59e7af65f3080966fb90f2723cb6a9"
+  },
+  "run_ids": [
+    "run-000-fd449e38-87ba-4b25-a786-668c45d6fdaf",
+    "run-001-4941895e-678a-48d3-a792-c9f1da8cef9d",
+    "run-002-a701a4d6-5c17-45ef-a4f8-fa29ee02fc88"
+  ],
+  "second_run": {
+    "error_message": null,
+    "id": "run-001-4941895e-678a-48d3-a792-c9f1da8cef9d",
+    "result": "last-good",
+    "status": 2
+  },
+  "shutdown_http_status": 200,
+  "source": {
+    "commit": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+    "dirty_paths": [],
+    "module_origins": {
+      "action_package_handler": "/home/runner/work/actions/actions/candidate/action_server/src/actions/server/_action_package_handler.py",
+      "actions_import": "/home/runner/work/actions/actions/candidate/action_server/src/actions/server/_actions_import.py",
+      "runtime_adapter": "/home/runner/work/actions/actions/candidate/action_server/src/actions/server/_rcc_runtime_adapter.py"
+    },
+    "parent_delta_file_sha256": {
+      "docs/skills/repository-operations.md": "ce5ac0e3d47449c5835eb92f428bd6efb0b095ffbf2399fd39cf92e334da04aa"
+    },
+    "runtime_module_sha256": {
+      "action_package_handler": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64",
+      "actions_import": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3",
+      "runtime_adapter": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a"
+    },
+    "tree": "e05141d122b7245b626c5d0389cf9b653c8ad300"
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,73 @@
+{
+  "admission": {
+    "issues": [],
+    "passed": true
+  },
+  "published_details": {
+    "artifact_digest": "sha256:3f6f70055487190cfabd6be3f0c60b32eae88ec93baf0027e07e8771b30d3322",
+    "provider_is_loopback": true,
+    "raw_json_sha256": "6413cf0ed895ed980edb6a5138558efccb6e145a3c42d1dad3b84f71d1136a30",
+    "single_invocation": true,
+    "specification_digest": "sha256:5e7dcfdb9f4ca5cc19ca6b2e93cad75a3fd60f598d4a71fd10451bffc1ddc56f"
+  },
+  "rcc": {
+    "action_server_default_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "action_server_default_version": "v18.19.3",
+    "receipt_matches_binary": true,
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "v18.19.3"
+  },
+  "runner": {
+    "libc_name": "glibc",
+    "libc_version": "2.39",
+    "meets_artifact_minimum": true
+  },
+  "schema_version": 1,
+  "source": {
+    "candidate_sha": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+    "candidate_tree": "e05141d122b7245b626c5d0389cf9b653c8ad300",
+    "files_sha256": {
+      "acceptance_helper": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+      "action_package_handler": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64",
+      "actions_import": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3",
+      "rollback_test": "60d81fabaa2ba0446ff888109e050c883ee944553794636fd527a6fe27d4691b",
+      "runtime_adapter": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a",
+      "source_manifest": "4fb8d376d1b4aa06d301dedaeee67a2916561c7d10b8f1dadd657870b37b2b43",
+      "source_read": "4ae8cbe57aa5c924585f4257a1be1700aa49baa63d6150efba20935045f7a8a5",
+      "source_staging": "fda3f2c045414a9cae21cc0765a3eb7c72db2ddd2f5d74e567a04a0513baf620",
+      "staged_consumer_test": "0edc5d092dba9415f552ee1f666edac8f3ce9e833bea1ef73f8370ed2d446e6a"
+    },
+    "receipt_source_matches_candidate": true,
+    "runtime_module_hashes_match_candidate": true,
+    "runtime_module_origins_match_candidate": true,
+    "workflow_control_sha": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+    "workflow_control_tree": "6e8af78b3386b870191d559535519f90bc4b0b8a"
+  },
+  "test": {
+    "exit_code": 0,
+    "expected_test_identity_matches": true,
+    "failed_case_names": [],
+    "forced_cleanup_returncode_observed": true,
+    "forced_stop_used": false,
+    "junit": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 3
+    },
+    "junit_counts_match_testcases": true,
+    "managed_worker_origins_confirmed": true,
+    "natural_exit_status": "PASS",
+    "natural_return_code_before_cleanup": 1,
+    "provider_operation_count": 2,
+    "provider_operations_unchanged": true,
+    "published_details_receipt_status": "PASS",
+    "published_details_receipt_valid": true,
+    "receipt_status": "PASS",
+    "remaining_owned_descendant_count": 0,
+    "run_results_match": true,
+    "staged_action_sha256_matches": true,
+    "staged_consumer_receipt_status": "PASS",
+    "staged_consumer_receipt_valid": true
+  }
+}

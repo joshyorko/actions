@@ -1,0 +1,77 @@
+{
+  "accepted_target": "fbde0d3a248c47c9964851355f96575c89a87329",
+  "actual_run_executed": false,
+  "added_leaves": [
+    "action_server/scripts/frozen_wrapper_acceptance_plugin.py",
+    "action_server/scripts/verify_frozen_catalog_harness.py",
+    "action_server/scripts/verify_frozen_catalog_wrapper_artifact.py",
+    "action_server/tests/contract_tests/test_frozen_wrapper_acceptance_plugin.py",
+    "action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py",
+    "action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py",
+    "action_server/tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py",
+    "developer/tests/test_frozen_wrapper_metadata.py",
+    "docs/program/evidence/runtime-frozen-current-source-20261011/README.md",
+    "docs/program/evidence/runtime-frozen-current-source-20261011/build-log-evidence.json",
+    "docs/program/evidence/runtime-frozen-current-source-20261011/byte-source-review.json",
+    "docs/program/evidence/runtime-frozen-current-source-20261011/current-control-independent-review.json",
+    "docs/program/evidence/runtime-frozen-current-source-20261011/inspect_archives.py",
+    "docs/program/evidence/runtime-frozen-current-source-20261011/manifest.json",
+    "docs/program/evidence/runtime-frozen-current-source-20261011/producer-input-inventory.json",
+    "docs/program/evidence/runtime-frozen-current-source-20261011/selected-test-inventory.json"
+  ],
+  "branch_or_worktree_updated": false,
+  "cache_fixture": {
+    "equals_existing_305_bytes": true,
+    "only_target_delta": true,
+    "path": "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+    "sha256": "e0ee387250e42b40b4295d74a9cfe6fdc0e8b1e4d9af52e78cf8bb390bdd8979",
+    "union_blob": "1e9d70b1aa0ed3bff37a46904a1f8ceeee6438cb"
+  },
+  "candidate_head": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+  "changed_original_leaves": [
+    ".github/workflows/_gen_workflows.py",
+    ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+    "action_server/docs/DEVELOPMENT.md",
+    "action_server/scripts/verify_frozen_catalog_artifact.py",
+    "action_server/scripts/verify_frozen_catalog_junit.py",
+    "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "full_producer_compatibility": "Every original producer leaf except seven enumerated docs/CI/acceptance-harness leaves is byte/mode identical. All Runtime/Core/Helper source, manifests/locks, frontend, Go wrapper, common/build-common and production build files match; 16 added leaves are acceptance control/tests/evidence, no producer source addition.",
+  "inventory": {
+    "path": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/simulated-union-full-leaf-inventory.json",
+    "sha256": "2f24cb2f348d35a9af46df67e004b1398679c236e6544dc0e23583568dc69d73"
+  },
+  "leaf_counts": {
+    "candidate": 1385,
+    "producer": 1390,
+    "target": 1406,
+    "union": 1406
+  },
+  "merge_conflicts": [],
+  "native_producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "native_producer_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "native_reuse_admission": "Source compatibility established for simulated tree only. After real ordinary merge and test-only follow-up commit, remeasure exact SHA/tree/ordered parents and all producer input bodies/modes before native reuse. Retain original native manifest source92498; no artifact relabelling.",
+  "new_commit_head": null,
+  "novel_leaf_bytes": [],
+  "original_producer_leaf_count": 1390,
+  "original_producer_unchanged_leaf_count": 1383,
+  "parent_leaf_deletions": [],
+  "phase": "READ_ONLY_MERGE_SIMULATION_NOT_COMMITTED",
+  "selected_test_delta": [],
+  "selected_test_entries": 5,
+  "simulated_ordered_parents": [
+    "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+    "fbde0d3a248c47c9964851355f96575c89a87329"
+  ],
+  "simulated_tree": "d7d21a0f25c69d28728231b6e238b85d93d0cffe",
+  "source_mutated": false,
+  "strict_inventory": {
+    "path": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/simulated-union-producer-and-selected-inventory.json",
+    "sha256": "0ca58af2be51f25d3c76077ce3fa56d170b3f1417a8fce416edb175b3ef6a9f8"
+  },
+  "strict_producer_delta": [],
+  "strict_producer_entries": 268,
+  "tip_only_gap_correction": "Previous 266/268 and four/five comparison describes ca3 versus producer only. Ordinary union resolves all eight Runtime differences and the absent selected test from accepted target; no implementation or manual conflict resolution added.",
+  "upstream_disposition": "none"
+}

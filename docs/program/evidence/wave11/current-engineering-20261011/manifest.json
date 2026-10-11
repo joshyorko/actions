@@ -248,5 +248,200 @@
     "source": "/workspace/engineering/pr282-windows-owned/hosted-linux-admission-diagnostic-proposal.json",
     "bytes": 2600,
     "sha256": "ace0991fbdd664142c077a4e8097803e7afdabece5edebf338f5115693ce6052"
+  },
+  "pr310-original-platform-independent-review.json": {
+    "source": "/workspace/engineering/pr310-hosted-platform-review/independent-platform-actual-review.json",
+    "bytes": 15850,
+    "sha256": "c600dfc1cea6208de8698b933ee0597b1c874a9ac8de9dec1bd2779fa5a623d7"
+  },
+  "pr310-platform-guide-proposed.patch": {
+    "source": "/workspace/engineering/pr310-hosted-platform-review/canonical-work-items-platform-proposed.patch",
+    "bytes": 2945,
+    "sha256": "57fe12e38b696e32de01046b1497e34f7eab3072269fd1cf592d010c55ee7cbe"
+  },
+  "pr310-platform-gate-clarification.patch": {
+    "source": "/workspace/engineering/pr310-hosted-platform-review/canonical-work-items-gate-subject-clarification-proposed.patch",
+    "bytes": 997,
+    "sha256": "5e38c68583aa8cac5700a0ad0fe42dc425fd8ce0fb252d8cd76b694638061a7e"
+  },
+  "current-declared-job-inventory-proposed.patch": {
+    "source": "/workspace/engineering/current-admission-review/canonical-declared-job-inventory-proposed.patch",
+    "bytes": 1354,
+    "sha256": "47c0c6cdc74d1c2a4604e6080720fa109ec36fcb51eb076e0545346a49e82a7e"
+  },
+  "pr302-current-three-case-independent-review.json": {
+    "source": "/workspace/engineering/pr302-current-S-C-actual-review/independent-current-three-case-review.json",
+    "bytes": 8159,
+    "sha256": "b8acf687480874184fce59bdb43be123ab5820e664aa9fa98a49905a55c039ba"
+  },
+  "pr282-failure-diagnostic-source.json": {
+    "source": "/workspace/engineering/pr282-diagnostics-receipt.json",
+    "bytes": 8818,
+    "sha256": "fd0c217fe62a62efa842bf56a50c624d6b4d0005f9787693d61f9686bfa405c8"
+  },
+  "pr282-failure-diagnostic-independent-review.json": {
+    "source": "/workspace/engineering/pr282-diagnostic-independent-review/independent-source-diagnostic-review.json",
+    "bytes": 3501,
+    "sha256": "86468285182089d573ee0684864a3cb143e5752a1ae8f1424c7d89117a00b28d"
+  },
+  "pr311-original-windows-independent-review.json": {
+    "source": "/workspace/engineering/pr311-original-windows-independent-review/original-hosted-diagnostic-review.json",
+    "bytes": 18731,
+    "sha256": "81b819b9eb7a4d25bb46e0517b27bc303f78b80c32c7df89a6da4198967afe95"
+  },
+  "pr311-original-windows-guide-proposal.md": {
+    "source": "/workspace/engineering/pr311-original-windows-independent-review/canonical-original-windows-diagnostic-proposal.md",
+    "bytes": 2716,
+    "sha256": "972f870be11e6a0bf45adf9f283c08ecea4dabf6c0f017b2854ecf43e519b753"
+  },
+  "pr307-oauth-guard-source.json": {
+    "source": "/workspace/engineering/pr307-guard-owned/successor-receipt.json",
+    "bytes": 12830,
+    "sha256": "dc101ebfe12f201cb0a945e3f3c070bf41684289a4df607a8a3416ba7c42fe81"
+  },
+  "pr307-oauth-guard-independent-review.json": {
+    "source": "/workspace/engineering/pr307-independent-review/frozen-source-control-review.json",
+    "bytes": 11790,
+    "sha256": "48d03bc4256c13ceb6fee1cf81e86bd56e6fd2af2903baf99444d32101693229"
+  },
+  "pr307-controlled-gateway.json": {
+    "source": "/workspace/engineering/pr307-guard-owned/controlled-gateway-receipt.json",
+    "bytes": 2909,
+    "sha256": "4ae7bd2f9ce66ba94cc1424b93347627640fcb67da8324a6b5c68a9af9c1feee"
+  },
+  "pr307-controlled-gateway-child-identities.jsonl": {
+    "source": "/workspace/engineering/pr307-guard-owned/gateway-children.jsonl",
+    "bytes": 940,
+    "sha256": "a45d3544ba1ce61160a3c63a5135eb67aadfec2b605677dffbd40265c179ead0"
+  },
+  "pr307-guard-preservation.json": {
+    "source": "/workspace/engineering/pr307-guard-owned/preservation-receipt.json",
+    "bytes": 553,
+    "sha256": "974d586cf72756fae92ad4fabf647895a121378f138c09a32c86690f96bf2658"
+  },
+  "pr307-canonical-exact-delta.patch": {
+    "source": "/workspace/engineering/pr307-independent-review/canonical-documentation-exact-delta.patch",
+    "bytes": 6915,
+    "sha256": "1f09c93bb40c75b87cb4576a3fc251b3b999d3eaeeeb96581df0cb5f24bde044"
+  },
+  "pr305-union-source-admission.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/simulated-union-source-admission.json",
+    "bytes": 4575,
+    "sha256": "49a1f60bc386e9cae818f9d1fbc5003ab5d1714e4caededef82fedbbcb10df3e"
+  },
+  "pr305-bounded-source-and-command-proposal.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/bounded-source-and-command-proposal.json",
+    "bytes": 13010,
+    "sha256": "d282a4ac92185b3149d8820d8b0930030481c66514fbdbc012908c713b3cf716"
+  },
+  "pr311-original-windows-34ec97696df8d90c-1.json": {
+    "source": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/34ec97696df8d90c-1.json",
+    "bytes": 1578,
+    "sha256": "83e4f7193a1348dec1b41086766c41db0db21f42932d663f1a3e19d13eeba1fb"
+  },
+  "pr311-original-windows-34ec97696df8d90c-2.json": {
+    "source": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/34ec97696df8d90c-2.json",
+    "bytes": 1913,
+    "sha256": "fbbed8206f4f28d14c21a975fa4077fc1645852f8bc1bf4efbdcf53616e46a56"
+  },
+  "pr311-original-windows-34ec97696df8d90c-3.json": {
+    "source": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/34ec97696df8d90c-3.json",
+    "bytes": 1912,
+    "sha256": "22ffb25652c68fff3f8d66ff4d0b348ab293fa01927597a0462a243e1c582ef7"
+  },
+  "pr311-original-windows-34ec97696df8d90c-4.json": {
+    "source": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/34ec97696df8d90c-4.json",
+    "bytes": 330,
+    "sha256": "b57a6dd931c9f1c79dfd0c91c854c01bc71ea57bc9066c46fb2f595daa8891b7"
+  },
+  "pr311-original-windows-7d0f2e912f58600f-1.json": {
+    "source": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/7d0f2e912f58600f-1.json",
+    "bytes": 1559,
+    "sha256": "ce067a9e4dd7860184a5c9448685110709343c6f6702fcd49c3a2948509108b9"
+  },
+  "pr311-original-windows-7d0f2e912f58600f-2.json": {
+    "source": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/7d0f2e912f58600f-2.json",
+    "bytes": 1917,
+    "sha256": "18c9d44bcf00cb36879fdd2c2156b8090177a18e74c87c0de50309cc0478b910"
+  },
+  "pr311-original-windows-7d0f2e912f58600f-3.json": {
+    "source": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/7d0f2e912f58600f-3.json",
+    "bytes": 1917,
+    "sha256": "e12f9f76d47c8e60edac807f3d7bbfa0d685ebce7cfdfac1d45f26435e38bcba"
+  },
+  "pr311-original-windows-7d0f2e912f58600f-4.json": {
+    "source": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/7d0f2e912f58600f-4.json",
+    "bytes": 330,
+    "sha256": "b57a6dd931c9f1c79dfd0c91c854c01bc71ea57bc9066c46fb2f595daa8891b7"
+  },
+  "pr311-original-windows-authenticated-run.json": {
+    "source": "/workspace/engineering/pr311-original-windows-diagnostics-owned/authenticated-run.json",
+    "bytes": 261,
+    "sha256": "c2a2512c8e8da6aa696047faf47cb9e7b04bd0ead739079e092305b545763744"
+  },
+  "pr311-original-windows-authenticated-job.json": {
+    "source": "/workspace/engineering/pr311-original-windows-diagnostics-owned/authenticated-job.json",
+    "bytes": 3818,
+    "sha256": "f9e60686551ace02107a1118e4147d1a8ea1ab61f761ef5997291db4dbdf797d"
+  },
+  "pr311-original-windows-authenticated-control.json": {
+    "source": "/workspace/engineering/pr311-original-windows-diagnostics-owned/authenticated-control.json",
+    "bytes": 225,
+    "sha256": "a47a84e2dc3aad42ef729bc788c3fa745284a9615213ad74a3df3ec936a318ae"
+  },
+  "pr311-original-windows-authenticated-artifact.json": {
+    "source": "/workspace/engineering/pr311-original-windows-diagnostics-owned/authenticated-artifact.json",
+    "bytes": 250,
+    "sha256": "ce91f002ae96dee0d448af6f6107788b631fd77b12a57333b1df2cfaa0b0eca3"
+  },
+  "pr302-current-actual-acceptance-summary.json": {
+    "source": "/workspace/engineering/pr302-current-S-C-actual-review/original-members/rcc-provider-rollback-evidence/acceptance-summary.json",
+    "bytes": 3067,
+    "sha256": "47a5a26178a405164611280c319278a865db1b8f1cf7af80fbbb137841b97f92"
+  },
+  "pr302-current-actual-acceptance-summary.log": {
+    "source": "/workspace/engineering/pr302-current-S-C-actual-review/original-members/rcc-provider-rollback-evidence/acceptance-summary.log",
+    "bytes": 686,
+    "sha256": "40e206ae7d74417ce430e121ceaf6f5638ac903e430d532ee02025434b45d734"
+  },
+  "pr302-current-actual-lifecycle-receipt.json": {
+    "source": "/workspace/engineering/pr302-current-S-C-actual-review/original-members/rcc-provider-rollback-evidence/lifecycle-receipt.json",
+    "bytes": 7603,
+    "sha256": "cc86ef7939d9f243e021a9a0676e97a0849b28b556b78fc07a0b736bec8ede7b"
+  },
+  "pr302-current-actual-lifecycle-summary.json": {
+    "source": "/workspace/engineering/pr302-current-S-C-actual-review/original-members/rcc-provider-rollback-evidence/lifecycle-summary.json",
+    "bytes": 1221,
+    "sha256": "2f2230b71760e46884a263f5c03524f100275b6be95aad6bfde1ba8ce2ce9020"
+  },
+  "pr302-current-actual-published-details-receipt.json": {
+    "source": "/workspace/engineering/pr302-current-S-C-actual-review/original-members/rcc-provider-rollback-evidence/published-details-receipt.json",
+    "bytes": 1483,
+    "sha256": "a3e4b61ca3fcf1043ca50770caabfc8b31ff85b4de22a6e848e480d84f4b4052"
+  },
+  "pr302-current-actual-staged-consumer-receipt.json": {
+    "source": "/workspace/engineering/pr302-current-S-C-actual-review/original-members/rcc-provider-rollback-evidence/staged-consumer-receipt.json",
+    "bytes": 2393,
+    "sha256": "7f0a0c7c86052d94beb28fdebb493ca86c4779326c74353894e9ba8ad2cfe092"
+  },
+  "pr302-current-actual-rcc-provider-rollback-junit.xml": {
+    "source": "/workspace/engineering/pr302-current-S-C-actual-review/original-members/rcc-provider-rollback-junit.xml",
+    "bytes": 752,
+    "sha256": "01dd302d04c21569e427a3eb9a380b926be30904782bc112ad28c4b3b7836724"
+  },
+  "pr305-public-source-checkpoint.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/frozen-source-checkpoint-receipt.json",
+    "bytes": 7011,
+    "sha256": "d68e265a2bbbb28cc54cfed511d2e0bbc3cdaeb71a93ac08ef1d7c74aeaae60e"
+  },
+  "pr305-public-source-independent-review.json": {
+    "source": "/workspace/engineering/pr305-independent-public-review/independent-source-review.json",
+    "bytes": 3750,
+    "sha256": "b1737888384c60a1c6694e0c2567eac85515cf775ba49425f5c039ff6efaa676"
+  },
+  "current-actual-evidence-independent-prepush-review.json": {
+    "source": "/workspace/engineering/campaign-checkpoint-independent-review/current-actual-evidence-batch-prepush-review.json",
+    "bytes": 34528,
+    "sha256": "5cead67f2918b3b5e6c6411cfeb9476618265ce0f6e400a9dd92b97bef9ddd0c"
   }
 }

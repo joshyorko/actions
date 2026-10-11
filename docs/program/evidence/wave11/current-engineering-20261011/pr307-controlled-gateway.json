@@ -1,0 +1,71 @@
+{
+  "source": {
+    "head": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+    "tree": "638b960a3700bbbba3026874efb158fa6e95117f",
+    "parents": [
+      "0df315284ec7ddc5d8be47c07874522b52d7e9b4"
+    ],
+    "guard_file_sha256": {
+      "action_server/tasks.py": "3fa7419c346fe9494bdbe89a7f245cf72287832bef36ee73ea4bd0039ef477d6",
+      "action_server/scripts/build_oauth2_config.py": "f6dbc67610fefd7ec69e8972b5385506e71559ca2ff96cf41749ea07733ff4a8"
+    }
+  },
+  "outer_yaml_forbidden": true,
+  "outer_interpreter": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+  "actual_invoke_task": true,
+  "actual_package_poetry_helper": true,
+  "source_acquisition": "mock gh on owned PATH only; no network",
+  "structural_fixture_is_not_release_content": true,
+  "command": [
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+    "/workspace/engineering/pr307-guard-owned/outer_invoke_no_yaml.py",
+    "/workspace/engineering/pr307/action_server"
+  ],
+  "cases": [
+    {
+      "case": "valid_structural_pair",
+      "exit_code": 0,
+      "module_sha256": "793712026d4dddb651f091034e4609d433b6aa8931a9cbcbe776ac949e94164f",
+      "private_cause_withheld": true
+    },
+    {
+      "case": "second_acquisition_failure",
+      "exit_code": 1,
+      "module_sha256": "793712026d4dddb651f091034e4609d433b6aa8931a9cbcbe776ac949e94164f",
+      "private_cause_withheld": true
+    }
+  ],
+  "helper_processes": [
+    {
+      "input": "actions-oauth-config.yaml",
+      "helper_pid": 47663,
+      "helper_argv0": "/workspace/engineering/pr307/action_server/.venv/bin/python",
+      "helper_exe": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12"
+    },
+    {
+      "input": "oauth-config.yaml",
+      "helper_pid": 47663,
+      "helper_argv0": "/workspace/engineering/pr307/action_server/.venv/bin/python",
+      "helper_exe": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12"
+    },
+    {
+      "input": "actions-oauth-config.yaml",
+      "helper_pid": 47674,
+      "helper_argv0": "/workspace/engineering/pr307/action_server/.venv/bin/python",
+      "helper_exe": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12"
+    },
+    {
+      "input": "oauth-config.yaml",
+      "helper_pid": 47674,
+      "helper_argv0": "/workspace/engineering/pr307/action_server/.venv/bin/python",
+      "helper_exe": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12"
+    }
+  ],
+  "package_yaml": {
+    "python": "/workspace/engineering/pr307/action_server/.venv/bin/python",
+    "prefix": "/workspace/engineering/pr307/action_server/.venv",
+    "yaml": "6.0.3",
+    "yaml_origin": "/workspace/engineering/pr307/action_server/.venv/lib/python3.12/site-packages/yaml/__init__.py"
+  },
+  "generated_module_restored_in_finally": true
+}

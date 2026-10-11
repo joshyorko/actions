@@ -1,0 +1,447 @@
+{
+  "verdict": "GO_ACCEPT_ORIGINAL_BOUNDED_DIAGNOSTIC_EVIDENCE_ONLY; HOLD_TIMEOUT_FIX_CLEANUP_COMPLETENESS_AND_MERGE",
+  "scope": "read-only independent original 1151 hosted Windows observation; no rerun, cancel, source mutation or publication",
+  "control": {
+    "sha": "c4794ac6d8312866a2dac92b52185fca912046bb",
+    "tree": "1b742a1bac55d9dee96a1f70bbf2ad0735edf356",
+    "parents": [
+      "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+      "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9"
+    ]
+  },
+  "original_head": "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9",
+  "authenticated_github": [
+    {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/authenticated-run.json",
+      "size": 261,
+      "sha256": "c2a2512c8e8da6aa696047faf47cb9e7b04bd0ead739079e092305b545763744"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/authenticated-job.json",
+      "size": 3818,
+      "sha256": "f9e60686551ace02107a1118e4147d1a8ea1ab61f761ef5997291db4dbdf797d"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/authenticated-control.json",
+      "size": 225,
+      "sha256": "a47a84e2dc3aad42ef729bc788c3fa745284a9615213ad74a3df3ec936a318ae"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/authenticated-artifact.json",
+      "size": 250,
+      "sha256": "ce91f002ae96dee0d448af6f6107788b631fd77b12a57333b1df2cfaa0b0eca3"
+    }
+  ],
+  "original_zip": {
+    "path": "/workspace/attachments/b854d2e5-b5fc-4b18-ab27-9b7f64879752/pr311-original-1151-windows-startup-diagnostics.zip",
+    "size": 6083,
+    "sha256": "0115d2e19118f7946734f14952338d97e7982b43d5d79835c75e1179b41e793d"
+  },
+  "original_decoded_job_log": {
+    "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/job114376917743-original-decoded.log",
+    "size": 762594,
+    "sha256": "8e1e283aec983b2784ef5062685ae3c4877a9c362cca88b883c4add6ebfd3d10"
+  },
+  "original_raw_json": [
+    {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/7d0f2e912f58600f-1.json",
+      "size": 1559,
+      "sha256": "ce067a9e4dd7860184a5c9448685110709343c6f6702fcd49c3a2948509108b9"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/7d0f2e912f58600f-2.json",
+      "size": 1917,
+      "sha256": "18c9d44bcf00cb36879fdd2c2156b8090177a18e74c87c0de50309cc0478b910"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/7d0f2e912f58600f-3.json",
+      "size": 1917,
+      "sha256": "e12f9f76d47c8e60edac807f3d7bbfa0d685ebce7cfdfac1d45f26435e38bcba"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/7d0f2e912f58600f-4.json",
+      "size": 330,
+      "sha256": "b57a6dd931c9f1c79dfd0c91c854c01bc71ea57bc9066c46fb2f595daa8891b7"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/34ec97696df8d90c-1.json",
+      "size": 1578,
+      "sha256": "83e4f7193a1348dec1b41086766c41db0db21f42932d663f1a3e19d13eeba1fb"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/34ec97696df8d90c-2.json",
+      "size": 1913,
+      "sha256": "fbbed8206f4f28d14c21a975fa4077fc1645852f8bc1bf4efbdcf53616e46a56"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/34ec97696df8d90c-3.json",
+      "size": 1912,
+      "sha256": "22ffb25652c68fff3f8d66ff4d0b348ab293fa01927597a0462a243e1c582ef7"
+    },
+    {
+      "path": "/workspace/engineering/pr311-original-windows-diagnostics-owned/reports/34ec97696df8d90c-4.json",
+      "size": 330,
+      "sha256": "b57a6dd931c9f1c79dfd0c91c854c01bc71ea57bc9066c46fb2f595daa8891b7"
+    }
+  ],
+  "artifact_bytes_match_safe_extraction": true,
+  "allowlisted_all_actual_fields": true,
+  "source_bindings_windows_checkout_crlf": [
+    {
+      "case": "failed_watched_reload",
+      "path": "src/actions/server/_rcc.py",
+      "git_lf_sha256": "74a0646de66d3bfb5a30339080a37c5dc0f79b2e0ab46b7c16a6c19717e6d41b",
+      "windows_crlf": {
+        "sha256": "36ea643613cd17028160f79e3646f4e48d4b271c94bfaf5ac488bcca60d347da",
+        "size": 17638
+      }
+    },
+    {
+      "case": "failed_watched_reload",
+      "path": "src/actions/server/_robo_utils/process.py",
+      "git_lf_sha256": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+      "windows_crlf": {
+        "sha256": "94c1ebe15ee8e2971da5056858b2c9726e4297a99f3b80cfae17f5b74d2a8721",
+        "size": 14638
+      }
+    },
+    {
+      "case": "failed_watched_reload",
+      "path": "src/actions/server/_selftest.py",
+      "git_lf_sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+      "windows_crlf": {
+        "sha256": "d07e6877c858d8ea51f3b8e4730dbb2014a7ef8b67038971474aa61b65cfb420",
+        "size": 26204
+      }
+    },
+    {
+      "case": "failed_watched_reload",
+      "path": "tests/action_server_tests/fixtures.py",
+      "git_lf_sha256": "2db8403ad100977951a4a07a0585668db493147d7be316e8d60641b7a416a854",
+      "windows_crlf": {
+        "sha256": "7e75dc6b39c6bcd99c24ddd122b180b787780cfe15d97e6f7089518af0272ebd",
+        "size": 13575
+      }
+    },
+    {
+      "case": "failed_watched_reload",
+      "path": "tests/action_server_tests/native_startup_diagnostics.py",
+      "git_lf_sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c",
+      "windows_crlf": {
+        "sha256": "6dfcdf9338978146dc016c181a7c03bdb90207357b15dca6da1e2212f10e3c73",
+        "size": 13345
+      }
+    },
+    {
+      "case": "failed_watched_reload",
+      "path": "tests/action_server_tests/test_cli_live_reload_multi_package.py",
+      "git_lf_sha256": "1fa3944b8984314f7a00aeaf59b0927c5dd2b8995ff52536cd20e8d002feb0a3",
+      "windows_crlf": {
+        "sha256": "a1bc4c378c3afce4c89f54ed1b27784db86ce98b27c03dbc8a0e72049a2eccdd",
+        "size": 15492
+      }
+    },
+    {
+      "case": "failed_watched_reload",
+      "path": "tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+      "git_lf_sha256": "f02184650c57217f4784e3916d75c9d74085f3cf23685a84264bdf1571d86f34",
+      "windows_crlf": {
+        "sha256": "9414dbfd31a49619005dc5417e36e421d60406fd9a3385ab9b6968760eba902f",
+        "size": 14354
+      }
+    },
+    {
+      "case": "catalog_resource_collision",
+      "path": "src/actions/server/_rcc.py",
+      "git_lf_sha256": "74a0646de66d3bfb5a30339080a37c5dc0f79b2e0ab46b7c16a6c19717e6d41b",
+      "windows_crlf": {
+        "sha256": "36ea643613cd17028160f79e3646f4e48d4b271c94bfaf5ac488bcca60d347da",
+        "size": 17638
+      }
+    },
+    {
+      "case": "catalog_resource_collision",
+      "path": "src/actions/server/_robo_utils/process.py",
+      "git_lf_sha256": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+      "windows_crlf": {
+        "sha256": "94c1ebe15ee8e2971da5056858b2c9726e4297a99f3b80cfae17f5b74d2a8721",
+        "size": 14638
+      }
+    },
+    {
+      "case": "catalog_resource_collision",
+      "path": "src/actions/server/_selftest.py",
+      "git_lf_sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+      "windows_crlf": {
+        "sha256": "d07e6877c858d8ea51f3b8e4730dbb2014a7ef8b67038971474aa61b65cfb420",
+        "size": 26204
+      }
+    },
+    {
+      "case": "catalog_resource_collision",
+      "path": "tests/action_server_tests/fixtures.py",
+      "git_lf_sha256": "2db8403ad100977951a4a07a0585668db493147d7be316e8d60641b7a416a854",
+      "windows_crlf": {
+        "sha256": "7e75dc6b39c6bcd99c24ddd122b180b787780cfe15d97e6f7089518af0272ebd",
+        "size": 13575
+      }
+    },
+    {
+      "case": "catalog_resource_collision",
+      "path": "tests/action_server_tests/native_startup_diagnostics.py",
+      "git_lf_sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c",
+      "windows_crlf": {
+        "sha256": "6dfcdf9338978146dc016c181a7c03bdb90207357b15dca6da1e2212f10e3c73",
+        "size": 13345
+      }
+    },
+    {
+      "case": "catalog_resource_collision",
+      "path": "tests/action_server_tests/test_cli_live_reload_multi_package.py",
+      "git_lf_sha256": "1fa3944b8984314f7a00aeaf59b0927c5dd2b8995ff52536cd20e8d002feb0a3",
+      "windows_crlf": {
+        "sha256": "a1bc4c378c3afce4c89f54ed1b27784db86ce98b27c03dbc8a0e72049a2eccdd",
+        "size": 15492
+      }
+    },
+    {
+      "case": "catalog_resource_collision",
+      "path": "tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+      "git_lf_sha256": "f02184650c57217f4784e3916d75c9d74085f3cf23685a84264bdf1571d86f34",
+      "windows_crlf": {
+        "sha256": "9414dbfd31a49619005dc5417e36e421d60406fd9a3385ab9b6968760eba902f",
+        "size": 14354
+      }
+    }
+  ],
+  "actual_integration_counters": {
+    "failed": 6,
+    "passed": 125,
+    "skipped": 18,
+    "deselected": 1130
+  },
+  "prior_issue_two_failures_is_historical_not_current_run_census": true,
+  "failure_primary_phases": [
+    {
+      "node": "action_server_tests\\test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+      "primary_phase": "first native start; ready-port wait reaches existing 90-second deadline",
+      "semantic_reload_or_drain_assertions_reached": false,
+      "raw_log_lines_1_based": [
+        4218,
+        4630
+      ],
+      "startup_cleanup_incomplete_note": true
+    },
+    {
+      "node": "action_server_tests\\test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+      "primary_phase": "first native start; ready-port wait reaches existing 90-second deadline",
+      "semantic_reload_or_drain_assertions_reached": false,
+      "raw_log_lines_1_based": [
+        4641,
+        5015
+      ],
+      "startup_cleanup_incomplete_note": true
+    },
+    {
+      "node": "action_server_tests\\test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+      "primary_phase": "first native start; ready-port wait reaches existing 90-second deadline",
+      "semantic_reload_or_drain_assertions_reached": false,
+      "raw_log_lines_1_based": [
+        5021,
+        5400
+      ],
+      "startup_cleanup_incomplete_note": true
+    },
+    {
+      "node": "action_server_tests\\test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]",
+      "primary_phase": "first native start; ready-port wait reaches existing 90-second deadline",
+      "semantic_reload_or_drain_assertions_reached": false,
+      "raw_log_lines_1_based": [
+        5411,
+        5785
+      ],
+      "startup_cleanup_incomplete_note": true
+    },
+    {
+      "node": "action_server_tests\\test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart",
+      "primary_phase": "first native start; ready-port wait reaches existing 90-second deadline",
+      "semantic_reload_or_drain_assertions_reached": false,
+      "raw_log_lines_1_based": [
+        5810,
+        6140
+      ],
+      "startup_cleanup_incomplete_note": true
+    },
+    {
+      "node": "action_server_tests\\test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot",
+      "primary_phase": "first native start; ready-port wait reaches existing 90-second deadline",
+      "semantic_reload_or_drain_assertions_reached": false,
+      "raw_log_lines_1_based": [
+        6164,
+        6550
+      ],
+      "startup_cleanup_incomplete_note": false
+    }
+  ],
+  "instrumented_case_count": 2,
+  "sample_findings": [
+    {
+      "case": "failed_watched_reload",
+      "nodeid": "tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+      "sample_elapsed_seconds": [
+        80.063,
+        88.031
+      ],
+      "interval_seconds": 7.9680000000000035,
+      "process_count": 3,
+      "measured_process_name_counts": "unavailable: names are not emitted",
+      "identity_and_parent_links_stable": true,
+      "deltas": [
+        {
+          "position": 0,
+          "command_operation": "unavailable",
+          "cpu_seconds_delta": 0.0,
+          "read_bytes_delta": 0,
+          "write_bytes_delta": 0,
+          "handles_delta": 0
+        },
+        {
+          "position": 1,
+          "command_operation": "unavailable",
+          "cpu_seconds_delta": 0.0,
+          "read_bytes_delta": 0,
+          "write_bytes_delta": 0,
+          "handles_delta": 0
+        },
+        {
+          "position": 2,
+          "command_operation": "holotree variables",
+          "cpu_seconds_delta": 3.9375,
+          "read_bytes_delta": 63794795,
+          "write_bytes_delta": 162976242,
+          "handles_delta": -1
+        }
+      ],
+      "final_observation": {
+        "after_start_returned": {
+          "host_readers_alive": [
+            false,
+            false
+          ],
+          "observation": "host_only",
+          "returncode": 15
+        },
+        "exception": "TimeoutError",
+        "native_executable": {
+          "sha256": "45e6de407f12101d04d2d7e4972c563c5dafb48fafa4a2183d1136bc987566f0",
+          "size": 57692160
+        },
+        "outcome": "failed",
+        "sampler_alive": false,
+        "sampler_cancelled": true
+      },
+      "cache_exists_at_both_samples": false
+    },
+    {
+      "case": "catalog_resource_collision",
+      "nodeid": "tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+      "sample_elapsed_seconds": [
+        80.063,
+        88.031
+      ],
+      "interval_seconds": 7.9680000000000035,
+      "process_count": 3,
+      "measured_process_name_counts": "unavailable: names are not emitted",
+      "identity_and_parent_links_stable": true,
+      "deltas": [
+        {
+          "position": 0,
+          "command_operation": "unavailable",
+          "cpu_seconds_delta": 0.0,
+          "read_bytes_delta": 0,
+          "write_bytes_delta": 0,
+          "handles_delta": 0
+        },
+        {
+          "position": 1,
+          "command_operation": "unavailable",
+          "cpu_seconds_delta": 0.0,
+          "read_bytes_delta": 0,
+          "write_bytes_delta": 0,
+          "handles_delta": 0
+        },
+        {
+          "position": 2,
+          "command_operation": "holotree variables",
+          "cpu_seconds_delta": 4.859375,
+          "read_bytes_delta": 61391993,
+          "write_bytes_delta": 156130489,
+          "handles_delta": -1
+        }
+      ],
+      "final_observation": {
+        "after_start_returned": {
+          "host_readers_alive": [
+            false,
+            false
+          ],
+          "observation": "host_only",
+          "returncode": 15
+        },
+        "exception": "TimeoutError",
+        "native_executable": {
+          "sha256": "45e6de407f12101d04d2d7e4972c563c5dafb48fafa4a2183d1136bc987566f0",
+          "size": 57692160
+        },
+        "outcome": "failed",
+        "sampler_alive": false,
+        "sampler_cancelled": true
+      },
+      "cache_exists_at_both_samples": false
+    }
+  ],
+  "rcc_progress": {
+    "uppercase_Progress_occurrences": 0,
+    "lowercase_progress_occurrences": 2,
+    "lowercase_occurrence_scope": [
+      "checkout show-progress option",
+      "git checkout command"
+    ],
+    "raw_rcc_progress_marks_and_intervals": "not available in original decoded log or eight raw diagnostic reports",
+    "reported_total_rcc_duration": "not available; do not reconstruct from observer elapsed time or treat a previous-mark interval as total"
+  },
+  "supported": [
+    "All six fail on first native ready-port wait, before test semantic transitions.",
+    "The two instrumented starts retain stable owned three-process identity/parent chains through both snapshots.",
+    "The holotree variables RCC process accrues CPU and disk read/write between 80 and 88 seconds; wrapper and direct child CPU/IO remain unchanged.",
+    "No observed process forest truncation, unknown RCC argument, home mismatch or measured RCC binary disagreement between the two cases.",
+    "Final host-only observations record wrapper returncode 15 and stopped two host readers and sampler; sampler cancellation is a request event distinct from sampler_alive."
+  ],
+  "contradicted_narrow_hypotheses": [
+    "RCC was completely CPU/IO idle throughout the measured 80-to-88-second intervals.",
+    "The primary failure was a failed-reload/catalog rollback/resource-history/drain semantic assertion.",
+    "An observer timeout replaced the original readiness deadline or primary TimeoutError."
+  ],
+  "remaining_uncertainty": [
+    "Active CPU/IO does not exclude partial blocking, network waits, subprocess pauses, antivirus work or other unobserved mechanisms.",
+    "Process names, RCC internal readers, raw progress marks, descendant state after cleanup, and actual ProcessTreeCleanupResult fields are absent.",
+    "Five primary timeout traces retain an explicit incomplete cleanup note; final host-only rc15/readers/sampler fields cannot erase it or prove all descendants reaped.",
+    "Absent env-info cache at two moments is an observation, not a demonstrated cache defect.",
+    "The sixth uninstrumented drain-start failure has no cleanup note, which alone cannot prove complete cleanup.",
+    "Native executable final hash is measured by the observer but not independently matched to a separately downloaded whole hosted native artifact.",
+    "Broader six-case initial managed-environment startup failures do not establish a #299-specific regression or the cause of cold Windows RCC work."
+  ],
+  "canonical_documentation": {
+    "proposal": "canonical-original-windows-diagnostic-proposal.md",
+    "disposition": "proposed to root for next ordinary durable evidence integration; no repository mutation",
+    "stale_ambiguity": "Earlier two-timeout census applies to earlier run; current original1151 run has six failed initial starts but only two instrumented observations.",
+    "evidence": "original ZIP, all eight JSON hashes, authenticated run/job/control/artifact and full decoded-log hash above",
+    "upstream": "none; no root-cause or upstream defect established",
+    "proposal_binding": {
+      "path": "/workspace/engineering/pr311-original-windows-independent-review/canonical-original-windows-diagnostic-proposal.md",
+      "size": 2716,
+      "sha256": "972f870be11e6a0bf45adf9f283c08ecea4dabf6c0f017b2854ecf43e519b753"
+    }
+  },
+  "private_metadata_and_release_gates": "unchanged HOLD; no whole-runtime release qualification"
+}

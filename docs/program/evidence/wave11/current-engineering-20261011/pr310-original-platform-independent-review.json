@@ -1,0 +1,298 @@
+{
+  "verdict": "GO_BOUNDED_HISTORICAL_MAC_WINDOWS_BROWSER_AND_CANDIDATE_CONSUMER_EVIDENCE",
+  "full208_and_release": "HOLD separate complete issue gates remain open",
+  "current310_merge": "HOLD fresh4b/fbde tested merge CI pending; these artifacts retain original tuple",
+  "workflow_run_id": 38107100997,
+  "attempt": 1,
+  "workflow_head": "f506a04e240feba048bf10e32bccebf591674f9e",
+  "actual_build_and_harness_checkout": "65c0cb832e43f31d908aa3991e6c38d01ff964a9",
+  "actual_tree": "782ff78fa4bfc751b6d02004f665da84fc79c81b",
+  "ordered_parents": [
+    "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+    "f506a04e240feba048bf10e32bccebf591674f9e"
+  ],
+  "commit_provenance": "independent GitHub git/commits/65c0cb... API returns exact tree and ordered parents; same tree as localf506 used for Git blob comparisons",
+  "current_source": "4b2df94d77b1145a9ed586fb924eeb88c478d01c",
+  "source_parity": "all268 producer input Git blobs/modes and five selected frozen-control test inputs identical f506/4b/92498; actual65c tree equalsf506. UI/browser and consumer helper/test blobs unchangedf506/4b. Git HEAD binding is not a clean-source attestation or checkout-byte/line-ending attestation.",
+  "five_selected_inputs": {
+    "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": "100644 blob 0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+    "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": "100644 blob 12ec0f644d96a45824ac110b7f1dafebb4c42ce6",
+    "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py": "100644 blob 7a5a378bf1f8151118034d18b5dfb269f2b24e90",
+    "action_server/tests/action_server_tests/test_cli_multi_package_sync.py": "100644 blob b0919a8b7508954976a8fab631a5fff219c2aeb8",
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": "100644 blob 534e51afbc75b4d3ce473dee37d7ac00d52dbc92"
+  },
+  "artifacts_verification": "all8 original downloaded ZIP byte counts and API SHA256 exact; all original member hashes preserved. In-place TAR exact names/types/modes/internal links/per-file content hashes verified (Mac1176 entries1055 files,Windows1863 entries1718files). Frozen and wrapper SHA exact. Original embedded ZIP bytes range found in wrapper and SHA exact; embedded file set equals frozen inventory including resolved file links; tree/content/source digests exact. No executable run or archive extraction into source worktree.",
+  "archive_evidence": "/workspace/engineering/pr310-hosted-platform-review/original-all-eight-archives-verification.json",
+  "artifact_byte_review": "/workspace/engineering/pr310-hosted-platform-review/independent-artifact-byte-verification.json",
+  "platforms": [
+    {
+      "platform": "macos",
+      "job_id": 114374812118,
+      "job_status": "completed/success",
+      "UI_module_cases_per_runtime": 31,
+      "UI_module_seconds": [
+        32.85,
+        32.84
+      ],
+      "actual_native_browser_case_per_runtime": 1,
+      "browser_stages_per_native_case": 3,
+      "UI_native_receipts": [
+        {
+          "path": "/workspace/engineering/pr310-hosted-platform-review/11689584989/dakota-workitems-ui-frozen-macos-15-38107100997-1.json",
+          "sha256": "357a4535c371637c1da075dbabbe0b7b17ee9680ce5a111b7caaeac47e43b3d3",
+          "kind": "frozen",
+          "stages": [
+            {
+              "stage": "normal",
+              "status": "PASS",
+              "script_exit_code": 0
+            },
+            {
+              "stage": "authorization-denied",
+              "status": "PASS",
+              "script_exit_code": 0
+            },
+            {
+              "stage": "storage-error",
+              "status": "PASS",
+              "script_exit_code": 0
+            }
+          ],
+          "cleanup": {
+            "wrapper_started": true,
+            "wrapper_reaped": true,
+            "live_descendant_count": 0,
+            "zombie_descendant_count": 0,
+            "descendant_snapshot_complete": true,
+            "control_error_count": 0,
+            "snapshot_failure_type": null,
+            "stop_failure_type": null
+          },
+          "not_run": {
+            "missing_runtime_support": "cannot be induced without mutating the package",
+            "generic_http_500": "no supported native backend fault fixture"
+          },
+          "post_runtime_tree_diff": {
+            "added_count": 0,
+            "removed_count": 0,
+            "changed_count": 0,
+            "report_path": "dakota-workitems-ui-frozen-macos-15-38107100997-1-frozen-post-runtime-tree-diff.json"
+          },
+          "post_runtime_tree_validation": {
+            "valid": true,
+            "failure_reason": null,
+            "immutable_build_tree_unchanged": true,
+            "rcc_version": "18.19.3",
+            "runtime_generated_state": []
+          }
+        },
+        {
+          "path": "/workspace/engineering/pr310-hosted-platform-review/11689584989/dakota-workitems-ui-go-wrapper-macos-15-38107100997-1.json",
+          "sha256": "73a64cb89107f5b1ef86c6939fdfdecef1e1a0df3f20f0bbad49c7a8ad423bfd",
+          "kind": "go-wrapper",
+          "stages": [
+            {
+              "stage": "normal",
+              "status": "PASS",
+              "script_exit_code": 0
+            },
+            {
+              "stage": "authorization-denied",
+              "status": "PASS",
+              "script_exit_code": 0
+            },
+            {
+              "stage": "storage-error",
+              "status": "PASS",
+              "script_exit_code": 0
+            }
+          ],
+          "cleanup": {
+            "wrapper_started": true,
+            "wrapper_reaped": true,
+            "live_descendant_count": 0,
+            "zombie_descendant_count": 0,
+            "descendant_snapshot_complete": true,
+            "control_error_count": 0,
+            "snapshot_failure_type": null,
+            "stop_failure_type": null
+          },
+          "not_run": {
+            "missing_runtime_support": "cannot be induced without mutating the package",
+            "generic_http_500": "no supported native backend fault fixture"
+          },
+          "post_runtime_tree_diff": {
+            "added_count": 0,
+            "removed_count": 0,
+            "changed_count": 0,
+            "report_path": "dakota-workitems-ui-go-wrapper-macos-15-38107100997-1-go-wrapper-post-runtime-tree-diff.json"
+          },
+          "post_runtime_tree_validation": {
+            "valid": true,
+            "failure_reason": null,
+            "immutable_build_tree_unchanged": true,
+            "rcc_version": "18.19.3",
+            "runtime_generated_state": []
+          }
+        }
+      ],
+      "consumer_cases": 2,
+      "consumer_seconds": 63.37,
+      "consumer_receipt": "/workspace/engineering/pr310-hosted-platform-review/11690780293/dakota-workitems-native-38107100997-1.json",
+      "consumer_sha256": "80d1c2e830adb87188465cc429736d9d6d5df97f99c8a3166231d21871576246",
+      "core_installation_source": "local candidate wheel installed by post-install, not public registry",
+      "core_version": "1.0.3",
+      "candidate_core_wheel_sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+      "original_decoded_job_log_local_only": {
+        "path": "/workspace/engineering/pr310-hosted-platform-review/macos-original-job.log",
+        "sha256": "99f124171d1477b91ebbd1f8c2876d1e78daedc98d1ad4ea9a6f6e2dd39b95a5"
+      },
+      "native_JUnit": "NOT RETAINED; original module summaries plus source-bound stage receipts used for bounded historical review",
+      "browser_selector_binding": "source headless persistent Chromium; installed1234 full Chromium and headless shell; actual receipt151.0.7922.34; no uploaded launch trace/executable digest/live-process identity",
+      "cleanup_scope": "harness process.stop then force_kill_process_tree_until; captured Runtime wrapper reaped and complete snapshot zero live/zombie/errors; no natural-shutdown or universal descendant claim"
+    },
+    {
+      "platform": "windows",
+      "job_id": 114374812005,
+      "job_status": "completed/success",
+      "UI_module_cases_per_runtime": 31,
+      "UI_module_seconds": [
+        53.06,
+        52.35
+      ],
+      "actual_native_browser_case_per_runtime": 1,
+      "browser_stages_per_native_case": 3,
+      "UI_native_receipts": [
+        {
+          "path": "/workspace/engineering/pr310-hosted-platform-review/11689474294/dakota-workitems-ui-frozen-windows-2022-38107100997-1.json",
+          "sha256": "5e173d69f6dfc18f0e5b2f0e2e3c55758f34b5169eb67b78d8040443697032bc",
+          "kind": "frozen",
+          "stages": [
+            {
+              "stage": "normal",
+              "status": "PASS",
+              "script_exit_code": 0
+            },
+            {
+              "stage": "authorization-denied",
+              "status": "PASS",
+              "script_exit_code": 0
+            },
+            {
+              "stage": "storage-error",
+              "status": "PASS",
+              "script_exit_code": 0
+            }
+          ],
+          "cleanup": {
+            "wrapper_started": true,
+            "wrapper_reaped": true,
+            "live_descendant_count": 0,
+            "zombie_descendant_count": 0,
+            "descendant_snapshot_complete": true,
+            "control_error_count": 0,
+            "snapshot_failure_type": null,
+            "stop_failure_type": null
+          },
+          "not_run": {
+            "missing_runtime_support": "cannot be induced without mutating the package",
+            "generic_http_500": "no supported native backend fault fixture"
+          },
+          "post_runtime_tree_diff": {
+            "added_count": 0,
+            "removed_count": 0,
+            "changed_count": 0,
+            "report_path": "dakota-workitems-ui-frozen-windows-2022-38107100997-1-frozen-post-runtime-tree-diff.json"
+          },
+          "post_runtime_tree_validation": {
+            "valid": true,
+            "failure_reason": null,
+            "immutable_build_tree_unchanged": true,
+            "rcc_version": "18.19.3",
+            "runtime_generated_state": []
+          }
+        },
+        {
+          "path": "/workspace/engineering/pr310-hosted-platform-review/11689474294/dakota-workitems-ui-go-wrapper-windows-2022-38107100997-1.json",
+          "sha256": "726d6fd10ab870191f3c174c1710163b8423ec762019d92d462dbf74a93eae37",
+          "kind": "go-wrapper",
+          "stages": [
+            {
+              "stage": "normal",
+              "status": "PASS",
+              "script_exit_code": 0
+            },
+            {
+              "stage": "authorization-denied",
+              "status": "PASS",
+              "script_exit_code": 0
+            },
+            {
+              "stage": "storage-error",
+              "status": "PASS",
+              "script_exit_code": 0
+            }
+          ],
+          "cleanup": {
+            "wrapper_started": true,
+            "wrapper_reaped": true,
+            "live_descendant_count": 0,
+            "zombie_descendant_count": 0,
+            "descendant_snapshot_complete": true,
+            "control_error_count": 0,
+            "snapshot_failure_type": null,
+            "stop_failure_type": null
+          },
+          "not_run": {
+            "missing_runtime_support": "cannot be induced without mutating the package",
+            "generic_http_500": "no supported native backend fault fixture"
+          },
+          "post_runtime_tree_diff": {
+            "added_count": 0,
+            "removed_count": 0,
+            "changed_count": 0,
+            "report_path": "dakota-workitems-ui-go-wrapper-windows-2022-38107100997-1-go-wrapper-post-runtime-tree-diff.json"
+          },
+          "post_runtime_tree_validation": {
+            "valid": true,
+            "failure_reason": null,
+            "immutable_build_tree_unchanged": true,
+            "rcc_version": "18.19.3",
+            "runtime_generated_state": []
+          }
+        }
+      ],
+      "consumer_cases": 2,
+      "consumer_seconds": 77.57,
+      "consumer_receipt": "/workspace/engineering/pr310-hosted-platform-review/11690189249/dakota-workitems-native-38107100997-1.json",
+      "consumer_sha256": "4327408274852820895fcc632d4bf20b347e200efe6c6de53e13282f0a3ba82b",
+      "core_installation_source": "local candidate wheel installed by post-install, not public registry",
+      "core_version": "1.0.3",
+      "candidate_core_wheel_sha256": "af607a2e3a82ca827f26d8cc2822c7067c7768e6cf42becb74a0519f021b7553",
+      "original_decoded_job_log_local_only": {
+        "path": "/workspace/engineering/pr310-hosted-platform-review/windows-original-job.log",
+        "sha256": "49f2f78341331e31f57c2ba0296d70d21295632bf4d962ac38af2bd61a348767"
+      },
+      "native_JUnit": "NOT RETAINED; original module summaries plus source-bound stage receipts used for bounded historical review",
+      "browser_selector_binding": "source headless persistent Chromium; installed1234 full Chromium and headless shell; actual receipt151.0.7922.34; no uploaded launch trace/executable digest/live-process identity",
+      "cleanup_scope": "harness process.stop then force_kill_process_tree_until; captured Runtime wrapper reaped and complete snapshot zero live/zombie/errors; no natural-shutdown or universal descendant claim"
+    }
+  ],
+  "candidate_core_limit": "Mac candidatewheel8e088 equals independently retained publicCore1.0.3 wheel digest; Windowsaf607 differs. Local candidate installation proved by managed action and pip-report binding; original wheels/raw pip reports absent from uploaded archives, Windows difference cause unknown. No public registry installation claim.",
+  "other_limits": [
+    "Missing runtime support and generic HTTP500 UI remain NOT_RUN; authorization case proves middleware403/sign-in recovery rather than separate Access denied alert.",
+    "Consumer synthetic failure and seeded abandoned reservation fixture do not prove actual crash recovery.",
+    "No native JUnit or launch-executable digest retained; do not claim exact one-case JUnit or live browser identity.",
+    "Mac original job contains robocorp-log FileNotFoundError output/output.robolog during pytest teardown; both modules exit successfully31PASS and native receiptsPASS. No cause attribution or new upstream report from this incidental diagnostic.",
+    "Original run65c/f506 differs from separate owned Linux f506/92498 proof and current4b source union; identities never relabeled."
+  ],
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/work-items.md exact proposed patch /workspace/engineering/pr310-hosted-platform-review/canonical-work-items-platform-proposed.patch",
+    "durable_learning_captured": "Separate workflow head, actual synthetic build and harness; distinguish original module counts from selected native case/JUnit proof; candidate-wheel install from registry; captured forced-cleanup snapshot from natural shutdown; preserve platform tuple scope.",
+    "evidence": "Eight API-bound original archives, four raw UI receipts, two consumer receipts and immutable job logs; TAR/embedded ZIP/source verification.",
+    "stale_or_ambiguous_guidance_removed": "Windows/macOS still require passing receipts replaced with bounded measured historical tuple; candidate Core1.0.3 does not imply public install; module31PASS cannot be called one-caseJUnit.",
+    "remaining_uncertainty": "Actual browser executable hash/live identity and native JUnit absent; candidate wheel/raw pip reports absent; Windows wheel byte-difference cause unknown; full208/release and fresh4bCI pending."
+  },
+  "upstream_disposition": "none; no authorized external report and incidental logging diagnostic not attributed",
+  "mutations": "No source edits, push, merge, rerun, rebuild or executable invocation; owned local review receipts/downloads only"
+}

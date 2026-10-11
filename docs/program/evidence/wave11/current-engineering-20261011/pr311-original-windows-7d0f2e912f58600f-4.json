@@ -1,0 +1,1 @@
+{"after_start_returned": {"host_readers_alive": [false, false], "observation": "host_only", "returncode": 15}, "exception": "TimeoutError", "native_executable": {"sha256": "45e6de407f12101d04d2d7e4972c563c5dafb48fafa4a2183d1136bc987566f0", "size": 57692160}, "outcome": "failed", "sampler_alive": false, "sampler_cancelled": true}

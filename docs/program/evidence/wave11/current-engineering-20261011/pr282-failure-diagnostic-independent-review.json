@@ -1,0 +1,29 @@
+{
+  "verdict": "GO_SOURCE_FAILURE_DIAGNOSTIC_FOR_NORMAL_PUSH",
+  "head": "811c826addf662c3a7de23d27c5f1014ecd3c6a3",
+  "tree": "c2b3f214a6ea850c48421303fef2a68ec0b3422a",
+  "parent": "0d8d0803a954faefd53e5cdb92d08c2a1275a820",
+  "independent_source_review": [
+    "Exactly4allowed changed paths,1400of1404 leaves/modes unchanged; production/browser/templates/runtime/source pins/measured71f fixture and old actual receipts preserved.",
+    "Original39 receipt_ok conjunct AST identical; diagnostic39 lambdas exactly same predicate AST/order. Whole original validator AST equal after removing only reviewed diagnostics; strict JUnit/pytest/final gate and successful sanitized receipt unchanged.",
+    "Whole generator AST outside published_canvas_acceptance unchanged. Workflow shell/env/selectors/conditions/timeouts unchanged; only validator Python and one fixed failure-file upload path differ. Other7 outputs unchanged.",
+    "Failure-only output schema contains fixed predicate/status/exception codes and integer JUnit counts; no input values, paths, raw exceptions, provider URLs or env. Read/evaluation failures become allowlisted classes; observation does not identify original short-circuit position. Diagnostic write IO failure does not replace admission failure."
+  ],
+  "evidence": {
+    "path": "/workspace/engineering/pr282-diagnostics-receipt.json",
+    "sha256": "fd0c217fe62a62efa842bf56a50c624d6b4d0005f9787693d61f9686bfa405c8",
+    "source_proof_sha256": "06385be08485bbdfaf3cfaf227805ca0002bc3a13a3e59c78065b42c5fb0b410",
+    "all9log_hashes": "independently verified"
+  },
+  "local_validation": "DoctorPASS; authorized preparedBootstrap reuse; RED32failed41deselected demonstrates absent diagnostic regression; GREEN final generated-validator76PASS and replay76PASS; Toolkit138PASS; configured Ruff check/format299+Isort and Mypy331PASS; optional Markdown lint absent. Tests retain valid measured baseline and all old poisons, add secret error poison, missing/nonobject/invalidJSON/invalidUnicode/read-denied, JUnit/pytest failure diagnostics and exact39AST sync.",
+  "actual_gate": "NOT_RUN for new head; old0d actual pytest1PASS but receipt admissionFAIL, failed predicate and raw receipt presence UNKNOWN; no root-cause/native fix or gate waiver. Earlier71f actual proof retains71f source identity.",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md updated in811c",
+    "durable_learning_captured": "Passing pytest does not establish receipt admission; JUnit-only upload cannot establish missing raw receipt. Reobserve all fixed predicates after rejection with PASS/FAIL/UNAVAILABLE and fixed error classes; preserve original failure gate and privacy.",
+    "evidence": "Originaljob114380503419 negative receipt_valid; exact preserved validator AST; meaningful RED/GREEN76 and138Toolkit; new failure file always-upload condition unchanged.",
+    "stale_or_ambiguous_guidance_removed": "Failure-only diagnostics retention qualified for pre-validator/write failures; original unknown predicate and unknown raw presence explicitly named; reobservations separate from original short-circuit position.",
+    "remaining_uncertainty": "Original failing predicate/raw receipt presence unresolved; new actual hosted diagnostic execution pending; no native cleanup/byte/source admission waiver."
+  },
+  "upstream_disposition": "none",
+  "mutations": "Owned review receipt only; no repository edit/push/merge/rerun/build"
+}

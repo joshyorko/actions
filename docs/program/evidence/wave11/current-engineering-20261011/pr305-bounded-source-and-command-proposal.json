@@ -1,0 +1,219 @@
+{
+  "actual_run_authorized": false,
+  "actual_run_executed": false,
+  "branch": "test/canvas-runtime-cache-isolation-20261010",
+  "current_source": {
+    "current_native_parity": false,
+    "current_producer_input_count": 266,
+    "current_selected_test_count": 4,
+    "head": "ca3ea2aa4c8a5fa7c1d9773f79347dfb64f310cc",
+    "native_producer_input_count": 268,
+    "native_selected_test_count": 5,
+    "ordered_parents": [
+      "f9c424f7c625297514dbfeaa35ecc0e4b5797e22",
+      "19380993febaa71238eaee3026b5c808773283ff"
+    ],
+    "original_producer_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "original_producer_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+    "producer_delta": {
+      "action_server/src/actions/server/_api_action_routes.py": {
+        "current": "100644 blob 1880245f3ff09cd2ef1fec47d08f3baa41207b4f",
+        "producer": "100644 blob 7e5ad63318ea9073ad2ef806ff95e18495c5eca7"
+      },
+      "action_server/src/actions/server/_models.py": {
+        "current": "100644 blob 964d31c51e42dc285e5eb77e02d86e62adecd6bb",
+        "producer": "100644 blob e2cd220d7c948d87bf961a253c28b3ee54e8dcbb"
+      },
+      "action_server/src/actions/server/_robo_utils/process.py": {
+        "current": "100644 blob cc35194f88ec6aac5718dcaeadab588ab18d380d",
+        "producer": "100644 blob 5c10630a44bdee21f570ebbbd199c188e0837994"
+      },
+      "action_server/src/actions/server/_selftest.py": {
+        "current": "100644 blob bc32bccf7e238bb625e6cea87a2e1f141c3d80d4",
+        "producer": "100644 blob ee3268ae80b424f42f341770afad86bf72ee717f"
+      },
+      "action_server/src/actions/server/mcp/resource_routing.py": {
+        "current": null,
+        "producer": "100644 blob 82792a02bdc87982cf739ca8a725a4d79731cb3d"
+      },
+      "action_server/src/actions/server/mcp/setup_mcp_server_v2.py": {
+        "current": "100644 blob 382e2ee9877e4c4f9304e01e8d75adbe996e1314",
+        "producer": "100644 blob 9961a2064dede78f12e21295081b8702ecbe08f8"
+      },
+      "action_server/src/actions/server/migrations/__init__.py": {
+        "current": "100644 blob 757bba4dc814abdadcd7a12614f2585cf36b0f66",
+        "producer": "100644 blob cb68bcb4a2e41ecefcb5a409ce5c26065a505d05"
+      },
+      "action_server/src/actions/server/migrations/migration_add_mcp_resource_routing.py": {
+        "current": null,
+        "producer": "100644 blob 4fc4bc5abfbb34bb016072c29209d7e2263d99c7"
+      }
+    },
+    "selected_delta": {
+      "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": {
+        "current": null,
+        "producer": "100644 blob 534e51afbc75b4d3ce473dee37d7ac00d52dbc92"
+      }
+    },
+    "target": "fbde0d3a248c47c9964851355f96575c89a87329",
+    "tree": "ab17a0cf3970273c86d3c4f1d26d3da852c9585f"
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "fixture overrides and synchronized-package containment; exact candidate/public/native source scopes",
+    "evidence": "current305 fixture/source gap, retained native292/310 admission, opt-in14green check distinction, actual282 public-Core receipt",
+    "exact_delta_path": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/canonical-guide-proposed-delta.md",
+    "remaining_uncertainty": "new305 union/source/test-mode/runner and actual acceptance await separate authorization; no broad99 closure",
+    "sha256": "c61b7c93f828124524bdf3e49ee75b9d465c7a0484d856f3cf769dfe61a73ea4",
+    "stale_ambiguity_removed": "caller env or green default suite does not prove fixture containment/public/native execution"
+  },
+  "execution_ready": false,
+  "expected_actual_assertions": [
+    "exact1pytest case PASS0skips/failures/errors",
+    "exact1Playwright real Runtime Action result case with actual selected browser digest/launch evidence",
+    "exact resource bytes/MIME/public decorator metadata from frozen Runtime",
+    "three Python MCP calls and two browser-host-forwarded calls produce exactlyfive passed persisted Run IDs/action names",
+    "worker uses actual public Core1.0.3 provenance; no candidate wheel claim",
+    "actual cache inventory and synchronized snapshot paths disjoint from owned sibling cache; production symlink rejection unchanged",
+    "native tree/binary/manifest original bytes unchanged before/after; producer identity remains92498/tree80e5",
+    "strict owned Runtime/supervisor/browser cleanup and cancelled observer"
+  ],
+  "next_bounded_source_step": {
+    "meaningful_regressions": [
+      "actual Runtime snapshot accepts clean source with cache-directory symlink in owned sibling and rejects it when moved under synchronized package",
+      "published mode reaches package emission with no candidate build or local wheel override; poisoned candidate receipt rejected",
+      "explicit pinned browser survives conflicting system selector; missing explicit selection rejected",
+      "receipt poisoning for skip/count/Core/source/browser/cache containment/cleanup rejected through actual admission code"
+    ],
+    "minimal_test_scope": [
+      "retain existing test_canvas_view_calls_public_action_through_runtime_bridge, its sibling cache boundary and real Runtime MCP/resource/five Run assertions",
+      "add a separately labelled published Core1.0.3 mode of that existing fixture with no local uv build/candidate wheel installation or candidate-wheel receipt fields",
+      "reuse accepted public Core registry/module provenance construction and receipt schema from282; no replacement Canvas template, host or Core helper implementation",
+      "preserve explicit reviewed browser selection and make implicit browser selection inadmissible",
+      "retain synthetic artifact-status fixture as fixture-only and explicitly leave real artifact resolution NOT_RUN",
+      "emit strict package/cache/source/public-Core/browser/Run/cleanup receipt; immutable runner must be reviewed after source commit"
+    ],
+    "ordinary_refresh": "merge actual accepted target into same existing PR305 branch, preserve commits and sibling-cache fix; no reset/rebase/replacement",
+    "ownership": "root assigns future PR305 writer after current302/307 slots; this lane remains read-only",
+    "required_post_refresh_admission": [
+      "exact new305 SHA/tree/ordered parents and full tree inventory",
+      "all268 Runtime/Core/Helper producer entries and allfive selected290 test blobs equal original80e5 producer",
+      "all native packaged frontend/dependency/wrapper producer inputs equal92498, except declared browser/test/docs harness changes",
+      "current opt-in test and harness bytes admitted separately; no previous14 CI carry"
+    ]
+  },
+  "phase": "READ_ONLY_SOURCE_GAP_AND_COMMAND_PROPOSAL",
+  "planned_command": {
+    "activate": "source /workspace/actions-cloud/activate.sh",
+    "actual_runner_sha256": null,
+    "canvas_bundle": "existing node requires build:canvas twice via npm wrapper; admit one qualified Canvas build or exact retained bundle separately before execution, and avoid treating it as rebuilt native Runtime",
+    "env": {
+      "ACTIONS_CANVAS_RUNTIME_ACCEPTANCE": "1",
+      "ACTIONS_HOME": "fresh owned RCC home sibling to synchronized package",
+      "CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "DEBUG": "pw:browser",
+      "MKL_NUM_THREADS": "2",
+      "OMP_NUM_THREADS": "2",
+      "OPENBLAS_NUM_THREADS": "2",
+      "PYTEST_XDIST_AUTO_NUM_WORKERS": "2",
+      "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE": "fresh owned exact frozen copy",
+      "TMPDIR/TMP/TEMP": "short mode0700 /tmp/cv305-* browser root, separate from receipt/package roots",
+      "UV_CACHE_DIR": "fresh owned cache sibling to synchronized package",
+      "proposed_published_core_mode": "requires reviewed source addition; presently unavailable"
+    },
+    "exact_pytest_argv": [
+      "python",
+      "-m",
+      "pytest",
+      "tests/action_server_tests/mcp/test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge",
+      "-q",
+      "-rs",
+      "-n",
+      "0",
+      "--tb=short",
+      "--basetemp",
+      "FRESH_OWNED_ATTEMPT/pytest",
+      "--junitxml",
+      "FRESH_OWNED_ATTEMPT/junit.xml"
+    ],
+    "gateway": "rcc task script -r developer/toolkit.yaml -- python -c toolkit.poetry(action_server,run,python,REVIEWED_IMMUTABLE_RUNNER)",
+    "gateway_cwd": "/workspace/engineering/pr305 once ordinary existing-branch worktree is authorized",
+    "source_tuple": null
+  },
+  "process_policy": {
+    "cleanup": "owned supervisor Linux subreaper; strict per-kind Runtime wrapper/snapshot/reap/readers errors and live/zombie observations; owned short browser root removed only after bounded process cleanup; no natural shutdown/universal adoption claim",
+    "existing_supervisor": {
+      "api": "run_owned_process",
+      "cleanup_grace_seconds": 10,
+      "command_budget_seconds": 600,
+      "inherited_parent_bound_seconds": 645,
+      "meaning": "600 consumer plus supervised cleanup stages; never claim600 overall",
+      "outer_gateway_seconds": 660,
+      "outer_term_kill_grace_seconds": 10,
+      "path": "/workspace/engineering/pr310/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    "failure": "one attempt after independent exact-runner review; retain primary stdout/stderr and cleanup failure; stop, no blind retry",
+    "owned_observer": {
+      "api": "observe_start + snapshot",
+      "existing_canvas_readiness_seconds": 120,
+      "path": "/workspace/engineering/pr311/action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "proposed_offsets_seconds": [
+        20,
+        80,
+        110
+      ],
+      "sampling": "single cancellable event sampler, no subprocess pipe reads, only owned PID/create-time CPU/IO/host-reader snapshots; join cancellation separately admitted",
+      "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c",
+      "windows_guard": "do not widen enabled()/NODES or alter any90s startup/20s failure-cleanup behavior"
+    }
+  },
+  "replacement_branch": false,
+  "retained_native_artifact": {
+    "artifact_id": 11686643166,
+    "artifact_run": 38098225250,
+    "assets_sha256": "c85862c9b4dba354953c02cbb80e520052f07cb6d506600bf4a07d2f755135e0",
+    "embedded_files_sha256": "576d6cb8e5a8637dcfd82f675384d638736509541a0e10877420151b61c4786b",
+    "executed": false,
+    "frozen_sha256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb",
+    "full_inventory_equal": true,
+    "inventory_entries": 1192,
+    "inventory_sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf",
+    "kind": "frozen only",
+    "layout": "/workspace/engineering/pr310-runner-qualification-owned",
+    "layout_receipt": "/workspace/engineering/pr310-runner-qualification-owned/prepared-artifact-layout.json",
+    "layout_receipt_sha256": "b2c86b3e264283a53db1c5410cceb260a46dced202ab3d6e39d0dca5790cdcb5",
+    "manifest_sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44",
+    "manifest_source_unmodified": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "runtime_path": "owned copy of dist/action-server/action-server preserving complete1192-entry tree",
+    "source_sha_relabelled": false,
+    "status": "PASS_EXACT_COPIED_ARTIFACT_LAYOUT",
+    "tracked_worktree_clean": true,
+    "tree_sha256": "739838962d9d29f873932e13d2598d51ebba58b0f97c2c52fff8550004f06ae0",
+    "wrapper_sha256": "214548879a4eb74ccd94998dcd6250b712b2bdfe7a07ab803e2e2e37f679c04b"
+  },
+  "smallest_actual_acceptance_scope": "ONE Linux frozen executable/public-Core/official Canvas bridge/shared-cache containment case, no Go-wrapper pair repeat, no282 production-template repeat, no310 WorkItems UI repeat",
+  "source_edits": false,
+  "upstream_disposition": "none",
+  "windows_readonly": {
+    "caller_variables_seconds": 89.28,
+    "failure_cleanup_seconds": 20,
+    "hold300": true,
+    "job": 114372237761,
+    "new311_head": "d75b25fb4c354e5c95bc0f639b426d6ff402104b",
+    "new311_windows_job": 114383803907,
+    "new311_windows_run": 38110132836,
+    "no_deadline_changes_or_retries": true,
+    "original311_head": "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9",
+    "original311_run": 38107807246,
+    "original311_status": "in_progress Test(integration), diagnostic retention step pending",
+    "original311_windows_job": 114376917743,
+    "pr299_head": "9cb61c52fce35201221b55707d73da9e9b0840a6",
+    "primary": "TimeoutError at initial native startup before rollback/collision assertions",
+    "progress_sum_seconds": 89.259,
+    "readiness_seconds": 90,
+    "run": 38106229594,
+    "secondary": "cleanup incomplete disjunction; survivor/reader/observation cause unavailable",
+    "slow_phase_owner": "unresolved;66.491 delta includes multiple stages,15.687 is last delta not total"
+  }
+}

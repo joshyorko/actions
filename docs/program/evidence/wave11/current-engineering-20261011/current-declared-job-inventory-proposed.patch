@@ -1,0 +1,19 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3226,7 +3226,15 @@
+ workflow-run inventory before merge admission. Page each endpoint until
+ exhausted and count checks, jobs and runs separately. A successful workflow can
+ contain skipped jobs; inspect each skip's event condition and retain it as
+-skipped. Empty commit statuses do not imply absent Actions checks. After a
++skipped. Empty commit statuses do not imply absent Actions checks. Derive the
++expected job set from the exact workflow revision, branch/path filters, matrix
++and job conditions. A dependent job may appear only after its `needs` finish;
++an early check count is not the final inventory. In Runtime PyPI CI, the
++`publish` job still validates and collects artifacts on pull requests, while
++its publishing steps are push-only. The Work Items publication job instead
++has a tag-only job condition, so its pull-request skip is expected. Keep run
++event and job identity when reconciling repeated check names; a duplicate
++Copilot setup check does not add a package gate or supply Runtime evidence. After a
+ prerequisite merge, compare the dependent's new prospective tree with its
+ previously tested tree. Require review and fresh checks for a changed union;
+ matching earlier production changes does not include later prerequisite repairs.

@@ -29,3 +29,47 @@ Independently reviewed ordinary source refreshes are now pushed: #309 `41d4ee411
 Two current source writers continue on the existing #307 OAuth boundary guard and #282 failure-only receipt diagnosis. The former keeps approved-source/provider/recovery policy HOLD; the latter keeps every strict acceptance predicate and records fixed safe failed-predicate codes. Neither local source work nor a passing testcase grants complete release or hosted admission. Existing #305 cache-isolation work is being inspected for its next bounded refresh/public-consumer gate, without a replacement branch.
 
 The copied OAuth unified patch intentionally retains an original context-only blank line whose space is required by its original hash. Whole evidence diff-check reports that retained patch line; authored canonical guidance passes whitespace checks. Original evidence bytes are not normalized. Upstream disposition: none.
+
+
+The earlier pending entries above are retained history. Current #302 S43a73/Cba04
+three-case execution passed at run38110371338/job114384488800; independent b8acf687
+binds its original seven artifact members, separate lifecycle/staged environments,
+single real publication, natural HTTP200 return1 and recorded cleanup limits. Full
+current CI remains pending and #310 must integrate first; later source/control
+refreshes cannot inherit this tuple's execution or old producer equivalence.
+
+Original #310 Mac/Windows run38107100997 now has independently reviewed original
+native artifacts at producer/harness65c0cb83, separate from Linux92498/f506. Frozen
+and wrapper UI stages and their recorded cleanup passed. Missing native JUnit,
+browser file/launch identity, local candidate Core provenance, seeded lease fixture
+and incidental macOS teardown error remain explicit in c600dfc1. Whole208 remains
+open. Both exact canonical proposals are integrated in the owning Work Items guide.
+
+Original #3111151 Windows finished with six FIRST readiness failures,125 passes
+and18 skips. Eight original allowlisted JSON reports and authenticated identities
+are retained unchanged. Two instrumented nodes show active RCC CPU/IO80→88 seconds;
+cause and RCC-internal phase remain unknown, raw Progress is absent, and host-only
+completion does not prove descendant cleanup. Five traces preserve incomplete20s
+cleanup notes. The full decoded raw log stays outside this repository. The accepted
+proposal is adapted into durable operations guidance; currentd75 CI is separate.
+
+#282811 fixed failure-only diagnostic source is normally pushed after independent
+86468285 GO; all39 strict admission predicates remain unchanged. Its predecessor
+0d8 hosted testcase passed while strict admission failed with unknown predicate.
+Fresh CI and emitted diagnostic evidence remain pending; no gate waiver is claimed.
+
+#30787e412 guard is normally pushed after independent48d03bc4 source/gateway GO.
+RED3/GREEN41,1173 package passes/13 existing skips,Toolkit69 and complete static gates
+are bound to exact committed source. Actual controlled Invoke→Runtime Poetry
+gateway proves environment/dependency selection and preserves the module on failure.
+Approved OAuth source pair, provider policy, generated release content, old immutable
+recovery and fresh complete hosted gates remain HOLD. Accepted canonical proposals
+are adapted into the owning source guide; full-manifest authority design is deferred.
+
+#305 same-branch union/public-consumer proposal is retained as preparation, not actual
+execution or new source admission. Existing cache fixture is preserved. Its active
+source lane must freeze/review source and an immutable owned runner before one real
+frozen-only attempt is authorized. No candidate wheel may be relabeled public Core.
+The declared-job inventory proposal is adapted into operations guidance: late needs
+jobs and Runtime PR artifact validation cannot be omitted from complete CI.
+Upstream disposition: none. No release, issue closure or infrastructure change.

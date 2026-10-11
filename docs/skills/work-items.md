@@ -130,6 +130,13 @@ The `pypi` environment is a workflow reference only. Its approval and protection
 
 Action Server loads the installed Work Items distribution under a private module name. When distribution metadata has no copied `actions/work_items/__init__.py`, the loader accepts only its PEP 610 editable local-file `direct_url.json` root and resolves a contained `src/actions/work_items/__init__.py` or `actions/work_items/__init__.py`; it never consults project import paths, keeping shadow packages from controlling the REST adapter path.
 
+Convert a PEP 610 file URL path with `urllib.request.url2pathname` before
+constructing a `Path`. On Windows, a local drive URL has a URL path such as
+`/C:/...`; passing that URI spelling directly to `Path` does not produce the
+drive-rooted filesystem path. Keep both editable layouts and the project
+`actions.py` shadowing test, and use the hosted Windows run to verify native
+drive conversion; POSIX path simulations do not establish it.
+
 Native packaging must retain that filesystem source tree. The Action Server
 PyInstaller spec uses `collect_data_files('actions.work_items', include_py_files=True)`
 because hidden imports supply module names in the PYZ archive, not the initializer
@@ -343,18 +350,44 @@ artifact provenance. Optional `--frozen`, `--go-wrapper`, `--node` and
 
 The credential-free workflow is hand-maintained: it is absent from the
 `TARGETS` list in `.github/workflows/_gen_workflows.py`, so workflow regeneration
-does not overwrite it.
+does not overwrite it. Its native artifact contract step discovers both
+`test_native_artifact_manifest.py` and `test_native_artifact_provenance_archive.py`.
+
+The frozen provenance artifact is captured immediately after measurement and
+before Runtime execution, which can add bytecode under the package tree. Its
+existing GitHub artifact name now carries one deterministic PAX tar,
+`native-artifact-provenance.tar`, rather than separate globbed tree paths. The
+tar contains the full `dist/action-server/` tree plus
+`output/native-artifact-manifest.json` and its referenced
+`output/native-artifact-tree-inventory.json`; this preserves hidden files,
+symlink targets, and recorded modes. The manifest's
+`container_archive_path` identifies the tar, while each `archive_path` identifies
+a member within it. The complete tree and both metadata files are measured
+before archiving and remeasured afterward; any byte or inventory drift fails
+closed. Every symlink must have a relative target that resolves inside the
+frozen tree, including directory links. The executable locator must name the
+canonical direct child `action-server` or `action-server.exe` before its bytes
+are read. Keep acceptance receipts separate and do not regenerate the manifest
+or filter package files after measurement.
 
 The credential-free workflow retains the Go wrapper under the existing
-`action-server-unauthenticated-<runner-os>` artifact name and separately uploads
-the frozen executable and manifest in
-`action-server-native-provenance-<runner-os>-<run-id>-<attempt>`. The manifest
+`action-server-unauthenticated-<runner-os>` artifact name and uploads the frozen
+provenance tar in the existing
+`action-server-native-provenance-<runner-os>-<run-id>-<attempt>` artifact. The manifest
 checks Git `HEAD` against `github.sha`, records actual Python and Go versions
 plus platform/architecture, and measures executable hashes and package-relative
 paths. Each runtime entry also records the frozen onedir tree hash and its
 relative-file/content digest, the generated `go-wrapper/assets/assets.zip`
-hash, and a deterministic hash over `go-wrapper/main.go`, `go.mod`, and
-`go.sum`. These component values are read from the real build outputs after
+hash, and a deterministic hash over `go-wrapper/main.go`, `process.go`, `go.mod`,
+and `go.sum`. Those four source inputs have explicit `eol=lf` rules in
+`.gitattributes`: without them, Windows text checkout can hash CRLF worktree
+bytes while the committed source is LF. A regression compares every measured
+worktree input byte-for-byte with its Git blob. The manifest producer and
+independent UI consumer require the same ordered source inventory. Changing
+`process.go` changes the source binding
+while preserving executable and packaged-artifact measurements; omitting the
+helper fails manifest generation. These component values are read from the real
+build outputs after
 `build-executable --go-wrapper`; missing inputs fail manifest generation. The
 browser harness remeasures the checked-out archive and wrapper sources, the
 frozen tree, and extracted wrapper files before accepting UI behavior. The
@@ -367,6 +400,30 @@ so the manifest makes no Core-wheel provenance claim; the worker-consumer
 acceptance requires a separately measured task-local wheel. The manifest binds
 the source revision and named build inputs, but does not hash every build
 dependency or attest a clean source tree.
+
+When replaying native UI acceptance against an existing measured build, keep
+the original manifest source SHA and record the harness commit/tree separately.
+Compare Runtime, dependency, wrapper and frontend producer inputs against the
+build revision; a changed browser acceptance script is a harness change, not a
+new packaged frontend build. The Go-wrapper consumer requires the unchanged
+frozen tree at its sibling `dist/action-server` path, and both runtime consumers
+require the original `go-wrapper/assets/assets.zip` bytes in the harness checkout.
+If that archive was not uploaded separately, an exact embedded byte range from
+the measured wrapper is usable only after its SHA-256 matches the manifest;
+recompressing the extracted tree does not recover archive identity. Use the
+canonical RCC toolchain for a fresh frontend `npm ci --no-audit --no-fund`, keep
+Node module resolution local to that checkout, and record the selected
+Playwright version, actual launch selector, browser path and browser digest.
+For Playwright 1.62.1, `headless: true` without `channel` or `executablePath`
+selects `chromium-headless-shell`; `chromium.executablePath()` returns the
+full Chromium binary and does not establish this launch identity. Inspect the
+installed selector/registry and retain actual `pw:browser` launch-path/PID
+evidence with the selected executable digest. If using `DEBUG_FILE`, each
+separate Node process recreates that stream, so its final file records only
+the last attempted browser stage. Keep Chromium `TMPDIR`
+under a short, private `/tmp` directory independently of long receipt/profile
+paths: its SingletonSocket can otherwise exceed the Unix socket path limit
+before page navigation. This qualifies replay inputs; passing native execution receipts remain a separate gate.
 
 On Linux, macOS, and Windows, the same workflow has a separate bounded Work
 Items consumer gate. Each matrix job builds `actions-core` as a wheel into a
@@ -387,6 +444,12 @@ The consumer test generates its action module from source fragments, so its
 regression test must execute a real module import: `compile()` alone does not
 evaluate module-level annotations or decorators. Keep every global referenced
 by an embedded helper in the generated module's own imports.
+
+The Action Server `typecheck` task checks both `src` and `tests` with
+`mypy --follow-imports=silent --show-column-numbers --namespace-packages
+--explicit-package-bases src tests`. A source-only mypy run does not qualify
+the packaged Work Items harness; type its receipt structures and test doubles
+against the same process and cleanup contracts exercised at runtime.
 
 For Action Server Python harness changes, `invoke lint` runs `ruff check src tests`
 using the package-discovered `action_server/ruff.toml`, then `ruff format --check`
@@ -411,10 +474,23 @@ manifest, or live external-service behavior. The workflow retains a receipt
 even when the gate fails or is interrupted, then removes only its run-owned RCC
 home.
 
-This harness proves creation and restart persistence, not worker-driven Work
-Item state transitions, attachment behavior, accessibility or other browsers.
-Those cells remain separate acceptance requirements. A workflow build/version
-check alone is not native Work Items acceptance.
+The same hosted run `38107100997` retains two passing native consumer cases
+on Windows and macOS using Core 1.0.3 wheels built locally in that checkout
+and installed by post-install. The managed action checked distribution ownership
+and a pip report bound to the local candidate wheel. The Mac wheel digest
+`8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265`
+matches the independently measured published wheel bytes; the Windows candidate
+digest `af607a2e3a82ca827f26d8cc2822c7067c7768e6cf42becb74a0519f021b7553`
+differs. Neither receipt proves a public registry installation. The workflow
+retained hashes but did not upload those wheels or raw pip reports; the cause
+of the Windows byte difference is unmeasured. Seeded stale reservations remain
+a recovery fixture, not a process crash.
+
+The browser gate proves UI creation and backend readback. The separate native
+consumer cases establish their recorded worker-driven transitions and restart
+persistence. Attachment behavior, accessibility and other browsers remain
+separate acceptance requirements. A workflow build/version check alone is not
+native Work Items acceptance.
 
 For packaged Work Items storage-failure UI checks, keep Action Server's own
 database (`--db-file=server.db`) separate from the management API database at
@@ -469,17 +545,61 @@ and extracted-file-set SHA-256 `0eccdeebceb4c8a7f6bf94b8f12e37f4f3302e8726daffc6
 It verified the same empty/populated queue, Escape focus restoration, detail,
 320px layout, and real storage-unavailable states as the frozen gate. These are
 Linux results only. The native workflow runs separate frozen and Go-wrapper
-browser gates on Ubuntu and Windows; their receipts bind the manifest path,
+browser gates on Ubuntu, Windows and macOS; their receipts bind the manifest path,
 executable hash, and (for frozen builds) the onedir package-tree hash. Windows
 manifest paths include `.exe` for both runtimes, which the harness validates.
-Those Windows gates still require passing hosted receipts; macOS browser
-acceptance is not configured. Independent Linux frozen and Go-wrapper native
-runs both passed the normal, authorization-denied/sign-in-recovery, and
-storage-error stages at their recorded source/build. Those scoped results do
-not cover missing bundled support or a generic HTTP 500: keep both states
-`NOT_RUN` until a hash-bound packaged browser stage exercises each real backend
-condition. Frontend tests with synthetic responses may verify message
-classification, but do not clear native acceptance. Do not use response
+Preserve platform results as separate measured tuples. Hosted run
+`38107100997`, attempt 1, retains passing Windows and macOS frozen and
+Go-wrapper browser receipts for actual build/harness checkout `65c0cb83`
+(tree `782ff78f`, workflow head `f506a04e`). Independent review verified both
+original wrapper executables and provenance TARs against the per-platform
+manifest, every package entry and mode, and each original embedded assets ZIP.
+Each browser module invocation passed 31 cases and recorded three passing
+actual browser stages for its selected native runtime. These are module counts
+from the original job logs; the workflow did not retain native JUnit XML or
+Playwright launch traces. Recorded browser version `151.0.7922.34` and
+headless Chromium source settings do not establish the actual browser file
+digest or live process identity. The complete captured descendant snapshot
+was empty after the harness stop and force-kill sequence; natural Runtime
+shutdown and universal future-descendant discovery remain unproved. Keep
+this tuple separate from the Linux `f506a04e` replay of build `92498aff` and
+from later source unions or full issue #208 acceptance. The native
+browser harness now has an
+authorization-denial stage: after signing in, it removes only its own
+`actions_browser_session` cookie, requires the packaged Runtime's Work Items
+request to return the real middleware-generated 403, verifies that
+`RuntimeAuthentication` gates the protected page behind the API-key sign-in
+form, then reauthenticates and reads the previously created item. This stage
+tests sign-in recovery, not the Work Items page's separate `Access denied`
+alert: the shared browser-auth observer treats any same-origin protected API
+403 as loss of session and the auth wrapper unmounts protected content. The
+browser stage receipt records the exact 403 status and middleware body. The
+outer acceptance receipt keeps `authorization_denial_ui` in `states_not_run`
+until that stage is attempted. An attempted failure moves it to `states_failed`
+and preserves the browser stage's `FAIL` receipt; only a `PASS` clears it from
+both maps. A normal-stage pass leaves the denial criterion `NOT_RUN`. This
+stage passed in retained Linux frozen and Go-wrapper receipts using build
+`856c0a47`; the Go-wrapper receipt binds harness head `ec8bea13`. Those
+bounded receipts establish normal, middleware-403/sign-in recovery and
+storage-503 behavior for their measured artifacts only. Current Linux replay
+with harness `f506a04e` separately passed frozen and Go-wrapper gates against
+original build `92498aff` (build tree `80e5c775`), after unchanged Runtime,
+dependency, wrapper and packaged frontend producer inputs were verified.
+Each gate retained one non-skipped passing native testcase, all three passing
+browser stages, observed Runtime wrapper reap with complete descendant
+snapshots and zero live/zombie descendants or process-control errors, and zero
+immutable package-tree changes. The existing command supervisor independently
+reaped six exited descendants in each gate; that count is separate from Runtime
+cleanup observations. Runtime cleanup in each gate was forced by its supervisor;
+these receipts do not establish natural Runtime shutdown. The final Playwright debug file
+covers the last attempted browser stage only and supplies its recorded launch
+path/PID; it does not prove live process identity. Earlier stage PASS evidence
+comes from the original native receipt rather than that one launch trace.
+Preserve the original manifest's build source identity
+and retain the harness identity in its runner envelope. For later Runtime
+changes, repeat source/artifact admission and actual execution for each gate. Missing
+bundled support and generic HTTP 500 remain `NOT_RUN` until
+their separately owned or supported packaged fixtures run. Do not use response
 interception as backend evidence.
 The browser receipt may say `PASS_BOUNDED` only after the bounded process-tree
 cleanup result confirms that the Runtime wrapper was reaped, its descendant

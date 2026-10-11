@@ -1,0 +1,26 @@
+{
+  "artifact_digest": "sha256:e02054e9c2f97c0dd794256e9028e0e13ad63476922eedc102e789dfac5ddab6",
+  "managed_root": "/home/runner/work/_temp/rcc-provider-rollback-tmp/pytest-of-runner/pytest-0/test_staged_package_executes_i0/managed-home/holotree",
+  "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+  "rcc_version": "v18.19.3",
+  "source_commit": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+  "source_inventory": "{\"entries\":[{\"mode\":420,\"path\":\"action.py\",\"sha256\":\"a554f7395fa4254e36ca28780a0edff940f208ca7409dfedcd829193b31c3898\",\"size\":560},{\"mode\":420,\"path\":\"package.yaml\",\"sha256\":\"e160d068efc17467d8c43174bca8676208e33914ca9fc45d815a43b81ddbed1e\",\"size\":113}],\"sourcePolicyVersion\":1}",
+  "source_sha256": {
+    "action.py": "a554f7395fa4254e36ca28780a0edff940f208ca7409dfedcd829193b31c3898",
+    "package.yaml": "e160d068efc17467d8c43174bca8676208e33914ca9fc45d815a43b81ddbed1e"
+  },
+  "source_tree": "e05141d122b7245b626c5d0389cf9b653c8ad300",
+  "staged_inventory": "{\"entries\":[{\"mode\":420,\"path\":\"action.py\",\"sha256\":\"a554f7395fa4254e36ca28780a0edff940f208ca7409dfedcd829193b31c3898\",\"size\":560},{\"mode\":420,\"path\":\"package.yaml\",\"sha256\":\"e160d068efc17467d8c43174bca8676208e33914ca9fc45d815a43b81ddbed1e\",\"size\":113}],\"sourcePolicyVersion\":1}",
+  "staged_sha256": {
+    "action.py": "a554f7395fa4254e36ca28780a0edff940f208ca7409dfedcd829193b31c3898",
+    "package.yaml": "e160d068efc17467d8c43174bca8676208e33914ca9fc45d815a43b81ddbed1e"
+  },
+  "status": "PASS",
+  "typed_action_result": {
+    "action_source_path": "/home/runner/work/_temp/rcc-provider-rollback-tmp/pytest-of-runner/pytest-0/test_staged_package_executes_i0/runtime-data/.rcc-runtime-sources/b049caca43c708a673227b2b487e14e8172d0dad8fc17115f90423f92b1e6373/action.py",
+    "action_source_sha256": "a554f7395fa4254e36ca28780a0edff940f208ca7409dfedcd829193b31c3898",
+    "core_origin": "/home/runner/work/_temp/rcc-provider-rollback-tmp/pytest-of-runner/pytest-0/test_staged_package_executes_i0/managed-home/holotree/62fb83f_5a1fac3_0f67ae6c/lib/python3.12/site-packages/actions/__init__.py",
+    "core_version": "1.0.2",
+    "python_executable": "/home/runner/work/_temp/rcc-provider-rollback-tmp/pytest-of-runner/pytest-0/test_staged_package_executes_i0/managed-home/holotree/62fb83f_5a1fac3_0f67ae6c/bin/python3.12"
+  }
+}
