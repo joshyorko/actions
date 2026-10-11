@@ -68,8 +68,8 @@ def test_browser_harness_deadline_reaps_owned_descendant(tmp_path):
         browser_processes = []
         deadline = time.monotonic() + 10
         while time.monotonic() < deadline and not browser_processes:
-            if child_pid_file.exists():
-                node_pid = int(child_pid_file.read_text())
+            node_pid = _read_browser_harness_pid(child_pid_file)
+            if node_pid is not None:
                 try:
                     descendants = psutil.Process(node_pid).children(recursive=True)
                     for child in descendants:
@@ -112,11 +112,86 @@ def test_browser_harness_deadline_reaps_owned_descendant(tmp_path):
     )
 
 
+def _read_browser_harness_pid(path: Path) -> int | None:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+    if not isinstance(payload, dict) or set(payload) != {"pid"}:
+        return None
+    pid = payload["pid"]
+    return (
+        pid if isinstance(pid, int) and not isinstance(pid, bool) and pid > 0 else None
+    )
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        None,
+        "",
+        '{"pid":',
+        "invalid",
+        "{}",
+        '{"pid":true}',
+        '{"pid":0}',
+        '{"pid":-1}',
+        '{"pid":"12"}',
+        '{"pid":12,"extra":true}',
+        "[]",
+    ],
+)
+def test_browser_harness_pid_waits_for_complete_valid_handoff(tmp_path, payload):
+    path = tmp_path / "child.pid"
+    if payload is not None:
+        path.write_text(payload, encoding="utf-8")
+    assert _read_browser_harness_pid(path) is None
+
+
+def test_browser_harness_atomically_publishes_actual_node_pid(tmp_path):
+    path = tmp_path / "child.pid"
+    body = _BROWSER_SCRIPT.split("if (input.force_hang_after_browser_launch) {", 1)[
+        1
+    ].split("await new Promise", 1)[0]
+    script = (
+        r"""
+import {writeFileSync as realWrite, readFileSync, existsSync, renameSync} from 'node:fs';
+const input = {process_pid_file: process.argv[1]};
+let partialPublished = false;
+function writeFileSync(path, content, options) {
+    realWrite(path, '', options);
+    if (existsSync(input.process_pid_file) && readFileSync(input.process_pid_file, 'utf8') === '') partialPublished = true;
+    realWrite(path, content);
+}
+"""
+        + body
+        + r"""
+console.log(JSON.stringify({actual_node_pid: process.pid, partial_published: partialPublished,
+    payload: JSON.parse(readFileSync(input.process_pid_file, 'utf8'))}));
+"""
+    )
+    node = shutil.which("node")
+    assert node is not None, "RCC Node.js is required for PID publication coverage"
+    completed = subprocess.run(
+        [node, "--input-type=module", "-e", script, str(path)],
+        capture_output=True,
+        text=True,
+        check=True,
+        timeout=5,
+    )
+    result = json.loads(completed.stdout)
+    assert result["partial_published"] is False
+    assert result["payload"] == {"pid": result["actual_node_pid"]}
+    assert result["actual_node_pid"] > 0
+    assert _read_browser_harness_pid(path) == result["actual_node_pid"]
+    assert not list(tmp_path.glob("*.tmp"))
+
+
 _BROWSER_SCRIPT = textwrap.dedent(
     r"""
     import assert from "node:assert/strict";
     import { request as httpRequest } from "node:http";
-    import { readFileSync, writeFileSync } from "node:fs";
+    import { readFileSync, writeFileSync, renameSync } from "node:fs";
     import { chromium } from "@playwright/test";
 
     const input = JSON.parse(readFileSync(process.env.ACTIONS_BROWSER_ACCEPTANCE_INPUT, "utf8"));
@@ -164,7 +239,9 @@ _BROWSER_SCRIPT = textwrap.dedent(
             headless: true,
         });
         if (input.force_hang_after_browser_launch) {
-            writeFileSync(input.process_pid_file, String(process.pid));
+            const pendingPidFile = `${input.process_pid_file}.${process.pid}.tmp`;
+            writeFileSync(pendingPidFile, JSON.stringify({pid: process.pid}), {flag: "wx", mode: 0o600});
+            renameSync(pendingPidFile, input.process_pid_file);
             await new Promise(() => {});
         }
         const context = await browser.newContext();

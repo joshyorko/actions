@@ -66,9 +66,9 @@ def test_public_probe_admits_exact_sample_and_rejects_boundary_poisons(
     from unittest.mock import patch
 
     probe = bridge._canvas_worker_probe({"mode": "published"})
-    # These checkout files equal the three accepted registry sample members.
-    # Copy them into a synthetic distribution to exercise the emitted probe;
-    # this control does not claim an installed public worker or registry acquisition.
+    # Authenticate committed bytes for this synthetic distribution: checkout
+    # newline conversion must not change the accepted registry sample fixture.
+    # The emitted probe still hashes actual installed members without normalization.
     repository = Path(bridge.__file__).resolve().parents[4]
     modules = {}
     for name, digest in bridge.PUBLISHED_CORE_MODULE_SHA256.items():
@@ -78,7 +78,10 @@ def test_public_probe_admits_exact_sample_and_rejects_boundary_poisons(
             if name.endswith("_metadata")
             else source / "__init__.py"
         )
-        payload = source.read_bytes()
+        payload = subprocess.check_output(
+            ["git", "show", f"HEAD:{source.relative_to(repository).as_posix()}"],
+            cwd=repository,
+        )
         assert hashlib.sha256(payload).hexdigest() == digest
         path = tmp_path / (name.replace(".", "_") + ".py")
         path.write_bytes(payload)
@@ -106,6 +109,42 @@ def test_public_probe_admits_exact_sample_and_rejects_boundary_poisons(
         else:
             with pytest.raises(AssertionError):
                 namespace["canvas_fixture_worker_provenance"]()
+
+
+@pytest.mark.parametrize("member", list(bridge.PUBLISHED_CORE_MODULE_SHA256))
+@pytest.mark.parametrize("poison", [None, "member", "version", "ownership", "prefix"])
+def test_public_probe_fixture_ignores_checkout_newline_conversion(
+    tmp_path, monkeypatch, member, poison
+):
+    import hashlib
+
+    repository = Path(bridge.__file__).resolve().parents[4]
+    source = repository / "actions/src" / member.replace(".", "/")
+    source = (
+        source.with_suffix(".py")
+        if member.endswith("_metadata")
+        else source / "__init__.py"
+    )
+    committed = subprocess.check_output(
+        ["git", "show", f"HEAD:{source.relative_to(repository).as_posix()}"],
+        cwd=repository,
+    )
+    assert (
+        hashlib.sha256(committed).hexdigest()
+        == bridge.PUBLISHED_CORE_MODULE_SHA256[member]
+    )
+    crlf = committed.replace(b"\n", b"\r\n")
+    assert (
+        hashlib.sha256(crlf).hexdigest() != bridge.PUBLISHED_CORE_MODULE_SHA256[member]
+    )
+    read_bytes = Path.read_bytes
+
+    def checkout_bytes(path):
+        return crlf if path == source else read_bytes(path)
+
+    monkeypatch.setattr(Path, "read_bytes", checkout_bytes)
+    assert b"\r\n" in source.read_bytes()
+    test_public_probe_admits_exact_sample_and_rejects_boundary_poisons(tmp_path, poison)
 
 
 def test_owned_command_preserves_arguments_result_and_primary_output(
