@@ -2741,6 +2741,17 @@ Keep historical receipts bound to their recorded source revision: a prior
 Core 1.0.2 candidate result is not a current-source result when the checked-out
 Core metadata declares 1.0.3.
 
+The candidate-version regression controls Poetry's version and build responses
+and creates synthetic wheel ZIPs. It admits the matching source, filename and
+`METADATA` tuple and rejects a metadata-version mutation. That service-free
+result qualifies the verifier's identity checks; it does not prove an actual
+Poetry build, RCC action, provider request or unavailable-provider warm reuse.
+The live test remains separately opt-in through `ACTIONS_REAL_RCC_ACCEPTANCE=1`.
+When refreshing this verifier onto native control changes, compare the committed
+producer-input and selected-test inventories at the merged tree before carrying
+artifact evidence forward. Preserved producer bytes do not change the source
+identity or failed wrapper cell of an older candidate-wheel receipt.
+
 With RCC v18.19.2 `cache serve`, two isolated consumer homes acquired the
 recorded digest through the same provider and each returned the exact digest
 with `verification.valid: true`. After the provider's digest-addressed
