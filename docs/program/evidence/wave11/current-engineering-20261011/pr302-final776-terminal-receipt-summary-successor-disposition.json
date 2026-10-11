@@ -1,0 +1,12 @@
+{
+  "original_receipt": {
+    "path": "/workspace/engineering/pr302-final-current-scoped-integration-review/safe-final-current-scoped-integration-GO.json",
+    "sha256": "7c4d3b448760935e9e7da75b15a6cdeaa5b3e096c70dc9b2a0a776c10a147899"
+  },
+  "successor": {
+    "path": "/workspace/engineering/pr302-final-current-scoped-integration-review/safe-final-current-scoped-integration-GO-v2.json",
+    "sha256": "b65220a19647d195c6f8c51881ad07639083134d96f92a6feab31bd980f37ef1"
+  },
+  "delta": "Only two summary strings corrected: remove inapplicable queued-publisher futurefailure/log proposal and explicitly label priorqueued evidence historical. No metadata, source, actual proof, GO scope, raw files or qualification changed.",
+  "Upstream_disposition": "none"
+}

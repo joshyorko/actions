@@ -1,0 +1,8 @@
+{
+  "original_receipt": {
+    "path": "/workspace/engineering/pr309-issue152-request-enforcement/paused-initial-fixture-frozen-checkpoint.json",
+    "sha256": "ae4a0c040a3067b468920a439636c65b849f6c103249e74c7e426debcf742766"
+  },
+  "only_correction": "exact authoritative websocket.close/code1008 dict, no invented reason key; budgets/state/auth predicates unchanged",
+  "corrected_source_sha256": "852bc2575154039a1151c5c0dd100f3bb68ca977026a28b237d5bff60e6cb46a"
+}

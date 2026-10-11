@@ -371,3 +371,52 @@ patch context. Full54-contract acceptance, private RCC recovery, approved OAuth
 source/content policy, actual product/native/backend/provider scopes, final #221
 union/closure and Runtime release/distribution remain HOLD. Devsy is disabled;
 no Dakota or replacement infrastructure is used. Upstream disposition: none.
+
+The next engineering checkpoint retains516 original receipts and patches, with
+all prior428 entries unchanged. Actual integration is now
+`77647484b3cdd8e18aabf344a4018ea8ed8e3ea0`, tree
+`a1c4aecb8aa83935245377cfecfa1de568a25dcf`, following normally integrated #302.
+Its exact current source/control/synthetic tuple passed all26 declared checks and
+all10 workflows. Final scoped review7c4d3b44 and independent actual readback8ebf678e
+remain separate from sourceS′d642, controlC′a346 and syntheticf5dd. Named summary
+successorb652 corrects only two stale queued-state summaries; original7c is kept.
+The fresh three-case actual receipt54a855d6 remains narrow: one real publication,
+managed Core1.0.2, staged payloads and observed natural HTTP200 return precede
+separate cleanup. It does not qualify the whole current Runtime wheel or134.
+
+Reviewed same-branch refreshes #2993155 and #309513 are normally pushed for fresh
+CI against actual776. #299 source1219 passed/13 skipped preserves original shared
+output implementation and accepted RCC adapter; #300 waits for actual accepted
+#299 integration. #309 source1245 passed/13 skipped includes all73 request cases.
+Three original owned mutations failed through real secret/SQL/artifact exposure
+before restoration; the original fixture failures are retained. The test-only
+9475 child preserved209 production files, while the later776 union separately
+imports its accepted RCC adapter delta. Original registration census, request test
+and auth source are retained. Neither source push carries older774 hosted CI.
+
+#308 SOURCE7eb has the narrow independently accepted public parent-deadline guard,
+its19 retained controls and original candidate contract preserved. Source1190
+passed/13 skipped; RED16 failures/3 passes preceded GREEN19. Independent SOURCE review29c13d7e admits separate CONTROL authoring only; the
+source-pinning CONTROL and current hosted execution remain distinct gates; no current hosted actual
+or CLI-parent acceptance is bundled. The original opt-in candidate-wheel test
+asserts a negative lifecycle, and the2510-second envelope was not exercised by a
+short provider control. Public guard reuse does not reconstruct missing private
+RCC01f/frozen-v6 or import the unrelated native trust-profile union.
+
+Existing private completed-scratch archives preserve21 named namespaces across
+eight batches; original failed563d remains. Batch7 and8 safe receipts and original
+independent preservation reviews are retained. This records byte preservation
+and scoped capacity recovery, with historical handles and unrecorded metadata
+unknown. It neither restores a failed gate nor creates replacement infrastructure.
+
+PR221 stays draft at776/communitya709, with a current complete closure audit of
+zero linked issue closures. Its33-check preflight is historical pending metadata,
+not final current CI. Prospective Runtime1.0.3 wheel integrity/RECORD and source
+body agreement do not accept its two empty generated OAuth configuration inputs;
+source authority, content policy and complete release gates remain HOLD. No
+Runtime tag/publication, PR221 integration or retained issue closure is admitted.
+Raw logs, configuration strings, ZIPs, native artifacts, environments and scratch
+archive indices remain private outside Git. Canonical improvements cover actual
+request fixtures, YAML root-trigger normalization, named-ref/policy census and
+negative candidate/parent-watchdog scope.
+Upstream disposition: none.

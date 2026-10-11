@@ -1,0 +1,115 @@
+{
+  "schema": "actions-independent-current-CI-admission-review/v1",
+  "PR": 308,
+  "observedUTC": "2026-10-11T07:30:09.840374+00:00",
+  "head": "4ca431b51b018b947fac6f096ca3cdc21028dd28",
+  "tree": "3726baf58c5b7caac1fbb1339e17b9d083b40fa4",
+  "base": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "prospective_merge": "97861fcc50347bb5bcab83620ed758b5dd7c4800",
+  "ordered_prospective_parents": [
+    "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "4ca431b51b018b947fac6f096ca3cdc21028dd28"
+  ],
+  "verdict": "HOLD_THREE_CURRENT_REQUIRED_JOBS_PENDING_NO_TERMINAL_FAILURE",
+  "CI": {
+    "complete_paginated_API_inventory": {
+      "path": "/workspace/engineering/current299308-ci-independent-review/pr308-complete-current-CI-inventory.json",
+      "bytes": 140333,
+      "sha256": "85c4901e6db9f60cdf2f8145c82d4602f103656310cecf4667ee5ffb11ae6075"
+    },
+    "exact_workflow_filter_matrix_and_check_job_bindings": {
+      "path": "/workspace/engineering/current299308-ci-independent-review/pr308-exact-expected-workflow-and-check-bindings.json",
+      "bytes": 8644,
+      "sha256": "8e07ce00a2ebbf124939befa888bcd5d1488fc6613a3861cb7a46b715e440d67"
+    },
+    "expected_workflows": 6,
+    "expected_jobs": 19,
+    "complete_current_check_run_count": 19,
+    "complete_actual_job_count": 19,
+    "status_commit_count": 0,
+    "merge_SHA_checkruns_count": 0,
+    "head_and_control_binding": "Every workflow/run/job/check is exactcurrenthead; checksIDs equaljobsIDs, suites matchruns. No priorhead greens carried. GitAPI fullprospectivemerge ordered774+head/tree=currenthead and namedrefs/pull merge confirmexact4b39(299)/97861(308).",
+    "all19SUCCESS": false,
+    "pending": [
+      {
+        "job_id": 114410449748,
+        "run": 38119273317,
+        "scope": "Windows Runtime tests",
+        "status": "in_progress",
+        "currently_integration_in_progress": true
+      },
+      {
+        "job_id": 114410450014,
+        "run": 38119273364,
+        "scope": "Mac Toolkit primary18.19.3",
+        "status": "queued"
+      },
+      {
+        "job_id": 114410450015,
+        "run": 38119273364,
+        "scope": "Mac Toolkit n-1 18.18.1",
+        "status": "queued"
+      }
+    ],
+    "terminal_failure_observed": false,
+    "pending_not_cause_or_failure": "No timeout cause/semantic failure/cleanup inference from inprogress orqueue duration; no rerun/retry/artifact/logdownload."
+  },
+  "checkout_scope": "Required source/build checkouts configured default PRmerge, checkoutsteps terminalSUCCESS exceptnot-yetqueuedMacToolkit308. Prospective Gitmerge refs/tree/parents authenticated; actual runtime jobAPI head/source config observed. Original checkoutlog/manifest not acquired under read-only no-download boundary; no independently measured artifact provenance claim.",
+  "policies_reviews_threads": {
+    "inventory": {
+      "path": "/workspace/engineering/current299308-ci-independent-review/complete-current-policy-review-thread-inventory.json",
+      "bytes": 1487,
+      "sha256": "5d29d537073641251da0acff8afcb17e75dbbccb26fa437c03cd114c88123201"
+    },
+    "paginated_reviews": 0,
+    "all_review_threads": 0,
+    "thread_pagination_exhausted": true,
+    "reviewDecision": null,
+    "observed_active_rules": [],
+    "observed_rulesets": [],
+    "branch_protected": false,
+    "branch_required_contexts": [],
+    "protection_detail": "REST403 Resource not accessible by integration; preserved visibility limitation. Branchsummary+active rules+rulesets observed no requiredcontexts/review; no policy waiver or force requested.",
+    "draft": false,
+    "normal_ready_required": false
+  },
+  "accepted_source_controls": {
+    "pr308-current774-frozen-source-receipt.json": {
+      "source": "/workspace/engineering/pr308-actual774-refresh/frozen-source-receipt.json",
+      "bytes": 10796,
+      "sha256": "51c946c156b09c0da7c6bcc80e0a4a2815ed569947f862f56812c0aa4d236870"
+    },
+    "pr308-current774-independent-frozen-source-review.json": {
+      "source": "/workspace/engineering/pr308-actual774-refresh/independent-frozen-source-review.json",
+      "bytes": 5583,
+      "sha256": "db8780bba1f4b1125fb110daafc298af41cdc67003ff715279bc5fda33b90797"
+    },
+    "pr308-current774-canonical-imported-delta.patch": {
+      "source": "/workspace/engineering/pr308-actual774-refresh/canonical-imported-delta.patch",
+      "bytes": 13215,
+      "sha256": "c8f464f911c97f0176f0534632dc89f4a0becfbbc66c60f2d364c02e03b47c7c"
+    }
+  },
+  "retained_scope_HOLDs": "Wholeissue134/private01f/frozen-v6/fullprovider/metadata/native/backend/transport acceptance and Runtimepublication are not admitted by sourceCI.299274producer originalsamebranch withold92498sixchanged+sixadds remainsunqualified;300 waitsactualaccepted299 integration.308verifier fixture/wholewheelidentity is not actualcurrentRCC/platform/private full134. No gateexception authorized.",
+  "final_readback": {
+    "path": "/workspace/engineering/current299308-ci-independent-review/final-head-target-and-pending-jobs-readback.json",
+    "bytes": 14456,
+    "sha256": "5cc302eab2080e1f76cafc9ecbacba6200939f85b2182c85d60207f49e4058a8"
+  },
+  "next_root": "Waitcurrent requiredjobs terminal and requerycomplete19set. Ifterminalfailure, retainoriginalfullprivatejoblog/actualtuple once under separate authorization and classifyprimaryphase, current two-node diagnostics actualcleanup/timefields; no extension/prewarm/retry/causeguess. Anytargetchange requiresordinaryrefresh/freshCI.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accepted exact owning source patches already retained/verified; new exact read-onlytriggerkey proposal",
+    "Exact_delta": {
+      "path": "/workspace/engineering/current299308-ci-independent-review/canonical-workflow-trigger-key-normalization-proposed.patch",
+      "bytes": 737,
+      "sha256": "c5e4a8f166a4e3c96bad2f0a93de3cc2b76eb5003d3cbaeaa07dc400ceda384c"
+    },
+    "Disposition": "PROPOSE exact737B five-lineparagraph before expectedCIjobset. Existing accepted299/308canonical sourcepatch bytehashes verified separately; no application/source/evidencebranch mutation by reviewer.",
+    "Durable_learning_captured": "PyYAML default YAML1.1 unquoted on rootkey parsesTrue; quoted on remainsstring. Normalize onlyroot eventkey before derivingcomplete path/branch-filtered workflowjobinventory.",
+    "Evidence": "Initial immutable verify_expected.py detected onlytwo quoted-on workflows and falsely omittedfour actualworkflows; namedverify_expected_v2.py onlyaddsTrue rootfallback, actualsix-workflow19job identities fullymatch onboth currentheads. Exactcomplete paginated check/job/run sets plus actualsourceworkflowbytes. This is independent proof preparation, not sourcegate failure/newimplementation or gatewaiver.",
+    "Stale_or_ambiguous_guidance_removed": "Workflow expectedjobset guidance lacked loaderkey ambiguity, allowing four requiredworkflows to be missed despite complete APIpagination.",
+    "Remaining_uncertainty": "CurrentCI timing/postreadychecks and futuretargetunion;308three pendingjobs; source/provider/private/native/artifact/wholeissue/release acceptance retainedunknown; no actualcheckout/artifactdownload in this task.",
+    "Upstream_disposition": "none"
+  },
+  "reviewer_actions": "Boundedread-only completepaginatedchecks/jobs/runs/statuses/reviews/GraphQLthreads/policies/Gitrefs/sourceworkflow parsing; no source/index/appmutation,push/merge/rerun/artifact/logdownload/native/provider test or infrastructure.309ec73 notadmitted."
+}

@@ -1,0 +1,16 @@
+{
+  "status": "INITIAL_PROPOSAL_PATH_EXPECTATION_MISMATCH_NO_PRIVATE_LEAK_CLAIM",
+  "observed": "67PASS1FAIL10.56s; /artifacts/unrelated.txt returns200, expected404; all54credentialmatrix+6dispatchdenials+6ASGIWS+dot-binding404passed",
+  "source_authority": "existing /artifacts/{run_id} SPA route before staticmount captures onepart unrelated.txt; serve_artifact_index calls serve_index for non-dot path. Mount requires2+pathsegments. Originalinventory explicitly labels UIroute public separately from authenticatedterminalmount.",
+  "raw_response_body": "not retained; status failure only, no leaked file or private response assertion established",
+  "source": {
+    "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/corrected-close-initial-matrix-source-preserved.py",
+    "sha256": "852bc2575154039a1151c5c0dd100f3bb68ca977026a28b237d5bff60e6cb46a"
+  },
+  "log": {
+    "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/corrected-73-cell-request-matrix.log",
+    "sha256": "dc118404d2b8c6c097caa79cfadb9c1ff54beadfec1152e8939045a0041379d6"
+  },
+  "proposed_correction": "Root choose source-authority publicUI200/no-privatefilebytes assertion on samepath, or replace onepartpath by mount-only /artifacts/unrelated.txt/payload.bin preserving404; no production auth changes",
+  "remaining": "privacy/mount test and public/localextras not complete; no waiver or actual admission"
+}

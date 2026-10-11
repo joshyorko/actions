@@ -1,0 +1,18 @@
+{
+  "status": "NORMAL_EXISTING_PR_BRANCH_PUSH_AUTHENTICATED",
+  "pr": 299,
+  "head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+  "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+  "branch": "feat/shared-run-output-20261010",
+  "existing_remote_before": "5db93e2251cf039ef81780730098da1b255d8d2e",
+  "named_remote_after": "3155fc55ea7d47afbc547fddc963b5860462924b",
+  "actual_target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "source_receipt_sha256": "ecd10a4c0d696b022219fed9b16884fca8893167d5dc069140716fe0e60889ce",
+  "independent_source_review_sha256": "40b79b4acb2909634c6c6cf66f17b5404f8d9b2ca722627c0e8db3127b8269d2",
+  "full_source": "1219PASS13SKIP",
+  "prior_5db_774_19CI": "HISTORICAL_NOT_CURRENT_CARRY",
+  "fresh_hosted_CI": "REQUIRED",
+  "300_dependency": "ACTUAL_ACCEPTED_299_INTEGRATION_NOT_SOURCE_PUSH",
+  "no_merge_native_private_release_claim": true,
+  "upstream_disposition": "none"
+}

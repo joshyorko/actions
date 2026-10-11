@@ -1,0 +1,21 @@
+{
+  "status": "NORMAL_EXISTING_PR_BRANCH_PUSH_AUTHENTICATED",
+  "pr": 309,
+  "head": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+  "tree": "3c2c8ad1c9a067ec774eafd6f5d254cb8703213b",
+  "ordered_parents": [
+    "9475a30fbe8645fd0c6b9c2746182f7a78631059",
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+  ],
+  "branch": "test/auth-route-census-20261010",
+  "existing_remote_before": "ec73bb6372c1f613a3e130f0ce92f649d9d40a97",
+  "named_remote_after": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+  "source_receipt_sha256": "437aafe5f58d667b11d1456fd5860bfd80a4c429515fa47c815dcdfbaeb0b159",
+  "independent_source_review_sha256": "a769ac74ebd6c215f89d0fa181e8038f895d666f2e95863033626733a5c76462",
+  "full_source": "1245PASS13SKIP15WARN",
+  "request_authorization_cases": 73,
+  "prior_ec73_774_CI": "HISTORICAL_NOT_CURRENT_CARRY",
+  "fresh_hosted_CI": "REQUIRED",
+  "no_merge_native_private_release_claim": true,
+  "upstream_disposition": "none"
+}

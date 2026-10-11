@@ -2273,8 +2273,8 @@ These service-free source controls do not recover the missing private inspector
 or specification and do not qualify provider, metadata or native execution.
 The wrapper cell accepts only terminal `completed` with an integer zero exit
 code, excluding booleans, missing status and nonterminal states. Focused tests
-exercise detached live writers and fast-exiting adopted children, but source
-Runtime/candidate-wheel receipts still show a failed RCC wrapper. These harness
+exercise detached live writers and fast-exiting adopted children, but the
+retained candidate-wheel receipts keep their historical failed RCC wrapper. These harness
 checks do not establish production pool retirement, lease-release ordering,
 frozen Runtime acceptance or remote-provider acceptance.
 
@@ -2877,6 +2877,11 @@ observations. These semantics are verified against RCC v18.19.3 commit
 `4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`, `pretty/functions.go`.
 
 
+When inspecting workflow triggers with PyYAML's default YAML 1.1 resolver,
+account for unquoted `on` becoming the boolean key `True`; quoted `'on'` remains
+a string. Normalize that root trigger key before evaluating event, branch and
+path filters. Otherwise a workflow inventory can silently omit required jobs.
+
 Derive the expected CI job set from the exact workflow revision, branch/path
 filters, matrices, job conditions and dependencies. A dependent job can appear
 only after its `needs` finish; an early check count is not final. Exhausting a
@@ -3038,7 +3043,19 @@ Candidate-version regression controls can create synthetic wheel ZIPs and contro
 Poetry responses to test source, filename and METADATA identity and reject a
 metadata mutation. This qualifies the verifier, not an actual Poetry build, RCC
 action, provider request or unavailable-provider warm reuse. The live RCC case
-remains separately opt-in. Compare committed producer and selected-test inventories
+remains separately opt-in.
+The retained opt-in candidate-wheel test expects overall `FAIL` and failed
+offline-warm cells. A passing test verifies that negative contract; it does not
+qualify a successful candidate lifecycle. Preserve those assertions during guard
+reuse and qualify a positive candidate proof separately. Its retained parent
+watchdog is 2465 seconds and the test envelope is 2510 seconds with a 10-second
+cleanup grace. A shorter control gateway does not cover that invocation.
+Keep parent watchdog receipt handling separate from native-mode and trust-profile
+selection. Reusing its reviewed helpers and timeout branch does not require those
+implementations. Review the completed source checkpoint before authoring a separate
+hosted-control commit that pins its commit and tree. The three-case provider control
+does not exercise the candidate-wheel CLI parent's timeout path.
+Compare committed producer and selected-test inventories
 at each ordinary refresh before carrying artifact evidence; preserved input bytes
 do not relabel an older candidate receipt or repair its failed wrapper cell.
 
@@ -3047,6 +3064,10 @@ integration target. Reconcile every declared matrix job with its workflow run an
 check suite; a PR job named publish can validate artifacts while registry upload
 stays push-only. Check draft state, reviews and threads separately. An inaccessible
 protection endpoint is an unverified policy surface, not a bypass permission.
+An empty visible ruleset list does not resolve an inaccessible traditional
+branch-protection endpoint. Bracket a paginated census with live named-ref
+readbacks. If the target advances during collection, retain the old tuple and
+query the new head separately; do not transfer its predecessor's passing CI.
 After an actual dependency merge, refresh the existing source branch normally,
 preserve history and receipts, inspect the complete union and regenerate all
 canonical workflows before fresh configured and hosted gates. Engineering
@@ -3113,6 +3134,38 @@ Review a route census as a Counter of route class, normalized `path_format` and
 complete sorted method set. A URL set loses duplicate registrations and method
 or class changes. The stopped-startup census verifies registration and
 classification; credential enforcement still requires its actual request matrix.
+
+An assembled authorization-request fixture can capture `start_server()`'s real
+application in a `before_start` callback and return `False` before pool and
+Uvicorn startup. Keep its real `create_db()` context alive through requests and
+use an owned file-backed SQLite database: `Database.connect()` opens a separate
+thread-local connection, so the registration-only census's `:memory:` database
+is not a shared request database for TestClient worker threads.
+Snapshot logical SQL rows and owned files after legitimate fixture seeding,
+then compare them after each denied request. Include Run records, counters,
+artifact bindings and directories, Work Item attachments, schedules and the
+in-memory secret store. Observe `Database.connect()` as well as `get_db()`:
+handlers can retain imported database aliases, so replacing only the defining
+module attribute does not observe every read boundary. Robot dispatch creates
+Run/counter/artifact state
+before entering its RCC background task; a zero-RCC-call assertion alone does
+not prove rejection before side effects. Exercise valid-key controls through
+real handlers for the deterministic subset. Keep a valid-key validation error
+or dispatch sentinel separate from successful import or execution acceptance.
+The configured server key and browser session do not identify a Workspace
+principal: `APIKeyAuthBackend` returns a generic authenticated user. Keep that
+boundary separate from Workspace ownership and binding contracts.
+
+The public `/artifacts/{run_id}` UI fallback is registered before the protected
+artifact mount. A one-segment path can therefore return the UI shell rather
+than exercise file delivery. Use two-segment paths for mounted storage-internal
+refusal controls, including the dot-prefixed binding manifest, and retain exact
+404, no private bytes and unchanged-state assertions. Native ASGI WebSocket
+denial sends `websocket.close` with code `1008` and no `reason` field; match
+that source-defined shape rather than invent an empty-reason requirement.
+Bounded native ASGI echo and close still do not qualify network or browser
+acceptance.
+
 
 Candidate wheel identity requires exactly one UTF-8 `.dist-info/METADATA` member
 whose `Name` and `Version` match the expected distribution and checked-out version

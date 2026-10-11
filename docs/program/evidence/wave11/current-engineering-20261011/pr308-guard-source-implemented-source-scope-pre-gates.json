@@ -1,0 +1,17 @@
+{
+  "status": "PASS_STATIC_SOURCE_SCOPE",
+  "ordinary_merge": "bc4296014fed571b478bc86911217e5f1dbcdc01",
+  "ordered_parents": [
+    "4ca431b51b018b947fac6f096ca3cdc21028dd28",
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+  ],
+  "exact639helpers_and_19control_ASTs": true,
+  "whole308verifier_AST_unchanged_after_removing_only_guard_helpers_timeout_handler": true,
+  "whole308tests_AST_unchanged_after_removing_only7helpers_controls_hashlib": true,
+  "candidate_negative_actual_test_deadlines_argv_assertions_unchanged": true,
+  "source_worktree_paths": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": "e4a311dd9e6dd6fa98b0257f37716b7e326eeac7f2beb8d9324802e40878fba3",
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": "099f81433f1089e2de1b3ff1e7a7fd18fc3b96ef4dcf46b867753e44a88b5b82",
+    "docs/skills/repository-operations.md": "caaefe29ee0d7b47302f434847c2ed5981e2084062988f23caf79ac2368f5839"
+  }
+}

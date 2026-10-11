@@ -1,0 +1,130 @@
+{
+  "status": "GO_INDEPENDENT_ACTUAL_NORMAL_PR302_INTEGRATION_READBACK_ONLY",
+  "captured_at_utc": "2026-10-11T07:33:15.886Z",
+  "live_named_target": {
+    "ref": "heads/integration/community-release-20261008",
+    "sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+  },
+  "merged_PR": {
+    "number": 302,
+    "merged": true,
+    "state": "closed",
+    "head": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "actual_merge": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "merged_at": "2026-10-11T07:31:44Z"
+  },
+  "actual_committed_tuple": {
+    "sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "ordered_parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ],
+    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf"
+  },
+  "tested_synthetic": {
+    "sha": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+    "ordered_parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ],
+    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "actual_tree_equal": true
+  },
+  "control": {
+    "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "soleparent": "d642a3ac24f8da85101538bdfdf59b509fd74bfb"
+  },
+  "source": {
+    "sha": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+    "ordered_parents": [
+      "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+    ]
+  },
+  "complete_actual_synthetic_control_leaf_inventory": {
+    "leaves": 1409,
+    "typed_blob_mode_table_byte_exact": true,
+    "sha256": "7202ed2bfb85c5849fa5e9e11377dd09b098d5209932823503437e96371f10b6"
+  },
+  "immutable_source_pin_and_generator_exact_control": true,
+  "nine_candidate_source_git_hash_modes_authenticated": true,
+  "root_receipt": {
+    "path": "/workspace/engineering/pr302-actual-integration.json",
+    "sha256": "841713980d4eb46d5915d1e7bc3b2610616af5149a20bfd21775185ac7bd9797",
+    "initial_missing_synthetic_object": "Root retained initial missing local object failure; exact SHA subsequently fetched. Reviewer confirms all immutable objects and complete trees currently exist/equal. No new fetch by reviewer."
+  },
+  "retained_source_control_final_GO_actual_refs": [
+    {
+      "path": "/workspace/engineering/pr302-final-current-scoped-integration-review/safe-final-current-scoped-integration-GO.json",
+      "size": 21515,
+      "sha256": "7c4d3b448760935e9e7da75b15a6cdeaa5b3e096c70dc9b2a0a776c10a147899"
+    },
+    {
+      "path": "/workspace/engineering/pr302-final-current-scoped-integration-review/safe-final-current-scoped-integration-GO-v2.json",
+      "size": 21475,
+      "sha256": "b65220a19647d195c6f8c51881ad07639083134d96f92a6feab31bd980f37ef1"
+    },
+    {
+      "path": "/workspace/engineering/pr302-Sprime-independent-source-review/independent-Sprime-source-review-v2.json",
+      "size": 8349,
+      "sha256": "4c1374d437612c8b42c47fde9408e78f4a2ba6d310683e701fb05c25dc5a05f2"
+    },
+    {
+      "path": "/workspace/engineering/pr302-Cprime-independent-control-review/independent-Cprime-control-review.json",
+      "size": 10208,
+      "sha256": "6d2cda93076dea5f0eb79d1ebe62af5df8b0bc7291984ca15a688795e1d7ef4f"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/independent-fresh-three-case-actual-review.json",
+      "size": 9553,
+      "sha256": "54a855d62a41645ec53476d7d212cf8bc3a743520c952dca4005790876afc20c"
+    }
+  ],
+  "retained_final_current_CI_scope": {
+    "checks": 26,
+    "jobs": 26,
+    "flows": 10,
+    "all_success": true,
+    "publisher": 114414257399,
+    "expected_PR_release_step_skips": "Tag provenance/credential/publication remain skipped; completed validation is not publishing proof.",
+    "evidence_reuse": "Final7c4d and summaryv2b652 describe original tested syntheticf5dd at target774. Actual776 differentcommit but exact same orderedparents/tree independently verified; no historical63cf receipt transfer."
+  },
+  "original_private_three_case_archive_and_full_log_unchanged": true,
+  "prior_other_branch_CI": "Older299/308/305/282/306/309/774 receipts do not admit those branches against newly advanced776 target; refresh/review/freshchangedunionCI separately.",
+  "remaining_HOLDs": [
+    "Changed runtimeadapter native92498 unqualified; no new native build/artifact qualification",
+    "Current Runtime wheel OAuth twoempty strings does not qualify approvedsource/content/coldregistry/installation/release",
+    "Fullprivate134135 metadata/spec/supervisor and broaderRCC/Windows/platform/provider remainHOLD",
+    "No Runtime/Core/WorkItems publication,221integration,issueclosure or release admission claimed"
+  ],
+  "private_original_API_metadata": {
+    "path": "/workspace/engineering/pr302-actual-integration-independent-review/original-actual-readback-API-metadata-private.json",
+    "size": 70591,
+    "sha256": "8126214b2ff8c06ae72420f8f8ed06ef15fb65989db2d363dca9bd7366887530",
+    "mode": "0600"
+  },
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; committed fef375 source/control/testedmerge lesson verified unchanged in actual776. Accepted latejob d7a0 root adaptation independently verified in campaign canonical workspace; not falsely claimed as part of actual776 committed tree.",
+    "Durable_learning_captured": "A normal integration commit and tested synthetic can differ in commit SHA while their ordered parents and complete typed tree are identical. Carry scoped CI only after verifying those identities. Dependent publisher completion must be included in full current CI.",
+    "Evidence": [
+      "Actual/live namedref/mergedPR/immutable776 API and Git orderedparents+tree exactf5dd/controla3461409leaves",
+      "Final26SUCCESS10flowSUCCESS publisher terminal plus original54a immutable sourcepin/nine files",
+      "Committed source/control canonical blob equality and exact accepted root late-job paragraph"
+    ],
+    "Stale_or_ambiguous_guidance_removed": "Neither merge status nor previousCI counts alone admit actual integration or later dependent branches; historicaltarget results kept distinct from current776.",
+    "Remaining_uncertainty": "Unchanged private/native/currentOAuth/release qualification holds; earlier branch CI needs newactualtarget admission.",
+    "prior_exact_deltas_disposition": {
+      "fef37515784cbf9fbb003ecca90ec0acb78d8e319bf2fd0ce2c2c1805ff955e6": "RETAINED_AND_VERIFIED_IN_ACTUAL_COMMITTED_GUIDE",
+      "d7a0a7b9452553bb609084acdf71bb7ace68f152b5bdd419a8817e151ddeb93b": "ACCEPTED_ROOT_ADAPTATION_VERIFIED_IN_CANONICAL_WORKSPACE"
+    },
+    "actual_committed_guide_sha256": "7b288d85cc74c78e4d4685a7c2d5aebb2dde1130f74f0527704049b071287886",
+    "root_adaptation_snapshot": {
+      "path": "/workspace/engineering/pr302-actual-integration-independent-review/accepted-root-canonical-adaptation-at-actual-readback.md",
+      "sha256": "4d1798fec7981ec7c957a98c7b7bd4d1e64a60106241121bf6c89f087dc5afab"
+    }
+  },
+  "Upstream_disposition": "none",
+  "mutations": "External owned readonly evidence only; no repository/ref/application write, merge/rerun/log/artifact acquisition/native/provider/private/OAuth/release execution."
+}

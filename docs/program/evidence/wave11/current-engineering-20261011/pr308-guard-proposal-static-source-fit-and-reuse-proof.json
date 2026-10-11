@@ -1,0 +1,160 @@
+{
+  "status": "READ_ONLY_STATIC_SOURCE_TASK_FIT_NO_IMPLEMENTATION_OR_TEST_EXECUTION",
+  "original_public11_objects_Git_sha256_verified": true,
+  "ordinary_refresh": {
+    "base": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "left": "4ca431b51b018b947fac6f096ca3cdc21028dd28",
+    "right": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "only_both_changed_path": "docs/skills/repository-operations.md",
+    "leaves_both": 1409,
+    "verifier_and_guard_tests_unchanged_by_target776": true
+  },
+  "whole_public_branch_import": {
+    "changed_since774": [
+      "action_server/scripts/native_runtime_artifact_binding.py",
+      "action_server/scripts/test_native_runtime_artifact_binding.py",
+      "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "action_server/src/actions/server/_action_package_handler.py",
+      "action_server/src/actions/server/_actions_import.py",
+      "action_server/src/actions/server/_actions_process_pool.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/rcc_trust_profile.py",
+      "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+      "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "both_changed_paths": [
+      "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+      "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "AST_overlap": {
+      "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+        "same_AST_overlap": [
+          "CandidateWheel",
+          "CandidateWheels",
+          "candidate_version_fields",
+          "candidate_wheel_records",
+          "validate_candidate_wheel_metadata"
+        ],
+        "divergent_AST_overlap": [
+          "_run",
+          "build_candidate_wheels"
+        ]
+      },
+      "action_server/src/actions/server/_rcc_runtime_adapter.py": {
+        "same_AST_overlap": [
+          "RccPublishedArtifactDetails",
+          "parse_published_artifact_details"
+        ],
+        "divergent_AST_overlap": [
+          "_publish_artifact_payload",
+          "publish_artifact",
+          "publish_artifact_details"
+        ]
+      },
+      "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py": {
+        "same_AST_overlap": [
+          "test_legacy_publish_artifact_keeps_artifact_only_payload_compatibility",
+          "test_publish_artifact_details_preserves_one_pinned_rcc_payload_and_provider",
+          "test_publish_artifact_details_rejects_missing_malformed_or_conflicting_identity"
+        ],
+        "divergent_AST_overlap": []
+      },
+      "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py": {
+        "same_AST_overlap": [
+          "_create_runtime_catalog_database",
+          "test_published_artifact_details_preserves_one_rcc_identity_pair",
+          "test_runtime_catalog_database_fixture_creates_directory_and_current_schema",
+          "test_staged_package_executes_in_managed_rcc_runtime"
+        ],
+        "divergent_AST_overlap": []
+      }
+    },
+    "not_required_for_receipt_guard": "Native helper files/trust-profile module and production handler/import/pool/adapter changes are independent original public checkpoint source, not prerequisites of two stdlib receipt helpers or timeout handler."
+  },
+  "narrow_proposed_patch": {
+    "path": "/workspace/engineering/pr308-public-deadline-next-source-proposal/exact-narrow-accepted-guard-source-proposal.patch",
+    "size": 16984,
+    "sha256": "e502ba2f4a312566474a4d28d9acf8fefb15679be44c5eb1748ece0df1dcf73b"
+  },
+  "canonical_proposed_patch": {
+    "path": "/workspace/engineering/pr308-public-deadline-next-source-proposal/exact-canonical-guard-reuse-scope-proposal.patch",
+    "size": 3635,
+    "sha256": "20ec31b441f8b9d4523d00577611e8f1985259faa76021d00eef89b705f8b605"
+  },
+  "reuse_proofs": {
+    "exact_two_accepted639_helper_ASTs": [
+      "_private_deadline_receipt_file",
+      "record_supervisor_deadline_failure"
+    ],
+    "exact_accepted639_TimeoutExpired_handler_AST": true,
+    "after_removing_exact_guard_additions_original308_verifier_AST_unchanged": true,
+    "needed_imports_already_present": [
+      "Path",
+      "hashlib",
+      "json",
+      "os",
+      "tempfile"
+    ],
+    "no_native_binding_or_trust_profile_dependency": true,
+    "exact_original19_parameterized_guard_controls_reused": [
+      "parent_receipt_control",
+      "_worker_bytes",
+      "test_parent_deadline_demotes_overall_receipt_preserving_worker_measurements",
+      "test_parent_deadline_annotation_collision_preserves_unknown_worker_field",
+      "test_parent_deadline_never_fabricates_missing_or_malformed_worker_receipt",
+      "test_parent_deadline_persistence_failure_preserves_primary_and_owned_files",
+      "test_parent_nondeadline_completion_keeps_original_worker_receipt"
+    ],
+    "existing308_test_module_AST_unchanged_after_removing_new_guard_controls_hashlib": true,
+    "existing_mode_candidatewheel_and_original_wheel_versions_filename_METADATA_expectations_unchanged": true
+  },
+  "historical_bindings": [
+    {
+      "path": "/workspace/engineering/rcc-public-checkpoint-live-recovery.json",
+      "size": 4809,
+      "sha256": "91a74396931a4336182cdc79d4226c01f6b6a394376c12856b3def5c8776f5a4"
+    },
+    {
+      "path": "/workspace/engineering/rcc-public-parent-deadline-source/independent-frozen-source-review.json",
+      "size": 7544,
+      "sha256": "259c2b0c9a586cbae04e48092555e29ddf2434de4e7e56b14104e07180a154d8"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual774-refresh/independent-frozen-source-review.json",
+      "size": 5583,
+      "sha256": "db8780bba1f4b1125fb110daafc298af41cdc67003ff715279bc5fda33b90797"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/independent-fresh-three-case-actual-review.json",
+      "size": 9553,
+      "sha256": "54a855d62a41645ec53476d7d212cf8bc3a743520c952dca4005790876afc20c"
+    },
+    {
+      "path": "/workspace/engineering/pr302-actual-integration-independent-review/independent-actual-integration-readback.json",
+      "size": 7319,
+      "sha256": "8ebf678e2ed9335261808e20350461d4b931323e57eddc37d4013308f7eb6fd0"
+    }
+  ],
+  "metadata": {
+    "path": "/workspace/engineering/pr308-public-deadline-next-source-proposal/original-issue134-PR308-metadata-private.json",
+    "size": 83260,
+    "sha256": "af51623e371996ddfa21f2b8320a6ae916b4fc4cb28b5bd9d31cad62f74118a7"
+  },
+  "control_existing": {
+    "candidate_sha": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "candidate_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+    "existing_optin_push_branches": [
+      "test/rcc-provider-rollback-hosted-20261010",
+      "fix/rcc-published-artifact-details-20261010"
+    ],
+    "proposed_new_optin_branch": "fix/rcc-candidate-wheel-identities-20261010",
+    "requires_new_root_source_and_control_authorization": "Current task is preparation only; no event/generator/source mutation performed."
+  },
+  "source_patch_application_scope": "Exact proposal built against immutable4ca verifier/test/guide. Apply only after ordinary776 refresh, preserving both guide conflict blocks and target fef375; reconcile guide anchors against resulting source, no reset/rebase/replacement branch/cherry-pick of entire639 ancestry."
+}

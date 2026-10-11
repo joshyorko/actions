@@ -1,0 +1,91 @@
+{
+  "schema": "actions-pr299-independent-actual776-frozen-source-push-review/v1",
+  "verdict": "GO_NORMAL_EXISTING_PR_BRANCH_SOURCE_CHECKPOINT_PUSH_ONLY",
+  "subject": {
+    "branch": "feat/shared-run-output-20261010",
+    "head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+    "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+    "ordered_parents": [
+      "5db93e2251cf039ef81780730098da1b255d8d2e",
+      "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+    ],
+    "clean": true
+  },
+  "authoritative_source_receipt": {
+    "path": "/workspace/engineering/pr299-actual776-refresh/frozen-source-receipt.json",
+    "bytes": 22666,
+    "sha256": "ecd10a4c0d696b022219fed9b16884fca8893167d5dc069140716fe0e60889ce"
+  },
+  "independent_proof": {
+    "path": "/workspace/engineering/pr299-actual776-independent-review/independent-complete-union-and-bindings-proof.json",
+    "bytes": 247487,
+    "sha256": "f829217c2ad3f01a200a945067d1b2da6dce913be8fba2139d6f5a29bc752c75"
+  },
+  "independent_verifier": {
+    "path": "/workspace/engineering/pr299-actual776-independent-review/verify_frozen.py",
+    "bytes": 7660,
+    "sha256": "8d086b1d4d97b5db785e0d9b7206cf57e1d38daa9c4f74ae9642d78a44d2363b"
+  },
+  "source_verification": {
+    "complete_union_leaves": 1419,
+    "old_parent_leaves": 1419,
+    "actual_target_leaves": 1409,
+    "no_deleted_leaves": true,
+    "no_novel_application_leaves": true,
+    "only_novel_combined_leaf": [
+      "docs/skills/repository-operations.md"
+    ],
+    "all_current_file_bytes_match_committed_Git": true,
+    "original23_implementation_tests_mode_blobs_exact9cb_old": true,
+    "whole_github_mode_blobs_exact_actual776": true,
+    "reader_boundary": "Unchanged service.resolve takes Workspace lock and validates workspace/pin, principal grant read operation, final attachment/expiry/provider before provider.open under same transaction; yields already-authorized reader after transaction. Revocation denies future acquisition, not retroactive open-reader invalidation. No backend/public transport/principal identity qualification inferred.",
+    "native_producers": "274 complete current producer entries:273 exact original299/old plus accepted302 adapter exact target. Compared with92498:261 match,7 change,6 add,0drop; five selected tests separate and exact old/target/native. Native UNQUALIFIED; no exclusions or old binary carry.",
+    "immutable_bindings": "All26 named evidence-file bytes and36 unique absolute receipt bindings independently hash/size matched.24 prepared inputs exact plus5 own concrete prefix/source/config origins verified before full replay; original Bootstrap hash retained.",
+    "YAML_scope": "26 workflow/dependabot byteidentities plus4 additional tracked YAML forms equals30; only8 generator outputs. Both26 before/after maps equal;4 additional hashes checked separately."
+  },
+  "retained_gates_verified": {
+    "Doctor": "PASS",
+    "Bootstrap": "VERIFIED_REUSE exact24source inputs plus five own concrete source/prefix checks; no installer",
+    "Toolkit": 96,
+    "original_shared_output_scoped": {
+      "passed": 189,
+      "platform_skipped": 1,
+      "integration_deselected": 12
+    },
+    "imported302adapter_staged_consumer_scoped": {
+      "passed": 77,
+      "skipped": 1,
+      "integration_deselected": 2
+    },
+    "full_configured_Runtime_source": {
+      "passed": 1219,
+      "skipped": 13,
+      "warnings": 15,
+      "seconds": 122.9,
+      "workers": 2
+    },
+    "full_configured_lint": "Ruff/format/Isort PASS",
+    "typecheck_files": 347,
+    "generated_workflow_roundtrip": 8,
+    "workflow_plus_dependabot_YAML": 26,
+    "all_tracked_YAML_parsed_and_bytepreserved": 30,
+    "additional_four_forms_not_claimed_generated": true,
+    "git_diff_check": "PASS"
+  },
+  "historical_ci_disposition": "Previous5db/774 nineteen-check9318 qualification retained under original tuple only; current3155/776 full hosted CI remains required. Inherited RCC specialized source/control gate pins its candidate, not this299union. No hosted/native/backend/private/release admission from local source checks.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Accept exact imported docs/skills/repository-operations.md delta d62116a39e9c105ee1ca17a15f89e7bb60baa99a9b81e861fcabd71e54180438; no cosmetic child",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr299-actual776-refresh/canonical-imported-delta.patch",
+      "bytes": 10332,
+      "sha256": "d62116a39e9c105ee1ca17a15f89e7bb60baa99a9b81e861fcabd71e54180438"
+    },
+    "Durable_learning_captured": "Distinct source/control/tested-merge identities and fresh target qualification; hash original ZIP/raw lifecycle/publication/staged-consumer/JUnit receipts before summary; publication-details pair from one invocation; Core1.0.2/captured-descendant/private-bundle limits; preserve grant-bound future-reader and concrete-origin lessons.",
+    "Evidence": "Patch exact git diff5db\u21923155, seven paragraph SHA identities retained across their authoritative parent and merged guide (three old reader/origin plus four accepted target source/control/raw/publication blocks); complete1419leaf proof and matched gates/36 bindings.",
+    "Stale_or_ambiguous_guidance_removed": "Inherited one-case/current-candidate claim replaced by accepted three-case and exact source/control/raw-review boundaries; preserved historical receipts never relabeled.",
+    "Remaining_uncertainty": "Fresh3155/776 hostedCI, original Windows readiness cause/cleanup dimensions, native producer qualification, real backend/private/authenticated transport, full134/135, PR300 and release acceptance remain HOLD. Source PASS does not prove universal descendant reaping; source/control proof is not actual current299 RCC execution."
+  },
+  "review_scaffold_correction": "Initial final-receipt precondition incorrectly expected30 entries in workflow/dependabot map. It rejected before writing receipt. Corrected verifier preserves26-map plus4-additional-YAML distinction and revalidated all30; no source test failure or source change.",
+  "actions": "Read-only Git/file/hash/source/log inspection and owned safe review outputs only. No source changes, broad replay, gateway/native/provider/browser/metadata execution, artifact downloads, branch/ref mutation, push/merge/application write.",
+  "upstream_disposition": "none"
+}

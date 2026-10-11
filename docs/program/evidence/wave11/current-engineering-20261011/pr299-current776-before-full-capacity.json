@@ -1,0 +1,12 @@
+{
+  "head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+  "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+  "clean": true,
+  "available_bytes": 2666680320,
+  "workers": 2,
+  "root_serialized_full_slot_authorized_after152terminal": true,
+  "light_gates_checked_PASS": true,
+  "producer_proof_sha256": "b1310c55b369dbad019e0907d2a2395a44669d5cf6ee2d809f962a6374515c5d",
+  "concrete_own_origin_proof_sha256": "cbf3f07f1b7dac0d9f02d34707cbee17928392bd5c8c86033c11471d3946894a",
+  "no_installer_or_actual_gate": true
+}

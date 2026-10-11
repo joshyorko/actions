@@ -1,0 +1,20 @@
+{
+  "old_parent": "5db93e2251cf039ef81780730098da1b255d8d2e",
+  "accepted_target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "old_reader_and_concrete_origin_paragraphs_exact": 3,
+  "incoming_verified_source_control_raw_archive_publication_details_paragraphs_exact": 4,
+  "paragraph_sha256_only": {
+    "old": [
+      "1a5ae31a0ce7b2e485d057856dfb0c92c04ee641da4d9b9afd52bc65a7d15fe0",
+      "18c36a43a1394e167edc563243beb81e49181f01b436b3c9928ea416770894e9",
+      "6773d72e6701d0f7ca07c79a9988553ac4937ecba6669eaf063e6271fc233d6c"
+    ],
+    "incoming": [
+      "d049158611c68112f1b6047e7afb0d2680c44c9d1a4b6ed677b316e2ce356998",
+      "1577f829e6d4627fe7efbabf4d67d094aa2811e80743a710deb07f05b56c7cd2",
+      "7e4175a5b94bce771a1dfa49faf95494fa0dcee581fe829498a92fbd0cefcc9d",
+      "1cd2cf616e8039e165babb1036b2daa1eade5281aecf4378a53089ba0294796f"
+    ]
+  },
+  "scope": "Both accepted-parent durable lessons retained; replaced stale one-case RCC/current-candidate guidance follows actual accepted302 scope; no diary/duplicate source"
+}

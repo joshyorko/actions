@@ -1,0 +1,69 @@
+{
+  "schema": "actions-independent-staged428-source-bound-evidence-review/v1",
+  "verdict": "GO_EXACT_STAGED_EVIDENCE_CHECKPOINT_NORMAL_EXISTING_HANDOFF_BRANCH_COMMIT_PUSH_ONLY",
+  "parent": "bbb9b33a87fe6f380ca04c1dec38d14b848dd440",
+  "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+  "staged_tree": "c54b170d91dc7e224bad4fe4cf14f8ce446707bd",
+  "whole_index_fingerprint_sha256": "94c06acfdff854f12ef6fd21cc0895ffdbb2f2d0bbf6ce05504ddf84a4650d0f",
+  "changed_paths": 84,
+  "no_unstaged_or_untracked_source": true,
+  "bindings": {
+    "path": "/workspace/engineering/checkpoint-428-independent-review/verified-manifest-source-and-stage-bindings.json",
+    "bytes": 182832,
+    "sha256": "358e4796413afe39bb3944fb3ad05d32a9727cd340fd524f911060c6e38f84a8"
+  },
+  "manifest_sha256": "d2dc39e5c5c742357511349583f9000293e28e4038ee16b2c9cdfd0bcf1167b9",
+  "README_sha256": "f017c7b7381321e3ce8f12f2f6aabaf9b7b4785da627c0fbb52a84b0c3339175",
+  "canonical_guide_sha256": "c977e264d78d578c8476d27a36f7bfbd4806da1f92b669cf912fe7153df49149",
+  "byte_scope": {
+    "files": 428,
+    "prior347_bytes_manifest_records_unchanged": true,
+    "new81_explicit_collector_named_originals_exact": true,
+    "new_extensions": [
+      "71JSON",
+      "10originalPATCH"
+    ],
+    "nested_absolute_refs": 593,
+    "nested_relative_original_wheel_members": 245,
+    "all838_nested_bindings_exact": true,
+    "original_private_refs_not_copied": true
+  },
+  "privacy": {
+    "new_secret_credentials_private_key_signed_url_jwt_pattern_hits": 0,
+    "all428_broad_scan_false_positive": "Prior unchanged pip report PyJWT description sample jwt.encode({some:payload},secret,HS256); documented example not real credential. Token not reproduced.",
+    "new_URL_hosts": {
+      "api.github.com": 2,
+      "github.com": 1
+    },
+    "no_new_private_full_log_ZIP_native_cache_scratch_member_inventory_raw_config_payloads": true,
+    "prior_safe_exception_disposition": "Prior4XML/12PY/12MD/jsonl/sanitized acceptance-summary.log/41B measured Chrome-version stdout+empty stderr artifacts unchanged; not native binaries or private full logs. Historical raw patch/context bytes preserved."
+  },
+  "claim_consistency": {
+    "pr302_current_threecase54a_and_full26_HOLD_separate": true,
+    "full26_snapshot": "At preserved07:23 readback25SUCCESS and dependentpublishqueued; no fresh live terminal or merge inferred by this batch",
+    "prospective_empty_OAuth_wheel": "PR302 S-prime d642/C-prime a346/syntheticf5dd only; not current221/integration774, integrity does not qualify input/content/publication",
+    "pr306": "Original c38native failures and cf6352precisionHOLD retained; successor1a3source1216PASS13SKIP/959dd GO separate with fresh Windows/fullCI pending",
+    "typed_producer_counts": "305268producer+5selected=273bindings;282269producer+5selected,266same+2changes+1added; no qualifying oldnative for282",
+    "issue152": "Grounded73cell/e21 test-only proposal not implementation/full152/196GO; originalec73census sourceCI not futurechild admission",
+    "body_read_failure": "Original submitted80Bcaterror and prior10292Bbody preservation/restoration receipt retained0108 plus successful authenticated readback; no failed read substituted as correct body",
+    "private_capacity": "Only safe archive-count/hash/recovery metadata receipts copied; private full member inventories/archive payloads excluded; no runtimegate passes inferred"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "ACCEPT exact staged docs/skills/repository-operations.md additions; no extra cosmetic patch proposed",
+    "Exact_delta": {
+      "path": "/workspace/engineering/checkpoint-428-independent-review/canonical-exact-staged-delta.patch",
+      "bytes": 6423,
+      "sha256": "51433130d991da0a93869d8f91a7882f14326a63d06720087c1c893b1f9e2ba2"
+    },
+    "Durable_learning_captured": "Wheel metadata/RECORD integrity versus measured generated-content authority and prospectiveintegration identity; actual existing observer delivery loss/privacy/strict absolute monotonic comparisons; dependent job registration after prerequisites; successful complete body reads before remote mutation.",
+    "Evidence": "Copied exact5ae/535 prospectivewheel originals; byte-identical 36line V2 plus precision successor guide block from1a3, preserved cf6352 counterexample/959dd successor controls; source-linked full26 d7a metadata and body correction0108;428 exact manifest/source/index entries,838 nested bindings",
+    "Stale_or_ambiguous_guidance_removed": "Currentguide lacked precise delivered-line observation, lostsum/privateclock/roundedfalsepositive and cleanup limits; archive selfconsistency versus generator authority, prospectivebuild versus current221, earlypaginated check count versus finaldependentjob, shelloutput versus authoredbody now explicit",
+    "Remaining_uncertainty": "FullcurrentCI/native/provider/backend/browser/private/authoritativeOAuthsource/content/coldconsumer/Runtimepublication/campaign acceptance remain HOLD. Proposed152 still unimplemented. Batch durability does not itself admit engineering source or tests."
+  },
+  "whitespace": {
+    "authored_README_manifest_canonical_diffcheck": "PASS",
+    "all_original_raw_patch_context_and_prior_stdout_measurement_bytes": "Preserved exactly; no normalization or wholeartifact whitespace PASS claimed"
+  },
+  "actions": "Independent read-only Git/index/file/JSON/stdlib retainedwheel-member comparison; owned review files outside checkout only. No source/index changes, tests/gateway, native/provider/browser, artifactdownload, applicationwrite, archive extraction/cleanup, commit/push/merge/publication.",
+  "upstream_disposition": "none"
+}

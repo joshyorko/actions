@@ -1,0 +1,51 @@
+{
+  "measured_inside_each_own_package_Poetry_environment": true,
+  "checked_before_full": true,
+  "rows": [
+    {
+      "package": "actions",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr299/actions/.venv",
+      "source": "/workspace/engineering/pr299/actions/src/actions/__init__.py",
+      "source_sha256": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+      "config_sha256": "9e54a340a89865f8c2e41c271d7f720286c0ce1e3ac2867698100b61e3e53341"
+    },
+    {
+      "package": "action_server",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr299/action_server/.venv",
+      "source": "/workspace/engineering/pr299/action_server/src/actions/server/__init__.py",
+      "source_sha256": "399f9e2ef2d67d7018d8ab7c6b9a65adf70aa33134d15c9840aedcf35a821576",
+      "config_sha256": "e4bb44e1cef35ef810a134f165a7b3e247545822f68d625e29119c6b3d395f8a"
+    },
+    {
+      "package": "actions-http-helper",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr299/actions-http-helper/.venv",
+      "source": "/workspace/engineering/pr299/actions-http-helper/src/actions_http/__init__.py",
+      "source_sha256": "7648587a165a31364362a5b6a8dce9e2eb84baaf81a581dc61916bca9c83cb22",
+      "config_sha256": "daac9c82fd28a7d9cd9387b137acf6f9d8521ef7e2c525a411a1ba83f52218c9"
+    },
+    {
+      "package": "devutils",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr299/devutils/.venv",
+      "source": "/workspace/engineering/pr299/devutils/src/devutils/invoke_utils.py",
+      "source_sha256": "7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5",
+      "config_sha256": "82f0c7518781d4fbcdcc24b3477b25c554e718c43b5e73062a8ab06f13256ccf"
+    },
+    {
+      "package": "work-items",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr299/work-items/.venv",
+      "source": "/workspace/engineering/pr299/work-items/src/actions/work_items/__init__.py",
+      "source_sha256": "95b4d7ae1c47a63fe4745cb794088685ec424812744d780ec4c2c11c6e836654",
+      "config_sha256": "89bbaaaa8996832c65e362b24c15cf590099780b47ad5e3f5ea713a853007528"
+    }
+  ]
+}

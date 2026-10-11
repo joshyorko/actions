@@ -1,0 +1,43 @@
+{
+  "status": "EXPECTED_THREE_RED_ASSERTIONS_WITH_REAL_OWNED_MUTATION_AND_EXACT_LEAK",
+  "records": [
+    {
+      "row": "secrets-write",
+      "actual_status": 200,
+      "changed_categories": [
+        "secrets"
+      ],
+      "owned_artifact_exact_bytes_returned": false,
+      "response_bytes_sha256": "c48b5b1a9776c84602de2306d7903a7241158a5077e7a8519af75c33441b8334",
+      "only_synthetic_owned_data": true
+    },
+    {
+      "row": "work-item-create",
+      "actual_status": 200,
+      "changed_categories": [
+        "logical_sql",
+        "directories"
+      ],
+      "owned_artifact_exact_bytes_returned": false,
+      "response_bytes_sha256": "c6f3bdb91f50e3504168946246bed77d3f24a1978f47735d952e6f987a11938e",
+      "only_synthetic_owned_data": true
+    },
+    {
+      "row": "mounted-artifact",
+      "actual_status": 200,
+      "changed_categories": [],
+      "owned_artifact_exact_bytes_returned": true,
+      "response_bytes_sha256": "8137484fadd3d2f4668dce6b06a45f00ce6aadd391bb6ac3c0bfbfefc687b4ef",
+      "only_synthetic_owned_data": true
+    }
+  ],
+  "test_source_before_after_sha256": "c0202c207cb7979c637d5f6eee4ef951ff47832f415931418a42c788385f5c49",
+  "failed_case_ids": [
+    "tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix[wrong-secrets-write]",
+    "tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix[wrong-work-item-create]",
+    "tests/action_server_tests/test_auth_route_enforcement.py::test_real_assembled_credential_matrix[wrong-mounted-artifact]"
+  ],
+  "all_production_files_unchanged_count": 209,
+  "auth_methods_restored": true,
+  "native_provider_or_external_data": "NONE"
+}

@@ -1,0 +1,281 @@
+{
+  "PR": 308,
+  "head": "4ca431b51b018b947fac6f096ca3cdc21028dd28",
+  "prospective_merge": "97861fcc50347bb5bcab83620ed758b5dd7c4800",
+  "tree": "3726baf58c5b7caac1fbb1339e17b9d083b40fa4",
+  "ordered_merge_parents": [
+    "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "4ca431b51b018b947fac6f096ca3cdc21028dd28"
+  ],
+  "complete_PRfiles_pages": [
+    {
+      "page": 1,
+      "count": 3
+    }
+  ],
+  "changed_paths": [
+    "action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "predicted_six_workflows_expected19jobs": {
+    ".github/workflows/actions_runtime_pypi_release.yml": {
+      "name": "Actions Runtime PYPI Release",
+      "expected_jobs": 5,
+      "jobs": {
+        "build-sdist": {
+          "expected_job_instances": 1,
+          "checkout_steps": [
+            {
+              "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "ref": "DEFAULT_PR_MERGE_CHECKOUT"
+            }
+          ],
+          "if": null,
+          "publish_step_conditions": []
+        },
+        "build-wheels": {
+          "expected_job_instances": 3,
+          "checkout_steps": [
+            {
+              "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "ref": "DEFAULT_PR_MERGE_CHECKOUT"
+            }
+          ],
+          "if": null,
+          "publish_step_conditions": []
+        },
+        "publish": {
+          "expected_job_instances": 1,
+          "checkout_steps": [
+            {
+              "uses": "actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "ref": "DEFAULT_PR_MERGE_CHECKOUT"
+            }
+          ],
+          "if": null,
+          "publish_step_conditions": [
+            {
+              "name": "Check Runtime publish credential",
+              "if": "github.event_name == 'push'"
+            },
+            {
+              "name": "Publish verified artifacts",
+              "if": "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'"
+            }
+          ]
+        }
+      },
+      "source_file_sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+      "actual_run_id": 38119273327,
+      "job_ids": [
+        114410449822,
+        114410449918,
+        114410449971,
+        114410450012,
+        114414698158
+      ]
+    },
+    ".github/workflows/actions_runtime_tests.yml": {
+      "name": "Action Server Tests",
+      "expected_jobs": 3,
+      "jobs": {
+        "build": {
+          "expected_job_instances": 3,
+          "checkout_steps": [
+            {
+              "uses": "actions/checkout@v5",
+              "ref": "DEFAULT_PR_MERGE_CHECKOUT"
+            }
+          ],
+          "if": null,
+          "publish_step_conditions": []
+        }
+      },
+      "source_file_sha256": "430588021cf889391842be3a7c78eb4c04648b1bb7311f9c03da452e313fb161",
+      "actual_run_id": 38119273317,
+      "job_ids": [
+        114410449716,
+        114410449735,
+        114410449748
+      ]
+    },
+    ".github/workflows/ai-audit.yml": {
+      "name": "AI audit evidence",
+      "expected_jobs": 1,
+      "jobs": {
+        "audit": {
+          "expected_job_instances": 1,
+          "checkout_steps": [
+            {
+              "uses": "actions/checkout@v4",
+              "ref": "DEFAULT_PR_MERGE_CHECKOUT"
+            }
+          ],
+          "if": null,
+          "publish_step_conditions": []
+        }
+      },
+      "source_file_sha256": "2334d210444efcc82389a3f535032794aec91142e7f44eaf5b97bcb9816f5d0e",
+      "actual_run_id": 38119273321,
+      "job_ids": [
+        114410449694
+      ]
+    },
+    ".github/workflows/coverage-gate.yml": {
+      "name": "Measured Python coverage gate",
+      "expected_jobs": 1,
+      "jobs": {
+        "coverage": {
+          "expected_job_instances": 1,
+          "checkout_steps": [
+            {
+              "uses": "actions/checkout@v4",
+              "ref": "DEFAULT_PR_MERGE_CHECKOUT"
+            }
+          ],
+          "if": null,
+          "publish_step_conditions": []
+        }
+      },
+      "source_file_sha256": "e355c4769bae5e548dc7aa8c7393bdc496ebfcbdd24c1c3918d90bc7e1ef76cf",
+      "actual_run_id": 38119273320,
+      "job_ids": [
+        114410449681
+      ]
+    },
+    ".github/workflows/developer_toolkit.yml": {
+      "name": "RCC developer toolkit",
+      "expected_jobs": 6,
+      "jobs": {
+        "toolkit": {
+          "expected_job_instances": 6,
+          "checkout_steps": [
+            {
+              "uses": "actions/checkout@v4",
+              "ref": "DEFAULT_PR_MERGE_CHECKOUT"
+            }
+          ],
+          "if": null,
+          "publish_step_conditions": []
+        }
+      },
+      "source_file_sha256": "60ca471cb9bdff0059b1a9b1fcdf9256b666fb2fb1d533b93307d2841facc0a8",
+      "actual_run_id": 38119273364,
+      "job_ids": [
+        114410449901,
+        114410449948,
+        114410450013,
+        114410450014,
+        114410450015,
+        114410450127
+      ]
+    },
+    ".github/workflows/frontend-build-unauthenticated.yml": {
+      "name": "Action Server Build (Unauthenticated)",
+      "expected_jobs": 3,
+      "jobs": {
+        "build-external": {
+          "expected_job_instances": 3,
+          "checkout_steps": [
+            {
+              "uses": "actions/checkout@v3",
+              "ref": "DEFAULT_PR_MERGE_CHECKOUT"
+            }
+          ],
+          "if": null,
+          "publish_step_conditions": []
+        }
+      },
+      "source_file_sha256": "2d2a21af458ccfdb771f65707d7ab60fb1f5dfa24019c94ded4a02ed46f8d36d",
+      "actual_run_id": 38119273326,
+      "job_ids": [
+        114410449741,
+        114410449872,
+        114410449920
+      ]
+    }
+  },
+  "all19complete_check_runs_equal_exact_actual_current_jobs": true,
+  "all_runs_and_jobs_head_sha_exact_current": true,
+  "ignored_workflows": [
+    {
+      "path": ".github/workflows/action_server_build_cdn.yml",
+      "reason": "no pull_request event"
+    },
+    {
+      "path": ".github/workflows/action_server_frontend_tests.yml",
+      "reason": "paths filters exclude complete current diff"
+    },
+    {
+      "path": ".github/workflows/action_server_update_downloads.yml",
+      "reason": "no pull_request event"
+    },
+    {
+      "path": ".github/workflows/actions_core_tests.yml",
+      "reason": "paths filters exclude complete current diff"
+    },
+    {
+      "path": ".github/workflows/actions_release.yml",
+      "reason": "no pull_request event"
+    },
+    {
+      "path": ".github/workflows/actions_runtime_binary_release.yml",
+      "reason": "no pull_request event"
+    },
+    {
+      "path": ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+      "reason": "no pull_request event"
+    },
+    {
+      "path": ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+      "reason": "no pull_request event"
+    },
+    {
+      "path": ".github/workflows/actions_runtime_recovery.yml",
+      "reason": "no pull_request event"
+    },
+    {
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "reason": "paths filters exclude complete current diff"
+    },
+    {
+      "path": ".github/workflows/deploy-beta-templates.yml",
+      "reason": "no pull_request event"
+    },
+    {
+      "path": ".github/workflows/deploy-templates.yml",
+      "reason": "no pull_request event"
+    },
+    {
+      "path": ".github/workflows/frontend-build-cdn.yml",
+      "reason": "no pull_request event"
+    },
+    {
+      "path": ".github/workflows/frontend-build.yml",
+      "reason": "branch filter excludes named base"
+    },
+    {
+      "path": ".github/workflows/http_helper_tests.yml",
+      "reason": "branch filter excludes named base"
+    },
+    {
+      "path": ".github/workflows/http_lib_release.yml",
+      "reason": "no pull_request event"
+    },
+    {
+      "path": ".github/workflows/lighthouse.yml",
+      "reason": "branch filter excludes named base"
+    },
+    {
+      "path": ".github/workflows/quality-report.yml",
+      "reason": "no pull_request event"
+    },
+    {
+      "path": ".github/workflows/work_items_release.yml",
+      "reason": "paths filters exclude complete current diff"
+    }
+  ],
+  "checkout_boundary": "Default PRmerge checkout configured for required build/source jobs; current merge ref/tree/parents authenticated. No raw job logs/artifacts downloaded to independently measure actual checkout; API job/head identity+source configuration establishes control tuple only.",
+  "publication_limit": "publish job is inventory/Twine/dryrun gate; credential/upload step is push-only, does not publish on PR."
+}

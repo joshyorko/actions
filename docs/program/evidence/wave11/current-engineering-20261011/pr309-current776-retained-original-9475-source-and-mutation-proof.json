@@ -1,0 +1,35 @@
+{
+  "status": "UNCHANGED_ORIGINAL_EVIDENCE_NARROW_AUTH_TEST_SOURCE_REUSE",
+  "original_subject": "9475a30fbe8645fd0c6b9c2746182f7a78631059",
+  "original_tree": "ddb2bb30a5f7ba381867020821054e510960b917",
+  "original_reference_count": 39,
+  "all_39_refs_equal": true,
+  "current_test_sha256_equal": true,
+  "not_current_209_production_parity": "Incoming target changes Runtime adapter. Original mutation209-parity applies only to original9475 attempt; current all268 producer delta is separately measured.",
+  "original_control_references": [
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/immutable-request-enforcement-source-checkpoint.json",
+      "sha256": "130bb73051b73d060c84ea55a47a36cad7fb99d1aa3bfd60de6ac79669fddf82"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/database-bound-final-owned-auth-mutation-controls.py",
+      "sha256": "99dc98410779f7686389231e915829db296e0415a78321685a752faa663173ec"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/database-bound-final-owned-auth-mutation-RED-receipt.json",
+      "sha256": "c2f8d9c3111c4497a86afa21e6dcfd0b5e47af11ac0afafdaa1d1efe5cbd7941"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/database-bound-final-light.log",
+      "sha256": "ee58fe905aba655ba1a3eac73611872becbf46a846feb157523511d4344d10c1"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/current-full-configured-source.log",
+      "sha256": "5f321606bd1b3161da2fbfa96ab7ea895148538fc62d1f71ca313e8961c08fbd"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-independent-review/independent-frozen-request-enforcement-source-review.json",
+      "sha256": "92214dbb41ced101f1e0e34552006fe55b6515085d1afac59a4e001b998aafe3"
+    }
+  ]
+}

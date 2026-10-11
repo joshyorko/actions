@@ -1,0 +1,402 @@
+{
+  "status": "INDEPENDENT_EXACT_CURRENT776_SOURCE_PROOF",
+  "head": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+  "tree": "3c2c8ad1c9a067ec774eafd6f5d254cb8703213b",
+  "ordered_parents": [
+    "9475a30fbe8645fd0c6b9c2746182f7a78631059",
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+  ],
+  "clean": true,
+  "merge_tree_exact_ordinary_union_1411_no_deletions_only_novel_guide": true,
+  "all1411_current_working_sha_mode_blob_executable_bits_exact_before_and_Git": true,
+  "checkpoint": {
+    "path": "/workspace/engineering/pr309-actual776-refresh/immutable-current776-refresh-source-checkpoint.json",
+    "bytes": 13033,
+    "sha256": "437aafe5f58d667b11d1456fd5860bfd80a4c429515fa47c815dcdfbaeb0b159"
+  },
+  "all60_current21_prior39_reference_bindings": [
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/before-one-authorized-current-full-source.json",
+      "bytes": 384156,
+      "sha256": "ef5bd243cd025ac1f333496bbf93bd38dde0c0e176638dd8a0cca040493983fe"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/before-ordinary-refresh.json",
+      "bytes": 632,
+      "sha256": "30c1c5ad9330e16277e4bd92d4c32e472ac42e33143fade5a618dd8319d2a7ae"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/canonical-imported-combined-delta-vs-target.patch",
+      "bytes": 5113,
+      "sha256": "26a716527452b799ae8a7178ed533a33da30912e8864531d7b319509a571cfe7"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/canonical-imported-target-delta-vs-auth-parent.patch",
+      "bytes": 10332,
+      "sha256": "cb9dadcba5d128b5d3241b5ae9e7a47dcf087bac77123931bc787b1ff1acf7aa"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/current-Doctor.log",
+      "bytes": 13487,
+      "sha256": "812533e89dbb01554e6a36f2776f921aae737f13923e4ef619ae7894f2a2f89a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/current-ToolkitTest.log",
+      "bytes": 14345,
+      "sha256": "0b96d4655558ee6a53c6b96f206aa89f1f4bd2d10d3bc75f59a1c0fd81e9e471"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/current-full-configured-source.log",
+      "bytes": 321127,
+      "sha256": "593ee29494106fe5cc42d8817ef70dda0f4d69f07a946cd952a972430e877fdb"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/current-generator-roundtrip.py",
+      "bytes": 1800,
+      "sha256": "f490b4e08c004a318b03a23d866995263ef2465356dbe200fb07939f502f44e7"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/current-nine-RCC-bindings-and-full-old-producer-delta.json",
+      "bytes": 3791,
+      "sha256": "f144f1541afaa8aefc2458616fa88edfb2f5c7be1139c8ad24ceb72b9682c99f"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/current-own-five-environment-origins.log",
+      "bytes": 6683,
+      "sha256": "c1a16b22ade8c02e323cd9d5835fbd6e5c6521ccb9b001d50112a0fb85f81d9a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/current-scoped-static-generator.log",
+      "bytes": 8531,
+      "sha256": "0106f576228979d2feba53a703ed04f3c78f48c8014172b3421b1e6e3676a53a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "d03086cf1c1c65efb2ec389ee3153695c6d8902c2c972e4838fc4ad8ce6d834b"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/ordinary-merge-complete-union-and-bootstrap-reuse.json",
+      "bytes": 4452,
+      "sha256": "be170ddb527ec862ff0ae1ff568c2c95bec63ffbbce58d22fe1a5b1a82e02717"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/preview-complete-parent-union.diff",
+      "bytes": 124176,
+      "sha256": "81f162735b848596578aee9511e298897f161727bd4bbbc7c6fe8d238e95b30d"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/retained-original-9475-source-and-mutation-proof.json",
+      "bytes": 1910,
+      "sha256": "292e067f35b1790dbab1640e7beefbf262ddf5a8eba8947d7055f717c707d372"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-refresh/terminal-full-source-and-postconditions.json",
+      "bytes": 5871,
+      "sha256": "22d350009c7de4bfb8b0097518ba9a3f8b103efae413dd49624fc7083c787e66"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/immutable-request-enforcement-source-checkpoint.json",
+      "bytes": 16702,
+      "sha256": "130bb73051b73d060c84ea55a47a36cad7fb99d1aa3bfd60de6ac79669fddf82"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-independent-review/independent-frozen-request-enforcement-source-review.json",
+      "bytes": 9318,
+      "sha256": "92214dbb41ced101f1e0e34552006fe55b6515085d1afac59a4e001b998aafe3"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual774-refresh/verify_own_envs_v2.py",
+      "bytes": 629,
+      "sha256": "c8ab68d536ffb17c7e5c23618ce777783180d2a180391e3d234358e1108f1bcf"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual774-refresh/source-union-proof.json",
+      "bytes": 42280,
+      "sha256": "9e304d0411381a63b337683c82fd7dd226a8715f7a50e1ed8e729dd14ee4bf4c"
+    },
+    {
+      "path": "/workspace/engineering/pr309-bootstrap.log",
+      "bytes": 27576,
+      "sha256": "a2d74004b9b8cc641cc92e26e07157332032c5018a7116ccf2df67a51c91e4ab"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/before-disposition-all-parent-leaves.json",
+      "bytes": 362429,
+      "sha256": "1c9b99ad0d80a7360650f177960e9e38adbecd0c10da0ded5126316d58e1c384"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/before-source-pinned28-checkpoint.json",
+      "bytes": 6462,
+      "sha256": "dafef26b68e85341eb9d3edef07c28c11c4609fbca51017810bb5145f51b53d0"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/canonical-baseline-and-ASGI-shape-proposed.patch",
+      "bytes": 2152,
+      "sha256": "381ae20391ce339ddf67d851c5b4660506dfd513a22fde0e6c280b964beebeb4"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/current-Doctor.log",
+      "bytes": 13487,
+      "sha256": "7b6b4be7f0845930ae246dabbb6d9892d6e63cb7f53d17ca0c55da6769d76471"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/current-ToolkitTest.log",
+      "bytes": 14344,
+      "sha256": "b6d572639618fab6c2d6d7abb94d005bd45294535349df1f9d0e698e3e243686"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/current-own-five-environment-origins.log",
+      "bytes": 6684,
+      "sha256": "059be12766edeed23e429760d0b635aefef52fc8f8daa8d83d0b24c15d27fc3a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/initial-73-cell-request-matrix.log",
+      "bytes": 11562,
+      "sha256": "f640d454bcb3f122437144ecf8762ff837b4787ac017bf86461b7e84107bd6b3"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/initial-73-cell-source-preserved.py",
+      "bytes": 19565,
+      "sha256": "c52e961fbbd6c80ca234dfce5a927b6f4ea70715ed6fca0c55324160ed6153ab"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/initial-73-cell-terminal-checkpoint.json",
+      "bytes": 1076,
+      "sha256": "fb9212d2daab8b8e4f2729c9c31cddf77ef9a7b4be71b2cb0f2ee8bf684d26cc"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/own-Bootstrap-reuse-inputs.json",
+      "bytes": 2720,
+      "sha256": "9d849313554b1ad4733e709c345d57ca3b488136cb2cd49e97cf07bf850c747f"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/paused-baseline-Documentation-improvement-proposal.json",
+      "bytes": 1228,
+      "sha256": "133a0e007b20a1949f59c0450b847463642c95a1b45eeb4fb0f4cd6e7f838177"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/paused-initial-fixture-frozen-checkpoint.json",
+      "bytes": 5365,
+      "sha256": "ae4a0c040a3067b468920a439636c65b849f6c103249e74c7e426debcf742766"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement/valid-key-real-assembled-baseline-initial.log",
+      "bytes": 3840,
+      "sha256": "18fb873c2f3e73aefb384dfc811a5ae06c42495726bc213a8b852bf52b6437a5"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/before-authorized-full-source-current-scope.json",
+      "bytes": 405436,
+      "sha256": "ba22565c990f9e24284bb8e3206968094cbe03b1679ec0417b7d5d5e0650d03a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/corrected-73-cell-request-matrix.log",
+      "bytes": 10407,
+      "sha256": "dc118404d2b8c6c097caa79cfadb9c1ff54beadfec1152e8939045a0041379d6"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/corrected-close-initial-matrix-source-preserved.py",
+      "bytes": 19551,
+      "sha256": "852bc2575154039a1151c5c0dd100f3bb68ca977026a28b237d5bff60e6cb46a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/corrected-close-terminal-path-boundary-checkpoint.json",
+      "bytes": 1435,
+      "sha256": "32f6c83cbb88bb6e6284756b5aaa2157617414a72e6feeda25c06f84ceb786fa"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/corrected-configured-static.log",
+      "bytes": 6008,
+      "sha256": "9f960ee39d224f39536e2f7cf0d93e00b33e016bf186a74b9c1075d50d3f7c58"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/current-full-configured-source.log",
+      "bytes": 316475,
+      "sha256": "5f321606bd1b3161da2fbfa96ab7ea895148538fc62d1f71ca313e8961c08fbd"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/current-generator-roundtrip.py",
+      "bytes": 1821,
+      "sha256": "dca57c06afc3b1e39f707a4b012f5e8145b550088e15633f0406a6c9f7e7ff34"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/database-bound-final-light.log",
+      "bytes": 28345,
+      "sha256": "ee58fe905aba655ba1a3eac73611872becbf46a846feb157523511d4344d10c1"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/database-bound-final-owned-auth-mutation-RED-receipt.json",
+      "bytes": 1707,
+      "sha256": "c2f8d9c3111c4497a86afa21e6dcfd0b5e47af11ac0afafdaa1d1efe5cbd7941"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/database-bound-final-owned-auth-mutation-controls.py",
+      "bytes": 4776,
+      "sha256": "99dc98410779f7686389231e915829db296e0415a78321685a752faa663173ec"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/exact-current-canonical-delta-v2.patch",
+      "bytes": 2792,
+      "sha256": "e9d6414ca38eb3a9e16eade73449c36857298f5f6ab18e3de0be14416dbe94cf"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/exact-current-canonical-delta.patch",
+      "bytes": 2404,
+      "sha256": "20de9bf69607d067ac71e59e0bda1a0777f11879f0ab64c1e8cbf727678481f1"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/final-mount-boundary-73-cell-GREEN.log",
+      "bytes": 4300,
+      "sha256": "745463b30327e99738b97aa5f7648bbd440e6d2b86296854088fc0154e670f65"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/final-mutation-GREEN-scoped-generator.log",
+      "bytes": 27202,
+      "sha256": "64bb9c2bd8c269c3f27d22eb84103eaa1736d3a2f43548e3315046ed2e04f67f"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/final-owned-auth-mutation-RED-receipt.json",
+      "bytes": 1707,
+      "sha256": "2b96e4db8a0221152c53bae7512de148d9ab9a5214e62c44a4b501302e6c188e"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/final-owned-auth-mutation-controls.py",
+      "bytes": 4761,
+      "sha256": "652197315bb916a596172f7b618c696469f40cb217a123fa394cddc0fcdce1b3"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "20c8c062289bda9e34694e390c191f8d5da3114cc29e7acdcd7c2140fe6be44e"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/initial-configured-static.log",
+      "bytes": 6835,
+      "sha256": "e837e7d65cb20273cb786e98795521c0a2d836c24b8011578b136bf11ffaed5a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/initial-failure-preservation-and-correction.json",
+      "bytes": 468,
+      "sha256": "f6a6088eb54abd96d928493ae9db45d7fb466d641e94b2d23eb936361d190433"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/owned-auth-mutation-RED-receipt.json",
+      "bytes": 1602,
+      "sha256": "23a9c6a0549db0caef53bba393461eab4d1edaf7fdc4799bbaa00be9b4856d97"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/owned-auth-mutation-RED.log",
+      "bytes": 24975,
+      "sha256": "85df21bf452d95f567942651d76a0685e8512d877160f197154877fe30148107"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/owned-auth-mutation-controls.py",
+      "bytes": 4288,
+      "sha256": "a5ae33441361e7ba8f6bb5fa6a0f77d891e5448b14f76d0789fac54d350c8d99"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/post-full-terminal-source-and-scope.json",
+      "bytes": 6217,
+      "sha256": "df83d129937f439d97fd8f5781bd2be26a42120ca3b5e4f95024212b0e26c757"
+    },
+    {
+      "path": "/workspace/engineering/pr309-issue152-request-enforcement-successor/pre-type-correction-current-source-preserved.py",
+      "bytes": 21760,
+      "sha256": "c84b1120821345784ee0aded03af1da3c88c766d6f35e53b48aae15a0c17ddc7"
+    },
+    {
+      "path": "/workspace/engineering/issue152-next-inprocess-proposal/grounded-test-only-proposal.json",
+      "bytes": 28747,
+      "sha256": "e21e43b02e0aff3922535e4f57d7cf0c591523889cb8d558464fa29dba7bb80f"
+    },
+    {
+      "path": "/workspace/engineering/issue152-next-inprocess-proposal/canonical-proposed-delta.patch",
+      "bytes": 1763,
+      "sha256": "9dd5249ebbd12785eb99d7a9d03777e710a458934e54f035e53f416b48177e58"
+    }
+  ],
+  "original_prior92214_source_GO_retained": true,
+  "new608line_test_census_and27_non_guide_sourcefacts_exact_original9475": true,
+  "original_mutations_narrowly_reused_auth_test_parity_only": true,
+  "original209_production_parity_historical_current209_imported_adapter_diff": [
+    "action_server/src/actions/server/_rcc_runtime_adapter.py"
+  ],
+  "producer268_old92498_delta": [
+    "action_server/src/actions/server/_rcc_runtime_adapter.py"
+  ],
+  "five_selected_inputs_exact_old_native_target_current": [
+    "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
+    "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+    "action_server/tests/action_server_tests/test_cli_multi_package_sync.py",
+    "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py"
+  ],
+  "nine_RCC_bindings_exact_current_target_d642": true,
+  "own24_inputs_and_five_recorded_source_prefix_origins_verified": [
+    {
+      "package": "actions",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr309/actions/.venv",
+      "source": "/workspace/engineering/pr309/actions/src/actions/__init__.py"
+    },
+    {
+      "package": "action_server",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr309/action_server/.venv",
+      "source": "/workspace/engineering/pr309/action_server/src/actions/server/__init__.py"
+    },
+    {
+      "package": "actions-http-helper",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr309/actions-http-helper/.venv",
+      "source": "/workspace/engineering/pr309/actions-http-helper/src/actions_http/__init__.py"
+    },
+    {
+      "package": "devutils",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr309/devutils/.venv",
+      "source": "/workspace/engineering/pr309/devutils/src/devutils/invoke_utils.py"
+    },
+    {
+      "package": "work-items",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr309/work-items/.venv",
+      "source": "/workspace/engineering/pr309/work-items/src/actions/work_items/__init__.py"
+    }
+  ],
+  "current_full1245_13_15_146_04_two_workers_RCC_success_raw_log_verified": true,
+  "all73_named_actual_source_cases_PASS": {
+    "matrix": 54,
+    "dispatch_denial": 6,
+    "native_ASGI_WS": 6,
+    "private_file": 3,
+    "public": 2,
+    "local": 2
+  },
+  "scoped225_1skip_4actual_deselect_lint303_type339_Toolkit96_gen8_all30_current_bytes": true,
+  "exact_canonical_parent_import_deltas": [
+    {
+      "path": "/workspace/engineering/pr309-actual776-independent-review/canonical-imported-target-delta-vs-auth-parent.patch",
+      "bytes": 10332,
+      "sha256": "cb9dadcba5d128b5d3241b5ae9e7a47dcf087bac77123931bc787b1ff1acf7aa"
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual776-independent-review/canonical-imported-combined-delta-vs-target.patch",
+      "bytes": 5113,
+      "sha256": "26a716527452b799ae8a7178ed533a33da30912e8864531d7b319509a571cfe7"
+    }
+  ],
+  "original31_auth_guide_addedlines_contiguously_preserved": true,
+  "no_new_execution_or_source_mutation_push_merge": true,
+  "limits": [
+    "Fresh exact513/current776 hosted CI remains required; source push GO only.",
+    "Original9475 209-production mutation equality is historical; current adapter differs.",
+    "Old92498 native producer unqualified; full152/196/Workspace/backend/private/ChatGPT/release remain HOLD."
+  ]
+}

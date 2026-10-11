@@ -1,0 +1,2421 @@
+{
+  "schema": "actions-pr221-current776-complete-readonly-preflight/v1",
+  "verdict": "HOLD_DRAFT_PENDING_CURRENT_SOURCE_CI_UNAVAILABLE_TRADITIONAL_POLICY_AND_RELEASE_QUALIFICATION",
+  "historical_previous774": {
+    "head": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "base": "a70993fafc99a9f94041485542d5a720797ca394",
+    "named_head_exact": true,
+    "head_tree": "17c1afa7fbaa6ae817830d85226b41f67dd8b820",
+    "synthetic_merge": "adafea04da2554c0b05aa6acd8657da62dc3ec9d",
+    "ordered_synthetic_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+    ],
+    "synthetic_tree": "17c1afa7fbaa6ae817830d85226b41f67dd8b820",
+    "draft": true,
+    "REST_mergeable": true,
+    "REST_mergeable_state": "clean",
+    "GraphQL_mergeStateStatus": "CLEAN",
+    "reviewDecision": null,
+    "closures": {
+      "count": 0,
+      "complete_pages": 1,
+      "hasNextPage": false
+    },
+    "review_counts": {
+      "reviews": 0,
+      "review_pages": 1,
+      "threads": 0,
+      "unresolved_threads": 0,
+      "review_comments": 0,
+      "issue_comments": 1
+    },
+    "check_runs": {
+      "count": 34,
+      "pages": 1,
+      "outcomes": {
+        "success": 33,
+        "skipped": 1
+      },
+      "failure_rows": [],
+      "pending_rows": []
+    },
+    "commit_statuses_count": 0,
+    "commit_status_pages": 1,
+    "workflow_runs_count": 13,
+    "workflow_run_pages": 1,
+    "runs": [
+      {
+        "id": 38117318857,
+        "workflow": "RCC developer toolkit",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 6,
+        "job_outcome_counts": {
+          "success": 6
+        }
+      },
+      {
+        "id": 38117318868,
+        "workflow": "Action Server Tests",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 3,
+        "job_outcome_counts": {
+          "success": 3
+        }
+      },
+      {
+        "id": 38117318914,
+        "workflow": "Copilot Setup Steps",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 1,
+        "job_outcome_counts": {
+          "success": 1
+        }
+      },
+      {
+        "id": 38117318833,
+        "workflow": "Lighthouse CI",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 1,
+        "job_outcome_counts": {
+          "success": 1
+        }
+      },
+      {
+        "id": 38117318998,
+        "workflow": "AI audit evidence",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 1,
+        "job_outcome_counts": {
+          "success": 1
+        }
+      },
+      {
+        "id": 38117318862,
+        "workflow": "Action Server Frontend tests",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 1,
+        "job_outcome_counts": {
+          "success": 1
+        }
+      },
+      {
+        "id": 38117318830,
+        "workflow": "Work Items Release",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 2,
+        "job_outcome_counts": {
+          "success": 1,
+          "skipped": 1
+        }
+      },
+      {
+        "id": 38117318777,
+        "workflow": "Frontend Build",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 3,
+        "job_outcome_counts": {
+          "success": 3
+        }
+      },
+      {
+        "id": 38117319071,
+        "workflow": "Actions Core Tests",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 4,
+        "job_outcome_counts": {
+          "success": 4
+        }
+      },
+      {
+        "id": 38117318819,
+        "workflow": "Actions Runtime PYPI Release",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 5,
+        "job_outcome_counts": {
+          "success": 5
+        }
+      },
+      {
+        "id": 38117318760,
+        "workflow": "HTTP Helper Tests",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 3,
+        "job_outcome_counts": {
+          "success": 3
+        }
+      },
+      {
+        "id": 38117318778,
+        "workflow": "Action Server Build (Unauthenticated)",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 3,
+        "job_outcome_counts": {
+          "success": 3
+        }
+      },
+      {
+        "id": 38117318806,
+        "workflow": "Measured Python coverage gate",
+        "event": "pull_request",
+        "head_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "jobs_pages": 1,
+        "jobs_count": 1,
+        "job_outcome_counts": {
+          "success": 1
+        }
+      }
+    ],
+    "jobs_count": 34,
+    "jobs_outcomes": {
+      "success": 33,
+      "skipped": 1
+    },
+    "failed_step_names": [],
+    "policy": {
+      "visible_branch_rules": [],
+      "visible_rulesets": [],
+      "traditional_branch_protection": "UNAVAILABLE_HTTP403_NOT_POLICY_BYPASS",
+      "request": {
+        "path": "/workspace/engineering/pr221-current774-preflight/branch-protection.request.json",
+        "bytes": 173,
+        "sha256": "492296229b7cc0de1e2a7baa88dd93a178a4a92740dad144216f0c53044d24f1"
+      }
+    },
+    "scope": "Paginated endpoints complete at their captured responses; dynamic late publisher jobs and states can change. Run/check head identity and queried prospective synthetic object do not establish actual runner checkout without logs; no log acquisition authorized."
+  },
+  "current776": {
+    "head": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "base": "a70993fafc99a9f94041485542d5a720797ca394",
+    "named_head_exact": true,
+    "head_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "synthetic_merge": "19d53f9b08b6f79debe01bb2fbae205262a58339",
+    "ordered_synthetic_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+    ],
+    "synthetic_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "draft": true,
+    "REST_mergeable": true,
+    "REST_mergeable_state": "unstable",
+    "GraphQL_mergeStateStatus": "UNSTABLE",
+    "reviewDecision": null,
+    "closures": {
+      "count": 0,
+      "complete_pages": 1,
+      "hasNextPage": false
+    },
+    "review_counts": {
+      "reviews": 0,
+      "review_pages": 1,
+      "threads": 0,
+      "unresolved_threads": 0,
+      "review_comments": 0,
+      "issue_comments": 1
+    },
+    "check_runs": {
+      "count": 33,
+      "pages": 1,
+      "outcomes": {
+        "queued": 32,
+        "in_progress": 1
+      },
+      "failure_rows": [],
+      "pending_rows": [
+        {
+          "id": 114417513037,
+          "name": "audit",
+          "status": "queued"
+        },
+        {
+          "id": 114417512871,
+          "name": "build-wheels (macos-15)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512843,
+          "name": "build-wheels (windows-2022)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512824,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512762,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress"
+        },
+        {
+          "id": 114417512728,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512699,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512695,
+          "name": "build (macos-py3.10-devmode)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512684,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "queued"
+        },
+        {
+          "id": 114417512672,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512652,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512644,
+          "name": "candidate-wheel",
+          "status": "queued"
+        },
+        {
+          "id": 114417512627,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512615,
+          "name": "build (macos-py3.10-devmode)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512613,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512610,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "queued"
+        },
+        {
+          "id": 114417512597,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "queued"
+        },
+        {
+          "id": 114417512593,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512581,
+          "name": "lighthouse",
+          "status": "queued"
+        },
+        {
+          "id": 114417512576,
+          "name": "build (macos-latest)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512553,
+          "name": "coverage",
+          "status": "queued"
+        },
+        {
+          "id": 114417512542,
+          "name": "build (ubuntu-latest)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512537,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "queued"
+        },
+        {
+          "id": 114417512528,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "queued"
+        },
+        {
+          "id": 114417512512,
+          "name": "action-server-frontend-tests",
+          "status": "queued"
+        },
+        {
+          "id": 114417512509,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512498,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512495,
+          "name": "verify",
+          "status": "queued"
+        },
+        {
+          "id": 114417512482,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512472,
+          "name": "build (windows-latest)",
+          "status": "queued"
+        },
+        {
+          "id": 114417512444,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "queued"
+        },
+        {
+          "id": 114417512123,
+          "name": "copilot-setup-steps",
+          "status": "queued"
+        },
+        {
+          "id": 114417506031,
+          "name": "copilot-setup-steps",
+          "status": "queued"
+        }
+      ]
+    },
+    "commit_statuses_count": 0,
+    "commit_status_pages": 1,
+    "workflow_runs_count": 14,
+    "workflow_run_pages": 1,
+    "runs": [
+      {
+        "id": 38121679483,
+        "workflow": "HTTP Helper Tests",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 3,
+        "job_outcome_counts": {
+          "queued": 3
+        }
+      },
+      {
+        "id": 38121679486,
+        "workflow": "Copilot Setup Steps",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 1,
+        "job_outcome_counts": {
+          "queued": 1
+        }
+      },
+      {
+        "id": 38121679528,
+        "workflow": "Actions Core Tests",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 4,
+        "job_outcome_counts": {
+          "queued": 4
+        }
+      },
+      {
+        "id": 38121679549,
+        "workflow": "Action Server Tests",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 3,
+        "job_outcome_counts": {
+          "queued": 2,
+          "in_progress": 1
+        }
+      },
+      {
+        "id": 38121679558,
+        "workflow": "Frontend Build",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 3,
+        "job_outcome_counts": {
+          "in_progress": 1,
+          "queued": 2
+        }
+      },
+      {
+        "id": 38121679501,
+        "workflow": "RCC developer toolkit",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 6,
+        "job_outcome_counts": {
+          "queued": 6
+        }
+      },
+      {
+        "id": 38121679526,
+        "workflow": "Action Server Build (Unauthenticated)",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 3,
+        "job_outcome_counts": {
+          "queued": 3
+        }
+      },
+      {
+        "id": 38121679503,
+        "workflow": "Work Items Release",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 1,
+        "job_outcome_counts": {
+          "queued": 1
+        }
+      },
+      {
+        "id": 38121679553,
+        "workflow": "Lighthouse CI",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 1,
+        "job_outcome_counts": {
+          "queued": 1
+        }
+      },
+      {
+        "id": 38121679538,
+        "workflow": "Action Server Frontend tests",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 1,
+        "job_outcome_counts": {
+          "queued": 1
+        }
+      },
+      {
+        "id": 38121679507,
+        "workflow": "Measured Python coverage gate",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 1,
+        "job_outcome_counts": {
+          "queued": 1
+        }
+      },
+      {
+        "id": 38121679581,
+        "workflow": "Actions Runtime PYPI Release",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 4,
+        "job_outcome_counts": {
+          "queued": 4
+        }
+      },
+      {
+        "id": 38121679683,
+        "workflow": "AI audit evidence",
+        "event": "pull_request",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 1,
+        "job_outcome_counts": {
+          "queued": 1
+        }
+      },
+      {
+        "id": 38121677104,
+        "workflow": "Copilot Setup Steps",
+        "event": "push",
+        "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "associated_PR_numbers": [
+          221
+        ],
+        "attempt": 1,
+        "status": "queued",
+        "conclusion": null,
+        "jobs_pages": 1,
+        "jobs_count": 1,
+        "job_outcome_counts": {
+          "queued": 1
+        }
+      }
+    ],
+    "jobs_count": 33,
+    "jobs_outcomes": {
+      "queued": 31,
+      "in_progress": 2
+    },
+    "failed_step_names": [],
+    "policy": {
+      "visible_branch_rules": [],
+      "visible_rulesets": [],
+      "traditional_branch_protection": "UNAVAILABLE_HTTP403_NOT_POLICY_BYPASS",
+      "request": {
+        "path": "/workspace/engineering/pr221-current776-preflight/branch-protection.request.json",
+        "bytes": 81,
+        "sha256": "749bf09dad37e79483611f29aab31e49f318f0624d8d33ae5419237a98b30810"
+      }
+    },
+    "scope": "Paginated endpoints complete at their captured responses; dynamic late publisher jobs and states can change. Run/check head identity and queried prospective synthetic object do not establish actual runner checkout without logs; no log acquisition authorized."
+  },
+  "prior_authenticated_zero_closure_audit": {
+    "path": "/workspace/engineering/pr221-authenticated-closures-after310.json",
+    "bytes": 366,
+    "sha256": "3b819438b7c3ddf1c3bdcfcbe4a99af19dd31ce0c273ca5fb227024e7e553278"
+  },
+  "prior_tuple_immutable": true,
+  "source_CI_failures_observed": [],
+  "current_pending_not_previous_green": true,
+  "prospective302_wheel_HOLD_reference": {
+    "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-prospective-runtime103-qualification-review.json",
+    "bytes": 9081,
+    "sha256": "5ae089d08c7bb6b231d9c6adfa313d2f6961aa5ae03116829ad1b25588719578"
+  },
+  "prospective_wheel_scope": "Prospective3025ae wheel with empty generated OAuth member retains content-authority HOLD. It is not a qualification artifact for previous221774 or current221776; no artifact/log/download/installed/native probe performed here.",
+  "retained_release_HOLDs": [
+    "Owner-approved generated OAuth content authority",
+    "Final source/wheel/frozen/platform qualification",
+    "Published Runtime registry independent readback",
+    "Native distribution/checksums/Cask current cold install and upgrade",
+    "Private backend/transport/RCC metadata/provider/ChatGPT/fullissue gates",
+    "Release publication/tag authority"
+  ],
+  "next_dependency_ready_engineering": {
+    "scope": "Existing299 ordinary actual776 refresh; root separately authorized only after this read-only checkpoint freezes",
+    "branch": "feat/shared-run-output-20261010",
+    "original_head": "5db93e2251cf039ef81780730098da1b255d8d2e",
+    "target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "source_scope": "No duplicate implementation: preserve original23 run-output implementation/tests and grant transaction semantics; ordinary both-parent leaves/guide; exact current274 producer and five selector proofs after union, do not exclude changed302adapter or carry92498qualification",
+    "relationship": "Retained54 graph #83/#86/#129 shared durable output boundaries; actual299 remains dependency for300. No300retarget before actual299 acceptance. No active152 auth/newtestfile change.",
+    "gates": "Doctor/verified own Bootstrap and five origins/Toolkit/scoped original299 plus imported302strict tests/configuredlint/types/gen8/all30/full2workers only after root serialized slot clearance; no actual native/provider/browser/PG/installer",
+    "readiness": "Source union/CI work dependency-ready; not full #83/#86/#129 acceptance or release. Next novel129digest work remains design approval only, not implementation authorization."
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md (exact read-only proposed delta)",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+      "bytes": 897,
+      "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+    },
+    "Durable_learning_captured": "Visible empty rulesets cannot establish unavailable traditional protection; paginated live snapshots must retain distinct tuples when named target advances.",
+    "Evidence": "Traditional branch protection HTTP403 alongside empty branch rules/rulesets; previous77433success+1skip compared new776pending with independently authenticated ordered synthetic parents/tree and zero closures at each tuple.",
+    "Stale_or_ambiguous_guidance_removed": "Explicitly separates visible ruleset emptiness from missing traditional protection and adds before/after named-ref census binding.",
+    "Remaining_uncertainty": "Endpoint responses are not atomic; current job state may advance after capture. Actual checkout cannot be proved from metadata alone. Branch-protection policy and release/installed content remain unavailable/HOLD."
+  },
+  "source_graph": {
+    "path": "/workspace/engineering/campaign-checkpoint/docs/program/community-execution-graph.json",
+    "bytes": 1393601,
+    "sha256": "c2fedf1b7618b76153451b8694cb8b850ee98a80e0b6dd1c50ecac5784c20a02"
+  },
+  "source_issue_body_authority": {
+    "path": "/workspace/engineering/campaign-checkpoint/docs/program/community-program-ledger.json",
+    "bytes": 3897771,
+    "sha256": "c5e51e37e7a989a8c4946bde52655d2feae6bd610118760e4440c9c8be67ba00"
+  },
+  "readback_files": {
+    "pr221-current774-preflight/rulesets.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/rulesets.raw.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current774-preflight/named-base.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/named-base.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/branch-rules.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/branch-rules.request.json",
+      "bytes": 166,
+      "sha256": "b7bc63af9a285d88fed2cbba249f30afab6208d070a3b0bacac01d1cd5b136df"
+    },
+    "pr221-current774-preflight/run-38117319071-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117319071-jobs.raw.json",
+      "bytes": 15175,
+      "sha256": "36e57ced560eb23fd981f32e0839422afe9f594d0828208c3eae3d3f2a2a5240"
+    },
+    "pr221-current774-preflight/rulesets-all.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/rulesets-all.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current774-preflight/branch-rules.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/branch-rules.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318777-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318777-jobs.response.private",
+      "bytes": 10724,
+      "sha256": "35d7409f7f937b2c186fc97c8190362b2e1b56c121610fa1651792f8ea616650"
+    },
+    "pr221-current774-preflight/head-check-suites.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-check-suites.raw.json",
+      "bytes": 129370,
+      "sha256": "e40200ebbdf993b54ba8608e1538bd21a223238cab6fbd706d2ac611f267d042"
+    },
+    "pr221-current774-preflight/run-38117318862-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318862-jobs.response.private",
+      "bytes": 2789,
+      "sha256": "74ebe253ab6e64ebbf8b35ada96ff0564ae9f7419d55dbfcf0a774f05a4d246d"
+    },
+    "pr221-current774-preflight/head-runs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-runs.request.json",
+      "bytes": 241,
+      "sha256": "e0532058b1de5b6779e36e3076529d963e3dbbfe8c0a0a7b159fd05c5719fe61"
+    },
+    "pr221-current774-preflight/review-comments.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/review-comments.request.json",
+      "bytes": 192,
+      "sha256": "56223e8ffadfa0d1e06877944ff9c3302aeb7ab0396b89e9bc0731d82a8df280"
+    },
+    "pr221-current774-preflight/run-38117318778-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318778-jobs.raw.json",
+      "bytes": 24130,
+      "sha256": "6d144a678755b2cad9751dea5ea789503bf3748bdc9c98037e9f4571896eb5ad"
+    },
+    "pr221-current774-preflight/head-runs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-runs.raw.json",
+      "bytes": 171547,
+      "sha256": "f91da114bdd8a8380b40f9d28c363540f24f5847a5fe070bf22255df7c265e0f"
+    },
+    "pr221-current774-preflight/merge-runs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-runs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117319071-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117319071-jobs.request.json",
+      "bytes": 218,
+      "sha256": "50ab7689403af350908ca75f5e1bb6d32b5640cb4443065089ba81151334e86f"
+    },
+    "pr221-current774-preflight/acquire.py": {
+      "path": "/workspace/engineering/pr221-current774-preflight/acquire.py",
+      "bytes": 2391,
+      "sha256": "dce07c894da242e049e7044e47de7f6bf82d62ea408f8270b5d8bdf00bda392e"
+    },
+    "pr221-current774-preflight/run-38117319071-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117319071-jobs.response.private",
+      "bytes": 14235,
+      "sha256": "c2637e896fa4e29bdf34ec175091c2042949677373b36d106b0084685231ec36"
+    },
+    "pr221-current774-preflight/head-statuses.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-statuses.raw.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    "pr221-current774-preflight/run-38117318868-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318868-jobs.raw.json",
+      "bytes": 16955,
+      "sha256": "b198595a6c88003695b8145ae35d76062de33b7825f41e521dae02cb9bc30a2a"
+    },
+    "pr221-current774-preflight/reviews.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/reviews.request.json",
+      "bytes": 191,
+      "sha256": "f982fc36d688cd4e9259b5cab0504861d04666253c0e0e58594941518f76916b"
+    },
+    "pr221-current774-preflight/merge-runs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-runs.response.private",
+      "bytes": 36,
+      "sha256": "a2790a384d7d281e7395679000c35d27768d89dbd7052f725b8f4688beb59915"
+    },
+    "pr221-current774-preflight/run-38117318833-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318833-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/named-base.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/named-base.request.json",
+      "bytes": 163,
+      "sha256": "a226a7faa8b8e96549c602debd31042d07bc286070f7806acfffe34c3f05060c"
+    },
+    "pr221-current774-preflight/review-comments.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/review-comments.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318819-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318819-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318830-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318830-jobs.raw.json",
+      "bytes": 4659,
+      "sha256": "4c301beefa4d560b2826c50f764f88fe9fc198c8884fb78684dec4cb20db7a16"
+    },
+    "pr221-current774-preflight/issue-comments.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/issue-comments.request.json",
+      "bytes": 196,
+      "sha256": "d910524d72b5ab4f981d53e2d5c8794da96afa4f38d05ba4b2178c9252662ef8"
+    },
+    "pr221-current774-preflight/review-comments.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/review-comments.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current774-preflight/issue221.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/issue221.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/issue221.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/issue221.raw.json",
+      "bytes": 12832,
+      "sha256": "20ea710ca1644d40c93ade3783f01c0b8381bc622d8c1b4fa301585df44dcc7d"
+    },
+    "pr221-current774-preflight/merge-statuses.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-statuses.raw.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    "pr221-current774-preflight/run-38117318998-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318998-jobs.raw.json",
+      "bytes": 2040,
+      "sha256": "842bbf167e908afb669b352bc65ef551bcf1052d363c5a4adc929441f88b0163"
+    },
+    "pr221-current774-preflight/acquire_graphql.py": {
+      "path": "/workspace/engineering/pr221-current774-preflight/acquire_graphql.py",
+      "bytes": 2155,
+      "sha256": "44a532515ab542541a49fb37d21ead9a13d0c4db3f4e37de150272f46e908a14"
+    },
+    "pr221-current774-preflight/merge-statuses.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-statuses.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318998-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318998-jobs.request.json",
+      "bytes": 217,
+      "sha256": "4a42cba45151a55caafb746fe93eb06fdb4512066d5bcc38fbcd83431cb9a214"
+    },
+    "pr221-current774-preflight/rulesets.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/rulesets.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/merge-runs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-runs.request.json",
+      "bytes": 237,
+      "sha256": "25d324403d06fe1783b8cd5f9eeef729c2b48c63e2c761ad8249436cd60c1bac"
+    },
+    "pr221-current774-preflight/closures-page-1.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/closures-page-1.raw.json",
+      "bytes": 647,
+      "sha256": "b04b3cad9fa168c57db270004e555feb100d2cf2b80bd4a870114bc4717f5632"
+    },
+    "pr221-current774-preflight/threads-page-1.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/threads-page-1.raw.json",
+      "bytes": 637,
+      "sha256": "cc9d196bbd6c3b8438a4ea36dd58859877a723005d2b713218834cc54942c391"
+    },
+    "pr221-current774-preflight/branch-protection.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/branch-protection.stderr.private",
+      "bytes": 54,
+      "sha256": "67522825656fb8092ae4db6a436b2aad857054a3f7b587f46c1725d77df82871"
+    },
+    "pr221-current774-preflight/merge-check-runs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-check-runs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318914-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318914-jobs.response.private",
+      "bytes": 2408,
+      "sha256": "9a97303f26dce87759aabd0019980bbe1914d624d59939589fd39dbdc77a0120"
+    },
+    "pr221-current774-preflight/merge-commit.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-commit.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318760-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318760-jobs.raw.json",
+      "bytes": 10508,
+      "sha256": "9d9beb1811e60cc26ee1f69ec50402bd1f02f84b5108b8ce2b3a8bb14d1de4ad"
+    },
+    "pr221-current774-preflight/run-38117318857-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318857-jobs.raw.json",
+      "bytes": 21244,
+      "sha256": "1fc560a7379273ac9260eb6f550f6e8b7182ccfbe63c6774243c3b7f3d51b8ab"
+    },
+    "pr221-current774-preflight/run-38117318760-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318760-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318830-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318830-jobs.request.json",
+      "bytes": 217,
+      "sha256": "242e58c175778ea2c2b1024812f1e046d977ed0eb4657f6dc122be755060bdf9"
+    },
+    "pr221-current774-preflight/merge-commit.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-commit.request.json",
+      "bytes": 216,
+      "sha256": "91fc93b2bf0524f77b63623efb22bdfa77617c7e84f6533960f9423e89958041"
+    },
+    "pr221-current774-preflight/run-38117318830-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318830-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318806-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318806-jobs.response.private",
+      "bytes": 3113,
+      "sha256": "9cecd7fc927e1fa4369a7ca7bf850bdbdb7f1bfc29bfc069e0ebd22675a7ae44"
+    },
+    "pr221-current774-preflight/run-38117318868-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318868-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318862-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318862-jobs.raw.json",
+      "bytes": 2970,
+      "sha256": "1aa995a63f64e7f2c37a7d203664c384486159b370d5663a00c92ee91a6c5e90"
+    },
+    "pr221-current774-preflight/run-38117318819-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318819-jobs.request.json",
+      "bytes": 218,
+      "sha256": "23c9d6c41c247099bc0bcd6a3af4040cd1c31062db78b84ab51b73137b045346"
+    },
+    "pr221-current774-preflight/run-38117319071-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117319071-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/merge-check-suites.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-check-suites.response.private",
+      "bytes": 35,
+      "sha256": "5eab0fc75af2063c338a2776c933c41fc944239dfd2f21247b24e2189ea6f9bd"
+    },
+    "pr221-current774-preflight/merge-commit.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-commit.raw.json",
+      "bytes": 1105092,
+      "sha256": "a410201e1817db56ce7c4201cad6521955cecc9fe30abc4938841e5d402f56a6"
+    },
+    "pr221-current774-preflight/head-check-runs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-check-runs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/acquire_v2.py": {
+      "path": "/workspace/engineering/pr221-current774-preflight/acquire_v2.py",
+      "bytes": 2711,
+      "sha256": "926111198cb094cc6ef7b3638375d63e1a20a83ceba44d2950bab0ecc9699126"
+    },
+    "pr221-current774-preflight/named-head.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/named-head.request.json",
+      "bytes": 192,
+      "sha256": "548f26caa8ee1ccd21fc17ec23792e7e782638f281e4076f9487ec0a4e9b9039"
+    },
+    "pr221-current774-preflight/threads-page-1.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/threads-page-1.request.json",
+      "bytes": 112,
+      "sha256": "7fba776d5f21ed8f322d726266d4bd99c80318e952719beb36a6dd042278e8c4"
+    },
+    "pr221-current774-preflight/head-check-runs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-check-runs.raw.json",
+      "bytes": 128122,
+      "sha256": "e71ea9205b3b082fa85245423bfa29c040ab1daa8c1d0d8c7b3f9c399a94a6dd"
+    },
+    "pr221-current774-preflight/run-38117318830-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318830-jobs.response.private",
+      "bytes": 4384,
+      "sha256": "9414603a852339a0071bf4911b82b8ed531ba4525d9a3eaa90424b5be600ad74"
+    },
+    "pr221-current774-preflight/issue221.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/issue221.request.json",
+      "bytes": 176,
+      "sha256": "a021b6ecbd41c31a671d12a3a8853afe6c796b801a9b7d367f975c5c27542691"
+    },
+    "pr221-current774-preflight/head-statuses.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-statuses.request.json",
+      "bytes": 231,
+      "sha256": "b2e0cdb6f8a94c6c22aae092ebe048d394b9d71d45ca8fe4495b77c73c6b335e"
+    },
+    "pr221-current774-preflight/run-38117318833-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318833-jobs.raw.json",
+      "bytes": 2841,
+      "sha256": "a06ed5fd2b503a28fcc79536c45cc456d0a71dea2676f9c097aad9ab09f604f6"
+    },
+    "pr221-current774-preflight/merge-check-runs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-check-runs.response.private",
+      "bytes": 33,
+      "sha256": "e83cfac35507982a40cfeb776ce85aa0367e7646f81fe857df4a6c841ea8a170"
+    },
+    "pr221-current774-preflight/head-statuses.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-statuses.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/named-head.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/named-head.raw.json",
+      "bytes": 5415,
+      "sha256": "61a37201133a4d8bec8862368be11be21d5a8838e6f07e2ab0cedc562b9791c5"
+    },
+    "pr221-current774-preflight/head-runs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-runs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/issue-comments.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/issue-comments.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/merge-check-runs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-check-runs.request.json",
+      "bytes": 245,
+      "sha256": "66dd1d2dbfb988abad74dc2859e7b2cfe7f3d00ff4b4f7f525ba60e39f1d883f"
+    },
+    "pr221-current774-preflight/merge-statuses.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-statuses.request.json",
+      "bytes": 231,
+      "sha256": "664567c2ec8539e25b5d27fa87bd11da37749c8b64ec3ea3885d2bc50ba87e44"
+    },
+    "pr221-current774-preflight/run-38117318862-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318862-jobs.request.json",
+      "bytes": 217,
+      "sha256": "0bdd4cca3d5f7e6c1476db57c814cf0821e263730727f30a137332264bbcdb99"
+    },
+    "pr221-current774-preflight/merge-check-runs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-check-runs.raw.json",
+      "bytes": 38,
+      "sha256": "3b29ca22d800ee4f4f72aa18efc5af2f17c8f788db9d63ab463b365d2c0920a2"
+    },
+    "pr221-current774-preflight/run-38117318760-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318760-jobs.request.json",
+      "bytes": 217,
+      "sha256": "81ed6f9d53f26205d66fe17b18c5c51e0e57ca2f6eb961df6147bd81b550982a"
+    },
+    "pr221-current774-preflight/run-38117318868-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318868-jobs.request.json",
+      "bytes": 218,
+      "sha256": "06806d30bbf396fe9f749b94aa0ee49a16f27986d18a15dab98a343e3aa57182"
+    },
+    "pr221-current774-preflight/run-38117318806-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318806-jobs.raw.json",
+      "bytes": 3318,
+      "sha256": "f8635461728ed1606a89cafbd53be3f27fc6f43d2a8b77d5a050414aff70b4b3"
+    },
+    "pr221-current774-preflight/run-38117318868-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318868-jobs.response.private",
+      "bytes": 15880,
+      "sha256": "97281843453a74a66633ba487f9d2f3334e10c1946d524e18f21ce7fbe58d855"
+    },
+    "pr221-current774-preflight/run-38117318819-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318819-jobs.response.private",
+      "bytes": 23106,
+      "sha256": "d4ff223b6069d084c9c76f56b830286b27a483b9a9d154592979abf00b0266eb"
+    },
+    "pr221-current774-preflight/branch-rules.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/branch-rules.raw.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current774-preflight/run-38117318760-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318760-jobs.response.private",
+      "bytes": 9865,
+      "sha256": "5a27f218efc3dbcc86281f22d49fa0fc6988c4cb6e76077c18e3707ab511598b"
+    },
+    "pr221-current774-preflight/review-comments.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/review-comments.raw.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    "pr221-current774-preflight/reviews.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/reviews.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current774-preflight/merge-check-suites.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-check-suites.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318833-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318833-jobs.response.private",
+      "bytes": 2660,
+      "sha256": "079ecf77dcccdd247ae9d1d8e5a04f197cbcefcf119ceb38c376c9ff55b0260d"
+    },
+    "pr221-current774-preflight/rulesets-all.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/rulesets-all.request.json",
+      "bytes": 204,
+      "sha256": "f1e4b62a423c553beeafb70121560ff0664aff40a42ca4663d4a29e2cb918c39"
+    },
+    "pr221-current774-preflight/run-38117318857-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318857-jobs.response.private",
+      "bytes": 19962,
+      "sha256": "0dbad49ddf5a3e8e750a0b75ee262603969e918acd06b34c68b39128d937f94b"
+    },
+    "pr221-current774-preflight/run-38117318833-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318833-jobs.request.json",
+      "bytes": 217,
+      "sha256": "3ade7b909c4e9f0b0710987655a3fdc4200c3e5cf2d5b594c87fcd84563612fc"
+    },
+    "pr221-current774-preflight/branch-protection.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/branch-protection.request.json",
+      "bytes": 173,
+      "sha256": "492296229b7cc0de1e2a7baa88dd93a178a4a92740dad144216f0c53044d24f1"
+    },
+    "pr221-current774-preflight/merge-statuses.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-statuses.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current774-preflight/run-38117318914-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318914-jobs.raw.json",
+      "bytes": 2565,
+      "sha256": "119bef5717e127e917ece11b40a597e7ba46ae2b7a5acfdc09187a4654190f03"
+    },
+    "pr221-current774-preflight/closures-page-1.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/closures-page-1.request.json",
+      "bytes": 112,
+      "sha256": "17d7e9aea1ba03b2979ca55e9b38583b0500949f6a6d4bc41fab84dd35579e70"
+    },
+    "pr221-current774-preflight/reviews.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/reviews.raw.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    "pr221-current774-preflight/run-38117318806-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318806-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/pr.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/pr.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/named-head.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/named-head.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/issue221.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/issue221.response.private",
+      "bytes": 12832,
+      "sha256": "20ea710ca1644d40c93ade3783f01c0b8381bc622d8c1b4fa301585df44dcc7d"
+    },
+    "pr221-current774-preflight/head-check-suites.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-check-suites.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/named-base.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/named-base.raw.json",
+      "bytes": 5309,
+      "sha256": "4faa14fe308d559e3bb1d479d1cc5946238075ec0292f90e4222c450bbced8bb"
+    },
+    "pr221-current774-preflight/rulesets.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/rulesets.request.json",
+      "bytes": 163,
+      "sha256": "6a244f0a3d18843d32814b1235a3645bae1d3a9c0d52b38bbd0ad96b3ea92731"
+    },
+    "pr221-current774-preflight/merge-check-suites.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-check-suites.request.json",
+      "bytes": 236,
+      "sha256": "29a67f4ea540c2c3d7fc0b202466a0fc14644e5ff08bd1caf5c12295444b848e"
+    },
+    "pr221-current774-preflight/issue-comments.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/issue-comments.response.private",
+      "bytes": 5254,
+      "sha256": "44e8455a38654e727426cc738e555fac41efd72ca84dd31cea0acc25be803204"
+    },
+    "pr221-current774-preflight/closures-page-1.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/closures-page-1.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318777-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318777-jobs.raw.json",
+      "bytes": 11475,
+      "sha256": "4f7e49141d68b7ad0a835d45f8f67d69e62c79d313cf03e663e3c8c814c1a9d4"
+    },
+    "pr221-current774-preflight/rulesets-all.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/rulesets-all.raw.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    "pr221-current774-preflight/run-38117318778-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318778-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/issue-comments.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/issue-comments.raw.json",
+      "bytes": 5427,
+      "sha256": "e42c5945bbf86bbd634f9dfcfe832421c08d45dccb54a8f38ce60c99a8570dfd"
+    },
+    "pr221-current774-preflight/head-check-runs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-check-runs.request.json",
+      "bytes": 249,
+      "sha256": "24e0a11e566c4a31a59a1b6b55fb649facad43e714f2653989467b5285c58a16"
+    },
+    "pr221-current774-preflight/threads-page-1.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/threads-page-1.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/pr.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/pr.raw.json",
+      "bytes": 24444,
+      "sha256": "cd89de872f20d13e3afdecb8036dc1f5fd48b0a6bf29f2fdbd7a1edec39adb3c"
+    },
+    "pr221-current774-preflight/head-check-suites.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-check-suites.request.json",
+      "bytes": 240,
+      "sha256": "a906dabff3e1def0670254677674569087a0725055f5b24b1e7d7b3443ef4732"
+    },
+    "pr221-current774-preflight/run-38117318914-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318914-jobs.request.json",
+      "bytes": 217,
+      "sha256": "a8933cba7f4a6cbb7c51c2cc602a6413efd5a881eec532c35ccc810cb15a21b2"
+    },
+    "pr221-current774-preflight/head-check-suites.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-check-suites.response.private",
+      "bytes": 124086,
+      "sha256": "7164cde2e192537b719206e7617546da94f0e6e453bad23e1353542e294d9d7c"
+    },
+    "pr221-current774-preflight/run-38117318998-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318998-jobs.response.private",
+      "bytes": 1919,
+      "sha256": "3ffd20ccce0b5c4dc6d38c1e9f5ae5c9f1d12c6259363cbf9303113a7065bd6e"
+    },
+    "pr221-current774-preflight/run-38117318778-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318778-jobs.response.private",
+      "bytes": 22659,
+      "sha256": "a158830445b621c6825b8e05b2fcb7946442a7a64526693aa33489cb3df19cfa"
+    },
+    "pr221-current774-preflight/head-statuses.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-statuses.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current774-preflight/merge-check-suites.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-check-suites.raw.json",
+      "bytes": 40,
+      "sha256": "4e929adbdc69abcb55cbd6c541fa88397ad113392ae033696f5e1ab55b596d50"
+    },
+    "pr221-current774-preflight/run-38117318777-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318777-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/branch-protection.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/branch-protection.raw.json",
+      "bytes": 167,
+      "sha256": "e2373c984773dfee141aed6665a6497c3d7ae4022e643d1c860ab01b710aa23a"
+    },
+    "pr221-current774-preflight/run-38117318857-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318857-jobs.request.json",
+      "bytes": 218,
+      "sha256": "30f112d0476954bd4b0f8048387bdc41af465542d752702109d2392a7bd9a054"
+    },
+    "pr221-current774-preflight/run-38117318806-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318806-jobs.request.json",
+      "bytes": 217,
+      "sha256": "f4f22027c42f0334a6c85d4bd175bffd0c7c2e9a9870331e00154c5d519e038e"
+    },
+    "pr221-current774-preflight/merge-runs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-runs.raw.json",
+      "bytes": 41,
+      "sha256": "725143e0e46d6aefd0d32064f5407f39c7c2149674a6fb60e3f3376c71e7b5ad"
+    },
+    "pr221-current774-preflight/head-runs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-runs.response.private",
+      "bytes": 165537,
+      "sha256": "6a9f2b27298af53ef1612a29fc58789b8cce09dd30e91fdc8aeba31cd950a436"
+    },
+    "pr221-current774-preflight/rulesets-all.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/rulesets-all.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/head-check-runs.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/head-check-runs.response.private",
+      "bytes": 121057,
+      "sha256": "dcb7df6f0a97340a6bea9ec91f00ae41d22f02f4d9f22236a20319c41cba5b1d"
+    },
+    "pr221-current774-preflight/run-38117318819-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318819-jobs.raw.json",
+      "bytes": 24643,
+      "sha256": "a376d8e7b6a7da062c2a94de3959e0a4a02ba0cca2dd8cc56f39baee2380ff5f"
+    },
+    "pr221-current774-preflight/run-38117318857-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318857-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/merge-commit.response.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/merge-commit.response.private",
+      "bytes": 1105092,
+      "sha256": "a410201e1817db56ce7c4201cad6521955cecc9fe30abc4938841e5d402f56a6"
+    },
+    "pr221-current774-preflight/run-38117318998-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318998-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318914-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318914-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/pr.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/pr.request.json",
+      "bytes": 155,
+      "sha256": "134b59237d77485e597cda7989106f3dfe1d161b746d9d3b7cc51f6e50e8a412"
+    },
+    "pr221-current774-preflight/reviews.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/reviews.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/run-38117318778-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318778-jobs.request.json",
+      "bytes": 218,
+      "sha256": "fbb3727ab1c30aaa40fd95768e6e6be5663bd062ace6dce7434ea9e91f7b2550"
+    },
+    "pr221-current774-preflight/run-38117318777-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318777-jobs.request.json",
+      "bytes": 218,
+      "sha256": "c9927ba112c6167bb94b536af9e18235eb76bee4e657572a0a30d370b814eeda"
+    },
+    "pr221-current774-preflight/run-38117318862-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/run-38117318862-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/head-check-suites.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/head-check-suites.raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/head-runs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/head-runs.request.json",
+      "bytes": 236,
+      "sha256": "2118fe2f366ff9a66ba18a500b21c2a78ffd054ae84b4d6490afffd45d1bafaf"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/review-comments.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/review-comments.request.json",
+      "bytes": 192,
+      "sha256": "d1d591c8c53295d3634dfdddf142aa05b7355491532080d0b5c34a52752eb232"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/head-runs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/head-runs.raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/merge-runs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/merge-runs.stderr.private",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/acquire.py": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/acquire.py",
+      "bytes": 2391,
+      "sha256": "dce07c894da242e049e7044e47de7f6bf82d62ea408f8270b5d8bdf00bda392e"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/head-statuses.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/head-statuses.raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/reviews.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/reviews.request.json",
+      "bytes": 191,
+      "sha256": "278668206bd9063221623c09e93d7934a4e5703aaf0ef92a51040feb44b24618"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/review-comments.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/review-comments.stderr.private",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/issue-comments.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/issue-comments.request.json",
+      "bytes": 193,
+      "sha256": "660f668c57447a0e737c9be295010a3549dc94048a03d1573a697fac335a7e81"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/merge-statuses.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/merge-statuses.raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/merge-statuses.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/merge-statuses.stderr.private",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/merge-runs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/merge-runs.request.json",
+      "bytes": 236,
+      "sha256": "3eaf338c2352f188b0d2a10d846f714b941bf67e5e29f251f902f1cbd4833519"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/merge-check-runs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/merge-check-runs.stderr.private",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/head-check-runs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/head-check-runs.stderr.private",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/head-check-runs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/head-check-runs.raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/head-statuses.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/head-statuses.request.json",
+      "bytes": 231,
+      "sha256": "f11b75ca9ce10d6ab195fea3602069682a0cd9a996323af6d4a0c4556e44d7c9"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/head-statuses.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/head-statuses.stderr.private",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/head-runs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/head-runs.stderr.private",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/issue-comments.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/issue-comments.stderr.private",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/merge-check-runs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/merge-check-runs.request.json",
+      "bytes": 244,
+      "sha256": "e8aa9aba9537c675db0fa3848e3f51bc040956f25504c146854c9bce16a9a6c6"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/merge-statuses.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/merge-statuses.request.json",
+      "bytes": 231,
+      "sha256": "419528c7eaa6bf1c54a1b289c691ca96e96c0a5b5c6ce8f517e3b62f7455fe33"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/merge-check-runs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/merge-check-runs.raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/review-comments.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/review-comments.raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/merge-check-suites.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/merge-check-suites.stderr.private",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/rulesets-all.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/rulesets-all.request.json",
+      "bytes": 204,
+      "sha256": "db836154972f021307891660f4e05f55a9c3eae8f0936950e7eeaa483e6f8c99"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/reviews.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/reviews.raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/head-check-suites.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/head-check-suites.stderr.private",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/merge-check-suites.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/merge-check-suites.request.json",
+      "bytes": 235,
+      "sha256": "25c1ae8af93e318388d5b88f47fb14d487626cdf26bb34ae6b7d74fd023f6e99"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/rulesets-all.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/rulesets-all.raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/issue-comments.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/issue-comments.raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/head-check-runs.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/head-check-runs.request.json",
+      "bytes": 244,
+      "sha256": "1174974f1685ba003dd68407e051e1800045bef08f4f17120805902a21925fe2"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/head-check-suites.request.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/head-check-suites.request.json",
+      "bytes": 235,
+      "sha256": "08aa0fe33b3769005771d9274e86243f846078c126a4c787f371977c889cfe27"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/merge-check-suites.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/merge-check-suites.raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/merge-runs.raw.json": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/merge-runs.raw.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/rulesets-all.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/rulesets-all.stderr.private",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae"
+    },
+    "pr221-current774-preflight/unsupported-slurp-draft/reviews.stderr.private": {
+      "path": "/workspace/engineering/pr221-current774-preflight/unsupported-slurp-draft/reviews.stderr.private",
+      "bytes": 1249,
+      "sha256": "8fbdf01d7bfc79357ac4103cac53e183b4d56414792487feadb6ab4e69c935ae"
+    },
+    "pr221-current776-preflight/rulesets.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/rulesets.raw.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current776-preflight/branch-rules.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/branch-rules.request.json",
+      "bytes": 76,
+      "sha256": "30aa401a3c9a24820c58b4c74597c9dd9945494aaa41af7ec123157f1c371a4a"
+    },
+    "pr221-current776-preflight/run-38121679553-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679553-jobs.response.private",
+      "bytes": 868,
+      "sha256": "9c79d2febb6cbe2728dff541cf60bd5e587f7f5b7910ee0b1895dc126136b939"
+    },
+    "pr221-current776-preflight/rulesets-all.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/rulesets-all.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current776-preflight/branch-rules.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/branch-rules.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/head-check-suites.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-check-suites.raw.json",
+      "bytes": 137783,
+      "sha256": "66b2ab36243955772347b80e91dab9ba3c20512146df7a32cd8c52b3977e30d2"
+    },
+    "pr221-current776-preflight/run-38121679538-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679538-jobs.response.private",
+      "bytes": 901,
+      "sha256": "fa92fa94996875b79c8bbc8ab177c77b609a1668b706450c9ec1f6f9e74fabfc"
+    },
+    "pr221-current776-preflight/head-runs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-runs.request.json",
+      "bytes": 241,
+      "sha256": "a753122ab2dc0f1d107cc7057fff997001097752b67d891c1e1b9336c6eb51c9"
+    },
+    "pr221-current776-preflight/run-38121679483-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679483-jobs.request.json",
+      "bytes": 225,
+      "sha256": "d81872697330df731a1eeb3f5921903e87af6e8d37f2c95fd1d1808718bb51ee"
+    },
+    "pr221-current776-preflight/review-comments.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/review-comments.request.json",
+      "bytes": 192,
+      "sha256": "56223e8ffadfa0d1e06877944ff9c3302aeb7ab0396b89e9bc0731d82a8df280"
+    },
+    "pr221-current776-preflight/head-runs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-runs.raw.json",
+      "bytes": 184754,
+      "sha256": "1c8d14c5b4dca870748f41c4deb93a26f999568ab4b8935717a86ff0c0c48ca6"
+    },
+    "pr221-current776-preflight/run-38121679486-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679486-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/merge-runs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-runs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679558-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679558-jobs.response.private",
+      "bytes": 4674,
+      "sha256": "9b40ee812fdd40f8c2d2c869d5bc01702ba9764ae31c21cdb7c474063a7a2097"
+    },
+    "pr221-current776-preflight/head-statuses.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-statuses.raw.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    "pr221-current776-preflight/reviews.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/reviews.request.json",
+      "bytes": 191,
+      "sha256": "f982fc36d688cd4e9259b5cab0504861d04666253c0e0e58594941518f76916b"
+    },
+    "pr221-current776-preflight/merge-runs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-runs.response.private",
+      "bytes": 36,
+      "sha256": "a2790a384d7d281e7395679000c35d27768d89dbd7052f725b8f4688beb59915"
+    },
+    "pr221-current776-preflight/final-named-head.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/final-named-head.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/review-comments.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/review-comments.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679538-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679538-jobs.request.json",
+      "bytes": 224,
+      "sha256": "c90d651d239bc5a20f93a11fc0e3987b1ed62eb7eb4df781abdc1ebd23d0b103"
+    },
+    "pr221-current776-preflight/run-38121679526-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679526-jobs.request.json",
+      "bytes": 225,
+      "sha256": "09adeb580e7c11515805eadd1a2ab9a4e232878975f419c6e671db533f969161"
+    },
+    "pr221-current776-preflight/issue-comments.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/issue-comments.request.json",
+      "bytes": 196,
+      "sha256": "d910524d72b5ab4f981d53e2d5c8794da96afa4f38d05ba4b2178c9252662ef8"
+    },
+    "pr221-current776-preflight/review-comments.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/review-comments.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current776-preflight/run-38121679526-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679526-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/issue221.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/issue221.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch": {
+      "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+      "bytes": 897,
+      "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+    },
+    "pr221-current776-preflight/issue221.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/issue221.raw.json",
+      "bytes": 12832,
+      "sha256": "43beb93321af93dac5bc7290813092af0fc1c64368552a9be994de617241b021"
+    },
+    "pr221-current776-preflight/merge-statuses.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-statuses.raw.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    "pr221-current776-preflight/acquire_graphql.py": {
+      "path": "/workspace/engineering/pr221-current776-preflight/acquire_graphql.py",
+      "bytes": 2155,
+      "sha256": "7fd21345e823affdcd8d1cdc25debc6af88fc4cf7e74cfa4832ec89b5cab3f09"
+    },
+    "pr221-current776-preflight/merge-statuses.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-statuses.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/rulesets.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/rulesets.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679683-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679683-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679483-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679483-jobs.raw.json",
+      "bytes": 2756,
+      "sha256": "15065052ddb90eb20ee7ce43b65aaf47b9b468a39416f322eb4fd81b1b7b8524"
+    },
+    "pr221-current776-preflight/run-38121679549-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679549-jobs.request.json",
+      "bytes": 225,
+      "sha256": "d461894fca774dd920f24dc255a28c6cd376b349e877ba8b151acf98821350a5"
+    },
+    "pr221-current776-preflight/merge-runs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-runs.request.json",
+      "bytes": 237,
+      "sha256": "ce9ea5c0ed68efbfcd8dba4c05d3a1c958bc09661b5524415d6b6cd128e2db70"
+    },
+    "pr221-current776-preflight/closures-page-1.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/closures-page-1.raw.json",
+      "bytes": 650,
+      "sha256": "21906b2b2dbe589a03ddda525ad6ff1d993bc7ce313ee792e7608d8211f8aee7"
+    },
+    "pr221-current776-preflight/threads-page-1.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/threads-page-1.raw.json",
+      "bytes": 640,
+      "sha256": "3c7def4f7ec7564f4861c9c22710ec16acbfaedf4392484fa7ff0ebcf99cafe9"
+    },
+    "pr221-current776-preflight/branch-protection.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/branch-protection.stderr.private",
+      "bytes": 54,
+      "sha256": "67522825656fb8092ae4db6a436b2aad857054a3f7b587f46c1725d77df82871"
+    },
+    "pr221-current776-preflight/run-38121679486-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679486-jobs.raw.json",
+      "bytes": 933,
+      "sha256": "af6b495160eb8df20abdc785aba4a50a67ed1e0bcbfe6b7276b0ceae10f2074c"
+    },
+    "pr221-current776-preflight/merge-check-runs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-check-runs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/merge-commit.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-commit.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679526-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679526-jobs.raw.json",
+      "bytes": 2908,
+      "sha256": "7d5ab1ea45184f0105357d0deb17e601cf0d805cc230a2b357172b7d9a883b70"
+    },
+    "pr221-current776-preflight/run-38121679501-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679501-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679558-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679558-jobs.request.json",
+      "bytes": 225,
+      "sha256": "cd2192bf7edea99ec614f92dc4d7ca72be0a174629bf29b09b3cbe8d12179e2e"
+    },
+    "pr221-current776-preflight/complete_readback.py": {
+      "path": "/workspace/engineering/pr221-current776-preflight/complete_readback.py",
+      "bytes": 1707,
+      "sha256": "30df8a12f6e6fc3add91a2861b0457ea8c8d07016ee40ab0f756e45d7a882ba2"
+    },
+    "pr221-current776-preflight/run-38121679553-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679553-jobs.request.json",
+      "bytes": 224,
+      "sha256": "7d3f14b715ec728ccb4a3c254c4b3755edfc8646eb0127358ec88910fae4ae6e"
+    },
+    "pr221-current776-preflight/merge-commit.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-commit.request.json",
+      "bytes": 216,
+      "sha256": "1fc740a135ad1c8ed4d3750cbd181d80883e549dc44ace722c883ceef736cc07"
+    },
+    "pr221-current776-preflight/run-38121679483-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679483-jobs.response.private",
+      "bytes": 2614,
+      "sha256": "8c46699445b99ee4b2a14ac25f8a1964e778dc0f54e89b0ce4ba065e8471947d"
+    },
+    "pr221-current776-preflight/run-38121679528-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679528-jobs.request.json",
+      "bytes": 225,
+      "sha256": "91214d04403d057917d74dbe5acf82e1651bbaf93099f90086ce4ede5518a989"
+    },
+    "pr221-current776-preflight/final-named-head.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/final-named-head.request.json",
+      "bytes": 220,
+      "sha256": "d7f4a88d47c0f2b66966107e7b57062302334d14ab2a55bd1b88c08d23e1d067"
+    },
+    "pr221-current776-preflight/freeze_readonly.py": {
+      "path": "/workspace/engineering/pr221-current776-preflight/freeze_readonly.py",
+      "bytes": 10996,
+      "sha256": "82edf92b934b7662e3aa52581281e11e3888c01d026d1b348ab51f7b11beea2a"
+    },
+    "pr221-current776-preflight/run-38121679507-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679507-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121677104-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121677104-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679549-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679549-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679581-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679581-jobs.request.json",
+      "bytes": 225,
+      "sha256": "031ffb29622f311ba171acdcd54218bdfb00851df7472ad4ffde8b51ac54b7dd"
+    },
+    "pr221-current776-preflight/merge-check-suites.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-check-suites.response.private",
+      "bytes": 91,
+      "sha256": "2f85832e31ca57711e6107af6b142363351ae516adb71c69afc643fac26be7f6"
+    },
+    "pr221-current776-preflight/merge-commit.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-commit.raw.json",
+      "bytes": 1076014,
+      "sha256": "fccbf6b9a3e29954bcd3df28dfbdbcfb263361c698745ceafd2c81195d0b483e"
+    },
+    "pr221-current776-preflight/merge-check-suites-bounded-read-successor.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-check-suites-bounded-read-successor.raw.json",
+      "bytes": 40,
+      "sha256": "4e929adbdc69abcb55cbd6c541fa88397ad113392ae033696f5e1ab55b596d50"
+    },
+    "pr221-current776-preflight/head-check-runs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-check-runs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/final-pr.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/final-pr.response.private",
+      "bytes": 24447,
+      "sha256": "473eaf12ef5772676f59f0f044f9bcf9932f6911c2affc2fd70d901f8de1a0fa"
+    },
+    "pr221-current776-preflight/acquire_v2.py": {
+      "path": "/workspace/engineering/pr221-current776-preflight/acquire_v2.py",
+      "bytes": 2711,
+      "sha256": "bf1f7e853b18d9d0dd343728bfcc71d22406cc1afbb06b600e15a157ff867f37"
+    },
+    "pr221-current776-preflight/run-38121679683-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679683-jobs.raw.json",
+      "bytes": 917,
+      "sha256": "bcb11cf543e1376ed19382927a19c1d77c00d1d99bac79c01ec6d2c108ca482b"
+    },
+    "pr221-current776-preflight/threads-page-1.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/threads-page-1.request.json",
+      "bytes": 112,
+      "sha256": "7fba776d5f21ed8f322d726266d4bd99c80318e952719beb36a6dd042278e8c4"
+    },
+    "pr221-current776-preflight/head-check-runs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-check-runs.raw.json",
+      "bytes": 123063,
+      "sha256": "af859a26d620cfae0f73571bf67cc83ef0c9d6d3c78a033fc573c8f029b3e410"
+    },
+    "pr221-current776-preflight/run-38121679526-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679526-jobs.response.private",
+      "bytes": 2766,
+      "sha256": "d6f59117b0c2de48aa61892987eb9cb58fbadcfcd3d9ee6b642eca53c798ba47"
+    },
+    "pr221-current776-preflight/run-38121679553-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679553-jobs.raw.json",
+      "bytes": 918,
+      "sha256": "0f2723e4e5b5172cc7c30ac2fdb43aaa5dae7512f4de6b9cddedec4aeec3dd8a"
+    },
+    "pr221-current776-preflight/run-38121679683-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679683-jobs.response.private",
+      "bytes": 867,
+      "sha256": "bc4cfd0c4b8fa927c1f7075fd666dd7283f8c2c4e18faf13e717123948921500"
+    },
+    "pr221-current776-preflight/merge-check-suites-bounded-read-successor.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-check-suites-bounded-read-successor.request.json",
+      "bytes": 244,
+      "sha256": "8fafc3dc2cea285cde8b01c238cabdd0606a3521d38a7496fb41e4f6fa31c67c"
+    },
+    "pr221-current776-preflight/issue221.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/issue221.request.json",
+      "bytes": 176,
+      "sha256": "516e188ae56599334f805cc9ccab5e0036bb4121f3f41783780b47fd18bbe169"
+    },
+    "pr221-current776-preflight/head-statuses.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-statuses.request.json",
+      "bytes": 231,
+      "sha256": "2991c4c82c410f18b047035db9e9bec51737b705a29f1dcf40bb5dda3c9a23be"
+    },
+    "pr221-current776-preflight/merge-check-runs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-check-runs.response.private",
+      "bytes": 33,
+      "sha256": "e83cfac35507982a40cfeb776ce85aa0367e7646f81fe857df4a6c841ea8a170"
+    },
+    "pr221-current776-preflight/final-named-head.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/final-named-head.raw.json",
+      "bytes": 5435,
+      "sha256": "9bb082819575b65e0b2f346e4d7071c25a3216f85b60210801b0a98de1e93e99"
+    },
+    "pr221-current776-preflight/head-statuses.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-statuses.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/named-head.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/named-head.raw.json",
+      "bytes": 5435,
+      "sha256": "9bb082819575b65e0b2f346e4d7071c25a3216f85b60210801b0a98de1e93e99"
+    },
+    "pr221-current776-preflight/head-runs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-runs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/issue-comments.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/issue-comments.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679486-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679486-jobs.request.json",
+      "bytes": 224,
+      "sha256": "62208074537b0738b22781ebaa643843ffb29bf3714ecc7525270c1876caa4cf"
+    },
+    "pr221-current776-preflight/merge-check-runs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-check-runs.request.json",
+      "bytes": 245,
+      "sha256": "90049b4436377cf58ac962a070e1cbb5640c394cea7cf4190f19ff3afdfe8b99"
+    },
+    "pr221-current776-preflight/open-prs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/open-prs.raw.json",
+      "bytes": 209521,
+      "sha256": "bcfbd3d4f41680ce4d30e6330b7fdcdf03d921a1de763361fb1d17cb97dd75ef"
+    },
+    "pr221-current776-preflight/run-38121679581-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679581-jobs.response.private",
+      "bytes": 3510,
+      "sha256": "7a1ea908e6a1c2a4d77613ecade0b3ef11be87a99b786377b2d9e1bee8af7fc0"
+    },
+    "pr221-current776-preflight/run-38121679581-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679581-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/merge-statuses.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-statuses.request.json",
+      "bytes": 231,
+      "sha256": "e322bf75b0e0dd8b2a48bbd162818185cb104d64c14f4ef9dfc38cf544726612"
+    },
+    "pr221-current776-preflight/run-38121679507-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679507-jobs.raw.json",
+      "bytes": 931,
+      "sha256": "3b80036e057520b8eb6a717820f7477bae56c08a6ed77a68714f71aa01d420a6"
+    },
+    "pr221-current776-preflight/merge-check-runs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-check-runs.raw.json",
+      "bytes": 38,
+      "sha256": "3b29ca22d800ee4f4f72aa18efc5af2f17c8f788db9d63ab463b365d2c0920a2"
+    },
+    "pr221-current776-preflight/run-38121679538-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679538-jobs.raw.json",
+      "bytes": 951,
+      "sha256": "1c85e772dd026fd116d1e615ab5976d788c1a1a075d82273cffac9b4f0c1f763"
+    },
+    "pr221-current776-preflight/final-named-head.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/final-named-head.response.private",
+      "bytes": 5435,
+      "sha256": "9bb082819575b65e0b2f346e4d7071c25a3216f85b60210801b0a98de1e93e99"
+    },
+    "pr221-current776-preflight/run-38121679486-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679486-jobs.response.private",
+      "bytes": 883,
+      "sha256": "0233b858178a9c50351cfb0d0b5d3f2e3875d1d8ece8450f56ca1c5b950a7376"
+    },
+    "pr221-current776-preflight/branch-rules.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/branch-rules.raw.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current776-preflight/run-38121677104-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121677104-jobs.raw.json",
+      "bytes": 933,
+      "sha256": "26d0c3c9c7a80e4d8dfc085391536ea7721575b0e884322493ba4135f92cf1cc"
+    },
+    "pr221-current776-preflight/run-38121679501-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679501-jobs.raw.json",
+      "bytes": 5932,
+      "sha256": "ee5e49283c52ebf4c5f75ebd84f78b7eaf56971c111966065ba93a2d994d1532"
+    },
+    "pr221-current776-preflight/review-comments.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/review-comments.raw.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    "pr221-current776-preflight/reviews.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/reviews.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current776-preflight/merge-check-suites.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-check-suites.stderr.private",
+      "bytes": 13,
+      "sha256": "3d3d864664790f14d23d3e0e6692c4c41a8722868cb68029d8bd2c5061a056c7"
+    },
+    "pr221-current776-preflight/run-38121679501-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679501-jobs.request.json",
+      "bytes": 225,
+      "sha256": "80ed815d7568260e2b37d177cae228f2b689402fb37366fbc2e1a7926e091da3"
+    },
+    "pr221-current776-preflight/run-38121679503-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679503-jobs.response.private",
+      "bytes": 869,
+      "sha256": "71b361de59ad4ffce65ce2261d38b84dd32f017c8db67a2934ebc3dcce956fa0"
+    },
+    "pr221-current776-preflight/rulesets-all.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/rulesets-all.request.json",
+      "bytes": 204,
+      "sha256": "f1e4b62a423c553beeafb70121560ff0664aff40a42ca4663d4a29e2cb918c39"
+    },
+    "pr221-current776-preflight/run-38121677104-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121677104-jobs.response.private",
+      "bytes": 883,
+      "sha256": "fed800d566e19a0757e109ba254b9d527db13f6c350bee706e64926c5df30de8"
+    },
+    "pr221-current776-preflight/run-38121679558-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679558-jobs.raw.json",
+      "bytes": 5007,
+      "sha256": "cf045ef7f1d15ccfa0fb8beb44225b886c688904f25a5668653ab25bf62d0d1e"
+    },
+    "pr221-current776-preflight/run-38121679553-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679553-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679528-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679528-jobs.response.private",
+      "bytes": 3468,
+      "sha256": "ce3bda744d91a826bff7c2dd8a3739fc831e96196ddc54f1b819769e59942bfb"
+    },
+    "pr221-current776-preflight/branch-protection.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/branch-protection.request.json",
+      "bytes": 81,
+      "sha256": "749bf09dad37e79483611f29aab31e49f318f0624d8d33ae5419237a98b30810"
+    },
+    "pr221-current776-preflight/merge-statuses.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-statuses.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current776-preflight/final-pr.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/final-pr.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/closures-page-1.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/closures-page-1.request.json",
+      "bytes": 112,
+      "sha256": "17d7e9aea1ba03b2979ca55e9b38583b0500949f6a6d4bc41fab84dd35579e70"
+    },
+    "pr221-current776-preflight/reviews.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/reviews.raw.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    "pr221-current776-preflight/merge-check-suites-bounded-read-successor.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-check-suites-bounded-read-successor.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679538-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679538-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/issue221.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/issue221.response.private",
+      "bytes": 12832,
+      "sha256": "43beb93321af93dac5bc7290813092af0fc1c64368552a9be994de617241b021"
+    },
+    "pr221-current776-preflight/run-38121679503-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679503-jobs.request.json",
+      "bytes": 224,
+      "sha256": "66b750c88e32b4e0aa6655854939576f58d9165aed346d97824bc9ffb345b6a3"
+    },
+    "pr221-current776-preflight/head-check-suites.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-check-suites.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/named-base.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/named-base.raw.json",
+      "bytes": 5309,
+      "sha256": "4faa14fe308d559e3bb1d479d1cc5946238075ec0292f90e4222c450bbced8bb"
+    },
+    "pr221-current776-preflight/run-38121679528-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679528-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679558-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679558-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/rulesets.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/rulesets.request.json",
+      "bytes": 73,
+      "sha256": "ee032d6dda2b0c237657a00e347365f6bc8d8d1e1a2a64fe56ec5313eb23ace4"
+    },
+    "pr221-current776-preflight/run-38121679501-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679501-jobs.response.private",
+      "bytes": 5652,
+      "sha256": "3f7d69ca9b9a5e1778cf292749825c116772c57b5db49bfebb51f029277e990a"
+    },
+    "pr221-current776-preflight/merge-check-suites.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-check-suites.request.json",
+      "bytes": 236,
+      "sha256": "a47b96077ec1f4fafd3244459034ec4ff9e4c357e8d5e862e4a2beb5fd43fcc7"
+    },
+    "pr221-current776-preflight/issue-comments.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/issue-comments.response.private",
+      "bytes": 5254,
+      "sha256": "44e8455a38654e727426cc738e555fac41efd72ca84dd31cea0acc25be803204"
+    },
+    "pr221-current776-preflight/run-38121679503-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679503-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/closures-page-1.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/closures-page-1.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/merge-check-suites-bounded-read-successor.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-check-suites-bounded-read-successor.response.private",
+      "bytes": 35,
+      "sha256": "5eab0fc75af2063c338a2776c933c41fc944239dfd2f21247b24e2189ea6f9bd"
+    },
+    "pr221-current776-preflight/rulesets-all.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/rulesets-all.raw.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    "pr221-current776-preflight/issue-comments.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/issue-comments.raw.json",
+      "bytes": 5427,
+      "sha256": "e42c5945bbf86bbd634f9dfcfe832421c08d45dccb54a8f38ce60c99a8570dfd"
+    },
+    "pr221-current776-preflight/head-check-runs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-check-runs.request.json",
+      "bytes": 249,
+      "sha256": "f07f268016ed743172dcd66fa216c88d8a1acdbee70dc02725994e9d3e99a04e"
+    },
+    "pr221-current776-preflight/threads-page-1.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/threads-page-1.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/run-38121679507-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679507-jobs.request.json",
+      "bytes": 224,
+      "sha256": "6c825f9151359247dbda78ae98c5460134f8c56da1ce2ee3b54a80d78b1125ea"
+    },
+    "pr221-current776-preflight/pr.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/pr.raw.json",
+      "bytes": 24447,
+      "sha256": "473eaf12ef5772676f59f0f044f9bcf9932f6911c2affc2fd70d901f8de1a0fa"
+    },
+    "pr221-current776-preflight/run-38121679549-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679549-jobs.response.private",
+      "bytes": 6328,
+      "sha256": "89c83c3c54b1228deb42c56ff71662b224e6047654d1f787783d30448c15c456"
+    },
+    "pr221-current776-preflight/head-check-suites.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-check-suites.request.json",
+      "bytes": 240,
+      "sha256": "4c9bcea8302fb6e62396e6430fab06d5ab575de26cbd4588f2ecd91fa3c7c0a4"
+    },
+    "pr221-current776-preflight/head-check-suites.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-check-suites.response.private",
+      "bytes": 132143,
+      "sha256": "f0a7d0a1c486344f03a17e49471772b036c067a30d9bb075d7ff219bf382367c"
+    },
+    "pr221-current776-preflight/head-statuses.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-statuses.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "pr221-current776-preflight/merge-check-suites.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-check-suites.raw.json",
+      "bytes": 91,
+      "sha256": "2f85832e31ca57711e6107af6b142363351ae516adb71c69afc643fac26be7f6"
+    },
+    "pr221-current776-preflight/run-38121679683-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679683-jobs.request.json",
+      "bytes": 224,
+      "sha256": "ad8b3e603ec4de89e1a08c01db3b467e43289109cbdd4b0f74cc6c774049e0b6"
+    },
+    "pr221-current776-preflight/run-38121679549-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679549-jobs.raw.json",
+      "bytes": 6769,
+      "sha256": "9da7645ee12435a79f85581c5e46d6b7e2cac92d8af09a87e7c35550c1acc322"
+    },
+    "pr221-current776-preflight/final-pr.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/final-pr.request.json",
+      "bytes": 183,
+      "sha256": "c03dc0f7ff9e479fb4f1b57c8c1271d21a5ea2cee684711fe1ffe1ae90b08d3e"
+    },
+    "pr221-current776-preflight/open-prs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/open-prs.response.private",
+      "bytes": 203595,
+      "sha256": "40cfcc9d104efe1e00fd45ba5f4683bd67a33c0b46cd6cb058969e8d3af52c1b"
+    },
+    "pr221-current776-preflight/branch-protection.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/branch-protection.raw.json",
+      "bytes": 167,
+      "sha256": "e2373c984773dfee141aed6665a6497c3d7ae4022e643d1c860ab01b710aa23a"
+    },
+    "pr221-current776-preflight/run-38121679507-jobs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679507-jobs.response.private",
+      "bytes": 881,
+      "sha256": "e5f854fc90cb1bf4a31d4530499175e8d7a33ea6e8a674357da5b155b0f72e2c"
+    },
+    "pr221-current776-preflight/run-38121679528-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679528-jobs.raw.json",
+      "bytes": 3656,
+      "sha256": "f8bd5750a6ea4a15ce1b8d85832b41b95bd26bec988a57824b6f6d3aebeb7675"
+    },
+    "pr221-current776-preflight/run-38121677104-jobs.request.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121677104-jobs.request.json",
+      "bytes": 224,
+      "sha256": "fb84b5970b4fe6eec614c094cee8f7ca82e92801d184b388b817a7656b0bb8aa"
+    },
+    "pr221-current776-preflight/run-38121679581-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679581-jobs.raw.json",
+      "bytes": 3698,
+      "sha256": "bc08d9a5038684cb4418118f537c3e9b4b2813139397b533558ccb7c18b264e7"
+    },
+    "pr221-current776-preflight/merge-runs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-runs.raw.json",
+      "bytes": 41,
+      "sha256": "725143e0e46d6aefd0d32064f5407f39c7c2149674a6fb60e3f3376c71e7b5ad"
+    },
+    "pr221-current776-preflight/head-runs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-runs.response.private",
+      "bytes": 178279,
+      "sha256": "9fb56f4f1eac9f3b66d599ad4556e4c91de3f0f9b92c74f27533a1b10d710be9"
+    },
+    "pr221-current776-preflight/run-38121679503-jobs.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679503-jobs.raw.json",
+      "bytes": 919,
+      "sha256": "56846b601cc6868c93347ee0debe173807f03d52af818fd55dc70c17af4b5b71"
+    },
+    "pr221-current776-preflight/rulesets-all.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/rulesets-all.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/head-check-runs.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/head-check-runs.response.private",
+      "bytes": 116228,
+      "sha256": "34527da7ad3e12f9f3bc9576c521ee0a134c159d8618cc514fc4035dc7472e2d"
+    },
+    "pr221-current776-preflight/merge-commit.response.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/merge-commit.response.private",
+      "bytes": 1076014,
+      "sha256": "fccbf6b9a3e29954bcd3df28dfbdbcfb263361c698745ceafd2c81195d0b483e"
+    },
+    "pr221-current776-preflight/run-38121679483-jobs.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/run-38121679483-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/reviews.stderr.private": {
+      "path": "/workspace/engineering/pr221-current776-preflight/reviews.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pr221-current776-preflight/final-pr.raw.json": {
+      "path": "/workspace/engineering/pr221-current776-preflight/final-pr.raw.json",
+      "bytes": 24447,
+      "sha256": "473eaf12ef5772676f59f0f044f9bcf9932f6911c2affc2fd70d901f8de1a0fa"
+    }
+  },
+  "mutations": "None: no source/ref/push/tag/publish/issue/CI rerun/artifact/log/download/install/infrastructure action",
+  "upstream_disposition": "none"
+}

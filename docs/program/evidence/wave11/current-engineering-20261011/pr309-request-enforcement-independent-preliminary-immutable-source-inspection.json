@@ -1,0 +1,24 @@
+{
+  "status": "READONLY_SOURCE_INSPECTION_PASSED_FINALGO_HELD_UNTIL_FROZEN_COMMIT_AND_FULLTERMINAL",
+  "parent": "ec73bb6372c1f613a3e130f0ce92f649d9d40a97",
+  "source_authorized_base": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "current_actual_base": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "unchanged_original_non_guide_leaf_count": 1409,
+  "original_census_and_allproduction_unchanged": true,
+  "test_sha256": "dd7d3093f62fdd966e4cc07ad44d9043b3d8839bfb45f535843d94b893a277b8",
+  "guide_sha256": "228d249cb2940b891061bc51d3c84148ea42ac2baae2da1733eb638f02902893",
+  "semantic_cases": {
+    "credential_matrix": 54,
+    "real_validhandlers": 18,
+    "denied_dispatch": 6,
+    "nativeASGIwebsocket": 6,
+    "private_mountedstorage": 3,
+    "intentional_publicbootstrap": 2,
+    "intentional_nokeylocal": 2,
+    "total": 73
+  },
+  "three_real_owned_mutations_fail_and_auth209_production_restore_recorded": true,
+  "allglobals_env_home_connections_fixture_cleanup_reviewed": "MonkeyPatch fixture restores replacements; local source app and key caches cleared; TestClient closed in finally; create_db/load_db and Database.connect closing contexts remain scoped; snapshot read-onlysqlite connection explicitlyclosing. No nativepool/Uvicorn due before_startFalse/sentinels.",
+  "scope": "Source-only boundarycontrols; no network/native/provider/backendWorkspaceprincipal/private/release acceptance; no tests or actual run by independent reviewer.",
+  "upstream": "none"
+}

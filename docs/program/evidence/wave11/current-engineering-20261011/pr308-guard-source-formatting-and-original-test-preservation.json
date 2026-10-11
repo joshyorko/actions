@@ -1,0 +1,8 @@
+{
+  "status": "PASS_AST_FORMATTING_ONLY_JOIN_WHITESPACE",
+  "original308alltestfunctions_AST_exact": true,
+  "accepted639all7newhelpers_19controls_AST_exact": true,
+  "working_test_sha256": "c84029ef30e84c863f06b4720c27dc839909db44d7fc0d9190274021cfccbf8f",
+  "initial_static_failure_retained": "scoped-static.log",
+  "configured_formatter_scope": "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py"
+}

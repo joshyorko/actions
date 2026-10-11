@@ -1,0 +1,25 @@
+{
+  "status": "ACTUAL_NORMAL_EXPECTED_HEAD_PR302_INTEGRATION_VERIFIED",
+  "actual_merge": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+  "ordered_parents": [
+    "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+  ],
+  "tested_synthetic": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+  "tested_tree_exact": true,
+  "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+  "control": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+  "full_current_CI": "26SUCCESS_10WORKFLOWS_SUCCESS",
+  "independent_final_GO_sha256": "7c4d3b448760935e9e7da75b15a6cdeaa5b3e096c70dc9b2a0a776c10a147899",
+  "independent_final_summary_v2_sha256": "b65220a19647d195c6f8c51881ad07639083134d96f92a6feab31bd980f37ef1",
+  "independent_actual_three_case_sha256": "54a855d62a41645ec53476d7d212cf8bc3a743520c952dca4005790876afc20c",
+  "named_target_verified": true,
+  "normal_ready_and_expected_head_merge": true,
+  "initial_local_synthetic_comparison": "FAILED_OBJECT_NOT_YET_FETCHED_AFTER_ACTUAL_PARENTS_TREE_VERIFIED_NO_RECEIPT_EMITTED",
+  "successor": "FETCHED_EXACT_SYNTHETIC_SHA_AND_VERIFIED_COMPLETE_TREE",
+  "private_Rcc_metadata_native_provider_OAuth_release_full134": "HOLD",
+  "prior_299_308_305_282_306_309_774_CI": "HISTORICAL_REQUIRES_NEW_ACTUAL_TARGET_ADMISSION",
+  "no221_merge_runtime_publication_issue_closure": true,
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,14 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2877,6 +2877,11 @@
+ `4148c2b71705c9d2baf0e88b48d08a79cb7bda0f`, `pretty/functions.go`.
+ 
+ 
++When inspecting workflow triggers with PyYAML's default YAML 1.1 resolver,
++account for unquoted `on` becoming the boolean key `True`; quoted `'on'` remains
++a string. Normalize that root trigger key before evaluating event, branch and
++path filters. Otherwise a workflow inventory can silently omit required jobs.
++
+ Derive the expected CI job set from the exact workflow revision, branch/path
+ filters, matrices, job conditions and dependencies. A dependent job can appear
+ only after its `needs` finish; an early check count is not final. Exhausting a

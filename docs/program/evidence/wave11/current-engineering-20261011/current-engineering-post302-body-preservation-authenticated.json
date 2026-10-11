@@ -1,0 +1,14 @@
+{
+  "status": "EXACT_AUTHENTICATED_POST302_BODY_AND_PRESERVED_TAIL",
+  "issue101_suffix_bytes": 28075,
+  "issue101_suffix_sha256": "d6aa504c67bb72508006751c65d0d575d2e108a1ae3f677034723ee8101843b7",
+  "issue101_suffix_exact": true,
+  "issue101_body_sha256": "02d4bf45b6b7b13eff8f8b465f943606c60c946046dba8a6850daa859db65af4",
+  "pr221_previous_body_preserved": true,
+  "pr221_body_sha256": "687c4ef40c2e1ac6de844b2a60bdfae7ebf47c33d562cda2e84fe2b80c3a6eee",
+  "target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "no_issue_closure_release_221merge": true,
+  "upstream_disposition": "none",
+  "pr221_draft": true,
+  "pr221_head": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+}
