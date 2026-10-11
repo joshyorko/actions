@@ -1,0 +1,25 @@
+{
+  "scope": "template source and generated Canvas resource only",
+  "artifact_access": {
+    "state": "blocked-by-missing-authorized-binding",
+    "existing_runtime_routes": [
+      "GET /api/runs/{run_id}/artifacts",
+      "GET /api/runs/{run_id}/artifacts/text-content?artifact_names=...",
+      "GET /api/runs/{run_id}/artifacts/binary-content?artifact_name=..."
+    ],
+    "gap": "Runtime routes resolve content through a run ID plus artifact_names or artifact_name; the Canvas MCP View has no caller-owned Workspace/application/revision binding resolver to authorize a selected artifact.",
+    "template_behavior": "No artifact handle, fetch, status, or success claim is emitted."
+  },
+  "successful_search_shape": {
+    "state": "partial",
+    "artifact": null,
+    "shared_success_schema": "not-satisfied",
+    "reason": "The shared QueryResults Success schema requires a non-null Artifact.handle; this template has no authorized artifact resolver."
+  },
+  "core_dependency": {
+    "declared_version": "1.0.3",
+    "state": "published-wheel-verified; template-runtime-consumer-pending",
+    "required_gate": "Run the Canvas template Runtime/browser gate and require the managed worker's installed Core modules to match the published 1.0.3 wheel receipt before claiming this template's installed-consumer compatibility.",
+    "evidence_limit": "The independent Core receipt verifies the published wheel's public metadata API with an external Actions CLI consumer. It does not prove this template's Runtime/browser consumer, a packaged/frozen Action Server, authorized artifact retrieval, or ChatGPT rendering."
+  }
+}
