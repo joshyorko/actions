@@ -1029,8 +1029,24 @@ passes with consistent counters and zero skips, and Runtime cleanup records
 `wrapper_reaped`, `descendant_snapshot_complete`, and `descendant_reap_complete`
 as true with empty errors, readers, and observed live/zombie descendant lists.
 Checking only boolean or list types would admit failed cleanup. Upload sanitized
-JUnit even after failure; upload a sanitized receipt only after admission. A
-service-free test may relocate paths in an earlier measured receipt to test this
+JUnit even after failure; upload a sanitized receipt only after admission.
+On receipt rejection, the validator independently observes each existing
+receipt predicate and writes failure-only diagnostics with fixed reason codes,
+PASS/FAIL/UNAVAILABLE statuses, fixed read/parse exception classes and JUnit
+counts. It emits no receipt values, exception messages, paths, URLs, providers,
+environment maps or test output. These are observations after rejection, not
+proof of the original short-circuit position. A failed predicate and an
+unavailable observation are distinct; neither waives admission or cleanup.
+The always-run upload also
+retains this diagnostic file when written. A failure before validator execution
+or an unsuccessful diagnostic write may still leave it unavailable.
+One passing pytest case does not establish receipt admission, and an artifact
+containing only JUnit does not prove that the raw receipt was missing: rejection
+happens before the successful sanitized receipt is written. Require actual
+reason-code evidence before identifying the failed predicate. Earlier failures
+without those diagnostics retain unknown failed-predicate identity and unknown
+raw-receipt presence.
+A service-free test may relocate paths in an earlier measured receipt to test this
 validator, but it must preserve that receipt's executed source identity and must
 not relabel it as execution of a later workflow commit. When a measured receipt
 contains Linux byte hashes, materialize the validator's input files from the

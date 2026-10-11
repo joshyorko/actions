@@ -231,18 +231,101 @@ jobs:
         ,\n    \"actions.mcp._metadata\": \"c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c\"\
         ,\n}\nexpected_parents = source_parents.split()\nwith zipfile.ZipFile(\"src/actions/server/templates/zips/canvas-query.zip\"\
         ) as templates:\n    expected_resource_sha256 = hashlib.sha256(templates.read(\"\
-        canvas.html\")).hexdigest()\nreceipt_ok = False\nif Path(receipt_path).is_file():\n\
-        \    try:\n        receipt = json.loads(Path(receipt_path).read_text(encoding=\"\
-        utf-8\"))\n        core = receipt.get(\"published_core\", {})\n        worker\
-        \ = core.get(\"measured_worker\", {})\n        runtime = receipt.get(\"runtime\"\
-        , {})\n        browser = receipt.get(\"browser\", {})\n        prefix = Path(worker.get(\"\
-        worker_prefix\", \"\"))\n        modules = worker.get(\"modules\", {})\n \
-        \       runtime_args = runtime.get(\"process_args\", [])\n        receipt_ok\
-        \ = (\n            receipt.get(\"scope\") == \"published-core Runtime/browser\
-        \ acceptance only\"\n            and receipt.get(\"source\") == {\"commit\"\
-        : source_sha, \"tree\": source_tree, \"parents\": expected_parents}\n    \
-        \        and core.get(\"declared_version\") == \"1.0.3\"\n            and\
-        \ core.get(\"independently_verified_registry_wheel_sha256\") == \"8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265\"\
+        canvas.html\")).hexdigest()\ndef failure_class(error):\n    if isinstance(error,\
+        \ UnicodeError):\n        return \"TEXT_ERROR\"\n    if isinstance(error,\
+        \ json.JSONDecodeError):\n        return \"JSON_ERROR\"\n    for error_type,\
+        \ code in (\n        (OSError, \"IO_ERROR\"), (TypeError, \"TYPE_ERROR\"),\n\
+        \        (ValueError, \"VALUE_ERROR\"), (AttributeError, \"ATTRIBUTE_ERROR\"\
+        ),\n        (KeyError, \"KEY_ERROR\"),\n    ):\n        if isinstance(error,\
+        \ error_type):\n            return code\n    return \"OTHER_ERROR\"\n\ndef\
+        \ write_failure_diagnostics():\n    # Reobserve each unchanged predicate independently;\
+        \ never serialize inputs.\n    def optional(read):\n        try:\n       \
+        \     return read()\n        except Exception:\n            return None\n\n\
+        \    core = optional(lambda: receipt.get(\"published_core\", {}))\n    worker\
+        \ = optional(lambda: core.get(\"measured_worker\", {}))\n    runtime = optional(lambda:\
+        \ receipt.get(\"runtime\", {}))\n    browser = optional(lambda: receipt.get(\"\
+        browser\", {}))\n    prefix = optional(lambda: Path(worker.get(\"worker_prefix\"\
+        , \"\")))\n    modules = optional(lambda: worker.get(\"modules\", {}))\n \
+        \   runtime_args = optional(lambda: runtime.get(\"process_args\", []))\n \
+        \   checks = (\n        ('scope', lambda: receipt.get('scope') == 'published-core\
+        \ Runtime/browser acceptance only'),\n        ('source_identity', lambda:\
+        \ receipt.get('source') == {'commit': source_sha, 'tree': source_tree, 'parents':\
+        \ expected_parents}),\n        ('declared_core_version', lambda: core.get('declared_version')\
+        \ == '1.0.3'),\n        ('registry_wheel_digest', lambda: core.get('independently_verified_registry_wheel_sha256')\
+        \ == '8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265'),\n\
+        \        ('worker_core_version', lambda: worker.get('version') == '1.0.3'),\n\
+        \        ('worker_module_hashes', lambda: worker.get('module_hashes') == expected_hashes),\n\
+        \        ('worker_prefix_absolute', lambda: prefix.is_absolute()),\n     \
+        \   ('worker_module_inventory', lambda: set(modules) == set(expected_hashes)),\n\
+        \        ('worker_modules_contained', lambda: all((Path(path).is_absolute()\
+        \ and Path(path).is_relative_to(prefix) for path in modules.values()))),\n\
+        \        ('runtime_origin', lambda: Path(runtime.get('module_origin', '')).resolve()\
+        \ == Path('src/actions/server/__init__.py').resolve()),\n        ('runtime_module_digest',\
+        \ lambda: runtime.get('module_sha256') == hashlib.sha256(Path('src/actions/server/__init__.py').read_bytes()).hexdigest()),\n\
+        \        ('runtime_args_list', lambda: isinstance(runtime_args, list)),\n\
+        \        ('runtime_args_count', lambda: len(runtime_args) >= 3),\n       \
+        \ ('runtime_interpreter_absolute', lambda: Path(runtime_args[0]).is_absolute()),\n\
+        \        ('runtime_module_entry', lambda: runtime_args[1:3] == ['-m', 'actions.server']),\n\
+        \        ('runtime_wrapper_reaped', lambda: runtime.get('wrapper_reaped')\
+        \ is True),\n        ('runtime_live_descendants_empty', lambda: runtime.get('live_descendant_pids')\
+        \ == []),\n        ('runtime_readers_empty', lambda: runtime.get('active_readers')\
+        \ == []),\n        ('runtime_zombies_empty', lambda: runtime.get('zombie_descendant_pids')\
+        \ == []),\n        ('runtime_snapshot_complete', lambda: runtime.get('descendant_snapshot_complete')\
+        \ is True),\n        ('runtime_reap_complete', lambda: runtime.get('descendant_reap_complete')\
+        \ is True),\n        ('runtime_cleanup_errors_empty', lambda: runtime.get('cleanup_errors')\
+        \ == []),\n        ('runtime_calls', lambda: receipt.get('runtime_calls')\
+        \ == ['published_core_identity', 'canvas_fixture_search:alpha', 'canvas_fixture_search:unmatched-query']),\n\
+        \        ('template_digest', lambda: receipt.get('template_zip_sha256') ==\
+        \ hashlib.sha256(Path('src/actions/server/templates/zips/canvas-query.zip').read_bytes()).hexdigest()),\n\
+        \        ('package_manifest_digest', lambda: receipt.get('production_package_manifest_sha256')\
+        \ == hashlib.sha256(Path('../templates/canvas-query/package.yaml').read_bytes()).hexdigest()),\n\
+        \        ('resource_digest', lambda: receipt.get('built_resource_sha256')\
+        \ == expected_resource_sha256),\n        ('browser_status', lambda: browser.get('status')\
+        \ == 'passed'),\n        ('browser_explicit_selection', lambda: browser.get('selection')\
+        \ == 'explicit'),\n        ('browser_version', lambda: browser.get('version')\
+        \ == browser_version),\n        ('browser_preflight_digest_valid', lambda:\
+        \ is_sha256(browser_sha256)),\n        ('browser_digest', lambda: browser.get('sha256')\
+        \ == browser_sha256),\n        ('browser_selected_path', lambda: Path(browser.get('path',\
+        \ '')).resolve() == Path(os.environ['CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH']).resolve()),\n\
+        \        ('browser_temp_removed', lambda: browser.get('temporary_root_removed')\
+        \ is True),\n        ('browser_temp_absolute', lambda: Path(browser.get('temporary_root',\
+        \ '')).is_absolute()),\n        ('browser_temp_absent', lambda: not Path(browser['temporary_root']).exists()),\n\
+        \        ('browser_playwright_version', lambda: browser.get('playwright_version')\
+        \ == json.loads(Path('frontend/package-lock.json').read_text())['packages']['node_modules/@playwright/test']['version']),\n\
+        \        ('browser_lock_digest', lambda: browser.get('frontend_lock_sha256')\
+        \ == hashlib.sha256(Path('frontend/package-lock.json').read_bytes()).hexdigest()),\n\
+        \        ('limits_list', lambda: isinstance(receipt.get('limits'), list)),\n\
+        \        ('limits_count', lambda: len(receipt['limits']) == 4),\n    )\n \
+        \   observations = []\n    for code, check in checks:\n        try:\n    \
+        \        passed = bool(check())\n        except Exception as error:\n    \
+        \        observations.append({\"code\": code, \"status\": \"UNAVAILABLE\"\
+        , \"failure_class\": failure_class(error)})\n        else:\n            observations.append({\"\
+        code\": code, \"status\": \"PASS\" if passed else \"FAIL\", \"failure_class\"\
+        : \"NONE\"})\n    diagnostics = {\n        \"status\": \"FAIL\",\n       \
+        \ \"admission\": {\"pytest\": \"FAIL\" if pytest_status else \"PASS\", \"\
+        junit\": \"PASS\" if junit_ok else \"FAIL\", \"receipt\": \"PASS\" if receipt_ok\
+        \ else \"FAIL\"},\n        \"receipt_read\": {\"status\": receipt_read_status,\
+        \ \"code\": receipt_failure_class},\n        \"counts\": {\"tests\": len(cases),\
+        \ \"skipped\": skipped, \"failures\": failures, \"errors\": errors},\n   \
+        \     \"checks\": observations,\n    }\n    try:\n        Path(receipt_safe).with_name(\"\
+        published-core-failure-diagnostics.json\").write_text(\n            json.dumps(diagnostics,\
+        \ indent=2, sort_keys=True) + \"\\n\", encoding=\"utf-8\"\n        )\n   \
+        \ except OSError:\n        # Diagnostic retention must not replace the original\
+        \ admission failure.\n        print(\"Canvas failure diagnostics unavailable:\
+        \ IO_ERROR\", file=sys.stderr)\n\nreceipt_ok = False\nreceipt = None\nreceipt_read_status\
+        \ = \"MISSING_OR_NON_FILE\"\nreceipt_failure_class = \"NONE\"\nif Path(receipt_path).is_file():\n\
+        \    try:\n        receipt_read_status = \"READ_ERROR\"\n        receipt =\
+        \ json.loads(Path(receipt_path).read_text(encoding=\"utf-8\"))\n        receipt_read_status\
+        \ = \"PARSED\"\n        core = receipt.get(\"published_core\", {})\n     \
+        \   worker = core.get(\"measured_worker\", {})\n        runtime = receipt.get(\"\
+        runtime\", {})\n        browser = receipt.get(\"browser\", {})\n        prefix\
+        \ = Path(worker.get(\"worker_prefix\", \"\"))\n        modules = worker.get(\"\
+        modules\", {})\n        runtime_args = runtime.get(\"process_args\", [])\n\
+        \        receipt_ok = (\n            receipt.get(\"scope\") == \"published-core\
+        \ Runtime/browser acceptance only\"\n            and receipt.get(\"source\"\
+        ) == {\"commit\": source_sha, \"tree\": source_tree, \"parents\": expected_parents}\n\
+        \            and core.get(\"declared_version\") == \"1.0.3\"\n           \
+        \ and core.get(\"independently_verified_registry_wheel_sha256\") == \"8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265\"\
         \n            and worker.get(\"version\") == \"1.0.3\"\n            and worker.get(\"\
         module_hashes\") == expected_hashes\n            and prefix.is_absolute()\n\
         \            and set(modules) == set(expected_hashes)\n            and all(Path(path).is_absolute()\
@@ -278,12 +361,13 @@ jobs:
         ]\n            and browser.get(\"frontend_lock_sha256\") == hashlib.sha256(Path(\"\
         frontend/package-lock.json\").read_bytes()).hexdigest()\n            and isinstance(receipt.get(\"\
         limits\"), list) and len(receipt[\"limits\"]) == 4\n        )\n    except\
-        \ (OSError, TypeError, ValueError, AttributeError, KeyError):\n        receipt_ok\
-        \ = False\nif not junit_ok or pytest_status or not receipt_ok:\n    failure_root\
-        \ = ET.Element(\n        \"testsuite\",\n        {\n            \"name\":\
-        \ \"canvas-template-published-core\",\n            \"tests\": \"1\",\n   \
-        \         \"skipped\": \"0\",\n            \"failures\": \"1\",\n        \
-        \    \"errors\": \"0\",\n        },\n    )\n    failure_case = ET.SubElement(\n\
+        \ (OSError, TypeError, ValueError, AttributeError, KeyError) as error:\n \
+        \       receipt_ok = False\n        receipt_failure_class = failure_class(error)\n\
+        if not junit_ok or pytest_status or not receipt_ok:\n    write_failure_diagnostics()\n\
+        \    failure_root = ET.Element(\n        \"testsuite\",\n        {\n     \
+        \       \"name\": \"canvas-template-published-core\",\n            \"tests\"\
+        : \"1\",\n            \"skipped\": \"0\",\n            \"failures\": \"1\"\
+        ,\n            \"errors\": \"0\",\n        },\n    )\n    failure_case = ET.SubElement(\n\
         \        failure_root,\n        \"testcase\",\n        {\"classname\": expected_class,\
         \ \"name\": expected},\n    )\n    ET.SubElement(\n        failure_case,\n\
         \        \"failure\",\n        {\"message\": \"Published Core/browser acceptance\
@@ -314,6 +398,9 @@ jobs:
           }}
         path: '${{ runner.temp }}/canvas-query-published-acceptance-${{ github.run_id
           }}-${{ github.run_attempt }}/published-core-receipt.sanitized.json
+
+          ${{ runner.temp }}/canvas-query-published-acceptance-${{ github.run_id }}-${{
+          github.run_attempt }}/published-core-failure-diagnostics.json
 
           ${{ runner.temp }}/canvas-query-published-acceptance-${{ github.run_id }}-${{
           github.run_attempt }}/junit.xml

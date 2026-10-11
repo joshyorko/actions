@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ast
 import importlib.util
 import json
 import os
@@ -114,7 +115,7 @@ def _validate(
         case.set("classname", "another_module")
     elif mutation == "pytest_failure":
         status = "1"
-    elif mutation:
+    elif mutation and not mutation.startswith("receipt_"):
         path, value = POISONS[mutation]
         target = receipt
         for part in path[:-1]:
@@ -126,6 +127,14 @@ def _validate(
     safe_receipt = tmp_path / "receipt.sanitized.json"
     ET.ElementTree(suites).write(raw_junit, encoding="utf-8")
     raw_receipt.write_text(json.dumps(receipt))
+    if mutation == "receipt_missing":
+        raw_receipt.unlink()
+    elif mutation == "receipt_invalid_json":
+        raw_receipt.write_text("private https://provider.invalid/?token=poison")
+    elif mutation == "receipt_invalid_text":
+        raw_receipt.write_bytes(b"\xffprivate-provider-token")
+    elif mutation == "receipt_not_object":
+        raw_receipt.write_text("[]")
     env = os.environ.copy()
     env.update(
         {
@@ -138,10 +147,19 @@ def _validate(
     )
     # Independent preflight identities remain the measured values. Relocating
     # paths makes this admission test portable, not a new consumer execution.
+    validator = _validator()
+    if mutation == "receipt_read_denied":
+        validator = (
+            "import sys\n"
+            "def deny_receipt_read(event, args):\n"
+            "    if event == 'open' and args[0] == sys.argv[4]:\n"
+            "        raise PermissionError('private https://provider.invalid/?token=poison')\n"
+            "sys.addaudithook(deny_receipt_read)\n" + validator
+        )
     command = [
         sys.executable,
         "-c",
-        _validator(),
+        validator,
         str(raw_junit),
         str(safe_junit),
         status,
@@ -192,6 +210,10 @@ POISONS = {
     "snapshot_integer": (("runtime", "descendant_snapshot_complete"), 1),
     "reap_integer": (("runtime", "descendant_reap_complete"), 1),
     "cleanup_errors": (("runtime", "cleanup_errors"), ["cleanup failed"]),
+    "cleanup_errors_secret": (
+        ("runtime", "cleanup_errors"),
+        ["private https://provider.invalid/?token=poison"],
+    ),
     "live_children": (("runtime", "live_descendant_pids"), [123]),
     "zombie_children": (("runtime", "zombie_descendant_pids"), [123]),
     "readers": (("runtime", "active_readers"), ["reader"]),
@@ -210,6 +232,7 @@ def test_measured_published_consumer_receipt_admitted(tmp_path: Path):
     assert str(ROOT) not in receipt.read_text()
     assert str(tmp_path) not in receipt.read_text()
     assert ET.parse(junit).getroot().get("failures") == "0"
+    assert not (receipt.parent / "published-core-failure-diagnostics.json").exists()
 
 
 @pytest.mark.parametrize(
@@ -282,6 +305,129 @@ def test_poisoned_published_consumer_receipt_rejected(
     assert not receipt.exists()
     assert ET.parse(junit).getroot().get("failures") == "1"
     assert "private failure detail" not in junit.read_text()
+    diagnostics = _failure_diagnostics(receipt)
+    assert diagnostics["admission"]["pytest"] == (
+        "FAIL" if mutation == "pytest_failure" else "PASS"
+    )
+    assert diagnostics["admission"]["junit"] == (
+        "FAIL" if mutation in {"skip", "count", "name", "class"} else "PASS"
+    )
+    assert diagnostics["admission"]["receipt"] == (
+        "FAIL" if mutation in POISONS else "PASS"
+    )
+
+
+def _failure_diagnostics(receipt: Path) -> dict:
+    diagnostics = json.loads(
+        (receipt.parent / "published-core-failure-diagnostics.json").read_text()
+    )
+    assert set(diagnostics) == {
+        "status",
+        "admission",
+        "receipt_read",
+        "counts",
+        "checks",
+    }
+    assert diagnostics["status"] == "FAIL"
+    assert set(diagnostics["counts"]) == {"tests", "skipped", "failures", "errors"}
+    assert all(type(value) is int for value in diagnostics["counts"].values())
+    assert len(diagnostics["checks"]) == 39
+    assert len({check["code"] for check in diagnostics["checks"]}) == 39
+    for check in diagnostics["checks"]:
+        assert set(check) == {"code", "status", "failure_class"}
+        assert check["status"] in {"PASS", "FAIL", "UNAVAILABLE"}
+        assert check["failure_class"] in {
+            "NONE",
+            "IO_ERROR",
+            "TEXT_ERROR",
+            "JSON_ERROR",
+            "TYPE_ERROR",
+            "VALUE_ERROR",
+            "ATTRIBUTE_ERROR",
+            "KEY_ERROR",
+            "OTHER_ERROR",
+        }
+    encoded = json.dumps(diagnostics)
+    for forbidden in (
+        str(receipt.parent),
+        "provider.invalid",
+        "private",
+        "token=",
+        "https://",
+        "prepared-browser",
+        "actions-home",
+        "removed-browser-temp",
+    ):
+        assert forbidden not in encoded
+    return diagnostics
+
+
+@pytest.mark.parametrize("mutation", POISONS)
+def test_receipt_poison_preserves_strict_rejection_with_diagnostics(
+    tmp_path: Path, mutation: str, admitted_baseline
+):
+    result, junit, receipt = _validate(tmp_path, mutation)
+    assert result.returncode != 0
+    assert not receipt.exists()
+    assert ET.parse(junit).getroot().get("failures") == "1"
+    diagnostics = _failure_diagnostics(receipt)
+    assert diagnostics["admission"] == {
+        "pytest": "PASS",
+        "junit": "PASS",
+        "receipt": "FAIL",
+    }
+    assert any(check["status"] == "FAIL" for check in diagnostics["checks"])
+
+
+@pytest.mark.parametrize(
+    "mutation, status, failure_class",
+    [
+        ("receipt_missing", "MISSING_OR_NON_FILE", "NONE"),
+        ("receipt_invalid_json", "READ_ERROR", "JSON_ERROR"),
+        ("receipt_invalid_text", "READ_ERROR", "TEXT_ERROR"),
+        ("receipt_read_denied", "READ_ERROR", "IO_ERROR"),
+        ("receipt_not_object", "PARSED", "ATTRIBUTE_ERROR"),
+    ],
+)
+def test_receipt_read_and_parse_failures_have_distinct_fixed_diagnostics(
+    tmp_path: Path, mutation: str, status: str, failure_class: str, admitted_baseline
+):
+    result, junit, receipt = _validate(tmp_path, mutation)
+    assert result.returncode != 0
+    assert not receipt.exists()
+    assert ET.parse(junit).getroot().get("failures") == "1"
+    diagnostics = _failure_diagnostics(receipt)
+    assert diagnostics["receipt_read"] == {"status": status, "code": failure_class}
+    assert diagnostics["admission"]["receipt"] == "FAIL"
+    assert "provider.invalid" not in result.stderr
+
+
+def test_failure_diagnostics_cover_each_existing_receipt_predicate():
+    validator = ast.parse(_validator())
+    admission = next(
+        node.value
+        for node in ast.walk(validator)
+        if isinstance(node, ast.Assign)
+        and isinstance(node.targets[0], ast.Name)
+        and node.targets[0].id == "receipt_ok"
+        and isinstance(node.value, ast.BoolOp)
+    )
+    diagnostic_function = next(
+        node
+        for node in validator.body
+        if isinstance(node, ast.FunctionDef)
+        and node.name == "write_failure_diagnostics"
+    )
+    checks = next(
+        node.value
+        for node in diagnostic_function.body
+        if isinstance(node, ast.Assign)
+        and isinstance(node.targets[0], ast.Name)
+        and node.targets[0].id == "checks"
+    )
+    assert [ast.dump(check.elts[1].body) for check in checks.elts] == [
+        ast.dump(predicate) for predicate in admission.values
+    ]
 
 
 def test_generated_published_gate_matches_generator(tmp_path: Path):
@@ -311,3 +457,4 @@ def test_generated_published_gate_matches_generator(tmp_path: Path):
     assert gate["if"] == "matrix.os == 'ubuntu-22.04'"
     assert upload["if"] == "always() && matrix.os == 'ubuntu-22.04'"
     assert "receipt.sanitized.json" in upload["with"]["path"]
+    assert "published-core-failure-diagnostics.json" in upload["with"]["path"]
