@@ -1,0 +1,9 @@
+{
+  "status": "READER_SCOPE_CORRECTED_NOT_PRODUCT_HOLD",
+  "initial_inspector": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-independent-preexecution-review/review-frozen-proposal-v5.py",
+    "bytes": 14704,
+    "sha256": "4a8725ec0400660f528ada32facaf44bf0de7e10a2b93cc87611c434801c8c2b"
+  },
+  "observation": "Final153 refs include current618 four0444 helper snapshots and historical776 four0600 snapshots. Initial own reader counted both with a generic substring. Current snapshot predicate corrected to exact B prefix; all historical hashes remain checked. No candidate control or consumer executed."
+}

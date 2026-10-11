@@ -1,0 +1,144 @@
+{
+  "schema": "actions-pr300-actual299-source-preparation/v4",
+  "status": "FROZEN_AFTER_ACTUAL299_ROOT_READBACK_AWAIT_INDEPENDENT_ACTUAL299_GO_AND_EXPLICIT_WRITER_A_ACTIVATION",
+  "observed_at": "2026-10-11T09:02:18.925Z",
+  "existing_PR": {
+    "number": 300,
+    "state": "open",
+    "draft": true,
+    "head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+    "tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1",
+    "existing_head_branch": "feat/run-output-transport-20261010",
+    "base_branch": "feat/shared-run-output-20261010",
+    "payload_base_SHA_stale": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+    "actual_named_stack_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+    "known_integration_target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "local_worktree": "No currently registered pr300 worktree",
+    "local_existing_ref": "Existing origin remote-tracking ref3cad only; no local source branch yet. Materialize a local tracking checkout of the SAME accepted existing remote branch when root activates; no new remote/replacement branch.",
+    "current_named_integration_target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "known_integration_target_is_historical_premerge": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+  },
+  "dependency": {
+    "required": "Actual normal299 merge6181 is authenticated by bounded own commit API and root readback, tree99ac ordered776+3155. Await assigned independent actual299 GO and root explicit writerA activation/capacity gate before any source/worktree/base/ref mutation or tests.",
+    "order": "Actual2996181 independent integration GO \u2192 root writerA activation \u2192 same existing300 ordinary refresh onto actual6181/current authenticated target \u2192 configured source gates + independent source GO \u2192 root guarded existing PR retarget/push \u2192 fresh current-head CI \u2192 scoped admission",
+    "no_premature_base_or_head_mutation": true
+  },
+  "complete_prospective_union_proof": {
+    "path": "/workspace/engineering/pr300-after299-engineering-preparation/complete-object-only-prospective-union-proof.json",
+    "bytes": 256395,
+    "sha256": "1a281ce07571e645bb2dd5b34e3a82147f5d2c6f8403da6c1c966741f2863572"
+  },
+  "source_scope": {
+    "route": "Optional default-off server-owned GET /api/workspaces/{workspace_id}/outputs/{handle}",
+    "authority": "Installation-key/browser auth is only an outer gate. Trusted server-owned async request-to-Actor callback is mandatory; caller Actor IDs/installation tokens/browser sessions do not create Workspace authority. Current persisted grant and canonical output admission are checked before provider reader acquisition.",
+    "streaming": "Measured descriptor; at most64KiB chunks; attachment/no-store/nosniff; validated opaque handle before filename headers; shielded acquisition/owned exit and cancellable streaming.",
+    "limits": "GET-only; HEAD405 and Range416 are explicit rejection, not acceptance of full HEAD/Range/static-serving contract. Denial/revocation precede acquisition; active stream does not recheck grant. Preserve original nine private source/test files as source contracts; nine files are not native/platform acceptance.",
+    "current_source": "Four original300 patch paths byte/mode exact in prospective union; entire299 .github exact; no implementation rewrite needed."
+  },
+  "retained_historical_receipts": [
+    {
+      "path": "/workspace/engineering/pr300-readonly-preparation.json",
+      "bytes": 1367,
+      "sha256": "a7913b199135a5fa8c0af27302e099f9ec9ca6f7d2dc91427150a8b128797adc"
+    },
+    {
+      "path": "/workspace/engineering/pr300-merge-preview.txt",
+      "bytes": 40285,
+      "sha256": "e0909ecfbf868a59ed771ca634f916301af2552b92066abf73b2ea0c70e658ab"
+    },
+    {
+      "path": "/workspace/engineering/reconciliation/pr300-live.json",
+      "bytes": 7411,
+      "sha256": "e26b49afdd2ff1b906dc14dc72a95d9ade78996ee7090304e007ce3406998f35"
+    },
+    {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/current-open-pr-audit-20261010T1753Z/pr300-loopback-review.json",
+      "bytes": 4540,
+      "sha256": "7562e2aaf7bd357a6d208faf629b53b7a0d25f51cb46ab74bfe1fa7d748a95d5"
+    }
+  ],
+  "historical_gate_disposition": "73 focused PASS and author100 broader PASS/one browser fixture not run are historical receipt claims for old source. Original2-test loopback receipt belongs3cad with test-supplied trusted Actor, old prepared interpreter, and its own log/probe hashes; not rerun, not current gateway/full source/package/release proof. Preserve it without borrowing production identity, Canvas/native/browser/public endpoint or current-union acceptance. Old3cad CI and stale payload base are not new actual-target qualification.",
+  "concrete_root_authorized_source_plan_after_dependency": [
+    "Await root assigned independent actual299 integration GO and explicit writerA activation. Before source materialization, authenticate named integration ref6181 (or explicitly updated actual target); preserve any target advancement and recompute complete union.",
+    "Materialize the SAME existing feat/run-output-transport-20261010 branch at exact remote3cad in a bounded pr300 checkout. Preserve old commits/receipts; ordinary merge ACTUAL target into source, no rebase/replacement/cherry-pick duplication.",
+    "Ordinary merge actual6181 into existing3cad source. Read-only preview is conflict-free f6b711f1589bcff6b9df73ab889c30503859d90d/1421 leaves with1417 target leaves exact and four original300 patch paths exact. Preserve all nine private foundation body/mode pairs and both parent canonical lessons; compare actual materialized union, do not force predicted bytes or create a replacement branch.",
+    "Use managed RCC18.19.3 and canonical developer toolkit. Doctor, own Bootstrap or measured exact-input reuse with package-prefix and concrete-module origins for all five packages; no host Poetry/pip or stale historical interpreter.",
+    "ToolkitTest; configured Runtime focused run_outputs service/filesystem/concurrency/migration/transport tests plus inherited changed-source and auth-origin seams. Keep Linux provider skip explicit on non-Linux; no broadened skips, deadlines or external/native executions.",
+    "Run ONE authorized current-union full configured Runtime test-not-integration through package Invoke with bounded two workers; full configured lint Ruff/check/format/Isort and full typecheck. Reconcile every skip/external dependency. Preserve before/after complete source body/mode hashes, owned tool inputs and process/cleanup limitations; failures remain source-bound.",
+    "Canonical generator replay all eight exact outputs and dependabot/all tracked YAML parse/byte comparison; no workflow pin edits unless separately assigned. Commit only the accepted ordinary union and necessary evidence-backed canonical delta. Freeze exact SHA/tree/parents/source/checkpoint; independent source acceptance before guarded existing-ref normal push.",
+    "Root verifies actual source/head/base/ref and preservation, retargets EXISTING PR300 only after actual299 accepted integration to integration/community-release-20261008, normal-pushes with expected existing-ref/head guard and retains exact HTTP body final newline.",
+    "Derive expected hosted job set from new exact current-union workflow event/branch/path/matrix/needs rules and prospective diff after retarget. Require every mandatory current-head job including late publisher, complete pagination/status/reviews/threads/policy/readiness, authenticated tested checkout and current scope evidence. No old299/300 greens carry."
+  ],
+  "not_authorized_or_claimed": [
+    "No source/worktree/ref/base changes or tests/native/provider/browser execution before independent actual299 GO plus root explicit writeractivation/full serialization.",
+    "No current native build/artifact/installed consumer qualification;275 named inputs vs old268 now260matches8changes7adds, five selectors exact separately.",
+    "No new provider/authenticator design, active-stream revocation, HEAD/Range implementation, public tunnel or infrastructure.",
+    "No Canvas producer/ChatGPT/full83/86/127/129/private134/frozen-v6/Runtime221/publication/whole campaign closure."
+  ],
+  "private_live_API": {
+    "path": "/workspace/engineering/pr300-after299-engineering-preparation/private-authenticated-PR300-preparation-readbacks.json",
+    "bytes": 64480,
+    "sha256": "156a96b547d63947aa63005949cc77c87aa3dd9ec0dbbf7e8f11c872de96d8ef"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/provenance-observability.md original accepted GET transport guide delta retained exactly for ordinary source refresh; existing repository-operations grant-acquisition paragraph verified unchanged.",
+    "Exact_proposed_delta": {
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/canonical-original-accepted-GET-transport-guide-proposed.patch",
+      "bytes": 3697,
+      "sha256": "23355d62bd9e3c1c9537e6432e0821e10b0e65ba7f0faa6779351530701acb92"
+    },
+    "Existing_exact_reader_scope": {
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/canonical-existing-reader-acquisition-scope-verified.txt",
+      "bytes": 550,
+      "sha256": "40282f966ad96a496f6266c333fdb9f64c17e5f5b1698df454918585554e0795"
+    },
+    "Durable_learning_captured": "Default-off trusted Actor plus persisted grant permits bounded GET acquisition; source/ASGI and historical test-authenticated loopback scopes remain distinct from deployed identity/native/Canvas acceptance. Revocation guards future reader acquisition, not an active stream.",
+    "Evidence": "Original3cad transport/server/test Git blobs, explicit GET-only/HEAD405/Range416 tests, same9private foundation mode/blob pairs in prospective1421 union; historicalloopback receipt7562; unchanged original guidec73 and existing reader transaction lesson. Actual2996181 commit/tree/orderedparents authenticated; object-only3cad+6181 remains exactf6b1421 union. Prior/preparation bytes preserved separately.",
+    "Stale_or_ambiguous_guidance_removed": "PR description old600fb stack reference and stale payload4cad do not supply current named3155 or actual integrated dependency. No original73/100/TCP receipt/current-head CI requalification, HEAD/range rejection as supported contract, or nine source files as native proof.",
+    "Remaining_uncertainty": "Assigned independent actual299 acceptance and root writeractivation still pending here; named target freshness at activation, actual materialized source/full/current-hosted gates, production identity/provider/Canvas/native/whole storage/release acceptance."
+  },
+  "actions": "Bounded private preparation and object-only Git merge-tree preview; no branch/worktree/source/base/ref mutation, test/gateway/native/install/download/rerun/merge or another299 census.",
+  "upstream_disposition": "none",
+  "prior_preintegration_handoff_preserved": {
+    "path": "/workspace/engineering/pr300-after299-engineering-preparation/immutable-after299-existing-PR300-source-handoff.json",
+    "bytes": 10373,
+    "sha256": "6c517a6372149a3a7073a34023d0d00c0a5e6b59f3f43824c89e2a76451b360e"
+  },
+  "actual299": {
+    "sha": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+    "ordered_parents": [
+      "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "3155fc55ea7d47afbc547fddc963b5860462924b"
+    ],
+    "root_readback": {
+      "path": "/workspace/engineering/pr299-actual-integration.json",
+      "bytes": 1567,
+      "sha256": "327250afa7750b41b8fa6c950ba068a7857376856444da67e0711f98966afed5"
+    },
+    "own_bounded_commit_API_readback": {
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/private-authenticated-actual299-commit.json",
+      "bytes": 2745,
+      "sha256": "a63e8fbb2e467143b4c4254a28e6ffc58a70b387cb6502c6c577b110965d753c"
+    },
+    "ordinary_object_only_actual_union_tree": "f6b711f1589bcff6b9df73ab889c30503859d90d",
+    "actual_union_equals_prior_prospective_tree": true,
+    "root_independent_merge_review": "PENDING external assigned lane; this plan is not a substitute"
+  },
+  "full_gate_serialization": "All local full source suites require root explicit serialization/capacity clearance. Neither writeractivation nor preparation independently authorizes overlap with305/309/full or actual consumer runs.",
+  "prior_actual299_preparation_v3_preserved": {
+    "path": "/workspace/engineering/pr300-after299-engineering-preparation/immutable-actual299-existing-PR300-source-handoff-v3.json",
+    "bytes": 12265,
+    "sha256": "616988069dfe033311ac4a208bbbaf41d0112d9899ca1ccd85acf926a3f30c55"
+  },
+  "post299_live_named_refs": {
+    "observed_at": "2026-10-11T09:05:59.156Z",
+    "integration_head": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "PR300_head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+    "private_original_API": {
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/private-authenticated-post299-live-named-ref-readbacks.json",
+      "bytes": 12763,
+      "sha256": "f52e6c171a197bdeaf58a5cbcaed63e2607f47dd882de4ca609538c90dca0a29"
+    }
+  }
+}

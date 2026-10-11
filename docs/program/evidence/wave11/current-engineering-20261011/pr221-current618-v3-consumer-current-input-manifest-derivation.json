@@ -1,0 +1,76 @@
+{
+  "status": "CURRENT_SOURCE_INPUT_MANIFEST_DERIVED_NOT_ACTUAL",
+  "ownerfinal": {
+    "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/OWNERFINAL-current618-partial-distribution-integrity-v2.json",
+    "bytes": 12170,
+    "sha256": "9b406fdf505871e6790d7a4233d0b8c075ae6f170f2c5b7a954bbca0f0d46236"
+  },
+  "original_archive": {
+    "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/original-11697353355.zip",
+    "bytes": 28299039,
+    "sha256": "fc4018e6e7ed4a0e47c4f5888d36d55655216ca22ebd965f29ce9f1130938f8c"
+  },
+  "selected_wheel": {
+    "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "bytes": 14180835,
+    "sha256": "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6"
+  },
+  "tracked215": 215,
+  "python202": 202,
+  "regular_files_record221": 221,
+  "hashed_RECORD220": 220,
+  "directory_count": 27,
+  "helper_mechanism": "Existing acceptedrunner; narrow identity/count/receiptwording/temp-prefix successor only",
+  "generated_exceptions": {
+    "oauth": {
+      "path": "actions/server/_oauth2_config.py",
+      "bytes": 287,
+      "sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe",
+      "AST_only_never_executed": true,
+      "fixed_assignment": "FILE_CONTENTS",
+      "fixed_fields": [
+        {
+          "fixed_field": "actions_config",
+          "category": "EMPTY_STRING",
+          "utf8_bytes": 0,
+          "characters": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "fixed_field": "default_user_config",
+          "category": "EMPTY_STRING",
+          "utf8_bytes": 0,
+          "characters": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "required_payload_both_current_measured_empty": true,
+      "authority_and_provider_config_policy": "UNQUALIFIED; no approved input pair/revisions/digests authenticated; historical empty1.0.2 is not a fallback",
+      "record_match_scope": "RECORD integrity authenticates measured empty-member bytes within this original wheel; it does not qualify generator input authority or completeness"
+    },
+    "rcc": {
+      "path": "actions/server/bin/rcc-18.19.3",
+      "bytes": 22282402,
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "version_execution": "NOT_RUN",
+      "authority": "Pinned7e588bytes; no provider/native proof"
+    },
+    "dist_info": "Four packaging metadata/entrypoint files plus self-unhashed RECORD, full integrity separately checked"
+  },
+  "new_runner": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-consumer-runner-v3.py",
+    "bytes": 19364,
+    "sha256": "ade8a64f77069af3327140eee6732cba3cc43cb46547f6fe40849773a5fd150e"
+  },
+  "new_gate": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/current-input-admission-v3.py",
+    "bytes": 7267,
+    "sha256": "7474e6fae0e8d8d8211bfc9376697dcd14546b9c1a4ea5925c4042786720ea25"
+  },
+  "new_manifest": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/input-and-source-admission.json",
+    "bytes": 170656,
+    "sha256": "50f33fec6151d479de967159c4b04de83cccd9ff220936fbc63e0b8e2e17ca42"
+  },
+  "actual_authorized": false
+}

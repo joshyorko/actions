@@ -1,0 +1,10 @@
+{
+  "original_script": "/workspace/engineering/pr308-actual299-source-refresh/verify-materialized-source-before-commit.py",
+  "observed_exception": "KeyError: developer/tests/test_toolkit.py",
+  "stage": "PRECOMMIT before any SOURCE commit or gateway gates",
+  "original_script_preserved": true,
+  "corrected_named_v2_uses_authoritative_C_changed_paths": "developer/tests/test_rcc_provider_rollback_workflow.py",
+  "raw_original_traceback": "Tool history; no fabricated original log",
+  "application_or_control_source_correction": false,
+  "upstream_disposition": "none"
+}

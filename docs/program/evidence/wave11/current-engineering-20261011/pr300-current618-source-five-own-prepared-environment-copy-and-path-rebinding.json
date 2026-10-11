@@ -1,0 +1,1217 @@
+{
+  "prepared_source_checkout": "/workspace/engineering/pr299",
+  "own_source_checkout": "/workspace/engineering/pr300",
+  "no_installer_no_download": true,
+  "environments": [
+    {
+      "package": "actions",
+      "source": "/workspace/engineering/pr299/actions/.venv",
+      "own_destination": "/workspace/engineering/pr300/actions/.venv",
+      "copy": "cp -a --reflink=auto; independent clone when filesystem lacks reflink",
+      "path_only_rebindings": [
+        {
+          "relative": "pyvenv.cfg",
+          "original_sha256": "9e54a340a89865f8c2e41c271d7f720286c0ce1e3ac2867698100b61e3e53341",
+          "rebound_sha256": "468b2d8bf93cd03beda2f7a1a4c8138270ef1e094395d9256c7d99045a474b4b"
+        },
+        {
+          "relative": "bin/pylint-config",
+          "original_sha256": "989b0259d5bddd98626aafe4f4da30f975084cdeca9b2560095aa837646c010d",
+          "rebound_sha256": "2c7d5ae86e538bc19b4b864c6983ee24546cd604af726e012efd44b9d45fc1dc"
+        },
+        {
+          "relative": "bin/pip3",
+          "original_sha256": "e888004c2021e2b0925e9ed55a9ea5cfc0c7d06d48b3bcf87ff6cc31cbb4eec4",
+          "rebound_sha256": "51565e88a2d7107c99660741732d4d395c776edf5dc6ceba7863abfaff809ad9"
+        },
+        {
+          "relative": "bin/get_objgraph",
+          "original_sha256": "35851fd0db772c2b8131ad9c498d2ce5361de68fb6750d6eb0d0f85f34a5df89",
+          "rebound_sha256": "0b1c97fc4f41a86805cd9fe4b64c9c2c0c7ebd35786ea6aba31e6a6a1e8139fa"
+        },
+        {
+          "relative": "bin/mdformat",
+          "original_sha256": "999132df56c64952693ae82d458fa087e0205c186fd35ddf12bd8384417bd5fb",
+          "rebound_sha256": "168e7b7486b398aa8889cdab184955e9b4cc27c26f954985f093d126f4763550"
+        },
+        {
+          "relative": "bin/isort-identify-imports",
+          "original_sha256": "f7f7773d5bffdf140847ccecadb247832f439532195e783da9ccc560d71a19be",
+          "rebound_sha256": "3e10333dd227339767005a536653ae3460f48e9eb670a3ef7b321978b4d15c8a"
+        },
+        {
+          "relative": "bin/pyreverse",
+          "original_sha256": "c364f28de6ab6560aa58e0cf677d8bfe5bea2077deda218294540bf36724648f",
+          "rebound_sha256": "dbe68f052ab59d75a3c32c735dc45feb1152c0304efecb599df1688343531595"
+        },
+        {
+          "relative": "bin/f2py",
+          "original_sha256": "686adb6ef954954cdd2d8ad5af1dc4644e0040e0a386fc9bbe9c87ff94907194",
+          "rebound_sha256": "4840ecd67acd58b41def8a9e1521fac65ce9126e5dd4e9e76aec45eeb57875b3"
+        },
+        {
+          "relative": "bin/pytest",
+          "original_sha256": "b84b85edba85412d4fe973507a77ceae4171a6e181e2d99bdc514149db733d01",
+          "rebound_sha256": "7240992ae4681f60f124b03e352b221db39dc7f434b773a6d8950ac16a6f5bc3"
+        },
+        {
+          "relative": "bin/undill",
+          "original_sha256": "5a17c6d38ffbbe4591acb73288269e96f59e675f59185c29204a34c84c73b698",
+          "rebound_sha256": "3ae92acd099156087238fe8c0255a7db34f109c4830501753073fe5e0c7723fd"
+        },
+        {
+          "relative": "bin/py.test",
+          "original_sha256": "b84b85edba85412d4fe973507a77ceae4171a6e181e2d99bdc514149db733d01",
+          "rebound_sha256": "7240992ae4681f60f124b03e352b221db39dc7f434b773a6d8950ac16a6f5bc3"
+        },
+        {
+          "relative": "bin/pip-3.12",
+          "original_sha256": "e888004c2021e2b0925e9ed55a9ea5cfc0c7d06d48b3bcf87ff6cc31cbb4eec4",
+          "rebound_sha256": "51565e88a2d7107c99660741732d4d395c776edf5dc6ceba7863abfaff809ad9"
+        },
+        {
+          "relative": "bin/lazydocs",
+          "original_sha256": "2e2cc0f2d5b174823f64abafc6c914dc0d95caac3c4c483fe470e4fd24672fa3",
+          "rebound_sha256": "7eac5b48af881595d07426ce3fb2007dbf8bcf48fc9b72742548b11a9b7aee59"
+        },
+        {
+          "relative": "bin/isort",
+          "original_sha256": "12e47345ec06395441a6392fcf2c3ed697d7f4d5558764309cd9c2793e25d233",
+          "rebound_sha256": "1b1e1e4ece00d216fffb826e85a75a8db75d6e47654900153053f1c3722e257e"
+        },
+        {
+          "relative": "bin/pylint",
+          "original_sha256": "f9bf80ceb5b532e57433f7ea00a9f53b822168924445604d81ea27be8cd8d8cd",
+          "rebound_sha256": "7ad87c75eb5238ea462d911d2f1f567ed1bda2e91534d0773ff26b17ec404727"
+        },
+        {
+          "relative": "bin/activate",
+          "original_sha256": "1aa01d002d2daf9d406fdce3414f3e6da00af2d5166fc9b7fed6ed2fbd21154a",
+          "rebound_sha256": "45f41edaabd8aed2003c1c3cc903edb74905dea8e0a089abf08282e0944c6d33"
+        },
+        {
+          "relative": "bin/pygmentize",
+          "original_sha256": "63b1f41a44fdaeab9a2a1cca520a8a943355ce82fbfae2a3c5f1e9208615da52",
+          "rebound_sha256": "69597396d29ecc74543c078c90dee2e951005d6cd8d7f09a9d0892619de2cd07"
+        },
+        {
+          "relative": "bin/coverage3",
+          "original_sha256": "fa9e58690516cf1d0e5aa93518b0846c5851233a8c37775e570bf6d41d321d97",
+          "rebound_sha256": "f55c85a5c579f94a778962e6c608694c9ea9c9f6514bab3a73b3456989d28a21"
+        },
+        {
+          "relative": "bin/symilar",
+          "original_sha256": "9c66fcfd017494956f4d13beef983d9f3843adddf2de1b3e886e294fc1dc1f6a",
+          "rebound_sha256": "8f50f67d62b2df04f371e65f81bf90804c09cc81b94dc844f5e1886965a00ad2"
+        },
+        {
+          "relative": "bin/stubtest",
+          "original_sha256": "a9881294993c234b36604053c3bd1648b5df15de08f6b4b6191e6478a9384ef5",
+          "rebound_sha256": "71727ac70d4cdea39ff58ff42c71c6b3aa4359c4400f3d6505e5b56d73fe4567"
+        },
+        {
+          "relative": "bin/activate.nu",
+          "original_sha256": "469321963177a86177b08495bf5d36dcde8eec6acd8c460da9e885acc741fb99",
+          "rebound_sha256": "1ff7c841d825435439df4230a86d5d55db6b3f0300c2c6c162fa2385d46b105f"
+        },
+        {
+          "relative": "bin/mypy",
+          "original_sha256": "7d275ff5ea93871efdb80a24954781ef639cf23467b2782d22026c132eaeb3c6",
+          "rebound_sha256": "fb3d3d15bf89d96c6adfc258b122f0b0ed30cf8c2e3819ed54b015279e54ae2c"
+        },
+        {
+          "relative": "bin/coverage-3.12",
+          "original_sha256": "fa9e58690516cf1d0e5aa93518b0846c5851233a8c37775e570bf6d41d321d97",
+          "rebound_sha256": "f55c85a5c579f94a778962e6c608694c9ea9c9f6514bab3a73b3456989d28a21"
+        },
+        {
+          "relative": "bin/stubgen",
+          "original_sha256": "d68b75df87f0377b8b4500ddc6eff6eecc193b804d8162e48b3b75163b753a3b",
+          "rebound_sha256": "36de528f8b606a229640ea2f296b3ce82d5ce8fa90aec605a589c5ebb8b30315"
+        },
+        {
+          "relative": "bin/cffi-gen-src",
+          "original_sha256": "76c7f014980c134dc87695872db3cde1f018353527e476945f9377423cd4ea4c",
+          "rebound_sha256": "58d4e87d069bb56197d04cb484bcaf8fdd4923f7274b48d5283812ab052141ce"
+        },
+        {
+          "relative": "bin/inv",
+          "original_sha256": "42d9f14be688995f28300434ed7ca4294ba45a61c4d751e93c02a4892bf92e7d",
+          "rebound_sha256": "9908977d90e8de9d29138ff8743a66b077fdf920cf09f09f26c2a34b7f44f77f"
+        },
+        {
+          "relative": "bin/dmypy",
+          "original_sha256": "8c6a964dbc03f7e7b6881a2bf8e6ee3401a43b2230639f898a81cebf4cd64857",
+          "rebound_sha256": "4665336f9b04fa6518cd00eeb8f6fd2df0833b4a0a96692225d1201a85c34f87"
+        },
+        {
+          "relative": "bin/pydocstyle",
+          "original_sha256": "24bfb308ee8a4216fd86c56f9a454909a61f8bec5f0092fd8b08daac293d6bd1",
+          "rebound_sha256": "11346b106160926f1072434c346f42942d4972b4974fa3c6219b6aefb735c4e6"
+        },
+        {
+          "relative": "bin/invoke",
+          "original_sha256": "42d9f14be688995f28300434ed7ca4294ba45a61c4d751e93c02a4892bf92e7d",
+          "rebound_sha256": "9908977d90e8de9d29138ff8743a66b077fdf920cf09f09f26c2a34b7f44f77f"
+        },
+        {
+          "relative": "bin/actions",
+          "original_sha256": "fa2f24da74701f9b02b94775ca675b30e1dc5032e5d353e29b42cb349741b76a",
+          "rebound_sha256": "522700c2b8a754425450ab106e7844ea9acb388e491937333979fe0db50ccc96"
+        },
+        {
+          "relative": "bin/pip3.12",
+          "original_sha256": "e888004c2021e2b0925e9ed55a9ea5cfc0c7d06d48b3bcf87ff6cc31cbb4eec4",
+          "rebound_sha256": "51565e88a2d7107c99660741732d4d395c776edf5dc6ceba7863abfaff809ad9"
+        },
+        {
+          "relative": "bin/coverage",
+          "original_sha256": "9fccde07b4cca24d0597d2345eb1fa3b66c5f8937031a332495a7a6d0f25e3b3",
+          "rebound_sha256": "de5b262a40c7f48a9890e81661a5b2e46bc195f853e8c0dd470e3e4481be70af"
+        },
+        {
+          "relative": "bin/activate.csh",
+          "original_sha256": "d3c6ae0f9637a452f1628fea4846643733f869a83ceff0da3c8894c6aa620897",
+          "rebound_sha256": "e81d011c66ebb3854e5f1b2eaed7e28fa07118e146895c37df851304806509eb"
+        },
+        {
+          "relative": "bin/pysemver",
+          "original_sha256": "8a4219dfdae084976a3d3920d3734aaee5e42ac1aa3427fdd8fc15537c29c0ec",
+          "rebound_sha256": "decebd6caf6bb643c2d57295478ccc72976dbd06a98babd245a815c437e6cdc3"
+        },
+        {
+          "relative": "bin/mypyc",
+          "original_sha256": "7e2acec66d0d08936073faeb10503d1a056af67918d6a7809cdab1015273049b",
+          "rebound_sha256": "f9a4ee44237e67a5f25cee1b554d03a496ae95509453f20839170538235eac06"
+        },
+        {
+          "relative": "bin/typer",
+          "original_sha256": "1e2644fbc27eb9192f6a008141beb9915cc4f1c8d439bb32878da75b1fc66a8c",
+          "rebound_sha256": "bde8346e3f0a8030dbdd678d6494a49a92742a4b0a5b0a8084ef9f11b430f5cc"
+        },
+        {
+          "relative": "bin/activate.fish",
+          "original_sha256": "66368646bd939cff6a4657853ea893d3ff7914c741c3ccfbd55731975a47e4f0",
+          "rebound_sha256": "f6f795027ad6ad53d578c0082407335538353eccae39079b60882da62a50c3c5"
+        },
+        {
+          "relative": "bin/get_gprof",
+          "original_sha256": "9c888ac81176d3e4b621151c02629bc5ffea3d2b78bf486a02cf8fc86410b2c3",
+          "rebound_sha256": "8728f617c8a9344f0a90f4e1c90e9279546e5b18fb01d0adfe3f2cff4d3f3b3f"
+        },
+        {
+          "relative": "bin/pip",
+          "original_sha256": "e888004c2021e2b0925e9ed55a9ea5cfc0c7d06d48b3bcf87ff6cc31cbb4eec4",
+          "rebound_sha256": "51565e88a2d7107c99660741732d4d395c776edf5dc6ceba7863abfaff809ad9"
+        },
+        {
+          "relative": "bin/markdown-it",
+          "original_sha256": "222b0a994301b7bc0c5fbcf8b7676b329528264455bc5da712f788e576186d02",
+          "rebound_sha256": "e3308d17f8bd8f93b97b14af7991a6864d4679942c133dde5b2da12969c38fc6"
+        },
+        {
+          "relative": "bin/epylint",
+          "original_sha256": "1fe637f09e2110d32d6d13dbadb4efd399bb251e7dfccbbd8e9d65cf00583e12",
+          "rebound_sha256": "b088f77fb9be1ca5bb269e7dccf805b87f59ba535291a7b632d961b6664bad89"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_core.pth",
+          "original_sha256": "d9e9707d19bf82c42fa62bc126193b9de8b02b0675f30297201009cdc3313f45",
+          "rebound_sha256": "4635c4e1cff5b530d9e94334df29beb3d37ffb5ddd3bff10c3fb6003ce8b5115"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_local_devutils.pth",
+          "original_sha256": "c1e91e0384555a04b3db7623ad0763e6c71a2d906ad2cc98df2cd1e006cc225e",
+          "rebound_sha256": "783b155f31c86c22304d8868b6bc12b38ecd8af53da3a058b0c0dd10674070d3"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_http_helper.pth",
+          "original_sha256": "2592ecf68893c6f64be325d75117f8e837dc86d04756ecb178b45ef6aa741ab4",
+          "rebound_sha256": "0b8540cb89eb82ea8997dc32a3e10f40d5cdf9c9e19e219cb74c962fdbddf5a3"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_http_helper-1.0.3.dist-info/direct_url.json",
+          "original_sha256": "609c3ffd2ab0dc1668c47e0d081f919999ea0ad4a861de222a41500565ba9659",
+          "rebound_sha256": "bb448e25605e862423996e5071bff09731b5bffa2221789145890eb0d7597d90"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_local_devutils-0.0.1.dist-info/direct_url.json",
+          "original_sha256": "2af39f1ea99061f0f14d025541c165b4469d39f5bbc6e25624987c4cc22fe295",
+          "rebound_sha256": "941d5b7457c2288edd5f658d9171eac5863fe9c7ba74157e0c784b028b063122"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_core-1.0.3.dist-info/direct_url.json",
+          "original_sha256": "cf8e0d0cf187ff5567541d88c54ff03ae20da2129fac2ffba924c6645f881c15",
+          "rebound_sha256": "50780e88897755f4047324dfb68208c0a9f32019585d654e2f2ce402c3758515"
+        }
+      ],
+      "original_edited_inputs_unchanged": true
+    },
+    {
+      "package": "action_server",
+      "source": "/workspace/engineering/pr299/action_server/.venv",
+      "own_destination": "/workspace/engineering/pr300/action_server/.venv",
+      "copy": "cp -a --reflink=auto; independent clone when filesystem lacks reflink",
+      "path_only_rebindings": [
+        {
+          "relative": "pyvenv.cfg",
+          "original_sha256": "e4bb44e1cef35ef810a134f165a7b3e247545822f68d625e29119c6b3d395f8a",
+          "rebound_sha256": "eda8fe3612d2a4508beeea0476e14d4e03986d46db8e1970bc2d30d065871179"
+        },
+        {
+          "relative": "bin/pylint-config",
+          "original_sha256": "b3effe30d4f76d6761885ad0acae3ae1886ed5e5d2bdf9ded89a04bfb474c2e9",
+          "rebound_sha256": "02b7bfd40a965fef1c56af5f31f2b3b63403235e865eab4d58c2109f6fcd05d2"
+        },
+        {
+          "relative": "bin/pip3",
+          "original_sha256": "5c878a649c1d0cc7b1f7e9e65223ae8f2f5ed463b65adee74df8f35dc8cdc0cd",
+          "rebound_sha256": "ee2c893b15d88564ddfffd570be202584b41b2cbac4f209ffbe36687dd02a379"
+        },
+        {
+          "relative": "bin/get_objgraph",
+          "original_sha256": "c6b0cfe6f427234d76dcaa3398dafa4063e8be0df372fabc35d9fe4f9d691526",
+          "rebound_sha256": "b3dbe521a5c1fc8bc8a507f3974a91c99a8b3b2146de825d30bdd86a2e98c943"
+        },
+        {
+          "relative": "bin/mdformat",
+          "original_sha256": "6ecf0bf32115e7e6231c9fc78ae67aa828213d97343c7505c14aedfee8c54da9",
+          "rebound_sha256": "f0f18ad4fe6ca61bad74642d7db56fb7dcb23ca3f58b7dbe005ff81a17f67e19"
+        },
+        {
+          "relative": "bin/jsonschema",
+          "original_sha256": "a5f33fb495e6e2d31dd975323ef1ed887576c196ec1bd3997678a13e5fdb1123",
+          "rebound_sha256": "2f25c6dcdee413a0085bb4aac5a8bb753f4b429b7a1beba152597b22f9b2c2d0"
+        },
+        {
+          "relative": "bin/uvicorn",
+          "original_sha256": "2416d3881e636e699779ba6983ef0e47cf617abca9f5141c5f03a6e6f9e46b1c",
+          "rebound_sha256": "3f9079c2cbf4b279006f3b156eac66839534ac50e222625eace264750158a776"
+        },
+        {
+          "relative": "bin/isort-identify-imports",
+          "original_sha256": "3beb6354cabf25e9247ca58c51dd61bbc546a0ac69e45921782bc91d1b682129",
+          "rebound_sha256": "b80a40a22fa4d085be9aa83df9ebcf8a21c8b01b4f690558fca487b910c46c76"
+        },
+        {
+          "relative": "bin/pyreverse",
+          "original_sha256": "87eb3434e03beb7086565e9e7be4154476b1382fde8efa67bdfca72cc50487c2",
+          "rebound_sha256": "7537081df719531d9cfac86888c0357fc42ecf2db0efa7e65d6a1d6ba96a7454"
+        },
+        {
+          "relative": "bin/fastapi",
+          "original_sha256": "f99fa685de7d34fd62b77a04edeb9a06131aafdea201c2d8af289e91fd7074af",
+          "rebound_sha256": "a1942e6e77743dded275cf492f198e752bd58f0471a4c2dc81945e3d2ccf0ce9"
+        },
+        {
+          "relative": "bin/pyinstaller",
+          "original_sha256": "2cb7d4338926a5196b3ae348116fbc8535953efd2ad45ae4f3ac87d80fef4014",
+          "rebound_sha256": "b86259b56b4b0a30b2c881729f03a66ad8da02c319cdd5a1e3666ce5a508f7b1"
+        },
+        {
+          "relative": "bin/pytest",
+          "original_sha256": "bbb283e61231112e463c1cbfa94f943e26c65702e0b95e0efb67190098df77af",
+          "rebound_sha256": "6fef2ec4844571b5e490b2d69ba538057bafd5db7b733d04eeee5823f2b3e0b2"
+        },
+        {
+          "relative": "bin/undill",
+          "original_sha256": "f1c19d0b8b1ad20ce8c10553fa7cb6a1953da88de5c81998e001b2c102cea7a6",
+          "rebound_sha256": "a58441ae28cf74e69f46320e9ce7529c5af863ab324ba282711271923c3f7b92"
+        },
+        {
+          "relative": "bin/py.test",
+          "original_sha256": "bbb283e61231112e463c1cbfa94f943e26c65702e0b95e0efb67190098df77af",
+          "rebound_sha256": "6fef2ec4844571b5e490b2d69ba538057bafd5db7b733d04eeee5823f2b3e0b2"
+        },
+        {
+          "relative": "bin/pip-3.12",
+          "original_sha256": "5c878a649c1d0cc7b1f7e9e65223ae8f2f5ed463b65adee74df8f35dc8cdc0cd",
+          "rebound_sha256": "ee2c893b15d88564ddfffd570be202584b41b2cbac4f209ffbe36687dd02a379"
+        },
+        {
+          "relative": "bin/pyi-makespec",
+          "original_sha256": "8e71681784830a16af00288b256a4592c277fb6ea6d070da3291d3387ef0fddc",
+          "rebound_sha256": "01bddef7e77b7dedd4224f787c560c1003b5c30fb2a046c1239bf4dc187038c6"
+        },
+        {
+          "relative": "bin/lazydocs",
+          "original_sha256": "658318888f509ec295254162c18605c1ad24e6cbe04a7b9fe0f7f2c86dbc43db",
+          "rebound_sha256": "bccaa1190a34911cfb7493ab0663f973456362ef4f5669c8603a4b02b5cd208d"
+        },
+        {
+          "relative": "bin/isort",
+          "original_sha256": "974d95f791401352d2970c072a3800ec8110eb2d9c161b8a067c1a1a20b7278d",
+          "rebound_sha256": "8ed411c0431d19c05819e99d12733364fe54f179914830f1009bd4387877aeb9"
+        },
+        {
+          "relative": "bin/pylint",
+          "original_sha256": "e84b35f892b74c2ba97e22c72c9700c28628174d149a4dbcab5dcc9683c45ec4",
+          "rebound_sha256": "6d0b064328ac772041da03fa3268b6ac91aff7cfcbcc1acd808f85942768541a"
+        },
+        {
+          "relative": "bin/websockets",
+          "original_sha256": "4a837208fb0db88285b27762f2594c69124f128e15720a67df149802abd75a99",
+          "rebound_sha256": "ff87fb57eed41089c02a28d35c81101c00e865ec257327bdf043ce7351ab8b71"
+        },
+        {
+          "relative": "bin/activate",
+          "original_sha256": "cf099aef980bfc1372b588dbe43491befaa41d159f5dba6bdd6d56f70978d297",
+          "rebound_sha256": "88014bd7ab27c937c9b76fa1692b6ec9f37ebefe8efe5ddc95d53941cd92e755"
+        },
+        {
+          "relative": "bin/pygmentize",
+          "original_sha256": "53b52565430238c36aafbf099f8929a131858ee25235367a802e90b767b131ff",
+          "rebound_sha256": "815047d0907af520a9a36f38b024e8c5726f223023b7176423db0feef397b06f"
+        },
+        {
+          "relative": "bin/coverage3",
+          "original_sha256": "42a8b6516417c9a8a4c1b9eed57792bb3b05c95d24b33a9a6cf556f7d5570a4d",
+          "rebound_sha256": "b945d4bf694ebe1726a92b03cc1f8438eca9303761af3e964654541f5a84a3b4"
+        },
+        {
+          "relative": "bin/symilar",
+          "original_sha256": "4b20236664e1114c24877e730cd0cd2c2fd6acf25f4f0ac09b2ab323c12aa7c3",
+          "rebound_sha256": "e1214d111bca5d8acd0b1fd188e3ecf686f897d2b689eaae8484a35779559341"
+        },
+        {
+          "relative": "bin/stubtest",
+          "original_sha256": "3aa6445d01b6923ef02c68c75454e06b5216888dcf07e26c660ed5a5cc24d81f",
+          "rebound_sha256": "22170f56c05c16dffe9335228655e86e73b28dc453c3abb93f172e58786c7989"
+        },
+        {
+          "relative": "bin/activate.nu",
+          "original_sha256": "319ea05e59627ec36d70a1dc0e736052cb18bfaee33a795fe8807efbee210ebe",
+          "rebound_sha256": "263ab5861e058c3098e91bf8f0adb767504c83b3eb2abc7f195e08d2b9291c54"
+        },
+        {
+          "relative": "bin/mypy",
+          "original_sha256": "734a935ce7ff0276d365c10b5dc4dcdf665f9a5e752624ff2ea7241f81be93c0",
+          "rebound_sha256": "ade5da876b922ea1ee6aeb0643fc651611b1ef6ed937851f043812ceda4ca4d9"
+        },
+        {
+          "relative": "bin/coverage-3.12",
+          "original_sha256": "42a8b6516417c9a8a4c1b9eed57792bb3b05c95d24b33a9a6cf556f7d5570a4d",
+          "rebound_sha256": "b945d4bf694ebe1726a92b03cc1f8438eca9303761af3e964654541f5a84a3b4"
+        },
+        {
+          "relative": "bin/stubgen",
+          "original_sha256": "d573be79cce3e24b36d935d0fcba56beb6f4c9c01a4049722e0b476b1a4eeb66",
+          "rebound_sha256": "e1f8c8ca06b9b2f371d979ae15327d25befb9329d7c40b6a90107f4da796cb50"
+        },
+        {
+          "relative": "bin/mcp",
+          "original_sha256": "e04e8dba5b261503302407e30764cf946c4d620ebc184ed1f25cd6a16037657e",
+          "rebound_sha256": "bcce29517f467e3f11f451a4baf49e378d36ed94373cf615baed0e0b77d045d9"
+        },
+        {
+          "relative": "bin/watchfiles",
+          "original_sha256": "12df289b9f31d2d7ad7e359d4948a2f6c6ef867d42a6d2066addcec55a9a59a6",
+          "rebound_sha256": "55c67ae691462287330c616ac0dd727cd4c927562df1d4ea3fa4c24afd073387"
+        },
+        {
+          "relative": "bin/cffi-gen-src",
+          "original_sha256": "61d2905f9b4d94d9257101400773b6e02c98e3fc303001d541c328da61a078dc",
+          "rebound_sha256": "634ce0ed85b0c7cc1a8016c1b928c59aae24b756e85a5c91142a8f51a19e3d2e"
+        },
+        {
+          "relative": "bin/pyi-archive_viewer",
+          "original_sha256": "e560a5d6271dd3e2ac8f641b478a3d1401f9d67372038d3af6a2103f6d1f2009",
+          "rebound_sha256": "1a7ac805e077dda3c241f9367c0980a5826464f0eb4b6dfa1be473fd923613b0"
+        },
+        {
+          "relative": "bin/httpx2",
+          "original_sha256": "891db917f7cf4993f8f57f903475f866b296db8fc1f498af5c29f23d827b439b",
+          "rebound_sha256": "c18c19935776c55e1f293a512dc3eacf3193c503acb5f334fed246580b94ac56"
+        },
+        {
+          "relative": "bin/inv",
+          "original_sha256": "e85f70bb7078b128be23b8457bbce56578d387d2e3026bfa3b0169700bbcbd30",
+          "rebound_sha256": "4b1b70bfe7d103d83f361925aa70275921ef1731069a09ed17914531612c1c31"
+        },
+        {
+          "relative": "bin/dmypy",
+          "original_sha256": "f332ac6b74d03ef80ddce0ba08ffd801abf285a13cef36ab10b93a3a68ae898c",
+          "rebound_sha256": "22eef2863428e47f43600fd8f7078a204e251c47145426366a4fb2f21d2cf73c"
+        },
+        {
+          "relative": "bin/pydocstyle",
+          "original_sha256": "c9faaafbe7a97765e061bf6c61979e2ab8db34bf0d4d4f1675cdd6f75a539fa9",
+          "rebound_sha256": "25571fb38d97d55abe96b97e864396629729689ba1b0467bba8b5ec7316a0fb0"
+        },
+        {
+          "relative": "bin/invoke",
+          "original_sha256": "e85f70bb7078b128be23b8457bbce56578d387d2e3026bfa3b0169700bbcbd30",
+          "rebound_sha256": "4b1b70bfe7d103d83f361925aa70275921ef1731069a09ed17914531612c1c31"
+        },
+        {
+          "relative": "bin/actions",
+          "original_sha256": "ad85ea78ea8cbf812b78caff985d9416f94a091fe91adf1173aab594b1f594ae",
+          "rebound_sha256": "135f5134b1cde333c9eb3028c544bbda48aeac598ba0e5f5bcad0a1784a35706"
+        },
+        {
+          "relative": "bin/pip3.12",
+          "original_sha256": "5c878a649c1d0cc7b1f7e9e65223ae8f2f5ed463b65adee74df8f35dc8cdc0cd",
+          "rebound_sha256": "ee2c893b15d88564ddfffd570be202584b41b2cbac4f209ffbe36687dd02a379"
+        },
+        {
+          "relative": "bin/idna",
+          "original_sha256": "4fe9e1a0a4acae2423bdd248badf8de5c345cdcbaa1c5033a29fcf53c3d2dd26",
+          "rebound_sha256": "43d2a318226af59dcf36e35c68d1a92fac8853aaa10f7369b0f3dc7596a9c179"
+        },
+        {
+          "relative": "bin/coverage",
+          "original_sha256": "69459596ba93f670e8d7b939b515bf66cfa25308474f232d0c45e625f13ea977",
+          "rebound_sha256": "039f1f5c5245ad95091cb5a6074189d9fefe0bae473e84525bc7271453a53c81"
+        },
+        {
+          "relative": "bin/activate.csh",
+          "original_sha256": "1132ad77a2edea3dff7892e99c17a4ac4bcc191c6e9fa08e2597e88b4f5e9428",
+          "rebound_sha256": "e1a57ed69e3b0cc0414bef9dc39273fb65b65f43ccc645cc2be04bc146c332e6"
+        },
+        {
+          "relative": "bin/pysemver",
+          "original_sha256": "f736edecf8213df415f0ba3ebf3307522129dfa76482dc3ecd16846db4af4891",
+          "rebound_sha256": "45c83fe00f5f870a4346abf1ef489559d1d5c8ac28fa9f2086f01f7c00e068f2"
+        },
+        {
+          "relative": "bin/pyi-bindepend",
+          "original_sha256": "fca66c845dd9862776c61c6a3d0168329748da70ba370eb8f6c78c5279e2b0a5",
+          "rebound_sha256": "25f0b0b18ae14dcafb7ea52ade1bd1ab831f2b67f5d9098da4726246311de4d2"
+        },
+        {
+          "relative": "bin/mypyc",
+          "original_sha256": "b740bc36d26a84e6a19151e144f497e06f094d75bbd2ebdb4bebaf0f02a57273",
+          "rebound_sha256": "e7f86f72af1e276d79aa4f1f63585ef7851a635fb061d96082a725bd3d9c3b28"
+        },
+        {
+          "relative": "bin/httpx",
+          "original_sha256": "3f7784067ed2a041383f047607a3018126bbeb08c2f88424508444541c20e7b2",
+          "rebound_sha256": "1ff2e93828c22e57de3bb31f511adf2e14f2874fcbf98937e6fa1b1f992beeb3"
+        },
+        {
+          "relative": "bin/normalizer",
+          "original_sha256": "110556011feb46dcaa2faadea8318c8a88d9a013234e89275a9da7eea2290a8c",
+          "rebound_sha256": "51472dd11c57cd5aee698016ab7f80278f8b1333acb5e0ea07228be9bbf21005"
+        },
+        {
+          "relative": "bin/typer",
+          "original_sha256": "0d9456f3871e431bf5f3f502c5279b3bf875dffab77678bac55cdab0867d14dc",
+          "rebound_sha256": "5ef67dd0a0e93883a20bab3c3f67751243b80b298ba4fe46548680ef661544ea"
+        },
+        {
+          "relative": "bin/activate.fish",
+          "original_sha256": "95a5aca0dce03fe19151c594613d784ae9aec5f04dbf8053e622ee513d5bc3c2",
+          "rebound_sha256": "bb0b3004c9e1409e47d4af37d7a5337c20c78e04b68e19459cb1694da57972c6"
+        },
+        {
+          "relative": "bin/get_gprof",
+          "original_sha256": "18cc051661962a0b38fa0d60b1df2d07c903e737bb85582a5679e6ed45d6269e",
+          "rebound_sha256": "ec02e149cbea3637122ffb19f445fc8c4aff07da5a589f53f0f5a1084a35c4f6"
+        },
+        {
+          "relative": "bin/pip",
+          "original_sha256": "5c878a649c1d0cc7b1f7e9e65223ae8f2f5ed463b65adee74df8f35dc8cdc0cd",
+          "rebound_sha256": "ee2c893b15d88564ddfffd570be202584b41b2cbac4f209ffbe36687dd02a379"
+        },
+        {
+          "relative": "bin/action-server",
+          "original_sha256": "f55a06b311896fec6214b7f0052f16535ffe9e65c6ba6009df2bd37ebdbdfb88",
+          "rebound_sha256": "4b56e9d422bc031bfa8093a834236a85ddbd1fb6a2ea5fae0d7169ef1c5d630e"
+        },
+        {
+          "relative": "bin/markdown-it",
+          "original_sha256": "f29536a3994fd2da32b24afe758526b4cb48917e24c78d533abf9de9251d5235",
+          "rebound_sha256": "a3ac04e8018c82cfd8fd577983c63266e104b659de1e7491f64a003e23632e49"
+        },
+        {
+          "relative": "bin/pyi-set_version",
+          "original_sha256": "28c21909191964397b284fa087c0fa97552eb85aba107b2d796894854c0385d9",
+          "rebound_sha256": "6efe27b8ce04993cf7bd3f1abc7c80fc148f0432c30f58f7466dad22fac07910"
+        },
+        {
+          "relative": "bin/epylint",
+          "original_sha256": "071bbb17c38c473c5e1659c036c100a2b0d25e1507e414c6c91110f643b98f18",
+          "rebound_sha256": "ccc2d42fe331ec03a7f119f08117404b0d7c5d64e8afc47e06bd5b50e9f939ff"
+        },
+        {
+          "relative": "bin/pyi-grab_version",
+          "original_sha256": "ec33cb04ef91646959afae213c66a708cf2a8b6e6e0f2afac36d082f1af016a3",
+          "rebound_sha256": "9139411b5f3e7bd4abd66fcccaa3bff8d4898cd3fd253644907f106efdc82725"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_core.pth",
+          "original_sha256": "d9e9707d19bf82c42fa62bc126193b9de8b02b0675f30297201009cdc3313f45",
+          "rebound_sha256": "4635c4e1cff5b530d9e94334df29beb3d37ffb5ddd3bff10c3fb6003ce8b5115"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_local_devutils.pth",
+          "original_sha256": "c1e91e0384555a04b3db7623ad0763e6c71a2d906ad2cc98df2cd1e006cc225e",
+          "rebound_sha256": "783b155f31c86c22304d8868b6bc12b38ecd8af53da3a058b0c0dd10674070d3"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_http_helper.pth",
+          "original_sha256": "2592ecf68893c6f64be325d75117f8e837dc86d04756ecb178b45ef6aa741ab4",
+          "rebound_sha256": "0b8540cb89eb82ea8997dc32a3e10f40d5cdf9c9e19e219cb74c962fdbddf5a3"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_runtime.pth",
+          "original_sha256": "ff8ffd7546cff852964f9d7d0c92bc7cdcccb28ee50d2e9924e2104122907339",
+          "rebound_sha256": "4264982378eabbe9f1e97cd5c24bb9940011bbec7b13f4015156dc96e93a3fbb"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_http_helper-1.0.3.dist-info/direct_url.json",
+          "original_sha256": "609c3ffd2ab0dc1668c47e0d081f919999ea0ad4a861de222a41500565ba9659",
+          "rebound_sha256": "bb448e25605e862423996e5071bff09731b5bffa2221789145890eb0d7597d90"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_local_devutils-0.0.1.dist-info/direct_url.json",
+          "original_sha256": "2af39f1ea99061f0f14d025541c165b4469d39f5bbc6e25624987c4cc22fe295",
+          "rebound_sha256": "941d5b7457c2288edd5f658d9171eac5863fe9c7ba74157e0c784b028b063122"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_core-1.0.3.dist-info/direct_url.json",
+          "original_sha256": "2be7d2817e79ecfbdc53209bb1916e3af47c1a87baf778acc8cb127e69dd9ec7",
+          "rebound_sha256": "e6e8d6e445286df09eb690cd0fd3da90b28fbabf2d0eb36d2803753da087df76"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_runtime-1.0.3.dist-info/direct_url.json",
+          "original_sha256": "e3bc1eb9a9117ed9bbd712f18b314c86f5ea7b93145dbe9b7067741d08109702",
+          "rebound_sha256": "034939fb9fac15c6632dfa05012a3487433d47f8d3536efe6f7306ffc7eed6be"
+        }
+      ],
+      "original_edited_inputs_unchanged": true
+    },
+    {
+      "package": "actions-http-helper",
+      "source": "/workspace/engineering/pr299/actions-http-helper/.venv",
+      "own_destination": "/workspace/engineering/pr300/actions-http-helper/.venv",
+      "copy": "cp -a --reflink=auto; independent clone when filesystem lacks reflink",
+      "path_only_rebindings": [
+        {
+          "relative": "pyvenv.cfg",
+          "original_sha256": "daac9c82fd28a7d9cd9387b137acf6f9d8521ef7e2c525a411a1ba83f52218c9",
+          "rebound_sha256": "843e647ee0cf667b15fa610b6c9af13786b3066dee1812709bb07b2719394b94"
+        },
+        {
+          "relative": "bin/pylint-config",
+          "original_sha256": "47da9bf7afe63d12b721bfc3c6c7680d6289469200a4f396f953a44e3879411a",
+          "rebound_sha256": "41a2981463e8b088d8d64fce615b00075b284298f76eace62c403d6a40af29f9"
+        },
+        {
+          "relative": "bin/pip3",
+          "original_sha256": "afcd3b0f2e8434bb53f3cd39c5406898405db810fbd3aea0ce9baea5bf117451",
+          "rebound_sha256": "f77aa51ca8ab2201b71edbdbc28955303ca7bcae81cd169a2b9aecc0dd5609c1"
+        },
+        {
+          "relative": "bin/get_objgraph",
+          "original_sha256": "e112415cecc5ecc35414dc20b1644a554ed8060fa8133ea324a1ec32defcec3f",
+          "rebound_sha256": "607ff8443823370a9aad9c53c6dd3e2f6e609b91be92cea8647520b6e4c28335"
+        },
+        {
+          "relative": "bin/mdformat",
+          "original_sha256": "0dfee7deb5ae95dcf9787e89bbcb60651085f0bbf034d9dd6a287ee91de68662",
+          "rebound_sha256": "c3203a29dc96310fc909e16bed99c7460f14e54f78be25b7df2f48d151579715"
+        },
+        {
+          "relative": "bin/isort-identify-imports",
+          "original_sha256": "7f380ebcdd76af63a2eb0f71f70611f161a2e1a141e4dd8fc8cafe372a43765d",
+          "rebound_sha256": "d6ad32481519a779a13d7253fe01a9b1fefa641e747ef32ee662dbf2faa22282"
+        },
+        {
+          "relative": "bin/pyreverse",
+          "original_sha256": "6bafa6b4534d541c6e08b1f48b96cf759150ee4e117b91acedbd1a28bfc54663",
+          "rebound_sha256": "f0811872f0713ffff4e6206f7338b0b4066a806bfdac3a5cd34053b0f4c2610f"
+        },
+        {
+          "relative": "bin/pytest",
+          "original_sha256": "289191809eff84373f9606d6e6a4df0264d869fcbbbcb5384491ba21be132230",
+          "rebound_sha256": "fccb262abe559448eaacd99c5e2d6183fd2092190907e1e8cf544ed7c64a1424"
+        },
+        {
+          "relative": "bin/undill",
+          "original_sha256": "83c2f8e6e19115f5ebcc19d03069ad1ccb69c7ffac85c259443407c53fa16bf6",
+          "rebound_sha256": "d7de14f446cf3aae0e9992e4b991fdd187392dc6734557f401136cf376c11aab"
+        },
+        {
+          "relative": "bin/py.test",
+          "original_sha256": "289191809eff84373f9606d6e6a4df0264d869fcbbbcb5384491ba21be132230",
+          "rebound_sha256": "fccb262abe559448eaacd99c5e2d6183fd2092190907e1e8cf544ed7c64a1424"
+        },
+        {
+          "relative": "bin/pip-3.12",
+          "original_sha256": "afcd3b0f2e8434bb53f3cd39c5406898405db810fbd3aea0ce9baea5bf117451",
+          "rebound_sha256": "f77aa51ca8ab2201b71edbdbc28955303ca7bcae81cd169a2b9aecc0dd5609c1"
+        },
+        {
+          "relative": "bin/lazydocs",
+          "original_sha256": "0329052f0b637eb490c0918d4512a913cab9cd4f0fd5d359083426b21ab94e49",
+          "rebound_sha256": "fb666984d2b836ff9707f0ed0a20bc7a883adb481e2d4a905240e50e4d5f240b"
+        },
+        {
+          "relative": "bin/isort",
+          "original_sha256": "5be6f7813a984c058a8fa227351f753f7229cbaae1761642dd6d668a4c1512fb",
+          "rebound_sha256": "cc2d4184df2680b2684a187dad7aaec1fd7d7dd34cf3a1658d2d256f48889f54"
+        },
+        {
+          "relative": "bin/pylint",
+          "original_sha256": "974946a6834225dba61f0772401b328d2616138b62840a305b4f1213c58c27a3",
+          "rebound_sha256": "4e5ae533842ed4772d6fb9d9bbe53814bd74a315b19d1eb8e99c097b91d0e132"
+        },
+        {
+          "relative": "bin/activate",
+          "original_sha256": "3ee4ebccc051b8d5162a36cb295a2bd1af5c54eaf1f3404fee0309e53fe9c565",
+          "rebound_sha256": "30acfd2e2105ce8d2ab90c601595c2055c5cba6f4393cca30d1db9bcfe7a4dc0"
+        },
+        {
+          "relative": "bin/pygmentize",
+          "original_sha256": "bbee46c45378f682ef1857cf8421a46dc7eceda66e6fab278951dc481575eef1",
+          "rebound_sha256": "1edbf56284dfa3690976a563b0a585fb3b77d3a0cca9f7a391a56e53ef21b262"
+        },
+        {
+          "relative": "bin/coverage3",
+          "original_sha256": "399bda3ff3bce348c7fc607998e49e814447b97869bce0f41ce63df326027066",
+          "rebound_sha256": "11b459332d06ef59c4e11bbbe2cb7700a2092ab0ac117cfe1ee9939142aeae2e"
+        },
+        {
+          "relative": "bin/symilar",
+          "original_sha256": "83e1f2adc73095f76677e9993471b696f92f72f7d836a2a29cf7c9239f7dc930",
+          "rebound_sha256": "d7f861a01ca37fdbd961d145140c2d52bea983118b63f60683cc34bed7516b17"
+        },
+        {
+          "relative": "bin/stubtest",
+          "original_sha256": "5a65f075524ab8f509d4dafc33f8c1aafb71738c6c2a52410cc083a77ed55796",
+          "rebound_sha256": "45f66dbb04716442bad7fec954060ee690917b0c5b013fc5308dd50aeb55b7cb"
+        },
+        {
+          "relative": "bin/activate.nu",
+          "original_sha256": "b6f8ac0e8fc29b1a962c7268c62720a32e48f36c103c30005858522e4f3395e4",
+          "rebound_sha256": "ec06e0cd08b9861c0718597acd624250e1e8f40ca6c383e421864152af75d6f6"
+        },
+        {
+          "relative": "bin/mypy",
+          "original_sha256": "537bd75c7d9082f6747a79c99aee9291e2af5d4af40df5cfb61b4b51ebaacb95",
+          "rebound_sha256": "441fe2d6f80ee510ef7ab6e8e5e8ffc8a72facd34c53aa45293f14cc3d4ab3f1"
+        },
+        {
+          "relative": "bin/coverage-3.12",
+          "original_sha256": "399bda3ff3bce348c7fc607998e49e814447b97869bce0f41ce63df326027066",
+          "rebound_sha256": "11b459332d06ef59c4e11bbbe2cb7700a2092ab0ac117cfe1ee9939142aeae2e"
+        },
+        {
+          "relative": "bin/stubgen",
+          "original_sha256": "02de4f5c8c5924e1dbfe3158894ddd96ea45648420c5224f3233e79814deddb2",
+          "rebound_sha256": "b2fc776c005aede3d90e5753ff629fe70e71d06a387a4736ae36041401b40a36"
+        },
+        {
+          "relative": "bin/inv",
+          "original_sha256": "59797344290850f4c20428b79c613eeb666d1af402a8e160d5f85af66f4aa0aa",
+          "rebound_sha256": "bd2c14c2ef97b50d18ecf64b237b4f3ae19e72bb3466d72f46882cb9231a073e"
+        },
+        {
+          "relative": "bin/dmypy",
+          "original_sha256": "eb78e6b26d61677830b6b784918c6a93c628274b47d02e22b9f42677be0d1e5b",
+          "rebound_sha256": "58445a518611f2b2aaf9c86ec8eeea9e5b2a9dbd18a08a62231bf7c5ca94ba72"
+        },
+        {
+          "relative": "bin/pydocstyle",
+          "original_sha256": "34643fc30c824f795aef81580d750a9c43fb43bd759636c1ff3386d43c0a1627",
+          "rebound_sha256": "0bbc77e932e3677b1e5815a95e3dbde3b7e33b82c57d9ed09e239929b4d90744"
+        },
+        {
+          "relative": "bin/invoke",
+          "original_sha256": "59797344290850f4c20428b79c613eeb666d1af402a8e160d5f85af66f4aa0aa",
+          "rebound_sha256": "bd2c14c2ef97b50d18ecf64b237b4f3ae19e72bb3466d72f46882cb9231a073e"
+        },
+        {
+          "relative": "bin/pip3.12",
+          "original_sha256": "afcd3b0f2e8434bb53f3cd39c5406898405db810fbd3aea0ce9baea5bf117451",
+          "rebound_sha256": "f77aa51ca8ab2201b71edbdbc28955303ca7bcae81cd169a2b9aecc0dd5609c1"
+        },
+        {
+          "relative": "bin/coverage",
+          "original_sha256": "6e8454e948203dbe21b1be889bf350863973c7d9c9beaabd0cd9752f0c803d20",
+          "rebound_sha256": "0c7606ddf9acae797f23bc0749762e3305b9d25a7a6dbd0e5bdc8785e8fb4990"
+        },
+        {
+          "relative": "bin/activate.csh",
+          "original_sha256": "93348ec625dc2bb3306260f5a1d06a210d84db7c102d375f955a1642f9a8f51d",
+          "rebound_sha256": "66bb0ecfe06055f5d538cd361e802162391697c7a6888db8c093ef10866ecc78"
+        },
+        {
+          "relative": "bin/pysemver",
+          "original_sha256": "864f85418c8bc112582dfc019658e9119b4b11f93d1889cd7c0050230098a148",
+          "rebound_sha256": "5cc54d9c3e8784ef2732f2460b6dbcc0c33e74717c7a1bcddcdff2f2aa3bf109"
+        },
+        {
+          "relative": "bin/mypyc",
+          "original_sha256": "1b7abf816d6481733855d8ed2463886d36b17bc36c340c624df1d9e7fb364525",
+          "rebound_sha256": "28774524e02495bcaf50385b6ab19bb1d39df5ff0ff890075cfd106daa699bc8"
+        },
+        {
+          "relative": "bin/typer",
+          "original_sha256": "5169aa4a5f722b89b32ac633ec91b04eb874c600d34c88a531eec1272dd5e0a7",
+          "rebound_sha256": "4a49ec4bbb4ec6b89f073eed5f937e8a3d71797b8afdc50cfcdb7af9ef16a60a"
+        },
+        {
+          "relative": "bin/activate.fish",
+          "original_sha256": "e598889097a13f0872041fb86b2e35a003392e114f0cedbe5d4d4c276c2f6e6d",
+          "rebound_sha256": "810270b927b46b1cc6fa011af0471413f0e1d6280b5572262330207ce2e5d1cc"
+        },
+        {
+          "relative": "bin/get_gprof",
+          "original_sha256": "b018111eb1b6ea79f6355b7bfc839762d528abca84c00e3a8c1ec68992094abd",
+          "rebound_sha256": "61a0392990c540ec9c84bb3afde5900223747dd59b857a3a361cd7c5f6a9942d"
+        },
+        {
+          "relative": "bin/pip",
+          "original_sha256": "afcd3b0f2e8434bb53f3cd39c5406898405db810fbd3aea0ce9baea5bf117451",
+          "rebound_sha256": "f77aa51ca8ab2201b71edbdbc28955303ca7bcae81cd169a2b9aecc0dd5609c1"
+        },
+        {
+          "relative": "bin/markdown-it",
+          "original_sha256": "08c2617d38018ac9fd202febefe6456b72ece03bb5b31d50f8e6a7b5390df0b3",
+          "rebound_sha256": "790a8e1dd2a2e0de5d0dd2ad2494f1ad7d6d06b3c7429a513329d7c0a7ac2dc0"
+        },
+        {
+          "relative": "bin/epylint",
+          "original_sha256": "acfaa4feb5fda6ad96680096530c4fa1e637ce1f791abfdc08ff4c94a1079b58",
+          "rebound_sha256": "83ff862b06655be9f4845f8c9a71bab5d27a3dae6d5d649806353336b4f54cdc"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_local_devutils.pth",
+          "original_sha256": "c1e91e0384555a04b3db7623ad0763e6c71a2d906ad2cc98df2cd1e006cc225e",
+          "rebound_sha256": "783b155f31c86c22304d8868b6bc12b38ecd8af53da3a058b0c0dd10674070d3"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_http_helper.pth",
+          "original_sha256": "2592ecf68893c6f64be325d75117f8e837dc86d04756ecb178b45ef6aa741ab4",
+          "rebound_sha256": "0b8540cb89eb82ea8997dc32a3e10f40d5cdf9c9e19e219cb74c962fdbddf5a3"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_http_helper-1.0.3.dist-info/direct_url.json",
+          "original_sha256": "7de29e245472628e27b3a2d82bec6f2a60498c0de4674dcc4e0964f0ff8f469f",
+          "rebound_sha256": "74d34d31a3f0d38ec7e9e27d78b557e43b6b84c7a7a1e947096f6f1089bb87f2"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_local_devutils-0.0.1.dist-info/direct_url.json",
+          "original_sha256": "2af39f1ea99061f0f14d025541c165b4469d39f5bbc6e25624987c4cc22fe295",
+          "rebound_sha256": "941d5b7457c2288edd5f658d9171eac5863fe9c7ba74157e0c784b028b063122"
+        }
+      ],
+      "original_edited_inputs_unchanged": true
+    },
+    {
+      "package": "devutils",
+      "source": "/workspace/engineering/pr299/devutils/.venv",
+      "own_destination": "/workspace/engineering/pr300/devutils/.venv",
+      "copy": "cp -a --reflink=auto; independent clone when filesystem lacks reflink",
+      "path_only_rebindings": [
+        {
+          "relative": "pyvenv.cfg",
+          "original_sha256": "82f0c7518781d4fbcdcc24b3477b25c554e718c43b5e73062a8ab06f13256ccf",
+          "rebound_sha256": "71baf45ec6c2b18e6715a97048c42a08217c2e0f3b6a7202967de42bf33f1771"
+        },
+        {
+          "relative": "bin/pylint-config",
+          "original_sha256": "4bab279816b8638e28888e333f3513df5787b28441c23e8485b726c4d1bbf041",
+          "rebound_sha256": "998fb087703bb011643569e3740b0fc0227ecf884f1a2a43c089b781b407cee8"
+        },
+        {
+          "relative": "bin/pip3",
+          "original_sha256": "a4dc0787ee49776b5aab419fd9486b3a8b8d68abb7ba280f5cf59f4b3c3be526",
+          "rebound_sha256": "015c34e36ecc59f910294712a64bc471fc573f02839285fdb6677ae9c3942d06"
+        },
+        {
+          "relative": "bin/get_objgraph",
+          "original_sha256": "99fe5a4dc03c66a5b459b170c89c61a92af96a0943098843d8fd67fa278b4828",
+          "rebound_sha256": "0aaaa1ef442d04343b3f883b5a64e52ef24f6337f5bca295d1f4d8c63a1d3006"
+        },
+        {
+          "relative": "bin/mdformat",
+          "original_sha256": "74df0c8f88a2adaa80deb529bb36ee0e2611cb8bd68044c7310a292076cbd63b",
+          "rebound_sha256": "3857ad67585404f8a00fb493406debdeeb401075b8e9ffa3bc8ca678eaabf783"
+        },
+        {
+          "relative": "bin/isort-identify-imports",
+          "original_sha256": "9f70765bbbd365074430b66658f62f79e3eda1880e77fd6f3f3bd6d35fb779d7",
+          "rebound_sha256": "b260e60e9fe5e727f1ec0be3adac61988f9cecb836cc4e604c43731ef5cf118c"
+        },
+        {
+          "relative": "bin/pyreverse",
+          "original_sha256": "867d2a92fda545e76e93a976b51c2f80cd85e6bf616bd1916dd812737b46ae62",
+          "rebound_sha256": "71e71e3103f3f275a321d1acf2c5d87276922b5b8bea1c99f4a7645c00853a5d"
+        },
+        {
+          "relative": "bin/pytest",
+          "original_sha256": "f73988c093a42a7cac913bad191efcdd83120c5d9830ae9b6e8c99bd3a476205",
+          "rebound_sha256": "7f32d58e907dc0ebdad2175d96b03001ed8a7d76207728f450b8f58861c50b1a"
+        },
+        {
+          "relative": "bin/undill",
+          "original_sha256": "fc35d1adddb71504cd9333e7b70fae0281f855d47d64ae41ab3400031cdf2f90",
+          "rebound_sha256": "c73706ad49474c60e726a8a746f2c00d21704df60f97c52df4b92d82004d0aa4"
+        },
+        {
+          "relative": "bin/py.test",
+          "original_sha256": "f73988c093a42a7cac913bad191efcdd83120c5d9830ae9b6e8c99bd3a476205",
+          "rebound_sha256": "7f32d58e907dc0ebdad2175d96b03001ed8a7d76207728f450b8f58861c50b1a"
+        },
+        {
+          "relative": "bin/pip-3.12",
+          "original_sha256": "a4dc0787ee49776b5aab419fd9486b3a8b8d68abb7ba280f5cf59f4b3c3be526",
+          "rebound_sha256": "015c34e36ecc59f910294712a64bc471fc573f02839285fdb6677ae9c3942d06"
+        },
+        {
+          "relative": "bin/lazydocs",
+          "original_sha256": "652bd31907ae7ed4aae0e8a64f0de3366a38d3f5fd5ba26d752d78b36ba07347",
+          "rebound_sha256": "be4d6a95b743fd0aa293d0e821e80bf863913f5c82244c18037fac90b2231e56"
+        },
+        {
+          "relative": "bin/isort",
+          "original_sha256": "ed736bd158738d7861ebdab9eb3afbfdfb670dc5e96ad8a59dfceb24bcea1722",
+          "rebound_sha256": "80f126cffe607036f5816b1ece7b5f17701eea3ced1db02e96780fde96eb3b65"
+        },
+        {
+          "relative": "bin/pylint",
+          "original_sha256": "fed26fd620e11b61f8cd91d03fab6ec16e637329d6f8a7d3815b0e32b66eacbf",
+          "rebound_sha256": "3c9e41e2cc9a2520935f0e764eb9697a09391635cf9c2381d16446ed321e4837"
+        },
+        {
+          "relative": "bin/activate",
+          "original_sha256": "565c8f0a4f7d6b2eeed0c86380e84ca8f0aa10710e812c1fed7679386b975a4c",
+          "rebound_sha256": "cdbf1241ff72bf0a628b3d0705965b88c5ba3daa237e31875f65dce355abf0c9"
+        },
+        {
+          "relative": "bin/pygmentize",
+          "original_sha256": "ef2d1f38fa99abd44fd18db5019491157df327d44e1ae732abd8b951383f03d4",
+          "rebound_sha256": "b2ef947d839ca9a357d95cfb5e293eb2eab372891f9a3f771e80e136d6d76178"
+        },
+        {
+          "relative": "bin/coverage3",
+          "original_sha256": "0381783035bf24311e4959dc136f1d667aa7c18f0a6373dcbca124413d17881e",
+          "rebound_sha256": "6e516da458226940805f88353647fd37597b6fe37edbebc610be41f517a6949d"
+        },
+        {
+          "relative": "bin/symilar",
+          "original_sha256": "a6d94717a5bbbc7978f01c7cea48bc718d857553eb944549339fc8b2078bc6a1",
+          "rebound_sha256": "f94e1af76560cab019334f998bd803011b754c44d7dc392eb584156e76517bb3"
+        },
+        {
+          "relative": "bin/stubtest",
+          "original_sha256": "659bb2253dcd388c7c958da71b553c7bb2056541f5bbe16ef24726306384a2fb",
+          "rebound_sha256": "1b3024228ccd2d6cc520b51c5e4381ac41a0dbdf4719d5ce88929f30031e9a53"
+        },
+        {
+          "relative": "bin/activate.nu",
+          "original_sha256": "2a94d4ae78ceac54585cb5aa0bf7550861f8e3b908e8e8e6bd3daa276ac5f202",
+          "rebound_sha256": "9b8f0d1f314f4ee6d9a74f4186436f2b1724116eedec2a16c4892d8c0a034ccc"
+        },
+        {
+          "relative": "bin/mypy",
+          "original_sha256": "539df8757afb4cd206ab137aa16b998aa5f392f2a71cb308e83f0ce0baa4b294",
+          "rebound_sha256": "118a6f06126cb6145cba68b15eb4869561b9b25ab130787fa19105f415d9fc10"
+        },
+        {
+          "relative": "bin/coverage-3.12",
+          "original_sha256": "0381783035bf24311e4959dc136f1d667aa7c18f0a6373dcbca124413d17881e",
+          "rebound_sha256": "6e516da458226940805f88353647fd37597b6fe37edbebc610be41f517a6949d"
+        },
+        {
+          "relative": "bin/stubgen",
+          "original_sha256": "6c285eaa6acb091e4ad02f0cf08c42ec41d12887ac190e8f2eeb3ad7d37573fa",
+          "rebound_sha256": "00b20657164385a3832e4f339dd317f4caddfc4e750eb50139cbbd5aeebf24a3"
+        },
+        {
+          "relative": "bin/inv",
+          "original_sha256": "70df5331517aad44a5afe448430fc622a70ececf3836ed8bc90d513119fb8c65",
+          "rebound_sha256": "bf61938776d6877c86cf379ca65b1ca31c83943ef437e1a9f11d25d81b4f349b"
+        },
+        {
+          "relative": "bin/dmypy",
+          "original_sha256": "a9e29b43953fd191e2c0c0692832094edb17ff055fc68c0a4a38ad68168eff70",
+          "rebound_sha256": "55316e52bc844f8134cfbeb175e2545e7d5008f49cb75139924f9be28cb19f88"
+        },
+        {
+          "relative": "bin/pydocstyle",
+          "original_sha256": "3c3e0e4a5fbb6e7458b6d8a7c927a6d349d9a50b1056813703d1fa48429ce7f2",
+          "rebound_sha256": "b2c2693025604946d51bdca08a0e8f437969b239975e196962f019095a9528a2"
+        },
+        {
+          "relative": "bin/invoke",
+          "original_sha256": "70df5331517aad44a5afe448430fc622a70ececf3836ed8bc90d513119fb8c65",
+          "rebound_sha256": "bf61938776d6877c86cf379ca65b1ca31c83943ef437e1a9f11d25d81b4f349b"
+        },
+        {
+          "relative": "bin/pip3.12",
+          "original_sha256": "a4dc0787ee49776b5aab419fd9486b3a8b8d68abb7ba280f5cf59f4b3c3be526",
+          "rebound_sha256": "015c34e36ecc59f910294712a64bc471fc573f02839285fdb6677ae9c3942d06"
+        },
+        {
+          "relative": "bin/coverage",
+          "original_sha256": "47beddfeeec11aedf287e4373bea58196133b35538b6b7641791adf56dc468d1",
+          "rebound_sha256": "c494a9b3e5f4866e980ac2c23a9068682e677fc8e09a42ec35f12236a3927145"
+        },
+        {
+          "relative": "bin/activate.csh",
+          "original_sha256": "edd4c23ed5072e27764c413bab974901df89b2e1945e2123579c7806884d4468",
+          "rebound_sha256": "08a52850f47594a00b7d97ff3f4196dff81ccfb5cb839253cbe4bcd896db676d"
+        },
+        {
+          "relative": "bin/pysemver",
+          "original_sha256": "0563971dde68ccf25d25fc32b6a3b295b85cf539f65e06a74586504ff846a40a",
+          "rebound_sha256": "084e12ac98af464bb3c2ae560031d6eb8618adba87ba6d9cbae92fa64d4f5530"
+        },
+        {
+          "relative": "bin/mypyc",
+          "original_sha256": "8e492e08271cfc9f8da67c95b1c55b6b8cf153c104e1221531c6d125593ed1be",
+          "rebound_sha256": "2074dd6c7be850acf4828af356cadcc76cb402bbc27ef3c410529d32f4078282"
+        },
+        {
+          "relative": "bin/typer",
+          "original_sha256": "42c6d25d64f050bceac9b1830a58d799a37793fcc576c0fe79d899bd4d6e584d",
+          "rebound_sha256": "e89af0fbc6a51076d5bf6fc8dd853b5bc5ebc0579333d18ef9a6385cf6cea2cc"
+        },
+        {
+          "relative": "bin/activate.fish",
+          "original_sha256": "2ec60c67c862e62e444fa764ae33c7c5479af2d4ff34344db699084e4a53f5ae",
+          "rebound_sha256": "7a85f87fd585fc411a27f967d1205cb247fdf4b3f199243953f8153130e7e65b"
+        },
+        {
+          "relative": "bin/get_gprof",
+          "original_sha256": "d47a39b8e30c96cdde67c4f2209ce8dfb34c63e0f8c708a7ccb0e5d9bbcbe525",
+          "rebound_sha256": "8c9cc2e6e7d27f940374275501d6ff0040d09991f9066605fbc80c36115d9f76"
+        },
+        {
+          "relative": "bin/pip",
+          "original_sha256": "a4dc0787ee49776b5aab419fd9486b3a8b8d68abb7ba280f5cf59f4b3c3be526",
+          "rebound_sha256": "015c34e36ecc59f910294712a64bc471fc573f02839285fdb6677ae9c3942d06"
+        },
+        {
+          "relative": "bin/markdown-it",
+          "original_sha256": "68cea7fcf86000180539534d135e50c4ec3c8855a85202e48fd67e6dd9e973ae",
+          "rebound_sha256": "579e15472b73a88da62cf1d3439c2ea2795aeac10d9ebd31b91fe5b1f5ae0895"
+        },
+        {
+          "relative": "bin/epylint",
+          "original_sha256": "29c0fc607f2a11a9eab33542009861ed55fb1dd02c3f933182b8e27a1f968d09",
+          "rebound_sha256": "21f9a9cab9bf767027f0829e49aa3277868235587b95790cf8a874d7a0873ff9"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_local_devutils.pth",
+          "original_sha256": "c1e91e0384555a04b3db7623ad0763e6c71a2d906ad2cc98df2cd1e006cc225e",
+          "rebound_sha256": "783b155f31c86c22304d8868b6bc12b38ecd8af53da3a058b0c0dd10674070d3"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_local_devutils-0.0.1.dist-info/direct_url.json",
+          "original_sha256": "eac9a8195a43746a5de34a30403d9acff74bb166513e189f877d0c275b0f4810",
+          "rebound_sha256": "d9bbfc2c7efc3e9f5955dd8e3577683539ecaf2371a9b8de459e7fa21b44ca51"
+        }
+      ],
+      "original_edited_inputs_unchanged": true
+    },
+    {
+      "package": "work-items",
+      "source": "/workspace/engineering/pr299/work-items/.venv",
+      "own_destination": "/workspace/engineering/pr300/work-items/.venv",
+      "copy": "cp -a --reflink=auto; independent clone when filesystem lacks reflink",
+      "path_only_rebindings": [
+        {
+          "relative": "pyvenv.cfg",
+          "original_sha256": "89bbaaaa8996832c65e362b24c15cf590099780b47ad5e3f5ea713a853007528",
+          "rebound_sha256": "5ce10bb0c72ce919f64d9ae8e685316faccd0270337bb8c95d664951535518ed"
+        },
+        {
+          "relative": "bin/rst2html4",
+          "original_sha256": "e96eae9d325497207f054ac75cc0dec88327ad671856cf70e01d6c21c1145509",
+          "rebound_sha256": "dd7998d4c7f532043a176d54dca1e91de49f4387986ac29669de2a6e1485d55f"
+        },
+        {
+          "relative": "bin/pip3",
+          "original_sha256": "639afa16987a143d50aa49ff3047568da4024d37eb8e2187838e8ba6d0d7260c",
+          "rebound_sha256": "34f7d31db123c308e4119fb20032c306804902a529dd7500d59a8fb90313e42f"
+        },
+        {
+          "relative": "bin/twine",
+          "original_sha256": "4423aa4bd332114f80896da096a2beee1382e268b61b25296991174ceb731dac",
+          "rebound_sha256": "51aa8757c42bd3e606eace0c7169ab0ba3af372a48ba663167ffecddf651937a"
+        },
+        {
+          "relative": "bin/rst2man",
+          "original_sha256": "6e2c41e7ac6e7e7f5b279a0226951ddb5e5066501c606026f3401a1eba6db07c",
+          "rebound_sha256": "40af1e451a861728e64a687c95c4663b10e6cbfd85705cd8869545b76f54d75e"
+        },
+        {
+          "relative": "bin/rst2xetex",
+          "original_sha256": "3274be6fc725429dfd0357fcb7ca8502eaa6851b5c82e4eaa1ac0696525b8058",
+          "rebound_sha256": "9d3fa208461e06fd38238200754276009415ec6728ca1b3af91634b74e1a1ba6"
+        },
+        {
+          "relative": "bin/keyring",
+          "original_sha256": "544d0351ba4b664d81356fabc1b111d73e0195b31647c82b09fbea5908e57241",
+          "rebound_sha256": "5402949876bd845d001d56165f713de9de4cf5f4e0a02b101a937ea5e20e9680"
+        },
+        {
+          "relative": "bin/rst2odt",
+          "original_sha256": "f890cb8caeb31b1e1a101929a08d51688d29fa6397089d9ae071afc37a674bca",
+          "rebound_sha256": "f386ad465e42acb734cfe22ad819088e599e9485ae829be58768d5be8fb50984"
+        },
+        {
+          "relative": "bin/pytest",
+          "original_sha256": "9b64f5f4d3a35f803ab5bbba34dd4872069511a72c1d7cc33cb26a33179c6186",
+          "rebound_sha256": "74da597184439d686efb78b8db9342aab52eabf311f95b5437e50ddb964f80da"
+        },
+        {
+          "relative": "bin/rst2latex",
+          "original_sha256": "098e5e0e5af476bd100be4089e2811094875b9f81a6922e4cef08b2d14ec60cd",
+          "rebound_sha256": "987472cb92bbeee5259abb568f53de3f99b50a8fc15eb98d1b95399bf26ba296"
+        },
+        {
+          "relative": "bin/py.test",
+          "original_sha256": "9b64f5f4d3a35f803ab5bbba34dd4872069511a72c1d7cc33cb26a33179c6186",
+          "rebound_sha256": "74da597184439d686efb78b8db9342aab52eabf311f95b5437e50ddb964f80da"
+        },
+        {
+          "relative": "bin/rst2pseudoxml",
+          "original_sha256": "525c771dd7fe33548adcd60301601e1182b126ae8e5fddc420d435efd4246344",
+          "rebound_sha256": "561077bd34b8e9ccb30f6eccd0e1a92b399a5320a11492b9f3b3b7cd3a9dff6e"
+        },
+        {
+          "relative": "bin/pip-3.12",
+          "original_sha256": "639afa16987a143d50aa49ff3047568da4024d37eb8e2187838e8ba6d0d7260c",
+          "rebound_sha256": "34f7d31db123c308e4119fb20032c306804902a529dd7500d59a8fb90313e42f"
+        },
+        {
+          "relative": "bin/rst2s5",
+          "original_sha256": "c3f55b2c95e4e9ebd1489fd1a730cb1fa5414b86738eba3b3e681371fca18d34",
+          "rebound_sha256": "4a48c4f2cf1823d799e8aa0287a04f6a69d45e8b8d75ff88ad47d625f1ae3283"
+        },
+        {
+          "relative": "bin/activate",
+          "original_sha256": "c7934c8a1fac9863f8739b09f864517f8e51732642921957cb1399c1ac031099",
+          "rebound_sha256": "6d9e28eb938752e2218a0853dd8a6dc0a4766d2e84f2876c4d7f0757493deb02"
+        },
+        {
+          "relative": "bin/pygmentize",
+          "original_sha256": "b9e23783338689dbf47e0ae974cb1b2477ab2141bfe547db9aa7206cb8fca959",
+          "rebound_sha256": "50accc897dabc8fe1bfca6c93f27df34d2bf3d1be7fb6d595e420ae92830e668"
+        },
+        {
+          "relative": "bin/coverage3",
+          "original_sha256": "f85625fb8832f9179d0054166a404b9952b567d2118d20ef1be2d333da1e2d96",
+          "rebound_sha256": "1591bdb65872e4d22f77d2a78fa2d747c7414ee7f8753602c7ad06430a33e046"
+        },
+        {
+          "relative": "bin/stubtest",
+          "original_sha256": "187ff17d5aba593216beac73d6633cf91ee584e27751dbcb0a27bb1d9cff7720",
+          "rebound_sha256": "8f7b1a7833f496da249e2865a4a9952bfb6f7f68f81c103e4cdab8bce2c88b1b"
+        },
+        {
+          "relative": "bin/activate.nu",
+          "original_sha256": "e63d4fdc52dbe2b1c72c7c44b9b5a84e735164deb18c2f0746f0bcf28133bac0",
+          "rebound_sha256": "cd92199b47e6a1f85d6ea4ce31a7d3b4c53e359f3e1cbc4fb95d09541bfece23"
+        },
+        {
+          "relative": "bin/mypy",
+          "original_sha256": "d5883dd122f9b913eb31a529a9ec823d2b883c8bb1bc9a57174ca02673147c09",
+          "rebound_sha256": "83883d7d816969d735cc9bf4f29b02a0010849c45a534212fec75f0e9edc0f47"
+        },
+        {
+          "relative": "bin/rst2html",
+          "original_sha256": "b8e22315f712a3631659897078a831f08e39f864f40e7734a2af51cf15cfcabc",
+          "rebound_sha256": "38163c2073c4c63f51d3ca02b87a9917cd7cf08ec282ce4cfc52da55a21ed02c"
+        },
+        {
+          "relative": "bin/coverage-3.12",
+          "original_sha256": "f85625fb8832f9179d0054166a404b9952b567d2118d20ef1be2d333da1e2d96",
+          "rebound_sha256": "1591bdb65872e4d22f77d2a78fa2d747c7414ee7f8753602c7ad06430a33e046"
+        },
+        {
+          "relative": "bin/stubgen",
+          "original_sha256": "7597938bfe179c4295dd944ac7e9ee147e27eacd3772896d7d6b6273a3954c67",
+          "rebound_sha256": "539536739090ca795637aa414b91f9b0a993d884e0563ef706ee23115eee298c"
+        },
+        {
+          "relative": "bin/cffi-gen-src",
+          "original_sha256": "56c0e0002779ee45181ca2e486c5f2687f6ff96485fffe7935fa14d383bedb2b",
+          "rebound_sha256": "13a52bfa92cd22ed6c6441a317772b88be123e23cc722fd3ae57ecff75fca645"
+        },
+        {
+          "relative": "bin/dmypy",
+          "original_sha256": "9c7bb6a7c397075055dd7970de23633790b113bd5c4651ec500fb9aa7d4e6bf5",
+          "rebound_sha256": "31097aeaa4603039ff75d8b59531078415aa08c4dddd434f86a8161cf74751a2"
+        },
+        {
+          "relative": "bin/pip3.12",
+          "original_sha256": "639afa16987a143d50aa49ff3047568da4024d37eb8e2187838e8ba6d0d7260c",
+          "rebound_sha256": "34f7d31db123c308e4119fb20032c306804902a529dd7500d59a8fb90313e42f"
+        },
+        {
+          "relative": "bin/rst2html5",
+          "original_sha256": "73314eda246207c2ba9023fb1f048a1cfaeba6b5c750e73d9113852260c4082c",
+          "rebound_sha256": "045add1223b1246a2178b3cb9ba18ee59ce3417482b56c75b49284e95a06464e"
+        },
+        {
+          "relative": "bin/idna",
+          "original_sha256": "9d7311b7c83590a9c73bf628d6674632d8ad477ae1b7d0527cfcab83ef20fbb2",
+          "rebound_sha256": "faa99c70c1ddd993a43403b002a4b65c3dd840c377b967efb05ef4ea3aa847ec"
+        },
+        {
+          "relative": "bin/coverage",
+          "original_sha256": "fc7407cf1a106d61d9148a002d5e83d27df6bbf9b58b6066ba9f3ffbf0abc832",
+          "rebound_sha256": "b7c90708b950173d631bb29b72b37bf05095eb9788e1ddef05d18bd28fe0a10e"
+        },
+        {
+          "relative": "bin/activate.csh",
+          "original_sha256": "23e66322eb00b8fa64fbc656837df3280c3ed8f89ebfb1d6b19bae7875a0a5e8",
+          "rebound_sha256": "8797b9a1214038a61e773baf12cdbd668e35056eeb48cc637fd5b95abf13f715"
+        },
+        {
+          "relative": "bin/docutils",
+          "original_sha256": "8020130535c4a1139a8150fa8bc006fbb6ff1147a4bf337927bce61a66ce51bf",
+          "rebound_sha256": "3d79cf0c6da112a7ef0601c2a0db89feb369acaf933bf6de196a858e5150ffd5"
+        },
+        {
+          "relative": "bin/rst2xml",
+          "original_sha256": "48a095416ed6ffec3bdaee43be2e3f636b11fa741602591fdbc046cf889f1ffd",
+          "rebound_sha256": "332e144d2c10a00e8d9b28cb79cf6fb9d893d18fe2891f389ed90b36183e9df5"
+        },
+        {
+          "relative": "bin/mypyc",
+          "original_sha256": "78338f0a8c043dabbb2eaab6e7b974692a41bb267bd09749e4c1168a1bdffcba",
+          "rebound_sha256": "113ac12b0dd889c2f06c5accaddfd5926dd209aed924ba74592580f27dd2b189"
+        },
+        {
+          "relative": "bin/normalizer",
+          "original_sha256": "2223af91ec4b6470da24713906c9f7c2a4e584f399d4763b2e842f5fed98cee8",
+          "rebound_sha256": "61bac5caf4a297359715a9b538718cbfc9ac690fc54b3451147e3cc83ae77685"
+        },
+        {
+          "relative": "bin/activate.fish",
+          "original_sha256": "6178f853ff3a27d873ca51902a6e893dc02bee4b874c53b20408d78b7cddb4ea",
+          "rebound_sha256": "7cda46b929078fe413aa3b1099587265140caba884f59e27c3dde40b0112cf6a"
+        },
+        {
+          "relative": "bin/pip",
+          "original_sha256": "639afa16987a143d50aa49ff3047568da4024d37eb8e2187838e8ba6d0d7260c",
+          "rebound_sha256": "34f7d31db123c308e4119fb20032c306804902a529dd7500d59a8fb90313e42f"
+        },
+        {
+          "relative": "bin/markdown-it",
+          "original_sha256": "fbda7f3869d3394759446c825ca393c85737262cc5c6bc33577f66c6eef38d3d",
+          "rebound_sha256": "3b5a8b75c935b0c2ea5770b97ffce3ef66ea250b11f9ae5fed6bdde7ec91060b"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_work_items.pth",
+          "original_sha256": "022d603b5fbea94b9ccabc5fccea0633ec53f92031b9f51b93158ac0f150df31",
+          "rebound_sha256": "fbf2dc9003205d8d1d2c03fc44c9df36016d3277123966b494dc5bd707933722"
+        },
+        {
+          "relative": "lib/python3.12/site-packages/actions_work_items-0.4.4.dist-info/direct_url.json",
+          "original_sha256": "6249dbdcad616446ff4f7d319017dd75b2059adbcb162ef5a3455ad44827908f",
+          "rebound_sha256": "1725e0c701b0d8866fab1582f76c8fc9b7ecb07542569f1fd526ed2fa521d4b7"
+        }
+      ],
+      "original_edited_inputs_unchanged": true
+    }
+  ]
+}

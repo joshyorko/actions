@@ -1,0 +1,150 @@
+{
+  "status": "ROOT_NORMAL_READY_AND_EXPECTED_HEAD_MERGE_AUTHORIZED_CURRENT_SCOPED309",
+  "PR": 309,
+  "head": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea",
+  "target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "tested_checkout": "012cd8fd70cecbf53e236ca35ede0ffcb35297b5",
+  "tree": "1181b35b11e4904405ca1a9a3a398e6c1c3abfd0",
+  "independent_final_scoped_GO": {
+    "path": "/workspace/engineering/pr309-current618-independent-final-admission-review/OWNERFINAL-independent-current309-final-scoped-admission-review.json",
+    "bytes": 10066,
+    "sha256": "8d834b13a663e6768090963ef8a62860155b31b2c9b1aebbf5b11b5c3f70ab7e"
+  },
+  "fresh_graphql": {
+    "path": "/workspace/engineering/pr309-current618-root-final-bracket.response.private.json",
+    "bytes": 3300,
+    "sha256": "3d9269f7cb3e6efb552360b367a723a8e8bf194ce402e56e0a7ad0b6a957d7a9"
+  },
+  "named_refs": {
+    "refs/heads/integration/community-release-20261008": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "refs/heads/test/auth-route-census-20261010": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea"
+  },
+  "complete_current_checks": [
+    {
+      "__typename": "CheckRun",
+      "name": "audit",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "build (ubuntu-py3.12-devmode)",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "build-sdist (ubuntu-py3.12)",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "coverage",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "build (windows-py3.12-devmode)",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "build (macos-py3.12-devmode)",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "build-wheels (ubuntu-22.04)",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "build-wheels (windows-2022)",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "build-wheels (macos-15)",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    },
+    {
+      "__typename": "CheckRun",
+      "name": "publish (3.12)",
+      "conclusion": "SUCCESS",
+      "status": "COMPLETED"
+    }
+  ],
+  "complete_current_reviews_threads_closures": [
+    0,
+    0,
+    0
+  ],
+  "isDraft_before_ready": true,
+  "mergeable": "MERGEABLE",
+  "mergeStateStatus": "CLEAN",
+  "normal_API_policy_enforcement_required": true,
+  "force_or_waiver": false,
+  "required_followup": "Normal ready readback then expected-head merge; authenticate actual Git parents/tree before integration claim",
+  "remaining_holds": "Whole152/196, native/private/provider, Runtime publication and retained issue closures are not admitted"
+}

@@ -1,0 +1,22 @@
+{
+  "single_authorized_SOURCE_full": true,
+  "exit_code": 0,
+  "passed": 1240,
+  "skipped": 13,
+  "warnings": 15,
+  "seconds": 137.04,
+  "workers": 2,
+  "outer_timeout_seconds": 600,
+  "kill_grace_seconds": 10,
+  "RCC": "SUCCESS",
+  "head": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+  "tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb",
+  "private_original_log": {
+    "path": "/workspace/engineering/pr308-actual299-source-refresh/SOURCE-full-configured-runtime-source.log",
+    "bytes": 320721,
+    "sha256": "3a53c22ef6c55fcb0712afe853b481e1c0dd8a730201d6916e453f81426eaf3b"
+  },
+  "private_original_log_mode": "0o600",
+  "scope": "Configured invoke test-not-integration only; native2510/provider/private/release unqualified.",
+  "cleanup_scope": "Gateway exit0/sourcePASS is not universal descendant reaping/native cleanup proof."
+}

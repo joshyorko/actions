@@ -1,0 +1,33 @@
+{
+  "status": "PASS_COMPLETE_ORIGINAL_SOURCE_BYTES_MODES_AND_NARROW_GENERATOR_SCOPE",
+  "base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "original_typed_leaves": 1419,
+  "unchanged_original_leaves": 1414,
+  "exact_existing_generator_AST_after_only_two_filter_removals": true,
+  "two_owning_classes": [
+    "ActionServerTests",
+    "ActionServerPyPiRelease"
+  ],
+  "two_generated_outputs": {
+    ".github/workflows/actions_runtime_tests.yml": {
+      "old": "430588021cf889391842be3a7c78eb4c04648b1bb7311f9c03da452e313fb161",
+      "new": "84981311da9a21c549d5213cfaf0778162224851f8a4d639b3151a059be33872",
+      "only_PR_paths_item_changed": true,
+      "all_matrices_jobs_needs_permissions_tag_and_publisher_guards_exact": true
+    },
+    ".github/workflows/actions_runtime_pypi_release.yml": {
+      "old": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+      "new": "72998a0e12719bbd49d7695696ee4bd3542e6eb4c43f5ac93aa071e917ec8b29",
+      "only_PR_paths_item_changed": true,
+      "all_matrices_jobs_needs_permissions_tag_and_publisher_guards_exact": true
+    }
+  },
+  "eight_generated_target_data_matches": 8,
+  "all_tracked_GitHub_YAML_parsed": 30,
+  "other_tracked_YAML_byte_exact": 28,
+  "new_tests": [
+    "devutils/tests/test_runtime_checkout_bytes.py",
+    "devutils/tests/test_runtime_checkout_workflows.py"
+  ],
+  "all_Runtime_and_frontend_source_blobs_modes_unchanged": true
+}

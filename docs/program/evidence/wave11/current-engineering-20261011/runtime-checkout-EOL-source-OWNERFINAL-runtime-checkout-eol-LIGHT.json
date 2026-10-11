@@ -1,0 +1,318 @@
+{
+  "schema": "runtime-checkout-eol-source-LIGHT-v1",
+  "status": "OWNER_LIGHT_FINAL_FULL_SOURCE_GATES_HELD_FOR_DISTINCT_ROOT_RELEASE",
+  "branch": "fix/runtime-checkout-eol-20261011",
+  "source_head": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+  "source_tree": "8c7362e63c85a930ca2fe962ede9bc3ebb6ffe68",
+  "sole_parent_actual_target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "clean": true,
+  "complete_tracked_leaf_count": 1421,
+  "original_leaves": 1419,
+  "original_unchanged_typed_leaves": 1414,
+  "changed_original_paths": [
+    ".gitattributes",
+    ".github/workflows/_gen_workflows.py",
+    ".github/workflows/actions_runtime_tests.yml",
+    ".github/workflows/actions_runtime_pypi_release.yml",
+    "docs/skills/repository-operations.md"
+  ],
+  "new_permanent_tests": [
+    "devutils/tests/test_runtime_checkout_bytes.py",
+    "devutils/tests/test_runtime_checkout_workflows.py"
+  ],
+  "all_production_Runtime_and_frontend_input_Git_bodies_and_modes_unchanged": true,
+  "selected_input_inventory": {
+    "Runtime_Python": 201,
+    "packaged_nonPython_text": 5,
+    "frontend_HTML_scaffold": 1,
+    "total": 207
+  },
+  "actual_Git_controls": {
+    "old_policy_RED_synthetic_coreautocrlf_true_changed_inputs": 180,
+    "historical_Windows_changed_tracked_inputs_distinct": 178,
+    "new_policy_GREEN_all207_two_autocrlf_settings": true,
+    "independent_seven_rule_removal_poisons_rejected_from_valid_baseline": true,
+    "unrelated_six_binary_archives_platform_bat_literal_CRLF_and_other_package_test_python_policy_and_bytes_preserved": true
+  },
+  "filter_controls": {
+    "original_owning_filters_RED_failed": 6,
+    "final_own_checkout_and_filter_controls_PASS": 10,
+    "new_source_own_configured_Ruff_and_format_and_Isort_PASS": true,
+    "original_RED_function_AST_exact_in_final_own_test_module": true
+  },
+  "own_gateway_gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "OWN_PREPARED_REUSE_NO_INSTALL",
+    "prepared_inputs_exact": 30,
+    "concrete_own_module_origins_and_prefixes": 5,
+    "copied_prepared_bytes": 802772497,
+    "Toolkit_PASS": 96,
+    "Runtime_configured_lint": "PASS",
+    "Runtime_configured_typecheck_source_files_PASS": 347,
+    "Runtime_static_gate_original_and_current_production_bodies_exact": true,
+    "gen8_actual_roundtrip": "PASS",
+    "dependabot_and_all30_tracked_YAML_bytes_and_parse": "PASS"
+  },
+  "source_full_execution": "NOT_RUN_ROOT_SERIALIZATION_HELD",
+  "next_proposed_full_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/bin/rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/engineering/runtime-checkout-eol-source/full-source-gates-root-release-required.py"
+  ],
+  "next_full_cwd": "/workspace/engineering/runtime-checkout-eol",
+  "next_full_worker_count": 2,
+  "next_full_suites": [
+    "devutils/tests (all service-free developer contracts)",
+    "Runtime invoke test-not-integration (existing opt-ins remain unexecuted)"
+  ],
+  "next_full_preconditions": [
+    "Distinct root serialization/capacity release after consumer attempt terminal",
+    "Rehash1421 committed body/executable-mode inventory, prepared30/five own origins, ignored RCC and all owner references",
+    "Fresh workspace>=1200000000B; exactly one600s TERM+10s KILL envelope; no retries"
+  ],
+  "fresh_workspace_free_bytes": 1546502144,
+  "fresh_tmp_free_bytes": 1019146240,
+  "known_preserved_preparation_failures": [
+    "First Git GREEN invocation wrong pr282 cwd: module import failed before any control; corrected own-source cwd",
+    "First format attempt guessed nonexistent root ruff.toml: failed before formatting; corrected declared devutils/ruff.toml",
+    "Existing test formatter changed inherited three-line formatting; original test fully restored and new filter AST moved unchanged into own new module"
+  ],
+  "private_v4_principal_frozen_files_unchanged": {
+    "/workspace/engineering/pr221-current618-linux-consumer-preflight/immutable-current618-linux-consumer-preexecution-proposal-v4.json": "da926a733e60108fd2943add0a60a0bf6d365afbb1d489bf986a0624ecda65c0",
+    "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-consumer-runner-v4.py": "06f64db20bba0554f570d4653f11fb7bccc7b98ec2e7de7085ab90fd8ba7333b",
+    "/workspace/engineering/pr221-current618-linux-consumer-preflight/current-input-admission-v4.py": "1edf96b6b801de5e7b8c1c7c284a636cec44bc06fcb45adb6e1781e519b3a8f6",
+    "/workspace/engineering/pr221-current618-linux-consumer-preflight/input-and-source-admission-v4.json": "798f11c5416e57d6d0fa39c79c9524fc52e2e022496c1c3f12b3c902facc61d3"
+  },
+  "remaining_holds": [
+    "No full source qualification or independent SOURCE GO yet",
+    "No fresh hosted Runtime builder/test checkout or Windows distribution proof",
+    "Original effective checkout configuration and frontend input/compiler causation UNKNOWN",
+    "Generated embedded HTML CR semantics UNKNOWN; no normalization/content waiver",
+    "Private/OAuth/provider/native/cold registry/full seven installed consumers/release/tag/publication HOLD",
+    "No push/new PR or actual execution by this worker"
+  ],
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Durable learning captured": "Exact207 tracked checkout inputs include packaged non-Python text; generated embedded asset bytes differ from outer module line endings; both affected PR filters must select attrs-only changes",
+    "Evidence": "Accepted1306 exact16-line content, actual Git RED/GREEN/seven poisons, six filter RED/ten scoped GREEN, encoder read_bytes/repr source preserved, complete source/gen proof",
+    "Stale or ambiguous guidance removed": "Prevents Python-only checkout qualification, outer module newline-as-embedded normalization and successful unrelated CI-as-builder admission",
+    "Remaining uncertainty": "Historical cause, fresh Windows/generated distribution bytes, full source/hosted/installation and release authority remain unqualified"
+  },
+  "Upstream disposition": "none",
+  "immutable_evidence_bindings": [
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/Doctor.log",
+      "bytes": 12878,
+      "sha256": "b7943ef46577c34c01406621b2e6e846c4d28dbd682d5a1a82fc5aa0751da41e"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/Toolkit.log",
+      "bytes": 14466,
+      "sha256": "03b3697c57432e6547e217e5af7bc02c1dfebbbd97f1b81e5c4868ea3e4e2553"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/accepted-design-inventory-and-canonical-proof.json",
+      "bytes": 572,
+      "sha256": "2400b86751b8fe83c934a90e370e00904bfaa52c03811c55913dd691d0fd6e9e"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/checkout-original-policy-RED.log",
+      "bytes": 2614,
+      "sha256": "012d57b809f98a6ca184133d75d5a7f0742b89c1e77703149fd092ff4bfc46b3"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/checkout-policy-GREEN.log",
+      "bytes": 904,
+      "sha256": "767acc38faabbb6ef00e5dee7f63e1af9f8919cee2ccfc3b19b95c7ee1c7636e"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/committed-source-LIGHT-pre-full.json",
+      "bytes": 394990,
+      "sha256": "4750fbf3c1b04eaccc9d8b233d2ed7217517103e1f73191fd2ed8f51e4441a5d"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/complete-scope-and-generator-proof.json",
+      "bytes": 1417,
+      "sha256": "cf3e268e8765faae5e9d8f66501186077f70a3c7137e47232bb6c38001970f2b"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/complete-scope-and-generator.log",
+      "bytes": 4893,
+      "sha256": "42d2a3862987e2f85b3f4713a685e8187d436b95961e46d158a9cbd6f0392d39"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/exact-canonical-checkout-and-generated-scope.patch",
+      "bytes": 1724,
+      "sha256": "3a3588c1740acc52904b405c7987b26d111a2705b5208eb5bd30d60d469d060d"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/filter-RED-gateway.py",
+      "bytes": 203,
+      "sha256": "4cb8ca05e25b5b37a7637eb9e598bdfc1a2c131d4abc857aa72acea1adc6bfe5"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/filter-control-scope-cleanup.json",
+      "bytes": 394,
+      "sha256": "a2d2786bf2357d8ca040f54105e2628149a5b384f4b6a756910b8e5e392416a7"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/filter-original-policy-RED.log",
+      "bytes": 12792,
+      "sha256": "ed787005817f535a3cdd4f33524d128a58f0dc9d8dea4eb9ae1fae19426df9c2"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/final-changed-tests-format.log",
+      "bytes": 4221,
+      "sha256": "a3ed4fbe9f1357ca332bfdbf5859127115149fac6dd0e0e9c330ce9c69c02831"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/final-owned-scoped-tests-and-static.log",
+      "bytes": 4506,
+      "sha256": "3c198380e9ef96f0db23a1872c75e1b64350e7237080ef0422fdbdfe89c409ca"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/format-changed-tests.log",
+      "bytes": 4316,
+      "sha256": "b8f7f30ba93c49de59e30e22d0c841be088c28f85e7311138f8e6150be56a384"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/format-changed-tests.py",
+      "bytes": 331,
+      "sha256": "946473a76b07d1f4da9654eba213fc25fef3b3781697414453d582e482e52257"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/full-source-gates-root-release-required.py",
+      "bytes": 229,
+      "sha256": "70c834e35917b2eb86d3ae4fa72188730a458537fd0771cce126e36c46ae1820"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/generator-all-eight-roundtrip.json",
+      "bytes": 3813,
+      "sha256": "4c9105e7008262649b0cabdcabcb50559286719b16bab892f18673226622a460"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/generator-all-eight-roundtrip.log",
+      "bytes": 4805,
+      "sha256": "5902c9a53651236d229d44f74fdb6134c27b6d0da0eb86c0bd5d93e6c7408aa6"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/generator-all-eight-roundtrip.py",
+      "bytes": 1019,
+      "sha256": "2d3cb06cbb21b6316bdf466a4a8acbf9733a0d6207062c020f0ab3553cc3356b"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/initial-Git-control-wrong-cwd-import-failure.log",
+      "bytes": 844,
+      "sha256": "c1d4f9c987e0c81b365cbf1b6cf50c4c9780e37e1faaae11885c115603437ad6"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/initial-filter-controls-before-scope-cleanup.py",
+      "bytes": 74786,
+      "sha256": "c30e69195a99ecea6ee8f86b368301a26749f08f75dad9b007413e3e76cc6dc0"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/initial-format-changed-tests.py",
+      "bytes": 330,
+      "sha256": "87674c3d3446af71c90d8101df4835963c53e62d3388e2c428968a64527443d1"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/initial-format-nonexistent-root-config-failure.log",
+      "bytes": 5566,
+      "sha256": "a663fda7f388cf4a1c8b68a21885a3bfd6741429d5b7f50dceeb538382736e2d"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/initial-format-nonexistent-root-config.py",
+      "bytes": 321,
+      "sha256": "cc331b8b7e82773322f30e732bf58e6485b8137bd6561e51a1dafea76db088f1"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/initial-run-owned-scoped-checks.py",
+      "bytes": 560,
+      "sha256": "9174f10704f3dd9e3b5a83b21775984225243f745963032fc4eae5d974c17e97"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/origin-action_server.json",
+      "bytes": 328,
+      "sha256": "6ee21ed7f1d9f863b29dc8a4cb25498ffafc129818b88aff25e148759a54bf7e"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/origin-actions-http-helper.json",
+      "bytes": 309,
+      "sha256": "7154b87e85312b262d695820b622f2eafbd24f7ffe7f5e90aca25e5e157b3750"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/origin-actions.json",
+      "bytes": 263,
+      "sha256": "13a206a60978c69b9aaad5c84d4bacd5723c958a9692ff7820520e77d5d51b32"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/origin-devutils.json",
+      "bytes": 285,
+      "sha256": "e5fa78efe728330ca469ef25076f30e48c193595b5c647340ff5d7515bc810f7"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/origin-work-items.json",
+      "bytes": 294,
+      "sha256": "ae85d53c5a888f840d5ebda2f394b7a9e317125ff443c8a937c4b2eb0332ec37"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/original-source-and-design-bindings.json",
+      "bytes": 243353,
+      "sha256": "317fa4810ec35980587ba49d3b2c0ceb433d135cc1848c1b8ecc07c3298d7c2f"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6642,
+      "sha256": "b887988b906cc73f0f30e237b70432f01b44c187312d8416d09b2990a90bc39e"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/own-prepared-inputs-and-origins.log",
+      "bytes": 7020,
+      "sha256": "c2a2c66bb3f4f7722b5800d0a454b9150120c7909c4ada0d418af77a2ce49ba7"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/owned-prepared-environments-copy.json",
+      "bytes": 55018,
+      "sha256": "a6e361dd1bee7e4a8bf117346c47204f60f206c2caf8ddad38d233ce879ce12b"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/owned-scoped-and-static.log",
+      "bytes": 6650,
+      "sha256": "e29cfde2ac178da37e387417ca5f57bf3b8a4bb6e6016b49a7350f885131cb57"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/regenerate-two-workflows.log",
+      "bytes": 3728,
+      "sha256": "e64d9e421323740f007c79ca60f1f876df126b95233bb9f31609d92bd129a8be"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/regenerate-two-workflows.py",
+      "bytes": 386,
+      "sha256": "ed15703f9490709bdda6702e3f50e3c030d7f8dd05630a19fa126dbce9069f43"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/run-owned-scoped-checks.py",
+      "bytes": 495,
+      "sha256": "5d4bea0868e1a534c297e49dd6c0ed1949ff52cad3d166a7d9d62da558550f3e"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/verify-complete-scope-and-generator.py",
+      "bytes": 3941,
+      "sha256": "049f1d7dfc6bcf3875a03e7e7cc7c69f2121d8da1e3b35ae34ab2132751bdc56"
+    },
+    {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/verify-own-prepared.py",
+      "bytes": 2686,
+      "sha256": "8d4e91f8e8317b680a0ab4c829eb369ea2b90c3d6670fa0759c5a1b6c267dd0a"
+    }
+  ]
+}

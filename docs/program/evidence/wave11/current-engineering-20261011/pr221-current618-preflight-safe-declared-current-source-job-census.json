@@ -1,0 +1,863 @@
+[
+  {
+    "path": ".github/workflows/action_server_frontend_tests.yml",
+    "workflow": "Action Server Frontend tests",
+    "source_sha256": "058e7625c4eb32f885bdeef6443643dd1a3df87ec6c5131bb39b36ec4289b8d2",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": {
+      "branches": [
+        "community",
+        "integration/**"
+      ],
+      "paths": [
+        "action_server/frontend/**",
+        "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py",
+        "docs/contracts/canvas/fixtures/**",
+        ".github/workflows/action_server_frontend_tests.yml"
+      ]
+    },
+    "declared_jobs": [
+      {
+        "id": "action-server-frontend-tests",
+        "name": "action-server-frontend-tests",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {}
+        ]
+      }
+    ],
+    "expected_job_count": 1,
+    "observed_job_count": 1,
+    "not_materialized_count": 0,
+    "run_id": 38126987520,
+    "run_status": "completed",
+    "run_conclusion": "success",
+    "observed_jobs": [
+      {
+        "id": 114433293137,
+        "name": "action-server-frontend-tests",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": false
+  },
+  {
+    "path": ".github/workflows/actions_core_tests.yml",
+    "workflow": "Actions Core Tests",
+    "source_sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": {
+      "branches": [
+        "community",
+        "integration/**"
+      ],
+      "paths": [
+        "actions/**",
+        ".github/workflows/actions_core_tests.yml",
+        "devutils/**",
+        "actions-http-helper/**",
+        ".github/workflows/_gen_workflows.py"
+      ]
+    },
+    "declared_jobs": [
+      {
+        "id": "build",
+        "name": "build",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {
+            "name": "ubuntu-py3.10-devmode",
+            "python": "3.10",
+            "os": "ubuntu-22.04"
+          },
+          {
+            "name": "windows-py3.10-devmode",
+            "python": "3.10",
+            "os": "windows-2022"
+          },
+          {
+            "name": "macos-py3.10-devmode",
+            "os": "macos-15",
+            "python": "3.10"
+          }
+        ]
+      },
+      {
+        "id": "candidate-wheel",
+        "name": "candidate-wheel",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {}
+        ]
+      }
+    ],
+    "expected_job_count": 4,
+    "observed_job_count": 4,
+    "not_materialized_count": 0,
+    "run_id": 38126987462,
+    "run_status": "completed",
+    "run_conclusion": "success",
+    "observed_jobs": [
+      {
+        "id": 114433293054,
+        "name": "candidate-wheel",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293203,
+        "name": "build (ubuntu-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293215,
+        "name": "build (macos-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293387,
+        "name": "build (windows-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": false
+  },
+  {
+    "path": ".github/workflows/actions_runtime_pypi_release.yml",
+    "workflow": "Actions Runtime PYPI Release",
+    "source_sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": {
+      "branches": [
+        "community",
+        "integration/**"
+      ],
+      "paths": [
+        ".github/workflows/_gen_workflows.py",
+        ".github/workflows/actions_runtime_pypi_release.yml",
+        ".github/workflows/actions_runtime_binary_release.yml",
+        ".github/workflows/actions_runtime_manylinux_release.yml",
+        "devutils/tests/test_actions_runtime_release_line.py",
+        "devutils/tests/test_runtime_release_workflows.py",
+        "docs/skills/repository-operations.md",
+        "action_server/scripts/publish_verified_runtime.py",
+        "action_server/scripts/verify_published_runtime_floor.py"
+      ]
+    },
+    "declared_jobs": [
+      {
+        "id": "build-sdist",
+        "name": "build-sdist",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {
+            "name": "ubuntu-py3.12",
+            "python": "3.12",
+            "os": "ubuntu-22.04"
+          }
+        ]
+      },
+      {
+        "id": "build-wheels",
+        "name": "build-wheels",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {
+            "os": "ubuntu-22.04",
+            "python": "3.12",
+            "name": "ubuntu"
+          },
+          {
+            "os": "windows-2022",
+            "python": "3.12",
+            "name": "windows"
+          },
+          {
+            "os": "macos-15",
+            "python": "3.12",
+            "name": "macos"
+          }
+        ]
+      },
+      {
+        "id": "publish",
+        "name": "publish",
+        "if": null,
+        "needs": [
+          "build-sdist",
+          "build-wheels"
+        ],
+        "matrix_rows": [
+          {
+            "python": "3.12"
+          }
+        ]
+      }
+    ],
+    "expected_job_count": 5,
+    "observed_job_count": 4,
+    "not_materialized_count": 1,
+    "run_id": 38126987514,
+    "run_status": "queued",
+    "run_conclusion": null,
+    "observed_jobs": [
+      {
+        "id": 114433293117,
+        "name": "build-wheels (windows-2022)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293201,
+        "name": "build-sdist (ubuntu-py3.12)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293230,
+        "name": "build-wheels (macos-15)",
+        "status": "queued",
+        "conclusion": null,
+        "failed_steps": []
+      },
+      {
+        "id": 114433293243,
+        "name": "build-wheels (ubuntu-22.04)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": false
+  },
+  {
+    "path": ".github/workflows/actions_runtime_tests.yml",
+    "workflow": "Action Server Tests",
+    "source_sha256": "430588021cf889391842be3a7c78eb4c04648b1bb7311f9c03da452e313fb161",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": {
+      "branches": [
+        "master",
+        "community",
+        "integration/**"
+      ],
+      "paths": [
+        "action_server/**",
+        ".github/workflows/actions_runtime_tests.yml",
+        "devutils/**",
+        "actions/**",
+        "actions-http-helper/**",
+        "work-items/**"
+      ]
+    },
+    "declared_jobs": [
+      {
+        "id": "build",
+        "name": "build",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {
+            "name": "ubuntu-py3.12-devmode",
+            "python": "3.12",
+            "os": "ubuntu-22.04"
+          },
+          {
+            "name": "windows-py3.12-devmode",
+            "python": "3.12",
+            "os": "windows-2022"
+          },
+          {
+            "name": "macos-py3.12-devmode",
+            "os": "macos-15",
+            "python": "3.12"
+          }
+        ]
+      }
+    ],
+    "expected_job_count": 3,
+    "observed_job_count": 3,
+    "not_materialized_count": 0,
+    "run_id": 38126987486,
+    "run_status": "in_progress",
+    "run_conclusion": null,
+    "observed_jobs": [
+      {
+        "id": 114433292936,
+        "name": "build (ubuntu-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null,
+        "failed_steps": []
+      },
+      {
+        "id": 114433293118,
+        "name": "build (macos-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null,
+        "failed_steps": []
+      },
+      {
+        "id": 114433293134,
+        "name": "build (windows-py3.12-devmode)",
+        "status": "in_progress",
+        "conclusion": null,
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": false
+  },
+  {
+    "path": ".github/workflows/ai-audit.yml",
+    "workflow": "AI audit evidence",
+    "source_sha256": "2334d210444efcc82389a3f535032794aec91142e7f44eaf5b97bcb9816f5d0e",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": null,
+    "declared_jobs": [
+      {
+        "id": "audit",
+        "name": "audit",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {}
+        ]
+      }
+    ],
+    "expected_job_count": 1,
+    "observed_job_count": 1,
+    "not_materialized_count": 0,
+    "run_id": 38126987459,
+    "run_status": "completed",
+    "run_conclusion": "success",
+    "observed_jobs": [
+      {
+        "id": 114433292971,
+        "name": "audit",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": false
+  },
+  {
+    "path": ".github/workflows/copilot-setup-steps.yml",
+    "workflow": "Copilot Setup Steps",
+    "source_sha256": "cdeaf466a6e662747e06e32618d91a48fd76c41fada5c2369e380b7034f3f906",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": {
+      "paths": [
+        ".github/workflows/copilot-setup-steps.yml",
+        ".github/workflows/developer_toolkit.yml",
+        "developer/**"
+      ]
+    },
+    "declared_jobs": [
+      {
+        "id": "copilot-setup-steps",
+        "name": "copilot-setup-steps",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {}
+        ]
+      }
+    ],
+    "expected_job_count": 1,
+    "observed_job_count": 1,
+    "not_materialized_count": 0,
+    "run_id": 38126987463,
+    "run_status": "completed",
+    "run_conclusion": "success",
+    "observed_jobs": [
+      {
+        "id": 114433293052,
+        "name": "copilot-setup-steps",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": true
+  },
+  {
+    "path": ".github/workflows/coverage-gate.yml",
+    "workflow": "Measured Python coverage gate",
+    "source_sha256": "e355c4769bae5e548dc7aa8c7393bdc496ebfcbdd24c1c3918d90bc7e1ef76cf",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": {
+      "branches": [
+        "community",
+        "integration/community-release-20261008"
+      ]
+    },
+    "declared_jobs": [
+      {
+        "id": "coverage",
+        "name": "coverage",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {}
+        ]
+      }
+    ],
+    "expected_job_count": 1,
+    "observed_job_count": 1,
+    "not_materialized_count": 0,
+    "run_id": 38126987468,
+    "run_status": "completed",
+    "run_conclusion": "success",
+    "observed_jobs": [
+      {
+        "id": 114433292948,
+        "name": "coverage",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": false
+  },
+  {
+    "path": ".github/workflows/developer_toolkit.yml",
+    "workflow": "RCC developer toolkit",
+    "source_sha256": "60ca471cb9bdff0059b1a9b1fcdf9256b666fb2fb1d533b93307d2841facc0a8",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": null,
+    "declared_jobs": [
+      {
+        "id": "toolkit",
+        "name": "toolkit",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {
+            "lane": "primary",
+            "rcc_version": "18.19.3",
+            "os": "ubuntu-22.04",
+            "asset": "rcc-linux64",
+            "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+          },
+          {
+            "lane": "primary",
+            "rcc_version": "18.19.3",
+            "os": "macos-15",
+            "asset": "rcc-macosarm64",
+            "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266"
+          },
+          {
+            "lane": "primary",
+            "rcc_version": "18.19.3",
+            "os": "windows-2022",
+            "asset": "rcc-windows64.exe",
+            "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+          },
+          {
+            "lane": "n-1",
+            "rcc_version": "18.18.1",
+            "os": "ubuntu-22.04",
+            "asset": "rcc-linux64",
+            "sha256": "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf"
+          },
+          {
+            "lane": "n-1",
+            "rcc_version": "18.18.1",
+            "os": "macos-15",
+            "asset": "rcc-macosarm64",
+            "sha256": "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d"
+          },
+          {
+            "lane": "n-1",
+            "rcc_version": "18.18.1",
+            "os": "windows-2022",
+            "asset": "rcc-windows64.exe",
+            "sha256": "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b"
+          }
+        ]
+      }
+    ],
+    "expected_job_count": 6,
+    "observed_job_count": 6,
+    "not_materialized_count": 0,
+    "run_id": 38126987471,
+    "run_status": "queued",
+    "run_conclusion": null,
+    "observed_jobs": [
+      {
+        "id": 114433293000,
+        "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293150,
+        "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293171,
+        "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293179,
+        "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293227,
+        "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+        "status": "queued",
+        "conclusion": null,
+        "failed_steps": []
+      },
+      {
+        "id": 114433293240,
+        "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+        "status": "queued",
+        "conclusion": null,
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": false
+  },
+  {
+    "path": ".github/workflows/frontend-build-unauthenticated.yml",
+    "workflow": "Action Server Build (Unauthenticated)",
+    "source_sha256": "2d2a21af458ccfdb771f65707d7ab60fb1f5dfa24019c94ded4a02ed46f8d36d",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": {
+      "paths": [
+        "action_server/**",
+        "work-items/**",
+        ".github/workflows/frontend-build-unauthenticated.yml"
+      ]
+    },
+    "declared_jobs": [
+      {
+        "id": "build-external",
+        "name": "Build Action Server binary without credentials",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {
+            "os": "ubuntu-22.04",
+            "python": "3.12"
+          },
+          {
+            "os": "windows-2022",
+            "python": "3.12"
+          },
+          {
+            "os": "macos-15",
+            "python": "3.12"
+          }
+        ]
+      }
+    ],
+    "expected_job_count": 3,
+    "observed_job_count": 3,
+    "not_materialized_count": 0,
+    "run_id": 38126987482,
+    "run_status": "queued",
+    "run_conclusion": null,
+    "observed_jobs": [
+      {
+        "id": 114433293058,
+        "name": "Build Action Server binary without credentials (windows-2022)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293252,
+        "name": "Build Action Server binary without credentials (macos-15)",
+        "status": "queued",
+        "conclusion": null,
+        "failed_steps": []
+      },
+      {
+        "id": 114433293367,
+        "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": false
+  },
+  {
+    "path": ".github/workflows/frontend-build.yml",
+    "workflow": "Frontend Build",
+    "source_sha256": "55def13a3b25269e0a8780a08c89bbbe9b32189b4f4fcbea21189ee8d6ee16a1",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": {
+      "branches": [
+        "community"
+      ],
+      "paths": [
+        "action_server/frontend/**",
+        ".github/workflows/frontend-build.yml"
+      ]
+    },
+    "declared_jobs": [
+      {
+        "id": "build",
+        "name": "build",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {
+            "os": "ubuntu-latest"
+          },
+          {
+            "os": "macos-latest"
+          },
+          {
+            "os": "windows-latest"
+          }
+        ]
+      }
+    ],
+    "expected_job_count": 3,
+    "observed_job_count": 3,
+    "not_materialized_count": 0,
+    "run_id": 38126987519,
+    "run_status": "completed",
+    "run_conclusion": "success",
+    "observed_jobs": [
+      {
+        "id": 114433293043,
+        "name": "build (windows-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293218,
+        "name": "build (ubuntu-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293250,
+        "name": "build (macos-latest)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": false
+  },
+  {
+    "path": ".github/workflows/http_helper_tests.yml",
+    "workflow": "HTTP Helper Tests",
+    "source_sha256": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": {
+      "branches": [
+        "community"
+      ],
+      "paths": [
+        "actions-http-helper/**",
+        ".github/workflows/http_helper_tests.yml",
+        "devutils/**"
+      ]
+    },
+    "declared_jobs": [
+      {
+        "id": "build",
+        "name": "build",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {
+            "name": "ubuntu-py3.10-devmode",
+            "python": "3.10",
+            "os": "ubuntu-22.04"
+          },
+          {
+            "name": "windows-py3.10-devmode",
+            "python": "3.10",
+            "os": "windows-2022"
+          },
+          {
+            "name": "macos-py3.10-devmode",
+            "os": "macos-15",
+            "python": "3.10"
+          }
+        ]
+      }
+    ],
+    "expected_job_count": 3,
+    "observed_job_count": 3,
+    "not_materialized_count": 0,
+    "run_id": 38126987473,
+    "run_status": "queued",
+    "run_conclusion": null,
+    "observed_jobs": [
+      {
+        "id": 114433292989,
+        "name": "build (ubuntu-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114433293128,
+        "name": "build (macos-py3.10-devmode)",
+        "status": "queued",
+        "conclusion": null,
+        "failed_steps": []
+      },
+      {
+        "id": 114433293138,
+        "name": "build (windows-py3.10-devmode)",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": false
+  },
+  {
+    "path": ".github/workflows/lighthouse.yml",
+    "workflow": "Lighthouse CI",
+    "source_sha256": "ff985adf49fae8b5409e4edf4cd10d08045b712dc64b02ad9ec7a9f0498305bd",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": {
+      "branches": [
+        "community"
+      ],
+      "paths": [
+        "action_server/frontend/**",
+        ".github/workflows/lighthouse.yml"
+      ]
+    },
+    "declared_jobs": [
+      {
+        "id": "lighthouse",
+        "name": "lighthouse",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {}
+        ]
+      }
+    ],
+    "expected_job_count": 1,
+    "observed_job_count": 1,
+    "not_materialized_count": 0,
+    "run_id": 38126987464,
+    "run_status": "completed",
+    "run_conclusion": "success",
+    "observed_jobs": [
+      {
+        "id": 114433292897,
+        "name": "lighthouse",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": false
+  },
+  {
+    "path": ".github/workflows/work_items_release.yml",
+    "workflow": "Work Items Release",
+    "source_sha256": "e30cf818b7d81e3b910bdef8d2f78a9c32c8f52dd119de8b8a75a94b616e10c0",
+    "event": "pull_request",
+    "matched_branch": "community",
+    "declared_event_filter": {
+      "paths": [
+        "work-items/**",
+        ".devcontainer/bin/verify-work-items",
+        ".devcontainer/bin/smoke-host",
+        ".devcontainer/bin/bootstrap",
+        ".devcontainer/tests/**",
+        ".github/workflows/work_items_release.yml",
+        "docs/skills/work-items.md"
+      ]
+    },
+    "declared_jobs": [
+      {
+        "id": "verify",
+        "name": "verify",
+        "if": null,
+        "needs": [],
+        "matrix_rows": [
+          {}
+        ]
+      },
+      {
+        "id": "publish",
+        "name": "publish",
+        "if": "startsWith(github.ref, 'refs/tags/actions-work-items-')",
+        "needs": "verify",
+        "matrix_rows": [
+          {}
+        ]
+      }
+    ],
+    "expected_job_count": 2,
+    "observed_job_count": 2,
+    "not_materialized_count": 0,
+    "run_id": 38126987484,
+    "run_status": "completed",
+    "run_conclusion": "success",
+    "observed_jobs": [
+      {
+        "id": 114433293040,
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "failed_steps": []
+      },
+      {
+        "id": 114434239113,
+        "name": "publish",
+        "status": "completed",
+        "conclusion": "skipped",
+        "failed_steps": []
+      }
+    ],
+    "auxiliaryCopilot": false
+  }
+]

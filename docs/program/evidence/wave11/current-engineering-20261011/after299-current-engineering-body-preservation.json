@@ -1,0 +1,27 @@
+{
+  "status": "EXACT_AFTER299_CONTINUOUS_ENGINEERING_BODIES_VERIFIED",
+  "time": "2026-10-11T09:12:21.110331+00:00",
+  "actual_integration": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "independent_actual_GO": "06a652e23b77573ab5cfe9a8837b46de42909efd50908dcea031d7311a27c9ba",
+  "checkpoint644": "bd023f9fd2ea8007031c2bd4f909cab4546dabe1 stagedGO; independentcommitted readback pending",
+  "bodies": [
+    {
+      "subject": 101,
+      "body_bytes": 32620,
+      "body_sha256": "a08e591f978217cc6f746b60c06494b9db4ce7fe7b1ccf5e926d04b3eb046d42",
+      "readback_path": "/workspace/engineering/issue101-after299-engineering-body-authenticated.json",
+      "readback_sha256": "124afd6213eb38453b55cdc65885d4f1fc452d5b52d8582448d818b9ecb2f767"
+    },
+    {
+      "subject": 221,
+      "body_bytes": 14744,
+      "body_sha256": "5e2341fb7b8423d57c1e34c9d7f4a2ba124bf088976adf230f0b2913e6c0e7b2",
+      "readback_path": "/workspace/engineering/pr221-after299-engineering-body-authenticated.json",
+      "readback_sha256": "c227c2c56da72103b94e63d5a882501fedf80e0a8b560bad7e76d7c1af4d2b21"
+    }
+  ],
+  "issue101_audited_suffix_exact_bytes": 28075,
+  "issue101_audited_suffix_sha256": "d6aa504c67bb72508006751c65d0d575d2e108a1ae3f677034723ee8101843b7",
+  "prior221_entire_body_preserved": true,
+  "no_closure_release_or221_merge": true
+}

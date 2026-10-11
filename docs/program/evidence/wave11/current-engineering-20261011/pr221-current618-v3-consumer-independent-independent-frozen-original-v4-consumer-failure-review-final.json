@@ -1,0 +1,106 @@
+{
+  "schema": "current618-linux-consumer-original-v4-failure-independent-review/v1",
+  "status": "HOLD_ACTUAL_CONSUMER_UNQUALIFIED_SELECTOR_DIRECTORY_PRECONDITION_FAILED",
+  "observed_utc": "2026-10-11T10:36:32.345777+00:00",
+  "owner_final_failure": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/OWNERFINAL-original-current618-consumer-gateway-failure.json",
+    "bytes": 2740,
+    "sha256": "6f29ccd4b905b0036e6347aac23c12bda82cb6a719a1e7da0008eec951c0e773"
+  },
+  "proposal": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/immutable-current618-linux-consumer-preexecution-proposal-v4.json",
+    "bytes": 39398,
+    "sha256": "da926a733e60108fd2943add0a60a0bf6d365afbb1d489bf986a0624ecda65c0"
+  },
+  "authorization": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/root-one-actual-current618-execution-authorization.json",
+    "bytes": 302051,
+    "sha256": "81ea8a77d1680456739a98d9ead5ce7d9a063b4e3c93f797f00dce0548d4caae"
+  },
+  "original_gateway_log": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/original-one-actual-current618-gateway.log",
+    "bytes": 5663,
+    "sha256": "b45d0cdaf59ef8ae84a0b8e30ed2588a2153cd5a2d98740c64b54e90c8b093be"
+  },
+  "original_gateway_exit": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/original-one-actual-current618-gateway-exit.json",
+    "bytes": 608,
+    "sha256": "20c520d0600df6a7b99f5747cf844ab7cddfc513c2f3475df312365b2d217ebd"
+  },
+  "post_harness": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/root-current618-consumer-postexecution-harness-readback.json",
+    "bytes": 293642,
+    "sha256": "eea64ec447a4cffeb5365ad27bea652e05cac0838cc2b7c6159754a78e69537f"
+  },
+  "actual_gateway_exit": 10,
+  "actual_attempts_authorized": 1,
+  "verified_failure": {
+    "exception": "ValueError",
+    "source_function": "verify_published_runtime_floor.select_runtime_wheel",
+    "runner_supervisor_line": 331,
+    "unchanged_floor_SHA256": "f1ad142a6cd83ca1a71ed0a6183d558a6d72f00f073b492ce0d18e563a067193",
+    "directory_contract": "Exactly one cp312 actions-runtime1.0.3 wheel; strict existing selector intentionally has no platform filter",
+    "actual_directory_original_qualified_candidates": [
+      {
+        "filename": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "bytes": 14180835,
+        "sha256": "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6",
+        "platform": "Linux",
+        "ABI": "cp312"
+      },
+      {
+        "filename": "actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+        "bytes": 11634753,
+        "sha256": "4be1bd325a3d5061d2c3aa7c1293caeedc65f46944613c0b623ac96c7081d883",
+        "platform": "Windows",
+        "ABI": "cp312"
+      }
+    ],
+    "cp313_ignored_by_selector": 2,
+    "before_attempt_mkdir_temporary_worker_install_CLI_cleanup": true,
+    "attempt_namespace_absent": true,
+    "no_consumer_worker_or_install_acceptance": true,
+    "cleanup": "UNAVAILABLE: no owned worker or temp/attempt was created; no leak/natural/reaping claim inferred",
+    "consumer_phase_network_not_reached": "Source ordering only; no universal RCC gateway network census claim"
+  },
+  "source_retention": {
+    "current_harness_head": "e736f846557ed1d603348e97c5eb80060d62e3e2",
+    "tree": "07b716104ba623df81c00bd83be08dde84dd29f1",
+    "all1433_prepost_current_FS_hash_execbits_clean": true,
+    "v4_all60_refs_exact": true,
+    "original_v3_proposal_and_HOLD_exact": true,
+    "historical_v4_preexecution_GO": {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-independent-preexecution-review/independent-frozen-v4-preexecution-review-GO.json",
+      "bytes": 7955,
+      "sha256": "856e104d0bba81067e682dd9c5b959ae52b04579f2785b4b63822f9443c11913"
+    },
+    "preexecution_GO_not_relabelled_actual_or_overwritten": true
+  },
+  "review_gap": "The preexecution review bound selectedwheel bytes and existing selector code but did not admit the actual WHEEL.parent candidate population. The authorized actual safely failed this unmet directory prerequisite. Preserve the preexecution-only review history and add a source-backed directory-exclusivity admission before any separately reviewed successor attempt.",
+  "next_source_or_proposal_scope": "Root-authorized writer may preserve the mixed original acquisition directory and make named private copies of the exact original Linuxcp312+cp313 pair. Meaningful read-only real selector RED on mixed originals, GREEN on isolated pair, and foreigncp312 injection rejection must bind a new immutable proposal. No weakened selector/platform fallback, no original archive/wheel deletion or automatic actual retry.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accept root/owner upcoming exact directory-exclusivity lesson",
+    "Durable_learning": "A fixed wheel path/digest does not satisfy a selector that scans its parent directory. Qualify the directory candidate set using the real selector before installation; retain mixed original acquisitions and isolate exact selected platform bytes without weakening selection.",
+    "Evidence": "Immutable original gateway log and source line331; exact unchanged floor function; independent data-only two legitimate cp312 candidate inventories; actual attempt absent and1433 source posthashes unchanged. Prior5f08 independent-provenance lesson retained, but archive identity and directory uniqueness are separate prerequisites.",
+    "Stale_or_ambiguous_guidance_removed": "Preexecution byte/identity GO is not actual installed-consumer acceptance and does not implicitly prove the parent-directory selector contract.",
+    "Remaining_uncertainty": "No current installed consumer/cleanup/CLI result. Any successor requires frozen proposal review and distinct root execution authorization; OAuth/Windows/macro-platform/fullseven/private/native/tag/release HOLD.",
+    "Disposition": "Exact8-added-line directory-exclusivity lesson proposed beside accepted5f08 provenance lesson. Root may explicitly reuse an equivalent owner successor lesson; no cosmetic source/document mutation by reviewer.",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-independent-preexecution-review/canonical-selector-directory-contract-proposed.patch",
+      "bytes": 685,
+      "sha256": "fb9c9604f6f9dd32259d9a133eadafba076acfd92546ab0ccce2a080a918591c"
+    }
+  },
+  "not_performed": [
+    "Selector or consumer reexecution",
+    "Tests/controls/gateway/installer/payload imports",
+    "Source/index/branch writes or downloads",
+    "Delete/copy/restore originals, push/merge/release"
+  ],
+  "upstream_disposition": "none",
+  "original_construction_review_preserved": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-independent-preexecution-review/independent-frozen-original-v4-consumer-failure-review.json",
+    "bytes": 6512,
+    "sha256": "33ec67bfa973526d0dcce0cd245ba33bfa45aa2f76d04168122b72c9ca0f3237"
+  }
+}

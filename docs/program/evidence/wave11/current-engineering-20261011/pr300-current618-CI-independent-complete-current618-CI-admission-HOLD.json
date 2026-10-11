@@ -1,0 +1,1432 @@
+{
+  "PR": 300,
+  "REST_changed_files_exact_current_PR_three_dot5": true,
+  "actions": {
+    "bounded_metadata_once_after_owner_push": true,
+    "source_branch_remote_index_tests_installs_actual_artifacts_logs_mutated_or_rerun": false
+  },
+  "actual_aux_PUSH_Copilot": [
+    {
+      "event": "push",
+      "jobs": 1,
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "push_before_after": {
+        "after": "7840057a8b055576d11d339d8c0fbb738927a491",
+        "before": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+        "changed_paths": 48,
+        "matched": "developer/tests/** changes in actual normal push"
+      },
+      "run_id": 38129324525
+    }
+  ],
+  "actual_job_checkout": "UNKNOWN_NO_OWNED_ORIGINAL_LOGS_ACQUIRED",
+  "closing_issues": {
+    "complete": true,
+    "count": 0,
+    "issues": [],
+    "no_closure_admission": true
+  },
+  "current_head_and_merge": {
+    "head": {
+      "check_count": 19,
+      "checks": [
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917409,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174637,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "QUEUED"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917247,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174633,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "IN_PROGRESS"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917341,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174613,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "IN_PROGRESS"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917247,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174601,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "IN_PROGRESS"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917247,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174598,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "IN_PROGRESS"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917409,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174596,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "QUEUED"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917341,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174594,
+          "name": "build-wheels (windows-2022)",
+          "status": "QUEUED"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917247,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174563,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "IN_PROGRESS"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917247,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174555,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "QUEUED"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917341,
+          "conclusion": "SUCCESS",
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174552,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "COMPLETED"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917409,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174511,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "IN_PROGRESS"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917247,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174454,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "QUEUED"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917341,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174452,
+          "name": "build-wheels (macos-15)",
+          "status": "IN_PROGRESS"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917230,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174436,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "QUEUED"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917230,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174430,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "IN_PROGRESS"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917230,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174314,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "IN_PROGRESS"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917211,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174242,
+          "name": "audit",
+          "status": "QUEUED"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305917196,
+          "conclusion": null,
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440174222,
+          "name": "coverage",
+          "status": "IN_PROGRESS"
+        },
+        {
+          "app": "github-actions",
+          "check_suite_id": 103305914213,
+          "conclusion": "SUCCESS",
+          "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+          "id": 114440170754,
+          "name": "copilot-setup-steps",
+          "status": "COMPLETED"
+        }
+      ],
+      "normalized_counts": {
+        "IN_PROGRESS": 10,
+        "QUEUED": 7,
+        "SUCCESS": 2
+      },
+      "pages": {
+        "check-runs": 1,
+        "check-suites": 1,
+        "runs": 1,
+        "statuses": 1
+      },
+      "run_count": 7,
+      "status_count": 0,
+      "statuses": [],
+      "suite_count": 9,
+      "suites": [
+        {
+          "app": "docker",
+          "conclusion": null,
+          "id": 103305910881,
+          "status": "QUEUED"
+        },
+        {
+          "app": "renovate",
+          "conclusion": null,
+          "id": 103305911128,
+          "status": "QUEUED"
+        },
+        {
+          "app": "github-actions",
+          "conclusion": "SUCCESS",
+          "id": 103305914213,
+          "status": "COMPLETED"
+        },
+        {
+          "app": "github-actions",
+          "conclusion": null,
+          "id": 103305917196,
+          "status": "IN_PROGRESS"
+        },
+        {
+          "app": "github-actions",
+          "conclusion": null,
+          "id": 103305917211,
+          "status": "QUEUED"
+        },
+        {
+          "app": "github-actions",
+          "conclusion": null,
+          "id": 103305917230,
+          "status": "QUEUED"
+        },
+        {
+          "app": "github-actions",
+          "conclusion": null,
+          "id": 103305917247,
+          "status": "QUEUED"
+        },
+        {
+          "app": "github-actions",
+          "conclusion": null,
+          "id": 103305917341,
+          "status": "QUEUED"
+        },
+        {
+          "app": "github-actions",
+          "conclusion": null,
+          "id": 103305917409,
+          "status": "QUEUED"
+        }
+      ]
+    },
+    "merge": {
+      "check_count": 0,
+      "checks": [],
+      "normalized_counts": {},
+      "pages": {
+        "check-runs": 1,
+        "check-suites": 1,
+        "runs": 1,
+        "statuses": 1
+      },
+      "run_count": 0,
+      "status_count": 0,
+      "statuses": [],
+      "suite_count": 0,
+      "suites": []
+    }
+  },
+  "declaration": {
+    "bytes": 62885,
+    "path": "/workspace/engineering/pr300-current618-CI-admission-review/exact784-event-specific-workflow-declaration-v3.json",
+    "sha256": "e9b7c60cbb49c658c0f7451524fad382eb2535894cc2e00ffb4a1251ec311200"
+  },
+  "declared_unregistered_late_jobs": [
+    {
+      "display_label": "publish (3.12)",
+      "disposition": "DECLARED_NOT_REGISTERED_NEEDS_PENDING",
+      "if": null,
+      "job_key": "publish",
+      "matrix": {
+        "python": "3.12"
+      },
+      "needs": [
+        "build-sdist",
+        "build-wheels"
+      ],
+      "registered_job_id": null,
+      "run_id": 38129325678,
+      "workflow_path": ".github/workflows/actions_runtime_pypi_release.yml"
+    }
+  ],
+  "documentation_improvement": {
+    "Added_lines": 6,
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Durable_learning": "Derive PR and namedpush event-specific changed paths and tag/branch filters separately;target union can trigger auxiliaryCopilot for PUSH while its PR filter excludes currentfivepaths. Count observed auxiliarypush separately and retainunregistered needs-dependent publisher.",
+    "Evidence": "Current784 PR5 and authenticatedpush3cad\u219278448paths withdeveloper/test updates;sourceCopilotdeveloper/** filter;originalrun38129324525 push/currentjob114440170754SUCCESS;6PRflows19declared18materialized andunregisteredpublish needs producers.",
+    "Exact_proposed_delta": {
+      "bytes": 909,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/canonical-event-specific-push-paths-proposed.patch",
+      "sha256": "592949e0da5d48236262b87f3d6568dbde0d78fc7cc92835a7e8a512c48f73aa"
+    },
+    "Existing_lessons_reused": "Literalon normalization;exactmatrices;late needsjobs;policy403UNKNOWN;synthetic metadata vs actualcheckout;source versus complete native producer identity.",
+    "Remaining_uncertainty": "Non-atomic metadata snapshot can advance aftercapture;latepublisher unregistered,actualcheckoutandprotectionunavailable;allretained acceptanceholds.",
+    "Stale_guidance_removed": "No source removed;namedv3 corrects preserved earlierpreparatory trigger interpretations,no CIstatussample repeated or priorhead carried."
+  },
+  "draft": true,
+  "expected_total_current_event_jobs": 20,
+  "immutable_private_raw_metadata_refs": [
+    {
+      "bytes": 460,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/after-named-base.raw.private.json",
+      "sha256": "e6995883a02cda35696ddee5b9231b4952dc2bf4a74d57c25ee0cc9c7fc3dc38"
+    },
+    {
+      "bytes": 447,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/after-named-head.raw.private.json",
+      "sha256": "635296a365f6932d79c8dee9e25c87244888c57e77544337761a4384d1137ce5"
+    },
+    {
+      "bytes": 20608,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/after-pr.raw.private.json",
+      "sha256": "985ce1c3afb8cc4c25dd6d70e08e698aa6a13aa5a7d34a2a738f85a9811fc0fb"
+    },
+    {
+      "bytes": 460,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/before-named-base.raw.private.json",
+      "sha256": "e6995883a02cda35696ddee5b9231b4952dc2bf4a74d57c25ee0cc9c7fc3dc38"
+    },
+    {
+      "bytes": 447,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/before-named-head.raw.private.json",
+      "sha256": "635296a365f6932d79c8dee9e25c87244888c57e77544337761a4384d1137ce5"
+    },
+    {
+      "bytes": 20608,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/before-pr.raw.private.json",
+      "sha256": "985ce1c3afb8cc4c25dd6d70e08e698aa6a13aa5a7d34a2a738f85a9811fc0fb"
+    },
+    {
+      "bytes": 30788,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/changed-files.raw.private.json",
+      "sha256": "e7314daf16e217fd8a7dbf09b61e7a74939d7f3b01b6e14817cf66ded0b92a3f"
+    },
+    {
+      "bytes": 650,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/closures-page-1.raw.private.json",
+      "sha256": "4ba96ca252f70a7ddf8b219bd3233c4f8296278d8c777290c602d2b809b3fc01"
+    },
+    {
+      "bytes": 71688,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/head-check-runs.raw.private.json",
+      "sha256": "8df6d3a123b55202feafb446b4c770b7ec2f342a2f14f5e2be1dd094f0eecf04"
+    },
+    {
+      "bytes": 78362,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/head-check-suites.raw.private.json",
+      "sha256": "2bdfec33e413b39569db13ea26a76dbd88663a6cbd5c3e45e4e6b217fae29bb0"
+    },
+    {
+      "bytes": 5122,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/head-commit.raw.private.json",
+      "sha256": "8abb7626bae018ef7a216251b8a6989bba8617063947bf075ce62a14e80fde65"
+    },
+    {
+      "bytes": 91692,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/head-runs.raw.private.json",
+      "sha256": "f0c4b019927794dea30ed44fef6ebb383bd657530ef66af3b6512f52bcb4e0e0"
+    },
+    {
+      "bytes": 4,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/head-statuses.raw.private.json",
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "bytes": 4,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/issue-comments.raw.private.json",
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "bytes": 38,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/merge-check-runs.raw.private.json",
+      "sha256": "3b29ca22d800ee4f4f72aa18efc5af2f17c8f788db9d63ab463b365d2c0920a2"
+    },
+    {
+      "bytes": 40,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/merge-check-suites.raw.private.json",
+      "sha256": "4e929adbdc69abcb55cbd6c541fa88397ad113392ae033696f5e1ab55b596d50"
+    },
+    {
+      "bytes": 35789,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/merge-commit.raw.private.json",
+      "sha256": "f583b2ccd9dbb71c267e747d7c0d2576802328fdeac38ccdfc2c8579c08c3374"
+    },
+    {
+      "bytes": 41,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/merge-runs.raw.private.json",
+      "sha256": "725143e0e46d6aefd0d32064f5407f39c7c2149674a6fb60e3f3376c71e7b5ad"
+    },
+    {
+      "bytes": 4,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/merge-statuses.raw.private.json",
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "bytes": 4,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/review-comments.raw.private.json",
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "bytes": 4,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/reviews.raw.private.json",
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "bytes": 4,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/rulesets.raw.private.json",
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "bytes": 2561,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129324525-jobs.raw.private.json",
+      "sha256": "ae18c8a68144cd0d598a4ace20f3ae16e30d5f6714a1b4e460261210e3ee3664"
+    },
+    {
+      "bytes": 2977,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129325615-jobs.raw.private.json",
+      "sha256": "8ed2ce67c8c5ebef693849586bbdfaaa2c2988598f00be80e4e530e0bdc71c6d"
+    },
+    {
+      "bytes": 913,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129325625-jobs.raw.private.json",
+      "sha256": "f48859a2bc58b995f26edb8127384d3fb65048ee9362bbda0ac6d6a93b207077"
+    },
+    {
+      "bytes": 15037,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129325632-jobs.raw.private.json",
+      "sha256": "36e1f792aaee52daed8e051c474d8f6b15874c1d171e01cbaa0e5cb5f0b068c6"
+    },
+    {
+      "bytes": 14381,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129325637-jobs.raw.private.json",
+      "sha256": "b219e22ecb2dec62a37957a51b3181177d74bd456991149f1a421053c59ddafd"
+    },
+    {
+      "bytes": 15099,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129325678-jobs.raw.private.json",
+      "sha256": "dda5e43ad4a64deb4328eaa3067329b2ddfa54eeeed05825503b4667d71b487b"
+    },
+    {
+      "bytes": 6843,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129325703-jobs.raw.private.json",
+      "sha256": "35f042d5eba6da5224effe9d174bc0a290a7f4166a0116da78a1aaecf2a084f8"
+    },
+    {
+      "bytes": 640,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/threads-page-1.raw.private.json",
+      "sha256": "b262d32de9f88bd382c57e3a4afb16c5a0197b77da02ef9a1c6902bdae4f6add"
+    },
+    {
+      "bytes": 294,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/after-named-base.request.json",
+      "sha256": "19957986a3e8693bd9a28a651b39798ce47e324bc1ed2cc2a31acf20841173a2"
+    },
+    {
+      "bytes": 290,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/after-named-head.request.json",
+      "sha256": "024f358612ac318a735eafc27d3b9b4f0399a51c04cc2927771a31f27d5766c9"
+    },
+    {
+      "bytes": 253,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/after-pr.request.json",
+      "sha256": "65f3bfd026f17ce2ce5f87011742b583974a64f0176d761d4749cf10d6ff110e"
+    },
+    {
+      "bytes": 302,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/base-protection.request.json",
+      "sha256": "d6678ee23177afcf86bcd7fa5a9f42f0f0b92b89a1edf9e40b5ce9e68c89347d"
+    },
+    {
+      "bytes": 294,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/before-named-base.request.json",
+      "sha256": "b93b5ee23232ba151c34d25f51931cf85a45bfd1b9ddbbfd43d296e2e39593f6"
+    },
+    {
+      "bytes": 290,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/before-named-head.request.json",
+      "sha256": "3e962ac153b4bda84727767bd4cdfb14990d206a88dacd6d78a2f6d9f9b04e45"
+    },
+    {
+      "bytes": 253,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/before-pr.request.json",
+      "sha256": "0f47fe1e15ac8d013d49462541bf42d079674a77fb2a0670527d220c953e02ea"
+    },
+    {
+      "bytes": 271,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/changed-files.request.json",
+      "sha256": "1aaafd3a3f003da51212e52d7f36da84fc7c320713f2de4b0fac19cb6917a130"
+    },
+    {
+      "bytes": 164,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/closures-page-1.request.json",
+      "sha256": "003283d84c57b5f2f34d6daab222c1f9992584197b4a2436a802d7a7d516f009"
+    },
+    {
+      "bytes": 326,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/head-check-runs.request.json",
+      "sha256": "8a17d426b738ddc605e74075a6f32ad1e2d83f457158ebcd0e63843d661a37bb"
+    },
+    {
+      "bytes": 317,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/head-check-suites.request.json",
+      "sha256": "0bdc949ff6fcd0ec8bdefcc2f837e3f9ea943791a2e4dc765a1a91247dcc6f16"
+    },
+    {
+      "bytes": 291,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/head-commit.request.json",
+      "sha256": "d59fd4a77e7ac756e21e348172dd21f64b6b65f33b92eb285d35c70da635de22"
+    },
+    {
+      "bytes": 318,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/head-runs.request.json",
+      "sha256": "dbcee7a98952e05313235dbb0eaaca7ee65bc6c5d1e5032b8443817b1fa227a0"
+    },
+    {
+      "bytes": 309,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/head-statuses.request.json",
+      "sha256": "e5dabddc3c7f63fd8d55a6a8e6838d6015d92d0421a985d801e5961f57cd4cff"
+    },
+    {
+      "bytes": 271,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/issue-comments.request.json",
+      "sha256": "643d12357734b3bc3ccc52525d062a52e3a4f451c002c6b7d2626c831bc62734"
+    },
+    {
+      "bytes": 323,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/merge-check-runs.request.json",
+      "sha256": "63151bda5a99d9ef42a874f377011f8d167794554e69f953ace4332897366cc3"
+    },
+    {
+      "bytes": 314,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/merge-check-suites.request.json",
+      "sha256": "f91c4c594e545a15f5f3dd1989c9fd45cb4429fbf8385713c8b9cb18471844cc"
+    },
+    {
+      "bytes": 292,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/merge-commit.request.json",
+      "sha256": "af54d4edef82a9ab7ef589d69d77b48fc866351f57b5bd7ebacf0b63750cbc1c"
+    },
+    {
+      "bytes": 315,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/merge-runs.request.json",
+      "sha256": "c10aea39e071547e9f141b837420722d97b284158e0e045432f866fa809c4c25"
+    },
+    {
+      "bytes": 309,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/merge-statuses.request.json",
+      "sha256": "4b99773d8ebb0e0af99d3802b959dec3a43c1f4e50f8ede6c6e888519c0a2197"
+    },
+    {
+      "bytes": 270,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/review-comments.request.json",
+      "sha256": "5cc3d2bd43df9bb8627c2c170618a5297e37bc9f13f0250d9ab606feb1476711"
+    },
+    {
+      "bytes": 269,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/reviews.request.json",
+      "sha256": "ce9790003bc7da7fd8d5554680e0062415a181ae7754a3387e4201b7228d049c"
+    },
+    {
+      "bytes": 282,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/rulesets.request.json",
+      "sha256": "7d5875f2ff8664b132d9a63bb17c697503b2b255a187545b8546df4e9c3251a3"
+    },
+    {
+      "bytes": 295,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129324525-jobs.request.json",
+      "sha256": "8ae063f266886f02aee8a854ea38288a8f8fb4fec85546ce428ad1c46a94e721"
+    },
+    {
+      "bytes": 295,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129325615-jobs.request.json",
+      "sha256": "edb907e2d3680fef96247ea9c468f82b94e806ccbc63594d6632b3ab3fd97b64"
+    },
+    {
+      "bytes": 294,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129325625-jobs.request.json",
+      "sha256": "f1f31d50ae978160ce5d3956d9e0f7e1c0b31faa071f9bb200eea36d834ca2a1"
+    },
+    {
+      "bytes": 296,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129325632-jobs.request.json",
+      "sha256": "3a5915be8aa41a540a0ac71a8ba240243d3bc9333c4c41306fb34345e1b9edae"
+    },
+    {
+      "bytes": 296,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129325637-jobs.request.json",
+      "sha256": "0c0e2bacfd6c8d09f8378ea23463e44c5b5cff59efbd606e02838f2cc5980621"
+    },
+    {
+      "bytes": 296,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129325678-jobs.request.json",
+      "sha256": "03d56138e1ccc0421f0d3f95f10b6ea20e5a1f144a3e21b1415875dc5aa58a69"
+    },
+    {
+      "bytes": 295,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/run-38129325703-jobs.request.json",
+      "sha256": "2d4ee28fe2659cf2d1d436b0f338ad5bab366cef04469581179f6a599f445dd8"
+    },
+    {
+      "bytes": 164,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/threads-page-1.request.json",
+      "sha256": "9f3b90fe524d5af1865e7c9a510e669a05fd4611d7b77fde61a8a3926e0dbf89"
+    },
+    {
+      "bytes": 167,
+      "path": "/workspace/engineering/pr300-current618-CI-admission-review/base-protection.response.private",
+      "sha256": "e2373c984773dfee141aed6665a6497c3d7ae4022e643d1c860ab01b710aa23a"
+    }
+  ],
+  "job_matrix_suite_unique_declaration_bindings": [
+    {
+      "conclusion": null,
+      "declared_not_registered": [],
+      "event": "pull_request",
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "path": ".github/workflows/developer_toolkit.yml",
+      "registered_jobs": [
+        {
+          "check_id": 114440174454,
+          "display_match": "UNIQUE_GITHUB_TRUNCATION_PREFIX",
+          "job_id": 114440174454,
+          "observed_state": {
+            "conclusion": null,
+            "status": "QUEUED"
+          },
+          "source_declaration": {
+            "display_label": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266)",
+            "if": null,
+            "job_key": "toolkit",
+            "matrix": {
+              "asset": "rcc-macosarm64",
+              "lane": "primary",
+              "os": "macos-15",
+              "rcc_version": "18.19.3",
+              "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917247
+        },
+        {
+          "check_id": 114440174555,
+          "display_match": "UNIQUE_GITHUB_TRUNCATION_PREFIX",
+          "job_id": 114440174555,
+          "observed_state": {
+            "conclusion": null,
+            "status": "QUEUED"
+          },
+          "source_declaration": {
+            "display_label": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d)",
+            "if": null,
+            "job_key": "toolkit",
+            "matrix": {
+              "asset": "rcc-macosarm64",
+              "lane": "n-1",
+              "os": "macos-15",
+              "rcc_version": "18.18.1",
+              "sha256": "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917247
+        },
+        {
+          "check_id": 114440174563,
+          "display_match": "UNIQUE_GITHUB_TRUNCATION_PREFIX",
+          "job_id": 114440174563,
+          "observed_state": {
+            "conclusion": null,
+            "status": "IN_PROGRESS"
+          },
+          "source_declaration": {
+            "display_label": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428)",
+            "if": null,
+            "job_key": "toolkit",
+            "matrix": {
+              "asset": "rcc-linux64",
+              "lane": "primary",
+              "os": "ubuntu-22.04",
+              "rcc_version": "18.19.3",
+              "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917247
+        },
+        {
+          "check_id": 114440174598,
+          "display_match": "UNIQUE_GITHUB_TRUNCATION_PREFIX",
+          "job_id": 114440174598,
+          "observed_state": {
+            "conclusion": null,
+            "status": "IN_PROGRESS"
+          },
+          "source_declaration": {
+            "display_label": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf)",
+            "if": null,
+            "job_key": "toolkit",
+            "matrix": {
+              "asset": "rcc-linux64",
+              "lane": "n-1",
+              "os": "ubuntu-22.04",
+              "rcc_version": "18.18.1",
+              "sha256": "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917247
+        },
+        {
+          "check_id": 114440174601,
+          "display_match": "UNIQUE_GITHUB_TRUNCATION_PREFIX",
+          "job_id": 114440174601,
+          "observed_state": {
+            "conclusion": null,
+            "status": "IN_PROGRESS"
+          },
+          "source_declaration": {
+            "display_label": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4)",
+            "if": null,
+            "job_key": "toolkit",
+            "matrix": {
+              "asset": "rcc-windows64.exe",
+              "lane": "primary",
+              "os": "windows-2022",
+              "rcc_version": "18.19.3",
+              "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917247
+        },
+        {
+          "check_id": 114440174633,
+          "display_match": "UNIQUE_GITHUB_TRUNCATION_PREFIX",
+          "job_id": 114440174633,
+          "observed_state": {
+            "conclusion": null,
+            "status": "IN_PROGRESS"
+          },
+          "source_declaration": {
+            "display_label": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b)",
+            "if": null,
+            "job_key": "toolkit",
+            "matrix": {
+              "asset": "rcc-windows64.exe",
+              "lane": "n-1",
+              "os": "windows-2022",
+              "rcc_version": "18.18.1",
+              "sha256": "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917247
+        }
+      ],
+      "run_attempt": 1,
+      "run_id": 38129325637,
+      "status": "QUEUED"
+    },
+    {
+      "conclusion": null,
+      "declared_not_registered": [],
+      "event": "pull_request",
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "path": ".github/workflows/ai-audit.yml",
+      "registered_jobs": [
+        {
+          "check_id": 114440174242,
+          "display_match": "EXACT",
+          "job_id": 114440174242,
+          "observed_state": {
+            "conclusion": null,
+            "status": "QUEUED"
+          },
+          "source_declaration": {
+            "display_label": "audit",
+            "if": null,
+            "job_key": "audit",
+            "matrix": {},
+            "needs": []
+          },
+          "suite_id": 103305917211
+        }
+      ],
+      "run_attempt": 1,
+      "run_id": 38129325625,
+      "status": "QUEUED"
+    },
+    {
+      "conclusion": null,
+      "declared_not_registered": [],
+      "event": "pull_request",
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "registered_jobs": [
+        {
+          "check_id": 114440174314,
+          "display_match": "EXACT",
+          "job_id": 114440174314,
+          "observed_state": {
+            "conclusion": null,
+            "status": "IN_PROGRESS"
+          },
+          "source_declaration": {
+            "display_label": "Build Action Server binary without credentials (windows-2022)",
+            "if": null,
+            "job_key": "build-external",
+            "matrix": {
+              "os": "windows-2022",
+              "python": "3.12"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917230
+        },
+        {
+          "check_id": 114440174430,
+          "display_match": "EXACT",
+          "job_id": 114440174430,
+          "observed_state": {
+            "conclusion": null,
+            "status": "IN_PROGRESS"
+          },
+          "source_declaration": {
+            "display_label": "Build Action Server binary without credentials (ubuntu-22.04)",
+            "if": null,
+            "job_key": "build-external",
+            "matrix": {
+              "os": "ubuntu-22.04",
+              "python": "3.12"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917230
+        },
+        {
+          "check_id": 114440174436,
+          "display_match": "EXACT",
+          "job_id": 114440174436,
+          "observed_state": {
+            "conclusion": null,
+            "status": "QUEUED"
+          },
+          "source_declaration": {
+            "display_label": "Build Action Server binary without credentials (macos-15)",
+            "if": null,
+            "job_key": "build-external",
+            "matrix": {
+              "os": "macos-15",
+              "python": "3.12"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917230
+        }
+      ],
+      "run_attempt": 1,
+      "run_id": 38129325632,
+      "status": "QUEUED"
+    },
+    {
+      "conclusion": null,
+      "declared_not_registered": [
+        {
+          "display_label": "publish (3.12)",
+          "if": null,
+          "job_key": "publish",
+          "matrix": {
+            "python": "3.12"
+          },
+          "needs": [
+            "build-sdist",
+            "build-wheels"
+          ]
+        }
+      ],
+      "event": "pull_request",
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "registered_jobs": [
+        {
+          "check_id": 114440174452,
+          "display_match": "EXACT",
+          "job_id": 114440174452,
+          "observed_state": {
+            "conclusion": null,
+            "status": "IN_PROGRESS"
+          },
+          "source_declaration": {
+            "display_label": "build-wheels (macos-15)",
+            "if": null,
+            "job_key": "build-wheels",
+            "matrix": {
+              "name": "macos",
+              "os": "macos-15",
+              "python": "3.12"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917341
+        },
+        {
+          "check_id": 114440174552,
+          "display_match": "EXACT",
+          "job_id": 114440174552,
+          "observed_state": {
+            "conclusion": "SUCCESS",
+            "status": "COMPLETED"
+          },
+          "source_declaration": {
+            "display_label": "build-sdist (ubuntu-py3.12)",
+            "if": null,
+            "job_key": "build-sdist",
+            "matrix": {
+              "name": "ubuntu-py3.12",
+              "os": "ubuntu-22.04",
+              "python": "3.12"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917341
+        },
+        {
+          "check_id": 114440174594,
+          "display_match": "EXACT",
+          "job_id": 114440174594,
+          "observed_state": {
+            "conclusion": null,
+            "status": "QUEUED"
+          },
+          "source_declaration": {
+            "display_label": "build-wheels (windows-2022)",
+            "if": null,
+            "job_key": "build-wheels",
+            "matrix": {
+              "name": "windows",
+              "os": "windows-2022",
+              "python": "3.12"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917341
+        },
+        {
+          "check_id": 114440174613,
+          "display_match": "EXACT",
+          "job_id": 114440174613,
+          "observed_state": {
+            "conclusion": null,
+            "status": "IN_PROGRESS"
+          },
+          "source_declaration": {
+            "display_label": "build-wheels (ubuntu-22.04)",
+            "if": null,
+            "job_key": "build-wheels",
+            "matrix": {
+              "name": "ubuntu",
+              "os": "ubuntu-22.04",
+              "python": "3.12"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917341
+        }
+      ],
+      "run_attempt": 1,
+      "run_id": 38129325678,
+      "status": "QUEUED"
+    },
+    {
+      "conclusion": null,
+      "declared_not_registered": [],
+      "event": "pull_request",
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "path": ".github/workflows/actions_runtime_tests.yml",
+      "registered_jobs": [
+        {
+          "check_id": 114440174511,
+          "display_match": "EXACT",
+          "job_id": 114440174511,
+          "observed_state": {
+            "conclusion": null,
+            "status": "IN_PROGRESS"
+          },
+          "source_declaration": {
+            "display_label": "build (ubuntu-py3.12-devmode)",
+            "if": null,
+            "job_key": "build",
+            "matrix": {
+              "name": "ubuntu-py3.12-devmode",
+              "os": "ubuntu-22.04",
+              "python": "3.12"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917409
+        },
+        {
+          "check_id": 114440174596,
+          "display_match": "EXACT",
+          "job_id": 114440174596,
+          "observed_state": {
+            "conclusion": null,
+            "status": "QUEUED"
+          },
+          "source_declaration": {
+            "display_label": "build (windows-py3.12-devmode)",
+            "if": null,
+            "job_key": "build",
+            "matrix": {
+              "name": "windows-py3.12-devmode",
+              "os": "windows-2022",
+              "python": "3.12"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917409
+        },
+        {
+          "check_id": 114440174637,
+          "display_match": "EXACT",
+          "job_id": 114440174637,
+          "observed_state": {
+            "conclusion": null,
+            "status": "QUEUED"
+          },
+          "source_declaration": {
+            "display_label": "build (macos-py3.12-devmode)",
+            "if": null,
+            "job_key": "build",
+            "matrix": {
+              "name": "macos-py3.12-devmode",
+              "os": "macos-15",
+              "python": "3.12"
+            },
+            "needs": []
+          },
+          "suite_id": 103305917409
+        }
+      ],
+      "run_attempt": 1,
+      "run_id": 38129325703,
+      "status": "QUEUED"
+    },
+    {
+      "conclusion": null,
+      "declared_not_registered": [],
+      "event": "pull_request",
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "path": ".github/workflows/coverage-gate.yml",
+      "registered_jobs": [
+        {
+          "check_id": 114440174222,
+          "display_match": "EXACT",
+          "job_id": 114440174222,
+          "observed_state": {
+            "conclusion": null,
+            "status": "IN_PROGRESS"
+          },
+          "source_declaration": {
+            "display_label": "coverage",
+            "if": null,
+            "job_key": "coverage",
+            "matrix": {},
+            "needs": []
+          },
+          "suite_id": 103305917196
+        }
+      ],
+      "run_attempt": 1,
+      "run_id": 38129325615,
+      "status": "IN_PROGRESS"
+    },
+    {
+      "conclusion": "SUCCESS",
+      "declared_not_registered": [],
+      "event": "push",
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "registered_jobs": [
+        {
+          "check_id": 114440170754,
+          "display_match": "EXACT",
+          "job_id": 114440170754,
+          "observed_state": {
+            "conclusion": "SUCCESS",
+            "status": "COMPLETED"
+          },
+          "source_declaration": {
+            "display_label": "copilot-setup-steps",
+            "if": null,
+            "job_key": "copilot-setup-steps",
+            "matrix": {},
+            "needs": []
+          },
+          "suite_id": 103305914213
+        }
+      ],
+      "run_attempt": 1,
+      "run_id": 38129324525,
+      "status": "COMPLETED"
+    }
+  ],
+  "mergeStateStatus": "UNSTABLE",
+  "named_refs_bracket": {
+    "base": {
+      "after": "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "before": "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "branch": "integration/community-release-20261008",
+      "stable": true
+    },
+    "head": {
+      "after": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "before": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "branch": "feat/run-output-transport-20261010",
+      "stable": true
+    }
+  },
+  "observation_interval": [
+    "2026-10-11T09:45:28.221891+00:00",
+    "2026-10-11T09:45:33.383613+00:00"
+  ],
+  "one_snapshot_no_status_poll": true,
+  "pending_registered_check_job_ids": [
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917409,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174637,
+      "name": "build (macos-py3.12-devmode)",
+      "status": "QUEUED"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917247,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174633,
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917341,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174613,
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917247,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174601,
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917247,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174598,
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917409,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174596,
+      "name": "build (windows-py3.12-devmode)",
+      "status": "QUEUED"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917341,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174594,
+      "name": "build-wheels (windows-2022)",
+      "status": "QUEUED"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917247,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174563,
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917247,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174555,
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "status": "QUEUED"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917409,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174511,
+      "name": "build (ubuntu-py3.12-devmode)",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917247,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174454,
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "status": "QUEUED"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917341,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174452,
+      "name": "build-wheels (macos-15)",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917230,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174436,
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "status": "QUEUED"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917230,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174430,
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917230,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174314,
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "status": "IN_PROGRESS"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917211,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174242,
+      "name": "audit",
+      "status": "QUEUED"
+    },
+    {
+      "app": "github-actions",
+      "check_suite_id": 103305917196,
+      "conclusion": null,
+      "head_sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "id": 114440174222,
+      "name": "coverage",
+      "status": "IN_PROGRESS"
+    }
+  ],
+  "pending_runs": [
+    {
+      "event": "pull_request",
+      "id": 38129325637,
+      "path": ".github/workflows/developer_toolkit.yml",
+      "status": "QUEUED"
+    },
+    {
+      "event": "pull_request",
+      "id": 38129325625,
+      "path": ".github/workflows/ai-audit.yml",
+      "status": "QUEUED"
+    },
+    {
+      "event": "pull_request",
+      "id": 38129325632,
+      "path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "status": "QUEUED"
+    },
+    {
+      "event": "pull_request",
+      "id": 38129325678,
+      "path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "status": "QUEUED"
+    },
+    {
+      "event": "pull_request",
+      "id": 38129325703,
+      "path": ".github/workflows/actions_runtime_tests.yml",
+      "status": "QUEUED"
+    },
+    {
+      "event": "pull_request",
+      "id": 38129325615,
+      "path": ".github/workflows/coverage-gate.yml",
+      "status": "IN_PROGRESS"
+    }
+  ],
+  "policy": {
+    "branch_protection": "UNKNOWN_HTTP403",
+    "normal_API_policy_enforcement_required": true,
+    "visible_rulesets": 0
+  },
+  "preparatory_interpretation_limits": {
+    "final_v3_e9b7_declares_event_specificPR5_push48": true,
+    "no_original_or_later_execution_relabel": true,
+    "original3584_tag_push_assumption_retained": true,
+    "v2_891015_PRpath_used_for_push_assumption_retained": true
+  },
+  "registered19_jobs_equal_current19_check_ids": true,
+  "registered_check_counts": {
+    "IN_PROGRESS": 10,
+    "QUEUED": 7,
+    "SUCCESS": 2
+  },
+  "remaining_HOLD": [
+    "17 registered pending checks plus declared unregistered Runtimepublisher",
+    "Draft currentPR",
+    "Actual runner checkout UNKNOWN without owned originals",
+    "Protection403 UNKNOWN and normalpolicy enforcement required",
+    "Private/native/provider/backend/active revocation/HEAD/Range/full-issue/platform/release/publication remain unqualified"
+  ],
+  "reviews_and_threads": {
+    "complete_connections": true,
+    "current_head_reviews": 0,
+    "issue_comments": 0,
+    "reviewDecision": null,
+    "review_comments": 0,
+    "review_states": {},
+    "reviews": 0,
+    "threads": 0,
+    "unresolved_threads": 0
+  },
+  "schema": "actions.independent-pr300-current618-complete-paged-snapshot/v1",
+  "six_PR_flows_19_declared_18_materialized": true,
+  "source_and_push_bindings": [
+    {
+      "bytes": 795,
+      "path": "/workspace/engineering/pr300-current618-authenticated-push-successor.json",
+      "sha256": "3aeecbf344ccc4277debf6774866f51dbd45536a2b02dc8f627079a60b00ce61"
+    },
+    {
+      "bytes": 1936,
+      "path": "/workspace/engineering/pr300-current618-verified-source-push.json",
+      "sha256": "b843f206ba96b3782faf617ffbff29021dc18f1c7e1513bf16e3c396e60df488"
+    },
+    {
+      "bytes": 10058,
+      "path": "/workspace/engineering/pr300-actual299-independent-source-review/independent-frozen-actual299-source-review.json",
+      "sha256": "8bd3f1d1cc71d437bb591abe2b550a8d554f7c761f9c54ae40880c3cfa30deee"
+    },
+    {
+      "bytes": 72050,
+      "path": "/workspace/engineering/pr300-actual299-refresh/immutable-actual299-source-checkpoint.json",
+      "sha256": "b16ef794377b8a51a66444efa697401bc41793842ac6b7bf2986085501e967ee"
+    }
+  ],
+  "source_and_synthetic": {
+    "head": {
+      "ordered_parents": [
+        "d4443c49973ddd629838c682111474991e3ea0c2"
+      ],
+      "sha": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "tree": "10e09d88027ca4fea512ff06c57efaab95755ffb"
+    },
+    "merge": {
+      "ordered_parents": [
+        "6181b044c75de35386f1ae30e71725398b6a7feb",
+        "7840057a8b055576d11d339d8c0fbb738927a491"
+      ],
+      "sha": "2076246f60afc4c8fb069b4206699e57e006890b",
+      "tree": "10e09d88027ca4fea512ff06c57efaab95755ffb"
+    }
+  },
+  "source_native_scope": "275 producer260match8changed7added versus historical268;five selected tests separate;old92498UNQUALIFIED",
+  "upstream_disposition": "none",
+  "verdict": "HOLD_CURRENT_PENDING_DRAFT_CHECKOUT_AND_POLICY"
+}

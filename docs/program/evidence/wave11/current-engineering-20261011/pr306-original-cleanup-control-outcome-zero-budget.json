@@ -1,0 +1,40 @@
+{
+  "scenario": "zero-budget",
+  "clock_end": 0.0,
+  "deadline": 0.0,
+  "unused_budget": 0,
+  "child_absent_at": null,
+  "wrapper_reaped": true,
+  "execution_stopped": false,
+  "descendant_reap_complete": false,
+  "live": [
+    200
+  ],
+  "zombies": [],
+  "error_count": 0,
+  "snapshot_complete": true,
+  "actions": [],
+  "trace": [
+    {
+      "event": "snapshot",
+      "time": 0.0
+    },
+    {
+      "event": "psutil_wait",
+      "time": 0.0,
+      "count": 1,
+      "timeout": 0.0
+    },
+    {
+      "event": "psutil_wait",
+      "time": 0.0,
+      "count": 1,
+      "timeout": 0.0
+    },
+    {
+      "event": "Popen_wait",
+      "time": 0.0,
+      "timeout": 0.0
+    }
+  ]
+}

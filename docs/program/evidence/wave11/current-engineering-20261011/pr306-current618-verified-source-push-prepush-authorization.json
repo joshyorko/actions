@@ -1,0 +1,37 @@
+{
+  "pr": 306,
+  "worktree": "/workspace/engineering/pr306",
+  "branch": "fix/database-savepoint-admission-20261010",
+  "base_branch": "integration/community-release-20261008",
+  "target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "head": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+  "tree": "a31db4434c7bbe69bf572626d2174f64f9ff2f39",
+  "ordered_parents": [
+    "662014533d8104c1998bce26d91211140acc08e5",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "existing_remote_before": "662014533d8104c1998bce26d91211140acc08e5",
+  "output": "/workspace/engineering/pr306-current618-verified-source-push.json",
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr306-actual299-refresh/immutable-actual299-source-checkpoint.json",
+      "bytes": 98491,
+      "sha256": "9604f6b94d62648f3efaa2a8223ff7640a8ef1245e60b7281124dc6bde35b7d1"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual299-independent-review/independent-frozen-actual299-source-review.json",
+      "bytes": 9097,
+      "sha256": "acba8473e268c0c34a6c43d36be958bba999af8bf13e849106ca64d09ecc0d92"
+    }
+  ],
+  "source_gates": "1283PASS13SKIP15WARN;Toolkit96;type347;scoped246+PGskip",
+  "before_API": {
+    "head": "662014533d8104c1998bce26d91211140acc08e5",
+    "head_ref": "fix/database-savepoint-admission-20261010",
+    "base": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "base_ref": "integration/community-release-20261008",
+    "draft": true,
+    "state": "open"
+  },
+  "action": "ONE_NORMAL_EXISTING_BRANCH_PUSH"
+}

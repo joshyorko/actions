@@ -1,0 +1,8 @@
+{
+  "expected_RED_gate": "Original frozenv3 accepts independently valid current bytes with archive-only and coordinated staleid/run/job labels",
+  "failed": 6,
+  "passed_valid_baseline": 1,
+  "gateway_exit": 10,
+  "log_sha256": "cef180f2184dc7c7af4de24346b3ad6370e5240d4511c08a14433943aa6aeaf1",
+  "actual_consumer_executed": false
+}

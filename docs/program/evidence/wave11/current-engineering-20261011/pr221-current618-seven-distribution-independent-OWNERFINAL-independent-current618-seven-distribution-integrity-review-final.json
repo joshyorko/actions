@@ -1,0 +1,72 @@
+{
+  "schema": "actions.independent-current618-seven-distribution-ownerfinal-review/v1",
+  "verdict": "GO_COMPLETE_ORIGINAL_DISTRIBUTION_INVENTORY_AND_INTEGRITY_ONLY",
+  "owner_final": {
+    "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/OWNERFINAL-current618-complete-original-distribution-integrity.json",
+    "bytes": 24118,
+    "sha256": "75757b7de4162b6e8afd739fd983b99325cd18ea2a368a279d4f233197c4314a"
+  },
+  "independent_data_proof": {
+    "path": "/workspace/engineering/pr221-current618-complete-distribution-independent-review/independent-complete-original-distribution-data-proof.json",
+    "bytes": 19264,
+    "sha256": "3977c6de160169f664e4a4ca8810e47d750bfe14bbbe5c95a397f006080c8ec7"
+  },
+  "subject": {
+    "actual_source": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "actual_tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+    "original_synthetic_producer": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+    "producer_ordered_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "6181b044c75de35386f1ae30e71725398b6a7feb"
+    ],
+    "run": 38126987514,
+    "new_artifact_IDs": [
+      11698787320,
+      11698838081
+    ],
+    "new_Mac_log_job": 114433293230
+  },
+  "verified": {
+    "new17_prior217_binding_SHA_sizes": true,
+    "six_wheels_plus_sdist": true,
+    "aggregate8_members_seven_exact_original_distributions_plus939B7row_manifest": true,
+    "all_CRC_and_wheel_RECORD220hash221file_source_metadata_deps_tags_entrypoints": true,
+    "Mac_Linux_all215_tracked_source_bodies_and_fullrecorded_modes": true,
+    "sdist_all215_tracked_source_bodies_and_modes": true,
+    "four_original_decoded_builder_logs_e766_not_relabeled_actual618": true,
+    "original_v4_90a_wheel_and798f_manifest_retained": true,
+    "wheel_empty_directory_entries_separate_from221_RECORD_regular_files": true,
+    "original_6f29_gateway_failure_beforeworker_install_original_bindings_unchanged": true
+  },
+  "findings": [],
+  "holds": [
+    "Allsix wheels/sdist OAuth two fixed entries empty; approved source/content authority HOLD",
+    "Windows173Python+5othertextCRLF and1additionalstatic/13decodedCR differences; semantic equivalence NOT_ESTABLISHED, historical causation UNKNOWN, Unix mode unavailable",
+    "Current installed-platform consumers/native/browser/provider/private/backend/registry/tag/fullrelease acceptance remain separate; failed Linux gateway-before-worker/install and v5 preparation do not constitute actual PASS"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_delta_disposition": "Accept verified existing9744 policy/snapshot, bf95 partialplatform/syntheticidentity, and1306 generatedstatic/completecheckout lessons verbatim in owning guide; no cosmetic addition",
+    "Durable_learning_captured": "Complete seven distribution/aggregate integrity is distinct from source-body identity, generated-input authority and actual platform consumer qualification; eighth manifest typed separately; syntheticproducer remains distinct from equal-tree actual integration",
+    "Evidence": "Allseven originalplatform distribution bytes equal aggregate, manifest exactsourcepublisherAST format, sixRECORD/metadata/tags/deps, all215Mac/Linux/sdistGitbodies+modes; Windows rawdifferences andemptyOAuth measured separately; fouroriginalcheckout logs; separate empty directory headers from221RECORDregularfiles, all original storage0600 and6f29 original preworker gatewayFAIL retained",
+    "Stale_or_ambiguous_guidance_removed": "Seven distributions are not eight outermembers or seven consumers; CR-removal diagnostic comparison is not semantics/source waiver; LF module writing does not normalize embedded assets",
+    "Remaining_uncertainty": "Windows historicalcause/semantics, Unixmodeunavailable, approved generatedOAuth source/content, actualcurrentinstalledconsumers and private/native/releasegraph",
+    "Accepted_existing_exact_integrity_directory_paragraph": {
+      "path": "/workspace/engineering/pr221-current618-complete-distribution-independent-review/canonical-existing-wheel-integrity-and-directory-scope.md",
+      "bytes": 1085,
+      "sha256": "7295dd44387b31b042a6af2b479b587a47596ee94ad74decf23f10b65a162df9"
+    }
+  },
+  "upstream_disposition": "none",
+  "prior_immutable_independent_review": {
+    "path": "/workspace/engineering/pr221-current618-complete-distribution-independent-review/OWNERFINAL-independent-current618-seven-distribution-integrity-review.json",
+    "bytes": 3692,
+    "sha256": "2c73bb8819db504a1511d6c24da8f085b541ee1c2cd06909fefa6da2c012f961"
+  },
+  "additional_safe_proof": {
+    "path": "/workspace/engineering/pr221-current618-complete-distribution-independent-review/independent-directory-storage-and-original-consumer-failure-preservation-addendum.json",
+    "bytes": 3948,
+    "sha256": "3fd0774a6d444d29342fc3e267e161be7a46f4da53d26b1e78010bd339462d38"
+  },
+  "reviewer_inspector_disposition": "Owned data reader initially assumed every central-directory member was a regular payload and decoded static constants were text only; corrected to retain zero-byte directory headers separately and inspect byte constants as data. No product/artifact failure reclassification or consumer execution."
+}

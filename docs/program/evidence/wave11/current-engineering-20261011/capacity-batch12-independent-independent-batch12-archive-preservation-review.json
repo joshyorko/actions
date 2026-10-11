@@ -1,0 +1,75 @@
+{
+  "verdict": "GO_SCOPED_PRIVATE_ARCHIVE_DATA_AND_RECORDED_MEMBER_METADATA_PRESERVATION; NOT_ACCEPTANCE_OR_BACKUP_OF_UNRECORDED_METADATA",
+  "summary": {
+    "path": "/workspace/engineering/capacity-recovery-batch12-independent-review/independent-safe-batch12-summary.json",
+    "bytes": 1978,
+    "sha256": "2ae5c2b9c00675575f6be351e693b86d9b32919aef957c923779fa118f4927b4"
+  },
+  "private_inventory": {
+    "path": "/tmp/actions-completed-scratch-recovery-batch12/private-complete-inventory-and-recovery.json",
+    "bytes": 12536775,
+    "sha256": "bbad1c5f8e3485614dbb54ca092256c6ca84020eafa35cc9816a30dd1f039565"
+  },
+  "private_inventory_mode": "0600",
+  "archives_parent_mode": "0700",
+  "two_archives": [
+    {
+      "archive_ordinal": 1,
+      "archive_bytes": 250496578,
+      "archive_sha256": "898f4e4c12428ef9001adda0974b90c0413e7fca24bb4994e74f866a48117c44",
+      "root_directory_header": 1,
+      "members_verified": 14933,
+      "kinds": {
+        "file": 11629,
+        "directory": 2875,
+        "symlink": 422,
+        "fifo": 7,
+        "hardlink_headers": 3
+      },
+      "resolved_internal_hardlink_data_verified": 3,
+      "logical_regular_file_bytes_verified": 590873022,
+      "completed_recycle_marker_verified": true,
+      "expanded_namespace_absent": true
+    },
+    {
+      "archive_ordinal": 2,
+      "archive_bytes": 249696725,
+      "archive_sha256": "00dfd52d2d80bafabb448e4f413805fce2d446d4948403174d6c2d20e64856ab",
+      "root_directory_header": 1,
+      "members_verified": 15206,
+      "kinds": {
+        "file": 11719,
+        "directory": 3008,
+        "symlink": 471,
+        "fifo": 8,
+        "hardlink_headers": 4
+      },
+      "resolved_internal_hardlink_data_verified": 4,
+      "logical_regular_file_bytes_verified": 610221781,
+      "completed_recycle_marker_verified": true,
+      "expanded_namespace_absent": true
+    }
+  ],
+  "all_inventory_member_names_exact_unique": true,
+  "regular_and_hardlink_bytes_size_SHA256_exact": true,
+  "member_mode_uid_gid_exact": true,
+  "symlink_targets_exact_without_dereferencing": true,
+  "internal_hardlink_targets_bounded_to_same_archive_and_payloads_exact": true,
+  "completed_recycle_now_true_markers_verified": true,
+  "existing_two_expanded_namespaces_absent": true,
+  "source_recovery_script": {
+    "path": "/tmp/actions-capacity-recovery-batch12.py",
+    "bytes": 5258,
+    "sha256": "0b5422e248e5b36ae492fce37fb1f5f37d1f2c631a6a7732c74d0043622d456a"
+  },
+  "historical_ordering": "Existing script verifies archive, rechecks full inventory and live handles, then writes retained inventory and removes only exact completed namespace; Independent review does not rerun script or reconstruct historical live fd observation.",
+  "limitations": [
+    "Expanded originals intentionally removed; original byte identity is independently checked against retained pre-removal complete inventory and archive summary, not surviving expanded files.",
+    "Inventory does not record original inode equivalence, root-directory metadata, ACL/xattrs or full nanosecond archive mtime roundtrip; independent GO covers all named member bytes/modes/uidgid/symlink targets and archived internal-hardlink data, not unspecified metadata.",
+    "Prior no-live-fd/cwd precondition and untouched-other-path claims are supported by recorded scope/script, not a retroactive independent full filesystem/process census.",
+    "No private archive contents/member names or complete private inventory admitted to Git or tool output; only safe ordinal aggregate fields and hashes.",
+    "Source/native/consumer/cache/venv unchanged historical assertion not a fresh hash of concurrently mutating source writers. Failed ENOSPC gates remain failed; new bounded gate replay required."
+  ],
+  "review_seconds": 7.468,
+  "upstream": "none"
+}

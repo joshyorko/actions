@@ -1,0 +1,12 @@
+{
+  "status": "FAIL_BEFORE_OWNERFINAL_ONLY_DOC_PRESENCE_ASSERT",
+  "constructor": {
+    "path": "/workspace/engineering/pr300-pr309-current618-full-live-successor-02/freeze-one-complete-current-CI-census.py",
+    "bytes": 16251,
+    "sha256": "91e21c64846a6fd9021b789e0152db95cd92be99cbac7d4a57ba7c8dc5a0f50a"
+  },
+  "failure": "Exact50ad proposal accepted but not verbatim in current owningrootguide; initial assertion requiredall3 proposals verbatim. Current592/b774 blocks present.",
+  "side_effects": "Two original perPR current event-inventory proof files retained; no sourceapplication changes or extraAPI sample.",
+  "metadata_verification_completed": "Both exactheads/source/synthetic trees/currentchecks/jobs/reviews/threads/closure/policy validated before docs assertion.",
+  "named_successor": "v2 labels50ad verifiedaccepted proposal pendingrootintegration and creates distinctlynamed eventinventories, preserving everyoriginal"
+}

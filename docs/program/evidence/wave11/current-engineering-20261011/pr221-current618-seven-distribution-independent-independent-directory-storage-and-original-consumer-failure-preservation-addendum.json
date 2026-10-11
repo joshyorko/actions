@@ -1,0 +1,96 @@
+{
+  "wheel_central_directory_counts": [
+    {
+      "platform": "Linux",
+      "ABI": "cp312",
+      "central_directory_entries": 248,
+      "regular_files": 221,
+      "empty_directory_entries": 27,
+      "directory_entries_outside_RECORD_file_set": true
+    },
+    {
+      "platform": "Linux",
+      "ABI": "cp313",
+      "central_directory_entries": 248,
+      "regular_files": 221,
+      "empty_directory_entries": 27,
+      "directory_entries_outside_RECORD_file_set": true
+    },
+    {
+      "platform": "Windows",
+      "ABI": "cp312",
+      "central_directory_entries": 221,
+      "regular_files": 221,
+      "empty_directory_entries": 0,
+      "directory_entries_outside_RECORD_file_set": true
+    },
+    {
+      "platform": "Windows",
+      "ABI": "cp313",
+      "central_directory_entries": 221,
+      "regular_files": 221,
+      "empty_directory_entries": 0,
+      "directory_entries_outside_RECORD_file_set": true
+    },
+    {
+      "platform": "macOS",
+      "ABI": "cp312",
+      "central_directory_entries": 248,
+      "regular_files": 221,
+      "empty_directory_entries": 27,
+      "directory_entries_outside_RECORD_file_set": true
+    },
+    {
+      "platform": "macOS",
+      "ABI": "cp313",
+      "central_directory_entries": 248,
+      "regular_files": 221,
+      "empty_directory_entries": 27,
+      "directory_entries_outside_RECORD_file_set": true
+    }
+  ],
+  "all_five_original_ZIP_six_wheel_and_sdist_storage0600": true,
+  "original_failed_current_Linux_gateway": {
+    "frozen_owner": {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/OWNERFINAL-original-current618-consumer-gateway-failure.json",
+      "bytes": 2740,
+      "sha256": "6f29ccd4b905b0036e6347aac23c12bda82cb6a719a1e7da0008eec951c0e773"
+    },
+    "proposal": {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/immutable-current618-linux-consumer-preexecution-proposal-v4.json",
+      "bytes": 39398,
+      "sha256": "da926a733e60108fd2943add0a60a0bf6d365afbb1d489bf986a0624ecda65c0"
+    },
+    "authorization": {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/root-one-actual-current618-execution-authorization.json",
+      "bytes": 302051,
+      "sha256": "81ea8a77d1680456739a98d9ead5ce7d9a063b4e3c93f797f00dce0548d4caae"
+    },
+    "original_log": {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/original-one-actual-current618-gateway.log",
+      "bytes": 5663,
+      "sha256": "b45d0cdaf59ef8ae84a0b8e30ed2588a2153cd5a2d98740c64b54e90c8b093be"
+    },
+    "gateway_exit": {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/original-one-actual-current618-gateway-exit.json",
+      "bytes": 608,
+      "sha256": "20c520d0600df6a7b99f5747cf844ab7cddfc513c2f3475df312365b2d217ebd"
+    },
+    "post_harness": {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/root-current618-consumer-postexecution-harness-readback.json",
+      "bytes": 293642,
+      "sha256": "eea64ec447a4cffeb5365ad27bea652e05cac0838cc2b7c6159754a78e69537f"
+    },
+    "observed_exit": 10,
+    "failure_point_scope": "Before worker/install per frozen original owner; this review retains original failure and does not run or upgrade a successor",
+    "no_automatic_retry": true,
+    "cleanup_scope": "No worker cleanup receipt inferred from preworker failure"
+  },
+  "canonical_existing_exact_integrity_and_directory_excerpt": {
+    "path": "/workspace/engineering/pr221-current618-complete-distribution-independent-review/canonical-existing-wheel-integrity-and-directory-scope.md",
+    "bytes": 1085,
+    "sha256": "7295dd44387b31b042a6af2b479b587a47596ee94ad74decf23f10b65a162df9"
+  },
+  "scope": "Data-only addendum; no current consumer actual rerun, v5 execution qualification, metadata poll, download, package import/install/build or source operation",
+  "upstream_disposition": "none"
+}

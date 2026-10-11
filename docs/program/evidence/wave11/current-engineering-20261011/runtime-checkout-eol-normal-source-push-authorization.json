@@ -1,0 +1,22 @@
+{
+  "status": "ROOT_ONE_NORMAL_NEW_SOURCE_BRANCH_PUSH_AUTHORIZED",
+  "head": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+  "tree": "8c7362e63c85a930ca2fe962ede9bc3ebb6ffe68",
+  "sole_parent": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "branch": "fix/runtime-checkout-eol-20261011",
+  "base_branch": "integration/community-release-20261008",
+  "owner": {
+    "path": "/workspace/engineering/runtime-checkout-eol-source/OWNERFINAL-runtime-checkout-eol-SOURCEFINAL.json",
+    "bytes": 22316,
+    "sha256": "b0d51fbc7fb87c88fc0f65af090634cc44c7cfb311e00de7b56472160b074189"
+  },
+  "independent_source_GO": {
+    "path": "/workspace/engineering/runtime-checkout-eol-independent-final-source-review/OWNERFINAL-independent-runtime-checkout-eol-source-review.json",
+    "bytes": 8416,
+    "sha256": "a64c6b1c05aa93613c18578cdae0a9dd29722b674df1aec2824ad850741f13d7"
+  },
+  "all1421_source_bytes_and_executable_modes_reverified": true,
+  "new_remote_branch_absent_before_push": true,
+  "force_or_retry": false,
+  "remaining_gates": "Draft PR/current hosted Windows and complete CI, source/content authority, OAuth, consumer/native/private/provider and release remain separate"
+}

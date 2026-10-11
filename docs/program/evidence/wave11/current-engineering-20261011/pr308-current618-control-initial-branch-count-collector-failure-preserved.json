@@ -1,0 +1,22 @@
+{
+  "collector_schema": "initial inherited count predicate",
+  "expected": {
+    "failed": 1,
+    "passed": 4
+  },
+  "actual": {
+    "failed": 2,
+    "passed": 3
+  },
+  "failure": "AssertionError at expected1failed4passed regex predicate",
+  "readback_source": "PTY session49122 terminalexit1 reported AssertionError; terminal text not saved as original shell logfile",
+  "raw_RED_log": {
+    "path": "/workspace/engineering/pr308-actual299-control-refresh/branch-RED.log",
+    "bytes": 8008,
+    "sha256": "a1dd37d81a1950a76f2aebcaf38012ca14c1841745a1935be45c46f9bda9555a"
+  },
+  "original_log_unchanged": true,
+  "restoration_in_finally_before_GREEN": true,
+  "GREEN_launch_preceded_collector_failure_readback": true,
+  "no_reexecution_or_relabel": true
+}

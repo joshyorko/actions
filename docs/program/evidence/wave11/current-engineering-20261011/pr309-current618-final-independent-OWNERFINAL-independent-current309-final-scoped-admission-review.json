@@ -1,0 +1,248 @@
+{
+  "verdict": "GO_SCOPED_NORMAL_MERGE_ADMISSION_SUBJECT_TO_ROOT_FINAL_REFERENCE_READY_AND_POLICY_ENFORCEMENT",
+  "PR": 309,
+  "source": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea",
+  "source_tree": "1181b35b11e4904405ca1a9a3a398e6c1c3abfd0",
+  "target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "original_executed_synthetic": "012cd8fd70cecbf53e236ca35ede0ffcb35297b5",
+  "ordered_tested_parents": [
+    "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "83123ff42c21587e3eb944e20af89f1a9e9ff0ea"
+  ],
+  "complete_typed_tree_leaves": 1421,
+  "owner": {
+    "path": "/workspace/engineering/pr309-current618-original-Windows-owned/OWNERFINAL-original-current309-Windows-qualified-scoped-admission.json",
+    "bytes": 88078,
+    "sha256": "265ae78cc8060762a5a030e6cfe1fdc95236292c200eecfc2fa13a53ee65ac93"
+  },
+  "complete_metadata_owner": {
+    "path": "/workspace/engineering/pr300-pr309-current618-full-live-successor-02/OWNERFINAL-one-current300-309-complete-CI-census-metadata-successor-v3.json",
+    "bytes": 268509,
+    "sha256": "8a46b48dd3baaf64dc5051f96090b59d930a83d39ea768ed0a585657847b9051"
+  },
+  "source_owner": {
+    "bytes": 19843,
+    "path": "/workspace/engineering/pr309-actual618-refresh/frozen-source-receipt.json",
+    "sha256": "e00bf1644c432c14da0b71fe79ffe58373cc1df3325163127cca780bd2120d01"
+  },
+  "independent_source_GO": {
+    "bytes": 6938,
+    "path": "/workspace/engineering/pr309-actual618-independent-review/independent-frozen-current618-source-review.json",
+    "sha256": "1f0537ee03da972e181e39868ad47a28feac48aba8dee08b5448e4211feed005"
+  },
+  "unique_binding_files_rehashed": 334,
+  "complete_current_CI": {
+    "declared_PR_workflows": 6,
+    "declared_PR_jobs": 19,
+    "auxiliary_PUSH_jobs": 0,
+    "materialized_checks": 19,
+    "materialized_jobs": 19,
+    "all_completed_success": true,
+    "late_publisher_id": 114444748187,
+    "registry_publication_qualified": false,
+    "jobs": [
+      {
+        "id": 114438874534,
+        "name": "build-wheels (ubuntu-22.04)",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874652,
+        "name": "build-sdist (ubuntu-py3.12)",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874695,
+        "name": "build-wheels (macos-15)",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874702,
+        "name": "build-wheels (windows-2022)",
+        "conclusion": "success"
+      },
+      {
+        "id": 114444748187,
+        "name": "publish (3.12)",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874485,
+        "name": "build (macos-py3.12-devmode)",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874596,
+        "name": "build (windows-py3.12-devmode)",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874669,
+        "name": "build (ubuntu-py3.12-devmode)",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874410,
+        "name": "coverage",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874735,
+        "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874869,
+        "name": "Build Action Server binary without credentials (windows-2022)",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874908,
+        "name": "Build Action Server binary without credentials (macos-15)",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874592,
+        "name": "audit",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874644,
+        "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874783,
+        "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874799,
+        "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874812,
+        "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874836,
+        "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+        "conclusion": "success"
+      },
+      {
+        "id": 114438874935,
+        "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "original_Windows_runtime": {
+    "run": 38128878509,
+    "job": 114438874596,
+    "decoded_original_log": {
+      "bytes": 628710,
+      "path": "/workspace/engineering/pr309-current618-original-Windows-owned/original-decoded-job-log.private.txt",
+      "sha256": "70af99b600c5e02c685467fe4c377a6e305a3cdb18b4be21d2fd8120b3e4d3d8"
+    },
+    "checkout_line": 113,
+    "source_phase": {
+      "PASS": 1166,
+      "SKIP": 142,
+      "duration_seconds": 318.52,
+      "deselected": "UNREPORTED"
+    },
+    "integration_phase": {
+      "PASS": 131,
+      "SKIP": 19,
+      "DESELECT": 1311,
+      "duration_seconds": 1560.04
+    },
+    "all150_unique_nodes_reconciled": true,
+    "focused_nodes": [
+      {
+        "line": 4477,
+        "node": "action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+        "status": "PASSED"
+      },
+      {
+        "line": 4478,
+        "node": "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+        "status": "PASSED"
+      },
+      {
+        "line": 4479,
+        "node": "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+        "status": "PASSED"
+      },
+      {
+        "line": 4480,
+        "node": "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]",
+        "status": "PASSED"
+      },
+      {
+        "line": 4481,
+        "node": "action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart",
+        "status": "PASSED"
+      },
+      {
+        "line": 4492,
+        "node": "action_server_tests/test_database_shared.py::test_postgresql_run_output_archive_collision_preserves_data_and_retries[stdout]",
+        "status": "SKIPPED"
+      },
+      {
+        "line": 4493,
+        "node": "action_server_tests/test_database_shared.py::test_postgresql_run_output_archive_collision_preserves_data_and_retries[stderr]",
+        "status": "SKIPPED"
+      }
+    ],
+    "cleanup": "UNKNOWN_NOT_INFERRED_FROM_PASS"
+  },
+  "policy": {
+    "applicable_branch_rules": 0,
+    "named_branch_protected": false,
+    "normal_API_enforcement_required_no_bypass": true,
+    "traditional_protection": "UNKNOWN_HTTP403",
+    "visible_rulesets": 0
+  },
+  "reviews_threads_closures": {
+    "all_graphQL_connection_and_nested_pages_complete": true,
+    "closures": 0,
+    "requested_reviewers": 0,
+    "requested_teams": 0,
+    "reviews": 0,
+    "unresolved_threads": 0
+  },
+  "draft_at_frozen_census": true,
+  "root_required_final_actions": [
+    "Fresh expected831 source/current618 named target bracket and current terminal checks remain unchanged",
+    "Normal ready transition and readback",
+    "Normal expected-head merge API with repository policy enforcement; no bypass despite protection403UNKNOWN"
+  ],
+  "scope_limits": [
+    "Only current source fixture73 auth matrix and unchanged census/source scope; whole152/196/Workspace identity/backend not admitted",
+    "PostgreSQL collision twoSKIP retained; healthyPG not admitted",
+    "Current native producer differs92498; no native asset/private/ChatGPT/publication/release/issueclosure acceptance",
+    "Original successful309 readiness does not fix different300 failure or older306 failures"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact accepted592 event-specific filters+b774 joined pytest census+50ad original checkout identity paragraphs verified already integrated",
+    "Exact_documentation_delta": "Reuse verified existing paragraphs;50ad original checkout identity five-line addition bound by exact root application receipt, no cosmetic duplicate",
+    "Exact_root_application": {
+      "path": "/workspace/engineering/canonical-original-runner-checkout-exact-context-application.json",
+      "bytes": 840,
+      "sha256": "b8c47ded156c0f638e1501dddb3a3e87437d0b342a71373ddbaff4c8c38d4da0"
+    },
+    "Durable_learning_captured": "Derive current job inventory from exact PR event paths and declared needs; bind original logged checkout separately; reconcile all joined pytest node tokens with terminal census.",
+    "Evidence": "Six eligible PR workflows19 jobs from exact831 YAML and actual job/checkIDs; publisher114444748187 success; original log113/API012cd8/full1421 typed tree equality; all150 node results match original terminal131PASS19SKIP.",
+    "Stale_or_ambiguous_guidance_removed": "No auxiliary Copilot forced from unrelated PUSH; no content-wrapper-as-log or later merge-ref relabel; no pending-at-capture documentation rewritten as priorGO.",
+    "Remaining_uncertainty": "Root final live ready/ref/check bracket and normal HTTP403-unknown policy enforcement required; broad issues/cleanup/native/private/release remain separate."
+  },
+  "Upstream_disposition": "none",
+  "review_script": {
+    "path": "/workspace/engineering/pr309-current618-independent-final-admission-review/verify_readonly.py",
+    "bytes": 12043,
+    "sha256": "ffb7d8b178c0abc3c746d2aa3a359caf2d4338965b06ca07167bd1476a97d811"
+  }
+}

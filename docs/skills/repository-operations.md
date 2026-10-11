@@ -1738,6 +1738,14 @@ configuration in the workflow's RCC holotree cache hash so dependency changes in
 the matching runner cache. `Typecheck` runs only package-declared typecheck gates; `devutils` has no such gate
 and is not assigned an invented strict-Mypy contract.
 
+Verified reuse of package environments does not populate a new checkout's
+ignored Runtime RCC fixture asset. Before tests, bind `get_default_rcc_location()`
+to the package pin and verify the owned binary's digest and mode. A matching
+already prepared Bootstrap output can be copied with its source and byte identity
+retained; this is reuse, not a new Bootstrap run or binary build. Do not bypass
+the fixture, download a substitute, or borrow unrelated generated inputs to
+clear a missing-asset failure.
+
 The portable Action Server source-tree test gate is its declared `test-not-integration`
 Invoke task. Binary-only, credentialed cloud, and frontend-build integration tests
 remain in their dedicated package gates; the RCC `Test` task must not fold them into the
@@ -1963,6 +1971,12 @@ Every dispatch includes the mandatory documentation receipt from root `AGENTS.md
 
 Final reports list exact commands and outcomes, external/service tests skipped, environments not exercised, documentation improvements, and remaining uncertainty. “Tests pass” without fresh output is not evidence.
 
+Runtime’s configured `invoke test-not-integration` uses pytest `-n auto`.
+For a bounded worker count, set `PYTEST_XDIST_AUTO_NUM_WORKERS` to the reviewed
+count in the owned launcher before sequential package commands. An explicit
+`-n 2` on the devutils command does not bound the later Runtime command; bind
+the worker setting and outer timeout before execution.
+
 ## RCC Environment Artifact execution
 
 Managed spec-v2 Action packages use the provisional RCC runtime adapter only
@@ -1996,6 +2010,18 @@ remains false after a failed refresh if the wrapper has exited; only a
 successful refresh while that owner is observable can restore it. An
 unexpected exit before controlled retirement starts keeps its distinct
 `crash_unverified` classification across retries until the reader is joined.
+
+A captured-tree cleanup can report an observed live child before its shared
+deadline is exhausted. A deterministic control of the original function
+returned after 0.41 seconds following two 0.2-second descendant waits and a
+quick wrapper reap, while a captured child was modeled absent at 0.75 seconds
+within the unchanged 18-second tree budget. Keep the reported incomplete
+result false; wrapper reaping does not establish descendant completion.
+This control establishes an early-return case, not the cause of a hosted
+timeout whose surviving identity and remaining cleanup budget were not
+recorded. Any improvement must retain the same deadline and exclusive
+Popen wrapper wait ownership, with live, zombie and observation-error
+states kept distinct.
 
 The bounded process-tree result distinguishes wrapper reaping, observed live
 descendants, and zombie descendants. A zombie is reported and makes
@@ -2312,6 +2338,12 @@ the adapter rejected the acquisition; the manifest was restored afterward.
 Resolve both the local `origin` repository and any `upstream` repository before listing pull requests. Compare open PR head/base branches and changed-file intersections against the intended local base; do not classify a PR as superseded from its title or a different repository's PR list alone.
 
 For hosted pull-request validation, record the actual checkout SHA from the workflow log and, for `refs/pull/<number>/merge`, its two parents and tree. The PR head SHA alone does not identify the tested candidate. When the target base advances, generate the synthetic merge for that base and compare its tree with the tested tree before carrying results forward. A raw diff between divergent PR and base tips can misstate which workflow steps survive; inspect the actual three-way merge result and the executed workflow. A combined rollup must pass its focused, full, static, and hosted gates on its exact candidate tree before it replaces separate green PRs.
+
+A current PR merge ref can differ from the synthetic checkout recorded by an
+earlier job. Bind a failure to the checkout in its original job log, then verify
+that immutable commit's ordered parents and complete tree. Keep a later merge
+ref as a separate metadata observation even when those parents and trees match;
+matching content does not change the checkout identity of the executed job.
 
 In a dated checkpoint, list current open PR heads separately from merged integration commits. Do not label a merged PR head as open/current, and bind every check summary to its observed head and cutoff; queued or in-progress checks remain pending.
 
@@ -2895,6 +2927,12 @@ account for unquoted `on` becoming the boolean key `True`; quoted `'on'` remains
 a string. Normalize that root trigger key before evaluating event, branch and
 path filters. Otherwise a workflow inventory can silently omit required jobs.
 
+Evaluate workflow path filters against the event's own changed-file set: a PR
+uses its base/head comparison, while a named branch push uses the authenticated
+before/after update. A merged target can trigger a push-only Copilot path filter
+even when that workflow is excluded from the PR set. Tag-only push filters do
+not admit a branch update; keep these namespaces and auxiliary jobs separate.
+
 Derive the expected CI job set from the exact workflow revision, branch/path
 filters, matrices, job conditions and dependencies. A dependent job can appear
 only after its `needs` finish; an early check count is not final. Exhausting a
@@ -2916,6 +2954,12 @@ different run's previous-mark sequence. Host return codes, stopped host readers
 and a cancelled sampler do not expose actual cleanup snapshot, reap, live,
 zombie or error predicates. Leave them unknown until the owned call's measured
 result is retained separately.
+
+Verbose pytest output can join a long node name directly to `SKIPPED`
+without a separating space. Strip terminal formatting, separate the result
+token from the node, and reconcile each phase's individual outcomes with
+its collection and terminal summary. A whitespace-only parser can omit a
+reported skip; that formatting gap is not a missing test or a passing gate.
 
 Keep the complete terminal failure census separate from this two-node observer
 coverage and from reached semantic assertions. Active owned RCC CPU/I/O at the
@@ -3228,6 +3272,22 @@ integration head before that source union is actually admitted. Archive review
 does not establish registry publication, installed-consumer behavior or native
 acceptance.
 
+When qualifying generated Runtime frontend content, decode `_static_contents.py`
+as data and bind each asset's bytes to its builder checkout. The encoder reads
+`dist/index.html` as bytes and writes their representation; setting the generated
+module's newline to LF does not normalize the embedded asset. Keep outer module
+CRLF differences, decoded asset CR differences and semantic equivalence separate.
+A carriage-return-removal comparison is diagnostic evidence, not a source or
+content waiver. If the original frontend input and effective checkout newline
+setting were not retained, keep checkout-versus-compiler causation unknown.
+
+Include tracked non-Python package text in checkout-byte qualification. A
+Python-only rule leaves packaged README, HTML, YAML and other text differences
+unresolved; keep binary archives and intentional platform-specific line-ending
+fixtures outside any proposed text rule. A checkout-byte fix must also appear
+in affected builder and test workflow path filters. A passing census that
+excluded those workflows does not qualify its distribution bytes.
+
 A platform artifact containing only Linux wheels does not satisfy the
 seven-artifact release inventory. A selected cp312 consumer has a distinct
 nonpublishing scope; retain its original ZIP, wheel, `METADATA`, `RECORD` and
@@ -3237,6 +3297,20 @@ payload bytes with the build's synthetic tree. Tree equality does not turn that
 earlier synthetic checkout into an actual integration build. Derive the Python
 member count from the new wheel bytes even when it equals an earlier count,
 and retain generated-input authority and content holds separately.
+
+Archive size and digest authenticate bytes, not artifact, run or job labels.
+Before an installed-consumer probe, bind those labels to an independently
+frozen artifact qualification as well as to the producer tuple. Comparing two
+label copies in the same input manifest is insufficient: changing both copies
+while retaining the correct archive bytes must still fail before installation.
+
+Before a retained-wheel consumer, admit the actual selector directory contract.
+A fixed wheel digest does not prove that its parent has exactly one matching
+candidate. Preserve mixed-platform acquisitions; isolate exact selected platform
+originals in private storage and bind their hashes. Use the real selector to
+reject an additional matching foreign-platform wheel rather than weakening it.
+A refusal before attempt or worker creation supplies no installed-consumer or
+cleanup result.
 
 The private Run output resolver locks its Workspace, checks the actor's grant
 and acquires the provider reader within one transaction, then yields the reader

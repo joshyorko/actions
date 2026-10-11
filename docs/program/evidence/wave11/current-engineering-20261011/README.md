@@ -456,3 +456,69 @@ three reviewed RCC control branches, and the distinct Linux consumer/release sco
 Evidence is the exact source/review patches and original receipts in the manifest.
 No issue is closed and no Runtime release or infrastructure change is authorized
 by this checkpoint. Upstream disposition: none.
+
+Current checkpoint after #309 integration: 1,180 original safe JSON and patch
+payloads, including all 644 previous originals unchanged and 536 new originals.
+Actual integration is `a0d258a16095b95b1bf9000cb1201cddfaff4779`, tree
+`1181b35b11e4904405ca1a9a3a398e6c1c3abfd0`, ordered parents6181/83123.
+#292, #290, #311, #310, #302 and #299 retain their accepted scoped integrations.
+#309 final independent admission8d834b13 binds all19 successful declared jobs,
+the original Windows checkout012cd8 and its131 passes/19skips, and all1,421 typed
+tree entries. Root actualcc144793 and independent actual787ed17e verify the normal
+integration. The original tested Git object is unavailable locally; original
+authenticated API trees and the runner log bind that identity separately.
+
+#3007840057a, #305519a0beb, #306fada8e06, #282e736f846 and #308 sourcec10380a4/
+controld5a3d2f5 retain independently reviewed source checkpoints against6181.
+Their earlier CI cannot qualify a0d. Original #300 Windows has130 integration
+passes/19skips/one FIRST readiness timeout; its eight-member observer evidence
+shows active RCC CPU and IO, with causal phase and owned cleanup unknown. A worker
+metadata response exposed one temporary signed download URL; that raw response
+remains private and is excluded here. Original #306 Windows has126 integration
+passes/19skips/five FIRST readiness timeouts. Its seven-member diagnostic shows
+one surviving captured child after wrapper reap; survivor PID and readiness cause
+are unreported. Independent reviews64c820fd and18eee82e preserve those limits.
+No deadline increase, automatic retry or failed-gate waiver follows.
+
+The original public cleanup function deterministic control has one meaningful RED
+and eight passing controls: asynchronous captured-child termination can complete
+inside the remaining18-second deadline after the current function returns early.
+Independent58b007d2 accepts that bounded diagnosis and a minimal proposal only;
+it does not establish hosted causality or accept an unimplemented production fix.
+The original terminal0.46-second duration and1,078 warnings remain distinct from
+JUnit timing. #308 fresh original three-case execution has independent5dbff4ce GO
+for d5a/c103/6181 only: seven original members, one real publication, natural HTTP
+return before separate cleanup, and nine exact sample bindings. Private01f/frozen-v6,
+CLI2510, full supervisor/metadata and native acceptance remain HOLD.
+
+Necessary Windows checkout-byte fix PR312 is draft, normally pushed at92e6deda,
+after independent sourcea64c6b1c and explicit-two-worker full gates. Its207 protected
+Runtime text inputs, seven narrow LF rules and workflow filters retain outside
+binary/platform fixtures. Its local a0d refresh and #300 transport acceptance
+assertions are the next source wave; their active work is excluded from this
+frozen packet and requires separate source acceptance, full gates and current CI.
+
+#221 stays draft against communitya709. Its prior6181 terminal CI, seven original
+distribution integrity review38ec59ef, and Linuxcp312 installed-consumer07a2e926
+are accepted only within their retained scopes. The first consumer gateway failed
+before worker creation because of a mixed platform directory; the separately
+authorized v5 attempt passed with202 measured installed Python members,215 tracked
+source payloads, public Core1.0.2/Helper1.0.3 provenance and strict captured cleanup.
+Removed installed files are retained measurements, not a fresh tree reread.
+Windows has178 CRLF-only tracked differences and a separate generated HTML body
+difference; semantic equivalence is unknown. Both required OAuth strings remain
+empty in all six wheels and the sdist. Current-head combined CI, approved content
+authority, all platforms/native/private consumers, immutable tag, publication,
+downloads/checksums and owning Homebrew installation/upgrade remain release gates.
+
+Completed scratch is preserved in35 verified private archives across16 batches on
+existing mounts. Failed563d remains failed and retained. Historical physical-index
+comparison HOLD has a named semantic-index successor; the inherited22,524-byte
+precommit manifest alias remains unrecovered. Canonical operations guidance imports
+source-backed lessons on job census, ignored RCC fixtures, checkout bytes, physical
+artifact selection, worker bounds, original runner identity and captured cleanup.
+No raw logs, ZIPs, original member payloads, private code or archive indices enter
+Git. The full54-contract acceptance graph remains open, including four close-ready
+recommendations and human-review-only293–296. Devsy remains disabled; no Dakota
+writers, replacement infrastructure, issue closures or Runtime publication.
+Upstream disposition: none.

@@ -1,0 +1,118 @@
+{
+  "pr": 309,
+  "head": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea",
+  "base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "check_count": 18,
+  "checks": [
+    {
+      "id": 114438874935,
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "status": "queued",
+      "conclusion": null
+    },
+    {
+      "id": 114438874908,
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874869,
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874836,
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874812,
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874799,
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874783,
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874735,
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874702,
+      "name": "build-wheels (windows-2022)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874695,
+      "name": "build-wheels (macos-15)",
+      "status": "queued",
+      "conclusion": null
+    },
+    {
+      "id": 114438874669,
+      "name": "build (ubuntu-py3.12-devmode)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874652,
+      "name": "build-sdist (ubuntu-py3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874644,
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874596,
+      "name": "build (windows-py3.12-devmode)",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 114438874592,
+      "name": "audit",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874534,
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114438874485,
+      "name": "build (macos-py3.12-devmode)",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 114438874410,
+      "name": "coverage",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "scope": "ONE bounded complete head check-run metadata page only; declared needs/workflow/source/policy/runner logs require independent admission. Not complete merge gates.",
+  "upstream_disposition": "none"
+}

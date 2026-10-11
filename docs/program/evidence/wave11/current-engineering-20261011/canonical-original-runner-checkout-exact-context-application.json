@@ -1,0 +1,18 @@
+{
+  "status": "EXACT_INDEPENDENTLY_ACCEPTED_FIVE_LINE_TEXT_INSERTED_AT_UNIQUE_HOSTED_CHECKOUT_CONTRACT",
+  "original_proposal": {
+    "path": "/workspace/engineering/pr306-current618-fada-original-Windows-failure-owned/canonical-original-runner-checkout-vs-current-merge-ref-proposed.patch",
+    "bytes": 486,
+    "sha256": "50ad18bce0a30cbfb1cb346d1768729b67ea20125796a6558bb57e1594ef2aec"
+  },
+  "initial_git_apply_check": {
+    "exit": 128,
+    "diagnostic": "No valid patches in input; original proposal has unnumbered @@ marker",
+    "source_edits": false
+  },
+  "accepted_independent_review": "64c820fd13336474a8222ea66648b6269e50b2299ac8fbea75362262a1db839c",
+  "exact_proposed_text_lines": 5,
+  "canonical": "docs/skills/repository-operations.md",
+  "existing_56_added_lines_retained": true,
+  "original_proposal_unchanged": true
+}

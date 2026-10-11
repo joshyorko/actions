@@ -1,0 +1,35 @@
+{
+  "status": "ROOT_NORMAL299_ACTUAL_INTEGRATION_READBACK_PASS_PENDING_INDEPENDENT_READBACK",
+  "captured_at": "2026-10-11T09:03:43.378005+00:00",
+  "PR": 299,
+  "actual": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+  "ordered_parents": [
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "3155fc55ea7d47afbc547fddc963b5860462924b"
+  ],
+  "tested_synthetic": "600d1b213fcfe6f94f341cbe4bca4472bd002e4c",
+  "all1419_typed_mode_blob_path_entries_equal_source_and_accepted_tested_tree": true,
+  "typed_entry_inventory_sha256": "cade8528d375ded3a410bf6145eca28f3b74f64f7efe2d0bcd4aa58d8ec0de10",
+  "final_independent_scoped_GO_sha256": "178ab95cf19bbe6e473d6f81610ada618db0b2add440657e87d7c6768262a7c0",
+  "normal_merge_authorization_sha256": "c480f7546ddea034c89a243e3f2d61598833ac123da15d8db9d7468b8621922a",
+  "issue_closure_or_full_issue_or_publication_claim": false,
+  "remaining_HOLD": [
+    "full shared-output contracts/current native/backend/private",
+    "original FIRST cause/cleanup unknown",
+    "300 actual newtuple refresh and freshCI",
+    "Runtime release and full retained graph"
+  ],
+  "evidence": [
+    {
+      "path": "/workspace/engineering/pr299-actual-merge-authenticated.json",
+      "bytes": 26641,
+      "sha256": "b68b31f42c3f53d3d63c0dbd3c2b56b00692486da39ea832d51c31f03530a7de"
+    },
+    {
+      "path": "/workspace/engineering/pr299-actual-commit-authenticated.json",
+      "bytes": 2744,
+      "sha256": "21b88da82a3439a76673ddd4b200872a11edc233bd12234b591c7af65d73f2a3"
+    }
+  ]
+}

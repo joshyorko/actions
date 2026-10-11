@@ -1,0 +1,356 @@
+{
+  "schema": "actions-pr305-actual618-light-ready-source/v1",
+  "status": "LIGHT_READY_ONE_FULL_HELD_BEHIND_A300_ROOT_RELEASE",
+  "head": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+  "tree": "2bd99392d53f3df8be0569368450df1c933d3a3a",
+  "ordered_parents": [
+    "6390270cd07851448b7b325c81c98dc11a1d3a17",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "branch": "test/canvas-runtime-cache-isolation-20261010",
+  "clean": true,
+  "all1420_working_body_modes_prefull_Git_exact": true,
+  "complete_union": {
+    "path": "/workspace/engineering/pr305-actual618-refresh/ordinary-union-and-original-Canvas-retention-proof.json",
+    "bytes": 461953,
+    "sha256": "f0682b79b918f747eef436a5ac65961518b9742545b1e585ef1cda4f677e3998"
+  },
+  "Canvas3original1e9": {
+    "action_server/tests/action_server_tests/mcp/test_canvas_runtime_admission.py": [
+      "100644",
+      "blob",
+      "0167fffb5265f915c82e59ddec74fbb1e5317c84"
+    ],
+    "action_server/tests/action_server_tests/test_browser_origin_acceptance.py": [
+      "100644",
+      "blob",
+      "c31a8fa756fed3924fd9f31c01391e23ff43fa4b"
+    ],
+    "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py": [
+      "100644",
+      "blob",
+      "163e07629f197d7592fba7092383c426fb90ee1f"
+    ]
+  },
+  "current_producer": {
+    "old": 268,
+    "current": 274,
+    "matching": 261,
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "current_all_entries_exact_actual618": true
+  },
+  "five_selected_separate": {
+    "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": [
+      "100644",
+      "blob",
+      "12ec0f644d96a45824ac110b7f1dafebb4c42ce6"
+    ],
+    "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": [
+      "100644",
+      "blob",
+      "0e1ab11bdd4b52e2d35d06b42dd17996dd082022"
+    ],
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": [
+      "100644",
+      "blob",
+      "534e51afbc75b4d3ce473dee37d7ac00d52dbc92"
+    ],
+    "action_server/tests/action_server_tests/test_cli_multi_package_sync.py": [
+      "100644",
+      "blob",
+      "b0919a8b7508954976a8fab631a5fff219c2aeb8"
+    ],
+    "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py": [
+      "100644",
+      "blob",
+      "7a5a378bf1f8151118034d18b5dfb269f2b24e90"
+    ]
+  },
+  "nativequalification": "UNQUALIFIED_CURRENT274_7CHANGED6ADDED; original1192preservation notcurrentnativeproof",
+  "nineRCCsample": {
+    "path": "/workspace/engineering/pr305-actual618-refresh/accepted-nine-RCC-source-sample.json",
+    "bytes": 3031,
+    "sha256": "a16413e68569f8a1caa760c24e00cc9d12dba322bb7bbe43c677c0646069ea34"
+  },
+  "construction_verification_order_failure": {
+    "diagnostic": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/initial-inspector-reference-count-diagnostic.json",
+      "bytes": 617,
+      "sha256": "4d4ec9eacaca5b03a8891f95ac303f73da25e1f20f5b2ae2dc2fb347f38824f3"
+    },
+    "original_inspector": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/initial-inspector-before-count-correction.py",
+      "bytes": 4345,
+      "sha256": "bd9406c8273020a9cb15099cb5b78288eda5f8c4beba2b0bc18b822bc22d8677"
+    },
+    "measured_previous776_binding_count": 39,
+    "all39_rehashed_postcommit_before_LIGHT": true,
+    "scope": "Commit519 was made after referencecount verification failed. No SOURCEGO from that commit; exact corrected completeunion/postcommit guards and freshgates required. No reset/rewrite or source waiver; subsequent commands enforce exit failure with set-e."
+  },
+  "gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "30exact preparedinputs/five concrete ownprefix+moduleorigins; no install",
+    "Toolkit": 96,
+    "Canvas": {
+      "passed": 47,
+      "integration_deselected": 4,
+      "skip": 0
+    },
+    "current_RCC_source": {
+      "passed": 112,
+      "actual_optin_skipped": 1,
+      "integration_deselected": 3
+    },
+    "configured_lint": "Ruff/format/Isort PASS",
+    "Mypy": 348,
+    "gen8_roundtrip": "PASS",
+    "workflow_plus_dependabot": 26,
+    "all_YAML": 30,
+    "full_source": "NOT_RUN pendingrootrelease"
+  },
+  "owned_artifact_retention_before": {
+    "native1192_helpers0444_browser_V5": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/retained-native-helper-browser-and-V5-proof.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    "V5raw18_frozen50_Node_frontend": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/raw18-frozen50-Node-frontend-retained-before.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    }
+  },
+  "prior_source838": {
+    "path": "/workspace/engineering/pr305-actual776-refresh/frozen-source-receipt.json",
+    "bytes": 15012,
+    "sha256": "8385812a98dcd387122a2fda39290e3609b278b41bd875b52e43de34ec87bce9"
+  },
+  "prior_source_ind3c352": {
+    "path": "/workspace/engineering/pr305-actual776-independent-review/independent-frozen-source-review.json",
+    "bytes": 6329,
+    "sha256": "3c3524ca1338e5bef2c4a28cccf0aebf3565f984e207fd5154d46b53330ed92c"
+  },
+  "prior_oldsource776_20green_current618_metadata_HOLD4ff": {
+    "path": "/workspace/engineering/pr305-pr306-current6181-bounded-CI-review/independent-complete-bounded-current6181-CI-HOLD.json",
+    "bytes": 30204,
+    "sha256": "4ff38555cdcd979c5d61eb73eaeac481da32d317a8cb62cb275f1b7798f4703a"
+  },
+  "accepted_actual618_ind06a": {
+    "path": "/workspace/engineering/pr299-actual-integration-independent-review/independent-actual299-integration-readback.json",
+    "bytes": 6973,
+    "sha256": "06a652e23b77573ab5cfe9a8837b46de42909efd50908dcea031d7311a27c9ba"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md and docs/skills/provenance-observability.md, exact both accepted parent imports",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/exact-both-parent-canonical-import.patch",
+      "bytes": 13633,
+      "sha256": "2b23510070526fd8672cfcc83e8ac474a6980d870fdc3fef462fadb7abd193a2"
+    },
+    "Existing_root_verification_exit_status_lesson_reused": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/reused-root-canonical-verification-status-lesson.md",
+      "bytes": 470,
+      "sha256": "cce330dd0562324ae64133fe393574607cf399e0e9ce53c0182effffc594fbac"
+    },
+    "Durable_learning_captured": "Preserve Canvas originalGitblob CRLF fixtures, ownedcollection/report-channel/rawretention/NodePID/cleanup distinctions while importing sharedRun Actor/attempt/output/visibility/recovery provenance; keep currentsource/oldactual/native/release qualification separate. Failed verification status must precede commit/push; construction commit does not supply sourceGO.",
+    "Evidence": "Complete1420 typed selected-parent nondocmode/body union, originalCanvas3 exact1e9, all39 measured prior776 refs rehashed, real retained1192/native/helperedc7/0444/browser/V5raw18frozen50/Nodefrontend guards, fresh light gates; original countFAIL/earlyconstructioncommit openly preserved and corrected beforelight.",
+    "Stale_or_ambiguous_guidance_removed": "Earlier Canvas branch lacked accepted sharedRun provenance and scoped output visibility/reconciliation limits; no source fixturePASS relabelled as native/Workspace/publicCore/coldregistry proof. Measured39 references replace initial wrong28 inspector expectation, not a source assertion waiver.",
+    "Remaining_uncertainty": "Currentfull pending rootserialization release; fresh exactsource hostedCI required; current274 differsold268; native/provider/private/full99+134/OAuth/ChatGPT/publication/release HOLD. OriginalV5 forcedcleanup notnatural/coldwholewheel proof.",
+    "Disposition": "Exact accepted parent guide blocks imported, root existing status lesson verified; no cosmetic child."
+  },
+  "pre_full": {
+    "path": "/workspace/engineering/pr305-actual618-refresh/committed-union-pre-full.json",
+    "bytes": 291366,
+    "sha256": "967bea12655fc1e111d3c89af35eaf8fff5fd6b44c60bc6e1ceaa91835ba1897"
+  },
+  "capacity_bytes": 1987563520,
+  "evidence_files": {
+    "Bootstrap-reuse.log": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/Bootstrap-reuse.log",
+      "bytes": 6702,
+      "sha256": "0397b0c6d8049ef65dc2c8593b8e626f7e19da770c76e1aa62731c67db0d37c9"
+    },
+    "Canvas-scoped.log": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/Canvas-scoped.log",
+      "bytes": 3997,
+      "sha256": "1e7dcedbdab67fef726edf8720f015a35023446d6092638f2d684f30fbf7f4e9"
+    },
+    "Doctor.log": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/Doctor.log",
+      "bytes": 13486,
+      "sha256": "a7dc88fe58b9f76855ce6c17a2c85ecb2b43e890a728d8cb7ff408bb5e22a6ec"
+    },
+    "PR305.private.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/PR305.private.json",
+      "bytes": 28507,
+      "sha256": "21252309a67c5a33a6ea9d018ea854ceb15e6f8a80d9a04e22d6dc101d9def95"
+    },
+    "Toolkit.log": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/Toolkit.log",
+      "bytes": 14344,
+      "sha256": "b39782bb4a7fa78187081422c21494d7eaeac047b98d9ccb6f9e660809f10a0b"
+    },
+    "accepted-nine-RCC-source-sample.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/accepted-nine-RCC-source-sample.json",
+      "bytes": 3031,
+      "sha256": "a16413e68569f8a1caa760c24e00cc9d12dba322bb7bbe43c677c0646069ea34"
+    },
+    "committed-union-pre-full.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/committed-union-pre-full.json",
+      "bytes": 291366,
+      "sha256": "967bea12655fc1e111d3c89af35eaf8fff5fd6b44c60bc6e1ceaa91835ba1897"
+    },
+    "current-RCC-and-static.log": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/current-RCC-and-static.log",
+      "bytes": 6989,
+      "sha256": "e839392c5f1a7460d53e73277e8aa58f34d1be710b8d5ba24829a6b37e55519d"
+    },
+    "exact-both-parent-canonical-import.patch": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/exact-both-parent-canonical-import.patch",
+      "bytes": 13633,
+      "sha256": "2b23510070526fd8672cfcc83e8ac474a6980d870fdc3fef462fadb7abd193a2"
+    },
+    "generator-roundtrip.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "d03086cf1c1c65efb2ec389ee3153695c6d8902c2c972e4838fc4ad8ce6d834b"
+    },
+    "generator-roundtrip.log": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/generator-roundtrip.log",
+      "bytes": 4565,
+      "sha256": "cd8cf17890847b2b9b43a70fb4d6bfe23258efca845979b9965b5b4ab3d305fe"
+    },
+    "generator-roundtrip.py": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/generator-roundtrip.py",
+      "bytes": 1800,
+      "sha256": "482bfdf6c566a135205c19a17c48d42d7bf2bfa4e27750f0c963f46b666df4e6"
+    },
+    "initial-inspector-before-count-correction.py": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/initial-inspector-before-count-correction.py",
+      "bytes": 4345,
+      "sha256": "bd9406c8273020a9cb15099cb5b78288eda5f8c4beba2b0bc18b822bc22d8677"
+    },
+    "initial-inspector-reference-count-diagnostic.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/initial-inspector-reference-count-diagnostic.json",
+      "bytes": 617,
+      "sha256": "4d4ec9eacaca5b03a8891f95ac303f73da25e1f20f5b2ae2dc2fb347f38824f3"
+    },
+    "named_source.private.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/named_source.private.json",
+      "bytes": 468,
+      "sha256": "446717b059cdfef52513e9d52a3b5a9638606cdadec5e0e62ac28471fdc09453"
+    },
+    "named_target.private.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/named_target.private.json",
+      "bytes": 448,
+      "sha256": "316aab6b935e68ab876f9943e173a74dcbe9484c1be5465b143a32c9c780d5c0"
+    },
+    "ordinary-union-and-original-Canvas-retention-proof.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/ordinary-union-and-original-Canvas-retention-proof.json",
+      "bytes": 461953,
+      "sha256": "f0682b79b918f747eef436a5ac65961518b9742545b1e585ef1cda4f677e3998"
+    },
+    "origin-action_server.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/origin-action_server.json",
+      "bytes": 283,
+      "sha256": "96eb60a559a313d478c17f52e8cc42e71588b1ae33089ba1ad3c77650a967b26"
+    },
+    "origin-actions-http-helper.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "0866a5c2bc030a15822b06983f3fb43b1400b20f4add57537aaec59da1b8c4d1"
+    },
+    "origin-actions.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/origin-actions.json",
+      "bytes": 218,
+      "sha256": "6b00bd4e70a69f4484a9d44c3447039354a9906fef5be41feff2fb284a73a549"
+    },
+    "origin-devutils.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "f9c9bb61ea486fd667ff37367ef8656aa374af2f4e3484569f4d4cfab28125cd"
+    },
+    "origin-work-items.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "24808585e8fef1faae9b7130b4656ee211c50597fe0e0e3d2adbb8b058f37296"
+    },
+    "own-Bootstrap-reuse-inputs-and-origins.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6428,
+      "sha256": "75db58a41f5b65cb2bf6a801ec43ddf961e7913c2a951bf875abadf1066be1f3"
+    },
+    "pre-source-existing305-checkpoint.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/pre-source-existing305-checkpoint.json",
+      "bytes": 605,
+      "sha256": "7370b10dfc73ccc766c34913f69c2a4f71c3eb4501b739bc8ac6b63f170aa4ae"
+    },
+    "raw18-frozen50-Node-frontend-retained-before.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/raw18-frozen50-Node-frontend-retained-before.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    "retained-native-helper-browser-and-V5-proof.json": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/retained-native-helper-browser-and-V5-proof.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    "reused-root-canonical-verification-status-lesson.md": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/reused-root-canonical-verification-status-lesson.md",
+      "bytes": 470,
+      "sha256": "cce330dd0562324ae64133fe393574607cf399e0e9ce53c0182effffc594fbac"
+    },
+    "run-Canvas-scoped.py": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/run-Canvas-scoped.py",
+      "bytes": 316,
+      "sha256": "5959d9ef264ee534142d67b5929ccd296109e6a1949e691af6d3c1da373b4352"
+    },
+    "run-current-RCC-static.py": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/run-current-RCC-static.py",
+      "bytes": 353,
+      "sha256": "b4fbe9823b1de83af76d504f1daa68cb5c78eb6f436566c4a8334f5a0aa2ea40"
+    },
+    "verify-own-prepared-bootstrap.py": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/verify-own-prepared-bootstrap.py",
+      "bytes": 2693,
+      "sha256": "b36e6889b35d1e1bfaf65eacb819618bac98fc70791576be96a459440609d770"
+    },
+    "verify-retained-actual-inputs-before.py": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/verify-retained-actual-inputs-before.py",
+      "bytes": 3582,
+      "sha256": "e75836fd9d5cfd9ee6008b91511b52384289ae836406459cea3eb504abcf434d"
+    },
+    "verify-retained-raw-and-driver.py": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/verify-retained-raw-and-driver.py",
+      "bytes": 2524,
+      "sha256": "bc0851d03aee806c64a5998f92d0c732b9c3c74ad009a76e4b6809862acea26f"
+    },
+    "verify-union-before-commit.py": {
+      "path": "/workspace/engineering/pr305-actual618-refresh/verify-union-before-commit.py",
+      "bytes": 4345,
+      "sha256": "075a70ee878d88af10cf7a19f8cac005d91b68a9dd3c8190c407f8d50d762a44"
+    }
+  },
+  "not_run": [
+    "Full pendingserialization",
+    "Newinstaller/native/provider/browser/private/PG/consumer actual/manualretry",
+    "Push/integration/artifactdownload/metadata/release"
+  ],
+  "upstream_disposition": "none"
+}

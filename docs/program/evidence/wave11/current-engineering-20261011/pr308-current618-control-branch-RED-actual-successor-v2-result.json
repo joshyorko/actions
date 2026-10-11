@@ -1,0 +1,15 @@
+{
+  "actual_failed": 2,
+  "actual_passed": 3,
+  "genuine_rejections": [
+    "developer/tests/test_rcc_provider_rollback_workflow.py::test_generated_workflow_is_checkout_equivalent",
+    "developer/tests/test_rcc_provider_rollback_workflow.py::test_rcc_rollback_workflow_is_opt_in_pinned_and_secret_free"
+  ],
+  "initial_collector_expected": {
+    "failed": 1,
+    "passed": 4
+  },
+  "collector_status": "FAIL incorrect inherited count; raw original retained, not rerun or retroactively PASS",
+  "source_restoration": "finally restored valid freshly generated workflow bytes",
+  "GREEN_started_after_finally_restoration_before_collector_failure_readback": true
+}

@@ -1,0 +1,25 @@
+{
+  "status": "PASS_READ_ONLY_RETAINED_ORIGINAL_BYTES_AND_MODES",
+  "native_producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "native_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "native_entries": 1192,
+  "all_original_inventory_kinds_modes_targets_digests_exact": true,
+  "manifest_assets_frozen_hashes_exact": true,
+  "four_helpers_original_snapshot_exact": true,
+  "snapshot_mode": "0444",
+  "browser_Node_frontend_lock_selection_hashes_exact": true,
+  "raw_private_receipts": 18,
+  "frozen_refs": 50,
+  "current_external_exact": 50,
+  "historical_source_Git_binding_exact": 0,
+  "all_before_root_release_after_proofs_identical": true,
+  "original_actual_source": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+  "limits": [
+    "No native artifact or process launch; no publication/download/build",
+    "No current275 producer equivalence to historical268",
+    "No upgrade of original browser_version38/39 cause/values or two adopted-zombie observations",
+    "Captured DEBUG executable selection is not live PID identity",
+    "No full Core wheel/cold-registry or private/Workspace/ChatGPT/release qualification"
+  ],
+  "upstream_disposition": "none"
+}

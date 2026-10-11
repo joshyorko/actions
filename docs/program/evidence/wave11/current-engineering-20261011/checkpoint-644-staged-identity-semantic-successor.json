@@ -1,0 +1,16 @@
+{
+  "status": "EXACT644_STAGED_IDENTITY_SERIALIZATION_CLARIFIED_UNCHANGED",
+  "base": "4d948f57a6eaf024620c65b947973eb71127c60d",
+  "manifest_count": 644,
+  "index_sha256": "bbf308f62bee8da2a84d9e6311070bfe4d04eec4afc45b6979791cd9b722043f",
+  "staged_names_sha256": "5432ae9ce266bc474937502285db5c8949bcd6c41aabfca8deafd4e3db5e4091",
+  "captured_at": "2026-10-11T08:56:34.958778+00:00",
+  "index_sha256_encoding": "SHA256(git --no-optional-locks ls-files -s -z output), mode/blob/stage/path, not physical Git index file",
+  "staged_names_sha256_encoding": "SHA256(git --no-optional-locks diff --cached --name-status -z output)",
+  "predecessor_receipt": {
+    "path": "/workspace/engineering/checkpoint-644-staged-identity.json",
+    "sha256": "c03e4e0b7b6d841f6716df58ec3f6655302ca8e1ea8e68fef81b1e217bcd96df",
+    "bytes": 388
+  },
+  "source_or_index_entries_changed": false
+}

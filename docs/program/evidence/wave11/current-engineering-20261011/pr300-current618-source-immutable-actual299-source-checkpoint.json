@@ -1,0 +1,2016 @@
+{
+  "schema": "actions-pr300-actual299-owner-frozen-source-checkpoint/v1",
+  "status": "SOURCE_COMPLETE_AWAIT_INDEPENDENT_REVIEW_AND_ROOT_NORMAL_RETARGET_PUSH",
+  "frozen_at_utc_epoch": 1791711081.6254814,
+  "subject": {
+    "head": "7840057a8b055576d11d339d8c0fbb738927a491",
+    "tree": "10e09d88027ca4fea512ff06c57efaab95755ffb",
+    "sole_parent": "d4443c49973ddd629838c682111474991e3ea0c2",
+    "branch": "feat/run-output-transport-20261010",
+    "worktree": "/workspace/engineering/pr300",
+    "clean": true,
+    "original_remote_PR_branch_preserved": "feat/run-output-transport-20261010",
+    "no_push_or_retarget_performed": true
+  },
+  "ordinary_merge": {
+    "head": "d4443c49973ddd629838c682111474991e3ea0c2",
+    "tree": "f6b711f1589bcff6b9df73ab889c30503859d90d",
+    "ordered_parents": [
+      "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "6181b044c75de35386f1ae30e71725398b6a7feb"
+    ]
+  },
+  "complete_scope": {
+    "all_original_paths_and_modes_retained": true,
+    "leaf_counts": {
+      "original300": 1401,
+      "actual299": 1419,
+      "union": 1421
+    },
+    "all1421_typed_body_mode_and_FS_executable_bits_exact_Git_before_and_after_full": true,
+    "pre_post_complete_source_proofs_equal": true,
+    "inventory_sha256": "80cbd6596d47ac03a4d870fe635600263206282bd6cbea5b195fdb2d1935b02e",
+    "all1420_other_paths_exact_ordinary_union": true,
+    "only_novel_child": "8 meaningful lines in docs/skills/repository-operations.md; no application or test edits",
+    "original_four_transport_patch_paths_exact": {
+      "action_server/src/actions/server/_server.py": {
+        "mode": "100644",
+        "blob": "6f5e6fe658fb2d7c2dd2271bf2169adbe18be86b",
+        "bytes": 35066,
+        "sha256": "2c9e8079826fae95653e0805ea014a666849f25c6fbac02150ba61d952c61fc3"
+      },
+      "action_server/src/actions/server/run_outputs/transport.py": {
+        "mode": "100644",
+        "blob": "32d72daf3037f72ff7caa63d74025735df9a4d22",
+        "bytes": 6505,
+        "sha256": "4a50fba1d837ce914eb5a6cd4e30d195640ec45d80f7ef811616f066e962b60e"
+      },
+      "action_server/tests/action_server_tests/run_outputs/test_transport.py": {
+        "mode": "100644",
+        "blob": "61e30daed53076ab802e7fe7a7a3d40920d6f601",
+        "bytes": 13821,
+        "sha256": "45386defba7a1871772f38f5560bf510e33597389063a90fd3032ec3b834389b"
+      },
+      "docs/skills/provenance-observability.md": {
+        "mode": "100644",
+        "blob": "c73eb44a07b7192fce8843031e49269c3db8de05",
+        "bytes": 15602,
+        "sha256": "67a876678836ca68532ec971ded1a7f13cab8488b3046b076856909672a0a100"
+      }
+    },
+    "all_nine_private_foundation_paths_exact_old_and_actual299": {
+      "action_server/src/actions/server/run_outputs/__init__.py": {
+        "mode": "100644",
+        "blob": "6787c69b364901f1a1eed93e553ae8cfe4d194ef",
+        "bytes": 71,
+        "sha256": "4c29ad35ab314ea4472025d453703b124a08262cfa24a51baf3a1a2ffb58ae38"
+      },
+      "action_server/src/actions/server/run_outputs/filesystem.py": {
+        "mode": "100644",
+        "blob": "89170173dd0f1771e1a9923bb8532f2b28448dd1",
+        "bytes": 10580,
+        "sha256": "db8daf79dc0d2a06ecec9a2c3ab67319d6df420c2a44578948d46f2b558c5606"
+      },
+      "action_server/src/actions/server/run_outputs/models.py": {
+        "mode": "100644",
+        "blob": "ae75ceee659776fd51e1dda36528a22640afba19",
+        "bytes": 1976,
+        "sha256": "c69318f6893484156fba1002f8372711fc83e32e56d0e29c54e985cc26196065"
+      },
+      "action_server/src/actions/server/run_outputs/service.py": {
+        "mode": "100644",
+        "blob": "55f5c09aeb0a3e9199b56916bb7fee41708b35c6",
+        "bytes": 33287,
+        "sha256": "46174068c6d5fb1609a38630fd460983c071a51a48bec4bb6ecdeff42446fe62"
+      },
+      "action_server/src/actions/server/run_outputs/types.py": {
+        "mode": "100644",
+        "blob": "cac30880373c26f648bb1c835fb74449f567cb22",
+        "bytes": 4087,
+        "sha256": "9195c6986edee9b2821e5e75c88a556ab4ef747eb065adb05b72b415165767d3"
+      },
+      "action_server/tests/action_server_tests/run_outputs/test_concurrency.py": {
+        "mode": "100644",
+        "blob": "6aff0138011bc1e5bce88e70ba542044601292ff",
+        "bytes": 9651,
+        "sha256": "609dc07d3c4829e8f7c27856fcb238668cd9026e7cc856848ae1e88273f2be68"
+      },
+      "action_server/tests/action_server_tests/run_outputs/test_filesystem.py": {
+        "mode": "100644",
+        "blob": "b10f3ede197762836b043df60101a95f02bbd62d",
+        "bytes": 6783,
+        "sha256": "82f4a852c711b21325d3903b4aa98cdf7e9f218c671fa0151c3ea1f27b912d9c"
+      },
+      "action_server/tests/action_server_tests/run_outputs/test_migration.py": {
+        "mode": "100644",
+        "blob": "91d10765b9d3441c76817735790c9a318eb94e3c",
+        "bytes": 2458,
+        "sha256": "2e7a4536b87c807e074c68d148a751f0ec88811fbc92ea94c2d4af445c289c61"
+      },
+      "action_server/tests/action_server_tests/run_outputs/test_service.py": {
+        "mode": "100644",
+        "blob": "4fcd73a8764c52f2681ba909541d578ddd2457cf",
+        "bytes": 33321,
+        "sha256": "18e99bfb8147e24d23f581b52eb4de09ee7b2e51ec6384e27a171cc7657581d8"
+      }
+    },
+    "whole_GitHub_exact_actual299": true
+  },
+  "gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "Existing prepared30 inputs checked exactly with five OWN concrete module origins/prefixes; original Bootstrap bytes preserved, no new installer/bootstrap run",
+    "Toolkit": {
+      "passed": 96,
+      "RCC_SUCCESS": true
+    },
+    "scoped_Runtime_source": {
+      "passed": 150,
+      "skipped": 0,
+      "integration_deselected": 1,
+      "subject": "ordinary d444; final784 non-doc bytes/modes exact"
+    },
+    "configured_lint": {
+      "Ruff_check": "PASS",
+      "Ruff_format_files": 313,
+      "Isort": "PASS",
+      "subject": "ordinary d444; final784 non-doc bytes/modes exact"
+    },
+    "configured_typecheck": {
+      "files": 349,
+      "status": "PASS",
+      "subject": "ordinary d444; final784 non-doc bytes/modes exact"
+    },
+    "generator": {
+      "actual_derived_TARGETS_outputs": 8,
+      "all_tracked_GitHub_YAML_and_dependabot_bytes_and_parse": 30,
+      "total_repository_YAML_files_not_claimed_as30": 116,
+      "status": "PASS",
+      "subject": "7840057a8b055576d11d339d8c0fbb738927a491"
+    },
+    "ONE_full_configured_invoke_test_not_integration": {
+      "single_authorized_full": true,
+      "exit_code": 0,
+      "passed": 1242,
+      "skipped": 13,
+      "warnings": 15,
+      "duration_seconds": 143.87,
+      "workers": 2,
+      "RCC_gateway_SUCCESS": true,
+      "source_head": "7840057a8b055576d11d339d8c0fbb738927a491",
+      "source_tree": "10e09d88027ca4fea512ff06c57efaab95755ffb",
+      "original_private_log": {
+        "path": "/workspace/engineering/pr300-actual299-refresh/full-configured-runtime-source.log",
+        "bytes": 319769,
+        "sha256": "b3db4a1fe6edbd3ee1d1734272bbd5aa7637a2537db2dabe3f47183ba90f0569",
+        "mode": "0o600"
+      },
+      "no_native_or_manual_actual_gate_claim": true,
+      "scope": "Configured invoke test-not-integration; original skipped and excluded opt-ins remain unqualified."
+    }
+  },
+  "prepared_input_and_original_receipt_postchecks": {
+    "all30_prepared_input_bytes_unchanged": true,
+    "five_own_configs_and_Python_resolved_paths_unchanged": true,
+    "five_original_concrete_module_origin_records_remain_valid_paths": true,
+    "original_and_own_rebound_environment_metadata_bytes_unchanged": true,
+    "rebound_path_count": 233,
+    "pinned_Rcc_source_destination_and_gateway_digest_exact": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "pinned_Rcc_fixture_mode_exact": "0o711",
+    "all_light_original_evidence_refs_exact": 16,
+    "generated_OAuth_still_absent_content_authority_HOLD": true,
+    "no_complete_environment_tree_or_process_reaping_claim": true
+  },
+  "earlier_attempts_preserved": {
+    "scoped_original": "57PASS93fixtureERROR1integrationDESELECT; required ignored RCC file absent, no failing product assertion; original raw log unchanged",
+    "generator_original": "Inspector incorrectly expected all repository YAML count30; actual116. Failed before generator. Named successor scopes exact30 GitHub YAML, derives8 outputs from actual TARGETS; no source/control correction."
+  },
+  "source_semantic_scope": {
+    "trusted_server_owned_RunOutputTransport": "default off optional keyword-only configuration, trusted callback must return Actor; no default principal/env/UUID/browser session inference",
+    "request": "GET-only route; original actor plus persisted grant checked before provider reader acquisition in grant transaction; response yields after transaction exits",
+    "HEAD": "405 rejection retained, not HEAD support",
+    "Range": "416 rejection retained, not Range support",
+    "revocation": "future reader acquisition only; no active stream reauthorization claim",
+    "stream": "original bounded 64KiB chunks, no-store/nosniff/opaque attachment; owned shielded acquire/cancellable yield/final release unchanged",
+    "nine_foundation_paths": "source preservation, not nine native acceptance cases"
+  },
+  "native_producer_comparison": {
+    "historical_source": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "historical_production_count": 268,
+    "current_production_count": 275,
+    "unchanged_historical_entries": 260,
+    "changed_eight": {
+      "action_server/src/actions/server/_actions_run.py": {
+        "old": [
+          "100644",
+          "blob",
+          "3637cfcd94e5d91f0bf5b9b2fc4b3e94d4562826"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "24fc844ad99c658d70f6f5069f0df250bb72ad87"
+        ]
+      },
+      "action_server/src/actions/server/_api_analytics.py": {
+        "old": [
+          "100644",
+          "blob",
+          "7f82f03353940b457fb5057e22e02a5c6f962197"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "8b3177b995500ec111fbc79b8e7c8589319b1cd2"
+        ]
+      },
+      "action_server/src/actions/server/_api_run.py": {
+        "old": [
+          "100644",
+          "blob",
+          "424094841a29bd11d6bc7fb0f3b9e528573353d9"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24"
+        ]
+      },
+      "action_server/src/actions/server/_models.py": {
+        "old": [
+          "100644",
+          "blob",
+          "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "405304f2e593fdfe949b431851eb0dae39c6ab96"
+        ]
+      },
+      "action_server/src/actions/server/_rcc_runtime_adapter.py": {
+        "old": [
+          "100644",
+          "blob",
+          "2184e9edb95683822c323d0e27d73d6d207d3492"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "09234363409bf979016a970c34b8b38ff642fb1f"
+        ]
+      },
+      "action_server/src/actions/server/_runs_state_cache.py": {
+        "old": [
+          "100644",
+          "blob",
+          "6428a201a110b8d1073fc3b5265d9282723de944"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "3774e9a0e77d43e63a18733a4ff5652454ef06ce"
+        ]
+      },
+      "action_server/src/actions/server/_server.py": {
+        "old": [
+          "100644",
+          "blob",
+          "3684b01c4155ca8efd35d5f6b318c6aefcb8efe3"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "6f5e6fe658fb2d7c2dd2271bf2169adbe18be86b"
+        ]
+      },
+      "action_server/src/actions/server/migrations/__init__.py": {
+        "old": [
+          "100644",
+          "blob",
+          "cb68bcb4a2e41ecefcb5a409ce5c26065a505d05"
+        ],
+        "current": [
+          "100644",
+          "blob",
+          "7889794dd3db1019bf4cdc179fa892c05943dc79"
+        ]
+      }
+    },
+    "added_seven": {
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py": [
+        "100644",
+        "blob",
+        "3629ef55d42815acc7c1701bdd5b6949d3394ec6"
+      ],
+      "action_server/src/actions/server/run_outputs/__init__.py": [
+        "100644",
+        "blob",
+        "6787c69b364901f1a1eed93e553ae8cfe4d194ef"
+      ],
+      "action_server/src/actions/server/run_outputs/filesystem.py": [
+        "100644",
+        "blob",
+        "89170173dd0f1771e1a9923bb8532f2b28448dd1"
+      ],
+      "action_server/src/actions/server/run_outputs/models.py": [
+        "100644",
+        "blob",
+        "ae75ceee659776fd51e1dda36528a22640afba19"
+      ],
+      "action_server/src/actions/server/run_outputs/service.py": [
+        "100644",
+        "blob",
+        "55f5c09aeb0a3e9199b56916bb7fee41708b35c6"
+      ],
+      "action_server/src/actions/server/run_outputs/transport.py": [
+        "100644",
+        "blob",
+        "32d72daf3037f72ff7caa63d74025735df9a4d22"
+      ],
+      "action_server/src/actions/server/run_outputs/types.py": [
+        "100644",
+        "blob",
+        "cac30880373c26f648bb1c835fb74449f567cb22"
+      ]
+    },
+    "all_current275_mode_blob_inputs": {
+      "action_server/poetry.lock": [
+        "100644",
+        "blob",
+        "ca8438a2e772a9195be251ab85c7048960bf0952"
+      ],
+      "action_server/pyproject.toml": [
+        "100644",
+        "blob",
+        "021ab546f04306dcff615e3e31a8395110e78703"
+      ],
+      "action_server/src/actions/server/README.md": [
+        "100644",
+        "blob",
+        "e09c2c64722deea376edb064f5a2aecf947266ba"
+      ],
+      "action_server/src/actions/server/__init__.py": [
+        "100644",
+        "blob",
+        "bc7ea9dbb51795630cb5385c4ddbb3e246754b13"
+      ],
+      "action_server/src/actions/server/__main__.py": [
+        "100644",
+        "blob",
+        "525a9e1d9424bbf3ecb1728c98a1632e1a2e7bc3"
+      ],
+      "action_server/src/actions/server/_action_package_handler.py": [
+        "100644",
+        "blob",
+        "a306eb11038f8cd4114415fb978321eb2ac51a0f"
+      ],
+      "action_server/src/actions/server/_actions_cloud.py": [
+        "100644",
+        "blob",
+        "429bcb6f6e453a3cdb2d20ef5ff316bb988c40d7"
+      ],
+      "action_server/src/actions/server/_actions_import.py": [
+        "100644",
+        "blob",
+        "50f72e8c95dcc4455a8225eb19c8d3309faada58"
+      ],
+      "action_server/src/actions/server/_actions_process_pool.py": [
+        "100644",
+        "blob",
+        "af261b4d40870ecf5415980ae1b3e2923f0734b1"
+      ],
+      "action_server/src/actions/server/_actions_run.py": [
+        "100644",
+        "blob",
+        "24fc844ad99c658d70f6f5069f0df250bb72ad87"
+      ],
+      "action_server/src/actions/server/_actions_run_helpers.py": [
+        "100644",
+        "blob",
+        "1bd891670f82f35a967d6701893cf0d204c022bc"
+      ],
+      "action_server/src/actions/server/_api_action_package.py": [
+        "100644",
+        "blob",
+        "74b08898dc88ebc1bba010c45f5c0e4f2d647270"
+      ],
+      "action_server/src/actions/server/_api_action_routes.py": [
+        "100644",
+        "blob",
+        "7e5ad63318ea9073ad2ef806ff95e18495c5eca7"
+      ],
+      "action_server/src/actions/server/_api_analytics.py": [
+        "100644",
+        "blob",
+        "8b3177b995500ec111fbc79b8e7c8589319b1cd2"
+      ],
+      "action_server/src/actions/server/_api_oauth2.py": [
+        "100644",
+        "blob",
+        "6ac81bef654d52898c9e0792c418e38562e67887"
+      ],
+      "action_server/src/actions/server/_api_robots.py": [
+        "100644",
+        "blob",
+        "62e74c5492f81158f1f6c89991c10ac3c930b5c5"
+      ],
+      "action_server/src/actions/server/_api_run.py": [
+        "100644",
+        "blob",
+        "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24"
+      ],
+      "action_server/src/actions/server/_api_schedules.py": [
+        "100644",
+        "blob",
+        "3584a6ce6b9b2a35c6d351dfebd45a1a81d5fd0b"
+      ],
+      "action_server/src/actions/server/_api_secrets.py": [
+        "100644",
+        "blob",
+        "21c1ada7f23b57de94ac823844a78d48266ac7dc"
+      ],
+      "action_server/src/actions/server/_api_triggers.py": [
+        "100644",
+        "blob",
+        "9181af4fe6ebc6e244c0f828dfb4bd538b234f4d"
+      ],
+      "action_server/src/actions/server/_api_work_items.py": [
+        "100644",
+        "blob",
+        "533baa128a57150dea017f5dc23035f97a102d0c"
+      ],
+      "action_server/src/actions/server/_app.py": [
+        "100644",
+        "blob",
+        "1d065bcc8cad0f0ef42e80f458be23ec3e273b45"
+      ],
+      "action_server/src/actions/server/_artifact_storage.py": [
+        "100644",
+        "blob",
+        "fd723d35156102e7b6bb47d5ac8dfc28706494c8"
+      ],
+      "action_server/src/actions/server/_ask_user.py": [
+        "100644",
+        "blob",
+        "9b68d29a382e7c7d39db6e2f923d0deea0c5ea06"
+      ],
+      "action_server/src/actions/server/_browser_session.py": [
+        "100644",
+        "blob",
+        "f6c21fcd85122990b288b57d4aa779decc703bc1"
+      ],
+      "action_server/src/actions/server/_build_common/__init__.py": [
+        "100644",
+        "blob",
+        "27fdca497c37a411ce6797129774810e4f937b5b"
+      ],
+      "action_server/src/actions/server/_build_common/build_executable.py": [
+        "100644",
+        "blob",
+        "85b417655abb2d068174bbfb46dfbf7dee5c8d83"
+      ],
+      "action_server/src/actions/server/_build_common/entitlements.py": [
+        "100644",
+        "blob",
+        "297758e5916aec735d0a0702d77802113e763917"
+      ],
+      "action_server/src/actions/server/_build_common/file_from_function.py": [
+        "100644",
+        "blob",
+        "20a5e2feaef8230458f6e1a6a4dab49d1a59c6e0"
+      ],
+      "action_server/src/actions/server/_build_common/process_call.py": [
+        "100644",
+        "blob",
+        "88cd793e6e568de36fd5c5442cf158c2ae4a1320"
+      ],
+      "action_server/src/actions/server/_build_common/py.typed": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/_build_common/rcc_bundle.py": [
+        "100644",
+        "blob",
+        "a2e2fe413b3dbc48b1fce58e48de41e96a756e59"
+      ],
+      "action_server/src/actions/server/_build_common/root_dir.py": [
+        "100644",
+        "blob",
+        "70fc1c9df553e278c6cd614d2053317436adae5d"
+      ],
+      "action_server/src/actions/server/_build_common/signing.py": [
+        "100644",
+        "blob",
+        "1e74301a88a63d621c7b40488674df101962aeee"
+      ],
+      "action_server/src/actions/server/_build_common/version_from_github_actions.py": [
+        "100644",
+        "blob",
+        "0b1573d856fe6052eaf5c8fb04c574c44a9221fa"
+      ],
+      "action_server/src/actions/server/_build_common/workflows.py": [
+        "100644",
+        "blob",
+        "ab647b566a00773d038ada4a9290c96487958f19"
+      ],
+      "action_server/src/actions/server/_build_common/zip_assets.py": [
+        "100644",
+        "blob",
+        "1312029d57cc1b8119bc3e3befc078c9a08c5e92"
+      ],
+      "action_server/src/actions/server/_cli_helpers.py": [
+        "100644",
+        "blob",
+        "843ff62d3e7c3b3afdbb0086ed17f69e653dabe8"
+      ],
+      "action_server/src/actions/server/_cli_impl.py": [
+        "100644",
+        "blob",
+        "d02a38c59ec913414721656193f971204c636a5b"
+      ],
+      "action_server/src/actions/server/_common/__init__.py": [
+        "100644",
+        "blob",
+        "52102188e5bd7ef47a1d8d1f650b8301cf213f9c"
+      ],
+      "action_server/src/actions/server/_common/action_package_handling/__init__.py": [
+        "100644",
+        "blob",
+        "4989cec7bf5c71416bdbec734596ce230a2513f3"
+      ],
+      "action_server/src/actions/server/_common/action_package_handling/cli_errors.py": [
+        "100644",
+        "blob",
+        "d66d2efc0ecba39218fe80407d45def88d08dc46"
+      ],
+      "action_server/src/actions/server/_common/app_mutex.py": [
+        "100644",
+        "blob",
+        "b369907df7be789203bd73cd9e69a781fe40cf89"
+      ],
+      "action_server/src/actions/server/_common/autoexit.py": [
+        "100644",
+        "blob",
+        "b1b0a305d22da673f9952dbce84528c334bed553"
+      ],
+      "action_server/src/actions/server/_common/callback.py": [
+        "100644",
+        "blob",
+        "82f6ce83be13a8f644f726a372f3998cdd7211da"
+      ],
+      "action_server/src/actions/server/_common/gallery.py": [
+        "100644",
+        "blob",
+        "642798231c407aef71e1292766c7e1143501f772"
+      ],
+      "action_server/src/actions/server/_common/gen_certificate.py": [
+        "100644",
+        "blob",
+        "6c2f7b404c657974495cc735cc417c30979333cb"
+      ],
+      "action_server/src/actions/server/_common/locations.py": [
+        "100644",
+        "blob",
+        "53039271fab6fe5c178c91644b75a5c363174bae"
+      ],
+      "action_server/src/actions/server/_common/ls_protocols.py": [
+        "100644",
+        "blob",
+        "bc44aba71154e3793335370834547197a19610f2"
+      ],
+      "action_server/src/actions/server/_common/monitor.py": [
+        "100644",
+        "blob",
+        "2bca1d32bfe486f89a5194619cc8401a0855d723"
+      ],
+      "action_server/src/actions/server/_common/null.py": [
+        "100644",
+        "blob",
+        "87d68eb8f8d278e72f2eb8825805d0263474c05a"
+      ],
+      "action_server/src/actions/server/_common/oauth2_settings.py": [
+        "100644",
+        "blob",
+        "17d4e73181469f6f6654a25dbb0c30519f14c669"
+      ],
+      "action_server/src/actions/server/_common/package_deps/__init__.py": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/_common/package_deps/_conda_deps.py": [
+        "100644",
+        "blob",
+        "d7d59a1e1f96bc2e2bb3894818ab42f5117dde2f"
+      ],
+      "action_server/src/actions/server/_common/package_deps/_deps_protocols.py": [
+        "100644",
+        "blob",
+        "fe51a5fe66c34e01dda46f24c47fc5c2e1812efb"
+      ],
+      "action_server/src/actions/server/_common/package_deps/_package_deps.py": [
+        "100644",
+        "blob",
+        "b01fa935da23e2e6aaec53e9190c8c714589c652"
+      ],
+      "action_server/src/actions/server/_common/package_deps/_pip_deps.py": [
+        "100644",
+        "blob",
+        "6c6501a87b66de6a45084bd49641068b8e3ed7ea"
+      ],
+      "action_server/src/actions/server/_common/package_deps/analyzer.py": [
+        "100644",
+        "blob",
+        "6d46fb3fda48fd8db0ca19fa0b9108e773d7aab4"
+      ],
+      "action_server/src/actions/server/_common/package_deps/conda_cloud.py": [
+        "100644",
+        "blob",
+        "aae122f04c8199ca8b6723493f1e91ca577b8311"
+      ],
+      "action_server/src/actions/server/_common/package_deps/conda_impl/__init__.py": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/_common/package_deps/conda_impl/conda_channel.py": [
+        "100644",
+        "blob",
+        "0241ac66ef4657b8a830f3901af4e5e66110a783"
+      ],
+      "action_server/src/actions/server/_common/package_deps/conda_impl/conda_match_spec.py": [
+        "100644",
+        "blob",
+        "6aebddd04967275d56f50b24680fcda222ae4615"
+      ],
+      "action_server/src/actions/server/_common/package_deps/conda_impl/conda_path.py": [
+        "100644",
+        "blob",
+        "11121672261d2fceb1519ae83401debb14db6788"
+      ],
+      "action_server/src/actions/server/_common/package_deps/conda_impl/conda_url.py": [
+        "100644",
+        "blob",
+        "09d46f680e9d301ee0d74bf930f1a9f2d7242cc9"
+      ],
+      "action_server/src/actions/server/_common/package_deps/conda_impl/conda_version.py": [
+        "100644",
+        "blob",
+        "e9ce170dcffdb3ef8386e5b259ad05091a9a4a22"
+      ],
+      "action_server/src/actions/server/_common/package_deps/pip_impl/__init__.py": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/_common/package_deps/pip_impl/pip_distlib_util.py": [
+        "100644",
+        "blob",
+        "41ba83dbf0291ca19b8d15c3cce27a89fb0dfa7e"
+      ],
+      "action_server/src/actions/server/_common/package_deps/pip_impl/pip_packaging_structure.py": [
+        "100644",
+        "blob",
+        "90a6465f9682c886363eea5327dac64bf623a6ff"
+      ],
+      "action_server/src/actions/server/_common/package_deps/pip_impl/pip_packaging_version.py": [
+        "100644",
+        "blob",
+        "4d8f3163120d3613ea52998d89c8fa5f450c7ed5"
+      ],
+      "action_server/src/actions/server/_common/package_deps/pypi_cloud.py": [
+        "100644",
+        "blob",
+        "9a37d41e87067b05ddccd6c8aa605edbfcf5111b"
+      ],
+      "action_server/src/actions/server/_common/package_exclude.py": [
+        "100644",
+        "blob",
+        "cb800c86633b843984331b469a7db32deb4d0b45"
+      ],
+      "action_server/src/actions/server/_common/process.py": [
+        "100644",
+        "blob",
+        "6fe2c531a8267a00e1d0601b3c83842485224e5e"
+      ],
+      "action_server/src/actions/server/_common/process_logging.py": [
+        "100644",
+        "blob",
+        "ab6a744cd3ab1e3e5140a2f9e8c16fcdcfe4cfef"
+      ],
+      "action_server/src/actions/server/_common/protocols.py": [
+        "100644",
+        "blob",
+        "fbbdd636c96cc98326defe869a6c8c1b85ce46e0"
+      ],
+      "action_server/src/actions/server/_common/py.typed": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/_common/run_in_thread.py": [
+        "100644",
+        "blob",
+        "e792cd87efdde164847ef0752007911c5fd9f24c"
+      ],
+      "action_server/src/actions/server/_common/system_mutex.py": [
+        "100644",
+        "blob",
+        "af13724f57c229793bb2e96a58d1ca67ca92fbad"
+      ],
+      "action_server/src/actions/server/_common/termcolors/__init__.py": [
+        "100644",
+        "blob",
+        "2df7621d74d77a3a84585d8498b4032e69ca07e7"
+      ],
+      "action_server/src/actions/server/_common/text.py": [
+        "100644",
+        "blob",
+        "3f7261672112b5879dbfe1ee0bae16ad116e2452"
+      ],
+      "action_server/src/actions/server/_common/tools.py": [
+        "100644",
+        "blob",
+        "79239135214cb731785cff064cfbcbc319c7dc23"
+      ],
+      "action_server/src/actions/server/_common/uris.py": [
+        "100644",
+        "blob",
+        "fd6064a35da7bcc58beb285412d0b3afc4e2ace2"
+      ],
+      "action_server/src/actions/server/_common/url_callback_server.py": [
+        "100644",
+        "blob",
+        "95617c6be9694de674eeb10b9b8172281222dc73"
+      ],
+      "action_server/src/actions/server/_common/wait_for.py": [
+        "100644",
+        "blob",
+        "506c804bd1a97bf866538adb61ecbacdccf9f297"
+      ],
+      "action_server/src/actions/server/_common/yaml_with_location.py": [
+        "100644",
+        "blob",
+        "4450fe5fbb5039e3fd4c2508c7bd0f0dc66fc3ca"
+      ],
+      "action_server/src/actions/server/_community_expose.py": [
+        "100644",
+        "blob",
+        "d527bcc5c8ed2a62bd6d6cb7976df059c4a1f0be"
+      ],
+      "action_server/src/actions/server/_community_expose_lifecycle.py": [
+        "100644",
+        "blob",
+        "ac9b791cb8f2bd63f1dc97596987640d3a852940"
+      ],
+      "action_server/src/actions/server/_database.py": [
+        "100644",
+        "blob",
+        "e7d9e6d06d8db537c81a24888615f9b7b74e8753"
+      ],
+      "action_server/src/actions/server/_datadir_commands.py": [
+        "100644",
+        "blob",
+        "a8dbeabfd508832294ca702b1235d3071de1a5ae"
+      ],
+      "action_server/src/actions/server/_devenv.py": [
+        "100644",
+        "blob",
+        "73dc430b196ebc59ed8b74e05e3a687d0ececb46"
+      ],
+      "action_server/src/actions/server/_directory_publication.py": [
+        "100644",
+        "blob",
+        "35b1fd2349121ddd518c6ef3f3830f5c3c4951a7"
+      ],
+      "action_server/src/actions/server/_download_rcc.py": [
+        "100644",
+        "blob",
+        "f694f9798803f94ad4ee4331503bc46dc75a0062"
+      ],
+      "action_server/src/actions/server/_encryption.py": [
+        "100644",
+        "blob",
+        "fd5392a703766aa81cd3933fab9025f9dce6db43"
+      ],
+      "action_server/src/actions/server/_errors.py": [
+        "100644",
+        "blob",
+        "3b25eda0086dddc089ff6503519e08daff4105ba"
+      ],
+      "action_server/src/actions/server/_errors_action_server.py": [
+        "100644",
+        "blob",
+        "46b73f5a0f977990886e43a6f697f3dc1529b7a1"
+      ],
+      "action_server/src/actions/server/_gen_ids.py": [
+        "100644",
+        "blob",
+        "76a63338d853e24efe3bbb0cf5ae958f53b8bdda"
+      ],
+      "action_server/src/actions/server/_mode.py": [
+        "100644",
+        "blob",
+        "146902dbbf1dcc1b9a0ca718eac250b6d9be3926"
+      ],
+      "action_server/src/actions/server/_models.py": [
+        "100644",
+        "blob",
+        "405304f2e593fdfe949b431851eb0dae39c6ab96"
+      ],
+      "action_server/src/actions/server/_new_project.py": [
+        "100644",
+        "blob",
+        "593dd9b6c00bed8c972c0965955310fee585daff"
+      ],
+      "action_server/src/actions/server/_new_project_helpers.py": [
+        "100644",
+        "blob",
+        "daba02d5035f8c181a338f57078549bf8647101b"
+      ],
+      "action_server/src/actions/server/_notifications.py": [
+        "100644",
+        "blob",
+        "e619be680f9cccf3c605dc316c2229224e26f84a"
+      ],
+      "action_server/src/actions/server/_oauth2.py": [
+        "100644",
+        "blob",
+        "0c5a7b9daaf2ad14b910c5f341791c7e26653841"
+      ],
+      "action_server/src/actions/server/_portable_paths.py": [
+        "100644",
+        "blob",
+        "a7f9d3b1beb6ce3165823612c0d8f5bfd16b7374"
+      ],
+      "action_server/src/actions/server/_preload_actions/__init__.py": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/_preload_actions/preload_actions.py": [
+        "100644",
+        "blob",
+        "4d0219749c9708243af0e4209f4a5e22386affde"
+      ],
+      "action_server/src/actions/server/_preload_actions/preload_actions_autoexit.py": [
+        "100644",
+        "blob",
+        "23ec6ad5e6cdfdc457878538b44c53e1e29aa8a3"
+      ],
+      "action_server/src/actions/server/_preload_actions/preload_actions_server_main.py": [
+        "100644",
+        "blob",
+        "390a1db0e3fb15dc13fa3137565026e64981eeac"
+      ],
+      "action_server/src/actions/server/_preload_actions/preload_actions_streams.py": [
+        "100644",
+        "blob",
+        "6f380c32086f2514aef57e77f754ac631b13ad6f"
+      ],
+      "action_server/src/actions/server/_preload_actions/preload_actions_teardown.py": [
+        "100644",
+        "blob",
+        "70af8bef71426599abc24a5eec8da239c7d0c36a"
+      ],
+      "action_server/src/actions/server/_protocols.py": [
+        "100644",
+        "blob",
+        "0dc99fd17e55f78987c007acdeb603ccabee543e"
+      ],
+      "action_server/src/actions/server/_rcc.py": [
+        "100644",
+        "blob",
+        "1a310407efe52091194e4d121ac7bece15ea5b70"
+      ],
+      "action_server/src/actions/server/_rcc_robot_utils.py": [
+        "100644",
+        "blob",
+        "4be3348377d75a477473aa7a9873030f0264f514"
+      ],
+      "action_server/src/actions/server/_rcc_runtime_adapter.py": [
+        "100644",
+        "blob",
+        "09234363409bf979016a970c34b8b38ff642fb1f"
+      ],
+      "action_server/src/actions/server/_robo_utils/auth.py": [
+        "100644",
+        "blob",
+        "8620ff37ff9ae726996921b19cba8d48287b6cee"
+      ],
+      "action_server/src/actions/server/_robo_utils/callback.py": [
+        "100644",
+        "blob",
+        "27064ea9aaf807cc02c0122e7c55cf8d2b9c195c"
+      ],
+      "action_server/src/actions/server/_robo_utils/constants.py": [
+        "100644",
+        "blob",
+        "2dd3131259c3566348950bafa4681f09157ad828"
+      ],
+      "action_server/src/actions/server/_robo_utils/log_custom_handler.py": [
+        "100644",
+        "blob",
+        "f80009178874f00c2b42363dc1008a8d25c99f20"
+      ],
+      "action_server/src/actions/server/_robo_utils/log_formatter.py": [
+        "100644",
+        "blob",
+        "d6a66cd9a829dee870512448bbbbb3d77c0dd0e1"
+      ],
+      "action_server/src/actions/server/_robo_utils/process.py": [
+        "100644",
+        "blob",
+        "5c10630a44bdee21f570ebbbd199c188e0837994"
+      ],
+      "action_server/src/actions/server/_robo_utils/run_in_thread.py": [
+        "100644",
+        "blob",
+        "2b06ecbce44aaafb256c104fccf1387bce971aa8"
+      ],
+      "action_server/src/actions/server/_robo_utils/system_mutex.py": [
+        "100644",
+        "blob",
+        "a786fb09054580cc17f14be825ec5b45892a1f56"
+      ],
+      "action_server/src/actions/server/_runs_state_cache.py": [
+        "100644",
+        "blob",
+        "3774e9a0e77d43e63a18733a4ff5652454ef06ce"
+      ],
+      "action_server/src/actions/server/_scheduler.py": [
+        "100644",
+        "blob",
+        "608c9c154221e5fedb6651d44843624032c6494b"
+      ],
+      "action_server/src/actions/server/_selftest.py": [
+        "100644",
+        "blob",
+        "ee3268ae80b424f42f341770afad86bf72ee717f"
+      ],
+      "action_server/src/actions/server/_server.py": [
+        "100644",
+        "blob",
+        "6f5e6fe658fb2d7c2dd2271bf2169adbe18be86b"
+      ],
+      "action_server/src/actions/server/_server_websockets.py": [
+        "100644",
+        "blob",
+        "e98fb04d7f04f3df3ebbf332fc50eb375e193713"
+      ],
+      "action_server/src/actions/server/_settings.py": [
+        "100644",
+        "blob",
+        "611698dab1ca583346de9685ec889935169eacd1"
+      ],
+      "action_server/src/actions/server/_slugify.py": [
+        "100644",
+        "blob",
+        "3f7261672112b5879dbfe1ee0bae16ad116e2452"
+      ],
+      "action_server/src/actions/server/_static_contents.py": [
+        "100644",
+        "blob",
+        "06f4c3821cdcb6c38e3a4b2c3c807f0c35ba840f"
+      ],
+      "action_server/src/actions/server/_storage.py": [
+        "100644",
+        "blob",
+        "557a31aae4c60f57559f160750823adbe8b98671"
+      ],
+      "action_server/src/actions/server/_triggers.py": [
+        "100644",
+        "blob",
+        "1bc1981d15952134f9e404dc22c2add8941e83b3"
+      ],
+      "action_server/src/actions/server/_user_session.py": [
+        "100644",
+        "blob",
+        "7929feef472137f4eef96150f61c6c51d0591002"
+      ],
+      "action_server/src/actions/server/_watcher.py": [
+        "100644",
+        "blob",
+        "3265644244cc7106228431ee42346c52b6c285aa"
+      ],
+      "action_server/src/actions/server/_whitelist.py": [
+        "100644",
+        "blob",
+        "0ca629d3ec354429b23e2f8d0d73e65f3abb03d1"
+      ],
+      "action_server/src/actions/server/_work_items_import.py": [
+        "100644",
+        "blob",
+        "99d2f97ba60e1f52bafd3660f4fcb1fdfd13189e"
+      ],
+      "action_server/src/actions/server/_work_items_paths.py": [
+        "100644",
+        "blob",
+        "4a56027ce0acb27344ac7a142c07be5262ea6e43"
+      ],
+      "action_server/src/actions/server/api.py": [
+        "100644",
+        "blob",
+        "16f57f9ebc9d2893f883147f5892bc95514f1cba"
+      ],
+      "action_server/src/actions/server/bin/.gitignore": [
+        "100644",
+        "blob",
+        "32f18dede5f98b4cd1828672e43595a2e72f6fdc"
+      ],
+      "action_server/src/actions/server/cli.py": [
+        "100644",
+        "blob",
+        "829e465a2365e82d41a9503d0caa009f23370a0b"
+      ],
+      "action_server/src/actions/server/deployments/__init__.py": [
+        "100644",
+        "blob",
+        "5036ae71faab7d51505ec7bb7c9a3335d223005a"
+      ],
+      "action_server/src/actions/server/deployments/canonical.py": [
+        "100644",
+        "blob",
+        "4d9872fc842f1b54321f58bb514027386640709b"
+      ],
+      "action_server/src/actions/server/deployments/ids.py": [
+        "100644",
+        "blob",
+        "5c0d4639d7610f5847324b168b91d67acd75b640"
+      ],
+      "action_server/src/actions/server/deployments/source_manifest.py": [
+        "100644",
+        "blob",
+        "5c02ece585884a656175d586e6b3d5a64f0c065e"
+      ],
+      "action_server/src/actions/server/deployments/source_read.py": [
+        "100644",
+        "blob",
+        "7ec910a2ef7aecd2be73c6a7b786d42ea78c81af"
+      ],
+      "action_server/src/actions/server/deployments/source_staging.py": [
+        "100644",
+        "blob",
+        "b475fd6688b7afc6606cde2cba9a1294d771a64c"
+      ],
+      "action_server/src/actions/server/env/__init__.py": [
+        "100644",
+        "blob",
+        "0d0201d472cd6bb7b7c88d2c0f39cda9ea4cf3f7"
+      ],
+      "action_server/src/actions/server/index.html": [
+        "100644",
+        "blob",
+        "29d5a80b19a191ab9e484c317dfbf3cb6703eff8"
+      ],
+      "action_server/src/actions/server/mcp/__init__.py": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/mcp/gateway_metadata.py": [
+        "100644",
+        "blob",
+        "fd5dde93ae135be0cd7b137e6780031018d3fec3"
+      ],
+      "action_server/src/actions/server/mcp/resource_routing.py": [
+        "100644",
+        "blob",
+        "82792a02bdc87982cf739ca8a725a4d79731cb3d"
+      ],
+      "action_server/src/actions/server/mcp/setup_mcp_server_from_actions.py": [
+        "100644",
+        "blob",
+        "d014ef9fe33c552129dface8ac3b3c248dfccbf3"
+      ],
+      "action_server/src/actions/server/mcp/setup_mcp_server_v2.py": [
+        "100644",
+        "blob",
+        "9961a2064dede78f12e21295081b8702ecbe08f8"
+      ],
+      "action_server/src/actions/server/migrations/__init__.py": [
+        "100644",
+        "blob",
+        "7889794dd3db1019bf4cdc179fa892c05943dc79"
+      ],
+      "action_server/src/actions/server/migrations/migration_add_action_enabled.py": [
+        "100644",
+        "blob",
+        "7f6f682ee87d26971fd4b4430dbf1e51652c3d1b"
+      ],
+      "action_server/src/actions/server/migrations/migration_add_action_managed_params.py": [
+        "100644",
+        "blob",
+        "6c0d9981be140578eac2dc8c98b59c9f8f6244d6"
+      ],
+      "action_server/src/actions/server/migrations/migration_add_action_options.py": [
+        "100644",
+        "blob",
+        "a17a0d772c54a2c4206329c5a3b9b0a073bb5474"
+      ],
+      "action_server/src/actions/server/migrations/migration_add_code_verifier.py": [
+        "100644",
+        "blob",
+        "dd2c5ca5e357c740776cb59791a52e2e30fbc44b"
+      ],
+      "action_server/src/actions/server/migrations/migration_add_is_consequential.py": [
+        "100644",
+        "blob",
+        "182b5b12563fdfffaca2737614f813ede33cfdf0"
+      ],
+      "action_server/src/actions/server/migrations/migration_add_mcp_catalog_names.py": [
+        "100644",
+        "blob",
+        "215cf04b0e177f6a0de4ca90e8585d5092b64905"
+      ],
+      "action_server/src/actions/server/migrations/migration_add_mcp_resource_routing.py": [
+        "100644",
+        "blob",
+        "4fc4bc5abfbb34bb016072c29209d7e2263d99c7"
+      ],
+      "action_server/src/actions/server/migrations/migration_add_request_id_to_run.py": [
+        "100644",
+        "blob",
+        "b33cfbe272d90b31e5a48edb95b277f410763de9"
+      ],
+      "action_server/src/actions/server/migrations/migration_add_robot_run_columns.py": [
+        "100644",
+        "blob",
+        "7c242c8d69292e01a5e76df1261d43d687453122"
+      ],
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py": [
+        "100644",
+        "blob",
+        "3629ef55d42815acc7c1701bdd5b6949d3394ec6"
+      ],
+      "action_server/src/actions/server/migrations/migration_add_schedules.py": [
+        "100644",
+        "blob",
+        "9e6ff2a13e035c98ebf146fbcaa702af019f24cd"
+      ],
+      "action_server/src/actions/server/migrations/migration_add_session_and_indexes.py": [
+        "100644",
+        "blob",
+        "ee84b6b52730c904d1c32f852afa1db899ea3cee"
+      ],
+      "action_server/src/actions/server/migrations/migration_align_schema_indexes.py": [
+        "100644",
+        "blob",
+        "6cd015da09df88e10cce5cb0a9967d13c675b5a3"
+      ],
+      "action_server/src/actions/server/migrations/migration_initial.py": [
+        "100644",
+        "blob",
+        "ab3420e7ad5d2316eb57cb0d021dca8b6938d2b5"
+      ],
+      "action_server/src/actions/server/migrations/migration_reconcile_run_columns.py": [
+        "100644",
+        "blob",
+        "814402efff914f9543b6bdbf90dffe78f4df960c"
+      ],
+      "action_server/src/actions/server/migrations/migration_reconcile_schema.py": [
+        "100644",
+        "blob",
+        "f5ff08b883015ec3f849fb56aa57cc909b9c2491"
+      ],
+      "action_server/src/actions/server/package/__init__.py": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/package/_package_build.py": [
+        "100644",
+        "blob",
+        "f4d07df7f735e0d1b71f8bd673f32ae89ae24f39"
+      ],
+      "action_server/src/actions/server/package/_package_build_cli.py": [
+        "100644",
+        "blob",
+        "6e46cea448a7a0ec58b958d63451afbd3a9b48c6"
+      ],
+      "action_server/src/actions/server/package/_package_metadata.py": [
+        "100644",
+        "blob",
+        "60bd368d998b9f15ce305b2bb10e0f51f96fde79"
+      ],
+      "action_server/src/actions/server/package/_package_publish.py": [
+        "100644",
+        "blob",
+        "8cd518c5ab1ac9c1df61c7a09498595b8fa36eb9"
+      ],
+      "action_server/src/actions/server/package/_package_publish_api.py": [
+        "100644",
+        "blob",
+        "81dd0821e5d4dad5274d84f7de6cf572e5189717"
+      ],
+      "action_server/src/actions/server/package/_package_reader.py": [
+        "100644",
+        "blob",
+        "ec5667274b0cb92ac29c654ff9bf099e1bdda8b2"
+      ],
+      "action_server/src/actions/server/package/package_exclude.py": [
+        "100644",
+        "blob",
+        "5ba06d1d058af8e148abc9b5a1040a04cd91de00"
+      ],
+      "action_server/src/actions/server/py.typed": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/run_outputs/__init__.py": [
+        "100644",
+        "blob",
+        "6787c69b364901f1a1eed93e553ae8cfe4d194ef"
+      ],
+      "action_server/src/actions/server/run_outputs/filesystem.py": [
+        "100644",
+        "blob",
+        "89170173dd0f1771e1a9923bb8532f2b28448dd1"
+      ],
+      "action_server/src/actions/server/run_outputs/models.py": [
+        "100644",
+        "blob",
+        "ae75ceee659776fd51e1dda36528a22640afba19"
+      ],
+      "action_server/src/actions/server/run_outputs/service.py": [
+        "100644",
+        "blob",
+        "55f5c09aeb0a3e9199b56916bb7fee41708b35c6"
+      ],
+      "action_server/src/actions/server/run_outputs/transport.py": [
+        "100644",
+        "blob",
+        "32d72daf3037f72ff7caa63d74025735df9a4d22"
+      ],
+      "action_server/src/actions/server/run_outputs/types.py": [
+        "100644",
+        "blob",
+        "cac30880373c26f648bb1c835fb74449f567cb22"
+      ],
+      "action_server/src/actions/server/templates/action-templates.yaml": [
+        "100644",
+        "blob",
+        "3e185da2fc48eeb9c0131eeb1986fadc3adc8329"
+      ],
+      "action_server/src/actions/server/templates/action-templates.zip": [
+        "100644",
+        "blob",
+        "776bdb9a76d078cd68c79c79d4d772638ae0bde6"
+      ],
+      "action_server/src/actions/server/templates/zips/advanced.zip": [
+        "100644",
+        "blob",
+        "d3ccb0f62bfac347b2e04181ba5b7c9d53173e8c"
+      ],
+      "action_server/src/actions/server/templates/zips/basic.zip": [
+        "100644",
+        "blob",
+        "b046ffcb7e087a9158a201d27e2d79e21ef4df36"
+      ],
+      "action_server/src/actions/server/templates/zips/mcp-v2-showcase.zip": [
+        "100644",
+        "blob",
+        "9a0da95fe806c7d2bd4f8a1f2891a2df1bb3120c"
+      ],
+      "action_server/src/actions/server/templates/zips/minimal.zip": [
+        "100644",
+        "blob",
+        "4d9d65500d987674a292398a29ff080feb4bfb03"
+      ],
+      "action_server/src/actions/server/templates/zips/workflow-producer-consumer.zip": [
+        "100644",
+        "blob",
+        "7f4f7beaca4b465c9bcc365b29ab4466ff5f9f28"
+      ],
+      "action_server/src/actions/server/vendored_deps/README.md": [
+        "100644",
+        "blob",
+        "423ac231dee48d533fc2cf896a5cbabc8286d060"
+      ],
+      "action_server/src/actions/server/vendored_deps/__init__.py": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/vendored_deps/action_package_handling/__init__.py": [
+        "100644",
+        "blob",
+        "4989cec7bf5c71416bdbec734596ce230a2513f3"
+      ],
+      "action_server/src/actions/server/vendored_deps/action_package_handling/cli_errors.py": [
+        "100644",
+        "blob",
+        "d66d2efc0ecba39218fe80407d45def88d08dc46"
+      ],
+      "action_server/src/actions/server/vendored_deps/gen_certificate.py": [
+        "100644",
+        "blob",
+        "1a2db5cbd3835e7f85c83d2dfbaaecd408f6f365"
+      ],
+      "action_server/src/actions/server/vendored_deps/ls_protocols.py": [
+        "100644",
+        "blob",
+        "bc44aba71154e3793335370834547197a19610f2"
+      ],
+      "action_server/src/actions/server/vendored_deps/oauth2_settings.py": [
+        "100644",
+        "blob",
+        "b5c2c3f99e5836ae9867a24da8e006e9ef6cd9d5"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/__init__.py": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/_conda_deps.py": [
+        "100644",
+        "blob",
+        "d7d59a1e1f96bc2e2bb3894818ab42f5117dde2f"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/_deps_protocols.py": [
+        "100644",
+        "blob",
+        "fe51a5fe66c34e01dda46f24c47fc5c2e1812efb"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/_package_deps.py": [
+        "100644",
+        "blob",
+        "b01fa935da23e2e6aaec53e9190c8c714589c652"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/_pip_deps.py": [
+        "100644",
+        "blob",
+        "6c6501a87b66de6a45084bd49641068b8e3ed7ea"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/analyzer.py": [
+        "100644",
+        "blob",
+        "6d46fb3fda48fd8db0ca19fa0b9108e773d7aab4"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/conda_cloud.py": [
+        "100644",
+        "blob",
+        "aae122f04c8199ca8b6723493f1e91ca577b8311"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/conda_impl/__init__.py": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/conda_impl/conda_channel.py": [
+        "100644",
+        "blob",
+        "0241ac66ef4657b8a830f3901af4e5e66110a783"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/conda_impl/conda_match_spec.py": [
+        "100644",
+        "blob",
+        "6aebddd04967275d56f50b24680fcda222ae4615"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/conda_impl/conda_path.py": [
+        "100644",
+        "blob",
+        "11121672261d2fceb1519ae83401debb14db6788"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/conda_impl/conda_url.py": [
+        "100644",
+        "blob",
+        "09d46f680e9d301ee0d74bf930f1a9f2d7242cc9"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/conda_impl/conda_version.py": [
+        "100644",
+        "blob",
+        "e9ce170dcffdb3ef8386e5b259ad05091a9a4a22"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/pip_impl/__init__.py": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/pip_impl/pip_distlib_util.py": [
+        "100644",
+        "blob",
+        "41ba83dbf0291ca19b8d15c3cce27a89fb0dfa7e"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/pip_impl/pip_packaging_structure.py": [
+        "100644",
+        "blob",
+        "90a6465f9682c886363eea5327dac64bf623a6ff"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/pip_impl/pip_packaging_version.py": [
+        "100644",
+        "blob",
+        "4d8f3163120d3613ea52998d89c8fa5f450c7ed5"
+      ],
+      "action_server/src/actions/server/vendored_deps/package_deps/pypi_cloud.py": [
+        "100644",
+        "blob",
+        "9a37d41e87067b05ddccd6c8aa605edbfcf5111b"
+      ],
+      "action_server/src/actions/server/vendored_deps/termcolors/__init__.py": [
+        "100644",
+        "blob",
+        "98870846f484e08868b5d6769a0e68a170c85c01"
+      ],
+      "action_server/src/actions/server/vendored_deps/url_callback_server.py": [
+        "100644",
+        "blob",
+        "1b2f6cba2da60e74f6e9eeb493a42dc9899a3192"
+      ],
+      "action_server/src/actions/server/vendored_deps/yaml_with_location.py": [
+        "100644",
+        "blob",
+        "4450fe5fbb5039e3fd4c2508c7bd0f0dc66fc3ca"
+      ],
+      "actions-http-helper/poetry.lock": [
+        "100644",
+        "blob",
+        "a8ee796ee5d149edcb9999ee519010bbb489b526"
+      ],
+      "actions-http-helper/pyproject.toml": [
+        "100644",
+        "blob",
+        "311c7f28fa6d441755b26945ed6374a4fcb67263"
+      ],
+      "actions-http-helper/src/actions_http/__init__.py": [
+        "100644",
+        "blob",
+        "df54ed0040d666ece1496f4f40980d0f33f28834"
+      ],
+      "actions-http-helper/src/actions_http/py.typed": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "actions-http-helper/src/actions_http/types.py": [
+        "100644",
+        "blob",
+        "88551165dc38c9c3fea49aafae25084efaeae3cd"
+      ],
+      "actions/poetry.lock": [
+        "100644",
+        "blob",
+        "71f2fcbefe63f62092d9559686505505b4b923ab"
+      ],
+      "actions/pyproject.toml": [
+        "100644",
+        "blob",
+        "a93e622dfd2764592d51ab4bb02e8e796a6abae3"
+      ],
+      "actions/src/actions/__init__.py": [
+        "100644",
+        "blob",
+        "b6721b365f79c1737128856c8c7037284460b031"
+      ],
+      "actions/src/actions/__main__.py": [
+        "100644",
+        "blob",
+        "490c0875da3324c47392e76b3dd5a351cdfbb0f0"
+      ],
+      "actions/src/actions/_action.py": [
+        "100644",
+        "blob",
+        "1956cc27f7e4799ee1492caaac20c255379c382e"
+      ],
+      "actions/src/actions/_action_context.py": [
+        "100644",
+        "blob",
+        "7a0efa1368cff1d5fc66e6a0e601f1997a94394c"
+      ],
+      "actions/src/actions/_args_dispatcher.py": [
+        "100644",
+        "blob",
+        "a7367410a8c2064290358e89f202c93d6680e94d"
+      ],
+      "actions/src/actions/_callback.py": [
+        "100644",
+        "blob",
+        "cb2b6479ae54da6610f034004a3ca5549b0f1b29"
+      ],
+      "actions/src/actions/_collect_actions.py": [
+        "100644",
+        "blob",
+        "2406c6ac5674ba5369b17b0c4a0f8069028d95af"
+      ],
+      "actions/src/actions/_commands.py": [
+        "100644",
+        "blob",
+        "38f391d5a9fdf95bfa02906b111f3dc094a6c186"
+      ],
+      "actions/src/actions/_config.py": [
+        "100644",
+        "blob",
+        "18eac444418d691b999a013949a73a22a0ef946e"
+      ],
+      "actions/src/actions/_constants.py": [
+        "100644",
+        "blob",
+        "c660cbfe12b6edf6686664d3d33eb871185877ac"
+      ],
+      "actions/src/actions/_customization/__init__.py": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "actions/src/actions/_customization/_extension_points.py": [
+        "100644",
+        "blob",
+        "dcbed4544e6f3621e48f05d637524c40c508b7bc"
+      ],
+      "actions/src/actions/_customization/_plugin_manager.py": [
+        "100644",
+        "blob",
+        "3dc4d3c12c0743c1509253fbfc7037d56741a833"
+      ],
+      "actions/src/actions/_exceptions.py": [
+        "100644",
+        "blob",
+        "52a7a94c23742daa190e2cfb26b435921bd3a2c0"
+      ],
+      "actions/src/actions/_fixtures.py": [
+        "100644",
+        "blob",
+        "9bfa49e411f3c12e700526ed6c8c9d05285b7038"
+      ],
+      "actions/src/actions/_hooks.py": [
+        "100644",
+        "blob",
+        "aab116c7e7b8359c7da51f68823bff35ce80b688"
+      ],
+      "actions/src/actions/_interrupts.py": [
+        "100644",
+        "blob",
+        "cdee50bdb3d9180f742a06125613339674fbc082"
+      ],
+      "actions/src/actions/_lifecycle.py": [
+        "100644",
+        "blob",
+        "499bb7aaaad1fc7d617583147509d9891cd461a0"
+      ],
+      "actions/src/actions/_lint_action.py": [
+        "100644",
+        "blob",
+        "336bd32f08bc02bac505748abfaa30b809f993db"
+      ],
+      "actions/src/actions/_log_auto_setup.py": [
+        "100644",
+        "blob",
+        "e9bdde76ec3e6cae50dce5b896c40a96ff485134"
+      ],
+      "actions/src/actions/_log_output_setup.py": [
+        "100644",
+        "blob",
+        "9212639ec7e3d02a07edde7e09bcc852dc2261ba"
+      ],
+      "actions/src/actions/_managed_parameters.py": [
+        "100644",
+        "blob",
+        "8b2aa7b700e9924101477c414a9392e3109f9882"
+      ],
+      "actions/src/actions/_protocols.py": [
+        "100644",
+        "blob",
+        "4e870f7557f5362a5b25c2957fc80717965f2542"
+      ],
+      "actions/src/actions/_raw_types_handler.py": [
+        "100644",
+        "blob",
+        "5a384710bcd7cb981defaaee95aea23326c624ff"
+      ],
+      "actions/src/actions/_remove_refs.py": [
+        "100644",
+        "blob",
+        "c9ba8efe76e16ab74029a77558c48d195bfd737a"
+      ],
+      "actions/src/actions/_request.py": [
+        "100644",
+        "blob",
+        "3a2a350de5e752656fa0a903d25a6ac65eb71b13"
+      ],
+      "actions/src/actions/_request_impl.py": [
+        "100644",
+        "blob",
+        "eed11b15bed867b0f5582e79a4f8a7612f3b7eb9"
+      ],
+      "actions/src/actions/_response.py": [
+        "100644",
+        "blob",
+        "ea8f52a3e6152d058618af40a1ef466753888a08"
+      ],
+      "actions/src/actions/_secret/__init__.py": [
+        "100644",
+        "blob",
+        "4de265c1415b382b6cd937ee64ef8edb367533d6"
+      ],
+      "actions/src/actions/_secret/_oauth2_secret.py": [
+        "100644",
+        "blob",
+        "9c30ea914320f2bf063ae0a533892d3379be22ce"
+      ],
+      "actions/src/actions/_secret/_secret.py": [
+        "100644",
+        "blob",
+        "d9572f25619a446618e3ab53b410fbbac6d33e7f"
+      ],
+      "actions/src/actions/_table.py": [
+        "100644",
+        "blob",
+        "09d1114f9603ff811e41c57579c3cfff3a92e225"
+      ],
+      "actions/src/actions/_uris.py": [
+        "100644",
+        "blob",
+        "a56882746183a2fd658853cdd9b04b7aa14822c1"
+      ],
+      "actions/src/actions/_variables_scope.py": [
+        "100644",
+        "blob",
+        "c8c7708041de73e891a4ad405fb60752dcb8b9cb"
+      ],
+      "actions/src/actions/agent/__init__.py": [
+        "100644",
+        "blob",
+        "c91091024314afefa3ddb7c7d611ad797938d315"
+      ],
+      "actions/src/actions/agent/_client.py": [
+        "100644",
+        "blob",
+        "717ba569a6636101af93353c7445109e61d2ae98"
+      ],
+      "actions/src/actions/agent/_models.py": [
+        "100644",
+        "blob",
+        "9b97fdf3154bcb7be7f97c5edace3cb6185b946c"
+      ],
+      "actions/src/actions/agent/_platforms.py": [
+        "100644",
+        "blob",
+        "fb8c270ceccb3c7283823999b646d80a347c9c41"
+      ],
+      "actions/src/actions/agent/_response.py": [
+        "100644",
+        "blob",
+        "ecb35611cdfa20834030b9d69f8b445294a5c5bd"
+      ],
+      "actions/src/actions/api.py": [
+        "100644",
+        "blob",
+        "ae0b79e2303987f03082920d00fe0c7dd95cfe20"
+      ],
+      "actions/src/actions/chat/__init__.py": [
+        "100644",
+        "blob",
+        "998a021a9b3f09d288132d11219fae368234b5d1"
+      ],
+      "actions/src/actions/chat/_client.py": [
+        "100644",
+        "blob",
+        "d86de329221adb717f5da3d8e075541e6bd2e0eb"
+      ],
+      "actions/src/actions/cli.py": [
+        "100644",
+        "blob",
+        "7f46a1a5a14aa0cefcb59dd50a0a2fca1e6e703d"
+      ],
+      "actions/src/actions/mcp/__init__.py": [
+        "100644",
+        "blob",
+        "e997a62833877d9394365cfc261e15d9e9c0b7d1"
+      ],
+      "actions/src/actions/mcp/_metadata.py": [
+        "100644",
+        "blob",
+        "e761a0608505c053532c807f81b888839fd1be06"
+      ],
+      "actions/src/actions/mcp/_validate_prompt.py": [
+        "100644",
+        "blob",
+        "5f15a2d5bd58feb232b3fb9e83f8ae886a4bf9b2"
+      ],
+      "actions/src/actions/mcp/_validate_resource.py": [
+        "100644",
+        "blob",
+        "99b679431384f79ac3ec9ce9dcb0b8603d5fb1b4"
+      ],
+      "actions/src/actions/mcp/py.typed": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "actions/src/actions/py.typed": [
+        "100644",
+        "blob",
+        "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      ],
+      "actions/src/actions/server_integration.py": [
+        "100644",
+        "blob",
+        "7e4971b949a1b4f2bb7008d4c86b0d21d81cf0ea"
+      ]
+    },
+    "five_selected_tests_separate": {
+      "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": [
+        "100644",
+        "blob",
+        "12ec0f644d96a45824ac110b7f1dafebb4c42ce6"
+      ],
+      "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": [
+        "100644",
+        "blob",
+        "0e1ab11bdd4b52e2d35d06b42dd17996dd082022"
+      ],
+      "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": [
+        "100644",
+        "blob",
+        "534e51afbc75b4d3ce473dee37d7ac00d52dbc92"
+      ],
+      "action_server/tests/action_server_tests/test_cli_multi_package_sync.py": [
+        "100644",
+        "blob",
+        "b0919a8b7508954976a8fab631a5fff219c2aeb8"
+      ],
+      "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py": [
+        "100644",
+        "blob",
+        "7a5a378bf1f8151118034d18b5dfb269f2b24e90"
+      ]
+    },
+    "qualification": "UNQUALIFIED for old92498 native assets;275 production plus5 selected tests are280 combined, not280 production."
+  },
+  "retained_historical_receipts_exact": [
+    {
+      "path": "/workspace/engineering/pr300-readonly-preparation.json",
+      "bytes": 1367,
+      "sha256": "a7913b199135a5fa8c0af27302e099f9ec9ca6f7d2dc91427150a8b128797adc"
+    },
+    {
+      "path": "/workspace/engineering/pr300-merge-preview.txt",
+      "bytes": 40285,
+      "sha256": "e0909ecfbf868a59ed771ca634f916301af2552b92066abf73b2ea0c70e658ab"
+    },
+    {
+      "path": "/workspace/engineering/reconciliation/pr300-live.json",
+      "bytes": 7411,
+      "sha256": "e26b49afdd2ff1b906dc14dc72a95d9ade78996ee7090304e007ce3406998f35"
+    },
+    {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/current-open-pr-audit-20261010T1753Z/pr300-loopback-review.json",
+      "bytes": 4540,
+      "sha256": "7562e2aaf7bd357a6d208faf629b53b7a0d25f51cb46ab74bfe1fa7d748a95d5"
+    }
+  ],
+  "required_next_acceptance": [
+    "Independent exact-head SOURCE review before root retarget or push",
+    "Root normal retarget from existing shared-run-output base to actual target branch and existing-ref push in order that runs CI against accepted actual2996181, not obsolete stack base",
+    "Fresh complete exact-head hosted checks and synthetic checkout/source tree, status/review/thread/policy acceptance; no prior-head green carry",
+    "Actual artifact/platform/backend/provider/private graph/identity/consumer release gates remain retained HOLD"
+  ],
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/repository-operations.md",
+    "exact_delta": {
+      "path": "/workspace/engineering/pr300-actual299-refresh/canonical-prepared-fixture-assets-exact-child.patch",
+      "bytes": 1202,
+      "sha256": "b5b2091ec74313e13abe1f2b3d1df7068736691179dbf9a3e0df5bc87270cfc5"
+    },
+    "added_lines": 8,
+    "source_commit": "7840057a8b055576d11d339d8c0fbb738927a491",
+    "durable_learning": "Verified reuse of package environments and own module prefixes does not populate a new checkout ignored pinned RCC fixture asset; prove already-owned binary digest/mode and package pin before tests, retain exact source/output identity when copying, and do not substitute acquisition or unrelated generated content.",
+    "evidence": "Original57PASS93fixtureERROR1integrationDESELECT log; unchanged fixture default path; exact already-owned7e588/22282402B/mode0711 copy; named150PASS successor and unchanged application/test bytes; all1421 pre/post full exact; original static source was tracked exact and not copied, generated OAuth absent and not synthesized.",
+    "stale_or_ambiguous_guidance_removed": "Environment reuse alone is insufficient fixture preparation; exact output reuse is not a new Bootstrap installer execution or binary build. Original57/93 failed gate remains FAILED; initial whole-repository116-vs-GitHub30 generator inspector FAILED before replay remains retained.",
+    "preserved_existing_lessons": "Original accepted GET transport provenance guide plus both ordinary parent guide lessons retained; current-actor/grant reader-acquisition scope does not qualify active-stream revocation, HEAD, ranges, deployed identity or native backend.",
+    "remaining_uncertainty": "Current hosted CI and policy gates after root retarget/push, source reviewer acceptance, production identity/provider/Canvas/platform/installed-native acceptance and complete private/release graph remain unqualified."
+  },
+  "remaining_HOLD": [
+    "Fresh current hosted CI after retarget/push",
+    "Old92498 native assets remain UNQUALIFIED:275production=260old matches+8changed+7added; five selected tests exact separately (280 combined, not production)",
+    "No actual provider/browser/PG/manual-native/consumer/platform/full-private/production principal/Canvas/ChatGPT/release claim",
+    "No active stream revocation, HEAD or Range features",
+    "No universal process-reaping or complete environment tree integrity claim"
+  ],
+  "evidence_refs": [
+    {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/current-open-pr-audit-20261010T1753Z/pr300-loopback-review.json",
+      "bytes": 4540,
+      "sha256": "7562e2aaf7bd357a6d208faf629b53b7a0d25f51cb46ab74bfe1fa7d748a95d5"
+    },
+    {
+      "path": "/workspace/engineering/pr299-actual-integration-independent-review/independent-actual299-integration-readback.json",
+      "bytes": 6973,
+      "sha256": "06a652e23b77573ab5cfe9a8837b46de42909efd50908dcea031d7311a27c9ba"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/after-authorized-full-canonical-exact-child.patch",
+      "bytes": 1202,
+      "sha256": "b5b2091ec74313e13abe1f2b3d1df7068736691179dbf9a3e0df5bc87270cfc5"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/after-authorized-full-complete-source-proof.json",
+      "bytes": 423873,
+      "sha256": "c2efd8ac3af51ab9c31080e3f5c73ae0b8f70fc2b13001b1c078124da15119de"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/after-authorized-full-prepared-inputs-and-original-receipts-proof.json",
+      "bytes": 640,
+      "sha256": "1cfecffb76acf08bf6047f37e465d6dbf93a2cdf262ad58b6778fcaff3ab59c5"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/before-authorized-full-complete-source-proof.json",
+      "bytes": 423873,
+      "sha256": "c2efd8ac3af51ab9c31080e3f5c73ae0b8f70fc2b13001b1c078124da15119de"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/canonical-prepared-fixture-assets-exact-child.patch",
+      "bytes": 1202,
+      "sha256": "b5b2091ec74313e13abe1f2b3d1df7068736691179dbf9a3e0df5bc87270cfc5"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/doctor.log",
+      "bytes": 12787,
+      "sha256": "bbc3661f80a55a8875b8aad73f54a0edaf7086727e4c984495d3c11d82e5f986"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/existing-prepared-runtime-inputs-copy-successor-v2.json",
+      "bytes": 1330,
+      "sha256": "53c78b26a447c43aee220210b55da176f58b55525cfc1b2a5903068a89d52101"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/five-own-prepared-environment-copy-and-path-rebinding.json",
+      "bytes": 61700,
+      "sha256": "bfc96add0b529467cf1082d8fb9198520e4b5284e1ad4582d93b3ab7c89935a7"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/full-configured-runtime-source-exit.json",
+      "bytes": 240,
+      "sha256": "110e50813f46c6bfd8479d2453cec26a9ceb1cd190bb862df6284a1f329d0d59"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/full-configured-runtime-source-safe-terminal.json",
+      "bytes": 721,
+      "sha256": "10d2e4a128a9a993cf3f6dd2e96d3d6b514c7aafa116014fecd702d4ffe02b07"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/full-configured-runtime-source.log",
+      "bytes": 319769,
+      "sha256": "b3db4a1fe6edbd3ee1d1734272bbd5aa7637a2537db2dabe3f47183ba90f0569"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/generator-roundtrip-successor-v2-receipt.json",
+      "bytes": 4217,
+      "sha256": "fa7497179a2140b5817e0b8c99847c42e9abd59958cf165dc0892e68e3c1c5bd"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/generator-roundtrip-successor-v2.log",
+      "bytes": 4421,
+      "sha256": "f2a3bea994765d45cb3c9653c002347f6b9585875d21f1dde2eae8a9a619828a"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/generator-roundtrip-v2.py",
+      "bytes": 1449,
+      "sha256": "b6f2bbc59ebe9f17dc2d251e949de2c79ec73f463564588c41c9a40591c934b0"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/generator-roundtrip.log",
+      "bytes": 4142,
+      "sha256": "2f7693943be73fdd04a80b770f055cbe4b78a2eb8ccfce94a7f079fd6363c29b"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/generator-roundtrip.py",
+      "bytes": 1579,
+      "sha256": "0aeb3340f291e09b14b445b82f3d335012660c92d9ed3c848973063a46de1efc"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/materialize-existing-remote-branch.log",
+      "bytes": 394,
+      "sha256": "7542871d4c8a3427e39501f5edac6d02ad0ac5990a42c9619600fb0eadc2bee7"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/ordinary-actual299-merge.log",
+      "bytes": 5030,
+      "sha256": "382d562308dac1819c1e6de9790bbffeadc53e16cd67e5e43e650e0d6dedf38f"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/ordinary-subject.json",
+      "bytes": 326,
+      "sha256": "b4f2813c9a661a2d69497b4d211501d69432f44aec8bf1e3b9dd30492bde3d47"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/origin-action_server.json",
+      "bytes": 285,
+      "sha256": "14008244eb89d7c7d6323d199150aa45b38c807d1756cc894aed7217b7d3ddd9"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "51dbbcf6d9ec45a2f184d73c0bf0bd38230b34980fda730a8830b6aac89f62f2"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/origin-actions.json",
+      "bytes": 218,
+      "sha256": "00ea15da32166b51cc26fc172a519c9c1ff01cec0e5558bec06b6b1388902405"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "a7b9eb046e514eec2d73d6fac49c2a84583908edcc76daf86d645018f305f9f9"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "37cf345d735f8a526313ad75ed0c24e743528b04e47b86a09c7c385f295e04f5"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6459,
+      "sha256": "77be9a1338a4f85f4817c5d9f9da8275492809722914c79a7319db2e41e76386"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/own-Bootstrap-reuse.log",
+      "bytes": 6705,
+      "sha256": "0ab6469f32c939b3ac8b47170f4f0f1e8ce60c75d86154b050fe82398907cdd6"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/own-prepared-30-input-pr299-parity.json",
+      "bytes": 3462,
+      "sha256": "5e5c2175ccb82459e1835cc6f6f4f17b2658b3f6be87b28849f66a46e07872c2"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/owner-light-ready-prehash-capacity-FULL-HOLD.json",
+      "bytes": 6259,
+      "sha256": "4b7de95665f79f45c52a5edfd2e332dbfc536bd26ee5275a89919c7b666d09bc"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/run-authorized-full.py",
+      "bytes": 485,
+      "sha256": "6a8cb72fb3cb2b20561a9ca97a4f4411a1ce201fa7c4ceb3cd41cf4e31e12a5d"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/run-light-gates.py",
+      "bytes": 426,
+      "sha256": "dce6a902cfdc5e53559456f181d3e368634901fcade64a284ac44fb3ab6ec680"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/scoped-configured-static-successor-v2.log",
+      "bytes": 6306,
+      "sha256": "7dc9f7815ff3c54982198496e11d56e3599230f59a21fc1812efab33d74274e1"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/scoped-configured-static.log",
+      "bytes": 159768,
+      "sha256": "2c89af98c6413d56e3804e7a7c7bcd8a5a87274f84ff53cc0d1934015f4a96a4"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/toolkit.log",
+      "bytes": 14345,
+      "sha256": "1a40dc36f88c7ee872b670d968d928a19601c354f293b0767143c3ffd84b68c7"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/verify-after-authorized-full-source.py",
+      "bytes": 6319,
+      "sha256": "9bdefd76050d87879b4c0972d227ebb9bd5e6dd45b283423be2d84f19ff681ea"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/verify-current-source.py",
+      "bytes": 6322,
+      "sha256": "9bf755c3cd17f559e0532fc2988150e6724b4e54cb2ae2d1eb021e5f9cc9aa8b"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/verify-own-bootstrap-reuse.py",
+      "bytes": 3137,
+      "sha256": "f374fbac338194fd7dcc1fbe1d2e89eccfcb76e5f34d1634a58265f833cbdfc5"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/verify-postfull-prepared-inputs.py",
+      "bytes": 2677,
+      "sha256": "e931ca6812c425c338d19a67737dd714fa32b5cef5dd11ce6dcd2f9c0819792c"
+    },
+    {
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/immutable-actual299-existing-PR300-source-handoff-v4.json",
+      "bytes": 13230,
+      "sha256": "49e6a05a63b7e7b4f9ef42aa8c7158899192dee57c3b4866eb452d6a911228fb"
+    },
+    {
+      "path": "/workspace/engineering/pr300-merge-preview.txt",
+      "bytes": 40285,
+      "sha256": "e0909ecfbf868a59ed771ca634f916301af2552b92066abf73b2ea0c70e658ab"
+    },
+    {
+      "path": "/workspace/engineering/pr300-readonly-preparation.json",
+      "bytes": 1367,
+      "sha256": "a7913b199135a5fa8c0af27302e099f9ec9ca6f7d2dc91427150a8b128797adc"
+    },
+    {
+      "path": "/workspace/engineering/reconciliation/pr300-live.json",
+      "bytes": 7411,
+      "sha256": "e26b49afdd2ff1b906dc14dc72a95d9ade78996ee7090304e007ce3406998f35"
+    }
+  ],
+  "evidence_refs_fingerprint_sha256": "4f7c5969f45bbf37544ad690747d1651bfe693f164e7128dfd0ae78ab1bbc43a",
+  "capacity_post_full": {
+    "total": 33770192896,
+    "used": 30928089088,
+    "free": 1107341312
+  },
+  "upstream_disposition": "none"
+}

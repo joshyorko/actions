@@ -1,0 +1,41 @@
+{
+  "status": "ROOT_RELEASE_ONE_EXPLICIT_TWO_WORKER_SOURCE_FULL_ONLY",
+  "proposal": {
+    "path": "/workspace/engineering/runtime-checkout-eol-source/OWNERFINAL-runtime-checkout-eol-prefull-explicit-worker-bound-v2.json",
+    "sha256": "7bf6cab2ba416579fd66858e0bb0715622f5f526ee973a4b12cb0eef12a02a5a",
+    "bytes": 6149
+  },
+  "independent_review": {
+    "path": "/workspace/engineering/runtime-checkout-eol-independent-worker-bound-v2-review/OWNERFINAL-independent-explicit-worker-bound-prefull-GO.json",
+    "sha256": "697bfa3f95a6e3d3adbcef1784904c97da743ecb06441ac7782ea42d81210669",
+    "bytes": 7220
+  },
+  "source_head": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+  "source_tree": "8c7362e63c85a930ca2fe962ede9bc3ebb6ffe68",
+  "tracked_leaves_reverified": 1421,
+  "all_original_LIGHT_and_proposal_bindings_reverified": true,
+  "workspace_available_bytes": 1503854592,
+  "consumer_gateway_terminal": true,
+  "outer_full_argv": [
+    "env",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/bin/rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/engineering/runtime-checkout-eol-source/full-source-gates-explicit-worker-bound-v2.py"
+  ],
+  "cwd": "/workspace/engineering/runtime-checkout-eol",
+  "explicit_environment": {
+    "PYTEST_XDIST_AUTO_NUM_WORKERS": "2"
+  },
+  "execution_limit": "Exactly one 600s TERM then 10s KILL; two workers for both sequential commands; no retry",
+  "remaining_holds": "Full source final review, hosted Windows artifacts, OAuth, private/native/provider/other-consumer acceptance and release remain separate gates"
+}

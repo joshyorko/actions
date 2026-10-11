@@ -1,0 +1,142 @@
+{
+  "verdict": "GO_DETERMINISTIC_ORIGINAL_RED_AND_MINIMAL_BOUNDED_FIX_PROPOSAL_ONLY",
+  "owner": {
+    "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/OWNERFINAL-original-cleanup-deterministic-control-v2.json",
+    "bytes": 17714,
+    "sha256": "ab1d68eded83108fa58c32046f2d2c2b8dfa92972b6fedf7a66a4cb72ab87c22"
+  },
+  "binding_count_verified": 31,
+  "source": {
+    "prepared_head": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+    "tree": "a31db4434c7bbe69bf572626d2174f64f9ff2f39",
+    "body": {
+      "path": "/workspace/engineering/pr306/action_server/src/actions/server/_common/process.py",
+      "bytes": 31134,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    "function_AST_sha256": "4daa20a96616417a162184172d77db8902ab5a10f21e2bed0dfc12368460d3bc",
+    "original_actual_checkout": "522b7bc6e7e9207dac0c745b49d90907ecdf3080",
+    "original_actual_body_exact": true,
+    "worktree_clean_before_and_after": true
+  },
+  "original_control": {
+    "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/test_original_cleanup_control.py",
+    "bytes": 6967,
+    "sha256": "f73570bb3366ac1084ded7d6127e03dcba5a3cbf80fe7e2f18eeab1193aff09a"
+  },
+  "original_JUnit": {
+    "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/original-control-junit.xml",
+    "bytes": 2874,
+    "sha256": "bdae2172c6a360419336efd0b7a4ff9d4336d77cbe4ab20fe5db1a680a425de3"
+  },
+  "original_private_log": {
+    "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/original-control.private.log",
+    "bytes": 9367,
+    "sha256": "6c0103b18d56afb3f8774f2536a3a70506c4cd7c39b71fd3b3190695d26839ff"
+  },
+  "checked_preflight": {
+    "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/checked-preflight.json",
+    "bytes": 5462,
+    "sha256": "81c0629add8c94f2880a66d5722708e0c7067503f8c7dddbfdf79720a0e9b2ef"
+  },
+  "source_callers": [
+    {
+      "path": "/workspace/engineering/pr306/action_server/src/actions/server/_robo_utils/process.py",
+      "bytes": 14197,
+      "sha256": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7"
+    },
+    {
+      "path": "/workspace/engineering/pr306/action_server/src/actions/server/_selftest.py",
+      "bytes": 25371,
+      "sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af"
+    }
+  ],
+  "original_execution": {
+    "pytest_exit": 1,
+    "gateway_exit": 10,
+    "tests": 9,
+    "PASS": 8,
+    "FAIL": 1,
+    "SKIP": 0,
+    "ERROR": 0,
+    "JUnit_suite_seconds": 0.391,
+    "pytest_terminal_seconds": 0.46,
+    "pytest_terminal_warnings": 1078,
+    "owner_pytest_seconds_correction": "Owner0.391 is JUnit suite duration; original terminal reports0.46 seconds and1078warnings, retained separately.",
+    "intended_failed_assertion": "captured descendant completion within same deadline; not setup failure",
+    "execution_count": 1,
+    "real_target_processes": false
+  },
+  "verified_control_witness": {
+    "first_descendant_wait": 0.2,
+    "second_descendant_wait": 0.2,
+    "quick_Popen_reap": 0.01,
+    "returned_at": 0.41,
+    "captured_child_absent_at_modeled": 0.75,
+    "tree_deadline": 18.0,
+    "unused_budget": 17.59,
+    "captured_child_live_at_return": true,
+    "strict_incomplete_result_preserved": true
+  },
+  "control_scope": {
+    "nine_outcomes_verified": [
+      "PID-reuse",
+      "asynchronous-exit",
+      "kill-error",
+      "never-exits",
+      "prompt-exit",
+      "snapshot-error",
+      "wrapper-not-reaped",
+      "zero-budget",
+      "zombie"
+    ],
+    "exclusive_Popen_wrapper_reap": true,
+    "PID_reuse": "old fake identity handle reports NoSuchProcess; no childPIDlookup; not OS psutil identity proof",
+    "snapshot_and_error_failclosed": true,
+    "zombie_execution_stopped_separate_from_reap": true,
+    "zero_budget_no_signals": true,
+    "real_OS_absence_timing": "NOT_MEASURED"
+  },
+  "fix_proposal_disposition": {
+    "reproducible_missing_wait_opportunity": true,
+    "minimal_next_source_work": "After exclusive wrapper reap, wait only captured identity-bound descendant handles using remaining SAME absolute tree deadline, then retain strict original live/zombie/error/snapshot classification. Preserve zero budget/no extension, wrapper nonreap and all failclosed controls.",
+    "future_RED_GREEN": "Preserve desired completion assertion in permanent regression; replace original-only live-at0.41 witness assertions with repaired observed state, while retaining this originalRED receipt. Never-exit and failure controls must still fail closed and remain within deadline.",
+    "root_authorization_required_before_source_patch_or_branch": true,
+    "production_fix_implemented_or_GREEN": "NOT_RUN"
+  },
+  "uncertainty_and_HOLDs": [
+    "Hosted cleanup remaining budget and survivorPID UNKNOWN; no identification with modeledchild200",
+    "No readiness rootcause claim; missing wait is source/model behavior only",
+    "No realOS/native/provider/runtime/CI/private/release acceptance",
+    "Deadline18 is complete20-second cleanup minus2 reader reservation only when starting from full budget; original hosted entry elapsed/remaining not recorded"
+  ],
+  "construction_history": {
+    "predecessor": {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/OWNERFINAL-original-cleanup-deterministic-control.json",
+      "bytes": 16273,
+      "sha256": "ad65ec44d958a7ed22d38a10638f0c5b2c39ab3ffa42b448c6f464529ecf0084"
+    },
+    "original_zero_byte_active_constructor_binding_invalid": true,
+    "v2_terminal_constructor_log_bytes": 350,
+    "test_execution_count_unchanged": 1,
+    "draft_never_admitted": true
+  },
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact12-line canonical-captured-tree-unused-deadline-proposed.patch ACCEPTED for root application",
+    "Exact_documentation_delta": {
+      "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/canonical-captured-tree-unused-deadline-proposed.patch",
+      "bytes": 1244,
+      "sha256": "36cc60d3263af329268d80c32f28fdd6ae5909fd71d9fc7bd60ba59c3dd04f93"
+    },
+    "Durable_learning_captured": "Two short descendant waits plus prompt wrapper reap can leave unused shared cleanup budget; strict incomplete result remains false. A bounded additional wait may use that budget without changing deadline or wrapper reap ownership.",
+    "Evidence": "Immutablef432 process body/AST4daa, original9caseJUnit1FAIL8PASS, clock trace0.2+0.2+0.01 and absent-at0.75 model. Source caller reserves2 seconds from20 cleanup.",
+    "Stale_or_ambiguous_guidance_removed": "No assumption every cleanup consumes full budget, no wrapper-reap-only success, no modeled scheduling transferred to hostedcause or survivor identity.",
+    "Remaining_uncertainty": "Production improvement/GREEN not implemented; hostedremainingbudget/survivor/rootcause and actualOS effectiveness remain unmeasured."
+  },
+  "Upstream_disposition": "none; Actions source behavior, no upstream defect established",
+  "review_script": {
+    "path": "/workspace/engineering/pr306-original-cleanup-deterministic-independent-review/verify_readonly.py",
+    "bytes": 11673,
+    "sha256": "001b5943f719894222cbfe8af5c3bc2b11b36ac1c80ebb5ae135f7a620a056ab"
+  }
+}

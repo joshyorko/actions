@@ -1,0 +1,44 @@
+{
+  "status": "SCOPED_COMPLETED_SCRATCH_RECOVERY_VERIFIED",
+  "archives": [
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/1664205128f89d2a",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch13/1664205128f89d2a.tar.gz",
+      "archive_bytes": 249583283,
+      "archive_sha256": "9c0ee080689f65af14c6784fa8c9c63ee782e3aa77cfe999577e8ebdcf04a93f",
+      "verified_members": 15240,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/e9752d23b1fadd92",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch13/e9752d23b1fadd92.tar.gz",
+      "archive_bytes": 250216680,
+      "archive_sha256": "05053b891be3647313eefc57dc04f5e1460cb7cb519e46cda8407b11cd30423c",
+      "verified_members": 15949,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    }
+  ],
+  "algorithm_scope": "Same already independently reviewed inventory/archive/hash/mode/uidgid/symlink/internal-hardlink-resolution before exact expanded namespace removal; no inferred ACL/xattr/inode/rootmetadata/precise-TAR-mtime or retroactive complete handle census",
+  "private_inventory_binding": {
+    "path": "/tmp/actions-completed-scratch-recovery-batch13/private-complete-inventory-and-recovery.json",
+    "bytes": 12870622,
+    "sha256": "226d8039eb15b841d59feed312645481963398558d5e81c3532cbcaa2eaf93f4"
+  },
+  "recovery_script_binding": {
+    "path": "/tmp/actions-capacity-recovery-batch13.py",
+    "bytes": 5258,
+    "sha256": "a5462314ec21cd6c3f497b039f1f0aac1abfc6860486620a1f3164121558c5da"
+  },
+  "terminal_log_binding": {
+    "path": "/tmp/actions-capacity-recovery-batch13.log",
+    "bytes": 344,
+    "sha256": "56fcf95b96ad9b923c70a404035bfba5fa740ca15991ff4967081ee4d3162a4e"
+  },
+  "recorded_members": 31189,
+  "workspace_free_bytes_after": 2286272512,
+  "preserved": "Prior29 archives+12 indices/V5 runner/failed563d baseline require separate independent reference check; no historical requalification",
+  "Documentation_improvement": "Existing7d070 capacity lesson adequate for unchanged reviewed algorithm; no cosmetic delta",
+  "upstream_disposition": "none"
+}

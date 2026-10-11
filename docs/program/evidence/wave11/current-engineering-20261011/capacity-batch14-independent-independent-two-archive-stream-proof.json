@@ -1,0 +1,71 @@
+{
+  "verdict": "PASS_RECORDED_ARCHIVE_PRESERVATION_ONLY",
+  "owner_final_safe": {
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch14.json",
+    "bytes": 2420,
+    "sha256": "88a81e8424dec8d5ef57b5ea37422273d6e1a24f90082f25630f177c9dd04619"
+  },
+  "private_index": {
+    "path": "/dev/shm/actions-completed-scratch-recovery-batch14/private-complete-inventory-and-recovery.json",
+    "bytes": 12595054,
+    "sha256": "2b87bb6b1cfd1e338c25566a083af4dd03bc1e433350767f8fd1e51aed02a8ef"
+  },
+  "script": {
+    "path": "/tmp/actions-capacity-recovery-batch14.py",
+    "bytes": 5264,
+    "sha256": "8ade1e813c2405d71f6e450d1e3fef29d4b50e61a53fd3bfc91b2a1a90d6f18f"
+  },
+  "terminal_log": {
+    "path": "/tmp/actions-capacity-recovery-batch14.log",
+    "bytes": 344,
+    "sha256": "3d1a464f4334c98ed8d643a1b55765d938a38028e23fd4b75cddc67793c70858"
+  },
+  "archives": [
+    {
+      "archive_ordinal": 1,
+      "archive_bytes": 249447428,
+      "archive_sha256": "215414f3fd42f10a159194ba80bee0c484b87736f012f1eaf5b51f62ed5d6bfc",
+      "root_directory_header": 1,
+      "members_verified": 15160,
+      "kinds": {
+        "file": 11710,
+        "directory": 2980,
+        "symlink": 462,
+        "fifo": 8,
+        "hardlink_headers": 4
+      },
+      "resolved_internal_hardlink_data_verified": 4,
+      "logical_regular_file_bytes_verified": 602564438,
+      "completed_recycle_marker_verified": true,
+      "expanded_namespace_absent": true,
+      "gzip_EOF_CRC_ISIZE_verified": true
+    },
+    {
+      "archive_ordinal": 2,
+      "archive_bytes": 250994967,
+      "archive_sha256": "438a48f33703a9190766118df30dec3dfc920b98b18cf75de64f76eea29fcf7f",
+      "root_directory_header": 1,
+      "members_verified": 15158,
+      "kinds": {
+        "file": 11710,
+        "directory": 2974,
+        "symlink": 466,
+        "fifo": 8,
+        "hardlink_headers": 4
+      },
+      "resolved_internal_hardlink_data_verified": 4,
+      "logical_regular_file_bytes_verified": 604399419,
+      "completed_recycle_marker_verified": true,
+      "expanded_namespace_absent": true,
+      "gzip_EOF_CRC_ISIZE_verified": true
+    }
+  ],
+  "total_recorded_members": 30318,
+  "AST_batch13_exact_except_DEST_STAGE_NAMES_constant_values": true,
+  "historical_ordering_preserved_in_script_index_and_log": true,
+  "historical_ordering_limit": "After-removal retained proof; no independent historical expanded filesystem or process census replay",
+  "private_index_mode": "0600",
+  "archive_parent_mode": "0700",
+  "review_seconds": 11.823,
+  "upstream_disposition": "none"
+}

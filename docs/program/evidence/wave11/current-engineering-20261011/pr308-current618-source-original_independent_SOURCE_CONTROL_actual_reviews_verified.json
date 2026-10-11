@@ -1,0 +1,21 @@
+{
+  "bound_original_independent_reviews": [
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-source-review/independent-frozen-S-source-review.json",
+      "bytes": 6631,
+      "sha256": "29c13d7e5bcb3400decbf41286ea736fb0073c6c5afc695ca382826c40a02e03"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/independent-frozen-C-control-review.json",
+      "bytes": 5900,
+      "sha256": "31779bad488b43b88d7bb81b3f2c5d75edabf7519f5765bd90d86c66569d6f9b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-independent-actual-review/independent-frozen-original-threecase-actual-review.json",
+      "bytes": 7669,
+      "sha256": "28f6b0055d89fff600fbaeec5dd3c063871afc0a4413374c16bb332c62b82106"
+    }
+  ],
+  "historical_scope_only_no_new_SOURCE_orCONTROL_admission": true,
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,28 @@
+{
+  "status": "PASS_IMMEDIATE_EXACT_ROOT_RELEASE_PREFLIGHT",
+  "source": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+  "tree": "8c7362e63c85a930ca2fe962ede9bc3ebb6ffe68",
+  "1421_source_FS_modes_exact": true,
+  "old41_and_successor6_refs_exact": true,
+  "prepared30_and_five_owned_config_interpreter_origins_retained": true,
+  "ignored_RCC0711_sha256_exact": true,
+  "retained1192_helper_browser_Node_raw18_frozen50_checks": true,
+  "other_local_python_heavy_processes": [],
+  "workspace_free_bytes": 1503670272,
+  "argv": [
+    "env",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/bin/rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/engineering/runtime-checkout-eol-source/full-source-gates-explicit-worker-bound-v2.py"
+  ]
+}

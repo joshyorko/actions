@@ -1,0 +1,79 @@
+{
+  "source_head": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+  "tree": "8c7362e63c85a930ca2fe962ede9bc3ebb6ffe68",
+  "sole_parent_actual": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "all1421_typed_FSbytes_exec_modes_exact": true,
+  "all1414_old_other_leaves_exact": true,
+  "only5_changed2new_paths": {
+    "changed": [
+      ".gitattributes",
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_pypi_release.yml",
+      ".github/workflows/actions_runtime_tests.yml",
+      "docs/skills/repository-operations.md"
+    ],
+    "added": [
+      "devutils/tests/test_runtime_checkout_bytes.py",
+      "devutils/tests/test_runtime_checkout_workflows.py"
+    ]
+  },
+  "narrow7LF_rules_only_201Python5packagedText1frontend": true,
+  "trueGit_originalRED180_synthetic_distinct_from_Windows178": true,
+  "GREEN4tests_bothautocrlf_seven_independent_rule_poison_controls_protected_files": true,
+  "original_filters6RED_currentscoped10PASS": true,
+  "generator_wholeAST_only_two_PRpath_items": true,
+  "two_YAML_raw_only_gitattributes_other6outputs_exact_all30YAML": true,
+  "all_matrices_needs_tags_permissions_publisher_guards_unchanged": true,
+  "all41_owner_refs_exact": true,
+  "prepared30_own5origins_config_RCC0711_exact": true,
+  "Toolkit96_Runtime_type347_lint_static_gen8_recorded_PASS_full_NOT_RUN": true,
+  "canonical_exact1306_16line_source_backed_import": {
+    "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/canonical-generated-static-and-complete-checkout-scope-proposed-v2.patch",
+    "bytes": 1212,
+    "sha256": "1306a314811448c8090b4aa2e77340e676bbba397ceb6c7ee0477b908cb9b2bf"
+  },
+  "execution_finding": {
+    "severity": "HOLD_PRE_FULL_BOUND",
+    "initial_launcher": {
+      "path": "/workspace/engineering/runtime-checkout-eol-source/full-source-gates-root-release-required.py",
+      "bytes": 229,
+      "sha256": "70c834e35917b2eb86d3ae4fa72188730a458537fd0771cce126e36c46ae1820"
+    },
+    "devutils_workers": 2,
+    "Runtime_selector": [
+      "sys.executable",
+      "-m",
+      "pytest",
+      "-m",
+      "not integration_test",
+      "-rfE",
+      "-vv",
+      "--force-regen",
+      "-n",
+      "auto"
+    ],
+    "explicit_auto_worker_env_binding": "ABSENT",
+    "host_CPUs_current": 5,
+    "required": "Named frozen owned launcher/metadata successor sets PYTEST_XDIST_AUTO_NUM_WORKERS=2 before both sequential commands; same configured tasks and600TERM+10 envelope retained",
+    "installed_xdist_source_authority": [
+      {
+        "path": "/workspace/engineering/runtime-checkout-eol/devutils/.venv/lib/python3.12/site-packages/xdist/plugin.py",
+        "bytes": 11561,
+        "sha256": "011ebe37d0c1b79ee1a01c5067ae013763f84a8563a181d68ee9b990f23f4810"
+      },
+      {
+        "path": "/workspace/engineering/runtime-checkout-eol/action_server/.venv/lib/python3.12/site-packages/xdist/plugin.py",
+        "bytes": 13921,
+        "sha256": "62df71dfe342969ab667cb3a4f2280a93be9c11bc9a4c2d9ead271c979d2afd8"
+      }
+    ],
+    "no_execution_by_reviewer": true
+  },
+  "canonical_new_worker_bound_proposal": {
+    "path": "/workspace/engineering/runtime-checkout-eol-independent-light-review/canonical-bounded-configured-xdist-worker-proposed.patch",
+    "bytes": 823,
+    "sha256": "a113e8c4001305664c781dccc7c5d62a5f0de929df0dc9e09b9c2f41f0d87434"
+  },
+  "no_source_test_gateway_native_browser_provider_download_push_merge": true,
+  "upstream_disposition": "none"
+}

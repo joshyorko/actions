@@ -1,0 +1,15 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2917,6 +2917,12 @@
+ zombie or error predicates. Leave them unknown until the owned call's measured
+ result is retained separately.
+ 
++Verbose pytest output can join a long node name directly to `SKIPPED`
++without a separating space. Strip terminal formatting, separate the result
++token from the node, and reconcile each phase's individual outcomes with
++its collection and terminal summary. A whitespace-only parser can omit a
++reported skip; that formatting gap is not a missing test or a passing gate.
++
+ Keep the complete terminal failure census separate from this two-node observer
+ coverage and from reached semantic assertions. Active owned RCC CPU/I/O at the
+ sample times does not identify a preparation cause. Bind each original tested

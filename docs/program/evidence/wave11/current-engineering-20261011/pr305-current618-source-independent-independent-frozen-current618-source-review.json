@@ -1,0 +1,115 @@
+{
+  "schema": "independent-frozen-source-review/v1",
+  "verdict": "GO_NORMAL_EXISTING_PR_BRANCH_SOURCE_PUSH_ONLY",
+  "head": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+  "tree": "2bd99392d53f3df8be0569368450df1c933d3a3a",
+  "ordered_parents": [
+    "6390270cd07851448b7b325c81c98dc11a1d3a17",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "existing_branch": "test/canvas-runtime-cache-isolation-20261010",
+  "owner_announced_frozen_receipt": {
+    "path": "/workspace/engineering/pr305-actual618-refresh/frozen-source-receipt.json",
+    "bytes": 22954,
+    "sha256": "406c50a1360b107fab2a8dbe50a4bfb5ccc1651a45da6189558820f3b0906944"
+  },
+  "independent_complete_proof": {
+    "path": "/workspace/engineering/pr305-actual618-independent-review/independent-complete-union-source-gates-and-retained-byte-proof.json",
+    "bytes": 34303,
+    "sha256": "fd237c5dcadb53d4a5bd6fc4f57437453d496f139460f8ad2cbd4b45704e6ca7"
+  },
+  "findings": [],
+  "source_acceptance": {
+    "all1420_typed_parent_entries_working_bytes_FS_executable_bits_prepost_exact": true,
+    "novel_combined_ops_guide_only": true,
+    "whole_github_and_current_production_exact_actual618": true,
+    "original_three_Canvas_modules_whole_body_mode_AST_exact1e9": true,
+    "nine_RCC_source_samples_exact_d642_current_target": true,
+    "original39_ref_set_count_hashes_exact_prior_checkpoint": true,
+    "owner_initial_wrong28_expectation_actual39_failure_retained": true,
+    "construction_commit_not_attributed_source_GO_before_corrected_full39_and_new_gates": true,
+    "current_recorded_source_gates": {
+      "Doctor": "PASS",
+      "Bootstrap": "30exact preparedinputs/five concrete ownprefix+moduleorigins; no install",
+      "Toolkit": 96,
+      "Canvas": {
+        "passed": 47,
+        "integration_deselected": 4,
+        "skip": 0
+      },
+      "current_RCC_source": {
+        "passed": 112,
+        "actual_optin_skipped": 1,
+        "integration_deselected": 3
+      },
+      "configured_lint": "Ruff/format/Isort PASS",
+      "Mypy": 348,
+      "gen8_roundtrip": "PASS",
+      "workflow_plus_dependabot": 26,
+      "all_YAML": 30,
+      "full_source": {
+        "passed": 1266,
+        "skipped": 12,
+        "warnings": 15,
+        "seconds": 134.9,
+        "workers": 2,
+        "one_authorized_attempt": true,
+        "outer_bound": "600s TERM +10s KILL",
+        "gateway": "CanonicalRCC18.19.3 -> own Runtime Poetry -> invoke test-not-integration"
+      }
+    },
+    "constructor_dynamic_current_HEAD_tree_parents_and_clean_prepost_source_39_refs_guards_verified": true,
+    "original1192_native_tree_helper0444_browser_Node_frontend_raw18_frozen50_before_after_exact": true
+  },
+  "producer_inventory": {
+    "old_native_count": 268,
+    "current_count": 274,
+    "match": 261,
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "status": "UNQUALIFIED_OLD_NATIVE92498"
+  },
+  "five_selected_test_inputs_typed_separate": 5,
+  "actual_history_scope": "V5 remains original source3ec/native92498 actual; originalV1-V4 failed attempts remain failed; no fresh actual/native/browser/provider gate or old776 CI carry. Current274 producer differs from old92498 by seven changed/six added entries and is UNQUALIFIED.",
+  "remaining_HOLDs": [
+    "Fresh complete exact618/source519a hostedCI with actual tested checkout/parents/tree, declared job matrix/publisher/reviews/normal policy before integration",
+    "Full issue99 and ChatGPT consumer acceptance",
+    "Current native producer/browser/provider/backend/Workspace/private134/OAuth/publication/release qualification",
+    "Universal child adoption/reaping or natural-exit claims beyond original bounded point-in-time actual V5 proof"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Accept exact ordinary merge imports in docs/skills/repository-operations.md and docs/skills/provenance-observability.md; reuse existing verification-status lesson in owning canonical checkpoint, not newly claimed inside305 source. No cosmetic child.",
+    "Exact_both_parent_delta": {
+      "path": "/workspace/engineering/pr305-actual618-independent-review/canonical-reviewed-imported-delta.patch",
+      "bytes": 13633,
+      "sha256": "2b23510070526fd8672cfcc83e8ac474a6980d870fdc3fef462fadb7abd193a2"
+    },
+    "Reused_exact_owning_root_lesson": {
+      "path": "/workspace/engineering/pr305-actual618-independent-review/reused-root-canonical-verification-status-lesson.md",
+      "bytes": 470,
+      "sha256": "cce330dd0562324ae64133fe393574607cf399e0e9ce53c0182effffc594fbac"
+    },
+    "Durable_learning_captured": "Preserve source/Gitblob Canvas fixtures, collection/report-channel/NodePID/cleanup and immutable actual identity limits while importing scoped Run Actor/output visibility/recovery boundaries. A failed verifier must block commit/push; a construction commit never supplies source GO. Use measured complete evidence-reference sets rather than guessed counts.",
+    "Evidence": "Exact2b235100 patch retains both parent added canonical lines; all1420 typed entries/source filesystem execmodes checked; originalCanvas3 exact1e9; complete measured39 prior refs rehashed; initial bd940 count28-vs39 failure4d4ec9 and early519a construction retained; corrected full39 verification and fresh1266/12 source/Toolkit96/scoped/static gates bound; cce330 lesson verbatim in owning campaign-checkpoint guide.",
+    "Stale_or_ambiguous_guidance_removed": "Accepted source imports close missing scoped output/provenance boundaries. Measured39 replaces wrong28 inspector expectation without weakening application assertions; distinguish construction from successful source admission, and root-owned guidance reuse from source branch document content.",
+    "Remaining_uncertainty": "Fresh current618 CI/policy and listed native/backend/private/ChatGPT/release gates remain open. Global credential/source tests do not establish Workspace principal identity; immutable originalV5 is not current274 producer qualification.",
+    "Disposition": "ACCEPT_VERIFIED_EXISTING_BOTH_PARENT_IMPORT_AND_OWNING_ROOT_STATUS_LESSON"
+  },
+  "review_actions": "Read-only source/Git/AST/log-summary/hash inspection plus owned review writes only; no source/index/ref edits, gateway/test/installers/native/browser/provider execution, downloads,push or merge.",
+  "upstream_disposition": "none"
+}

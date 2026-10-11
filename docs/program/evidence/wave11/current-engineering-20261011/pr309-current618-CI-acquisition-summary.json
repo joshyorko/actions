@@ -1,0 +1,22 @@
+{
+  "single_bracketed_snapshot": true,
+  "REST_requests": 27,
+  "nonzero_request_categories": [
+    [
+      "base-protection",
+      1
+    ]
+  ],
+  "graphql": [
+    [
+      "closures",
+      1
+    ],
+    [
+      "threads",
+      1
+    ]
+  ],
+  "workflow_runs_count": 6,
+  "no_log_ZIP_download_source_mutation_actual_execution_or_status_poll": true
+}

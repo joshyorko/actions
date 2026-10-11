@@ -1,0 +1,8 @@
+{
+  "initial_log": "/workspace/engineering/pr221-current618-linux-consumer-preflight/current-provenance-v4-GREEN.log",
+  "actual_result": "STATIC_FAIL_E721_before_pytest",
+  "no_consumer_executed": true,
+  "initial_gate_sha256": "661e41132c34ae31a9177c067aa4979eae386e677d8f43966116fb23116ce769",
+  "fix": "isinstance int and explicit bool rejection; original type semantics retained, no skip",
+  "next_gate_run": "First complete v4 provenance93 control suite only after corrected configured lint; priorRED6+1 and originalv3 unchanged"
+}

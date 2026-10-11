@@ -1,0 +1,36 @@
+{
+  "head": "d5a3d2f53737f4f5380b6ecb7fb93d1a651f005d",
+  "tree": "fa3f7728d315c9a192f88e17acf15f164d4eee13",
+  "sole_parent": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+  "pin_RED": {
+    "failed": 1,
+    "passed": 4
+  },
+  "branch_RED": {
+    "failed": 2,
+    "passed": 3,
+    "generated_equivalence_and_explicit_branch_contract": true,
+    "initial_collector_incorrect_count_FAIL_not_relabelled": true,
+    "GREEN_started_after_restore_before_collector_readback": true,
+    "named_successor_observation_before_remaining_gates": true
+  },
+  "GREEN": {
+    "metadata_tests": 55,
+    "Toolkit": 96,
+    "Ruff_check_format": true,
+    "Isort": true,
+    "py_compile": true,
+    "git_diff_check": true,
+    "generator_outputs": 8,
+    "all_GitHub_YAML_dependabot": 30
+  },
+  "gates_scope": "Private RCC gateway service-free CONTROL checks only; no sourcefull repeat or actual CLI/native/provider/browser",
+  "SOURCE_full_inherited_only": {
+    "SOURCE": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+    "passed": 1240,
+    "skipped": 13,
+    "typecheck_files": 347,
+    "not_RUN_on_CONTROL": true
+  },
+  "no_actual_no_push": true
+}

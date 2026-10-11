@@ -1,0 +1,1 @@
+{"after_start_returned": {"host_readers_alive": [true, true], "observation": "host_only", "returncode": null}, "exception": null, "native_executable": {"sha256": "6bf4d23df68b4ef87b7c2e2e8ddfb80fffc1c914a357f29953c2bb11f58963d0", "size": 57752576}, "outcome": "ready", "sampler_alive": false, "sampler_cancelled": true}

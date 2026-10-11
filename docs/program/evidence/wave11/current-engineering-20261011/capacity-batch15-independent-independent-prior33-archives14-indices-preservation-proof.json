@@ -1,0 +1,435 @@
+{
+  "prior33_archive_hash_size_mode0600_exact": [
+    {
+      "ordinal": 1,
+      "bytes": 248925896,
+      "sha256": "5dd438501df39ee6edbbdc46bee00090a57e95341db2ae6ec79f9c304f7e8282"
+    },
+    {
+      "ordinal": 2,
+      "bytes": 248923469,
+      "sha256": "c4c1368fade7afb8da019ad2f294e355bb6de1d201ff91df1dd742f1d523cb6e"
+    },
+    {
+      "ordinal": 3,
+      "bytes": 248938309,
+      "sha256": "c4375dfbd04f52b19b96891afca22e03a733b2090c289aa3ddf51d197ac74fc7"
+    },
+    {
+      "ordinal": 4,
+      "bytes": 248928930,
+      "sha256": "261ab38dadcca5fa23dbff535a51f4b19cc5e5c9bccf8c3e02e0079cb3f17465"
+    },
+    {
+      "ordinal": 5,
+      "bytes": 251827769,
+      "sha256": "2e93344dffffe25654771c36dc285ae931036ce3e4a082abe544ed44e27b80f6"
+    },
+    {
+      "ordinal": 6,
+      "bytes": 248928591,
+      "sha256": "9c3113d1efd1fb5de01c1e630d72ebe02dda264192a69756baa4608ec1a5cf9e"
+    },
+    {
+      "ordinal": 7,
+      "bytes": 249433326,
+      "sha256": "ca21746a2183928b38016ec4697a8d3ed06faa5ad4a8d5b78add54286972451b"
+    },
+    {
+      "ordinal": 8,
+      "bytes": 249424815,
+      "sha256": "1d32f631b13a64742ff7fbc8198172f6cd1c285db74bd4b95405f714902ee043"
+    },
+    {
+      "ordinal": 9,
+      "bytes": 248921681,
+      "sha256": "28e391747a904f4162e01a0b95ea67ea43bc4db8159f21345af65889ab4680b5"
+    },
+    {
+      "ordinal": 10,
+      "bytes": 249844712,
+      "sha256": "3ad07338c1e4e399b7e12ff422535a1530d9890ad3879222a0529a985d1c9d81"
+    },
+    {
+      "ordinal": 11,
+      "bytes": 248973111,
+      "sha256": "d11655773c3bcc750e0eb07933c7b2043a8b96a495a491349c31ff66fba0d556"
+    },
+    {
+      "ordinal": 12,
+      "bytes": 249413952,
+      "sha256": "958083b3e21e6475e20eb1ecf857880e1fd8b158ac367a959fa18105fe08110b"
+    },
+    {
+      "ordinal": 13,
+      "bytes": 250478741,
+      "sha256": "c1b869a58fa7099c0ffb028c9ca9b52db2d4dd7203de6b80f8816cee088d90e6"
+    },
+    {
+      "ordinal": 14,
+      "bytes": 248936762,
+      "sha256": "f6c4858022d26e06a876c967000b5581f7d9fdadb3a6de759cb254decc9cc5b4"
+    },
+    {
+      "ordinal": 15,
+      "bytes": 249067564,
+      "sha256": "4bb9b1a0734c967cb0f8ea7d48643de7d18a98a1f0b9b0b8c4c3345d46ce5d8a"
+    },
+    {
+      "ordinal": 16,
+      "bytes": 248927657,
+      "sha256": "7504b4413e7724be8c79b1fbdcc91cfa2b84476f31e3e951aa95245255f51369"
+    },
+    {
+      "ordinal": 17,
+      "bytes": 248922724,
+      "sha256": "357af5c058c1eeb1b31f7b58e9b82d9ca70a821b3e4d98a7157abe4360f0a91c"
+    },
+    {
+      "ordinal": 18,
+      "bytes": 249584134,
+      "sha256": "123e3d5f273b9b1cec6d5dfacab806b2ecdcff572379f7dda9679bfb331fcc9f"
+    },
+    {
+      "ordinal": 19,
+      "bytes": 250486923,
+      "sha256": "16e9c86852dbb7f81ee7d6d86f1ca75d6921cc651639ddc8145c6d57d4228609"
+    },
+    {
+      "ordinal": 20,
+      "bytes": 249586844,
+      "sha256": "1d5137932b1cc24fdf3a4fe7e714d36781315b0adfb7fe8ecde92d7dcda01ca2"
+    },
+    {
+      "ordinal": 21,
+      "bytes": 249438462,
+      "sha256": "2d9bbf1850733ac03503979532d6c46825cf3c988ceba868b685f63977372091"
+    },
+    {
+      "ordinal": 22,
+      "bytes": 249078845,
+      "sha256": "a166cecea0debfacce53b5ef934709984828476852aa520aea9eec0e07a93a09"
+    },
+    {
+      "ordinal": 23,
+      "bytes": 248945141,
+      "sha256": "d0b23f418b5a871b7872049bfeda7e05721a586d3d32e09a3335562305e530b2"
+    },
+    {
+      "ordinal": 24,
+      "bytes": 248924046,
+      "sha256": "4cd6f0b8862b760da7c94d06200dc3e244558c1c98260fe1bbbe0f8b25d17dad"
+    },
+    {
+      "ordinal": 25,
+      "bytes": 248928534,
+      "sha256": "0471b635e927aed0cf995df713914ae0ac101a6654734bd8b110b9ae88cb4b4e"
+    },
+    {
+      "ordinal": 26,
+      "bytes": 248944236,
+      "sha256": "a112574eaa2e9032e6a6b2293fceef83789bb827195e3b5cb2a3f7c33889dc45"
+    },
+    {
+      "ordinal": 27,
+      "bytes": 249075669,
+      "sha256": "d7f4311832b4c9e9819d529a4aee31c2e14c59106f6dbb6d6b94108bdceab0cd"
+    },
+    {
+      "ordinal": 28,
+      "bytes": 250496578,
+      "sha256": "898f4e4c12428ef9001adda0974b90c0413e7fca24bb4994e74f866a48117c44"
+    },
+    {
+      "ordinal": 29,
+      "bytes": 249696725,
+      "sha256": "00dfd52d2d80bafabb448e4f413805fce2d446d4948403174d6c2d20e64856ab"
+    },
+    {
+      "ordinal": 30,
+      "bytes": 249583283,
+      "sha256": "9c0ee080689f65af14c6784fa8c9c63ee782e3aa77cfe999577e8ebdcf04a93f"
+    },
+    {
+      "ordinal": 31,
+      "bytes": 250216680,
+      "sha256": "05053b891be3647313eefc57dc04f5e1460cb7cb519e46cda8407b11cd30423c"
+    },
+    {
+      "ordinal": 32,
+      "bytes": 249447428,
+      "sha256": "215414f3fd42f10a159194ba80bee0c484b87736f012f1eaf5b51f62ed5d6bfc"
+    },
+    {
+      "ordinal": 33,
+      "bytes": 250994967,
+      "sha256": "438a48f33703a9190766118df30dec3dfc920b98b18cf75de64f76eea29fcf7f"
+    }
+  ],
+  "prior14_complete_indices_hash_size_exact": [
+    {
+      "path": "/tmp/actions-completed-scratch-recovery/private-complete-inventory-and-recovery.json",
+      "bytes": 37387430,
+      "sha256": "154be7388533bfed541d9613f60095fe3cf7e12abbd681a9c1d7018469593e71"
+    },
+    {
+      "path": "/tmp/actions-completed-scratch-recovery-batch2/private-complete-inventory-and-recovery.json",
+      "bytes": 12519881,
+      "sha256": "29a908b32ef01a4d93ad22f0404403886610f72a1f1c97f1ea48045c19f6bbe8"
+    },
+    {
+      "path": "/tmp/actions-completed-scratch-recovery-batch3/private-complete-inventory-and-recovery.json",
+      "bytes": 13551365,
+      "sha256": "7976469c878721a9a8e27e42962ae9899628aad21b3463174f2aa9ef08cc7e2b"
+    },
+    {
+      "path": "/tmp/actions-completed-scratch-recovery-batch4/private-complete-inventory-and-recovery.json",
+      "bytes": 18738722,
+      "sha256": "8b5d93397160d15aaef1b7c5e7bcfe057e31d16961c641732f7627da7a613cb2"
+    },
+    {
+      "path": "/tmp/actions-completed-scratch-recovery-batch5/private-complete-inventory-and-recovery.json",
+      "bytes": 12450197,
+      "sha256": "4c445aa8d8ea6dda3f97307403c18bd097b0b08fedb92823745bf47c4e955c23"
+    },
+    {
+      "path": "/tmp/actions-completed-scratch-recovery-batch6/private-complete-inventory-and-recovery.json",
+      "bytes": 12405983,
+      "sha256": "3ecc541793b0a06154e36e7c9a073904c7483a873ea07dcbb2f1a71cfcae8c9f"
+    },
+    {
+      "path": "/tmp/actions-completed-scratch-recovery-batch7/private-complete-inventory-and-recovery.json",
+      "bytes": 12697137,
+      "sha256": "ebd2f11e0c8f3d1043d8c062931044c12efa20cfc33e0348c0e81c997f24848d"
+    },
+    {
+      "path": "/tmp/actions-completed-scratch-recovery-batch8/private-complete-inventory-and-recovery.json",
+      "bytes": 12746069,
+      "sha256": "9afd8ed2df6f7b7cb5be20c0464fa4eb737e545c77f8bc7ae0b7eae152ca4f42"
+    },
+    {
+      "path": "/tmp/actions-completed-scratch-recovery-batch9/private-complete-inventory-and-recovery.json",
+      "bytes": 12476335,
+      "sha256": "a3a7dd46ecefe48c73af1d1291250ca38292b4a10f00430fb7598e4237f1b8c6"
+    },
+    {
+      "path": "/tmp/actions-completed-scratch-recovery-batch10/private-complete-inventory-and-recovery.json",
+      "bytes": 12400253,
+      "sha256": "396d48ffbc80a31f65079466b696fa01b9146dd68545d29a1796e7db261eac14"
+    },
+    {
+      "path": "/tmp/actions-completed-scratch-recovery-batch11/private-complete-inventory-and-recovery.json",
+      "bytes": 12452837,
+      "sha256": "82460816bcb1ba6391bb91c1ddcaf672b31cd90fbffc5a53698a10fa2abd89d6"
+    },
+    {
+      "path": "/tmp/actions-completed-scratch-recovery-batch12/private-complete-inventory-and-recovery.json",
+      "bytes": 12536775,
+      "sha256": "bbad1c5f8e3485614dbb54ca092256c6ca84020eafa35cc9816a30dd1f039565"
+    },
+    {
+      "path": "/tmp/actions-completed-scratch-recovery-batch13/private-complete-inventory-and-recovery.json",
+      "bytes": 12870622,
+      "sha256": "226d8039eb15b841d59feed312645481963398558d5e81c3532cbcaa2eaf93f4"
+    },
+    {
+      "path": "/dev/shm/actions-completed-scratch-recovery-batch14/private-complete-inventory-and-recovery.json",
+      "bytes": 12595054,
+      "sha256": "2b87bb6b1cfd1e338c25566a083af4dd03bc1e433350767f8fd1e51aed02a8ef"
+    }
+  ],
+  "prior14_safe_summary_bindings_exact": [
+    {
+      "bytes": 3794,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery.json",
+      "sha256": "bc18bca235d00e9d7ca0f618653ba1c004f6c27afbbf535894cf6d4977cc3c71"
+    },
+    {
+      "bytes": 2403,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch2.json",
+      "sha256": "30bcb73c25914e33eb0705cdb5367cc1a07cfba5f0890eaf8d365876186f3537"
+    },
+    {
+      "bytes": 2804,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch3.json",
+      "sha256": "3328b24d3ca8bcdc8998f44f5fe7463a9fadc14a4051b5172ea56312abb0d880"
+    },
+    {
+      "bytes": 2636,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch4.json",
+      "sha256": "12e4d0ca481de54144088c824d6130301c650ada23bb647bfd1c96c030b0a431"
+    },
+    {
+      "bytes": 2086,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch5.json",
+      "sha256": "c1fc0008549a122fca3bd5ddceacdcc5505bf4f75e35197d4f347d90c4c7fcce"
+    },
+    {
+      "bytes": 2330,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch6.json",
+      "sha256": "7cf9148abc8cfa8b58097b3546b3dd493090b8751f9f1d80b17d5722482a372c"
+    },
+    {
+      "bytes": 2330,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch7.json",
+      "sha256": "e8adb9f532ee63203e063053f16137c7aefc453091f03a5613a998405afa40f5"
+    },
+    {
+      "bytes": 2330,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch8.json",
+      "sha256": "f8ecb0bdb23b9119139a19628c3af9f046704f699aab56727c561931b7295315"
+    },
+    {
+      "bytes": 2330,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch9.json",
+      "sha256": "45f72e0f5e3db721f8fc2ed3665daed006ff24333c560cae27b4ca79c730782b"
+    },
+    {
+      "bytes": 2243,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch10.json",
+      "sha256": "2a486f9c002844a7ded6159ce7c552badba60afdd095407ea5eb04b57dba4ac9"
+    },
+    {
+      "bytes": 2244,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch11.json",
+      "sha256": "94e3d73c02073e96a40b567030431bf4629e9fabbc98851ee476e13e1e2b2eb2"
+    },
+    {
+      "bytes": 2244,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch12.json",
+      "sha256": "41f617eeef2a6b5388c64ee2faafd2b18bd212b0474f3c1a9e48d2cc39b34c2b"
+    },
+    {
+      "bytes": 2244,
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch13.json",
+      "sha256": "e95c0d759973dde731805be7ea41a79b79fcd01a84cce1be6c9e470d17c0a6fb"
+    },
+    {
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch14.json",
+      "bytes": 2420,
+      "sha256": "88a81e8424dec8d5ef57b5ea37422273d6e1a24f90082f25630f177c9dd04619"
+    }
+  ],
+  "prior_review_bindings_exact": [
+    {
+      "bytes": 9595,
+      "path": "/workspace/engineering/capacity-recovery-independent-review/independent-archive-preservation-review-v2.json",
+      "sha256": "918485892e6663cedd3bb595824ef181a1ac87f8172a0bc4f026065941b214f6"
+    },
+    {
+      "bytes": 8000,
+      "path": "/workspace/engineering/capacity-recovery-batch2-independent-review/independent-batch2-archive-preservation-review-v2.json",
+      "sha256": "70951f62ce8ecab772976827522c64fd38f7eb2e469421a26256bc2723106ecd"
+    },
+    {
+      "bytes": 8915,
+      "path": "/workspace/engineering/capacity-recovery-batch3-independent-review/independent-batch3-archive-preservation-review-v2.json",
+      "sha256": "82328cb7bc68c77b7e12392e1ad01e1b58cd48a536e8acbb75f0a2cfb1b85219"
+    },
+    {
+      "bytes": 10686,
+      "path": "/workspace/engineering/capacity-recovery-batch4-independent-review/independent-batch4-archive-preservation-review-v2.json",
+      "sha256": "83d3ace6990571dc9b1e910fd7418e78c55748a4e8090caf2707074426117242"
+    },
+    {
+      "bytes": 10865,
+      "path": "/workspace/engineering/capacity-recovery-batch5-independent-review/independent-batch5-archive-preservation-review-v2.json",
+      "sha256": "a19d153d15d62aaa0fbde579550c453c3ce767a088fcc4b09ebf2f753f54eeca"
+    },
+    {
+      "bytes": 13460,
+      "path": "/workspace/engineering/capacity-recovery-batch6-independent-review/independent-batch6-archive-preservation-review-v2.json",
+      "sha256": "c6d45ace7ddfcaa563fa28a71e5d8d0ae9af0379fb9e5fece68971c6be4af949"
+    },
+    {
+      "bytes": 14701,
+      "path": "/workspace/engineering/capacity-recovery-batch7-independent-review/independent-batch7-archive-preservation-review-v2.json",
+      "sha256": "1faa2d84c8c3ab580f0b5a8927e0dcacdcbfb49fcebd1a248ffb959fb4c1bc90"
+    },
+    {
+      "bytes": 15573,
+      "path": "/workspace/engineering/capacity-recovery-batch8-independent-review/independent-batch8-archive-preservation-review-v2.json",
+      "sha256": "a6d53ba52b340a9c0a68897dcb7cc1ce221b70169f53ab93987571658dc77c3f"
+    },
+    {
+      "bytes": 16784,
+      "path": "/workspace/engineering/capacity-recovery-batch9-independent-review/independent-batch9-archive-preservation-review-v2.json",
+      "sha256": "ef81918b683bbe91a478546560c47e605f58650d6e8f2c77e986191d3e59f1d4"
+    },
+    {
+      "bytes": 19484,
+      "path": "/workspace/engineering/capacity-recovery-batch10-independent-review/independent-batch10-archive-preservation-review-v3.json",
+      "sha256": "5e2afa43dc12c8714e1a6b16b735e64d507ba5fc7e29c8ebebad59b2bf6ea3d3"
+    },
+    {
+      "bytes": 20175,
+      "path": "/workspace/engineering/capacity-recovery-batch11-independent-review/independent-batch11-archive-preservation-review-v3.json",
+      "sha256": "cf68e125a6c96c8e22172b67c0087e329cff1437fdbad322155a94406cb69774"
+    },
+    {
+      "bytes": 3801,
+      "path": "/workspace/engineering/capacity-recovery-batch12-independent-review/independent-batch12-archive-preservation-review.json",
+      "sha256": "02e281794097b2ab9bf1a93cd2150f94c93d6a17dfaed287e11eaeb4dea82fd6"
+    },
+    {
+      "bytes": 17008,
+      "path": "/workspace/engineering/capacity-recovery-batch12-independent-review/independent-batch12-archive-preservation-review-v2.json",
+      "sha256": "0eb075fdeede4d818bec4dfc7d05e8230d2eccddc9ec226d8d836288e37b83a0"
+    },
+    {
+      "bytes": 7693,
+      "path": "/workspace/engineering/capacity-recovery-batch12-independent-review/independent-batch12-archive-preservation-review-final.json",
+      "sha256": "ef773bf11d9c72a3fba5b72461bdb0722db4dea366edad83553cc062a4324dc8"
+    },
+    {
+      "bytes": 1978,
+      "path": "/workspace/engineering/capacity-recovery-batch12-independent-review/independent-safe-batch12-summary.json",
+      "sha256": "2ae5c2b9c00675575f6be351e693b86d9b32919aef957c923779fa118f4927b4"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch13-independent-review/independent-frozen-batch13-archive-preservation-review.json",
+      "bytes": 8951,
+      "sha256": "ec86ff74f126f71ecac8e760300c454ace4aa55d1089b9b02b826b9522152488"
+    },
+    {
+      "bytes": 3561,
+      "path": "/workspace/engineering/capacity-recovery-batch13-independent-review/independent-two-archive-stream-preservation-proof.json",
+      "sha256": "7c9d1347be7c655a32c61a0ae5afbfb74e146873c6e70cc3c196eba502d502f5"
+    },
+    {
+      "bytes": 14714,
+      "path": "/workspace/engineering/capacity-recovery-batch13-independent-review/independent-prior29-archives12-indices-and-original-reference-proof.json",
+      "sha256": "3026c493faa4d3eaf532e1a42c92529d2d207ef153c9384dee325fddfa308806"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch14-independent-review/OWNERFINAL-independent-batch14-archive-preservation-review.json",
+      "bytes": 5078,
+      "sha256": "86fa9938eb82ceea41eb53d11a9a398fe076c21b38a35ca3cb6acf8374e80d50"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch14-independent-review/independent-two-archive-stream-proof.json",
+      "bytes": 2583,
+      "sha256": "77af609822d3ea972798c85edd62c136b497958174536bb864ed9b207fe52d2f"
+    },
+    {
+      "path": "/workspace/engineering/capacity-recovery-batch14-independent-review/independent-prior31-archives13-indices-preservation-proof.json",
+      "bytes": 16049,
+      "sha256": "b14541a10e9a7c4bcfd23026dcae4124365cff179747d63163fbe75074591b5b"
+    }
+  ],
+  "V5runner_09cdc_exact": {
+    "bytes": 35497,
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v5.py",
+    "sha256": "09cdc6b19f5d3d9cc94fadca23373108868521e0378d33960146b1a8522e88ad"
+  },
+  "failed563d_exists_only": true,
+  "failed_namespace_contents_state_or_historical_handle_census_not_qualified": true,
+  "canonical7d070_exact_reuse": {
+    "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+    "bytes": 1068,
+    "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+  },
+  "current_canonical_paragraph_verbatim": true,
+  "no_prior_archive_extract_or_payload_replay": true,
+  "upstream_disposition": "none"
+}

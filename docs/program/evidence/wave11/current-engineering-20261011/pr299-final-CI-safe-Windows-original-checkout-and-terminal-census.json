@@ -1,0 +1,1216 @@
+{
+  "schema": "actions-pr299-current776-Windows-actual-log-census/v1",
+  "job": 114420728280,
+  "run": 38122766410,
+  "attempt": 1,
+  "original_decoded_UTF8_log": {
+    "path": "/workspace/engineering/pr299-current776-CI-admission-review/final-successor-04/private-original-Windows-job114420728280.log",
+    "bytes": 604369,
+    "sha256": "44779222a08daeeba62b67c6b6a0c680659502df3615cca570be5b6428f3e9a7"
+  },
+  "acquisitions": 1,
+  "lines": 4558,
+  "actual_checkout": {
+    "sha": "600d1b213fcfe6f94f341cbe4bca4472bd002e4c",
+    "tree_authenticated_by_API_and_equal_source": "99ac5309add45af65049546dd3a99f357884cf3b",
+    "ordered_parents_authenticated_by_API": [
+      "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "3155fc55ea7d47afbc547fddc963b5860462924b"
+    ],
+    "checkout_fetch_lines": [
+      83,
+      85
+    ],
+    "detached_HEAD_merge_line": 110,
+    "git_log_H_command_line": 112,
+    "git_log_H_output_line": 113
+  },
+  "terminal_source_summary": {
+    "line": 4204,
+    "counts": {
+      "passed": 1090,
+      "skipped": 142,
+      "warnings": 14
+    }
+  },
+  "source_results_reconciled": {
+    "PASSED": 1090,
+    "SKIPPED": 142
+  },
+  "integration_collection": {
+    "line": 4284,
+    "items": 1385,
+    "deselected": 1235,
+    "selected": 150
+  },
+  "terminal_integration_summary": {
+    "line": 4441,
+    "counts": {
+      "passed": 131,
+      "skipped": 19,
+      "deselected": 1235
+    }
+  },
+  "all150_individual_integration_outcomes": [
+    {
+      "line": 4286,
+      "node": "test_mcp_apps_authoring.py::test_public_mcp_apps_metadata_through_action_server_process",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4287,
+      "node": "test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4288,
+      "node": "test_mcp_integration.py::test_modern_mcp_lists_tools_without_initialization",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4289,
+      "node": "test_mcp_integration.py::test_mcp_integration_with_actions_in_no_conda_greeter",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4290,
+      "node": "test_mcp_integration.py::test_mcp_integration_with_actions_in_no_conda_mcp",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4291,
+      "node": "test_mcp_integration.py::test_mcp_integration_with_structured_output",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4292,
+      "node": "test_mcp_integration.py::test_mcp_integration_secrets",
+      "parameter": "env_var",
+      "parameter_sha256": "3f608b3868004a3a33757372725522298793ba7b4c764dc965196333df131cb1",
+      "result": "PASSED"
+    },
+    {
+      "line": 4293,
+      "node": "test_mcp_integration.py::test_mcp_integration_secrets",
+      "parameter": "request_header",
+      "parameter_sha256": "cd4fd4ef69bf3c8cfd84136e64db158ca69a513c23a8c179106b96d1d78cb6a1",
+      "result": "PASSED"
+    },
+    {
+      "line": 4294,
+      "node": "test_mcp_integration.py::test_modern_mcp_requests_can_move_between_independent_replicas",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4295,
+      "node": "test_mcp_integration.py::test_mcp_v2_routes_accept_discover_and_subscription_methods",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4296,
+      "node": "test_mcp_integration.py::test_mcp_test_gateway_observes_tool_routing_metadata",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4297,
+      "node": "test_mcp_integration.py::test_mcp_forwards_headers_and_cookies_to_actions",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4298,
+      "node": "test_mcp_integration.py::test_mcp_catalogs_are_fresh_after_action_reload",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4299,
+      "node": "test_mcp_integration.py::test_mcp_catalog_revisions_match_across_independent_runtime_processes",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4300,
+      "node": "test_mcp_v2_showcase_protocol_proof.py::test_mcp_v2_showcase_protocol_proof",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4304,
+      "node": "test_mcp_v2_showcase_template.py::test_embedded_mcp_v2_showcase_template_end_to_end",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4305,
+      "node": "test_action_unicode.py::test_action_unicode",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4306,
+      "node": "test_binary.py::test_binary_preserves_cli_usage_exit_code",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4307,
+      "node": "test_binary.py::test_binary_build",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4308,
+      "node": "test_binary.py::test_work_items_native_executable_api_round_trip",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4309,
+      "node": "test_browser_origin_acceptance.py::test_browser_harness_deadline_reaps_owned_descendant",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4310,
+      "node": "test_browser_origin_acceptance.py::test_live_runtime_browser_origin_and_ambient_session_matrix",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4311,
+      "node": "test_browser_session.py::test_assembled_server_browser_session",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4312,
+      "node": "test_cli.py::test_version",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4313,
+      "node": "test_cli.py::test_download_rcc",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4314,
+      "node": "test_cli.py::test_new",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4315,
+      "node": "test_cli.py::test_new_list_templates",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4316,
+      "node": "test_cli.py::test_help",
+      "parameter": "args0",
+      "parameter_sha256": "41d623fc5ba7638402e4bf322d49d70fa56e5527a9987eca070847dc3ceabd0d",
+      "result": "PASSED"
+    },
+    {
+      "line": 4317,
+      "node": "test_cli.py::test_help",
+      "parameter": "args1",
+      "parameter_sha256": "0f92d2abf9ed66168c7b98589da53f19f26832e4d65b3843319d73c5d7bbffd2",
+      "result": "PASSED"
+    },
+    {
+      "line": 4318,
+      "node": "test_cli.py::test_help",
+      "parameter": "args2",
+      "parameter_sha256": "4c5df96aa0853f3e885ea64fdf41169224695e5d6e45df2ccafb6eb47b059d32",
+      "result": "PASSED"
+    },
+    {
+      "line": 4319,
+      "node": "test_cli.py::test_help",
+      "parameter": "args3",
+      "parameter_sha256": "66a6f0bed00ef5ce4e7d2b29d1cee0079575de1d1c599dfa9f68cc238b7ad5b3",
+      "result": "PASSED"
+    },
+    {
+      "line": 4320,
+      "node": "test_cli.py::test_migrate",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4321,
+      "node": "test_cli.py::test_package_update",
+      "parameter": "dry_run.backup",
+      "parameter_sha256": "0a830c36bd6a8f8fb4d02a53b4093481ba7ddae1e2d301d52446c70f7c908d79",
+      "result": "PASSED"
+    },
+    {
+      "line": 4322,
+      "node": "test_cli.py::test_package_update",
+      "parameter": "dry_run.no_backup",
+      "parameter_sha256": "ab3dcb1862af5eaa373dc798170d10c2f4bb3c87307c38e4c4859f0bcc73c07a",
+      "result": "PASSED"
+    },
+    {
+      "line": 4323,
+      "node": "test_cli.py::test_package_update",
+      "parameter": "update.backup",
+      "parameter_sha256": "f195805f868a2dba61ce6eabc5e25a8d2cec3e90bade3b144be40ee2578b4a07",
+      "result": "PASSED"
+    },
+    {
+      "line": 4324,
+      "node": "test_cli.py::test_package_update",
+      "parameter": "update.no_backup",
+      "parameter_sha256": "fe69060889cc4a194209155653708ef9c57ad3f6c828fa38df7a3de7d2a5b575",
+      "result": "PASSED"
+    },
+    {
+      "line": 4325,
+      "node": "test_cli.py::test_oauth2_actions_config",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4326,
+      "node": "test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4327,
+      "node": "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good",
+      "parameter": "resource",
+      "parameter_sha256": "5de95319f17467ed6dc58e4e0b16c1193a13b35d60dc48bcf06bf6b7beebbe6c",
+      "result": "PASSED"
+    },
+    {
+      "line": 4328,
+      "node": "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good",
+      "parameter": "template",
+      "parameter_sha256": "5cde0f1298f41f7d1c8b907a36992a7a513225a2615bd6e307bf1a9149b06b40",
+      "result": "PASSED"
+    },
+    {
+      "line": 4329,
+      "node": "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good",
+      "parameter": "prompt",
+      "parameter_sha256": "cf07194ee232eb531e15f690000d19846dea69cf05504782658afcfacb9228a2",
+      "result": "PASSED"
+    },
+    {
+      "line": 4330,
+      "node": "test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4331,
+      "node": "test_cli_multi_package_sync.py::test_additive_import_serves_duplicate_action_names_across_restart",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4332,
+      "node": "test_cli_multi_package_sync.py::test_start_sync_treats_repeated_dirs_as_one_desired_set",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4333,
+      "node": "test_cli_multi_package_sync.py::test_start_sync_rejects_bad_later_package_without_partial_database_update",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4334,
+      "node": "test_cli_multi_package_sync.py::test_failed_sync_keeps_last_good_unmanaged_package_sources",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4335,
+      "node": "test_cli_multi_package_sync.py::test_sync_rejects_historical_mcp_alias_capture_and_rename_recovers",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4336,
+      "node": "test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4337,
+      "node": "test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4338,
+      "node": "test_dakota_rcc_acceptance.py::test_dakota_local_rcc_action_over_authenticated_http",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4339,
+      "node": "test_database_shared.py::test_postgresql_bound_json_operators_and_array_rhs_execute",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4340,
+      "node": "test_database_shared.py::test_postgresql_run_output_archive_preserves_values_and_reruns",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4341,
+      "node": "test_database_shared.py::test_postgresql_run_output_archive_collision_preserves_data_and_retries",
+      "parameter": "stdout",
+      "parameter_sha256": "63d42d26156fcc761e57da4128e9881d5bdf3bf933f0f6e9c93d6e26b9b90ae7",
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4342,
+      "node": "test_database_shared.py::test_postgresql_run_output_archive_collision_preserves_data_and_retries",
+      "parameter": "stderr",
+      "parameter_sha256": "7e6b710b765404cccbad9eedcff7615fc37b269d6db12cd81a58be541d93083c",
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4343,
+      "node": "test_database_shared.py::test_concurrent_postgresql_startup_archives_legacy_run_outputs_once",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4344,
+      "node": "test_database_shared.py::test_postgresql_schema_introspection_uses_effective_search_path",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4345,
+      "node": "test_database_shared.py::test_two_runtime_processes_claim_one_due_schedule",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4346,
+      "node": "test_database_shared.py::test_two_database_instances_preserve_concurrent_atomic_updates",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4347,
+      "node": "test_database_shared.py::test_postgresql_transaction_boundaries_emit_no_redundant_begin_notice",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4348,
+      "node": "test_database_shared.py::test_postgresql_transaction_rolls_back_failed_state_update",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4349,
+      "node": "test_database_shared.py::test_concurrent_postgresql_startup_applies_migrations_once",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4350,
+      "node": "test_database_shared.py::test_postgresql_production_models_are_visible_across_instances",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4351,
+      "node": "test_datadir_related_actions.py::test_datadir_related_actions",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4352,
+      "node": "test_deployment_schema_probe.py::test_postgresql_proposed_deployment_schema_scoped_ddl_in_isolated_schema",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4353,
+      "node": "test_devenv.py::test_devenv",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4354,
+      "node": "test_devenv.py::test_run_actions_with_custom_pythonpath",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4355,
+      "node": "test_frontend_build_unauthenticated.py::test_windows_npm_command_uses_resolved_node_cli",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4356,
+      "node": "test_frontend_build_unauthenticated.py::TestUnauthenticatedBuild::test_npm_ci_succeeds_without_auth",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4357,
+      "node": "test_frontend_build_unauthenticated.py::TestUnauthenticatedBuild::test_npm_build_succeeds_without_auth",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4358,
+      "node": "test_frontend_build_unauthenticated.py::TestUnauthenticatedBuild::test_build_output_exists",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4359,
+      "node": "test_frontend_build_unauthenticated.py::TestUnauthenticatedBuild::test_no_private_registry_access",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4360,
+      "node": "test_log_credentials.py::test_assembled_websocket_session_credentials_never_reach_logs",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4361,
+      "node": "test_log_verbosity.py::test_logs_dont_contain_secrets",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4362,
+      "node": "test_oauth2.py::test_print_user_oauth2_config_path",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4363,
+      "node": "test_p0_snapshot_reload_boundaries.py::test_additive_reimport_removed_action_keeps_executable_last_good",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4364,
+      "node": "test_p0_snapshot_reload_boundaries.py::test_metadata_collection_cannot_mutate_admitted_snapshot",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4365,
+      "node": "test_package_yaml_structure.py::test_package_yaml_structure_too_new",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4366,
+      "node": "test_package_yaml_structure.py::test_package_yaml_structure_warn_spec_version",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4367,
+      "node": "test_quickstart_validation.py::test_public_quickstart_creates_project_and_serves_mcp",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4368,
+      "node": "test_server.py::test_action_server_starts",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4369,
+      "node": "test_server.py::test_action_server_in_memory_db",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4370,
+      "node": "test_server.py::test_schema_request_no_actions_registered",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4371,
+      "node": "test_server.py::test_bad_return_on_no_conda",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4372,
+      "node": "test_server.py::test_run_id_in_response_header",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4373,
+      "node": "test_server.py::test_global_return_reuse_process",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4374,
+      "node": "test_server.py::test_is_consequential_openapi_spec",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4375,
+      "node": "test_server.py::test_import_no_conda",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4376,
+      "node": "test_server.py::test_full_run",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4377,
+      "node": "test_server.py::test_full_run_with_env_build",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4378,
+      "node": "test_server.py::test_routes",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4379,
+      "node": "test_server.py::test_summary_run_list_is_bounded_and_legacy_list_and_detail_remain_full",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4380,
+      "node": "test_server.py::test_summary_run_list_reports_corrupt_identity_without_disclosing_it",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4381,
+      "node": "test_server.py::test_runtime_deep_links_serve_frontend_index",
+      "parameter": null,
+      "parameter_sha256": "68865d0ef7c4ac7b3545b7c33987796c8bf6c317648a5e492eb70941e2f3f10a",
+      "result": "PASSED"
+    },
+    {
+      "line": 4382,
+      "node": "test_server.py::test_runtime_deep_links_serve_frontend_index",
+      "parameter": null,
+      "parameter_sha256": "266976c7368f376c94e6bb761b71a90fb072432e61759db795824716111a2457",
+      "result": "PASSED"
+    },
+    {
+      "line": 4383,
+      "node": "test_server.py::test_runtime_deep_links_serve_frontend_index",
+      "parameter": null,
+      "parameter_sha256": "b5fb85dc910cca5659d584865e641d26fb59dd9ce7133479aebaa0852d152e30",
+      "result": "PASSED"
+    },
+    {
+      "line": 4384,
+      "node": "test_server.py::test_runtime_deep_links_serve_frontend_index",
+      "parameter": null,
+      "parameter_sha256": "cc545284f574d6c41085c334598e1450933642e4866d14fe8f6d9e911dd285e5",
+      "result": "PASSED"
+    },
+    {
+      "line": 4385,
+      "node": "test_server.py::test_runtime_deep_links_serve_frontend_index",
+      "parameter": null,
+      "parameter_sha256": "cd157b6e2bb78c4abf2b191202f6ce8f3d447ba2fe6790d336d64e0c009adc4d",
+      "result": "PASSED"
+    },
+    {
+      "line": 4386,
+      "node": "test_server.py::test_runtime_deep_links_serve_frontend_index",
+      "parameter": null,
+      "parameter_sha256": "cf2f83ccd80d1b6ef9de226d6afe6c5aedd5e4b2ef2a631784a62fbafa320b51",
+      "result": "PASSED"
+    },
+    {
+      "line": 4387,
+      "node": "test_server.py::test_runtime_deep_links_serve_frontend_index",
+      "parameter": null,
+      "parameter_sha256": "2b34a7e0f414f7b41ad8ef5776dd44fa77044047cc2abda8594af66310182b7b",
+      "result": "PASSED"
+    },
+    {
+      "line": 4388,
+      "node": "test_server.py::test_runtime_artifact_download_survives_frontend_fallback",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4389,
+      "node": "test_server.py::test_server_url_flag",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4390,
+      "node": "test_server.py::test_server_full_openapi_flag",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4391,
+      "node": "test_server.py::test_auth_routes",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4392,
+      "node": "test_server.py::test_configured_api_key_protects_assembled_surfaces",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4393,
+      "node": "test_server.py::test_configured_api_key_boundary_covers_exceptions_and_uploads",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4394,
+      "node": "test_server.py::test_server_process_pool",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4395,
+      "node": "test_server.py::test_subprocesses_killed",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4396,
+      "node": "test_server.py::test_import_task_options",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4397,
+      "node": "test_server.py::test_port_in_use",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4398,
+      "node": "test_server.py::test_action_package_rename",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4399,
+      "node": "test_server.py::test_action_package_cwd",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4400,
+      "node": "test_server.py::test_kill_lock_holder",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4401,
+      "node": "test_server_async.py::test_server_async_api_requests_while_waiting_for_action_to_complete",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4402,
+      "node": "test_server_async.py::test_server_async_api",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4403,
+      "node": "test_server_async.py::test_server_async_process_poll_with_cancel",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4404,
+      "node": "test_server_async.py::test_cancel_existing_runs_on_restart",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4405,
+      "node": "test_server_automigrate.py::test_automigrate",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4406,
+      "node": "test_server_custom_model.py::test_server_custom_model_argument",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4407,
+      "node": "test_server_headers_in_body.py::test_server_headers_in_body",
+      "parameter": "context-in-body",
+      "parameter_sha256": "f1b99206afef5252b6c8874e599b9eca87897c2ee30696fe841cad12528902ff",
+      "result": "PASSED"
+    },
+    {
+      "line": 4408,
+      "node": "test_server_headers_in_body.py::test_server_headers_in_body",
+      "parameter": "regular",
+      "parameter_sha256": "667937c3e7a68ea374716edae34173e66dc54f380cffaccceaf15dfbfad22f99",
+      "result": "PASSED"
+    },
+    {
+      "line": 4409,
+      "node": "test_server_hot_reload.py::test_server_hot_reload",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4410,
+      "node": "test_server_https.py::test_serve_https",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4411,
+      "node": "test_server_parent_pid.py::test_mcp_sse_does_not_starve_server_or_sigterm",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4412,
+      "node": "test_server_parent_pid.py::test_action_server_parent_pid",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4413,
+      "node": "test_server_post_run.py::test_server_post_run",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4414,
+      "node": "test_server_post_run.py::test_server_post_run_on_failure",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4415,
+      "node": "test_server_post_run.py::test_server_bad_post_run_command",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4416,
+      "node": "test_server_request.py::test_issue_167_access_headers",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4417,
+      "node": "test_server_response.py::test_return_response_ok_action",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4418,
+      "node": "test_server_response.py::test_action_package_json",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4419,
+      "node": "test_server_secrets.py::test_secrets_simple",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4420,
+      "node": "test_server_secrets.py::test_secrets_encrypted",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4421,
+      "node": "test_server_secrets.py::test_secrets_not_encrypted",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4422,
+      "node": "test_server_secrets.py::test_secrets_unencrypted_set_through_separate_post_request",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4423,
+      "node": "test_server_secrets.py::test_secrets_encrypted_set_through_separate_post_request_env_var_or_header",
+      "parameter": "regular",
+      "parameter_sha256": "667937c3e7a68ea374716edae34173e66dc54f380cffaccceaf15dfbfad22f99",
+      "result": "PASSED"
+    },
+    {
+      "line": 4424,
+      "node": "test_server_secrets.py::test_secrets_encrypted_set_through_separate_post_request_env_var_or_header",
+      "parameter": "header-encrypted",
+      "parameter_sha256": "9560d3e2dafc1993014b8bd942e7efe3715bc0069bde1a8ecfc4ecdb8b82d41d",
+      "result": "PASSED"
+    },
+    {
+      "line": 4425,
+      "node": "test_server_secrets.py::test_secrets_encrypted_set_through_separate_post_request_env_var_or_header",
+      "parameter": "env-encrypted",
+      "parameter_sha256": "3e22fb70cb2db952ce3f6acc1efefafc6771b72f0fa08082e2851b7e954d3a99",
+      "result": "PASSED"
+    },
+    {
+      "line": 4426,
+      "node": "test_server_secrets.py::test_secrets_encrypted_set_through_separate_post_request_env_var_or_header",
+      "parameter": "header-unencrypted",
+      "parameter_sha256": "fe03cffa43f563e73a75b1d407f100a51a0bcdf2d8eb47431a0458c9863c3f0c",
+      "result": "PASSED"
+    },
+    {
+      "line": 4427,
+      "node": "test_server_secrets.py::test_secrets_encrypted_set_through_separate_post_request_env_var_or_header",
+      "parameter": "env-unencrypted",
+      "parameter_sha256": "9c0868bf65a999868e22ca5a8e1f7896e0c12b2235d754055e445b5ac972edaf",
+      "result": "PASSED"
+    },
+    {
+      "line": 4428,
+      "node": "test_server_secrets.py::test_secrets_encrypted_oauth2",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4429,
+      "node": "test_server_secrets.py::test_secrets_oauth2_encrypted_set_through_separate_post_request",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4431,
+      "node": "test_server_websockets.py::test_server_websockets",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4432,
+      "node": "test_server_websockets.py::test_configured_api_key_protects_websocket",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4433,
+      "node": "test_server_websockets.py::test_assembled_summary_websocket_snapshot_handles_large_stored_runs",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4434,
+      "node": "test_server_websockets.py::test_actual_uvicorn_websocket_rejects_reflected_host_and_forwarded_host",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4435,
+      "node": "test_server_whitelist.py::test_whitelist_on_import",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4436,
+      "node": "test_server_whitelist.py::test_whitelist_on_start",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4437,
+      "node": "test_server_whitelist.py::test_whitelist_on_start_run",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4438,
+      "node": "test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    },
+    {
+      "line": 4439,
+      "node": "test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "SKIPPED"
+    }
+  ],
+  "all11_frozen_native_integration_cases": [
+    {
+      "line": 4326,
+      "node": "test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4327,
+      "node": "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good",
+      "parameter": "resource",
+      "parameter_sha256": "5de95319f17467ed6dc58e4e0b16c1193a13b35d60dc48bcf06bf6b7beebbe6c",
+      "result": "PASSED"
+    },
+    {
+      "line": 4328,
+      "node": "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good",
+      "parameter": "template",
+      "parameter_sha256": "5cde0f1298f41f7d1c8b907a36992a7a513225a2615bd6e307bf1a9149b06b40",
+      "result": "PASSED"
+    },
+    {
+      "line": 4329,
+      "node": "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good",
+      "parameter": "prompt",
+      "parameter_sha256": "cf07194ee232eb531e15f690000d19846dea69cf05504782658afcfacb9228a2",
+      "result": "PASSED"
+    },
+    {
+      "line": 4330,
+      "node": "test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4331,
+      "node": "test_cli_multi_package_sync.py::test_additive_import_serves_duplicate_action_names_across_restart",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4332,
+      "node": "test_cli_multi_package_sync.py::test_start_sync_treats_repeated_dirs_as_one_desired_set",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4333,
+      "node": "test_cli_multi_package_sync.py::test_start_sync_rejects_bad_later_package_without_partial_database_update",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4334,
+      "node": "test_cli_multi_package_sync.py::test_failed_sync_keeps_last_good_unmanaged_package_sources",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4335,
+      "node": "test_cli_multi_package_sync.py::test_sync_rejects_historical_mcp_alias_capture_and_rename_recovers",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    },
+    {
+      "line": 4336,
+      "node": "test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot",
+      "parameter": null,
+      "parameter_sha256": null,
+      "result": "PASSED"
+    }
+  ],
+  "all3_original_collision_variants": [
+    {
+      "line": 4327,
+      "node": "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good",
+      "parameter": "resource",
+      "parameter_sha256": "5de95319f17467ed6dc58e4e0b16c1193a13b35d60dc48bcf06bf6b7beebbe6c",
+      "result": "PASSED"
+    },
+    {
+      "line": 4328,
+      "node": "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good",
+      "parameter": "template",
+      "parameter_sha256": "5cde0f1298f41f7d1c8b907a36992a7a513225a2615bd6e307bf1a9149b06b40",
+      "result": "PASSED"
+    },
+    {
+      "line": 4329,
+      "node": "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good",
+      "parameter": "prompt",
+      "parameter_sha256": "cf07194ee232eb531e15f690000d19846dea69cf05504782658afcfacb9228a2",
+      "result": "PASSED"
+    }
+  ],
+  "scope": "Original Windows CLI/native integration controls PASS for this600d tree; no build artifact byte identity/platform portability/new installed wheel/whole native acceptance claim. All19 skipped cases remain unverified. Current passing collision does not identify or erase historical9cb startup/cleanup cause. Host observer stop states are not independently measured descendant reaping predicates.",
+  "console_formatting_correction": {
+    "line": 4287,
+    "node": "test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge",
+    "status": "SKIPPED",
+    "reason": "Long verbose node directly joins uppercase SKIPPED. Correct splitting reconciles150 individual outcomes with131PASS19SKIP; no missing case, masking or fabricated result."
+  },
+  "upstream_disposition": "none"
+}

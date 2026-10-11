@@ -1,0 +1,135 @@
+{
+  "schema": "current618-linux-consumer-independent-v4-preexecution-review/v1",
+  "status": "GO_PREEXECUTION_PROPOSAL_ONLY_ACTUAL_REQUIRES_DISTINCT_ROOT_AUTHORIZATION",
+  "observed_utc": "2026-10-11T10:31:41.893106+00:00",
+  "owner_final_proposal": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/immutable-current618-linux-consumer-preexecution-proposal-v4.json",
+    "bytes": 39398,
+    "sha256": "da926a733e60108fd2943add0a60a0bf6d365afbb1d489bf986a0624ecda65c0"
+  },
+  "runner": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-consumer-runner-v4.py",
+    "bytes": 19479,
+    "sha256": "06f64db20bba0554f570d4653f11fb7bccc7b98ec2e7de7085ab90fd8ba7333b"
+  },
+  "input_gate": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/current-input-admission-v4.py",
+    "bytes": 9288,
+    "sha256": "1edf96b6b801de5e7b8c1c7c284a636cec44bc06fcb45adb6e1781e519b3a8f6"
+  },
+  "input_manifest": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/input-and-source-admission-v4.json",
+    "bytes": 170677,
+    "sha256": "798f11c5416e57d6d0fa39c79c9524fc52e2e022496c1c3f12b3c902facc61d3"
+  },
+  "previous_v3_proposal": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/immutable-current618-linux-consumer-preexecution-proposal-v3.json",
+    "bytes": 31495,
+    "sha256": "41ccd19946c766b97c6c49e72dcb592a38193c56763ae6c806a2d41c52b669e6"
+  },
+  "previous_v3_HOLD": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-independent-preexecution-review/independent-frozen-v3-preexecution-review-HOLD.json",
+    "bytes": 6278,
+    "sha256": "61929d78c9f98ef9d333447b0e09f3f18fcad4f84167b0bf256accab0b98189b"
+  },
+  "finding_disposition": "Original current bytes with stale archive metadata were admitted by v3. v4 corrects labels and rejects both single and coordinated stale copies through independently pinned9b406 qualification and its digest/size-bound complete inspection. Original v3 HOLD remains historical; no retroactive GO.",
+  "independent_expected_archive_identity": {
+    "id": 11697353355,
+    "run": 38126987514,
+    "job": 114433293243
+  },
+  "verified": {
+    "all_current_refs": 60,
+    "all_v3_refs_untouched": 36,
+    "historical776_refs": 29,
+    "owner_artifact_log_refs": 24,
+    "all_hash_sizes_exact": true,
+    "current_original_ZIP_SHA256": "fc4018e6e7ed4a0e47c4f5888d36d55655216ca22ebd965f29ce9f1130938f8c",
+    "current_wheel_SHA256": "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6",
+    "current_counts": {
+      "python": 202,
+      "tracked_source_payloads": 215,
+      "RECORD_files": 221,
+      "RECORD_hashsize_verified": 220,
+      "directories": 27
+    },
+    "current_input_payloads_unchanged_v3_except_identity_schema_labels": true,
+    "trusted_identity_not_derived_from_caller_duplicate_labels": true,
+    "all9_runner_function_ASTs_exact_v3": true,
+    "runner_only_top_level_attempt_and_manifest_gate_pins_changed": true,
+    "original_gate_predicates_AST_exact_after_removing_only_guard_call_and_receiptfield": true,
+    "only_new_guard_function": "admit_provenance",
+    "original85controls_ASTs_preserved_filename_rebinding_only": true,
+    "six_coordinated_and_single_stale_label_RED_baseline_pass": true,
+    "new_trusted_qualification_tamper_rejection_control": true,
+    "recorded93_GREEN0skip": true,
+    "E721_static_failure_before_tests_retained": "Strict int excluding bool corrected without predicate waiver",
+    "helpers_current_Git618_and4immutable0444_snapshots_exact": true,
+    "roots": 15,
+    "INVENTORY_CODE_unchanged": true,
+    "harness1433_e736_07b_clean_prehash": true,
+    "producer_synthetic_not_actual": "e766/a709+618/tree99ac remains builder; equal actual618 tree is separate identity",
+    "original_OAuth_two_empty_strings_and_Windows_semantics_modes_HOLD_retained": true
+  },
+  "planned_exact_gateway": {
+    "cwd": "/workspace/engineering/pr282",
+    "activate": "source /workspace/actions-cloud/activate.sh",
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "645s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import toolkit; toolkit.poetry(\"action_server\", \"run\", \"python\", \"/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-consumer-runner-v4.py\")"
+    ],
+    "attempt_root": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-2",
+    "attempt_absent": true,
+    "authorization": "NOTAUTHORIZED; root independent frozenv4 GO then capacity/serialization and distinct ONE release; no retry."
+  },
+  "budgets": {
+    "worker_seconds": 595,
+    "process_including_cleanup_seconds": 600,
+    "reserved_cleanup_max_seconds": 5,
+    "outer_gateway_seconds": 645,
+    "outer_TERM_KILL_grace_seconds": 10,
+    "temporary": "Fresh owned0700 /tmp/rt103-current618-* outside all known checkouts",
+    "output": "Directfiles/no newreaderthreads; primaryexceptionretained, additionalcleanup failureoverallFAIL",
+    "cleanup_scope": "Existingidentity-ownedPID/create-time point-in-time snapshots; no universaladoption/naturalshutdown/productionpool/native/service/provider/browserclaim"
+  },
+  "execution_capacity": "Root must freshly release serialization/capacity before separately authorizing exactly one actual; no execution by reviewer",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact source-backed privateprovenance guard lesson proposed for root integration",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/canonical-independent-archive-provenance-v4-proposed.patch",
+      "bytes": 890,
+      "sha256": "5f08b459a43e6fe50c6baac0c56f0a6d5241ec6aff913498df39e0d597962aeb"
+    },
+    "Durable_learning_captured": "Archive bytes cannot authenticate artifact/run/job labels. Independently SHA-bind the trusted qualification; rejecting coordinated false duplicate labels requires external evidence, not two caller copies.",
+    "Evidence": "V3 independentHOLD6192 with actual valid currentarchive labelled oldIDs; meaningfulRED6+1 thenGREEN93; originalv3 and all24 current owner refs preserved, exactprivatecode/provenance scope proof.",
+    "Stale_or_ambiguous_guidance_removed": "Digest/size equality no longer treated as enough to admit produceridentity labels; self-consistent duplicate labels not independent provenance.",
+    "Remaining_uncertainty": "V4 currentconsumer actual NOTRUN/NOTAUTHORIZED; capacity/heavyserialization and independentGO then root distinctONE release required. OAuthauthority, Windowsfrontendsemantic/mode, mac/aggregate/fullseven/platform consumers/tag/private/native/release HOLD.",
+    "Disposition": "Exact new6line provenance rule proposed; existingbf95/9744 partialplatform/tuple rules retained; no cosmeticdiary."
+  },
+  "remaining_HOLDs": [
+    "Current ONEinstalled Linuxconsumer notRUN/NOTAUTHORIZED",
+    "Rootheavyserialization and execution capacity",
+    "MacOS cp312/cp313/aggregate missing at captured metadata; fullseven/platform consumers/tag/publication",
+    "Windows178CRLF bodies and onefrontend decoded CR/HTML difference do not prove semantic equivalence; Unixmodes unavailable",
+    "GeneratedOAuth bothfixed entriesEMPTY all distributions; sourceauthority/content unqualified",
+    "Private01f/frozen-v6/full134/native/provider/browser/Workspace/backend/release; no override by Linuxdata integrity"
+  ],
+  "not_performed": [
+    "Actual consumer/Runtime install/import/CLI",
+    "Tests/controls/gateway/installer/download/live polling",
+    "Source/index/branch writes",
+    "Publication/tag/native/browser/provider/Windows gate/push/merge"
+  ],
+  "upstream_disposition": "none"
+}

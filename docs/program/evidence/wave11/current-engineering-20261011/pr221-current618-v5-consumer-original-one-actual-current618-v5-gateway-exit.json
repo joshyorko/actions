@@ -1,0 +1,15 @@
+{
+  "exit_code": 0,
+  "authorization": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/root-one-actual-current618-v5-execution-authorization.json",
+    "bytes": 302511,
+    "sha256": "53b71a810ef12b00965d5d1f4d07c5d67df1b024b81db7ea3872c0959099c556"
+  },
+  "original_log": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/original-one-actual-current618-v5-gateway.log",
+    "bytes": 22186,
+    "sha256": "e138f2f023277e36489015d30349fbc0534271bdd55768f57fea44049d5d3464"
+  },
+  "time": "2026-10-11T10:52:17.153076+00:00",
+  "automatic_retry": false
+}

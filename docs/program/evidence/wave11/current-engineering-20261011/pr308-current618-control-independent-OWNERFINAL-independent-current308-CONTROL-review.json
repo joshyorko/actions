@@ -1,0 +1,52 @@
+{
+  "schema": "actions.independent-current308-CONTROL-review/v1",
+  "verdict": "GO_NORMAL_EXISTING_BRANCH_SOURCE_CONTROL_CHECKPOINT_PUSH_ONLY",
+  "execution_subject": {
+    "CONTROL": "d5a3d2f53737f4f5380b6ecb7fb93d1a651f005d",
+    "CONTROL_tree": "fa3f7728d315c9a192f88e17acf15f164d4eee13",
+    "SOURCE": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+    "SOURCE_tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb",
+    "SOURCE_ordered_parents": [
+      "b673ddd761ba4ccd68e9baa8faaa9ab666df794e",
+      "6181b044c75de35386f1ae30e71725398b6a7feb"
+    ],
+    "actual_target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "branch": "fix/rcc-candidate-wheel-identities-20261010"
+  },
+  "owner_final": {
+    "path": "/workspace/engineering/pr308-actual299-control-refresh/CONTROL-frozen-owner-final-checkpoint.json",
+    "bytes": 141218,
+    "sha256": "c646a010c8b4108f19a6897761a6cd6469f59d8ff90b7e2ecd700eadac37832c"
+  },
+  "independent_proof": {
+    "path": "/workspace/engineering/pr308-actual299-independent-control-review/independent-complete-CONTROL-scope-gates-and-retained-byte-proof.json",
+    "bytes": 59536,
+    "sha256": "972a649d32308de1d37679b46b7b05548a3051728b64cb3cc20bbacdfa87ebbd"
+  },
+  "findings": [],
+  "verified_scope": [
+    "1419 complete typed/filesystem body and execute-mode union; only three control paths change two source identity values",
+    "All1416 other leaves and guide bodies/modes exactly reviewedSOURCE",
+    "All188 final and147 originalSOURCE bindings verified; seven old actual members and original native/helper/browser/Node/frontend/V5 bytes preserved",
+    "Original pinRED1FAIL4PASS, actualbranchRED2FAIL3PASS and mistakencollectorFAIL retained; GREEN55+Toolkit96+static/gen8/YAML30 currentCONTROL checks; full1240/13 remains SOURCE-only"
+  ],
+  "generator_and_gate_execution_identity": "Prepared CONTROL working bytes checked before child commit; roundtrip receipt observes SOURCEHEADc103, current30YAML hashes plus complete precommit/staged/postcommit1419 proofs bind checked bytes to final fa3f tree; no claimed committedHEADd5a3 generator rerun",
+  "sequencing_limit": "GREEN launched after valid workflow restoration before failed branch-count collector readback; successor metadata records original observed2FAIL3PASS only, no RED rerun or retroactive collector GO",
+  "required_next_gates": [
+    "Root normal existing-branch push with pinned CONTROL; no reviewer push",
+    "Fresh exact SOURCE/CONTROL hosted original three-case proof and complete current source/base CI, actual checkout, reviews/threads/draft and policy admission",
+    "Whole134/private01f/frozen-v6/positive2510/public639profile/native/provider/backend/publication/release remain HOLD; no old776 actual or fullCI carry"
+  ],
+  "documentation_improvement": {
+    "Canonical_files_changed_or_proposed": [
+      "docs/skills/repository-operations.md",
+      "docs/skills/provenance-observability.md"
+    ],
+    "Exact_delta_disposition": "Accept verified existing SOURCE b800238a three-branch correction and both-parent imports3b1c8448/7330b295, unchanged in CONTROL; no cosmetic child",
+    "Durable_learning_captured": "Source-first then separately reviewed control pins and new actual proof; all three declared push branches share retained eight paths; immutable original RED evidence and named successor observations preserve actual sequencing",
+    "Evidence": "Whole generator/test AST and emittedworkflow raw exact after only sourceSHA/tree substitutions; 1419leaf union; originalRED counts; fresh55controls96Toolkit8outputs30YAML; source and historicalactual bindings distinct",
+    "Stale_or_ambiguous_guidance_removed": "SOURCE corrects stale two-branch list; CONTROL does not relabel old7eb/b673/776 proof or SOURCEfull1240/13 as new currentCONTROL actual",
+    "Remaining_uncertainty": "Fresh current hosted three-case/fullCI/policy acceptance and all positive2510/private/native/provider/release gates still pending"
+  },
+  "upstream_disposition": "none"
+}

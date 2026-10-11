@@ -1,0 +1,1947 @@
+{
+  "head": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+  "tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb",
+  "ordered_parents": [
+    "b673ddd761ba4ccd68e9baa8faaa9ab666df794e",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "clean": true,
+  "complete_parent_counts": [
+    1409,
+    1419
+  ],
+  "all1419_mode_blob_filesystem_bytes_execbits_prepost_exact": true,
+  "only_difference_from_deterministic_ordinary_auto_tree": "docs/skills/repository-operations.md",
+  "only_novel_body_guide_approved_three_branch_correction": true,
+  "whole_original_guard_verifier_test_body_mode_AST_19_controls_negative_candidate_2465_2510_grace10_preserved": true,
+  "all_old_C_three_control_files_generator_workflow_developer_pins7eb_unchanged": true,
+  "whole_other_github_exact_actual618": true,
+  "producer_inventory": {
+    "current": 274,
+    "old": 268,
+    "matching": 261,
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "qualification": "UNQUALIFIED"
+  },
+  "selected_five_typed_separate_all_exact_native": true,
+  "all147_frozen_evidence_ref_fingerprint_and72_original31S16C22actual_plus3receipts_and3_independent_GO_refs_verified": true,
+  "verified_binding_count": 363,
+  "verified_bindings": [
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/freeze-SOURCE-final-immutable.py",
+      "bytes": 8659,
+      "sha256": "da5a7fb47f4f8719ab825e351b764c2423164d2109f88a2efcd9f46d661d268f"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/owned-pinned-ignored-Rcc-before-gates.json",
+      "bytes": 300,
+      "sha256": "4e6c4e07dc871e0d45bb46e100a7c85ec58e55490dbf88e0a96cdcee1e5499e4"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/SOURCE-full-configured-runtime-source.log",
+      "bytes": 320721,
+      "sha256": "3a53c22ef6c55fcb0712afe853b481e1c0dd8a730201d6916e453f81426eaf3b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/CONTROL-frozen-checkpoint.json",
+      "bytes": 9522,
+      "sha256": "4771821583f54164018854bee073ba8318d3164ea4e152324525913f6af734c6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/branch-RED.log",
+      "bytes": 6289,
+      "sha256": "c829e63a83493f486f64eb767dd2f7c552f002d7d8fadf1d26bab66e4d5d4e6b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/control-source-AST-scope-proof.json",
+      "bytes": 774,
+      "sha256": "1f1d0014e3346adcce7824318c23e36e569559dd0bc2a7585a0ac1bbc01bac68"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/final-precommit-control-hashes.json",
+      "bytes": 187809,
+      "sha256": "c619d5dead8d8333523f3d629eb8ef8d48505578ede1192bfed8d8b8ad769cd6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generate-one-workflow.log",
+      "bytes": 3650,
+      "sha256": "b85e8c26938855f8fc5378b2ae61d1e193945ee2a9f309fc63797910d7eb904a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generate-one-workflow.py",
+      "bytes": 432,
+      "sha256": "7784ffa9ec7a4365abc6526bd1b94b0e0bebf97a7164c7100d3cb9ebe37fd451"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "8f25f9bc65d44ae9a4d2957d0d57943b7fee93633241829a873594fdfb87401a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generator-roundtrip.log",
+      "bytes": 4564,
+      "sha256": "74c7e6efa262cdd5cf2baa06419fe0eb71f7d85a60b779b7a3a35118a46bf391"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generator-roundtrip.py",
+      "bytes": 1812,
+      "sha256": "0f5ae0f7a5cfdc716b5b9be7729ff2098a1efbdc144e1148cc505820d957dc3c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/green-controls-static.log",
+      "bytes": 4742,
+      "sha256": "baf4d6c34b1e4c000e902637bb01968c715b4cb61dff8b882299a00164a31809"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/pin-RED.log",
+      "bytes": 7795,
+      "sha256": "d16bc62bc1bc83740e2428507d8d0348abec29b9109eaf33402340783cb97a64"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/pre-C-reviewed-source-checkpoint.json",
+      "bytes": 470,
+      "sha256": "06ca3c5704bc1d63cc9d903217b67311e58aa23cc5f6ecd662f90bf73e3d460f"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/run-green-controls-static.py",
+      "bytes": 758,
+      "sha256": "43afbd40997510f9fbf8610a2c362dbe4401732080acb7261667637cab9dff89"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/run-red-controls.py",
+      "bytes": 125,
+      "sha256": "55b128663058a61b19a07c8a11f49bec0ce585618547e82973d1731d22996f57"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/toolkit.log",
+      "bytes": 14346,
+      "sha256": "f76986e5d5e7bf7e3cb17b055f2a3f57f7a04d6415ea883c349c0bd6880365df"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/workflow-and-nine-source-preservation-proof.json",
+      "bytes": 2509,
+      "sha256": "547c242d1336844bc0b0dd01260170fa0cdf1e5bd0bfaacb25950895bb820dd0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/canonical-three-reviewed-control-branches-proposed.patch",
+      "bytes": 1016,
+      "sha256": "cd97355e9506350c286532607b87c5ce4ff492073a78fb72336517fe8164b5cd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/SOURCE-frozen-checkpoint.json",
+      "bytes": 12828,
+      "sha256": "523e46db8f4ea12dfbb0afbe8f6d2ce675cb0aedd79658b8b4d2585f151afb8b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/changed-test-format.log",
+      "bytes": 3728,
+      "sha256": "d365f0c1cb5c56a146c119238337f4d8b08d4df8d19c1cb56282c11b4c9771d6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/doctor.log",
+      "bytes": 13487,
+      "sha256": "987088d01480092d952b72d915735ef22807ecdde45a2d46aee1fd0bfff1fddb"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/exact-implemented-canonical-delta.patch",
+      "bytes": 4385,
+      "sha256": "2bd81847fda0b761e42b24c704dbe9eccda907c21f40cc3b4e5d88bf704e12f6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/final-pre-full-source-hashes-and-capacity.json",
+      "bytes": 187820,
+      "sha256": "d174e32d66608099bf05a6ea1b07f8a3b8921032478f2f912d3235bf8323d1db"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/format-changed-test.py",
+      "bytes": 196,
+      "sha256": "c2e88c844b98d308598b0cffb0a87b848e687f3f95df780273f5acac29fce514"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/formatting-and-original-test-preservation.json",
+      "bytes": 422,
+      "sha256": "bcc4662a86814b91e6365ff41841bb8090bff2a6b81948dfa694ce6e059d717f"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/freeze-source.py",
+      "bytes": 9595,
+      "sha256": "405978a4fb2a95767a7afea9355ee060e7b814a6a0c5f98e9e3650d72362bedd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/full-configured-source.log",
+      "bytes": 308345,
+      "sha256": "582a506a3f5318679f9b80d1629bc8aa12aa1ae1de7cdc93669a9b58c3f86ca2"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "d03086cf1c1c65efb2ec389ee3153695c6d8902c2c972e4838fc4ad8ce6d834b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/generator-roundtrip.log",
+      "bytes": 4563,
+      "sha256": "eaa4074b8898a397e01d052471a3f5a1d0c7b88d55de8db5b8de886dbb8bcacb"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/generator-roundtrip.py",
+      "bytes": 1811,
+      "sha256": "80e15e60793d56d908cfe9eb5e6ca26725289ab83787603b57050a0db13dc1d9"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/guard-GREEN.log",
+      "bytes": 3909,
+      "sha256": "33748a9d0acfb5c5181d0128e34b194175c6791fe650b1d465febba94723d1d5"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/guard-RED.log",
+      "bytes": 50682,
+      "sha256": "84945fb6eba81cd092bc4ae85341a04531b5a546cc6086478bd6d8c82a497906"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/implemented-source-scope-pre-gates.json",
+      "bytes": 949,
+      "sha256": "33480b3bc5ab508f4de47894118254dadc9617d99d5625aeb175b28bf2f19230"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-action_server.json",
+      "bytes": 283,
+      "sha256": "f7a00c055eca6ebcd32e62cfa620b224f99ba834111d9d230937a29c9ede2f05"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "d8ab3c61fcf9ed762629848de7f5974dc488f23d963f533e7032717d29b18f1c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-actions.json",
+      "bytes": 218,
+      "sha256": "5f39b76931c708942c66e5df09de5930082f14aa780bbbf57634c913cd0f5fef"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "0f8a5be23e17e152e1bac26efa4e81c5a9cad12821a7422edf7ac15ad8d1e6a0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "d4da434483e01c6ca190a89eae5de51ca9b5a0ef9baa32722fd2382b05bab99d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6413,
+      "sha256": "e111c3c4a155f6c9439795863e8c8d2b4878630112e693c3b1fe0e28b4b8fc40"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/own-bootstrap-reuse.log",
+      "bytes": 6755,
+      "sha256": "5ded97ffda24205e513aac1707464752afa5951951adb81663a5466d3f8cd7c4"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/pre-source-and-ordinary-union-checkpoint.json",
+      "bytes": 431810,
+      "sha256": "9839fc79213723e0712e62049d0004447cc62a91b3ef8a2c5de1164d5a01da12"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/producer-inputs-and-pre-full-source-checkpoint.json",
+      "bytes": 229514,
+      "sha256": "38c26c9d1c8fc9d209eda1729cc3f8dc3acc7bcbf2351862b5ec89bf5c2d0a3a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/run-full-source.py",
+      "bytes": 88,
+      "sha256": "50a01ae3d7a06581876e3c3b5d573321b352605f16c0b43327a06122e0c9a0d5"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/run-guard-controls.py",
+      "bytes": 222,
+      "sha256": "f1a986c645cf6a39d4e3e87ae60759326211d4972fd7b47d04261b272411cf94"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/run-light-gates.py",
+      "bytes": 367,
+      "sha256": "e01f8a81a75dec76c1e10d529847bba7da719660769610dcbd0d372349392693"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/scoped-static-corrected.log",
+      "bytes": 6989,
+      "sha256": "d4924d37bf6c0cce5fb3e4ba32d86f821c5db1fbcdad75852942bd0596b7a5e0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/scoped-static.log",
+      "bytes": 6512,
+      "sha256": "5264af50dbc63b257d2f67dad54040b3ec2119e7e93b0d07e3057b458c8bc8d5"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/toolkit.log",
+      "bytes": 14344,
+      "sha256": "80567e2525576174465317879a7b1c6e003727fda57688143da02c8facb34774"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/verify-own-bootstrap-reuse.py",
+      "bytes": 2689,
+      "sha256": "6013ee944964546a257bd5bb0b4d1711f49aa84b1727be0a45594b993fe4cd4d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-CI-and-threecase-metadata/frozen-metadata-census.json",
+      "bytes": 40949,
+      "sha256": "044b08670dea70fc9dbd1576a4ebab20dd1510aaee7e52dfc72318866c2c2dc3"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/artifact-returned-reference.private.json",
+      "bytes": 1853,
+      "sha256": "fb12c423ed688e73596b7b429e932a7a538038bbc0ec4e4025ea06373600c69c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/frozen-original-threecase-proof.json",
+      "bytes": 19720,
+      "sha256": "16b60ef82e907388a768642e17db2134b5dfaea966cfc7045aa1715879ca38f4"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/immutable-C-validator.private.txt",
+      "bytes": 27087,
+      "sha256": "90e8023a40e5846dcf8985d8fbde1f816e5addc8f78feb175613d9924ee0c717"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/acceptance-summary.json",
+      "bytes": 3067,
+      "sha256": "0cae877e37e4ad4721045e8095cd3f40bb361006048e38ea2cfbea8de2c05fde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/acceptance-summary.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/lifecycle-receipt.json",
+      "bytes": 7881,
+      "sha256": "a18529d3dc94cfc150352d6dedc674883814245eca5573205a2ce92427875b8c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/lifecycle-summary.json",
+      "bytes": 1221,
+      "sha256": "56ad7a1548939ae3e143be6a83a846de330eb6bce4317d0cfc0e4a5190e22817"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/published-details-receipt.json",
+      "bytes": 1483,
+      "sha256": "0d8f704b99becdc0baad46006c276e4406b862bbf96408011ad587da68179129"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/staged-consumer-receipt.json",
+      "bytes": 2393,
+      "sha256": "42fb4f5876557bcffc597738bb642df22c69d91349c54d5d3c53fce97033abde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/validator-output.private.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-acquisition-and-member-inventory.json",
+      "bytes": 3017,
+      "sha256": "3780215b4c811eb85a7419ddb5454bf7df89081a150a7583a6466ad947d81065"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-artifact-11697165172.zip",
+      "bytes": 7582,
+      "sha256": "5bebad77cc556a5bf5cef84feae8d76d3a7d5c5aecfc63378691cc79dec3719d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-job-114425127596.private.log",
+      "bytes": 887255,
+      "sha256": "d36e0a7695b52fa2113a6d3a43c6554b1c5f032c0f777410bfadd2972b135c1b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/acceptance-summary.json",
+      "bytes": 3067,
+      "sha256": "0cae877e37e4ad4721045e8095cd3f40bb361006048e38ea2cfbea8de2c05fde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/acceptance-summary.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/lifecycle-receipt.json",
+      "bytes": 7881,
+      "sha256": "a18529d3dc94cfc150352d6dedc674883814245eca5573205a2ce92427875b8c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/lifecycle-summary.json",
+      "bytes": 1221,
+      "sha256": "56ad7a1548939ae3e143be6a83a846de330eb6bce4317d0cfc0e4a5190e22817"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/published-details-receipt.json",
+      "bytes": 1483,
+      "sha256": "0d8f704b99becdc0baad46006c276e4406b862bbf96408011ad587da68179129"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/staged-consumer-receipt.json",
+      "bytes": 2393,
+      "sha256": "42fb4f5876557bcffc597738bb642df22c69d91349c54d5d3c53fce97033abde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-junit.xml",
+      "bytes": 752,
+      "sha256": "99bd574e75a7d2313d50fb20749632ada952bb132f9c3a4f16642ac6ea4a9787"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/verify-original-proof.py",
+      "bytes": 17698,
+      "sha256": "bd594d9d026881b6ef2a157da601c752c264c3e4ea8b5804156559f1b233e777"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-source-review/independent-frozen-S-source-review.json",
+      "bytes": 6631,
+      "sha256": "29c13d7e5bcb3400decbf41286ea736fb0073c6c5afc695ca382826c40a02e03"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/independent-frozen-C-control-review.json",
+      "bytes": 5900,
+      "sha256": "31779bad488b43b88d7bb81b3f2c5d75edabf7519f5765bd90d86c66569d6f9b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-independent-actual-review/independent-frozen-original-threecase-actual-review.json",
+      "bytes": 7669,
+      "sha256": "28f6b0055d89fff600fbaeec5dd3c063871afc0a4413374c16bb332c62b82106"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/frozen-original-threecase-proof.json",
+      "bytes": 19720,
+      "sha256": "16b60ef82e907388a768642e17db2134b5dfaea966cfc7045aa1715879ca38f4"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/original-precommit-inspector-KeyError-preserved.json",
+      "bytes": 573,
+      "sha256": "c8476ec4196815f01fe143f5e8574c1c6d64b5370c3a98f1c0019d5f33a112c9"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/canonical-current-source-imported-repository-operations.patch",
+      "bytes": 10807,
+      "sha256": "3b1c844832bddb774744948a6c6182d67debb0b8f893f29fac9aff520b81ac33"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/canonical-current-source-imported-provenance-observability.patch",
+      "bytes": 3834,
+      "sha256": "7330b295929c287d4ea82f956634d4a475d21098a197262cc1555068ca12f3a3"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/canonical-exact-cd973-source-stale-branch-correction.patch",
+      "bytes": 1215,
+      "sha256": "b800238a6c4d331ef5beafc7322ed2f553b6bb1c02bfb394ebda08ceafe1c44b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/CONTROL-frozen-checkpoint.json",
+      "bytes": 9522,
+      "sha256": "4771821583f54164018854bee073ba8318d3164ea4e152324525913f6af734c6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/branch-RED.log",
+      "bytes": 6289,
+      "sha256": "c829e63a83493f486f64eb767dd2f7c552f002d7d8fadf1d26bab66e4d5d4e6b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/control-source-AST-scope-proof.json",
+      "bytes": 774,
+      "sha256": "1f1d0014e3346adcce7824318c23e36e569559dd0bc2a7585a0ac1bbc01bac68"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/final-precommit-control-hashes.json",
+      "bytes": 187809,
+      "sha256": "c619d5dead8d8333523f3d629eb8ef8d48505578ede1192bfed8d8b8ad769cd6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generate-one-workflow.log",
+      "bytes": 3650,
+      "sha256": "b85e8c26938855f8fc5378b2ae61d1e193945ee2a9f309fc63797910d7eb904a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generate-one-workflow.py",
+      "bytes": 432,
+      "sha256": "7784ffa9ec7a4365abc6526bd1b94b0e0bebf97a7164c7100d3cb9ebe37fd451"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "8f25f9bc65d44ae9a4d2957d0d57943b7fee93633241829a873594fdfb87401a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generator-roundtrip.log",
+      "bytes": 4564,
+      "sha256": "74c7e6efa262cdd5cf2baa06419fe0eb71f7d85a60b779b7a3a35118a46bf391"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generator-roundtrip.py",
+      "bytes": 1812,
+      "sha256": "0f5ae0f7a5cfdc716b5b9be7729ff2098a1efbdc144e1148cc505820d957dc3c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/green-controls-static.log",
+      "bytes": 4742,
+      "sha256": "baf4d6c34b1e4c000e902637bb01968c715b4cb61dff8b882299a00164a31809"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/pin-RED.log",
+      "bytes": 7795,
+      "sha256": "d16bc62bc1bc83740e2428507d8d0348abec29b9109eaf33402340783cb97a64"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/pre-C-reviewed-source-checkpoint.json",
+      "bytes": 470,
+      "sha256": "06ca3c5704bc1d63cc9d903217b67311e58aa23cc5f6ecd662f90bf73e3d460f"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/run-green-controls-static.py",
+      "bytes": 758,
+      "sha256": "43afbd40997510f9fbf8610a2c362dbe4401732080acb7261667637cab9dff89"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/run-red-controls.py",
+      "bytes": 125,
+      "sha256": "55b128663058a61b19a07c8a11f49bec0ce585618547e82973d1731d22996f57"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/toolkit.log",
+      "bytes": 14346,
+      "sha256": "f76986e5d5e7bf7e3cb17b055f2a3f57f7a04d6415ea883c349c0bd6880365df"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/workflow-and-nine-source-preservation-proof.json",
+      "bytes": 2509,
+      "sha256": "547c242d1336844bc0b0dd01260170fa0cdf1e5bd0bfaacb25950895bb820dd0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/canonical-three-reviewed-control-branches-proposed.patch",
+      "bytes": 1016,
+      "sha256": "cd97355e9506350c286532607b87c5ce4ff492073a78fb72336517fe8164b5cd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/independent-frozen-C-control-review.json",
+      "bytes": 5900,
+      "sha256": "31779bad488b43b88d7bb81b3f2c5d75edabf7519f5765bd90d86c66569d6f9b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-source-review/independent-frozen-S-source-review.json",
+      "bytes": 6631,
+      "sha256": "29c13d7e5bcb3400decbf41286ea736fb0073c6c5afc695ca382826c40a02e03"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/SOURCE-frozen-checkpoint.json",
+      "bytes": 12828,
+      "sha256": "523e46db8f4ea12dfbb0afbe8f6d2ce675cb0aedd79658b8b4d2585f151afb8b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/changed-test-format.log",
+      "bytes": 3728,
+      "sha256": "d365f0c1cb5c56a146c119238337f4d8b08d4df8d19c1cb56282c11b4c9771d6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/doctor.log",
+      "bytes": 13487,
+      "sha256": "987088d01480092d952b72d915735ef22807ecdde45a2d46aee1fd0bfff1fddb"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/exact-implemented-canonical-delta.patch",
+      "bytes": 4385,
+      "sha256": "2bd81847fda0b761e42b24c704dbe9eccda907c21f40cc3b4e5d88bf704e12f6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/final-pre-full-source-hashes-and-capacity.json",
+      "bytes": 187820,
+      "sha256": "d174e32d66608099bf05a6ea1b07f8a3b8921032478f2f912d3235bf8323d1db"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/format-changed-test.py",
+      "bytes": 196,
+      "sha256": "c2e88c844b98d308598b0cffb0a87b848e687f3f95df780273f5acac29fce514"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/formatting-and-original-test-preservation.json",
+      "bytes": 422,
+      "sha256": "bcc4662a86814b91e6365ff41841bb8090bff2a6b81948dfa694ce6e059d717f"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/freeze-source.py",
+      "bytes": 9595,
+      "sha256": "405978a4fb2a95767a7afea9355ee060e7b814a6a0c5f98e9e3650d72362bedd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/full-configured-source.log",
+      "bytes": 308345,
+      "sha256": "582a506a3f5318679f9b80d1629bc8aa12aa1ae1de7cdc93669a9b58c3f86ca2"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "d03086cf1c1c65efb2ec389ee3153695c6d8902c2c972e4838fc4ad8ce6d834b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/generator-roundtrip.log",
+      "bytes": 4563,
+      "sha256": "eaa4074b8898a397e01d052471a3f5a1d0c7b88d55de8db5b8de886dbb8bcacb"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/generator-roundtrip.py",
+      "bytes": 1811,
+      "sha256": "80e15e60793d56d908cfe9eb5e6ca26725289ab83787603b57050a0db13dc1d9"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/guard-GREEN.log",
+      "bytes": 3909,
+      "sha256": "33748a9d0acfb5c5181d0128e34b194175c6791fe650b1d465febba94723d1d5"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/guard-RED.log",
+      "bytes": 50682,
+      "sha256": "84945fb6eba81cd092bc4ae85341a04531b5a546cc6086478bd6d8c82a497906"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/implemented-source-scope-pre-gates.json",
+      "bytes": 949,
+      "sha256": "33480b3bc5ab508f4de47894118254dadc9617d99d5625aeb175b28bf2f19230"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-action_server.json",
+      "bytes": 283,
+      "sha256": "f7a00c055eca6ebcd32e62cfa620b224f99ba834111d9d230937a29c9ede2f05"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "d8ab3c61fcf9ed762629848de7f5974dc488f23d963f533e7032717d29b18f1c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-actions.json",
+      "bytes": 218,
+      "sha256": "5f39b76931c708942c66e5df09de5930082f14aa780bbbf57634c913cd0f5fef"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "0f8a5be23e17e152e1bac26efa4e81c5a9cad12821a7422edf7ac15ad8d1e6a0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "d4da434483e01c6ca190a89eae5de51ca9b5a0ef9baa32722fd2382b05bab99d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6413,
+      "sha256": "e111c3c4a155f6c9439795863e8c8d2b4878630112e693c3b1fe0e28b4b8fc40"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/own-bootstrap-reuse.log",
+      "bytes": 6755,
+      "sha256": "5ded97ffda24205e513aac1707464752afa5951951adb81663a5466d3f8cd7c4"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/pre-source-and-ordinary-union-checkpoint.json",
+      "bytes": 431810,
+      "sha256": "9839fc79213723e0712e62049d0004447cc62a91b3ef8a2c5de1164d5a01da12"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/producer-inputs-and-pre-full-source-checkpoint.json",
+      "bytes": 229514,
+      "sha256": "38c26c9d1c8fc9d209eda1729cc3f8dc3acc7bcbf2351862b5ec89bf5c2d0a3a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/run-full-source.py",
+      "bytes": 88,
+      "sha256": "50a01ae3d7a06581876e3c3b5d573321b352605f16c0b43327a06122e0c9a0d5"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/run-guard-controls.py",
+      "bytes": 222,
+      "sha256": "f1a986c645cf6a39d4e3e87ae60759326211d4972fd7b47d04261b272411cf94"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/run-light-gates.py",
+      "bytes": 367,
+      "sha256": "e01f8a81a75dec76c1e10d529847bba7da719660769610dcbd0d372349392693"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/scoped-static-corrected.log",
+      "bytes": 6989,
+      "sha256": "d4924d37bf6c0cce5fb3e4ba32d86f821c5db1fbcdad75852942bd0596b7a5e0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/scoped-static.log",
+      "bytes": 6512,
+      "sha256": "5264af50dbc63b257d2f67dad54040b3ec2119e7e93b0d07e3057b458c8bc8d5"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/toolkit.log",
+      "bytes": 14344,
+      "sha256": "80567e2525576174465317879a7b1c6e003727fda57688143da02c8facb34774"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/verify-own-bootstrap-reuse.py",
+      "bytes": 2689,
+      "sha256": "6013ee944964546a257bd5bb0b4d1711f49aa84b1727be0a45594b993fe4cd4d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/Doctor.log",
+      "bytes": 13486,
+      "sha256": "0098f6535b771edb6a8cd159dedd2333dfb27e92313fa5393ee8e2addfe70ecd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/SOURCE-after-full-complete-original-input-and-source-proof.json",
+      "bytes": 806,
+      "sha256": "0c405657cb5edce797f901ca75fb503e0c1f9797997bbc3b5f2cb9bf5a8b3f14"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/SOURCE-full-configured-runtime-source-exit.json",
+      "bytes": 240,
+      "sha256": "55da497e6181eeba8e9b89e7148697fd24b121670db882619df59b0a9e3ecd60"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/SOURCE-full-configured-runtime-source.log",
+      "bytes": 320721,
+      "sha256": "3a53c22ef6c55fcb0712afe853b481e1c0dd8a730201d6916e453f81426eaf3b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/SOURCE-full-safe-terminal.json",
+      "bytes": 839,
+      "sha256": "84b1adb97846dd5d97cf43ff28a645cd19b55be8396ecffbab926a94747c4a47"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/SOURCE-owner-light-ready-prehash-capacity-FULL-HOLD.json",
+      "bytes": 62450,
+      "sha256": "c12d7f9f13f24a4da18be0dac97426b9e012216b70dea6a94400e94d2d9e03e8"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/ToolkitTest.log",
+      "bytes": 14346,
+      "sha256": "4f1fb5ad08d9d41f5747f18529888d9de8a08fa5a7f3a1e328369805af263794"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/after-full-complete-source-proof.json",
+      "bytes": 518604,
+      "sha256": "10b38eafa098af30ad85ead9f5c8bb56b4a25f877a9e64544a4ed44c3e153942"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/after-full-origin-action_server.json",
+      "bytes": 283,
+      "sha256": "f7a00c055eca6ebcd32e62cfa620b224f99ba834111d9d230937a29c9ede2f05"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/after-full-origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "d8ab3c61fcf9ed762629848de7f5974dc488f23d963f533e7032717d29b18f1c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/after-full-origin-actions.json",
+      "bytes": 218,
+      "sha256": "5f39b76931c708942c66e5df09de5930082f14aa780bbbf57634c913cd0f5fef"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/after-full-origin-devutils.json",
+      "bytes": 240,
+      "sha256": "0f8a5be23e17e152e1bac26efa4e81c5a9cad12821a7422edf7ac15ad8d1e6a0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/after-full-origin-work-items.json",
+      "bytes": 249,
+      "sha256": "d4da434483e01c6ca190a89eae5de51ca9b5a0ef9baa32722fd2382b05bab99d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/after-full-own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6413,
+      "sha256": "e111c3c4a155f6c9439795863e8c8d2b4878630112e693c3b1fe0e28b4b8fc40"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/after-full-own-environments.log",
+      "bytes": 6792,
+      "sha256": "c2c5b0c6d03675a05947650d48e2840fe3ac828cdf58b48638cc4768b8ce3d49"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/after-full-raw18-frozen50-Node-frontend-retained.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/after-full-retained-native-helper-browser-and-V5-proof.json",
+      "bytes": 4720,
+      "sha256": "88b95c803cb08c84aede15794eef09521350d6fb617ac2e06081eebb853f4985"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/before-full-complete-source-proof.json",
+      "bytes": 518613,
+      "sha256": "64ba98a307e2ebcbd97aced1062ed3cc868ba9a7f1bb74f9276eef674d57a521"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/before-source-raw18-frozen50-Node-frontend-retained.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/before-source-retained-native-helper-browser-and-V5-proof.json",
+      "bytes": 4720,
+      "sha256": "88b95c803cb08c84aede15794eef09521350d6fb617ac2e06081eebb853f4985"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/canonical-current-source-imported-provenance-observability.patch",
+      "bytes": 3834,
+      "sha256": "7330b295929c287d4ea82f956634d4a475d21098a197262cc1555068ca12f3a3"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/canonical-current-source-imported-repository-operations.patch",
+      "bytes": 10807,
+      "sha256": "3b1c844832bddb774744948a6c6182d67debb0b8f893f29fac9aff520b81ac33"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/canonical-exact-cd973-source-stale-branch-correction.patch",
+      "bytes": 1215,
+      "sha256": "b800238a6c4d331ef5beafc7322ed2f553b6bb1c02bfb394ebda08ceafe1c44b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/exact-stale-guide-three-reviewed-branches-correction.json",
+      "bytes": 1065,
+      "sha256": "f5fbc1d0c6e4b1547856a381b31cfe24a1b73668ab77b99107834af3156617b0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/freeze-SOURCE-final-immutable.py",
+      "bytes": 8659,
+      "sha256": "da5a7fb47f4f8719ab825e351b764c2423164d2109f88a2efcd9f46d661d268f"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/generator-derived-roundtrip.py",
+      "bytes": 1456,
+      "sha256": "3f8a8cb3025d29243a8c80837bb8b990bd726df6eb2f8cd13742987b03dab45f"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/generator-roundtrip-successor-v2-receipt.json",
+      "bytes": 4217,
+      "sha256": "4a6c9dcd835fc8046a0dad17fe45f91a0e6444f46e7fc3f4080db99d3f5131af"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/generator-roundtrip.log",
+      "bytes": 4420,
+      "sha256": "7de1b79b459a0c7e679317c2dec840a75d2b7260bb763907c30cb805316d1cc6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/immediate-pre-full-complete-source-proof.json",
+      "bytes": 518613,
+      "sha256": "64ba98a307e2ebcbd97aced1062ed3cc868ba9a7f1bb74f9276eef674d57a521"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/immediate-pre-full-origin-action_server.json",
+      "bytes": 283,
+      "sha256": "f7a00c055eca6ebcd32e62cfa620b224f99ba834111d9d230937a29c9ede2f05"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/immediate-pre-full-origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "d8ab3c61fcf9ed762629848de7f5974dc488f23d963f533e7032717d29b18f1c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/immediate-pre-full-origin-actions.json",
+      "bytes": 218,
+      "sha256": "5f39b76931c708942c66e5df09de5930082f14aa780bbbf57634c913cd0f5fef"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/immediate-pre-full-origin-devutils.json",
+      "bytes": 240,
+      "sha256": "0f8a5be23e17e152e1bac26efa4e81c5a9cad12821a7422edf7ac15ad8d1e6a0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/immediate-pre-full-origin-work-items.json",
+      "bytes": 249,
+      "sha256": "d4da434483e01c6ca190a89eae5de51ca9b5a0ef9baa32722fd2382b05bab99d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/immediate-pre-full-own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6413,
+      "sha256": "e111c3c4a155f6c9439795863e8c8d2b4878630112e693c3b1fe0e28b4b8fc40"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/immediate-pre-full-own-environments.log",
+      "bytes": 6832,
+      "sha256": "5e6eece913666027f34f3d3cae9f05e53860c30b410ffd73b34197a7715fa9f0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/immediate-pre-full-raw18-frozen50-Node-frontend-retained.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/immediate-pre-full-retained-native-helper-browser-and-V5-proof.json",
+      "bytes": 4720,
+      "sha256": "88b95c803cb08c84aede15794eef09521350d6fb617ac2e06081eebb853f4985"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/materialized-source-before-commit-proof.json",
+      "bytes": 424771,
+      "sha256": "5c6a4e76a6663d96678aabab66303595b960e8299e9fc989ae69b65f1ca930e9"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/ordinary-merge-materialization.log",
+      "bytes": 116,
+      "sha256": "3f7f0b04e04835e64456925fc63debae91995c2d12210c9e9eae2274838f7fc2"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/origin-action_server.json",
+      "bytes": 283,
+      "sha256": "f7a00c055eca6ebcd32e62cfa620b224f99ba834111d9d230937a29c9ede2f05"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "d8ab3c61fcf9ed762629848de7f5974dc488f23d963f533e7032717d29b18f1c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/origin-actions.json",
+      "bytes": 218,
+      "sha256": "5f39b76931c708942c66e5df09de5930082f14aa780bbbf57634c913cd0f5fef"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "0f8a5be23e17e152e1bac26efa4e81c5a9cad12821a7422edf7ac15ad8d1e6a0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "d4da434483e01c6ca190a89eae5de51ca9b5a0ef9baa32722fd2382b05bab99d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/original-precommit-inspector-KeyError-preserved.json",
+      "bytes": 573,
+      "sha256": "c8476ec4196815f01fe143f5e8574c1c6d64b5370c3a98f1c0019d5f33a112c9"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/original_independent_SOURCE_CONTROL_actual_reviews_verified.json",
+      "bytes": 911,
+      "sha256": "43a6e2bca7381cf48332915ec40ae0781ba6c6b7a78a5520a619cf397fb7c6d2"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6413,
+      "sha256": "e111c3c4a155f6c9439795863e8c8d2b4878630112e693c3b1fe0e28b4b8fc40"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/own-prepared-environments.log",
+      "bytes": 6737,
+      "sha256": "f124164670898b1eabc40506056ab1f5886ec6fd84d438bad1d1502d809920ad"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/owned-pinned-ignored-Rcc-before-gates.json",
+      "bytes": 300,
+      "sha256": "4e6c4e07dc871e0d45bb46e100a7c85ec58e55490dbf88e0a96cdcee1e5499e4"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/pre-refresh-original-source-control-actual-bindings.json",
+      "bytes": 383129,
+      "sha256": "fdc17c223d986db1c2d11acabbdfd8bcfa231a1ce8589ae9355b44e9ce38e57c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/prospective-auto-merge-tree.log",
+      "bytes": 41,
+      "sha256": "16cf3750139f785cc80b750ae3792c4e6e8e57576bc6af936d9e5d38a0074cd4"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/repository-instructions-snapshot.txt",
+      "bytes": 7190,
+      "sha256": "c7980454a13763bf49430a4e8f8ed56b10b754392fb295adac92ff0e3e6b1f4d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/run-authorized-SOURCE-full.py",
+      "bytes": 485,
+      "sha256": "c63d1ea4e97dcfacde093ba247b9e2327a2386e4f4334fd23b322c5babac8de9"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/run-scoped-configured-static.py",
+      "bytes": 723,
+      "sha256": "3d4149d0bb215b2d26f1b8df1eba8248366e2359cadd191cdf87f68fc58ca5df"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/scoped-configured-static.log",
+      "bytes": 6989,
+      "sha256": "1e1f7356582955c43031cbdf60931b058c798a53ad3789d0cc13f13715984051"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/staged-source-before-commit-proof.json",
+      "bytes": 424839,
+      "sha256": "6db1d4883ea82ad1617a99486a233b57748fdd81be2a1842147464c12062e2c6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-after-full-native-inputs.py",
+      "bytes": 3600,
+      "sha256": "9efad2a4d6a30efddca99ec88c97a358f7f4ea4d130420103a387452eb5c9829"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-after-full-own-environments.py",
+      "bytes": 2827,
+      "sha256": "ff36c87bf0cb9c8ff34bbb50ff9b086f14da6ceeb5654bc78e9543fd462a52c6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-after-full-raw-driver.py",
+      "bytes": 2535,
+      "sha256": "5f31f305f9f624a8b79d1d56721e677aa7da2d604a5eca7efd9acae07c9085a7"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-after-full-source.py",
+      "bytes": 5421,
+      "sha256": "e0d10735cc4cb88d273147b64db0f3701eb4fa9489d8a40b374b1633f1eff399"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-before-full-source.py",
+      "bytes": 5431,
+      "sha256": "ffe6add9cb2bc2b895ae2745f6e0abcc002e9f634fff1d2176727bc9cdd98544"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-before-source-raw-driver.py",
+      "bytes": 2538,
+      "sha256": "61845ba0de8608ed8b30b2063f9e068125a9915b62144d63c163efde315fcd6f"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-before-source-retained-native-inputs.py",
+      "bytes": 3603,
+      "sha256": "979673cca73458e2635e9aeba0aa57cde5ca09d71e22cf0db2f00a9a420f29bb"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-immediate-pre-full-native-inputs.py",
+      "bytes": 3608,
+      "sha256": "9e8fbf18a985f7884918942b81903b1722dcf248dc1eadecc3c08766d7e6612d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-immediate-pre-full-own-environments.py",
+      "bytes": 2843,
+      "sha256": "a1c6459f06ca99c75d1b23452963101472a301f81087fb97804979032ac51e9a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-immediate-pre-full-raw-driver.py",
+      "bytes": 2543,
+      "sha256": "f715858c3c2a38886a714bffa99e33c073d627e3a4839100c97dd3921a0d4083"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-immediate-pre-full-source.py",
+      "bytes": 5438,
+      "sha256": "cefe04e5d34bfdeea6e5da2cc6997011f8767cd3e14cd67bbf5013b73d63991a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-materialized-source-before-commit-v2.py",
+      "bytes": 5065,
+      "sha256": "56d371e5e956ef87c3e4720780c724f46cd8bb2455a2d1f6ff039b7962f445a0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-materialized-source-before-commit.py",
+      "bytes": 5042,
+      "sha256": "bab7dc82660a6952305b4375109d45d388e9981a6c190bb91dc5f06b0d2d1692"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-own-prepared-environments.py",
+      "bytes": 2805,
+      "sha256": "9062f9ba17a76e6507ab030a65028824ad26c85fcc85f370208bef86f12d5c2c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/verify-staged-source-before-commit-v3.py",
+      "bytes": 5228,
+      "sha256": "80d89b78590cc761270e6043fe8fe42e5647751403beb11f8795bde7dd9e0a70"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-CI-and-threecase-metadata/frozen-metadata-census.json",
+      "bytes": 40949,
+      "sha256": "044b08670dea70fc9dbd1576a4ebab20dd1510aaee7e52dfc72318866c2c2dc3"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/artifact-returned-reference.private.json",
+      "bytes": 1853,
+      "sha256": "fb12c423ed688e73596b7b429e932a7a538038bbc0ec4e4025ea06373600c69c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/frozen-original-threecase-proof.json",
+      "bytes": 19720,
+      "sha256": "16b60ef82e907388a768642e17db2134b5dfaea966cfc7045aa1715879ca38f4"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/immutable-C-validator.private.txt",
+      "bytes": 27087,
+      "sha256": "90e8023a40e5846dcf8985d8fbde1f816e5addc8f78feb175613d9924ee0c717"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/acceptance-summary.json",
+      "bytes": 3067,
+      "sha256": "0cae877e37e4ad4721045e8095cd3f40bb361006048e38ea2cfbea8de2c05fde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/acceptance-summary.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/lifecycle-receipt.json",
+      "bytes": 7881,
+      "sha256": "a18529d3dc94cfc150352d6dedc674883814245eca5573205a2ce92427875b8c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/lifecycle-summary.json",
+      "bytes": 1221,
+      "sha256": "56ad7a1548939ae3e143be6a83a846de330eb6bce4317d0cfc0e4a5190e22817"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/published-details-receipt.json",
+      "bytes": 1483,
+      "sha256": "0d8f704b99becdc0baad46006c276e4406b862bbf96408011ad587da68179129"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/staged-consumer-receipt.json",
+      "bytes": 2393,
+      "sha256": "42fb4f5876557bcffc597738bb642df22c69d91349c54d5d3c53fce97033abde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/validator-output.private.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-acquisition-and-member-inventory.json",
+      "bytes": 3017,
+      "sha256": "3780215b4c811eb85a7419ddb5454bf7df89081a150a7583a6466ad947d81065"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-artifact-11697165172.zip",
+      "bytes": 7582,
+      "sha256": "5bebad77cc556a5bf5cef84feae8d76d3a7d5c5aecfc63378691cc79dec3719d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-job-114425127596.private.log",
+      "bytes": 887255,
+      "sha256": "d36e0a7695b52fa2113a6d3a43c6554b1c5f032c0f777410bfadd2972b135c1b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/acceptance-summary.json",
+      "bytes": 3067,
+      "sha256": "0cae877e37e4ad4721045e8095cd3f40bb361006048e38ea2cfbea8de2c05fde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/acceptance-summary.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/lifecycle-receipt.json",
+      "bytes": 7881,
+      "sha256": "a18529d3dc94cfc150352d6dedc674883814245eca5573205a2ce92427875b8c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/lifecycle-summary.json",
+      "bytes": 1221,
+      "sha256": "56ad7a1548939ae3e143be6a83a846de330eb6bce4317d0cfc0e4a5190e22817"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/published-details-receipt.json",
+      "bytes": 1483,
+      "sha256": "0d8f704b99becdc0baad46006c276e4406b862bbf96408011ad587da68179129"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/staged-consumer-receipt.json",
+      "bytes": 2393,
+      "sha256": "42fb4f5876557bcffc597738bb642df22c69d91349c54d5d3c53fce97033abde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-junit.xml",
+      "bytes": 752,
+      "sha256": "99bd574e75a7d2313d50fb20749632ada952bb132f9c3a4f16642ac6ea4a9787"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/verify-original-proof.py",
+      "bytes": 17698,
+      "sha256": "bd594d9d026881b6ef2a157da601c752c264c3e4ea8b5804156559f1b233e777"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-independent-actual-review/independent-frozen-original-threecase-actual-review.json",
+      "bytes": 7669,
+      "sha256": "28f6b0055d89fff600fbaeec5dd3c063871afc0a4413374c16bb332c62b82106"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/CONTROL-frozen-checkpoint.json",
+      "bytes": 9522,
+      "sha256": "4771821583f54164018854bee073ba8318d3164ea4e152324525913f6af734c6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/branch-RED.log",
+      "bytes": 6289,
+      "sha256": "c829e63a83493f486f64eb767dd2f7c552f002d7d8fadf1d26bab66e4d5d4e6b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/control-source-AST-scope-proof.json",
+      "bytes": 774,
+      "sha256": "1f1d0014e3346adcce7824318c23e36e569559dd0bc2a7585a0ac1bbc01bac68"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/final-precommit-control-hashes.json",
+      "bytes": 187809,
+      "sha256": "c619d5dead8d8333523f3d629eb8ef8d48505578ede1192bfed8d8b8ad769cd6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generate-one-workflow.log",
+      "bytes": 3650,
+      "sha256": "b85e8c26938855f8fc5378b2ae61d1e193945ee2a9f309fc63797910d7eb904a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generate-one-workflow.py",
+      "bytes": 432,
+      "sha256": "7784ffa9ec7a4365abc6526bd1b94b0e0bebf97a7164c7100d3cb9ebe37fd451"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "8f25f9bc65d44ae9a4d2957d0d57943b7fee93633241829a873594fdfb87401a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generator-roundtrip.log",
+      "bytes": 4564,
+      "sha256": "74c7e6efa262cdd5cf2baa06419fe0eb71f7d85a60b779b7a3a35118a46bf391"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/generator-roundtrip.py",
+      "bytes": 1812,
+      "sha256": "0f5ae0f7a5cfdc716b5b9be7729ff2098a1efbdc144e1148cc505820d957dc3c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/green-controls-static.log",
+      "bytes": 4742,
+      "sha256": "baf4d6c34b1e4c000e902637bb01968c715b4cb61dff8b882299a00164a31809"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/pin-RED.log",
+      "bytes": 7795,
+      "sha256": "d16bc62bc1bc83740e2428507d8d0348abec29b9109eaf33402340783cb97a64"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/pre-C-reviewed-source-checkpoint.json",
+      "bytes": 470,
+      "sha256": "06ca3c5704bc1d63cc9d903217b67311e58aa23cc5f6ecd662f90bf73e3d460f"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/run-green-controls-static.py",
+      "bytes": 758,
+      "sha256": "43afbd40997510f9fbf8610a2c362dbe4401732080acb7261667637cab9dff89"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/run-red-controls.py",
+      "bytes": 125,
+      "sha256": "55b128663058a61b19a07c8a11f49bec0ce585618547e82973d1731d22996f57"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/toolkit.log",
+      "bytes": 14346,
+      "sha256": "f76986e5d5e7bf7e3cb17b055f2a3f57f7a04d6415ea883c349c0bd6880365df"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-control/workflow-and-nine-source-preservation-proof.json",
+      "bytes": 2509,
+      "sha256": "547c242d1336844bc0b0dd01260170fa0cdf1e5bd0bfaacb25950895bb820dd0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/canonical-three-reviewed-control-branches-proposed.patch",
+      "bytes": 1016,
+      "sha256": "cd97355e9506350c286532607b87c5ce4ff492073a78fb72336517fe8164b5cd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/SOURCE-frozen-checkpoint.json",
+      "bytes": 12828,
+      "sha256": "523e46db8f4ea12dfbb0afbe8f6d2ce675cb0aedd79658b8b4d2585f151afb8b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/changed-test-format.log",
+      "bytes": 3728,
+      "sha256": "d365f0c1cb5c56a146c119238337f4d8b08d4df8d19c1cb56282c11b4c9771d6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/doctor.log",
+      "bytes": 13487,
+      "sha256": "987088d01480092d952b72d915735ef22807ecdde45a2d46aee1fd0bfff1fddb"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/exact-implemented-canonical-delta.patch",
+      "bytes": 4385,
+      "sha256": "2bd81847fda0b761e42b24c704dbe9eccda907c21f40cc3b4e5d88bf704e12f6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/final-pre-full-source-hashes-and-capacity.json",
+      "bytes": 187820,
+      "sha256": "d174e32d66608099bf05a6ea1b07f8a3b8921032478f2f912d3235bf8323d1db"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/format-changed-test.py",
+      "bytes": 196,
+      "sha256": "c2e88c844b98d308598b0cffb0a87b848e687f3f95df780273f5acac29fce514"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/formatting-and-original-test-preservation.json",
+      "bytes": 422,
+      "sha256": "bcc4662a86814b91e6365ff41841bb8090bff2a6b81948dfa694ce6e059d717f"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/freeze-source.py",
+      "bytes": 9595,
+      "sha256": "405978a4fb2a95767a7afea9355ee060e7b814a6a0c5f98e9e3650d72362bedd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/full-configured-source.log",
+      "bytes": 308345,
+      "sha256": "582a506a3f5318679f9b80d1629bc8aa12aa1ae1de7cdc93669a9b58c3f86ca2"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "d03086cf1c1c65efb2ec389ee3153695c6d8902c2c972e4838fc4ad8ce6d834b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/generator-roundtrip.log",
+      "bytes": 4563,
+      "sha256": "eaa4074b8898a397e01d052471a3f5a1d0c7b88d55de8db5b8de886dbb8bcacb"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/generator-roundtrip.py",
+      "bytes": 1811,
+      "sha256": "80e15e60793d56d908cfe9eb5e6ca26725289ab83787603b57050a0db13dc1d9"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/guard-GREEN.log",
+      "bytes": 3909,
+      "sha256": "33748a9d0acfb5c5181d0128e34b194175c6791fe650b1d465febba94723d1d5"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/guard-RED.log",
+      "bytes": 50682,
+      "sha256": "84945fb6eba81cd092bc4ae85341a04531b5a546cc6086478bd6d8c82a497906"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/implemented-source-scope-pre-gates.json",
+      "bytes": 949,
+      "sha256": "33480b3bc5ab508f4de47894118254dadc9617d99d5625aeb175b28bf2f19230"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-action_server.json",
+      "bytes": 283,
+      "sha256": "f7a00c055eca6ebcd32e62cfa620b224f99ba834111d9d230937a29c9ede2f05"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "d8ab3c61fcf9ed762629848de7f5974dc488f23d963f533e7032717d29b18f1c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-actions.json",
+      "bytes": 218,
+      "sha256": "5f39b76931c708942c66e5df09de5930082f14aa780bbbf57634c913cd0f5fef"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "0f8a5be23e17e152e1bac26efa4e81c5a9cad12821a7422edf7ac15ad8d1e6a0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "d4da434483e01c6ca190a89eae5de51ca9b5a0ef9baa32722fd2382b05bab99d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6413,
+      "sha256": "e111c3c4a155f6c9439795863e8c8d2b4878630112e693c3b1fe0e28b4b8fc40"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/own-bootstrap-reuse.log",
+      "bytes": 6755,
+      "sha256": "5ded97ffda24205e513aac1707464752afa5951951adb81663a5466d3f8cd7c4"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/pre-source-and-ordinary-union-checkpoint.json",
+      "bytes": 431810,
+      "sha256": "9839fc79213723e0712e62049d0004447cc62a91b3ef8a2c5de1164d5a01da12"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/producer-inputs-and-pre-full-source-checkpoint.json",
+      "bytes": 229514,
+      "sha256": "38c26c9d1c8fc9d209eda1729cc3f8dc3acc7bcbf2351862b5ec89bf5c2d0a3a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/run-full-source.py",
+      "bytes": 88,
+      "sha256": "50a01ae3d7a06581876e3c3b5d573321b352605f16c0b43327a06122e0c9a0d5"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/run-guard-controls.py",
+      "bytes": 222,
+      "sha256": "f1a986c645cf6a39d4e3e87ae60759326211d4972fd7b47d04261b272411cf94"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/run-light-gates.py",
+      "bytes": 367,
+      "sha256": "e01f8a81a75dec76c1e10d529847bba7da719660769610dcbd0d372349392693"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/scoped-static-corrected.log",
+      "bytes": 6989,
+      "sha256": "d4924d37bf6c0cce5fb3e4ba32d86f821c5db1fbcdad75852942bd0596b7a5e0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/scoped-static.log",
+      "bytes": 6512,
+      "sha256": "5264af50dbc63b257d2f67dad54040b3ec2119e7e93b0d07e3057b458c8bc8d5"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/toolkit.log",
+      "bytes": 14344,
+      "sha256": "80567e2525576174465317879a7b1c6e003727fda57688143da02c8facb34774"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/verify-own-bootstrap-reuse.py",
+      "bytes": 2689,
+      "sha256": "6013ee944964546a257bd5bb0b4d1711f49aa84b1727be0a45594b993fe4cd4d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-CI-and-threecase-metadata/frozen-metadata-census.json",
+      "bytes": 40949,
+      "sha256": "044b08670dea70fc9dbd1576a4ebab20dd1510aaee7e52dfc72318866c2c2dc3"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/artifact-returned-reference.private.json",
+      "bytes": 1853,
+      "sha256": "fb12c423ed688e73596b7b429e932a7a538038bbc0ec4e4025ea06373600c69c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/frozen-original-threecase-proof.json",
+      "bytes": 19720,
+      "sha256": "16b60ef82e907388a768642e17db2134b5dfaea966cfc7045aa1715879ca38f4"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/immutable-C-validator.private.txt",
+      "bytes": 27087,
+      "sha256": "90e8023a40e5846dcf8985d8fbde1f816e5addc8f78feb175613d9924ee0c717"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/acceptance-summary.json",
+      "bytes": 3067,
+      "sha256": "0cae877e37e4ad4721045e8095cd3f40bb361006048e38ea2cfbea8de2c05fde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/acceptance-summary.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/lifecycle-receipt.json",
+      "bytes": 7881,
+      "sha256": "a18529d3dc94cfc150352d6dedc674883814245eca5573205a2ce92427875b8c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/lifecycle-summary.json",
+      "bytes": 1221,
+      "sha256": "56ad7a1548939ae3e143be6a83a846de330eb6bce4317d0cfc0e4a5190e22817"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/published-details-receipt.json",
+      "bytes": 1483,
+      "sha256": "0d8f704b99becdc0baad46006c276e4406b862bbf96408011ad587da68179129"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/staged-consumer-receipt.json",
+      "bytes": 2393,
+      "sha256": "42fb4f5876557bcffc597738bb642df22c69d91349c54d5d3c53fce97033abde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/validator-output.private.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-acquisition-and-member-inventory.json",
+      "bytes": 3017,
+      "sha256": "3780215b4c811eb85a7419ddb5454bf7df89081a150a7583a6466ad947d81065"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-artifact-11697165172.zip",
+      "bytes": 7582,
+      "sha256": "5bebad77cc556a5bf5cef84feae8d76d3a7d5c5aecfc63378691cc79dec3719d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-job-114425127596.private.log",
+      "bytes": 887255,
+      "sha256": "d36e0a7695b52fa2113a6d3a43c6554b1c5f032c0f777410bfadd2972b135c1b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/acceptance-summary.json",
+      "bytes": 3067,
+      "sha256": "0cae877e37e4ad4721045e8095cd3f40bb361006048e38ea2cfbea8de2c05fde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/acceptance-summary.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/lifecycle-receipt.json",
+      "bytes": 7881,
+      "sha256": "a18529d3dc94cfc150352d6dedc674883814245eca5573205a2ce92427875b8c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/lifecycle-summary.json",
+      "bytes": 1221,
+      "sha256": "56ad7a1548939ae3e143be6a83a846de330eb6bce4317d0cfc0e4a5190e22817"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/published-details-receipt.json",
+      "bytes": 1483,
+      "sha256": "0d8f704b99becdc0baad46006c276e4406b862bbf96408011ad587da68179129"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/staged-consumer-receipt.json",
+      "bytes": 2393,
+      "sha256": "42fb4f5876557bcffc597738bb642df22c69d91349c54d5d3c53fce97033abde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-junit.xml",
+      "bytes": 752,
+      "sha256": "99bd574e75a7d2313d50fb20749632ada952bb132f9c3a4f16642ac6ea4a9787"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/verify-original-proof.py",
+      "bytes": 17698,
+      "sha256": "bd594d9d026881b6ef2a157da601c752c264c3e4ea8b5804156559f1b233e777"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-source-review/independent-frozen-S-source-review.json",
+      "bytes": 6631,
+      "sha256": "29c13d7e5bcb3400decbf41286ea736fb0073c6c5afc695ca382826c40a02e03"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/independent-frozen-C-control-review.json",
+      "bytes": 5900,
+      "sha256": "31779bad488b43b88d7bb81b3f2c5d75edabf7519f5765bd90d86c66569d6f9b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-independent-actual-review/independent-frozen-original-threecase-actual-review.json",
+      "bytes": 7669,
+      "sha256": "28f6b0055d89fff600fbaeec5dd3c063871afc0a4413374c16bb332c62b82106"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/artifact-returned-reference.private.json",
+      "bytes": 1853,
+      "sha256": "fb12c423ed688e73596b7b429e932a7a538038bbc0ec4e4025ea06373600c69c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/immutable-C-validator.private.txt",
+      "bytes": 27087,
+      "sha256": "90e8023a40e5846dcf8985d8fbde1f816e5addc8f78feb175613d9924ee0c717"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/acceptance-summary.json",
+      "bytes": 3067,
+      "sha256": "0cae877e37e4ad4721045e8095cd3f40bb361006048e38ea2cfbea8de2c05fde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/acceptance-summary.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/lifecycle-receipt.json",
+      "bytes": 7881,
+      "sha256": "a18529d3dc94cfc150352d6dedc674883814245eca5573205a2ce92427875b8c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/lifecycle-summary.json",
+      "bytes": 1221,
+      "sha256": "56ad7a1548939ae3e143be6a83a846de330eb6bce4317d0cfc0e4a5190e22817"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/published-details-receipt.json",
+      "bytes": 1483,
+      "sha256": "0d8f704b99becdc0baad46006c276e4406b862bbf96408011ad587da68179129"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/staged-consumer-receipt.json",
+      "bytes": 2393,
+      "sha256": "42fb4f5876557bcffc597738bb642df22c69d91349c54d5d3c53fce97033abde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/offline-validator-regenerated/validator-output.private.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-acquisition-and-member-inventory.json",
+      "bytes": 3017,
+      "sha256": "3780215b4c811eb85a7419ddb5454bf7df89081a150a7583a6466ad947d81065"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-artifact-11697165172.zip",
+      "bytes": 7582,
+      "sha256": "5bebad77cc556a5bf5cef84feae8d76d3a7d5c5aecfc63378691cc79dec3719d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-job-114425127596.private.log",
+      "bytes": 887255,
+      "sha256": "d36e0a7695b52fa2113a6d3a43c6554b1c5f032c0f777410bfadd2972b135c1b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/acceptance-summary.json",
+      "bytes": 3067,
+      "sha256": "0cae877e37e4ad4721045e8095cd3f40bb361006048e38ea2cfbea8de2c05fde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/acceptance-summary.log",
+      "bytes": 686,
+      "sha256": "d4cc8ec93cf0227ae2206808180e53b29271b45c8658151106c01d416a0455fd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/lifecycle-receipt.json",
+      "bytes": 7881,
+      "sha256": "a18529d3dc94cfc150352d6dedc674883814245eca5573205a2ce92427875b8c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/lifecycle-summary.json",
+      "bytes": 1221,
+      "sha256": "56ad7a1548939ae3e143be6a83a846de330eb6bce4317d0cfc0e4a5190e22817"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/published-details-receipt.json",
+      "bytes": 1483,
+      "sha256": "0d8f704b99becdc0baad46006c276e4406b862bbf96408011ad587da68179129"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-evidence/staged-consumer-receipt.json",
+      "bytes": 2393,
+      "sha256": "42fb4f5876557bcffc597738bb642df22c69d91349c54d5d3c53fce97033abde"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-members/rcc-provider-rollback-junit.xml",
+      "bytes": 752,
+      "sha256": "99bd574e75a7d2313d50fb20749632ada952bb132f9c3a4f16642ac6ea4a9787"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/verify-original-proof.py",
+      "bytes": 17698,
+      "sha256": "bd594d9d026881b6ef2a157da601c752c264c3e4ea8b5804156559f1b233e777"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-CI-and-threecase-metadata/frozen-metadata-census.json",
+      "bytes": 40949,
+      "sha256": "044b08670dea70fc9dbd1576a4ebab20dd1510aaee7e52dfc72318866c2c2dc3"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/canonical-three-reviewed-control-branches-proposed.patch",
+      "bytes": 1016,
+      "sha256": "cd97355e9506350c286532607b87c5ce4ff492073a78fb72336517fe8164b5cd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/original-artifact-11697165172.zip",
+      "bytes": 7582,
+      "sha256": "5bebad77cc556a5bf5cef84feae8d76d3a7d5c5aecfc63378691cc79dec3719d"
+    },
+    {
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/bin/rcc-18.19.3",
+      "bytes": 22282402,
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-manifest.json",
+      "bytes": 3162,
+      "sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json",
+      "bytes": 255076,
+      "sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf"
+    },
+    {
+      "path": "/workspace/engineering/pr310/action_server/go-wrapper/assets/assets.zip",
+      "bytes": 73556451,
+      "sha256": "c85862c9b4dba354953c02cbb80e520052f07cb6d506600bf4a07d2f755135e0"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/dist/action-server/action-server",
+      "bytes": 17633792,
+      "sha256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb"
+    },
+    {
+      "path": "/workspace/engineering/pr282/action_server/tests/action_server_tests/mcp/test_canvas_query_template.py",
+      "bytes": 51505,
+      "sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/test_canvas_query_template.py",
+      "bytes": 51505,
+      "sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e"
+    },
+    {
+      "path": "/workspace/engineering/pr305/action_server/scripts/write_native_artifact_manifest.py",
+      "bytes": 8499,
+      "sha256": "aaa6855bc6c0bccc41933703fbdb2e58d9f25a118a651d254a7dce34e5fd113b"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/write_native_artifact_manifest.py",
+      "bytes": 8499,
+      "sha256": "aaa6855bc6c0bccc41933703fbdb2e58d9f25a118a651d254a7dce34e5fd113b"
+    },
+    {
+      "path": "/workspace/engineering/pr310/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "bytes": 74274,
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "bytes": 74274,
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    {
+      "path": "/workspace/engineering/pr311/action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "bytes": 13009,
+      "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/native_startup_diagnostics.py",
+      "bytes": 13009,
+      "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c"
+    },
+    {
+      "path": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "bytes": 196975952,
+      "sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-passed-checkpoint-corrected.json",
+      "bytes": 33914,
+      "sha256": "28b2af71d1ac7b5dd0bbd7bf7518845a2c3d208c6700fd102914cffaf449dca3"
+    },
+    {
+      "path": "/workspace/engineering/pr305-v5-independent-runner-review/independent-actual-v5-review.json",
+      "bytes": 8129,
+      "sha256": "1848613d69513e20039cee94efe960a3609fff451a582c7a33552c8fa4df1108"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v5.json",
+      "bytes": 28665,
+      "sha256": "f915a178adfa23833fe7a2e047e9c0b98f995fdd4b95730e1bb522e5f48fe7ee"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/actual-admission.json",
+      "bytes": 1602,
+      "sha256": "68c70c22fcc4f1307127c520387843973bc2b9c8de7d68977677eb087b624aa2"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/bridge-receipt.json",
+      "bytes": 5146,
+      "sha256": "6d48e6bf0fc06e23f4c2dc4c86d19e7012ec0b8022d02ff0a6050221a4efce51"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-1-stderr.log",
+      "bytes": 192,
+      "sha256": "31268753892853abc32ea1862c718e2d5bf63d563acba1ef293d63cb70c7e59d"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-1-stdout.log",
+      "bytes": 790,
+      "sha256": "ea2bd1be095c21b78670840af1e9c33af51fdbe8ebb29dfe4e796b246cee691f"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-2-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-2-stdout.log",
+      "bytes": 40,
+      "sha256": "d75fc32089eefc512b00ce4d792475a993ba56dcb863b971a4c13bcd17b3629f"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-3-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-3-stdout.log",
+      "bytes": 11643,
+      "sha256": "6d85a8593dfffa4df876442b02c2b74235cb32fe2845d8223bbbd176ea1d6d82"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-receipts.json",
+      "bytes": 2162,
+      "sha256": "2c1051abeaaa84d5db41e3104f444def972995dab2c690a74488208771555171"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/junit.xml",
+      "bytes": 408,
+      "sha256": "3653795fed112f88a2057193ce556a658273ff5f9261a0b92e763d7da037838c"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/outer-cleanup.json",
+      "bytes": 518,
+      "sha256": "658e58dbf4f5668c826b572cd2789a186f7a391bf66c2a33b4a89c8439a26fb9"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/preflight.json",
+      "bytes": 4534,
+      "sha256": "439baab0be7d2c1e9a3c57470c4600ea419813fa3a47fc38e60b0a067b52ab16"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/runtime-cleanup.json",
+      "bytes": 699,
+      "sha256": "118af76bb047bc1c3b501f7c3e2493aa8a95248259503ea64ec37aa5cdde85a2"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/runtime-start-final-snapshot.json",
+      "bytes": 809,
+      "sha256": "dfb02f47cf9e71696d6c9a5358ca3a2a704dc967e81a44f110d1c3dfed67d90d"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/startup-observations.json",
+      "bytes": 2681,
+      "sha256": "a40928cd75de4445bba5fa7a5db6bc3c22f8d50e5e8114234cfab57452176fc3"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/worker-stderr.log",
+      "bytes": 50685,
+      "sha256": "8927fe288bc98fb8ff814594a846d0389d63d9ff9fe0adc96b022f351bbed9fe"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/worker-stdout.log",
+      "bytes": 13506,
+      "sha256": "cd96d29f128a931625e1674b0b722ef887116b917e2353a50788708464cfa5d1"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-gateway.log",
+      "bytes": 3701,
+      "sha256": "498cc4e745130de220195d993c5364019f4a9b9261d94c8add085fe8b97cf1bf"
+    }
+  ],
+  "original_actual_ZIP_seven_complete_unique_member_bytes_SHA_sizes_CRC_recorded_modes_and_current0600_storage_verified": true,
+  "old_actual_source_control_target": [
+    "7eb5bce946750555ab009f77592862920a901506",
+    "b673ddd761ba4ccd68e9baa8faaa9ab666df794e",
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+  ],
+  "constructor_fixed_current_head_tree_no_overwrite_body_SHA_exact_not_reexecuted": {
+    "path": "/workspace/engineering/pr308-actual299-source-refresh/freeze-SOURCE-final-immutable.py",
+    "bytes": 8659,
+    "sha256": "da5a7fb47f4f8719ab825e351b764c2423164d2109f88a2efcd9f46d661d268f"
+  },
+  "source_inspector_KeyError_before_commit_gates_retained_v2_authoritative_control_path_and_stagedv3_proof_preserved": true,
+  "own30_inputs_five_origins_configprefix_python_and_RCC0711_exact": true,
+  "recorded_source_gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "Verified reuse30 exact ownpreparedinputs/fiveactualconcreteorigins+prefixes; no new installer",
+    "owned_pinned_ignored_RCC": {
+      "path": "/workspace/engineering/pr308-actual299-source-refresh/owned-pinned-ignored-Rcc-before-gates.json",
+      "bytes": 300,
+      "sha256": "4e6c4e07dc871e0d45bb46e100a7c85ec58e55490dbf88e0a96cdcee1e5499e4"
+    },
+    "Toolkit": 96,
+    "scoped": {
+      "passed": 133,
+      "existing_actual_RCC_skipped": 1,
+      "integration_deselected": 3,
+      "warnings": 4,
+      "seconds": 7.86
+    },
+    "configured_full_static": "Ruffcheck/format311/Isort PASS",
+    "configured_typecheck_files": 347,
+    "derived_actual_generated_TARGETS_outputs": 8,
+    "all30_tracked_GitHub_YAML_dependabot_bytes_parse": "PASS",
+    "full_Runtime_source": {
+      "single_authorized_SOURCE_full": true,
+      "exit_code": 0,
+      "passed": 1240,
+      "skipped": 13,
+      "warnings": 15,
+      "seconds": 137.04,
+      "workers": 2,
+      "outer_timeout_seconds": 600,
+      "kill_grace_seconds": 10,
+      "RCC": "SUCCESS",
+      "head": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+      "tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb",
+      "private_original_log": {
+        "path": "/workspace/engineering/pr308-actual299-source-refresh/SOURCE-full-configured-runtime-source.log",
+        "bytes": 320721,
+        "sha256": "3a53c22ef6c55fcb0712afe853b481e1c0dd8a730201d6916e453f81426eaf3b"
+      },
+      "private_original_log_mode": "0o600",
+      "scope": "Configured invoke test-not-integration only; native2510/provider/private/release unqualified.",
+      "cleanup_scope": "Gateway exit0/sourcePASS is not universal descendant reaping/native cleanup proof."
+    },
+    "post_full_own30_plus5actualorigins": "PASS exact light and immediatepre; no installer"
+  },
+  "original1192_native_helper0444_browser_Node_frontend_raw18_frozen50_prepost_exact": true,
+  "historical_V5_source": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+  "historical_native_producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "canonical_verified_both_parent_patches": [
+    {
+      "path": "/workspace/engineering/pr308-actual299-independent-source-review/canonical-current-source-imported-repository-operations.patch",
+      "bytes": 10807,
+      "sha256": "3b1c844832bddb774744948a6c6182d67debb0b8f893f29fac9aff520b81ac33"
+    },
+    {
+      "path": "/workspace/engineering/pr308-actual299-independent-source-review/canonical-current-source-imported-provenance-observability.patch",
+      "bytes": 3834,
+      "sha256": "7330b295929c287d4ea82f956634d4a475d21098a197262cc1555068ca12f3a3"
+    }
+  ],
+  "canonical_sole_novel_three_branch_correction": {
+    "path": "/workspace/engineering/pr308-actual299-independent-source-review/canonical-reviewed-three-branch-correction.patch",
+    "bytes": 1215,
+    "sha256": "b800238a6c4d331ef5beafc7322ed2f553b6bb1c02bfb394ebda08ceafe1c44b"
+  },
+  "no_source_test_gateway_installer_native_browser_provider_download_push_merge_execution": true,
+  "corrected_guide_three_branches_exact_retained_generated_workflow_push_filter": [
+    "test/rcc-provider-rollback-hosted-20261010",
+    "fix/rcc-published-artifact-details-20261010",
+    "fix/rcc-candidate-wheel-identities-20261010"
+  ],
+  "retained_push_path_filter_count": 8,
+  "all147_owner_evidence_paths_unique": true
+}

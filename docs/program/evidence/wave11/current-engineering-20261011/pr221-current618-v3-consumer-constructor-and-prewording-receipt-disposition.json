@@ -1,0 +1,16 @@
+{
+  "frozen_proposal_sha256": "41ccd19946c766b97c6c49e72dcb592a38193c56763ae6c806a2d41c52b669e6",
+  "status": "PRELIMINARY_CONSTRUCTION_IDENTITIES_HISTORY_ONLY_FINAL_EXACT_BINDINGS_ARE_FROZEN_PROPOSAL",
+  "constructor_derivation": "current-input-manifest-derivation.json captured pre-Ruff renderer identities; these are construction observations, not frozen execution pins",
+  "prewording_AST_proof": "exact-parameter-successor-AST-and-current-input-proof.json captured runner/manifest before four-distinfo wording correction; finalproposal independently rechecks exact current AST/input bindings",
+  "preserved_prewording_runner": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/runner-before-dist-info-wording-correction.py",
+    "sha256": "e2be54c502e730030e94f3d444742a96871146bfcef7d479180416b77595908c"
+  },
+  "preserved_prewording_manifest": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/input-manifest-before-dist-info-wording-correction.json",
+    "sha256": "50f33fec6151d479de967159c4b04de83cccd9ff220936fbc63e0b8e2e17ca42"
+  },
+  "final_controls": "85 same boundary controls before text-only input annotation correction; final8 input/source pin and sixmutation cases bind final exactrunner/gate/manifest; no consumer run",
+  "accepted_original776_source_bytes_overwritten": false
+}

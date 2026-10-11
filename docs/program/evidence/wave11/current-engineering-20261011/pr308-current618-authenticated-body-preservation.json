@@ -1,0 +1,10 @@
+{
+  "status": "EXACT_AUTHENTICATED_BODY",
+  "bytes": 10297,
+  "sha256": "53893c5559bd40c5fb9b5b4e939bb5a895857ae1387160e057f275313919b4d6",
+  "head": "d5a3d2f53737f4f5380b6ecb7fb93d1a651f005d",
+  "base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "draft": true,
+  "previous_full_context_retained": true,
+  "source_control_acceptance_only": "freshcurrentactual/fullCI/policy required"
+}

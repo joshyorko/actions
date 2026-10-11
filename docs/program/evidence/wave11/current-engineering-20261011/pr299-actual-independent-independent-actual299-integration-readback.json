@@ -1,0 +1,81 @@
+{
+  "schema": "actions-independent-actual299-integration-readback/v1",
+  "verdict": "PASS_SCOPED_NORMAL299_ACTUAL_INTEGRATION_READBACK",
+  "actual": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+  "ordered_parents": [
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "3155fc55ea7d47afbc547fddc963b5860462924b"
+  ],
+  "accepted_source": "3155fc55ea7d47afbc547fddc963b5860462924b",
+  "accepted_tested_synthetic": "600d1b213fcfe6f94f341cbe4bca4472bd002e4c",
+  "complete_typed_entries": 1419,
+  "typed_raw_Git_inventory_sha256": "cade8528d375ded3a410bf6145eca28f3b74f64f7efe2d0bcd4aa58d8ec0de10",
+  "root_actual_receipt": {
+    "path": "/workspace/engineering/pr299-actual-integration.json",
+    "bytes": 1567,
+    "sha256": "327250afa7750b41b8fa6c950ba068a7857376856444da67e0711f98966afed5"
+  },
+  "independent_complete_actual_proof": {
+    "path": "/workspace/engineering/pr299-actual-integration-independent-review/independent-complete-actual299-integration-readback-proof.json",
+    "bytes": 6720,
+    "sha256": "3a34297b3fc3f5a4aceb17a76c395332e3dbcbe715e3ff05dec4e8eee723bbe6"
+  },
+  "final_scoped_source_fullCI_GO": {
+    "path": "/workspace/engineering/pr299-current776-CI-admission-review/final-successor-04/independent-current776-final-scoped-admission-GO.json",
+    "bytes": 69950,
+    "sha256": "178ab95cf19bbe6e473d6f81610ada618db0b2add440657e87d7c6768262a7c0"
+  },
+  "root_normal_ready_expected_head_authorization": {
+    "path": "/workspace/engineering/pr299-root-final-normal-merge-authorization.json",
+    "bytes": 1215,
+    "sha256": "c480f7546ddea034c89a243e3f2d61598833ac123da15d8db9d7468b8621922a"
+  },
+  "private_independent_live_API": {
+    "path": "/workspace/engineering/pr299-actual-integration-independent-review/private-independent-live-API-readback.json",
+    "bytes": 47767,
+    "sha256": "5759ff92ea1e1a05b6058d998050652ccace55a079a5f57d835cca06361b4565"
+  },
+  "live_readback": {
+    "PR": 299,
+    "merged": true,
+    "state": "closed",
+    "source": "3155fc55ea7d47afbc547fddc963b5860462924b",
+    "named_target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "actual_Git_API_ordered_parents_and_tree_exact": true,
+    "all1419_path_mode_blob_entries_actual_source_and_accepted_tested_complete_tree_exact": true,
+    "normal_ready_transition_and_final20SUCCESS_before_merge_evidence_verified": true,
+    "actual_execution_tested_tuple_preserved": "Original authenticated synthetic600d Gitcommit has same99ac complete tree and776/3155 parents. It is separate from actual6181 merge; local synthetic commit object absent, bound through original authenticated tree identity without fetching refs."
+  },
+  "dependency_disposition": "Actual accepted299 source3155 is present in named integration6181. This clears the retained actual299 prerequisite for authorized #300 source work; #300 still needs its own ordinary actual6181 union review and fresh gates, with no CI/native/artifact carry by assumption.",
+  "findings": [],
+  "policy": "Normal root ready+expected3155 merge API; visible protection disabled/rulesets empty as recorded. Dedicated403 administrative policy surface remains UNKNOWN, not resolved by API success; no override or bypass by reviewer.",
+  "historical_actual_CI_scope": "Six PR workflows19jobs plus matching push Copilot1=20 terminalSUCCESS and seven run attempts complete in admitted tuple. Retained original Windows600d checkout binds131PASS19SKIP integration/collision controls; skipped gates stay unverified. This task acquired no logs/artifacts or newCI census.",
+  "remaining_HOLD": [
+    "full shared-output contracts/current native/backend/private",
+    "original FIRST cause/cleanup unknown",
+    "300 actual newtuple refresh and freshCI",
+    "Runtime release and full retained graph",
+    "Historical9cb first-startup resource collision timeout and original311/306 failures keep their own source tuples and cause/cleanup limitations; no causal fix claim.",
+    "Current274 producer binding differs from92498 by seven original/current production changes and six added299 paths: old native assets remain UNQUALIFIED. Runtime Windows integration PASS is distinct from authenticated native artifact or installed-consumer qualification.",
+    "All19 Windows integration skips are unverified including PostgreSQL, explicit candidate/public RCC consumers and browser/native fixtures.",
+    "Private full134/135/frozen-v6, production provider/identity, full storage lifecycle, Canvas/ChatGPT, Runtime221 publication and full campaign issue acceptance remain HOLD.",
+    "#300 source refresh/retarget waits ACTUAL accepted #299 merge readback; no dependency work was mutated here."
+  ],
+  "review_actions": "Independent ordinary metadata reads for PR/named source/named target/actual Gitcommit plus local Git tree/receipt hashing. No source/ref/index/ready/merge/CI mutation, test/gateway/native/pip/download/retry.",
+  "review_scaffold_disposition": "Initial local synthetic Gitcommit lookup was unavailable; corrected to already retained authenticated final04 synthetic Gitcommit/tree and compared all actual/source99ac entries without fetch. Exact-guide paragraph extractor also normalized only leading blank separators. Original bytes/statuses/source unaffected.",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Exact_existing_verified_excerpt": {
+      "path": "/workspace/engineering/pr299-actual-integration-independent-review/canonical-verified-existing-actual-merge-and-dependent-refresh-lessons.md",
+      "bytes": 1422,
+      "sha256": "167cc9f7e18a3d066e6e0c07e84e5e7275ffa864c1533903cd8bbbb4d594786c"
+    },
+    "Disposition": "ACCEPT/REUSE exact existing admitted-guide checkout/ordered-tree/dependent-target rules; no cosmetic or session-diary amendment",
+    "Durable learning captured": "Authenticate the actual accepted dependency in the named target and compare complete actual/source/tested tree identities before refreshing its descendant. Preserve synthetic and actual merge roles even when their complete trees agree.",
+    "Evidence": "Live merged/closedPR299/namedtarget6181/namedsource3155 and Git API actualordered776/3155/tree99ac;1419full typed entries/identicalrawinventorycade8528; retained finalGO178ab/rootauthorizationc480 and original tested600d tree identity.",
+    "Stale or ambiguous guidance removed": "No reliance on PR base payload, mergeable flag, historicalgreen or unintegrated dependency source; actual accepted source present now, successor300 gates still separate. Existing precise rule executed rather than duplicated.",
+    "Remaining uncertainty": "Backend/full shared-output/private contracts, historical readiness cause/cleanup, oldnative92498 unqualified for274 currentproduction inputs, skipped actual/provider/native/browser gates, descendant300 currentunion and Runtime/full release remain HOLD."
+  },
+  "Upstream disposition": "none"
+}

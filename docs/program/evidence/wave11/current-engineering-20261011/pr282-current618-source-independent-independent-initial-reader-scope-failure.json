@@ -1,0 +1,6 @@
+{
+  "status": "INITIAL_INDEPENDENT_READER_SCOPE_MISMATCH",
+  "root_evidence_unchanged": true,
+  "cause": "Reader counted all repository YAML, while recorded30 traversal is tracked .github YAML including issue forms; exact declared traversal inspected before successor",
+  "source_gate_failure": false
+}

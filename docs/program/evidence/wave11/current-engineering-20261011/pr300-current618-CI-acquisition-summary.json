@@ -1,0 +1,25 @@
+{
+  "bounded_one_snapshot": true,
+  "PR": 300,
+  "head": "7840057a8b055576d11d339d8c0fbb738927a491",
+  "expected_base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "rest_requests": 29,
+  "rest_nonzero": [
+    [
+      "base-protection",
+      1
+    ]
+  ],
+  "graphql_connections": [
+    [
+      "closures",
+      1
+    ],
+    [
+      "threads",
+      1
+    ]
+  ],
+  "no_logs_ZIPs_source_or_remote_mutation": true,
+  "no_pending_poll_or_retry": true
+}

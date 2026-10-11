@@ -1,0 +1,7 @@
+{
+  "status": "EXACT_NEW_FILTER_CONTROL_FUNCTION_AST_RETAINED_IN_OWN_TEST_MODULE",
+  "reason": "Restore all existing test source bytes, including inherited unrelated three-line formatting drift; isolate newly added filter controls",
+  "original_existing_test_restored_exact_HEAD": true,
+  "new_control_function_AST_exact": true,
+  "initial_RED_functions_and_final_GREEN_functions_same": true
+}

@@ -1,0 +1,12 @@
+{
+  "manifest_count": 644,
+  "old_count": 516,
+  "new_count": 128,
+  "newbytes": 5683927,
+  "all_new_staged_source_size_hashes_match": true,
+  "prior516_entries_exact": true,
+  "privacy_pattern_findings_for_manual_classification": [],
+  "URL_hosts_only": {
+    "files.pythonhosted.org": 2
+  }
+}

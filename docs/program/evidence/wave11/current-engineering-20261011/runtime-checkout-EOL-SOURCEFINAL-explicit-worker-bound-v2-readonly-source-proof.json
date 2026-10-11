@@ -1,0 +1,34 @@
+{
+  "status": "PASS_READ_ONLY_INSTALLED_WORKER_SELECTOR_AND_PROPAGATION_PROOF",
+  "installed_xdist": [
+    {
+      "installed_package": "devutils",
+      "installed_plugin_path": "/workspace/engineering/runtime-checkout-eol/devutils/.venv/lib/python3.12/site-packages/xdist/plugin.py",
+      "installed_plugin_bytes": 11561,
+      "installed_plugin_sha256": "011ebe37d0c1b79ee1a01c5067ae013763f84a8563a181d68ee9b990f23f4810",
+      "installed_auto_worker_function_AST_sha256": "4a47d06d6aee9d5a3c6b5d8ca7cbe14885ef0c1c78e17c77e4a3ebb62da89cfa",
+      "actual_installed_function_controlled_environment_result": 2,
+      "execution_scope": "Only AST-extracted worker selector function; decorators/type annotations removed, body unchanged; no pytest collection/tests/process launch"
+    },
+    {
+      "installed_package": "action_server",
+      "installed_plugin_path": "/workspace/engineering/runtime-checkout-eol/action_server/.venv/lib/python3.12/site-packages/xdist/plugin.py",
+      "installed_plugin_bytes": 13921,
+      "installed_plugin_sha256": "62df71dfe342969ab667cb3a4f2280a93be9c11bc9a4c2d9ead271c979d2afd8",
+      "installed_auto_worker_function_AST_sha256": "b61539b40e0914425f64ac6a99779b4276d570517444e2b659d72f780138b9ea",
+      "actual_installed_function_controlled_environment_result": 2,
+      "execution_scope": "Only AST-extracted worker selector function; decorators/type annotations removed, body unchanged; no pytest collection/tests/process launch"
+    }
+  ],
+  "toolkit_source_sha256": "e1a3f96b57c31be2a0db5cdd3d63ce9ac243a9e8e29dff5ce6e07fd897fb605f",
+  "toolkit_package_environment_preserves_reviewed_setting_for_both_packages": true,
+  "toolkit_subprocess_run_passes_same_environment": true,
+  "configured_Runtime_task_source_sha256": "b35d3722b1f9ed51e57ce4dcd3f7fdc81b7df238cbcdef0eaf44d47d08555791",
+  "configured_Runtime_pytest_n_auto_unchanged": true,
+  "Runtime_process_call_source_sha256": "ed0416866bb085da8f92759d4463963ab3d346c455a1b756e3f041b0945547df",
+  "Runtime_process_call_default_env_None_inherits_Invoke_environment": true,
+  "new_launcher_only_os_import_and_precommand_environment_assignment": true,
+  "old_two_package_commands_AST_exact": true,
+  "tests_collected_or_executed": 0,
+  "configured_gate_or_source_changes": 0
+}

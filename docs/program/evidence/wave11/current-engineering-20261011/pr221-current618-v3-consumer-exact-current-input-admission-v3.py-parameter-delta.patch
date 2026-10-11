@@ -1,0 +1,34 @@
+--- /workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission-v2.py
++++ /workspace/engineering/pr221-current618-linux-consumer-preflight/current-input-admission-v3.py
+@@ -114,11 +114,11 @@
+             member = wheel.read(info)
+             assert len(member) == row["bytes"] and digest(member) == row["sha256"]
+     receipt = validate_payload(payload)
+-    assert receipt["record_entries"] == expected_wheel["record_entries"] == 215
++    assert receipt["record_entries"] == expected_wheel["record_entries"] == 221
+     assert (
+         receipt["record_verified_entries"]
+         == expected_wheel["record_sha256_size_verified_entries"]
+-        == 214
++        == 220
+     )
+     assert receipt["record_sha256"] == expected_wheel["record_sha256"]
+     assert receipt["python_member_count"] == sum(
+@@ -146,7 +146,7 @@
+         for meta, name in [row.split(b"\t", 1)]
+     }
+     bindings = manifest["tracked_member_bindings"]
+-    assert len(bindings) == manifest["tracked_payload_count"] == 209
++    assert len(bindings) == manifest["tracked_payload_count"] == 215
+     assert len({r["member"] for r in bindings}) == len(bindings)
+     for row in bindings:
+         assert tracked[row["source_path"]][2] == row["source_blob"]
+@@ -167,7 +167,7 @@
+     assert contents == {"actions_config": "", "default_user_config": ""}
+     receipt.update(
+         {
+-            "tracked_payload_source_matches": 209,
++            "tracked_payload_source_matches": 215,
+             "original_producer": manifest["producer_tuple"],
+             "actual_integration": actual,
+             "generated_oauth_content": "EMPTY_CONTENT_AUTHORITY_HOLD",

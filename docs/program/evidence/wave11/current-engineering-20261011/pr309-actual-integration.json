@@ -1,0 +1,25 @@
+{
+  "status": "ACTUAL_NORMAL309_INTEGRATION_GIT_AND_AUTHENTICATED_API_VERIFIED",
+  "PR": 309,
+  "actual": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "tree": "1181b35b11e4904405ca1a9a3a398e6c1c3abfd0",
+  "ordered_parents": [
+    "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "83123ff42c21587e3eb944e20af89f1a9e9ff0ea"
+  ],
+  "source": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea",
+  "tested_synthetic": "012cd8fd70cecbf53e236ca35ede0ffcb35297b5",
+  "all1421_typed_mode_blob_path_entries_equal_accepted_source_and_tested_tree": true,
+  "typed_inventory_sha256": "1ed74906c693217b500f2e3795298de283edd04dbc86f1db216fe2af861924fc",
+  "named_integration_branch": "a0d258a16095b95b1bf9000cb1201cddfaff4779",
+  "final_independent_scoped_GO_sha256": "8d834b13a663e6768090963ef8a62860155b31b2c9b1aebbf5b11b5c3f70ab7e",
+  "normal_root_merge_authorization_sha256": "11216299b207fd3c7c7473959745f07aa3b1963511e9596de1822eeadfe8ec7a",
+  "merged_at": "2026-10-11T11:30:31Z",
+  "private_API_binding": {
+    "path": "/workspace/engineering/pr309-actual-integration-API.private.json",
+    "bytes": 24532,
+    "sha256": "92ad2b281be79e3ff4b4b9cc5eaa7660806e0d4bcb1347908d05cd9b2271bcfa"
+  },
+  "issue_closure_or_full_issue_or_publication_claim": false,
+  "other_source_or_CI_carry_forward": "NO; dependent branches need exact-current-target refresh and fresh gates"
+}

@@ -1,0 +1,81 @@
+{
+  "verdict": "GO_SCOPED_PRIVATE_ARCHIVE_DATA_AND_RECORDED_MEMBER_METADATA_PRESERVATION; NOT_ACCEPTANCE_OR_BACKUP_OF_UNRECORDED_METADATA",
+  "summary": {
+    "path": "/workspace/engineering/capacity-recovery-batch10-independent-review/independent-safe-batch10-summary.json",
+    "bytes": 2335,
+    "sha256": "221afdc34f78cf97d78eca9f8c95dcc76eea33e8ebd7767257f5a13c3c6d8677"
+  },
+  "private_inventory": {
+    "path": "/tmp/actions-completed-scratch-recovery-batch10/private-complete-inventory-and-recovery.json",
+    "bytes": 12400253,
+    "sha256": "396d48ffbc80a31f65079466b696fa01b9146dd68545d29a1796e7db261eac14"
+  },
+  "private_inventory_mode": "0600",
+  "archives_parent_mode": "0700",
+  "two_archives": [
+    {
+      "namespace": "d5c182665e3c83c2",
+      "archive": {
+        "path": "/tmp/actions-completed-scratch-recovery-batch10/d5c182665e3c83c2.tar.gz",
+        "bytes": 248924046,
+        "sha256": "4cd6f0b8862b760da7c94d06200dc3e244558c1c98260fe1bbbe0f8b25d17dad"
+      },
+      "root_directory_header": 1,
+      "members_verified": 14852,
+      "kinds": {
+        "file": 11588,
+        "directory": 2842,
+        "symlink": 415,
+        "fifo": 7,
+        "hardlink_headers": 3
+      },
+      "resolved_internal_hardlink_data_verified": 3,
+      "logical_regular_file_bytes_verified": 588774516,
+      "completed_recycle_marker_verified": true,
+      "expanded_namespace_absent": true
+    },
+    {
+      "namespace": "e39d138c1a852cdf",
+      "archive": {
+        "path": "/tmp/actions-completed-scratch-recovery-batch10/e39d138c1a852cdf.tar.gz",
+        "bytes": 248928534,
+        "sha256": "0471b635e927aed0cf995df713914ae0ac101a6654734bd8b110b9ae88cb4b4e"
+      },
+      "root_directory_header": 1,
+      "members_verified": 14855,
+      "kinds": {
+        "file": 11592,
+        "directory": 2842,
+        "symlink": 414,
+        "fifo": 7,
+        "hardlink_headers": 3
+      },
+      "resolved_internal_hardlink_data_verified": 3,
+      "logical_regular_file_bytes_verified": 588774673,
+      "completed_recycle_marker_verified": true,
+      "expanded_namespace_absent": true
+    }
+  ],
+  "all_inventory_member_names_exact_unique": true,
+  "regular_and_hardlink_bytes_size_SHA256_exact": true,
+  "member_mode_uid_gid_exact": true,
+  "symlink_targets_exact_without_dereferencing": true,
+  "internal_hardlink_targets_bounded_to_same_archive_and_payloads_exact": true,
+  "completed_recycle_now_true_markers_verified": true,
+  "existing_two_expanded_namespaces_absent": true,
+  "source_recovery_script": {
+    "path": "/tmp/actions-capacity-recovery-batch10.py",
+    "bytes": 5258,
+    "sha256": "296ba4d229b2fcba2302413af420e95283ef5701fabec1a7ffdd4c78539cb90c"
+  },
+  "historical_ordering": "Existing script verifies archive, rechecks full inventory and live handles, then writes retained inventory and removes only exact completed namespace; Independent review does not rerun script or reconstruct historical live fd observation.",
+  "limitations": [
+    "Expanded originals intentionally removed; original byte identity is independently checked against retained pre-removal complete inventory and archive summary, not surviving expanded files.",
+    "Inventory does not record original inode equivalence, root-directory metadata, ACL/xattrs or full nanosecond archive mtime roundtrip; independent GO covers all named member bytes/modes/uidgid/symlink targets and archived internal-hardlink data, not unspecified metadata.",
+    "Prior no-live-fd/cwd precondition and untouched-other-path claims are supported by recorded scope/script, not a retroactive independent full filesystem/process census.",
+    "No private archive contents/member names or complete private inventory admitted to Git or tool output; only safe named-namespace aggregate fields and hashes.",
+    "Source/native/consumer/cache/venv unchanged historical assertion not a fresh hash of concurrently mutating source writers. Failed ENOSPC gates remain failed; new bounded gate replay required."
+  ],
+  "review_seconds": 7.289,
+  "upstream": "none"
+}

@@ -1,0 +1,36 @@
+{
+  "status": "SCOPED_COMPLETED_SCRATCH_RECOVERY_VERIFIED",
+  "archives": [
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/7a5f87608714acdd",
+      "archive": "/dev/shm/actions-completed-scratch-recovery-batch15/7a5f87608714acdd.tar.gz",
+      "archive_bytes": 249431769,
+      "archive_sha256": "710835797c07bb6fcef9b8216e9f52150b38cc5daf5ded8233399702c5332548",
+      "verified_members": 15082,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    }
+  ],
+  "algorithm_scope": "Same already independently reviewed inventory/archive/hash/mode/uidgid/symlink/internal-hardlink-resolution before exact expanded namespace removal; no inferred ACL/xattr/inode/rootmetadata/precise-TAR-mtime or retroactive complete handle census",
+  "private_inventory_binding": {
+    "path": "/dev/shm/actions-completed-scratch-recovery-batch15/private-complete-inventory-and-recovery.json",
+    "bytes": 6273198,
+    "sha256": "c5514286d0fc7d9d4ceea4fd2cd95557b2acf1bff04bff249c97c868520d3020"
+  },
+  "recovery_script_binding": {
+    "path": "/tmp/actions-capacity-recovery-batch15.py",
+    "bytes": 5244,
+    "sha256": "d8e04cf568d311aa8aa17ca030a41d12a4af85ad5b15ff7fdc09ec6c6eb8604d"
+  },
+  "terminal_log_binding": {
+    "path": "/tmp/actions-capacity-recovery-batch15.log",
+    "bytes": 200,
+    "sha256": "4158a7b9cc838887195185ce895ad77f9a71fb949283c3294057310a1ad6178e"
+  },
+  "recorded_members": 15082,
+  "workspace_free_bytes_after": 2605572096,
+  "preserved": "Prior33 archives+14 indices/V5runner09cdc/failed563d existence remain separate independent reference verification; no historical requalification",
+  "Documentation_improvement": "Existing7d070 capacity lesson adequate for unchanged reviewed algorithm; no cosmetic delta",
+  "upstream_disposition": "none",
+  "existing_mount_allocation": "One archive on existing /dev/shm; distinct unused /tmp staging directory; no infrastructure provisioned"
+}

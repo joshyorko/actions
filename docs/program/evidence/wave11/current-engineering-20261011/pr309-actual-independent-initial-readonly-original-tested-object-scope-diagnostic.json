@@ -1,0 +1,9 @@
+{
+  "status": "READER_COMMON_GIT_ASSUMPTION_CORRECTED_NO_SOURCE_GATE_FAILURE",
+  "initial_reader": {
+    "path": "/workspace/engineering/pr309-actual-integration-independent-review/verify-readonly-actual-integration.py",
+    "bytes": 8760,
+    "sha256": "f9d8f63850ab0ab6a2ccd03c9becbde5a3951b243527c657625c3274d27944e2"
+  },
+  "scope": "Actuala0d/source831 commonGitobjects present; original tested012cd8 object absent as retained Windows owner explicitly states. Named corrected inspector instead verifies original logSHA checkout line113 and authenticated retained complete commit/tree API1421 equality. No fetch/download/reconstruction/new API call or original tested commit relabel."
+}

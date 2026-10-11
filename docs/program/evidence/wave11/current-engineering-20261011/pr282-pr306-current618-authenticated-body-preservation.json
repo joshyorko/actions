@@ -1,0 +1,32 @@
+{
+  "282": {
+    "body_path": "/workspace/engineering/pr282-current618-body.md",
+    "body_bytes": 15308,
+    "body_sha256": "47570eab4986afe6a9ebefe12119c2a1cd2a93682acff3e522450b159b1f8ddd",
+    "authenticated_readback": {
+      "path": "/workspace/engineering/pr282-current618-body-authenticated.raw.private.json",
+      "bytes": 31181,
+      "sha256": "765a4854663f54229c9689c65f69d3c0b60770da08c843b8b7dc0dee96635af4"
+    },
+    "head": "e736f846557ed1d603348e97c5eb80060d62e3e2",
+    "base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "draft": true,
+    "complete_previous_context_preserved": true,
+    "source_only_not_CI_admission": true
+  },
+  "306": {
+    "body_path": "/workspace/engineering/pr306-current618-body.md",
+    "body_bytes": 9077,
+    "body_sha256": "f352016506af2fdee0e81ef82a822cc2873d565d291038985aaaaf0245778b54",
+    "authenticated_readback": {
+      "path": "/workspace/engineering/pr306-current618-body-readback.raw.private.json",
+      "bytes": 24947,
+      "sha256": "4b7b6b60abdee88e873145830d126c3f76f6c3d22456fc67b782e4ae59d61aff"
+    },
+    "head": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+    "base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "draft": true,
+    "complete_previous_context_preserved": true,
+    "source_only_not_CI_admission": true
+  }
+}

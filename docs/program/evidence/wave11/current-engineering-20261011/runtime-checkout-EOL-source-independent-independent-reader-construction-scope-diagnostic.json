@@ -1,0 +1,9 @@
+{
+  "status": "READER_PREDICATE_SCOPE_CORRECTED_NO_PRODUCT_GATE_FAILURE",
+  "initial_inspector": {
+    "path": "/workspace/engineering/runtime-checkout-eol-independent-final-source-review/verify-readonly-source-final.py",
+    "bytes": 17860,
+    "sha256": "7aa55ef3bf381ab89f9f37eead642436bfe1b133071b0e504b15af9cc38bb0e0"
+  },
+  "observed_scope": "Both original RED test functions AST exact in final permanent workflow module. Loader helper differs only importlib spec module label workflow_generator\u2192checkout_workflow_generator, a disjoint test module namespace. Initial reader incorrectly required helper namespace label unchanged. Corrected named reader verifies that sole literal change. Earlier metadata shape probes mistook native inventory list and raw18 boolean, failed read-only before admission; no candidate run/source mutation."
+}

@@ -1,0 +1,23 @@
+{
+  "status": "EXPLICIT_IMMUTABLE_GIT_OBJECT_FETCH_AND_FULL_GIT_READBACK",
+  "object": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+  "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+  "ordered_parents": [
+    "a70993fafc99a9f94041485542d5a720797ca394",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "raw_commit_bytes": 1197,
+  "raw_commit_sha256": "ddef5b3cfadacc7352aacfbfcd83dd2c15052c2961c0c410de05b67b43823f4e",
+  "fetch_command": "git fetch --no-tags --no-write-fetch-head origin e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+  "fetch_exit": 0,
+  "no_named_ref_or_FETCH_HEAD_write": true,
+  "existing_authority": {
+    "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/OWNERFINAL-current618-partial-distribution-integrity-v2.json",
+    "bytes": 12170,
+    "sha256": "9b406fdf505871e6790d7a4233d0b8c075ae6f170f2c5b7a954bbca0f0d46236"
+  },
+  "working_head": "e736f846557ed1d603348e97c5eb80060d62e3e2",
+  "working_status": "",
+  "meaning": "Full actual synthetic Git object is now local. Builder identity stays distinct from tree-equivalent actual618; no inferred producer or publication.",
+  "upstream_disposition": "none"
+}

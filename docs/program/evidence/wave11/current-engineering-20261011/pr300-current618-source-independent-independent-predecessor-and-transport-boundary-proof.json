@@ -1,0 +1,119 @@
+{
+  "all1421_regular_user_executable_bits_exact_Git": true,
+  "canonical_parentlessons": "Threeway union has zero divergent leaves and no dropped paths. Child removes exact8-line addition to reproduce parent guide byte-for-byte; original provenance guide fulltransport scope retained unchanged.",
+  "pinned_default_Rcc_18_19_3_fixture_path": "action_server/tests/action_server_tests/fixtures.py",
+  "predecessor_nested_file_bindings": [
+    {
+      "bytes": 256395,
+      "context": "predecessor.complete_prospective_union_proof",
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/complete-object-only-prospective-union-proof.json",
+      "sha256": "1a281ce07571e645bb2dd5b34e3a82147f5d2c6f8403da6c1c966741f2863572"
+    },
+    {
+      "bytes": 1367,
+      "context": "predecessor.retained_historical_receipts[0]",
+      "path": "/workspace/engineering/pr300-readonly-preparation.json",
+      "sha256": "a7913b199135a5fa8c0af27302e099f9ec9ca6f7d2dc91427150a8b128797adc"
+    },
+    {
+      "bytes": 40285,
+      "context": "predecessor.retained_historical_receipts[1]",
+      "path": "/workspace/engineering/pr300-merge-preview.txt",
+      "sha256": "e0909ecfbf868a59ed771ca634f916301af2552b92066abf73b2ea0c70e658ab"
+    },
+    {
+      "bytes": 7411,
+      "context": "predecessor.retained_historical_receipts[2]",
+      "path": "/workspace/engineering/reconciliation/pr300-live.json",
+      "sha256": "e26b49afdd2ff1b906dc14dc72a95d9ade78996ee7090304e007ce3406998f35"
+    },
+    {
+      "bytes": 4540,
+      "context": "predecessor.retained_historical_receipts[3]",
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/current-open-pr-audit-20261010T1753Z/pr300-loopback-review.json",
+      "sha256": "7562e2aaf7bd357a6d208faf629b53b7a0d25f51cb46ab74bfe1fa7d748a95d5"
+    },
+    {
+      "bytes": 64480,
+      "context": "predecessor.private_live_API",
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/private-authenticated-PR300-preparation-readbacks.json",
+      "sha256": "156a96b547d63947aa63005949cc77c87aa3dd9ec0dbbf7e8f11c872de96d8ef"
+    },
+    {
+      "bytes": 3697,
+      "context": "predecessor.documentation_improvement.Exact_proposed_delta",
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/canonical-original-accepted-GET-transport-guide-proposed.patch",
+      "sha256": "23355d62bd9e3c1c9537e6432e0821e10b0e65ba7f0faa6779351530701acb92"
+    },
+    {
+      "bytes": 550,
+      "context": "predecessor.documentation_improvement.Existing_exact_reader_scope",
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/canonical-existing-reader-acquisition-scope-verified.txt",
+      "sha256": "40282f966ad96a496f6266c333fdb9f64c17e5f5b1698df454918585554e0795"
+    },
+    {
+      "bytes": 10373,
+      "context": "predecessor.prior_preintegration_handoff_preserved",
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/immutable-after299-existing-PR300-source-handoff.json",
+      "sha256": "6c517a6372149a3a7073a34023d0d00c0a5e6b59f3f43824c89e2a76451b360e"
+    },
+    {
+      "bytes": 1567,
+      "context": "predecessor.actual299.root_readback",
+      "path": "/workspace/engineering/pr299-actual-integration.json",
+      "sha256": "327250afa7750b41b8fa6c950ba068a7857376856444da67e0711f98966afed5"
+    },
+    {
+      "bytes": 2745,
+      "context": "predecessor.actual299.own_bounded_commit_API_readback",
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/private-authenticated-actual299-commit.json",
+      "sha256": "a63e8fbb2e467143b4c4254a28e6ffc58a70b387cb6502c6c577b110965d753c"
+    },
+    {
+      "bytes": 12265,
+      "context": "predecessor.prior_actual299_preparation_v3_preserved",
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/immutable-actual299-existing-PR300-source-handoff-v3.json",
+      "sha256": "616988069dfe033311ac4a208bbbaf41d0112d9899ca1ccd85acf926a3f30c55"
+    },
+    {
+      "bytes": 12763,
+      "context": "predecessor.post299_live_named_refs.private_original_API",
+      "path": "/workspace/engineering/pr300-after299-engineering-preparation/private-authenticated-post299-live-named-ref-readbacks.json",
+      "sha256": "f52e6c171a197bdeaf58a5cbcaed63e2607f47dd882de4ca609538c90dca0a29"
+    }
+  ],
+  "predecessor_receipt_exact_current_refs": "/workspace/engineering/pr300-after299-engineering-preparation/immutable-actual299-existing-PR300-source-handoff-v4.json",
+  "retained_historical_four_exact": [
+    {
+      "bytes": 1367,
+      "path": "/workspace/engineering/pr300-readonly-preparation.json",
+      "sha256": "a7913b199135a5fa8c0af27302e099f9ec9ca6f7d2dc91427150a8b128797adc"
+    },
+    {
+      "bytes": 40285,
+      "path": "/workspace/engineering/pr300-merge-preview.txt",
+      "sha256": "e0909ecfbf868a59ed771ca634f916301af2552b92066abf73b2ea0c70e658ab"
+    },
+    {
+      "bytes": 7411,
+      "path": "/workspace/engineering/reconciliation/pr300-live.json",
+      "sha256": "e26b49afdd2ff1b906dc14dc72a95d9ade78996ee7090304e007ce3406998f35"
+    },
+    {
+      "bytes": 4540,
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/current-open-pr-audit-20261010T1753Z/pr300-loopback-review.json",
+      "sha256": "7562e2aaf7bd357a6d208faf629b53b7a0d25f51cb46ab74bfe1fa7d748a95d5"
+    }
+  ],
+  "source_transport_boundary_verified": {
+    "CHUNK_BYTES": 65536,
+    "GET_only_HEAD405_Range416": true,
+    "actual_start_server_endpoint_dependency_outer_installation_gate": true,
+    "descriptor_yield_after_transaction_exit": true,
+    "native_nine_foundation_paths": "preserved source identities, not nine native execution cases",
+    "optional_keyword_only_default_disabled": true,
+    "persisted_grant_authorization_and_provider_acquisition_in_same_transaction": true,
+    "revocation": "future resolutions only; existing authorized stream not actively reauthorized",
+    "trusted_callback_returns_Actor_before_resolver": true
+  }
+}

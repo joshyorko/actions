@@ -1,0 +1,16 @@
+{
+  "head": "c75dfa6969c2c562a59a967e2e674fea6c8af457",
+  "tree": "6a4580843f2f927e7911bf316a32f8ceab53179e",
+  "branch": "feat/canvas-template-20261010",
+  "clean": true,
+  "original776_receipt": {
+    "path": "/workspace/engineering/pr282-actual776-refresh/frozen-source-receipt.json",
+    "sha256": "58ae1c1657c4cc310d1b43c70391b4b7038499d6d07cb215112761fa81621977",
+    "bytes": 17901
+  },
+  "measured_prior_evidence_count": 43,
+  "prior_all_evidence_exact": true,
+  "target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "target_tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+  "capacity": 1718149120
+}

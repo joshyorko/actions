@@ -1,0 +1,209 @@
+{
+  "body_equality_source_scope": "Linux/macOS/sdist exact; Windows rawdifferences and mode unavailable retained.",
+  "sdist": {
+    "complete_member_bytes_hash_size_mode_uid_gid_inventory": true,
+    "embedded_Rcc_member_count": 0,
+    "generated_OAuth_categories": {
+      "actions_config": "EMPTY_STRING",
+      "default_user_config": "EMPTY_STRING"
+    },
+    "original_tar": {
+      "bytes": 1020336,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3.tar.gz",
+      "sha256": "b165562bf9443104e2eaeebf91275ce65c661f350f2715857d27a9ba967b2cca"
+    },
+    "original_tar_members": 221,
+    "root_generated_setup_PKGINFO_and_tracked_README_build_pyproject_proof": "/workspace/engineering/pr221-current618-wheel-integrity-owned/safe-complete-sdist-root-source-bindings.json",
+    "source_pyproject_equal": true,
+    "tracked_Git_body_equal": 215,
+    "tracked_Git_full_permissions_equal": 215
+  },
+  "wheels": [
+    {
+      "Python_member_count_derived": 202,
+      "generated_OAuth_categories": {
+        "actions_config": "EMPTY_STRING",
+        "default_user_config": "EMPTY_STRING"
+      },
+      "generated_Rcc_data_binding": {
+        "bytes": 22282402,
+        "mode": "0o100755",
+        "public_path": "actions/server/bin/rcc-18.19.3",
+        "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        "version_execution_or_native_qualification": "NOT_RUN"
+      },
+      "generated_static_Git_body_equal": true,
+      "generated_untracked_members": [
+        "actions/server/_oauth2_config.py",
+        "actions/server/bin/rcc-18.19.3"
+      ],
+      "nonPython_member_count_derived": 15,
+      "original_wheel": {
+        "bytes": 14180835,
+        "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "sha256": "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6"
+      },
+      "platform": "Linux",
+      "python_ABI": "cp312",
+      "tracked_Git_body_different": 0,
+      "tracked_Git_body_equal": 215,
+      "tracked_Git_full_permissions_equal": 215,
+      "tracked_Unix_permissions_unavailable": 0
+    },
+    {
+      "Python_member_count_derived": 202,
+      "generated_OAuth_categories": {
+        "actions_config": "EMPTY_STRING",
+        "default_user_config": "EMPTY_STRING"
+      },
+      "generated_Rcc_data_binding": {
+        "bytes": 22282402,
+        "mode": "0o100755",
+        "public_path": "actions/server/bin/rcc-18.19.3",
+        "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+        "version_execution_or_native_qualification": "NOT_RUN"
+      },
+      "generated_static_Git_body_equal": true,
+      "generated_untracked_members": [
+        "actions/server/_oauth2_config.py",
+        "actions/server/bin/rcc-18.19.3"
+      ],
+      "nonPython_member_count_derived": 15,
+      "original_wheel": {
+        "bytes": 14180835,
+        "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "sha256": "2f856d2f27dba472aa84e954245f63ecd879e102751a300eb0fd0b361486cdfd"
+      },
+      "platform": "Linux",
+      "python_ABI": "cp313",
+      "tracked_Git_body_different": 0,
+      "tracked_Git_body_equal": 215,
+      "tracked_Git_full_permissions_equal": 215,
+      "tracked_Unix_permissions_unavailable": 0
+    },
+    {
+      "Python_member_count_derived": 202,
+      "generated_OAuth_categories": {
+        "actions_config": "EMPTY_STRING",
+        "default_user_config": "EMPTY_STRING"
+      },
+      "generated_Rcc_data_binding": {
+        "bytes": 19985408,
+        "mode": "0o100755",
+        "public_path": "actions/server/bin/rcc-18.19.3.exe",
+        "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+        "version_execution_or_native_qualification": "NOT_RUN"
+      },
+      "generated_static_Git_body_equal": false,
+      "generated_untracked_members": [
+        "actions/server/_oauth2_config.py",
+        "actions/server/bin/rcc-18.19.3.exe"
+      ],
+      "nonPython_member_count_derived": 15,
+      "original_wheel": {
+        "bytes": 11634753,
+        "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+        "sha256": "4be1bd325a3d5061d2c3aa7c1293caeedc65f46944613c0b623ac96c7081d883"
+      },
+      "platform": "Windows",
+      "python_ABI": "cp312",
+      "tracked_Git_body_different": 179,
+      "tracked_Git_body_equal": 36,
+      "tracked_Git_full_permissions_equal": 0,
+      "tracked_Unix_permissions_unavailable": 215
+    },
+    {
+      "Python_member_count_derived": 202,
+      "generated_OAuth_categories": {
+        "actions_config": "EMPTY_STRING",
+        "default_user_config": "EMPTY_STRING"
+      },
+      "generated_Rcc_data_binding": {
+        "bytes": 19985408,
+        "mode": "0o100755",
+        "public_path": "actions/server/bin/rcc-18.19.3.exe",
+        "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+        "version_execution_or_native_qualification": "NOT_RUN"
+      },
+      "generated_static_Git_body_equal": false,
+      "generated_untracked_members": [
+        "actions/server/_oauth2_config.py",
+        "actions/server/bin/rcc-18.19.3.exe"
+      ],
+      "nonPython_member_count_derived": 15,
+      "original_wheel": {
+        "bytes": 11634753,
+        "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp313-cp313-win_amd64.whl",
+        "sha256": "fe5c721eab513d837f98a442564ece4af90dc123007b71a762eae10ac29ff605"
+      },
+      "platform": "Windows",
+      "python_ABI": "cp313",
+      "tracked_Git_body_different": 179,
+      "tracked_Git_body_equal": 36,
+      "tracked_Git_full_permissions_equal": 0,
+      "tracked_Unix_permissions_unavailable": 215
+    },
+    {
+      "Python_member_count_derived": 202,
+      "generated_OAuth_categories": {
+        "actions_config": "EMPTY_STRING",
+        "default_user_config": "EMPTY_STRING"
+      },
+      "generated_Rcc_data_binding": {
+        "bytes": 20886722,
+        "mode": "0o100755",
+        "public_path": "actions/server/bin/rcc-18.19.3",
+        "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
+        "version_execution_or_native_qualification": "NOT_RUN"
+      },
+      "generated_static_Git_body_equal": true,
+      "generated_untracked_members": [
+        "actions/server/_oauth2_config.py",
+        "actions/server/bin/rcc-18.19.3"
+      ],
+      "nonPython_member_count_derived": 15,
+      "original_wheel": {
+        "bytes": 13276496,
+        "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl",
+        "sha256": "ee7841c8d0e565314e8ced177f0f9d0ea21adb4a7382594bcfe5562e01b2d5d6"
+      },
+      "platform": "macOS",
+      "python_ABI": "cp312",
+      "tracked_Git_body_different": 0,
+      "tracked_Git_body_equal": 215,
+      "tracked_Git_full_permissions_equal": 215,
+      "tracked_Unix_permissions_unavailable": 0
+    },
+    {
+      "Python_member_count_derived": 202,
+      "generated_OAuth_categories": {
+        "actions_config": "EMPTY_STRING",
+        "default_user_config": "EMPTY_STRING"
+      },
+      "generated_Rcc_data_binding": {
+        "bytes": 20886722,
+        "mode": "0o100755",
+        "public_path": "actions/server/bin/rcc-18.19.3",
+        "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
+        "version_execution_or_native_qualification": "NOT_RUN"
+      },
+      "generated_static_Git_body_equal": true,
+      "generated_untracked_members": [
+        "actions/server/_oauth2_config.py",
+        "actions/server/bin/rcc-18.19.3"
+      ],
+      "nonPython_member_count_derived": 15,
+      "original_wheel": {
+        "bytes": 13276496,
+        "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl",
+        "sha256": "90497c3879e3644e7fffa5be379f613a669926fb795561e1af2b653bd97c5019"
+      },
+      "platform": "macOS",
+      "python_ABI": "cp313",
+      "tracked_Git_body_different": 0,
+      "tracked_Git_body_equal": 215,
+      "tracked_Git_full_permissions_equal": 215,
+      "tracked_Unix_permissions_unavailable": 0
+    }
+  ]
+}

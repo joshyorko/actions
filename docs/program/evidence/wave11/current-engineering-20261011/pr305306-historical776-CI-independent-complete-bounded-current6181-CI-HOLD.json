@@ -1,0 +1,734 @@
+{
+  "schema": "actions-pr305-pr306-bounded-current6181-CI-census/v1",
+  "observed_at": "2026-10-11T09:13:34.808Z",
+  "target_named_ref_before_after": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "no_terminal_failure": true,
+  "no_log_download_authorization_triggered": true,
+  "no_poll_retry_cancel_source_or_merge_mutation": true,
+  "private_original_API": {
+    "path": "/workspace/engineering/pr305-pr306-current6181-bounded-CI-review/private-authenticated-complete-bounded-census.json",
+    "bytes": 1011967,
+    "sha256": "95344d7ada77ac39174b931e9520f4f35b3587b48d3c888393fc8631fe4040ce"
+  },
+  "policy": {
+    "named_target_protected": false,
+    "branch_protection_metadata": {
+      "enabled": false,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "visible_rulesets": [],
+    "traditional_protection": {
+      "error": "GitHub API error 403: {\"message\":\"Resource not accessible by integration\",\"documentation_url\":\"https://docs.github.com/rest/branches/branch-protection#get-branch-protection\",\"status\":\"403\"}",
+      "error_code": "FORBIDDEN",
+      "error_data": {
+        "message": "Resource not accessible by integration",
+        "documentation_url": "https://docs.github.com/rest/branches/branch-protection#get-branch-protection",
+        "status": "403"
+      }
+    },
+    "disposition": "403 administrative policy surface remains UNKNOWN; visible rulesets empty/branch metadata disabled does not grant bypass or settle inaccessible endpoint."
+  },
+  "subjects": [
+    {
+      "PR": 305,
+      "decision": "HOLD_ACTUAL_TARGET_ADVANCED_SOURCE_REFRESH_REQUIRED_OLD_TARGET_METADATA20SUCCESS_ONLY",
+      "head": "6390270cd07851448b7b325c81c98dc11a1d3a17",
+      "actual_named_target_before_after": "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "payload_base": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "current_authenticated_cached_synthetic": {
+        "sha": "d61a3915ac6680dc592328e371874dff6884e1bf",
+        "tree": "6ab0a1c559b583eb7bfd442fa4260aa75af91fdf",
+        "ordered_parents": [
+          "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+          "6390270cd07851448b7b325c81c98dc11a1d3a17"
+        ],
+        "still_old776": true
+      },
+      "PR_draft": true,
+      "checks_and_registered_jobs": 20,
+      "counts": {
+        "success": 20
+      },
+      "declared_total": 20,
+      "not_instantiated": 0,
+      "late_publisher": "Runtime PyPI publish3.12 depends build-sdist and allthree build-wheels; no job if excludes PR; publisher collects and validates while actual registry steps push-only",
+      "pending_jobs": [],
+      "all_current_registered_job_ids": [
+        114428502713,
+        114428502958,
+        114428503017,
+        114428503136,
+        114428503083,
+        114428503169,
+        114428503228,
+        114428502678,
+        114428502784,
+        114428502827,
+        114428502869,
+        114428502874,
+        114428502881,
+        114428502723,
+        114428502842,
+        114428502868,
+        114428502923,
+        114431868201,
+        114428502753,
+        114428495693
+      ],
+      "all_job_bindings": [
+        {
+          "id": 114428502713,
+          "run": 38125367681,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428502958,
+          "run": 38125367745,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428503017,
+          "run": 38125367745,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428503136,
+          "run": 38125367745,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428503083,
+          "run": 38125367639,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428503169,
+          "run": 38125367639,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428503228,
+          "run": 38125367639,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428502678,
+          "run": 38125367619,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428502784,
+          "run": 38125367619,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428502827,
+          "run": 38125367619,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428502869,
+          "run": 38125367619,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428502874,
+          "run": 38125367619,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428502881,
+          "run": 38125367619,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428502723,
+          "run": 38125367676,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428502842,
+          "run": 38125367676,
+          "name": "build-wheels (macos-15)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428502868,
+          "run": 38125367676,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428502923,
+          "run": 38125367676,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114431868201,
+          "run": 38125367676,
+          "name": "publish (3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428502753,
+          "run": 38125367654,
+          "name": "coverage",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428495693,
+          "run": 38125365170,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "run_binding": [
+        {
+          "run": 38125367681,
+          "workflow": ".github/workflows/ai-audit.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 1,
+          "registered_jobs": 1,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38125367745,
+          "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 3,
+          "registered_jobs": 3,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38125367639,
+          "workflow": ".github/workflows/actions_runtime_tests.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 3,
+          "registered_jobs": 3,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38125367619,
+          "workflow": ".github/workflows/developer_toolkit.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 6,
+          "registered_jobs": 6,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38125367676,
+          "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 5,
+          "registered_jobs": 5,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38125367654,
+          "workflow": ".github/workflows/coverage-gate.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 1,
+          "registered_jobs": 1,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38125365170,
+          "workflow": ".github/workflows/copilot-setup-steps.yml",
+          "event": "push",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 1,
+          "registered_jobs": 1,
+          "not_instantiated": 0
+        }
+      ],
+      "declared_inventory": {
+        "path": "/workspace/engineering/pr305-pr306-current6181-bounded-CI-review/pr305-declared-current-source-workflow-job-inventory.json",
+        "bytes": 40960,
+        "sha256": "01937f748c8288b7a4547f781e18c98eca8f89350b18339f8390c4f4665e85eb"
+      },
+      "source_acceptance_preserved": {
+        "path": "/workspace/engineering/pr305-actual776-independent-review/independent-frozen-source-review.json",
+        "bytes": 6329,
+        "sha256": "3c3524ca1338e5bef2c4a28cccf0aebf3565f984e207fd5154d46b53330ed92c"
+      },
+      "reviews_threads_requested": {
+        "submitted": 0,
+        "unresolved_threads": 0,
+        "requested_reviewers": 0,
+        "requested_teams": 0
+      },
+      "statuses_source_synthetic": 0,
+      "named_source_before_after_stable": true,
+      "prospective_union_preparation": {
+        "common_base": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "current_source_leaves": 1410,
+        "new_target_leaves": 1419,
+        "union_path_count_before_any_resolution": 1420,
+        "source_delta_paths": [
+          "action_server/tests/action_server_tests/mcp/test_canvas_runtime_admission.py",
+          "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+          "action_server/tests/action_server_tests/test_browser_origin_acceptance.py",
+          "docs/skills/repository-operations.md"
+        ],
+        "actual_target_delta_paths": [
+          "action_server/src/actions/server/_actions_run.py",
+          "action_server/src/actions/server/_api_analytics.py",
+          "action_server/src/actions/server/_api_run.py",
+          "action_server/src/actions/server/_models.py",
+          "action_server/src/actions/server/_runs_state_cache.py",
+          "action_server/src/actions/server/migrations/__init__.py",
+          "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+          "action_server/src/actions/server/run_outputs/__init__.py",
+          "action_server/src/actions/server/run_outputs/filesystem.py",
+          "action_server/src/actions/server/run_outputs/models.py",
+          "action_server/src/actions/server/run_outputs/service.py",
+          "action_server/src/actions/server/run_outputs/types.py",
+          "action_server/tests/action_server_tests/mcp/test_alias_history.py",
+          "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+          "action_server/tests/action_server_tests/run_outputs/test_concurrency.py",
+          "action_server/tests/action_server_tests/run_outputs/test_filesystem.py",
+          "action_server/tests/action_server_tests/run_outputs/test_migration.py",
+          "action_server/tests/action_server_tests/run_outputs/test_service.py",
+          "action_server/tests/action_server_tests/test_artifact_storage.py",
+          "action_server/tests/action_server_tests/test_database.py",
+          "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt",
+          "action_server/tests/action_server_tests/test_database_shared.py",
+          "action_server/tests/action_server_tests/test_server_websockets.py",
+          "docs/skills/provenance-observability.md",
+          "docs/skills/repository-operations.md"
+        ],
+        "shared_changed_paths": [
+          "docs/skills/repository-operations.md"
+        ],
+        "both_source_and_target_whole_github_equal_common_base": true,
+        "scope": "Structural read-only comparison only. No prospective actual6181 merge/tree computed or frozen; shared application-test and guidance changes require ordinary union preservation/review. No old-source CI admission of new union."
+      },
+      "actual_runner_checkout": "NOT_INDEPENDENTLY_QUALIFIED_CURRENT_TASK; API head SHA/default checkout/stepSUCCESS metadata is not raw runner checkout. No terminal failure observed; log acquisition condition not met, no logs or artifacts downloaded.",
+      "root_next_action": "Keep historical source776 receipts; ordinary refresh existing branch against actual6181 after current authorized writers release, preserve full union/source history and both accepted guide lessons, then independent source review and fresh complete current-tree configured/hosted gates. No cause-fix claim or rerun now."
+    },
+    {
+      "PR": 306,
+      "decision": "HOLD_ACTUAL_TARGET_ADVANCED_SOURCE_REFRESH_REQUIRED_PENDING_DECLARED_JOBS",
+      "head": "662014533d8104c1998bce26d91211140acc08e5",
+      "actual_named_target_before_after": "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "payload_base": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "current_authenticated_cached_synthetic": {
+        "sha": "4ac174fdf8988f2076137a589e4294b49a1a3c16",
+        "tree": "118b7d6f7c51107a08e062825c5fabbb5496975c",
+        "ordered_parents": [
+          "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+          "662014533d8104c1998bce26d91211140acc08e5"
+        ],
+        "still_old776": true
+      },
+      "PR_draft": true,
+      "checks_and_registered_jobs": 19,
+      "counts": {
+        "success": 16,
+        "queued": 2,
+        "in_progress": 1
+      },
+      "declared_total": 20,
+      "not_instantiated": 1,
+      "late_publisher": "Runtime PyPI publish3.12 depends build-sdist and allthree build-wheels; no job if excludes PR; publisher collects and validates while actual registry steps push-only",
+      "pending_jobs": [
+        {
+          "id": 114428629486,
+          "run": 38125410206,
+          "name": "build-wheels (macos-15)",
+          "status": "queued"
+        },
+        {
+          "id": 114428629430,
+          "run": 38125410176,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "queued"
+        },
+        {
+          "id": 114428629297,
+          "run": 38125410194,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress"
+        }
+      ],
+      "all_current_registered_job_ids": [
+        114428629285,
+        114428629452,
+        114428629461,
+        114428629486,
+        114428629209,
+        114428629338,
+        114428629393,
+        114428629396,
+        114428629410,
+        114428629430,
+        114428629523,
+        114428629392,
+        114428629471,
+        114428629474,
+        114428629297,
+        114428629433,
+        114428629484,
+        114428629287,
+        114428624079
+      ],
+      "all_job_bindings": [
+        {
+          "id": 114428629285,
+          "run": 38125410206,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629452,
+          "run": 38125410206,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629461,
+          "run": 38125410206,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629486,
+          "run": 38125410206,
+          "name": "build-wheels (macos-15)",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 114428629209,
+          "run": 38125410176,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629338,
+          "run": 38125410176,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629393,
+          "run": 38125410176,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629396,
+          "run": 38125410176,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629410,
+          "run": 38125410176,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629430,
+          "run": 38125410176,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 114428629523,
+          "run": 38125410326,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629392,
+          "run": 38125410213,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629471,
+          "run": 38125410213,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629474,
+          "run": 38125410213,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629297,
+          "run": 38125410194,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114428629433,
+          "run": 38125410194,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629484,
+          "run": 38125410194,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428629287,
+          "run": 38125410196,
+          "name": "coverage",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114428624079,
+          "run": 38125408375,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "run_binding": [
+        {
+          "run": 38125410206,
+          "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "queued",
+          "conclusion": null,
+          "declared_jobs": 5,
+          "registered_jobs": 4,
+          "not_instantiated": 1
+        },
+        {
+          "run": 38125410176,
+          "workflow": ".github/workflows/developer_toolkit.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "queued",
+          "conclusion": null,
+          "declared_jobs": 6,
+          "registered_jobs": 6,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38125410326,
+          "workflow": ".github/workflows/ai-audit.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 1,
+          "registered_jobs": 1,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38125410213,
+          "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 3,
+          "registered_jobs": 3,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38125410194,
+          "workflow": ".github/workflows/actions_runtime_tests.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "in_progress",
+          "conclusion": null,
+          "declared_jobs": 3,
+          "registered_jobs": 3,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38125410196,
+          "workflow": ".github/workflows/coverage-gate.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 1,
+          "registered_jobs": 1,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38125408375,
+          "workflow": ".github/workflows/copilot-setup-steps.yml",
+          "event": "push",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 1,
+          "registered_jobs": 1,
+          "not_instantiated": 0
+        }
+      ],
+      "declared_inventory": {
+        "path": "/workspace/engineering/pr305-pr306-current6181-bounded-CI-review/pr306-declared-current-source-workflow-job-inventory.json",
+        "bytes": 42144,
+        "sha256": "16ea862c840afe83b05632ba9657501cef222d3b6ef6c4952697edabc55c53c8"
+      },
+      "source_acceptance_preserved": {
+        "path": "/workspace/engineering/pr306-actual776-independent-source-review/independent-frozen-current776-handoff-source-review.json",
+        "bytes": 11485,
+        "sha256": "6daedc292da9f47659c646ebc88267df3efa696480200fd651fce22691f11ae2"
+      },
+      "reviews_threads_requested": {
+        "submitted": 0,
+        "unresolved_threads": 0,
+        "requested_reviewers": 0,
+        "requested_teams": 0
+      },
+      "statuses_source_synthetic": 0,
+      "named_source_before_after_stable": true,
+      "prospective_union_preparation": {
+        "common_base": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "current_source_leaves": 1409,
+        "new_target_leaves": 1419,
+        "union_path_count_before_any_resolution": 1419,
+        "source_delta_paths": [
+          "action_server/src/actions/server/_database.py",
+          "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+          "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+          "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+          "action_server/tests/action_server_tests/test_database.py",
+          "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+          "docs/skills/repository-operations.md"
+        ],
+        "actual_target_delta_paths": [
+          "action_server/src/actions/server/_actions_run.py",
+          "action_server/src/actions/server/_api_analytics.py",
+          "action_server/src/actions/server/_api_run.py",
+          "action_server/src/actions/server/_models.py",
+          "action_server/src/actions/server/_runs_state_cache.py",
+          "action_server/src/actions/server/migrations/__init__.py",
+          "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+          "action_server/src/actions/server/run_outputs/__init__.py",
+          "action_server/src/actions/server/run_outputs/filesystem.py",
+          "action_server/src/actions/server/run_outputs/models.py",
+          "action_server/src/actions/server/run_outputs/service.py",
+          "action_server/src/actions/server/run_outputs/types.py",
+          "action_server/tests/action_server_tests/mcp/test_alias_history.py",
+          "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+          "action_server/tests/action_server_tests/run_outputs/test_concurrency.py",
+          "action_server/tests/action_server_tests/run_outputs/test_filesystem.py",
+          "action_server/tests/action_server_tests/run_outputs/test_migration.py",
+          "action_server/tests/action_server_tests/run_outputs/test_service.py",
+          "action_server/tests/action_server_tests/test_artifact_storage.py",
+          "action_server/tests/action_server_tests/test_database.py",
+          "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt",
+          "action_server/tests/action_server_tests/test_database_shared.py",
+          "action_server/tests/action_server_tests/test_server_websockets.py",
+          "docs/skills/provenance-observability.md",
+          "docs/skills/repository-operations.md"
+        ],
+        "shared_changed_paths": [
+          "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+          "action_server/tests/action_server_tests/test_database.py",
+          "docs/skills/repository-operations.md"
+        ],
+        "both_source_and_target_whole_github_equal_common_base": true,
+        "scope": "Structural read-only comparison only. No prospective actual6181 merge/tree computed or frozen; shared application-test and guidance changes require ordinary union preservation/review. No old-source CI admission of new union."
+      },
+      "actual_runner_checkout": "NOT_INDEPENDENTLY_QUALIFIED_CURRENT_TASK; API head SHA/default checkout/stepSUCCESS metadata is not raw runner checkout. No terminal failure observed; log acquisition condition not met, no logs or artifacts downloaded.",
+      "root_next_action": "Keep historical source776 receipts; ordinary refresh existing branch against actual6181 after current authorized writers release, preserve full union/source history and both accepted guide lessons, then independent source review and fresh complete current-tree configured/hosted gates. No cause-fix claim or rerun now."
+    }
+  ],
+  "Upstream disposition": "none",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Exact_existing_verified_lesson_excerpt": {
+      "path": "/workspace/engineering/pr299-current776-CI-admission-review/canonical-existing-job-trigger-policy-lessons.md",
+      "bytes": 2764,
+      "sha256": "4054b1d8bc396bd9a4c1054393cfe8cb3566638213ef9e04b34fc7ea1d42a7a4"
+    },
+    "Disposition": "ACCEPT/REUSE already accepted exact YAML trigger, declared dependent job, inaccessible policy and stale named-target/PR metadata lessons; no cosmetic paragraph or session diary",
+    "Durable learning captured": "Complete current registered20 job success is still tied to its authenticated source/old-target synthetic tuple. A target advance may leave both PR base and merge ref cached at the old parent. Compare named target and ordered synthetic parents; preserve old completion while requiring ordinary resolved-union review and fresh gates. A late publisher remains a declared gate before it instantiates.",
+    "Evidence": "Bounded42 API reads/pages for two exact heads: named6181 before/after while both payload base776 and cached d61/4ac parents776; source refs stable. Source YAML25 workflow files each derives6PR/19jobs+1auxPush.30520SUCCESS,30616SUCCESS3pending+1uninstantiatedpublisher. Current .github on source/newtarget unchanged common776, source306 shared changed tests require preserving both parent implementations. Dedicated policy403 and empty rulesets preserved.",
+    "Stale or ambiguous guidance removed": "No green subset or currently paginated19 count treated as declared20 completion; no publisher upload inference from PR job name; no metadata-only runner checkout/native claims; no old776 CI transfer to6181; no inferred policy bypass.",
+    "Remaining uncertainty": "No accepted actual6181 resolved union or new synthetic/workflow execution for305/306;306 Macwheel/primaryMacToolkit/WindowsRuntime and later publisher outcomes unknown; runtime/node cleanup/cause not sampled here. Backend/native/browser/provider/private/fullissue/release gates stay separate."
+  },
+  "review_safety": "One bounded census without polling. No failures observed, so no original job logs/artifacts acquired; no native/gateway/source tests, cause attribution, mutation, retries or cancellation. Existing immutable source3051216PASS12SKIP/ind3c352 and3061233PASS13SKIP/ind6dae retained."
+}

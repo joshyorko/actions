@@ -1,0 +1,296 @@
+{
+  "README_claim_original_receipts": {
+    "pr221-current-Linux-consumer-independent-independent-one-actual-current-linux-consumer-review.json": {
+      "accepted_measurements": {
+        "cleanup": "Four strict booleans TRUE; error/readers/observed live/observed zombie lists EMPTY; owned temporary root absent; elapsed19.646487973001058s. Captured PID/create-time scope only, not universal adoption or natural shutdown proof.",
+        "frozen_bindings": "Owner-announced checkpoint, root one-attempt authorization,645+10 command,1768 runner,3be2 input gate,57a8 proposal, helper snapshots/source hashes, original raw reports/logs/proof/cleanup retained and rehashed. No retry observed or introduced by reviewer.",
+        "input_admission": "Current originalZIP/wheel SHA and complete inventory reverified. 215 RECORD entries/214 SHA+size rows;209 tracked payloads equal actual776 and originald642;196 Python count derived from wheel",
+        "installed_member_admission": "All196 retained measured installed-member hashes equal exact wheel bytes; complete inventory names and wheel SHA match; prefix distinct base; four actual import origins prefix-contained and all sys.path/origins/members outside15 known checkout roots. Unchanged reviewed full-member private-Core guard runs before passed proof write.",
+        "public_floor": "Actual pip report exact Core1.0.2 and Helper1.0.3 URL/SHA/version identities; isolated uncached binary-only install argv, pip check reports no broken requirements; CLIstdout exact1.0.3 LF/stderr empty",
+        "raw_retention": "Original stdout/stderr, pip report, inventory, CLI output, install argv, attempt/input/proof/cleanup and gateway files retained privately; safe review exposes hashes/counts/scope only."
+      },
+      "exact_manifest_binding": {
+        "bytes": 8197,
+        "sha256": "f230cbdc1a7e4b9b5bb2f9323d7aa1e645c89778d0db9a554c32cf6bcae69967",
+        "source": "/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-one-actual-current-linux-consumer-review.json"
+      },
+      "execution_subject": {
+        "CLI": "1.0.3",
+        "actual_integration": {
+          "ordered_parents": [
+            "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+            "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+          ],
+          "producer_not_relabelled_actual": true,
+          "producer_tree_equal_actual": true,
+          "sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+          "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf"
+        },
+        "case_count": 1,
+        "case_kind": "Installed consumer runner case; no fabricated pytest/JUnit result",
+        "gateway_exit": 0,
+        "input_gate": {
+          "bytes": 7267,
+          "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission-v2.py",
+          "sha256": "3be2b971a43de3848c5a1aec59eecbeb6ac9dd796a81a6f2e489eab782492d1a"
+        },
+        "original_ZIP": {
+          "bytes": 28271148,
+          "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/original-Linux-wheels-11693813383.zip",
+          "sha256": "32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6"
+        },
+        "original_build": {
+          "actual_integration_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+          "actual_integration_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+          "api_head": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "artifact_id": 11693813383,
+          "artifact_zip_bytes": 28271148,
+          "artifact_zip_sha256": "32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6",
+          "attempt": 1,
+          "build_is_actual_integration_job": false,
+          "checkout": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+          "event": "pull_request",
+          "parents": [
+            "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+            "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+          ],
+          "publication": false,
+          "run_id": 38118859475,
+          "scope": "two originalLinuxwheels only; consumer selects cp312; seven-artifact gate HOLD",
+          "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+          "source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+          "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf"
+        },
+        "runner": {
+          "bytes": 19366,
+          "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+          "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+        },
+        "selected_wheel": {
+          "bytes": 14166151,
+          "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+          "sha256": "f82ee06c09e07bd224e797e11b7e58138920c0c8df49ef814ac50b0087d81c6c"
+        },
+        "skip_count": 0
+      },
+      "identity_scope": "Original PRbuild f5dd/controla346/source d642 remains original producer. Actual776 treea1c equals build/control tree, authenticating selected payload correspondence without relabeling original build as integration job. Old12340/7704/00d1 consumer is separate retained evidence.",
+      "postcleanup_limit": "Temporary environment removed by reviewed owner. Independent review compares recorded installed-member digest observations to original wheel and reviews the exact executed admission path; it does not claim a new rehash of absent installed files.",
+      "remaining_HOLD": [
+        "Both generated OAuth strings measured EMPTY; approved input authority and content qualification remain HOLD irrespective import success",
+        "Full seven-artifact cross-platform inventory, cp313 consumer, tag/upload/publication/official release provenance remain HOLD",
+        "Selected209 source correspondence and Linux installed-member/private-import gate do not replace complete producer/native qualification",
+        "No Runtime service/provider/backend/native/browser/ChatGPT/private01f/frozen-v6/full134 or full retained graph/release acceptance",
+        "No issue closure or broad Runtime221 release GO"
+      ],
+      "verdict": "GO_NARROW_ONE_ACTUAL_CURRENT_LINUX_CP312_INSTALLED_CONSUMER_ONLY"
+    },
+    "pr221-current776-terminal-CI-frozen-terminal-CI-successor.json": {
+      "CI": {
+        "PR_jobs_including_Copilot": 34,
+        "PR_workflows_including_Copilot": 13,
+        "Windows_terminal_success": {
+          "job": 114417512593,
+          "run": 38121679549,
+          "scope": "Metadata only; no native node/observer/cleanup counts inferred."
+        },
+        "additional_push_Copilot_jobs": 1,
+        "additional_push_Copilot_workflows": 1,
+        "all_expected_jobs_materialized": true,
+        "all_job_IDs_equal_check_IDs": true,
+        "all_jobs": 35,
+        "all_runs": 14,
+        "all_runs_terminal_success": true,
+        "expected_WorkItems_tag_publisher_skip": {
+          "job": 114419317326,
+          "job_condition": "startsWith(github.ref, 'refs/tags/actions-work-items-')",
+          "workflow": ".github/workflows/work_items_release.yml"
+        },
+        "expected_tag_skip": 1,
+        "failed": 0,
+        "head_checks": 35,
+        "late_Runtime_publisher": {
+          "job": 114424254461,
+          "materialized_success": true,
+          "needs": [
+            "build-sdist",
+            "build-wheels"
+          ],
+          "publication_step_guards": [
+            {
+              "if": "github.event_name == 'push'",
+              "name": "Verify merged tag provenance and version"
+            },
+            {
+              "if": "github.event_name == 'push'",
+              "name": "Check Runtime publish credential"
+            },
+            {
+              "if": "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'",
+              "name": "Publish verified artifacts"
+            }
+          ],
+          "run": 38121679581,
+          "scope": "PR publisher success validates artifacts; tag-only registry publication remains unexecuted/qualification separately required.",
+          "tag_trigger": {
+            "tags": [
+              "actions-runtime-*"
+            ]
+          }
+        },
+        "pending": 0,
+        "product_PR_jobs": 33,
+        "product_PR_workflows": 12,
+        "success": 34
+      },
+      "base": "a70993fafc99a9f94041485542d5a720797ca394",
+      "exact_manifest_binding": {
+        "bytes": 70487,
+        "sha256": "956a52b10ad6efc12dffa34bb80f630372d38374401e001ee6f766cd7f2f3318",
+        "source": "/workspace/engineering/pr221-current776-terminal-CI-reconciliation/frozen-terminal-CI-successor.json"
+      },
+      "head": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "metadata_limits": "Responses have separate timestamps; bracket proves stable named identities, not atomic job acquisition. Terminal source CI scope does not establish wheel content, installed runtime, native receipts or policy approval.",
+      "verdict": "GO_CURRENT_DECLARED_CI_ONLY__HOLD_MERGE_POLICY_AND_PUBLICATION_QUALIFICATION"
+    },
+    "pr309-current776-final-CI-frozen-final-complete-current-scoped-CI-review.json": {
+      "exact_manifest_binding": {
+        "bytes": 17262,
+        "sha256": "884ced9adbfddf9e682f24386ce982286295fe9107fc9ca5c2b4a581ed6b7ffc",
+        "source": "/workspace/engineering/pr309-current776-final-CI-independent-review/frozen-final-complete-current-scoped-CI-review.json"
+      },
+      "head_checks": {
+        "SUCCESS": 20
+      },
+      "publisher": {
+        "conclusion": "SUCCESS",
+        "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+        "declared_job_keys": [
+          "build-sdist",
+          "build-wheels",
+          "publish"
+        ],
+        "event": "pull_request",
+        "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+        "id": 38123557755,
+        "jobs": [
+          {
+            "conclusion": "SUCCESS",
+            "id": 114423098756,
+            "name": "build-sdist (ubuntu-py3.12)",
+            "status": "COMPLETED"
+          },
+          {
+            "conclusion": "SUCCESS",
+            "id": 114423098878,
+            "name": "build-wheels (ubuntu-22.04)",
+            "status": "COMPLETED"
+          },
+          {
+            "conclusion": "SUCCESS",
+            "id": 114423098884,
+            "name": "build-wheels (macos-15)",
+            "status": "COMPLETED"
+          },
+          {
+            "conclusion": "SUCCESS",
+            "id": 114423098910,
+            "name": "build-wheels (windows-2022)",
+            "status": "COMPLETED"
+          },
+          {
+            "conclusion": "SUCCESS",
+            "id": 114425288893,
+            "name": "publish (3.12)",
+            "status": "COMPLETED"
+          }
+        ],
+        "path": ".github/workflows/actions_runtime_pypi_release.yml",
+        "run_attempt": 1,
+        "status": "COMPLETED"
+      },
+      "remaining_HOLDs": [
+        "Draft must be ready before normal API merge",
+        "Full152/196/Workspace/backend/native/private/publication remain HOLD",
+        "Complete cleanup/natural exit not inferred from source or hosted jobs",
+        "Current native92498 adapter mismatch remains unqualified"
+      ],
+      "source_and_synthetic": {
+        "head": {
+          "ordered_parents": [
+            "9475a30fbe8645fd0c6b9c2746182f7a78631059",
+            "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+          ],
+          "sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "tree": "3c2c8ad1c9a067ec774eafd6f5d254cb8703213b"
+        },
+        "merge": {
+          "ordered_parents": [
+            "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+            "5130638dc68161c3cfc1a437bacf0467d7cecb42"
+          ],
+          "sha": "99e8c64a0398669fd65f216656427179fe90228a",
+          "tree": "3c2c8ad1c9a067ec774eafd6f5d254cb8703213b"
+        }
+      },
+      "verdict": "GO_COMPLETE_CURRENT_SOURCE_CI_FOR_NORMAL_READY_TRANSITION_THEN_POLICY_ENFORCED_INTEGRATION"
+    }
+  },
+  "explicit_Git_mismatches": [],
+  "explicit_Git_missing": [],
+  "new_explicit_Git_blob_checks": [
+    {
+      "blob": "a306eb11038f8cd4114415fb978321eb2ac51a0f",
+      "bytes": 24361,
+      "sha256": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64"
+    },
+    {
+      "blob": "50f72e8c95dcc4455a8225eb19c8d3309faada58",
+      "bytes": 28217,
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    {
+      "blob": "09234363409bf979016a970c34b8b38ff642fb1f",
+      "bytes": 27382,
+      "sha256": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a"
+    },
+    {
+      "blob": "13c760dd2adbd38bfeec039eba73376bbf32745c",
+      "bytes": 23456,
+      "sha256": "60d81fabaa2ba0446ff888109e050c883ee944553794636fd527a6fe27d4691b"
+    },
+    {
+      "blob": "6bb84ba5d78aeb200be4fae46155fc082bb8eb31",
+      "bytes": 19214,
+      "sha256": "0edc5d092dba9415f552ee1f666edac8f3ce9e833bea1ef73f8370ed2d446e6a"
+    },
+    {
+      "blob": "b475fd6688b7afc6606cde2cba9a1294d771a64c",
+      "bytes": 25641,
+      "sha256": "fda3f2c045414a9cae21cc0765a3eb7c72db2ddd2f5d74e567a04a0513baf620"
+    },
+    {
+      "blob": "7ec910a2ef7aecd2be73c6a7b786d42ea78c81af",
+      "bytes": 11051,
+      "sha256": "4ae8cbe57aa5c924585f4257a1be1700aa49baa63d6150efba20935045f7a8a5"
+    },
+    {
+      "blob": "5c02ece585884a656175d586e6b3d5a64f0c065e",
+      "bytes": 8281,
+      "sha256": "4fb8d376d1b4aa06d301dedaeee67a2916561c7d10b8f1dadd657870b37b2b43"
+    },
+    {
+      "blob": "b2b8a58b2114b5a3e8fddbf90c7ad6314c6c1d05",
+      "bytes": 80376,
+      "sha256": "e4a311dd9e6dd6fa98b0257f37716b7e326eeac7f2beb8d9324802e40878fba3"
+    }
+  ],
+  "originals_preserved_not_reexecuted": true,
+  "three_branch_control": {
+    "C": "b673ddd761ba4ccd68e9baa8faaa9ab666df794e",
+    "S": "7eb5bce946750555ab009f77592862920a901506",
+    "actual776_path_filter_exact": true,
+    "qualification": "hosted_tuple_specific_no_future_source_carry",
+    "three_reviewed_branches_present": true,
+    "workflow_sha256": "e061ddd1e5cda4845a84743f30d5f8be7f7293bfedeb55527b68ccc6f14ededa"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "scenario": "zombie",
+  "clock_end": 0.41,
+  "deadline": 18.0,
+  "unused_budget": 17.59,
+  "child_absent_at": null,
+  "wrapper_reaped": true,
+  "execution_stopped": true,
+  "descendant_reap_complete": false,
+  "live": [],
+  "zombies": [
+    200
+  ],
+  "error_count": 0,
+  "snapshot_complete": true,
+  "actions": [
+    "child_terminate",
+    "wrapper_terminate",
+    "child_kill"
+  ],
+  "trace": [
+    {
+      "event": "snapshot",
+      "time": 0.0
+    },
+    {
+      "event": "child_terminate",
+      "time": 0.0
+    },
+    {
+      "event": "wrapper_terminate",
+      "time": 0.0
+    },
+    {
+      "event": "psutil_wait",
+      "time": 0.0,
+      "count": 1,
+      "timeout": 0.2
+    },
+    {
+      "event": "child_kill",
+      "time": 0.2
+    },
+    {
+      "event": "psutil_wait",
+      "time": 0.2,
+      "count": 1,
+      "timeout": 0.2
+    },
+    {
+      "event": "Popen_wait",
+      "time": 0.4,
+      "timeout": 17.400000000000002
+    }
+  ]
+}

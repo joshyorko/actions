@@ -1,0 +1,9 @@
+{
+  "actual_executions": 0,
+  "source_mutations": 0,
+  "initial_synthetic_object_absence": "Stopped before input identity write; original inspector retained; root later fetched exact object without ref/FETCH_HEAD writes and source/metadata/log identities match",
+  "source_comparison_schema_misread": "Two generated/packaged records have git_path but no trackedbody fields; failed inspection retained, measured classification field used; allowlisted onlyexactOAuth/RCC exceptions, both exactSHA guarded",
+  "Unicode_prehasher_display_quote_error": "git ls-files display output quoted Unicode paths; inspector stopped before prehash freeze. Corrected ls-files -z strict UTF8 actual filenames, complete1433 bytes/exec bit manifest",
+  "no_failure_exit_waivers": true,
+  "lint_gate_replay": "Original85GREEN plus8final input-binding readback after dist-info text-only correction; no product or configured broad run"
+}

@@ -1,0 +1,29 @@
+{
+  "actual_hosted_cause": "UNKNOWN_ORIGINAL_INPUT_AND_EFFECTIVE_AUTOCRLF_NOT_RETAINED",
+  "implementation_now": "NOT_AUTHORIZED_NOT_PERFORMED",
+  "meaningful_service_free_RED_GREEN_plan": [
+    "In an owned temporary Git repository/index, retain the exact current Runtime HTML blob and current attributes. Set core.autocrlf=true for this synthetic checkout only; assert checked-out Runtime HTML SHA/bytes equal the LF Git blob. The current text=auto/no-eol contract should produce13CRLF and fail that exact-byte assertion.",
+    "Apply only the proposed exact Runtime HTML text eol=lf attribute in the owned fixture. Repeat the same checked-out-file assertion; it must be byte/hash exact to the retained372B Git input with13LF and0CR.",
+    "Repeat with core.autocrlf=false/input UTF8 content; require unchanged canonical bytes. Include a separate representative Python/text input to show that the targeted policy does not globally normalize other files.",
+    "Use synthetic bytes containing CRLF and a loneCR to protect the actual AST-extracted read_bytes/repr byte-preservation contract; evaluate only the literal representation as data and require every original byte retained. Do not turn this into a post-build CR-removal fix.",
+    "Require a source-following Windows build artifact requalification after any authorized source change; service-free Git and encoder controls do not establish frontend compiler equivalence, the original hosted cause, fullplatform consumers or release acceptance."
+  ],
+  "minimal_next_diagnostic_if_input_policy_not_approved": "Retain allowlisted Runtime source-index and pre-encoder dist-index SHA/byte/CR/CRLF/LF counts plus effective text/eol/core.autocrlf classes at the next already-authorized build; never dump HTML, environment, URLs or raw command output.",
+  "minimal_source_delta_candidate": "Set text eol=lf for action_server/frontend/apps/runtime/index.html only.",
+  "not_proposed": [
+    "global attributes policy",
+    "blanket output normalization",
+    "RECORD relabel",
+    "semantic equivalence waiver",
+    "new native/browser/provider/consumer run"
+  ],
+  "preserve": [
+    "all178 module CRLF-only comparisons",
+    "Windows Unix-mode UNAVAILABLE",
+    "both empty OAuth entries and source/content authorityHOLD",
+    "all original RECORD hashes",
+    "alloriginal previous qualifications and current full7/releaseHOLD"
+  ],
+  "status": "PROSPECTIVE_NARROW_INPUT_CONTRACT_FIX_REQUIRES_OWNER_SOURCE_AUTHORIZATION",
+  "why_this_boundary": "The retained difference is confined to CR at original HTML scaffold boundaries; the byte encoder deliberately preserves the compiled asset. Canonicalize the single tracked HTML input rather than stripping generated content or waiving raw equality."
+}

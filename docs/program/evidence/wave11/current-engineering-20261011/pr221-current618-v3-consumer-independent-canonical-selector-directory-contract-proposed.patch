@@ -1,0 +1,12 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3281,1 +3281,9 @@
+ while retaining the correct archive bytes must still fail before installation.
++
++Before a retained-wheel consumer, admit the actual selector directory contract.
++A fixed wheel digest does not prove that its parent has exactly one matching
++candidate. Preserve mixed-platform acquisitions; isolate exact selected platform
++originals in private storage and bind their hashes. Use the real selector to
++reject an additional matching foreign-platform wheel rather than weakening it.
++A refusal before attempt or worker creation supplies no installed-consumer or
++cleanup result.

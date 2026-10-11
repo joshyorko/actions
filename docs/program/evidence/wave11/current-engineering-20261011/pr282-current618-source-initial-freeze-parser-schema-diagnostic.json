@@ -1,0 +1,10 @@
+{
+  "status": "ORIGINAL_LIGHT_FREEZE_PARSER_FAILED_NO_RECEIPT_EMITTED",
+  "source_mutation": false,
+  "gates_repeated": false,
+  "original_parser_sha256": "005fbbcea4566cdff710ddba8c60bbb7bdc37063a2a9f7ff07aeeae21ce90f9e",
+  "cause": "Guessed log literals All checks passed/left unchanged/Running absent from successful configured task log",
+  "corrected_admission": "Original RCC exit0/SUCCESS plus actual emitted Ruffcheck/Ruffformat/Isort commands, actual formatted count and Mypy success; all original gate outputs retained",
+  "original_configured_log_sha256": "80427eaeb5b3821ed213a6be483ea40d3842c87f61fff81c2d346defbec29bce",
+  "verification_exit_enforced_before_freeze": true
+}

@@ -1,0 +1,2154 @@
+{
+  "schema": "actions-current618-live-CI-reconciliation/v1",
+  "PR": 221,
+  "verdict": "HOLD_CURRENT_DECLARED_CI_PENDING_AND_LATE_PUBLISHER",
+  "head": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "head_tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+  "base": "a70993fafc99a9f94041485542d5a720797ca394",
+  "synthetic": {
+    "sha": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+    "ordered_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "6181b044c75de35386f1ae30e71725398b6a7feb"
+    ],
+    "tree": "99ac5309add45af65049546dd3a99f357884cf3b"
+  },
+  "named_refs_and_API_before_after_stable": true,
+  "REST_GraphQL_current_tuple_equal": true,
+  "metadata_not_actual_checkout": "Original metadata checks queried exact head and prospective synthetic; no joblogs acquired to establish actual runner checkout independently.",
+  "declared": {
+    "matched_workflows": 13,
+    "expected_jobs": 34,
+    "materialized_check_job_bijection": 33,
+    "unmaterialized_late_jobs": 1,
+    "additional_triggered_push_workflows": 0,
+    "Copilot_nonmatches": [
+      {
+        "path": ".github/workflows/copilot-setup-steps.yml",
+        "event": "push",
+        "declared_event": {
+          "paths": [
+            ".github/workflows/copilot-setup-steps.yml",
+            ".github/workflows/developer_toolkit.yml",
+            "developer/**"
+          ]
+        },
+        "matched": false
+      }
+    ]
+  },
+  "captured": {
+    "check_outcomes": {
+      "skipped": 1,
+      "success": 29,
+      "queued": 2,
+      "in_progress": 1
+    },
+    "job_outcomes": {
+      "success": 29,
+      "queued": 2,
+      "in_progress": 1,
+      "skipped": 1
+    },
+    "pending": [
+      {
+        "id": 114433293230,
+        "name": "build-wheels (macos-15)",
+        "status": "queued"
+      },
+      {
+        "id": 114433293134,
+        "name": "build (windows-py3.12-devmode)",
+        "status": "in_progress"
+      },
+      {
+        "id": 114433293128,
+        "name": "build (macos-py3.10-devmode)",
+        "status": "queued"
+      }
+    ],
+    "failure": []
+  },
+  "late_Runtime_publisher": {
+    "run": 38126987514,
+    "job": "publish",
+    "needs": [
+      "build-sdist",
+      "build-wheels"
+    ],
+    "status": "NOT_MATERIALIZED_AT_CAPTURE",
+    "tag_trigger": {
+      "tags": [
+        "actions-runtime-*"
+      ]
+    },
+    "registry_steps_push_only": [
+      {
+        "name": "Verify merged tag provenance and version",
+        "if": "github.event_name == 'push'"
+      },
+      {
+        "name": "Check Runtime publish credential",
+        "if": "github.event_name == 'push'"
+      },
+      {
+        "name": "Publish verified artifacts",
+        "if": "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'"
+      }
+    ]
+  },
+  "complete_connections": {
+    "closingIssuesReferences": {
+      "count": 0,
+      "complete_pages": 1,
+      "hasNextPage": false
+    },
+    "reviewThreads": {
+      "count": 0,
+      "complete_pages": 1,
+      "hasNextPage": false
+    }
+  },
+  "reviews": 0,
+  "review_comments": 0,
+  "head_merge_statuses": 0,
+  "merge_check_runs_workflow_runs": 0,
+  "policy": {
+    "draft": true,
+    "mergeable": true,
+    "mergeable_state": "unstable",
+    "GraphQL_mergeStateStatus": "UNSTABLE",
+    "reviewDecision": null,
+    "protection": "UNKNOWN_HTTP403; not bypass permission",
+    "visible_rulesets_and_branch_rules_count": 0
+  },
+  "source_policy_scope": "Metadata sourceCI only; no normalmerge/fullissue/publication qualification while current jobs pending and policy scope unresolved.",
+  "snapshot_scope": "One bounded bracket; separate timestamp responses preserved. No busywait/poll/rerun/source writes/log/download/installer/actual consumer.",
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accepted exact9744+bf95 lessons verified in owning canonical checkpoint",
+    "Exact_existing_reuse": [
+      {
+        "patch": {
+          "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+          "bytes": 897,
+          "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+        },
+        "exact_added_text": "An empty visible ruleset list does not resolve an inaccessible traditional\nbranch-protection endpoint. Bracket a paginated census with live named-ref\nreadbacks. If the target advances during collection, retain the old tuple and\nquery the new head separately; do not transfer its predecessor's passing CI.\n",
+        "text_sha256": "1a43e678678f10a9bf8ac7c3507677b4530c2406c424f95e5c09d0eb2d20b42e",
+        "owning_canonical_file": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+        "verified_already_integrated": true
+      },
+      {
+        "patch": {
+          "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+          "bytes": 1158,
+          "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+        },
+        "exact_added_text": "\nA platform artifact containing only Linux wheels does not satisfy the\nseven-artifact release inventory. A selected cp312 consumer has a distinct\nnonpublishing scope; retain its original ZIP, wheel, `METADATA`, `RECORD` and\nbuild identities while cross-platform inventory, tag and upload gates remain\npending. After integration, compare the actual merge tree and selected tracked\npayload bytes with the build's synthetic tree. Tree equality does not turn that\nearlier synthetic checkout into an actual integration build. Derive the Python\nmember count from the new wheel bytes even when it equals an earlier count,\nand retain generated-input authority and content holds separately.\n",
+        "text_sha256": "76f1237b6d380b58be4bba1d7135e0dbc61346358b81d49fe0a8f5bd77a1edca",
+        "owning_canonical_file": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+        "verified_already_integrated": true
+      }
+    ],
+    "Durable_learning": "Actual event/path filters determine auxiliary workflows and expectedlatejobs; sourceCI and scoped original installedconsumer never transfer to later source/wheel or publication.",
+    "Evidence": "Current namedref brackets and declaredjobs/check-IDbijection, latepublish needs with missingmaterialization, protection403 and historical source/consumer tuples kept separate.",
+    "Stale_or_ambiguous_guidance_removed": "Existing9744 removes policy/snapshot predecessor carry ambiguity;bf95 removes partialplatform/new-source qualification ambiguity. No cosmetic newparagraph.",
+    "Remaining_uncertainty": "Current CI pending, latepublisher not materialized, protection403/draft; native/private/currentwheel/all7/release gates remainHOLD."
+  },
+  "Upstream_disposition": "none",
+  "source_mutations_actual_runs_downloads": false,
+  "flows": [
+    {
+      "path": ".github/workflows/action_server_frontend_tests.yml",
+      "workflow": "Action Server Frontend tests",
+      "source_sha256": "058e7625c4eb32f885bdeef6443643dd1a3df87ec6c5131bb39b36ec4289b8d2",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": {
+        "branches": [
+          "community",
+          "integration/**"
+        ],
+        "paths": [
+          "action_server/frontend/**",
+          "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py",
+          "docs/contracts/canvas/fixtures/**",
+          ".github/workflows/action_server_frontend_tests.yml"
+        ]
+      },
+      "declared_jobs": [
+        {
+          "id": "action-server-frontend-tests",
+          "name": "action-server-frontend-tests",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {}
+          ]
+        }
+      ],
+      "expected_jobs": 1,
+      "observed_jobs": 1,
+      "unmaterialized_count": 0,
+      "run_id": 38126987520,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "subjects": [
+        {
+          "id": 114433293137,
+          "name": "action-server-frontend-tests",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": false
+    },
+    {
+      "path": ".github/workflows/actions_core_tests.yml",
+      "workflow": "Actions Core Tests",
+      "source_sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": {
+        "branches": [
+          "community",
+          "integration/**"
+        ],
+        "paths": [
+          "actions/**",
+          ".github/workflows/actions_core_tests.yml",
+          "devutils/**",
+          "actions-http-helper/**",
+          ".github/workflows/_gen_workflows.py"
+        ]
+      },
+      "declared_jobs": [
+        {
+          "id": "build",
+          "name": "build",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {
+              "name": "ubuntu-py3.10-devmode",
+              "python": "3.10",
+              "os": "ubuntu-22.04"
+            },
+            {
+              "name": "windows-py3.10-devmode",
+              "python": "3.10",
+              "os": "windows-2022"
+            },
+            {
+              "name": "macos-py3.10-devmode",
+              "os": "macos-15",
+              "python": "3.10"
+            }
+          ]
+        },
+        {
+          "id": "candidate-wheel",
+          "name": "candidate-wheel",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {}
+          ]
+        }
+      ],
+      "expected_jobs": 4,
+      "observed_jobs": 4,
+      "unmaterialized_count": 0,
+      "run_id": 38126987462,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "subjects": [
+        {
+          "id": 114433293054,
+          "name": "candidate-wheel",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293203,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293215,
+          "name": "build (macos-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293387,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": false
+    },
+    {
+      "path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "workflow": "Actions Runtime PYPI Release",
+      "source_sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": {
+        "branches": [
+          "community",
+          "integration/**"
+        ],
+        "paths": [
+          ".github/workflows/_gen_workflows.py",
+          ".github/workflows/actions_runtime_pypi_release.yml",
+          ".github/workflows/actions_runtime_binary_release.yml",
+          ".github/workflows/actions_runtime_manylinux_release.yml",
+          "devutils/tests/test_actions_runtime_release_line.py",
+          "devutils/tests/test_runtime_release_workflows.py",
+          "docs/skills/repository-operations.md",
+          "action_server/scripts/publish_verified_runtime.py",
+          "action_server/scripts/verify_published_runtime_floor.py"
+        ]
+      },
+      "declared_jobs": [
+        {
+          "id": "build-sdist",
+          "name": "build-sdist",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {
+              "name": "ubuntu-py3.12",
+              "python": "3.12",
+              "os": "ubuntu-22.04"
+            }
+          ]
+        },
+        {
+          "id": "build-wheels",
+          "name": "build-wheels",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {
+              "os": "ubuntu-22.04",
+              "python": "3.12",
+              "name": "ubuntu"
+            },
+            {
+              "os": "windows-2022",
+              "python": "3.12",
+              "name": "windows"
+            },
+            {
+              "os": "macos-15",
+              "python": "3.12",
+              "name": "macos"
+            }
+          ]
+        },
+        {
+          "id": "publish",
+          "name": "publish",
+          "if": null,
+          "needs": [
+            "build-sdist",
+            "build-wheels"
+          ],
+          "matrix_rows": [
+            {
+              "python": "3.12"
+            }
+          ]
+        }
+      ],
+      "expected_jobs": 5,
+      "observed_jobs": 4,
+      "unmaterialized_count": 1,
+      "run_id": 38126987514,
+      "run_status": "queued",
+      "run_conclusion": null,
+      "subjects": [
+        {
+          "id": 114433293117,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293201,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293230,
+          "name": "build-wheels (macos-15)",
+          "status": "queued",
+          "conclusion": null,
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293243,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": false
+    },
+    {
+      "path": ".github/workflows/actions_runtime_tests.yml",
+      "workflow": "Action Server Tests",
+      "source_sha256": "430588021cf889391842be3a7c78eb4c04648b1bb7311f9c03da452e313fb161",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": {
+        "branches": [
+          "master",
+          "community",
+          "integration/**"
+        ],
+        "paths": [
+          "action_server/**",
+          ".github/workflows/actions_runtime_tests.yml",
+          "devutils/**",
+          "actions/**",
+          "actions-http-helper/**",
+          "work-items/**"
+        ]
+      },
+      "declared_jobs": [
+        {
+          "id": "build",
+          "name": "build",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {
+              "name": "ubuntu-py3.12-devmode",
+              "python": "3.12",
+              "os": "ubuntu-22.04"
+            },
+            {
+              "name": "windows-py3.12-devmode",
+              "python": "3.12",
+              "os": "windows-2022"
+            },
+            {
+              "name": "macos-py3.12-devmode",
+              "os": "macos-15",
+              "python": "3.12"
+            }
+          ]
+        }
+      ],
+      "expected_jobs": 3,
+      "observed_jobs": 3,
+      "unmaterialized_count": 0,
+      "run_id": 38126987486,
+      "run_status": "in_progress",
+      "run_conclusion": null,
+      "subjects": [
+        {
+          "id": 114433292936,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293118,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293134,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": false
+    },
+    {
+      "path": ".github/workflows/ai-audit.yml",
+      "workflow": "AI audit evidence",
+      "source_sha256": "2334d210444efcc82389a3f535032794aec91142e7f44eaf5b97bcb9816f5d0e",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": null,
+      "declared_jobs": [
+        {
+          "id": "audit",
+          "name": "audit",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {}
+          ]
+        }
+      ],
+      "expected_jobs": 1,
+      "observed_jobs": 1,
+      "unmaterialized_count": 0,
+      "run_id": 38126987459,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "subjects": [
+        {
+          "id": 114433292971,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": false
+    },
+    {
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "workflow": "Copilot Setup Steps",
+      "source_sha256": "cdeaf466a6e662747e06e32618d91a48fd76c41fada5c2369e380b7034f3f906",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": {
+        "paths": [
+          ".github/workflows/copilot-setup-steps.yml",
+          ".github/workflows/developer_toolkit.yml",
+          "developer/**"
+        ]
+      },
+      "declared_jobs": [
+        {
+          "id": "copilot-setup-steps",
+          "name": "copilot-setup-steps",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {}
+          ]
+        }
+      ],
+      "expected_jobs": 1,
+      "observed_jobs": 1,
+      "unmaterialized_count": 0,
+      "run_id": 38126987463,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "subjects": [
+        {
+          "id": 114433293052,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": true
+    },
+    {
+      "path": ".github/workflows/coverage-gate.yml",
+      "workflow": "Measured Python coverage gate",
+      "source_sha256": "e355c4769bae5e548dc7aa8c7393bdc496ebfcbdd24c1c3918d90bc7e1ef76cf",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": {
+        "branches": [
+          "community",
+          "integration/community-release-20261008"
+        ]
+      },
+      "declared_jobs": [
+        {
+          "id": "coverage",
+          "name": "coverage",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {}
+          ]
+        }
+      ],
+      "expected_jobs": 1,
+      "observed_jobs": 1,
+      "unmaterialized_count": 0,
+      "run_id": 38126987468,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "subjects": [
+        {
+          "id": 114433292948,
+          "name": "coverage",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": false
+    },
+    {
+      "path": ".github/workflows/developer_toolkit.yml",
+      "workflow": "RCC developer toolkit",
+      "source_sha256": "60ca471cb9bdff0059b1a9b1fcdf9256b666fb2fb1d533b93307d2841facc0a8",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": null,
+      "declared_jobs": [
+        {
+          "id": "toolkit",
+          "name": "toolkit",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {
+              "lane": "primary",
+              "rcc_version": "18.19.3",
+              "os": "ubuntu-22.04",
+              "asset": "rcc-linux64",
+              "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+            },
+            {
+              "lane": "primary",
+              "rcc_version": "18.19.3",
+              "os": "macos-15",
+              "asset": "rcc-macosarm64",
+              "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266"
+            },
+            {
+              "lane": "primary",
+              "rcc_version": "18.19.3",
+              "os": "windows-2022",
+              "asset": "rcc-windows64.exe",
+              "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+            },
+            {
+              "lane": "n-1",
+              "rcc_version": "18.18.1",
+              "os": "ubuntu-22.04",
+              "asset": "rcc-linux64",
+              "sha256": "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf"
+            },
+            {
+              "lane": "n-1",
+              "rcc_version": "18.18.1",
+              "os": "macos-15",
+              "asset": "rcc-macosarm64",
+              "sha256": "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d"
+            },
+            {
+              "lane": "n-1",
+              "rcc_version": "18.18.1",
+              "os": "windows-2022",
+              "asset": "rcc-windows64.exe",
+              "sha256": "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b"
+            }
+          ]
+        }
+      ],
+      "expected_jobs": 6,
+      "observed_jobs": 6,
+      "unmaterialized_count": 0,
+      "run_id": 38126987471,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "subjects": [
+        {
+          "id": 114433293000,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293150,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293171,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293179,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293227,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293240,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": false
+    },
+    {
+      "path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "workflow": "Action Server Build (Unauthenticated)",
+      "source_sha256": "2d2a21af458ccfdb771f65707d7ab60fb1f5dfa24019c94ded4a02ed46f8d36d",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": {
+        "paths": [
+          "action_server/**",
+          "work-items/**",
+          ".github/workflows/frontend-build-unauthenticated.yml"
+        ]
+      },
+      "declared_jobs": [
+        {
+          "id": "build-external",
+          "name": "Build Action Server binary without credentials",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {
+              "os": "ubuntu-22.04",
+              "python": "3.12"
+            },
+            {
+              "os": "windows-2022",
+              "python": "3.12"
+            },
+            {
+              "os": "macos-15",
+              "python": "3.12"
+            }
+          ]
+        }
+      ],
+      "expected_jobs": 3,
+      "observed_jobs": 3,
+      "unmaterialized_count": 0,
+      "run_id": 38126987482,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "subjects": [
+        {
+          "id": 114433293058,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293252,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293367,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": false
+    },
+    {
+      "path": ".github/workflows/frontend-build.yml",
+      "workflow": "Frontend Build",
+      "source_sha256": "55def13a3b25269e0a8780a08c89bbbe9b32189b4f4fcbea21189ee8d6ee16a1",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": {
+        "branches": [
+          "community"
+        ],
+        "paths": [
+          "action_server/frontend/**",
+          ".github/workflows/frontend-build.yml"
+        ]
+      },
+      "declared_jobs": [
+        {
+          "id": "build",
+          "name": "build",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {
+              "os": "ubuntu-latest"
+            },
+            {
+              "os": "macos-latest"
+            },
+            {
+              "os": "windows-latest"
+            }
+          ]
+        }
+      ],
+      "expected_jobs": 3,
+      "observed_jobs": 3,
+      "unmaterialized_count": 0,
+      "run_id": 38126987519,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "subjects": [
+        {
+          "id": 114433293043,
+          "name": "build (windows-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293218,
+          "name": "build (ubuntu-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293250,
+          "name": "build (macos-latest)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": false
+    },
+    {
+      "path": ".github/workflows/http_helper_tests.yml",
+      "workflow": "HTTP Helper Tests",
+      "source_sha256": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": {
+        "branches": [
+          "community"
+        ],
+        "paths": [
+          "actions-http-helper/**",
+          ".github/workflows/http_helper_tests.yml",
+          "devutils/**"
+        ]
+      },
+      "declared_jobs": [
+        {
+          "id": "build",
+          "name": "build",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {
+              "name": "ubuntu-py3.10-devmode",
+              "python": "3.10",
+              "os": "ubuntu-22.04"
+            },
+            {
+              "name": "windows-py3.10-devmode",
+              "python": "3.10",
+              "os": "windows-2022"
+            },
+            {
+              "name": "macos-py3.10-devmode",
+              "os": "macos-15",
+              "python": "3.10"
+            }
+          ]
+        }
+      ],
+      "expected_jobs": 3,
+      "observed_jobs": 3,
+      "unmaterialized_count": 0,
+      "run_id": 38126987473,
+      "run_status": "queued",
+      "run_conclusion": null,
+      "subjects": [
+        {
+          "id": 114433292989,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293128,
+          "name": "build (macos-py3.10-devmode)",
+          "status": "queued",
+          "conclusion": null,
+          "failure_step_names": []
+        },
+        {
+          "id": 114433293138,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": false
+    },
+    {
+      "path": ".github/workflows/lighthouse.yml",
+      "workflow": "Lighthouse CI",
+      "source_sha256": "ff985adf49fae8b5409e4edf4cd10d08045b712dc64b02ad9ec7a9f0498305bd",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": {
+        "branches": [
+          "community"
+        ],
+        "paths": [
+          "action_server/frontend/**",
+          ".github/workflows/lighthouse.yml"
+        ]
+      },
+      "declared_jobs": [
+        {
+          "id": "lighthouse",
+          "name": "lighthouse",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {}
+          ]
+        }
+      ],
+      "expected_jobs": 1,
+      "observed_jobs": 1,
+      "unmaterialized_count": 0,
+      "run_id": 38126987464,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "subjects": [
+        {
+          "id": 114433292897,
+          "name": "lighthouse",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": false
+    },
+    {
+      "path": ".github/workflows/work_items_release.yml",
+      "workflow": "Work Items Release",
+      "source_sha256": "e30cf818b7d81e3b910bdef8d2f78a9c32c8f52dd119de8b8a75a94b616e10c0",
+      "event": "pull_request",
+      "branch": "community",
+      "matched_event_filter": {
+        "paths": [
+          "work-items/**",
+          ".devcontainer/bin/verify-work-items",
+          ".devcontainer/bin/smoke-host",
+          ".devcontainer/bin/bootstrap",
+          ".devcontainer/tests/**",
+          ".github/workflows/work_items_release.yml",
+          "docs/skills/work-items.md"
+        ]
+      },
+      "declared_jobs": [
+        {
+          "id": "verify",
+          "name": "verify",
+          "if": null,
+          "needs": [],
+          "matrix_rows": [
+            {}
+          ]
+        },
+        {
+          "id": "publish",
+          "name": "publish",
+          "if": "startsWith(github.ref, 'refs/tags/actions-work-items-')",
+          "needs": "verify",
+          "matrix_rows": [
+            {}
+          ]
+        }
+      ],
+      "expected_jobs": 2,
+      "observed_jobs": 2,
+      "unmaterialized_count": 0,
+      "run_id": 38126987484,
+      "run_status": "completed",
+      "run_conclusion": "success",
+      "subjects": [
+        {
+          "id": 114433293040,
+          "name": "verify",
+          "status": "completed",
+          "conclusion": "success",
+          "failure_step_names": []
+        },
+        {
+          "id": 114434239113,
+          "name": "publish",
+          "status": "completed",
+          "conclusion": "skipped",
+          "failure_step_names": []
+        }
+      ],
+      "auxiliary_Copilot": false
+    }
+  ],
+  "previous_same_source_pending_census_retained": {
+    "path": "/workspace/engineering/pr221-current618-release-preflight/frozen-current618-release-preflight.json",
+    "bytes": 69339,
+    "sha256": "00cb933d4398c82210aedb6944266bc42bdee72125baa049ada517e256f1e080"
+  },
+  "historical_776_consumer_harness_proposal_preexec_actual": [
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+      "bytes": 19366,
+      "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/immutable-current776-linux-consumer-preexecution-proposal-v2.json",
+      "bytes": 25752,
+      "sha256": "57a8beb87e5a1c03fae276e4b22d7fc8734d1f42cc3c739ceb989a0d946e73a7"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-frozen-one-consumer-preexecution-review.json",
+      "bytes": 9830,
+      "sha256": "6346a5feb759d9fb6615d20da814b02de8c528ae273ec7eaa20e56b8327fdb7f"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-one-actual-current-linux-consumer-review.json",
+      "bytes": 8197,
+      "sha256": "f230cbdc1a7e4b9b5bb2f9323d7aa1e645c89778d0db9a554c32cf6bcae69967"
+    }
+  ],
+  "declared_wheel_build_outputs_and_artifact_metadata": [
+    {
+      "workflow": ".github/workflows/actions_core_tests.yml",
+      "run": 38126987462,
+      "declared_uploads": [
+        {
+          "job": "candidate-wheel",
+          "matrix": null,
+          "name": "actions-core-candidate-dist",
+          "path": "actions/dist"
+        }
+      ],
+      "materialized_artifact_metadata": [
+        {
+          "id": 11697642769,
+          "name": "actions-core-candidate-dist",
+          "size_in_bytes": 185503,
+          "expired": false,
+          "digest_if_reported": "sha256:70bfa602c7b3dabae65e1f30eb3c4e5fafbdacb0b8ca91221519db08977397f0",
+          "run": 38126987462,
+          "head": "6181b044c75de35386f1ae30e71725398b6a7feb",
+          "branch": "integration/community-release-20261008"
+        }
+      ]
+    },
+    {
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "run": 38126987514,
+      "declared_uploads": [
+        {
+          "job": "build-sdist",
+          "matrix": {
+            "name": [
+              "ubuntu-py3.12"
+            ],
+            "include": [
+              {
+                "name": "ubuntu-py3.12",
+                "python": "3.12",
+                "os": "ubuntu-22.04"
+              }
+            ]
+          },
+          "name": "action-server-dist",
+          "path": "action_server/dist/*"
+        },
+        {
+          "job": "build-wheels",
+          "matrix": {
+            "os": [
+              "ubuntu-22.04",
+              "windows-2022",
+              "macos-15"
+            ],
+            "include": [
+              {
+                "os": "ubuntu-22.04",
+                "python": "3.12",
+                "name": "ubuntu"
+              },
+              {
+                "os": "windows-2022",
+                "python": "3.12",
+                "name": "windows"
+              },
+              {
+                "os": "macos-15",
+                "python": "3.12",
+                "name": "macos"
+              }
+            ]
+          },
+          "name": "${{ runner.os }}-wheels",
+          "path": "action_server/wheelhouse/*"
+        },
+        {
+          "job": "publish",
+          "matrix": {
+            "python": [
+              "3.12"
+            ]
+          },
+          "name": "actions-runtime-dist",
+          "path": "action_server/dist/*"
+        }
+      ],
+      "materialized_artifact_metadata": [
+        {
+          "id": 11697788053,
+          "name": "Windows-wheels",
+          "size_in_bytes": 23201552,
+          "expired": false,
+          "digest_if_reported": "sha256:f6c1d0e41ba6a1f8651c7a93ca7f76e4c17c3305e30b2c2e347724b0fc272273",
+          "run": 38126987514,
+          "head": "6181b044c75de35386f1ae30e71725398b6a7feb",
+          "branch": "integration/community-release-20261008"
+        },
+        {
+          "id": 11697522927,
+          "name": "action-server-dist",
+          "size_in_bytes": 1020782,
+          "expired": false,
+          "digest_if_reported": "sha256:30b0020ac0dcbea840627a5cfff4c9a8c6be95d89cd319953b51f5d9d1139a5a",
+          "run": 38126987514,
+          "head": "6181b044c75de35386f1ae30e71725398b6a7feb",
+          "branch": "integration/community-release-20261008"
+        },
+        {
+          "id": 11697353355,
+          "name": "Linux-wheels",
+          "size_in_bytes": 28299039,
+          "expired": false,
+          "digest_if_reported": "sha256:fc4018e6e7ed4a0e47c4f5888d36d55655216ca22ebd965f29ce9f1130938f8c",
+          "run": 38126987514,
+          "head": "6181b044c75de35386f1ae30e71725398b6a7feb",
+          "branch": "integration/community-release-20261008"
+        }
+      ]
+    },
+    {
+      "workflow": ".github/workflows/work_items_release.yml",
+      "run": 38126987484,
+      "declared_uploads": [
+        {
+          "job": "verify",
+          "matrix": null,
+          "name": "actions-work-items-dist",
+          "path": "work-items/dist"
+        }
+      ],
+      "materialized_artifact_metadata": [
+        {
+          "id": 11697448544,
+          "name": "actions-work-items-dist",
+          "size_in_bytes": 114288,
+          "expired": false,
+          "digest_if_reported": "sha256:a10c6e04ee3dad46213626a53c7658a2b1013a2c7bb6041f14eaaed08583a3fb",
+          "run": 38126987484,
+          "head": "6181b044c75de35386f1ae30e71725398b6a7feb",
+          "branch": "integration/community-release-20261008"
+        }
+      ]
+    }
+  ],
+  "Runtime_platform_inventory": {
+    "publisher_source": "action_server/scripts/publish_verified_runtime.py",
+    "publisher_source_sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c",
+    "expected_inner_distribution_inventory": "One actions-runtime sdist plus six cp312/cp313 wheels across manylinuxx86_64/macOSarm64/Windowsamd64",
+    "expected_wheel_slots": [
+      {
+        "python": "cp312",
+        "platform": "macos"
+      },
+      {
+        "python": "cp312",
+        "platform": "manylinux"
+      },
+      {
+        "python": "cp312",
+        "platform": "windows"
+      },
+      {
+        "python": "cp313",
+        "platform": "macos"
+      },
+      {
+        "python": "cp313",
+        "platform": "manylinux"
+      },
+      {
+        "python": "cp313",
+        "platform": "windows"
+      }
+    ],
+    "Runtime_build_OS_matrix": {
+      "os": [
+        "ubuntu-22.04",
+        "windows-2022",
+        "macos-15"
+      ],
+      "include": [
+        {
+          "os": "ubuntu-22.04",
+          "python": "3.12",
+          "name": "ubuntu"
+        },
+        {
+          "os": "windows-2022",
+          "python": "3.12",
+          "name": "windows"
+        },
+        {
+          "os": "macos-15",
+          "python": "3.12",
+          "name": "macos"
+        }
+      ]
+    },
+    "captured_archive_names": [
+      "Linux-wheels",
+      "Windows-wheels",
+      "action-server-dist"
+    ],
+    "missing_archive_names_at_metadata_capture": [
+      "actions-runtime-dist",
+      "macOS-wheels"
+    ],
+    "missing_platform_archive": "macOS-wheels; its two wheel slots are not materialized in artifact metadata",
+    "aggregate_actions_runtime_dist": "NOT_MATERIALIZED; latepublisher depends on sdist/wheels",
+    "inner_wheel_names_bytes_RECORD_members": "UNKNOWN_METADATA_ONLY for every archive; artifactmetadata names/sizes/digests cannot prove contents or seven distribution inventory",
+    "artifact_query_scope": "Three wheel-producing workflows Runtime/Core/WorkItems metadata once, captured after same-wave CI bracket; no log/ZIP download, no atomic state claim."
+  },
+  "next_dependency_ready_qualification_proposal": {
+    "authority": "Read-only preparation only; new original artifact acquisition requires root-authorized ONE owned qualification proposal after complete currentCI/source/policy review",
+    "tuple": "Current618 source and current run38126987514 artifacts; independently bind actual build checkout/log to source tree before qualification. Old776wheel/consumer cannot substitute.",
+    "bounded_step": "Propose original Runtime platform ZIP(s) and sdist acquisition by exact unexpired IDs and measured digests; verify archive bounds, six wheel+one sdist inventory, platformtags/versions, every wheel RECORD/member hashes/modes, approved source/config pair and selected tracked module equality. Freeze raw member inventories/digests and scope before any consumer.",
+    "selected_available_Linux_artifact": {
+      "id": 11697353355,
+      "name": "Linux-wheels",
+      "size_in_bytes": 28299039,
+      "expired": false,
+      "digest_if_reported": "sha256:fc4018e6e7ed4a0e47c4f5888d36d55655216ca22ebd965f29ce9f1130938f8c",
+      "run": 38126987514,
+      "head": "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "branch": "integration/community-release-20261008"
+    },
+    "history_only_harness_reuse": [
+      {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+        "bytes": 19366,
+        "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/immutable-current776-linux-consumer-preexecution-proposal-v2.json",
+        "bytes": 25752,
+        "sha256": "57a8beb87e5a1c03fae276e4b22d7fc8734d1f42cc3c739ceb989a0d946e73a7"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-frozen-one-consumer-preexecution-review.json",
+        "bytes": 9830,
+        "sha256": "6346a5feb759d9fb6615d20da814b02de8c528ae273ec7eaa20e56b8327fdb7f"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-one-actual-current-linux-consumer-review.json",
+        "bytes": 8197,
+        "sha256": "f230cbdc1a7e4b9b5bb2f9323d7aa1e645c89778d0db9a554c32cf6bcae69967"
+      }
+    ],
+    "no_runner_source_edits": "A306/B305 active; existing frozen1768harness/57a8proposal/6346preexec/f230actual are historical contracts for a separately reviewed new currenttuple. No new consumer execution or editing now.",
+    "explicit_HOLDs": [
+      "Approved generatedOAuth source-to-build authority and emptyOAuth content must remain explicit; sourcepair approval is not wholewheel/registry qualification",
+      "Currentmissing macOS/aggregate archive andfull seven distribution/consumer/native platform matrix",
+      "Unrecovered private01f/fafb frozenv6 and private backend/ChatGPT/fullgraph",
+      "Tag/publication/currentcoldregistry/Cask/native release gates"
+    ],
+    "no_publication_or_consumer_authority": true
+  },
+  "evidence": [
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/acquire-live-CI-once.py",
+      "bytes": 5626,
+      "sha256": "a24c26da7519a06098772a8711832ccbb83577e4535389180eed73dc7b54ff56"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/acquisition-summary.json",
+      "bytes": 351,
+      "sha256": "50eec09b706eb62f5f4e280df0a9563630a34a82cd0e4ad2e62d824d803e1ca7"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/acquisition.log",
+      "bytes": 263,
+      "sha256": "19aa8282783de7bcebcea1777219fb8da3d72f2c4cf9e1078f77961ba8fdf672"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/after-named-base.raw.private.json",
+      "bytes": 361,
+      "sha256": "5813d89de5eccdb57f0d5d449d62387e0070db17f340b821e12fd6089bde776d"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/after-named-base.request.json",
+      "bytes": 265,
+      "sha256": "9c04e2d409cde9559678dbe449e9c688f7f9d388b54c07cc1cce01a5a0479db7"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/after-named-base.response.private",
+      "bytes": 349,
+      "sha256": "e942c39796358320842ace1f28306132cdcfc247d97656ad5dca57134565bea3"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/after-named-base.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/after-named-head.raw.private.json",
+      "bytes": 460,
+      "sha256": "e6995883a02cda35696ddee5b9231b4952dc2bf4a74d57c25ee0cc9c7fc3dc38"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/after-named-head.request.json",
+      "bytes": 294,
+      "sha256": "a0f93d991252c378e0af54dd8d973c1f7099c49d8ed11b4cba5d3e0b0be7edc3"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/after-named-head.response.private",
+      "bytes": 448,
+      "sha256": "316aab6b935e68ab876f9943e173a74dcbe9484c1be5465b143a32c9c780d5c0"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/after-named-head.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/after-pr.raw.private.json",
+      "bytes": 31280,
+      "sha256": "3b53feb23e730ce2fac6e1b7ab5886ae286faf3650851238e9c71ce75eeef1e2"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/after-pr.request.json",
+      "bytes": 253,
+      "sha256": "22e1e9e13527778fd501196d20d40ef61642985b381f721aa8bd0560a0002acb"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/after-pr.response.private",
+      "bytes": 30582,
+      "sha256": "76ed75b98669c35ec83236d7942b530b1750b14e03323c1a6cb690285a36c029"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/after-pr.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/base-protection.request.json",
+      "bytes": 271,
+      "sha256": "83291def5d45e3391c79c576bf67d84c068ee614d7c826c3cb09681fea0140aa"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/base-protection.response.private",
+      "bytes": 167,
+      "sha256": "e2373c984773dfee141aed6665a6497c3d7ae4022e643d1c860ab01b710aa23a"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/base-protection.stderr.private",
+      "bytes": 54,
+      "sha256": "67522825656fb8092ae4db6a436b2aad857054a3f7b587f46c1725d77df82871"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/before-named-base.raw.private.json",
+      "bytes": 361,
+      "sha256": "5813d89de5eccdb57f0d5d449d62387e0070db17f340b821e12fd6089bde776d"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/before-named-base.request.json",
+      "bytes": 265,
+      "sha256": "2e6090c542a217b3d0604390c20abf72d81d31609585d3b8e85ad1a76c2b1ba2"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/before-named-base.response.private",
+      "bytes": 349,
+      "sha256": "e942c39796358320842ace1f28306132cdcfc247d97656ad5dca57134565bea3"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/before-named-base.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/before-named-head.raw.private.json",
+      "bytes": 460,
+      "sha256": "e6995883a02cda35696ddee5b9231b4952dc2bf4a74d57c25ee0cc9c7fc3dc38"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/before-named-head.request.json",
+      "bytes": 294,
+      "sha256": "b9b183fcc8c9a6c651366458cbc61e3514f4e4351aebabe59c0cf1f470a5f49a"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/before-named-head.response.private",
+      "bytes": 448,
+      "sha256": "316aab6b935e68ab876f9943e173a74dcbe9484c1be5465b143a32c9c780d5c0"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/before-named-head.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/before-pr.raw.private.json",
+      "bytes": 31280,
+      "sha256": "3b53feb23e730ce2fac6e1b7ab5886ae286faf3650851238e9c71ce75eeef1e2"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/before-pr.request.json",
+      "bytes": 253,
+      "sha256": "1113774b96a7feb9c5f97602ada36b6e7d705764f8c457cee94a5ae45abcfb19"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/before-pr.response.private",
+      "bytes": 30582,
+      "sha256": "76ed75b98669c35ec83236d7942b530b1750b14e03323c1a6cb690285a36c029"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/before-pr.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/branch-rules.raw.private.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/branch-rules.request.json",
+      "bytes": 246,
+      "sha256": "0b0b2cd73ca1b57260ee553743f8e9bd0d662b163959a610b373585481820b7e"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/branch-rules.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/branch-rules.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/changed-files.raw.private.json",
+      "bytes": 3650641,
+      "sha256": "63128f8a9c1b61cd412d1dd58c62455faec888ad94c29840d9b5c558f8e11480"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/changed-files.request.json",
+      "bytes": 273,
+      "sha256": "397c8a4081d88389316f785a102c0eb094ea83b298bfd97b6d6a4e7d7df1af18"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/changed-files.response.private",
+      "bytes": 3641975,
+      "sha256": "13478034fdba73c978122a2b9d49bd0c680037fe9a5c5f190107f410fb42e76e"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/changed-files.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/closures-page-1.raw.private.json",
+      "bytes": 731,
+      "sha256": "81f329d642e2f3e61eb8f9a886e3d6503b9fb1d561441daec746e433c5830646"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/closures-page-1.request.json",
+      "bytes": 148,
+      "sha256": "3978a3e0142b7d7efbe1c4aabba5ddd47da9cb330643f248f3307c2222127795"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/closures-page-1.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-check-runs.raw.private.json",
+      "bytes": 123831,
+      "sha256": "ebbbb30c46ce0e13cfd8122eb09314a8e344a765772f28d8a177b90fe03687a5"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-check-runs.request.json",
+      "bytes": 327,
+      "sha256": "06f41ca62757a05b20e81e26519d06a073e441887502b2b975ef3bf251418420"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-check-runs.response.private",
+      "bytes": 116996,
+      "sha256": "8f7e0b1feb442603c2c8586bf7b15aab62f9e1836c4d96dc24619b6d5ff9b89e"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-check-runs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-check-suites.raw.private.json",
+      "bytes": 129306,
+      "sha256": "e69c0c6b4dfb4b30ca14a42d1196f37a124e186797a950b47faebf4937e99cef"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-check-suites.request.json",
+      "bytes": 318,
+      "sha256": "e95b918ea03c18665a488e84b11bfe0422611724f90470b36ee732c518c623aa"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-check-suites.response.private",
+      "bytes": 124022,
+      "sha256": "23558c38fef466500eaf38f6f018b3496bb62247f58fc9429f51a7de9ec51d9c"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-check-suites.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-commit.raw.private.json",
+      "bytes": 164570,
+      "sha256": "deaf0bae0d6b509bf81e4b6155fa7c073de9a2311566ec1b49b910c4405e7a46"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-commit.request.json",
+      "bytes": 293,
+      "sha256": "46f4e34d119f6b0e18650c68839b0d94c064ca54a3a8caa44bcf608a2a0bbf17"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-commit.response.private",
+      "bytes": 163925,
+      "sha256": "e41d9795fb5cbe18b04e8a3f7d8caae239cffd87dcaaadc76236aa340f7d34c5"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-commit.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-runs.raw.private.json",
+      "bytes": 171489,
+      "sha256": "49b55ac621db7dcb3e8c8705c0e59f8272f31e82149202c71fa8eee29a6df2c4"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-runs.request.json",
+      "bytes": 319,
+      "sha256": "62aa8b06b41e74e0affec2c77d336bbe182d9f1c960501ba5a21fc54df98c1cc"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-runs.response.private",
+      "bytes": 165479,
+      "sha256": "a3dc1821fc7df6e57e9776f87d84dc43a2741271f4087f0d4a48772a63be79a5"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-runs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-statuses.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-statuses.request.json",
+      "bytes": 309,
+      "sha256": "94be9e593f91f324ae2f5487262e5fdcd2fb20835afab97e5d4c9d1614edf579"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-statuses.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/head-statuses.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-check-runs.raw.private.json",
+      "bytes": 38,
+      "sha256": "3b29ca22d800ee4f4f72aa18efc5af2f17c8f788db9d63ab463b365d2c0920a2"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-check-runs.request.json",
+      "bytes": 323,
+      "sha256": "aaae49b761a036f56fda72c187f04819e1e0c25f3e0b80652e5c37e1dcd431ec"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-check-runs.response.private",
+      "bytes": 33,
+      "sha256": "e83cfac35507982a40cfeb776ce85aa0367e7646f81fe857df4a6c841ea8a170"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-check-runs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-check-suites.raw.private.json",
+      "bytes": 40,
+      "sha256": "4e929adbdc69abcb55cbd6c541fa88397ad113392ae033696f5e1ab55b596d50"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-check-suites.request.json",
+      "bytes": 314,
+      "sha256": "0255563999521220dd326a3a657a790e3b8aaf4e460e2d4c6a3cc8b6ed5d6fd7"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-check-suites.response.private",
+      "bytes": 35,
+      "sha256": "5eab0fc75af2063c338a2776c933c41fc944239dfd2f21247b24e2189ea6f9bd"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-check-suites.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-commit.raw.private.json",
+      "bytes": 1085921,
+      "sha256": "61871a394264364304b16b791a6f36d6b1461e74938df05d26faf6b72613ffb0"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-commit.request.json",
+      "bytes": 294,
+      "sha256": "d63bf3f39d249582c02dd42ebbe43ec7e963e442381cb4f0e599ff2a91fee34b"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-commit.response.private",
+      "bytes": 1080075,
+      "sha256": "a0538806723d9a008685388504b93331ddc2094bbe4547132fd3324ee9b32cbb"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-commit.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-runs.raw.private.json",
+      "bytes": 41,
+      "sha256": "725143e0e46d6aefd0d32064f5407f39c7c2149674a6fb60e3f3376c71e7b5ad"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-runs.request.json",
+      "bytes": 315,
+      "sha256": "84e9a93da47daa093a98d9e3de7378d7eb0a86cf378e3831004c83e97e5045e6"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-runs.response.private",
+      "bytes": 36,
+      "sha256": "a2790a384d7d281e7395679000c35d27768d89dbd7052f725b8f4688beb59915"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-runs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-statuses.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-statuses.request.json",
+      "bytes": 309,
+      "sha256": "d2a8d45c79145587bb0566786a587ba156c4ef40dbe557352492f9c39039bf8b"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-statuses.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/merge-statuses.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/review-comments.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/review-comments.request.json",
+      "bytes": 270,
+      "sha256": "76b95ab56bcbeb80cac50df07f3b854bee2ae7a1e1d596ee3be113489a0c82df"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/review-comments.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/review-comments.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/reviews.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/reviews.request.json",
+      "bytes": 269,
+      "sha256": "4d92ff1dd2330b88783adc9c5dd814bde07fefa2a4be7c2fbd44856ef9009f82"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/reviews.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/reviews.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/rulesets.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/rulesets.request.json",
+      "bytes": 282,
+      "sha256": "d6838a2b083afc663795a6f2606f81c7854df0b36a4b91d42c1c3029a5ef16f0"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/rulesets.response.private",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/rulesets.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987459-jobs.raw.private.json",
+      "bytes": 2040,
+      "sha256": "ab31ebec8faa246ecd1838c089c433a9e331b90813ddb13407f9a1d542b694e5"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987459-jobs.request.json",
+      "bytes": 295,
+      "sha256": "5d322829e3adc87cd70ab8b11f08f82a391d4701ea446bcaafa2ae84605cae3e"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987459-jobs.response.private",
+      "bytes": 1919,
+      "sha256": "f191a46d263b02e131acafb7aaf86bdb2b57d9ec1421b2c6ef0c57b7b6b2956a"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987459-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987462-artifacts.raw.private.json",
+      "bytes": 790,
+      "sha256": "28c7774ec99ec5a3b371fb13c346e713ec732f2ab2fbf4bf4ba03c501a8aba1f"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987462-artifacts.request.json",
+      "bytes": 270,
+      "sha256": "fc661850cff070d9511dd69ae6e162e19501cbce3534654032e0ba2267d4a960"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987462-artifacts.response.private",
+      "bytes": 753,
+      "sha256": "5847c48f926fca403de8e66c55a1ce7cdbbd9558cbe526ef0b7f21510fd5d229"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987462-artifacts.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987462-jobs.raw.private.json",
+      "bytes": 15175,
+      "sha256": "fed926c64e6b5ac772df51c81c563c1bd3b674528dd5011c0c3fa7917f49ead1"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987462-jobs.request.json",
+      "bytes": 296,
+      "sha256": "ff422879d1e81bc2ea3caa166ab835794a5461df31da36b0df0be4d1ae97e4ec"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987462-jobs.response.private",
+      "bytes": 14235,
+      "sha256": "3a8197851831d312cc10d1ffca92e20bda172602bc0b861e3114e98860f5fec0"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987462-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987463-jobs.raw.private.json",
+      "bytes": 2565,
+      "sha256": "016d29f38c2470587d1b2c2169d412c26007663c45ac079759e879d40b902cc2"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987463-jobs.request.json",
+      "bytes": 295,
+      "sha256": "f50a2a941f742968acaf1f3a79ca285a381772e0df7e19ac3961d7c845473a6f"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987463-jobs.response.private",
+      "bytes": 2408,
+      "sha256": "1633f825d103bb1f77ed04be1776809bbb703d9e6622a5b68053c75d8e4c888d"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987463-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987464-jobs.raw.private.json",
+      "bytes": 2841,
+      "sha256": "bdee834e2d323c794893c22461f22b2fecf48180e1424b9d4d830785e06019c2"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987464-jobs.request.json",
+      "bytes": 295,
+      "sha256": "c61d48660b5d2298eb3a46d0e542ec595ec24e13fbe9f6f36d6f3f7f87daf773"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987464-jobs.response.private",
+      "bytes": 2660,
+      "sha256": "f844392923cadfdcd49c330cb2ab0a4ab59355a2ebad86721f7b2d726eff781d"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987464-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987468-jobs.raw.private.json",
+      "bytes": 3318,
+      "sha256": "f4ae561b21210fa0802c4e572b213e30d08a60e652d136ad4559a63b8060e5cc"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987468-jobs.request.json",
+      "bytes": 295,
+      "sha256": "0e258e76aaa4d4ce60b035efe166340c1095dd56bcab8f63f935763c7d0fe1b5"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987468-jobs.response.private",
+      "bytes": 3113,
+      "sha256": "f72c18c93752b977e1ebb1497970ff58fdddce27de560dd7a0abc0ed6c81dbad"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987468-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987471-jobs.raw.private.json",
+      "bytes": 21244,
+      "sha256": "ac31957a896d2f1bfee1ec6c9ad2c591a86c76b178357e6d0fd2ef56fb45eb08"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987471-jobs.request.json",
+      "bytes": 296,
+      "sha256": "44f5c0813e1a34017df67463a257dbd67f0aed2591af2acf15a2d1e13c94b307"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987471-jobs.response.private",
+      "bytes": 19962,
+      "sha256": "1770b9a8a33e789a828692274d10b1e87ce92d05116e6e1dae2cb6f568a5feae"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987471-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987473-jobs.raw.private.json",
+      "bytes": 7924,
+      "sha256": "7a25cb80253759ca23ff71e21b604e8588f5f3a3b828497125f530f41431396d"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987473-jobs.request.json",
+      "bytes": 295,
+      "sha256": "6a94d2f5adf27da00ca76be2322575814d8b262589688355fcaa0b4a9cd8265a"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987473-jobs.response.private",
+      "bytes": 7448,
+      "sha256": "93a09c4bbe80901b81430219a6d3d2dc3c9078a2e391e9f705433f0ce4be8902"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987473-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987482-jobs.raw.private.json",
+      "bytes": 24130,
+      "sha256": "dc88aca5ec1eea7130a8533ecea67bbe8e3578dc8f5965e8fc90de46aa98edb9"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987482-jobs.request.json",
+      "bytes": 296,
+      "sha256": "dc5f792684f5d83ac9af434f812ed5aaf86a00d65e9bbbabbd0b443676daaae8"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987482-jobs.response.private",
+      "bytes": 22659,
+      "sha256": "3b4307446a002dbba2d91fb6a81d08713dec3bb5d618a89aa08c74ed9b99a9f6"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987482-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987484-artifacts.raw.private.json",
+      "bytes": 786,
+      "sha256": "d55ff6c2b40209fda861d54f8b7a97dca8653ef31f2f5f7562436ff5d8c45d35"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987484-artifacts.request.json",
+      "bytes": 270,
+      "sha256": "eded290eca344b50d19c074cd582997047c7b80002301578ca25e09d051cdfc9"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987484-artifacts.response.private",
+      "bytes": 749,
+      "sha256": "e5b44f45cf5c59eebe930188eff26da8f59208ae870908224cc9c7ac91a50447"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987484-artifacts.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987484-jobs.raw.private.json",
+      "bytes": 4659,
+      "sha256": "16683b66f5011977470f6c2ffd70078d1d33775475cb26c325f2ae199c4fc254"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987484-jobs.request.json",
+      "bytes": 295,
+      "sha256": "03b46cbac9aa660fb26724d179be803faed57d3d5c8e9b63f1da227f2823a5af"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987484-jobs.response.private",
+      "bytes": 4384,
+      "sha256": "9ba4b2817108b1565611c52eacdd8339e795545b5993f45551ef03e6bff59036"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987484-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987486-jobs.raw.private.json",
+      "bytes": 16403,
+      "sha256": "487550924bbaa606e2d49265b87511c11837b52a26d6210601236f56cf83c154"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987486-jobs.request.json",
+      "bytes": 296,
+      "sha256": "695ae54d7fd9c982884f5f0ae5bc39ed5b140a501b5f16d2b69a4ffebb84ceac"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987486-jobs.response.private",
+      "bytes": 15340,
+      "sha256": "08dc5af93555f87062c1415ad4ad745125f3db8be92257917427c133e2f2dce9"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987486-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987514-artifacts.raw.private.json",
+      "bytes": 2268,
+      "sha256": "f0e004a6154171983d9a72aea2a9fe120bc4fc179a0c9c7c940af80c4c4ddecf"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987514-artifacts.request.json",
+      "bytes": 271,
+      "sha256": "50937ff2d38ddfd8ce6cf563f7b0d193903b3601f72a94f6d355e441ff68f975"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987514-artifacts.response.private",
+      "bytes": 2165,
+      "sha256": "3632fbb221066a628d03d20751512fd39b63daa4139612419c5c5175924d8798"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987514-artifacts.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987514-jobs.raw.private.json",
+      "bytes": 15961,
+      "sha256": "a13b35d89ec884a66436683c55eb583f322b10b7d6f43598ee0d5dd5417c3153"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987514-jobs.request.json",
+      "bytes": 296,
+      "sha256": "c8089d258565613ee22b526a94564360d87768a6aec952ad02d71715de268703"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987514-jobs.response.private",
+      "bytes": 14972,
+      "sha256": "e319db6db074c3b1acb4a89dd8a826ece8189165e0f546a6d73e90b52cafbe7f"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987514-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987519-jobs.raw.private.json",
+      "bytes": 11475,
+      "sha256": "ea9b0be10a021f94f05a5cfccbb474789c027605c743837d82c0a1355e401f2e"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987519-jobs.request.json",
+      "bytes": 296,
+      "sha256": "68e813e54dbb9935d402fbf8bcca369099c628ae7453d3f1d114363406c6c9de"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987519-jobs.response.private",
+      "bytes": 10724,
+      "sha256": "330435499fbf02e28e1c3d56e5ec252e81d8daa65d0e0cf1accbebd32646106f"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987519-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987520-jobs.raw.private.json",
+      "bytes": 2970,
+      "sha256": "27998c3b55b1bbc321b1a63c1517fe088d4dbfda8c48eb3978a774cef0476d4b"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987520-jobs.request.json",
+      "bytes": 295,
+      "sha256": "b770af9b2d02090d7678296ee6452a483e336917cfd1a8733fbdf48ff750a589"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987520-jobs.response.private",
+      "bytes": 2789,
+      "sha256": "4ffa751aa1011f3f01cdca8d29700a9de370442cac9c628401eb1d822a3e9e9c"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/run-38126987520-jobs.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/threads-page-1.raw.private.json",
+      "bytes": 721,
+      "sha256": "96c9576bb81c7ec3757b4eb71baa6474eac42d6505848e0fb11b3d8396b2fe32"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/threads-page-1.request.json",
+      "bytes": 148,
+      "sha256": "25376c634d8ccc9fad46c8e2ef90174bb82ce190fda28103d7e388e5bb702646"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-live-CI-reconciliation/threads-page-1.stderr.private",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+      "bytes": 897,
+      "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+      "bytes": 1158,
+      "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+    },
+    {
+      "path": "/workspace/engineering/current618-309-and221-CI-wave/safe-canonical-existing-9744-bf95-reuse.json",
+      "bytes": 2058,
+      "sha256": "7b18e39a14853bd082791d261d3133f6d79f2967e049fd753ed353cc7cf6256c"
+    },
+    {
+      "path": "/workspace/engineering/current618-309-and221-CI-wave/freeze-live-censuses.py",
+      "bytes": 17975,
+      "sha256": "12e1db1e021ece4d0b321b1b094d12ef741053c328e7c03ab643364e0e1f8935"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current618-release-preflight/frozen-current618-release-preflight.json",
+      "bytes": 69339,
+      "sha256": "00cb933d4398c82210aedb6944266bc42bdee72125baa049ada517e256f1e080"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+      "bytes": 19366,
+      "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/immutable-current776-linux-consumer-preexecution-proposal-v2.json",
+      "bytes": 25752,
+      "sha256": "57a8beb87e5a1c03fae276e4b22d7fc8734d1f42cc3c739ceb989a0d946e73a7"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-frozen-one-consumer-preexecution-review.json",
+      "bytes": 9830,
+      "sha256": "6346a5feb759d9fb6615d20da814b02de8c528ae273ec7eaa20e56b8327fdb7f"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-one-actual-current-linux-consumer-review.json",
+      "bytes": 8197,
+      "sha256": "f230cbdc1a7e4b9b5bb2f9323d7aa1e645c89778d0db9a554c32cf6bcae69967"
+    }
+  ]
+}

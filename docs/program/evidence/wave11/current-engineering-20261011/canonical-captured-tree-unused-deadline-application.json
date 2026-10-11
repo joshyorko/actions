@@ -1,0 +1,14 @@
+{
+  "status": "EXACT_ACCEPTED_ORIGINAL_CONTROL_LESSON_APPLIED_CANONICAL_GUIDANCE",
+  "patch": {
+    "path": "/workspace/engineering/pr306-original-cleanup-deterministic-control-owned/canonical-captured-tree-unused-deadline-proposed.patch",
+    "bytes": 1244,
+    "sha256": "36cc60d3263af329268d80c32f28fdd6ae5909fd71d9fc7bd60ba59c3dd04f93"
+  },
+  "independent_review_sha256": "58b007d23144a46522095ba727eeb8ec6cfaaf13dd09bcbbb387222c57f0bfa5",
+  "git_apply_check": "PASS",
+  "git_apply": "PASS",
+  "original_function_control_only": "No hostedcause or productionfix acceptance",
+  "canonical": "docs/skills/repository-operations.md",
+  "prior62_added_lines_retained": true
+}

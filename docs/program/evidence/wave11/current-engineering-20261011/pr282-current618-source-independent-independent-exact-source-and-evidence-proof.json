@@ -1,0 +1,236 @@
+{
+  "status": "PASS_READ_ONLY_EXACT_CURRENT_SOURCE_AND_RECORDED_GATES",
+  "observed_utc": "2026-10-11T10:05:35.650725+00:00",
+  "receipt": {
+    "path": "/workspace/engineering/pr282-actual618-refresh/frozen-source-receipt.json",
+    "bytes": 67074,
+    "sha256": "78f41d01e5a1bdfe4df059f7cc797c7a8a80a840b9d12b8d95fad6a98816db71"
+  },
+  "source": {
+    "head": "e736f846557ed1d603348e97c5eb80060d62e3e2",
+    "tree": "07b716104ba623df81c00bd83be08dde84dd29f1",
+    "ordered_parents": [
+      "c75dfa6969c2c562a59a967e2e674fea6c8af457",
+      "6181b044c75de35386f1ae30e71725398b6a7feb"
+    ],
+    "branch": "feat/canvas-template-20261010",
+    "clean": true
+  },
+  "complete_union": {
+    "typed_leaves": 1433,
+    "parent_counts": [
+      1423,
+      1419
+    ],
+    "no_deletions": true,
+    "novel_combined_paths": [
+      "docs/skills/repository-operations.md"
+    ],
+    "three_way_conflicts": [
+      "docs/skills/repository-operations.md"
+    ],
+    "Git_FS_prepost_body_exec_bits_exact": true,
+    "executable_files": 10,
+    "symlinks": 0,
+    "typed_sha256": "6f5d22aa2e27254c8c224e2ee1c1b7b31b543419d20273094c07d481a9ddb8d9"
+  },
+  "references": {
+    "final": 50,
+    "historical": 43,
+    "all_hash_size_exact": true
+  },
+  "Canvas": {
+    "whole39_names": [
+      "scope",
+      "source_identity",
+      "declared_core_version",
+      "registry_wheel_digest",
+      "worker_core_version",
+      "worker_module_hashes",
+      "worker_prefix_absolute",
+      "worker_module_inventory",
+      "worker_modules_contained",
+      "runtime_origin",
+      "runtime_module_digest",
+      "runtime_args_list",
+      "runtime_args_count",
+      "runtime_interpreter_absolute",
+      "runtime_module_entry",
+      "runtime_wrapper_reaped",
+      "runtime_live_descendants_empty",
+      "runtime_readers_empty",
+      "runtime_zombies_empty",
+      "runtime_snapshot_complete",
+      "runtime_reap_complete",
+      "runtime_cleanup_errors_empty",
+      "runtime_calls",
+      "template_digest",
+      "package_manifest_digest",
+      "resource_digest",
+      "browser_status",
+      "browser_explicit_selection",
+      "browser_version",
+      "browser_preflight_digest_valid",
+      "browser_digest",
+      "browser_selected_path",
+      "browser_temp_removed",
+      "browser_temp_absolute",
+      "browser_temp_absent",
+      "browser_playwright_version",
+      "browser_lock_digest",
+      "limits_list",
+      "limits_count"
+    ],
+    "method_AST_and_step_equal_original9c": true,
+    "three_original_tests_staging_equal_original9c": true,
+    "generator_body_AST_equal_c75": true,
+    "no_fresh_2_plus_8_claim": true,
+    "helper_edc7_exact": true
+  },
+  "RCC": {
+    "nine_sample_exact_d642_and_618": true,
+    "scope": "Nine source sample; not whole producer/actual/full134"
+  },
+  "producer": {
+    "historical": 268,
+    "current": 275,
+    "matching": 259,
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py",
+      "action_server/src/actions/server/templates/action-templates.yaml",
+      "action_server/src/actions/server/templates/action-templates.zip"
+    ],
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py",
+      "action_server/src/actions/server/templates/zips/canvas-query.zip"
+    ],
+    "five_selected_separate_exact": true,
+    "native": "UNQUALIFIED"
+  },
+  "prepared": {
+    "inputs": 30,
+    "old_source_current_bytes_exact": true,
+    "origins": 5,
+    "own_configs_prefixes_python_origins_exact": true,
+    "ignored_RCC_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "mode": "0711",
+    "new_installer": false
+  },
+  "recorded_gates": {
+    "Doctor": "PASS",
+    "Bootstrap_reuse": "30 exact prepared/current inputs and five concrete own prefixes/origins; no installer",
+    "Toolkit": 179,
+    "Canvas_source": 75,
+    "focused_staging": {
+      "passed": 4,
+      "deselected": 24
+    },
+    "RCC_source": {
+      "passed": 112,
+      "skipped": 1,
+      "deselected": 3,
+      "skip": "existing opt-in actual NOTRUN"
+    },
+    "configured_lint": "Ruff/format/Isort PASS",
+    "Mypy": 348,
+    "generated_workflows": 8,
+    "workflow_plus_dependabot": 26,
+    "all_tracked_YAML": 30,
+    "full_source": {
+      "passed": 1233,
+      "skipped": 12,
+      "warnings": 15,
+      "seconds": 133.96,
+      "workers": 2,
+      "single_authorized_attempt": true,
+      "outer_bound": "600s TERM +10s KILL",
+      "gateway": "CanonicalRCC18.19.3 -> own Runtime Poetry invoke test-not-integration"
+    }
+  },
+  "observed_log_counts": {
+    "Doctor.log": [],
+    "Toolkit.log": [
+      [
+        "179",
+        "",
+        "",
+        "",
+        "38.14"
+      ]
+    ],
+    "Canvas-scoped.log": [
+      [
+        "75",
+        "",
+        "",
+        "",
+        "1.68"
+      ],
+      [
+        "4",
+        "",
+        "24",
+        "",
+        "1.29"
+      ]
+    ],
+    "Canvas-gateway-contract.log": [],
+    "current-RCC-and-static.log": [
+      [
+        "112",
+        "1",
+        "3",
+        "4",
+        "9.09"
+      ]
+    ],
+    "generator-roundtrip.log": [],
+    "full-configured-source.log": [
+      [
+        "1233",
+        "12",
+        "",
+        "15",
+        "133.96"
+      ]
+    ]
+  },
+  "YAML": {
+    "tracked": 30,
+    "workflow_plus_dependabot": 26,
+    "generated": 8,
+    "original_before_after_current_exact": true
+  },
+  "initial_parser_failure": {
+    "original_immutable_retained": true,
+    "scope": "Receipt log-schema parser failure; unchanged original successful gates and no source gate rerun"
+  },
+  "documentation": {
+    "canonical_files": [
+      "docs/skills/repository-operations.md",
+      "docs/skills/provenance-observability.md"
+    ],
+    "exact_accepted_parent_patch_sha256": "436b14701d385f7b652ad16496a32b64a965caa930970b3950b993e64f0c2b9e",
+    "bytes": 13633,
+    "additions": 167,
+    "removals": 1,
+    "both_parent_added_lessons_retained": true,
+    "no_cosmetic_child": true
+  },
+  "not_run": [
+    "Tests/gates/installer/native/browser/provider/download",
+    "Git mutation/push/merge"
+  ],
+  "upstream_disposition": "none"
+}

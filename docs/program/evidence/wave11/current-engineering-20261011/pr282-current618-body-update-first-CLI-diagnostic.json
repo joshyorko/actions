@@ -1,0 +1,1 @@
+{"status": "FAILED_BEFORE_CONFIRMED_BODY_UPDATE", "command": "gh pr edit --body-file", "reason": "GitHub classic projectCards GraphQL deprecation", "body_expected_bytes": 15308, "followup": "REST exact body structured request; no source or CI gate rerun"}

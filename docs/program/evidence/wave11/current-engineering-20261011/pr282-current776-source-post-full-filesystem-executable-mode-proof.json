@@ -1,0 +1,5699 @@
+{
+  "head": "c75dfa6969c2c562a59a967e2e674fea6c8af457",
+  "source_receipt_sha256": "58ae1c1657c4cc310d1b43c70391b4b7038499d6d07cb215112761fa81621977",
+  "all1423_executable_bits_match_currentGitmode": true,
+  "checked": {
+    ".agents/skills/actions-repository/SKILL.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".agents/skills/actions-repository/agents/openai.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".claude/agents/frontend-developer.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".claude/agents/ui-ux-designer.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".claude/settings.local.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".coverage-thresholds.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".coveragerc": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".devcontainer/Dockerfile": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".devcontainer/bin/bootstrap": {
+      "git_mode": "100755",
+      "filesystem_mode": "0o700"
+    },
+    ".devcontainer/bin/smoke": {
+      "git_mode": "100755",
+      "filesystem_mode": "0o700"
+    },
+    ".devcontainer/bin/smoke-host": {
+      "git_mode": "100755",
+      "filesystem_mode": "0o700"
+    },
+    ".devcontainer/bin/verify-work-items": {
+      "git_mode": "100755",
+      "filesystem_mode": "0o700"
+    },
+    ".devcontainer/devcontainer.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".devcontainer/tests/test_contract.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".devcontainer/tests/test_service_orchestration.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".editorconfig": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".eslintignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".gitattributes": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".githooks/pre-commit": {
+      "git_mode": "100755",
+      "filesystem_mode": "0o700"
+    },
+    ".github/CODEOWNERS": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/ISSUE_TEMPLATE/bug-report.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/ISSUE_TEMPLATE/config.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/ISSUE_TEMPLATE/feature-request.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/PULL_REQUEST_TEMPLATE.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/change-tiers.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/copilot-instructions.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/dependabot.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/_gen_workflows.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/action_server_build_cdn.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/action_server_frontend_tests.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/action_server_update_downloads.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/actions_core_tests.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/actions_release.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/actions_runtime_binary_release.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/actions_runtime_frozen_catalog_rollback.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/actions_runtime_pypi_release.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/actions_runtime_rcc_provider_rollback.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/actions_runtime_recovery.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/actions_runtime_tests.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/ai-audit.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/copilot-setup-steps.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/coverage-gate.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/deploy-beta-templates.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/deploy-templates.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/developer_toolkit.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/frontend-build-cdn.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/frontend-build-unauthenticated.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/frontend-build.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/http_helper_tests.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/http_lib_release.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/lighthouse.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/quality-report.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".github/workflows/work_items_release.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".prettierignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".project": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".pydevproject": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".settings/org.python.pydev.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".superpowers/sdd/2026-08-05-action-server-devcontainer/task-1-report.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".superpowers/sdd/2026-08-05-action-server-devcontainer/task-2-report.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".superpowers/sdd/2026-08-05-work-items-hardening/progress.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".superpowers/sdd/2026-08-05-work-items-hardening/task-1-report.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".superpowers/sdd/2026-08-05-work-items-hardening/task-2-report.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    ".vscode/launch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "AGENTS.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "CLAUDE.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "CONTRIBUTING.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "LICENSE": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "NOTICE.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/.vscode/launch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/action-server.spec": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/build-binary/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/build-binary/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/build-binary/artifact_validator.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/build-binary/build_artifact.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/build-binary/determinism.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/build-binary/downloads_index.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/build-binary/package_manifest.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/build-binary/package_resolver.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/build-binary/tree_shaker.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/build.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/CHANGELOG.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/DEVELOPMENT.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/00-startup-command-line.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/01-package-yaml.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/02-process-pool.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/03-whitelist-on-start-or-import.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/04-custom-data.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/05-exposing.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/06-package-distribution.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/07-secrets.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/08-clean-tools-caches.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/09-structuring-actions.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/10-generated-logs-and-artifacts.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/11-action-server-ui.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/12-oauth2-development.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/13-post-run-script.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/14-dev-tasks.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/15-package-metadata.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/16-run-action-sync-async.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/17-external-endpoints.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/19-actions-request.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/20-chat-files.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/21-call-action.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/images/action-server-ui-initial.png": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/images/action-server-ui-run-action.png": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/images/action-server-ui-run-history.png": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/docs/guides/images/action-server-ui-run-log.png": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/.eslintrc.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/.lighthouserc.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/.npmignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/LICENSE": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/LICENSES/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/WorkItemsApiErrors.test.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/WorkItemsPage.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/a11y/Dialog.a11y.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/a11y/DropdownMenu.a11y.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/a11y/Input.a11y.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/a11y/Table.a11y.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/a11y/Textarea.a11y.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/a11y/custom-matchers.d.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/a11y/setup.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/api-client.test.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/browser-action-session.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/browser-auth.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/components/ui/ActionsStatus.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/components/ui/Badge.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/components/ui/Dialog.animation.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/components/ui/Dialog.animation.test.tsx.backup": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/components/ui/Dialog.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/components/ui/DropdownMenu.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/components/ui/ErrorBanner.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/components/ui/Input.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/components/ui/Loading.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/components/ui/Table.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/components/ui/Textarea.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/components/ui/animations.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/fixtures/sample-actions.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/performance/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/performance/Table.perf.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/runtime-api.test.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/runtime-events.test.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/runtime-providers.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/runtime-query-keys.test.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/runtime-shell.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/sbom-determinism.test.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/topology/frontend-topology.test.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/ui-system.test.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/utils/test-utils.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/visual/dialog.spec.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/visual/dropdown.spec.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/visual/form-components.spec.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/visual/product-evidence.spec.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/visual/state-indicators.spec.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/visual/table.spec.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/__tests__/websocketConn.test.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/canvas-view/canvas-template-runtime.spec.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/canvas-view/host-harness.html": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/canvas-view/host-harness.spec.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/canvas-view/index.html": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/canvas-view/src/McpCanvasView.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/canvas-view/src/host-harness.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/canvas-view/src/main.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/canvas-view/src/query-results/CanvasContractRoundTrip.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/canvas-view/src/query-results/QueryResultsView.test.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/canvas-view/src/query-results/QueryResultsView.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/canvas-view/src/query-results/query-results.css": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/canvas-view/vitest.config.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/runtime/index.html": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/apps/runtime/src/main.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/docs/CROSS_BROWSER_TESTING.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/docs/PERFORMANCE_AUDIT.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/eslint.config.js": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/package-lock.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/package.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/playwright.canvas-harness.config.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/playwright.canvas-template.config.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/playwright.config.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/playwright.product-evidence.config.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/postcss.config.js": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/scripts/check-bundle-size.cjs": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/scripts/check-bundle-size.js": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/scripts/inline-canvas-assets.mjs": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/scripts/inline-runtime-assets.mjs": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/scripts/native-browser-acceptance.mjs": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/scripts/native-history-acceptance.mjs": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/scripts/native-workitems-ui-acceptance.mjs": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/scripts/product-evidence-server.mjs": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/scripts/run-product-evidence.mjs": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/scripts/validate-artifacts.mjs": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/scripts/write-artifact-manifest.mjs": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/App.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/__tests/encrypt.test.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/__tests/fixtures/actionPayload.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/__tests/fixtures/case2ActionPayload.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/__tests/fixtures/case2FormData.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/__tests/fixtures/case2InputSchema.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/__tests/fixtures/formData.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/__tests/fixtures/inputSchema.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/__tests/formData.test.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/app/RuntimeAuthentication.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/app/RuntimeLayout.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/app/RuntimeNavigation.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/app/RuntimeProviders.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/app/RuntimeRoutes.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/app/RuntimeShell.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/schedules/ScheduleCalendar.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/schedules/ScheduleForm.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/schedules/cron/CronDaySelector.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/schedules/cron/CronHourSelector.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/schedules/cron/CronMinuteSelector.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/schedules/cron/CronMonthSelector.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/schedules/cron/CronPreview.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/schedules/cron/CronWeekdaySelector.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/schedules/cron/IntervalBuilder.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/schedules/cron/VisualCronBuilder.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/schedules/cron/WeekdayBuilder.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/ui/Badge.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/ui/Button.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/ui/Dialog.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/ui/DropdownMenu.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/ui/ErrorBanner.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/ui/Input.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/ui/Loading.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/ui/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/ui/Select.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/ui/Table.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/components/ui/Textarea.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/pages/Actions.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/pages/Analytics.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/pages/Artifacts.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/pages/Logs.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/pages/Overview.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/pages/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/pages/Robots.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/pages/RunHistory.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/pages/Schedules.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/pages/WorkItems.design.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/pages/WorkItems.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/core/services/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/index.css": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/queries/actions.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/queries/analytics.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/queries/robots.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/queries/runtime.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/queries/schedules.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/queries/workItems.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/react-19-compat.d.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/api-client.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/browser-auth.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/components/Icons.tsx": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/constants/index.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/context/actionServerContext.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/data/sampleData.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/hooks/useLocalStorage.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/hooks/useTheme.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/runtime-api.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/runtime-events.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/runtime-query-keys.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/types.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/utils/animations.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/utils/cn.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/utils/encryption.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/utils/formData.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/utils/helpers.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/utils/modelContainer.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/utils/oauth2.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/utils/slugify.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/src/shared/utils/websocketConn.ts": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/tailwind.config.js": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/tsconfig.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/frontend/vite.config.js": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/go-wrapper/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/go-wrapper/assets/.gitkeep": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/go-wrapper/go.mod": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/go-wrapper/go.sum": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/go-wrapper/main.go": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/go-wrapper/process.go": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/go-wrapper/process_test.go": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/poetry.lock": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/poetry.toml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/pyinstaller-hooks/pre_find_module_path/hook-actions.server.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/pyproject.toml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/ruff.toml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/archive_native_artifact_provenance.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/dakota_workitems_native_acceptance.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/frozen_wrapper_acceptance_plugin.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/install_candidate_core.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/publish_verified_runtime.py": {
+      "git_mode": "100755",
+      "filesystem_mode": "0o700"
+    },
+    "action_server/scripts/test_native_artifact_manifest.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/test_native_artifact_provenance_archive.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/test_native_process_ownership.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/verify_frozen_catalog_artifact.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/verify_frozen_catalog_harness.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/verify_frozen_catalog_junit.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/verify_frozen_catalog_wrapper_artifact.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/verify_native_acceptance.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/verify_native_history.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/verify_published_runtime_floor.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/scripts/write_native_artifact_manifest.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/__main__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_action_package_handler.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_actions_cloud.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_actions_import.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_actions_process_pool.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_actions_run.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_actions_run_helpers.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_api_action_package.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_api_action_routes.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_api_analytics.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_api_oauth2.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_api_robots.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_api_run.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_api_schedules.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_api_secrets.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_api_triggers.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_api_work_items.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_app.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_artifact_storage.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_ask_user.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_browser_session.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_build_common/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_build_common/build_executable.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_build_common/entitlements.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_build_common/file_from_function.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_build_common/process_call.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_build_common/py.typed": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_build_common/rcc_bundle.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_build_common/root_dir.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_build_common/signing.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_build_common/version_from_github_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_build_common/workflows.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_build_common/zip_assets.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_cli_helpers.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_cli_impl.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/action_package_handling/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/action_package_handling/cli_errors.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/app_mutex.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/autoexit.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/callback.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/gallery.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/gen_certificate.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/locations.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/ls_protocols.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/monitor.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/null.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/oauth2_settings.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/_conda_deps.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/_deps_protocols.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/_package_deps.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/_pip_deps.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/analyzer.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/conda_cloud.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/conda_impl/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/conda_impl/conda_channel.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/conda_impl/conda_match_spec.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/conda_impl/conda_path.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/conda_impl/conda_url.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/conda_impl/conda_version.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/pip_impl/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/pip_impl/pip_distlib_util.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/pip_impl/pip_packaging_structure.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/pip_impl/pip_packaging_version.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_deps/pypi_cloud.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/package_exclude.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/process.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/process_logging.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/protocols.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/py.typed": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/run_in_thread.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/system_mutex.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/termcolors/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/text.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/tools.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/uris.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/url_callback_server.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/wait_for.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_common/yaml_with_location.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_community_expose.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_community_expose_lifecycle.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_database.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_datadir_commands.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_devenv.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_directory_publication.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_download_rcc.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_encryption.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_errors.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_errors_action_server.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_gen_ids.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_mode.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_models.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_new_project.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_new_project_helpers.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_notifications.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_oauth2.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_portable_paths.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_preload_actions/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_preload_actions/preload_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_preload_actions/preload_actions_autoexit.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_preload_actions/preload_actions_server_main.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_preload_actions/preload_actions_streams.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_preload_actions/preload_actions_teardown.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_protocols.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_rcc.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_rcc_robot_utils.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_rcc_runtime_adapter.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_robo_utils/auth.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_robo_utils/callback.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_robo_utils/constants.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_robo_utils/log_custom_handler.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_robo_utils/log_formatter.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_robo_utils/process.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_robo_utils/run_in_thread.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_robo_utils/system_mutex.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_runs_state_cache.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_scheduler.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_selftest.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_server.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_server_websockets.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_settings.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_slugify.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_static_contents.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_storage.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_triggers.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_user_session.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_watcher.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_whitelist.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_work_items_import.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/_work_items_paths.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/api.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/bin/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/cli.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/deployments/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/deployments/canonical.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/deployments/ids.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/deployments/source_manifest.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/deployments/source_read.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/deployments/source_staging.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/env/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/index.html": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/mcp/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/mcp/gateway_metadata.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/mcp/resource_routing.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/mcp/setup_mcp_server_from_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/mcp/setup_mcp_server_v2.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_add_action_enabled.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_add_action_managed_params.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_add_action_options.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_add_code_verifier.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_add_is_consequential.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_add_mcp_catalog_names.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_add_mcp_resource_routing.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_add_request_id_to_run.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_add_robot_run_columns.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_add_schedules.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_add_session_and_indexes.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_align_schema_indexes.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_initial.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_reconcile_run_columns.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/migrations/migration_reconcile_schema.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/package/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/package/_package_build.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/package/_package_build_cli.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/package/_package_metadata.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/package/_package_publish.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/package/_package_publish_api.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/package/_package_reader.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/package/package_exclude.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/py.typed": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/templates/action-templates.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/templates/action-templates.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/templates/zips/advanced.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/templates/zips/basic.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/templates/zips/canvas-query.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/templates/zips/mcp-v2-showcase.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/templates/zips/minimal.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/templates/zips/workflow-producer-consumer.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/action_package_handling/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/action_package_handling/cli_errors.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/gen_certificate.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/ls_protocols.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/oauth2_settings.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/_conda_deps.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/_deps_protocols.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/_package_deps.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/_pip_deps.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/analyzer.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/conda_cloud.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/conda_impl/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/conda_impl/conda_channel.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/conda_impl/conda_match_spec.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/conda_impl/conda_path.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/conda_impl/conda_url.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/conda_impl/conda_version.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/pip_impl/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/pip_impl/pip_distlib_util.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/pip_impl/pip_packaging_structure.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/pip_impl/pip_packaging_version.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/package_deps/pypi_cloud.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/termcolors/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/url_callback_server.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/src/actions/server/vendored_deps/yaml_with_location.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tasks.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tasks_cdn.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/acceptance_evidence/candidate-wheel-67e82ef7.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/acceptance_evidence/candidate-wheel-7cf11c8b.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/acceptance_evidence/candidate-wheel-e33987b6.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_app_locked_startup.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_autoexit.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_callback.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_gallery.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_gallery/test_import_gallery_action_packages.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_imports.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_package_exclude.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_process.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_system_mutex.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_text.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_tools.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_uris.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/common_tests/test_wait_for.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/fixtures.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/fixtures/deployments/canonical-json-v1.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/mcp/test_alias_history.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/mcp/test_canvas_query_template.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/mcp/test_mcp_gateway_metadata.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/mcp/test_mcp_integration.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/mcp/test_mcp_integration/test_mcp_integration_with_structured_output.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/mcp/test_mcp_v2_showcase_protocol_proof.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/mcp/test_mcp_v2_showcase_template.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/mcp/test_pinned_mcp_auth_sdk_contract.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/mcp/test_resource_history.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/mcp/test_setup_mcp_server.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/native_startup_diagnostics.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/calculator/calculator_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/calculator/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/greeter/greeter_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/greeter/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/hello/hello_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/hello/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/hello_uv/hello_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/hello_uv/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/no_conda/calculator/calculator_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/no_conda/check_headers/headers_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/no_conda/custom_model/action_custom_model.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/no_conda/greeter/greeter_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/no_conda/mcp/simple_mcp_server.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/no_conda/oauth2/hello_action_oauth2.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/no_conda/slow/action_slow.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/sample_templates/action-templates.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/resources/sample_templates/minimal.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/robo_utils/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/robo_utils/test_system_mutex.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/sample_data.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_action_description.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_action_unicode.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_action_unicode/a\u00e7\u00e3o_pkg/action_a\u00e7\u00e3o.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_action_unicode/test_action_unicode.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_actions_process_pool.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_api_analytics.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_api_robots.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_artifact_binding_lock.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_artifact_storage.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_binary.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_browser_origin_acceptance.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_browser_session.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli/test_help_-h.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli/test_help_import.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli/test_help_migrate.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli/test_help_start.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli/test_package_update_dry_run_backup_.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli/test_package_update_dry_run_no_backup_.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli/test_package_update_update_backup_.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli/test_package_update_update_no_backup_.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli_multi_package_sync.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cloud.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_cloud/test_cloud_list_organizations.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_community_expose.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_community_expose_lifecycle.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_create_conda_from_package_yaml.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/my_wheel/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/my_wheel/my_module.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_create_conda_from_package_yaml/test_create_conda_from_package_yaml.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_create_conda_from_package_yaml/test_package_update.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_create_new_project.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_current_candidate_import_rollback.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_database.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_database/some_action.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_database/some_run.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_database/test_database_datetime.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_database_shared.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_datadir_related_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_deployment_canonical_values.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_deployment_schema_probe.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_devenv.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_devenv/pack1/lib/mylib.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_devenv/pack1/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_devenv/pack1/src/my_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_devenv/pack1/tests/test_my_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_directory_publication.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_frontend_build_unauthenticated.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_frontend_integrity.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_frontend_topology_contract.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_log_credentials.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_log_verbosity.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_mcp_tunnel_origin_scope.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_native_startup_diagnostics.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_native_startup_diagnostics_workflow.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_oauth2.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_p0_snapshot_reload_boundaries.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack1/another/no.foo": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack1/another/not_ok.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack1/another/ok.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack1/folder/dont_ignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack1/folder/ignore_only_at_root": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack1/hello_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack1/ignore/some_file.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack1/ignore_only_at_root": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack1/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack2/hello_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack2/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack_external_endpoints/hello_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack_external_endpoints/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack_external_endpoints_bad/hello_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack_external_endpoints_bad/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack_oauth2_secrets/oauth2_check_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack_secrets/hello_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack_v2_fields_but_not_v2_marked/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/pack_v2_fields_but_not_v2_marked/src/hello_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/test_package_metadata.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/test_package_metadata_api.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/test_package_metadata_external_endpoints.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/test_package_metadata_external_endpoints_bad.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/test_package_metadata_oauth2_secrets.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/test_package_metadata_secrets.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/test_package_set_changelog.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/test_package_status.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package/test_package_upload.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package_yaml_structure.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package_yaml_structure/pack1/lib/mylib.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package_yaml_structure/pack1/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package_yaml_structure/pack1/src/my_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_package_yaml_structure/pack_too_new/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_preload_actions_exit.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_quickstart_validation.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_rcc_runtime_source_snapshots.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server/test_auth_routes.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server/test_full_run.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server/test_import_no_conda.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server/test_import_no_conda_schema1.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server/test_is_consequential_openapi_spec.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server/test_routes.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server/test_schema_request_no_actions_registered.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server/test_server_full_openapi_flag.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server/test_server_url_flag.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server/test_work_items_files.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_async.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_async/async_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_automigrate.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_cors.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_custom_model.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_custom_model/test_server_custom_model_argument.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_headers_in_body.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_headers_in_body/my_package/action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_hot_reload.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_https.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_parent_pid.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_post_run.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_post_run/post_run_script.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_request.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_response.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_response/action_using_response.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_secrets.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_secrets/pack_encryption/hello_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_secrets/pack_encryption_oauth2/hello_action_oauth2.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_websockets.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_whitelist.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_whitelist/test_whitelist_on_start.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_server_whitelist/test_whitelist_on_start_run.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_sorting_robolog.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_sqlite_commit_admission.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_template_bundle.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_watcher_shutdown.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_work_items_import.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/action_server_tests/test_worker_core_floor.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/build_system_tests/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/build_system_tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/build_system_tests/test_build_artifact.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/build_system_tests/test_package_manifest.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/build_system_tests/test_package_resolver.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/build_system_tests/test_tree_shaker.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/conftest.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/test_active_contracts.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/test_artifact_naming.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/test_artifact_validator_import.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/test_frontend_artifact_contract.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/test_frozen_wrapper_acceptance_plugin.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/test_package_revision_schema.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/test_source_manifest.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/test_source_read.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/test_source_staging.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/evidence/dakota_workitems_native_acceptance_20261008.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/evidence/dakota_workitems_native_acceptance_integrity_20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/evidence/dakota_workitems_native_acceptance_resume_20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/integration_tests/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/integration_tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/performance_tests/baseline.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/quickstart_tests/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "action_server/tests/quickstart_tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions-http-helper/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions-http-helper/.python-version": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions-http-helper/LICENSE": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions-http-helper/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions-http-helper/docs/CHANGELOG.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions-http-helper/poetry.lock": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions-http-helper/pyproject.toml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions-http-helper/src/actions_http/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions-http-helper/src/actions_http/py.typed": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions-http-helper/src/actions_http/types.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions-http-helper/tasks.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions-http-helper/tests/test_http_helper.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/docs/CHANGELOG.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/docs/api/.pages": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/docs/api/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/docs/api/actions.agent.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/docs/api/actions.api.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/docs/api/actions.chat.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/docs/api/actions.cli.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/docs/api/actions.mcp.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/docs/api/actions.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/docs/api/actions.server_integration.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/docs/development.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/poetry.lock": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/pyproject.toml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/scripts/verify_clean_wheel.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/__main__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_action_context.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_args_dispatcher.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_callback.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_collect_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_commands.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_config.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_constants.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_customization/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_customization/_extension_points.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_customization/_plugin_manager.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_exceptions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_fixtures.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_hooks.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_interrupts.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_lifecycle.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_lint_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_log_auto_setup.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_log_output_setup.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_managed_parameters.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_protocols.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_raw_types_handler.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_remove_refs.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_request.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_request_impl.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_response.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_secret/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_secret/_oauth2_secret.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_secret/_secret.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_table.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_uris.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/_variables_scope.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/agent/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/agent/_client.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/agent/_models.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/agent/_platforms.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/agent/_response.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/api.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/chat/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/chat/_client.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/cli.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/mcp/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/mcp/_metadata.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/mcp/_validate_prompt.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/mcp/_validate_resource.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/mcp/py.typed": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/py.typed": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/src/actions/server_integration.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tasks.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/fixtures.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/mcp_tests/test_mcp.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/mcp_tests/test_mcp/sample_mcp_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/mcp_tests/test_mcp/test_collect_metadata.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/mcp_tests/test_mcp_apps_metadata.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/mcp_tests/test_mcp_collect_errors.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/mcp_tests/test_mcp_collect_errors/errors_collect_mcp_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/resources/check.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_clean_break_contract.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks/actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks/dupe/dupe.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks/in_init/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks/sub/sub_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks/test_list_tasks_api.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks2.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks2/different_root/root/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks2/different_root/root/main_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks2/different_root/root/module.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks_glob.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks_glob/my_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks_glob/my_module.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks_glob/sub/another_module.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks_glob/test_collect_tasks_glob_None_.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks_glob/test_collect_tasks_glob___py_.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks_glob/test_collect_tasks_glob_another_module_py_.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks_glob/test_collect_tasks_glob_my_action_py_another_module_py_.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_collect_tasks_glob/test_collect_tasks_glob_my_module__py_.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_command_dispatch_and_variable_scope.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration/__main__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration/change_cwd.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration/expected_error_in_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration/main_check_lines.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration/main_with_error_in_import.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration/simple.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration/test_core_log_integration_config_log.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration/test_core_log_integration_console_messages_ansi_.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration/test_core_log_integration_console_messages_plain_.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration/test_core_log_integration_error_in_import.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_log_integration/test_core_log_integration_lines.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_core_release_workflow.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_create_argparse.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_find_action_paths.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_fixture_module.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_fixture_module/actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_fixture_module/my_config.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_fixture_module/my_config2.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_fixture_module/test_fixture_module.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_fixtures.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_force_early_exit.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_interrupt.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_lifecycle.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_lifecycle/actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_lifecycle/test_integrated.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_load_autolog_config.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_load_autolog_config/test_load_autolog_config.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_load_autolog_config/test_load_autolog_config_exclude_default.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_public_runtime_contract.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_read_toml_settings.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_replace_refs.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_reuse_main_lifecycle.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_reuse_main_lifecycle/main.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_reuse_main_lifecycle/my_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_server_integration_contract.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_task_schema.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_tasks_arguments.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_tasks_arguments/actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_tasks_mutable.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_tasks_mutable/actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_teardown.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_core_tests/test_teardown/neverending/actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/agent_dummy_server.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/files_dummy_server.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_action_context.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions/calculator/calculator_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions/greeter/greeter_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions/test_actions_list.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_custom_data_models.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_custom_data_models/actions_python_structures.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_custom_data_models/actions_table.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_custom_data_models/test_actions_table_list.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_custom_data_models/test_list_in_input_output.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_custom_data_models/test_list_with_response.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_custom_data_models/test_table_repr.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_custom_data_models/test_table_result.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_custom_data_models/test_table_str.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_custom_data_models/test_table_with_response.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_oauth2_secrets.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_oauth2_secrets/bad/actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_oauth2_secrets/good/actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_oauth2_secrets/test_actions_oauth2_secret_list.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_pydantic.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_pydantic/action_with_pydantic.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_pydantic/test_pydantic_models_list.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_request.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_request/action_with_request.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_request/test_actions_request_list.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_response.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_response/action_using_response.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_response/test_actions_response_list.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_secrets.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_secrets/action_with_secrets.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_actions_secrets/test_actions_secret_list.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_agent_dataframe_functions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_agent_functions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_chat_files.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_chat_files/my_chat_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_full_import_pythonpath.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_full_import_pythonpath/my_package/my_action.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_full_import_pythonpath/my_package/my_lib.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_full_import_pythonpath/my_package/sublib/my_sublib.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_full_import_pythonpath/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_full_import_pythonpath/test_actions_list_relative_import.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_help.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_help/test_help_args0_.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_help/test_help_args1_.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_help/test_help_args2_.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/actions/bad_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_action_argument_untyped.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_action_big_description.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_action_docstring_not_matching.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_action_integrated.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_action_no_description.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_action_no_docstring.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_action_no_docstring_in_query_and_predict.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_action_oauth2_secret.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_action_oauth2_secret_list_issues.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_action_secret.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_action_secret_list_issues.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_action_with_is_consequential.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_data_source_docstring_not_required.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_data_source_docstring_not_required_inline_.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_data_source_docstring_not_required_list_issues.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_data_source_docstring_not_required_simple_.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_lint_actions/test_lint_data_source_docstring_not_required_union_.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_print.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_print/action_check_print.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_regexp_search_for_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_relative_import.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_relative_import/rootpkg/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_relative_import/rootpkg/actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_relative_import/rootpkg/runner.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/actions_tests/test_relative_import/test_actions_list_relative_import.yml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "actions/tests/conftest.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "build_common/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "build_common/docs/CHANGELOG.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "build_common/poetry.lock": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "common/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "common/docs/CHANGELOG.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "common/poetry.lock": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "common/tests/conftest.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "developer/coverage_gate.py": {
+      "git_mode": "100755",
+      "filesystem_mode": "0o755"
+    },
+    "developer/setup.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "developer/setup_windows_amd64.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "developer/tests/fixtures/canvas-published-71f60-receipt.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "developer/tests/test_canvas_published_workflow.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "developer/tests/test_community_execution_graph.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "developer/tests/test_coverage_gate.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "developer/tests/test_frozen_wrapper_metadata.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "developer/tests/test_rcc_provider_rollback_summary.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "developer/tests/test_rcc_provider_rollback_workflow.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "developer/tests/test_toolkit_contract.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "developer/toolkit.py": {
+      "git_mode": "100755",
+      "filesystem_mode": "0o755"
+    },
+    "developer/toolkit.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/.mdl_style.rb": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/.mdlrc": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/.pylintrc": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/bin/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/bin/develop.bat": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/bin/develop.sh": {
+      "git_mode": "100755",
+      "filesystem_mode": "0o700"
+    },
+    "devutils/poetry.lock": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/pyproject.toml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/requirements.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/ruff.toml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/src/devutils/_null_in_tests.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/src/devutils/_system_mutex_in_tests.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/src/devutils/docs.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/src/devutils/fixtures.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/src/devutils/invoke_utils.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/src/devutils/py.typed": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/src/devutils/rcc.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/src/devutils/runtime_conformance.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/tests/test_actions_runtime_release_line.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/tests/test_candidate_core_wheel.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/tests/test_docs.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/tests/test_fixtures.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/tests/test_http_helper_release_workflow.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/tests/test_http_helper_tests_workflow.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/tests/test_invoke_utils.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/tests/test_owned_distribution_mapping.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/tests/test_runtime_conformance.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/tests/test_runtime_registry_floor_canary.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "devutils/tests/test_runtime_release_workflows.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/BUILD_INSTRUCTIONS.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/adr/0100-mcp-app-authoring-contract.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/adr/0129-workspace-capability-deployments.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/ai-ops-runbook.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/contracts/canvas/fixtures/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/contracts/canvas/fixtures/query-results-v0.1.fixture.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/contracts/canvas/fixtures/query-results-v0.1.schema.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/design/deployment-revisions-draft.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/design/fixtures/package-revision-v1/consumer-refs.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/design/fixtures/package-revision-v1/portable-rcc.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/design/mcp-authorization-draft.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/design/mcp-v2-showcase-draft.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/design/package-revision-references-v1.schema.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/design/package-revision-v1-schema-draft.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/design/package-revision-v1.schema.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/include/create-action-package.png": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/include/header.svg": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/include/sema4ai-flow-dark_1x.webp": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/include/sema4ai-flow-light_1x.webp": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/include/sema4ai.png": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/metrics.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/community-ci-receipts.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/community-execution-graph.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/community-execution-graph.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/community-program-ledger.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/community-program-ledger.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/community-resume-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/engineering-handoff.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-common-api-authorization-seams-20261009.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009-v2.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009-v2.manifest.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009-v2.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009-v2.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009-v3.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009-v3.manifest.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009-v3.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009-v3.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.manifest.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009-v4.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009.manifest.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/canvas-execution-graph-amendment-20261009.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/cas-bootstrap-reconciliation-20261009.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/cas-expansion-20261009-1909.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/cas-heartbeat-20261009T2223Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/combined-e1e30ef-windows-typecheck.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-20261008.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-20261009-acceleration.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-20261009-checkpoint.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-20261009-cloud-admission.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-20261009-convergence.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-20261009-fanout.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-20261009-final-checkpoint.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-20261009-resume.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-20261009-update.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-20261009-update2.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-20261009-update3.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-graph-toolkit-test-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/community-graph-toolkit-test-20261009.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-checks-20261009T2246Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-correction-20261010T0140Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-erratum-20261009T2234Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261009T2150Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261009T2152Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261009T2154Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261009T2225Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261009T2230Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261009T2248Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261009T2253Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261009T2258Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261009T2328Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261010T0017Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261010T0049Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261010T0051Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261010T0056Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261010T0135Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261010T0211Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261010T0242Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261010T0305Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261010T0309Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261010T0310Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261010T0341Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-followup-20261010T0342Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261009T2146Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261009T2154Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261009T2220Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261009T2225Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261009T2230Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261009T2245Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261009T2247Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261009T2248Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261010T0049Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261010T0051Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261010T0056Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261010T0135Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261010T0211Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261010T0242Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261010T0305Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261010T0309Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261010T0310Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-live-prs-20261010T0341Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-pr256-next-action-20261010T0019Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-python-version-erratum-20261009T2300Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-refs-20261010T0049Z.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-refs-20261010T0051Z.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-refs-20261010T0056Z.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-refs-20261010T0136Z.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-refs-20261010T0305Z.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-refs-20261010T0309Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-refs-20261010T0310Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-refs-20261010T0341Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-root-receipt-20261010T0304Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-targeted-check-refresh-20261009T2253Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/convergence-worktrees-20261009T2223Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/core-1.0.2-pypi-verification-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/core-1.0.2-release-dispatch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/core-1.0.2-workflow-manifest-admission-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/core-api-source-link-repair-20261009.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/core-credential-attempt2.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/core-native-manifest-readback-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/current-convergence-amendment-20261009T2146Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/current-worker-inventory-20261009T201539Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/current-worker-inventory-20261009T201703Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/current-worker-inventory-20261009T201902Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/current-worker-inventory-20261009T202115Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/current-worker-inventory-20261009T2042Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/current-worker-inventory-20261009T2102Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/deployment-canonical-values-slice1a-20261010.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-convergence-checkpoint-2258.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-distribution-bundle-dispatch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-distribution-push-dispatch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-distribution-test-integrity-dispatch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-expand-bootstrap-dispatch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-native-auth-dispatch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-native-distribution-dispatch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-native-review-dispatch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-rcc-local-acceptance-dispatch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-sol-continuation-summary-20261009-2018.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-workitems-browser-dispatch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-workitems-bundle-dispatch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/devsy-workitems-consumer-dispatch.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/frontend-update-benchmark-20261010.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/governance-amendment-verification-20261009T2107Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/helper-1.0.3-publication-verified.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/http-helper-1.0.3-verified-dist.zip": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/independent-canvas-execution-graph-review-20261009.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/independent-convergence-governance-review.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/independent-core-pr248-admission-and-credential-probe-20261009.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/integration-pr258-admission-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/mcp-resource-history-cli-20261010.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/native-artifact-byte-review-38015195279.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/native-recovery-push-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/open-pr-convergence-audit-20261010T0337Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr219-design-checkpoint-scope-review-20261009.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr220-7b6-verify-diagnosis.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr221-core-python310-green-77e67de-38006225927.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr221-core-python310-lint-blocker-38004253328.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr221-frontend-bounded-rerun.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr221-frontend-failure-37998628314.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr221-release-critical-checks-77e67de-20261010T0001Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr256-524-artifact-admission-review-20261010T0052Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr256-524-integration-readback-20261010T0054Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr256-524-merge-response-20261010T0054Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr256-524-native-artifacts-api-20261010T0050Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr256-524e503-independent-source-review-20261010T0044Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr256-a1904783-browser-digest-mismatch-20261009.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr256-b676-artifact-admission-review-20261010T0034Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr256-check-readback-20261010T0049Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr256-check-readback-20261010T0051Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr256-dc205-independent-source-review.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr256-native-ci-524e503-20261010T0055Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr256-native-ci-dc205-20261010T0013Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr270-admission-preflight-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr270-admission-readback-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr272-body-969219e7.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr272-body-before-20261010T0341Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr273-03c-runtime-failures-20261010.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr273-337-runtime-gates-20261010.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr273-convergence-20261010T0321Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/pr273-exact-gates-20261010T0348Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/rcc-c8-independent-snapshot-review-20261010T0048Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/rcc-control-772-bootstrap-failure.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/rcc-control-772-bootstrap-failure.log": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/rcc-narrow-port-20261010T0007Z-request.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/rcc-narrow-port-20261010T0007Z-response.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/rcc-provider-rollback-38034105493/acceptance-summary.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/rcc-provider-rollback-38034105493/acceptance-summary.log": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/rcc-provider-rollback-38034105493/run.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/rcc-provider-rollback-38034464513/acceptance-summary.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/rcc-provider-rollback-38034464513/acceptance-summary.log": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/rcc-provider-rollback-38034464513/run.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/release-contract-audit-20261009.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/runtime-1.0.3-retained-contract-audit-20261009.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/runtime-frozen-current-source-20261011/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/runtime-frozen-current-source-20261011/build-log-evidence.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/runtime-frozen-current-source-20261011/byte-source-review.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/runtime-frozen-current-source-20261011/current-control-independent-review.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/runtime-frozen-current-source-20261011/inspect_archives.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/runtime-frozen-current-source-20261011/manifest.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/runtime-frozen-current-source-20261011/producer-input-inventory.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/runtime-frozen-current-source-20261011/selected-test-inventory.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/stack-pr-convergence-audit-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/superseded-pr-ci-cancellation-20261009T2150Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/target-merge-pr251-readback-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/target-merge-pr257-readback-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/target-merge-pr259-readback-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/target-merge-pr262-readback-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/target-merge-pr264-preflight-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/target-merge-pr264-readback-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/target-merge-pr264-response-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/target-merge-pr266-readback-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/target-merge-pr268-preflight-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/target-merge-pr268-readback-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/target-merge-pr268-response-20261009.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/watcher-convergence-20261010T0356Z.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/program/evidence/workitems-recovery-push-e171.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/review-rubric.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/skills/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/skills/provenance-observability.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/skills/repository-operations.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/skills/upstream-reporting.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/skills/work-items.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-05-action-server-devcontainer.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-05-actions-work-items-0.3.0-release.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-05-repository-agent-guidance.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-05-work-items-hardening.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-07-actions-work-items-contract-consolidation.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-13-frontend-artifact-validator-completion.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-13-opaque-resource-telemetry-repair.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-13-runtime-data-access.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-16-repository-owned-action-server-templates.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-16-template-actions-dependencies.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-17-community-product-surface-cleanup.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-17-install-community.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/plans/2026-08-25-rcc-runtime-adapter-first-vertical.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/specs/2026-08-05-action-server-devcontainer-design.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/specs/2026-08-05-actions-work-items-0.3.0-release-design.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/specs/2026-08-05-repository-agent-guidance-design.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/specs/2026-08-16-template-actions-dependencies-design.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/specs/2026-08-17-community-product-surface-cleanup-design.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/specs/2026-08-17-install-community-design.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "docs/superpowers/specs/2026-08-25-rcc-runtime-adapter-first-vertical-design.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "env.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "mcp/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "mcp/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "mcp/docs/CHANGELOG.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "mcp/docs/api/.pages": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "mcp/docs/api/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "mcp/docs/api/actions.mcp.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "mcp/poetry.lock": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "scripts/pr_quality_report.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "scripts/project_community_execution_graph.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "scripts/test_pr_quality_report.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "scripts/test_pr_quality_report_stdlib.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "scripts/test_project_community_execution_graph.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "tasks.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/LICENSE": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/CHANGELOG.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/LICENSE": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/devdata/input_create_repository_issue.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/devdata/input_get_repository_commits.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/package.png": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/pyproject.toml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/src/github/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/src/github/create_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/src/github/get_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/src/github/models.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/advanced/tests/test_template.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/basic/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/basic/CHANGELOG.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/basic/LICENSE": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/basic/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/basic/devdata/input_get_wikipedia_article_summary.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/basic/package.png": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/basic/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/basic/tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/basic/tests/test_template.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/basic/wikipedia_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/canvas-query/LICENSE": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/canvas-query/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/canvas-query/acceptance-gates.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/canvas-query/canvas-resource.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/canvas-query/canvas.html": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/canvas-query/canvas_query.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/canvas-query/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/canvas-query/tests/test_canvas_query.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/docs/vscode.png": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/mcp-v2-showcase/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/mcp-v2-showcase/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/mcp-v2-showcase/examples/mcp_client.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/mcp-v2-showcase/examples/open_close_sse.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/mcp-v2-showcase/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/mcp-v2-showcase/showcase_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/mcp-v2-showcase/tests/test_showcase_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/minimal/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/minimal/CHANGELOG.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/minimal/LICENSE": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/minimal/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/minimal/devdata/input_greet.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/minimal/greeting_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/minimal/package.png": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/minimal/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/minimal/tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/minimal/tests/test_template.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/packaging/build_embedded_bundle.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/packaging/create-templates-package.sh": {
+      "git_mode": "100755",
+      "filesystem_mode": "0o700"
+    },
+    "templates/packaging/templates-beta.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/packaging/templates-prod.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/workflow-producer-consumer/.gitignore": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/workflow-producer-consumer/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/workflow-producer-consumer/package.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "templates/workflow-producer-consumer/workflow_actions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "verify_t026a.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/NOTICE.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/contracts/compatibility-ledger.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/contracts/contract-port-provenance.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/contracts/expected-red-failures.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/contracts/ported-tests.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/contracts/public-surface-fixtures.json": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/docs/CHANGELOG.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/poetry.lock": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/pyproject.toml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/scripts/check_contract_port_provenance.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_adapters/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_adapters/_base.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_adapters/_docdb.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_adapters/_file.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_adapters/_redis.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_adapters/_sqlite.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_adapters/_yorko.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_collections.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_context.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_exceptions.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_paths.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_support.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_types.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_utils.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/_workitem.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/py.typed": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/scripts/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/scripts/config.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/work_items/workitems_integration.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions/workitems.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions_work_items/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/src/actions_work_items/workitems.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tasks.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/compose.persistent-backends.yaml": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/contract_sources/README.md": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/contract_sources/custom_backends_source.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/contract_sources/robocorp_email_source.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/contract_sources/robocorp_file_source.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/contract_sources/robocorp_fixtures_source.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/contract_sources/robocorp_lifecycle_source.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/contract_sources/robocorp_mocks_source.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/test_namespace_wheel.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/test_runtime_adapter_protocol.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/test_runtime_context.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/test_runtime_tasks.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/typecheck/runtime_adapter_calls.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/contract_ports/__init__.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/contract_ports/conftest.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/contract_ports/mocks.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/contract_ports/test_custom_backends.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/contract_ports/test_robocorp_email.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/contract_ports/test_robocorp_file.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/contract_ports/test_robocorp_lifecycle.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/test_adapter_factory.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/test_attachment_paths.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/test_contract_gap_classifier.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/test_contract_inventory.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/test_contract_ledger.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/test_file_adapter_modes.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/test_persistent_backend_compat.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/test_persistent_backend_services.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/test_sqlite_adapter.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/test_workitems_compat_api.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/tests/work_items_tests/test_yorko_adapter.py": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/work_item_files/22f28b59-37b6-4054-b15a-0c206d9df1dc/file1.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/work_item_files/22f28b59-37b6-4054-b15a-0c206d9df1dc/file2.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/work_item_files/22f28b59-37b6-4054-b15a-0c206d9df1dc/file3.png": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/work_item_files/7a23accc-d8d6-4a5d-a537-ebe934650d8d/file1.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/work_item_files/7a23accc-d8d6-4a5d-a537-ebe934650d8d/file2.txt": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    },
+    "work-items/work_item_files/7a23accc-d8d6-4a5d-a537-ebe934650d8d/file3.png": {
+      "git_mode": "100644",
+      "filesystem_mode": "0o600"
+    }
+  }
+}

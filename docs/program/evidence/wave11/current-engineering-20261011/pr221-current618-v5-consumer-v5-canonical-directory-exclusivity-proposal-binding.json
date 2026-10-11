@@ -1,0 +1,20 @@
+{
+  "canonical": "docs/skills/repository-operations.md",
+  "current_owning_retained_guide": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+  "base_sha256": "d4b39f1a20ba302ac5247177dcd83ff19a427a47512b9ae0114e45cab3b75196",
+  "exact_external_proposed_patch": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/canonical-real-directory-selector-before-consumer-v5-proposed.patch",
+    "bytes": 1325,
+    "sha256": "85acda07f8dbc42205d8c3200da7392fcfd72ca86e5596ef4ccfae619bdddfed"
+  },
+  "new_learning": "Wheel/path/hash admission is not actual-directory selector admission; real unchanged selector must reject duplicatecp312 and return exact selected input before immutable execution proposal. Copy admittedpair into private dedicateddir without removing originals. Early selector rejection beforeATTEMPT has no worker/install/CLI/cleanup outcome.",
+  "evidence": [
+    "unchanged floor.select_runtime_wheel source f1ad142a",
+    "original v4 gateway failure6f29 beforeATTEMPT",
+    "v5 servicefree100PASS including7 real directory controls",
+    "strict all248 wheelmembers221RECORD220verified215tracked202Python boundoriginalLinuxZIPfc4018/owner9b406"
+  ],
+  "stale_ambiguity": "Existing instruction to stage the selected host wheel did not require executing the actual selector on the proposed physical directory before freeze. No platform filter was added to helper.",
+  "remaining_uncertainty": "Independent immutablev5 preexecutionGO and separate root capacity/serialization/ONE release still required; actualconsumer/fullseven/OAuth/private/native/registrypublication remainHOLD.",
+  "upstream_disposition": "none"
+}

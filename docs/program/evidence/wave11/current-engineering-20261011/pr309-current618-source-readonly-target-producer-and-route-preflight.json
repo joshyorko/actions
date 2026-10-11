@@ -1,0 +1,37 @@
+{
+  "read_only": true,
+  "new_target_producer": {
+    "historical": 268,
+    "current": 274,
+    "matching": 261,
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ]
+  },
+  "route_registration_in_changed_API_modules": {
+    "action_server/src/actions/server/_api_run.py": {
+      "decorated_handler_names_and_registration_AST_unchanged": true,
+      "count": 10
+    },
+    "action_server/src/actions/server/_api_analytics.py": {
+      "decorated_handler_names_and_registration_AST_unchanged": true,
+      "count": 3
+    }
+  },
+  "73cells_new_union": "MUST RUN; sourcecensus unchanged is not whole152/Workspace or future handler semantic acceptance",
+  "no_source_mutation_before_rootGO": true
+}

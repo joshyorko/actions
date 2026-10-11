@@ -1,0 +1,154 @@
+{
+  "schema": "actions-pr282-current618-independent-source-review/v1",
+  "status": "GO_SOURCE_NORMAL_EXISTING_BRANCH_PUSH_ONLY",
+  "owner_final_receipt": {
+    "path": "/workspace/engineering/pr282-actual618-refresh/frozen-source-receipt.json",
+    "bytes": 67074,
+    "sha256": "78f41d01e5a1bdfe4df059f7cc797c7a8a80a840b9d12b8d95fad6a98816db71"
+  },
+  "observed_utc": "2026-10-11T10:08:43.740294+00:00",
+  "source": {
+    "head": "e736f846557ed1d603348e97c5eb80060d62e3e2",
+    "tree": "07b716104ba623df81c00bd83be08dde84dd29f1",
+    "ordered_parents": [
+      "c75dfa6969c2c562a59a967e2e674fea6c8af457",
+      "6181b044c75de35386f1ae30e71725398b6a7feb"
+    ],
+    "branch": "feat/canvas-template-20261010",
+    "clean": true
+  },
+  "independent_proofs": {
+    "complete_source_and_evidence": {
+      "path": "/workspace/engineering/pr282-actual618-independent-source-review/independent-exact-source-and-evidence-proof.json",
+      "bytes": 6793,
+      "sha256": "f06538911378be07726d22f943e1f9534b235e6f32c4ec5b7c3d8276ed532ca7"
+    },
+    "original_artifact_retention": {
+      "path": "/workspace/engineering/pr282-actual618-independent-source-review/independent-original-artifact-retention-proof.json",
+      "bytes": 1171,
+      "sha256": "f5e273281151d75f2b59e210240708ea769b983ac0e80ec60dc1558f9c9664c3"
+    }
+  },
+  "verified": {
+    "complete_typed_Git_FS_prepost_bodies_exec_bits": 1433,
+    "ordinary_complete_parent_union_no_deletions": true,
+    "only_novel_combined_leaf": "docs/skills/repository-operations.md",
+    "all_nondoc_selected_parent_exact": true,
+    "current_refs": 50,
+    "historical_refs": 43,
+    "whole39_original_Canvas_predicates_preserved": true,
+    "original9c_entire_generator_method_and_workflow_step": true,
+    "original9c_three_Canvas_helper_and_staging_blobs": true,
+    "current_generator_body_AST_exact_c75": "No fresh 2+8 integration claim; prior disjoint union retained",
+    "current_RCC_nine_sample_exact_d642_and_618": true,
+    "native1192_inventory_all_types_modes_links_hashes_exact": true,
+    "four_helper_original_and_0444_snapshot_hashes_exact": true,
+    "browser_Node_frontend_selection_hashes_exact": true,
+    "original_V5_raw_private_receipts": 18,
+    "original_V5_frozen_refs": 50,
+    "retained_before_root_released_after_proofs_identical": true,
+    "prepared_30_input_bytes_equal_original71_source": true,
+    "five_recorded_own_module_origin_prefix_assertions_and_current_config_python_bindings": true,
+    "own_ignored_RCC": {
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "mode": "0711"
+    },
+    "static_Ruff_check_format_Isort_checked_calls_Rcc_SUCCESS_Mypy348": true,
+    "generation_recorded_roundtrip_current_outputs": 8,
+    "workflow_plus_dependabot": 26,
+    "GitHub_YAML_including_issueforms": 30,
+    "gate_source_no_mutation_prepost": true
+  },
+  "recorded_gates": {
+    "Doctor": "PASS",
+    "Bootstrap_reuse": "30 exact prepared/current inputs and five concrete own prefixes/origins; no installer",
+    "Toolkit": 179,
+    "Canvas_source": 75,
+    "focused_staging": {
+      "passed": 4,
+      "deselected": 24
+    },
+    "RCC_source": {
+      "passed": 112,
+      "skipped": 1,
+      "deselected": 3,
+      "skip": "existing opt-in actual NOTRUN"
+    },
+    "configured_lint": "Ruff/format/Isort PASS",
+    "Mypy": 348,
+    "generated_workflows": 8,
+    "workflow_plus_dependabot": 26,
+    "all_tracked_YAML": 30,
+    "full_source": {
+      "passed": 1233,
+      "skipped": 12,
+      "warnings": 15,
+      "seconds": 133.96,
+      "workers": 2,
+      "single_authorized_attempt": true,
+      "outer_bound": "600s TERM +10s KILL",
+      "gateway": "CanonicalRCC18.19.3 -> own Runtime Poetry invoke test-not-integration"
+    }
+  },
+  "historical_failures": {
+    "owner_initial_LIGHT_parser": "Immutable original parser and diagnostic retained; guessed log schema failed before final receipt. Actual gate logs unchanged and successful; no source gate rerun or retroactive claim.",
+    "independent_initial_reader": {
+      "path": "/workspace/engineering/pr282-actual618-independent-source-review/independent-initial-reader-scope-failure.json",
+      "bytes": 303,
+      "sha256": "0a46b523f5da49d56f8a58fdaa667e702e38a7adacfccad3bf16f5557624f508"
+    },
+    "independent_reader_disposition": "Initial reader counted all repository YAML instead of declared .github traversal; preserved original reader and named v2 implements measured30 .github scope. No owner/source/artifact mutation.",
+    "original_browser_version_failure": "38/39 cause and original values UNAVAILABLE/UNKNOWN; no diagnosis inferred from retained later proof.",
+    "original_two_adopted_zombies": "Original cleanup observation remains limited to its original tuple; source suites and other artifacts do not establish complete/universal/natural reaping."
+  },
+  "producer": {
+    "historical_native_source": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "historical": 268,
+    "current": 275,
+    "matching": 259,
+    "changed": 9,
+    "added": 7,
+    "five_selected_tests": "Separate inventory exact current/c75/618/92498; five matches do not compensate for producer differences",
+    "current_native_qualification": "UNQUALIFIED",
+    "original_actual_V5_source": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "original_actual_not_relabeled": true
+  },
+  "mode_scope": "Exact tracked1433 FS executable bits, native1192 inventory recorded modes, helper snapshots0444 and RCC0711. Raw18/frozen50 retained size/SHA pre/post bindings contain no historical file-mode field; raw18 current mode0600 observed, not an invented historical mode baseline. Browser0755 and Node0775 executable modes currently observed.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": [
+      "docs/skills/repository-operations.md",
+      "docs/skills/provenance-observability.md"
+    ],
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr282-actual618-refresh/exact-both-parent-canonical-import.patch",
+      "bytes": 13633,
+      "sha256": "436b14701d385f7b652ad16496a32b64a965caa930970b3950b993e64f0c2b9e"
+    },
+    "Delta_relative_to_c75": {
+      "added_lines": 167,
+      "removed_lines": 1,
+      "both_parent_evidence_backed_lessons_retained": true,
+      "new_cosmetic_child": false
+    },
+    "Durable_learning": "Accepted parent lessons preserve strict Canvas receipt/diagnostic/staging/source and cleanup boundaries while importing Run Actor/grant/Attempt/output publication, provider ownership and reconciliation limits. Prepared namespace modules need a concrete file-backed origin. Full producer inventory remains separate from five selectors and nine RCC sample; ordinary doc conflict resolution does not carry old CI/native results.",
+    "Evidence": "Independent whole original9c method/step39 and three blobs; full1433 parent/Git/FS inventory; nine exact d642/618 RCC source samples; recorded gates and original1192/raw18/frozen50 byte retention. Exact436b accepted import patch, both parents additions checked in both final canonical guides.",
+    "Stale_or_ambiguous_guidance_removed": "Earlier branch lacked accepted Run-output trust/recovery boundaries; imported preparation wording distinguishes file-backed namespace identity. Scope forbids equating selected samples, source PASS or old browser proof with complete current producer/cleanup/private acceptance.",
+    "Remaining_uncertainty": "Fresh exact618 hosted CI/protection/source-checkout evidence is not reviewed here. Current native275 differs from old268. Original browser_version cause/values and two adopted-zombie cleanup limits remain. Full127, ChatGPT/private/Workspace/backend/provider/OAuth/coldregistry and release qualification remain HOLD.",
+    "Disposition": "Verified reuse of exact accepted both-parent canonical imports; no source/document mutation by independent reviewer."
+  },
+  "authority": "Permits root guarded normal push to existing branch only after verifying live remote remains c75; no force/rebase/replacement branch. Fresh complete exact618 hosted CI and policy/checkout admission required before integration. No permission to push/merge/publish or close issues by reviewer.",
+  "remaining_HOLD": [
+    "Fresh full exact-source hosted CI and branch policies/current actual checkout",
+    "Native current275 producer acceptance",
+    "Full127/ChatGPT/private/Workspace/backend/provider/public Core wholewheel/coldregistry",
+    "OAuth/source-authority/platform/release publication",
+    "Historical browser_version cause/values and complete adopted-zombie cleanup"
+  ],
+  "not_performed": [
+    "Product/source/index/branch mutations",
+    "Tests/gate/installer/native/provider/browser executions",
+    "Network/log/artifact download or retry",
+    "Push/merge/publication/issue closure"
+  ],
+  "upstream_disposition": "none"
+}

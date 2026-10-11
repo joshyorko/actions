@@ -1,0 +1,100 @@
+{
+  "actions": {
+    "read_only_Git_remote_and_files": true,
+    "source_index_collector_gates_downloads_actual_runs_changed_or_reexecuted": false
+  },
+  "committed_original_binding_proof": {
+    "bytes": 311470,
+    "path": "/workspace/engineering/checkpoint-644-independent-review/committed644-original-byte-source-and-remote-proof.json",
+    "sha256": "efdb239ff6fbe58d4f4b0da8b4a4ed29a443f7400c8f8c0219db7ad7b224d53d"
+  },
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Disposition": "ACCEPT/REUSE owner-staged40 additions with zero deletions and correct retained root anchors",
+    "Durable learning": "Owner announcement and content-addressed authored recovery bind frozen evidence without retroactive admission; ownership handoff requires all candidate declarations and absence of all old declarations but separate RPCs are not atomic; three declared RCC branches retain path filtering and tuple-specific admission; Linux selected consumer remains separate from cross-platform release inventory/current integration build/generated input authority",
+    "Evidence": "Exact b0ff13/fb55710/bf9510 additions plus source-verified equivalent cd9737; immutable original306 recovery, assembled catalog six-state proof, Cb673 workflow and accepted776 filter, independently reviewed original Linux consumer f230",
+    "Exact delta": {
+      "bytes": 4862,
+      "exact40_additions_zero_removals": true,
+      "exact_blocks": [
+        {
+          "added_lines": 13,
+          "bytes": 1401,
+          "exact_staged_added_block": true,
+          "payload": "pr306-constructor-recovery-canonical-immutable-constructor-and-owner-freeze-proposed.patch",
+          "sha256": "b0ff0bf2bb0a18af8dc354e1503fd10e576873d4fa870a05b238ad35af701fe6"
+        },
+        {
+          "added_lines": 10,
+          "bytes": 1453,
+          "exact_staged_added_block": true,
+          "payload": "pr306-current776-actual-handoff-canonical-delta.patch",
+          "sha256": "fb557e5d7ca92f94871920212c5b464ffc0428716d6447917f65743127b0ef04"
+        },
+        {
+          "added_lines": 10,
+          "bytes": 1158,
+          "exact_staged_added_block": true,
+          "payload": "pr221-current-Linux-consumer-canonical-partial-platform-consumer-scope-proposed.patch",
+          "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+        }
+      ],
+      "path": "/workspace/engineering/checkpoint-644-independent-review/canonical-exact-staged644-delta.patch",
+      "sha256": "72a99e03c800dd1a5d71f0f41471b8cf2ad27296ca25779c0133d39dad9f97ac",
+      "three_branch_equivalent_block": {
+        "lines": 7,
+        "scope": "three_existing_opt_in_PR_branches_retained_path_filter_hosted_source_control_qualified_separately",
+        "source_proposal_bytes": 1016,
+        "source_proposal_sha256": "cd97355e9506350c286532607b87c5ce4ff492073a78fb72336517fe8164b5cd"
+      }
+    },
+    "Remaining uncertainty": "Historical precommit manifest original unavailable in this review; separateRPC barrier non-atomic; final source/native/provider/private/platform/publication/generated OAuth authority and content remain held",
+    "Stale guidance removed": "No prior text removed. New paragraphs eliminate ambiguity about visible construction drafts, candidate-only catalog listing, branch admission count and partial platform/tree-equality scope"
+  },
+  "historical_evidence_limits": {
+    "historical196_installed_members_after_owned_cleanup": "Measured historical paths; retained receipt/wheel evidence does not imply current installed-tree independent reread",
+    "immutable_original_Git_source_aliases_independently_exact": 55,
+    "new128_unresolved_frozen_original_bindings": 0,
+    "one_inherited_precommit_manifest_alias": "22524B/a48328 binding in current-actual-evidence-independent-prepush-review.json is preserved in prior516 unchanged. Exact original precommit manifest not recovered by this review. No current mutable alias or predecessor construction admission inferred",
+    "original306_constructor": "Distinct recovered original11281B/6c536779 matches original binding; exact draft/final receipts retained, no retroactive predecessor admission",
+    "retained_original_direct_hashes_exact": 2790
+  },
+  "observed_at": "2026-10-11T09:11:54.643955+00:00",
+  "prior_staged_GO": {
+    "bytes": 9557,
+    "path": "/workspace/engineering/checkpoint-644-independent-review/independent-frozen-exact644-staged-batch-review.json",
+    "sha256": "8e4170165e4ff61d26a9e3aad5a46b90d65a8e799c20e16956a2f8ee6dd17184"
+  },
+  "privacy": {
+    "URL_hosts_only": [
+      "files.pythonhosted.org"
+    ],
+    "new128_original_content_credentials_signedURLs_or_nonempty_raw_secret_fields": 0,
+    "prior516": "Unchanged immutable previously reviewed records and payload blobs",
+    "raw_full_logs_ZIPs_private_executable_harnesses_installed_member_payloads_archival_indices": "OutsideGit originals referenced by exact hashes; not added in128",
+    "safe_failure_frames": "Only tracked source identifiers/line numbers/fixed error categories; no original private result payload or raw transcript"
+  },
+  "qualification": "644 immutable documentation/evidence checkpoint only. Does not relabel prior CI/actual source tuples or waive issue closure, synthetic-versus-actual checkout, provider, native, private, generated OAuth authority/content, cross-platform inventory or Runtime publication HOLDs. Historical unrecovered22524/a483 precommit manifest remains explicitly unqualified;196 removed clean-venv member paths remain prior measurements.",
+  "schema": "actions.independent-committed-remote644-readback/v1",
+  "subject": {
+    "clean": true,
+    "head": "bd023f9fd2ea8007031c2bd4f909cab4546dabe1",
+    "remote_after": "bd023f9fd2ea8007031c2bd4f909cab4546dabe1\trefs/heads/handoff/actions-swarm-mk3-wave8-20261010",
+    "remote_before": "bd023f9fd2ea8007031c2bd4f909cab4546dabe1\trefs/heads/handoff/actions-swarm-mk3-wave8-20261010",
+    "sole_parent": "4d948f57a6eaf024620c65b947973eb71127c60d",
+    "tree": "d85962af33bb262a40e1531f6d47264fedbf112f"
+  },
+  "upstream_disposition": "none",
+  "verdict": "PASS_EXACT644_NORMAL_COMMIT_AND_NAMED_REMOTE_READBACK_ONLY",
+  "verified": {
+    "131_exact_changes_all100644": true,
+    "all2938_index_entries_equal_reviewed_serialization": true,
+    "clean_worktree_and_remote_bracket_stable": true,
+    "guide_exact_reviewed40line_patch": true,
+    "manifest644_blobs_sizes_SHA_originals_exact": true,
+    "new128_exact_original_safeJSON_PATCH": true,
+    "new_original_bytes": 5683927,
+    "no_repeated_full_nested_scan": "Exact committed tree/index and staged receipt identity match; frozen staged nested proof remains applicable",
+    "prior516_records_and_payloads_preserved": true
+  }
+}

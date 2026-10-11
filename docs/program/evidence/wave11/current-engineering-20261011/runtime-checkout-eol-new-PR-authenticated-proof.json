@@ -1,0 +1,22 @@
+{
+  "status": "NORMAL_SOURCE_PUSH_AND_NEW_DRAFT_PR_AUTHENTICATED",
+  "PR": 312,
+  "url": "https://github.com/joshyorko/actions/pull/312",
+  "head": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+  "base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "head_branch": "fix/runtime-checkout-eol-20261011",
+  "base_branch": "integration/community-release-20261008",
+  "body_bytes": 1785,
+  "body_sha256": "5debe526ab5278872f70dcbe01bba35ebfbba1d4f0d1540bf82dd090add8d104",
+  "draft": true,
+  "closing_text_added": false,
+  "branch_push_proof_sha256": "b5d09fc4da76dca93a39a6e6cb61f4b5077dbc9ffefa7223a826fb983a9913b1",
+  "source_owner_sha256": "b0d51fbc7fb87c88fc0f65af090634cc44c7cfb311e00de7b56472160b074189",
+  "independent_source_GO_sha256": "a64c6b1c05aa93613c18578cdae0a9dd29722b674df1aec2824ad850741f13d7",
+  "current_hosted_CI_and_Windows_content": "PENDING_NO_INTEGRATION_OR_PUBLICATION_CLAIM",
+  "private_first_API_binding": {
+    "path": "/workspace/engineering/runtime-checkout-eol-new-PR-first-readback.private.json",
+    "bytes": 17593,
+    "sha256": "6b49277c4afbb4ca9366f0d00e7d091cbf4c83dfc0b32039b4b24e80a6eea1c9"
+  }
+}

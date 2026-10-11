@@ -1,0 +1,34 @@
+{
+  "status": "NORMAL_EXISTING_PR_BRANCH_SOURCE_PUSH_AUTHENTICATED",
+  "pr": 309,
+  "head": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea",
+  "tree": "1181b35b11e4904405ca1a9a3a398e6c1c3abfd0",
+  "ordered_parents": [
+    "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "branch": "test/auth-route-census-20261010",
+  "existing_remote_before": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+  "named_remote_after": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea",
+  "authenticated_head": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea",
+  "authenticated_base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "draft": true,
+  "source_and_independent_bindings": [
+    {
+      "path": "/workspace/engineering/pr309-actual618-refresh/frozen-source-receipt.json",
+      "sha256": "e00bf1644c432c14da0b71fe79ffe58373cc1df3325163127cca780bd2120d01",
+      "bytes": 19843
+    },
+    {
+      "path": "/workspace/engineering/pr309-actual618-independent-review/independent-frozen-current618-source-review.json",
+      "sha256": "1f0537ee03da972e181e39868ad47a28feac48aba8dee08b5448e4211feed005",
+      "bytes": 6938
+    }
+  ],
+  "root_exception": "Normal push succeeded once. Immediate post-push API head assertion failed before receipt construction; those exact cached head values were not persisted and are unavailable. No repeat push. Successor named remote and authenticated head/base readback are exact.",
+  "source_gate": "1295PASS13SKIP15WARN;73credentialcasesPASS",
+  "prior776_CI": "HISTORICAL_ONLY",
+  "fresh_current618_CI": "REQUIRED",
+  "native_private_whole_issue_release": "HOLD",
+  "upstream_disposition": "none"
+}

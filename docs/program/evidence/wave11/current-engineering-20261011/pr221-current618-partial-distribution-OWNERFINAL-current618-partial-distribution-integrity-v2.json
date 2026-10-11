@@ -1,0 +1,277 @@
+{
+  "Documentation_improvement": {
+    "bytes": 3050,
+    "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/verified-canonical-accepted-reuse.json",
+    "sha256": "78bd358536816c4302ae810f914847c47a61c5c7b7002f554883b27de2e4d7e3"
+  },
+  "Upstream_disposition": "none",
+  "acquisition_retries": 0,
+  "artifact_ids": [
+    11697353355,
+    11697788053,
+    11697522927
+  ],
+  "complete_original_member_inventories": {
+    "bytes": 1200001,
+    "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/safe-data-only-integrity-inspection.json",
+    "sha256": "ec30816fa8826fb6f93ee088cea3e290a146d7d367a4b74205be4ba441f367a8"
+  },
+  "complete_sdist_root_source_bindings": {
+    "bytes": 2877,
+    "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/safe-complete-sdist-root-source-bindings.json",
+    "sha256": "7f3a642a02642d8e3c05f12218d40a8d98e3f5b832ffe1239acbff162afa212f"
+  },
+  "current_platform_installed_consumer_execution": "NOT_RUN",
+  "current_seven_platform_distribution_inventory": {
+    "aggregate_artifact": "MISSING_AT_CAPTURE",
+    "captured_present": [
+      "Linux_cp312",
+      "Linux_cp313",
+      "Windows_cp312",
+      "Windows_cp313",
+      "sdist"
+    ],
+    "missing_at_metadata_capture": [
+      "macOS_cp312",
+      "macOS_cp313"
+    ],
+    "subsequent_poll": "NOT_PERFORMED"
+  },
+  "derived_package_nonpython_counts": [
+    15,
+    15,
+    15,
+    15
+  ],
+  "derived_package_python_counts": [
+    202,
+    202,
+    202,
+    202
+  ],
+  "evidence": [
+    {
+      "bytes": 14180835,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6"
+    },
+    {
+      "bytes": 11634753,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+      "sha256": "4be1bd325a3d5061d2c3aa7c1293caeedc65f46944613c0b623ac96c7081d883"
+    },
+    {
+      "bytes": 14180835,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "2f856d2f27dba472aa84e954245f63ecd879e102751a300eb0fd0b361486cdfd"
+    },
+    {
+      "bytes": 11634753,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp313-cp313-win_amd64.whl",
+      "sha256": "fe5c721eab513d837f98a442564ece4af90dc123007b71a762eae10ac29ff605"
+    },
+    {
+      "bytes": 1020336,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3.tar.gz",
+      "sha256": "b165562bf9443104e2eaeebf91275ce65c661f350f2715857d27a9ba967b2cca"
+    },
+    {
+      "bytes": 1781,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/artifact-11697353355-returned-reference.private.json",
+      "sha256": "704a78b927f7b6f483e1696962db40092bac5aa60cb5b6c47920fc1420d4ad15"
+    },
+    {
+      "bytes": 1787,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/artifact-11697522927-returned-reference.private.json",
+      "sha256": "4d815d802658971fe0b1f49189a2aa91a63969bf339fe01eda4663541fe9aa3d"
+    },
+    {
+      "bytes": 1781,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/artifact-11697788053-returned-reference.private.json",
+      "sha256": "ee5631a2d9620d6270888612c851851a3efa173466cfff40aa9aae3e35d62128"
+    },
+    {
+      "bytes": 14182,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/classify_and_freeze_partial_integrity.py",
+      "sha256": "069f74f9b7a861e76a4447a91467563d9e18b8cc99d6577e5514cb8952c5e779"
+    },
+    {
+      "bytes": 388,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/freeze-original.private.log",
+      "sha256": "83e23387c77db21f2103ba9d321c8adbddf5d77eb1ff3ccd35a017970cc7d1c5"
+    },
+    {
+      "bytes": 4675,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/freeze_complete_partial_integrity_v2.py",
+      "sha256": "6eaef9b83a9102c7b5f4a13ef28750623c2e4d114add53f51a190baa6d7569ee"
+    },
+    {
+      "bytes": 10023,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/frozen-current618-partial-distribution-integrity.json",
+      "sha256": "c7e3cdc23d519b52459853ffa1437bb2f563fcad9d18d332e69f4b7d066f3c29"
+    },
+    {
+      "bytes": 16640,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/inspect_current_original_artifacts.py",
+      "sha256": "3b43d554ebf63806f422fc70ec0bc9cf09444b875797cfd6d6a629e282815943"
+    },
+    {
+      "bytes": 1841,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/inspection-original.private.log",
+      "sha256": "a37b9e2a86f0dd1e409835477fb7da2c946c18e221f8b97ba60011f264527f94"
+    },
+    {
+      "bytes": 182571,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/job-114433293117-original.private.log",
+      "sha256": "6af4be956dc6b8c56c5509dc4e7e7756ea583503853ff93c9b85678d3e87a085"
+    },
+    {
+      "bytes": 823529,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/job-114433293201-original.private.log",
+      "sha256": "4d47b2c5e5ad3b78d6fdbf5cfcb226814cf255570c2106b8215d9cf32776ed72"
+    },
+    {
+      "bytes": 876045,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/job-114433293243-original.private.log",
+      "sha256": "325c54809da8b95c8071ad8d64ec671d8eed8453a77ce33a79c9db6060987b24"
+    },
+    {
+      "bytes": 28299039,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/original-11697353355.zip",
+      "sha256": "fc4018e6e7ed4a0e47c4f5888d36d55655216ca22ebd965f29ce9f1130938f8c"
+    },
+    {
+      "bytes": 1020782,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/original-11697522927.zip",
+      "sha256": "30b0020ac0dcbea840627a5cfff4c9a8c6be95d89cd319953b51f5d9d1139a5a"
+    },
+    {
+      "bytes": 23201552,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/original-11697788053.zip",
+      "sha256": "f6c1d0e41ba6a1f8651c7a93ca7f76e4c17c3305e30b2c2e347724b0fc272273"
+    },
+    {
+      "bytes": 2877,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/safe-complete-sdist-root-source-bindings.json",
+      "sha256": "7f3a642a02642d8e3c05f12218d40a8d98e3f5b832ffe1239acbff162afa212f"
+    },
+    {
+      "bytes": 1200001,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/safe-data-only-integrity-inspection.json",
+      "sha256": "ec30816fa8826fb6f93ee088cea3e290a146d7d367a4b74205be4ba441f367a8"
+    },
+    {
+      "bytes": 463826,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/safe-source-body-and-builder-observations.json",
+      "sha256": "1b2328f9b8e837ceb426ea63cc80c1d03629d230979702a0d6629e21a425030e"
+    },
+    {
+      "bytes": 3050,
+      "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/verified-canonical-accepted-reuse.json",
+      "sha256": "78bd358536816c4302ae810f914847c47a61c5c7b7002f554883b27de2e4d7e3"
+    }
+  ],
+  "files": {
+    "original_ZIP_count": 3,
+    "original_decoded_builder_log_count": 3,
+    "original_sdist_count": 1,
+    "original_wheel_count": 4
+  },
+  "generated_OAuth_all_four_wheels_and_sdist": "BOTH_FIXED_ENTRIES_EMPTY_STRING_AUTHORITY_HOLD",
+  "metadata_record_crc_dependency_tag_entrypoint_checks": "PASS",
+  "original_decoded_log_scope": "EXACT_CONNECTOR_RETURNED_DECODED_CONTENT_PRESERVED_UTF8; NOT_A_CLAIM_OF_ORIGINAL_COMPRESSED_LOG_ARCHIVE_BYTES",
+  "preserved_construction_checkpoint": {
+    "bytes": 10023,
+    "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/frozen-current618-partial-distribution-integrity.json",
+    "sha256": "c7e3cdc23d519b52459853ffa1437bb2f563fcad9d18d332e69f4b7d066f3c29"
+  },
+  "previous_owned_exact_id_search": "NO_MATCH",
+  "producer": {
+    "checkout": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+    "checkout_proven_by_all_three_original_decoded_builder_logs": true,
+    "equal_tree_does_not_relabel_synthetic_as_actual_integration": true,
+    "ordered_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "6181b044c75de35386f1ae30e71725398b6a7feb"
+    ],
+    "run_id": 38126987514,
+    "tree": "99ac5309add45af65049546dd3a99f357884cf3b"
+  },
+  "read_only_scope": {
+    "CI_poll_retry_cancel": false,
+    "new_consumer": false,
+    "package_import_install_execution": false,
+    "provider_browser_native": false,
+    "push_merge_tag_registry": false,
+    "raw_logs_private_configs_signed_URLs_forwarded": false,
+    "source_changes": false
+  },
+  "release_verdict": "HOLD",
+  "remaining_holds": [
+    "MACOS_CP312_CP313_AND_AGGREGATE_MISSING_AT_CAPTURE",
+    "FULL_SEVEN_PLATFORM_INVENTORY",
+    "GENERATED_OAUTH_SOURCE_AND_CONTENT_AUTHORITY",
+    "CURRENT_INSTALLED_PLATFORM_CONSUMERS_NOT_RUN",
+    "TAG_REGISTRY_PUBLICATION",
+    "NATIVE_BROWSER_PROVIDER_PRIVATE_BACKEND_RELEASE_GRAPH",
+    "WINDOWS_FRONTEND_SEMANTIC_EQUIVALENCE_NOT_ESTABLISHED",
+    "WINDOWS_UNIX_EXECUTABLE_MODE_UNAVAILABLE",
+    "FULL_CURRENT_CI_AND_POLICY_ADMISSION_NOT_RECHECKED"
+  ],
+  "retained_original776_consumer_proofs": {
+    "bindings": [
+      {
+        "bytes": 19366,
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+        "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+      },
+      {
+        "bytes": 25752,
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/immutable-current776-linux-consumer-preexecution-proposal-v2.json",
+        "sha256": "57a8beb87e5a1c03fae276e4b22d7fc8734d1f42cc3c739ceb989a0d946e73a7"
+      },
+      {
+        "bytes": 9830,
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-frozen-one-consumer-preexecution-review.json",
+        "sha256": "6346a5feb759d9fb6615d20da814b02de8c528ae273ec7eaa20e56b8327fdb7f"
+      },
+      {
+        "bytes": 8197,
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-one-actual-current-linux-consumer-review.json",
+        "sha256": "f230cbdc1a7e4b9b5bb2f9323d7aa1e645c89778d0db9a554c32cf6bcae69967"
+      },
+      {
+        "bytes": 12913,
+        "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/inspect_original_wheel_v3.py",
+        "sha256": "c8a78be1f14f3e8baa68992b746fb9c1c5f1b0939b14dc36f5ccffa5a843aa77"
+      }
+    ],
+    "scope": "HISTORY_ONLY_NOT_CURRENT618"
+  },
+  "schema": "current-runtime-partial-original-distribution-integrity-v2",
+  "single_acquisition_each": true,
+  "source": {
+    "actual_integration": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "actual_tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+    "community_base": "a70993fafc99a9f94041485542d5a720797ca394"
+  },
+  "source_body_mode_and_builder_scope": {
+    "bytes": 463826,
+    "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/safe-source-body-and-builder-observations.json",
+    "sha256": "1b2328f9b8e837ceb426ea63cc80c1d03629d230979702a0d6629e21a425030e"
+  },
+  "unchanged_frozen_external_helpers_history_only": [
+    {
+      "bytes": 51505,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/test_canvas_query_template.py",
+      "sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e"
+    },
+    {
+      "bytes": 35497,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v5.py",
+      "sha256": "09cdc6b19f5d3d9cc94fadca23373108868521e0378d33960146b1a8522e88ad"
+    }
+  ],
+  "verdict": "GO_DATA_ONLY_LINUX_WINDOWS_SDIST_INTEGRITY_WITH_EXPLICIT_SOURCE_DIFFERENCE_LIMITS",
+  "whole_source_body_equality_verdict": "HOLD_WINDOWS_GENERATED_FRONTEND_RAW_DIFFERENCE_AND_MODE_UNAVAILABLE"
+}

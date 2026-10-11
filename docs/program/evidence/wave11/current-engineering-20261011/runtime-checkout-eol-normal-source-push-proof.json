@@ -1,0 +1,13 @@
+{
+  "status": "NORMAL_NEW_SOURCE_BRANCH_PUSH_VERIFIED_NO_PR_OR_INTEGRATION_CLAIM",
+  "authorization": {
+    "path": "/workspace/engineering/runtime-checkout-eol-normal-source-push-authorization.json",
+    "bytes": 1173,
+    "sha256": "5df945f8c753841fa53009f1e1eafd8525820cc2260ea1f77813b9c18dd024f4"
+  },
+  "head": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+  "tree": "8c7362e63c85a930ca2fe962ede9bc3ebb6ffe68",
+  "branch": "fix/runtime-checkout-eol-20261011",
+  "named_remote_verified": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+  "force_or_retry": false
+}

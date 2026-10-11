@@ -1,0 +1,31 @@
+{
+  "Canonical_file_changed_or_proposed": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+  "Exact_delta_or_verified_reuse": [
+    {
+      "exact_added_text": "An empty visible ruleset list does not resolve an inaccessible traditional\nbranch-protection endpoint. Bracket a paginated census with live named-ref\nreadbacks. If the target advances during collection, retain the old tuple and\nquery the new head separately; do not transfer its predecessor's passing CI.",
+      "patch": {
+        "bytes": 897,
+        "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+        "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+      },
+      "present_in_canonical_checkpoint": true,
+      "present_in_current618_source": false
+    },
+    {
+      "exact_added_text": "\nA platform artifact containing only Linux wheels does not satisfy the\nseven-artifact release inventory. A selected cp312 consumer has a distinct\nnonpublishing scope; retain its original ZIP, wheel, `METADATA`, `RECORD` and\nbuild identities while cross-platform inventory, tag and upload gates remain\npending. After integration, compare the actual merge tree and selected tracked\npayload bytes with the build's synthetic tree. Tree equality does not turn that\nearlier synthetic checkout into an actual integration build. Derive the Python\nmember count from the new wheel bytes even when it equals an earlier count,\nand retain generated-input authority and content holds separately.",
+      "patch": {
+        "bytes": 1158,
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+        "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+      },
+      "present_in_canonical_checkpoint": true,
+      "present_in_current618_source": false
+    }
+  ],
+  "Durable_learning_captured": "Current producer checkout/API head/actual integration, complete data-only bytes, selected Linux installed consumer and whole cross-platform release inventory are separate identities/gates. Derive current202 Python and215tracked payloads from currentwheel; no196-member carry. GeneratedOAuthempty and Windowsfrontend/rawmode limits remain separate holds.",
+  "Evidence": "CurrentOWNERFINAL9b406 data-only qualification/215Gitbody+exec bit bindings/221 RECORD integrity; parameter-only current counts proof and85service-free controls; final input hash bindings separately read back. Actualcurrent consumer NOTRUN.",
+  "Stale_or_ambiguous_guidance_removed": "No old776196-member consumer, equality of synthetic tree, missing-policy access or partial Linux inventory promoted to currentwholeRuntime/publication acceptance.",
+  "Remaining_uncertainty": "Current consumer execution is still NOTAUTHORIZED; execution capacity and heavy serialization must be released; macOS/aggregate/fullseven/OAuthauthority/Windowsfrontendsemantics and modes/tag/private/native/release HOLD.",
+  "Disposition": "Exact accepted bf95/9744 lesson present in root canonical guide, verified reuse; source618 lacks these paragraphs and has not been edited by private harness lane.",
+  "Upstream_disposition": "none"
+}

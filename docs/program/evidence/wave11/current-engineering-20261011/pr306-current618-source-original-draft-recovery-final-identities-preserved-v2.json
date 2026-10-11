@@ -1,0 +1,35 @@
+{
+  "identities": [
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/frozen-source-receipt-construction-draft.json",
+      "bytes": 18155,
+      "sha256": "efe56fd3b844baae8f7cdfb8a552a81947d7fee71fc4245d44d2ca3c49448eb7"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/frozen-source-receipt-final-successor.json",
+      "bytes": 18457,
+      "sha256": "2d85e5b9e3842368e60c2c935680ad2376e0e38e88d832256361fa78f0ae40e6"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/receipt-construction-identity-reconciliation.json",
+      "bytes": 2861,
+      "sha256": "02f43a82322a03f29c087efe67f90336f59af2a3ac01cfe511251d02545d2723"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/original-constructor-content-recovery/freeze-source-receipt-initial-exact-recovered.py",
+      "bytes": 11281,
+      "sha256": "6c5367796b853a77cca55f0256d71ba0d42deb1e9abade55cff063a37e0622f7"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/original-constructor-content-recovery/safe-authored-constructor-recovery-disposition.json",
+      "bytes": 2127,
+      "sha256": "fff2aa6f43995e46c843c4ce80ad81cef635d4f0de4d11607d4be37451379c97"
+    }
+  ],
+  "authoritative_final": "2d85e5b9e3842368e60c2c935680ad2376e0e38e88d832256361fa78f0ae40e6",
+  "retained_constructor_recovery": "6c5367796b853a77cca55f0256d71ba0d42deb1e9abade55cff063a37e0622f7",
+  "constructor_executed": false,
+  "original_paths_unmodified": true,
+  "initial_inspector_failure": "A later receipt-discovery draft used only top-level filenames and missed nested original-constructor-content-recovery, failing before writing its identity receipt. It did not run an application/gate or change source. This named successor uses exact independently reviewed paths, not guessed filenames. The mandatory complete pre-commit union inspector already passed before commit/gates.",
+  "upstream_disposition": "none"
+}

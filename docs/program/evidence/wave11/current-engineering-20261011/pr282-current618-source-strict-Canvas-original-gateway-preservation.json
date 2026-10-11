@@ -1,0 +1,9 @@
+{
+  "status": "PASS_STRICT_ORIGINAL_CANVAS_GATE_UNCHANGED",
+  "original_source": "9c8f1c95caeded6495877280ed1465fd9850b254",
+  "current_head": "e736f846557ed1d603348e97c5eb80060d62e3e2",
+  "whole_Canvas_generator_method_AST_exact_original9c": true,
+  "whole_Canvas_workflow_step_exact_original9c": true,
+  "scope": "all39strictpredicates/version/preflight/controller/source/hash/diagnostic expectations unchanged; incoming RCC source control separate",
+  "no_actual_execution": true
+}

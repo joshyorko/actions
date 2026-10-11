@@ -1,0 +1,21 @@
+{
+  "status": "NORMAL_EXISTING282_SOURCE_CHECKPOINT_PUSH_VERIFIED_776_SOURCE_SCOPE_ONLY",
+  "time": "2026-10-11T09:07:04.377212+00:00",
+  "head": "c75dfa6969c2c562a59a967e2e674fea6c8af457",
+  "tree": "6a4580843f2f927e7911bf316a32f8ceab53179e",
+  "ordered_source_parents": [
+    "e9641caaa1f11414fe92874eb40e159cb48604a6",
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+  ],
+  "independent_SOURCE_GO_sha256": "579ca8898dbb9c49824af3f38b342733825f4b34637eec879d340e4d091c8697",
+  "source_frozen_receipt_sha256": "58ae1c1657c4cc310d1b43c70391b4b7038499d6d07cb215112761fa81621977",
+  "branch": "feat/canvas-template-20261010",
+  "draft": true,
+  "actual_target_now": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "authenticated_base_snapshot": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "remaining_HOLD": [
+    "ordinary current-target source refresh and complete exactcurrentCI",
+    "current native/private/full127/release"
+  ],
+  "upstream_disposition": "none"
+}

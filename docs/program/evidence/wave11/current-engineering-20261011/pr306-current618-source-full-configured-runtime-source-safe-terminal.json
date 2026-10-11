@@ -1,0 +1,22 @@
+{
+  "single_authorized_full": true,
+  "exit_code": 0,
+  "passed": 1283,
+  "skipped": 13,
+  "warnings": 15,
+  "duration_seconds": 130.75,
+  "workers": 2,
+  "RCC_GATEWAY": "SUCCESS",
+  "outer_timeout_seconds": 600,
+  "kill_grace_seconds": 10,
+  "head": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+  "tree": "a31db4434c7bbe69bf572626d2174f64f9ff2f39",
+  "private_raw_log": {
+    "path": "/workspace/engineering/pr306-actual299-refresh/full-configured-runtime-source.log",
+    "bytes": 333009,
+    "sha256": "f1046fb42e03a7856a64034d8a74f2448cbe907a9f34ac6cb22b31418b6de8d1"
+  },
+  "private_raw_log_mode": "0o600",
+  "scope": "configured invoke test-not-integration; no actual native/provider/browser/PG qualification",
+  "cleanup": "Gateway exit0 and source SUCCESS only; descendant/native child reaping not established."
+}

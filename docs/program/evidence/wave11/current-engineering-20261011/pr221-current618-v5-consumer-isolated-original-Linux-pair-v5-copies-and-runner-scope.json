@@ -1,0 +1,62 @@
+{
+  "copies": [
+    {
+      "original": {
+        "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "bytes": 14180835,
+        "sha256": "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6"
+      },
+      "dedicated_copy": {
+        "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/linux-platform-input-v5/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "bytes": 14180835,
+        "sha256": "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6"
+      },
+      "copy_mode": "0600",
+      "original_ZIP_member": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "original_ZIP_bytes_equal": true
+    },
+    {
+      "original": {
+        "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "bytes": 14180835,
+        "sha256": "2f856d2f27dba472aa84e954245f63ecd879e102751a300eb0fd0b361486cdfd"
+      },
+      "dedicated_copy": {
+        "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/linux-platform-input-v5/actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "bytes": 14180835,
+        "sha256": "2f856d2f27dba472aa84e954245f63ecd879e102751a300eb0fd0b361486cdfd"
+      },
+      "copy_mode": "0600",
+      "original_ZIP_member": "actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "original_ZIP_bytes_equal": true
+    }
+  ],
+  "original_archive": {
+    "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/original-11697353355.zip",
+    "bytes": 28299039,
+    "sha256": "fc4018e6e7ed4a0e47c4f5888d36d55655216ca22ebd965f29ce9f1130938f8c"
+  },
+  "immutable_v4": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/immutable-current618-linux-consumer-preexecution-proposal-v4.json",
+    "bytes": 39398,
+    "sha256": "da926a733e60108fd2943add0a60a0bf6d365afbb1d489bf986a0624ecda65c0"
+  },
+  "new_manifest": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/input-and-source-admission-v5.json",
+    "bytes": 170704,
+    "sha256": "596942a7c85fe6f742777454d6d1a76c1bc3e8c29ed88f693eea28af856d7c34"
+  },
+  "new_runner": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-consumer-runner-v5.py",
+    "bytes": 19506,
+    "sha256": "67912e4bfdc1de4dd83d36511bf19b19cd90e34c0d84197d30a7e05f0fce4ad9"
+  },
+  "all9_runner_function_ASTs_exact_v4": true,
+  "only_runner_parameter_deltas": [
+    "WHEEL dedicated Linux path",
+    "ATTEMPT suffix3",
+    "SOURCES input_manifest path and SHA"
+  ],
+  "all_other_globals_and_budgets_unchanged": true,
+  "actual_consumer_executed": false
+}

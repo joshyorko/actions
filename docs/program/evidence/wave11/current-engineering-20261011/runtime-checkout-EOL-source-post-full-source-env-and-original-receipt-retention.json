@@ -1,0 +1,26 @@
+{
+  "status": "PASS_EXACT_CURRENT_SOURCE_AND_PREPARED_INPUTS_RETENTION",
+  "head": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+  "tree": "8c7362e63c85a930ca2fe962ede9bc3ebb6ffe68",
+  "1421_source_body_exec_mode_hashes_exact": true,
+  "old41_and_successor6_frozen_refs_exact": true,
+  "prepared30_and_five_config_interpreter_origin_paths_retained": true,
+  "RCC0711_sha256_retained": true,
+  "full_summary_counts": [
+    "162 passed in 9.74s",
+    "1219 passed, 13 skipped, 15 warnings in 133.23s"
+  ],
+  "worker_item_census": [
+    [
+      "2",
+      "1232"
+    ]
+  ],
+  "created_worker_census": [
+    [
+      "2",
+      "2"
+    ]
+  ],
+  "workspace_free_bytes": 661151744
+}

@@ -1,0 +1,45 @@
+{
+  "status": "SCOPED_COMPLETED_SCRATCH_RECOVERY_VERIFIED",
+  "archives": [
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/6626d6008afef362",
+      "archive": "/dev/shm/actions-completed-scratch-recovery-batch14/6626d6008afef362.tar.gz",
+      "archive_bytes": 249447428,
+      "archive_sha256": "215414f3fd42f10a159194ba80bee0c484b87736f012f1eaf5b51f62ed5d6bfc",
+      "verified_members": 15160,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/1748c6a354c4f0e0",
+      "archive": "/dev/shm/actions-completed-scratch-recovery-batch14/1748c6a354c4f0e0.tar.gz",
+      "archive_bytes": 250994967,
+      "archive_sha256": "438a48f33703a9190766118df30dec3dfc920b98b18cf75de64f76eea29fcf7f",
+      "verified_members": 15158,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    }
+  ],
+  "algorithm_scope": "Same already independently reviewed inventory/archive/hash/mode/uidgid/symlink/internal-hardlink-resolution before exact expanded namespace removal; no inferred ACL/xattr/inode/rootmetadata/precise-TAR-mtime or retroactive complete handle census",
+  "private_inventory_binding": {
+    "path": "/dev/shm/actions-completed-scratch-recovery-batch14/private-complete-inventory-and-recovery.json",
+    "bytes": 12595054,
+    "sha256": "2b87bb6b1cfd1e338c25566a083af4dd03bc1e433350767f8fd1e51aed02a8ef"
+  },
+  "recovery_script_binding": {
+    "path": "/tmp/actions-capacity-recovery-batch14.py",
+    "bytes": 5264,
+    "sha256": "8ade1e813c2405d71f6e450d1e3fef29d4b50e61a53fd3bfc91b2a1a90d6f18f"
+  },
+  "terminal_log_binding": {
+    "path": "/tmp/actions-capacity-recovery-batch14.log",
+    "bytes": 344,
+    "sha256": "3d1a464f4334c98ed8d643a1b55765d938a38028e23fd4b75cddc67793c70858"
+  },
+  "recorded_members": 30318,
+  "workspace_free_bytes_after": 2169884672,
+  "preserved": "Prior31 archives+13 indices/V5 runner/failed563d baseline require separate independent reference check; no historical requalification",
+  "Documentation_improvement": "Existing7d070 capacity lesson adequate for unchanged reviewed algorithm; no cosmetic delta",
+  "upstream_disposition": "none",
+  "existing_mount_allocation": "Two archives preserved on already existing /dev/shm mount; no infrastructure provisioned. Distinct unused /tmp staging directory."
+}

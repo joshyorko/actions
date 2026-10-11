@@ -1,0 +1,49 @@
+{
+  "status": "NORMAL_EXISTING_PR_BRANCH_SOURCE_PUSH_NAMED_REMOTE_EXACT_API_READBACK_PENDING",
+  "pr": 300,
+  "head": "7840057a8b055576d11d339d8c0fbb738927a491",
+  "tree": "10e09d88027ca4fea512ff06c57efaab95755ffb",
+  "ordered_parents": [
+    "d4443c49973ddd629838c682111474991e3ea0c2"
+  ],
+  "branch": "feat/run-output-transport-20261010",
+  "existing_remote_before": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+  "named_remote_after": "7840057a8b055576d11d339d8c0fbb738927a491",
+  "retarget_before_source_push": {
+    "old_base": "feat/shared-run-output-20261010",
+    "new_base": "integration/community-release-20261008",
+    "base_sha_before_push": "6181b044c75de35386f1ae30e71725398b6a7feb"
+  },
+  "authenticated_after_reads": [
+    {
+      "head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "head_ref": "feat/run-output-transport-20261010",
+      "base_ref": "integration/community-release-20261008",
+      "draft": true
+    },
+    {
+      "head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "head_ref": "feat/run-output-transport-20261010",
+      "base_ref": "integration/community-release-20261008",
+      "draft": true
+    }
+  ],
+  "source_and_independent_bindings": [
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/immutable-actual299-source-checkpoint.json",
+      "bytes": 72050,
+      "sha256": "b16ef794377b8a51a66444efa697401bc41793842ac6b7bf2986085501e967ee"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-independent-source-review/independent-frozen-actual299-source-review.json",
+      "bytes": 10058,
+      "sha256": "8bd3f1d1cc71d437bb591abe2b550a8d554f7c761f9c54ae40880c3cfa30deee"
+    }
+  ],
+  "full_source": "1242PASS13SKIP15WARN",
+  "current_CI": "REQUIRED",
+  "native_private_whole_issue_release": "HOLD",
+  "upstream_disposition": "none"
+}

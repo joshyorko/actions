@@ -1,0 +1,15 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2903,6 +2903,12 @@
+ a string. Normalize that root trigger key before evaluating event, branch and
+ path filters. Otherwise a workflow inventory can silently omit required jobs.
+ 
++Evaluate workflow path filters against the event's own changed-file set: a PR
++uses its base/head comparison, while a named branch push uses the authenticated
++before/after update. A merged target can trigger a push-only Copilot path filter
++even when that workflow is excluded from the PR set. Tag-only push filters do
++not admit a branch update; keep these namespaces and auxiliary jobs separate.
++
+ Derive the expected CI job set from the exact workflow revision, branch/path
+ filters, matrices, job conditions and dependencies. A dependent job can appear
+ only after its `needs` finish; an early check count is not final. Exhausting a

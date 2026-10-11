@@ -1,0 +1,110 @@
+{
+  "schema": "actions-pr282-independent-actual776-frozen-source-review/v1",
+  "verdict": "GO_NORMAL_EXISTING_PR_BRANCH_SOURCE_CHECKPOINT_PUSH_ONLY",
+  "source": {
+    "head": "c75dfa6969c2c562a59a967e2e674fea6c8af457",
+    "tree": "6a4580843f2f927e7911bf316a32f8ceab53179e",
+    "ordered_parents": [
+      "e9641caaa1f11414fe92874eb40e159cb48604a6",
+      "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+    ],
+    "branch": "feat/canvas-template-20261010",
+    "clean": true
+  },
+  "announced_frozen_receipt": {
+    "path": "/workspace/engineering/pr282-actual776-refresh/frozen-source-receipt.json",
+    "bytes": 17901,
+    "sha256": "58ae1c1657c4cc310d1b43c70391b4b7038499d6d07cb215112761fa81621977"
+  },
+  "independent_complete_proof": {
+    "path": "/workspace/engineering/pr282-actual776-independent-review/independent-complete-union-gates-and-retained-byte-proof.json",
+    "bytes": 36819,
+    "sha256": "caabf4507939d472c6b4668a64745b4ba1d28ede3f644c00946e3fbf43b96f44"
+  },
+  "findings": [],
+  "verified": {
+    "complete_union": "1423 complete typed Git mode/blob leaves; no parent deletion; all current working bytes and executable bits equal frozen Git before/post source gates. Only generator and canonical guide combine parent bodies.",
+    "generator": {
+      "merge_base": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "source_changed_parts": 2,
+      "target_changed_parts": 8,
+      "overlap": 0,
+      "exact_resolved_union_preserves_both_changed_part_sets": true
+    },
+    "strict_Canvas": "Entire published_canvas_acceptance method AST and entire generated acceptance step equal original9c8; all39 strict predicates, version preflight, source/hash/bindings, diagnostic and selectors preserved. Helperedc7 and originalstaging tests exact bodies/modes.",
+    "RCC": "Nine selected accepted source samples equal d642 and actual776; separate from full producer",
+    "producer": {
+      "native268": 268,
+      "current269": 269,
+      "match": 265,
+      "changed": [
+        "action_server/src/actions/server/_rcc_runtime_adapter.py",
+        "action_server/src/actions/server/templates/action-templates.yaml",
+        "action_server/src/actions/server/templates/action-templates.zip"
+      ],
+      "added": [
+        "action_server/src/actions/server/templates/zips/canvas-query.zip"
+      ],
+      "selected5_separate_exact": true,
+      "qualification": "UNQUALIFIED_CHANGED_PRODUCTION_INPUTS"
+    },
+    "toolchain": "30 current/prepared Git-bound input comparisons and five own prefix/config/Python/source origins; no installer executed by reviewer",
+    "recorded_gates": {
+      "Doctor": "PASS",
+      "Bootstrap_reuse": "30 exact current/prepared inputs; five measured own prefixes/origins; no installer",
+      "Toolkit": 179,
+      "Canvas_source": 75,
+      "focused_staging": {
+        "passed": 4,
+        "deselected": 24
+      },
+      "RCC_source": {
+        "passed": 112,
+        "skipped": 1,
+        "deselected": 3,
+        "skip": "existing actual opt-in, NOT RUN"
+      },
+      "configured_lint": "Ruff/format/Isort PASS",
+      "Mypy": 338,
+      "generated_workflows": 8,
+      "workflow_plus_dependabot": 26,
+      "all_tracked_YAML": 30,
+      "full_source": {
+        "passed": 1183,
+        "skipped": 12,
+        "warnings": 15,
+        "seconds": 132.61,
+        "workers": 2,
+        "command": "canonicalRCC task script -> own Runtime Poetry invoke test-not-integration",
+        "outer_bound": "600s TERM +10s KILL",
+        "single_authorized_attempt": true
+      }
+    },
+    "preservation": "Original1192 native entries/modes/symlink targets/content hashes reverified; original ZIP/executable/helpers0444/browser,18 raw and50 frozen V5 measurements, Node/frontend bytes exact before/after. 28 prior282 source/actual/failure references rehashed.",
+    "historical_actual": "Retained V5 source3ec/native92498 and old282 actual tuples remain unchanged; neither qualifies c75 production union. Two prior adopted zombie observations remain original point-in-time ownership evidence, not complete reaping."
+  },
+  "review_scaffold_disposition": "Initial overly strict target whole-paragraph expectation corrected after inspecting exact imported delta: three pre-existing source-backed Canvas metadata/head/staging additions extend target paragraphs and four incoming RCC paragraphs are corrected/extended. This was a reviewer scaffold assumption, not a product/gate failure. Exact parent patch and all body changes remain verified.",
+  "remaining_HOLD": [
+    "Fresh full hosted CI for exactc75/actual776 tested union required; no old e964/9c8 CI carry",
+    "Native92498 qualification UNQUALIFIED: current269 inputs versus historical268,265 matches,3 changed and1 added;5 selectors separate, no exclusion",
+    "No current native build/Canvas/browser/provider/service/ChatGPT/consumer/cold-registry retry performed or admitted",
+    "Full127/private134/release retained contracts remain HOLD; no issue closure or broad release admission",
+    "Original failed browser-version predicate evidence and unavailable actual values retain cause UNKNOWN; source representation controls do not reconstruct hosted values",
+    "Current source PASS does not establish universal adoption, descendant capture or natural cleanup"
+  ],
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Exact delta": {
+      "path": "/workspace/engineering/pr282-actual776-independent-review/canonical-reviewed-imported-delta.patch",
+      "bytes": 10332,
+      "sha256": "8c4ca79a90f3d7b1a291a5601d95c8824a77daced49991cf9e6d75ab9293a211"
+    },
+    "Disposition": "ACCEPT verified exact ordinary imported delta8c4ca79a90f3d7b1a291a5601d95c8824a77daced49991cf9e6d75ab9293a211; no cosmetic child/session diary",
+    "Durable learning captured": "Preserve strict Canvas/raw-diagnostic/preflight/staging/producer bounds while importing accepted RCC candidate/control/tested merge identities, canonical specification/artifact same-response identity and narrow hosted evidence scope. Nine selected hashes do not replace complete producer qualification; stale control evidence remains historical.",
+    "Evidence": "Independent1423 typed union, disjoint generator source2/target8 changedASTparts/no overlap/exact resolved preservation; original9c8 full Canvas method/workflow/helper equality; current269producer/5separate selectors/9RCCsamples; retained1192/18raw/50frozen; configured1183PASS12SKIP/Toolkit179/source75+4/RCC112+1SKIP/source static338/8generated+30YAML.",
+    "Stale or ambiguous guidance removed": "Earlier one-case RCC/control/publication wording corrected by accepted target, preserving original strict Canvas version/diagnostic and staging lessons. Prevents source green or sample parity from being interpreted as current native equivalence.",
+    "Remaining uncertainty": "Current exact hosted CI and new native/Canvas/browser/provider/consumer/private/ChatGPT/coldregistry/release gates; original missing hosted version values/cause and complete adopted-zombie reaping remain unproven."
+  },
+  "Upstream disposition": "none",
+  "reviewer_actions": "Read-only Git/file/hash/AST/YAML review and owned review outputs only; no source/index edit, test/gateway/native/browser/provider/installer/download/push/merge"
+}

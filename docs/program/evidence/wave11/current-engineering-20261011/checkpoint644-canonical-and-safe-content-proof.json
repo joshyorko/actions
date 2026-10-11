@@ -1,0 +1,51 @@
+{
+  "canonical_delta": {
+    "bytes": 4862,
+    "exact40_additions_zero_removals": true,
+    "exact_blocks": [
+      {
+        "added_lines": 13,
+        "bytes": 1401,
+        "exact_staged_added_block": true,
+        "payload": "pr306-constructor-recovery-canonical-immutable-constructor-and-owner-freeze-proposed.patch",
+        "sha256": "b0ff0bf2bb0a18af8dc354e1503fd10e576873d4fa870a05b238ad35af701fe6"
+      },
+      {
+        "added_lines": 10,
+        "bytes": 1453,
+        "exact_staged_added_block": true,
+        "payload": "pr306-current776-actual-handoff-canonical-delta.patch",
+        "sha256": "fb557e5d7ca92f94871920212c5b464ffc0428716d6447917f65743127b0ef04"
+      },
+      {
+        "added_lines": 10,
+        "bytes": 1158,
+        "exact_staged_added_block": true,
+        "payload": "pr221-current-Linux-consumer-canonical-partial-platform-consumer-scope-proposed.patch",
+        "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+      }
+    ],
+    "path": "/workspace/engineering/checkpoint-644-independent-review/canonical-exact-staged644-delta.patch",
+    "sha256": "72a99e03c800dd1a5d71f0f41471b8cf2ad27296ca25779c0133d39dad9f97ac",
+    "three_branch_equivalent_block": {
+      "lines": 7,
+      "scope": "three_existing_opt_in_PR_branches_retained_path_filter_hosted_source_control_qualified_separately",
+      "source_proposal_bytes": 1016,
+      "source_proposal_sha256": "cd97355e9506350c286532607b87c5ce4ff492073a78fb72336517fe8164b5cd"
+    }
+  },
+  "new128_content_scan": {
+    "URL_hosts": {
+      "files.pythonhosted.org": 2
+    },
+    "credential_or_signed_url_hits": [],
+    "extensions": {
+      ".json": 114,
+      ".patch": 14
+    },
+    "nonempty_raw_secret_payload_fields": []
+  },
+  "prior516_privacy": "byte_exact_unchanged_previously_independently_reviewed",
+  "scope": "prospective_Linux_consumer_not_seven_artifact_release_or_new_actual_integration_build; current776 pre299 CI snapshots immutable historical",
+  "source_code_patches": "authorized_test_and_canonical_documentation_deltas_only_no_private_external_runner_implementation_added"
+}

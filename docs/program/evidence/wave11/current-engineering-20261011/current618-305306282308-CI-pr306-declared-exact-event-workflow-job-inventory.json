@@ -1,0 +1,2139 @@
+{
+  "source": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+  "workflows": [
+    {
+      "path": ".github/workflows/action_server_build_cdn.yml",
+      "source_git_blob": "89372722a0c4e7d1601ba6b8b961cf3ecb066999",
+      "sha256": "51ba9d399f06d712e46bd691a24379ac940b6b479a58c83eb882a4e65f115aeb",
+      "name": "Build Action Server with CDN Frontend",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event_absent"
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event_absent"
+        }
+      },
+      "jobs": {
+        "build": {
+          "names": [
+            "build (ubuntu-22.04)",
+            "build (windows-2022)",
+            "build (macos-15)"
+          ],
+          "matrix_rows": [
+            {
+              "os": "ubuntu-22.04",
+              "python": "3.12",
+              "asset_name": "action-server"
+            },
+            {
+              "os": "windows-2022",
+              "python": "3.12",
+              "asset_name": "action-server.exe"
+            },
+            {
+              "os": "macos-15",
+              "python": "3.12",
+              "asset_name": "action-server"
+            }
+          ],
+          "count": 3,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Upload artifact",
+              "if": "${{ github.event.inputs.upload_artifacts == 'true' }}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/action_server_frontend_tests.yml",
+      "source_git_blob": "4ac2b5646cf12f430a8af59f0592739aad3be9b5",
+      "sha256": "058e7625c4eb32f885bdeef6443643dd1a3df87ec6c5131bb39b36ec4289b8d2",
+      "name": "Action Server Frontend tests",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": true,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py",
+              "docs/contracts/canvas/fixtures/**",
+              ".github/workflows/action_server_frontend_tests.yml"
+            ]
+          },
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event_absent"
+        }
+      },
+      "jobs": {
+        "action-server-frontend-tests": {
+          "names": [
+            "action-server-frontend-tests"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/action_server_update_downloads.yml",
+      "source_git_blob": "a1539ea1add95546f2f966d0edca4d9d61ad3b3e",
+      "sha256": "b96ea3507a48cbad6bccd8cb99114552b170c59bfd6e03ac3a8c4e97d41ef771",
+      "name": "Action Server Update Downloads",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event_absent"
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event_absent"
+        }
+      },
+      "jobs": {
+        "update-index": {
+          "names": [
+            "update-index"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": "${{ true }}",
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_core_tests.yml",
+      "source_git_blob": "1c855355d6e5fc7a196ceea7bf83c1af952957a8",
+      "sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296",
+      "name": "Actions Core Tests",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": true,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "actions/**",
+              ".github/workflows/actions_core_tests.yml",
+              "devutils/**",
+              "actions-http-helper/**",
+              ".github/workflows/_gen_workflows.py"
+            ]
+          },
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": false,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community",
+              "wip"
+            ],
+            "paths": [
+              "actions/**",
+              ".github/workflows/actions_core_tests.yml",
+              "devutils/**",
+              "actions-http-helper/**",
+              ".github/workflows/_gen_workflows.py"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "build": {
+          "names": [
+            "build (ubuntu-py3.10-devmode)",
+            "build (windows-py3.10-devmode)",
+            "build (macos-py3.10-devmode)"
+          ],
+          "matrix_rows": [
+            {
+              "name": "ubuntu-py3.10-devmode",
+              "python": "3.10",
+              "os": "ubuntu-22.04"
+            },
+            {
+              "name": "windows-py3.10-devmode",
+              "python": "3.10",
+              "os": "windows-2022"
+            },
+            {
+              "name": "macos-py3.10-devmode",
+              "os": "macos-15",
+              "python": "3.10"
+            }
+          ],
+          "count": 3,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Install project (not dev)",
+              "if": "contains(matrix.name, '-devmode') == false"
+            },
+            {
+              "name": "Install project (dev)",
+              "if": "contains(matrix.name, '-devmode')"
+            },
+            {
+              "name": "`inv lint`, potentially fixed with `inv pretty`",
+              "if": "always()"
+            },
+            {
+              "name": "`inv typecheck`",
+              "if": "always()"
+            },
+            {
+              "name": "`inv docs` with checking on files changed",
+              "if": "always()"
+            }
+          ]
+        },
+        "candidate-wheel": {
+          "names": [
+            "candidate-wheel"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_release.yml",
+      "source_git_blob": "af9e816aabb94b642521aa29cd7df1d649cf0e61",
+      "sha256": "cdc2a5d5d2ab0887d26c76c56ca63c7b17e4df00030a844cf70491b19b1adf64",
+      "name": "Actions Release",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event_absent"
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": true,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": true,
+          "declared_trigger": {
+            "tags": [
+              "actions-core-*"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "verify": {
+          "names": [
+            "verify"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        },
+        "publish": {
+          "names": [
+            "publish"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": "verify",
+          "if": "startsWith(github.ref, 'refs/tags/actions-core-')",
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_runtime_binary_release.yml",
+      "source_git_blob": "1fce9c558943fffab5c264bcc0599095162aa3ee",
+      "sha256": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64",
+      "name": "Actions Runtime BINARY Release",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event_absent"
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": false,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "tags": [
+              "actions-runtime-*"
+            ],
+            "branches": [
+              "*-beta"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "build": {
+          "names": [
+            "build (ubuntu-22.04)",
+            "build (windows-2022)",
+            "build (macos-15)"
+          ],
+          "matrix_rows": [
+            {
+              "os": "ubuntu-22.04",
+              "python": "3.12",
+              "name": "linux",
+              "asset_path": "action_server/dist/final/action-server"
+            },
+            {
+              "os": "windows-2022",
+              "python": "3.12",
+              "name": "windows",
+              "asset_path": "action_server/dist/final/action-server.exe"
+            },
+            {
+              "os": "macos-15",
+              "python": "3.12",
+              "name": "macos",
+              "asset_path": "action_server/dist/final/action-server"
+            }
+          ],
+          "count": 3,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Install project (not dev)",
+              "if": "contains(matrix.name, '-devmode') == false"
+            },
+            {
+              "name": "Install project (dev)",
+              "if": "contains(matrix.name, '-devmode')"
+            },
+            {
+              "name": "Check tag version",
+              "if": "${{ !endsWith(github.ref_name, '-beta') }}"
+            },
+            {
+              "name": "Verify Runtime tag SHA and community ancestry",
+              "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}"
+            },
+            {
+              "name": "Build binary (signed)",
+              "if": "${{ steps.signing.outputs.signed == 'true' }}"
+            },
+            {
+              "name": "Build binary (unsigned)",
+              "if": "${{ steps.signing.outputs.signed != 'true' }}"
+            }
+          ]
+        },
+        "release": {
+          "names": [
+            "release"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [
+            "build"
+          ],
+          "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}",
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+      "source_git_blob": "e66bbf2451b3550fa3bf6b10e6bb5483f02f3ca0",
+      "sha256": "aabf25267c48b9d361f4d575a332a9f7bdddc4c5d1f3ce4ff5ac151c98d36140",
+      "name": "Actions Runtime Frozen Catalog Rollback",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event_absent"
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": false,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "test/frozen-catalog-rollback-20261010",
+              "test/frozen-generation-drain-20261010",
+              "test/mcp-alias-frozen-control-20261010",
+              "test/frozen-control-resource-history-20261010",
+              "test/frozen-control-a47-20261010"
+            ],
+            "paths": [
+              ".github/workflows/_gen_workflows.py",
+              ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+              "action_server/scripts/verify_frozen_catalog_artifact.py",
+              "action_server/scripts/verify_frozen_catalog_wrapper_artifact.py",
+              "action_server/scripts/verify_frozen_catalog_junit.py",
+              "action_server/scripts/verify_frozen_catalog_harness.py",
+              "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+              "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
+              "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py",
+              "action_server/tests/action_server_tests/test_cli_multi_package_sync.py",
+              "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+              "action_server/scripts/frozen_wrapper_acceptance_plugin.py",
+              "action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py",
+              "action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py",
+              "action_server/tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py",
+              "developer/tests/test_frozen_wrapper_metadata.py",
+              "action_server/docs/DEVELOPMENT.md"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "build": {
+          "names": [
+            "build"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Write final sanitized evidence receipt",
+              "if": "always()"
+            },
+            {
+              "name": "Upload frozen acceptance evidence",
+              "if": "always()"
+            }
+          ]
+        },
+        "go_wrapper": {
+          "names": [
+            "go_wrapper"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Verify wrapper-extracted frozen executable identity",
+              "if": "${{ steps.wrapper_acceptance.outcome == 'success' }}"
+            },
+            {
+              "name": "Write separate Go-wrapper acceptance receipt",
+              "if": "always()"
+            },
+            {
+              "name": "Upload Go-wrapper acceptance evidence",
+              "if": "always()"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "source_git_blob": "8a6c70171fca53059f4da2b1be0cb657890c20e2",
+      "sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+      "name": "Actions Runtime PYPI Release",
+      "events": {
+        "pull_request": {
+          "eligible": true,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": true,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              ".github/workflows/_gen_workflows.py",
+              ".github/workflows/actions_runtime_pypi_release.yml",
+              ".github/workflows/actions_runtime_binary_release.yml",
+              ".github/workflows/actions_runtime_manylinux_release.yml",
+              "devutils/tests/test_actions_runtime_release_line.py",
+              "devutils/tests/test_runtime_release_workflows.py",
+              "docs/skills/repository-operations.md",
+              "action_server/scripts/publish_verified_runtime.py",
+              "action_server/scripts/verify_published_runtime_floor.py"
+            ]
+          },
+          "matched_paths": [
+            "docs/skills/repository-operations.md"
+          ]
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": true,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": true,
+          "declared_trigger": {
+            "tags": [
+              "actions-runtime-*"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "build-sdist": {
+          "names": [
+            "build-sdist (ubuntu-py3.12)"
+          ],
+          "matrix_rows": [
+            {
+              "name": "ubuntu-py3.12",
+              "python": "3.12",
+              "os": "ubuntu-22.04"
+            }
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Install project (not dev)",
+              "if": "contains(matrix.name, '-devmode') == false"
+            },
+            {
+              "name": "Install project (dev)",
+              "if": "contains(matrix.name, '-devmode')"
+            },
+            {
+              "name": "Check tag version",
+              "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}"
+            },
+            {
+              "name": "Build frontend",
+              "if": "github.event_name == 'push'"
+            },
+            {
+              "name": "Build frontend (PR)",
+              "if": "github.event_name == 'pull_request'"
+            },
+            {
+              "name": "Build OAuth2 config",
+              "if": "github.event_name == 'push'"
+            },
+            {
+              "name": "Build OAuth2 config (PR)",
+              "if": "github.event_name == 'pull_request'"
+            }
+          ]
+        },
+        "build-wheels": {
+          "names": [
+            "build-wheels (ubuntu-22.04)",
+            "build-wheels (windows-2022)",
+            "build-wheels (macos-15)"
+          ],
+          "matrix_rows": [
+            {
+              "os": "ubuntu-22.04",
+              "python": "3.12",
+              "name": "ubuntu"
+            },
+            {
+              "os": "windows-2022",
+              "python": "3.12",
+              "name": "windows"
+            },
+            {
+              "os": "macos-15",
+              "python": "3.12",
+              "name": "macos"
+            }
+          ],
+          "count": 3,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Install project (not dev)",
+              "if": "contains(matrix.name, '-devmode') == false"
+            },
+            {
+              "name": "Install project (dev)",
+              "if": "contains(matrix.name, '-devmode')"
+            },
+            {
+              "name": "Check tag version",
+              "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}"
+            },
+            {
+              "name": "Build frontend",
+              "if": "github.event_name == 'push'"
+            },
+            {
+              "name": "Build frontend (PR)",
+              "if": "github.event_name == 'pull_request'"
+            },
+            {
+              "name": "Build OAuth2 config",
+              "if": "github.event_name == 'push'"
+            },
+            {
+              "name": "Build OAuth2 config (PR)",
+              "if": "github.event_name == 'pull_request'"
+            },
+            {
+              "name": "Set macOS deployment target",
+              "if": "${{ matrix.name == 'macos' }}"
+            },
+            {
+              "name": "Build candidate Core wheel for PR compatibility tests",
+              "if": "github.event_name == 'pull_request'"
+            },
+            {
+              "name": "Build candidate HTTP Helper wheel for PR compatibility tests",
+              "if": "github.event_name == 'pull_request'"
+            },
+            {
+              "name": "Verify Runtime wheel with published Core and Helper",
+              "if": "github.event_name == 'pull_request'"
+            }
+          ]
+        },
+        "publish": {
+          "names": [
+            "publish (3.12)"
+          ],
+          "matrix_rows": [
+            {
+              "python": "3.12"
+            }
+          ],
+          "count": 1,
+          "needs": [
+            "build-sdist",
+            "build-wheels"
+          ],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Verify merged tag provenance and version",
+              "if": "github.event_name == 'push'"
+            },
+            {
+              "name": "Check Runtime publish credential",
+              "if": "github.event_name == 'push'"
+            },
+            {
+              "name": "Publish verified artifacts",
+              "if": "github.event_name == 'push' && steps.runtime-token.outputs.enabled == 'true'"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+      "source_git_blob": "ec7a6df7762394beeaf1125d424c9de9109c8db7",
+      "sha256": "9bf4533d94eac31ad2dc1f193f1a53441a64e19de2b2466c1631c5203f79d3d2",
+      "name": "Action Server RCC provider rollback acceptance",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event_absent"
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": false,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "test/rcc-provider-rollback-hosted-20261010",
+              "fix/rcc-published-artifact-details-20261010"
+            ],
+            "paths": [
+              "developer/tests/test_rcc_provider_rollback_workflow.py",
+              "developer/tests/test_rcc_provider_rollback_summary.py",
+              "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+              "action_server/src/actions/server/deployments/source_staging.py",
+              "action_server/src/actions/server/deployments/source_read.py",
+              "action_server/src/actions/server/deployments/source_manifest.py",
+              ".github/workflows/_gen_workflows.py",
+              ".github/workflows/actions_runtime_rcc_provider_rollback.yml"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "build": {
+          "names": [
+            "build"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": "${{ github.sha }}",
+              "path": "control"
+            },
+            {
+              "ref": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+              "path": "candidate"
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Write sanitized source and test evidence",
+              "if": "always()"
+            },
+            {
+              "name": "Validate RCC rollback admission",
+              "if": "always()"
+            },
+            {
+              "name": "Upload sanitized acceptance evidence",
+              "if": "always()"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_runtime_recovery.yml",
+      "source_git_blob": "b84289aefb5d5c164fac25e9492a17f07dcd819b",
+      "sha256": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f",
+      "name": "Actions Runtime Recovery",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event_absent"
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event_absent"
+        }
+      },
+      "jobs": {
+        "validate": {
+          "names": [
+            "validate"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": "${{ github.workflow_sha }}",
+              "path": "recovery-code"
+            },
+            {
+              "ref": "${{ inputs.release_sha }}",
+              "path": "release-source"
+            }
+          ],
+          "source_step_conditions": []
+        },
+        "pypi-recovery": {
+          "names": [
+            "pypi-recovery"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [
+            "validate"
+          ],
+          "if": "${{ needs.validate.result == 'success' && inputs.release_ref != 'actions-runtime-1.0.1' }}",
+          "checkouts": [
+            {
+              "ref": "${{ github.workflow_sha }}",
+              "path": "recovery-code"
+            },
+            {
+              "ref": "${{ inputs.release_sha }}",
+              "path": "release-source"
+            }
+          ],
+          "source_step_conditions": []
+        },
+        "binary-build": {
+          "names": [
+            "binary-build (ubuntu-22.04, linux, 3.12)",
+            "binary-build (macos-15, macos, 3.12)",
+            "binary-build (windows-2022, windows, 3.12)"
+          ],
+          "matrix_rows": [
+            {
+              "os": "ubuntu-22.04",
+              "name": "linux",
+              "python": "3.12"
+            },
+            {
+              "os": "macos-15",
+              "name": "macos",
+              "python": "3.12"
+            },
+            {
+              "os": "windows-2022",
+              "name": "windows",
+              "python": "3.12"
+            }
+          ],
+          "count": 3,
+          "needs": [
+            "validate"
+          ],
+          "if": "${{ needs.validate.result == 'success' }}",
+          "checkouts": [
+            {
+              "ref": "${{ github.workflow_sha }}",
+              "path": "recovery-code"
+            },
+            {
+              "ref": "${{ inputs.release_sha }}",
+              "path": "release-source"
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Build binary (signed)",
+              "if": "${{ steps.signing.outputs.signed == 'true' }}"
+            },
+            {
+              "name": "Build binary (unsigned)",
+              "if": "${{ steps.signing.outputs.signed != 'true' }}"
+            }
+          ]
+        },
+        "binary-release": {
+          "names": [
+            "binary-release"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [
+            "validate",
+            "binary-build"
+          ],
+          "if": "${{ needs.binary-build.result == 'success' }}",
+          "checkouts": [
+            {
+              "ref": "${{ github.workflow_sha }}",
+              "path": "recovery-code"
+            },
+            {
+              "ref": "${{ inputs.release_sha }}",
+              "path": "release-source"
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_runtime_tests.yml",
+      "source_git_blob": "e93fb3c75b8ecb3353a07e1cab00d526b8db0559",
+      "sha256": "430588021cf889391842be3a7c78eb4c04648b1bb7311f9c03da452e313fb161",
+      "name": "Action Server Tests",
+      "events": {
+        "pull_request": {
+          "eligible": true,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": true,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "master",
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "action_server/**",
+              ".github/workflows/actions_runtime_tests.yml",
+              "devutils/**",
+              "actions/**",
+              "actions-http-helper/**",
+              "work-items/**"
+            ]
+          },
+          "matched_paths": [
+            "action_server/src/actions/server/_database.py",
+            "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+            "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+            "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+            "action_server/tests/action_server_tests/test_database.py",
+            "action_server/tests/action_server_tests/test_native_startup_diagnostics.py"
+          ]
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": false,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "master",
+              "wip"
+            ],
+            "paths": [
+              "action_server/**",
+              ".github/workflows/actions_runtime_tests.yml",
+              "devutils/**",
+              "actions/**",
+              "actions-http-helper/**",
+              "work-items/**"
+            ]
+          },
+          "matched_paths": [
+            "action_server/src/actions/server/_actions_run.py",
+            "action_server/src/actions/server/_api_analytics.py",
+            "action_server/src/actions/server/_api_run.py",
+            "action_server/src/actions/server/_models.py",
+            "action_server/src/actions/server/_runs_state_cache.py",
+            "action_server/src/actions/server/migrations/__init__.py",
+            "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+            "action_server/src/actions/server/run_outputs/__init__.py",
+            "action_server/src/actions/server/run_outputs/filesystem.py",
+            "action_server/src/actions/server/run_outputs/models.py",
+            "action_server/src/actions/server/run_outputs/service.py",
+            "action_server/src/actions/server/run_outputs/types.py",
+            "action_server/tests/action_server_tests/mcp/test_alias_history.py",
+            "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+            "action_server/tests/action_server_tests/run_outputs/test_concurrency.py",
+            "action_server/tests/action_server_tests/run_outputs/test_filesystem.py",
+            "action_server/tests/action_server_tests/run_outputs/test_migration.py",
+            "action_server/tests/action_server_tests/run_outputs/test_service.py",
+            "action_server/tests/action_server_tests/test_artifact_storage.py",
+            "action_server/tests/action_server_tests/test_database.py",
+            "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt",
+            "action_server/tests/action_server_tests/test_database_shared.py",
+            "action_server/tests/action_server_tests/test_server_websockets.py"
+          ]
+        }
+      },
+      "jobs": {
+        "build": {
+          "names": [
+            "build (ubuntu-py3.12-devmode)",
+            "build (windows-py3.12-devmode)",
+            "build (macos-py3.12-devmode)"
+          ],
+          "matrix_rows": [
+            {
+              "name": "ubuntu-py3.12-devmode",
+              "python": "3.12",
+              "os": "ubuntu-22.04"
+            },
+            {
+              "name": "windows-py3.12-devmode",
+              "python": "3.12",
+              "os": "windows-2022"
+            },
+            {
+              "name": "macos-py3.12-devmode",
+              "os": "macos-15",
+              "python": "3.12"
+            }
+          ],
+          "count": 3,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Install project (not dev)",
+              "if": "contains(matrix.name, '-devmode') == false"
+            },
+            {
+              "name": "Install project (dev)",
+              "if": "contains(matrix.name, '-devmode')"
+            },
+            {
+              "name": "Retain Windows native startup diagnostics",
+              "if": "always() && matrix.os == 'windows-2022'"
+            },
+            {
+              "name": "`inv lint`, potentially fixed with `inv pretty`",
+              "if": "always()"
+            },
+            {
+              "name": "`inv typecheck`",
+              "if": "always()"
+            },
+            {
+              "name": "`inv docs` with checking on files changed",
+              "if": "always()"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/ai-audit.yml",
+      "source_git_blob": "1f6678d00c77352193032c667f9b81f5ab032204",
+      "sha256": "2334d210444efcc82389a3f535032794aec91142e7f44eaf5b97bcb9816f5d0e",
+      "name": "AI audit evidence",
+      "events": {
+        "pull_request": {
+          "eligible": true,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": true,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {},
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event_absent"
+        }
+      },
+      "jobs": {
+        "audit": {
+          "names": [
+            "audit"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "source_git_blob": "9ef0a4cfc38550c50fb8dd56111fc3a2cd9f3296",
+      "sha256": "cdeaf466a6e662747e06e32618d91a48fd76c41fada5c2369e380b7034f3f906",
+      "name": "Copilot Setup Steps",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": true,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "paths": [
+              ".github/workflows/copilot-setup-steps.yml",
+              ".github/workflows/developer_toolkit.yml",
+              "developer/**"
+            ]
+          },
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": true,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "paths": [
+              ".github/workflows/copilot-setup-steps.yml",
+              ".github/workflows/developer_toolkit.yml",
+              "developer/**"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "copilot-setup-steps": {
+          "names": [
+            "copilot-setup-steps"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/coverage-gate.yml",
+      "source_git_blob": "d5ed7d50a00166fe117e76f45e54ab7860bad0e0",
+      "sha256": "e355c4769bae5e548dc7aa8c7393bdc496ebfcbdd24c1c3918d90bc7e1ef76cf",
+      "name": "Measured Python coverage gate",
+      "events": {
+        "pull_request": {
+          "eligible": true,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": true,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community",
+              "integration/community-release-20261008"
+            ]
+          },
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": false,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "coverage": {
+          "names": [
+            "coverage"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Upload coverage receipts",
+              "if": "always()"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/deploy-beta-templates.yml",
+      "source_git_blob": "327b5f6178a5b010d7975f811b2227d52129df9f",
+      "sha256": "7c3f567689c5cbbf83d54df188f2c82ca0174c473a81e1cf180d638ae623dddb",
+      "name": "Deploy Beta Action Templates for Action Server",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event_absent"
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": false,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "templates/**"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "deploy": {
+          "names": [
+            "Deploy Template Actions to S3"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/deploy-templates.yml",
+      "source_git_blob": "9766158a4c4d45477bc4e9a0a0599de954a274b0",
+      "sha256": "639ae316785f9a39af52856ed33451cf9a7bf28c43de19f8a6f6dfae7e181bb1",
+      "name": "Deploy Action Templates for Action Server",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event_absent"
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event_absent"
+        }
+      },
+      "jobs": {
+        "deploy": {
+          "names": [
+            "Deploy Template Actions to S3"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/developer_toolkit.yml",
+      "source_git_blob": "42ac277ccfb33b7e434f03eb937729b53cde6119",
+      "sha256": "60ca471cb9bdff0059b1a9b1fcdf9256b666fb2fb1d533b93307d2841facc0a8",
+      "name": "RCC developer toolkit",
+      "events": {
+        "pull_request": {
+          "eligible": true,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": true,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {},
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": false,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "toolkit": {
+          "names": [
+            "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+            "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+            "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+            "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+            "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+            "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83..."
+          ],
+          "matrix_rows": [
+            {
+              "lane": "primary",
+              "rcc_version": "18.19.3",
+              "os": "ubuntu-22.04",
+              "asset": "rcc-linux64",
+              "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+            },
+            {
+              "lane": "primary",
+              "rcc_version": "18.19.3",
+              "os": "macos-15",
+              "asset": "rcc-macosarm64",
+              "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266"
+            },
+            {
+              "lane": "primary",
+              "rcc_version": "18.19.3",
+              "os": "windows-2022",
+              "asset": "rcc-windows64.exe",
+              "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+            },
+            {
+              "lane": "n-1",
+              "rcc_version": "18.18.1",
+              "os": "ubuntu-22.04",
+              "asset": "rcc-linux64",
+              "sha256": "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf"
+            },
+            {
+              "lane": "n-1",
+              "rcc_version": "18.18.1",
+              "os": "macos-15",
+              "asset": "rcc-macosarm64",
+              "sha256": "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d"
+            },
+            {
+              "lane": "n-1",
+              "rcc_version": "18.18.1",
+              "os": "windows-2022",
+              "asset": "rcc-windows64.exe",
+              "sha256": "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b"
+            }
+          ],
+          "count": 6,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Bootstrap toolkit (Linux)",
+              "if": "runner.os == 'Linux'"
+            },
+            {
+              "name": "Verify isolated package environments (Linux)",
+              "if": "runner.os == 'Linux'"
+            },
+            {
+              "name": "Package task smoke (Linux)",
+              "if": "runner.os == 'Linux'"
+            },
+            {
+              "name": "Build and verify community binary (Linux)",
+              "if": "runner.os == 'Linux'"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/frontend-build-cdn.yml",
+      "source_git_blob": "d6d088bd4e199471d0468cf04cc642dfd8e2d453",
+      "sha256": "251ff3279d9019f2223adb849c0e09214dc01ae0931827a3e6f3a76cdcfb3618",
+      "name": "Frontend Build CDN",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event_absent"
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event_absent"
+        }
+      },
+      "jobs": {
+        "build-frontend-cdn": {
+          "names": [
+            "build-frontend-cdn"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "source_git_blob": "7dfb11853152b455bcf5e31564a6b6512d075117",
+      "sha256": "2d2a21af458ccfdb771f65707d7ab60fb1f5dfa24019c94ded4a02ed46f8d36d",
+      "name": "Action Server Build (Unauthenticated)",
+      "events": {
+        "pull_request": {
+          "eligible": true,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": true,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "paths": [
+              "action_server/**",
+              "work-items/**",
+              ".github/workflows/frontend-build-unauthenticated.yml"
+            ]
+          },
+          "matched_paths": [
+            "action_server/src/actions/server/_database.py",
+            "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+            "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+            "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+            "action_server/tests/action_server_tests/test_database.py",
+            "action_server/tests/action_server_tests/test_native_startup_diagnostics.py"
+          ]
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": false,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/**",
+              "work-items/**"
+            ]
+          },
+          "matched_paths": [
+            "action_server/src/actions/server/_actions_run.py",
+            "action_server/src/actions/server/_api_analytics.py",
+            "action_server/src/actions/server/_api_run.py",
+            "action_server/src/actions/server/_models.py",
+            "action_server/src/actions/server/_runs_state_cache.py",
+            "action_server/src/actions/server/migrations/__init__.py",
+            "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+            "action_server/src/actions/server/run_outputs/__init__.py",
+            "action_server/src/actions/server/run_outputs/filesystem.py",
+            "action_server/src/actions/server/run_outputs/models.py",
+            "action_server/src/actions/server/run_outputs/service.py",
+            "action_server/src/actions/server/run_outputs/types.py",
+            "action_server/tests/action_server_tests/mcp/test_alias_history.py",
+            "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+            "action_server/tests/action_server_tests/run_outputs/test_concurrency.py",
+            "action_server/tests/action_server_tests/run_outputs/test_filesystem.py",
+            "action_server/tests/action_server_tests/run_outputs/test_migration.py",
+            "action_server/tests/action_server_tests/run_outputs/test_service.py",
+            "action_server/tests/action_server_tests/test_artifact_storage.py",
+            "action_server/tests/action_server_tests/test_database.py",
+            "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt",
+            "action_server/tests/action_server_tests/test_database_shared.py",
+            "action_server/tests/action_server_tests/test_server_websockets.py"
+          ]
+        }
+      },
+      "jobs": {
+        "build-external": {
+          "names": [
+            "Build Action Server binary without credentials (ubuntu-22.04)",
+            "Build Action Server binary without credentials (windows-2022)",
+            "Build Action Server binary without credentials (macos-15)"
+          ],
+          "matrix_rows": [
+            {
+              "os": "ubuntu-22.04",
+              "python": "3.12"
+            },
+            {
+              "os": "windows-2022",
+              "python": "3.12"
+            },
+            {
+              "os": "macos-15",
+              "python": "3.12"
+            }
+          ],
+          "count": 3,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Verify packaged Work Items browser acceptance (frozen)",
+              "if": "matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022' || matrix.os == 'macos-15'"
+            },
+            {
+              "name": "Verify packaged Work Items browser acceptance (Go wrapper)",
+              "if": "matrix.os == 'ubuntu-22.04' || matrix.os == 'windows-2022' || matrix.os == 'macos-15'"
+            },
+            {
+              "name": "Upload Work Items native acceptance receipt",
+              "if": "always()"
+            },
+            {
+              "name": "Clean task-owned Work Items RCC home",
+              "if": "always()"
+            },
+            {
+              "name": "Upload native acceptance receipt",
+              "if": "always()"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/frontend-build.yml",
+      "source_git_blob": "8c02a93844d312dc5096d0a4c1965fc5257caf9e",
+      "sha256": "55def13a3b25269e0a8780a08c89bbbe9b32189b4f4fcbea21189ee8d6ee16a1",
+      "name": "Frontend Build",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": false,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              ".github/workflows/frontend-build.yml"
+            ]
+          },
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": false,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              ".github/workflows/frontend-build.yml"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "build": {
+          "names": [
+            "build (ubuntu-latest)",
+            "build (macos-latest)",
+            "build (windows-latest)"
+          ],
+          "matrix_rows": [
+            {
+              "os": "ubuntu-latest"
+            },
+            {
+              "os": "macos-latest"
+            },
+            {
+              "os": "windows-latest"
+            }
+          ],
+          "count": 3,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Job Summary",
+              "if": "always()"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/http_helper_tests.yml",
+      "source_git_blob": "960c81f7faa38acd3726c716b9297ea36cc5ea4b",
+      "sha256": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8",
+      "name": "HTTP Helper Tests",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": false,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "actions-http-helper/**",
+              ".github/workflows/http_helper_tests.yml",
+              "devutils/**"
+            ]
+          },
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": false,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community",
+              "wip"
+            ],
+            "paths": [
+              "actions-http-helper/**",
+              ".github/workflows/http_helper_tests.yml",
+              "devutils/**"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "build": {
+          "names": [
+            "build (ubuntu-py3.10-devmode)",
+            "build (windows-py3.10-devmode)",
+            "build (macos-py3.10-devmode)"
+          ],
+          "matrix_rows": [
+            {
+              "name": "ubuntu-py3.10-devmode",
+              "python": "3.10",
+              "os": "ubuntu-22.04"
+            },
+            {
+              "name": "windows-py3.10-devmode",
+              "python": "3.10",
+              "os": "windows-2022"
+            },
+            {
+              "name": "macos-py3.10-devmode",
+              "os": "macos-15",
+              "python": "3.10"
+            }
+          ],
+          "count": 3,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Install project (not dev)",
+              "if": "contains(matrix.name, '-devmode') == false"
+            },
+            {
+              "name": "Install project (dev)",
+              "if": "contains(matrix.name, '-devmode')"
+            },
+            {
+              "name": "`inv lint`, potentially fixed with `inv pretty`",
+              "if": "always()"
+            },
+            {
+              "name": "`inv typecheck`",
+              "if": "always()"
+            },
+            {
+              "name": "`inv docs` with checking on files changed",
+              "if": "always()"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/http_lib_release.yml",
+      "source_git_blob": "cd3ad2659ab47fd10f4738e89f9435fd175efb79",
+      "sha256": "9edd9b480072b60160d2adc29c66fb11dc262edf0625edf762da7c80a777a6de",
+      "name": "HTTP Helper Release",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event_absent"
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": true,
+          "paths_match": true,
+          "all_paths_ignored": false,
+          "tag_only": true,
+          "declared_trigger": {
+            "tags": [
+              "actions_http-*"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "verify": {
+          "names": [
+            "verify"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        },
+        "publish": {
+          "names": [
+            "publish"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": "verify",
+          "if": "startsWith(github.ref, 'refs/tags/actions_http-')",
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/lighthouse.yml",
+      "source_git_blob": "d1157a323ee91c03de314a7c70f55392a36cd7cf",
+      "sha256": "ff985adf49fae8b5409e4edf4cd10d08045b712dc64b02ad9ec7a9f0498305bd",
+      "name": "Lighthouse CI",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": false,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              ".github/workflows/lighthouse.yml"
+            ]
+          },
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event_absent"
+        }
+      },
+      "jobs": {
+        "lighthouse": {
+          "names": [
+            "lighthouse"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": [
+            {
+              "name": "Upload Lighthouse Results",
+              "if": "always()"
+            },
+            {
+              "name": "Job Summary",
+              "if": "always()"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/quality-report.yml",
+      "source_git_blob": "4cab6730b9c6bbb8786055937f168b7b97cf52e9",
+      "sha256": "c144961b14d28a24f39ad647be4d72963c6685e07257e468c9285f4f2622cbaf",
+      "name": "Quality report",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event_absent"
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event_absent"
+        }
+      },
+      "jobs": {
+        "report": {
+          "names": [
+            "report"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/work_items_release.yml",
+      "source_git_blob": "fd92c01ece1f97d2798d2211e328fe12a37e8c6c",
+      "sha256": "e30cf818b7d81e3b910bdef8d2f78a9c32c8f52dd119de8b8a75a94b616e10c0",
+      "name": "Work Items Release",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "integration/community-release-20261008",
+          "branches_match": true,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "paths": [
+              "work-items/**",
+              ".devcontainer/bin/verify-work-items",
+              ".devcontainer/bin/smoke-host",
+              ".devcontainer/bin/bootstrap",
+              ".devcontainer/tests/**",
+              ".github/workflows/work_items_release.yml",
+              "docs/skills/work-items.md"
+            ]
+          },
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "branch_namespace": "heads",
+          "branch": "fix/database-savepoint-admission-20261010",
+          "branches_match": false,
+          "paths_match": false,
+          "all_paths_ignored": false,
+          "tag_only": false,
+          "declared_trigger": {
+            "branches": [
+              "community"
+            ],
+            "tags": [
+              "actions-work-items-*"
+            ],
+            "paths": [
+              "work-items/**",
+              ".devcontainer/bin/verify-work-items",
+              ".devcontainer/bin/smoke-host",
+              ".devcontainer/bin/bootstrap",
+              ".devcontainer/tests/**",
+              ".github/workflows/work_items_release.yml",
+              "docs/skills/work-items.md"
+            ]
+          },
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "verify": {
+          "names": [
+            "verify"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": [],
+          "if": null,
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            },
+            {
+              "ref": "631f5601617e9935620a72c788a98e1012331323",
+              "path": ".contract-references/robocorp"
+            },
+            {
+              "ref": "c56c70102423a18ed54037221116f81ccccd4f4e",
+              "path": ".contract-references/custom"
+            }
+          ],
+          "source_step_conditions": []
+        },
+        "publish": {
+          "names": [
+            "publish"
+          ],
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "needs": "verify",
+          "if": "startsWith(github.ref, 'refs/tags/actions-work-items-')",
+          "checkouts": [
+            {
+              "ref": null,
+              "path": null
+            }
+          ],
+          "source_step_conditions": []
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "record_entries": 221,
+  "record_verified_entries": 220,
+  "record_sha256": "6c45d0056858ea7c083d52f8596652bd7fb99c0db23e597a49a1923c4012bcfb",
+  "python_member_count": 202,
+  "tracked_payload_source_matches": 215,
+  "qualified_archive_provenance": {
+    "id": 11697353355,
+    "run": 38126987514,
+    "job": 114433293243
+  },
+  "original_producer": {
+    "control": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "control_tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+    "source_candidate": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "source_tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+    "target": "a70993fafc99a9f94041485542d5a720797ca394",
+    "synthetic": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+    "synthetic_ordered_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "6181b044c75de35386f1ae30e71725398b6a7feb"
+    ],
+    "synthetic_tree_equals_control": true,
+    "event": "pull_request",
+    "run_id": 38126987514,
+    "job_id": 114433293243,
+    "API_head_not_relabelled_checkout": true,
+    "artifact_id": 11697353355
+  },
+  "actual_integration": {
+    "sha": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+    "ordered_parents": [
+      "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "3155fc55ea7d47afbc547fddc963b5860462924b"
+    ],
+    "producer_tree_equal_actual": true,
+    "producer_not_relabelled_actual": true
+  },
+  "generated_oauth_content": "EMPTY_CONTENT_AUTHORITY_HOLD",
+  "scope": "Linuxcp312 input only; no seven-artifact/tag/publication/full-producer/native claim",
+  "status": "READONLY_INPUT_ADMISSION_ONLY_NOT_CONSUMER",
+  "real_source_selector": "/workspace/engineering/pr282/action_server/scripts/verify_published_runtime_floor.py",
+  "selector_source_sha256": "f1ad142a6cd83ca1a71ed0a6183d558a6d72f00f073b492ce0d18e563a067193",
+  "original_mixed_directory": "/workspace/engineering/pr221-current618-wheel-integrity-owned",
+  "original_mixed_result": "REJECTED_2_MATCHING_CP312_WHEELS",
+  "selected_exact_path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/linux-platform-input-v5/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+  "selected_original_sha256": "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6",
+  "dedicated_input_directory": "/workspace/engineering/pr221-current618-linux-consumer-preflight/linux-platform-input-v5",
+  "directory_mode": "0o700",
+  "two_original_pair_copies": [
+    {
+      "filename": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14180835,
+      "sha256": "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6",
+      "mode": "0o600"
+    },
+    {
+      "filename": "actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14180835,
+      "sha256": "2f856d2f27dba472aa84e954245f63ecd879e102751a300eb0fd0b361486cdfd",
+      "mode": "0o600"
+    }
+  ],
+  "attempt_absent": true,
+  "worker_install_pip_CLI_cleanup_executed": false
+}

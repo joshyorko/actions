@@ -1,0 +1,114 @@
+{
+  "schema": "independent-frozen-source-review/v1",
+  "verdict": "GO_NORMAL_EXISTING_PR_BRANCH_SOURCE_PUSH_ONLY",
+  "head": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea",
+  "tree": "1181b35b11e4904405ca1a9a3a398e6c1c3abfd0",
+  "ordered_parents": [
+    "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "existing_branch": "test/auth-route-census-20261010",
+  "owner_announced_receipt": {
+    "path": "/workspace/engineering/pr309-actual618-refresh/frozen-source-receipt.json",
+    "bytes": 19843,
+    "sha256": "e00bf1644c432c14da0b71fe79ffe58373cc1df3325163127cca780bd2120d01"
+  },
+  "independent_proof": {
+    "path": "/workspace/engineering/pr309-actual618-independent-review/independent-complete-union-source-gates-and-retained-byte-proof.json",
+    "bytes": 33034,
+    "sha256": "63f1e62705ef6d55f4cb3366a670febece7317cb30605d82fef6261e8fa59c00"
+  },
+  "findings": [],
+  "source_acceptance": {
+    "complete_union_leaf_count": 1421,
+    "all_parent_mode_blob_and_working_body_execbits_preserved": true,
+    "novel_combined_docs_only": true,
+    "whole_github_and_route_production_exact_actual_target": true,
+    "original608_line_auth_fixture_and_route_census_exact9475": true,
+    "current_auth_junit_unique_cases": 73,
+    "auth_skips_failures_errors": 0,
+    "retained_original_mutation_evidence_refs": 39,
+    "original_three_meaningful_mutation_RED_failures_retained": true,
+    "declared_gates_recorded_and_immutable": {
+      "Doctor": "PASS",
+      "Bootstrap_reuse": "30 exact prepared inputs, five concrete own prefixes/moduleorigins; no installer",
+      "Toolkit": 96,
+      "auth_request_cases": {
+        "passed": 73,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "broader_scoped": {
+        "passed": 225,
+        "skipped": 1,
+        "deselected": 4,
+        "warnings": 4,
+        "skip_scope": "Existing actual opt-in and realRCC/integration selection, no waived tests"
+      },
+      "configured_lint": "Ruff/format/Isort PASS",
+      "Mypy": 349,
+      "gen8_roundtrip": "PASS",
+      "workflow_plus_dependabot": 26,
+      "all_YAML_parsed_identical": 30,
+      "full_source": {
+        "passed": 1295,
+        "skipped": 13,
+        "warnings": 15,
+        "seconds": 149.79,
+        "workers": 2,
+        "one_authorized_attempt": true,
+        "outer_bound": "600s TERM +10s KILL",
+        "gateway": "CanonicalRCC18.19.3 -> own Runtime Poetry -> invoke test-not-integration"
+      }
+    },
+    "pre_post_source_and_retained_original_native_helper_browser_Node_frontend_V5_bytes_exact": true
+  },
+  "native_inventory": {
+    "old_native_count": 268,
+    "current_count": 274,
+    "match": 261,
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "status": "UNQUALIFIED_OLD_NATIVE92498"
+  },
+  "five_selected_test_inputs_separate": 5,
+  "history_scope": "Old 776 twenty-green CI is qualified historical evidence only; fresh complete exact618/source83123 tested-union CI, reviews and normal-policy admission are required after push. Current source GO supplies no integration authorization.",
+  "remaining_HOLDs": [
+    "Current exact618 hosted CI, synthetic checkout/ordered parents/tree, full matrix/publisher, reviews/threads/policy before integration",
+    "Complete issues152/196 and Workspace/principal/authenticated public transport coverage",
+    "Actual backend/provider/native/browser/ChatGPT/private/publication/tag/release acceptance",
+    "Historical native92498 cannot qualify274-input current production (seven changed, six added); unchanged selected tests cannot substitute native execution",
+    "Original V5 remains source3ec/native92498 actual with bounded sampled browser/tool proof and point-in-time cleanup; no current-source relabel or universal reaping"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Accept exact ordinary-merge imports in docs/skills/repository-operations.md and docs/skills/provenance-observability.md; no cosmetic child proposed.",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr309-actual618-independent-review/canonical-reviewed-imported-delta.patch",
+      "bytes": 13633,
+      "sha256": "42306d1bb5bc706d2103f0a3da2d21f71ca01409466ee3b5db4492a35755bb2f"
+    },
+    "Durable_learning_captured": "Request-level global APIKey denial must remain distinct from route registration and Workspace grants; persisted scoped Run/output reader acquisition is authorized under the Workspace transaction, while revocation denies future resolutions and cannot recall an already open reader. Keep current producer and actual receipt identities separate from old native and historical source CI.",
+    "Evidence": "Both parent added canonical lines retained; exact42306d1b patch; original608-line assembled FastAPI/FILESQLite fixture and full Counter census body/mode/AST preserved;73 unique JUnit PASS plus retained SQL/filesystem-mutation and artifact-leak threeREDs;274-input inventory measured;service.py resolve lines806-854 binds authorization/provider.open under transaction and yields after exit, with accepted actual618 target source/tests retained.",
+    "Stale_or_ambiguous_guidance_removed": "Imports accepted target shared-Run Actor/output access and recovery limits into the auth branch; avoids implying that unchanged73 cases prove complete152/Workspace coverage, that an open-reader proof establishes active-stream revocation, or that old native/current registration equality establishes packaged qualification.",
+    "Remaining_uncertainty": "Fresh exact current CI/policy and the listed full/backend/private/native/provider/release gates remain unverified. SQLite/threaded in-process tests do not qualify PostgreSQL or trusted public Workspace identity transport.",
+    "Disposition": "ACCEPT_VERIFIED_EXISTING_BOTH_PARENT_CANONICAL_DELTA"
+  },
+  "review_actions": "Read-only source/Git/AST/XML/log-summary inspection and owned receipt writes only; no gateway, test, installer, native/browser/provider execution, artifact/log download, source/index/ref edit, push or merge.",
+  "upstream_disposition": "none"
+}

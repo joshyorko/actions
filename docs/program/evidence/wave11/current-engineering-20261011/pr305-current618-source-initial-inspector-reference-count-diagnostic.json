@@ -1,0 +1,9 @@
+{
+  "status": "RETAINED_NONPASSING_INSPECTOR_COUNT_EXPECTATION",
+  "inspector_sha256": "bd9406c8273020a9cb15099cb5b78288eda5f8c4beba2b0bc18b822bc22d8677",
+  "expected_previous776_refs": 28,
+  "actual_previous776_refs": 39,
+  "source_checks_before_count_assertion": "Complete1420union/allworkingGitmodebytes/Canvas3original1e9/274producer/5selected/docsparentblocks passed",
+  "ordinary_merge_was_committed_after_inspector_failure": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+  "disposition": "External inspector count fixed to measured39, all39 will be rehashed; no source reset/rewrite/deadline/assertion change"
+}

@@ -1,0 +1,133 @@
+{
+  "schema": "actions-pr300-actual299-light-ready-full-serialization-hold/v1",
+  "status": "ALL_AUTHORIZED_LIGHT_GATES_READY_FULL_NOT_RUN_AWAIT_ROOT_SERIALIZED_RELEASE",
+  "head": "7840057a8b055576d11d339d8c0fbb738927a491",
+  "tree": "10e09d88027ca4fea512ff06c57efaab95755ffb",
+  "sole_parent": "d4443c49973ddd629838c682111474991e3ea0c2",
+  "ordinary_ordered_parents": [
+    "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "complete_leaves": 1421,
+  "all1420_non_child_guide_body_mode_pairs_exact": true,
+  "own30prepared_inputs_plus5_concrete_module_origins": "PASS; independent own clones and path-only rebindings, original edited source-environment bytes checked unchanged; no installer/download",
+  "ignored_RCC_input": "Exact already-owned7e588 pinned22,282,402B/mode0711 copied into new checkout; no substitute acquisition. Tracked static member exact original Git, not copied; OAuth member absent, authority/content HOLD.",
+  "gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "verified existing prepared30 inputs/5 own environment prefix+module origins, no new Bootstrap installer",
+    "Toolkit": 96,
+    "scoped_Runtime_source": {
+      "passed": 150,
+      "integration_deselected": 1,
+      "skipped": 0
+    },
+    "full_configured_lint": "Ruff check/format313/Isort PASS",
+    "full_configured_typecheck_files": 349,
+    "generator_outputs": 8,
+    "all_GitHub_tracked_YAML_bytes_and_parse": 30,
+    "full_Runtime_source": "NOT RUN; root explicit serialized release required"
+  },
+  "earlier_attempts": {
+    "scoped_original": "57PASS93fixtureERROR1integrationDESELECT; required ignored RCC file absent, no failing product assertion; original raw log unchanged",
+    "generator_original": "Inspector incorrectly expected all repository YAML count30; actual116. Failed before generator. Named successor scopes exact30 GitHub YAML, derives8 outputs from actual TARGETS; no source/control correction."
+  },
+  "capacity_now": {
+    "total": 33770192896,
+    "used": 30042394624,
+    "free": 1993035776
+  },
+  "new_canonical_delta": {
+    "path": "/workspace/engineering/pr300-actual299-refresh/canonical-prepared-fixture-assets-exact-child.patch",
+    "bytes": 1202,
+    "sha256": "b5b2091ec74313e13abe1f2b3d1df7068736691179dbf9a3e0df5bc87270cfc5"
+  },
+  "evidence": [
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/ordinary-subject.json",
+      "bytes": 326,
+      "sha256": "b4f2813c9a661a2d69497b4d211501d69432f44aec8bf1e3b9dd30492bde3d47"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/doctor.log",
+      "bytes": 12787,
+      "sha256": "bbc3661f80a55a8875b8aad73f54a0edaf7086727e4c984495d3c11d82e5f986"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6459,
+      "sha256": "77be9a1338a4f85f4817c5d9f9da8275492809722914c79a7319db2e41e76386"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/five-own-prepared-environment-copy-and-path-rebinding.json",
+      "bytes": 61700,
+      "sha256": "bfc96add0b529467cf1082d8fb9198520e4b5284e1ad4582d93b3ab7c89935a7"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/existing-prepared-runtime-inputs-copy-successor-v2.json",
+      "bytes": 1330,
+      "sha256": "53c78b26a447c43aee220210b55da176f58b55525cfc1b2a5903068a89d52101"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/toolkit.log",
+      "bytes": 14345,
+      "sha256": "1a40dc36f88c7ee872b670d968d928a19601c354f293b0767143c3ffd84b68c7"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/scoped-configured-static.log",
+      "bytes": 159768,
+      "sha256": "2c89af98c6413d56e3804e7a7c7bcd8a5a87274f84ff53cc0d1934015f4a96a4"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/scoped-configured-static-successor-v2.log",
+      "bytes": 6306,
+      "sha256": "7dc9f7815ff3c54982198496e11d56e3599230f59a21fc1812efab33d74274e1"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/generator-roundtrip.log",
+      "bytes": 4142,
+      "sha256": "2f7693943be73fdd04a80b770f055cbe4b78a2eb8ccfce94a7f079fd6363c29b"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/generator-roundtrip-successor-v2.log",
+      "bytes": 4421,
+      "sha256": "f2a3bea994765d45cb3c9653c002347f6b9585875d21f1dde2eae8a9a619828a"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/generator-roundtrip-successor-v2-receipt.json",
+      "bytes": 4217,
+      "sha256": "fa7497179a2140b5817e0b8c99847c42e9abd59958cf165dc0892e68e3c1c5bd"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/before-authorized-full-complete-source-proof.json",
+      "bytes": 423873,
+      "sha256": "c2efd8ac3af51ab9c31080e3f5c73ae0b8f70fc2b13001b1c078124da15119de"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/canonical-prepared-fixture-assets-exact-child.patch",
+      "bytes": 1202,
+      "sha256": "b5b2091ec74313e13abe1f2b3d1df7068736691179dbf9a3e0df5bc87270cfc5"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/verify-current-source.py",
+      "bytes": 6322,
+      "sha256": "9bf755c3cd17f559e0532fc2988150e6724b4e54cb2ae2d1eb021e5f9cc9aa8b"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/run-light-gates.py",
+      "bytes": 426,
+      "sha256": "dce6a902cfdc5e53559456f181d3e368634901fcade64a284ac44fb3ab6ec680"
+    },
+    {
+      "path": "/workspace/engineering/pr300-actual299-refresh/verify-own-bootstrap-reuse.py",
+      "bytes": 3137,
+      "sha256": "f374fbac338194fd7dcc1fbe1d2e89eccfcb76e5f34d1634a58265f833cbdfc5"
+    }
+  ],
+  "scope_HOLD": [
+    "Full current source suite not run; no hosted/current CI or independent source acceptance",
+    "275production vs old268260matches8changes7adds; five selected exact separately; old native assets UNQUALIFIED",
+    "GET-only Actor+persisted grant before reader; no active-stream revocation/HEAD/Range support",
+    "No native/provider/browser/PG/actualconsumer/publication/retarget/push/full graph closure"
+  ],
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,17 @@
+--- a/docs/skills/provenance-observability.md
++++ b/docs/skills/provenance-observability.md
+@@ -215,6 +215,14 @@
+ separate integration; a retrievable private-service output does not authorize
+ changing a template's `artifact: null` without its own end-to-end proof.
+ 
++For assembled output-transport denials, count provider-open attempts before
++entering the reader context; a list of successfully opened readers alone cannot
++prove that storage was never touched. Take complete logical database and owned
++filesystem snapshots after legitimate publication or grant changes, then compare
++them across each request. Compare SQL rows rather than physical SQLite bytes:
++the resolver takes idempotent writer locks even for authorized reads. HEAD 405
++and Range 416 prove rejection, not method support or persisted-grant resolution.
++
+ The private filesystem provider requires Linux descriptor features and trusted
+ kernel procfs, borrows a verified service-owned root FD, and measures/seals actual
+ bounded bytes. It rejects special objects through an O_PATH pin before any

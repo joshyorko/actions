@@ -1,0 +1,17 @@
+{
+  "status": "READONLY_PREFLIGHT_WAIT_ROOT_INDEPENDENT_ACTUAL618_GO",
+  "head": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+  "tree": "3c2c8ad1c9a067ec774eafd6f5d254cb8703213b",
+  "branch": "test/auth-route-census-20261010",
+  "PR_source": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+  "PR_base_snapshot": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "named_actual_target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "named_head": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+  "clean": true,
+  "free_bytes": 2471370752,
+  "source_mutation": false,
+  "current776_CI_history": {
+    "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/frozen-final-complete-current-scoped-CI-review.json",
+    "sha256": "884ced9adbfddf9e682f24386ce982286295fe9107fc9ca5c2b4a581ed6b7ffc"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "owned_ignored_RCC": "/workspace/engineering/pr282/action_server/src/actions/server/bin/rcc-18.19.3",
+  "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+  "executable": true,
+  "ignored": true,
+  "gateway_rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+  "scope": "existing own prepared pinnedbinary no installer/no actual"
+}

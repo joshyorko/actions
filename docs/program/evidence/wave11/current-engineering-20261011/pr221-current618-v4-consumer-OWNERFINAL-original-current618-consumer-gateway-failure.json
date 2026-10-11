@@ -1,0 +1,44 @@
+{
+  "status": "FAILED_GATEWAY_BEFORE_CONSUMER_WORKER_OR_INSTALL",
+  "observed_gateway_exit": 10,
+  "proposal": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/immutable-current618-linux-consumer-preexecution-proposal-v4.json",
+    "bytes": 39398,
+    "sha256": "da926a733e60108fd2943add0a60a0bf6d365afbb1d489bf986a0624ecda65c0"
+  },
+  "authorization": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/root-one-actual-current618-execution-authorization.json",
+    "bytes": 302051,
+    "sha256": "81ea8a77d1680456739a98d9ead5ce7d9a063b4e3c93f797f00dce0548d4caae"
+  },
+  "gateway_exit": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/original-one-actual-current618-gateway-exit.json",
+    "bytes": 608,
+    "sha256": "20c520d0600df6a7b99f5747cf844ab7cddfc513c2f3475df312365b2d217ebd"
+  },
+  "original_gateway_log": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/original-one-actual-current618-gateway.log",
+    "bytes": 5663,
+    "sha256": "b45d0cdaf59ef8ae84a0b8e30ed2588a2153cd5a2d98740c64b54e90c8b093be"
+  },
+  "post_harness": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/root-current618-consumer-postexecution-harness-readback.json",
+    "bytes": 293642,
+    "sha256": "eea64ec447a4cffeb5365ad27bea652e05cac0838cc2b7c6159754a78e69537f"
+  },
+  "failure": "verify_published_runtime_floor.select_runtime_wheel(WHEEL.parent) raised ValueError: Expected exactly one cp312 actions-runtime1.0.3 wheel, found2. Original retained directory contains Linux+Windows pairs; strict selector contract was not admitted against actual directory before gateway.",
+  "failure_point": "supervisor line331 before ATTEMPT mkdir, temporary directory, worker/PID, install/pip/network/CLI or cleanup code",
+  "attempt_namespace": "/workspace/engineering/pr221-current618-linux-consumer-preflight/installed-linux-current618-90a785d8-2",
+  "attempt_absent": true,
+  "cleanup_receipt": "UNAVAILABLE: no worker or owned attempt was created; no cleanup claim inferred",
+  "originals_preserved": true,
+  "harness1433_exact_pre_post": true,
+  "automatic_retry": false,
+  "next_bound": "Named isolated original Linux cp312+cp313 copies with original hashes/private modes plus real strict source selector read-only admission; new immutable proposal and independent review before separate root execution release. Existing source selector remains unchanged.",
+  "remaining_holds": [
+    "Current installed consumer NOTQUALIFIED",
+    "Windows bytes/static semantic/actualhistorical cause unresolved",
+    "OAuth authority/fullplatform/native/private/Runtimerelease HOLD"
+  ],
+  "upstream_disposition": "none"
+}

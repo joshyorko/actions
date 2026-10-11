@@ -1,0 +1,56 @@
+{
+  "canonical_file": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+  "durable_learning": "Complete original distribution hashes and aggregate equality qualify inventory integrity, independently of checkout source-byte differences, generated-input authority and actual platform consumers.",
+  "evidence": [
+    {
+      "bytes": 1768575,
+      "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/safe-complete-original-seven-distribution-inspection.json",
+      "sha256": "f931a396e67f9d9e0799119eb662fb4fbc8914c5c29776f298ef672893420e95"
+    },
+    {
+      "bytes": 8544,
+      "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/safe-complete-source-mode-generated-input-summary.json",
+      "sha256": "aa01e5895916f26ffa5d90a00aa4b4bb4ec0b9457dbbc5fd17da6fc134578c3b"
+    }
+  ],
+  "exact_deltas": [
+    {
+      "disposition": "VERIFIED_ACCEPTED_REUSE",
+      "exact_delta": "An empty visible ruleset list does not resolve an inaccessible traditional\nbranch-protection endpoint. Bracket a paginated census with live named-ref\nreadbacks. If the target advances during collection, retain the old tuple and\nquery the new head separately; do not transfer its predecessor's passing CI.",
+      "exact_patch": {
+        "bytes": 897,
+        "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+        "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+      },
+      "present_in_canonical_checkpoint": true
+    },
+    {
+      "disposition": "VERIFIED_ACCEPTED_REUSE",
+      "exact_delta": "\nA platform artifact containing only Linux wheels does not satisfy the\nseven-artifact release inventory. A selected cp312 consumer has a distinct\nnonpublishing scope; retain its original ZIP, wheel, `METADATA`, `RECORD` and\nbuild identities while cross-platform inventory, tag and upload gates remain\npending. After integration, compare the actual merge tree and selected tracked\npayload bytes with the build's synthetic tree. Tree equality does not turn that\nearlier synthetic checkout into an actual integration build. Derive the Python\nmember count from the new wheel bytes even when it equals an earlier count,\nand retain generated-input authority and content holds separately.",
+      "exact_patch": {
+        "bytes": 1158,
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+        "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+      },
+      "present_in_canonical_checkpoint": true
+    },
+    {
+      "disposition": "RETAINED_SOURCE_BACKED_PROPOSAL",
+      "exact_delta": "When qualifying generated Runtime frontend content, decode `_static_contents.py`\nas data and bind each asset's bytes to its builder checkout. The encoder reads\n`dist/index.html` as bytes and writes their representation; setting the generated\nmodule's newline to LF does not normalize the embedded asset. Keep outer module\nCRLF differences, decoded asset CR differences and semantic equivalence separate.\nA carriage-return-removal comparison is diagnostic evidence, not a source or\ncontent waiver. If the original frontend input and effective checkout newline\nsetting were not retained, keep checkout-versus-compiler causation unknown.\n\nInclude tracked non-Python package text in checkout-byte qualification. A\nPython-only rule leaves packaged README, HTML, YAML and other text differences\nunresolved; keep binary archives and intentional platform-specific line-ending\nfixtures outside any proposed text rule. A checkout-byte fix must also appear\nin affected builder and test workflow path filters. A passing census that\nexcluded those workflows does not qualify its distribution bytes.\n",
+      "exact_patch": {
+        "bytes": 1212,
+        "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/canonical-generated-static-and-complete-checkout-scope-proposed-v2.patch",
+        "sha256": "1306a314811448c8090b4aa2e77340e676bbba397ceb6c7ee0477b908cb9b2bf"
+      },
+      "present_in_canonical_checkpoint": true
+    }
+  ],
+  "remaining_uncertainty": [
+    "Windows historical checkout/compile cause and semantics",
+    "generatedOAuth approvedsource/content authority",
+    "current complete installedconsumer/private/native/release obligations"
+  ],
+  "source_changed": false,
+  "stale_or_ambiguous_guidance_removed": "Seven distribution files are distinct from eight aggregate outer members; availability/integrity does not waive Windows179sourcebody differences or emptyOAuth authority.",
+  "upstream_disposition": "none"
+}

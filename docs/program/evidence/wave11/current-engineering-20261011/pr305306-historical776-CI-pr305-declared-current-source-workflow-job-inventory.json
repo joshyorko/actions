@@ -1,0 +1,1488 @@
+{
+  "source": "6390270cd07851448b7b325c81c98dc11a1d3a17",
+  "old_target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "actual_named_target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "PR_diff_paths": [
+    "action_server/tests/action_server_tests/mcp/test_canvas_runtime_admission.py",
+    "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+    "action_server/tests/action_server_tests/test_browser_origin_acceptance.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "push_diff_paths": [
+    ".github/workflows/_gen_workflows.py",
+    ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+    "action_server/src/actions/server/_rcc_runtime_adapter.py",
+    "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+    "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "developer/tests/test_rcc_provider_rollback_summary.py",
+    "developer/tests/test_rcc_provider_rollback_workflow.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "expected_PR_workflows": 6,
+  "expected_PR_jobs": 19,
+  "expected_push_auxiliary_jobs": 1,
+  "all_workflows": [
+    {
+      "path": ".github/workflows/action_server_build_cdn.yml",
+      "sha256": "51ba9d399f06d712e46bd691a24379ac940b6b479a58c83eb882a4e65f115aeb",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event absent"
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event absent"
+        }
+      },
+      "jobs": {
+        "build": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {
+              "os": "ubuntu-22.04",
+              "python": "3.12",
+              "asset_name": "action-server"
+            },
+            {
+              "os": "windows-2022",
+              "python": "3.12",
+              "asset_name": "action-server.exe"
+            },
+            {
+              "os": "macos-15",
+              "python": "3.12",
+              "asset_name": "action-server"
+            }
+          ],
+          "count": 3,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/action_server_frontend_tests.yml",
+      "sha256": "058e7625c4eb32f885bdeef6443643dd1a3df87ec6c5131bb39b36ec4289b8d2",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py",
+              "docs/contracts/canvas/fixtures/**",
+              ".github/workflows/action_server_frontend_tests.yml"
+            ]
+          },
+          "branch_matches": true,
+          "path_matches": false,
+          "tag_only": false,
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event absent"
+        }
+      },
+      "jobs": {
+        "action-server-frontend-tests": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/action_server_update_downloads.yml",
+      "sha256": "b96ea3507a48cbad6bccd8cb99114552b170c59bfd6e03ac3a8c4e97d41ef771",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event absent"
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event absent"
+        }
+      },
+      "jobs": {
+        "update-index": {
+          "needs": [],
+          "if": "${{ true }}",
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_core_tests.yml",
+      "sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "actions/**",
+              ".github/workflows/actions_core_tests.yml",
+              "devutils/**",
+              "actions-http-helper/**",
+              ".github/workflows/_gen_workflows.py"
+            ]
+          },
+          "branch_matches": true,
+          "path_matches": false,
+          "tag_only": false,
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community",
+              "wip"
+            ],
+            "paths": [
+              "actions/**",
+              ".github/workflows/actions_core_tests.yml",
+              "devutils/**",
+              "actions-http-helper/**",
+              ".github/workflows/_gen_workflows.py"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": [
+            ".github/workflows/_gen_workflows.py"
+          ]
+        }
+      },
+      "jobs": {
+        "build": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {
+              "name": "ubuntu-py3.10-devmode",
+              "python": "3.10",
+              "os": "ubuntu-22.04"
+            },
+            {
+              "name": "windows-py3.10-devmode",
+              "python": "3.10",
+              "os": "windows-2022"
+            },
+            {
+              "name": "macos-py3.10-devmode",
+              "os": "macos-15",
+              "python": "3.10"
+            }
+          ],
+          "count": 3,
+          "checkout_refs": [
+            null
+          ]
+        },
+        "candidate-wheel": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_release.yml",
+      "sha256": "cdc2a5d5d2ab0887d26c76c56ca63c7b17e4df00030a844cf70491b19b1adf64",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event absent"
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "tags": [
+              "actions-core-*"
+            ]
+          },
+          "branch_matches": true,
+          "path_matches": true,
+          "tag_only": true,
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "verify": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        },
+        "publish": {
+          "needs": "verify",
+          "if": "startsWith(github.ref, 'refs/tags/actions-core-')",
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_runtime_binary_release.yml",
+      "sha256": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event absent"
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "tags": [
+              "actions-runtime-*"
+            ],
+            "branches": [
+              "*-beta"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "build": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {
+              "os": "ubuntu-22.04",
+              "python": "3.12",
+              "name": "linux",
+              "asset_path": "action_server/dist/final/action-server"
+            },
+            {
+              "os": "windows-2022",
+              "python": "3.12",
+              "name": "windows",
+              "asset_path": "action_server/dist/final/action-server.exe"
+            },
+            {
+              "os": "macos-15",
+              "python": "3.12",
+              "name": "macos",
+              "asset_path": "action_server/dist/final/action-server"
+            }
+          ],
+          "count": 3,
+          "checkout_refs": [
+            null
+          ]
+        },
+        "release": {
+          "needs": [
+            "build"
+          ],
+          "if": "${{ github.event_name == 'push' && !endsWith(github.ref_name, '-beta') }}",
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+      "sha256": "aabf25267c48b9d361f4d575a332a9f7bdddc4c5d1f3ce4ff5ac151c98d36140",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event absent"
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "test/frozen-catalog-rollback-20261010",
+              "test/frozen-generation-drain-20261010",
+              "test/mcp-alias-frozen-control-20261010",
+              "test/frozen-control-resource-history-20261010",
+              "test/frozen-control-a47-20261010"
+            ],
+            "paths": [
+              ".github/workflows/_gen_workflows.py",
+              ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+              "action_server/scripts/verify_frozen_catalog_artifact.py",
+              "action_server/scripts/verify_frozen_catalog_wrapper_artifact.py",
+              "action_server/scripts/verify_frozen_catalog_junit.py",
+              "action_server/scripts/verify_frozen_catalog_harness.py",
+              "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+              "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
+              "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py",
+              "action_server/tests/action_server_tests/test_cli_multi_package_sync.py",
+              "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+              "action_server/scripts/frozen_wrapper_acceptance_plugin.py",
+              "action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py",
+              "action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py",
+              "action_server/tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py",
+              "developer/tests/test_frozen_wrapper_metadata.py",
+              "action_server/docs/DEVELOPMENT.md"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": [
+            ".github/workflows/_gen_workflows.py"
+          ]
+        }
+      },
+      "jobs": {
+        "build": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        },
+        "go_wrapper": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+      "events": {
+        "pull_request": {
+          "eligible": true,
+          "trigger": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              ".github/workflows/_gen_workflows.py",
+              ".github/workflows/actions_runtime_pypi_release.yml",
+              ".github/workflows/actions_runtime_binary_release.yml",
+              ".github/workflows/actions_runtime_manylinux_release.yml",
+              "devutils/tests/test_actions_runtime_release_line.py",
+              "devutils/tests/test_runtime_release_workflows.py",
+              "docs/skills/repository-operations.md",
+              "action_server/scripts/publish_verified_runtime.py",
+              "action_server/scripts/verify_published_runtime_floor.py"
+            ]
+          },
+          "branch_matches": true,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": [
+            "docs/skills/repository-operations.md"
+          ]
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "tags": [
+              "actions-runtime-*"
+            ]
+          },
+          "branch_matches": true,
+          "path_matches": true,
+          "tag_only": true,
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "build-sdist": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {
+              "name": "ubuntu-py3.12",
+              "python": "3.12",
+              "os": "ubuntu-22.04"
+            }
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        },
+        "build-wheels": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {
+              "os": "ubuntu-22.04",
+              "python": "3.12",
+              "name": "ubuntu"
+            },
+            {
+              "os": "windows-2022",
+              "python": "3.12",
+              "name": "windows"
+            },
+            {
+              "os": "macos-15",
+              "python": "3.12",
+              "name": "macos"
+            }
+          ],
+          "count": 3,
+          "checkout_refs": [
+            null
+          ]
+        },
+        "publish": {
+          "needs": [
+            "build-sdist",
+            "build-wheels"
+          ],
+          "if": null,
+          "matrix_rows": [
+            {
+              "python": "3.12"
+            }
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+      "sha256": "9bf4533d94eac31ad2dc1f193f1a53441a64e19de2b2466c1631c5203f79d3d2",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event absent"
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "test/rcc-provider-rollback-hosted-20261010",
+              "fix/rcc-published-artifact-details-20261010"
+            ],
+            "paths": [
+              "developer/tests/test_rcc_provider_rollback_workflow.py",
+              "developer/tests/test_rcc_provider_rollback_summary.py",
+              "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+              "action_server/src/actions/server/deployments/source_staging.py",
+              "action_server/src/actions/server/deployments/source_read.py",
+              "action_server/src/actions/server/deployments/source_manifest.py",
+              ".github/workflows/_gen_workflows.py",
+              ".github/workflows/actions_runtime_rcc_provider_rollback.yml"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": [
+            ".github/workflows/_gen_workflows.py",
+            ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+            "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+            "developer/tests/test_rcc_provider_rollback_summary.py",
+            "developer/tests/test_rcc_provider_rollback_workflow.py"
+          ]
+        }
+      },
+      "jobs": {
+        "build": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            "${{ github.sha }}",
+            "d642a3ac24f8da85101538bdfdf59b509fd74bfb"
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_runtime_recovery.yml",
+      "sha256": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event absent"
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event absent"
+        }
+      },
+      "jobs": {
+        "validate": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            "${{ github.workflow_sha }}",
+            "${{ inputs.release_sha }}"
+          ]
+        },
+        "pypi-recovery": {
+          "needs": [
+            "validate"
+          ],
+          "if": "${{ needs.validate.result == 'success' && inputs.release_ref != 'actions-runtime-1.0.1' }}",
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            "${{ github.workflow_sha }}",
+            "${{ inputs.release_sha }}"
+          ]
+        },
+        "binary-build": {
+          "needs": [
+            "validate"
+          ],
+          "if": "${{ needs.validate.result == 'success' }}",
+          "matrix_rows": [
+            {
+              "os": "ubuntu-22.04",
+              "name": "linux",
+              "python": "3.12"
+            },
+            {
+              "os": "macos-15",
+              "name": "macos",
+              "python": "3.12"
+            },
+            {
+              "os": "windows-2022",
+              "name": "windows",
+              "python": "3.12"
+            }
+          ],
+          "count": 3,
+          "checkout_refs": [
+            "${{ github.workflow_sha }}",
+            "${{ inputs.release_sha }}"
+          ]
+        },
+        "binary-release": {
+          "needs": [
+            "validate",
+            "binary-build"
+          ],
+          "if": "${{ needs.binary-build.result == 'success' }}",
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            "${{ github.workflow_sha }}",
+            "${{ inputs.release_sha }}"
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/actions_runtime_tests.yml",
+      "sha256": "430588021cf889391842be3a7c78eb4c04648b1bb7311f9c03da452e313fb161",
+      "events": {
+        "pull_request": {
+          "eligible": true,
+          "trigger": {
+            "branches": [
+              "master",
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "action_server/**",
+              ".github/workflows/actions_runtime_tests.yml",
+              "devutils/**",
+              "actions/**",
+              "actions-http-helper/**",
+              "work-items/**"
+            ]
+          },
+          "branch_matches": true,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": [
+            "action_server/tests/action_server_tests/mcp/test_canvas_runtime_admission.py",
+            "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+            "action_server/tests/action_server_tests/test_browser_origin_acceptance.py"
+          ]
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "master",
+              "wip"
+            ],
+            "paths": [
+              "action_server/**",
+              ".github/workflows/actions_runtime_tests.yml",
+              "devutils/**",
+              "actions/**",
+              "actions-http-helper/**",
+              "work-items/**"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": [
+            "action_server/src/actions/server/_rcc_runtime_adapter.py",
+            "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+            "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py"
+          ]
+        }
+      },
+      "jobs": {
+        "build": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {
+              "name": "ubuntu-py3.12-devmode",
+              "python": "3.12",
+              "os": "ubuntu-22.04"
+            },
+            {
+              "name": "windows-py3.12-devmode",
+              "python": "3.12",
+              "os": "windows-2022"
+            },
+            {
+              "name": "macos-py3.12-devmode",
+              "os": "macos-15",
+              "python": "3.12"
+            }
+          ],
+          "count": 3,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/ai-audit.yml",
+      "sha256": "2334d210444efcc82389a3f535032794aec91142e7f44eaf5b97bcb9816f5d0e",
+      "events": {
+        "pull_request": {
+          "eligible": true,
+          "trigger": {},
+          "branch_matches": true,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event absent"
+        }
+      },
+      "jobs": {
+        "audit": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "sha256": "cdeaf466a6e662747e06e32618d91a48fd76c41fada5c2369e380b7034f3f906",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "trigger": {
+            "paths": [
+              ".github/workflows/copilot-setup-steps.yml",
+              ".github/workflows/developer_toolkit.yml",
+              "developer/**"
+            ]
+          },
+          "branch_matches": true,
+          "path_matches": false,
+          "tag_only": false,
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": true,
+          "trigger": {
+            "paths": [
+              ".github/workflows/copilot-setup-steps.yml",
+              ".github/workflows/developer_toolkit.yml",
+              "developer/**"
+            ]
+          },
+          "branch_matches": true,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": [
+            "developer/tests/test_rcc_provider_rollback_summary.py",
+            "developer/tests/test_rcc_provider_rollback_workflow.py"
+          ]
+        }
+      },
+      "jobs": {
+        "copilot-setup-steps": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/coverage-gate.yml",
+      "sha256": "e355c4769bae5e548dc7aa8c7393bdc496ebfcbdd24c1c3918d90bc7e1ef76cf",
+      "events": {
+        "pull_request": {
+          "eligible": true,
+          "trigger": {
+            "branches": [
+              "community",
+              "integration/community-release-20261008"
+            ]
+          },
+          "branch_matches": true,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "coverage": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/deploy-beta-templates.yml",
+      "sha256": "7c3f567689c5cbbf83d54df188f2c82ca0174c473a81e1cf180d638ae623dddb",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event absent"
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "templates/**"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": false,
+          "tag_only": false,
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "deploy": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/deploy-templates.yml",
+      "sha256": "639ae316785f9a39af52856ed33451cf9a7bf28c43de19f8a6f6dfae7e181bb1",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event absent"
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event absent"
+        }
+      },
+      "jobs": {
+        "deploy": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/developer_toolkit.yml",
+      "sha256": "60ca471cb9bdff0059b1a9b1fcdf9256b666fb2fb1d533b93307d2841facc0a8",
+      "events": {
+        "pull_request": {
+          "eligible": true,
+          "trigger": {},
+          "branch_matches": true,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "toolkit": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {
+              "lane": "primary",
+              "rcc_version": "18.19.3",
+              "os": "ubuntu-22.04",
+              "asset": "rcc-linux64",
+              "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+            },
+            {
+              "lane": "primary",
+              "rcc_version": "18.19.3",
+              "os": "macos-15",
+              "asset": "rcc-macosarm64",
+              "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266"
+            },
+            {
+              "lane": "primary",
+              "rcc_version": "18.19.3",
+              "os": "windows-2022",
+              "asset": "rcc-windows64.exe",
+              "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+            },
+            {
+              "lane": "n-1",
+              "rcc_version": "18.18.1",
+              "os": "ubuntu-22.04",
+              "asset": "rcc-linux64",
+              "sha256": "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf"
+            },
+            {
+              "lane": "n-1",
+              "rcc_version": "18.18.1",
+              "os": "macos-15",
+              "asset": "rcc-macosarm64",
+              "sha256": "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d"
+            },
+            {
+              "lane": "n-1",
+              "rcc_version": "18.18.1",
+              "os": "windows-2022",
+              "asset": "rcc-windows64.exe",
+              "sha256": "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b"
+            }
+          ],
+          "count": 6,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/frontend-build-cdn.yml",
+      "sha256": "251ff3279d9019f2223adb849c0e09214dc01ae0931827a3e6f3a76cdcfb3618",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event absent"
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event absent"
+        }
+      },
+      "jobs": {
+        "build-frontend-cdn": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "sha256": "2d2a21af458ccfdb771f65707d7ab60fb1f5dfa24019c94ded4a02ed46f8d36d",
+      "events": {
+        "pull_request": {
+          "eligible": true,
+          "trigger": {
+            "paths": [
+              "action_server/**",
+              "work-items/**",
+              ".github/workflows/frontend-build-unauthenticated.yml"
+            ]
+          },
+          "branch_matches": true,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": [
+            "action_server/tests/action_server_tests/mcp/test_canvas_runtime_admission.py",
+            "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+            "action_server/tests/action_server_tests/test_browser_origin_acceptance.py"
+          ]
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/**",
+              "work-items/**"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": true,
+          "tag_only": false,
+          "matched_paths": [
+            "action_server/src/actions/server/_rcc_runtime_adapter.py",
+            "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+            "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py"
+          ]
+        }
+      },
+      "jobs": {
+        "build-external": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {
+              "os": "ubuntu-22.04",
+              "python": "3.12"
+            },
+            {
+              "os": "windows-2022",
+              "python": "3.12"
+            },
+            {
+              "os": "macos-15",
+              "python": "3.12"
+            }
+          ],
+          "count": 3,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/frontend-build.yml",
+      "sha256": "55def13a3b25269e0a8780a08c89bbbe9b32189b4f4fcbea21189ee8d6ee16a1",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              ".github/workflows/frontend-build.yml"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": false,
+          "tag_only": false,
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              ".github/workflows/frontend-build.yml"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": false,
+          "tag_only": false,
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "build": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {
+              "os": "ubuntu-latest"
+            },
+            {
+              "os": "macos-latest"
+            },
+            {
+              "os": "windows-latest"
+            }
+          ],
+          "count": 3,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/http_helper_tests.yml",
+      "sha256": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "actions-http-helper/**",
+              ".github/workflows/http_helper_tests.yml",
+              "devutils/**"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": false,
+          "tag_only": false,
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community",
+              "wip"
+            ],
+            "paths": [
+              "actions-http-helper/**",
+              ".github/workflows/http_helper_tests.yml",
+              "devutils/**"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": false,
+          "tag_only": false,
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "build": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {
+              "name": "ubuntu-py3.10-devmode",
+              "python": "3.10",
+              "os": "ubuntu-22.04"
+            },
+            {
+              "name": "windows-py3.10-devmode",
+              "python": "3.10",
+              "os": "windows-2022"
+            },
+            {
+              "name": "macos-py3.10-devmode",
+              "os": "macos-15",
+              "python": "3.10"
+            }
+          ],
+          "count": 3,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/http_lib_release.yml",
+      "sha256": "9edd9b480072b60160d2adc29c66fb11dc262edf0625edf762da7c80a777a6de",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event absent"
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "tags": [
+              "actions_http-*"
+            ]
+          },
+          "branch_matches": true,
+          "path_matches": true,
+          "tag_only": true,
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "verify": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        },
+        "publish": {
+          "needs": "verify",
+          "if": "startsWith(github.ref, 'refs/tags/actions_http-')",
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/lighthouse.yml",
+      "sha256": "ff985adf49fae8b5409e4edf4cd10d08045b712dc64b02ad9ec7a9f0498305bd",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              ".github/workflows/lighthouse.yml"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": false,
+          "tag_only": false,
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event absent"
+        }
+      },
+      "jobs": {
+        "lighthouse": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/quality-report.yml",
+      "sha256": "c144961b14d28a24f39ad647be4d72963c6685e07257e468c9285f4f2622cbaf",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "reason": "event absent"
+        },
+        "push": {
+          "eligible": false,
+          "reason": "event absent"
+        }
+      },
+      "jobs": {
+        "report": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    },
+    {
+      "path": ".github/workflows/work_items_release.yml",
+      "sha256": "e30cf818b7d81e3b910bdef8d2f78a9c32c8f52dd119de8b8a75a94b616e10c0",
+      "events": {
+        "pull_request": {
+          "eligible": false,
+          "trigger": {
+            "paths": [
+              "work-items/**",
+              ".devcontainer/bin/verify-work-items",
+              ".devcontainer/bin/smoke-host",
+              ".devcontainer/bin/bootstrap",
+              ".devcontainer/tests/**",
+              ".github/workflows/work_items_release.yml",
+              "docs/skills/work-items.md"
+            ]
+          },
+          "branch_matches": true,
+          "path_matches": false,
+          "tag_only": false,
+          "matched_paths": []
+        },
+        "push": {
+          "eligible": false,
+          "trigger": {
+            "branches": [
+              "community"
+            ],
+            "tags": [
+              "actions-work-items-*"
+            ],
+            "paths": [
+              "work-items/**",
+              ".devcontainer/bin/verify-work-items",
+              ".devcontainer/bin/smoke-host",
+              ".devcontainer/bin/bootstrap",
+              ".devcontainer/tests/**",
+              ".github/workflows/work_items_release.yml",
+              "docs/skills/work-items.md"
+            ]
+          },
+          "branch_matches": false,
+          "path_matches": false,
+          "tag_only": false,
+          "matched_paths": []
+        }
+      },
+      "jobs": {
+        "verify": {
+          "needs": [],
+          "if": null,
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null,
+            "631f5601617e9935620a72c788a98e1012331323",
+            "c56c70102423a18ed54037221116f81ccccd4f4e"
+          ]
+        },
+        "publish": {
+          "needs": "verify",
+          "if": "startsWith(github.ref, 'refs/tags/actions-work-items-')",
+          "matrix_rows": [
+            {}
+          ],
+          "count": 1,
+          "checkout_refs": [
+            null
+          ]
+        }
+      }
+    }
+  ],
+  "runs": [
+    {
+      "run": 38125367681,
+      "workflow": ".github/workflows/ai-audit.yml",
+      "event": "pull_request",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "declared_jobs": 1,
+      "registered_jobs": 1,
+      "not_instantiated": 0
+    },
+    {
+      "run": 38125367745,
+      "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+      "event": "pull_request",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "declared_jobs": 3,
+      "registered_jobs": 3,
+      "not_instantiated": 0
+    },
+    {
+      "run": 38125367639,
+      "workflow": ".github/workflows/actions_runtime_tests.yml",
+      "event": "pull_request",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "declared_jobs": 3,
+      "registered_jobs": 3,
+      "not_instantiated": 0
+    },
+    {
+      "run": 38125367619,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "declared_jobs": 6,
+      "registered_jobs": 6,
+      "not_instantiated": 0
+    },
+    {
+      "run": 38125367676,
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "declared_jobs": 5,
+      "registered_jobs": 5,
+      "not_instantiated": 0
+    },
+    {
+      "run": 38125367654,
+      "workflow": ".github/workflows/coverage-gate.yml",
+      "event": "pull_request",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "declared_jobs": 1,
+      "registered_jobs": 1,
+      "not_instantiated": 0
+    },
+    {
+      "run": 38125365170,
+      "workflow": ".github/workflows/copilot-setup-steps.yml",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "declared_jobs": 1,
+      "registered_jobs": 1,
+      "not_instantiated": 0
+    }
+  ]
+}

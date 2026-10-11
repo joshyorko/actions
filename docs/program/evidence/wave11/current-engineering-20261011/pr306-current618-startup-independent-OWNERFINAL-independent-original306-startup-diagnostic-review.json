@@ -1,0 +1,85 @@
+{
+  "verdict": "GO_ORIGINAL_EVIDENCE_INTEGRITY_ONLY__HOLD_READINESS_AND_CLEANUP",
+  "owner": {
+    "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/OWNERFINAL-original306-fada-startup-diagnostic-artifact-proof.json",
+    "bytes": 31201,
+    "sha256": "bbb30a3c7f258c681e9c320c07b945c41501585f9e7e477e95ef879fbd5d4fb3"
+  },
+  "evidence_bindings_verified": 12,
+  "ZIP": {
+    "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-original-owned/original-artifact-11699761944.zip",
+    "bytes": 6951,
+    "sha256": "92219c8a6699d6cdd03590f5820ad837552a8ab0b385051e9f68d215a4319d4a"
+  },
+  "members_verified": 7,
+  "expanded_bytes": 18154,
+  "actual_runner": {
+    "sha": "522b7bc6e7e9207dac0c745b49d90907ecdf3080",
+    "tree": "a31db4434c7bbe69bf572626d2174f64f9ff2f39",
+    "ordered_parents": [
+      "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade"
+    ],
+    "identity_GITHUB_SHA_equal_original_log_checkout": true
+  },
+  "candidate_source": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+  "later_merge_ref_separate": "3dae00de315bfa9d909cc2a546f717da342c329b",
+  "source_representation": {
+    "Git_equal_source_body_count": 7,
+    "original_report_matches_CRLF_representation": true,
+    "effective_checkout_EOL_config": "UNKNOWN",
+    "body_qualification_waiver": false
+  },
+  "resource_observations": {
+    "sample_seconds": [
+      80.062,
+      88.109
+    ],
+    "RCC_cpu_IO_delta": {
+      "cpu_seconds": 1.515625,
+      "read_bytes": 244395119,
+      "write_bytes": 19153085
+    },
+    "no_delivered_progress_or_ready_mark": true,
+    "cleanup": {
+      "active_reader_count": 0,
+      "cleanup_error_count": 0,
+      "descendant_reap_complete": false,
+      "descendant_snapshot_complete": true,
+      "execution_stopped": false,
+      "observed_live_child_count": 1,
+      "observed_zombie_child_count": 0,
+      "status": "returned",
+      "wrapper_reaped": true
+    },
+    "surviving_PID": "UNREPORTED",
+    "sample80_child_absent88_scope": "captured_snapshot_only"
+  },
+  "watched_comparator": {
+    "scope": "initial_readiness_only",
+    "ready_offset_seconds": 85.453,
+    "conservative_deadline_lower_bound_seconds": 90,
+    "progress_marks": 16,
+    "interval_sum_seconds": 82.62,
+    "cleanup": "UNAVAILABLE"
+  },
+  "remaining_limits": [
+    "Readiness cause UNKNOWN; activity does not identify preparation phase/cache/pipe defect",
+    "Other four failed nodes unsampled",
+    "Wrapper reap/readers stopped do not override measured live-child cleanup failure",
+    "No new execution/source/CI/native/provider/private/release acceptance"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; existing first-readiness/owned-cleanup observation paragraphs accepted; exact50ad checkout identity proposal accepted in separate review",
+    "Durable_learning_captured": "Separate sampled activity and readiness from measured cleanup predicates. Captured live-child cleanup failure remains despite wrapper/readers stopping or neighboring first-ready success.",
+    "Evidence": "Original seven JSON reports; seven source hashes match CRLF representation only; measured cleanup execution_stopped false, reap false, live1. Existing guide lines2947-2994 states the observation and predicate limits.",
+    "Stale_or_ambiguous_guidance_removed": "No activity-to-cause or partial-cleanup-to-PASS inference; no source-body waiver from newline representation.",
+    "Remaining_uncertainty": "Preparation cause, final surviving PID, other failures and watched teardown remain unavailable."
+  },
+  "Upstream_disposition": "none",
+  "review_script": {
+    "path": "/workspace/engineering/pr306-current618-fada-startup-diagnostic-independent-review/verify_readonly.py",
+    "bytes": 7715,
+    "sha256": "c5a5d518057fbcb2482c808a70cd7cbfd117fcc576ef73e5ff937d6d55367f26"
+  }
+}

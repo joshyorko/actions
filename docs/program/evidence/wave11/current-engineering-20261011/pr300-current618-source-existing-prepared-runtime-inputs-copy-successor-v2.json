@@ -1,0 +1,25 @@
+{
+  "copied_ignored_fixture_input": {
+    "path": "action_server/src/actions/server/bin/rcc-18.19.3",
+    "bytes": 22282402,
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "mode": "0o711",
+    "source": "/workspace/engineering/pr299/action_server/src/actions/server/bin/rcc-18.19.3",
+    "source_bytes_unchanged": true
+  },
+  "tracked_static_member_not_copied_or_modified": {
+    "path": "action_server/src/actions/server/_static_contents.py",
+    "bytes": 989282,
+    "sha256": "155a07ea8663ee8dbdd0bbb1c3ea300be203f5349a259aec8dc9dadae25c6772",
+    "exact_current_Git": true
+  },
+  "generated_OAuth_member": "Absent in both checkouts, not copied or synthesized; authority/content acceptance remains HOLD",
+  "initial_failed_light": {
+    "passed": 57,
+    "errors": 93,
+    "integration_deselected": 1,
+    "reason": "Unchanged autouse fixture requires new-checkout ignored pinned RCC asset; RuntimeError missing own default path; no reached failing product assertion"
+  },
+  "copy_inspector_precision": "Initial bounded copy copied RCC then correctly refused existing tracked _static_contents.py; no original file overwritten. Named successor record distinguishes copied ignored binary from already-exact tracked static source.",
+  "no_download_or_installer_or_production_change": true
+}

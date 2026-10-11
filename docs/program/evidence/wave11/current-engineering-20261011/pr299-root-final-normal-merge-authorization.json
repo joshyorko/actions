@@ -1,0 +1,29 @@
+{
+  "status": "ROOT_CURRENT299_NORMAL_POLICY_ENFORCED_MERGE_AUTHORIZED",
+  "captured_at": "2026-10-11T09:03:02.927096+00:00",
+  "source": "3155fc55ea7d47afbc547fddc963b5860462924b",
+  "target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "tested_synthetic": "600d1b213fcfe6f94f341cbe4bca4472bd002e4c",
+  "expected_tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+  "final_independent_GO_sha256": "178ab95cf19bbe6e473d6f81610ada618db0b2add440657e87d7c6768262a7c0",
+  "ready": true,
+  "checks20_terminal_success": true,
+  "policy": "normal GitHub merge API enforcement; historical403 remains UNKNOWN, no override",
+  "merge_method": "merge",
+  "remaining_HOLD": [
+    "whole issues/backend/private/current native/publication",
+    "historical readiness cause and cleanup unknown"
+  ],
+  "evidence": [
+    {
+      "path": "/workspace/engineering/pr299-root-after-ready-authenticated.json",
+      "bytes": 25662,
+      "sha256": "69b41b445e6705420ad058af79d663e8bcde735793bfda04817439c7889ed503"
+    },
+    {
+      "path": "/workspace/engineering/pr299-root-after-ready-checks-authenticated.json",
+      "bytes": 72096,
+      "sha256": "aaea1fa9b839d11a42266e2f874b45236bf88d37880ac1e7d0960546f374822c"
+    }
+  ]
+}

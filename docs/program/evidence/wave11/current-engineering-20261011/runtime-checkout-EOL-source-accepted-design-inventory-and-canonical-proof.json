@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "201_source_Python_blobs_modes_and_SHA256_exact_accepted_inventory": true,
+  "selected_207_source_count_derivation": "201 actual tracked Runtime Python plus5 exact tracked non-Python packaged text plus1 exact frontend scaffold HTML",
+  "all_selected_source_CR_bytes": 0,
+  "canonical_accepted_patch_sha256": "1306a314811448c8090b4aa2e77340e676bbba397ceb6c7ee0477b908cb9b2bf",
+  "canonical_exact_accepted_16_line_content_integrated": true,
+  "provenance5f08_imported": false,
+  "historical_178_Windows_differences_not_same_as_synthetic_180": true
+}

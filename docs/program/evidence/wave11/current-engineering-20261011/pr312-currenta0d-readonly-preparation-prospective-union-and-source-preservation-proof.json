@@ -1,0 +1,41 @@
+{
+  "status": "PASS_READ_ONLY_EXACT_OBJECT_UNION_SOURCE_PRESERVATION",
+  "ordered_proposed_local_merge_parents": [
+    "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+    "a0d258a16095b95b1bf9000cb1201cddfaff4779"
+  ],
+  "merge_base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "prospective_tree": "edf1801e565692fb3f07b809b3a95b27981fe2fe",
+  "prospective_complete_typed_leaf_count": 1423,
+  "source_typed_count": 1421,
+  "target_typed_count": 1421,
+  "automatic_merge_conflicts": [],
+  "all_parent_paths_retained": true,
+  "no_novel_non_documentation_blob_or_mode": true,
+  "only_combined_novel_documentation_blob": {
+    "docs/skills/repository-operations.md": [
+      "100644",
+      "4b8073ed6df061c7be124e10468a1a47d06dd891"
+    ]
+  },
+  "source_seven_delta_paths": [
+    ".gitattributes",
+    ".github/workflows/_gen_workflows.py",
+    ".github/workflows/actions_runtime_pypi_release.yml",
+    ".github/workflows/actions_runtime_tests.yml",
+    "devutils/tests/test_runtime_checkout_bytes.py",
+    "devutils/tests/test_runtime_checkout_workflows.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "source_six_non_documentation_delta_blobs_modes_exact": true,
+  "source207protected_checkout_input_Git_bodies_modes_unchanged_by_target": true,
+  "target_auth_test_additions_exact": [
+    "action_server/tests/action_server_tests/test_auth_route_enforcement.py",
+    "action_server/tests/action_server_tests/test_auth_route_inventory.py"
+  ],
+  "target_auth_all58_line_documentation_additions_exact_after_removing_only_source16_line_lesson": true,
+  "prepared30_source_cfg_lock_inputs_exact_both_current_and_prospective": true,
+  "own_five_concrete_prefix_origin_paths_reusable_after_actual_auth_only_target_union": true,
+  "source_or_branch_or_worktree_mutations_performed": false,
+  "git_object_tree_materialization_only": true
+}

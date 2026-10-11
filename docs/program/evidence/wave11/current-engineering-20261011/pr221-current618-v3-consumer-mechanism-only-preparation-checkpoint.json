@@ -1,0 +1,126 @@
+{
+  "status": "PREPARATION_MECHANISM_ONLY_WAIT_CURRENT_LINUX_OWNERFINAL",
+  "current_input_identities_bound": false,
+  "actual_authorized": false,
+  "accepted_runner_exact_file_sha_verified": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+    "bytes": 19366,
+    "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+  },
+  "original_retained_refs": {
+    "installed-consumer-runner-v2.py": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+      "bytes": 19366,
+      "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+    },
+    "current-input-admission-v2.py": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission-v2.py",
+      "bytes": 7267,
+      "sha256": "3be2b971a43de3848c5a1aec59eecbeb6ac9dd796a81a6f2e489eab782492d1a"
+    },
+    "immutable-current776-linux-consumer-preexecution-proposal-v2.json": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/immutable-current776-linux-consumer-preexecution-proposal-v2.json",
+      "bytes": 25752,
+      "sha256": "57a8beb87e5a1c03fae276e4b22d7fc8734d1f42cc3c739ceb989a0d946e73a7"
+    },
+    "input-and-source-admission.json": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/input-and-source-admission.json",
+      "bytes": 147945,
+      "sha256": "ff5560c8233985e2755e1e9288f780018f625a7ec4184f3eac98e4a14d50e594"
+    },
+    "test_current_input_admission.py": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/test_current_input_admission.py",
+      "bytes": 7808,
+      "sha256": "9ac6546291ad088eb1af09e698ea094fba4b512be2b3f10426acb4c0874a5f15"
+    },
+    "test_installed_consumer_runner_v2.py": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/test_installed_consumer_runner_v2.py",
+      "bytes": 9838,
+      "sha256": "af8441563c24deeb9dd96def1721c6d92924e44329c102f581da9678b53ca68e"
+    },
+    "private-focused-green-v3.log": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/private-focused-green-v3.log",
+      "bytes": 6906,
+      "sha256": "9c0aa16de30eed3f73c6ec5821c244f5e68eefa0c45807334084eb35ba7af953"
+    },
+    "current-input-metadata-RED.log": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-metadata-RED.log",
+      "bytes": 7776,
+      "sha256": "812d7e91eec86ea968308fc6b9e4fee5d4185a5a3f24ce02486d43e339350e87"
+    },
+    "private-focused-green-v2.log": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/private-focused-green-v2.log",
+      "bytes": 13714,
+      "sha256": "6ef41082bac3875b48a8e9ec19c4b5cffde4c03d41005ea298165db34c2ea85d"
+    },
+    "frozen-one-actual-current-linux-consumer-checkpoint.json": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/frozen-one-actual-current-linux-consumer-checkpoint.json",
+      "bytes": 8866,
+      "sha256": "f681018b9b516d9b969ea8d0786f4688ebb1c95b46e031217cf388645d8affaa"
+    },
+    "canonical-partial-platform-consumer-scope-proposed.patch": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+      "bytes": 1158,
+      "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+    }
+  },
+  "original_helpers_current_working_bytes_exact": {
+    "floor": {
+      "path": "/workspace/engineering/pr282/action_server/scripts/verify_published_runtime_floor.py",
+      "bytes": 8925,
+      "sha256": "f1ad142a6cd83ca1a71ed0a6183d558a6d72f00f073b492ce0d18e563a067193"
+    },
+    "publisher": {
+      "path": "/workspace/engineering/pr282/action_server/scripts/publish_verified_runtime.py",
+      "bytes": 18453,
+      "sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c"
+    },
+    "guard": {
+      "path": "/workspace/engineering/pr311/action_server/tests/contract_tests/test_active_contracts.py",
+      "bytes": 38962,
+      "sha256": "b76ec605e343e8bec7dea6e230dad3f516eabc4fd90a2769638b0d9111a6ade0"
+    },
+    "process": {
+      "path": "/workspace/engineering/pr282/action_server/src/actions/server/_common/process.py",
+      "bytes": 31134,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    "rcc": {
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "bytes": 22282402,
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    }
+  },
+  "proposed_changes": "Only current owned archive/wheel/source/producer/checkouts/modulemanifest/count identities and matching literals; existing UTF8/metadata/RECORD/source/private-Core/origin/cleanup/budgets preserved; no input tuple frozen before ownerfinal",
+  "known_checkout_roots_unchanged": [
+    "/workspace/actions",
+    "/workspace/engineering",
+    "/workspace/engineering/campaign-checkpoint",
+    "/workspace/engineering/pr282",
+    "/workspace/engineering/pr290",
+    "/workspace/engineering/pr299",
+    "/workspace/engineering/pr302",
+    "/workspace/engineering/pr305",
+    "/workspace/engineering/pr306",
+    "/workspace/engineering/pr307",
+    "/workspace/engineering/pr308",
+    "/workspace/engineering/pr309",
+    "/workspace/engineering/pr310",
+    "/workspace/engineering/pr311",
+    "/workspace/engineering/rcc-public"
+  ],
+  "future_checkout_guard": "Existing /workspace/engineering root already bans future engineering checkout/harness paths and symlink resolution; isolated temp remains /tmp outside all known roots",
+  "budgets_unchanged": {
+    "worker_seconds": 595,
+    "process_including_cleanup_seconds": 600,
+    "reserved_cleanup_max_seconds": 5,
+    "outer_gateway_seconds": 645,
+    "outer_TERM_KILL_grace_seconds": 10,
+    "temporary": "Freshowned0700 /tmp/rt103-current776-* outsideallcheckouts",
+    "output": "Directfiles/no newreaderthreads; primaryexceptionretained, additionalcleanup failureoverallFAIL",
+    "cleanup_scope": "Existingidentity-ownedPID/create-time point-in-time snapshots; no universaladoption/naturalshutdown/productionpool/native/service/provider/browserclaim"
+  },
+  "source_harness": "Ownpreparedpr282 currentlye736/07b; helper bytes unchanged, harness not wheelproducer",
+  "capacity_bytes": 1573433344,
+  "upstream_disposition": "none"
+}

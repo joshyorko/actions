@@ -1,0 +1,4514 @@
+{
+  "schema": "independent-one-bounded-pr305-pr306-current618-CI-census/v1",
+  "verdict": "HOLD_BOTH_PR_PENDING_FULL_DECLARED_CURRENT_CI",
+  "observed_at": "2026-10-11T10:06:30.933Z",
+  "target_named_before_after": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "raw_authenticated_API": {
+    "path": "/workspace/engineering/pr305-pr306-current618-bounded-CI-review/private-authenticated-complete-current-census.json",
+    "bytes": 2176533,
+    "sha256": "079523d82285d062db6bd7f4500bd9c50bd721e62136f1ca1f1ddfa0d3c46107"
+  },
+  "synthetic_checks_addendum": {
+    "path": "/workspace/engineering/pr305-pr306-current618-bounded-CI-review/private-synthetic-checks-addendum.json",
+    "bytes": 187,
+    "sha256": "86c013949d6134e372775973d5c804e5b5190b51ffd6ecbd354700de8790ce0d"
+  },
+  "authenticated_closure_read": {
+    "path": "/workspace/engineering/pr305-pr306-current618-bounded-CI-review/private-authenticated-closure-graphql-readback.json",
+    "bytes": 529,
+    "sha256": "aaa470d18d6f487cc6c4c50a74f5eddeaf06db01567d6402fa12badca408ab24"
+  },
+  "API_original_read_count": 50,
+  "subjects": [
+    {
+      "PR": 305,
+      "decision": "HOLD_PENDING_DECLARED_CURRENT_JOBS_AND_UNINSTANTIATED_RUNTIME_PUBLISHER",
+      "head": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+      "target_before_after": "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "synthetic": {
+        "sha": "157fa9bed006f46cb16a5f144cda3751c3aa4d18",
+        "tree": "2bd99392d53f3df8be0569368450df1c933d3a3a",
+        "ordered_parents": [
+          "6181b044c75de35386f1ae30e71725398b6a7feb",
+          "519a0beb7451cb6e4410f0bee18c826fc493086e"
+        ],
+        "complete_API_recursive_tree_typed_modes_blobs_equal_exact_local_source": true,
+        "full_leaf_count": 1420
+      },
+      "source_commit_ordered_parents": [
+        "6390270cd07851448b7b325c81c98dc11a1d3a17",
+        "6181b044c75de35386f1ae30e71725398b6a7feb"
+      ],
+      "PR_draft": true,
+      "PR_mergeable": true,
+      "mergeable_state": "unstable",
+      "source_check_count": 18,
+      "source_check_counts_at_check_read": {
+        "queued": 4,
+        "in_progress": 2,
+        "success": 12
+      },
+      "registered_job_count": 18,
+      "job_counts_at_job_read": {
+        "success": 12,
+        "queued": 4,
+        "in_progress": 2
+      },
+      "declared_PR_jobs": 19,
+      "declared_push_auxiliary_jobs": 0,
+      "expected_total_current": 19,
+      "not_instantiated": 1,
+      "late_publisher": "Runtime publish3.12 job requires build-sdist and allthree build-wheels; it validates/collects on PR, actual registry publishing steps push-only. Mac wheel is pending; no publish job-level PR exclusion.",
+      "pending_jobs": [
+        {
+          "id": 114440659710,
+          "run": 38129489723,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "queued"
+        },
+        {
+          "id": 114440659760,
+          "run": 38129489723,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "queued"
+        },
+        {
+          "id": 114440659758,
+          "run": 38129489742,
+          "name": "build-wheels (macos-15)",
+          "status": "queued"
+        },
+        {
+          "id": 114440660005,
+          "run": 38129489790,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress"
+        },
+        {
+          "id": 114440660149,
+          "run": 38129489790,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress"
+        },
+        {
+          "id": 114440660183,
+          "run": 38129489790,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "queued"
+        }
+      ],
+      "all_job_bindings": [
+        {
+          "id": 114440659659,
+          "run": 38129489723,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install pinned RCC",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Validate RCC manifest",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Run toolkit doctor",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run toolkit contract tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Bootstrap toolkit (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Verify isolated package environments (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Package task smoke (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Build and verify community binary (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 21,
+              "name": "Post Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114440659710,
+          "run": 38129489723,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "queued",
+          "conclusion": null,
+          "steps": []
+        },
+        {
+          "id": 114440659718,
+          "run": 38129489723,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install pinned RCC",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Validate RCC manifest",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Run toolkit doctor",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run toolkit contract tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Bootstrap toolkit (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Verify isolated package environments (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Package task smoke (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Build and verify community binary (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 21,
+              "name": "Post Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114440659760,
+          "run": 38129489723,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "queued",
+          "conclusion": null,
+          "steps": []
+        },
+        {
+          "id": 114440659823,
+          "run": 38129489723,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install pinned RCC",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Validate RCC manifest",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Run toolkit doctor",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run toolkit contract tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Bootstrap toolkit (Linux)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Verify isolated package environments (Linux)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Package task smoke (Linux)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Build and verify community binary (Linux)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114440659953,
+          "run": 38129489723,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install pinned RCC",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Validate RCC manifest",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Run toolkit doctor",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run toolkit contract tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Bootstrap toolkit (Linux)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Verify isolated package environments (Linux)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Package task smoke (Linux)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Build and verify community binary (Linux)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114440659529,
+          "run": 38129489742,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install project (not dev)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Install project (dev)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Check tag version",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Build frontend",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Build frontend (PR)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 13,
+              "name": "Build OAuth2 config (PR)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Build sdist",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Upload artifact: action_server/dist/*",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 28,
+              "name": "Post Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 29,
+              "name": "Post Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 30,
+              "name": "Post Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 31,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114440659751,
+          "run": 38129489742,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install project (not dev)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Install project (dev)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Check tag version",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Build frontend",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Build frontend (PR)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 13,
+              "name": "Build OAuth2 config (PR)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Set macOS deployment target",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Build candidate Core wheel for PR compatibility tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Build candidate HTTP Helper wheel for PR compatibility tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Build and clean-test wheels",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Verify Runtime wheel with published Core and Helper",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Upload artifact: action_server/wheelhouse/*",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 38,
+              "name": "Post Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 39,
+              "name": "Post Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 40,
+              "name": "Post Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 41,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114440659758,
+          "run": 38129489742,
+          "name": "build-wheels (macos-15)",
+          "status": "queued",
+          "conclusion": null,
+          "steps": []
+        },
+        {
+          "id": 114440659764,
+          "run": 38129489742,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install project (not dev)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Install project (dev)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Check tag version",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Build frontend",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Build frontend (PR)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 13,
+              "name": "Build OAuth2 config (PR)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Set macOS deployment target",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Build candidate Core wheel for PR compatibility tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Build candidate HTTP Helper wheel for PR compatibility tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Build and clean-test wheels",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Verify Runtime wheel with published Core and Helper",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Upload artifact: action_server/wheelhouse/*",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 38,
+              "name": "Post Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 39,
+              "name": "Post Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 40,
+              "name": "Post Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 41,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114440660005,
+          "run": 38129489790,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install project (not dev)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Install project (dev)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Build frontend",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Test Go wrapper child lifecycle",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Build binary",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Upload artifact: action_server/dist/final/",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Test (not integration)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Install Playwright Chromium for Runtime browser acceptance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Test (integration)",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "number": 18,
+              "name": "Retain Windows native startup diagnostics",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 19,
+              "name": "`inv lint`, potentially fixed with `inv pretty`",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 20,
+              "name": "`inv typecheck`",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 21,
+              "name": "`inv docs` with checking on files changed",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 39,
+              "name": "Post Setup node",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 40,
+              "name": "Post Setup go",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 41,
+              "name": "Post Install the latest version of uv",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 42,
+              "name": "Post Checkout repository and submodules",
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        },
+        {
+          "id": 114440660149,
+          "run": 38129489790,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install project (not dev)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Install project (dev)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Build frontend",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Test Go wrapper child lifecycle",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Build binary",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Upload artifact: action_server/dist/final/",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Test (not integration)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Install Playwright Chromium for Runtime browser acceptance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Test (integration)",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "number": 18,
+              "name": "Retain Windows native startup diagnostics",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 19,
+              "name": "`inv lint`, potentially fixed with `inv pretty`",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 20,
+              "name": "`inv typecheck`",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 21,
+              "name": "`inv docs` with checking on files changed",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 39,
+              "name": "Post Setup node",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 40,
+              "name": "Post Setup go",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 41,
+              "name": "Post Install the latest version of uv",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 42,
+              "name": "Post Checkout repository and submodules",
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        },
+        {
+          "id": 114440660183,
+          "run": 38129489790,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "queued",
+          "conclusion": null,
+          "steps": []
+        },
+        {
+          "id": 114440659727,
+          "run": 38129489732,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Capture bounded audit evidence",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114440659600,
+          "run": 38129489728,
+          "name": "coverage",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Select task-local RCC and receipt directories",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install pinned RCC",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Check pinned toolchain",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Bootstrap declared package environments",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run toolkit contracts",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Measure portable package suite coverage",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Upload coverage receipts",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Post Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114440659820,
+          "run": 38129489774,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify no .npmrc with credentials",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Install project",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Verify artifact binding locks on the native filesystem",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Verify tunnel pipe lifecycle on the native platform",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Verify Robot publication on the native filesystem",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Setup Node.js",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Build frontend from public dependencies",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Verify native artifact manifest contract",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Build binary (unsigned, with Go wrapper)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Record native binary and embedded component provenance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Create complete native provenance archive",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Upload frozen executable and provenance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Install Chromium for native acceptance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Verify packaged Work Items browser acceptance (frozen)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Verify packaged Work Items browser acceptance (Go wrapper)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Build candidate Core wheel for native Work Items acceptance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Verify Work Items consumer through frozen and Go runtimes",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Upload Work Items native acceptance receipt",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 26,
+              "name": "Clean task-owned Work Items RCC home",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 27,
+              "name": "Verify binary was built",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 28,
+              "name": "Verify native process ownership",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 29,
+              "name": "Verify frozen and Go-wrapper browser and storage behavior",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 30,
+              "name": "Verify large stored Run history in frozen and Go-wrapper browsers",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 31,
+              "name": "Upload native acceptance receipt",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Upload binary artifact",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 61,
+              "name": "Post Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 62,
+              "name": "Post Setup Node.js",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 63,
+              "name": "Post Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 64,
+              "name": "Post Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 65,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114440659979,
+          "run": 38129489774,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify no .npmrc with credentials",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Install project",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Verify artifact binding locks on the native filesystem",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Verify tunnel pipe lifecycle on the native platform",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Verify Robot publication on the native filesystem",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Setup Node.js",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Build frontend from public dependencies",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Verify native artifact manifest contract",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Build binary (unsigned, with Go wrapper)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Record native binary and embedded component provenance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Create complete native provenance archive",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Upload frozen executable and provenance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Install Chromium for native acceptance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Verify packaged Work Items browser acceptance (frozen)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Verify packaged Work Items browser acceptance (Go wrapper)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Build candidate Core wheel for native Work Items acceptance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Verify Work Items consumer through frozen and Go runtimes",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Upload Work Items native acceptance receipt",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 26,
+              "name": "Clean task-owned Work Items RCC home",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 27,
+              "name": "Verify binary was built",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 28,
+              "name": "Verify native process ownership",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 29,
+              "name": "Verify frozen and Go-wrapper browser and storage behavior",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 30,
+              "name": "Verify large stored Run history in frozen and Go-wrapper browsers",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 31,
+              "name": "Upload native acceptance receipt",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Upload binary artifact",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 61,
+              "name": "Post Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 62,
+              "name": "Post Setup Node.js",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 63,
+              "name": "Post Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 64,
+              "name": "Post Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 65,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114440660031,
+          "run": 38129489774,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify no .npmrc with credentials",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Install project",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Verify artifact binding locks on the native filesystem",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Verify tunnel pipe lifecycle on the native platform",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Verify Robot publication on the native filesystem",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Setup Node.js",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Build frontend from public dependencies",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Verify native artifact manifest contract",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Build binary (unsigned, with Go wrapper)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Record native binary and embedded component provenance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Create complete native provenance archive",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Upload frozen executable and provenance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Install Chromium for native acceptance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Verify packaged Work Items browser acceptance (frozen)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Verify packaged Work Items browser acceptance (Go wrapper)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Build candidate Core wheel for native Work Items acceptance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Verify Work Items consumer through frozen and Go runtimes",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Upload Work Items native acceptance receipt",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 26,
+              "name": "Clean task-owned Work Items RCC home",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 27,
+              "name": "Verify binary was built",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 28,
+              "name": "Verify native process ownership",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 29,
+              "name": "Verify frozen and Go-wrapper browser and storage behavior",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 30,
+              "name": "Verify large stored Run history in frozen and Go-wrapper browsers",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 31,
+              "name": "Upload native acceptance receipt",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Upload binary artifact",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 61,
+              "name": "Post Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 62,
+              "name": "Post Setup Node.js",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 63,
+              "name": "Post Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 64,
+              "name": "Post Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 65,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "all_source_check_bindings": [
+        {
+          "id": 114440660183,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 114440660149,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114440660031,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114440660005,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114440659979,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114440659953,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114440659823,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114440659820,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114440659764,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114440659760,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 114440659758,
+          "name": "build-wheels (macos-15)",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 114440659751,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114440659727,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114440659718,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114440659710,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 114440659659,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114440659600,
+          "name": "coverage",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114440659529,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "run_binding": [
+        {
+          "run": 38129489723,
+          "workflow": ".github/workflows/developer_toolkit.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "queued",
+          "conclusion": null,
+          "declared_jobs": 6,
+          "registered_jobs": 6,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38129489742,
+          "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "queued",
+          "conclusion": null,
+          "declared_jobs": 5,
+          "registered_jobs": 4,
+          "not_instantiated": 1
+        },
+        {
+          "run": 38129489790,
+          "workflow": ".github/workflows/actions_runtime_tests.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "queued",
+          "conclusion": null,
+          "declared_jobs": 3,
+          "registered_jobs": 3,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38129489732,
+          "workflow": ".github/workflows/ai-audit.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 1,
+          "registered_jobs": 1,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38129489728,
+          "workflow": ".github/workflows/coverage-gate.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 1,
+          "registered_jobs": 1,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38129489774,
+          "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 3,
+          "registered_jobs": 3,
+          "not_instantiated": 0
+        }
+      ],
+      "declared_exact_source_inventory": {
+        "path": "/workspace/engineering/pr305-pr306-current618-bounded-CI-review/pr305-exact-event-paths-declared-workflow-job-inventory.json",
+        "bytes": 58259,
+        "sha256": "d0b105461e6cc248ef35924a24b9402b0a75102469a1a1d089e4e5cfcc3e3389"
+      },
+      "independent_source_GO": {
+        "path": "/workspace/engineering/pr305-actual618-independent-review/independent-frozen-current618-source-review.json",
+        "bytes": 7161,
+        "sha256": "91118b6f1c952b7ee0df2cd6b8b8b174261ee373106ca08ecd130acfe06617c4"
+      },
+      "review_requested_threads": {
+        "submitted": 0,
+        "unresolved": 0,
+        "requested_reviewers": 0,
+        "requested_teams": 0
+      },
+      "closure_references": {
+        "complete_GraphQL_count": 0,
+        "no_more_pages": true
+      },
+      "statuses_source_synthetic": 0,
+      "synthetic_checks": 0,
+      "named_source_target_synthetic_ref_brackets_stable": true,
+      "actual_runner_checkout_qualification": "UNKNOWN_CURRENT_TASK: no original full job logs acquired; API source head, synthetic merge metadata/tree, default checkout declaration or successful checkout step does not authenticate actual runner SHA. Pending fullCI means no merge GO; no log/artifact/download authorization.",
+      "historical_scope": "Old776green metadata and source receipts remain historical; current exact source and accepted618 synthetic identities independently measured. No old native/current whole issue or release carry."
+    },
+    {
+      "PR": 306,
+      "decision": "HOLD_PENDING_DECLARED_CURRENT_JOBS_AND_UNINSTANTIATED_RUNTIME_PUBLISHER",
+      "head": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+      "target_before_after": "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "synthetic": {
+        "sha": "3dae00de315bfa9d909cc2a546f717da342c329b",
+        "tree": "a31db4434c7bbe69bf572626d2174f64f9ff2f39",
+        "ordered_parents": [
+          "6181b044c75de35386f1ae30e71725398b6a7feb",
+          "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade"
+        ],
+        "complete_API_recursive_tree_typed_modes_blobs_equal_exact_local_source": true,
+        "full_leaf_count": 1419
+      },
+      "source_commit_ordered_parents": [
+        "662014533d8104c1998bce26d91211140acc08e5",
+        "6181b044c75de35386f1ae30e71725398b6a7feb"
+      ],
+      "PR_draft": true,
+      "PR_mergeable": true,
+      "mergeable_state": "unstable",
+      "source_check_count": 18,
+      "source_check_counts_at_check_read": {
+        "in_progress": 8,
+        "queued": 4,
+        "success": 6
+      },
+      "registered_job_count": 18,
+      "job_counts_at_job_read": {
+        "success": 6,
+        "in_progress": 8,
+        "queued": 4
+      },
+      "declared_PR_jobs": 19,
+      "declared_push_auxiliary_jobs": 0,
+      "expected_total_current": 19,
+      "not_instantiated": 1,
+      "late_publisher": "Runtime publish3.12 job requires build-sdist and allthree build-wheels; it validates/collects on PR, actual registry publishing steps push-only. Mac wheel is pending; no publish job-level PR exclusion.",
+      "pending_jobs": [
+        {
+          "id": 114442488073,
+          "run": 38130109442,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "in_progress"
+        },
+        {
+          "id": 114442488157,
+          "run": 38130109442,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "in_progress"
+        },
+        {
+          "id": 114442488188,
+          "run": 38130109442,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "queued"
+        },
+        {
+          "id": 114442488189,
+          "run": 38130109442,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "queued"
+        },
+        {
+          "id": 114442488255,
+          "run": 38130109442,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "in_progress"
+        },
+        {
+          "id": 114442488081,
+          "run": 38130109452,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "queued"
+        },
+        {
+          "id": 114442488251,
+          "run": 38130109452,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "in_progress"
+        },
+        {
+          "id": 114442488576,
+          "run": 38130109489,
+          "name": "build-wheels (macos-15)",
+          "status": "queued"
+        },
+        {
+          "id": 114442488103,
+          "run": 38130109484,
+          "name": "coverage",
+          "status": "in_progress"
+        },
+        {
+          "id": 114442488480,
+          "run": 38130109466,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "in_progress"
+        },
+        {
+          "id": 114442488607,
+          "run": 38130109466,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress"
+        },
+        {
+          "id": 114442488662,
+          "run": 38130109466,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress"
+        }
+      ],
+      "all_job_bindings": [
+        {
+          "id": 114442488314,
+          "run": 38130109518,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Capture bounded audit evidence",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run actions/upload-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114442488073,
+          "run": 38130109442,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install pinned RCC",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Validate RCC manifest",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Run toolkit doctor",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run toolkit contract tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Bootstrap toolkit (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Verify isolated package environments (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Package task smoke (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Build and verify community binary (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 21,
+              "name": "Post Cache RCC holotree",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/checkout@v4",
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        },
+        {
+          "id": 114442488148,
+          "run": 38130109442,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install pinned RCC",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Validate RCC manifest",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Run toolkit doctor",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run toolkit contract tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Bootstrap toolkit (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Verify isolated package environments (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Package task smoke (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Build and verify community binary (Linux)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 21,
+              "name": "Post Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114442488157,
+          "run": 38130109442,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install pinned RCC",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Validate RCC manifest",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Run toolkit doctor",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run toolkit contract tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Bootstrap toolkit (Linux)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Verify isolated package environments (Linux)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Package task smoke (Linux)",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "number": 11,
+              "name": "Build and verify community binary (Linux)",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 21,
+              "name": "Post Cache RCC holotree",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/checkout@v4",
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        },
+        {
+          "id": 114442488188,
+          "run": 38130109442,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "queued",
+          "conclusion": null,
+          "steps": []
+        },
+        {
+          "id": 114442488189,
+          "run": 38130109442,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "queued",
+          "conclusion": null,
+          "steps": []
+        },
+        {
+          "id": 114442488255,
+          "run": 38130109442,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install pinned RCC",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Validate RCC manifest",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Run toolkit doctor",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run toolkit contract tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Bootstrap toolkit (Linux)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Verify isolated package environments (Linux)",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "number": 10,
+              "name": "Package task smoke (Linux)",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 11,
+              "name": "Build and verify community binary (Linux)",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 21,
+              "name": "Post Cache RCC holotree",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 22,
+              "name": "Post Run actions/checkout@v4",
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        },
+        {
+          "id": 114442488081,
+          "run": 38130109452,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "queued",
+          "conclusion": null,
+          "steps": []
+        },
+        {
+          "id": 114442488214,
+          "run": 38130109452,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify no .npmrc with credentials",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Install project",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Verify artifact binding locks on the native filesystem",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Verify tunnel pipe lifecycle on the native platform",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Verify Robot publication on the native filesystem",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Setup Node.js",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Build frontend from public dependencies",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Verify native artifact manifest contract",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Build binary (unsigned, with Go wrapper)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Record native binary and embedded component provenance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Create complete native provenance archive",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Upload frozen executable and provenance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Install Chromium for native acceptance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Verify packaged Work Items browser acceptance (frozen)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Verify packaged Work Items browser acceptance (Go wrapper)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Build candidate Core wheel for native Work Items acceptance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Verify Work Items consumer through frozen and Go runtimes",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Upload Work Items native acceptance receipt",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 26,
+              "name": "Clean task-owned Work Items RCC home",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 27,
+              "name": "Verify binary was built",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 28,
+              "name": "Verify native process ownership",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 29,
+              "name": "Verify frozen and Go-wrapper browser and storage behavior",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 30,
+              "name": "Verify large stored Run history in frozen and Go-wrapper browsers",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 31,
+              "name": "Upload native acceptance receipt",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Upload binary artifact",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 61,
+              "name": "Post Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 62,
+              "name": "Post Setup Node.js",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 63,
+              "name": "Post Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 64,
+              "name": "Post Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 65,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114442488251,
+          "run": 38130109452,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify no .npmrc with credentials",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Install project",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Verify artifact binding locks on the native filesystem",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Verify tunnel pipe lifecycle on the native platform",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Verify Robot publication on the native filesystem",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Setup Node.js",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Build frontend from public dependencies",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Verify native artifact manifest contract",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Build binary (unsigned, with Go wrapper)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Record native binary and embedded component provenance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Create complete native provenance archive",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Upload frozen executable and provenance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Install Chromium for native acceptance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Verify packaged Work Items browser acceptance (frozen)",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "number": 22,
+              "name": "Verify packaged Work Items browser acceptance (Go wrapper)",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 23,
+              "name": "Build candidate Core wheel for native Work Items acceptance",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 24,
+              "name": "Verify Work Items consumer through frozen and Go runtimes",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 25,
+              "name": "Upload Work Items native acceptance receipt",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 26,
+              "name": "Clean task-owned Work Items RCC home",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 27,
+              "name": "Verify binary was built",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 28,
+              "name": "Verify native process ownership",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 29,
+              "name": "Verify frozen and Go-wrapper browser and storage behavior",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 30,
+              "name": "Verify large stored Run history in frozen and Go-wrapper browsers",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 31,
+              "name": "Upload native acceptance receipt",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 32,
+              "name": "Upload binary artifact",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 61,
+              "name": "Post Setup go",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 62,
+              "name": "Post Setup Node.js",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 63,
+              "name": "Post Install the latest version of uv",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 64,
+              "name": "Post Checkout repository and submodules",
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        },
+        {
+          "id": 114442488444,
+          "run": 38130109489,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install project (not dev)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Install project (dev)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Check tag version",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Build frontend",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Build frontend (PR)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 13,
+              "name": "Build OAuth2 config (PR)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Build sdist",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Upload artifact: action_server/dist/*",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 28,
+              "name": "Post Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 29,
+              "name": "Post Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 30,
+              "name": "Post Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 31,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114442488507,
+          "run": 38130109489,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install project (not dev)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Install project (dev)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Check tag version",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Build frontend",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Build frontend (PR)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 13,
+              "name": "Build OAuth2 config (PR)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Set macOS deployment target",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Build candidate Core wheel for PR compatibility tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Build candidate HTTP Helper wheel for PR compatibility tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Build and clean-test wheels",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Verify Runtime wheel with published Core and Helper",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Upload artifact: action_server/wheelhouse/*",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 38,
+              "name": "Post Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 39,
+              "name": "Post Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 40,
+              "name": "Post Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 41,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114442488560,
+          "run": 38130109489,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install project (not dev)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Install project (dev)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Check tag version",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Build frontend",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Build frontend (PR)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 13,
+              "name": "Build OAuth2 config (PR)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Set macOS deployment target",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Build candidate Core wheel for PR compatibility tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Build candidate HTTP Helper wheel for PR compatibility tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Build and clean-test wheels",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Verify Runtime wheel with published Core and Helper",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Upload artifact: action_server/wheelhouse/*",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 38,
+              "name": "Post Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 39,
+              "name": "Post Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 40,
+              "name": "Post Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 41,
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114442488576,
+          "run": 38130109489,
+          "name": "build-wheels (macos-15)",
+          "status": "queued",
+          "conclusion": null,
+          "steps": []
+        },
+        {
+          "id": 114442488103,
+          "run": 38130109484,
+          "name": "coverage",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Select task-local RCC and receipt directories",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Cache RCC holotree",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install pinned RCC",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Check pinned toolchain",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Bootstrap declared package environments",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run toolkit contracts",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Measure portable package suite coverage",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "number": 10,
+              "name": "Upload coverage receipts",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 19,
+              "name": "Post Cache RCC holotree",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/checkout@v4",
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        },
+        {
+          "id": 114442488480,
+          "run": 38130109466,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install project (not dev)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Install project (dev)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Build frontend",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Test Go wrapper child lifecycle",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Build binary",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Upload artifact: action_server/dist/final/",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Test (not integration)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Install Playwright Chromium for Runtime browser acceptance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Test (integration)",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "number": 18,
+              "name": "Retain Windows native startup diagnostics",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 19,
+              "name": "`inv lint`, potentially fixed with `inv pretty`",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 20,
+              "name": "`inv typecheck`",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 21,
+              "name": "`inv docs` with checking on files changed",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 39,
+              "name": "Post Setup node",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 40,
+              "name": "Post Setup go",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 41,
+              "name": "Post Install the latest version of uv",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 42,
+              "name": "Post Checkout repository and submodules",
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        },
+        {
+          "id": 114442488607,
+          "run": 38130109466,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install project (not dev)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Install project (dev)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Build frontend",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Test Go wrapper child lifecycle",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Build binary",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Upload artifact: action_server/dist/final/",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Test (not integration)",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "number": 16,
+              "name": "Install Playwright Chromium for Runtime browser acceptance",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 17,
+              "name": "Test (integration)",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 18,
+              "name": "Retain Windows native startup diagnostics",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 19,
+              "name": "`inv lint`, potentially fixed with `inv pretty`",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 20,
+              "name": "`inv typecheck`",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 21,
+              "name": "`inv docs` with checking on files changed",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 39,
+              "name": "Post Setup node",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 40,
+              "name": "Post Setup go",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 41,
+              "name": "Post Install the latest version of uv",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 42,
+              "name": "Post Checkout repository and submodules",
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        },
+        {
+          "id": 114442488662,
+          "run": 38130109466,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Checkout repository and submodules",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Install the latest version of uv",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install devutils requirements",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install project (not dev)",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Install project (dev)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Setup go",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Setup node",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Build frontend",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Build OAuth2 config",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Test Go wrapper child lifecycle",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Build binary",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Upload artifact: action_server/dist/final/",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Test (not integration)",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "number": 16,
+              "name": "Install Playwright Chromium for Runtime browser acceptance",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 17,
+              "name": "Test (integration)",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 18,
+              "name": "Retain Windows native startup diagnostics",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 19,
+              "name": "`inv lint`, potentially fixed with `inv pretty`",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 20,
+              "name": "`inv typecheck`",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 21,
+              "name": "`inv docs` with checking on files changed",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 39,
+              "name": "Post Setup node",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 40,
+              "name": "Post Setup go",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 41,
+              "name": "Post Install the latest version of uv",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "number": 42,
+              "name": "Post Checkout repository and submodules",
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        }
+      ],
+      "all_source_check_bindings": [
+        {
+          "id": 114442488662,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114442488607,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114442488576,
+          "name": "build-wheels (macos-15)",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 114442488560,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114442488507,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114442488480,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114442488444,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114442488314,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114442488255,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114442488251,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114442488214,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114442488189,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 114442488188,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 114442488157,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114442488148,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 114442488103,
+          "name": "coverage",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "id": 114442488081,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "queued",
+          "conclusion": null
+        },
+        {
+          "id": 114442488073,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "in_progress",
+          "conclusion": null
+        }
+      ],
+      "run_binding": [
+        {
+          "run": 38130109518,
+          "workflow": ".github/workflows/ai-audit.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "completed",
+          "conclusion": "success",
+          "declared_jobs": 1,
+          "registered_jobs": 1,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38130109442,
+          "workflow": ".github/workflows/developer_toolkit.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "queued",
+          "conclusion": null,
+          "declared_jobs": 6,
+          "registered_jobs": 6,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38130109452,
+          "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "queued",
+          "conclusion": null,
+          "declared_jobs": 3,
+          "registered_jobs": 3,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38130109489,
+          "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "queued",
+          "conclusion": null,
+          "declared_jobs": 5,
+          "registered_jobs": 4,
+          "not_instantiated": 1
+        },
+        {
+          "run": 38130109484,
+          "workflow": ".github/workflows/coverage-gate.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "in_progress",
+          "conclusion": null,
+          "declared_jobs": 1,
+          "registered_jobs": 1,
+          "not_instantiated": 0
+        },
+        {
+          "run": 38130109466,
+          "workflow": ".github/workflows/actions_runtime_tests.yml",
+          "event": "pull_request",
+          "attempt": 1,
+          "status": "in_progress",
+          "conclusion": null,
+          "declared_jobs": 3,
+          "registered_jobs": 3,
+          "not_instantiated": 0
+        }
+      ],
+      "declared_exact_source_inventory": {
+        "path": "/workspace/engineering/pr305-pr306-current618-bounded-CI-review/pr306-exact-event-paths-declared-workflow-job-inventory.json",
+        "bytes": 58868,
+        "sha256": "001b2d3ac2d163fc18ffb20470fa98e41b15f195e153b519bd1c074069bc735d"
+      },
+      "independent_source_GO": {
+        "path": "/workspace/engineering/pr306-actual299-independent-review/independent-frozen-actual299-source-review.json",
+        "bytes": 9097,
+        "sha256": "acba8473e268c0c34a6c43d36be958bba999af8bf13e849106ca64d09ecc0d92"
+      },
+      "review_requested_threads": {
+        "submitted": 0,
+        "unresolved": 0,
+        "requested_reviewers": 0,
+        "requested_teams": 0
+      },
+      "closure_references": {
+        "complete_GraphQL_count": 0,
+        "no_more_pages": true
+      },
+      "statuses_source_synthetic": 0,
+      "synthetic_checks": 0,
+      "named_source_target_synthetic_ref_brackets_stable": true,
+      "actual_runner_checkout_qualification": "UNKNOWN_CURRENT_TASK: no original full job logs acquired; API source head, synthetic merge metadata/tree, default checkout declaration or successful checkout step does not authenticate actual runner SHA. Pending fullCI means no merge GO; no log/artifact/download authorization.",
+      "historical_scope": "Old776green metadata and source receipts remain historical; current exact source and accepted618 synthetic identities independently measured. No old native/current whole issue or release carry."
+    }
+  ],
+  "policy": {
+    "named_target_protected": false,
+    "branch_protection_metadata": {
+      "enabled": false,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "visible_rulesets": [],
+    "traditional_protection": "403 UNKNOWN Resource not accessible by integration",
+    "disposition": "Empty visible rulesets/disabled branch metadata do not settle inaccessible traditional policy or authorize bypass; root normal API remains subject to policy."
+  },
+  "observed_terminal_FAILURES": 0,
+  "no_logs_or_artifacts_acquired": true,
+  "no_poll_retry_cancel_source_tests_gate_installer_native_browser_provider_push_merge_mutation": true,
+  "closure_initial_CLI_error_disposition": "gh prview JSON field unsupported; retained private error and corrected ordinary read-only GraphQL query succeeds, both complete closures empty. No authentication failure inferred.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Accept existing exact event-specific592 lesson and9744 policy/named-ref paragraph in owning docs/skills/repository-operations.md; no duplicate source guide child.",
+    "Verified_reused_exact_deltas": [
+      {
+        "path": "/workspace/engineering/pr305-pr306-current618-bounded-CI-review/canonical-event-specific-push-paths-proposed.patch",
+        "bytes": 909,
+        "sha256": "592949e0da5d48236262b87f3d6568dbde0d78fc7cc92835a7e8a512c48f73aa"
+      },
+      {
+        "path": "/workspace/engineering/pr305-pr306-current618-bounded-CI-review/canonical-policy-and-snapshot-proposed.patch",
+        "bytes": 897,
+        "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+      }
+    ],
+    "Durable_learning_captured": "PR and normal push use different authenticated changed-file sets; derive each expected job matrix rather than requiring a historical auxiliary Copilot count. Preserve late Runtime publisher until needs finish and inaccessible traditional protection as UNKNOWN.",
+    "Evidence": "Current exact305 PR4paths/sourcepush pathset and306 PR7paths/sourcepush pathset parsed across25 YAML workflows; sixPR19jobs and zero eligible auxiliary push jobs match actualsix pull_request run namespaces each. Complete paginated check/run/job/status/review inventories, recursive full typed synthetic trees, closure GraphQL and stable named-ref brackets;403 admin policy error remains retained.",
+    "Stale_or_ambiguous_guidance_removed": "Existing accepted guidance already prevents treating historical20check cardinality as mandatory for every source/event, treating18 instantiated checks as final, or treating empty rulesets as complete policy. No novel behavior warrants cosmetic prose.",
+    "Remaining_uncertainty": "Both exact-current fullCI remain pending including late publisher, actual runner checkout/log qualification unavailable in this bounded metadata task, inaccessible traditional protection remains UNKNOWN. Whole99/84/native/healthyPG/private/backend/ChatGPT/provider/OAuth/release held."
+  },
+  "upstream_disposition": "none"
+}

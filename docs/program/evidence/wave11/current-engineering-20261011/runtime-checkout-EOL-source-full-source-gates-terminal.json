@@ -1,0 +1,27 @@
+{
+  "returncode": 0,
+  "elapsed_seconds": 152.2893511129987,
+  "source_head": "92e6deda5c252a503510c4b6261a86cb51f73cb6",
+  "source_tree": "8c7362e63c85a930ca2fe962ede9bc3ebb6ffe68",
+  "log": "/workspace/engineering/runtime-checkout-eol-source/full-source-gates.log",
+  "log_bytes": 314820,
+  "log_sha256": "3c1d0a12626cdc97af2e5eb98cadd31b5f8e798cfd9cdab480fe538404ede89b",
+  "argv": [
+    "env",
+    "PYTEST_XDIST_AUTO_NUM_WORKERS=2",
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/bin/rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/engineering/runtime-checkout-eol-source/full-source-gates-explicit-worker-bound-v2.py"
+  ],
+  "full_attempt_count": 1,
+  "retry": false
+}

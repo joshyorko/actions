@@ -1,0 +1,44 @@
+{
+  "status": "PASS_RECORDED_ARCHIVE_MEMBER_PRESERVATION",
+  "root_safe": {
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch15.json",
+    "bytes": 1962,
+    "sha256": "644b9afe894a710251bcf0780ac67bc4eb6c0a197f8d73656761ea3ddd80e879"
+  },
+  "private_index": {
+    "path": "/dev/shm/actions-completed-scratch-recovery-batch15/private-complete-inventory-and-recovery.json",
+    "bytes": 6273198,
+    "sha256": "c5514286d0fc7d9d4ceea4fd2cd95557b2acf1bff04bff249c97c868520d3020"
+  },
+  "script": {
+    "path": "/tmp/actions-capacity-recovery-batch15.py",
+    "bytes": 5244,
+    "sha256": "d8e04cf568d311aa8aa17ca030a41d12a4af85ad5b15ff7fdc09ec6c6eb8604d"
+  },
+  "terminal_log": {
+    "path": "/tmp/actions-capacity-recovery-batch15.log",
+    "bytes": 200,
+    "sha256": "4158a7b9cc838887195185ce895ad77f9a71fb949283c3294057310a1ad6178e"
+  },
+  "archive_bytes": 249431769,
+  "archive_sha256": "710835797c07bb6fcef9b8216e9f52150b38cc5daf5ded8233399702c5332548",
+  "members": 15082,
+  "kinds": {
+    "file": 11674,
+    "directory": 2943,
+    "symlink": 457,
+    "fifo": 8,
+    "hardlink_headers": 4
+  },
+  "internal_hardlink_payloads_verified": 4,
+  "logical_regular_bytes": 602563272,
+  "root_header_count_only": 1,
+  "member_bytes_SHA_size_mode_UID_GID_symlink_targets_exact": true,
+  "gzip_EOF_CRC_ISIZE": true,
+  "recycle_marker_True": true,
+  "expanded_namespace_absent": true,
+  "script_AST_batch14_exact_except_DEST_STAGE_NAMES": true,
+  "retained_script_index_log_order_preserved": "Archive verified/inventory stable/live-handle guard before exact removal in retained script. No independent historical process census replay.",
+  "stream_seconds": 10.881,
+  "upstream_disposition": "none"
+}

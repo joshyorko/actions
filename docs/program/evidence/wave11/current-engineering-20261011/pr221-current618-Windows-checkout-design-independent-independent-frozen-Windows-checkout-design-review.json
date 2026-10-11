@@ -1,0 +1,113 @@
+{
+  "schema": "current618-windows-checkout-source-design-independent-review/v1",
+  "status": "GO_DESIGN_ONLY_SOURCE_AND_CONTROLS_NOT_EXECUTED",
+  "observed_utc": "2026-10-11T10:25:53.373057+00:00",
+  "owner_final": {
+    "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/OWNERFINAL-windows-static-and-complete-checkout-diagnosis-v2.json",
+    "bytes": 23744,
+    "sha256": "0839a2ba6ee40b9b2e244f399496158e4775e5bbe1bd3fcc3d6056bbbf51c683"
+  },
+  "frozen_proposal": {
+    "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/bounded-complete-runtime-checkout-and-filter-proposal-v2.json",
+    "bytes": 78439,
+    "sha256": "8575d7293cbcc2dcb025dcf8403896b4a6242c7229467a723018225bf5601bf1"
+  },
+  "verified": {
+    "owner_refs": 24,
+    "original_artifact_refs": 24,
+    "source_snapshot_Git_bindings": 10,
+    "current_source": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "synthetic_builder": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+    "equal_tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+    "producer_not_relabeled_actual": true,
+    "sourcePython_inventory": 201,
+    "narrow_attributes": [
+      "action_server/src/**/*.py text eol=lf",
+      "action_server/frontend/apps/runtime/index.html text eol=lf",
+      "action_server/src/actions/server/README.md text eol=lf",
+      "action_server/src/actions/server/bin/.gitignore text eol=lf",
+      "action_server/src/actions/server/index.html text eol=lf",
+      "action_server/src/actions/server/templates/action-templates.yaml text eol=lf",
+      "action_server/src/actions/server/vendored_deps/README.md text eol=lf"
+    ],
+    "new_attributes_rewrite_source_blobs": false,
+    "two_filter_scope": [
+      {
+        "generator_class": "ActionServerTests",
+        "workflow": ".github/workflows/actions_runtime_tests.yml",
+        "declared_expanded_jobs": 3,
+        "current_attributes_only_excluded": true,
+        "proposed_single_PR_path_addition": ".gitattributes",
+        "events_matrix_needs_permissions_tags_registry_timeouts_assertions_must_remain_exact": true
+      },
+      {
+        "generator_class": "ActionServerPyPiRelease",
+        "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+        "declared_expanded_jobs": 5,
+        "current_attributes_only_excluded": true,
+        "proposed_single_PR_path_addition": ".gitattributes",
+        "events_matrix_needs_permissions_tags_registry_timeouts_assertions_must_remain_exact": true
+      }
+    ],
+    "CRLF_only_tracked_differences": 178,
+    "Python": 173,
+    "other_package_text": 5,
+    "generated_static_module_additional_non_CRLF_only_difference": true,
+    "decoded_Windows_CR": 13,
+    "CRLF": 12,
+    "lone_CR": 1,
+    "all_CR_removed_Linux_equal_diagnostic_only": true,
+    "outer_both_generated_modules_CR": 0,
+    "original_builder_logs_bound": [
+      114433293243,
+      114433293117,
+      114433293201
+    ],
+    "original_checkout_config_input_compiler_intermediate": "UNAVAILABLE/UNKNOWN"
+  },
+  "required_meaningful_future_controls": {
+    "real_temporary_Git_index_checkout_not_fnmatch_for_attributes": true,
+    "complete_selected_body_SHA_byte_equality": {
+      "Python": 201,
+      "nonPython": 5,
+      "HTML": 1
+    },
+    "autocrlf_TRUE_RED_and_narrow7rules_TRUE_FALSE_GREEN": "NOT_RUN",
+    "seven_removed_rule_poison_states": "NOT_RUN",
+    "binaryZIP_bat_intentional_CRLF_testfixtures_otherpackages_preserved": "REQUIRED_NOT_RUN",
+    "exact_gitattributes_only_two_workflows_community_integration_select_wrongbranch_reject": "REQUIRED_NOT_RUN",
+    "six_unrelated_generated_outputs_and_other_generator_AST_exact": "REQUIRED_AFTER_SOURCE_AUTHORIZATION",
+    "source_following_hosted_Windows_distribution_bytes_requalification": "REQUIRED_NOT_RUN"
+  },
+  "actual_temporary_Git_execution": "NOT_RUN confirmed by owner; existing private-index check-attr merely observed current text=auto/eol unset; no measured checkout GREEN exists",
+  "diagnosis_scope": "13CR localization strongly supports an HTML scaffold input representation hypothesis. Source contract proposal is testable, but missing original checkout input/config/compiler intermediate prevents proving historical cause or compiler/semantic equivalence. No normalization of actual installed/wheel/frontend bytes, RECORD or private metadata is proposed.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "Exact_delta": {
+      "bytes": 1212,
+      "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/canonical-generated-static-and-complete-checkout-scope-proposed-v2.patch",
+      "sha256": "1306a314811448c8090b4aa2e77340e676bbba397ceb6c7ee0477b908cb9b2bf"
+    },
+    "Durable_learning": "LF Python module output and exact embedded frontend asset identity are independent; input evidence is required for checkout-versus-compiler causal attribution. Include packaged nonPython source text and affected workflow trigger filters in checkout-byte qualification.",
+    "Evidence": "Independent AST read_bytes/repr/LF module writer; original Windows/Linux module and decodedasset hashes/counts/scaffold mapping; current173Python+5nonPython CRLF-only mismatches plus generated-static raw difference; exact two workflow current path filters exclude attributes-only changes.",
+    "Stale_or_ambiguous_guidance_removed": "An LF module writer or CR-removal comparison must not be mistaken for embedded-content normalization or semantic equivalence. Distinguish173Python fromfive othertext bodies; attributes-only changes currently exclude both Runtime builder/test workflows.",
+    "Remaining_uncertainty": "Original checkout input/config and compiler intermediate were not retained.",
+    "Disposition": "Accept exact16-line1306 proposal for root integration; no cosmetic independent guide delta."
+  },
+  "authority": "Independent design GO only; no source implementation/control run/actual consumer or Windows source gate authorized by this review. Root owns separate source authorization and frozen implementation review.",
+  "remaining_HOLDs": [
+    "Windows raw frontend body difference",
+    "Windows unavailable Unix executable mode",
+    "OAuth empty generated entries/sourceauthority",
+    "macOS/aggregate/full7/platform consumers",
+    "private/native/registry/release/whole graph"
+  ],
+  "not_performed": [
+    "Source/index/branch writes",
+    "Tests/tempGit checkout/poison/gateway/installer executions",
+    "Downloads or live CI polling",
+    "Consumer/native/browser/provider run",
+    "Release/merge/push/issue closure"
+  ],
+  "upstream_disposition": "none"
+}

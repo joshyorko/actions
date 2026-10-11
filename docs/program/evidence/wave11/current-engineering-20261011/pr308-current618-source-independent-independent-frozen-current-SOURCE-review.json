@@ -1,0 +1,183 @@
+{
+  "schema": "independent-frozen-SOURCE-review/v1",
+  "verdict": "GO_SOURCE_FOR_ROOT_SEPARATE_CONTROL_RELEASE_ONLY_NO_PUSH",
+  "head": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+  "tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb",
+  "ordered_parents": [
+    "b673ddd761ba4ccd68e9baa8faaa9ab666df794e",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "existing_branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "owner_announced_final_SOURCE": {
+    "path": "/workspace/engineering/pr308-actual299-source-refresh/SOURCE-frozen-owner-final-checkpoint.json",
+    "bytes": 110017,
+    "sha256": "de231c011ee899c8e3ce6c6de4f2448136350758231f3f873f760d30600f4678"
+  },
+  "exact_immutable_constructor": {
+    "path": "/workspace/engineering/pr308-actual299-source-refresh/freeze-SOURCE-final-immutable.py",
+    "bytes": 8659,
+    "sha256": "da5a7fb47f4f8719ab825e351b764c2423164d2109f88a2efcd9f46d661d268f"
+  },
+  "independent_complete_proof": {
+    "path": "/workspace/engineering/pr308-actual299-independent-source-review/independent-complete-SOURCE-union-gates-and-retained-byte-proof.json",
+    "bytes": 90450,
+    "sha256": "0ae65c00ce8ec43a922735876af7b1c4310ad4b540aa5d35fd880aa6b268261d"
+  },
+  "findings": [],
+  "source_acceptance": {
+    "all1419_parent_paths_typed_mode_blobs_working_bytes_execbits_prepost_preserved": true,
+    "only_difference_from_f0a100_automatic_union": "Exact approved stale two-branch guide paragraph replaced by the three actually allowed reviewed branches; no other source body/mode change.",
+    "whole_original_verifier_and_test_AST_bytes_guard19_helpers_and_negative_contract_exact_oldC": true,
+    "all_old_C_three_control_paths_generator_workflow_developer_bytes_modes_pins7eb_retained": true,
+    "all147_unique_frozen_refs_and72_distinct_original_refs_and3_original_independent_GO_refs_rehashed": true,
+    "original_31SOURCE_16CONTROL_22actual_plus3checkpoint_direct_bindings_preserved": true,
+    "original_actual_ZIP_seven_unique_members_SHA_sizes_CRC_recorded_mode_and_private0600_storage_exact": true,
+    "recorded_gates": {
+      "Doctor": "PASS",
+      "Bootstrap": "Verified reuse30 exact ownpreparedinputs/fiveactualconcreteorigins+prefixes; no new installer",
+      "owned_pinned_ignored_RCC": {
+        "path": "/workspace/engineering/pr308-actual299-source-refresh/owned-pinned-ignored-Rcc-before-gates.json",
+        "bytes": 300,
+        "sha256": "4e6c4e07dc871e0d45bb46e100a7c85ec58e55490dbf88e0a96cdcee1e5499e4"
+      },
+      "Toolkit": 96,
+      "scoped": {
+        "passed": 133,
+        "existing_actual_RCC_skipped": 1,
+        "integration_deselected": 3,
+        "warnings": 4,
+        "seconds": 7.86
+      },
+      "configured_full_static": "Ruffcheck/format311/Isort PASS",
+      "configured_typecheck_files": 347,
+      "derived_actual_generated_TARGETS_outputs": 8,
+      "all30_tracked_GitHub_YAML_dependabot_bytes_parse": "PASS",
+      "full_Runtime_source": {
+        "single_authorized_SOURCE_full": true,
+        "exit_code": 0,
+        "passed": 1240,
+        "skipped": 13,
+        "warnings": 15,
+        "seconds": 137.04,
+        "workers": 2,
+        "outer_timeout_seconds": 600,
+        "kill_grace_seconds": 10,
+        "RCC": "SUCCESS",
+        "head": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+        "tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb",
+        "private_original_log": {
+          "path": "/workspace/engineering/pr308-actual299-source-refresh/SOURCE-full-configured-runtime-source.log",
+          "bytes": 320721,
+          "sha256": "3a53c22ef6c55fcb0712afe853b481e1c0dd8a730201d6916e453f81426eaf3b"
+        },
+        "private_original_log_mode": "0o600",
+        "scope": "Configured invoke test-not-integration only; native2510/provider/private/release unqualified.",
+        "cleanup_scope": "Gateway exit0/sourcePASS is not universal descendant reaping/native cleanup proof."
+      },
+      "post_full_own30_plus5actualorigins": "PASS exact light and immediatepre; no installer"
+    },
+    "original1192_native_metadata_helper0444_browser_Node_frontend_raw18_frozen50_bytes_prepost_exact": true,
+    "own30_prepared_inputs_five_current_origins_configs_and_owned_RCC0711_exact": true,
+    "immutable_constructor_current_fixed_HEAD_tree_no_overwrite_guard_and_body_SHA_verified_not_reexecuted": true,
+    "initial_guessed_developer_path_KeyError_before_commit_gates_retained_v2_named_authoritative_C_path_and_stagedv3_PASS_preserved": true
+  },
+  "current_native_producer_inventory": {
+    "current": 274,
+    "old": 268,
+    "matching": 261,
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "qualification": "UNQUALIFIED"
+  },
+  "selected_five_tests_separate_old_native_exact": 5,
+  "SOURCE_CONTROL_boundary": {
+    "current_SOURCE": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+    "current_SOURCE_tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb",
+    "current_target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+    "old_CONTROL": "b673ddd761ba4ccd68e9baa8faaa9ab666df794e",
+    "old_SOURCE_pin": "7eb5bce946750555ab009f77592862920a901506",
+    "new_CONTROL_authored": false,
+    "next_authorized_action": "ROOT separately releases existing writer to author current SOURCE commit/tree repin as CONTROL; independent CONTROL review required before any normal branch push. This GO is not release to execute actual RCC, native/browser/provider, push or merge."
+  },
+  "historical_actual_scope": {
+    "authoritative_frozen_receipt": {
+      "path": "/workspace/engineering/pr308-current776-fresh-threecase-owned/frozen-original-threecase-proof.json",
+      "bytes": 19720,
+      "sha256": "16b60ef82e907388a768642e17db2134b5dfaea966cfc7045aa1715879ca38f4"
+    },
+    "source_S": {
+      "commit": "7eb5bce946750555ab009f77592862920a901506",
+      "tree": "3ff76037779763d0461ff3a755b900c9ed83dcf8"
+    },
+    "control_C": {
+      "commit": "b673ddd761ba4ccd68e9baa8faaa9ab666df794e",
+      "tree": "56d108fcdb5d43f7f27a8f2554fec51b702519f4",
+      "sole_parent": "7eb5bce946750555ab009f77592862920a901506"
+    },
+    "target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "run": 38124233445,
+    "job": 114425127596,
+    "artifact": 11697165172,
+    "all7_original_members_hash_length_mode_and_retained0600_exact": true,
+    "raw_lifecycle_publication_stagedconsumer_and_actualtimestamps_lastgood_recovery_natural_lifecycle_unchanged": true,
+    "scope_limits_preserved": [
+      "Original successful threecase scopes only; full fresh CI snapshot has7pending of26",
+      "PolicyHTTP403UNKNOWN remainsHOLD, not bypass",
+      "NOT_RUN public negativeCLI2510 is not positiveparentguard qualification",
+      "No private134135/provider metadata/native/currentcoldinstall/fullwheel/publication/release acceptance",
+      "Nine source sample is not complete native producer qualification; accepted302adapter differs old92498",
+      "Old302d642/a346/54a receipts remain separate despite sampledcode equality"
+    ],
+    "new_current618_source_actual_gate": "HOLD; old776 receipt does not qualify current SOURCE or new CONTROL"
+  },
+  "remaining_HOLDs": [
+    "NewCONTROL exact current SOURCE pins, independent CONTROL source/contract review and root normal existingbranch push",
+    "Fresh current SOURCE/CONTROL original threecase paired reports/source/checkout/timestamps/lifecycle evidence",
+    "Complete current exact synthetic merge hostedCI/event-specific jobs/statuses/reviews/threads/normal policy; old776 CI and actual proof cannot carry",
+    "Positive candidate2510 actual execution, private01f/fafb/frozenv6/full639 profile/native union/full134/backend/platform/healthyPG/Workspace/ChatGPT/provider/OAuth/publication/tag/release",
+    "Current274 producer differs old268 by seven changed/six added, so old92498 native UNQUALIFIED; unchanged selected tests do not qualify producer",
+    "Gateway/sourcePASS is not universal descendant/native cleanup"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Accept exact current SOURCE imports in docs/skills/repository-operations.md and docs/skills/provenance-observability.md plus the source-backed owning-guide three-branch correction.",
+    "Exact_current_both_parent_imports": [
+      {
+        "path": "/workspace/engineering/pr308-actual299-independent-source-review/canonical-current-source-imported-repository-operations.patch",
+        "bytes": 10807,
+        "sha256": "3b1c844832bddb774744948a6c6182d67debb0b8f893f29fac9aff520b81ac33"
+      },
+      {
+        "path": "/workspace/engineering/pr308-actual299-independent-source-review/canonical-current-source-imported-provenance-observability.patch",
+        "bytes": 3834,
+        "sha256": "7330b295929c287d4ea82f956634d4a475d21098a197262cc1555068ca12f3a3"
+      }
+    ],
+    "Exact_sole_novel_correction": {
+      "path": "/workspace/engineering/pr308-actual299-independent-source-review/canonical-reviewed-three-branch-correction.patch",
+      "bytes": 1215,
+      "sha256": "b800238a6c4d331ef5beafc7322ed2f553b6bb1c02bfb394ebda08ceafe1c44b"
+    },
+    "Approved_prior_proposal_SHA256": "cd97355e9506350c286532607b87c5ce4ff492073a78fb72336517fe8164b5cd",
+    "Durable_learning_captured": "Guide branch permissions must match the retained generated control: original opt-in branch and both reviewed PR branches under the same eight path filters. SOURCE freeze/review precedes separate CONTROL repin/review and actual current receipts; an old pinned control or passing negative-candidate pytest cannot qualify a new SOURCE or positive candidate2510. Preserve persisted grant/reader/migration source imports with full producer limits.",
+    "Evidence": "Exact b800238a1215-byte replacement from deterministicauto tree; actualunchanged generatedworkflow has exactlythree listedbranches/eight paths, existing source/control method/test byteidentity; acceptedcd973 proposal; current3b1c8448 ops/7330b295 provenance imports and all retained parent additions;1419 complete source prepost/147refs/seven originalmember checks/source1240PASS13SKIP19guardcontrols/scoped133/native274delta.",
+    "Stale_or_ambiguous_guidance_removed": "Replaced stale two-branch guide list that omitted existing fix/rcc-candidate-wheel-identities-20261010. No generator permission expansion or cosmetic child. Old7eb/b673/776 threecase lifecycle proof stays historical; preserved negative candidate assertions remain negative acceptance.",
+    "Remaining_uncertainty": "NewCONTROL and currentactualthreecase/fullCI/policy still required; positive2510/private/native/backend/fullrelease gates remainheld. Raw original oldactual evidence remains bounded and does not reconstruct unavailable private01f."
+  },
+  "review_actions": "Read-only Git/source/AST/YAML/original privateZIP/member hash and log-summary checks plus owned safe outputs only. No source/index/ref mutation, test/gateway/installer/native/browser/provider/actual/download/push/merge execution.",
+  "upstream_disposition": "none"
+}

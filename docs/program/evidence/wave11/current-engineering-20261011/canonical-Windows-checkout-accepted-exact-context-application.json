@@ -1,0 +1,12 @@
+{
+  "status": "EXACT16_ACCEPTED_LINES_RELOCATED_TO_EXISTING_WHEEL_CONTENT_SCOPE",
+  "original_patch": {
+    "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/canonical-generated-static-and-complete-checkout-scope-proposed-v2.patch",
+    "bytes": 1212,
+    "sha256": "1306a314811448c8090b4aa2e77340e676bbba397ceb6c7ee0477b908cb9b2bf"
+  },
+  "first_apply": "Zero-context patch applied at EOF with whitespace warning; no source/test/gate changed",
+  "correction": "Exact16addedlines moved before existing platform-artifact paragraph; no invented text or frozen patch edit",
+  "independent_design_review": "ec4d2136997aa225c5a4f674d0bfbc16054248e598491cd720e0529448d4b684",
+  "upstream_disposition": "none"
+}

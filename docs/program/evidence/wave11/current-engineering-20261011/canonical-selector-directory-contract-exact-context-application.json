@@ -1,0 +1,12 @@
+{
+  "status": "EXACT8_ACCEPTED_LINES_INSERTED_AT_UNIQUE_PROVENANCE_SCOPE_ANCHOR",
+  "original_patch": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-independent-preexecution-review/canonical-selector-directory-contract-proposed.patch",
+    "bytes": 685,
+    "sha256": "fb9c9604f6f9dd32259d9a133eadafba076acfd92546ab0ccce2a080a918591c"
+  },
+  "first_apply_check_and_apply": "Both refused single-context hunk despite identical unique text; no edits before exact insertion",
+  "independent_owner_review": "c61398f72766de55af65d5817a23e831ce9d8b5f97fdc298f8f7521fe89004eb",
+  "privatepayloads": "none",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,14 @@
+{
+  "status": "EXACT_ACCEPTED_WORKER_BOUND_PATCH_APPLIED_TO_CANONICAL_GUIDANCE",
+  "patch": {
+    "path": "/workspace/engineering/runtime-checkout-eol-independent-light-review/canonical-bounded-configured-xdist-worker-proposed.patch",
+    "bytes": 823,
+    "sha256": "a113e8c4001305664c781dccc7c5d62a5f0de929df0dc9e09b9c2f41f0d87434"
+  },
+  "canonical": "docs/skills/repository-operations.md",
+  "accepted_independent_review": "697bfa3f95a6e3d3adbcef1784904c97da743ecb06441ac7782ea42d81210669",
+  "exact_added_lines": 6,
+  "prior50_added_lines_retained": true,
+  "full_execution_separate": "root-one-explicit-two-worker-full-execution-authorization.json",
+  "git_diff_check": "PASS"
+}

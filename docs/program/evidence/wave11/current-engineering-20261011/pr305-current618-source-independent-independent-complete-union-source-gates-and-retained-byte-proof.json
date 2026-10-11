@@ -1,0 +1,776 @@
+{
+  "head": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+  "tree": "2bd99392d53f3df8be0569368450df1c933d3a3a",
+  "ordered_parents": [
+    "6390270cd07851448b7b325c81c98dc11a1d3a17",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "clean": true,
+  "full_typed_parent_leaf_counts": [
+    1410,
+    1419
+  ],
+  "all1420_union_mode_blob_working_bytes_and_FS_executable_bits_exact": true,
+  "novel_combined_path": [
+    "docs/skills/repository-operations.md"
+  ],
+  "whole_github_and_all_production_route_implementations_exact_actual618": true,
+  "original3_Canvas_fixture_whole_body_mode_AST_exact1e9": true,
+  "original39_source_actual_and_RED_evidence_rehashed": true,
+  "initial_expected28_measured39_count_failure_and_early_construction_commit_retained": true,
+  "corrected39_reference_verification_and_fresh_gates_required_before_sourceGO": true,
+  "existing_root_verification_status_lesson_reused_exact_in_owning_root_canonical_checkpoint_not_source305": true,
+  "producer_inventory": {
+    "old_native_count": 268,
+    "current_count": 274,
+    "match": 261,
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "status": "UNQUALIFIED_OLD_NATIVE92498"
+  },
+  "five_selected_tests_typed_separate_exact_both_parents_and_native": true,
+  "nine_RCC_samples_exact_d642_actual618": true,
+  "prepared30_inputs_five_own_prefixes_and_sourceorigins_verified": true,
+  "recorded_source_gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "30exact preparedinputs/five concrete ownprefix+moduleorigins; no install",
+    "Toolkit": 96,
+    "Canvas": {
+      "passed": 47,
+      "integration_deselected": 4,
+      "skip": 0
+    },
+    "current_RCC_source": {
+      "passed": 112,
+      "actual_optin_skipped": 1,
+      "integration_deselected": 3
+    },
+    "configured_lint": "Ruff/format/Isort PASS",
+    "Mypy": 348,
+    "gen8_roundtrip": "PASS",
+    "workflow_plus_dependabot": 26,
+    "all_YAML": 30,
+    "full_source": {
+      "passed": 1266,
+      "skipped": 12,
+      "warnings": 15,
+      "seconds": 134.9,
+      "workers": 2,
+      "one_authorized_attempt": true,
+      "outer_bound": "600s TERM +10s KILL",
+      "gateway": "CanonicalRCC18.19.3 -> own Runtime Poetry -> invoke test-not-integration"
+    }
+  },
+  "original1192_native_modes_bytes_symlinks_exact": true,
+  "helpers0444_browser_Node_frontend_raw18_frozen50_original_before_after_exact": true,
+  "V5_actual_historical_source": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+  "native_producer_historical": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "nested_verified_binding_count": 136,
+  "nested_verified_bindings": [
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/ordinary-union-and-original-Canvas-retention-proof.json",
+      "bytes": 461953,
+      "sha256": "f0682b79b918f747eef436a5ac65961518b9742545b1e585ef1cda4f677e3998"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/accepted-nine-RCC-source-sample.json",
+      "bytes": 3031,
+      "sha256": "a16413e68569f8a1caa760c24e00cc9d12dba322bb7bbe43c677c0646069ea34"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/light-ready-pre-full-checkpoint.json",
+      "bytes": 17424,
+      "sha256": "d07f3de86715831dd633b786b8985a5f73678ee58daa80206b00b3a3e6aaa090"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/root-released-final-pre-full-checkpoint.json",
+      "bytes": 595,
+      "sha256": "e5ff511c9d5eb3eed27a1a53ea2acb606ac62dc1fd2fd59a01c53a00fbe9948e"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/committed-union-pre-full.json",
+      "bytes": 291366,
+      "sha256": "967bea12655fc1e111d3c89af35eaf8fff5fd6b44c60bc6e1ceaa91835ba1897"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/retained-native-helper-browser-and-V5-proof.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/retained-native-helper-browser-and-V5-proof-after.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/raw18-frozen50-Node-frontend-retained-before.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/raw18-frozen50-Node-frontend-retained-after.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr305-pr306-current6181-bounded-CI-review/independent-complete-bounded-current6181-CI-HOLD.json",
+      "bytes": 30204,
+      "sha256": "4ff38555cdcd979c5d61eb73eaeac481da32d317a8cb62cb275f1b7798f4703a"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/frozen-source-receipt.json",
+      "bytes": 15012,
+      "sha256": "8385812a98dcd387122a2fda39290e3609b278b41bd875b52e43de34ec87bce9"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-independent-review/independent-frozen-source-review.json",
+      "bytes": 6329,
+      "sha256": "3c3524ca1338e5bef2c4a28cccf0aebf3565f984e207fd5154d46b53330ed92c"
+    },
+    {
+      "path": "/workspace/engineering/pr299-actual-integration-independent-review/independent-actual299-integration-readback.json",
+      "bytes": 6973,
+      "sha256": "06a652e23b77573ab5cfe9a8837b46de42909efd50908dcea031d7311a27c9ba"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/initial-inspector-reference-count-diagnostic.json",
+      "bytes": 617,
+      "sha256": "4d4ec9eacaca5b03a8891f95ac303f73da25e1f20f5b2ae2dc2fb347f38824f3"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/initial-inspector-before-count-correction.py",
+      "bytes": 4345,
+      "sha256": "bd9406c8273020a9cb15099cb5b78288eda5f8c4beba2b0bc18b822bc22d8677"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/exact-both-parent-canonical-import.patch",
+      "bytes": 13633,
+      "sha256": "2b23510070526fd8672cfcc83e8ac474a6980d870fdc3fef462fadb7abd193a2"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/reused-root-canonical-verification-status-lesson.md",
+      "bytes": 470,
+      "sha256": "cce330dd0562324ae64133fe393574607cf399e0e9ce53c0182effffc594fbac"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/Bootstrap-reuse.log",
+      "bytes": 6702,
+      "sha256": "0397b0c6d8049ef65dc2c8593b8e626f7e19da770c76e1aa62731c67db0d37c9"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/Canvas-scoped.log",
+      "bytes": 3997,
+      "sha256": "1e7dcedbdab67fef726edf8720f015a35023446d6092638f2d684f30fbf7f4e9"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/Doctor.log",
+      "bytes": 13486,
+      "sha256": "a7dc88fe58b9f76855ce6c17a2c85ecb2b43e890a728d8cb7ff408bb5e22a6ec"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/PR305.private.json",
+      "bytes": 28507,
+      "sha256": "21252309a67c5a33a6ea9d018ea854ceb15e6f8a80d9a04e22d6dc101d9def95"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/Toolkit.log",
+      "bytes": 14344,
+      "sha256": "b39782bb4a7fa78187081422c21494d7eaeac047b98d9ccb6f9e660809f10a0b"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/accepted-nine-RCC-source-sample.json",
+      "bytes": 3031,
+      "sha256": "a16413e68569f8a1caa760c24e00cc9d12dba322bb7bbe43c677c0646069ea34"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/committed-union-pre-full.json",
+      "bytes": 291366,
+      "sha256": "967bea12655fc1e111d3c89af35eaf8fff5fd6b44c60bc6e1ceaa91835ba1897"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/current-RCC-and-static.log",
+      "bytes": 6989,
+      "sha256": "e839392c5f1a7460d53e73277e8aa58f34d1be710b8d5ba24829a6b37e55519d"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/exact-both-parent-canonical-import.patch",
+      "bytes": 13633,
+      "sha256": "2b23510070526fd8672cfcc83e8ac474a6980d870fdc3fef462fadb7abd193a2"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/freeze-final-source.py",
+      "bytes": 6850,
+      "sha256": "c092a7f6ce5ec540b275913639d3efacec9ac16ed03c16e54055bd0402e3b6ff"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/full-configured-source.log",
+      "bytes": 326832,
+      "sha256": "fb164a444e6a2073dbecd7ee29d1316e4956b6a6de04baf637768c62b83e8895"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "d03086cf1c1c65efb2ec389ee3153695c6d8902c2c972e4838fc4ad8ce6d834b"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/generator-roundtrip.log",
+      "bytes": 4565,
+      "sha256": "cd8cf17890847b2b9b43a70fb4d6bfe23258efca845979b9965b5b4ab3d305fe"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/generator-roundtrip.py",
+      "bytes": 1800,
+      "sha256": "482bfdf6c566a135205c19a17c48d42d7bf2bfa4e27750f0c963f46b666df4e6"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/initial-inspector-before-count-correction.py",
+      "bytes": 4345,
+      "sha256": "bd9406c8273020a9cb15099cb5b78288eda5f8c4beba2b0bc18b822bc22d8677"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/initial-inspector-reference-count-diagnostic.json",
+      "bytes": 617,
+      "sha256": "4d4ec9eacaca5b03a8891f95ac303f73da25e1f20f5b2ae2dc2fb347f38824f3"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/light-ready-pre-full-checkpoint.json",
+      "bytes": 17424,
+      "sha256": "d07f3de86715831dd633b786b8985a5f73678ee58daa80206b00b3a3e6aaa090"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/named_source.private.json",
+      "bytes": 468,
+      "sha256": "446717b059cdfef52513e9d52a3b5a9638606cdadec5e0e62ac28471fdc09453"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/named_target.private.json",
+      "bytes": 448,
+      "sha256": "316aab6b935e68ab876f9943e173a74dcbe9484c1be5465b143a32c9c780d5c0"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/ordinary-union-and-original-Canvas-retention-proof.json",
+      "bytes": 461953,
+      "sha256": "f0682b79b918f747eef436a5ac65961518b9742545b1e585ef1cda4f677e3998"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/origin-action_server.json",
+      "bytes": 283,
+      "sha256": "96eb60a559a313d478c17f52e8cc42e71588b1ae33089ba1ad3c77650a967b26"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "0866a5c2bc030a15822b06983f3fb43b1400b20f4add57537aaec59da1b8c4d1"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/origin-actions.json",
+      "bytes": 218,
+      "sha256": "6b00bd4e70a69f4484a9d44c3447039354a9906fef5be41feff2fb284a73a549"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "f9c9bb61ea486fd667ff37367ef8656aa374af2f4e3484569f4d4cfab28125cd"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "24808585e8fef1faae9b7130b4656ee211c50597fe0e0e3d2adbb8b058f37296"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6428,
+      "sha256": "75db58a41f5b65cb2bf6a801ec43ddf961e7913c2a951bf875abadf1066be1f3"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/pre-source-existing305-checkpoint.json",
+      "bytes": 605,
+      "sha256": "7370b10dfc73ccc766c34913f69c2a4f71c3eb4501b739bc8ac6b63f170aa4ae"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/raw18-frozen50-Node-frontend-retained-after.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/raw18-frozen50-Node-frontend-retained-before.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/raw18-frozen50-Node-frontend-retained-root-released-pre.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/retained-native-helper-browser-and-V5-proof-after.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/retained-native-helper-browser-and-V5-proof-root-released-pre.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/retained-native-helper-browser-and-V5-proof.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/reused-root-canonical-verification-status-lesson.md",
+      "bytes": 470,
+      "sha256": "cce330dd0562324ae64133fe393574607cf399e0e9ce53c0182effffc594fbac"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/root-released-final-pre-full-checkpoint.json",
+      "bytes": 595,
+      "sha256": "e5ff511c9d5eb3eed27a1a53ea2acb606ac62dc1fd2fd59a01c53a00fbe9948e"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/run-Canvas-scoped.py",
+      "bytes": 316,
+      "sha256": "5959d9ef264ee534142d67b5929ccd296109e6a1949e691af6d3c1da373b4352"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/run-current-RCC-static.py",
+      "bytes": 353,
+      "sha256": "b4fbe9823b1de83af76d504f1daa68cb5c78eb6f436566c4a8334f5a0aa2ea40"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/run-full-source.py",
+      "bytes": 85,
+      "sha256": "5c2a1fd7500b33eecef9b9efdf6d234cfccd80c77230cf0344878d94f34a8763"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/verify-own-prepared-bootstrap.py",
+      "bytes": 2693,
+      "sha256": "b36e6889b35d1e1bfaf65eacb819618bac98fc70791576be96a459440609d770"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/verify-retained-actual-inputs-after.py",
+      "bytes": 3588,
+      "sha256": "f043d4d1fffbc92144b1dc5f0f9b0b5b965fb0aa34d05c6904971efdec17aa71"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/verify-retained-actual-inputs-before.py",
+      "bytes": 3582,
+      "sha256": "e75836fd9d5cfd9ee6008b91511b52384289ae836406459cea3eb504abcf434d"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/verify-retained-actual-inputs-root-released-pre.py",
+      "bytes": 3600,
+      "sha256": "e96157cf384b314efb91e227811191d681fed17a73791c3a4bb25e3cc2943939"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/verify-retained-raw-and-driver-after.py",
+      "bytes": 2523,
+      "sha256": "d9bacb2fc7b7bf7a7f6c67b16695f1360112460dbd0532ae208f3c6250ef8095"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/verify-retained-raw-and-driver-root-released-pre.py",
+      "bytes": 2535,
+      "sha256": "e75959eee138395afb2701c037bde4916d847aa628597d5b82b281f8b42bdd9a"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/verify-retained-raw-and-driver.py",
+      "bytes": 2524,
+      "sha256": "bc0851d03aee806c64a5998f92d0c732b9c3c74ad009a76e4b6809862acea26f"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/verify-union-before-commit.py",
+      "bytes": 4345,
+      "sha256": "075a70ee878d88af10cf7a19f8cac005d91b68a9dd3c8190c407f8d50d762a44"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/Bootstrap-reuse.log",
+      "bytes": 6701,
+      "sha256": "956bafd74c2f2b3376dd0108421e7791e28dbff8f2660377c6e2a175eb155da2"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/Canvas-scoped.log",
+      "bytes": 3996,
+      "sha256": "df91522d03b1aaeb0090d068a3f52b7943c439c07c8c6f07b7b47473eae50902"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/accepted302-nine-source-preservation.json",
+      "bytes": 3327,
+      "sha256": "5fb4d5b840e581c15a273e13b5e5b9b5aed15dc225b79d7ce6946c1404794ecb"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/current-RCC-and-static.log",
+      "bytes": 6989,
+      "sha256": "fbebde22dd87a6bd943eaaf41a9cf580f277ea5b68c86f7c8b61587681969238"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/doctor.log",
+      "bytes": 13487,
+      "sha256": "7d6f7f4f5123a4cec6cab75edb360b305c651210407f2f42a2c215361d854ac5"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/exact-imported-canonical-delta.patch",
+      "bytes": 10332,
+      "sha256": "5b2d4d953814d9bb4287847b95e1f92a63690b7a7b6174e0206c132bd02ba36e"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/freeze-current-source.py",
+      "bytes": 8757,
+      "sha256": "698b3d47231b6e5829d5d862cc7fa0a83ccbab8c830b38cd904fa14408dd16ef"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/full-configured-source.log",
+      "bytes": 314460,
+      "sha256": "0c96d83ab885d5041bc6bca04dc1c260909a95ec649ffcfdbebd8fbdc0f8464e"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "d03086cf1c1c65efb2ec389ee3153695c6d8902c2c972e4838fc4ad8ce6d834b"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/generator-roundtrip.log",
+      "bytes": 4564,
+      "sha256": "da17b074aae9466937d20404c0269b03d393c7b83cd1e49598d210cdba6973fb"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/generator-roundtrip.py",
+      "bytes": 1800,
+      "sha256": "a9c80dd192c05e0db9799d16483b2503176400e84ec6ed85602a0a2cfacbdefc"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/historical-V1-through-V5-retained-identities.json",
+      "bytes": 1672,
+      "sha256": "582a55b09f37e9d21a2206cca552db67fb8f77a818199b928f174d26bdf47232"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/light-complete-pre-full-checkpoint.json",
+      "bytes": 187916,
+      "sha256": "36341c2b7885793bec50f2d1f58bbec17fcb5b463652b3519c21c300b79aadf2"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/ordinary-union-and-producer-proof.json",
+      "bytes": 257732,
+      "sha256": "dc3cecbfdc4f891f5ca21d25c5910b68bc573545299e47a721a03a140dcd0f42"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/origin-action_server.json",
+      "bytes": 283,
+      "sha256": "96eb60a559a313d478c17f52e8cc42e71588b1ae33089ba1ad3c77650a967b26"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "0866a5c2bc030a15822b06983f3fb43b1400b20f4add57537aaec59da1b8c4d1"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/origin-actions.json",
+      "bytes": 218,
+      "sha256": "6b00bd4e70a69f4484a9d44c3447039354a9906fef5be41feff2fb284a73a549"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "f9c9bb61ea486fd667ff37367ef8656aa374af2f4e3484569f4d4cfab28125cd"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "24808585e8fef1faae9b7130b4656ee211c50597fe0e0e3d2adbb8b058f37296"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/original-V5-retention-scope-proof.json",
+      "bytes": 534,
+      "sha256": "bf08ddc6a82d00894ab036af6dc8f770b54259c0567db7dcff5e3ffabd378a60"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6428,
+      "sha256": "75db58a41f5b65cb2bf6a801ec43ddf961e7913c2a951bf875abadf1066be1f3"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/pre-source-existing305-checkpoint.json",
+      "bytes": 189209,
+      "sha256": "434e6fd7cda4281c995715bae590119a96f08f2cf8bb9bce3505879a664f4137"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/raw18-frozen50-Node-frontend-retained-after.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/raw18-frozen50-Node-frontend-retained-before.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/retained-after.log",
+      "bytes": 3584,
+      "sha256": "badb6b276b0ec0d65aeed212bb00a16cfef62a7b8b00221333f8b8c52e9537a1"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/retained-before.log",
+      "bytes": 3584,
+      "sha256": "0b624c6832600447a158e1b715001c442b796b99bd30eb709cdd505537e04302"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/retained-native-helper-browser-and-V5-proof-after.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/retained-native-helper-browser-and-V5-proof.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/root-released-final-pre-full-checkpoint.json",
+      "bytes": 423,
+      "sha256": "bdae78e423c403f2d1ece6c8a5b287f92b58a0c8864623d198cf01d6d400c2fc"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/run-Canvas-scoped.py",
+      "bytes": 316,
+      "sha256": "5959d9ef264ee534142d67b5929ccd296109e6a1949e691af6d3c1da373b4352"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/run-current-RCC-static.py",
+      "bytes": 353,
+      "sha256": "b4fbe9823b1de83af76d504f1daa68cb5c78eb6f436566c4a8334f5a0aa2ea40"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/run-full-source.py",
+      "bytes": 85,
+      "sha256": "5c2a1fd7500b33eecef9b9efdf6d234cfccd80c77230cf0344878d94f34a8763"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/toolkit.log",
+      "bytes": 14346,
+      "sha256": "cc2564fcf8a4adbf348b513806e2fd20554339aa30ddc74a88b82be62c8d28bd"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/verify-own-prepared-bootstrap.py",
+      "bytes": 2693,
+      "sha256": "37ebd3cbf2c8e7233381a3ab117093cd302981e9c1a584fc73b32be46c020115"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/verify-retained-actual-inputs-after.py",
+      "bytes": 3588,
+      "sha256": "047d0577cd14be0e9f2d01ba569aa77d02480383139e2800f371809ff00e2cf1"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/verify-retained-actual-inputs-before.py",
+      "bytes": 3582,
+      "sha256": "848ee77bbd7455deba5621d97b1a7f891b2a1ee22b33f931478754dfa74a1dd0"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/verify-retained-raw-and-driver-after.py",
+      "bytes": 2523,
+      "sha256": "94749393e3ae1c7f85add07f7e1dd147e4337aae8de9af467336731f49a8016e"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/verify-retained-raw-and-driver.py",
+      "bytes": 2524,
+      "sha256": "ba064b64be871edc4c87439cceed0ddea41c55cc380cb0c8d800ae55557a0a5f"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-manifest.json",
+      "bytes": 3162,
+      "sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json",
+      "bytes": 255076,
+      "sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf"
+    },
+    {
+      "path": "/workspace/engineering/pr310/action_server/go-wrapper/assets/assets.zip",
+      "bytes": 73556451,
+      "sha256": "c85862c9b4dba354953c02cbb80e520052f07cb6d506600bf4a07d2f755135e0"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/dist/action-server/action-server",
+      "bytes": 17633792,
+      "sha256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb"
+    },
+    {
+      "path": "/workspace/engineering/pr282/action_server/tests/action_server_tests/mcp/test_canvas_query_template.py",
+      "bytes": 51505,
+      "sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/test_canvas_query_template.py",
+      "bytes": 51505,
+      "sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e"
+    },
+    {
+      "path": "/workspace/engineering/pr305/action_server/scripts/write_native_artifact_manifest.py",
+      "bytes": 8499,
+      "sha256": "aaa6855bc6c0bccc41933703fbdb2e58d9f25a118a651d254a7dce34e5fd113b"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/write_native_artifact_manifest.py",
+      "bytes": 8499,
+      "sha256": "aaa6855bc6c0bccc41933703fbdb2e58d9f25a118a651d254a7dce34e5fd113b"
+    },
+    {
+      "path": "/workspace/engineering/pr310/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "bytes": 74274,
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "bytes": 74274,
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    {
+      "path": "/workspace/engineering/pr311/action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "bytes": 13009,
+      "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/native_startup_diagnostics.py",
+      "bytes": 13009,
+      "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c"
+    },
+    {
+      "path": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "bytes": 196975952,
+      "sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-passed-checkpoint-corrected.json",
+      "bytes": 33914,
+      "sha256": "28b2af71d1ac7b5dd0bbd7bf7518845a2c3d208c6700fd102914cffaf449dca3"
+    },
+    {
+      "path": "/workspace/engineering/pr305-v5-independent-runner-review/independent-actual-v5-review.json",
+      "bytes": 8129,
+      "sha256": "1848613d69513e20039cee94efe960a3609fff451a582c7a33552c8fa4df1108"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v5.json",
+      "bytes": 28665,
+      "sha256": "f915a178adfa23833fe7a2e047e9c0b98f995fdd4b95730e1bb522e5f48fe7ee"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/actual-admission.json",
+      "bytes": 1602,
+      "sha256": "68c70c22fcc4f1307127c520387843973bc2b9c8de7d68977677eb087b624aa2"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/bridge-receipt.json",
+      "bytes": 5146,
+      "sha256": "6d48e6bf0fc06e23f4c2dc4c86d19e7012ec0b8022d02ff0a6050221a4efce51"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-1-stderr.log",
+      "bytes": 192,
+      "sha256": "31268753892853abc32ea1862c718e2d5bf63d563acba1ef293d63cb70c7e59d"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-1-stdout.log",
+      "bytes": 790,
+      "sha256": "ea2bd1be095c21b78670840af1e9c33af51fdbe8ebb29dfe4e796b246cee691f"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-2-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-2-stdout.log",
+      "bytes": 40,
+      "sha256": "d75fc32089eefc512b00ce4d792475a993ba56dcb863b971a4c13bcd17b3629f"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-3-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-3-stdout.log",
+      "bytes": 11643,
+      "sha256": "6d85a8593dfffa4df876442b02c2b74235cb32fe2845d8223bbbd176ea1d6d82"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-receipts.json",
+      "bytes": 2162,
+      "sha256": "2c1051abeaaa84d5db41e3104f444def972995dab2c690a74488208771555171"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/junit.xml",
+      "bytes": 408,
+      "sha256": "3653795fed112f88a2057193ce556a658273ff5f9261a0b92e763d7da037838c"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/outer-cleanup.json",
+      "bytes": 518,
+      "sha256": "658e58dbf4f5668c826b572cd2789a186f7a391bf66c2a33b4a89c8439a26fb9"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/preflight.json",
+      "bytes": 4534,
+      "sha256": "439baab0be7d2c1e9a3c57470c4600ea419813fa3a47fc38e60b0a067b52ab16"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/runtime-cleanup.json",
+      "bytes": 699,
+      "sha256": "118af76bb047bc1c3b501f7c3e2493aa8a95248259503ea64ec37aa5cdde85a2"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/runtime-start-final-snapshot.json",
+      "bytes": 809,
+      "sha256": "dfb02f47cf9e71696d6c9a5358ca3a2a704dc967e81a44f110d1c3dfed67d90d"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/startup-observations.json",
+      "bytes": 2681,
+      "sha256": "a40928cd75de4445bba5fa7a5db6bc3c22f8d50e5e8114234cfab57452176fc3"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/worker-stderr.log",
+      "bytes": 50685,
+      "sha256": "8927fe288bc98fb8ff814594a846d0389d63d9ff9fe0adc96b022f351bbed9fe"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/worker-stdout.log",
+      "bytes": 13506,
+      "sha256": "cd96d29f128a931625e1674b0b722ef887116b917e2353a50788708464cfa5d1"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-gateway.log",
+      "bytes": 3701,
+      "sha256": "498cc4e745130de220195d993c5364019f4a9b9261d94c8add085fe8b97cf1bf"
+    }
+  ],
+  "canonical_exact_both_parent_import_patch": {
+    "path": "/workspace/engineering/pr305-actual618-independent-review/canonical-reviewed-imported-delta.patch",
+    "bytes": 13633,
+    "sha256": "2b23510070526fd8672cfcc83e8ac474a6980d870fdc3fef462fadb7abd193a2"
+  },
+  "both_parent_added_canonical_lines_preserved": true,
+  "no_source_gateway_test_installer_native_browser_provider_download_push_merge_execution": true,
+  "original39_reference_set_exact_previous776_owner_checkpoint": true,
+  "recorded_count_failure_expected28_actual39_preserved_with_no_premature_GO": true,
+  "verification_constructor_current_HEAD_tree_parents_clean_all1420_prepost_and39_refs_asserted": true
+}

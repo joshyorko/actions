@@ -1,0 +1,9 @@
+{
+  "source_proposal": "/workspace/engineering/pr308-accepted-public-guard-independent-control-review/canonical-three-reviewed-control-branches-proposed.patch",
+  "source_proposal_sha256": "cd97355e9506350c286532607b87c5ce4ff492073a78fb72336517fe8164b5cd",
+  "old_exact": "the original opt-in branch\n`test/rcc-provider-rollback-hosted-20261010` and the existing reviewed PR branch\n`fix/rcc-published-artifact-details-20261010`, subject to the retained path filter.\n",
+  "new_exact": "the original opt-in branch `test/rcc-provider-rollback-hosted-20261010` and the\nexisting reviewed PR branches `fix/rcc-published-artifact-details-20261010` and\n`fix/rcc-candidate-wheel-identities-20261010`, subject to the retained path filter.\n",
+  "status": "APPLIED_ONLY_EXISTING_REVIEWED_THREE_BRANCH_LIST_NO_GENERATOR_TEST_WORKFLOW_CHANGE",
+  "source_evidence": "Existing b673 generator and emitted workflow tested branch extension with55 metadata controls; current Source refresh keeps controls unchanged until independent SourceGO.",
+  "upstream_disposition": "none"
+}

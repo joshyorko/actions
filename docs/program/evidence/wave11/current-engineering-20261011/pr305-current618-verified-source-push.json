@@ -1,0 +1,65 @@
+{
+  "pr": 305,
+  "worktree": "/workspace/engineering/pr305",
+  "branch": "test/canvas-runtime-cache-isolation-20261010",
+  "base_branch": "integration/community-release-20261008",
+  "target": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "head": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+  "tree": "2bd99392d53f3df8be0569368450df1c933d3a3a",
+  "ordered_parents": [
+    "6390270cd07851448b7b325c81c98dc11a1d3a17",
+    "6181b044c75de35386f1ae30e71725398b6a7feb"
+  ],
+  "existing_remote_before": "6390270cd07851448b7b325c81c98dc11a1d3a17",
+  "output": "/workspace/engineering/pr305-current618-verified-source-push.json",
+  "bindings": [
+    {
+      "path": "/workspace/engineering/pr305-actual618-refresh/frozen-source-receipt.json",
+      "bytes": 22954,
+      "sha256": "406c50a1360b107fab2a8dbe50a4bfb5ccc1651a45da6189558820f3b0906944"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual618-independent-review/independent-frozen-current618-source-review.json",
+      "bytes": 7161,
+      "sha256": "91118b6f1c952b7ee0df2cd6b8b8b174261ee373106ca08ecd130acfe06617c4"
+    }
+  ],
+  "source_gates": "1266PASS12SKIP15WARN;Toolkit96;type348;Canvas47;RCC112",
+  "before_API": {
+    "head": "6390270cd07851448b7b325c81c98dc11a1d3a17",
+    "head_ref": "test/canvas-runtime-cache-isolation-20261010",
+    "base": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "base_ref": "integration/community-release-20261008",
+    "draft": true,
+    "state": "open"
+  },
+  "authenticated_after_reads": [
+    {
+      "head": "6390270cd07851448b7b325c81c98dc11a1d3a17",
+      "head_ref": "test/canvas-runtime-cache-isolation-20261010",
+      "base": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "base_ref": "integration/community-release-20261008",
+      "draft": true,
+      "state": "open"
+    },
+    {
+      "head": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+      "head_ref": "test/canvas-runtime-cache-isolation-20261010",
+      "base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "base_ref": "integration/community-release-20261008",
+      "draft": true,
+      "state": "open"
+    }
+  ],
+  "named_remote_after": "519a0beb7451cb6e4410f0bee18c826fc493086e",
+  "authorization_binding": {
+    "path": "/workspace/engineering/pr305-current618-verified-source-push-prepush-authorization.json",
+    "bytes": 1510,
+    "sha256": "97be6e54e55789079f612c015ae4247243459d1e669d0deb4fad2c89cc5b17d1"
+  },
+  "status": "NORMAL_EXISTING_PR_BRANCH_SOURCE_PUSH_AUTHENTICATED",
+  "fresh_current_CI": "REQUIRED",
+  "native_private_whole_issue_release": "HOLD",
+  "no_force_no_retry": true,
+  "upstream_disposition": "none"
+}

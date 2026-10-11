@@ -1,0 +1,19 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -1007,6 +1007,16 @@
+ the seven-artifact byte inventory; it does not grant tag or publication
+ provenance. A run's API head can differ from its actual synthetic merge
+ checkout, so record both instead of attributing the build to the API head.
++
++A platform artifact containing only Linux wheels does not satisfy the
++seven-artifact release inventory. A selected cp312 consumer has a distinct
++nonpublishing scope; retain its original ZIP, wheel, `METADATA`, `RECORD` and
++build identities while cross-platform inventory, tag and upload gates remain
++pending. After integration, compare the actual merge tree and selected tracked
++payload bytes with the build's synthetic tree. Tree equality does not turn that
++earlier synthetic checkout into an actual integration build. Derive the Python
++member count from the new wheel bytes even when it equals an earlier count,
++and retain generated-input authority and content holds separately.
+ 
+ Stage only the selected host cp312 wheel when calling
+ `verify_published_runtime_floor.py`: the complete release inventory contains

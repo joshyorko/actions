@@ -1,0 +1,118 @@
+{
+  "actual": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+  "ordered_parents": [
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "3155fc55ea7d47afbc547fddc963b5860462924b"
+  ],
+  "source": "3155fc55ea7d47afbc547fddc963b5860462924b",
+  "tested_synthetic": "600d1b213fcfe6f94f341cbe4bca4472bd002e4c",
+  "live_API_merged_closed_and_named_source_target_exact": true,
+  "all1419_complete_typed_mode_blob_path_entries_actual_source_tested_identical": true,
+  "synthetic_binding": "Original authenticated final04 synthetic Gitcommit600d names identical complete tree99ac/ordered7763155; synthetic commit object absent locally, so compare actual/source99ac full tree bytes and bind accepted synthetic through its original authenticated tree identity without Git fetch.",
+  "raw_git_ls_tree_SHA256": "cade8528d375ded3a410bf6145eca28f3b74f64f7efe2d0bcd4aa58d8ec0de10",
+  "typed_inventory_SHA256": "46dedef1e2170e7b2c63e876899337552b34d7bc6841055a2b000b9588f0ecd7",
+  "root_typed_inventory_declared_hash": "cade8528d375ded3a410bf6145eca28f3b74f64f7efe2d0bcd4aa58d8ec0de10",
+  "independent_final_source_and_fullCI_acceptance": {
+    "path": "/workspace/engineering/pr299-current776-CI-admission-review/final-successor-04/independent-current776-final-scoped-admission-GO.json",
+    "bytes": 69950,
+    "sha256": "178ab95cf19bbe6e473d6f81610ada618db0b2add440657e87d7c6768262a7c0"
+  },
+  "root_normal_ready_expected_source_merge_authorization": {
+    "path": "/workspace/engineering/pr299-root-final-normal-merge-authorization.json",
+    "bytes": 1215,
+    "sha256": "c480f7546ddea034c89a243e3f2d61598833ac123da15d8db9d7468b8621922a"
+  },
+  "root_after_ready20_successful_checks_exact_same_ids": true,
+  "verified_nested_bindings": [
+    {
+      "path": "/workspace/engineering/pr299-actual-merge-authenticated.json",
+      "bytes": 26641,
+      "sha256": "b68b31f42c3f53d3d63c0dbd3c2b56b00692486da39ea832d51c31f03530a7de"
+    },
+    {
+      "path": "/workspace/engineering/pr299-actual-commit-authenticated.json",
+      "bytes": 2744,
+      "sha256": "21b88da82a3439a76673ddd4b200872a11edc233bd12234b591c7af65d73f2a3"
+    },
+    {
+      "path": "/workspace/engineering/pr299-actual776-independent-review/independent-frozen-source-review.json",
+      "bytes": 6360,
+      "sha256": "40b79b4acb2909634c6c6cf66f17b5404f8d9b2ca722627c0e8db3127b8269d2"
+    },
+    {
+      "path": "/workspace/engineering/pr299-current776-CI-admission-review/declared-current-workflow-and-job-inventory.json",
+      "bytes": 51617,
+      "sha256": "16f804cb80b24c03ef32a8b0604482506c80f040313ade98193246536dcbb39b"
+    },
+    {
+      "path": "/workspace/engineering/pr299-current776-CI-admission-review/bounded-successor-03/independent-current776-bounded-successor-HOLD.json",
+      "bytes": 11930,
+      "sha256": "46e95d43585e2b2f2d33fc7949fa521bd1f2995845fbe8ec3a6d1f45b6677f9c"
+    },
+    {
+      "path": "/workspace/engineering/pr299-current776-CI-admission-review/final-successor-04/private-authenticated-api-census.json",
+      "bytes": 495123,
+      "sha256": "90ea37301513cf2bedc42693a04f4d658834cfeb6813ec2944eaffb0a8b30ca3"
+    },
+    {
+      "path": "/workspace/engineering/pr299-current776-CI-admission-review/final-successor-04/safe-Windows-original-checkout-and-terminal-census.json",
+      "bytes": 37917,
+      "sha256": "0054daa53c85ad65589b662cfaaddbbc1715317b55d10f295d70fb27e9931927"
+    },
+    {
+      "path": "/workspace/engineering/pr299-current776-CI-admission-review/final-successor-04/canonical-verbose-pytest-terminal-census-proposed.patch",
+      "bytes": 836,
+      "sha256": "b774083c0e21e360209d962aa95054bbb8fee4cacc5fa7dff1c0c89b2b5dad53"
+    },
+    {
+      "path": "/workspace/engineering/pr299-current776-CI-admission-review/canonical-existing-job-trigger-policy-lessons.md",
+      "bytes": 2764,
+      "sha256": "4054b1d8bc396bd9a4c1054393cfe8cb3566638213ef9e04b34fc7ea1d42a7a4"
+    },
+    {
+      "path": "/workspace/engineering/pr299-root-after-ready-authenticated.json",
+      "bytes": 25662,
+      "sha256": "69b41b445e6705420ad058af79d663e8bcde735793bfda04817439c7889ed503"
+    },
+    {
+      "path": "/workspace/engineering/pr299-root-after-ready-checks-authenticated.json",
+      "bytes": 72096,
+      "sha256": "aaea1fa9b839d11a42266e2f874b45236bf88d37880ac1e7d0960546f374822c"
+    }
+  ],
+  "independent_private_live_API": {
+    "path": "/workspace/engineering/pr299-actual-integration-independent-review/private-independent-live-API-readback.json",
+    "bytes": 47767,
+    "sha256": "5759ff92ea1e1a05b6058d998050652ccace55a079a5f57d835cca06361b4565"
+  },
+  "normal_policy_limitation": {
+    "named_branch_protected": false,
+    "named_branch_protection_enabled": false,
+    "branch_required_status_metadata": {
+      "enforcement_level": "off",
+      "contexts": [],
+      "checks": []
+    },
+    "visible_rulesets": [],
+    "traditional_endpoint": "403 Resource not accessible by integration: administrative endpoint unavailable, preserved limitation; no inferred bypass or changed repository policy."
+  },
+  "actual_windows_scope": {
+    "path": "/workspace/engineering/pr299-current776-CI-admission-review/final-successor-04/safe-Windows-original-checkout-and-terminal-census.json",
+    "bytes": 37917,
+    "sha256": "0054daa53c85ad65589b662cfaaddbbc1715317b55d10f295d70fb27e9931927"
+  },
+  "retained_HOLDs": [
+    "Historical9cb first-startup resource collision timeout and original311/306 failures keep their own source tuples and cause/cleanup limitations; no causal fix claim.",
+    "Current274 producer binding differs from92498 by seven original/current production changes and six added299 paths: old native assets remain UNQUALIFIED. Runtime Windows integration PASS is distinct from authenticated native artifact or installed-consumer qualification.",
+    "All19 Windows integration skips are unverified including PostgreSQL, explicit candidate/public RCC consumers and browser/native fixtures.",
+    "Private full134/135/frozen-v6, production provider/identity, full storage lifecycle, Canvas/ChatGPT, Runtime221 publication and full campaign issue acceptance remain HOLD.",
+    "#300 source refresh/retarget waits ACTUAL accepted #299 merge readback; no dependency work was mutated here."
+  ],
+  "canonical_verified_existing_lessons": {
+    "path": "/workspace/engineering/pr299-actual-integration-independent-review/canonical-verified-existing-actual-merge-and-dependent-refresh-lessons.md",
+    "bytes": 1422,
+    "sha256": "167cc9f7e18a3d066e6e0c07e84e5e7275ffa864c1533903cd8bbbb4d594786c"
+  },
+  "actions": "Independent read-only API/Git/receipt hashing only; no source/check/rerun/log acquisition/download/ready/merge/ref mutations"
+}

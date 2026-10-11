@@ -1,0 +1,160 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index a30c956e..f4c5023f 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -534,10 +534,19 @@ Python 3.12. The contract failed with the unpinned host interpreter and passed
+ with RCC Python 3.12. Record that interpreter's version in the receipt; do not
+ install host tooling or falsify version discovery to make this boundary pass.
+ 
++Verify prepared package environments through each package's Poetry process,
++binding `sys.prefix` to its own `.venv` and a file-backed module to its checkout's
++`src`. A namespace package can have `__file__ = None`; this leaves its file
++identity unavailable rather than proving a stale environment. Inspect a concrete
++submodule such as `devutils.invoke_utils` instead. Run dependency-sensitive
++preflights as separate checked calls or stop the command sequence on failure.
++Preserve failed probes and named successors, and distinguish observations made
++after a gate starts from evidence checked before that gate.
++
+ When running Action Server source tests from a detached checkout with a prepared
+ Runtime virtualenv, put that checkout's `action_server/src`, `actions/src`,
+ `actions-http-helper/src`, and `devutils/src` first on `PYTHONPATH`, and confirm
+-the imported modules' `__file__` paths point into the checkout. The Runtime
++the imported file-backed modules' `__file__` paths point into the checkout. The Runtime
+ virtualenv can contain an older installed `actions` package that otherwise
+ shadows the checkout's Core source. The Action Server test fixture also
+ requires the package-pinned RCC binary at
+@@ -2241,9 +2250,9 @@ branch permissions unchanged. Record a new hosted execution for the new tuple
+ and require full CI on its exact tested merge. Production input changes also
+ require new frozen-artifact qualification; compare the retained producer
+ inventory without excluding changed files. The control permits only pushes to
+-the original opt-in branch
+-`test/rcc-provider-rollback-hosted-20261010` and the existing reviewed PR branch
+-`fix/rcc-published-artifact-details-20261010`, subject to the retained path filter.
++the original opt-in branch `test/rcc-provider-rollback-hosted-20261010` and the
++existing reviewed PR branches `fix/rcc-published-artifact-details-20261010` and
++`fix/rcc-candidate-wheel-identities-20261010`, subject to the retained path filter.
+ Local service-free control tests establish admission behavior, not an actual
+ RCC artifact execution. Record a new hosted run before claiming acceptance of
+ this candidate, and retain earlier receipts under their original identities.
+@@ -3464,6 +3473,108 @@ jsdom wall-clock measurement cannot establish browser frame rate: hosted run
+ 38056869588 measured 34.13ms against the old 32ms assertion without a rendering
+ correctness failure. Controlled browser performance remains a separate proof.
+ 
++## Common Run-output migration and verification
++
++Refreshing the common Run-output branch preserves its service and regression
++controls but creates a new source union requiring fresh CI. The retained Windows
++failure at `9cb61c52` occurred on the resource catalog test's **first** native
++startup, before rollback/collision assertions: readiness exhausted its 90-second
++budget while the RCC variables call took 89.28 seconds. RCC 18.19.3 source
++`4148c2b7` reports elapsed time **since the previous progress mark**; the complete
++16-mark series sums to 89.259 seconds. Neither the final 15.687-second interval
++nor the 66.491-second mark identifies total preparation time or UV install time.
++The separate 20-second cleanup reported an incomplete condition without enough
++evidence to identify a survivor, reader, or observation failure.
++
++The original `1151a0c8` Windows diagnostic branch retained six first-startup
++readiness failures; only two test nodes sampled owned RCC CPU/IO at 80 and 88
++seconds. Their activity proves those observed processes were doing work, not
++which preparation phase caused the timeout. No raw progress series was retained
++for that run. Preserve both failures and their source identities: a later source
++refresh or another branch's result does not establish their cause or waive the
++90/20-second readiness/cleanup boundaries. Actual returned cleanup fields and
++delivered-stream timing require separately reviewed observations.
++
++The private common Run-output service depends on migration 15, stacked after
++the MCP ownership and routing-history migrations 13/14. Register every model
++through `get_all_model_classes()` in fixtures that exercise Run reads or updates;
++partial custom schemas must include the normalized Run models. Missing tables
++fail closed and must not trigger a legacy authorization fallback. Upgrading
++creates no synthetic pins or grants for historical Runs and preserves their
++status, result, inputs and artifact directory.
++
++Legacy Run API tests that replace the in-memory `RunsState` must implement
++`is_scoped_run(run_id)` explicitly. A legacy-only fixture may return false only
++for the known Run it models as having no persisted `RunPin`; keep the production
++check intact so a real scoped Run cannot fall through to a legacy cache or
++durable artifact manifest. The durable-binding regression should still restart
++the storage object, recover legacy Run metadata, and verify the existing binary
++Range response.
++Historical fixtures built with the current `create_db()` must remove tables and
++indexes owned by later migrations before backdating the migration version.
++Changing only the version leaves future schema behind and can make forward
++migration repeat existing indexes. Preserve populated legacy-output archive
++assertions while restoring the intended historical schema boundary.
++
++Use independent processes to verify claim and conflicting terminal publication,
++and a real connection commit failure to verify rollback. SQLite must acquire
++its writer before reading the Run pin: a deferred read followed by a write can
++deadlock two interprocess lock upgrades even with an in-process Python lock.
++Run claim/resolve/publication uses the existing installation counter lock first
++on SQLite and Workspace row locks on PostgreSQL. Registration and numbered
++admission both take Counter before Workspace on either backend; reversing
++those two locks creates a PostgreSQL registration/admission deadlock cycle. Lease
++and retention milliseconds use decimal TEXT with BIGINT casts rather than the
++facade's PostgreSQL INTEGER mapping. PostgreSQL behavior requires an actual
++backend receipt; SQLite results do not establish it.
++
++The service rejects mutable raw-bind `Database.verbose` diagnostics instead of
++disabling global logging. It sanitizes SQL body errors before the Database
++transaction logs rollback, while preserving nonsensitive commit exception
++types. Verify both actual caplog and exception traceback with private-input or
++result sentinels. This is a narrow SQL-bind boundary, not general output or
++provider diagnostic redaction. Linux-only filesystem proofs skip elsewhere,
++while configured Linux/Windows/macOS type checks still apply. Required flags
++and callable capabilities use strict getters with no weaker fallback.
++
++Before exposing scoped Runs, audit every legacy SQL read, cache update, websocket
++subscription, request-ID lookup, artifact/manifest fallback and analytics query.
++Those paths exclude pins; the private resolver supplies current scoped access
++checks. Keep provider roots outside legacy/static serving, and do not treat the
++existing global API token or a typed reference as a Workspace grant. Native,
++public authenticated transport, HTTP Range/HEAD, Windows provider and complete
++multi-adapter lifecycle acceptance need their own measured gates.
++
++The private resolver authorizes the actor and acquires the provider reader inside
++the Workspace transaction lock, then yields the stream after that transaction
++exits. Revocation denies later resolutions; it does not recall an already
++authorized open reader. The revocation regression replaces `provider.open` with
++a failure sentinel to prove that a denied actor, wrong Workspace or revoked grant
++never reaches the provider. Keep reader-acquisition authorization separate from
++active-stream revocation; a durable handle or successful restart is not evidence
++for the latter.
++
++
++A stage failure after provider sealing must retain actual seal metadata in the
++aborted output record before any cleanup. The private provider's transient owned
++seal includes issuer and object identity evidence; only ref/digest/size enter the
++DB. Discard validates that ownership, actual integrity and the current no-follow
++name binding. A byte-identical replacement or another provider's seal must not
++be deleted. Missing owned objects allow idempotent discard. Metadata commitment
++and deletion are separate: abort commit uncertainty skips deletion, and discard
++failure leaves a measured receipt for later reconciliation while preserving the
++original failure. Successful publication or another referencing record prevents
++discard. No protective metadata is erased after cleanup.
++
++The filesystem root requires an exclusive trusted writer for each generated
++object name. POSIX does not provide atomic inode-conditional unlink against a
++hostile same-euid writer after the final identity check; do not claim that
++protection. A crash between sealing and recording the abort, a malformed seal
++or a DB outage can still leave an unindexed orphan. General reconciliation/GC,
++crash-safe provider staging and automatic external-effect retry remain separate
++gates. Verify real cancel-during-stage, rolled-back seal writes, ambiguous
++commits, cleanup failures and successful-publication/replay safety.
++
+ ### Live pull-request base identity
+ 
+ Reconcile the complete exact-head check-run inventory, commit statuses and
+@@ -3482,6 +3593,12 @@ the prospective merge's ordered parents and complete tree. Bind carried-forward
+ CI evidence to the checkout actually recorded in job logs; neither the PR
+ payload's base SHA nor a mergeable flag alone establishes the current tested union.
+ 
++For an ordinary stacked-branch refresh whose only conflict is an append to
++canonical guidance, retain each parent's evidence-backed lesson. Compare every
++non-documentation blob in the resolved tree with the ordered parents before
++committing; a docs-only conflict does not establish source-tree identity or
++transfer old test results to the new union.
++
+ Before refreshing a dependent pull request, confirm that its dependency's
+ accepted source is present in the current target ref. An older dependency commit
+ in the PR branch or a previously reviewed local union is not sufficient. Refresh

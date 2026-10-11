@@ -1,0 +1,9 @@
+{
+  "exit_code": 0,
+  "completed_at_utc_epoch": 1791711984.7694464,
+  "single_authorized_full": true,
+  "workers": 2,
+  "outer_timeout_seconds": 600,
+  "kill_after_seconds": 10,
+  "source_head": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade"
+}

@@ -1,0 +1,20 @@
+{
+  "status": "NORMAL_EXISTING_PR_BRANCH_SOURCE_PUSH_AUTHENTICATED",
+  "head": "7840057a8b055576d11d339d8c0fbb738927a491",
+  "base": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "branch": "feat/run-output-transport-20261010",
+  "draft": true,
+  "tree": "10e09d88027ca4fea512ff06c57efaab95755ffb",
+  "previous_receipt": {
+    "path": "/workspace/engineering/pr300-current618-verified-source-push.json",
+    "sha256": "b843f206ba96b3782faf617ffbff29021dc18f1c7e1513bf16e3c396e60df488",
+    "bytes": 1936
+  },
+  "original_authenticated_cached_states_retained": true,
+  "named_remote_head": "7840057a8b055576d11d339d8c0fbb738927a491",
+  "retarget_before_push": true,
+  "no_second_push": true,
+  "fresh_current_CI": "REQUIRED",
+  "native_private_release": "HOLD",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,442 @@
+{
+  "schema": "independent-data-only-complete-seven-distribution-integrity/v1",
+  "owner_final": {
+    "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/OWNERFINAL-current618-complete-original-distribution-integrity.json",
+    "bytes": 24118,
+    "sha256": "75757b7de4162b6e8afd739fd983b99325cd18ea2a368a279d4f233197c4314a"
+  },
+  "actual_source": "6181b044c75de35386f1ae30e71725398b6a7feb",
+  "actual_source_tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+  "actual_ordered_parents": [
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "3155fc55ea7d47afbc547fddc963b5860462924b"
+  ],
+  "original_producer": {
+    "checkout": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+    "ordered_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "6181b044c75de35386f1ae30e71725398b6a7feb"
+    ],
+    "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+    "run": 38126987514,
+    "identity_scope": "Synthetic build e766 remains distinct from actual integration618 despite fulltree equality"
+  },
+  "bindings": {
+    "new": 17,
+    "prior": 217,
+    "all_hash_size_exact": true
+  },
+  "original_archive_count": {
+    "new": 2,
+    "prior": 3,
+    "total": 5,
+    "aggregate_outer_members": 8,
+    "distributions": 7,
+    "manifest": 1
+  },
+  "all_outer_and_inner_ZIP_paths_unique_safe_bounded_CRC_bytes_complete": true,
+  "all_seven_platform_distributions_byteequal_aggregate": true,
+  "six_wheel_slots": [
+    {
+      "filename": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "platform": "Linux",
+      "ABI": "cp312",
+      "bytes": 14180835,
+      "sha256": "90a785d81ca1158ab58a3feb0eabc1b3b3dabb6e395f2f503337c2cf53e986d6",
+      "metadata": {
+        "name": "actions-runtime",
+        "version": "1.0.3",
+        "dependency_count": 25,
+        "source_python_dependencies_exact": true,
+        "sha256": "2d57f93a2328220f8b851bca8014d4805f7a29c8b41533562e923f6e3ceceda0"
+      },
+      "RECORD_files": 221,
+      "RECORD_hashes": 220,
+      "Python_members": 202,
+      "nonPython_members": 15,
+      "entrypoints_exact_source": true,
+      "tags_exact_filename_and_source_matrix": true,
+      "source_comparison": {
+        "tracked": 215,
+        "body_equal": 215,
+        "CRLF_only_Python": 0,
+        "CRLF_only_other_text": 0,
+        "generated_static_additional_difference": 0,
+        "recorded_full_Unix_permission_equal": 215,
+        "Unix_permission_unavailable": 0
+      },
+      "generated_OAuth": {
+        "entries": 2,
+        "category": "BOTH_EMPTY_STRINGS",
+        "module_sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe",
+        "authority": "HOLD"
+      },
+      "generated_static_decoded_CR": 0,
+      "consumer_native_execution": "NOT_RUN"
+    },
+    {
+      "filename": "actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "platform": "Linux",
+      "ABI": "cp313",
+      "bytes": 14180835,
+      "sha256": "2f856d2f27dba472aa84e954245f63ecd879e102751a300eb0fd0b361486cdfd",
+      "metadata": {
+        "name": "actions-runtime",
+        "version": "1.0.3",
+        "dependency_count": 25,
+        "source_python_dependencies_exact": true,
+        "sha256": "2d57f93a2328220f8b851bca8014d4805f7a29c8b41533562e923f6e3ceceda0"
+      },
+      "RECORD_files": 221,
+      "RECORD_hashes": 220,
+      "Python_members": 202,
+      "nonPython_members": 15,
+      "entrypoints_exact_source": true,
+      "tags_exact_filename_and_source_matrix": true,
+      "source_comparison": {
+        "tracked": 215,
+        "body_equal": 215,
+        "CRLF_only_Python": 0,
+        "CRLF_only_other_text": 0,
+        "generated_static_additional_difference": 0,
+        "recorded_full_Unix_permission_equal": 215,
+        "Unix_permission_unavailable": 0
+      },
+      "generated_OAuth": {
+        "entries": 2,
+        "category": "BOTH_EMPTY_STRINGS",
+        "module_sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe",
+        "authority": "HOLD"
+      },
+      "generated_static_decoded_CR": 0,
+      "consumer_native_execution": "NOT_RUN"
+    },
+    {
+      "filename": "actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+      "platform": "Windows",
+      "ABI": "cp312",
+      "bytes": 11634753,
+      "sha256": "4be1bd325a3d5061d2c3aa7c1293caeedc65f46944613c0b623ac96c7081d883",
+      "metadata": {
+        "name": "actions-runtime",
+        "version": "1.0.3",
+        "dependency_count": 25,
+        "source_python_dependencies_exact": true,
+        "sha256": "2d57f93a2328220f8b851bca8014d4805f7a29c8b41533562e923f6e3ceceda0"
+      },
+      "RECORD_files": 221,
+      "RECORD_hashes": 220,
+      "Python_members": 202,
+      "nonPython_members": 15,
+      "entrypoints_exact_source": true,
+      "tags_exact_filename_and_source_matrix": true,
+      "source_comparison": {
+        "tracked": 215,
+        "body_equal": 36,
+        "CRLF_only_Python": 173,
+        "CRLF_only_other_text": 5,
+        "generated_static_additional_difference": 1,
+        "recorded_full_Unix_permission_equal": 0,
+        "Unix_permission_unavailable": 215
+      },
+      "generated_OAuth": {
+        "entries": 2,
+        "category": "BOTH_EMPTY_STRINGS",
+        "module_sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe",
+        "authority": "HOLD"
+      },
+      "generated_static_decoded_CR": 13,
+      "consumer_native_execution": "NOT_RUN"
+    },
+    {
+      "filename": "actions_runtime-1.0.3-cp313-cp313-win_amd64.whl",
+      "platform": "Windows",
+      "ABI": "cp313",
+      "bytes": 11634753,
+      "sha256": "fe5c721eab513d837f98a442564ece4af90dc123007b71a762eae10ac29ff605",
+      "metadata": {
+        "name": "actions-runtime",
+        "version": "1.0.3",
+        "dependency_count": 25,
+        "source_python_dependencies_exact": true,
+        "sha256": "2d57f93a2328220f8b851bca8014d4805f7a29c8b41533562e923f6e3ceceda0"
+      },
+      "RECORD_files": 221,
+      "RECORD_hashes": 220,
+      "Python_members": 202,
+      "nonPython_members": 15,
+      "entrypoints_exact_source": true,
+      "tags_exact_filename_and_source_matrix": true,
+      "source_comparison": {
+        "tracked": 215,
+        "body_equal": 36,
+        "CRLF_only_Python": 173,
+        "CRLF_only_other_text": 5,
+        "generated_static_additional_difference": 1,
+        "recorded_full_Unix_permission_equal": 0,
+        "Unix_permission_unavailable": 215
+      },
+      "generated_OAuth": {
+        "entries": 2,
+        "category": "BOTH_EMPTY_STRINGS",
+        "module_sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe",
+        "authority": "HOLD"
+      },
+      "generated_static_decoded_CR": 13,
+      "consumer_native_execution": "NOT_RUN"
+    },
+    {
+      "filename": "actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl",
+      "platform": "macOS",
+      "ABI": "cp312",
+      "bytes": 13276496,
+      "sha256": "ee7841c8d0e565314e8ced177f0f9d0ea21adb4a7382594bcfe5562e01b2d5d6",
+      "metadata": {
+        "name": "actions-runtime",
+        "version": "1.0.3",
+        "dependency_count": 25,
+        "source_python_dependencies_exact": true,
+        "sha256": "2d57f93a2328220f8b851bca8014d4805f7a29c8b41533562e923f6e3ceceda0"
+      },
+      "RECORD_files": 221,
+      "RECORD_hashes": 220,
+      "Python_members": 202,
+      "nonPython_members": 15,
+      "entrypoints_exact_source": true,
+      "tags_exact_filename_and_source_matrix": true,
+      "source_comparison": {
+        "tracked": 215,
+        "body_equal": 215,
+        "CRLF_only_Python": 0,
+        "CRLF_only_other_text": 0,
+        "generated_static_additional_difference": 0,
+        "recorded_full_Unix_permission_equal": 215,
+        "Unix_permission_unavailable": 0
+      },
+      "generated_OAuth": {
+        "entries": 2,
+        "category": "BOTH_EMPTY_STRINGS",
+        "module_sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe",
+        "authority": "HOLD"
+      },
+      "generated_static_decoded_CR": 0,
+      "consumer_native_execution": "NOT_RUN"
+    },
+    {
+      "filename": "actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl",
+      "platform": "macOS",
+      "ABI": "cp313",
+      "bytes": 13276496,
+      "sha256": "90497c3879e3644e7fffa5be379f613a669926fb795561e1af2b653bd97c5019",
+      "metadata": {
+        "name": "actions-runtime",
+        "version": "1.0.3",
+        "dependency_count": 25,
+        "source_python_dependencies_exact": true,
+        "sha256": "2d57f93a2328220f8b851bca8014d4805f7a29c8b41533562e923f6e3ceceda0"
+      },
+      "RECORD_files": 221,
+      "RECORD_hashes": 220,
+      "Python_members": 202,
+      "nonPython_members": 15,
+      "entrypoints_exact_source": true,
+      "tags_exact_filename_and_source_matrix": true,
+      "source_comparison": {
+        "tracked": 215,
+        "body_equal": 215,
+        "CRLF_only_Python": 0,
+        "CRLF_only_other_text": 0,
+        "generated_static_additional_difference": 0,
+        "recorded_full_Unix_permission_equal": 215,
+        "Unix_permission_unavailable": 0
+      },
+      "generated_OAuth": {
+        "entries": 2,
+        "category": "BOTH_EMPTY_STRINGS",
+        "module_sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe",
+        "authority": "HOLD"
+      },
+      "generated_static_decoded_CR": 0,
+      "consumer_native_execution": "NOT_RUN"
+    }
+  ],
+  "sdist": {
+    "filename": "actions_runtime-1.0.3.tar.gz",
+    "sha256": "b165562bf9443104e2eaeebf91275ce65c661f350f2715857d27a9ba967b2cca",
+    "bytes": 1020336,
+    "members": 221,
+    "allmember_hash_size_mode_UID_GID_recorded_exact": true,
+    "gzip_EOF_CRC_ISIZE": true,
+    "METADATA": {
+      "name": "actions-runtime",
+      "version": "1.0.3",
+      "dependency_count": 25,
+      "source_python_dependencies_exact": true,
+      "sha256": "2d57f93a2328220f8b851bca8014d4805f7a29c8b41533562e923f6e3ceceda0"
+    },
+    "project_exact_source": true,
+    "tracked_source": {
+      "tracked": 215,
+      "body_equal": 215,
+      "CRLF_only_Python": 0,
+      "CRLF_only_other_text": 0,
+      "generated_static_additional_difference": 0,
+      "recorded_full_Unix_permission_equal": 215,
+      "Unix_permission_unavailable": 0
+    },
+    "generated_OAuth": {
+      "entries": 2,
+      "category": "BOTH_EMPTY_STRINGS",
+      "module_sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe",
+      "authority": "HOLD"
+    },
+    "embedded_RCC_members": 0
+  },
+  "aggregate_manifest": {
+    "bytes": 939,
+    "rows": 7,
+    "sha256": "6a94bd11691b33dba2e9a032f462707b26a91658b62bb4ecc6af6a746638a381",
+    "source_sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c",
+    "sorted_original_digests_doubleSpace_filename_LF_exact": true,
+    "publisher_AST_source_authority_observed_only_NOT_RUN": true
+  },
+  "four_original_builder_decoded_logs": [
+    {
+      "file": {
+        "bytes": 182571,
+        "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/job-114433293117-original.private.log",
+        "sha256": "6af4be956dc6b8c56c5509dc4e7e7756ea583503853ff93c9b85678d3e87a085"
+      },
+      "authenticated_decoded_checkout": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+      "checkout_observation": {
+        "command_line": 110,
+        "SHA_line": 111
+      },
+      "scope": "Original decoded text bytes, not compressed server log archive"
+    },
+    {
+      "file": {
+        "bytes": 823529,
+        "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/job-114433293201-original.private.log",
+        "sha256": "4d47b2c5e5ad3b78d6fdbf5cfcb226814cf255570c2106b8215d9cf32776ed72"
+      },
+      "authenticated_decoded_checkout": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+      "checkout_observation": {
+        "command_line": 123,
+        "SHA_line": 124
+      },
+      "scope": "Original decoded text bytes, not compressed server log archive"
+    },
+    {
+      "file": {
+        "bytes": 876045,
+        "path": "/workspace/engineering/pr221-current618-wheel-integrity-owned/job-114433293243-original.private.log",
+        "sha256": "325c54809da8b95c8071ad8d64ec671d8eed8453a77ce33a79c9db6060987b24"
+      },
+      "authenticated_decoded_checkout": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+      "checkout_observation": {
+        "command_line": 123,
+        "SHA_line": 124
+      },
+      "scope": "Original decoded text bytes, not compressed server log archive"
+    },
+    {
+      "file": {
+        "bytes": 747099,
+        "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/job-114433293230-original.private.log",
+        "sha256": "24623a7481f2e2884e47718ca30f5e5b4abdc67429c68c4022fe0ca3792418f2"
+      },
+      "authenticated_decoded_checkout": "e7666eacf2687f65050b97a88e791f8d0ce4cd20",
+      "checkout_observation": {
+        "command_line": 106,
+        "SHA_line": 107
+      },
+      "scope": "Original decoded text bytes, not compressed server log archive"
+    }
+  ],
+  "new_Mac_floor_marker": {
+    "sample": "EXISTING_BUILDER_CP312_ONLY",
+    "allowlisted_versions_and_SHA": {
+      "actions-core": {
+        "version": "1.0.2",
+        "sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80"
+      },
+      "actions-http-helper": {
+        "version": "1.0.3",
+        "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9"
+      }
+    },
+    "not_cp313_or_new_installed_consumer_qualification": true
+  },
+  "Linux_v4_input_exact_unchanged": true,
+  "Windows_scope": {
+    "perwheel_raw_source_matches": 36,
+    "perwheel_Python_CRLF_only": 173,
+    "perwheel_other_text_CRLF_only": 5,
+    "perwheel_static_additional_difference": 1,
+    "perwheel_decoded_static_CR": 13,
+    "Unix_permission_identity": "UNAVAILABLE",
+    "semantic_equivalence": "NOT_ESTABLISHED",
+    "historical_checkout_vs_compiler_cause": "UNKNOWN"
+  },
+  "generated_OAuth_authority": "HOLD_BOTH_FIXED_ENTRIES_EMPTY_ALL_SIX_WHEELS_AND_SDIST",
+  "installed_consumer_native_private_registry_tag_release": "HOLD_NOT_RUN_BY_REVIEWER",
+  "canonical_exact_source_backed_reuse": {
+    "canonical_file": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+    "durable_learning": "Complete original distribution hashes and aggregate equality qualify inventory integrity, independently of checkout source-byte differences, generated-input authority and actual platform consumers.",
+    "evidence": [
+      {
+        "bytes": 1768575,
+        "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/safe-complete-original-seven-distribution-inspection.json",
+        "sha256": "f931a396e67f9d9e0799119eb662fb4fbc8914c5c29776f298ef672893420e95"
+      },
+      {
+        "bytes": 8544,
+        "path": "/workspace/engineering/pr221-current618-complete-distribution-integrity-owned/safe-complete-source-mode-generated-input-summary.json",
+        "sha256": "aa01e5895916f26ffa5d90a00aa4b4bb4ec0b9457dbbc5fd17da6fc134578c3b"
+      }
+    ],
+    "exact_deltas": [
+      {
+        "disposition": "VERIFIED_ACCEPTED_REUSE",
+        "exact_delta": "An empty visible ruleset list does not resolve an inaccessible traditional\nbranch-protection endpoint. Bracket a paginated census with live named-ref\nreadbacks. If the target advances during collection, retain the old tuple and\nquery the new head separately; do not transfer its predecessor's passing CI.",
+        "exact_patch": {
+          "bytes": 897,
+          "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+          "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+        },
+        "present_in_canonical_checkpoint": true
+      },
+      {
+        "disposition": "VERIFIED_ACCEPTED_REUSE",
+        "exact_delta": "\nA platform artifact containing only Linux wheels does not satisfy the\nseven-artifact release inventory. A selected cp312 consumer has a distinct\nnonpublishing scope; retain its original ZIP, wheel, `METADATA`, `RECORD` and\nbuild identities while cross-platform inventory, tag and upload gates remain\npending. After integration, compare the actual merge tree and selected tracked\npayload bytes with the build's synthetic tree. Tree equality does not turn that\nearlier synthetic checkout into an actual integration build. Derive the Python\nmember count from the new wheel bytes even when it equals an earlier count,\nand retain generated-input authority and content holds separately.",
+        "exact_patch": {
+          "bytes": 1158,
+          "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+          "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+        },
+        "present_in_canonical_checkpoint": true
+      },
+      {
+        "disposition": "RETAINED_SOURCE_BACKED_PROPOSAL",
+        "exact_delta": "When qualifying generated Runtime frontend content, decode `_static_contents.py`\nas data and bind each asset's bytes to its builder checkout. The encoder reads\n`dist/index.html` as bytes and writes their representation; setting the generated\nmodule's newline to LF does not normalize the embedded asset. Keep outer module\nCRLF differences, decoded asset CR differences and semantic equivalence separate.\nA carriage-return-removal comparison is diagnostic evidence, not a source or\ncontent waiver. If the original frontend input and effective checkout newline\nsetting were not retained, keep checkout-versus-compiler causation unknown.\n\nInclude tracked non-Python package text in checkout-byte qualification. A\nPython-only rule leaves packaged README, HTML, YAML and other text differences\nunresolved; keep binary archives and intentional platform-specific line-ending\nfixtures outside any proposed text rule. A checkout-byte fix must also appear\nin affected builder and test workflow path filters. A passing census that\nexcluded those workflows does not qualify its distribution bytes.\n",
+        "exact_patch": {
+          "bytes": 1212,
+          "path": "/workspace/engineering/pr221-current618-static-frontend-trace-owned/canonical-generated-static-and-complete-checkout-scope-proposed-v2.patch",
+          "sha256": "1306a314811448c8090b4aa2e77340e676bbba397ceb6c7ee0477b908cb9b2bf"
+        },
+        "present_in_canonical_checkpoint": true
+      }
+    ],
+    "remaining_uncertainty": [
+      "Windows historical checkout/compile cause and semantics",
+      "generatedOAuth approvedsource/content authority",
+      "current complete installedconsumer/private/native/release obligations"
+    ],
+    "source_changed": false,
+    "stale_or_ambiguous_guidance_removed": "Seven distribution files are distinct from eight aggregate outer members; availability/integrity does not waive Windows179sourcebody differences or emptyOAuth authority.",
+    "upstream_disposition": "none"
+  },
+  "no_download_metadata_poll_package_import_install_build_source_control_execution_native_provider_browser_push_merge": true,
+  "upstream_disposition": "none"
+}

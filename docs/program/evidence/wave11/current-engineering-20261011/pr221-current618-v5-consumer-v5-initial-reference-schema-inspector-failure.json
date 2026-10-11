@@ -1,0 +1,12 @@
+{
+  "status": "FAIL_BEFORE_ANY_DIRECTORY_COPY_RUNNER_OR_TEST_WRITE",
+  "script": {
+    "path": "/workspace/engineering/pr221-current618-linux-consumer-preflight/prepare-isolated-platform-input-v5.py",
+    "bytes": 4980,
+    "sha256": "8ab7fbb70c70d262caf03c47aefb4305891a001c9f6ea197f9081168e1bb7433"
+  },
+  "reason": "KeyError evidence: initial ref inspector guessed v4 reference array key; no directory or newrunner created",
+  "original_retained": true,
+  "correction": "Named v2 derives exact authoritative v4 key from inspected JSON schema before mutation",
+  "no_actual_no_retry": true
+}
