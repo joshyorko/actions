@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 import json
 import os
@@ -30,6 +31,261 @@ def _harness():
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+
+@pytest.fixture
+def parent_receipt_control(tmp_path, monkeypatch):
+    harness = _harness()
+    # Fault injection belongs to this verifier, not pytest's logging or files.
+    for name in ("json", "os", "tempfile"):
+        monkeypatch.setattr(
+            harness, name, SimpleNamespace(**vars(getattr(harness, name)))
+        )
+    receipt = tmp_path / "receipt.json"
+    for key in (
+        "ACTIONS_RUNTIME_RCC_BINARY",
+        "ACTIONS_ACCEPTANCE_POETRY",
+        "ACTIONS_ACCEPTANCE_ROBOCORP_HOME",
+    ):
+        monkeypatch.setenv(key, "synthetic-unused")
+    monkeypatch.setattr(harness, "_cli_platform_is_supported", lambda: True)
+    monkeypatch.setattr(harness, "child_environment", lambda *args, **kwargs: {})
+
+    def invoke(worker):
+        monkeypatch.setattr(harness, "run_owned_process", worker)
+        return harness.main(["--receipt", str(receipt)])
+
+    return harness, receipt, invoke
+
+
+def _worker_bytes(status="PASS"):
+    return (
+        json.dumps(
+            {
+                "acceptance_status": status,
+                "cells": {"process_cleanup": "PASS", "authenticated_action": status},
+                "unrecognized_worker_field": {"measured": [3, False, None]},
+            },
+            separators=(",", ":"),
+        )
+        + "\n"
+    ).encode()
+
+
+@pytest.mark.parametrize("worker_status", ["PASS", "FAIL"])
+def test_parent_deadline_demotes_overall_receipt_preserving_worker_measurements(
+    parent_receipt_control, worker_status, capsys
+):
+    harness, receipt, invoke = parent_receipt_control
+    original = _worker_bytes(worker_status)
+    calls = []
+
+    def timeout(command, **kwargs):
+        calls.append((command, kwargs))
+        receipt.write_bytes(original)
+        raise subprocess.TimeoutExpired(["secret-command"], 1, stderr="secret-stderr")
+
+    assert invoke(timeout) == 1
+    assert len(calls) == 1
+    assert calls[0][1]["timeout_seconds"] == 2465 == harness.CLI_WATCHDOG_SECONDS
+    assert calls[0][0][-1] == "--_worker"
+    updated = json.loads(receipt.read_bytes())
+    worker = json.loads(original)
+    assert updated["acceptance_status"] == "FAIL"
+    assert {
+        key: value for key, value in updated.items() if key != "supervisor_deadline"
+    } == {
+        **worker,
+        "acceptance_status": "FAIL",
+    }
+    assert updated["cells"] == worker["cells"]
+    assert updated["unrecognized_worker_field"] == worker["unrecognized_worker_field"]
+    deadline = updated["supervisor_deadline"]
+    preserved = receipt.parent / deadline["worker_receipt_file"]
+    assert deadline == {
+        "reason": "watchdog_timeout",
+        "cleanup_state": "unknown",
+        "worker_acceptance_status": worker_status,
+        "worker_receipt_sha256": hashlib.sha256(original).hexdigest(),
+        "worker_receipt_file": preserved.name,
+    }
+    assert preserved.read_bytes() == original
+    assert preserved.parent == receipt.parent
+    assert preserved.name.startswith(".rcc-worker-original-")
+    if os.name == "posix":
+        assert receipt.stat().st_mode & 0o777 == 0o600
+        assert preserved.stat().st_mode & 0o777 == 0o600
+    assert not list(receipt.parent.glob(".rcc-deadline-*"))
+    output = capsys.readouterr()
+    assert "watchdog_timeout" in output.err
+    assert "secret" not in output.err + output.out
+
+
+def test_parent_deadline_annotation_collision_preserves_unknown_worker_field(
+    parent_receipt_control, capsys
+):
+    _, receipt, invoke = parent_receipt_control
+    original = b'{"acceptance_status":"PASS","cells":{},"supervisor_deadline":{"unknown":"secret-worker-value"}}'
+
+    def timeout(*args, **kwargs):
+        receipt.write_bytes(original)
+        raise subprocess.TimeoutExpired(["secret-command"], 1)
+
+    assert invoke(timeout) == 1
+    assert receipt.read_bytes() == original
+    assert not list(receipt.parent.glob(".rcc-*"))
+    output = capsys.readouterr()
+    assert "watchdog_timeout" in output.err
+    assert "receipt_state=annotation_conflict" in output.err
+    assert "secret" not in output.err + output.out
+
+
+@pytest.mark.parametrize(
+    ("original", "state"),
+    [
+        (None, "unavailable"),
+        (b"not-json-secret", "invalid_json"),
+        (b"\xff", "invalid_json"),
+        (b"[]", "invalid_shape"),
+        (b"null", "invalid_shape"),
+        (b'{"acceptance_status":"PASS","cells":[]}', "invalid_shape"),
+        (b'{"acceptance_status":"PASS","cells":null}', "invalid_shape"),
+    ],
+)
+def test_parent_deadline_never_fabricates_missing_or_malformed_worker_receipt(
+    parent_receipt_control, original, state, capsys
+):
+    _, receipt, invoke = parent_receipt_control
+
+    def timeout(*args, **kwargs):
+        if original is not None:
+            receipt.write_bytes(original)
+        raise subprocess.TimeoutExpired(["secret-command"], 1)
+
+    assert invoke(timeout) == 1
+    assert receipt.exists() is (original is not None)
+    if original is not None:
+        assert receipt.read_bytes() == original
+    assert not list(receipt.parent.glob(".rcc-*"))
+    output = capsys.readouterr()
+    assert "watchdog_timeout" in output.err
+    assert f"receipt_state={state}" in output.err
+    assert "secret" not in output.err + output.out
+
+
+@pytest.mark.parametrize(
+    ("failure_phase", "state"),
+    [
+        ("read", "read_failed"),
+        ("preserve", "preservation_failed"),
+        ("encode", "encode_failed"),
+        ("write", "write_failed"),
+        ("fsync", "write_failed"),
+        ("replace", "replace_failed"),
+    ],
+)
+def test_parent_deadline_persistence_failure_preserves_primary_and_owned_files(
+    parent_receipt_control, monkeypatch, failure_phase, state, capsys
+):
+    harness, receipt, invoke = parent_receipt_control
+    original = _worker_bytes()
+    unrelated = receipt.parent / ".rcc-deadline-unrelated"
+    unrelated.write_bytes(b"not-owned")
+
+    def fail(*args, **kwargs):
+        raise OSError("secret-secondary-path-token")
+
+    def timeout(*args, **kwargs):
+        receipt.write_bytes(original)
+        if failure_phase == "read":
+            real_read = Path.read_bytes
+            monkeypatch.setattr(
+                Path,
+                "read_bytes",
+                lambda path: fail() if path == receipt else real_read(path),
+            )
+        elif failure_phase == "preserve":
+            monkeypatch.setattr(harness.tempfile, "mkstemp", fail)
+        elif failure_phase == "encode":
+            monkeypatch.setattr(harness.json, "dumps", fail)
+        elif failure_phase == "write":
+            real_fdopen = harness.os.fdopen
+            calls = 0
+
+            class FailingWriter:
+                def __init__(self, stream):
+                    self.stream = stream
+
+                def __enter__(self):
+                    return self
+
+                def __exit__(self, *args):
+                    self.stream.close()
+
+                def __getattr__(self, name):
+                    return getattr(self.stream, name)
+
+                def write(self, payload):
+                    fail()
+
+            def fail_aggregate_write(*args, **kwargs):
+                nonlocal calls
+                calls += 1
+                stream = real_fdopen(*args, **kwargs)
+                return FailingWriter(stream) if calls == 2 else stream
+
+            monkeypatch.setattr(harness.os, "fdopen", fail_aggregate_write)
+        elif failure_phase == "fsync":
+            real = harness.os.fsync
+            calls = 0
+
+            def fail_aggregate(*args, **kwargs):
+                nonlocal calls
+                calls += 1
+                if calls == 2:
+                    fail()
+                return real(*args, **kwargs)
+
+            monkeypatch.setattr(harness.os, "fsync", fail_aggregate)
+        else:
+            monkeypatch.setattr(harness.os, "replace", fail)
+        raise subprocess.TimeoutExpired(["secret-command"], 1)
+
+    assert invoke(timeout) == 1
+    output = capsys.readouterr()
+    assert "watchdog_timeout" in output.err
+    assert f"receipt_state={state}" in output.err
+    assert "secret" not in output.err + output.out
+    monkeypatch.undo()
+    assert receipt.read_bytes() == original
+    assert unrelated.read_bytes() == b"not-owned"
+    assert list(receipt.parent.glob(".rcc-deadline-*")) == [unrelated]
+    for preserved in receipt.parent.glob(".rcc-worker-original-*"):
+        assert preserved.read_bytes() == original
+
+
+@pytest.mark.parametrize(
+    "outcome", ["completed_zero", "completed_nonzero", "exception"]
+)
+def test_parent_nondeadline_completion_keeps_original_worker_receipt(
+    parent_receipt_control, outcome
+):
+    _, receipt, invoke = parent_receipt_control
+    original = _worker_bytes()
+
+    def worker(command, **kwargs):
+        receipt.write_bytes(original)
+        if outcome == "exception":
+            raise RuntimeError("fixed synthetic exception")
+        return subprocess.CompletedProcess(
+            command, 0 if outcome == "completed_zero" else 7, "", ""
+        )
+
+    assert invoke(worker) == (
+        0 if outcome == "completed_zero" else 7 if outcome == "completed_nonzero" else 1
+    )
+    assert receipt.read_bytes() == original
+    assert not list(receipt.parent.glob(".rcc-*"))
 
 
 def test_dakota_acceptance_harness_describes_candidate_wheel_proof():
