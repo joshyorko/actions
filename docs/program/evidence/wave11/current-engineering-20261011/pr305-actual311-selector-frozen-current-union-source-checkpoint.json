@@ -1,0 +1,208 @@
+{
+  "actual_predecessors": [
+    {
+      "bytes": 9334,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v2-failed-checkpoint.json",
+      "sha256": "989584cfeaab8a9eb26ca3cd436c594cf3b6cf322c3f17c1bc51c6d00784e79a"
+    },
+    {
+      "bytes": 14899,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v3-failed-checkpoint.json",
+      "sha256": "18ebad580803103351a4c3f7a684f7e9f302a602182c699ef06450eadab29614"
+    },
+    {
+      "bytes": 7899,
+      "path": "/workspace/engineering/pr305-v3-independent-runner-review/independent-actual-v3-failure-review.json",
+      "sha256": "8bf57b7d80be59fbc515314853ca0d109ca6c8a64cd21f688a54bdd9f8f3655c"
+    }
+  ],
+  "branch": "test/canvas-runtime-cache-isolation-20261010",
+  "current_native_qualification": "full268+5body/modeparityPASS, originalnative92498 identities maintained; bothfreshcopied1192trees afterfailedactualexactoriginal, no new build or currentactualrelabelling",
+  "discovery_real_driver_proof": {
+    "actual_emitted_committed_selector_cases": 1,
+    "browser_or_testcase_executed": false,
+    "corrected_exact_full_title": {
+      "cases": 1,
+      "title": "official bridge renders a real Runtime Action result"
+    },
+    "first_proposal_failure_retained": "Initial filename-only anchor stillfailed becauseemptyroot/project names prependspaces; source untouchedduringdiagnosis, correctedleadingwhitespaceexactfilepatternprovenbydriverlist",
+    "old_source_pattern": {
+      "cases": 0,
+      "global_error": "No tests found"
+    },
+    "overbroad": {
+      "cases": 2
+    },
+    "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/full-title-discovery/selector-discovery.json",
+    "sha256": "d61d80a8af0a8a5a09cfe1e653afbc242ffb8a7222a51449a0f64a121b0f9c7d",
+    "wrong_case": {
+      "cases": 1,
+      "title": "official MCP Apps bridge handles fixture calls and host context lifecycle"
+    }
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md changed+ordinarytargetunion",
+    "Durable_learning": "Bind actualpytestcollectedmodule, Playwrightfulltitlefile/emptyparentspaces discovery, immutablehelper selflaunch/budget, explicitfinalsampler/per-kindRuntimecleanup, retainnonzeroouterresult andfilterfive tool Runs separatelyfromresourceRuns",
+    "Evidence": "V2actualbindingfailure/realcollect-onlyRED-GREEN/50controls/independentreview; V3actual0casefailure/independentready3Pythoncallcleanup/ownedRECORD sample; actuallockeddriver--listRED/GREEN/broadwrongcase controls and sourceemittedregexRED2/GREEN19, currentToolkit/fullsource/static",
+    "Remaining_uncertainty": "Actualcurrent3ec/native92498 publicbrowser/fiveRun/sharedcache combined acceptance pending reviewedimmutable successor+rootauthorization; Windows311acceptance retainedtargetonly; later302source cannotinheritartifactparity; no wholeCore/coldregistry/productionhost/realartifact/OAuth/wholeepic proof",
+    "Stale_guidance_removed": "Clarifies leaf-only anchoredgrep, qualifiedpreimportsameobject, cancellationimpliesexit,600consumerbudgetoverall, outerreaprepairsRuntimefalse, noRuntimeownerimpliesnativeleak, totalDBcount==fiveToolRuns. Originalacceptancerequirements preserved.",
+    "exact_delta": {
+      "bytes": 9261,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/canonical-current-union.patch",
+      "sha256": "c5e79cc6cef79c65c6e870431df654d7a39d96381e7e6b6ee9e9e7bc479d2f97"
+    },
+    "guide_bytes": {
+      "bytes": 236830,
+      "path": "/workspace/engineering/pr305/docs/skills/repository-operations.md",
+      "sha256": "00e6e2089eccb2c66c425c16e31be32818992ab6cc903cea29c4951664f210de"
+    },
+    "reviewer_patch_disposition": [
+      {
+        "disposition": "Integrated exactparagraphs in066 andretained3ec",
+        "patch": {
+          "bytes": 1671,
+          "path": "/workspace/engineering/pr305-v3-independent-runner-review/canonical-collected-module-proposed.patch",
+          "sha256": "7e244ee6986c68e7b8244f667044629fa6be661a968b99be45f1680507e78bee"
+        }
+      },
+      {
+        "disposition": "Integrated actualscopeparagraphverbatim; discoveryparagraphintegratedwithmeasuredfulltitle/leadingwhitespacelearning",
+        "patch": {
+          "bytes": 1643,
+          "path": "/workspace/engineering/pr305-v3-independent-runner-review/canonical-actual-v3-proposed.patch",
+          "sha256": "5dbf490d781451fefc400cacd9adccdf0402af16962863a73ec33975b4ae468a"
+        }
+      }
+    ]
+  },
+  "head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+  "logs": [
+    {
+      "bytes": 7736,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/source-emitted-selector-RED.log",
+      "sha256": "447a9c41c6e7d99007451eb0e1304114175fb34222058e4fa939e113076ac191"
+    },
+    {
+      "bytes": 4074,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/source-selector-GREEN.log",
+      "sha256": "d9aabea2d48deb86b8c3db273858c30869e1642967027fb6c28bd01523b0b64f"
+    },
+    {
+      "bytes": 13485,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/doctor.log",
+      "sha256": "08cfd24769173194bff860721d3263143870a4ca37e04fd5f51cc7a86ae03a28"
+    },
+    {
+      "bytes": 8113,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/discovery-RED-GREEN.log",
+      "sha256": "cbf74d265fa457e60c576f6d764f37707ff69ba0948cb9be1fae4a9568ea5835"
+    },
+    {
+      "bytes": 6613,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/discovery-full-title-RED-GREEN.log",
+      "sha256": "9c6b43d377bf5230afcee9975459136c2538c863141c92aba05e9b103da4c653"
+    },
+    {
+      "bytes": 8205,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/final-scoped-static-gates.log",
+      "sha256": "cb38f51f77441c3ce0683a7918fb718a9d90eefeb3d11e30463b0306964a8508"
+    },
+    {
+      "bytes": 305117,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/current-union-full-source-gates.log",
+      "sha256": "8e82faac133dc09e7dc9c3dd286058ce5b38282d9d9baca871949630ea40cba3"
+    }
+  ],
+  "ordered_parents": [
+    "066eb3e2bc997d0f84f2f539b08b85ccfa808a46",
+    "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+  ],
+  "ordinary_merge_conflicts": [],
+  "preserved_selector_fix": {
+    "head": "066eb3e2bc997d0f84f2f539b08b85ccfa808a46",
+    "parent": "14c1c1965314b192c4118c3281f5539d29f0aa6f",
+    "tree": "f34c6c913f037bce6fe1acf3cd9a4c35f62d0955"
+  },
+  "skips": {
+    "live_package_upload_status_changelog": 3,
+    "nodes": [
+      "action_server_tests/test_artifact_binding_lock.py::test_windows_binding_does_not_import_fcntl",
+      "action_server_tests/test_artifact_storage.py::test_storage_handles_mixed_resolved_drive_prefixes",
+      "action_server_tests/common_tests/test_uris.py::test_normalize_uri",
+      "action_server_tests/common_tests/test_uris.py::test_win_to_fs_path[file:///c:/far/boo-c:\\\\far\\\\boo]",
+      "action_server_tests/common_tests/test_uris.py::test_win_to_fs_path[file:///C:/far/boo-c:\\\\far\\\\boo]",
+      "action_server_tests/common_tests/test_uris.py::test_win_to_fs_path[file:///C:/far/space%20%3Fboo-c:\\\\far\\\\space ?boo]",
+      "action_server_tests/common_tests/test_uris.py::test_win_from_fs_path[c:\\\\far\\\\boo-file:///c:/far/boo]",
+      "action_server_tests/common_tests/test_uris.py::test_win_from_fs_path[C:\\\\far\\\\space ?boo-file:///c:/far/space%20%3Fboo]",
+      "action_server_tests/test_package.py::test_package_upload",
+      "action_server_tests/test_package.py::test_package_status",
+      "action_server_tests/test_package.py::test_package_set_changelog",
+      "action_server_tests/test_rcc_runtime_adapter.py::test_real_rcc_artifact_action_vertical"
+    ],
+    "real_RCC_optin": 1,
+    "windows_platform": 8
+  },
+  "source_identity_limits": "Prior V2/V3 actual proof/failedattempts remain14c/native92498; source3ec is not actualpublic/browser/fiveRun qualification. No native rebuild/newsource producer relabel.",
+  "source_proofs": [
+    {
+      "bytes": 833,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/actual-emitted-selector-GREEN.json",
+      "sha256": "9a63c583e592f0ea8c5997b9777272845584a9fe27fdcf3dda0b7f6eadfc0eb8"
+    },
+    {
+      "bytes": 259,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/actual-validator-error-controls.json",
+      "sha256": "53c7599cee3aa02a39afbe9e5ff47960cc3b80ee02262ec61ffbefb45e7bcc8c"
+    },
+    {
+      "bytes": 2854,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/current-union-bootstrap-reuse.json",
+      "sha256": "d1414b9a5e787d923682d0a273423490e69b7e38ab7915326088cccb0461cc3c"
+    },
+    {
+      "bytes": 3142,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/current-union-source-parity.json",
+      "sha256": "a3410fae84e69b9443ecf82258ef8d529422adf93da14a615e43521bad049254"
+    },
+    {
+      "bytes": 517,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/ordinary-current-target-union-proof.json",
+      "sha256": "e68dde4596712b1b7a6b3992171f56ecea7bc21b652c6e76e071d0ec2d254b04"
+    }
+  ],
+  "source_scope": "Exactlyonepublicgrep literal repair; sourcecontroller regex probes/empty report negative; canonicalguide. Whole remainder authoringAST exact14c, defaultcandidate/fiveRun/cache/resource/privacy/callargs/bounds unchanged. Target311source test/guide/CI union preserved.",
+  "source_sha256": "d84f5e54dafb29e9beda15673769110952f165aee61c0deb5a04ee920515abcf",
+  "status": "LOCAL_SOURCE_GATE_PASS_REVIEW_REQUIRED_NO_PUSH_NO_NEW_ACTUAL",
+  "tests": {
+    "Bootstrap": "REUSED earlieractualfivepackageenvs; exact71a/currenttrackedinputs andpreparedvenv parity, no reinstall/npm install",
+    "Doctor": "PASS, inputparity bound unchanged19toolkit/manifest/lockfiles",
+    "ToolkitTest": {
+      "passed": 69
+    },
+    "configured_Runtime_invoke_test_not_integration": {
+      "command": "toolkit.poetry(\"action_server\", \"run\", \"invoke\", \"test-not-integration\")",
+      "duration_seconds": 139.28,
+      "passed": 1170,
+      "skipped": 12,
+      "warnings": 15,
+      "workers": 2
+    },
+    "configured_lint": "Ruffcheck/format302files+IsortPASS; Markdownlintunavailable",
+    "configured_typecheck": "Mypy338PASS",
+    "focused_controls": {
+      "passed": 19,
+      "skipped": 0
+    },
+    "fresh_hosted_current_head": "NOT_RUN",
+    "full_package_integration": "NOT_RUN",
+    "native_or_browser_actual_after_fix": "NOT_AUTHORIZED_NOT_RUN",
+    "scoped_authoring_and_admission": {
+      "integration_deselected": 2,
+      "passed": 20,
+      "skipped": 0
+    },
+    "whitespace": "PASS"
+  },
+  "tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,12 @@
+{
+  "phase": "REAL_COLLECTION_ONLY_FAKE_CONTROLLER_NO_CONSUMER",
+  "nodeid": "tests/action_server_tests/mcp/test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge",
+  "collected_module": "test_mcp_apps_authoring",
+  "preimport_module": "action_server_tests.mcp.test_mcp_apps_authoring",
+  "same_module": false,
+  "source_sha256": "d84f5e54dafb29e9beda15673769110952f165aee61c0deb5a04ee920515abcf",
+  "predecessor_hook_missing_RED": true,
+  "collected_public_boundary_GREEN": true,
+  "exact_CompletedProcess_forwarding": true,
+  "collected_owner_restored": true
+}

@@ -1,0 +1,202 @@
+{
+  "verdict": "GO_NORMAL_PUSH_EXACT_C38_CURRENT306_SOURCE_REFRESH; HOLD_FRESH_HOSTED_MERGE_CURRENT_NATIVE_HEALTHY_POSTGRES_AND_FULL84_RELEASE",
+  "scope": "read-only exact ordinaryrefresh/source/rawreceipts review; no reviewer source/test/provider/Postgres/native/run mutation",
+  "source": {
+    "head": "c38e22c74290dca391617e9693fcf5b2968956df",
+    "tree": "75dfe6916d4a4e8c07a1b76aafea13540bc7afe1",
+    "parent": "0babc41dbcf2024682be1d89c49ad1a102377c83",
+    "ordinary_merge_tree": "a9221f5b0ff2f959b26ed2c5532bb39d24bed7de",
+    "ordered_ordinary_parents": [
+      "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ],
+    "actual_target_tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78",
+    "same_branch": "fix/database-savepoint-admission-20261010",
+    "clean": true
+  },
+  "independent_preservation": {
+    "target_and_final_leaves": 1409,
+    "original_leaves": 1385,
+    "no_source_or_target_deletions": true,
+    "nonowned_paths_complete_modes_blobs_equal_target": true,
+    "original_Database_blob_retained": [
+      "100644",
+      "blob",
+      "6fd267165834f60968ee10a8653dd084a39ad521"
+    ],
+    "both_original_regression_ASTs_preserved": [
+      "test_database_transactions_nested",
+      "test_nested_transaction_savepoint_start_failure_preserves_error_and_counter"
+    ],
+    "all_target_test_function_ASTs_retained": true,
+    "only_new_test_vs_target": "test_nested_transaction_savepoint_start_failure_preserves_error_and_counter",
+    "ordinary_nonconflicting_3way_paths_checked": 1407,
+    "both_parent_changed_paths": [
+      "action_server/tests/action_server_tests/test_database.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "non_doc_both_changed_external_clean_merge_file_byteequal": true,
+    "oldguideparagraph_plus_entire_target_guide_preserved": true,
+    "final_only_delta": "20canonicalguide lines",
+    "final_non_doc_mode_blob_pairs_identical_to_tested_union": 1408,
+    "complete_github_generator_workflows_exact_actualtarget": true
+  },
+  "source_behavior": "Originalacceptedfix publishesnestedtransaction depth only AFTER SAVEPOINT creation succeeds. MeaningfulSQLite authorizerDENY exercisescreationfailure beforebody and asserts originalDBError/sqliteerrorchain, noenteredbody, counterszero, noopenconnectiontransaction andsameconnection nested recovery; accepted successfulrollback control unchanged. No new production implementation.",
+  "actual_current_validation": {
+    "Doctor": "PASS",
+    "freshownBootstrap": "PASS",
+    "toolkit": 69,
+    "own_Database_origin_and_package_prefix": "asserted in rawfocused log",
+    "transaction_focus": 2,
+    "complete_database_source_pass": 61,
+    "actual_PostgreSQL_skips": 12,
+    "configured_source_pass": 1151,
+    "configured_source_existing_skips": 13,
+    "warnings": 15,
+    "configured_lint": "Ruffcheck/format301/IsortPASS",
+    "configured_typecheck_source_files": 337,
+    "tracked_all_yaml_dependabot_roundtrip": 26,
+    "canonicaldiffcheck": "PASS",
+    "tests_source": "0babc ordinaryunion+final20workingguide lines; frozen c38 only guide and1408othermode/blobpairs exact"
+  },
+  "producer_scope": [
+    {
+      "inventory": "producer-input-inventory.json",
+      "entries": 268,
+      "matches": 267,
+      "differences": [
+        {
+          "path": "action_server/src/actions/server/_database.py",
+          "historical": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "e7d9e6d06d8db537c81a24888615f9b7b74e8753",
+            "sha256": "5d3776fb85a36604b5c9dbc2c2169ee2770734330fea90ceda507515e4fc4638"
+          },
+          "current": {
+            "mode": "100644",
+            "kind": "blob",
+            "blob": "6fd267165834f60968ee10a8653dd084a39ad521",
+            "sha256": "c48ff5838d333ebd2c483be30036d9e3b8588d29c8d6dbbe324e247b9168bdd4"
+          }
+        }
+      ]
+    },
+    {
+      "inventory": "selected-test-inventory.json",
+      "entries": 5,
+      "matches": 5,
+      "differences": []
+    }
+  ],
+  "old_native92498_qualification": "NOT_QUALIFIED_current306 changes _database.py; no exclusion/relabeling oforiginalartifact",
+  "original_worker_receipt": {
+    "path": "/workspace/engineering/pr306-refresh-preparation/frozen-source-receipt.json",
+    "bytes": 13902,
+    "sha256": "cf34ca2aec87e1b6d0db6313683ce37a53bdd8fb0488f05bf61fe075ebc0b030"
+  },
+  "verified_raw_worker_logs": {
+    "bootstrap": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/bootstrap.log",
+      "bytes": 27576,
+      "sha256": "25fa23496d40adf4c9ac632ea9ce80c7330b089393fe14d2a47b29a7552e54a8"
+    },
+    "current-source-proof": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/current-source-proof.log",
+      "bytes": 2761,
+      "sha256": "6cfbd06fcc1e446009b36fba0f94535977dac0dd2f08d43df093e763f6bbd8a0"
+    },
+    "database-complete-source": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/database-complete-source.log",
+      "bytes": 3958,
+      "sha256": "139a752769c674c98f0cb0621d47f7db738338c261eb7eac808e493d0d48b02c"
+    },
+    "database-scoped": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/database-scoped.log",
+      "bytes": 4748,
+      "sha256": "bf41d48e0296cc4bfdb574eaf626daeb403c1136f585e075f072e9f669137430"
+    },
+    "diff-check": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "doctor": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/doctor.log",
+      "bytes": 12786,
+      "sha256": "da97465dad82a8a629a572c778ba76970c3279e5d3106110d88916d700dac885"
+    },
+    "full-source": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/full-source.log",
+      "bytes": 296600,
+      "sha256": "d944c04dde761dac0b56c7b11d9c4f5e5cec0123c9127bae8f869213934bb6af"
+    },
+    "generator-roundtrip": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/generator-roundtrip.log",
+      "bytes": 4561,
+      "sha256": "a18340d916fe176cf981082d79c994abd0ee44cddeefdc0cd04dc9abee4c0195"
+    },
+    "original-windows-job-114316872435": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/original-windows-job-114316872435.log",
+      "bytes": 612777,
+      "sha256": "2608e02752145c7dc50b002df9208fb33c64b955da03106411b9d0404c3f93ee"
+    },
+    "static": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/static.log",
+      "bytes": 5694,
+      "sha256": "5895af7a1ec9bb922e70532e85be106173293ebd5c8bbaea2b89724b378a72aa"
+    },
+    "toolkit": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/toolkit.log",
+      "bytes": 14344,
+      "sha256": "15b3043649b48d8aadf4321f2bf4dc03262ba90cdeb64434e1098af09894a590"
+    }
+  },
+  "verified_source_proof": {
+    "path": "/workspace/engineering/pr306-refresh-preparation/current-source-proof.json",
+    "bytes": 2761,
+    "sha256": "6cfbd06fcc1e446009b36fba0f94535977dac0dd2f08d43df093e763f6bbd8a0"
+  },
+  "verified_source_inspector": {
+    "path": "/workspace/engineering/pr306-refresh-preparation/verify_current_source.py",
+    "bytes": 5778,
+    "sha256": "5b473fdf24744968d0deb9459f9dbdc7b8244ad3d9dc7581d7b5ba673d84569b"
+  },
+  "verified_historical_acceptance": {
+    "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave4-convergence-20261010T2045Z/database-savepoint/savepoint-fix-independent-review.json": "50f4148abdc3c1785a608d8e5f5650e6fcc233235f5e114b517a33cbebd849ab",
+    "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave6-checkpoint-20261010T212704Z/post304-union/pr305-306-307-308-post304-union-independent-review.json": "6982169bccf4e6a754615e932b4c05188f251adfa6214cce5d144afe8feab727",
+    "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_review.json": "4cf0f23ff8beadbf705aadf4fc3f30957483d1655374aeaa7173b0edc6d75d6b"
+  },
+  "PostgreSQL_limit": "Retained4cf source1421 PostgreSQL17.11/psycopg3.3.4 already-abortedtransactionSAVEPOINT25P02 recovery is same_Database_bytes only; not currentunion/newexecution or healthytransactiondenial/full84. TwelvecurrentbackendtestsSKIPPED; no newservice/run.",
+  "historical_TDD_limit": "Accepted50f414 review retains original RED log hashes and source-bound acceptance; raw historical RED logs absent from this environment snapshot. No new behavioral implementation or fresh RED claim. Both original regression ASTs and production Database bytes survive exactly.",
+  "historical_Windows_limit": "Retainededdec/source1421 original989/94source and1FAIL129PASS18SKIP1086DESELECTnative; templateFIRSTstartup beforecollisionassertions,87.81RCCvariables/87.799previousmarksum; oldselftestlacksaccepted20cleanup; no sourcefix/regressionfailure/rootcause/fullownedcleanup inferred. No currentnative retry. Fullrawlog remainsPRIVATE.",
+  "ephemeral_setup_py": {
+    "reviewer_observed": "Untracked action_server/setup.py during Bootstrap",
+    "worker_first_post_Bootstrap_observation": "Absent before cleanup",
+    "conditional_copy_hash_remove": "No-op because path absent",
+    "original_bytes_and_sha256": "UNAVAILABLE",
+    "actual_deletion_attribution": "UNKNOWN; install/build may explain generation but deletion not independently captured",
+    "generic_cleanup": false
+  },
+  "held_gates": [
+    "Fresh exactc38 currentunion hostedcompletecheck/review/target/policy gates beforemerge; originalgreen failuresnotcarried.",
+    "Changedproductiondatabaseinvalidatesold92498currentnative qualification evenwithfive selectedtestsunchanged.",
+    "ActualhealthyPostgreSQLSAVEPOINTdenial/full84 acceptance remainsOPEN;12currentPGskips notpassingbackend.",
+    "HistoricalWindows startupownership/cause/fullcleanup unknown; later311pass doesnotrepair306source-boundfailure.",
+    "Private01f/fafb/frozenv6spec-runner/fullissue and Runtimepublication gates remainHOLD."
+  ],
+  "canonical_documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_integrated_delta": {
+      "path": "/workspace/engineering/pr306-independent-current-review/canonical-integrated-current-database-bootstrap-delta.patch",
+      "bytes": 2456,
+      "sha256": "cac89fd92340ccb2e3bf41a415881450f1b65bb5a7de6892121bb8d2195a3ee6"
+    },
+    "disposition": "INTEGRATEDc38doconly20line addendum retainingoldfixandactualtargetlessons; reviewrequestedremovalofunqualifiedcold adjective applied",
+    "durable_learning": "healthySQLiteSAVEPOINTauthorizationdenial differsfromalreadyabortedPostgreSQLrecovery; RCCcreationSUCCESS differsfromRuntime ready-port admission/reachedtests",
+    "evidence": "sameacceptedDatabase/regressionAST50f/6982;historicalPG4cf moduleidentity scopedactualrecovery;historicalWindows2608 logstartup; current2+61/12+1151/13+69 sourcegates/static/26YAMLroundtrip",
+    "stale_ambiguity": "sourcepass orabortedPGcase proveshealthyPGdenial/full84; environmentSUCCESS provesRuntime ready/reachedcatalogassertions; coldprivateenvironment implieswholecache qualification; sourceunion clearsoldfailure/relabelsoldnative",
+    "remaining_uncertainty": "currentexacthosted/native/currentartifact/healthyPGfull84/historicalownedstartupcausecleanup/private-releaseacceptance; unavailabletransientsetupbytes",
+    "upstream": "none"
+  }
+}

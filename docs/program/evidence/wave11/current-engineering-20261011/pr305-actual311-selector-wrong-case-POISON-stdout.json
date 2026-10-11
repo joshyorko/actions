@@ -1,0 +1,84 @@
+{
+  "config": {
+    "argv": [
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+      "/workspace/engineering/pr305/action_server/frontend/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/workspace/engineering/pr305/action_server/frontend/playwright.canvas-harness.config.ts",
+      "--grep",
+      "^host-harness\\.spec\\.ts official MCP Apps bridge handles fixture calls and host context lifecycle$",
+      "--workers",
+      "1",
+      "--reporter",
+      "json",
+      "--list"
+    ],
+    "configFile": "/workspace/engineering/pr305/action_server/frontend/playwright.canvas-harness.config.ts",
+    "rootDir": "/workspace/engineering/pr305/action_server/frontend/apps/canvas-view",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/engineering/pr305/action_server/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/engineering/pr305/action_server/frontend/apps/canvas-view",
+        "testIgnore": [],
+        "testMatch": [
+          "host-harness.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run dev -- --mode canvas --host 127.0.0.1 --port 4180 --strictPort",
+      "url": "http://127.0.0.1:4180/host-harness.html",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [],
+  "errors": [
+    {
+      "message": "Error: No tests found",
+      "stack": "Error: No tests found"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-10-11T04:58:41.282Z",
+    "duration": 251.58399999999995,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

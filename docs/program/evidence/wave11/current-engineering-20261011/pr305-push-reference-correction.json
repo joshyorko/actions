@@ -1,0 +1,21 @@
+{
+  "utc": "2026-10-11T05:13:06Z",
+  "source_head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+  "source_tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca",
+  "independent_source_review": "d29a5c618c8ff32effee017bbceed355eda911791dcef8c97260db636bab8615",
+  "intended_pr": 305,
+  "existing_pr_ref": "test/canvas-runtime-cache-isolation-20261010",
+  "root_error": "Guessed title-derived branch name instead of querying actual PR headRefName before push. Normal push created a new unintended ref, without PR.",
+  "unintended_ref": "test/canvas-core-rcc-bridge-20261010",
+  "unintended_ref_was_new": true,
+  "unintended_prs": [],
+  "corrective_action": "Normal fast-forward push14c\u21923ec to independently queried existing PR ref; verified PR head3ec. Then conditional exact3ec lease deleted only root-created accidental ref. No commit rewritten or removed; original source and receipts preserved.",
+  "final_readback": {
+    "proper_pr_head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "unintended_ref_absent": true,
+    "unintended_branch_workflow_runs_total_count": 0
+  },
+  "next_push_procedure": "Query actual PR headRefName; compare local branch and independently accepted SHA; require existing remote ref; push only that returned reference, then verify PR head. Never infer ref from PR title.",
+  "canonical_file_proposed": "docs/skills/repository-operations.md",
+  "upstream_disposition": "none"
+}

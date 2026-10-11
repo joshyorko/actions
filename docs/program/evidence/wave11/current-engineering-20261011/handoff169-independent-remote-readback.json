@@ -1,0 +1,32 @@
+{
+  "verdict": "GO_AUTHENTICATED_EXISTING_HANDOFF_REMOTE_DURABILITY_READBACK_ONLY",
+  "remote_commit": {
+    "sha": "ef91a8c4da5cb5002ca57d950c3f3f753212e27a",
+    "tree": "14d15d286caf7a550090b659b82dbdcb1d675a61",
+    "parents": [
+      "821724432cd90f662deda2a878564902bdf25571"
+    ]
+  },
+  "manifest_records": 169,
+  "all_committed_Git_blob_bytes_sizes_sha256_verified": true,
+  "remote_complete_tree_identical_local_reviewed_tree": true,
+  "prior168_review": {
+    "path": "/workspace/engineering/current-admission-review/checkpoint168-independent-durability-review.json",
+    "sha256": "aabbcaeaa014785ea49f8ff8a695e7bfeb9da7016bfcc048b1e2fc55fccaf07e"
+  },
+  "additive_latest_commit_scope": "README9lines only; prior168+independentreview sourcebytes preserved",
+  "README": {
+    "sha256": "9e46d3644ddcaf7cf8c02f1f5b10f8c4fedec32e711bede3b62e779d1f16565e",
+    "clarification_review": "ACCEPTED exact41-byte SPACE-beforeLF browser measurement and embedded originalV3 patch context are raw immutable evidence; do not normalize or claim blanket Markdown whitespace; authored guide/README/manifest checks distinct"
+  },
+  "manifest_sha256": "15abb275ff576d65e0c59be91535419f9eae52f5b6f1f03bbece4d0f64cc8aa0",
+  "engineering_admission": "NONE;310failed/302held/newactualtarget unions and complete release graph remain unchanged",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "Accepted operations and WorkItems canonical deltas from frozen168 review; README immutable-byte exception clarification accepted",
+    "Durable learning captured": "Verify committed bytes through exact authenticated remote tree; preserve raw measured formatting and original patch context separately from authored whitespace checks",
+    "Evidence": "remoteef91 tree14d15; all169Gitblob hashes/sizes; additive9-line README; prior168independent review",
+    "Stale or ambiguous guidance removed": "Whole-evidence diffcheck implies authored defect or permits original byte normalization",
+    "Remaining uncertainty": "Engineering startup cause/cleanup/newunion/native/private/release gates remain as recorded; absent raw originals not made durable by path fields"
+  },
+  "Upstream disposition": "none"
+}

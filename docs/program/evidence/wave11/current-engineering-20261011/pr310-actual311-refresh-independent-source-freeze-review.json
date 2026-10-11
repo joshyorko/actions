@@ -1,0 +1,110 @@
+{
+  "verdict": "GO_EXACT_SOURCE_REFRESH_FOR_NORMAL_PUSH_ONLY; HOLD_FRESH_HOSTED_CI_AND_MERGE_ADMISSION",
+  "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+  "tree": "17c1afa7fbaa6ae817830d85226b41f67dd8b820",
+  "parent": "bd200037c870ebc40052923b681754a6b08ebd18",
+  "ordinary_refresh": {
+    "commit": "bd200037c870ebc40052923b681754a6b08ebd18",
+    "tree": "5e7b7f481345a2637fa59af1d379414e2350d628",
+    "ordered_parents": [
+      "4b2df94d77b1145a9ed586fb924eeb88c478d01c",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ]
+  },
+  "complete_union": {
+    "leaves": 1409,
+    "no_parent_leaf_missing": true,
+    "every_nondoc_final_mode_blob_equals_ordinary_merge": true,
+    "all_incoming_target_only_leaves_preserved": true,
+    "all268_native_producer_and5_selected_inputs_equal_old_target_original92498": true,
+    "tracked_historical_evidence_leaves_unchanged": 191,
+    "whole_github_AST_and_blobs_equal_actual_target": true,
+    "all8_generated_workflows_plus_all_tracked_YAML_and_dependabot_roundtrip": "PASS"
+  },
+  "source_changes": "Accepted311 observer/fixture/tests/workflow imported by normal merge; only2canonicalguides novel after ordinary merge; no production/process/RCC/_selftest or deadline changes",
+  "observer_scope": "Windows native watched-reload and duplicate-resource only80/88; duplicate-template unsampled; best-effort artifact observation not cause repair, full cleanup proof or V2 implementation",
+  "local_gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "PASS prepared own worktree reuse24exact unchangedinputs",
+    "Toolkit": "69PASS",
+    "focused": "88PASS3integrationdeselected",
+    "full_portable_source": "1154PASS12SKIP15warnings",
+    "configured_lint": "PASS Ruff rules/format301 and Isort",
+    "configured_typecheck": "PASS337files",
+    "canonical_workflow_regeneration": "PASS",
+    "diffcheck": "PASS"
+  },
+  "gates_and_proofs": {
+    "doctor.log": {
+      "path": "/workspace/engineering/pr310-current-refresh/doctor.log",
+      "bytes": 13485,
+      "sha256": "676b8d98c716e63d56f35a7e4555a45aae3eca9011a02d340e62c14e00c98c81"
+    },
+    "bootstrap-reuse.json": {
+      "path": "/workspace/engineering/pr310-current-refresh/bootstrap-reuse.json",
+      "bytes": 2895,
+      "sha256": "e32a2f3ef8137e4e1dd78e260d9c155dd1de23d08cddaa78d794b493ff41e40d"
+    },
+    "toolkit.log": {
+      "path": "/workspace/engineering/pr310-current-refresh/toolkit.log",
+      "bytes": 14344,
+      "sha256": "bd838fed008089cd8b6160dea2615c8188de199ff1b51a8f45831d10cb049464"
+    },
+    "scoped.log": {
+      "path": "/workspace/engineering/pr310-current-refresh/scoped.log",
+      "bytes": 5346,
+      "sha256": "d1e0e0146940cbcb2803125f9f3ab379c2c4098b8f0edbc6e646f16366137d6e"
+    },
+    "full-source.log": {
+      "path": "/workspace/engineering/pr310-current-refresh/full-source.log",
+      "bytes": 297178,
+      "sha256": "d3211401b60585c8e6d0b9b47f3667577bf11c9f7516dfe1d4850bc255cbcdf3"
+    },
+    "static.log": {
+      "path": "/workspace/engineering/pr310-current-refresh/static.log",
+      "bytes": 5692,
+      "sha256": "b028c509e27c8e3297eeaefd3c7b1e5cdd24bcd9dde903c6dca2db3c1c1bfc5d"
+    },
+    "source-union-proof.json": {
+      "path": "/workspace/engineering/pr310-current-refresh/source-union-proof.json",
+      "bytes": 4663,
+      "sha256": "b27754ef8f7d2a7272d34ce71c1f6be1bf99dbe6fbcc5de4eba6d4700369e6a8"
+    },
+    "generator-roundtrip.json": {
+      "path": "/workspace/engineering/pr310-current-refresh/generator-roundtrip.json",
+      "bytes": 3164,
+      "sha256": "21412f27d916c53f7db67fd1aa920040a27846192316d21d935b360ff9eb5da4"
+    },
+    "generator-roundtrip.log": {
+      "path": "/workspace/engineering/pr310-current-refresh/generator-roundtrip.log",
+      "bytes": 4563,
+      "sha256": "5da87b44ab40387616fee72394768b0cc22569336a0cad9a3c6ea6fe3719c2d6"
+    }
+  },
+  "retained_native_receipt_content_identities": {
+    "pr310-actual-native-pair.json": "e95abb8f7024148019085d630f5755c8472290eabc3ad51537331f95e50b8b64",
+    "pr310-independent-actual-review.json": "4d5ed4117610c4d246272556ee31036a14eff85b1ab2e60d64116160c00dccb4",
+    "pr310-original-platform-independent-review.json": "c600dfc1cea6208de8698b933ee0597b1c874a9ac8de9dec1bd2779fa5a623d7"
+  },
+  "old_failure": {
+    "path": "/workspace/engineering/current-admission-review/310-terminal-first-readiness-independent-review.json",
+    "bytes": 9291,
+    "sha256": "de53338aa808a3d7308901761f3fcfa5598de5f000e678f7146952bf2268cfc2"
+  },
+  "historical_limits": "4b Runtime Windows3FIRSTtimeouts distinct from currentold nativeUI3OSselectedPASS; cleanupUNKNOWN and causeUNKNOWN. Linux92498/f506 pair distinct from original65c MacWin tuple; missingnativeJUnit/browserliveidentity, localcandidateCore, seedfixture and incidentalMac teardown remain in unchanged c600 review. No original proof relabeling or rerun/rebuild.",
+  "fresh_requirements": "Root must normalpush exactdfca then reconcile completefreshsource/currenttarget CI, Runtime included, before merge. Old21SUCCESS+1SKIP+1FAIL is historical only; no carry. Full208/private/release remain held.",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md and docs/skills/work-items.md integrated in exactdfca",
+    "Durable learning captured": "Completeprevious-mark timing and FIRSTfailure scopes; receipt SHA256 separatefrom Git source ancestry; originalplatform/candidateCore/native cleanup scopes separatefrom fullRuntimeCI",
+    "Evidence": "de5333-node failure; immutableRCC4148; corrected evidenceproof; original4d5/e95/c600; all1409union/268+5 and configuredgates",
+    "Stale or ambiguous guidance removed": "MacWin stillunverified despite scopedoriginalreceipts; UIcreation-only statement despite separateworkerconsumer evidence; progress15total; receiptsha as commit; selectedUIpass admits Runtime",
+    "Remaining uncertainty": "Freshhostedunion CI/native Runtime FIRSTcause/explicitcleanup; templateobserverabsent; candidate/publicCore/nativebrowseridentity/private/fullrelease limits"
+  },
+  "Upstream disposition": "none",
+  "writer_frozen_receipt": {
+    "path": "/workspace/engineering/pr310-current-refresh/frozen-source-receipt.json",
+    "sha256": "a17dbc7d262b3ffa8179b66618373fea0cb3896d1cafabdd2d7d417a92ee2194",
+    "nested_binding_records_independently_verified": 28
+  },
+  "corrected_proof_drafts": "V0 receipt digest/Git-prefix confusion and V1 synthetic-producer ancestry requirement explicitly rejected; later read-only reproductions are not original transcripts or green source evidence"
+}

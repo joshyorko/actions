@@ -1,0 +1,108 @@
+{
+  "config": {
+    "argv": [
+      "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+      "/workspace/engineering/pr305/action_server/frontend/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "/workspace/engineering/pr305/action_server/frontend/playwright.canvas-harness.config.ts",
+      "--grep",
+      "^\\s*host-harness\\.spec\\.ts official bridge renders a real Runtime Action result$",
+      "--workers",
+      "1",
+      "--reporter",
+      "json",
+      "--list"
+    ],
+    "configFile": "/workspace/engineering/pr305/action_server/frontend/playwright.canvas-harness.config.ts",
+    "rootDir": "/workspace/engineering/pr305/action_server/frontend/apps/canvas-view",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/engineering/pr305/action_server/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/engineering/pr305/action_server/frontend/apps/canvas-view",
+        "testIgnore": [],
+        "testMatch": [
+          "host-harness.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run dev -- --mode canvas --host 127.0.0.1 --port 4180 --strictPort",
+      "url": "http://127.0.0.1:4180/host-harness.html",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "host-harness.spec.ts",
+      "file": "host-harness.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "official bridge renders a real Runtime Action result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1549f58063b58d555b5b-078cd9a3676aa4d29ffb",
+          "file": "host-harness.spec.ts",
+          "line": 85,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-11T05:00:59.907Z",
+    "duration": 215.33799999999997,
+    "expected": 0,
+    "skipped": 1,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

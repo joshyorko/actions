@@ -1,0 +1,326 @@
+{
+  "status": "GO_SOURCE_CONTROLS_NORMAL_PUSH_REVIEW_ONLY; CURRENT_ACTUAL_ACCEPTANCE_NOT_RUN",
+  "head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+  "tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca",
+  "ordered_parents": [
+    "066eb3e2bc997d0f84f2f539b08b85ccfa808a46",
+    "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+  ],
+  "selector_fix_parent": "14c1c1965314b192c4118c3281f5539d29f0aa6f",
+  "exact_auto_merge_tree": true,
+  "selector_scope": "whole authoring AST unchanged except one public grep literal; fixed case filename and literal leaf plus permitted leading whitespace; product assertions/command ownership/native/Core/browser/cache/cleanup/deadlines unchanged",
+  "producer_and_selected": "all268+5 committed bodies/modes and working bytes equal92498 producer",
+  "full_tree": {
+    "original": 1390,
+    "current": 1410,
+    "unchanged_original": 1380,
+    "changed_original": [
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+      ".github/workflows/actions_runtime_tests.yml",
+      "action_server/docs/DEVELOPMENT.md",
+      "action_server/scripts/verify_frozen_catalog_artifact.py",
+      "action_server/scripts/verify_frozen_catalog_junit.py",
+      "action_server/tests/action_server_tests/fixtures.py",
+      "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+      "action_server/tests/contract_tests/test_active_contracts.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "added": [
+      "action_server/scripts/frozen_wrapper_acceptance_plugin.py",
+      "action_server/scripts/verify_frozen_catalog_harness.py",
+      "action_server/scripts/verify_frozen_catalog_wrapper_artifact.py",
+      "action_server/tests/action_server_tests/mcp/test_canvas_runtime_admission.py",
+      "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+      "action_server/tests/action_server_tests/test_native_startup_diagnostics_workflow.py",
+      "action_server/tests/contract_tests/test_frozen_wrapper_acceptance_plugin.py",
+      "action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py",
+      "action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py",
+      "action_server/tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py",
+      "developer/tests/test_frozen_wrapper_metadata.py",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/README.md",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/build-log-evidence.json",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/byte-source-review.json",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/current-control-independent-review.json",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/inspect_archives.py",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/manifest.json",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/producer-input-inventory.json",
+      "docs/program/evidence/runtime-frozen-current-source-20261011/selected-test-inventory.json"
+    ],
+    "deleted": []
+  },
+  "bootstrap": "reused prior prepared gateway with19 unchanged input blob/modes and5 exactpyvenvcfg/python roots; no installs",
+  "list_discovery": {
+    "old14c": 0,
+    "new_actual_emitted": 1,
+    "broad": 2,
+    "wrong_fixture": 1,
+    "actual_browser_or_test_execution": false,
+    "driver_semantics": {
+      "common": {
+        "path": "/workspace/engineering/pr310/action_server/frontend/node_modules/playwright/lib/common/index.js",
+        "size": 116916,
+        "sha256": "8f2588ccdb7ce2d245fdbe3222ba67817293799dff1ba2e58303f0d558b6526f"
+      },
+      "runner": {
+        "path": "/workspace/engineering/pr310/action_server/frontend/node_modules/playwright/lib/runner/index.js",
+        "size": 304701,
+        "sha256": "6dcf135a144b0f243848128bb68e0a25898b8ad764a34326f36ab45d9a9e1685"
+      }
+    }
+  },
+  "independent_service_free_validator": {
+    "path": "/workspace/engineering/pr305-selector-independent-source-review/independent-result-validator-controls.json",
+    "size": 518,
+    "sha256": "5545bb9ec84f50d4f28770186bf03e237e80478b74a35ced6188e29716f618e2"
+  },
+  "all8_generator_outputs_exact": [
+    {
+      "path": "/workspace/engineering/pr305/.github/workflows/actions_runtime_tests.yml",
+      "size": 7049,
+      "sha256": "430588021cf889391842be3a7c78eb4c04648b1bb7311f9c03da452e313fb161"
+    },
+    {
+      "path": "/workspace/engineering/pr305/.github/workflows/actions_runtime_rcc_provider_rollback.yml",
+      "size": 36244,
+      "sha256": "066adce2531a5223720661afce2f6485d7493243c10156eb1d84e624e252ac92"
+    },
+    {
+      "path": "/workspace/engineering/pr305/.github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+      "size": 25887,
+      "sha256": "aabf25267c48b9d361f4d575a332a9f7bdddc4c5d1f3ce4ff5ac151c98d36140"
+    },
+    {
+      "path": "/workspace/engineering/pr305/.github/workflows/actions_core_tests.yml",
+      "size": 6557,
+      "sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296"
+    },
+    {
+      "path": "/workspace/engineering/pr305/.github/workflows/http_helper_tests.yml",
+      "size": 3225,
+      "sha256": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8"
+    },
+    {
+      "path": "/workspace/engineering/pr305/.github/workflows/actions_runtime_pypi_release.yml",
+      "size": 13180,
+      "sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f"
+    },
+    {
+      "path": "/workspace/engineering/pr305/.github/workflows/actions_runtime_binary_release.yml",
+      "size": 12155,
+      "sha256": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64"
+    },
+    {
+      "path": "/workspace/engineering/pr305/.github/workflows/actions_runtime_recovery.yml",
+      "size": 43844,
+      "sha256": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f"
+    }
+  ],
+  "writer_evidence": {
+    "current-union-source-parity.json": {
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/current-union-source-parity.json",
+      "size": 3142,
+      "sha256": "a3410fae84e69b9443ecf82258ef8d529422adf93da14a615e43521bad049254"
+    },
+    "current-union-bootstrap-reuse.json": {
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/current-union-bootstrap-reuse.json",
+      "size": 2854,
+      "sha256": "d1414b9a5e787d923682d0a273423490e69b7e38ab7915326088cccb0461cc3c"
+    },
+    "full-title-discovery/selector-discovery.json": {
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/full-title-discovery/selector-discovery.json",
+      "size": 2947,
+      "sha256": "d61d80a8af0a8a5a09cfe1e653afbc242ffb8a7222a51449a0f64a121b0f9c7d"
+    },
+    "actual-emitted-selector-GREEN.json": {
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/actual-emitted-selector-GREEN.json",
+      "size": 833,
+      "sha256": "9a63c583e592f0ea8c5997b9777272845584a9fe27fdcf3dda0b7f6eadfc0eb8"
+    },
+    "source-emitted-selector-RED.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/source-emitted-selector-RED.log",
+      "size": 7736,
+      "sha256": "447a9c41c6e7d99007451eb0e1304114175fb34222058e4fa939e113076ac191"
+    },
+    "source-selector-GREEN.log": {
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/source-selector-GREEN.log",
+      "size": 4074,
+      "sha256": "d9aabea2d48deb86b8c3db273858c30869e1642967027fb6c28bd01523b0b64f"
+    }
+  },
+  "historical_actuals": {
+    "V2": "14c controller failure before startup; retained unchanged",
+    "V3": {
+      "receipt": {
+        "path": "/workspace/engineering/pr305-v3-independent-runner-review/independent-actual-v3-failure-review.json",
+        "size": 7899,
+        "sha256": "8bf57b7d80be59fbc515314853ca0d109ca6c8a64cd21f688a54bdd9f8f3655c"
+      },
+      "checkpoint": {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v3-failed-checkpoint.json",
+        "size": 14899,
+        "sha256": "18ebad580803103351a4c3f7a684f7e9f302a602182c699ef06450eadab29614"
+      },
+      "status": "14c browser discovery failure, three Python tool Runs and sampledCore provenance/cleanup partial; no newunion actual result"
+    }
+  },
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md integrates62 new lines in066, carried into actual1c75 union; read-only reviewer verified/admitted those lessons",
+    "Durable learning captured": "Locked Playwright grep uses file/project/suite/tag full title with leading blank parent entries; --list proves selection only. Exact collected ownership, primary error/outer result preservation, Runtime versus outer cleanup/sampler distinctions and tool-only Run counting preserve actual partial-result scope.",
+    "Evidence": "actual14c failure8bf57; corrected source-emitted list1case; actual driver_ grepTitleWithTags code; eight independent validator controls; wholemodule singleliteral ASTdiff; native273 and exact8 outputs",
+    "Stale or ambiguous guidance removed": "The incorrect leaf-title-only selector is replaced; copied pre-execution NOT_RUN proposal stays historical while guide distinguishes actual partial Runtime execution from absent browser result. Earlier7e244/5dbf reviewer proposals and helper/sampler proposal integrated/adapted, no duplicated policy or waiver.",
+    "Remaining uncertainty": "Fresh current-union hostedCI, immutable V4 runner qualification and separately authorized actual browser/five-tool-Run/shared-cache gate are pending. Historical14c actual receipts remain failures and do not become3ec actual results. WholeCorewheel/coldregistry/productionartifact/OAuth/full134 remain unqualified."
+  },
+  "Upstream disposition": "none; Actions selector integration defect with supported Playwright full-title semantics, no upstream violation established",
+  "writer_frozen_checkpoint": {
+    "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/frozen-current-union-source-checkpoint.json",
+    "sha256": "ccfb6baa0a3e63b446ce388bfe00519cfcf992ba2821053e44a91528043381e9",
+    "bytes": 10712
+  },
+  "fresh_configured_gates": {
+    "Bootstrap": "REUSED earlieractualfivepackageenvs; exact71a/currenttrackedinputs andpreparedvenv parity, no reinstall/npm install",
+    "Doctor": "PASS, inputparity bound unchanged19toolkit/manifest/lockfiles",
+    "ToolkitTest": {
+      "passed": 69
+    },
+    "configured_Runtime_invoke_test_not_integration": {
+      "command": "toolkit.poetry(\"action_server\", \"run\", \"invoke\", \"test-not-integration\")",
+      "duration_seconds": 139.28,
+      "passed": 1170,
+      "skipped": 12,
+      "warnings": 15,
+      "workers": 2
+    },
+    "configured_lint": "Ruffcheck/format302files+IsortPASS; Markdownlintunavailable",
+    "configured_typecheck": "Mypy338PASS",
+    "focused_controls": {
+      "passed": 19,
+      "skipped": 0
+    },
+    "fresh_hosted_current_head": "NOT_RUN",
+    "full_package_integration": "NOT_RUN",
+    "native_or_browser_actual_after_fix": "NOT_AUTHORIZED_NOT_RUN",
+    "scoped_authoring_and_admission": {
+      "integration_deselected": 2,
+      "passed": 20,
+      "skipped": 0
+    },
+    "whitespace": "PASS"
+  },
+  "independent_review_source": {
+    "path": "/workspace/engineering/pr305-selector-independent-source-review/review_source.py",
+    "sha256": "e204ea826915a6d127e72b7ff1b9e350d565633af1a727d85cf4c4065acf1c4c",
+    "bytes": 9462
+  },
+  "independent_source_gateway_log": {
+    "path": "/workspace/engineering/pr305-selector-independent-source-review/source-review.log",
+    "sha256": "7eba5830e5c469fadec6f293cf9fa979646beb4724487e124a9fb1c43551afaa",
+    "bytes": 4922
+  },
+  "review_finalizer": {
+    "path": "/workspace/engineering/pr305-selector-independent-source-review/finalize_review.py",
+    "sha256": "1be811ce78c598ffb23420dbeb63422aacfa2bbb71b35b7af9a9e767e04dcadb",
+    "bytes": 3235
+  },
+  "frozen_evidence_hashes_verified": [
+    {
+      "bytes": 7736,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/source-emitted-selector-RED.log",
+      "sha256": "447a9c41c6e7d99007451eb0e1304114175fb34222058e4fa939e113076ac191"
+    },
+    {
+      "bytes": 4074,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/source-selector-GREEN.log",
+      "sha256": "d9aabea2d48deb86b8c3db273858c30869e1642967027fb6c28bd01523b0b64f"
+    },
+    {
+      "bytes": 13485,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/doctor.log",
+      "sha256": "08cfd24769173194bff860721d3263143870a4ca37e04fd5f51cc7a86ae03a28"
+    },
+    {
+      "bytes": 8113,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/discovery-RED-GREEN.log",
+      "sha256": "cbf74d265fa457e60c576f6d764f37707ff69ba0948cb9be1fae4a9568ea5835"
+    },
+    {
+      "bytes": 6613,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/discovery-full-title-RED-GREEN.log",
+      "sha256": "9c6b43d377bf5230afcee9975459136c2538c863141c92aba05e9b103da4c653"
+    },
+    {
+      "bytes": 8205,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/final-scoped-static-gates.log",
+      "sha256": "cb38f51f77441c3ce0683a7918fb718a9d90eefeb3d11e30463b0306964a8508"
+    },
+    {
+      "bytes": 305117,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/current-union-full-source-gates.log",
+      "sha256": "8e82faac133dc09e7dc9c3dd286058ce5b38282d9d9baca871949630ea40cba3"
+    },
+    {
+      "bytes": 833,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/actual-emitted-selector-GREEN.json",
+      "sha256": "9a63c583e592f0ea8c5997b9777272845584a9fe27fdcf3dda0b7f6eadfc0eb8"
+    },
+    {
+      "bytes": 259,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/actual-validator-error-controls.json",
+      "sha256": "53c7599cee3aa02a39afbe9e5ff47960cc3b80ee02262ec61ffbefb45e7bcc8c"
+    },
+    {
+      "bytes": 2854,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/current-union-bootstrap-reuse.json",
+      "sha256": "d1414b9a5e787d923682d0a273423490e69b7e38ab7915326088cccb0461cc3c"
+    },
+    {
+      "bytes": 3142,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/current-union-source-parity.json",
+      "sha256": "a3410fae84e69b9443ecf82258ef8d529422adf93da14a615e43521bad049254"
+    },
+    {
+      "bytes": 517,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/ordinary-current-target-union-proof.json",
+      "sha256": "e68dde4596712b1b7a6b3992171f56ecea7bc21b652c6e76e071d0ec2d254b04"
+    },
+    {
+      "bytes": 9334,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v2-failed-checkpoint.json",
+      "sha256": "989584cfeaab8a9eb26ca3cd436c594cf3b6cf322c3f17c1bc51c6d00784e79a"
+    },
+    {
+      "bytes": 14899,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v3-failed-checkpoint.json",
+      "sha256": "18ebad580803103351a4c3f7a684f7e9f302a602182c699ef06450eadab29614"
+    },
+    {
+      "bytes": 7899,
+      "path": "/workspace/engineering/pr305-v3-independent-runner-review/independent-actual-v3-failure-review.json",
+      "sha256": "8bf57b7d80be59fbc515314853ca0d109ca6c8a64cd21f688a54bdd9f8f3655c"
+    }
+  ],
+  "canonical_proposal_disposition": [
+    {
+      "disposition": "Integrated exactparagraphs in066 andretained3ec",
+      "patch": {
+        "bytes": 1671,
+        "path": "/workspace/engineering/pr305-v3-independent-runner-review/canonical-collected-module-proposed.patch",
+        "sha256": "7e244ee6986c68e7b8244f667044629fa6be661a968b99be45f1680507e78bee"
+      }
+    },
+    {
+      "disposition": "Integrated actualscopeparagraphverbatim; discoveryparagraphintegratedwithmeasuredfulltitle/leadingwhitespacelearning",
+      "patch": {
+        "bytes": 1643,
+        "path": "/workspace/engineering/pr305-v3-independent-runner-review/canonical-actual-v3-proposed.patch",
+        "sha256": "5dbf490d781451fefc400cacd9adccdf0402af16962863a73ec33975b4ae468a"
+      }
+    }
+  ],
+  "limitations": [
+    "No product/native/browser actual execution in independent source review; only eight synthetic result-admission controls and static/generator parity under canonical RCC gateway.",
+    "Source gates admit production input equivalence to the measured92498 build, not a new build or public acceptance run.",
+    "Configured lint reported Markdownlint unavailable; configured Ruff/Isort/typecheck pass. No skip/deadline/cleanup/ownership waiver."
+  ]
+}

@@ -843,5 +843,305 @@
     "source": "/workspace/engineering/current-admission-review/checkpoint168-independent-durability-review.json",
     "bytes": 3791,
     "sha256": "aabbcaeaa014785ea49f8ff8a695e7bfeb9da7016bfcc048b1e2fc55fccaf07e"
+  },
+  "pr310-actual311-refresh-frozen-source-receipt.json": {
+    "source": "/workspace/engineering/pr310-current-refresh/frozen-source-receipt.json",
+    "bytes": 12712,
+    "sha256": "a17dbc7d262b3ffa8179b66618373fea0cb3896d1cafabdd2d7d417a92ee2194"
+  },
+  "pr310-actual311-refresh-independent-source-freeze-review.json": {
+    "source": "/workspace/engineering/pr310-current-refresh/independent-source-freeze-review.json",
+    "bytes": 6577,
+    "sha256": "6282ffab3862700e9b0279de029a7cfd64ebb59909dd3b860463a5ec43cc1fed"
+  },
+  "pr310-actual311-refresh-source-union-proof.json": {
+    "source": "/workspace/engineering/pr310-current-refresh/source-union-proof.json",
+    "bytes": 4663,
+    "sha256": "b27754ef8f7d2a7272d34ce71c1f6be1bf99dbe6fbcc5de4eba6d4700369e6a8"
+  },
+  "pr310-actual311-refresh-bootstrap-reuse.json": {
+    "source": "/workspace/engineering/pr310-current-refresh/bootstrap-reuse.json",
+    "bytes": 2895,
+    "sha256": "e32a2f3ef8137e4e1dd78e260d9c155dd1de23d08cddaa78d794b493ff41e40d"
+  },
+  "pr310-actual311-refresh-generator-roundtrip.json": {
+    "source": "/workspace/engineering/pr310-current-refresh/generator-roundtrip.json",
+    "bytes": 3164,
+    "sha256": "21412f27d916c53f7db67fd1aa920040a27846192316d21d935b360ff9eb5da4"
+  },
+  "pr310-actual311-refresh-canonical-actual-delta.patch": {
+    "source": "/workspace/engineering/pr310-current-refresh/canonical-actual-delta.patch",
+    "bytes": 6727,
+    "sha256": "c3b1ef94af5dd54132b4f771be3ce413f8d244695dcbfa2455848578253bc8ad"
+  },
+  "pr310-actual311-refresh-draft-proof-disposition.md": {
+    "source": "/workspace/engineering/pr310-current-refresh/draft-proof-disposition.md",
+    "bytes": 715,
+    "sha256": "4ae25286458182498a514edc7c6c1144bdb988701d8380016927b4f50d0cc9e8"
+  },
+  "pr310-original-first-readiness-310-terminal-first-readiness-independent-review.json": {
+    "source": "/workspace/engineering/current-admission-review/310-terminal-first-readiness-independent-review.json",
+    "bytes": 9291,
+    "sha256": "de53338aa808a3d7308901761f3fcfa5598de5f000e678f7146952bf2268cfc2"
+  },
+  "pr310-original-first-readiness-310-initial-readiness-canonical-proposed.patch": {
+    "source": "/workspace/engineering/current-admission-review/310-initial-readiness-canonical-proposed.patch",
+    "bytes": 1660,
+    "sha256": "b4b32085a6adb9e1a0f9c531245267d12d50d41d7ddbadbe343f9ed9c647c0e7"
+  },
+  "pr306-actual311-refresh-frozen-source-receipt.json": {
+    "source": "/workspace/engineering/pr306-refresh-preparation/frozen-source-receipt.json",
+    "bytes": 13902,
+    "sha256": "cf34ca2aec87e1b6d0db6313683ce37a53bdd8fb0488f05bf61fe075ebc0b030"
+  },
+  "pr306-actual311-refresh-current-source-proof.json": {
+    "source": "/workspace/engineering/pr306-refresh-preparation/current-source-proof.json",
+    "bytes": 2761,
+    "sha256": "6cfbd06fcc1e446009b36fba0f94535977dac0dd2f08d43df093e763f6bbd8a0"
+  },
+  "pr306-actual311-refresh-generator-roundtrip.json": {
+    "source": "/workspace/engineering/pr306-refresh-preparation/generator-roundtrip.json",
+    "bytes": 3164,
+    "sha256": "21412f27d916c53f7db67fd1aa920040a27846192316d21d935b360ff9eb5da4"
+  },
+  "pr306-actual311-refresh-canonical-actual-delta.patch": {
+    "source": "/workspace/engineering/pr306-refresh-preparation/canonical-actual-delta.patch",
+    "bytes": 2456,
+    "sha256": "cac89fd92340ccb2e3bf41a415881450f1b65bb5a7de6892121bb8d2195a3ee6"
+  },
+  "pr306-actual311-independent-independent-current-source-review.json": {
+    "source": "/workspace/engineering/pr306-independent-current-review/independent-current-source-review.json",
+    "bytes": 11382,
+    "sha256": "4533d20b974e3ee92b145c0a5c24587374278de9b62d08fd4722a243ca9b2b62"
+  },
+  "pr305-actual311-selector-frozen-current-union-source-checkpoint.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/frozen-current-union-source-checkpoint.json",
+    "bytes": 10712,
+    "sha256": "ccfb6baa0a3e63b446ce388bfe00519cfcf992ba2821053e44a91528043381e9"
+  },
+  "pr305-actual311-selector-ordinary-current-target-union-proof.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/ordinary-current-target-union-proof.json",
+    "bytes": 517,
+    "sha256": "e68dde4596712b1b7a6b3992171f56ecea7bc21b652c6e76e071d0ec2d254b04"
+  },
+  "pr305-actual311-selector-current-union-source-parity.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/current-union-source-parity.json",
+    "bytes": 3142,
+    "sha256": "a3410fae84e69b9443ecf82258ef8d529422adf93da14a615e43521bad049254"
+  },
+  "pr305-actual311-selector-current-union-bootstrap-reuse.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/current-union-bootstrap-reuse.json",
+    "bytes": 2854,
+    "sha256": "d1414b9a5e787d923682d0a273423490e69b7e38ab7915326088cccb0461cc3c"
+  },
+  "pr305-actual311-selector-canonical-current-union.patch": {
+    "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/canonical-current-union.patch",
+    "bytes": 9261,
+    "sha256": "c5e79cc6cef79c65c6e870431df654d7a39d96381e7e6b6ee9e9e7bc479d2f97"
+  },
+  "pr305-actual311-selector-actual-emitted-selector-GREEN.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/actual-emitted-selector-GREEN.json",
+    "bytes": 833,
+    "sha256": "9a63c583e592f0ea8c5997b9777272845584a9fe27fdcf3dda0b7f6eadfc0eb8"
+  },
+  "pr305-actual311-selector-actual-validator-error-controls.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/actual-validator-error-controls.json",
+    "bytes": 259,
+    "sha256": "53c7599cee3aa02a39afbe9e5ff47960cc3b80ee02262ec61ffbefb45e7bcc8c"
+  },
+  "pr305-actual311-selector-actual-emitted-list-stdout.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/actual-emitted-list-stdout.json",
+    "bytes": 2929,
+    "sha256": "4af67b6a880f109991748e8832de8a682a2813ab0e0541c41cb63330cd4bc43d"
+  },
+  "pr305-actual311-selector-full-title-GREEN-stdout.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/full-title-GREEN-stdout.json",
+    "bytes": 2275,
+    "sha256": "36dde6c5b2488b8ca57d854fda0d49d7ed436c388f280f18de3ffb15ed33a6cb"
+  },
+  "pr305-actual311-selector-overbroad-POISON-stdout.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/overbroad-POISON-stdout.json",
+    "bytes": 3452,
+    "sha256": "9ced3d60264692affda815c1580a0afdcf375e0017bae24b2a3565e7c5884f43"
+  },
+  "pr305-actual311-selector-retained-source-RED-stdout.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/retained-source-RED-stdout.json",
+    "bytes": 2261,
+    "sha256": "5cf747363b677e9ace5a5905c64475c53fddbba5699e64467e49d6aab21b550a"
+  },
+  "pr305-actual311-selector-wrong-case-POISON-stdout.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-selector-fix/wrong-case-POISON-stdout.json",
+    "bytes": 2307,
+    "sha256": "52e599f609222b7506d6f47d4222572f597461060ff2a56bba7392ab54de1dbe"
+  },
+  "pr305-selector-independent-independent-frozen-source-review.json": {
+    "source": "/workspace/engineering/pr305-selector-independent-source-review/independent-frozen-source-review.json",
+    "bytes": 16644,
+    "sha256": "d29a5c618c8ff32effee017bbceed355eda911791dcef8c97260db636bab8615"
+  },
+  "pr305-canvas-native-public-runner-v4.py": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v4.py",
+    "bytes": 33806,
+    "sha256": "da4be9f4f6f01a7079f0ff285fa8339618e663425224a4873f3cf299d6787032"
+  },
+  "pr305-test_runner_admission_v4.py": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v4.py",
+    "bytes": 23367,
+    "sha256": "c0fe769b1aa21529de1f0f1c767cf5812c7b2953f2547787d9f658a471099cce"
+  },
+  "pr305-immutable-runner-proposal-v4.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v4.json",
+    "bytes": 22071,
+    "sha256": "28ea5fe06285f3dcfe8d1d00dc0583dfb286026afdaa129067830a8ba6ec674e"
+  },
+  "pr305-canonical-runner-v4-proposed-delta.md": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v4-proposed-delta.md",
+    "bytes": 2565,
+    "sha256": "6ff8419c855741d18ba25b71e88e810815704b62231ecd206251ee14fbe1e26e"
+  },
+  "pr305-actual-v4-failed-checkpoint-scoped.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/actual-v4-failed-checkpoint-scoped.json",
+    "bytes": 23800,
+    "sha256": "21385511f183b27c92cf94d3d9acf9e19b27a6a4a41fae0827cffed30651c632"
+  },
+  "pr305-v4-independent-independent-v4-runner-qualification.json": {
+    "source": "/workspace/engineering/pr305-v4-independent-runner-review/independent-v4-runner-qualification.json",
+    "bytes": 13596,
+    "sha256": "92ddf866b1b0414b310f3b96b9d8b87dbba8b21c506dd3aeb9a115b1ef4b92d4"
+  },
+  "pr305-v4-independent-independent-real-collection-controls.json": {
+    "source": "/workspace/engineering/pr305-v4-independent-runner-review/independent-real-collection-controls.json",
+    "bytes": 1421,
+    "sha256": "2d961c7b2588f89a21026b30495c217f4606e3e24b2eb673ea02c7c8fa4bd0a3"
+  },
+  "pr305-v4-independent-independent-actual-v4-failure-review.json": {
+    "source": "/workspace/engineering/pr305-v4-independent-runner-review/independent-actual-v4-failure-review.json",
+    "bytes": 8521,
+    "sha256": "5fe7bbe683b77bc156de21c75a2bcfd6591b6be574dc838661f1ed182df564bf"
+  },
+  "pr305-v4-independent-canonical-actual-v4-proposed.patch": {
+    "source": "/workspace/engineering/pr305-v4-independent-runner-review/canonical-actual-v4-proposed.patch",
+    "bytes": 1302,
+    "sha256": "ce3ddb4458c87cb3a61e39fb77378c19f62303d92b7f422a5ab86ce0e83d6f9a"
+  },
+  "next-actual311-union-independent-next-current-union-preparation.json": {
+    "source": "/workspace/engineering/next-current-union-independent-preparation/independent-next-current-union-preparation.json",
+    "bytes": 84478,
+    "sha256": "862c893d4c3bf201245875294f382b1d745380cb1f116752bda7498dab6a81e6"
+  },
+  "next-actual311-union-pr299-prospective-complete-leaf-modes-blobs.json": {
+    "source": "/workspace/engineering/next-current-union-independent-preparation/pr299-prospective-complete-leaf-modes-blobs.json",
+    "bytes": 236942,
+    "sha256": "5b3666d2923f769e4dcd5cc94b76213c7c78e0afa95a043a3ee0f70cc0acfa14"
+  },
+  "next-actual311-union-pr308-prospective-complete-leaf-modes-blobs.json": {
+    "source": "/workspace/engineering/next-current-union-independent-preparation/pr308-prospective-complete-leaf-modes-blobs.json",
+    "bytes": 235217,
+    "sha256": "ca6d19a215294f4bbf0547704c1431e57ac5d8b53e138cd24e4940db0d8413db"
+  },
+  "next-actual311-union-pr309-prospective-complete-leaf-modes-blobs.json": {
+    "source": "/workspace/engineering/next-current-union-independent-preparation/pr309-prospective-complete-leaf-modes-blobs.json",
+    "bytes": 235395,
+    "sha256": "50311b5bec3493e9cc105835c6c33df1b9af4c193bc143999f85fc83f22f84f9"
+  },
+  "next-actual311-union-canonical-prospective-source-and-CI-filter-proposed.patch": {
+    "source": "/workspace/engineering/next-current-union-independent-preparation/canonical-prospective-source-and-CI-filter-proposed.patch",
+    "bytes": 1689,
+    "sha256": "8e91bc5395e01d6e02347a6597f452e6a7251d1a66464a45f359a4273b8610ed"
+  },
+  "handoff169-independent-remote-readback.json": {
+    "source": "/workspace/engineering/current-admission-review/handoff169-independent-remote-readback.json",
+    "bytes": 2214,
+    "sha256": "4862a9f21b6537b051b350a63506477614d7e2616402b026867cfa191c5bae06"
+  },
+  "pr305-push-reference-correction.json": {
+    "source": "/workspace/engineering/pr305-push-reference-correction.json",
+    "bytes": 1410,
+    "sha256": "0718c2e06ede3b2e4f924c1f2dc5bb9b3df5820b24681676a08982daaaedb995"
+  },
+  "rcc-public-checkpoint-live-recovery.json": {
+    "source": "/workspace/engineering/rcc-public-checkpoint-live-recovery.json",
+    "bytes": 4809,
+    "sha256": "91a74396931a4336182cdc79d4226c01f6b6a394376c12856b3def5c8776f5a4"
+  },
+  "pr309-actual311-frozen-source-receipt.json": {
+    "source": "/workspace/engineering/pr309-actual311-refresh/frozen-source-receipt.json",
+    "bytes": 6413,
+    "sha256": "7654ba25146baecf37b18423183ef3609c5fd231ecc19f81d0d6393fdd258906"
+  },
+  "pr308-actual311-frozen-source-receipt.json": {
+    "source": "/workspace/engineering/pr308-actual311-refresh/frozen-source-receipt.json",
+    "bytes": 7124,
+    "sha256": "804e7de01f982a3d4901c52b9ac765c3e3491a98f135792287bc4a9220252b20"
+  },
+  "pr305-canvas-native-public-runner-v5.py": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v5.py",
+    "bytes": 35497,
+    "sha256": "09cdc6b19f5d3d9cc94fadca23373108868521e0378d33960146b1a8522e88ad"
+  },
+  "pr305-test_runner_admission_v5.py": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v5.py",
+    "bytes": 30661,
+    "sha256": "e39fb419aed778fb9f5ef1408333ec07408f05759a85c2b212a15e19dff5932b"
+  },
+  "pr305-immutable-runner-proposal-v5.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v5.json",
+    "bytes": 28665,
+    "sha256": "f915a178adfa23833fe7a2e047e9c0b98f995fdd4b95730e1bb522e5f48fe7ee"
+  },
+  "pr305-canonical-runner-v5-proposed.patch": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v5-proposed.patch",
+    "bytes": 2010,
+    "sha256": "e84eb7659efef7f349231b1b8b5a80ef5c0d8a2f20e9dc2e1a9d59eea8c3e0b0"
+  },
+  "pr305-v5-ast-scope-proof.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/v5-ast-scope-proof.json",
+    "bytes": 599,
+    "sha256": "35bf4a28e73e724ecb0db8b49925bbef8b77b7823d81f2489c2d99f2e6ad0e41"
+  },
+  "pr305-actual-v4-original-output-trace.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/actual-v4-original-output-trace.json",
+    "bytes": 7490,
+    "sha256": "af65538d285785b43ee6b622f732dc57cfe3136f010fe3fe7bbc67f55e11abb3"
+  },
+  "pr305-canonical-actual-v4-proposed-delta.md": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/canonical-actual-v4-proposed-delta.md",
+    "bytes": 523,
+    "sha256": "29139c6658ab7d291f853b3f5b609294fcd88ef5910f9b987e9fdd070d1e22da"
+  },
+  "pr305-v5-real-collection-controls.json": {
+    "source": "/workspace/actions-cloud/receipts/pr305-runner/v5-real-collection-controls.json",
+    "bytes": 596,
+    "sha256": "e3139d093929442aa4cbdbdd5f78ae1552a871e0eb5695d79424694fc4ac6fe4"
+  },
+  "pr305-independent-v5-runner-qualification.json": {
+    "source": "/workspace/engineering/pr305-v5-independent-runner-review/independent-v5-runner-qualification.json",
+    "bytes": 17474,
+    "sha256": "3e57a47907b647571e32f5f0466cd053b1927c4e858ba1ad4835de4618d8dc4e"
+  },
+  "pr309-actual311-independent-independent-frozen-source-review.json": {
+    "source": "/workspace/engineering/pr309-actual311-independent-review/independent-frozen-source-review.json",
+    "bytes": 8608,
+    "sha256": "1d17999812e80c58e0a10e55a96a8fe55f13072b293465c52eb85eb13ba2412c"
+  },
+  "pr309-actual311-independent-canonical-integrated-actual311-delta.patch": {
+    "source": "/workspace/engineering/pr309-actual311-independent-review/canonical-integrated-actual311-delta.patch",
+    "bytes": 1238,
+    "sha256": "1371319e50f1fd45f2c8191c6c37f246532077bf4dea018b8046da6458dad347"
+  },
+  "pr308-actual311-independent-independent-frozen-source-review.json": {
+    "source": "/workspace/engineering/pr308-actual311-independent-review/independent-frozen-source-review.json",
+    "bytes": 9191,
+    "sha256": "e46fdd1d7ed7b7073b9cc3d1fdaed29fdd1e314f674257ea1a9c1260c75b867d"
+  },
+  "pr308-actual311-independent-canonical-integrated-actual311-delta.patch": {
+    "source": "/workspace/engineering/pr308-actual311-independent-review/canonical-integrated-actual311-delta.patch",
+    "bytes": 1220,
+    "sha256": "34a93d6719c8e33168155e1c03caf7d76859e4a6cc9826e8d04900826fcbb9f6"
+  },
+  "current-309-308-verified-push-readback.json": {
+    "source": "/workspace/engineering/current-309-308-verified-push-readback.json",
+    "bytes": 873,
+    "sha256": "1fc6cd33b0f1a834eebc355bd39bf1ce94dcced14a05e78fcffc22a17223bd4c"
   }
 }

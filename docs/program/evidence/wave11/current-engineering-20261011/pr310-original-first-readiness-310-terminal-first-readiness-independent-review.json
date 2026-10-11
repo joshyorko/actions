@@ -1,0 +1,218 @@
+{
+  "verdict": "HOLD_EXACT310_CURRENT_COMPLETE_CI_AND_MERGE; GO_BOUNDED_FIRST_READINESS_FAILURE_CENSUS_ONLY",
+  "source": {
+    "head": "4b2df94d77b1145a9ed586fb924eeb88c478d01c",
+    "tested_merge": "9b0928c477771ac1623401f5c6d28cb03edb2e03",
+    "tree": "f035fd321afe1a5821a249fa7ccd3aea95ee703d",
+    "ordered_tested_parents": [
+      "fbde0d3a248c47c9964851355f96575c89a87329",
+      "4b2df94d77b1145a9ed586fb924eeb88c478d01c"
+    ],
+    "new_actual_target": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+    "old_tested_union_not_current_target_acceptance": true
+  },
+  "job": {
+    "run": 38110093076,
+    "job": 114383685403,
+    "terminal": "FAILURE",
+    "only_failed_step": "Test (integration)",
+    "url": "https://github.com/joshyorko/actions/actions/runs/38110093076/job/114383685403"
+  },
+  "full_declared_inventory": {
+    "count": 23,
+    "success": 21,
+    "expected_tag_only_workitems_publish_skip": 1,
+    "failure": 1,
+    "current_Runtime_required_failure_not_excluded": true,
+    "metadata": {
+      "path": "/workspace/engineering/current-admission-review/310-terminal-authenticated-safe-metadata.json",
+      "bytes": 11690,
+      "sha256": "7f1d7d2777cd67664155198594bc809c2965e85565cc0a3941e00c649471b0b8"
+    }
+  },
+  "counts": {
+    "portable": {
+      "passed": 1054,
+      "skipped": 94,
+      "warnings": 14,
+      "seconds": 434.44
+    },
+    "integration": {
+      "failed": 3,
+      "passed": 128,
+      "skipped": 18,
+      "deselected": 1151,
+      "seconds": 1835.1
+    },
+    "configured_typecheck_after_test_failure": {
+      "status": "PASS",
+      "source_files": 335
+    }
+  },
+  "failed_nodes_and_complete_RCC_intervals": [
+    {
+      "node": "action_server_tests\\test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+      "intervals_00_through_15_seconds": [
+        0.03,
+        0.006,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.644,
+        63.605,
+        1.522,
+        0.0,
+        2.24,
+        0.0,
+        0.001,
+        4.032,
+        17.408
+      ],
+      "interval_sum_seconds": 89.488,
+      "caller_holotree_duration_seconds": 89.52,
+      "caller_minus_interval_sum_seconds": 0.032,
+      "phase": "INITIAL_FIRST_READINESS_BEFORE_SEMANTIC_ASSERTIONS"
+    },
+    {
+      "node": "action_server_tests\\test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+      "intervals_00_through_15_seconds": [
+        0.035,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.006,
+        0.0,
+        0.63,
+        65.899,
+        2.379,
+        0.0,
+        1.473,
+        0.0,
+        0.001,
+        4.066,
+        13.814
+      ],
+      "interval_sum_seconds": 88.303,
+      "caller_holotree_duration_seconds": 88.34,
+      "caller_minus_interval_sum_seconds": 0.037,
+      "phase": "INITIAL_FIRST_READINESS_BEFORE_SEMANTIC_ASSERTIONS"
+    },
+    {
+      "node": "action_server_tests\\test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+      "intervals_00_through_15_seconds": [
+        0.024,
+        0.011,
+        0.003,
+        0.001,
+        0.001,
+        0.0,
+        0.001,
+        0.597,
+        60.665,
+        1.406,
+        0.0,
+        2.353,
+        0.001,
+        0.001,
+        6.893,
+        15.474
+      ],
+      "interval_sum_seconds": 87.431,
+      "caller_holotree_duration_seconds": 87.45,
+      "caller_minus_interval_sum_seconds": 0.019,
+      "phase": "INITIAL_FIRST_READINESS_BEFORE_SEMANTIC_ASSERTIONS"
+    }
+  ],
+  "primary_source_attribution": {
+    "exception": "TimeoutError",
+    "location": "action_server/src/actions/server/_selftest.py:202",
+    "wait": "future.result(1) followed by native90-second deadline",
+    "startup_stage": "first host/port readiness before reload/collision/recovery assertions",
+    "primary_paths_mode_blobs": {
+      "action_server/src/actions/server/_selftest.py": "100644 blob ee3268ae80b424f42f341770afad86bf72ee717f",
+      "action_server/src/actions/server/_rcc.py": "100644 blob 1a310407efe52091194e4d121ac7bece15ea5b70",
+      "action_server/src/actions/server/_robo_utils/process.py": "100644 blob 5c10630a44bdee21f570ebbbd199c188e0837994",
+      "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": "100644 blob 0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+      "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": "100644 blob 12ec0f644d96a45824ac110b7f1dafebb4c42ce6"
+    },
+    "primary_paths_equal_accepted292_current4b_and_actual311target": true,
+    "producer268_selected5_equal_base_head_tested_actual_target": true,
+    "actual311_observer_import_is_test_only": [
+      "action_server/tests/action_server_tests/fixtures.py",
+      "action_server/tests/action_server_tests/native_startup_diagnostics.py"
+    ],
+    "unchanged_test_nodes_preserved": true
+  },
+  "RCC_interpretation": {
+    "version": "18.19.3",
+    "immutable_source": {
+      "conda/workflows.go": {
+        "commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+        "local_path": "/workspace/engineering/rcc-conda-workflows.go",
+        "sha256": "0e0390bf4930645a1d3819fd5ecb99aa9892c281846923c0952d0b19ed93e694"
+      },
+      "htfs/commands.go": {
+        "commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+        "local_path": "/workspace/engineering/rcc-htfs-commands.go",
+        "sha256": "e210cdd9d7978c530212b0bba8db0f5eb59fb437eaa19dce70b85c0135fc9b03"
+      },
+      "pretty/functions.go": {
+        "commit": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+        "local_path": "/workspace/engineering/rcc-pretty-functions.go",
+        "sha256": "04eb4b94cff48868d743de47e7b9f9f9bb5737ce4d51b282ac29d8f8d5279b32"
+      }
+    },
+    "delta_contract": "now minus previous ProgressMark",
+    "step08": "preceding micromamba/layer-record/setup interval before UV starts",
+    "step09": "UV interval",
+    "step15": "restoration/externally-managed/stage cleanup interval; not total",
+    "no_unexplained_caller_vs_sum_forwarding_gap": true,
+    "remaining_ready_port_duration_and_phase": "UNAVAILABLE; no child CPU/IO or firstREADY observation retained in this job"
+  },
+  "cleanup": {
+    "failure_cleanup_source_budget_seconds": 20,
+    "explicit_note_counts": {
+      "Action Server startup cleanup did not fully complete": 0,
+      "Action Server startup cleanup raised while handling": 0
+    },
+    "wrapper_return_reader_descendant_census": "UNKNOWN in retained failure output; absence of notes does not establish each cleanup predicate",
+    "no_cleanup_waiver_or_Rcc_cause_claim": true
+  },
+  "artifact_identity": {
+    "Windows_Runtime_build_metadata": {
+      "id": 11691821082,
+      "name": "action-server-windows-2022",
+      "size_in_bytes": 53565707,
+      "digest": "sha256:c4e43ba8b6f230ae9367294f1700ecb3b117ed4d80f4d5d1b3bce874429a3994",
+      "expired": false,
+      "workflow_head": "4b2df94d77b1145a9ed586fb924eeb88c478d01c"
+    },
+    "digest_scope": "GitHub artifact metadata digest only; original ZIP/binary members not independently downloaded/rehashed in this failure review",
+    "actual_binary_checkout": "9b0928c477771ac1623401f5c6d28cb03edb2e03",
+    "actual_executable_member_hash": "UNKNOWN",
+    "native_UI_3OS_current_jobs": "PASS for selected31-module/frozen31/wrapper31 and two consumer cases as previously reviewed logs; distinct workflow binaries and selector scope, does not repair failed Runtime integration job",
+    "historical_native_tuples": "Linux92498/f506 and original65c Mac/Windows remain separate; neither relabeled"
+  },
+  "original_private_log": {
+    "path": "/workspace/engineering/current-admission-review/original-job-logs/310_runtime_windows_failure.log",
+    "bytes": 755380,
+    "sha256": "7c299e981c03b11f0976f96d051178b5d0230aed4b5e59c21f9f4487927e9fb9"
+  },
+  "safe_receipt_policy": "No provider URLs, environment payloads, configuration values or raw child paths copied; full decoded log remains local-only",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md exact additive patch",
+    "Exact delta": {
+      "path": "/workspace/engineering/current-admission-review/310-initial-readiness-canonical-proposed.patch",
+      "bytes": 1660,
+      "sha256": "b4b32085a6adb9e1a0f9c531245267d12d50d41d7ddbadbe343f9ed9c647c0e7"
+    },
+    "Durable learning captured": "First-readiness and semantic failures differ; complete previous-mark timing sequence and absent-cleanup-note limits; separate selected native UI from full Runtime gate",
+    "Evidence": "Exact terminal3-node log, unchanged source/deadlines and268+5 inventory, immutable RCC4148 sources, separately passing native workflow jobs",
+    "Stale or ambiguous guidance removed": "Final progress equals total; step08 duration is UV; no cleanup note proves full cleanup; selected UI green admits full Runtime CI",
+    "Remaining uncertainty": "Cause of first readiness delay, unmeasured READY remainder, explicit cleanup census, executable member identity, new actual-target union and fresh full gates"
+  },
+  "Upstream disposition": "none; no confirmed maintained upstream defect established; no external issue authority used"
+}

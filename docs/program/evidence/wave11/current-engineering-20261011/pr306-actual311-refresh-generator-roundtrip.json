@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "all_tracked_yaml_before_after_identical": true,
+  "sha256": {
+    ".github/workflows/action_server_build_cdn.yml": "51ba9d399f06d712e46bd691a24379ac940b6b479a58c83eb882a4e65f115aeb",
+    ".github/workflows/action_server_frontend_tests.yml": "058e7625c4eb32f885bdeef6443643dd1a3df87ec6c5131bb39b36ec4289b8d2",
+    ".github/workflows/action_server_update_downloads.yml": "b96ea3507a48cbad6bccd8cb99114552b170c59bfd6e03ac3a8c4e97d41ef771",
+    ".github/workflows/actions_core_tests.yml": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296",
+    ".github/workflows/actions_release.yml": "cdc2a5d5d2ab0887d26c76c56ca63c7b17e4df00030a844cf70491b19b1adf64",
+    ".github/workflows/actions_runtime_binary_release.yml": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64",
+    ".github/workflows/actions_runtime_frozen_catalog_rollback.yml": "aabf25267c48b9d361f4d575a332a9f7bdddc4c5d1f3ce4ff5ac151c98d36140",
+    ".github/workflows/actions_runtime_pypi_release.yml": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+    ".github/workflows/actions_runtime_rcc_provider_rollback.yml": "066adce2531a5223720661afce2f6485d7493243c10156eb1d84e624e252ac92",
+    ".github/workflows/actions_runtime_recovery.yml": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f",
+    ".github/workflows/actions_runtime_tests.yml": "430588021cf889391842be3a7c78eb4c04648b1bb7311f9c03da452e313fb161",
+    ".github/workflows/ai-audit.yml": "2334d210444efcc82389a3f535032794aec91142e7f44eaf5b97bcb9816f5d0e",
+    ".github/workflows/copilot-setup-steps.yml": "cdeaf466a6e662747e06e32618d91a48fd76c41fada5c2369e380b7034f3f906",
+    ".github/workflows/coverage-gate.yml": "e355c4769bae5e548dc7aa8c7393bdc496ebfcbdd24c1c3918d90bc7e1ef76cf",
+    ".github/workflows/deploy-beta-templates.yml": "7c3f567689c5cbbf83d54df188f2c82ca0174c473a81e1cf180d638ae623dddb",
+    ".github/workflows/deploy-templates.yml": "639ae316785f9a39af52856ed33451cf9a7bf28c43de19f8a6f6dfae7e181bb1",
+    ".github/workflows/developer_toolkit.yml": "60ca471cb9bdff0059b1a9b1fcdf9256b666fb2fb1d533b93307d2841facc0a8",
+    ".github/workflows/frontend-build-cdn.yml": "251ff3279d9019f2223adb849c0e09214dc01ae0931827a3e6f3a76cdcfb3618",
+    ".github/workflows/frontend-build-unauthenticated.yml": "2d2a21af458ccfdb771f65707d7ab60fb1f5dfa24019c94ded4a02ed46f8d36d",
+    ".github/workflows/frontend-build.yml": "55def13a3b25269e0a8780a08c89bbbe9b32189b4f4fcbea21189ee8d6ee16a1",
+    ".github/workflows/http_helper_tests.yml": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8",
+    ".github/workflows/http_lib_release.yml": "9edd9b480072b60160d2adc29c66fb11dc262edf0625edf762da7c80a777a6de",
+    ".github/workflows/lighthouse.yml": "ff985adf49fae8b5409e4edf4cd10d08045b712dc64b02ad9ec7a9f0498305bd",
+    ".github/workflows/quality-report.yml": "c144961b14d28a24f39ad647be4d72963c6685e07257e468c9285f4f2622cbaf",
+    ".github/workflows/work_items_release.yml": "e30cf818b7d81e3b910bdef8d2f78a9c32c8f52dd119de8b8a75a94b616e10c0",
+    ".github/dependabot.yml": "d1203d66bf638824ab98fc85bf8cc61dbc6a8407699d62460449d45577952c92"
+  }
+}

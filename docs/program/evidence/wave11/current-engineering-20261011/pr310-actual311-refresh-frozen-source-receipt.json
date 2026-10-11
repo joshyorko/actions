@@ -1,0 +1,267 @@
+{
+  "schema": "actions-pr310-actual311-source-refresh/v1",
+  "status": "FROZEN_SOURCE_READY_FOR_INDEPENDENT_REVIEW_NOT_PUSHED",
+  "observed_utc": "2026-10-11T05:19:56.604395+00:00",
+  "branch": "test/workitems-ui-errors-20261010",
+  "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+  "tree": "17c1afa7fbaa6ae817830d85226b41f67dd8b820",
+  "parent": "bd200037c870ebc40052923b681754a6b08ebd18",
+  "ordinary_union": {
+    "head": "bd200037c870ebc40052923b681754a6b08ebd18",
+    "tree": "5e7b7f481345a2637fa59af1d379414e2350d628",
+    "ordered_parents": [
+      "4b2df94d77b1145a9ed586fb924eeb88c478d01c",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ]
+  },
+  "actual_target": {
+    "head": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+    "tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78"
+  },
+  "source_proof": {
+    "path": "/workspace/engineering/pr310-current-refresh/source-union-proof.json",
+    "bytes": 4663,
+    "sha256": "b27754ef8f7d2a7272d34ce71c1f6be1bf99dbe6fbcc5de4eba6d4700369e6a8"
+  },
+  "source_inspector": {
+    "path": "/workspace/engineering/pr310-current-refresh/verify_union.py",
+    "bytes": 5757,
+    "sha256": "0429f29dedd54b7469be8217408424958d1d129ad1bbe5f17ab7c82fbdc7d071"
+  },
+  "leaf_counts": {
+    "old": 1406,
+    "target": 1409,
+    "union": 1409,
+    "current": 1409
+  },
+  "no_old_or_target_deletions": true,
+  "all_workitems_test_modes_blobs_retained": {
+    "action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance.py": [
+      "100644",
+      "blob",
+      "d01cf28df01c0777b8a5a6220110ff78d26691e0"
+    ],
+    "action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py": [
+      "100644",
+      "blob",
+      "e74a4e9bbf1b7fa39bd9ac9c22aede89cca5735c"
+    ],
+    "action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py": [
+      "100644",
+      "blob",
+      "1724cc0a38a931e6e56bb3345e00e8ee37638a40"
+    ],
+    "action_server/tests/action_server_tests/test_server/test_work_items_files.py": [
+      "100644",
+      "blob",
+      "160082f73617f588bc1e549a457c7eaba94d432a"
+    ],
+    "action_server/tests/action_server_tests/test_work_items_import.py": [
+      "100644",
+      "blob",
+      "be64b888b192454ec4d5552fff53f6f96822d7cb"
+    ]
+  },
+  "current_followup_changes": "Only canonical operations and Work Items guides; all code/test/workflow leaves equal ordinary union",
+  "all268_producer_and5_selectors_exact_old_target92498": true,
+  "native_source_parity_scope": "Production inputs and selected test blobs equal old original producer; complete current tree is distinct. This is no new native execution/qualification or cause explanation.",
+  "historical_receipts_not_git_commits": {
+    "pr310-actual-native-pair.json": {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-20261011/pr310-actual-native-pair.json",
+      "bytes": 13502,
+      "sha256": "e95abb8f7024148019085d630f5755c8472290eabc3ad51537331f95e50b8b64"
+    },
+    "pr310-independent-actual-review.json": {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-20261011/pr310-independent-actual-review.json",
+      "bytes": 6066,
+      "sha256": "4d5ed4117610c4d246272556ee31036a14eff85b1ab2e60d64116160c00dccb4"
+    },
+    "pr310-original-platform-independent-review.json": {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-20261011/pr310-original-platform-independent-review.json",
+      "bytes": 15850,
+      "sha256": "c600dfc1cea6208de8698b933ee0597b1c874a9ac8de9dec1bd2779fa5a623d7"
+    }
+  },
+  "retained_git_history": [
+    "4b2df94d77b1145a9ed586fb924eeb88c478d01c",
+    "f506a04e240feba048bf10e32bccebf591674f9e"
+  ],
+  "original4b_windows_failure": {
+    "path": "/workspace/engineering/current-admission-review/310-terminal-first-readiness-independent-review.json",
+    "bytes": 9291,
+    "sha256": "de53338aa808a3d7308901761f3fcfa5598de5f000e678f7146952bf2268cfc2"
+  },
+  "original4b_failure_scope": "de533 source4b/tested9b has3 initialFIRSTreadiness timeouts before watched/collision semantics; unchanged90s/20s. Explicit wrapper/reader/descendant cleanup census UNKNOWN. Other21SUCCESS/1conditionaltagpublishSKIP does not admit fullCI.",
+  "accepted311_observation_import": {
+    "80_88s_only_watched_resource": true,
+    "template_unsampled": true,
+    "90s_start_20s_cleanup_retained": true
+  },
+  "gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "REUSED original76fb PASS after24 exact manifest/lock/toolkit/setup/protocol inputs and own five prepared environments verified",
+    "Toolkit": {
+      "pass": 69
+    },
+    "scoped_WorkItems_and_observer_source": {
+      "pass": 88,
+      "integration_deselect": 3,
+      "skip": 0
+    },
+    "full_configured_Runtime_source": {
+      "pass": 1154,
+      "skip": 12,
+      "workers": 2,
+      "gate": "invoke test-not-integration (existing --force-regen/-n auto; PYTEST_XDIST_AUTO_NUM_WORKERS=2); no resulting tracked changes"
+    },
+    "full_configured_lint": "PASS Ruff check/format/Isort",
+    "configured_typecheck": {
+      "pass": true,
+      "files": 337
+    },
+    "workflow_roundtrip": "All YAML/dependabot byte-identical; complete .github tree equals actualtarget",
+    "diff_check": "PASS"
+  },
+  "bootstrap_reuse_proof": {
+    "path": "/workspace/engineering/pr310-current-refresh/bootstrap-reuse.json",
+    "bytes": 2895,
+    "sha256": "e32a2f3ef8137e4e1dd78e260d9c155dd1de23d08cddaa78d794b493ff41e40d"
+  },
+  "bootstrap_original_log": {
+    "path": "/workspace/engineering/pr310-bootstrap.log",
+    "bytes": 27576,
+    "sha256": "76fb8f8fdc5707534f68f250c4897f1de95c598b9a74d5380107dab4011e360b"
+  },
+  "gate_logs": {
+    "diff-check": {
+      "path": "/workspace/engineering/pr310-current-refresh/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "doctor": {
+      "path": "/workspace/engineering/pr310-current-refresh/doctor.log",
+      "bytes": 13485,
+      "sha256": "676b8d98c716e63d56f35a7e4555a45aae3eca9011a02d340e62c14e00c98c81"
+    },
+    "draft-v0-reproduction": {
+      "path": "/workspace/engineering/pr310-current-refresh/draft-v0-reproduction.log",
+      "bytes": 250,
+      "sha256": "7575b91da84a7b376543c39cbedc9e6b9e197cc4d2c31bdee6b332d2244c4bcb"
+    },
+    "draft-v1-reproduction": {
+      "path": "/workspace/engineering/pr310-current-refresh/draft-v1-reproduction.log",
+      "bytes": 451,
+      "sha256": "3741c89bb477109ba57a28da155da4aad7cfa19937488b16e1ce4513dcdcf05e"
+    },
+    "full-source": {
+      "path": "/workspace/engineering/pr310-current-refresh/full-source.log",
+      "bytes": 297178,
+      "sha256": "d3211401b60585c8e6d0b9b47f3667577bf11c9f7516dfe1d4850bc255cbcdf3"
+    },
+    "generator-roundtrip": {
+      "path": "/workspace/engineering/pr310-current-refresh/generator-roundtrip.log",
+      "bytes": 4563,
+      "sha256": "5da87b44ab40387616fee72394768b0cc22569336a0cad9a3c6ea6fe3719c2d6"
+    },
+    "scoped": {
+      "path": "/workspace/engineering/pr310-current-refresh/scoped.log",
+      "bytes": 5346,
+      "sha256": "d1e0e0146940cbcb2803125f9f3ab379c2c4098b8f0edbc6e646f16366137d6e"
+    },
+    "source-union-proof": {
+      "path": "/workspace/engineering/pr310-current-refresh/source-union-proof.log",
+      "bytes": 4663,
+      "sha256": "b27754ef8f7d2a7272d34ce71c1f6be1bf99dbe6fbcc5de4eba6d4700369e6a8"
+    },
+    "static": {
+      "path": "/workspace/engineering/pr310-current-refresh/static.log",
+      "bytes": 5692,
+      "sha256": "b028c509e27c8e3297eeaefd3c7b1e5cdd24bcd9dde903c6dca2db3c1c1bfc5d"
+    },
+    "toolkit": {
+      "path": "/workspace/engineering/pr310-current-refresh/toolkit.log",
+      "bytes": 14344,
+      "sha256": "bd838fed008089cd8b6160dea2615c8188de199ff1b51a8f45831d10cb049464"
+    }
+  },
+  "workflow_roundtrip": {
+    "path": "/workspace/engineering/pr310-current-refresh/generator-roundtrip.json",
+    "bytes": 3164,
+    "sha256": "21412f27d916c53f7db67fd1aa920040a27846192316d21d935b360ff9eb5da4"
+  },
+  "draft_proof_disposition": {
+    "path": "/workspace/engineering/pr310-current-refresh/draft-proof-disposition.md",
+    "bytes": 715,
+    "sha256": "4ae25286458182498a514edc7c6c1144bdb988701d8380016927b4f50d0cc9e8"
+  },
+  "historical_rejected_draft_proofs": [
+    {
+      "path": "/workspace/engineering/pr310-current-refresh/draft-v0-prefix-identity-proof.py",
+      "bytes": 5443,
+      "sha256": "5cf26ec7aa57cd1a7edef010a358da54b604cb9b0f52bb1ab775ece02c99cc0c"
+    },
+    {
+      "path": "/workspace/engineering/pr310-current-refresh/draft-v0-reproduction.log",
+      "bytes": 250,
+      "sha256": "7575b91da84a7b376543c39cbedc9e6b9e197cc4d2c31bdee6b332d2244c4bcb"
+    },
+    {
+      "path": "/workspace/engineering/pr310-current-refresh/draft-v1-synthetic-ancestry-proof.py",
+      "bytes": 5786,
+      "sha256": "34febf6e3622ceaf2b8ecd26d8a33a031f9e969c25248f10aa04fd7ee29375b3"
+    },
+    {
+      "path": "/workspace/engineering/pr310-current-refresh/draft-v1-reproduction.log",
+      "bytes": 451,
+      "sha256": "3741c89bb477109ba57a28da155da4aad7cfa19937488b16e1ce4513dcdcf05e"
+    }
+  ],
+  "historical_platform_limits": [
+    "Original Mac/Windows run38107100997 workflowf506/checkout65c tree782 remains separate from Linux92498 producer/f506 harness and current union.",
+    "Localcandidate Core1.0.3 wheel installation is not public registry installation. Mac8e088 matches known public wheel bytes; Windowsaf607 differs, cause unknown; original wheels/rawpipreports absent.",
+    "31-case native module logs and three browser stages are distinct from exact one selected LinuxJUnit cells; original MacWindows nativeJUnit and browser launchtrace/hash/liveidentity absent.",
+    "Mac original job emitted robocorp-log FileNotFoundError for output/output.robolog during pytest teardown despite successful31PASS modules/nativePASS receipts; diagnostic remains preserved, cause UNKNOWN and not erased by passing stages.",
+    "Forced stop/kill empty captured descendant snapshot is not natural shutdown or universal discovery; seeded stale reservation is not an actual process crash."
+  ],
+  "documentation_improvement": {
+    "Canonical_files_changed": [
+      "docs/skills/repository-operations.md",
+      "docs/skills/work-items.md"
+    ],
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr310-current-refresh/canonical-actual-delta.patch",
+      "bytes": 6727,
+      "sha256": "c3b1ef94af5dd54132b4f771be3ce413f8d244695dcbfa2455848578253bc8ad"
+    },
+    "Accepted_proposals_integrated": [
+      {
+        "path": "/workspace/engineering/current-admission-review/310-initial-readiness-canonical-proposed.patch",
+        "bytes": 1660,
+        "sha256": "b4b32085a6adb9e1a0f9c531245267d12d50d41d7ddbadbe343f9ed9c647c0e7"
+      },
+      {
+        "path": "/workspace/engineering/pr310-hosted-platform-review/canonical-work-items-platform-proposed.patch",
+        "bytes": 2945,
+        "sha256": "57fe12e38b696e32de01046b1497e34f7eab3072269fd1cf592d010c55ee7cbe"
+      },
+      {
+        "path": "/workspace/engineering/pr310-hosted-platform-review/canonical-work-items-gate-subject-clarification-proposed.patch",
+        "bytes": 997,
+        "sha256": "5e38c68583aa8cac5700a0ad0fe42dc425fd8ce0fb252d8cd76b694638061a7e"
+      }
+    ],
+    "Durable_learning": "FIRST readiness vs semantic/fullCI admission; previous-mark RCC intervals; explicit cleanup census vs no note; platform/candidate/registry scopes; observer template limit; typed receipt digests vs source commits and synthetic-tree equality vs ancestry.",
+    "Evidence": "de533 originalfailure review, e95/4d5/c600 exact receipt bytehashes, corrected draftidentity proof, complete ordinaryunion/sourceparity and fresh configured source gates.",
+    "Stale_ambiguity_removed": "Windows/macOS receipts categorically absent; browser scope conflated with separate consumer persistence; finalRCCprogress treated total; no cleanupnote equals fullreap; selectednative UI success admits fullRuntime; receiptSHA prefix is Git ancestry.",
+    "Remaining_uncertainty": "Current full hosted/native/browser admission, original FIRSTdelaycause/cleanup, template observations, originalMacWindowsbrowseridentity/nativeJUnit/candidatewheel difference, full208."
+  },
+  "not_run": [
+    "New native/browser/provider execution or build",
+    "Windows retries",
+    "Fresh hostedCI",
+    "Full issue208"
+  ],
+  "upstream_disposition": "none; no maintained upstream defect identified or external issue authority used.",
+  "source_changes_outside_two_guides_after_union": false,
+  "new_push_or_remote_branch": false
+}

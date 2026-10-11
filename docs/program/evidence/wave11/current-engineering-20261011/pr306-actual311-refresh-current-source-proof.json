@@ -1,0 +1,76 @@
+{
+  "source_head": "c38e22c74290dca391617e9693fcf5b2968956df",
+  "source_tree": "75dfe6916d4a4e8c07a1b76aafea13540bc7afe1",
+  "source_status": "",
+  "ordinary_union": {
+    "head": "0babc41dbcf2024682be1d89c49ad1a102377c83",
+    "tree": "a9221f5b0ff2f959b26ed2c5532bb39d24bed7de",
+    "ordered_parents": [
+      "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ]
+  },
+  "actual_target": {
+    "head": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+    "tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78"
+  },
+  "leaf_counts": {
+    "old": 1385,
+    "target": 1409,
+    "merge": 1409,
+    "current": 1409
+  },
+  "retention": {
+    "no_old_or_target_deletions": true,
+    "all_nonowned_leaf_modes_and_blobs_exact_target": true,
+    "original_database_fix_blob_mode": [
+      "100644",
+      "blob",
+      "6fd267165834f60968ee10a8653dd084a39ad521"
+    ],
+    "both_original_regression_asts_unchanged": [
+      "test_database_transactions_nested",
+      "test_nested_transaction_savepoint_start_failure_preserves_error_and_counter"
+    ],
+    "all_actual_target_test_function_asts_unchanged": true,
+    "only_new_test_function_vs_target": "test_nested_transaction_savepoint_start_failure_preserves_error_and_counter",
+    "original_guide_plus_entire_actual_target_retained": true,
+    "removing_only_two_new_guide_paragraphs_equals_entire_ordinary_union": true,
+    "complete_github_tree_generator_and_workflows_exact_target": true
+  },
+  "producer_inventory_count": 268,
+  "changed_producer_inputs": [
+    "action_server/src/actions/server/_database.py"
+  ],
+  "five_selected_test_modes_blobs": {
+    "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": [
+      "100644",
+      "blob",
+      "12ec0f644d96a45824ac110b7f1dafebb4c42ce6"
+    ],
+    "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": [
+      "100644",
+      "blob",
+      "0e1ab11bdd4b52e2d35d06b42dd17996dd082022"
+    ],
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": [
+      "100644",
+      "blob",
+      "534e51afbc75b4d3ce473dee37d7ac00d52dbc92"
+    ],
+    "action_server/tests/action_server_tests/test_cli_multi_package_sync.py": [
+      "100644",
+      "blob",
+      "b0919a8b7508954976a8fab631a5fff219c2aeb8"
+    ],
+    "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py": [
+      "100644",
+      "blob",
+      "7a5a378bf1f8151118034d18b5dfb269f2b24e90"
+    ]
+  },
+  "native_92498_qualification": "HOLD: changed production _database.py; do not exclude or relabel old bytes",
+  "canonical_delta_sha256": "6b97699a8126eaf00023b28cb67b90ba01743864e3e9c830a59352a6341cbfef",
+  "upstream_disposition": "none",
+  "full_issue_84": "OPEN"
+}

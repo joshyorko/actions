@@ -1,0 +1,25 @@
+{
+  "phase": "ACTUAL_SOURCE_EMITTED_SELECTOR_DISCOVERY_ONLY_NO_EXECUTION",
+  "source_sha256": "d84f5e54dafb29e9beda15673769110952f165aee61c0deb5a04ee920515abcf",
+  "argv": [
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/node",
+    "/workspace/engineering/pr305/action_server/frontend/node_modules/@playwright/test/cli.js",
+    "test",
+    "--config",
+    "/workspace/engineering/pr305/action_server/frontend/playwright.canvas-harness.config.ts",
+    "--grep",
+    "^\\s*host-harness\\.spec\\.ts official bridge renders a real Runtime Action result$",
+    "--workers",
+    "1",
+    "--reporter",
+    "json",
+    "--list"
+  ],
+  "returncode": 0,
+  "specs": [
+    "official bridge renders a real Runtime Action result"
+  ],
+  "test_entries": 1,
+  "browser_launched": false,
+  "testcase_executed": false
+}

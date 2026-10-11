@@ -1,0 +1,125 @@
+{
+  "head": "dfca3f8e63465595acff421f37f34d2a9d0a1b39",
+  "tree": "17c1afa7fbaa6ae817830d85226b41f67dd8b820",
+  "status": "",
+  "ordinary_union": {
+    "head": "bd200037c870ebc40052923b681754a6b08ebd18",
+    "tree": "5e7b7f481345a2637fa59af1d379414e2350d628",
+    "ordered_parents": [
+      "4b2df94d77b1145a9ed586fb924eeb88c478d01c",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ]
+  },
+  "actual_target": {
+    "head": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+    "tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78"
+  },
+  "retained_history": [
+    "4b2df94d77b1145a9ed586fb924eeb88c478d01c",
+    "f506a04e240feba048bf10e32bccebf591674f9e"
+  ],
+  "retained_receipt_sha256_identities_not_git_commits": {
+    "pr310-actual-native-pair.json": {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-20261011/pr310-actual-native-pair.json",
+      "bytes": 13502,
+      "sha256": "e95abb8f7024148019085d630f5755c8472290eabc3ad51537331f95e50b8b64"
+    },
+    "pr310-independent-actual-review.json": {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-20261011/pr310-independent-actual-review.json",
+      "bytes": 6066,
+      "sha256": "4d5ed4117610c4d246272556ee31036a14eff85b1ab2e60d64116160c00dccb4"
+    },
+    "pr310-original-platform-independent-review.json": {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-20261011/pr310-original-platform-independent-review.json",
+      "bytes": 15850,
+      "sha256": "c600dfc1cea6208de8698b933ee0597b1c874a9ac8de9dec1bd2779fa5a623d7"
+    }
+  },
+  "leaf_counts": {
+    "old": 1406,
+    "target": 1409,
+    "union": 1409,
+    "current": 1409
+  },
+  "no_old_or_target_leaf_deleted": true,
+  "no_novel_non_documentation_union_leaf": true,
+  "current_nondoc_complete_leaf_identity_equals_ordinary_union": true,
+  "all_incoming_only_leaves_exact_target": true,
+  "original_owned_source_control_leaves": {
+    "action_server/frontend/scripts/native-workitems-ui-acceptance.mjs": [
+      "100644",
+      "blob",
+      "92348a261869d99d2004f81a12dd89dd0c05ad2a"
+    ],
+    "action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py": [
+      "100644",
+      "blob",
+      "1724cc0a38a931e6e56bb3345e00e8ee37638a40"
+    ]
+  },
+  "all_workitems_test_file_modes_blobs_retained": {
+    "action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance.py": [
+      "100644",
+      "blob",
+      "d01cf28df01c0777b8a5a6220110ff78d26691e0"
+    ],
+    "action_server/tests/action_server_tests/test_dakota_workitems_native_acceptance_harness.py": [
+      "100644",
+      "blob",
+      "e74a4e9bbf1b7fa39bd9ac9c22aede89cca5735c"
+    ],
+    "action_server/tests/action_server_tests/test_dakota_workitems_native_ui_acceptance.py": [
+      "100644",
+      "blob",
+      "1724cc0a38a931e6e56bb3345e00e8ee37638a40"
+    ],
+    "action_server/tests/action_server_tests/test_server/test_work_items_files.py": [
+      "100644",
+      "blob",
+      "160082f73617f588bc1e549a457c7eaba94d432a"
+    ],
+    "action_server/tests/action_server_tests/test_work_items_import.py": [
+      "100644",
+      "blob",
+      "be64b888b192454ec4d5552fff53f6f96822d7cb"
+    ]
+  },
+  "producer_count": 268,
+  "producer_commit": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "all268_exact_old_target_native_union": true,
+  "five_selected_test_modes_blobs": {
+    "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": [
+      "100644",
+      "blob",
+      "12ec0f644d96a45824ac110b7f1dafebb4c42ce6"
+    ],
+    "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": [
+      "100644",
+      "blob",
+      "0e1ab11bdd4b52e2d35d06b42dd17996dd082022"
+    ],
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": [
+      "100644",
+      "blob",
+      "534e51afbc75b4d3ce473dee37d7ac00d52dbc92"
+    ],
+    "action_server/tests/action_server_tests/test_cli_multi_package_sync.py": [
+      "100644",
+      "blob",
+      "b0919a8b7508954976a8fab631a5fff219c2aeb8"
+    ],
+    "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py": [
+      "100644",
+      "blob",
+      "7a5a378bf1f8151118034d18b5dfb269f2b24e90"
+    ]
+  },
+  "complete_github_generator_and_workflows_exact_actual_target": true,
+  "unchanged_observer": {
+    "80_88s_only_watched_resource": true,
+    "template_unsampled": true,
+    "90s_start_20s_cleanup_retained": true
+  },
+  "no_new_native_browser_execution_build": true,
+  "source_parity_is_not_fresh_hosted_or_native_acceptance": true
+}

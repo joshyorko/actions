@@ -1,0 +1,2295 @@
+{
+  "verdict": "GO_BOUNDED_READ_ONLY_NEXT_SOURCE_REFRESH_PREPARATION_309_THEN308_THEN299; HOLD_CURRENT_MERGE_NEW_EXECUTION_AND300_DEPENDENT_REFRESH",
+  "scope": "No branch/worktree/source mutations, checkout, actualtests/native/provider/retry, newwriter or upstream report. gitmerge-tree wrote only simulation objects insharedGitobjectstore; alltrackedworktree/HEADs unchanged.",
+  "actual_target": {
+    "head": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+    "tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78",
+    "authenticated_ref_binding": {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/live-target.json",
+      "bytes": 5419,
+      "sha256": "2c47c15a1a4747d7590f9b09c1d9f41c94bcbf2d722b87447f6a9d597dd84550"
+    }
+  },
+  "priority": "309/308 sourceparity/filter readinessfirst,299 source/route/provider/transportholdnext; rootdispatch subjectto310sourcefreeze/V4heavyownership and max2writers",
+  "prospective_candidates": [
+    {
+      "pr": 309,
+      "same_existing_branch": "test/auth-route-census-20261010",
+      "head": "41d4ee41190d7d3f3969212471863c70852295ba",
+      "old_head_tree": "211cea442440baf18ad270e5530ad8467b50176f",
+      "live_target": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "live_target_tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78",
+      "common_ancestor": "fbde0d3a248c47c9964851355f96575c89a87329",
+      "prospective_ordinary_tree": "65b4ed6efe2b26e7192fe8981a84d4fc0050d7fb",
+      "simulation_only_no_commit": true,
+      "no_conflicts": true,
+      "complete_leafset": {
+        "path": "/workspace/engineering/next-current-union-independent-preparation/pr309-prospective-complete-leaf-modes-blobs.json",
+        "bytes": 235395,
+        "sha256": "50311b5bec3493e9cc105835c6c33df1b9af4c193bc143999f85fc83f22f84f9"
+      },
+      "prospective_leaf_count": 1410,
+      "source_and_target_no_deletion": true,
+      "independent_nonconflicting_union_paths_checked": 1409,
+      "only_both_changed_path": [
+        "docs/skills/repository-operations.md"
+      ],
+      "both_guide_addedblocks_retained": true,
+      "original_owned_non_doc_paths": [
+        "action_server/tests/action_server_tests/test_auth_route_inventory.py"
+      ],
+      "original_owned_non_doc_modes_blobs_preserved": true,
+      "complete_delta_vs_target": [
+        "action_server/tests/action_server_tests/test_auth_route_inventory.py",
+        "docs/skills/repository-operations.md"
+      ],
+      "full_github_generator_workflows_exact_target": true,
+      "native268_comparison": {
+        "matches": 268,
+        "differences": [],
+        "additional_production_inputs_outside268": []
+      },
+      "selected5_mode_blob_sha_match": true,
+      "producer_parity_scope": "trackedinputsourceparityonly; noactualnative/newwheel/managedorigin/releasequalification",
+      "observed_current_checks": {
+        "total": 20,
+        "success": 20,
+        "failure": 0,
+        "nonterminal": 0,
+        "optional_copilot_setup_seen": 1
+      },
+      "observed_head_runs": [
+        {
+          "run": 38109935980,
+          "workflow": ".github/workflows/ai-audit.yml",
+          "head": "41d4ee41190d7d3f3969212471863c70852295ba",
+          "created_at": "2026-10-11T03:55:31Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 1,
+          "jobs_expected_when_fully_created": 1
+        },
+        {
+          "run": 38109935952,
+          "workflow": ".github/workflows/coverage-gate.yml",
+          "head": "41d4ee41190d7d3f3969212471863c70852295ba",
+          "created_at": "2026-10-11T03:55:31Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 1,
+          "jobs_expected_when_fully_created": 1
+        },
+        {
+          "run": 38109935993,
+          "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+          "head": "41d4ee41190d7d3f3969212471863c70852295ba",
+          "created_at": "2026-10-11T03:55:31Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 3,
+          "jobs_expected_when_fully_created": 3
+        },
+        {
+          "run": 38109936039,
+          "workflow": ".github/workflows/developer_toolkit.yml",
+          "head": "41d4ee41190d7d3f3969212471863c70852295ba",
+          "created_at": "2026-10-11T03:55:31Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 6,
+          "jobs_expected_when_fully_created": 6
+        },
+        {
+          "run": 38109935982,
+          "workflow": ".github/workflows/actions_runtime_tests.yml",
+          "head": "41d4ee41190d7d3f3969212471863c70852295ba",
+          "created_at": "2026-10-11T03:55:31Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 3,
+          "jobs_expected_when_fully_created": 3
+        },
+        {
+          "run": 38109936008,
+          "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+          "head": "41d4ee41190d7d3f3969212471863c70852295ba",
+          "created_at": "2026-10-11T03:55:31Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 5,
+          "jobs_expected_when_fully_created": 5
+        }
+      ],
+      "old_API_control_bound": {
+        "sha": "08f051e750dd97c920463dd55f0f166da92010a2",
+        "tree": "211cea442440baf18ad270e5530ad8467b50176f",
+        "ordered_parents": [
+          "fbde0d3a248c47c9964851355f96575c89a87329",
+          "41d4ee41190d7d3f3969212471863c70852295ba"
+        ],
+        "metadata_still_old_base": "fbde evennamedtarget advanced"
+      },
+      "actual_old_audit_checkout_log_private": {
+        "path": "/workspace/engineering/next-current-union-preparation-owned/audit-job-114383217609-original-decoded.log",
+        "bytes": 56819,
+        "sha256": "70574128e5baf69e9b9b9df5c93a9e03ffa38869c33895cc36af0542d56aef83"
+      },
+      "audit_checkout_limit": "Only auditjob originalcheckout independentlydecoded here; no claim everyotherjoblog/native receipt reviewed",
+      "expected_future_PR_workflows": [
+        {
+          "path": ".github/workflows/actions_runtime_pypi_release.yml",
+          "pull_request": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              ".github/workflows/_gen_workflows.py",
+              ".github/workflows/actions_runtime_pypi_release.yml",
+              ".github/workflows/actions_runtime_binary_release.yml",
+              ".github/workflows/actions_runtime_manylinux_release.yml",
+              "devutils/tests/test_actions_runtime_release_line.py",
+              "devutils/tests/test_runtime_release_workflows.py",
+              "docs/skills/repository-operations.md",
+              "action_server/scripts/publish_verified_runtime.py",
+              "action_server/scripts/verify_published_runtime_floor.py"
+            ]
+          },
+          "job_keys": [
+            "build-sdist",
+            "build-wheels",
+            "publish"
+          ],
+          "declared_matrix_shapes": {
+            "build-sdist": {
+              "matrix": {
+                "name": [
+                  "ubuntu-py3.12"
+                ],
+                "include": [
+                  {
+                    "name": "ubuntu-py3.12",
+                    "python": "3.12",
+                    "os": "ubuntu-22.04"
+                  }
+                ]
+              },
+              "declared_job_count": 1
+            },
+            "build-wheels": {
+              "matrix": {
+                "os": [
+                  "ubuntu-22.04",
+                  "windows-2022",
+                  "macos-15"
+                ],
+                "include": [
+                  {
+                    "os": "ubuntu-22.04",
+                    "python": "3.12",
+                    "name": "ubuntu"
+                  },
+                  {
+                    "os": "windows-2022",
+                    "python": "3.12",
+                    "name": "windows"
+                  },
+                  {
+                    "os": "macos-15",
+                    "python": "3.12",
+                    "name": "macos"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            },
+            "publish": {
+              "matrix": {
+                "python": [
+                  "3.12"
+                ]
+              },
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 5
+        },
+        {
+          "path": ".github/workflows/actions_runtime_tests.yml",
+          "pull_request": {
+            "branches": [
+              "master",
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "action_server/**",
+              ".github/workflows/actions_runtime_tests.yml",
+              "devutils/**",
+              "actions/**",
+              "actions-http-helper/**",
+              "work-items/**"
+            ]
+          },
+          "job_keys": [
+            "build"
+          ],
+          "declared_matrix_shapes": {
+            "build": {
+              "matrix": {
+                "name": [
+                  "ubuntu-py3.12-devmode",
+                  "windows-py3.12-devmode",
+                  "macos-py3.12-devmode"
+                ],
+                "include": [
+                  {
+                    "name": "ubuntu-py3.12-devmode",
+                    "python": "3.12",
+                    "os": "ubuntu-22.04"
+                  },
+                  {
+                    "name": "windows-py3.12-devmode",
+                    "python": "3.12",
+                    "os": "windows-2022"
+                  },
+                  {
+                    "name": "macos-py3.12-devmode",
+                    "os": "macos-15",
+                    "python": "3.12"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            }
+          },
+          "declared_job_count": 3
+        },
+        {
+          "path": ".github/workflows/ai-audit.yml",
+          "pull_request": null,
+          "job_keys": [
+            "audit"
+          ],
+          "declared_matrix_shapes": {
+            "audit": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/coverage-gate.yml",
+          "pull_request": {
+            "branches": [
+              "community",
+              "integration/community-release-20261008"
+            ]
+          },
+          "job_keys": [
+            "coverage"
+          ],
+          "declared_matrix_shapes": {
+            "coverage": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/developer_toolkit.yml",
+          "pull_request": null,
+          "job_keys": [
+            "toolkit"
+          ],
+          "declared_matrix_shapes": {
+            "toolkit": {
+              "matrix": {
+                "include": [
+                  {
+                    "lane": "primary",
+                    "rcc_version": "18.19.3",
+                    "os": "ubuntu-22.04",
+                    "asset": "rcc-linux64",
+                    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+                  },
+                  {
+                    "lane": "primary",
+                    "rcc_version": "18.19.3",
+                    "os": "macos-15",
+                    "asset": "rcc-macosarm64",
+                    "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266"
+                  },
+                  {
+                    "lane": "primary",
+                    "rcc_version": "18.19.3",
+                    "os": "windows-2022",
+                    "asset": "rcc-windows64.exe",
+                    "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+                  },
+                  {
+                    "lane": "n-1",
+                    "rcc_version": "18.18.1",
+                    "os": "ubuntu-22.04",
+                    "asset": "rcc-linux64",
+                    "sha256": "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf"
+                  },
+                  {
+                    "lane": "n-1",
+                    "rcc_version": "18.18.1",
+                    "os": "macos-15",
+                    "asset": "rcc-macosarm64",
+                    "sha256": "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d"
+                  },
+                  {
+                    "lane": "n-1",
+                    "rcc_version": "18.18.1",
+                    "os": "windows-2022",
+                    "asset": "rcc-windows64.exe",
+                    "sha256": "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b"
+                  }
+                ]
+              },
+              "declared_job_count": 6
+            }
+          },
+          "declared_job_count": 6
+        },
+        {
+          "path": ".github/workflows/frontend-build-unauthenticated.yml",
+          "pull_request": {
+            "paths": [
+              "action_server/**",
+              "work-items/**",
+              ".github/workflows/frontend-build-unauthenticated.yml"
+            ]
+          },
+          "job_keys": [
+            "build-external"
+          ],
+          "declared_matrix_shapes": {
+            "build-external": {
+              "matrix": {
+                "os": [
+                  "ubuntu-22.04",
+                  "windows-2022",
+                  "macos-15"
+                ],
+                "include": [
+                  {
+                    "os": "ubuntu-22.04",
+                    "python": "3.12"
+                  },
+                  {
+                    "os": "windows-2022",
+                    "python": "3.12"
+                  },
+                  {
+                    "os": "macos-15",
+                    "python": "3.12"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            }
+          },
+          "declared_job_count": 3
+        }
+      ],
+      "expected_future_PR_declared_job_count": 19,
+      "filtered_out_future_PR_workflows": [
+        {
+          "path": ".github/workflows/action_server_frontend_tests.yml",
+          "pull_request": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py",
+              "docs/contracts/canvas/fixtures/**",
+              ".github/workflows/action_server_frontend_tests.yml"
+            ]
+          },
+          "job_keys": [
+            "action-server-frontend-tests"
+          ],
+          "declared_matrix_shapes": {
+            "action-server-frontend-tests": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/actions_core_tests.yml",
+          "pull_request": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "actions/**",
+              ".github/workflows/actions_core_tests.yml",
+              "devutils/**",
+              "actions-http-helper/**",
+              ".github/workflows/_gen_workflows.py"
+            ]
+          },
+          "job_keys": [
+            "build",
+            "candidate-wheel"
+          ],
+          "declared_matrix_shapes": {
+            "build": {
+              "matrix": {
+                "name": [
+                  "ubuntu-py3.10-devmode",
+                  "windows-py3.10-devmode",
+                  "macos-py3.10-devmode"
+                ],
+                "include": [
+                  {
+                    "name": "ubuntu-py3.10-devmode",
+                    "python": "3.10",
+                    "os": "ubuntu-22.04"
+                  },
+                  {
+                    "name": "windows-py3.10-devmode",
+                    "python": "3.10",
+                    "os": "windows-2022"
+                  },
+                  {
+                    "name": "macos-py3.10-devmode",
+                    "os": "macos-15",
+                    "python": "3.10"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            },
+            "candidate-wheel": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 4
+        },
+        {
+          "path": ".github/workflows/copilot-setup-steps.yml",
+          "pull_request": {
+            "paths": [
+              ".github/workflows/copilot-setup-steps.yml",
+              ".github/workflows/developer_toolkit.yml",
+              "developer/**"
+            ]
+          },
+          "job_keys": [
+            "copilot-setup-steps"
+          ],
+          "declared_matrix_shapes": {
+            "copilot-setup-steps": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/frontend-build.yml",
+          "pull_request": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              ".github/workflows/frontend-build.yml"
+            ]
+          },
+          "job_keys": [
+            "build"
+          ],
+          "declared_matrix_shapes": {
+            "build": {
+              "matrix": {
+                "os": [
+                  "ubuntu-latest",
+                  "macos-latest",
+                  "windows-latest"
+                ]
+              },
+              "declared_job_count": 3
+            }
+          },
+          "declared_job_count": 3
+        },
+        {
+          "path": ".github/workflows/http_helper_tests.yml",
+          "pull_request": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "actions-http-helper/**",
+              ".github/workflows/http_helper_tests.yml",
+              "devutils/**"
+            ]
+          },
+          "job_keys": [
+            "build"
+          ],
+          "declared_matrix_shapes": {
+            "build": {
+              "matrix": {
+                "name": [
+                  "ubuntu-py3.10-devmode",
+                  "windows-py3.10-devmode",
+                  "macos-py3.10-devmode"
+                ],
+                "include": [
+                  {
+                    "name": "ubuntu-py3.10-devmode",
+                    "python": "3.10",
+                    "os": "ubuntu-22.04"
+                  },
+                  {
+                    "name": "windows-py3.10-devmode",
+                    "python": "3.10",
+                    "os": "windows-2022"
+                  },
+                  {
+                    "name": "macos-py3.10-devmode",
+                    "os": "macos-15",
+                    "python": "3.10"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            }
+          },
+          "declared_job_count": 3
+        },
+        {
+          "path": ".github/workflows/lighthouse.yml",
+          "pull_request": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              ".github/workflows/lighthouse.yml"
+            ]
+          },
+          "job_keys": [
+            "lighthouse"
+          ],
+          "declared_matrix_shapes": {
+            "lighthouse": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/work_items_release.yml",
+          "pull_request": {
+            "paths": [
+              "work-items/**",
+              ".devcontainer/bin/verify-work-items",
+              ".devcontainer/bin/smoke-host",
+              ".devcontainer/bin/bootstrap",
+              ".devcontainer/tests/**",
+              ".github/workflows/work_items_release.yml",
+              "docs/skills/work-items.md"
+            ]
+          },
+          "job_keys": [
+            "verify",
+            "publish"
+          ],
+          "declared_matrix_shapes": {
+            "verify": {
+              "matrix": null,
+              "declared_job_count": 1
+            },
+            "publish": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 2
+        }
+      ],
+      "configured_CI_scope": "sixmatrixworkflows19jobs, optionalcopilotsetupseparate; manualRCC/frozen/provider/recoveryand fullprivate-releasegraph notimplied",
+      "smallest_refresh": [
+        "rootcapturesactualtargetatdispatchagain; iftargetadvancedrecomputeprospective",
+        "ordinarymerge actualconfirmedtarget INTOsameexistingbranch; retainall acceptedhistory/receipts",
+        "no newimplementation requiredbythiscleanunion; preservebothguide lessons",
+        "canonicalgenerator all8outputs exact pluscomplete.github/treeproof",
+        "freshToolkit/scopedroute census/startup-barrier/uncategorized-route rejection + existing auth,CORS,browser-session/early-reject controls; realrequest/native qualification remains separate/fullconfiguredRuntime nonintegration/lintRuffformatIsort/typechecks/diffcheck onexactfrozenunion",
+        "independent source reviewbefore normalexpectedexistingbranchpush",
+        "freshfull19declaredhostedjobs andcompletehead/control/tree/target/review/thread/draft/policy readback beforemerge; norelabeloldCI"
+      ],
+      "scoped_acceptance_and_holds": [
+        "Registration/classificationbeforeUvicorn isnotrequestcredential/method/mount/sideeffect authorization or optionaltransport coverage; #152fullacceptanceHOLD."
+      ],
+      "prior_accepted_source_review": {
+        "path": "/workspace/engineering/pr309-independent-current-review/source-control-prepush-review.json",
+        "bytes": 7679,
+        "sha256": "7374c9eaa420966f6455c7d63c3feea5dc211808cb96c0a21b9cca2acff6f6cb"
+      },
+      "branch_worktree_unchanged": true
+    },
+    {
+      "pr": 308,
+      "same_existing_branch": "fix/rcc-candidate-wheel-identities-20261010",
+      "head": "483e3e735c268b08acba1fd3930a9a34e0deaa91",
+      "old_head_tree": "9b69d78117e0e5cade3f59fcacc6db56a747b61f",
+      "live_target": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "live_target_tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78",
+      "common_ancestor": "fbde0d3a248c47c9964851355f96575c89a87329",
+      "prospective_ordinary_tree": "391daa0d048a701ae25d5c4b8b6522930b389338",
+      "simulation_only_no_commit": true,
+      "no_conflicts": true,
+      "complete_leafset": {
+        "path": "/workspace/engineering/next-current-union-independent-preparation/pr308-prospective-complete-leaf-modes-blobs.json",
+        "bytes": 235217,
+        "sha256": "ca6d19a215294f4bbf0547704c1431e57ac5d8b53e138cd24e4940db0d8413db"
+      },
+      "prospective_leaf_count": 1409,
+      "source_and_target_no_deletion": true,
+      "independent_nonconflicting_union_paths_checked": 1408,
+      "only_both_changed_path": [
+        "docs/skills/repository-operations.md"
+      ],
+      "both_guide_addedblocks_retained": true,
+      "original_owned_non_doc_paths": [
+        "action_server/scripts/verify_dakota_rcc_acceptance.py",
+        "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py"
+      ],
+      "original_owned_non_doc_modes_blobs_preserved": true,
+      "complete_delta_vs_target": [
+        "action_server/scripts/verify_dakota_rcc_acceptance.py",
+        "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+        "docs/skills/repository-operations.md"
+      ],
+      "full_github_generator_workflows_exact_target": true,
+      "native268_comparison": {
+        "matches": 268,
+        "differences": [],
+        "additional_production_inputs_outside268": []
+      },
+      "selected5_mode_blob_sha_match": true,
+      "producer_parity_scope": "trackedinputsourceparityonly; noactualnative/newwheel/managedorigin/releasequalification",
+      "observed_current_checks": {
+        "total": 20,
+        "success": 19,
+        "failure": 0,
+        "nonterminal": 1,
+        "optional_copilot_setup_seen": 1
+      },
+      "observed_head_runs": [
+        {
+          "run": 38112192362,
+          "workflow": ".github/workflows/actions_runtime_tests.yml",
+          "head": "483e3e735c268b08acba1fd3930a9a34e0deaa91",
+          "created_at": "2026-10-11T04:37:51Z",
+          "status": "in_progress",
+          "conclusion": null,
+          "jobs_observed": 3,
+          "jobs_expected_when_fully_created": 3
+        },
+        {
+          "run": 38112192428,
+          "workflow": ".github/workflows/coverage-gate.yml",
+          "head": "483e3e735c268b08acba1fd3930a9a34e0deaa91",
+          "created_at": "2026-10-11T04:37:51Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 1,
+          "jobs_expected_when_fully_created": 1
+        },
+        {
+          "run": 38112192290,
+          "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+          "head": "483e3e735c268b08acba1fd3930a9a34e0deaa91",
+          "created_at": "2026-10-11T04:37:51Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 3,
+          "jobs_expected_when_fully_created": 3
+        },
+        {
+          "run": 38112192391,
+          "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+          "head": "483e3e735c268b08acba1fd3930a9a34e0deaa91",
+          "created_at": "2026-10-11T04:37:51Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 5,
+          "jobs_expected_when_fully_created": 5
+        },
+        {
+          "run": 38112192300,
+          "workflow": ".github/workflows/ai-audit.yml",
+          "head": "483e3e735c268b08acba1fd3930a9a34e0deaa91",
+          "created_at": "2026-10-11T04:37:51Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 1,
+          "jobs_expected_when_fully_created": 1
+        },
+        {
+          "run": 38112192390,
+          "workflow": ".github/workflows/developer_toolkit.yml",
+          "head": "483e3e735c268b08acba1fd3930a9a34e0deaa91",
+          "created_at": "2026-10-11T04:37:51Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 6,
+          "jobs_expected_when_fully_created": 6
+        }
+      ],
+      "old_API_control_bound": {
+        "sha": "335a6add55ead58ea082a74e965b40b43ce3f925",
+        "tree": "9b69d78117e0e5cade3f59fcacc6db56a747b61f",
+        "ordered_parents": [
+          "fbde0d3a248c47c9964851355f96575c89a87329",
+          "483e3e735c268b08acba1fd3930a9a34e0deaa91"
+        ],
+        "metadata_still_old_base": "fbde evennamedtarget advanced"
+      },
+      "actual_old_audit_checkout_log_private": {
+        "path": "/workspace/engineering/next-current-union-preparation-owned/audit-job-114389876996-original-decoded.log",
+        "bytes": 56826,
+        "sha256": "a65328d57a5016139d77d24314715d7c57722af0854bd046273cf94445de8423"
+      },
+      "audit_checkout_limit": "Only auditjob originalcheckout independentlydecoded here; no claim everyotherjoblog/native receipt reviewed",
+      "expected_future_PR_workflows": [
+        {
+          "path": ".github/workflows/actions_runtime_pypi_release.yml",
+          "pull_request": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              ".github/workflows/_gen_workflows.py",
+              ".github/workflows/actions_runtime_pypi_release.yml",
+              ".github/workflows/actions_runtime_binary_release.yml",
+              ".github/workflows/actions_runtime_manylinux_release.yml",
+              "devutils/tests/test_actions_runtime_release_line.py",
+              "devutils/tests/test_runtime_release_workflows.py",
+              "docs/skills/repository-operations.md",
+              "action_server/scripts/publish_verified_runtime.py",
+              "action_server/scripts/verify_published_runtime_floor.py"
+            ]
+          },
+          "job_keys": [
+            "build-sdist",
+            "build-wheels",
+            "publish"
+          ],
+          "declared_matrix_shapes": {
+            "build-sdist": {
+              "matrix": {
+                "name": [
+                  "ubuntu-py3.12"
+                ],
+                "include": [
+                  {
+                    "name": "ubuntu-py3.12",
+                    "python": "3.12",
+                    "os": "ubuntu-22.04"
+                  }
+                ]
+              },
+              "declared_job_count": 1
+            },
+            "build-wheels": {
+              "matrix": {
+                "os": [
+                  "ubuntu-22.04",
+                  "windows-2022",
+                  "macos-15"
+                ],
+                "include": [
+                  {
+                    "os": "ubuntu-22.04",
+                    "python": "3.12",
+                    "name": "ubuntu"
+                  },
+                  {
+                    "os": "windows-2022",
+                    "python": "3.12",
+                    "name": "windows"
+                  },
+                  {
+                    "os": "macos-15",
+                    "python": "3.12",
+                    "name": "macos"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            },
+            "publish": {
+              "matrix": {
+                "python": [
+                  "3.12"
+                ]
+              },
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 5
+        },
+        {
+          "path": ".github/workflows/actions_runtime_tests.yml",
+          "pull_request": {
+            "branches": [
+              "master",
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "action_server/**",
+              ".github/workflows/actions_runtime_tests.yml",
+              "devutils/**",
+              "actions/**",
+              "actions-http-helper/**",
+              "work-items/**"
+            ]
+          },
+          "job_keys": [
+            "build"
+          ],
+          "declared_matrix_shapes": {
+            "build": {
+              "matrix": {
+                "name": [
+                  "ubuntu-py3.12-devmode",
+                  "windows-py3.12-devmode",
+                  "macos-py3.12-devmode"
+                ],
+                "include": [
+                  {
+                    "name": "ubuntu-py3.12-devmode",
+                    "python": "3.12",
+                    "os": "ubuntu-22.04"
+                  },
+                  {
+                    "name": "windows-py3.12-devmode",
+                    "python": "3.12",
+                    "os": "windows-2022"
+                  },
+                  {
+                    "name": "macos-py3.12-devmode",
+                    "os": "macos-15",
+                    "python": "3.12"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            }
+          },
+          "declared_job_count": 3
+        },
+        {
+          "path": ".github/workflows/ai-audit.yml",
+          "pull_request": null,
+          "job_keys": [
+            "audit"
+          ],
+          "declared_matrix_shapes": {
+            "audit": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/coverage-gate.yml",
+          "pull_request": {
+            "branches": [
+              "community",
+              "integration/community-release-20261008"
+            ]
+          },
+          "job_keys": [
+            "coverage"
+          ],
+          "declared_matrix_shapes": {
+            "coverage": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/developer_toolkit.yml",
+          "pull_request": null,
+          "job_keys": [
+            "toolkit"
+          ],
+          "declared_matrix_shapes": {
+            "toolkit": {
+              "matrix": {
+                "include": [
+                  {
+                    "lane": "primary",
+                    "rcc_version": "18.19.3",
+                    "os": "ubuntu-22.04",
+                    "asset": "rcc-linux64",
+                    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+                  },
+                  {
+                    "lane": "primary",
+                    "rcc_version": "18.19.3",
+                    "os": "macos-15",
+                    "asset": "rcc-macosarm64",
+                    "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266"
+                  },
+                  {
+                    "lane": "primary",
+                    "rcc_version": "18.19.3",
+                    "os": "windows-2022",
+                    "asset": "rcc-windows64.exe",
+                    "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+                  },
+                  {
+                    "lane": "n-1",
+                    "rcc_version": "18.18.1",
+                    "os": "ubuntu-22.04",
+                    "asset": "rcc-linux64",
+                    "sha256": "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf"
+                  },
+                  {
+                    "lane": "n-1",
+                    "rcc_version": "18.18.1",
+                    "os": "macos-15",
+                    "asset": "rcc-macosarm64",
+                    "sha256": "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d"
+                  },
+                  {
+                    "lane": "n-1",
+                    "rcc_version": "18.18.1",
+                    "os": "windows-2022",
+                    "asset": "rcc-windows64.exe",
+                    "sha256": "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b"
+                  }
+                ]
+              },
+              "declared_job_count": 6
+            }
+          },
+          "declared_job_count": 6
+        },
+        {
+          "path": ".github/workflows/frontend-build-unauthenticated.yml",
+          "pull_request": {
+            "paths": [
+              "action_server/**",
+              "work-items/**",
+              ".github/workflows/frontend-build-unauthenticated.yml"
+            ]
+          },
+          "job_keys": [
+            "build-external"
+          ],
+          "declared_matrix_shapes": {
+            "build-external": {
+              "matrix": {
+                "os": [
+                  "ubuntu-22.04",
+                  "windows-2022",
+                  "macos-15"
+                ],
+                "include": [
+                  {
+                    "os": "ubuntu-22.04",
+                    "python": "3.12"
+                  },
+                  {
+                    "os": "windows-2022",
+                    "python": "3.12"
+                  },
+                  {
+                    "os": "macos-15",
+                    "python": "3.12"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            }
+          },
+          "declared_job_count": 3
+        }
+      ],
+      "expected_future_PR_declared_job_count": 19,
+      "filtered_out_future_PR_workflows": [
+        {
+          "path": ".github/workflows/action_server_frontend_tests.yml",
+          "pull_request": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py",
+              "docs/contracts/canvas/fixtures/**",
+              ".github/workflows/action_server_frontend_tests.yml"
+            ]
+          },
+          "job_keys": [
+            "action-server-frontend-tests"
+          ],
+          "declared_matrix_shapes": {
+            "action-server-frontend-tests": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/actions_core_tests.yml",
+          "pull_request": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "actions/**",
+              ".github/workflows/actions_core_tests.yml",
+              "devutils/**",
+              "actions-http-helper/**",
+              ".github/workflows/_gen_workflows.py"
+            ]
+          },
+          "job_keys": [
+            "build",
+            "candidate-wheel"
+          ],
+          "declared_matrix_shapes": {
+            "build": {
+              "matrix": {
+                "name": [
+                  "ubuntu-py3.10-devmode",
+                  "windows-py3.10-devmode",
+                  "macos-py3.10-devmode"
+                ],
+                "include": [
+                  {
+                    "name": "ubuntu-py3.10-devmode",
+                    "python": "3.10",
+                    "os": "ubuntu-22.04"
+                  },
+                  {
+                    "name": "windows-py3.10-devmode",
+                    "python": "3.10",
+                    "os": "windows-2022"
+                  },
+                  {
+                    "name": "macos-py3.10-devmode",
+                    "os": "macos-15",
+                    "python": "3.10"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            },
+            "candidate-wheel": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 4
+        },
+        {
+          "path": ".github/workflows/copilot-setup-steps.yml",
+          "pull_request": {
+            "paths": [
+              ".github/workflows/copilot-setup-steps.yml",
+              ".github/workflows/developer_toolkit.yml",
+              "developer/**"
+            ]
+          },
+          "job_keys": [
+            "copilot-setup-steps"
+          ],
+          "declared_matrix_shapes": {
+            "copilot-setup-steps": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/frontend-build.yml",
+          "pull_request": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              ".github/workflows/frontend-build.yml"
+            ]
+          },
+          "job_keys": [
+            "build"
+          ],
+          "declared_matrix_shapes": {
+            "build": {
+              "matrix": {
+                "os": [
+                  "ubuntu-latest",
+                  "macos-latest",
+                  "windows-latest"
+                ]
+              },
+              "declared_job_count": 3
+            }
+          },
+          "declared_job_count": 3
+        },
+        {
+          "path": ".github/workflows/http_helper_tests.yml",
+          "pull_request": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "actions-http-helper/**",
+              ".github/workflows/http_helper_tests.yml",
+              "devutils/**"
+            ]
+          },
+          "job_keys": [
+            "build"
+          ],
+          "declared_matrix_shapes": {
+            "build": {
+              "matrix": {
+                "name": [
+                  "ubuntu-py3.10-devmode",
+                  "windows-py3.10-devmode",
+                  "macos-py3.10-devmode"
+                ],
+                "include": [
+                  {
+                    "name": "ubuntu-py3.10-devmode",
+                    "python": "3.10",
+                    "os": "ubuntu-22.04"
+                  },
+                  {
+                    "name": "windows-py3.10-devmode",
+                    "python": "3.10",
+                    "os": "windows-2022"
+                  },
+                  {
+                    "name": "macos-py3.10-devmode",
+                    "os": "macos-15",
+                    "python": "3.10"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            }
+          },
+          "declared_job_count": 3
+        },
+        {
+          "path": ".github/workflows/lighthouse.yml",
+          "pull_request": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              ".github/workflows/lighthouse.yml"
+            ]
+          },
+          "job_keys": [
+            "lighthouse"
+          ],
+          "declared_matrix_shapes": {
+            "lighthouse": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/work_items_release.yml",
+          "pull_request": {
+            "paths": [
+              "work-items/**",
+              ".devcontainer/bin/verify-work-items",
+              ".devcontainer/bin/smoke-host",
+              ".devcontainer/bin/bootstrap",
+              ".devcontainer/tests/**",
+              ".github/workflows/work_items_release.yml",
+              "docs/skills/work-items.md"
+            ]
+          },
+          "job_keys": [
+            "verify",
+            "publish"
+          ],
+          "declared_matrix_shapes": {
+            "verify": {
+              "matrix": null,
+              "declared_job_count": 1
+            },
+            "publish": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 2
+        }
+      ],
+      "configured_CI_scope": "sixmatrixworkflows19jobs, optionalcopilotsetupseparate; manualRCC/frozen/provider/recoveryand fullprivate-releasegraph notimplied",
+      "smallest_refresh": [
+        "rootcapturesactualtargetatdispatchagain; iftargetadvancedrecomputeprospective",
+        "ordinarymerge actualconfirmedtarget INTOsameexistingbranch; retainall acceptedhistory/receipts",
+        "no newimplementation requiredbythiscleanunion; preservebothguide lessons",
+        "canonicalgenerator all8outputs exact pluscomplete.github/treeproof",
+        "freshToolkit/scopedcandidatePoetry/version/filename/uniqueMETADATA negative controls + bounded supervisedprocess receipt/cleanup controls; actualRCCoptin remainsNOT_RUN/fullconfiguredRuntime nonintegration/lintRuffformatIsort/typechecks/diffcheck onexactfrozenunion",
+        "independent source reviewbefore normalexpectedexistingbranchpush",
+        "freshfull19declaredhostedjobs andcompletehead/control/tree/target/review/thread/draft/policy readback beforemerge; norelabeloldCI"
+      ],
+      "scoped_acceptance_and_holds": [
+        "Syntheticcandidateversion controls are not newactualPoetrywheel/RCC/provider/warmcache/frozen behavior; earlier67e82/e339wrapperexit-1 retained."
+      ],
+      "prior_accepted_source_review": {
+        "path": "/workspace/engineering/pr308-independent-current-review/independent-current-source-review.json",
+        "bytes": 8694,
+        "sha256": "010f01b9673d9d80e5b898f18f9c7ec2ac69a268d21a2dca6bcaaf92dea21631"
+      },
+      "branch_worktree_unchanged": true
+    },
+    {
+      "pr": 299,
+      "same_existing_branch": "feat/shared-run-output-20261010",
+      "head": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+      "old_head_tree": "3c78f95d814fe2603f40169783fc3c4a84cd6315",
+      "live_target": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "live_target_tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78",
+      "common_ancestor": "fbde0d3a248c47c9964851355f96575c89a87329",
+      "prospective_ordinary_tree": "0f5a438ef06a22a1efabe155aba471f68a44c537",
+      "simulation_only_no_commit": true,
+      "no_conflicts": true,
+      "complete_leafset": {
+        "path": "/workspace/engineering/next-current-union-independent-preparation/pr299-prospective-complete-leaf-modes-blobs.json",
+        "bytes": 236942,
+        "sha256": "5b3666d2923f769e4dcd5cc94b76213c7c78e0afa95a043a3ee0f70cc0acfa14"
+      },
+      "prospective_leaf_count": 1419,
+      "source_and_target_no_deletion": true,
+      "independent_nonconflicting_union_paths_checked": 1418,
+      "only_both_changed_path": [
+        "docs/skills/repository-operations.md"
+      ],
+      "both_guide_addedblocks_retained": true,
+      "original_owned_non_doc_paths": [
+        "action_server/src/actions/server/_actions_run.py",
+        "action_server/src/actions/server/_api_analytics.py",
+        "action_server/src/actions/server/_api_run.py",
+        "action_server/src/actions/server/_models.py",
+        "action_server/src/actions/server/_runs_state_cache.py",
+        "action_server/src/actions/server/migrations/__init__.py",
+        "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+        "action_server/src/actions/server/run_outputs/__init__.py",
+        "action_server/src/actions/server/run_outputs/filesystem.py",
+        "action_server/src/actions/server/run_outputs/models.py",
+        "action_server/src/actions/server/run_outputs/service.py",
+        "action_server/src/actions/server/run_outputs/types.py",
+        "action_server/tests/action_server_tests/mcp/test_alias_history.py",
+        "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+        "action_server/tests/action_server_tests/run_outputs/test_concurrency.py",
+        "action_server/tests/action_server_tests/run_outputs/test_filesystem.py",
+        "action_server/tests/action_server_tests/run_outputs/test_migration.py",
+        "action_server/tests/action_server_tests/run_outputs/test_service.py",
+        "action_server/tests/action_server_tests/test_artifact_storage.py",
+        "action_server/tests/action_server_tests/test_database.py",
+        "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt",
+        "action_server/tests/action_server_tests/test_database_shared.py",
+        "action_server/tests/action_server_tests/test_server_websockets.py"
+      ],
+      "original_owned_non_doc_modes_blobs_preserved": true,
+      "complete_delta_vs_target": [
+        "action_server/src/actions/server/_actions_run.py",
+        "action_server/src/actions/server/_api_analytics.py",
+        "action_server/src/actions/server/_api_run.py",
+        "action_server/src/actions/server/_models.py",
+        "action_server/src/actions/server/_runs_state_cache.py",
+        "action_server/src/actions/server/migrations/__init__.py",
+        "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+        "action_server/src/actions/server/run_outputs/__init__.py",
+        "action_server/src/actions/server/run_outputs/filesystem.py",
+        "action_server/src/actions/server/run_outputs/models.py",
+        "action_server/src/actions/server/run_outputs/service.py",
+        "action_server/src/actions/server/run_outputs/types.py",
+        "action_server/tests/action_server_tests/mcp/test_alias_history.py",
+        "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+        "action_server/tests/action_server_tests/run_outputs/test_concurrency.py",
+        "action_server/tests/action_server_tests/run_outputs/test_filesystem.py",
+        "action_server/tests/action_server_tests/run_outputs/test_migration.py",
+        "action_server/tests/action_server_tests/run_outputs/test_service.py",
+        "action_server/tests/action_server_tests/test_artifact_storage.py",
+        "action_server/tests/action_server_tests/test_database.py",
+        "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt",
+        "action_server/tests/action_server_tests/test_database_shared.py",
+        "action_server/tests/action_server_tests/test_server_websockets.py",
+        "docs/skills/provenance-observability.md",
+        "docs/skills/repository-operations.md"
+      ],
+      "full_github_generator_workflows_exact_target": true,
+      "native268_comparison": {
+        "matches": 262,
+        "differences": [
+          {
+            "path": "action_server/src/actions/server/_actions_run.py",
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "3637cfcd94e5d91f0bf5b9b2fc4b3e94d4562826",
+              "sha256": "4e6d1c0be66939a3e87719f52f47083822506d1936a6c036d0f73ed522b5b702"
+            },
+            "prospective": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "24fc844ad99c658d70f6f5069f0df250bb72ad87",
+              "sha256": "945fa1ce70ee4834410c8d37fd92372e6772aa8a1a0d128f4cada3035ddbd301"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/_api_analytics.py",
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "7f82f03353940b457fb5057e22e02a5c6f962197",
+              "sha256": "86df893f425a5910e4e9a242a3ee21a9e709600f3a6e45968fba76878cc0dcc7"
+            },
+            "prospective": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "8b3177b995500ec111fbc79b8e7c8589319b1cd2",
+              "sha256": "7e18d7142655607645b526d3e3bde397f22fee874e21c789104a3cad0ca25bfb"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/_api_run.py",
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "424094841a29bd11d6bc7fb0f3b9e528573353d9",
+              "sha256": "0e4ff75583d1754b1c4e2bceb8e1b411718cf7ce3c4a066588ab25744f04a9c6"
+            },
+            "prospective": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24",
+              "sha256": "be672635fc9cc000dc3d573a4a0e182d3e42f2d2f48f469b2b1ab27dd2dfc872"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/_models.py",
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb",
+              "sha256": "530cdbfe913495b9eaff54bc029ef1340840d1598aff205d3e6047ea4d296a73"
+            },
+            "prospective": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "405304f2e593fdfe949b431851eb0dae39c6ab96",
+              "sha256": "bc9ad180099414005575b2d034741176f8d86b1b758f6bbf1c3e3b5497aadbf9"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/_runs_state_cache.py",
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "6428a201a110b8d1073fc3b5265d9282723de944",
+              "sha256": "0f5714321d4bb1af809b565efd48d4a96a7d66e93bb3967bc1cb3c5bed6cb73c"
+            },
+            "prospective": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "3774e9a0e77d43e63a18733a4ff5652454ef06ce",
+              "sha256": "4b7fea14ad672f7f039ff63fc9b75b7195c4f7cb44f79d81b5dc8f3069f4ca7c"
+            }
+          },
+          {
+            "path": "action_server/src/actions/server/migrations/__init__.py",
+            "historical": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "cb68bcb4a2e41ecefcb5a409ce5c26065a505d05",
+              "sha256": "0bfc8983263177242f12a32824d88596f665fabcd08c96344709c9e00e1ce37e"
+            },
+            "prospective": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "7889794dd3db1019bf4cdc179fa892c05943dc79",
+              "sha256": "c3001c1c3fa605c315b04c43b8dfd845495e3dc3773a0098be60d0d5efe931f6"
+            }
+          }
+        ],
+        "additional_production_inputs_outside268": [
+          {
+            "path": "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+            "mode_blob": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "3629ef55d42815acc7c1701bdd5b6949d3394ec6"
+            },
+            "sha256": "ebb773140f650555ac85628b9599363d6ec6b180841c86200a0fee622d4b9de4"
+          },
+          {
+            "path": "action_server/src/actions/server/run_outputs/__init__.py",
+            "mode_blob": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "6787c69b364901f1a1eed93e553ae8cfe4d194ef"
+            },
+            "sha256": "4c29ad35ab314ea4472025d453703b124a08262cfa24a51baf3a1a2ffb58ae38"
+          },
+          {
+            "path": "action_server/src/actions/server/run_outputs/filesystem.py",
+            "mode_blob": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "89170173dd0f1771e1a9923bb8532f2b28448dd1"
+            },
+            "sha256": "db8daf79dc0d2a06ecec9a2c3ab67319d6df420c2a44578948d46f2b558c5606"
+          },
+          {
+            "path": "action_server/src/actions/server/run_outputs/models.py",
+            "mode_blob": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "ae75ceee659776fd51e1dda36528a22640afba19"
+            },
+            "sha256": "c69318f6893484156fba1002f8372711fc83e32e56d0e29c54e985cc26196065"
+          },
+          {
+            "path": "action_server/src/actions/server/run_outputs/service.py",
+            "mode_blob": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "55f5c09aeb0a3e9199b56916bb7fee41708b35c6"
+            },
+            "sha256": "46174068c6d5fb1609a38630fd460983c071a51a48bec4bb6ecdeff42446fe62"
+          },
+          {
+            "path": "action_server/src/actions/server/run_outputs/types.py",
+            "mode_blob": {
+              "mode": "100644",
+              "kind": "blob",
+              "blob": "cac30880373c26f648bb1c835fb74449f567cb22"
+            },
+            "sha256": "9195c6986edee9b2821e5e75c88a556ab4ef747eb065adb05b72b415165767d3"
+          }
+        ]
+      },
+      "selected5_mode_blob_sha_match": true,
+      "producer_parity_scope": "OLD_NATIVE_ARTIFACT_NOT_QUALIFIED299",
+      "observed_current_checks": {
+        "total": 19,
+        "success": 10,
+        "failure": 0,
+        "nonterminal": 9,
+        "optional_copilot_setup_seen": 1
+      },
+      "observed_head_runs": [
+        {
+          "run": 38113139320,
+          "workflow": ".github/workflows/developer_toolkit.yml",
+          "head": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+          "created_at": "2026-10-11T04:55:52Z",
+          "status": "queued",
+          "conclusion": null,
+          "jobs_observed": 6,
+          "jobs_expected_when_fully_created": 6
+        },
+        {
+          "run": 38113139406,
+          "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+          "head": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+          "created_at": "2026-10-11T04:55:52Z",
+          "status": "queued",
+          "conclusion": null,
+          "jobs_observed": 4,
+          "jobs_expected_when_fully_created": 5
+        },
+        {
+          "run": 38113139428,
+          "workflow": ".github/workflows/actions_runtime_tests.yml",
+          "head": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+          "created_at": "2026-10-11T04:55:52Z",
+          "status": "in_progress",
+          "conclusion": null,
+          "jobs_observed": 3,
+          "jobs_expected_when_fully_created": 3
+        },
+        {
+          "run": 38113139304,
+          "workflow": ".github/workflows/ai-audit.yml",
+          "head": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+          "created_at": "2026-10-11T04:55:52Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 1,
+          "jobs_expected_when_fully_created": 1
+        },
+        {
+          "run": 38113139437,
+          "workflow": ".github/workflows/coverage-gate.yml",
+          "head": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+          "created_at": "2026-10-11T04:55:52Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 1,
+          "jobs_expected_when_fully_created": 1
+        },
+        {
+          "run": 38113139398,
+          "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+          "head": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+          "created_at": "2026-10-11T04:55:52Z",
+          "status": "completed",
+          "conclusion": "success",
+          "jobs_observed": 3,
+          "jobs_expected_when_fully_created": 3
+        }
+      ],
+      "old_API_control_bound": {
+        "sha": "b96808f3ad979ad6abce6d8725aa94ef18b85a29",
+        "tree": "3c78f95d814fe2603f40169783fc3c4a84cd6315",
+        "ordered_parents": [
+          "fbde0d3a248c47c9964851355f96575c89a87329",
+          "80ba4c3adce0d0f5fd8a7040d271ab19433e4042"
+        ],
+        "metadata_still_old_base": "fbde evennamedtarget advanced"
+      },
+      "actual_old_audit_checkout_log_private": {
+        "path": "/workspace/engineering/next-current-union-preparation-owned/audit-job-114392667473-original-decoded.log",
+        "bytes": 56822,
+        "sha256": "4a1f968f83b6e28e630012fa340f885fbc7a7cccdd3d9cf6447e6cfdbcd8f1f6"
+      },
+      "audit_checkout_limit": "Only auditjob originalcheckout independentlydecoded here; no claim everyotherjoblog/native receipt reviewed",
+      "expected_future_PR_workflows": [
+        {
+          "path": ".github/workflows/actions_runtime_pypi_release.yml",
+          "pull_request": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              ".github/workflows/_gen_workflows.py",
+              ".github/workflows/actions_runtime_pypi_release.yml",
+              ".github/workflows/actions_runtime_binary_release.yml",
+              ".github/workflows/actions_runtime_manylinux_release.yml",
+              "devutils/tests/test_actions_runtime_release_line.py",
+              "devutils/tests/test_runtime_release_workflows.py",
+              "docs/skills/repository-operations.md",
+              "action_server/scripts/publish_verified_runtime.py",
+              "action_server/scripts/verify_published_runtime_floor.py"
+            ]
+          },
+          "job_keys": [
+            "build-sdist",
+            "build-wheels",
+            "publish"
+          ],
+          "declared_matrix_shapes": {
+            "build-sdist": {
+              "matrix": {
+                "name": [
+                  "ubuntu-py3.12"
+                ],
+                "include": [
+                  {
+                    "name": "ubuntu-py3.12",
+                    "python": "3.12",
+                    "os": "ubuntu-22.04"
+                  }
+                ]
+              },
+              "declared_job_count": 1
+            },
+            "build-wheels": {
+              "matrix": {
+                "os": [
+                  "ubuntu-22.04",
+                  "windows-2022",
+                  "macos-15"
+                ],
+                "include": [
+                  {
+                    "os": "ubuntu-22.04",
+                    "python": "3.12",
+                    "name": "ubuntu"
+                  },
+                  {
+                    "os": "windows-2022",
+                    "python": "3.12",
+                    "name": "windows"
+                  },
+                  {
+                    "os": "macos-15",
+                    "python": "3.12",
+                    "name": "macos"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            },
+            "publish": {
+              "matrix": {
+                "python": [
+                  "3.12"
+                ]
+              },
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 5
+        },
+        {
+          "path": ".github/workflows/actions_runtime_tests.yml",
+          "pull_request": {
+            "branches": [
+              "master",
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "action_server/**",
+              ".github/workflows/actions_runtime_tests.yml",
+              "devutils/**",
+              "actions/**",
+              "actions-http-helper/**",
+              "work-items/**"
+            ]
+          },
+          "job_keys": [
+            "build"
+          ],
+          "declared_matrix_shapes": {
+            "build": {
+              "matrix": {
+                "name": [
+                  "ubuntu-py3.12-devmode",
+                  "windows-py3.12-devmode",
+                  "macos-py3.12-devmode"
+                ],
+                "include": [
+                  {
+                    "name": "ubuntu-py3.12-devmode",
+                    "python": "3.12",
+                    "os": "ubuntu-22.04"
+                  },
+                  {
+                    "name": "windows-py3.12-devmode",
+                    "python": "3.12",
+                    "os": "windows-2022"
+                  },
+                  {
+                    "name": "macos-py3.12-devmode",
+                    "os": "macos-15",
+                    "python": "3.12"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            }
+          },
+          "declared_job_count": 3
+        },
+        {
+          "path": ".github/workflows/ai-audit.yml",
+          "pull_request": null,
+          "job_keys": [
+            "audit"
+          ],
+          "declared_matrix_shapes": {
+            "audit": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/coverage-gate.yml",
+          "pull_request": {
+            "branches": [
+              "community",
+              "integration/community-release-20261008"
+            ]
+          },
+          "job_keys": [
+            "coverage"
+          ],
+          "declared_matrix_shapes": {
+            "coverage": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/developer_toolkit.yml",
+          "pull_request": null,
+          "job_keys": [
+            "toolkit"
+          ],
+          "declared_matrix_shapes": {
+            "toolkit": {
+              "matrix": {
+                "include": [
+                  {
+                    "lane": "primary",
+                    "rcc_version": "18.19.3",
+                    "os": "ubuntu-22.04",
+                    "asset": "rcc-linux64",
+                    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+                  },
+                  {
+                    "lane": "primary",
+                    "rcc_version": "18.19.3",
+                    "os": "macos-15",
+                    "asset": "rcc-macosarm64",
+                    "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266"
+                  },
+                  {
+                    "lane": "primary",
+                    "rcc_version": "18.19.3",
+                    "os": "windows-2022",
+                    "asset": "rcc-windows64.exe",
+                    "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+                  },
+                  {
+                    "lane": "n-1",
+                    "rcc_version": "18.18.1",
+                    "os": "ubuntu-22.04",
+                    "asset": "rcc-linux64",
+                    "sha256": "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf"
+                  },
+                  {
+                    "lane": "n-1",
+                    "rcc_version": "18.18.1",
+                    "os": "macos-15",
+                    "asset": "rcc-macosarm64",
+                    "sha256": "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d"
+                  },
+                  {
+                    "lane": "n-1",
+                    "rcc_version": "18.18.1",
+                    "os": "windows-2022",
+                    "asset": "rcc-windows64.exe",
+                    "sha256": "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b"
+                  }
+                ]
+              },
+              "declared_job_count": 6
+            }
+          },
+          "declared_job_count": 6
+        },
+        {
+          "path": ".github/workflows/frontend-build-unauthenticated.yml",
+          "pull_request": {
+            "paths": [
+              "action_server/**",
+              "work-items/**",
+              ".github/workflows/frontend-build-unauthenticated.yml"
+            ]
+          },
+          "job_keys": [
+            "build-external"
+          ],
+          "declared_matrix_shapes": {
+            "build-external": {
+              "matrix": {
+                "os": [
+                  "ubuntu-22.04",
+                  "windows-2022",
+                  "macos-15"
+                ],
+                "include": [
+                  {
+                    "os": "ubuntu-22.04",
+                    "python": "3.12"
+                  },
+                  {
+                    "os": "windows-2022",
+                    "python": "3.12"
+                  },
+                  {
+                    "os": "macos-15",
+                    "python": "3.12"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            }
+          },
+          "declared_job_count": 3
+        }
+      ],
+      "expected_future_PR_declared_job_count": 19,
+      "filtered_out_future_PR_workflows": [
+        {
+          "path": ".github/workflows/action_server_frontend_tests.yml",
+          "pull_request": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py",
+              "docs/contracts/canvas/fixtures/**",
+              ".github/workflows/action_server_frontend_tests.yml"
+            ]
+          },
+          "job_keys": [
+            "action-server-frontend-tests"
+          ],
+          "declared_matrix_shapes": {
+            "action-server-frontend-tests": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/actions_core_tests.yml",
+          "pull_request": {
+            "branches": [
+              "community",
+              "integration/**"
+            ],
+            "paths": [
+              "actions/**",
+              ".github/workflows/actions_core_tests.yml",
+              "devutils/**",
+              "actions-http-helper/**",
+              ".github/workflows/_gen_workflows.py"
+            ]
+          },
+          "job_keys": [
+            "build",
+            "candidate-wheel"
+          ],
+          "declared_matrix_shapes": {
+            "build": {
+              "matrix": {
+                "name": [
+                  "ubuntu-py3.10-devmode",
+                  "windows-py3.10-devmode",
+                  "macos-py3.10-devmode"
+                ],
+                "include": [
+                  {
+                    "name": "ubuntu-py3.10-devmode",
+                    "python": "3.10",
+                    "os": "ubuntu-22.04"
+                  },
+                  {
+                    "name": "windows-py3.10-devmode",
+                    "python": "3.10",
+                    "os": "windows-2022"
+                  },
+                  {
+                    "name": "macos-py3.10-devmode",
+                    "os": "macos-15",
+                    "python": "3.10"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            },
+            "candidate-wheel": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 4
+        },
+        {
+          "path": ".github/workflows/copilot-setup-steps.yml",
+          "pull_request": {
+            "paths": [
+              ".github/workflows/copilot-setup-steps.yml",
+              ".github/workflows/developer_toolkit.yml",
+              "developer/**"
+            ]
+          },
+          "job_keys": [
+            "copilot-setup-steps"
+          ],
+          "declared_matrix_shapes": {
+            "copilot-setup-steps": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/frontend-build.yml",
+          "pull_request": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              ".github/workflows/frontend-build.yml"
+            ]
+          },
+          "job_keys": [
+            "build"
+          ],
+          "declared_matrix_shapes": {
+            "build": {
+              "matrix": {
+                "os": [
+                  "ubuntu-latest",
+                  "macos-latest",
+                  "windows-latest"
+                ]
+              },
+              "declared_job_count": 3
+            }
+          },
+          "declared_job_count": 3
+        },
+        {
+          "path": ".github/workflows/http_helper_tests.yml",
+          "pull_request": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "actions-http-helper/**",
+              ".github/workflows/http_helper_tests.yml",
+              "devutils/**"
+            ]
+          },
+          "job_keys": [
+            "build"
+          ],
+          "declared_matrix_shapes": {
+            "build": {
+              "matrix": {
+                "name": [
+                  "ubuntu-py3.10-devmode",
+                  "windows-py3.10-devmode",
+                  "macos-py3.10-devmode"
+                ],
+                "include": [
+                  {
+                    "name": "ubuntu-py3.10-devmode",
+                    "python": "3.10",
+                    "os": "ubuntu-22.04"
+                  },
+                  {
+                    "name": "windows-py3.10-devmode",
+                    "python": "3.10",
+                    "os": "windows-2022"
+                  },
+                  {
+                    "name": "macos-py3.10-devmode",
+                    "os": "macos-15",
+                    "python": "3.10"
+                  }
+                ]
+              },
+              "declared_job_count": 3
+            }
+          },
+          "declared_job_count": 3
+        },
+        {
+          "path": ".github/workflows/lighthouse.yml",
+          "pull_request": {
+            "branches": [
+              "community"
+            ],
+            "paths": [
+              "action_server/frontend/**",
+              ".github/workflows/lighthouse.yml"
+            ]
+          },
+          "job_keys": [
+            "lighthouse"
+          ],
+          "declared_matrix_shapes": {
+            "lighthouse": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 1
+        },
+        {
+          "path": ".github/workflows/work_items_release.yml",
+          "pull_request": {
+            "paths": [
+              "work-items/**",
+              ".devcontainer/bin/verify-work-items",
+              ".devcontainer/bin/smoke-host",
+              ".devcontainer/bin/bootstrap",
+              ".devcontainer/tests/**",
+              ".github/workflows/work_items_release.yml",
+              "docs/skills/work-items.md"
+            ]
+          },
+          "job_keys": [
+            "verify",
+            "publish"
+          ],
+          "declared_matrix_shapes": {
+            "verify": {
+              "matrix": null,
+              "declared_job_count": 1
+            },
+            "publish": {
+              "matrix": null,
+              "declared_job_count": 1
+            }
+          },
+          "declared_job_count": 2
+        }
+      ],
+      "configured_CI_scope": "sixmatrixworkflows19jobs, optionalcopilotsetupseparate; manualRCC/frozen/provider/recoveryand fullprivate-releasegraph notimplied",
+      "smallest_refresh": [
+        "rootcapturesactualtargetatdispatchagain; iftargetadvancedrecomputeprospective",
+        "ordinarymerge actualconfirmedtarget INTOsameexistingbranch; retainall acceptedhistory/receipts",
+        "no newimplementation requiredbythiscleanunion; preservebothguide lessons",
+        "canonicalgenerator all8outputs exact pluscomplete.github/treeproof",
+        "freshToolkit/scopedrun_outputs interprocessclaim/publication, provider identity/no-follow/negativecleanup, migration/legacycache/manifest exclusion controls + sharedRun/alias/resource-history controls; actualpublictransport/backend/native remainseparate/fullconfiguredRuntime nonintegration/lintRuffformatIsort/typechecks/diffcheck onexactfrozenunion",
+        "independent source reviewbefore normalexpectedexistingbranchpush",
+        "freshfull19declaredhostedjobs andcompletehead/control/tree/target/review/thread/draft/policy readback beforemerge; norelabeloldCI"
+      ],
+      "scoped_acceptance_and_holds": [
+        "Sixchangedplussixaddedproductioninputs relativeold92498 invalidateoldnative qualification; do notexclude paths.",
+        "PostgreSQL rowlock/order/BIGINT semantics needactualbackend; SQLite notparity.",
+        "ScopedRun legacySQL/cache/websocket/request-ID/artifact/analytics exclusions and publicWorkspacegrants/HTTPRangeHEAD/Windowsprovider/multiadapterlifecycle needmeasuredacceptance.",
+        "Historical2999cb first90startup/89.28variables/89.259previousmarksum/cleanupunknown retained;311passnotrepair.",
+        "PR300refresh remainsblocked untilactual299acceptedmerge; thenordinaryrefresh300ontoreadbackactualmerged299source."
+      ],
+      "prior_accepted_source_review": {
+        "path": "/workspace/engineering/pr299-independent-current-review/independent-current-source-review.json",
+        "bytes": 15206,
+        "sha256": "8604a06969f760f9343e427f564c5e4527337cfa3aa39c37fa3698dcb9a78929"
+      },
+      "branch_worktree_unchanged": true
+    }
+  ],
+  "raw_authenticated_snapshot_bindings": [
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/checks299.json",
+      "bytes": 67872,
+      "sha256": "7d1e15849256533cab4fc73c28c79bea48f64766c8f63cb02785585e5b1a6b66"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/checks308.json",
+      "bytes": 72315,
+      "sha256": "812a62135d146c603cb58e110b25404383f9d0886eeef2da9877738fb9ef6f0b"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/checks309.json",
+      "bytes": 72096,
+      "sha256": "23d42f2911bc85396d457bc40aa1ecaf40dfdc04206a27ad89229ab9705d5226"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/live-target.json",
+      "bytes": 5419,
+      "sha256": "2c47c15a1a4747d7590f9b09c1d9f41c94bcbf2d722b87447f6a9d597dd84550"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/ordinary-union-simulation.json",
+      "bytes": 894,
+      "sha256": "516cc52d7e307b7d4a7089074c200ddf105a7a2ef7ff15a595a5419d0b519851"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr299-current-prospective-control.json",
+      "bytes": 2648,
+      "sha256": "9772d5bd3aa7b18c02e551f847250f992d004ee2728f95f652d117074607af20"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr299-run-38113139304-jobs.json",
+      "bytes": 1912,
+      "sha256": "4b600beb2e3308ded16be94f9855e46b073f8f98fa2f1b0d0c55f66f8d162100"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr299-run-38113139320-jobs.json",
+      "bytes": 12268,
+      "sha256": "ceeb0769d1c2fec43d39298c2b30c3bcf3a90cc3e127f35e39e5f2f6b1fb740a"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr299-run-38113139398-jobs.json",
+      "bytes": 22638,
+      "sha256": "d3f6839c4350405702bdb0d2216ccf801710bfafe148c56d2f39bdd28ccb80fb"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr299-run-38113139406-jobs.json",
+      "bytes": 11758,
+      "sha256": "94fb4cb0174b4f96f7bcebdacb0d23aca38daa0aba1841442c5aeca00ba2a8db"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr299-run-38113139428-jobs.json",
+      "bytes": 14792,
+      "sha256": "23e3c750f2371c2bc2acf413365a1bd673c8b1ffbe58f5955d390b25197973c5"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr299-run-38113139437-jobs.json",
+      "bytes": 3106,
+      "sha256": "4dd58368deb6ec409c1fbcf215595beee6b972a3edad28d763b5f5d2c452b65c"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr299.json",
+      "bytes": 21165,
+      "sha256": "46823c573e9603b8843d63c3c98c053f9764d89f86195291e207eb69784b9ba8"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr308-current-prospective-control.json",
+      "bytes": 2648,
+      "sha256": "3300acc166c934fa7f5f59d30619e9dd2425f87334cc2e9b0af04470a37862c1"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr308-run-38112192290-jobs.json",
+      "bytes": 22674,
+      "sha256": "dd68e87d8eee1990f46a537cbf05c771ad8b10293e8627f34ddd8cf3296a184e"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr308-run-38112192300-jobs.json",
+      "bytes": 1924,
+      "sha256": "4cf9bab9bd82d8aefd55bdeaa5bfb4e7cb073c023ed47e04660db4b441bf8d81"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr308-run-38112192362-jobs.json",
+      "bytes": 14849,
+      "sha256": "b88eb99e32d3445c39166eee0bb3ce0a5d4080ea9f91167e4d2529b82130f81c"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr308-run-38112192390-jobs.json",
+      "bytes": 19992,
+      "sha256": "2e1a157271ab3763c4d7c04e3d7fa4cac2dd14ef1c8e584d1c8e0619bf885371"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr308-run-38112192391-jobs.json",
+      "bytes": 23131,
+      "sha256": "871d2c10c54073bff1ad60797c51a468e8dbc4a38a88b9c1f626cacb095a0eab"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr308-run-38112192428-jobs.json",
+      "bytes": 3118,
+      "sha256": "67f06bc8d18999bb00e06f2adb137ca60a6e934ddf4143ea6bda629de46e3b0b"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr308.json",
+      "bytes": 18844,
+      "sha256": "9e4ae6a1d1ae2fe6d9655c7074dfa443453ce05c7316a85cde2c0f4eccbcd21e"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr309-current-prospective-control.json",
+      "bytes": 2648,
+      "sha256": "434b0a7ae2923029a535cc9c0d8b502d43245f1c3833e102be1f77b329d4be99"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr309-run-38109935952-jobs.json",
+      "bytes": 3106,
+      "sha256": "cf2449f28378f3cf2e09cfecef12cc7338036932d240aa7d8fd8c45582ecd0c0"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr309-run-38109935980-jobs.json",
+      "bytes": 1912,
+      "sha256": "161b6284758550f73693184dfa4720330328a58274acf3e47ec0ef78a796f6f5"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr309-run-38109935982-jobs.json",
+      "bytes": 15310,
+      "sha256": "ab2de88ff6b92517eb0f9059e38211116c9dc452424a1ee253b4bab7542bad79"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr309-run-38109935993-jobs.json",
+      "bytes": 22638,
+      "sha256": "b0bc2e613a4b0527e4bfbda6370f310f5b137515b4d2bcecf205b7ea9a270250"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr309-run-38109936008-jobs.json",
+      "bytes": 23071,
+      "sha256": "8e78de57410c9f82d25ab480030644e70637ff3101d8f86cdd5ae100afbae142"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr309-run-38109936039-jobs.json",
+      "bytes": 19920,
+      "sha256": "8ecf66fe9606518b147899f7f4a7fc9c2763eb560b0ab00989b682e1ea597b2b"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/pr309.json",
+      "bytes": 17558,
+      "sha256": "4e753fd57243624f02bbda5518cfb90f33e1123526a21b1cd83fa15cf9e6ac32"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/prospective-workflow-pr-trigger-definitions.json",
+      "bytes": 4544,
+      "sha256": "5d5b2b502c7866dbb77571830bf92207ba75d874273d7f06a6dac3ad54ef40cd"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/runs299.json",
+      "bytes": 75908,
+      "sha256": "b24642c7726ac3b681c97289543b38f6d0b90d171cf0f8af82c1d6d061f91fe8"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/runs308.json",
+      "bytes": 76068,
+      "sha256": "a88fc96ff90e31d67a87c28917bc4c9a469d87e16d6fb18990d11f61cbee2424"
+    },
+    {
+      "path": "/workspace/engineering/next-current-union-preparation-owned/runs309.json",
+      "bytes": 75861,
+      "sha256": "bede7aee0fb74bd07b40a101d69d9709b6fd3f5a715b5d408aeb69e737610200"
+    }
+  ],
+  "no_old_green_carry": true,
+  "next_target_advance_rule": "Recompute againstactualtarget if anyotherPRintegrates before dispatch; supplied1c758trees notauthorityfor laterbase.",
+  "canonical_documentation": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_proposed_delta": {
+      "path": "/workspace/engineering/next-current-union-independent-preparation/canonical-prospective-source-and-CI-filter-proposed.patch",
+      "bytes": 1689,
+      "sha256": "8e91bc5395e01d6e02347a6597f452e6a7251d1a66464a45f359a4273b8610ed"
+    },
+    "disposition": "PROPOSED durable actualtarget-simulation/filter/native-stacklesson; no code/doc repo mutation",
+    "durable_learning": "cachedsynthetic metadata can remainold; fullordinary sourceunion+pathfilter expectedjobs mustbindactualtarget, andnative sourceparity cannot admit modified oradded production artifact; stackedrefreshneedsactualdependencymerge",
+    "evidence": "authenticated1c758 ref/old3APIcontrols andoriginalauditlogs;3cleancompleteordinarytrees/independentleaf+modes+blobs/268+5comparisons; combinedactualtarget workflowfilters+6matrices19jobs",
+    "stale_ambiguity": "PRcurrentmerge field meanslivebase; allgreen20includingcopilotmeansnewunion19gate; importedgen automaticallytriggersCoredespitenodiff; selected5matchproves299oldartifact;299sourcepreppermits300refresh",
+    "remaining_uncertainty": "futureactualtarget/sourcecommit andfreshsource/hosted/reviewpolicygates;308actualRCC/private,309requestauth/optionaltransport,299backend/native/publictransport/Windowsprovider/multiadapter; fullprivate-releasegraph",
+    "upstream": "none"
+  }
+}

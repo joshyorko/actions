@@ -1,0 +1,27 @@
+{
+  "phase": "REAL_COLLECTION_ONLY_AND_FAKE_CONTROLLER_NO_PRODUCT_EXECUTION",
+  "source_head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+  "source_tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca",
+  "runner_sha256": "da4be9f4f6f01a7079f0ff285fa8339618e663425224a4873f3cf299d6787032",
+  "selected_node": "tests/action_server_tests/mcp/test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge",
+  "collected_module": "test_mcp_apps_authoring",
+  "preimport_module": "action_server_tests.mcp.test_mcp_apps_authoring",
+  "same_object": false,
+  "source_sha256": "d84f5e54dafb29e9beda15673769110952f165aee61c0deb5a04ee920515abcf",
+  "controls": [
+    "qualified_preimport_does_not_admit_actual_collected_module_RED",
+    "actual_pytest_plugin_collection_boundary_GREEN",
+    "exact_CompletedProcess_command_cwd_env_timeout_streams",
+    "successful_hook_restore_leaves_other_module_untouched",
+    "installed_failure_restores_actual_hook_and_start_preserves_primary_secondary",
+    "binding_poison_node",
+    "binding_poison_module",
+    "binding_poison_count",
+    "binding_poison_hash",
+    "binding_poison_existing_hook"
+  ],
+  "controls_passed": 10,
+  "native_Runtime_browser_package_build": "NOT_RUN",
+  "worker_failure_runtime_cleanup": "unavailable/null, no manufactured fields",
+  "owned_outputs": "only independent directory and temporary control roots; writer receipts untouched"
+}

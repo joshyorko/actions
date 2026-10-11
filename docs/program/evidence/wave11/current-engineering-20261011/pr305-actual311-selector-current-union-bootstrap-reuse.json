@@ -1,0 +1,62 @@
+{
+  "phase": "REUSE_PREPARED_BOOTSTRAP_NO_INSTALL",
+  "prior_bootstrap_log": "/workspace/actions-cloud/receipts/pr305-readonly-proposal/bootstrap.log",
+  "prior_log_sha256": "1c556a0f55684fbe7be59187a1aa5dd1bb864f89ee599f27a35d56a1d65ec5ab",
+  "inputs_equal_checkpoint": "71aab046754ae0e0837f223fd0ba6b8513e63a62",
+  "current_head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+  "checked_inputs": [
+    "action_server/poetry.lock",
+    "action_server/pyproject.toml",
+    "action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml",
+    "actions-http-helper/poetry.lock",
+    "actions-http-helper/pyproject.toml",
+    "actions/poetry.lock",
+    "actions/pyproject.toml",
+    "actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml",
+    "build_common/poetry.lock",
+    "common/poetry.lock",
+    "developer/setup.yaml",
+    "developer/setup_windows_amd64.yaml",
+    "developer/toolkit.yaml",
+    "devutils/poetry.lock",
+    "devutils/pyproject.toml",
+    "mcp/poetry.lock",
+    "templates/advanced/pyproject.toml",
+    "work-items/poetry.lock",
+    "work-items/pyproject.toml"
+  ],
+  "all_five_prepared_environment_roots": [
+    {
+      "package": "actions",
+      "venv": "/workspace/engineering/pr305/actions/.venv",
+      "python_resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "configuration_sha256": "2a3891386c700dece6c21b8ba80ea8d7fc514d8eade9a10374cab43dc0bd693f"
+    },
+    {
+      "package": "actions-http-helper",
+      "venv": "/workspace/engineering/pr305/actions-http-helper/.venv",
+      "python_resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "configuration_sha256": "743f2feb6a1fac576fc6313ebf0bbdf5484378bdf21433fe2cc134a8775d563f"
+    },
+    {
+      "package": "devutils",
+      "venv": "/workspace/engineering/pr305/devutils/.venv",
+      "python_resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "configuration_sha256": "868a9122466b928c47f90be30f1a01e28f73d5b5c586b95d57e177c97aa72a6c"
+    },
+    {
+      "package": "work-items",
+      "venv": "/workspace/engineering/pr305/work-items/.venv",
+      "python_resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "configuration_sha256": "7894fbdd57bbb2c2cfca8a74fab61f425333b36c66b95ebabc200aeb7c678fb6"
+    },
+    {
+      "package": "action_server",
+      "venv": "/workspace/engineering/pr305/action_server/.venv",
+      "python_resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "configuration_sha256": "eb5e96f842624fb2dd3c1a37c755f65dbcfc4eadb4697693b5e1213a91696a8a"
+    }
+  ],
+  "bootstrap_rerun": false,
+  "package_install_or_npm_install": false
+}

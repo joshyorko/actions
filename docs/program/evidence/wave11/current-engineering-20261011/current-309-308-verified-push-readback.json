@@ -1,0 +1,23 @@
+{
+  "utc": "2026-10-11T05:38:45.370314+00:00",
+  "pull_requests": [
+    {
+      "number": 309,
+      "head_ref": "test/auth-route-census-20261010",
+      "head_sha": "0d947f839628cc902bd409a7be93dcb49bc0aa02",
+      "base_sha": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "normal_push": true,
+      "initial_GraphQL_readback": "briefly retained old cachedhead; later REST+Gitref confirmscurrenthead",
+      "merge_admission": "HOLD freshcompleteCI"
+    },
+    {
+      "number": 308,
+      "head_ref": "fix/rcc-candidate-wheel-identities-20261010",
+      "head_sha": "9025a1e44bb05992e9f220842bfaf16a99ebd04f",
+      "base_sha": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "normal_push": true,
+      "initial_GraphQL_readback": "briefly retained old cachedhead; later REST+Gitref confirmscurrenthead",
+      "merge_admission": "HOLD freshcompleteCI"
+    }
+  ]
+}

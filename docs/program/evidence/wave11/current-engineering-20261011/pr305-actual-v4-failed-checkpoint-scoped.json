@@ -1,0 +1,516 @@
+{
+  "actual_attempts_this_runner": 1,
+  "actual_retry_authorized": false,
+  "bounds": {
+    "activate": "source /workspace/actions-cloud/activate.sh",
+    "command_seconds": 600,
+    "cwd": "/workspace/engineering/pr305",
+    "discovery_command_seconds": 30,
+    "discovery_helper_cleanup_seconds": 5,
+    "exact_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "660s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import toolkit; toolkit.poetry(\"action_server\", \"run\", \"python\", \"/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v4.py\", \"--execute-reviewed-proposal\")"
+    ],
+    "independent_parent_seconds": 645,
+    "inherited_supervisor_cleanup_grace_seconds": 10,
+    "meaning": "660 includes preflight/ownedcopy/gateway/worker/supervisor/receipt I/O;600 is consumer command budget only. Outer hard cutoff can curtail later stages if preparation unexpectedly runs long; no claim600 overall. List-only preflight30scommand+existing5shelpercleanup is inside unchanged660souter; no increase to600command/645parent/660outer. Worst-case combination may be curtailed by outer660; no600overall claim.",
+    "outer_gateway_seconds": 660,
+    "outer_term_kill_grace_seconds": 10
+  },
+  "detailed_retained_file_hash_inventory": {
+    "note": "Private exhaustive retained-cache file hash index; no extra provenance/acceptance claim. Scoped terminal evidence below is authoritative for review.",
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v4-failed-checkpoint.json",
+    "sha256": "e58bc8f2009dea4639d8050b51279d8cd3ba5e6d361483d1b42ac180738d1b74"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact follow-up proposed; source3ec remains unchanged",
+    "Durable_learning": "Post-CompletedProcess assertion must preserve returned streams; zero exit/partial tool evidence cannot admit absent browser receipt",
+    "Evidence": "V4 command3 return0; frozen catch overwrite; actual1failure0skip; strict Runtime and separate outer receipts",
+    "Remaining_uncertainty": "Original command3 JSON/DEBUG bytes unavailable; whole combined acceptance remains HOLD; current actual tool/origin evidence awaits independent read-only review",
+    "Stale_guidance_removed": "Exception fallback always safely substitutes command output; command0 equals report acceptance",
+    "exact_delta": {
+      "bytes": 523,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canonical-actual-v4-proposed-delta.md",
+      "sha256": "29139c6658ab7d291f853b3f5b609294fcd88ef5910f9b987e9fdd070d1e22da"
+    }
+  },
+  "frozen_posthashes": [
+    {
+      "bytes": 23367,
+      "expected_sha256": "c0fe769b1aa21529de1f0f1c767cf5812c7b2953f2547787d9f658a471099cce",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v4.py",
+      "sha256": "c0fe769b1aa21529de1f0f1c767cf5812c7b2953f2547787d9f658a471099cce"
+    },
+    {
+      "bytes": 4140,
+      "expected_sha256": "181280d6b98946b05f0c8a0068adfc7c84fbb81c443c93f9715d598b8be10bf5",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/v4-driver-discovery-GREEN.json",
+      "sha256": "181280d6b98946b05f0c8a0068adfc7c84fbb81c443c93f9715d598b8be10bf5"
+    },
+    {
+      "bytes": 2260,
+      "expected_sha256": "74aaad2088e49212df7dd5011fff0c259e4e0424cac2cb06cf7fafe524623506",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/v4-driver-discovery-oldzero.json",
+      "sha256": "74aaad2088e49212df7dd5011fff0c259e4e0424cac2cb06cf7fafe524623506"
+    },
+    {
+      "bytes": 3441,
+      "expected_sha256": "829af4b8c25e25bbe86acf6566af832144eea825e0bee5326c52dec4ca63ee19",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/v4-driver-discovery-broadtwo.json",
+      "sha256": "829af4b8c25e25bbe86acf6566af832144eea825e0bee5326c52dec4ca63ee19"
+    },
+    {
+      "bytes": 2960,
+      "expected_sha256": "fe7f60691136960da3738f1989e25515f77518dd6ae7c88d76ae3dda452f58c1",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/v4-driver-discovery-wrongfixture.json",
+      "sha256": "fe7f60691136960da3738f1989e25515f77518dd6ae7c88d76ae3dda452f58c1"
+    },
+    {
+      "bytes": 2565,
+      "expected_sha256": "6ff8419c855741d18ba25b71e88e810815704b62231ecd206251ee14fbe1e26e",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v4-proposed-delta.md",
+      "sha256": "6ff8419c855741d18ba25b71e88e810815704b62231ecd206251ee14fbe1e26e"
+    },
+    {
+      "bytes": 9261,
+      "expected_sha256": "c5e79cc6cef79c65c6e870431df654d7a39d96381e7e6b6ee9e9e7bc479d2f97",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/canonical-current-union.patch",
+      "sha256": "c5e79cc6cef79c65c6e870431df654d7a39d96381e7e6b6ee9e9e7bc479d2f97"
+    },
+    {
+      "bytes": 990,
+      "expected_sha256": "a800c30a70cc5fc3564d5fd243888de646c54dcb42243a138af0c0eafee42152",
+      "matches": true,
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/headless-selection.json",
+      "sha256": "a800c30a70cc5fc3564d5fd243888de646c54dcb42243a138af0c0eafee42152"
+    },
+    {
+      "bytes": 324510,
+      "expected_sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+      "matches": true,
+      "path": "/workspace/engineering/pr305/action_server/frontend/package-lock.json",
+      "sha256": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a"
+    },
+    {
+      "bytes": 1371,
+      "expected_sha256": "79b0b9478ef826e0c668ac6a92f3605fbb9f4ad0cdb2262fde1fb8783fcec3dc",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helper-bindings.json",
+      "sha256": "79b0b9478ef826e0c668ac6a92f3605fbb9f4ad0cdb2262fde1fb8783fcec3dc"
+    },
+    {
+      "bytes": 255076,
+      "expected_sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf",
+      "matches": true,
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json",
+      "sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf"
+    },
+    {
+      "bytes": 3162,
+      "expected_sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44",
+      "matches": true,
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-manifest.json",
+      "sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44"
+    },
+    {
+      "bytes": 709,
+      "expected_sha256": "bc88e92a88e8299b5697aae5091bdec1d26534d1f1b464bc7ca2207bef055a5b",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/v4-ast-scope-proof.json",
+      "sha256": "bc88e92a88e8299b5697aae5091bdec1d26534d1f1b464bc7ca2207bef055a5b"
+    },
+    {
+      "bytes": 10642,
+      "expected_sha256": "8be3b239ed5aa8f27c53d280afa5d6c70da01b8d5dc3443a8131f0c7f8bb4ff4",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v4-final-controls.log",
+      "sha256": "8be3b239ed5aa8f27c53d280afa5d6c70da01b8d5dc3443a8131f0c7f8bb4ff4"
+    },
+    {
+      "bytes": 17440,
+      "expected_sha256": "5932b6026418c32530e29b1a0d6e0c3edda4b76b0164ce13ab988961af2aab94",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/runner-controls-final.log",
+      "sha256": "5932b6026418c32530e29b1a0d6e0c3edda4b76b0164ce13ab988961af2aab94"
+    },
+    {
+      "bytes": 6131,
+      "expected_sha256": "b794d8ce6b96cfb99ff41148f3f06e1ccc64e886856ac30166184d83bc897445",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v3-controls.log",
+      "sha256": "b794d8ce6b96cfb99ff41148f3f06e1ccc64e886856ac30166184d83bc897445"
+    },
+    {
+      "bytes": 9557,
+      "expected_sha256": "bc41dac0d409a349c7c1fb9430673acb33f107fa2c03d1d65325751c17a026d9",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v3-controls-2.log",
+      "sha256": "bc41dac0d409a349c7c1fb9430673acb33f107fa2c03d1d65325751c17a026d9"
+    },
+    {
+      "bytes": 10651,
+      "expected_sha256": "a7e12a2c376495e47bef64ea35d9ac23df253859d5537fa62c60d57d6f597c82",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v4-controls.log",
+      "sha256": "a7e12a2c376495e47bef64ea35d9ac23df253859d5537fa62c60d57d6f597c82"
+    },
+    {
+      "bytes": 596,
+      "expected_sha256": "e3139d093929442aa4cbdbdd5f78ae1552a871e0eb5695d79424694fc4ac6fe4",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/v4-real-collection-controls.json",
+      "sha256": "e3139d093929442aa4cbdbdd5f78ae1552a871e0eb5695d79424694fc4ac6fe4"
+    },
+    {
+      "bytes": 33806,
+      "expected_sha256": "da4be9f4f6f01a7079f0ff285fa8339618e663425224a4873f3cf299d6787032",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v4.py",
+      "sha256": "da4be9f4f6f01a7079f0ff285fa8339618e663425224a4873f3cf299d6787032"
+    },
+    {
+      "bytes": 10712,
+      "expected_sha256": "ccfb6baa0a3e63b446ce388bfe00519cfcf992ba2821053e44a91528043381e9",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/frozen-current-union-source-checkpoint.json",
+      "sha256": "ccfb6baa0a3e63b446ce388bfe00519cfcf992ba2821053e44a91528043381e9"
+    },
+    {
+      "bytes": 16644,
+      "expected_sha256": "d29a5c618c8ff32effee017bbceed355eda911791dcef8c97260db636bab8615",
+      "matches": true,
+      "path": "/workspace/engineering/pr305-selector-independent-source-review/independent-frozen-source-review.json",
+      "sha256": "d29a5c618c8ff32effee017bbceed355eda911791dcef8c97260db636bab8615"
+    },
+    {
+      "bytes": 14899,
+      "expected_sha256": "18ebad580803103351a4c3f7a684f7e9f302a602182c699ef06450eadab29614",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v3-failed-checkpoint.json",
+      "sha256": "18ebad580803103351a4c3f7a684f7e9f302a602182c699ef06450eadab29614"
+    },
+    {
+      "bytes": 20133,
+      "expected_sha256": "384ea6b542aec522424d4fbb0ed3b3006230795794b48966dae6dda881d91b74",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v3.py",
+      "sha256": "384ea6b542aec522424d4fbb0ed3b3006230795794b48966dae6dda881d91b74"
+    },
+    {
+      "bytes": 13928,
+      "expected_sha256": "5f30c9d49a806639b9ce01de62e2f61fec98db9349483c94267e4ea662619a28",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v2.py",
+      "sha256": "5f30c9d49a806639b9ce01de62e2f61fec98db9349483c94267e4ea662619a28"
+    },
+    {
+      "bytes": 10905,
+      "expected_sha256": "a3415fefc1a58ad2424318acd44bebc2386bb1cb7ca480a21ab69f21eef11731",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission.py",
+      "sha256": "a3415fefc1a58ad2424318acd44bebc2386bb1cb7ca480a21ab69f21eef11731"
+    },
+    {
+      "bytes": 6500,
+      "expected_sha256": "9dc16e3203f416526f7365b6ecdcd00a83dd60fc8da8c4561e46ddd851db3a24",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-controls.log",
+      "sha256": "9dc16e3203f416526f7365b6ecdcd00a83dd60fc8da8c4561e46ddd851db3a24"
+    },
+    {
+      "bytes": 12403,
+      "expected_sha256": "7ba9410efaeaa9c144634cc76ec98a50e2f023d3bdef1e45f53c145acc1d1bca",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal.json",
+      "sha256": "7ba9410efaeaa9c144634cc76ec98a50e2f023d3bdef1e45f53c145acc1d1bca"
+    },
+    {
+      "bytes": 27449,
+      "expected_sha256": "0feee8b8c911f94496323d10dc4a92cf93cfe2ce566b54efc29e3b771b8e56d5",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner.py",
+      "sha256": "0feee8b8c911f94496323d10dc4a92cf93cfe2ce566b54efc29e3b771b8e56d5"
+    },
+    {
+      "bytes": 9334,
+      "expected_sha256": "989584cfeaab8a9eb26ca3cd436c594cf3b6cf322c3f17c1bc51c6d00784e79a",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v2-failed-checkpoint.json",
+      "sha256": "989584cfeaab8a9eb26ca3cd436c594cf3b6cf322c3f17c1bc51c6d00784e79a"
+    },
+    {
+      "bytes": 3416,
+      "expected_sha256": "f519daf8d474b0d83d2e6822b27a0a103e019a4baaed2f13d926088a71e750bd",
+      "matches": true,
+      "path": "/workspace/engineering/pr305-v3-independent-runner-review/independent-failed-v2-review.json",
+      "sha256": "f519daf8d474b0d83d2e6822b27a0a103e019a4baaed2f13d926088a71e750bd"
+    },
+    {
+      "bytes": 14351,
+      "expected_sha256": "5b183508588d3d58ae433447c8c35acb80c55b94e757f2d92106a78a6e8c3743",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v2.json",
+      "sha256": "5b183508588d3d58ae433447c8c35acb80c55b94e757f2d92106a78a6e8c3743"
+    },
+    {
+      "bytes": 28284,
+      "expected_sha256": "f16f5ebefe6ac74d3259b1bbc5af6054a4aedd563e24eef7a1dfebcb0e0f2454",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v2.py",
+      "sha256": "f16f5ebefe6ac74d3259b1bbc5af6054a4aedd563e24eef7a1dfebcb0e0f2454"
+    },
+    {
+      "bytes": 7899,
+      "expected_sha256": "8bf57b7d80be59fbc515314853ca0d109ca6c8a64cd21f688a54bdd9f8f3655c",
+      "matches": true,
+      "path": "/workspace/engineering/pr305-v3-independent-runner-review/independent-actual-v3-failure-review.json",
+      "sha256": "8bf57b7d80be59fbc515314853ca0d109ca6c8a64cd21f688a54bdd9f8f3655c"
+    },
+    {
+      "bytes": 18686,
+      "expected_sha256": "5aafa519d1af3b288b9e1da858392faaa2a45df1f800d8dc7893d0320fb90de4",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v3.json",
+      "sha256": "5aafa519d1af3b288b9e1da858392faaa2a45df1f800d8dc7893d0320fb90de4"
+    },
+    {
+      "bytes": 30332,
+      "expected_sha256": "d7650dc023ddc714fb67fb05e336c906c6156baa5d2bbceca00ae7b07361afba",
+      "matches": true,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v3.py",
+      "sha256": "d7650dc023ddc714fb67fb05e336c906c6156baa5d2bbceca00ae7b07361afba"
+    }
+  ],
+  "gateway_exit_code": 10,
+  "independent_review": {
+    "bytes": 13596,
+    "path": "/workspace/engineering/pr305-v4-independent-runner-review/independent-v4-runner-qualification.json",
+    "sha256": "92ddf866b1b0414b310f3b96b9d8b87dbba8b21c506dd3aeb9a115b1ef4b92d4"
+  },
+  "junit": {
+    "cases": [
+      {
+        "classname": "tests.action_server_tests.mcp.test_mcp_apps_authoring",
+        "name": "test_canvas_view_calls_public_action_through_runtime_bridge",
+        "time": "44.253"
+      }
+    ],
+    "errors": 0,
+    "failures": 1,
+    "skipped": 0,
+    "suites": [
+      {
+        "errors": "0",
+        "failures": "1",
+        "hostname": "3a465a304f04",
+        "name": "pytest",
+        "skipped": "0",
+        "tests": "1",
+        "time": "44.338",
+        "timestamp": "2026-10-11T05:23:47.478600+00:00"
+      }
+    ],
+    "tests": 1
+  },
+  "native": {
+    "entries": 1192,
+    "inventory": {
+      "bytes": 255076,
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json",
+      "sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf"
+    },
+    "original_equals_immutable_inventory": true,
+    "owned_copy_equals_original": true,
+    "producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e"
+  },
+  "outer_cleanup": {
+    "cleanup_disposition": "reaped_exited_descendants",
+    "command": [
+      "/workspace/engineering/pr305/action_server/.venv/bin/python",
+      "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v4.py",
+      "--worker",
+      "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3"
+    ],
+    "command_returncode": 1,
+    "reaped_descendants": 6,
+    "scope": "outer supervisor observed adopted command descendants only; not Runtime internal cleanup admission"
+  },
+  "playwright": {
+    "command_returncode": 0,
+    "launch_path_admitted": false,
+    "limitation": "Frozen catch branch replaced prior command-3 stdout/stderr with empty AssertionError fallback. Zero return code alone does not admit one browser testcase or launch path.",
+    "report_admitted": false,
+    "returned_streams_retained": false
+  },
+  "postconditions": {
+    "browser_hash": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+    "browser_matches": true,
+    "helpers_match": true,
+    "source_clean": true,
+    "source_head": "3ec9d0acbe30ad94d02e4c24fef2587127964495"
+  },
+  "primary": {
+    "boundary": "external owned_command browser-launch receipt assertion",
+    "kind": "AssertionError",
+    "message": "Actual Playwright launch path not observed"
+  },
+  "proposal": {
+    "bytes": 22071,
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v4.json",
+    "sha256": "28ea5fe06285f3dcfe8d1d00dc0583dfb286026afdaa129067830a8ba6ec674e"
+  },
+  "raw_receipts_private_do_not_commit": [
+    {
+      "bytes": 68755,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/actual-admission.json",
+      "sha256": "86efca2e5640a943b5917dbb5b723705c15ab75123e2e604e5bf23ab02e4b64b"
+    },
+    {
+      "bytes": 192,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-1-stderr.log",
+      "sha256": "31268753892853abc32ea1862c718e2d5bf63d563acba1ef293d63cb70c7e59d"
+    },
+    {
+      "bytes": 790,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-1-stdout.log",
+      "sha256": "a065efcb8370ec20075a7aad722df02b941189a4b6ff116286247644f5d3c3e5"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-2-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 40,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-2-stdout.log",
+      "sha256": "d75fc32089eefc512b00ce4d792475a993ba56dcb863b971a4c13bcd17b3629f"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-3-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-3-stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1878,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-receipts.json",
+      "sha256": "a805d8857e05ef58a8b2dba6e1ef057c5ac011661caf3939d3369d0507aa95b9"
+    },
+    {
+      "bytes": 51005,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/failure-stderr.log",
+      "sha256": "de2953ae56bc242b33ffcf9de3b5a5f855c67c5ae1bae674c7e185e7896a64c5"
+    },
+    {
+      "bytes": 13438,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/failure-stdout.log",
+      "sha256": "8b66e6f59c97c8e0432349783f91080d96813c5444454e9151fbcded7f97cfed"
+    },
+    {
+      "bytes": 1209,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/junit.xml",
+      "sha256": "88c502dab54ee49bedcf415e6e39848bbe4b83fd2e24c98d673c30a770a74b87"
+    },
+    {
+      "bytes": 518,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/outer-cleanup.json",
+      "sha256": "75acd6c09edc02c336586d52b4fa7afdf910997f4665e180d8236e5d45272ccb"
+    },
+    {
+      "bytes": 4535,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/preflight.json",
+      "sha256": "f729b7ed6bc654e90def547db1faeb0319d6d4fa84e620864652ce00f5adda81"
+    },
+    {
+      "bytes": 699,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/runtime-cleanup.json",
+      "sha256": "68b6653af69a415bb8e9c5e197e9e9b22a5236c6541c7c1ad865dd559f69cb51"
+    },
+    {
+      "bytes": 793,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/runtime-start-final-snapshot.json",
+      "sha256": "e78f7fcbd4c0beb5e02cb18bff0b2954cca07f01d1a3e8ed26b873acf57b3c12"
+    },
+    {
+      "bytes": 2662,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/startup-observations.json",
+      "sha256": "da861962e7c753c3d93d0c274da364b3d65f36a2d5b0ef6b8275d49332c5a28f"
+    },
+    {
+      "bytes": 51005,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/worker-stderr.log",
+      "sha256": "de2953ae56bc242b33ffcf9de3b5a5f855c67c5ae1bae674c7e185e7896a64c5"
+    },
+    {
+      "bytes": 13438,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/worker-stdout.log",
+      "sha256": "8b66e6f59c97c8e0432349783f91080d96813c5444454e9151fbcded7f97cfed"
+    },
+    {
+      "bytes": 70438,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v4-gateway.log",
+      "sha256": "456470d3c0445eee79e3f8515b09f3ce3cd8b634a8e1074415be83bbc18a7778"
+    }
+  ],
+  "remaining_uncertainty": [
+    "No retry authorized",
+    "Current source3ec/native92498 actual combined case not qualified",
+    "Core three-member samples are not whole wheel/cold registry",
+    "No production artifact/OAuth release/full epic admission"
+  ],
+  "runner": {
+    "bytes": 33806,
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v4.py",
+    "sha256": "da4be9f4f6f01a7079f0ff285fa8339618e663425224a4873f3cf299d6787032"
+  },
+  "runtime_cleanup": {
+    "cleanup": {
+      "active_readers": [],
+      "cleanup_errors": [],
+      "descendant_reap_complete": true,
+      "descendant_snapshot_complete": true,
+      "natural_runtime_exit": "NOT_PROVEN; fixture/owned supervisor forced cleanup",
+      "observed_live_children": [],
+      "observed_zombie_children": [],
+      "wrapper_reaped": true
+    },
+    "finite_observed_descendants": 0,
+    "natural_shutdown_proven": false,
+    "sampler_alive": false,
+    "sampler_cancelled": true,
+    "strict_measured_fields_passed": true,
+    "testcase_status": "failed"
+  },
+  "source": {
+    "head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "native_producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "producer_entries": 268,
+    "selected_entries": 5,
+    "tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca"
+  },
+  "status": "failed_HOLD",
+  "upstream_disposition": "none",
+  "worker_exit_code": 1
+}

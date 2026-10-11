@@ -1,0 +1,95 @@
+{
+  "schema": "actions.retained-public-rcc-checkpoint-recovery/v1",
+  "utc": "2026-10-11T05:35:15.066846+00:00",
+  "repository": "joshyorko/actions",
+  "existing_ref": "44afd960ad01f83eeef7773b334ccde3683c022d\trefs/heads/mk3/wave9-rcc-public-source-union-20261010",
+  "head": "44afd960ad01f83eeef7773b334ccde3683c022d",
+  "tree": "2960c688fa2a2420f8915edbf0817fd3dd818b98",
+  "ordered_parents": [
+    "052bd852783a7c2b5533a6732adb17008b04dc31",
+    "7c0b6fdcf49bd9c5cc663326a30d7df37a5fb203"
+  ],
+  "retained_review_sha256": "7fbd5bd3684f88b36e8d6b880814bd43553c790e8bb0b4a6fe7637777c876cae",
+  "changed_source_objects": [
+    {
+      "git_blob": "7ab99778b25806ff80ab22a9d0d52479a7e1a211",
+      "path": "action_server/scripts/native_runtime_artifact_binding.py",
+      "sha256": "efbac7fdaf558728281da2338017bdb3e83bb68b9165b43222dd4e460319d08e",
+      "preserved": true,
+      "current_target_blob": null
+    },
+    {
+      "git_blob": "6ece62af001c0f059630d8e4b5e96a0c95760988",
+      "path": "action_server/scripts/test_native_runtime_artifact_binding.py",
+      "sha256": "cb215a746009982b021abcdca101e2e538f90adb54aac534cc4c365033401173",
+      "preserved": true,
+      "current_target_blob": null
+    },
+    {
+      "git_blob": "77a7a4c3be9a9f7c21086366b2f52b2dea9f6ab1",
+      "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "05bd886e452515509c4e5fd81cff0be6c512e0659665262ab7d20e5c5dd91ba9",
+      "preserved": true,
+      "current_target_blob": "4f155d2f63e86b38697c12557dd8a6550b9d36a3"
+    },
+    {
+      "git_blob": "4b036d64b5a69305681d96faa340d424ed4d5461",
+      "path": "action_server/src/actions/server/_action_package_handler.py",
+      "sha256": "d003b916b550a866321c0e110b525774cb2369aaf672d0336d4c50b2b13fb425",
+      "preserved": true,
+      "current_target_blob": "a306eb11038f8cd4114415fb978321eb2ac51a0f"
+    },
+    {
+      "git_blob": "d7b0212e07741d03339b4edb44e698871423e33b",
+      "path": "action_server/src/actions/server/_actions_import.py",
+      "sha256": "628560ea5e45b245a3b85d50b5935f98bb58ef94c50cc5477a4e846e3929255e",
+      "preserved": true,
+      "current_target_blob": "50f72e8c95dcc4455a8225eb19c8d3309faada58"
+    },
+    {
+      "git_blob": "c6dca66b1be24c923347c43528e036b7beabd7ed",
+      "path": "action_server/src/actions/server/_actions_process_pool.py",
+      "sha256": "e3a682cacf1f58ccadba71b1ce05fac9238d5e6cef44be0d7350b88de8108d50",
+      "preserved": true,
+      "current_target_blob": "af261b4d40870ecf5415980ae1b3e2923f0734b1"
+    },
+    {
+      "git_blob": "5f0b5186bed910ddb35a2c8544b19e1c0082b90a",
+      "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "sha256": "1cbff1830f2bac1695a4f597f2d5facc464d39c8672193c5a280787400576815",
+      "preserved": true,
+      "current_target_blob": "2184e9edb95683822c323d0e27d73d6d207d3492"
+    },
+    {
+      "git_blob": "53061837cf15729a3c12312deb8f0bcff85b2400",
+      "path": "action_server/src/actions/server/rcc_trust_profile.py",
+      "sha256": "27b2e1de96ab7a684d6885b07e80c7f1d6fa9b41feb59fcfb36200f0b7f685ac",
+      "preserved": true,
+      "current_target_blob": null
+    },
+    {
+      "git_blob": "ac907316af20acc08461b692c34f60f1643d484f",
+      "path": "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+      "sha256": "3d34119a606d6dc82e78fef54b1e9c5dc750c3d1123dc2289b0474b56de75d73",
+      "preserved": true,
+      "current_target_blob": "cfdef3f02dac51404b68ea250086d1140db2192a"
+    },
+    {
+      "git_blob": "1f56f2054338fb23a0bf3af7ae982448232b58d7",
+      "path": "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "sha256": "d26b40f4eabd51faa3ac877d37a710ea59ff0a8a9634684f67ff36eae33e6335",
+      "preserved": true,
+      "current_target_blob": "6e81aeda234154fb1b02303c67836e69997d5aba"
+    },
+    {
+      "git_blob": "844efa2ef6578b6cc8dce1f94031e060de168454",
+      "path": "docs/skills/repository-operations.md",
+      "sha256": "e80fca1baf43c3de510719f232f76e50e46c998fe70984c0f1648625fdffc986",
+      "preserved": true,
+      "current_target_blob": "6fd5e19122f944e1362b2aa45ca3d0841e5fa0e0"
+    }
+  ],
+  "current_target": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+  "scope": "All11 original public Actions RCC source/checkpoint objects recovered unchanged. Existing source-only GO is historical, no fresh suite/provider/metadata/native/release acceptance. Not GoRCC source. Private01f/frozen-v6 source unavailable locally; no reconstruction or private upload. No source branch created or modified.",
+  "next_gate": "Use original public owner source and existing supervisor checkpoints for bounded controls; full private metadata requires original private checkpoint and independently qualified supervisor. 302 integration still follows310native qualification."
+}

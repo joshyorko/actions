@@ -1,0 +1,16 @@
+{
+  "head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+  "tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca",
+  "ordered_parents": [
+    "066eb3e2bc997d0f84f2f539b08b85ccfa808a46",
+    "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+  ],
+  "leaf_count": 1410,
+  "no_deletions_from_parent_union": true,
+  "novel_blobs": [
+    "docs/skills/repository-operations.md"
+  ],
+  "all_non_doc_leaves_match_parent": true,
+  "conflicts": [],
+  "documentation_delta_to_actual_target": "109\t5\tdocs/skills/repository-operations.md"
+}

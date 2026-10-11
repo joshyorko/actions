@@ -1,0 +1,159 @@
+{
+  "status": "GO_IMMUTABLE_V4_RUNNER_QUALIFICATION_ONLY; ROOT_SEPARATE_EXECUTION_AUTHORIZATION_REQUIRED",
+  "source": {
+    "head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "ordered_parents": [
+      "066eb3e2bc997d0f84f2f539b08b85ccfa808a46",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ],
+    "preserved_actual_predecessor_harness": "14c1c1965314b192c4118c3281f5539d29f0aa6f",
+    "producer_entries": 268,
+    "selected_test_entries": 5,
+    "selector_fix": "066eb3e2bc997d0f84f2f539b08b85ccfa808a46",
+    "source_checkpoint": {
+      "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/frozen-current-union-source-checkpoint.json",
+      "sha256": "ccfb6baa0a3e63b446ce388bfe00519cfcf992ba2821053e44a91528043381e9"
+    },
+    "source_independent_review": {
+      "path": "/workspace/engineering/pr305-selector-independent-source-review/independent-frozen-source-review.json",
+      "sha256": "d29a5c618c8ff32effee017bbceed355eda911791dcef8c97260db636bab8615"
+    },
+    "tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca"
+  },
+  "runner": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v4.py",
+    "sha256": "da4be9f4f6f01a7079f0ff285fa8339618e663425224a4873f3cf299d6787032"
+  },
+  "controls": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v4.py",
+    "sha256": "c0fe769b1aa21529de1f0f1c767cf5812c7b2953f2547787d9f658a471099cce"
+  },
+  "proposal": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v4.json",
+    "bytes": 22071,
+    "sha256": "28ea5fe06285f3dcfe8d1d00dc0583dfb286026afdaa129067830a8ba6ec674e"
+  },
+  "all_referenced_hashes_verified": {
+    "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v4.py": "c0fe769b1aa21529de1f0f1c767cf5812c7b2953f2547787d9f658a471099cce",
+    "/workspace/actions-cloud/receipts/pr305-runner/v4-driver-discovery-GREEN.json": "181280d6b98946b05f0c8a0068adfc7c84fbb81c443c93f9715d598b8be10bf5",
+    "/workspace/actions-cloud/receipts/pr305-runner/v4-driver-discovery-oldzero.json": "74aaad2088e49212df7dd5011fff0c259e4e0424cac2cb06cf7fafe524623506",
+    "/workspace/actions-cloud/receipts/pr305-runner/v4-driver-discovery-broadtwo.json": "829af4b8c25e25bbe86acf6566af832144eea825e0bee5326c52dec4ca63ee19",
+    "/workspace/actions-cloud/receipts/pr305-runner/v4-driver-discovery-wrongfixture.json": "fe7f60691136960da3738f1989e25515f77518dd6ae7c88d76ae3dda452f58c1",
+    "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v4-proposed-delta.md": "6ff8419c855741d18ba25b71e88e810815704b62231ecd206251ee14fbe1e26e",
+    "/workspace/actions-cloud/receipts/pr305-selector-fix/canonical-current-union.patch": "c5e79cc6cef79c65c6e870431df654d7a39d96381e7e6b6ee9e9e7bc479d2f97",
+    "/workspace/engineering/pr310-runner-qualification-owned/headless-selection.json": "a800c30a70cc5fc3564d5fd243888de646c54dcb42243a138af0c0eafee42152",
+    "/workspace/engineering/pr305/action_server/frontend/package-lock.json": "30e50040438c67254859807343cb53c288508b4895fb69648732277e8184a12a",
+    "/workspace/actions-cloud/receipts/pr305-runner/frozen-helper-bindings.json": "79b0b9478ef826e0c668ac6a92f3605fbb9f4ad0cdb2262fde1fb8783fcec3dc",
+    "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf",
+    "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-manifest.json": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44",
+    "/workspace/actions-cloud/receipts/pr305-runner/v4-ast-scope-proof.json": "bc88e92a88e8299b5697aae5091bdec1d26534d1f1b464bc7ca2207bef055a5b",
+    "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v4-final-controls.log": "8be3b239ed5aa8f27c53d280afa5d6c70da01b8d5dc3443a8131f0c7f8bb4ff4",
+    "/workspace/actions-cloud/receipts/pr305-runner/runner-controls-final.log": "5932b6026418c32530e29b1a0d6e0c3edda4b76b0164ce13ab988961af2aab94",
+    "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v3-controls.log": "b794d8ce6b96cfb99ff41148f3f06e1ccc64e886856ac30166184d83bc897445",
+    "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v3-controls-2.log": "bc41dac0d409a349c7c1fb9430673acb33f107fa2c03d1d65325751c17a026d9",
+    "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v4-controls.log": "a7e12a2c376495e47bef64ea35d9ac23df253859d5537fa62c60d57d6f597c82",
+    "/workspace/actions-cloud/receipts/pr305-runner/v4-real-collection-controls.json": "e3139d093929442aa4cbdbdd5f78ae1552a871e0eb5695d79424694fc4ac6fe4",
+    "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v4.py": "da4be9f4f6f01a7079f0ff285fa8339618e663425224a4873f3cf299d6787032",
+    "/workspace/actions-cloud/receipts/pr305-selector-fix/frozen-current-union-source-checkpoint.json": "ccfb6baa0a3e63b446ce388bfe00519cfcf992ba2821053e44a91528043381e9",
+    "/workspace/engineering/pr305-selector-independent-source-review/independent-frozen-source-review.json": "d29a5c618c8ff32effee017bbceed355eda911791dcef8c97260db636bab8615",
+    "/workspace/actions-cloud/receipts/pr305-runner/actual-v3-failed-checkpoint.json": "18ebad580803103351a4c3f7a684f7e9f302a602182c699ef06450eadab29614",
+    "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v3.py": "384ea6b542aec522424d4fbb0ed3b3006230795794b48966dae6dda881d91b74",
+    "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission_v2.py": "5f30c9d49a806639b9ce01de62e2f61fec98db9349483c94267e4ea662619a28",
+    "/workspace/actions-cloud/receipts/pr305-runner/test_runner_admission.py": "a3415fefc1a58ad2424318acd44bebc2386bb1cb7ca480a21ab69f21eef11731",
+    "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-controls.log": "9dc16e3203f416526f7365b6ecdcd00a83dd60fc8da8c4561e46ddd851db3a24",
+    "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal.json": "7ba9410efaeaa9c144634cc76ec98a50e2f023d3bdef1e45f53c145acc1d1bca",
+    "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner.py": "0feee8b8c911f94496323d10dc4a92cf93cfe2ce566b54efc29e3b771b8e56d5",
+    "/workspace/actions-cloud/receipts/pr305-runner/actual-v2-failed-checkpoint.json": "989584cfeaab8a9eb26ca3cd436c594cf3b6cf322c3f17c1bc51c6d00784e79a",
+    "/workspace/engineering/pr305-v3-independent-runner-review/independent-failed-v2-review.json": "f519daf8d474b0d83d2e6822b27a0a103e019a4baaed2f13d926088a71e750bd",
+    "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v2.json": "5b183508588d3d58ae433447c8c35acb80c55b94e757f2d92106a78a6e8c3743",
+    "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v2.py": "f16f5ebefe6ac74d3259b1bbc5af6054a4aedd563e24eef7a1dfebcb0e0f2454",
+    "/workspace/engineering/pr305-v3-independent-runner-review/independent-actual-v3-failure-review.json": "8bf57b7d80be59fbc515314853ca0d109ca6c8a64cd21f688a54bdd9f8f3655c",
+    "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v3.json": "5aafa519d1af3b288b9e1da858392faaa2a45df1f800d8dc7893d0320fb90de4",
+    "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v3.py": "d7650dc023ddc714fb67fb05e336c906c6156baa5d2bbceca00ae7b07361afba"
+  },
+  "source_review": {
+    "path": "/workspace/engineering/pr305-selector-independent-source-review/independent-frozen-source-review.json",
+    "sha256": "d29a5c618c8ff32effee017bbceed355eda911791dcef8c97260db636bab8615"
+  },
+  "exact_AST_scope": "Current source HEAD/tree/checkpoint/schema and collected source SHA; guarded exact emitted-selector list-only preflight; preflight metadata receipt; fresh suffix3. Entire worker/helper/semantic admission/cleanup/observer/Core/browser/command budgets unchanged from V3.",
+  "independent_real_collection_controls": {
+    "path": "/workspace/engineering/pr305-v4-independent-runner-review/independent-real-collection-controls.json",
+    "bytes": 1421,
+    "sha256": "2d961c7b2588f89a21026b30495c217f4606e3e24b2eb673ea02c7c8fa4bd0a3"
+  },
+  "independent_real_collection_gateway_log": {
+    "path": "/workspace/engineering/pr305-v4-independent-runner-review/independent-real-collection-controls.log",
+    "bytes": 7675,
+    "sha256": "616de6484bae84378bd56a5574585815be879bb0c867ce543ec167d60d1cb232"
+  },
+  "independent_control_script": {
+    "path": "/workspace/engineering/pr305-v4-independent-runner-review/independent_collection_controls.py",
+    "bytes": 5857,
+    "sha256": "95fbc382525870032c0dfcf6dd4e92f5756e7023a7224abc6e459ab021868558"
+  },
+  "independent_readiness_controls": "valid measured-link baseline passes; absent and wrong links rejected before command; no dependency install or source mutation",
+  "writer_controls": "56PASS0skip; RuffPASS; full1192native/268+5 producer parity and exactcase list-only preflightPASS",
+  "driver_discovery": "old selector realNoTestsFound0; current emitted one intended case; broad2 andwrongfixture rejected. Unexecuted list entry status skipped/results[]/expected0 is inventory only, not executed admission.",
+  "immutable_source_native_browser_helpers": "All proposal references verified, prepared actual frontend link matches measuredtree; browserheadless_shell e11f; original92498 native producer retained. Fresh suffix3 absent.",
+  "bounds": {
+    "activate": "source /workspace/actions-cloud/activate.sh",
+    "command_seconds": 600,
+    "cwd": "/workspace/engineering/pr305",
+    "discovery_command_seconds": 30,
+    "discovery_helper_cleanup_seconds": 5,
+    "exact_argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "660s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import toolkit; toolkit.poetry(\"action_server\", \"run\", \"python\", \"/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v4.py\", \"--execute-reviewed-proposal\")"
+    ],
+    "independent_parent_seconds": 645,
+    "inherited_supervisor_cleanup_grace_seconds": 10,
+    "meaning": "660 includes preflight/ownedcopy/gateway/worker/supervisor/receipt I/O;600 is consumer command budget only. Outer hard cutoff can curtail later stages if preparation unexpectedly runs long; no claim600 overall. List-only preflight30scommand+existing5shelpercleanup is inside unchanged660souter; no increase to600command/645parent/660outer. Worst-case combination may be curtailed by outer660; no600overall claim.",
+    "outer_gateway_seconds": 660,
+    "outer_term_kill_grace_seconds": 10
+  },
+  "actual_admission": "Unchanged: one exact executed pytest+Playwright pass0skip/retry/error, five-tool-Run membership plus real resource/public sample/cache fences, strict internalRuntime cleanup andexactfinalsampler before ownouter disposition; no waiver.",
+  "historical_failures": "V2 qualified-preimport versus collected-module failure occurred before Runtime; V3 source14c NoTestsFound after partial Runtime/Python sample. Both retained as failed, not current3ec proof.",
+  "no_product_execution_by_reviewer": true,
+  "review_script": {
+    "path": "/workspace/engineering/pr305-v4-independent-runner-review/review_frozen_v4.py",
+    "bytes": 11569,
+    "sha256": "bfc3d55a797eb00425f90aae900e6250f704f9120ea382edb88124b42fad4cc7"
+  },
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md accepted7e244/5dbf integrated066/current3ec; exact runner-only dependency/discovery followup proposed in canonical-runner-v4-proposed-delta.md",
+    "Durable learning captured": "Measure dependency tree actually executed; require retained correct prepared link. List skipped inventory differs from executed-case admission. Preflight30+5 stays inside unchanged660 outer gateway; current harness and native producer identities remain separate.",
+    "Evidence": [
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/canonical-runner-v4-proposed-delta.md",
+        "sha256": "6ff8419c855741d18ba25b71e88e810815704b62231ecd206251ee14fbe1e26e"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-selector-fix/canonical-current-union.patch",
+        "sha256": "c5e79cc6cef79c65c6e870431df654d7a39d96381e7e6b6ee9e9e7bc479d2f97"
+      },
+      {
+        "path": "/workspace/engineering/pr305-v4-independent-runner-review/independent-real-collection-controls.json",
+        "bytes": 1421,
+        "sha256": "2d961c7b2588f89a21026b30495c217f4606e3e24b2eb673ea02c7c8fa4bd0a3"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-v4-final-controls.log",
+        "sha256": "8be3b239ed5aa8f27c53d280afa5d6c70da01b8d5dc3443a8131f0c7f8bb4ff4"
+      }
+    ],
+    "Stale or ambiguous guidance removed": "Hashing another prepared tree does not authenticate actual ignored node_modules; list inventory skipped status is not product execution or PASS; source update does not relabel artifact producer or historicalactual failures.",
+    "Remaining uncertainty": "Current actualbrowser/publicCore/fiveToolRuns/sharedcache/strictcleanup NOT_RUN pending separate root authority; worst-case preflight+copy+consumer+cleanup can be curtailed by unchanged outer660s. WholeCorewheel/coldregistry/productionhost/realartifact/OAuth/private134 unqualified."
+  },
+  "Upstream disposition": "none; supported Playwright selection and local controller/dependency binding, no maintained upstream defect established"
+}

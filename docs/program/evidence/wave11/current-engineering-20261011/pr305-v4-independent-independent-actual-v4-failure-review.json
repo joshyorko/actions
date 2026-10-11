@@ -1,0 +1,173 @@
+{
+  "status": "HOLD_ACTUAL_V4_EXTERNAL_LAUNCH_RECEIPT_ASSERTION_WITH_OVERWRITTEN_RAW_STREAMS",
+  "checkpoint": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v4-failed-checkpoint-scoped.json",
+    "size": 23800,
+    "sha256": "21385511f183b27c92cf94d3d9acf9e19b27a6a4a41fae0827cffed30651c632"
+  },
+  "source": {
+    "head": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "native_producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "producer_entries": 268,
+    "selected_entries": 5,
+    "tree": "8ed17c0c2ed48a3ad4fe89994bab572d028e59ca"
+  },
+  "runner": {
+    "bytes": 33806,
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v4.py",
+    "sha256": "da4be9f4f6f01a7079f0ff285fa8339618e663425224a4873f3cf299d6787032"
+  },
+  "proposal": {
+    "bytes": 22071,
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v4.json",
+    "sha256": "28ea5fe06285f3dcfe8d1d00dc0583dfb286026afdaa129067830a8ba6ec674e"
+  },
+  "review_script": {
+    "path": "/workspace/engineering/pr305-v4-independent-runner-review/review_actual_v4.py",
+    "size": 12001,
+    "sha256": "872f49da5478cbc99f61aa7831f00684ac8d5f2657e89a0c09f6706130946a2b"
+  },
+  "counts": {
+    "pytest": 1,
+    "failure": 1,
+    "error": 0,
+    "skip": 0,
+    "suite_seconds": 44.338,
+    "command3_returncode": 0,
+    "admitted_browser_case": false,
+    "admitted_browser_launch_path": false,
+    "combined_browser_and_five_tool_Run_acceptance": false
+  },
+  "primary": "External owned_command launch-path assertion failed; returned command streams were initially written then overwritten by empty AssertionError fallback. Exact browser JSON report andlaunch evidence remain unavailable. No gate waiver or retry.",
+  "raw_recovery": {
+    "command3_stdout_stderr_bytes": 0,
+    "worker_failure_admission_junit_scopes": "no <launching>, pw:browser or exact command3 report copy",
+    "browser_owner": "in-memory PIPE CompletedProcess, no independent command3 spool",
+    "outer_owner": "wholeworker TemporaryDirectory spool read into supervisor JSON andremoved before return; returned worker streams retained identically",
+    "remaining_supervisor_scratch_directories": 0,
+    "last_run_marker": {
+      "status": "passed",
+      "failed_tests_count": 0,
+      "evidence": {
+        "path": "/workspace/engineering/pr305/action_server/frontend/test-results/.last-run.json",
+        "size": 45,
+        "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+      },
+      "limitation": "auxiliary marker only; not exact executed-case/launch evidence andnot used for admission"
+    },
+    "reconstructed_raw_or_new_execution": false
+  },
+  "partial_Runtime": {
+    "startup": "ready; exceptionnull",
+    "persisted_declared_tool_Run_count": 5,
+    "unique_Run_count": 5,
+    "known_declared_tool_names": [
+      "canvas_fixture_artifact_status",
+      "canvas_fixture_artifact_status",
+      "canvas_fixture_search",
+      "canvas_fixture_search",
+      "canvas_fixture_worker_provenance"
+    ],
+    "all_status_code2": true,
+    "separate_resource_Run_count": 2,
+    "public_core_version": "1.0.3",
+    "private_DB_hash_size_only": {
+      "sha256": "d3aebd41f31da621a26bfad82a674ecd95dd6929cc81d59298e5314b0ea68a72",
+      "size": 1114112
+    },
+    "installed_METADATA_sha256": "f50156dd4869504ee4e73f536641e5b69c8f7c4553d0b07f34dc177abcc4789a",
+    "installed_RECORD_sha256": "2d807f60228bff14f1da6a0a3cef2e293c7a7e3224e99c9b879cc248d229ee37",
+    "three_modules": {
+      "actions": {
+        "sha256": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+        "inside_worker_prefix": true,
+        "owned_by_actions_core_RECORD": true,
+        "RECORD_sha256_matches": true
+      },
+      "actions.mcp": {
+        "sha256": "c944de3b044a232143e66edd85ebd342b81b49cd100221689e22908d0dd5f365",
+        "inside_worker_prefix": true,
+        "owned_by_actions_core_RECORD": true,
+        "RECORD_sha256_matches": true
+      },
+      "actions.mcp._metadata": {
+        "sha256": "c5750e654cb3c1e057705d80e65c4f6a935a3d81e46450d6dbf68d37f45cb48c",
+        "inside_worker_prefix": true,
+        "owned_by_actions_core_RECORD": true,
+        "RECORD_sha256_matches": true
+      }
+    },
+    "inside_attempt_worker_prefix": true,
+    "whole_wheel_authenticated": false,
+    "cold_registry_acquisition": false,
+    "production_artifact_resolution_qualified": false
+  },
+  "cleanup": {
+    "Runtime_case_status": "failed",
+    "strict_Runtime_flags": "all3 True",
+    "strict_Runtime_lists": "all4 empty",
+    "finite_observed_descendants": 0,
+    "final_sampler": {
+      "exception": null,
+      "outcome": "ready",
+      "sampler_alive": false,
+      "sampler_cancelled": true
+    },
+    "natural_exit": "NOT_PROVEN forcedownedcleanup",
+    "outer_disposition": "reaped_exited_descendants",
+    "outer_returned_worker_code": 1,
+    "outer_reaped_descendants": 6,
+    "browser_short_private_temp_removed": true,
+    "scope": "Internal Runtime and outer scopes independentlymeasured; no universal adoption/naturalexit/completebrowsercleanup claim"
+  },
+  "postconditions": {
+    "raw_scoped_refs_verified": 19,
+    "frozen_refs_verified": 36,
+    "source273_working_and_Git_parity": true,
+    "original_and_owned1192_native_inventories_identical": true,
+    "source3ec_clean": true,
+    "helpers_browser_originalassets_unchanged": true,
+    "V2_V3_failure_checkpoints_preserved": true
+  },
+  "no_product_execution_or_retry_by_reviewer": true,
+  "private_data_policy": "No DB body/raw results/profiles/datadirs/env/APIkeys/workerprivatepaths exported; only known tool counts/status andactual distribution-member hashes/ownership",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md exact canonical-actual-v4-proposed.patch; writer29139 proposed paragraph retained separately",
+    "Durable learning captured": "Retain CompletedProcess streams/returncode before postguard; empty exception attributes must not destroy returned output. Narrow command0/persisted5tools/3Coremembers/strictcleanup doesnot qualify missing actualbrowser report/launch gate. Search bounded authoritative copies rather than reconstructing evidence.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr305-v4-independent-runner-review/canonical-actual-v4-proposed.patch",
+        "size": 1302,
+        "sha256": "ce3ddb4458c87cb3a61e39fb77378c19f62303d92b7f422a5ab86ce0e83d6f9a"
+      },
+      {
+        "bytes": 523,
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/canonical-actual-v4-proposed-delta.md",
+        "sha256": "29139c6658ab7d291f853b3f5b609294fcd88ef5910f9b987e9fdd070d1e22da"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-receipts.json",
+        "size": 1878,
+        "sha256": "a805d8857e05ef58a8b2dba6e1ef057c5ac011661caf3939d3369d0507aa95b9"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/junit.xml",
+        "size": 1209,
+        "sha256": "88c502dab54ee49bedcf415e6e39848bbe4b83fd2e24c98d673c30a770a74b87"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/runtime-cleanup.json",
+        "size": 699,
+        "sha256": "68b6653af69a415bb8e9c5e197e9e9b22a5236c6541c7c1ad865dd559f69cb51"
+      },
+      {
+        "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/outer-cleanup.json",
+        "size": 518,
+        "sha256": "75acd6c09edc02c336586d52b4fa7afdf910997f4665e180d8236e5d45272ccb"
+      }
+    ],
+    "Stale or ambiguous guidance removed": "Exception fallback substitutes command raw output safely; exit0 andlast-run marker authenticate executedcase/launchpath; partial persistedRun evidence closescombinedgate. No actualV4 DEBUG channel placement inferred from missing raw.",
+    "Remaining uncertainty": "Original executed report/launchtrace unavailable, so combinedcurrent3ec acceptance remains HOLD. New named V5 correction requires independent qualification then separate execution authority. WholeCorewheel/coldregistry/realartifact/productionhost/OAuth/private134 remain unqualified."
+  },
+  "Upstream disposition": "none; local externalcontroller receipt handling defect, no maintained upstream violation established"
+}

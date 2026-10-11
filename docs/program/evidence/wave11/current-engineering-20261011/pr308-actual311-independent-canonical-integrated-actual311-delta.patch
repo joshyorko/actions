@@ -1,0 +1,18 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index 306baa3e..22f1e9e8 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2790,6 +2790,13 @@ frozen Runtime acceptance or remote-provider acceptance.
+ The Dakota RCC candidate-wheel verifier derives Core and HTTP Helper versions
+ from each checked-out package using the pinned Poetry executable, then checks
+ that each built wheel's filename and `METADATA` agree with that source version.
++Filename selection alone does not admit the archive: the verifier requires
++exactly one `.dist-info/METADATA` member, decodes it as UTF-8, and compares its
++`Name` and `Version` with the expected distribution and checked-out package
++version reported by pinned Poetry.
++Keep these member-level identity checks separate from the whole-wheel SHA-256
++recorded in the receipt; that digest binds bytes but does not prove installation
++or a provider-backed run.
+ The same candidate identities flow into the synthetic Action expectation and
+ success or failure receipt. This identifies the local candidate under test; it
+ does not establish a registry publication or provider-backed Runtime result.

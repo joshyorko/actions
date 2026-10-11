@@ -1,0 +1,159 @@
+{
+  "driver_static_evidence": {
+    "claim": "Locked driver routes worker stdErr into result.stderr and JSON reporter serializes those entries; static dependency semantics, not recovered V4 bytes",
+    "json_result_stderr_serialization_line": 4161,
+    "path": "/workspace/engineering/pr310/action_server/frontend/node_modules/playwright/lib/runner/index.js",
+    "sha256": "6dcf135a144b0f243848128bb68e0a25898b8ad764a34326f36ab45d9a9e1685",
+    "worker_stdErr_result_capture_lines": [
+      5374,
+      5377
+    ]
+  },
+  "helper_mechanics": {
+    "browser_owner": "Popen PIPE communicate returns CompletedProcess directly; no persistent transport/output file copy",
+    "outer_owner": "Linux supervisor temporary stdout/stderr buffers contain worker output, then TemporaryDirectory removed; retained worker streams lack original command3 JSON",
+    "postguard": "V4 wrote completed streams then AssertionError handler rewrote files with empty fallback"
+  },
+  "no_original_completed_stream_copies_found_in_retained_worker_gateway_command_receipts": true,
+  "original_command3_raw_streams_retained": false,
+  "original_command3_returncode": 0,
+  "phase": "READ_ONLY_ORIGINAL_V4_TRACE_INVENTORY",
+  "reconstructed_missing_streams": false,
+  "records": [
+    {
+      "browser_path_markers": 0,
+      "bytes": 68755,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/actual-admission.json",
+      "sha256": "86efca2e5640a943b5917dbb5b723705c15ab75123e2e604e5bf23ab02e4b64b"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 192,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-1-stderr.log",
+      "sha256": "31268753892853abc32ea1862c718e2d5bf63d563acba1ef293d63cb70c7e59d"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 790,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-1-stdout.log",
+      "sha256": "a065efcb8370ec20075a7aad722df02b941189a4b6ff116286247644f5d3c3e5"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 0,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-2-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 40,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-2-stdout.log",
+      "sha256": "d75fc32089eefc512b00ce4d792475a993ba56dcb863b971a4c13bcd17b3629f"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 0,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-3-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 0,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-3-stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "browser_path_markers": 4,
+      "bytes": 1878,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/command-receipts.json",
+      "sha256": "a805d8857e05ef58a8b2dba6e1ef057c5ac011661caf3939d3369d0507aa95b9"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 51005,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/failure-stderr.log",
+      "sha256": "de2953ae56bc242b33ffcf9de3b5a5f855c67c5ae1bae674c7e185e7896a64c5"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 13438,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/failure-stdout.log",
+      "sha256": "8b66e6f59c97c8e0432349783f91080d96813c5444454e9151fbcded7f97cfed"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 1209,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/junit.xml",
+      "sha256": "88c502dab54ee49bedcf415e6e39848bbe4b83fd2e24c98d673c30a770a74b87"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 518,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/outer-cleanup.json",
+      "sha256": "75acd6c09edc02c336586d52b4fa7afdf910997f4665e180d8236e5d45272ccb"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 4535,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/preflight.json",
+      "sha256": "f729b7ed6bc654e90def547db1faeb0319d6d4fa84e620864652ce00f5adda81"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 699,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/runtime-cleanup.json",
+      "sha256": "68b6653af69a415bb8e9c5e197e9e9b22a5236c6541c7c1ad865dd559f69cb51"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 793,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/runtime-start-final-snapshot.json",
+      "sha256": "e78f7fcbd4c0beb5e02cb18bff0b2954cca07f01d1a3e8ed26b873acf57b3c12"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 2662,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/startup-observations.json",
+      "sha256": "da861962e7c753c3d93d0c274da364b3d65f36a2d5b0ef6b8275d49332c5a28f"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 51005,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/worker-stderr.log",
+      "sha256": "de2953ae56bc242b33ffcf9de3b5a5f855c67c5ae1bae674c7e185e7896a64c5"
+    },
+    {
+      "browser_path_markers": 0,
+      "bytes": 13438,
+      "launch_markers": 0,
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-3/worker-stdout.log",
+      "sha256": "8b66e6f59c97c8e0432349783f91080d96813c5444454e9151fbcded7f97cfed"
+    },
+    {
+      "bytes": 45,
+      "data_scope": "Ignored Playwright last-run bookkeeping only; not original full JSON report/launch proof",
+      "path": "/workspace/engineering/pr305/action_server/frontend/test-results/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "status": "passed"
+    }
+  ],
+  "remaining_uncertainty": "No original V4 command3 report/DEBUG bytes available; command0 and last-run cannot admit browser launch/case/five-tool-Run acceptance; immutable V5 synthetic parser qualification must not relabel V4.",
+  "source": "3ec9d0acbe30ad94d02e4c24fef2587127964495"
+}

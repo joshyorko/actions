@@ -1,0 +1,338 @@
+{
+  "schema": "actions-pr306-current-source-refresh/v1",
+  "status": "FROZEN_SOURCE_READY_FOR_INDEPENDENT_REVIEW_NOT_PUSHED",
+  "observed_utc": "2026-10-11T05:11:38.814573+00:00",
+  "branch": "fix/database-savepoint-admission-20261010",
+  "head": "c38e22c74290dca391617e9693fcf5b2968956df",
+  "tree": "75dfe6916d4a4e8c07a1b76aafea13540bc7afe1",
+  "parent": "0babc41dbcf2024682be1d89c49ad1a102377c83",
+  "ordinary_union": {
+    "head": "0babc41dbcf2024682be1d89c49ad1a102377c83",
+    "tree": "a9221f5b0ff2f959b26ed2c5532bb39d24bed7de",
+    "ordered_parents": [
+      "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+    ]
+  },
+  "actual_target": {
+    "head": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+    "tree": "35a5168a3904ba41e29047fec2a4cd3b50880a78"
+  },
+  "retention": {
+    "no_old_or_target_deletions": true,
+    "all_nonowned_leaf_modes_and_blobs_exact_target": true,
+    "original_database_fix_blob_mode": [
+      "100644",
+      "blob",
+      "6fd267165834f60968ee10a8653dd084a39ad521"
+    ],
+    "both_original_regression_asts_unchanged": [
+      "test_database_transactions_nested",
+      "test_nested_transaction_savepoint_start_failure_preserves_error_and_counter"
+    ],
+    "all_actual_target_test_function_asts_unchanged": true,
+    "only_new_test_function_vs_target": "test_nested_transaction_savepoint_start_failure_preserves_error_and_counter",
+    "original_guide_plus_entire_actual_target_retained": true,
+    "removing_only_two_new_guide_paragraphs_equals_entire_ordinary_union": true,
+    "complete_github_tree_generator_and_workflows_exact_target": true
+  },
+  "leaf_counts": {
+    "old": 1385,
+    "target": 1409,
+    "merge": 1409,
+    "current": 1409
+  },
+  "source_proof": {
+    "path": "/workspace/engineering/pr306-refresh-preparation/current-source-proof.json",
+    "bytes": 2761,
+    "sha256": "6cfbd06fcc1e446009b36fba0f94535977dac0dd2f08d43df093e763f6bbd8a0"
+  },
+  "source_inspector": {
+    "path": "/workspace/engineering/pr306-refresh-preparation/verify_current_source.py",
+    "bytes": 5778,
+    "sha256": "5b473fdf24744968d0deb9459f9dbdc7b8244ad3d9dc7581d7b5ba673d84569b"
+  },
+  "gate_counts": {
+    "Doctor": "PASS",
+    "Bootstrap": "PASS fresh isolated five package environments",
+    "Toolkit": {
+      "pass": 69
+    },
+    "focused_transaction_tests": {
+      "pass": 2
+    },
+    "database_source": {
+      "pass": 61,
+      "PostgreSQL_skip": 12
+    },
+    "configured_Runtime_nonintegration": {
+      "pass": 1151,
+      "skip": 13,
+      "workers": 2,
+      "exact_gate": "invoke test-not-integration, existing --force-regen/-n auto with PYTEST_XDIST_AUTO_NUM_WORKERS=2; complete tracked leaf retention checked afterward"
+    },
+    "full_configured_lint": "PASS Ruff check/format/Isort",
+    "configured_typecheck": {
+      "pass": true,
+      "files": 337
+    },
+    "workflow_generation": "PASS all YAML/dependabot byte roundtrip and complete .github tree exact actualtarget",
+    "diff_check": "PASS"
+  },
+  "gate_logs": {
+    "bootstrap": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/bootstrap.log",
+      "bytes": 27576,
+      "sha256": "25fa23496d40adf4c9ac632ea9ce80c7330b089393fe14d2a47b29a7552e54a8"
+    },
+    "current-source-proof": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/current-source-proof.log",
+      "bytes": 2761,
+      "sha256": "6cfbd06fcc1e446009b36fba0f94535977dac0dd2f08d43df093e763f6bbd8a0"
+    },
+    "database-complete-source": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/database-complete-source.log",
+      "bytes": 3958,
+      "sha256": "139a752769c674c98f0cb0621d47f7db738338c261eb7eac808e493d0d48b02c"
+    },
+    "database-scoped": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/database-scoped.log",
+      "bytes": 4748,
+      "sha256": "bf41d48e0296cc4bfdb574eaf626daeb403c1136f585e075f072e9f669137430"
+    },
+    "diff-check": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "doctor": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/doctor.log",
+      "bytes": 12786,
+      "sha256": "da97465dad82a8a629a572c778ba76970c3279e5d3106110d88916d700dac885"
+    },
+    "full-source": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/full-source.log",
+      "bytes": 296600,
+      "sha256": "d944c04dde761dac0b56c7b11d9c4f5e5cec0123c9127bae8f869213934bb6af"
+    },
+    "generator-roundtrip": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/generator-roundtrip.log",
+      "bytes": 4561,
+      "sha256": "a18340d916fe176cf981082d79c994abd0ee44cddeefdc0cd04dc9abee4c0195"
+    },
+    "original-windows-job-114316872435": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/original-windows-job-114316872435.log",
+      "bytes": 612777,
+      "sha256": "2608e02752145c7dc50b002df9208fb33c64b955da03106411b9d0404c3f93ee"
+    },
+    "static": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/static.log",
+      "bytes": 5694,
+      "sha256": "5895af7a1ec9bb922e70532e85be106173293ebd5c8bbaea2b89724b378a72aa"
+    },
+    "toolkit": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/toolkit.log",
+      "bytes": 14344,
+      "sha256": "15b3043649b48d8aadf4321f2bf4dc03262ba90cdeb64434e1098af09894a590"
+    }
+  },
+  "generator_roundtrip": {
+    "path": "/workspace/engineering/pr306-refresh-preparation/generator-roundtrip.json",
+    "bytes": 3164,
+    "sha256": "21412f27d916c53f7db67fd1aa920040a27846192316d21d935b360ff9eb5da4"
+  },
+  "source_origin": "Own pr306 _database module and package .venv prefix asserted before tests",
+  "rcc": {
+    "path": "/workspace/actions-cloud/bin/rcc",
+    "version": "18.19.3",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+  },
+  "bootstrap_reuse": false,
+  "installer_coordination": "Root granted306 heavy installer slot; stack305 confirmed no installer/npm install. Doctor/Bootstrap completed; slot released.",
+  "producer_inventory": {
+    "count": 268,
+    "changed_inputs": [
+      "action_server/src/actions/server/_database.py"
+    ],
+    "native92498qualification": "HOLD: changed production _database.py; do not exclude or relabel old bytes",
+    "selected_five": {
+      "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": [
+        "100644",
+        "blob",
+        "12ec0f644d96a45824ac110b7f1dafebb4c42ce6"
+      ],
+      "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": [
+        "100644",
+        "blob",
+        "0e1ab11bdd4b52e2d35d06b42dd17996dd082022"
+      ],
+      "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": [
+        "100644",
+        "blob",
+        "534e51afbc75b4d3ce473dee37d7ac00d52dbc92"
+      ],
+      "action_server/tests/action_server_tests/test_cli_multi_package_sync.py": [
+        "100644",
+        "blob",
+        "b0919a8b7508954976a8fab631a5fff219c2aeb8"
+      ],
+      "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py": [
+        "100644",
+        "blob",
+        "7a5a378bf1f8151118034d18b5dfb269f2b24e90"
+      ]
+    }
+  },
+  "retained_prior_receipts": {
+    "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave4-convergence-20261010T2045Z/database-savepoint/savepoint-fix-independent-review.json": "50f4148abdc3c1785a608d8e5f5650e6fcc233235f5e114b517a33cbebd849ab",
+    "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave6-checkpoint-20261010T212704Z/post304-union/pr305-306-307-308-post304-union-independent-review.json": "6982169bccf4e6a754615e932b4c05188f251adfa6214cce5d144afe8feab727",
+    "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_review.json": "4cf0f23ff8beadbf705aadf4fc3f30957483d1655374aeaa7173b0edc6d75d6b"
+  },
+  "retained_TDD_limits": "Accepted50f414 review retains original RED log hashes and source-bound acceptance; raw historical RED logs absent from this environment snapshot. No new behavioral implementation or fresh RED claim. Both original regression ASTs and production Database bytes survive exactly.",
+  "retained_windows": {
+    "run": 38087471281,
+    "job": 114316872435,
+    "actual_checkout": "eddec2f488428c33dbd5f70e57e61c968af3b64e",
+    "actual_checkout_tree": "42f70afb88877335a71e9bc02ad2e85730d69442",
+    "actual_checkout_ordered_parents": [
+      "19380993febaa71238eaee3026b5c808773283ff",
+      "1421fcf85c1b681aef1fe58fe2902f776f208167"
+    ],
+    "log": "/workspace/engineering/pr306-refresh-preparation/original-windows-job-114316872435.log",
+    "log_bytes": 612777,
+    "log_sha256": "2608e02752145c7dc50b002df9208fb33c64b955da03106411b9d0404c3f93ee",
+    "preserved_utf8_bom_and_crlf": true,
+    "source_counts": {
+      "pass": 989,
+      "skip": 94
+    },
+    "native_counts": {
+      "fail": 1,
+      "pass": 129,
+      "skip": 18,
+      "deselect": 1086
+    },
+    "failed_node": "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+    "failure_stage": "initial _runtime context entry -> readiness future, before collision mutation/assertions",
+    "ready_banner_observed_in_failing_capture": false,
+    "rcc_variables_seconds": 87.81,
+    "rcc_creation_reported_success": true,
+    "rcc_progress_previous_mark_deltas": [
+      {
+        "index": 0,
+        "previous_mark_delta_seconds": 0.028
+      },
+      {
+        "index": 1,
+        "previous_mark_delta_seconds": 0.002
+      },
+      {
+        "index": 2,
+        "previous_mark_delta_seconds": 0.003
+      },
+      {
+        "index": 3,
+        "previous_mark_delta_seconds": 0.0
+      },
+      {
+        "index": 4,
+        "previous_mark_delta_seconds": 0.0
+      },
+      {
+        "index": 5,
+        "previous_mark_delta_seconds": 0.001
+      },
+      {
+        "index": 6,
+        "previous_mark_delta_seconds": 0.001
+      },
+      {
+        "index": 7,
+        "previous_mark_delta_seconds": 0.782
+      },
+      {
+        "index": 8,
+        "previous_mark_delta_seconds": 57.859
+      },
+      {
+        "index": 9,
+        "previous_mark_delta_seconds": 5.575
+      },
+      {
+        "index": 10,
+        "previous_mark_delta_seconds": 0.0
+      },
+      {
+        "index": 11,
+        "previous_mark_delta_seconds": 2.236
+      },
+      {
+        "index": 12,
+        "previous_mark_delta_seconds": 0.0
+      },
+      {
+        "index": 13,
+        "previous_mark_delta_seconds": 0.001
+      },
+      {
+        "index": 14,
+        "previous_mark_delta_seconds": 7.082
+      },
+      {
+        "index": 15,
+        "previous_mark_delta_seconds": 14.229
+      }
+    ],
+    "rcc_progress_delta_sum_seconds": 87.799,
+    "process_start_local_time": "22:11:45.685",
+    "last_import_discovery_local_second": "22:13:16",
+    "wrapper_kill_local_time": "22:13:16.495",
+    "wrapper_start_to_kill_seconds": 90.81,
+    "old_selftest_has_no_startup_failure_20_second_cleanup": true,
+    "prospective_union_selftest_equals_accepted_target": true,
+    "unknown": [
+      "precise pre-readiness blocking ownership/cause",
+      "full owned descendant/reader cleanup outcome"
+    ],
+    "classification": "observed cold-bootstrap/readiness budget exhaustion; no observed SAVEPOINT regression failure"
+  },
+  "read_only_preparation": {
+    "path": "/workspace/engineering/pr306-refresh-preparation/prospective-union-receipt.json",
+    "bytes": 8580,
+    "sha256": "9c63fdf403a39d38439b61df43a3bfd687d11778d5b1a57b84301739f57c21ed"
+  },
+  "historical_read_only_doc_proposal": {
+    "path": "/workspace/engineering/pr306-refresh-preparation/canonical-proposed-delta.md",
+    "bytes": 3850,
+    "sha256": "0763044ef3661f352a6fee2d619e090a06c10d4f2de39b764f1a5d5a3a8305bb"
+  },
+  "ephemeral_setup_py": {
+    "reviewer_observed": "Untracked action_server/setup.py during Bootstrap",
+    "worker_first_post_Bootstrap_observation": "Absent before cleanup",
+    "conditional_copy_hash_remove": "No-op because path absent",
+    "original_bytes_and_sha256": "UNAVAILABLE",
+    "actual_deletion_attribution": "UNKNOWN; install/build may explain generation but deletion not independently captured",
+    "generic_cleanup": false
+  },
+  "not_run": [
+    "New exacthead hosted CI",
+    "New native Runtime build/execution or frozen requalification",
+    "New actual PostgreSQL",
+    "Windows retry"
+  ],
+  "full_issue_84": "OPEN",
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr306-refresh-preparation/canonical-actual-delta.patch",
+      "bytes": 2456,
+      "sha256": "cac89fd92340ccb2e3bf41a415881450f1b65bb5a7de6892121bb8d2195a3ee6"
+    },
+    "Durable_learning": "Healthy SQLite authorizer denial differs from PostgreSQL already-aborted25P02 recovery; successful RCC preparation differs from Runtime ready-port admission and reached semantics.",
+    "Evidence": "Accepted50f414 and boundedPostgres4cf0f23 receipts, preserved originalWindows job114316872435 log2608e027 with87.81s successfulvariables call beforestartup90s expiration; unchangedretainedsource tests and freshsource gates.",
+    "Stale_ambiguity_removed": "Missing backend-fault and bootstrap-success/readiness distinctions clarified; no unqualified wholecold-cache claim or changed deadline; previous receipts remain original identities.",
+    "Remaining_uncertainty": "HealthyPostgreSQLdenial/full84, precise originalWindows blockingownership/cause and cleanup, currenthosted/nativequalification."
+  },
+  "upstream_disposition": "none; Actions-owned fix; Windows evidence does not establish an upstream defect.",
+  "push_merge_external_execution": false
+}

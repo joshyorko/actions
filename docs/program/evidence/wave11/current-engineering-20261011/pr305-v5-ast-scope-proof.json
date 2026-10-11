@@ -1,0 +1,22 @@
+{
+  "unchanged_top_level_functions": [
+    "sha",
+    "write",
+    "load_helper",
+    "verify_helpers",
+    "record_outer_completion",
+    "admit_source",
+    "admit_cleanup",
+    "admit_observer",
+    "admit_junit",
+    "admit_bridge",
+    "assert_prepared_frontend",
+    "discover_canvas_case",
+    "preflight"
+  ],
+  "unchanged_global_constants_imports_cli_main": true,
+  "worker_only_owned_command_changed": true,
+  "execute_only_fresh_suffix3_to4_changed": true,
+  "added_only": "admit_browser_launch",
+  "same_source3ec_native92498_helpers_browser_Core3sample_cleanup_sampler_budgets": true
+}

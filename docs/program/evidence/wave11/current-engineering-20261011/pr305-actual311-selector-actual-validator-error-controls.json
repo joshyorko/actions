@@ -1,0 +1,7 @@
+{
+  "phase": "ACTUAL_SOURCE_VALIDATOR_SERVICE_FREE_CONTROLS_ONLY",
+  "valid_synthetic_baseline_admitted": true,
+  "otherwise_valid_nonblank_error_rejected": true,
+  "retained_actual_empty_NoTestsFound_report_rejected": true,
+  "product_result_claim": false
+}

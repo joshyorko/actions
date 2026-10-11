@@ -1,0 +1,20 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -165,6 +165,17 @@
+ its narrower contract and the outer supervisor's own result separately. A DEBUG
+ browser launch path can establish the selected executable for that launch; it
+ does not establish a live PID identity or natural shutdown.
++
++Preserve a returned CompletedProcess's raw stdout, stderr and return code before
++checking post-command receipts. A later assertion may have no stream attributes;
++its exception fallback must not overwrite already captured output with empty
++values. Retain the primary assertion and bounded cleanup observations separately.
++If the executed report or browser launch evidence is unavailable, command exit
++zero and successful persisted tool Runs remain partial observations. They do not
++admit the combined browser gate. Search only the retained command, worker and
++owned supervisor evidence for an authoritative copy; do not reconstruct a report
++from a last-run marker, exit code or subsequent run. Keep any later JSON reporter
++channel handling tied to the locked reporter schema and measured launch path.
+ 
+ Read the Runtime testcase outcome and its cleanup measurements separately. A
+ failed testcase can retain true wrapper/snapshot/reap flags, empty error/reader/
