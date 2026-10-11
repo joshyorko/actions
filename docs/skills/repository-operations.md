@@ -104,6 +104,17 @@ then verify the same connection can commit a later nested transaction. The
 existing successful nested rollback test does not exercise SAVEPOINT creation
 failure.
 
+Keep backend fault injection explicit: SQLite authorizer denial tests SAVEPOINT
+creation in an otherwise usable transaction. In PostgreSQL, a failed statement
+can leave an outer transaction aborted (SQLSTATE `22012` for division by zero);
+the next nested `Database.transaction()` attempts its SAVEPOINT and fails with
+`25P02`. Verify that the original SAVEPOINT `DBError` propagates, the nested body
+does not run, outer cleanup returns nesting to zero and the connection to IDLE,
+and the same connection later commits an outer row and a nested row while
+rolling back another nested row. Record both SQLSTATEs and the server/driver
+versions. This proves recovery from SAVEPOINT failure in an already-aborted
+transaction, not denial of SAVEPOINT in a healthy transaction.
+
 Actions Core pull requests run a non-publishing candidate-wheel gate on Ubuntu
 with the release-pinned Python 3.10 and Poetry 2.1.1 toolchain. It synchronizes
 the locked environment, builds the wheel and source archive, checks the exact
@@ -146,6 +157,15 @@ before the watched-reload assertions began. Keep the 90-second allowance
 limited to the initial native-executable startup; this reuses the existing
 native acceptance startup budget. Source-mode startup remains at 30 seconds,
 as do the watcher and restart deadlines.
+
+RCC environment creation reporting `SUCCESS` does not establish Runtime
+readiness. A successful `holotree variables` call can consume nearly the
+existing startup budget, leaving package collection and ready-port publication
+unfinished. Attribute the timeout to the initial context entry when it occurs
+before the test body; do not describe unreached catalog or database assertions
+as failed. Preserve the command duration, ready-port observation and owned
+cleanup outcome separately, and leave unavailable ownership observations
+unknown. Keep the startup and cleanup deadlines unchanged.
 
 At #311 head `c888fb4a`, Windows run `38099013706`, job `114350853595`,
 timed out at the initial native startup in the watched-reload and resource
