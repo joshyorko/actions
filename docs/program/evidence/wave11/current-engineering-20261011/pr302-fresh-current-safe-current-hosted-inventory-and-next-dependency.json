@@ -1,0 +1,963 @@
+{
+  "status": "HOLD_FULL_CURRENT_CI; NARROW_PUBLIC_LINUX_THREECASE_GO_REVIEWED_SEPARATELY",
+  "captured_at_utc": "2026-10-11T06:52:03.354210+00:00",
+  "repo": "joshyorko/actions",
+  "pr": 302,
+  "named_refs": {
+    "head_ref": "fix/rcc-published-artifact-details-20261010",
+    "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "base_ref": "integration/community-release-20261008",
+    "base_sha": "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+  },
+  "source_candidate": {
+    "sha": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4"
+  },
+  "control_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+  "fresh_synthetic": {
+    "sha": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "ordered_parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ],
+    "tree_equals_control": true,
+    "fresh_full_suite_actual_checkout": "PENDING_TERMINAL_SOURCE_READBACK; synthetic identity is authenticated independently; no testedmerge completion claim"
+  },
+  "pull_request": {
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "mergeable_state": "unstable",
+    "author_body_current_file_exact_after_boundary_whitespace": true,
+    "current_body_sha256": "9e023b8452695038c54d5470a8c98324582f907e4fac4d067e3717d671d674e9"
+  },
+  "pagination": {
+    "fresh_runs": {
+      "page": 1,
+      "per_page": 100,
+      "total": 10,
+      "all_returned": true
+    },
+    "fresh_checks": {
+      "page": 1,
+      "per_page": 100,
+      "total": 25,
+      "all_returned": true
+    },
+    "each_run_jobs": "RESTlatestattempt/per_page100/page1; each length equals total<100; all10runs/25jobs included",
+    "publisher_caveat": "Jobnotyetinstantiated, not SKIPPED/PASS; a future latest inventory must include declared dependent publish job and terminal steps. Current25 is not old26."
+  },
+  "current_check_and_job_census": {
+    "queued/None": 2,
+    "completed/success": 15,
+    "in_progress/None": 8
+  },
+  "current_checks": [
+    {
+      "id": 114409246884,
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "status": "queued",
+      "conclusion": null,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246866,
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246836,
+      "name": "candidate-wheel",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246833,
+      "name": "build (windows-py3.10-devmode)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246802,
+      "name": "build (ubuntu-py3.10-devmode)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246790,
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246670,
+      "name": "build (macos-py3.10-devmode)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246558,
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246528,
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246525,
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246504,
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246481,
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246328,
+      "name": "build-wheels (windows-2022)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246292,
+      "name": "build (macos-py3.12-devmode)",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246280,
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246268,
+      "name": "build (ubuntu-py3.12-devmode)",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246265,
+      "name": "build-sdist (ubuntu-py3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246244,
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246216,
+      "name": "coverage",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246186,
+      "name": "build (windows-py3.12-devmode)",
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246163,
+      "name": "audit",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246153,
+      "name": "build-wheels (macos-15)",
+      "status": "queued",
+      "conclusion": null,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409246083,
+      "name": "copilot-setup-steps",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409238566,
+      "name": "build",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "id": 114409238527,
+      "name": "copilot-setup-steps",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    }
+  ],
+  "fresh_runs_full_job_inventory": [
+    {
+      "id": 38118859475,
+      "name": "Actions Runtime PYPI Release",
+      "path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "queued",
+      "conclusion": null,
+      "jobs": [
+        {
+          "id": 114409246153,
+          "name": "build-wheels (macos-15)",
+          "status": "queued",
+          "conclusion": null,
+          "started_at": "2026-10-11T06:41:04Z",
+          "completed_at": null,
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {}
+        },
+        {
+          "id": 114409246244,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:43:42Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 19,
+            "completed/skipped": 5
+          }
+        },
+        {
+          "id": 114409246265,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:42:01Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 15,
+            "completed/skipped": 4
+          }
+        },
+        {
+          "id": 114409246328,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:45:56Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 19,
+            "completed/skipped": 5
+          }
+        }
+      ]
+    },
+    {
+      "id": 38118859588,
+      "name": "Action Server Build (Unauthenticated)",
+      "path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "queued",
+      "conclusion": null,
+      "jobs": [
+        {
+          "id": 114409246790,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-11T06:42:03Z",
+          "completed_at": null,
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 29,
+            "in_progress/None": 1,
+            "pending/None": 6
+          }
+        },
+        {
+          "id": 114409246866,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-11T06:48:19Z",
+          "completed_at": null,
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 21,
+            "in_progress/None": 1,
+            "pending/None": 14
+          }
+        },
+        {
+          "id": 114409246884,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "queued",
+          "conclusion": null,
+          "started_at": "2026-10-11T06:41:04Z",
+          "completed_at": null,
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {}
+        }
+      ]
+    },
+    {
+      "id": 38118859503,
+      "name": "AI audit evidence",
+      "path": ".github/workflows/ai-audit.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 114409246163,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:41:14Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": 38118859480,
+      "name": "Copilot Setup Steps",
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 114409246083,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:43:47Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 9
+          }
+        }
+      ]
+    },
+    {
+      "id": 38118859472,
+      "name": "Measured Python coverage gate",
+      "path": ".github/workflows/coverage-gate.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "in_progress",
+      "conclusion": null,
+      "jobs": [
+        {
+          "id": 114409246216,
+          "name": "coverage",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-11T06:43:43Z",
+          "completed_at": null,
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 8,
+            "in_progress/None": 1,
+            "pending/None": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": 38118859587,
+      "name": "Actions Core Tests",
+      "path": ".github/workflows/actions_core_tests.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 114409246670,
+          "name": "build (macos-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:46:05Z",
+          "completed_at": "2026-10-11T06:47:37Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 15,
+            "completed/skipped": 1
+          }
+        },
+        {
+          "id": 114409246802,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:43:35Z",
+          "completed_at": "2026-10-11T06:44:52Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 15,
+            "completed/skipped": 1
+          }
+        },
+        {
+          "id": 114409246833,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:44:28Z",
+          "completed_at": "2026-10-11T06:47:27Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 15,
+            "completed/skipped": 1
+          }
+        },
+        {
+          "id": 114409246836,
+          "name": "candidate-wheel",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:43:48Z",
+          "completed_at": "2026-10-11T06:44:27Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": 38118859516,
+      "name": "RCC developer toolkit",
+      "path": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "in_progress",
+      "conclusion": null,
+      "jobs": [
+        {
+          "id": 114409246280,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:07Z",
+          "completed_at": "2026-10-11T06:44:47Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 10,
+            "completed/skipped": 4
+          }
+        },
+        {
+          "id": 114409246481,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:44:44Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 10,
+            "completed/skipped": 4
+          }
+        },
+        {
+          "id": 114409246504,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:48:18Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 14
+          }
+        },
+        {
+          "id": 114409246525,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-11T06:47:43Z",
+          "completed_at": null,
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 7,
+            "completed/skipped": 4,
+            "in_progress/None": 1,
+            "pending/None": 1
+          }
+        },
+        {
+          "id": 114409246528,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-11T06:41:15Z",
+          "completed_at": null,
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 10,
+            "in_progress/None": 1,
+            "pending/None": 2
+          }
+        },
+        {
+          "id": 114409246558,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:46:18Z",
+          "completed_at": "2026-10-11T06:49:30Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 10,
+            "completed/skipped": 4
+          }
+        }
+      ]
+    },
+    {
+      "id": 38118859493,
+      "name": "Action Server Tests",
+      "path": ".github/workflows/actions_runtime_tests.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "in_progress",
+      "conclusion": null,
+      "jobs": [
+        {
+          "id": 114409246186,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": null,
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 14,
+            "completed/skipped": 1,
+            "in_progress/None": 1,
+            "pending/None": 9
+          }
+        },
+        {
+          "id": 114409246268,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": null,
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 15,
+            "completed/skipped": 1,
+            "in_progress/None": 1,
+            "pending/None": 8
+          }
+        },
+        {
+          "id": 114409246292,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-11T06:49:11Z",
+          "completed_at": null,
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 11,
+            "completed/skipped": 1,
+            "in_progress/None": 1,
+            "pending/None": 12
+          }
+        }
+      ]
+    },
+    {
+      "id": 38118856645,
+      "name": "Copilot Setup Steps",
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "event": "push",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 114409238527,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:03Z",
+          "completed_at": "2026-10-11T06:43:34Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 9
+          }
+        }
+      ]
+    },
+    {
+      "id": 38118856632,
+      "name": "Action Server RCC provider rollback acceptance",
+      "path": ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+      "event": "push",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 114409238566,
+          "name": "build",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:03Z",
+          "completed_at": "2026-10-11T06:44:36Z",
+          "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "step_counts": {
+            "completed/success": 21
+          }
+        }
+      ]
+    }
+  ],
+  "publisher": {
+    "run": 38118859475,
+    "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+    "status": "DECLARED_NOT_YET_INSTANTIATED",
+    "depends_on": [
+      "build-sdist",
+      "build-wheels"
+    ],
+    "current4builder_jobs": "3SUCCESS1QUEUED; notpublisheracceptance",
+    "scope": "PRartifact inventory/Twine/canary validation; actualpublication token/upload remains push-tag-only and unaccepted"
+  },
+  "source_candidate_workflow_runs": "0 for unpushed sourceSprime query; its threecase execution authenticated inside separate pushedCprime runreceipt",
+  "reviews_and_threads": {
+    "reviews": 0,
+    "threads": 0,
+    "unresolved_reported_threads": 0,
+    "human_approval": "NONE_OBSERVED"
+  },
+  "statuses": {
+    "state": "pending",
+    "rows": 0,
+    "warning": "empty statuses does not supersede25check-runs"
+  },
+  "policy": {
+    "base_protected_flag": false,
+    "rulesets": [],
+    "branch_protection_read": "403Resource not accessible by integration; unavailableadminpolicy not waived",
+    "encoded_branch_rules_read": "connector rejected invalidrepositorypath; not policy determination"
+  },
+  "narrow_actual_review": {
+    "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/independent-fresh-three-case-actual-review.json",
+    "sha256": "54a855d62a41645ec53476d7d212cf8bc3a743520c952dca4005790876afc20c",
+    "run": 38118856632,
+    "job": 114409238566,
+    "artifact": 11694723060,
+    "status": "GO_EXACT_PUBLIC_LINUX_SPRIME_THREE_CASE_ACCEPTANCE_ONLY"
+  },
+  "original_metadata_private_records": [
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-artifacts.json",
+      "size": 764,
+      "sha256": "36b8f27e91187abb1c2cd36509622a40d3d8d514ed70637907c638de576e72f9"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-base_ref.json",
+      "size": 448,
+      "sha256": "4dbfae279f601793034e38bc799c21ac228ebb0020b6c6c703275a919b69a5d5"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-base_rules.json",
+      "size": 130,
+      "sha256": "7a6be52dfa7873cd432c64f08fc9b5634bf0995dcd078627ad373bae0f20de50"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-branch_metadata.json",
+      "size": 5415,
+      "sha256": "61a37201133a4d8bec8862368be11be21d5a8838e6f07e2ab0cedc562b9791c5"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-branch_protection.json",
+      "size": 419,
+      "sha256": "f280fe0302cebe9d9fe2b778599ba9191fec5a5bfedc5e571b608e2ebd28da6b"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-checks.json",
+      "size": 89336,
+      "sha256": "148ed785fda8f0d857d926d8c255ccd37fd9473cc73c1954a64c4fc9fa179e54"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_base_ref.json",
+      "size": 448,
+      "sha256": "4dbfae279f601793034e38bc799c21ac228ebb0020b6c6c703275a919b69a5d5"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_checks.json",
+      "size": 89466,
+      "sha256": "e299bf94e3c0ea93bfeec75b4e732741549436e0562490c899737a3cd2efc776"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_head_ref.json",
+      "size": 465,
+      "sha256": "9c034c3578035e2842e3d38c49dfd53ef942725ed41811c4cbd7f7388decab9c"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_jobs_38118856632.json",
+      "size": 4680,
+      "sha256": "31259a3c5fdc5794f067528f1dc1b484973c38034f7cf8b2789041f34978fd4b"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_jobs_38118856645.json",
+      "size": 2413,
+      "sha256": "67960fcf52faef91701bc8a64dea7b7775830b11606fe0797b566e6d0808ebf2"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_jobs_38118859472.json",
+      "size": 2793,
+      "sha256": "aac99cd5db3a332b0b1183f489d45f05e85ad4ac9d012a154e1939f9cf0b572f"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_jobs_38118859475.json",
+      "size": 14992,
+      "sha256": "fa1f978dc120f7c0c247e9ac3eb852b9143b951684c780a450901b73fe2cdd58"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_jobs_38118859480.json",
+      "size": 2413,
+      "sha256": "2a8dfa6f6158933528aed14a9846a2d073c8689d4a597fd034cdbac4ed8a5937"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_jobs_38118859493.json",
+      "size": 14060,
+      "sha256": "9711ca2fb5b0001599632a37e83753b19eb397ebc4490e36f8c9924eb5aeb661"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_jobs_38118859503.json",
+      "size": 1924,
+      "sha256": "7af34cc876c590d5e8777b28ad5ba7f358f3e51a3fea019eb879fb23e7f3993e"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_jobs_38118859516.json",
+      "size": 19471,
+      "sha256": "f13ecdb713e04ea3d908993f2607dcc695320aced74085b6e2aa7a424c9e0d9d"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_jobs_38118859587.json",
+      "size": 14255,
+      "sha256": "24e050170a51a972b28dc0e2040d2a3bf9c7f4a4986e35f11224b12500d7bc7d"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_jobs_38118859588.json",
+      "size": 14791,
+      "sha256": "04b635940f2f1218d077dba6fb3e6d04a39a612d1c41a26cb1153edf49dff675"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_merge_ref.json",
+      "size": 345,
+      "sha256": "a2acb9d3e081b0c76e5be0097273d96f853426c5ae606889ba36d28ed9ce4e06"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_pr.json",
+      "size": 22194,
+      "sha256": "ec2bbd65d0e7d051370ceb9aac01337994b5d6cc693082ab81d58e7b178598bb"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-final_runs.json",
+      "size": 126553,
+      "sha256": "c6a6d997d9c5f69fede28d90c16b6e2f00c564e9d44779663cf1e389ca9ffa44"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-head_commit.json",
+      "size": 1131,
+      "sha256": "089b0de39bf83280b83a65964ed5c161d3489b5b95172821132a3e30f31255d5"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-head_ref.json",
+      "size": 465,
+      "sha256": "9c034c3578035e2842e3d38c49dfd53ef942725ed41811c4cbd7f7388decab9c"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-jobs_38118856632.json",
+      "size": 4680,
+      "sha256": "31259a3c5fdc5794f067528f1dc1b484973c38034f7cf8b2789041f34978fd4b"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-jobs_38118856645.json",
+      "size": 2413,
+      "sha256": "67960fcf52faef91701bc8a64dea7b7775830b11606fe0797b566e6d0808ebf2"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-jobs_38118859472.json",
+      "size": 2750,
+      "sha256": "603964088c1ae1bbdc32ba0379eb3755131dfe71fa217823e29cba531662b399"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-jobs_38118859475.json",
+      "size": 14624,
+      "sha256": "01ac2fc0dc6bf94f3dc4df9720420d3a377a3d559920daf076d55d6d0e89318c"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-jobs_38118859480.json",
+      "size": 2413,
+      "sha256": "2a8dfa6f6158933528aed14a9846a2d073c8689d4a597fd034cdbac4ed8a5937"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-jobs_38118859493.json",
+      "size": 10223,
+      "sha256": "961467c28e0b8d078a1a7100583cfb4643b821563d3c69ceda0b2d89e828fe11"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-jobs_38118859503.json",
+      "size": 1924,
+      "sha256": "7af34cc876c590d5e8777b28ad5ba7f358f3e51a3fea019eb879fb23e7f3993e"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-jobs_38118859516.json",
+      "size": 14572,
+      "sha256": "379cdcc5859b1525b1b48af6681049d4c2811aa6fd64f73a80a9dd1b080066e8"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-jobs_38118859587.json",
+      "size": 11075,
+      "sha256": "55758d9210f74c30d6689cd96f514b74318dcd7ffae0db85e0ba54f3fec54157"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-jobs_38118859588.json",
+      "size": 8356,
+      "sha256": "4eee5261dd42a178b19cf07986346944fc66b59a5a99004f94614cd039da42e4"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-merge_commit.json",
+      "size": 2648,
+      "sha256": "bc668bb2ece163ae3bafda4680ab026695e1f87595849e3656b1815487c8fe50"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-merge_ref.json",
+      "size": 345,
+      "sha256": "a2acb9d3e081b0c76e5be0097273d96f853426c5ae606889ba36d28ed9ce4e06"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-pr.json",
+      "size": 22194,
+      "sha256": "772ad4f83e8e9ffae5dec0d22d73e6646f467188467501534a2840c4d7d57541"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-reviews.json",
+      "size": 138,
+      "sha256": "2b8c033f134309716574cded93fcf0dd78177c85f04967eef77044736b00ff96"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-rulesets.json",
+      "size": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-runs.json",
+      "size": 126535,
+      "sha256": "159c256a36d8b41f1e6acee89f95404b4eaa7eed23f343311ac55a0dbefeb76e"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-source_commit.json",
+      "size": 1401,
+      "sha256": "56e5c59ce930026aba61157e603089cc638e62cc0b5b6338c951dcc08a08b557"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-source_runs.json",
+      "size": 36,
+      "sha256": "a2790a384d7d281e7395679000c35d27768d89dbd7052f725b8f4688beb59915"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-status.json",
+      "size": 4492,
+      "sha256": "b1bf53106b01da4ebb3d740e5ae05d6d7ce9c27e70d4d0f96fe34db307c2ed47"
+    },
+    {
+      "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-threads.json",
+      "size": 145,
+      "sha256": "8530f55d221e9b5ea523c682f768e80ed7f1ff35d4d019dac8251317095ee048"
+    }
+  ],
+  "root_normal_push_readback": {
+    "path": "/workspace/engineering/pr302-Cprime-verified-push-readback.json",
+    "sha256": "fe42e74d24ef874bba2aaff47919f64b35b4d1f2e24299be2360743113b3f054"
+  },
+  "next_dependency": "Await declared fresh workflow terminal outcomes, latepublishercreation/completion and freshfullsuite actualtestedmerge readback. Recheck named head/base/merge refs before integration. No pollingloop/manualrerun/merge proposed now.",
+  "HOLDs": [
+    "FullcurrentCI/testedmerge/lateRuntimepublishartifactvalidation",
+    "268producer adapter differs92498=>oldnativeUNQUALIFIED; no exclusions",
+    "Originalprivate01f/frozenv6/full134metadata/supervisor missing",
+    "WindowsRCC/Core103/wholewheel/fullrelease/actualpublication"
+  ],
+  "historical_identity": "Old63cf/26checks/11691074610 remainS43a/Cba04 only; currentf5dd/a346/d642 has distinctactualartifact11694723060",
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md accepted fef375 source/control/nine-sample/fullproducer/testedmerge patch integrated S-prime, C-prime byte-exact",
+    "Durable_learning_captured": "Authenticate nine reported hashes under actual immutable candidate; keep actual control and fullCI testedmerge separate even tree-equal. One measured publication JSON supports both parser identities; captured shutdown and mapped Core1.0.2 are bounded evidence.",
+    "Evidence": "Fresh original11694723060 archive/API digest+all7members, completejob114409238566, exact3JUnit, rawcandidate/control tuple, nineGitbody/mode and natural-before-cleanup receipt above",
+    "Stale_or_ambiguous_guidance_removed": "Accepted fef375 explicitly blocks carrying oldcontrol receipts/sample hashes onto currentunion/fullproducer. New frozen proof has its own tuple; no extra cosmetic proposal.",
+    "Remaining_uncertainty": "CurrentfullCI/publisher/testedmerge, adapterchanged92498UNQUALIFIED, originalprivate/full134metadata, WindowsRCC/Core103/wholewheel/fullrelease and complete reaping remain unqualified.",
+    "accepted_patch_sha256": "fef37515784cbf9fbb003ecca90ec0acb78d8e319bf2fd0ce2c2c1805ff955e6",
+    "disposition": "Existing accepted exactdelta verified once, retained unchanged; newactualevidence supports its narrow scope."
+  },
+  "Upstream_disposition": "none",
+  "mutations": "Privateownedmetadata/rawartifact/log/evidencereceipt only; no ref/checkout/source/push/merge/manualactual/build/retry/applicationwrite",
+  "review_script_sha256": "71d13b36a779fa58d28a11083593d0e6667e337ae07333c680a1273e79da8f4f"
+}

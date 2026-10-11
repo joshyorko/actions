@@ -1,0 +1,8 @@
+{
+  "all3source_bytes_exact_before_after_full": true,
+  "sha256": {
+    "action_server/tests/action_server_tests/native_startup_diagnostics.py": "75f85115cc5b927fd78fafeaa353462e89b2b767b63e40704ca8efff62d00b48",
+    "action_server/tests/action_server_tests/test_native_startup_diagnostics.py": "412f8f61aa6c683a26753d1c0f8cbedb23564db928e04d0352080b5b53eaba91",
+    "docs/skills/repository-operations.md": "3061e9de663a901bd0b34eb952b10cdc47c7c42317feb8fb22f0a64dbc67f841"
+  }
+}

@@ -298,3 +298,76 @@ metadata and historical-handle limits remain explicit. Original ENOSPC failures
 are not relabeled. Current101 source-wave lead preserves the original audited
 tail byte-for-byte including its final newline;221 remains draft at774/a709.
 No issue closure, release/tag/publication or whole-campaign acceptance occurred.
+
+Current engineering source checkpoint: 428 original evidence files preserve all
+347 earlier originals unchanged and add 81 source-bound reviews, proofs and exact
+canonical proposals. Named integration is still774438b1/tree17c1; no later merge,
+issue closure or Runtime1.0.3 publication is claimed by this checkpoint.
+
+Fresh #302 sourceS′d642/controlC′a346/syntheticf5dd has independently accepted
+three-case actual execution54a855d6. Original seven artifact members, nine sampled
+source files, one publication-details payload and natural HTTP200 return1 before
+separate cleanup are bound explicitly. Complete paginated fresh CI now accounts
+for26 jobs across10 workflows:25SUCCESS and the queued publisher. WindowsRuntime
+and Mac wheel succeeded; admission remains HOLD until the publisher and final
+policy/exact-tuple reconciliation pass. Earlier25-job inventories remain history.
+The prospective Linux wheel11693813383, bound to this S′/C′ tuple, has valid
+member/RECORD integrity and Runtime1.0.3 metadata, but its generated287-byte OAuth
+member contains two measured empty strings. Review5ae089d0 separates directory
+entries, regular members, tracked payloads and generated content. This candidate
+is not a wheel of current integration/#221774 and does not qualify source
+content authority, installed consumers, other platforms, native or publication.
+
+Independently reviewed ordinary actual774 source unions are normally pushed on
+the existing branches: #2995db93e22, #3084ca431b5, #309ec73bb63, #305723397b7,
+#282e9641caa and #3061a3ab0b5. Complete fresh CI and each retained actual scope
+remain required; #300 still follows actual accepted #299 integration. The #309
+census-only source is historical to the active #152 test extension, not merge
+admission for that pending extension. Its grounded proposale21e43b0 specifies a
+real callback-stopped assembled app, file-backed SQLite, post-seed logical SQL /
+file / secret-store snapshots and at most73 deterministic semantic request cells.
+The proposal is retained as a plan, without claiming implementation or whole152.
+
+#305's1,200-pass source union preserves original fixture bytes and the existing
+V5 raw/native/helper/browser subjects. Its273 combined bindings mean268 producer
+inputs plus five selected tests; they are not273 production inputs. Historical
+V5 is still source3ec/native92498, not current723. #282's1,167-pass source union
+preserves all39 strict Canvas controls, all four staging tests and immutable
+helper identities. It recorded two adopted zombies, so complete reaping is
+unproved. Its269 producer inputs have266 matches, two changes and one addition
+against92498, separately from five selected tests; old native remains unqualified.
+The first REST push readback lagged behind the named e964 ref. A subsequent body
+read error was accidentally submitted; the original description is preserved
+inside the corrected current body and exact authenticated restoration is recorded.
+No content, acceptance or source evidence was lost.
+
+#306 original c38 Windows sixFIRST failures remain failed with unavailable
+forwarding/progress/actual-cleanup dimensions. Implemented V2cf6352 preserved
+original watched tests, callbacks, process actions, deadlines and return values,
+and passed1,202 source tests, but independent review held its rounded-clock
+comparison. Frozen failure/HOLD and precision evidence remain separate. Accepted
+ordinary successor1a3ab0b5 compares private absolute monotonic instants, rounds
+only display fields and treats equality as false; a conservative lower bound is
+not the actual Future deadline. Meaningful RED9/5 and GREEN72 controls, scoped94,
+full1,216PASS13SKIP and independent959dd882 are bound to this successor. Fresh
+Windows/full CI remain required; original PostgreSQL/DB proof is preserved,
+without current native/full84 acceptance. Whole GitHub byte/mode inventory and
+all30 YAML/YML parse scope stay distinct from the original29-yml-only roundtrip.
+
+Privately verified scratch batches5 and6 retain original archive/member hashes
+and recorded metadata, including internal hardlink payloads. Existing17 archives
+now retain257,449 recorded members and54 internal hardlink payloads. Expanded
+completed namespaces were deliberately removed only after recorded verification;
+original failed563d remains. These bounded receipts do not infer historical
+complete handles, ACL/xattr/inode/root metadata or exact TAR mtime. Private full
+logs, ZIPs, native/cache trees and complete scratch inventories remain outside
+Git; archive recovery does not pass a failed source gate.
+
+Canonical guidance incorporates exact source-backed wheel/content, observer
+loss/privacy/absolute-clock, late-job registration and successful body-read
+lessons. Imported original patches are preserved byte-for-byte. Whitespace claims
+apply to authored README, manifest and canonical guidance, not historical raw
+patch context. Full54-contract acceptance, private RCC recovery, approved OAuth
+source/content policy, actual product/native/backend/provider scopes, final #221
+union/closure and Runtime release/distribution remain HOLD. Devsy is disabled;
+no Dakota or replacement infrastructure is used. Upstream disposition: none.

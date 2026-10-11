@@ -1,0 +1,39 @@
+{
+  "status": "SCOPED_COMPLETED_SCRATCH_RECOVERY_VERIFIED",
+  "algorithm_scope": "Same already independently reviewed recorded inventory/archive/hash/mode/uidgid/symlink/hardlink-resolution before exact expanded namespace removal; no inferred ACL/xattr/inode/rootmetadata/precise-TAR-mtime or retroactive complete handle census",
+  "private_inventory_binding": {
+    "path": "/tmp/actions-completed-scratch-recovery-batch5/private-complete-inventory-and-recovery.json",
+    "bytes": 12450197,
+    "sha256": "4c445aa8d8ea6dda3f97307403c18bd097b0b08fedb92823745bf47c4e955c23"
+  },
+  "recovery_script_binding": {
+    "path": "/tmp/actions-capacity-recovery-batch5.py",
+    "bytes": 5256,
+    "sha256": "00d2d46a37403b101261ebfafd32b087045ed41e2374b250965d7fe54a8432b7"
+  },
+  "archives": [
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/42a753c86cce8e98",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch5/42a753c86cce8e98.tar.gz",
+      "archive_bytes": 248936762,
+      "archive_sha256": "f6c4858022d26e06a876c967000b5581f7d9fdadb3a6de759cb254decc9cc5b4",
+      "verified_members": 14851,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/8680dc48a62386bb",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch5/8680dc48a62386bb.tar.gz",
+      "archive_bytes": 249067564,
+      "archive_sha256": "4bb9b1a0734c967cb0f8ea7d48643de7d18a98a1f0b9b0b8c4c3345d46ce5d8a",
+      "verified_members": 15011,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    }
+  ],
+  "recorded_members": 29862,
+  "workspace_free_bytes_after": 2903506944,
+  "preserved": "All source,commits,receipts,private compiled natives/consumers/cache/venvs and earlier13archives+4indices and originalfailed563d namespace remain retained",
+  "Documentation_improvement": "Existing7d070 canonical capacity lesson stillcorrect samealgorithm; separate independent review requested",
+  "upstream_disposition": "none"
+}

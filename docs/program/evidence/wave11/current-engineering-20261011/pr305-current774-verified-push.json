@@ -1,0 +1,18 @@
+{
+  "status": "NORMAL_EXISTING_PR_BRANCH_PUSH_VERIFIED",
+  "pr": 305,
+  "head": "723397b748b48282e13480b0ab7e4cb4c7e10c8c",
+  "tree": "a58412bc551d5927580d9d9d6f5fb8989c67ffc2",
+  "branch": "test/canvas-runtime-cache-isolation-20261010",
+  "existing_remote_before": "1e9c462fc16534f1a6153ef666ae60a9ac9560d6",
+  "named_ref_after": "723397b748b48282e13480b0ab7e4cb4c7e10c8c",
+  "current_actual_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "independent_review_sha256": "c8a7ce67653b7accbb9d5e87e9eb61330c997fdec2f48fc21feebc757e8d4348",
+  "full_source1200PASS12SKIP": true,
+  "combined_binding": "268production+5selectedtests=273combined",
+  "original_actual_V5": "ONLY3ec9d0ac/native92498",
+  "retained_full1192_native_and_assets_helper_browser": "SOURCE_PRESERVATION_NOT_NEW_ACTUAL",
+  "old1e9_CI_before_push": "retained nonadmitting snapshot; fresh newhead currenttarget CI required",
+  "no_merge_or_new_actual": true,
+  "upstream_disposition": "none"
+}

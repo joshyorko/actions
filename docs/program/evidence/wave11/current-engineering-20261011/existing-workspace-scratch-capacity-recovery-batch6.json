@@ -1,0 +1,44 @@
+{
+  "archives": [
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/613d8c0bb737d08e",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch6/613d8c0bb737d08e.tar.gz",
+      "archive_bytes": 248927657,
+      "archive_sha256": "7504b4413e7724be8c79b1fbdcc91cfa2b84476f31e3e951aa95245255f51369",
+      "verified_members": 14878,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/b5b01f4732f24619",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch6/b5b01f4732f24619.tar.gz",
+      "archive_bytes": 248922724,
+      "archive_sha256": "357af5c058c1eeb1b31f7b58e9b82d9ca70a821b3e4d98a7157abe4360f0a91c",
+      "verified_members": 14850,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    }
+  ],
+  "status": "SCOPED_COMPLETED_SCRATCH_RECOVERY_VERIFIED",
+  "algorithm_scope": "Same already independently reviewed inventory/archive/hash/mode/uidgid/symlink/internal-hardlink-resolution before exact expanded namespace removal; no inferred ACL/xattr/inode/rootmetadata/precise-TAR-mtime or retroactive complete handle census",
+  "private_inventory_binding": {
+    "path": "/tmp/actions-completed-scratch-recovery-batch6/private-complete-inventory-and-recovery.json",
+    "bytes": 12405983,
+    "sha256": "3ecc541793b0a06154e36e7c9a073904c7483a873ea07dcbb2f1a71cfcae8c9f"
+  },
+  "recovery_script_binding": {
+    "path": "/tmp/actions-capacity-recovery-batch6.py",
+    "bytes": 5256,
+    "sha256": "57b9396bf22ae36c8ea98646a268fc389dac1e8223f68af167291c6da978d267"
+  },
+  "terminal_log_binding": {
+    "path": "/tmp/actions-capacity-recovery-batch6.log",
+    "bytes": 344,
+    "sha256": "7ee627f2346ba825ffaf3fcdadb2294c77b52885543a254ed4eab0a79be25daa"
+  },
+  "recorded_members": 29728,
+  "workspace_free_bytes_after": 2849730560,
+  "preserved": "Prior15archives+5indices/V5runner hashes verified in separate independent reference receipt; failed563d namespace existence only, no unbaselined content or concurrent sourcewriter equality claim",
+  "Documentation_improvement": "Existing7d070 canonical capacity lesson sufficient for same verified algorithm; independent exact delta binding retained",
+  "upstream_disposition": "none"
+}

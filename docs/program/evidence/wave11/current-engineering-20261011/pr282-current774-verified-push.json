@@ -1,0 +1,18 @@
+{
+  "status": "NORMAL_EXISTING_PR_BRANCH_PUSH_VERIFIED_AFTER_INITIAL_REST_CACHE_LAG",
+  "pr": 282,
+  "head": "e9641caaa1f11414fe92874eb40e159cb48604a6",
+  "tree": "6ec12ad4150a1f0d37fb418d5a956e8268a4ffcc",
+  "branch": "feat/canvas-template-20261010",
+  "existing_remote_before": "9c8f1c95caeded6495877280ed1465fd9850b254",
+  "named_ref_after": "e9641caaa1f11414fe92874eb40e159cb48604a6",
+  "current_actual_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "independent_review_sha256": "3304f57cf687dcbc02b3a0cc3f4bc608ed699824d208e193b2b5d928c5784dbd",
+  "source_full1167PASS12SKIP": true,
+  "fresh_hosted_exacttuple": "REQUIRED_NO_OLD26GREEN_CARRY",
+  "native269_producer_inputs": "266_MATCH_2_CHANGED_1_ADDED_OLD92498_UNQUALIFIED",
+  "source_gate_cleanup": "TWO_IMMEDIATE_PPID1_ZOMBIES_COMPLETE_REAP_UNPROVED",
+  "full127_acceptance": "HOLD",
+  "no_merge_or_new_actual": true,
+  "upstream_disposition": "none"
+}

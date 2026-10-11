@@ -1,0 +1,5 @@
+{
+  "stage": "first local receipt construction",
+  "error": "canonical-imported-delta.patch absent because initial proof aborted before capture",
+  "disposition": "Exact old1e9-to-current723 guide diff captured after gates; same frozen source, no source mutation or replay; first failed construction did not emit receipt"
+}

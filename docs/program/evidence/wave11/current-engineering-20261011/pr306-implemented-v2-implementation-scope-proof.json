@@ -1,0 +1,29 @@
+{
+  "parent_merge": "e281cbc05dcf2e42d9b37d8879ad986803e6a5e7",
+  "only_three_authorized_paths": [
+    "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+    "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "all_other_leaf_bodies_modes_exact": 1406,
+  "total_leaves": 1409,
+  "original_observer_AST_exact_after_removing_only_delivered_optional_fields_and_owned_wrapper_call": true,
+  "original_old_test_functions_AST_exact": [
+    "test_failure_keeps_exception_and_observes_before_cleanup",
+    "test_ready_start_cancels_future_samples",
+    "test_observation_failure_does_not_replace_startup_failure",
+    "test_explicit_gate_only_enables_selected_windows_native_nodes",
+    "test_allowlist_omits_poisoned_command_and_stderr",
+    "test_failed_artifact_write_does_not_mask_original_error",
+    "test_snapshot_rejects_descendant_whose_parent_changed",
+    "test_installed_observer_hashes_native_only_after_original_cleanup"
+  ],
+  "new_test_functions": 24,
+  "original_NODES_enabled_snapshot_stderr_summary_file_identity_command_summary_unchanged": true,
+  "original80_88_90_20_50ms_sample_cleanup_join_budgets_unchanged": true,
+  "all_production_DB_guard_fixtures_othercases_toolkit_manifests_lockfiles_workflows_generator_unchanged": true,
+  "production_DB_module_sha256": "c48ff5838d333ebd2c483be30036d9e3b8588d29c8d6dbbe324e247b9168bdd4",
+  "canonical_delta": "36 new lines only; original ordinary merged guide byte-exact after removal",
+  "actual_native_provider_browser_execution": "NONE_NEW",
+  "host_visibility": "delivered stream and actual returned owned cleanup only; native RCC internals/Future/emitter unavailable"
+}

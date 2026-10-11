@@ -1,0 +1,210 @@
+{
+  "verdict": "GO_SCOPED_PRIVATE_ARCHIVE_DATA_AND_RECORDED_MEMBER_METADATA_PRESERVATION; NOT_ACCEPTANCE_OR_BACKUP_OF_UNRECORDED_METADATA",
+  "summary": {
+    "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch5.json",
+    "bytes": 2086,
+    "sha256": "c1fc0008549a122fca3bd5ddceacdcc5505bf4f75e35197d4f347d90c4c7fcce"
+  },
+  "private_inventory": {
+    "path": "/tmp/actions-completed-scratch-recovery-batch5/private-complete-inventory-and-recovery.json",
+    "bytes": 12450197,
+    "sha256": "4c445aa8d8ea6dda3f97307403c18bd097b0b08fedb92823745bf47c4e955c23"
+  },
+  "private_inventory_mode": "0600",
+  "archives_parent_mode": "0700",
+  "two_archives": [
+    {
+      "namespace": "42a753c86cce8e98",
+      "archive": {
+        "path": "/tmp/actions-completed-scratch-recovery-batch5/42a753c86cce8e98.tar.gz",
+        "bytes": 248936762,
+        "sha256": "f6c4858022d26e06a876c967000b5581f7d9fdadb3a6de759cb254decc9cc5b4"
+      },
+      "root_directory_header": 1,
+      "members_verified": 14851,
+      "kinds": {
+        "file": 11591,
+        "directory": 2840,
+        "symlink": 413,
+        "fifo": 7,
+        "hardlink_headers": 3
+      },
+      "resolved_internal_hardlink_data_verified": 3,
+      "logical_regular_file_bytes_verified": 589033310,
+      "completed_recycle_marker_verified": true,
+      "expanded_namespace_absent": true
+    },
+    {
+      "namespace": "8680dc48a62386bb",
+      "archive": {
+        "path": "/tmp/actions-completed-scratch-recovery-batch5/8680dc48a62386bb.tar.gz",
+        "bytes": 249067564,
+        "sha256": "4bb9b1a0734c967cb0f8ea7d48643de7d18a98a1f0b9b0b8c4c3345d46ce5d8a"
+      },
+      "root_directory_header": 1,
+      "members_verified": 15011,
+      "kinds": {
+        "file": 11678,
+        "directory": 2899,
+        "symlink": 427,
+        "fifo": 7,
+        "hardlink_headers": 3
+      },
+      "resolved_internal_hardlink_data_verified": 3,
+      "logical_regular_file_bytes_verified": 589266698,
+      "completed_recycle_marker_verified": true,
+      "expanded_namespace_absent": true
+    }
+  ],
+  "all29862_inventory_member_names_exact_unique": true,
+  "regular_and_hardlink_bytes_size_SHA256_exact": true,
+  "member_mode_uid_gid_exact": true,
+  "symlink_targets_exact_without_dereferencing": true,
+  "internal_hardlink_targets_bounded_to_same_archive_and_payloads_exact": true,
+  "completed_recycle_now_true_markers_verified": true,
+  "existing_two_expanded_namespaces_absent": true,
+  "source_recovery_script": {
+    "path": "/tmp/actions-capacity-recovery-batch5.py",
+    "bytes": 5256,
+    "sha256": "00d2d46a37403b101261ebfafd32b087045ed41e2374b250965d7fe54a8432b7"
+  },
+  "historical_ordering": "Existing script verifies archive, rechecks full inventory and live handles, then writes retained inventory and removes only exact completed namespace; initial regular-only rejection reportedly removed nothing. Independent review does not rerun script or reconstruct historical live fd observation.",
+  "limitations": [
+    "Expanded originals intentionally removed; original byte identity is independently checked against retained pre-removal complete inventory and archive summary, not surviving expanded files.",
+    "Inventory does not record original inode equivalence, root-directory metadata, ACL/xattrs or full nanosecond archive mtime roundtrip; independent GO covers named29862 member bytes/modes/uidgid/symlink targets and archived internal-hardlink data, not unspecified metadata.",
+    "Prior no-live-fd/cwd precondition and untouched-other-path claims are supported by recorded scope/script, not a retroactive independent full filesystem/process census.",
+    "No private archive contents/member names or full89k inventory admitted to Git or tool output; only safe named-namespace aggregate fields and hashes.",
+    "Source/native/consumer/cache/venv unchanged historical assertion not a fresh hash of concurrently mutating source writers. Failed ENOSPC gates remain failed; new bounded gate replay required."
+  ],
+  "review_seconds": 7.278,
+  "upstream": "none",
+  "prior13_archives_4privateindices_summaries_and_reviews_exact_original_hashes_preserved": [
+    {
+      "summary": {
+        "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery.json",
+        "bytes": 3794,
+        "sha256": "bc18bca235d00e9d7ca0f618653ba1c004f6c27afbbf535894cf6d4977cc3c71"
+      },
+      "private_inventory": {
+        "path": "/tmp/actions-completed-scratch-recovery/private-complete-inventory-and-recovery.json",
+        "bytes": 37387430,
+        "sha256": "154be7388533bfed541d9613f60095fe3cf7e12abbd681a9c1d7018469593e71"
+      },
+      "all_archive_bytes_size_SHA_preserved": true,
+      "archive_count": 6,
+      "original_independent_review": {
+        "path": "/workspace/engineering/capacity-recovery-independent-review/independent-archive-preservation-review-v2.json",
+        "bytes": 9595,
+        "sha256": "918485892e6663cedd3bb595824ef181a1ac87f8172a0bc4f026065941b214f6"
+      }
+    },
+    {
+      "summary": {
+        "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch2.json",
+        "bytes": 2403,
+        "sha256": "30bcb73c25914e33eb0705cdb5367cc1a07cfba5f0890eaf8d365876186f3537"
+      },
+      "private_inventory": {
+        "path": "/tmp/actions-completed-scratch-recovery-batch2/private-complete-inventory-and-recovery.json",
+        "bytes": 12519881,
+        "sha256": "29a908b32ef01a4d93ad22f0404403886610f72a1f1c97f1ea48045c19f6bbe8"
+      },
+      "all_archive_bytes_size_SHA_preserved": true,
+      "archive_count": 2,
+      "original_independent_review": {
+        "path": "/workspace/engineering/capacity-recovery-batch2-independent-review/independent-batch2-archive-preservation-review-v2.json",
+        "bytes": 8000,
+        "sha256": "70951f62ce8ecab772976827522c64fd38f7eb2e469421a26256bc2723106ecd"
+      }
+    },
+    {
+      "summary": {
+        "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch3.json",
+        "bytes": 2804,
+        "sha256": "3328b24d3ca8bcdc8998f44f5fe7463a9fadc14a4051b5172ea56312abb0d880"
+      },
+      "private_inventory": {
+        "path": "/tmp/actions-completed-scratch-recovery-batch3/private-complete-inventory-and-recovery.json",
+        "bytes": 13551365,
+        "sha256": "7976469c878721a9a8e27e42962ae9899628aad21b3463174f2aa9ef08cc7e2b"
+      },
+      "all_archive_bytes_size_SHA_preserved": true,
+      "archive_count": 2,
+      "original_independent_review": {
+        "path": "/workspace/engineering/capacity-recovery-batch3-independent-review/independent-batch3-archive-preservation-review-v2.json",
+        "bytes": 8915,
+        "sha256": "82328cb7bc68c77b7e12392e1ad01e1b58cd48a536e8acbb75f0a2cfb1b85219"
+      }
+    },
+    {
+      "summary": {
+        "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch4.json",
+        "bytes": 2636,
+        "sha256": "12e4d0ca481de54144088c824d6130301c650ada23bb647bfd1c96c030b0a431"
+      },
+      "private_inventory": {
+        "path": "/tmp/actions-completed-scratch-recovery-batch4/private-complete-inventory-and-recovery.json",
+        "bytes": 18738722,
+        "sha256": "8b5d93397160d15aaef1b7c5e7bcfe057e31d16961c641732f7627da7a613cb2"
+      },
+      "all_archive_bytes_size_SHA_preserved": true,
+      "archive_count": 3,
+      "original_independent_review": {
+        "path": "/workspace/engineering/capacity-recovery-batch4-independent-review/independent-batch4-archive-preservation-review-v2.json",
+        "bytes": 10686,
+        "sha256": "83d3ace6990571dc9b1e910fd7418e78c55748a4e8090caf2707074426117242"
+      }
+    }
+  ],
+  "algorithm_parity": {
+    "batch5_tool": {
+      "path": "/tmp/actions-capacity-recovery-batch5.py",
+      "bytes": 5256,
+      "sha256": "00d2d46a37403b101261ebfafd32b087045ed41e2374b250965d7fe54a8432b7"
+    },
+    "first_tool": {
+      "path": "/tmp/actions-capacity-recovery.py",
+      "bytes": 5331,
+      "sha256": "07491f6739651fbc9b682bf8dece7080021aeecd694932efbdf2c476520f4554"
+    },
+    "AST_exact_except_names_and_private_output_dirs": true,
+    "scope": "No recovery script execution by independent reviewer; two exact namespace names and existing outputdirs only"
+  },
+  "immutable_reference_spotchecks": {
+    "V5runner": {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/canvas-native-public-runner-v5.py",
+      "bytes": 35497,
+      "sha256": "09cdc6b19f5d3d9cc94fadca23373108868521e0378d33960146b1a8522e88ad"
+    },
+    "failed563d_namespace_exists": true,
+    "scope": "Frozen externalrunner byteidentity and failed563d directory existence only; no unbaselined content equality or current sourcewriter hash claims"
+  },
+  "original_archive_review_preserved": {
+    "path": "/workspace/engineering/capacity-recovery-batch5-independent-review/independent-batch5-archive-preservation-review.json",
+    "bytes": 4069,
+    "sha256": "8bc8602d646e10574c85f9d6af93b637b01ac9ecc07b9aae40caa292ee59b465"
+  },
+  "canonical_documentation": {
+    "file": "docs/skills/repository-operations.md",
+    "repository_instructions_read": {
+      "path": "/workspace/actions/AGENTS.md",
+      "bytes": 5948,
+      "sha256": "9b763b4ba0362a658fdc495a84fdd59528a192fc9490e4627aec2447e52e039f"
+    },
+    "accepted_original_exact_delta": {
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "bytes": 1068,
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    },
+    "current_root_integrated_exact_excerpt": {
+      "path": "/workspace/engineering/capacity-recovery-batch5-independent-review/canonical-existing-capacity-paragraph.md",
+      "bytes": 761,
+      "sha256": "b89b0738700b950d3a2810063f5252d450407523f88e12c3cb14d2c1c3993431"
+    },
+    "disposition": "Existing7d070 capacity paragraph is verbatim integrated and sufficient for same-algorithm fifth batch; no new learning warrants duplicate/cosmetic guide changes",
+    "evidence": "29862 unique members with all internal hardlink payloads and recorded metadata verified; prior13 archive+4index+summary+review hashes unchanged; recovery AST same except2exact names/outputdirs; no original failedgates relabeled",
+    "stale_ambiguity": "A TAR hardlink header is not missing regular data; archived recorded metadata does not qualify unrecorded ACL/xattr/root/inode/mtime or retroactivehandle state; recovered capacity does not pass ENOSPC tests",
+    "remaining_uncertainty": "Expanded originals gone by design; byte proof bounded to retained pre-removal inventory. Full historical handle census and unrecorded metadata unavailable. No baseline content guarantee for failed563d or concurrent source writers. Source/native/private/backend/release gates remain separate",
+    "upstream": "none"
+  }
+}

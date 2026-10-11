@@ -1,0 +1,15 @@
+{
+  "independent_review": {
+    "path": "/workspace/engineering/pr305-fixture-independent-source-review/independent-frozen-fixture-source-review.json",
+    "bytes": 6846,
+    "sha256": "1fc31354ae289b0c00e851048c772854c21ef8444b24eef319f46226af7da419"
+  },
+  "source_checkpoint": {
+    "path": "/workspace/actions-cloud/receipts/pr305-crlf-fixture/frozen-test-fixture-source-checkpoint.json",
+    "sha256": "b5be5088acf921984bac61ac6a39a4be3e1a0152d7168566b08509a07e8a76a0",
+    "bytes": 9810
+  },
+  "source_head": "1e9c462fc16534f1a6153ef666ae60a9ac9560d6",
+  "source_tree": "4d72bd113397900be41b720282736f6ab4999fb2",
+  "preserved": true
+}

@@ -1,0 +1,475 @@
+{
+  "schema": "actions-issue152-grounded-next-test-only-proposal/v1",
+  "status": "PROPOSAL_ONLY_NOT_EXECUTED_NOT_SOURCE_GO",
+  "issue_contract": {
+    "path": "/workspace/engineering/issue152-next-inprocess-proposal/live-issue152.json",
+    "sha256": "6ae5e0f01750b89d557c32d19ba55a0f15dcbc18408deeb5cb32506900aaa094",
+    "url": "https://github.com/joshyorko/actions/issues/152",
+    "updated_at": "2026-09-07T14:52:00Z",
+    "retained_graph_state": "IMPLEMENTED_UNVERIFIED; merged foundation199; no unresolved issue prerequisites; consumer196 remains held"
+  },
+  "existing_branch_and_checkpoint": {
+    "PR": 309,
+    "branch": "test/auth-route-census-20261010",
+    "source": "ec73bb6372c1f613a3e130f0ce92f649d9d40a97",
+    "tree": "481723a9ffb8528709a6c4e437ac5ad0dc40092c",
+    "target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "preserve_history": "Ordinary test-only descendant on same existing branch, preserve complete ec73 ancestry and original Counter census byte/mode. If target changes before writer, root chooses ordinary refresh first. No new branch or API/source production change.",
+    "ci_scope": "Extension invalidates old ec73 source/CI as admission for the new child; require fresh complete exact-head/base tested-tree gates."
+  },
+  "recommended_files": [
+    "action_server/tests/action_server_tests/test_auth_route_enforcement.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "must_remain_unchanged": [
+    "action_server/tests/action_server_tests/test_auth_route_inventory.py",
+    "all production implementations",
+    "generator/all workflows/manifests/locks",
+    "existing tests and historical receipts"
+  ],
+  "matrix": [
+    {
+      "method": "POST",
+      "path": "/api/secrets",
+      "request_or_seed": "global secret envelope",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 and isolated real IN_MEMORY_SECRETS replacement; no global leakage",
+      "denial_observation": "secret store exact prior values"
+    },
+    {
+      "method": "POST",
+      "path": "/api/work-items",
+      "request_or_seed": "{\"payload\":{\"probe\":\"owned-fixture\"}}",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 PENDING persisted item",
+      "denial_observation": "no lazy adapter/database/files initialization or inserted item"
+    },
+    {
+      "method": "GET",
+      "path": "/api/work-items/{item_id}",
+      "request_or_seed": "owned seeded item",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 exact payload",
+      "denial_observation": "no adapter or filesystem access spy, SQL/files unchanged"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/work-items/{item_id}",
+      "request_or_seed": "owned seeded item with attachment",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 deletion; real SQL/file absence",
+      "denial_observation": "item and attachment remain"
+    },
+    {
+      "method": "POST",
+      "path": "/api/work-items/{item_id}/files",
+      "request_or_seed": "tiny owned multipart report.txt",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 bytes persisted",
+      "denial_observation": "no body/upload spool, attachment or adapter mutation"
+    },
+    {
+      "method": "GET",
+      "path": "/api/work-items/{item_id}/files/{filename}",
+      "request_or_seed": "owned attachment",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 exact bytes + download header",
+      "denial_observation": "no private response bytes; SQL/files unchanged"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/work-items/{item_id}/files/{filename}",
+      "request_or_seed": "owned attachment",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 deletion",
+      "denial_observation": "attachment exact bytes remains"
+    },
+    {
+      "method": "POST",
+      "path": "/api/schedules",
+      "request_or_seed": "name=owned-fixture,schedule_type=interval,interval_seconds=60,enabled=false",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 exact row with no scheduler work",
+      "denial_observation": "schedule rows/counters unchanged"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/schedules/{schedule_id}",
+      "request_or_seed": "owned disabled schedule; name change only",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 persisted rename",
+      "denial_observation": "original row exact"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/schedules/{schedule_id}",
+      "request_or_seed": "owned disabled schedule",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 deletion",
+      "denial_observation": "schedule/execution rows exact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/runs/summary",
+      "request_or_seed": "owned sample Run seed",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 expected summary projection",
+      "denial_observation": "no private response fields; Run/counter rows unchanged"
+    },
+    {
+      "method": "GET",
+      "path": "/api/runs/{run_id}/artifacts/binary-content",
+      "request_or_seed": "artifact_name=payload.bin owned binding",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 exact bytes",
+      "denial_observation": "no private bytes returned; SQL/files/binding exact"
+    },
+    {
+      "method": "GET",
+      "path": "/api/runs/{run_id}/log.html",
+      "request_or_seed": "owned finite log.html with no live robolog",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 exact finite log body (not live stream lifecycle)",
+      "denial_observation": "no private bytes returned or file generation"
+    },
+    {
+      "method": "GET",
+      "path": "/artifacts/{run_id}/payload.bin",
+      "request_or_seed": "owned run-scoped binding",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 exact bytes",
+      "denial_observation": "no private bytes; binding/files unchanged"
+    },
+    {
+      "method": "HEAD",
+      "path": "/artifacts/{run_id}/payload.bin",
+      "request_or_seed": "owned run-scoped binding",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 expected length, empty body",
+      "denial_observation": "403 empty body; no files/SQL changed"
+    },
+    {
+      "method": "GET",
+      "path": "/api/analytics/summary",
+      "request_or_seed": "owned Run seed",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 real SQL-derived bounded result",
+      "denial_observation": "no private summary returned; SQL unchanged"
+    },
+    {
+      "method": "GET",
+      "path": "/api/actionPackages",
+      "request_or_seed": "owned ActionPackage/Action seed",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 real registered package identity",
+      "denial_observation": "no private package content returned"
+    },
+    {
+      "method": "GET",
+      "path": "/api/robots/catalog",
+      "request_or_seed": "explicit owned robots-home fixture only",
+      "missing_key_expected": "403; zero protected state/read/handler side effects",
+      "wrong_key_expected": "403; same snapshot unchanged",
+      "valid_key_control": "200 bounded empty/owned catalog",
+      "denial_observation": "no directory discovery call, files unchanged"
+    }
+  ],
+  "credential_cells": {
+    "forms": [
+      "missing Authorization header",
+      "Authorization: Bearer fixed wrong synthetic test key",
+      "Authorization: Bearer fixed valid synthetic test key"
+    ],
+    "main_rows": 18,
+    "main_cells": 54,
+    "not_real_credentials": true,
+    "no_logging_header_payloads": true
+  },
+  "additional_bounded_controls": [
+    {
+      "case": "Robot import multipart denial only",
+      "method": "POST",
+      "path": "/api/robots/import",
+      "cells": 2,
+      "keys": [
+        "missing",
+        "wrong"
+      ],
+      "body": "tiny valid-shape .zip upload; no real import",
+      "observations": "403; receive/spool and _save_uploaded_robot/_publish_robot_package/_download_from_url sentinels never reached; owned files and SQL unchanged",
+      "positive_scope": "Optional correct-key malformed ZIP returns own importer validation (success=false), not accepted successful import; valid importer publication remains a later distinct slice."
+    },
+    {
+      "case": "Robot run denial only",
+      "method": "POST",
+      "path": "/api/robots/run",
+      "cells": 2,
+      "keys": [
+        "missing",
+        "wrong"
+      ],
+      "body": "valid model shape with owned robot_package_path and task_name; never executed",
+      "observations": "403; Run/counter logical rows, artifact tree and run bindings unchanged; no background task/RCC/provider calls",
+      "positive_scope": "No valid-key execution requested or qualified by this proposal."
+    },
+    {
+      "case": "Dynamic Action run denial only",
+      "method": "POST",
+      "path": "/api/actions/greeter/greet/run",
+      "cells": 2,
+      "keys": [
+        "missing",
+        "wrong"
+      ],
+      "body": "valid schema input name=owned-fixture",
+      "observations": "403; _actions_run._create_run/_create_run_artifacts_dir and process pool sentinels never reached; Run/counters/files exact",
+      "positive_scope": "No valid-key process/native execution; retain real sample registered route instead of substitute probe handler."
+    },
+    {
+      "case": "Assembled native WebSocket auth",
+      "methods": [
+        "WEBSOCKET"
+      ],
+      "paths": [
+        "/api/ws",
+        "/api/ws/summary"
+      ],
+      "cells": 6,
+      "keys": [
+        "missing",
+        "wrong",
+        "valid"
+      ],
+      "observations": "missing/wrong disconnect1008 before accept/connection-state registration; valid native SocketServer echo handshake on trusted fixture Origin then close/zero residual socket state",
+      "limits": "This is TestClient/ASGI native WebSocket, no network/TLS or browser acceptance. Budgeted close required; do not mock websocket endpoint as auth proof."
+    },
+    {
+      "case": "Assembled static private-file refusal",
+      "paths": [
+        "/artifacts/.action-server-run-bindings.json",
+        "/artifacts/unrelated.txt",
+        "/artifacts/missing/payload.bin"
+      ],
+      "cells": 3,
+      "keys": [
+        "valid"
+      ],
+      "observations": "404, no storage-internal bytes; incoming mount composition proof only. Existing full containment/symlink/range test remains unchanged and is cited rather than copied."
+    },
+    {
+      "case": "Public bootstrap compatibility",
+      "paths": [
+        "/config",
+        "/"
+      ],
+      "cells": 2,
+      "keys": [
+        "missing"
+      ],
+      "observations": "200 intentional public config/UI with key configured; retain actual policy rather than invent health endpoints."
+    },
+    {
+      "case": "Intentional local no-key operation",
+      "cells": 2,
+      "paths": [
+        "/api/runs/summary",
+        "/api/work-items"
+      ],
+      "observations": "fresh api_key=None fixture, no Authorization, real owned read/seed operation succeeds; no remote-hosting extrapolation."
+    }
+  ],
+  "cap": {
+    "maximum_initial_semantic_request_cells": 73,
+    "maximum_focus_wall_seconds": 180,
+    "run_workers": 0,
+    "budget_is_proposal_not_measured": true,
+    "failure_action": "On baseline fixture/source failure, freeze exact error/state and stop; no masked skips, retries, widened deadlines, production fix or broader source work without root review."
+  },
+  "fixture_design": {
+    "assembly": "Mirror original census callback stop on real start_server; create real settings datadir/artifacts roots/server_url on loopback; expose=false,auto_reload=false,redis_url/password=None, scheduler/triggers disabled, min/max pool0; maintain file-backed create_db(tmp_path/server.db) context and exact ActionPackage/Action/Run seeds through TestClient requests; never reinclude routers manually.",
+    "threading": "File-backed SQLite required: Database thread-local connect opens separate connections in TestClient workers. Registration-only :memory: census is retained unchanged.",
+    "application_lifecycle": "Use plain TestClient without entering MCP/custom app lifespan when unnecessary for HTTP; no server process, socket, provider, installer or pool startup. For actual native WS use existing SocketServer and bounded connect/echo/close. Guard Uvicorn/pool startup as census does; failure if any attempted.",
+    "owned_state": "Fresh isolated InMemorySecrets instance; reset/restore _api_work_items._adapter, get_app cache, mode config, scheduler, global runs state and socket singleton maps through existing helpers/fixtures. Every created fixture resource under own tmp_path/TMPDIR; dedicated existing robots home helper confined to own root if catalog used. Do not alter host/shared profiles.",
+    "snapshot": "After legitimate seeding, compare canonical sorted logical SQL rows for ALL application tables incl Run/Counter/Schedule/Execution/OAuth/UserSession and Work Items tables; compare separate secret-store values, owned directory entries and exact file hashes excluding SQL physical journaling replaced by logical-row snapshots. First request pair before valid Work Item creation also proves no lazy DB/files existence. Never mistake same row counts for same state.",
+    "sentinels": "Read/handler/import/execution/provider/pool spies wrap real low-level boundaries only in denial cells or fail if reached; no mocked handler success or substitute app. All deterministic positive controls use real handlers/SQLite/files. Seed legit state before each negative snapshot; do not compare against pre-fixture setup.",
+    "secrecy": "Only synthetic fixtures; suppress request headers, secret-store payloads and DB contents in durable receipt. Store hashes/counts/allowlisted status/case IDs/source tuple. Failures may remain owned private logs."
+  },
+  "non_duplication": {
+    "existing": "test_server.py1060-1274 already covers selected native assembled authorized reads, missing-key mutations/uploads, protected OAuth and public webhook; test_artifact_storage.py41-115 covers run-scoped auth/HEAD/range/containment on helper-mounted app; test_browser_session.py covers helper-app cookie/origin and assembled native selected reads; test_server.py1276 covers raw middleware body receive; original309 Counter census only registration.",
+    "new_value": "Systematic missing+wrong+valid controls with real assembled router/mount/WS composition and per-request full logical/owned state snapshots; wrong-key mutation/delete preservation, native HTTP positive state operations without RCC bootstrap, independently observed pre-RCC denial ordering.",
+    "excluded_duplication": "Do not copy existing Counter inventory or helper containment/origin tests; use original census unchanged and cite retained exact sources; no new workflow/infrastructure."
+  },
+  "proof_plan": {
+    "no_known_production_bug_claim": "Gap is acceptance coverage; no original-source RED or production defect is asserted from review.",
+    "first": "Build minimal real fixture and valid-key deterministic baselines first. Preserve any real baseline failure separately; do not equate 422/404/503 with positive mutation/execution acceptance.",
+    "meaningful_RED": "In an owned external proof copy or bounded mutation-control fixture only, replace BrowserSessions.authorized with always-true for one wrong-key WorkItem POST and one wrong-key Secrets POST so both middleware and dependency checks are bypassed; original403 and unchanged-state assertions must fail and show concrete owned mutation. Separately bypass only mounted APIKeyAuthBackend for protected artifact GET; leaked exact fixture bytes must be rejected by assertions. Mutation scopes use synthetic data only; never commit altered production behavior.",
+    "GREEN": "Restore exact pinned auth source/fixture, same cases pass with403 and unchanged logical/file/store snapshots; correct-key real create/read/delete and artifact bytes still pass. Keep RED/GREEN separate and hashes/source pins exact.",
+    "not_a_proof": "A no-RCC-call assertion, raw response !=403, registration counter, schema422 or mocked handler is not successful auth/mutation/dispatch acceptance."
+  },
+  "required_writer_checks": {
+    "gateway": "Pinned Josh RCC18.19.3 Doctor, exact authorized24input/five own environment reuse or Bootstrap, ToolkitTest; no host install or ad hoc runner.",
+    "focus": "new enforcement file plus unchanged census, appropriate existing browser-session/artifact/server source cases; cap180s, -n0, no integration/native/provider/browser selection.",
+    "full": "Configured full Runtime source suite plus package Ruff/format/Isort/Mypy and git diff --check; record all skips and deselections, source head/tree and import origins; no broad unrelated packages.",
+    "preservation": "Original census byte+mode, entire production and all workflow/generator AST/output bytes, all historical receipt bytes; complete parent union; docs-only production input delta none.",
+    "hosted": "Root obtains fresh complete current child/full source and actual tested merge/base checks; no old ec73 green carry and no issue closure."
+  },
+  "public_and_policy_boundaries": {
+    "source_authority": "_ConfiguredAPIKeyMiddleware._is_public plus actual Counter census; protected API routers+legacy OAuth GET, nativeWS dependency, separate MCP/static auth backends.",
+    "explicit_public": "/config; OAuth login/callback exceptions (/oauth2/login[/],/actions/oauth2[/]); registered public webhook prefix; framework docs/openapi and UI shell outside protected-prefix policy. No invented health resource. Existing exception handler validation/provider behavior remains separate.",
+    "OPTIONS": "Actual CORS preflight is middleware exception and existing request-level CORS tests own it; do not impose bearer403 on preflight.",
+    "HEAD": "Static mounted FileResponse supports HEAD as existing tests prove; APIRoute GET-only method sets must not be silently widened. A keyed405 on unsupported API HEAD is method behavior, not successful protected delivery.",
+    "workspace": "APIKeyAuthBackend SimpleUser(authenticated), server-key and same-origin session scope; no Workspace principal/binding policy is invented. #129/#83/#86 ownership and durable identity criteria remain separate."
+  },
+  "remaining_gates": [
+    "All protected registered routes not covered by this bounded18-row slice, including schedule groups/triggers, protected legacy OAuth mutation/refresh/logout, remaining Run cancellation/artifact text variants and public webhook configured-secret contract",
+    "Valid robot/action native/RCC execution, scheduler-trigger execution, successful real robot import/publication; denied sentinels cannot qualify those positive paths",
+    "Real-browser origin/ambient credential matrix of153, remote TLS/proxy/native packaged source/binary identities, external provider services or private vault integration",
+    "Workspace ownership/bindings/principal contracts129/83/86 are absent from current152 server-key boundary, not waived or inferred",
+    "Full issue152 and consumer196 externally reachable hosting remain HOLD; issue has no unresolved prerequisite to begin this bounded local slice"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact proposed insertion following existing assembled census boundary",
+    "Exact_delta": {
+      "path": "/workspace/engineering/issue152-next-inprocess-proposal/canonical-proposed-delta.patch",
+      "bytes": 1763,
+      "sha256": "9dd5249ebbd12785eb99d7a9d03777e710a458934e54f035e53f416b48177e58"
+    },
+    "Durable_learning_captured": "File-backed SQLite for thread-local real TestClient requests; keep fixture context alive; post-seeding all-row/owned-state snapshots; robot Run/counter/artifact writes precede RCC and generic server auth is not Workspace identity.",
+    "Evidence": "Exact ec73 source manifest: Database434/476-501, models493-537, server819-821 capture stop; robot997-1073 writes before RCC; actual auth backend74-99 and BrowserSessions136-151; live152 requires real HTTP+zero side effects and valid positive controls.",
+    "Stale_or_ambiguous_guidance_removed": "Clarifies why registration-only memory DB cannot be reused as shared HTTP request database, why no-RCC-call does not prove no writes, and why valid-key validation is not execution acceptance. Does not claim proposed tests are already implemented.",
+    "Remaining_uncertainty": "Proposal not run; focused wall time and exact fixture dependency/lifespan details must be measured by writer. Real native/provider/browser/workspace/full152 gates stay open."
+  },
+  "source_manifest": {
+    "action_server/src/actions/server/_server.py": {
+      "git_blob": "3684b01c4155ca8efd35d5f6b318c6aefcb8efe3",
+      "sha256": "3be0ce254252211270fecf2906da2cec5d438b3203fefd68ad3d0731cf4d42bb"
+    },
+    "action_server/src/actions/server/_api_action_routes.py": {
+      "git_blob": "7e5ad63318ea9073ad2ef806ff95e18495c5eca7",
+      "sha256": "9f8135a8bdb238bb1c83e91a1612d0814cec7309d7b32075157db719194540e3"
+    },
+    "action_server/src/actions/server/_browser_session.py": {
+      "git_blob": "f6c21fcd85122990b288b57d4aa779decc703bc1",
+      "sha256": "cec334983ec8e77e786383af93dcea9fc527f498ba25d81748f97557598751f4"
+    },
+    "action_server/src/actions/server/_database.py": {
+      "git_blob": "e7d9e6d06d8db537c81a24888615f9b7b74e8753",
+      "sha256": "5d3776fb85a36604b5c9dbc2c2169ee2770734330fea90ceda507515e4fc4638"
+    },
+    "action_server/src/actions/server/_models.py": {
+      "git_blob": "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb",
+      "sha256": "530cdbfe913495b9eaff54bc029ef1340840d1598aff205d3e6047ea4d296a73"
+    },
+    "action_server/src/actions/server/_api_secrets.py": {
+      "git_blob": "21c1ada7f23b57de94ac823844a78d48266ac7dc",
+      "sha256": "58e59aeb7141ea16741a765d52e72ba119c53706b6aa15bd40a6d1018cd865b3"
+    },
+    "action_server/src/actions/server/_api_work_items.py": {
+      "git_blob": "533baa128a57150dea017f5dc23035f97a102d0c",
+      "sha256": "ce4c396419dc4d2b4db92b2a16798c81a1086b72b1d858f7ade1374de3e7e788"
+    },
+    "action_server/src/actions/server/_api_schedules.py": {
+      "git_blob": "3584a6ce6b9b2a35c6d351dfebd45a1a81d5fd0b",
+      "sha256": "e51f4f54caffaa79a5d967a463280e7cd3a2172d2d7e290109ed601ae5ca6854"
+    },
+    "action_server/src/actions/server/_api_robots.py": {
+      "git_blob": "62e74c5492f81158f1f6c89991c10ac3c930b5c5",
+      "sha256": "e1d5ad71aa1a96b0c3356e61a31f8372023d5b155151b3e09998023ebe29c3b1"
+    },
+    "action_server/src/actions/server/_actions_run.py": {
+      "git_blob": "3637cfcd94e5d91f0bf5b9b2fc4b3e94d4562826",
+      "sha256": "4e6d1c0be66939a3e87719f52f47083822506d1936a6c036d0f73ed522b5b702"
+    },
+    "action_server/src/actions/server/_api_run.py": {
+      "git_blob": "424094841a29bd11d6bc7fb0f3b9e528573353d9",
+      "sha256": "0e4ff75583d1754b1c4e2bceb8e1b411718cf7ce3c4a066588ab25744f04a9c6"
+    },
+    "action_server/src/actions/server/_api_oauth2.py": {
+      "git_blob": "6ac81bef654d52898c9e0792c418e38562e67887",
+      "sha256": "406801434c900a4f92898b9287ec9e66581f1c4ca504e0e939482646e05fbceb"
+    },
+    "action_server/src/actions/server/_api_triggers.py": {
+      "git_blob": "9181af4fe6ebc6e244c0f828dfb4bd538b234f4d",
+      "sha256": "d7a08d434704bc25e368bff5d34de52d946ec19d7506a305d64646bec71ce315"
+    },
+    "action_server/src/actions/server/_artifact_storage.py": {
+      "git_blob": "fd723d35156102e7b6bb47d5ac8dfc28706494c8",
+      "sha256": "a81ba60bc0be372db784ecb0c14639305cfe21d6f64cd96f693288b543dd9f12"
+    },
+    "action_server/src/actions/server/_server_websockets.py": {
+      "git_blob": "e98fb04d7f04f3df3ebbf332fc50eb375e193713",
+      "sha256": "e5a10a74683def5fc98537706aca113b1aedce0d1d177229fd9fcfa772979081"
+    },
+    "action_server/src/actions/server/_scheduler.py": {
+      "git_blob": "608c9c154221e5fedb6651d44843624032c6494b",
+      "sha256": "679f188f4d2619d5a5690ae8995d77e1e35baa40fab86e91491c05cbe0dd90d5"
+    },
+    "action_server/tests/action_server_tests/test_auth_route_inventory.py": {
+      "git_blob": "e1e4b314d6a535fec2175da2b5224105e4d7f8fd",
+      "sha256": "a268effcf8629cfa8cd320442c484cb49e7f458c417327e17f132306bb6517eb"
+    },
+    "action_server/tests/action_server_tests/test_server.py": {
+      "git_blob": "71c732a0a9d2bf055e72b7c6d1ee707968b93baa",
+      "sha256": "603acb40e78e89c207286002fa17788bddafc744080b62e0ec73c73b8e74710f"
+    },
+    "action_server/tests/action_server_tests/test_browser_session.py": {
+      "git_blob": "7fbd1e595a96a9bb7dfe25e8b004339bf27d7aad",
+      "sha256": "d7e03874bc0414bd1ded979313e9f704663e0423a1b6937caa9e14b091684715"
+    },
+    "action_server/tests/action_server_tests/test_artifact_storage.py": {
+      "git_blob": "82610d002eeacedb525cc004e6d56bca18af5a17",
+      "sha256": "a19fda9b494f645883c3fbc1494c15d1786d6926ddefe1090cc1f7779da6fb34"
+    },
+    "action_server/tests/action_server_tests/test_server/test_work_items_files.py": {
+      "git_blob": "160082f73617f588bc1e549a457c7eaba94d432a",
+      "sha256": "4e81fcf512fc83be5c2e8d9e060c4c81c4a789c931ecfd09ead8b99f8e5d9c95"
+    },
+    "action_server/tests/action_server_tests/test_api_robots.py": {
+      "git_blob": "ec183cd5d68fb514120e6bf9de72a554d22dd546",
+      "sha256": "453e7261fdbe690cf6916654d4f41a0041bfd2c76596dbaee5bcf1b0b4395eb0"
+    },
+    "action_server/tests/action_server_tests/sample_data.py": {
+      "git_blob": "d01eddbe203a53e16eb3337054de7ca07bd2805c",
+      "sha256": "31069da5cea75f93a38b04c474e711c7a3277d8a5403458710501ab70bceb0ca"
+    },
+    "docs/skills/repository-operations.md": {
+      "git_blob": "82522232ee447d7ac9666535460b2b27b0bc58c0",
+      "sha256": "f6844ee518be31d6949c80bf26950d545227ac382789a2f1a6bc2ef6a2f0c793"
+    },
+    "AGENTS.md": {
+      "git_blob": "9849912567247208e4b55d54ef19e306e78f45ca",
+      "sha256": "c7980454a13763bf49430a4e8f8ed56b10b754392fb295adac92ff0e3e6b1f4d"
+    },
+    ".agents/skills/actions-repository/SKILL.md": {
+      "git_blob": "9b1c5be7786b759159ae4b6385b952c47b1ba94f",
+      "sha256": "772ad88363ef92bc0dc4a0c9bb5b81f78fa4d54cc3c14be0aa5e7fc9b467bd94"
+    },
+    "docs/skills/README.md": {
+      "git_blob": "b8eb53b0bcb19c8cfadc72490d7a5a7a3106fa60",
+      "sha256": "bd584b2de9acddf3e6d640990e05a77dc36323f0972941563b6fd5b7c516d8e3"
+    },
+    "docs/skills/upstream-reporting.md": {
+      "git_blob": "05c293b270dd163ef1c10cbc4c249ba71bc8cfa7",
+      "sha256": "5f3b4f816ba609c56f5ce7a07e902b9b9e0df975b21a191291446edca54065f7"
+    }
+  },
+  "upstream_disposition": "none",
+  "reviewer_actions": "Read-only source and live issue/PR metadata; owned exact proposal/patch files only; no gateway/tests/auth requests/source edits/branch/push/merge/external messages"
+}

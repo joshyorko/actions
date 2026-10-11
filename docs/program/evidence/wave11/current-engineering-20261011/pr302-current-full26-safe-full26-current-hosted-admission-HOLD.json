@@ -1,0 +1,510 @@
+{
+  "status": "HOLD_FINAL_SCOPED_INTEGRATION_LATE_PUBLISHER_QUEUED",
+  "captured_at_utc": "2026-10-11T07:23:08.304Z",
+  "one_bounded_readback_no_polling": true,
+  "tuple": {
+    "control": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "named_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "synthetic_tested_merge": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+    "synthetic_ordered_parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ],
+    "synthetic_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "control_tree_equals_synthetic": true,
+    "source_candidate_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4"
+  },
+  "named_ref_live_PR_and_synthetic_tuple_verified": true,
+  "strict_optin_control_source_pin_verified": true,
+  "full_registered_coverage": {
+    "checks": 26,
+    "jobs": 26,
+    "workflow_runs": 10,
+    "checks_page1_per100_total26_returned26_complete": true,
+    "runs_page1_per100_total10_returned10_complete": true,
+    "all10jobs_endpoints_page1_per100_total_equals_returned": true,
+    "check_ids_names_statuses_headsha_match_all_job_ids_exact": true,
+    "declared_current_event_workflow_job_counts": {
+      "38118859516": 6,
+      "38118859472": 1,
+      "38118859587": 4,
+      "38118859588": 3,
+      "38118859475": 5,
+      "38118859503": 1,
+      "38118859480": 1,
+      "38118859493": 3,
+      "38118856645": 1,
+      "38118856632": 1
+    },
+    "full_expected26_registered_including_dependent_publish": true
+  },
+  "current_census": {
+    "checks": {
+      "queued": 1,
+      "success": 25
+    },
+    "jobs": {
+      "success": 25,
+      "queued": 1
+    }
+  },
+  "all10flows_current_jobs": [
+    {
+      "run_id": 38118859516,
+      "workflow_path": ".github/workflows/developer_toolkit.yml",
+      "name": "RCC developer toolkit",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "status": "completed",
+      "conclusion": "success",
+      "page": 1,
+      "per_page": 100,
+      "total_count": 6,
+      "pagination_complete": true,
+      "jobs": [
+        {
+          "id": 114409246280,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:07Z",
+          "completed_at": "2026-10-11T06:44:47Z"
+        },
+        {
+          "id": 114409246481,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:44:44Z"
+        },
+        {
+          "id": 114409246504,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:48:18Z"
+        },
+        {
+          "id": 114409246525,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:47:43Z",
+          "completed_at": "2026-10-11T06:51:21Z"
+        },
+        {
+          "id": 114409246528,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:15Z",
+          "completed_at": "2026-10-11T06:51:45Z"
+        },
+        {
+          "id": 114409246558,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:46:18Z",
+          "completed_at": "2026-10-11T06:49:30Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859472,
+      "workflow_path": ".github/workflows/coverage-gate.yml",
+      "name": "Measured Python coverage gate",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "status": "completed",
+      "conclusion": "success",
+      "page": 1,
+      "per_page": 100,
+      "total_count": 1,
+      "pagination_complete": true,
+      "jobs": [
+        {
+          "id": 114409246216,
+          "name": "coverage",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:43:43Z",
+          "completed_at": "2026-10-11T06:54:29Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859587,
+      "workflow_path": ".github/workflows/actions_core_tests.yml",
+      "name": "Actions Core Tests",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "status": "completed",
+      "conclusion": "success",
+      "page": 1,
+      "per_page": 100,
+      "total_count": 4,
+      "pagination_complete": true,
+      "jobs": [
+        {
+          "id": 114409246670,
+          "name": "build (macos-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:46:05Z",
+          "completed_at": "2026-10-11T06:47:37Z"
+        },
+        {
+          "id": 114409246802,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:43:35Z",
+          "completed_at": "2026-10-11T06:44:52Z"
+        },
+        {
+          "id": 114409246833,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:44:28Z",
+          "completed_at": "2026-10-11T06:47:27Z"
+        },
+        {
+          "id": 114409246836,
+          "name": "candidate-wheel",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:43:48Z",
+          "completed_at": "2026-10-11T06:44:27Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859588,
+      "workflow_path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "name": "Action Server Build (Unauthenticated)",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "status": "completed",
+      "conclusion": "success",
+      "page": 1,
+      "per_page": 100,
+      "total_count": 3,
+      "pagination_complete": true,
+      "jobs": [
+        {
+          "id": 114409246790,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:42:03Z",
+          "completed_at": "2026-10-11T06:51:18Z"
+        },
+        {
+          "id": 114409246866,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:48:19Z",
+          "completed_at": "2026-10-11T06:52:35Z"
+        },
+        {
+          "id": 114409246884,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:51:36Z",
+          "completed_at": "2026-10-11T06:58:11Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859475,
+      "workflow_path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "name": "Actions Runtime PYPI Release",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "status": "queued",
+      "conclusion": null,
+      "page": 1,
+      "per_page": 100,
+      "total_count": 5,
+      "pagination_complete": true,
+      "jobs": [
+        {
+          "id": 114409246153,
+          "name": "build-wheels (macos-15)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T07:09:35Z",
+          "completed_at": "2026-10-11T07:12:09Z"
+        },
+        {
+          "id": 114409246244,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:43:42Z"
+        },
+        {
+          "id": 114409246265,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:42:01Z"
+        },
+        {
+          "id": 114409246328,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:45:56Z"
+        },
+        {
+          "id": 114414257399,
+          "name": "publish (3.12)",
+          "status": "queued",
+          "conclusion": null,
+          "started_at": "2026-10-11T07:12:09Z",
+          "completed_at": null
+        }
+      ]
+    },
+    {
+      "run_id": 38118859503,
+      "workflow_path": ".github/workflows/ai-audit.yml",
+      "name": "AI audit evidence",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "status": "completed",
+      "conclusion": "success",
+      "page": 1,
+      "per_page": 100,
+      "total_count": 1,
+      "pagination_complete": true,
+      "jobs": [
+        {
+          "id": 114409246163,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:41:14Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859480,
+      "workflow_path": ".github/workflows/copilot-setup-steps.yml",
+      "name": "Copilot Setup Steps",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "status": "completed",
+      "conclusion": "success",
+      "page": 1,
+      "per_page": 100,
+      "total_count": 1,
+      "pagination_complete": true,
+      "jobs": [
+        {
+          "id": 114409246083,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:43:47Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859493,
+      "workflow_path": ".github/workflows/actions_runtime_tests.yml",
+      "name": "Action Server Tests",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "status": "completed",
+      "conclusion": "success",
+      "page": 1,
+      "per_page": 100,
+      "total_count": 3,
+      "pagination_complete": true,
+      "jobs": [
+        {
+          "id": 114409246186,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T07:18:51Z"
+        },
+        {
+          "id": 114409246268,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:59:19Z"
+        },
+        {
+          "id": 114409246292,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:49:11Z",
+          "completed_at": "2026-10-11T07:06:44Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118856645,
+      "workflow_path": ".github/workflows/copilot-setup-steps.yml",
+      "name": "Copilot Setup Steps",
+      "event": "push",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "status": "completed",
+      "conclusion": "success",
+      "page": 1,
+      "per_page": 100,
+      "total_count": 1,
+      "pagination_complete": true,
+      "jobs": [
+        {
+          "id": 114409238527,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:03Z",
+          "completed_at": "2026-10-11T06:43:34Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118856632,
+      "workflow_path": ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+      "name": "Action Server RCC provider rollback acceptance",
+      "event": "push",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "status": "completed",
+      "conclusion": "success",
+      "page": 1,
+      "per_page": 100,
+      "total_count": 1,
+      "pagination_complete": true,
+      "jobs": [
+        {
+          "id": 114409238566,
+          "name": "build",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:03Z",
+          "completed_at": "2026-10-11T06:44:36Z"
+        }
+      ]
+    }
+  ],
+  "late_publisher": {
+    "id": 114414257399,
+    "run_id": 38118859475,
+    "name": "publish (3.12)",
+    "status": "queued",
+    "conclusion": null,
+    "now_registered": true,
+    "source_workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+    "source_blob_sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+    "depends_on": [
+      "build-sdist",
+      "build-wheels"
+    ],
+    "all4builders_terminal_success": true,
+    "future_scope": "Pending PR-canary artifact validation is not authorized publication; tag/credentials/release-source conditions stay unchanged."
+  },
+  "Windows_Runtime_and_Mac_wheel_terminal": {
+    "Windows_Runtime_job": 114409246186,
+    "Windows_Runtime_conclusion": "success",
+    "Mac_wheel_job": 114409246153,
+    "Mac_wheel_conclusion": "success",
+    "evidence": "Original current API job/check state at exactC; no new log acquisition. Historical generic302_runtime_windows/mac logs carry63cf/ba04 and are NOT borrowed for current checkout identity."
+  },
+  "statuses_reviews_threads": {
+    "legacy_status_count": 0,
+    "legacy_combined_state": "pending",
+    "reviews": 0,
+    "review_threads": 0
+  },
+  "policy": {
+    "base_protected": false,
+    "rulesets": [],
+    "protection_endpoint": "403 administration permission unavailable; not a proof of absence of full protection policy"
+  },
+  "PR": {
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "mergeable_state": "unstable"
+  },
+  "fresh_narrow_actual": {
+    "receipt": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/independent-fresh-three-case-actual-review.json",
+    "sha256": "54a855d62a41645ec53476d7d212cf8bc3a743520c952dca4005790876afc20c",
+    "archive_and_full_log_hashes_unchanged": true,
+    "all7original_members_hashes_unchanged": true,
+    "original_private0600_retained": true,
+    "strict_summary_admission_true_noissues": true,
+    "source_candidate_and_control_pin_exact": true,
+    "all9source_Git_hash_mode_records_authenticated_again": true,
+    "new_acquisition": "NONE; retained private local bytes only"
+  },
+  "past_inventory_identity": {
+    "path": "/workspace/engineering/pr302-current-bounded-reconciliation/safe-current-full-CI-reconciliation-HOLD.json",
+    "sha256": "755f4bb506207d3cdfe22be21a156e7836e4513ee87302f55348b1eb3b6fdd42",
+    "transition": "Earlier25registered/23SUCCESS/2pending cannot substitute for current26; current25SUCCESS leaves dependentpublisher pending."
+  },
+  "first_new_terminal_failure": "NONE at current captured26checks/jobs; no private log acquisition proposal required. If this queued publisher later fails, root should authorize one original terminal full-log acquisition bound to114414257399/38118859475/a346/f5dd before source diagnosis.",
+  "next_ready_dependency": "Natural terminal completion of publish(3.12) job114414257399 then one bounded exacttuple26checks/26jobs/10flows/status/review/threads/policy reconciliation. No busy polling/manual rerun. No final integrationGO now.",
+  "release_and_other_HOLDs": [
+    "Independently owned prospective Linux wheel287B generated OAuth module contains two measured empty strings; not approved OAuth source/content or release fallback",
+    "Current fullproducer/platform/coldregistry/install/native gates distinct; changed runtimeadapter means92498UNQUALIFIED",
+    "Private full134/135 metadata and release/publication remainHOLD; narrow3case/Core102 natural cleanup scope retained, no universal/process/native/platform claims"
+  ],
+  "raw_private_metadata": {
+    "path": "/workspace/engineering/pr302-full26-current-hosted-admission/original-current-API-metadata-private.json",
+    "size": 804508,
+    "sha256": "987da9dda3fa9d160cf86f841cddedefa6656616220e23090a2dd35efa201a1e",
+    "mode": "0600"
+  },
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact read-only proposal extends existing Live pull-request base identity paragraph",
+    "Durable_learning_captured": "A fully paginated earlier registered-job list can precede dependent-job registration. Reconcile again after producer prerequisites finish and keep queued publisher pending.",
+    "Evidence": [
+      "Retained755f25registered whileMacqueued; current captured26registered after4buildersSUCCESS with new114414257399queued",
+      "Immutablea346fd7dfca7a6490e6968d16c809a85814ff5b0:.github/workflows/actions_runtime_pypi_release.yml publish needs build-sdist/build-wheels",
+      "Current26check/job IDs/statuses exactmatch; existing54a source/control/testedmerge/nine-sample proof retained"
+    ],
+    "Stale_or_ambiguous_guidance_removed": "Paging to exhaustion is necessary but alone does not qualify a workflow whose dependent jobs were not yet registered or remain queued.",
+    "Remaining_uncertainty": "Publisher terminalvalidation pending; OAuth authority/content, release/platform/coldregistry/native/privatefull134 gates open.",
+    "exact_proposed_patch": {
+      "path": "/workspace/engineering/pr302-full26-current-hosted-admission/exact-dependent-job-registration-canonical-proposal.patch",
+      "size": 912,
+      "sha256": "d7a0a7b9452553bb609084acdf71bb7ace68f152b5bdd419a8817e151ddeb93b"
+    },
+    "prior_fef375_disposition": "Accepted exact fef375 retained source/controlguidebyteequal and fresh54a unchanged; no old63cf/all26/artifact11691074610 transfer."
+  },
+  "Upstream_disposition": "none; expected dependency scheduling and separate release-contentHOLD, no established upstream defect",
+  "mutations": "External owned evidence/proposedpatch only. No repository/ref/application edits, merge/push/rerun/artifact or log acquisition."
+}

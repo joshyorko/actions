@@ -1,0 +1,464 @@
+{
+  "status": "HOLD_CURRENT_FULL_CI_DEPENDENT_PUBLISHER_NOT_INSTANTIATED_NO_INTEGRATION_GO",
+  "captured_at_utc": "2026-10-11T07:08:38.903Z",
+  "one_bounded_current_reconciliation": true,
+  "tuple": {
+    "control": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "control_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+    "target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "synthetic": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+    "synthetic_ordered_parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ],
+    "synthetic_tree_equals_control": true
+  },
+  "named_ref_and_live_PR_tuple_verified": true,
+  "fresh_synthetic_ordered_parents_tree_verified": true,
+  "strict_source_pin_authorship_verified": true,
+  "pagination": {
+    "runs": {
+      "page": 1,
+      "per_page": 100,
+      "total": 10,
+      "returned": 10,
+      "complete": true
+    },
+    "checks": {
+      "page": 1,
+      "per_page": 100,
+      "total": 25,
+      "returned": 25,
+      "complete_for_current_registered_checks_only": true
+    },
+    "jobs": {
+      "all10runs_total_below100_page1complete": true,
+      "registered_jobs": 25,
+      "dependent_future_publish_not_counted": true
+    },
+    "statuses": {
+      "total": 0,
+      "returned": 0
+    }
+  },
+  "current_census": {
+    "check_runs": {
+      "success": 23,
+      "in_progress": 1,
+      "queued": 1
+    },
+    "registered_jobs": {
+      "queued": 1,
+      "success": 23,
+      "in_progress": 1
+    }
+  },
+  "current_runs_and_declared_instantiated_jobs": [
+    {
+      "run_id": 38118859475,
+      "name": "Actions Runtime PYPI Release",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "workflow_path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "status": "queued",
+      "conclusion": null,
+      "total_count": 4,
+      "all_pages_complete": true,
+      "jobs": [
+        {
+          "id": 114409246153,
+          "name": "build-wheels (macos-15)",
+          "status": "queued",
+          "conclusion": null,
+          "started_at": "2026-10-11T06:41:04Z",
+          "completed_at": null
+        },
+        {
+          "id": 114409246244,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:43:42Z"
+        },
+        {
+          "id": 114409246265,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:42:01Z"
+        },
+        {
+          "id": 114409246328,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:45:56Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859503,
+      "name": "AI audit evidence",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "workflow_path": ".github/workflows/ai-audit.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "total_count": 1,
+      "all_pages_complete": true,
+      "jobs": [
+        {
+          "id": 114409246163,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:41:14Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859480,
+      "name": "Copilot Setup Steps",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "workflow_path": ".github/workflows/copilot-setup-steps.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "total_count": 1,
+      "all_pages_complete": true,
+      "jobs": [
+        {
+          "id": 114409246083,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:43:47Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859516,
+      "name": "RCC developer toolkit",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "workflow_path": ".github/workflows/developer_toolkit.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "total_count": 6,
+      "all_pages_complete": true,
+      "jobs": [
+        {
+          "id": 114409246280,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:07Z",
+          "completed_at": "2026-10-11T06:44:47Z"
+        },
+        {
+          "id": 114409246481,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:44:44Z"
+        },
+        {
+          "id": 114409246504,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:48:18Z"
+        },
+        {
+          "id": 114409246525,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:47:43Z",
+          "completed_at": "2026-10-11T06:51:21Z"
+        },
+        {
+          "id": 114409246528,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:15Z",
+          "completed_at": "2026-10-11T06:51:45Z"
+        },
+        {
+          "id": 114409246558,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:46:18Z",
+          "completed_at": "2026-10-11T06:49:30Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859472,
+      "name": "Measured Python coverage gate",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "workflow_path": ".github/workflows/coverage-gate.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "total_count": 1,
+      "all_pages_complete": true,
+      "jobs": [
+        {
+          "id": 114409246216,
+          "name": "coverage",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:43:43Z",
+          "completed_at": "2026-10-11T06:54:29Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859587,
+      "name": "Actions Core Tests",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "workflow_path": ".github/workflows/actions_core_tests.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "total_count": 4,
+      "all_pages_complete": true,
+      "jobs": [
+        {
+          "id": 114409246670,
+          "name": "build (macos-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:46:05Z",
+          "completed_at": "2026-10-11T06:47:37Z"
+        },
+        {
+          "id": 114409246802,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:43:35Z",
+          "completed_at": "2026-10-11T06:44:52Z"
+        },
+        {
+          "id": 114409246833,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:44:28Z",
+          "completed_at": "2026-10-11T06:47:27Z"
+        },
+        {
+          "id": 114409246836,
+          "name": "candidate-wheel",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:43:48Z",
+          "completed_at": "2026-10-11T06:44:27Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859493,
+      "name": "Action Server Tests",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "workflow_path": ".github/workflows/actions_runtime_tests.yml",
+      "status": "in_progress",
+      "conclusion": null,
+      "total_count": 3,
+      "all_pages_complete": true,
+      "jobs": [
+        {
+          "id": 114409246186,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": null
+        },
+        {
+          "id": 114409246268,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:06Z",
+          "completed_at": "2026-10-11T06:59:19Z"
+        },
+        {
+          "id": 114409246292,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:49:11Z",
+          "completed_at": "2026-10-11T07:06:44Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118859588,
+      "name": "Action Server Build (Unauthenticated)",
+      "event": "pull_request",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "workflow_path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "total_count": 3,
+      "all_pages_complete": true,
+      "jobs": [
+        {
+          "id": 114409246790,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:42:03Z",
+          "completed_at": "2026-10-11T06:51:18Z"
+        },
+        {
+          "id": 114409246866,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:48:19Z",
+          "completed_at": "2026-10-11T06:52:35Z"
+        },
+        {
+          "id": 114409246884,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:51:36Z",
+          "completed_at": "2026-10-11T06:58:11Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118856645,
+      "name": "Copilot Setup Steps",
+      "event": "push",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "workflow_path": ".github/workflows/copilot-setup-steps.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "total_count": 1,
+      "all_pages_complete": true,
+      "jobs": [
+        {
+          "id": 114409238527,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:03Z",
+          "completed_at": "2026-10-11T06:43:34Z"
+        }
+      ]
+    },
+    {
+      "run_id": 38118856632,
+      "name": "Action Server RCC provider rollback acceptance",
+      "event": "push",
+      "attempt": 1,
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "workflow_path": ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "total_count": 1,
+      "all_pages_complete": true,
+      "jobs": [
+        {
+          "id": 114409238566,
+          "name": "build",
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-10-11T06:41:03Z",
+          "completed_at": "2026-10-11T06:44:36Z"
+        }
+      ]
+    }
+  ],
+  "dependent_publisher": {
+    "run_id": 38118859475,
+    "status": "queued",
+    "macos_builder_queued": true,
+    "linux_windows_sdist_builders_success": true,
+    "publish_not_yet_instantiated": true,
+    "declared_source_workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+    "workflow_blob_sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+    "full_workflow_admission": "HOLD; builder summaries cannot qualify dependent artifact validation job. A later readback must enumerate all pages including that job once naturally instantiated."
+  },
+  "reviews_threads_status": {
+    "review_count": 0,
+    "review_thread_count": 0,
+    "legacy_status_count": 0,
+    "legacy_combined_state": "pending"
+  },
+  "pull_request": {
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "mergeable_state": "unstable",
+    "authored_body_matches": true
+  },
+  "policy_scope": {
+    "base_branch_protected": false,
+    "rulesets": [],
+    "branch_protection": "UNAVAILABLE403 integration lacks administration permission; do not infer readable full protection policy"
+  },
+  "preserved_fresh_narrow_actual": {
+    "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/independent-fresh-three-case-actual-review.json",
+    "sha256": "54a855d62a41645ec53476d7d212cf8bc3a743520c952dca4005790876afc20c",
+    "original_artifact_and_full_log": "retained; NOT reacquired"
+  },
+  "previous_metadata_and_builder_logs": {
+    "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/safe-next-publisher-and-build-metadata-checkpoint.json",
+    "sha256": "d17834004efe0121e171492db4017942aafa9eed1cddd3c308f22c945777e6ca",
+    "logs_artifacts": "No builder log or original three-case reacquisition; no artifact download."
+  },
+  "release_HOLDs": [
+    "ApprovedauthoritativeOAuthsourcepair/content absent; historicalemptygeneratedOAuth isnotfallback/admittedsource",
+    "No artifactdownloads/memberMETADATA/RECORD/rawpayload evidence or currentwholeproducer qualification",
+    "Other5running1queued checks and dependentpublisher notterminal; no fullCI/sourceintegrationGO",
+    "Currentadapter differs92498 oldnative=>UNQUALIFIED, no nativebuild/installer/provider/browser/coldregistry run",
+    "Wholeplatform/native/install/Core103/privatefull134metadata/fullrelease/publication unqualified",
+    "Root reports independently inspected current Linux wheel generated OAuth module has two empty strings; separate owning evidence is required, not release content admission. No OAuth fallback or publication approval."
+  ],
+  "next_dependency": "Natural completion of Windows Runtime test and macOS wheel, then fully paginated dependent publisher terminal artifact-validation readback; no busy polling/retry/manual run. Precision306 frozen successor is next independent review priority.",
+  "original_private_API_metadata": {
+    "path": "/workspace/engineering/pr302-current-bounded-reconciliation/original-current-API-metadata-private.json",
+    "size": 783086,
+    "sha256": "601565c5b961673a1cb382ebe599de3c8a189a20ad6fc2d8934786b04e1d0ccc",
+    "mode": "0600"
+  },
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accepted exact fef37515784cbf9fbb003ecca90ec0acb78d8e319bf2fd0ce2c2c1805ff955e6 delta retained, source/control guide byte-exact",
+    "Durable_learning_captured": "Authenticate nine sample hashes under source candidate separately from control and tested merge; complete registered check pagination does not admit a not-yet-instantiated dependent producer job or release content.",
+    "Evidence": "Retained54a original three-case review, current named refs/synthetic tree/all10 workflows25 checks25 jobs, immutable publisher source needs and source/control canonical blob identity.",
+    "Stale_or_ambiguous_guidance_removed": "Existing accepted lesson blocks historical tuple/sample proof transfer to full current producer; explicitly retain pending dependent publisher and OAuth content boundaries. No cosmetic extra patch.",
+    "Remaining_uncertainty": "Windows Runtime and macOS wheel/publisher pending, current generated OAuth source/content not approved, native92498 changed production input unqualified, fullprivate134metadata/release/coldinstallation HOLD.",
+    "proposal_disposition": "Accepted exact fef375 already integrated and remains code/evidence-backed; retained unchanged with new bounded current CI proof, not a full integration or release GO."
+  },
+  "Upstream_disposition": "none",
+  "mutations": "No repository/ref/application writes, push, merge, package/native/provider/browser run or artifact acquisition",
+  "local_controller_diagnostic": "Oversized serialization and JSON chunk literal errors corrected from retained connector metadata without reacquisition; guessed local workflow path corrected from original run path, diagnostic retained."
+}

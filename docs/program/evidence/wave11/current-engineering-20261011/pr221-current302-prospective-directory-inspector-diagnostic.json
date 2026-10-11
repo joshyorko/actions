@@ -1,0 +1,10 @@
+{
+  "status": "RETAINED_V2_INSPECTOR_ASSUMPTION_FAILURE_NOT_ARTIFACT_FAILURE",
+  "fixed_reason": "STANDARD_WHEEL_DIRECTORY_ENTRIES_NOT_RECORD_FILES",
+  "original_inspector_sha256": "c1602f01d786cb78de84a99a8bfece1edbfe38a55c4739bbb03bb406d58f69d3",
+  "entries": 241,
+  "directories": 26,
+  "files": 215,
+  "artifact_download_repeated": false,
+  "successor_scope": "Validate all central-directory entries and CRCs; RECORD must cover all215 file entries exactly, directory entries retained separately"
+}

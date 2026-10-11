@@ -1,0 +1,12 @@
+{
+  "status": "CURRENT_ENGINEERING_BODY_UPDATE_PRESERVATION_PREPARED",
+  "issue101_suffix_bytes": 28075,
+  "issue101_suffix_sha256": "d6aa504c67bb72508006751c65d0d575d2e108a1ae3f677034723ee8101843b7",
+  "issue101_suffix_exact": true,
+  "issue101_body_sha256": "8f7fc5e356ec0f8a3f5750280bf6d5e88b8dbb48d787134b42d9de716c3c16a5",
+  "pr221_prior_body_exact_details": true,
+  "pr221_body_sha256": "6c9d7ebc0c5797a153f81c4365c4b3f16d3cb5c9e7496dcfe4d8f1edebb182ab",
+  "target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "no_issue_closure_release_merge": true,
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,216 @@
+{
+  "status": "ALL_CURRENT_GITHUB_FILES_EXACT_ACTUAL774_AND_ORDINARY_E281",
+  "parent": "e281cbc05dcf2e42d9b37d8879ad986803e6a5e7",
+  "actual_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "complete_github_leaf_count": 34,
+  "complete_github_files_sha256": {
+    ".github/CODEOWNERS": {
+      "mode_kind_blob": "100644 blob f22187bcbe11977073701b3c9a2f871b6bc7c24c",
+      "sha256": "f0adb2acb70e692589cdf121cca25b6133cf0e7e330806f41af48e23d4062fa3"
+    },
+    ".github/ISSUE_TEMPLATE/bug-report.yaml": {
+      "mode_kind_blob": "100644 blob 9f52c3cc5c9d7e8a5aa96c5df47bd3e563491fa3",
+      "sha256": "1f769e361b072f44e5ec445a347e639791fe4d540ef93e08b47d11ee433f3f5d"
+    },
+    ".github/ISSUE_TEMPLATE/config.yml": {
+      "mode_kind_blob": "100644 blob 7dbe51bc932268b753c2ea6ec44bdf7cb32f72d4",
+      "sha256": "d9b07bd7b1a769d2747b6f3d05067d507f6a07d6accb0ec90b1922f7537af2a8"
+    },
+    ".github/ISSUE_TEMPLATE/feature-request.yml": {
+      "mode_kind_blob": "100644 blob 97634841c91cca8928d9f30d9a22a98b14568fac",
+      "sha256": "642d28a8bc7e4234042b7e4e4d42c0b079b62d7205beef06d0dbc0cb834a69ce"
+    },
+    ".github/PULL_REQUEST_TEMPLATE.md": {
+      "mode_kind_blob": "100644 blob bbdf18241940a2ad57e9313f2aa21f3bde33f165",
+      "sha256": "c0cef0aceeac99ea6d1280af767b5b846dfff7fff3491356fed5b9214c730f1f"
+    },
+    ".github/change-tiers.yml": {
+      "mode_kind_blob": "100644 blob 9e36ee4be1c33dcab87cf4bef66bad292b873a47",
+      "sha256": "61d8fa45ecb76597d85696073158e9578492c7c5414e17d3dfda4494200954a6"
+    },
+    ".github/copilot-instructions.md": {
+      "mode_kind_blob": "100644 blob ac931d43e8d9dc42d74757061efddacef294e738",
+      "sha256": "aced7a5e3b603d0ee1088ba80cedfbca604abee0d29a859e566feec33a0811da"
+    },
+    ".github/dependabot.yml": {
+      "mode_kind_blob": "100644 blob e1db25fa55794ca463dc326d3c3a91eb96bef231",
+      "sha256": "d1203d66bf638824ab98fc85bf8cc61dbc6a8407699d62460449d45577952c92"
+    },
+    ".github/workflows/_gen_workflows.py": {
+      "mode_kind_blob": "100644 blob a65cc9045eb31db6f42090cec5809c9500314ccd",
+      "sha256": "74f1860433cd5293b6feba99d5df5e536ff695f9063caf914576300ae7d219da"
+    },
+    ".github/workflows/action_server_build_cdn.yml": {
+      "mode_kind_blob": "100644 blob 89372722a0c4e7d1601ba6b8b961cf3ecb066999",
+      "sha256": "51ba9d399f06d712e46bd691a24379ac940b6b479a58c83eb882a4e65f115aeb"
+    },
+    ".github/workflows/action_server_frontend_tests.yml": {
+      "mode_kind_blob": "100644 blob 4ac2b5646cf12f430a8af59f0592739aad3be9b5",
+      "sha256": "058e7625c4eb32f885bdeef6443643dd1a3df87ec6c5131bb39b36ec4289b8d2"
+    },
+    ".github/workflows/action_server_update_downloads.yml": {
+      "mode_kind_blob": "100644 blob a1539ea1add95546f2f966d0edca4d9d61ad3b3e",
+      "sha256": "b96ea3507a48cbad6bccd8cb99114552b170c59bfd6e03ac3a8c4e97d41ef771"
+    },
+    ".github/workflows/actions_core_tests.yml": {
+      "mode_kind_blob": "100644 blob 1c855355d6e5fc7a196ceea7bf83c1af952957a8",
+      "sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296"
+    },
+    ".github/workflows/actions_release.yml": {
+      "mode_kind_blob": "100644 blob af9e816aabb94b642521aa29cd7df1d649cf0e61",
+      "sha256": "cdc2a5d5d2ab0887d26c76c56ca63c7b17e4df00030a844cf70491b19b1adf64"
+    },
+    ".github/workflows/actions_runtime_binary_release.yml": {
+      "mode_kind_blob": "100644 blob 1fce9c558943fffab5c264bcc0599095162aa3ee",
+      "sha256": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64"
+    },
+    ".github/workflows/actions_runtime_frozen_catalog_rollback.yml": {
+      "mode_kind_blob": "100644 blob e66bbf2451b3550fa3bf6b10e6bb5483f02f3ca0",
+      "sha256": "aabf25267c48b9d361f4d575a332a9f7bdddc4c5d1f3ce4ff5ac151c98d36140"
+    },
+    ".github/workflows/actions_runtime_pypi_release.yml": {
+      "mode_kind_blob": "100644 blob 8a6c70171fca53059f4da2b1be0cb657890c20e2",
+      "sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f"
+    },
+    ".github/workflows/actions_runtime_rcc_provider_rollback.yml": {
+      "mode_kind_blob": "100644 blob 3ad07ba08084476d0103ba305a2a582cbb991966",
+      "sha256": "066adce2531a5223720661afce2f6485d7493243c10156eb1d84e624e252ac92"
+    },
+    ".github/workflows/actions_runtime_recovery.yml": {
+      "mode_kind_blob": "100644 blob b84289aefb5d5c164fac25e9492a17f07dcd819b",
+      "sha256": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f"
+    },
+    ".github/workflows/actions_runtime_tests.yml": {
+      "mode_kind_blob": "100644 blob e93fb3c75b8ecb3353a07e1cab00d526b8db0559",
+      "sha256": "430588021cf889391842be3a7c78eb4c04648b1bb7311f9c03da452e313fb161"
+    },
+    ".github/workflows/ai-audit.yml": {
+      "mode_kind_blob": "100644 blob 1f6678d00c77352193032c667f9b81f5ab032204",
+      "sha256": "2334d210444efcc82389a3f535032794aec91142e7f44eaf5b97bcb9816f5d0e"
+    },
+    ".github/workflows/copilot-setup-steps.yml": {
+      "mode_kind_blob": "100644 blob 9ef0a4cfc38550c50fb8dd56111fc3a2cd9f3296",
+      "sha256": "cdeaf466a6e662747e06e32618d91a48fd76c41fada5c2369e380b7034f3f906"
+    },
+    ".github/workflows/coverage-gate.yml": {
+      "mode_kind_blob": "100644 blob d5ed7d50a00166fe117e76f45e54ab7860bad0e0",
+      "sha256": "e355c4769bae5e548dc7aa8c7393bdc496ebfcbdd24c1c3918d90bc7e1ef76cf"
+    },
+    ".github/workflows/deploy-beta-templates.yml": {
+      "mode_kind_blob": "100644 blob 327b5f6178a5b010d7975f811b2227d52129df9f",
+      "sha256": "7c3f567689c5cbbf83d54df188f2c82ca0174c473a81e1cf180d638ae623dddb"
+    },
+    ".github/workflows/deploy-templates.yml": {
+      "mode_kind_blob": "100644 blob 9766158a4c4d45477bc4e9a0a0599de954a274b0",
+      "sha256": "639ae316785f9a39af52856ed33451cf9a7bf28c43de19f8a6f6dfae7e181bb1"
+    },
+    ".github/workflows/developer_toolkit.yml": {
+      "mode_kind_blob": "100644 blob 42ac277ccfb33b7e434f03eb937729b53cde6119",
+      "sha256": "60ca471cb9bdff0059b1a9b1fcdf9256b666fb2fb1d533b93307d2841facc0a8"
+    },
+    ".github/workflows/frontend-build-cdn.yml": {
+      "mode_kind_blob": "100644 blob d6d088bd4e199471d0468cf04cc642dfd8e2d453",
+      "sha256": "251ff3279d9019f2223adb849c0e09214dc01ae0931827a3e6f3a76cdcfb3618"
+    },
+    ".github/workflows/frontend-build-unauthenticated.yml": {
+      "mode_kind_blob": "100644 blob 7dfb11853152b455bcf5e31564a6b6512d075117",
+      "sha256": "2d2a21af458ccfdb771f65707d7ab60fb1f5dfa24019c94ded4a02ed46f8d36d"
+    },
+    ".github/workflows/frontend-build.yml": {
+      "mode_kind_blob": "100644 blob 8c02a93844d312dc5096d0a4c1965fc5257caf9e",
+      "sha256": "55def13a3b25269e0a8780a08c89bbbe9b32189b4f4fcbea21189ee8d6ee16a1"
+    },
+    ".github/workflows/http_helper_tests.yml": {
+      "mode_kind_blob": "100644 blob 960c81f7faa38acd3726c716b9297ea36cc5ea4b",
+      "sha256": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8"
+    },
+    ".github/workflows/http_lib_release.yml": {
+      "mode_kind_blob": "100644 blob cd3ad2659ab47fd10f4738e89f9435fd175efb79",
+      "sha256": "9edd9b480072b60160d2adc29c66fb11dc262edf0625edf762da7c80a777a6de"
+    },
+    ".github/workflows/lighthouse.yml": {
+      "mode_kind_blob": "100644 blob d1157a323ee91c03de314a7c70f55392a36cd7cf",
+      "sha256": "ff985adf49fae8b5409e4edf4cd10d08045b712dc64b02ad9ec7a9f0498305bd"
+    },
+    ".github/workflows/quality-report.yml": {
+      "mode_kind_blob": "100644 blob 4cab6730b9c6bbb8786055937f168b7b97cf52e9",
+      "sha256": "c144961b14d28a24f39ad647be4d72963c6685e07257e468c9285f4f2622cbaf"
+    },
+    ".github/workflows/work_items_release.yml": {
+      "mode_kind_blob": "100644 blob fd92c01ece1f97d2798d2211e328fe12a37e8c6c",
+      "sha256": "e30cf818b7d81e3b910bdef8d2f78a9c32c8f52dd119de8b8a75a94b616e10c0"
+    }
+  },
+  "original_regeneration_proof_scope": "rglob(*.yml) only:29; no claim30 regenerated",
+  "original29_yml_paths": [
+    ".github/ISSUE_TEMPLATE/config.yml",
+    ".github/ISSUE_TEMPLATE/feature-request.yml",
+    ".github/change-tiers.yml",
+    ".github/dependabot.yml",
+    ".github/workflows/action_server_build_cdn.yml",
+    ".github/workflows/action_server_frontend_tests.yml",
+    ".github/workflows/action_server_update_downloads.yml",
+    ".github/workflows/actions_core_tests.yml",
+    ".github/workflows/actions_release.yml",
+    ".github/workflows/actions_runtime_binary_release.yml",
+    ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+    ".github/workflows/actions_runtime_pypi_release.yml",
+    ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+    ".github/workflows/actions_runtime_recovery.yml",
+    ".github/workflows/actions_runtime_tests.yml",
+    ".github/workflows/ai-audit.yml",
+    ".github/workflows/copilot-setup-steps.yml",
+    ".github/workflows/coverage-gate.yml",
+    ".github/workflows/deploy-beta-templates.yml",
+    ".github/workflows/deploy-templates.yml",
+    ".github/workflows/developer_toolkit.yml",
+    ".github/workflows/frontend-build-cdn.yml",
+    ".github/workflows/frontend-build-unauthenticated.yml",
+    ".github/workflows/frontend-build.yml",
+    ".github/workflows/http_helper_tests.yml",
+    ".github/workflows/http_lib_release.yml",
+    ".github/workflows/lighthouse.yml",
+    ".github/workflows/quality-report.yml",
+    ".github/workflows/work_items_release.yml"
+  ],
+  "extra_yaml_paths_not_in_original_roundtrip": [
+    ".github/ISSUE_TEMPLATE/bug-report.yaml"
+  ],
+  "workflow_yaml_count": 25,
+  "workflow_yaml_paths": [
+    ".github/workflows/action_server_build_cdn.yml",
+    ".github/workflows/action_server_frontend_tests.yml",
+    ".github/workflows/action_server_update_downloads.yml",
+    ".github/workflows/actions_core_tests.yml",
+    ".github/workflows/actions_release.yml",
+    ".github/workflows/actions_runtime_binary_release.yml",
+    ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+    ".github/workflows/actions_runtime_pypi_release.yml",
+    ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+    ".github/workflows/actions_runtime_recovery.yml",
+    ".github/workflows/actions_runtime_tests.yml",
+    ".github/workflows/ai-audit.yml",
+    ".github/workflows/copilot-setup-steps.yml",
+    ".github/workflows/coverage-gate.yml",
+    ".github/workflows/deploy-beta-templates.yml",
+    ".github/workflows/deploy-templates.yml",
+    ".github/workflows/developer_toolkit.yml",
+    ".github/workflows/frontend-build-cdn.yml",
+    ".github/workflows/frontend-build-unauthenticated.yml",
+    ".github/workflows/frontend-build.yml",
+    ".github/workflows/http_helper_tests.yml",
+    ".github/workflows/http_lib_release.yml",
+    ".github/workflows/lighthouse.yml",
+    ".github/workflows/quality-report.yml",
+    ".github/workflows/work_items_release.yml"
+  ],
+  "issue_forms_count": 3,
+  "issue_forms_paths": [
+    ".github/ISSUE_TEMPLATE/bug-report.yaml",
+    ".github/ISSUE_TEMPLATE/config.yml",
+    ".github/ISSUE_TEMPLATE/feature-request.yml"
+  ],
+  "all_yaml_yml_count": 30,
+  "all_extension_inventory_byte_exact_parent_and_actual_target": true,
+  "no_new_generator_run_or_source_change": true
+}

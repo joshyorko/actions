@@ -1,0 +1,432 @@
+{
+  "count": 85,
+  "all_named_entries_original1e9_3ec_native92498_exact": true,
+  "entries": {
+    "action_server/frontend/package-lock.json": [
+      "100644",
+      "blob",
+      "13f627bfad5a5158b6b37d688a9ffe308ebfac29"
+    ],
+    "action_server/frontend/package.json": [
+      "100644",
+      "blob",
+      "72dbfaf8b1c587eac2236213ab8b8f8117b00888"
+    ],
+    "action_server/frontend/src/App.tsx": [
+      "100644",
+      "blob",
+      "9a12f9883f2a36ebbd98dbbfe301f2f7e42a9eaa"
+    ],
+    "action_server/frontend/src/__tests/encrypt.test.ts": [
+      "100644",
+      "blob",
+      "400bc4e01a202d9788b149ba37139850f718da92"
+    ],
+    "action_server/frontend/src/__tests/fixtures/actionPayload.json": [
+      "100644",
+      "blob",
+      "fb27681127cd6fbe94a0cbc5a4c0e86b00ee1e79"
+    ],
+    "action_server/frontend/src/__tests/fixtures/case2ActionPayload.json": [
+      "100644",
+      "blob",
+      "20745d3a6e64771d36f4653cf78d736e4c56fb75"
+    ],
+    "action_server/frontend/src/__tests/fixtures/case2FormData.json": [
+      "100644",
+      "blob",
+      "93d8aea581ac591fd122855c3d4f05e2c4a7523d"
+    ],
+    "action_server/frontend/src/__tests/fixtures/case2InputSchema.json": [
+      "100644",
+      "blob",
+      "015b7850a5dead29b15d0a457b208105e79fc62c"
+    ],
+    "action_server/frontend/src/__tests/fixtures/formData.json": [
+      "100644",
+      "blob",
+      "8e96d635a0bb39e54ac269a690ad5e2727a279dc"
+    ],
+    "action_server/frontend/src/__tests/fixtures/inputSchema.json": [
+      "100644",
+      "blob",
+      "5238cc0f1c8d351d84d429cbd4d0fc92168025a0"
+    ],
+    "action_server/frontend/src/__tests/formData.test.ts": [
+      "100644",
+      "blob",
+      "cb63ce765de66149f095d4de9031e35076b552d7"
+    ],
+    "action_server/frontend/src/app/RuntimeAuthentication.tsx": [
+      "100644",
+      "blob",
+      "48df561b7cb8dcef4ffe1e030e3d36f2c3a8293c"
+    ],
+    "action_server/frontend/src/app/RuntimeLayout.tsx": [
+      "100644",
+      "blob",
+      "6592641cc033d254db49ba15db98a3d49bc81207"
+    ],
+    "action_server/frontend/src/app/RuntimeNavigation.tsx": [
+      "100644",
+      "blob",
+      "4925577f329b6810a7bd976caf287b82c4eb266e"
+    ],
+    "action_server/frontend/src/app/RuntimeProviders.tsx": [
+      "100644",
+      "blob",
+      "c5446c428f18be2a54d2d51b5d38cd568fa0091b"
+    ],
+    "action_server/frontend/src/app/RuntimeRoutes.tsx": [
+      "100644",
+      "blob",
+      "639732b9966e2234d76bf1a72d9532e1513868a1"
+    ],
+    "action_server/frontend/src/app/RuntimeShell.tsx": [
+      "100644",
+      "blob",
+      "edf4e4b5fb161c993b9b04c491822a357f947bf6"
+    ],
+    "action_server/frontend/src/core/components/schedules/ScheduleCalendar.tsx": [
+      "100644",
+      "blob",
+      "c952116ba08840408ac104acd68b8f186fb466ca"
+    ],
+    "action_server/frontend/src/core/components/schedules/ScheduleForm.tsx": [
+      "100644",
+      "blob",
+      "14b501d0faad994eadea17ca59a312ff19c3b33d"
+    ],
+    "action_server/frontend/src/core/components/schedules/cron/CronDaySelector.tsx": [
+      "100644",
+      "blob",
+      "c44dde429e8f2bc8dad49a4baa989803b486c560"
+    ],
+    "action_server/frontend/src/core/components/schedules/cron/CronHourSelector.tsx": [
+      "100644",
+      "blob",
+      "dd8d27c864514abc6578bdc230c796fbdce523fd"
+    ],
+    "action_server/frontend/src/core/components/schedules/cron/CronMinuteSelector.tsx": [
+      "100644",
+      "blob",
+      "d2169cc301b8f3d7ef0c40de08e79f94f65b6b87"
+    ],
+    "action_server/frontend/src/core/components/schedules/cron/CronMonthSelector.tsx": [
+      "100644",
+      "blob",
+      "c2fa9d2eb59dcb883f54afad448f29cb4eb2e838"
+    ],
+    "action_server/frontend/src/core/components/schedules/cron/CronPreview.tsx": [
+      "100644",
+      "blob",
+      "f422ee820819adb155b80c6181ca41bdbb3b38d3"
+    ],
+    "action_server/frontend/src/core/components/schedules/cron/CronWeekdaySelector.tsx": [
+      "100644",
+      "blob",
+      "1c1fc0d5a69f2eb53a6be8c9625823e7665f5655"
+    ],
+    "action_server/frontend/src/core/components/schedules/cron/IntervalBuilder.tsx": [
+      "100644",
+      "blob",
+      "9f65133249f0658965b0da3083a6046c062eafb9"
+    ],
+    "action_server/frontend/src/core/components/schedules/cron/VisualCronBuilder.tsx": [
+      "100644",
+      "blob",
+      "0afc3386bbb883bf3fec770c493a887ec292bffc"
+    ],
+    "action_server/frontend/src/core/components/schedules/cron/WeekdayBuilder.tsx": [
+      "100644",
+      "blob",
+      "9f9fc92fe53a1c77f4ec534a0ec2b11c55504096"
+    ],
+    "action_server/frontend/src/core/components/ui/Badge.tsx": [
+      "100644",
+      "blob",
+      "96be367a9697fbb2e09dd227558dac9822e98608"
+    ],
+    "action_server/frontend/src/core/components/ui/Button.tsx": [
+      "100644",
+      "blob",
+      "5533118c01dcacfbe2da4cc8a0a5c47cc6d963c6"
+    ],
+    "action_server/frontend/src/core/components/ui/Dialog.tsx": [
+      "100644",
+      "blob",
+      "722b976c1bc005e0bec5373cd57bff494cd56fa7"
+    ],
+    "action_server/frontend/src/core/components/ui/DropdownMenu.tsx": [
+      "100644",
+      "blob",
+      "f8a257cb68c7c28327810899e1ebbf8a7400f8a7"
+    ],
+    "action_server/frontend/src/core/components/ui/ErrorBanner.tsx": [
+      "100644",
+      "blob",
+      "a5f0524f4d17a07e93cda0c43b4ed6cdff904d1b"
+    ],
+    "action_server/frontend/src/core/components/ui/Input.tsx": [
+      "100644",
+      "blob",
+      "295b2f83dff26621a154d983b26bb0924f2d2cf4"
+    ],
+    "action_server/frontend/src/core/components/ui/Loading.tsx": [
+      "100644",
+      "blob",
+      "e34521fe325c9c4f496030219c40f755f0948cf5"
+    ],
+    "action_server/frontend/src/core/components/ui/README.md": [
+      "100644",
+      "blob",
+      "8da9603dca56ae83ecf6c12b159c468209f9df68"
+    ],
+    "action_server/frontend/src/core/components/ui/Select.tsx": [
+      "100644",
+      "blob",
+      "dcca612f02bdbf35164b051f6fdec6041ddc0570"
+    ],
+    "action_server/frontend/src/core/components/ui/Table.tsx": [
+      "100644",
+      "blob",
+      "4ca6a7bf43c863652919161d7f90f89a75f4ab37"
+    ],
+    "action_server/frontend/src/core/components/ui/Textarea.tsx": [
+      "100644",
+      "blob",
+      "84886c8ab91f1eb0c9f4b2b7aa0e14208d054bbb"
+    ],
+    "action_server/frontend/src/core/pages/Actions.tsx": [
+      "100644",
+      "blob",
+      "03c88880bb587e84eeec308fa1da633d6e3cd4fc"
+    ],
+    "action_server/frontend/src/core/pages/Analytics.tsx": [
+      "100644",
+      "blob",
+      "12a23094d7a473971dcab9b68bc8885feef37700"
+    ],
+    "action_server/frontend/src/core/pages/Artifacts.tsx": [
+      "100644",
+      "blob",
+      "47ced8145613f265ca7e3f4c327b1b86e8123c74"
+    ],
+    "action_server/frontend/src/core/pages/Logs.tsx": [
+      "100644",
+      "blob",
+      "e6f9507d00ca1e8e275b2576bf06eb67233deb64"
+    ],
+    "action_server/frontend/src/core/pages/Overview.tsx": [
+      "100644",
+      "blob",
+      "7b09b4822d7af19e1b661e9222a3e7e80aa99eae"
+    ],
+    "action_server/frontend/src/core/pages/README.md": [
+      "100644",
+      "blob",
+      "f03e3f8862e6ac3f58b65d19c92496df37b71fa8"
+    ],
+    "action_server/frontend/src/core/pages/Robots.tsx": [
+      "100644",
+      "blob",
+      "239fbf7509fb23a45748b2eb5a34db22a3216d3f"
+    ],
+    "action_server/frontend/src/core/pages/RunHistory.tsx": [
+      "100644",
+      "blob",
+      "85e8e775c179a132a85e4414a8ed0d04264c2992"
+    ],
+    "action_server/frontend/src/core/pages/Schedules.tsx": [
+      "100644",
+      "blob",
+      "4e5bb15c2a4709c693fe2dbee3f8125aa3b30d5a"
+    ],
+    "action_server/frontend/src/core/pages/WorkItems.design.md": [
+      "100644",
+      "blob",
+      "a4bbc5d50c0e2a2329bdaa45ff9a65789fbe1f0a"
+    ],
+    "action_server/frontend/src/core/pages/WorkItems.tsx": [
+      "100644",
+      "blob",
+      "49e1f1ffe6486cd1c0204833791c6382017938e3"
+    ],
+    "action_server/frontend/src/core/services/README.md": [
+      "100644",
+      "blob",
+      "7e210b2ba7956655b2a66b90bb410353dd9cb136"
+    ],
+    "action_server/frontend/src/index.css": [
+      "100644",
+      "blob",
+      "701ae19144aede77ee1faf44708fb8bcedc4aacf"
+    ],
+    "action_server/frontend/src/queries/actions.ts": [
+      "100644",
+      "blob",
+      "c2095dcae7b6fdab8e797d28c79f8ab0a3741fb7"
+    ],
+    "action_server/frontend/src/queries/analytics.ts": [
+      "100644",
+      "blob",
+      "b39013f0d131234753b2f1d0c30a5397d4ce5232"
+    ],
+    "action_server/frontend/src/queries/robots.ts": [
+      "100644",
+      "blob",
+      "4ca18b393731245a448134ac0c8075fafc636ecd"
+    ],
+    "action_server/frontend/src/queries/runtime.ts": [
+      "100644",
+      "blob",
+      "4fe3d1cc167f2b10e5ef3302c11e5792045eaa73"
+    ],
+    "action_server/frontend/src/queries/schedules.ts": [
+      "100644",
+      "blob",
+      "f019a4665f6988e278fc27ab2b571604548ec6e7"
+    ],
+    "action_server/frontend/src/queries/workItems.ts": [
+      "100644",
+      "blob",
+      "899782703e606ba33da19d67436db4b63344b5a2"
+    ],
+    "action_server/frontend/src/react-19-compat.d.ts": [
+      "100644",
+      "blob",
+      "9b60183a127fe9653b08f95fddb504ae346f5482"
+    ],
+    "action_server/frontend/src/shared/README.md": [
+      "100644",
+      "blob",
+      "f17c8e47a0db332137c87c7f26f1863524e6f50b"
+    ],
+    "action_server/frontend/src/shared/api-client.ts": [
+      "100644",
+      "blob",
+      "98ab33e7fb28e435b27b925ec9cbc84b62199f3d"
+    ],
+    "action_server/frontend/src/shared/browser-auth.ts": [
+      "100644",
+      "blob",
+      "81d4441737207b6f1d342a724a65ba43d2658282"
+    ],
+    "action_server/frontend/src/shared/components/Icons.tsx": [
+      "100644",
+      "blob",
+      "eef28b8a980ba6a58e958e8448c5be046fd1f248"
+    ],
+    "action_server/frontend/src/shared/constants/index.ts": [
+      "100644",
+      "blob",
+      "1b3a28e81a8e8022cac53627b47881a678620c6f"
+    ],
+    "action_server/frontend/src/shared/context/actionServerContext.ts": [
+      "100644",
+      "blob",
+      "3621e286079f99ef9cf962772261da269626d059"
+    ],
+    "action_server/frontend/src/shared/data/sampleData.ts": [
+      "100644",
+      "blob",
+      "0ba8c835cc341d182e967add11aa330a73cc0313"
+    ],
+    "action_server/frontend/src/shared/hooks/useLocalStorage.ts": [
+      "100644",
+      "blob",
+      "8a93c21379cab838701db19c6ff99564a09d7952"
+    ],
+    "action_server/frontend/src/shared/hooks/useTheme.ts": [
+      "100644",
+      "blob",
+      "e6dbc76dccb56014442fd8ea02d3ed11cf8008ce"
+    ],
+    "action_server/frontend/src/shared/runtime-api.ts": [
+      "100644",
+      "blob",
+      "da0a1a08397d76a2cb6e7344cc3d174c0fde9e8b"
+    ],
+    "action_server/frontend/src/shared/runtime-events.ts": [
+      "100644",
+      "blob",
+      "b3bb5492d12cc0d70c7ce06733c579e1a4fc3176"
+    ],
+    "action_server/frontend/src/shared/runtime-query-keys.ts": [
+      "100644",
+      "blob",
+      "e93a89258467b1a1924ba4016ab5354d6685e162"
+    ],
+    "action_server/frontend/src/shared/types.ts": [
+      "100644",
+      "blob",
+      "674c5f52d4b8dbb1019191a92cf6f6f3048f665f"
+    ],
+    "action_server/frontend/src/shared/utils/animations.ts": [
+      "100644",
+      "blob",
+      "b6f4b6183eafc7ee996aa5aee347a468a2419084"
+    ],
+    "action_server/frontend/src/shared/utils/cn.ts": [
+      "100644",
+      "blob",
+      "6c2f0362f2b10eaa4a5307d261109e4fa5cf927c"
+    ],
+    "action_server/frontend/src/shared/utils/encryption.ts": [
+      "100644",
+      "blob",
+      "e6723bc85da7e44e5d22722accfd568d11d6970d"
+    ],
+    "action_server/frontend/src/shared/utils/formData.ts": [
+      "100644",
+      "blob",
+      "4dad4bf56305bcc91dd4fadef86c400a79db6877"
+    ],
+    "action_server/frontend/src/shared/utils/helpers.ts": [
+      "100644",
+      "blob",
+      "849a64cfd256ed5e6c84093bcdbff165363f6107"
+    ],
+    "action_server/frontend/src/shared/utils/modelContainer.ts": [
+      "100644",
+      "blob",
+      "6399ce74410db719a9f6a89b6dc426dad452c835"
+    ],
+    "action_server/frontend/src/shared/utils/oauth2.ts": [
+      "100644",
+      "blob",
+      "d9faa36a952069ce32bd20119567a6dcfe26ec9e"
+    ],
+    "action_server/frontend/src/shared/utils/slugify.ts": [
+      "100644",
+      "blob",
+      "a0932308f0b682210a980be3f3f408940d5030eb"
+    ],
+    "action_server/frontend/src/shared/utils/websocketConn.ts": [
+      "100644",
+      "blob",
+      "3ba79aebdedbb4393a3a0727aad5adb700032dfa"
+    ],
+    "action_server/go-wrapper/go.mod": [
+      "100644",
+      "blob",
+      "7609a11774b307a63e4c46a37136903819454359"
+    ],
+    "action_server/go-wrapper/go.sum": [
+      "100644",
+      "blob",
+      "50c942eb3ae22570912ef0cdd82f9271eb4cd750"
+    ],
+    "action_server/go-wrapper/main.go": [
+      "100644",
+      "blob",
+      "87738b86b23016eb2d3ca486a338957f7eb2a41c"
+    ],
+    "action_server/go-wrapper/process.go": [
+      "100644",
+      "blob",
+      "42c7f1092fb78897069581e173266aa2d56cfbb5"
+    ]
+  },
+  "scope": "Named tracked frontend source/dependency and four wrapper inputs only; no new build or current-head actual execution qualification"
+}

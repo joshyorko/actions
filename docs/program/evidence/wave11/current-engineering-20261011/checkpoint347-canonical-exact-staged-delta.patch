@@ -1,0 +1,83 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index c86cdb2f..91acf349 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -168,6 +168,10 @@ baseline is explicitly amended. Render and validate it separately from the
+ retained issue rows and stage counts, with a source-backed reproduction and a
+ live issue readback; do not silently add it to the original contract inventory.
+ For a current status refresh, read the repository issue collection across all pages, match every retained issue ID, and record open/closed state separately from the retained contract and acceptance decision. A closed issue is not automatically accepted; only its explicit full-contract acceptance evidence can change the acceptance classification. Record unmatched IDs or newly closed-but-unaccepted issues explicitly instead of inferring a clean audit from partial pages.
++When a structured remote body update must preserve an audited section exactly,
++retain its final newline as well as its visible text. Avoid trimming the body
++payload; verify the authenticated readback against the original retained suffix.
++
+ The community graph validator is part of `ToolkitTest`: run
+ `rcc run -r developer/toolkit.yaml --dev -t ToolkitTest`. The existing
+ `.github/workflows/developer_toolkit.yml` pull-request matrix discovers its
+@@ -398,10 +402,19 @@ Python 3.12. The contract failed with the unpinned host interpreter and passed
+ with RCC Python 3.12. Record that interpreter's version in the receipt; do not
+ install host tooling or falsify version discovery to make this boundary pass.
+ 
++Verify prepared environments through each package's Poetry process, binding
++`sys.prefix` to its own `.venv` and a file-backed module to its checkout's `src`.
++A namespace package can have `__file__ = None`; its file identity is unavailable,
++which does not prove a stale environment. Inspect a concrete submodule such as
++`devutils.invoke_utils`. Run dependency-sensitive preflights as separate checked
++calls or stop the sequence on failure. Preserve failed probes and named
++successors. Keep observations made after a gate starts distinct from evidence
++checked before that gate.
++
+ When running Action Server source tests from a detached checkout with a prepared
+ Runtime virtualenv, put that checkout's `action_server/src`, `actions/src`,
+ `actions-http-helper/src`, and `devutils/src` first on `PYTHONPATH`, and confirm
+-the imported modules' `__file__` paths point into the checkout. The Runtime
++the imported file-backed modules' `__file__` paths point into the checkout. The Runtime
+ virtualenv can contain an older installed `actions` package that otherwise
+ shadows the checkout's Core source. The Action Server test fixture also
+ requires the package-pinned RCC binary at
+@@ -2241,14 +2254,20 @@ successful parent deadline or overall acceptance. Require both outcomes; do
+ not infer failed Runtime cleanup from a parent timeout when the worker measured
+ cleanup separately. Keep those measured cells and the original failed attempt.
+ 
+-A parent-deadline receipt guard is a separate source change requiring controls
+-for absent, malformed, failed and passing worker receipts plus atomic-write
+-failure. It must mark overall acceptance failed using a fixed deadline reason,
+-preserve worker measurements and original worker acceptance status, and retain
+-the primary timeout if receipt persistence also fails. Existing-root refusal
+-remains authoritative. Public checkpoint recovery and service-free controls do
+-not recover a missing private inspector/specification or qualify provider,
+-metadata or native execution.
++The public parent-deadline receipt guard marks overall acceptance failed using
++fixed `watchdog_timeout` while retaining measured worker cells and unknown fields.
++It first preserves the original receipt bytes in an invocation-owned private file,
++then binds their digest and original status in the aggregate. Replacement uses an
++exclusive same-directory private temporary file and atomic rename. Absent,
++malformed or invalid-status evidence is not synthesized. Fixed unavailable or
++persistence-failure categories retain the primary timeout without copying command
++or exception bodies. A reserved supervisor-annotation collision fails closed with
++`annotation_conflict`; it does not overwrite the worker's unknown data. An
++unchanged worker status remains provisional because the parent failed. Controls
++cover valid, missing, malformed and failed receipts plus serialization, write,
++fsync and replacement failures. Existing-root refusal remains authoritative.
++These service-free source controls do not recover the missing private inspector
++or specification and do not qualify provider, metadata or native execution.
+ The wrapper cell accepts only terminal `completed` with an integer zero exit
+ code, excluding booleans, missing status and nonterminal states. Focused tests
+ exercise detached live writers and fast-exiting adopted children, but source
+@@ -2863,6 +2882,17 @@ publishing steps are push-only. Work Items publication has a tag-only job
+ condition, so its PR job skip is expected. Keep run event and job identity for
+ repeated Copilot checks. Empty commit statuses do not imply absent Actions checks.
+ 
++Retain complete terminal logs privately before counting failures. A connector
++preview can omit the terminal census and traceback. Bind the tested merge SHA,
++ordered parents and tree separately from a later integration target. Count failed
++readiness stages separately from reached semantic assertions and the observer's
++two-node allowlist. Active RCC CPU/I/O does not establish a preparation cause;
++missing progress marks leave interval timings unavailable. Do not substitute a
++different run's previous-mark sequence. Host return codes, stopped host readers
++and a cancelled sampler do not expose actual cleanup snapshot, reap, live,
++zombie or error predicates. Leave them unknown until the owned call's measured
++result is retained separately.
++
+ For native readiness timeouts, separate the first ready-port wait from later
+ reload, catalog and drain semantics. A failure before readiness does not exercise
+ those later assertions. In original PR3111151 Windows, all six failures were in

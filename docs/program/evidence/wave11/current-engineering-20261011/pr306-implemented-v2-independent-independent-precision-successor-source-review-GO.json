@@ -1,0 +1,534 @@
+{
+  "status": "GO_SOURCE_ONLY_FOR_NORMAL_EXISTING_PR306_BRANCH_PUSH",
+  "source": {
+    "branch": "fix/database-savepoint-admission-20261010",
+    "head": "1a3ab0b580710f776fd2075d39e04720c71541ff",
+    "tree": "f2bc958f11a15d1f01b5d0d82dd1f3f51bf590fc",
+    "ordered_parents": [
+      "cf6352e253c70095c8e09904e730fc18a42f9a65"
+    ],
+    "clean_readback": true
+  },
+  "verified_source_checkpoint": {
+    "path": "/workspace/engineering/pr306-v2-precision-successor/precision-successor-frozen-source-checkpoint.json",
+    "size": 11775,
+    "sha256": "3036e4b8e5121e5bce8e3bee93e41137b5636f2d155d94b290759e54ec4d7923"
+  },
+  "verified_new_evidence_files": 26,
+  "verified_original_evidence_files": 36,
+  "verified_original_immutable_references": 5,
+  "evidence": [
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/after-full-scope-verification.log",
+      "size": 1641,
+      "sha256": "7a42ba395edb1bf5d9abc0298ef42e5064a4dd2c971d51c2765a3e8abf7a6dca"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/after-full-source-byte-preservation.json",
+      "size": 617,
+      "sha256": "e98eb4be8950d22fed5f6e7488b1167bd83adcb39ed625ed0bb7e8f3ce12f438"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/before-full-source-checkpoint.json",
+      "size": 622,
+      "sha256": "0b4e733307ad537a42e255d33e2779b9e8236396bf02915c795580108f631af3"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-Doctor.log",
+      "size": 13487,
+      "sha256": "3256fb4e7eabf1e44149252d312b0b3fc0563d4311c71cb8f258b1d49726b3e8"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-ToolkitTest.log",
+      "size": 14344,
+      "sha256": "b970a8992c61e99322da323896129cb209a9c3cf189e970562ebb92f358cb1f4"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-full-configured-source.log",
+      "size": 315717,
+      "sha256": "731c4d04c2c4e9a79a10981fc86f73624dfdf718a6ddd5bfad89cd9fe692e314"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-generator-and-complete-DB.log",
+      "size": 5039,
+      "sha256": "4607406f9b95981d5c80eaf694801aae4cb19c3aac5f6daff1d7baa0a974c61b"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-generator-roundtrip.json",
+      "size": 3579,
+      "sha256": "638d6f90802b75904d150086a24a0b842ae501f6a86f85567b872ab7875b4fdc"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-own-Bootstrap-reuse.log",
+      "size": 6726,
+      "sha256": "937dbab61b4554ce57e597c5390b537c1677da291a2c83c648cde777b06e74fd"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/current-scoped-configured-static.log",
+      "size": 6262,
+      "sha256": "ac772577b8c189a2ca3e7e1e09bf58879a0a70564d6f4440e7440c860f4089b4"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/exact-precision-canonical-delta.patch",
+      "size": 1263,
+      "sha256": "70cc7d514c45172e07fcee0f9ca683a2fe90e59de77d6ec5e5bd6af982d36c78"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/final-committed-scope-verification.log",
+      "size": 1641,
+      "sha256": "7a42ba395edb1bf5d9abc0298ef42e5064a4dd2c971d51c2765a3e8abf7a6dca"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/fractional-boundary-and-original-controls-GREEN.log",
+      "size": 4265,
+      "sha256": "7d1ecbcce4f1e5c03e4d4dc0319813664843adf834a0399d9e3c96651ecff5c5"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/fractional-boundary-preimplementation-RED.log",
+      "size": 16531,
+      "sha256": "6a79566b34483b80c0b602434ef739caa393308132ab50ffdba44f5343e8b961"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/freeze-precision-successor.py",
+      "size": 6057,
+      "sha256": "0e7c0bbb31fbadd2fbabba138f291b0f64737e4d0847231421a00d24da184a1d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/github-complete-both-extensions-successor-recheck.json",
+      "size": 7827,
+      "sha256": "c3173bac4bf9ea73deb2f286c491bed70d12e8d17db904937cc11651f65849a1"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/origin-action_server.json",
+      "size": 283,
+      "sha256": "821d911ab56b7ee0b89eb31ddf3ce4457169d21821e28d90c6a3c2a1ec78e7ac"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/origin-actions-http-helper.json",
+      "size": 264,
+      "sha256": "a1fbe59ca022e1eb12b153ce3c4cb4367199285759a85d72fbe994b9a0d63ff4"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/origin-actions.json",
+      "size": 218,
+      "sha256": "0b5cefe74a2b488991409a0a99431fbcbe1a11a00afe22be8f44a36b556f7b85"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/origin-devutils.json",
+      "size": 240,
+      "sha256": "5acbf91f56445f2efa0bd2afc45d44737f3a1e17661591e9f8f81fafea6eebee"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/origin-work-items.json",
+      "size": 249,
+      "sha256": "ddde67b3d3048dd076042103f7a437dae472fc833529de709d1fab413207f01d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/own-Bootstrap-reuse-inputs-and-origins.json",
+      "size": 6419,
+      "sha256": "7e2701d78d4ff244beb186121404980d9e63b4b35256b676570846393997ec24"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/precision-successor-scope-proof.json",
+      "size": 1641,
+      "sha256": "7a42ba395edb1bf5d9abc0298ef42e5064a4dd2c971d51c2765a3e8abf7a6dca"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/verify-generator-roundtrip-successor.py",
+      "size": 1055,
+      "sha256": "cd6a3ee2af97570223d2aba8fda1b7c72339b4a23bdf99006687a020aece3aa4"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/verify-own-prepared-env-successor.py",
+      "size": 2689,
+      "sha256": "61e89cc464980bda1693893516c38a24510e07785893f8afed630a68aa2d4781"
+    },
+    {
+      "path": "/workspace/engineering/pr306-v2-precision-successor/verify-precision-successor-scope.py",
+      "size": 3914,
+      "sha256": "a0100139f3ffc3ea73da3ec9b67ad86bdba6e571094500f784d3d55622a86082"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/after-full-source-byte-preservation.json",
+      "size": 480,
+      "sha256": "ef78074cfb7dabec938f140e2e88e021546357e9c7d33b0547262b17df67199b"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/before-full-source-checkpoint.json",
+      "size": 944,
+      "sha256": "7e4779a53e42a4f224eaad2410f4128462e3f062dce91add7d240f0d51a00981"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/current-Doctor.log",
+      "size": 13487,
+      "sha256": "83814fd407aff5717c6bdba7c88fb847da55202d3bf96d634891b1864356f294"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/current-ToolkitTest.log",
+      "size": 14346,
+      "sha256": "11948fa9cf69b87329683f966b0ef1548c81a6f4003178d6c57b5918c7e7f12b"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/current-full-configured-source.log",
+      "size": 311691,
+      "sha256": "5b242d4424bda4030751197552e3e8e29f152ae203a62355b89c0221c4bdc62d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/current-full-producer-and-selected5-preservation.json",
+      "size": 70460,
+      "sha256": "51cf0aacd130a28b59ad2fe5c6ea80c093073c538a10e0b6a0e819f4a17be4a8"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/current-generation-and-complete-DB-source.log",
+      "size": 5037,
+      "sha256": "6ca97e74eeec4b30945895b00913c4e2b5d5d18a1439fd6a617e8b8f3e9b1eea"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/current-generator-roundtrip.json",
+      "size": 3579,
+      "sha256": "638d6f90802b75904d150086a24a0b842ae501f6a86f85567b872ab7875b4fdc"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/exact-canonical-V2-added-paragraphs.md",
+      "size": 2263,
+      "sha256": "fa000df4d5684a0db49c90d014f9f646842e2a72598d4d8bc651a4959bc22afc"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/exact-canonical-V2-delta.patch",
+      "size": 3053,
+      "sha256": "ae0e988cd582af3df9a2ed7aab5c6e1c9af31bdd52827f461dba8b545e81cd8f"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/final-scoped-static-corrected.log",
+      "size": 6440,
+      "sha256": "7f26cc68f56bca4729f81bd28a39252bed9b9216e60ca8a9dcb2d3a63b387a9b"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/final-scoped-static-initial.log",
+      "size": 6489,
+      "sha256": "144b982fea235b0151c7324ec0526e2e876b4d57affd00a958ea5be82a48328b"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/final-scoped-static-real-paths.log",
+      "size": 5983,
+      "sha256": "0b5aa6f567d6fca20e6bb5f358c7d693ade61dc9ae795a440b18287977edcce0"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/freeze-source-checkpoint.py",
+      "size": 9938,
+      "sha256": "ef27cd707030ed9a4bf3b79e3a7d312d4931c399bd81e2d0c30e464a9a80f1a1"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/github-complete-and-both-YAML-extensions-successor-inventory.json",
+      "size": 11061,
+      "sha256": "cf6994a1caccf679167cb49836bb6dfb6eb75d2ce78f3b73c1c650e00e8cfe5d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/historical-interval-parser-control.json",
+      "size": 517,
+      "sha256": "42fc332aceee66e2e6ead176cbcd0a2d8f5214dfed0701cdbc78cbccaf7eb2f7"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/historical-interval-parser-control.log",
+      "size": 4174,
+      "sha256": "36d22c528978bd95aa7975998f25d2ba35029b8cf3900e3df5d85f59cd6c0084"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/implementation-scope-proof.json",
+      "size": 1731,
+      "sha256": "4365b8ff7341561d455583aeee8753b571c1a40490d61ce65051f791f7212b53"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/merge-tree-original.txt",
+      "size": 428,
+      "sha256": "ed7f9311cc4b3f77b3f1c82ffbb7f3e44c63aa51298eea334be2832217f235f2"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/observer-V2-GREEN-boundaries.log",
+      "size": 4345,
+      "sha256": "23fb8ce56ddddd65e9343d7c657caa4f257979bd143d3abaa24fb7a9b7658a68"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/observer-V2-GREEN-initial.log",
+      "size": 3839,
+      "sha256": "ab8a471df6a45e09f510ee6eb80e030ff9f879b03f0a908faa38a8c71a07aed4"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/observer-V2-final-privacy-GREEN.log",
+      "size": 4396,
+      "sha256": "4756ab07eeb2f75f201a6931f8a5f2340e839fc673910af516f7c027ccaa94f9"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/observer-V2-preimplementation-RED-real-result.log",
+      "size": 55835,
+      "sha256": "13f0f954efb17c473289a5df58888dda2a9baf0ae74f98b8c961fd036875b306"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/observer-V2-preimplementation-RED.log",
+      "size": 50850,
+      "sha256": "850843245b7e69b98311bfd60468db0a6f6f83f47d115f90a02b838dd6fa1c93"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/ordinary-merge-frozen-checkpoint.json",
+      "size": 831,
+      "sha256": "8943a8b057d18f8447c7aaa563a013efbe0b0638d6a5ba110806f797f84be856"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/origin-action_server.json",
+      "size": 283,
+      "sha256": "821d911ab56b7ee0b89eb31ddf3ce4457169d21821e28d90c6a3c2a1ec78e7ac"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/origin-actions-http-helper.json",
+      "size": 264,
+      "sha256": "a1fbe59ca022e1eb12b153ce3c4cb4367199285759a85d72fbe994b9a0d63ff4"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/origin-actions.json",
+      "size": 218,
+      "sha256": "0b5cefe74a2b488991409a0a99431fbcbe1a11a00afe22be8f44a36b556f7b85"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/origin-devutils.json",
+      "size": 240,
+      "sha256": "5acbf91f56445f2efa0bd2afc45d44737f3a1e17661591e9f8f81fafea6eebee"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/origin-work-items.json",
+      "size": 249,
+      "sha256": "ddde67b3d3048dd076042103f7a437dae472fc833529de709d1fab413207f01d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/own-Bootstrap-reuse-inputs-and-origins.json",
+      "size": 6419,
+      "sha256": "7e2701d78d4ff244beb186121404980d9e63b4b35256b676570846393997ec24"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/own-Bootstrap-reuse.log",
+      "size": 6703,
+      "sha256": "b54ee44fb7a30e8941416fc9e8928af046ca4adb37a44f8f36ea00236185e796"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/verify-generator-roundtrip.py",
+      "size": 1050,
+      "sha256": "134bd3c3c5c4d7908799c323f42fa3f6085710795c021011a64289cf37961dcc"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/verify-historical-interval-parser.py",
+      "size": 1764,
+      "sha256": "3b9ed1610f06ac1578f767ec6f38f14554123a6f6ecaca3b6c4702c94f11686b"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/verify-implementation-scope.py",
+      "size": 4263,
+      "sha256": "425ce4618991620430ce80c685f4e6a79cedcbdb8378ddf19e334f7e96ee9950"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/verify-own-prepared-env.py",
+      "size": 2684,
+      "sha256": "9eca048868b1bb17f2ed322c0380c1a09302806af524f46fca75fad4fbb4deec"
+    },
+    {
+      "path": "/workspace/engineering/windows-next-observation-owned/design-v2.md",
+      "size": 13875,
+      "sha256": "a23775765d3295a8019a2d88ddaea571049b8a55ed988a9b10635c7bcf28257c"
+    },
+    {
+      "path": "/workspace/engineering/windows-next-observation-independent-review/independent-v2-design-review.json",
+      "size": 12370,
+      "sha256": "95f44464acd56e278a87890e0c5f24da9b38cbfb044f925f48bbf1c2221355e3"
+    },
+    {
+      "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/safe-terminal-failure-and-v2-activation-review.json",
+      "size": 27556,
+      "sha256": "fd8621daa58c6f0d570b293fbb49d7778a875c337f0eb18f4195fcf3c0c068dc"
+    },
+    {
+      "path": "/workspace/engineering/pr306-refresh-preparation/frozen-source-receipt.json",
+      "size": 13902,
+      "sha256": "cf34ca2aec87e1b6d0db6313683ce37a53bdd8fb0488f05bf61fe075ebc0b030"
+    },
+    {
+      "path": "/workspace/engineering/pr306-independent-current-review/independent-current-source-review.json",
+      "size": 11382,
+      "sha256": "4533d20b974e3ee92b145c0a5c24587374278de9b62d08fd4722a243ca9b2b62"
+    }
+  ],
+  "preservation": {
+    "total_leaves": 1409,
+    "other_leaf_body_mode_exact": 1406,
+    "authorized_three_paths": [
+      "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "whole_module_outside_DeliveredObservations_AST_exact": true,
+    "unchanged_loss_privacy_cleanup_methods": [
+      "_record",
+      "_count",
+      "cleanup_returned",
+      "cleanup_raised",
+      "start_finished"
+    ],
+    "changed_precision_methods": [
+      "__init__",
+      "_offset",
+      "line",
+      "process_start_returned",
+      "summary",
+      "_instant"
+    ],
+    "original58controls_helper_imports_AST_exact": true,
+    "new_boundary_functions": [
+      "test_ready_lower_bound_uses_exact_instants_not_rounded_display",
+      "test_reported_rounding_counterexample_stays_postbound",
+      "test_unknown_start_return_clock_keeps_deadline_classification_unknown"
+    ],
+    "all_original_process_callback_and_cleanup_wrapper_AST_exact": true,
+    "all90_20_80_88_50ms_other30s_budgets_and_original_tuple_exception_identity_unchanged": true,
+    "producer_inputs": 268,
+    "native_producer_delta": [
+      "action_server/src/actions/server/_database.py"
+    ],
+    "selected_tests_body_mode_equal_native": 5,
+    "github_leaves_preserved": 34,
+    "yaml_yml_inventory": 30,
+    "original_yml_roundtrip_scope": 29,
+    "bootstrap_input_digests": 30,
+    "own_environment_configs": 5,
+    "before_after_full_committed_three_source_sha256": {
+      "action_server/tests/action_server_tests/native_startup_diagnostics.py": "b365e561c79240146ed5ac8fb07735d095cab11a25dba038bd43cbf3d80bbee4",
+      "action_server/tests/action_server_tests/test_native_startup_diagnostics.py": "d26fdec852b8a70f98237226dac6bcf47a5a4e3fc1e4cb21ddd5e3c868f7d0c5",
+      "docs/skills/repository-operations.md": "4c7d77b0b19c7677b1113bc2d84fcb267c13cbcab3fae8f9a00e23cdf90363ad"
+    }
+  },
+  "precision_finding_disposition": {
+    "original_HOLD": {
+      "path": "/workspace/engineering/pr306-V2-independent-source-review/independent-original-cf6352-source-review-HOLD.json",
+      "size": 17006,
+      "sha256": "24a0d2c1bf0e0cfa18a141dbbfb0952e0fdf297ff7b93be25c58ea681a08cba7"
+    },
+    "status": "RESOLVED_FOR_THIS_SUCCESSOR_SOURCE_ONLY",
+    "fix": "Private absolute raw monotonic start and delivered match instants classify strict less-than; display offsets alone rounded3. No offset subtraction or display-rounding feeds comparator.",
+    "meaningful_TDD": "Original source RED9/5/58deselected; current72 observer controls =original58+14 new cases. Four origins xpre/equal/post12 plus reportedcounterexample and unavailable-clock; exact equality/post-boundFalse; actual source never imported/executed by reviewer.",
+    "independent_scalar_control_summary": [
+      {
+        "origin": 0.0,
+        "delta": -0.0001,
+        "strict_raw_before_bound": true
+      },
+      {
+        "origin": 0.0,
+        "delta": 0.0,
+        "strict_raw_before_bound": false
+      },
+      {
+        "origin": 0.0,
+        "delta": 0.0001,
+        "strict_raw_before_bound": false
+      },
+      {
+        "origin": 1000.125,
+        "delta": -0.0001,
+        "strict_raw_before_bound": true
+      },
+      {
+        "origin": 1000.125,
+        "delta": 0.0,
+        "strict_raw_before_bound": false
+      },
+      {
+        "origin": 1000.125,
+        "delta": 0.0001,
+        "strict_raw_before_bound": false
+      },
+      {
+        "origin": 1048576.0,
+        "delta": -0.0001,
+        "strict_raw_before_bound": true
+      },
+      {
+        "origin": 1048576.0,
+        "delta": 0.0,
+        "strict_raw_before_bound": false
+      },
+      {
+        "origin": 1048576.0,
+        "delta": 0.0001,
+        "strict_raw_before_bound": false
+      },
+      {
+        "origin": 1000000000.0,
+        "delta": -0.0001,
+        "strict_raw_before_bound": true
+      },
+      {
+        "origin": 1000000000.0,
+        "delta": 0.0,
+        "strict_raw_before_bound": false
+      },
+      {
+        "origin": 1000000000.0,
+        "delta": 0.0001,
+        "strict_raw_before_bound": false
+      }
+    ],
+    "unknown_and_scope": "Missing start measurement remainsNone; report excludes private instants. Pre-conservative-bound delivery does not prove Future readiness, native emission or actual deadline success."
+  },
+  "current_frozen_validation": {
+    "precision_RED_on_original_cf6352": "9 failed, 5 passed, 58 deselected; exact post/equal boundary false positives reproduced",
+    "current_observer_controls": "72 passed; original58 plus14 fractional/equal/post/unknown cases",
+    "Doctor": "PASS",
+    "Bootstrap": "REUSE ONLY: 30 actual unique gateway/build/manifest/lock inputs and five own package origins/prefixes verified; no install",
+    "ToolkitTest": "69 passed; developer Ruff PASS",
+    "scoped_source": "94 passed",
+    "complete_DB_source": "61 passed; 12 PostgreSQL skips retained, no actual PostgreSQL run",
+    "configured_static": "301 files formatted/Isort/Ruff PASS; Mypy337 PASS; optional Markdown lint unavailable",
+    "generation": "8 generated workflows plus dependabot roundtrip unchanged;29 yml files scope, separately complete34GitHub leaves/30 yaml+yml bytes/modes unchanged",
+    "full_configured_source": {
+      "passed": 1216,
+      "skipped": 13,
+      "warnings": 15,
+      "seconds": 127.85,
+      "workers": 2,
+      "RCC": "SUCCESS",
+      "outer_seconds": 600,
+      "kill_grace_seconds": 10
+    }
+  },
+  "original_result_identity": "cf6352/f542/HOLD24a/full1202 retained unchanged; successor1216 bound separately. No historical Windows failures or native proof relabeled.",
+  "remaining_HOLDs": [
+    "Fresh exact source hosted CI and actual bounded two-node V2 native observation absent",
+    "Original six first readiness failures remain historical; no native child pipe/forwarding/emitter/Future/rootcause established",
+    "Native92498 productionDB delta UNQUALIFIED; no new native artifact/build/retry",
+    "Broader PostgreSQL/privatefull134/metadata/OAuth/release/coldinstallation gates unchanged",
+    "This is normal existing branch source push GO only; root owns push and any separately authorized future actual or merge"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact implemented5line precision delta in this successor",
+    "Durable_learning_captured": "Strict deadline classification uses private unrounded monotonic instants, serialized offsets display only; equalityFalse and conservative lower-bound scope explicit.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr306-v2-precision-successor/exact-precision-canonical-delta.patch",
+        "size": 1263,
+        "sha256": "70cc7d514c45172e07fcee0f9ca683a2fe90e59de77d6ec5e5bd6af982d36c78"
+      },
+      {
+        "path": "/workspace/engineering/pr306-v2-precision-successor/precision-successor-frozen-source-checkpoint.json",
+        "size": 11775,
+        "sha256": "3036e4b8e5121e5bce8e3bee93e41137b5636f2d155d94b290759e54ec4d7923"
+      },
+      {
+        "path": "/workspace/engineering/pr306-V2-independent-source-review/independent-original-cf6352-source-review-HOLD.json",
+        "size": 17006,
+        "sha256": "24a0d2c1bf0e0cfa18a141dbbfb0952e0fdf297ff7b93be25c58ea681a08cba7"
+      },
+      "Original9RED/current72GREEN14new boundary cases, immutable comparator and pure scalar classifications across4origins"
+    ],
+    "Stale_or_ambiguous_guidance_removed": "cf6352 could claim predeadline from rounded offsets; successor now implements raw comparator and exact guide explains equality/positive lower-bound limits.",
+    "Remaining_uncertainty": "Actual Windows observation, readiness Future/native emitter/internal transport and cause remain unavailable; sourceGO not actual/release/private admission.",
+    "Prior_proposal_disposition": "e2f885f8 independently proposed precision lesson ADAPTED/INTEGRATED; source-backed strict equality/conservative-bound clarification added. Original36line ae0e988c operational lesson otherwise retained byte-exact."
+  },
+  "Upstream_disposition": "none; local Actions observer correction, no confirmed RCC upstream defect or external mutation",
+  "review_execution": "Read-only Git/AST/hash/frozen log and standard-library scalar arithmetic; no source imports, gateway/tests/replay/native/provider/browser/install/push/merge."
+}

@@ -1,0 +1,197 @@
+{
+  "verdict": "GO_EXACT_PUBLIC_LINUX_SPRIME_THREE_CASE_ACCEPTANCE_ONLY",
+  "source_candidate": {
+    "sha": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4"
+  },
+  "control": {
+    "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf"
+  },
+  "run": {
+    "id": 38118856632,
+    "attempt": 1,
+    "event": "push",
+    "job": 114409238566,
+    "status": "completed/success"
+  },
+  "original_archive": {
+    "id": 11694723060,
+    "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-artifact-11694723060.zip",
+    "size": 8018,
+    "sha256": "59d3448321e40fe0801a2a5f836823752f0fb06932262150dc37ecd19bb8e2fb",
+    "members": [
+      {
+        "member": "rcc-provider-rollback-evidence/acceptance-summary.json",
+        "size": 3067,
+        "sha256": "fc890a42818bcc98d53afaf55eda39ff0f44a594b568e038a6bdea3e5fb98550"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/acceptance-summary.log",
+        "size": 686,
+        "sha256": "3ce127f2f38334266d744fd92399270e4c166b5be7f4e208216466f50e830dff"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/lifecycle-receipt.json",
+        "size": 8972,
+        "sha256": "04e1284dede009ceee949bd59d61456b8fd75c2aeafdeab0ba70db74cb96e6b4"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/lifecycle-summary.json",
+        "size": 1221,
+        "sha256": "514c67a075377943f5d4061219cc1987a32669f4bb9e22f4ef7ed2bd9dc2b33f"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/published-details-receipt.json",
+        "size": 1483,
+        "sha256": "0267305165215bed09907ed0d7e1c3abd8822fe72d9b8e1cecb17cc588802361"
+      },
+      {
+        "member": "rcc-provider-rollback-evidence/staged-consumer-receipt.json",
+        "size": 2393,
+        "sha256": "890e32bfb1df2bb99a78637e2aeba1ea5918b07fbebcdd371a455bacb0603355"
+      },
+      {
+        "member": "rcc-provider-rollback-junit.xml",
+        "size": 752,
+        "sha256": "8fc2ebe97228a1568b489293bfaf0e698081d2e8d6eb05a3cd11d3dbae3fcb67"
+      }
+    ]
+  },
+  "complete_original_job_private": {
+    "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/original-job-114409238566.log",
+    "size": 908083,
+    "sha256": "f1b471186942061f615a5ac9e83902a29cfcca83174ef22eac6bbf24d2967fc7",
+    "decoded_original_UTF16_units": 907587,
+    "lines": 6554,
+    "acquired_once": true,
+    "mode": "0600",
+    "summary": "3PASS1warning169.44s"
+  },
+  "verified": {
+    "source_nine_git_body_modes": {
+      "action_package_handler": {
+        "path": "action_server/src/actions/server/_action_package_handler.py",
+        "sha256": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64",
+        "mode": "100644"
+      },
+      "actions_import": {
+        "path": "action_server/src/actions/server/_actions_import.py",
+        "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3",
+        "mode": "100644"
+      },
+      "runtime_adapter": {
+        "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+        "sha256": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a",
+        "mode": "100644"
+      },
+      "rollback_test": {
+        "path": "action_server/tests/action_server_tests/test_current_candidate_import_rollback.py",
+        "sha256": "60d81fabaa2ba0446ff888109e050c883ee944553794636fd527a6fe27d4691b",
+        "mode": "100644"
+      },
+      "staged_consumer_test": {
+        "path": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+        "sha256": "0edc5d092dba9415f552ee1f666edac8f3ce9e833bea1ef73f8370ed2d446e6a",
+        "mode": "100644"
+      },
+      "source_staging": {
+        "path": "action_server/src/actions/server/deployments/source_staging.py",
+        "sha256": "fda3f2c045414a9cae21cc0765a3eb7c72db2ddd2f5d74e567a04a0513baf620",
+        "mode": "100644"
+      },
+      "source_read": {
+        "path": "action_server/src/actions/server/deployments/source_read.py",
+        "sha256": "4ae8cbe57aa5c924585f4257a1be1700aa49baa63d6150efba20935045f7a8a5",
+        "mode": "100644"
+      },
+      "source_manifest": {
+        "path": "action_server/src/actions/server/deployments/source_manifest.py",
+        "sha256": "4fb8d376d1b4aa06d301dedaeee67a2916561c7d10b8f1dadd657870b37b2b43",
+        "mode": "100644"
+      },
+      "acceptance_helper": {
+        "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+        "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+        "mode": "100644"
+      }
+    },
+    "lifecycle_source_clean_and_11_parent_delta_hashes_exact": true,
+    "three_Runtime_module_hashes_and_candidate_source_origins": true,
+    "summary_admission_passed": true,
+    "raw_three_receipts_statusPASS": true,
+    "three_exact_JUnit": [
+      [
+        "tests.action_server_tests.test_current_candidate_import_rollback",
+        "test_current_candidate_failed_reload_keeps_last_good_action_usable",
+        "73.748"
+      ],
+      [
+        "tests.action_server_tests.test_source_staging_rcc_consumer",
+        "test_staged_package_executes_in_managed_rcc_runtime",
+        "61.913"
+      ],
+      [
+        "tests.action_server_tests.test_source_staging_rcc_consumer",
+        "test_published_artifact_details_preserves_one_rcc_identity_pair",
+        "33.703"
+      ]
+    ],
+    "JUnit": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 3
+    },
+    "one_actual_publication_command": true,
+    "same_retained_JSON_exact_pure_string_and_details_parsers": "PASS; no newpublish/Runtime execution",
+    "publication_pair": {
+      "specification_digest": "sha256:5e7dcfdb9f4ca5cc19ca6b2e93cad75a3fd60f598d4a71fd10451bffc1ddc56f",
+      "artifact_digest": "sha256:c2e5b2b084f7901e1c319411a1f3509afd14fc321bfc092d5628d510be855053",
+      "raw_json_sha256": "2cfe785eafe95d46967e82617e7e8f098b1a6366baaa9b27c0a1ef73f77015a7",
+      "invocation_count": 1
+    },
+    "lifecycle_same_two_provider_ops": [
+      "publish",
+      "acquire"
+    ],
+    "three_unique_runs_status2_and_lastgood_recovered": true,
+    "artifact_reused_source_generation_changes": true,
+    "three_case_provider_artifacts": "Distinct fixture identities; do not combine publication details/staged/lifecycle into one shared operation",
+    "staged_two_entry_body_inventory_and_mode420_equal": true,
+    "managed_Core102_typed_origin_containment": true,
+    "RCC_and_default_version": "v18.19.3/Linux7e588c",
+    "runner_glibc_compatible": true,
+    "profile_scope": "Inherited source/provider profile contract unchanged; isolated homes and loopbackprovider source assertions executed in these exact cases; no namedprofile/universal trust carrier claim",
+    "shutdown_http": 200,
+    "natural_return_before_cleanup": 1,
+    "forced_stop_used": false,
+    "captured_descendants_before_after": {
+      "before": 0,
+      "after": 0
+    },
+    "postcleanup_return_is_natural_evidence": false,
+    "complete_universal_descendant_reaping": "NOT_PROVED; captured-tree-only old observer scope",
+    "trace_scope": "23 summarized RCC entries; phase is a one-element list slice, not complete argv or universal child activity. Provider operations verified separately."
+  },
+  "merge": "HOLD fresh fullCI/testedmerge and lateRuntimepublisher currentinventory pending; this actualGO is S-prime/C-prime publicLinux3case only",
+  "HOLDs": [
+    "Fresh exactSprime/Cprime hostedpublicLinux3case and fulltestedmergeCI",
+    "newfrozenartifactqualification for changedadapter/nativeproducer",
+    "Originalprivate01f/fafb/frozenv6 metadata/supervisor/full134135",
+    "WindowsRCC/Core1.0.3/fullrelease/publication"
+  ],
+  "historical_receipts": "63cf/26checks/artifact11691074610 remain originalS43a/Cba04; no current relabel",
+  "mutations": "Owned original downloads/extraction/reviewreceipt only; no checkout/ref/source/actual rerun/push/merge/application writes",
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md accepted fef375 source/control/nine-sample/fullproducer/testedmerge patch integrated S-prime, C-prime byte-exact",
+    "Durable_learning_captured": "Authenticate nine reported hashes under actual immutable candidate; keep actual control and fullCI testedmerge separate even tree-equal. One measured publication JSON supports both parser identities; captured shutdown and mapped Core1.0.2 are bounded evidence.",
+    "Evidence": "Fresh original11694723060 archive/API digest+all7members, completejob114409238566, exact3JUnit, rawcandidate/control tuple, nineGitbody/mode and natural-before-cleanup receipt above",
+    "Stale_or_ambiguous_guidance_removed": "Accepted fef375 explicitly blocks carrying oldcontrol receipts/sample hashes onto currentunion/fullproducer. New frozen proof has its own tuple; no extra cosmetic proposal.",
+    "Remaining_uncertainty": "CurrentfullCI/publisher/testedmerge, adapterchanged92498UNQUALIFIED, originalprivate/full134metadata, WindowsRCC/Core103/wholewheel/fullrelease and complete reaping remain unqualified.",
+    "accepted_patch_sha256": "fef37515784cbf9fbb003ecca90ec0acb78d8e319bf2fd0ce2c2c1805ff955e6",
+    "disposition": "Existing accepted exactdelta verified once, retained unchanged; newactualevidence supports its narrow scope."
+  },
+  "Upstream_disposition": "none",
+  "review_script_sha256": "c1e6c59c7cf3a896d9ac3982a91cc93249ef785da87d893465f0f1af1b0ba002"
+}

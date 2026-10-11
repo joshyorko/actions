@@ -1,0 +1,352 @@
+{
+  "status": "HOLD_ORIGINAL_CF6352_READY_DEADLINE_PRECISION_NO_PUSH_GO",
+  "source": {
+    "head": "cf6352e253c70095c8e09904e730fc18a42f9a65",
+    "tree": "6905620ca6d0cd7d9b84c67750f18fc3f8be5167",
+    "ordered_parents": [
+      "e281cbc05dcf2e42d9b37d8879ad986803e6a5e7"
+    ]
+  },
+  "immutable_source_not_mutable_checkout": true,
+  "verified_checkpoint": {
+    "path": "/workspace/engineering/pr306-windows-v2-source/implementation-V2-frozen-source-checkpoint.json",
+    "size": 20285,
+    "sha256": "f542bc04747ea8fd8741c309f26de523ee347c8aee82320931f44accf9681be0"
+  },
+  "verified_evidence_files_count": 36,
+  "verified_immutable_references_count": 5,
+  "evidence": [
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/after-full-source-byte-preservation.json",
+      "size": 480,
+      "sha256": "ef78074cfb7dabec938f140e2e88e021546357e9c7d33b0547262b17df67199b"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/before-full-source-checkpoint.json",
+      "size": 944,
+      "sha256": "7e4779a53e42a4f224eaad2410f4128462e3f062dce91add7d240f0d51a00981"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/current-Doctor.log",
+      "size": 13487,
+      "sha256": "83814fd407aff5717c6bdba7c88fb847da55202d3bf96d634891b1864356f294"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/current-ToolkitTest.log",
+      "size": 14346,
+      "sha256": "11948fa9cf69b87329683f966b0ef1548c81a6f4003178d6c57b5918c7e7f12b"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/current-full-configured-source.log",
+      "size": 311691,
+      "sha256": "5b242d4424bda4030751197552e3e8e29f152ae203a62355b89c0221c4bdc62d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/current-full-producer-and-selected5-preservation.json",
+      "size": 70460,
+      "sha256": "51cf0aacd130a28b59ad2fe5c6ea80c093073c538a10e0b6a0e819f4a17be4a8"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/current-generation-and-complete-DB-source.log",
+      "size": 5037,
+      "sha256": "6ca97e74eeec4b30945895b00913c4e2b5d5d18a1439fd6a617e8b8f3e9b1eea"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/current-generator-roundtrip.json",
+      "size": 3579,
+      "sha256": "638d6f90802b75904d150086a24a0b842ae501f6a86f85567b872ab7875b4fdc"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/exact-canonical-V2-added-paragraphs.md",
+      "size": 2263,
+      "sha256": "fa000df4d5684a0db49c90d014f9f646842e2a72598d4d8bc651a4959bc22afc"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/exact-canonical-V2-delta.patch",
+      "size": 3053,
+      "sha256": "ae0e988cd582af3df9a2ed7aab5c6e1c9af31bdd52827f461dba8b545e81cd8f"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/final-scoped-static-corrected.log",
+      "size": 6440,
+      "sha256": "7f26cc68f56bca4729f81bd28a39252bed9b9216e60ca8a9dcb2d3a63b387a9b"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/final-scoped-static-initial.log",
+      "size": 6489,
+      "sha256": "144b982fea235b0151c7324ec0526e2e876b4d57affd00a958ea5be82a48328b"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/final-scoped-static-real-paths.log",
+      "size": 5983,
+      "sha256": "0b5aa6f567d6fca20e6bb5f358c7d693ade61dc9ae795a440b18287977edcce0"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/freeze-source-checkpoint.py",
+      "size": 9938,
+      "sha256": "ef27cd707030ed9a4bf3b79e3a7d312d4931c399bd81e2d0c30e464a9a80f1a1"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/github-complete-and-both-YAML-extensions-successor-inventory.json",
+      "size": 11061,
+      "sha256": "cf6994a1caccf679167cb49836bb6dfb6eb75d2ce78f3b73c1c650e00e8cfe5d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/historical-interval-parser-control.json",
+      "size": 517,
+      "sha256": "42fc332aceee66e2e6ead176cbcd0a2d8f5214dfed0701cdbc78cbccaf7eb2f7"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/historical-interval-parser-control.log",
+      "size": 4174,
+      "sha256": "36d22c528978bd95aa7975998f25d2ba35029b8cf3900e3df5d85f59cd6c0084"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/implementation-scope-proof.json",
+      "size": 1731,
+      "sha256": "4365b8ff7341561d455583aeee8753b571c1a40490d61ce65051f791f7212b53"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/merge-tree-original.txt",
+      "size": 428,
+      "sha256": "ed7f9311cc4b3f77b3f1c82ffbb7f3e44c63aa51298eea334be2832217f235f2"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/observer-V2-GREEN-boundaries.log",
+      "size": 4345,
+      "sha256": "23fb8ce56ddddd65e9343d7c657caa4f257979bd143d3abaa24fb7a9b7658a68"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/observer-V2-GREEN-initial.log",
+      "size": 3839,
+      "sha256": "ab8a471df6a45e09f510ee6eb80e030ff9f879b03f0a908faa38a8c71a07aed4"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/observer-V2-final-privacy-GREEN.log",
+      "size": 4396,
+      "sha256": "4756ab07eeb2f75f201a6931f8a5f2340e839fc673910af516f7c027ccaa94f9"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/observer-V2-preimplementation-RED-real-result.log",
+      "size": 55835,
+      "sha256": "13f0f954efb17c473289a5df58888dda2a9baf0ae74f98b8c961fd036875b306"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/observer-V2-preimplementation-RED.log",
+      "size": 50850,
+      "sha256": "850843245b7e69b98311bfd60468db0a6f6f83f47d115f90a02b838dd6fa1c93"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/ordinary-merge-frozen-checkpoint.json",
+      "size": 831,
+      "sha256": "8943a8b057d18f8447c7aaa563a013efbe0b0638d6a5ba110806f797f84be856"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/origin-action_server.json",
+      "size": 283,
+      "sha256": "821d911ab56b7ee0b89eb31ddf3ce4457169d21821e28d90c6a3c2a1ec78e7ac"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/origin-actions-http-helper.json",
+      "size": 264,
+      "sha256": "a1fbe59ca022e1eb12b153ce3c4cb4367199285759a85d72fbe994b9a0d63ff4"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/origin-actions.json",
+      "size": 218,
+      "sha256": "0b5cefe74a2b488991409a0a99431fbcbe1a11a00afe22be8f44a36b556f7b85"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/origin-devutils.json",
+      "size": 240,
+      "sha256": "5acbf91f56445f2efa0bd2afc45d44737f3a1e17661591e9f8f81fafea6eebee"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/origin-work-items.json",
+      "size": 249,
+      "sha256": "ddde67b3d3048dd076042103f7a437dae472fc833529de709d1fab413207f01d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/own-Bootstrap-reuse-inputs-and-origins.json",
+      "size": 6419,
+      "sha256": "7e2701d78d4ff244beb186121404980d9e63b4b35256b676570846393997ec24"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/own-Bootstrap-reuse.log",
+      "size": 6703,
+      "sha256": "b54ee44fb7a30e8941416fc9e8928af046ca4adb37a44f8f36ea00236185e796"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/verify-generator-roundtrip.py",
+      "size": 1050,
+      "sha256": "134bd3c3c5c4d7908799c323f42fa3f6085710795c021011a64289cf37961dcc"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/verify-historical-interval-parser.py",
+      "size": 1764,
+      "sha256": "3b9ed1610f06ac1578f767ec6f38f14554123a6f6ecaca3b6c4702c94f11686b"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/verify-implementation-scope.py",
+      "size": 4263,
+      "sha256": "425ce4618991620430ce80c685f4e6a79cedcbdb8378ddf19e334f7e96ee9950"
+    },
+    {
+      "path": "/workspace/engineering/pr306-windows-v2-source/verify-own-prepared-env.py",
+      "size": 2684,
+      "sha256": "9eca048868b1bb17f2ed322c0380c1a09302806af524f46fca75fad4fbb4deec"
+    },
+    {
+      "path": "/workspace/engineering/windows-next-observation-owned/design-v2.md",
+      "size": 13875,
+      "sha256": "a23775765d3295a8019a2d88ddaea571049b8a55ed988a9b10635c7bcf28257c"
+    },
+    {
+      "path": "/workspace/engineering/windows-next-observation-independent-review/independent-v2-design-review.json",
+      "size": 12370,
+      "sha256": "95f44464acd56e278a87890e0c5f24da9b38cbfb044f925f48bbf1c2221355e3"
+    },
+    {
+      "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/safe-terminal-failure-and-v2-activation-review.json",
+      "size": 27556,
+      "sha256": "fd8621daa58c6f0d570b293fbb49d7778a875c337f0eb18f4195fcf3c0c068dc"
+    },
+    {
+      "path": "/workspace/engineering/pr306-refresh-preparation/frozen-source-receipt.json",
+      "size": 13902,
+      "sha256": "cf34ca2aec87e1b6d0db6313683ce37a53bdd8fb0488f05bf61fe075ebc0b030"
+    },
+    {
+      "path": "/workspace/engineering/pr306-independent-current-review/independent-current-source-review.json",
+      "size": 11382,
+      "sha256": "4533d20b974e3ee92b145c0a5c24587374278de9b62d08fd4722a243ca9b2b62"
+    }
+  ],
+  "source_preservation": {
+    "total_leaves": 1409,
+    "exact_other_leaves_modes": 1406,
+    "authorized_paths": [
+      "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "ordinary_parent_non_doc_union_exact": true,
+    "normalized_original_observer_AST_exact": true,
+    "original_test_functions_AST_exact": [
+      "test_failure_keeps_exception_and_observes_before_cleanup",
+      "test_ready_start_cancels_future_samples",
+      "test_observation_failure_does_not_replace_startup_failure",
+      "test_explicit_gate_only_enables_selected_windows_native_nodes",
+      "test_allowlist_omits_poisoned_command_and_stderr",
+      "test_failed_artifact_write_does_not_mask_original_error",
+      "test_snapshot_rejects_descendant_whose_parent_changed",
+      "test_installed_observer_hashes_native_only_after_original_cleanup"
+    ],
+    "canonical_added_lines": 36,
+    "producer_inputs": 268,
+    "producer_delta_only": [
+      "action_server/src/actions/server/_database.py"
+    ],
+    "selected_five_report": true,
+    "github_leaves": 34,
+    "yaml_yml_inventory_count": 30,
+    "original_yml_roundtrip_scope": 29,
+    "bootstrap_inputs_exact": 30,
+    "own_environment_configs_and_retained_origins": 5
+  },
+  "reviewed_no_additional_blocker": [
+    "Two FIRST Windows native actions_sync timeout90 allowlist, unchanged90/20/80/88/50ms/other30s behavior",
+    "Existing callback delivery only; no new readers, processes, launch/argv/env/port/Future/stop/kill/wait",
+    "Nonblocking measurement loss, invalid marks, version/count/cap/truncation/overflow permanently disqualify invocation sum",
+    "Probe failures caught before Callback logger.exception; fixed scalar/categories only",
+    "Process wrappers limited by identity; exact original args/kwargs, tuple/result and exception object preserved",
+    "Actual returned cleanup result distinguished from host state, None/unavailable and raised; no inferred successful cleanup"
+  ],
+  "finding": {
+    "path": "/workspace/engineering/pr306-V2-independent-source-review/original-cf6352-precision-finding.json",
+    "size": 1586,
+    "sha256": "c635472ba8bba791c3a209ba380270010510078b1df7e5b45c1300ed2c1bbf57"
+  },
+  "remaining_counterexamples": "No additional counterexample found in immutable cf6352 review. Successor unreviewed; root coordinates its own full gate and freeze.",
+  "original_configured_results_only": {
+    "Doctor": "PASS",
+    "Bootstrap": "verified own original successful preparation reuse;30 complete declaredinput bytes equal0babc +five actual own prefixes/origins; NO INSTALL",
+    "ToolkitTest": {
+      "passed": 69,
+      "seconds": 11.38
+    },
+    "preimplementation_meaningful_RED": {
+      "failed": 33,
+      "passed": 10,
+      "seconds": 1.8,
+      "cause": "original observer lacks DeliveredObservations/owned hook and emitted fields; actual real cleanup fixture validated before RED"
+    },
+    "final_servicefree_observer_controls": {
+      "passed": 58,
+      "seconds": 0.49
+    },
+    "scoped_observer_existing_process_database_workflow": {
+      "passed": 80,
+      "seconds": 10.63
+    },
+    "complete_DB_source": {
+      "passed": 61,
+      "skipped_PostgreSQL": 12,
+      "seconds": 8.77
+    },
+    "configured_lint": "PASS Ruffcheck/configuredformat301/Isort; optionalMarkdownlint unavailable, no ad hoc install",
+    "configured_typecheck": {
+      "passed_files": 337
+    },
+    "full_configured_Runtime_nonintegration": {
+      "passed": 1202,
+      "skipped": 13,
+      "warnings": 15,
+      "seconds": 131.12,
+      "workers": 2,
+      "gateway": "RCC -> prepared own Poetry invoke test-not-integration; existing -m not integration_test --force-regen -n auto",
+      "outer_bound_seconds": 600,
+      "TERM_kill_grace_seconds": 10
+    },
+    "generator_roundtrip": "8 outputs+dependabot PASS; original traversal29 .yml exact; named successor complete34 GitHub leaves/all30 yaml+yml equalsactual774/e281; measured25workflow+1dependabot+1change-tiers+3forms",
+    "after_full_source_bytes": "allthree owned file sha256 exact before/after; allother1406 modes/leaves exact parent",
+    "historical_numeric_parser_control": "PASS 16authenticated original299 fixture marks sum89.259; purely current parser control, not currentnative measurement",
+    "git_diff_check": "PASS"
+  },
+  "original_windows_failure": "C38 source six FIRST readiness waits failed; two observed active holotree variable samples, no rawmarks and actualcleanup unavailable. Oldfd862 receipt retained unchanged; new source cannot relabel those results.",
+  "native_92498": "UNQUALIFIED: complete268 producer inventory retains _database.py-only delta vs92498, allfive selectedinputs exact; no file exclusion/rebuild/newnativeproof",
+  "remaining_HOLDs": [
+    "New exact source hostedWindows/native ready observer evidence and complete current CI",
+    "Host-invisible RCC internal pipes/forwarding/native ready emitter/Future state and rootcause",
+    "Native current artifact/database build provenance, fullissue84 and broader savepoint/PostgreSQL variants",
+    "Private metadata/supervisor/full134135 and release/publication gates unchanged",
+    "cf6352 strict predeadline attribution has precision defect; no normal-push GO for cf6352",
+    "Mutable precision successor needs separate immutable source/control review and current full gates"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact precision proposal external to checkout",
+    "Durable_learning_captured": "Unrounded monotonic instants determine strict deadline classification; rounding belongs only to serialized display. Fractional clock origins must be controlled.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr306-V2-independent-source-review/original-cf6352-precision-finding.json",
+        "size": 1586,
+        "sha256": "c635472ba8bba791c3a209ba380270010510078b1df7e5b45c1300ed2c1bbf57"
+      },
+      {
+        "path": "/workspace/engineering/pr306-V2-independent-source-review/exact-precision-canonical-proposal.patch",
+        "size": 895,
+        "sha256": "e2f885f8ad15a734f3d824afe8cce956a6e1d9488b51426bdf238b4f26e1f3a0"
+      },
+      "Immutable cf6352 _offset and threshold source; concrete static false predeadline counterexample"
+    ],
+    "Stale_or_ambiguous_guidance_removed": "Qualifies cf6352 guide claim that late markers cannot be attributed predeadline; the claim is not implemented correctly until raw-instant successor is qualified.",
+    "Remaining_uncertainty": "Successor source/control/full gate and hosted Windows actual evidence; native internal emitter/pipe/Future, actual root cause, current native producer, private/release remain HOLD.",
+    "Prior_36_line_delta_disposition": "Retained ae0e988c source-backed scope/privacy/cleanup guidance; timing-attribution implementation claim blocked specifically by this finding until separately reviewed precision successor.",
+    "exact_proposed_patch": {
+      "path": "/workspace/engineering/pr306-V2-independent-source-review/exact-precision-canonical-proposal.patch",
+      "size": 895,
+      "sha256": "e2f885f8ad15a734f3d824afe8cce956a6e1d9488b51426bdf238b4f26e1f3a0"
+    }
+  },
+  "Upstream_disposition": "none; local Actions test observer defect, no confirmed upstream failure or authorized external mutation"
+}

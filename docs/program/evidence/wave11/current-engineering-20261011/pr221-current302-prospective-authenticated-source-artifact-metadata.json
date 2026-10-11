@@ -1,0 +1,44 @@
+{
+  "control": {
+    "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "parents": [
+      "d642a3ac24f8da85101538bdfdf59b509fd74bfb"
+    ]
+  },
+  "source": {
+    "sha": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+    "parents": [
+      "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+    ]
+  },
+  "synthetic": {
+    "sha": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ]
+  },
+  "artifact": {
+    "id": 11693813383,
+    "name": "Linux-wheels",
+    "size_in_bytes": 28271148,
+    "url": "https://api.github.com/repos/joshyorko/actions/actions/artifacts/11693813383",
+    "archive_download_url": "https://api.github.com/repos/joshyorko/actions/actions/artifacts/11693813383/zip",
+    "expired": false,
+    "created_at": "2026-10-11T06:43:37Z",
+    "expires_at": "2027-01-09T06:41:04Z",
+    "updated_at": "2026-10-11T06:43:37Z",
+    "digest": "sha256:32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6",
+    "workflow_run": {
+      "id": 38118859475,
+      "repository_id": 948932748,
+      "head_repository_id": 948932748,
+      "head_branch": "fix/rcc-published-artifact-details-20261010",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    }
+  }
+}

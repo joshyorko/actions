@@ -1,0 +1,25 @@
+{
+  "helper_original": {
+    "path": "/workspace/engineering/pr282/action_server/tests/action_server_tests/mcp/test_canvas_query_template.py",
+    "bytes": 51505,
+    "sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e"
+  },
+  "305_frozen_snapshot": {
+    "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/test_canvas_query_template.py",
+    "bytes": 51505,
+    "sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e"
+  },
+  "snapshot_mode": "0o444",
+  "prior_source_receipt": {
+    "path": "/workspace/engineering/pr282-staging-source-refresh/frozen-source-receipt.json",
+    "bytes": 14460,
+    "sha256": "1b59d89f584616772ed4881a3c0ae2baea9ea253529dfe1b445b1ef5d856fd74"
+  },
+  "prior_independent_review": {
+    "path": "/workspace/engineering/pr282-staging-source-refresh/independent-frozen-source-review.json",
+    "bytes": 3786,
+    "sha256": "235df4d71ecf79cce044747b99b2f19644bc51177d4972a584b82f03f1577f2a"
+  },
+  "staging_entire_test_module_bytes_unchanged": true,
+  "not_actual_execution": true
+}

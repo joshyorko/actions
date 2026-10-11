@@ -1,0 +1,25 @@
+{
+  "id": "READY_DEADLINE_DISPLAY_ROUNDING_FALSE_PREDEADLINE",
+  "classification": "Actions test-observer correctness; no established upstream or native cause",
+  "source": {
+    "head": "cf6352e253c70095c8e09904e730fc18a42f9a65",
+    "path": "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+    "sha256": "75f85115cc5b927fd78fafeaa353462e89b2b767b63e40704ca8efff62d00b48",
+    "offset_rounding_line": 87,
+    "threshold_line": 195
+  },
+  "counterexample": {
+    "private_start_return_offset": 2.06651,
+    "private_arrival_offset": 92.06661,
+    "exact_deadline_lower_bound": 92.06651,
+    "serialized_start": 2.067,
+    "serialized_arrival": 92.067,
+    "rounded_computed_lower_bound_repr": "92.06700000000001",
+    "exact_predeadline": false,
+    "cf6352_predeadline": true
+  },
+  "scope": "Static source plus standard-library scalar arithmetic only; no source import/test/native/gateway execution",
+  "required_fix": "Retain private unrounded monotonic instants for strict less-than classification; round only serialized display. Equality and post-bound delivery must remain false across fractional origins.",
+  "prior_guidance_disposition": "cf6352 implemented the 36-line guide, but predeadline attribution claim is HOLD until successor precision controls and source independently qualify; other scope/privacy/cleanup descriptions remain source-backed.",
+  "root_and_writer_disposition": "Root accepted HOLD and authorized separate ordinary-child precision fix. This receipt does not assess mutable successor or reuse cf6352 full results for successor."
+}

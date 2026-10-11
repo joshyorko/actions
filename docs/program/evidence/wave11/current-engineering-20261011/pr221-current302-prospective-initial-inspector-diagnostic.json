@@ -1,0 +1,8 @@
+{
+  "status": "RETAINED_INITIAL_LOCAL_INSPECTOR_FAILURE_NOT_ARTIFACT_FAILURE",
+  "fixed_reason": "SYNTHETIC_LOCAL_TREE_BODY_UNAVAILABLE",
+  "original_inspector_sha256": "c677cba0a34cd6d427d57ee743146b13cba9cea804b0a14f3823836cd6fb6112",
+  "artifact_download_repeated": false,
+  "selected_wheel_extracted_before_failure": false,
+  "successor_scope": "Use independently authenticated synthetic/control tree equality and full local control source bodies; keep synthetic checkout identity explicit, no source carry from older artifacts"
+}

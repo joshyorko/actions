@@ -1,0 +1,610 @@
+{
+  "status": "HOLD_CURRENT_FULL_CI_AND_LATE_PUBLISHER; METADATA_ONLY_BUILD_OBSERVATION",
+  "captured_at_utc": "2026-10-11T06:56:03.348471+00:00",
+  "tuple": {
+    "control": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "control_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+    "target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "synthetic": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+    "synthetic_ordered_parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ],
+    "synthetic_tree_equals_control": true
+  },
+  "one_bounded_current_readback": true,
+  "pagination": {
+    "runs": "page1per100,total10allreturned",
+    "checks": "page1per100,total25allreturned",
+    "all10runs_jobs": "eachpage1per100length==total<100,25jobsallreturned",
+    "artifactmetadata": "page1per100,total3allreturned"
+  },
+  "current_census": {
+    "queued/None": 1,
+    "completed/success": 19,
+    "in_progress/None": 5
+  },
+  "current_runs_and_declared_instantiated_jobs": [
+    {
+      "id": 38118859475,
+      "name": "Actions Runtime PYPI Release",
+      "path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "queued",
+      "conclusion": null,
+      "jobs": [
+        {
+          "id": 114409246153,
+          "name": "build-wheels (macos-15)",
+          "status": "queued",
+          "conclusion": null,
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": null
+        },
+        {
+          "id": 114409246244,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:43:42Z"
+        },
+        {
+          "id": 114409246265,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:42:01Z"
+        },
+        {
+          "id": 114409246328,
+          "name": "build-wheels (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:45:56Z"
+        }
+      ]
+    },
+    {
+      "id": 38118859503,
+      "name": "AI audit evidence",
+      "path": ".github/workflows/ai-audit.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 114409246163,
+          "name": "audit",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:41:14Z"
+        }
+      ]
+    },
+    {
+      "id": 38118859480,
+      "name": "Copilot Setup Steps",
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 114409246083,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:43:47Z"
+        }
+      ]
+    },
+    {
+      "id": 38118859472,
+      "name": "Measured Python coverage gate",
+      "path": ".github/workflows/coverage-gate.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "in_progress",
+      "conclusion": null,
+      "jobs": [
+        {
+          "id": 114409246216,
+          "name": "coverage",
+          "status": "in_progress",
+          "conclusion": null,
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": null
+        }
+      ]
+    },
+    {
+      "id": 38118859587,
+      "name": "Actions Core Tests",
+      "path": ".github/workflows/actions_core_tests.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 114409246670,
+          "name": "build (macos-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:47:37Z"
+        },
+        {
+          "id": 114409246802,
+          "name": "build (ubuntu-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:44:52Z"
+        },
+        {
+          "id": 114409246833,
+          "name": "build (windows-py3.10-devmode)",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:47:27Z"
+        },
+        {
+          "id": 114409246836,
+          "name": "candidate-wheel",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:44:27Z"
+        }
+      ]
+    },
+    {
+      "id": 38118859493,
+      "name": "Action Server Tests",
+      "path": ".github/workflows/actions_runtime_tests.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "in_progress",
+      "conclusion": null,
+      "jobs": [
+        {
+          "id": 114409246186,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": null
+        },
+        {
+          "id": 114409246268,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": null
+        },
+        {
+          "id": 114409246292,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": null
+        }
+      ]
+    },
+    {
+      "id": 38118859588,
+      "name": "Action Server Build (Unauthenticated)",
+      "path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "in_progress",
+      "conclusion": null,
+      "jobs": [
+        {
+          "id": 114409246790,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:51:18Z"
+        },
+        {
+          "id": 114409246866,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:52:35Z"
+        },
+        {
+          "id": 114409246884,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "in_progress",
+          "conclusion": null,
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": null
+        }
+      ]
+    },
+    {
+      "id": 38118859516,
+      "name": "RCC developer toolkit",
+      "path": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 114409246280,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:44:47Z"
+        },
+        {
+          "id": 114409246481,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:44:44Z"
+        },
+        {
+          "id": 114409246504,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:48:18Z"
+        },
+        {
+          "id": 114409246525,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:51:21Z"
+        },
+        {
+          "id": 114409246528,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:51:45Z"
+        },
+        {
+          "id": 114409246558,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:49:30Z"
+        }
+      ]
+    },
+    {
+      "id": 38118856645,
+      "name": "Copilot Setup Steps",
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "event": "push",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 114409238527,
+          "name": "copilot-setup-steps",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:43:34Z"
+        }
+      ]
+    },
+    {
+      "id": 38118856632,
+      "name": "Action Server RCC provider rollback acceptance",
+      "path": ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+      "event": "push",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 114409238566,
+          "name": "build",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+          "completed_at": "2026-10-11T06:44:36Z"
+        }
+      ]
+    }
+  ],
+  "dependent_publisher": {
+    "status": "NOT_YET_INSTANTIATED; macOSwheelbuilderqueued",
+    "required_scope": "Source declares publish job needs build-sdist+build-wheels; its PRartifactinventory/Twine/localverifier steps require freshterminalreview. Current25 cannot replace historical26 or futurefulljobinventory.",
+    "actual_publication": "NOT_AUTHORIZED/NOT_QUALIFIED; tag-only credential/upload distinct"
+  },
+  "fresh_artifact_API_metadata": [
+    {
+      "id": 11694384051,
+      "name": "Windows-wheels",
+      "archive_size": 23173284,
+      "API_archive_digest": "sha256:a2d2988956102059dc64d7e2ed6727f263021bb7c2a400ac73595874d73eca4d",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "run": 38118859475,
+      "expires_at": "2027-01-09T06:41:04Z",
+      "download": "NOT_DONE; pendingrootcapacityauthorization",
+      "archive_member_bytes_and_member_digests": "UNKNOWN"
+    },
+    {
+      "id": 11693858156,
+      "name": "action-server-dist",
+      "archive_size": 1009770,
+      "API_archive_digest": "sha256:3988dd1d5f9558d8896c72a46982d7b746ee1d8c2ac3e0e536161028b2160444",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "run": 38118859475,
+      "expires_at": "2027-01-09T06:41:04Z",
+      "download": "NOT_DONE; pendingrootcapacityauthorization",
+      "archive_member_bytes_and_member_digests": "UNKNOWN"
+    },
+    {
+      "id": 11693813383,
+      "name": "Linux-wheels",
+      "archive_size": 28271148,
+      "API_archive_digest": "sha256:32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6",
+      "head_sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "run": 38118859475,
+      "expires_at": "2027-01-09T06:41:04Z",
+      "download": "NOT_DONE; pendingrootcapacityauthorization",
+      "archive_member_bytes_and_member_digests": "UNKNOWN"
+    }
+  ],
+  "completed_builder_log_observations": [
+    {
+      "job": 114409246244,
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "completed/success",
+      "original_log_private": {
+        "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/original-build-job-114409246244.log",
+        "bytes": 918601,
+        "sha256": "7c2c7149d2842f5da848ad12640d7e7111ffc000c1da1ec40f7c87e7ef66455b",
+        "mode": "0600",
+        "acquired_once": true
+      },
+      "producer_identity": {
+        "workflow_API_head_control": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+        "log_full_synthetic_merge_observed": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+        "log_control_observed": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+        "synthetic_git_tree_from_prior_authenticated_API": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+        "whole_generated_producer_inventory": "NOT_QUALIFIED; reportedcheckout/buildcontext only"
+      },
+      "reported_Runtime_wheel_filenames": [
+        "actions_runtime-1.0.3-cp312-cp312-linux_x86_64.whl",
+        "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "actions_runtime-1.0.3-cp313-cp313-linux_x86_64.whl",
+        "actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+      ],
+      "reported_filename_scope": "Logmentions intermediate and repaired names, not verifiedarchive member inventory. No wheel bytes/METADATA/RECORD/module content evidence acquired."
+    },
+    {
+      "job": 114409246328,
+      "name": "build-wheels (windows-2022)",
+      "status": "completed/success",
+      "original_log_private": {
+        "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/original-build-job-114409246328.log",
+        "bytes": 182405,
+        "sha256": "1c653e899cb54c06b78b0e568ccc3094c9c7f3aa5da6eb1dfd746ab159e6171a",
+        "mode": "0600",
+        "acquired_once": true
+      },
+      "producer_identity": {
+        "workflow_API_head_control": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+        "log_full_synthetic_merge_observed": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+        "log_control_observed": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+        "synthetic_git_tree_from_prior_authenticated_API": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+        "whole_generated_producer_inventory": "NOT_QUALIFIED; reportedcheckout/buildcontext only"
+      },
+      "reported_Runtime_wheel_filenames": [
+        "actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+        "actions_runtime-1.0.3-cp313-cp313-win_amd64.whl"
+      ],
+      "reported_filename_scope": "Logmentions intermediate and repaired names, not verifiedarchive member inventory. No wheel bytes/METADATA/RECORD/module content evidence acquired."
+    },
+    {
+      "job": 114409246265,
+      "name": "build-sdist (ubuntu-py3.12)",
+      "status": "completed/success",
+      "original_log_private": {
+        "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/original-build-job-114409246265.log",
+        "bytes": 812980,
+        "sha256": "80af0ed675ffec67117aae0b30db65559fd7753f4d9d96b6e27bdcf9e856694f",
+        "mode": "0600",
+        "acquired_once": true
+      },
+      "producer_identity": {
+        "workflow_API_head_control": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+        "log_full_synthetic_merge_observed": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+        "log_control_observed": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+        "synthetic_git_tree_from_prior_authenticated_API": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+        "whole_generated_producer_inventory": "NOT_QUALIFIED; reportedcheckout/buildcontext only"
+      },
+      "reported_Runtime_wheel_filenames": [],
+      "reported_filename_scope": "Logmentions intermediate and repaired names, not verifiedarchive member inventory. No wheel bytes/METADATA/RECORD/module content evidence acquired."
+    }
+  ],
+  "reviews_threads_status": {
+    "reviews": 0,
+    "threads": 0,
+    "statuses": 0,
+    "status_rollup": "pending",
+    "human_approval": "noneobserved"
+  },
+  "pull_request": {
+    "state": "open",
+    "draft": true,
+    "mergeable": true,
+    "mergeable_state": "unstable"
+  },
+  "policy_scope": "Prior742snapshot rulesets[]/baseprotectedfalse; branchprotectionGET403administrationunavailable retained, not waived. No applicationmutation.",
+  "preserved_previous_inventory": {
+    "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/safe-current-hosted-inventory-and-next-dependency.json",
+    "sha256": "742758b4a71620b9ddef1ff9b5484c72b6811dae869dfc2e301fa24018d94a3a"
+  },
+  "preserved_fresh_narrow_actual": {
+    "path": "/workspace/engineering/pr302-fresh-Sprime-Cprime-hosted-review/independent-fresh-three-case-actual-review.json",
+    "sha256": "54a855d62a41645ec53476d7d212cf8bc3a743520c952dca4005790876afc20c",
+    "scope": "PublicLinux3case S-prime/C-prime only; originalartifact/fulljoblognotreacquired"
+  },
+  "release_HOLDs": [
+    "ApprovedauthoritativeOAuthsourcepair/content absent; historicalemptygeneratedOAuth isnotfallback/admittedsource",
+    "No artifactdownloads/memberMETADATA/RECORD/rawpayload evidence or currentwholeproducer qualification",
+    "Other5running1queued checks and dependentpublisher notterminal; no fullCI/sourceintegrationGO",
+    "Currentadapter differs92498 oldnative=>UNQUALIFIED, no nativebuild/installer/provider/browser/coldregistry run",
+    "Wholeplatform/native/install/Core103/privatefull134metadata/fullrelease/publication unqualified"
+  ],
+  "next_dependency": "Await naturalpublisherandallfreshdeclaredCI terminal outcomes. Once available, root may assign new exacttuple readback; firstretain safeartifactAPI/buildprovenance, request/rootcapacityauthorization before ZIPdownloads. Currentphase stops withoutpolling/sleep/rerun/merge.",
+  "original_private_metadata_records": [
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_base_ref.json",
+      "size": 448,
+      "sha256": "4dbfae279f601793034e38bc799c21ac228ebb0020b6c6c703275a919b69a5d5"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_checks.json",
+      "size": 89555,
+      "sha256": "b41969c5234a238ea8cd2aa18b19f33de3801e7cb6933dcee5f2fc13a63da840"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_head_ref.json",
+      "size": 465,
+      "sha256": "9c034c3578035e2842e3d38c49dfd53ef942725ed41811c4cbd7f7388decab9c"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_jobs_38118856632.json",
+      "size": 4680,
+      "sha256": "31259a3c5fdc5794f067528f1dc1b484973c38034f7cf8b2789041f34978fd4b"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_jobs_38118856645.json",
+      "size": 2413,
+      "sha256": "67960fcf52faef91701bc8a64dea7b7775830b11606fe0797b566e6d0808ebf2"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_jobs_38118859472.json",
+      "size": 2793,
+      "sha256": "aac99cd5db3a332b0b1183f489d45f05e85ad4ac9d012a154e1939f9cf0b572f"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_jobs_38118859475.json",
+      "size": 14992,
+      "sha256": "fa1f978dc120f7c0c247e9ac3eb852b9143b951684c780a450901b73fe2cdd58"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_jobs_38118859480.json",
+      "size": 2413,
+      "sha256": "2a8dfa6f6158933528aed14a9846a2d073c8689d4a597fd034cdbac4ed8a5937"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_jobs_38118859493.json",
+      "size": 14189,
+      "sha256": "f4f65b592dab6be58c92801610e28789dd78b246b87b467bc542801b6770cfcf"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_jobs_38118859503.json",
+      "size": 1924,
+      "sha256": "7af34cc876c590d5e8777b28ad5ba7f358f3e51a3fea019eb879fb23e7f3993e"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_jobs_38118859516.json",
+      "size": 19992,
+      "sha256": "a9d736edfe5d68dd4dd1a9a61937767a090ff7f043fb3cf8ddea72e8b9aaaae7"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_jobs_38118859587.json",
+      "size": 14255,
+      "sha256": "24e050170a51a972b28dc0e2040d2a3bf9c7f4a4986e35f11224b12500d7bc7d"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_jobs_38118859588.json",
+      "size": 21618,
+      "sha256": "424b13e5f4632bc04b698c15bdf5578e4bfcb0ae7dbef28b2d8ed372b5d504a0"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_merge_ref.json",
+      "size": 345,
+      "sha256": "a2acb9d3e081b0c76e5be0097273d96f853426c5ae606889ba36d28ed9ce4e06"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_pr.json",
+      "size": 22194,
+      "sha256": "6cd2d14f7ed76d3ff696e785720358d77cd31b9a50e9a83a8d6c84e457e8dcd9"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_publish_artifacts.json",
+      "size": 2180,
+      "sha256": "7a4f01ecfc409f9abcb91c84c7c90eea514f42183fc3b8af3f4fee36b71548cf"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_reviews.json",
+      "size": 14,
+      "sha256": "857bc02336eacb938dc8dcd86fe6a56561f76db25311a1b1b17f11f393eb29c6"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_runs.json",
+      "size": 126561,
+      "sha256": "2f5f47c80aeaaa9bfd7779fb377de2c01881d521afd37a3ca0b369f4bded8af6"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_status.json",
+      "size": 4492,
+      "sha256": "b1bf53106b01da4ebb3d740e5ae05d6d7ce9c27e70d4d0f96fe34db307c2ed47"
+    },
+    {
+      "path": "/workspace/engineering/pr302-next-publisher-metadata-readback/next_threads.json",
+      "size": 21,
+      "sha256": "2e70f446bcf3b0fd4033dde42ae0ad7381a8c0c944e9e4aa557cd56cdb1b860b"
+    }
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md accepted fef375 source/control/nine-sample/fullproducer/testedmerge patch integrated S-prime, C-prime byte-exact",
+    "Durable_learning_captured": "Authenticate nine reported hashes under actual immutable candidate; keep actual control and fullCI testedmerge separate even tree-equal. One measured publication JSON supports both parser identities; captured shutdown and mapped Core1.0.2 are bounded evidence.",
+    "Evidence": "Fresh original11694723060 archive/API digest+all7members, completejob114409238566, exact3JUnit, rawcandidate/control tuple, nineGitbody/mode and natural-before-cleanup receipt above",
+    "Stale_or_ambiguous_guidance_removed": "Accepted fef375 explicitly blocks carrying oldcontrol receipts/sample hashes onto currentunion/fullproducer. New frozen proof has its own tuple; no extra cosmetic proposal.",
+    "Remaining_uncertainty": "CurrentfullCI/publisher/testedmerge, adapterchanged92498UNQUALIFIED, originalprivate/full134metadata, WindowsRCC/Core103/wholewheel/fullrelease and complete reaping remain unqualified.",
+    "accepted_patch_sha256": "fef37515784cbf9fbb003ecca90ec0acb78d8e319bf2fd0ce2c2c1805ff955e6",
+    "disposition": "Existing accepted exactdelta verified once, retained unchanged; newactualevidence supports its narrow scope."
+  },
+  "canonical_disposition": "Accepted exactfef375 source/control/nine-source/fullproducer/testedmerge lesson stays integratedandunchanged. New54aactual pluscurrentbuilder/sourcecontext separately validatesguidance; filename/APIarchiveSHA cannotqualify memberbytes/generatedOAuth/release.",
+  "Upstream_disposition": "none",
+  "mutations": "ExternalprivateAPI/logs/safereceiptonly; no artifactdownload, threecasereacquisition, source/ref/push/merge/build/test/retry/provision/applicationwrite",
+  "review_script_sha256": "4a943f92e321cf072bcbcd27872775a0c44d7fa554b1e79fe2643ca23fdad3f8"
+}

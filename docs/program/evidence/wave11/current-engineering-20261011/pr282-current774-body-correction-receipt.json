@@ -1,0 +1,12 @@
+{
+  "status": "BODY_CORRECTION_AUTHENTICATED_EXACT",
+  "pr": 282,
+  "head": "e9641caaa1f11414fe92874eb40e159cb48604a6",
+  "initial_push_readback": "STALE_9c8_DESPITE_NAMED_REF_e964",
+  "initial_failed_body_submit": "ERROR_MESSAGE_80_BYTES_SUBMITTED_FROM_FAILED_CAT",
+  "restored_prior_body": "EXACT_ORIGINAL_10292_BYTES_PRESERVED_INSIDE_DETAILS",
+  "current_body_sha256": "55bbba183bba7aad4d938f754f6132f952854e3a226e95e51940c95dbc2a2b66",
+  "current_body_bytes": 12357,
+  "authored_body_read_guard": "EXIT_CODE_ZERO_AND_TOKEN_BUDGET_REQUIRED_BEFORE_TOOL",
+  "upstream_disposition": "none"
+}

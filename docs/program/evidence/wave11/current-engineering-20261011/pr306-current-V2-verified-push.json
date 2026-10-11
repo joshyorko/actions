@@ -1,0 +1,18 @@
+{
+  "status": "NORMAL_EXISTING_PR_BRANCH_PUSH_VERIFIED",
+  "pr": 306,
+  "head": "1a3ab0b580710f776fd2075d39e04720c71541ff",
+  "tree": "f2bc958f11a15d1f01b5d0d82dd1f3f51bf590fc",
+  "branch": "fix/database-savepoint-admission-20261010",
+  "existing_remote_before": "c38e22c74290dca391617e9693fcf5b2968956df",
+  "named_ref_after": "1a3ab0b580710f776fd2075d39e04720c71541ff",
+  "current_actual_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "independent_review_sha256": "959dd88273fcafb81f02c7f34d17fd7ff2fe47d580e8aa807eaa79c5170f8be8",
+  "source_full1216PASS13SKIP": true,
+  "first_cf6352_review": "HOLD_PRECISION_COUNTEREXAMPLE_RETAINED",
+  "current_precision_successor": "GO_SOURCE_ONLY_PRIVATE_ABSOLUTE_MONOTONIC_COMPARISON",
+  "fresh_hosted_exacttuple": "REQUIRED_NO_OLD_WINDOWS_FAILURE_OR_GREEN_CARRY",
+  "native_producer268plus5_parity": "ONE_DATABASE_DELTA_UNQUALIFIED_OLD92498",
+  "no_merge_or_new_actual": true,
+  "upstream_disposition": "none"
+}

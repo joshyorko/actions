@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "records": [
+    {
+      "package": "actions",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr309/actions/.venv",
+      "source": "/workspace/engineering/pr309/actions/src/actions/__init__.py",
+      "source_sha256": "790b5e45f1a570f4d209879a47007ce94b73aab76c522bd6400867168726b0d2",
+      "venv_config_sha256": "3b1166e95834e2b868f3aaa945b9d3250f8bda954db1b68685f32ef3e49e4faf"
+    },
+    {
+      "package": "action_server",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr309/action_server/.venv",
+      "source": "/workspace/engineering/pr309/action_server/src/actions/server/__init__.py",
+      "source_sha256": "399f9e2ef2d67d7018d8ab7c6b9a65adf70aa33134d15c9840aedcf35a821576",
+      "venv_config_sha256": "3c7c3f4d6fd328f93dada985a1cc7fe19630bd7545971d3af1f6384ca44fed90"
+    },
+    {
+      "package": "actions-http-helper",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr309/actions-http-helper/.venv",
+      "source": "/workspace/engineering/pr309/actions-http-helper/src/actions_http/__init__.py",
+      "source_sha256": "7648587a165a31364362a5b6a8dce9e2eb84baaf81a581dc61916bca9c83cb22",
+      "venv_config_sha256": "0de87b14d54343ac5290af94cb95565e9e9276eaa3d9a7343bce409c444775ed"
+    },
+    {
+      "package": "devutils",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr309/devutils/.venv",
+      "source": "/workspace/engineering/pr309/devutils/src/devutils/invoke_utils.py",
+      "source_sha256": "7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5",
+      "venv_config_sha256": "359f0d89e09ca9924153080fad9d76f6a308eeac81a5459aae7ec04c7e69b4dc"
+    },
+    {
+      "package": "work-items",
+      "own_prefix": true,
+      "own_source": true,
+      "prefix": "/workspace/engineering/pr309/work-items/.venv",
+      "source": "/workspace/engineering/pr309/work-items/src/actions/work_items/__init__.py",
+      "source_sha256": "95b4d7ae1c47a63fe4745cb794088685ec424812744d780ec4c2c11c6e836654",
+      "venv_config_sha256": "554b1bdba5a373102095b16deab0d5f32ddd3594612257913fbe0cfdd20c7b13"
+    }
+  ],
+  "preflight_timing": "Checked canonical calls completed successfully before fullsource authorization/request; no installer"
+}

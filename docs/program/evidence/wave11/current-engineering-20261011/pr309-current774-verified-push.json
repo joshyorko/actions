@@ -1,0 +1,16 @@
+{
+  "status": "NORMAL_EXISTING_PR_BRANCH_PUSH_VERIFIED",
+  "pr": 309,
+  "head": "ec73bb6372c1f613a3e130f0ce92f649d9d40a97",
+  "tree": "481723a9ffb8528709a6c4e437ac5ad0dc40092c",
+  "branch": "test/auth-route-census-20261010",
+  "existing_remote_before": "0d947f839628cc902bd409a7be93dcb49bc0aa02",
+  "named_ref_after": "ec73bb6372c1f613a3e130f0ce92f649d9d40a97",
+  "current_actual_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "independent_review_sha256": "b243da12d1f1cbba5badc1cb40421f80d80eb5fcb59807873c55bbabcdf03160",
+  "source_full1156PASS13SKIP": true,
+  "fresh_hosted_exacttuple": "REQUIRED_NO_OLD19GREEN_CARRY",
+  "source_scope": "Counterregistrationmultiplicityunchanged;268production+5selectedtestbindings preserved; notactualauthenticationenforcement/full152",
+  "no_merge_or_new_actual": true,
+  "upstream_disposition": "none"
+}

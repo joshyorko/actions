@@ -1,0 +1,36 @@
+{
+  "parent_immutable_cf6352": "cf6352e253c70095c8e09904e730fc18a42f9a65",
+  "only_three_owned_paths": [
+    "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+    "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "all_other_leaf_bodies_modes_exact": 1406,
+  "whole_observer_module_except_DeliveredObservations_AST_exact_parent": true,
+  "unchanged_class_loss_privacy_cleanup_methods": [
+    "_record",
+    "_count",
+    "cleanup_returned",
+    "cleanup_raised",
+    "start_finished"
+  ],
+  "allowed_precision_methods_changed": [
+    "__init__",
+    "_offset",
+    "line",
+    "process_start_returned",
+    "summary",
+    "_instant"
+  ],
+  "original58controls_and_helper_function_ASTs_exact": true,
+  "new_boundary_test_functions": [
+    "test_ready_lower_bound_uses_exact_instants_not_rounded_display",
+    "test_reported_rounding_counterexample_stays_postbound",
+    "test_unknown_start_return_clock_keeps_deadline_classification_unknown"
+  ],
+  "private_raw_clock_fields_not_serialized": "match_instants/start_return_instant used only comparator; displayed offsets round3decimals; progress schema unchanged",
+  "all90_20_80_88_50ms_budgets_kwargs_callback_hook_Process_class_restoration_original_tuple_exception_unchanged": true,
+  "all_production_DBguard_test_database_267otherproducer5selectors_native_helper_workflow_manifest_lockfile_bytes_unchanged": true,
+  "canonical_delta": "5added precisionlines; all originalcf paragraphs retained except explicit tightened lowerbound sentence; no diary",
+  "native_actual_execution": "NONE"
+}

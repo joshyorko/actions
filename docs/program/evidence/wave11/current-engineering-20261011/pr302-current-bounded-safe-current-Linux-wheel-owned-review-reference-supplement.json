@@ -1,0 +1,25 @@
+{
+  "status": "CURRENT_PROSPECTIVE302_LINUX_WHEEL_RELEASE_CONTENT_HOLD",
+  "current_tuple": "Cprimea346/Sprimed642/syntheticf5dd distinct from currentintegration774/current221",
+  "independent_owned_reviews_hash_verified": [
+    {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-prospective-runtime103-qualification-review.json",
+      "size": 9081,
+      "sha256": "5ae089d08c7bb6b231d9c6adfa313d2f6961aa5ae03116829ad1b25588719578"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-current-linux-wheel-inspection.json",
+      "size": 152714,
+      "sha256": "535b308837dab9737412243646dc085a560202dbd58b9e9315dd1cac54808c82"
+    }
+  ],
+  "original_artifact": "11693813383/run38118859475, already acquired by owning merge_review; not downloaded or reinspected here",
+  "owned_review_findings": "Selected cp312 METADATA/RECORD passed integrity; generated287-byte OAuth module SHA f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe has FILE_CONTENTS actions_config/default_user_config exact empty strings. Integrity is separate from approved OAuth content/source authority.",
+  "claim_scope": "Independent safe receipts verified, no direct wheel execution/download/installation or new underlying archive inspection. Does not establish all wheels/currenttarget/coldregistry/native/provider/private/release admission. No cause attributed.",
+  "current_full_CI_receipt": {
+    "path": "/workspace/engineering/pr302-current-bounded-reconciliation/safe-current-full-CI-reconciliation-HOLD.json",
+    "sha256": "755f4bb506207d3cdfe22be21a156e7836e4513ee87302f55348b1eb3b6fdd42"
+  },
+  "Documentation_disposition": "Exact fef375 existing integrated guide lesson distinguishes candidate samples/control/testedmerge/fullproducer; current owned artifact integrity and empty OAuth do not collapse these scopes. Owner retains canonical0f75 proposal; no duplicate cosmetic delta.",
+  "Upstream_disposition": "none"
+}

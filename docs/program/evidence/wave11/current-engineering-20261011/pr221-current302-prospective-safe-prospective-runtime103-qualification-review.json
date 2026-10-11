@@ -1,0 +1,149 @@
+{
+  "schema": "actions-prospective-runtime103-linux-wheel-independent-qualification/v1",
+  "verdict": "GO_BOUNDED_ARCHIVE_PACKAGE_METADATA_RECORD_INSPECTION_ONLY; HOLD_GENERATED_OAUTH_AUTHORITY_CONTENT_CURRENT221_AND_FULL_RELEASE",
+  "candidate_subject": {
+    "control": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "control_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+    "target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "synthetic": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+    "synthetic_ordered_parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ],
+    "synthetic_tree_equals_control": true
+  },
+  "current_integration_subject": {
+    "source": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "relationship": "PR302 candidate S-prime/C-prime has not been integrated; this is NOT current PR221/integration774 wheel. No relabel or admission carry."
+  },
+  "authenticated_metadata": {
+    "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/authenticated-source-artifact-metadata.json",
+    "bytes": 1511,
+    "sha256": "3cde66c7e9914f7fb3d677b89520fa8e3ee34d4d113c77d7ecbfb38dfb28907d"
+  },
+  "inspection": {
+    "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-current-linux-wheel-inspection.json",
+    "bytes": 152714,
+    "sha256": "535b308837dab9737412243646dc085a560202dbd58b9e9315dd1cac54808c82"
+  },
+  "archive": {
+    "id": 11693813383,
+    "run": 38118859475,
+    "job": 114409246244,
+    "path_private": "/workspace/engineering/pr221-current302-linux-wheel-owned/original-Linux-wheels-11693813383.zip",
+    "bytes": 28271148,
+    "sha256": "32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6",
+    "mode": "0600",
+    "download_count": 1
+  },
+  "selected_wheel": {
+    "filename": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "bytes": 14166151,
+    "sha256": "f82ee06c09e07bd224e797e11b7e58138920c0c8df49ef814ac50b0087d81c6c",
+    "member_count": 241,
+    "directory_count": 26,
+    "file_count": 215,
+    "METADATA_Name": "actions-runtime",
+    "METADATA_Version": "1.0.3",
+    "metadata_sha256": "2d57f93a2328220f8b851bca8014d4805f7a29c8b41533562e923f6e3ceceda0",
+    "source_pyproject_sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+    "wheel_tag_count": 4,
+    "wheel_tags": [
+      "cp312-cp312-manylinux_2_5_x86_64",
+      "cp312-cp312-manylinux1_x86_64",
+      "cp312-cp312-manylinux_2_17_x86_64",
+      "cp312-cp312-manylinux2014_x86_64"
+    ],
+    "record_entries": 215,
+    "record_sha256_size_verified_entries": 214,
+    "record_unhashed_entries": [
+      "actions_runtime-1.0.3.dist-info/RECORD"
+    ],
+    "record_sha256": "f9075e4a4f1d842f08f10938898921753781c86aa7462f0b0c06b5de9a6a3c3a"
+  },
+  "verified_limits": {
+    "outer_inventory": "Exactly cp312/cp313 Linux wheels, both raw hashes retained; only cp312 inner archive qualified",
+    "zip_integrity": "All original selected-wheel file/directory CRCs read; duplicate names/unsafe paths/symlinks/encryption absent; RECORD exactly215file rows/214hash-size verified plus intentionally unhashed RECORD self-row",
+    "source_correspondence": "209 tracked selected payload members exact Sprime/source body; zero differing tracked members. Generated OAuth and packaged RCC two untracked inputs separately classified; partial member matching does not qualify complete producer/source union/native",
+    "build_context": "Completed Linux114409246244 original log preserved918601B/sha7c2c714... and reused, not reacquired. Log names f5dd checkout and a346control; authenticated API tree/orderedparents separately pinned. Synthetic treea1c4 equals localcontrol treea1c4; local synthetic body unavailable, never silently guessed. Sourcepyproject gives actions-runtime1.0.3.",
+    "artifact_downloads": 1,
+    "wheel_installed_or_imported": false,
+    "runtime_native_browser_provider_tests": false
+  },
+  "measured_current_oauth": {
+    "path": "actions/server/_oauth2_config.py",
+    "bytes": 287,
+    "sha256": "f79d95697f1b20691cfff74faa422dc5fa9a13e7fd5d16e98bac3572c6dd7dbe",
+    "AST_only_never_executed": true,
+    "fixed_assignment": "FILE_CONTENTS",
+    "fixed_fields": [
+      {
+        "fixed_field": "actions_config",
+        "category": "EMPTY_STRING",
+        "utf8_bytes": 0,
+        "characters": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "fixed_field": "default_user_config",
+        "category": "EMPTY_STRING",
+        "utf8_bytes": 0,
+        "characters": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "required_payload_both_current_measured_empty": true,
+    "authority_and_provider_config_policy": "UNQUALIFIED; no approved input pair/revisions/digests authenticated; historical empty1.0.2 is not a fallback",
+    "record_match_scope": "RECORD integrity authenticates measured empty-member bytes within this original wheel; it does not qualify generator input authority or completeness"
+  },
+  "qualification_HOLDs": [
+    "Approved authoritative source pair/revisions/digests and generated OAuth content qualification unresolved; both required fields measured EMPTY in CURRENT prospectivecp312 wheel",
+    "No current774 or futureacceptedmerge relabel; fresh exact actual integration/sourceproducer acceptance still required",
+    "No official Runtime1.0.3 publication/coldregistry/installed consumer/dependency resolution acceptance",
+    "No other platform/cp313 innerarchive/native/installer/browser/provider/private/full134/fullrelease acceptance",
+    "Historical official1.0.2 empty configuration not a fallback; prior artifact116902 evidence not carried"
+  ],
+  "preserved_inspector_diagnostics": [
+    {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/initial-inspector-diagnostic.json",
+      "bytes": 535,
+      "sha256": "4423cf54fde3758f662948e1936871d22f3cefac70d8961532c194a249ce5b92"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/directory-inspector-diagnostic.json",
+      "bytes": 502,
+      "sha256": "4ab3745d59e613bdc2e2619ba65b5e63ec254a96a73dc6eaf4b6e14aed7e2278"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/inspect_original_wheel.py",
+      "bytes": 11992,
+      "sha256": "c677cba0a34cd6d427d57ee743146b13cba9cea804b0a14f3823836cd6fb6112"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/inspect_original_wheel_v2.py",
+      "bytes": 12773,
+      "sha256": "c1602f01d786cb78de84a99a8bfece1edbfe38a55c4739bbb03bb406d58f69d3"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/inspect_original_wheel_v3.py",
+      "bytes": 12913,
+      "sha256": "c8a78be1f14f3e8baa68992b746fb9c1c5f1b0939b14dc36f5ccffa5a843aa77"
+    }
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact new proposed insertion following accepted fef375 source/control/testedmerge boundary",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/canonical-prospective-wheel-content-delta.patch",
+      "bytes": 1593,
+      "sha256": "0f75c5b66213807b6d5c2c8af697a3fbf1581519f93aef4d2d8d4eeb7298c0da"
+    },
+    "Durable_learning_captured": "Valid wheel metadata/RECORD can authenticate measured empty generated OAuth bytes while required input authority/content stays unresolved. Distinguish directory entries from RECORD regular files and prospective PR build from current integration wheel.",
+    "Evidence": "Original fresh authorized11693813383 archive/fullAPI SHA; selectedcp312f82ee...241entries/26directories/215files/214digest-size entries, module287B/f79d956...both fixed payloads0B; separately authenticated d642/a346/f5dd trees and original retained buildlog. No rawvalues copied.",
+    "Stale_or_ambiguous_guidance_removed": "Extends existing fef375 tuple rule to close ambiguity between self-consistent wheel integrity, generated input authority, and current integration/artifact identity; does not add a session diary or claim planned qualification implemented.",
+    "Remaining_uncertainty": "Authoritative generator source/content policy, complete producer/native qualification, full currentCI/integration, cold registry/installedconsumer/otherplatform/release remain unresolved. No failed remote acquisition/root cause attributed from empty values alone."
+  },
+  "upstream_disposition": "none",
+  "reviewer_actions": "One approved original artifact GitHub download then retainedfile reads/stdlib ZIP/email/CSV/AST/Git/source/API tuple verification. No whole extraction/import/install/build/gateway/applicationwrite/provider/browser/native run/retry/push/merge/publication."
+}
