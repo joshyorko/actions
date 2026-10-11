@@ -6,6 +6,7 @@ import signal
 import subprocess
 import sys
 import time
+import tomllib
 import urllib.error
 import urllib.request
 import zipfile
@@ -13,7 +14,6 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
-import tomllib
 
 SCRIPT = Path(__file__).parents[2] / "scripts" / "verify_dakota_rcc_acceptance.py"
 HISTORICAL_RECEIPT = (
