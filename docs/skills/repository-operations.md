@@ -2125,10 +2125,11 @@ commit from being mistaken for the source under test. The test
 `test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable`
 requires `ACTIONS_REAL_RCC_ARTIFACT_TEST=1` and an
 `ACTIONS_RUNTIME_RCC_BINARY` whose RCC v18.19.3 bytes match the pinned SHA-256.
-The retained generated workflow selects rollback and staged-consumer tests with
-xdist disabled, uses the normal Action Server developer install path, and
-uploads a sanitized receipt/source-hash summary even if a test fails. An
-ordinary-suite skip is not acceptance evidence.
+The generated workflow selects rollback, publication-details and staged-consumer
+tests with xdist disabled and uses the normal Action Server developer install
+path. It preserves raw lifecycle and publication receipts alongside sanitized
+summaries and JUnit evidence even if a test fails. An ordinary-suite skip is
+not acceptance evidence.
 
 A retained specialized RCC workflow can pin an older candidate and case set
 than the latest accepted hosted proof. Before scheduling it, inspect the exact
@@ -2136,23 +2137,33 @@ generator/control revision, immutable candidate commit/tree, selected case
 identities and retained receipt inventory. Inheriting that workflow in a newer
 engineering branch does not make it test that branch. Keep earlier execution
 evidence under its original candidate/control identities; a refreshed gate
-needs its own reviewed tuple and receipt. The publication-details case is
-separate from the two-case workflow until its control explicitly selects and
-validates that third case.
+needs its own reviewed tuple and receipt. The refreshed three-case control
+pins candidate `665468112f1593249449278cf2113c155a6ec6e3` and tree
+`d729a43127c048c7fb35133d2a4b07bc53635402`; its eventual control commit
+is a separate identity. It permits only pushes to the original opt-in branch
+`test/rcc-provider-rollback-hosted-20261010` and the existing reviewed PR branch
+`fix/rcc-published-artifact-details-20261010`, subject to the retained path filter.
+Local service-free control tests establish admission behavior, not an actual
+RCC artifact execution. Record a new hosted run before claiming acceptance of
+this candidate, and retain earlier receipts under their original identities.
 
-The retained two-case admission summary fails closed unless JUnit records both
-passed, non-skipped tests, with suite totals matching the actual testcase result
-elements and the expected rollback/staged-consumer names and modules; the
-lifecycle receipt is `PASS` and binds to the checked-out
+The three-case admission summary fails closed unless JUnit records exactly
+three passed, non-skipped tests, with suite totals matching the actual testcase
+result elements and the expected rollback/publication-details/staged-consumer
+names and modules; the lifecycle receipt is `PASS` and binds to the checked-out
 candidate commit/tree; imported runtime modules originate from and hash-match
 that candidate; both the runtime RCC and Action Server's default RCC path match
 the pinned version and digest; provider-operation snapshots and expected
 persisted Run results agree; and natural shutdown has an observed pre-cleanup
 return code of 0 or 1, followed by an observed cleanup return code, without
 forced stop or observed surviving owned descendants. The always-run summary
-executes from the workspace root and uploads only sanitized evidence, so a
-skipped test, missing receipt, inconsistent JUnit counters, or failed checkout
-cannot appear green.
+executes from the workspace root. Publication admission binds the source and
+control commit/tree, one RCC invocation, a credential-free loopback provider,
+the raw JSON hash and the specification/artifact digest pair. Retain the original
+`lifecycle-receipt.json` as well as `lifecycle-summary.json`: a reconstructed
+summary cannot establish the exact original receipt bytes. A skipped test,
+missing receipt, inconsistent JUnit counters or failed checkout cannot appear
+green.
 
 The admission-summary tests execute both synthetic RCC paths to verify version
 and digest checks. These fixtures need a host-native executable format: a
