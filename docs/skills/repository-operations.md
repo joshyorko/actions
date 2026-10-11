@@ -2840,6 +2840,16 @@ Revision API and does not modify the legacy Robot ZIP/import path. The bounded
 Linux contract suite exercises successful mode normalization, invalid and
 non-empty destinations, links/special files, source/staged-byte mutation, and
 failure cleanup; it does not establish an RCC consumer/import proof.
+The staged-byte regression matches the destination descriptor by device and
+inode and writes the same-sized poison before the underlying read. A positive
+baseline and mutation control with constant timestamp observations verify that
+the re-read digest rejects changed bytes without relying on clock advancement.
+The separate after-read control returns the prior bytes, then forces and checks
+an actual metadata change before requiring rejection and owned-tree cleanup.
+Keep these two signals distinct: a write after a read cannot change the digest
+of the bytes already returned. An unrecorded injection or metadata observation
+does not identify a hosted failure's timestamp cause. These controls retain the
+exclusive destination-writer and non-atomic snapshot limits above.
 The staging failure tests inject errors after mkdir at identity observation,
 directory open, and fstat; when identity cannot be established they require the
 original exception to survive with an explicit unresolved-cleanup note.
