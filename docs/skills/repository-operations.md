@@ -240,8 +240,46 @@ terminated at the 30-second startup deadline on both Windows and macOS,
 before the watched-reload assertions began. Keep the 90-second allowance
 limited to the initial native-executable startup; this reuses the existing
 native acceptance startup budget. Source-mode startup remains at 30 seconds,
-as do the watcher and restart deadlines. Inspect child stderr before
-treating a timeout as an RCC or Runtime failure.
+as do the watcher and restart deadlines.
+
+At #311 head `c888fb4a`, Windows run `38099013706`, job `114350853595`,
+timed out at the initial native startup in the watched-reload and resource
+catalog-rollback nodes. Both had completed `ht hash` and logged `holotree
+variables --no-retry-build` before the unchanged 90-second deadline. The
+same test and RCC source bytes passed those nodes in accepted #292 run
+`38098225220`, job `114348512491`. This evidence identifies the bootstrap
+stage, not its root cause. RCC's `Running:` log follows acquisition of the
+Python mutex; it does not establish successful RCC spawn or internal-lock
+progress. Captured stderr is line-oriented, and RCC's interactive forwarding
+does not explicitly flush, so absent captured lines do not establish inactivity.
+
+The Windows Runtime test workflow now sets an explicit
+`ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR` and attempts to retain its bounded JSON
+reports with `always()` even when integration fails. Upload is best effort:
+`if-no-files-found: warn` permits a successful upload step with no reports, and
+job cancellation or infrastructure failure may prevent the step from running.
+Verify the artifact inventory and report bytes before claiming observations.
+The test-owned observer enables
+only those two native nodes, samples pending initial startup at 80 and 88
+seconds, and delegates unchanged startup and its existing 20-second failure
+cleanup. Reports contain source/executable/config byte identities, an
+allowlisted RCC operation/space/flags summary, owned descendant CPU/I/O state,
+cache-file existence and effective-home equality, and registered host-reader
+and pipe-closure state. They contain no raw commands, stderr, URLs, paths,
+environment maps or environment-cache contents. Access denial, vanished
+processes, unobserved RCC identity, and the frozen child's internal readers
+remain explicitly unavailable. The probe limits traversal to 64 processes
+and a one-second traversal budget; individual OS queries may outlast that
+budget, so cancellation never waits on a pending query before startup cleanup.
+The final report's `sampler_cancelled: true` means cancellation was requested,
+not that the sampler stopped. Check `sampler_alive` separately after its bounded
+50 ms join. A pending OS query may leave that daemon alive; late observations
+are discarded after cancellation. Neither field proves Runtime process or
+stream cleanup, which remains owned by the unchanged starter.
+These synthetic observer checks do not establish Windows native acceptance
+or fix the original failure. Compare the next exact-head reports before
+changing production code; do not warm caches, retry RCC, or enlarge deadlines
+to obtain a passing result.
 
 For a split package API promotion, verify the producer's public contract from
 the exact built wheel in an isolated installation. Assess consumer adoption
@@ -268,6 +306,24 @@ published Core 1.0.1. On the selected integration candidate (`3fee2792`), all
 four existing template manifests pin published Core 1.0.2. A template pin is
 therefore revision-specific; verify the target manifests before describing a
 release's template state.
+
+For the Runtime/Core private-module boundary, a checkout-only AST guard and a
+clean Core-wheel probe are separate evidence from a clean installed Runtime
+wheel check. The Runtime wheel contract must enumerate every `.py` member in
+the installed `actions-runtime` distribution, verify each installed file is
+inside the fresh environment and outside the checkout, and compare every file
+byte-for-byte with the corresponding member of the exact selected Runtime
+wheel. Bind that scan to the wheel SHA-256, then run the private-Core import
+AST guard over every member, including modules not imported by the smoke test.
+Keep the public Core API compatibility checks in those same clean installs;
+Runtime-owned modules such as `actions.server._protocols` remain valid. Report
+this boundary as passed only when the installed-member inventory is complete,
+all member bytes match the selected wheel, and the full scan succeeds. Tests that
+construct a wheel ZIP and a matching installed-tree fixture must write the same
+encoded payload bytes to both: `Path.write_text` performs platform newline
+translation on Windows, so it can turn a valid LF wheel member into CRLF in the
+fixture and create a false byte-mismatch failure. Preserve the exact-byte
+comparison; fix the fixture writer instead of normalizing installed bytes.
 
 Poetry merges the matching Core source into the main/dev lock entry: a
 `poetry install --only main` using this checkout lock still selects local Core.
@@ -2920,6 +2976,14 @@ tests under distinct names. Compare complete function bodies and parameterizatio
 before consolidation, and capture `pytest --collect-only -q` counts before and
 after so collection changes are explicit. Then run the complete combined suite
 and lint.
+
+Test modules can contain expensive integration cases without an integration
+marker. Before running a bounded subset, enumerate test definitions and their
+parameterizations from the source AST, inspect the selected tests' helper call
+paths for build, install, service, or provider effects, and invoke only explicit
+test-node selectors. A marker-only filter or a whole-module invocation does
+not bound unmarked tests; record the exact selected nodes and excluded heavy
+node in the task receipt.
 
 Credential redaction must cover argparse-accepted long-option abbreviations
 for `--api-key`, in both separate and equals forms. HTTP header names are
