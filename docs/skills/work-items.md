@@ -474,10 +474,32 @@ manifest, or live external-service behavior. The workflow retains a receipt
 even when the gate fails or is interrupted, then removes only its run-owned RCC
 home.
 
-This harness proves creation and restart persistence, not worker-driven Work
-Item state transitions, attachment behavior, accessibility or other browsers.
-Those cells remain separate acceptance requirements. A workflow build/version
-check alone is not native Work Items acceptance.
+The same hosted run `38107100997` retains two passing native consumer cases
+on Windows and macOS using Core 1.0.3 wheels built locally in that checkout
+and installed by post-install. The managed action checked distribution ownership
+and a pip report bound to the local candidate wheel. The Mac wheel digest
+`8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265`
+matches the independently measured published wheel bytes; the Windows candidate
+digest `af607a2e3a82ca827f26d8cc2822c7067c7768e6cf42becb74a0519f021b7553`
+differs. Neither receipt proves a public registry installation. The workflow
+retained hashes but did not upload those wheels or raw pip reports; the cause
+of the Windows byte difference is unmeasured. Seeded stale reservations remain
+a recovery fixture, not a process crash.
+
+The browser gate proves UI creation and backend readback. The separate native
+consumer cases establish their recorded worker-driven transitions and restart
+persistence. Attachment behavior, accessibility and other browsers remain
+separate acceptance requirements. A workflow build/version check alone is not
+native Work Items acceptance.
+
+Admit the complete required Runtime CI separately from these selected browser
+and consumer cases. An initial ready-port timeout in a different integration
+node can leave the semantic assertions unreached while the selected Work Items
+gates pass. Preserve both receipts under their own tested trees. Importing the
+reviewed startup observer during an ordinary target refresh adds observation,
+not a production repair: its watched-reload and resource-rollback nodes do not
+sample the template-rollback variant. Require fresh complete CI for the union
+and keep unavailable startup or cleanup observations unknown.
 
 For packaged Work Items storage-failure UI checks, keep Action Server's own
 database (`--db-file=server.db`) separate from the management API database at
@@ -535,7 +557,22 @@ Linux results only. The native workflow runs separate frozen and Go-wrapper
 browser gates on Ubuntu, Windows and macOS; their receipts bind the manifest path,
 executable hash, and (for frozen builds) the onedir package-tree hash. Windows
 manifest paths include `.exe` for both runtimes, which the harness validates.
-Windows and macOS still require their own passing hosted receipts. The native
+Preserve platform results as separate measured tuples. Hosted run
+`38107100997`, attempt 1, retains passing Windows and macOS frozen and
+Go-wrapper browser receipts for actual build/harness checkout `65c0cb83`
+(tree `782ff78f`, workflow head `f506a04e`). Independent review verified both
+original wrapper executables and provenance TARs against the per-platform
+manifest, every package entry and mode, and each original embedded assets ZIP.
+Each browser module invocation passed 31 cases and recorded three passing
+actual browser stages for its selected native runtime. These are module counts
+from the original job logs; the workflow did not retain native JUnit XML or
+Playwright launch traces. Recorded browser version `151.0.7922.34` and
+headless Chromium source settings do not establish the actual browser file
+digest or live process identity. The complete captured descendant snapshot
+was empty after the harness stop and force-kill sequence; natural Runtime
+shutdown and universal future-descendant discovery remain unproved. Keep
+this tuple separate from the Linux `f506a04e` replay of build `92498aff` and
+from later source unions or full issue #208 acceptance. The native
 browser harness now has an
 authorization-denial stage: after signing in, it removes only its own
 `actions_browser_session` cookie, requires the packaged Runtime's Work Items
