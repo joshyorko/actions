@@ -164,10 +164,12 @@ def test_native_runtime_release_uses_only_community_github_release_assets():
         "${{ github.ref_name }}-windows64.exe",
         "${{ github.ref_name }}-sha256.txt",
     ]
-    assert [
-        step["with"]["overwrite"]
-        for step in upload_steps
-    ] == [False, False, False, False]
+    assert [step["with"]["overwrite"] for step in upload_steps] == [
+        False,
+        False,
+        False,
+        False,
+    ]
 
     forbidden_destinations = (
         "sema4ai/homebrew-tools",
@@ -223,9 +225,9 @@ def test_native_runtime_release_notes_match_the_exact_tag_contract():
     assert selected_body.strip()
     assert "Canvas" not in selected_body
     assert not re.search(r"\bpublish(?:ed|ation)?\b", selected_body, re.IGNORECASE)
-    unreleased_body = changelog.split("## Unreleased\n", 1)[1].split(
-        f"## {tag}\n", 1
-    )[0]
+    unreleased_body = changelog.split("## Unreleased\n", 1)[1].split(f"## {tag}\n", 1)[
+        0
+    ]
     assert all(issue in unreleased_body for issue in ("#134", "#153", "#211"))
 
 
