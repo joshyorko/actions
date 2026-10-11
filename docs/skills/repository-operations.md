@@ -525,10 +525,19 @@ Python 3.12. The contract failed with the unpinned host interpreter and passed
 with RCC Python 3.12. Record that interpreter's version in the receipt; do not
 install host tooling or falsify version discovery to make this boundary pass.
 
+Verify prepared package environments through each package's Poetry process,
+binding `sys.prefix` to its own `.venv` and a file-backed module to its checkout's
+`src`. A namespace package can have `__file__ = None`; this leaves its file
+identity unavailable rather than proving a stale environment. Inspect a concrete
+submodule such as `devutils.invoke_utils` instead. Run dependency-sensitive
+preflights as separate checked calls or stop the command sequence on failure.
+Preserve failed probes and named successors, and distinguish observations made
+after a gate starts from evidence checked before that gate.
+
 When running Action Server source tests from a detached checkout with a prepared
 Runtime virtualenv, put that checkout's `action_server/src`, `actions/src`,
 `actions-http-helper/src`, and `devutils/src` first on `PYTHONPATH`, and confirm
-the imported modules' `__file__` paths point into the checkout. The Runtime
+the imported file-backed modules' `__file__` paths point into the checkout. The Runtime
 virtualenv can contain an older installed `actions` package that otherwise
 shadows the checkout's Core source. The Action Server test fixture also
 requires the package-pinned RCC binary at
