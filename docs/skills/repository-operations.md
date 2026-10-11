@@ -2281,6 +2281,17 @@ The staged consumer fixture retains its worker's exact env-exec lease receipt
 and actual typed retirement/cleanup snapshots in private evidence. Missing
 snapshots stay null; testcase success does not prove lease release or reaping.
 
+An isolated, sequential RCC qualification may share only its once-owned `pkgs`
+download cache between publication and staged execution for the same source and
+binary tuple. Admit the operator configuration, root marker, ownership, modes,
+containment and publication receipt before mounting it; reject unknown or
+cross-version state. The first publication requires an empty package cache.
+Keep each case's Holotree, artifacts, provider and runtime origins separate.
+The staged case then uses the publication's warm package cache; this is not
+cold-registry or cold-install qualification. Identical retained cache bodies
+can identify duplicate storage, but do not prove a future peak or compatibility.
+Keep capacity thresholds and strict cleanup admission unchanged.
+
 Managed spec-v2 Action packages use the provisional RCC runtime adapter only
 when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`
 explicitly opts into artifact mode. Without either opt-in, legacy bootstrap
