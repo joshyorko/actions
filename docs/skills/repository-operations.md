@@ -85,6 +85,55 @@ SQLite-persisted Runtime Run records containing Run IDs, passed statuses, and
 action names. Preserve this receipt before reusing the pytest `--basetemp`
 directory or allowing pytest to prune old temporary trees.
 
+The Canvas Query template has a separate opt-in candidate-source gate:
+`ACTIONS_CANVAS_TEMPLATE_CANDIDATE_ACCEPTANCE=1` runs
+`test_canvas_template_candidate_source_runs_through_runtime_and_real_browser`.
+It leaves the embedded bundle and production `actions-core=1.0.3` manifest
+unchanged, then adjusts only a disposable extracted project's manifest to use
+published Core 1.0.2 as the resolvable base and installs an exact wheel built
+from the checked-out Core source after environment creation. The Runtime worker
+must report a matching local-wheel `direct_url.json`, archive SHA-256, imported
+module ownership, and source revision/tree/blob IDs; the same built view is
+then exercised in a real browser against Runtime. This proves the candidate
+source path only. The production template's exact published-Core 1.0.3 gate
+remains separate and blocked until that dependency is published and verified.
+Pin `PYTHONPATH` to the absolute Runtime source path for this source-mode gate
+and probe the child interpreter from the extracted project's working directory;
+a relative path can silently select another checkout's editable Runtime. The
+worker must report the loaded `actions.mcp` and metadata-module paths and hashes,
+which are checked against both candidate wheel bytes and source blobs. Browser
+execution is currently a Linux hosted gate: launch Node in a fresh POSIX session
+and capture descendant PID/create-time identities while it runs. Signal the
+process group only while the original leader is still unreaped or a captured
+identity confirms that the original group remains; after the leader exits, its
+numeric group ID can be reused. Clean captured identities on completion or
+timeout, and skip this POSIX-specific regression on Windows. This also covers a
+Node parent that exits while a browser child keeps inherited output pipes open;
+killing only the Node PID is insufficient.
+The hosted candidate-source control belongs in
+`.github/workflows/frontend-build-unauthenticated.yml` on its Linux job: it
+already installs the lockfile-selected Chromium through the frontend's
+`node_modules`. From the `action_server` working directory, resolve the
+executable through `./frontend/node_modules/@playwright/test`, set its
+absolute path explicitly, and run only the opt-in candidate test with the
+checkout's Python Runtime source. Unset the frozen-executable selector and
+`VIRTUAL_ENV`, use task-local `ACTIONS_HOME`, `TMPDIR` and `UV_CACHE_DIR`,
+and reuse the same-job Playwright browser cache because later native browser
+checks consume it. Require JUnit to
+contain exactly that one test with no skips, failures, or errors before
+uploading its sanitized summary and provenance receipt. This workflow has no
+generated-file header, and `.github/workflows/_gen_workflows.py`'s `TARGETS`
+omits it, so a direct workflow edit is maintained.
+The default integration suite skips both opt-in Runtime/browser gates, so a
+skip is not browser evidence. The fixture's `artifact: null` response is
+deliberately partial: it is not a successful shared-schema result and does not
+prove authorized artifact retrieval or user-facing download behavior.
+Keep tests shipped inside the template self-contained: run them from a fresh
+`action-server new` extraction and read only files included in that extracted
+project. Tests that compare a packaged example with repository contract
+fixtures belong in the repository's test suite, since those fixtures are not
+present for a template user after extraction.
+
 The focused source tests exercise public decorators through the Runtime
 Streamable HTTP route. The process-level fixture additionally installs the
 exact candidate Core wheel into an isolated test environment before importing an
@@ -127,6 +176,13 @@ legacy test pins to 1.0.0 bootstrapped an environment but the worker exited
 before writing its result; a fixture pin to 0.10.0 could not be resolved. The
 Runtime's explicit minimum-version error and those fixture inputs identify a
 test-fixture incompatibility, not an RCC defect.
+
+Version metadata alone is not source provenance: a source-built candidate can
+have the same `1.0.2` version as the registry wheel while containing different
+API bytes. Bind candidate acceptance to its source revision/tree and wheel
+SHA-256, then verify that exact wheel through the worker's `direct_url.json`;
+keep its result distinct from a test of the unchanged manifest against the
+published wheel.
 
 Frozen integration fixtures that synchronize packages with `package.yaml` may
 need a cold RCC-managed environment before the server emits its ready-port
@@ -509,6 +565,18 @@ new upload and never replace an existing tag or distribution file.
 Publish dependency releases before changing template pins. After publication,
 update the source templates and regenerate the embedded template ZIP and its
 SHA-256 metadata together; source YAML changes alone do not update shipped templates.
+When adding an embedded community template, update the exact inventory in
+`test_new_list_templates` too: check both its human-readable listing and the
+complete `action-server new list-templates --json` name set. Bundle integrity
+tests do not verify that the CLI inventory assertion includes the new template.
+Template tests are shipped in the template archive, so verify them from a fresh
+archive extraction and keep their inputs and dependencies inside that template.
+Comparisons against monorepo contracts or fixtures belong in repository-level
+tests; an extracted template must not reach outside its files to load them.
+Keep unpublished Core pins explicitly provisional and do not present the
+dependent production template to users before publication and fresh resolution.
+For Canvas results, `artifact: null` is a deliberately partial local result,
+not a match for the shared `Success` schema's required artifact handle.
 The Core clean-wheel verifier compares the installed version with the input wheel's
 METADATA rather than a historical release number, so patch releases exercise the
 same isolated-install and action-execution checks.
@@ -1072,16 +1140,106 @@ verify the published registry wheel with a clean install before advancing the
 supported-worker Core floor. Do not weaken the existing floor test or infer
 registry compatibility from the source checkout or retained candidate artifact.
 
-The current PR #282 head `bab27a93664494965db8a86761ea5685a3be6618` (tree
-`72257e07a78d33ec1d3d067fa0da83369eea0357`) declares that 1.0.3 dependency,
-while Action Server Tests run 38042719836 and RCC toolkit run 38042719804
-still require 1.0.2; refresh and rerun against the current integration after
-the registry prerequisite is met. The earlier candidate Runtime/browser PASS
-(run 38041682069) is bound to predecessor tree
-`80a6ef315411a446db00c234ff9a5a294d91fc00`, not this head. PR #282 also returns
-`artifact: null`; authorized replica-readable output and retrieval remain
-dependent on the shared #86/#83/#129 contracts. Actual ChatGPT operation is
-separate host evidence and has not been established by the MCP Apps harness.
+Core 1.0.3 was published from `actions-core-1.0.3` at
+`a70993fafc99a9f94041485542d5a720797ca394`. The release readback verifies the
+PyPI wheel SHA-256
+`8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265`
+and its public metadata decorators in a clean installed CLI consumer. That
+producer proof clears the published dependency prerequisite; template Runtime
+consumer acceptance remains separate.
+
+Name the executed Canvas template acceptance path. The candidate-source gate
+uses an acceptance manifest with Core 1.0.2 and then installs its own candidate
+wheel, so its receipt cannot establish consumption of the production template's
+published Core 1.0.3 wheel. The published consumer gate preserves the production
+manifest and checks installed version, distribution ownership, interpreter-prefix
+containment, and three recorded module hashes. Those sampled hashes do not
+authenticate all wheel members or prove cold registry acquisition.
+
+The published consumer gate requires a clean committed checkout and an explicit
+`CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`; a system Chromium found on PATH
+cannot replace that selection. It checks the installed Playwright version against
+the frontend lock and records the selected browser's version and digest. Run it
+with `ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1` and retain the receipt selected by
+`CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH`. The exact test is
+`mcp/test_canvas_query_template.py::test_canvas_template_runs_through_runtime_and_real_browser`
+under `action_server/tests/action_server_tests`. It owns temporary Runtime and
+cache roots, rejects a configured artifact provider and a frozen Runtime override,
+and caps Runtime worker processes at two. It records the source commit/tree,
+worker imports, resource and template digests, and bounded Runtime cleanup only
+after the MCP and browser checks pass. The browser launcher stops its owned
+process tree before removing its private browser temporary directory. On POSIX,
+the browser alone receives a short mode-0700 `/tmp/cv-*` root through `TMPDIR`,
+`TMP`, and `TEMP`; Chromium creates a Unix-domain `SingletonSocket` below that
+root, so inheriting a long receipt or pytest path can abort launch before any
+page check. Keep Runtime, cache, and receipt roots separate from this browser
+pathname constraint. Remove only the browser-owned root after bounded process
+cleanup on both success and failure; Windows uses its native temporary root.
+Runtime cleanup reports direct-child reap, observed descendants and
+reader closure while preserving an earlier failure. Point-in-time descendant
+observations do not establish universal discovery or adoption. A receipt alone
+does not establish passing pytest teardown; retain an executed zero-skip JUnit
+result alongside it. Keep candidate and published consumer receipts separate.
+The generated Runtime Tests Linux job runs the exact published consumer after its
+existing Poetry, Node, and Chromium setup. Admit a receipt only when its current
+source identity and measured Core/browser values match, its one named JUnit case
+passes with consistent counters and zero skips, and Runtime cleanup records
+`wrapper_reaped`, `descendant_snapshot_complete`, and `descendant_reap_complete`
+as true with empty errors, readers, and observed live/zombie descendant lists.
+Checking only boolean or list types would admit failed cleanup. Upload sanitized
+JUnit even after failure; upload a sanitized receipt only after admission.
+On receipt rejection, the validator independently observes each existing
+receipt predicate and writes failure-only diagnostics with fixed reason codes,
+PASS/FAIL/UNAVAILABLE statuses, fixed read/parse exception classes and JUnit
+counts. It emits no receipt values, exception messages, paths, URLs, providers,
+environment maps or test output. These are observations after rejection, not
+proof of the original short-circuit position. A failed predicate and an
+unavailable observation are distinct; neither waives admission or cleanup.
+The always-run upload also
+retains this diagnostic file when written. A failure before validator execution
+or an unsuccessful diagnostic write may still leave it unavailable.
+One passing pytest case does not establish receipt admission, and an artifact
+containing only JUnit does not prove that the raw receipt was missing: rejection
+happens before the successful sanitized receipt is written. Require actual
+reason-code evidence before identifying the failed predicate. Earlier failures
+without those diagnostics retain unknown failed-predicate identity and unknown
+raw-receipt presence.
+A parsed failure report with `browser_version` FAIL records rejection of the
+receipt/preflight version equality for that invocation. Matching executable
+path and digest predicates do not identify the compared version strings or
+establish browser byte drift. The report omits those values, so preserve the
+failed code and unavailable comparison inputs without attributing a cause.
+Sanitized JUnit can contain a synthetic admission failure after the original
+pytest case passed; retain those two outcomes separately. A new measured reason
+code does not identify an earlier failure that lacked diagnostics or waive any
+source, browser, hash or cleanup predicate.
+
+Measure the expected browser version with the receipt's checked subprocess
+contract: the selected executable's `--version`, captured text output, a
+10-second bound and `stdout.strip()`. Reject nonzero, empty or timed-out
+measurements before admission. Shell command substitution removes trailing
+newlines but retains trailing spaces, so it can disagree with that receipt
+measurement even when executable bytes match. Normalize at the measurement
+boundary and keep the full branded version equality unchanged in admission.
+A local formatting reproduction establishes that mechanism; it does not
+identify unavailable version strings from an earlier hosted failure.
+A service-free test may relocate paths in an earlier measured receipt to test this
+validator, but it must preserve that receipt's executed source identity and must
+not relabel it as execution of a later workflow commit. When a measured receipt
+contains Linux byte hashes, materialize the validator's input files from the
+current committed Git blobs into an isolated admission checkout. Windows Git
+checkout can convert the Runtime module, package manifest, and frontend lock to
+CRLF, which changes their raw-byte hashes even when their Git blobs are unchanged.
+Keep the measured fixture and its hashes immutable; do not normalize bytes or
+ignore mismatches in the production validator. Test each CRLF working-file case,
+require a valid baseline before poison tests, and reject altered isolated inputs.
+This is service-free admission coverage, not Windows Runtime/browser execution;
+the actual consumer gate continues hashing its own working-tree bytes.
+
+PR #282 still returns `artifact: null`, which fails the shared artifact-bearing
+Success schema. Caller-owned Workspace/application/revision binding and
+authorized retrieval require the shared ownership and Run-output contracts.
+Actual ChatGPT operation needs separate host evidence.
 
 For any accepted public metadata API, keep the boundary strict: reject cycles,
 non-finite values, non-string keys, and excessive depth/size; validate supported
@@ -1268,6 +1426,22 @@ release job's environment. If a CLI wrapper drops stdin while setting a secret,
 use native `gh` and repeat the safe check; never print or transfer the value to
 an agent. Follow the [upstream reporting procedure](upstream-reporting.md)
 before attributing a tooling failure to a dependency.
+
+When qualifying generated Runtime frontend content, decode `_static_contents.py`
+as data and bind each asset's bytes to its builder checkout. The encoder reads
+`dist/index.html` as bytes and writes their representation; setting the generated
+module's newline to LF does not normalize the embedded asset. Keep outer module
+CRLF differences, decoded asset CR differences and semantic equivalence separate.
+A carriage-return-removal comparison is diagnostic evidence, not a source or
+content waiver. If the original frontend input and effective checkout newline
+setting were not retained, keep checkout-versus-compiler causation unknown.
+
+Include tracked non-Python package text in checkout-byte qualification. A
+Python-only rule leaves packaged README, HTML, YAML and other text differences
+unresolved; keep binary archives and intentional platform-specific line-ending
+fixtures outside any proposed text rule. A checkout-byte fix must also appear
+in affected builder and test workflow path filters. A passing census that
+excluded those workflows does not qualify its distribution bytes.
 
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
@@ -1565,6 +1739,18 @@ candidate gate.
 
 ## Development Loop
 
+Give every preservation-sensitive pytest invocation its own unique, absent
+`--basetemp` outside the shared numbered pytest parent, and retain policy `all`.
+The installed pytest default retains three numbered roots and registers cleanup
+at process exit; a later invocation can delete an earlier completed test root.
+Explicit basetemp bypasses that numbered-root cleanup, but pytest removes an
+existing explicit target before using it. Never reuse a retained target or share
+one basetemp setting across sequential Toolkit and Runtime invocations. Policy
+`none` increases deletion; it does not disable cleanup. Before attributing a
+vanished root, bind recorded commands and installed cleanup source, distinguish
+scratch loss from independently retained logs and source receipts, and keep
+unobserved process attribution and broader evidence references unknown.
+
 1. Inspect branch/status and package configuration.
 2. Reproduce the failure or establish a clean baseline.
 3. Add a regression before behavioral code.
@@ -1820,6 +2006,17 @@ The beta and production template deployment workflows change into
 Preserve that script's tracked executable mode (`100755`); a checkout that loses
 the mode fails before Python starts with shell exit 126. The active contract test
 checks both the executable bit and each workflow's direct invocation.
+The Canvas Query acceptance test that times out an owned process tree waits for
+a readiness marker published only after its grandchild starts before starting
+the short runtime-timeout clock. Keep readiness separately bounded and atomic:
+otherwise interpreter startup latency can expire the cleanup timeout before a
+descendant exists, producing a missing-PID fixture failure rather than testing
+descendant cleanup. The marker proves setup only; retain the process-tree
+identity checks and require the captured descendant to be gone or zombie after
+timeout cleanup. If the leader exits while the marker is being published,
+recheck the atomic marker before reporting early exit. Drain captured output
+with a short bound only: a descendant may inherit the pipes, so unbounded
+`communicate()` can block before identity-checked cleanup runs.
 
 ### Action Server tunnel verification
 
@@ -2586,7 +2783,8 @@ separately from RCC wrapper receipts. `ActionServerProcess.stop()` delegates to
 can consume the direct child's wait status, so a later `Popen.poll()` value of 0
 is not natural-exit evidence. A normal `start_server` return produces CLI exit
 0. The
-explicit `/api/shutdown/` endpoint instead calls `_thread.interrupt_main()`;
+explicit `/api/shutdown/` endpoint schedules `_thread.interrupt_main()` as a
+response background task, after the final ASGI response-body send completes;
 `_main_retcode` catches that `KeyboardInterrupt` and returns 1. Count exit 1 as
 the expected controlled API-interrupt outcome only when the receipt also proves
 that shutdown request and its successful 2xx response. An observed natural exit
@@ -2598,6 +2796,13 @@ the captured natural result. Preserve any post-stop `Popen.poll()` value as
 forced-cleanup-only evidence, never as natural exit. A `stop()` return is not
 process-exit evidence, and a captured descendant set only reports that
 observation; it does not prove complete tree reaping.
+The assembled route's service-free ordering controls require completed response
+start and final body sends before interruption; denied requests and failed
+sends must not interrupt. A server access-log status 200 does not prove that
+the client received the response. Keep client response delivery, natural exit
+and cleanup predicates separate; passing checkout-byte tests establishes no
+shutdown cause. ASGI send ordering still requires fresh platform client and
+natural-exit acceptance, and does not guarantee network delivery.
 The bounded retirement result is one pool-lifecycle signal, separate from the
 Action execution result and RCC terminal receipt. Preserve failed wrapper
 receipts. Neither wrapper reaping nor stopped observed descendants establishes
@@ -2872,6 +3077,16 @@ Revision API and does not modify the legacy Robot ZIP/import path. The bounded
 Linux contract suite exercises successful mode normalization, invalid and
 non-empty destinations, links/special files, source/staged-byte mutation, and
 failure cleanup; it does not establish an RCC consumer/import proof.
+The staged-byte regression matches the destination descriptor by device and
+inode and writes the same-sized poison before the underlying read. A positive
+baseline and mutation control with constant timestamp observations verify that
+the re-read digest rejects changed bytes without relying on clock advancement.
+The separate after-read control returns the prior bytes, then forces and checks
+an actual metadata change before requiring rejection and owned-tree cleanup.
+Keep these two signals distinct: a write after a read cannot change the digest
+of the bytes already returned. An unrecorded injection or metadata observation
+does not identify a hosted failure's timestamp cause. These controls retain the
+exclusive destination-writer and non-atomic snapshot limits above.
 The staging failure tests inject errors after mkdir at identity observation,
 directory open, and fstat; when identity cannot be established they require the
 original exception to survive with an explicit unresolved-cleanup note.
