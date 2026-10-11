@@ -85,10 +85,10 @@ class RunsState:
         db: Database = self._db
 
         with db.connect():
-            query = "SELECT * FROM run"
+            query = "SELECT * FROM run WHERE NOT EXISTS (SELECT 1 FROM run_pin WHERE run_pin.run_id=run.id)"
             values: list[Any] = []
             if run_type:
-                query += " WHERE run_type = ?"
+                query += " AND run_type = ?"
                 values.append(run_type)
             query += " ORDER BY numbered_id DESC LIMIT ? OFFSET ?"
             values.extend((limit, offset))
@@ -108,11 +108,12 @@ class RunsState:
         with db.connect():
             query = (
                 "SELECT id, status, action_id, start_time, run_time, numbered_id, "
-                "run_type, robot_package_path, robot_task_name FROM run"
+                "run_type, robot_package_path, robot_task_name FROM run "
+                "WHERE NOT EXISTS (SELECT 1 FROM run_pin WHERE run_pin.run_id=run.id)"
             )
             values: list[Any] = []
             if run_type:
-                query += " WHERE run_type = ?"
+                query += " AND run_type = ?"
                 values.append(run_type)
             query += " ORDER BY numbered_id DESC LIMIT ? OFFSET ?"
             values.extend((limit, offset))
@@ -132,7 +133,11 @@ class RunsState:
         db: Database = self._db
 
         with db.connect():
-            return db.first(Run, "SELECT * FROM run WHERE id = ?", [run_id])
+            return db.first(
+                Run,
+                "SELECT * FROM run WHERE id = ? AND NOT EXISTS (SELECT 1 FROM run_pin WHERE run_pin.run_id=run.id)",
+                [run_id],
+            )
 
     def get_run_from_request_id(self, request_id: str) -> "Run":
         """
@@ -148,7 +153,18 @@ class RunsState:
         db: Database = self._db
 
         with db.connect():
-            return db.first(Run, "SELECT * FROM run WHERE request_id = ?", [request_id])
+            return db.first(
+                Run,
+                "SELECT * FROM run WHERE request_id = ? AND NOT EXISTS (SELECT 1 FROM run_pin WHERE run_pin.run_id=run.id)",
+                [request_id],
+            )
+
+    def is_scoped_run(self, run_id: str) -> bool:
+        """Known scoped Runs never enter unauthenticated legacy read/cache paths."""
+        from .run_outputs.models import RunPin
+
+        with self._db.connect():
+            return bool(self._db.all(RunPin, where="run_id=?", values=[run_id]))
 
     def register(self, listener):
         assert (
@@ -163,6 +179,8 @@ class RunsState:
         self._run_listeners.pop(listener, None)
 
     def on_run_inserted(self, run: "Run"):
+        if self.is_scoped_run(run.id):
+            return
         # Keep a stable shallow snapshot without copying potentially large payloads.
         run_copy = copy(run)
         with self.semaphore:
@@ -173,6 +191,8 @@ class RunsState:
         """
         Creates the runtime info for a run and returns it.
         """
+        if self.is_scoped_run(run_id):
+            raise PermissionError("scoped Run requires common authorized lifecycle")
         runtime_info = RunRuntimeInfo(run_id)
         assert run_id not in self._run_id_to_runtime_info
         self._run_id_to_runtime_info[run_id] = runtime_info
@@ -180,6 +200,9 @@ class RunsState:
 
     def on_run_changed(self, run: "Run", changes: Dict[str, Any]):
         from actions.server._models import RunStatus
+
+        if self.is_scoped_run(run.id):
+            return
 
         # Keep a stable shallow snapshot without copying potentially large payloads.
         run_copy = copy(run)
@@ -203,6 +226,8 @@ class RunsState:
             True if the run was canceled, False otherwise (if the run was not running).
         """
 
+        if self.is_scoped_run(run_id):
+            return False
         with self.semaphore:
             runtime_info = self._run_id_to_runtime_info.get(run_id)
             if runtime_info is not None:
