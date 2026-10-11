@@ -1,0 +1,235 @@
+{
+  "canonical_guidance": {
+    "exact_verified_text": "Freeze an RCC gate against the actual composed source, not independently reviewed tips. The strict publication-pair API and detached trust profile both change publication: keep one shared RCC publish payload and thread the selected trust profile through both artifact-only and details interfaces, preserving exact provider arguments and the same-response specification/artifact pair.",
+    "path": "docs/skills/repository-operations.md",
+    "status": "Already integrated; no additional cosmetic/session note proposed",
+    "why_sufficient": "This paragraph directly encodes the verified conflict-resolution lesson; its following text preserves context/cache reconciliation, selector versus profile distinction, old Core fixture scope and required native rebuilding. The adjacent scripts-lint paragraph is confirmed by tasks.py and retained configured package lint commands."
+  },
+  "changed_source_objects": [
+    {
+      "git_blob": "7ab99778b25806ff80ab22a9d0d52479a7e1a211",
+      "path": "action_server/scripts/native_runtime_artifact_binding.py",
+      "sha256": "efbac7fdaf558728281da2338017bdb3e83bb68b9165b43222dd4e460319d08e"
+    },
+    {
+      "git_blob": "6ece62af001c0f059630d8e4b5e96a0c95760988",
+      "path": "action_server/scripts/test_native_runtime_artifact_binding.py",
+      "sha256": "cb215a746009982b021abcdca101e2e538f90adb54aac534cc4c365033401173"
+    },
+    {
+      "git_blob": "77a7a4c3be9a9f7c21086366b2f52b2dea9f6ab1",
+      "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "05bd886e452515509c4e5fd81cff0be6c512e0659665262ab7d20e5c5dd91ba9"
+    },
+    {
+      "git_blob": "4b036d64b5a69305681d96faa340d424ed4d5461",
+      "path": "action_server/src/actions/server/_action_package_handler.py",
+      "sha256": "d003b916b550a866321c0e110b525774cb2369aaf672d0336d4c50b2b13fb425"
+    },
+    {
+      "git_blob": "d7b0212e07741d03339b4edb44e698871423e33b",
+      "path": "action_server/src/actions/server/_actions_import.py",
+      "sha256": "628560ea5e45b245a3b85d50b5935f98bb58ef94c50cc5477a4e846e3929255e"
+    },
+    {
+      "git_blob": "c6dca66b1be24c923347c43528e036b7beabd7ed",
+      "path": "action_server/src/actions/server/_actions_process_pool.py",
+      "sha256": "e3a682cacf1f58ccadba71b1ce05fac9238d5e6cef44be0d7350b88de8108d50"
+    },
+    {
+      "git_blob": "5f0b5186bed910ddb35a2c8544b19e1c0082b90a",
+      "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "sha256": "1cbff1830f2bac1695a4f597f2d5facc464d39c8672193c5a280787400576815"
+    },
+    {
+      "git_blob": "53061837cf15729a3c12312deb8f0bcff85b2400",
+      "path": "action_server/src/actions/server/rcc_trust_profile.py",
+      "sha256": "27b2e1de96ab7a684d6885b07e80c7f1d6fa9b41feb59fcfb36200f0b7f685ac"
+    },
+    {
+      "git_blob": "ac907316af20acc08461b692c34f60f1643d484f",
+      "path": "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+      "sha256": "3d34119a606d6dc82e78fef54b1e9c5dc750c3d1123dc2289b0474b56de75d73"
+    },
+    {
+      "git_blob": "1f56f2054338fb23a0bf3af7ae982448232b58d7",
+      "path": "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "sha256": "d26b40f4eabd51faa3ac877d37a710ea59ff0a8a9634684f67ff36eae33e6335"
+    },
+    {
+      "git_blob": "844efa2ef6578b6cc8dce1f94031e060de168454",
+      "path": "docs/skills/repository-operations.md",
+      "sha256": "e80fca1baf43c3de510719f232f76e50e46c998fe70984c0f1648625fdffc986"
+    }
+  ],
+  "checks_performed": [
+    "Read complete combined adapter conflict and differential branch-preservation changes, guide diff, owner runner and bounded log outcomes",
+    "Read-only git parent/tree/status/path/object checks",
+    "Standard-library AST and import-binding comparisons; SHA256 of retained logs and exact changed source/config bytes; no tests or candidate code execution"
+  ],
+  "clean": true,
+  "disposition": "GO_SOURCE_ONLY",
+  "findings": [],
+  "first_merge": {
+    "head": "052bd852783a7c2b5533a6732adb17008b04dc31",
+    "parents": [
+      "d649c90112ee03c46f8b88c973849d7203f7e64a",
+      "14a7810ca3f48d3021f7b76721a58f60e4a7b897"
+    ],
+    "tree": "cfe926c4f772b7ec2c8c725a3738cfa5cf0a4aa1"
+  },
+  "head": "44afd960ad01f83eeef7773b334ccde3683c022d",
+  "integration_equalities": {
+    ".github/workflows": {
+      "equal": true,
+      "integration_object": "d3fb1b9624f7c16a8b00442c73657d58dbf6b125",
+      "union_object": "d3fb1b9624f7c16a8b00442c73657d58dbf6b125"
+    },
+    "action_server/poetry.lock": {
+      "equal": true,
+      "integration_object": "ca8438a2e772a9195be251ab85c7048960bf0952",
+      "union_object": "ca8438a2e772a9195be251ab85c7048960bf0952"
+    },
+    "action_server/pyproject.toml": {
+      "equal": true,
+      "integration_object": "021ab546f04306dcff615e3e31a8395110e78703",
+      "union_object": "021ab546f04306dcff615e3e31a8395110e78703"
+    },
+    "action_server/src/actions/server/templates": {
+      "equal": true,
+      "integration_object": "f6bdb026b40707291010b905c2754ca93b72eac4",
+      "union_object": "f6bdb026b40707291010b905c2754ca93b72eac4"
+    },
+    "action_server/tasks.py": {
+      "equal": true,
+      "integration_object": "905cc8e106194c1a984138e3a0bd27b384f5a4d4",
+      "union_object": "905cc8e106194c1a984138e3a0bd27b384f5a4d4"
+    },
+    "actions": {
+      "equal": true,
+      "integration_object": "1986f0f9547519669f771f675684849443a8e2a4",
+      "union_object": "1986f0f9547519669f771f675684849443a8e2a4"
+    },
+    "devutils/ruff.toml": {
+      "equal": true,
+      "integration_object": "9c90880d3a9306d5aba0cb140a81648b9efdffb8",
+      "union_object": "9c90880d3a9306d5aba0cb140a81648b9efdffb8"
+    }
+  },
+  "observations": [
+    "Ordinary ordered parent chain d649 + reviewed profile14a => 052bd852, then 052bd852 + reviewed selector7c0 => 44afd960; integration remains an ancestor. No recovery/evidence baseline is used.",
+    "Combined merge conflict resolution preserves one _publish_artifact_payload call per public API. Both APIs forward provider, trust_profile and runner. Payload helper appends unchanged provider argv before profile argv; strict specification/artifact parser retains same-response identity checks, legacy parser retains artifact-only compatibility.",
+    "Every original PR302 adapter test function/class AST is unchanged; diff removes no lines from that baseline test file. Existing platform-aware Path strings and exact provider argv remain.",
+    "All four nonoverlapping profile caller/helper sources are byte-identical to reviewed14a. Selector helper/test/verifier changes from reviewed7c0 are three import-order swaps only: non-import AST and imported bindings equal. Selector verifier test file is byte-identical to7c0.",
+    "New focused regression observes exactly one details-publication call with differing specification/artifact digests and appended filesystem-carrier arguments. Its provider=local is a fake-runner input only; it establishes no supported real provider form.",
+    "Core/actions tree, workflows including generator, template tree, Runtime metadata/lock, tasks and formatter configuration equal accepted193 objects. Prepared Runtime pyproject/lock and shared gateway/formatter configuration equality rechecked."
+  ],
+  "observed_at_utc": "2026-10-11T00:06:31.056401+00:00",
+  "owner_receipt": {
+    "path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/union-checkpoint-44afd960.json",
+    "sha256": "f6cf8fc44e150c839585e471f47a32ac83eff001d01206f033b2bf5912f76d6d"
+  },
+  "parents": [
+    "052bd852783a7c2b5533a6732adb17008b04dc31",
+    "7c0b6fdcf49bd9c5cc663326a30d7df37a5fb203"
+  ],
+  "remaining_gates": [
+    "No current hosted head/merge admission implied; future published exact head needs hosted checks.",
+    "Actual RCC/provider/local-detached/offline lifecycle and issue134 acceptance NOT RUN.",
+    "Private compiler/inspector source absent; profile/context/cache/publish-details seam still needs separate reviewed composition.",
+    "Verifier does not propagate local profile merely because selector and adapter are in one tree. A future frozen gate must select the approved profile explicitly and bind stable raw HOME/ROBOCORP_HOME/RCC context.",
+    "Profile-bearing frozen/Go artifacts require rebuilding and exact provenance; current193 artifacts do not prove this new source behavior.",
+    "Full Action Server suite/native/wheel/metadata/release acceptance NOT RUN. Package typecheck excludes script verifier; its existing unrelated type issue is not claimed fixed."
+  ],
+  "repository": "/workspace/work/actions-mk3-wave9-rcc-source-union",
+  "retained_verification": {
+    "all_hashes_match": true,
+    "gateway": "Owner retained logs show canonical RCC18.19.3 task script --no-build success with candidate module origins and prepared interpreter; reviewer performed readback only.",
+    "historical_failures": "Initial RCC fixture absence and script-isort failure logs preserved and hash-verified; fake-only tests and mechanical sorting do not retroactively convert them into full-package acceptance.",
+    "logs": [
+      {
+        "bytes": 18531,
+        "name": "adapter_contracts_final",
+        "path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/adapter-contracts-final.log",
+        "sha256": "257ef96c0d80f29710ace6c02d9ff93cec81393df9d9ef8ccc7d36afc97a23bf",
+        "verified": true
+      },
+      {
+        "bytes": 12696,
+        "name": "selector_contracts_final",
+        "path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/selector-contracts-final.log",
+        "sha256": "44ab10a0ad05330a204cec9072f447454ef542494cb6788b3899dcdf39392d57",
+        "verified": true
+      },
+      {
+        "bytes": 4511,
+        "name": "package_lint",
+        "path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/lint-final.log",
+        "sha256": "f273e50c1a5c38722be083511a98625d4bc1a844b367cd1d699d91b5b9d6a304",
+        "verified": true
+      },
+      {
+        "bytes": 5733,
+        "name": "package_typecheck",
+        "path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/typecheck-final.log",
+        "sha256": "088ca22ccf7ada4acafbf57327d019a90827fe9b1c55d5eb345aa19f1304188a",
+        "verified": true
+      },
+      {
+        "bytes": 4299,
+        "name": "script_ruff",
+        "path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/script-lint-final.log",
+        "sha256": "af2bdea21ecd8b8ae51641cdebf1992698c4fcdb58f1c2c8286cd53aa892d333",
+        "verified": true
+      },
+      {
+        "bytes": 4382,
+        "name": "script_format",
+        "path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/script-format-final.log",
+        "sha256": "e4e64c6c01a4bf4aae5f9e43fad01e45942266b33e04a03141f47c032a19b0e7",
+        "verified": true
+      },
+      {
+        "bytes": 4240,
+        "name": "script_isort",
+        "path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/script-isort-final.log",
+        "sha256": "480c1ff670cd2c52b2b5888d21720fc77d4816283141874f5eef97e6f8c0801e",
+        "verified": true
+      },
+      {
+        "bytes": 174843,
+        "name": "initial_full_adapter_fixture_failure",
+        "path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/profile-adapter.log",
+        "reason": "All tests errored during the autouse RCC fixture because action_server/src/actions/server/bin/rcc-18.19.3 was absent; no test body ran. No install/bootstrap was attempted; bounded fake-only suite reran with --noconftest and deselected real_rcc.",
+        "sha256": "f7e8b2af51e5e77530b5f62c3260bb45e04a0e6fd47922c3ebd1d3db65ea91ff",
+        "verified": true
+      },
+      {
+        "bytes": 5839,
+        "name": "initial_script_isort_failure",
+        "path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/script-isort.log",
+        "reason": "Configured Isort found import-order-only changes in the three selector helper/test scripts. Pinned Isort reordered imports; final script Ruff, format, and Isort gates passed.",
+        "sha256": "20fc5f33b89136dd0de60eaf210e089c94b889904f00f17f4ba4926ae8fc9bec",
+        "verified": true
+      }
+    ],
+    "results": {
+      "adapter": "92 passed; 1 real RCC deselected",
+      "package_lint": "Ruff/format/isort PASS; Markdown executable unavailable",
+      "package_typecheck": "327 src/tests files PASS",
+      "scripts": "Explicit Ruff/format/isort PASS; script Mypy not established",
+      "selector_verifier": "55 passed; 1 real RCC deselected"
+    },
+    "runner_path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/run_checks.py",
+    "runner_sha256": "17f40f69a3b3f3a2224e3c9e9f6258dce0fb273480a9f14fa6a519ce49ebce22"
+  },
+  "schema": "independent-rcc-public-union-source-review-v1",
+  "source_branches": {
+    "integration": "19380993febaa71238eaee3026b5c808773283ff",
+    "profile": "14a7810ca3f48d3021f7b76721a58f60e4a7b897",
+    "selector": "7c0b6fdcf49bd9c5cc663326a30d7df37a5fb203"
+  },
+  "starting_source": "d649c90112ee03c46f8b88c973849d7203f7e64a",
+  "tree": "2960c688fa2a2420f8915edbf0817fd3dd818b98",
+  "upstream_disposition": "None; no confirmed reproduced/deduplicated maintained defect identified by this source union review."
+}

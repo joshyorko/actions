@@ -1,0 +1,32 @@
+{
+  "job_id": 114343060346,
+  "repository": "joshyorko/actions",
+  "source": "approved GitHub decoded workflow job logs",
+  "selected_lines": [
+    "2026-10-11T00:04:21.8007158Z                     f\"installed Runtime member differs from selected wheel: {member} \"\r",
+    "2026-10-11T00:04:21.8011403Z E               AssertionError: installed Runtime member differs from selected wheel: actions/server/_protocols.py installed=6e6f3444834c169f8bb94ab25cc0892951e6e5c8d5297e9041caa81a0c71bebe wheel=48eed80d504a8e4a58f0f63da4f7265f8826f48776fc92081ba190dbd71fc1a5\r",
+    "2026-10-11T00:04:21.8047361Z E        Input: 'installed Runtime member differs from selected wheel: actions/server/_protocols.py installed=6e6f3444834c169f8bb94ab25cc0892951e6e5c8d5297e9041caa81a0c71bebe wheel=48eed80d504a8e4a58f0f63da4f7265f8826f48776fc92081ba190dbd71fc1a5'\r",
+    "2026-10-11T00:04:21.8051325Z [gw1] [ 70%] FAILED contract_tests\\test_active_contracts.py::test_installed_runtime_wheel_scan_rejects_unimported_private_core_import \r",
+    "2026-10-11T00:04:21.8619149Z [gw1] [ 71%] FAILED contract_tests\\test_active_contracts.py::test_installed_runtime_wheel_scan_allows_public_core_and_runtime_json_modules \r",
+    "2026-10-11T00:04:21.8701042Z                     f\"installed Runtime member differs from selected wheel: {member} \"\r",
+    "2026-10-11T00:04:21.8706618Z E               AssertionError: installed Runtime member differs from selected wheel: actions/server/_protocols.py installed=6e6f3444834c169f8bb94ab25cc0892951e6e5c8d5297e9041caa81a0c71bebe wheel=48eed80d504a8e4a58f0f63da4f7265f8826f48776fc92081ba190dbd71fc1a5\r",
+    "2026-10-11T00:05:51.1319937Z                     f\"installed Runtime member differs from selected wheel: {member} \"\r",
+    "2026-10-11T00:05:51.1322213Z E               AssertionError: installed Runtime member differs from selected wheel: actions/server/_protocols.py installed=6e6f3444834c169f8bb94ab25cc0892951e6e5c8d5297e9041caa81a0c71bebe wheel=48eed80d504a8e4a58f0f63da4f7265f8826f48776fc92081ba190dbd71fc1a5\r",
+    "2026-10-11T00:05:51.1339102Z E        Input: 'installed Runtime member differs from selected wheel: actions/server/_protocols.py installed=6e6f3444834c169f8bb94ab25cc0892951e6e5c8d5297e9041caa81a0c71bebe wheel=48eed80d504a8e4a58f0f63da4f7265f8826f48776fc92081ba190dbd71fc1a5'\r",
+    "2026-10-11T00:05:51.8654012Z                     f\"installed Runtime member differs from selected wheel: {member} \"\r",
+    "2026-10-11T00:05:51.8656454Z E               AssertionError: installed Runtime member differs from selected wheel: actions/server/_protocols.py installed=6e6f3444834c169f8bb94ab25cc0892951e6e5c8d5297e9041caa81a0c71bebe wheel=48eed80d504a8e4a58f0f63da4f7265f8826f48776fc92081ba190dbd71fc1a5\r",
+    "2026-10-11T00:05:51.8669805Z =========================== short test summary info ===========================\r",
+    "2026-10-11T00:05:51.8670734Z FAILED contract_tests\\test_active_contracts.py::test_installed_runtime_wheel_scan_rejects_unimported_private_core_import - AssertionError: Regex pattern did not match.\r",
+    "2026-10-11T00:05:51.8672821Z  Input: 'installed Runtime member differs from selected wheel: actions/server/_protocols.py installed=6e6f3444834c169f8bb94ab25cc0892951e6e5c8d5297e9041caa81a0c71bebe wheel=48eed80d504a8e4a58f0f63da4f7265f8826f48776fc92081ba190dbd71fc1a5'\r",
+    "2026-10-11T00:05:51.8675316Z FAILED contract_tests\\test_active_contracts.py::test_installed_runtime_wheel_scan_allows_public_core_and_runtime_json_modules - AssertionError: installed Runtime member differs from selected wheel: actions/server/_protocols.py installed=6e6f3444834c169f8bb94ab25cc0892951e6e5c8d5297e9041caa81a0c71bebe wheel=48eed80d504a8e4a58f0f63da4f7265f8826f48776fc92081ba190dbd71fc1a5\r",
+    "2026-10-11T00:05:51.8676970Z ===== 2 failed, 992 passed, 94 skipped, 14 warnings in 361.87s (0:06:01) ======\r",
+    "2026-10-11T00:05:52.2648361Z ##[error]Process completed with exit code 1.\r",
+    "2026-10-11T00:06:13.7988360Z tests\\contract_tests\\test_active_contracts.py:229:5: error: Need type annotation for \"violations\" (hint: \"violations: list[<type>] = ...\")  [var-annotated]\r",
+    "2026-10-11T00:06:13.7990254Z tests\\contract_tests\\test_active_contracts.py:297:5: error: Need type annotation for \"violations\" (hint: \"violations: list[<type>] = ...\")  [var-annotated]\r",
+    "2026-10-11T00:06:16.7929451Z Found 2 errors in 1 file (checked 327 source files)\r",
+    "2026-10-11T00:06:17.0352079Z ##[error]Process completed with exit code 1.\r"
+  ],
+  "original_log_characters": 550807,
+  "result": "FAIL",
+  "original_log_disposition": "Local only; no public full-log upload"
+}

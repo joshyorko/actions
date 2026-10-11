@@ -1,0 +1,165 @@
+{
+  "schema": "actions-current-convergence-receipt/v1",
+  "recorded_at_utc": "2026-10-11T00:21:29Z",
+  "evidence_tree": {
+    "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+    "head": "5007896376674c33d5cb4e47724b84afe64a413b",
+    "tree": "31fa0f351cc6dd631da53380b599a6477eed4e92",
+    "parent": "4d0aa41427e80e059737f9f758277577db927857"
+  },
+  "scope": "Dated public evidence/status reconciliation only. No source edit, test launch, RCC/native/runtime execution, issue or PR write, publication, commit, or push was performed.",
+  "payload": {
+    "referenced_bundle": "../current-convergence-20261011/",
+    "manifest": "payload-manifest.json",
+    "manifest_sha256": "309c1178a99d402a86ad3c8466920a255a0214477a4b23c430fe19f7b806b5d2",
+    "file_count": 11,
+    "creator_attribution": "UNKNOWN. The sibling payload directory was present and read-only at first inspection. A collector attempt later wrote the remote-ref member listed in creation-provenance.json; original bytes are unavailable, so preservation of that member across the attempt is unverified. Current bytes were verified against the sibling manifest and separately retained read-only source record. The remaining ten payload members matched their manifest and available listed source bytes at validation.",
+    "v2_payload_manifest": "../current-convergence-20261011-v2/payload-manifest.json",
+    "v2_creation_receipt": "../current-convergence-20261011-v2/creation-provenance.json",
+    "excluded": "No full decoded CI logs, candidate-05 private review details, candidate-06 plan details, or private source-composition payload is copied.",
+    "preservation_caveat": "No claim that the sibling bundle was wholly unchanged is made. See creation-provenance.json for the single member whose prior bytes were not retained."
+  },
+  "rcc_public_source_union": {
+    "independent_review": {
+      "payload_path": "../current-convergence-20261011/payloads/rcc-source-union-independent-review-44afd960.json",
+      "sha256": "7fbd5bd3684f88b36e8d6b880814bd43553c790e8bb0b4a6fe7637777c876cae",
+      "bytes": 13278,
+      "disposition": "GO_SOURCE_ONLY",
+      "observed_at_utc": "2026-10-11T00:06:31.056401Z"
+    },
+    "checkpoint": {
+      "payload_path": "../current-convergence-20261011/payloads/rcc-source-union-checkpoint-44afd960.json",
+      "sha256": "f6cf8fc44e150c839585e471f47a32ac83eff001d01206f033b2bf5912f76d6d",
+      "head": "44afd960ad01f83eeef7773b334ccde3683c022d",
+      "tree": "2960c688fa2a2420f8915edbf0817fd3dd818b98",
+      "parents": [
+        "052bd852783a7c2b5533a6732adb17008b04dc31",
+        "7c0b6fdcf49bd9c5cc663326a30d7df37a5fb203"
+      ],
+      "working_tree_clean": true
+    },
+    "remote_checkpoint": {
+      "payload_path": "../current-convergence-20261011/payloads/rcc-source-union-remote-ref-44afd960.json",
+      "sha256": "45e546fcccd63e931c4f3594a91147d83f3fa0c5808c3a58b12522a2afc979e1",
+      "observed_at_utc": "2026-10-11T00:15:02Z",
+      "command_exit_code": 0,
+      "remote_ref": "refs/heads/mk3/wave9-rcc-public-source-union-20261010",
+      "remote_head": "44afd960ad01f83eeef7773b334ccde3683c022d"
+    },
+    "source_gate_limits": [
+      "Independent review GO is source-only; runtime/metadata/actual provider inspection remains NOT RUN.",
+      "Reviewed local adapter and selector fakes are not RCC/provider acceptance; review records 92 adapter tests and 55 selector tests with one real-RCC test deselected in each, plus scoped configured lint/type checks.",
+      "No installed-wheel, native frozen/Go, package-wide, offline lifecycle, publication, or whole-issue acceptance is inferred."
+    ]
+  },
+  "successor_readiness_100_126_130": {
+    "readiness_payload": "../current-convergence-20261011/payloads/successor-readiness-canvas-package.json",
+    "readiness_sha256": "d38694937ead4f953752e700800a5761fcaf9dc566d9b47e5a69b508dbc31dc1",
+    "observed_at_utc": "2026-10-11T00:06:29Z",
+    "baseline_head": "19380993febaa71238eaee3026b5c808773283ff",
+    "baseline_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "decision": "No additional ready implementation slice selected from #100, #126, or #130; the already integrated scoped slices and unresolved evidence/specification do not justify another writer. #208 remains the pre-existing optional ready slice.",
+    "whole_issue_status": "#100, #126, and #130 remain open unless their full contracts are independently accepted.",
+    "doc_proposal": {
+      "payload_path": "../current-convergence-20261011/payloads/successor-readiness-doc-proposal.md",
+      "sha256": "72f289d1eaf27a51b307b13fa1a86802559ba6f62fe17de778d3ae1209d3aac5",
+      "disposition": "REJECTED_NO_DELTA",
+      "reason": "The existing repository-operations guide already documents the embedded offline template inventory and limits the MCP v2 Showcase to static core-protocol behavior. The retained graph already scopes #125 public-package-boundary to the relevant #126 template criteria. A dated status paragraph would become stale."
+    },
+    "writer_status": "No additional writers dispatched for #100, #126, or #130."
+  },
+  "current_ci_and_source_status": {
+    "summary_payload": "../current-convergence-20261011/payloads/current-ci-summary-20261011T0010Z.json",
+    "summary_sha256": "b2f84ec4a1983302a80e28f63b8a488b65c26684babb2f3857e80b53721a90d7",
+    "observed_at_utc": "2026-10-11 00:10:11 UTC",
+    "required_check_policy": "UNKNOWN",
+    "pr292": {
+      "head": "ddc62d11d1e38116e529cde713d00f71fd81b28a",
+      "checks": {
+        "total": 18,
+        "success": 12,
+        "failure": 1,
+        "queued": 4,
+        "in_progress": 1
+      },
+      "linux_job": 114342192621,
+      "bounded_excerpt": "../current-convergence-20261011/payloads/ci-job-114342192621-bounded-excerpt.json",
+      "excerpt_sha256": "9616a2d035571b9f0b292e594f81261e1ecaa77a09400281fb06b97d68e8a56e",
+      "result": "Linux devmode check failure is Mypy; hosted gate remains HOLD."
+    },
+    "pr311": {
+      "head": "8eb2e6f92109bcbd51e4925ebe703074ee28c6ac",
+      "checks": {
+        "total": 19,
+        "success": 13,
+        "failure": 1,
+        "queued": 4,
+        "in_progress": 1
+      },
+      "windows_job": 114343060346,
+      "bounded_excerpt": "../current-convergence-20261011/payloads/ci-job-114343060346-bounded-excerpt.json",
+      "excerpt_sha256": "8d1c8ede635c6655de4811c9615f9683021b04e86cf54fe5e17f27f6b8f1ea9e",
+      "synthetic_merge": "bc38345d280538f73b1d5c3e9471ba7752558348",
+      "result": "Windows output records 2 failures, 992 passed, 94 skipped, plus Mypy annotation errors; this synthetic merge and its failed check do not establish acceptance."
+    },
+    "synthetic_merge_sources": {
+      "payload_path": "../current-convergence-20261011/payloads/synthetic-merge-source-identities.json",
+      "sha256": "afbc76eeadf649e8f84cdfd1a06a969f7828863b13a0aaac47bbfc3fc1f5b0b4"
+    },
+    "local_tests": {
+      "coordinator_reported": "PR292-related local synthetic merge 467ba24cca3d4edabad7418d340d4c490196966c reports 1097 + 132 passing tests.",
+      "provenance_limit": "Counts are coordinator-reported and are not represented as this bundle's independently read local command output or as hosted CI results."
+    },
+    "writer_assignments": "Coordinator-reported active Cloud writers: portability292 and template311. These ownership labels do not prove progress or acceptance."
+  },
+  "issue_101_readback": {
+    "payload_path": "../current-convergence-20261011/payloads/current-ledger-issue-101-20261011T0009Z.json",
+    "sha256": "859876838eea905d24a6c62b8c6ebe7016fbba18f6643e540508378b5cf3160e",
+    "observed_at_utc": "2026-10-11 00:09:20 UTC",
+    "updated_at": "2026-10-11T00:09:21Z",
+    "issue": 101,
+    "state": "open",
+    "body_chars": 27846,
+    "accounting": "58 open issues; the body categorizes #134/#195 as active/assigned and #149/#155 as advisory."
+  },
+  "runtime_wheel_and_metadata_gates": {
+    "issue_195_candidate_05": {
+      "review_path": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/independent-heavy-plan-review-candidate-05.json",
+      "review_bytes": 9618,
+      "review_sha256": "9fb068397b36af876531aa31c617e7988118175268f5288f57d7f1bb565c8a5e",
+      "disposition": "HOLD_ONE_BOUNDED_HEAVY_CANDIDATE_05",
+      "public_summary": "Candidate 05 is on HOLD; no heavy installed-wheel gate is reported as executed. Private review detail is excluded."
+    },
+    "issue_195_candidate_06": {
+      "manifest_path": "/workspace/work/actions-mk3-evidence/runtime-wheel-private-import-design-195-20261010/implementation-checkpoint/heavy-gate-plan-v2-candidate-06/manifest.json",
+      "manifest_bytes": 5213,
+      "manifest_sha256": "ec71f527909f3b1a9941e5cb39cd256d7e1e03e9d622174ca97f55158f557d5a",
+      "status": "Coordinator reports paused until PR311 source fix; execution NOT RUN. No plan details copied."
+    },
+    "rcc_actual_metadata": {
+      "status": "Actual metadata inspection NOT RUN; RCCv5 preparation remains local-only. No acceptance inferred."
+    },
+    "private_rcc_composition": {
+      "sha256": "491e97b3bbaf6385c5346ff1d177a055346de5ccd4f226e210a4a493fbe18bda",
+      "disposition": "LOCAL_ONLY; PRIVATE PAYLOAD EXCLUDED",
+      "details": "No private composition contents are reproduced."
+    }
+  },
+  "canonical_documentation": {
+    "path": "docs/skills/repository-operations.md#retained-ci-artifact-and-command-evidence",
+    "line": 2638,
+    "sha256": "dd0e26b6ec01e1c43ee85680d625571e3b72d60014b1e53bd7f8a42dcbbd789f",
+    "decision": "SHARED_DELTA_PRESENT_PENDING_ROOT_RECONCILIATION",
+    "exact_text": "For measurements of state that cleanup or uninstall later removes, record the UTC observation time and lifecycle phase, actual executable/version, and exact source/input identity with the result. Capture required state before cleanup; a later absence proves cleanup only. For decoded or excerpted CI logs, identify the retrieval source and decoding/line-ending treatment, and hash the exact representation retained. Do not attribute a decoded-text digest to unmeasured transport bytes.",
+    "evidence": "The exact current shared-worktree diff is reported to root; no local documentation edit is claimed as committed or merged. Generic lesson is supported by the candidate-05 preparation HOLD (review SHA above, defect details omitted) and source-bound CI connector provenance plus bounded excerpts in this bundle.",
+    "stale_ambiguity_removed": "None; this adds measurement-phase and representation provenance to existing exact runner/output/source guidance.",
+    "remaining_uncertainty": "Actual candidate-05/06 installed-wheel acceptance is not run. Original job-log redirect transport bytes were not measured; the retained hashes apply to connector-decoded UTF-8 representations."
+  },
+  "verification": {
+    "payload_manifest_validation": "PASS: all 11 current sibling payloads match their recorded manifest sizes/hashes. Ten match their listed external source files byte-for-byte. The remote-ref member is labeled local-generated/command-output in the manifest; its original bytes were not retained, so historical preservation across the collector attempt is unknown.",
+    "new_register_json": "PASS: this JSON parsed successfully during validation at 2026-10-11T00:21:29Z.",
+    "git_diff_check": "Pending final handoff validation.",
+    "mutations": "No source, CI, issue, PR, release, tag, commit, or remote mutation. The collector did write one sibling remote-ref receipt during its earlier bundle attempt; see explicit provenance caveat. No further writes to the sibling bundle occurred."
+  },
+  "upstream_disposition": "NONE; no confirmed upstream defect identified."
+}

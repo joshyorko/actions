@@ -1,0 +1,26 @@
+{
+  "source": "approved workflow job logs connector",
+  "privacy": "local only",
+  "records": [
+    {
+      "job_id": 114342192621,
+      "exact_connector_decoded_utf8": {
+        "path": "/workspace/work/actions-mk3-evidence/wave9/ci-failures/job-114342192621-decoded-exact-utf8.log",
+        "bytes": 1241118,
+        "sha256": "0909c129acc2b95884bc30b0783d94465dec04a2a161b8295290da79713718bd"
+      },
+      "original_redirect_archive": "NOT_MEASURED",
+      "previous_apply_patch_lines": "Preserved as transformed text; not original transport-byte evidence"
+    },
+    {
+      "job_id": 114343060346,
+      "exact_connector_decoded_utf8": {
+        "path": "/workspace/work/actions-mk3-evidence/wave9/ci-failures/job-114343060346-decoded-exact-utf8.log",
+        "bytes": 550829,
+        "sha256": "29b8c86f8c2a1e177c69181636d7f6737c26f01b5136af1c1b1fe601ddb45e39"
+      },
+      "original_redirect_archive": "NOT_MEASURED",
+      "previous_apply_patch_lines": "Preserved as transformed text; not original transport-byte evidence"
+    }
+  ]
+}

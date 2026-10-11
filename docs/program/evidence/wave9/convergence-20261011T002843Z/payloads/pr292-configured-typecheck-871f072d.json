@@ -1,0 +1,59 @@
+{
+  "artifacts": {
+    "/workspace/actions-cloud/activate.sh": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a",
+    "/workspace/actions-cloud/bin/rcc": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/artifacts/journal.run": "8410a10fb42e97660e5cc44dde9ca9e3a11892d5fb77fd9f8323fd74f69467f1",
+    "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/artifacts/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/artifacts/stdout.log": "8f9a2953329accc45004468304018cdf8b0e06ff1e04d7e7a1d480a45380157b",
+    "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/run.log": "23fa2c094a40e9f018ae8fdc987252b380853a6cf2cafd30310466bdb6853514",
+    "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/run_mypy.py": "864c4aa86c966792cf775dd3181bd8b2a8612d567ab7615125d5205f926ae91a",
+    "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/toolkit.yaml": "a8f0f598aa0fde41235e8ffecaa742024d84ee542331c966fd9f6823f7f19ce1"
+  },
+  "command": {
+    "cwd": "/workspace/work/actions-mk3-wave8-pr292/action_server",
+    "gateway": "source /workspace/actions-cloud/activate.sh && rcc task script --no-build -r /workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/toolkit.yaml -- python /workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/run_mypy.py",
+    "inside_action_server": "python -m mypy --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases src tests",
+    "install_performed": false,
+    "mypy": "1.20.2",
+    "no_build": true,
+    "python": "3.12.15 from prepared /workspace/work/actions-mk3-pr302/action_server/.venv",
+    "rcc": "v18.19.3",
+    "robohome": "/workspace/actions-cloud/robocorp (verified after activation)"
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "No new delta; the same-commit repository-operations delta in the preserved source receipt covers the verified type pattern.",
+    "durable_learning_captured": "The exact configured Action Server Mypy CI invocation passes on this source tree across 327 files.",
+    "evidence": "This additive, source-bound receipt and captured RCC task log.",
+    "remaining_uncertainty": "Native Windows gate remains unrun.",
+    "stale_or_ambiguous_guidance_removed": "None."
+  },
+  "limitations": [
+    "No Windows/native/provider/RCC lifecycle rerun.",
+    "No push or PR mutation."
+  ],
+  "manifests": {
+    "action_server/poetry.lock": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+    "action_server/pyproject.toml": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+    "activate_script": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a",
+    "rcc_binary": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+  },
+  "previous_receipt_preserved": {
+    "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/startup-mypy-repair-871f072d.json",
+    "sha256": "37c43e6dc6083c9c2223dbb6e89130192ea3874b022f8af12456a99d021c576a"
+  },
+  "result": {
+    "exit_code": 0,
+    "prepared_manifest_match": true,
+    "source_origin": "/workspace/work/actions-mk3-wave8-pr292/action_server/src/actions/server/__init__.py",
+    "summary": "Success: no issues found in 327 source files"
+  },
+  "source": {
+    "branch": "mk3/wave8-pr292-startup-cleanup-20261010",
+    "clean": true,
+    "head": "871f072d1842df797ca8d275cf910a7a10465405",
+    "parent": "ddc62d11d1e38116e529cde713d00f71fd81b28a",
+    "tree": "a9058c05b4fa5d0a7d19939f62a75355c442156c"
+  },
+  "task": "PR292 configured Action Server CI Mypy gate verification",
+  "upstream_disposition": "none; local test typing issue only."
+}

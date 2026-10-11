@@ -1,0 +1,204 @@
+{
+  "schema": "actions.scoped-successor-readiness/v1",
+  "observed_at_utc": "2026-10-11T00:06:29Z",
+  "scope": "Read-only criterion-level successor selection for issues #100, #126, and #130 against current integration source; no implementation, dispatch, GitHub mutation, or issue completion claim.",
+  "engineering_baseline": {
+    "ref": "integration/community-release-20261008",
+    "commit": "19380993febaa71238eaee3026b5c808773283ff",
+    "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "worktree": "/workspace/work/actions-mk3-integration",
+    "worktree_status": "clean",
+    "graph_sha256": "e911cb7b180ba4e29fe9cc9ceda02030561a19fb21f14de91b1629e20b575707",
+    "canonical_guide_sha256": "9bcfccf7a6129675037497fa3952f4bd55029ab9eaaf37da133fedd11c0146f3"
+  },
+  "live_inputs": {
+    "issues_snapshot": {
+      "path": "/workspace/work/actions-closure-audit/open-issues-live.json",
+      "sha256": "7e25e48a19a1b4cbabd3ca44b8d003bf6eb5fc20acee62b50e17115a450d46c2",
+      "issue_count": 58,
+      "contracts": {
+        "100": {
+          "title": "Define Canvas authoring contracts in actions-core without package proliferation",
+          "updated_at": "2026-10-09T19:34:29Z",
+          "body_sha256": "7ecc079e380a695d8a8886bf175023c48b78819a32012650088ff4f5710fa995"
+        },
+        "126": {
+          "title": "feat: add an MCP v2 capabilities showcase template",
+          "updated_at": "2026-10-09T19:37:10Z",
+          "body_sha256": "51a7d0e02335aa285a653becf942dcc55adc45322c4c665655c349d7f0e5a623"
+        },
+        "130": {
+          "title": "Design Package v3 as an immutable capability bundle with pluggable runtime plans and exposure projections",
+          "updated_at": "2026-10-10T05:00:48Z",
+          "body_sha256": "5fea0f4828c20faa32298d60083ca684b3b8225f0af6baea0d8fa4363dae4277"
+        }
+      }
+    },
+    "current_pr_census": {
+      "observed_at_utc": "2026-10-11T00:00:00Z",
+      "open_pr_count": 14,
+      "pr221_state": "open; not merged",
+      "provenance": "Coordinator-provided authoritative current census. Its path overlap is tracked below as coordination context, not a typed issue prerequisite."
+    },
+    "prior_local_open_pr_snapshot": {
+      "path": "/workspace/work/actions-closure-audit/open-prs-live.json",
+      "sha256": "5273af37f2964aa416a7997f41915e84da5b2f888d3ee14cc9ee4111dc6afe32",
+      "observed_at_utc": "2026-10-10T22:11:00Z",
+      "use_limit": "Historical supporting snapshot only; the 00:00Z coordinator census supersedes its freshness."
+    },
+    "prior_issue_delivery_matrix": {
+      "path": "/workspace/work/actions-closure-audit/matrix/issue-delivery-matrix-2026-10-10T223737Z.json",
+      "sha256": "c675b8721f9a65b1efeec3360489b62456dc59789216c2ca3b18cc6098ca53bb",
+      "use_limit": "Historical contract/relationship index only; do not use its previous operational statuses as current proof."
+    }
+  },
+  "candidates": [
+    {
+      "issue": 100,
+      "decision": "NO_ADDITIONAL_READY_SLICE_IDENTIFIED",
+      "exact_scoped_acceptance_already_present": [
+        "100-A public authoring surface: PR263 is integrated; current tests cover public tool UI metadata/resource semantics, real process, and wheel-level boundaries.",
+        "100-B Python/JSON/TypeScript shared CanvasSpec fixture: PR301 head c734b9f is integrated and its shared round-trip fixture is in the current tree."
+      ],
+      "current_paths": [
+        {
+          "path": "actions/src/actions/mcp/__init__.py",
+          "blob": "e997a62833877d9394365cfc261e15d9e9c0b7d1"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/mcp/test_mcp_apps_authoring.py",
+          "blob": "072d47fab92f25a69e7f7f6acfe45741149b6df0"
+        }
+      ],
+      "provenance": [
+        {
+          "pr": 263,
+          "head": "948df916ebe8750caebc71cc821bb5b76f16c273",
+          "integration_ancestor": true,
+          "scope": "100-A"
+        },
+        {
+          "pr": 301,
+          "head": "c734b9f850ec7b6bea8561b70312aca5c93dd6c1",
+          "integration_ancestor": true,
+          "scope": "100-B"
+        }
+      ],
+      "typed_dependencies": "#93 is coordination; #99/#71 are related consumers. Neither whole issue blocks the already accepted #100-A/#100-B slices. Current graph scopes 100-A only to relevant #125 public package/MCP resource criteria.",
+      "actual_missing_producer_criterion": "No distinct unmet #100-A or #100-B producer criterion was established from the live body, comments, current source, and integrated scoped slices. Remaining whole-issue review/distribution acceptance is not itself a new code slice.",
+      "ownership_or_overlap": "PR221 is an open broad integration candidate, not a typed prerequisite. No distinct current writer assignment was proven for a new #100 source slice. Do not infer ownership from prior worker labels.",
+      "stop_condition": "Re-open slice selection only if a live acceptance comment identifies a concrete unimplemented authoring/round-trip requirement or an exact-head gate fails; preserve whole #100 as open until its own complete acceptance is reviewed."
+    },
+    {
+      "issue": 126,
+      "decision": "NO_ADDITIONAL_READY_SLICE_IDENTIFIED",
+      "exact_scoped_acceptance_already_present": [
+        "#262 provides the separate bounded core source-protocol proof.",
+        "#265 is integrated and ships the generated mcp-v2-showcase template. The current integration test creates a fresh project from the embedded production template, starts the real mounted Action Server at /mcp, exercises server/discover, tools/list and calls, resources/list/templates/read, prompts, structured results, safe errors, and the open/close SSE example.",
+        "The core protocol and optional MCP Apps/Canvas extension remain separate; no Tasks/Run-backed claim is implied."
+      ],
+      "current_paths": [
+        {
+          "path": "action_server/tests/action_server_tests/mcp/test_mcp_v2_showcase_template.py",
+          "blob": "6573b70fc9a3c20925767a2e71a61e66add2c2d9"
+        },
+        {
+          "path": "action_server/tests/action_server_tests/mcp/test_mcp_v2_showcase_protocol_proof.py",
+          "blob": "537ad451bfd94d8c5a9220113350ab88d6106668"
+        },
+        {
+          "path": "templates/mcp-v2-showcase/package.yaml",
+          "blob": "b23fb4c32887589a73fbd8dc6f0ab1c0346b2958"
+        },
+        {
+          "path": "templates/packaging/templates-prod.json",
+          "blob": "2de85e701e20524f56343166abd49aa8a29f3926"
+        }
+      ],
+      "provenance": [
+        {
+          "pr": 262,
+          "head": "04b23ea34e1e4525b4dbbc329841b1d13445af30",
+          "integration_ancestor": true,
+          "scope": "source-protocol only"
+        },
+        {
+          "pr": 265,
+          "head": "9193989985de15dc6d5fecfd655042957cf9926c",
+          "integration_ancestor": true,
+          "scope": "showcase template/generator"
+        }
+      ],
+      "typed_dependencies": "Graph edge 125:public-package-boundary → 126-template is restricted to relevant public-package/template checks. It does not require all of #125; #93/#101 are coordination. No dependency on #100/#99 is needed for the core MCP showcase.",
+      "actual_missing_producer_criterion": "No missing source/test producer criterion is shown for the core advertised showcase cells in the current mounted-runtime template integration test. Local clean-wheel was explicitly not run in the PR265 record; that is a verification-evidence gap only if the exact candidate acceptance requires a distinct clean installed-wheel consumer trace. The extant evidence does not establish that distinction, so it is UNKNOWN, not a confirmed source defect or ready implementation slice.",
+      "ownership_or_overlap": "PR221 remains open at the 00:00Z census; its broad candidate status is not a typed blocker. Do not duplicate the merged PR265 generator/template implementation. Reconcile any exact-base/test gap before proposing a new test-only owner.",
+      "stop_condition": "No new writer until a source-bound review determines whether current embedded-template integration satisfies the issue's 'fresh packaged client/server trace' or whether a separate installed-wheel trace is required. Keep unadvertised Tasks, Canvas, ChatGPT, and unsupported cells explicitly out of acceptance."
+    },
+    {
+      "issue": 130,
+      "decision": "DESIGN_OR_CRITERION_CONFIRMATION_NEEDED; NO_NEW_IMPLEMENTATION_SLICE_SELECTED",
+      "exact_scoped_acceptance_already_present": [
+        "Live comment #6094007327 accepts a bounded Package Revision schema/fixture envelope: immutable Workspace/Package/revision references; Runtime Plan digest, schema, and compatibility identity; portable package content excludes Workspace/binding/credential/local-path state; logical binding requirements remain separate; plan choice is explicit with no silent fallback.",
+        "The current integration contains an explicitly experimental draft schema, consumer-reference schema, fixtures, and contract tests for that envelope; their description explicitly denies approved production manifest syntax or a digest algorithm."
+      ],
+      "current_paths": [
+        {
+          "path": "docs/design/package-revision-v1.schema.json",
+          "blob": "681c8cd0b5507caf962b912c965954d9d41239af",
+          "status": "present in baseline; blob ID was not separately captured"
+        },
+        {
+          "path": "docs/design/package-revision-references-v1.schema.json",
+          "blob": "8d36965f1f63eab923b10c36b0d245e4690c97b4",
+          "status": "present in baseline; blob ID was not separately captured"
+        },
+        {
+          "path": "docs/design/fixtures/package-revision-v1/portable-rcc.json",
+          "blob": "836fca75ee449819d73392e26a35b16805e624f1"
+        },
+        {
+          "path": "docs/design/fixtures/package-revision-v1/consumer-refs.json",
+          "blob": "2621fbaa9f42662e759740c9f71c5474e6590df0"
+        },
+        {
+          "path": "action_server/tests/contract_tests/test_package_revision_schema.py",
+          "blob": "2621fbaa9f42662e759740c9f71c5474e6590df0"
+        }
+      ],
+      "provenance": [
+        {
+          "comment": 6094007327,
+          "type": "accepted scoped #129 prerequisite envelope; not whole #129 acceptance"
+        },
+        {
+          "baseline": "19380993febaa71238eaee3026b5c808773283ff",
+          "type": "experimental schema/fixture/test artifacts already present"
+        }
+      ],
+      "typed_dependencies": "Retained graph edge #129 → #130 is an active execution predecessor. The accepted comment scopes the available prerequisite to schema/fixture semantics; #129's broader DDL/API, resolver, and runtime pinning remain independently unaccepted and are not blanket prerequisites for that bounded schema slice. Conversely, this envelope does not settle #130's full production syntax, digest rules, compiler normalization, or runtime execution semantics.",
+      "actual_missing_producer_criterion": "The live #130 body says exact syntax requires an approved specification. Although the scoped fixture envelope is accepted and prototype artifacts exist, no current accepted production manifest syntax/specification was found. Existing prototype coverage makes a new schema test-only slice duplicative; promotion to production contract remains design-needed.",
+      "ownership_or_overlap": "PR221 is an open broad integration candidate and includes package-revision paths in its prior changed-file census; treat that as path-coordination context only. The active graph predecessor must be satisfied at the precise accepted schema-envelope boundary, not by closing #129 wholesale.",
+      "stop_condition": "Do not implement production schema or runtime behavior until the exact remaining syntax/digest/normalization decision is approved and isolated from the already present fixture; then define a new criterion-level contract and test slice."
+    }
+  ],
+  "existing_ready_slice_not_repeated": {
+    "issue": 208,
+    "pr": 310,
+    "head": "ec8bea135569d98a3a63ef4f4f07b7dcc87e9f9d",
+    "status": "Parent identifies bounded consumer synthetic-error classification as the first optional Dakota slice. Do not repeat that work here.",
+    "design_receipt_path": "/workspace/work/actions-mk3-evidence/workitems-consumer-classification-design-208-20261010/design-receipt.json",
+    "design_receipt_sha256": "5f13e52a289b80ea8cd84cf56c413a26af69177923ded9559d9f66eda33fa04c",
+    "tree": "82700f57df8a25c26d156d6e1738d1f64a4fa5c5"
+  },
+  "next_wave_selection": {
+    "selected_from_examined_issues": [],
+    "reason": "#100's scoped producer slices and #126's template/protocol source proof are already in the integration baseline; #130's accepted schema envelope is already prototyped while production contract approval remains unsettled. The remaining uncertainty is evidence or specification, not a clearly missing independent producer slice. Preserve #208 as the pre-existing optional ready slice.",
+    "not_a_completion_claim": "Issues #100, #126, and #130 remain open unless independently accepted against their full issue-specific criteria; this readiness result makes no whole-issue acceptance claim."
+  },
+  "canonical_documentation": {
+    "decision": "NO_DELTA_PROPOSED",
+    "reason": "The canonical repository-operations guide already records the packaged offline template inventory and explicitly limits the MCP v2 showcase to static core-protocol behavior (repository-operations.md around the MCP v2 Showcase section). The retained graph already carries the criterion-level 125:public-package-boundary → 126-template edge with scope limited to relevant public package/template checks. No new durable operational rule was learned; a per-run status paragraph would become stale.",
+    "would_remove_stale_ambiguity": "Do not use the open #126 body statement 'No showcase template is shipped yet' as current source truth: it predates integrated PR265. Likewise, older 'deferred behind #125' wording is superseded by the criterion-scoped graph amendment.",
+    "upstream_disposition": "None. No confirmed, reproducible upstream defect was found. Any future public issue remains restricted to deduplicated confirmed defects in joshyorko/actions; third-party observations remain draft-only and private findings stay private."
+  }
+}

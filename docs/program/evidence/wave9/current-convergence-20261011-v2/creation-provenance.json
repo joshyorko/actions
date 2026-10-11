@@ -1,0 +1,24 @@
+{
+  "schema": "evidence-bundle-creation-provenance/v1",
+  "created_at_utc": "2026-10-11T00:17:36Z",
+  "path": "/workspace/work/actions-mk3-wave8-evidence-tree/docs/program/evidence/wave9/current-convergence-20261011-v2",
+  "command": "test ! -e docs/program/evidence/wave9/current-convergence-20261011-v2 && mkdir -m 700 docs/program/evidence/wave9/current-convergence-20261011-v2",
+  "exit_code": 0,
+  "parent_evidence_tree": {
+    "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+    "head": "5007896376674c33d5cb4e47724b84afe64a413b",
+    "tree": "31fa0f351cc6dd631da53380b599a6477eed4e92",
+    "parent": "4d0aa41427e80e059737f9f758277577db927857"
+  },
+  "preexisting_sibling_bundle": {
+    "path": "../current-convergence-20261011",
+    "creator_attribution": "UNKNOWN",
+    "preservation": "The bundle was already present and read-only at first inspection; its creator is UNKNOWN. During an initial population attempt, the collector wrote payloads/rcc-source-union-remote-ref-44afd960.json before the attempt stopped on a read-only review receipt. Original bytes for that one member were not captured, so its preservation across the attempt cannot be attested. Its current bytes match the recorded manifest and the separately retained read-only git ls-remote result. No chmod was attempted.",
+    "payload_manifest_sha256": "309c1178a99d402a86ad3c8466920a255a0214477a4b23c430fe19f7b806b5d2",
+    "collector_write_uncertainty": {
+      "member": "payloads/rcc-source-union-remote-ref-44afd960.json",
+      "original_bytes_known": false,
+      "current_integrity": "Current size/hash matches the sibling manifest and the read-only source record; this establishes current consistency, not historical preservation."
+    }
+  }
+}

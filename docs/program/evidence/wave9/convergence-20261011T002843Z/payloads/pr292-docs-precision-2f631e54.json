@@ -1,0 +1,57 @@
+{
+  "branch": "mk3/wave8-pr292-startup-cleanup-20261010",
+  "commit": {
+    "changed_paths": [
+      "docs/skills/repository-operations.md"
+    ],
+    "parent": "871f072d1842df797ca8d275cf910a7a10465405",
+    "pushed": false,
+    "sha": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+    "tree": "35ad4b9f4c6cb47997ba826b91d3a88d69fff25c",
+    "worktree_clean": true
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "evidence": "The configured Mypy command on the original affected module identified local base_process variables at lines 421, 469, 506. The full requested configured CI invocation passed on the source commit: Success: no issues found in 327 source files.",
+    "exact_delta": "Clarifies that Mypy rejects the local runtime alias `base_process = process_module.Process` as a class base; recommends direct import of Process for subclass declarations plus separate patching of process_module.Process, preserving runtime substitution.",
+    "remaining_uncertainty": "Native Windows lifecycle gate remains unrun.",
+    "stale_or_ambiguous_guidance_removed": "Removed wording that generalized from a local alias to module attributes in general."
+  },
+  "ownership_boundary": "Local docs-only commit for root integration; no source/test changes or remote writes.",
+  "source_test_equivalence": {
+    "byte_equal_paths": {
+      "action_server/src/actions/server/_robo_utils/process.py": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+      "action_server/src/actions/server/_selftest.py": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+      "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": "3075771e4d91e83dd5c7780726b43968d61118b07129fc665e9266eee5695825"
+    },
+    "comparison_base": "871f072d1842df797ca8d275cf910a7a10465405"
+  },
+  "task": "PR292 Mypy guidance precision follow-up (docs-only)",
+  "upstream_disposition": "none; this is repository-local Mypy guidance.",
+  "verification": {
+    "configured_gate_log_sha256": "23fa2c094a40e9f018ae8fdc987252b380853a6cf2cafd30310466bdb6853514",
+    "configured_gate_receipt_sha256": "013fcf8475dcdae7636da3c05c83b4d02b11ccf8ad92c95cb8c353e68ed6bd14",
+    "docs_diff_check": "git diff --check HEAD^ HEAD passed",
+    "original_source_receipt_sha256": "37c43e6dc6083c9c2223dbb6e89130192ea3874b022f8af12456a99d021c576a",
+    "preserved_reference_receipts": {
+      "configured_gate_log": {
+        "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/run.log",
+        "sha256": "23fa2c094a40e9f018ae8fdc987252b380853a6cf2cafd30310466bdb6853514"
+      },
+      "configured_gate_receipt": {
+        "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/verification-receipt.json",
+        "sha256": "013fcf8475dcdae7636da3c05c83b4d02b11ccf8ad92c95cb8c353e68ed6bd14"
+      },
+      "independent_source_review": {
+        "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/independent-startup-mypy-source-review-871f072d.json",
+        "sha256": "2a186a7b1d72fc7c4f50e24b925a39b67c42a27d739e7a952d81785d6e2a7f00"
+      },
+      "original_commit_receipt": {
+        "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/startup-mypy-repair-871f072d.json",
+        "sha256": "37c43e6dc6083c9c2223dbb6e89130192ea3874b022f8af12456a99d021c576a"
+      }
+    },
+    "sol_source_review_receipt_sha256": "2a186a7b1d72fc7c4f50e24b925a39b67c42a27d739e7a952d81785d6e2a7f00",
+    "source_rerun": "Not needed: docs-only commit, test and production source blobs byte-equal to reviewed 871f072d."
+  }
+}

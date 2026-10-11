@@ -1,0 +1,53 @@
+{
+  "schema": "actions-wave9-checkpoint-payload-manifest-v1",
+  "files": [
+    {
+      "path": "payloads/pr292-windows-independent-readback.json",
+      "source_path": "/workspace/work/actions-mk3-evidence/wave9/ci-failures/pr292-windows-114342192546-independent-readback.json",
+      "bytes": 13566,
+      "sha256": "9e75e255572c48bd76a242a9957f00284afbb24abb2916ac8606cc5be280bd78"
+    },
+    {
+      "path": "payloads/pr292-configured-typecheck-871f072d.json",
+      "source_path": "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/verification-receipt.json",
+      "bytes": 3876,
+      "sha256": "013fcf8475dcdae7636da3c05c83b4d02b11ccf8ad92c95cb8c353e68ed6bd14"
+    },
+    {
+      "path": "payloads/pr292-independent-typecheck-addendum.json",
+      "source_path": "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/independent-configured-typecheck-addendum.json",
+      "bytes": 5830,
+      "sha256": "493c0ca315bf17def3200e5556a40df4bc832d4d3746a118902af312015e4980"
+    },
+    {
+      "path": "payloads/pr292-docs-precision-2f631e54.json",
+      "source_path": "/workspace/work/actions-mk3-evidence/wave8/pr292/docs-precision-2f631e54.json",
+      "bytes": 3619,
+      "sha256": "661eadb99e6d07376614b19ab09e4b73e07539c7caca6d5c8826e583c0bfca88"
+    },
+    {
+      "path": "checkpoint.json",
+      "bytes": 5501,
+      "sha256": "ccb64000b9410cd0e4a3a889ef89b6a99ff9cac9f752920466deac5dedf02218"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2415,
+      "sha256": "40ce8e34ae32048b5794b8451f1cb3ee14bb3fba659be8517c1ce0ecf3a7f7d9"
+    }
+  ],
+  "excluded": [
+    "large decoded CI logs",
+    "private RCC code and harness payloads",
+    "incident raw environment/config/stdout/stderr",
+    "binary artifacts"
+  ],
+  "verification": {
+    "v1_payloads": "11 hashes and sizes match manifest",
+    "v2_payloads": "11 hashes and sizes match manifest",
+    "json": "PASS",
+    "git_diff_check": "PASS observed2026-10-11T00:29:56Z",
+    "unknown_provenance": "Original sibling bundle creator and overwritten remote-ref prior bytes remain UNKNOWN; no reconstruction."
+  },
+  "snapshot_limit": "Earlier registers retain their observation times. Current incident and subsequent Windows review are additive; no acceptance upgrade."
+}

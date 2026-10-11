@@ -1,0 +1,309 @@
+{
+  "schema": "codex.independent-pr292-windows-result-readback/v1",
+  "disposition": "GO_SCOPED_CARRY_FORWARD_EVIDENCE_NEW_UNION_GATES_OPEN",
+  "repository": "joshyorko/actions",
+  "run_id": 38096097650,
+  "run_attempt": 1,
+  "job_id": 114342192546,
+  "job": {
+    "name": "build (windows-py3.12-devmode)",
+    "status": "completed",
+    "conclusion": "failure",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Checkout repository and submodules",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Install the latest version of uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Install Python 3.12",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Install devutils requirements",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Install project (not dev)",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 6
+      },
+      {
+        "name": "Install project (dev)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7
+      },
+      {
+        "name": "Setup go",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8
+      },
+      {
+        "name": "Setup node",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9
+      },
+      {
+        "name": "Build frontend",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10
+      },
+      {
+        "name": "Build OAuth2 config",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11
+      },
+      {
+        "name": "Test Go wrapper child lifecycle",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12
+      },
+      {
+        "name": "Build binary",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13
+      },
+      {
+        "name": "Upload artifact: action_server/dist/final/",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14
+      },
+      {
+        "name": "Test (not integration)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15
+      },
+      {
+        "name": "Install Playwright Chromium for Runtime browser acceptance",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16
+      },
+      {
+        "name": "Test (integration)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17
+      },
+      {
+        "name": "`inv lint`, potentially fixed with `inv pretty`",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18
+      },
+      {
+        "name": "`inv typecheck`",
+        "status": "completed",
+        "conclusion": "failure",
+        "number": 19
+      },
+      {
+        "name": "`inv docs` with checking on files changed",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20
+      },
+      {
+        "name": "Post Setup node",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 37
+      },
+      {
+        "name": "Post Setup go",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 38
+      },
+      {
+        "name": "Post Install the latest version of uv",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 39
+      },
+      {
+        "name": "Post Checkout repository and submodules",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 40
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 41
+      }
+    ]
+  },
+  "checkout": {
+    "head": "ddc62d11d1e38116e529cde713d00f71fd81b28a",
+    "synthetic_merge": "467ba24cca3d4edabad7418d340d4c490196966c",
+    "tree": "b2448078c1a77700b27741eeedc75bdeccb24825",
+    "ordered_parents": [
+      "19380993febaa71238eaee3026b5c808773283ff",
+      "ddc62d11d1e38116e529cde713d00f71fd81b28a"
+    ],
+    "method": "Exact checkout fetched-ref/log HEAD and immutable Git commit/tree API"
+  },
+  "current": {
+    "head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+    "tree": "35ad4b9f4c6cb47997ba826b91d3a88d69fff25c",
+    "ordered_parents": [
+      "871f072d1842df797ca8d275cf910a7a10465405"
+    ],
+    "live_base_ref": "19380993febaa71238eaee3026b5c808773283ff",
+    "prospective_merge": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "prospective_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+    "prospective_ordered_parents": [
+      "19380993febaa71238eaee3026b5c808773283ff",
+      "2f631e5403ae3ff0b37af2416dc19a98bdc04a84"
+    ],
+    "stale_payload_base_sha": "de2b9a884a7bf75320d0c3efb9294b8ec179c5c8",
+    "method": "Live PR head, explicit live integration Git ref, immutable prospective merge parents/tree; payload base.sha is stale"
+  },
+  "results": {
+    "python": "3.12.15 Windows",
+    "go_child_lifecycle": "PASS; go test process.go process_test.go; command-line-arguments0.023s",
+    "native_go_binary_build": "PASS; --go-wrapper",
+    "artifact_upload": "PASS; bytes/downloaded artifact not independently inspected in this readback",
+    "unit": {
+      "passed": 1015,
+      "skipped": 94,
+      "warnings": 14,
+      "duration_seconds": 344.05
+    },
+    "binary_integration": {
+      "collected": 1261,
+      "selected": 149,
+      "passed": 131,
+      "skipped": 18,
+      "deselected": 1112,
+      "duration_seconds": 1588.44,
+      "command": "uv run --no-project --python 3.12 poetry run inv test-binary --jobs 0"
+    },
+    "resource_history_case": "test_cli_resource_owner_history_across_reload_and_restart PASSED",
+    "startup_cleanup_cases": "All three synthetic timeout/error-before-spawn/cleanup-error regressions PASSED in old unit selection",
+    "lint": "PASS",
+    "docs": "PASS",
+    "typecheck": {
+      "result": "FAIL",
+      "errors": 6,
+      "files_with_errors": 1,
+      "checked_files": 331,
+      "locations": [
+        421,
+        469,
+        506
+      ],
+      "cause": "Each runtime-local base_process subclass gives valid-type and invalid base class errors"
+    }
+  },
+  "fix_comparison": {
+    "reviewed_fix": "871f072d1842df797ca8d275cf910a7a10465405",
+    "fix_test_blob": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92",
+    "current_head_same_test_blob": true,
+    "change": "Static directly imported BaseProcess replaces runtime-local superclass variable; separate Process monkeypatch and original cleanup assertions preserved. getattr accesses retain exact required fields/assertions.",
+    "configured_current_fix_gate": {
+      "receipt_sha256": "013fcf8475dcdae7636da3c05c83b4d02b11ccf8ad92c95cb8c353e68ed6bd14",
+      "log_sha256": "23fa2c094a40e9f018ae8fdc987252b380853a6cf2cafd30310466bdb6853514",
+      "independent_addendum_sha256": "493c0ca315bf17def3200e5556a40df4bc832d4d3746a118902af312015e4980",
+      "result": "PASS327 files at exact871, not prospective331"
+    }
+  },
+  "tree_equivalence": {
+    "method": "Complete recursive Git tree API inventories; both non-truncated; compare leaf path/type/mode/blob identity",
+    "old_entries": 1686,
+    "new_prospective_entries": 1686,
+    "old_leaves": 1390,
+    "new_prospective_leaves": 1390,
+    "equal_leaves": 1388,
+    "differing_leaves": [
+      {
+        "path": "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+        "old": "763e89d0d46a67fb3a4e3439a1f31e6843468c67",
+        "new": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92"
+      },
+      {
+        "path": "docs/skills/repository-operations.md",
+        "old": "3eb8ec55c18aa3e3ba33cd14e216dce76e432bf0",
+        "new": "ef4dc288030e3683a479e1a424597de8559a30fb"
+      }
+    ],
+    "equal_scope": "All production backend/Core/Go sources, frontend inputs/assets, package locks/configurations, workflow/generator and all other tests exact blob/type/mode equality. Branch head alone differs from old synthetic at21 leaves; equivalence is established against new prospective union924, not whole branch head."
+  },
+  "admission": {
+    "permitted": "Retain old completed Go lifecycle/native build and binary resource-history integration evidence for unchanged production/configuration source in prospective924. Pair changed test-only mechanics with independently reviewed871 source and source-bound configured327 PASS.",
+    "not_permitted": [
+      "Do not convert old overallFAIL/typecheckFAIL intoPASS.",
+      "Do not assert new-head Windows/prospective331 hosted typecheck or full current union CI passed.",
+      "No new artifact byte identity or whole Runtime/#292/security/#134 acceptance from this readback.",
+      "No CI rerun, merge, push, install or native execution performed."
+    ]
+  },
+  "decoded_job_log": {
+    "sha256": "c90580c73f32ef686bfb5c1414d1566c34b5cefb4af02c5807fb936255082eb7",
+    "bytes": 558616
+  },
+  "bounded_sanitized_excerpts": [
+    "2026-10-10T23:48:36.1286740Z HEAD is now at 467ba24 Merge ddc62d11d1e38116e529cde713d00f71fd81b28a into 19380993febaa71238eaee3026b5c808773283ff",
+    "2026-10-10T23:50:50.3165799Z ##[group]Run go test process.go process_test.go",
+    "2026-10-10T23:50:59.0129644Z ok  \tcommand-line-arguments\t0.023s",
+    "2026-10-10T23:52:12.3472629Z ##[group]Run uv run --no-project --python 3.12 poetry run inv test-not-integration",
+    "2026-10-10T23:52:57.3716044Z [gw1] [ 29%] PASSED action_server_tests\\test_cli_mcp_resource_history.py::test_action_server_start_timeout_reaps_child_and_output_readers ",
+    "2026-10-10T23:52:57.3893800Z [gw1] [ 29%] PASSED action_server_tests\\test_cli_mcp_resource_history.py::test_action_server_start_preserves_error_when_cleanup_raises ",
+    "2026-10-10T23:52:57.3966607Z [gw1] [ 29%] PASSED action_server_tests\\test_cli_mcp_resource_history.py::test_action_server_start_failure_before_spawn_keeps_original_error ",
+    "2026-10-10T23:58:00.7119106Z ========== 1015 passed, 94 skipped, 14 warnings in 344.05s (0:05:44) ==========",
+    "2026-10-10T23:58:16.2950028Z ##[group]Run uv run --no-project --python 3.12 poetry run inv test-binary --jobs 0",
+    "2026-10-11T00:08:53.1138773Z action_server_tests\\test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart PASSED [ 28%]",
+    "2026-10-11T00:24:48.2218232Z ======== 131 passed, 18 skipped, 1112 deselected in 1588.44s (0:26:28) ========",
+    "2026-10-11T00:24:58.4565255Z ##[group]Run uv run --no-project --python 3.12 inv typecheck",
+    "2026-10-11T00:25:18.4746328Z tests\\action_server_tests\\test_cli_mcp_resource_history.py:421:27: error: Variable \"base_process\" is not valid as a type  [valid-type]",
+    "2026-10-11T00:25:18.4752881Z tests\\action_server_tests\\test_cli_mcp_resource_history.py:421:27: error: Invalid base class \"base_process\"  [misc]",
+    "2026-10-11T00:25:18.4756515Z tests\\action_server_tests\\test_cli_mcp_resource_history.py:469:33: error: Variable \"base_process\" is not valid as a type  [valid-type]",
+    "2026-10-11T00:25:18.4761250Z tests\\action_server_tests\\test_cli_mcp_resource_history.py:469:33: error: Invalid base class \"base_process\"  [misc]",
+    "2026-10-11T00:25:18.4762345Z tests\\action_server_tests\\test_cli_mcp_resource_history.py:506:31: error: Variable \"base_process\" is not valid as a type  [valid-type]",
+    "2026-10-11T00:25:18.4764743Z tests\\action_server_tests\\test_cli_mcp_resource_history.py:506:31: error: Invalid base class \"base_process\"  [misc]",
+    "2026-10-11T00:25:19.1504905Z Found 6 errors in 1 file (checked 331 source files)"
+  ],
+  "metadata_limits": "Job wrapper and actual completed log establish job outcome; run metadata currently reports queued/null and is not promoted to completed whole-run status. First-page run-jobs listing only; required/advisory policy unknown.",
+  "canonical_doc_delta": {
+    "path": "docs/skills/repository-operations.md",
+    "text": "When a later test-only repair follows a failed CI job, retain the original failed check and job conclusions. Carry forward only the successful measured slices whose production, configuration and test contract inputs are unchanged or independently reviewed as equivalent. Compare the exact checked-out synthetic merge tree and ordered parents to the new prospective union; PR payload base.sha can be stale and branch-head equality alone is insufficient. A local327-file typecheck does not establish the new prospective331-file Windows gate. Recheck live refs and require exact new-union hosted checks before admission.",
+    "evidence": "Windows job114342192546; old467/new924 Git parents/tree and complete1390-leaf comparison; exact871 configured327 PASS.",
+    "uncertainty": "New union hosted results and downloaded new artifacts not inspected here."
+  },
+  "upstream_disposition": "none; confirmed old test type errors already corrected in reviewed source; no new product defect established",
+  "commands": [
+    "GitHub approved read-only fetch_workflow_job_logs/job_steps/run_jobs; GET immutable commits/recursive trees/live PR/Git ref",
+    "Read-only local git diff ddc..871 and871..2f",
+    "Rehash retained configured327 owner/log/independent addendum"
+  ],
+  "observed_at_utc": "2026-10-11T00:32:07.822473+00:00"
+}

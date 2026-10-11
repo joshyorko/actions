@@ -1,0 +1,26 @@
+{
+  "source": "GitHub job checkout log prefixes reconciled against approved commit GET",
+  "commits": [
+    {
+      "log_prefix": "467ba24",
+      "sha": "467ba24cca3d4edabad7418d340d4c490196966c",
+      "tree": "b2448078c1a77700b27741eeedc75bdeccb24825",
+      "parents": [
+        "19380993febaa71238eaee3026b5c808773283ff",
+        "ddc62d11d1e38116e529cde713d00f71fd81b28a"
+      ],
+      "message": "Merge ddc62d11d1e38116e529cde713d00f71fd81b28a into 19380993febaa71238eaee3026b5c808773283ff"
+    },
+    {
+      "log_prefix": "bc38345",
+      "sha": "bc38345d280538f73b1d5c3e9471ba7752558348",
+      "tree": "1a5350219c8bfa1715eb6c4c20c9fcbecd9788b3",
+      "parents": [
+        "19380993febaa71238eaee3026b5c808773283ff",
+        "8eb2e6f92109bcbd51e4925ebe703074ee28c6ac"
+      ],
+      "message": "Merge 8eb2e6f92109bcbd51e4925ebe703074ee28c6ac into 19380993febaa71238eaee3026b5c808773283ff"
+    }
+  ],
+  "limitation": "These tested prospective unions do not accept any future altered tree."
+}

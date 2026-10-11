@@ -1,0 +1,102 @@
+{
+  "all_eight_artifact_pins_match": true,
+  "artifacts": [
+    {
+      "bytes": 987,
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a",
+      "verified": true
+    },
+    {
+      "bytes": 22282402,
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+      "verified": true
+    },
+    {
+      "bytes": 503,
+      "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/artifacts/journal.run",
+      "sha256": "8410a10fb42e97660e5cc44dde9ca9e3a11892d5fb77fd9f8323fd74f69467f1",
+      "verified": true
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/artifacts/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verified": true
+    },
+    {
+      "bytes": 2154,
+      "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/artifacts/stdout.log",
+      "sha256": "8f9a2953329accc45004468304018cdf8b0e06ff1e04d7e7a1d480a45380157b",
+      "verified": true
+    },
+    {
+      "bytes": 2651,
+      "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/run.log",
+      "sha256": "23fa2c094a40e9f018ae8fdc987252b380853a6cf2cafd30310466bdb6853514",
+      "verified": true
+    },
+    {
+      "bytes": 2941,
+      "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/run_mypy.py",
+      "sha256": "864c4aa86c966792cf775dd3181bd8b2a8612d567ab7615125d5205f926ae91a",
+      "verified": true
+    },
+    {
+      "bytes": 290,
+      "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/toolkit.yaml",
+      "sha256": "a8f0f598aa0fde41235e8ffecaa742024d84ee542331c966fd9f6823f7f19ce1",
+      "verified": true
+    }
+  ],
+  "canonical_guidance": {
+    "disposition": "Preserve integrated static-class-import/separate-monkeypatch lesson; prior local-variable wording refinement remains nonblocking.",
+    "evidence": "Historical module-only and exploratory diagnostics are superseded only for configured gate by this additive exact327-file command.",
+    "exact_proposed_verified_sentence": "Retain the exact configured Mypy argv, source head/tree and reported file count in a separate source-bound receipt; a narrower module check or an exploratory tests-only probe does not replace the configured src/tests gate, and a local head result does not establish a different prospective merge tree.",
+    "path": "docs/skills/repository-operations.md",
+    "uncertainty": "Future hosted combined source and Windows/native checks remain pending."
+  },
+  "commands": [
+    "Read/hash all eight receipt artifacts and setup bytes; read exact runner/config/log/journal",
+    "Read-only source head/tree/parent/clean and source/prepared metadata/config equality"
+  ],
+  "disposition": "GO_EXACT_HEAD_CONFIGURED_TYPECHECK_EVIDENCE",
+  "limitations": [
+    "No claim for the earlier hosted prospective merge467...331-file tree or any future combined head; those need their own exact-head hosted CI.",
+    "No independent test/typecheck execution by reviewer. Windows/native/fullRuntime/PR292 acceptance not established; no remote mutation authorized by this receipt."
+  ],
+  "observations": [
+    "Exact source871f072d/treea9058c05/parentddc clean readback matches receipt. Both Runtime metadata/lock bytes equal the prepared package.",
+    "Fresh retained toolkit.yaml selects exact source setup.yaml and a separate evidence artifact directory. Canonical RCC18.19.3 task script --no-build executes the retained source-bound runner, with activation/RCC/runner/config/log/journal hashes independently verified.",
+    "Runner removes inherited toolchain/PYTHONPATH contamination, binds prepared Python path resolution, configures exact candidate src/tests paths, validates actions.server origin, and executes actual configured python -m mypy --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases src tests from action_server.",
+    "Retained log reports Python prepared interpreter, candidate module origin, Mypy1.20.2 and Success:no issues found in327 source files; RCC OK and stopped journal retained. No install or service is observed in this scoped command.",
+    "This additive evidence establishes configured327-file gate on exact source head. Previous module-only/probe runner attribution limitation remains historical; the new separate run_mypy.py/config/log are explicitly hash-bound."
+  ],
+  "observed_at_utc": "2026-10-11T00:17:25.154325+00:00",
+  "owner_receipt": {
+    "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/ci-gate-871f072d/verification-receipt.json",
+    "sha256": "013fcf8475dcdae7636da3c05c83b4d02b11ccf8ad92c95cb8c353e68ed6bd14"
+  },
+  "prior_independent_review": {
+    "path": "/workspace/work/actions-mk3-evidence/wave8/pr292/independent-startup-mypy-source-review-871f072d.json",
+    "sha256": "2a186a7b1d72fc7c4f50e24b925a39b67c42a27d739e7a952d81785d6e2a7f00",
+    "unchanged": true
+  },
+  "schema": "independent-pr292-configured-typecheck-addendum-v1",
+  "setup": {
+    "equals_exact_commit": true,
+    "equals_prepared": true,
+    "path": "/workspace/work/actions-mk3-wave8-pr292/developer/setup.yaml",
+    "sha256": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a"
+  },
+  "source": {
+    "branch": "mk3/wave8-pr292-startup-cleanup-20261010",
+    "clean": true,
+    "head": "871f072d1842df797ca8d275cf910a7a10465405",
+    "parent": "ddc62d11d1e38116e529cde713d00f71fd81b28a",
+    "tree": "a9058c05b4fa5d0a7d19939f62a75355c442156c"
+  },
+  "source_disposition": "GO_SOURCE_ONLY preserved",
+  "upstream_disposition": "None; no confirmed reproduced/deduplicated maintained defect."
+}

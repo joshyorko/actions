@@ -1,0 +1,95 @@
+{
+  "schema": "wave9-current-convergence-payload-manifest/v1",
+  "recorded_at_utc": "2026-10-11T00:15:02Z",
+  "files": [
+    {
+      "id": "rcc_source_union_independent_review",
+      "source_path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/independent-source-union-review-44afd960.json",
+      "bundled_path": "payloads/rcc-source-union-independent-review-44afd960.json",
+      "bytes": 13278,
+      "sha256": "7fbd5bd3684f88b36e8d6b880814bd43553c790e8bb0b4a6fe7637777c876cae",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "rcc_source_union_checkpoint",
+      "source_path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/union-checkpoint-44afd960.json",
+      "bundled_path": "payloads/rcc-source-union-checkpoint-44afd960.json",
+      "bytes": 11390,
+      "sha256": "f6cf8fc44e150c839585e471f47a32ac83eff001d01206f033b2bf5912f76d6d",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "successor_readiness",
+      "source_path": "/workspace/work/actions-mk3-evidence/successor-readiness-canvas-package-20261011T000629Z/readiness.json",
+      "bundled_path": "payloads/successor-readiness-canvas-package.json",
+      "bytes": 14340,
+      "sha256": "d38694937ead4f953752e700800a5761fcaf9dc566d9b47e5a69b508dbc31dc1",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "successor_readiness_doc_proposal",
+      "source_path": "/workspace/work/actions-mk3-evidence/successor-readiness-canvas-package-20261011T000629Z/canonical-doc-proposal.md",
+      "bundled_path": "payloads/successor-readiness-doc-proposal.md",
+      "bytes": 817,
+      "sha256": "72f289d1eaf27a51b307b13fa1a86802559ba6f62fe17de778d3ae1209d3aac5",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "current_ci_summary",
+      "source_path": "/workspace/work/actions-mk3-wave8-evidence/followup-ci-20261011T0010Z-summary.json",
+      "bundled_path": "payloads/current-ci-summary-20261011T0010Z.json",
+      "bytes": 22432,
+      "sha256": "b2f84ec4a1983302a80e28f63b8a488b65c26684babb2f3857e80b53721a90d7",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "ci_linux_bounded_excerpt",
+      "source_path": "/workspace/work/actions-mk3-evidence/wave9/ci-failures/job-114342192621-bounded-excerpt.json",
+      "bundled_path": "payloads/ci-job-114342192621-bounded-excerpt.json",
+      "bytes": 1428,
+      "sha256": "9616a2d035571b9f0b292e594f81261e1ecaa77a09400281fb06b97d68e8a56e",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "ci_windows_bounded_excerpt",
+      "source_path": "/workspace/work/actions-mk3-evidence/wave9/ci-failures/job-114343060346-bounded-excerpt.json",
+      "bundled_path": "payloads/ci-job-114343060346-bounded-excerpt.json",
+      "bytes": 4692,
+      "sha256": "8d1c8ede635c6655de4811c9615f9683021b04e86cf54fe5e17f27f6b8f1ea9e",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "decoded_log_provenance",
+      "source_path": "/workspace/work/actions-mk3-evidence/wave9/ci-failures/decoded-log-provenance.json",
+      "bundled_path": "payloads/ci-decoded-log-provenance.json",
+      "bytes": 1048,
+      "sha256": "3a9215e473afdb528c7e992add6c97af492afc4055d09b4e1769cabd16e3c241",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "current_issue_101_readback",
+      "source_path": "/workspace/work/actions-mk3-wave8-evidence/ledger-20261011T0009Z-readback.json",
+      "bundled_path": "payloads/current-ledger-issue-101-20261011T0009Z.json",
+      "bytes": 28383,
+      "sha256": "859876838eea905d24a6c62b8c6ebe7016fbba18f6643e540508378b5cf3160e",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "synthetic_merge_source_identities",
+      "source_path": "/workspace/work/actions-mk3-evidence/wave9/ci-failures/synthetic-merge-source-identities.json",
+      "bundled_path": "payloads/synthetic-merge-source-identities.json",
+      "bytes": 1003,
+      "sha256": "afbc76eeadf649e8f84cdfd1a06a969f7828863b13a0aaac47bbfc3fc1f5b0b4",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "rcc_union_remote_ref_readback",
+      "source_path": "local-generated",
+      "bundled_path": "payloads/rcc-source-union-remote-ref-44afd960.json",
+      "bytes": 442,
+      "sha256": "45e546fcccd63e931c4f3594a91147d83f3fa0c5808c3a58b12522a2afc979e1",
+      "copy_method": "recorded exact command output"
+    }
+  ],
+  "excluded": "Full connector-decoded job logs, original raw job-log transport bytes (not measured), candidate-05 private review details, candidate-06 plan details, and private RCC source-composition payload are not copied."
+}

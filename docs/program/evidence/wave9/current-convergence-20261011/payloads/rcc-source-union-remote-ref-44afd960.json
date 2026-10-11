@@ -1,0 +1,10 @@
+{
+  "schema": "remote-branch-readback/v1",
+  "repository": "joshyorko/actions",
+  "remote": "origin",
+  "command": "git ls-remote origin refs/heads/mk3/wave9-rcc-public-source-union-20261010",
+  "observed_at_utc": "2026-10-11T00:15:02Z",
+  "exit_code": 0,
+  "stdout": "44afd960ad01f83eeef7773b334ccde3683c022d\trefs/heads/mk3/wave9-rcc-public-source-union-20261010\n",
+  "scope": "Read-only exact branch-head readback; no remote mutation."
+}

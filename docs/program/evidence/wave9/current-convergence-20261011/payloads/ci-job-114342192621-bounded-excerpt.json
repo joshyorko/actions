@@ -1,0 +1,18 @@
+{
+  "job_id": 114342192621,
+  "repository": "joshyorko/actions",
+  "source": "approved GitHub decoded workflow job logs",
+  "selected_lines": [
+    "2026-10-11T00:05:40.7396035Z tests/action_server_tests/test_cli_mcp_resource_history.py:421:27: error: Variable \"base_process\" is not valid as a type  [valid-type]",
+    "2026-10-11T00:05:40.7399157Z tests/action_server_tests/test_cli_mcp_resource_history.py:421:27: error: Invalid base class \"base_process\"  [misc]",
+    "2026-10-11T00:05:40.7400456Z tests/action_server_tests/test_cli_mcp_resource_history.py:469:33: error: Variable \"base_process\" is not valid as a type  [valid-type]",
+    "2026-10-11T00:05:40.7403625Z tests/action_server_tests/test_cli_mcp_resource_history.py:469:33: error: Invalid base class \"base_process\"  [misc]",
+    "2026-10-11T00:05:40.7405359Z tests/action_server_tests/test_cli_mcp_resource_history.py:506:31: error: Variable \"base_process\" is not valid as a type  [valid-type]",
+    "2026-10-11T00:05:40.7409002Z tests/action_server_tests/test_cli_mcp_resource_history.py:506:31: error: Invalid base class \"base_process\"  [misc]",
+    "2026-10-11T00:05:41.2812517Z Found 6 errors in 1 file (checked 331 source files)",
+    "2026-10-11T00:05:41.3344687Z ##[error]Process completed with exit code 1."
+  ],
+  "original_log_characters": 1237976,
+  "result": "FAIL",
+  "original_log_disposition": "Local only; no public full-log upload"
+}

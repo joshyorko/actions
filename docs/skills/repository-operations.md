@@ -2635,6 +2635,27 @@ original output is missing. Keep that attribution explicit and use subsequent
 exact-head CI as separate evidence. If a removed temporary configuration was
 printed in retained logs, state that recovery source rather than claiming the
 original file survived.
+For measurements of state that cleanup or uninstall later removes, record the
+UTC observation time and lifecycle phase, actual executable/version, and exact
+source/input identity with the result. Capture required state before cleanup;
+a later absence proves cleanup only. For decoded or excerpted CI logs, identify
+the retrieval source and decoding/line-ending treatment, and hash the exact
+representation retained. Do not attribute a decoded-text digest to unmeasured
+transport bytes.
+
+Before selecting a supposedly pure test set, inspect the collected nodes and
+their helper calls. A wheel-building test may have no integration marker;
+marker exclusion alone does not prove that builds or installs cannot run.
+Enumerate the intended pure nodes explicitly and exclude effectful nodes by
+identity. Preserve unintended execution results separately from the approved
+acceptance gate, including an aborted outer task and incomplete child reaping.
+
+A signal handler that only sets an overrun flag does not enforce a deadline
+across blocking receipt reads, parsing, writes or fsync. The finite supervisor
+must cover primary persistence and fallback without renewing the budget. Test
+the actual finalization path with stalled service-free operations, and retain
+an existing failed receipt as failed rather than calling its hashed presence
+PASS.
 
 For RCC acceptance, freeze the actual composed source SHA/tree and imported
 module origins. Separate source reviews of publication and detached-profile

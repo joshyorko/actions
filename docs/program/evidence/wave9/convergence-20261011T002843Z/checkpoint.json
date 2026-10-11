@@ -1,0 +1,130 @@
+{
+  "schema": "actions-convergence-checkpoint-v1",
+  "observed_at_utc": "2026-10-11 00:28:43 UTC",
+  "engineering_baseline": false,
+  "authoritative_remote_refs": {
+    "community": "a70993fafc99a9f94041485542d5a720797ca394",
+    "integration": "19380993febaa71238eaee3026b5c808773283ff",
+    "pr292": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+    "rcc_public_source_union": "44afd960ad01f83eeef7773b334ccde3683c022d",
+    "pr311": "8eb2e6f92109bcbd51e4925ebe703074ee28c6ac"
+  },
+  "issue_graph": {
+    "open_issues": 58,
+    "open_prs": 14,
+    "retained_contracts": 54,
+    "retained_open": 53,
+    "retained_accepted_closed": [
+      210
+    ],
+    "close_ready_recommendations": [
+      162,
+      194,
+      209,
+      279
+    ],
+    "integrated_foundation_unaccepted": 9,
+    "active_implementation_verification_issue_scopes": 2,
+    "admitted_prs_ready": 0,
+    "automatic_closures": "UNKNOWN",
+    "observed_closing_keywords": 0,
+    "premature_closure_risks": "UNKNOWN",
+    "distinct_dependency_blockers": "UNKNOWN"
+  },
+  "pr292": {
+    "source_reviewed_head": "871f072d1842df797ca8d275cf910a7a10465405",
+    "source_reviewed_tree": "a9058c05b4fa5d0a7d19939f62a75355c442156c",
+    "pushed_docs_only_head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+    "pushed_tree": "35ad4b9f4c6cb47997ba826b91d3a88d69fff25c",
+    "test_and_production_blobs_identical": true,
+    "configured_typecheck": {
+      "files": 327,
+      "status": "PASS_EXACT_SOURCE_871",
+      "command": "python -m mypy --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases src tests",
+      "receipt_sha256": "013fcf8475dcdae7636da3c05c83b4d02b11ccf8ad92c95cb8c353e68ed6bd14",
+      "independent_addendum_sha256": "493c0ca315bf17def3200e5556a40df4bc832d4d3746a118902af312015e4980"
+    },
+    "previous_windows": {
+      "run": 38096097650,
+      "job": 114342192546,
+      "head": "ddc62d11d1e38116e529cde713d00f71fd81b28a",
+      "go_child_lifecycle": "PASS",
+      "binary_build": "PASS",
+      "unit": "PASS",
+      "integration": "PASS",
+      "lint": "PASS",
+      "typecheck": "FAIL",
+      "docs": "PASS",
+      "unit_integration_counts": "NOT_YET_RECONCILED",
+      "synthetic_checkout_identity": "AWAITING_LOG_REVIEW"
+    },
+    "new_head_ci": "PENDING",
+    "stack_290_299_300": "HELD_PENDING_292_ACCEPTANCE"
+  },
+  "pr311_incident": {
+    "head": "8eb2e6f92109bcbd51e4925ebe703074ee28c6ac",
+    "source_fix": "UNCOMMITTED_SCOPED_FIXTURE_BYTES_AND_TYPES",
+    "unplanned_module_pytest": {
+      "status": "PASS",
+      "tests": 39,
+      "wall_seconds": 58.93
+    },
+    "actual_effects": {
+      "wheel_builds": 4,
+      "installed_test_venvs": 2
+    },
+    "overall_rcc_task": "ABORTED_DURING_MYPY",
+    "mypy": "INTERRUPTED_UNKNOWN",
+    "ruff": "UNKNOWN",
+    "wheel_venv_config_bytes": "DELETED_NOT_RECONSTRUCTED",
+    "owned_process_group": 75476,
+    "live_group_members": 0,
+    "adopted_zombie_pids": [
+      75479,
+      75485,
+      75661
+    ],
+    "full_reaping": "UNPROVEN",
+    "incident_receipt_sha256": "cedb7cf90b43a1a64a2e97e6c0b5a4ca77dcbee61946bde42255e030325c068c",
+    "root_census_sha256": "bb41c5df5902d46adaf73bb8a0514ec53088f5f8ed679c4c4d02945708c8cfdc",
+    "independent_reconciliation_sha256": "f805fa8e5ea15dd9645c52ad695df53576e86f63b45df9bf6c0a292c4d00fcbe",
+    "disposition": "GO_EXPLICIT_PURE_PREPARATION_ONLY_WITH_SEPARATE_ROOT_FINITE_GRANT",
+    "approved_standalone_gate": "NOT_RUN",
+    "issue_195_acceptance": "NOT_ACCEPTED",
+    "selection_requirement": "Enumerated exact pure node IDs; heavy wheel test is unmarked, so marker-only exclusion is insufficient."
+  },
+  "rcc": {
+    "public_union": "SOURCE_ONLY_GO",
+    "private_source_composition": "IN_PROGRESS_EXISTING_OWNER_ISOLATED_PRIVATE_ENGINEERING_MERGE",
+    "private_plan_sha256": "491e97b3bbaf6385c5346ff1d177a055346de5ccd4f226e210a4a493fbe18bda",
+    "frozen_v5_manifest_sha256": "a97bd4b874bfbc5b12b517fbf1830cea660be278c481214d4172d5eb0978727b",
+    "frozen_v5_review_sha256": "d38ce6a8ad6eccc2bcd3a2d25da511086d56cdb3367bafac758d6da4ef094cd8",
+    "frozen_v5_disposition": "HOLD_PREPARATION_DEADLINE_ENFORCEMENT",
+    "remaining_harness_gate": "Enforced finite deadline across blocking persistence/fallback; accurate FAIL preservation; real main-path stalled read/write controls.",
+    "v6": "PURE_PREPARATION_ASSIGNED_EXISTING_OWNER",
+    "actual_metadata": "NOT_RUN",
+    "current_core_identity": "1.0.3_REQUIRED_OLD_1.0.2_FIXTURE_INSUFFICIENT"
+  },
+  "native": {
+    "old_work_items": "LATEST_COMPLETED_NOT_ACTIVE_AT_0000Z",
+    "old_rcc": "LATEST_INTERRUPTED_NOT_ACTIVE_AT_0000Z",
+    "new_writers": 0,
+    "boundary": "USER_EXECUTION_BOUNDARY_QUESTION_PENDING",
+    "devsy": "DISABLED"
+  },
+  "publication": {
+    "runtime_103": "UNRELEASED",
+    "runtime_registry": "1.0.2_DOES_NOT_PROVE_NATIVE_103",
+    "native_homebrew_install_upgrade": "NOT_RUN",
+    "core_helper_103": "REGISTRY_ARTIFACTS_AND_API_VERIFIED",
+    "work_items_version": "0.4.4"
+  },
+  "documentation_disposition": {
+    "collector_observation_phase_log_representation_paragraph": "ACCEPTED_FOR_EVIDENCE_BRANCH_INTEGRATION",
+    "graph_successor_proposal": "NO_NEW_DELTA_EXISTING_TYPED_EDGE_GUIDE_ALREADY_COVERS",
+    "rcc_v5_outer_gateway_hunk": "DEFERRED_UNTIL_CORRECTED_IMPLEMENTATION_INDEPENDENT_GO",
+    "root_incident_lesson": "EXACT_NODE_SELECTION_AND_EXECUTION_ACCEPTANCE_SEPARATION"
+  },
+  "upstream_disposition": "none",
+  "unexecuted_requirements": "BLOCKED_OR_NOT_RUN_NEVER_PASS"
+}
