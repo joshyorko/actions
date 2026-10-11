@@ -2447,7 +2447,6 @@ def test_test_only_admission_hashes_before_probe_and_never_probes_wrong_bytes(
     assert events == ["hash"]
 
 
-
 @pytest.mark.parametrize(
     "selector", ["released-18.19.5-linux-amd64", "candidate-727-18.19.6-linux-amd64"]
 )
