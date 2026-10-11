@@ -1007,6 +1007,16 @@ without treating a shadowed historical template as the winner of a direct URI.
 Unavailable current routes return errors; history never restores an old callback.
 Same-owner revisions invoke the current callback and remain permitted.
 
+For watched MCP ownership handoffs between independently refreshed packages, a new
+candidate route being listed does not prove the previous package has relinquished
+its declarations. An assembled-catalog control can publish the new template while
+the old direct route remains listed and still validly serves the old owner. Wait
+for all intended candidate declarations and the absence of every old declaration
+before asserting historical-owner rejection. Keep callback nonexecution and
+unrelated-URI success checks. The two resource-list RPCs are separate observations;
+this barrier is not an atomic catalog snapshot, nor proof of a hosted failure's
+actual update order. Preserve deadlines and the original failed execution tuple.
+
 Routing history joins the existing serialized admission transaction and rollback
 boundary. Fixed-size domain-separated digests identify full RFC 8785 canonical
 payloads; full equality, shape, digest, and matcher-policy version 1 are validated
