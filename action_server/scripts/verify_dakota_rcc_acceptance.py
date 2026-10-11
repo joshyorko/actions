@@ -7,6 +7,7 @@ import argparse
 import ctypes
 import hashlib
 import http.server
+import importlib.util
 import json
 import math
 import os
@@ -17,8 +18,46 @@ import sys
 import tempfile
 import threading
 import time
+import zipfile
+from email.parser import Parser
 from pathlib import Path
+from typing import TYPE_CHECKING, NamedTuple
 from urllib.parse import urlsplit
+
+
+def _load_sibling_module(name: str):
+    """Load a verifier helper from this directory without changing sys.path."""
+
+    helper_path = Path(__file__).resolve().with_name(f"{name}.py")
+    module = sys.modules.get(name)
+    if module is not None:
+        loaded_path = getattr(module, "__file__", None)
+        if loaded_path is None or Path(loaded_path).resolve() != helper_path:
+            raise ImportError(f"unexpected module already registered for {name}")
+        return module
+    spec = importlib.util.spec_from_file_location(name, helper_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"unable to load verifier helper {name}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    try:
+        spec.loader.exec_module(module)
+    except BaseException:
+        sys.modules.pop(name, None)
+        raise
+    return module
+
+
+# These helpers have existing sibling imports. Register each exact sibling
+# before loading its consumer; importlib-by-path callers need no scripts path.
+_load_sibling_module("write_native_artifact_manifest")
+_load_sibling_module("archive_native_artifact_provenance")
+_native_binding = _load_sibling_module("native_runtime_artifact_binding")
+if TYPE_CHECKING:
+    from native_runtime_artifact_binding import ValidatedNativeArtifact
+
+validate_go_extraction = _native_binding.validate_go_extraction
+validate_native_artifact = _native_binding.validate_native_artifact
 
 RCC_VERSION = "v18.19.3"
 RCC_SHA256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
@@ -51,6 +90,19 @@ _ENV_ALLOWLIST = {
     "COMSPEC",
     "PATHEXT",
 }
+
+
+class CandidateWheel(NamedTuple):
+    distribution: str
+    version: str
+    path: Path
+
+
+class CandidateWheels(NamedTuple):
+    core: CandidateWheel
+    helper: CandidateWheel
+
+
 _SAFE_EXTRA_ENV = {
     "ACTIONS_ACCEPTANCE_POETRY",
     "ACTIONS_ACCEPTANCE_ROBOCORP_HOME",
@@ -101,7 +153,11 @@ class ProcessTreeCleanupError(RuntimeError):
 
 
 def child_environment(
-    source: dict[str, str], *, task_root: Path, extra: dict[str, str] | None = None
+    source: dict[str, str],
+    *,
+    task_root: Path,
+    extra: dict[str, str] | None = None,
+    validated_native_artifact: ValidatedNativeArtifact | None = None,
 ) -> dict[str, str]:
     """Copy only execution, network, and trust settings needed by the proof."""
 
@@ -149,6 +205,18 @@ def child_environment(
         if forbidden:
             raise ValueError("unsupported child environment override")
         env.update(extra)
+    if validated_native_artifact is not None:
+        validated_native_selector = validated_native_artifact.selector_path
+        if (
+            not validated_native_selector.is_absolute()
+            or not validated_native_selector.is_file()
+        ):
+            raise ValueError(
+                "validated native selector is not an existing absolute file"
+            )
+        env["SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE"] = str(
+            validated_native_selector
+        )
     return env
 
 
@@ -348,8 +416,8 @@ def run_owned_process(
         completed = subprocess.CompletedProcess(
             command, result["returncode"], result["stdout"], result["stderr"]
         )
-        completed.cleanup_disposition = result["cleanup_disposition"]
-        completed.reaped_descendants = result["reaped_descendants"]
+        completed.cleanup_disposition = result["cleanup_disposition"]  # type: ignore[attr-defined]
+        completed.reaped_descendants = result["reaped_descendants"]  # type: ignore[attr-defined]
         if result.get("unexpected_live_descendants") and not result["timed_out"]:
             raise ProcessTreeCleanupError(
                 "command exited while owned descendants were still live; "
@@ -720,15 +788,42 @@ def _source_root() -> Path:
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Prove the source Runtime's local RCC Environment Artifact and process "
-            "lease with a synthetic Action over authenticated HTTP."
+            "Prove a local RCC Environment Artifact and process lease with a "
+            "synthetic Action over authenticated HTTP. Candidate Core/Helper "
+            "wheels are used with source, frozen, or Go-wrapper Runtime mode."
         )
     )
     parser.add_argument(
-        "--mode",
-        choices=("candidate-wheel",),
-        default="candidate-wheel",
-        help="Use local candidate Core/Helper wheels with the source Runtime.",
+        "--action-server-mode",
+        choices=("source", "frozen", "go-wrapper"),
+        default="source",
+        help=(
+            "Select source Runtime by default, or an explicitly bound frozen "
+            "Runtime / Go wrapper. The proof still uses candidate-wheel packages."
+        ),
+    )
+    parser.add_argument(
+        "--native-package-root",
+        type=Path,
+        help="Staged root containing dist/action-server and dist/final.",
+    )
+    parser.add_argument(
+        "--native-build-manifest", type=Path, help="Measured native build manifest."
+    )
+    parser.add_argument(
+        "--native-tree-inventory",
+        type=Path,
+        help="Complete frozen package tree inventory.",
+    )
+    parser.add_argument(
+        "--native-provenance",
+        type=Path,
+        help="Provenance tar that binds the full frozen tree and manifest.",
+    )
+    parser.add_argument(
+        "--native-assets-zip",
+        type=Path,
+        help="Exact measured embedded assets ZIP (required for go-wrapper).",
     )
     parser.add_argument(
         "--receipt",
@@ -892,8 +987,9 @@ def build_candidate_wheels(
     source_env: dict[str, str],
     poetry: Path,
     deadline: Deadline,
-) -> tuple[Path, Path]:
-    repo_root = Path(__file__).resolve().parents[2]
+    repo_root: Path | None = None,
+) -> CandidateWheels:
+    repo_root = repo_root or Path(__file__).resolve().parents[2]
     wheelhouse = root / "candidate-wheelhouse"
     wheelhouse.mkdir()
     env = child_environment(
@@ -908,9 +1004,28 @@ def build_candidate_wheels(
             "POETRY_CACHE_DIR": str(root / "poetry-cache"),
         },
     )
-    for package_dir in (repo_root / "actions-http-helper", repo_root / "actions"):
+    package_specs = (
+        (repo_root / "actions-http-helper", "actions-http-helper"),
+        (repo_root / "actions", "actions-core"),
+    )
+    versions: dict[str, str] = {}
+    for package_dir, distribution in package_specs:
         result = run_owned_process(
-            [poetry, "build", "--format", "wheel", "--output", str(wheelhouse)],
+            [str(poetry), "version", "--short"],
+            cwd=package_dir,
+            env=env,
+            timeout_seconds=deadline.remaining(),
+        )
+        version = (result.stdout or "").strip()
+        if result.returncode or not version or any(c.isspace() for c in version):
+            raise RuntimeError(
+                f"pinned Poetry could not read {distribution} candidate version"
+            )
+        versions[distribution] = version
+
+    for package_dir, _distribution in package_specs:
+        result = run_owned_process(
+            [str(poetry), "build", "--format", "wheel", "--output", str(wheelhouse)],
             cwd=package_dir,
             env=env,
             timeout_seconds=deadline.remaining(),
@@ -920,11 +1035,67 @@ def build_candidate_wheels(
                 "pinned Poetry candidate wheel build failed: "
                 f"{(result.stderr or result.stdout)[-1000:]}"
             )
-    core = wheelhouse / "actions_core-1.0.2-py3-none-any.whl"
-    helper = wheelhouse / "actions_http_helper-1.0.3-py3-none-any.whl"
-    if not core.is_file() or not helper.is_file():
-        raise RuntimeError("Poetry did not produce the expected candidate wheels")
-    return core, helper
+
+    candidates: dict[str, CandidateWheel] = {}
+    for _package_dir, distribution in package_specs:
+        version = versions[distribution]
+        filename_distribution = distribution.replace("-", "_")
+        wheel = wheelhouse / (f"{filename_distribution}-{version}-py3-none-any.whl")
+        if not wheel.is_file():
+            raise RuntimeError(
+                f"Poetry did not produce {distribution} {version} candidate wheel"
+            )
+        validate_candidate_wheel_metadata(
+            wheel, expected_distribution=distribution, expected_version=version
+        )
+        candidates[distribution] = CandidateWheel(
+            distribution=distribution, version=version, path=wheel
+        )
+    return CandidateWheels(
+        core=candidates["actions-core"],
+        helper=candidates["actions-http-helper"],
+    )
+
+
+def validate_candidate_wheel_metadata(
+    wheel: Path, *, expected_distribution: str, expected_version: str
+) -> None:
+    try:
+        with zipfile.ZipFile(wheel) as archive:
+            metadata_members = [
+                member
+                for member in archive.namelist()
+                if member.endswith(".dist-info/METADATA")
+            ]
+            if len(metadata_members) != 1:
+                raise RuntimeError(
+                    f"candidate wheel METADATA inventory is invalid: {wheel.name}"
+                )
+            metadata_text = archive.read(metadata_members[0]).decode("utf-8")
+    except (OSError, UnicodeDecodeError, zipfile.BadZipFile) as error:
+        raise RuntimeError(
+            f"candidate wheel METADATA could not be read: {wheel.name}"
+        ) from error
+
+    metadata = Parser().parsestr(metadata_text)
+    actual_distribution = metadata.get("Name")
+    actual_version = metadata.get("Version")
+    if (
+        actual_distribution != expected_distribution
+        or actual_version != expected_version
+    ):
+        raise RuntimeError(
+            f"candidate wheel METADATA mismatch for {wheel.name}: expected "
+            f"{expected_distribution}=={expected_version}, got "
+            f"{actual_distribution}=={actual_version}"
+        )
+
+
+def candidate_version_fields(wheels: CandidateWheels) -> dict[str, str]:
+    return {
+        "actions_core": wheels.core.version,
+        "actions_http_helper": wheels.helper.version,
+    }
 
 
 def sha256_file(path: Path) -> str:
@@ -933,6 +1104,50 @@ def sha256_file(path: Path) -> str:
         for block in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def candidate_wheel_records(wheels: CandidateWheels) -> dict[str, dict[str, str]]:
+    return {
+        wheel.distribution: {
+            "filename": wheel.path.name,
+            "version": wheel.version,
+            "sha256": sha256_file(wheel.path),
+        }
+        for wheel in (wheels.core, wheels.helper)
+    }
+
+
+def candidate_worker_distribution_identity(
+    result: object, expected_result: dict[str, str]
+) -> dict[str, object]:
+    if not isinstance(result, dict) or any(
+        result.get(key) != value for key, value in expected_result.items()
+    ):
+        raise AssertionError("Action returned an unexpected candidate result")
+    prefix_value = result.get("worker_prefix")
+    if not isinstance(prefix_value, str) or not Path(prefix_value).is_absolute():
+        raise AssertionError("candidate worker prefix is not absolute")
+    prefix = Path(prefix_value).resolve(strict=True)
+    distributions = {}
+    for name, key, version_key in (
+        ("actions-core", "actions_core_distribution_root", "actions_core"),
+        (
+            "actions-http-helper",
+            "actions_http_helper_distribution_root",
+            "actions_http_helper",
+        ),
+    ):
+        root_value = result.get(key)
+        if not isinstance(root_value, str) or not Path(root_value).is_absolute():
+            raise AssertionError(f"{name} worker distribution origin is invalid")
+        root = Path(root_value).resolve(strict=True)
+        if not root.is_dir() or not root.is_relative_to(prefix):
+            raise AssertionError(f"{name} worker distribution is outside its prefix")
+        distributions[name] = {
+            "root": str(root),
+            "version": expected_result[version_key],
+        }
+    return {"worker_prefix": str(prefix), "distributions": distributions}
 
 
 def source_revision(repo_root: Path, *, env: dict[str, str], deadline: Deadline) -> str:
@@ -1127,8 +1342,14 @@ def _sanitize_runtime_receipt(receipt: dict[str, object]) -> dict[str, object]:
     }
 
 
-def _run(receipt_path: Path) -> dict[str, object]:
-    deadline = Deadline.after(PROOF_TIMEOUT_SECONDS)
+def _run(
+    receipt_path: Path,
+    *,
+    action_server_mode: str = "source",
+    native_binding: ValidatedNativeArtifact | None = None,
+    deadline: Deadline | None = None,
+) -> dict[str, object]:
+    deadline = deadline or Deadline.after(PROOF_TIMEOUT_SECONDS)
     source_env = dict(os.environ)
     repo_root = Path(__file__).resolve().parents[2]
     if receipt_path.expanduser().resolve().exists():
@@ -1155,19 +1376,22 @@ def _run(receipt_path: Path) -> dict[str, object]:
             source_env, task_root=root / "source-inspection", extra=tool_extra
         )
         source_sha = source_revision(repo_root, env=tool_env, deadline=deadline)
-        core_wheel, helper_wheel = build_candidate_wheels(
+        source_tree_result = run_owned_process(
+            ["git", "rev-parse", "HEAD^{tree}"],
+            cwd=repo_root,
+            env=tool_env,
+            timeout_seconds=deadline.remaining(cap=10),
+        )
+        source_tree = source_tree_result.stdout.strip()
+        if source_tree_result.returncode or len(source_tree) != 40:
+            raise RuntimeError("unable to determine the exact candidate source tree")
+        candidate_wheels = build_candidate_wheels(
             root, source_env=source_env, poetry=poetry, deadline=deadline
         )
-        wheel_records = {
-            "actions-core": {
-                "filename": core_wheel.name,
-                "sha256": sha256_file(core_wheel),
-            },
-            "actions-http-helper": {
-                "filename": helper_wheel.name,
-                "sha256": sha256_file(helper_wheel),
-            },
-        }
+        core_wheel = candidate_wheels.core
+        helper_wheel = candidate_wheels.helper
+        candidate_versions = candidate_version_fields(candidate_wheels)
+        wheel_records = candidate_wheel_records(candidate_wheels)
         package_dir = root / "package"
         package_dir.mkdir()
         (package_dir / "package.yaml").write_text(
@@ -1178,14 +1402,15 @@ dependencies:
   conda-forge:
     - python=3.12.15
   pypi:
-    - actions-core @ {core_wheel.as_uri()}
-    - actions-http-helper @ {helper_wheel.as_uri()}
+    - actions-core @ {core_wheel.path.as_uri()}
+    - actions-http-helper @ {helper_wheel.path.as_uri()}
 """,
             encoding="utf-8",
         )
         (package_dir / "action.py").write_text(
             "import json\n"
-            "from importlib.metadata import version\n"
+            "import sys\n"
+            "from importlib.metadata import distribution, version\n"
             "from actions import action\n"
             "from actions.server_integration import ManagedParameters\n\n"
             "@action\n"
@@ -1195,14 +1420,18 @@ dependencies:
             "        'actions_core': version('actions-core'),\n"
             "        'actions_http_helper': version('actions-http-helper'),\n"
             "        'server_integration': ManagedParameters.__name__,\n"
+            "        'worker_prefix': sys.prefix,\n"
+            "        'actions_core_distribution_root': str(distribution('actions-core').locate_file('')),\n"
+            "        'actions_http_helper_distribution_root': str(distribution('actions-http-helper').locate_file('')),\n"
             "    }, sort_keys=True)\n",
             encoding="utf-8",
         )
 
         runtime_root = root / "runtime-state"
+        runtime_environment_root = runtime_root / "environment"
         runtime_env = child_environment(
             source_env,
-            task_root=runtime_root / "environment",
+            task_root=runtime_environment_root,
             extra={
                 "ACTIONS_REAL_RCC_ARTIFACT_TEST": "1",
                 "ACTIONS_RUNTIME_RCC_BINARY": rcc_binary,
@@ -1211,7 +1440,10 @@ dependencies:
                 ),
                 "ROBOCORP_HOME": str(runtime_root / "rcc-home"),
             },
+            validated_native_artifact=native_binding,
         )
+        if action_server_mode == "go-wrapper":
+            runtime_env["HOME"] = str(runtime_environment_root / "home")
         os.environ.clear()
         os.environ.update(runtime_env)
         sys.path.insert(0, str(_source_root() / "src"))
@@ -1291,13 +1523,13 @@ dependencies:
             response.raise_for_status()
             expected_result = {
                 "result": "dakota-rcc-local-acceptance",
-                "actions_core": "1.0.2",
-                "actions_http_helper": "1.0.3",
+                **candidate_versions,
                 "server_integration": "ManagedParameters",
             }
             candidate_result = json.loads(response.json())
-            if candidate_result != expected_result:
-                raise AssertionError("Action returned an unexpected result")
+            candidate_distribution_identity = candidate_worker_distribution_identity(
+                candidate_result, expected_result
+            )
             run_id = response.headers.get("x-action-server-run-id", "")
             if not run_id:
                 raise AssertionError("Runtime did not return a run identity")
@@ -1381,6 +1613,7 @@ dependencies:
         warm_run_id = ""
         warm_response = None
         warm_candidate_result = None
+        warm_distribution_identity = None
         warm_receipt = None
         warm_receipt_path = None
         provider_probe_stopped = False
@@ -1574,8 +1807,11 @@ dependencies:
                 )
             warm_response.raise_for_status()
             warm_candidate_result = json.loads(warm_response.json())
-            if warm_candidate_result != expected_result:
-                raise AssertionError("offline warm Action returned unexpected result")
+            warm_distribution_identity = candidate_worker_distribution_identity(
+                warm_candidate_result, expected_result
+            )
+            if warm_distribution_identity != candidate_distribution_identity:
+                raise AssertionError("offline warm worker candidate origins changed")
             warm_run_id = warm_response.headers.get("x-action-server-run-id", "")
             if not warm_run_id:
                 raise AssertionError("offline warm run has no identity")
@@ -1618,6 +1854,19 @@ dependencies:
                 provider_probe_stopped = True
         warm_provider_requests = provider_probe.requests
 
+        go_extraction = None
+        if action_server_mode == "go-wrapper":
+            if native_binding is None:
+                raise AssertionError("Go-wrapper mode requires a validated artifact")
+            go_extraction = validate_go_extraction(
+                Path(runtime_env["HOME"]),
+                native_binding.inventory_path,
+                embedded_files_sha256=str(
+                    native_binding.receipt["embedded_files_sha256"]
+                ),
+                assets_zip_sha256=str(native_binding.receipt["assets_zip_sha256"]),
+            )
+
         if warm_failure_class is not None:
             with load_db(db_path) as db:
                 with db.connect():
@@ -1631,7 +1880,7 @@ dependencies:
                 if unauthenticated.status_code in (401, 403)
                 else "FAIL",
                 "authenticated_action": "PASS"
-                if response.status_code == 200 and candidate_result == expected_result
+                if response.status_code == 200 and candidate_distribution_identity
                 else "FAIL",
                 "sqlite_run": "PASS"
                 if run is not None and run.status == RunStatus.PASSED
@@ -1664,16 +1913,24 @@ dependencies:
             evidence = {
                 "schema_version": 1,
                 "runtime_mode": "candidate-wheel",
-                "action_server_mode": "source",
+                "action_server_mode": action_server_mode,
                 "source_sha": source_sha,
+                "source_tree": source_tree,
+                "native_source_tree_matches_candidate": (
+                    native_binding.receipt.get("build_source_tree") == source_tree
+                    if native_binding is not None
+                    else None
+                ),
+                "native_artifact": _receipt_native_binding(native_binding),
+                "go_extraction": go_extraction,
                 "rcc": {
                     "version": runtime["rcc_version"],
                     "sha256": rcc_sha256,
                 },
                 "candidate_wheels": wheel_records,
-                "actions_core": "1.0.2",
-                "actions_http_helper": "1.0.3",
+                **candidate_versions,
                 "server_integration": candidate_result["server_integration"],
+                "candidate_worker_distributions": candidate_distribution_identity,
                 "artifact_digest": digest,
                 "run_id": run_id,
                 "sqlite_status": "passed"
@@ -1743,7 +2000,7 @@ dependencies:
                 if run is None or run.status != RunStatus.PASSED:
                     raise AssertionError("SQLite did not persist a passed Action run")
                 if json.loads(run.result or "null") != json.dumps(
-                    expected_result, sort_keys=True
+                    candidate_result, sort_keys=True
                 ):
                     raise AssertionError("SQLite persisted an unexpected Action result")
                 package = db.all(ActionPackage)[0]
@@ -1758,7 +2015,7 @@ dependencies:
             if unauthenticated.status_code in (401, 403)
             else "FAIL",
             "authenticated_action": "PASS"
-            if response.status_code == 200 and candidate_result == expected_result
+            if response.status_code == 200 and candidate_distribution_identity
             else "FAIL",
             "sqlite_run": "PASS"
             if run is not None and run.status == RunStatus.PASSED
@@ -1775,12 +2032,12 @@ dependencies:
             if server_reaped and provider_reaped and receipts
             else "FAIL",
             "offline_warm_artifact_ready": "PASS"
-            if lifecycle.get("ready") is True
+            if isinstance(lifecycle, dict) and lifecycle.get("ready") is True
             else "FAIL",
             "offline_warm_action": "PASS"
             if warm_response is not None
             and warm_response.status_code == 200
-            and warm_candidate_result == expected_result
+            and warm_distribution_identity == candidate_distribution_identity
             and warm_run is not None
             and warm_run.status == RunStatus.PASSED
             else "FAIL",
@@ -1800,13 +2057,21 @@ dependencies:
         evidence = {
             "schema_version": 1,
             "runtime_mode": "candidate-wheel",
-            "action_server_mode": "source",
+            "action_server_mode": action_server_mode,
             "source_sha": source_sha,
+            "source_tree": source_tree,
+            "native_source_tree_matches_candidate": (
+                native_binding.receipt.get("build_source_tree") == source_tree
+                if native_binding is not None
+                else None
+            ),
+            "native_artifact": _receipt_native_binding(native_binding),
+            "go_extraction": go_extraction,
             "rcc": {"version": runtime["rcc_version"], "sha256": rcc_sha256},
             "candidate_wheels": wheel_records,
-            "actions_core": "1.0.2",
-            "actions_http_helper": "1.0.3",
+            **candidate_versions,
             "server_integration": candidate_result["server_integration"],
+            "candidate_worker_distributions": candidate_distribution_identity,
             "artifact_digest": digest,
             "run_id": run_id,
             "sqlite_status": "passed",
@@ -1849,6 +2114,80 @@ def require_supported_platform() -> None:
         raise RuntimeError("Dakota RCC acceptance cleanup is verified on Linux only")
 
 
+def _validate_native_argument_shape(args) -> None:
+    native_values = (
+        args.native_package_root,
+        args.native_build_manifest,
+        args.native_tree_inventory,
+        args.native_provenance,
+        args.native_assets_zip,
+    )
+    if args.action_server_mode == "source":
+        if any(value is not None for value in native_values):
+            raise ValueError("source mode does not accept native artifact inputs")
+        return
+    if any(value is None for value in native_values[:4]):
+        raise ValueError(
+            "native mode requires package, manifest, inventory, and provenance"
+        )
+    if args.action_server_mode == "frozen" and args.native_assets_zip is not None:
+        raise ValueError("frozen mode does not accept Go-wrapper asset inputs")
+    if args.action_server_mode == "go-wrapper" and args.native_assets_zip is None:
+        raise ValueError("Go-wrapper mode requires its measured assets archive")
+
+
+def _native_binding_from_args(args) -> ValidatedNativeArtifact | None:
+    _validate_native_argument_shape(args)
+    if args.action_server_mode == "source":
+        return None
+    return validate_native_artifact(
+        args.action_server_mode,
+        args.native_package_root,
+        args.native_build_manifest,
+        args.native_tree_inventory,
+        args.native_provenance,
+        assets_zip_path=args.native_assets_zip,
+    )
+
+
+def _receipt_native_binding(
+    binding: ValidatedNativeArtifact | None,
+) -> dict[str, object] | None:
+    if binding is None:
+        return None
+    return binding.receipt
+
+
+def _worker_command(args) -> list[str]:
+    command = [
+        sys.executable,
+        str(Path(__file__).resolve()),
+        "--action-server-mode",
+        args.action_server_mode,
+        "--receipt",
+        str(args.receipt.expanduser().resolve()),
+    ]
+    if args.action_server_mode != "source":
+        command.extend(
+            [
+                "--native-package-root",
+                str(args.native_package_root.resolve()),
+                "--native-build-manifest",
+                str(args.native_build_manifest.resolve()),
+                "--native-tree-inventory",
+                str(args.native_tree_inventory.resolve()),
+                "--native-provenance",
+                str(args.native_provenance.resolve()),
+            ]
+        )
+        if args.native_assets_zip is not None:
+            command.extend(
+                ["--native-assets-zip", str(args.native_assets_zip.resolve())]
+            )
+    command.append("--_worker")
+    return command
+
+
 def _cli_platform_is_supported() -> bool:
     try:
         require_supported_platform()
@@ -1866,8 +2205,6 @@ def main(argv: list[str] | None = None) -> int:
             return 2
         return _supervisor_main()
     args = _parser().parse_args(argv)
-    if args.mode != "candidate-wheel":
-        raise AssertionError("unreachable unsupported mode")
     if not args._worker and args.receipt.expanduser().resolve().exists():
         print(
             "Dakota RCC acceptance failed: refusing to overwrite an existing "
@@ -1877,6 +2214,14 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     if not _cli_platform_is_supported():
         return 2
+    try:
+        _validate_native_argument_shape(args)
+    except Exception as exc:
+        print(
+            f"Dakota RCC acceptance failed: {type(exc).__name__}: {exc}",
+            file=sys.stderr,
+        )
+        return 1
     if not args._worker:
         try:
             source_env = dict(os.environ)
@@ -1894,15 +2239,7 @@ def main(argv: list[str] | None = None) -> int:
                 extra=extra,
             )
             completed = run_owned_process(
-                [
-                    sys.executable,
-                    str(Path(__file__).resolve()),
-                    "--mode",
-                    args.mode,
-                    "--receipt",
-                    str(args.receipt.expanduser().resolve()),
-                    "--_worker",
-                ],
+                _worker_command(args),
                 timeout_seconds=CLI_WATCHDOG_SECONDS,
                 env=worker_env,
             )
@@ -1932,7 +2269,17 @@ def main(argv: list[str] | None = None) -> int:
             sys.stderr.write(completed.stderr)
         return completed.returncode
     try:
-        result = _run(args.receipt)
+        # Native tree, tar, and ZIP measurements are potentially large. Keep
+        # them inside this worker, under the parent's owned-process watchdog,
+        # and charge them against the same total proof deadline.
+        deadline = Deadline.after(PROOF_TIMEOUT_SECONDS)
+        native_binding = _native_binding_from_args(args)
+        result = _run(
+            args.receipt,
+            action_server_mode=args.action_server_mode,
+            native_binding=native_binding,
+            deadline=deadline,
+        )
     except Exception as exc:
         print(
             f"Dakota RCC acceptance failed: {type(exc).__name__}: {exc}",

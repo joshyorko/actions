@@ -1226,6 +1226,11 @@ address the first failure before treating lint as green. The configured
 `devutils` gates in `developer/toolkit.py` run `pytest tests` and `ruff check
 src tests`.
 
+Runtime's `inv lint` also checks test-file formatting with
+`ruff format --check --config ../devutils/ruff.toml`. When validating a focused
+Runtime test change, use that configuration as well as `ruff check`; passing
+the tests or the lint rules alone does not establish formatter acceptance.
+
 For `devutils`, regenerate from that package directory with
 `uvx --from poetry==2.1.1 poetry lock --no-interaction`, then run
 `uvx --from poetry==2.1.1 poetry check --lock`. Run the lock command a second
@@ -2116,6 +2121,22 @@ acceptance or an offline freshness guarantee. Fake adapter contracts verify
 command construction and fail-closed path checks; they do not prove that actual RCC
 accepted a real detached carrier. Keep that distinction in test receipts.
 
+Freeze an RCC gate against the actual composed source, not independently
+reviewed tips. The strict publication-pair API and detached trust profile both
+change publication: keep one shared RCC publish payload and thread the selected
+trust profile through both artifact-only and details interfaces, preserving
+exact provider arguments and the same-response specification/artifact pair.
+Reconcile inspection cache details with profile and exact HOME/RCC context
+identity before using the private inspector. A native selector validates
+packaging identity; it does not propagate a trust profile or prove offline
+lifecycle acceptance. Controlled Core 1.0.2 metadata measurements remain
+scoped to that fixture. Rebuild and bind new profile-bearing frozen/Go artifacts
+before claiming those modes, and keep each phase's provider request census and
+remaining gates explicit.
+The Action Server package `invoke lint` commands cover `src` and `tests`, not
+`scripts/`; changes to verifier scripts need explicit checks with the pinned
+Ruff and Isort tools using the package configuration.
+
 The current-candidate rollback/provider acceptance is a separate, explicitly
 opt-in hosted Linux workflow. It checks out its workflow-control revision and
 the Runtime candidate as separate repositories, verifies the candidate's full
@@ -2722,6 +2743,16 @@ Runtime/candidate-wheel receipts still show a failed RCC wrapper. These harness
 checks do not establish production pool retirement, lease-release ordering,
 frozen Runtime acceptance or remote-provider acceptance.
 
+The Dakota RCC candidate-wheel verifier derives Core and HTTP Helper versions
+from each checked-out package using the pinned Poetry executable, then checks
+that each built wheel's filename and `METADATA` agree with that source version.
+The same candidate identities flow into the synthetic Action expectation and
+success or failure receipt. This identifies the local candidate under test; it
+does not establish a registry publication or provider-backed Runtime result.
+Keep historical receipts bound to their recorded source revision: a prior
+Core 1.0.2 candidate result is not a current-source result when the checked-out
+Core metadata declares 1.0.3.
+
 With RCC v18.19.2 `cache serve`, two isolated consumer homes acquired the
 recorded digest through the same provider and each returned the exact digest
 with `verification.valid: true`. After the provider's digest-addressed
@@ -3080,6 +3111,34 @@ frozen evidence for that candidate only. Later production changes, including the
 catalog-ownership migration, require a newly built artifact and acceptance run;
 the older receipt does not establish their native behavior, Go-wrapper execution,
 or full release acceptance.
+
+The RCC acceptance verifier defaults to source Runtime mode and intentionally
+filters `SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE` from inherited
+process environments. Frozen and Go-wrapper modes require explicit package,
+build manifest, full-tree inventory, and provenance archive inputs; validate the
+selected executable and the complete frozen package against those records before
+forwarding the selector to the worker. Keep the candidate checkout/tree and
+metadata-derived Core/Helper wheel hashes and versions separate from native build
+source/tree and run/attempt identities. A manifest's Git HEAD is not a clean
+source attestation. The synthetic Action reports its managed worker prefix and
+both installed distribution roots so the measured wheel versions are tied to the
+actual worker environment. Go-wrapper proof also requires the matching measured
+assets ZIP, a fresh task-owned `HOME`, and a post-run comparison of the extracted
+file inventory and digest against the manifest's embedded-file identity; record
+the extracted filesystem tree digest separately because ZIP extraction does not
+preserve the frozen tree's symlink and directory metadata. Receipts keep
+`runtime_mode=candidate-wheel` and identify the separately selected
+`action_server_mode`; source-mode success does not establish native execution.
+The offline positive cells retain their existing meanings for every mode.
+The verifier is also imported by path from existing browser-origin and source-
+staging harnesses, so helper loading must use exact sibling files without
+adding the scripts directory to global `sys.path`. Native tree, provenance TAR,
+and ZIP measurement belongs inside the existing owned worker watchdog and the
+same proof deadline. Bound entry counts and declared/observed bytes before
+building inventories, stream ZIP member hashes in fixed-size chunks, and
+require the resolved frozen companion tree to remain inside the selected
+package root. These checks bound validation work and prevent an external
+symlinked companion from being accepted as part of a selected bundle.
 
 When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
 `VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run
