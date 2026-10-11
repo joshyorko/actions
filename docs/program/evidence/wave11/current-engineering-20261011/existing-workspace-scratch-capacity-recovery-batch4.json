@@ -1,0 +1,48 @@
+{
+  "status": "SCOPED_COMPLETED_SCRATCH_RECOVERY_VERIFIED",
+  "algorithm_scope": "Same previously independently reviewed inventory/archive/member/hash/mode/uid/gid/symlink/hardlink-resolution before exact expanded namespace removal; no inferred ACL/xattr/inode/rootmetadata/precise-TAR-mtime or retroactive complete handle census",
+  "private_inventory_binding": {
+    "path": "/tmp/actions-completed-scratch-recovery-batch4/private-complete-inventory-and-recovery.json",
+    "bytes": 18738722,
+    "sha256": "8b5d93397160d15aaef1b7c5e7bcfe057e31d16961c641732f7627da7a613cb2"
+  },
+  "recovery_script_binding": {
+    "path": "/tmp/actions-capacity-recovery-batch4.py",
+    "bytes": 5276,
+    "sha256": "9a1410a32271ff883baa14fbb5a11ebfd1809cb42898b08422da14b66cb26f52"
+  },
+  "archives": [
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/5a38330844afa346",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch4/5a38330844afa346.tar.gz",
+      "archive_bytes": 248973111,
+      "archive_sha256": "d11655773c3bcc750e0eb07933c7b2043a8b96a495a491349c31ff66fba0d556",
+      "verified_members": 15001,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/979f13da48369c2f",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch4/979f13da48369c2f.tar.gz",
+      "archive_bytes": 249413952,
+      "archive_sha256": "958083b3e21e6475e20eb1ecf857880e1fd8b158ac367a959fa18105fe08110b",
+      "verified_members": 15073,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/e8ce8c2a780962f8",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch4/e8ce8c2a780962f8.tar.gz",
+      "archive_bytes": 250478741,
+      "archive_sha256": "c1b869a58fa7099c0ffb028c9ca9b52db2d4dd7203de6b80f8816cee088d90e6",
+      "verified_members": 14926,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    }
+  ],
+  "recorded_members": 45000,
+  "workspace_free_bytes_after": 3523178496,
+  "preserved": "All source trees, commits, receipts, private compiled natives/consumers/cache/venvs, earlier10archives+3indices and original failed563d namespace; scoped recovery does not turn original failed gates into passes",
+  "Documentation_improvement": "Existing independently accepted7d070 canonical paragraph remains correct; same algorithm repeated on3exactcompletednames only. New independent review requested.",
+  "upstream_disposition": "none"
+}

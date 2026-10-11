@@ -1,0 +1,22 @@
+{
+  "head": "e281cbc05dcf2e42d9b37d8879ad986803e6a5e7",
+  "tree": "b88be8a0811baab05d4b61c163fb5603935870a2",
+  "ordered_parents": [
+    "c38e22c74290dca391617e9693fcf5b2968956df",
+    "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+  ],
+  "common_base": "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+  "only_conflict": "docs/skills/repository-operations.md",
+  "resolution": "retain both exact conflict blocks separated by blank line; no other novel edits",
+  "all_other_parent_union_leaves_exact": true,
+  "leaf_counts": {
+    "left": 1409,
+    "right": 1409,
+    "merged": 1409
+  },
+  "working_tree_clean": true,
+  "source_production_and_DB_guard": "byte exact left; target imports native UI harness/docs only",
+  "actual_execution": "NONE",
+  "full_source_gates": "pending implementation and configured gates",
+  "upstream": "none"
+}

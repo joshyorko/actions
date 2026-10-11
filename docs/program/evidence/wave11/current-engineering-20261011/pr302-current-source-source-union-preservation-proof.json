@@ -1,0 +1,41 @@
+{
+  "source_parent": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+  "actual_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "common_base": "fbde0d3a248c47c9964851355f96575c89a87329",
+  "resolved_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+  "ordered_merge_parents": [
+    "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+    "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+  ],
+  "leaf_counts": {
+    "left": 1406,
+    "right": 1409,
+    "union": 1409
+  },
+  "deleted_parent_leaves": [],
+  "noncombined_leaf_failures": [],
+  "combined_paths": [
+    "docs/skills/repository-operations.md",
+    ".github/workflows/_gen_workflows.py"
+  ],
+  "generator_top_level_AST_exact_parent_union": true,
+  "generator_block_count": 32,
+  "canonical_parent_changed_blocks_retained": {
+    "ba04dff7c932b963f2d7a60529fbc3c325bbee1d": 5,
+    "774438b130afb2ead9bbc1c1b76cb6f91e72150a": 4
+  },
+  "novel_source_delta": "canonical nine-sample/fullproducer/testedtuple lesson only",
+  "all_nine_RCC_source_inputs_equal_historical_S43a": true,
+  "three_actual_case_selectors_raw_summary_helper_profile_publication_contracts_unchanged": true,
+  "producer268_delta": [
+    {
+      "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "native_sha256": "65abc1efe7879ffc325f84841b9630f05b8a5b11cdc3a32728daf7df7091edcb",
+      "source_union_sha256": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a"
+    }
+  ],
+  "selected5_equal_native": true,
+  "native92498_reuse": "UNQUALIFIED_CHANGED_ADAPTER_NO_EXCLUSIONS",
+  "control_candidate_pin": "historicalS43a unchanged pendingSprimeindependentreview",
+  "actual_run": "NONE"
+}

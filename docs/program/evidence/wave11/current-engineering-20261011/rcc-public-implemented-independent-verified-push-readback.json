@@ -1,0 +1,32 @@
+{
+  "schema": "actions-public-RCC-independent-existing-branch-push-readback/v1",
+  "observed_utc": "2026-10-11 06:39:30 UTC",
+  "verdict": "CONFIRMED_PUBLIC_EXISTING_BRANCH_CHECKPOINT_ONLY",
+  "branch": "mk3/wave9-rcc-public-source-union-20261010",
+  "remote_head": "639b591a19d80688afcfabf62d6f4bff8b8a0d69",
+  "remote_tree": "c540632f4615aeb51803fc1fc39177f20f6234d8",
+  "ordered_parents": [
+    "99e64a1c926f52f42698c4a5bc9f39d946827654"
+  ],
+  "associated_PRs": [],
+  "root_readback": {
+    "path": "/workspace/engineering/rcc-public-parent-deadline-verified-push-readback.json",
+    "sha256": "1acf1cf147f4e4c21e9980ab25bb5c3e74bce05801067f766b1f8bdf022666bb"
+  },
+  "independent_source_GO": {
+    "path": "/workspace/engineering/rcc-public-parent-deadline-source/independent-frozen-source-review.json",
+    "sha256": "259c2b0c9a586cbae04e48092555e29ddf2434de4e7e56b14104e07180a154d8"
+  },
+  "prior_remote_head": "44afd960ad01f83eeef7773b334ccde3683c022d",
+  "normal_push_boundary": "Root recorded normal push; independent descendant/source/history and exact remote ref/tree matches verified. No PR creation or engineering integration.",
+  "scope": "Public source checkpoint only. Worker/parent guard source-qualified; no private01f/frozen-v6 reconstruction, provider/metadata/profile-bearing native/browser execution, whole134/135 or release acceptance.",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md exact23line parent-deadline lesson already reviewed and pushed with639",
+    "Durable learning captured": "Worker receipt remains provisional until parent success; exact backupbytes/hash/status and fixed timeout/persistence states remain distinct from actual provider/native qualification.",
+    "Evidence": "Independent source259c, root push1acf, authenticated branch+commit tree/parents and empty associatedPRs.",
+    "Stale or ambiguous guidance removed": "Public branch push treated as private source recovery, actual execution, PR creation/integration or overall acceptance.",
+    "Remaining uncertainty": "Private source/spec/frozen-v6 and full29eb runner unavailable; current269 producer inventory not original92498-qualified; actual provider/metadata/native/browser/full134/135/release gates held."
+  },
+  "documentation_delta_disposition": "ACCEPT existing exactguard lesson; no duplicate cosmetic delta.",
+  "upstream_disposition": "none"
+}

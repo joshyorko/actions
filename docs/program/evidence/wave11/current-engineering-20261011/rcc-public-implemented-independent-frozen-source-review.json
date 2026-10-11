@@ -1,0 +1,139 @@
+{
+  "schema": "actions-public-rcc-independent-frozen-checkpoint-review/v1",
+  "verdict": "GO_NORMAL_EXISTING_BRANCH_CHECKPOINT_PUSH_ONLY",
+  "head": "639b591a19d80688afcfabf62d6f4bff8b8a0d69",
+  "tree": "c540632f4615aeb51803fc1fc39177f20f6234d8",
+  "branch": "mk3/wave9-rcc-public-source-union-20261010",
+  "root_frozen_receipt": {
+    "path": "/workspace/engineering/rcc-public-parent-deadline-source/frozen-source-receipt.json",
+    "sha256": "7ef02aa10098e57baac33befd1642182ed90e0b40707ee7bfd768af944b40739"
+  },
+  "verified_nested_binding_count": 31,
+  "clean": true,
+  "original_head_ancestor": true,
+  "remote_readback": {
+    "observed_utc": "2026-10-11 06:29:56 UTC",
+    "existing_branch_head": "44afd960ad01f83eeef7773b334ccde3683c022d",
+    "associated_PRs": []
+  },
+  "ordinary_unions": [
+    {
+      "head": "5ce38be8e4ab735d33784eef3ed4cd88abb1741a",
+      "tree": "6136b724cb150f189e43f639b93cca188227bec7",
+      "ordered_parents": [
+        "44afd960ad01f83eeef7773b334ccde3683c022d",
+        "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+      ],
+      "actual_leaves": 1412,
+      "parent_paths_preserved": true,
+      "combined_parent_paths": [
+        "docs/skills/repository-operations.md"
+      ],
+      "ordinary_merge_tree_implementation_exact": true,
+      "guide_resolution_vs_computed_tree": [
+        "docs/skills/repository-operations.md"
+      ],
+      "automatic_merge_tree_exit": 1
+    },
+    {
+      "head": "99e64a1c926f52f42698c4a5bc9f39d946827654",
+      "tree": "e850c50ad35604d1eaf706c9ef4d3f1eafa4b950",
+      "ordered_parents": [
+        "27e5939be0d6932b06bae233a7758d1bbcc9bf1a",
+        "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+      ],
+      "actual_leaves": 1412,
+      "parent_paths_preserved": true,
+      "combined_parent_paths": [
+        "docs/skills/repository-operations.md"
+      ],
+      "ordinary_merge_tree_implementation_exact": true,
+      "guide_resolution_vs_computed_tree": [],
+      "automatic_merge_tree_exit": 0
+    }
+  ],
+  "current_leaves": 1412,
+  "original11_production_profile_selector_bodies_retained_except3owned_paths": true,
+  "verifier_original_AST_exact_except2newreceipt_helpers_and1parentTimeout_handler": true,
+  "original_acceptance_test_function_AST_preserved_count": 32,
+  "new_test_functions": [
+    "_worker_bytes",
+    "parent_receipt_control",
+    "test_parent_deadline_annotation_collision_preserves_unknown_worker_field",
+    "test_parent_deadline_demotes_overall_receipt_preserving_worker_measurements",
+    "test_parent_deadline_never_fabricates_missing_or_malformed_worker_receipt",
+    "test_parent_deadline_persistence_failure_preserves_primary_and_owned_files",
+    "test_parent_nondeadline_completion_keeps_original_worker_receipt"
+  ],
+  "whole_github_exact774": true,
+  "full_source_gate_subject": {
+    "pass": 1206,
+    "skip": 13,
+    "warnings": 16,
+    "seconds": 132.38,
+    "workers": 2,
+    "executed_head": "99e64a1c926f52f42698c4a5bc9f39d946827654",
+    "executed_tree": "e850c50ad35604d1eaf706c9ef4d3f1eafa4b950",
+    "subsequent_change": "Isort-only; unchanged imports and every non-import AST. No broad rerun claimed for639b; exact finalbytes covered by19controls and static."
+  },
+  "final_style_equivalence": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": "SAME_NONIMPORT_AST_AND_IMPORT_SET",
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": "SAME_NONIMPORT_AST_AND_IMPORT_SET"
+  },
+  "evidence_summaries": {
+    "red-isolated.log": [
+      "15 failed, 3 passed, 38 deselected in 0.74s"
+    ],
+    "collision-red.log": [
+      "1 failed, 56 deselected in 0.27s"
+    ],
+    "green-final.log": [
+      "19 passed, 38 deselected in 0.57s"
+    ],
+    "scoped-current-final.log": [
+      "166 passed, 2 deselected, 5 warnings in 10.08s"
+    ],
+    "full-source-current.log": [
+      "========== 1206 passed, 13 skipped, 16 warnings in 132.38s (0:02:12) ==========="
+    ],
+    "toolkit.log": [
+      "============================= 69 passed in 10.72s =============================="
+    ],
+    "static-and-controls-final.log": [
+      "302 files already formatted",
+      "Success: no issues found in 338 source files",
+      "19 passed, 38 deselected in 0.60s"
+    ]
+  },
+  "controls_review": "19 source-only cases: PASS/FAILworker measurements and exactbackupbytes/hash/status, collisionfailclosed,7absentmalformedshapes,6persistencefailures includingatomicreplace/fsync,3nontimeout statuses. Original2465timer/workerargv/owner/native/provider/metadata paths preserved. FixedprimaryTimeout/errorstate output excludes arbitrarycommand/exception bodies; existing receipt refusal remains before supervisor creation. Backup/aggregate use exclusive same-dir private0600 files and atomicallyreplace only aggregate; unrelated files preserved.",
+  "native_producer_inventory": {
+    "count": 269,
+    "matches92498": 264,
+    "original_public_changed_inputs": [
+      "action_server/src/actions/server/_action_package_handler.py",
+      "action_server/src/actions/server/_actions_import.py",
+      "action_server/src/actions/server/_actions_process_pool.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py"
+    ],
+    "original_public_added_input": [
+      "action_server/src/actions/server/rcc_trust_profile.py"
+    ],
+    "qualification": "NOT_QUALIFIED_COMPLETE_PRODUCER_INVENTORY_DIFFERS",
+    "five_selectors_exact": true
+  },
+  "scope": "Checkpoint push only; no PR creation, integration, private reconstruction, installer, actual retry/provider/metadata/profile-bearing native/browser gate or full134/135/release admission. Fullfunctional1206+13 belongs99e; final639 controlled19/static338 plus verifiedstyleequivalence, not a broad final-head rerun.",
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md",
+    "Exact_delta": {
+      "path": "/workspace/engineering/rcc-public-parent-deadline-source/canonical-actual-delta.patch",
+      "bytes": 2543,
+      "sha256": "77bcf8d85ce55bff7f3ed34bfe51f438f4dea9e4011b9c556cdda2190b943fa7"
+    },
+    "Durable_learning_captured": "Worker PASS is provisional until the parent succeeds. Timeout demotes aggregate acceptance while preserving exact original worker bytes/hash/status and measured cells; absent/malformed/persistence-failed/colliding evidence is not fabricated. Parent timeout does not prove Runtime cleanup failure.",
+    "Evidence": "Pinned44afd main AST control; isolated15FAIL/3PASS RED\u219218PASS; annotation-collision1FAIL RED\u219219PASS; current scoped166 and full1206 plus originalowner AST retention and atomic-write/secret-nonleak controls",
+    "Stale_or_ambiguous_guidance_removed": "Anchored prior generic timeout behavior to44afd; replaced future guard wording with implemented source contract. Retained worker PASS is not complete watchdog acceptance; parent deadline cannot overwrite unknown worker fields or redefine cleanup.",
+    "Remaining_uncertainty": "No new actual provider/metadata/profile-bearing native acceptance. Private01f/frozen-v6 source/spec and full29eb runner remain unavailable; full134/135/release HOLD. Current269 producer inventory differs from92498."
+  },
+  "documentation_delta_disposition": "ACCEPT exact23line guard lesson SHA77bcf8d85ce55bff7f3ed34bfe51f438f4dea9e4011b9c556cdda2190b943fa7; separates worker measurement/provisionalstatus from parentfailure, preserves backupsha/status, fixed unavailable/collision states and private/native limits. No further correctness delta required.",
+  "upstream_disposition": "none"
+}

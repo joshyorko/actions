@@ -1,0 +1,16 @@
+{
+  "records": {
+    "Sprime": {
+      "returncode": 1,
+      "source_sha256": "16346e1cf53b36c93128297c88da810867549ac42f25393005cf9b227f6aa5d5",
+      "diff_sha256": "47a7db25553fe0f69efbb7937d68570045274f38eddf82e6078f80fe81ac27b7"
+    },
+    "Cprime": {
+      "returncode": 1,
+      "source_sha256": "76fcf5b9dadb193aa0a998e0daaf4e09d5b638cac695424d017290ce54257fa1",
+      "diff_sha256": "47a7db25553fe0f69efbb7937d68570045274f38eddf82e6078f80fe81ac27b7"
+    }
+  },
+  "same_parent_format_diff": true,
+  "no_new_control_format_failure": true
+}

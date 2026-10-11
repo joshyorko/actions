@@ -1,0 +1,55 @@
+{
+  "schema": "actions-existing-workspace-lossless-completed-scratch-recovery/v3",
+  "status": "TWO_EXACT_COMPLETED_SCRATCH_NAMESPACES_ARCHIVED_VERIFIED_EXPANDED_REMOVED",
+  "algorithm": {
+    "path": "/tmp/actions-capacity-recovery-batch3.py",
+    "bytes": 5256,
+    "sha256": "2843727e9f9d7a48f39e1a6a64dc9ccbb7a0c38b22951b401d4781fcb0bc5b50"
+  },
+  "private_inventory_binding": {
+    "path": "/tmp/actions-completed-scratch-recovery-batch3/private-complete-inventory-and-recovery.json",
+    "bytes": 13551365,
+    "sha256": "7976469c878721a9a8e27e42962ae9899628aad21b3463174f2aa9ef08cc7e2b"
+  },
+  "prior_safe_summaries": [
+    {
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery.json",
+      "bytes": 3794,
+      "sha256": "bc18bca235d00e9d7ca0f618653ba1c004f6c27afbbf535894cf6d4977cc3c71"
+    },
+    {
+      "path": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch2.json",
+      "bytes": 2403,
+      "sha256": "30bcb73c25914e33eb0705cdb5367cc1a07cfba5f0890eaf8d365876186f3537"
+    }
+  ],
+  "archives": [
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/dd09121ba364f685",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch3/dd09121ba364f685.tar.gz",
+      "archive_bytes": 248921681,
+      "archive_sha256": "28e391747a904f4162e01a0b95ea67ea43bc4db8159f21345af65889ab4680b5",
+      "verified_members": 14805,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    },
+    {
+      "original_namespace": "/workspace/actions-cloud/robocorp/temp/bb55ced8211c49f0",
+      "archive": "/tmp/actions-completed-scratch-recovery-batch3/bb55ced8211c49f0.tar.gz",
+      "archive_bytes": 249844712,
+      "archive_sha256": "3ad07338c1e4e399b7e12ff422535a1530d9890ad3879222a0529a985d1c9d81",
+      "verified_members": 18370,
+      "archive_verified_before_original_removal": true,
+      "expanded_removed": true
+    }
+  ],
+  "workspace_free_bytes": 2365640704,
+  "tmp_free_bytes": 6388846592,
+  "scope": "Onlydd09121ba364f685/bb55ced8211c49f0 completed marked scratch, archive member bytes/mode/uidgid/symlink/internalhardlink resolveddata verified againstunchangedpre-removal inventory beforeexpandedremove. Pre/postno-livecwd/fd guard historical. No current302/RCC/other source, receipts, native, consumer, venvs,cache or failed563d removal. No infrastructure provisioned. Allprivateindices/archives stayoutsideGit.",
+  "limitations": [
+    "No originalinode-equivalence/rootmetadata/ACL/xattrs/preciseTARmtime roundtrip claim",
+    "Recordedinventoryscope only; expanded originals intentionallyabsent",
+    "Privatefirstsixandbatch2originals untouched bythisalgorithm; independentreadbackpending",
+    "FailedENOSPCchecks unchanged; freshsource gates separatelyqualified"
+  ]
+}

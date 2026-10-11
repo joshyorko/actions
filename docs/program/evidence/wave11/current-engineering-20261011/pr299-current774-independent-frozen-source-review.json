@@ -1,0 +1,115 @@
+{
+  "schema": "actions-pr299-independent-actual774-source-refresh-review/v1",
+  "verdict": "GO_SOURCE_REFRESH_FOR_NORMAL_EXISTING_BRANCH_PUSH_ONLY",
+  "head": "5db93e2251cf039ef81780730098da1b255d8d2e",
+  "tree": "bf3e9dffb8e4d07cf1a06ba376c4e3a64e9bfdf0",
+  "branch": "feat/shared-run-output-20261010",
+  "ordinary_merge": {
+    "head": "11c9ab3aa3b5b953486794878408bbd7a7e5ca78",
+    "tree": "758f098dd846437b0d69d246d112fbdb89caf363",
+    "ordered_parents": [
+      "2ad0fd6a899d26aa92d719390f639a76b89fb6f3",
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+    ]
+  },
+  "matches_previously_reviewed_a96_prospective_tree": true,
+  "clean": true,
+  "root_frozen_receipt": {
+    "path": "/workspace/engineering/pr299-actual774-refresh/frozen-source-receipt.json",
+    "sha256": "95778c8069e989be172b0b43226333c55d4ec7d57110c2c5bb257a17ff546295"
+  },
+  "verified_nested_hash_bindings": 34,
+  "leaf_count": 1419,
+  "no_parent_paths_deleted": true,
+  "every_nondoc_mode_blob_equals_a_parent": true,
+  "doc_only_child": true,
+  "all_original23_source_test_mode_blobs_exact9cb_full80ba_2ad": true,
+  "full_80ba_comparison_commit": "80ba4c3adce0d0f5fd8a7040d271ab19433e4042",
+  "whole_github_exact_actual774": true,
+  "all5selectors_exact_original_source_target92498": true,
+  "native_inventory": {
+    "count": 274,
+    "original_92498_matches": 262,
+    "six_changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "six_added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "all274_exact_original299": true,
+    "qualification": "NOT_QUALIFIED_COMPLETE_PRODUCER_INVENTORY_DIFFERS"
+  },
+  "configured_gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "REUSED exact24 inputs plus five own prepared package environments; no installer",
+    "Toolkit": 69,
+    "scoped_shared_run_output": {
+      "pass": 189,
+      "integration_deselect": 12,
+      "skip": 1
+    },
+    "full_configured_Runtime_source": {
+      "pass": 1203,
+      "skip": 13,
+      "workers": 2
+    },
+    "full_configured_lint": "Ruff check/format/Isort PASS",
+    "typecheck_files": 347,
+    "all_workflow_and_dependabot_roundtrip": "PASS"
+  },
+  "source_gate_subject": {
+    "head": "11c9ab3aa3b5b953486794878408bbd7a7e5ca78",
+    "tree": "758f098dd846437b0d69d246d112fbdb89caf363",
+    "final_child_scope": "Documentation only; all production/test/configured gate source bytes unchanged; no full-suite repeat after doc clarification"
+  },
+  "evidence_summaries": {
+    "full-source": [
+      "========== 1203 passed, 13 skipped, 15 warnings in 138.09s (0:02:18) ==========="
+    ],
+    "scoped": [
+      "189 passed, 1 skipped, 12 deselected in 19.95s"
+    ],
+    "static": [
+      "311 files already formatted",
+      "Success: no issues found in 347 source files"
+    ],
+    "toolkit": [
+      "============================= 69 passed in 10.76s =============================="
+    ]
+  },
+  "origin_probe_sequencing": {
+    "failed_probe_preserved": true,
+    "failure": "devutils namespace __file__ None caused proof scaffold TypeError; not demonstrated stale environment",
+    "Runtime_Core_Helper_own_prefix_source_logged_before_failed_namespace_probe": true,
+    "full_gate_started_after_shell_continued_past_probe_failure": true,
+    "before_full_complete_origin_JSON": "NOT_EMITTED",
+    "named_v2_successor": "Five own package prefixes and concrete source file/venv config hashes verified; devutils.invoke_utils used",
+    "during_full_receipt_timing": "After full source started, not before-gate preflight",
+    "no_gate_or_environment_relabeling": true
+  },
+  "scope": "Source push only. Full1203+13 belongs11c9 union; final5db docs-only child has identical source/test/configured-gate bytes, no broad replay claimed. Fresh hosted CI/current native/provider/browser/backend/authenticated transport/full134 remain open. Original299/311 Windows FIRST failures and cleanup gaps remain original tuples. PR300 waits actual299 admission; no PR300 work, push, integration or actual test by reviewer.",
+  "documentation_improvement": {
+    "Canonical_file_changed": "docs/skills/repository-operations.md",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr299-actual774-refresh/canonical-own-origin-delta.patch",
+      "bytes": 1687,
+      "sha256": "8e755ffc198658d3d2311776ee2ae58cb238b7c28b83be2f133d8c35c5ace8d2"
+    },
+    "Durable_learning": "Prepared own-environment validation binds sys.prefix and concrete file-backed module origins inside each package Poetry process. Namespace package devutils has no __file__; devutils.invoke_utils supplies an actual source identity.",
+    "Evidence": "Original namespace probe fails with TypeError on devutils.__file__=None; named successor verifies own source and prefix for all five packages, including devutils.invoke_utils. Scoped189/full configured source/static gates and complete original23 blob retention.",
+    "Stale_or_ambiguous_guidance_removed": "Unqualified imported modules __file__ origin guidance does not account for namespace packages or outer-toolkit interpreters.",
+    "Remaining_uncertainty": "Current hosted/native/backend/transport acceptance and fullprivate134 remain open; historical native262/6+6 mismatch, Windows FIRSTreadiness cause and cleanup dimensions unknown; PR300 waits actual299 admission"
+  },
+  "documentation_delta_disposition": "ACCEPT exact own-origin/preflight sequencing lesson SHA8e755ffc198658d3d2311776ee2ae58cb238b7c28b83be2f133d8c35c5ace8d2; concrete namespace module, package Poetry own prefix/source, stop sequence or checked preflight, retained failed/named successor and honest after-start timing. No additional correctness delta required.",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,18 @@
+{
+  "status": "NORMAL_EXISTING_BRANCH_PUSH_VERIFIED",
+  "source_Sprime": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+  "control_Cprime": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+  "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+  "existing_remote_before": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+  "branch": "fix/rcc-published-artifact-details-20261010",
+  "authenticated_PR_head": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+  "named_Git_ref_after": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+  "source_review_sha256": "4c1374d437612c8b42c47fde9408e78f4a2ba6d310683e701fb05c25dc5a05f2",
+  "control_review_sha256": "6d2cda93076dea5f0eb79d1ebe62af5df8b0bc7291984ca15a688795e1d7ef4f",
+  "current_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "hosted_CI": "FRESH_EXACT_TUPLE_REQUIRED",
+  "old_actual_artifact": "HISTORICAL_ONLY",
+  "native_92498": "UNQUALIFIED_CHANGED_ADAPTER",
+  "no_new_actual_or_integration": true,
+  "upstream_disposition": "none"
+}

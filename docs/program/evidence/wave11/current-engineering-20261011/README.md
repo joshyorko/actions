@@ -221,7 +221,7 @@ infrastructure provisioning occurred. Upstream disposition: none.
 PR #305 fixture successor `1e9c462f` is now independently reviewed by `1fc31354`
 and normally pushed on its existing branch. Meaningful CRLF and incomplete-PID
 controls pass after the test-only fixes; full source has 1,197 passes and 12 skips.
-All production/probe/constants, 268+5 producer inputs, original native manifest,
+All production/probe/constants, the combined binding of 268 production inputs and five selected tests, original native manifest,
 helpers and browser remain unchanged. Fresh hosted Windows/macOS and actual
 forced-hang gates remain required. The V5 actual tuple stays bound to source3ec.
 
@@ -245,3 +245,56 @@ continues on its existing branch with a controlled ordinary774 refresh.
 PR #221 remains draft at774/a709. Authenticated complete closingIssuesReferences
 is empty with no pagination remainder. No issue closure, tag, release publication
 or replacement infrastructure occurred. Upstream disposition: none.
+
+The next source wave preserves all prior291 originals and adds independently
+reviewed engineering checkpoints. Public RCC639b591a/treec540 now implements
+its bounded parent-deadline guard on the existing branch, with independent259c
+source GO and2d46/d7c8 remote confirmations. Full1206PASS13SKIP belongs to99e64;
+final639 has unchanged non-import AST/import sets and passing configured static
+and19 controls. Original worker bytes/status/measured fields are retained before
+atomic failed aggregate publication; annotation collisions fail closed. Missing
+private source, actual metadata/provider/native/browser and release gates remain
+HOLD. No public RCC PR or integration was created.
+
+PR302 sourceS′d642/treefdf2 is ordinaryba04/actual774, source review4c137,
+full1169PASS13SKIP. SeparateC′a346/treea1c4 pinsS′, retains1406 other leaves,
+and passes meaningful old-pinRED1/54 thenGREEN55 plusToolkit96. Independent6d2c
+accepts normal existing-branch push, verifiedfe42. Extra generator formatting
+FAIL is inherited identically onS′/C′ and remains disclosed. Original actual
+artifact and old26SUCCESS are historical; fresh exacttuple CI/actual gates must
+qualify the new source/control candidate. Adapter changes leave92498 native
+unqualified.
+
+PR299 source5db93/treebf3e is independently reviewed0591 and normally pushed,
+verified4bd7. Ordinary11c9/tree758f is2ad0/actual774 and passes full1203/13;
+final guide-only child retains all other1418 leaves. Failed namespace-origin
+probe and named successor are retained with honest after-start timing. All23
+original source/test blobs and274 producers remain exact299;6changed+6added
+versus92498 leave that native unqualified. Fresh hosted and retained transport,
+backend/private gates remain required. PR300 waits for actual299 acceptance.
+
+PR308 ordinary4ca431/tree3726 is9025/actual774, with full1155PASS13SKIP and
+configured source gates. It preserves original verifier/tests and the combined binding
+of 268 production inputs and five selected tests; independent source reviewdb8780 now accepts normal existing-branch push.
+The verified current push retains old19greens as historical; fresh exacttuple
+hosted admission remains required. PR309 is the next ordinary refresh. The two bounded source writers
+now own309 refresh and306 Windows diagnostics. No new actual/native retry or
+replacement infrastructure was used.
+
+PR306's complete retained Windows log records6 FIRST-readiness failures,
+125PASS18SKIP1167deselect, and four deduplicated incomplete cleanup notes.
+Independentfd862 leaves RCC progress intervals/forwarding/actualcleanup unknown;
+observed CPU/I/O and host reader/sampler completion do not prove them. The
+already reviewed V2 design still fits all8 relevant source bytes and is now
+reactivated after ordinarye281/treeb88b,c38/actual774. Only observer tests and
+canonical guide change; readiness90/cleanup20 and the two-node allowlist remain
+fixed. This ongoing implementation is not yet frozen or accepted.
+
+Capacity batches3 and4 have independent8232/83d3 scoped archive verification.
+All13 retained private archives bind197859 recorded members and42 internal
+hardlinks. Source/receipts/compiled natives/consumers/cache/venvs and failed563d
+remain retained. Private indices/archive payloads stay outside Git; unrecorded
+metadata and historical-handle limits remain explicit. Original ENOSPC failures
+are not relabeled. Current101 source-wave lead preserves the original audited
+tail byte-for-byte including its final newline;221 remains draft at774/a709.
+No issue closure, release/tag/publication or whole-campaign acceptance occurred.

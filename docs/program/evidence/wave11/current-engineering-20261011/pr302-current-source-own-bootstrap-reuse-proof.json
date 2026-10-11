@@ -1,0 +1,66 @@
+{
+  "status": "REUSE_OWN_PREPARED_BOOTSTRAP_NO_INSTALL",
+  "prior_bootstrap": "/workspace/engineering/pr302-current-bootstrap.log",
+  "prior_bootstrap_sha256": "d3986696099fd4e6ab15279f8e219d4e683a07ccdb7483afdae1037f193f59c3",
+  "source_input_checkpoint": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+  "all19inputs_exact": {
+    "action_server/poetry.lock": "5d6acb65ba220211d1da020c78c51a5ea89465f2bbedc99aaf72319b862914e5",
+    "action_server/pyproject.toml": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f",
+    "action_server/tests/action_server_tests/test_create_conda_from_package_yaml/create_wheel/pyproject.toml": "4d581bfc7b6d64979c3aef6411198548a17713e0c8439c07d0cbb1a91fae3851",
+    "actions-http-helper/poetry.lock": "8e717ea54b91b17e638bb633026372fd415487a5e817768b450c0e473cd84d13",
+    "actions-http-helper/pyproject.toml": "1888af6e0e2ce2280080920338245122563f69ce677796a5dbddc4c6bb07d28d",
+    "actions/poetry.lock": "b90ab7b6e3dd3a68a3d23bfee456adf6d22446f845e1bd5e2a334ec573035f15",
+    "actions/pyproject.toml": "9de923a2bf29d73d486ebf67982e177c0ab41d8a35266f7dd1f2d75b1ec43ec3",
+    "actions/tests/actions_core_tests/test_core_log_integration/pyproject.toml": "f2119f900206f7a6bcbedd34b7cfb1c83bd996db13fdf81710fa509ed3cc72cf",
+    "build_common/poetry.lock": "5dfaebdb2e73b95e022e9064f4258fefb66a4a0a2a6c3d8829cd9d2838e07160",
+    "common/poetry.lock": "55fb76128d984be26ba5af1dc791a7b010298f70908d969b80fd7f268e84019e",
+    "developer/setup.yaml": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a",
+    "developer/setup_windows_amd64.yaml": "86a36910ad271616626e019e02e6c7b21fdb32eaa1e1717c2a654673504a8001",
+    "developer/toolkit.yaml": "0ed7beaa93dd0ba763d1618382a3de8ce307cc5cf613759d06081d735fcd7e68",
+    "devutils/poetry.lock": "22bf11dae2a1ed46de5024da774dde4fe778c206d720929fba9244819f3b0b6e",
+    "devutils/pyproject.toml": "7ffef37af3dc666ae72f1075ac1e06d8c61405225d678b326d767fe1952825e1",
+    "mcp/poetry.lock": "9b84391e939e90e56422e1b9373862fbc1827b667ebba87126a6330a74069543",
+    "templates/advanced/pyproject.toml": "ef1312a9eaf6323b143d9339defb3158ea19b67b22a7cce0ecf766ba6ed5223d",
+    "work-items/poetry.lock": "dcb776a04f9fb30fb93c6667cc42fe9733208e07ec23e7d54dff39650ae11bf4",
+    "work-items/pyproject.toml": "a09a91d33e5f91cdec649a96d72b91e4fc1e4ecf97d3654e9b243f0ac8ecc10e"
+  },
+  "all5ownenvs": [
+    {
+      "package": "actions",
+      "venv": "/workspace/engineering/pr302/actions/.venv",
+      "python_resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "configuration_sha256": "26aa4239ea658e7220212e0e63ac970925c39bbd40ead1a95fbb02f5fae32f42",
+      "configuration": "home = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin\nimplementation = CPython\nversion_info = 3.12.15.final.0\nversion = 3.12.15\nexecutable = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12\ncommand = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3 -m virtualenv /workspace/engineering/pr302/actions/.venv\nvirtualenv = 20.39.1\nprompt = \"actions-core-py3.12\"\ninclude-system-site-packages = false\nbase-prefix = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534\nbase-exec-prefix = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534\nbase-executable = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3\n"
+    },
+    {
+      "package": "actions-http-helper",
+      "venv": "/workspace/engineering/pr302/actions-http-helper/.venv",
+      "python_resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "configuration_sha256": "a5ac6a6d832eaf1b5237cb1138e3500cc3474717664eff1d8daaad108483ec08",
+      "configuration": "home = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin\nimplementation = CPython\nversion_info = 3.12.15.final.0\nversion = 3.12.15\nexecutable = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12\ncommand = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3 -m virtualenv /workspace/engineering/pr302/actions-http-helper/.venv\nvirtualenv = 20.39.1\nprompt = \"actions-http-helper-py3.12\"\ninclude-system-site-packages = false\nbase-prefix = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534\nbase-exec-prefix = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534\nbase-executable = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3\n"
+    },
+    {
+      "package": "devutils",
+      "venv": "/workspace/engineering/pr302/devutils/.venv",
+      "python_resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "configuration_sha256": "a1cd38c242c16dacfe9f1ba3fbac79662d2708449c6d5120206150900e41b5d0",
+      "configuration": "home = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin\nimplementation = CPython\nversion_info = 3.12.15.final.0\nversion = 3.12.15\nexecutable = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12\ncommand = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3 -m virtualenv /workspace/engineering/pr302/devutils/.venv\nvirtualenv = 20.39.1\nprompt = \"actions-local-devutils-py3.12\"\ninclude-system-site-packages = false\nbase-prefix = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534\nbase-exec-prefix = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534\nbase-executable = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3\n"
+    },
+    {
+      "package": "work-items",
+      "venv": "/workspace/engineering/pr302/work-items/.venv",
+      "python_resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "configuration_sha256": "d3cf6fcafb4e1473bf9e57fe12879b9f94952b53d2a3c70a7982380fdaec4cda",
+      "configuration": "home = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin\nimplementation = CPython\nversion_info = 3.12.15.final.0\nversion = 3.12.15\nexecutable = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12\ncommand = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3 -m virtualenv /workspace/engineering/pr302/work-items/.venv\nvirtualenv = 20.39.1\nprompt = \"actions-work-items-py3.12\"\ninclude-system-site-packages = false\nbase-prefix = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534\nbase-exec-prefix = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534\nbase-executable = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3\n"
+    },
+    {
+      "package": "action_server",
+      "venv": "/workspace/engineering/pr302/action_server/.venv",
+      "python_resolved": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12",
+      "configuration_sha256": "dfecf8157ebf48529517676ea8b33510e1fcd4f6f08e621f1b6e8d8f6d3f70de",
+      "configuration": "home = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin\nimplementation = CPython\nversion_info = 3.12.15.final.0\nversion = 3.12.15\nexecutable = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3.12\ncommand = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3 -m virtualenv /workspace/engineering/pr302/action_server/.venv\nvirtualenv = 20.39.1\nprompt = \"actions-runtime-py3.12\"\ninclude-system-site-packages = false\nbase-prefix = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534\nbase-exec-prefix = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534\nbase-executable = /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python3\n"
+    }
+  ],
+  "new_installs": false,
+  "no_manifest_lock_changes": true
+}

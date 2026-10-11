@@ -1453,5 +1453,285 @@
     "source": "/workspace/engineering/pr221-authenticated-closures-after310.json",
     "bytes": 366,
     "sha256": "3b819438b7c3ddf1c3bdcfcbe4a99af19dd31ce0c273ca5fb227024e7e553278"
+  },
+  "handoff291-independent-exact-staged-batch-review.json": {
+    "source": "/workspace/engineering/checkpoint-291-independent-review/independent-exact-staged-batch-review.json",
+    "bytes": 22182,
+    "sha256": "4d33ccf0cadfa0f47b9230e42b97baf7a9c3190aa41fee2f596c696ce8e8454a"
+  },
+  "handoff291-verified-manifest-source-bindings.json": {
+    "source": "/workspace/engineering/checkpoint-291-independent-review/verified-manifest-source-bindings.json",
+    "bytes": 102090,
+    "sha256": "462a3f4fdca2a8c38e30582feda27848e28e9a36485968e2e3572d695f34d519"
+  },
+  "handoff291-independent-committed-remote-readback.json": {
+    "source": "/workspace/engineering/checkpoint-291-independent-review/independent-committed-remote-readback.json",
+    "bytes": 7917,
+    "sha256": "e9d1f1aab3a7ccbf8020711b5c883b13624e6c95e7ef649d8e004083f9277618"
+  },
+  "rcc-public-implemented-frozen-source-receipt.json": {
+    "source": "/workspace/engineering/rcc-public-parent-deadline-source/frozen-source-receipt.json",
+    "bytes": 65465,
+    "sha256": "7ef02aa10098e57baac33befd1642182ed90e0b40707ee7bfd768af944b40739"
+  },
+  "rcc-public-implemented-independent-frozen-source-review.json": {
+    "source": "/workspace/engineering/rcc-public-parent-deadline-source/independent-frozen-source-review.json",
+    "bytes": 7544,
+    "sha256": "259c2b0c9a586cbae04e48092555e29ddf2434de4e7e56b14104e07180a154d8"
+  },
+  "rcc-public-implemented-source-union-proof.json": {
+    "source": "/workspace/engineering/rcc-public-parent-deadline-source/source-union-proof.json",
+    "bytes": 52387,
+    "sha256": "c69237cc30c9b92ef3467d7e5c1c5cc3070cf9702ee01a6aafd533afbfe1f987"
+  },
+  "rcc-public-implemented-post-full-format-AST-proof.json": {
+    "source": "/workspace/engineering/rcc-public-parent-deadline-source/post-full-format-AST-proof.json",
+    "bytes": 845,
+    "sha256": "39a7d78b5164a846b9fbf84793315340f053e4e950b27a4d1164c973278c655b"
+  },
+  "rcc-public-implemented-bootstrap-preflight.json": {
+    "source": "/workspace/engineering/rcc-public-parent-deadline-source/bootstrap-preflight.json",
+    "bytes": 3033,
+    "sha256": "ae7dd77932475264f3648d904743413c2706b5e93fad4449d013e62d8cf2f672"
+  },
+  "rcc-public-implemented-generator-roundtrip.json": {
+    "source": "/workspace/engineering/rcc-public-parent-deadline-source/generator-roundtrip.json",
+    "bytes": 10286,
+    "sha256": "20c8c062289bda9e34694e390c191f8d5da3114cc29e7acdcd7c2140fe6be44e"
+  },
+  "rcc-public-implemented-canonical-actual-delta.patch": {
+    "source": "/workspace/engineering/rcc-public-parent-deadline-source/canonical-actual-delta.patch",
+    "bytes": 2543,
+    "sha256": "77bcf8d85ce55bff7f3ed34bfe51f438f4dea9e4011b9c556cdda2190b943fa7"
+  },
+  "pr302-current-source-source-Sprime-frozen-checkpoint.json": {
+    "source": "/workspace/engineering/pr302-actual310-source-refresh/source-Sprime-frozen-checkpoint.json",
+    "bytes": 13101,
+    "sha256": "61a0d394e75fd605936acec528aac87a9f768025ee8e5e82db667628eb090c74"
+  },
+  "pr302-current-source-source-union-preservation-proof.json": {
+    "source": "/workspace/engineering/pr302-actual310-source-refresh/source-union-preservation-proof.json",
+    "bytes": 1638,
+    "sha256": "c2c55ebb7e26c2afa5495ac74de33a3b2581b05509ad6a1f3c8f0bcbac967368"
+  },
+  "pr302-current-source-own-bootstrap-reuse-complete-gateway-proof.json": {
+    "source": "/workspace/engineering/pr302-actual310-source-refresh/own-bootstrap-reuse-complete-gateway-proof.json",
+    "bytes": 14793,
+    "sha256": "0c375df64581c3439361ab7b62076e16d9e604d4d71a5cba1a62ec700c2e3666"
+  },
+  "pr302-current-source-own-bootstrap-reuse-proof.json": {
+    "source": "/workspace/engineering/pr302-actual310-source-refresh/own-bootstrap-reuse-proof.json",
+    "bytes": 8052,
+    "sha256": "87d27678599967c0f75508c8e583bc271191c790433428f3ada568d8e2909d6f"
+  },
+  "pr302-current-source-own-five-prefix-and-source-origins.json": {
+    "source": "/workspace/engineering/pr302-actual310-source-refresh/own-five-prefix-and-source-origins.json",
+    "bytes": 1556,
+    "sha256": "9e7e61e960e89fc7bed158b573d62b05be247cea35b39192d30cace234cc22db"
+  },
+  "pr302-current-source-canonical-current-source-merge-delta.patch": {
+    "source": "/workspace/engineering/pr302-actual310-source-refresh/canonical-current-source-merge-delta.patch",
+    "bytes": 10332,
+    "sha256": "5e982d887e4cc717073ad88d49eb1addfdc6893fd6d9fcf983f7d1b3921c7a91"
+  },
+  "pr302-current-source-independent-independent-Sprime-source-review-v2.json": {
+    "source": "/workspace/engineering/pr302-Sprime-independent-source-review/independent-Sprime-source-review-v2.json",
+    "bytes": 8349,
+    "sha256": "4c1374d437612c8b42c47fde9408e78f4a2ba6d310683e701fb05c25dc5a05f2"
+  },
+  "pr302-current-control-control-Cprime-frozen-checkpoint.json": {
+    "source": "/workspace/engineering/pr302-actual310-control-refresh/control-Cprime-frozen-checkpoint.json",
+    "bytes": 17740,
+    "sha256": "a96bb92e2d2bac6602ff5ff944c916bf2acbab68681d0c54c467af04e7eedf1e"
+  },
+  "pr302-current-control-control-only-patch-plan.json": {
+    "source": "/workspace/engineering/pr302-actual310-control-refresh/control-only-patch-plan.json",
+    "bytes": 2063,
+    "sha256": "707603dcb793ebe2b6ef13bb46fc090aebdd287b53232b31bf4dfccb7429c93b"
+  },
+  "pr302-current-control-control-only-source-and-output-proof.json": {
+    "source": "/workspace/engineering/pr302-actual310-control-refresh/control-only-source-and-output-proof.json",
+    "bytes": 2630,
+    "sha256": "d0457a77772fc0903cc5e27f159d8c339afebb727f229bc157f1da74a0500df4"
+  },
+  "pr302-current-control-inherited-generator-format-diagnostic.json": {
+    "source": "/workspace/engineering/pr302-actual310-control-refresh/inherited-generator-format-diagnostic.json",
+    "bytes": 548,
+    "sha256": "793f4901a85ba1e195a5cd50948254c4dc418fdffc6953b8b3bc68852a65ac20"
+  },
+  "pr302-current-control-exact-control-delta.patch": {
+    "source": "/workspace/engineering/pr302-actual310-control-refresh/exact-control-delta.patch",
+    "bytes": 3532,
+    "sha256": "2cc443430a68b7b831bcced4aba6a6586b852c7ddbb4d3bd0044de5b4c358aa4"
+  },
+  "pr302-current-control-independent-independent-Cprime-control-review.json": {
+    "source": "/workspace/engineering/pr302-Cprime-independent-control-review/independent-Cprime-control-review.json",
+    "bytes": 10208,
+    "sha256": "6d2cda93076dea5f0eb79d1ebe62af5df8b0bc7291984ca15a688795e1d7ef4f"
+  },
+  "pr299-current774-frozen-source-receipt.json": {
+    "source": "/workspace/engineering/pr299-actual774-refresh/frozen-source-receipt.json",
+    "bytes": 19159,
+    "sha256": "95778c8069e989be172b0b43226333c55d4ec7d57110c2c5bb257a17ff546295"
+  },
+  "pr299-current774-source-union-proof.json": {
+    "source": "/workspace/engineering/pr299-actual774-refresh/source-union-proof.json",
+    "bytes": 90664,
+    "sha256": "c94972c2c44db77ecc6ac3ddb0c6beb5c528f6ad9cd08039fd33a9b3804ced9b"
+  },
+  "pr299-current774-doc-child-preservation.json": {
+    "source": "/workspace/engineering/pr299-actual774-refresh/doc-child-preservation.json",
+    "bytes": 566,
+    "sha256": "f435d84b05be1fdf610c3b326420881db4f14aba96a12d8b9e9c08a792453c3f"
+  },
+  "pr299-current774-bootstrap-reuse.json": {
+    "source": "/workspace/engineering/pr299-actual774-refresh/bootstrap-reuse.json",
+    "bytes": 2734,
+    "sha256": "e4bd2d1144a002eeebbf5fdad0c72166a0fa2d41d1adeec41319a24351647ee4"
+  },
+  "pr299-current774-own-env-origin-proof.json": {
+    "source": "/workspace/engineering/pr299-actual774-refresh/own-env-origin-proof.json",
+    "bytes": 2450,
+    "sha256": "e6060274e56f2a9af3d51b5cb509c4c21b35a32b39bed4a133f485acff9541f0"
+  },
+  "pr299-current774-generator-roundtrip.json": {
+    "source": "/workspace/engineering/pr299-actual774-refresh/generator-roundtrip.json",
+    "bytes": 10286,
+    "sha256": "20c8c062289bda9e34694e390c191f8d5da3114cc29e7acdcd7c2140fe6be44e"
+  },
+  "pr299-current774-canonical-imported-delta.patch": {
+    "source": "/workspace/engineering/pr299-actual774-refresh/canonical-imported-delta.patch",
+    "bytes": 13215,
+    "sha256": "28b32169a5e33ee6b048c39c3bb6b1466cbd7159ee8ab34b5466a63fdf6c679e"
+  },
+  "pr299-current774-canonical-own-origin-delta.patch": {
+    "source": "/workspace/engineering/pr299-actual774-refresh/canonical-own-origin-delta.patch",
+    "bytes": 1687,
+    "sha256": "8e755ffc198658d3d2311776ee2ae58cb238b7c28b83be2f133d8c35c5ace8d2"
+  },
+  "pr306-current-terminal-authenticated-tested-source.json": {
+    "source": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/authenticated-tested-source.json",
+    "bytes": 342,
+    "sha256": "7354eb2406e5e1a7afbd5de0fa1058f593a79e453ce78870975a1d2ec6b0e09d"
+  },
+  "pr306-current-terminal-safe-terminal-failure-and-v2-activation-review.json": {
+    "source": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/safe-terminal-failure-and-v2-activation-review.json",
+    "bytes": 27556,
+    "sha256": "fd8621daa58c6f0d570b293fbb49d7778a875c337f0eb18f4195fcf3c0c068dc"
+  },
+  "pr306-current-terminal-canonical-terminal-census-and-visibility-proposed.patch": {
+    "source": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/canonical-terminal-census-and-visibility-proposed.patch",
+    "bytes": 1341,
+    "sha256": "4d08c67271a23910119842376e3a7f568cb483b4cf6237e6774ac4a21c2ccd94"
+  },
+  "pr306-current-v2-ordinary-merge-frozen-checkpoint.json": {
+    "source": "/workspace/engineering/pr306-windows-v2-source/ordinary-merge-frozen-checkpoint.json",
+    "bytes": 831,
+    "sha256": "8943a8b057d18f8447c7aaa563a013efbe0b0638d6a5ba110806f797f84be856"
+  },
+  "capacity-batch3-independent-independent-batch3-archive-preservation-review-v2.json": {
+    "source": "/workspace/engineering/capacity-recovery-batch3-independent-review/independent-batch3-archive-preservation-review-v2.json",
+    "bytes": 8915,
+    "sha256": "82328cb7bc68c77b7e12392e1ad01e1b58cd48a536e8acbb75f0a2cfb1b85219"
+  },
+  "existing-workspace-scratch-capacity-recovery-batch3.json": {
+    "source": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch3.json",
+    "bytes": 2804,
+    "sha256": "3328b24d3ca8bcdc8998f44f5fe7463a9fadc14a4051b5172ea56312abb0d880"
+  },
+  "existing-workspace-scratch-capacity-recovery-batch4.json": {
+    "source": "/workspace/engineering/existing-workspace-scratch-capacity-recovery-batch4.json",
+    "bytes": 2636,
+    "sha256": "12e4d0ca481de54144088c824d6130301c650ada23bb647bfd1c96c030b0a431"
+  },
+  "pr302-Cprime-verified-push-readback.json": {
+    "source": "/workspace/engineering/pr302-Cprime-verified-push-readback.json",
+    "bytes": 972,
+    "sha256": "fe42e74d24ef874bba2aaff47919f64b35b4d1f2e24299be2360743113b3f054"
+  },
+  "rcc-public-parent-deadline-verified-push-readback.json": {
+    "source": "/workspace/engineering/rcc-public-parent-deadline-verified-push-readback.json",
+    "bytes": 837,
+    "sha256": "1acf1cf147f4e4c21e9980ab25bb5c3e74bce05801067f766b1f8bdf022666bb"
+  },
+  "rcc-public-implemented-independent-verified-push-readback.json": {
+    "source": "/workspace/engineering/rcc-public-parent-deadline-source/independent-verified-push-readback.json",
+    "bytes": 2426,
+    "sha256": "2d4693dcd8262742515b0a90ec4327d59363287c9fbe9f9623e0f5b06a636874"
+  },
+  "rcc-public-implemented-independent-push-post-review-confirmation.json": {
+    "source": "/workspace/engineering/rcc-public-parent-deadline-source/independent-push-post-review-confirmation.json",
+    "bytes": 1046,
+    "sha256": "d7c81aab5be817498350d666cdedd0add33817187f7c956b80188ea754c9b202"
+  },
+  "pr299-current774-independent-frozen-source-review.json": {
+    "source": "/workspace/engineering/pr299-actual774-refresh/independent-frozen-source-review.json",
+    "bytes": 6350,
+    "sha256": "059141ecdb885a373892d53e80b72179cd58607ae739fe919a3e6003600c6c24"
+  },
+  "pr299-current774-verified-push.json": {
+    "source": "/workspace/engineering/pr299-current774-verified-push.json",
+    "bytes": 844,
+    "sha256": "4bd7c6528dde54b17e1c1d5dd09521a3b36bb263b5ee7adda27f3817ea051d5e"
+  },
+  "capacity-batch4-independent-archive-preservation-review-v2.json": {
+    "source": "/workspace/engineering/capacity-recovery-batch4-independent-review/independent-batch4-archive-preservation-review-v2.json",
+    "bytes": 10686,
+    "sha256": "83d3ace6990571dc9b1e910fd7418e78c55748a4e8090caf2707074426117242"
+  },
+  "issue101-current-source-wave-preservation.json": {
+    "source": "/workspace/engineering/issue101-current-source-wave-preservation.json",
+    "bytes": 414,
+    "sha256": "2c1a1f03574afd884fc28c0fe7161f67ee9a1e6b93415eaeb65172c8bd157a86"
+  },
+  "pr308-current774-frozen-source-receipt.json": {
+    "source": "/workspace/engineering/pr308-actual774-refresh/frozen-source-receipt.json",
+    "bytes": 10796,
+    "sha256": "51c946c156b09c0da7c6bcc80e0a4a2815ed569947f862f56812c0aa4d236870"
+  },
+  "pr308-current774-source-union-proof.json": {
+    "source": "/workspace/engineering/pr308-actual774-refresh/source-union-proof.json",
+    "bytes": 42448,
+    "sha256": "6589dc49cc810cec21aaaa9198aefc9502fbcd6c1d5d0ba191dcf47d33eae970"
+  },
+  "pr308-current774-bootstrap-reuse.json": {
+    "source": "/workspace/engineering/pr308-actual774-refresh/bootstrap-reuse.json",
+    "bytes": 2734,
+    "sha256": "52b2133f852f86ca5714fcae833290ccf6477b977fa11388468271e8ffadaec6"
+  },
+  "pr308-current774-own-env-origin-proof.json": {
+    "source": "/workspace/engineering/pr308-actual774-refresh/own-env-origin-proof.json",
+    "bytes": 2367,
+    "sha256": "25c41a88b521bc52226674636ec422f6a1fb80bf791f948bb4be69b0a37a5f74"
+  },
+  "pr308-current774-generator-roundtrip.json": {
+    "source": "/workspace/engineering/pr308-actual774-refresh/generator-roundtrip.json",
+    "bytes": 10286,
+    "sha256": "20c8c062289bda9e34694e390c191f8d5da3114cc29e7acdcd7c2140fe6be44e"
+  },
+  "pr308-current774-canonical-imported-delta.patch": {
+    "source": "/workspace/engineering/pr308-actual774-refresh/canonical-imported-delta.patch",
+    "bytes": 13215,
+    "sha256": "c8f464f911c97f0176f0534632dc89f4a0becfbbc66c60f2d364c02e03b47c7c"
+  },
+  "issue101-current-source-wave-authenticated-preservation.json": {
+    "source": "/workspace/engineering/issue101-current-source-wave-authenticated-preservation.json",
+    "bytes": 628,
+    "sha256": "8e92d3d5a91e589afceb355ebec22ea4600b9f41c9cb69dbdaed7accb44f3013"
+  },
+  "current-source-wave-safe-CI-snapshot-20261011T064748Z.json": {
+    "source": "/workspace/engineering/current-source-wave-safe-CI-snapshot-20261011T064748Z.json",
+    "bytes": 2654,
+    "sha256": "9db3fb92347193d410a7db1b4cf4c601170cf50660e5133ab1f3b149dc3a8a70"
+  },
+  "pr308-current774-independent-frozen-source-review.json": {
+    "source": "/workspace/engineering/pr308-actual774-refresh/independent-frozen-source-review.json",
+    "bytes": 5583,
+    "sha256": "db8780bba1f4b1125fb110daafc298af41cdc67003ff715279bc5fda33b90797"
+  },
+  "pr308-current774-verified-push.json": {
+    "source": "/workspace/engineering/pr308-current774-verified-push.json",
+    "bytes": 816,
+    "sha256": "25e6b8164b4528560fa2bc98cc17c448aff0332cafa89065896e8d92b9b34f9c"
   }
 }

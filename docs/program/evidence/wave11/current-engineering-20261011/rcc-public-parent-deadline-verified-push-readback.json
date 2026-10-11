@@ -1,0 +1,11 @@
+{
+  "schema": "actions-public-rcc-existing-source-branch-push/v1",
+  "checked_at": "2026-10-11T06:33:41.502201+00:00",
+  "branch": "refs/heads/mk3/wave9-rcc-public-source-union-20261010",
+  "head": "639b591a19d80688afcfabf62d6f4bff8b8a0d69",
+  "tree": "c540632f4615aeb51803fc1fc39177f20f6234d8",
+  "prior_remote_head": "44afd960ad01f83eeef7773b334ccde3683c022d",
+  "normal_push": true,
+  "independent_source_GO_sha256": "259c2b0c9a586cbae04e48092555e29ddf2434de4e7e56b14104e07180a154d8",
+  "scope": "Public source checkpoint only, not PR/integration. Existing originalprofile/selector and acceptedtarget history preserved. No replacementbranch/private source reconstruction/provider/native/metadata/full134/135/release qualification. Original2465timer and all worker measurements retained; safe parent-timeout guard source-qualified."
+}

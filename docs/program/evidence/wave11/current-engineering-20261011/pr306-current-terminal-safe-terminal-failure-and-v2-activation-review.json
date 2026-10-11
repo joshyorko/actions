@@ -1,0 +1,566 @@
+{
+  "verdict": "HOLD_FIRST_NATIVE_READINESS_SEMANTIC_ASSERTIONS_UNREACHED_CAUSE_UNKNOWN",
+  "repository": "joshyorko/actions",
+  "PR": 306,
+  "run_id": 38114147201,
+  "job_id": 114395573331,
+  "terminal_job_conclusion": "failure",
+  "tested_source": {
+    "sha": "125e5bd27042f3e08c368c778e22fc167bbe019d",
+    "tree": "75dfe6916d4a4e8c07a1b76aafea13540bc7afe1",
+    "ordered_parents": [
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "c38e22c74290dca391617e9693fcf5b2968956df"
+    ],
+    "message": "Merge c38e22c74290dca391617e9693fcf5b2968956df into 1c7585fe8bb3cb9476c3997570bd3f04466f2bbc"
+  },
+  "current_actual_target_at_review": {
+    "head": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "tree": "17c1afa7fbaa6ae817830d85226b41f67dd8b820",
+    "ordered_parents": [
+      "1c7585fe8bb3cb9476c3997570bd3f04466f2bbc",
+      "dfca3f8e63465595acff421f37f34d2a9d0a1b39"
+    ],
+    "current_target_admission": false
+  },
+  "complete_original_log_private": {
+    "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/original-job-114395573331.log",
+    "bytes": 775300,
+    "sha256": "fe8c055c50eb05f0b49428fcbb1ef4390540a4ee233d5d1f09444f470a9cd1b9",
+    "mode": "0600",
+    "decoded_connector_UTF16_code_units": 771966,
+    "lines": 6779,
+    "retrieved_once": true,
+    "truncated": false,
+    "original_raw_body_published": false
+  },
+  "controller_test_census": {
+    "source_not_integration_passed": 1070,
+    "source_skipped": 94,
+    "source_warnings": 14,
+    "source_seconds": 540.29,
+    "integration_failed": 6,
+    "integration_passed": 125,
+    "integration_skipped": 18,
+    "integration_deselected": 1167,
+    "integration_seconds": 1907.71,
+    "fresh_SQLite_denied_SAVEPOINT_regression_passed": true
+  },
+  "failed_nodes": [
+    {
+      "nodeid": "action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+      "summary_line": 6651,
+      "exception": "TimeoutError",
+      "stage": "FIRST_NATIVE_START_READY_WAIT",
+      "semantic_assertions": "NOT_REACHED",
+      "primary_incomplete20cleanup_note": true
+    },
+    {
+      "nodeid": "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+      "summary_line": 6653,
+      "exception": "TimeoutError",
+      "stage": "FIRST_NATIVE_START_READY_WAIT",
+      "semantic_assertions": "NOT_REACHED",
+      "primary_incomplete20cleanup_note": true
+    },
+    {
+      "nodeid": "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+      "summary_line": 6655,
+      "exception": "TimeoutError",
+      "stage": "FIRST_NATIVE_START_READY_WAIT",
+      "semantic_assertions": "NOT_REACHED",
+      "primary_incomplete20cleanup_note": true
+    },
+    {
+      "nodeid": "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]",
+      "summary_line": 6657,
+      "exception": "TimeoutError",
+      "stage": "FIRST_NATIVE_START_READY_WAIT",
+      "semantic_assertions": "NOT_REACHED",
+      "primary_incomplete20cleanup_note": false
+    },
+    {
+      "nodeid": "action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart",
+      "summary_line": 6658,
+      "exception": "TimeoutError",
+      "stage": "FIRST_NATIVE_START_READY_WAIT",
+      "semantic_assertions": "NOT_REACHED",
+      "primary_incomplete20cleanup_note": false
+    },
+    {
+      "nodeid": "action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot",
+      "summary_line": 6659,
+      "exception": "TimeoutError",
+      "stage": "FIRST_NATIVE_START_READY_WAIT",
+      "semantic_assertions": "NOT_REACHED",
+      "primary_incomplete20cleanup_note": true
+    }
+  ],
+  "RCC_timing_visibility": {
+    "raw_progress_marks": 0,
+    "complete_current_sequence": false,
+    "current_previous_mark_sum": "UNAVAILABLE",
+    "current_holotree_variables_caller_duration": "UNAVAILABLE; Running logged, no completed output elapsed record in these six failures",
+    "timing_limits": "80/88 offsets sample from observer start; no precise readyFuture origin/end or cleanup-return interval in original report. Total integration1907.71 is controller suite time, not RCC creation duration."
+  },
+  "original_observer_artifact": {
+    "id": 11694535474,
+    "archive": {
+      "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/original-observer-artifact11694535474.zip",
+      "bytes": 6168,
+      "sha256": "6a91df05c38fd91dbc2310729d883d726dfbaf5bd0a52f33920240fd6d294f6e"
+    },
+    "members": [
+      {
+        "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/original-observer/34ec97696df8d90c-1.json",
+        "bytes": 1578,
+        "sha256": "3eb3d212846d807033708906067815cbd6d7def7b4294a694c5560711785cc3a"
+      },
+      {
+        "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/original-observer/34ec97696df8d90c-2.json",
+        "bytes": 1914,
+        "sha256": "c033fcddd677941703722feb8386c52b63053d7d7f261aeeffb9f2184391c987"
+      },
+      {
+        "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/original-observer/34ec97696df8d90c-3.json",
+        "bytes": 2123,
+        "sha256": "36aaed432d5f06c3249524c84895acd977525aba098840fba7409a8c3d66a0a4"
+      },
+      {
+        "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/original-observer/34ec97696df8d90c-4.json",
+        "bytes": 330,
+        "sha256": "be90ade9386655208697ead7aac2d6a3e1f8767ce9111e3a00c30f953ea2bd15"
+      },
+      {
+        "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/original-observer/7d0f2e912f58600f-1.json",
+        "bytes": 1559,
+        "sha256": "0fdaef7f5eddac9b9c083c348c975126cbabde7dc8af5386e5b04cc65e07d4cc"
+      },
+      {
+        "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/original-observer/7d0f2e912f58600f-2.json",
+        "bytes": 1916,
+        "sha256": "12829edbf1ed614f67f444f866f876b99ca44ae16ad111418d60163fb2c501b4"
+      },
+      {
+        "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/original-observer/7d0f2e912f58600f-3.json",
+        "bytes": 2129,
+        "sha256": "846408b3e26bc374d94b1af3df52bee4706755b1e94d31d0e7a44add9f2d026e"
+      },
+      {
+        "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/original-observer/7d0f2e912f58600f-4.json",
+        "bytes": 330,
+        "sha256": "be90ade9386655208697ead7aac2d6a3e1f8767ce9111e3a00c30f953ea2bd15"
+      }
+    ],
+    "observed_nodes": 2,
+    "unobserved_failed_nodes": 4,
+    "samples_per_observed_node": 2,
+    "observations": [
+      {
+        "nodeid": "tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+        "source_checks": [
+          {
+            "path": "action_server/src/actions/server/_rcc.py",
+            "Git_sha256": "74a0646de66d3bfb5a30339080a37c5dc0f79b2e0ab46b7c16a6c19717e6d41b",
+            "observed_checkout_sha256": "36ea643613cd17028160f79e3646f4e48d4b271c94bfaf5ac488bcca60d347da",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          },
+          {
+            "path": "action_server/src/actions/server/_robo_utils/process.py",
+            "Git_sha256": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+            "observed_checkout_sha256": "94c1ebe15ee8e2971da5056858b2c9726e4297a99f3b80cfae17f5b74d2a8721",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          },
+          {
+            "path": "action_server/src/actions/server/_selftest.py",
+            "Git_sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+            "observed_checkout_sha256": "d07e6877c858d8ea51f3b8e4730dbb2014a7ef8b67038971474aa61b65cfb420",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          },
+          {
+            "path": "action_server/tests/action_server_tests/fixtures.py",
+            "Git_sha256": "2db8403ad100977951a4a07a0585668db493147d7be316e8d60641b7a416a854",
+            "observed_checkout_sha256": "7e75dc6b39c6bcd99c24ddd122b180b787780cfe15d97e6f7089518af0272ebd",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          },
+          {
+            "path": "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+            "Git_sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c",
+            "observed_checkout_sha256": "6dfcdf9338978146dc016c181a7c03bdb90207357b15dca6da1e2212f10e3c73",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          },
+          {
+            "path": "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
+            "Git_sha256": "1fa3944b8984314f7a00aeaf59b0927c5dd2b8995ff52536cd20e8d002feb0a3",
+            "observed_checkout_sha256": "a1bc4c378c3afce4c89f54ed1b27784db86ce98b27c03dbc8a0e72049a2eccdd",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          },
+          {
+            "path": "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+            "Git_sha256": "f02184650c57217f4784e3916d75c9d74085f3cf23685a84264bdf1571d86f34",
+            "observed_checkout_sha256": "9414dbfd31a49619005dc5417e36e421d60406fd9a3385ab9b6968760eba902f",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          }
+        ],
+        "samples": [
+          {
+            "elapsed_seconds": 80.047,
+            "owned_process_count": 3,
+            "RCC_operation": "holotree variables",
+            "RCC_status": "running",
+            "RCC_cpu_seconds": 14.84375,
+            "RCC_io_bytes": {
+              "read": 361363340,
+              "write": 74283391
+            },
+            "effective_home_matches_launch": true,
+            "env_info_cache_exists": false,
+            "captured_stderr_characters": 4312,
+            "captured_stdout_characters": 0,
+            "host_readers_alive_count": 2,
+            "pipes_closed": false,
+            "RCC_internal_readers": "unavailable_from_host",
+            "staged_package_sha256": "fca4e1c7996139099f6fcc58a058b1df672cdaf7a3870bcd456a747455fa145e"
+          },
+          {
+            "elapsed_seconds": 88.063,
+            "owned_process_count": 4,
+            "RCC_operation": "holotree variables",
+            "RCC_status": "running",
+            "RCC_cpu_seconds": 15.9375,
+            "RCC_io_bytes": {
+              "read": 391467020,
+              "write": 87308562
+            },
+            "effective_home_matches_launch": true,
+            "env_info_cache_exists": false,
+            "captured_stderr_characters": 4312,
+            "captured_stdout_characters": 0,
+            "host_readers_alive_count": 2,
+            "pipes_closed": false,
+            "RCC_internal_readers": "unavailable_from_host",
+            "staged_package_sha256": "fca4e1c7996139099f6fcc58a058b1df672cdaf7a3870bcd456a747455fa145e"
+          }
+        ],
+        "final_host_only": {
+          "returncode": 15,
+          "host_readers_alive_count": 0,
+          "sampler_cancelled": true,
+          "sampler_alive": false,
+          "actual_cleanup_result_predicates": "UNAVAILABLE",
+          "actual_live_zombie_error_snapshot_reap_counts": "UNAVAILABLE"
+        },
+        "native_executable_identity": {
+          "sha256": "d1eef79a307e075125102e2e9a89f80ff12dd987ca860f19f2a5fd399db38c4f",
+          "size": 57694208
+        }
+      },
+      {
+        "nodeid": "tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers",
+        "source_checks": [
+          {
+            "path": "action_server/src/actions/server/_rcc.py",
+            "Git_sha256": "74a0646de66d3bfb5a30339080a37c5dc0f79b2e0ab46b7c16a6c19717e6d41b",
+            "observed_checkout_sha256": "36ea643613cd17028160f79e3646f4e48d4b271c94bfaf5ac488bcca60d347da",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          },
+          {
+            "path": "action_server/src/actions/server/_robo_utils/process.py",
+            "Git_sha256": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+            "observed_checkout_sha256": "94c1ebe15ee8e2971da5056858b2c9726e4297a99f3b80cfae17f5b74d2a8721",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          },
+          {
+            "path": "action_server/src/actions/server/_selftest.py",
+            "Git_sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+            "observed_checkout_sha256": "d07e6877c858d8ea51f3b8e4730dbb2014a7ef8b67038971474aa61b65cfb420",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          },
+          {
+            "path": "action_server/tests/action_server_tests/fixtures.py",
+            "Git_sha256": "2db8403ad100977951a4a07a0585668db493147d7be316e8d60641b7a416a854",
+            "observed_checkout_sha256": "7e75dc6b39c6bcd99c24ddd122b180b787780cfe15d97e6f7089518af0272ebd",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          },
+          {
+            "path": "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+            "Git_sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c",
+            "observed_checkout_sha256": "6dfcdf9338978146dc016c181a7c03bdb90207357b15dca6da1e2212f10e3c73",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          },
+          {
+            "path": "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
+            "Git_sha256": "1fa3944b8984314f7a00aeaf59b0927c5dd2b8995ff52536cd20e8d002feb0a3",
+            "observed_checkout_sha256": "a1bc4c378c3afce4c89f54ed1b27784db86ce98b27c03dbc8a0e72049a2eccdd",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          },
+          {
+            "path": "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+            "Git_sha256": "f02184650c57217f4784e3916d75c9d74085f3cf23685a84264bdf1571d86f34",
+            "observed_checkout_sha256": "9414dbfd31a49619005dc5417e36e421d60406fd9a3385ab9b6968760eba902f",
+            "observed_checkout_exact_CRLF_Git_representation": true
+          }
+        ],
+        "samples": [
+          {
+            "elapsed_seconds": 80.062,
+            "owned_process_count": 3,
+            "RCC_operation": "holotree variables",
+            "RCC_status": "running",
+            "RCC_cpu_seconds": 13.953125,
+            "RCC_io_bytes": {
+              "read": 360045140,
+              "write": 74526681
+            },
+            "effective_home_matches_launch": true,
+            "env_info_cache_exists": false,
+            "captured_stderr_characters": 4308,
+            "captured_stdout_characters": 0,
+            "host_readers_alive_count": 2,
+            "pipes_closed": false,
+            "RCC_internal_readers": "unavailable_from_host",
+            "staged_package_sha256": "6e96c2ce5b512d3bb11800e6686391ca52ceb406df981b650b226e843fe77de6"
+          },
+          {
+            "elapsed_seconds": 88.047,
+            "owned_process_count": 4,
+            "RCC_operation": "holotree variables",
+            "RCC_status": "running",
+            "RCC_cpu_seconds": 15.828125,
+            "RCC_io_bytes": {
+              "read": 391467145,
+              "write": 87308494
+            },
+            "effective_home_matches_launch": true,
+            "env_info_cache_exists": false,
+            "captured_stderr_characters": 4308,
+            "captured_stdout_characters": 0,
+            "host_readers_alive_count": 2,
+            "pipes_closed": false,
+            "RCC_internal_readers": "unavailable_from_host",
+            "staged_package_sha256": "6e96c2ce5b512d3bb11800e6686391ca52ceb406df981b650b226e843fe77de6"
+          }
+        ],
+        "final_host_only": {
+          "returncode": 15,
+          "host_readers_alive_count": 0,
+          "sampler_cancelled": true,
+          "sampler_alive": false,
+          "actual_cleanup_result_predicates": "UNAVAILABLE",
+          "actual_live_zombie_error_snapshot_reap_counts": "UNAVAILABLE"
+        },
+        "native_executable_identity": {
+          "sha256": "d1eef79a307e075125102e2e9a89f80ff12dd987ca860f19f2a5fd399db38c4f",
+          "size": 57694208
+        }
+      }
+    ],
+    "production_cleanup_proven": false,
+    "native_inventory_or_database_build_binding": "UNQUALIFIED; report hashes nativebytes only, no wholeartifact/nativecurrentproducer GO"
+  },
+  "historical_comparison": {
+    "original142_first_template_failure": {
+      "source": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "private_original_log": {
+        "path": "/workspace/engineering/pr306-refresh-preparation/original-windows-job-114316872435.log",
+        "bytes": 612777,
+        "sha256": "2608e02752145c7dc50b002df9208fb33c64b955da03106411b9d0404c3f93ee"
+      },
+      "integration": "1FAIL129PASS18SKIP1086DESELECT",
+      "RCC_previous_mark_columns": [
+        {
+          "step": 0,
+          "seconds_since_previous": "0.028"
+        },
+        {
+          "step": 1,
+          "seconds_since_previous": "0.002"
+        },
+        {
+          "step": 2,
+          "seconds_since_previous": "0.003"
+        },
+        {
+          "step": 3,
+          "seconds_since_previous": "0.000"
+        },
+        {
+          "step": 4,
+          "seconds_since_previous": "0.000"
+        },
+        {
+          "step": 5,
+          "seconds_since_previous": "0.001"
+        },
+        {
+          "step": 6,
+          "seconds_since_previous": "0.001"
+        },
+        {
+          "step": 7,
+          "seconds_since_previous": "0.782"
+        },
+        {
+          "step": 8,
+          "seconds_since_previous": "57.859"
+        },
+        {
+          "step": 9,
+          "seconds_since_previous": "5.575"
+        },
+        {
+          "step": 10,
+          "seconds_since_previous": "0.000"
+        },
+        {
+          "step": 11,
+          "seconds_since_previous": "2.236"
+        },
+        {
+          "step": 12,
+          "seconds_since_previous": "0.000"
+        },
+        {
+          "step": 13,
+          "seconds_since_previous": "0.001"
+        },
+        {
+          "step": 14,
+          "seconds_since_previous": "7.082"
+        },
+        {
+          "step": 15,
+          "seconds_since_previous": "14.229"
+        }
+      ],
+      "sum_seconds_since_previous": "87.799",
+      "caller_seconds": 87.81,
+      "qualification": "Historical nativeFIRSTtemplate readytimeout; variables SUCCESS is not Runtime readiness; no present-run timing or cleanup inferred"
+    },
+    "source4533": {
+      "path": "/workspace/engineering/pr306-independent-current-review/independent-current-source-review.json",
+      "bytes": 11382,
+      "sha256": "4533d20b974e3ee92b145c0a5c24587374278de9b62d08fd4722a243ca9b2b62"
+    },
+    "source4533_database_scope": "61source tests/12PGskip,2focused/Toolkit69/full1151+13skip historical currentc38source; no platform/nativegate waiver",
+    "accepted_PostgreSQL": {
+      "receipt": {
+        "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave8-convergence-20261010/results-receipts/pg_review.json",
+        "bytes": 6678,
+        "sha256": "4cf0f23ff8beadbf705aadf4fc3f30957483d1655374aeaa7173b0edc6d75d6b"
+      },
+      "source": "1421fcf85c1b681aef1fe58fe2902f776f208167",
+      "database_module_sha256": "c48ff5838d333ebd2c483be30036d9e3b8588d29c8d6dbbe324e247b9168bdd4",
+      "current_database_bytes_equal": true,
+      "scope": "RealPG17.11/psycopg3.3.4 already-abortedtransaction22012\u2192SAVEPOINT25P02 rollback/sameconnectionrecovery; not healthySAVEPOINTdenial/full84/currentnative",
+      "new_PG_execution": false
+    }
+  },
+  "next_source_activation": {
+    "verdict": "SOURCE_READY_TO_REUSE_ACCEPTED_V2_AFTER_ROOT_WRITER_AND_ORDINARY_TARGET_REFRESH",
+    "complete_original_design": {
+      "path": "/workspace/engineering/windows-next-observation-owned/design-v2.md",
+      "bytes": 13875,
+      "sha256": "a23775765d3295a8019a2d88ddaea571049b8a55ed988a9b10635c7bcf28257c"
+    },
+    "independent_design_review": {
+      "path": "/workspace/engineering/windows-next-observation-independent-review/independent-v2-design-review.json",
+      "bytes": 12370,
+      "sha256": "95f44464acd56e278a87890e0c5f24da9b38cbfb044f925f48bbf1c2221355e3"
+    },
+    "source_compatibility": [
+      {
+        "path": "action_server/src/actions/server/_rcc.py",
+        "sha256": "74a0646de66d3bfb5a30339080a37c5dc0f79b2e0ab46b7c16a6c19717e6d41b",
+        "design_d75_current_c38_target774_blob_bytes_equal": true
+      },
+      {
+        "path": "action_server/src/actions/server/_selftest.py",
+        "sha256": "74fc0360481981311def7dad28ae716d4d001157059eae02df15a52b615ee5af",
+        "design_d75_current_c38_target774_blob_bytes_equal": true
+      },
+      {
+        "path": "action_server/src/actions/server/_robo_utils/process.py",
+        "sha256": "847cf543ded2a745416e193355c810c12daccf9e81ecc344465f328af1937aa7",
+        "design_d75_current_c38_target774_blob_bytes_equal": true
+      },
+      {
+        "path": "action_server/src/actions/server/_robo_utils/callback.py",
+        "sha256": "5b60f8b5906ef2714f630004d0913a24be2421c917dd51126ea73767450b6d85",
+        "design_d75_current_c38_target774_blob_bytes_equal": true
+      },
+      {
+        "path": "action_server/src/actions/server/_common/process.py",
+        "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082",
+        "design_d75_current_c38_target774_blob_bytes_equal": true
+      },
+      {
+        "path": "action_server/src/actions/server/_server.py",
+        "sha256": "3be0ce254252211270fecf2906da2cec5d438b3203fefd68ad3d0731cf4d42bb",
+        "design_d75_current_c38_target774_blob_bytes_equal": true
+      },
+      {
+        "path": "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+        "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c",
+        "design_d75_current_c38_target774_blob_bytes_equal": true
+      },
+      {
+        "path": "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+        "sha256": "503eb72a44049c19952c3294c98a36ccbe72525e6bcfe248b7f474e2825ff926",
+        "design_d75_current_c38_target774_blob_bytes_equal": true
+      }
+    ],
+    "same_existing_branch": "fix/database-savepoint-admission-20261010",
+    "ordinary_merge_required": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "exact_scope": [
+      "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "design_change": "Only binding/activation context from deferred311green to current306 sixFIRSTfailure; complete original V2 contract/pins/privacy/loss latch/tests reused, no duplicate replacement design",
+    "scope_boundaries": "Same2nodes/firstnativeactions_sync only,90ready20cleanup80/88samples50msjoin. No production/toolkit/workflow/reader/deadline/config/cache/installer/native/provider/browser change or execution. Capture delivered-stream category/count/strict complete16previousmarks only when observed; returned cleanup result scalar fields only; exact original callbacks/deadline/tuple/exception preserved. Probe errors caught internally before existing Callback logger.exception; any loss permanently disqualifies sum.",
+    "meaningful_tests": "Reuse complete originalV2 six RED/GREEN contracts: validbaseline then eachmark/readychannel/deadline/cleanup/loss/secret-bearingexception/disabledotherprocess poison. No raw suffix/environment/errors/PIDs exported and no extra read/reader/thread/kill/wait. Canonical configuredsourcegates+protectedsource/genparity+independent freeze required before separate actual authorization.",
+    "invisible_child_boundary": "Host-only observer cannot see RCC internal pipe arrivals, flush/forwarding buffer, raw vars JSON admission, compiledchild ready-log emitter or readinessFuture state. Missingmarks remain UNKNOWN. Child hooks/eventtransport require separate source/artifact/lifecycle design and are NOT authorized here."
+  },
+  "review_script": {
+    "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/diagnose_terminal.py",
+    "bytes": 15686,
+    "sha256": "f9e54b54c81f2a589b9f3c6b56cf6f930524919218beb741bd42a70f1f0960eb"
+  },
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md exact canonical-terminal-census-and-visibility-proposed.patch; originaldesign canonicalV2 retained separately",
+    "Durable learning captured": "Full terminal census/source binding precedes bugclassification; sixFIRSTreadytimeouts and twoobserved activevariables samples do not identify database/rootcause or full cleanup. Currentmarks absent cannot borrow historical timing. OriginalV2 source chain stays bytecompatible through774 and can be reactivated unchanged in bounded existingtest lane.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/canonical-terminal-census-and-visibility-proposed.patch",
+        "bytes": 1341,
+        "sha256": "4d08c67271a23910119842376e3a7f568cb483b4cf6237e6774ac4a21c2ccd94"
+      },
+      {
+        "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/original-job-114395573331.log",
+        "bytes": 775300,
+        "sha256": "fe8c055c50eb05f0b49428fcbb1ef4390540a4ee233d5d1f09444f470a9cd1b9"
+      },
+      {
+        "path": "/workspace/engineering/pr306-c38-windows-terminal-diagnosis/original-observer-artifact11694535474.zip",
+        "bytes": 6168,
+        "sha256": "6a91df05c38fd91dbc2310729d883d726dfbaf5bd0a52f33920240fd6d294f6e"
+      },
+      {
+        "path": "/workspace/engineering/pr306-independent-current-review/independent-current-source-review.json",
+        "bytes": 11382,
+        "sha256": "4533d20b974e3ee92b145c0a5c24587374278de9b62d08fd4722a243ca9b2b62"
+      },
+      {
+        "path": "/workspace/engineering/windows-next-observation-independent-review/independent-v2-design-review.json",
+        "bytes": 12370,
+        "sha256": "95f44464acd56e278a87890e0c5f24da9b38cbfb044f925f48bbf1c2221355e3"
+      }
+    ],
+    "Stale or ambiguous guidance removed": "Duration/partialpreview determinesfailurecount/cause; sourcePASS oroldPG proof admits native; twoobservernodes censusall6; rc15/readersfalse meanssnapshot/reap cleanupPASS; latergreen oradvancedtarget rewrites earlier run",
+    "Remaining uncertainty": "Holotree internal phase, childpipe/log/readyport propagation and actualcleanup predicates; currenttarget774union/sourcegates, currentnativeartifact/databasebuild provenance, newhostedWindows andfull84 remain unqualified",
+    "Proposal disposition": "Exact guide delta proposed; reuses complete original acceptedV2 design and currentsource-adaptation proof, no tracked edits"
+  },
+  "Upstream disposition": "none; no maintained upstream fault/rootcause established",
+  "no_source_writer_actual_run_retry_deadline_waiver_install_provisioning_or_artifact_generation": true
+}

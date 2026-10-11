@@ -1,0 +1,112 @@
+{
+  "verdict": "GO_EXACT_COMMITTED_AND_REMOTE_291_MEMBER_DURABLE_ENGINEERING_CHECKPOINT",
+  "commit": "1019826455acb9d7972fd7554921535d32d6751f",
+  "tree": "9df642237779a5c1b8f8db065f8d996918be8ad1",
+  "parent": "5cdd53ebd8f69b88a4c1bb3afabda0d450ed802a",
+  "existing_branch": "handoff/actions-swarm-mk3-wave8-20261010",
+  "remote_exact_named_ref_head": "1019826455acb9d7972fd7554921535d32d6751f",
+  "clean": true,
+  "all291_committed_Gitblob_original_manifest_byte_size_SHA_verified": true,
+  "all291_workingfiles_byte_equal_committed": true,
+  "prior229_manifest_and_committed_original_members_unchanged": true,
+  "complete_committed_index_modes_blobs_matches_independently_reviewed_staged_fingerprint": true,
+  "authored_guide_README_manifest_exact_reviewed_boundary": true,
+  "changed_paths_exact_approved62plus3": true,
+  "prior_independent_review": {
+    "path": "/workspace/engineering/checkpoint-291-independent-review/independent-exact-staged-batch-review.json",
+    "bytes": 22182,
+    "sha256": "4d33ccf0cadfa0f47b9230e42b97baf7a9c3190aa41fee2f596c696ce8e8454a"
+  },
+  "bindings_proof": {
+    "path": "/workspace/engineering/checkpoint-291-independent-review/verified-manifest-source-bindings.json",
+    "bytes": 102090,
+    "sha256": "462a3f4fdca2a8c38e30582feda27848e28e9a36485968e2e3572d695f34d519"
+  },
+  "canonical_documentation": {
+    "file": "docs/skills/repository-operations.md",
+    "exact_existing_reviewed_delta": {
+      "path": "/workspace/engineering/checkpoint-291-independent-review/canonical-reviewed-root-delta.patch",
+      "bytes": 7207,
+      "sha256": "00bd191af5077c17234ee20f1b336cf58cc193f7319c5fff6034e0eda159c4e0"
+    },
+    "all_proposal_dispositions_preserved": [
+      {
+        "file": "capacity-independent-canonical-completed-scratch-preservation-proposed.patch",
+        "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208",
+        "disposition": "GO_INTEGRATED verbatim completed-scratch preservation paragraph; scoped recorded metadata, no archive or full index copied."
+      },
+      {
+        "file": "current-hosted-failure-canonical-PID-handoff-evidence-proposed.patch",
+        "sha256": "72ce742e46d6c764322f637968a47f9b0e0cc4619c885a45b7e79940b941ee66",
+        "disposition": "GO_INTEGRATED portable generic validPID/publication/processidentity boundary; missing measured cleanup remains unavailable."
+      },
+      {
+        "file": "current-hosted-failure-canonical-fixture-and-mutation-evidence-proposed.patch",
+        "sha256": "4f29ae54111aeadbf5c99443f2cdb51ab5d875024bd0c0427c0e7e846317c62d",
+        "disposition": "GO_INTEGRATED CRLF sourcefixture versus rawinstalledmember authority and injection-stage evidence; no incomplete-failure cause guess."
+      },
+      {
+        "file": "handoff229-canonical-exact-followup-proposed.patch",
+        "sha256": "4cd7a4227faef0159698e379f6f1326be75d12e4c06f131c389869ca22db51dd",
+        "disposition": "GO_INTEGRATED exact named-result.stderr qualification plus Runoutput grant/reader acquisition boundary; no active-stream recall claim."
+      },
+      {
+        "file": "pr282-staging-source-refresh-canonical-actual-delta.patch",
+        "sha256": "6b406306548394847d9ea37e18d170da93f714e4ef736648e695d8f22373958f",
+        "disposition": "GO_INTEGRATED ten-line lesson adapted generically: device/inode target before-read constant-time digest control versus separate forced after-read mtime detector; all exclusivewriter/nonatomicsnapshot limits retained."
+      },
+      {
+        "file": "pr299-actual311-independent-canonical-integrated-actual311-delta.patch",
+        "sha256": "b2331e6946e7c276dcf71d1ce98292c8ef4783931628f2c665e752357a26a4a3",
+        "disposition": "GO_INTEGRATED owning299 branch exact lesson and root generic paragraph from4cd; duplicate identical originalowner/reviewer b233 receipts retained, single canonical explanation."
+      },
+      {
+        "file": "pr299-actual311-refresh-canonical-actual-delta.patch",
+        "sha256": "b2331e6946e7c276dcf71d1ce98292c8ef4783931628f2c665e752357a26a4a3",
+        "disposition": "GO_INTEGRATED owning299 branch exact lesson and root generic paragraph from4cd; duplicate identical originalowner/reviewer b233 receipts retained, single canonical explanation."
+      },
+      {
+        "file": "pr302-next-refresh-canonical-nine-source-bindings-proposed.patch",
+        "sha256": "fef37515784cbf9fbb003ecca90ec0acb78d8e319bf2fd0ce2c2c1805ff955e6",
+        "disposition": "GO_INTEGRATED nine-file candidate sample versus complete union/native inventory and separate source/control/testmerge identities; no old ba04 evidence carry onto774."
+      },
+      {
+        "file": "pr305-fixture-source-canonical-fixture-and-output-preservation.patch",
+        "sha256": "58c62090aa0f290f75f96aa17e6926aa5430ce6230378375fd2b731df89b0793",
+        "disposition": "GO_INTEGRATED original1e9 sourceguide41line delta; root generic CompletedProcess/reportchannel/fixtureLF/completePID lessons retain required semantics without copying implementation diary."
+      },
+      {
+        "file": "pr305-v5-independent-canonical-actual-v5-proposed.patch",
+        "sha256": "e84eb7659efef7f349231b1b8b5a80ef5c0d8a2f20e9dc2e1a9d59eea8c3e0b0",
+        "disposition": "GO_INTEGRATED existing CompletedProcess plus newly specific locked named-result.stderr mechanism; prior V4 bytes not recovered or relabeled."
+      },
+      {
+        "file": "rcc-public-parent-canonical-parent-deadline-proposed-v2.patch",
+        "sha256": "1581a99017e37314d1c6c5737b51616fa458f25e833356fa7c89e21606aab9e0",
+        "disposition": "GO_DESIGN_ONLY_INTEGRATED_V2 retained44afd historical wording + originalworker summary/evidence and separate supervisor deadline; guard implementation/current actual gates still separate HOLD."
+      },
+      {
+        "file": "rcc-public-parent-canonical-parent-deadline-proposed.patch",
+        "sha256": "7933b5f7241227a022c3600e1efb1fcf2747f12a0380f60dab381beaac1e3da4",
+        "disposition": "SUPERSEDED_BY_NAMED_V2_FOR_CANONICAL_INTEGRATION original7933 preserved immutable; no stale current-parent final instruction."
+      },
+      {
+        "file": "rcc-public-parent-independent-canonical-parent-deadline-proposed-v2.patch",
+        "sha256": "1581a99017e37314d1c6c5737b51616fa458f25e833356fa7c89e21606aab9e0",
+        "disposition": "GO_DESIGN_ONLY_INTEGRATED_V2 retained44afd historical wording + originalworker summary/evidence and separate supervisor deadline; guard implementation/current actual gates still separate HOLD."
+      }
+    ],
+    "disposition": "Existing4d33 accepted exact canonical delta sufficient; readback introduces no new engineering lesson or duplicate proposal",
+    "evidence": "291 committed Gitblobs and immutable prior229 checked individually; complete modes/blob index fingerprint matches reviewed staged state; existing remote ref exact commit authenticates tree",
+    "stale_ambiguity": "Commit/push success alone is not durable evidence verification; current exact-byte and remotehead readback supplies it",
+    "remaining_uncertainty": "Evidence durability only. No fresh source/native/private/backend/publication acceptance from readback. Prospective774unions still require exact frozen source/control/current CI; historical failures and omitted private logs/index/archive content remain bounded",
+    "upstream": "none"
+  },
+  "limits": [
+    "Named remote head matches immutable Git commit/tree; no second download of every remote blob.",
+    "One historical manifest originalsource is authenticated GitHub readback descriptor rather than local sourcepath; original committedbytes preserved.",
+    "Original raw patch whitespace retained; no blanket raw-artifact diffcheck claim.",
+    "No source/evidence/index mutation, gateway/source/native/provider/private execution, cleanup, push/merge/publication/infrastructure by reviewer."
+  ],
+  "upstream": "none"
+}

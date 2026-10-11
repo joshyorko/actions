@@ -1,0 +1,16 @@
+{
+  "schema": "actions-public-RCC-post-PR299-review-remote-confirmation/v1",
+  "observed_utc": "2026-10-11 06:43:59 UTC",
+  "remote_branch": "mk3/wave9-rcc-public-source-union-20261010",
+  "head": "639b591a19d80688afcfabf62d6f4bff8b8a0d69",
+  "expected_tree": "c540632f4615aeb51803fc1fc39177f20f6234d8",
+  "unchanged_since_before_review": true,
+  "full_authenticated_commit_PR_and_source_review": {
+    "path": "/workspace/engineering/rcc-public-parent-deadline-source/independent-verified-push-readback.json",
+    "sha256": "2d4693dcd8262742515b0a90ec4327d59363287c9fbe9f9623e0f5b06a636874"
+  },
+  "root_push_readback_sha256": "1acf1cf147f4e4c21e9980ab25bb5c3e74bce05801067f766b1f8bdf022666bb",
+  "independent_PR299_source_review_sha256": "059141ecdb885a373892d53e80b72179cd58607ae739fe919a3e6003600c6c24",
+  "scope": "Public existingbranch checkpoint only; no PR creation/integration/private/provider/native/metadata/release acceptance. Canonical23line guard lesson remains accepted, no cosmetic duplicate.",
+  "upstream_disposition": "none"
+}

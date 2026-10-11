@@ -1,0 +1,16 @@
+{
+  "status": "NORMAL_EXISTING_PR_BRANCH_PUSH_VERIFIED",
+  "pr": 308,
+  "head": "4ca431b51b018b947fac6f096ca3cdc21028dd28",
+  "tree": "3726baf58c5b7caac1fbb1339e17b9d083b40fa4",
+  "branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "existing_remote_before": "9025a1e44bb05992e9f220842bfaf16a99ebd04f",
+  "named_ref_after": "4ca431b51b018b947fac6f096ca3cdc21028dd28",
+  "current_actual_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "independent_review_sha256": "db8780bba1f4b1125fb110daafc298af41cdc67003ff715279bc5fda33b90797",
+  "source_full1155PASS13SKIP": true,
+  "fresh_hosted_exacttuple": "REQUIRED_NO_OLD19GREEN_CARRY",
+  "native_producer268plus5_parity": "PRESERVATION_ONLY_NOT_FULL134_ACTUAL_PROVIDER_METADATA_OR_RELEASE",
+  "no_merge_or_new_actual": true,
+  "upstream_disposition": "none"
+}

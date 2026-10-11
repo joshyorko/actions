@@ -1,0 +1,109 @@
+{
+  "observed_UTC": "2026-10-11 06:47:48 UTC",
+  "scope": "Non-admitting current PR rollup; registered full inventory/tested synthetic tuple and acceptance gates remain independent",
+  "current_target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+  "pulls": [
+    {
+      "number": 309,
+      "head": "0d947f839628cc902bd409a7be93dcb49bc0aa02",
+      "draft": false,
+      "reported_count": 19,
+      "non_admitting_rollup_counts": {
+        "SUCCESS": 19
+      }
+    },
+    {
+      "number": 308,
+      "head": "9025a1e44bb05992e9f220842bfaf16a99ebd04f",
+      "draft": false,
+      "reported_count": 19,
+      "non_admitting_rollup_counts": {
+        "SUCCESS": 19
+      }
+    },
+    {
+      "number": 307,
+      "head": "87e412f89b201c697d3e6bd4bd34031cdbd14df3",
+      "draft": false,
+      "reported_count": 24,
+      "non_admitting_rollup_counts": {
+        "FAILURE": 8,
+        "SUCCESS": 13,
+        "CANCELLED": 2,
+        "SKIPPED": 1
+      }
+    },
+    {
+      "number": 306,
+      "head": "c38e22c74290dca391617e9693fcf5b2968956df",
+      "draft": false,
+      "reported_count": 20,
+      "non_admitting_rollup_counts": {
+        "SUCCESS": 19,
+        "FAILURE": 1
+      }
+    },
+    {
+      "number": 305,
+      "head": "1e9c462fc16534f1a6153ef666ae60a9ac9560d6",
+      "draft": false,
+      "reported_count": 19,
+      "non_admitting_rollup_counts": {
+        "SUCCESS": 18,
+        "IN_PROGRESS": 1
+      }
+    },
+    {
+      "number": 302,
+      "head": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "draft": true,
+      "reported_count": 25,
+      "non_admitting_rollup_counts": {
+        "QUEUED": 4,
+        "IN_PROGRESS": 8,
+        "SUCCESS": 13
+      }
+    },
+    {
+      "number": 300,
+      "head": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+      "draft": true,
+      "reported_count": 11,
+      "non_admitting_rollup_counts": {
+        "SUCCESS": 11
+      }
+    },
+    {
+      "number": 299,
+      "head": "5db93e2251cf039ef81780730098da1b255d8d2e",
+      "draft": true,
+      "reported_count": 18,
+      "non_admitting_rollup_counts": {
+        "QUEUED": 11,
+        "IN_PROGRESS": 6,
+        "SUCCESS": 1
+      }
+    },
+    {
+      "number": 282,
+      "head": "9c8f1c95caeded6495877280ed1465fd9850b254",
+      "draft": true,
+      "reported_count": 26,
+      "non_admitting_rollup_counts": {
+        "SUCCESS": 25,
+        "IN_PROGRESS": 1
+      }
+    },
+    {
+      "number": 221,
+      "head": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "draft": true,
+      "reported_count": 34,
+      "non_admitting_rollup_counts": {
+        "SUCCESS": 31,
+        "IN_PROGRESS": 2,
+        "SKIPPED": 1
+      }
+    }
+  ]
+}

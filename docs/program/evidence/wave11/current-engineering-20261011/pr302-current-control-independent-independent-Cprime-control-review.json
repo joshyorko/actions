@@ -1,0 +1,166 @@
+{
+  "status": "GO_CPRIME_FOR_NORMAL_EXISTING_BRANCH_PUSH_ONLY",
+  "control": {
+    "head": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "ordered_parents": [
+      "d642a3ac24f8da85101538bdfdf59b509fd74bfb"
+    ],
+    "branch": "fix/rcc-published-artifact-details-20261010",
+    "clean": true
+  },
+  "source_candidate": {
+    "head": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+    "source_not_control_self": true,
+    "independent_review_sha256": "4c1374d437612c8b42c47fde9408e78f4a2ba6d310683e701fb05c25dc5a05f2"
+  },
+  "checkpoint": {
+    "path": "/workspace/engineering/pr302-actual310-control-refresh/control-Cprime-frozen-checkpoint.json",
+    "sha256": "a96bb92e2d2bac6602ff5ff944c916bf2acbab68681d0c54c467af04e7eedf1e"
+  },
+  "review_operations": "Read-only Git body/mode/AST/hash and frozen-log readback; external evidence only. No gateway/toolkit/package/test/regeneration/product/native/provider execution.",
+  "verified": {
+    "only_three_declared_paths_changed": [
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+      "developer/tests/test_rcc_provider_rollback_workflow.py"
+    ],
+    "all1406_other_leaves_body_mode_type_exact_Sprime": true,
+    "all1409_working_bytes_modes_match_Cprime": true,
+    "whole_generator_AST_only_two_source_pins": true,
+    "whole_test_AST_only_two_expected_constants": true,
+    "generated_RCC_workflow_only_threeSHA_twoTREE_identity_substitutions": {
+      "sha_occurrences": 3,
+      "tree_occurrences": 2
+    },
+    "all_unrelated_workflows_and_dependabot_exact": true,
+    "three_selectors_profile_one_publish_Core102_raw_summary_RCCbinary_deadlines_and_every_other_AST_predicate_exact": true,
+    "meaningful_pin_RED": "1FAIL54PASS: actualoldcandidate_checkoutref rejects reviewedSprime",
+    "GREEN": "55PASS21.01s existingworkflow/actualsummaryvalidatorcontrols",
+    "ToolkitTest": "96PASS21.73s/configuredRuff/RCCSUCCESS",
+    "changed_generator_and_test_Ruff": "PASS",
+    "changed_test_format": "PASS",
+    "configured_Poetry_Isort": "PASS",
+    "compile": "PASS",
+    "diffcheck": "writerPASS/frozenexactidentitydiff inspected",
+    "source_full_gates": "Correctly reused S-prime1169PASS13SKIP/scoped109PASS4SKIP/type337/fullconfiguredlint because every affectedpackage/build/toolkit leaf unchanged",
+    "extra_generator_format": "Not PASS; S-prime and C-prime return1 with byte-identical47a7db diff. Accepted inherited diagnostic outside two-pin scope; no unrelated format edits or waiver of configured source checks.",
+    "canonical_fef375_exact_retained": "S-prime lesson occurs once/guideblob unchanged",
+    "original7member_artifact_and_old_candidate_control_identity": "Verified unchanged/historical only"
+  },
+  "evidence_files": {
+    "control-only-patch-plan.json": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/control-only-patch-plan.json",
+      "sha256": "707603dcb793ebe2b6ef13bb46fc090aebdd287b53232b31bf4dfccb7429c93b",
+      "size": 2063
+    },
+    "control-only-source-and-output-proof.json": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/control-only-source-and-output-proof.json",
+      "sha256": "d0457a77772fc0903cc5e27f159d8c339afebb727f229bc157f1da74a0500df4",
+      "size": 2630
+    },
+    "current-control-ToolkitTest.log": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/current-control-ToolkitTest.log",
+      "sha256": "c40356633f7601b64855bc8883b19ecdc8897d6fe44960fb5ca508f8ed34faad",
+      "size": 14346
+    },
+    "diagnose-inherited-format-v2.py": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/diagnose-inherited-format-v2.py",
+      "sha256": "307ed0f593d9121159a0d7dbaaae1b59d921352cb011fc25dc5dc5fb587846ff",
+      "size": 1778
+    },
+    "exact-control-delta.patch": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/exact-control-delta.patch",
+      "sha256": "2cc443430a68b7b831bcced4aba6a6586b852c7ddbb4d3bd0044de5b4c358aa4",
+      "size": 3532
+    },
+    "freeze-control-checkpoint.py": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/freeze-control-checkpoint.py",
+      "sha256": "a00752b9e9b98acbebc90bd6996a1e28f814fdcaedcd1fd4a8c7080979aac44e",
+      "size": 6681
+    },
+    "generator-format-Cprime.diff": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/generator-format-Cprime.diff",
+      "sha256": "47a7db25553fe0f69efbb7937d68570045274f38eddf82e6078f80fe81ac27b7",
+      "size": 4683
+    },
+    "generator-format-Cprime.stderr": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/generator-format-Cprime.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "generator-format-Sprime.diff": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/generator-format-Sprime.diff",
+      "sha256": "47a7db25553fe0f69efbb7937d68570045274f38eddf82e6078f80fe81ac27b7",
+      "size": 4683
+    },
+    "generator-format-Sprime.stderr": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/generator-format-Sprime.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "inherited-format-diagnosis-and-remaining-static.log": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/inherited-format-diagnosis-and-remaining-static.log",
+      "sha256": "bf34d1ceedf1d925d35dee08063cb71da967be4bb3feebf17e5c60691aba929a",
+      "size": 8781
+    },
+    "inherited-format-diagnosis-v2-and-remaining-static.log": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/inherited-format-diagnosis-v2-and-remaining-static.log",
+      "sha256": "d5a1fedf3e3b64a3041da519b643b58a0e358cd15d8accbc87379357942291aa",
+      "size": 4180
+    },
+    "inherited-generator-format-diagnostic.json": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/inherited-generator-format-diagnostic.json",
+      "sha256": "793f4901a85ba1e195a5cd50948254c4dc418fdffc6953b8b3bc68852a65ac20",
+      "size": 548
+    },
+    "new-source-pin-GREEN-static.log": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/new-source-pin-GREEN-static.log",
+      "sha256": "47f08ca94921ba75cae18ba945cb5a54bb00db2851f2ec52e06a8e066059e8ce",
+      "size": 7210
+    },
+    "old-source-pin-RED-serial.log": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/old-source-pin-RED-serial.log",
+      "sha256": "d53550003a016397dbf48143ce38d5ab66fd2858eead11d9538898f91452d634",
+      "size": 7836
+    },
+    "old-source-pin-RED.log": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/old-source-pin-RED.log",
+      "sha256": "32f2de33d5b2f957dde19ce88b5d04cb8028e3657631e5578624e213593dc492",
+      "size": 5179
+    },
+    "verify-control-scope.py": {
+      "path": "/workspace/engineering/pr302-actual310-control-refresh/verify-control-scope.py",
+      "sha256": "a5dce3594314af4f5a8dc4b198cb82fcd58cbc9653af7012afb17526bc7c74dd",
+      "size": 3829
+    }
+  },
+  "preserved_HOLDs": [
+    "Fresh exactSprime/Cprime hostedpublicLinux3case and fulltestedmergeCI",
+    "newfrozenartifactqualification for changedadapter/nativeproducer",
+    "Originalprivate01f/fafb/frozenv6 metadata/supervisor/full134135",
+    "WindowsRCC/Core1.0.3/fullrelease/publication"
+  ],
+  "native_reuse": "92498UNQUALIFIED changedadapter from earlierSprime, selected5 equality does not close fullproducer qualification",
+  "next_gate": "Root may normal-push existing branch after this exact review. Fresh current S-prime/C-prime hostedLinuxthreecase and fulltestedmergeCI required before integration; no actual/merge authorization granted by reviewer.",
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md already changed in prerequisite source S-prime d642; byte-identical in control C-prime; no duplicate cosmetic paragraph",
+    "Durable_learning": "Nine sampled inputs authenticate source candidate, not control or full producer; separately reviewed source must precede a control child pinning that immutable source/tree; full suite tested merge kept separate even tree-equal",
+    "Evidence": [
+      "S-prime source freeze61a0 and independent4c137 review",
+      "original seven artifact members/nine source hashes and historical26 controls/testedmerge63cf",
+      "meaningful old-pin RED/new-pin GREEN actual validator tests and pin-only AST/1406leaf preservation",
+      "full268 producer inventory retains changed adapter; selected5 equal does not qualify old native92498"
+    ],
+    "Stale_guidance_removed": "Source/control/nine-sample/full-producer/tested-merge conflation clarified in S-prime canonical addition; no older proof relabeled",
+    "Remaining_uncertainty": "New hosted current3case/fullCI, changed-adapter native artifact qualification, private/full134/135, Windows RCC/fullCore/release/publication remain open. Extra inherited generator formatting diagnostic is disclosed.",
+    "accepted_patch_sha256": "fef37515784cbf9fbb003ecca90ec0acb78d8e319bf2fd0ce2c2c1805ff955e6",
+    "disposition": "Integrated S-prime prerequisite lesson retained exactly; no C-prime new documentation mutation per bounded authorization"
+  },
+  "canonical_review_disposition": "Exact fef375 lesson integrated S-prime and retained byte-exact in C-prime; independent review confirms source/control/fullproducer/testedmerge separation. No cosmetic duplicate delta.",
+  "Upstream_disposition": "none",
+  "retained_review_diagnostic": "Initial external review script shadowed checkpoint Path with tracked filename after checks; receipt construction AttributeError only; corrected v2, no checkout mutation or package execution.",
+  "retained_306": "fd8621 recurrence+4d08 acceptedV2adaptation remains read-only/source-ready proposal; no observer implementation or actualretry.",
+  "review_script_sha256": "5c56bfbab62280010f879fb90b780ee6c9c226e3e595514e360aca5a8ee770c4"
+}

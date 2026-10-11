@@ -1,0 +1,154 @@
+{
+  "status": "GO_SPRIME_SOURCE_FOR_CONTROL_AUTHORING_ONLY",
+  "source": {
+    "head": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+    "ordered_parents": [
+      "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a"
+    ],
+    "branch": "fix/rcc-published-artifact-details-20261010",
+    "clean": true
+  },
+  "review_operations": "READ_ONLY_GIT_BLOB_AST_HASH_AND_FROZEN_LOG_READBACK; external evidence only; no gateway/product/test/regeneration execution",
+  "frozen_checkpoint": {
+    "path": "/workspace/engineering/pr302-actual310-source-refresh/source-Sprime-frozen-checkpoint.json",
+    "sha256": "61a0d394e75fd605936acec528aac87a9f768025ee8e5e82db667628eb090c74"
+  },
+  "independent_verified": {
+    "1409_exact_parent_leaf_union": true,
+    "no_parent_deletions_or_novel_nondocumentation": true,
+    "32_generator_top_level_AST_parent_union": true,
+    "RCC_class_and_generated_workflow_exact_old_control": true,
+    "canonical_ordinary_parent_merge_plus_exact_fef9_lesson": true,
+    "canonical_retained_parent_blocks": {
+      "ba04dff7c932b963f2d7a60529fbc3c325bbee1d": 5,
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a": 4
+    },
+    "all1409_current_working_bytes_modes_match_frozen_tree": true,
+    "nine_source_bodies_modes_exact_S43a": true,
+    "three_selectors_profile_one_publish_raw_summary_Core102_contracts_unchanged": true,
+    "producer268_changed_adapter_only": [
+      {
+        "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+        "native_sha256": "65abc1efe7879ffc325f84841b9630f05b8a5b11cdc3a32728daf7df7091edcb",
+        "source_union_sha256": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a"
+      }
+    ],
+    "selected5_body_modes_equal_native": true,
+    "bootstrap_reuse_inputs": {
+      "prior": 19,
+      "declared": 24,
+      "overlap": 13,
+      "unique": 30,
+      "unchanged_prepared_git_bytes_modes": true,
+      "five_actual_origin_prefix_records_and_existing_venv_configs": true,
+      "new_install": false
+    },
+    "Doctor": "PASS",
+    "ToolkitTest": "96PASS",
+    "scoped": "109PASS4optinSKIP4warnings",
+    "configured_full": "1169PASS13SKIP15warnings/129.49s/2workers",
+    "configured_lint": "Ruff/format301/Isort PASS; optionalmdl unavailable",
+    "typecheck": "337filesSUCCESS",
+    "regeneration_frozen_log_and_current_outputs": "8workflows+dependabot",
+    "original_7_member_artifact_hashes_unchanged": true
+  },
+  "evidence_files": {
+    "ToolkitTest.log": {
+      "path": "/workspace/engineering/pr302-actual310-source-refresh/ToolkitTest.log",
+      "sha256": "abd93279b7c0192bf77e905fa214d2526dd67f5e370fd203268c04f6a77fe891",
+      "size": 14344
+    },
+    "Doctor.log": {
+      "path": "/workspace/engineering/pr302-actual310-source-refresh/Doctor.log",
+      "sha256": "8c267b976811eeb15e563c0392c3eb6e027d76ca557e29c939de3c67515445d7",
+      "size": 13487
+    },
+    "own-origins-and-full-source.log": {
+      "path": "/workspace/engineering/pr302-actual310-source-refresh/own-origins-and-full-source.log",
+      "sha256": "d47c70a669989a07bd659b2e6e48d519b03b970df60e572dbbe2327a92cde9f3",
+      "size": 305774
+    },
+    "own-five-source-origins.log": {
+      "path": "/workspace/engineering/pr302-actual310-source-refresh/own-five-source-origins.log",
+      "sha256": "dddbda696d6b61b7f386403d528ef05fc5b2a27dc02e596db97639c99f40cbbc",
+      "size": 7867
+    },
+    "verify-source-union.py": {
+      "path": "/workspace/engineering/pr302-actual310-source-refresh/verify-source-union.py",
+      "sha256": "db88326ed1169e74dd9af8e22d4d487a165000d077df73c70b12e73d58527c0b",
+      "size": 4777
+    },
+    "scoped-static-regeneration.log": {
+      "path": "/workspace/engineering/pr302-actual310-source-refresh/scoped-static-regeneration.log",
+      "sha256": "d2b71f31ed0363c07160c1746ae36ba3559de28d6b2ba74572c1fc7cd962249c",
+      "size": 6043
+    },
+    "source-union-preservation-proof.json": {
+      "path": "/workspace/engineering/pr302-actual310-source-refresh/source-union-preservation-proof.json",
+      "sha256": "c2c55ebb7e26c2afa5495ac74de33a3b2581b05509ad6a1f3c8f0bcbac967368",
+      "size": 1638
+    },
+    "own-bootstrap-reuse-proof.json": {
+      "path": "/workspace/engineering/pr302-actual310-source-refresh/own-bootstrap-reuse-proof.json",
+      "sha256": "87d27678599967c0f75508c8e583bc271191c790433428f3ada568d8e2909d6f",
+      "size": 8052
+    },
+    "canonical-current-source-merge-delta.patch": {
+      "path": "/workspace/engineering/pr302-actual310-source-refresh/canonical-current-source-merge-delta.patch",
+      "sha256": "5e982d887e4cc717073ad88d49eb1addfdc6893fd6d9fcf983f7d1b3921c7a91",
+      "size": 10332
+    },
+    "own-bootstrap-reuse-complete-gateway-proof.json": {
+      "path": "/workspace/engineering/pr302-actual310-source-refresh/own-bootstrap-reuse-complete-gateway-proof.json",
+      "sha256": "0c375df64581c3439361ab7b62076e16d9e604d4d71a5cba1a62ec700c2e3666",
+      "size": 14793
+    },
+    "scoped-static-regeneration-corrected.log": {
+      "path": "/workspace/engineering/pr302-actual310-source-refresh/scoped-static-regeneration-corrected.log",
+      "sha256": "082afb5387ef5775f8f514636848e88bf83fa4ff7edce705893b295d74c59515",
+      "size": 8147
+    },
+    "own-five-prefix-and-source-origins.json": {
+      "path": "/workspace/engineering/pr302-actual310-source-refresh/own-five-prefix-and-source-origins.json",
+      "sha256": "9e7e61e960e89fc7bed158b573d62b05be247cea35b39192d30cace234cc22db",
+      "size": 1556
+    }
+  },
+  "historical_scope": {
+    "S": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+    "S_tree": "e05141d122b7245b626c5d0389cf9b653c8ad300",
+    "C": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+    "C_tree": "6e8af78b3386b870191d559535519f90bc4b0b8a",
+    "artifact_id": 11691074610,
+    "artifact_sha256": "b25afa9eb55320bf6b851ef49586cd2870952956eecc942a0f22080b898de1d1",
+    "original_summary_source_nine_candidate_control_and_threecase_counts_verified": true,
+    "old26checks": "originalba04/testedmerge63cf only; no new exactunion qualification"
+  },
+  "next_gate": "Root-authorized separate Cprime must pin immutable d642 source/tree fdf2; new control and fresh tested merge require independent review and hosted acceptance. This GO only releases control authoring, never push/actual/merge.",
+  "HOLDs": [
+    "native92498 changed-adapter reuse UNQUALIFIED; no exclusions/new native proof",
+    "new currentSprime/Cprime hosted three-case/fulltestedmergeCI",
+    "private01f/frozenv6/full134135/metadata/supervisor",
+    "Windows/Core103/fullrelease/publication"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md inSprime; targetguide/work-items.md retainedbyte-exact",
+    "Durable_learning": "Nine sampledsource hashes authenticate recordedcandidateS, notcontrolC orentirenativeproducer; resolvedsourceunion/fullproducer/fullCItestedmerge identities remainseparate even tree-equal",
+    "Evidence": [
+      "originalartifact11691074610/raw7members/nineS43a hashes and exact3JUnit",
+      "oldterminal26CI/testedmerge63cf orderedfbde/ba04",
+      "resolved1409leafordinarymerge and268adapter-onlydelta plus5selected equal",
+      "96Toolkit109scoped1169fullsource andconfiguredstatic/generatorunion proof"
+    ],
+    "Stale_guidance_removed": "Clarified sample/fullproducer and source/control/testedmerge ambiguity; keptoldreceipts historical instead ofcallingnewunionqualified",
+    "Remaining_uncertainty": "Sprime sourceonly; Cprime notauthored; freshhostedactual/fullCI/native/private/Windows/fullrelease gatesremainopen",
+    "accepted_patch_sha256": "fef37515784cbf9fbb003ecca90ec0acb78d8e319bf2fd0ce2c2c1805ff955e6",
+    "disposition": "exactninebindinglesson integrated; automaticcanonicalparentlessons allretained"
+  },
+  "Upstream_disposition": "none",
+  "retained_306": "fd8621/4d08V2activation-fit proposal remains read-only/design-only; no306 writer or actual retry",
+  "canonical_review_disposition": "Accepted fef9 patch integrated byte-exact once in frozenSprime; existing parent lessons retained. Independent review rejects any extension to artifact/native/current-CI qualification.",
+  "review_script_sha256": "2b0bfe3a2fd4d135d207cf382a3ec81413081bbbac885797f02f00ee64d953f0"
+}

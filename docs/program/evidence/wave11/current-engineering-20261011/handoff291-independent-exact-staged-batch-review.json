@@ -1,0 +1,485 @@
+{
+  "verdict": "GO_EXACT_STAGED_291_MEMBER_DURABLE_ENGINEERING_EVIDENCE_BATCH_AND_AUTHORED_GUIDANCE_ONLY",
+  "repository": "/workspace/engineering/campaign-checkpoint",
+  "preserved_parent": "5cdd53ebd8f69b88a4c1bb3afabda0d450ed802a",
+  "review_boundary": {
+    "manifest": {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-20261011/manifest.json",
+      "bytes": 77434,
+      "sha256": "949bc6260163af29167522d5523eca7c9f081c916c3a201495314ddc54fb5623"
+    },
+    "README": {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-20261011/README.md",
+      "bytes": 22118,
+      "sha256": "3be99a04a21dae940aa331448563bad101d6b03212f30410afedb1ca70bb0d18"
+    },
+    "canonical_guide": {
+      "path": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+      "bytes": 216083,
+      "sha256": "eadb9dc16a601549bd8173ede46cd290e52772b4e106f32a934a5e52ebc52c65"
+    },
+    "staged_complete_filelist_SHA256": "97db336b9c2947893f16389d0e0a9db8b81b52795794b7e0c9deb8a66331ed3c",
+    "staged_complete_filelist_rows": 2585
+  },
+  "byte_and_stage_verification": {
+    "291_working_original_manifest_size_SHA_verified": true,
+    "291_staged_Git_blob_bytes_exact": true,
+    "62_additions_exact_original_bytes": true,
+    "prior229_manifest_records_and_committed_Gitblobs_unchanged": true,
+    "all_staged_paths_exact_62plus_manifest_README_canonicalguide": true,
+    "no_worktree_unstaged_diff": true,
+    "safe_full_bindings": {
+      "path": "/workspace/engineering/checkpoint-291-independent-review/verified-manifest-source-bindings.json",
+      "bytes": 102090,
+      "sha256": "462a3f4fdca2a8c38e30582feda27848e28e9a36485968e2e3572d695f34d519"
+    },
+    "historical_descriptive_source": "Only prior pr290-actual-integration.json records authenticated GitHub readback rather than local original path; original committed bytes/manifest immutable"
+  },
+  "safety": {
+    "new_payloads": "49JSON and13originalpatches only",
+    "credential_private_key_signedURL_Bearer_patterns": 0,
+    "new_URLs": "github.com authenticated public repo job/PR URLs only; no signed artifact redirect/environment/token/provider payload",
+    "private_full_logs_archives_119684_member_indices_cachetrees_binaries_packages_added": false,
+    "manual_content_review": "Safe original failure field excerpts/categories and source/readiness/CI tuple metadata; raw reports/logs/databases/archive inventories retained path+hash only. No fullprivate provider/config/secret data. Original nested public pipMETADATA/history unchanged.",
+    "source_leaf_inventory": "Mode/blob/hash lists only, not raw tracked config or payload contents",
+    "new_original_source_files_verified": "All manifest originals exist and match except approved historical descriptive readback entry; no redownload or raw native run"
+  },
+  "claim_consistency": {
+    "V5": "Exact historical3ec/native92498 narrow Linux case PASS/5 declaredtoolRuns/2resourceRuns/3sampledCoremembers/DEBUGlaunchpath/strictRuntime sampler plus separate outerreap. Callerlabel correction additive; originalb475 and rawreferences unchanged. No naturalshutdown/livePID/wholewheel/coldregistry/fullcontract/latestsource carry. EarlierV2V3V4FAIL preserved.",
+    "fixtures": "Historical305 Windows syntheticLFvsCRLF and Mac emptyPID handoff failures preserved; new1e9 source-only controls/gates do not waive actual forcedhang/newplatform CI.282 staging oldbuffer/afterread/metadata controls source-only9c, no universal concurrentwriter guarantee or inferred timestamp cause.",
+    "299": "Source2ad completepreservation/current274 producer original exact but old268sixchanged+sixadds unqualified; fresh774union gates required;300 waits actual299 acceptedmerge.",
+    "capacity": "Safe summaries/reviews only; all119684 recordedmembers previously verified across8private archives. Rootmetadata/inodes/ACLxattrs/preciseTARmtime/historicalhandle limitations remain; ENOSPC failures unchanged. No broad hashes of concurrentwriters.",
+    "RCC": "V2 timeout design sourceTaskGO only; original44afdcontrol recovered, no private01f/frozenv6/full29eb/sourceguard implementation/provider/native qualification.",
+    "302": "Nine candidate sourcebindings authenticate sample distinct from control/fulltestedmerge; retained threecaseJunit/lifecycle metadata notwholeprivateacceptance; next774refresh proposal only.",
+    "310": "Final22observedjobs21SUCCESS1expectedtagonlyWorkItemsSKIP and actual774integration retained under exact reviewedtree17c1afa/parents1c75dfca. Original failure/selectedactualnative/UI receipts separate; full208/backend/browser/private/OAuth/release held. Newprospective299308309 trees are preparation only, old1c75CI cannot qualify774.",
+    "221": "Authenticated complete empty closingIssuesReferences for draft774/a709 retained; no issue closure/tag/registrypublication/infrastructure provisioned"
+  },
+  "canonical_documentation": {
+    "file": "docs/skills/repository-operations.md",
+    "exact_integrated_reviewed_delta": {
+      "path": "/workspace/engineering/checkpoint-291-independent-review/canonical-reviewed-root-delta.patch",
+      "bytes": 7207,
+      "sha256": "00bd191af5077c17234ee20f1b336cf58cc193f7319c5fff6034e0eda159c4e0"
+    },
+    "all13_original_proposal_dispositions": [
+      {
+        "file": "capacity-independent-canonical-completed-scratch-preservation-proposed.patch",
+        "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208",
+        "disposition": "GO_INTEGRATED verbatim completed-scratch preservation paragraph; scoped recorded metadata, no archive or full index copied."
+      },
+      {
+        "file": "current-hosted-failure-canonical-PID-handoff-evidence-proposed.patch",
+        "sha256": "72ce742e46d6c764322f637968a47f9b0e0cc4619c885a45b7e79940b941ee66",
+        "disposition": "GO_INTEGRATED portable generic validPID/publication/processidentity boundary; missing measured cleanup remains unavailable."
+      },
+      {
+        "file": "current-hosted-failure-canonical-fixture-and-mutation-evidence-proposed.patch",
+        "sha256": "4f29ae54111aeadbf5c99443f2cdb51ab5d875024bd0c0427c0e7e846317c62d",
+        "disposition": "GO_INTEGRATED CRLF sourcefixture versus rawinstalledmember authority and injection-stage evidence; no incomplete-failure cause guess."
+      },
+      {
+        "file": "handoff229-canonical-exact-followup-proposed.patch",
+        "sha256": "4cd7a4227faef0159698e379f6f1326be75d12e4c06f131c389869ca22db51dd",
+        "disposition": "GO_INTEGRATED exact named-result.stderr qualification plus Runoutput grant/reader acquisition boundary; no active-stream recall claim."
+      },
+      {
+        "file": "pr282-staging-source-refresh-canonical-actual-delta.patch",
+        "sha256": "6b406306548394847d9ea37e18d170da93f714e4ef736648e695d8f22373958f",
+        "disposition": "GO_INTEGRATED ten-line lesson adapted generically: device/inode target before-read constant-time digest control versus separate forced after-read mtime detector; all exclusivewriter/nonatomicsnapshot limits retained."
+      },
+      {
+        "file": "pr299-actual311-independent-canonical-integrated-actual311-delta.patch",
+        "sha256": "b2331e6946e7c276dcf71d1ce98292c8ef4783931628f2c665e752357a26a4a3",
+        "disposition": "GO_INTEGRATED owning299 branch exact lesson and root generic paragraph from4cd; duplicate identical originalowner/reviewer b233 receipts retained, single canonical explanation."
+      },
+      {
+        "file": "pr299-actual311-refresh-canonical-actual-delta.patch",
+        "sha256": "b2331e6946e7c276dcf71d1ce98292c8ef4783931628f2c665e752357a26a4a3",
+        "disposition": "GO_INTEGRATED owning299 branch exact lesson and root generic paragraph from4cd; duplicate identical originalowner/reviewer b233 receipts retained, single canonical explanation."
+      },
+      {
+        "file": "pr302-next-refresh-canonical-nine-source-bindings-proposed.patch",
+        "sha256": "fef37515784cbf9fbb003ecca90ec0acb78d8e319bf2fd0ce2c2c1805ff955e6",
+        "disposition": "GO_INTEGRATED nine-file candidate sample versus complete union/native inventory and separate source/control/testmerge identities; no old ba04 evidence carry onto774."
+      },
+      {
+        "file": "pr305-fixture-source-canonical-fixture-and-output-preservation.patch",
+        "sha256": "58c62090aa0f290f75f96aa17e6926aa5430ce6230378375fd2b731df89b0793",
+        "disposition": "GO_INTEGRATED original1e9 sourceguide41line delta; root generic CompletedProcess/reportchannel/fixtureLF/completePID lessons retain required semantics without copying implementation diary."
+      },
+      {
+        "file": "pr305-v5-independent-canonical-actual-v5-proposed.patch",
+        "sha256": "e84eb7659efef7f349231b1b8b5a80ef5c0d8a2f20e9dc2e1a9d59eea8c3e0b0",
+        "disposition": "GO_INTEGRATED existing CompletedProcess plus newly specific locked named-result.stderr mechanism; prior V4 bytes not recovered or relabeled."
+      },
+      {
+        "file": "rcc-public-parent-canonical-parent-deadline-proposed-v2.patch",
+        "sha256": "1581a99017e37314d1c6c5737b51616fa458f25e833356fa7c89e21606aab9e0",
+        "disposition": "GO_DESIGN_ONLY_INTEGRATED_V2 retained44afd historical wording + originalworker summary/evidence and separate supervisor deadline; guard implementation/current actual gates still separate HOLD."
+      },
+      {
+        "file": "rcc-public-parent-canonical-parent-deadline-proposed.patch",
+        "sha256": "7933b5f7241227a022c3600e1efb1fcf2747f12a0380f60dab381beaac1e3da4",
+        "disposition": "SUPERSEDED_BY_NAMED_V2_FOR_CANONICAL_INTEGRATION original7933 preserved immutable; no stale current-parent final instruction."
+      },
+      {
+        "file": "rcc-public-parent-independent-canonical-parent-deadline-proposed-v2.patch",
+        "sha256": "1581a99017e37314d1c6c5737b51616fa458f25e833356fa7c89e21606aab9e0",
+        "disposition": "GO_DESIGN_ONLY_INTEGRATED_V2 retained44afd historical wording + originalworker summary/evidence and separate supervisor deadline; guard implementation/current actual gates still separate HOLD."
+      }
+    ],
+    "disposition": "GO_INTEGRATED exact backed adaptation; historical/qualified/design-only scopes retained. Existing delta sufficient; no new cosmetic/repeated proposal needed.",
+    "evidence": "Independently preserved291 originals+index, prior229 committedblobs, all named source/actual/failure/capacity/design reviews and immutable originalpatches; no actual gate reexecution by batch reviewer.",
+    "stale_ambiguity": "Current initial summaries/source-only GO, historical failed jobs and design-only source proposal cannot be treated as latest actual admission. Caller labels/cleanup/launchpath/source-control tuples and artifact inventories have distinct evidence.",
+    "remaining_uncertainty": "Fresh current774ordinaryunions/full CI and all retained backend/transport/native/private/release graph gates remain open. Historical logs, missingV4original streams, originalprivate01f/frozenv6/full29eb bytes not recovered by bookkeeping or this batch.",
+    "upstream": "none"
+  },
+  "README_exact_reviewed_delta": {
+    "path": "/workspace/engineering/checkpoint-291-independent-review/README-reviewed-root-delta.patch",
+    "bytes": 6232,
+    "sha256": "a8cc02cb5a5f8ac37d848f38255970b86c65a892ee847d78b5e583542e7f0915"
+  },
+  "whitespace": {
+    "authored_staged_guide_README_manifest_diffcheck": "PASS",
+    "blanket_raw_artifact_diffcheck": "NOT_CLAIMED: original context/trailing whitespace preserved byteexact",
+    "original_patch_exceptions": [
+      {
+        "file": "pr310-canonical-guide-proposed.patch",
+        "sha256": "2915ac45c5140032ca613c48fa42b99b02bcaf5e995ec10872a002e1f40c12c8",
+        "lines": [
+          {
+            "line": 6,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "oauth-canonical-proposed.patch",
+        "sha256": "ac884e1e46d5be3e8307ce23a747422c265a736b8430a1e0fd368a5c4f7bf55c",
+        "lines": [
+          {
+            "line": 34,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr310-platform-guide-proposed.patch",
+        "sha256": "57fe12e38b696e32de01046b1497e34f7eab3072269fd1cf592d010c55ee7cbe",
+        "lines": [
+          {
+            "line": 6,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr310-platform-gate-clarification.patch",
+        "sha256": "5e38c68583aa8cac5700a0ad0fe42dc425fd8ce0fb252d8cd76b694638061a7e",
+        "lines": [
+          {
+            "line": 6,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 16,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr307-canonical-exact-delta.patch",
+        "sha256": "1f09c93bb40c75b87cb4576a3fc251b3b999d3eaeeeb96581df0cb5f24bde044",
+        "lines": [
+          {
+            "line": 19,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 62,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr299-current-union-source-scope.patch",
+        "sha256": "38126051092f739693008a78af0e8281bb656ad9490471bb3ab609cebfce0d76",
+        "lines": [
+          {
+            "line": 6,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 8,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr308-current-version-source-scope.patch",
+        "sha256": "6efd2c2a814dba6c9b9ca22cacb7368a19cc4b89d2a8fc2511d795b968cee698",
+        "lines": [
+          {
+            "line": 8,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr305-canonical-collected-module-proposed.patch",
+        "sha256": "7e244ee6986c68e7b8244f667044629fa6be661a968b99be45f1680507e78bee",
+        "lines": [
+          {
+            "line": 25,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr311-full-admission-canonical.patch",
+        "sha256": "caae3f92c32948f0bb29c93302b1ae85f5c4cc3c3671100690cd95dad5d52671",
+        "lines": [
+          {
+            "line": 4,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 6,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr305-actual-v3-canonical.patch",
+        "sha256": "5dbf490d781451fefc400cacd9adccdf0402af16962863a73ec33975b4ae468a",
+        "lines": [
+          {
+            "line": 24,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr307-hosted-acquisition-canonical.patch",
+        "sha256": "dd5396a28768f5b1eb841dbdf02991ec79870cdd8c938681d6f1dc0c3a29d0d3",
+        "lines": [
+          {
+            "line": 24,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr311-independent-integration-priority-canonical.patch",
+        "sha256": "f25c42da132befd90f086ac60f8ba426a673cb7a10d760a2b1b069bf6ff6985e",
+        "lines": [
+          {
+            "line": 4,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 6,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr310-actual311-refresh-canonical-actual-delta.patch",
+        "sha256": "c3b1ef94af5dd54132b4f771be3ce413f8d244695dcbfa2455848578253bc8ad",
+        "lines": [
+          {
+            "line": 8,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 43,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 74,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr310-original-first-readiness-310-initial-readiness-canonical-proposed.patch",
+        "sha256": "b4b32085a6adb9e1a0f9c531245267d12d50d41d7ddbadbe343f9ed9c647c0e7",
+        "lines": [
+          {
+            "line": 23,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr306-actual311-refresh-canonical-actual-delta.patch",
+        "sha256": "cac89fd92340ccb2e3bf41a415881450f1b65bb5a7de6892121bb8d2195a3ee6",
+        "lines": [
+          {
+            "line": 8,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 26,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr305-actual311-selector-canonical-current-union.patch",
+        "sha256": "c5e79cc6cef79c65c6e870431df654d7a39d96381e7e6b6ee9e9e7bc479d2f97",
+        "lines": [
+          {
+            "line": 28,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr305-v4-independent-canonical-actual-v4-proposed.patch",
+        "sha256": "ce3ddb4458c87cb3a61e39fb77378c19f62303d92b7f422a5ab86ce0e83d6f9a",
+        "lines": [
+          {
+            "line": 18,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "next-actual311-union-canonical-prospective-source-and-CI-filter-proposed.patch",
+        "sha256": "8e91bc5395e01d6e02347a6597f452e6a7251d1a66464a45f359a4273b8610ed",
+        "lines": [
+          {
+            "line": 4,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 6,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr305-canonical-runner-v5-proposed.patch",
+        "sha256": "e84eb7659efef7f349231b1b8b5a80ef5c0d8a2f20e9dc2e1a9d59eea8c3e0b0",
+        "lines": [
+          {
+            "line": 28,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "handoff229-canonical-exact-followup-proposed.patch",
+        "sha256": "4cd7a4227faef0159698e379f6f1326be75d12e4c06f131c389869ca22db51dd",
+        "lines": [
+          {
+            "line": 15,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr299-actual311-refresh-canonical-actual-delta.patch",
+        "sha256": "b2331e6946e7c276dcf71d1ce98292c8ef4783931628f2c665e752357a26a4a3",
+        "lines": [
+          {
+            "line": 8,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 18,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr299-actual311-independent-canonical-integrated-actual311-delta.patch",
+        "sha256": "b2331e6946e7c276dcf71d1ce98292c8ef4783931628f2c665e752357a26a4a3",
+        "lines": [
+          {
+            "line": 8,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 18,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr305-v5-independent-canonical-actual-v5-proposed.patch",
+        "sha256": "e84eb7659efef7f349231b1b8b5a80ef5c0d8a2f20e9dc2e1a9d59eea8c3e0b0",
+        "lines": [
+          {
+            "line": 28,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "current-hosted-failure-canonical-fixture-and-mutation-evidence-proposed.patch",
+        "sha256": "4f29ae54111aeadbf5c99443f2cdb51ab5d875024bd0c0427c0e7e846317c62d",
+        "lines": [
+          {
+            "line": 21,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 32,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "current-hosted-failure-canonical-PID-handoff-evidence-proposed.patch",
+        "sha256": "72ce742e46d6c764322f637968a47f9b0e0cc4619c885a45b7e79940b941ee66",
+        "lines": [
+          {
+            "line": 6,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 18,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr305-fixture-source-canonical-fixture-and-output-preservation.patch",
+        "sha256": "58c62090aa0f290f75f96aa17e6926aa5430ce6230378375fd2b731df89b0793",
+        "lines": [
+          {
+            "line": 8,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 36,
+            "kind": "original blank unified-context space"
+          },
+          {
+            "line": 58,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      },
+      {
+        "file": "pr302-next-refresh-canonical-nine-source-bindings-proposed.patch",
+        "sha256": "fef37515784cbf9fbb003ecca90ec0acb78d8e319bf2fd0ce2c2c1805ff955e6",
+        "lines": [
+          {
+            "line": 16,
+            "kind": "original blank unified-context space"
+          }
+        ]
+      }
+    ]
+  },
+  "no_actions": [
+    "No source/evidence/index mutation by independent reviewer",
+    "No gateway/actual/native/provider/browser/source checks",
+    "No cleanup/push/merge/publication/infrastructure/issue closure"
+  ],
+  "next_root": "Commit exactly reviewed index, verify all291 committed blobs/current authored bytes; normal push sameexistingbranch and exact remote readback, then assign independent committed/remote verification. Any additions require separate named additive batch review.",
+  "upstream": "none"
+}

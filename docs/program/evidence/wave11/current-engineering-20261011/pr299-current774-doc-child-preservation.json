@@ -1,0 +1,13 @@
+{
+  "head": "5db93e2251cf039ef81780730098da1b255d8d2e",
+  "tree": "bf3e9dffb8e4d07cf1a06ba376c4e3a64e9bfdf0",
+  "tested_parent": "11c9ab3aa3b5b953486794878408bbd7a7e5ca78",
+  "tested_parent_tree": "758f098dd846437b0d69d246d112fbdb89caf363",
+  "leaf_count": 1419,
+  "only_changed_path": "docs/skills/repository-operations.md",
+  "all_other_leaf_modes_kinds_and_blobs_exact": true,
+  "all_source_test_configuration_AST_exact_by_identical_bytes": true,
+  "whitespace_check": "git diff --check PASS",
+  "no_broad_repeat_after_docs_only_child": true,
+  "no_push": true
+}

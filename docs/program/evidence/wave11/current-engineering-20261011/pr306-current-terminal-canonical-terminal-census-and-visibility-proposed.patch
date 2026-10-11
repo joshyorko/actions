@@ -1,0 +1,21 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -166,6 +166,18 @@
+ as failed. Preserve the command duration, ready-port observation and owned
+ cleanup outcome separately, and leave unavailable ownership observations
+ unknown. Keep the startup and cleanup deadlines unchanged.
++
++Retain the complete terminal job log privately before counting failures; a
++bounded connector preview can omit the terminal census and original traceback.
++Bind the tested merge commit, ordered parents and tree separately from a later
++branch or integration target. Count failed readiness stages independently from
++reached semantic assertions and from the observer's two-node allowlist. Active
++RCC CPU/I/O at the retained sample times does not establish a preparation cause;
++missing raw progress marks leave interval timings unavailable for that run.
++Do not substitute another run's previous-mark sequence. A host return code,
++stopped host readers and cancelled sampler do not expose the actual cleanup
++result's snapshot/reap/live/zombie/error predicates. Preserve those as unknown
++until the existing owned call returns measurements that are separately retained.
+ 
+ At #311 head `c888fb4a`, Windows run `38099013706`, job `114350853595`,
+ timed out at the initial native startup in the watched-reload and resource

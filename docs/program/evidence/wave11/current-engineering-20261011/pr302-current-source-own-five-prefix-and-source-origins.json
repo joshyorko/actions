@@ -1,0 +1,36 @@
+{
+  "five_measured_origins": [
+    {
+      "module": "actions",
+      "origin": "/workspace/engineering/pr302/actions/src/actions/__init__.py",
+      "prefix": "/workspace/engineering/pr302/actions/.venv",
+      "python": "/workspace/engineering/pr302/actions/.venv/bin/python"
+    },
+    {
+      "module": "actions_http",
+      "origin": "/workspace/engineering/pr302/actions-http-helper/src/actions_http/__init__.py",
+      "prefix": "/workspace/engineering/pr302/actions-http-helper/.venv",
+      "python": "/workspace/engineering/pr302/actions-http-helper/.venv/bin/python"
+    },
+    {
+      "module": "devutils.invoke_utils",
+      "origin": "/workspace/engineering/pr302/devutils/src/devutils/invoke_utils.py",
+      "prefix": "/workspace/engineering/pr302/devutils/.venv",
+      "python": "/workspace/engineering/pr302/devutils/.venv/bin/python"
+    },
+    {
+      "module": "actions.work_items",
+      "origin": "/workspace/engineering/pr302/work-items/src/actions/work_items/__init__.py",
+      "prefix": "/workspace/engineering/pr302/work-items/.venv",
+      "python": "/workspace/engineering/pr302/work-items/.venv/bin/python"
+    },
+    {
+      "module": "actions.server._rcc_runtime_adapter",
+      "origin": "/workspace/engineering/pr302/action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "prefix": "/workspace/engineering/pr302/action_server/.venv",
+      "python": "/workspace/engineering/pr302/action_server/.venv/bin/python"
+    }
+  ],
+  "own_source_and_venv_prefix_assertions_passed": true,
+  "product_execution": false
+}

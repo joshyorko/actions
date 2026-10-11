@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "full_source_subject": "99e64a1c926f52f42698c4a5bc9f39d946827654",
+  "files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "before_sha256": "eaf3d19e2f8c63a66af1bdade6f956d27e5ec781b829fdc0c7c1da60d17bc4c1",
+      "after_sha256": "939f6bd9b53354d0f169f9e6115dbd4b15969fcab305040c6b6c929da280cebc",
+      "every_non_import_AST_exact": true,
+      "same_imports_only_stdlib_order_or_whitespace_changed": true
+    },
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": {
+      "before_sha256": "0c97161215c796c3174d77ae24d35da27cb79c8ba65a14041e25149849203e9f",
+      "after_sha256": "797aa5fc04ed4b62281b8fd8be4693c4550ce6ad32773063e8a359ac64eafdcb",
+      "every_non_import_AST_exact": true,
+      "same_imports_only_stdlib_order_or_whitespace_changed": true
+    }
+  }
+}
