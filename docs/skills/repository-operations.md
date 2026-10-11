@@ -3091,6 +3091,111 @@ catalog-ownership migration, require a newly built artifact and acceptance run;
 the older receipt does not establish their native behavior, Go-wrapper execution,
 or full release acceptance.
 
+The catalog-ownership migration control includes all five multi-package sync
+CLI cases, covering additive import/restart, desired-set deduplication, bad
+later-package rollback, last-good unmanaged sources, and historical-alias
+rejection/recovery. Its source-mode CLI result is separate from frozen
+acceptance: the ten-case control is pinned to a separately measured native
+artifact for candidate `c78288c3`; its independent byte receipt verifies the build
+tree, manifest, inventory, package tree, frozen executable, and wrapper artifact.
+Hosted run [38055229055](https://github.com/joshyorko/actions/actions/runs/38055229055)
+on control `57ba99ee` passed the ten exact cases (zero failures/errors/skips,
+257.83s). Independent receipt review verified artifact `11671465182`, its
+SHA-256 `ca81fb7da1915cde6bb4052b2effc1c6d5a871ee132db3e8c6ee8ff7efe7a404`,
+the case set, managed Core 1.0.2 workers and successful generation drain. This is
+Linux frozen evidence only, not Go-wrapper execution or other-platform acceptance.
+Keep configured import sorting active for the standalone JUnit validator tests:
+passing pytest does not establish that the separate lint gate passed. Before
+using the artifact from a later test/docs-only control commit, verify the complete
+build tree and unchanged Runtime source/dependency inputs; rebuild if those inputs
+change. The five-case receipt above remains evidence only for candidate `31239cf9`
+and must not be carried forward as migration proof.
+
+When extending a frozen acceptance set, update the exact pytest node selection,
+JUnit allowlist/count, validator contract fixture, and generated workflow together.
+A prior hosted receipt proves only its recorded nodes; a newly added Runtime
+behavior needs an artifact built from the final Runtime source/dependency inputs
+and a new frozen execution receipt. Source-mode CLI coverage is separate evidence.
+
+The a47 resource-history control is an eleven-case selector: it retains the ten
+rollback, drain, and package-sync cases and adds the exact CLI resource-owner
+history test from candidate `a47dc616`. Its control validates the copied test's
+Git blob, candidate/build tree equality, and the measured native archive,
+manifest, inventory, frozen executable, package-tree, and embedded-file digests.
+The measurement receipt binds candidate `a47dc616` to build commit `0045d91b` by
+identical tree `10e4b5fb`; it verifies Ubuntu frozen bytes only. The measured
+native archive does not contain the Go wrapper, so wrapper evidence must come
+from the separate wrapper artifact and job. Hosted run
+[38067094994](https://github.com/joshyorko/actions/actions/runs/38067094994)
+passed the exact eleven JUnit cases with no failures, errors, or skips for
+control `fbd504a3`, candidate `a47dc616`, and same-tree build source `0045d91b`.
+Its separate Go-wrapper job also passed those cases and recorded verified
+wrapper/child identities and natural shutdown for that candidate. This is
+Linux frozen evidence for this tuple only; it does not establish current
+integration or full release acceptance, nor Windows/macOS behavior. Keep the
+earlier ten-case c782 receipt as historical evidence.
+
+A refreshed control harness must record its source identity separately from the
+native build source. The retained pre-cleanup convergence control includes the
+reviewed staging prerequisite and PR292 typed fixture. Its verifier pins Runtime subtree
+`2aed50eae66abc2c85635a36c45a734429cfe905`: every Runtime source input must match
+candidate `a47dc616`, except the exact added `source_staging.py` blob
+`b475fd6688b7afc6606cde2cba9a1294d771a64c`. Core, HTTP Helper, all three manifests
+and locks remain identical to that candidate. The resource-history selector is
+the exact typed blob `5fe18b942ba66f339ac076fa26add1908d70305e`; the other four
+selected test blobs and eleven JUnit identities remain unchanged. This is an
+explicit harness difference, not a new native-build identity or an arbitrary
+source-diff exclusion. Both job summaries embed the verifier receipt and cannot
+pass without its successful source check bound to the control SHA. A changed
+Runtime helper, staging blob/mode, dependency input, or selector fails before
+artifact execution. Keep the successful `fbd504a3` tuple and its original
+selector as historical evidence; it does not execute the refreshed harness.
+The refreshed control depends on PR292 acceptance, and its hosted native and
+wrapper execution remain NOT RUN until separate exact-control receipts pass.
+Neither the added staging module nor whole-source native parity is proved by
+the older a47 binary.
+
+After importing PR292 startup-failure cleanup, the current Runtime helpers and
+resource-history test no longer match those retained pins. The retained pre-cleanup verifier rejects
+that checkout before artifact execution. Current-control native and wrapper
+execution require a separately reviewed current-source artifact tuple and new
+receipts. Preserve the original artifact pins and historical results in their
+original commits; never widen a source-equivalence exclusion to admit changed
+Runtime code.
+
+The current-source control uses accepted candidate `ba85aac7` and native build
+`92498aff`, both complete tree `80e5c775`. It checks exact equality for all
+source/dependency inputs and all five selected test blobs, with no exclusions.
+The frozen provenance and Go wrapper come from the same Build Unauthenticated
+run `38098225250`, attempt 1, artifacts `11686643166` and `11686533628`.
+A neighboring Tests run's shared head does not bind its binary bytes. Verify
+both downloaded archives independently and retain candidate, PR head and
+synthetic build identities separately. The combined byte/source measurement
+receipt is retained in
+[`runtime-frozen-current-source-20261011`](../program/evidence/runtime-frozen-current-source-20261011/README.md).
+The artifact API's `workflow_run.head_sha` identifies the workflow's PR head
+(`2f631e54` here), independently of the accepted candidate `ba85aac7` and actual
+synthetic checkout `92498aff`. Admit metadata against that exact workflow head;
+retain candidate/build tree equality and archive checks as separate gates.
+Exercise the generated metadata predicate with the real workflow head and with
+each mismatched identity, size and expiration before refreshing a control.
+Exact source equality and archive inspection admit this tuple for execution;
+they do not establish the eleven frozen cases, eleven wrapper cases, published
+dependency origins, other platforms or release acceptance. Preserve the old
+a47 receipts under their original identities.
+
+Frozen-wrapper contract tests must separate archive metadata from filesystem
+mode support. The verifier checks the ZIP member's POSIX executable mode before
+extraction on every platform; the extracted file's `chmod(0o755)` result is a
+filesystem assertion only on POSIX, because Windows does not preserve that mode
+bit. On Windows, retain assertions that the extracted path is a regular file
+with the verified bytes. Likewise, keep interpreter-receipt and workflow-source
+assertions cross-platform, but run `bash -n` only where `bash` is a native POSIX
+shell: on Windows, PATH can resolve `bash` to a WSL shim that fails because no
+distribution is installed. Linux/macOS contract tests still execute both
+embedded shell blocks, so this boundary does not remove syntax validation from
+those hosts or claim shell execution on Windows.
+
 When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
 `VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run
 the Poetry/Invoke command with `VIRTUAL_ENV` unset, then explicitly check the
@@ -3117,11 +3222,27 @@ correctness failure. Controlled browser performance remains a separate proof.
 
 ### Live pull-request base identity
 
+Reconcile the complete exact-head check-run inventory, commit statuses and
+workflow-run inventory before merge admission. Page each endpoint until
+exhausted and count checks, jobs and runs separately. A successful workflow can
+contain skipped jobs; inspect each skip's event condition and retain it as
+skipped. Empty commit statuses do not imply absent Actions checks. After a
+prerequisite merge, compare the dependent's new prospective tree with its
+previously tested tree. Require review and fresh checks for a changed union;
+matching earlier production changes does not include later prerequisite repairs.
+
+
 A pull-request metadata response can retain an older `base.sha` after its named
 target branch advances. Resolve the live target Git ref separately and inspect
 the prospective merge's ordered parents and complete tree. Bind carried-forward
 CI evidence to the checkout actually recorded in job logs; neither the PR
 payload's base SHA nor a mergeable flag alone establishes the current tested union.
+
+Before refreshing a dependent pull request, confirm that its dependency's
+accepted source is present in the current target ref. An older dependency commit
+in the PR branch or a previously reviewed local union is not sufficient. Refresh
+descendants in dependency order, and bind each carried-forward check to the exact
+source and prospective merge tree it tested.
 
 When merging a package-only community promotion into Runtime integration, retain
 the integration target in the generated package test workflow's PR branch list.
