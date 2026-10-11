@@ -3175,6 +3175,12 @@ the prospective merge's ordered parents and complete tree. Bind carried-forward
 CI evidence to the checkout actually recorded in job logs; neither the PR
 payload's base SHA nor a mergeable flag alone establishes the current tested union.
 
+Before refreshing a dependent pull request, confirm that its dependency's
+accepted source is present in the current target ref. An older dependency commit
+in the PR branch or a previously reviewed local union is not sufficient. Refresh
+descendants in dependency order, and bind each carried-forward check to the exact
+source and prospective merge tree it tested.
+
 When merging a package-only community promotion into Runtime integration, retain
 the integration target in the generated package test workflow's PR branch list.
 Regenerate from the combined workflow generator and compare its output, preserving
