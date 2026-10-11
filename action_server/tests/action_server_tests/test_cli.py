@@ -45,6 +45,7 @@ def test_new_list_templates(tmpdir) -> None:
     assert "Basic" in output.stderr
     assert "Advanced" in output.stderr
     assert "MCP v2 Showcase" in output.stderr
+    assert "Canvas Query" in output.stderr
 
     output = actions_server_run(
         ["new", "list-templates", "--json"], returncode=0, cwd=tmpdir
@@ -56,6 +57,7 @@ def test_new_list_templates(tmpdir) -> None:
     assert template_names == {
         "advanced",
         "basic",
+        "canvas-query",
         "mcp-v2-showcase",
         "minimal",
         "workflow-producer-consumer",
