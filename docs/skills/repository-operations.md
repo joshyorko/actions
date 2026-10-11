@@ -1209,6 +1209,22 @@ use native `gh` and repeat the safe check; never print or transfer the value to
 an agent. Follow the [upstream reporting procedure](upstream-reporting.md)
 before attributing a tooling failure to a dependency.
 
+When qualifying generated Runtime frontend content, decode `_static_contents.py`
+as data and bind each asset's bytes to its builder checkout. The encoder reads
+`dist/index.html` as bytes and writes their representation; setting the generated
+module's newline to LF does not normalize the embedded asset. Keep outer module
+CRLF differences, decoded asset CR differences and semantic equivalence separate.
+A carriage-return-removal comparison is diagnostic evidence, not a source or
+content waiver. If the original frontend input and effective checkout newline
+setting were not retained, keep checkout-versus-compiler causation unknown.
+
+Include tracked non-Python package text in checkout-byte qualification. A
+Python-only rule leaves packaged README, HTML, YAML and other text differences
+unresolved; keep binary archives and intentional platform-specific line-ending
+fixtures outside any proposed text rule. A checkout-byte fix must also appear
+in affected builder and test workflow path filters. A passing census that
+excluded those workflows does not qualify its distribution bytes.
+
 The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
 before cibuildwheel; Linux and Windows rows do not receive that platform-specific
 environment setup.
