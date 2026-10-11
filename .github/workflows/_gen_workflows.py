@@ -2606,6 +2606,7 @@ rm src/actions/server/bin/rcc* -f
             "name": "Build OAuth2 config (PR)",
             "run": release_step["run"],
             "if": "github.event_name == 'pull_request'",
+            "env": {"GH_TOKEN": "${{ github.token }}"},
         }
         return [release_step, canary_step]
 

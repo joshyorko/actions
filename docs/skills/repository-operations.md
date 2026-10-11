@@ -1593,9 +1593,10 @@ The verifier accepts cibuildwheel's interpreter-plus-ABI wheel names for the
 cp312/cp313 manylinux x86_64, macOS 12 arm64, and Windows amd64 set while
 rejecting mismatched ABI tags. The sdist and wheel build steps expose only
 `ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR builds run frontend and OAuth
-generation without credentials; matching command names do not establish matching
-generated payloads or successful source acquisition. PAT-bearing variants are
-limited to tag pushes. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
+generation without cross-repository PATs; the PR OAuth acquisition step receives
+only the built-in `${{ github.token }}` under `contents: read`. Matching command
+names do not establish matching generated payloads or successful source acquisition.
+PAT-bearing variants are limited to tag pushes. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
 from the child environment, while upload receives only the exact PyPI token.
 
 `inv build-oauth2-config` delegates to Runtime's installed Poetry environment.
@@ -1625,6 +1626,14 @@ policy, or actual OAuth behavior. An empty providers mapping is structurally
 admissible, without qualifying it as release content. The existing unpinned
 `Sema4AI/oauth-public-configs` authority remains unchanged; full OAuth and release
 source admission remain on hold until the owner identifies the authoritative pair.
+An authenticated repository-metadata 404 does not establish that an OAuth source
+is public, deleted or inaccessible to every credential. Preserve that ambiguity
+and the exact failed acquisition separately. A PR step's built-in GitHub token
+and a tag-only cross-repository PAT are different credential contracts; wiring
+`GH_TOKEN` does not approve an input pair or establish cross-repository access.
+Keep the checked acquisition, immutable content authority and provider admission
+separate; never promote token wiring into successful content or release proof.
+
 Do not replace unavailable input with a guessed repository, provider stub,
 successful skip or disabled-provider policy. Recovery invokes the task from
 immutable `release-source/action_server`, so the installed environment and task

@@ -95,6 +95,8 @@ jobs:
     - name: Build OAuth2 config (PR)
       run: uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config
       if: github.event_name == 'pull_request'
+      env:
+        GH_TOKEN: ${{ github.token }}
     - name: Build sdist
       run: '
 
@@ -181,6 +183,8 @@ jobs:
     - name: Build OAuth2 config (PR)
       run: uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config
       if: github.event_name == 'pull_request'
+      env:
+        GH_TOKEN: ${{ github.token }}
     - name: Install devutils requirements
       run: 'uv run --no-project --python ${{ matrix.python }}  python -m pip install
         --break-system-packages -r ../devutils/requirements.txt
