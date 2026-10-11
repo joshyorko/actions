@@ -2137,10 +2137,20 @@ generator/control revision, immutable candidate commit/tree, selected case
 identities and retained receipt inventory. Inheriting that workflow in a newer
 engineering branch does not make it test that branch. Keep earlier execution
 evidence under its original candidate/control identities; a refreshed gate
-needs its own reviewed tuple and receipt. The refreshed three-case control
-pins candidate `665468112f1593249449278cf2113c155a6ec6e3` and tree
-`d729a43127c048c7fb35133d2a4b07bc53635402`; its eventual control commit
-is a separate identity. It permits only pushes to the original opt-in branch
+needs its own reviewed tuple and receipt. Retained three-case run `38106813502`
+used control `ff6842223068bb34811990a417aa280331acbb6a` and candidate
+`665468112f1593249449278cf2113c155a6ec6e3`, tree
+`d729a43127c048c7fb35133d2a4b07bc53635402`. Preserve that execution under
+those identities. After the accepted target advances, commit and review the
+ordinary source union on the existing PR branch before creating a separate
+control child that pins that source commit and tree. A newer control that still
+checks out the old candidate does not establish execution of the new union.
+Keep the three case identities, RCC bytes, summary predicates, raw uploads and
+branch permissions unchanged. Record a new hosted execution for the new tuple
+and require full CI on its exact tested merge. Production input changes also
+require new frozen-artifact qualification; compare the retained producer
+inventory without excluding changed files. The control permits only pushes to
+the original opt-in branch
 `test/rcc-provider-rollback-hosted-20261010` and the existing reviewed PR branch
 `fix/rcc-published-artifact-details-20261010`, subject to the retained path filter.
 Local service-free control tests establish admission behavior, not an actual
@@ -2164,6 +2174,24 @@ the raw JSON hash and the specification/artifact digest pair. Retain the origina
 summary cannot establish the exact original receipt bytes. A skipped test,
 missing receipt, inconsistent JUnit counters or failed checkout cannot appear
 green.
+
+Independent admission review must hash the original artifact ZIP and compare
+retained lifecycle, publication, staged-consumer and JUnit bytes with its members
+before relying on a sanitized summary. The single-invocation guarantee binds
+the specification/artifact digests in the publication-details case; the rollback
+lifecycle and staged-consumer cases own separate environments and providers.
+This staged consumer pins published Core 1.0.2 and does not establish a Core
+1.0.3 consumer gate. An empty captured descendant snapshot proves only that no
+captured process survived, not complete descendant reaping.
+
+The public Linux three-case receipt establishes scoped rollback,
+publication-details and staged-consumer acceptance only. It does not complete
+the retained #134/#135 contracts, prove Core 1.0.3 consumption, or qualify
+Windows RCC. The original private `01f1a98c`/`fafb` bundle chain and frozen-v6
+specification/runner remain required and unavailable; private metadata stays
+NOT_RUN/HOLD. Retain each earlier receipt with its original candidate, control
+and artifact identities while the new source union and separate control gate
+await their own results.
 
 The admission-summary tests execute both synthetic RCC paths to verify version
 and digest checks. These fixtures need a host-native executable format: a
