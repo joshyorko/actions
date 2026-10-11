@@ -1,0 +1,116 @@
+{
+  "current_API_bindings": [
+    {
+      "bytes": 28217,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_import.py",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    {
+      "bytes": 58538,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_actions_process_pool.py",
+      "sha256": "3552bf39d0dc93f94ed3a4ab056de870ae460ed709f36d3d3a37dc043c349da8"
+    },
+    {
+      "bytes": 36123,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "sha256": "c1884571a572277beef50e359f8b5e71abf593e1ebdee4bea2e47290c8da81f2"
+    },
+    {
+      "bytes": 35232,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/_server.py",
+      "sha256": "0954b062ba7931609dddfd8b1f068dbac83967691e1194b6ac250a51befa20ff"
+    }
+  ],
+  "current_FULL_independent": {
+    "bytes": 10038,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+    "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+  },
+  "current_config": "control3 V8 exact a209 PREEXEC3860 independent accepted; no actual at preparation",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "disposition": "Reuse exact original nine-line durable livecache/restart/drain/last-good lesson, supported by current identical function AST; do not assert prepared controls or native executed.",
+    "durable_learning": "Import preparation precedes SQLite writer; pool generation staging and durable route publication separate; old running workers mark nonreuse but remain leased until call completion.",
+    "evidence": "Current8d49 exact eight original function ASTs; nine real algorithm tests/private mutants prepared only; existing ec231 SOURCE_ONLY review retained.",
+    "exact_delta": {
+      "bytes": 1021,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/canonical-current-source-reload-drain-transaction-scope-proposed.patch",
+      "sha256": "8354390b30343aa9a57a976aa5244e75068f8c59fc604f074af9e18110743856"
+    },
+    "remaining_uncertainty": "All nine controls NOTRUN; current native3/5/7276, actual lifecycle/barriers/typed cleanup/provider restart/private01f/full134/release HOLD",
+    "stale_ambiguity_removed": "Original b614 baseline not current8d49 qualification; servicefree fake-worker barriers not actual leases/provider recovery; publish-aftercommit distinct from preparation."
+  },
+  "existing_original_test_AST_prefix": "WHOLE_ORIGINAL_MODULE_AST_EXACT",
+  "function_equality": {
+    "bytes": 2698,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/current8d49-original-reload-pool-import-adapter-function-AST-equality-proof.json",
+    "sha256": "ab3c574e6685d227f197017eea5e4bcbfe446fda1e9e87c43e22539de9fdcc80"
+  },
+  "native": "NOT_RUN",
+  "nine_control_plan": {
+    "bytes": 4493,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/nine-real-SQLite-pool-barrier-baseline-and-private-mutant-RED-plan-NOTRUN.json",
+    "sha256": "1c33ec727106e5a3b686571011ab05dbc7259f70bacca773acdf627dd67e0a33"
+  },
+  "notes": {
+    "bytes": 1966,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/current8d49-reload-drain-recontext-implementation-and-admission.md",
+    "sha256": "8fd57f9442106b711dc724ee46201cd0b515ce2a8126825d619220a0f263e426"
+  },
+  "original_persistent_patch": {
+    "bytes": 24118,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/frozen-current8d49-two-path-persistent-fixture-source.patch",
+    "sha256": "ec23125cfcf2ca2af3e1c7e08871bb1f198e0df1db04e9be62d61b89b755b158"
+  },
+  "original_source_packet": {
+    "bytes": 17155,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr308-managed-reload-drain-source-packet/OWNERFINAL-current-b614-managed-reload-and-generation-drain-three-path-source-packet.json",
+    "sha256": "5978b9cf33e096f43aaa5d0a0f6b319a68c715ca4085edc5f8ccd71eaa38c1e9"
+  },
+  "persistent_independent_SOURCE_ONLY_logging_HOLD": {
+    "bytes": 10406,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-persistent-recontext-independent-review/OWNERFINAL-independent-private-current8d49-persistent-recontext-SOURCE_ONLY-and-logging-HOLD.json",
+    "sha256": "87ce7c08689988b43a9f563b2a5a26611397e0547694b67f2c9f01d7306cc1af"
+  },
+  "prior_transport_failure": "First readonly API command exec-server transport disconnected; unknown execution/result, later same readonly source read succeeded; no gate launched",
+  "private_control_source": {
+    "bytes": 14786,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py",
+    "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb"
+  },
+  "product_adoption": "NOT_AUTHORIZED",
+  "prospective_existing_adapter_test_append": {
+    "bytes": 99477,
+    "mode": "0o444",
+    "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/prospective-current-test_rcc_runtime_adapter-with-nine-servicefree-controls.py",
+    "sha256": "5a87636917a2d555c2e0aa5757336ef0db4c047e2f4777d63442a05c240700f5"
+  },
+  "provider_recovery": "Caller/transaction last-good rollback prepared; restart/provider-native failure/recovery UNQUALIFIED",
+  "real_native_lifecycle": "Original two-selector design retained NOT_IMPLEMENTED; candidate preparation vs drain separate",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_count": 1440,
+  "source_paths": [
+    "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "status": "PRIVATE_CURRENT_SOURCE_RECONTEXT_AND_NINE_REAL_CONTROL_SOURCE_PREPARED_NOT_RUN_NOT_APPLIED",
+  "tests": "NOT_RUN",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "unchanged": "Production/default3/pins/cache/source1440/persistent11helpers/sixcalls/originalselectors untouched",
+  "upstream_disposition": "none; no worker upstream posts"
+}

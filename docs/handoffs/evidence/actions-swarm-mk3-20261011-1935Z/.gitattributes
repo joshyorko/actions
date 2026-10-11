@@ -1,0 +1,6 @@
+# These immutable evidence/source copies retain their manifest-bound bytes.
+* -text
+# Exact original unified-patch blank context; authored files remain checked.
+06-proposed-two-path-assertions-and-cache-owner-features.patch whitespace=-blank-at-eol
+09-frozen-current8d49-two-path-persistent-fixture-source.patch whitespace=-blank-at-eol
+26-canonical-real-data-inspector-entry-and-boundary-controls-proposed-v2.patch whitespace=-blank-at-eol

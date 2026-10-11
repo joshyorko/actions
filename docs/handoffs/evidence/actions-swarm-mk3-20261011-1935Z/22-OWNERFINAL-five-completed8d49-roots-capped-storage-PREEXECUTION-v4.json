@@ -1,0 +1,455 @@
+{
+  "archiver_AST": {
+    "added_alias_function": "_durable_fixed_aliases_before_any_removal",
+    "all_original_cap_fsync_metadata_topology_allstage_removal_methods": "WHOLE_AST_EXACT",
+    "named_index_magic": "EXACT_FIVE_COMPLETED8D49_OWNED_ROOTS_ALL_STAGED_BEFORE_REMOVAL",
+    "old_definitions": 19,
+    "only_changed_old_definitions": [
+      "load_config",
+      "_completion_admitted"
+    ],
+    "whole_body_unchanged": 17
+  },
+  "bounds": {
+    "Python_child_timeout": 615,
+    "ROOT_outer_KILL_after": 10,
+    "ROOT_outer_TERM": 900,
+    "child_KILL_after": 10,
+    "child_TERM": 600,
+    "guard": 60,
+    "shm_native_floor_not_allocated_or_waived": 3865470567,
+    "tmp_before_two_archive_copies_plus_indices_plus_reserve": 251658240,
+    "tmp_reserve_before_removal": 134217728,
+    "workspace_data_only_floor": 16777216
+  },
+  "caps": {
+    "aggregate_actual_compressed_archive_writes_including_close_footer": 50331648,
+    "full_progress_fixed_alias_indices_combined": 16777216
+  },
+  "capture_ENV": {
+    "PATH0": "/workspace/actions-cloud/bin",
+    "PATH1": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin",
+    "primary_exception_retained_secondary_capture_failure_not_masked": true,
+    "raw_stdout_stderr_terminal_retained_before_assertion": true,
+    "unique_owned_before_after": true
+  },
+  "checkpoint_head_tree_bound": false,
+  "complete_snapshots_and_critical_row_proof": {
+    "bytes": 2349,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/private-final-five-root-completion-active-config-row-closure-and-capacity-proof.json",
+    "sha256": "0c97e1a9683fd15d5a0d9b111e7ff54334f8d5f6c226077df6f7650fc22e03e5"
+  },
+  "completion_cases": [
+    179,
+    27,
+    42,
+    51,
+    50
+  ],
+  "compression_result": "PROSPECTIVE_NOT_MEASURED_OR_GUARANTEED",
+  "corrected_single_readonly_probe": "PASS_0_15.259s_ENVIRONMENT_AND_CAPTURE_ONLY",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Reuse accepted capped-all-roots staging/fsync/topology/PAX lesson and exact original-row archive-alias lesson; new cached-Poetry search identity and retain capture-before-assertion delta",
+    "evidence": "Original actual function RED1; helper14PASS; original Poetry FileNotFoundError readonly probe; corrected one probe0; alias16 and actual persistence seam6; original cap/metadata AST exact",
+    "exact_new_delta": {
+      "bytes": 779,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/proposed-canonical-managed-Poetry-and-guard-capture-lesson.txt",
+      "sha256": "f46d621678d346caa1f71699ddd1f8fe7eb338fc75834e7a18b201c75d4f8e0a"
+    },
+    "remaining_uncertainty": "Compression/capacity/actual storage still prospective; no universal process quiescence/source origin/native/release qualification; five-root original50 metadata lesson preserves actual6-scope correction",
+    "stale_or_ambiguous_guidance_removed": "Old four-root capacity insufficient and consumed attempt cannot retry; Python prefix does not establish Poetry PATH; nine bound raw original rows cannot be dropped or relabeled physical after archiving"
+  },
+  "exact_child_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/archive_exact_five_completed_roots_once.py"
+  ],
+  "exact_outer_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/bin/bash",
+    "--noprofile",
+    "--norc",
+    "-c",
+    "set -euo pipefail; source \"$1\"; unset PYTHONOPTIMIZE PYTEST_ADDOPTS; export PYTHONDONTWRITEBYTECODE=1; export PATH=\"/workspace/actions-cloud/bin:/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin:$PATH\"; exec \"$2\" \"$3\" --root-execute-reviewed-five-completed8d49-roots \"$4\"",
+    "root-one-five-root-storage",
+    "/workspace/actions-cloud/activate.sh",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/launch_once.py",
+    "/workspace/engineering/root-completed8d49-five-root-storage-reviewed-release-v4.json"
+  ],
+  "five_selected_roots": {
+    "Runtime50-robot-output": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/robot-output",
+    "ToolkitTest": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/source-LIGHT-v3-basetemp-once/ToolkitTest",
+    "fixture42-GREEN-log": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-owned-once/robocorp-log",
+    "fixture51-TEMPORAL-log": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-TEMPORAL-owned-once/robocorp-log",
+    "original27-log": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/pure-count-alias-GREEN-owned-once/robocorp-log"
+  },
+  "fresh_capacity": {
+    "/dev/shm": 3901190144,
+    "/tmp": 600117248,
+    "/workspace": 1030774784
+  },
+  "fresh_floor_recheck_before_native_required": true,
+  "invented_RCC_recycle_marker": false,
+  "native_workspace_floor": 1288490189,
+  "nine_original_row_aliases": {
+    "allstage_full_index_and_alias_map_fsync_before_first_removal": true,
+    "before_and_alwayspost": "Exact physical original rows while root exists; archive/index/immutable fixed row aliases only when original root is absent; partial physical loss FAIL",
+    "combined_max_progress_index_full_index_alias_budget_checked_before_first_removal": true,
+    "fixed_plan": {
+      "bytes": 6946,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/private-fixed-nine-original-row-future-archive-member-plan.json",
+      "sha256": "693eecc2ef7006169ad72e978c0d4ecdd188c8e7202cb5f941d4827ab2543006"
+    },
+    "original_full_inventory_retained_unchanged": 18,
+    "original_paths_restored_or_invented": false,
+    "original_rows_retained_unchanged": 9,
+    "whole_archive_SHA_size_mode_owner_CRC_EOF_ISIZE_and_exact_safe_member_body_mode_uidgid_PAXmtime_required": true
+  },
+  "operation": "NOT_RUN",
+  "original_four_root_attempt": "FAIL_PREARCHIVER_ARCHIVER_NOT_RUN_ALL_ROOTS_REMAIN_ORIGINAL_DISCARDED_NESTED_CAUSE_UNKNOWN",
+  "predecessor_four_root_owner": {
+    "bytes": 9313,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/OWNERFINAL-four-completed8d49-roots-capped-storage-PREEXECUTION-v2.json",
+    "sha256": "f6cf65eb7dba1500609bee28a9adc8fdda11bf1487e8dded84b62106cde5b9e7"
+  },
+  "private_references": [
+    {
+      "bytes": 1338,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/ROOT-exact-five-root-release-template-NOTAUTHORIZATION.json",
+      "sha256": "1c6701b89a082551f7884d1fd038909ebb90663325125968e88d55edebc4239e"
+    },
+    {
+      "bytes": 25086,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/archive_exact_five_completed_roots_once.py",
+      "sha256": "dadff33e2521fb713ff50bb80808cfc472052b893f314948787efcc248ae850a"
+    },
+    {
+      "bytes": 4922,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/exact_original_row_archive_aliases.py",
+      "sha256": "fdbe4493f59c0256c4ca63f0da390c71d2a1d6c98dfc9f8d4cc0b5187561712e"
+    },
+    {
+      "bytes": 7938,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/guard_readonly.py",
+      "sha256": "56d00cea36726ca4f5476a6618429d5d9898974c791a646fdaf970c7cee99057"
+    },
+    {
+      "bytes": 9444,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/launch_once.py",
+      "sha256": "dc13fc13d411e1b62e2709c1fe70ca374489825314b63ed22d4c136f612dd0fb"
+    },
+    {
+      "bytes": 2096,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/named-pre-freeze-alias-refinement-source-AST-proof.json",
+      "sha256": "124427914602e13167bd524221234270cc4c4aa176c37053cecd627ebfae831b"
+    },
+    {
+      "bytes": 2349,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/private-final-five-root-completion-active-config-row-closure-and-capacity-proof.json",
+      "sha256": "0c97e1a9683fd15d5a0d9b111e7ff54334f8d5f6c226077df6f7650fc22e03e5"
+    },
+    {
+      "bytes": 17633,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/private-five-root-input-supplement.json",
+      "sha256": "bd7d77caad57d46aca726ec025927a4e336c22ecdaa87169894c491cd4e05ac6"
+    },
+    {
+      "bytes": 3414,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/private-five-root-source-AST-completion-and-row-preservation-proof.json",
+      "sha256": "6f3bac253b2885b3d8765942a94e130a2a9aec23d8eaa9c8aeeb79b43dbd0517"
+    },
+    {
+      "bytes": 6946,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/private-fixed-nine-original-row-future-archive-member-plan.json",
+      "sha256": "693eecc2ef7006169ad72e978c0d4ecdd188c8e7202cb5f941d4827ab2543006"
+    },
+    {
+      "bytes": 681,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/pure-alias-durability-seam-controls-terminal.json",
+      "sha256": "cff26ef4809bf89f5275fa2cfaa141de6aa1192c12d1046a6e27fcb5358a6acc"
+    },
+    {
+      "bytes": 799,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/pure-alias-durability-seam-controls-v2-terminal.json",
+      "sha256": "e3adb8d346cb72556819c0b4d897e9b1f36ac63af6d480f104b202fed8f8e0d4"
+    },
+    {
+      "bytes": 900,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/pure-alias-durability-seam-controls-v2.private.log",
+      "sha256": "1fe0438b75ba740b2e82a55ee4b62781741a4a7418a8c861cb79d4e7a73299b5"
+    },
+    {
+      "bytes": 4261,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/pure-alias-durability-seam-controls.private.log",
+      "sha256": "8132eec6fd3f7d2eedcf6e2280c267886e65e93ee82d89da9dae48e4d30ce16e"
+    },
+    {
+      "bytes": 698,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/pure-nine-row-alias-closure-controls-terminal.json",
+      "sha256": "ca5f537e054826180463ead4ab9b2084005f79a92c9991d8015de96d6de7fe91"
+    },
+    {
+      "bytes": 1727,
+      "mode": "0o600",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/pure-nine-row-alias-closure-controls.private.log",
+      "sha256": "cbd2cd0df98f9cb82214b32b53b15e13aafd4e537624a6cadbc8e4814b18905c"
+    },
+    {
+      "bytes": 450,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/retained-owner-readonly-constructor-root-string-SETUPFAIL.json",
+      "sha256": "9df09bb144972c0bb85059b35f2b96d9f456227c1fe6b654808be212a2b3348a"
+    },
+    {
+      "bytes": 5961,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/test_alias_durable_seam_controls.py",
+      "sha256": "7f7d520a84d70b6a91af2262359cac1912b6a1963246f89cae75fc9f6e19fbec"
+    },
+    {
+      "bytes": 6049,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/test_alias_durable_seam_controls_v2.py",
+      "sha256": "2b66aec0e106728247f61d280c627d0198331fe5da45547e2693ff6aa87b5b1f"
+    },
+    {
+      "bytes": 7371,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/test_exact_alias_closure_controls.py",
+      "sha256": "2dc8828a86884a38e51fdb3c1008e3b46df5386812bdf7f2f4107897dcd6a631"
+    },
+    {
+      "bytes": 9313,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/OWNERFINAL-four-completed8d49-roots-capped-storage-PREEXECUTION-v2.json",
+      "sha256": "f6cf65eb7dba1500609bee28a9adc8fdda11bf1487e8dded84b62106cde5b9e7"
+    },
+    {
+      "bytes": 3779,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v2/OWNERFINAL-readonly-active-a209cc-config-and-all-critical-row-overlap-supplement.json",
+      "sha256": "37f28dbde2116ccbe7eaeb543ea47a3f4d4faa8234a35e9ba4e7f44ffbf35705"
+    },
+    {
+      "bytes": 2919,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-independent-actual-failure-review/OWNERFINAL-independent-original-four-root-storage-precheck-FAIL-and-no-operation-review.json",
+      "sha256": "f301395155359e37541df24b4c2501ebeb8f2a9a11a74077992fa3ea7de33ee1"
+    },
+    {
+      "bytes": 4908,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/OWNERFINAL-one-corrected-managed-Poetry-durable-capture-readonly-guard-PASS.json",
+      "sha256": "6b2d8b7b0eea9badffb7024e2fd1f7345c42643f388178dd536f942aed4257d7"
+    },
+    {
+      "bytes": 8708,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/OWNERFINAL-V3-managed-Poetry-PATH-and-durable-guard-capture-readonly-probe-PREPARATION.json",
+      "sha256": "1dce1ab29991f7958d015ea469d5e1541ad5cd8d11db837f71a71fb0ddfcf58b"
+    },
+    {
+      "bytes": 3010,
+      "mode": "0o444",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/guard_capture.py",
+      "sha256": "7ce1b282a002fbf03371ba0b1c5ba1684253ee68ffcf234f16e58e7902860c2a"
+    },
+    {
+      "bytes": 760693,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config-v2.json",
+      "sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f"
+    },
+    {
+      "bytes": 5067,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/private-complete-one-control-output-file-inventory.json",
+      "sha256": "51acf96b7b544c2d51bd53246ca3202aa932f03aee80b37258a05f0361f2ea4c"
+    },
+    {
+      "bytes": 7674,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current8d49-configured-SOURCE_LIGHT-PASS.json",
+      "sha256": "d7f23a52d044195187992aeac80e692429e1a1a4af16ee9b37f1971cfbdc4104"
+    },
+    {
+      "bytes": 975,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/pure-count-alias-GREEN-owned-once/original-GREEN-terminal.json",
+      "sha256": "64e8b25f9c35984781476d73768748981a00f389890689ef792805206c7e75ba"
+    },
+    {
+      "bytes": 2846,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/current8d49_cached_source_LIGHT_body_v3.py",
+      "sha256": "6deb5e5a38495f0d83e5dc020c4cb0c722292cc4aec898f66830fd6904590884"
+    },
+    {
+      "bytes": 1198,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current8d49-source-LIGHT-original-owned-v3/original-terminal.json",
+      "sha256": "a0a46e59ba28081562e02d1e888c74489731b5535748759a06f6fbb732e4e253"
+    },
+    {
+      "bytes": 391,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/pure-count-alias-GREEN-owned-once/original-GREEN.private.log",
+      "sha256": "a763fb06bbd5fb62154f5349b9f41e4bc34a8ff7d95f5df4087dd5bf3a083512"
+    },
+    {
+      "bytes": 5141,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/pure-count-alias-GREEN-owned-once/original-GREEN-junit.xml",
+      "sha256": "eb2dad5c15261cafd106cb145e0f8e2ffeffdf63371eaa831547749c490b3bbb"
+    },
+    {
+      "bytes": 1160,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-owned-once/original-GREEN-terminal.json",
+      "sha256": "5aa2c8b7fc0ca2c825b53c83add802048fa6a07dd022895892ebff659c2c9e3a"
+    },
+    {
+      "bytes": 1272,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-owned-once/original-GREEN.private.log",
+      "sha256": "9cc67d5e5c0d746085d8cee338fdd5086724405d1fdd522c38a32aa06d9862ad"
+    },
+    {
+      "bytes": 8014,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-owned-once/original-GREEN-junit.xml",
+      "sha256": "fab7f5f19c80f8ee40a189f5547e09dd0ffac678c2df8f863fa886e9fbfc8535"
+    },
+    {
+      "bytes": 1198,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-TEMPORAL-owned-once/original-GREEN-TEMPORAL-terminal.json",
+      "sha256": "afeaf7d2d55bb7e026474a3539647675c895596d6b474e358d76754ea3fc0106"
+    },
+    {
+      "bytes": 1299,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-TEMPORAL-owned-once/original-GREEN-TEMPORAL.private.log",
+      "sha256": "37f3b517d128c7d89a99ca39d32559c68ec019e546a96d86219aa931fca4d2fa"
+    },
+    {
+      "bytes": 9670,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/pure-fixture-logger-GREEN-TEMPORAL-owned-once/original-GREEN-TEMPORAL-junit.xml",
+      "sha256": "f367f7ce3a907e7eb3d730747dae511078b3474e2b4bd2f694a698ce4582c0c6"
+    },
+    {
+      "bytes": 3014,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/completed-private-control-robot-output-capacity-candidate-v2.json",
+      "sha256": "422b946e46e710034b6bd84bebe7be76588c506b4b623581ad29d5fd7fca5b00"
+    },
+    {
+      "bytes": 5067,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/private-complete-one-control-output-file-inventory.json",
+      "sha256": "51acf96b7b544c2d51bd53246ca3202aa932f03aee80b37258a05f0361f2ea4c"
+    },
+    {
+      "bytes": 137,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/original-control-terminal.json",
+      "sha256": "908cc486d64d527023a8a65cd2a088a466dbd6ee67a758fd135cd75c57a9213b"
+    },
+    {
+      "bytes": 528,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/root-original-one-control-outer-terminal.json",
+      "sha256": "9475275fad6f367a2510100690b45bf17fd7983f6aead7619e2437e8ce7709cb"
+    },
+    {
+      "bytes": 9800,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-current-e2-inner-service-free-controls-v2-once-owned/junit.xml",
+      "sha256": "8fb252292db9f416bd342239ddce1b24aea3b803494e6e2d026c98d4459ea753"
+    },
+    {
+      "bytes": 10322,
+      "mode": "0o600",
+      "path": "/tmp/build-storage-v3-private-once.py",
+      "sha256": "6a65c0271621f79b5a6f55394a83fe5cfed8379a2a4ad1c469e98a3bd4ca996f"
+    },
+    {
+      "bytes": 17802,
+      "mode": "0o600",
+      "path": "/tmp/build-five-root-storage-v4-private-once.py",
+      "sha256": "d2d792dca97694fb23d1f0fcd8267f2eaf97db8927dd46e7af2c52130da6eb3a"
+    },
+    {
+      "bytes": 4267,
+      "mode": "0o600",
+      "path": "/tmp/refine-five-root-before-freeze.py",
+      "sha256": "b1f2f3ba9a1f960a48de6fce81eb3c5defb1cbc247c123729083aedde888bf3a"
+    },
+    {
+      "bytes": 13342,
+      "mode": "0o600",
+      "path": "/tmp/freeze-five-root-storage-v4-owner.py",
+      "sha256": "2b1a3683362dfefc5743c7235e3cf8367b3bbd9afeeed299396242c371e8ba78"
+    },
+    {
+      "bytes": 13417,
+      "mode": "0o444",
+      "path": "/tmp/freeze-five-root-storage-v4-owner-v2.py",
+      "sha256": "579de774ced4e148ed5a40b752976d331c5fedb02b84737bc1ef6183fbb3c121"
+    }
+  ],
+  "prospective_margin_not_guaranteed": 37229363,
+  "prospective_workspace_after_gain": 1325719552,
+  "pure_actual_function_controls": {
+    "allstage_alias_persistence_fsync_maximum_progress_budget_GREEN": 6,
+    "capture_success_and_failure_GREEN": 14,
+    "nine_row_archive_alias_GREEN": 16,
+    "no_actual_selected_root_archives_or_removal": true,
+    "original_discarded_capture_RED": 1,
+    "retained_persistence_mock_SETUPFAIL": "3ERROR3PASS_missing_FakePath_division_no_archive_defect_claim"
+  },
+  "required_review_decision": "GO_EXACT_FIVE_COMPLETED8D49_ROOTS_CAPPED_STORAGE_PREEXECUTION_V4",
+  "root_release_template": {
+    "bytes": 1338,
+    "mode": "0o400",
+    "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/ROOT-exact-five-root-release-template-NOTAUTHORIZATION.json",
+    "sha256": "1c6701b89a082551f7884d1fd038909ebb90663325125968e88d55edebc4239e"
+  },
+  "root_serialization": "No native/test/source or selected-root changes while the ROOT one storage attempt runs",
+  "schema": "EXACT_FIVE_COMPLETED8D49_OWNED_ROOTS_CAPPED_STORAGE_PREEXECUTION_V4",
+  "selected_allocated_bytes": 294944768,
+  "selected_member_count": 9035,
+  "source_head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_native_acceptance": "UNCHANGED",
+  "source_tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "status": "READY_FOR_INDEPENDENT_REVIEW_ROOT_RELEASE_REQUIRED_NO_OPERATION",
+  "upstream_disposition": "none"
+}

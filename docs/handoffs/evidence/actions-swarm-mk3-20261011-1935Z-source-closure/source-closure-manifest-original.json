@@ -1,0 +1,509 @@
+{
+  "additional_original_bytes": 110855,
+  "additional_rows": [
+    {
+      "bytes": 6228,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/01-owned_cache_policy_v8.py",
+      "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205"
+    },
+    {
+      "bytes": 27889,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/02-actual_transport_v8.py",
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    {
+      "bytes": 6327,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical_binding_current8d49_v8.py",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/03-historical_binding_current8d49_v8.py",
+      "sha256": "6f64d55837cc4ff14ee4eec013314ba512c09ecdc56f79192c1360ef46473b30"
+    },
+    {
+      "bytes": 11489,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/fixture_records_v8.py",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/04-fixture_records_v8.py",
+      "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064"
+    },
+    {
+      "bytes": 12959,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/05-runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    {
+      "bytes": 4632,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/06-owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    {
+      "bytes": 1072,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_binding_v1.py",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/07-historical_binding_v1.py",
+      "sha256": "10eac48f020d4c1030bb0be26b3b283d896712b7e7b5095e08045b8192808215"
+    },
+    {
+      "bytes": 2645,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_failed_receipt_archive_v1.py",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/08-historical_failed_receipt_archive_v1.py",
+      "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+    },
+    {
+      "bytes": 14786,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/09-test_current_managed_reload_sqlite_pool_barriers.py",
+      "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb"
+    },
+    {
+      "bytes": 15348,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o400",
+      "path": "/workspace/engineering/private-handoff-current1935-source-closure-PREPARATION/proposed-current8d49-adapter-nine-controls-append-only.patch",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/10-proposed-current8d49-adapter-nine-controls-append-only.patch",
+      "sha256": "7a8eb3af1d96b87f99025f43167e146af162f4b3cfde0596679d6beedb46a7a3"
+    },
+    {
+      "bytes": 4493,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/nine-real-SQLite-pool-barrier-baseline-and-private-mutant-RED-plan-NOTRUN.json",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/11-nine-real-SQLite-pool-barrier-baseline-and-private-mutant-RED-plan-NOTRUN.json",
+      "sha256": "1c33ec727106e5a3b686571011ab05dbc7259f70bacca773acdf627dd67e0a33"
+    },
+    {
+      "bytes": 1966,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/current8d49-reload-drain-recontext-implementation-and-admission.md",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/12-current8d49-reload-drain-recontext-implementation-and-admission.md",
+      "sha256": "8fd57f9442106b711dc724ee46201cd0b515ce2a8126825d619220a0f263e426"
+    },
+    {
+      "bytes": 1021,
+      "content_class": "PUBLIC_SOURCE_OR_TEST_OR_BOUNDED_PATCH_NO_PRIVATE_PAYLOAD",
+      "copied_Git_mode": "100644",
+      "execution": "NOT_RUN_BY_THIS_PREPARATION",
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/canonical-current-source-reload-drain-transaction-scope-proposed.patch",
+      "proposed_durable_path": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z-source-closure/13-canonical-current-source-reload-drain-transaction-scope-proposed.patch",
+      "sha256": "8354390b30343aa9a57a976aa5244e75068f8c59fc604f074af9e18110743856"
+    }
+  ],
+  "additional_unique_count": 13,
+  "direct_import_graph": [
+    {
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "runner_contracts_v3",
+        "stat"
+      ],
+      "source": {
+        "bytes": 6228,
+        "mode": "0o444",
+        "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/owned_cache_policy_v8.py",
+        "sha256": "4ccac4e3bd2c1e91352ef4e647968b4ca61f8691e1fc0f41e72a128a2942c205"
+      }
+    },
+    {
+      "imports": [
+        "argparse",
+        "fixture_records_v8",
+        "hashlib",
+        "historical_binding_current8d49_v8",
+        "json",
+        "math",
+        "os",
+        "owned_cache_policy_v8",
+        "owned_monitor_v1",
+        "pathlib",
+        "psutil",
+        "runner_contracts_v3",
+        "stat",
+        "subprocess",
+        "sys",
+        "threading",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "source": {
+        "bytes": 27889,
+        "mode": "0o444",
+        "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+        "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+      }
+    },
+    {
+      "imports": [
+        "hashlib",
+        "historical_binding_v1",
+        "json",
+        "os",
+        "pathlib",
+        "runner_contracts_v3",
+        "stat",
+        "subprocess"
+      ],
+      "source": {
+        "bytes": 6327,
+        "mode": "0o444",
+        "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical_binding_current8d49_v8.py",
+        "sha256": "6f64d55837cc4ff14ee4eec013314ba512c09ecdc56f79192c1360ef46473b30"
+      }
+    },
+    {
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "re",
+        "runner_contracts_v3"
+      ],
+      "source": {
+        "bytes": 11489,
+        "mode": "0o444",
+        "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/fixture_records_v8.py",
+        "sha256": "7a63ee62184ea268dead0c98460c6943ebc297816e9a4df180b10ed5e04b9064"
+      }
+    },
+    {
+      "imports": [
+        "decimal",
+        "hashlib",
+        "json",
+        "math",
+        "re",
+        "xml.etree"
+      ],
+      "source": {
+        "bytes": 12959,
+        "mode": "0o600",
+        "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+        "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+      }
+    },
+    {
+      "imports": [
+        "runner_contracts_v3",
+        "threading"
+      ],
+      "source": {
+        "bytes": 4632,
+        "mode": "0o600",
+        "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+        "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+      }
+    },
+    {
+      "imports": [
+        "historical_failed_receipt_archive_v1",
+        "json",
+        "pathlib",
+        "runner_contracts_v3"
+      ],
+      "source": {
+        "bytes": 1072,
+        "mode": "0o600",
+        "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_binding_v1.py",
+        "sha256": "10eac48f020d4c1030bb0be26b3b283d896712b7e7b5095e08045b8192808215"
+      }
+    },
+    {
+      "imports": [
+        "gzip",
+        "hashlib",
+        "json",
+        "pathlib",
+        "stat",
+        "tarfile"
+      ],
+      "source": {
+        "bytes": 2645,
+        "mode": "0o600",
+        "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_failed_receipt_archive_v1.py",
+        "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+      }
+    },
+    {
+      "imports": [
+        "actual_transport_v8",
+        "argparse",
+        "ast",
+        "hashlib",
+        "historical_binding_current8d49_v8",
+        "json",
+        "os",
+        "owned_cache_policy_v8",
+        "pathlib",
+        "runner_contracts_v3",
+        "stat",
+        "sys"
+      ],
+      "source": {
+        "bytes": 13715,
+        "mode": "0o444",
+        "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/build_qualified_current8d49_config_v8_FINAL.py",
+        "sha256": "1992b7bc25799a0cdd0a9c203d531a0bdca1356ee4678a84c489eafe242e319c"
+      }
+    },
+    {
+      "imports": [
+        "hashlib",
+        "json",
+        "launch_one_version_v8",
+        "os",
+        "pathlib",
+        "runner_contracts_v3",
+        "sys"
+      ],
+      "source": {
+        "bytes": 1444,
+        "mode": "0o444",
+        "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/managed_one_version_entry_v8.py",
+        "sha256": "f1ae7b01b9c01d6391fa46d7cef1cbaf6630dd0bd98698df400f677617f23b6d"
+      }
+    },
+    {
+      "imports": [
+        "actual_transport_v8",
+        "argparse",
+        "json",
+        "os",
+        "pathlib",
+        "runner_contracts_v3",
+        "subprocess",
+        "sys"
+      ],
+      "source": {
+        "bytes": 5013,
+        "mode": "0o444",
+        "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/launch_one_version_v8.py",
+        "sha256": "41c128697ab418985257df8aa2eb99abf0d22379264a34b948a12b92a2059b9e"
+      }
+    },
+    {
+      "imports": [
+        "actual_transport_v8",
+        "argparse",
+        "os",
+        "pathlib",
+        "runner_contracts_v3",
+        "stat",
+        "subprocess",
+        "sys"
+      ],
+      "source": {
+        "bytes": 4664,
+        "mode": "0o444",
+        "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/readonly_current_input_guard_v8.py",
+        "sha256": "13e123a40b4f811a81c549b6a4387135e8d6bc515be39559f34d5fc030c398b6"
+      }
+    },
+    {
+      "imports": [
+        "actual_transport_v8",
+        "argparse",
+        "hashlib",
+        "json",
+        "pathlib",
+        "sys",
+        "toolkit"
+      ],
+      "source": {
+        "bytes": 2988,
+        "mode": "0o444",
+        "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/gateway_entry_v8.py",
+        "sha256": "ad14539953b2b4b5039d729507d3117e021b1cf00aa767df7a049997c00784b8"
+      }
+    },
+    {
+      "imports": [
+        "actions.server",
+        "actions.server._actions_process_pool",
+        "actions.server._api_action_routes",
+        "actions.server._database",
+        "actions.server._models",
+        "actions.server._settings",
+        "ast",
+        "fastapi",
+        "inspect",
+        "os",
+        "pathlib",
+        "pytest",
+        "textwrap",
+        "threading",
+        "types"
+      ],
+      "source": {
+        "bytes": 14786,
+        "mode": "0o444",
+        "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py",
+        "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb"
+      }
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "delta": "Reuse existing config-consumed-path dependency closure and temporal historical-alias/source-identity guidance; zero new canonical lines",
+    "evidence": "c39564ff existing source-closure canonical in old84 + exact AST import graph/af2f Git blob + prospective adapter reconstruction",
+    "remaining_uncertainty": "Separate root source/actual grants, private inputs and all release/native/wholegraph holds remain",
+    "stale_ambiguity_removed": "Owner receipts alone do not contain their imported executable source; source reuse must bind body SHA rather than filename"
+  },
+  "existing_constructor_and_four_entry_guard_modules": "Exact five bodies already selected by original1935; not duplicated here",
+  "external_required_inputs_not_committed": [
+    "Original absolute-path private config and ROOT release; no caller-generated/relabelled approval",
+    "Approved binary3/5/7276 exactbytes and original provenance/managedactivation19/prepared Python+toolkit/pytest/psutil",
+    "Current8d49 tracked Runtime source and real fixtures; prior source/control tuples remain separate",
+    "Historical raw receipt archives/indices/maps referenced by hashed bindings, external-only",
+    "Distinct root capacity/serialization and reviewed actual execution release; no native permission implied"
+  ],
+  "historical_fixture_reconstruction": {
+    "ancestor_of_current_source": true,
+    "blob_entry": "100644 blob 9dcf5df9b2d7c21825b226b425027bcb8094828d\taction_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "bytes": 48314,
+    "executed_here": false,
+    "existing_private_snapshot": {
+      "bytes": 48314,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-real-fixture-mode-successor/historical-e4ff-staged-fixture-exact-Git-blob.snapshot.py",
+      "sha256": "af2f79ccd395c088076381f6681860cf8160f8fd0d9169e122634fe684c37c35"
+    },
+    "git_path": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "new_copy_required": false,
+    "proposed_later_reconstruction": [
+      "git -C /workspace/engineering/pr308 show e4ff080375a8422bb656e52d218f198521dda078:action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py > <exclusive-private-snapshot-path>",
+      "Require48314bytes/af2f79... exactSHA; chmod0444; preserve required exact accepted snapshot filename/parent mapping"
+    ],
+    "sha256": "af2f79ccd395c088076381f6681860cf8160f8fd0d9169e122634fe684c37c35",
+    "source": "e4ff080375a8422bb656e52d218f198521dda078",
+    "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+  },
+  "limitations": [
+    "This is source closure, not a standalone executable package or fresh functional qualification",
+    "Original absolute imports/paths unchanged; durable copies need explicitly reviewed staging to immutable original namespace or equivalent exact-path plan",
+    "Latest FIVE48capFAIL preserved; mutable V5storage preparation excluded",
+    "NativefirstnewerNONE; nine reloadcontrolsNOTRUN; production/currentPR308 unchanged"
+  ],
+  "old84_coverage_sha256": "af110adc759a7452c08db2c8df8262b4958c0db2562170d17fac17838903f7c5",
+  "old84_exact_copied_rows_verified": 84,
+  "old84_manifest": {
+    "bytes": 59977,
+    "mode": "0o600",
+    "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-successor-20261011/curated-safe-manifest-v7.json",
+    "sha256": "049b04baecd7e3db390b9f8eeb0d9989cedbc9a4689bf723a3aceec93489bd83"
+  },
+  "original1935_immutable": [
+    {
+      "bytes": 5606,
+      "mode": "0o400",
+      "path": "/workspace/engineering/private-handoff-current1935-successor-PREPARATION/OWNERFINAL-private-current1935-additive-handoff-PROPOSAL.json",
+      "sha256": "d5fe68a6346bc0be49b429886be0274906ea4091b43046116180d9cfb6f65de8"
+    },
+    {
+      "bytes": 22481,
+      "mode": "0o400",
+      "path": "/workspace/engineering/private-handoff-current1935-successor-PREPARATION/proposed-additive-safe-reference-manifest.json",
+      "sha256": "4bd2e8ea96b0062b21c2c3b23571d59e067b11ebd6a5eb65a488de114c9524e9"
+    },
+    {
+      "bytes": 3837,
+      "mode": "0o400",
+      "path": "/workspace/engineering/private-handoff-current1935-successor-PREPARATION/proposed-1935Z-engineering-handoff-successor.md",
+      "sha256": "4edb3381a10a99e05afed665261f9571dcc7613bfa056983008835d506ef2cce"
+    }
+  ],
+  "ownership_frozen_loader": {
+    "loader": "actual_transport_v8 load_verified_helper hashes original bytes then compile/exec verified buffer; observer identifies existing Linux helper self-launch path; __file__ remains immutable original path",
+    "required_external_public_helper": {
+      "bytes": 74274,
+      "mode": "0o444",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    "snapshot_or_helper_copies_here": false
+  },
+  "privacy_review": "Source AST/text only; no rawconfig/index/ZIP/binary/log/APIresponse/signedURL/memberpayload copied. Fixed path/hash admission constants and controlled test data are retained.",
+  "reload_application": {
+    "baseline": {
+      "bytes": 84689,
+      "path": "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "sha256": "1f1156908b523012c40fe95a2063764dbb11696a927e0330dc8d8b28c5de6ee7",
+      "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8"
+    },
+    "compact_append_patch": {
+      "bytes": 15348,
+      "mode": "0o400",
+      "path": "/workspace/engineering/private-handoff-current1935-source-closure-PREPARATION/proposed-current8d49-adapter-nine-controls-append-only.patch",
+      "sha256": "7a8eb3af1d96b87f99025f43167e146af162f4b3cfde0596679d6beedb46a7a3"
+    },
+    "nine_controls": "PREPARED_NOT_RUN",
+    "prospective_full_module": {
+      "bytes": 99477,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/prospective-current-test_rcc_runtime_adapter-with-nine-servicefree-controls.py",
+      "sha256": "5a87636917a2d555c2e0aa5757336ef0db4c047e2f4777d63442a05c240700f5"
+    },
+    "reconstruction": "original tracked adapter bytes + two LF bytes + exact standalone source bytes",
+    "standalone": {
+      "bytes": 14786,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py",
+      "sha256": "c148bd528f8306e638054df91dfbf915022eaf30d3e123ff845adbeae6b209eb"
+    },
+    "three_paths": "Combine already-selected ec231 persistent staging+guide patch with this adapter-only append patch and scoped1021 reload canonical; source adoption/new controls need distinct root authorization",
+    "whole_original_AST_prefix": "EXACT"
+  },
+  "schema": "PRIVATE_ADDITIVE_EXACT_SOURCE_CLOSURE_PROPOSAL_ONLY",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "PREPARED_NOT_COPIED_NOT_ADOPTED_NOT_EXECUTED",
+  "tests_or_native_or_imported_payload_execution": false,
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none",
+  "worktree_index_Git_product_mutations": false
+}

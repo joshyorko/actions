@@ -1,0 +1,51 @@
+{
+  "changes": [
+    "two expected argument Pathstr expressions",
+    "cache helper callable POSIX feature admission and sixUID/oneGID comparisons against single measured values"
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact seven-line proposed lesson",
+    "Durable_learning": "Native Path rendering and static platform API availability are separate fixture contracts",
+    "Evidence": "original Windows job114544417671 + purepathmatrix and actualhelperAST ownership-feature poisons",
+    "Remaining_uncertainty": "No productionadoption/freshfull/hostedWindows/native qualification",
+    "Stale_or_ambiguous_guidance_removed": "POSIX literal expectedarguments; runtimeLinuxskip mistakenforWindowsstaticexclusion"
+  },
+  "evidence": [
+    {
+      "bytes": 3827,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/proposed-two-path-assertions-and-cache-owner-features.patch",
+      "sha256": "093cb7f29b354f0b64f0e971726b4426b99549997aa6cf5611f14dec75ddf404"
+    },
+    {
+      "bytes": 1686,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/private-pure-path-and-real-cache-helper-feature-controls.json",
+      "sha256": "1e47be93d792c4c1c6bbc900cdce208cd709e3db38254ac90c42a4fadd1199eb"
+    },
+    {
+      "bytes": 989,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/private-minimal-AST-scope-and-original-source-proof.json",
+      "sha256": "c15c46b3b00240b650ec1c119baf8acfa4b1a9d5a2df09fda53863b8108ce788"
+    },
+    {
+      "bytes": 548,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/canonical-native-path-and-POSIX-feature-proposed.txt",
+      "sha256": "3169c416f55f972f5c8ec5bad7ef970a107fb55eae6778a315b40552c5949bfd"
+    }
+  ],
+  "full_source_fresh_CI": "REQUIRED_AFTER_ROOTADOPTION",
+  "schema": "PRIVATE_CURRENT8D49_WINDOWS_PORTABILITY_SOURCE_PROPOSAL",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "status": "PROPOSAL_ONLY_NO_PRODUCT_ADOPTION",
+  "tests": {
+    "Windows_original": "twoassertionFAILplussevenmypyerrors retained separately",
+    "native_or_package_tests": "NOT_RUN",
+    "original47controls": "UNCHANGED_NOT_RERUN",
+    "pure_rows": 9
+  },
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none; Actions-owned test portability defects"
+}

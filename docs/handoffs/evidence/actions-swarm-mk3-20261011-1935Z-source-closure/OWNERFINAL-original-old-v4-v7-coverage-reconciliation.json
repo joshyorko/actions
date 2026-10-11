@@ -1,0 +1,31 @@
+{
+  "actual_v4_rows": 76,
+  "actual_v7_rows": 84,
+  "additional_source_files_match_neither": true,
+  "canonical_existing_sourceclosure_reuse": "unchanged",
+  "closure_verified_v7": {
+    "bytes": 59977,
+    "mode": "0o600",
+    "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-successor-20261011/curated-safe-manifest-v7.json",
+    "sha256": "049b04baecd7e3db390b9f8eeb0d9989cedbc9a4689bf723a3aceec93489bd83"
+  },
+  "metadata_only": true,
+  "original_closure_owner": {
+    "bytes": 2400,
+    "mode": "0o400",
+    "path": "/workspace/engineering/private-handoff-current1935-source-closure-PREPARATION/OWNERFINAL-private-current1935-unique-safe-source-closure-PROPOSAL.json",
+    "sha256": "f92d2c46afcf5cf097a19f91603313720c16ff48a83825e9b88994e12e2646c6"
+  },
+  "root_named_v4": {
+    "bytes": 54630,
+    "mode": "0o600",
+    "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-successor-20261011/curated-safe-manifest-v4.json",
+    "sha256": "7ad7e6d0f9d2de6fa8c415a54308ccba510d6e6a789a19242bf33e7858d7c056"
+  },
+  "schema": "NAMED_PRIOR_MANIFEST_SCOPE_RECONCILIATION_NO_SOURCE_OR_PACKET_CHANGE",
+  "status": "ALL13_SOURCE_ADDITIONS_UNCHANGED_NO_DUPLICATES",
+  "upstream_disposition": "none",
+  "v4_rows_exact_subset_of_v7": true,
+  "v7_additional_rows": 8,
+  "worktree_copy_Git_tests_native_mutations": false
+}

@@ -1,0 +1,15 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@
+ The staged consumer fixture retains its worker's exact env-exec lease receipt
+ and actual typed retirement/cleanup snapshots in private evidence. Missing
+ snapshots stay null; testcase success does not prove lease release or reaping.
++Source-only environment reuse applies to a changed source generation in the
++same live adapter cache and provider context. Count publish/acquire separately
++from version probes and worker env-exec; durable restart revalidation can
++require acquire. A generation-drain fixture must observe the old action's
++admission, committed new generation and successful new action before releasing
++the old action. Candidate environment preparation and in-flight drain are
++separate intervals. Preserve last-good route/pool/source identities when a
++candidate fails; repaired-source success does not admit the failed generation.
++Retain actual leases and measured cleanup separately from synthetic controls.

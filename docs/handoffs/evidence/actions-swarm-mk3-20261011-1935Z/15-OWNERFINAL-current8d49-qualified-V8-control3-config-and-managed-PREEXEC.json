@@ -1,0 +1,183 @@
+{
+  "all_237_historical_rows": "Retained exact path+SHA/mode; oldfixture via fixed141187/e4Git/snapshot444; currentlive distinct; missingdd091 and8dc via acceptedaliases unchanged.",
+  "budgets": [
+    600,
+    10,
+    645,
+    660,
+    10
+  ],
+  "cache_plan_sha256": "0b5809ae39cfe90caa67117a336b9deab8554cb380b38872f428ff7f47c12012",
+  "capacity": {
+    "dev_shm_bytes": 3865470567,
+    "disposition": "FRESH_ROOT_CHECK_REQUIRED_CAPACITY_RECOVERY_NOT_CLAIMED",
+    "native_TMP_floor": "NONE_IN_EXISTING_TRANSPORT;SOURCEFULL_TMP_MIN_NOT_IMPORTED",
+    "workspace_bytes": 1288490189
+  },
+  "cleanup_kill_grace": 10,
+  "config_binding": {
+    "bytes": 760693,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config-v2.json",
+    "sha256": "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f"
+  },
+  "configuration_independent": null,
+  "constructor": {
+    "bytes": 13715,
+    "mode": "0o444",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/build_qualified_current8d49_config_v8_FINAL.py",
+    "sha256": "1992b7bc25799a0cdd0a9c203d531a0bdca1356ee4678a84c489eafe242e319c"
+  },
+  "current_hosted_Windows": "Two servicefree path-literal assertion portability failures; current source bytes keptimmutable for native; PRmergeHOLD, no allCI claim",
+  "current_source_FULL_independent": {
+    "bytes": 10038,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+    "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+  },
+  "current_source_LIGHT": {
+    "bytes": 7674,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current8d49-configured-SOURCE_LIGHT-PASS.json",
+    "sha256": "d7f23a52d044195187992aeac80e692429e1a1a4af16ee9b37f1971cfbdc4104"
+  },
+  "current_source_LIGHT_independent": {
+    "bytes": 3596,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current8d49-configured-SOURCE_LIGHT-review.json",
+    "sha256": "b0d1c4ee4cee11fc3c2ffd9f6fece609869fa4b447d43bfb8c91ca4a2bf6222b"
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Retain historical inputs by path+hash/Git snapshot; basetemp does not isolate pytest plugin logging; qualify real inner FULL with separate retained parentpost failure and supplement.",
+    "evidence": "RED2\u219251GREEN plus realmode444 admission;15baseline-first source/FULL/provenance poisonsPASS;073e actualFULL1470/13+separatepost",
+    "exact_patch": {
+      "bytes": 772,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/canonical-private-actual-fixture-history-and-pytest-logger-proposed.patch",
+      "sha256": "d21d043bb7cfcdfa32a7e9edb5239c71a649918ed800202f378449bd0e159877"
+    },
+    "remaining_uncertainty": "Actual3/5/7276 nativelease/cleanup compatibility NOTRUN; original private01f/frozen-v6 missing; Windowshosted and private/metadata/releaseHOLD",
+    "stale_ambiguity_removed": "Old fixture overwritten by live path, basetemp-only logger isolation, originalROOTFAIL relabeling asPASS"
+  },
+  "exact_argv_template_with_root_SHA_slot": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "bash",
+    "-c",
+    "source /workspace/actions-cloud/activate.sh && exec \"$@\"",
+    "current8d49-managed-once",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/managed_one_version_entry_v8.py",
+    "--config",
+    "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config-v2.json",
+    "--config-sha256",
+    "a209cc117db4d17a7383ba519abdff064211960aa0b8a88ddf32569fef322f9f",
+    "--release",
+    "/workspace/engineering/root-rcc-current8d49-control3-V8-one-release.json",
+    "--release-sha256",
+    "ROOT_MUST_SUPPLY_REAL_RELEASE_SHA256",
+    "--label",
+    "control3",
+    "--log-root",
+    "/workspace/engineering/root-rcc-owned-cache-one-current8d49-control3-v8-1"
+  ],
+  "first_config_disposition": "Servicefree construction preserved; finalv2 onlyadds managed activation19 entry and focused qualification controlcode binding. No native invocation occurred.",
+  "implementation_bindings": [
+    {
+      "bytes": 1444,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/managed_one_version_entry_v8.py",
+      "sha256": "f1ae7b01b9c01d6391fa46d7cef1cbaf6630dd0bd98698df400f677617f23b6d"
+    },
+    {
+      "bytes": 5013,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/launch_one_version_v8.py",
+      "sha256": "41c128697ab418985257df8aa2eb99abf0d22379264a34b948a12b92a2059b9e"
+    },
+    {
+      "bytes": 4664,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/readonly_current_input_guard_v8.py",
+      "sha256": "13e123a40b4f811a81c549b6a4387135e8d6bc515be39559f34d5fc030c398b6"
+    },
+    {
+      "bytes": 2988,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/gateway_entry_v8.py",
+      "sha256": "ad14539953b2b4b5039d729507d3117e021b1cf00aa767df7a049997c00784b8"
+    }
+  ],
+  "label": "control3",
+  "outer_seconds": 900,
+  "owned_basetemp": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-3/pytest",
+  "owned_logger": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-3/pytest-logging",
+  "owned_root": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-3",
+  "predecessor_control_rule": "Onlycontrol3 first; released5 then7276 require separate same-source acceptedactualPASS and distinct config/review/ROOTone release. No automatic versionloop.",
+  "preserved_first_config": {
+    "bytes": 759889,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/FROZEN-current8d49-control3-qualified-V8-config.json",
+    "sha256": "a3e191f245baa07ec04ef1129736d5839aad19a734f611dc222afa2d71d24882"
+  },
+  "private_source_independent": {
+    "bytes": 5345,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-V8-fixture-logger-independent-source-review/OWNERFINAL-independent-named-current8d49-V8-fixture-logger-temporal-SOURCE_ONLY-review.json",
+    "sha256": "2fd27844ac38b179b45abb0ce1a9603f49ce513ad6e0453878c06a7770c62d11"
+  },
+  "qualification_controls": {
+    "bindings": [
+      {
+        "bytes": 959,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/pure-qualification-GREEN-once/terminal.json",
+        "sha256": "be896ac71574fbd63177d68f1229e9dea6bdf29ee37637baa615b7107db556b5"
+      },
+      {
+        "bytes": 2608,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/pure-qualification-GREEN-once/original.private.log",
+        "sha256": "e0d10de847cf9adb5026e97db9b2c80704df6240d73f2f505d5361702bcb9d1e"
+      },
+      {
+        "bytes": 3476,
+        "mode": "0o400",
+        "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/pure-qualification-GREEN-once/original-junit.xml",
+        "sha256": "8370e3a7e9d78ffe6c752b029209dc21ef5193d9f26b4cd2ffc4148c40e95224"
+      }
+    ],
+    "cases": 15,
+    "passed": 15,
+    "skipped": 0,
+    "test": {
+      "bytes": 3348,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/test_current_qualified_FULL_provenance_v8.py",
+      "sha256": "1660e048335ee17b5a050d6026b14361f37dd6e26cc20b4487ec8f2e5e0b245d"
+    }
+  },
+  "readonly_pre_post_seconds": 120,
+  "root_adoption": null,
+  "root_release_template": {
+    "bytes": 1003,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/ROOT-only-one-control3-release-required-fields-NOTADOPTED.json",
+    "sha256": "1491b8339be17a70d0810b4483876c9bcabad1c7d2ccdd56cfd16d52be9c44fb"
+  },
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_proof": {
+    "bytes": 2859,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/current-config-original237-path-plus-SHA-and-complete-source-count-proof.json",
+    "sha256": "3ea736519ee92717365af9f3917d0cb60f726f47a03a15f0c9d437c62d6c6f87"
+  },
+  "status": "CURRENT_SOURCE_QUALIFIED_V8_CONTROL3_CONFIG_PREEXEC_INDEPENDENT_AND_ROOT_RELEASE_REQUIRED",
+  "temporal_before_alwayspost": "Two shared current log bodies/device/inode/UID/GID/mode/mtime_ns separate original237; explicit absent ownedlogger/ALL avoids shared plugin defaults.",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

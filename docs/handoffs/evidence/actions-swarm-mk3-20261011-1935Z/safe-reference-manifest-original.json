@@ -1,0 +1,338 @@
+{
+  "checkpoint_base": "d55ed399a5b6ba67e88002dd6d490ac9366c2130",
+  "checkpoint_branch": "handoff/actions-swarm-mk3-wave8-20261010",
+  "checkpoint_tree": "5c6d536cd08b8901fc744dfc9e2e2d64ed6cf271",
+  "integration_current_at_capture": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "new_copy_count": 21,
+  "new_original_bytes": 141250,
+  "no_copy_or_checkpoint_mutation": true,
+  "original_1830_1853_counts": {
+    "1830Z": 27
+  },
+  "original_handoff_files_verified": 43,
+  "original_handoff_subtree_serialization_sha256": "781826807d0ae02d417df32081845c0cd9f5680af320baa33b7fd9e8e8593423",
+  "private_exclusions": [
+    "rawlogs/API/MCP responses/signedURLs",
+    "fullmember/source/preparedinventories",
+    "binaries/artifactZIP/wheelmemberbodies",
+    "OAuth/provider/userconfiguration",
+    "private760Kqualifiedconfig",
+    "privatecurrentraws/rootstdio/native outputs"
+  ],
+  "schema": "PRIVATE_PROPOSED_ADDITIVE_SAFE_HANDOFF_REFERENCE_MANIFEST",
+  "scope": "Proposedimmutable1935snapshot, notlivepolledCI/currentexecutionrelease",
+  "selected_rows": [
+    {
+      "already_copied_at_checkpoint": [
+        "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/01-OWNERFINAL-current8d49-configured-SOURCE_LIGHT-PASS.json"
+      ],
+      "bytes": 7674,
+      "copy_needed": false,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current8d49-configured-SOURCE_LIGHT-PASS.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/01-OWNERFINAL-current8d49-configured-SOURCE_LIGHT-PASS.json",
+      "role": "source-light-owner",
+      "sha256": "d7f23a52d044195187992aeac80e692429e1a1a4af16ee9b37f1971cfbdc4104"
+    },
+    {
+      "already_copied_at_checkpoint": [
+        "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/02-OWNERFINAL-independent-current8d49-configured-SOURCE_LIGHT-review.json"
+      ],
+      "bytes": 3596,
+      "copy_needed": false,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current8d49-configured-SOURCE_LIGHT-review.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/02-OWNERFINAL-independent-current8d49-configured-SOURCE_LIGHT-review.json",
+      "role": "source-light-independent",
+      "sha256": "b0d1c4ee4cee11fc3c2ffd9f6fece609869fa4b447d43bfb8c91ca4a2bf6222b"
+    },
+    {
+      "already_copied_at_checkpoint": [
+        "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/190-OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json"
+      ],
+      "bytes": 10038,
+      "copy_needed": false,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/03-OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+      "role": "source-full-independent-retained-rootpost",
+      "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 11627,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-original-Windows-one-owned/OWNERFINAL-current8d49-one-original-Windows-source-and-static-failure-diagnosis.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/04-OWNERFINAL-current8d49-one-original-Windows-source-and-static-failure-diagnosis.json",
+      "role": "Windows-original-diagnosis",
+      "sha256": "3f864f74b7e41f8a0faaa25aa5e9b335c09947c2ce5d467d46098366bfa7bcbd"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 2565,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/OWNERFINAL-private-current8d49-Windows-portability-source-PROPOSAL.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/05-OWNERFINAL-private-current8d49-Windows-portability-source-PROPOSAL.json",
+      "role": "Windows-private-patch-source-owner",
+      "sha256": "ecb19ffb860b976a70f8394f0bff50a0b1ab469bee9d1f3ae4f71590bd70bc30"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 3827,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/proposed-two-path-assertions-and-cache-owner-features.patch",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/06-proposed-two-path-assertions-and-cache-owner-features.patch",
+      "role": "Windows-private-patch",
+      "sha256": "093cb7f29b354f0b64f0e971726b4426b99549997aa6cf5611f14dec75ddf404"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 4944,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-independent-review/OWNERFINAL-independent-private-current8d49-Windows-portability-SOURCE-proposal-review.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/07-OWNERFINAL-independent-private-current8d49-Windows-portability-SOURCE-proposal-review.json",
+      "role": "Windows-private-source-independent",
+      "sha256": "3cb83d185dcb474a602cdf3c954d8004bdb06ee18a63ce12b0cc6fa59f957bbb"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 6730,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/OWNERFINAL-current8d49-managed-reload-drain-private-source-and-nine-real-controls-PREPARED-NOTRUN.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/08-OWNERFINAL-current8d49-managed-reload-drain-private-source-and-nine-real-controls-PREPARED-NOTRUN.json",
+      "role": "reload-drain-NOTRUN",
+      "sha256": "faf0d846ba7e1f240dccb1b6e77ccbba23e36379010bf9ab8abf6c4e6221211f"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 24118,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-persistent-two-path-private-recontext/frozen-current8d49-two-path-persistent-fixture-source.patch",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/09-frozen-current8d49-two-path-persistent-fixture-source.patch",
+      "role": "persistent-source-patch",
+      "sha256": "ec23125cfcf2ca2af3e1c7e08871bb1f198e0df1db04e9be62d61b89b755b158"
+    },
+    {
+      "already_copied_at_checkpoint": [
+        "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/192-OWNERFINAL-independent-private-current8d49-persistent-recontext-SOURCE_ONLY-and-logging-HOLD.json"
+      ],
+      "bytes": 10406,
+      "copy_needed": false,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-persistent-recontext-independent-review/OWNERFINAL-independent-private-current8d49-persistent-recontext-SOURCE_ONLY-and-logging-HOLD.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/10-OWNERFINAL-independent-private-current8d49-persistent-recontext-SOURCE_ONLY-and-logging-HOLD.json",
+      "role": "persistent-source-independent",
+      "sha256": "87ce7c08689988b43a9f563b2a5a26611397e0547694b67f2c9f01d7306cc1af"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 7994,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-v2-ACTUAL-independent-review/OWNERFINAL-independent-original-current-e2-seven-distribution-inner-ACTUAL-integrity-review.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/11-OWNERFINAL-independent-original-current-e2-seven-distribution-inner-ACTUAL-integrity-review.json",
+      "role": "Runtime-seven-inner-actual-independent",
+      "sha256": "29168625d9ab51aa816e28e645285412130bca1552cb3d0132f92f31a8800dbd"
+    },
+    {
+      "already_copied_at_checkpoint": [
+        "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/10-OWNERFINAL-independent-current-e2-original-outer-inspection-ACTUAL-data-integrity-review-v2.json"
+      ],
+      "bytes": 8172,
+      "copy_needed": false,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-independent-review/OWNERFINAL-independent-current-e2-original-outer-inspection-ACTUAL-data-integrity-review-v2.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/12-OWNERFINAL-independent-current-e2-original-outer-inspection-ACTUAL-data-integrity-review-v2.json",
+      "role": "Runtime-original-outer-independent",
+      "sha256": "22eed535e92d5a9f4b50b0e5f15aa8df477f4b2eab314c77a141044332b7079d"
+    },
+    {
+      "already_copied_at_checkpoint": [
+        "docs/handoffs/evidence/actions-swarm-mk3-20261011-1830Z/08-OWNERFINAL-root-original-one-current-e2-aggregate-transfer-failure-and-exact-retained-ZIP.json"
+      ],
+      "bytes": 2912,
+      "copy_needed": false,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-current-e2-one-aggregate-adoption/OWNERFINAL-root-original-one-current-e2-aggregate-transfer-failure-and-exact-retained-ZIP.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/13-OWNERFINAL-root-original-one-current-e2-aggregate-transfer-failure-and-exact-retained-ZIP.json",
+      "role": "Runtime-original-transfer-FAIL",
+      "sha256": "6bf0790738248804416229c4540130103758f820aa63f953e0ac97b6c0f65230"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 4358,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/OWNERFINAL-currente2-original-Mac-Windows-producer-checkout-build-identity-only.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/14-OWNERFINAL-currente2-original-Mac-Windows-producer-checkout-build-identity-only.json",
+      "role": "Runtime-Mac-Windows-source-checkout-owner-review-pending",
+      "sha256": "d67b48ef702f04b5ed4a43d2ff01626f0acac8fafc3e5aa0118b59f7f31b3444"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 9277,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/OWNERFINAL-current8d49-qualified-V8-control3-config-and-managed-PREEXEC.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/15-OWNERFINAL-current8d49-qualified-V8-control3-config-and-managed-PREEXEC.json",
+      "role": "V8-qualified-config-owner-NOTRUN",
+      "sha256": "16f55dd096f13c6e8a9e9d56aa5f9f262bed2f1404e87d785f3a1f6a4a330aed"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 12177,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-independent-preexecution-review/OWNERFINAL-independent-current8d49-qualified-V8-control3-config-managed-PREEXEC-review.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/16-OWNERFINAL-independent-current8d49-qualified-V8-control3-config-managed-PREEXEC-review.json",
+      "role": "V8-qualified-config-independent-PREEXEC",
+      "sha256": "3860e929e17aeea6fb88fbacf02b61e451ed8689820425f491bdce118db4bcd7"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 13715,
+      "copy_needed": true,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/build_qualified_current8d49_config_v8_FINAL.py",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/17-build_qualified_current8d49_config_v8_FINAL.py",
+      "role": "V8-qualified-constructor-source",
+      "sha256": "1992b7bc25799a0cdd0a9c203d531a0bdca1356ee4678a84c489eafe242e319c"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 1444,
+      "copy_needed": true,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/managed_one_version_entry_v8.py",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/18-managed_one_version_entry_v8.py",
+      "role": "V8-managed-entry-source",
+      "sha256": "f1ae7b01b9c01d6391fa46d7cef1cbaf6630dd0bd98698df400f677617f23b6d"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 5013,
+      "copy_needed": true,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/launch_one_version_v8.py",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/19-launch_one_version_v8.py",
+      "role": "V8-launcher-source",
+      "sha256": "41c128697ab418985257df8aa2eb99abf0d22379264a34b948a12b92a2059b9e"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 4664,
+      "copy_needed": true,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/readonly_current_input_guard_v8.py",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/20-readonly_current_input_guard_v8.py",
+      "role": "V8-readonly-guard-source",
+      "sha256": "13e123a40b4f811a81c549b6a4387135e8d6bc515be39559f34d5fc030c398b6"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 2988,
+      "copy_needed": true,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current8d49-qualified-V8-config-preparation/gateway_entry_v8.py",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/21-gateway_entry_v8.py",
+      "role": "V8-gateway-source",
+      "sha256": "ad14539953b2b4b5039d729507d3117e021b1cf00aa767df7a049997c00784b8"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 22172,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-five-root-storage-PREPARATION-v4/OWNERFINAL-five-completed8d49-roots-capped-storage-PREEXECUTION-v4.json",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/22-OWNERFINAL-five-completed8d49-roots-capped-storage-PREEXECUTION-v4.json",
+      "role": "FIVE-storage-PREEXEC-review-pending",
+      "sha256": "a1333777200edeaf0320f437c946e9df15e2e6ce6a3c61a976838d7b9b088b2e"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 772,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current8d49-private-V8-fixture-logger-successor/canonical-private-actual-fixture-history-and-pytest-logger-proposed.patch",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/23-canonical-private-actual-fixture-history-and-pytest-logger-proposed.patch",
+      "role": "canonical-native-logger",
+      "sha256": "d21d043bb7cfcdfa32a7e9edb5239c71a649918ed800202f378449bd0e159877"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 548,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/canonical-native-path-and-POSIX-feature-proposed.txt",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/24-canonical-native-path-and-POSIX-feature-proposed.txt",
+      "role": "canonical-Windows-feature-guard",
+      "sha256": "3169c416f55f972f5c8ec5bad7ef970a107fb55eae6778a315b40552c5949bfd"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 779,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/completed8d49-four-root-storage-PREPARATION-v3/proposed-canonical-managed-Poetry-and-guard-capture-lesson.txt",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/25-proposed-canonical-managed-Poetry-and-guard-capture-lesson.txt",
+      "role": "canonical-Poetry-capture",
+      "sha256": "f46d621678d346caa1f71699ddd1f8fe7eb338fc75834e7a18b201c75d4f8e0a"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 1068,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-inner-data-executor-successor-v2-PREPARATION/canonical-real-data-inspector-entry-and-boundary-controls-proposed-v2.patch",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/26-canonical-real-data-inspector-entry-and-boundary-controls-proposed-v2.patch",
+      "role": "canonical-ZIP-vs-TAR",
+      "sha256": "f7977ae5226da1fcd2554d2439de9216fc4806a2446d1b1300525a8e0942e868"
+    },
+    {
+      "already_copied_at_checkpoint": [],
+      "bytes": 470,
+      "copy_needed": true,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-currente2c-Mac-Windows-original-producer-log-owned/canonical-original-platform-checkout-identity-proposed.md",
+      "privacy": "Safeowner/patch/public-source orchestration only; nestedreferences are scopes not copies. No rawlog/API/member/index/config/binary content admitted.",
+      "proposed_destination": "docs/handoffs/evidence/actions-swarm-mk3-20261011-1935Z/27-canonical-original-platform-checkout-identity-proposed.md",
+      "role": "canonical-platform-checkout",
+      "sha256": "74187436f50d80becea52d7679a6943085a950f6339dc4ce3a9fdc2c15ecf1de"
+    }
+  ],
+  "source_current": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none"
+}

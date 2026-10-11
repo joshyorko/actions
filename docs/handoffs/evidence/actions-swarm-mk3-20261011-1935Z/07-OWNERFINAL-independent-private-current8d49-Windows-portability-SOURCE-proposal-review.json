@@ -1,0 +1,83 @@
+{
+  "adoption_limits": "Keep8d49 frozen during native qualification. Future root application changes source and requires new LIGHT/full/configuration/freshhostedWindows; currentqualifiednativeconfig cannot follow changedsource automatically. No PRmerge/native3/5/7276/private/full134/releaseGO.",
+  "decision": "GO_PRIVATE_CURRENT8D49_WINDOWS_PORTABILITY_SOURCE_PROPOSAL_ONLY_ROOT_FUTURE_APPLICATION",
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "disposition": "ACCEPT_NATIVE_PATH_RENDERING_AND_POSIX_FEATURE_STATIC_CHECK_LESSON_FOR_ROOT_FUTURE_SOURCE_CONTEXT; no cosmetic prose.",
+    "evidence": "Actual adapter converts paths with str(Path); two old POSIX-literal assertions and7directPOSIX getter calls; data-only9controls and retained rootoriginalWindowsfailure.",
+    "exact7_line_delta": {
+      "bytes": 548,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/canonical-native-path-and-POSIX-feature-proposed.txt",
+      "sha256": "3169c416f55f972f5c8ec5bad7ef970a107fb55eae6778a315b40552c5949bfd"
+    },
+    "remaining_uncertainty": "Fresh configured format/type/full/hostedWindows after source adoption not run.",
+    "stale_ambiguity_removed": "POSIX path spelling on Windows; Linux runtime skip as exclusion from Windowsstaticchecks; no forgedWindowsownership."
+  },
+  "evidence_bindings": [
+    {
+      "bytes": 3827,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/proposed-two-path-assertions-and-cache-owner-features.patch",
+      "sha256": "093cb7f29b354f0b64f0e971726b4426b99549997aa6cf5611f14dec75ddf404"
+    },
+    {
+      "bytes": 1686,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/private-pure-path-and-real-cache-helper-feature-controls.json",
+      "sha256": "1e47be93d792c4c1c6bbc900cdce208cd709e3db38254ac90c42a4fadd1199eb"
+    },
+    {
+      "bytes": 989,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/private-minimal-AST-scope-and-original-source-proof.json",
+      "sha256": "c15c46b3b00240b650ec1c119baf8acfa4b1a9d5a2df09fda53863b8108ce788"
+    },
+    {
+      "bytes": 548,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/canonical-native-path-and-POSIX-feature-proposed.txt",
+      "sha256": "3169c416f55f972f5c8ec5bad7ef970a107fb55eae6778a315b40552c5949bfd"
+    }
+  ],
+  "historical_Windows_gate": "Original root-owned114544417671 census1257PASS224SKIP2pathFAIL and7Mypyfail retained; no reviewer acquisition/rerun.",
+  "inspector_original_failure_preserved": {
+    "bytes": 287,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-independent-review/original-readonly-AST-normalization-inspector-docstring-offset-FAIL.json",
+    "sha256": "7cba4779431c3b28ab308c3b89ede3962d082d08b187d6dd92a1486adb62bf6d"
+  },
+  "owner_binding": {
+    "bytes": 2565,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/OWNERFINAL-private-current8d49-Windows-portability-source-PROPOSAL.json",
+    "sha256": "ecb19ffb860b976a70f8394f0bff50a0b1ab469bee9d1f3ae4f71590bd70bc30"
+  },
+  "patch_binding": {
+    "bytes": 3827,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-Windows-private-portability-successor/proposed-two-path-assertions-and-cache-owner-features.patch",
+    "sha256": "093cb7f29b354f0b64f0e971726b4426b99549997aa6cf5611f14dec75ddf404"
+  },
+  "proof": {
+    "all4_frozen_evidence_size_SHA_mode_exact": true,
+    "all_other_wholemodule_AST_including47_controls_exact": true,
+    "helper_normalized_whole_AST_exact_after4_inserted_callablefeature_statements_and6UID1GID_name_substitutions": true,
+    "mode700_750_sameownership_marker600_root_cache700_identity_not_weakened": true,
+    "only2_expected_Pathstr_arguments_general900_injectedrunner_unchanged": true,
+    "same_realUID_primaryGID_single_read_no_synthesis_beforeFS_features_reject": true,
+    "source8d49_a806_clean_NO_APPLICATION": true,
+    "two_path_patch_exact_reconstructed_current_immutable_sources": true
+  },
+  "recorded_pure_controls": {
+    "PASS": 9,
+    "SKIP": 0,
+    "original_literal_WINDOWS_RED": 2,
+    "scope": "PureWindowsPath rendering data-only simulation and actual corrected helper AST owned syntheticFS plus4missing/noncallable feature poisons; no OS/native/new packagegate. Reviewer did not execute controls."
+  },
+  "reviewer_application_tests_native_gates": "NOT_RUN",
+  "schema": 1,
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "upstream_disposition": "none; Actions-owned fixture/test portability boundary"
+}

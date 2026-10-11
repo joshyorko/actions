@@ -1,0 +1,18 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -1426,6 +1426,15 @@
+ use native `gh` and repeat the safe check; never print or transfer the value to
+ an agent. Follow the [upstream reporting procedure](upstream-reporting.md)
+ before attributing a tooling failure to a dependency.
++
++Data-only inspectors that use assertions must reject optimized Python before
++reading admission inputs; syntax compilation does not prove those checks ran.
++Require the root release to be a regular, nonsymlink, mode-0600 file before
++parsing its typed authorization. Admit all ZIP headers before reading
++payloads so a later oversized or special member cannot bypass the initial
++resource boundary. Exercise the real frozen functions against independent
++restored baselines and poisons. Structural success retains separate source,
++generated-content and consumer authority holds.
+ 
+ When qualifying generated Runtime frontend content, decode `_static_contents.py`
+ as data and bind each asset's bytes to its builder checkout. The encoder reads

@@ -1,0 +1,12 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -0,0 +1,9 @@
++Keep historical fixture bindings keyed by path and content hash. When a live
++fixture changes, verify the old row against its original qualified config and
++immutable Git/snapshot bytes; bind the current live fixture separately.
++Explicit pytest basetemp and retention settings do not isolate robocorp-log
++output: its installed plugin defaults to `./output`. Pass
++`--robocorp-log-output` with an absent directory below the owned run root and
++reject existing paths or symlinks. Bind the shared generated log bodies and
++nanosecond file metadata before and in the always-run post guard to detect
++accidental writes; never relabel historical generated-output bindings.

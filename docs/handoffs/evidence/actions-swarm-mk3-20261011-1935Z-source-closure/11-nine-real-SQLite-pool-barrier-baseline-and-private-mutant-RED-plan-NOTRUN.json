@@ -1,0 +1,93 @@
+{
+  "cases": [
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "prepare_under_writer",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_candidate_preparation_precedes_real_sqlite_writer"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "publish_before_commit",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_publication_follows_actual_sqlite_commit"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "publish_staged_routes",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_staged_pool_keeps_original_routes_until_commit"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "omit_idle_restore",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_failed_warmup_restores_original_idle_and_catalog"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "omit_restore_token",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_actual_commit_failure_restores_original_generation_token"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "keep_old_reusable",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_running_old_handle_drains_only_after_new_publication"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "early_generation",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_candidate_warmup_precedes_generation_switch"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "omit_candidate_cleanup",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_rejected_candidate_cleanup_preserves_last_good"
+    },
+    {
+      "expected_RED": "EXACT_ONE_SELECTED_TEST_MUST_FAIL_ITS_ORDERING_OR_LAST_GOOD_ASSERTION",
+      "mutant": "omit_repaired_publish",
+      "mutation": "one declared AST statement/seam in actual current function, monkeypatch restored",
+      "native": "NOT_RUN",
+      "original_current_source_baseline": "MUST_PASS_FIRST",
+      "test": "test_repaired_candidate_publishes_without_admitting_failed_generation"
+    }
+  ],
+  "future_execution": {
+    "each_invocation_unique_ABSENT_owned_basetemp": true,
+    "explicit_robocorp_log_output_required": true,
+    "pytest": [
+      "--noconftest",
+      "-n0",
+      "-q",
+      "/workspace/engineering/pr308-current8d49-managed-reload-drain-private-preparation/test_current_managed_reload_sqlite_pool_barriers.py"
+    ],
+    "python": "/workspace/engineering/pr308/action_server/.venv/bin/python",
+    "reject_inherited_ADDOPTS": true,
+    "retention": "all",
+    "root_release_required": true,
+    "timeout120_kill10": true
+  },
+  "scope": "Actual SQLite/import/routes/pool algorithms with explicit controlled preparation and fake worker handles; no native/HTTP/watcher/action subprocess or typed leasecleanup proof.",
+  "status": "PREPARED_NOT_RUN_ROOT_EXECUTION_HOLD"
+}

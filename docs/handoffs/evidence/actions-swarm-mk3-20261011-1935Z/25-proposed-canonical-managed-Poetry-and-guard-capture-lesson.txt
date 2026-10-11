@@ -1,0 +1,10 @@
+A managed Python executable does not establish executable search identity for
+Poetry. For a prepared Toolkit metadata guard, keep the primary pinned RCC bin
+first and its verified cached Toolkit bin second on PATH before delegation;
+check that Poetry resolves from that cached prefix. A distinct read-only probe
+can diagnose this environment without identifying an earlier discarded cause.
+Persist subprocess stdout, stderr and terminal classification before asserting
+return-code admission, on success, nonzero return, timeout and spawn failure.
+Represent unavailable streams explicitly; preserve a primary exception when
+retention also fails, and fail closed if a successful result cannot be retained.
+Use separate owned before/after captures and refuse a reused capture path.
