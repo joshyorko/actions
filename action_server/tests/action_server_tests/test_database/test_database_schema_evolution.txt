@@ -392,4 +392,116 @@ CREATE UNIQUE INDEX trigger_invocation_id_index ON trigger_invocation(id);
 '''
 CREATE INDEX trigger_invocation_trigger_id_non_unique_index ON trigger_invocation(trigger_id);
 ''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS workspace(
+    id TEXT NOT NULL PRIMARY KEY,
+    state TEXT NOT NULL,
+    lock_version INTEGER NOT NULL
+)
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS run_admission(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    deployment_id TEXT NOT NULL,
+    snapshot_json TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+)
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS run_access_grant(
+    id TEXT NOT NULL PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    deployment_id TEXT NOT NULL,
+    principal_id TEXT NOT NULL,
+    operations_json TEXT NOT NULL,
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+)
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS run_pin(
+    id TEXT NOT NULL PRIMARY KEY,
+    run_id TEXT NOT NULL,
+    workspace_id TEXT NOT NULL,
+    run_admission_id TEXT NOT NULL,
+    admission_principal_id TEXT NOT NULL,
+    request_fingerprint TEXT NOT NULL,
+    idempotency_id TEXT NOT NULL,
+    idempotency_key TEXT NOT NULL,
+    current_attempt_id TEXT NOT NULL,
+    epoch INTEGER NOT NULL,
+    cancel_requested INTEGER NOT NULL,
+    recovery_epoch INTEGER NOT NULL,
+    recovery_receipt TEXT NOT NULL,
+    FOREIGN KEY (run_id) REFERENCES run(id),
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id),
+    FOREIGN KEY (run_admission_id) REFERENCES run_admission(id)
+)
+''',
+
+
+'''
+CREATE UNIQUE INDEX run_pin_run_id_index ON run_pin(run_id);
+''',
+
+
+'''
+CREATE UNIQUE INDEX run_pin_idempotency_id_index ON run_pin(idempotency_id);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS run_attempt(
+    id TEXT NOT NULL PRIMARY KEY,
+    run_id TEXT NOT NULL,
+    workspace_id TEXT NOT NULL,
+    owner_id TEXT NOT NULL,
+    epoch INTEGER NOT NULL,
+    lease_deadline_ms TEXT NOT NULL,
+    heartbeat_ms TEXT NOT NULL,
+    state TEXT NOT NULL,
+    FOREIGN KEY (run_id) REFERENCES run(id),
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+)
+''',
+
+
+'''
+CREATE INDEX run_attempt_run_id_non_unique_index ON run_attempt(run_id);
+''',
+
+
+'''
+CREATE TABLE IF NOT EXISTS run_output(
+    id TEXT NOT NULL PRIMARY KEY,
+    run_id TEXT NOT NULL,
+    workspace_id TEXT NOT NULL,
+    run_attempt_id TEXT NOT NULL,
+    epoch INTEGER NOT NULL,
+    provider_key TEXT NOT NULL,
+    object_ref TEXT NOT NULL,
+    digest TEXT NOT NULL,
+    size INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    media_type TEXT NOT NULL,
+    state TEXT NOT NULL,
+    expires_ms TEXT NOT NULL,
+    FOREIGN KEY (run_id) REFERENCES run(id),
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id),
+    FOREIGN KEY (run_attempt_id) REFERENCES run_attempt(id)
+)
+''',
+
+
+'''
+CREATE INDEX run_output_run_id_non_unique_index ON run_output(run_id);
+''',
 ]
