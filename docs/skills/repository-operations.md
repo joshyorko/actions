@@ -3167,6 +3167,12 @@ both downloaded archives independently and retain candidate, PR head and
 synthetic build identities separately. The combined byte/source measurement
 receipt is retained in
 [`runtime-frozen-current-source-20261011`](../program/evidence/runtime-frozen-current-source-20261011/README.md).
+The artifact API's `workflow_run.head_sha` identifies the workflow's PR head
+(`2f631e54` here), independently of the accepted candidate `ba85aac7` and actual
+synthetic checkout `92498aff`. Admit metadata against that exact workflow head;
+retain candidate/build tree equality and archive checks as separate gates.
+Exercise the generated metadata predicate with the real workflow head and with
+each mismatched identity, size and expiration before refreshing a control.
 Exact source equality and archive inspection admit this tuple for execution;
 they do not establish the eleven frozen cases, eleven wrapper cases, published
 dependency origins, other platforms or release acceptance. Preserve the old

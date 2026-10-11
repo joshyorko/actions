@@ -40,6 +40,7 @@ permissions:
     - action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py
     - action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py
     - action_server/tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py
+    - developer/tests/test_frozen_wrapper_metadata.py
     - action_server/docs/DEVELOPMENT.md
 defaults:
   run:
@@ -234,6 +235,7 @@ jobs:
         EXPECTED_RUN_ID: '38098225250'
         EXPECTED_ARTIFACT_NAME: action-server-unauthenticated-ubuntu-22.04
         EXPECTED_CANDIDATE_SHA: ba85aac7324ea4463bfba8c5f8586e27706dc2fe
+        EXPECTED_BUILD_HEAD_SHA: 2f631e5403ae3ff0b37af2416dc19a98bdc04a84
       run: "set -Eeuo pipefail\ncd \"$GITHUB_WORKSPACE\"\nuv run --no-project --python\
         \ 3.12 python action_server/scripts/verify_frozen_catalog_harness.py --source-root\
         \ . --output \"$RUNNER_TEMP/go-wrapper-catalog-evidence/harness-verification.json\"\
@@ -250,7 +252,7 @@ jobs:
         \ --header \"Accept: application/vnd.github+json\" \"$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID\"\
         \ --output \"$metadata\"\njq -e --argjson id \"$ARTIFACT_ID\" --argjson run\
         \ \"$EXPECTED_RUN_ID\" --arg name \"$EXPECTED_ARTIFACT_NAME\" --arg head \"\
-        $EXPECTED_CANDIDATE_SHA\" --argjson size \"$EXPECTED_ARCHIVE_SIZE\" ' .id\
+        $EXPECTED_BUILD_HEAD_SHA\" --argjson size \"$EXPECTED_ARCHIVE_SIZE\" ' .id\
         \ == $id and .name == $name and .size_in_bytes == $size and .expired == false\
         \ and .workflow_run.id == $run and .workflow_run.head_sha == $head ' \"$metadata\"\
         \ > /dev/null\narchive=\"$RUNNER_TEMP/go-wrapper-native.zip\"\ncurl --fail\

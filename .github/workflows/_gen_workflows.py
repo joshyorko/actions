@@ -732,6 +732,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py",
                         "action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py",
                         "action_server/tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py",
+                        "developer/tests/test_frozen_wrapper_metadata.py",
                         "action_server/docs/DEVELOPMENT.md",
                     ],
                 }
@@ -940,6 +941,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "EXPECTED_RUN_ID": "38098225250",
                         "EXPECTED_ARTIFACT_NAME": "action-server-unauthenticated-ubuntu-22.04",
                         "EXPECTED_CANDIDATE_SHA": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+                        "EXPECTED_BUILD_HEAD_SHA": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
                     },
                     "run": "\n".join(
                         [
@@ -952,7 +954,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                             'test "$build_tree" = "$candidate_tree"',
                             'metadata="$RUNNER_TEMP/go-wrapper-artifact-metadata.json"',
                             'curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID" --output "$metadata"',
-                            'jq -e --argjson id "$ARTIFACT_ID" --argjson run "$EXPECTED_RUN_ID" --arg name "$EXPECTED_ARTIFACT_NAME" --arg head "$EXPECTED_CANDIDATE_SHA" --argjson size "$EXPECTED_ARCHIVE_SIZE" \' .id == $id and .name == $name and .size_in_bytes == $size and .expired == false and .workflow_run.id == $run and .workflow_run.head_sha == $head \' "$metadata" > /dev/null',
+                            'jq -e --argjson id "$ARTIFACT_ID" --argjson run "$EXPECTED_RUN_ID" --arg name "$EXPECTED_ARTIFACT_NAME" --arg head "$EXPECTED_BUILD_HEAD_SHA" --argjson size "$EXPECTED_ARCHIVE_SIZE" \' .id == $id and .name == $name and .size_in_bytes == $size and .expired == false and .workflow_run.id == $run and .workflow_run.head_sha == $head \' "$metadata" > /dev/null',
                             'archive="$RUNNER_TEMP/go-wrapper-native.zip"',
                             'curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" --output "$archive"',
                             'test "$(stat -c %s "$archive")" = "$EXPECTED_ARCHIVE_SIZE"',
