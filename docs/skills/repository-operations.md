@@ -2219,6 +2219,24 @@ native-platform lifecycle proof is implied. Tests for the protocol boundary
 are in `test_preload_actions_exit.py` and
 `test_rcc_runtime_adapter.py`.
 
+`ActionServerProcess.start()` owns its direct child and registered stdout/stderr
+readers before readiness. Keep post-spawn startup work inside a failure-cleanup
+boundary: stop captured descendants, wait for and reap the direct `Popen` child,
+then join registered readers within one finite deadline. Preserve the original
+startup exception and attach cleanup errors or incomplete observations as
+notes. The cleanup result distinguishes stopped execution from descendant-reap
+completeness; a point-in-time snapshot does not prove universal descendant
+discovery or adoption. Successful startup and readiness timeouts remain
+unchanged. The synthetic timeout regression proves direct-child reap and both
+reader closures; native Windows startup remains a separate gate.
+
+When a test subclasses a process implementation read into a local runtime
+alias (such as `base_process = process_module.Process`), Mypy cannot use that
+alias as a class base. Import `Process` directly for the subclass declaration
+and patch `process_module.Process` separately so runtime substitution remains
+intact. Access private fields through a base-typed process handle with
+`getattr` while keeping the assertions on those fields.
+
 The socketpair test that fills a send buffer is a kernel-buffer behavior check:
 it runs on POSIX runners and is skipped on Windows, where the same payload may
 not saturate the pair. Keep a deterministic `socket.timeout` test on all
@@ -3112,13 +3130,13 @@ integration or full release acceptance, nor Windows/macOS behavior. Keep the
 earlier ten-case c782 receipt as historical evidence.
 
 A refreshed control harness must record its source identity separately from the
-native build source. After convergence with the reviewed staging prerequisite
-and PR292 typed fixture, the verifier requires Runtime subtree
+native build source. The retained pre-cleanup convergence control includes the
+reviewed staging prerequisite and PR292 typed fixture. Its verifier pins Runtime subtree
 `2aed50eae66abc2c85635a36c45a734429cfe905`: every Runtime source input must match
 candidate `a47dc616`, except the exact added `source_staging.py` blob
 `b475fd6688b7afc6606cde2cba9a1294d771a64c`. Core, HTTP Helper, all three manifests
 and locks remain identical to that candidate. The resource-history selector is
-now exact typed blob `5fe18b942ba66f339ac076fa26add1908d70305e`; the other four
+the exact typed blob `5fe18b942ba66f339ac076fa26add1908d70305e`; the other four
 selected test blobs and eleven JUnit identities remain unchanged. This is an
 explicit harness difference, not a new native-build identity or an arbitrary
 source-diff exclusion. Both job summaries embed the verifier receipt and cannot
@@ -3130,6 +3148,14 @@ The refreshed control depends on PR292 acceptance, and its hosted native and
 wrapper execution remain NOT RUN until separate exact-control receipts pass.
 Neither the added staging module nor whole-source native parity is proved by
 the older a47 binary.
+
+After importing PR292 startup-failure cleanup, the current Runtime helpers and
+resource-history test no longer match those retained pins. The verifier rejects
+that checkout before artifact execution. Current-control native and wrapper
+execution require a separately reviewed current-source artifact tuple and new
+receipts. Preserve the original artifact pins and historical results in their
+original commits; never widen a source-equivalence exclusion to admit changed
+Runtime code.
 
 Frozen-wrapper contract tests must separate archive metadata from filesystem
 mode support. The verifier checks the ZIP member's POSIX executable mode before
@@ -3168,6 +3194,16 @@ jsdom wall-clock measurement cannot establish browser frame rate: hosted run
 correctness failure. Controlled browser performance remains a separate proof.
 
 ### Live pull-request base identity
+
+Reconcile the complete exact-head check-run inventory, commit statuses and
+workflow-run inventory before merge admission. Page each endpoint until
+exhausted and count checks, jobs and runs separately. A successful workflow can
+contain skipped jobs; inspect each skip's event condition and retain it as
+skipped. Empty commit statuses do not imply absent Actions checks. After a
+prerequisite merge, compare the dependent's new prospective tree with its
+previously tested tree. Require review and fresh checks for a changed union;
+matching earlier production changes does not include later prerequisite repairs.
+
 
 A pull-request metadata response can retain an older `base.sha` after its named
 target branch advances. Resolve the live target Git ref separately and inspect

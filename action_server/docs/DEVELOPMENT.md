@@ -51,7 +51,7 @@ The resource-owner history CLI case is the separate eleventh node, covering conc
 
 The frozen-control workflow also defines a separate Go-wrapper job against the same measured candidate and eleven JUnit identities. It verifies the wrapper artifact's archive digest, single-member path, executable type and mode, and binary digest before extraction. A wrapper-job-only pytest plugin observes each selected `ActionServerProcess`: it verifies the launched Popen executable is the measured wrapper, its sole direct Runtime child is the cached measured frozen executable, and both identities have exited before normal test cleanup can signal anything. The per-node lifecycle receipt fails closed: a startup identity failure, missing verified child identity, or any stop/cleanup failure cannot be recorded as a natural exit. The five selected test files and eleven node IDs remain pinned; the plugin's per-node lifecycle receipt is a separate proof from JUnit. After the cases, the job also checks the extracted frozen executable. Its HOME, Actions home, Robots home, temp directory, JUnit, and receipts are independent from the frozen-executable job. Run 38067094994 passed this separate Go-wrapper gate for the historical fbd/a47 tuple; that receipt does not replace the frozen-executable receipt or establish other-platform acceptance.
 
-The refreshed convergence control retains the a47/0045 artifact pins, but its
+The retained pre-cleanup convergence control retains the a47/0045 artifact pins, but its
 harness Runtime subtree is `2aed50eae66abc2c85635a36c45a734429cfe905`. The new
 stdlib verifier permits only the exact reviewed `source_staging.py` addition
 (blob `b475fd6688b7afc6606cde2cba9a1294d771a64c`) relative to a47; it requires
@@ -62,6 +62,14 @@ separate harness receipt tied to its control SHA; it does not identify that
 harness as native build source. PR292 remains an acceptance dependency. Hosted
 execution of the refreshed control is **NOT RUN**, and the old binary does not
 prove the added staging implementation or full current-source artifact parity.
+
+After importing PR292 startup-failure cleanup, the current Runtime helpers and
+resource-history test no longer match those retained pins. The verifier rejects
+that checkout before artifact execution. Current-control native and wrapper
+execution require a separately reviewed current-source artifact tuple and new
+receipts. Preserve the original artifact pins and historical results in their
+original commits; never widen a source-equivalence exclusion to admit changed
+Runtime code.
 
 ## Release process
 
