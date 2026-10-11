@@ -150,8 +150,12 @@ progress. Captured stderr is line-oriented, and RCC's interactive forwarding
 does not explicitly flush, so absent captured lines do not establish inactivity.
 
 The Windows Runtime test workflow now sets an explicit
-`ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR` and retains its bounded JSON reports
-with `always()` even when integration fails. The test-owned observer enables
+`ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR` and attempts to retain its bounded JSON
+reports with `always()` even when integration fails. Upload is best effort:
+`if-no-files-found: warn` permits a successful upload step with no reports, and
+job cancellation or infrastructure failure may prevent the step from running.
+Verify the artifact inventory and report bytes before claiming observations.
+The test-owned observer enables
 only those two native nodes, samples pending initial startup at 80 and 88
 seconds, and delegates unchanged startup and its existing 20-second failure
 cleanup. Reports contain source/executable/config byte identities, an
@@ -163,6 +167,11 @@ processes, unobserved RCC identity, and the frozen child's internal readers
 remain explicitly unavailable. The probe limits traversal to 64 processes
 and a one-second traversal budget; individual OS queries may outlast that
 budget, so cancellation never waits on a pending query before startup cleanup.
+The final report's `sampler_cancelled: true` means cancellation was requested,
+not that the sampler stopped. Check `sampler_alive` separately after its bounded
+50 ms join. A pending OS query may leave that daemon alive; late observations
+are discarded after cancellation. Neither field proves Runtime process or
+stream cleanup, which remains owned by the unchanged starter.
 These synthetic observer checks do not establish Windows native acceptance
 or fix the original failure. Compare the next exact-head reports before
 changing production code; do not warm caches, retry RCC, or enlarge deadlines

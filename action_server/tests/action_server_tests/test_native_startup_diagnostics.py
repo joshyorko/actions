@@ -4,7 +4,6 @@ import threading
 from asyncio import CancelledError
 
 import pytest
-
 from action_server_tests import native_startup_diagnostics as diagnostics
 
 
