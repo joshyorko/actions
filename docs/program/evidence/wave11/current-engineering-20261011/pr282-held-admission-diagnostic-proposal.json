@@ -1,0 +1,26 @@
+{
+  "scope": "PR282 read-only hosted admission diagnosis checkpoint",
+  "job": 114380503419,
+  "run": 38109022977,
+  "source_candidate": "0d8d0803a954faefd53e5cdb92d08c2a1275a820",
+  "actual_checkout": "68696371c5fa313f072e05a748321f832db9dad3",
+  "junit_artifact": 11690817837,
+  "log": {
+    "path": "/workspace/engineering/ci-job-114380503419.log",
+    "sha256": "3a70ed53cffbeadde0ae38b9326fb26c6ae92325d4a966b3e8b7f74bdd0a8633"
+  },
+  "observed": "pytest0,one named case passes,zero skips/failures/errors; strict receipt_valid=False",
+  "raw_receipt_presence": "UNKNOWN; sanitized receipt written only after every gate passes, so JUnit-only upload does not prove raw absence",
+  "exact_failing_predicate": "UNKNOWN; existing single conjunction produces no per-predicate diagnostics",
+  "enable_env_and_destination": "Configured ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1 and explicit CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH under runner.temp in original hosted log",
+  "test_vs_control": "Producer teardown asserts execution_stopped and no active readers; strict admission additionally requires wrapper_reaped/snapshot/reap true and empty cleanup/live/zombie sets. Test pass does not waive stricter gates.",
+  "bounded_proposal": {
+    "branch": "existing feat/canvas-template-20261010",
+    "code_scope": "Canvas admission Python heredoc in generator, matching generated Runtime test workflow, existing service-free admission tests, canonical guide",
+    "behavior": "Evaluate each existing receipt/JUnit predicate independently with guarded access; retain identical pass/fail policy. On failure write a sanitized diagnostic containing stable failed predicate codes and safe categorical parse/evaluation error codes only. No paths, raw values, bodies, stdout, stderr or environment dump. Always upload that diagnostic with existing sanitized JUnit. Raw receipt remains local; if a selected known subset is retained it contains only public producer tuple/digests and boolean/count cleanup status, never args/origins/paths/config/limits bodies.",
+    "coverage": "Existing valid baseline still passes; every existing receipt/JUnit poison fails with specific reason code; absent/malformed/wrong-type receipt cannot crash diagnostic construction; safe diagnostic rejects injected path/body/private failure sentinels. Roundtrip generator and all7unrelatedoutputs unchanged.",
+    "execution": "No rerun or new actual execution in read-only lane; retain original failed run and upload. Independent source review before root normal push."
+  },
+  "upstream_disposition": "none",
+  "repository_edits": false
+}

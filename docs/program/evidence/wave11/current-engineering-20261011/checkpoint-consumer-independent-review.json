@@ -1,0 +1,147 @@
+{
+  "bound_modified_files": {
+    "docs/program/evidence/wave11/current-engineering-20261011/README.md": {
+      "bytes": 5395,
+      "sha256": "6f0cd22a01a99be3f9d66511fbe8757ce740cf7b564cceeb8d99a059d7f8541b"
+    },
+    "docs/program/evidence/wave11/current-engineering-20261011/manifest.json": {
+      "bytes": 8897,
+      "sha256": "cacfcc386b00ca8ec415c1d1b3ab7d0d42dbc502dbd4254b53a0767882c3e5ba"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 194943,
+      "sha256": "6f5cc941d0c0ca9d40cfa6f569c9dd2fe1a8a2f820518df0fc0453897ddd2539"
+    }
+  },
+  "canonical_proposal_reconciliation": {
+    "consumer_dryrun_publicfloor_hostwheel_producer_generated_boundaries": {
+      "canonical-documentation-proposal-followup.md": {
+        "all_quote_blocks_integrated": true,
+        "quote_blocks": 1,
+        "sha256": "b07cfdc9379bf41864e7f536fc2c1711c6aa13a1b2609d03b22bbbf6218e4bd2"
+      },
+      "canonical-documentation-proposal.md": {
+        "all_quote_blocks_integrated": true,
+        "quote_blocks": 3,
+        "sha256": "4cfc8e79ea57fd027eb933265dbe92a8f42170439a71f1a791b715384a49d526"
+      }
+    },
+    "future_full_manifest_mode_architecture_explicitly_deferred": true,
+    "oauth_source_policy_and_actual_release_hold_retained": true,
+    "oauth_stale_equivalent_claim_removed": true,
+    "pr290_original_receipt_exact_scope_paragraph_integrated": true
+  },
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/repository-operations.md",
+    "disposition": "GO exactacceptedconsumer/followup/290 paragraphs plus OAuthstructural-source/recoverylimits; READMEexplicitlydefers broaderdesignpendingauthority.",
+    "durable_learning": "Public artifactbyte/source/member proofs and loaded-import acceptance remain separate from generatedcontent/fullOAuth/provider/release ownership; measured API head vs producer; dryrun skipsTwine/credentials; real rawlifecycle vs summaryscope.",
+    "evidence": "All16newcopiedhashes/originalbytes; original reviewed source/control/consumer receipts; authenticated27checkmerge readback; exactquotedguidance reconciliation.",
+    "remaining_uncertainty": "Historicalproposals remainimmutableand maystatepreexecutionstatus, explicitly superseded by actualconsumerreceipt/README; no actualOAuthsourceauthority/providerbehavior/finalsource/platform/privatepublicationgates waived.",
+    "stale_or_ambiguous_guidance_removed": "Dry-run impliedTwine; equivalentOAuth generation impliedcorrectpayload; memberhash proof impliedgeneratedcontent acceptance; selectedcataloglifecycles impliedreadergates/wholewheelconsumer."
+  },
+  "new16_hashes_and_sizes_verified": true,
+  "new16_manifest_bindings": {
+    "oauth-build-design.json": {
+      "bytes": 6634,
+      "sha256": "2b309514a1ae3b8dd4c2c9d2580a854651c38792f2d84b306aab36908c60df51",
+      "source": "/workspace/engineering/oauth-config-design-owned/design-receipt.json"
+    },
+    "oauth-build-design.md": {
+      "bytes": 9223,
+      "sha256": "f9e9cfe603bfdb0b0f32d32a181b2ab03b1268091492fbd00d1fc3634ef0a304",
+      "source": "/workspace/engineering/oauth-config-design-owned/design.md"
+    },
+    "oauth-canonical-proposed.patch": {
+      "bytes": 2549,
+      "sha256": "ac884e1e46d5be3e8307ce23a747422c265a736b8430a1e0fd368a5c4f7bf55c",
+      "source": "/workspace/engineering/oauth-config-design-owned/canonical-guide-proposed.patch"
+    },
+    "pr221-actual-clean-consumer.json": {
+      "bytes": 9008,
+      "sha256": "7704cbac814064ba4d341f99c576b7ee36ab646b72c07e79a50d5dee186ac938",
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/actual-clean-consumer-receipt.json"
+    },
+    "pr221-attempt-identity.json": {
+      "bytes": 2416,
+      "sha256": "c56d2766463c5f6d5c710388a15f65a94c1304ca1f05d213d83bb98993445a7e",
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/attempt-identity.json"
+    },
+    "pr221-clean-consumer-proposal.json": {
+      "bytes": 16385,
+      "sha256": "579ed95e600ff002e9486a866b5df1f92a2c7dad075653ecb695ec1a819214b1",
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/clean-consumer-proposal.json"
+    },
+    "pr221-clean-consumer-runner-tests.py": {
+      "bytes": 5192,
+      "sha256": "9ded078557289c471f3c0e9372ac71e90bccf1b3f9474c3b0067897f10416eea",
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/test_installed_consumer_runner.py"
+    },
+    "pr221-clean-consumer-runner.py": {
+      "bytes": 16652,
+      "sha256": "8ac20b20442a0e599e038664e76f4acc8779bcdebaa4340c319f43580a1133a9",
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-consumer-runner.py"
+    },
+    "pr221-consumer-proof.json": {
+      "bytes": 55818,
+      "sha256": "9f1f2947797bbc159c57b47da827383513fe498583e53395c4ff53843193ce57",
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/consumer-proof.json"
+    },
+    "pr221-execution-cleanup-receipt.json": {
+      "bytes": 1109,
+      "sha256": "9789eecc3e7b904ad260c56e90d14f0017bfa0820ce9b5eebbfd7d2313ca1739",
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/execution-cleanup-receipt.json"
+    },
+    "pr221-independent-clean-consumer.json": {
+      "bytes": 18432,
+      "sha256": "00d1b3c51f2e250e07bed48df92ff5f0e688c86525440e5109ebad525c681f63",
+      "source": "/workspace/engineering/pr221-clean-consumer-independent-review/actual-one-consumer-review.json"
+    },
+    "pr221-install-argv.json": {
+      "bytes": 564,
+      "sha256": "4134aa92dfca9e3c3f5d86b125c9dc0ceb4702fed9f6f28f2979c71efe662c8c",
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/install-argv.json"
+    },
+    "pr221-installed-inventory-raw.json": {
+      "bytes": 30860,
+      "sha256": "cd3bf8423037071543f0900322a4698ac378c6c2501ebd5ca6ed8ce2db78c902",
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/installed-inventory-raw.json"
+    },
+    "pr221-pip-install-report.json": {
+      "bytes": 864906,
+      "sha256": "c9f134feedb243623faf689aa481f01ee16fd2b85b8cba5909e1980a14ea3ca4",
+      "source": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-linux-12340bb17-1/pip-install-report.json"
+    },
+    "pr282-windows-source-checkpoint.json": {
+      "bytes": 6450,
+      "sha256": "03c111382848683e15bb5ea74014ce3e756193fb6066793ee77a6ced699475cd",
+      "source": "/workspace/engineering/pr282-windows-owned/successor-receipt.json"
+    },
+    "pr290-actual-integration.json": {
+      "bytes": 605,
+      "sha256": "4c5314fead37ef489c94f33be43fe2b5688a9c3e70f1198695cc5211a7ee07db",
+      "source": "authenticated GitHub merge and readback"
+    }
+  },
+  "pr290_authenticated_current_readback": {
+    "all27_checks_success": true,
+    "head": "5c8084c61389e293eb992c24bc0f2962f705378e",
+    "merge": "fbde0d3a248c47c9964851355f96575c89a87329",
+    "merged_at": "2026-10-11T03:52:03Z",
+    "no_full_issue_or_publication_claim": true,
+    "tree_and_parent_objects_verified": true
+  },
+  "previous20_manifest_entries_unchanged": true,
+  "public_evidence_scan": {
+    "environment": "Onlypipplatform/interpreter description and ownedreceipt paths/PID/create-time/sourcehashes, not rawenvironment variables or secret values.",
+    "live_credentials_or_raw_provider_payloads_detected": false,
+    "pattern_false_positive": "Two PyPI-token-shaped Tidelift subscription package identifiers in public project_url metadata, inspected redacted; no credential.",
+    "pip_report": "66 install items;65 publicfiles.pythonhosted.org wheelURLs andoneoriginal localRuntimewheel. Large METADATA is retained public package metadata, not a private environment/config export.",
+    "provider_config": "Generated payload content is described only by empty lengths/hash or APIerror shape; no private provider bodies."
+  },
+  "reviewed_branch_head": "df6b2bb5ad2f2ee45076401bf51ea303aeeb3dd7",
+  "schema_version": 1,
+  "tests_or_source_mutation_by_reviewer": false,
+  "upstream_disposition": "none",
+  "verdict": "GO_DURABLE_ENGINEERING_EVIDENCE_AND_CANONICAL_GUIDANCE_PUSH_IF_REVIEWED_BYTES_UNCHANGED",
+  "workspace_original_copies_byte_equal": 15
+}

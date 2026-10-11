@@ -1,0 +1,79 @@
+{
+  "actual_admitted_target": "fbde0d3a248c47c9964851355f96575c89a87329",
+  "current_exact_source_logs_independently_rehashed": {
+    "admitted-scope": {
+      "path": "/workspace/engineering/pr309-admitted-scope.log",
+      "sha256": "eaf5ea71954c88a67f34b5f11502c961bab4456a51c5d01055c50f16913feaee",
+      "size": 5397
+    },
+    "admitted-static": {
+      "path": "/workspace/engineering/pr309-admitted-static.log",
+      "sha256": "2efd4174076f0f23126c78efce60bdb39684aa3ff22343ef9abfe66f2b2b2ebb",
+      "size": 5694
+    },
+    "admitted-toolkit": {
+      "path": "/workspace/engineering/pr309-admitted-toolkit.log",
+      "sha256": "352b2681f804840ef4f8f589ac1ad190e3b7382095de93f8aeb81d3a6864d2f9",
+      "size": 14342
+    }
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_and_preserved": "docs/skills/repository-operations.md",
+    "disposition": "GO retained route-census acceptance boundary and configuredIsort learning; no duplicate documentation proposal necessary.",
+    "evidence": "Original routeblob fixed; parentblocks independently present; source268+5 exact; current actual log checks.",
+    "exact_current_delta": "diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md\nindex f702dfa2..15bbdaa1 100644\n--- a/docs/skills/repository-operations.md\n+++ b/docs/skills/repository-operations.md\n@@ -517,6 +517,23 @@ Sign-out and expired-session status unmount providers, clear their query cache\n and disconnect browser subscriptions. The browser rechecks on protected HTTP\n 403, focus, expiry and a 15-second interval for revocation in another tab.\n \n+`test_auth_route_inventory.py` captures the assembled FastAPI route objects\n+through `start_server()`'s `before_start` callback, after HTTP, WebSocket, UI,\n+and artifact registrations. The callback returns `False` to stop before\n+process-pool or Uvicorn startup. Its explicit route-class, path, method, and\n+mount inventory includes hidden routes and the registered dynamic action; the\n+local `StaticFiles` mount is recorded as a terminal mount because it exposes no\n+nested route list. A new unclassified route fails the inventory. Since the\n+callback stops startup, this proves route registration and classification only.\n+Authorization acceptance requires a separate missing/wrong/valid credential\n+request matrix for protected routes and terminal mounts, including GET/HEAD,\n+downloads, WebSockets, streaming, and rejection before side effects. CORS\n+preflight and request authorization retain their separate request-level tests.\n+When trusted configuration enables an optional transport, inventory its enabled\n+routes too; default-off absence does not cover that configuration. Keep route\n+registration, request authorization, and packaged/native execution evidence\n+separate in acceptance receipts.\n+\n Community PRs touching `actions/**` run Actions Core Tests. Its non-publishing\n candidate-wheel job builds the exact-source wheel and sdist, checks their\n inventory, validates and clean-installs the wheel, and retains artifact hashes\n@@ -1253,6 +1270,12 @@ address the first failure before treating lint as green. The configured\n `devutils` gates in `developer/toolkit.py` run `pytest tests` and `ruff check\n src tests`.\n \n+Action Server's `invoke lint` also runs Ruff check, Ruff format, and isort for\n+`src` and `tests`; its `pyproject.toml` sets isort's Black profile. Isort checks\n+imports nested inside test functions as well as module-level imports. When a\n+test edit only reorders imports, use this package gate and verify the route or\n+contract assertions remain unchanged.\n+\n For `devutils`, regenerate from that package directory with\n `uvx --from poetry==2.1.1 poetry lock --no-interaction`, then run\n `uvx --from poetry==2.1.1 poetry check --lock`. Run the lock command a second\n",
+    "remaining_uncertainty": "Complete152request authorization plus fresh hosted/platform/native/fullsuite checks remain; no waiver.",
+    "stale_or_ambiguous_guidance_removed": "Registration category census cannot imply full credential/method/mount/sideeffect authorization; current exact-head source checks cannot reuse historical hosted green."
+  },
+  "head": "41d4ee41190d7d3f3969212471863c70852295ba",
+  "independent_source_checks": {
+    "all_original_and_admitted_history_retained": true,
+    "all_parent_guide_added_blocks_retained": {
+      "47b34146eac80e1d6eee26a9b7798ca7154027fa": 2,
+      "fbde0d3a248c47c9964851355f96575c89a87329": 3
+    },
+    "clean_tracked_worktree": true,
+    "complete_delta_vs_target": "A\taction_server/tests/action_server_tests/test_auth_route_inventory.py\nM\tdocs/skills/repository-operations.md\n",
+    "exact_producer268_and_selected5_blobs_equal_both_parents_and_original_native_inventory": true,
+    "independently_resolved_parent_leaves": 1406,
+    "merge_base": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+    "native_input_inventory": {
+      "path": "/workspace/engineering/native292-owned/producer-input-inventory.json",
+      "sha256": "544566c0d61547c1f9cd5e4c30b770b8a5d0d122760ad78e5596351788276d76"
+    },
+    "only_combined_path": [
+      "docs/skills/repository-operations.md"
+    ],
+    "production_runtime_core_helper_changed_vs_actual_target": false,
+    "route_blob": "100644 blob e1e4b314d6a535fec2175da2b5224105e4d7f8fd"
+  },
+  "ordinary_parents": [
+    "47b34146eac80e1d6eee26a9b7798ca7154027fa",
+    "fbde0d3a248c47c9964851355f96575c89a87329"
+  ],
+  "reviewed_owner_receipt": {
+    "path": "/workspace/engineering/pr309-admitted-refresh-receipt.json",
+    "sha256": "e1954dbcee305345a56ff88f03e02701a36ecea3ec322f5d702ebc90c598bbe8"
+  },
+  "schema_version": 1,
+  "source_mutation_or_test_execution_by_reviewer": false,
+  "source_test_review": {
+    "authorization_limit": "Classification categories are handwritten intendedpolicy; test does not exercise credential enforcement, side effects, route ordering, optional exposed transports or packaged/native execution.",
+    "inventory": "Counter of class/path/method identities enforces exact set and multiplicity including hidden/docs/API/UI/MCP/session/websocket/terminal StaticFiles mount, enabled shutdown branch and seeded dynamic action.",
+    "negative": "Actual classifier rejects a newly unclassified route; policy duplicate entries assert.",
+    "production_auth_unchanged": "New route test+durable guide only; no middleware/token/session/CORS/authallowlist edits.",
+    "route_capture": "Traverses real assembled HTTP/WebSocket/Mount route graph at before_start, returnsFalse before pool/Uvicorn; startup barrier test hooks fail on accidental startup."
+  },
+  "tree": "211cea442440baf18ad270e5530ad8467b50176f",
+  "upstream_disposition": "none",
+  "validation_admission": {
+    "ToolkitTest": "69PASS",
+    "configured_package_lint": "PASS real invoke lint: Ruffcheck, Ruffformat299,Isortsrc/tests; optional Markdownlint absent",
+    "configured_typecheck": "PASS335 files; existing annotation-unchecked notes retained",
+    "deselected": "test_assembled_server_browser_session; no credential/live-server proof implied",
+    "full_suite_or_native_or_hosted_head": "NOT RUN; root must push normal then reconcile exact newhead complete gates; no oldgreen carry",
+    "generator": "Owner actual canonical replay log plus independently clean generated worktree; no rerun by reviewer",
+    "scoped_source_tests": "116PASS1integrationDESELECTED; includes route,cors,browser_session,configured_apikey_early_reject and frozen harness/JUnit/artifact/plugin contracts"
+  },
+  "verdict": "GO_NORMAL_PUSH_EXACT_41D4_CURRENT_UNION_FOR_FRESH_HOSTED_GATES; HOLD_FULL_PR_MERGE_AND_ISSUE152_AUTH_ACCEPTANCE"
+}

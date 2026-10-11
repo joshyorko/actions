@@ -1,0 +1,17 @@
+{
+  "verdict": "GO_CANDIDATE_SOURCE",
+  "source": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+  "tree": "e05141d122b7245b626c5d0389cf9b653c8ad300",
+  "parent": "d8373ff4d07fcfe07ab01bffc88cdee67909b725",
+  "ordered_merge_parents": [
+    "ff6842223068bb34811990a417aa280331acbb6a",
+    "fbde0d3a248c47c9964851355f96575c89a87329"
+  ],
+  "independent_review": "1406 leaves; all parent union leaves retained; only combined generator/guide paths; S child canonical guide only; generator AST same ff except inherited frozen class; 268 producer inventory one existing adapter delta, five selected input identities equal fbde; no old receipt relabeling",
+  "local_gates": "Doctor/Bootstrap PASS; Toolkit96 PASS; scoped109 PASS4 opt-in SKIP; configured lint PASS/type334 PASS; optional Markdown lint absent",
+  "evidence": {
+    "path": "/workspace/engineering/pr302-candidate-S-receipt.json",
+    "sha256": "9c591806da515dfc4b03835f98fdaa9bec5313ca0f9d03f1b861450a48ad3820"
+  },
+  "admission": "Source review only; new S three-case and full exact tested-merge CI pending; integration310 first. Producer adapter delta disqualifies92498 artifacts without input exclusions."
+}

@@ -1,0 +1,83 @@
+{
+  "disposition": "LOCAL_CURRENT_UNION_CHECKPOINT_FOR_INDEPENDENT_REVIEW_NO_PUSH",
+  "head": "41d4ee41190d7d3f3969212471863c70852295ba",
+  "complete_tree": "211cea442440baf18ad270e5530ad8467b50176f",
+  "parents": [
+    "47b34146eac80e1d6eee26a9b7798ca7154027fa",
+    "fbde0d3a248c47c9964851355f96575c89a87329"
+  ],
+  "branch": "test/auth-route-census-20261010",
+  "actual_admitted_target": "fbde0d3a248c47c9964851355f96575c89a87329",
+  "source_proof": {
+    "path": "/workspace/engineering/pr309-admitted-source-proof.json",
+    "sha256": "acb25d22fa30b8cca4bfaca6deb5f2d147025ebfa6de69fd1efeeb72efac72a1",
+    "content": {
+      "head": "41d4ee41190d7d3f3969212471863c70852295ba",
+      "tree": "211cea442440baf18ad270e5530ad8467b50176f",
+      "parents": [
+        "47b34146eac80e1d6eee26a9b7798ca7154027fa",
+        "fbde0d3a248c47c9964851355f96575c89a87329"
+      ],
+      "retained_leaf_count": 1406,
+      "leaf_failures": [],
+      "combined_paths": [
+        "docs/skills/repository-operations.md"
+      ],
+      "parent_guide_blocks_retained": {
+        "47b34146eac80e1d6eee26a9b7798ca7154027fa": 2,
+        "fbde0d3a248c47c9964851355f96575c89a87329": 3
+      },
+      "producer268_exact_equality": true,
+      "selected5_exact_equality": true,
+      "source_delta_vs_admitted": "A\taction_server/tests/action_server_tests/test_auth_route_inventory.py\nM\tdocs/skills/repository-operations.md",
+      "route_blob": "e1e4b314d6a535fec2175da2b5224105e4d7f8fd"
+    }
+  },
+  "previous_checkpoint_receipt": {
+    "path": "/workspace/engineering/pr309-refresh-receipt.json",
+    "sha256": "7d1202e83627936ff7813c6601b890ecab7b0bb0beed054e4bb6bc62cffc7c71"
+  },
+  "current_validation": {
+    "ToolkitTest": "69 PASS including executed generatedjq metadata predicate",
+    "workflow_regeneration": "canonical RCC toolkit generator replay produced no source diff",
+    "scoped_auth_and_artifact_contracts": "116 PASS1 integration DESELECTED",
+    "deselected": "test_assembled_server_browser_session",
+    "configured_invoke_lint": "PASS Ruff check, Ruff format299files, Isort src/tests; optional mdl absent",
+    "configured_invoke_typecheck": "PASS335 source files Linux; annotation-unchecked notes retained",
+    "git_diff_check": "PASS",
+    "full_package_suite": "NOT RUN bounded scoped assignment",
+    "packaged_native_execution": "NOT RUN",
+    "fresh_exact_current_head_CI": "NOT RUN no push"
+  },
+  "logs": {
+    "admitted-toolkit": {
+      "path": "/workspace/engineering/pr309-admitted-toolkit.log",
+      "size": 14342,
+      "sha256": "352b2681f804840ef4f8f589ac1ad190e3b7382095de93f8aeb81d3a6864d2f9"
+    },
+    "admitted-scope": {
+      "path": "/workspace/engineering/pr309-admitted-scope.log",
+      "size": 5397,
+      "sha256": "eaf5ea71954c88a67f34b5f11502c961bab4456a51c5d01055c50f16913feaee"
+    },
+    "admitted-static": {
+      "path": "/workspace/engineering/pr309-admitted-static.log",
+      "size": 5694,
+      "sha256": "2efd4174076f0f23126c78efce60bdb39684aa3ff22343ef9abfe66f2b2b2ebb"
+    }
+  },
+  "documentation_improvement": {
+    "canonical_file_changed_and_preserved": "docs/skills/repository-operations.md at47b34146; current merge retains both parents blocks",
+    "durable_learning": "assembled before_start=False census proves registration/classification; authorization needs separate credential/method/mount/side-effect tests and enabled optional transports, source/native evidence separate",
+    "evidence": "route blob e1e4b314 unchanged;116 passing combined source contracts; sourceproof verifies parent guide retention",
+    "stale_or_ambiguous_guidance_removed": "vague registration caveat replaced with explicit acceptance boundaries, no oldgreen carry",
+    "remaining_uncertainty": "full152 request/auth criteria and fresh hosted native Windows/macOS proof remain open"
+  },
+  "proposed_additional_documentation_delta": "none: exact current source/testing reconfirms retained durable47b delta; avoid cosmetic duplicate",
+  "upstream_disposition": "none",
+  "remaining_uncertainty": [
+    "fresh currenthead hosted gates pending independent review/push authority",
+    "full152 acceptance not claimed",
+    "live311 original1151 Windows integration still pending; Linux/macOS native tests passed but configuredIsort failed reported separately"
+  ]
+}

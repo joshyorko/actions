@@ -1,0 +1,88 @@
+{
+  "actual_local_log_hashes_verified": {
+    "configured-isort-green": {
+      "path": "/workspace/engineering/pr311-configured-isort-green.log",
+      "sha256": "dae16f2006b1ec09cfec6216f3e2b14cf5c87925e1e97c9b7947e4e0181437c2",
+      "size": 4304
+    },
+    "configured-isort-red": {
+      "path": "/workspace/engineering/pr311-configured-isort-red.log",
+      "sha256": "660be71ab48493709fe681af536ac74ba1c5d7c3f493d27545c20e049f9d45c2",
+      "size": 5087
+    },
+    "isort-focused11": {
+      "path": "/workspace/engineering/pr311-isort-focused11.log",
+      "sha256": "9f13b44f8c6d9b1014322ac92d6eb13c9bc540929997bbfe033d5b6a54c00e56",
+      "size": 3903
+    },
+    "isort-local-diff": {
+      "path": "/workspace/engineering/pr311-isort-local-diff.log",
+      "sha256": "36daae2eafcc262cc16f0f242fd7e892f4f200134f7740b24c627fde3ca65c97",
+      "size": 5572
+    },
+    "isort-toolkit": {
+      "path": "/workspace/engineering/pr311-isort-toolkit.log",
+      "sha256": "34a31f1d6923e3cf591a21267a1e1d24ceb37338a7af5ff52d281a9f91e2dcc8",
+      "size": 14264
+    }
+  },
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/repository-operations.md",
+    "disposition": "GO best-effort upload and cancellation-request vs sampler completion guidance; no duplicatedocneeded.",
+    "durable_learning": "always-upload attempt and warn-success do not establish reportpresence; cancellation requested and daemon alive are separate observables, not Runtime/streamcleanup.",
+    "evidence": "Original unchanged workflowalways()/warnandobserverEvent.set/50msjoin/is_alive/postquerycancelcheck;11source/workflowtests; actualartifact gate remainspending.",
+    "exact_delta": "diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md\nindex f1180478..6b27c23c 100644\n--- a/docs/skills/repository-operations.md\n+++ b/docs/skills/repository-operations.md\n@@ -150,8 +150,12 @@ progress. Captured stderr is line-oriented, and RCC's interactive forwarding\n does not explicitly flush, so absent captured lines do not establish inactivity.\n \n The Windows Runtime test workflow now sets an explicit\n-`ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR` and retains its bounded JSON reports\n-with `always()` even when integration fails. The test-owned observer enables\n+`ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR` and attempts to retain its bounded JSON\n+reports with `always()` even when integration fails. Upload is best effort:\n+`if-no-files-found: warn` permits a successful upload step with no reports, and\n+job cancellation or infrastructure failure may prevent the step from running.\n+Verify the artifact inventory and report bytes before claiming observations.\n+The test-owned observer enables\n only those two native nodes, samples pending initial startup at 80 and 88\n seconds, and delegates unchanged startup and its existing 20-second failure\n cleanup. Reports contain source/executable/config byte identities, an\n@@ -163,6 +167,11 @@ processes, unobserved RCC identity, and the frozen child's internal readers\n remain explicitly unavailable. The probe limits traversal to 64 processes\n and a one-second traversal budget; individual OS queries may outlast that\n budget, so cancellation never waits on a pending query before startup cleanup.\n+The final report's `sampler_cancelled: true` means cancellation was requested,\n+not that the sampler stopped. Check `sampler_alive` separately after its bounded\n+50 ms join. A pending OS query may leave that daemon alive; late observations\n+are discarded after cancellation. Neither field proves Runtime process or\n+stream cleanup, which remains owned by the unchanged starter.\n These synthetic observer checks do not establish Windows native acceptance\n or fix the original failure. Compare the next exact-head reports before\n changing production code; do not warm caches, retry RCC, or enlarge deadlines\n",
+    "remaining_uncertainty": "OriginalWindows native bootstrap/20s cleanupcause and actualdiagnosticreports remainpending; freshd75b hosted gates and fullmerge/release/private requirements stillHOLD.",
+    "stale_or_ambiguous_guidance_removed": "Unconditional retainsreports replaced by attempts and concrete absence/cancel/infra limits; sampler_cancelled must not mean completed."
+  },
+  "head": "d75b25fb4c354e5c95bc0f639b426d6ff402104b",
+  "independent_source_checks": {
+    "all268_producer_inputs_exact_original_and_parent": true,
+    "clean_worktree": true,
+    "diagnostic_helper_fixture_workflow_generator_original_nodes_and_deadlines_unchanged": {
+      ".github/workflows/_gen_workflows.py": "94504186a23a4d2745c0a400e6f970afda483a98",
+      ".github/workflows/actions_runtime_tests.yml": "e93fb3c75b8ecb3353a07e1cab00d526b8db0559",
+      "action_server/tests/action_server_tests/fixtures.py": "8e5d743e77508592250bba702f05163a0efe86f0",
+      "action_server/tests/action_server_tests/native_startup_diagnostics.py": "4729a7d01cca6d0920fe0e91bc376fa6cf3ed081",
+      "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6",
+      "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022"
+    },
+    "exact_one_blank_line_removed": true,
+    "only_changed_paths": [
+      "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "ordinary_successor_samebranch_no_target_refresh": true,
+    "private_whole_wheel_guard_and_production_unchanged": true,
+    "test_full_AST_and_imports_unchanged": true,
+    "unchanged_git_blob_mode_leaves": 1391
+  },
+  "original_live_run_authenticated_readback": {
+    "completed_at": null,
+    "conclusion": null,
+    "head_sha": "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9",
+    "job_conclusion": null,
+    "job_id": 114376917743,
+    "job_status": "in_progress",
+    "run_id": 38107807246,
+    "status": "in_progress"
+  },
+  "parent": "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9",
+  "push_boundary": "Root may normalpush acceptedsource while preserving original1151 run38107807246/job114376917743 and eventualoriginaldiagnosticartifacts; never cancel/retry/relabel it. No concurrency cancellation configured in this workflow. Freshd75b hostedchecks required; historicalLinux/macOS passes cannotqualify newhead or originalWindows failure.",
+  "reviewed_owner_receipt": {
+    "path": "/workspace/engineering/pr311-isort-receipt.json",
+    "sha256": "e7b84318d4198c7e8df49e5042ea209d730d2952d4aabb76ce60e4051e3d115c"
+  },
+  "schema_version": 1,
+  "source_edits_or_test_rerun_by_reviewer": false,
+  "tree": "22c984ea5ce5275803308790c519263e7027b40c",
+  "upstream_disposition": "none",
+  "verdict": "GO_NORMAL_PUSH_EXACT_D75B_ISORT_AND_LITERAL_DIAGNOSTIC_GUIDANCE; HOLD_WINDOWS_NATIVE_ACCEPTANCE_AND_MERGE_PENDING_RAW_CURRENT_GATES",
+  "verification": {
+    "Toolkit": "62PASS",
+    "actual_windows_fix": "Not established; original1151 run still separatelyowned.",
+    "configured_lint": "Original1151RED onlydiagnostic Isort block; current realinvokeLintGREEN Ruffcheck,Ruffformat301,Isortsrc/tests; optionalMarkdownlint absent.",
+    "focused_observer_and_workflow": "11PASS synthetic/workflow sourcecases, no real Windows run",
+    "typecheck": "Not repeated; fullAST/import identity and no productiontype changes justify bounded scope."
+  }
+}

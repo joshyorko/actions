@@ -1,0 +1,276 @@
+{
+  "caller_count": 9,
+  "caller_order": [
+    {
+      "job": "build",
+      "oauth_if": null,
+      "oauth_name": "Build OAuth2 config",
+      "oauth_run": "uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config",
+      "oauth_step_index": 10,
+      "old_recovery_limit": false,
+      "preceding_runtime_poetry_installs": [
+        {
+          "if": "contains(matrix.name, '-devmode') == false",
+          "name": "Install project (not dev)",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv install",
+          "step_index": 5,
+          "working_directory": null
+        },
+        {
+          "if": "contains(matrix.name, '-devmode')",
+          "name": "Install project (dev)",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv devinstall",
+          "step_index": 6,
+          "working_directory": null
+        }
+      ],
+      "workflow": ".github/workflows/actions_runtime_tests.yml",
+      "working_directory": null,
+      "yaml_gateway_requirement": "Existing outerInvoke does not promise RuntimePyYAML in its interpreter; task must delegate validation into installedRuntimePoetry environment."
+    },
+    {
+      "job": "build-sdist",
+      "oauth_if": "github.event_name == 'push'",
+      "oauth_name": "Build OAuth2 config",
+      "oauth_run": "uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config",
+      "oauth_step_index": 11,
+      "old_recovery_limit": false,
+      "preceding_runtime_poetry_installs": [
+        {
+          "if": "contains(matrix.name, '-devmode') == false",
+          "name": "Install project (not dev)",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv install",
+          "step_index": 5,
+          "working_directory": null
+        },
+        {
+          "if": "contains(matrix.name, '-devmode')",
+          "name": "Install project (dev)",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv devinstall",
+          "step_index": 6,
+          "working_directory": null
+        }
+      ],
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "working_directory": null,
+      "yaml_gateway_requirement": "Existing outerInvoke does not promise RuntimePyYAML in its interpreter; task must delegate validation into installedRuntimePoetry environment."
+    },
+    {
+      "job": "build-sdist",
+      "oauth_if": "github.event_name == 'pull_request'",
+      "oauth_name": "Build OAuth2 config (PR)",
+      "oauth_run": "uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config",
+      "oauth_step_index": 12,
+      "old_recovery_limit": false,
+      "preceding_runtime_poetry_installs": [
+        {
+          "if": "contains(matrix.name, '-devmode') == false",
+          "name": "Install project (not dev)",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv install",
+          "step_index": 5,
+          "working_directory": null
+        },
+        {
+          "if": "contains(matrix.name, '-devmode')",
+          "name": "Install project (dev)",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv devinstall",
+          "step_index": 6,
+          "working_directory": null
+        }
+      ],
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "working_directory": null,
+      "yaml_gateway_requirement": "Existing outerInvoke does not promise RuntimePyYAML in its interpreter; task must delegate validation into installedRuntimePoetry environment."
+    },
+    {
+      "job": "build-wheels",
+      "oauth_if": "github.event_name == 'push'",
+      "oauth_name": "Build OAuth2 config",
+      "oauth_run": "uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config",
+      "oauth_step_index": 11,
+      "old_recovery_limit": false,
+      "preceding_runtime_poetry_installs": [
+        {
+          "if": "contains(matrix.name, '-devmode') == false",
+          "name": "Install project (not dev)",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv install",
+          "step_index": 5,
+          "working_directory": null
+        },
+        {
+          "if": "contains(matrix.name, '-devmode')",
+          "name": "Install project (dev)",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv devinstall",
+          "step_index": 6,
+          "working_directory": null
+        }
+      ],
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "working_directory": null,
+      "yaml_gateway_requirement": "Existing outerInvoke does not promise RuntimePyYAML in its interpreter; task must delegate validation into installedRuntimePoetry environment."
+    },
+    {
+      "job": "build-wheels",
+      "oauth_if": "github.event_name == 'pull_request'",
+      "oauth_name": "Build OAuth2 config (PR)",
+      "oauth_run": "uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config",
+      "oauth_step_index": 12,
+      "old_recovery_limit": false,
+      "preceding_runtime_poetry_installs": [
+        {
+          "if": "contains(matrix.name, '-devmode') == false",
+          "name": "Install project (not dev)",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv install",
+          "step_index": 5,
+          "working_directory": null
+        },
+        {
+          "if": "contains(matrix.name, '-devmode')",
+          "name": "Install project (dev)",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv devinstall",
+          "step_index": 6,
+          "working_directory": null
+        }
+      ],
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "working_directory": null,
+      "yaml_gateway_requirement": "Existing outerInvoke does not promise RuntimePyYAML in its interpreter; task must delegate validation into installedRuntimePoetry environment."
+    },
+    {
+      "job": "build",
+      "oauth_if": null,
+      "oauth_name": "Build OAuth2 config",
+      "oauth_run": "uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config",
+      "oauth_step_index": 12,
+      "old_recovery_limit": false,
+      "preceding_runtime_poetry_installs": [
+        {
+          "if": "contains(matrix.name, '-devmode') == false",
+          "name": "Install project (not dev)",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv install",
+          "step_index": 5,
+          "working_directory": null
+        },
+        {
+          "if": "contains(matrix.name, '-devmode')",
+          "name": "Install project (dev)",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv devinstall",
+          "step_index": 6,
+          "working_directory": null
+        }
+      ],
+      "workflow": ".github/workflows/actions_runtime_binary_release.yml",
+      "working_directory": null,
+      "yaml_gateway_requirement": "Existing outerInvoke does not promise RuntimePyYAML in its interpreter; task must delegate validation into installedRuntimePoetry environment."
+    },
+    {
+      "job": "binary-build",
+      "oauth_if": null,
+      "oauth_name": "Build OAuth2 config from immutable source",
+      "oauth_run": "uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config",
+      "oauth_step_index": 13,
+      "old_recovery_limit": true,
+      "preceding_runtime_poetry_installs": [
+        {
+          "if": null,
+          "name": "Install immutable Runtime source",
+          "run": "uv run --no-project --python 3.12 inv install",
+          "step_index": 9,
+          "working_directory": "release-source/action_server"
+        }
+      ],
+      "workflow": ".github/workflows/actions_runtime_recovery.yml",
+      "working_directory": "release-source/action_server",
+      "yaml_gateway_requirement": "Existing outerInvoke does not promise RuntimePyYAML in its interpreter; task must delegate validation into installedRuntimePoetry environment."
+    },
+    {
+      "job": "build-external",
+      "oauth_if": null,
+      "oauth_name": "Build OAuth2 config",
+      "oauth_run": "uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config",
+      "oauth_step_index": 13,
+      "old_recovery_limit": false,
+      "preceding_runtime_poetry_installs": [
+        {
+          "if": null,
+          "name": "Install project",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv devinstall",
+          "step_index": 6,
+          "working_directory": null
+        }
+      ],
+      "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+      "working_directory": null,
+      "yaml_gateway_requirement": "Existing outerInvoke does not promise RuntimePyYAML in its interpreter; task must delegate validation into installedRuntimePoetry environment."
+    },
+    {
+      "job": "build",
+      "oauth_if": null,
+      "oauth_name": "Build OAuth2 config",
+      "oauth_run": "uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config",
+      "oauth_step_index": 8,
+      "old_recovery_limit": false,
+      "preceding_runtime_poetry_installs": [
+        {
+          "if": null,
+          "name": "Install project dependencies",
+          "run": "uv run --no-project --python ${{ matrix.python }} inv devinstall",
+          "step_index": 5,
+          "working_directory": null
+        }
+      ],
+      "workflow": ".github/workflows/action_server_build_cdn.yml",
+      "working_directory": null,
+      "yaml_gateway_requirement": "Existing outerInvoke does not promise RuntimePyYAML in its interpreter; task must delegate validation into installedRuntimePoetry environment."
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": "Nine OAuth callsteps in six producerworkflows at exactfbde target; allpreceded byRuntimeinstall/devinstall; Invoke install source callsPoetryinstall andRuntimepyprojectdeclaresPyYAML6.0.3.",
+    "exact_delta_path": "/workspace/engineering/oauth-config-independent-review/canonical-invoke-poetry-gateway-proposal.md",
+    "exact_delta_sha256": "bbf66a9c3dec53bfb97637630b374ab00e263729339b615b46772fd36ad02f0d",
+    "exact_delta_text": "Proposed addition to docs/skills/repository-operations.md beside the OAuth build-source guard:\n\nGenerated and manual OAuth artifact producers install Runtime through `inv install` or `inv devinstall` before `inv build-oauth2-config`. Those install tasks populate Runtime's Poetry environment, where PyYAML is declared; they do not guarantee YAML is importable in the outer Invoke interpreter. Keep the outer task's acquisition/validation entry point delegated to Runtime Poetry and test that actual delegation with a controlled source. Recovery invokes the task from immutable `release-source/action_server`, so its installed environment and task version belong to that source; a current helper change does not repair an older release target.\n",
+    "remaining_uncertainty": "PR307 implementation/gateway/TDD/configuredchecks pending; noapprovedpair, generatedpayload/provider/release proof.",
+    "stale_or_ambiguous_guidance_removed": "Do not assume outerInvoke/uv/devutils hasYAML just becauseRuntimePoetrydependencies areinstalled; historicalrecoveryhelperbelongsselectedimmutableSource."
+  },
+  "git_source_bindings": {
+    ".github/workflows/action_server_build_cdn.yml": {
+      "git_blob": "89372722a0c4e7d1601ba6b8b961cf3ecb066999",
+      "sha256": "51ba9d399f06d712e46bd691a24379ac940b6b479a58c83eb882a4e65f115aeb"
+    },
+    ".github/workflows/actions_runtime_binary_release.yml": {
+      "git_blob": "1fce9c558943fffab5c264bcc0599095162aa3ee",
+      "sha256": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64"
+    },
+    ".github/workflows/actions_runtime_pypi_release.yml": {
+      "git_blob": "8a6c70171fca53059f4da2b1be0cb657890c20e2",
+      "sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f"
+    },
+    ".github/workflows/actions_runtime_recovery.yml": {
+      "git_blob": "b84289aefb5d5c164fac25e9492a17f07dcd819b",
+      "sha256": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f"
+    },
+    ".github/workflows/actions_runtime_tests.yml": {
+      "git_blob": "9f6837a49386528e7a09eb293885e7681084ec93",
+      "sha256": "9e6a7753bea73c5bd8f56caf9516fffc61768d0c719e445a1dc8808be5d65ab4"
+    },
+    ".github/workflows/frontend-build-unauthenticated.yml": {
+      "git_blob": "7dfb11853152b455bcf5e31564a6b6512d075117",
+      "sha256": "2d2a21af458ccfdb771f65707d7ab60fb1f5dfa24019c94ded4a02ed46f8d36d"
+    },
+    "action_server/pyproject.toml": {
+      "git_blob": "021ab546f04306dcff615e3e31a8395110e78703",
+      "sha256": "be4011d3915e8838249546c70ae30420dadfb0d08c19b59970d8980332c7573f"
+    },
+    "devutils/src/devutils/invoke_utils.py": {
+      "git_blob": "1e68ade51bdb378a5c908dfc0a8a86936b396d4c",
+      "sha256": "7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5"
+    }
+  },
+  "no_actual_remote_acquisition_or_test_execution": true,
+  "schema_version": 1,
+  "target": "fbde0d3a248c47c9964851355f96575c89a87329",
+  "target_tree": "65954e87147645985ee44f82de9907e937892112",
+  "upstream_disposition": "none",
+  "verdict": "EXISTING_CALLER_ORDER_VERIFIED; REQUIRE_REAL_INVOKE_TO_RUNTIME_POETRY_GATEWAY_TEST_BEFORE_PR307_PUSH"
+}

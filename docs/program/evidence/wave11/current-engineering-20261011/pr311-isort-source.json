@@ -1,0 +1,72 @@
+{
+  "disposition": "LOCAL_ISORT_CHECKPOINT_FOR_INDEPENDENT_REVIEW_NO_PUSH",
+  "head": "d75b25fb4c354e5c95bc0f639b426d6ff402104b",
+  "tree": "22c984ea5ce5275803308790c519263e7027b40c",
+  "parent": "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9",
+  "branch": "test/runtime-installed-wheel-import-guard-20261010",
+  "source_delta": "0\t1\taction_server/tests/action_server_tests/test_native_startup_diagnostics.py\n11\t2\tdocs/skills/repository-operations.md",
+  "source_proof": {
+    "test_AST_equal": true,
+    "producer_entries_unchanged": 268,
+    "protected_entries_unchanged": {
+      ".github/workflows/_gen_workflows.py": "94504186a23a4d2745c0a400e6f970afda483a98",
+      ".github/workflows/actions_runtime_tests.yml": "e93fb3c75b8ecb3353a07e1cab00d526b8db0559",
+      "action_server/tests/action_server_tests/native_startup_diagnostics.py": "4729a7d01cca6d0920fe0e91bc376fa6cf3ed081",
+      "action_server/tests/action_server_tests/fixtures.py": "8e5d743e77508592250bba702f05163a0efe86f0",
+      "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6",
+      "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022"
+    },
+    "readiness90_cleanup20_sampler80_88": "UNCHANGED",
+    "target_refresh": "NONE"
+  },
+  "validation": {
+    "configured_invoke_lint_red": "FAIL Isort diagnostic test import block; actual original1151 confirmed",
+    "configured_invoke_lint_green": "PASS Ruff check, Ruff format301files, Isort src/tests; optional Markdownlint absent",
+    "focused_observer_and_workflow": "11 PASS",
+    "ToolkitTest": "62 PASS",
+    "whitespace": "PASS",
+    "configured_typecheck": "NOT REPEATED AST-identical whitespace-only test edit; no production/test type changes",
+    "real_Windows_execution_or_rerun": "NONE; original1151 run38107807246/job114376917743 retained live last observation integration in_progress"
+  },
+  "logs": {
+    "configured-isort-red": {
+      "path": "/workspace/engineering/pr311-configured-isort-red.log",
+      "size": 5087,
+      "sha256": "660be71ab48493709fe681af536ac74ba1c5d7c3f493d27545c20e049f9d45c2"
+    },
+    "isort-local-diff": {
+      "path": "/workspace/engineering/pr311-isort-local-diff.log",
+      "size": 5572,
+      "sha256": "36daae2eafcc262cc16f0f242fd7e892f4f200134f7740b24c627fde3ca65c97"
+    },
+    "configured-isort-green": {
+      "path": "/workspace/engineering/pr311-configured-isort-green.log",
+      "size": 4304,
+      "sha256": "dae16f2006b1ec09cfec6216f3e2b14cf5c87925e1e97c9b7947e4e0181437c2"
+    },
+    "isort-toolkit": {
+      "path": "/workspace/engineering/pr311-isort-toolkit.log",
+      "size": 14264,
+      "sha256": "34a31f1d6923e3cf591a21267a1e1d24ceb37338a7af5ff52d281a9f91e2dcc8"
+    },
+    "isort-focused11": {
+      "path": "/workspace/engineering/pr311-isort-focused11.log",
+      "size": 3903,
+      "sha256": "9f13b44f8c6d9b1014322ac92d6eb13c9bc540929997bbfe033d5b6a54c00e56"
+    }
+  },
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/repository-operations.md",
+    "exact_delta": "Upload is best effort: warn permits no-files success; canceled/infra-failed job may omit step; inspect artifact inventory/bytes. sampler_cancelled true means cancellation requested; sampler_alive after bounded50ms join separate; pendingOS query may retain daemon, late reports discarded; neither field proves Runtime/stream cleanup.",
+    "durable_learning": "Interpret upload status and observer cancellation literally, independently of owned Runtime cleanup",
+    "evidence": "unchanged actions_runtime_tests.yml upload always/warn and observer Event.set/join/is_alive/discard implementation;11 synthetic/workflow tests",
+    "stale_or_ambiguous_guidance_removed": "replaced unconditional retains reports claim with attempts and concrete artifact limitations; distinguishes request vs completion",
+    "remaining_uncertainty": "Original Windows bootstrap cause/cleanup state remain unknown pending actual diagnostics; no Runtime rootcause fix claimed"
+  },
+  "upstream_disposition": "none",
+  "remaining_uncertainty": [
+    "original1151 Windows terminal/artifact receipts pending",
+    "newhead hosted static acceptance not run pending root review/push",
+    "Linux/macOS native passes at1151 do not accept originalWindows failures"
+  ]
+}

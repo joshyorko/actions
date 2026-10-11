@@ -1,0 +1,21 @@
+{
+  "verdict": "GO_SOURCE_REFRESH_CONTROL_FOR_NORMAL_PUSH",
+  "control": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+  "tree": "6e8af78b3386b870191d559535519f90bc4b0b8a",
+  "parent_source": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+  "pinned_source_tree": "e05141d122b7245b626c5d0389cf9b653c8ad300",
+  "independent_review": "Exact only three files; generator, workflow test and generated RCC workflow bytes equal S after replacing new source/tree pins with previous665/d729. No predicate, case, RCC, raw upload, permission or unrelated byte change. Child C pins parent S, not itself. Receipt and four raw log hashes verified. RED old pins1 failed4 passed; GREEN55 passed including poisons; Toolkit96 passed; configured lint and Mypy334 passed.",
+  "evidence": {
+    "path": "/workspace/engineering/pr302-current-S-C-receipt.json",
+    "sha256": "f7dd2d996cc80e9104211831b1678bfc16d502ff80662fce11ceccefd3daf924"
+  },
+  "merge": "HOLD pending new S under C exact three-case hosted proof and full current merge CI; integration310 first; old ff/66526 green cannot carry new union.",
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md changed in S, unchanged C",
+    "durable_learning_captured": "Review source union before child immutable control pins; raw original ZIP/member equality precedes sanitized summary; one publication pair is separate from lifecycle/staging providers; Core1.0.2 and captured descendants retain measured scope; public three-case does not waive private HOLD.",
+    "evidence": "Verified source union and exact C pin-only substitution; prior original11690338317 immutable hashes/ff665 proof retained; RED/GREEN and summary poisons.",
+    "stale_or_ambiguous_guidance_removed": "665 described as historical rather than current candidate; empty snapshot and public success cannot imply universal reap or full issue acceptance.",
+    "remaining_uncertainty": "New source native3-case/fullCI pending; private original artifacts absent; full134135/Core1.0.3/WindowsRCC not accepted."
+  },
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,99 @@
+{
+  "disposition": "CANDIDATE_S_FOR_REVIEW_BEFORE_ANY_CONTROL_C_REPIN",
+  "candidateS": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+  "candidate_tree": "e05141d122b7245b626c5d0389cf9b653c8ad300",
+  "source_proof": {
+    "path": "/workspace/engineering/pr302-candidate-source-proof.json",
+    "sha256": "4c5566d43df2de1b74641b1db97cb4ad5a1b489795d4b319e1ddb27bd4dae988",
+    "content": {
+      "candidateS": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+      "tree": "e05141d122b7245b626c5d0389cf9b653c8ad300",
+      "parent": "d8373ff4d07fcfe07ab01bffc88cdee67909b725",
+      "ordinary_merge_parents": [
+        "ff6842223068bb34811990a417aa280331acbb6a",
+        "fbde0d3a248c47c9964851355f96575c89a87329"
+      ],
+      "common_base": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+      "retained_leaf_count": 1404,
+      "leaf_failures": [],
+      "combined_paths": [
+        ".github/workflows/_gen_workflows.py",
+        "docs/skills/repository-operations.md"
+      ],
+      "combined_parent_blocks_retained": {
+        ".github/workflows/_gen_workflows.py": {
+          "ff6842223068bb34811990a417aa280331acbb6a": 35,
+          "fbde0d3a248c47c9964851355f96575c89a87329": 14
+        },
+        "docs/skills/repository-operations.md": {
+          "ff6842223068bb34811990a417aa280331acbb6a": 6,
+          "fbde0d3a248c47c9964851355f96575c89a87329": 3
+        }
+      },
+      "producer_count": 268,
+      "producer_delta_vs_admitted": {
+        "action_server/src/actions/server/_rcc_runtime_adapter.py": {
+          "admitted": "100644 blob 2184e9edb95683822c323d0e27d73d6d207d3492",
+          "candidate": "100644 blob 09234363409bf979016a970c34b8b38ff642fb1f"
+        }
+      },
+      "selected5_equal_admitted": true,
+      "source_delta_vs_admitted": "M\t.github/workflows/_gen_workflows.py\nM\t.github/workflows/actions_runtime_rcc_provider_rollback.yml\nM\taction_server/src/actions/server/_rcc_runtime_adapter.py\nM\taction_server/tests/action_server_tests/test_rcc_runtime_adapter.py\nM\taction_server/tests/action_server_tests/test_source_staging_rcc_consumer.py\nM\tdeveloper/tests/test_rcc_provider_rollback_summary.py\nM\tdeveloper/tests/test_rcc_provider_rollback_workflow.py\nM\tdocs/skills/repository-operations.md",
+      "control_pin_status": "665 original tuple intentionally unchanged; repin child forbidden before candidateS review"
+    }
+  },
+  "retained_historical_acceptance": {
+    "path": "/workspace/engineering/pr302-current-review/independent-acceptance-receipt.json",
+    "sha256": "5744c15b06089de40517e3388ea8d2877942e895844fc86cb71ac569eba6859a",
+    "run": 38106813502,
+    "control": "ff6842223068bb34811990a417aa280331acbb6a",
+    "candidate": "665468112f1593249449278cf2113c155a6ec6e3",
+    "original_zip_sha256": "686a6686693030ee5b0e985fa3bc8826fd6ed7d3753be721aa41f3a319170f7a",
+    "status": "HISTORICAL_ONLY_NOT_CURRENT_UNION"
+  },
+  "validation": {
+    "Doctor": "PASS",
+    "Bootstrap": "PASS",
+    "ToolkitTest": "96 PASS",
+    "scoped_adapter_rollback_consumer_staging": "109 PASS4 SKIP",
+    "skips": "four optin realRCC executions NOT RUN including candidate rollback/publication/staged-consumer and adapter vertical",
+    "configured_lint": "PASS Ruff check/format298files and Isort src/tests; optional mdl absent",
+    "configured_typecheck": "PASS334files Linux; annotation-unchecked notes retained",
+    "diff_check": "PASS",
+    "new_current_hosted3case_and_fullCI": "NOT RUN",
+    "current_frozen_qualification": "NOT ACCEPTED adapter input changed; no file exclusions"
+  },
+  "logs": {
+    "current-doctor": {
+      "path": "/workspace/engineering/pr302-current-doctor.log",
+      "size": 13484,
+      "sha256": "6bec1cd0427123e4541f4c0774b05a00ea236563c8eddc8603c93d10d4d5804b"
+    },
+    "current-bootstrap": {
+      "path": "/workspace/engineering/pr302-current-bootstrap.log",
+      "size": 14147,
+      "sha256": "d3986696099fd4e6ab15279f8e219d4e683a07ccdb7483afdae1037f193f59c3"
+    },
+    "candidate-toolkit": {
+      "path": "/workspace/engineering/pr302-candidate-toolkit.log",
+      "size": 14344,
+      "sha256": "2635ccc325e4402b0ee6b84ffcf9cd3ccd350ae9d0dcf9b3a99db2ba247695f0"
+    },
+    "candidate-source-static": {
+      "path": "/workspace/engineering/pr302-candidate-source-static.log",
+      "size": 7071,
+      "sha256": "77006deb805497f2a9996d272f6f7bf5d747382194360ca6e74f74d33b19cf38"
+    }
+  },
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/repository-operations.md inS",
+    "durable_learning": "separate reviewed source union and child control pins; original ZIP/member hashes before summary; publication singleinvocation distinct from rollback/stagedprovider environments; Core1.0.2 and captured descendant scope distinct from broader proof; public3case/privateHOLD separate",
+    "evidence": "preserved source/test predicates; historical rawZIP11690338317/member evidence and peer receipt;109 source checks96Toolkit",
+    "stale_or_ambiguous_guidance_removed": "665 described as retained historical executed candidate rather than current refreshed target; no implied Core1.0.3/private/native/general descendant acceptance",
+    "remaining_uncertainty": "fresh current3case/fullCI; private01f/fafb/frozen-v6 absentNOT_RUN/HOLD; WindowsRCC/Core1.0.3/full134135unaccepted"
+  },
+  "controlC": "NOT CREATED awaiting independentSreview; must pinS notself",
+  "integration_order": "310 FIRST;302 producerdelta requires fresh frozenartifact qualification",
+  "upstream_disposition": "none",
+  "push": "NONE"
+}

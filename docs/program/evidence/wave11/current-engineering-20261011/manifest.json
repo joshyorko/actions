@@ -178,5 +178,75 @@
     "source": "authenticated GitHub merge and readback",
     "bytes": 605,
     "sha256": "4c5314fead37ef489c94f33be43fe2b5688a9c3e70f1198695cc5211a7ee07db"
+  },
+  "pr309-current-source.json": {
+    "source": "/workspace/engineering/pr309-admitted-refresh-receipt.json",
+    "bytes": 4299,
+    "sha256": "e1954dbcee305345a56ff88f03e02701a36ecea3ec322f5d702ebc90c598bbe8"
+  },
+  "pr309-current-independent-review.json": {
+    "source": "/workspace/engineering/pr309-independent-current-review/source-control-prepush-review.json",
+    "bytes": 7679,
+    "sha256": "7374c9eaa420966f6455c7d63c3feea5dc211808cb96c0a21b9cca2acff6f6cb"
+  },
+  "pr310-current-source.json": {
+    "source": "/workspace/actions-cloud/receipts/pr310-fbde-refresh/local-refresh-receipt.json",
+    "bytes": 14186,
+    "sha256": "de8097731d06fe943477e279456d8362bb42f8b26aee8c80c9610f739166ff1a"
+  },
+  "pr311-isort-source.json": {
+    "source": "/workspace/engineering/pr311-isort-receipt.json",
+    "bytes": 4373,
+    "sha256": "e7b84318d4198c7e8df49e5042ea209d730d2952d4aabb76ce60e4051e3d115c"
+  },
+  "pr311-isort-independent-review.json": {
+    "source": "/workspace/engineering/pr311-independent-review/isort-source-and-guidance-review.json",
+    "bytes": 7401,
+    "sha256": "90d76f0d50a9f88ccc24b2f195d3ed08d5516a8ccd0352f3a2c1601fabe01fc1"
+  },
+  "pr302-current-source-S.json": {
+    "source": "/workspace/engineering/pr302-candidate-S-receipt.json",
+    "bytes": 5516,
+    "sha256": "9c591806da515dfc4b03835f98fdaa9bec5313ca0f9d03f1b861450a48ad3820"
+  },
+  "pr302-current-source-control.json": {
+    "source": "/workspace/engineering/pr302-current-S-C-receipt.json",
+    "bytes": 6828,
+    "sha256": "f7dd2d996cc80e9104211831b1678bfc16d502ff80662fce11ceccefd3daf924"
+  },
+  "pr302-current-independent-S-review.json": {
+    "source": "/workspace/engineering/pr302-current-review/independent-source-S-review.json",
+    "bytes": 1166,
+    "sha256": "0d9ec90f7c0079c99f21cd97914bad5e5676a5d0abc319d6a94bfee69c6fc3a0"
+  },
+  "pr302-current-independent-C-review.json": {
+    "source": "/workspace/engineering/pr302-current-review/independent-control-C-review.json",
+    "bytes": 2106,
+    "sha256": "3b5bc7dbe32176e6b27376ec38d10c09f5de5d5119a1c5d9f2f386ce0bf3a757"
+  },
+  "checkpoint-consumer-independent-review.json": {
+    "source": "/workspace/engineering/campaign-checkpoint-independent-review/durable-evidence-prepush-review.json",
+    "bytes": 8296,
+    "sha256": "7c12dc0ce3c70b03fa6f3f958447b2e2e0640c4d59d055720fe03a64c6b20724"
+  },
+  "oauth-minimal-boundary-review.json": {
+    "source": "/workspace/engineering/oauth-config-independent-review/minimal-boundary-design-review.json",
+    "bytes": 6371,
+    "sha256": "d34cc26886aa5a15e0972e9ebed62e8d467d0baf98754b7397850289acd18dc8"
+  },
+  "oauth-existing-producer-order-review.json": {
+    "source": "/workspace/engineering/oauth-config-independent-review/existing-caller-order-review.json",
+    "bytes": 13298,
+    "sha256": "9990927dd18a45d5b267ff1ee09589c44bb7e5e52ee0e7de1e63d4b442c0ea2c"
+  },
+  "pr221-authenticated-closures-after290.json": {
+    "source": "/workspace/engineering/pr221-authenticated-closures-after290.json",
+    "bytes": 242,
+    "sha256": "abe2c636dca6f13e67e11e2e45443857ef1b4d14cf99c04d1ebe499095c07d25"
+  },
+  "pr282-held-admission-diagnostic-proposal.json": {
+    "source": "/workspace/engineering/pr282-windows-owned/hosted-linux-admission-diagnostic-proposal.json",
+    "bytes": 2600,
+    "sha256": "ace0991fbdd664142c077a4e8097803e7afdabece5edebf338f5115693ce6052"
   }
 }

@@ -1,0 +1,129 @@
+{
+  "disposition": "SOURCE_S_REVIEWED_CONTROL_C_FOR_INDEPENDENT_REVIEW_NO_PUSH",
+  "branch": "fix/rcc-published-artifact-details-20261010",
+  "candidateS": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+  "candidate_tree": "e05141d122b7245b626c5d0389cf9b653c8ad300",
+  "controlC": "ba04dff7c932b963f2d7a60529fbc3c325bbee1d",
+  "control_tree": "6e8af78b3386b870191d559535519f90bc4b0b8a",
+  "C_parent": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+  "source_S_receipt": {
+    "path": "/workspace/engineering/pr302-candidate-S-receipt.json",
+    "sha256": "9c591806da515dfc4b03835f98fdaa9bec5313ca0f9d03f1b861450a48ad3820"
+  },
+  "S_independent_review": "merge_review GO_CANDIDATE_SOURCE exactS/tree before childC was created",
+  "control_source_proof": {
+    "path": "/workspace/engineering/pr302-control-source-proof.json",
+    "sha256": "4c87b6034a18391058cd294a21802ed6df22f7b4cc10d5f19c5fc93def9e841d",
+    "content": {
+      "candidateS": "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8",
+      "candidate_tree": "e05141d122b7245b626c5d0389cf9b653c8ad300",
+      "allowed_changes": [
+        ".github/workflows/_gen_workflows.py",
+        ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+        "developer/tests/test_rcc_provider_rollback_workflow.py"
+      ],
+      "generator_AST_equal_except_RccProvider_two_pins": true,
+      "workflow_test_AST_equal_except_two_constants": true,
+      "pin_values_before_after": [
+        [
+          "candidate_sha",
+          "665468112f1593249449278cf2113c155a6ec6e3"
+        ],
+        [
+          "candidate_tree",
+          "d729a43127c048c7fb35133d2a4b07bc53635402"
+        ],
+        [
+          "candidate_sha",
+          "43a73f2dbc48ba9afcb43a22e98b1e087712cdc8"
+        ],
+        [
+          "candidate_tree",
+          "e05141d122b7245b626c5d0389cf9b653c8ad300"
+        ]
+      ],
+      "other7_generated_outputs_byte_identical": {
+        ".github/workflows/actions_runtime_tests.yml": {
+          "blob": "9f6837a49386528e7a09eb293885e7681084ec93",
+          "sha256": "9e6a7753bea73c5bd8f56caf9516fffc61768d0c719e445a1dc8808be5d65ab4"
+        },
+        ".github/workflows/actions_runtime_frozen_catalog_rollback.yml": {
+          "blob": "e66bbf2451b3550fa3bf6b10e6bb5483f02f3ca0",
+          "sha256": "aabf25267c48b9d361f4d575a332a9f7bdddc4c5d1f3ce4ff5ac151c98d36140"
+        },
+        ".github/workflows/actions_core_tests.yml": {
+          "blob": "1c855355d6e5fc7a196ceea7bf83c1af952957a8",
+          "sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296"
+        },
+        ".github/workflows/http_helper_tests.yml": {
+          "blob": "960c81f7faa38acd3726c716b9297ea36cc5ea4b",
+          "sha256": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8"
+        },
+        ".github/workflows/actions_runtime_pypi_release.yml": {
+          "blob": "8a6c70171fca53059f4da2b1be0cb657890c20e2",
+          "sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f"
+        },
+        ".github/workflows/actions_runtime_binary_release.yml": {
+          "blob": "1fce9c558943fffab5c264bcc0599095162aa3ee",
+          "sha256": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64"
+        },
+        ".github/workflows/actions_runtime_recovery.yml": {
+          "blob": "b84289aefb5d5c164fac25e9492a17f07dcd819b",
+          "sha256": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f"
+        }
+      },
+      "all_other_tracked_bytes_equal_S": true,
+      "production_source_unchanged_from_S": true,
+      "summary_script_unchanged": true,
+      "raw_uploads_cases_permissions_rcc_bytes_unchanged": true,
+      "C_selfpin": "NONE;child pins reviewedS"
+    }
+  },
+  "validation": {
+    "RED_old665pin": "1 FAIL4 PASS existingcheckoutidentity assertion",
+    "GREEN_new_Spin_and_summary_poisons": "55 PASS",
+    "ToolkitTest_currentC": "96 PASS",
+    "source_S_scope": "109 PASS4 SKIP; raw source/tests unchangedC",
+    "configured_invoke_lint_currentC": "PASS Ruff check/format298files/Isort; optional mdl absent",
+    "configured_invoke_typecheck_currentC": "PASS334 files Linux; untypednotes retained",
+    "developer_generator_Ruff_currentC": "PASS2changedPythonfiles",
+    "diff_check": "PASS",
+    "current_hosted_3case": "NOT RUN must execute exactS underC",
+    "fresh_full_CI_current_tested_merge": "NOT RUN no oldgreen carry",
+    "frozen_92498_qualification": "DISQUALIFIED oneproduceradapter2184\u2192092343; no exclusions",
+    "full_package_suite": "NOT RUN bounded scoped assignment"
+  },
+  "logs": {
+    "control-old-pin-red": {
+      "path": "/workspace/engineering/pr302-control-old-pin-red.log",
+      "size": 7503,
+      "sha256": "8ba32c5801ef9eea7ed65a6e83e7c8f64ccad859b4de9d155e16d08337f4c0c6"
+    },
+    "control-new-pin-green": {
+      "path": "/workspace/engineering/pr302-control-new-pin-green.log",
+      "size": 3877,
+      "sha256": "01079ea08f21b076aa01a552ddab1df38372d122c2961d4da9e650992ba23f92"
+    },
+    "control-toolkit": {
+      "path": "/workspace/engineering/pr302-control-toolkit.log",
+      "size": 14342,
+      "sha256": "9c01246bd313445f5394a88afaa8b280f6a86337d2693a66698d89676d987e83"
+    },
+    "control-static": {
+      "path": "/workspace/engineering/pr302-control-static.log",
+      "size": 5852,
+      "sha256": "d2888e097eaaf2a42645e0c05a1436c7787137e3e9e9b2dcb7be3995800c3cde"
+    }
+  },
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/repository-operations.md atS retainedbyteidenticalC",
+    "durable_learning": "review/commitordinarysourceunion beforechildcontrol immutablepins; originalZIP/memberbytes before summary; onepublication pair scoped separate lifecycle/stagingproviders; publishedCore1.0.2 distinctCore1.0.3; capturedtree distinctcomplete reaping; public3case distinctprivateHOLD",
+    "exact_delta": "32added4removed lines inS: historical38106813502ff/665 tuple, source/control sequence and newhosted/fullCI/producerqualification rules, rawZIP/readback and operation/Core/descendant limits, original01f/fafb/frozen-v6 privateNOT_RUN/HOLD",
+    "evidence": "historical originalZIP11690338317/hash686a6686 and memberhash peerreceipt preserved; scoped109+96source, REDoldpin/GREEN55, AST/output equality",
+    "stale_or_ambiguous_guidance_removed": "665 current-control wording replaced historical; summary/singleinvocation/mappedorigin/emptydescendants/public scope cannot imply broaderproof",
+    "remaining_uncertainty": "newS threecase+currenttestedmergefullCI/nativequalification pending; privateoriginals absent; full134135/Core1.0.3/WindowsRCC remainunaccepted"
+  },
+  "required_order": "Integrate310FIRST;302 changesruntimeadapterproducerinput and invalidates retained92498 qualification",
+  "upstream_disposition": "none",
+  "push": "NONE awaiting independentcurrentcontrolGO"
+}
