@@ -155,6 +155,13 @@ superseded untyped projection as audit provenance, but run cycle and
 topological validation only over active execution prerequisites (including
 slice-to-slice gates). Record the authoritative source for each reclassification
 and verify that issue contracts, raw states, and accounting did not change.
+For each typed issue-to-issue prerequisite, record the exact producer criterion
+or artifact consumed by each successor slice. A producer's OPEN issue state
+does not by itself block every successor slice, and a partial foundation
+satisfies only the criteria its receipt proves. If an edge has only a generic
+issue-level scope and no criterion mapping, leave that successor slice
+unclassified until the edge is refined; do not turn the producer's whole-issue
+status into a blanket blocker or infer readiness from an unmapped edge.
 When a newly filed issue follows a frozen intake snapshot, retain it as a dated
 supplemental gate outside the original issue-contract list until the accounting
 baseline is explicitly amended. Render and validate it separately from the

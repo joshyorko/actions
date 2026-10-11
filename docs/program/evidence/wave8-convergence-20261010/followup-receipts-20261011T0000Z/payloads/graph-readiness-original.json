@@ -1,0 +1,201 @@
+{
+  "schema": "community-graph-successor-readiness/v1",
+  "observed_at_utc": "2026-10-10 23:51:57 UTC",
+  "disposition": "NO_DEPENDENCY_READY_UNOWNED_IMPLEMENTATION_SLICE_IDENTIFIED",
+  "scope": {
+    "retained_graph_contracts": 54,
+    "open_retained_contracts": 53,
+    "closed_retained_contracts": [210],
+    "base_sha": "19380993febaa71238eaee3026b5c808773283ff",
+    "base_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "no_source_or_graph_mutations": true,
+    "no_tests_or_services_run": true,
+    "live_open_prs_reconciled": 13,
+    "live_open_issue_count_source": 58
+  },
+  "source_evidence": [
+    {
+      "kind": "integration source",
+      "repo": "/workspace/work/actions-mk3-integration",
+      "ref": "origin/integration/community-release-20261008",
+      "commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "tree": "a8fe00af1858077273912d0b590f0f7a662c83d5"
+    },
+    {
+      "kind": "retained graph",
+      "path": "docs/program/community-execution-graph.json",
+      "git_blob": "4b51bde065228622dd6a630b79b51be5aeacf827",
+      "sha256": "not-separately-computed"
+    },
+    {
+      "kind": "retained ledger",
+      "path": "docs/program/community-program-ledger.json",
+      "git_blob": "6bd77b59d34801ab40995a248ba4e6892b06815b"
+    },
+    {
+      "kind": "issue-delivery matrix",
+      "path": "/workspace/work/actions-closure-audit/matrix/issue-delivery-matrix-2026-10-10T224444Z.json",
+      "sha256": "f90fc32a4cdf065f6066e24e6a6f9eb98c635a7f5375f166efd10577b5d87c5d"
+    },
+    {
+      "kind": "live issue snapshot",
+      "path": "/workspace/work/actions-closure-audit/open-issues-live.json",
+      "sha256": "7e25e48a19a1b4cbabd3ca44b8d003bf6eb5fc20acee62b50e17115a450d46c2"
+    },
+    {
+      "kind": "live PR snapshot",
+      "path": "/workspace/work/actions-closure-audit/open-prs-live.json",
+      "sha256": "5273af37f2964aa416a7997f41915e84da5b2f888d3ee14cc9ee4111dc6afe32"
+    },
+    {
+      "kind": "open PR union ancestry audit",
+      "path": "/workspace/work/actions-closure-audit/open-pr-live-union-audit.json",
+      "sha256": "523a0416c106032303857c21d820abeb814e7e14e1cf607fe2c5f2734bb4f03c"
+    },
+    {
+      "kind": "stack ancestry audit",
+      "path": "/workspace/work/actions-closure-audit/open-pr-dependency-head-ancestry.json",
+      "sha256": "f725c05717d89d7790129fdc648f4db84b955c8812d239d4956655126aaa40e4"
+    },
+    {
+      "kind": "current live GitHub inventory",
+      "observed_at_utc": "2026-10-10 23:51:57 UTC",
+      "open_pr_numbers": [310, 309, 308, 307, 306, 305, 302, 300, 299, 292, 290, 282, 221],
+      "note": "Fresh connector search confirmed the same 13 open PR set; current changed-file lists were fetched for all 13. Open issue bodies for #131/#151/#212 were freshly fetched and unchanged from the hashed captured bodies in the issue-delivery matrix."
+    }
+  ],
+  "candidates_considered": [
+    {
+      "issue": 151,
+      "title": "[security] Reject unsafe Robot ZIP package-root selection and bound archive staging",
+      "body_sha256": "e8f594671959e82db87ed8ea7de966295c827f3cb39daadf240fe8a0127b2d03",
+      "readiness": "NOT_SELECTED_DUPLICATE_COVERAGE_AND_ACTIVE_PATH_OVERLAP",
+      "exact_contract_slice_considered": "Native/platform-appropriate path cases under supported platform policy, including Windows destination aliases, link entries, containment and publication-race cases. The full issue additionally requires archive canonicalization, streamed size limits, raw-root exclusion, ordinary/rootless controls, metadata validation, atomic publication and bounded workflows.",
+      "typed_blockers": [],
+      "typed_relationships": {
+        "execution_predecessors": [],
+        "coordination_parent_edges": [],
+        "related_text_references": [148, 152, 153]
+      },
+      "integration_source": {
+        "production_path": "action_server/src/actions/server/_api_robots.py",
+        "production_git_blob": "62e74c5492f81158f1f6c89991c10ac3c930b5c5",
+        "test_path": "action_server/tests/action_server_tests/test_api_robots.py",
+        "test_git_blob": "ec183cd5d68fb514120e6bf9de72a554d22dd546",
+        "existing_tests": [
+          "test_robot_zip_rejects_raw_parent_root_without_copying_parent_sentinel",
+          "test_robot_zip_rejects_ambiguous_member_paths",
+          "test_robot_zip_rejects_case_colliding_members_before_publication",
+          "test_robot_zip_rejects_case_colliding_directory_prefixes",
+          "test_robot_zip_rejects_link_entries_before_extraction",
+          "test_robot_zip_enforces_actual_archive_input_bytes",
+          "test_robot_zip_enforces_entry_and_expansion_limits",
+          "test_robot_zip_accepts_ordinary_and_rootless_valid_packages",
+          "test_zip_rejects_windows_destination_aliases"
+        ],
+        "native_test_execution": "The generated Action Server Tests workflow runs test-binary on Ubuntu, Windows and macOS. The existing test file is included in that suite; exact issue-specific current-head acceptance remains unclaimed."
+      },
+      "current_open_pr_path_overlap": [
+        {
+          "pr": 221,
+          "head": "draft integration candidate; full current head recorded in live PR snapshot",
+          "paths": ["action_server/src/actions/server/_api_robots.py", "action_server/tests/action_server_tests/test_api_robots.py"]
+        }
+      ],
+      "reason": "The only native-path candidate already has explicit parser and publication tests executed by the native platform matrix, while the umbrella open integration PR edits the same two paths. The remaining body does not identify a separate ACL semantic/policy to implement; inventing one would exceed the contract. A new lane would duplicate existing tests or conflict with the active path owner.",
+      "smallest_safe_owner_paths": [],
+      "verification_if_revisited": "After PR221's relevant source is integrated and owner confirms a still-missing exact criterion, bind a focused native Windows test to the then-current full head, plus the existing Linux/macOS controls; do not claim ACL behavior without an accepted policy."
+    },
+    {
+      "issue": 212,
+      "title": "bug(ui): Runtime 1.0.1 Runs fails JSON parsing; oversized run list and same-origin WebSocket 403",
+      "body_sha256": "5d7d93486a73760e299fb77de1eb2f69f282b8253603b02cc7708373cb307a31",
+      "readiness": "BLOCKED_BY_ACTIVE_SHARED_PATH_STACK_NOT_TYPED_ISSUE_PREREQUISITE",
+      "exact_contract_slice_considered": "Bounded diagnosis and handling for large Run-list JSON payloads and same-origin WebSocket 403 while preserving Runtime 1.0.1 repro context; full issue also expects released-artifact browser confirmation and bounded response inspection.",
+      "typed_blockers": [],
+      "typed_relationships": {
+        "execution_predecessors": [],
+        "related_text_references": [96, 97, 153, 208, 209]
+      },
+      "overlap_paths": [
+        "action_server/src/actions/server/_api_run.py",
+        "action_server/src/actions/server/_server.py",
+        "action_server/src/actions/server/run_outputs/transport.py",
+        "action_server/tests/action_server_tests/test_server_websockets.py",
+        "action_server/tests/action_server_tests/run_outputs/test_transport.py"
+      ],
+      "current_live_open_prs": [
+        {
+          "pr": 299,
+          "head": "a62d02a76eec2b1322a03d5d5f541951d9cc241b",
+          "changed_overlap": ["action_server/src/actions/server/_api_run.py", "action_server/tests/action_server_tests/test_server_websockets.py"],
+          "status_note": "#299 is a current stacked Run-output/change scope; the captured ancestry audit records it after #292, whose current acceptance is a path-gate decision."
+        },
+        {
+          "pr": 300,
+          "head": "600fb4423dfdadb156840efd193e7522ecf35ec5",
+          "changed_overlap": ["action_server/src/actions/server/_server.py", "action_server/src/actions/server/run_outputs/transport.py", "action_server/tests/action_server_tests/run_outputs/test_transport.py"]
+        },
+        {
+          "pr": 221,
+          "changed_overlap": ["action_server/src/actions/server/_api_run.py", "action_server/src/actions/server/_server_websockets.py"]
+        }
+      ],
+      "reason": "Every obvious implementation/test surface is concurrently owned by the Run-output stack or the broad release-candidate PR. The graph has no typed issue predecessor here, so this is an exact-path concurrency/ownership hold, not a claim that #153 or #209 must close first. Re-scope only after those heads integrate and compare surviving #212 criteria against the then-current tree.",
+      "smallest_safe_owner_paths": [],
+      "verification_if_revisited": "Use bounded Runtime 1.0.1 or exact candidate artifact and Chromium with redacted/streamed response evidence; verify JSON parse, large-result behavior and same-origin WebSocket 403 on the new exact tree. Do not use PR titles or full-issue relation edges as proof."
+    },
+    {
+      "issue": 131,
+      "title": "Define an open provider-based data and knowledge plane for Actions",
+      "body_sha256": "4aaf54cce742b4133a45ee948148a22c313df8097e22ad65485b0a865a99d1ae",
+      "readiness": "BLOCKED_BY_TYPED_PRODUCER_GATES",
+      "exact_contract_slice_considered": "Demonstrate one local/offline provider (for example DuckDB over packaged CSV/Parquet) and one service-backed provider (for example PostgreSQL), with typed declarations, Deployment binding and provider-owned execution semantics.",
+      "typed_blockers": [
+        {
+          "prerequisite_issue": 125,
+          "reason": "Typed execution edge in the retained graph; #125 cleanup has integrated foundation but its exact acceptance is not yet verified."
+        },
+        {
+          "prerequisite_issue": 129,
+          "reason": "Typed execution edge; #129 has an integrated design/probe foundation but immutable Deployment binding/revision acceptance remains open."
+        },
+        {
+          "prerequisite_issue": 130,
+          "reason": "Typed execution edge; #130 is blocked by its own typed #129 prerequisite and its package-v3 declaration/runtime-plan contract is not yet accepted."
+        }
+      ],
+      "native_github_parent_and_references": {
+        "parent": 82,
+        "parent_is_execution_prerequisite": false,
+        "body_mentions": [125, 129, 130, 71, 86, 87, 90, 126, 127],
+        "only_execution_prerequisites_are_above": true
+      },
+      "reason": "The local/offline and service-backed provider slice is explicit, but beginning implementation before #129/#130 establishes immutable typed package declarations and deployment binding would guess the consuming contract. These are true typed producer edges, unlike #82 parent and issue body mentions.",
+      "smallest_safe_owner_paths": [],
+      "verification_if_revisited": "Once #129/#130 exact source criteria are accepted, add separate local/offline and service-backed provider tests at current integration head; verify binding snapshots, secret-free package declarations, bounded large-result handles and no hidden provider fallback."
+    }
+  ],
+  "readiness_conclusion": {
+    "ready_candidates": [],
+    "considered_candidates": [151, 212, 131],
+    "unresolved_external_inputs": [
+      "Owner disposition and exact issue-level acceptance for #151's residual ACL/source identity language; no policy is specified in the body.",
+      "Completion/acceptance and current ownership of PR292/#299/#300 stack plus PR221's full integration candidate before #212 file ownership is free.",
+      "Scoped acceptance of #129 and #130 typed producer contracts before #131 implementation."
+    ],
+    "no_full_issue_acceptance_claimed": true,
+    "no_graph_or_contract_amendment_proposed": true
+  },
+  "canonical_documentation_proposal": {
+    "path": "docs/skills/repository-operations.md#community-program-evidence",
+    "action": "NO_CHANGE",
+    "reason": "The current canonical text already directs reviewers to evaluate prerequisites from scoped evidence, says a cross-reference alone is not a blocking edge, separates typed prerequisites from parent/related/full-acceptance edges, and requires reviewing full PR diffs from their actual merge base. This pass found no durable guidance gap that warrants repeating those instructions.",
+    "exact_existing_guidance": [
+      "Recheck dependency sequencing against each retained contract before implementation; a cross-reference alone is not a blocking edge.",
+      "For a stacked PR, review the full diff from its actual merge base rather than relying on its title or last commit."
+    ],
+    "removed_stale_guidance": "None identified; no documentation edits made."
+  },
+  "upstream_disposition": "NONE; no new confirmed upstream defect was reproduced in this read-only readiness pass."
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "wave8-followup-payload-manifest/v1",
+  "recorded_at_utc": "2026-10-11T00:04:38Z",
+  "files": [
+    {
+      "id": "graph_readiness_original",
+      "source_path": "/workspace/work/actions-mk3-evidence/graph-successor-readiness-20261010/readiness.json",
+      "bundled_path": "payloads/graph-readiness-original.json",
+      "bytes": 12752,
+      "sha256": "6f8cdf2302d247b3a4e37978a49828fb54513c2a9dd4cc902c106252aef5c6a7",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "graph_readiness_correction_131",
+      "source_path": "/workspace/work/actions-mk3-evidence/graph-successor-readiness-20261010/readiness-correction-131.json",
+      "bundled_path": "payloads/graph-readiness-correction-131.json",
+      "bytes": 10689,
+      "sha256": "528f077a477726687d2fcd13f1a3bd183e1992f09e158da3f4f6dde8972607fa",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "ci_snapshot",
+      "source_path": "/workspace/work/actions-mk3-wave8-evidence/followup-ci-20261010T2359Z.json",
+      "bundled_path": "payloads/current-ci-20261010T2359Z.json",
+      "bytes": 306075,
+      "sha256": "c0f79528325d39120710cc0d3beb70b6ee6047327caced558f75500ce5710a98",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "native_status_snapshot",
+      "source_path": "/workspace/work/actions-mk3-wave8-evidence/dakota-status-20261011T0000Z.json",
+      "bundled_path": "payloads/native-status-20261011T0000Z.json",
+      "bytes": 2158,
+      "sha256": "4591925253731a1c851a3df81779e2c1db5a2e13b6df97c748e0a4fc3a413c7b",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "current_issue_101_readback",
+      "source_path": "/workspace/work/actions-mk3-wave8-evidence/ledger-current-20261011T0004Z.json",
+      "bundled_path": "payloads/current-ledger-issue-101-20261011T0004Z.json",
+      "bytes": 28177,
+      "sha256": "dc9a62ffb04806d1270fb61c7950c632d1fde8f2e5b08d2c725fd2016cd7b98b",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "historical_issue_101_readback",
+      "source_path": "/workspace/work/actions-mk3-wave8-evidence/ledger-results-readback.json",
+      "bundled_path": "payloads/historical-ledger-issue-101-20261010T2336Z.json",
+      "bytes": 23143,
+      "sha256": "bbc1ca86837df0c8b65607a03be5b9c286fa5bb84fd63ad642caf448ff7acbf2",
+      "copy_method": "byte-for-byte copy"
+    },
+    {
+      "id": "rcc_source_union_checkpoint",
+      "source_path": "/workspace/work/actions-mk3-evidence/wave9/rcc-source-union/union-checkpoint-44afd960.json",
+      "bundled_path": "payloads/rcc-source-union-checkpoint-44afd960.json",
+      "bytes": 11390,
+      "sha256": "f6cf8fc44e150c839585e471f47a32ac83eff001d01206f033b2bf5912f76d6d",
+      "copy_method": "byte-for-byte copy"
+    }
+  ],
+  "excluded": "Private independent-review details and raw logs are not included."
+}

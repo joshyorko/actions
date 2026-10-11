@@ -1,0 +1,60 @@
+{
+  "snapshots": [
+    {
+      "thread_id": "01a11d7a-e547-7423-8fc5-fc0148df2123",
+      "target": "local",
+      "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
+      "thread_status": "notLoaded",
+      "active_flags": [],
+      "unknown_active_flags": false,
+      "latest_turn": {
+        "id": "01a12124-a8c4-7492-8798-7ce1fe2dc9d0",
+        "status": "completed",
+        "error_code": null
+      },
+      "observed_at": "2026-10-11T00:00:12.584Z",
+      "revision": "7c204897bd8139d5e9b4ad44d440c85de3d55ef4e39703cbd7a24ae805c6f5c1",
+      "native_state_authoritative": true
+    },
+    {
+      "thread_id": "01a11d7b-4029-7953-aba7-f3b487098b32",
+      "target": "local",
+      "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
+      "thread_status": "notLoaded",
+      "active_flags": [],
+      "unknown_active_flags": false,
+      "latest_turn": {
+        "id": "01a1213e-6a35-7e53-80d7-803c46dfe2d9",
+        "status": "interrupted",
+        "error_code": null
+      },
+      "observed_at": "2026-10-11T00:00:13.623Z",
+      "revision": "2b37c0faa55296cb704264286c20eaa2dde8b537120ce8c9afd7e86caa40471c",
+      "native_state_authoritative": true
+    },
+    {
+      "thread_id": "01a12822-bbf0-7632-bc14-87d93f05f1b2",
+      "target": "local",
+      "cwd": "/home/kdlocpanda/second_brain/Projects/automation-control-plane/actions",
+      "thread_status": "notLoaded",
+      "active_flags": [],
+      "unknown_active_flags": false,
+      "latest_turn": {
+        "id": "01a12827-58a9-7b62-a41c-a82a109b2226",
+        "status": "completed",
+        "error_code": null
+      },
+      "observed_at": "2026-10-11T00:00:14.662Z",
+      "revision": "5571791b4c1a597067a1de827816dfd7fd8cc0671a21149c55089c0202d6ba59",
+      "native_state_authoritative": true
+    }
+  ],
+  "loaded": {
+    "data": [],
+    "nextCursor": null
+  },
+  "writer_launches": 0,
+  "execution_mode_approval": "PENDING",
+  "devsy": "DISABLED",
+  "disposition": "Read-only reconciliation. Historical Work Items completed; RCC interrupted. Preflight completed at GitHub sandbox boundary; no writers resumed or created."
+}

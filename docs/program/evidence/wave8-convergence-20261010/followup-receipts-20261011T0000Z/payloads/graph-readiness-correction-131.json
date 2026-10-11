@@ -1,0 +1,131 @@
+{
+  "schema": "community-graph-successor-readiness-correction/v1",
+  "observed_at_utc": "2026-10-10 23:57:12 UTC",
+  "supersedes_scope": "Clarifies only the #131 blocker wording in readiness.json; it does not rewrite or delete the original receipt or change the dispositions for #151 and #212.",
+  "prior_receipt": {
+    "path": "/workspace/work/actions-mk3-evidence/graph-successor-readiness-20261010/readiness.json",
+    "sha256": "6f8cdf2302d247b3a4e37978a49828fb54513c2a9dd4cc902c106252aef5c6a7"
+  },
+  "source_binding": {
+    "integration_ref": "integration/community-release-20261008",
+    "observed_remote_head": "19380993febaa71238eaee3026b5c808773283ff",
+    "observed_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "verification": "Read-only GitHub branch endpoint response at 2026-10-10 23:56 UTC; this is current. PR221 body text naming e886d26 is stale relative to the branch endpoint and was not used as the base.",
+    "graph_blob": "4b51bde065228622dd6a630b79b51be5aeacf827",
+    "contract_hashes": {
+      "125": "84c024b2fe240e3e0f01f914bdba3ffd9613a69e04cea7f81a4b84512fa49238",
+      "129": "8b0b49ade2f5cd29dfa9dab0babc91c2fd7ebd36098ed3fad7ac32daaf9f7ff5",
+      "130": "5fea0f4828c20faa32298d60083ca684b3b8225f0af6baea0d8fa4363dae4277",
+      "131": "4aaf54cce742b4133a45ee948148a22c313df8097e22ad65485b0a865a99d1ae"
+    },
+    "issue_body_hash_131": "4aaf54cce742b4133a45ee948148a22c313df8097e22ad65485b0a865a99d1ae"
+  },
+  "fresh_open_pr_reconciliation": {
+    "observed_at_utc": "2026-10-10 23:56 UTC",
+    "open_pr_count": 14,
+    "new_pr": {
+      "number": 311,
+      "head": "8eb2e6f92109bcbd51e4925ebe703074ee28c6ac",
+      "tree": "1a5350219c8bfa1715eb6c4c20c9fcbecd9788b3",
+      "changed_paths": [
+        "action_server/tests/contract_tests/test_active_contracts.py",
+        "docs/skills/repository-operations.md"
+      ],
+      "relationship_to_131": "No frontend or provider/data-plane path overlap. This current filename list removes #311 as a conflict candidate; it is not an implementation dependency."
+    },
+    "prior_13_pr_filename_audit": "Retained as a timestamp-bounded earlier snapshot, not asserted to be the current open-PR inventory.",
+    "open_pr_numbers": [
+      311,
+      310,
+      309,
+      308,
+      307,
+      306,
+      305,
+      302,
+      300,
+      299,
+      292,
+      290,
+      282,
+      221
+    ]
+  },
+  "issue_131_readiness_refinement": {
+    "disposition": "NO_CURRENT_PRODUCT_IMPLEMENTATION_SLICE_IS_READY; DO_NOT_BLOCK_ON_WHOLE_ISSUE_STATUS",
+    "active_graph_relationships": [
+      {
+        "producer": 125,
+        "consumer": 131,
+        "edge_kind": "typed execution prerequisite",
+        "stored_scope": "current projected contract gate"
+      },
+      {
+        "producer": 129,
+        "consumer": 131,
+        "edge_kind": "typed execution prerequisite",
+        "stored_scope": "current projected contract gate"
+      },
+      {
+        "producer": 130,
+        "consumer": 131,
+        "edge_kind": "typed execution prerequisite",
+        "stored_scope": "current projected contract gate"
+      }
+    ],
+    "missing_graph_precision": "The active relationship model has no criterion-level scoped_execution_gates and no execution_slices for #131. Therefore the generic issue-level edge labels do not tell us which producer criteria a particular #131 slice consumes. The edge cannot be translated into 'producer issue must close'; exact consumer/producer criterion mapping is unresolved.",
+    "producer_evidence_and_exact_relevant_conditions": [
+      {
+        "issue": 125,
+        "status": "PARTIAL_FOUNDATION_INTEGRATED; FULL_ACCEPTANCE_OPEN",
+        "foundation": "Graph records foundation PR #128 merged; no whole-issue acceptance is inferred.",
+        "#131_relevant_condition": "A provider implementation must preserve the explicit #131 exclusions: no Data Server, sema4ai-data dependency, DataContext or x-data-context contract; production secrets remain outside package declarations. The related #125 criteria are its exact product-surface removals and active-source boundary, not every cleanup criterion (for example all private-tier build, template archive and broad static-scan acceptance) as a prerequisite to any provider slice.",
+        "criterion_specific_current_proof": "No separate current receipt binds those exact #125 conditions to a provider implementation because no #131 source slice exists. This is not evidence that the foundation failed; a future bounded slice should enforce the no-legacy import/field boundary in its own files and check the relevant active source surface."
+      },
+      {
+        "issue": 129,
+        "status": "PARTIAL_DESIGN_FOUNDATION_INTEGRATED; PRODUCTION_ACCEPTANCE_OPEN",
+        "foundation": {
+          "pr": 250,
+          "integrated_commit": "3ed98ddbac3354c59414b8411b295db2e15d3545",
+          "probe_path": "action_server/tests/action_server_tests/test_deployment_schema_probe.py",
+          "probe_git_blob": "bd0a73f6b16d98d966abd90e908669d1e84cdd3b",
+          "probe_sha256": "9a9432e01f88f752ddfc0844519b31ba4eccd59debc02073181741de8ff25924",
+          "probe_scope": "Proposed SQLite/PostgreSQL DDL checks for Workspace-scoped Deployment/provider-profile relationships, composite ownership FKs, revision ancestry and pointer order; its docstring explicitly says this is not a migration."
+        },
+        "#131_relevant_condition": "The smallest two-binding provider vertical consumes a production contract that maps a logical data/knowledge requirement to a Workspace-authorized provider/connection reference; a binding update must produce deterministic new Deployment state while existing Runs remain pinned. The #129 probe does not establish production schema migration, binding create/resolve API, authorization, immutable update, or Run snapshot behavior. Those named behavior proofs—not full #129 closure—are missing for the two-binding vertical.",
+        "criterion_specific_current_proof": "Only the design/schema probe is established. No production binding/runtime proof is established in the retained graph/matrix."
+      },
+      {
+        "issue": 130,
+        "status": "NO_IMPLEMENTED_PACKAGE_REVISION_CONTRACT_FOUND; TYPED #129 PREDECESSOR ALSO UNRESOLVED",
+        "foundation": "Graph records no foundation/checkpoint PR and marks #130 NOT_STARTED/BLOCKED.",
+        "#131_relevant_condition": "Before connecting provider bindings, #131 needs an accepted immutable Package Revision declaration for logical data/knowledge requirements and named typed operations, with production connection values kept out of that artifact. This is exact #130 provider-relevant package schema/identity, not a reason to wait for every #130 runtime-plan/projection/worker-placement acceptance criterion.",
+        "criterion_specific_current_proof": "No current #130 package source/schema implements this declaration; the necessary producer interface is not available to bind #131 implementations without inventing a competing format."
+      }
+    ],
+    "smallest_vertical_test_from_issue_131": {
+      "exact_contract": [
+        "one local/offline provider such as DuckDB over packaged CSV/Parquet",
+        "one service-backed provider such as PostgreSQL",
+        "one unchanged Package Revision resolves both compatible provider bindings",
+        "parameterized named query, large durable result handle, paging/export, authorization, cancellation/timeout and Run provenance"
+      ],
+      "why_not_ready": "This smallest vertical directly consumes both the missing #130 logical package declaration and the unimplemented #129 provider binding/run-pinning behaviors. The #129 design probe is useful schema evidence but not the runtime binding behavior. #125's full open state is not the blocker; only the specific negative product-surface constraints apply to any future slice.",
+      "safe_preparatory_scope": "A docs-only provider contract comparison could be prepared without claiming implementation, but it is not an implementation or acceptance slice. Do not create production provider code until the package declaration and binding interface are explicitly scoped."
+    },
+    "next_readiness_gate": "Root should amend the graph proposal (not original contract bytes) with criterion-level #131 edge scopes: name the exact #130 logical provider declaration criterion and #129 binding/update/run-pin criteria consumed by the two-provider vertical; name the #125 no-legacy product-surface criterion only where consumed. Recompute readiness from evidence for these criteria rather than requiring producer issue closure."
+  },
+  "other_dispositions_unchanged": {
+    "151": "No typed prerequisites; not selected because existing Robot ZIP tests cover path/collision/streaming/containment/race cases on the native three-OS test matrix, while PR221 overlaps exact source/test files. Remaining ACL semantics lack a contract policy; this is an ownership/duplication hold, not a typed dependency.",
+    "212": "No typed prerequisites; path ownership remains with PR299/300 and PR221 on Run JSON/WebSocket/transport files. This is an active exact-path concurrency hold, not an assertion that issue references #153/#209 are blocking prerequisites."
+  },
+  "canonical_documentation_proposal": {
+    "path": "docs/skills/repository-operations.md#community-program-evidence",
+    "action": "PROPOSE_ADDITIVE_GUIDANCE",
+    "why_new": "The current guide says to use producer scoped evidence and distinguish typed gates, but the retained graph's #131 issue-level prerequisite labels are generic and have no criterion IDs/slice mapping. A durable instruction to bind each graph gate to consumed producer criteria would prevent both false whole-issue blockers and unsafe premature integration.",
+    "exact_proposed_text": "For a typed issue-to-issue prerequisite, record the exact producer acceptance criterion or artifact consumed by the successor slice. An open producer issue does not by itself block every successor slice: decide readiness from current evidence for the named criterion on the candidate tree. If a graph edge has only a generic issue-level scope and no criterion mapping, leave that successor slice unclassified until the edge is refined; do not translate the producer's whole-issue OPEN state into a blanket blocker. A producer's partial foundation satisfies only the criteria its receipt actually proves.",
+    "removed_stale_guidance": "The prior receipt's shorthand that #131 is blocked by #125/#129/#130 as whole issues is superseded. No repository documentation or original graph/contracts were edited."
+  },
+  "upstream_disposition": "NONE; no confirmed upstream defect identified."
+}
