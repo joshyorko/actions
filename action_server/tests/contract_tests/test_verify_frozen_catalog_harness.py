@@ -19,59 +19,58 @@ SPEC.loader.exec_module(VERIFIER)
 def _inputs():
     native = {
         "action_server/src/actions/server/_selftest.py": ("100644", "blob", "helper"),
+        "action_server/src/actions/server/deployments/source_staging.py": (
+            "100644", "blob", "staging"
+        ),
         "actions/src/actions/__init__.py": ("100644", "blob", "core"),
         "actions-http-helper/poetry.lock": ("100644", "blob", "lock"),
     }
-    actual = {
-        **native,
-        VERIFIER.STAGING_PATH: ("100644", "blob", VERIFIER.STAGING_BLOB),
-    }
-    return native, actual
+    return native, dict(native)
 
 
-def test_only_exact_staging_addition_is_permitted():
+def test_current_native_source_requires_exact_input_parity():
     native, actual = _inputs()
     VERIFIER._validate_inputs(actual, native)
 
 
 @pytest.mark.parametrize(
-    "change", ["runtime", "extra", "staging_blob", "staging_mode", "core", "lock"]
+    "change", ["runtime", "extra", "staging_blob", "staging_mode", "core", "lock", "missing"]
 )
-def test_unrelated_runtime_or_changed_staging_input_is_rejected(change):
+def test_every_changed_native_input_is_rejected(change):
     native, actual = _inputs()
+    staging = "action_server/src/actions/server/deployments/source_staging.py"
     paths = {
         "runtime": "action_server/src/actions/server/_selftest.py",
         "extra": "action_server/src/actions/server/unreviewed.py",
-        "staging_blob": VERIFIER.STAGING_PATH,
-        "staging_mode": VERIFIER.STAGING_PATH,
+        "staging_blob": staging,
+        "staging_mode": staging,
         "core": "actions/src/actions/__init__.py",
         "lock": "actions-http-helper/poetry.lock",
+        "missing": staging,
     }
-    actual[paths[change]] = (
-        "100755" if change == "staging_mode" else "100644",
-        "blob",
-        VERIFIER.STAGING_BLOB if change == "staging_mode" else "unreviewed",
-    )
-    with pytest.raises(ValueError, match="exact staging blob"):
+    if change == "missing":
+        actual.pop(paths[change])
+    else:
+        actual[paths[change]] = (
+            "100755" if change == "staging_mode" else "100644",
+            "blob",
+            "staging" if change == "staging_mode" else "unreviewed",
+        )
+    with pytest.raises(ValueError, match="native candidate"):
         VERIFIER._validate_inputs(actual, native)
 
 
-@pytest.mark.parametrize("change", ["typed_selector", "other_selector", "missing"])
-def test_typed_selector_and_other_four_test_blobs_are_bound(change):
+@pytest.mark.parametrize("change", ["resource_selector", "other_selector", "missing"])
+def test_all_five_test_blobs_must_match_native_candidate(change):
     native = {path: ("100644", "blob", "native") for path in VERIFIER.TEST_PATHS}
     actual = dict(native)
-    actual[VERIFIER.RESOURCE_TEST_PATH] = (
-        "100644",
-        "blob",
-        VERIFIER.RESOURCE_TEST_BLOB,
-    )
     VERIFIER._validate_tests(actual, native)
     if change == "missing":
         actual.pop(VERIFIER.TEST_PATHS[0])
     else:
         path = (
             VERIFIER.RESOURCE_TEST_PATH
-            if change == "typed_selector"
+            if change == "resource_selector"
             else VERIFIER.TEST_PATHS[0]
         )
         actual[path] = ("100644", "blob", "wrong")

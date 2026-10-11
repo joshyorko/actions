@@ -64,12 +64,27 @@ execution of the refreshed control is **NOT RUN**, and the old binary does not
 prove the added staging implementation or full current-source artifact parity.
 
 After importing PR292 startup-failure cleanup, the current Runtime helpers and
-resource-history test no longer match those retained pins. The verifier rejects
+resource-history test no longer match those retained pins. The retained pre-cleanup verifier rejects
 that checkout before artifact execution. Current-control native and wrapper
 execution require a separately reviewed current-source artifact tuple and new
 receipts. Preserve the original artifact pins and historical results in their
 original commits; never widen a source-equivalence exclusion to admit changed
 Runtime code.
+
+The current-source control uses accepted candidate `ba85aac7` and native build
+`92498aff`, both complete tree `80e5c775`. It checks exact equality for all
+source/dependency inputs and all five selected test blobs, with no exclusions.
+The frozen provenance and Go wrapper come from the same Build Unauthenticated
+run `38098225250`, attempt 1, artifacts `11686643166` and `11686533628`.
+A neighboring Tests run's shared head does not bind its binary bytes. Verify
+both downloaded archives independently and retain candidate, PR head and
+synthetic build identities separately. The combined byte/source measurement
+receipt is retained in
+[`runtime-frozen-current-source-20261011`](../../docs/program/evidence/runtime-frozen-current-source-20261011/README.md).
+Exact source equality and archive inspection admit this tuple for execution;
+they do not establish the eleven frozen cases, eleven wrapper cases, published
+dependency origins, other platforms or release acceptance. Preserve the old
+a47 receipts under their original identities.
 
 ## Release process
 

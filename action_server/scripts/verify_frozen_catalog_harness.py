@@ -1,4 +1,4 @@
-"""Bind refreshed test inputs separately from the immutable native artifact."""
+"""Bind the exact current-source harness to the immutable native artifact."""
 
 from __future__ import annotations
 
@@ -7,15 +7,13 @@ import json
 import subprocess
 from pathlib import Path
 
-NATIVE_CANDIDATE_SHA = "a47dc616069afdb0488aaed651abf0ceb9a82035"
-NATIVE_CANDIDATE_TREE = "10e4b5fb3a3ee3d7c6b7c8ccbf5f6bfcdde70bc6"
-HARNESS_RUNTIME_TREE = "2aed50eae66abc2c85635a36c45a734429cfe905"
-STAGING_PATH = "action_server/src/actions/server/deployments/source_staging.py"
-STAGING_BLOB = "b475fd6688b7afc6606cde2cba9a1294d771a64c"
+NATIVE_CANDIDATE_SHA = "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+NATIVE_CANDIDATE_TREE = "80e5c77513f6abf5d07005ee3aee47d49efd927f"
+HARNESS_RUNTIME_TREE = "20dca119289b1d6e40bd1065fd06b0d82aad3098"
 RESOURCE_TEST_PATH = (
     "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py"
 )
-RESOURCE_TEST_BLOB = "5fe18b942ba66f339ac076fa26add1908d70305e"
+RESOURCE_TEST_BLOB = "534e51afbc75b4d3ce473dee37d7ac00d52dbc92"
 INPUT_PATHS = (
     "action_server/src",
     "actions/src",
@@ -57,25 +55,15 @@ def _entries(root: Path, revision: str, paths: tuple[str, ...]) -> GitEntries:
 
 
 def _validate_inputs(actual: GitEntries, native: GitEntries) -> None:
-    expected = dict(native)
-    if STAGING_PATH in expected:
-        raise ValueError("native candidate unexpectedly contains the staging addition")
-    expected[STAGING_PATH] = ("100644", "blob", STAGING_BLOB)
-    if actual != expected:
-        raise ValueError(
-            "harness inputs differ from the native candidate plus exact staging blob"
-        )
+    if actual != native:
+        raise ValueError("harness inputs differ from the exact native candidate")
 
 
 def _validate_tests(actual: GitEntries, native: GitEntries) -> None:
-    expected = dict(native)
-    if set(expected) != set(TEST_PATHS):
+    if set(native) != set(TEST_PATHS):
         raise ValueError("native candidate does not contain the exact five test files")
-    expected[RESOURCE_TEST_PATH] = ("100644", "blob", RESOURCE_TEST_BLOB)
-    if actual != expected:
-        raise ValueError(
-            "harness test selector blobs differ from the verified five-file set"
-        )
+    if actual != native:
+        raise ValueError("harness test selector blobs differ from the native candidate")
 
 
 def verify(root: Path) -> dict[str, object]:
@@ -105,14 +93,12 @@ def verify(root: Path) -> dict[str, object]:
         "control_tree": _git(root, "rev-parse", "HEAD^{tree}").decode().strip(),
         "harness_runtime_source_tree": runtime_tree,
         "harness_runtime_reference_sha": NATIVE_CANDIDATE_SHA,
-        "harness_runtime_source_differences": [
-            {"path": STAGING_PATH, "mode": "100644", "blob": STAGING_BLOB}
-        ],
+        "harness_runtime_source_differences": [],
         "resource_history_test_blob": RESOURCE_TEST_BLOB,
-        "other_selected_test_blobs_match_native_candidate": True,
+        "all_selected_test_blobs_match_native_candidate": True,
         "native_candidate_sha": NATIVE_CANDIDATE_SHA,
         "native_candidate_tree": candidate_tree,
-        "harness_runtime_equals_native_source": False,
+        "harness_runtime_equals_native_source": True,
         "status": "PASS",
     }
 
