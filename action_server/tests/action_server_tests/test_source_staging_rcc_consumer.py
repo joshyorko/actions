@@ -15,6 +15,68 @@ from pathlib import Path
 import pytest
 
 
+def _verify_selected_rcc_fixture(rcc_binary: Path) -> tuple[str, str]:
+    """Keep legacy pins exact; explicitly selected tests share adapter admission."""
+    from actions.server import _rcc_runtime_adapter
+
+    selector = os.environ.get("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY")
+    if selector is not None:
+        identity = _rcc_runtime_adapter.verify_rcc_compatibility(rcc_binary)
+        assert identity is not None
+        return identity.version, identity.binary_sha256
+    rcc_sha256 = hashlib.sha256(rcc_binary.read_bytes()).hexdigest()
+    assert (
+        rcc_sha256 == "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    )
+    rcc_version = subprocess.run(
+        [str(rcc_binary), "--version"], capture_output=True, text=True, check=True
+    ).stdout.strip()
+    assert rcc_version == "v18.19.3"
+    return rcc_version, rcc_sha256
+
+
+def _staged_worker_evidence(handle: object, artifact_digest: str) -> dict[str, object]:
+    """Retain private measured lease/cleanup facts; absent snapshots stay null."""
+    from dataclasses import asdict
+
+    from actions.server._actions_process_pool import WorkerRetirementResult
+    from actions.server._common.process import ProcessTreeCleanupResult
+    from actions.server._rcc_runtime_adapter import (
+        RccProcessHandle,
+        RccRuntimeError,
+        read_receipt,
+    )
+
+    wrapper = getattr(handle, "_rcc_wrapper", None)
+    if not isinstance(wrapper, RccProcessHandle):
+        raise RccRuntimeError("receipt", "worker has no owned RCC wrapper")
+    path = wrapper.receipt_file
+    raw = path.read_bytes()
+    receipt = read_receipt(path, artifact_digest)
+    if path.read_bytes() != raw or json.loads(raw) != receipt:
+        raise RccRuntimeError("receipt", "worker receipt changed during observation")
+    retirement = getattr(handle, "_retirement_result", None)
+    if retirement is not None and not isinstance(retirement, WorkerRetirementResult):
+        raise RccRuntimeError("receipt", "invalid worker retirement result type")
+    cleanup = wrapper.last_cleanup_result
+    if cleanup is not None and not isinstance(cleanup, ProcessTreeCleanupResult):
+        raise RccRuntimeError("receipt", "invalid wrapper cleanup result type")
+    if (
+        retirement is not None
+        and retirement.cleanup is not None
+        and not isinstance(retirement.cleanup, ProcessTreeCleanupResult)
+    ):
+        raise RccRuntimeError("receipt", "invalid retirement cleanup result type")
+    return {
+        "artifact_digest": artifact_digest,
+        "runtime_receipt_path": str(path),
+        "runtime_receipt_sha256": hashlib.sha256(raw).hexdigest(),
+        "runtime_receipt": receipt,
+        "retirement_result": asdict(retirement) if retirement is not None else None,
+        "wrapper_cleanup_result": asdict(cleanup) if cleanup is not None else None,
+    }
+
+
 def _create_runtime_catalog_database(data_dir: Path):
     """Create the consumer test catalog using the complete Runtime registry."""
     from actions.server._database import Database
@@ -61,14 +123,7 @@ def test_published_artifact_details_preserves_one_rcc_identity_pair(tmp_path: Pa
     if not rcc_value:
         pytest.fail("ACTIONS_RUNTIME_RCC_BINARY is required for RCC publication proof")
     rcc_binary = Path(rcc_value).resolve(strict=True)
-    rcc_sha256 = hashlib.sha256(rcc_binary.read_bytes()).hexdigest()
-    assert (
-        rcc_sha256 == "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
-    )
-    rcc_version = subprocess.run(
-        [str(rcc_binary), "--version"], capture_output=True, text=True, check=True
-    ).stdout.strip()
-    assert rcc_version == "v18.19.3"
+    rcc_version, rcc_sha256 = _verify_selected_rcc_fixture(rcc_binary)
 
     package_dir = tmp_path / "minimal-package"
     package_dir.mkdir(mode=0o700)
@@ -200,14 +255,7 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
         pytest.fail("ACTIONS_RUNTIME_RCC_BINARY is required for staged RCC proof")
     rcc_binary = Path(rcc_binary_value).resolve(strict=True)
     assert rcc_binary.is_file()
-    rcc_sha256 = hashlib.sha256(rcc_binary.read_bytes()).hexdigest()
-    assert (
-        rcc_sha256 == "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
-    )
-    rcc_version = subprocess.run(
-        [str(rcc_binary), "--version"], capture_output=True, text=True, check=True
-    ).stdout.strip()
-    assert rcc_version == "v18.19.3"
+    rcc_version, rcc_sha256 = _verify_selected_rcc_fixture(rcc_binary)
 
     # The acceptance process owns both homes. Never inherit or mutate another
     # task's RCC cache, even when this test is run outside the hosted workflow.
@@ -303,6 +351,8 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
     Path(provider_environment["ACTIONS_HOME"]).mkdir(mode=0o700)
     provider = None
     pool = None
+    worker_handle = None
+    worker_artifact_digest = None
     repository_root = Path(__file__).resolve().parents[3]
     source_commit = subprocess.check_output(
         ["git", "-C", str(repository_root), "rev-parse", "HEAD"], text=True
@@ -364,7 +414,9 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
                 }
                 descriptor = load_descriptor(package.env_json)
                 assert descriptor is not None
-                assert descriptor.rcc_version == "v18.19.3"
+                assert descriptor.rcc_version == rcc_version
+                worker_artifact_digest = descriptor.artifact_digest
+                evidence["runtime_descriptor"] = descriptor.to_dict()
                 assert descriptor.provider_reference == provider_url
                 settings = Settings(
                     datadir=data_dir, artifacts_dir=tmp_path / "artifacts"
@@ -392,6 +444,7 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
                     numbered_id=1,
                 )
                 with pool.obtain_process_for_action(action) as handle:
+                    worker_handle = handle
                     assert (
                         handle.run_action(
                             run,
@@ -449,6 +502,14 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
                 cleanup_errors.append(
                     f"selected RCC provider cleanup: {type(error).__name__}"
                 )
+        if worker_handle is not None:
+            try:
+                assert worker_artifact_digest is not None
+                evidence["worker"] = _staged_worker_evidence(
+                    worker_handle, worker_artifact_digest
+                )
+            except Exception as error:
+                cleanup_errors.append(f"worker lease evidence: {type(error).__name__}")
         evidence["status"] = (
             "PASS" if execution_passed and not cleanup_errors else "FAIL"
         )
@@ -462,3 +523,193 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
                 json.dumps(evidence, indent=2, sort_keys=True) + "\n", encoding="utf-8"
             )
     assert evidence["status"] == "PASS"
+
+
+def test_staging_fixture_admission_reuses_approved_tuple_and_rejects_wrong_bytes(
+    tmp_path, monkeypatch
+):
+    from actions.server import _rcc_runtime_adapter as adapter
+
+    rcc = tmp_path / "rcc"
+    rcc.write_bytes(b"synthetic exact fixture")
+    rcc.chmod(0o700)
+    monkeypatch.setenv(
+        "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY", "released-18.19.5-linux-amd64"
+    )
+    monkeypatch.setattr(adapter, "_rcc_platform", lambda: "linux-amd64", raising=False)
+    monkeypatch.setattr(
+        adapter,
+        "_binary_sha256",
+        lambda _path: "1a617ad7c736fa67c605e20e5ebe3c7d54b02cd548f733e05c809cf49a48db1e",
+        raising=False,
+    )
+    monkeypatch.setattr(
+        subprocess,
+        "run",
+        lambda *args, **kwargs: subprocess.CompletedProcess(
+            args[0], 0, "v18.19.5\n", ""
+        ),
+    )
+    version, sha = _verify_selected_rcc_fixture(rcc)
+    assert version == "v18.19.5"
+    assert sha == "1a617ad7c736fa67c605e20e5ebe3c7d54b02cd548f733e05c809cf49a48db1e"
+    monkeypatch.setattr(adapter, "_binary_sha256", lambda _path: "0" * 64)
+    with pytest.raises(adapter.RccRuntimeError, match="compatibility"):
+        _verify_selected_rcc_fixture(rcc)
+
+
+def test_staging_fixture_default_keeps_exact_pinned_release_bytes(
+    tmp_path, monkeypatch
+):
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY", raising=False)
+    rcc = tmp_path / "rcc"
+    rcc.write_bytes(b"wrong bytes but version string matches")
+    rcc.chmod(0o700)
+    monkeypatch.setattr(
+        subprocess,
+        "run",
+        lambda *args, **kwargs: subprocess.CompletedProcess(
+            args[0], 0, "v18.19.3\n", ""
+        ),
+    )
+    with pytest.raises(AssertionError):
+        _verify_selected_rcc_fixture(rcc)
+
+
+@pytest.mark.parametrize("version", ["v18.19.3", "v18.19.5", "v18.19.6"])
+def test_real_staging_descriptor_assertion_binds_measured_version(version):
+    import ast
+    import inspect
+    import textwrap
+    from types import SimpleNamespace
+
+    source = ast.parse(
+        textwrap.dedent(
+            inspect.getsource(test_staged_package_executes_in_managed_rcc_runtime)
+        )
+    )
+    assertions = [
+        node
+        for node in ast.walk(source)
+        if isinstance(node, ast.Assert)
+        and any(
+            isinstance(child, ast.Attribute) and child.attr == "rcc_version"
+            for child in ast.walk(node)
+        )
+    ]
+    assert len(assertions) == 1
+    assertion = compile(
+        ast.fix_missing_locations(ast.Module(body=assertions, type_ignores=[])),
+        "actual-staging-version-assertion",
+        "exec",
+    )
+    exec(
+        assertion,
+        {"descriptor": SimpleNamespace(rcc_version=version), "rcc_version": version},
+    )
+    with pytest.raises(AssertionError):
+        exec(
+            assertion,
+            {
+                "descriptor": SimpleNamespace(rcc_version="wrong"),
+                "rcc_version": version,
+            },
+        )
+
+
+@pytest.fixture
+def staged_worker_receipt_control(tmp_path):
+    from types import SimpleNamespace
+
+    from actions.server._rcc_runtime_adapter import RccProcessHandle
+
+    digest = "sha256:" + "a" * 64
+    receipt = tmp_path / "actual-worker.json"
+    receipt.write_text(
+        json.dumps(
+            {
+                "artifactDigest": digest,
+                "verification": {"valid": True},
+                "leaseId": "measured-lease",
+                "status": "killed",
+            }
+        )
+    )
+    wrapper = RccProcessHandle(SimpleNamespace(), receipt)
+    handle = SimpleNamespace(_rcc_wrapper=wrapper, _retirement_result=None)
+    return handle, receipt, digest
+
+
+def test_staged_worker_evidence_retains_raw_lease_and_unknown_cleanup(
+    staged_worker_receipt_control,
+):
+    import hashlib
+
+    handle, path, digest = staged_worker_receipt_control
+    evidence = _staged_worker_evidence(handle, digest)
+    assert evidence["runtime_receipt"] == json.loads(path.read_text())
+    assert (
+        evidence["runtime_receipt_sha256"]
+        == hashlib.sha256(path.read_bytes()).hexdigest()
+    )
+    assert evidence["retirement_result"] is None
+    assert evidence["wrapper_cleanup_result"] is None
+    assert evidence["runtime_receipt"]["status"] == "killed"
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "artifact",
+        "verification",
+        "lease",
+        "wrapper-type",
+        "cleanup-type",
+        "retirement-type",
+    ],
+)
+def test_staged_worker_evidence_rejects_missing_lease_identity_or_wrong_typed_result(
+    staged_worker_receipt_control, mutation
+):
+    from actions.server._rcc_runtime_adapter import RccRuntimeError
+
+    handle, path, digest = staged_worker_receipt_control
+    payload = json.loads(path.read_text())
+    if mutation == "artifact":
+        payload["artifactDigest"] = "sha256:" + "b" * 64
+    elif mutation == "verification":
+        payload["verification"]["valid"] = False
+    elif mutation == "lease":
+        payload.pop("leaseId")
+    elif mutation == "wrapper-type":
+        handle._rcc_wrapper = {}
+    elif mutation == "cleanup-type":
+        handle._rcc_wrapper.last_cleanup_result = {"wrapper_reaped": True}
+    else:
+        handle._retirement_result = {"state": "execution_stopped"}
+    path.write_text(json.dumps(payload))
+    with pytest.raises(RccRuntimeError):
+        _staged_worker_evidence(handle, digest)
+
+
+def test_staged_worker_evidence_preserves_actual_pending_zombie_and_error_fields(
+    staged_worker_receipt_control,
+):
+    from dataclasses import asdict
+
+    from actions.server._actions_process_pool import WorkerRetirementResult
+    from actions.server._common.process import ProcessTreeCleanupResult
+
+    handle, path, digest = staged_worker_receipt_control
+    cleanup = ProcessTreeCleanupResult(
+        False, (12,), (13,), ("retained-private-error",), False
+    )
+    retirement = WorkerRetirementResult(
+        "pending", False, "retained-private-reason", cleanup
+    )
+    handle._rcc_wrapper.last_cleanup_result = cleanup
+    handle._retirement_result = retirement
+    evidence = _staged_worker_evidence(handle, digest)
+    assert evidence["wrapper_cleanup_result"] == asdict(cleanup)
+    assert evidence["retirement_result"] == asdict(retirement)
+    assert evidence["runtime_receipt"] == json.loads(path.read_text())

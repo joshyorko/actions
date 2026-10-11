@@ -1110,3 +1110,72 @@ def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypat
     except psutil.NoSuchProcess:
         provider_stopped = True
     assert provider_stopped
+
+
+def test_public_harness_uses_shared_test_only_binary_admission(tmp_path, monkeypatch):
+    from actions.server import _rcc_runtime_adapter as adapter
+
+    harness = _harness()
+    rcc = tmp_path / "rcc"
+    rcc.write_bytes(b"owned synthetic RCC")
+    rcc.chmod(0o700)
+    selector = "released-18.19.5-linux-amd64"
+    sha = "1a617ad7c736fa67c605e20e5ebe3c7d54b02cd548f733e05c809cf49a48db1e"
+    monkeypatch.setattr(harness, "sha256_file", lambda _path: sha)
+    monkeypatch.setattr(adapter, "_rcc_platform", lambda: "linux-amd64", raising=False)
+    monkeypatch.setattr(
+        harness,
+        "run_owned_process",
+        lambda *args, **kwargs: subprocess.CompletedProcess(
+            args[0], 0, "v18.19.5\n", ""
+        ),
+    )
+    env = {
+        "ACTIONS_RUNTIME_RCC_BINARY": str(rcc),
+        "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY": selector,
+    }
+    assert harness._verify_rcc(
+        env, task_root=tmp_path / "task", deadline=harness.Deadline(30)
+    ) == (str(rcc), sha)
+    child = harness.child_environment(
+        env,
+        task_root=tmp_path / "child",
+        extra={"ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY": selector},
+    )
+    assert child["ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY"] == selector
+    monkeypatch.setattr(harness, "sha256_file", lambda _path: "0" * 64)
+    with pytest.raises((adapter.RccRuntimeError, RuntimeError), match="compatibility"):
+        harness._verify_rcc(
+            env, task_root=tmp_path / "wrong", deadline=harness.Deadline(30)
+        )
+
+
+def test_public_harness_rejects_pending_unknown_policy_before_binary_launch(
+    tmp_path, monkeypatch
+):
+    harness = _harness()
+    calls = []
+    monkeypatch.setattr(
+        harness, "run_owned_process", lambda *args, **kwargs: calls.append(args)
+    )
+    env = {
+        "ACTIONS_RUNTIME_RCC_BINARY": str(tmp_path / "unused"),
+        "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY": "candidate-097-18.19.6-linux-amd64",
+    }
+    with pytest.raises(RuntimeError, match="compatibility"):
+        harness._verify_rcc(
+            env, task_root=tmp_path / "task", deadline=harness.Deadline(30)
+        )
+    assert not calls
+
+
+def test_public_harness_runtime_child_retains_only_approved_test_selection(tmp_path):
+    harness = _harness()
+    key = "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY"
+    value = "released-18.19.5-linux-amd64"
+    env = harness.child_environment({key: value}, task_root=tmp_path / "runtime")
+    assert env[key] == value
+    with pytest.raises(RuntimeError, match="compatibility"):
+        harness.child_environment(
+            {}, task_root=tmp_path / "poison", extra={key: "unapproved"}
+        )

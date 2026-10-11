@@ -2068,3 +2068,380 @@ def test_bootstrap_rejects_non_string_pythonpath(
     monkeypatch.setattr("actions.server._rcc.get_rcc", lambda: InvalidEnvironmentRcc())
     with pytest.raises(ActionPackageError, match="PYTHONPATH must be a string"):
         ActionPackageHandler(str(package), tmp_path / "data").bootstrap_environment()
+
+
+_RCC5_SELECTOR = "released-18.19.5-linux-amd64"
+_RCC5_SHA256 = "1a617ad7c736fa67c605e20e5ebe3c7d54b02cd548f733e05c809cf49a48db1e"
+
+
+@pytest.fixture
+def approved_rcc5(monkeypatch):
+    from actions.server import _rcc_runtime_adapter as adapter
+
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY", _RCC5_SELECTOR)
+    monkeypatch.setattr(
+        adapter, "_binary_sha256", lambda _path: _RCC5_SHA256, raising=False
+    )
+    monkeypatch.setattr(adapter, "_rcc_platform", lambda: "linux-amd64", raising=False)
+    monkeypatch.setattr(
+        adapter, "_rcc_version_probe", lambda _path: (0, "v18.19.5", ""), raising=False
+    )
+    return adapter
+
+
+def test_approved_test_only_rcc5_measures_version_without_changing_default(
+    approved_rcc5,
+):
+    adapter = approved_rcc5
+    assert adapter.RCC_VERSION == "v18.19.3"
+    assert (
+        adapter.verify_rcc_version(
+            Path("/owned/rcc"), lambda *args: (0, "v18.19.5\n", "")
+        )
+        == "v18.19.5"
+    )
+
+
+@pytest.mark.parametrize(
+    "selector", ["unknown", "candidate-097-18.19.6-linux-amd64", ""]
+)
+def test_unapproved_test_selector_rejected_before_publication(
+    tmp_path, monkeypatch, selector
+):
+    from actions.server import _rcc_runtime_adapter as adapter
+
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY", selector)
+    calls = []
+    with pytest.raises(adapter.RccRuntimeError, match="compatibility"):
+        adapter.publish_artifact_details(
+            tmp_path / "package.yaml",
+            Path("/owned/rcc"),
+            runner=lambda *args: calls.append(args) or (0, "{}", ""),
+        )
+    assert not calls
+
+
+@pytest.mark.parametrize("version", ["", "v18.19.3", "v18.19.5\nsecret", "x" * 1025])
+def test_test_only_version_rejection_does_not_leak_output(approved_rcc5, version):
+    adapter = approved_rcc5
+    with pytest.raises(adapter.RccRuntimeError) as error:
+        adapter.verify_rcc_version(
+            Path("/owned/rcc"), lambda *args: (0, version, "credential")
+        )
+    assert "secret" not in str(error.value)
+    assert "credential" not in str(error.value)
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("version", "v18.19.3"),
+        ("runtime_kind", "other"),
+        ("adapter_contract", "rcc-runtime/v2"),
+        ("source_commit", "0" * 40),
+        ("binary_sha256", "0" * 64),
+        ("platform", "windows-amd64"),
+        ("provenance_sha256", "0" * 64),
+        ("approval", "QUALIFIED"),
+        ("source_modified", False),
+        ("source_modified", 1),
+        ("required_surface", ("env-publish",)),
+    ],
+)
+def test_descriptor_co_mutated_identity_cannot_self_certify(
+    approved_rcc5, field, value
+):
+    adapter = approved_rcc5
+    identity = adapter.verify_rcc_compatibility(
+        Path("/owned/rcc"), runner=lambda *args: (0, "v18.19.5", "")
+    )
+    descriptor = adapter.RccRuntimeDescriptor(
+        "sha256:" + "a" * 64, rcc_version="v18.19.5", rcc_compatibility=identity
+    )
+    payload = descriptor.to_dict()
+    payload["runtime"]["rcc_compatibility"][field] = value
+    # Recomputing the mutable serialized ID cannot change the committed approval.
+    import hashlib
+
+    changed = payload["runtime"]["rcc_compatibility"]
+    changed.pop("compatibility_id", None)
+    changed["compatibility_id"] = hashlib.sha256(
+        json.dumps(changed, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    with pytest.raises(adapter.RccRuntimeError, match="compatibility"):
+        adapter.RccRuntimeDescriptor.from_dict(payload)
+
+
+def test_new_selected_binary_does_not_execute_legacy_descriptor(approved_rcc5):
+    adapter = approved_rcc5
+    legacy = adapter.RccRuntimeDescriptor("sha256:" + "a" * 64)
+    with pytest.raises(adapter.RccRuntimeError, match="reprepare"):
+        adapter.build_exec_command(
+            Path("/owned/rcc"), legacy, ["python"], receipt_file=None
+        )
+
+
+def test_new_descriptor_exec_rechecks_binary_bytes_and_selector(
+    approved_rcc5, monkeypatch
+):
+    adapter = approved_rcc5
+    identity = adapter.verify_rcc_compatibility(
+        Path("/owned/rcc"), runner=lambda *args: (0, "v18.19.5", "")
+    )
+    descriptor = adapter.RccRuntimeDescriptor(
+        "sha256:" + "a" * 64, rcc_version="v18.19.5", rcc_compatibility=identity
+    )
+    monkeypatch.setattr(
+        adapter, "_subprocess_runner", lambda *args: (0, "v18.19.5", "")
+    )
+    assert (
+        adapter.build_exec_command(
+            Path("/owned/rcc"), descriptor, ["python"], receipt_file=None
+        )[2]
+        == "exec"
+    )
+    monkeypatch.setattr(adapter, "_binary_sha256", lambda _path: "0" * 64)
+    with pytest.raises(adapter.RccRuntimeError, match="compatibility"):
+        adapter.build_exec_command(
+            Path("/owned/rcc"), descriptor, ["python"], receipt_file=None
+        )
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY")
+    with pytest.raises(adapter.RccRuntimeError, match="reprepare"):
+        adapter.build_exec_command(
+            Path("/owned/rcc"), descriptor, ["python"], receipt_file=None
+        )
+
+
+def test_selected_binary_partitions_source_cache_and_measures_all_descriptors(
+    approved_rcc5, tmp_path, monkeypatch
+):
+    adapter = approved_rcc5
+    environment = tmp_path / "package.yaml"
+    environment.write_text("spec-version: 2\ndependencies: []\n")
+    calls = []
+    digest = "sha256:" + "a" * 64
+
+    def runner(*args):
+        if args[-1] == "--version":
+            return 0, "v18.19.5", ""
+        calls.append(args[2])
+        return (
+            0,
+            json.dumps(
+                {
+                    "artifact": digest,
+                    "artifactDigest": digest,
+                    "verification": {"valid": True},
+                }
+            ),
+            "",
+        )
+
+    first = adapter.prepare_runtime(
+        environment, Path("/owned/rcc"), source_generation="one", runner=runner
+    )
+    second = adapter.prepare_runtime(
+        environment, Path("/owned/rcc"), source_generation="two", runner=runner
+    )
+    assert first.rcc_version == second.rcc_version == "v18.19.5"
+    assert first.rcc_compatibility == second.rcc_compatibility
+    assert second.preparation_class == "source-reuse"
+    assert calls == ["publish", "acquire"]
+    assert adapter.RccRuntimeDescriptor.from_json(second.to_json()) == second
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY")
+    calls.clear()
+    third = adapter.prepare_runtime(
+        environment, Path("/legacy/rcc"), source_generation="three", runner=runner
+    )
+    assert third.rcc_version == "v18.19.3"
+    assert third.rcc_compatibility is None
+    assert calls == ["publish", "acquire"]
+
+
+def test_wrong_binary_or_platform_stops_before_cache_or_artifact_operation(
+    approved_rcc5, tmp_path, monkeypatch
+):
+    adapter = approved_rcc5
+    environment = tmp_path / "package.yaml"
+    environment.write_text("spec-version: 2\ndependencies: []\n")
+    before = dict(adapter._prepared_runtime_cache)
+    calls = []
+    monkeypatch.setattr(adapter, "_binary_sha256", lambda _path: "0" * 64)
+    with pytest.raises(adapter.RccRuntimeError, match="compatibility"):
+        adapter.prepare_runtime(
+            environment,
+            Path("/owned/rcc"),
+            runner=lambda *args: (0, "v18.19.5", "")
+            if args[-1] == "--version"
+            else calls.append(args) or (0, "{}", ""),
+        )
+    assert not calls
+    assert adapter._prepared_runtime_cache == before
+    monkeypatch.setattr(adapter, "_binary_sha256", lambda _path: _RCC5_SHA256)
+    monkeypatch.setattr(adapter, "_rcc_platform", lambda: "windows-amd64")
+    with pytest.raises(adapter.RccRuntimeError, match="compatibility"):
+        adapter.prepare_runtime(
+            environment, Path("/owned/rcc"), runner=lambda *args: (0, "v18.19.5", "")
+        )
+    assert adapter._prepared_runtime_cache == before
+
+
+@pytest.mark.parametrize(
+    "selector,version,binary_sha,source,modified",
+    [
+        (
+            _RCC5_SELECTOR,
+            "v18.19.5",
+            _RCC5_SHA256,
+            "d1aec7d0bb897a81274423c7a6bb747233f9c263",
+            True,
+        ),
+        (
+            "candidate-727-18.19.6-linux-amd64",
+            "v18.19.6",
+            "be55dadc391ae4ac7dd38356755a1698c595fdf41bd4a0141f8df7cc9d29f00e",
+            "727c1ff8b679cdbbe12836e53c87734a1edb0071",
+            False,
+        ),
+    ],
+)
+def test_approved_test_tuples_record_measured_build_source_not_functionality(
+    monkeypatch, selector, version, binary_sha, source, modified
+):
+    from actions.server import _rcc_runtime_adapter as adapter
+
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY", selector)
+    monkeypatch.setattr(
+        adapter, "_binary_sha256", lambda _path: binary_sha, raising=False
+    )
+    monkeypatch.setattr(adapter, "_rcc_platform", lambda: "linux-amd64", raising=False)
+    identity = adapter.verify_rcc_compatibility(
+        Path("/owned/rcc"), runner=lambda *args: (0, version, "")
+    )
+    assert identity.version == version
+    assert identity.source_commit == source
+    assert identity.source_modified is modified
+    assert identity.binary_sha256 == binary_sha
+    assert identity.approval == "APPROVED_TEST_ONLY"
+    assert identity.provenance_kind == "ORIGINAL_API_ASSET_OR_BUILD_RECEIPT_DATA_ONLY"
+    assert identity.required_surface == (
+        "env-publish",
+        "env-acquire",
+        "env-exec",
+        "verified-artifact",
+        "process-lease",
+    )
+
+
+def test_changed_approved_binary_cannot_reuse_source_only_cache(
+    approved_rcc5, tmp_path, monkeypatch
+):
+    adapter = approved_rcc5
+    environment = tmp_path / "package.yaml"
+    environment.write_text("spec-version: 2\ndependencies: []\n")
+    calls = []
+
+    def runner(*args):
+        calls.append(args[2])
+        return (
+            0,
+            json.dumps(
+                {
+                    "artifact": "sha256:" + "a" * 64,
+                    "artifactDigest": "sha256:" + "a" * 64,
+                    "verification": {"valid": True},
+                }
+            ),
+            "",
+        )
+
+    first = adapter.prepare_runtime(
+        environment, Path("/owned/rcc5"), source_generation="one", runner=runner
+    )
+    monkeypatch.setenv(
+        "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY", "candidate-727-18.19.6-linux-amd64"
+    )
+    monkeypatch.setattr(
+        adapter,
+        "_binary_sha256",
+        lambda _path: "be55dadc391ae4ac7dd38356755a1698c595fdf41bd4a0141f8df7cc9d29f00e",
+    )
+    monkeypatch.setattr(
+        adapter, "_rcc_version_probe", lambda _path: (0, "v18.19.6", ""), raising=False
+    )
+    second = adapter.prepare_runtime(
+        environment, Path("/owned/rcc6"), source_generation="two", runner=runner
+    )
+    assert calls == ["publish", "acquire", "publish", "acquire"]
+    assert (
+        first.rcc_compatibility.compatibility_id
+        != second.rcc_compatibility.compatibility_id
+    )
+    assert second.rcc_version == "v18.19.6"
+    assert second.preparation_class != "source-reuse"
+    with pytest.raises(adapter.RccRuntimeError, match="reprepare"):
+        adapter.prepare_runtime(
+            environment, Path("/owned/rcc6"), previous_descriptor=first, runner=runner
+        )
+
+
+@pytest.mark.parametrize("mutation", ["version", "unknown-field", "wrong-shape"])
+def test_compatibility_descriptor_namespace_remains_strict(approved_rcc5, mutation):
+    adapter = approved_rcc5
+    identity = adapter.verify_rcc_compatibility(
+        Path("/owned/rcc"), runner=lambda *args: (0, "v18.19.5", "")
+    )
+    payload = adapter.RccRuntimeDescriptor(
+        "sha256:" + "a" * 64, rcc_version="v18.19.5", rcc_compatibility=identity
+    ).to_dict()
+    if mutation == "version":
+        payload["runtime"]["rcc_version"] = "v18.19.3"
+    elif mutation == "unknown-field":
+        payload["runtime"]["rcc_compatibility"]["operator_approval"] = True
+    else:
+        payload["runtime"]["rcc_compatibility"] = []
+    with pytest.raises(adapter.RccRuntimeError, match="compatibility"):
+        adapter.RccRuntimeDescriptor.from_dict(payload)
+
+
+def test_isolated_selection_requires_explicit_binary_before_default_acquisition(
+    monkeypatch,
+):
+    from actions.server import _download_rcc
+    from actions.server import _rcc_runtime_adapter as adapter
+
+    monkeypatch.setenv("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY", _RCC5_SELECTOR)
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_BINARY", raising=False)
+    calls = []
+    monkeypatch.setattr(
+        _download_rcc,
+        "get_default_rcc_location",
+        lambda: calls.append("download") or Path("/missing"),
+    )
+    with pytest.raises(adapter.RccRuntimeError, match="compatibility"):
+        adapter.get_rcc_location()
+    assert not calls
+
+
+def test_test_only_admission_hashes_before_probe_and_never_probes_wrong_bytes(
+    approved_rcc5, monkeypatch
+):
+    adapter = approved_rcc5
+    events = []
+    monkeypatch.setattr(
+        adapter, "_binary_sha256", lambda _path: events.append("hash") or _RCC5_SHA256
+    )
+    monkeypatch.setattr(
+        adapter,
+        "_rcc_version_probe",
+        lambda _path: events.append("probe") or (0, "v18.19.5", ""),
+    )
+    assert adapter.verify_rcc_compatibility(Path("/owned/rcc")).version == "v18.19.5"
+    assert events == ["hash", "probe"]
+    events.clear()
+    monkeypatch.setattr(
+        adapter, "_binary_sha256", lambda _path: events.append("hash") or "0" * 64
+    )
+    with pytest.raises(adapter.RccRuntimeError, match="compatibility"):
+        adapter.verify_rcc_compatibility(Path("/owned/rcc"))
+    assert events == ["hash"]

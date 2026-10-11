@@ -1,7 +1,7 @@
 """The provisional RCC Environment Artifact runtime boundary for spec-v2 Actions.
 
-Only the digest in :class:`RccRuntimeDescriptor` is durable execution authority.
-The RCC executable and receipt paths are local process evidence.
+Artifact digests remain durable execution authority. Explicit isolated binary
+selections additionally bind an approved compatibility identity, never local paths.
 """
 
 from __future__ import annotations
@@ -9,8 +9,10 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import platform
 import re
 import subprocess
+import sys
 import threading
 import uuid
 from collections.abc import Callable, Sequence
@@ -32,7 +34,7 @@ _ENVIRONMENT_FIELDS = (
     "post-install",
 )
 _prepared_runtime_cache: dict[
-    tuple[Path, str, str | None], tuple[str, RccRuntimeDescriptor]
+    tuple[Path, str, str | None, str | None], tuple[str, RccRuntimeDescriptor]
 ] = {}
 _prepared_runtime_cache_lock = threading.Lock()
 
@@ -86,6 +88,168 @@ class RccRuntimeError(RuntimeError):
         super().__init__(f"RCC {phase} failed: {message}")
 
 
+# Acquisition admits these exact binaries for isolated tests, not production
+# functionality. The required surface is an expectation for the actual gates.
+_RCC_TEST_SURFACE = (
+    "env-publish",
+    "env-acquire",
+    "env-exec",
+    "verified-artifact",
+    "process-lease",
+)
+_RCC_ACQUISITION_SHA256 = (
+    "0da97bfc63a5e47de1c900e8d37ec55261d8b7ef6f68069a74167afc344c72ad"
+)
+_APPROVED_RCC_TEST_TUPLES = (
+    (
+        "released-18.19.5-linux-amd64",
+        "v18.19.5",
+        "d1aec7d0bb897a81274423c7a6bb747233f9c263",
+        True,
+        "1a617ad7c736fa67c605e20e5ebe3c7d54b02cd548f733e05c809cf49a48db1e",
+    ),
+    (
+        "candidate-727-18.19.6-linux-amd64",
+        "v18.19.6",
+        "727c1ff8b679cdbbe12836e53c87734a1edb0071",
+        False,
+        "be55dadc391ae4ac7dd38356755a1698c595fdf41bd4a0141f8df7cc9d29f00e",
+    ),
+)
+
+
+@dataclass(frozen=True)
+class RccCompatibilityIdentity:
+    version: str
+    source_commit: str
+    source_modified: bool
+    binary_sha256: str
+    platform: str = "linux-amd64"
+    runtime_kind: str = "rcc"
+    adapter_contract: str = RCC_CONTRACT_VERSION
+    provenance_kind: str = "ORIGINAL_API_ASSET_OR_BUILD_RECEIPT_DATA_ONLY"
+    provenance_sha256: str = _RCC_ACQUISITION_SHA256
+    approval: str = "APPROVED_TEST_ONLY"
+    required_surface: tuple[str, ...] = _RCC_TEST_SURFACE
+    compatibility_id: str = ""
+
+    def __post_init__(self) -> None:
+        approved = any(
+            (self.version, self.source_commit, self.source_modified, self.binary_sha256)
+            == row[1:]
+            for row in _APPROVED_RCC_TEST_TUPLES
+        )
+        if (
+            not approved
+            or not isinstance(self.source_modified, bool)
+            or self.runtime_kind != "rcc"
+            or self.adapter_contract != RCC_CONTRACT_VERSION
+            or self.platform != "linux-amd64"
+            or self.provenance_kind != "ORIGINAL_API_ASSET_OR_BUILD_RECEIPT_DATA_ONLY"
+            or self.provenance_sha256 != _RCC_ACQUISITION_SHA256
+            or self.approval != "APPROVED_TEST_ONLY"
+            or self.required_surface != _RCC_TEST_SURFACE
+        ):
+            raise RccRuntimeError("compatibility", "unapproved RCC identity")
+        value = asdict(self)
+        value.pop("compatibility_id")
+        expected = hashlib.sha256(
+            json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        if self.compatibility_id and self.compatibility_id != expected:
+            raise RccRuntimeError("compatibility", "invalid identity digest")
+        object.__setattr__(self, "compatibility_id", expected)
+
+    @classmethod
+    def from_dict(cls, value: object) -> "RccCompatibilityIdentity":
+        if not isinstance(value, dict) or set(value) != set(cls.__dataclass_fields__):
+            raise RccRuntimeError("compatibility", "invalid identity fields")
+        value = dict(value)
+        surface = value.get("required_surface")
+        if not isinstance(surface, (list, tuple)):
+            raise RccRuntimeError("compatibility", "invalid required surface")
+        value["required_surface"] = tuple(surface)
+        try:
+            return cls(**value)
+        except (TypeError, ValueError):
+            raise RccRuntimeError("compatibility", "invalid identity") from None
+
+
+def approved_rcc_test_policy(selector: str) -> RccCompatibilityIdentity:
+    for name, version, source, modified, digest in _APPROVED_RCC_TEST_TUPLES:
+        if selector == name:
+            return RccCompatibilityIdentity(version, source, modified, digest)
+    raise RccRuntimeError("compatibility", "unknown or unapproved test selection")
+
+
+def _rcc_platform() -> str:
+    machine = platform.machine().lower()
+    arch = "amd64" if machine in ("x86_64", "amd64") else machine
+    return f"{sys.platform}-{arch}"
+
+
+def admit_rcc_compatibility(
+    version: str, binary_sha256: str, *, selector: str
+) -> RccCompatibilityIdentity:
+    expected = approved_rcc_test_policy(selector)
+    if (
+        _rcc_platform() != expected.platform
+        or not isinstance(version, str)
+        or len(version) > 1024
+        or version
+        not in (expected.version, expected.version + "\n", expected.version + "\r\n")
+        or binary_sha256 != expected.binary_sha256
+    ):
+        raise RccRuntimeError("compatibility", "selected executable identity mismatch")
+    return expected
+
+
+def _binary_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    try:
+        with path.open("rb") as stream:
+            for block in iter(lambda: stream.read(1024 * 1024), b""):
+                digest.update(block)
+    except OSError:
+        raise RccRuntimeError(
+            "compatibility", "unable to measure selected executable"
+        ) from None
+    return digest.hexdigest()
+
+
+def _rcc_version_probe(path: Path) -> tuple[int, str, str]:
+    try:
+        completed = subprocess.run(
+            [str(path), "--version"], capture_output=True, text=True, timeout=10
+        )
+    except (OSError, subprocess.TimeoutExpired, UnicodeError):
+        raise RccRuntimeError(
+            "compatibility", "unable to verify selected version"
+        ) from None
+    return completed.returncode, completed.stdout, completed.stderr
+
+
+def verify_rcc_compatibility(
+    rcc_location: Path, runner: Runner | None = None
+) -> RccCompatibilityIdentity | None:
+    selector = os.environ.get("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY")
+    if selector is None:
+        return None
+    expected = approved_rcc_test_policy(selector)
+    # Measure bytes before launching even the bounded version probe.
+    digest = _binary_sha256(rcc_location)
+    if digest != expected.binary_sha256 or _rcc_platform() != expected.platform:
+        raise RccRuntimeError("compatibility", "selected executable identity mismatch")
+    code, stdout, _stderr = (
+        runner(str(rcc_location), "--version")
+        if runner is not None
+        else _rcc_version_probe(rcc_location)
+    )
+    if code:
+        raise RccRuntimeError("compatibility", "unable to verify selected version")
+    return admit_rcc_compatibility(stdout, digest, selector=selector)
+
+
 @dataclass(frozen=True)
 class RccRuntimeDescriptor:
     artifact_digest: str
@@ -98,6 +262,7 @@ class RccRuntimeDescriptor:
     contract_version: str = RCC_CONTRACT_VERSION
     provider_reference: str | None = None
     provider_context_bound: bool = True
+    rcc_compatibility: RccCompatibilityIdentity | None = None
 
     def __post_init__(self) -> None:
         if not _DIGEST_RE.fullmatch(self.artifact_digest):
@@ -110,6 +275,12 @@ class RccRuntimeDescriptor:
             r"[0-9a-f]{64}", self.environment_fingerprint
         ):
             raise RccRuntimeError("descriptor", "invalid environment fingerprint")
+        if self.rcc_compatibility is not None:
+            if (
+                not isinstance(self.rcc_compatibility, RccCompatibilityIdentity)
+                or self.rcc_version != self.rcc_compatibility.version
+            ):
+                raise RccRuntimeError("compatibility", "descriptor identity mismatch")
         _validate_provider_reference(self.provider_reference)
         if not isinstance(self.provider_context_bound, bool):
             raise RccRuntimeError("descriptor", "invalid provider context binding")
@@ -117,6 +288,8 @@ class RccRuntimeDescriptor:
     def to_dict(self) -> dict[str, object]:
         runtime = asdict(self)
         runtime["kind"] = runtime.pop("runtime_kind")
+        if self.rcc_compatibility is None:
+            runtime.pop("rcc_compatibility")
         return {"runtime": runtime}
 
     def to_json(self) -> str:
@@ -135,6 +308,10 @@ class RccRuntimeDescriptor:
         if set(runtime) - allowed:
             raise RccRuntimeError("descriptor", "unknown runtime fields")
         runtime = dict(runtime)
+        if "rcc_compatibility" in runtime:
+            runtime["rcc_compatibility"] = RccCompatibilityIdentity.from_dict(
+                runtime["rcc_compatibility"]
+            )
         if "provider_reference" not in runtime:
             # Persisted legacy descriptors lack trust-carrier identity.
             runtime["provider_context_bound"] = False
@@ -353,6 +530,7 @@ def _publish_artifact_payload(
     provider: str | None,
     runner: Runner,
 ) -> dict:
+    verify_rcc_compatibility(rcc_location)
     provider = _validate_provider_reference(provider)
     args = [
         str(rcc_location),
@@ -404,6 +582,7 @@ def acquire_artifact(
     provider: str | None = None,
     runner: Runner = _subprocess_runner,
 ) -> dict:
+    verify_rcc_compatibility(rcc_location)
     provider = _validate_provider_reference(provider)
     if not _DIGEST_RE.fullmatch(artifact_digest):
         raise RccRuntimeError("acquire", "invalid artifact digest")
@@ -447,7 +626,20 @@ def prepare_runtime(
     cache_identity = (environment_identity or environment).resolve()
     provider = _validate_provider_reference(provider)
     environment_fingerprint = environment_spec_fingerprint(environment)
-    cache_key = (cache_identity, environment_fingerprint, provider)
+    compatibility = verify_rcc_compatibility(rcc_location)
+    if (
+        previous_descriptor is not None
+        and previous_descriptor.rcc_compatibility != compatibility
+    ):
+        raise RccRuntimeError(
+            "compatibility", "descriptor selection changed; reprepare required"
+        )
+    cache_key = (
+        cache_identity,
+        environment_fingerprint,
+        provider,
+        compatibility.compatibility_id if compatibility else None,
+    )
     source_hash = source_generation
     if source_hash == "unknown":
         source_hash = hashlib.sha256(environment.read_bytes()).hexdigest()
@@ -466,6 +658,7 @@ def prepare_runtime(
             environment_fingerprint=environment_fingerprint,
             preparation_class="source-reuse",
             rcc_version=cached_descriptor.rcc_version,
+            rcc_compatibility=compatibility,
             runtime_kind=cached_descriptor.runtime_kind,
             contract_version=cached_descriptor.contract_version,
             provider_reference=provider,
@@ -500,6 +693,8 @@ def prepare_runtime(
                 source_hash=source_hash,
                 environment_fingerprint=environment_fingerprint,
                 preparation_class="rebuild",
+                rcc_version=compatibility.version if compatibility else RCC_VERSION,
+                rcc_compatibility=compatibility,
                 provider_reference=provider,
             )
         else:
@@ -509,6 +704,8 @@ def prepare_runtime(
                 source_hash=source_hash,
                 environment_fingerprint=environment_fingerprint,
                 preparation_class="warm-reuse",
+                rcc_version=compatibility.version if compatibility else RCC_VERSION,
+                rcc_compatibility=compatibility,
                 provider_reference=provider,
             )
         with _prepared_runtime_cache_lock:
@@ -536,6 +733,8 @@ def prepare_runtime(
                 source_hash=source_hash,
                 environment_fingerprint=environment_fingerprint,
                 preparation_class="rebuild",
+                rcc_version=compatibility.version if compatibility else RCC_VERSION,
+                rcc_compatibility=compatibility,
                 provider_reference=provider,
             )
             with _prepared_runtime_cache_lock:
@@ -551,6 +750,7 @@ def prepare_runtime(
             environment_fingerprint=environment_fingerprint,
             preparation_class=descriptor.preparation_class,
             rcc_version=descriptor.rcc_version,
+            rcc_compatibility=compatibility,
             runtime_kind=descriptor.runtime_kind,
             contract_version=descriptor.contract_version,
             provider_reference=provider,
@@ -565,6 +765,8 @@ def prepare_runtime(
         source_generation=source_generation,
         source_hash=source_hash,
         environment_fingerprint=environment_fingerprint,
+        rcc_version=compatibility.version if compatibility else RCC_VERSION,
+        rcc_compatibility=compatibility,
         provider_reference=provider,
     )
     with _prepared_runtime_cache_lock:
@@ -583,6 +785,11 @@ def build_exec_command(
     if not descriptor.provider_context_bound:
         raise RccRuntimeError(
             "exec", "descriptor lacks provider trust context; reprepare required"
+        )
+    compatibility = verify_rcc_compatibility(rcc_location)
+    if descriptor.rcc_compatibility != compatibility:
+        raise RccRuntimeError(
+            "compatibility", "descriptor selection changed; reprepare required"
         )
     args = [
         str(rcc_location),
@@ -680,6 +887,13 @@ def new_receipt_path(datadir: Path) -> Path:
 
 def get_rcc_location() -> Path:
     override = os.environ.get("ACTIONS_RUNTIME_RCC_BINARY")
+    selector = os.environ.get("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY")
+    if selector is not None:
+        approved_rcc_test_policy(selector)
+        if not override:
+            raise RccRuntimeError(
+                "compatibility", "isolated selection requires an explicit executable"
+            )
     if override:
         path = Path(override)
         if not path.is_file() or not os.access(path, os.X_OK):
@@ -698,6 +912,10 @@ def get_rcc_location() -> Path:
 def verify_rcc_version(rcc_location: Path, runner: Runner = _subprocess_runner) -> str:
     """Require the selected executable to be the released RCC contract."""
 
+    if os.environ.get("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY") is not None:
+        compatibility = verify_rcc_compatibility(rcc_location, runner=runner)
+        assert compatibility is not None
+        return compatibility.version
     code, stdout, stderr = runner(str(rcc_location), "--version")
     if code:
         raise RccRuntimeError("rcc", "unable to verify RCC version")

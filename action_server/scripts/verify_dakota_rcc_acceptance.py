@@ -71,6 +71,7 @@ _SAFE_EXTRA_ENV = {
     "ACTIONS_ACCEPTANCE_POETRY",
     "ACTIONS_ACCEPTANCE_ROBOCORP_HOME",
     "ACTIONS_RUNTIME_RCC_BINARY",
+    "ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY",
     "ACTIONS_RUNTIME_RCC_TIMEOUT",
     "ACTIONS_REAL_RCC_ARTIFACT_TEST",
     "ACTIONS_RUNTIME_RCC_PROVIDER",
@@ -165,6 +166,12 @@ def child_environment(
         if forbidden:
             raise ValueError("unsupported child environment override")
         env.update(extra)
+    selector = env.get("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY", source.get("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY"))
+    if selector is not None:
+        from actions.server._rcc_runtime_adapter import approved_rcc_test_policy
+
+        approved_rcc_test_policy(selector)
+        env["ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY"] = selector
     return env
 
 
@@ -1266,6 +1273,11 @@ def run_acquire_diagnostic(
 def _verify_rcc(
     source_env: dict[str, str], *, task_root: Path, deadline: Deadline
 ) -> tuple[str, str]:
+    selector = source_env.get("ACTIONS_RUNTIME_RCC_TEST_COMPATIBILITY")
+    if selector is not None:
+        from actions.server._rcc_runtime_adapter import approved_rcc_test_policy
+
+        expected = approved_rcc_test_policy(selector)
     rcc_value = source_env.get("ACTIONS_RUNTIME_RCC_BINARY")
     if not rcc_value:
         raise RuntimeError("ACTIONS_RUNTIME_RCC_BINARY must name pinned RCC v18.19.3")
@@ -1277,11 +1289,22 @@ def _verify_rcc(
         task_root=task_root,
         extra={"ACTIONS_RUNTIME_RCC_BINARY": str(rcc)},
     )
+    if selector is not None:
+        digest = sha256_file(rcc)
+        if digest != expected.binary_sha256:
+            raise RuntimeError("RCC compatibility executable digest mismatch")
     result = run_owned_process(
         [str(rcc), "version"],
         timeout_seconds=deadline.remaining(cap=10),
         env=env,
     )
+    if selector is not None:
+        from actions.server._rcc_runtime_adapter import admit_rcc_compatibility
+
+        if result.returncode:
+            raise RuntimeError("RCC compatibility version probe failed")
+        admit_rcc_compatibility(result.stdout, digest, selector=selector)
+        return str(rcc), digest
     if result.returncode or result.stdout.strip() != RCC_VERSION:
         raise RuntimeError("candidate acceptance requires RCC v18.19.3")
     digest = sha256_file(rcc)
