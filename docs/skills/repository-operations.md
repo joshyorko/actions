@@ -668,6 +668,14 @@ preflights as separate checked calls or stop the command sequence on failure.
 Preserve failed probes and named successors, and distinguish observations made
 after a gate starts from evidence checked before that gate.
 
+Verified reuse of package environments does not populate a new checkout's
+ignored Runtime RCC fixture asset. Before tests, bind `get_default_rcc_location()`
+to the package pin and verify the owned binary's digest and mode. A matching
+already prepared Bootstrap output can be copied with its source and byte identity
+retained; this is reuse, not a new Bootstrap run or binary build. Do not bypass
+the fixture, download a substitute, or borrow unrelated generated inputs to
+clear a missing-asset failure.
+
 When running Action Server source tests from a detached checkout with a prepared
 Runtime virtualenv, put that checkout's `action_server/src`, `actions/src`,
 `actions-http-helper/src`, and `devutils/src` first on `PYTHONPATH`, and confirm
