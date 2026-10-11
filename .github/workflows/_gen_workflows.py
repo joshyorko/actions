@@ -686,8 +686,20 @@ class ActionServerTests(BaseTests):
                     "GITHUB_ACTIONS_MATRIX_NAME": "${{ matrix.name }}",
                     "CI_CREDENTIALS": "${{ secrets.CI_CREDENTIALS }}",
                     "CI_ENDPOINT": "${{ secrets.CI_ENDPOINT }}",
+                    "ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR": "${{ matrix.os == 'windows-2022' && format('{0}/native-startup-diagnostics', runner.temp) || '' }}",
                 },
                 "run": f"{run_in_env}poetry run inv test-binary --jobs 0",
+            },
+            {
+                "name": "Retain Windows native startup diagnostics",
+                "if": "always() && matrix.os == 'windows-2022'",
+                "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+                "with": {
+                    "name": "native-startup-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}",
+                    "path": "${{ runner.temp }}/native-startup-diagnostics/*.json",
+                    "if-no-files-found": "warn",
+                    "retention-days": 7,
+                },
             },
         ]
 
