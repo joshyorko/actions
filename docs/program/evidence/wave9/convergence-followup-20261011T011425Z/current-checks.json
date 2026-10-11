@@ -1,0 +1,152 @@
+{
+  "schema": "actions.final-four-head-check-observation/v1",
+  "observed_readback_end_utc": "2026-10-11 01:11:53 UTC",
+  "required_advisory_policy": "UNKNOWN",
+  "results": [
+    {
+      "n": 221,
+      "sha": "19380993febaa71238eaee3026b5c808773283ff",
+      "returned": 34,
+      "total": 34,
+      "complete_first_page": true,
+      "counts": {
+        "success": 33,
+        "skipped": 1
+      },
+      "nonpassing": [
+        {
+          "name": "publish",
+          "status": "completed",
+          "conclusion": "skipped",
+          "url": "https://github.com/joshyorko/actions/actions/runs/38087231158/job/114316389882"
+        }
+      ]
+    },
+    {
+      "n": 292,
+      "sha": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+      "returned": 19,
+      "total": 19,
+      "complete_first_page": true,
+      "counts": {
+        "success": 18,
+        "in_progress": 1
+      },
+      "nonpassing": [
+        {
+          "name": "build (macos-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38098225220/job/114348512688"
+        }
+      ]
+    },
+    {
+      "n": 310,
+      "sha": "7c98534ad4eece6d892e3bb2957471d0f1ad76e6",
+      "returned": 22,
+      "total": 22,
+      "complete_first_page": true,
+      "counts": {
+        "success": 11,
+        "skipped": 1,
+        "in_progress": 9,
+        "queued": 1
+      },
+      "nonpassing": [
+        {
+          "name": "publish",
+          "status": "completed",
+          "conclusion": "skipped",
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704407/job/114356020068"
+        },
+        {
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704372/job/114355873824"
+        },
+        {
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704372/job/114355873792"
+        },
+        {
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "queued",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704372/job/114355873741"
+        },
+        {
+          "name": "coverage",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704447/job/114355870240"
+        },
+        {
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704276/job/114355869990"
+        },
+        {
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704276/job/114355869976"
+        },
+        {
+          "name": "build (macos-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704276/job/114355869797"
+        },
+        {
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704272/job/114355869677"
+        },
+        {
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704272/job/114355869630"
+        },
+        {
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38100704272/job/114355869588"
+        }
+      ]
+    },
+    {
+      "n": 311,
+      "sha": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+      "returned": 19,
+      "total": 19,
+      "complete_first_page": true,
+      "counts": {
+        "success": 17,
+        "queued": 1,
+        "in_progress": 1
+      },
+      "nonpassing": [
+        {
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "queued",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38099013709/job/114350853713"
+        },
+        {
+          "name": "build (windows-py3.12-devmode)",
+          "status": "in_progress",
+          "conclusion": null,
+          "url": "https://github.com/joshyorko/actions/actions/runs/38099013706/job/114350853595"
+        }
+      ]
+    }
+  ]
+}

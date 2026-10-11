@@ -1,0 +1,30 @@
+{
+  "schema": "actions.bookkeeping-body-only-changes/v1",
+  "recorded_at_utc": "2026-10-11 01:13:50 UTC",
+  "pr310": {
+    "head": "7c98534ad4eece6d892e3bb2957471d0f1ad76e6",
+    "base": "19380993febaa71238eaee3026b5c808773283ff",
+    "readback_match": true,
+    "fields_changed": [
+      "body"
+    ],
+    "before_body_sha256": "9e75a64bedaf74a00fbcabe3edca9b24b648c87f9b134192f2e203d441c54fa9",
+    "after_body_sha256": "16a6a8134f502b1a6d7a999c62145ea459f36c7ec00198e05b2d81139c405fae"
+  },
+  "pr311": {
+    "head": "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+    "base": "19380993febaa71238eaee3026b5c808773283ff",
+    "readback_match": true,
+    "fields_changed": [
+      "body"
+    ],
+    "draft": true,
+    "before_body_sha256": "f3cd3de07ee6efd3ad3219972823568dc60e0ddc011365debff115724ac1990a",
+    "after_body_sha256": "1f0a113c21024eae9caeb8f2383db2235f68169d1eb4392fe43ec4b155e1da08"
+  },
+  "issue195_comment": {
+    "id": 6104087602,
+    "issue_left_open": true
+  },
+  "nonclaims": "No PR merge/close/retarget, issue closure, publication or tag mutation."
+}

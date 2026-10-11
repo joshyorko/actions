@@ -1,0 +1,36 @@
+{
+  "schema": "actions.public-convergence-followup-manifest/v1",
+  "created_at_utc": "2026-10-11T01:14:25.471034+00:00",
+  "files": [
+    {
+      "path": "docs/program/evidence/wave9/convergence-followup-20261011T011425Z/current-checks.json",
+      "bytes": 5094,
+      "sha256": "07774818ec031796c92507774d06f94c1e225875eea08d25356e547cc5ef2e95",
+      "source": "/workspace/work/actions-mk3-evidence/wave9/final-four-head-check-observation-20261011.json"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-followup-20261011T011425Z/body-only-corrections.json",
+      "bytes": 1071,
+      "sha256": "9fbb38aaa4dcc97ad25e3e99aeb94dadc026683a4da815a3a52b6a964ead1ac8",
+      "source": "root-generated additive record"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-followup-20261011T011425Z/private-preparation-status.json",
+      "bytes": 1438,
+      "sha256": "f631270fb0b1a3b60a6977cd6c62ff0a55f3e8bbe9238ed4c2f75eb056c7bd8f",
+      "source": "root-generated additive record"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-followup-20261011T011425Z/doc-receipt-dispositions.json",
+      "bytes": 949,
+      "sha256": "55ad23766fca1208fdb8812ba75ee8828cbdb2b1d309c0a3fd7305fecf72d92f",
+      "source": "root-generated additive record"
+    },
+    {
+      "path": "docs/program/evidence/wave9/convergence-followup-20261011T011425Z/README.md",
+      "bytes": 2255,
+      "sha256": "03ec3c55cc64aa13a3998359fe90deb5a2ddf3e7bb985c5999c565cf597b999c",
+      "source": "root-generated additive record"
+    }
+  ]
+}

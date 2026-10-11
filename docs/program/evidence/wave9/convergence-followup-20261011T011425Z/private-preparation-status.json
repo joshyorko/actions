@@ -1,0 +1,18 @@
+{
+  "schema": "actions.private-source-summary/v1",
+  "scope": "Sanitized status and identity only; private code, reviews and finding details excluded",
+  "last_source_checkpoint": "fafb4548540727ddb227a94dc1f88c460c992a9e",
+  "tree": "da89f2df31b01d79052a99d2e8f1ff3277a5cb75",
+  "source_status": "PRIVATE_HOLD",
+  "owner_receipt_sha256": "8a73d61d51d0116410887892497c71174404d56a903049afd68285c9dd09376d",
+  "independent_review_sha256": "f1578173ee3c2c392cf6fd31d4972430cc2618fb4c916ecee4df06f01e9b53fe",
+  "checks": "129 fake/pure contracts PASS, 1 actual-RCC skip; configured331Mypy/lint PASS",
+  "actual_metadata": "NOT_RUN",
+  "remaining": "Private inspection source boundary correction and independent review; separately implement and verify frozen-v6 supervisory deadline boundary before actual launch",
+  "last_accepted_component": "d103b9af declared-Core source GO; source scope only",
+  "local_recovery_bundle_sha256": "7b3cd697beee13f3db3c1b240df908c6ac75b9332fd21b931af386ebbbe1b467",
+  "local_recovery": "Bundleverify + restore exactfafb/tree + connectivityPASS; requires complete d21 and d103 incremental bundles",
+  "remote_private_recovery": "NOT_PROVEN",
+  "documentation_disposition": "Private child-context/profile guide proposal is deferred with source HOLD, not accepted public engineering guidance; no private payload published",
+  "upstream_disposition": "none; private source review, no actual execution/report"
+}
