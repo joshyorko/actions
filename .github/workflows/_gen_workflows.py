@@ -647,6 +647,7 @@ class ActionServerTests(BaseTests):
             "community",
             "integration/**",
         ]
+        parts["on"]["pull_request"]["paths"].append(".gitattributes")
         return parts
 
     def published_canvas_acceptance(self):
@@ -2533,6 +2534,7 @@ class ActionServerPyPiRelease(BaseWorkflow):
                 "pull_request": {
                     "branches": ["community", "integration/**"],
                     "paths": [
+                        ".gitattributes",
                         ".github/workflows/_gen_workflows.py",
                         ".github/workflows/actions_runtime_pypi_release.yml",
                         ".github/workflows/actions_runtime_binary_release.yml",
