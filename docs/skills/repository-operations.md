@@ -1145,7 +1145,9 @@ is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
 repository, immutable ref, and full SHA, or accepts an already downloaded directory; it
 never rebuilds. It verifies the exact seven artifacts and retained
-`actions-runtime-manifest.sha256` before running Twine 6.2.0. With `--publish`,
+`actions-runtime-manifest.sha256`. `--dry-run` then returns without running
+Twine or reading publication credentials; retain a separate strict Twine
+result when admitting metadata. The publishing path requires Twine 6.2.0. With `--publish`,
 the script reads only `PYPI` from the process environment or ignored repo-root
 `.env`, never prints or puts the token in arguments, and injects it only into
 Twine's child environment. Example commands are:
@@ -1166,6 +1168,33 @@ not an identity binding. Binary signing selection is split into expression-gated
 and unsigned steps so POSIX test syntax is never sent to the Windows PowerShell shell.
 Binary release names use GitHub expressions containing `${{ github.ref_name }}`; shell
 literals such as `$tag-linux64` are not valid action inputs.
+
+The `--run-id` provenance gate also applies to dry runs and rejects pull-request
+producers. For nonpublishing admission of independently verified PR artifacts,
+measure the downloaded ZIP and every manifest member, retain the repository,
+workflow, run and artifact identity and actual checkout SHA, tree and ordered
+parents, then use `--dist-dir DIRECTORY --dry-run`. This proves the seven-artifact
+byte inventory; it does not grant tag or publication provenance. A run's API head
+can differ from its actual synthetic merge checkout, so record both identities.
+
+Stage only the selected host cp312 wheel when calling
+`verify_published_runtime_floor.py`: the complete release inventory contains
+three cp312 platform wheels and its selector requires exactly one. Its isolated
+public install and import verification checks loaded imports and exact public
+dependency URLs and digests. Combine that result with the installed-wheel
+contract's full Python-member byte and private-Core import guard. Derive the
+member inventory from the selected wheel, retain it before removing the clean
+environment, and bind each receipt to that wheel and producer. An older wheel's
+member count, source or passing receipt cannot qualify a newer artifact.
+
+Installed-member byte equality proves the installed files match the selected
+wheel; it does not prove that build-generated payloads are complete. Bind tracked
+Python members to the producer tree and record generated members separately.
+Check each generator's acquisition exit status and resulting payload in the
+retained wheel. A successful wheel build, import smoke and private-Core scan can
+coexist with empty generated configuration when acquisition failure is ignored.
+Keep generated-payload admission separate from installed-wheel identity and
+dependency-floor admission.
 
 The generated `actions_runtime_recovery.yml` workflow is the only recovery lane for an
 immutable Runtime tag. Its required `release_ref` and full 40-hex `release_sha` inputs
@@ -1231,10 +1260,44 @@ after manifest creation and Twine checking, before artifact retention or upload.
 The verifier accepts cibuildwheel's interpreter-plus-ABI wheel names for the
 cp312/cp313 manylinux x86_64, macOS 12 arm64, and Windows amd64 set while
 rejecting mismatched ABI tags. The sdist and wheel build steps expose only
-`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR builds run equivalent frontend and
-OAuth generation without credentials; PAT-bearing variants are limited to tag
-pushes. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
+`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR builds run frontend and OAuth
+generation without credentials; matching command names do not establish matching
+generated payloads or successful source acquisition. PAT-bearing variants are
+limited to tag pushes. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
 from the child environment, while upload receives only the exact PyPI token.
+
+`inv build-oauth2-config` delegates to Runtime's installed Poetry environment.
+Generated and manual OAuth artifact producers install Runtime through `inv install`
+or `inv devinstall` before invoking the task. PyYAML is a Runtime dependency;
+repository-root devutils requirements do not guarantee it in the outer Invoke
+interpreter. The task removes outer virtualenv, Conda and Python activation hints
+from the replacement child environment so Poetry selects Runtime's environment.
+Removing only `VIRTUAL_ENV` leaves an active RCC `CONDA_PREFIX` able to select the
+toolchain interpreter. Verify the actual
+Invoke-to-Poetry boundary with controlled acquisition, including failure, rather
+than qualifying only direct helper calls.
+
+The OAuth build guard checks each binary acquisition's exit status and bounds it
+to 30 seconds. It rejects invalid UTF-8, blank bodies, malformed safe YAML and
+documents lacking mapping root, `oauth2Config` and `providers` values. Both inputs
+must pass before a same-directory atomic module replacement. The module retains
+the original strings, including their line endings; failure preserves the previous
+module and primary exception while attempting to remove only task-owned temporary
+files. A cleanup failure is reported separately without replacing the primary error.
+CLI failures expose fixed input names and reason categories, never raw acquisition
+stdout, stderr, configuration or credentials.
+
+These checks establish acquisition and consumer-compatible structural shape only.
+They do not establish an approved source pair or revision, supported provider
+policy, or actual OAuth behavior. An empty providers mapping is structurally
+admissible, without qualifying it as release content. The existing unpinned
+`Sema4AI/oauth-public-configs` authority remains unchanged; full OAuth and release
+source admission remain on hold until the owner identifies the authoritative pair.
+Do not replace unavailable input with a guessed repository, provider stub,
+successful skip or disabled-provider policy. Recovery invokes the task from
+immutable `release-source/action_server`, so the installed environment and task
+version belong to that source; a current helper fix does not repair an older
+release target.
 
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The
