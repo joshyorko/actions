@@ -73,12 +73,13 @@ def test_actual_reload_closure_compensates_nondurable_sqlite_commit(
         Action,
         ActionPackage,
         McpCatalogName,
+        McpResourceRouting,
         get_model_db_rules,
     )
     from actions.server._settings import Settings
 
     db = Database(tmp_path / "catalog.db")
-    db.initialize([ActionPackage, Action, McpCatalogName])
+    db.initialize([ActionPackage, Action, McpCatalogName, McpResourceRouting])
     monkeypatch.setattr(_models, "get_db", lambda: db)
     app = FastAPI()
     monkeypatch.setattr(_app, "get_app", lambda: app)
