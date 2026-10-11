@@ -263,6 +263,30 @@ limited to the initial native-executable startup; this reuses the existing
 native acceptance startup budget. Source-mode startup remains at 30 seconds,
 as do the watcher and restart deadlines.
 
+For a native first-readiness timeout, bind the failed Runtime job separately
+from passing selected native UI jobs. A timeout in `process.start()` precedes
+watched reload or catalog collision assertions and does not establish a failure
+of those semantics. RCC v18.19.3 Progress values measure the interval since the
+previous mark; retain the complete sequence and compare its sum with the caller's
+duration. The value printed beside the final holotree message is not the total,
+and the interval printed when UV starts includes the preceding micromamba and
+layer setup work. A completed environment close to the startup deadline does not
+measure the remaining ready-port work or prove a cache, provider or forwarding
+cause. Absence of a startup-cleanup exception note is not an explicit wrapper,
+reader or descendant census. Preserve unavailable cleanup fields, original failed
+tuples and unchanged readiness/cleanup deadlines; a passing different tuple or
+matching producer inputs does not explain the failure. A subsequent ordinary
+target refresh can import reviewed observation hooks without claiming a production
+fix, but requires its own complete union review and fresh gates.
+
+Verify receipt preservation by hashing its exact recorded file bytes. A
+receipt's SHA-256 identifies content; it is not a Git commit. Test ancestry with
+full recorded Git source identities and bind those checks separately from
+receipt digests. A prefix match in commit history does not substitute for either
+proof. A historical synthetic build commit may have the accepted source tree
+without being an ancestor of the current branch; retain those identities and
+compare the production inputs separately.
+
 At #311 head `c888fb4a`, Windows run `38099013706`, job `114350853595`,
 timed out at the initial native startup in the watched-reload and resource
 catalog-rollback nodes. Both had completed `ht hash` and logged `holotree
@@ -2108,6 +2132,12 @@ Action Server Mypy scans product source and ordinary tests. Generated
 use targeted module overrides rather than a global missing-import exemption. MCP SDK
 model constructors use Python field names such as `structured_content`; camelCase aliases
 remain wire-format names.
+
+When a test receipt is typed as `dict[str, object]`, narrow nested values before using
+them as mappings. Reuse an assertion-backed section helper or a `TypeGuard` that checks
+string keys; do not use casts or type ignores to make membership checks compile. This
+keeps malformed test receipts failing at runtime while satisfying the configured Mypy
+checks that include ordinary tests.
 
 Action Server keeps deprecation warnings actionable: repository-owned Pydantic models
 use `ConfigDict`, and build timestamps are timezone-aware UTC values. Pytest suppresses
