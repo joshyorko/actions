@@ -1,0 +1,31 @@
+{
+  "status": "NORMAL_EXISTING_BRANCH_PUSH_VERIFIED_SOURCE_ONLY",
+  "captured_at": "2026-10-11T08:47:27.399134+00:00",
+  "pr": 305,
+  "head": "6390270cd07851448b7b325c81c98dc11a1d3a17",
+  "tree": "6ab0a1c559b583eb7bfd442fa4260aa75af91fdf",
+  "branch": "test/canvas-runtime-cache-isolation-20261010",
+  "named_remote": "6390270cd07851448b7b325c81c98dc11a1d3a17",
+  "authenticated_second_readback_head": "6390270cd07851448b7b325c81c98dc11a1d3a17",
+  "target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "draft": true,
+  "first_api_readback": "cached predecessor retained; second authenticated readback confirms current head and target",
+  "source_and_independent_receipts": [
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/frozen-source-receipt.json",
+      "sha256": "8385812a98dcd387122a2fda39290e3609b278b41bd875b52e43de34ec87bce9",
+      "bytes": 15012
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-independent-review/independent-frozen-source-review.json",
+      "sha256": "3c3524ca1338e5bef2c4a28cccf0aebf3565f984e207fd5154d46b53330ed92c",
+      "bytes": 6329
+    }
+  ],
+  "remaining_HOLD": [
+    "fresh complete hosted CI and policies",
+    "actual merge and independent readback",
+    "current native/provider/private/full contract acceptance",
+    "Runtime publication and retained issue graph"
+  ]
+}

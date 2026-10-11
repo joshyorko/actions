@@ -1,0 +1,56 @@
+{
+  "status": "PASS_EXACT_WORKFLOW_NORMALIZATION_AND_NINE_SOURCE_BINDING",
+  "S": "7eb5bce946750555ab009f77592862920a901506",
+  "S_tree": "3ff76037779763d0461ff3a755b900c9ed83dcf8",
+  "workflow_only5identity_substitutions_and_addedexistingbranch": true,
+  "all_original_profile_selectors_onepublish_Core1_0_2_rawsummary_budget_bytes_preserved": true,
+  "nine_source_sample": {
+    "action_package_handler": {
+      "path": "action_server/src/actions/server/_action_package_handler.py",
+      "mode": "100644",
+      "sha256": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64"
+    },
+    "actions_import": {
+      "path": "action_server/src/actions/server/_actions_import.py",
+      "mode": "100644",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    "runtime_adapter": {
+      "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "mode": "100644",
+      "sha256": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a"
+    },
+    "rollback_test": {
+      "path": "action_server/tests/action_server_tests/test_current_candidate_import_rollback.py",
+      "mode": "100644",
+      "sha256": "60d81fabaa2ba0446ff888109e050c883ee944553794636fd527a6fe27d4691b"
+    },
+    "staged_consumer_test": {
+      "path": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "mode": "100644",
+      "sha256": "0edc5d092dba9415f552ee1f666edac8f3ce9e833bea1ef73f8370ed2d446e6a"
+    },
+    "source_staging": {
+      "path": "action_server/src/actions/server/deployments/source_staging.py",
+      "mode": "100644",
+      "sha256": "fda3f2c045414a9cae21cc0765a3eb7c72db2ddd2f5d74e567a04a0513baf620"
+    },
+    "source_read": {
+      "path": "action_server/src/actions/server/deployments/source_read.py",
+      "mode": "100644",
+      "sha256": "4ae8cbe57aa5c924585f4257a1be1700aa49baa63d6150efba20935045f7a8a5"
+    },
+    "source_manifest": {
+      "path": "action_server/src/actions/server/deployments/source_manifest.py",
+      "mode": "100644",
+      "sha256": "4fb8d376d1b4aa06d301dedaeee67a2916561c7d10b8f1dadd657870b37b2b43"
+    },
+    "acceptance_helper": {
+      "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "mode": "100644",
+      "sha256": "e4a311dd9e6dd6fa98b0257f37716b7e326eeac7f2beb8d9324802e40878fba3"
+    }
+  },
+  "nine_source_sample_count": 9,
+  "scope": "Exactsource9sampleunderS, separate completeproducer268+5. No actual/native/private/wholewheel claims."
+}

@@ -1,0 +1,12 @@
+{
+  "owning_canonical_file": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+  "exact_accepted_patch": {
+    "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+    "bytes": 897,
+    "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+  },
+  "verified_existing_exact_block": "An empty visible ruleset list does not resolve an inaccessible traditional\nbranch-protection endpoint. Bracket a paginated census with live named-ref\nreadbacks. If the target advances during collection, retain the old tuple and\nquery the new head separately; do not transfer its predecessor's passing CI.\n",
+  "block_sha256": "1a43e678678f10a9bf8ac7c3507677b4530c2406c424f95e5c09d0eb2d20b42e",
+  "current776_source_guide_contains_block": false,
+  "disposition": "Accepted lesson already integrated in canonical checkpoint; not current776 source-guide assertion, no duplicate docs child."
+}

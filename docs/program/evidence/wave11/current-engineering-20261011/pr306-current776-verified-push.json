@@ -1,0 +1,31 @@
+{
+  "status": "NORMAL_EXISTING_BRANCH_PUSH_VERIFIED_SOURCE_ONLY",
+  "captured_at": "2026-10-11T08:47:27.399134+00:00",
+  "pr": 306,
+  "head": "662014533d8104c1998bce26d91211140acc08e5",
+  "tree": "118b7d6f7c51107a08e062825c5fabbb5496975c",
+  "branch": "fix/database-savepoint-admission-20261010",
+  "named_remote": "662014533d8104c1998bce26d91211140acc08e5",
+  "authenticated_second_readback_head": "662014533d8104c1998bce26d91211140acc08e5",
+  "target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "draft": true,
+  "first_api_readback": "cached predecessor retained; second authenticated readback confirms current head and target",
+  "source_and_independent_receipts": [
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/frozen-source-receipt-final-successor.json",
+      "sha256": "2d85e5b9e3842368e60c2c935680ad2376e0e38e88d832256361fa78f0ae40e6",
+      "bytes": 18457
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-independent-source-review/independent-frozen-current776-handoff-source-review.json",
+      "sha256": "6daedc292da9f47659c646ebc88267df3efa696480200fd651fce22691f11ae2",
+      "bytes": 11485
+    }
+  ],
+  "remaining_HOLD": [
+    "fresh complete hosted CI and policies",
+    "actual merge and independent readback",
+    "current native/provider/private/full contract acceptance",
+    "Runtime publication and retained issue graph"
+  ]
+}

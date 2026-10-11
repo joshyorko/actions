@@ -1,0 +1,25 @@
+{
+  "status": "EXACT_AUTHENTICATED_CURRENT_BODIES_AND_PRESERVED_PRIOR_CONTEXT",
+  "bodies": [
+    {
+      "number": 101,
+      "kind": "issue",
+      "body_bytes": 33288,
+      "body_sha256": "891ce74e5ef204bc5e26d6c7ebde3c5c873774cdab2a57d7f64a5b993ba5fc93",
+      "preserved_previous_body": true,
+      "original_audited_suffix_bytes": 28075,
+      "original_audited_suffix_sha256": "d6aa504c67bb72508006751c65d0d575d2e108a1ae3f677034723ee8101843b7"
+    },
+    {
+      "number": 221,
+      "kind": "pr",
+      "body_bytes": 12477,
+      "body_sha256": "2e12c5653db1b32bcef1330b8b42f432cd4c71c8e744b5b28c8c6bb1a50b8760",
+      "preserved_previous_body": true,
+      "head": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "draft": true
+    }
+  ],
+  "no_221merge_issueclosure_release": true,
+  "upstream_disposition": "none"
+}

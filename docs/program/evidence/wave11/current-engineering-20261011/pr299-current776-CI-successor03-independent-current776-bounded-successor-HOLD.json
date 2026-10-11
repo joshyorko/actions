@@ -1,0 +1,303 @@
+{
+  "schema": "actions-pr299-current776-bounded-admission-successor-census/v3",
+  "verdict": "HOLD_ONE_REQUIRED_MAC_FRONTEND_JOB_RUNNING_DRAFT_AND_TRADITIONAL_POLICY_UNKNOWN",
+  "observed_at": "2026-10-11T08:48:51.655Z",
+  "subject": {
+    "source": "3155fc55ea7d47afbc547fddc963b5860462924b",
+    "target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "synthetic": "600d1b213fcfe6f94f341cbe4bca4472bd002e4c",
+    "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+    "ordered_synthetic_parents": [
+      "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "3155fc55ea7d47afbc547fddc963b5860462924b"
+    ],
+    "named_refs_bracketed_unchanged": true
+  },
+  "previous_successor_preserved": {
+    "path": "/workspace/engineering/pr299-current776-CI-admission-review/bounded-successor-02/independent-current776-bounded-successor-HOLD.json",
+    "bytes": 22347,
+    "sha256": "d2837ff04044ddc2deb84640966164e3764ac560340e64c0d39a1d9d0aab4107"
+  },
+  "source_review": {
+    "path": "/workspace/engineering/pr299-actual776-independent-review/independent-frozen-source-review.json",
+    "bytes": 6360,
+    "sha256": "40b79b4acb2909634c6c6cf66f17b5404f8d9b2ca722627c0e8db3127b8269d2"
+  },
+  "source_declared_job_inventory": {
+    "path": "/workspace/engineering/pr299-current776-CI-admission-review/declared-current-workflow-and-job-inventory.json",
+    "bytes": 51617,
+    "sha256": "16f804cb80b24c03ef32a8b0604482506c80f040313ade98193246536dcbb39b"
+  },
+  "all20_job_check_bindings": [
+    {
+      "id": 114420728218,
+      "name": "audit",
+      "run": 38122766365,
+      "workflow": ".github/workflows/ai-audit.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728189,
+      "name": "coverage",
+      "run": 38122766368,
+      "workflow": ".github/workflows/coverage-gate.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728399,
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "run": 38122766384,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728516,
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "run": 38122766384,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728530,
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "run": 38122766384,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728535,
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "run": 38122766384,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728547,
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "run": 38122766384,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728549,
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "run": 38122766384,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728456,
+      "name": "build-sdist (ubuntu-py3.12)",
+      "run": 38122766386,
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728631,
+      "name": "build-wheels (macos-15)",
+      "run": 38122766386,
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728633,
+      "name": "build-wheels (windows-2022)",
+      "run": 38122766386,
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728674,
+      "name": "build-wheels (ubuntu-22.04)",
+      "run": 38122766386,
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114426104242,
+      "name": "publish (3.12)",
+      "run": 38122766386,
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728280,
+      "name": "build (windows-py3.12-devmode)",
+      "run": 38122766410,
+      "workflow": ".github/workflows/actions_runtime_tests.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728496,
+      "name": "build (macos-py3.12-devmode)",
+      "run": 38122766410,
+      "workflow": ".github/workflows/actions_runtime_tests.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728618,
+      "name": "build (ubuntu-py3.12-devmode)",
+      "run": 38122766410,
+      "workflow": ".github/workflows/actions_runtime_tests.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728427,
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "run": 38122766422,
+      "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420728573,
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "run": 38122766422,
+      "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+      "event": "pull_request",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 114420728668,
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "run": 38122766422,
+      "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 114420725572,
+      "name": "copilot-setup-steps",
+      "run": 38122765590,
+      "workflow": ".github/workflows/copilot-setup-steps.yml",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "expected_PR_workflows": 6,
+  "expected_PR_jobs": 19,
+  "matching_push_auxiliary_jobs": 1,
+  "check_counts": {
+    "completed_success": 19,
+    "in_progress": 1
+  },
+  "job_counts": {
+    "completed_success": 19,
+    "in_progress": 1
+  },
+  "remaining_job": {
+    "id": 114420728573,
+    "name": "Build Action Server binary without credentials (macos-15)",
+    "run": 38122766422,
+    "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+    "event": "pull_request",
+    "status": "in_progress",
+    "conclusion": null
+  },
+  "mac_Runtime": {
+    "job": 114420728496,
+    "run": 38122766410,
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "late_publisher": {
+    "job": 114426104242,
+    "run": 38122766386,
+    "status": "completed",
+    "conclusion": "success",
+    "scope": "PR artifact validation; upload steps are push-only; no publication claim"
+  },
+  "complete_pagination_counts": {
+    "checks-page1": 20,
+    "runs-page1": 7,
+    "jobs-38122766365": 1,
+    "jobs-38122766368": 1,
+    "jobs-38122766384": 6,
+    "jobs-38122766386": 5,
+    "jobs-38122766410": 3,
+    "jobs-38122766422": 3,
+    "jobs-38122765590": 1,
+    "statuses-page1": 0,
+    "statuses-synthetic-page1": 0
+  },
+  "reviews_threads_requests": {
+    "reviews": 0,
+    "threads": 0,
+    "requested_reviewers": 0,
+    "requested_teams": 0
+  },
+  "PR_state": {
+    "draft": true,
+    "mergeable": true,
+    "mergeable_state": "unstable"
+  },
+  "policy": {
+    "branch_protected": false,
+    "branch_metadata": {
+      "enabled": false,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "visible_rulesets": [],
+    "traditional_protection": "UNKNOWN: 403 Resource not accessible by integration. Not bypass permission."
+  },
+  "raw_private_API": {
+    "path": "/workspace/engineering/pr299-current776-CI-admission-review/bounded-successor-03/private-authenticated-api-census.json",
+    "bytes": 494077,
+    "sha256": "9b4a6201f8178f911b8df9adb883f840deb0e72b9ed1ada22b0b3ed6bfd3a13d"
+  },
+  "qualification_boundary": "No final merge GO: mandatory frontend macOS job in progress; draft remains true and traditional policy inaccessible. No Windows/Linux original log acquisition because all-success prerequisite is unmet. Synthetic Git API identity is authenticated; runner actual checkout and integration/collision node outcomes remain unobserved. Current Windows/macOS/Linux Runtime job SUCCESS is metadata only. Original299 collision/startup failure and cause/cleanup uncertainty remain historical. Current274 native production inputs versus92498 seven changes plus six additions remain UNQUALIFIED; provider/backend/private/full134/Runtime publication/issue closure gates remain HOLD. #300 waits actual accepted #299 integration.",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Retain accepted exact declared-jobs/dependency-created publisher/YAML trigger/policy/ref-bracket paragraphs in docs/skills/repository-operations.md; no redundant new prose.",
+    "Exact_verified_excerpt": {
+      "path": "/workspace/engineering/pr299-current776-CI-admission-review/canonical-existing-job-trigger-policy-lessons.md",
+      "bytes": 2764,
+      "sha256": "4054b1d8bc396bd9a4c1054393cfe8cb3566638213ef9e04b34fc7ea1d42a7a4"
+    },
+    "Durable_learning_captured": "Complete registered pagination and producer success do not complete the declared PR job set. Reconcile current job/check identities, treat pending jobs separately from failure, and require terminal success before acquiring conditional runner evidence.",
+    "Evidence": "Exact3155 workflows declare19 PR jobs plus1 matching push auxiliary; seven attempt1 runs register20 matching checks/jobs;19 SUCCESS with frontend macOS114420728573 still IN_PROGRESS; Runtime macOS114420728496 and late publisher114426104242 now SUCCESS; stable776/3155/600d/99ac refs.",
+    "Stale_or_ambiguous_guidance_removed": "No old-head green carry, pending as failure, all-runtime-green as all-PR-green, job metadata as case/checkout evidence, late publisher omission, or empty rulesets as traditional policy permission.",
+    "Remaining_uncertainty": "Remaining frontend terminal result; draft readiness; inaccessible traditional policy; actual runner checkout/test census; native/provider/private/full issue and release gates."
+  },
+  "actions": "One bounded authenticated metadata census with stable before/after named refs and complete first pages. No busywait, log/artifact acquisition, rerun, cancel, source/index/ref mutation, native/service execution, push or merge.",
+  "upstream_disposition": "none"
+}

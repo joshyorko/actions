@@ -1,0 +1,138 @@
+{
+  "job_id": 114414469647,
+  "run_id": 38120640953,
+  "status": "completed",
+  "conclusion": "success",
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Checkout repository and submodules",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install the latest version of uv",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install Python 3.12",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install devutils requirements",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install project (not dev)",
+      "status": "completed",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Install project (dev)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Setup go",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Setup node",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build frontend",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build OAuth2 config",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Test Go wrapper child lifecycle",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build binary",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Upload artifact: action_server/dist/final/",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Test (not integration)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install Playwright Chromium for Runtime browser acceptance",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Test (integration)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Retain Windows native startup diagnostics",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "`inv lint`, potentially fixed with `inv pretty`",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "`inv typecheck`",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "`inv docs` with checking on files changed",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Setup node",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Setup go",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Install the latest version of uv",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Checkout repository and submodules",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}

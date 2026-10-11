@@ -1,0 +1,10 @@
+{
+  "status": "READY_ONE_FULL_AFTER_EXPLICIT_ROOT306_RELEASE",
+  "source": "6390270cd07851448b7b325c81c98dc11a1d3a17",
+  "tree": "6ab0a1c559b583eb7bfd442fa4260aa75af91fdf",
+  "source_clean": true,
+  "all1410_original_pre_full_hashes_still_exact": true,
+  "free_bytes": 2552184832,
+  "root_release": "306terminal1233PASS13SKIP15warn/RCC0/post1409exact;ONE305full600TERM10KILL2workers",
+  "no_new_light_or_installer": true
+}

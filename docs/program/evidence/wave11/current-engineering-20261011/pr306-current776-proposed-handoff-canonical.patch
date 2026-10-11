@@ -1,0 +1,16 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -3511,3 +3511,13 @@
+ tag workflow must still be followed by registry file/hash and installed public
+ API verification. Never move a tag or replace a published distribution to recover
+ a failed release.
++
++For watched MCP ownership handoffs between independently refreshed packages, a new
++candidate route being listed does not prove the previous package has relinquished
++its declarations. An assembled-catalog control can publish the new template while
++the old direct route remains listed and still validly serves the old owner. Wait
++for all intended candidate declarations and the absence of every old declaration
++before asserting historical-owner rejection. Keep callback nonexecution and
++unrelated-URI success checks. The two resource-list RPCs are separate observations;
++this barrier is not an atomic catalog snapshot, nor proof of a hosted failure's
++actual update order. Preserve deadlines and the original failed execution tuple.

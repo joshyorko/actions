@@ -1,0 +1,32 @@
+{
+  "status": "EXACT_AUTHORED_CONSTRUCTOR_RECOVERED_NO_EXECUTION",
+  "original_predecessor_receipt": {
+    "path": "/workspace/engineering/pr306-actual776-refresh/frozen-source-receipt-construction-draft.json",
+    "bytes": 18155,
+    "sha256": "efe56fd3b844baae8f7cdfb8a552a81947d7fee71fc4245d44d2ca3c49448eb7"
+  },
+  "known_original_constructor_binding": {
+    "path": "/workspace/engineering/pr306-actual776-refresh/freeze-source-receipt.py",
+    "bytes": 11281,
+    "sha256": "6c5367796b853a77cca55f0256d71ba0d42deb1e9abade55cff063a37e0622f7"
+  },
+  "recovery_source": {
+    "path": "/workspace/engineering/pr306-actual776-refresh/freeze-source-receipt-v2.py",
+    "bytes": 11583,
+    "sha256": "2048d77548dcbebd62db77756df56496609a70c78a05a995619ad3758b3be13f"
+  },
+  "method": "Reverse exactly the three recorded authored construction edits against retained v2 snapshot; accept only exact original recorded size AND SHA256. No reconstruction of logs/proofdata/source observations.",
+  "candidate_measured_bytes": 11281,
+  "candidate_measured_sha256": "6c5367796b853a77cca55f0256d71ba0d42deb1e9abade55cff063a37e0622f7",
+  "match_original_recorded_size_and_sha256": true,
+  "recovered_distinct_private_path": "/workspace/engineering/pr306-actual776-refresh/original-constructor-content-recovery/freeze-source-receipt-initial-exact-recovered.py",
+  "original_path_rewritten": false,
+  "old_predecessor_JSON_rewritten": false,
+  "constructor_executed": false,
+  "source_or_gate_replayed": false,
+  "frozen_final2d85_and_all46_bindings_preserved": true,
+  "source662_clean_unchanged": true,
+  "predecessor_disposition": "Original constructor dependency content recovered under distinct path and exact original identity; original-path occupancy and historical premature-dispatch status are not rewritten. Final source review continues against announced2d85; no automatic predecessor admission.",
+  "previous02f43_disposition": "Historical receipt correctly recorded then-unavailable original constructor; this named successor records newly verified recovery without rewriting that receipt.",
+  "Upstream_disposition": "none"
+}

@@ -1,0 +1,50 @@
+{
+  "scope": "OriginalV1preparation/V2-V4failures/V5originalactual retained, no relabel/retry/native execution",
+  "historical_files": [
+    {
+      "name": "immutable-runner-proposal.json",
+      "bytes": 12403,
+      "sha256": "7ba9410efaeaa9c144634cc76ec98a50e2f023d3bdef1e45f53c145acc1d1bca"
+    },
+    {
+      "name": "canvas-native-public-runner-v2.py",
+      "bytes": 28284,
+      "sha256": "f16f5ebefe6ac74d3259b1bbc5af6054a4aedd563e24eef7a1dfebcb0e0f2454"
+    },
+    {
+      "name": "actual-v2-failed-checkpoint.json",
+      "bytes": 9334,
+      "sha256": "989584cfeaab8a9eb26ca3cd436c594cf3b6cf322c3f17c1bc51c6d00784e79a"
+    },
+    {
+      "name": "canvas-native-public-runner-v3.py",
+      "bytes": 30332,
+      "sha256": "d7650dc023ddc714fb67fb05e336c906c6156baa5d2bbceca00ae7b07361afba"
+    },
+    {
+      "name": "actual-v3-failed-checkpoint.json",
+      "bytes": 14899,
+      "sha256": "18ebad580803103351a4c3f7a684f7e9f302a602182c699ef06450eadab29614"
+    },
+    {
+      "name": "canvas-native-public-runner-v4.py",
+      "bytes": 33806,
+      "sha256": "da4be9f4f6f01a7079f0ff285fa8339618e663425224a4873f3cf299d6787032"
+    },
+    {
+      "name": "actual-v4-failed-checkpoint-scoped.json",
+      "bytes": 23800,
+      "sha256": "21385511f183b27c92cf94d3d9acf9e19b27a6a4a41fae0827cffed30651c632"
+    },
+    {
+      "name": "canvas-native-public-runner-v5.py",
+      "bytes": 35497,
+      "sha256": "09cdc6b19f5d3d9cc94fadca23373108868521e0378d33960146b1a8522e88ad"
+    },
+    {
+      "name": "actual-v5-passed-checkpoint-corrected.json",
+      "bytes": 33914,
+      "sha256": "28b2af71d1ac7b5dd0bbd7bf7518845a2c3d208c6700fd102914cffaf449dca3"
+    }
+  ]
+}

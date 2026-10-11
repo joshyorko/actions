@@ -1,0 +1,98 @@
+{
+  "schema": "actions-independent-exact-staged516-source-bound-evidence-review/v1",
+  "verdict": "GO_EXACT_STAGED_EVIDENCE_CHECKPOINT_NORMAL_EXISTING_HANDOFF_BRANCH_COMMIT_PUSH_ONLY",
+  "subject": {
+    "parent": "439938021b4d26b73d64f9c329edfc323d158508",
+    "staged_tree": "1e1a1cbc762b6b1d74e763d6c5b321fdb27d83ee",
+    "index_fingerprint_sha256": "a4684de95471fad611bfe205bb79ed1586d03ebbb09e202fff652b0914e878d6",
+    "changed_paths": 91,
+    "clean_unstaged_untracked": true,
+    "branch": "handoff/actions-swarm-mk3-wave8-20261010"
+  },
+  "manifest": {
+    "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-20261011/manifest.json",
+    "bytes": 140744,
+    "sha256": "88bdb69b5541ed59eeafab7d545106dd57973e536a958a77428de0e96bded456"
+  },
+  "README": {
+    "path": "/workspace/engineering/campaign-checkpoint/docs/program/evidence/wave11/current-engineering-20261011/README.md",
+    "bytes": 34457,
+    "sha256": "b0bde4fab877e2275ee321e7eb74afd4a4fdb3e012161d396a89289aa758686d"
+  },
+  "canonical_guide": {
+    "path": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+    "bytes": 225915,
+    "sha256": "676c91dfd957d755d2927b6ebf6242f6ff10fc7b572fafaac7994c92cde4bd11"
+  },
+  "root_staged_identity": {
+    "path": "/workspace/engineering/checkpoint-516-staged-identity.json",
+    "bytes": 279,
+    "sha256": "8c3e812d5e2d02e10d9eb2ce7f777e0f7ab262aceb08880b979b4a05675d5e4f"
+  },
+  "source_binding_proof": {
+    "path": "/workspace/engineering/checkpoint-516-independent-review/verified-manifest-stage-source-and-nested-bindings.json",
+    "bytes": 727115,
+    "sha256": "54806b0295ade63bec658d70c2441806c6c37b1d0a2d42d0ec281e41b976f7b1"
+  },
+  "immutable_relative_source_map_proof": {
+    "path": "/workspace/engineering/checkpoint-516-independent-review/immutable-relative-source-map-binding-proof.json",
+    "bytes": 1651342,
+    "sha256": "c25a73ccf0001175a8a2a99a87152865d643c36faa810b0b138d5fdeecbe632a"
+  },
+  "read_only_verifiers": [
+    {
+      "path": "/workspace/engineering/checkpoint-516-independent-review/verify_stage.py",
+      "bytes": 7733,
+      "sha256": "0d747ff2a45ced258a92f62fb5c1bc1456bb5c19eb28fa7a2e10141daa91acbc"
+    },
+    {
+      "path": "/workspace/engineering/checkpoint-516-independent-review/verify_source_maps.py",
+      "bytes": 4504,
+      "sha256": "8c2470c2e85a9fb76af35b1909cdba5e51e83e2f62d4629cee878fb1ec575583"
+    }
+  ],
+  "verified_counts": {
+    "manifest516_stagebytes_size_sha_exact": true,
+    "prior428_entries_and_bytes_exact_immutable439_parent": true,
+    "new88_exact_explicit_collector_named_originals": true,
+    "exact91_allowed_paths_all100644": true,
+    "new74JSON14originalPATCH_only": true,
+    "direct_nested_original_bindings_exact": 779,
+    "relative_source_hashes_verified_owning_immutable_commits": 3238,
+    "historical_pre_format_metadata_observations": 2,
+    "final308_1409_source_map_exact7eb": true
+  },
+  "privacy": {
+    "new_secret_key_signedURL_JWT_pattern_hits": 0,
+    "new_URL_hosts": {
+      "github.com": 67,
+      "api.github.com": 5
+    },
+    "no_new_raw_private_logs_ZIP_native_cache_scratch_member_inventory_payloads_credentials_config_strings": true,
+    "raw_response_body_named_field": "309 initial corrected boundary receipt contains only91-byte fixed not-retained/no-private-leak-disposition string; no response body payload.",
+    "prior428": "Previously reviewed exact bytes preserved, including prior public PyJWT doctest sample, sanitized evidence and measured Chrome stdout whitespace exceptions."
+  },
+  "claim_consistency": {
+    "actual302": "776/a1c4 exactnormalmerge andf5dd/a346/d642 remain distinct. All26checks/all10runs success recorded in successor b652; original7c retained and onlytwo stalequeued summarystrings corrected. Threecase54a remains narrowCore1.0.2/publication/stagedpayload/naturalshutdownscope, notwheel/full134.",
+    "source299309": "3155/513 sourcepush1219/1245PASS13SKIP separate from futurecurrent776CI and original774checks.209production parity belongs9475 authfixture child only; actual776 adapterimport separately bound. Full152/Workspace principal/native/transport/release notinferred from73cases.",
+    "source308": "SOURCE7eb19controls/1190sourcepass and independent29c separate fromCONTROL authoring and currenthosted actualcandidate/CLIparent2510s acceptance. Negative lifecycle contract is retained. Unrelated nativeprofile/private01f/frozenv6 notimported orrecovered.",
+    "source308_earlier_format_snapshot": "099f814 observedtesthash appears in2early pre-gate maps, c84029 finalformattedtest binds7eb/final1409map. Earlierrawpreformatbody notindependentlyrecovered; originalstaticfailure/AST-onlyformatting receipt retained. No earlierhash relabeled as finalbyteidentity.",
+    "capacity": "21namespaces8batches safehash preservation withhistoricalhandles/unrecordedmetadata unknown; failed563d exists only, no inventedcontentbaseline orfailedgateGREEN.",
+    "PR221": "Draft776/communitya709, closures0, retained33checkpreflight historicalpending only. EmptygeneratedOAuthinputs remain measuredprospectivecandidatecontentHOLD despiteZIP/METADATA/RECORD integrity; no221merge/Runtimepublication/release/issueclosure."
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Accept exact staged docs/skills/repository-operations.md delta; no cosmeticchild or additionalcorrection needed",
+    "Exact_delta": {
+      "path": "/workspace/engineering/checkpoint-516-independent-review/canonical-exact-staged-delta.patch",
+      "bytes": 6817,
+      "sha256": "49b1027e0d3d654fb2c30b138e1be25697f38927c7502f7bf262302682273b52"
+    },
+    "Durable_learning_captured": "Owned file-backed assembledauthrequests and seededSQL/files/Run/counters/vault sentinels, Database.connect alias boundary,publicartifactUIfallback/nativeASGIclose1008shape; YAML1.1 onkey normalization; inaccessiblepolicy andnamedrefbracketing; candidate negativecontract/2465parent+2510envelope separate fromshort3caseprovidercontrol and source/controlsequencing.",
+    "Evidence": "Authparagraphs exact immutable513 guide (SHA28ed486c... and04a5b2dd...), source/test registration/close/DBboundary code;308negative11 block exact7eb SHA2a5c199a..., frozen19control/sourcefull1190 receipts, retainedprerequisite proof; source-linked YAMLtriggerproposal and403policy/preflight originals pluscurrent29920declaredjobHOLD evidence.516manifest/fullindex/779nested/3238immutablebindings exact.",
+    "Stale_or_ambiguous_guidance_removed": "Two oldwrapper lines nowidentify retained historicalFAIL ratherthancurrentRuntimeclaim; Counter registration separated fromactualcredential/sentinel tests; in-memorySQLite falsefixture assumptions,one-segmentartifactUIroute, WebSocketreasonfield, YAMLonbool andemptyrulesetversus403 ambiguities corrected; negativecandidatePASS andshortprovidercontrol cannotclaimpositive/fullwatchdog acceptance.",
+    "Remaining_uncertainty": "FreshengineeringCI/native/provider/backend/private/authenticatedtransport/whole134135152/Runtimepublishedcontentauthority/coldconsumer/release and221closure remainHOLD. Historicalpreformatbody andprocesshandles notreconstructed. Evidence durablity itself doesnot admitengineering source, nativeexecution orrelease."
+  },
+  "whitespace": "AuthoredREADME/manifest/guide stageddiffcheckPASS. Alloriginal rawpatch/context andprior41BChromeSPACEbeforeLF retainedunchanged; noblanketrawartifact whitespace claim.",
+  "actions": "Read-only localGit/index/file/stdlibhash/JSON/AST/staticYAML andowningimmutableGit comparisons; owned safe review files only. Rootcollector notexecuted; no source/index/ref mutation, downloads/log acquisition, restore/cleanup, application tests/gateway/native/provider/browser/installer, commit/push/merge.",
+  "upstream_disposition": "none"
+}

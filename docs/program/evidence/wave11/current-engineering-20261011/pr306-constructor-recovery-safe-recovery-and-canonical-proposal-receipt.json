@@ -1,0 +1,29 @@
+{
+  "status": "EXACT_AUTHORED_CONTENT_RECOVERED_CANONICAL_PROPOSAL_ONLY",
+  "recovery_disposition": {
+    "path": "/workspace/engineering/pr306-actual776-refresh/original-constructor-content-recovery/safe-authored-constructor-recovery-disposition.json",
+    "bytes": 2127,
+    "sha256": "fff2aa6f43995e46c843c4ce80ad81cef635d4f0de4d11607d4be37451379c97"
+  },
+  "recovered_original_constructor": {
+    "path": "/workspace/engineering/pr306-actual776-refresh/original-constructor-content-recovery/freeze-source-receipt-initial-exact-recovered.py",
+    "bytes": 11281,
+    "sha256": "6c5367796b853a77cca55f0256d71ba0d42deb1e9abade55cff063a37e0622f7"
+  },
+  "Documentation_improvement": {
+    "Canonical_file_proposed": "docs/skills/repository-operations.md",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr306-actual776-refresh/original-constructor-content-recovery/canonical-immutable-constructor-and-owner-freeze-proposed.patch",
+      "bytes": 1401,
+      "sha256": "b0ff0bf2bb0a18af8dc354e1503fd10e576873d4fa870a05b238ad35af701fe6"
+    },
+    "Durable_learning": "Preserve hash-bound authored constructors before edits; gate reviewer dispatch on owner-announced freeze; perform recovery only by exact original size/hash under distinct private path, without replay or relabelled evidence.",
+    "Evidence": "Original predecessor binds11281B SHA6c536779; retained authored snapshot reversed three recorded construction edits yields exact bytes. Shared-workspace draft18155/efe was dispatched before owner announced final18457/2d85; both receipt identities retained. Final2d85/all46bindings/source662 unchanged.",
+    "Stale_or_ambiguous_guidance_removed": "Existing content-hash paragraph did not specify preservation of receipt-constructor dependencies or distinguish shared-workspace draft visibility from owner-announced freeze; proposal adds those rules beside receipt identity guidance.",
+    "Remaining_uncertainty": "The original path contains a later authored draft; recovery does not rewrite it or historical02f43 UNAVAILABLE observation. No lost log or runtime observation is reconstructed; predecessor admission and final source review remain parent decisions."
+  },
+  "source_files_changed": false,
+  "constructors_executed": false,
+  "frozen_source_or_receipt_paths_rewritten": false,
+  "Upstream_disposition": "none"
+}

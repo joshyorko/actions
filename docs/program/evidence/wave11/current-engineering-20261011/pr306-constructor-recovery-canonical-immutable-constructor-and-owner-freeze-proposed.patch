@@ -1,0 +1,22 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -190,6 +190,19 @@
+ proof. A historical synthetic build commit may have the accepted source tree
+ without being an ancestor of the current branch; retain those identities and
+ compare the production inputs separately.
++
++Once a receipt binds an authored constructor or verifier by hash, preserve that
++exact file under an immutable name before editing it. Finalize the successor
++receipt and verify every binding before its owner announces the frozen Git tuple
++and the receipt's exact path, byte size and SHA-256 for reviewer dispatch. A file
++visible in a shared workspace during construction remains a draft observation
++until that announcement. If a bound authored file was overwritten, recover it
++from retained authored snapshots or tool-call text only when both its byte size
++and SHA-256 match the original binding. Write recovered bytes to a distinct
++private path; retain the original receipts and historical dispositions. Do not
++execute the constructor during recovery, rewrite old bindings, or infer missing
++logs and execution observations. Exact content recovery preserves the dependency;
++it does not retroactively admit the predecessor receipt.
+ 
+ At #311 head `c888fb4a`, Windows run `38099013706`, job `114350853595`,
+ timed out at the initial native startup in the watched-reload and resource

@@ -1,0 +1,227 @@
+{
+  "status": "INDEPENDENT_FROZEN_SOURCE_S_SCOPE_PROOF",
+  "head": "7eb5bce946750555ab009f77592862920a901506",
+  "tree": "3ff76037779763d0461ff3a755b900c9ed83dcf8",
+  "sole_parent": "bc4296014fed571b478bc86911217e5f1dbcdc01",
+  "ordinary_ordered_parents": [
+    "4ca431b51b018b947fac6f096ca3cdc21028dd28",
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+  ],
+  "clean": true,
+  "complete1409_ordinary_union_merge_tree_exact_no_deletions": true,
+  "only3_changed_source_paths": [
+    "action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "all1406_other_mode_blob_pairs_exact": true,
+  "all1409_current_working_bytes_modes_executable_bits_exact_Git_pre_full": true,
+  "frozen_checkpoint": {
+    "path": "/workspace/engineering/pr308-accepted-public-guard-source/SOURCE-frozen-checkpoint.json",
+    "bytes": 12828,
+    "sha256": "523e46db8f4ea12dfbb0afbe8f6d2ce675cb0aedd79658b8b4d2585f151afb8b"
+  },
+  "all31_original_refs_hash_size_exact": [
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/changed-test-format.log",
+      "bytes": 3728,
+      "sha256": "d365f0c1cb5c56a146c119238337f4d8b08d4df8d19c1cb56282c11b4c9771d6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/doctor.log",
+      "bytes": 13487,
+      "sha256": "987088d01480092d952b72d915735ef22807ecdde45a2d46aee1fd0bfff1fddb"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/exact-implemented-canonical-delta.patch",
+      "bytes": 4385,
+      "sha256": "2bd81847fda0b761e42b24c704dbe9eccda907c21f40cc3b4e5d88bf704e12f6"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/final-pre-full-source-hashes-and-capacity.json",
+      "bytes": 187820,
+      "sha256": "d174e32d66608099bf05a6ea1b07f8a3b8921032478f2f912d3235bf8323d1db"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/format-changed-test.py",
+      "bytes": 196,
+      "sha256": "c2e88c844b98d308598b0cffb0a87b848e687f3f95df780273f5acac29fce514"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/formatting-and-original-test-preservation.json",
+      "bytes": 422,
+      "sha256": "bcc4662a86814b91e6365ff41841bb8090bff2a6b81948dfa694ce6e059d717f"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/freeze-source.py",
+      "bytes": 9595,
+      "sha256": "405978a4fb2a95767a7afea9355ee060e7b814a6a0c5f98e9e3650d72362bedd"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/full-configured-source.log",
+      "bytes": 308345,
+      "sha256": "582a506a3f5318679f9b80d1629bc8aa12aa1ae1de7cdc93669a9b58c3f86ca2"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "d03086cf1c1c65efb2ec389ee3153695c6d8902c2c972e4838fc4ad8ce6d834b"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/generator-roundtrip.log",
+      "bytes": 4563,
+      "sha256": "eaa4074b8898a397e01d052471a3f5a1d0c7b88d55de8db5b8de886dbb8bcacb"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/generator-roundtrip.py",
+      "bytes": 1811,
+      "sha256": "80e15e60793d56d908cfe9eb5e6ca26725289ab83787603b57050a0db13dc1d9"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/guard-GREEN.log",
+      "bytes": 3909,
+      "sha256": "33748a9d0acfb5c5181d0128e34b194175c6791fe650b1d465febba94723d1d5"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/guard-RED.log",
+      "bytes": 50682,
+      "sha256": "84945fb6eba81cd092bc4ae85341a04531b5a546cc6086478bd6d8c82a497906"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/implemented-source-scope-pre-gates.json",
+      "bytes": 949,
+      "sha256": "33480b3bc5ab508f4de47894118254dadc9617d99d5625aeb175b28bf2f19230"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-action_server.json",
+      "bytes": 283,
+      "sha256": "f7a00c055eca6ebcd32e62cfa620b224f99ba834111d9d230937a29c9ede2f05"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "d8ab3c61fcf9ed762629848de7f5974dc488f23d963f533e7032717d29b18f1c"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-actions.json",
+      "bytes": 218,
+      "sha256": "5f39b76931c708942c66e5df09de5930082f14aa780bbbf57634c913cd0f5fef"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "0f8a5be23e17e152e1bac26efa4e81c5a9cad12821a7422edf7ac15ad8d1e6a0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "d4da434483e01c6ca190a89eae5de51ca9b5a0ef9baa32722fd2382b05bab99d"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6413,
+      "sha256": "e111c3c4a155f6c9439795863e8c8d2b4878630112e693c3b1fe0e28b4b8fc40"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/own-bootstrap-reuse.log",
+      "bytes": 6755,
+      "sha256": "5ded97ffda24205e513aac1707464752afa5951951adb81663a5466d3f8cd7c4"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/pre-source-and-ordinary-union-checkpoint.json",
+      "bytes": 431810,
+      "sha256": "9839fc79213723e0712e62049d0004447cc62a91b3ef8a2c5de1164d5a01da12"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/producer-inputs-and-pre-full-source-checkpoint.json",
+      "bytes": 229514,
+      "sha256": "38c26c9d1c8fc9d209eda1729cc3f8dc3acc7bcbf2351862b5ec89bf5c2d0a3a"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/run-full-source.py",
+      "bytes": 88,
+      "sha256": "50a01ae3d7a06581876e3c3b5d573321b352605f16c0b43327a06122e0c9a0d5"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/run-guard-controls.py",
+      "bytes": 222,
+      "sha256": "f1a986c645cf6a39d4e3e87ae60759326211d4972fd7b47d04261b272411cf94"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/run-light-gates.py",
+      "bytes": 367,
+      "sha256": "e01f8a81a75dec76c1e10d529847bba7da719660769610dcbd0d372349392693"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/scoped-static-corrected.log",
+      "bytes": 6989,
+      "sha256": "d4924d37bf6c0cce5fb3e4ba32d86f821c5db1fbcdad75852942bd0596b7a5e0"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/scoped-static.log",
+      "bytes": 6512,
+      "sha256": "5264af50dbc63b257d2f67dad54040b3ec2119e7e93b0d07e3057b458c8bc8d5"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/toolkit.log",
+      "bytes": 14344,
+      "sha256": "80567e2525576174465317879a7b1c6e003727fda57688143da02c8facb34774"
+    },
+    {
+      "path": "/workspace/engineering/pr308-accepted-public-guard-source/verify-own-bootstrap-reuse.py",
+      "bytes": 2689,
+      "sha256": "6013ee944964546a257bd5bb0b4d1711f49aa84b1727be0a45594b993fe4cd4d"
+    }
+  ],
+  "exact639_reused_helper_AST_names": [
+    "_private_deadline_receipt_file",
+    "record_supervisor_deadline_failure"
+  ],
+  "exact639_reused_timeout_handler_AST": true,
+  "exact639_seven_fixture_control_AST_names": [
+    "_worker_bytes",
+    "parent_receipt_control",
+    "test_parent_deadline_annotation_collision_preserves_unknown_worker_field",
+    "test_parent_deadline_demotes_overall_receipt_preserving_worker_measurements",
+    "test_parent_deadline_never_fabricates_missing_or_malformed_worker_receipt",
+    "test_parent_deadline_persistence_failure_preserves_primary_and_owned_files",
+    "test_parent_nondeadline_completion_keeps_original_worker_receipt"
+  ],
+  "all_original308_module_and_test_AST_after_removing_guard_only_exact": true,
+  "original_live_negative_test_AST": "test_dakota_local_rcc_action_over_authenticated_http",
+  "original_deadline_constants": {
+    "CLI_WATCHDOG_SECONDS": 2465,
+    "CLEANUP_GRACE_SECONDS": 10
+  },
+  "candidate_test_bound_seconds": 2510,
+  "original_negative_candidate_versions_argv_assertions_UNCHANGED_NOTRUN": true,
+  "full268_target_current_modeblob_equal_old92498_one_unqualified_adapter_delta": [
+    "action_server/src/actions/server/_rcc_runtime_adapter.py"
+  ],
+  "five_selected_modeblobs_equal_oldnative_target_current": [
+    "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
+    "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+    "action_server/tests/action_server_tests/test_cli_multi_package_sync.py",
+    "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py"
+  ],
+  "own30_prepared_input_hashes_original_bootstrap_log_and_five_origin_records_exact": true,
+  "RED16failed3pass_GREEN19_original_raw_log_verified": true,
+  "current_full1190_13_15_129_13_two_workers_RCCsuccess_and19_individuallyPASS": true,
+  "scoped133_1actualskip_3integration_deselect_lint301_type337_Toolkit96_gen8_all30_raw_records_current_bytes_verified": true,
+  "canonical_exact_delta": {
+    "path": "/workspace/engineering/pr308-accepted-public-guard-independent-source-review/canonical-reviewed-implemented-delta.patch",
+    "bytes": 4385,
+    "sha256": "2bd81847fda0b761e42b24c704dbe9eccda907c21f40cc3b4e5d88bf704e12f6"
+  },
+  "limits": [
+    "SOURCE GO authorizes separate CONTROL preparation only; no push/hostedactual/integration.",
+    "Guard service-free19controls does not execute2465watchdog/2510CLItest or turn negativeofflinecontract into positivecandidateacceptance.",
+    "Oldnative92498 adapter change UNQUALIFIED; whole639native/profile implementation excluded; private01f/frozen-v6 absent/full134/release HOLD."
+  ]
+}

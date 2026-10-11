@@ -1,0 +1,494 @@
+{
+  "schema": "actions-pr309-current776-complete-terminal-CI-independent/v1",
+  "verdict": "GO_COMPLETE_CURRENT_SOURCE_CI_FOR_NORMAL_READY_TRANSITION_THEN_POLICY_ENFORCED_INTEGRATION",
+  "integration_readiness": "HOLD_DRAFT_TRUE; root must make ready through ordinary API before merge; no bypass. Branch protection403 remains UNKNOWN, normal API enforcement required.",
+  "source_and_synthetic": {
+    "head": {
+      "sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "tree": "3c2c8ad1c9a067ec774eafd6f5d254cb8703213b",
+      "ordered_parents": [
+        "9475a30fbe8645fd0c6b9c2746182f7a78631059",
+        "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+      ]
+    },
+    "merge": {
+      "sha": "99e8c64a0398669fd65f216656427179fe90228a",
+      "tree": "3c2c8ad1c9a067ec774eafd6f5d254cb8703213b",
+      "ordered_parents": [
+        "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "5130638dc68161c3cfc1a437bacf0467d7cecb42"
+      ]
+    }
+  },
+  "named_refs_bracket": {
+    "head": {
+      "branch": "test/auth-route-census-20261010",
+      "before": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "after": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "stable": true
+    },
+    "base": {
+      "branch": "integration/community-release-20261008",
+      "before": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "after": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "stable": true
+    }
+  },
+  "observation_interval": [
+    "2026-10-11T08:50:14.579356+00:00",
+    "2026-10-11T08:50:19.692678+00:00"
+  ],
+  "complete_declared_PR_flows": 6,
+  "complete_declared_PR_jobs": 19,
+  "auxiliary_Copilot_push_jobs": 1,
+  "head_checks": {
+    "SUCCESS": 20
+  },
+  "full_runs_jobs": [
+    {
+      "id": 38123557771,
+      "path": ".github/workflows/ai-audit.yml",
+      "event": "pull_request",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423098821,
+          "name": "audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+      "declared_job_keys": [
+        "audit"
+      ]
+    },
+    {
+      "id": 38123557773,
+      "path": ".github/workflows/coverage-gate.yml",
+      "event": "pull_request",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423099028,
+          "name": "coverage",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+      "declared_job_keys": [
+        "coverage"
+      ]
+    },
+    {
+      "id": 38123557761,
+      "path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "event": "pull_request",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423098763,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098958,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423099026,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+      "declared_job_keys": [
+        "build-external"
+      ]
+    },
+    {
+      "id": 38123557755,
+      "path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423098756,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098878,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098884,
+          "name": "build-wheels (macos-15)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098910,
+          "name": "build-wheels (windows-2022)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114425288893,
+          "name": "publish (3.12)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+      "declared_job_keys": [
+        "build-sdist",
+        "build-wheels",
+        "publish"
+      ]
+    },
+    {
+      "id": 38123557759,
+      "path": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423098709,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098797,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098823,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098850,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098856,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098861,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+      "declared_job_keys": [
+        "toolkit"
+      ]
+    },
+    {
+      "id": 38123557753,
+      "path": ".github/workflows/actions_runtime_tests.yml",
+      "event": "pull_request",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423098852,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098973,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423099011,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+      "declared_job_keys": [
+        "build"
+      ]
+    },
+    {
+      "id": 38123555549,
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "event": "push",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423092267,
+          "name": "copilot-setup-steps",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "AUXILIARY_PUSH_COPILOT_NOT_PR_JOB_SET"
+    }
+  ],
+  "exact_job_name_matrix_suite_bijection": {
+    "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/exact-job-name-matrix-suite-bijection.json",
+    "bytes": 15557,
+    "sha256": "44819197a294bb52f11c640cecc7123676e9373c68948e6b84bca7573497a81b"
+  },
+  "publisher": {
+    "id": 38123557755,
+    "path": ".github/workflows/actions_runtime_pypi_release.yml",
+    "event": "pull_request",
+    "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+    "run_attempt": 1,
+    "status": "COMPLETED",
+    "conclusion": "SUCCESS",
+    "jobs": [
+      {
+        "id": 114423098756,
+        "name": "build-sdist (ubuntu-py3.12)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS"
+      },
+      {
+        "id": 114423098878,
+        "name": "build-wheels (ubuntu-22.04)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS"
+      },
+      {
+        "id": 114423098884,
+        "name": "build-wheels (macos-15)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS"
+      },
+      {
+        "id": 114423098910,
+        "name": "build-wheels (windows-2022)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS"
+      },
+      {
+        "id": 114425288893,
+        "name": "publish (3.12)",
+        "status": "COMPLETED",
+        "conclusion": "SUCCESS"
+      }
+    ],
+    "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+    "declared_job_keys": [
+      "build-sdist",
+      "build-wheels",
+      "publish"
+    ]
+  },
+  "actual_log_inspection": {
+    "Windows": {
+      "original_log": {
+        "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/Windows-Runtime-original.private.log",
+        "bytes": 610875,
+        "sha256": "f8157e077fd7b84d696ee54bbd2f1a9f765c06116491fd2e3611d0f8395c1f0f"
+      },
+      "job_id": 114423098973,
+      "actual_checkout_synthetic_exact": "99e8c64a0398669fd65f216656427179fe90228a",
+      "checkout_ref_and_log1_verified": true,
+      "actual_original_source_assembled_auth_cells": {
+        "unique_passed": 73,
+        "failed": 0,
+        "skipped": 0,
+        "nodeids_sha256": "b9e4ff6843c99edbd651d89b86a7a1c8ff48a1f3de05d372b4b80ff118d02daf",
+        "scope": "Real assembled in-process app with owned SQLite; fixture explicitly refuses native startup. 73 cells are source tests, distinct from binary integration."
+      },
+      "full_binary_integration": {
+        "passed": 131,
+        "skipped": 19,
+        "deselected": 1261,
+        "seconds": 1464.01,
+        "configured_command": "poetry run inv test-binary --jobs 0",
+        "scope": "Original full configured integration log; skipped native/backend/provider lanes unqualified. Not evidence every platform actual was inspected."
+      },
+      "all_summaries_safe_counts": [
+        [
+          "1164",
+          "94",
+          "",
+          "14",
+          "352.17"
+        ],
+        [
+          "131",
+          "19",
+          "1261",
+          "",
+          "1464.01"
+        ]
+      ]
+    },
+    "Linux": {
+      "original_log": {
+        "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/Linux-Runtime-original.private.log",
+        "bytes": 1287671,
+        "sha256": "1652edb2b3b483c36285d93dddc034fac56b791064f7203cc4279ba32e26e9bd"
+      },
+      "job_id": 114423099011,
+      "actual_checkout_synthetic_exact": "99e8c64a0398669fd65f216656427179fe90228a",
+      "checkout_ref_and_log1_verified": true,
+      "actual_original_source_assembled_auth_cells": {
+        "unique_passed": 73,
+        "failed": 0,
+        "skipped": 0,
+        "nodeids_sha256": "b9e4ff6843c99edbd651d89b86a7a1c8ff48a1f3de05d372b4b80ff118d02daf",
+        "scope": "Real assembled in-process app with owned SQLite; fixture explicitly refuses native startup. 73 cells are source tests, distinct from binary integration."
+      },
+      "full_binary_integration": {
+        "passed": 132,
+        "skipped": 18,
+        "deselected": 1261,
+        "seconds": 679.86,
+        "configured_command": "poetry run inv test-binary --jobs 0",
+        "scope": "Original full configured integration log; skipped native/backend/provider lanes unqualified. Not evidence every platform actual was inspected."
+      },
+      "all_summaries_safe_counts": [
+        [
+          "1246",
+          "12",
+          "",
+          "15",
+          "133.94"
+        ],
+        [
+          "132",
+          "18",
+          "1261",
+          "",
+          "679.86"
+        ]
+      ]
+    }
+  },
+  "reviews_threads": {
+    "count": 0,
+    "states": {},
+    "current_head_reviews": 0,
+    "review_comments": 0,
+    "issue_comments": 2,
+    "reviewDecision": null,
+    "threads": 0,
+    "unresolved_threads": 0,
+    "nested_comment_pagination_complete": true,
+    "GraphQL_connections_exhausted": true
+  },
+  "issue_closure": {
+    "count": 0,
+    "complete": true,
+    "issues": [],
+    "no_issue_mutation": true,
+    "whole_issue_closure_admission": "HOLD"
+  },
+  "policy": {
+    "traditional_branch_protection": "UNKNOWN_HTTP403",
+    "visible_rulesets": 0,
+    "normal_API_enforcement_required": true,
+    "no_bypass_permission": true
+  },
+  "draft": true,
+  "mergeStateStatus": "CLEAN",
+  "complete_metadata_snapshot": {
+    "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/independent-complete-current-CI-admission-HOLD.json",
+    "bytes": 34152,
+    "sha256": "91dba7317dd7c469dbf82d79597dffe33cfd4397edf118ea6351f7f3bf39324a"
+  },
+  "declaration": {
+    "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/exact-source-workflow-declaration.json",
+    "bytes": 57680,
+    "sha256": "2057934caf2edba190231b8562a4cdb4810a151106af98f165412d59d4cfa2da"
+  },
+  "source_GO": {
+    "path": "/workspace/engineering/pr309-actual776-independent-review/independent-frozen-current776-source-review.json",
+    "bytes": 6270,
+    "sha256": "a769ac74ebd6c215f89d0fa181e8038f895d666f2e95863033626733a5c76462"
+  },
+  "original_logs_once_private": {
+    "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/original-Runtime-log-acquisition.json",
+    "bytes": 950,
+    "sha256": "517184d9aef8f50de39bc6c776e2f5fb429de8231c526b78eded1d8252bb6890"
+  },
+  "transport_limitation": "Initial gh Windows redirect transport failed with empty body and private error retained; connector returned original once, no original log rerun/reacquisition.",
+  "preserved_previous_HOLD": {
+    "path": "/workspace/engineering/pr309-current776-CI-admission-review/frozen-independent-current-admission-HOLD.json",
+    "bytes": 8814,
+    "sha256": "4092ea45c2c68c99f4c2cbba37fe067a938d58801f97f74f35525f26ff32c188"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; verified reuse of exact accepted source guide deltas",
+    "Exact_delta": [
+      {
+        "path": "/workspace/engineering/pr309-actual776-independent-review/canonical-imported-target-delta-vs-auth-parent.patch",
+        "bytes": 10332,
+        "sha256": "cb9dadcba5d128b5d3241b5ae9e7a47dcf087bac77123931bc787b1ff1acf7aa"
+      },
+      {
+        "path": "/workspace/engineering/pr309-actual776-independent-review/canonical-imported-combined-delta-vs-target.patch",
+        "bytes": 5113,
+        "sha256": "26a716527452b799ae8a7178ed533a33da30912e8864531d7b319509a571cfe7"
+      }
+    ],
+    "Durable_learning_captured": "Declared PR flow/matrix/needs registration and auxiliary checks must be reconciled; synthetic metadata versus actual checkout; real assembled in-process auth73 independent of binary integration/native startup; policy403UNKNOWN is not exemption.",
+    "Evidence": "Exact513/776/99e8 stable refs,6flows19PRjobs+Copilot1 allSUCCESS, original Windows/Linux checkout and73 unique sourcePASS each, full integration131/19 and132/18; source a769 and exact guide patches verified.",
+    "Stale_or_ambiguous_guidance_removed": "No new cosmetic guide prose; verified accepted guide explicitly rejects inventory-only auth, sourcePASS as native execution, early publisher omissions or metadata-only actual checkout claims.",
+    "Remaining_uncertainty": "Draft transition pending; protection403UNKNOWN requires API enforcement; no Mac original log inspection, wholeissue152/196/Workspace/backend/publication/private/native qualification."
+  },
+  "not_run": [
+    "manual workflow rerun",
+    "native/provider/browser/consumer run",
+    "artifact download",
+    "source edit/push/merge/release"
+  ],
+  "remaining_HOLDs": [
+    "Draft must be ready before normal API merge",
+    "Full152/196/Workspace/backend/native/private/publication remain HOLD",
+    "Complete cleanup/natural exit not inferred from source or hosted jobs",
+    "Current native92498 adapter mismatch remains unqualified"
+  ],
+  "upstream_disposition": "none"
+}

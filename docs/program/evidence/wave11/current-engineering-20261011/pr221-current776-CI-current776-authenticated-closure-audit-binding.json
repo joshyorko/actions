@@ -1,0 +1,23 @@
+{
+  "status": "COMPLETE_ZERO_CLOSURE_REFERENCES_SAME_CURRENT776_TUPLE",
+  "prior_audit": {
+    "path": "/workspace/engineering/pr221-authenticated-closures-after302.json",
+    "bytes": 896,
+    "sha256": "5eb0f0146aee5cd51ab277ec6d77b95ea91dd1632cfd19d2c712b8703124a6dd"
+  },
+  "prior_preflight": {
+    "path": "/workspace/engineering/pr221-current776-preflight/frozen-readonly-preflight.json",
+    "bytes": 114464,
+    "sha256": "2d46a1f564f19281aca5ae76b0ab5bffbe1f4db0dcccf649a2bff22691a5bbdd"
+  },
+  "independent_current_frozen_receipt": {
+    "path": "/workspace/engineering/pr221-current776-independent-CI-admission-review/frozen-independent-current-admission-HOLD.json",
+    "bytes": 7094,
+    "sha256": "e831031d41f7d4cc9d6dbf0c652f69664a5e9e9cd3da1983ecdd428e6c3f2699"
+  },
+  "independent_current_count": 0,
+  "prior_historical774_audit_stays_historical": true,
+  "no_issue_or_PR_mutation": true,
+  "release_issue_closure_admission": "HOLD",
+  "upstream_disposition": "none"
+}

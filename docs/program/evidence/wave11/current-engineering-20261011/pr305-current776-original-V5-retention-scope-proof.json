@@ -1,0 +1,9 @@
+{
+  "status": "PASS_OLD305_V5_NATIVE_HELPER_BROWSER_RETENTION_FIELDS_EXACT",
+  "source_refresh_does_not_relabel_actual": true,
+  "original_3ec_source_and_native92498_tuple_retained": true,
+  "unchanged_prior_retention_metadata_except_explicit_current_execution_scope": true,
+  "canonical_import_sha256": "5b2d4d953814d9bb4287847b95e1f92a63690b7a7b6174e0206c132bd02ba36e",
+  "retained_prior_source_receipt_sha256": "0d21c19c364d2529dcccec9fd967ee467d3928cbfb8aa8929d884d1c2c2533c7",
+  "wholeproducer_vs9sample_remain_distinct": true
+}

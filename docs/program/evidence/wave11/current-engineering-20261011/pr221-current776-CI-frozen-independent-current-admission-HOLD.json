@@ -1,0 +1,173 @@
+{
+  "schema": "independent-complete-current-admission-frozen-v1",
+  "verdict": "HOLD",
+  "PR": 221,
+  "source_and_synthetic": {
+    "head": {
+      "sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+      "ordered_parents": [
+        "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+      ]
+    },
+    "merge": {
+      "sha": "19d53f9b08b6f79debe01bb2fbae205262a58339",
+      "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+      "ordered_parents": [
+        "a70993fafc99a9f94041485542d5a720797ca394",
+        "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+      ]
+    }
+  },
+  "observed_utc_interval": [
+    "2026-10-11T08:20:47.632824+00:00",
+    "2026-10-11T08:20:59.483027+00:00"
+  ],
+  "named_refs_bracketed_stable": true,
+  "PR_draft": true,
+  "exact_declared_PR_job_instances": 34,
+  "auxiliary_push_Copilot_instances": 1,
+  "check_counts": {
+    "SUCCESS": 33,
+    "SKIPPED": 1,
+    "IN_PROGRESS": 1
+  },
+  "head_check_count": 35,
+  "head_run_count": 14,
+  "head_commit_status_count": 0,
+  "synthetic_direct_checks_runs_statuses": {
+    "checks": 0,
+    "runs": 0,
+    "statuses": 0
+  },
+  "pending_check_job_ids": [
+    {
+      "id": 114417512593,
+      "name": "build (windows-py3.12-devmode)",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "app": "github-actions",
+      "status": "IN_PROGRESS",
+      "conclusion": null
+    }
+  ],
+  "pending_runs": [
+    {
+      "id": 38121679549,
+      "path": ".github/workflows/actions_runtime_tests.yml",
+      "status": "IN_PROGRESS"
+    }
+  ],
+  "reviews_and_threads": {
+    "count": 0,
+    "states": {},
+    "current_head_reviews": 0,
+    "review_comments": 0,
+    "issue_comments": 1,
+    "reviewDecision": null,
+    "threads": 0,
+    "unresolved_threads": 0,
+    "nested_comment_pagination_complete": true,
+    "GraphQL_connections_exhausted": true
+  },
+  "issue_closure": {
+    "count": 0,
+    "complete": true,
+    "issues": [],
+    "no_issue_mutation": true,
+    "whole_issue_closure_admission": "HOLD"
+  },
+  "normal_API_policy_enforcement": {
+    "traditional_branch_protection": "UNKNOWN_HTTP403",
+    "visible_rulesets": 0,
+    "normal_API_enforcement_required": true,
+    "no_bypass_permission": true
+  },
+  "actual_checkout": "UNKNOWN_WITHOUT_ORIGINAL_OWNED_LOGS",
+  "intended_synthetic_parents_tree": "VERIFIED_REST_AND_GRAPHQL_METADATA_ONLY",
+  "HOLDs": [
+    "Pending named checks/runs",
+    "Draft PR",
+    "Actual per-job checkout UNKNOWN: no owned original terminal logs acquired",
+    "Branch protection UNKNOWN403; empty visible rulesets not bypass",
+    "Full issue/backend/native/private/release gates not admitted",
+    "Owner-approved generated OAuth content authority / empty generated configuration unresolved",
+    "Final complete source/wheel/frozen and other-platform/native installed consumer qualification incomplete",
+    "Runtime registry/tag/publication authority and independent readback absent"
+  ],
+  "complete_metadata_receipt": {
+    "path": "/workspace/engineering/pr221-current776-independent-CI-admission-review/independent-complete-current-CI-admission-HOLD.json",
+    "bytes": 48908,
+    "sha256": "56c3edd257f24e199511303e1f6628b34e840741022408d7f78abac097b9dd18"
+  },
+  "exact_declared_workflow_inventory": {
+    "path": "/workspace/engineering/pr221-current776-independent-CI-admission-review/exact-source-workflow-declaration.json",
+    "bytes": 84099,
+    "sha256": "8a090c0c3b27e36556f1d01f5e3b8bfbc03e2d59cce9d0fd65aee0b77a80c2db"
+  },
+  "unique_job_matrix_suite_proof": {
+    "path": "/workspace/engineering/pr221-current776-independent-CI-admission-review/exact-job-name-matrix-suite-bijection.json",
+    "bytes": 25184,
+    "sha256": "9f9c026e281e82be0f6c98b8b39bbc1381b0f073fcd4dbf58a187d2824fd181d"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; no source edit, explicit reuse of accepted exact proposed deltas",
+    "Exact_delta": "Existing normalization/late-needs/policy/ref/checkout lessons retained verbatim; no cosmetic successor",
+    "Reused_exact_artifacts": [
+      {
+        "path": "/workspace/engineering/current299308-ci-independent-review/canonical-workflow-trigger-key-normalization-proposed.patch",
+        "bytes": 737,
+        "sha256": "c5e4a8f166a4e3c96bad2f0a93de3cc2b76eb5003d3cbaeaa07dc400ceda384c"
+      },
+      {
+        "path": "/workspace/engineering/pr302-full26-current-hosted-admission/exact-dependent-job-registration-canonical-proposal.patch",
+        "bytes": 912,
+        "sha256": "d7a0a7b9452553bb609084acdf71bb7ace68f152b5bdd419a8817e151ddeb93b"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+        "bytes": 897,
+        "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+      },
+      {
+        "path": "/workspace/engineering/pr299-current776-CI-admission-review/canonical-existing-job-trigger-policy-lessons.md",
+        "bytes": 2764,
+        "sha256": "4054b1d8bc396bd9a4c1054393cfe8cb3566638213ef9e04b34fc7ea1d42a7a4"
+      }
+    ],
+    "Durable_learning": "Preserve YAML on key, expand exact matrix/event/path set, include needs-created publisher, distinguish auxiliary push Copilot, inaccessible protection UNKNOWN and synthetic metadata versus actual checkout.",
+    "Evidence": {
+      "yaml11_boolean_on_controls": 17,
+      "declared_PR_jobs": 34,
+      "registered_late_publisher": [
+        114424254461
+      ],
+      "policy_HTTP": 403,
+      "stable_named_refs": true
+    },
+    "Stale_guidance_removed": "No existing source removed; reuse explicitly rejects early job totals, empty-status/ruleset absence inference and metadata-only checkout proof.",
+    "Remaining_uncertainty": "States span one finite non-atomic snapshot and can change after capture; original checkout logs unavailable; branch protection unavailable; no full issue/release qualification."
+  },
+  "source_push_review_binding": [],
+  "no_old_tuple_CI_carried": true,
+  "one_snapshot_no_poll_retry_logs_download_artifact_source_or_issue_mutation": true,
+  "upstream_disposition": "none",
+  "prior_current776_preflight": {
+    "path": "/workspace/engineering/pr221-current776-preflight/frozen-readonly-preflight.json",
+    "bytes": 114464,
+    "sha256": "2d46a1f564f19281aca5ae76b0ab5bffbe1f4db0dcccf649a2bff22691a5bbdd"
+  },
+  "prior_closure_audit": {
+    "path": "/workspace/engineering/pr221-authenticated-closures-after310.json",
+    "bytes": 366,
+    "sha256": "3b819438b7c3ddf1c3bdcfcbe4a99af19dd31ce0c273ca5fb227024e7e553278"
+  },
+  "prior_preflight_retained_release_HOLDs": [
+    "Owner-approved generated OAuth content authority",
+    "Final source/wheel/frozen/platform qualification",
+    "Published Runtime registry independent readback",
+    "Native distribution/checksums/Cask current cold install and upgrade",
+    "Private backend/transport/RCC metadata/provider/ChatGPT/fullissue gates",
+    "Release publication/tag authority"
+  ]
+}

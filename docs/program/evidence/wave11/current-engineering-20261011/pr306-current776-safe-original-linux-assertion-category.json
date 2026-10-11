@@ -1,0 +1,31 @@
+{
+  "tested_checkout": "11484f93750b51cafc052b46030cfcbd89f2ee18",
+  "test_source_file": "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+  "failure_helper": "_assert_mcp_error",
+  "assertion_source_line": 278,
+  "source_assertion": "assert \"error\" in result, result",
+  "caller_tracked_source_lines_only": [
+    {
+      "log_line": 8725,
+      "exact_tracked_source_line_numbers": [
+        619,
+        706
+      ]
+    },
+    {
+      "log_line": 8731,
+      "source_line_numbers": [
+        619
+      ]
+    },
+    {
+      "log_line": 8737,
+      "exact_tracked_source_line_numbers": [
+        276
+      ]
+    }
+  ],
+  "fixed_assertion_categories": [],
+  "cause": "UNKNOWN; no timing/reload/callback/state attribution from this bounded category census",
+  "phase": "resource-history semantic error assertion, after initial startup entry; no readiness-timeout classification"
+}

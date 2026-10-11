@@ -1,0 +1,517 @@
+{
+  "schema": "actions-current776-linuxcp312-consumer-preexecution/v2",
+  "status": "FROZEN_FOR_INDEPENDENT_PREEXECUTION_REVIEW_ACTUAL_HOLD",
+  "actual_consumer_executed": false,
+  "pip_install_or_download_or_publication_executed": false,
+  "authoring_authorization": "RootreleasedsourcewriterA after306fullterminal; privatepreparation nowfinished/frozen. RootsourcewriterB305full andcapacityserialization separate.",
+  "runner": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+    "bytes": 19366,
+    "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+  },
+  "input_gate": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission-v2.py",
+    "bytes": 7267,
+    "sha256": "3be2b971a43de3848c5a1aec59eecbeb6ac9dd796a81a6f2e489eab782492d1a"
+  },
+  "input_manifest": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/input-and-source-admission.json",
+    "bytes": 147945,
+    "sha256": "ff5560c8233985e2755e1e9288f780018f625a7ec4184f3eac98e4a14d50e594"
+  },
+  "producer": {
+    "control": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+    "control_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+    "source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+    "target": "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "synthetic": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+    "synthetic_ordered_parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ],
+    "synthetic_tree_equals_control": true
+  },
+  "actual_integration": {
+    "sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+    "ordered_parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    ],
+    "producer_tree_equal_actual": true,
+    "producer_not_relabelled_actual": true
+  },
+  "harness": {
+    "checkout": "/workspace/engineering/pr282",
+    "head": "c75dfa6969c2c562a59a967e2e674fea6c8af457",
+    "scope": "Ownpreparedgatewayonly; not wheelproducer. Immutablefloor/process/guard bytes equalGitactual776."
+  },
+  "artifact": {
+    "original_zip": {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/original-Linux-wheels-11693813383.zip",
+      "bytes": 28271148,
+      "sha256": "32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6"
+    },
+    "selected_cp312_wheel": {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14166151,
+      "sha256": "f82ee06c09e07bd224e797e11b7e58138920c0c8df49ef814ac50b0087d81c6c"
+    },
+    "original_prospective_review": {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-prospective-runtime103-qualification-review.json",
+      "bytes": 9081,
+      "sha256": "5ae089d08c7bb6b231d9c6adfa313d2f6961aa5ae03116829ad1b25588719578"
+    },
+    "original_detailed_inspection": {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-current-linux-wheel-inspection.json",
+      "bytes": 152714,
+      "sha256": "535b308837dab9737412243646dc085a560202dbd58b9e9315dd1cac54808c82"
+    },
+    "outer_inventory_count": 2,
+    "current_counts": {
+      "Python_members": 196,
+      "tracked_source_payloads": 209,
+      "regular_files_and_RECORD_rows": 215,
+      "hashed_RECORD_rows": 214,
+      "directories": 26
+    },
+    "count_identity": "Current196 derived from f82ee06c bytes. Same count as old0f366268 doesnotcarryoldwheel qualification;209includesnon-Pythonassets.",
+    "producer_roles": "Originalf5dd PR checkout/controla346/source d642 retained; actual776treea1c4 equalsproducer tree. Original535b/5ae preintegrationwording remains immutable historical.",
+    "content_HOLD": "GeneratedOAuth287B/f79d...bothrequiredstringsEMPTY; no approvedsourcepairauthority/content acceptance evenifconsumerimportspass."
+  },
+  "literal_runner_source_bindings": {
+    "floor": {
+      "path": "/workspace/engineering/pr282/action_server/scripts/verify_published_runtime_floor.py",
+      "sha256": "f1ad142a6cd83ca1a71ed0a6183d558a6d72f00f073b492ce0d18e563a067193"
+    },
+    "publisher": {
+      "path": "/workspace/engineering/pr282/action_server/scripts/publish_verified_runtime.py",
+      "sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c"
+    },
+    "guard": {
+      "path": "/workspace/engineering/pr311/action_server/tests/contract_tests/test_active_contracts.py",
+      "sha256": "b76ec605e343e8bec7dea6e230dad3f516eabc4fd90a2769638b0d9111a6ade0"
+    },
+    "process": {
+      "path": "/workspace/engineering/pr282/action_server/src/actions/server/_common/process.py",
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    "rcc": {
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    "artifact_review": {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-prospective-runtime103-qualification-review.json",
+      "sha256": "5ae089d08c7bb6b231d9c6adfa313d2f6961aa5ae03116829ad1b25588719578"
+    },
+    "inspection": {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/safe-current-linux-wheel-inspection.json",
+      "sha256": "535b308837dab9737412243646dc085a560202dbd58b9e9315dd1cac54808c82"
+    },
+    "input_manifest": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/input-and-source-admission.json",
+      "sha256": "ff5560c8233985e2755e1e9288f780018f625a7ec4184f3eac98e4a14d50e594"
+    },
+    "input_gate": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission-v2.py",
+      "sha256": "3be2b971a43de3848c5a1aec59eecbeb6ac9dd796a81a6f2e489eab782492d1a"
+    }
+  },
+  "unchanged_helper_snapshots_with_Git776_modeblobs": {
+    "floor": {
+      "actual_path": {
+        "path": "/workspace/engineering/pr282/action_server/scripts/verify_published_runtime_floor.py",
+        "bytes": 8925,
+        "sha256": "f1ad142a6cd83ca1a71ed0a6183d558a6d72f00f073b492ce0d18e563a067193"
+      },
+      "snapshot": {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unchanged-helper-snapshots/floor/verify_published_runtime_floor.py",
+        "bytes": 8925,
+        "sha256": "f1ad142a6cd83ca1a71ed0a6183d558a6d72f00f073b492ce0d18e563a067193"
+      },
+      "git_path": "action_server/scripts/verify_published_runtime_floor.py",
+      "actual776_mode_blob": [
+        "100644",
+        "blob",
+        "0588a4552c327fbc0a274d7d2e172671925ecf29"
+      ],
+      "git_subject": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+    },
+    "publisher": {
+      "actual_path": {
+        "path": "/workspace/engineering/pr282/action_server/scripts/publish_verified_runtime.py",
+        "bytes": 18453,
+        "sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c"
+      },
+      "snapshot": {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unchanged-helper-snapshots/publisher/publish_verified_runtime.py",
+        "bytes": 18453,
+        "sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c"
+      },
+      "git_path": "action_server/scripts/publish_verified_runtime.py",
+      "actual776_mode_blob": [
+        "100755",
+        "blob",
+        "2fd4f8f77e58fbf7b4c173122f6496daa2aa9241"
+      ],
+      "git_subject": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+    },
+    "guard": {
+      "actual_path": {
+        "path": "/workspace/engineering/pr311/action_server/tests/contract_tests/test_active_contracts.py",
+        "bytes": 38962,
+        "sha256": "b76ec605e343e8bec7dea6e230dad3f516eabc4fd90a2769638b0d9111a6ade0"
+      },
+      "snapshot": {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unchanged-helper-snapshots/guard/test_active_contracts.py",
+        "bytes": 38962,
+        "sha256": "b76ec605e343e8bec7dea6e230dad3f516eabc4fd90a2769638b0d9111a6ade0"
+      },
+      "git_path": "action_server/tests/contract_tests/test_active_contracts.py",
+      "actual776_mode_blob": [
+        "100644",
+        "blob",
+        "f7887db02e30c3aaa610bfd9bc9ea11dd468d92f"
+      ],
+      "git_subject": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+    },
+    "process": {
+      "actual_path": {
+        "path": "/workspace/engineering/pr282/action_server/src/actions/server/_common/process.py",
+        "bytes": 31134,
+        "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+      },
+      "snapshot": {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unchanged-helper-snapshots/process/process.py",
+        "bytes": 31134,
+        "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+      },
+      "git_path": "action_server/src/actions/server/_common/process.py",
+      "actual776_mode_blob": [
+        "100644",
+        "blob",
+        "6fe2c531a8267a00e1d0601b3c83842485224e5e"
+      ],
+      "git_subject": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+    }
+  },
+  "logic_preservation": {
+    "exact_original_runner_AST_functions": [
+      "digest",
+      "assert_source_bytes",
+      "load",
+      "cleanup_is_complete",
+      "finish"
+    ],
+    "INVENTORY_CODE_AST_exact_original": true,
+    "all_original19_guard_control_functions_AST_exact": true,
+    "safe_members_AST_exact_original_inspector": true,
+    "narrow_changes": "CurrentZIP/wheel/METADATA/RECORD/209source gate and immutableconfig; expandknowncheckoutroots; derivecurrent196count; retainpartialplatform/emptygeneratedholds in proof. Existingfloorinstaller/report/private-Coreguard/processcleanup bodiesunchanged.",
+    "publisher_gate": "Fullsevenvalidatorbody unchanged/snapshot retained; currentLinuxonlyscope doesnotinvoke/replacefullseven/tag/Twine/upload gate."
+  },
+  "servicefree_evidence": {
+    "canonical_gateway": "RCC18.19.3\u2192ownpreparedaction_serverPoetry; onlyfocusedexternaladmission controls andsource/ZIP/AST/Git/reportfixtures. No installedRuntime consumer bytes imported.",
+    "RED_metadata": {
+      "failed": 1,
+      "deselected": 30,
+      "reason": "Initialdraft acceptedinvalidUTF8METADATA; genuineDIDNOTRAISE control beforeexplicitUTF8guard.",
+      "log": {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-metadata-RED.log",
+        "bytes": 7776,
+        "sha256": "812d7e91eec86ea968308fc6b9e4fee5d4185a5a3f24ce02486d43e339350e87"
+      }
+    },
+    "initial_static_RED": {
+      "reason": "Two unusedimports, fixedonlynamedv2helper; originaldraftunchanged.",
+      "log": {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/private-focused-format-and-static.log",
+        "bytes": 6147,
+        "sha256": "12ae28253fe8992aa68438da58319c220e7d01f4d0f2c5c5d97880df0282c8fe"
+      }
+    },
+    "initial_fixture_mismatch": {
+      "passed": 84,
+      "failed": 1,
+      "reason": "Escapedmemberalso poisoned fouroriginfixture paths; correctearlierorigin guard rejected. Independentvalidorigins nowreach actualmemberguard.",
+      "log": {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/private-focused-green-v2.log",
+        "bytes": 13714,
+        "sha256": "6ef41082bac3875b48a8e9ec19c4b5cffde4c03d41005ea298165db34c2ea85d"
+      }
+    },
+    "final_focused_GREEN": {
+      "passed": 85,
+      "failed": 0,
+      "skipped": 0,
+      "warnings": 2,
+      "seconds": 2.71,
+      "RCC_exit": 0,
+      "session": 59498,
+      "gateway_bound_seconds": 180,
+      "kill_grace_seconds": 10,
+      "log": {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/private-focused-green-v3.log",
+        "bytes": 6906,
+        "sha256": "9c0aa16de30eed3f73c6ec5821c244f5e68eefa0c45807334084eb35ba7af953"
+      },
+      "commands": {
+        "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/run-private-focused-green-v3.py",
+        "bytes": 663,
+        "sha256": "3f817fbd53a1c32d42b32e91dc5e7f67a08e93aadb1161eabcfd2610343e544e"
+      }
+    },
+    "configured_static": "Ruffcheck/format4files andownIsortPASS; explicitpackagepytestconfig. Two warnings intentionalduplicateZIP andretainedoldemptyregexmatch.",
+    "meaningful_negative_boundaries": [
+      "Actualmemberguard: missing/extra/mutated/escaped/symlinked files; wrongwheel/base/version",
+      "Unimportedprivate-Core direct/fromimport/alias/relative/builtin/concatenated imports",
+      "All15knowncheckout roots +aliases/moduleorigin poison",
+      "Actualpublicfloorreport Core1.0.2/Helper1.0.3 exactURL/SHA/version/missing cases",
+      "OriginalsafeZIPname duplicate/traversal/absolute/backslash/colon/symlink/encrypted flags",
+      "METADATAuniqueNameVersion/UTF8/tag; strictRECORD absentduplicateextraentries/hash-size/selfrow/UTF8",
+      "Actualcurrent209Git tree/blob/member/archive/wheeldigest/omittedsource changes",
+      "Eachmissingcleanup predicate andoriginalprimaryerror identity+cleanupnote"
+    ],
+    "not_actual_acceptance": "85pytestadmission controls are not the ONEinstalled consumer case and no JUnit/consumerPASS fabricated."
+  },
+  "planned_ONE_actual_gateway": {
+    "cwd": "/workspace/engineering/pr282",
+    "activate": "source /workspace/actions-cloud/activate.sh",
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "645s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import toolkit; toolkit.poetry(\"action_server\", \"run\", \"python\", \"/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py\")"
+    ],
+    "attempt_root": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1",
+    "attempt_absent": true,
+    "authorization": "NOTAUTHORIZED; independentROOTpreexecutionGO then AFTER305full serialization/capacityclearance andexacthashreadbackrequired beforeONEattempt; stoponfailure,no retry."
+  },
+  "budgets": {
+    "worker_seconds": 595,
+    "process_including_cleanup_seconds": 600,
+    "reserved_cleanup_max_seconds": 5,
+    "outer_gateway_seconds": 645,
+    "outer_TERM_KILL_grace_seconds": 10,
+    "temporary": "Freshowned0700 /tmp/rt103-current776-* outsideallcheckouts",
+    "output": "Directfiles/no newreaderthreads; primaryexceptionretained, additionalcleanup failureoverallFAIL",
+    "cleanup_scope": "Existingidentity-ownedPID/create-time point-in-time snapshots; no universaladoption/naturalshutdown/productionpool/native/service/provider/browserclaim"
+  },
+  "known_checkout_roots": [
+    "/workspace/actions",
+    "/workspace/engineering",
+    "/workspace/engineering/campaign-checkpoint",
+    "/workspace/engineering/pr282",
+    "/workspace/engineering/pr290",
+    "/workspace/engineering/pr299",
+    "/workspace/engineering/pr302",
+    "/workspace/engineering/pr305",
+    "/workspace/engineering/pr306",
+    "/workspace/engineering/pr307",
+    "/workspace/engineering/pr308",
+    "/workspace/engineering/pr309",
+    "/workspace/engineering/pr310",
+    "/workspace/engineering/pr311",
+    "/workspace/engineering/rcc-public"
+  ],
+  "available_capacity_bytes_at_freeze": 1911099392,
+  "preserved_originals": {
+    "oldrunner": {
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/installed-consumer-runner.py",
+      "bytes": 16652,
+      "sha256": "8ac20b20442a0e599e038664e76f4acc8779bcdebaa4340c319f43580a1133a9"
+    },
+    "oldpreexecution": {
+      "path": "/workspace/engineering/pr221-clean-consumer-independent-review/immutable-runner-preexecution-review.json",
+      "bytes": 12934,
+      "sha256": "195ba97f0ffefb42cc53ba11544cefd65b4cc1c288753e810417a3f1c3aa36fe"
+    },
+    "oldactualreview00d1": {
+      "path": "/workspace/engineering/pr221-clean-consumer-independent-review/actual-one-consumer-review.json",
+      "bytes": 18432,
+      "sha256": "00d1b3c51f2e250e07bed48df92ff5f0e688c86525440e5109ebad525c681f63"
+    },
+    "oldactualreceipt7704": {
+      "path": "/workspace/actions-cloud/receipts/runtime-103-preflight/actual-clean-consumer-receipt.json",
+      "bytes": 9008,
+      "sha256": "7704cbac814064ba4d341f99c576b7ee36ab646b72c07e79a50d5dee186ac938"
+    },
+    "paused_draft_runner": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner.py",
+      "bytes": 18722,
+      "sha256": "2f50a3f6bfa0e2a5544fad7c816be1b3e0e9020827acfb741514c5b7cc22143c"
+    },
+    "paused_draft_inputgate": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission.py",
+      "bytes": 6786,
+      "sha256": "ca4d216307932b7971d7cae295fb4019bd8b85f6bf029221e8c709f0c4c3acc8"
+    },
+    "paused_proposald26": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/paused-immutable-current776-consumer-preparation-proposal.json",
+      "bytes": 16138,
+      "sha256": "d26aa60f9e710d1d20e399041b3b9b36aeba0233f7324542bd61c87f68f096ae"
+    }
+  },
+  "all_frozen_private_inputs_and_originals": [
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+      "bytes": 1158,
+      "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission-v2.py",
+      "bytes": 7267,
+      "sha256": "3be2b971a43de3848c5a1aec59eecbeb6ac9dd796a81a6f2e489eab782492d1a"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission.py",
+      "bytes": 6786,
+      "sha256": "ca4d216307932b7971d7cae295fb4019bd8b85f6bf029221e8c709f0c4c3acc8"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-metadata-RED.log",
+      "bytes": 7776,
+      "sha256": "812d7e91eec86ea968308fc6b9e4fee5d4185a5a3f24ce02486d43e339350e87"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/exact-final-v2-runner-reuse-delta.patch",
+      "bytes": 10230,
+      "sha256": "f26c91c8ffc07186740bd9b2ba2fe2da8445247b15a581199e02236187909d24"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/final-freeze-inspector-diagnostic.json",
+      "bytes": 564,
+      "sha256": "10322a00121f404fcfb84fce675e46295fe504f4b7ca97205af3b84c9d3b6955"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/input-and-source-admission.json",
+      "bytes": 147945,
+      "sha256": "ff5560c8233985e2755e1e9288f780018f625a7ec4184f3eac98e4a14d50e594"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+      "bytes": 19366,
+      "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner.py",
+      "bytes": 18722,
+      "sha256": "2f50a3f6bfa0e2a5544fad7c816be1b3e0e9020827acfb741514c5b7cc22143c"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/original-helper-and-runner-bindings.json",
+      "bytes": 5120,
+      "sha256": "c65b41209d011a5a3e88ad05295ddaa5731587865ecaea00b0b59b3949217e91"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/paused-immutable-current776-consumer-preparation-proposal.json",
+      "bytes": 16138,
+      "sha256": "d26aa60f9e710d1d20e399041b3b9b36aeba0233f7324542bd61c87f68f096ae"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/private-focused-format-and-static.log",
+      "bytes": 6147,
+      "sha256": "12ae28253fe8992aa68438da58319c220e7d01f4d0f2c5c5d97880df0282c8fe"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/private-focused-green-v2.log",
+      "bytes": 13714,
+      "sha256": "6ef41082bac3875b48a8e9ec19c4b5cffde4c03d41005ea298165db34c2ea85d"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/private-focused-green-v3.log",
+      "bytes": 6906,
+      "sha256": "9c0aa16de30eed3f73c6ec5821c244f5e68eefa0c45807334084eb35ba7af953"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/run-private-admission-format.py",
+      "bytes": 346,
+      "sha256": "346049e7d46abd60733db774bebde4100db2c7feaa8b2329b4ebdf5b654fc248"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/run-private-admission-red.py",
+      "bytes": 363,
+      "sha256": "2a18a14baaf8d3facea8218f1aec6485b43f3d239bf9fc452b1ee2d3687e2ef5"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/run-private-focused-green-v2.py",
+      "bytes": 598,
+      "sha256": "9b0e1de02beece74ef8de5c489ae785a146cccd359465bba87332a280629b337"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/run-private-focused-green-v3.py",
+      "bytes": 663,
+      "sha256": "3f817fbd53a1c32d42b32e91dc5e7f67a08e93aadb1161eabcfd2610343e544e"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/safe-members-original-function.txt",
+      "bytes": 571,
+      "sha256": "ba7bbc338c47fce501f0beb5faec501e3fc9c72a13802e70b14a5e75cbb5fc10"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/test_current_input_admission.py",
+      "bytes": 7808,
+      "sha256": "9ac6546291ad088eb1af09e698ea094fba4b512be2b3f10426acb4c0874a5f15"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/test_installed_consumer_runner_v2.py",
+      "bytes": 9838,
+      "sha256": "af8441563c24deeb9dd96def1721c6d92924e44329c102f581da9678b53ca68e"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unchanged-helper-snapshots/floor/verify_published_runtime_floor.py",
+      "bytes": 8925,
+      "sha256": "f1ad142a6cd83ca1a71ed0a6183d558a6d72f00f073b492ce0d18e563a067193"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unchanged-helper-snapshots/guard/test_active_contracts.py",
+      "bytes": 38962,
+      "sha256": "b76ec605e343e8bec7dea6e230dad3f516eabc4fd90a2769638b0d9111a6ade0"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unchanged-helper-snapshots/process/process.py",
+      "bytes": 31134,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unchanged-helper-snapshots/publisher/publish_verified_runtime.py",
+      "bytes": 18453,
+      "sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c"
+    },
+    {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/unvalidated-private-runner-reuse-delta.patch",
+      "bytes": 10382,
+      "sha256": "416a92dc2365b82ac431074948000a41e730e8a51803c84d2563f8bed7a76c6a"
+    }
+  ],
+  "remaining_HOLDs": [
+    "IndependentpreexecutionGO and AFTER305full capacityserializationclearance beforeactualpip/install/consumer",
+    "CurrentpublicfloorexactURL/SHA/pipcheck/fourrealmoduleorigins/196installedmember/privateimportscan/CLI1.0.3/cleanup NOTRUN",
+    "RequiredgeneratedOAuthsourcepairauthority/content remainsEMPTY/unqualified regardlessimportsuccess",
+    "209payloadcorrespondence/tree equalitynotfullproducer/native/complete7artifact/tag/Twine/upload/officialpublication",
+    "cp313onlyouterhash; otherplatform/service/backend/browser/ChatGPT/private01f/frozen-v6/full134/releaseHOLD"
+  ],
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Exact delta": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+      "bytes": 1158,
+      "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+    },
+    "Disposition": "PROPOSEDfornextrootcanonicalbatch; no repodoc/index/applicationchanges orcosmeticdiary.",
+    "Durable learning captured": "PartialLinuxartifact advancesonlyscopedcp312consumer; seveninventoryremainsopen. Postintegrationtree equality doesnotrelabelsyntheticproducer; equal196count doesnotcarryoldwheel admission; generatedholdsseparate.",
+    "Evidence": "Original116938ZIP/f82wheel535b/5ae inspection; independentlycurrent196/209trackedmatches/215RECORD; actual776a1c4equalsa346/f5dd; originalhelpersGit776;85servicefreecontrols+UTF8RED1, no actualconsumer.",
+    "Stale or ambiguous guidance removed": "Existingcompleteinventoryhostselection andpreintegrationrule lackpartialplatform/postintegrationproducer/countdistinction. Exactproposaladds sourcebackedlimits withoutclaiming actualtestsuccess.",
+    "Remaining uncertainty": "Independentpreexec/capacity/currentactualconsumer/fullseven/OAuth/native/provider/private/release acceptance pending."
+  },
+  "Upstream disposition": "none"
+}

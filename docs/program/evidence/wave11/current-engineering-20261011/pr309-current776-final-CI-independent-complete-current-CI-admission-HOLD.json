@@ -1,0 +1,917 @@
+{
+  "schema": "independent-paged-current-CI-admission-v1",
+  "verdict": "HOLD",
+  "PR": 309,
+  "observed_utc_interval": [
+    "2026-10-11T08:50:14.579356+00:00",
+    "2026-10-11T08:50:19.692678+00:00"
+  ],
+  "bounded_single_snapshot": true,
+  "named_refs_bracket": {
+    "head": {
+      "branch": "test/auth-route-census-20261010",
+      "before": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "after": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "stable": true
+    },
+    "base": {
+      "branch": "integration/community-release-20261008",
+      "before": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "after": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "stable": true
+    }
+  },
+  "PR_payload_stable": true,
+  "source_and_synthetic": {
+    "head": {
+      "sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "tree": "3c2c8ad1c9a067ec774eafd6f5d254cb8703213b",
+      "ordered_parents": [
+        "9475a30fbe8645fd0c6b9c2746182f7a78631059",
+        "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+      ]
+    },
+    "merge": {
+      "sha": "99e8c64a0398669fd65f216656427179fe90228a",
+      "tree": "3c2c8ad1c9a067ec774eafd6f5d254cb8703213b",
+      "ordered_parents": [
+        "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+        "5130638dc68161c3cfc1a437bacf0467d7cecb42"
+      ]
+    }
+  },
+  "synthetic_ordered_parents_and_tree": "VERIFIED_BY_REST_AND_GRAPHQL",
+  "actual_job_checkout": "UNKNOWN",
+  "no_original_logs_or_artifact_download": true,
+  "declarations": {
+    "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/exact-source-workflow-declaration.json",
+    "bytes": 57680,
+    "sha256": "2057934caf2edba190231b8562a4cdb4810a151106af98f165412d59d4cfa2da"
+  },
+  "head_and_merge_inventories": {
+    "head": {
+      "checks": [
+        {
+          "id": 114425288893,
+          "name": "publish (3.12)",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423099028,
+          "name": "coverage",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423099026,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423099011,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098973,
+          "name": "build (windows-py3.12-devmode)",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098958,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098910,
+          "name": "build-wheels (windows-2022)",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098884,
+          "name": "build-wheels (macos-15)",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098878,
+          "name": "build-wheels (ubuntu-22.04)",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098861,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098856,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098852,
+          "name": "build (macos-py3.12-devmode)",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098850,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098823,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098821,
+          "name": "audit",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098797,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098763,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098756,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098709,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423092267,
+          "name": "copilot-setup-steps",
+          "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "check_count": 20,
+      "normalized_counts": {
+        "SUCCESS": 20
+      },
+      "check_suites": [
+        {
+          "id": 103290659605,
+          "app": "docker",
+          "status": "QUEUED",
+          "conclusion": null
+        },
+        {
+          "id": 103290659803,
+          "app": "renovate",
+          "status": "QUEUED",
+          "conclusion": null
+        },
+        {
+          "id": 103290661508,
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 103290667411,
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 103290667426,
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 103290667428,
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 103290667437,
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 103290667468,
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 103290667492,
+          "app": "github-actions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "check_suite_count": 9,
+      "commit_statuses": [],
+      "status_count": 0,
+      "run_count": 7,
+      "pages": {
+        "check-runs": 1,
+        "check-suites": 1,
+        "statuses": 1,
+        "runs": 1
+      }
+    },
+    "merge": {
+      "checks": [],
+      "check_count": 0,
+      "normalized_counts": {},
+      "check_suites": [],
+      "check_suite_count": 0,
+      "commit_statuses": [],
+      "status_count": 0,
+      "run_count": 0,
+      "pages": {
+        "check-runs": 1,
+        "check-suites": 1,
+        "statuses": 1,
+        "runs": 1
+      }
+    }
+  },
+  "runs_and_jobs": [
+    {
+      "id": 38123557771,
+      "path": ".github/workflows/ai-audit.yml",
+      "event": "pull_request",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423098821,
+          "name": "audit",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+      "declared_job_keys": [
+        "audit"
+      ]
+    },
+    {
+      "id": 38123557773,
+      "path": ".github/workflows/coverage-gate.yml",
+      "event": "pull_request",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423099028,
+          "name": "coverage",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+      "declared_job_keys": [
+        "coverage"
+      ]
+    },
+    {
+      "id": 38123557761,
+      "path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "event": "pull_request",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423098763,
+          "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098958,
+          "name": "Build Action Server binary without credentials (macos-15)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423099026,
+          "name": "Build Action Server binary without credentials (windows-2022)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+      "declared_job_keys": [
+        "build-external"
+      ]
+    },
+    {
+      "id": 38123557755,
+      "path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423098756,
+          "name": "build-sdist (ubuntu-py3.12)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098878,
+          "name": "build-wheels (ubuntu-22.04)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098884,
+          "name": "build-wheels (macos-15)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098910,
+          "name": "build-wheels (windows-2022)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114425288893,
+          "name": "publish (3.12)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+      "declared_job_keys": [
+        "build-sdist",
+        "build-wheels",
+        "publish"
+      ]
+    },
+    {
+      "id": 38123557759,
+      "path": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423098709,
+          "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098797,
+          "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098823,
+          "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098850,
+          "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098856,
+          "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098861,
+          "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+      "declared_job_keys": [
+        "toolkit"
+      ]
+    },
+    {
+      "id": 38123557753,
+      "path": ".github/workflows/actions_runtime_tests.yml",
+      "event": "pull_request",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423098852,
+          "name": "build (macos-py3.12-devmode)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423098973,
+          "name": "build (windows-py3.12-devmode)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 114423099011,
+          "name": "build (ubuntu-py3.12-devmode)",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "EXACT_MATRIX_COUNT_AND_PATH",
+      "declared_job_keys": [
+        "build"
+      ]
+    },
+    {
+      "id": 38123555549,
+      "path": ".github/workflows/copilot-setup-steps.yml",
+      "event": "push",
+      "head_sha": "5130638dc68161c3cfc1a437bacf0467d7cecb42",
+      "run_attempt": 1,
+      "status": "COMPLETED",
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 114423092267,
+          "name": "copilot-setup-steps",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS"
+        }
+      ],
+      "declaration_reconciliation": "AUXILIARY_PUSH_COPILOT_NOT_PR_JOB_SET"
+    }
+  ],
+  "declared_PR_job_instances": 19,
+  "observed_auxiliary_push_jobs": 1,
+  "registered_jobs_equals_exact_head_checks": true,
+  "all_declared_PR_matrix_jobs_registered": true,
+  "pending_check_job_ids": [],
+  "pending_runs": [],
+  "reviews": {
+    "count": 0,
+    "states": {},
+    "current_head_reviews": 0,
+    "review_comments": 0,
+    "issue_comments": 2,
+    "reviewDecision": null,
+    "threads": 0,
+    "unresolved_threads": 0,
+    "nested_comment_pagination_complete": true,
+    "GraphQL_connections_exhausted": true
+  },
+  "issue_closure": {
+    "count": 0,
+    "complete": true,
+    "issues": [],
+    "no_issue_mutation": true,
+    "whole_issue_closure_admission": "HOLD"
+  },
+  "policy": {
+    "traditional_branch_protection": "UNKNOWN_HTTP403",
+    "visible_rulesets": 0,
+    "normal_API_enforcement_required": true,
+    "no_bypass_permission": true
+  },
+  "draft": true,
+  "mergeStateStatus": "CLEAN",
+  "HOLDs": [
+    "Pending named checks/runs",
+    "Draft PR",
+    "Actual per-job checkout UNKNOWN: no owned original terminal logs acquired",
+    "Branch protection UNKNOWN403; empty visible rulesets not bypass",
+    "Full issue/backend/native/private/release gates not admitted"
+  ],
+  "private_raw_evidence": [
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/after-named-base.raw.private.json",
+      "bytes": 460,
+      "sha256": "d87ac55d3b6dfb598df3e4c3413e824d885a5bcb6a089a61f0241cc30f090ac2"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/after-named-head.raw.private.json",
+      "bytes": 437,
+      "sha256": "cc23a4713ec76b4d9f7b580d3bca572b3b8cc6377a6a81a10a71307d7ce34898"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/after-pr.raw.private.json",
+      "bytes": 22891,
+      "sha256": "42fd226d3b3e654f8540a6ff4c743a938d4cdd8ae3885865a54fe3aec7042262"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/before-named-base.raw.private.json",
+      "bytes": 460,
+      "sha256": "d87ac55d3b6dfb598df3e4c3413e824d885a5bcb6a089a61f0241cc30f090ac2"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/before-named-head.raw.private.json",
+      "bytes": 437,
+      "sha256": "cc23a4713ec76b4d9f7b580d3bca572b3b8cc6377a6a81a10a71307d7ce34898"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/before-pr.raw.private.json",
+      "bytes": 22214,
+      "sha256": "ab9d3b2d357c3cfc1416a26cf3c9516b27d639c5f76ac0128514b8951c255f1d"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/changed-files.raw.private.json",
+      "bytes": 43668,
+      "sha256": "856a9f4853eff13f6154047750e6d2b0f39fb819de3f4497960647eb03fe17b3"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/closures-page-1.raw.private.json",
+      "bytes": 647,
+      "sha256": "dbd1dfa76b9002a11712575874bb1a96c19baf3e4cc917e95906af66ee917cfe"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/head-check-runs.raw.private.json",
+      "bytes": 76263,
+      "sha256": "8dbdae1106637103d3a2be9dcb1393f9678ae5762d1d57b68727bdc4ca98f0bb"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/head-check-suites.raw.private.json",
+      "bytes": 78459,
+      "sha256": "8ad954bee946f7f6ea175c99e3486ff48e71379bf2157be4b20c80a1e05afef0"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/head-commit.raw.private.json",
+      "bytes": 139510,
+      "sha256": "3b44787d51d5df5f42f5668e6e57d6015e76efef18f486a1de38144de4ff5baf"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/head-runs.raw.private.json",
+      "bytes": 91687,
+      "sha256": "0e1bae7c16b1b4b6a5acda9452c1192ed4cde7a423bb23add063b63304084720"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/head-statuses.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/issue-comments.raw.private.json",
+      "bytes": 9134,
+      "sha256": "6eddf4f0a94ba4c65fc971bbb8958c0a1eddcbdec728190e6ce32bac4db9e36a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/merge-check-runs.raw.private.json",
+      "bytes": 38,
+      "sha256": "3b29ca22d800ee4f4f72aa18efc5af2f17c8f788db9d63ab463b365d2c0920a2"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/merge-check-suites.raw.private.json",
+      "bytes": 40,
+      "sha256": "4e929adbdc69abcb55cbd6c541fa88397ad113392ae033696f5e1ab55b596d50"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/merge-commit.raw.private.json",
+      "bytes": 48669,
+      "sha256": "0a431b81751d74995cffde6e6f105098b1757266381c80f0fd703abf22a29c2b"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/merge-runs.raw.private.json",
+      "bytes": 41,
+      "sha256": "725143e0e46d6aefd0d32064f5407f39c7c2149674a6fb60e3f3376c71e7b5ad"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/merge-statuses.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/review-comments.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/reviews.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/rulesets.raw.private.json",
+      "bytes": 4,
+      "sha256": "cf1cbb66a638b4860a516671fb74850e6ccf787fe6c4c8d29e9c04efe880bd05"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123555549-jobs.raw.private.json",
+      "bytes": 2558,
+      "sha256": "bfc8cc44604bb3e3a6bff3c67766bcf30451f905c7257326b2ad0cbc4b03f6da"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123557753-jobs.raw.private.json",
+      "bytes": 16934,
+      "sha256": "de841d4ecd9c0ffd0e8799111e7d34a536b9326c5a8be638dd2faa169d4b38b9"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123557755-jobs.raw.private.json",
+      "bytes": 24608,
+      "sha256": "28fd2398061bc14f4ea77d1860eacdf11087dd125fe783f7d1d8f9e9c5dfd5b2"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123557759-jobs.raw.private.json",
+      "bytes": 21202,
+      "sha256": "b8c0f6d702fc77c5cbe90850f11b2b0a6c9ae2e70cc41196017b48d3416184fc"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123557761-jobs.raw.private.json",
+      "bytes": 24109,
+      "sha256": "46e87e5d05856d5d39e48eada155e11f518a623ecfd21d68405a53bd9328de7c"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123557771-jobs.raw.private.json",
+      "bytes": 2033,
+      "sha256": "fb01909f7fecd254caa641131a828c6db02210044fae6eafe8be111d3f681320"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123557773-jobs.raw.private.json",
+      "bytes": 3311,
+      "sha256": "d5bb8f109ccaad7e5776969bf9f482adcc4419407dfbf598f3660355e835a041"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/threads-page-1.raw.private.json",
+      "bytes": 637,
+      "sha256": "d76afd444580d962c3fb48c8061f0161216b575831b6f0a44dd0187ec52e4b2c"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/after-named-base.request.json",
+      "bytes": 294,
+      "sha256": "b12f83a4b54db82c2cf337d74b3f21ba5647ef4707c3dcc31f7abfc3f25c61f0"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/after-named-head.request.json",
+      "bytes": 287,
+      "sha256": "43f83d3ea1f43fb301c77e47a271a2faaacfc6ea8fc3fa9ba59382a60d26e41d"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/after-pr.request.json",
+      "bytes": 253,
+      "sha256": "a2e699455ebcbc7059aae0a1f2a44e576631aaf53c7ee1ba4501b021deffd90a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/base-protection.request.json",
+      "bytes": 302,
+      "sha256": "b40f985095c2c2f3d453ff896b9cfb117625949f76d28e70affd9368a05972f1"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/before-named-base.request.json",
+      "bytes": 294,
+      "sha256": "2d75ea4d3016f5a13ab7f3d3127aee189aa71af9926d4fcd9cb9f2687920582b"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/before-named-head.request.json",
+      "bytes": 287,
+      "sha256": "548e741415af73f93d31f7b885512a9a286b0fbc0b9988dee5c59ed43b4d425e"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/changed-files.request.json",
+      "bytes": 271,
+      "sha256": "103f1966a53f2a47b33334e9d096b271cf422253a564b78c210bb561d7339ee2"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/closures-page-1.request.json",
+      "bytes": 164,
+      "sha256": "3227bddc9f28ad248e10900acc49d2c724144d2dd26c343c5376a43603bae4ca"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/head-check-runs.request.json",
+      "bytes": 326,
+      "sha256": "3f2138224950cd8901ae618e048c2712cc22fcbfe8f70b2187a6011c6c4ed916"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/head-check-suites.request.json",
+      "bytes": 317,
+      "sha256": "4bd90619ac5192d71b1bb73c4f057fea88b1b03c1951c84a4eb887d4cb9a1002"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/head-commit.request.json",
+      "bytes": 293,
+      "sha256": "868376d6cf7526682c109120890c205719d073c6088d1352459511534c54c32a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/head-runs.request.json",
+      "bytes": 318,
+      "sha256": "d480625ee5d7d313ea592f514f1ecded7dfb80a84260a0d89f113fd08a8d751c"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/head-statuses.request.json",
+      "bytes": 309,
+      "sha256": "99b25b7a3e6c5a47003b7b274c0f1b18e4296b47c1fc64df5972f44f066dcd33"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/issue-comments.request.json",
+      "bytes": 274,
+      "sha256": "894f9f8c96a0468f4738c1a20926151782559b77c1fb2c6810ca1e5cbe430b9d"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/merge-check-runs.request.json",
+      "bytes": 323,
+      "sha256": "c09c31af01fe775ba9d9b8047d5a61bcf5ebac4262463a38e1479ed1c1e42b89"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/merge-check-suites.request.json",
+      "bytes": 314,
+      "sha256": "bf139478ae862da9bfba9868c15b4002e78bbaac29630fe17ec8b29c850092ba"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/merge-commit.request.json",
+      "bytes": 292,
+      "sha256": "75b8cfed571c3b7f4bc6a79820bb1e80a213d9fe8c594b17ae6a5a2623995a15"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/merge-runs.request.json",
+      "bytes": 315,
+      "sha256": "e4228fa0990aca028436206eac99305e76d6e63a61e52da030303ad4f51daed7"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/merge-statuses.request.json",
+      "bytes": 309,
+      "sha256": "75de3cd2f2afed522b2c9ae4861ab05edfe659679132528c31e8423178448613"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/review-comments.request.json",
+      "bytes": 270,
+      "sha256": "28d32ad52e39892121f3c414def6350460089c1f5c631b5b39f7f35c51587801"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/reviews.request.json",
+      "bytes": 269,
+      "sha256": "368d2400514e290378df5ddca32080f2b6bce538092d341c179205dd8d97c92a"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/rulesets.request.json",
+      "bytes": 282,
+      "sha256": "d58d38b12d4f80b97a356195816c47ddf98c50bddca4b38a89c566609d9a444f"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123555549-jobs.request.json",
+      "bytes": 295,
+      "sha256": "c7de042922355786a31cf50d6b75e0c56d148d6feea59b71ce4a4118bf3a261c"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123557753-jobs.request.json",
+      "bytes": 296,
+      "sha256": "52ebfcc30824a4136436e2d7069b06ba839f5bddbfe730e9a9e500dafa0337af"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123557755-jobs.request.json",
+      "bytes": 296,
+      "sha256": "4aed80644eb2532a6a4145252b148cbb6415ce92ba811fd77091dd9aec3b2e8c"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123557759-jobs.request.json",
+      "bytes": 296,
+      "sha256": "58172ff0ca4a8ac6413a0feb3f64ed98b5a2e6723dee6b68b4737c4f7dadb5df"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123557761-jobs.request.json",
+      "bytes": 296,
+      "sha256": "14053800d7a48bfb3289b6f82b92aca6c7767c67b8f1a28ffd06544a871c23cf"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123557771-jobs.request.json",
+      "bytes": 295,
+      "sha256": "ce3d86c6af134b52ed4ad3488180332773420470298a1d230ddba0451ff0d847"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/run-38123557773-jobs.request.json",
+      "bytes": 295,
+      "sha256": "7461015b9f3e373c218564c6e85f78701e60e57bd6b468b20115881285682678"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/threads-page-1.request.json",
+      "bytes": 164,
+      "sha256": "e35419414549455ce36c42f4256d0136c766d3e4b35df2202e18e97376b61a1b"
+    },
+    {
+      "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/base-protection.response.private",
+      "bytes": 167,
+      "sha256": "e2373c984773dfee141aed6665a6497c3d7ae4022e643d1c860ab01b710aa23a"
+    }
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; no source edit, explicit reuse of accepted exact proposed deltas",
+    "Exact_delta": "Existing normalization/late-needs/policy/ref/checkout lessons retained verbatim; no cosmetic successor",
+    "Reused_exact_artifacts": [
+      {
+        "path": "/workspace/engineering/current299308-ci-independent-review/canonical-workflow-trigger-key-normalization-proposed.patch",
+        "bytes": 737,
+        "sha256": "c5e4a8f166a4e3c96bad2f0a93de3cc2b76eb5003d3cbaeaa07dc400ceda384c"
+      },
+      {
+        "path": "/workspace/engineering/pr302-full26-current-hosted-admission/exact-dependent-job-registration-canonical-proposal.patch",
+        "bytes": 912,
+        "sha256": "d7a0a7b9452553bb609084acdf71bb7ace68f152b5bdd419a8817e151ddeb93b"
+      },
+      {
+        "path": "/workspace/engineering/pr221-current776-preflight/canonical-policy-and-snapshot-proposed.patch",
+        "bytes": 897,
+        "sha256": "9744b01f0f2f888de5f88f129b857df33938cb1adf182ec32b30ed08b2f14fe8"
+      },
+      {
+        "path": "/workspace/engineering/pr299-current776-CI-admission-review/canonical-existing-job-trigger-policy-lessons.md",
+        "bytes": 2764,
+        "sha256": "4054b1d8bc396bd9a4c1054393cfe8cb3566638213ef9e04b34fc7ea1d42a7a4"
+      }
+    ],
+    "Durable_learning": "Preserve YAML on key, expand exact matrix/event/path set, include needs-created publisher, distinguish auxiliary push Copilot, inaccessible protection UNKNOWN and synthetic metadata versus actual checkout.",
+    "Evidence": {
+      "yaml11_boolean_on_controls": 17,
+      "declared_PR_jobs": 19,
+      "registered_late_publisher": [
+        114425288893
+      ],
+      "policy_HTTP": 403,
+      "stable_named_refs": true
+    },
+    "Stale_guidance_removed": "No existing source removed; reuse explicitly rejects early job totals, empty-status/ruleset absence inference and metadata-only checkout proof.",
+    "Remaining_uncertainty": "States span one finite non-atomic snapshot and can change after capture; original checkout logs unavailable; branch protection unavailable; no full issue/release qualification."
+  },
+  "upstream_disposition": "none",
+  "source_mutations": false,
+  "pending_polls_or_retries": false
+}

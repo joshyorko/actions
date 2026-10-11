@@ -1,0 +1,14 @@
+{
+  "observed_result_fixed_known_fixture_matches_only": [
+    {
+      "fixture_owner": "A",
+      "fixture_revision": "v2",
+      "transition": "direct_to_template"
+    }
+  ],
+  "failure_call_source_line": 619,
+  "source_wait_condition": "candidate B route listed; no explicit A claims-removal condition before conflict assertion",
+  "hypothesis": "Candidate B publication can precede A claims removal across independently observed package changes; returned A fixture is consistent with incomplete handoff, not proof of historical-ownership bypass.",
+  "remaining_unknown": "No captured catalog-generation/old-A-route absence at failed read; no scheduling/mtime/callback cause proved.",
+  "next_bounded_control_proposal": "Service-free forced package-update ordering control: publish B before removing A; show B route presence alone can satisfy the current wait while A owns the old URI, then require full handoff barrier before unchanged historical conflict assertion. No real native retry or deadline increase."
+}

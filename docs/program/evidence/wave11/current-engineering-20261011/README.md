@@ -420,3 +420,39 @@ archive indices remain private outside Git. Canonical improvements cover actual
 request fixtures, YAML root-trigger normalization, named-ref/policy census and
 negative candidate/parent-watchdog scope.
 Upstream disposition: none.
+
+
+Current checkpoint: 644 original safe receipt and patch payloads, retaining all
+516 previous originals byte for byte. Actual integration remains776 at capture.
+#305639 and #306662 are normally pushed after independent current source review;
+their fresh hosted CI remains required. The #306 original Linux failure, test-owned
+handoff RED/GREEN, final owner-announced source freeze, prematurely read draft
+receipt and exact known-hash authored-constructor recovery are preserved separately.
+Recovery does not retroactively admit the draft. #308 source7eb/controlb673 now has
+independent original three-case actual GO28f6, including seven members, one
+publication and limited natural-return-before-cleanup evidence; its captured full
+CI census remains pending. Current #309513 complete source CI is independently GO
+884c for a normal policy-enforced readiness/integration path; actual integration
+has not occurred. #2993155 retains successive bounded CI holds; the last original
+hold has19 successful jobs and one pending, without inferred runner checkout.
+
+The current prospective Linux cp312 wheelf82e passed exactly one authorized clean
+consumer attempt, independently reviewed f230: CLI1.0.3,196 measured installed
+Python members,209 source-bound payloads and public Core1.0.2/Helper1.0.3 provenance.
+Strict measured cleanup passed within its captured process scope. Installed files
+were removed as designed; the retained measurements are not a fresh independent
+reread of that removed tree. Original f5dd producer and tree-equivalent actual776
+remain distinct. #221 declared CI has34 successes plus the expected tag-publisher
+skip under terminal956a review; PR artifact validation does not publish. Empty
+OAuth authority/content, full seven-artifact platform inventory, actual current
+native/private acceptance, tag/publication and the retained issue graph remain HOLD.
+Completed batch9 scratch is preserved in verified private archives on existing
+mounts. No raw logs, ZIPs, private harness implementations, original member payloads
+or archive indices are added here. All historical failures and prior scopes remain.
+
+Canonical documentation imports verified lessons about immutable constructors and
+owner-announced review freezes, complete ownership-handoff barriers, the exact
+three reviewed RCC control branches, and the distinct Linux consumer/release scope.
+Evidence is the exact source/review patches and original receipts in the manifest.
+No issue is closed and no Runtime release or infrastructure change is authorized
+by this checkpoint. Upstream disposition: none.

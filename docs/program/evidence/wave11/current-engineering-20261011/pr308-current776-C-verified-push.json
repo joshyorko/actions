@@ -1,0 +1,23 @@
+{
+  "status": "NORMAL_EXISTING_PR_BRANCH_PUSH_AUTHENTICATED",
+  "pr": 308,
+  "head": "b673ddd761ba4ccd68e9baa8faaa9ab666df794e",
+  "tree": "56d108fcdb5d43f7f27a8f2554fec51b702519f4",
+  "control_sole_parent": "7eb5bce946750555ab009f77592862920a901506",
+  "candidate_tree": "3ff76037779763d0461ff3a755b900c9ed83dcf8",
+  "branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "existing_remote_before": "4ca431b51b018b947fac6f096ca3cdc21028dd28",
+  "named_remote_after": "b673ddd761ba4ccd68e9baa8faaa9ab666df794e",
+  "actual_target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "source_receipt_sha256": "523e46db8f4ea12dfbb0afbe8f6d2ce675cb0aedd79658b8b4d2585f151afb8b",
+  "source_independent_review_sha256": "29c13d7e5bcb3400decbf41286ea736fb0073c6c5afc695ca382826c40a02e03",
+  "control_receipt_sha256": "4771821583f54164018854bee073ba8318d3164ea4e152324525913f6af734c6",
+  "control_independent_review_sha256": "31779bad488b43b88d7bb81b3f2c5d75edabf7519f5765bd90d86c66569d6f9b",
+  "source_full": "1190PASS13SKIP",
+  "control_focused": "55PASS",
+  "draft": true,
+  "fresh_hosted_full_CI_and_three_case_actual": "REQUIRED",
+  "actual_CLI2510_private_native_release": "HOLD_NOT_RUN",
+  "no_merge_claim": true,
+  "upstream_disposition": "none"
+}

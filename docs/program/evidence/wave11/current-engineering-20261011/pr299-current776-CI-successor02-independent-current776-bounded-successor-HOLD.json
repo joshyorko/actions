@@ -1,0 +1,623 @@
+{
+  "schema": "actions-pr299-current776-bounded-admission-successor-census/v1",
+  "verdict": "HOLD_DRAFT_TWO_REQUIRED_MAC_JOBS_PENDING_AND_POLICY_UNKNOWN",
+  "captured_at": "2026-10-11T08:27:38.624Z",
+  "subject": {
+    "source": "3155fc55ea7d47afbc547fddc963b5860462924b",
+    "target": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+    "synthetic": "600d1b213fcfe6f94f341cbe4bca4472bd002e4c",
+    "tree": "99ac5309add45af65049546dd3a99f357884cf3b",
+    "ordered_synthetic_parents": [
+      "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "3155fc55ea7d47afbc547fddc963b5860462924b"
+    ],
+    "named_refs_bracketed_unchanged": true,
+    "synthetic_tree_matches_independently_reviewed_source": true
+  },
+  "initial_HOLD_preserved": {
+    "path": "/workspace/engineering/pr299-current776-CI-admission-review/independent-current776-complete-CI-HOLD.json",
+    "bytes": 19013,
+    "sha256": "64180f8ef7c0e62b671d192443bc117f832d95a1bd323f41ddd6833988fc347a"
+  },
+  "source_review": {
+    "path": "/workspace/engineering/pr299-actual776-independent-review/independent-frozen-source-review.json",
+    "bytes": 6360,
+    "sha256": "40b79b4acb2909634c6c6cf66f17b5404f8d9b2ca722627c0e8db3127b8269d2"
+  },
+  "source_declared_workflow_inventory": {
+    "path": "/workspace/engineering/pr299-current776-CI-admission-review/declared-current-workflow-and-job-inventory.json",
+    "bytes": 51617,
+    "sha256": "16f804cb80b24c03ef32a8b0604482506c80f040313ade98193246536dcbb39b"
+  },
+  "registered_current_jobs": 20,
+  "expected_PR_jobs": 19,
+  "separate_matching_push_Copilot_jobs": 1,
+  "earlier_current_check_snapshot": {
+    "queued": 2,
+    "success": 17,
+    "in_progress": 1
+  },
+  "later_current_job_snapshot": {
+    "success": 18,
+    "queued": 1,
+    "in_progress": 1
+  },
+  "pending_jobs": [
+    {
+      "id": 114420728573,
+      "run": 38122766422,
+      "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+      "event": "pull_request",
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "queued",
+      "later_job_conclusion": null,
+      "earlier_check_status": "queued",
+      "earlier_check_conclusion": null,
+      "checkout_steps": []
+    },
+    {
+      "id": 114420728496,
+      "run": 38122766410,
+      "workflow": ".github/workflows/actions_runtime_tests.yml",
+      "event": "pull_request",
+      "name": "build (macos-py3.12-devmode)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "in_progress",
+      "later_job_conclusion": null,
+      "earlier_check_status": "in_progress",
+      "earlier_check_conclusion": null,
+      "checkout_steps": [
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout repository and submodules",
+          "status": "pending",
+          "conclusion": null
+        }
+      ]
+    }
+  ],
+  "all20_job_check_bindings": [
+    {
+      "id": 114420728427,
+      "run": 38122766422,
+      "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+      "event": "pull_request",
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728573,
+      "run": 38122766422,
+      "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+      "event": "pull_request",
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "queued",
+      "later_job_conclusion": null,
+      "earlier_check_status": "queued",
+      "earlier_check_conclusion": null,
+      "checkout_steps": []
+    },
+    {
+      "id": 114420728668,
+      "run": 38122766422,
+      "workflow": ".github/workflows/frontend-build-unauthenticated.yml",
+      "event": "pull_request",
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728218,
+      "run": 38122766365,
+      "workflow": ".github/workflows/ai-audit.yml",
+      "event": "pull_request",
+      "name": "audit",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728189,
+      "run": 38122766368,
+      "workflow": ".github/workflows/coverage-gate.yml",
+      "event": "pull_request",
+      "name": "coverage",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728280,
+      "run": 38122766410,
+      "workflow": ".github/workflows/actions_runtime_tests.yml",
+      "event": "pull_request",
+      "name": "build (windows-py3.12-devmode)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728496,
+      "run": 38122766410,
+      "workflow": ".github/workflows/actions_runtime_tests.yml",
+      "event": "pull_request",
+      "name": "build (macos-py3.12-devmode)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "in_progress",
+      "later_job_conclusion": null,
+      "earlier_check_status": "in_progress",
+      "earlier_check_conclusion": null,
+      "checkout_steps": [
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout repository and submodules",
+          "status": "pending",
+          "conclusion": null
+        }
+      ]
+    },
+    {
+      "id": 114420728618,
+      "run": 38122766410,
+      "workflow": ".github/workflows/actions_runtime_tests.yml",
+      "event": "pull_request",
+      "name": "build (ubuntu-py3.12-devmode)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728399,
+      "run": 38122766384,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728516,
+      "run": 38122766384,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728530,
+      "run": 38122766384,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728535,
+      "run": 38122766384,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728547,
+      "run": 38122766384,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728549,
+      "run": 38122766384,
+      "workflow": ".github/workflows/developer_toolkit.yml",
+      "event": "pull_request",
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728456,
+      "run": 38122766386,
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "name": "build-sdist (ubuntu-py3.12)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728631,
+      "run": 38122766386,
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "name": "build-wheels (macos-15)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728633,
+      "run": 38122766386,
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "name": "build-wheels (windows-2022)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420728674,
+      "run": 38122766386,
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "name": "build-wheels (ubuntu-22.04)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114426104242,
+      "run": 38122766386,
+      "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+      "event": "pull_request",
+      "name": "publish (3.12)",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "queued",
+      "earlier_check_conclusion": null,
+      "checkout_steps": [
+        {
+          "name": "Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout repository and submodules",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114420725572,
+      "run": 38122765590,
+      "workflow": ".github/workflows/copilot-setup-steps.yml",
+      "event": "push",
+      "name": "copilot-setup-steps",
+      "source_head": "3155fc55ea7d47afbc547fddc963b5860462924b",
+      "later_job_status": "completed",
+      "later_job_conclusion": "success",
+      "earlier_check_status": "completed",
+      "earlier_check_conclusion": "success",
+      "checkout_steps": [
+        {
+          "name": "Checkout code",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout code",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "late_publisher": {
+    "id": 114426104242,
+    "name": "publish (3.12)",
+    "run": 38122766386,
+    "earlier_check": "queued",
+    "later_job": "completed/success",
+    "dependencies": "All3wheel jobs includingmac114420728631 andsdist nowSUCCESS; declaredfifthjob materialized. Initial19-pageHOLD remainshistorical; no reread or invented finalcheck count."
+  },
+  "pagination": {
+    "per_page": 100,
+    "all_counts_less100_equal_returned": {
+      "checks-page1": 20,
+      "runs-page1": 7,
+      "statuses-page1": 0,
+      "checks-synthetic-page1": 0,
+      "statuses-synthetic-page1": 0,
+      "jobs-38122766422": 3,
+      "jobs-38122766365": 1,
+      "jobs-38122766368": 1,
+      "jobs-38122766410": 3,
+      "jobs-38122766384": 6,
+      "jobs-38122766386": 5,
+      "jobs-38122765590": 1
+    },
+    "checks_equal_all20jobIDs_headSHA": true,
+    "review_submissions": 0,
+    "threads": 0,
+    "visible_rulesets": 0
+  },
+  "PR_state": {
+    "draft": true,
+    "mergeable": true,
+    "mergeable_state": "unstable",
+    "review_requests": 0
+  },
+  "policy": {
+    "branch_protected": false,
+    "branch_metadata": {
+      "enabled": false,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "visible_rulesets": [],
+    "traditional_protection": "UNKNOWN403 Resource notaccessiblebyintegration; no bypasspermission or inferred adminrequirements"
+  },
+  "qualification_boundary": "NotallterminalSUCCESS. No originalRuntimeWindows/Linux logs acquired and no observedcheckout/nodePASS/cause oractualnativeconsumer claims made; their jobSUCCESS onlymetadata. FuturefullGO requires source/currentdeclaredjobs/readyandpolicy review plusactualcheckout binding whenauthorized. Original9cb FIRSTresourcecollision/readiness failure,cause/cleanup unknown retained, not relabelled by currentjobSUCCESS. Nativeproducer274 versusold92498 sevenchanges+sixadds remainsUNQUALIFIED. Backend/private/full134/300/Runtime221/release/issueclosuresremainHOLD.",
+  "raw_private_API": {
+    "path": "/workspace/engineering/pr299-current776-CI-admission-review/bounded-successor-02/private-authenticated-api-census.json",
+    "bytes": 482843,
+    "sha256": "900170cc97b28191f47ea4b4dca1da5adf3989f04ff68b87e798115a6ff154c4"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "Accept existing exact docs/skills/repository-operations.md declaredjob/latepublisher/YAML/policy/bracketedref lesson; no cosmeticchild",
+    "Exact_verified_excerpt": {
+      "path": "/workspace/engineering/pr299-current776-CI-admission-review/canonical-existing-job-trigger-policy-lessons.md",
+      "bytes": 2764,
+      "sha256": "4054b1d8bc396bd9a4c1054393cfe8cb3566638213ef9e04b34fc7ea1d42a7a4"
+    },
+    "Durable_learning_captured": "Completed producerdependencies can materialize a previously absent job; exhaustive earlypagination is notdeclaredcompletion. Preserve source/control/testedmerge, checkversuslaterjob timing,policyUNKNOWN andactualcheckout scope.",
+    "Evidence": "Source3155 workflowSHA inventory exact; sevenruns20currentjobs19PR+1aux; missingpublisher at initial64180 now114426104242SUCCESS aftermacwheel; stable600d/99ac/776+3155; branchmetadataoff/rulesets[] versus403traditionalpolicy.",
+    "Stale_or_ambiguous_guidance_removed": "No initial19-jobcount asfinal, prior5dbgreen ascurrent qualification, mixedsnapshots collapsed intoinventedterminalrollup, jobstatus asobservedtestcase/checkout, orrulesets[] aspolicybypass.",
+    "Remaining_uncertainty": "TwoMacjobs pending,drafttrue, inaccessibletraditionalpolicy andactualrunnerGit/testnode result notyetqualified; native/provider/backend/private/fullissue/release gates open."
+  },
+  "actions": "Oneboundedmetadata census; samepagecomplete currentchecks/runs/jobs/statuses/reviews/threads/policy/refbrackets andownimmutable workflow inspection. OwnedprivateAPI/safereceipt only; no poll/retry/cancel/logorartifactdownload/native/service/source/refmutation/merge.",
+  "upstream_disposition": "none"
+}

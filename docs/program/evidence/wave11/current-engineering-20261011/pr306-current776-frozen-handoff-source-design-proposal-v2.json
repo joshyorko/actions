@@ -1,0 +1,90 @@
+{
+  "status": "FROZEN_ORDERING_SOURCE_DESIGN_PROPOSAL_V2_NO_SOURCE_MUTATION",
+  "current_head": "d3c4cee69ea715779bb28ada0d8fea2ccb72e0d7",
+  "current_tree": "90c7a268f2d3ebbf8419d8ba669e5ebfd020769c",
+  "actual_tested_original_checkout": "11484f93750b51cafc052b46030cfcbd89f2ee18",
+  "test_blob_unchanged": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92",
+  "RED": "legacy B-only wait TRUE while A-v2 direct owner valid; expected false assertion FAILED1",
+  "GREEN": "combined B-presence plus all old A-declaration absence FALSE before A removal, TRUE after A removal; strict historical conflict blocks every old concrete URI without callback; other B URIs/B-safe/A-control success; PASS1",
+  "transport": "existing actual _CustomFastAPI/_ActionRoutes/SQLite catalog + TestClient, synthetic callback only, same transition and route definitions, no native/frozen/runtime process or watcher",
+  "warning_scope": "standalone owned probe outside package conftest produced3199 existing deprecation warnings in each bounded invocation",
+  "proposed_source_scope": "one existing CLI helper plus first handoff admission wait predicate only; preserves per-transition30s/50ms waits and all assertions/callbacks/restart/deadlines. Regression to integrate after independent design GO using existing catalog fixture/actual catalog responses rather than new production implementation.",
+  "separate_RPC_limit": "resources/list and resources/templates/list are not atomic; fixture removes A claims monotonically and does not reintroduce until later restart",
+  "hosted_cause": "UNKNOWN: deterministic witness proves insufficient wait condition, not actual hosted scheduling or timestamp cause",
+  "native_input_disposition": "proposal changes one of five selected tests and requires new source selector binding; no native old tuple carry",
+  "documentation": {
+    "file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Candidate presence alone is not cross-package ownership handoff completion; require old declaration absence plus all candidate presence, retain semantic assertions and separate-RPC limitation",
+    "evidence": "actual assembled ordering control RED1/GREEN1",
+    "stale_ambiguity_removed": "No inference that new route visibility proves previous owner relinquishment",
+    "remaining_uncertainty": "actual Linux update order and native V2 observer observations unavailable"
+  },
+  "Upstream_disposition": "none",
+  "source_mutation": false,
+  "evidence": [
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/test_handoff_probe.py",
+      "bytes": 4633,
+      "sha256": "00694ca2c471bac425f6a96759a12535381bc36302a8756b0326cd2d88cc2519"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/handoff-legacy-RED.log",
+      "bytes": 10415,
+      "sha256": "c83d316f3a9b9e1950df56cbe1af95674fd736625eae43a253b6b81e4833ea48"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/handoff-legacy-exit.json",
+      "bytes": 33,
+      "sha256": "5cac2634805284422f45ca22d6261c1b013dd36a5853272100bf5a60a9748e53"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/handoff-full-GREEN.log",
+      "bytes": 5968,
+      "sha256": "012fa2aa06f93b1f0a4d37adbcd9d425e8513d2c16a21bd649bdd9ddc02d080d"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/proposed-handoff-test-only.patch",
+      "bytes": 1951,
+      "sha256": "73707d1fa4f9cab3158ad5e3c1b5e70c697e60a188433e5692e76f96e6beb3ee"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/proposed-handoff-canonical.patch",
+      "bytes": 1032,
+      "sha256": "aee4797183b1c51f0355cee844147ccac95f0b13aad7c74bbc8c3d5bec4362c5"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/safe-original-linux-handoff-hypothesis.json",
+      "bytes": 1016,
+      "sha256": "e5a17f73d245021fa14c1930133b2ded4891741299cbaabed9fecb05161930e5"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/safe-original-linux-log-census.json",
+      "bytes": 1538,
+      "sha256": "dd4f40197f294adee864620dd59a85af60d19e26ea79bb91242a107f4079b163"
+    }
+  ],
+  "predecessor": {
+    "path": "/workspace/engineering/pr306-actual776-refresh/frozen-handoff-ordering-proof-proposal.json",
+    "bytes": 4171,
+    "sha256": "b393cd8fea81b3efe69a8ee60cf46372c70555b155d870545ab4fc1125de22e9"
+  },
+  "canonical_placement": "after same-owner resource revisions, beside concrete ownership/history section",
+  "proposed_regression": "Existing catalog fixture; actual two listRPCresults replace only CLI transport; oldB listing proof, combined false/true barrier, originalstrict historicalerrors/callback nonexecution and unrelated positives; missingB poison false",
+  "new_named_successor_evidence": [
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/proposed-handoff-canonical-v2.patch",
+      "bytes": 1249,
+      "sha256": "dfba16eb99635255cc91bd54e900dafe9e3658b3d1d4ea7dc307a552f4d9ecb5"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/proposed-handoff-regression.patch",
+      "bytes": 3832,
+      "sha256": "68bffd85bd71231a9bb4730325f707849e686cb4114d5d197f97d431a87ee91a"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/safe-original1a-terminal-diagnosis.json",
+      "bytes": 7263,
+      "sha256": "8e801bd76694d4ff3c4a9aa2faf5bf212b22bbe32d3e55569b784ac6c6d4e983"
+    }
+  ]
+}

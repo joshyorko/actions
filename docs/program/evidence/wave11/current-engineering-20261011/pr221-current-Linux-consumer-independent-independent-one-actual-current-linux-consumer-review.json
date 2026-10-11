@@ -1,0 +1,110 @@
+{
+  "schema": "actions-independent-current776-linuxcp312-one-actual-consumer-review/v1",
+  "verdict": "GO_NARROW_ONE_ACTUAL_CURRENT_LINUX_CP312_INSTALLED_CONSUMER_ONLY",
+  "checkpoint": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/frozen-one-actual-current-linux-consumer-checkpoint.json",
+    "bytes": 8866,
+    "sha256": "f681018b9b516d9b969ea8d0786f4688ebb1c95b46e031217cf388645d8affaa"
+  },
+  "preexecution_review": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-frozen-one-consumer-preexecution-review.json",
+    "bytes": 9830,
+    "sha256": "6346a5feb759d9fb6615d20da814b02de8c528ae273ec7eaa20e56b8327fdb7f"
+  },
+  "independent_original_result_proof": {
+    "path": "/workspace/engineering/pr221-current776-linux-consumer-independent-review/independent-original-one-consumer-result-proof.json",
+    "bytes": 16150,
+    "sha256": "7eaa354c02975ee4fbdccb7a24368ee3a74287d1ade02fba2a8a58026610de52"
+  },
+  "execution_subject": {
+    "original_build": {
+      "actual_integration_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "actual_integration_tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf",
+      "api_head": "a346fd7dfca7a6490e6968d16c809a85814ff5b0",
+      "artifact_id": 11693813383,
+      "artifact_zip_bytes": 28271148,
+      "artifact_zip_sha256": "32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6",
+      "attempt": 1,
+      "build_is_actual_integration_job": false,
+      "checkout": "f5dd0e18d9cda660c2eaa6bbc33a11180ddd7158",
+      "event": "pull_request",
+      "parents": [
+        "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+      ],
+      "publication": false,
+      "run_id": 38118859475,
+      "scope": "two originalLinuxwheels only; consumer selects cp312; seven-artifact gate HOLD",
+      "source_candidate": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+      "source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+      "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf"
+    },
+    "actual_integration": {
+      "ordered_parents": [
+        "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+        "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+      ],
+      "producer_not_relabelled_actual": true,
+      "producer_tree_equal_actual": true,
+      "sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "tree": "a1c4aecb8aa83935245377cfecfa1de568a25dcf"
+    },
+    "runner": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py",
+      "bytes": 19366,
+      "sha256": "1768d6edebc874f5f76ea77a6a3a49d6effa46e144340b7f49bf6f3da0fcf809"
+    },
+    "input_gate": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/current-input-admission-v2.py",
+      "bytes": 7267,
+      "sha256": "3be2b971a43de3848c5a1aec59eecbeb6ac9dd796a81a6f2e489eab782492d1a"
+    },
+    "original_ZIP": {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/original-Linux-wheels-11693813383.zip",
+      "bytes": 28271148,
+      "sha256": "32485758f22e51b529d3ea657c4f4c0033233f6c84ec7d3d605c4493c11d82c6"
+    },
+    "selected_wheel": {
+      "path": "/workspace/engineering/pr221-current302-linux-wheel-owned/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14166151,
+      "sha256": "f82ee06c09e07bd224e797e11b7e58138920c0c8df49ef814ac50b0087d81c6c"
+    },
+    "case_count": 1,
+    "skip_count": 0,
+    "gateway_exit": 0,
+    "case_kind": "Installed consumer runner case; no fabricated pytest/JUnit result",
+    "CLI": "1.0.3"
+  },
+  "findings": [],
+  "accepted_measurements": {
+    "input_admission": "Current originalZIP/wheel SHA and complete inventory reverified. 215 RECORD entries/214 SHA+size rows;209 tracked payloads equal actual776 and originald642;196 Python count derived from wheel",
+    "installed_member_admission": "All196 retained measured installed-member hashes equal exact wheel bytes; complete inventory names and wheel SHA match; prefix distinct base; four actual import origins prefix-contained and all sys.path/origins/members outside15 known checkout roots. Unchanged reviewed full-member private-Core guard runs before passed proof write.",
+    "public_floor": "Actual pip report exact Core1.0.2 and Helper1.0.3 URL/SHA/version identities; isolated uncached binary-only install argv, pip check reports no broken requirements; CLIstdout exact1.0.3 LF/stderr empty",
+    "frozen_bindings": "Owner-announced checkpoint, root one-attempt authorization,645+10 command,1768 runner,3be2 input gate,57a8 proposal, helper snapshots/source hashes, original raw reports/logs/proof/cleanup retained and rehashed. No retry observed or introduced by reviewer.",
+    "cleanup": "Four strict booleans TRUE; error/readers/observed live/observed zombie lists EMPTY; owned temporary root absent; elapsed19.646487973001058s. Captured PID/create-time scope only, not universal adoption or natural shutdown proof.",
+    "raw_retention": "Original stdout/stderr, pip report, inventory, CLI output, install argv, attempt/input/proof/cleanup and gateway files retained privately; safe review exposes hashes/counts/scope only."
+  },
+  "postcleanup_limit": "Temporary environment removed by reviewed owner. Independent review compares recorded installed-member digest observations to original wheel and reviews the exact executed admission path; it does not claim a new rehash of absent installed files.",
+  "identity_scope": "Original PRbuild f5dd/controla346/source d642 remains original producer. Actual776 treea1c equals build/control tree, authenticating selected payload correspondence without relabeling original build as integration job. Old12340/7704/00d1 consumer is separate retained evidence.",
+  "remaining_HOLD": [
+    "Both generated OAuth strings measured EMPTY; approved input authority and content qualification remain HOLD irrespective import success",
+    "Full seven-artifact cross-platform inventory, cp313 consumer, tag/upload/publication/official release provenance remain HOLD",
+    "Selected209 source correspondence and Linux installed-member/private-import gate do not replace complete producer/native qualification",
+    "No Runtime service/provider/backend/native/browser/ChatGPT/private01f/frozen-v6/full134 or full retained graph/release acceptance",
+    "No issue closure or broad Runtime221 release GO"
+  ],
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Exact delta": {
+      "path": "/workspace/engineering/pr221-current776-linux-consumer-preflight/canonical-partial-platform-consumer-scope-proposed.patch",
+      "bytes": 1158,
+      "sha256": "bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81"
+    },
+    "Disposition": "ACCEPT/REUSE verified precise partial-platform consumer paragraph bf95da899763f97c016f76fa4a0cf8878ebba8326d57c11ab1a520b1df597c81; no cosmetic or session-diary amendment",
+    "Durable learning captured": "Linux cp312 installed-consumer acceptance remains separate from complete seven-artifact release inventory. Preserve original build identities through actual merge tree equivalence; independently derive new member count; generated-input content/authority remains separate from successful imports.",
+    "Evidence": "Frozen actualf681 and independent raw7eaa review: one case/CLI1.0.3/Core1.0.2+Helper1.0.3/196member/209payload/214RECORD observations with exact original116938 ZIP324857 and wheelf82e; unchanged runner1768/helper bindings; strict bounded cleanup and actual776/f5dd complete-tree equality.",
+    "Stale or ambiguous guidance removed": "Prevents partial Linux PASS or equal196 count from being read as full inventory/publication/current-integration-build/source-content acceptance; no earlier artifact identities relabeled.",
+    "Remaining uncertainty": "Unapproved empty generated inputs, remaining platform/artifact/publication/private/native/provider/full acceptance gates, universal cleanup and natural shutdown unproven."
+  },
+  "Upstream disposition": "none"
+}

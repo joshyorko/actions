@@ -1,0 +1,225 @@
+{
+  "status": "ORIGINAL1A_TERMINAL_DIAGNOSIS_NO_CAUSE_OR_NATIVE_FIX_CLAIM",
+  "source_head": "1a3ab0b580710f776fd2075d39e04720c71541ff",
+  "actual_checkout": "11484f93750b51cafc052b46030cfcbd89f2ee18",
+  "tree": "f2bc958f11a15d1f01b5d0d82dd1f3f51bf590fc",
+  "ordered_parents": [
+    "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+    "1a3ab0b580710f776fd2075d39e04720c71541ff"
+  ],
+  "actual_git_object_local": "UNAVAILABLE; authenticated commit tree equals existing local1a tree; no currentPRmerge_ref substitution",
+  "Linux": {
+    "run": 38120640953,
+    "job": 114414469493,
+    "conclusion": "failure",
+    "source": {
+      "passed": 1217,
+      "skipped": 12,
+      "warnings": 15,
+      "seconds": 137.03
+    },
+    "integration": {
+      "failed": 1,
+      "passed": 131,
+      "skipped": 17,
+      "deselected": 1232,
+      "seconds": 682.38
+    },
+    "sole_node": "test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart",
+    "first_stage": "MCP historical-owner semantic assertion after startup",
+    "source_line": 619,
+    "assertion_helper_line": 278,
+    "fixture_classification": {
+      "owner": "A",
+      "revision": "v2",
+      "transition": "direct_to_template"
+    },
+    "readiness_timeout_attribution": false,
+    "cleanup_receipt": "UNAVAILABLE; no timeout secondarynote observed does not prove complete cleanup",
+    "cause": "UNKNOWN; service-free actual catalog witness separately proves B-only barrier insufficient"
+  },
+  "Windows": {
+    "job_id": 114414469647,
+    "run_id": 38120640953,
+    "status": "completed",
+    "conclusion": "success",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Checkout repository and submodules",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install the latest version of uv",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install Python 3.12",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install devutils requirements",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install project (not dev)",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Install project (dev)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Setup go",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Setup node",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Build frontend",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Build OAuth2 config",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Test Go wrapper child lifecycle",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Build binary",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Upload artifact: action_server/dist/final/",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Test (not integration)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install Playwright Chromium for Runtime browser acceptance",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Test (integration)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Retain Windows native startup diagnostics",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "`inv lint`, potentially fixed with `inv pretty`",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "`inv typecheck`",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "`inv docs` with checking on files changed",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Setup node",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Setup go",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Install the latest version of uv",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Checkout repository and submodules",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "Windows_V2_observations": "UNAVAILABLE: exact artifactmetadata but one authenticated redirectForbidden; no retry/log acquisition",
+  "raw_log_privacy": "one decodedLinux acquisition stored0600 outsideGit; no rawpayload in receipt; artifactghstderr was not redirected and temporarysignedURL surfaced in toolerror, acknowledged to root and no retry",
+  "ordinary_actual776_source_refresh": "d3c4cee69ea715779bb28ada0d8fea2ccb72e0d7 leaves historicalresource-test unchanged; no oldfailure fix claim",
+  "evidence": [
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/original1a-linux-job-114414469493.private.log",
+      "bytes": 1504752,
+      "sha256": "6e7a9e074012ecc70df0bd454727183150284385e464e1aee1556bb813eb0de9"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/original1a-tested-commit.raw.json",
+      "bytes": 57178,
+      "sha256": "ac3e720a71083f797c19b8c7164db1873ab0f451128f6a48f88c27823d98eae0"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/pre-refresh-original1a-hosted-inventory.json",
+      "bytes": 15358,
+      "sha256": "b68d7076ccd9f1c676de0bb63bfbbf14969e488e369afa6268e25af2363be437"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/safe-original-linux-log-census.json",
+      "bytes": 1538,
+      "sha256": "dd4f40197f294adee864620dd59a85af60d19e26ea79bb91242a107f4079b163"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/safe-original-linux-assertion-category.json",
+      "bytes": 907,
+      "sha256": "6ee25a6c71bcea5b9bd31389e9370ec4d75766acac512dddba5a08e46f82d004"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/safe-original-linux-handoff-hypothesis.json",
+      "bytes": 1016,
+      "sha256": "e5a17f73d245021fa14c1930133b2ded4891741299cbaabed9fecb05161930e5"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/safe-original1a-Windows-status-successor.json",
+      "bytes": 3127,
+      "sha256": "08a954dfe251e9e855aaf82564c3a041afb387f89f0b10097205bb0a2a773c94"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/safe-original-diagnostic-artifact-acquisition-failure.json",
+      "bytes": 315,
+      "sha256": "09057aeb53b0d0db8f0d8f1f6ed61de1f2eb917b6f3f938666d7e6d4f4e621ef"
+    }
+  ],
+  "Upstream_disposition": "none"
+}

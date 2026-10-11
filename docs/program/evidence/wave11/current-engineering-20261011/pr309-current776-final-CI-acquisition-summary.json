@@ -1,0 +1,23 @@
+{
+  "bounded_single_snapshot": true,
+  "rest_requests": 28,
+  "rest_nonzero": [
+    [
+      "base-protection",
+      1
+    ]
+  ],
+  "graphql_connections": [
+    [
+      309,
+      "closures",
+      1
+    ],
+    [
+      309,
+      "threads",
+      1
+    ]
+  ],
+  "no_log_zip_or_source_mutation": true
+}

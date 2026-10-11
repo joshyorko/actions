@@ -1,0 +1,186 @@
+{
+  "schema": "independent-current776-narrow-handoff-source-review-v1",
+  "decision": "GO_NORMAL_EXISTING_BRANCH_PUSH_ONLY",
+  "head": "662014533d8104c1998bce26d91211140acc08e5",
+  "tree": "118b7d6f7c51107a08e062825c5fabbb5496975c",
+  "ordered_parents": [
+    "d3c4cee69ea715779bb28ada0d8fea2ccb72e0d7"
+  ],
+  "ordinary_merge_ordered_parents": [
+    "1a3ab0b580710f776fd2075d39e04720c71541ff",
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+  ],
+  "branch": "fix/database-savepoint-admission-20261010",
+  "source_worktree_clean": true,
+  "authoritative_owner_announced_frozen_receipt": {
+    "path": "/workspace/engineering/pr306-actual776-refresh/frozen-source-receipt.json",
+    "bytes": 18457,
+    "sha256": "2d85e5b9e3842368e60c2c935680ad2376e0e38e88d832256361fa78f0ae40e6"
+  },
+  "proof": {
+    "path": "/workspace/engineering/pr306-actual776-independent-source-review/independent-byte-AST-and-evidence-proof.json",
+    "bytes": 203252,
+    "sha256": "db5b0d0c3742900c85cb6eacbe0e77a330e080a7f664572768377ffe1772ec14"
+  },
+  "reviewer_byte_AST_script": {
+    "path": "/workspace/engineering/pr306-actual776-independent-source-review/review_frozen_source_v2.py",
+    "bytes": 13894,
+    "sha256": "4d3ee4e2be57b09ba536ee0e756e012a93cae5ae989974c9915dd3d10888a8a9"
+  },
+  "reviewer_receipt_script": {
+    "path": "/workspace/engineering/pr306-actual776-independent-source-review/freeze_independent_review.py",
+    "bytes": 9217,
+    "sha256": "d693a0e619279fa3f01854de2025a62626a19a971d1c6577e0b85df6b8ad0895"
+  },
+  "independent_design": {
+    "path": "/workspace/engineering/pr306-handoff-independent-design-review/independent-frozen-handoff-design-review.json",
+    "bytes": 8446,
+    "sha256": "318bb338de32e0a51ded54778b5e48e375153ce8f50230fe9f099ef7b18f2bb2"
+  },
+  "source_design_v3": {
+    "path": "/workspace/engineering/pr306-actual776-refresh/frozen-handoff-source-design-proposal-v3.json",
+    "bytes": 6638,
+    "sha256": "702d4c12c8f5d1ca7443f9413e3dd0256c69ccf2a4fbd26b2dc8d78ff66572ac"
+  },
+  "all46_final_evidence_hashes_verified": true,
+  "all16_design_reference_hashes_verified": true,
+  "source_preservation": {
+    "ordinary_union_leaves": 1409,
+    "sole_novel_ordinary_leaf": "docs/skills/repository-operations.md",
+    "changed_paths": [
+      "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+      "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "all_other1406_bodies_modes_exact_ordinary_parent": true,
+    "all1409_Git_and_pre_full_working_SHA256_exact": true,
+    "actual776_workflow_tree_exact": true,
+    "original_CLI_AST_after_reversing_only_first_wait_and_removing_new_helper": "EXACT",
+    "all_original_resource_history_AST_except_one_added120line_test": "EXACT",
+    "new_regression_matches_reviewed_v2_AST": true,
+    "two_fixed_key_asserts_only_typed_helper_refinement": true,
+    "original_DBguard_and72_V2_precision_loss_privacy_controls": "EXACT_BYTES plus72 current fullPASS node names",
+    "original_watched_startup90FIRST_cleanup20_samples80_88_join50ms_and_first_wait30s_poll50ms_restart_errors_callback_otherURI": "PRESERVED_BYTE_AST_PROOF",
+    "all268_producer_entries_exact_ordinary_parent": true,
+    "all_five_selectors_compared_without_exclusions": true,
+    "historical92498_two_production_deltas": [
+      "action_server/src/actions/server/_database.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py"
+    ],
+    "historical92498_one_selected_delta": "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+    "oldnative_control_qualification": "UNQUALIFIED_HOLD"
+  },
+  "meaningful_regression": {
+    "fixture": "Existing real _CustomFastAPI/_ActionRoutes/SQLite in-memory/TestClient catalog, synthetic callback counter unchanged; only CLI transport wraps actual two RPC responses",
+    "RED": "Integrated original B-only predicate1FAIL before A declarations relinquished",
+    "GREEN": "28PASS1nativeDESELECT including allthree oldA re-enable poisons/allthree B removal poisons and six restorations",
+    "unchanged_semantics": "Historical owner errors/no callback; other candidate expansions/Bsafe/Acontrol success",
+    "limits": "Two RPCs not atomic; no original hosted timing-cause proof or production authorization defect claim"
+  },
+  "gate_readback": {
+    "Doctor": "PASS pinned RCC18.19.3 gateway",
+    "Bootstrap": "Own successful prepared0babc reused;30 actual declared input bytes and five own source-prefix/origin/config records verified, no install",
+    "ToolkitTest": "96PASS",
+    "scoped": "216PASS1PostgreSQLSKIP14integrationDESELECT",
+    "configured_static": "Original Mypy object-inferenceFAIL retained; only fixed-key assertions resolve it; configured Ruff/Black/Isort/Mypy337PASS",
+    "generation": "Eight workflows unchanged/all30 .github YAML parsed and bytes preserved",
+    "full": {
+      "passed": 1233,
+      "skipped": 13,
+      "warnings": 15,
+      "seconds": 132.64,
+      "workers": 2,
+      "outer_seconds": 600,
+      "kill_grace_seconds": 10,
+      "RCC": "SUCCESS",
+      "command_exit": 0
+    },
+    "current_before_after1409_hashes": "EXACT"
+  },
+  "historical_actual_limits": {
+    "head": "1a3ab0b580710f776fd2075d39e04720c71541ff",
+    "Linux_job": 114414469493,
+    "run": 38120640953,
+    "Linux_actual_checkout": "11484f93750b51cafc052b46030cfcbd89f2ee18",
+    "Linux_tree": "f2bc958f11a15d1f01b5d0d82dd1f3f51bf590fc",
+    "Linux_checkout_ordered_parents": [
+      "774438b130afb2ead9bbc1c1b76cb6f91e72150a",
+      "1a3ab0b580710f776fd2075d39e04720c71541ff"
+    ],
+    "Linux_source": "1217PASS12SKIP",
+    "Linux_native_integration": "1FAIL131PASS17SKIP1232DESELECT; resource-history conflicting-owner assertion line619; returned fixed known A-v2 direct\u2192template fixture",
+    "Linux_actual_update_order_cause": "UNKNOWN; assembled control establishes insufficient test barrier, not original hosted scheduler/timestamp cause or production authorization defect",
+    "Windows_job": 114414469647,
+    "Windows_terminal": "SUCCESS metadata including source/integration/lint/type/diagnosticupload; no independent Windows checkout/node/counters claimed",
+    "Windows_V2_contents": "UNAVAILABLE; one authenticated exact artifact ZIP read redirectForbidden,0Bpartial retained private, no retry or Windowslog acquired",
+    "raw_log_disposition": "single decodedLinuxlog acquired private0600 outsideGit; signedURL accidentally surfaced through unredirectedartifactCLIstderr acknowledged to root, no intentional URL or rawpayload in receipt"
+  },
+  "receipt_identity": {
+    "preliminary_root_dispatch": "Construction draft pre-freeze HOLD, not source/gateFAIL",
+    "retained_draft": {
+      "path": "/workspace/engineering/pr306-actual776-refresh/frozen-source-receipt-construction-draft.json",
+      "bytes": 18155,
+      "sha256": "efe56fd3b844baae8f7cdfb8a552a81947d7fee71fc4245d44d2ca3c49448eb7"
+    },
+    "final_named_successor": {
+      "path": "/workspace/engineering/pr306-actual776-refresh/frozen-source-receipt-final-successor.json",
+      "bytes": 18457,
+      "sha256": "2d85e5b9e3842368e60c2c935680ad2376e0e38e88d832256361fa78f0ae40e6"
+    },
+    "historical_UNAVAILABLE_observation_retained": {
+      "path": "/workspace/engineering/pr306-actual776-refresh/receipt-construction-identity-reconciliation.json",
+      "bytes": 2861,
+      "sha256": "02f43a82322a03f29c087efe67f90336f59af2a3ac01cfe511251d02545d2723"
+    },
+    "content_addressed_authored_constructor_recovery": {
+      "path": "/workspace/engineering/pr306-actual776-refresh/original-constructor-content-recovery/freeze-source-receipt-initial-exact-recovered.py",
+      "bytes": 11281,
+      "sha256": "6c5367796b853a77cca55f0256d71ba0d42deb1e9abade55cff063a37e0622f7"
+    },
+    "recovery_disposition": {
+      "path": "/workspace/engineering/pr306-actual776-refresh/original-constructor-content-recovery/safe-authored-constructor-recovery-disposition.json",
+      "bytes": 2127,
+      "sha256": "fff2aa6f43995e46c843c4ce80ad81cef635d4f0de4d11607d4be37451379c97"
+    },
+    "exact_three_authored_literal_edits_independently_reversed_AST_equal": true,
+    "constructors_executed_by_reader": false,
+    "original_path_and_prior_admission_not_rewritten": true
+  },
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md: exact10-line lesson already integrated; explicit reuse of distinct readonly owner-freeze/constructor proposal for root integration",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr306-actual776-refresh/actual-handoff-canonical-delta.patch",
+      "bytes": 1453,
+      "sha256": "fb557e5d7ca92f94871920212c5b464ffc0428716d6447917f65743127b0ef04"
+    },
+    "Exact_reviewed_placement": {
+      "path": "/workspace/engineering/pr306-actual776-refresh/proposed-handoff-canonical-v2.patch",
+      "bytes": 1249,
+      "sha256": "dfba16eb99635255cc91bd54e900dafe9e3658b3d1d4ea7dc307a552f4d9ecb5"
+    },
+    "Reused_readonly_owner_freeze_proposal": {
+      "path": "/workspace/engineering/pr306-actual776-refresh/original-constructor-content-recovery/canonical-immutable-constructor-and-owner-freeze-proposed.patch",
+      "bytes": 1401,
+      "sha256": "b0ff0bf2bb0a18af8dc354e1503fd10e576873d4fa870a05b238ad35af701fe6"
+    },
+    "Durable_learning": "B discovery does not prove A relinquished ownership declarations; wait for all B and absence of all A before unchanged historical error checks, preserving no-callback and unrelated success. Two list RPCs are not atomic. Hash-bound authored constructors and owner-announced frozen receipts need distinct preservation.",
+    "Evidence": "Real catalog B-before-A RED; six independent poison/restoration states; integrated28/currentfull1233; dfba exact10-line ownership-history placement; retained draftefe/final2d85 and exact original constructor11281/SHA6c53 recovery without execution.",
+    "Stale_or_ambiguous_guidance_removed": "B-only first handoff readiness replaced without timeout change; catalog discovery versus relinquishment clarified. Accepted target302 guide replacements and original DB/V2/precision paragraphs preserved. Owner-freeze proposal rejects dispatch based on visible construction drafts.",
+    "Remaining_uncertainty": "Original native timingcause UNKNOWN; separateRPC observations not atomic. Windows metadata SUCCESS lacks actual checkout/counters/V2contents. New native producer/control evidence, healthyPG/private/fullissues/release remain HOLD. Original constructor path/history not rewritten."
+  },
+  "remaining_HOLDs": [
+    "fresh exact-head full hostedCI and native gate after rootpush",
+    "current exactproducer+selector native artifact qualification",
+    "actual healthyPostgreSQL/currentfull84 admission",
+    "private/backend/ChatGPT/coldinstall/release/publication acceptance",
+    "No integration/issueclosure/whole84/152/196/private/release admission"
+  ],
+  "review_actions": {
+    "source_or_index_mutations": false,
+    "gate_reruns": 0,
+    "log_or_artifact_downloads": 0,
+    "push_merge_publication": false,
+    "reader_assertion_corrections": "Pure review assertions initially assumed every obsolete oldguide line must survive accepted target replacements and three literal edits must span three textdiff hunks. Corrected via exact accepted imported guide delta and structural AST reversal. No source finding/gate failure."
+  },
+  "Upstream_disposition": "none"
+}

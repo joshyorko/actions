@@ -1,0 +1,55 @@
+{
+  "status": "RECEIPT_CONSTRUCTION_IDENTITY_RECONCILIATION_NO_SOURCE_OR_GATE_CHANGE",
+  "old18155_retained_exact": {
+    "path": "/workspace/engineering/pr306-actual776-refresh/frozen-source-receipt-construction-draft.json",
+    "bytes": 18155,
+    "sha256": "efe56fd3b844baae8f7cdfb8a552a81947d7fee71fc4245d44d2ca3c49448eb7"
+  },
+  "old_observation_disposition": "Root inspected/dispatched while receipt construction continued, before worker finalannouncement; preserved predecessor bytes, not source admission",
+  "final18457_frozen_exact": {
+    "path": "/workspace/engineering/pr306-actual776-refresh/frozen-source-receipt.json",
+    "bytes": 18457,
+    "sha256": "2d85e5b9e3842368e60c2c935680ad2376e0e38e88d832256361fa78f0ae40e6"
+  },
+  "final_distinct_named_successor_same_bytes": {
+    "path": "/workspace/engineering/pr306-actual776-refresh/frozen-source-receipt-final-successor.json",
+    "bytes": 18457,
+    "sha256": "2d85e5b9e3842368e60c2c935680ad2376e0e38e88d832256361fa78f0ae40e6"
+  },
+  "source_head": "662014533d8104c1998bce26d91211140acc08e5",
+  "source_tree": "118b7d6f7c51107a08e062825c5fabbb5496975c",
+  "exact_changed_top_level_fields": [
+    "draft_proof_disposition",
+    "evidence"
+  ],
+  "shared_evidence_bindings_exact": 44,
+  "retired_predecessor_evidence_refs": [
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/current-complete-producer-selector-union-proof.json",
+      "bytes": 45050,
+      "sha256": "e97b3f02a91476e4781db60579ef4412824f9d92e677f2dd8e874c1bcc17f5fb"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/freeze-source-receipt.py",
+      "bytes": 11281,
+      "sha256": "6c5367796b853a77cca55f0256d71ba0d42deb1e9abade55cff063a37e0622f7"
+    }
+  ],
+  "new_named_successor_refs": [
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/current-complete-producer-selector-union-proof-final.json",
+      "bytes": 45342,
+      "sha256": "8991166075cb18689ef08f9fe4134c6e682984ded2222babdb1090f53bd031a5"
+    },
+    {
+      "path": "/workspace/engineering/pr306-actual776-refresh/freeze-source-receipt-v2.py",
+      "bytes": 11583,
+      "sha256": "2048d77548dcbebd62db77756df56496609a70c78a05a995619ad3758b3be13f"
+    }
+  ],
+  "label_correction": "Remove stale execution-pending label from named inventory successor; bind final constructor-v2 and explain prior proof drafts accurately. Inventory identity has no execution authority; full execution bound independently.",
+  "original_initial_constructor_bytes": "UNAVAILABLE at original path after construction edits; do not reconstruct/relabel. Predecessor receipt completeness HOLD for this unavailable dependency; predecessor receipt bytes themselves retainedexact.",
+  "all_final46_bindings_verified": true,
+  "all_final_source_gate_DOC_inventory_actuals_unchanged": true,
+  "no_source_or_gate_rerun": true
+}

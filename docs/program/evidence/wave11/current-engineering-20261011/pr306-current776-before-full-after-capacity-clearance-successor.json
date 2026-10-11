@@ -1,0 +1,11 @@
+{
+  "bound_predecessor": "before-full-source-checkpoint.json",
+  "predecessor_sha256": "183a3de2b0ca2090cecbac44e5614be3b49cf0010b491948cdcc078acb258eb4",
+  "head": "662014533d8104c1998bce26d91211140acc08e5",
+  "tree": "118b7d6f7c51107a08e062825c5fabbb5496975c",
+  "all1409_before_bytes_unchanged": true,
+  "source_clean": true,
+  "fresh_workspace_free_bytes": 3188604928,
+  "full_workers": 2,
+  "outer600_TERM_10KILL": true
+}

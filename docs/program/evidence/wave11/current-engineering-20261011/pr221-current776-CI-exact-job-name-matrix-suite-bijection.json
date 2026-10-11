@@ -1,0 +1,755 @@
+{
+  "schema": "exact-workflow-job-check-bijection-v1",
+  "PR": 221,
+  "head": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+  "every_declared_instance_matches_unique_job_name_matrix_and_suite": true,
+  "GitHub_truncated_toolkit_names_explicitly_accounted": true,
+  "job_id_matches_actual_check_run_url": true,
+  "bindings": [
+    {
+      "workflow_path": ".github/workflows/action_server_frontend_tests.yml",
+      "run_id": 38121679538,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417512512,
+          "check_id": 114417512512,
+          "check_suite_id": 103285672471,
+          "observed_display_name": "action-server-frontend-tests",
+          "exact_declaration": {
+            "name": "action-server-frontend-tests",
+            "job_key": "action-server-frontend-tests",
+            "matrix": {},
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/lighthouse.yml",
+      "run_id": 38121679553,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417512581,
+          "check_id": 114417512581,
+          "check_suite_id": 103285672507,
+          "observed_display_name": "lighthouse",
+          "exact_declaration": {
+            "name": "lighthouse",
+            "job_key": "lighthouse",
+            "matrix": {},
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/ai-audit.yml",
+      "run_id": 38121679683,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417513037,
+          "check_id": 114417513037,
+          "check_suite_id": 103285672874,
+          "observed_display_name": "audit",
+          "exact_declaration": {
+            "name": "audit",
+            "job_key": "audit",
+            "matrix": {},
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/work_items_release.yml",
+      "run_id": 38121679503,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417512495,
+          "check_id": 114417512495,
+          "check_suite_id": 103285672384,
+          "observed_display_name": "verify",
+          "exact_declaration": {
+            "name": "verify",
+            "job_key": "verify",
+            "matrix": {},
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114419317326,
+          "check_id": 114419317326,
+          "check_suite_id": 103285672384,
+          "observed_display_name": "publish",
+          "exact_declaration": {
+            "name": "publish",
+            "job_key": "publish",
+            "matrix": {},
+            "needs": "verify",
+            "if": "startsWith(github.ref, 'refs/tags/actions-work-items-')",
+            "expected_skip": true
+          },
+          "match": "EXACT"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/copilot-setup-steps.yml",
+      "run_id": 38121679486,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417512123,
+          "check_id": 114417512123,
+          "check_suite_id": 103285672302,
+          "observed_display_name": "copilot-setup-steps",
+          "exact_declaration": {
+            "name": "copilot-setup-steps",
+            "job_key": "copilot-setup-steps",
+            "matrix": {},
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/actions_runtime_tests.yml",
+      "run_id": 38121679549,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417512593,
+          "check_id": 114417512593,
+          "check_suite_id": 103285672506,
+          "observed_display_name": "build (windows-py3.12-devmode)",
+          "exact_declaration": {
+            "name": "build (windows-py3.12-devmode)",
+            "job_key": "build",
+            "matrix": {
+              "name": "windows-py3.12-devmode",
+              "python": "3.12",
+              "os": "windows-2022"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512728,
+          "check_id": 114417512728,
+          "check_suite_id": 103285672506,
+          "observed_display_name": "build (macos-py3.12-devmode)",
+          "exact_declaration": {
+            "name": "build (macos-py3.12-devmode)",
+            "job_key": "build",
+            "matrix": {
+              "name": "macos-py3.12-devmode",
+              "os": "macos-15",
+              "python": "3.12"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512762,
+          "check_id": 114417512762,
+          "check_suite_id": 103285672506,
+          "observed_display_name": "build (ubuntu-py3.12-devmode)",
+          "exact_declaration": {
+            "name": "build (ubuntu-py3.12-devmode)",
+            "job_key": "build",
+            "matrix": {
+              "name": "ubuntu-py3.12-devmode",
+              "python": "3.12",
+              "os": "ubuntu-22.04"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/coverage-gate.yml",
+      "run_id": 38121679507,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417512553,
+          "check_id": 114417512553,
+          "check_suite_id": 103285672389,
+          "observed_display_name": "coverage",
+          "exact_declaration": {
+            "name": "coverage",
+            "job_key": "coverage",
+            "matrix": {},
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/frontend-build.yml",
+      "run_id": 38121679558,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417512472,
+          "check_id": 114417512472,
+          "check_suite_id": 103285672512,
+          "observed_display_name": "build (windows-latest)",
+          "exact_declaration": {
+            "name": "build (windows-latest)",
+            "job_key": "build",
+            "matrix": {
+              "os": "windows-latest"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512542,
+          "check_id": 114417512542,
+          "check_suite_id": 103285672512,
+          "observed_display_name": "build (ubuntu-latest)",
+          "exact_declaration": {
+            "name": "build (ubuntu-latest)",
+            "job_key": "build",
+            "matrix": {
+              "os": "ubuntu-latest"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512576,
+          "check_id": 114417512576,
+          "check_suite_id": 103285672512,
+          "observed_display_name": "build (macos-latest)",
+          "exact_declaration": {
+            "name": "build (macos-latest)",
+            "job_key": "build",
+            "matrix": {
+              "os": "macos-latest"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/frontend-build-unauthenticated.yml",
+      "run_id": 38121679526,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417512482,
+          "check_id": 114417512482,
+          "check_suite_id": 103285672437,
+          "observed_display_name": "Build Action Server binary without credentials (ubuntu-22.04)",
+          "exact_declaration": {
+            "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+            "job_key": "build-external",
+            "matrix": {
+              "os": "ubuntu-22.04",
+              "python": "3.12"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512613,
+          "check_id": 114417512613,
+          "check_suite_id": 103285672437,
+          "observed_display_name": "Build Action Server binary without credentials (windows-2022)",
+          "exact_declaration": {
+            "name": "Build Action Server binary without credentials (windows-2022)",
+            "job_key": "build-external",
+            "matrix": {
+              "os": "windows-2022",
+              "python": "3.12"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512627,
+          "check_id": 114417512627,
+          "check_suite_id": 103285672437,
+          "observed_display_name": "Build Action Server binary without credentials (macos-15)",
+          "exact_declaration": {
+            "name": "Build Action Server binary without credentials (macos-15)",
+            "job_key": "build-external",
+            "matrix": {
+              "os": "macos-15",
+              "python": "3.12"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/developer_toolkit.yml",
+      "run_id": 38121679501,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417512444,
+          "check_id": 114417512444,
+          "check_suite_id": 103285672358,
+          "observed_display_name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+          "exact_declaration": {
+            "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4)",
+            "job_key": "toolkit",
+            "matrix": {
+              "lane": "primary",
+              "rcc_version": "18.19.3",
+              "os": "windows-2022",
+              "asset": "rcc-windows64.exe",
+              "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "GITHUB_DISPLAY_TRUNCATION_PREFIX_OF_FULL_MATRIX_LABEL"
+        },
+        {
+          "job_id": 114417512528,
+          "check_id": 114417512528,
+          "check_suite_id": 103285672358,
+          "observed_display_name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+          "exact_declaration": {
+            "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266)",
+            "job_key": "toolkit",
+            "matrix": {
+              "lane": "primary",
+              "rcc_version": "18.19.3",
+              "os": "macos-15",
+              "asset": "rcc-macosarm64",
+              "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "GITHUB_DISPLAY_TRUNCATION_PREFIX_OF_FULL_MATRIX_LABEL"
+        },
+        {
+          "job_id": 114417512537,
+          "check_id": 114417512537,
+          "check_suite_id": 103285672358,
+          "observed_display_name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+          "exact_declaration": {
+            "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b)",
+            "job_key": "toolkit",
+            "matrix": {
+              "lane": "n-1",
+              "rcc_version": "18.18.1",
+              "os": "windows-2022",
+              "asset": "rcc-windows64.exe",
+              "sha256": "705e2a4ec70a8bc3881f042a2eae222ed07e39a8360735307ee937d74d2a0f5b"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "GITHUB_DISPLAY_TRUNCATION_PREFIX_OF_FULL_MATRIX_LABEL"
+        },
+        {
+          "job_id": 114417512597,
+          "check_id": 114417512597,
+          "check_suite_id": 103285672358,
+          "observed_display_name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+          "exact_declaration": {
+            "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428)",
+            "job_key": "toolkit",
+            "matrix": {
+              "lane": "primary",
+              "rcc_version": "18.19.3",
+              "os": "ubuntu-22.04",
+              "asset": "rcc-linux64",
+              "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "GITHUB_DISPLAY_TRUNCATION_PREFIX_OF_FULL_MATRIX_LABEL"
+        },
+        {
+          "job_id": 114417512610,
+          "check_id": 114417512610,
+          "check_suite_id": 103285672358,
+          "observed_display_name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+          "exact_declaration": {
+            "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d)",
+            "job_key": "toolkit",
+            "matrix": {
+              "lane": "n-1",
+              "rcc_version": "18.18.1",
+              "os": "macos-15",
+              "asset": "rcc-macosarm64",
+              "sha256": "57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984d2d6a8190024798d"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "GITHUB_DISPLAY_TRUNCATION_PREFIX_OF_FULL_MATRIX_LABEL"
+        },
+        {
+          "job_id": 114417512684,
+          "check_id": 114417512684,
+          "check_suite_id": 103285672358,
+          "observed_display_name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+          "exact_declaration": {
+            "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf)",
+            "job_key": "toolkit",
+            "matrix": {
+              "lane": "n-1",
+              "rcc_version": "18.18.1",
+              "os": "ubuntu-22.04",
+              "asset": "rcc-linux64",
+              "sha256": "ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf02f2c9bb4b4ef0bfcf"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "GITHUB_DISPLAY_TRUNCATION_PREFIX_OF_FULL_MATRIX_LABEL"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/actions_core_tests.yml",
+      "run_id": 38121679528,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417512509,
+          "check_id": 114417512509,
+          "check_suite_id": 103285672443,
+          "observed_display_name": "build (ubuntu-py3.10-devmode)",
+          "exact_declaration": {
+            "name": "build (ubuntu-py3.10-devmode)",
+            "job_key": "build",
+            "matrix": {
+              "name": "ubuntu-py3.10-devmode",
+              "python": "3.10",
+              "os": "ubuntu-22.04"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512644,
+          "check_id": 114417512644,
+          "check_suite_id": 103285672443,
+          "observed_display_name": "candidate-wheel",
+          "exact_declaration": {
+            "name": "candidate-wheel",
+            "job_key": "candidate-wheel",
+            "matrix": {},
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512695,
+          "check_id": 114417512695,
+          "check_suite_id": 103285672443,
+          "observed_display_name": "build (macos-py3.10-devmode)",
+          "exact_declaration": {
+            "name": "build (macos-py3.10-devmode)",
+            "job_key": "build",
+            "matrix": {
+              "name": "macos-py3.10-devmode",
+              "os": "macos-15",
+              "python": "3.10"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512699,
+          "check_id": 114417512699,
+          "check_suite_id": 103285672443,
+          "observed_display_name": "build (windows-py3.10-devmode)",
+          "exact_declaration": {
+            "name": "build (windows-py3.10-devmode)",
+            "job_key": "build",
+            "matrix": {
+              "name": "windows-py3.10-devmode",
+              "python": "3.10",
+              "os": "windows-2022"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/http_helper_tests.yml",
+      "run_id": 38121679483,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417512498,
+          "check_id": 114417512498,
+          "check_suite_id": 103285672298,
+          "observed_display_name": "build (ubuntu-py3.10-devmode)",
+          "exact_declaration": {
+            "name": "build (ubuntu-py3.10-devmode)",
+            "job_key": "build",
+            "matrix": {
+              "name": "ubuntu-py3.10-devmode",
+              "python": "3.10",
+              "os": "ubuntu-22.04"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512615,
+          "check_id": 114417512615,
+          "check_suite_id": 103285672298,
+          "observed_display_name": "build (macos-py3.10-devmode)",
+          "exact_declaration": {
+            "name": "build (macos-py3.10-devmode)",
+            "job_key": "build",
+            "matrix": {
+              "name": "macos-py3.10-devmode",
+              "os": "macos-15",
+              "python": "3.10"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512672,
+          "check_id": 114417512672,
+          "check_suite_id": 103285672298,
+          "observed_display_name": "build (windows-py3.10-devmode)",
+          "exact_declaration": {
+            "name": "build (windows-py3.10-devmode)",
+            "job_key": "build",
+            "matrix": {
+              "name": "windows-py3.10-devmode",
+              "python": "3.10",
+              "os": "windows-2022"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/actions_runtime_pypi_release.yml",
+      "run_id": 38121679581,
+      "event": "pull_request",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417512652,
+          "check_id": 114417512652,
+          "check_suite_id": 103285672577,
+          "observed_display_name": "build-sdist (ubuntu-py3.12)",
+          "exact_declaration": {
+            "name": "build-sdist (ubuntu-py3.12)",
+            "job_key": "build-sdist",
+            "matrix": {
+              "name": "ubuntu-py3.12",
+              "python": "3.12",
+              "os": "ubuntu-22.04"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512824,
+          "check_id": 114417512824,
+          "check_suite_id": 103285672577,
+          "observed_display_name": "build-wheels (ubuntu-22.04)",
+          "exact_declaration": {
+            "name": "build-wheels (ubuntu-22.04)",
+            "job_key": "build-wheels",
+            "matrix": {
+              "os": "ubuntu-22.04",
+              "python": "3.12",
+              "name": "ubuntu"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512843,
+          "check_id": 114417512843,
+          "check_suite_id": 103285672577,
+          "observed_display_name": "build-wheels (windows-2022)",
+          "exact_declaration": {
+            "name": "build-wheels (windows-2022)",
+            "job_key": "build-wheels",
+            "matrix": {
+              "os": "windows-2022",
+              "python": "3.12",
+              "name": "windows"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114417512871,
+          "check_id": 114417512871,
+          "check_suite_id": 103285672577,
+          "observed_display_name": "build-wheels (macos-15)",
+          "exact_declaration": {
+            "name": "build-wheels (macos-15)",
+            "job_key": "build-wheels",
+            "matrix": {
+              "os": "macos-15",
+              "python": "3.12",
+              "name": "macos"
+            },
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        },
+        {
+          "job_id": 114424254461,
+          "check_id": 114424254461,
+          "check_suite_id": 103285672577,
+          "observed_display_name": "publish (3.12)",
+          "exact_declaration": {
+            "name": "publish (3.12)",
+            "job_key": "publish",
+            "matrix": {
+              "python": "3.12"
+            },
+            "needs": [
+              "build-sdist",
+              "build-wheels"
+            ],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        }
+      ]
+    },
+    {
+      "workflow_path": ".github/workflows/copilot-setup-steps.yml",
+      "run_id": 38121677104,
+      "event": "push",
+      "head_sha": "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0",
+      "job_check_suite_declaration_bijection": [
+        {
+          "job_id": 114417506031,
+          "check_id": 114417506031,
+          "check_suite_id": 103285666512,
+          "observed_display_name": "copilot-setup-steps",
+          "exact_declaration": {
+            "name": "copilot-setup-steps",
+            "job_key": "copilot-setup-steps",
+            "matrix": {},
+            "needs": [],
+            "if": null,
+            "expected_skip": false
+          },
+          "match": "EXACT"
+        }
+      ]
+    }
+  ]
+}

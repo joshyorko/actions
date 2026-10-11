@@ -1,0 +1,42 @@
+{
+  "status": "ROOT_ONE_CURRENT_LINUX_CP312_CONSUMER_AUTHORIZED",
+  "time": "2026-10-11T08:50:32.319758+00:00",
+  "proposal_sha256": "57a8beb87e5a1c03fae276e4b22d7fc8734d1f42cc3c739ceb989a0d946e73a7",
+  "independent_GO_sha256": "6346a5feb759d9fb6615d20da814b02de8c528ae273ec7eaa20e56b8327fdb7f",
+  "command": {
+    "cwd": "/workspace/engineering/pr282",
+    "activate": "source /workspace/actions-cloud/activate.sh",
+    "argv": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "645s",
+      "/workspace/actions-cloud/bin/rcc",
+      "task",
+      "script",
+      "-r",
+      "developer/toolkit.yaml",
+      "--",
+      "python",
+      "-c",
+      "import toolkit; toolkit.poetry(\"action_server\", \"run\", \"python\", \"/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-consumer-runner-v2.py\")"
+    ],
+    "attempt_root": "/workspace/engineering/pr221-current776-linux-consumer-preflight/installed-linux-current776-f82ee06c-1",
+    "attempt_absent": true,
+    "authorization": "NOTAUTHORIZED; independentROOTpreexecutionGO then AFTER305full serialization/capacityclearance andexacthashreadbackrequired beforeONEattempt; stoponfailure,no retry."
+  },
+  "fresh_capacity": {
+    "/workspace": 1907228672,
+    "/tmp": 3065376768
+  },
+  "serialization": "305 full terminal; 282 full held; no other local full/actual",
+  "actual_attempts_authorized": 1,
+  "failure_policy": "preserve original failure; no automatic retry",
+  "remaining_HOLDs": [
+    "IndependentpreexecutionGO and AFTER305full capacityserializationclearance beforeactualpip/install/consumer",
+    "CurrentpublicfloorexactURL/SHA/pipcheck/fourrealmoduleorigins/196installedmember/privateimportscan/CLI1.0.3/cleanup NOTRUN",
+    "RequiredgeneratedOAuthsourcepairauthority/content remainsEMPTY/unqualified regardlessimportsuccess",
+    "209payloadcorrespondence/tree equalitynotfullproducer/native/complete7artifact/tag/Twine/upload/officialpublication",
+    "cp313onlyouterhash; otherplatform/service/backend/browser/ChatGPT/private01f/frozen-v6/full134/releaseHOLD"
+  ]
+}

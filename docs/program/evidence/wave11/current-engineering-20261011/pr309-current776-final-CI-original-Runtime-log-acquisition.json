@@ -1,0 +1,18 @@
+{
+  "Windows": {
+    "job_id": 114423098973,
+    "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/Windows-Runtime-original.private.log",
+    "bytes": 610875,
+    "sha256": "f8157e077fd7b84d696ee54bbd2f1a9f765c06116491fd2e3611d0f8395c1f0f",
+    "original_decoded_acquisition": "GitHub connector structuredContent.content, acquired once; initial gh Windows transport failure preserved empty, no original body obtained by gh",
+    "private": true
+  },
+  "Linux": {
+    "job_id": 114423099011,
+    "path": "/workspace/engineering/pr309-current776-final-CI-independent-review/Linux-Runtime-original.private.log",
+    "bytes": 1287671,
+    "sha256": "1652edb2b3b483c36285d93dddc034fac56b791064f7203cc4279ba32e26e9bd",
+    "original_decoded_acquisition": "GitHub connector structuredContent.content, acquired once; initial gh Windows transport failure preserved empty, no original body obtained by gh",
+    "private": true
+  }
+}

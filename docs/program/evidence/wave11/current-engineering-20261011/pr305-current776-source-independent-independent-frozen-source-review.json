@@ -1,0 +1,83 @@
+{
+  "schema": "actions-pr305-independent-current776-frozen-source-review/v1",
+  "verdict": "GO_NORMAL_EXISTING_PR_BRANCH_SOURCE_CHECKPOINT_PUSH_ONLY",
+  "source": {
+    "head": "6390270cd07851448b7b325c81c98dc11a1d3a17",
+    "tree": "6ab0a1c559b583eb7bfd442fa4260aa75af91fdf",
+    "ordered_parents": [
+      "723397b748b48282e13480b0ab7e4cb4c7e10c8c",
+      "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+    ],
+    "branch": "test/canvas-runtime-cache-isolation-20261010",
+    "clean": true
+  },
+  "announced_source_receipt": {
+    "path": "/workspace/engineering/pr305-actual776-refresh/frozen-source-receipt.json",
+    "bytes": 15012,
+    "sha256": "8385812a98dcd387122a2fda39290e3609b278b41bd875b52e43de34ec87bce9"
+  },
+  "independent_proof": {
+    "path": "/workspace/engineering/pr305-actual776-independent-review/independent-complete-source-and-retained-byte-proof.json",
+    "bytes": 28212,
+    "sha256": "4e96528e4736297373f1f66a74be6447333ba6e093a1759d4cd281dfb487ea94"
+  },
+  "findings": [],
+  "verification": {
+    "complete_union": "1410 mode/blob leaves; both parent leaf sets retained; no novel or changed resolved body beyond parent inputs except combined canonical guide; all working bytes match exact frozen Git; whole .github equals target776",
+    "original_Canvas": "Three original1e9 bodies, ASTs and Git modes unchanged",
+    "RCC_sample": "Nine selected source body/mode/hash entries equal accepted d642 and actual776, distinct from full producer",
+    "producer_inventory": {
+      "producer_inputs": 268,
+      "selected_tests": 5,
+      "producer_and_selector_sets_disjoint": true,
+      "all_exact_actual776": true,
+      "native92498_difference": [
+        "action_server/src/actions/server/_rcc_runtime_adapter.py"
+      ],
+      "native_qualification": "UNQUALIFIED_CHANGED_PRODUCTION_INPUT; no artifact exclusion"
+    },
+    "prepared_toolchain": "30 exact prepared Git-bound inputs; five existing owned config/Python/source prefix bindings; no installer or Bootstrap execution by reviewer",
+    "recorded_gates": {
+      "Doctor": "PASS",
+      "Bootstrap": "authorized verified own reuse",
+      "Toolkit": 96,
+      "Canvas": "47 PASS/4 integration deselected/zero skipped",
+      "RCC_service_free": "112 PASS/1 existing real RCC SKIP/3 integration deselected",
+      "full_configured_source": "1216 PASS/12 SKIP/15 warnings/138.43s/two workers; RCC gateway SUCCESS",
+      "lint": "configured Ruff check/format/Isort PASS;302 formatted files",
+      "types": "338 source files PASS",
+      "generator": "8 generated outputs;26 .github workflow/dependabot identities and4 additional YAML =30; preserved roundtrip hashes",
+      "diff_check": "PASS"
+    },
+    "retention": "Rehashed all1192 native inventory entries with modes/symlink targets/content; original ZIP/executable, browser, Node/frontend lock, helper snapshots mode0444, raw18 and frozen50 exact. V1 preparation/V2-V4 failure/V5 files retained. 82 nested receipt reference bindings verified."
+  },
+  "historical_actual_scope": {
+    "source": "3ec9d0acbe30ad94d02e4c24fef2587127964495",
+    "native_producer": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "actual_review_sha256": "1848613d69513e20039cee94efe960a3609fff451a582c7a33552c8fa4df1108",
+    "checkpoint_sha256": "28b2af71d1ac7b5dd0bbd7bf7518845a2c3d208c6700fd102914cffaf449dca3",
+    "measured": "One pytest and one exact browser case passed, no skips/retries/errors; five unique declared tool Runs; three sampled public Core members; Runtime bounded flags/lists and sampler accepted",
+    "limits": "Forced cleanup does not prove natural exit or universal adoption; measured browser launch path not live PID. No successor source relabel, whole-wheel/cold registry/real artifact/ChatGPT/host/OAuth/release/private qualification. Original Windows fixture failure and V4 unknown report channel remain separate."
+  },
+  "holds": [
+    "Fresh full CI on source639 and exact current tested target union required after normal push; no old723 CI carry",
+    "No new actual native/browser/provider/cold consumer/forced-hang/cleanup execution performed or admitted",
+    "Full #99/#134, private metadata/provider, OAuth content and release remain HOLD",
+    "No merge, issue closure or Runtime221 release admission"
+  ],
+  "review_scaffold_disposition": "Initial overly strict whole-parent-paragraph assertion rejected before receipt: ordinary merge preserves two previously accepted Canvas corrections and four incoming RCC corrected/extended paragraphs. Exact two-parent canonical patch and all unchanged parent blocks verified; no source/gate failure inferred.",
+  "Documentation improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md",
+    "Exact delta": {
+      "path": "/workspace/engineering/pr305-actual776-independent-review/canonical-reviewed-imported-delta.patch",
+      "bytes": 10332,
+      "sha256": "5b2d4d953814d9bb4287847b95e1f92a63690b7a7b6174e0206c132bd02ba36e"
+    },
+    "Disposition": "ACCEPT existing exact ordinary imported canonical delta; no cosmetic child or session diary",
+    "Durable learning captured": "Preserve original Canvas Git-blob/selector/atomic PID ownership and forced-cleanup/raw-output limits while importing accepted RCC source/control/nine-source-sample/full-producer/three-case scope lessons. A new adapter body disqualifies older frozen producer evidence for the new source union.",
+    "Evidence": "Independent1410 complete parent union;268 producer+5 separate selectors;9 samples; native1192/raw18/frozen50 retained hashes; exact historical3ec V5 receipt and current configured source gates; canonical patch5b2d4d953814d9bb4287847b95e1f92a63690b7a7b6174e0206c132bd02ba36e",
+    "Stale or ambiguous guidance removed": "Older one-case control and artifact-only publication guidance corrected by accepted target. Old default-candidate Canvas wording replaced by already accepted candidate/published and explicit browser evidence boundaries. No current native or whole-wheel equivalence claim added.",
+    "Remaining uncertainty": "Current exact hosted union CI and native/browser execution; whole public wheel/cold registry, natural shutdown, universal adoption, production host/ChatGPT/artifact/provider/private/release qualification remain unproven."
+  },
+  "Upstream disposition": "none"
+}

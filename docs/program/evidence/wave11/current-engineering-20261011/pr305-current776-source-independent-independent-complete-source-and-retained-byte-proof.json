@@ -1,0 +1,488 @@
+{
+  "head": "6390270cd07851448b7b325c81c98dc11a1d3a17",
+  "tree": "6ab0a1c559b583eb7bfd442fa4260aa75af91fdf",
+  "ordered_parents": [
+    "723397b748b48282e13480b0ab7e4cb4c7e10c8c",
+    "77647484b3cdd8e18aabf344a4018ea8ed8e3ea0"
+  ],
+  "clean": true,
+  "leaves": 1410,
+  "novel_leafs_only_docs": [
+    "docs/skills/repository-operations.md"
+  ],
+  "all1410_mode_blob_union_and_working_bytes_exact": true,
+  "all_parent_leaves_present": true,
+  "whole_github_exact_target": true,
+  "production_inputs268_and_selected_tests5_typed_separate_exact_target": true,
+  "native92498_changed_production_inputs": [
+    "action_server/src/actions/server/_rcc_runtime_adapter.py"
+  ],
+  "native_status": "UNQUALIFIED_CHANGED_ADAPTER",
+  "three_owned_Canvas_source_mode_AST_exact_original1e9": true,
+  "nine_selected_RCC_source_samples_exact_d642_and776": true,
+  "own30_prepared_inputs_and_five_source_prefix_config_bindings_exact": true,
+  "nested_receipt_reference_bindings": [
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/accepted302-nine-source-preservation.json",
+      "bytes": 3327,
+      "sha256": "5fb4d5b840e581c15a273e13b5e5b9b5aed15dc225b79d7ce6946c1404794ecb"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/historical-V1-through-V5-retained-identities.json",
+      "bytes": 1672,
+      "sha256": "582a55b09f37e9d21a2206cca552db67fb8f77a818199b928f174d26bdf47232"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/retained-native-helper-browser-and-V5-proof.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/retained-native-helper-browser-and-V5-proof-after.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/raw18-frozen50-Node-frontend-retained-before.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/raw18-frozen50-Node-frontend-retained-after.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual774-refresh/frozen-source-receipt.json",
+      "bytes": 17355,
+      "sha256": "0d21c19c364d2529dcccec9fd967ee467d3928cbfb8aa8929d884d1c2c2533c7"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual774-independent-review/independent-frozen-source-review.json",
+      "bytes": 6833,
+      "sha256": "c8a7ce67653b7accbb9d5e87e9eb61330c997fdec2f48fc21feebc757e8d4348"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/exact-imported-canonical-delta.patch",
+      "bytes": 10332,
+      "sha256": "5b2d4d953814d9bb4287847b95e1f92a63690b7a7b6174e0206c132bd02ba36e"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/Bootstrap-reuse.log",
+      "bytes": 6701,
+      "sha256": "956bafd74c2f2b3376dd0108421e7791e28dbff8f2660377c6e2a175eb155da2"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/Canvas-scoped.log",
+      "bytes": 3996,
+      "sha256": "df91522d03b1aaeb0090d068a3f52b7943c439c07c8c6f07b7b47473eae50902"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/accepted302-nine-source-preservation.json",
+      "bytes": 3327,
+      "sha256": "5fb4d5b840e581c15a273e13b5e5b9b5aed15dc225b79d7ce6946c1404794ecb"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/current-RCC-and-static.log",
+      "bytes": 6989,
+      "sha256": "fbebde22dd87a6bd943eaaf41a9cf580f277ea5b68c86f7c8b61587681969238"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/doctor.log",
+      "bytes": 13487,
+      "sha256": "7d6f7f4f5123a4cec6cab75edb360b305c651210407f2f42a2c215361d854ac5"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/exact-imported-canonical-delta.patch",
+      "bytes": 10332,
+      "sha256": "5b2d4d953814d9bb4287847b95e1f92a63690b7a7b6174e0206c132bd02ba36e"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/freeze-current-source.py",
+      "bytes": 8757,
+      "sha256": "698b3d47231b6e5829d5d862cc7fa0a83ccbab8c830b38cd904fa14408dd16ef"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/full-configured-source.log",
+      "bytes": 314460,
+      "sha256": "0c96d83ab885d5041bc6bca04dc1c260909a95ec649ffcfdbebd8fbdc0f8464e"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/generator-roundtrip.json",
+      "bytes": 10286,
+      "sha256": "d03086cf1c1c65efb2ec389ee3153695c6d8902c2c972e4838fc4ad8ce6d834b"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/generator-roundtrip.log",
+      "bytes": 4564,
+      "sha256": "da17b074aae9466937d20404c0269b03d393c7b83cd1e49598d210cdba6973fb"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/generator-roundtrip.py",
+      "bytes": 1800,
+      "sha256": "a9c80dd192c05e0db9799d16483b2503176400e84ec6ed85602a0a2cfacbdefc"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/historical-V1-through-V5-retained-identities.json",
+      "bytes": 1672,
+      "sha256": "582a55b09f37e9d21a2206cca552db67fb8f77a818199b928f174d26bdf47232"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/light-complete-pre-full-checkpoint.json",
+      "bytes": 187916,
+      "sha256": "36341c2b7885793bec50f2d1f58bbec17fcb5b463652b3519c21c300b79aadf2"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/ordinary-union-and-producer-proof.json",
+      "bytes": 257732,
+      "sha256": "dc3cecbfdc4f891f5ca21d25c5910b68bc573545299e47a721a03a140dcd0f42"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/origin-action_server.json",
+      "bytes": 283,
+      "sha256": "96eb60a559a313d478c17f52e8cc42e71588b1ae33089ba1ad3c77650a967b26"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/origin-actions-http-helper.json",
+      "bytes": 264,
+      "sha256": "0866a5c2bc030a15822b06983f3fb43b1400b20f4add57537aaec59da1b8c4d1"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/origin-actions.json",
+      "bytes": 218,
+      "sha256": "6b00bd4e70a69f4484a9d44c3447039354a9906fef5be41feff2fb284a73a549"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/origin-devutils.json",
+      "bytes": 240,
+      "sha256": "f9c9bb61ea486fd667ff37367ef8656aa374af2f4e3484569f4d4cfab28125cd"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/origin-work-items.json",
+      "bytes": 249,
+      "sha256": "24808585e8fef1faae9b7130b4656ee211c50597fe0e0e3d2adbb8b058f37296"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/original-V5-retention-scope-proof.json",
+      "bytes": 534,
+      "sha256": "bf08ddc6a82d00894ab036af6dc8f770b54259c0567db7dcff5e3ffabd378a60"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "bytes": 6428,
+      "sha256": "75db58a41f5b65cb2bf6a801ec43ddf961e7913c2a951bf875abadf1066be1f3"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/pre-source-existing305-checkpoint.json",
+      "bytes": 189209,
+      "sha256": "434e6fd7cda4281c995715bae590119a96f08f2cf8bb9bce3505879a664f4137"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/raw18-frozen50-Node-frontend-retained-after.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/raw18-frozen50-Node-frontend-retained-before.json",
+      "bytes": 12822,
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/retained-after.log",
+      "bytes": 3584,
+      "sha256": "badb6b276b0ec0d65aeed212bb00a16cfef62a7b8b00221333f8b8c52e9537a1"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/retained-before.log",
+      "bytes": 3584,
+      "sha256": "0b624c6832600447a158e1b715001c442b796b99bd30eb709cdd505537e04302"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/retained-native-helper-browser-and-V5-proof-after.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/retained-native-helper-browser-and-V5-proof.json",
+      "bytes": 4720,
+      "sha256": "1f4c267ee2659c7bc21bd3290c5f1bf7f35f4ec345ac6afb3939b54a5d18687c"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/root-released-final-pre-full-checkpoint.json",
+      "bytes": 423,
+      "sha256": "bdae78e423c403f2d1ece6c8a5b287f92b58a0c8864623d198cf01d6d400c2fc"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/run-Canvas-scoped.py",
+      "bytes": 316,
+      "sha256": "5959d9ef264ee534142d67b5929ccd296109e6a1949e691af6d3c1da373b4352"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/run-current-RCC-static.py",
+      "bytes": 353,
+      "sha256": "b4fbe9823b1de83af76d504f1daa68cb5c78eb6f436566c4a8334f5a0aa2ea40"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/run-full-source.py",
+      "bytes": 85,
+      "sha256": "5c2a1fd7500b33eecef9b9efdf6d234cfccd80c77230cf0344878d94f34a8763"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/toolkit.log",
+      "bytes": 14346,
+      "sha256": "cc2564fcf8a4adbf348b513806e2fd20554339aa30ddc74a88b82be62c8d28bd"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/verify-own-prepared-bootstrap.py",
+      "bytes": 2693,
+      "sha256": "37ebd3cbf2c8e7233381a3ab117093cd302981e9c1a584fc73b32be46c020115"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/verify-retained-actual-inputs-after.py",
+      "bytes": 3588,
+      "sha256": "047d0577cd14be0e9f2d01ba569aa77d02480383139e2800f371809ff00e2cf1"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/verify-retained-actual-inputs-before.py",
+      "bytes": 3582,
+      "sha256": "848ee77bbd7455deba5621d97b1a7f891b2a1ee22b33f931478754dfa74a1dd0"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/verify-retained-raw-and-driver-after.py",
+      "bytes": 2523,
+      "sha256": "94749393e3ae1c7f85add07f7e1dd147e4337aae8de9af467336731f49a8016e"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual776-refresh/verify-retained-raw-and-driver.py",
+      "bytes": 2524,
+      "sha256": "ba064b64be871edc4c87439cceed0ddea41c55cc380cb0c8d800ae55557a0a5f"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-manifest.json",
+      "bytes": 3162,
+      "sha256": "70405e6e831066a37631c7a63045010fcbc8b3c928a6a22ff5130467c3ad9d44"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/output/native-artifact-tree-inventory.json",
+      "bytes": 255076,
+      "sha256": "154aeb29249db79a32392124a3b71a8ac325c0bdaeda1bbc2e7445e96ffc7fdf"
+    },
+    {
+      "path": "/workspace/engineering/pr310/action_server/go-wrapper/assets/assets.zip",
+      "bytes": 73556451,
+      "sha256": "c85862c9b4dba354953c02cbb80e520052f07cb6d506600bf4a07d2f755135e0"
+    },
+    {
+      "path": "/workspace/engineering/pr310-runner-qualification-owned/dist/action-server/action-server",
+      "bytes": 17633792,
+      "sha256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb"
+    },
+    {
+      "path": "/workspace/engineering/pr282/action_server/tests/action_server_tests/mcp/test_canvas_query_template.py",
+      "bytes": 51505,
+      "sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/test_canvas_query_template.py",
+      "bytes": 51505,
+      "sha256": "edc7ccfb85bd20bc89775f73ee45039bcf4c501fe6dae9a5ebd81a80e16eda4e"
+    },
+    {
+      "path": "/workspace/engineering/pr305/action_server/scripts/write_native_artifact_manifest.py",
+      "bytes": 8499,
+      "sha256": "aaa6855bc6c0bccc41933703fbdb2e58d9f25a118a651d254a7dce34e5fd113b"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/write_native_artifact_manifest.py",
+      "bytes": 8499,
+      "sha256": "aaa6855bc6c0bccc41933703fbdb2e58d9f25a118a651d254a7dce34e5fd113b"
+    },
+    {
+      "path": "/workspace/engineering/pr310/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "bytes": 74274,
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "bytes": 74274,
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    {
+      "path": "/workspace/engineering/pr311/action_server/tests/action_server_tests/native_startup_diagnostics.py",
+      "bytes": 13009,
+      "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/native_startup_diagnostics.py",
+      "bytes": 13009,
+      "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c"
+    },
+    {
+      "path": "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell",
+      "bytes": 196975952,
+      "sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-passed-checkpoint-corrected.json",
+      "bytes": 33914,
+      "sha256": "28b2af71d1ac7b5dd0bbd7bf7518845a2c3d208c6700fd102914cffaf449dca3"
+    },
+    {
+      "path": "/workspace/engineering/pr305-v5-independent-runner-review/independent-actual-v5-review.json",
+      "bytes": 8129,
+      "sha256": "1848613d69513e20039cee94efe960a3609fff451a582c7a33552c8fa4df1108"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/immutable-runner-proposal-v5.json",
+      "bytes": 28665,
+      "sha256": "f915a178adfa23833fe7a2e047e9c0b98f995fdd4b95730e1bb522e5f48fe7ee"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/actual-admission.json",
+      "bytes": 1602,
+      "sha256": "68c70c22fcc4f1307127c520387843973bc2b9c8de7d68977677eb087b624aa2"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/bridge-receipt.json",
+      "bytes": 5146,
+      "sha256": "6d48e6bf0fc06e23f4c2dc4c86d19e7012ec0b8022d02ff0a6050221a4efce51"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-1-stderr.log",
+      "bytes": 192,
+      "sha256": "31268753892853abc32ea1862c718e2d5bf63d563acba1ef293d63cb70c7e59d"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-1-stdout.log",
+      "bytes": 790,
+      "sha256": "ea2bd1be095c21b78670840af1e9c33af51fdbe8ebb29dfe4e796b246cee691f"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-2-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-2-stdout.log",
+      "bytes": 40,
+      "sha256": "d75fc32089eefc512b00ce4d792475a993ba56dcb863b971a4c13bcd17b3629f"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-3-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-3-stdout.log",
+      "bytes": 11643,
+      "sha256": "6d85a8593dfffa4df876442b02c2b74235cb32fe2845d8223bbbd176ea1d6d82"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/command-receipts.json",
+      "bytes": 2162,
+      "sha256": "2c1051abeaaa84d5db41e3104f444def972995dab2c690a74488208771555171"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/junit.xml",
+      "bytes": 408,
+      "sha256": "3653795fed112f88a2057193ce556a658273ff5f9261a0b92e763d7da037838c"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/outer-cleanup.json",
+      "bytes": 518,
+      "sha256": "658e58dbf4f5668c826b572cd2789a186f7a391bf66c2a33b4a89c8439a26fb9"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/preflight.json",
+      "bytes": 4534,
+      "sha256": "439baab0be7d2c1e9a3c57470c4600ea419813fa3a47fc38e60b0a067b52ab16"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/runtime-cleanup.json",
+      "bytes": 699,
+      "sha256": "118af76bb047bc1c3b501f7c3e2493aa8a95248259503ea64ec37aa5cdde85a2"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/runtime-start-final-snapshot.json",
+      "bytes": 809,
+      "sha256": "dfb02f47cf9e71696d6c9a5358ca3a2a704dc967e81a44f110d1c3dfed67d90d"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/startup-observations.json",
+      "bytes": 2681,
+      "sha256": "a40928cd75de4445bba5fa7a5db6bc3c22f8d50e5e8114234cfab57452176fc3"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/worker-stderr.log",
+      "bytes": 50685,
+      "sha256": "8927fe288bc98fb8ff814594a846d0389d63d9ff9fe0adc96b022f351bbed9fe"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-3ec9d0acbe30ad94d02e4c24fef2587127964495-4/worker-stdout.log",
+      "bytes": 13506,
+      "sha256": "cd96d29f128a931625e1674b0b722ef887116b917e2353a50788708464cfa5d1"
+    },
+    {
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/actual-v5-gateway.log",
+      "bytes": 3701,
+      "sha256": "498cc4e745130de220195d993c5364019f4a9b9261d94c8add085fe8b97cf1bf"
+    }
+  ],
+  "original1192_native_tree_entries_modes_hashes_symlink_targets_exact": true,
+  "original_helper_snapshots_mode0444_exact": true,
+  "V5historical3ec_native92498_not_current_actual": true,
+  "raw18_frozen50_Node_browser_frontend_beforeafter_exact": true,
+  "all_V1_preparation_V2_V3_V4_failures_and_V5_bytes_retained": true,
+  "canonical_imported_delta": {
+    "path": "/workspace/engineering/pr305-actual776-independent-review/canonical-reviewed-imported-delta.patch",
+    "bytes": 10332,
+    "sha256": "5b2d4d953814d9bb4287847b95e1f92a63690b7a7b6174e0206c132bd02ba36e"
+  },
+  "target_guide_all_paragraphs_retained_except_two_previously_accepted_Canvas_corrections": true,
+  "target_guide_superseded_Canvas_paragraphs": [
+    "The bounded bridge test is\n`test_mcp_apps_authoring.py::test_canvas_view_calls_public_action_through_runtime_bridge`:\nit builds the Canvas HTML and an exact-checkout `actions-core` wheel, installs\nthat wheel into the isolated RCC worker after environment creation, reads the\nresource and public decorator metadata from a running Action Server, and drives\nthe same built view through browser calls to that Runtime's Streamable HTTP MCP\nendpoint. Do not replace this with a fabricated tool response or a direct\ncomponent test. The browser test allocates a test-selected port and refuses to\nreuse an existing server. It accepts an explicit local Chromium executable for\nenvironments without Playwright's pinned browser; record its version and\nSHA-256 separately, and report the pinned Playwright browser as not run. This\ncandidate-source integration does not prove published-wheel compatibility,\nproduction-host authorization/CSP, artifact resolution, or ChatGPT rendering.\nOn success it writes `canvas-bridge-acceptance-receipt.json` under pytest's\ntemporary test directory, binding the candidate wheel SHA and `direct_url.json`\nto the worker prefix and imported module and recording the built resource digest\nand browser identity. It separates five observed successful MCP calls from five\nSQLite-persisted Runtime Run records containing Run IDs, passed statuses, and\naction names. Preserve this receipt before reusing the pytest `--basetemp`\ndirectory or allowing pytest to prune old temporary trees.",
+    "The focused source tests exercise public decorators through the Runtime\nStreamable HTTP route. The process-level fixture additionally installs the\nexact candidate Core wheel into an isolated test environment before importing an\nordinary action package; record its wheel digest because its version metadata\ncan match an already-published wheel. Neither test proves that published Core\nbytes contain the candidate API, a host renders the resource, a full MCP Apps\nview/result lifecycle works, or a packaged Runtime release accepts it."
+  ],
+  "old_guide_paragraphs_superseded_by_accepted_target_corrections": [
+    "The [community issue ledger](../program/community-program-ledger.md) retains\nevery open issue's full acceptance body and comments in its machine-readable\ncompanion. A checkpoint PR or green workflow establishes only the exact tested\nslice, not whole issue acceptance. When a consumer is not implemented yet,\nevaluate its prerequisites using the producer's scoped evidence; the consumer's\nown integration test is an acceptance gate for that implementation, not a\nprecondition to creating it. Refresh stale graph reasons through a dated current\nprojection while preserving original contract hashes and archived contract bytes.\nKeep source, installed-wheel, native,\npackaged-browser and published-artifact receipts separate, recording the exact\ncandidate SHA and PASS, FAIL, BLOCKED or NOT_RUN. Skipped publication is not\npublication success. Recheck dependency sequencing against each retained\ncontract before implementation; a cross-reference alone is not a blocking edge.\nFor a stacked PR, review the full diff from its actual merge base rather than\nrelying on its title or last commit. When a reviewed component is integrated\nseparately from a combined candidate, compare the candidate's synthetic merge\ntree before and after the target advances. Prior checks apply to the new\ncandidate only when that tested tree is identical; otherwise rerun the relevant\ngates on the new tree. This separates component admission from the combined\ncandidate gate without inferring either from issue-level completion.",
+    "The current-candidate rollback/provider acceptance is a separate, explicitly\nopt-in hosted Linux workflow. It checks out its workflow-control revision and\nthe Runtime candidate as separate repositories, verifies the candidate's full\ncommit SHA before installing or testing it, and binds the sanitized receipt to\nboth checkouts. This prevents a mutable PR head or synthetic workflow merge\ncommit from being mistaken for the source under test. The test\n`test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable`\nrequires `ACTIONS_REAL_RCC_ARTIFACT_TEST=1` and an\n`ACTIONS_RUNTIME_RCC_BINARY` whose RCC v18.19.3 bytes match the pinned SHA-256.\nThe workflow selects that one test with xdist disabled, uses the normal Action\nServer developer install path, and uploads a sanitized receipt/source-hash\nsummary even if the test fails. Its ordinary-suite skip is not acceptance\nevidence.",
+    "The admission summary fails closed unless JUnit records exactly one passed,\nnon-skipped test, with suite totals matching the actual testcase result\nelements and the expected rollback test name/module; the lifecycle receipt is\n`PASS` and binds to the checked-out\ncandidate commit/tree; imported runtime modules originate from and hash-match\nthat candidate; both the runtime RCC and Action Server's default RCC path match\nthe pinned version and digest; provider-operation snapshots and expected\npersisted Run results agree; and natural shutdown has an observed pre-cleanup\nreturn code of 0 or 1, followed by an observed cleanup return code, without\nforced stop or observed surviving owned descendants. The always-run summary\nexecutes from the workspace root and uploads only sanitized evidence, so a\nskipped test, missing receipt, inconsistent JUnit counters, or failed checkout\ncannot appear green.",
+    "`test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime`\nis the opt-in Linux consumer proof. It stages the explicitly selected\n`package.yaml` and `action.py`, imports that staged package into the existing\nRuntime, executes its typed `dict[str, str]` Action through a real RCC worker,\nand checks the worker interpreter and `actions-core` origin under the\ntask-owned managed `ACTIONS_HOME/holotree`. It compares source, staged, and\nworker-observed Action-file SHA-256 values and records a staged-consumer\nreceipt bound to the candidate checkout commit and tree. The existing pinned\nRCC provider rollback workflow invokes this test alongside the rollback case\nand rejects a skipped or missing result. The\nproof is conditional on that exact hosted gate passing; a local test that is\nskipped because no task-owned managed provider is configured is NOT RUN, not\nacceptance evidence. This exercises one selected package through the current\nRuntime consumer; it does not prove complete source selection, source\nauthorization, compiler/admission trust, or any package identity API.\nOn 2026-10-10 the immutable consumer-gate candidate advanced from\n`f7c6ed61f24fd9e98d1465c83042c5446466311b`, which predates this test and is\nnot eligible to run it, to `d376399f497fb98f47062e493219e063db8f08e1`\n(tree `fb04c136e5e1a7ce709649b13cf895d84ac93c1a`). The earlier local gated\ncollection had no task-owned RCC provider configured and remains NOT RUN; the\nnew pin does not retroactively change that result."
+  ],
+  "recorded_gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "REUSED30exactsourceinputs/fiveownconcreteprefixes+sourceorigins;noinstaller",
+    "Toolkit": 96,
+    "Canvas_fixture_and_authoring": {
+      "passed": 47,
+      "integration_deselected": 4,
+      "skip": 0
+    },
+    "current_RCC_servicefree": {
+      "passed": 112,
+      "real_RCC_skipped": 1,
+      "integration_deselected": 3
+    },
+    "configured_lint": "Ruff check/format/Isort PASS",
+    "Mypy_files": 338,
+    "full_configured_Runtime": {
+      "passed": 1216,
+      "skipped": 12,
+      "warnings": 15,
+      "duration_seconds": 138.43,
+      "workers": 2,
+      "ONE_execution": true,
+      "timeout_seconds": 600,
+      "cleanup_grace_seconds": 10,
+      "started_only_after_root306slotcapacityrelease": true
+    },
+    "generator": "8outputs+dependabotbyteidentity;all30trackedYAMLparsedandpreserved",
+    "diff_check": "PASS"
+  },
+  "no_source_test_gateway_native_browser_provider_or_push_execution": true
+}

@@ -1,0 +1,15 @@
+{
+  "status": "PASS_WHOLE_GENERATOR_AND_TEST_AST_NORMALIZED_ONLY_2PINS_2CONSTANTS_EXACT_BRANCH",
+  "source": "7eb5bce946750555ab009f77592862920a901506",
+  "source_tree": "3ff76037779763d0461ff3a755b900c9ed83dcf8",
+  "original_source_pin": "d642a3ac24f8da85101538bdfdf59b509fd74bfb",
+  "original_source_tree": "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4",
+  "new_optin_existing_branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "changed_paths": [
+    ".github/workflows/_gen_workflows.py",
+    ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+    "developer/tests/test_rcc_provider_rollback_workflow.py"
+  ],
+  "generator_AST_only_two_class_pins_and_one_branch_addition": true,
+  "developer_test_AST_only_two_constants_and_one_branch_expectation": true
+}
