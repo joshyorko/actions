@@ -72,12 +72,15 @@ resource and public decorator metadata from a running Action Server, and drives
 the same built view through browser calls to that Runtime's Streamable HTTP MCP
 endpoint. Do not replace this with a fabricated tool response or a direct
 component test. The browser test allocates a test-selected port and refuses to
-reuse an existing server. It accepts an explicit local Chromium executable for
-environments without Playwright's pinned browser; record its version and
-SHA-256 separately, and report the pinned Playwright browser as not run. This
+reuse an existing server. It preserves an explicit local Chromium executable
+before system discovery;
+record the executable's path, version and SHA-256 separately from whether that
+path is the declared Playwright-managed browser. A system-browser fallback is
+not proof that Playwright's declared browser ran. This
 candidate-source integration does not prove published-wheel compatibility,
 production-host authorization/CSP, artifact resolution, or ChatGPT rendering.
-On success it writes `canvas-bridge-acceptance-receipt.json` under pytest's
+On success the default candidate mode writes
+`canvas-bridge-acceptance-receipt.json` under pytest's
 temporary test directory, binding the candidate wheel SHA and `direct_url.json`
 to the worker prefix and imported module and recording the built resource digest
 and browser identity. It separates five observed successful MCP calls from five
@@ -85,8 +88,47 @@ SQLite-persisted Runtime Run records containing Run IDs, passed statuses, and
 action names. Preserve this receipt before reusing the pytest `--basetemp`
 directory or allowing pytest to prune old temporary trees.
 
+Keep caches and temporary build state outside the action package that Runtime
+synchronizes. The Canvas bridge fixture sets its own build `UV_CACHE_DIR` and
+`TMPDIR`, so caller environment variables alone cannot correct cache placement
+inside the source root. Allocate a unique owned sibling with `tmp_path_factory`
+and preserve Runtime's directory-symlink rejection. Git ignore rules do not
+establish Runtime source containment.
+
+The same opt-in node defaults to `ACTIONS_CANVAS_CORE_MODE=candidate`: its
+published Core 1.0.2 environment base is replaced by the measured checkout
+wheel. The separate `published` mode declares Core 1.0.3 without a candidate
+build or local-wheel post-install override. Its worker probe checks distribution
+ownership, environment-prefix containment, version and three named module
+hashes against the independently verified public wheel. This is a three-member
+sample, not whole-wheel authentication or cold registry acquisition. Keep the
+existing synthetic artifact-status response fixture-only.
+
+Published mode requires an external owned-command hook and an explicit browser
+executable; the hook changes subprocess ownership only and preserves command,
+working directory, environment, timeout, output and success assertions. The
+browser selector preserves an explicit path before system discovery, measures
+its bytes and version, and checks installed Playwright against the frontend
+lock. It uses a short private browser temporary root and invokes the exact
+one-case Playwright CLI after one Canvas build. Success requires one passing
+case without skips or retries and the existing five persisted Runtime Run
+records. These are implemented admission controls; an actual native/public-Core
+bridge receipt still requires a separately reviewed immutable runner and run.
+
+Compare retained native producer inputs to the resolved ordinary merge tree,
+then repeat at the committed harness checkpoint. Divergent tips can omit later
+accepted parent files restored by the union. Require all producer input bodies
+and modes, including frontend, dependency and wrapper inputs, to match before
+reusing an older native artifact. Preserve its original producer identity and
+record the new harness commit, tree and ordered parents separately. Default
+suite green checks do not establish that the opt-in bridge ran. Keep Runtime,
+browser and supervisor cleanup evidence separate from semantic assertions;
+forced cleanup is not evidence of natural shutdown. Production-host
+authorization/CSP, real artifact resolution, ChatGPT and full public-wheel/cold
+installation proof remain separate gates.
+
 The focused source tests exercise public decorators through the Runtime
-Streamable HTTP route. The process-level fixture additionally installs the
+Streamable HTTP route. The default candidate process-level fixture additionally installs the
 exact candidate Core wheel into an isolated test environment before importing an
 ordinary action package; record its wheel digest because its version metadata
 can match an already-published wheel. Neither test proves that published Core
