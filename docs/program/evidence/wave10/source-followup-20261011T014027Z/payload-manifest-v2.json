@@ -1,0 +1,136 @@
+{
+  "schema": "actions.additive-public-manifest/v2",
+  "supersedes": "Original manifest preserved; adds OPERATOR.md and indexes original manifest",
+  "members": [
+    {
+      "path": "OPERATOR.md",
+      "sha256": "cf76d567f103e4a823d081788d64ed5cb59dc364e334f026b6674b788f5e4e4b",
+      "bytes": 5183
+    },
+    {
+      "path": "README.md",
+      "sha256": "f796285b760159b2ae8a45b7a6427bf0d672c896f2849410af19930608a3ba29",
+      "bytes": 1494
+    },
+    {
+      "path": "current-source-and-ci-status.json",
+      "sha256": "fb0c897e74a163324338eceff3edca52da8b5f5f4d858157cccba1823b7f7d85",
+      "bytes": 12802
+    },
+    {
+      "path": "issue-matrix.json",
+      "sha256": "a6a95e22d0f244690dde14135c5df3aacaa27438936775c3e81ad03bc4d0b77a",
+      "bytes": 95724
+    },
+    {
+      "path": "payload-manifest.json",
+      "sha256": "ad80e36a1f54cddecabdb8d336004802d7988b1cb55ec2e396fd25ae827aa5fe",
+      "bytes": 4179
+    },
+    {
+      "path": "pr290-owner/manifest.json",
+      "sha256": "cb71123fb1589c74b7cc27ac3905fb55931624ab992617d231cbad492c8f8c9e",
+      "bytes": 4397
+    },
+    {
+      "path": "pr290-owner/rcc-captured-artifacts/environment_linux_amd64_freeze.yaml",
+      "sha256": "90fc0205b1cf24c39ac0ea41cf3def46fcc1a2a000481413a191427ef601dc22",
+      "bytes": 2008
+    },
+    {
+      "path": "pr290-owner/rcc-captured-artifacts/journal.run",
+      "sha256": "e715660b74a1ad1eee808f7b127880273bdba1132c0e5f34a882d377606743f8",
+      "bytes": 2029
+    },
+    {
+      "path": "pr290-owner/rcc-captured-artifacts/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "pr290-owner/rcc-captured-artifacts/stdout.log",
+      "sha256": "3e3559c530795a99157a0332c00be7578d3c7b11602ef97c28b06834786ab808",
+      "bytes": 179
+    },
+    {
+      "path": "pr290-owner/rcc-test-cached-robot.yaml",
+      "sha256": "90ad7f44f98ce441aff66132449f6efd0ac1bb32e1a406f28edd19c6c4e3a350",
+      "bytes": 515
+    },
+    {
+      "path": "pr290-owner/rcc-test-cached-robotdir.log",
+      "sha256": "b266ff10617ca4f391b135d643a1a765b5aa9c46cc8841c6b6b48d518ca144d5",
+      "bytes": 12336
+    },
+    {
+      "path": "pr290-owner/rcc-test-cached-robotdir.yaml",
+      "sha256": "5a9458fc80de411de1da09122aba0ffce9f5987421735d6f9efc160f25292771",
+      "bytes": 509
+    },
+    {
+      "path": "pr290-owner/rcc-test-cached.log",
+      "sha256": "2649e461cf7e7f49fa0c8a8e55e5fc35da1f84d83d940c1ebb4891aa71a40f66",
+      "bytes": 1205
+    },
+    {
+      "path": "pr290-owner/rcc-test-managed-robot.yaml",
+      "sha256": "c2d9a0e5633c72a6e1f6dca548dda3541ab0848ed8aa8c6118d1b9c29b128475",
+      "bytes": 469
+    },
+    {
+      "path": "pr290-owner/rcc-test-managed.log",
+      "sha256": "2661e68f6c857ea5e616e7ca8d55f0110a48516a7ccbf60cb89eb040d48603d0",
+      "bytes": 1086
+    },
+    {
+      "path": "pr290-owner/rcc-test-robot.yaml",
+      "sha256": "dd82c511f6e4e48d72250741dab252399520ee4bcf3a4a3bf873169117258167",
+      "bytes": 600
+    },
+    {
+      "path": "pr290-owner/rcc-test.log",
+      "sha256": "40f5a5fb74342938f7e197366013abd33cb4ceffa771b9556c0d366b8b4f8ba9",
+      "bytes": 1283
+    },
+    {
+      "path": "pr290-owner/receipt.json",
+      "sha256": "512314314cf0bfc48852260313bb70c59e8e8efd750e00bd0f819e4d7bb06ac3",
+      "bytes": 5779
+    },
+    {
+      "path": "pr290-owner/source-union-comparison.json",
+      "sha256": "8b21f6f849f04684763622476070cc57031ea28ebd578bd58dfdfa9e6fc23a55",
+      "bytes": 28693
+    },
+    {
+      "path": "pr290-review/independent-review-18d45b89.json",
+      "sha256": "247f6d8993646be9e655566d9f9dcfa3b3000e50ab76690ad10e794ce3973961",
+      "bytes": 5524
+    },
+    {
+      "path": "pr290-review/manifest-18d45b89.json",
+      "sha256": "1cceac1c5fa08046c3c5760473f75ef49762de7ecf194cd3ba7470cc8d68c39e",
+      "bytes": 187
+    },
+    {
+      "path": "pr290-review/manifest-file-count-correction.json",
+      "sha256": "ba53b7c93e7ad81b6ffc1970730eed97b22d185d08c69e0e4c192d3c20e25df7",
+      "bytes": 402
+    },
+    {
+      "path": "release/manifest.json",
+      "sha256": "360f8eee96ad8518bac6af8bc371c4219d8251dfe6c745623a278f4a848dee54",
+      "bytes": 169
+    },
+    {
+      "path": "release/receipt.json",
+      "sha256": "4ce73827349a24d6e25afb76ca5d6eed2fad0c553c3ab79b8d55dbce18a94224",
+      "bytes": 2202
+    },
+    {
+      "path": "source-reference-provenance.json",
+      "sha256": "a7346625bbcd3cc8f8032963f66250fdd37c7404277218a5afd47b292348bc8b",
+      "bytes": 1128
+    }
+  ]
+}

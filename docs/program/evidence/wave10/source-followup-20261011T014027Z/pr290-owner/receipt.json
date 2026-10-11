@@ -1,0 +1,72 @@
+{
+  "branch": "mk3/pr290-source-refresh-20261011",
+  "dependency_and_scope": {
+    "pr289_merge": "fdf9ee8f023d068c16e567a85defd7c0437f8117",
+    "pr289_merge_is_ancestor_of_live_integration": true,
+    "pr290_prerequisite_satisfied": "PR290 declares #289 as dependency; that merge is in live integration 19380993.",
+    "pr292_state": "bounded acceptance independently approved but #292 head2f631e54 is not integrated into this refresh; this PR290 candidate does not include #292.",
+    "stack_scope": "No PR299/300 edits; they remain gated on actual #292 integration and refreshed PR299 integration, respectively."
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Dependent PR refreshes must verify the accepted dependency is in the live target ref; older ancestors or prior local unions do not satisfy this. Refresh descendants in dependency order and bind evidence to exact source/merge tree.",
+    "evidence": "#289 merge fdf9 is ancestor of current integration193; current #292 accepted source2f is absent from integration; PR299 branch retains old #292 checkpoint58b. New guide paragraph committed as18d45 above merge candidate.",
+    "remaining_uncertainty": "New exact-head CI and independent review of this source union remain pending.",
+    "stale_or_ambiguous_guidance_removed": "None; prior live-base/exact-tree guidance retained and extended."
+  },
+  "manifest": {
+    "bytes": 4397,
+    "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/manifest.json",
+    "sha256": "cb71123fb1589c74b7cc27ac3905fb55931624ab992617d231cbad492c8f8c9e"
+  },
+  "merge_inventory": {
+    "PR290_non_documentation_changed_blobs_preserved": true,
+    "PR290_parent_changed_paths": 26,
+    "all_non_documentation_merge_paths_equal_one_parent": true,
+    "base": "e886d26ebaefafa9189a69517f6707691b53662e",
+    "comparison_path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/source-union-comparison.json",
+    "comparison_sha256": "8b21f6f849f04684763622476070cc57031ea28ebd578bd58dfdfa9e6fc23a55",
+    "complete_union_changed_paths": 35,
+    "documentation_followup_changes_only": "docs/skills/repository-operations.md",
+    "integration_parent_changed_paths": 10,
+    "only_merge_composition_path": "docs/skills/repository-operations.md",
+    "union_equals_merge_tree_delta": true
+  },
+  "observed_utc": "2026-10-11",
+  "preserved_limits": [
+    "Historical Linux frozen artifact proof remains bound to its prior measured build/source identity; no native/frozen/Go execution was repeated at this merged tree.",
+    "No current exact-head hosted PR290 CI was run or independently read back; new source candidate requires root/Sol review and current exact-head CI before acceptance.",
+    "No publication, package version/floor change, or whole owning-issue acceptance is claimed.",
+    "Root/Sol review and root-only push remain pending."
+  ],
+  "schema": "pr290-source-refresh-receipt/v1",
+  "source": {
+    "candidate_head": "18d45b892e39d97d4949ca8f7eb698dd5edc283f",
+    "candidate_parent": "f27bee1ad07a9a526c7182713b025ad6174594e5",
+    "candidate_status": "clean local source candidate; no remote push or PR mutation",
+    "candidate_tree": "81e69ed5d504d9278fbde7b125a3fde4467f2a8a",
+    "documentation_commit": "18d45b892e39d97d4949ca8f7eb698dd5edc283f",
+    "initial_head": "9e1059a12456faba64d11313d6dd8f943ad28912",
+    "initial_tree": "03e6aa898081e6d4fe0df4d147d2c5242fdeb097",
+    "live_integration_parent": "19380993febaa71238eaee3026b5c808773283ff",
+    "live_integration_ref": "integration/community-release-20261008",
+    "live_integration_tree": "a8fe00af1858077273912d0b590f0f7a662c83d5",
+    "merge_base": "e886d26ebaefafa9189a69517f6707691b53662e",
+    "ordered_parents": [
+      "9e1059a12456faba64d11313d6dd8f943ad28912",
+      "19380993febaa71238eaee3026b5c808773283ff"
+    ],
+    "ordinary_merge_commit": "f27bee1ad07a9a526c7182713b025ad6174594e5",
+    "ordinary_merge_tree": "c7a27263e2b4c754f01a77fec86ecb71cb57c927"
+  },
+  "upstream_disposition": "none; no upstream defect identified or investigated; no external issue mutation.",
+  "verification": {
+    "configured_command": "source /workspace/actions-cloud/activate.sh && cd /workspace/work/actions-mk3-wave10-pr290 && rcc run --dev --no-build --robot /workspace/work/actions-mk3-wave10-pr290/developer/wave10-pr290-source-refresh.yaml -t Test",
+    "configured_result": "PASS: 88 passed in 4.93s in RCC18.19.3 developer holotree, cached blueprint318089d9095ad813. setup.yaml SHA from manifest; actual workflow-contract test file devutils/tests/test_runtime_release_workflows.py. No source/package install or heavy/native/provider test.",
+    "failed_setup_attempts": "Three earlier RCC invocations returned before pytest collection with `No module named pytest` because their YAML was outside developer/ and RCC invoked the outer interpreter; full configs/logs retained and excluded from PASS. Correct canonical config was placed temporarily beside developer/setup.yaml, run successfully from cached RCC blueprint, then copied into evidence and removed from worktree.",
+    "git_diff_check": "PASS for merge-parent diff and final candidate.",
+    "read_only_ref_check": "git ls-remote origin confirmed integration19380993 and PR head9e1059a unchanged before and after local refresh; related #299/#300 heads were also unchanged.",
+    "temporary_rcc_output": "RCC wrote artifacts under its workspace path inside developer/; exact four regular files were copied/hash-verified under evidence/rcc-captured-artifacts and only this invocation-owned empty workspace tree was removed. Final Git status clean."
+  },
+  "worktree": "/workspace/work/actions-mk3-wave10-pr290"
+}

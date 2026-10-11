@@ -1,0 +1,88 @@
+{
+  "files": {
+    "developer_setup": {
+      "bytes": 331,
+      "path": "/workspace/work/actions-mk3-wave10-pr290/developer/setup.yaml",
+      "sha256": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a"
+    },
+    "final_repository_operations_guide": {
+      "bytes": 221686,
+      "path": "/workspace/work/actions-mk3-wave10-pr290/docs/skills/repository-operations.md",
+      "sha256": "c3807f16120045475a2e5674a47e0ed3aea58ca7b8c62ae18ea5ea04873156b1"
+    },
+    "rcc_captured_environment": {
+      "bytes": 2008,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-captured-artifacts/environment_linux_amd64_freeze.yaml",
+      "sha256": "90fc0205b1cf24c39ac0ea41cf3def46fcc1a2a000481413a191427ef601dc22"
+    },
+    "rcc_captured_journal": {
+      "bytes": 2029,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-captured-artifacts/journal.run",
+      "sha256": "e715660b74a1ad1eee808f7b127880273bdba1132c0e5f34a882d377606743f8"
+    },
+    "rcc_captured_stderr": {
+      "bytes": 0,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-captured-artifacts/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rcc_captured_stdout": {
+      "bytes": 179,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-captured-artifacts/stdout.log",
+      "sha256": "3e3559c530795a99157a0332c00be7578d3c7b11602ef97c28b06834786ab808"
+    },
+    "rcc_failed_attempt_1_config": {
+      "bytes": 600,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-test-robot.yaml",
+      "sha256": "dd82c511f6e4e48d72250741dab252399520ee4bcf3a4a3bf873169117258167"
+    },
+    "rcc_failed_attempt_1_log": {
+      "bytes": 1283,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-test.log",
+      "sha256": "40f5a5fb74342938f7e197366013abd33cb4ceffa771b9556c0d366b8b4f8ba9"
+    },
+    "rcc_failed_attempt_2_config": {
+      "bytes": 469,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-test-managed-robot.yaml",
+      "sha256": "c2d9a0e5633c72a6e1f6dca548dda3541ab0848ed8aa8c6118d1b9c29b128475"
+    },
+    "rcc_failed_attempt_2_log": {
+      "bytes": 1086,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-test-managed.log",
+      "sha256": "2661e68f6c857ea5e616e7ca8d55f0110a48516a7ccbf60cb89eb040d48603d0"
+    },
+    "rcc_failed_attempt_3_config": {
+      "bytes": 515,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-test-cached-robot.yaml",
+      "sha256": "90ad7f44f98ce441aff66132449f6efd0ac1bb32e1a406f28edd19c6c4e3a350"
+    },
+    "rcc_failed_attempt_3_log": {
+      "bytes": 1205,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-test-cached.log",
+      "sha256": "2649e461cf7e7f49fa0c8a8e55e5fc35da1f84d83d940c1ebb4891aa71a40f66"
+    },
+    "rcc_success_log": {
+      "bytes": 12336,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-test-cached-robotdir.log",
+      "sha256": "b266ff10617ca4f391b135d643a1a765b5aa9c46cc8841c6b6b48d518ca144d5"
+    },
+    "rcc_success_robot_config": {
+      "bytes": 509,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-test-cached-robotdir.yaml",
+      "sha256": "5a9458fc80de411de1da09122aba0ffce9f5987421735d6f9efc160f25292771"
+    },
+    "union_comparison": {
+      "bytes": 28693,
+      "path": "/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/source-union-comparison.json",
+      "sha256": "8b21f6f849f04684763622476070cc57031ea28ebd578bd58dfdfa9e6fc23a55"
+    }
+  },
+  "schema": "pr290-source-refresh-manifest/v1",
+  "source": {
+    "candidate_head": "18d45b892e39d97d4949ca8f7eb698dd5edc283f",
+    "candidate_tree": "81e69ed5d504d9278fbde7b125a3fde4467f2a8a",
+    "documentation_followup_commit": "18d45b892e39d97d4949ca8f7eb698dd5edc283f",
+    "live_integration_parent": "19380993febaa71238eaee3026b5c808773283ff",
+    "ordinary_merge_commit": "f27bee1ad07a9a526c7182713b025ad6174594e5",
+    "parent_pr_head": "9e1059a12456faba64d11313d6dd8f943ad28912"
+  }
+}

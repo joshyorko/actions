@@ -1,0 +1,20 @@
+"/workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/rcc-test-managed-robot.yaml" as robot.yaml is:
+tasks:
+  Test:
+    shell: python -m pytest -q /workspace/work/actions-mk3-wave10-pr290/devutils/tests/test_runtime_release_workflows.py
+environmentConfigs:
+  - /workspace/work/actions-mk3-wave10-pr290/developer/setup_windows_amd64.yaml
+  - /workspace/work/actions-mk3-wave10-pr290/developer/setup.yaml
+artifactsDir: /workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/artifacts-managed
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
+
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12: No module named pytest
+Process 84614: exit status 1, command: /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 [-m pytest -q /workspace/work/actions-mk3-wave10-pr290/devutils/tests/test_runtime_release_workflows.py] [v18.19.3/84609]
+Note: Now running rcc v18.19.3. There is newer rcc version v18.19.5 available, released at 07.09.2026.
+Error: exit status 1
+[rcc] exit status will be: 10!

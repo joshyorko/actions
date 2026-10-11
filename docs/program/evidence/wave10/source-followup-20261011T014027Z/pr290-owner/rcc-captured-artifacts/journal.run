@@ -1,0 +1,12 @@
+{"when":1791682481,"controller":"rcc.user","event":"start task","detail":"name=Test from=/workspace/work/actions-mk3-wave10-pr290/developer/wave10-pr290-source-refresh.yaml","comment":"at task environment setup"}
+{"when":1791682481,"controller":"rcc.user","event":"environment","detail":"build","comment":"Progress: 00/15 v18.19.3 0.021s Context: \"\" \u003cagent@e13229d8d59d\u003e [linux_amd64/Debian GNU/Linux 13 (trixie) [id=debian; version=13]]."}
+{"when":1791682481,"controller":"rcc.user","event":"environment","detail":"build","comment":"Progress: 01/15 v18.19.3 0.001s Fresh [private mode] holotree environment 5598d290-c866-2ae4-a51d-5dad5ce3ff34. (parent/pid: 84647/84648)"}
+{"when":1791682481,"controller":"rcc.user","event":"environment","detail":"build","comment":"Progress: 02/15 v18.19.3 0.001s Holotree blueprint is \"318089d9095ad813\" [linux_amd64 with 4 workers on 5 CPUs from \"setup.yaml\"]."}
+{"when":1791682481,"controller":"rcc.user","event":"environment","detail":"build","comment":"Progress: 14/15 v18.19.3 0.388s Restore space from library [with 4 workers on 5 CPUs; with compression: true]."}
+{"when":1791682482,"controller":"rcc.user","event":"environment","detail":"build","comment":"Progress: 15/15 v18.19.3 0.621s Fresh holotree done [with 4 workers on 5 CPUs]."}
+{"when":1791682482,"controller":"rcc.user","event":"start","detail":"robot","comment":"started"}
+{"when":1791682482,"controller":"rcc.user","event":"run","detail":"robot","comment":"task run"}
+{"when":1791682482,"controller":"rcc.user","event":"processes","detail":"updated","comment":"count from 0 to 1 ... map[84654:python3.12]"}
+{"when":1791682488,"controller":"rcc.user","event":"robot exit","detail":"From rcc \"v18.19.3\" (controller: \"user\") point of view, \"actual main robot run\" was SUCCESS.","comment":"rcc point of view"}
+{"when":1791682488,"controller":"rcc.user","event":"processes","detail":"final","comment":"count: 0"}
+{"when":1791682489,"controller":"rcc.user","event":"stop","detail":"robot","comment":"done"}

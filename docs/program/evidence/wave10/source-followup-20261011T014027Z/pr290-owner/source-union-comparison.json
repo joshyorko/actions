@@ -1,0 +1,970 @@
+{
+  "candidate_preserves_all_pr290_non_doc_changed_blobs": true,
+  "complete_union_changed_path_count": 35,
+  "final_candidate_delta_paths": 35,
+  "guide_final_delta_only": true,
+  "guide_merge_composition_from_both_parents": true,
+  "integration_parent_changed_paths": 10,
+  "merge_base": "e886d26ebaefafa9189a69517f6707691b53662e",
+  "non_doc_merge_paths_equal_a_parent": true,
+  "ordered_merge_parents": [
+    "9e1059a12456faba64d11313d6dd8f943ad28912",
+    "19380993febaa71238eaee3026b5c808773283ff"
+  ],
+  "ordinary_merge_commit": "f27bee1ad07a9a526c7182713b025ad6174594e5",
+  "ordinary_merge_delta_paths": 35,
+  "ordinary_merge_tree": "c7a27263e2b4c754f01a77fec86ecb71cb57c927",
+  "paths": [
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "a3176428177a83908271b1bd5e5c4c8d915c5da3",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "8fdee5a6e4db5b79e484da7d87a75577318f4a66",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "a3176428177a83908271b1bd5e5c4c8d915c5da3",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "8fdee5a6e4db5b79e484da7d87a75577318f4a66",
+        "type": "blob"
+      },
+      "path": ".github/workflows/_gen_workflows.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "8fdee5a6e4db5b79e484da7d87a75577318f4a66",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "8b2ec2685b33706b73974acb1ec5fdef32d943e9",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "4ac2b5646cf12f430a8af59f0592739aad3be9b5",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "4ac2b5646cf12f430a8af59f0592739aad3be9b5",
+        "type": "blob"
+      },
+      "merge_attribution": "integration_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "4ac2b5646cf12f430a8af59f0592739aad3be9b5",
+        "type": "blob"
+      },
+      "path": ".github/workflows/action_server_frontend_tests.yml",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "8b2ec2685b33706b73974acb1ec5fdef32d943e9",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "557dab1b4b85bea79bc6f6337ea6068a3d4209cb",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "80c94bcd73c1c1eec93c123f348a1a7cabf23a4b",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "557dab1b4b85bea79bc6f6337ea6068a3d4209cb",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "80c94bcd73c1c1eec93c123f348a1a7cabf23a4b",
+        "type": "blob"
+      },
+      "path": ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "80c94bcd73c1c1eec93c123f348a1a7cabf23a4b",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "affa2356b177757edc78e7127c99a3b2ee19fbc3",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "a11eeefadf32760694e9d6604f3836e2216710b7",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "affa2356b177757edc78e7127c99a3b2ee19fbc3",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "a11eeefadf32760694e9d6604f3836e2216710b7",
+        "type": "blob"
+      },
+      "path": "action_server/docs/DEVELOPMENT.md",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "a11eeefadf32760694e9d6604f3836e2216710b7",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "a6753f89bfd09e3504c751fa39c6ff99a01c127e",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "a6753f89bfd09e3504c751fa39c6ff99a01c127e",
+        "type": "blob"
+      },
+      "merge_attribution": "integration_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "a6753f89bfd09e3504c751fa39c6ff99a01c127e",
+        "type": "blob"
+      },
+      "path": "action_server/frontend/apps/canvas-view/src/query-results/CanvasContractRoundTrip.test.tsx",
+      "pr290_head": null
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "adb74cc497002aad6ff96c91113a76230f6f6e46",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "13f627bfad5a5158b6b37d688a9ffe308ebfac29",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "13f627bfad5a5158b6b37d688a9ffe308ebfac29",
+        "type": "blob"
+      },
+      "merge_attribution": "integration_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "13f627bfad5a5158b6b37d688a9ffe308ebfac29",
+        "type": "blob"
+      },
+      "path": "action_server/frontend/package-lock.json",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "adb74cc497002aad6ff96c91113a76230f6f6e46",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "d8be4851bd5bab02c1d7ffabbf7cd387d3b3966d",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "72dbfaf8b1c587eac2236213ab8b8f8117b00888",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "72dbfaf8b1c587eac2236213ab8b8f8117b00888",
+        "type": "blob"
+      },
+      "merge_attribution": "integration_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "72dbfaf8b1c587eac2236213ab8b8f8117b00888",
+        "type": "blob"
+      },
+      "path": "action_server/frontend/package.json",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "d8be4851bd5bab02c1d7ffabbf7cd387d3b3966d",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "01228d66311b1c0f3a238738ee8da38c6a25111d",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": null,
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "01228d66311b1c0f3a238738ee8da38c6a25111d",
+        "type": "blob"
+      },
+      "path": "action_server/scripts/frozen_wrapper_acceptance_plugin.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "01228d66311b1c0f3a238738ee8da38c6a25111d",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "62e02bc11c3196dbecc5214d1ecc1e024ef732f9",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "c198ef479b23f0b0e7f4e38ee3ef475a27b8a327",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "62e02bc11c3196dbecc5214d1ecc1e024ef732f9",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "c198ef479b23f0b0e7f4e38ee3ef475a27b8a327",
+        "type": "blob"
+      },
+      "path": "action_server/scripts/verify_frozen_catalog_artifact.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "c198ef479b23f0b0e7f4e38ee3ef475a27b8a327",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "b72c2cf79b8b686a6be21cac928c93324263d3a2",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": null,
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "b72c2cf79b8b686a6be21cac928c93324263d3a2",
+        "type": "blob"
+      },
+      "path": "action_server/scripts/verify_frozen_catalog_harness.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "b72c2cf79b8b686a6be21cac928c93324263d3a2",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "176434fd7176ad076f6c94c5e8905a833c1c9991",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "b0bad3a8d5d6b8147fefcad2e65981c5163da0d2",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "176434fd7176ad076f6c94c5e8905a833c1c9991",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "b0bad3a8d5d6b8147fefcad2e65981c5163da0d2",
+        "type": "blob"
+      },
+      "path": "action_server/scripts/verify_frozen_catalog_junit.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "b0bad3a8d5d6b8147fefcad2e65981c5163da0d2",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "53209db9ddf2093e9a77b307a2f8d791cc8dba8d",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": null,
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "53209db9ddf2093e9a77b307a2f8d791cc8dba8d",
+        "type": "blob"
+      },
+      "path": "action_server/scripts/verify_frozen_catalog_wrapper_artifact.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "53209db9ddf2093e9a77b307a2f8d791cc8dba8d",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "f496f154f294d68c865b4e37a010988d57f78a77",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "0588a4552c327fbc0a274d7d2e172671925ecf29",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "0588a4552c327fbc0a274d7d2e172671925ecf29",
+        "type": "blob"
+      },
+      "merge_attribution": "integration_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "0588a4552c327fbc0a274d7d2e172671925ecf29",
+        "type": "blob"
+      },
+      "path": "action_server/scripts/verify_published_runtime_floor.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "f496f154f294d68c865b4e37a010988d57f78a77",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "1880245f3ff09cd2ef1fec47d08f3baa41207b4f",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "7e5ad63318ea9073ad2ef806ff95e18495c5eca7",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "1880245f3ff09cd2ef1fec47d08f3baa41207b4f",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "7e5ad63318ea9073ad2ef806ff95e18495c5eca7",
+        "type": "blob"
+      },
+      "path": "action_server/src/actions/server/_api_action_routes.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "7e5ad63318ea9073ad2ef806ff95e18495c5eca7",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "964d31c51e42dc285e5eb77e02d86e62adecd6bb",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "964d31c51e42dc285e5eb77e02d86e62adecd6bb",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb",
+        "type": "blob"
+      },
+      "path": "action_server/src/actions/server/_models.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "e2cd220d7c948d87bf961a253c28b3ee54e8dcbb",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "82792a02bdc87982cf739ca8a725a4d79731cb3d",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": null,
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "82792a02bdc87982cf739ca8a725a4d79731cb3d",
+        "type": "blob"
+      },
+      "path": "action_server/src/actions/server/mcp/resource_routing.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "82792a02bdc87982cf739ca8a725a4d79731cb3d",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "382e2ee9877e4c4f9304e01e8d75adbe996e1314",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "9961a2064dede78f12e21295081b8702ecbe08f8",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "382e2ee9877e4c4f9304e01e8d75adbe996e1314",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "9961a2064dede78f12e21295081b8702ecbe08f8",
+        "type": "blob"
+      },
+      "path": "action_server/src/actions/server/mcp/setup_mcp_server_v2.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "9961a2064dede78f12e21295081b8702ecbe08f8",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "757bba4dc814abdadcd7a12614f2585cf36b0f66",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "cb68bcb4a2e41ecefcb5a409ce5c26065a505d05",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "757bba4dc814abdadcd7a12614f2585cf36b0f66",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "cb68bcb4a2e41ecefcb5a409ce5c26065a505d05",
+        "type": "blob"
+      },
+      "path": "action_server/src/actions/server/migrations/__init__.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "cb68bcb4a2e41ecefcb5a409ce5c26065a505d05",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "4fc4bc5abfbb34bb016072c29209d7e2263d99c7",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": null,
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "4fc4bc5abfbb34bb016072c29209d7e2263d99c7",
+        "type": "blob"
+      },
+      "path": "action_server/src/actions/server/migrations/migration_add_mcp_resource_routing.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "4fc4bc5abfbb34bb016072c29209d7e2263d99c7",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "35b1ff36cd39ee9a5f076b91d180562f53be7774",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "a4fd23572341439b38164b20171120836848f459",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "35b1ff36cd39ee9a5f076b91d180562f53be7774",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "a4fd23572341439b38164b20171120836848f459",
+        "type": "blob"
+      },
+      "path": "action_server/tests/action_server_tests/mcp/test_alias_history.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "a4fd23572341439b38164b20171120836848f459",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "1b1f5d07c90112f1d971652bedc77852064a3502",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": null,
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "1b1f5d07c90112f1d971652bedc77852064a3502",
+        "type": "blob"
+      },
+      "path": "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "1b1f5d07c90112f1d971652bedc77852064a3502",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "d545880394d1c882d78a9a105ccce81a27523bad",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "822f28009200cf6e42800999eca1b35b7a337854",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "822f28009200cf6e42800999eca1b35b7a337854",
+        "type": "blob"
+      },
+      "merge_attribution": "integration_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "822f28009200cf6e42800999eca1b35b7a337854",
+        "type": "blob"
+      },
+      "path": "action_server/tests/action_server_tests/test_canvas_query_results_fixture.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "d545880394d1c882d78a9a105ccce81a27523bad",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "5fe18b942ba66f339ac076fa26add1908d70305e",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": null,
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "5fe18b942ba66f339ac076fa26add1908d70305e",
+        "type": "blob"
+      },
+      "path": "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "5fe18b942ba66f339ac076fa26add1908d70305e",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "4fb9d29d6b6150edd4b99c78736e9e4b93f81d67",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "758514fbb123e3c2bdebee6c6b317751aca8f885",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "4fb9d29d6b6150edd4b99c78736e9e4b93f81d67",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "758514fbb123e3c2bdebee6c6b317751aca8f885",
+        "type": "blob"
+      },
+      "path": "action_server/tests/action_server_tests/test_database.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "758514fbb123e3c2bdebee6c6b317751aca8f885",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "c4c5f19267d815986f141812527e97587fda6d62",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "f44efc6c01736ecead0e48e510d5f1c68587ef05",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "c4c5f19267d815986f141812527e97587fda6d62",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "f44efc6c01736ecead0e48e510d5f1c68587ef05",
+        "type": "blob"
+      },
+      "path": "action_server/tests/action_server_tests/test_database/test_database_schema_evolution.txt",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "f44efc6c01736ecead0e48e510d5f1c68587ef05",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "cad772f366c805c4f0fb88d18b481fdc3a9ccdab",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "b2d3bd36293ccc05cf600337dbe56d014563d2fd",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "cad772f366c805c4f0fb88d18b481fdc3a9ccdab",
+        "type": "blob"
+      },
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "b2d3bd36293ccc05cf600337dbe56d014563d2fd",
+        "type": "blob"
+      },
+      "path": "action_server/tests/action_server_tests/test_p0_snapshot_reload_boundaries.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "b2d3bd36293ccc05cf600337dbe56d014563d2fd",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "939bbffcc55f46d53fb4d6149f30d2e84c6d359b",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "6e81aeda234154fb1b02303c67836e69997d5aba",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "6e81aeda234154fb1b02303c67836e69997d5aba",
+        "type": "blob"
+      },
+      "merge_attribution": "integration_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "6e81aeda234154fb1b02303c67836e69997d5aba",
+        "type": "blob"
+      },
+      "path": "action_server/tests/action_server_tests/test_rcc_runtime_adapter.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "939bbffcc55f46d53fb4d6149f30d2e84c6d359b",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "04a66ff5bb93394c51fea04167272795a62b298c",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": null,
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "04a66ff5bb93394c51fea04167272795a62b298c",
+        "type": "blob"
+      },
+      "path": "action_server/tests/contract_tests/test_frozen_wrapper_acceptance_plugin.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "04a66ff5bb93394c51fea04167272795a62b298c",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "b1cfe7529e03e9ef07701e95f0cd7d5179eba853",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": null,
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "b1cfe7529e03e9ef07701e95f0cd7d5179eba853",
+        "type": "blob"
+      },
+      "path": "action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "b1cfe7529e03e9ef07701e95f0cd7d5179eba853",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "383cd5bd752d5070719b8e2db4d47927cc74fced",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": null,
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "383cd5bd752d5070719b8e2db4d47927cc74fced",
+        "type": "blob"
+      },
+      "path": "action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "383cd5bd752d5070719b8e2db4d47927cc74fced",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "ed8d5959ca003edcf5bc053467a845f8cf243d78",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": null,
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "ed8d5959ca003edcf5bc053467a845f8cf243d78",
+        "type": "blob"
+      },
+      "path": "action_server/tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "ed8d5959ca003edcf5bc053467a845f8cf243d78",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "8f59dafcec07b00f27f6f5d82da6781403926a04",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "85292e01acb37717b7b8dc438b26b16bfc2fa718",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "85292e01acb37717b7b8dc438b26b16bfc2fa718",
+        "type": "blob"
+      },
+      "merge_attribution": "integration_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "85292e01acb37717b7b8dc438b26b16bfc2fa718",
+        "type": "blob"
+      },
+      "path": "devutils/tests/test_runtime_release_workflows.py",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "8f59dafcec07b00f27f6f5d82da6781403926a04",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "4fb0bc97f50b3417bcd697e1e518b5ed637be725",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "74c3914eb8355727e67f953c6bc9b6af81c0c5be",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "74c3914eb8355727e67f953c6bc9b6af81c0c5be",
+        "type": "blob"
+      },
+      "merge_attribution": "integration_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "74c3914eb8355727e67f953c6bc9b6af81c0c5be",
+        "type": "blob"
+      },
+      "path": "docs/contracts/canvas/fixtures/README.md",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "4fb0bc97f50b3417bcd697e1e518b5ed637be725",
+        "type": "blob"
+      }
+    },
+    {
+      "base": null,
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "74749d705d5318674a774946177f86689bbba29d",
+        "type": "blob"
+      },
+      "final_delta": "same_as_merge",
+      "integration_head": null,
+      "merge_attribution": "pr290_parent",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "74749d705d5318674a774946177f86689bbba29d",
+        "type": "blob"
+      },
+      "path": "docs/program/evidence/mcp-resource-history-cli-20261010.json",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "74749d705d5318674a774946177f86689bbba29d",
+        "type": "blob"
+      }
+    },
+    {
+      "base": {
+        "mode": "100644",
+        "oid": "bbaa329910ddbe41f622ad08b90518c3252c004a",
+        "type": "blob"
+      },
+      "final_candidate": {
+        "mode": "100644",
+        "oid": "4b1d9c88fcc5c2b981cf85dc26c59d6590bc6b70",
+        "type": "blob"
+      },
+      "final_delta": "guide_followup",
+      "integration_head": {
+        "mode": "100644",
+        "oid": "66bef06142d4e3ceb9e90f2ea55d5f9bb19bfadb",
+        "type": "blob"
+      },
+      "merge_attribution": "auto_merge",
+      "ordinary_merge": {
+        "mode": "100644",
+        "oid": "84fb82c9aab063cd53fa50d1a64853768b62c4a9",
+        "type": "blob"
+      },
+      "path": "docs/skills/repository-operations.md",
+      "pr290_head": {
+        "mode": "100644",
+        "oid": "2e495cf265ed8e748a42240569b7d7f6f1766ee1",
+        "type": "blob"
+      }
+    }
+  ],
+  "pr290_parent_changed_paths": 26,
+  "schema": "pr290-source-union-comparison/v1",
+  "source_candidate_head": "18d45b892e39d97d4949ca8f7eb698dd5edc283f",
+  "source_candidate_tree": "81e69ed5d504d9278fbde7b125a3fde4467f2a8a",
+  "union_equals_ordinary_merge_delta": true
+}

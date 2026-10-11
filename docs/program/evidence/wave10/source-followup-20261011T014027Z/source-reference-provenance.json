@@ -1,0 +1,23 @@
+{
+  "source_members_not_duplicated": [
+    {
+      "role": "developer_setup",
+      "bytes": 331,
+      "path": "/workspace/work/actions-mk3-wave10-pr290/developer/setup.yaml",
+      "sha256": "8674d6b55439fae5ac284fa92d7db8016e3589fafbf2d34e066e29345efa016a",
+      "source_commit": "18d45b892e39d97d4949ca8f7eb698dd5edc283f",
+      "not_copied": "Already in accepted pushed source commit"
+    },
+    {
+      "role": "final_repository_operations_guide",
+      "bytes": 221686,
+      "path": "/workspace/work/actions-mk3-wave10-pr290/docs/skills/repository-operations.md",
+      "sha256": "c3807f16120045475a2e5674a47e0ed3aea58ca7b8c62ae18ea5ea04873156b1",
+      "source_commit": "18d45b892e39d97d4949ca8f7eb698dd5edc283f",
+      "not_copied": "Already in accepted pushed source commit"
+    }
+  ],
+  "original_manifest_files": 15,
+  "selected_owner_manifest_members": 13,
+  "scope": "Original manifest records15 source/evidence members; two source files are available at accepted pushed18d45 commit. Reviewer original16-label retained with additive correction. Unmanifested invocation scratch not claimed verified or copied."
+}

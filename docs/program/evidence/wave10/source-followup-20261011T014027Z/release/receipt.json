@@ -1,0 +1,54 @@
+{
+  "schema": "actions.release-readback/v1",
+  "observations": {
+    "pypi_runtime": {
+      "url": "https://pypi.org/pypi/actions-runtime/json",
+      "observed_at_utc": "2026-10-11T01:38:56.383183+00:00",
+      "http_status": 200,
+      "response_sha256": "7d830d6cf750d5cf2b5820cb43f72583047b2b72eab1f2d33ffb4b276c7438ef",
+      "response_bytes": 26154,
+      "latest": "1.0.2",
+      "version_1_0_3_present": false,
+      "version_1_0_3_files": []
+    },
+    "native_release": {
+      "url": "https://api.github.com/repos/joshyorko/actions/releases/tags/actions-runtime-1.0.3",
+      "observed_at_utc": "2026-10-11T01:38:56.383909+00:00",
+      "http_status": 404,
+      "outcome": "not-found"
+    },
+    "native_tag": {
+      "url": "https://api.github.com/repos/joshyorko/actions/git/ref/tags/actions-runtime-1.0.3",
+      "observed_at_utc": "2026-10-11T01:38:56.384383+00:00",
+      "http_status": 404,
+      "outcome": "not-found"
+    },
+    "latest_native": {
+      "url": "https://api.github.com/repos/joshyorko/actions/releases/latest",
+      "observed_at_utc": "2026-10-11T01:38:56.384742+00:00",
+      "http_status": 200,
+      "response_sha256": "c8ca6c3f2af614518a269dc1a3feca67b9d5039aa6d4d7944f282ca34e5ce5fb",
+      "response_bytes": 7045,
+      "tag_name": "actions-runtime-1.0.1",
+      "asset_names": [
+        "actions-runtime-1.0.1-linux64",
+        "actions-runtime-1.0.1-macos-arm64",
+        "actions-runtime-1.0.1-windows64.exe"
+      ],
+      "draft": false
+    },
+    "owning_cask": {
+      "url": "https://raw.githubusercontent.com/joshyorko/homebrew-tools/main/Casks/action-server.rb",
+      "observed_at_utc": "2026-10-11T01:38:56.385072+00:00",
+      "http_status": 200,
+      "response_sha256": "fbd00170ccbe93d476a168ffc35eba99ced8f0192918b114f308083768c3169f",
+      "response_bytes": 1284,
+      "version_line": "version \"1.0.1\""
+    }
+  },
+  "scope": "Read-only endpoint observations; no publication or artifact download/install proof",
+  "Homebrew_install_upgrade": "NOT RUN",
+  "actual_ChatGPT": "NOT RUN",
+  "documentation": "Existing independent endpoint/404-vs-UNKNOWN guidance covers this refresh; no new durable delta",
+  "upstream_disposition": "none"
+}

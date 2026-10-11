@@ -1,0 +1,85 @@
+{
+  "schema": "independent-pr290-source-refresh-review/v1",
+  "status": "GO_SOURCE_REFRESH",
+  "observed_utc": "2026-10-11T01:37:40.457019+00:00",
+  "head": "18d45b892e39d97d4949ca8f7eb698dd5edc283f",
+  "tree": "81e69ed5d504d9278fbde7b125a3fde4467f2a8a",
+  "ordered_parents": [
+    "f27bee1ad07a9a526c7182713b025ad6174594e5"
+  ],
+  "ordinary_merge": "f27bee1ad07a9a526c7182713b025ad6174594e5",
+  "ordinary_merge_tree": "c7a27263e2b4c754f01a77fec86ecb71cb57c927",
+  "merge_ordered_parents": [
+    "9e1059a12456faba64d11313d6dd8f943ad28912",
+    "19380993febaa71238eaee3026b5c808773283ff"
+  ],
+  "worktree": "/workspace/work/actions-mk3-wave10-pr290",
+  "clean_observed": true,
+  "live_target_ref": "integration/community-release-20261008",
+  "live_target": "19380993febaa71238eaee3026b5c808773283ff",
+  "declared_dependency_289": "fdf9ee8f023d068c16e567a85defd7c0437f8117",
+  "dependency_289_ancestor_verified": true,
+  "current_pr292_not_integrated": true,
+  "source_preservation_checks": {
+    "pr_changed_non_doc_preserved": true,
+    "non_doc_equal_parent": true,
+    "only_doc_followup": true,
+    "core_all_equal_live": true,
+    "all_other_workflows_equal_live": true,
+    "package_locks_versions_equal_live": true,
+    "generator_only_frozen_class_changed": true
+  },
+  "complete_leaf_counts": {
+    "base": 1384,
+    "old_pr": 1396,
+    "integration": 1385,
+    "merge": 1397,
+    "final": 1397
+  },
+  "old_pr_delta_paths": 26,
+  "complete_union_delta_paths": 35,
+  "generator_definitions_changed_from_integration": [
+    "ActionServerFrozenCatalogRollback"
+  ],
+  "owner_receipt_sha256": "512314314cf0bfc48852260313bb70c59e8e8efd750e00bd0f819e4d7bb06ac3",
+  "owner_manifest_sha256": "cb71123fb1589c74b7cc27ac3905fb55931624ab992617d231cbad492c8f8c9e",
+  "comparison_sha256": "8b21f6f849f04684763622476070cc57031ea28ebd578bd58dfdfa9e6fc23a55",
+  "all16_manifest_file_bytes_hashes_verified": true,
+  "configured_check": {
+    "command": "source /workspace/actions-cloud/activate.sh && cd /workspace/work/actions-mk3-wave10-pr290 && rcc run --dev --no-build --robot /workspace/work/actions-mk3-wave10-pr290/developer/wave10-pr290-source-refresh.yaml -t Test",
+    "result": "88 workflow-contract tests passed4.93s under canonical RCC18.19.3 cached developer configuration",
+    "log_sha256": "b266ff10617ca4f391b135d643a1a765b5aa9c46cc8841c6b6b48d518ca144d5",
+    "config_sha256": "5a9458fc80de411de1da09122aba0ffce9f5987421735d6f9efc160f25292771",
+    "failed_setup_attempts": "Three missing-pytest failures before collection retained; not behavioral test failures or PASS."
+  },
+  "observations": [
+    "Correct worktree verified through git worktree list; task suggested path did not exist. Actual branch/head/tree match owner.",
+    "Complete recursive git leaf inventories independently establish all PR290 changed non-documentation assertions/scripts/source unchanged from old PR parent, every non-documentation merge path inherited one parent, and follow-up only canonical docs.",
+    "Core, other workflows, package locks/versions/security-relevant integration source retained. Generator AST differs from live target only in existing PR290 frozen catalog class; accepted Core generator/workflow union unchanged.",
+    "Docs ordinary merge contains both source-specific guidance; follow-up adds dependency-order/live-target rule only.",
+    "Approved live Git ref resolves193. Dependency289 merge ancestor of193; current292 head2f is not ancestor. PR299/300 stack gates unchanged.",
+    "Retained exact owner88-test log/config and four captured artifacts plus all three failed setup logs/configs checked against full manifest. No rerun by reviewer."
+  ],
+  "limits": [
+    "GO for source refresh checkpoint/root-only conditional fast-forward publication of existing PR head, not whole PR/native acceptance or merge authorization.",
+    "Fresh exact-head hosted CI and its tested prospective union still required; no current new-head CI claim.",
+    "Historical frozen/native/Go evidence remains bound to earlier measured source/artifacts; no new native/frozen/Go execution at this union.",
+    "No whole owning-issue, Runtime release, package publication or version/floor acceptance.",
+    "PR292 source currently absent from live integration; no implied PR299/300 dependency satisfaction.",
+    "No source edits/tests/services/native workers/fetch/remote mutations by reviewer."
+  ],
+  "documentation_improvement": {
+    "disposition": "VERIFIED_EXACT_GUIDANCE_ALREADY_IN_COMMIT",
+    "target": "docs/skills/repository-operations.md",
+    "exact_delta": "Before refreshing a dependent pull request, confirm its accepted dependency source is present in current target ref. An older dependency in PR branch or prior local union is insufficient; refresh descendants in dependency order and bind carried-forward checks to exact tested source/prospective tree.",
+    "evidence": "289 ancestor/live193 verified;292 current head absent; ordinary parent chain inventories measured; source follow-up doc-only.",
+    "uncertainty": "Current-head hosted CI/native acceptance not established; wording does not promote historical evidence."
+  },
+  "upstream_disposition": "none; no new confirmed defect or external report",
+  "commands": [
+    "git worktree list/status/show/full parent diffs/merge-base ancestry",
+    "Approved read-only live target Git ref",
+    "Standard-library complete git tree/AST comparisons and SHA256 for owner evidence",
+    "Exclusive immutable public-safe receipt/manifest creation only"
+  ]
+}

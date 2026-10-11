@@ -1,0 +1,7 @@
+{
+  "type": "additive-review-field-count-correction",
+  "review_sha256": "247f6d8993646be9e655566d9f9dcfa3b3000e50ab76690ad10e794ce3973961",
+  "field": "all16_manifest_file_bytes_hashes_verified",
+  "correction": "All 15 manifest-listed files were byte/hash verified; field label incorrectly said16. Verification boolean remains true; no source/admission change.",
+  "actual_manifest_file_count": 15
+}

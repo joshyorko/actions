@@ -1,0 +1,7 @@
+# Reviewed source refresh and current CI checkpoint
+
+PR290 ordinary source refresh18d45 is independentlyGO_SOURCE_REFRESH and FFpushed with before/after remote/PR verification. Parent mergef27 preserves9e1059a/19380993; no PR merged/retargeted and no integration history rewritten.88 configured RCC workflow tests passed; three setup attempts failed before test collection and stay distinct. Two source files are referenced at18d45 rather than duplicated; all13 evidence-manifest members plus receipts retained. Reviewer15/16 field discrepancy is preserved with additive correction.
+
+At01:38:38,PR29022checks queued/running;PR31020success/1publishskip/1Windowsinprogress. PR29219success/exact924unionaccepted;PR31118success/1Windowsintegrationfailure, causeUNKNOWN. Sourcewriters0,2hostedCIlane gates continue. [Current58-row matrix](issue-matrix.json) keeps primary counts unchanged;6scopedcandidates/8held scopes,actualreadyUNKNOWN. [Seven-question closure audit](../convergence-20261011T013516Z/closure-residual-audit.json) remainsHOLD; automaticrelationshipsUNKNOWN.
+
+Fresh01:38:56release endpoints:RuntimePyPIlatest1.0.2/no1.0.3;native1.0.3release/tag404;latestnative andowningCask1.0.1. Downloads/Homebrewinstall-upgrade/actualChatGPTNOTRUN. PrivateRCCsource01f1a98cGO_COMPONENT,actualmetadataNOTRUN/supervisorHOLD;privatebytes notincluded. No newworkers/coordinator,issuesclosed,releases/tagspublished. Full54retainedcontractmissioncontinues;WorkItems0.4.4,DevsyDISABLED,0Dakotawriters.

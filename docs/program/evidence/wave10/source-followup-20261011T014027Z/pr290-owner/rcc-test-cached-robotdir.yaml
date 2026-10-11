@@ -1,0 +1,16 @@
+tasks:
+  Test:
+    shell: python -m pytest -q /workspace/work/actions-mk3-wave10-pr290/devutils/tests/test_runtime_release_workflows.py
+devTasks:
+  Test:
+    shell: python -m pytest -q /workspace/work/actions-mk3-wave10-pr290/devutils/tests/test_runtime_release_workflows.py
+environmentConfigs:
+  - setup_windows_amd64.yaml
+  - setup.yaml
+artifactsDir: /workspace/work/actions-mk3-evidence/wave10/pr290-source-refresh-20261011/artifacts-rcc-cached
+PATH:
+  - .
+PYTHONPATH:
+  - .
+ignoreFiles:
+  - ../.gitignore
