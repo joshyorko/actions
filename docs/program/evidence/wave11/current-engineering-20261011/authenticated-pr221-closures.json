@@ -1,0 +1,28 @@
+{
+  "schema": "actions.current-head-closure-audit/v1",
+  "base": "a70993fafc99a9f94041485542d5a720797ca394",
+  "head": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+  "new_commit_count": 461,
+  "complete_range_text_sha256": "21f4a1038d69f9e954df5c6021d6bdea1128195c1e2974a4e7a17c4168405238",
+  "observed_closing_keywords": [],
+  "authenticated_closing_relationships": {
+    "data": {
+      "repository": {
+        "pullRequest": {
+          "headRefOid": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+          "baseRefOid": "a70993fafc99a9f94041485542d5a720797ca394",
+          "closingIssuesReferences": {
+            "nodes": [],
+            "pageInfo": {
+              "hasNextPage": false,
+              "endCursor": null
+            }
+          }
+        }
+      }
+    }
+  },
+  "state": "CURRENT_HEAD_NO_TARGETS; final admitted head requires revalidation",
+  "historical_audit": "5f2d7e3d preserved, historical unknowns unchanged",
+  "mutations": "No issue closure or closing metadata added"
+}

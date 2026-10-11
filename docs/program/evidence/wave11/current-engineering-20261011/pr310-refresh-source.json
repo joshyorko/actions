@@ -1,0 +1,68 @@
+{
+  "source_head": "f506a04e240feba048bf10e32bccebf591674f9e",
+  "source_tree": "782ff78fa4bfc751b6d02004f665da84fc79c81b",
+  "ordinary_merge": "5071ee3c3f2e060374ebcfd0d753a16bdc22e3a8",
+  "ordered_merge_parents": [
+    "7c98534ad4eece6d892e3bb2957471d0f1ad76e6",
+    "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+  ],
+  "tracked_leaves": 1390,
+  "novel_leaves": [
+    "docs/skills/repository-operations.md",
+    "docs/skills/work-items.md"
+  ],
+  "non_documentation_novel_leaves": [],
+  "preservation": {
+    "no_parent_leaf_deleted": true,
+    "historical_receipts_preserved": true
+  },
+  "gates": {
+    "Doctor": "PASS",
+    "Bootstrap": "PASS",
+    "ToolkitTest": "62 PASS",
+    "scoped_pure_controls": "33 PASS; 2 integration deselected",
+    "configured_lint": "PASS",
+    "configured_mypy": "PASS; 330 files"
+  },
+  "logs": {
+    "doctor": {
+      "path": "/workspace/engineering/pr310-doctor.log",
+      "size": 12786,
+      "sha256": "c5e9b7546737fd7259858b50865518c2e439b37d84fd8a8446fd54862a9e6c7a"
+    },
+    "bootstrap": {
+      "path": "/workspace/engineering/pr310-bootstrap.log",
+      "size": 27576,
+      "sha256": "76fb8f8fdc5707534f68f250c4897f1de95c598b9a74d5380107dab4011e360b"
+    },
+    "toolkit": {
+      "path": "/workspace/engineering/pr310-toolkit.log",
+      "size": 14262,
+      "sha256": "b136a7b179fa626e23ec679519ea2ce693f0a8b4dab2a930821858392694e120"
+    },
+    "scoped": {
+      "path": "/workspace/engineering/pr310-scoped.log",
+      "size": 3945,
+      "sha256": "4f3a56a8a3620881d6d53372933bd541471fd22fda6541e6e657d1c466e790e6"
+    },
+    "static": {
+      "path": "/workspace/engineering/pr310-static.log",
+      "size": 5694,
+      "sha256": "344bf9d97b31e2923dac1a25f7a9fd8276dfc7670853ae0ba51392f69efbaf49"
+    }
+  },
+  "not_run": [
+    "Current-head hosted CI",
+    "Current-source native frozen/browser/wrapper execution",
+    "Complete #208 acceptance",
+    "Runtime publication"
+  ],
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/work-items.md",
+    "durable_learning": "Bind historical artifact/browser receipts independently from the current refreshed Runtime union; use only attested harness identities.",
+    "evidence": "Retained 856c artifact, ec8 wrapper and recovered immutable frozen review, ordered-parent union and canonical gate logs.",
+    "stale_guidance_removed": "Unqualified claim that authorization-denial stage never produced a native artifact receipt.",
+    "remaining_uncertainty": "Refreshed-source hosted/native execution and complete platform/error/quality acceptance remain open."
+  },
+  "upstream_disposition": "none"
+}

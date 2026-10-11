@@ -1,0 +1,147 @@
+{
+  "artifact": {
+    "id": 11690338317,
+    "members": {
+      "rcc-provider-rollback-evidence/acceptance-summary.json": {
+        "sha256": "bc6438485d279a2bf9fb4ff8d9b4e14f63ad21a24e78d660bbf84e1fb85d2189",
+        "size": 3067
+      },
+      "rcc-provider-rollback-evidence/acceptance-summary.log": {
+        "sha256": "a682be588c1e58d761ca601aac8ee1f2f19c892782fea3a59d151bc66a83484f",
+        "size": 686
+      },
+      "rcc-provider-rollback-evidence/lifecycle-receipt.json": {
+        "sha256": "b12fc9f5697e0ff123f8e666f29af3c50839e34fe122fd3fb81b64307f648a99",
+        "size": 7603
+      },
+      "rcc-provider-rollback-evidence/lifecycle-summary.json": {
+        "sha256": "d346cbd176e4d9dd680758326d5e4f35f857f1df6122add5a82cd25e9c662c5d",
+        "size": 1221
+      },
+      "rcc-provider-rollback-evidence/published-details-receipt.json": {
+        "sha256": "c72d06046c813bee442b583db1e3db529d866ab8048ef47795d624b22bacf4c3",
+        "size": 1483
+      },
+      "rcc-provider-rollback-evidence/staged-consumer-receipt.json": {
+        "sha256": "37baf7f55caf4fc0b504096bb0614cb7c72dfe63dca5f8de066811b60526b644",
+        "size": 2393
+      },
+      "rcc-provider-rollback-junit.xml": {
+        "sha256": "7e6e044832f38b94a44bc9c6d47a9158a6f018595ce9abda93cea903fd0fa9c7",
+        "size": 752
+      }
+    },
+    "original_zip_member_equality_confirmed": true,
+    "zip_sha256": "686a6686693030ee5b0e985fa3bc8826fd6ed7d3753be721aa41f3a319170f7a",
+    "zip_size": 7450
+  },
+  "candidate": {
+    "commit": "665468112f1593249449278cf2113c155a6ec6e3",
+    "tree": "d729a43127c048c7fb35133d2a4b07bc53635402"
+  },
+  "candidate_git_files": {
+    "acceptance_helper": {
+      "git_blob_oid": "4f155d2f63e86b38697c12557dd8a6550b9d36a3",
+      "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    "action_package_handler": {
+      "git_blob_oid": "a306eb11038f8cd4114415fb978321eb2ac51a0f",
+      "path": "action_server/src/actions/server/_action_package_handler.py",
+      "sha256": "a623ec0d2a7862bc5f27599fda853cb039ce68459b18c95e01c7a53adcdedb64"
+    },
+    "actions_import": {
+      "git_blob_oid": "50f72e8c95dcc4455a8225eb19c8d3309faada58",
+      "path": "action_server/src/actions/server/_actions_import.py",
+      "sha256": "57ad235e30fdd84c763f84efd7ccdd8514d620d5b5cfff05ac1051f60ceefad3"
+    },
+    "rollback_test": {
+      "git_blob_oid": "13c760dd2adbd38bfeec039eba73376bbf32745c",
+      "path": "action_server/tests/action_server_tests/test_current_candidate_import_rollback.py",
+      "sha256": "60d81fabaa2ba0446ff888109e050c883ee944553794636fd527a6fe27d4691b"
+    },
+    "runtime_adapter": {
+      "git_blob_oid": "09234363409bf979016a970c34b8b38ff642fb1f",
+      "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "sha256": "64f70563e9aaf2fa1a3a12006ae26e513b51be3bf465dac3d2b3bba76c1c669a"
+    },
+    "source_manifest": {
+      "git_blob_oid": "5c02ece585884a656175d586e6b3d5a64f0c065e",
+      "path": "action_server/src/actions/server/deployments/source_manifest.py",
+      "sha256": "4fb8d376d1b4aa06d301dedaeee67a2916561c7d10b8f1dadd657870b37b2b43"
+    },
+    "source_read": {
+      "git_blob_oid": "7ec910a2ef7aecd2be73c6a7b786d42ea78c81af",
+      "path": "action_server/src/actions/server/deployments/source_read.py",
+      "sha256": "4ae8cbe57aa5c924585f4257a1be1700aa49baa63d6150efba20935045f7a8a5"
+    },
+    "source_staging": {
+      "git_blob_oid": "b475fd6688b7afc6606cde2cba9a1294d771a64c",
+      "path": "action_server/src/actions/server/deployments/source_staging.py",
+      "sha256": "fda3f2c045414a9cae21cc0765a3eb7c72db2ddd2f5d74e567a04a0513baf620"
+    },
+    "staged_consumer_test": {
+      "git_blob_oid": "6bb84ba5d78aeb200be4fae46155fc082bb8eb31",
+      "path": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "sha256": "0edc5d092dba9415f552ee1f666edac8f3ce9e833bea1ef73f8370ed2d446e6a"
+    }
+  },
+  "control": {
+    "commit": "ff6842223068bb34811990a417aa280331acbb6a",
+    "tree": "0e4972743f84d85b19c3bda9a6d4cc27d49a3805"
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Require original-byte artifact readback; distinguish publication invocation, lifecycle environment, published Core identity and captured descendant scope.",
+    "evidence": "Run 38106813502/job114373973414; original ZIP 11690338317; independently hash-checked raw receipts and candidate Git blobs.",
+    "exact_delta": "After the paragraph ending \"A skipped test, missing receipt, inconsistent JUnit counters or failed checkout cannot appear green.\", add: \"Independent admission review must hash the original artifact ZIP and compare retained lifecycle, publication, staged-consumer and JUnit bytes with its members before relying on a sanitized summary. The single-invocation guarantee binds the specification/artifact digests in the publication-details case; the rollback lifecycle and staged-consumer cases own separate environments and providers. This staged consumer pins published Core 1.0.2 and does not establish a Core 1.0.3 consumer gate. An empty captured descendant snapshot proves only that no captured process survived, not complete descendant reaping.\"",
+    "remaining_uncertainty": "Private metadata, full supervisor graph, Windows RCC and Core 1.0.3 consumer remain unaccepted.",
+    "stale_or_ambiguous_guidance_removed": "Avoid treating summarized PASS, paired digests, managed origin or empty descendant snapshot as broader acceptance."
+  },
+  "hosted": {
+    "actual_job_logs_independently_read": true,
+    "conclusion": "success",
+    "errors": 0,
+    "exact_tests": 3,
+    "failures": 0,
+    "job_id": 114373973414,
+    "run_id": 38106813502,
+    "skipped": 0
+  },
+  "lifecycle": {
+    "controlled_shutdown_http_status": 200,
+    "forced_stop_used": false,
+    "last_good_after_failure": true,
+    "natural_precleanup_returncode": 1,
+    "observation_scope": "captured tree only; not a complete descendant-reaping claim",
+    "observed_same_owned_descendants_remaining": 0,
+    "recovery": true,
+    "unchanged_provider_operation_count": 2
+  },
+  "limitations": [
+    "Selected three-case public Linux gate only; not whole retained #134/#135 acceptance.",
+    "Private 01f1a98c/fafb bundle chain and original frozen-v6 specification/runner are absent: private metadata NOT_RUN/HOLD remains.",
+    "Staged consumer proves published Core 1.0.2, not Core 1.0.3; no Runtime 1.0.3 publication or Windows RCC gate.",
+    "Owned descendant observation is captured-tree only, with empty pre-stop snapshot; not complete descendant reaping.",
+    "Publication pair and lifecycle use separate test environments/providers; only the two publication digests share the single publication invocation."
+  ],
+  "publication": {
+    "artifact_digest": "sha256:386d57deca90ca8105c98f7e0b7bb3b383eecf3a0ba74e6a92aea11f5e705787",
+    "raw_json_sha256": "9a8b04783a0abb35b1be4cda4f38a2efc8ddf2892ad105ef057bf1caa5948275",
+    "separate_from_lifecycle_environment": true,
+    "single_actual_invocation": true,
+    "specification_digest": "sha256:5e7dcfdb9f4ca5cc19ca6b2e93cad75a3fd60f598d4a71fd10451bffc1ddc56f"
+  },
+  "rcc": {
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "v18.19.3"
+  },
+  "schema_version": 1,
+  "staged_consumer": {
+    "exact_staged_bytes": true,
+    "managed_worker_origins": true,
+    "published_core_version": "1.0.2"
+  },
+  "upstream_disposition": "none",
+  "verdict": "GO_PUBLIC_CURRENT_SOURCE_THREE_CASE_RCC_ACCEPTANCE"
+}

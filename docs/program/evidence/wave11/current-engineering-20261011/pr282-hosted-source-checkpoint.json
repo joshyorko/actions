@@ -1,0 +1,101 @@
+{
+  "Documentationimprovement": {
+    "Canonicalfilechanged/proposed": "docs/skills/repository-operations.md changed",
+    "Durablelearning": "Receipt admission needs actual successful cleanup values, exact JUnit/current-source/consumer identities and measured browser preflight. Service-free relocated historical proof tests validators without relabeling old execution as a later workflow commit.",
+    "Evidence": "Four cleanup poison RED cases, resourcedigest RED,34 finalactualgeneratedvalidator tests against measured71f60 fixture, all8 generatorroundtrips, immutable actualreceipt andJUnit hashes.",
+    "Remaininguncertainty": "Fresh hosted combined exactheadchecks awaitpush; publishedCoremember sampling/artifactnull/frozenChatGPT/globaladoption limits unchanged.",
+    "Staleguidanceremoved": "No old paragraph removed in this follow-up; resolved prior ambiguity that boolean/list types or receipt presence alone established acceptance."
+  },
+  "Upstreamdisposition": "none; local workflow admission defect, no authorized upstream target",
+  "actual_consumer_proof": {
+    "executed_source_commit": "71f60ee8b931cb968866db5a8f45ba2056d18ed8",
+    "executed_source_tree": "30e880f0640a446a3db2b6e555e6801ee6dc92fc",
+    "junit_sha256": "b258c5cca3c0aa6a9499f75a672b2a1c2540a3e6c6ce6320c1a72c7f8c0e7e1a",
+    "limits": "Three measured published-Core members, artifact:null partial, sourceRuntime/browser only, observedadoptedChromezombies recorded separately; no globaladoption/frozen/ChatGPT claim.",
+    "receipt_sha256": "387915157b68d339a0bca151868c706cfc8e62e6c03609e9c96fdf11ecd3d727",
+    "status": "Prior independently scoped GO retained; no new actualconsumer rerun or relabeling to workflow commit."
+  },
+  "checks": {
+    "Doctor_Bootstrap": "Reuse existingpr282 verifiedRCC18.19.3/Poetry2.1.1/Node20.19.3 receipts; toolchain/manifests unchanged",
+    "ToolkitTest_final": "96passed, including34 generatedvalidator/roundtrip tests, developerRuffpassed",
+    "admission_cleanup_RED": "4failed/25passed; false snapshot/reap, errors and zombies were admitted by original proposal",
+    "admission_resource_RED": "1failed/33deselected; arbitrary valid-shaped digest admitted",
+    "full_Runtime_and_actual_consumer": "Not rerun for workflow/test/doc-only descendant; exacthead hostedgate required after independent review/push.",
+    "regeneration": "All8 outputtargets checkout-equivalent; onlyactions_runtime_tests.yml changed; unrelatedASTequal",
+    "static": "Ruffgenerator/developerpassed; newtestformatpassed; generatorpy_compilepassed; bash-npassed; gitdiffcheckpassed"
+  },
+  "logs": {
+    "published-admission-red.log": "/workspace/actions-cloud/receipts/pr282-writer/published-admission-red.log",
+    "published-resource-admission-red.log": "/workspace/actions-cloud/receipts/pr282-writer/published-resource-admission-red.log",
+    "workflow-preservation-final.log": "/workspace/actions-cloud/receipts/pr282-writer/workflow-preservation-final.log",
+    "workflow-regenerate-final.log": "/workspace/actions-cloud/receipts/pr282-writer/workflow-regenerate-final.log",
+    "workflow-toolkit-test-final.log": "/workspace/actions-cloud/receipts/pr282-writer/workflow-toolkit-test-final.log"
+  },
+  "preservation": {
+    "bash_syntax": "PASS",
+    "changed_outputs": [
+      "actions_runtime_tests.yml"
+    ],
+    "outputs": {
+      "actions_core_tests.yml": {
+        "after_sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296",
+        "before_sha256": "d9e1c8884b4321024b2f785e6b01af655e1da0be4a1f45572f51a7ef1d64b296",
+        "checkout_equal": true
+      },
+      "actions_runtime_binary_release.yml": {
+        "after_sha256": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64",
+        "before_sha256": "bc9d5abf00cae45a622f03bbef0adf089c8e08fd6ac2d6d1d70cbc5ad4a0dd64",
+        "checkout_equal": true
+      },
+      "actions_runtime_frozen_catalog_rollback.yml": {
+        "after_sha256": "518e370eb63213ca70a684102dfcf4c7a6c98733744b82dfb0fb2afedf9ff175",
+        "before_sha256": "518e370eb63213ca70a684102dfcf4c7a6c98733744b82dfb0fb2afedf9ff175",
+        "checkout_equal": true
+      },
+      "actions_runtime_pypi_release.yml": {
+        "after_sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+        "before_sha256": "c22ee0ead9d01ef08169c3d9e329c9c17b9bcdb29a9fce969f16846f88d0347f",
+        "checkout_equal": true
+      },
+      "actions_runtime_rcc_provider_rollback.yml": {
+        "after_sha256": "066adce2531a5223720661afce2f6485d7493243c10156eb1d84e624e252ac92",
+        "before_sha256": "066adce2531a5223720661afce2f6485d7493243c10156eb1d84e624e252ac92",
+        "checkout_equal": true
+      },
+      "actions_runtime_recovery.yml": {
+        "after_sha256": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f",
+        "before_sha256": "d45d82ae617e8af5e6ac06bf80afac45f814ccc4f8cbe2203ed49891b0a7843f",
+        "checkout_equal": true
+      },
+      "actions_runtime_tests.yml": {
+        "after_sha256": "da4be8cef87d7330158466feb48edfe30cc91fc74dbeafaa9762c2cc0cabb52d",
+        "before_sha256": "9e6a7753bea73c5bd8f56caf9516fffc61768d0c719e445a1dc8808be5d65ab4",
+        "checkout_equal": true
+      },
+      "http_helper_tests.yml": {
+        "after_sha256": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8",
+        "before_sha256": "32496dddc278173c3d51387d7e3221d5a8b61d62ecb55b0c7538145f692f81d8",
+        "checkout_equal": true
+      }
+    },
+    "unrelated_AST": "Equivalent after removing one new method and its one call"
+  },
+  "push_status": "NOT_PUSHED; independent root/reviewer GO required",
+  "source_preservation": "All production modules, existing Canvas test/runner bytes, templates, ZIPs, manifests and unrelated workflows identical to parent71f60. One generator method and one call only; unrelated AST equivalent.",
+  "strict_admission": "Current sourcecommit/tree/orderedparents; exact1case name/class/counter/no-skips/exitstatus; published1.0.3+verifiedwheelSHA+measuredmemberhashes/prefixcontainment; sourceRuntimeorigin/digest/launch; explicitbrowserpath/version/preflightdigest/lock/removedtmp; templateZIP,productionmanifest andactualZIPHTMLdigests; Runtimewrapper/snapshot/reap strictlyTrue anderrors/readers/live/zombies empty. SanitizedfailureJUnit always; sanitizedreceipt onlyafteradmission.",
+  "workflow_checkpoint": {
+    "changed_paths": [
+      ".github/workflows/_gen_workflows.py",
+      ".github/workflows/actions_runtime_tests.yml",
+      "developer/tests/fixtures/canvas-published-71f60-receipt.json",
+      "developer/tests/test_canvas_published_workflow.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "clean": true,
+    "commit": "7ad9a7f15f46fa302bf7f5015100dbf2c3d1b3cd",
+    "parents": [
+      "71f60ee8b931cb968866db5a8f45ba2056d18ed8"
+    ],
+    "tree": "c352d18e172049e40f3c41ea29b6c51ae3d5bb8f"
+  }
+}

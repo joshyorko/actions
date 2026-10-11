@@ -1,0 +1,27 @@
+{
+  "pr300": "3cad4fd6d9fb386451b3b76d7b1103256eec54e5",
+  "pr300_tree": "2831e5abca6eca2072509789d9990a4b10b2e2e1",
+  "pr299": "9cb61c52fce35201221b55707d73da9e9b0840a6",
+  "pr299_tree": "6d1104d9f6c2372cb7fa41dfcb4f7e6b7074140d",
+  "merge_base": "4cad04ca0e70d219f53452fa5911c6d61192fd0d",
+  "preserved_private_contracts": {
+    "action_server/src/actions/server/run_outputs/__init__.py": true,
+    "action_server/src/actions/server/run_outputs/filesystem.py": true,
+    "action_server/src/actions/server/run_outputs/models.py": true,
+    "action_server/src/actions/server/run_outputs/service.py": true,
+    "action_server/src/actions/server/run_outputs/types.py": true,
+    "action_server/tests/action_server_tests/run_outputs/test_concurrency.py": true,
+    "action_server/tests/action_server_tests/run_outputs/test_filesystem.py": true,
+    "action_server/tests/action_server_tests/run_outputs/test_migration.py": true,
+    "action_server/tests/action_server_tests/run_outputs/test_service.py": true
+  },
+  "merge_preview": {
+    "path": "/workspace/engineering/pr300-merge-preview.txt",
+    "sha256": "e0909ecfbf868a59ed771ca634f916301af2552b92066abf73b2ea0c70e658ab",
+    "conflict_markers": false
+  },
+  "source_mutations": false,
+  "retargeted": false,
+  "pushed": false,
+  "acceptance": "preparation only; actual #299 integration required before refresh"
+}

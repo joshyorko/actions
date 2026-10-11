@@ -2176,6 +2176,27 @@ When a local reviewed commit is coalesced or recreated as a different published 
 
 A check or workflow display name is a label, not a unique run identity; names are reused across workflow files and matrix variants. Record the repository, workflow path, run/job, event checkout SHA/tree, operating system, interpreter, and package/version when interpreting a result. A test count does not identify the Python version. An artifact ID is an identifier, not its size or digest: verify downloaded bytes and member hashes before claiming artifact contents, and distinguish workflow-reported metadata from independently verified bytes.
 
+GitHub artifact `workflow_run.head_sha` can identify a PR source head while the
+producer checks out a synthetic merge with a different commit SHA. Bind artifact
+API metadata to its actual workflow head, then separately bind the producer
+checkout commit/tree and accepted target tree using logs and measured source
+inventories. Do not substitute the accepted target SHA for the workflow head in
+a metadata guard. Test the generated guard with both the real workflow head and
+the wrong, valid-shaped target SHA; service-free string inspection alone can
+miss this mismatch. The current frozen-catalog control established this with a
+failed metadata-only wrapper job followed by exact eleven-case frozen and wrapper
+passes; its selected lifecycle cases do not prove unselected startup-reader cleanup.
+
+A stacked PR targeting a feature branch can omit package workflows whose
+pull-request branch filters cover only master, community and integration
+branches. Check required workflow presence before interpreting green checks.
+After the predecessor actually integrates, ordinary-merge the accepted target
+into the existing branch, retarget the existing PR, and require fresh exact-checkout
+package evidence. Binary-build and toolkit success do not establish Runtime
+transport execution.
+
+
+
 When a hosted acceptance artifact contains only a sanitized summary, distinguish
 that summary from the underlying JUnit XML and full lifecycle receipt. Verify
 the summary-producing checks against their exact source and corroborate the

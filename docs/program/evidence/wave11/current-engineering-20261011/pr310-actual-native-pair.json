@@ -1,0 +1,208 @@
+{
+  "status": "GO_CURRENT_HARNESS_LINUX_NATIVE_PAIR_BOUNDED_ACCEPTANCE",
+  "harness": {
+    "sha": "f506a04e240feba048bf10e32bccebf591674f9e",
+    "tree": "782ff78fa4bfc751b6d02004f665da84fc79c81b"
+  },
+  "artifact": {
+    "original_build_source_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "original_build_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+    "build_run": "38098225250",
+    "attempt": "1",
+    "source_relabelled": false
+  },
+  "immutable_runner_sha256": "cbbb61581274a6caa830c8c400386735e738d28f3ea0700577a0926293693368",
+  "qualified_selection_receipt": "/workspace/engineering/pr310-runner-qualification-owned/runner-qualification-receipt-v2.json",
+  "executions": {
+    "frozen": {
+      "status": "PASS_BOUNDED",
+      "outer_elapsed_seconds": 40.86025447500015,
+      "runner_elapsed_seconds": 35.64857058899997,
+      "JUnit": {
+        "pass": 1,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      },
+      "stages": [
+        {
+          "stage": "normal",
+          "status": "PASS",
+          "script_exit_code": 0
+        },
+        {
+          "stage": "authorization-denied",
+          "status": "PASS",
+          "script_exit_code": 0
+        },
+        {
+          "stage": "storage-error",
+          "status": "PASS",
+          "script_exit_code": 0
+        }
+      ],
+      "cleanup": {
+        "wrapper_started": true,
+        "wrapper_reaped": true,
+        "live_descendant_count": 0,
+        "zombie_descendant_count": 0,
+        "descendant_snapshot_complete": true,
+        "control_error_count": 0,
+        "snapshot_failure_type": null,
+        "stop_failure_type": null
+      },
+      "supervisor_cleanup_disposition": "reaped_exited_descendants",
+      "supervisor_reaped_descendants": 6,
+      "tree_diff": {
+        "added_count": 0,
+        "removed_count": 0,
+        "changed_count": 0,
+        "report_path": "native-ui-receipt-frozen-post-runtime-tree-diff.json"
+      },
+      "immutable_build_tree_unchanged": true,
+      "browser": {
+        "paths": [
+          "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell"
+        ],
+        "launched_pids": [
+          19207
+        ],
+        "executable_file_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+        "trace_sha256": "149ec58332072c263a29b80a67ab2f1f49d35ef5afc80272652db7b89e100bb9",
+        "measurement": "actual pw:browser launch command and PID, executable file bytes measured before/after; no live /proc identity sample"
+      },
+      "short_tmp_cleanup": "REMOVED_AFTER_SUPERVISOR_COMPLETED",
+      "states_not_run": {
+        "missing_runtime_support": "cannot be induced without mutating the package",
+        "generic_http_500": "no supported native backend fault fixture"
+      },
+      "states_failed": {},
+      "executable_sha256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb",
+      "runtime_version": "1.0.3",
+      "readback": "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/readback-summary.json"
+    },
+    "go-wrapper": {
+      "status": "PASS_BOUNDED",
+      "outer_elapsed_seconds": 48.73780379400023,
+      "runner_elapsed_seconds": 43.37171053200018,
+      "JUnit": {
+        "pass": 1,
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      },
+      "stages": [
+        {
+          "stage": "normal",
+          "status": "PASS",
+          "script_exit_code": 0
+        },
+        {
+          "stage": "authorization-denied",
+          "status": "PASS",
+          "script_exit_code": 0
+        },
+        {
+          "stage": "storage-error",
+          "status": "PASS",
+          "script_exit_code": 0
+        }
+      ],
+      "cleanup": {
+        "wrapper_started": true,
+        "wrapper_reaped": true,
+        "live_descendant_count": 0,
+        "zombie_descendant_count": 0,
+        "descendant_snapshot_complete": true,
+        "control_error_count": 0,
+        "snapshot_failure_type": null,
+        "stop_failure_type": null
+      },
+      "supervisor_cleanup_disposition": "reaped_exited_descendants",
+      "supervisor_reaped_descendants": 6,
+      "tree_diff": {
+        "added_count": 0,
+        "removed_count": 0,
+        "changed_count": 0,
+        "report_path": "native-ui-receipt-go-wrapper-post-runtime-tree-diff.json"
+      },
+      "immutable_build_tree_unchanged": true,
+      "browser": {
+        "paths": [
+          "/workspace/actions-cloud/cache/playwright/chromium_headless_shell-1234/chrome-headless-shell-linux64/chrome-headless-shell"
+        ],
+        "launched_pids": [
+          20364
+        ],
+        "executable_file_sha256": "e11fc9ce65c96313476f7ee9844b6fb6a9220fb048693cfe9eee00acf4170a9f",
+        "trace_sha256": "050822c91c9220685a40c40a0f354876763a8039ff220f94ae348267243df699",
+        "measurement": "actual pw:browser launch command and PID, executable file bytes measured before/after; no live /proc identity sample"
+      },
+      "short_tmp_cleanup": "REMOVED_AFTER_SUPERVISOR_COMPLETED",
+      "states_not_run": {
+        "missing_runtime_support": "cannot be induced without mutating the package",
+        "generic_http_500": "no supported native backend fault fixture"
+      },
+      "states_failed": {},
+      "executable_sha256": "214548879a4eb74ccd94998dcd6250b712b2bdfe7a07ab803e2e2e37f679c04b",
+      "runtime_version": "1.0.3",
+      "readback": "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/readback-summary.json"
+    }
+  },
+  "source_mutation": false,
+  "tracked_worktree_clean": true,
+  "limits": [
+    "Linux pair only; Windows/macOS unexecuted here despite current workflow configuring both",
+    "missing_runtime_support and generic_http_500 remain NOT_RUN",
+    "original manifest is not a clean-build attestation or independent bundled/Core dependency origin proof",
+    "final DEBUG_FILE covers last attempted browser stage; later live /proc diagnostics did not capture PID and imply no live-process or universal discovery claim",
+    "private RCC metadata and frozen-v6 supervisor implementation remain NOT_RUN/HOLD; no replacement private policy"
+  ],
+  "proposal_disposition": {
+    "V1 runner/qualification": "REJECTED_HOLD_BROWSER_BINDING: fullChrome getter differed from actual headless selector; bytes retained unchanged",
+    "V2 runner/qualification": "INDEPENDENTLY_ACCEPTED_BY_ROOT; actual pair separately authorized and executed one attempt each",
+    "initial canonical proposal": "SUPERSEDED by V2 browser-selector correction; durable original-source/archive/layout learning retained in final patch",
+    "V2 canonical proposal": "INCORPORATED into final patch; root integration pending",
+    "frozen-only canonical/result proposal": "Historical checkpoint retained; frozen-only status superseded by final separate pair results; cleanup/gate learning retained",
+    "final canonical patch": "PROPOSED_FOR_ROOT_INTEGRATION; no tracked guide mutation by this execution lane"
+  },
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/work-items.md; exact canonical-guide-final-proposed.patch",
+    "Durable learning captured": "Existing original artifacts can be replayed by qualified current harness; preserve source/harness identities, exact ZIP/layout, actual Playwright headless selector and short private temp; independent per-kind gates and observed Runtime/supervisor counts define bounded acceptance.",
+    "Evidence": "All1390tracked paths parity except harness/tests/docs; exact embedded asset range/hash;1192entry frozen inventory equality; actual frozen and wrapper1PASS each with three browser stages, cleanup0live/0zombie/errors and unchanged tree; installed Playwright selector and actual launch traces; source workflow matrix explicitly includes macos-15 and both browser gates",
+    "Stale or ambiguous guidance removed": "Corrects macOS browser acceptance not configured claim; replaces current union native gates NOT_RUN statement with scoped Linux current-harness pair proof; distinguishes getter/fullChrome from headless-shell launch and source build from harness.",
+    "Remaining uncertainty": "Windows/macOS hosted native receipts, missing-support/generic500 fixtures, clean build/dependency origin, parent integration/check status"
+  },
+  "upstream_disposition": "none",
+  "evidence": {
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/native-ui-receipt-pretest-tree-inventory.json": "08d8c246e5fd7fcf982f7f1aedd446f1563648e66f0b75f8a9ca0d15fd584659",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/test-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/pw-browser-launch.log": "149ec58332072c263a29b80a67ab2f1f49d35ef5afc80272652db7b89e100bb9",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/test-stdout.log": "8f505596918d9290d9f262ae60affab1ca3de489974add5686f8a73ec057e8ca",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/native-ui-receipt-frozen-post-runtime-tree-inventory.json": "3528676ec30753c5487f27a019a264d7d672b63e5dbac5bfa2dd32fcc58398d6",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/actual-browser-proc-sample.json": "e66544a18291c36b099da8ec98a305427666e7f1ee3047ffd65ed1da252df426",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/native-ui-receipt-frozen-post-runtime-tree-diff.json": "6e18014feed9e00853147b2cb547f3b35bdfa3ff552fdbc26267df76fe6b9cd5",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/native-ui-receipt.json": "32df0a8501d08318b2106fd27d385e8d1c06c464057538f4e1db9b7c9a32f643",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/readback-summary.json": "5c61b444845d02e2b476909c71173610b32ff8f513785ace323d4c51469b6ef0",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/runner-envelope.json": "0bb5435725cc16e8ebed76b0c2a23586b7aea129f6825583754361f19a815485",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/native-ui-receipt-frozen-copy-pretest-tree-inventory.json": "640964ce3f2faef0626b8e968f6915e0d6bfa1486fc0f4f8885e1f2ba16b0415",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen/junit.xml": "caca3f3dc05f32800b4bb919eb3f63349d8f976f0d149a7c3847141aa3071c31",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/native-ui-receipt-pretest-tree-inventory.json": "195e3982ebbd7d9d6d097f5c02339681f9f28779a2997ef47e3019ee88202c8c",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/native-ui-receipt-go-wrapper-pretest-tree-inventory.json": "e6e9f12d5f03e05213e30fa633a73e9a34982593fa8fb20f55e1fd63a19b52fe",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/test-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/native-ui-receipt-go-wrapper-post-runtime-tree-diff.json": "988148318e0051f0ff9f85abd23efcb1291c0b3326c01a07858f344477dc72d9",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/pw-browser-launch.log": "050822c91c9220685a40c40a0f354876763a8039ff220f94ae348267243df699",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/test-stdout.log": "a3f308746e875fb43773b3ae77cc3f7bd422c2a6df7159283fd2ed9c39e7c53f",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/actual-browser-proc-sample.json": "1d643c9a9ca6fd0ccb94a9de175c90f8689b378a68a7c623c47f48337cc6f3b9",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/native-ui-receipt.json": "94a26bc14f64fb7cd219b94cf3278c19a3962e1b5e85782c6c758e893c2b4781",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/readback-summary.json": "4ee223909f3f5a0b1f645ba4424e2c47d7cab2528dc24bbaaf6faf91e589d7d3",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/runner-envelope.json": "bb8b8e2e8c50f88aa5a06882b67176377027e3702a606edcf547fa2bc1e003e8",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/native-ui-receipt-go-wrapper-post-runtime-tree-inventory.json": "48efffea912c82514e278c826e39a2fe5de69850fe63f15e57abcece2d84728f",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper/junit.xml": "e0d4df39503f6490cb683d18be59bc5403d3072bd17056258ce9183e93429f92",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen-launcher-receipt.json": "b79988a4b8d1701812fbea5b6e3c458df2a969b71d5007927c4b1802d0f7e716",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-frozen-outer.log": "18a18c8ebe455a059249713f6c590e444351f8fa8c741ae3ea90e248961aac92",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper-launcher-receipt.json": "bdefeaa1830c4faed5a4ffc55083c169ee0aff4845be1dfc990d5ecee0f444a5",
+    "/workspace/engineering/pr310-runner-qualification-owned/actual-go-wrapper-outer.log": "2074306e03fdc18761d98200b521eb12d2e7fe34d49dca145fef674d2588e41d",
+    "/workspace/engineering/pr310-runner-qualification-owned/canonical-guide-final-proposed.patch": "2915ac45c5140032ca613c48fa42b99b02bcaf5e995ec10872a002e1f40c12c8"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "pr290-independent-actual-review.json": {
+    "source": "/workspace/engineering/pr290-independent-current-acceptance/independent-actual-receipt-review.json",
+    "bytes": 17154,
+    "sha256": "765ceb2a6d801413b3db8847fe75fcc0662d621f18fee39164d40fa446ab4298"
+  },
+  "pr302-independent-actual-review.json": {
+    "source": "/workspace/engineering/pr302-current-review/independent-acceptance-receipt.json",
+    "bytes": 7674,
+    "sha256": "5744c15b06089de40517e3388ea8d2877942e895844fc86cb71ac569eba6859a"
+  },
+  "pr310-actual-native-pair.json": {
+    "source": "/workspace/engineering/pr310-runner-qualification-owned/actual-native-pair-successor-receipt.json",
+    "bytes": 13502,
+    "sha256": "e95abb8f7024148019085d630f5755c8472290eabc3ad51537331f95e50b8b64"
+  },
+  "pr310-canonical-guide-proposed.patch": {
+    "source": "/workspace/engineering/pr310-runner-qualification-owned/canonical-guide-final-proposed.patch",
+    "bytes": 4883,
+    "sha256": "2915ac45c5140032ca613c48fa42b99b02bcaf5e995ec10872a002e1f40c12c8"
+  },
+  "pr311-independent-source-review.json": {
+    "source": "/workspace/engineering/pr311-independent-review/independent-source-control-review.json",
+    "bytes": 7976,
+    "sha256": "928d4daf3e8282c357bcea6f8017bde04d65b4fd1ac182c2e28a041b2824128a"
+  },
+  "pr282-hosted-source-checkpoint.json": {
+    "source": "/workspace/actions-cloud/receipts/pr282-writer/hosted-workflow-checkpoint-receipt.json",
+    "bytes": 6910,
+    "sha256": "75f59ec0086e1c9ac4f4ee5736194816fb34e9555821130bd180cadb723d70cb"
+  },
+  "pr282-published-source-checkpoint.json": {
+    "source": "/workspace/actions-cloud/receipts/pr282-writer/source-checkpoint-receipt.json",
+    "bytes": 6490,
+    "sha256": "c42dd6954ca86280fd79c14220aeac597a0a493788373cab77017f664f3a2494"
+  },
+  "pr310-refresh-source.json": {
+    "source": "/workspace/engineering/pr310-refresh-receipt.json",
+    "bytes": 2623,
+    "sha256": "18393abc70d65e0adf238543f2258fd6682c75436c25410a823e4c5f3a7dc4a2"
+  },
+  "pr302-current-control-source.json": {
+    "source": "/workspace/engineering/pr302-rcc-control-successor-receipt.json",
+    "bytes": 7968,
+    "sha256": "208d73033c1b479f66aa170df447c9402daf7744fe4c5cbbb0062952dbf8c2bd"
+  },
+  "authenticated-pr221-closures.json": {
+    "source": "/workspace/engineering/reconciliation/pr221-current-closure-audit.json",
+    "bytes": 996,
+    "sha256": "2b891e8453f96a69a1c06d121467c825932b4418770edcd4c5a0f74e23a8ead8"
+  },
+  "pr300-readonly-preparation.json": {
+    "source": "/workspace/engineering/pr300-readonly-preparation.json",
+    "bytes": 1367,
+    "sha256": "a7913b199135a5fa8c0af27302e099f9ec9ca6f7d2dc91427150a8b128797adc"
+  }
+}

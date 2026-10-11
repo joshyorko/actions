@@ -1,0 +1,124 @@
+{
+  "author_receipt": {
+    "all_retained_log_hashes_independently_verified": true,
+    "path": "/workspace/engineering/pr311-diagnostic-receipt.json",
+    "sha256": "70fbbe498a497f501d0dadf9cb5038534a36f30b98405316f14dfe1c2218495d"
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Interpret best-effort artifacts, early successful cancellation, and daemon cancellation flags accurately.",
+    "evidence": "Reviewed exact generator/generated upload steps and observe_start cancellation/final report behavior at1151a0c8; existing barrier/negative tests and independently hash-verified author logs.",
+    "exact_delta": "Append to the Windows native startup diagnostic paragraph: \"The always-run upload uses `if-no-files-found: warn`; a green job alone does not prove the diagnostic receipt exists. A successful startup cancels pending 80/88-second samples and can retain only identity/completion reports. A final `sampler_cancelled` flag means cancellation was requested; inspect `sampler_alive` before claiming observation has stopped. Missing or unavailable observations preserve the original timeout as unresolved.\"",
+    "remaining_uncertainty": "Exact Windows diagnostic report and original RCC stall cause await normal exact-head CI.",
+    "stale_or_ambiguous_guidance_removed": "Avoid equating always-upload, green CI, or requested sampler cancellation with retained pending-startup evidence or sampler termination."
+  },
+  "limitations": [
+    "Original Windows timeout root cause remains OPEN/HOLD; no Windows native execution or new native build in this review.",
+    "Individual OS queries and bounded file reads are not forcibly interruptible; cancellation flag does not establish sampler thread termination when sampler_alive=true.",
+    "Owned descendant/process observations are sampled snapshots, not complete supervision or reaping acceptance.",
+    "Artifact upload is best-effort: if-no-files-found=warn means a green job alone does not prove diagnostic receipt availability.",
+    "Core1.0.3 consumer, private01f/fafb frozen-v6 metadata and Runtime publication acceptance remain unchanged."
+  ],
+  "observed_author_validation": {
+    "final": "11 PASS",
+    "git_diff_check": "PASS",
+    "mypy": "4 changed test/helper/fixture files PASS",
+    "observer_initial_red": "4 FAIL / 2 PASS",
+    "ownership_red": "1 FAIL / 7 deselected",
+    "ruff": "changed test/helper/fixture and workflow generator PASS",
+    "toolkit": "62 PASS"
+  },
+  "review": {
+    "actual_gates_run": false,
+    "bounds": "Two offsets80/88; at most64 descendants per sample, one-second traversal deadline; no consuming subprocess pipes, no production changes, original90-second readiness/20-second cleanup untouched.",
+    "exception_and_cleanup_contract": "Exact original callable kwargs/result/error preserved; original accepted cleanup runs before observer cancellation; publish failures swallowed.",
+    "generator_generated_parity": {
+      "Retain Windows native startup diagnostics": {
+        "if": "always() && matrix.os == 'windows-2022'",
+        "name": "Retain Windows native startup diagnostics",
+        "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "with": {
+          "if-no-files-found": "warn",
+          "name": "native-startup-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}",
+          "path": "${{ runner.temp }}/native-startup-diagnostics/*.json",
+          "retention-days": 7
+        }
+      },
+      "Test (integration)": {
+        "env": {
+          "ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR": "${{ matrix.os == 'windows-2022' && format('{0}/native-startup-diagnostics', runner.temp) || '' }}",
+          "CI_CREDENTIALS": "${{ secrets.CI_CREDENTIALS }}",
+          "CI_ENDPOINT": "${{ secrets.CI_ENDPOINT }}",
+          "GITHUB_ACTIONS_MATRIX_NAME": "${{ matrix.name }}"
+        },
+        "name": "Test (integration)",
+        "run": "uv run --no-project --python ${{ matrix.python }} poetry run inv test-binary --jobs 0"
+      }
+    },
+    "independent_findings": [],
+    "meaningful_regressions": "Failure and cancellation barrier verifies observation before cleanup and same exception identity; successful startup cancels future snapshots; poisoned command/stderr/env/config content omitted; changed-parent descendant skipped before cmdline; native bytes hashed only after original cleanup.",
+    "read_only": true,
+    "scope": "Exact two Windows native node IDs; first timeout90/actions_sync startup only; explicit diagnostic directory and executable required."
+  },
+  "schema_version": 1,
+  "source": {
+    "changed_files": {
+      ".github/workflows/_gen_workflows.py": {
+        "git_blob_oid": "94504186a23a4d2745c0a400e6f970afda483a98",
+        "sha256": "7fd4511e6cb58d979208ee7421ef7018b62643a9e34011fff4805e8fc4d69ad0"
+      },
+      ".github/workflows/actions_runtime_tests.yml": {
+        "git_blob_oid": "e93fb3c75b8ecb3353a07e1cab00d526b8db0559",
+        "sha256": "430588021cf889391842be3a7c78eb4c04648b1bb7311f9c03da452e313fb161"
+      },
+      "action_server/tests/action_server_tests/fixtures.py": {
+        "git_blob_oid": "8e5d743e77508592250bba702f05163a0efe86f0",
+        "sha256": "2db8403ad100977951a4a07a0585668db493147d7be316e8d60641b7a416a854"
+      },
+      "action_server/tests/action_server_tests/native_startup_diagnostics.py": {
+        "git_blob_oid": "4729a7d01cca6d0920fe0e91bc376fa6cf3ed081",
+        "sha256": "943d3882e753f5d6ce31330b3783248c050c2c7eb8cf6ab1bedada020799d76c"
+      },
+      "action_server/tests/action_server_tests/test_native_startup_diagnostics.py": {
+        "git_blob_oid": "722c854a07c2fd6c3ab91b8fe722c6f95cde3c3e",
+        "sha256": "6872a450f3612b2fb58a52b7379b668945e0b7f8df313fef03d4bc5a258e480e"
+      },
+      "action_server/tests/action_server_tests/test_native_startup_diagnostics_workflow.py": {
+        "git_blob_oid": "a19703e055dcd223b5aab63febe2128aad4e264b",
+        "sha256": "b94cc2a6489fabf6cad0cfff2f79ec1c3b2711637a93215e3ebd0b789f1916f3"
+      },
+      "docs/skills/repository-operations.md": {
+        "git_blob_oid": "f11804786301d854d119e5c536fc4ca23a47a984",
+        "sha256": "ad1514a67f01da4ab5f2787d2dc36905023419f4bf6c6dd7e56df6dbcb480370"
+      }
+    },
+    "clean": true,
+    "commit": "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9",
+    "merge_parents": [
+      "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca",
+      "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+    ],
+    "parent_normal_merge": "f1edc3785fc78439dd1e7a31200f0583c667489b",
+    "production_delta_after_accepted_merge": [],
+    "tree": "1b742a1bac55d9dee96a1f70bbf2ad0735edf356",
+    "unchanged_original_accepted_current_blobs": {
+      "action_server/src/actions/server/_rcc.py": {
+        "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9": "1a310407efe52091194e4d121ac7bece15ea5b70",
+        "ba85aac7324ea4463bfba8c5f8586e27706dc2fe": "1a310407efe52091194e4d121ac7bece15ea5b70",
+        "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca": "1a310407efe52091194e4d121ac7bece15ea5b70"
+      },
+      "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": {
+        "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6",
+        "ba85aac7324ea4463bfba8c5f8586e27706dc2fe": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6",
+        "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6"
+      },
+      "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": {
+        "1151a0c8dfdfc1cba9afcb430e4fee71d9a4b4f9": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+        "ba85aac7324ea4463bfba8c5f8586e27706dc2fe": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+        "c888fb4a33fb2f8aa2bc30700d36ff92ccf535ca": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022"
+      }
+    }
+  },
+  "upstream_disposition": "none",
+  "verdict": "GO_NORMAL_PUSH_FOR_BOUNDED_WINDOWS_DIAGNOSTICS_AND_CURRENT_UNION_CI"
+}

@@ -1,0 +1,330 @@
+{
+  "candidate": {
+    "commit": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+    "tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f"
+  },
+  "control": {
+    "clean": true,
+    "commit": "5c8084c61389e293eb992c24bc0f2962f705378e",
+    "tree": "65954e87147645985ee44f82de9907e937892112"
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Separate actual catalog/lifecycle acceptance, explicit reader gates, managed Core observation and published whole-wheel origin.",
+    "evidence": "Run38106878127/jobs114374165981 and114374166191; original artifacts11689824072/11689419321; exact control5c8084c6 and25 raw lifecycles.",
+    "exact_delta": "After the current-source frozen control admission paragraph, add: \"Review actual targeted acceptance from the original receipt ZIPs, exact-case JUnit, raw test output and wrapper lifecycle records together. Every selected node must have a verified measured wrapper/direct-frozen-child lifecycle; a green summary cannot replace missing records. Keep this scope separate from startup-failure reader-reaping regressions: the eleven catalog cases do not select those three tests, and the wrapper lifecycle JSON has no explicit reader termination fields. Managed Core version and module hashes establish the observed worker identity, not independent whole-wheel provenance or a Core 1.0.3 consumer gate.\"",
+    "remaining_uncertainty": "All current PR checks, other platforms, private metadata and qualified Runtime publication remain required.",
+    "stale_or_ambiguous_guidance_removed": "Avoid conflating byte admission with actual execution, or natural wrapper exit with reader/whole-wheel/arbitrary-descendant proof."
+  },
+  "hosted_metadata_readback": {
+    "frozen": {
+      "artifact": {
+        "expired": false,
+        "id": 11689824072,
+        "name": "frozen-catalog-rollback-5c8084c61389e293eb992c24bc0f2962f705378e",
+        "size_in_bytes": 111343,
+        "workflow_run": {
+          "head_branch": "test/mcp-alias-frozen-control-20261010",
+          "head_repository_id": 948932748,
+          "head_sha": "5c8084c61389e293eb992c24bc0f2962f705378e",
+          "id": 38106878127,
+          "repository_id": 948932748
+        }
+      },
+      "conclusion": "success",
+      "head_sha": "5c8084c61389e293eb992c24bc0f2962f705378e",
+      "job_id": 114374165981,
+      "run_id": 38106878127
+    },
+    "wrapper": {
+      "artifact": {
+        "expired": false,
+        "id": 11689419321,
+        "name": "frozen-catalog-go-wrapper-5c8084c61389e293eb992c24bc0f2962f705378e",
+        "size_in_bytes": 119147,
+        "workflow_run": {
+          "head_branch": "test/mcp-alias-frozen-control-20261010",
+          "head_repository_id": 948932748,
+          "head_sha": "5c8084c61389e293eb992c24bc0f2962f705378e",
+          "id": 38106878127,
+          "repository_id": 948932748
+        }
+      },
+      "conclusion": "success",
+      "head_sha": "5c8084c61389e293eb992c24bc0f2962f705378e",
+      "job_id": 114374166191,
+      "run_id": 38106878127
+    }
+  },
+  "limitations": [
+    "Selected Linux controls only; full exact-head PR checks and current target union must pass before merge.",
+    "No independent whole published Core/dependency wheel origin proof, Core1.0.3 consumer, Windows/macOS or Runtime publication acceptance.",
+    "Manifest binds Git HEAD, not clean build inputs; assets.zip bytes remain unreconstructed.",
+    "Wrapper receipt establishes parent/direct frozen child identity and natural pre-stop exit; captured generation worker identities establish bounded owned workers, not arbitrary descendants.",
+    "Selected eleven omit three startup-failure reader-reaping regressions; wrapper lifecycle JSON has no explicit reader termination fields. Preserve separate exact-head unit/native gates.",
+    "Private01f/fafb original bundle/spec/frozen-v6 runner remains absent: metadata HOLD unchanged."
+  ],
+  "merge_verdict": "HOLD_UNTIL_ALL_EXACT_HEAD_PR_CHECKS_AND_CURRENT_TARGET_UNION_GATES_COMPLETE",
+  "native_build": {
+    "attempt": 1,
+    "byte_source_measurement_sha256": "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff",
+    "commit": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+    "original_producer_zip_bytes_rehashed": true,
+    "run_id": 38098225250,
+    "tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+    "workflow_head": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84"
+  },
+  "original_receipt_zip_readback": {
+    "frozen": {
+      "artifact_id": 11689824072,
+      "members": {
+        "frozen-catalog-artifact-verification.json": {
+          "sha256": "985419d58ac0cecac21c347081e8aff052d458d95fc17bde0ef51b2b8a79c02f",
+          "size": 1305
+        },
+        "frozen-catalog-evidence/harness-verification.json": {
+          "sha256": "56b34ad6220d742d70b4f54e7628260228c8888b92de3fb409d472a4eb6ac2fe",
+          "size": 669
+        },
+        "frozen-catalog-junit-summary.json": {
+          "sha256": "8b301c36f67fa6626f79aa6d1570eb9bc057b3c55dfe0079e75eeac913fefc3a",
+          "size": 2058
+        },
+        "frozen-catalog-junit.xml": {
+          "sha256": "6bdccc082313e634337954ab868fd9cd1400be51a1ff53913e2202e754dbcd53",
+          "size": 2124
+        },
+        "frozen-catalog-native-build-source-tree.txt": {
+          "sha256": "9098b76ae0927b0f885b598d1a89ab8cc1daef2f7fed595f92075334e18e7a08",
+          "size": 41
+        },
+        "frozen-catalog-rcc-sha256.txt": {
+          "sha256": "f82f2794a59445d60d1bcd0153b30495eb6005bd077a8879426d32ea1ce81877",
+          "size": 101
+        },
+        "frozen-catalog-rcc-version.txt": {
+          "sha256": "57ba3c9c038ed6497b5f04e5064d74548a6947a34a0c018ce59b3f6e40bea199",
+          "size": 9
+        },
+        "frozen-catalog-summary.json": {
+          "sha256": "845d52e05b079c0daddd252e8fde5418a3512e381e0af6e72a93ad920ed657fd",
+          "size": 5519
+        },
+        "frozen-catalog-test.log": {
+          "sha256": "46c1cbb364f3b44ec91525d582a82aa8010618a09763390c8278e178679026b3",
+          "size": 1222948
+        }
+      },
+      "original_members_equal_extracted": true,
+      "zip_sha256": "8cf996cfc545ccc5fddd0fc142d1c07e518645c28b9be9fd38132910fd89e3f4",
+      "zip_size": 111343
+    },
+    "wrapper": {
+      "artifact_id": 11689419321,
+      "members": {
+        "go-wrapper-catalog-summary.json": {
+          "sha256": "75bf4c3223b5b2a01f1238a8aef313b5f1a73d6191a2317f0b85313135ab2b6f",
+          "size": 36974
+        },
+        "harness-verification.json": {
+          "sha256": "56b34ad6220d742d70b4f54e7628260228c8888b92de3fb409d472a4eb6ac2fe",
+          "size": 669
+        },
+        "junit-summary.json": {
+          "sha256": "8b301c36f67fa6626f79aa6d1570eb9bc057b3c55dfe0079e75eeac913fefc3a",
+          "size": 2058
+        },
+        "junit.xml": {
+          "sha256": "d375e6b557b14ff7903af8edcfee334d86caa061f03f4fa0e56b1b748e1472f4",
+          "size": 2126
+        },
+        "rcc-sha256.txt": {
+          "sha256": "f82f2794a59445d60d1bcd0153b30495eb6005bd077a8879426d32ea1ce81877",
+          "size": 101
+        },
+        "rcc-version.txt": {
+          "sha256": "57ba3c9c038ed6497b5f04e5064d74548a6947a34a0c018ce59b3f6e40bea199",
+          "size": 9
+        },
+        "test-interpreter.txt": {
+          "sha256": "747f1e030f2f72c750ae1b0710cbf6e21385052160b63ac7709def399d44bb4d",
+          "size": 220
+        },
+        "test-python-path.txt": {
+          "sha256": "1dc78641a833938d285430d92eeedca0a4928c41d382f6f52d91e770649fa3de",
+          "size": 84
+        },
+        "test.log": {
+          "sha256": "4c43fbbb1e25031cfa0ecb9a48a32241e850785615360121b42f19dd2f339ac1",
+          "size": 1289191
+        },
+        "wrapper-artifact-verification.json": {
+          "sha256": "416f35bef1cfbea9e46620ae629bd25a2ff4a368e082b969cf80e6ef872937b9",
+          "size": 1234
+        },
+        "wrapper-extracted-frozen-verification.json": {
+          "sha256": "b34509e8659f68ba8623e19e02b981144d9e9e13838fcc5b9bf41cb891b31b93",
+          "size": 241
+        },
+        "wrapper-process-lifecycle.json": {
+          "sha256": "d17fbbfaa39bda31828b3f956284ab8e581e366e0016795b56c7396390bfec1e",
+          "size": 30081
+        }
+      },
+      "original_members_equal_extracted": true,
+      "zip_sha256": "85734bec902565a7aded256285e70b775f04d548b95df8a73319119f81681338",
+      "zip_size": 119147
+    }
+  },
+  "raw_proofs": {
+    "frozen": {
+      "generation_drain": {
+        "controlled_shutdown_status": 200,
+        "natural_parent_returncode": 1,
+        "new_result": {
+          "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+          "core_origin": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/actions-home/holotree/62fb83f_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py",
+          "core_version": "1.0.2",
+          "generation": "v2",
+          "payload": "v2",
+          "python_executable": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/actions-home/holotree/62fb83f_a78733b_2a94c46e/bin/python3.12",
+          "source": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/runtime-data/.rcc-runtime-sources/c1ef3c376e25df368a713dce558798dbc7668fa44dc643e8f33ee0225218ebc5/generation_action.py",
+          "worker_pid": 4597
+        },
+        "new_run_id": "run-001-aa1fb07b-7073-4ebd-a8f0-a9cae23ad58b",
+        "new_source": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/runtime-data/.rcc-runtime-sources/c1ef3c376e25df368a713dce558798dbc7668fa44dc643e8f33ee0225218ebc5/generation_action.py",
+        "new_worker_identity": {
+          "create_time": 1791687755.95,
+          "pid": 4597
+        },
+        "old_result": {
+          "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+          "core_origin": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/actions-home/holotree/62fb83f_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py",
+          "core_version": "1.0.2",
+          "generation": "v1",
+          "payload": "v1",
+          "python_executable": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/actions-home/holotree/62fb83f_a78733b_2a94c46e/bin/python3.12",
+          "source": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/runtime-data/.rcc-runtime-sources/8ff03cb7a4751ea46562920e18557277010cf43785455ac6e7b51af1c38e7738/generation_action.py",
+          "worker_pid": 4579
+        },
+        "old_run_id": "run-000-5da9e137-339d-4ac1-b0bc-801513dd2092",
+        "old_snapshot_retained_until_drain": true,
+        "old_source": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/runtime-data/.rcc-runtime-sources/8ff03cb7a4751ea46562920e18557277010cf43785455ac6e7b51af1c38e7738/generation_action.py",
+        "old_worker_identity": {
+          "create_time": 1791687755.49,
+          "pid": 4579
+        },
+        "owned_worker_identities": [
+          [
+            4579,
+            1791687755.49
+          ],
+          [
+            4597,
+            1791687755.95
+          ]
+        ],
+        "parent_create_time": 1791687730.95,
+        "parent_executable": "/home/runner/work/_temp/frozen-native-package/dist/action-server/action-server",
+        "parent_pid": 4363
+      },
+      "resource_history_managed_worker": {
+        "core_origin": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-1/test_cli_resource_owner_histor0/actions-home/holotree/62fb83f_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py",
+        "core_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2",
+        "python": "/home/runner/work/_temp/frozen-tmp/pytest-of-runner/pytest-1/test_cli_resource_owner_histor0/actions-home/holotree/62fb83f_a78733b_2a94c46e/bin/python3.12"
+      },
+      "watched_failure_recovery_restart": true
+    },
+    "wrapper": {
+      "generation_drain": {
+        "controlled_shutdown_status": 200,
+        "natural_parent_returncode": 1,
+        "new_result": {
+          "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+          "core_origin": "/home/runner/work/_temp/go-wrapper-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/actions-home/holotree/43cc887_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py",
+          "core_version": "1.0.2",
+          "generation": "v2",
+          "payload": "v2",
+          "python_executable": "/home/runner/work/_temp/go-wrapper-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/actions-home/holotree/43cc887_a78733b_2a94c46e/bin/python3.12",
+          "source": "/home/runner/work/_temp/go-wrapper-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/runtime-data/.rcc-runtime-sources/d03c23875b4bbf0bcb3be9be2cf0919e997c29fcc264841b2a61d241375bfb7f/generation_action.py",
+          "worker_pid": 4919
+        },
+        "new_run_id": "run-001-035144c2-5a0b-4862-ac3a-1326d6bd92f0",
+        "new_source": "/home/runner/work/_temp/go-wrapper-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/runtime-data/.rcc-runtime-sources/d03c23875b4bbf0bcb3be9be2cf0919e997c29fcc264841b2a61d241375bfb7f/generation_action.py",
+        "new_worker_identity": {
+          "create_time": 1791688120.91,
+          "pid": 4919
+        },
+        "old_result": {
+          "core_init_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+          "core_origin": "/home/runner/work/_temp/go-wrapper-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/actions-home/holotree/43cc887_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py",
+          "core_version": "1.0.2",
+          "generation": "v1",
+          "payload": "v1",
+          "python_executable": "/home/runner/work/_temp/go-wrapper-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/actions-home/holotree/43cc887_a78733b_2a94c46e/bin/python3.12",
+          "source": "/home/runner/work/_temp/go-wrapper-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/runtime-data/.rcc-runtime-sources/7904e77472e29e57334532f8972f1cda29d2999171be28dfaba0bc6f576e8a12/generation_action.py",
+          "worker_pid": 4901
+        },
+        "old_run_id": "run-000-730bd4b9-2188-412e-92b6-4d819a66ef28",
+        "old_snapshot_retained_until_drain": true,
+        "old_source": "/home/runner/work/_temp/go-wrapper-tmp/pytest-of-runner/pytest-1/test_successful_generation_swi0/runtime-data/.rcc-runtime-sources/7904e77472e29e57334532f8972f1cda29d2999171be28dfaba0bc6f576e8a12/generation_action.py",
+        "old_worker_identity": {
+          "create_time": 1791688120.19,
+          "pid": 4901
+        },
+        "owned_worker_identities": [
+          [
+            4681,
+            1791688092.25
+          ],
+          [
+            4901,
+            1791688120.19
+          ],
+          [
+            4919,
+            1791688120.91
+          ]
+        ],
+        "parent_create_time": 1791688092.24,
+        "parent_executable": "/home/runner/work/_temp/go-wrapper-native/action-server",
+        "parent_pid": 4671
+      },
+      "resource_history_managed_worker": {
+        "core_origin": "/home/runner/work/_temp/go-wrapper-tmp/pytest-of-runner/pytest-1/test_cli_resource_owner_histor0/actions-home/holotree/43cc887_a78733b_2a94c46e/lib/python3.12/site-packages/actions/__init__.py",
+        "core_sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc",
+        "core_version": "1.0.2",
+        "python": "/home/runner/work/_temp/go-wrapper-tmp/pytest-of-runner/pytest-1/test_cli_resource_owner_histor0/actions-home/holotree/43cc887_a78733b_2a94c46e/bin/python3.12"
+      },
+      "watched_failure_recovery_restart": true
+    }
+  },
+  "review": {
+    "actual_decoded_job_logs_independently_read": true,
+    "exact_case_JUnits_zero_fail_error_skip": true,
+    "native_execution_by_reviewer": false,
+    "rcc_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "rcc_version": "v18.19.3",
+    "repository_mutation": false,
+    "summary_equals_original_raw_artifact_receipts": true
+  },
+  "schema_version": 1,
+  "source_parity": {
+    "complete_source_dependency_inputs": 268,
+    "control_candidate_producer_git_equality": true,
+    "exclusions": [],
+    "selected_test_files": 5
+  },
+  "upstream_disposition": "none",
+  "verdict": "GO_EXACT_CONTROL_LINUX_ELEVEN_FROZEN_AND_ELEVEN_WRAPPER_ACCEPTANCE_ONLY",
+  "wrapper_lifecycle": {
+    "all_precleanup_natural_exit_code": 1,
+    "all_stop_observed_no_failure": true,
+    "original_sha256": "d17fbbfaa39bda31828b3f956284ab8e581e366e0016795b56c7396390bfec1e",
+    "raw_equals_summary": true,
+    "records": 25,
+    "selected_nodes": 11,
+    "verified_parent_direct_child_digests_and_pid_create_times": true
+  }
+}

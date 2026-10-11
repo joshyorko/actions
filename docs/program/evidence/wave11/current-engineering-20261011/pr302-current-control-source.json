@@ -1,0 +1,123 @@
+{
+  "status": "LOCAL_CONTROL_READY_FOR_INDEPENDENT_REVIEW_NOT_PUSHED",
+  "repository": "joshyorko/actions",
+  "pr": 302,
+  "branch": "fix/rcc-published-artifact-details-20261010",
+  "worktree": "/workspace/engineering/pr302",
+  "control": {
+    "commit": "ff6842223068bb34811990a417aa280331acbb6a",
+    "tree": "0e4972743f84d85b19c3bda9a6d4cc27d49a3805",
+    "parent": "665468112f1593249449278cf2113c155a6ec6e3"
+  },
+  "immutable_candidate": {
+    "commit": "665468112f1593249449278cf2113c155a6ec6e3",
+    "tree": "d729a43127c048c7fb35133d2a4b07bc53635402",
+    "merge": "ad2b3874a1a6ef0b1053cbe98086dd9b95ed9ccf",
+    "ordered_merge_parents": [
+      "d649c90112ee03c46f8b88c973849d7203f7e64a",
+      "ba85aac7324ea4463bfba8c5f8586e27706dc2fe"
+    ],
+    "non_doc_parent_union": "19 changed paths, zero mismatches, zero overlapping changed non-doc paths"
+  },
+  "existing_control_derivation": "20bfbfd14fd554a594517dc567f7342da7ce7022 RCC summary and workflow class only, pins refreshed candidate; adds existing PR302 branch and raw lifecycle-receipt upload",
+  "cases": [
+    "test_current_candidate_import_rollback::test_current_candidate_failed_reload_keeps_last_good_action_usable",
+    "test_source_staging_rcc_consumer::test_staged_package_executes_in_managed_rcc_runtime",
+    "test_source_staging_rcc_consumer::test_published_artifact_details_preserves_one_rcc_identity_pair"
+  ],
+  "local_verification": {
+    "red": "24 failed / 31 passed against inherited two-case implementation, expected missing three-case/publication admission; separate initial invocation found no tests because RCC task cwd is developer/",
+    "green": "55 passed, 18.52 seconds; synthetic service-free receipt and workflow controls only",
+    "ToolkitTest": "89 passed, 21.17 seconds; Ruff developer check pass",
+    "format_compile_diff": "Ruff check/format and generator py_compile, git diff --check PASS; initial structural format check found inherited whitespace, corrected via prepared Ruff",
+    "unrelated_generator": "all unrelated top-level AST nodes identical; seven of seven unrelated generated workflow outputs byte identical",
+    "package_source": "action_server/actions runtime source unchanged from verified candidate; source-refresh receipt records 132 pass/3 deselected and action_server lint/typecheck PASS",
+    "fresh_commands": [
+      "source /workspace/actions-cloud/activate.sh; unset ACTIONS_RUNTIME_TEST_PYTHON; rcc task script --no-build -r developer/toolkit.yaml -- python -c 'import sys, toolkit; toolkit.run([sys.executable, \"-m\", \"pytest\", \"-q\", \"developer/tests/test_rcc_provider_rollback_workflow.py\", \"developer/tests/test_rcc_provider_rollback_summary.py\"])'",
+      "source /workspace/actions-cloud/activate.sh; unset ACTIONS_RUNTIME_TEST_PYTHON; rcc run -r developer/toolkit.yaml --dev -t ToolkitTest"
+    ],
+    "logs": {
+      "pr302-controls-red.log": {
+        "path": "/workspace/engineering/pr302-controls-red.log",
+        "sha256": "caebe93743df0f761f6109e74da7124c1da55d0f73fde7ae97afa8567d38c009"
+      },
+      "pr302-controls-red-valid.log": {
+        "path": "/workspace/engineering/pr302-controls-red-valid.log",
+        "sha256": "66ee0274fdeae3455806d18b1ad33d0cfd35d251164bbce1f31f678a083976f2"
+      },
+      "pr302-controls-green.log": {
+        "path": "/workspace/engineering/pr302-controls-green.log",
+        "sha256": "71d403e0cceda9d64486e982d594c7137cba08fc36895121df07a7e44b47b916"
+      },
+      "pr302-before-generator.log": {
+        "path": "/workspace/engineering/pr302-before-generator.log",
+        "sha256": "0a8d8705842936c6024dc3dc0e18d58db06594c55bf7c9f271e0a37e08608fe6"
+      },
+      "pr302-before-generator-valid.log": {
+        "path": "/workspace/engineering/pr302-before-generator-valid.log",
+        "sha256": "11c359279f1aeede20b7d64f880284b072d47adbe36b0eaf0b475e927e0ac5af"
+      },
+      "pr302-control-generate.log": {
+        "path": "/workspace/engineering/pr302-control-generate.log",
+        "sha256": "edd8e3d826c25da27a2a6d8d22d0d9a4b6a995a0b3cdd2c4dc24ea19d1f17778"
+      },
+      "pr302-control-structural.log": {
+        "path": "/workspace/engineering/pr302-control-structural.log",
+        "sha256": "b63677e0c16a2258b7658a28736184d885671a2bb1f3d8b94f75d57602d3d3fd"
+      },
+      "pr302-control-format.log": {
+        "path": "/workspace/engineering/pr302-control-format.log",
+        "sha256": "a759739bbec002261dc9b30742ee50da17ee6b85324fd8564ccab73883ef6a53"
+      },
+      "pr302-controls-toolkit.log": {
+        "path": "/workspace/engineering/pr302-controls-toolkit.log",
+        "sha256": "620b920b9b070e22987641c98ffe74df3e108846f5d494aa4fc60c005aaf8d3d"
+      },
+      "pr302-before-control-valid-generator-manifest.json": {
+        "path": "/workspace/engineering/pr302-before-control-valid-generator-manifest.json",
+        "sha256": "ddc996daeb8e5de969dc0b35aafbd1adf6cde65c7753e2ced455246605832870"
+      },
+      "pr302-after-control-generator-manifest.json": {
+        "path": "/workspace/engineering/pr302-after-control-generator-manifest.json",
+        "sha256": "34e413eecb480ef56b9855ca03deb18018025f4c18864db6342774dcffdb30bd"
+      }
+    }
+  },
+  "historical_actual_proof": {
+    "run": "38075869631",
+    "job": "114282580676",
+    "artifact": "11678565491",
+    "candidate": "e31506239fd0260d708a11440762537334f8d2d1",
+    "control": "20bfbfd14fd554a594517dc567f7342da7ce7022",
+    "result": "3 PASS / zero skips, PASS_WITH_REPLAY_LIMITATION; raw lifecycle receipt not retained; historical receipt identity remains original"
+  },
+  "not_run": [
+    "new hosted three-case acceptance on candidate665/controlff",
+    "local actual RCC/provider/artifact execution",
+    "private metadata",
+    "Windows/macOS toolkit execution",
+    "full package suite and wheel consumer rerun"
+  ],
+  "private_blocker": {
+    "component": "01f1a98c6e91ae8192248553eef7a5ac4a4e6d9a",
+    "tree": "95d64fe7f9b4af7a01df80e872f1e930b310d6a3",
+    "parent": "fafb4548540727ddb227a94dc1f88c460c992a9e",
+    "status": "GO_COMPONENT historical source only; actual metadata NOT RUN; frozen-v6 supervisor/controller implementation and controls HOLD",
+    "required_recovery": "original complete d21+d103 incremental bundle chain, then fafb+01f; exact frozen-v6 spec and runner paths/bytes unavailable in current workspace and public receipts; remote durability NOT_PROVEN",
+    "replacement_policy": "not created"
+  },
+  "public_union_preserved": {
+    "commit": "44afd960ad01f83eeef7773b334ccde3683c022d",
+    "tree": "2960c688fa2a2420f8915edbf0817fd3dd818b98",
+    "status": "existing reviewed union preserved, no duplicate implementation or stricter checkpoint folded into302"
+  },
+  "next_gate": "root independent diff/control review, then only separately authorized ordinary push of existing PR302 branch; hosted candidate/control admission must be green before integration verdict",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md, committed in665 and ff",
+    "Durable learning captured": "Private hashes do not recover bytes; immutable source/control tuples and exact selected cases define hosted proof. Raw lifecycle receipt retention enables original-byte replay; synthetic control tests are not actual RCC execution.",
+    "Evidence": "verified missing private checkout/bundles, accepted historical run38075869631 replay limitation, RED24 failures / GREEN55 / ToolkitTest89, generator AST and unrelated output equality",
+    "Stale or ambiguous guidance removed": "one-case then inherited two-case/current-head implications, sanitized-only inventory assumption; now explicit three-case selection, branch scope, candidate665/controlff separation",
+    "Remaining uncertainty": "Private source/spec/runner recovery, new hosted candidate665 lifecycle acceptance, native toolkit matrix and receipt inventory review"
+  },
+  "upstream_disposition": "none; no upstream defect or authorized report target"
+}
