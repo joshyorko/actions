@@ -29,6 +29,8 @@ from mcp.types import (
     ToolAnnotations,
 )
 
+from .resource_routing import ResourceRoutingProjection, resource_template_matches
+
 log = logging.getLogger(__name__)
 CATALOG_REVISION_META_KEY = "actions.catalogRevision"
 CATALOG_TTL_MS = 0
@@ -44,6 +46,7 @@ class ActionInfo:
     doc_desc: str
     output_schema_kind: OutputSchemaKind
     mcp_meta: dict[str, Any] | None
+    identity: tuple[str, str] | None
 
 
 @dataclass
@@ -56,6 +59,7 @@ class _McpCatalog:
     resource_template_to_action_info: dict[str, ActionInfo]
     prompts: list[Prompt]
     prompt_name_to_action_info: dict[str, ActionInfo]
+    resource_routing_history: tuple[ResourceRoutingProjection, ...] = ()
 
 
 class McpResponseHandler:
@@ -289,6 +293,16 @@ class McpServerSetupHelper:
                 f"No resource found for URI: {uri}. Rediscover with resources/list "
                 "and resources/templates/list before retrying.",
             )
+        for projection in catalog.resource_routing_history:
+            previous = projection.owner(uri)
+            if previous is not None and previous != action_info.identity:
+                raise MCPError(
+                    INVALID_PARAMS,
+                    f"Resource URI {uri!r} has a conflicting historical owner. "
+                    "Rediscover with resources/list and resources/templates/list. "
+                    "Rediscovery does not reauthorize this URI; use a renamed, "
+                    "non-conflicting resource route.",
+                )
         headers, cookies = self._request_values(ctx)
         result = await action_info.func(
             response_handler=McpResponseHandler(),
@@ -394,9 +408,7 @@ class McpServerSetupHelper:
     def _resource_template_matches(
         self, uri_template: str, uri: str
     ) -> dict[str, Any] | None:
-        pattern = uri_template.replace("{", "(?P<").replace("}", ">[^/]+)")
-        match = re.match(f"^{pattern}$", uri)
-        return match.groupdict() if match else None
+        return resource_template_matches(uri_template, uri)
 
     @staticmethod
     def resolve_tool_names(
@@ -459,6 +471,11 @@ class McpServerSetupHelper:
     ) -> None:
         catalog = self._catalog
         options = json.loads(action.options) if action.options else {}
+        # Standalone adapter callers may omit package data and have no durable
+        # history. Runtime admission always supplies the original package owner.
+        identity = (
+            (action_package.name, action.name) if action_package is not None else None
+        )
         mcp_meta = options.get("_meta")
         if mcp_meta is not None and not isinstance(mcp_meta, dict):
             raise ValueError(f"MCP _meta for {action.name} must be an object")
@@ -480,7 +497,13 @@ class McpServerSetupHelper:
                     )
                 )
                 catalog.resource_template_to_action_info[uri] = ActionInfo(
-                    func, action, display_name, doc_desc, "string", mcp_meta
+                    func,
+                    action,
+                    display_name,
+                    doc_desc,
+                    "string",
+                    mcp_meta,
+                    identity,
                 )
                 catalog.resource_templates.sort(key=lambda item: item.uri_template)
             else:
@@ -496,7 +519,13 @@ class McpServerSetupHelper:
                     _meta=mcp_meta,
                 )
                 catalog.resource_to_action_info[uri] = ActionInfo(
-                    func, action, display_name, doc_desc, "string", mcp_meta
+                    func,
+                    action,
+                    display_name,
+                    doc_desc,
+                    "string",
+                    mcp_meta,
+                    identity,
                 )
             return
         if kind == "prompt":
@@ -520,7 +549,13 @@ class McpServerSetupHelper:
                 )
             )
             catalog.prompt_name_to_action_info[action.name] = ActionInfo(
-                func, action, display_name, doc_desc, "string", mcp_meta
+                func,
+                action,
+                display_name,
+                doc_desc,
+                "string",
+                mcp_meta,
+                identity,
             )
             catalog.prompts.sort(key=lambda item: item.name)
             return
@@ -559,7 +594,13 @@ class McpServerSetupHelper:
             )
         )
         catalog.tool_name_to_action_info[tool_name] = ActionInfo(
-            func, action, display_name, doc_desc, output_schema_kind, mcp_meta
+            func,
+            action,
+            display_name,
+            doc_desc,
+            output_schema_kind,
+            mcp_meta,
+            identity,
         )
         catalog.tools.sort(key=lambda item: item.name)
 

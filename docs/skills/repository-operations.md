@@ -136,8 +136,46 @@ terminated at the 30-second startup deadline on both Windows and macOS,
 before the watched-reload assertions began. Keep the 90-second allowance
 limited to the initial native-executable startup; this reuses the existing
 native acceptance startup budget. Source-mode startup remains at 30 seconds,
-as do the watcher and restart deadlines. Inspect child stderr before
-treating a timeout as an RCC or Runtime failure.
+as do the watcher and restart deadlines.
+
+At #311 head `c888fb4a`, Windows run `38099013706`, job `114350853595`,
+timed out at the initial native startup in the watched-reload and resource
+catalog-rollback nodes. Both had completed `ht hash` and logged `holotree
+variables --no-retry-build` before the unchanged 90-second deadline. The
+same test and RCC source bytes passed those nodes in accepted #292 run
+`38098225220`, job `114348512491`. This evidence identifies the bootstrap
+stage, not its root cause. RCC's `Running:` log follows acquisition of the
+Python mutex; it does not establish successful RCC spawn or internal-lock
+progress. Captured stderr is line-oriented, and RCC's interactive forwarding
+does not explicitly flush, so absent captured lines do not establish inactivity.
+
+The Windows Runtime test workflow now sets an explicit
+`ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR` and attempts to retain its bounded JSON
+reports with `always()` even when integration fails. Upload is best effort:
+`if-no-files-found: warn` permits a successful upload step with no reports, and
+job cancellation or infrastructure failure may prevent the step from running.
+Verify the artifact inventory and report bytes before claiming observations.
+The test-owned observer enables
+only those two native nodes, samples pending initial startup at 80 and 88
+seconds, and delegates unchanged startup and its existing 20-second failure
+cleanup. Reports contain source/executable/config byte identities, an
+allowlisted RCC operation/space/flags summary, owned descendant CPU/I/O state,
+cache-file existence and effective-home equality, and registered host-reader
+and pipe-closure state. They contain no raw commands, stderr, URLs, paths,
+environment maps or environment-cache contents. Access denial, vanished
+processes, unobserved RCC identity, and the frozen child's internal readers
+remain explicitly unavailable. The probe limits traversal to 64 processes
+and a one-second traversal budget; individual OS queries may outlast that
+budget, so cancellation never waits on a pending query before startup cleanup.
+The final report's `sampler_cancelled: true` means cancellation was requested,
+not that the sampler stopped. Check `sampler_alive` separately after its bounded
+50 ms join. A pending OS query may leave that daemon alive; late observations
+are discarded after cancellation. Neither field proves Runtime process or
+stream cleanup, which remains owned by the unchanged starter.
+These synthetic observer checks do not establish Windows native acceptance
+or fix the original failure. Compare the next exact-head reports before
+changing production code; do not warm caches, retry RCC, or enlarge deadlines
+to obtain a passing result.
 
 For a split package API promotion, verify the producer's public contract from
 the exact built wheel in an isolated installation. Assess consumer adoption
@@ -164,6 +202,24 @@ published Core 1.0.1. On the selected integration candidate (`3fee2792`), all
 four existing template manifests pin published Core 1.0.2. A template pin is
 therefore revision-specific; verify the target manifests before describing a
 release's template state.
+
+For the Runtime/Core private-module boundary, a checkout-only AST guard and a
+clean Core-wheel probe are separate evidence from a clean installed Runtime
+wheel check. The Runtime wheel contract must enumerate every `.py` member in
+the installed `actions-runtime` distribution, verify each installed file is
+inside the fresh environment and outside the checkout, and compare every file
+byte-for-byte with the corresponding member of the exact selected Runtime
+wheel. Bind that scan to the wheel SHA-256, then run the private-Core import
+AST guard over every member, including modules not imported by the smoke test.
+Keep the public Core API compatibility checks in those same clean installs;
+Runtime-owned modules such as `actions.server._protocols` remain valid. Report
+this boundary as passed only when the installed-member inventory is complete,
+all member bytes match the selected wheel, and the full scan succeeds. Tests that
+construct a wheel ZIP and a matching installed-tree fixture must write the same
+encoded payload bytes to both: `Path.write_text` performs platform newline
+translation on Windows, so it can turn a valid LF wheel member into CRLF in the
+fixture and create a false byte-mismatch failure. Preserve the exact-byte
+comparison; fix the fixture writer instead of normalizing installed bytes.
 
 Poetry merges the matching Core source into the main/dev lock entry: a
 `poetry install --only main` using this checkout lock still selects local Core.
@@ -833,18 +889,45 @@ catalog can finish on that generation. Serving whitelists and authentication
 still apply to original package/action identities. External alias-keyed grants
 are not established by reservations.
 
-Exact template-string ownership does not prevent different templates from
-matching the same concrete URI. For example, `example://{tenant}/item` and
-`example://acme/{resource}` both match `example://acme/item`; retiring one and
-admitting the other can change that concrete read's target. This observed
-cross-template matching ambiguity remains outside the exact-key guard and needs
-separate policy before claiming durable identity for every concrete resource URI.
-Cross-kind matching also remains unguarded: a prior direct resource
-`example://cross/new` can later match `example://cross/{item}`, while a prior
-`example://cross-old/{item}` read can later hit a new direct resource at
-`example://cross-old/item`. Direct URI lookup takes precedence over template
-matching. Exact namespace reservations therefore do not preserve concrete URI
-identity across namespaces or overlapping patterns.
+Concrete resource URI ownership also retains complete admitted routing
+projections in `mcp_resource_routing`, starting with migration 14. Each canonical
+projection records exact direct URI owners and lexically ordered template
+owners, using `(ActionPackage.name, Action.name)` pairs. Runtime resolves direct
+URIs first, then the first matching template, in both the current and historical
+projections. Before invoking a current callback, it rejects a URI whose winner
+in any recorded projection belongs to a different pair. This covers cross-kind
+capture (`example://cross/new` later matching `example://cross/{item}`, or an old
+template read later hitting a new direct URI), and distinct patterns such as
+`example://{tenant}/item` and `example://acme/{resource}` matching
+`example://acme/item`. It protects advertised expansions that were never read,
+without treating a shadowed historical template as the winner of a direct URI.
+Unavailable current routes return errors; history never restores an old callback.
+Same-owner revisions invoke the current callback and remain permitted.
+
+Routing history joins the existing serialized admission transaction and rollback
+boundary. Fixed-size domain-separated digests identify full RFC 8785 canonical
+payloads; full equality, shape, digest, and matcher-policy version 1 are validated
+before admission. Duplicate projections and metadata-only updates consume no new
+history; empty resource catalogs bind no URI and add no projection. Malformed,
+incompatible, colliding, missing, or overcapacity history fails admission without
+publication. Private hard limits are 256 projections, 10,000 aggregate route rows,
+and 16 MiB of aggregate canonical UTF-8 payloads. Capacity rejects the complete
+update and retains last-good; protective history is never evicted. A duplicate
+remains admissible at capacity. These bound storage and matching iterations,
+not regex CPU time: policy 1 preserves the existing anchored placeholder
+substitution, including unescaped literal regex characters. No URI grammar or
+template intersection solver is introduced.
+
+Discovery and descriptor revisions remain deterministic functions of the current
+admitted set. Read-time checks do not prove complete template disjointness at
+admission: an advertised template may contain concrete URIs that return historical
+ownership-conflict errors. Rediscovery cannot reauthorize such a URI; rename or
+choose a non-conflicting resource route. Migration cannot reconstruct unknown
+pre-upgrade routing precedence from exact-key rows, and a fresh/replaced database
+has no prior routing history. The guarantee covers recorded post-upgrade
+projections in the shared database, not arbitrary earlier advertisements,
+authorization grants, or code/revision identity. A call already admitted against
+an older immutable catalog may finish on that generation.
 
 HTTP paths, action display names, metadata, and dispatch
 targets remain tied to their original package/action. Resource URI and prompt
@@ -1791,6 +1874,12 @@ declared portable-suite result and hand it to the Action Server test-layout
 owner; do not mask it with a workspace-wide `PYTHONPATH` or silently change
 the package's discovery rules.
 
+CLI tests that parse nested MCP JSON responses should model the concrete
+response and transition shapes with `TypedDict`, then validate the decoded
+`object` at the HTTP boundary with a narrow `TypeGuard` before indexing. This
+keeps success and error variants explicit and avoids both untyped JSON access
+and broad `Any` annotations.
+
 The generated `actions_runtime_tests.yml` workflow is the configured full
 Action Server PR gate: it runs the portable and binary test tasks, then lint,
 typecheck, and docs checks. Its pull-request filter must retain the generated
@@ -2249,6 +2338,24 @@ native-platform lifecycle proof is implied. Tests for the protocol boundary
 are in `test_preload_actions_exit.py` and
 `test_rcc_runtime_adapter.py`.
 
+`ActionServerProcess.start()` owns its direct child and registered stdout/stderr
+readers before readiness. Keep post-spawn startup work inside a failure-cleanup
+boundary: stop captured descendants, wait for and reap the direct `Popen` child,
+then join registered readers within one finite deadline. Preserve the original
+startup exception and attach cleanup errors or incomplete observations as
+notes. The cleanup result distinguishes stopped execution from descendant-reap
+completeness; a point-in-time snapshot does not prove universal descendant
+discovery or adoption. Successful startup and readiness timeouts remain
+unchanged. The synthetic timeout regression proves direct-child reap and both
+reader closures; native Windows startup remains a separate gate.
+
+When a test subclasses a process implementation read into a local runtime
+alias (such as `base_process = process_module.Process`), Mypy cannot use that
+alias as a class base. Import `Process` directly for the subclass declaration
+and patch `process_module.Process` separately so runtime substitution remains
+intact. Access private fields through a base-typed process handle with
+`getattr` while keeping the assertions on those fields.
+
 The socketpair test that fills a send buffer is a kernel-buffer behavior check:
 it runs on POSIX runners and is skipped on Windows, where the same payload may
 not saturate the pair. Keep a deterministic `socket.timeout` test on all
@@ -2287,7 +2394,8 @@ compensation closure after nondurable SQLite commit failure with
 `min_processes=0`; it does not prove warmed RCC worker compensation or
 external-service rollback.
 When a reload test constructs a partial `Database` directly, register
-`McpCatalogName` alongside `ActionPackage` and `Action` before creating tables.
+`McpCatalogName` and `McpResourceRouting` alongside `ActionPackage` and `Action`
+before creating tables.
 `create_tables(get_model_db_rules())` creates only registered models; the rules
 do not add missing tables. Otherwise catalog admission fails before the injected
 commit failure, and the test never exercises generation compensation. Preserve
@@ -2475,7 +2583,23 @@ case in `test_cli_multi_package_sync.py` that honors
 new candidate artifact, since older frozen artifacts cannot prove this repair.
 The permanent exact-key admission guard above preserves historical ownership
 without changing deterministic current-set names. It does not fence calls by
-catalog revision or solve overlapping resource-template matching.
+catalog revision. `mcp/test_resource_history.py` separately covers historical
+concrete resource winners across overlapping templates and direct/template
+transitions, rejection before callback, same-owner revisions, restart, capacity,
+malformed history, commit rollback, and serialized two-process SQLite admission.
+This read-time guard retains the existing matcher; it does not solve arbitrary
+template intersection or reauthorize a conflicting URI after rediscovery.
+`test_cli_mcp_resource_history.py` adds one real CLI/HTTP `resources/read`
+acceptance node spanning direct-to-template, template-to-direct, and
+template-to-template owner changes. It verifies that candidate routes can be
+listed while a protected concrete read fails before the new callback, then
+checks same-owner callback revision, direct-over-template precedence, rename
+recovery, retired-resource unavailability, malformed watched-reload last-good
+behavior, and persisted denial after restart. The one JUnit node contains all
+three transition classes; it is not three separately counted test cases. In a
+frozen run its managed package fixtures pin `actions-core=1.0.2` and verify the
+worker's Core origin and version. Source-mode evidence remains distinct from a
+run against the actual new frozen Runtime artifact.
 The legacy `test_action_package_rename` makes the ownership boundary explicit:
 renaming `calculator` while retaining its `calculator_sum` MCP key is rejected,
 and the test compares every persisted column in the package, action, and owner
@@ -2844,6 +2968,14 @@ before consolidation, and capture `pytest --collect-only -q` counts before and
 after so collection changes are explicit. Then run the complete combined suite
 and lint.
 
+Test modules can contain expensive integration cases without an integration
+marker. Before running a bounded subset, enumerate test definitions and their
+parameterizations from the source AST, inspect the selected tests' helper call
+paths for build, install, service, or provider effects, and invoke only explicit
+test-node selectors. A marker-only filter or a whole-module invocation does
+not bound unmarked tests; record the exact selected nodes and excluded heavy
+node in the task receipt.
+
 Credential redaction must cover argparse-accepted long-option abbreviations
 for `--api-key`, in both separate and equals forms. HTTP header names are
 case-insensitive; the actual Uvicorn DEBUG handshake lowercases incoming
@@ -3140,6 +3272,111 @@ require the resolved frozen companion tree to remain inside the selected
 package root. These checks bound validation work and prevent an external
 symlinked companion from being accepted as part of a selected bundle.
 
+The catalog-ownership migration control includes all five multi-package sync
+CLI cases, covering additive import/restart, desired-set deduplication, bad
+later-package rollback, last-good unmanaged sources, and historical-alias
+rejection/recovery. Its source-mode CLI result is separate from frozen
+acceptance: the ten-case control is pinned to a separately measured native
+artifact for candidate `c78288c3`; its independent byte receipt verifies the build
+tree, manifest, inventory, package tree, frozen executable, and wrapper artifact.
+Hosted run [38055229055](https://github.com/joshyorko/actions/actions/runs/38055229055)
+on control `57ba99ee` passed the ten exact cases (zero failures/errors/skips,
+257.83s). Independent receipt review verified artifact `11671465182`, its
+SHA-256 `ca81fb7da1915cde6bb4052b2effc1c6d5a871ee132db3e8c6ee8ff7efe7a404`,
+the case set, managed Core 1.0.2 workers and successful generation drain. This is
+Linux frozen evidence only, not Go-wrapper execution or other-platform acceptance.
+Keep configured import sorting active for the standalone JUnit validator tests:
+passing pytest does not establish that the separate lint gate passed. Before
+using the artifact from a later test/docs-only control commit, verify the complete
+build tree and unchanged Runtime source/dependency inputs; rebuild if those inputs
+change. The five-case receipt above remains evidence only for candidate `31239cf9`
+and must not be carried forward as migration proof.
+
+When extending a frozen acceptance set, update the exact pytest node selection,
+JUnit allowlist/count, validator contract fixture, and generated workflow together.
+A prior hosted receipt proves only its recorded nodes; a newly added Runtime
+behavior needs an artifact built from the final Runtime source/dependency inputs
+and a new frozen execution receipt. Source-mode CLI coverage is separate evidence.
+
+The a47 resource-history control is an eleven-case selector: it retains the ten
+rollback, drain, and package-sync cases and adds the exact CLI resource-owner
+history test from candidate `a47dc616`. Its control validates the copied test's
+Git blob, candidate/build tree equality, and the measured native archive,
+manifest, inventory, frozen executable, package-tree, and embedded-file digests.
+The measurement receipt binds candidate `a47dc616` to build commit `0045d91b` by
+identical tree `10e4b5fb`; it verifies Ubuntu frozen bytes only. The measured
+native archive does not contain the Go wrapper, so wrapper evidence must come
+from the separate wrapper artifact and job. Hosted run
+[38067094994](https://github.com/joshyorko/actions/actions/runs/38067094994)
+passed the exact eleven JUnit cases with no failures, errors, or skips for
+control `fbd504a3`, candidate `a47dc616`, and same-tree build source `0045d91b`.
+Its separate Go-wrapper job also passed those cases and recorded verified
+wrapper/child identities and natural shutdown for that candidate. This is
+Linux frozen evidence for this tuple only; it does not establish current
+integration or full release acceptance, nor Windows/macOS behavior. Keep the
+earlier ten-case c782 receipt as historical evidence.
+
+A refreshed control harness must record its source identity separately from the
+native build source. The retained pre-cleanup convergence control includes the
+reviewed staging prerequisite and PR292 typed fixture. Its verifier pins Runtime subtree
+`2aed50eae66abc2c85635a36c45a734429cfe905`: every Runtime source input must match
+candidate `a47dc616`, except the exact added `source_staging.py` blob
+`b475fd6688b7afc6606cde2cba9a1294d771a64c`. Core, HTTP Helper, all three manifests
+and locks remain identical to that candidate. The resource-history selector is
+the exact typed blob `5fe18b942ba66f339ac076fa26add1908d70305e`; the other four
+selected test blobs and eleven JUnit identities remain unchanged. This is an
+explicit harness difference, not a new native-build identity or an arbitrary
+source-diff exclusion. Both job summaries embed the verifier receipt and cannot
+pass without its successful source check bound to the control SHA. A changed
+Runtime helper, staging blob/mode, dependency input, or selector fails before
+artifact execution. Keep the successful `fbd504a3` tuple and its original
+selector as historical evidence; it does not execute the refreshed harness.
+The refreshed control depends on PR292 acceptance, and its hosted native and
+wrapper execution remain NOT RUN until separate exact-control receipts pass.
+Neither the added staging module nor whole-source native parity is proved by
+the older a47 binary.
+
+After importing PR292 startup-failure cleanup, the current Runtime helpers and
+resource-history test no longer match those retained pins. The retained pre-cleanup verifier rejects
+that checkout before artifact execution. Current-control native and wrapper
+execution require a separately reviewed current-source artifact tuple and new
+receipts. Preserve the original artifact pins and historical results in their
+original commits; never widen a source-equivalence exclusion to admit changed
+Runtime code.
+
+The current-source control uses accepted candidate `ba85aac7` and native build
+`92498aff`, both complete tree `80e5c775`. It checks exact equality for all
+source/dependency inputs and all five selected test blobs, with no exclusions.
+The frozen provenance and Go wrapper come from the same Build Unauthenticated
+run `38098225250`, attempt 1, artifacts `11686643166` and `11686533628`.
+A neighboring Tests run's shared head does not bind its binary bytes. Verify
+both downloaded archives independently and retain candidate, PR head and
+synthetic build identities separately. The combined byte/source measurement
+receipt is retained in
+[`runtime-frozen-current-source-20261011`](../program/evidence/runtime-frozen-current-source-20261011/README.md).
+The artifact API's `workflow_run.head_sha` identifies the workflow's PR head
+(`2f631e54` here), independently of the accepted candidate `ba85aac7` and actual
+synthetic checkout `92498aff`. Admit metadata against that exact workflow head;
+retain candidate/build tree equality and archive checks as separate gates.
+Exercise the generated metadata predicate with the real workflow head and with
+each mismatched identity, size and expiration before refreshing a control.
+Exact source equality and archive inspection admit this tuple for execution;
+they do not establish the eleven frozen cases, eleven wrapper cases, published
+dependency origins, other platforms or release acceptance. Preserve the old
+a47 receipts under their original identities.
+
+Frozen-wrapper contract tests must separate archive metadata from filesystem
+mode support. The verifier checks the ZIP member's POSIX executable mode before
+extraction on every platform; the extracted file's `chmod(0o755)` result is a
+filesystem assertion only on POSIX, because Windows does not preserve that mode
+bit. On Windows, retain assertions that the extracted path is a regular file
+with the verified bytes. Likewise, keep interpreter-receipt and workflow-source
+assertions cross-platform, but run `bash -n` only where `bash` is a native POSIX
+shell: on Windows, PATH can resolve `bash` to a WSL shim that fails because no
+distribution is installed. Linux/macOS contract tests still execute both
+embedded shell blocks, so this boundary does not remove syntax validation from
+those hosts or claim shell execution on Windows.
+
 When a CI step uses `uv run --with poetry` to install a Poetry project, uv's
 `VIRTUAL_ENV` can cause Poetry to target uv's temporary tool environment. Run
 the Poetry/Invoke command with `VIRTUAL_ENV` unset, then explicitly check the
@@ -3166,11 +3403,27 @@ correctness failure. Controlled browser performance remains a separate proof.
 
 ### Live pull-request base identity
 
+Reconcile the complete exact-head check-run inventory, commit statuses and
+workflow-run inventory before merge admission. Page each endpoint until
+exhausted and count checks, jobs and runs separately. A successful workflow can
+contain skipped jobs; inspect each skip's event condition and retain it as
+skipped. Empty commit statuses do not imply absent Actions checks. After a
+prerequisite merge, compare the dependent's new prospective tree with its
+previously tested tree. Require review and fresh checks for a changed union;
+matching earlier production changes does not include later prerequisite repairs.
+
+
 A pull-request metadata response can retain an older `base.sha` after its named
 target branch advances. Resolve the live target Git ref separately and inspect
 the prospective merge's ordered parents and complete tree. Bind carried-forward
 CI evidence to the checkout actually recorded in job logs; neither the PR
 payload's base SHA nor a mergeable flag alone establishes the current tested union.
+
+Before refreshing a dependent pull request, confirm that its dependency's
+accepted source is present in the current target ref. An older dependency commit
+in the PR branch or a previously reviewed local union is not sufficient. Refresh
+descendants in dependency order, and bind each carried-forward check to the exact
+source and prospective merge tree it tested.
 
 When merging a package-only community promotion into Runtime integration, retain
 the integration target in the generated package test workflow's PR branch list.
