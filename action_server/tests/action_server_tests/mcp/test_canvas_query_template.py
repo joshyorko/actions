@@ -11,6 +11,7 @@ import shutil
 import signal
 import subprocess
 import sys
+import tempfile
 import time
 import zipfile
 from copy import deepcopy
@@ -786,7 +787,7 @@ def canvas_candidate_core_provenance() -> dict[str, object]:
 
 def _run_published_canvas_browser(
     frontend_root: Path, project: Path, runtime_url: str, output: Path
-) -> dict[str, str]:
+) -> dict[str, str | bool]:
     playwright_cli = frontend_root / "node_modules" / "@playwright" / "test" / "cli.js"
     node = shutil.which("node")
     assert (
@@ -821,18 +822,29 @@ def _run_published_canvas_browser(
         playwright_version
         == lock["packages"]["node_modules/@playwright/test"]["version"]
     )
-    _run_owned_process_tree(
-        [
-            node,
-            str(playwright_cli),
-            "test",
-            "--config",
-            str(frontend_root / "playwright.canvas-template.config.ts"),
-        ],
-        cwd=frontend_root,
-        env=env,
-        timeout=180,
-    )
+    # Chromium's SingletonSocket uses a Unix-domain path beneath TMPDIR.
+    # Keep this privately owned root short even when receipt/basetemp paths are long.
+    with tempfile.TemporaryDirectory(
+        prefix="cv-", dir="/tmp" if os.name != "nt" else None
+    ) as browser_temp:
+        temporary_root = Path(browser_temp)
+        if os.name != "nt":
+            temporary_root.chmod(0o700)
+        for name in ("TMPDIR", "TMP", "TEMP"):
+            env[name] = str(temporary_root)
+        _run_owned_process_tree(
+            [
+                node,
+                str(playwright_cli),
+                "test",
+                "--config",
+                str(frontend_root / "playwright.canvas-template.config.ts"),
+            ],
+            cwd=frontend_root,
+            env=env,
+            timeout=180,
+        )
+    assert not temporary_root.exists()
     assert hashlib.sha256(browser_path.read_bytes()).hexdigest() == browser_sha256
     return {
         "status": "passed",
@@ -842,6 +854,8 @@ def _run_published_canvas_browser(
         "sha256": browser_sha256,
         "playwright_version": playwright_version,
         "frontend_lock_sha256": hashlib.sha256(lock_path.read_bytes()).hexdigest(),
+        "temporary_root": str(temporary_root),
+        "temporary_root_removed": True,
     }
 
 
@@ -876,6 +890,84 @@ def test_published_consumer_preserves_explicit_browser(
         frontend, tmp_path, "http://127.0.0.1:12345/mcp", tmp_path / "output"
     )
     assert launched["CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH"] == str(selected)
+
+
+@pytest.mark.parametrize("launch_fails", [False, True])
+def test_published_consumer_owns_short_browser_temp(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, launch_fails: bool
+) -> None:
+    frontend = tmp_path / "frontend"
+    cli = frontend / "node_modules" / "@playwright" / "test" / "cli.js"
+    cli.parent.mkdir(parents=True)
+    cli.touch()
+    selected = tmp_path / "pinned-chromium"
+    selected.write_text("pinned browser bytes", encoding="utf-8")
+    selected.chmod(0o755)
+    (cli.parent / "package.json").write_text('{"version": "1.62.1"}', encoding="utf-8")
+    (frontend / "package-lock.json").write_text(
+        '{"packages": {"node_modules/@playwright/test": {"version": "1.62.1"}}}',
+        encoding="utf-8",
+    )
+    poison = tmp_path / ("long-immutable-receipt-path-" * 5)
+    poison.mkdir()
+    for name in ("TMPDIR", "TMP", "TEMP"):
+        monkeypatch.setenv(name, str(poison))
+    monkeypatch.setenv("CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH", str(selected))
+    monkeypatch.setattr(shutil, "which", lambda name: f"/system/{name}")
+    monkeypatch.setattr(
+        subprocess,
+        "run",
+        lambda command, **kwargs: subprocess.CompletedProcess(
+            command, 0, stdout="Chromium test version"
+        ),
+    )
+    observed: list[Path] = []
+
+    def launch(
+        command: list[str], *, env: dict[str, str], **kwargs: object
+    ) -> subprocess.CompletedProcess[str]:
+        temporary_root = Path(env["TMPDIR"])
+        observed.append(temporary_root)
+        assert temporary_root.is_dir() and temporary_root != poison
+        assert env["TMP"] == env["TEMP"] == str(temporary_root)
+        if os.name != "nt":
+            assert temporary_root.parent == Path("/tmp")
+            assert temporary_root.stat().st_mode & 0o777 == 0o700
+            # Chromium creates a further randomized directory and SingletonSocket.
+            assert (
+                len(
+                    os.fsencode(
+                        temporary_root / "org.chromium.Chromium.XXXXXX/SingletonSocket"
+                    )
+                )
+                < 108
+            )
+        if launch_fails:
+            raise subprocess.CalledProcessError(
+                1, command, "browser failure", "details"
+            )
+        return subprocess.CompletedProcess(command, 0, stdout="passed")
+
+    monkeypatch.setattr(sys.modules[__name__], "_run_owned_process_tree", launch)
+    try:
+        if launch_fails:
+            with pytest.raises(subprocess.CalledProcessError):
+                _run_published_canvas_browser(
+                    frontend,
+                    tmp_path,
+                    "http://127.0.0.1:12345/mcp",
+                    tmp_path / "output",
+                )
+        else:
+            _run_published_canvas_browser(
+                frontend, tmp_path, "http://127.0.0.1:12345/mcp", tmp_path / "output"
+            )
+    finally:
+        assert len(observed) == 1 and not observed[0].exists()
+        assert poison.is_dir()
+        assert all(
+            os.environ[name] == str(poison) for name in ("TMPDIR", "TMP", "TEMP")
+        )
 
 
 def test_published_consumer_requires_explicit_browser(

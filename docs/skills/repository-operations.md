@@ -1010,7 +1010,14 @@ cache roots, rejects a configured artifact provider and a frozen Runtime overrid
 and caps Runtime worker processes at two. It records the source commit/tree,
 worker imports, resource and template digests, and bounded Runtime cleanup only
 after the MCP and browser checks pass. The browser launcher stops its owned
-process tree; Runtime cleanup reports direct-child reap, observed descendants and
+process tree before removing its private browser temporary directory. On POSIX,
+the browser alone receives a short mode-0700 `/tmp/cv-*` root through `TMPDIR`,
+`TMP`, and `TEMP`; Chromium creates a Unix-domain `SingletonSocket` below that
+root, so inheriting a long receipt or pytest path can abort launch before any
+page check. Keep Runtime, cache, and receipt roots separate from this browser
+pathname constraint. Remove only the browser-owned root after bounded process
+cleanup on both success and failure; Windows uses its native temporary root.
+Runtime cleanup reports direct-child reap, observed descendants and
 reader closure while preserving an earlier failure. Point-in-time descendant
 observations do not establish universal discovery or adoption. A receipt alone
 does not establish passing pytest teardown; retain an executed zero-skip JUnit
