@@ -1,0 +1,32 @@
+{
+  "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py": {
+    "mode": "100644",
+    "kind": "blob",
+    "blob": "12ec0f644d96a45824ac110b7f1dafebb4c42ce6",
+    "sha256": "1fa3944b8984314f7a00aeaf59b0927c5dd2b8995ff52536cd20e8d002feb0a3"
+  },
+  "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py": {
+    "mode": "100644",
+    "kind": "blob",
+    "blob": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022",
+    "sha256": "f02184650c57217f4784e3916d75c9d74085f3cf23685a84264bdf1571d86f34"
+  },
+  "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py": {
+    "mode": "100644",
+    "kind": "blob",
+    "blob": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92",
+    "sha256": "3075771e4d91e83dd5c7780726b43968d61118b07129fc665e9266eee5695825"
+  },
+  "action_server/tests/action_server_tests/test_cli_multi_package_sync.py": {
+    "mode": "100644",
+    "kind": "blob",
+    "blob": "b0919a8b7508954976a8fab631a5fff219c2aeb8",
+    "sha256": "6e45597f99b2b91f6d9c8cd3a5014d31523981419770fef2bed3a000dd64f002"
+  },
+  "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py": {
+    "mode": "100644",
+    "kind": "blob",
+    "blob": "7a5a378bf1f8151118034d18b5dfb269f2b24e90",
+    "sha256": "8f7f20fa4d17049d1a0888ca658f4d80862eb64bd17710303f208898a1906cd4"
+  }
+}
