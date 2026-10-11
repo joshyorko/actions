@@ -618,6 +618,37 @@ routes too; default-off absence does not cover that configuration. Keep route
 registration, request authorization, and packaged/native execution evidence
 separate in acceptance receipts.
 
+An assembled authorization-request fixture can capture `start_server()`'s real
+application in a `before_start` callback and return `False` before pool and
+Uvicorn startup. Keep its real `create_db()` context alive through requests and
+use an owned file-backed SQLite database: `Database.connect()` opens a separate
+thread-local connection, so the registration-only census's `:memory:` database
+is not a shared request database for TestClient worker threads.
+Snapshot logical SQL rows and owned files after legitimate fixture seeding,
+then compare them after each denied request. Include Run records, counters,
+artifact bindings and directories, Work Item attachments, schedules and the
+in-memory secret store. Observe `Database.connect()` as well as `get_db()`:
+handlers can retain imported database aliases, so replacing only the defining
+module attribute does not observe every read boundary. Robot dispatch creates
+Run/counter/artifact state
+before entering its RCC background task; a zero-RCC-call assertion alone does
+not prove rejection before side effects. Exercise valid-key controls through
+real handlers for the deterministic subset. Keep a valid-key validation error
+or dispatch sentinel separate from successful import or execution acceptance.
+The configured server key and browser session do not identify a Workspace
+principal: `APIKeyAuthBackend` returns a generic authenticated user. Keep that
+boundary separate from Workspace ownership and binding contracts.
+
+The public `/artifacts/{run_id}` UI fallback is registered before the protected
+artifact mount. A one-segment path can therefore return the UI shell rather
+than exercise file delivery. Use two-segment paths for mounted storage-internal
+refusal controls, including the dot-prefixed binding manifest, and retain exact
+404, no private bytes and unchanged-state assertions. Native ASGI WebSocket
+denial sends `websocket.close` with code `1008` and no `reason` field; match
+that source-defined shape rather than invent an empty-reason requirement.
+Bounded native ASGI echo and close still do not qualify network or browser
+acceptance.
+
 Community PRs touching `actions/**` run Actions Core Tests. Its non-publishing
 candidate-wheel job builds the exact-source wheel and sdist, checks their
 inventory, validates and clean-installs the wheel, and retains artifact hashes
