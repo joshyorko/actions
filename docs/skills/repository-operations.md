@@ -115,6 +115,68 @@ case without skips or retries and the existing five persisted Runtime Run
 records. These are implemented admission controls; an actual native/public-Core
 bridge receipt still requires a separately reviewed immutable runner and run.
 
+An external pytest ownership hook must bind to the module object on the exact
+collected item, not just a qualified preimport of the same file. Pytest can
+collect that file under a different module name, leaving the live hook unset.
+Qualify the actual collection boundary with `--collect-only`: require the
+expected single node, source file and bytes before installing only the owned
+callback, and restore the previous hook in `finally`. Exercise public-mode
+admission and exact command/result forwarding on that collected object with a
+fake controller; collection controls do not execute Runtime or authenticate a
+product result.
+
+Playwright's `--grep` matches its full title, including the source file, project
+and suite names, and tags. With the prepared Canvas configuration, empty root
+and project names leave leading spaces before `host-harness.spec.ts` and the
+case title. A pattern anchored to the case title alone discovers no tests.
+Qualify the emitted selector with the locked driver's `--list` mode before
+running the browser: require the one intended spec, and reject empty,
+overbroad and wrong-case selections. List-only discovery proves selection;
+the executed JSON report must still contain one exact passing case without
+skips or retries, followed by the existing five persisted Runtime Run records.
+A JSON report with no suites, zero expected cases and `No tests found` is a
+discovery failure, not a browser result. Preserve that primary report and keep
+the combined bridge gate failed.
+
+Preserve primary test output and the returned outer supervisor cleanup result
+before raising for a nonzero worker exit. If public-mode admission fails before
+Runtime startup, missing Runtime cleanup observations remain unavailable; a
+failed strict cleanup assertion does not identify a Runtime leak. Keep that
+failed attempt distinct from the next immutable runner proposal and require
+new review and execution authority. Do not relax product assertions or infer
+cleanup fields from a different process owner's result.
+
+A hash-checked import alone does not bind a helper's later subprocess execution.
+The Linux owned-process helper launches its own `__file__`; bind and verify the
+reviewed helper bytes for both module loading and that child invocation. Load
+from the verified byte buffer to avoid an unchecked second read or cached
+bytecode. Preserve a private, unchanged helper snapshot and check it before and
+after ownership calls. Record command, supervisor and outer gateway deadlines
+separately: the command budget excludes bounded supervisor cleanup. Require
+exactly one last-stage observer final report with `sampler_cancelled is True`
+and `sampler_alive is False`; offset snapshots may omit those fields. Missing,
+non-boolean, duplicate or stale final reports fail admission. Cancellation and
+post-join sampler liveness remain separate from Runtime cleanup admission.
+
+Keep the Runtime's measured wrapper, snapshot and descendant-reap flags and its
+reader/error/live/zombie observations intact. A later outer subreaper result does
+not turn a false Runtime cleanup predicate into a pass. The accepted browser
+owner returns a CompletedProcess without all per-browser cleanup fields; record
+its narrower contract and the outer supervisor's own result separately. A DEBUG
+browser launch path can establish the selected executable for that launch; it
+does not establish a live PID identity or natural shutdown.
+
+Read the Runtime testcase outcome and its cleanup measurements separately. A
+failed testcase can retain true wrapper/snapshot/reap flags, empty error/reader/
+live/zombie lists and a stopped final sampler; those measured fields qualify
+only their ownership scope. Returned outer reaping counts are separate, and
+forced cleanup does not prove natural Runtime exit. Partial Python MCP calls
+and three measured public Core members do not establish the later browser calls
+or five-tool-Run gate. Count those tool Runs by the fixture's declared action
+names; a resource read can create an additional persisted Run. Keep whole-wheel
+authentication, cold registry acquisition and production artifact resolution
+outside this partial evidence.
+
 Compare retained native producer inputs to the resolved ordinary merge tree,
 then repeat at the committed harness checkpoint. Divergent tips can omit later
 accepted parent files restored by the union. Require all producer input bodies

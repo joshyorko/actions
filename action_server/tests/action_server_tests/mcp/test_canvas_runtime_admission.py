@@ -2,6 +2,7 @@
 
 import json
 import os
+import re
 import subprocess
 from pathlib import Path
 
@@ -197,6 +198,22 @@ def test_public_browser_preserves_pin_and_owns_temp(
             frontend / "node_modules/@playwright/test/cli.js"
         )
         assert "npm" not in command and "--workers" in command
+        selector = command[command.index("--grep") + 1]
+        full_title = (
+            "host-harness.spec.ts official bridge renders a real Runtime Action result"
+        )
+        assert re.search(
+            selector, full_title
+        ), "Selector must match Playwright's file-prefixed full title"
+        assert re.search(selector, "  " + full_title)
+        assert not re.search(
+            selector,
+            "host-harness.spec.ts official MCP Apps bridge handles fixture calls and host context lifecycle",
+        )
+        assert not re.search(
+            selector,
+            "other.spec.ts official bridge renders a real Runtime Action result",
+        )
         if launch_fails:
             raise subprocess.CalledProcessError(
                 1, command, "primary output", "primary error"
@@ -240,7 +257,9 @@ def test_public_browser_requires_explicit_pin(tmp_path, monkeypatch):
         bridge._run_canvas_browser(frontend, "http://127.0.0.1:1234/mcp", "published")
 
 
-@pytest.mark.parametrize("poison", ["skipped", "failed", "wrong-name", "extra-case"])
+@pytest.mark.parametrize(
+    "poison", ["skipped", "failed", "wrong-name", "extra-case", "empty"]
+)
 def test_public_browser_rejects_poisoned_report(poison):
     spec = {
         "title": "official bridge renders a real Runtime Action result",
@@ -254,6 +273,9 @@ def test_public_browser_rejects_poisoned_report(poison):
         "stats": {"expected": 1, "unexpected": 0, "skipped": 0, "flaky": 0},
         "suites": [{"specs": [spec, spec] if poison == "extra-case" else [spec]}],
     }
+    if poison == "empty":
+        report["suites"] = []
+        report["stats"]["expected"] = 0
     with pytest.raises(AssertionError):
         bridge._assert_canvas_playwright_report(report)
 

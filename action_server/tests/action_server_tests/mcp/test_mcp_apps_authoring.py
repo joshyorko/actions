@@ -570,7 +570,7 @@ def _run_canvas_browser(
                 "--config",
                 str(frontend_root / "playwright.canvas-harness.config.ts"),
                 "--grep",
-                "^official bridge renders a real Runtime Action result$",
+                r"^\s*host-harness\.spec\.ts official bridge renders a real Runtime Action result$",
                 "--workers",
                 "1",
                 "--reporter",
