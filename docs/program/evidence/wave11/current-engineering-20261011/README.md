@@ -78,6 +78,15 @@ The declared-job inventory proposal is adapted into operations guidance: late ne
 jobs and Runtime PR artifact validation cannot be omitted from complete CI.
 Upstream disposition: none. No release, issue closure or infrastructure change.
 
+Original raw bytes remain unchanged even when a whitespace checker flags them.
+The41-byte browser stdout intentionally ends in a space before LF: those exact
+bytes establish the Bash/Python measurement disagreement. The copied V3 proposal
+contains an original unified patch whose blank context line retains its space.
+These two new original-evidence exceptions, alongside copied `.patch` files,
+are excluded from authored Markdown whitespace claims. Canonical guidance,
+README and manifest pass their own whitespace checks; every manifest byte is
+verified against the committed Git blob separately.
+
 
 Current convergence checkpoint: #292 and #290 are integrated; target is now
 `1c7585fe8bb3cb9476c3997570bd3f04466f2bbc` after normal #311 integration.
