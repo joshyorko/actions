@@ -277,6 +277,15 @@ packaged-browser and published-artifact receipts separate, recording the exact
 candidate SHA and PASS, FAIL, BLOCKED or NOT_RUN. Skipped publication is not
 publication success. Recheck dependency sequencing against each retained
 contract before implementation; a cross-reference alone is not a blocking edge.
+
+A sanitized private checkpoint containing commit/tree identities, receipt
+hashes and historical bundle-verification results does not contain recoverable
+source. Before resuming that lane in another workspace, verify the actual
+required bundle chain and prerequisites, exact restored commit/tree, and
+separately frozen runner/specification bytes. If those bytes are absent and
+remote private durability was not established, keep implementation and
+execution on HOLD. A newly authorized replacement policy needs a new identity;
+do not represent it as recovery of the prior frozen policy.
 For a stacked PR, review the full diff from its actual merge base rather than
 relying on its title or last commit. When a reviewed component is integrated
 separately from a combined candidate, compare the candidate's synthetic merge
@@ -2116,15 +2125,25 @@ commit from being mistaken for the source under test. The test
 `test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable`
 requires `ACTIONS_REAL_RCC_ARTIFACT_TEST=1` and an
 `ACTIONS_RUNTIME_RCC_BINARY` whose RCC v18.19.3 bytes match the pinned SHA-256.
-The workflow selects that one test with xdist disabled, uses the normal Action
-Server developer install path, and uploads a sanitized receipt/source-hash
-summary even if the test fails. Its ordinary-suite skip is not acceptance
-evidence.
+The retained generated workflow selects rollback and staged-consumer tests with
+xdist disabled, uses the normal Action Server developer install path, and
+uploads a sanitized receipt/source-hash summary even if a test fails. An
+ordinary-suite skip is not acceptance evidence.
 
-The admission summary fails closed unless JUnit records exactly one passed,
-non-skipped test, with suite totals matching the actual testcase result
-elements and the expected rollback test name/module; the lifecycle receipt is
-`PASS` and binds to the checked-out
+A retained specialized RCC workflow can pin an older candidate and case set
+than the latest accepted hosted proof. Before scheduling it, inspect the exact
+generator/control revision, immutable candidate commit/tree, selected case
+identities and retained receipt inventory. Inheriting that workflow in a newer
+engineering branch does not make it test that branch. Keep earlier execution
+evidence under its original candidate/control identities; a refreshed gate
+needs its own reviewed tuple and receipt. The publication-details case is
+separate from the two-case workflow until its control explicitly selects and
+validates that third case.
+
+The retained two-case admission summary fails closed unless JUnit records both
+passed, non-skipped tests, with suite totals matching the actual testcase result
+elements and the expected rollback/staged-consumer names and modules; the
+lifecycle receipt is `PASS` and binds to the checked-out
 candidate commit/tree; imported runtime modules originate from and hash-match
 that candidate; both the runtime RCC and Action Server's default RCC path match
 the pinned version and digest; provider-operation snapshots and expected
