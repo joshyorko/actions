@@ -982,16 +982,44 @@ verify the published registry wheel with a clean install before advancing the
 supported-worker Core floor. Do not weaken the existing floor test or infer
 registry compatibility from the source checkout or retained candidate artifact.
 
-The current PR #282 head `bab27a93664494965db8a86761ea5685a3be6618` (tree
-`72257e07a78d33ec1d3d067fa0da83369eea0357`) declares that 1.0.3 dependency,
-while Action Server Tests run 38042719836 and RCC toolkit run 38042719804
-still require 1.0.2; refresh and rerun against the current integration after
-the registry prerequisite is met. The earlier candidate Runtime/browser PASS
-(run 38041682069) is bound to predecessor tree
-`80a6ef315411a446db00c234ff9a5a294d91fc00`, not this head. PR #282 also returns
-`artifact: null`; authorized replica-readable output and retrieval remain
-dependent on the shared #86/#83/#129 contracts. Actual ChatGPT operation is
-separate host evidence and has not been established by the MCP Apps harness.
+Core 1.0.3 was published from `actions-core-1.0.3` at
+`a70993fafc99a9f94041485542d5a720797ca394`. The release readback verifies the
+PyPI wheel SHA-256
+`8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265`
+and its public metadata decorators in a clean installed CLI consumer. That
+producer proof clears the published dependency prerequisite; template Runtime
+consumer acceptance remains separate.
+
+Name the executed Canvas template acceptance path. The candidate-source gate
+uses an acceptance manifest with Core 1.0.2 and then installs its own candidate
+wheel, so its receipt cannot establish consumption of the production template's
+published Core 1.0.3 wheel. The published consumer gate preserves the production
+manifest and checks installed version, distribution ownership, interpreter-prefix
+containment, and three recorded module hashes. Those sampled hashes do not
+authenticate all wheel members or prove cold registry acquisition.
+
+The published consumer gate requires a clean committed checkout and an explicit
+`CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`; a system Chromium found on PATH
+cannot replace that selection. It checks the installed Playwright version against
+the frontend lock and records the selected browser's version and digest. Run it
+with `ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1` and retain the receipt selected by
+`CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH`. The exact test is
+`mcp/test_canvas_query_template.py::test_canvas_template_runs_through_runtime_and_real_browser`
+under `action_server/tests/action_server_tests`. It owns temporary Runtime and
+cache roots, rejects a configured artifact provider and a frozen Runtime override,
+and caps Runtime worker processes at two. It records the source commit/tree,
+worker imports, resource and template digests, and bounded Runtime cleanup only
+after the MCP and browser checks pass. The browser launcher stops its owned
+process tree; Runtime cleanup reports direct-child reap, observed descendants and
+reader closure while preserving an earlier failure. Point-in-time descendant
+observations do not establish universal discovery or adoption. A receipt alone
+does not establish passing pytest teardown; retain an executed zero-skip JUnit
+result alongside it. Keep candidate and published consumer receipts separate.
+
+PR #282 still returns `artifact: null`, which fails the shared artifact-bearing
+Success schema. Caller-owned Workspace/application/revision binding and
+authorized retrieval require the shared ownership and Run-output contracts.
+Actual ChatGPT operation needs separate host evidence.
 
 For any accepted public metadata API, keep the boundary strict: reject cycles,
 non-finite values, non-string keys, and excessive depth/size; validate supported

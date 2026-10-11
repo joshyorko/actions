@@ -784,15 +784,172 @@ def canvas_candidate_core_provenance() -> dict[str, object]:
     )
 
 
+def _run_published_canvas_browser(
+    frontend_root: Path, project: Path, runtime_url: str, output: Path
+) -> dict[str, str]:
+    playwright_cli = frontend_root / "node_modules" / "@playwright" / "test" / "cli.js"
+    node = shutil.which("node")
+    assert (
+        node is not None
+    ), "Node must be available in the prepared frontend toolchain."
+    assert playwright_cli.is_file(), "Install the configured frontend dependencies."
+    env = os.environ.copy()
+    env["CANVAS_RUNTIME_MCP_URL"] = runtime_url
+    env["CANVAS_TEMPLATE_RESOURCE_PATH"] = str(project / "canvas.html")
+    env["CANVAS_TEMPLATE_TEST_OUTPUT"] = str(output)
+    browser = env.get("CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH")
+    assert browser, "Select an explicit Chromium executable for this acceptance gate."
+    browser_path = Path(browser).resolve(strict=True)
+    assert browser_path.is_file() and os.access(browser_path, os.X_OK)
+    env["CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH"] = str(browser_path)
+    browser_version = subprocess.run(
+        [str(browser_path), "--version"],
+        env=env,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=10,
+    ).stdout.strip()
+    assert browser_version
+    browser_sha256 = hashlib.sha256(browser_path.read_bytes()).hexdigest()
+    lock_path = frontend_root / "package-lock.json"
+    lock = json.loads(lock_path.read_text(encoding="utf-8"))
+    playwright_version = json.loads(
+        (playwright_cli.parent / "package.json").read_text(encoding="utf-8")
+    )["version"]
+    assert (
+        playwright_version
+        == lock["packages"]["node_modules/@playwright/test"]["version"]
+    )
+    _run_owned_process_tree(
+        [
+            node,
+            str(playwright_cli),
+            "test",
+            "--config",
+            str(frontend_root / "playwright.canvas-template.config.ts"),
+        ],
+        cwd=frontend_root,
+        env=env,
+        timeout=180,
+    )
+    assert hashlib.sha256(browser_path.read_bytes()).hexdigest() == browser_sha256
+    return {
+        "status": "passed",
+        "selection": "explicit",
+        "path": str(browser_path),
+        "version": browser_version,
+        "sha256": browser_sha256,
+        "playwright_version": playwright_version,
+        "frontend_lock_sha256": hashlib.sha256(lock_path.read_bytes()).hexdigest(),
+    }
+
+
+def test_published_consumer_preserves_explicit_browser(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    frontend = tmp_path / "frontend"
+    cli = frontend / "node_modules" / "@playwright" / "test" / "cli.js"
+    cli.parent.mkdir(parents=True)
+    cli.touch()
+    selected = tmp_path / "pinned-chromium"
+    selected.write_text("pinned browser bytes", encoding="utf-8")
+    selected.chmod(0o755)
+    (cli.parent / "package.json").write_text('{"version": "1.62.1"}', encoding="utf-8")
+    (frontend / "package-lock.json").write_text(
+        '{"packages": {"node_modules/@playwright/test": {"version": "1.62.1"}}}',
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH", str(selected))
+    monkeypatch.setattr(shutil, "which", lambda name: f"/system/{name}")
+    launched: dict[str, str] = {}
+
+    def observe(
+        command: list[str], *, env: dict[str, str], **kwargs: object
+    ) -> subprocess.CompletedProcess[str]:
+        launched.update(env)
+        return subprocess.CompletedProcess(command, 0, stdout="Chromium test version")
+
+    monkeypatch.setattr(subprocess, "run", observe)
+    monkeypatch.setattr(sys.modules[__name__], "_run_owned_process_tree", observe)
+    _run_published_canvas_browser(
+        frontend, tmp_path, "http://127.0.0.1:12345/mcp", tmp_path / "output"
+    )
+    assert launched["CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH"] == str(selected)
+
+
+def test_published_consumer_requires_explicit_browser(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    cli = tmp_path / "node_modules" / "@playwright" / "test" / "cli.js"
+    cli.parent.mkdir(parents=True)
+    cli.touch()
+    monkeypatch.delenv("CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH", raising=False)
+    monkeypatch.setattr(shutil, "which", lambda name: f"/system/{name}")
+    monkeypatch.setattr(subprocess, "run", lambda *args, **kwargs: None)
+    with pytest.raises(AssertionError, match="explicit Chromium"):
+        _run_published_canvas_browser(
+            tmp_path, tmp_path, "http://127.0.0.1:12345/mcp", tmp_path / "output"
+        )
+
+
 @pytest.mark.integration_test
 @pytest.mark.skipif(
     os.environ.get("ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE") != "1",
     reason="Set ACTIONS_CANVAS_TEMPLATE_ACCEPTANCE=1 for the Runtime/browser gate.",
 )
 def test_canvas_template_runs_through_runtime_and_real_browser(
-    action_server_process: ActionServerProcess, tmp_path: Path
+    action_server_process: ActionServerProcess,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    assert (
+        "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE" not in os.environ
+    ), "This gate measures the current source Runtime, not a frozen executable."
+    assert (
+        "ACTIONS_RUNTIME_RCC_PROVIDER" not in os.environ
+    ), "This gate uses a local managed worker, not a configured artifact provider."
+    runtime_home = tmp_path / "published-actions-home"
+    runtime_tmp = tmp_path / "runtime-tmp"
+    uv_cache = tmp_path / "published-uv-cache"
+    for directory in (runtime_home, runtime_tmp, uv_cache):
+        directory.mkdir(mode=0o700)
+    monkeypatch.setenv("ACTIONS_HOME", str(runtime_home))
+    monkeypatch.setenv("ROBOCORP_HOME", str(runtime_home))
+    monkeypatch.setenv("TMPDIR", str(runtime_tmp))
+    monkeypatch.setenv("UV_CACHE_DIR", str(uv_cache))
+    source_revision = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=REPOSITORY_ROOT, text=True, timeout=10
+    ).strip()
+    source_tree = subprocess.check_output(
+        ["git", "rev-parse", "HEAD^{tree}"], cwd=REPOSITORY_ROOT, text=True, timeout=10
+    ).strip()
+    source_parents = subprocess.check_output(
+        ["git", "show", "-s", "--format=%P", "HEAD"],
+        cwd=REPOSITORY_ROOT,
+        text=True,
+        timeout=10,
+    ).split()
+    assert not subprocess.check_output(
+        ["git", "diff", "HEAD", "--name-only"],
+        cwd=REPOSITORY_ROOT,
+        text=True,
+        timeout=10,
+    ).strip(), "Commit all tracked source changes before running this gate."
+    from actions import server as runtime_module
+
+    runtime_origin = Path(runtime_module.__file__).resolve()
+    assert (
+        runtime_origin
+        == (REPOSITORY_ROOT / "action_server/src/actions/server/__init__.py").resolve()
+    )
     project = _create_project(tmp_path, "canvas-query-runtime")
+    package_bytes = (project / "package.yaml").read_bytes()
+    assert (
+        package_bytes
+        == (REPOSITORY_ROOT / "templates/canvas-query/package.yaml").read_bytes()
+    )
+    assert b"actions-core=1.0.3" in package_bytes
     (project / "published_core_probe.py").write_text(
         """from importlib.metadata import distribution
 import hashlib
@@ -817,7 +974,7 @@ PUBLISHED_CORE_MODULE_SHA256 = {
 
 
 @tool
-def published_core_identity() -> dict[str, str]:
+def published_core_identity() -> dict[str, object]:
     core = distribution("actions-core")
     modules = {
         "actions": Path(actions.__file__).resolve(),
@@ -829,7 +986,8 @@ def published_core_identity() -> dict[str, str]:
     }
     if any(module not in installed_files for module in modules.values()):
         raise AssertionError("an Actions module is not owned by installed actions-core")
-    if any(not module.is_relative_to(sys.prefix) for module in modules.values()):
+    prefix = Path(sys.prefix).resolve()
+    if any(not module.is_relative_to(prefix) for module in modules.values()):
         raise AssertionError("an Actions module is outside the managed environment")
     module_hashes = {
         name: hashlib.sha256(module.read_bytes()).hexdigest()
@@ -840,7 +998,12 @@ def published_core_identity() -> dict[str, str]:
             "installed actions-core differs from the independently verified "
             f"published wheel {PUBLISHED_CORE_WHEEL_SHA256}"
         )
-    return {"version": core.version, **module_hashes}
+    return {
+        "version": core.version,
+        "worker_prefix": str(prefix),
+        "module_hashes": module_hashes,
+        "modules": {name: str(path) for name, path in modules.items()},
+    }
 """,
         encoding="utf-8",
     )
@@ -849,7 +1012,9 @@ def published_core_identity() -> dict[str, str]:
         db_file="server.db",
         actions_sync=True,
         timeout=120,
+        max_processes=2,
     )
+    worker_provenance: dict[str, object] = {}
 
     async def check_runtime_contract() -> None:
         async with action_server_process.mcp_client() as session:
@@ -858,10 +1023,10 @@ def published_core_identity() -> dict[str, str]:
                 tool for tool in listed.tools if tool.name == "published_core_identity"
             )
             core_identity = await session.call_tool(core_tool.name, {})
-            assert core_identity.structured_content == {
-                "version": "1.0.3",
-                **PUBLISHED_CORE_MODULE_SHA256,
-            }, (
+            assert core_identity.structured_content is not None
+            worker_provenance.update(core_identity.structured_content)
+            assert worker_provenance["version"] == "1.0.3"
+            assert worker_provenance["module_hashes"] == PUBLISHED_CORE_MODULE_SHA256, (
                 "Worker module bytes must match published Core wheel "
                 f"{PUBLISHED_CORE_WHEEL_SHA256}."
             )
@@ -910,36 +1075,111 @@ def published_core_identity() -> dict[str, str]:
 
     from action_server_tests.fixtures import run_async_in_new_thread
 
-    assert run_async_in_new_thread(check_runtime_contract) is None
+    process = action_server_process.process
+    try:
+        server_args = process._args
+        assert server_args[:3] == [sys.executable, "-m", "actions.server"]
+        assert run_async_in_new_thread(check_runtime_contract) is None
+        worker_prefix = worker_provenance["worker_prefix"]
+        assert isinstance(worker_prefix, str)
+        prefix = Path(worker_prefix)
+        assert prefix.is_absolute() and prefix.is_relative_to(runtime_home)
+        modules = worker_provenance["modules"]
+        assert isinstance(modules, dict)
+        assert set(modules) == set(PUBLISHED_CORE_MODULE_SHA256)
+        for path in modules.values():
+            assert isinstance(path, str)
+            assert Path(path).is_absolute() and Path(path).is_relative_to(prefix)
+        browser = _run_published_canvas_browser(
+            REPOSITORY_ROOT / "action_server/frontend",
+            project,
+            f"http://127.0.0.1:{action_server_process.port}/mcp",
+            tmp_path / "playwright-output",
+        )
+    finally:
+        primary_failure = sys.exception()
+        try:
+            cleanup, readers = process._stop_and_reap_until(time.monotonic() + 20)
+            assert cleanup is not None
+            assert cleanup.execution_stopped
+            assert not readers
+            action_server_process.stop()
+        except BaseException as cleanup_failure:
+            if primary_failure is None:
+                raise
+            primary_failure.add_note(
+                f"Published Canvas Runtime cleanup failed: {cleanup_failure}"
+            )
 
-    repository_root = Path(__file__).resolve().parents[4]
-    frontend_root = repository_root / "action_server" / "frontend"
-    playwright_cli = frontend_root / "node_modules" / "@playwright" / "test" / "cli.js"
-    node = shutil.which("node")
+    assert cleanup is not None
+    assert (project / "package.yaml").read_bytes() == package_bytes
+    resource_bytes = (project / "canvas.html").read_bytes()
+    resource_info = json.loads(
+        (project / "canvas-resource.json").read_text(encoding="utf-8")
+    )
+    resource_sha256 = hashlib.sha256(resource_bytes).hexdigest()
+    assert resource_sha256 == resource_info["sha256"]
+    assert not subprocess.check_output(
+        ["git", "diff", "HEAD", "--name-only"],
+        cwd=REPOSITORY_ROOT,
+        text=True,
+        timeout=10,
+    ).strip()
     assert (
-        node is not None
-    ), "Node must be available in the prepared frontend toolchain."
-    assert (
-        playwright_cli.is_file()
-    ), "Install frontend dependencies through the configured toolchain."
-
-    env = os.environ.copy()
-    env["CANVAS_RUNTIME_MCP_URL"] = f"http://127.0.0.1:{action_server_process.port}/mcp"
-    env["CANVAS_TEMPLATE_RESOURCE_PATH"] = str(project / "canvas.html")
-    env["CANVAS_TEMPLATE_TEST_OUTPUT"] = str(tmp_path / "playwright-output")
-    browser = shutil.which("chromium")
-    if browser:
-        env["CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH"] = browser
-    subprocess.run(
-        [
-            node,
-            str(playwright_cli),
-            "test",
-            "--config",
-            str(frontend_root / "playwright.canvas-template.config.ts"),
+        subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=REPOSITORY_ROOT, text=True, timeout=10
+        ).strip()
+        == source_revision
+    )
+    receipt = {
+        "scope": "published-core Runtime/browser acceptance only",
+        "source": {
+            "commit": source_revision,
+            "tree": source_tree,
+            "parents": source_parents,
+        },
+        "production_package_manifest_sha256": hashlib.sha256(package_bytes).hexdigest(),
+        "template_zip_sha256": hashlib.sha256(
+            (EMBEDDED_TEMPLATES / "zips/canvas-query.zip").read_bytes()
+        ).hexdigest(),
+        "built_resource_sha256": resource_sha256,
+        "published_core": {
+            "declared_version": "1.0.3",
+            "independently_verified_registry_wheel_sha256": PUBLISHED_CORE_WHEEL_SHA256,
+            "measured_worker": worker_provenance,
+        },
+        "runtime": {
+            "module_origin": str(runtime_origin),
+            "module_sha256": hashlib.sha256(runtime_origin.read_bytes()).hexdigest(),
+            "process_args": server_args,
+            "wrapper_reaped": cleanup.wrapper_reaped,
+            "live_descendant_pids": list(cleanup.live_descendant_pids),
+            "zombie_descendant_pids": list(cleanup.zombie_descendant_pids),
+            "descendant_snapshot_complete": cleanup.descendant_snapshot_complete,
+            "cleanup_errors": list(cleanup.errors),
+            "descendant_reap_complete": cleanup.descendant_reap_complete,
+            "active_readers": list(readers),
+        },
+        "runtime_calls": [
+            "published_core_identity",
+            "canvas_fixture_search:alpha",
+            "canvas_fixture_search:unmatched-query",
         ],
-        cwd=frontend_root,
-        env=env,
-        check=True,
-        timeout=180,
+        "browser": browser,
+        "limits": [
+            "Three measured worker members do not authenticate the complete wheel or prove cold registry acquisition.",
+            "artifact:null is a partial result and does not prove authorized artifact retrieval.",
+            "This source Runtime/browser gate does not claim frozen Runtime or ChatGPT acceptance.",
+            "Cleanup records point-in-time descendant observations, not universal descendant discovery or adoption.",
+        ],
+    }
+    receipt_path = Path(
+        os.environ.get(
+            "CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH",
+            str(tmp_path / "canvas-template-published-core-receipt.json"),
+        )
+    )
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    receipt_path.write_text(
+        json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
