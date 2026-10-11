@@ -1,0 +1,7 @@
+# Current-source frozen artifact admission
+
+Read-only byte and source inspection accepts the sibling Build Unauthenticated run 38098225250, attempt 1, Linux artifact pair. Accepted candidate `ba85aac7` and synthetic native producer `92498aff` have the identical complete tree `80e5c775`; PR292 source head `2f631e54` has a different complete tree and is retained separately. The control's 268 source/dependency entries and all five selected test files match the accepted candidate exactly. No source-difference exclusion applies.
+
+The combined `byte-source-review.json` is the native and wrapper measurement receipt. Both verification summaries identify its SHA256. Its complete archive/member/inventory measurements and limits are retained here. The inspector ran read-only with the recorded diagnostic Python; this is artifact inspection, not canonical package or Runtime execution. No binary was run by that inspection. The manifest checks Git HEAD, not clean build input attestation; published dependency origins and independent assets.zip reconstruction remain unproved by this record.
+
+The historical a47 and staging-only controls remain immutable evidence in earlier commits. New eleven-case frozen and eleven-case Go-wrapper execution must produce their own exact-control JUnit, provenance and lifecycle receipts. This source/byte admission does not establish execution, Windows/macOS acceptance, or release readiness.
