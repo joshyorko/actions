@@ -1032,7 +1032,16 @@ Checking only boolean or list types would admit failed cleanup. Upload sanitized
 JUnit even after failure; upload a sanitized receipt only after admission. A
 service-free test may relocate paths in an earlier measured receipt to test this
 validator, but it must preserve that receipt's executed source identity and must
-not relabel it as execution of a later workflow commit.
+not relabel it as execution of a later workflow commit. When a measured receipt
+contains Linux byte hashes, materialize the validator's input files from the
+current committed Git blobs into an isolated admission checkout. Windows Git
+checkout can convert the Runtime module, package manifest, and frontend lock to
+CRLF, which changes their raw-byte hashes even when their Git blobs are unchanged.
+Keep the measured fixture and its hashes immutable; do not normalize bytes or
+ignore mismatches in the production validator. Test each CRLF working-file case,
+require a valid baseline before poison tests, and reject altered isolated inputs.
+This is service-free admission coverage, not Windows Runtime/browser execution;
+the actual consumer gate continues hashing its own working-tree bytes.
 
 PR #282 still returns `artifact: null`, which fails the shared artifact-bearing
 Success schema. Caller-owned Workspace/application/revision binding and

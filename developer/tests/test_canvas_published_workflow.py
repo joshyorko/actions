@@ -19,6 +19,12 @@ WORKFLOW = ROOT / ".github/workflows/actions_runtime_tests.yml"
 FIXTURE = Path(__file__).parent / "fixtures/canvas-published-71f60-receipt.json"
 TEST_NAME = "test_canvas_template_runs_through_runtime_and_real_browser"
 TEST_CLASS = "tests.action_server_tests.mcp.test_canvas_query_template"
+ADMISSION_INPUTS = (
+    "action_server/src/actions/server/__init__.py",
+    "action_server/src/actions/server/templates/zips/canvas-query.zip",
+    "action_server/frontend/package-lock.json",
+    "templates/canvas-query/package.yaml",
+)
 
 
 def _steps() -> list[dict]:
@@ -46,12 +52,31 @@ def _relocate(value, replacements):
     return value
 
 
-def _validate(tmp_path: Path, mutation: str | None = None):
+def _validate(
+    tmp_path: Path,
+    mutation: str | None = None,
+    *,
+    input_repository: Path = ROOT,
+    changed_input: str | None = None,
+):
+    # Git checkout may convert text inputs to CRLF. Preserve the measured
+    # fixture's byte contract with current Git blobs, not normalized work files.
+    checkout = tmp_path / "admission-checkout"
+    for relative in ADMISSION_INPUTS:
+        content = subprocess.check_output(
+            ["git", "show", f"HEAD:{relative}"], cwd=input_repository
+        )
+        path = checkout / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(content)
+    if changed_input:
+        path = checkout / changed_input
+        path.write_bytes(path.read_bytes() + b"\n")
     measured = json.loads(FIXTURE.read_text())
     receipt = _relocate(
         deepcopy(measured),
         {
-            "<checkout>": ROOT,
+            "<checkout>": checkout,
             "<actions-home>": tmp_path / "actions-home",
             "<runner-temp>": tmp_path,
             "<browser>": tmp_path / "prepared-browser",
@@ -107,7 +132,7 @@ def _validate(tmp_path: Path, mutation: str | None = None):
             "CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH": str(
                 tmp_path / "prepared-browser"
             ),
-            "GITHUB_WORKSPACE": str(ROOT),
+            "GITHUB_WORKSPACE": str(checkout),
             "RUNNER_TEMP": str(tmp_path),
         }
     )
@@ -130,7 +155,7 @@ def _validate(tmp_path: Path, mutation: str | None = None):
     ]
     result = subprocess.run(
         command,
-        cwd=ROOT / "action_server",
+        cwd=checkout / "action_server",
         env=env,
         capture_output=True,
         text=True,
@@ -188,9 +213,70 @@ def test_measured_published_consumer_receipt_admitted(tmp_path: Path):
 
 
 @pytest.mark.parametrize(
+    "crlf_input",
+    [relative for relative in ADMISSION_INPUTS if not relative.endswith(".zip")],
+)
+def test_measured_admission_uses_git_bytes_from_crlf_checkout(
+    tmp_path: Path, crlf_input: str
+):
+    repository = tmp_path / "crlf-checkout"
+    repository.mkdir()
+    for relative in ADMISSION_INPUTS:
+        content = subprocess.check_output(["git", "show", f"HEAD:{relative}"], cwd=ROOT)
+        path = repository / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(content)
+    subprocess.run(["git", "init", "-q", str(repository)], check=True)
+    subprocess.run(
+        ["git", "-c", "core.autocrlf=false", "add", "."], cwd=repository, check=True
+    )
+    subprocess.run(
+        [
+            "git",
+            "-c",
+            "user.name=Fixture",
+            "-c",
+            "user.email=fixture@example.invalid",
+            "commit",
+            "-qm",
+            "Canonical admission inputs",
+        ],
+        cwd=repository,
+        check=True,
+    )
+    path = repository / crlf_input
+    path.write_bytes(path.read_bytes().replace(b"\n", b"\r\n"))
+    assert b"\r\n" in path.read_bytes()
+    result, _, receipt = _validate(tmp_path, input_repository=repository)
+    assert result.returncode == 0, result.stderr
+    assert (
+        json.loads(receipt.read_text())["source"]
+        == json.loads(FIXTURE.read_text())["source"]
+    )
+
+
+@pytest.fixture(scope="module")
+def admitted_baseline(tmp_path_factory):
+    result, _, _ = _validate(tmp_path_factory.mktemp("admitted-baseline"))
+    assert result.returncode == 0, result.stderr
+
+
+@pytest.mark.parametrize("changed_input", ADMISSION_INPUTS)
+def test_changed_admission_input_rejected(
+    tmp_path: Path, changed_input: str, admitted_baseline
+):
+    result, junit, receipt = _validate(tmp_path, changed_input=changed_input)
+    assert result.returncode != 0, f"admitted changed {changed_input} bytes"
+    assert not receipt.exists()
+    assert ET.parse(junit).getroot().get("failures") == "1"
+
+
+@pytest.mark.parametrize(
     "mutation", ["skip", "count", "name", "class", "pytest_failure", *POISONS]
 )
-def test_poisoned_published_consumer_receipt_rejected(tmp_path: Path, mutation: str):
+def test_poisoned_published_consumer_receipt_rejected(
+    tmp_path: Path, mutation: str, admitted_baseline
+):
     result, junit, receipt = _validate(tmp_path, mutation)
     assert result.returncode != 0, f"admitted poisoned {mutation} receipt"
     assert not receipt.exists()
