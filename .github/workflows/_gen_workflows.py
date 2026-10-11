@@ -686,14 +686,26 @@ class ActionServerTests(BaseTests):
                     "GITHUB_ACTIONS_MATRIX_NAME": "${{ matrix.name }}",
                     "CI_CREDENTIALS": "${{ secrets.CI_CREDENTIALS }}",
                     "CI_ENDPOINT": "${{ secrets.CI_ENDPOINT }}",
+                    "ACTIONS_NATIVE_STARTUP_DIAGNOSTICS_DIR": "${{ matrix.os == 'windows-2022' && format('{0}/native-startup-diagnostics', runner.temp) || '' }}",
                 },
                 "run": f"{run_in_env}poetry run inv test-binary --jobs 0",
+            },
+            {
+                "name": "Retain Windows native startup diagnostics",
+                "if": "always() && matrix.os == 'windows-2022'",
+                "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+                "with": {
+                    "name": "native-startup-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}",
+                    "path": "${{ runner.temp }}/native-startup-diagnostics/*.json",
+                    "if-no-files-found": "warn",
+                    "retention-days": 7,
+                },
             },
         ]
 
 
 class ActionServerFrozenCatalogRollback(BaseWorkflow):
-    """Run managed catalog rollback and generation drain against a pinned Linux binary."""
+    """Run frozen rollback, generation drain, sync, and resource-history cases on Linux."""
 
     name = "Actions Runtime Frozen Catalog Rollback"
     target = "actions_runtime_frozen_catalog_rollback.yml"
@@ -712,18 +724,39 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                     "branches": [
                         "test/frozen-catalog-rollback-20261010",
                         "test/frozen-generation-drain-20261010",
+                        "test/mcp-alias-frozen-control-20261010",
+                        "test/frozen-control-resource-history-20261010",
+                        "test/frozen-control-a47-20261010",
                     ],
                     "paths": [
                         ".github/workflows/_gen_workflows.py",
                         ".github/workflows/actions_runtime_frozen_catalog_rollback.yml",
                         "action_server/scripts/verify_frozen_catalog_artifact.py",
+                        "action_server/scripts/verify_frozen_catalog_wrapper_artifact.py",
                         "action_server/scripts/verify_frozen_catalog_junit.py",
+                        "action_server/scripts/verify_frozen_catalog_harness.py",
                         "action_server/tests/action_server_tests/test_cli_mcp_catalog_rollback.py",
                         "action_server/tests/action_server_tests/test_cli_live_reload_multi_package.py",
                         "action_server/tests/action_server_tests/test_cli_successful_generation_drain.py",
+                        "action_server/tests/action_server_tests/test_cli_multi_package_sync.py",
+                        "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+                        "action_server/scripts/frozen_wrapper_acceptance_plugin.py",
+                        "action_server/tests/contract_tests/test_verify_frozen_catalog_junit.py",
+                        "action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py",
+                        "action_server/tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py",
+                        "developer/tests/test_frozen_wrapper_metadata.py",
                         "action_server/docs/DEVELOPMENT.md",
                     ],
                 }
+            }
+        }
+
+    @override
+    def jobs_part(self):
+        return {
+            "jobs": {
+                "build": self.build_job_part(),
+                "go_wrapper": self.go_wrapper_job_part(),
             }
         }
 
@@ -748,20 +781,19 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                 "shell": "bash",
                 "env": {
                     "GITHUB_TOKEN": "${{ github.token }}",
-                    "ARTIFACT_ID": "11664669288",
-                    "EXPECTED_ARCHIVE_SIZE": "59369402",
-                    "EXPECTED_ARCHIVE_SHA256": "5db37991cde941ba1c541912d376b33cb0e397db7a427db3e3f627358f5c7286",
+                    "ARTIFACT_ID": "11686643166",
+                    "EXPECTED_ARCHIVE_SIZE": "59410740",
+                    "EXPECTED_ARCHIVE_SHA256": "0905c4734d6b636a5a465e0a958cf8bc4521b5047a68da473830b95821b7c8c0",
                 },
                 "run": "\n".join(
                     [
                         "set -Eeuo pipefail",
-                        "git merge-base --is-ancestor 31239cf99c7b264a0eab89660e93b391532ac305 HEAD",
-                        "test \"$(git rev-parse 31239cf99c7b264a0eab89660e93b391532ac305^{tree})\" = d2ef7229651b6120db5cfa5995c65942ef768da8",
-                        'build_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/056d32601563a213643436e7df14e6ca0ea50516" | jq -er .commit.tree.sha)"',
-                        'test "$build_tree" = "$(git rev-parse 31239cf99c7b264a0eab89660e93b391532ac305^{tree})"',
+                        'uv run --no-project --python 3.12 python scripts/verify_frozen_catalog_harness.py --source-root .. --output "$RUNNER_TEMP/frozen-catalog-evidence/harness-verification.json"',
+                        'candidate_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/ba85aac7324ea4463bfba8c5f8586e27706dc2fe" | jq -er .commit.tree.sha)"',
+                        'test "$candidate_tree" = 80e5c77513f6abf5d07005ee3aee47d49efd927f',
+                        'build_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e" | jq -er .commit.tree.sha)"',
+                        'test "$build_tree" = "$candidate_tree"',
                         'printf "%s\\n" "$build_tree" > "$RUNNER_TEMP/frozen-catalog-native-build-source-tree.txt"',
-                        "test \"$(git rev-parse HEAD:action_server/src/actions/server)\" = \"$(git rev-parse 31239cf99c7b264a0eab89660e93b391532ac305:action_server/src/actions/server)\"",
-                        "git diff --quiet 31239cf99c7b264a0eab89660e93b391532ac305 HEAD -- action_server/src/actions/server",
                         'archive="$RUNNER_TEMP/frozen-native.zip"',
                         "curl --fail --silent --show-error --location \\",
                         '  --header "Authorization: Bearer $GITHUB_TOKEN" \\',
@@ -814,7 +846,7 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                 "run": "uv run --no-project --python 3.12 --with poetry==2.1.1 --with invoke==2.2.0 env -u VIRTUAL_ENV inv devinstall",
             },
             {
-                "name": "Run frozen managed rollback and drain acceptance",
+                "name": "Run frozen rollback, drain, sync, and resource-history acceptance",
                 "id": "acceptance",
                 "shell": "bash",
                 "env": {
@@ -828,11 +860,14 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "set -Eeuo pipefail",
                         'mkdir -p "$ACTIONS_HOME" "$ROBOTS_HOME" "$TMPDIR"',
                         "uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -c 'import pytest, sys; print(f\"pytest={pytest.__file__}; python={sys.executable}\")'",
+                        "uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -m pytest -q -p no:robocorp_log_pytest tests/contract_tests/test_verify_frozen_catalog_junit.py tests/contract_tests/test_verify_frozen_catalog_harness.py",
                         "set +e",
                         "uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry run python -m pytest -m integration_test -n 0 -q -s \\",
                         "  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good \\",
                         "  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers \\",
                         "  tests/action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot \\",
+                        "  tests/action_server_tests/test_cli_multi_package_sync.py \\",
+                        "  tests/action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart \\",
                         '  --junitxml="$RUNNER_TEMP/frozen-catalog-junit.xml" 2>&1 | tee "$RUNNER_TEMP/frozen-catalog-test.log"',
                         "test_status=${PIPESTATUS[0]}",
                         'if [ "$test_status" -eq 0 ]; then uv run --no-project --python 3.12 python scripts/verify_frozen_catalog_junit.py \\',
@@ -860,13 +895,20 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
                         "from pathlib import Path",
                         'root = Path(os.environ["RUNNER_TEMP"])',
                         'steps = {name: os.environ.get(name + "_OUTCOME", "not-run") for name in ("ARTIFACT", "FROZEN", "RCC", "DEPENDENCIES", "ACCEPTANCE")}',
-                        'receipt = {"candidate_sha": "31239cf99c7b264a0eab89660e93b391532ac305", "candidate_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8", "native_build_source_sha": "056d32601563a213643436e7df14e6ca0ea50516", "native_build_source_tree": "d2ef7229651b6120db5cfa5995c65942ef768da8", "native_build_workflow_run_id": "38039806634", "native_build_workflow_run_attempt": "1", "native_byte_verification_receipt_sha256": "3afbc8e2f4fe6e46bdd03512e82794e27cca3c705ad28c4a7711fb26b7fb349a", "control_sha": os.environ["GITHUB_SHA"], "artifact_id": "11664669288", "artifact_size": 59369402, "artifact_sha256": "5db37991cde941ba1c541912d376b33cb0e397db7a427db3e3f627358f5c7286", "wrapper_binary_artifact_id": "11665179231", "wrapper_binary_artifact_size": 77776642, "wrapper_binary_artifact_sha256": "72c3451b5a9f1d54632d7bdeaf36aa0ab3b43e9fbf021497b53db372a00c80a8", "wrapper_binary_size": 81977186, "wrapper_binary_sha256": "28cf80cb1d2811236ed64595b8b9d03a54d1904d63497eb39f34fb9bd67978f3", "wrapper_binary_verification_receipt_sha256": "1a87b8fac2810a5b7e8ce4916771ffe1d71e20494bd86562ad43666c79bb2896", "wrapper_execution_verified": False, "step_outcomes": steps, "status": "PASS" if all(value == "success" for value in steps.values()) else "FAIL_OR_NOT_RUN"}',
+                        'rcc_version_file = root / "frozen-catalog-rcc-version.txt"',
+                        'rcc_sha_file = root / "frozen-catalog-rcc-sha256.txt"',
+                        'receipt = {"candidate_sha": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe", "candidate_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f", "native_build_source_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e", "native_build_source_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f", "native_build_workflow_run_id": "38098225250", "native_build_workflow_run_attempt": "1", "native_byte_verification_receipt_sha256": "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff", "control_sha": os.environ["GITHUB_SHA"], "resource_history_test_blob": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92", "artifact_id": "11686643166", "artifact_size": 59410740, "artifact_sha256": "0905c4734d6b636a5a465e0a958cf8bc4521b5047a68da473830b95821b7c8c0", "go_wrapper": "NOT_VERIFIED; separate wrapper artifact is not included in the measured provenance TAR", "step_outcomes": steps, "status": "PASS" if all(value == "success" for value in steps.values()) else "FAIL_OR_NOT_RUN"}',
+                        'if rcc_version_file.is_file(): receipt["rcc_version"] = rcc_version_file.read_text(encoding="utf-8").strip()',
+                        'if rcc_sha_file.is_file(): receipt["rcc_sha256"] = rcc_sha_file.read_text(encoding="utf-8").split()[0]',
                         'source_tree = root / "frozen-catalog-native-build-source-tree.txt"',
                         'if source_tree.is_file(): receipt["native_build_source_tree_api_readback"] = source_tree.read_text(encoding="utf-8").strip()',
                         'artifact_verification = root / "frozen-catalog-artifact-verification.json"',
                         'if artifact_verification.is_file(): receipt["frozen_artifact_verification"] = json.loads(artifact_verification.read_text(encoding="utf-8"))',
                         'junit = root / "frozen-catalog-junit-summary.json"',
                         'if junit.is_file(): receipt["junit"] = json.loads(junit.read_text(encoding="utf-8"))',
+                        'harness = root / "frozen-catalog-evidence/harness-verification.json"',
+                        'if harness.is_file(): receipt["test_harness"] = json.loads(harness.read_text(encoding="utf-8"))',
+                        'if receipt.get("test_harness", {}).get("status") != "PASS" or receipt.get("test_harness", {}).get("control_sha") != os.environ["GITHUB_SHA"]: receipt["status"] = "FAIL_OR_NOT_RUN"',
                         '(root / "frozen-catalog-summary.json").write_text(json.dumps(receipt, indent=2) + "\\n", encoding="utf-8")',
                         "PY",
                     ]
@@ -885,15 +927,208 @@ class ActionServerFrozenCatalogRollback(BaseWorkflow):
             },
         ]
 
+    def go_wrapper_job_part(self) -> dict:
+        return {
+            "runs-on": "ubuntu-24.04",
+            "timeout-minutes": 45,
+            "steps": [
+                {
+                    **self.checkout_repo(pinned=True),
+                    "with": {"fetch-depth": 0},
+                },
+                *self.setup_python(pinned=True),
+                {
+                    "name": "Initialize isolated Go-wrapper acceptance evidence",
+                    "run": 'mkdir -p "$RUNNER_TEMP/go-wrapper-catalog-evidence"',
+                },
+                {
+                    "name": "Fetch and verify the measured Go-wrapper artifact",
+                    "id": "wrapper_artifact",
+                    "shell": "bash",
+                    "env": {
+                        "GITHUB_TOKEN": "${{ github.token }}",
+                        "ARTIFACT_ID": "11686533628",
+                        "EXPECTED_ARCHIVE_SIZE": "77830730",
+                        "EXPECTED_ARCHIVE_SHA256": "8386960d869d5a2be69ccf22a43064cb62550062e00aab200a70e06ab1547f7a",
+                        "EXPECTED_RUN_ID": "38098225250",
+                        "EXPECTED_ARTIFACT_NAME": "action-server-unauthenticated-ubuntu-22.04",
+                        "EXPECTED_CANDIDATE_SHA": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+                        "EXPECTED_BUILD_HEAD_SHA": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84",
+                    },
+                    "run": "\n".join(
+                        [
+                            "set -Eeuo pipefail",
+                            'cd "$GITHUB_WORKSPACE"',
+                            'uv run --no-project --python 3.12 python action_server/scripts/verify_frozen_catalog_harness.py --source-root . --output "$RUNNER_TEMP/go-wrapper-catalog-evidence/harness-verification.json"',
+                            'candidate_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/$EXPECTED_CANDIDATE_SHA" | jq -er .commit.tree.sha)"',
+                            'test "$candidate_tree" = 80e5c77513f6abf5d07005ee3aee47d49efd927f',
+                            'build_tree="$(curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/commits/92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e" | jq -er .commit.tree.sha)"',
+                            'test "$build_tree" = "$candidate_tree"',
+                            'metadata="$RUNNER_TEMP/go-wrapper-artifact-metadata.json"',
+                            'curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID" --output "$metadata"',
+                            'jq -e --argjson id "$ARTIFACT_ID" --argjson run "$EXPECTED_RUN_ID" --arg name "$EXPECTED_ARTIFACT_NAME" --arg head "$EXPECTED_BUILD_HEAD_SHA" --argjson size "$EXPECTED_ARCHIVE_SIZE" \' .id == $id and .name == $name and .size_in_bytes == $size and .expired == false and .workflow_run.id == $run and .workflow_run.head_sha == $head \' "$metadata" > /dev/null',
+                            'archive="$RUNNER_TEMP/go-wrapper-native.zip"',
+                            'curl --fail --silent --show-error --location --header "Authorization: Bearer $GITHUB_TOKEN" --header "Accept: application/vnd.github+json" "$GITHUB_API_URL/repos/$GITHUB_REPOSITORY/actions/artifacts/$ARTIFACT_ID/zip" --output "$archive"',
+                            'test "$(stat -c %s "$archive")" = "$EXPECTED_ARCHIVE_SIZE"',
+                            'echo "$EXPECTED_ARCHIVE_SHA256  $archive" | sha256sum --check --status',
+                            "uv run --no-project --python 3.12 python action_server/scripts/verify_frozen_catalog_wrapper_artifact.py \\",
+                            '  --archive "$archive" \\',
+                            '  --destination "$RUNNER_TEMP/go-wrapper-native" \\',
+                            "  --source-root action_server \\",
+                            '  --output "$RUNNER_TEMP/go-wrapper-catalog-evidence/wrapper-artifact-verification.json"',
+                            'rm "$archive"',
+                        ]
+                    ),
+                },
+                {
+                    "name": "Install checksum-pinned RCC for wrapper acceptance",
+                    "id": "wrapper_rcc",
+                    "run": "\n".join(
+                        [
+                            "set -Eeuo pipefail",
+                            "destination=src/actions/server/bin/rcc-18.19.3",
+                            'mkdir -p "$(dirname "$destination")"',
+                            "curl --fail --silent --show-error --location \\",
+                            "  https://github.com/joshyorko/rcc/releases/download/v18.19.3/rcc-linux64 \\",
+                            '  --output "$destination"',
+                            "echo '7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428  '"
+                            + '"$destination" | sha256sum --check --status',
+                            'chmod 755 "$destination"',
+                            'sha256sum "$destination" > "$RUNNER_TEMP/go-wrapper-catalog-evidence/rcc-sha256.txt"',
+                            '"$destination" version > "$RUNNER_TEMP/go-wrapper-catalog-evidence/rcc-version.txt"',
+                        ]
+                    ),
+                },
+                {
+                    "name": "Install Action Server test dependencies for wrapper job",
+                    "id": "wrapper_dependencies",
+                    "env": {"ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD": "1"},
+                    "run": "\n".join(
+                        [
+                            "set -Eeuo pipefail",
+                            "uv run --no-project --python 3.12 --with poetry==2.1.1 --with invoke==2.2.0 env -u VIRTUAL_ENV inv devinstall",
+                            'uv run --no-project --python 3.12 --with poetry==2.1.1 env -u VIRTUAL_ENV poetry env info --executable > "$RUNNER_TEMP/go-wrapper-catalog-evidence/test-python-path.txt"',
+                            'test -x "$(cat "$RUNNER_TEMP/go-wrapper-catalog-evidence/test-python-path.txt")"',
+                        ]
+                    ),
+                },
+                {
+                    "name": "Run the exact eleven Go-wrapper acceptance cases",
+                    "id": "wrapper_acceptance",
+                    "shell": "bash",
+                    "env": {
+                        "SEMA4AI_INTEGRATION_TEST_ACTION_SERVER_EXECUTABLE": "${{ runner.temp }}/go-wrapper-native/action-server",
+                        "SEMA4AI_INTEGRATION_TEST_GO_WRAPPER": "1",
+                        "WRAPPER_ARTIFACT_VERIFICATION": "${{ runner.temp }}/go-wrapper-catalog-evidence/wrapper-artifact-verification.json",
+                        "WRAPPER_PROCESS_EVIDENCE": "${{ runner.temp }}/go-wrapper-catalog-evidence/wrapper-process-lifecycle.json",
+                        "HOME": "${{ runner.temp }}/go-wrapper-home",
+                        "ACTIONS_HOME": "${{ runner.temp }}/go-wrapper-actions-home",
+                        "ROBOTS_HOME": "${{ runner.temp }}/go-wrapper-robots-home",
+                        "TMPDIR": "${{ runner.temp }}/go-wrapper-tmp",
+                    },
+                    "run": "\n".join(
+                        [
+                            "set -Eeuo pipefail",
+                            'mkdir -p "$HOME" "$ACTIONS_HOME" "$ROBOTS_HOME" "$TMPDIR"',
+                            'test_python="$(cat "$RUNNER_TEMP/go-wrapper-catalog-evidence/test-python-path.txt")"',
+                            'test -x "$test_python"',
+                            'export VIRTUAL_ENV="$(dirname "$(dirname "$test_python")")"',
+                            'export PATH="$VIRTUAL_ENV/bin:$PATH"',
+                            '"$test_python" -c \'import pytest, sys; print(f"pytest={pytest.__file__}; python={sys.executable}")\' | tee "$RUNNER_TEMP/go-wrapper-catalog-evidence/test-interpreter.txt"',
+                            '"$test_python" -m pytest -q -p no:robocorp_log_pytest tests/contract_tests/test_verify_frozen_catalog_junit.py tests/contract_tests/test_verify_frozen_catalog_wrapper_artifact.py tests/contract_tests/test_verify_frozen_catalog_harness.py',
+                            "set +e",
+                            '"$test_python" -m pytest -p scripts.frozen_wrapper_acceptance_plugin -m integration_test -n 0 -q -s '
+                            + "\\",
+                            "  tests/action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good "
+                            + "\\",
+                            "  tests/action_server_tests/test_cli_live_reload_multi_package.py::test_failed_watched_reload_keeps_both_packages_and_recovers "
+                            + "\\",
+                            "  tests/action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot "
+                            + "\\",
+                            "  tests/action_server_tests/test_cli_multi_package_sync.py "
+                            + "\\",
+                            "  tests/action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart "
+                            + "\\",
+                            '  --junitxml="$RUNNER_TEMP/go-wrapper-catalog-evidence/junit.xml" 2>&1 | tee "$RUNNER_TEMP/go-wrapper-catalog-evidence/test.log"',
+                            "test_status=${PIPESTATUS[0]}",
+                            'if [ "$test_status" -eq 0 ]; then uv run --no-project --python 3.12 python scripts/verify_frozen_catalog_junit.py \\',
+                            '  "$RUNNER_TEMP/go-wrapper-catalog-evidence/junit.xml" "$RUNNER_TEMP/go-wrapper-catalog-evidence/junit-summary.json" || test_status=$?; fi',
+                            'echo "GO_WRAPPER_TEST_EXIT_CODE=$test_status" >> "$GITHUB_ENV"',
+                            'exit "$test_status"',
+                        ]
+                    ),
+                },
+                {
+                    "name": "Verify wrapper-extracted frozen executable identity",
+                    "id": "wrapper_runtime",
+                    "if": "${{ steps.wrapper_acceptance.outcome == 'success' }}",
+                    "shell": "bash",
+                    "env": {
+                        "HOME": "${{ runner.temp }}/go-wrapper-home",
+                        "EXPECTED_FROZEN_BINARY_SHA256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb",
+                        "EVIDENCE_DIR": "${{ runner.temp }}/go-wrapper-catalog-evidence",
+                    },
+                    "run": 'python - <<\'PY\'\nimport hashlib, json, os, stat\nfrom pathlib import Path\nhome = Path(os.environ["HOME"]).resolve()\nexpected = os.environ["EXPECTED_FROZEN_BINARY_SHA256"]\nmatches = list(home.glob(".actions/bin/action-server/internal/*/action-server"))\nif len(matches) != 1:\n    raise SystemExit("wrapper did not leave exactly one extracted frozen executable")\nbinary = matches[0]\nif binary.is_symlink() or not stat.S_ISREG(binary.stat().st_mode) or stat.S_IMODE(binary.stat().st_mode) != 0o755:\n    raise SystemExit("wrapper-extracted frozen executable type or mode is invalid")\ndigest = hashlib.sha256()\nwith binary.open("rb") as stream:\n    for chunk in iter(lambda: stream.read(1024 * 1024), b""):\n        digest.update(chunk)\nactual = digest.hexdigest()\nif actual != expected:\n    raise SystemExit("wrapper-extracted frozen executable digest does not match candidate")\nrecord = {"relative_path": binary.relative_to(home).as_posix(), "mode": stat.S_IMODE(binary.stat().st_mode), "size": binary.stat().st_size, "sha256": actual, "matches_measured_frozen_candidate": True}\nPath(os.environ["EVIDENCE_DIR"], "wrapper-extracted-frozen-verification.json").write_text(json.dumps(record, indent=2) + "\\n", encoding="utf-8")\nPY',
+                },
+                {
+                    "name": "Write separate Go-wrapper acceptance receipt",
+                    "if": "always()",
+                    "shell": "bash",
+                    "working-directory": "${{ runner.temp }}",
+                    "env": {
+                        "ARTIFACT_OUTCOME": "${{ steps.wrapper_artifact.outcome }}",
+                        "RCC_OUTCOME": "${{ steps.wrapper_rcc.outcome }}",
+                        "DEPENDENCIES_OUTCOME": "${{ steps.wrapper_dependencies.outcome }}",
+                        "ACCEPTANCE_OUTCOME": "${{ steps.wrapper_acceptance.outcome }}",
+                        "WRAPPER_RUNTIME_OUTCOME": "${{ steps.wrapper_runtime.outcome }}",
+                    },
+                    "run": "\n".join(
+                        [
+                            "python - <<'PY'",
+                            "import json, os",
+                            "from pathlib import Path",
+                            'evidence = Path(os.environ["RUNNER_TEMP"]) / "go-wrapper-catalog-evidence"',
+                            'steps = {name: os.environ.get(name + "_OUTCOME", "not-run") for name in ("ARTIFACT", "RCC", "DEPENDENCIES", "ACCEPTANCE", "WRAPPER_RUNTIME")}',
+                            'receipt = {"candidate_sha": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe", "candidate_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f", "native_build_source_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e", "native_build_source_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f", "native_build_run_id": "38098225250", "native_build_run_attempt": "1", "wrapper_artifact_id": "11686533628", "wrapper_archive_size": 77830730, "wrapper_archive_sha256": "8386960d869d5a2be69ccf22a43064cb62550062e00aab200a70e06ab1547f7a", "wrapper_source_sha256": "dd0260b11a3fadf019058e55eb43fe96a2b85088793e1210c1d44835e343d293", "wrapper_measurement_receipt_sha256": "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff", "native_measurement_receipt_sha256": "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff", "control_sha": os.environ["GITHUB_SHA"], "resource_history_test_blob": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92", "expected_junit_tests": 11, "step_outcomes": steps}',
+                            'for name, filename in (("test_harness", "harness-verification.json"), ("artifact_verification", "wrapper-artifact-verification.json"), ("junit", "junit-summary.json"), ("wrapper_process_lifecycle", "wrapper-process-lifecycle.json"), ("wrapper_extracted_frozen_binary", "wrapper-extracted-frozen-verification.json")):',
+                            "    path = evidence / filename",
+                            '    if path.is_file(): receipt[name] = json.loads(path.read_text(encoding="utf-8"))',
+                            'for name, filename in (("rcc_sha256", "rcc-sha256.txt"), ("rcc_version", "rcc-version.txt")):',
+                            "    path = evidence / filename",
+                            '    if path.is_file(): receipt[name] = path.read_text(encoding="utf-8").split()[0]',
+                            'lifecycle = receipt.get("wrapper_process_lifecycle", {})',
+                            'receipt["status"] = "PASS" if all(value == "success" for value in steps.values()) and lifecycle.get("status") == "PASS" and receipt.get("test_harness", {}).get("status") == "PASS" and receipt.get("test_harness", {}).get("control_sha") == os.environ["GITHUB_SHA"] else "FAIL_OR_NOT_RUN"',
+                            '(evidence / "go-wrapper-catalog-summary.json").write_text(json.dumps(receipt, indent=2) + "\\n", encoding="utf-8")',
+                            "PY",
+                        ]
+                    ),
+                },
+                {
+                    "name": "Upload Go-wrapper acceptance evidence",
+                    "if": "always()",
+                    "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+                    "with": {
+                        "name": "frozen-catalog-go-wrapper-${{ github.sha }}",
+                        "path": "${{ runner.temp }}/go-wrapper-catalog-evidence/**",
+                        "if-no-files-found": "warn",
+                        "retention-days": 30,
+                    },
+                },
+            ],
+        }
+
 
 
 RCC_ROLLBACK_SUMMARY_SCRIPT = r"""import hashlib
 import json
+import math
 import os
+import re
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from urllib.parse import urlsplit
 
 workspace = Path(os.environ["GITHUB_WORKSPACE"])
 control = workspace / "control"
@@ -1019,8 +1254,8 @@ except (OSError, ET.ParseError, ValueError):
     issues.append("junit_missing_or_invalid")
 if test_counts != actual_case_counts:
     issues.append("junit_suite_counts_do_not_match_testcases")
-if test_counts != {"tests": 2, "failures": 0, "errors": 0, "skipped": 0}:
-    issues.append("test_result_not_exactly_two_passes")
+if test_counts != {"tests": 3, "failures": 0, "errors": 0, "skipped": 0}:
+    issues.append("test_result_not_exactly_three_passes")
 expected_test_identities = {
     (
         "test_current_candidate_import_rollback",
@@ -1030,13 +1265,17 @@ expected_test_identities = {
         "test_source_staging_rcc_consumer",
         "test_staged_package_executes_in_managed_rcc_runtime",
     ),
+    (
+        "test_source_staging_rcc_consumer",
+        "test_published_artifact_details_preserves_one_rcc_identity_pair",
+    ),
 }
 observed_test_identities = {
     (case.attrib.get("classname", "").rsplit(".", 1)[-1], case.attrib.get("name"))
     for case in cases
 }
 test_identity_matches = (
-    len(cases) == 2 and observed_test_identities == expected_test_identities
+    len(cases) == 3 and observed_test_identities == expected_test_identities
 )
 if not test_identity_matches:
     issues.append("unexpected_test_identity")
@@ -1065,16 +1304,24 @@ source_action_digest = (
 staged_action_digest = (
     staged_digests.get("action.py") if isinstance(staged_digests, dict) else None
 )
-inventory_entries = (
-    source_inventory.get("entries") if isinstance(source_inventory, dict) else None
-)
-inventory_digests = (
-    {entry.get("path"): entry.get("sha256") for entry in inventory_entries}
-    if isinstance(inventory_entries, list)
-    and all(isinstance(entry, dict) for entry in inventory_entries)
-    else None
-)
 expected_staged_paths = {"action.py", "package.yaml"}
+
+def exact_inventory_digests(inventory):
+    entries = inventory.get("entries") if isinstance(inventory, dict) else None
+    if not isinstance(entries, list) or len(entries) != len(expected_staged_paths):
+        return None
+    if not all(isinstance(entry, dict) for entry in entries):
+        return None
+    paths = [entry.get("path") for entry in entries]
+    if any(not isinstance(path, str) for path in paths):
+        return None
+    if len(set(paths)) != len(expected_staged_paths) or set(paths) != expected_staged_paths:
+        return None
+    return {entry["path"]: entry.get("sha256") for entry in entries}
+
+
+source_inventory_digests = exact_inventory_digests(source_inventory)
+staged_inventory_digests = exact_inventory_digests(staged_inventory)
 expected_result_fields = {
     "action_source_sha256",
     "action_source_path",
@@ -1100,7 +1347,8 @@ staged_receipt_valid = (
     and source_inventory == staged_inventory
     and isinstance(source_inventory, dict)
     and source_inventory.get("sourcePolicyVersion") == 1
-    and inventory_digests == source_digests
+    and source_inventory_digests == source_digests
+    and staged_inventory_digests == staged_digests
     and source_action_digest == staged_action_digest
     and isinstance(staged_result, dict)
     and set(staged_result) == expected_result_fields
@@ -1151,6 +1399,120 @@ if receipt.get("rcc_sha256") != expected_rcc_sha:
 if receipt.get("rcc_version") != expected_rcc_version:
     issues.append("receipt_rcc_version_mismatch")
 
+published_details = read_json(evidence_dir / "published-details-receipt.json")
+if not isinstance(published_details, dict):
+    published_details = {}
+publication = published_details.get("publication")
+publication = publication if isinstance(publication, dict) else {}
+details_source = published_details.get("source")
+details_source = details_source if isinstance(details_source, dict) else {}
+details_control = published_details.get("control")
+details_control = details_control if isinstance(details_control, dict) else {}
+details_rcc = published_details.get("rcc")
+details_rcc = details_rcc if isinstance(details_rcc, dict) else {}
+raw_json = publication.get("raw_json")
+raw_payload = None
+if isinstance(raw_json, str):
+    try:
+        raw_payload = json.loads(raw_json)
+    except json.JSONDecodeError:
+        raw_payload = None
+specification_digest = publication.get("specification_digest")
+artifact_digest = publication.get("artifact_digest")
+provider = publication.get("provider")
+publish_args = publication.get("args")
+provider_is_loopback = False
+if isinstance(provider, str):
+    try:
+        parsed_provider = urlsplit(provider)
+        provider_is_loopback = (
+            not any(
+                ord(character) < 32
+                or ord(character) == 127
+                or character.isspace()
+                for character in provider
+            )
+            and parsed_provider.scheme == "http"
+            and parsed_provider.hostname == "127.0.0.1"
+            and parsed_provider.port is not None
+            and parsed_provider.username is None
+            and parsed_provider.password is None
+            and not parsed_provider.query
+            and not parsed_provider.fragment
+        )
+    except ValueError:
+        provider_is_loopback = False
+publish_args_valid = (
+    isinstance(publish_args, list)
+    and len(publish_args) == 8
+    and publish_args[:4]
+    == [
+        str(rcc_binary),
+        "env",
+        "publish",
+        "--environment",
+    ]
+    and isinstance(publish_args[4], str)
+    and Path(publish_args[4]).is_absolute()
+    and Path(publish_args[4]).name == "package.yaml"
+    and Path(publish_args[4]).parent.name == "minimal-package"
+    and publish_args[5:] == ["--json", "--provider", provider]
+)
+identity_digests_valid = (
+    isinstance(specification_digest, str)
+    and re.fullmatch(r"sha256:[0-9a-f]{64}", specification_digest) is not None
+    and isinstance(artifact_digest, str)
+    and re.fullmatch(r"sha256:[0-9a-f]{64}", artifact_digest) is not None
+)
+raw_json_hash_matches = (
+    isinstance(raw_json, str)
+    and publication.get("raw_json_sha256")
+    == hashlib.sha256(raw_json.encode("utf-8")).hexdigest()
+)
+raw_pair_matches = (
+    isinstance(raw_payload, dict)
+    and raw_payload.get("specificationDigest") == specification_digest
+    and raw_payload.get("artifactDigest") == artifact_digest
+)
+raw_aliases_match = isinstance(raw_payload, dict)
+if isinstance(raw_payload, dict):
+    if (
+        "specification_digest" in raw_payload
+        and raw_payload.get("specification_digest") != specification_digest
+    ):
+        raw_aliases_match = False
+    for alias in ("artifact_digest", "digest"):
+        if alias in raw_payload and raw_payload[alias] != artifact_digest:
+            raw_aliases_match = False
+    for alias in ("artifact", "environment_artifact"):
+        if alias not in raw_payload:
+            continue
+        value = raw_payload[alias]
+        if isinstance(value, dict) and "digest" in value:
+            value = value["digest"]
+        if value != artifact_digest:
+            raw_aliases_match = False
+published_details_valid = (
+    published_details.get("schema_version") == 1
+    and published_details.get("status") == "PASS"
+    and details_source.get("commit") == candidate_sha
+    and details_source.get("tree") == candidate_tree
+    and details_control.get("commit") == control_sha
+    and details_control.get("tree") == control_tree
+    and details_rcc.get("version") == expected_rcc_version
+    and details_rcc.get("sha256") == expected_rcc_sha
+    and type(publication.get("invocation_count")) is int
+    and publication.get("invocation_count") == 1
+    and provider_is_loopback
+    and publish_args_valid
+    and identity_digests_valid
+    and raw_pair_matches
+    and raw_aliases_match
+    and raw_json_hash_matches
+)
+if not published_details_valid:
+    issues.append("published_details_receipt_missing_or_invalid")
+
 before = receipt.get("provider_ops_before_failure")
 after_failure = receipt.get("provider_ops_after_failure")
 after_recovery = receipt.get("provider_ops_after_recovery")
@@ -1163,6 +1525,16 @@ provider_ops_equal = (
 )
 if not provider_ops_equal:
     issues.append("provider_operations_changed_or_missing")
+allowed_provider_phases = {"publish", "acquire", "build"}
+provider_phases_valid = provider_ops_equal and all(
+    isinstance(operation, dict)
+    and type(operation.get("phase")) is str
+    and operation.get("phase") in allowed_provider_phases
+    for phase_group in (before, after_failure, after_recovery)
+    for operation in phase_group
+)
+if not provider_phases_valid:
+    issues.append("provider_operation_phase_missing_or_invalid")
 
 run_expectations = {
     "first_run": (2, "last-good"),
@@ -1193,6 +1565,80 @@ if runtime.get("forced_cleanup_returncode_observed") is not True:
 remaining = runtime.get("same_owned_descendants_remaining_after_stop")
 if not isinstance(remaining, list) or remaining:
     issues.append("owned_descendants_remain_or_unknown")
+
+def safe_phase_list(value):
+    if not isinstance(value, list):
+        return []
+    return [
+        operation["phase"]
+        if isinstance(operation, dict)
+        and type(operation.get("phase")) is str
+        and operation.get("phase") in {"publish", "acquire", "build"}
+        else "INVALID"
+        for operation in value
+    ]
+
+def safe_process_identities(value):
+    if not isinstance(value, list):
+        return []
+    identities = []
+    for process in value:
+        if not isinstance(process, dict):
+            continue
+        identity = {}
+        if type(process.get("pid")) is int and process["pid"] > 0:
+            identity["pid"] = process["pid"]
+        try:
+            valid_create_time = (
+                type(process.get("create_time")) in (int, float)
+                and math.isfinite(process["create_time"])
+                and process["create_time"] > 0
+            )
+        except OverflowError:
+            valid_create_time = False
+        if valid_create_time:
+            identity["create_time"] = process["create_time"]
+        identities.append(identity)
+    return identities
+
+safe_natural_status = runtime.get("natural_exit_status")
+if type(safe_natural_status) is not str or safe_natural_status not in {"PASS", "FAIL", "NOT_RUN", "UNKNOWN"}:
+    safe_natural_status = "UNKNOWN"
+safe_return_code = runtime.get("returncode_before_forced_cleanup")
+if type(safe_return_code) is not int:
+    safe_return_code = None
+safe_runtime = {
+    "natural_exit_status": safe_natural_status,
+    "returncode_before_forced_cleanup": safe_return_code,
+    "shutdown_request_succeeded": runtime.get("shutdown_request_succeeded")
+    if type(runtime.get("shutdown_request_succeeded")) is bool
+    else None,
+    "forced_stop_used": runtime.get("forced_stop_used")
+    if type(runtime.get("forced_stop_used")) is bool
+    else None,
+    "forced_cleanup_returncode_observed": runtime.get("forced_cleanup_returncode_observed")
+    if type(runtime.get("forced_cleanup_returncode_observed")) is bool
+    else None,
+}
+if type(runtime.get("pid")) is int and runtime["pid"] > 0:
+    safe_runtime["pid"] = runtime["pid"]
+safe_module_hashes = {
+    name: file_hashes[name]
+    for name in ("action_package_handler", "actions_import", "runtime_adapter")
+    if file_hashes.get(name) is not None
+}
+safe_run_statuses = {}
+for run_name in ("first_run", "second_run", "recovered_run"):
+    run_value = receipt.get(run_name)
+    run_status = run_value.get("status") if isinstance(run_value, dict) else None
+    safe_run_statuses[run_name] = run_status if type(run_status) is int else "INVALID"
+safe_receipt_status = receipt.get("status")
+if type(safe_receipt_status) is not str or safe_receipt_status not in {"PASS", "FAIL"}:
+    safe_receipt_status = "NOT_RECORDED"
+safe_rcc_version = receipt.get("rcc_version")
+if safe_rcc_version != expected_rcc_version:
+    safe_rcc_version = "UNKNOWN"
+safe_rcc_sha = actual_rcc_sha if actual_rcc_sha == expected_rcc_sha else None
 
 summary = {
     "schema_version": 1,
@@ -1225,19 +1671,28 @@ summary = {
         "junit_counts_match_testcases": test_counts == actual_case_counts,
         "expected_test_identity_matches": test_identity_matches,
         "failed_case_names": failed_case_names,
-        "receipt_status": receipt.get("status", "NOT_RECORDED"),
+        "receipt_status": safe_receipt_status,
         "provider_operations_unchanged": provider_ops_equal,
         "provider_operation_count": len(before) if isinstance(before, list) else 0,
         "run_results_match": run_results_match,
-        "natural_exit_status": runtime.get("natural_exit_status"),
+        "natural_exit_status": safe_natural_status,
         "natural_return_code_before_cleanup": natural_return_code if type(natural_return_code) is int and natural_return_code in (0, 1) else None,
-        "forced_stop_used": runtime.get("forced_stop_used"),
+        "forced_stop_used": safe_runtime["forced_stop_used"],
         "forced_cleanup_returncode_observed": runtime.get("forced_cleanup_returncode_observed") is True,
         "remaining_owned_descendant_count": len(remaining) if isinstance(remaining, list) else None,
-        "staged_consumer_receipt_status": staged_receipt.get("status", "NOT_RECORDED"),
+        "staged_consumer_receipt_status": staged_receipt.get("status") if type(staged_receipt.get("status")) is str and staged_receipt.get("status") in {"PASS", "FAIL"} else "NOT_RECORDED",
         "staged_consumer_receipt_valid": staged_receipt_valid,
         "staged_action_sha256_matches": staged_action_digest == (staged_result.get("action_source_sha256") if isinstance(staged_result, dict) else None),
         "managed_worker_origins_confirmed": managed_worker_origins,
+        "published_details_receipt_status": published_details.get("status") if type(published_details.get("status")) is str and published_details.get("status") in {"PASS", "FAIL"} else "NOT_RECORDED",
+        "published_details_receipt_valid": published_details_valid,
+    },
+    "published_details": {
+        "specification_digest": specification_digest if identity_digests_valid else None,
+        "artifact_digest": artifact_digest if identity_digests_valid else None,
+        "raw_json_sha256": publication.get("raw_json_sha256") if raw_json_hash_matches else None,
+        "single_invocation": type(publication.get("invocation_count")) is int and publication.get("invocation_count") == 1,
+        "provider_is_loopback": provider_is_loopback,
     },
 }
 (evidence_dir / "acceptance-summary.json").write_text(
@@ -1253,12 +1708,41 @@ lines = [
     f"runner_libc={worker_libc_name or 'UNKNOWN'} {worker_libc_version or 'UNKNOWN'}",
     f"rcc_version={summary['rcc']['version']}",
     f"rcc_sha256={actual_rcc_sha}",
+    f"published_details_receipt_valid={published_details_valid}",
+    f"published_specification_digest={specification_digest if identity_digests_valid else 'INVALID'}",
+    f"published_artifact_digest={artifact_digest if identity_digests_valid else 'INVALID'}",
     f"pytest_exit_code={test_exit_code}",
-    f"receipt_status={receipt.get('status', 'NOT_RECORDED')}",
-    f"natural_exit_status={runtime.get('natural_exit_status')}",
+    f"receipt_status={safe_receipt_status}",
+    f"natural_exit_status={safe_natural_status}",
 ]
 (evidence_dir / "acceptance-summary.log").write_text("\n".join(lines) + "\n", encoding="utf-8")
 print("\n".join(lines))
+before_ops = receipt.get("provider_ops_before_failure", [])
+after_ops = receipt.get("provider_ops_after_recovery", [])
+
+lifecycle_summary = {
+    "schema_version": 1,
+    "status": safe_receipt_status,
+    "source": {
+        "commit": candidate_sha,
+        "tree": candidate_tree,
+        "runtime_module_sha256": safe_module_hashes,
+    },
+    "rcc": {"version": safe_rcc_version, "sha256": safe_rcc_sha},
+    "provider_operation_phases_before_failure": safe_phase_list(before_ops),
+    "provider_operation_phases_after_recovery": safe_phase_list(after_ops),
+    "run_statuses": safe_run_statuses,
+    "action_server_process_exit": safe_runtime,
+    "owned_descendants_before_stop": safe_process_identities(
+        runtime.get("owned_descendants_before_stop")
+    ),
+    "same_owned_descendants_remaining_after_stop": safe_process_identities(
+        runtime.get("same_owned_descendants_remaining_after_stop")
+    ),
+}
+(evidence_dir / "lifecycle-summary.json").write_text(
+    json.dumps(lifecycle_summary, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+)
 sys.exit(0 if not issues else 1)
 """
 
@@ -1268,8 +1752,8 @@ class ActionServerRccProviderRollback(BaseWorkflow):
     target = "actions_runtime_rcc_provider_rollback.yml"
     project_name = "action_server"
     rcc_sha256 = "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
-    candidate_sha = "d376399f497fb98f47062e493219e063db8f08e1"
-    candidate_tree = "fb04c136e5e1a7ce709649b13cf895d84ac93c1a"
+    candidate_sha = "d642a3ac24f8da85101538bdfdf59b509fd74bfb"
+    candidate_tree = "fdf2823ebcdbd938b9047fd452c9fb13eb4be4e4"
 
     def __init__(self):
         super().__init__()
@@ -1292,7 +1776,10 @@ class ActionServerRccProviderRollback(BaseWorkflow):
         return {
             "on": {
                 "push": {
-                    "branches": ["test/rcc-provider-rollback-hosted-20261010"],
+                    "branches": [
+                        "test/rcc-provider-rollback-hosted-20261010",
+                        "fix/rcc-published-artifact-details-20261010",
+                    ],
                     "paths": paths[:],
                 },
             }
@@ -1354,10 +1841,13 @@ actual_tree=$(git -C "$GITHUB_WORKSPACE/candidate" rev-parse HEAD^{tree})
 test "$actual_tree" = "$CANDIDATE_TREE"
 control=$(git -C "$GITHUB_WORKSPACE/control" rev-parse HEAD)
 test "$control" = "$CONTROL_SHA"
+control_tree=$(git -C "$GITHUB_WORKSPACE/control" rev-parse HEAD^{tree})
 printf 'RCC_ROLLBACK_CANDIDATE_SHA=%s\\n' "$actual" >> "$GITHUB_ENV"
 printf 'RCC_ROLLBACK_CANDIDATE_TREE=%s\\n' "$actual_tree" >> "$GITHUB_ENV"
 printf 'RCC_ROLLBACK_CONTROL_SHA=%s\\n' "$control" >> "$GITHUB_ENV"
+printf 'RCC_ROLLBACK_CONTROL_TREE=%s\\n' "$control_tree" >> "$GITHUB_ENV"
 printf 'control_sha=%s\\n' "$control"
+printf 'control_tree=%s\\n' "$control_tree"
 printf 'candidate_sha=%s\\n' "$actual"
 printf 'candidate_tree=%s\\n' "$actual_tree"
 """,
@@ -1448,7 +1938,7 @@ sha256sum "$runtime" "$default"
             {
                 "name": "Prepare isolated acceptance evidence",
                 "shell": "bash",
-                "run": f'mkdir -p "{evidence_dir}" "$RUNNER_TEMP/rcc-provider-rollback-tmp"',
+                "run": f'mkdir -m 700 -p "{evidence_dir}" "$RUNNER_TEMP/rcc-provider-rollback-tmp" "$RUNNER_TEMP/rcc-provider-rollback-home"',
             },
             {
                 "name": "Run current-candidate RCC provider rollback acceptance",
@@ -1457,6 +1947,9 @@ sha256sum "$runtime" "$default"
                     "ACTIONS_REAL_RCC_ARTIFACT_TEST": "1",
                     "ACTIONS_RUNTIME_LIFECYCLE_RECEIPT": f"{evidence_dir}/lifecycle-receipt.json",
                     "ACTIONS_RUNTIME_STAGED_CONSUMER_RECEIPT": f"{evidence_dir}/staged-consumer-receipt.json",
+                    "ACTIONS_RUNTIME_PUBLISHED_DETAILS_RECEIPT": f"{evidence_dir}/published-details-receipt.json",
+                    "ACTIONS_HOME": "${{ runner.temp }}/rcc-provider-rollback-home",
+                    "ROBOCORP_HOME": "${{ runner.temp }}/rcc-provider-rollback-home",
                     "PYTHONPATH": "${{ github.workspace }}/candidate/action_server/src:${{ github.workspace }}/candidate/actions/src",
                     "TMPDIR": "${{ runner.temp }}/rcc-provider-rollback-tmp",
                 },
@@ -1469,6 +1962,7 @@ uv run --no-project --python 3.12 poetry run pytest -n 0 -vv -rA \\
   -m 'integration_test and real_rcc' \\
   tests/action_server_tests/test_current_candidate_import_rollback.py::test_current_candidate_failed_reload_keeps_last_good_action_usable \\
   tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime \\
+  tests/action_server_tests/test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair \\
   --junitxml="{junit_path}" 2>&1 | tee "{raw_log}"
 status=${{PIPESTATUS[0]}}
 echo "RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE=$status" >> "$GITHUB_ENV"
@@ -1487,7 +1981,9 @@ exit "$status"
                 "run": """python - <<'PY'
 import hashlib
 import json
+import math
 import os
+import re
 import subprocess
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -1539,7 +2035,15 @@ if not isinstance(runtime, dict):
 source = receipt.get("source", {})
 if not isinstance(source, dict):
     source = {}
-module_hashes = source.get("runtime_module_sha256", {})
+module_paths = {
+    "action_package_handler": "action_server/src/actions/server/_action_package_handler.py",
+    "actions_import": "action_server/src/actions/server/_actions_import.py",
+    "runtime_adapter": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+}
+module_hashes = {
+    name: sha256(candidate / path) for name, path in module_paths.items()
+}
+module_hashes = {name: digest for name, digest in module_hashes.items() if digest is not None}
 before = receipt.get("provider_ops_before_failure", [])
 after = receipt.get("provider_ops_after_recovery", [])
 before = before if isinstance(before, list) else []
@@ -1575,18 +2079,19 @@ summary = {
     "test": {
         "exit_code": os.environ.get("RCC_PROVIDER_ROLLBACK_TEST_EXIT_CODE"),
         "junit": test_cases,
-        "receipt_status": receipt.get("status", "NOT_RECORDED"),
-        "failure_type": receipt.get("failure_type"),
+        "receipt_status": receipt.get("status") if type(receipt.get("status")) is str and receipt.get("status") in {"PASS", "FAIL"} else "NOT_RECORDED",
         "receipt_read_error": receipt_read_error,
-        "provider_operation_phases_before_failure": [op.get("phase") for op in before if isinstance(op, dict)],
-        "provider_operation_phases_after_recovery": [op.get("phase") for op in after if isinstance(op, dict)],
+        "provider_operation_phases_before_failure": [op["phase"] if isinstance(op, dict) and type(op.get("phase")) is str and op.get("phase") in {"publish", "acquire", "build"} else "INVALID" for op in before],
+        "provider_operation_phases_after_recovery": [op["phase"] if isinstance(op, dict) and type(op.get("phase")) is str and op.get("phase") in {"publish", "acquire", "build"} else "INVALID" for op in after],
         "run_statuses": [
             (receipt.get(name) or {}).get("status")
+            if type((receipt.get(name) or {}).get("status")) is int
+            else "INVALID"
             for name in ("first_run", "second_run", "recovered_run")
         ],
-        "natural_exit_status": runtime.get("natural_exit_status"),
-        "returncode_before_forced_cleanup": runtime.get("returncode_before_forced_cleanup"),
-        "forced_stop_used": runtime.get("forced_stop_used"),
+        "natural_exit_status": runtime.get("natural_exit_status") if type(runtime.get("natural_exit_status")) is str and runtime.get("natural_exit_status") in {"PASS", "FAIL", "NOT_RUN", "UNKNOWN"} else "UNKNOWN",
+        "returncode_before_forced_cleanup": runtime.get("returncode_before_forced_cleanup") if type(runtime.get("returncode_before_forced_cleanup")) is int else None,
+        "forced_stop_used": runtime.get("forced_stop_used") if type(runtime.get("forced_stop_used")) is bool else None,
         "same_owned_descendants_remaining_after_stop": len(runtime.get("same_owned_descendants_remaining_after_stop", [])),
     },
 }
@@ -1630,7 +2135,7 @@ PY
                 "uses": "actions/upload-artifact@v4",
                 "with": {
                     "name": "rcc-provider-rollback-${{ github.run_id }}-${{ github.run_attempt }}",
-                    "path": f"{evidence_dir}/acceptance-summary.*\n{evidence_dir}/staged-consumer-receipt.json",
+                    "path": f"{evidence_dir}/acceptance-summary.*\n{evidence_dir}/staged-consumer-receipt.json\n{evidence_dir}/published-details-receipt.json\n{evidence_dir}/lifecycle-summary.json\n{evidence_dir}/lifecycle-receipt.json\n{junit_path}",
                     "if-no-files-found": "warn",
                     "retention-days": 14,
                 },

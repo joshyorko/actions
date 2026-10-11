@@ -55,9 +55,15 @@ is distinct from Playwright's pinned browser.
 
 `action_server/tests/action_server_tests/test_canvas_query_results_fixture.py`
 checks this exact JSON sample against the draft schema and verifies Python JSON
-round-trip compatibility, including malformed fixture rejection. It treats the
-artifact handle as inert serialized data; it does not prove a Runtime resolver,
-action binding, or caller authorization.
+round-trip compatibility, including malformed fixture rejection. With the
+prepared frontend Node/Vitest workspace, it sends compact Python JSON through
+the TypeScript test, validates and serializes it there, then validates the
+returned JSON in Python and checks exact serialized-byte preservation. Local
+runs without Node or Vitest skip this bridge; a skip is NOT RUN and does not
+prove the cross-language round trip. The community frontend PR workflow sets
+`ACTIONS_CANVAS_REQUIRE_ROUNDTRIP=1` and fails if the bridge is unavailable. It
+treats the artifact handle as inert serialized data; it does not prove a Runtime
+resolver, action binding, or caller authorization.
 
 The renderer drops a pending artifact-status result when a query is edited or
 submitted for a new result and when the view unmounts. Async status success,

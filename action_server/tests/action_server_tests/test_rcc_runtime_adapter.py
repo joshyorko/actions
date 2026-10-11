@@ -31,6 +31,117 @@ def test_artifact_digest_parser_accepts_only_exact_identity():
             parse_artifact_digest(payload)
 
 
+def test_publish_artifact_details_preserves_one_pinned_rcc_payload_and_provider():
+    from actions.server._rcc_runtime_adapter import (
+        RccPublishedArtifactDetails,
+        publish_artifact_details,
+    )
+
+    specification_digest = "sha256:" + "a" * 64
+    artifact_digest = "sha256:" + "b" * 64
+    provider = "https://cache.example:8134/root"
+    payload = {
+        "artifactDigest": artifact_digest,
+        "specificationDigest": specification_digest,
+        "legacyBlueprintKey": "fixture-blueprint",
+        "objectCount": 1,
+        "uploadedBytes": 12,
+        "reusedBytes": 34,
+    }
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        return 0, json.dumps(payload), ""
+
+    details = publish_artifact_details(
+        Path("/package/package.yaml"),
+        Path("/opt/rcc"),
+        provider=provider,
+        runner=runner,
+    )
+
+    assert details == RccPublishedArtifactDetails(
+        specification_digest=specification_digest,
+        artifact_digest=artifact_digest,
+    )
+    assert calls == [
+        (
+            str(Path("/opt/rcc")),
+            "env",
+            "publish",
+            "--environment",
+            str(Path("/package/package.yaml")),
+            "--json",
+            "--provider",
+            provider,
+        )
+    ]
+
+
+@pytest.mark.parametrize(
+    "updates",
+    [
+        {"specificationDigest": None},
+        {"specificationDigest": "sha256:" + "a" * 63},
+        {"artifactDigest": None},
+        {"artifactDigest": "sha256:" + "b" * 63},
+        {"artifact_digest": "not-a-digest"},
+        {"digest": "sha256:" + "c" * 64},
+        {"artifact": {"digest": "sha256:" + "c" * 64}},
+        {"specification_digest": "sha256:" + "c" * 64},
+    ],
+)
+def test_publish_artifact_details_rejects_missing_malformed_or_conflicting_identity(
+    updates,
+):
+    from actions.server._rcc_runtime_adapter import (
+        RccRuntimeError,
+        publish_artifact_details,
+    )
+
+    payload = {
+        "artifactDigest": "sha256:" + "a" * 64,
+        "specificationDigest": "sha256:" + "b" * 64,
+        **updates,
+    }
+
+    with pytest.raises(RccRuntimeError, match="publish"):
+        publish_artifact_details(
+            Path("/package/package.yaml"),
+            Path("/opt/rcc"),
+            runner=lambda *args: (0, json.dumps(payload), ""),
+        )
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {"artifact": "sha256:" + "a" * 64},
+        {"artifact_digest": "sha256:" + "a" * 64},
+        {"artifactDigest": "sha256:" + "a" * 64},
+        {"digest": "sha256:" + "a" * 64},
+        {"artifact": {"digest": "sha256:" + "a" * 64}},
+        {"environment_artifact": {"digest": "sha256:" + "a" * 64}},
+    ],
+)
+def test_legacy_publish_artifact_keeps_artifact_only_payload_compatibility(payload):
+    from actions.server._rcc_runtime_adapter import publish_artifact
+
+    calls = []
+
+    def runner(*args):
+        calls.append(args)
+        return 0, json.dumps(payload), ""
+
+    assert (
+        publish_artifact(Path("/package/package.yaml"), Path("/opt/rcc"), runner=runner)
+        == "sha256:" + "a" * 64
+    )
+    assert len(calls) == 1
+    assert calls[0][1:3] == ("env", "publish")
+
+
 def test_runtime_descriptor_has_no_activation_path_authority():
     from actions.server._rcc_runtime_adapter import RccRuntimeDescriptor
 
@@ -1313,18 +1424,96 @@ def test_pending_retirement_keeps_capacity_until_retry_completes(monkeypatch):
     assert not pool._processes_running_semaphore.acquire(blocking=False)
 
 
-def test_retirement_lock_wait_uses_caller_deadline():
+@pytest.mark.parametrize(
+    ("now", "deadline", "expected_timeout"),
+    [
+        (10.25, 10.5, 0.25),  # elapsed time is subtracted from the caller's budget
+        (10.5, 10.0, 0.0),  # an expired deadline never becomes an unbounded wait
+    ],
+)
+def test_retirement_lock_wait_uses_remaining_caller_budget(
+    monkeypatch, now, deadline, expected_timeout
+):
+    from actions.server._actions_process_pool import ProcessHandle
+
+    clock = {"now": now}
+    monkeypatch.setattr(time, "monotonic", lambda: clock["now"])
+
+    class RecordingLock:
+        def __init__(self):
+            self.timeouts = []
+            self.release_calls = 0
+
+        def acquire(self, *, timeout):
+            self.timeouts.append(timeout)
+            return False
+
+        def release(self):
+            self.release_calls += 1
+
+    handle = ProcessHandle.__new__(ProcessHandle)
+    lock = RecordingLock()
+    handle._retirement_lock = lock
+    handle._retire_locked = lambda unused_deadline: pytest.fail(
+        "retirement critical section must not run when lock acquisition fails"
+    )
+
+    result = handle.retire(deadline)
+
+    assert result.state == "pending"
+    assert result.reason == "retirement lock deadline expired"
+    assert lock.timeouts == [expected_timeout]
+    assert lock.release_calls == 0
+
+
+def test_retirement_lock_wait_does_not_turn_scheduler_delay_into_failure(monkeypatch):
+    from actions.server._actions_process_pool import ProcessHandle
+
+    clock = {"now": 20.0}
+    monkeypatch.setattr(time, "monotonic", lambda: clock["now"])
+
+    class SchedulerDelayedLock:
+        def __init__(self):
+            self.timeouts = []
+            self.release_calls = 0
+
+        def acquire(self, *, timeout):
+            self.timeouts.append(timeout)
+            clock["now"] += 0.30
+            return False
+
+        def release(self):
+            self.release_calls += 1
+
+    handle = ProcessHandle.__new__(ProcessHandle)
+    lock = SchedulerDelayedLock()
+    handle._retirement_lock = lock
+    handle._retire_locked = lambda unused_deadline: pytest.fail(
+        "retirement critical section must not run when lock acquisition fails"
+    )
+
+    result = handle.retire(20.03)
+
+    assert clock["now"] - 20.0 >= 0.25  # old wall-clock assertion would fail here
+    assert result.state == "pending"
+    assert result.reason == "retirement lock deadline expired"
+    assert lock.timeouts == [pytest.approx(0.03)]
+    assert lock.release_calls == 0
+
+
+def test_retirement_lock_wait_smoke_when_real_lock_is_held():
     from actions.server._actions_process_pool import ProcessHandle
 
     handle = ProcessHandle.__new__(ProcessHandle)
     handle._retirement_lock = threading.Lock()
     handle._retirement_lock.acquire()
     try:
-        started = time.monotonic()
-        assert not handle.retire(started + 0.03)
-        assert time.monotonic() - started < 0.25
+        result = handle.retire(time.monotonic() + 0.03)
     finally:
         handle._retirement_lock.release()
+
+    assert result.state == "pending"
+    assert result.reason == "retirement lock deadline expired"
 
 
 def test_active_cancellation_retirement_skips_exit_send(monkeypatch):

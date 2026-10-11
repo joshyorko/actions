@@ -1,0 +1,25 @@
+{
+  "status": "GO_CURRENT_TUPLE_CONTROL",
+  "review_base": "88c97efb",
+  "measurement_receipt_sha256": "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff",
+  "pin_checks": {
+    "frozen": 17,
+    "wrapper": 17,
+    "harness": true,
+    "archive_validation_implementations_unchanged": true,
+    "generator_and_generated_workflow_exact_identical_tuple_substitutions": true,
+    "selector_junit_plugin_unchanged": true,
+    "copied_measurement_evidence_byte_identical": true
+  },
+  "changed_file_sha256": {
+    ".github/workflows/_gen_workflows.py": "2b94af0fe74170000ae43af940b0535d3914f084f9e77d4000b01093f339fa6c",
+    ".github/workflows/actions_runtime_frozen_catalog_rollback.yml": "e7fc531f7a4c532c30dcc88c3df231332303f19c87aaec36882988f74096b235",
+    "action_server/docs/DEVELOPMENT.md": "f3174583bd9df0b497ecddd70bae70b94279d8392a14946a009b7a93f6bf1e83",
+    "action_server/scripts/verify_frozen_catalog_artifact.py": "1013dfde2ea39342ed26edd235438288b964cfedd70feb5ac14ceaa7f7bb322a",
+    "action_server/scripts/verify_frozen_catalog_harness.py": "7a855e00556dec92f964c26cbe227ce4c1edac28e8c010e336cd4db94336a89f",
+    "action_server/scripts/verify_frozen_catalog_wrapper_artifact.py": "58b8a71216ac2f42ecba3929a4eb4189148a04a20cb1b4cb9f9f1abc11ae75b9",
+    "action_server/tests/contract_tests/test_verify_frozen_catalog_harness.py": "7c63a6a0e55221d95954cb7593afffb068d0d586f6681c6d0cb183d1fe72e2b8",
+    "docs/skills/repository-operations.md": "9a86707221963e997124bf4f84f210cee6f1e3739f39e0eccf3cf19dd32bbd03"
+  },
+  "execution_claim": "NOT RUN; RCC guard replay and static checks do not execute native cases"
+}
