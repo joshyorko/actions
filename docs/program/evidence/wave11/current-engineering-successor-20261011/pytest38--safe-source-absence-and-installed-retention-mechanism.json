@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "decision": "HOLD_SOURCE_ROOT_UNAVAILABLE",
+  "observed_at_UTC": "2026-10-11T16:37:39.861231+00:00",
+  "root": "/tmp/pytest-of-agent/pytest-38",
+  "root_exists": false,
+  "parent_real_directory": true,
+  "observed_current_numbered_roots": [
+    39,
+    40,
+    41
+  ],
+  "default_control_numbered_root": 39,
+  "installed_source_bindings": [
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/site-packages/_pytest/tmpdir.py",
+      "bytes": 11375,
+      "sha256": "6e8e34aff829c52ec0741fc100da52821fdf7a31e25da196ac1c47a5ac7dc2dc",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/site-packages/_pytest/pathlib.py",
+      "bytes": 36617,
+      "sha256": "a275e830ca3871ba7e0d1d375d0b918a6b889bf0eb1cd83746e8f03f867bb627",
+      "mode": "0o600"
+    }
+  ],
+  "installed_defaults": {
+    "tmp_path_retention_count": 3,
+    "tmp_path_retention_policy": "all"
+  },
+  "source_lines": {
+    "tmpdir_defaults": [
+      227,
+      233
+    ],
+    "tmpdir_default_directory": [
+      184,
+      187
+    ],
+    "pathlib_candidate_threshold": [
+      344,
+      347,
+      352
+    ],
+    "pathlib_exit_registration": [
+      398,
+      403
+    ]
+  },
+  "mechanism": "Default numbered-root cleanup is registered at exit; candidate number <= max_existing-keep. With max_existing41 and keep3,38 is eligible. Lock/deletion logic must also admit it.",
+  "actual_default39_command": [
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "/workspace/engineering/pytest38-completed-preservation-private-source/test_pytest38_archiver_controls.py"
+  ],
+  "actual_default39_log": {
+    "path": "/workspace/engineering/pytest38-completed-preservation-private-source/controls-serial-successor.private.log",
+    "bytes": 10560,
+    "sha256": "8339b43788aeaf74caeff90ec036942094dec6c40ad3670e1f46efa3f6fd698e",
+    "mode": "0o600"
+  },
+  "effective_settings_for40_41": "UNAVAILABLE",
+  "responsible_cleanup_invocation": "UNKNOWN",
+  "original_root_bytes": "UNAVAILABLE_NO_ARCHIVE_PROOF_NO_RECONSTRUCTION",
+  "archiver_operation_parent_or_remove_execution": "NOT_RUN",
+  "exact_preexecution_source_guard_failed_before_archive_destination_created": true,
+  "original_inventory_retained": {
+    "path": "/workspace/engineering/pytest38-completed-preservation-readonly-proposal/private-complete-two-stable-pytest38-body-metadata-inventory.json",
+    "bytes": 5178078,
+    "sha256": "921cddf1d3d18a753311e80ffec100c6d173986e5e5b9f5111c9fcdf5f20bcda",
+    "mode": "0o600"
+  }
+}

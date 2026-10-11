@@ -1,0 +1,350 @@
+{
+  "binding_count": 32,
+  "complete_union": {
+    "leaves": 1424,
+    "no_deletions": true,
+    "no_novel_non_doc_blobs": true,
+    "proof": {
+      "bytes": 2653,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/committed-current-584a-typed-ordinary-union-source-proof.json",
+      "sha256": "1ee8748e867525731a2e434bdd2037c166b8251f197b32b92e1360a600155273"
+    }
+  },
+  "current_capacity": {
+    "full_floor_bytes": 1288490188,
+    "full_status": "HOLD_DISTINCT_ROOT_CAPACITY_AND_SERIALIZATION",
+    "workspace_available_bytes": 1127575552
+  },
+  "documentation_improvement": {
+    "both_parent_blocks_evidence": {
+      "bytes": 2631,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/verified-both-parent-canonical-guide-block-preservation.json",
+      "sha256": "4e98a6f8bdec5a8b61694d153e64e77a231d873b2f5bdbcb51fa0a374c30b808"
+    },
+    "canonical_files_changed_or_imported": [
+      "docs/skills/repository-operations.md",
+      "docs/skills/provenance-observability.md"
+    ],
+    "durable_learning": "Reader acquisition ownership and active-stream grant revocation are distinct; output event route/producer revision semantics require current transport controls while all original Canvas/native scopes remain bounded.",
+    "evidence": "1424 complete ordinary union, both parent canonical insertion/replacement blocks verified, originalCanvas3 bytes+all39wholeworkflow bytes, fresh265 source cases including current run-output transport.",
+    "exact_imported_accepted_delta": {
+      "bytes": 5462,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/exact-imported-e3-canonical-guide-delta.patch",
+      "sha256": "0cf87ed34224683d86326baaf62802c41cc545252ecc5683faf8b7dc9b9b0c02"
+    },
+    "remaining_uncertainty": "CurrentSOURCEFULL/sourceCI and actual native/browser/private/backend/full99/release qualification remain held",
+    "stale_or_ambiguous_guidance_removed": "Old40ad source/fullpreexec/actual historical receipts are not current584a execution; production275 and selected5 bindings are separately typed. No cosmetic child."
+  },
+  "frozen_bindings": [
+    {
+      "bytes": 13486,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/Doctor-current-e3c-original.private.log",
+      "sha256": "b7eb5d04fe97450a3b8bf96042d35dfccc96a96492ae32ea68f78115d522ad4a"
+    },
+    {
+      "bytes": 2653,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/committed-current-584a-typed-ordinary-union-source-proof.json",
+      "sha256": "1ee8748e867525731a2e434bdd2037c166b8251f197b32b92e1360a600155273"
+    },
+    {
+      "bytes": 4073,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/current-generator8-allYAML30-roundtrip.json",
+      "sha256": "56e895503a993568cf0235122d76a956ee16ef0b933036004286e68038e5fcd8"
+    },
+    {
+      "bytes": 51316,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/current-scoped-source-junit.xml",
+      "sha256": "2752164c309929d8c224cd6624d398ea3332f0510f4f9271c08150578c8f1680"
+    },
+    {
+      "bytes": 9440,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/current-source-LIGHT-original.private.log",
+      "sha256": "821aa11e92426d90b5744667dc2fab5118086e8e8454a7461ec47fe47c43bab0"
+    },
+    {
+      "bytes": 58,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/current-source-LIGHT-terminal.json",
+      "sha256": "fe068aad201f3a2002f536f96190e9b3658ff1be6c97314b053fa626e1d1d097"
+    },
+    {
+      "bytes": 5462,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/exact-imported-e3-canonical-guide-delta.patch",
+      "sha256": "0cf87ed34224683d86326baaf62802c41cc545252ecc5683faf8b7dc9b9b0c02"
+    },
+    {
+      "bytes": 6175,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/freeze_current_source_LIGHT.py",
+      "sha256": "76fffa03d275499d4f375e4a6aa731cac90dfefa20441ffdd10bfe478b84592d"
+    },
+    {
+      "bytes": 69,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/managed-activation19-before-LIGHT.private.log",
+      "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48"
+    },
+    {
+      "bytes": 4885,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/own-current30-input-and-five-concrete-origins-Bootstrap-reuse.json",
+      "sha256": "457289d536c3db04d4b614e4b3ae7188afc63475abeee7e1ec64b5f2387643b0"
+    },
+    {
+      "bytes": 283,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/own-origin-action_server.json",
+      "sha256": "96eb60a559a313d478c17f52e8cc42e71588b1ae33089ba1ad3c77650a967b26"
+    },
+    {
+      "bytes": 264,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/own-origin-actions-http-helper.json",
+      "sha256": "0866a5c2bc030a15822b06983f3fb43b1400b20f4add57537aaec59da1b8c4d1"
+    },
+    {
+      "bytes": 218,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/own-origin-actions.json",
+      "sha256": "6b00bd4e70a69f4484a9d44c3447039354a9906fef5be41feff2fb284a73a549"
+    },
+    {
+      "bytes": 240,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/own-origin-devutils.json",
+      "sha256": "f9c9bb61ea486fd667ff37367ef8656aa374af2f4e3484569f4d4cfab28125cd"
+    },
+    {
+      "bytes": 249,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/own-origin-work-items.json",
+      "sha256": "24808585e8fef1faae9b7130b4656ee211c50597fe0e0e3d2adbb8b058f37296"
+    },
+    {
+      "bytes": 378541,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/private-current-584a-complete-source-body-mode-inventory.json",
+      "sha256": "53815576f3cd58f4f4062e0076bf19c418e3364652291430b62b7356bd3b7a2d"
+    },
+    {
+      "bytes": 5285,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/prove_current_typed_union.py",
+      "sha256": "3f18ded41519e6c6dfca7cb9468ccd91cdc57ac1cfeb0e10aea28e09b6dcad65"
+    },
+    {
+      "bytes": 12822,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/raw18-frozen50-Node-frontend-retained-postLIGHT.json",
+      "sha256": "281b25a2e052e88f8a2a90d37b2a3ee2619762d4bbb7d1df79b3ae88b8fafc85"
+    },
+    {
+      "bytes": 57,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/readonly-retention-terminal.json",
+      "sha256": "d2321ce8e8d54659b3ee05c55571fdfebda2ed3bca30dc4cf9baffd46c7eb154"
+    },
+    {
+      "bytes": 4751,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/retained-native-helper-browser-and-V5-proof-postLIGHT.json",
+      "sha256": "ac36efa52d343f893d63df90c8d72e9afe79a18317facb94deb3bafbdcfb586f"
+    },
+    {
+      "bytes": 63,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/retained-native-helper-browser-original.private.log",
+      "sha256": "1a8dbe4243e393a542bf934aace44feb9aaa281a0c63a191f58b7bcf8c1eded8"
+    },
+    {
+      "bytes": 221,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/retained-raw18-frozen50-original.private.log",
+      "sha256": "6aa79d9cc2f60987881be1dcbb936fa63d1781ccf4b4acd19b95b28eeab4571d"
+    },
+    {
+      "bytes": 4166,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/run_current_source_LIGHT.py",
+      "sha256": "6d38cace582aeca8cb750056091b9dcc6ba921f22fb946818fc245d1e36db52d"
+    },
+    {
+      "bytes": 98363,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/typed-current-production-and-five-selector-inventory.json",
+      "sha256": "a904ed62b148af01662b162ef5834c39b14cbebf2f76096c46c04720fb1c524d"
+    },
+    {
+      "bytes": 2631,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/verified-both-parent-canonical-guide-block-preservation.json",
+      "sha256": "4e98a6f8bdec5a8b61694d153e64e77a231d873b2f5bdbcb51fa0a374c30b808"
+    },
+    {
+      "bytes": 3630,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/verify-retained-actual-inputs-postLIGHT.py",
+      "sha256": "cdd1f970fb7bbe99e2c8e6b40a9e988590c24713e3d04e9f231591a9d0acba22"
+    },
+    {
+      "bytes": 2534,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-current-e3c-source-LIGHT/verify-retained-raw-and-driver-postLIGHT.py",
+      "sha256": "d5cc84789ca6054119b39d0067504a8606cc278206b3d52667007b82014d148b"
+    },
+    {
+      "bytes": 90785,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-actual309-refresh/OWNERFINAL-current40ad-ordinary-a0d-source-LIGHT-full-and-actual-HOLD.json",
+      "sha256": "2d2771a4f0d44b0021c0233ae367b3957ebe4639e62396518229853fd5b5ec41"
+    },
+    {
+      "bytes": 6428,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr305-actual309-refresh/own-Bootstrap-reuse-inputs-and-origins.json",
+      "sha256": "75db58a41f5b65cb2bf6a801ec43ddf961e7913c2a951bf875abadf1066be1f3"
+    },
+    {
+      "bytes": 634107,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+      "sha256": "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 74274,
+      "mode": "0o444",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    }
+  ],
+  "gates": {
+    "Bootstrap": "EXACT_30_OWN_INPUTS_FIVE_CONCRETE_PREFIX_AND_ORIGINS_REUSE_NO_INSTALL",
+    "Doctor": "PASS",
+    "Toolkit": {
+      "pass": 96
+    },
+    "all_tracked_YAML_parsed_preserved": 30,
+    "configured_lint": "PASS_FULL_RUFF_FORMAT_ISORT",
+    "configured_typecheck": {
+      "source_files": 352,
+      "status": "PASS"
+    },
+    "full_configured_Runtime_source": "NOT_RUN_DISTINCT_ROOT_RELEASE_REQUIRED",
+    "generator_roundtrip": 8,
+    "scoped_package": {
+      "deselect": 7,
+      "module_outcomes": {
+        "tests.action_server_tests.mcp.test_canvas_runtime_admission": {
+          "pass": 34,
+          "skip": 0
+        },
+        "tests.action_server_tests.mcp.test_mcp_apps_authoring": {
+          "pass": 1,
+          "skip": 0
+        },
+        "tests.action_server_tests.run_outputs.test_transport": {
+          "pass": 30,
+          "skip": 0
+        },
+        "tests.action_server_tests.test_auth_route_enforcement": {
+          "pass": 73,
+          "skip": 0
+        },
+        "tests.action_server_tests.test_auth_route_inventory": {
+          "pass": 3,
+          "skip": 0
+        },
+        "tests.action_server_tests.test_browser_origin_acceptance": {
+          "pass": 12,
+          "skip": 0
+        },
+        "tests.action_server_tests.test_dakota_rcc_acceptance": {
+          "pass": 35,
+          "skip": 0
+        },
+        "tests.action_server_tests.test_rcc_runtime_adapter": {
+          "pass": 76,
+          "skip": 1
+        },
+        "tests.action_server_tests.test_source_staging_rcc_consumer": {
+          "pass": 1,
+          "skip": 0
+        }
+      },
+      "pass": 265,
+      "skip": 1,
+      "skip_scope": "original opt-in real RCC probe; original fourCanvas plus threeRCC integration nodes deselected; no actual browser/provider/native"
+    }
+  },
+  "original_preservation": {
+    "frozen_native1192": "original pinned inventory module measured unchanged; no native execution",
+    "historical_V5": "3ec/92498 unchanged not transferred to current584a",
+    "old_source_owner_evidence_files_rehashed": 39,
+    "original39_admission_predicates_and_workflow_generator_control_bytes_exact_parent40ad": true,
+    "original_Canvas3_and_RCC_fixture_bodies_modes_exact": true,
+    "pins_CONTROL_helpers0444": "unchanged",
+    "raw18_frozen50_Node_frontend_browser": "separate original hashes retained; original3ec Gitbody classification where current source differs"
+  },
+  "producer": {
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/transport.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/_server.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "current_production_count": 275,
+    "deleted": [],
+    "five_selector_changes": [],
+    "match": 260,
+    "native_qualification": "UNQUALIFIED",
+    "old_production_count": 268
+  },
+  "remaining_HOLD": [
+    "Independent current SOURCE_LIGHT and FULLpreexecution review.",
+    "Fresh\u22651.2GiB capacity and serialized exactROOTrelease before configuredfull.",
+    "No install/native/provider/browser/PG/manualretry/push/merge/source-policy waiver.",
+    "Old40ad FULLpreexec86c4/ind2529 and originalV5 actual remain historical only."
+  ],
+  "schema": 1,
+  "source": {
+    "accepted_target": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+    "commit": "584a7ed0cb7112fe6691103931c007b5cc0be5f3",
+    "existing_branch": "test/canvas-runtime-cache-isolation-20261010",
+    "ordered_parents": [
+      "40ad3b14d264d0e6aa7843e7c26b9fa3855fc34b",
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+    ],
+    "original_accepted_source": "40ad3b14d264d0e6aa7843e7c26b9fa3855fc34b",
+    "tree": "5b4bd2f10c35d0bc7b9d85037f211fa55c47a282"
+  },
+  "status": "OWNERFINAL_CURRENT_584a_ORDINARY_E3_SOURCE_LIGHT_GO_FOR_REVIEW_FULL_AND_ACTUAL_HOLD",
+  "upstream_disposition": "none"
+}

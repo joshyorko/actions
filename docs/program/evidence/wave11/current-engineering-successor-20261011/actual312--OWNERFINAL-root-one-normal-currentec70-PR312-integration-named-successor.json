@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "status": "ROOT_ONE_NORMAL_EXPECTED_HEAD_PR312_INTEGRATION_PASS_NAMED_METADATA_SUCCESSOR",
+  "pr": 312,
+  "actual_sha": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+  "actual_tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+  "ordered_parents": [
+    "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+    "ec70a2928461941c129b1c05332dc441070e0184"
+  ],
+  "target_branch": "integration/community-release-20261008",
+  "expected_head": "ec70a2928461941c129b1c05332dc441070e0184",
+  "normal_policy": true,
+  "admin_bypass": false,
+  "force": false,
+  "merge_attempts": 1,
+  "no_second_merge": true,
+  "metadata_failure_preserved": "original-post-merge-guessed-target-ref-readback-FAIL.json",
+  "CI_jobs_success": 23,
+  "source_linux": {
+    "passed": 1335,
+    "skipped": 13
+  },
+  "source_Windows": {
+    "passed": 1176,
+    "skipped": 172
+  },
+  "integration_Windows": {
+    "passed": 131,
+    "skipped": 19
+  },
+  "production_RCC": "18.19.3_UNCHANGED",
+  "release_qualification": "HOLD",
+  "actual_local_git_object_proof": "PENDING_FETCH_AND_TYPED_SOURCE_REVIEW"
+}

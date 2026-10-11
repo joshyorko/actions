@@ -1,0 +1,320 @@
+{
+  "binding_count": 31,
+  "complete_union": {
+    "leaves": 1423,
+    "no_deletions": true,
+    "no_novel_non_doc_blobs": true,
+    "proof": {
+      "bytes": 2742,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/committed-current-e4ff-typed-ordinary-union-source-proof.json",
+      "sha256": "b66fd27cdd4c0a7ba20536845ec77227fad214ebc85546d0034a351aac0c4621"
+    }
+  },
+  "current_capacity": {
+    "full_floor_bytes": 1288490188,
+    "full_status": "HOLD_FRESH_CAPACITY_AND_ROOT_SERIALIZED_RELEASE",
+    "workspace_available_bytes": 514211840
+  },
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/repository-operations.md",
+    "durable_learning": "11 accepted lines: isolated same-version package downloads only, validation before mounting, separate case roots, empty first and warm staged cache boundary, no peak/compatibility guarantee",
+    "evidence": "accepted aa2b patch/ae37 independent,34 permanent guards and real symlink forwarding spy, original954086630-byte duplicate repodata pair measurement",
+    "remaining_uncertainty": "future native cache-symlink support/peak/cleanup and current full-source gate not run",
+    "stale_or_ambiguous_guidance_removed": "Distinguish package-cache warmth from per-case runtime isolation and whole cold-registry/cold-install qualification. Preserve all target and original source guide blocks."
+  },
+  "frozen_bindings": [
+    {
+      "bytes": 13487,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/Doctor-current-e3c-original.private.log",
+      "sha256": "35a9a4387ccda7b536d006a8de9b0cbd305948f5dfe067100df7bb50b60097e1"
+    },
+    {
+      "bytes": 2742,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/committed-current-e4ff-typed-ordinary-union-source-proof.json",
+      "sha256": "b66fd27cdd4c0a7ba20536845ec77227fad214ebc85546d0034a351aac0c4621"
+    },
+    {
+      "bytes": 4073,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/current-generator8-allYAML30-roundtrip.json",
+      "sha256": "95295384184955e77a2dc9370118e503164ea8f37d1b68c2fd6f71d4cf2826ad"
+    },
+    {
+      "bytes": 50372,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/current-scoped-source-junit.xml",
+      "sha256": "0025ad74555bd514555079f0e093bb61f778ce920bcbd71f39e1bacd2926b4b3"
+    },
+    {
+      "bytes": 213,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/current-source-LIGHT-original.private.log",
+      "sha256": "cdab3aea9738cf2dbd3d4e3240e939a538d38a3c4e38840f0b222107ec9d9f9e"
+    },
+    {
+      "bytes": 50,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/current-source-LIGHT-terminal.json",
+      "sha256": "c13aabc46507161ba39f96020aa8ecb4b4f25b0e1b95ed27938cf2df0f302190"
+    },
+    {
+      "bytes": 9148,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/current-source-LIGHT-v2-original.private.log",
+      "sha256": "de77a02ef8fdceb2cd8684d36b1c05d927a20c3f31b2f970cd34bea2769f7cfd"
+    },
+    {
+      "bytes": 50,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/current-source-LIGHT-v2-terminal.json",
+      "sha256": "dfbcfdc793d7b504955f6a7f5b60df4080699a7c1488523446e8d2ccc3869795"
+    },
+    {
+      "bytes": 7206,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/freeze_current_source_LIGHT.py",
+      "sha256": "8a12fe6866c05779180a551b5aa7f38d9a9434bc0fdf7bc4745600fde72c40aa"
+    },
+    {
+      "bytes": 69,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/managed-activation19-pre-LIGHT-v2.private.log",
+      "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48"
+    },
+    {
+      "bytes": 69,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/managed-activation19-pre-LIGHT.private.log",
+      "sha256": "9e7476b86b94c13ab1e9762548883c60e950ede7c9c4a74e9281613e05d88f48"
+    },
+    {
+      "bytes": 4870,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/own-current30-input-and-five-concrete-origins-Bootstrap-reuse.json",
+      "sha256": "db1fcd59ab9ea7fe9cff7c14f6f51498556887e03965fceddb8fe26be7d0c58b"
+    },
+    {
+      "bytes": 283,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/own-origin-action_server.json",
+      "sha256": "f7a00c055eca6ebcd32e62cfa620b224f99ba834111d9d230937a29c9ede2f05"
+    },
+    {
+      "bytes": 264,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/own-origin-actions-http-helper.json",
+      "sha256": "d8ab3c61fcf9ed762629848de7f5974dc488f23d963f533e7032717d29b18f1c"
+    },
+    {
+      "bytes": 218,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/own-origin-actions.json",
+      "sha256": "5f39b76931c708942c66e5df09de5930082f14aa780bbbf57634c913cd0f5fef"
+    },
+    {
+      "bytes": 240,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/own-origin-devutils.json",
+      "sha256": "0f8a5be23e17e152e1bac26efa4e81c5a9cad12821a7422edf7ac15ad8d1e6a0"
+    },
+    {
+      "bytes": 249,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/own-origin-work-items.json",
+      "sha256": "d4da434483e01c6ca190a89eae5de51ca9b5a0ef9baa32722fd2382b05bab99d"
+    },
+    {
+      "bytes": 378255,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/private-current-e4ff-complete-source-body-mode-inventory.json",
+      "sha256": "9a5bc2e507bab7e81cb0323254af33c9451c348303b505a4a62ddf50e86a9a80"
+    },
+    {
+      "bytes": 5527,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/prove_current_typed_union.py",
+      "sha256": "e675e8fa51514b69cabd8f6fc4fec0530da7925d28f650f005176ee9bf3cd78a"
+    },
+    {
+      "bytes": 3799,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/run_current_source_LIGHT.py",
+      "sha256": "a9cd31e8d9b461796e75b05751231249c320481656ee3de0393e39d6ce981975"
+    },
+    {
+      "bytes": 3871,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/run_current_source_LIGHT_v2.py",
+      "sha256": "2d7692da9339757ab6f9e998012f74fadf41fd458a54a923a8d33f633e2ceb48"
+    },
+    {
+      "bytes": 98363,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/typed-current-production-and-five-selector-inventory.json",
+      "sha256": "82e26b7bab701e08232a2b75d48ff686d151288a3718896044b9588eb2721dbe"
+    },
+    {
+      "bytes": 19191,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/OWNERFINAL-private-current-b614-owned-package-cache-two-path-source-patch.json",
+      "sha256": "10a7fe7e20545a0f5947e330cee87c21a88ab06cf2ef57eae610cad10186d8a2"
+    },
+    {
+      "bytes": 7994,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-owned-package-cache-independent-private-patch-review/OWNERFINAL-independent-private-owned-package-cache-two-path-patch-review.json",
+      "sha256": "ae37fd270e8dd8755cd1774a0eb0cbcdf41d41aeb8f0fad8e394789b0a8a6878"
+    },
+    {
+      "bytes": 22781,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-owned-package-cache-private-source/owned-package-cache-two-path.patch",
+      "sha256": "aa2b0b1d008a717915764a4ddc97b8a60386b10afe63824ef23b4b487e2ece21"
+    },
+    {
+      "bytes": 1483,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-rcc-compatibility-control3-one-actual/OWNERFINAL-root-one-control3-terminal.json",
+      "sha256": "72cb3d7fb9ff99386f2c9e2a8d43282ec77ac609d1eb813543d23a6596047697"
+    },
+    {
+      "bytes": 1696,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1/OWNERFINAL-one-version-actual-result.json",
+      "sha256": "8dc25bb1b99503af386d12d32c0637aa3503617c6f97d66a83f4643969934d4c"
+    },
+    {
+      "bytes": 634107,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-actual-runner-readonly-preparation/FROZEN-control3-current-b614-actual-config-v2.json",
+      "sha256": "8c5da5be25ebfcf86f286ee9f93ddad328c68b3243b0935ec5937c93376bb948"
+    },
+    {
+      "bytes": 6413,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/own-Bootstrap-reuse-inputs-and-origins.json",
+      "sha256": "e111c3c4a155f6c9439795863e8c8d2b4878630112e693c3b1fe0e28b4b8fc40"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    },
+    {
+      "bytes": 74274,
+      "mode": "0o444",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    }
+  ],
+  "frozen_native1192": "DATA_REHASHED_UNCHANGED_NOT_CURRENT_NATIVE_QUALIFICATION",
+  "gates": {
+    "Bootstrap": "EXACT_30_OWN_INPUTS_AND_FIVE_CONCRETE_ORIGINS_REUSE_NO_INSTALL",
+    "Doctor": "PASS",
+    "Toolkit": {
+      "pass": 96
+    },
+    "all_tracked_YAML_parsed_preserved": 30,
+    "configured_lint": "PASS_FULL_RUFF_FORMAT_ISORT",
+    "configured_typecheck": {
+      "source_files": 351,
+      "status": "PASS"
+    },
+    "full_configured_Runtime_source": "NOT_RUN_DISTINCT_ROOT_RELEASE_REQUIRED",
+    "generator_roundtrip": 8,
+    "scoped_package": {
+      "deselect": 3,
+      "pass": 244,
+      "permanent_cache_guard_pass": 34,
+      "skip": 1,
+      "skip_scope": "original opt-in real RCC lifecycle probe; not executed"
+    }
+  },
+  "original_failure_preservation": {
+    "actual_root_owner": {
+      "bytes": 1483,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-rcc-compatibility-control3-one-actual/OWNERFINAL-root-one-control3-terminal.json",
+      "sha256": "72cb3d7fb9ff99386f2c9e2a8d43282ec77ac609d1eb813543d23a6596047697"
+    },
+    "actual_terminal": {
+      "bytes": 1696,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1/OWNERFINAL-one-version-actual-result.json",
+      "sha256": "8dc25bb1b99503af386d12d32c0637aa3503617c6f97d66a83f4643969934d4c"
+    },
+    "cleanup": "FAIL",
+    "new_source_is_not_original_failed_source": "distinct committed cache application plus actual target union; old b614 failure tuple not relabeled",
+    "newer5_and_7276": "NOT_RUN",
+    "primary": "CAPACITY_THRESHOLD"
+  },
+  "original_setup_failure": {
+    "cause": "external script lacked exact developer sys.path",
+    "corrected_named_successor": "run_current_source_LIGHT_v2.py",
+    "scope": "no package gate was run before correction",
+    "status": "PRE_PACKAGE_COMMAND_IMPORT_SETUP_FAIL_RETAINED"
+  },
+  "producer": {
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/transport.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/_server.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "current_production_count": 275,
+    "deleted": [],
+    "five_selector_changes": [],
+    "match": 260,
+    "native_qualification": "UNQUALIFIED",
+    "old_production_count": 268
+  },
+  "public_configured_fixture": {
+    "CONTROL": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962/21676c626a933c2d55761ec85ecf26fe0eef26bb unchanged",
+    "config_keys": [
+      "schema",
+      "runtime_source_sha",
+      "runtime_source_tree",
+      "label",
+      "binary_sha256",
+      "state_root",
+      "package_cache_root",
+      "state_marker_sha256"
+    ],
+    "default_environment_absent": "original b614 fixture AST preserved by accepted independent private review",
+    "environment_key": "ACTIONS_RUNTIME_RCC_TEST_PACKAGE_CACHE_CONFIG",
+    "future_transport": "distinct reviewed new config and transport release required; old v5/v6/config cannot execute current source",
+    "only_shared_state": "once-owned same-version pkgs; first publication empty then staged warm",
+    "source_pin": "future runner config must bind e4ff/973ff40charGit tuple after exact FULL/independent acceptance"
+  },
+  "schema": 1,
+  "source": {
+    "accepted_target": "e3c29cde8878307912e55ed09b6436c0f91d06d5",
+    "application": "6d92344c28a17a727944559fd52f28305ee8eff2",
+    "commit": "e4ff080375a8422bb656e52d218f198521dda078",
+    "old_original_failed_source": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "ordered_parents": [
+      "6d92344c28a17a727944559fd52f28305ee8eff2",
+      "e3c29cde8878307912e55ed09b6436c0f91d06d5"
+    ],
+    "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+  },
+  "status": "OWNER_CURRENT_SOURCE_LIGHT_FROZEN_FULL_AND_NEW_RCC_ACTUAL_HOLD",
+  "upstream_disposition": "none"
+}

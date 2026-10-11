@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "status": "ROOT_ONE_NORMAL_PR282_INTEGRATION_EXACT_ACTUAL_TREE_PARENTS_VERIFIED",
+  "source": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+  "previous_target": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+  "target_ref": "integration/community-release-20261008",
+  "actual_integration": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "actual_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "actual_parents": [
+    "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "1299cc4bb6586f467d36ca124faaaaa77362695f"
+  ],
+  "independent_admission": {
+    "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/OWNERFINAL-independent-current1299-a54-scoped-PR282-merge-admission-GO-v2.json",
+    "bytes": 9568,
+    "sha256": "9f903031955f9117cfb4447c3dfd46cfe9bf3350b73373f634950fe87806147c",
+    "mode": "0o600"
+  },
+  "original_body_sha256": "b9591fb72b6a0e960974199d7a944a8d7354cb2e733401835c333c4f6836a5e7",
+  "new_body_sha256": "22b24d61e49ccb3f172d50bb19106a521c49573304754398f472d2fcd0916554",
+  "all_previous_body_preserved": true,
+  "error": null,
+  "no_force_rebase_admin_branch_delete_publication_or_issue_closure": true,
+  "full54_contract_graph": "53_OPEN_PLUS_ACCEPTED_CLOSED210_UNCHANGED",
+  "recorded_utc": "2026-10-11T16:55:35.402443+00:00"
+}

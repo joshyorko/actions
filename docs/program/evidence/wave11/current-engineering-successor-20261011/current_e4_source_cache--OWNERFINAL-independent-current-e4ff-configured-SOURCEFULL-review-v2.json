@@ -1,0 +1,172 @@
+{
+  "schema": 1,
+  "owner_announced_at_UTC": "2026-10-11T15:32:29.530781+00:00",
+  "decision": "GO_CURRENT_E4FF_CONFIGURED_SOURCEFULL_ONLY",
+  "source": {
+    "head": "e4ff080375a8422bb656e52d218f198521dda078",
+    "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8",
+    "complete_typed_git_FS_bytes_modes": 1423,
+    "clean": true
+  },
+  "root_OWNERFINAL": {
+    "path": "/workspace/engineering/root-pr308-currente4ff-one-sourcefull-v2/OWNERFINAL-root-currente4ff-configured-SOURCEFULL-PASS-v2.json",
+    "bytes": 3589,
+    "sha256": "fb8a58b643957e72ba1d53d2216d4b73ac42b5e57235b2510f3159f667a2c1a0",
+    "mode": "0o600"
+  },
+  "independent_original_proof": {
+    "path": "/workspace/engineering/pr308-currente4ff-SOURCEFULL-independent-actual-review/independent-current-e4ff-original-sourcefull-proof.json",
+    "bytes": 20468,
+    "sha256": "1ef1041244b0162da9c7d2e35d50e3ac94ab71f99add0e2fbb3d436f889a677f",
+    "mode": "0o600"
+  },
+  "read_only_inspector": {
+    "path": "/workspace/engineering/pr308-currente4ff-SOURCEFULL-independent-actual-review/verify_original_source_full_readonly.py",
+    "bytes": 12327,
+    "sha256": "b08b7f2d2c62999f6e79e53cdbddea065f4e2f11c8244432817a13ffb3c09a95",
+    "mode": "0o600"
+  },
+  "preceding_source_LIGHT_independent": {
+    "path": "/workspace/engineering/pr308-currente4ff-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current-e4ff-owned-cache-ordinary-source-LIGHT-review.json",
+    "bytes": 7021,
+    "sha256": "66a2819f6231928140574e590d3a68146d29c1f965609caa14dd65f705b8a33d",
+    "mode": "0o444"
+  },
+  "current_actual_full": {
+    "complete_unique_nodes": 1440,
+    "passed": 1427,
+    "skipped": 13,
+    "failed": 0,
+    "error": 0,
+    "workers": [
+      "gw0",
+      "gw1"
+    ],
+    "pytest_seconds": 103.73,
+    "warnings": 15,
+    "source_definition_modules": 93,
+    "complete_names_with_spaces_retained": 39,
+    "all1440_nodes_match_original_root_v2_census_and_current_real_definitions": true,
+    "all34_current_cache_guards": "PASSED",
+    "summary_matches_original_raw_log": true,
+    "original_before_primary_after_returncodes": [
+      0,
+      0,
+      0
+    ],
+    "original_root_outer_returncode": 0,
+    "original_parent_seconds": 137.26609449899843,
+    "original_root_outer_seconds": 137.38308166199567,
+    "actual_before_and_after_guard_summaries": [
+      {
+        "stage": "before",
+        "status": "PASS",
+        "source": "e4ff080375a8422bb656e52d218f198521dda078",
+        "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8",
+        "source_leaves": 1423,
+        "native_original": 1192,
+        "five_concrete_origins": 5,
+        "workspace_available_bytes": 1344217088
+      },
+      {
+        "stage": "after",
+        "status": "PASS",
+        "source": "e4ff080375a8422bb656e52d218f198521dda078",
+        "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8",
+        "source_leaves": 1423,
+        "native_original": 1192,
+        "five_concrete_origins": 5,
+        "workspace_available_bytes": 1301618688
+      }
+    ]
+  },
+  "exact_adopted_release": {
+    "root_authorization": {
+      "path": "/workspace/engineering/root-pr308-currente4ff-one-sourcefull-v2/root-one-distinct-current-sourcefull-authorization.json",
+      "bytes": 390,
+      "sha256": "8f7e8878dd9f5710060517eef618b04ee9979a2f574a00e8c09a6170750ec69d",
+      "mode": "0o600"
+    },
+    "one_serialized_attempt": true,
+    "preflight_or_first_gate_repeated": false,
+    "envelope": "900s TERM+10s kill grace outer, parent configured source subprocess640s, exact source600s TERM+10s kill grace,60s preguard and separate60s always-post; all terminal successful without bound changes",
+    "managed_environment": "18 exact activation exports plus PATH =19, xdist2; 5 native/operator exports and PYTHONOPTIMIZE absent",
+    "original_private_outputs": "separate0700 owned attempt and0600 original raw source log/terminal; original outer terminal/log independently hash-bound"
+  },
+  "input_preservation": {
+    "source1423_typed_Git_FS_bodies_modes_clean": true,
+    "preexec23_original_bindings_exact": true,
+    "LIGHT31_original_bindings": "30 exact physical plus1 exact historical archive member8dc25 with original physical alias absent",
+    "own_declared30_Bootstrap_inputs": "exact reused; no new Bootstrap or installation by reviewer",
+    "five_own_origin_probes": "actual before/after cached managed guard through own package interpreters; no reviewer probe execution",
+    "native1192_members_exact_pathset_bytes_modes_links": true,
+    "helpers0444_and_original_V5_frozen_through_exact_LIGHT_bindings": "Independently rehashed4 original/snapshot byte-equal pairs,4 snapshots0444; original helper current0600 observed, no historic original mode manufactured. Original native manifest/inventory/ZIP/executable/browser +V5 checkpoint/independent/proposal, exact runner09cdc and18 original raw+50 frozen rows independently rehashed, original source3ec scope retained.",
+    "RCC_managed18_19_3_binary_fixture_and_build_download_defaults": "UNCHANGED",
+    "oldCONTROL": "c103/D5a source historical unchanged; no new control/native proof carried",
+    "producer": "current275 vs old268:260 equal8 changed7 added; five selectors separately equal, old native UNQUALIFIED"
+  },
+  "preserved_prior_failures": {
+    "initial_root_census": "token regex truncated spaces in parameter IDs, undercount1426; original metadataFAIL retained",
+    "corrected_named_v2_census": "same original log complete-line1440 unique; no tests rerun",
+    "original_current_LIGHT_sys_path_setup_FAILURE": "retained; preceding successful named successor not retroactive proof of failed script",
+    "original_b614_control3_ACTUAL": "FAIL_HOLD unchanged; exact original8dc25 archived member/metadata and ca557 archive preserved; capacity primary distinct from final ProcessTreeCleanupError",
+    "historical_b614_SOURCEFULL": "separate old source tuple; current e4ff qualification derived only from this original new full run",
+    "reviewer_retention_inspection": "First supplement assumed original helper files share0444 snapshot mode; originals measured0600 and snapshots0444, no originalmode baseline exists in old rows. Named v2 checks exact original bytes and snapshot444, records observed other modes. Inspection assumption not source or gate failure."
+  },
+  "remaining_admission_limits": [
+    "Only currente4ff source suite is admitted, no real lease/action/persistent reuse/reload/generation drain/provider/native compatibility executed by this full run.",
+    "No released18.19.5 or candidate72718.19.6 binary ever executed or functionally qualified by this evidence.",
+    "Current native275 production inputs differ from old native268; no stale producer tree or selector equivalence waiver.",
+    "Source/control/current hostedCI/private CLI/full134/other platforms/OAuth/publication/release/issueclosure require their own gates.",
+    "Completed original failed3 archive evidence proves preservation, not failed cleanup success or universal quiescence.",
+    "Future configuration/runner/root adoption require new exact immutable independent preexecution review and distinct root execution release."
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md: verified reuse of source-applied exact11-line a68e cache contract; exact6-line9dd8008 archive-alias lesson already independently accepted and retained as proposal. No cosmetic source/doc mutation.",
+    "accepted_cache_delta": {
+      "path": "/workspace/engineering/pr308-owned-package-cache-independent-private-patch-review/exact-accepted-owned-package-cache-canonical-delta.patch",
+      "bytes": 1273,
+      "sha256": "a68e716ce5cef554024ba6e031237fdeeda528add0bc6a72151245284e149886",
+      "mode": "0o444"
+    },
+    "accepted_archive_alias_delta": {
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/canonical-exact-historical-receipt-archive-alias-proposed.patch",
+      "bytes": 846,
+      "sha256": "9dd8008b4194f7cd9848796c7c7b5639862271e73ee222da46d5a59ef501d8ad",
+      "mode": "0o600"
+    },
+    "Durable_learning": "Share only admitted once-owned same-version package downloads while keeping case runtime roots separate; warm cache proof is not cold registry proof. An exact reviewed archive member can resolve a removed historical evidence path while retaining original failure.",
+    "Evidence": "Exact applied aa2b patch and LIGHT1423 union; this original full1440 complete source nodes/34 cache guards; original archive compressed SHA/member digest0600UIDGID1000 and before/after archive-aware guards.",
+    "Stale_guidance_removed": "No inference from a restored path or common success label; keep warm-cache/resource/native acceptance separate and retain failed execution identity.",
+    "Remaining_uncertainty": "New real RCC compatibility/resource peak/symlink support/typed cleanup and broader release/private gates remain unqualified; preserved original FAILED control3 is unchanged."
+  },
+  "upstream_disposition": "none",
+  "reviewer_operations": "Read-only stdlib hashes/XML-independent original text/AST/Git/FS/TAR selected member inspection and safe outside-Git reviewer receipts; no helper/product/native imports, gates/tests/downloads/extract/restore/source/ref mutations.",
+  "preannouncement_review_candidate_retained": {
+    "path": "/workspace/engineering/pr308-currente4ff-SOURCEFULL-independent-actual-review/OWNERFINAL-independent-current-e4ff-configured-SOURCEFULL-review.json",
+    "bytes": 8632,
+    "sha256": "7b493afac47f28cef3172f54acf980c956f7b946c5fd8002920c6e5aca852a1b",
+    "mode": "0o444"
+  },
+  "authoritative_named_final": "v2 adds direct original helper/native/browser/V5 retention supplement; source identity/full run/GO unchanged, predecessor construction bytes retained, no gate rerun",
+  "original_native_helper_browser_V5_retention_supplement": {
+    "path": "/workspace/engineering/pr308-currente4ff-SOURCEFULL-independent-actual-review/independent-original-native-helper-browser-V5-retention-supplement.json",
+    "bytes": 22481,
+    "sha256": "200192f1e254804f60124c589021fe48aeae6270cdd5a1f4ae05e189c9157986",
+    "mode": "0o600"
+  },
+  "retention_inspectors": [
+    {
+      "path": "/workspace/engineering/pr308-currente4ff-SOURCEFULL-independent-actual-review/verify_original_helper_V5_retention_readonly.py",
+      "bytes": 3132,
+      "sha256": "dc5fc47c100ef607526dd4e7c43add18c47e454acb552538cb0d8b74a52533e7",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr308-currente4ff-SOURCEFULL-independent-actual-review/verify_original_helper_V5_retention_readonly_v2.py",
+      "bytes": 3102,
+      "sha256": "5d7c0498d925904d5ac2da9ac8b15dc0e572dbbec56dcc6c56d73b4e3b6b78dd",
+      "mode": "0o600"
+    }
+  ]
+}

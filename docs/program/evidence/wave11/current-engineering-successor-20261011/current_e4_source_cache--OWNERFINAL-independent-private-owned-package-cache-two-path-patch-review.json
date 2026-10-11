@@ -1,0 +1,140 @@
+{
+  "status": "GO_PRIVATE_TWO_PATH_CACHE_PATCH_FOR_ROOT_SOURCE_APPLICATION_AND_SEPARATE_COMPOSED_SOURCE_REVIEW_ONLY",
+  "original_owner": {
+    "path": "/workspace/engineering/pr308-owned-package-cache-private-source/OWNERFINAL-private-current-b614-owned-package-cache-two-path-source-patch.json",
+    "bytes": 19191,
+    "sha256": "10a7fe7e20545a0f5947e330cee87c21a88ab06cf2ef57eae610cad10186d8a2",
+    "mode": "0o600"
+  },
+  "exact_patch": {
+    "path": "/workspace/engineering/pr308-owned-package-cache-private-source/owned-package-cache-two-path.patch",
+    "bytes": 22781,
+    "sha256": "aa2b0b1d008a717915764a4ddc97b8a60386b10afe63824ef23b4b487e2ece21",
+    "mode": "0o600"
+  },
+  "source": {
+    "branch_ref_unchanged": true,
+    "checkout_index_before_and_after": {
+      "bytes": 186252,
+      "mode": "0o600",
+      "path": "/workspace/actions/.git/worktrees/pr308/index",
+      "sha256": "36525bcffc1af1a8cf640c4eaa8b14d6200bbb0c40af2a703731d9fe250d17a4"
+    },
+    "commit": "b614864ba9da55c13662894b6ef3c8515d9fdb25",
+    "tracked_leaves": 1421,
+    "tree": "6fa4f5c1e9837a0d893868255575b355b3977fae"
+  },
+  "independent_proof": {
+    "path": "/workspace/engineering/pr308-owned-package-cache-independent-private-patch-review/independent-private-patch-source-and-control-proof.json",
+    "bytes": 3471,
+    "sha256": "ca0bbba59a2654683e1cdaaa65e67f0bf7a152668fae38c2f2cb818b0a19bf3b",
+    "mode": "0o444"
+  },
+  "read_only_verifier": {
+    "path": "/workspace/engineering/pr308-owned-package-cache-independent-private-patch-review/verify-readonly-private-patch.py",
+    "bytes": 10314,
+    "sha256": "15ce22afe54876f6d1bfcb6f97df3ba3ea7ae3163a4e0d8a48389b6443b12773",
+    "mode": "0o444"
+  },
+  "private_inspection_log": {
+    "path": "/workspace/engineering/pr308-owned-package-cache-independent-private-patch-review/private-readonly-inspection.log",
+    "bytes": 260,
+    "sha256": "3309dcc1df52c02d983319f9aa50010109cd3f5e97dc221b5f7edc87070591d3",
+    "mode": "0o400"
+  },
+  "verified_scope": {
+    "references": 51,
+    "unchanged_original_source_Git_FS_leaves": 1421,
+    "old_original_functions_default_AST_exact": 13,
+    "original_module_nonfunction_AST_exact": true,
+    "only_two_explicit_optin_call_insertions": [
+      "test_published_artifact_details_preserves_one_rcc_identity_pair",
+      "test_staged_package_executes_in_managed_rcc_runtime"
+    ],
+    "patch_paths": [
+      "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "shared_alias": "Only owned managed_home/pkgs points to same admitted once-owned version/source/binary actions-home/pkgs; per-case Holotree/artifacts/provider/runtime origins remain original AST",
+    "main_admission": "Existing _verify_selected_rcc_fixture executes before cache helper; shared immutable binary/source/platform/features/APPROVED_TEST_ONLY policy remains original. Cache helper then validates its fixed version/binary tuple and matching Git source env/root-marker/receipt. Acquisition is not functional qualification.",
+    "publication_recording": "Original one publish/identity/raw JSON recording unchanged",
+    "mount_admission": "Cold empty first; valid matching owned publicationPASS and nonempty same-version cache before staged mount. Unknown/duplicate/invalidscalar/config/source/binary/ownership/modes/links fail before attempted mount.",
+    "permanent_new_Linux_tests": 34,
+    "positive_mount_spy": "Exact sole Path.symlink_to call forwards target and target_is_directory=True; physical synthetic same-inode body observed by recorded test",
+    "negative_mount_spy": "No call for all33 negatives; current34GREEN/0skip",
+    "TDD": {
+      "RED-v2-junit.xml": {
+        "cases": 31,
+        "pass": 1,
+        "fail": 30,
+        "error": 0,
+        "skip": 0,
+        "DID_NOT_RAISE": 29,
+        "FileExistsError": 1
+      },
+      "marker-scalar-RED-junit.xml": {
+        "cases": 34,
+        "pass": 32,
+        "fail": 2,
+        "error": 0,
+        "skip": 0,
+        "DID_NOT_RAISE": 2,
+        "FileExistsError": 0
+      },
+      "final-v3-private-GREEN-junit.xml": {
+        "cases": 34,
+        "pass": 34,
+        "fail": 0,
+        "error": 0,
+        "skip": 0,
+        "DID_NOT_RAISE": 0,
+        "FileExistsError": 0
+      }
+    },
+    "configured_private_static": "Recorded Ruffcheck/format/Isort/Mypy one private fixture file pass; final34PASS16deselect2existing privatecollection marker warnings retained"
+  },
+  "original_failed_CONTROL3_disposition": "Retained original CAPACITY_THRESHOLD primary and ProcessTreeCleanupError failure; publicationcasePASS and stagedSTARTED_NO_TERMINAL are distinct; versions5/7276 remain NOTRUN. No reclassification as compatibility failure or cleanupPASS.",
+  "remaining_HOLDs": [
+    "Source-only patch not applied; composition with separately reviewed persistent fixture patch needs new exact source review/full/runner",
+    "No native binary, provider, tests or product imports executed by reviewer",
+    "Peak/storage reduction and RCC symlink support prospective, not proved by Linux synthetic controls",
+    "Current source/controls do not upgrade original failed control3 or not-run5/7276",
+    "Compose with independently reviewed persistent fixture patch after existing PR308 ordinary accepted-target refresh; complete new source/full/pin/control/transport/runner review still required",
+    "No native92498/private01f/frozenv6/full134/135/provider/recovery/internalreader/release waiver",
+    "Real memory reduction and RCC pkgs symlink support require future separately authorized measured native invocation; thresholds unchanged"
+  ],
+  "Documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; exact11line patch accepted for root application, no private diary",
+    "Exact_delta": {
+      "path": "/workspace/engineering/pr308-owned-package-cache-independent-private-patch-review/exact-accepted-owned-package-cache-canonical-delta.patch",
+      "bytes": 1273,
+      "sha256": "a68e716ce5cef554024ba6e031237fdeeda528add0bc6a72151245284e149886",
+      "mode": "0o444"
+    },
+    "Durable_learning_captured": "Share only the admitted version-owned package-download cache serially; require cold first publication and matching receipt before warm staged alias, keep Holotree/provider/runtime isolation and strict budgets/cleanup independent. Retained duplicate bodies do not establish future peak reduction or RCC compatibility.",
+    "Evidence": [
+      {
+        "path": "/workspace/engineering/pr308-owned-package-cache-independent-private-patch-review/independent-private-patch-source-and-control-proof.json",
+        "bytes": 3471,
+        "sha256": "ca0bbba59a2654683e1cdaaa65e67f0bf7a152668fae38c2f2cb818b0a19bf3b",
+        "mode": "0o444"
+      },
+      {
+        "path": "/workspace/engineering/pr308-owned-package-cache-private-source/final-v3-private-GREEN-junit.xml",
+        "bytes": 4204,
+        "sha256": "9bc758e9325ef835c7333a463cfdbd4fc6d32a3cb3f210a8ca8a3cf6043c60f0",
+        "mode": "0o600"
+      },
+      {
+        "path": "/workspace/engineering/pr308-owned-package-cache-private-source/owned-package-cache-two-path.patch",
+        "bytes": 22781,
+        "sha256": "aa2b0b1d008a717915764a4ddc97b8a60386b10afe63824ef23b4b487e2ece21",
+        "mode": "0o600"
+      }
+    ],
+    "Stale_or_ambiguous_guidance_removed": "Package-cache warmth is distinguished from whole cold-registry/cold-install qualification; failure and unknown peak/compatibility observations remain unchanged.",
+    "Remaining_uncertainty": "Unapplied patch; future composed source/full/operator transport and actual symlink/capacity/cleanup behavior not measured."
+  },
+  "Upstream_disposition": "none",
+  "reviewer_execution": "Read-only stdlib file/Git/hash/AST/XML plus git apply --check only; no patch application, tests, product imports, environment preparation, binary/provider/native or cache mount/changes"
+}

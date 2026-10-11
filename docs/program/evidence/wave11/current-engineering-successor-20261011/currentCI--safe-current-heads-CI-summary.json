@@ -1,0 +1,46 @@
+{
+  "captured_utc": "2026-10-11T16:37:22.660873+00:00",
+  "queries": {
+    "pr282": {
+      "returncode": 0,
+      "bytes": 8692,
+      "sha256": "4ee43b238a23aad63da941c1215ca45ccbb677d8b58ac3ae4174f9fc5cf7febd",
+      "number": 282,
+      "state": "OPEN",
+      "isDraft": true,
+      "headRefOid": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+      "headRefName": "feat/canvas-template-20261010",
+      "baseRefName": "integration/community-release-20261008",
+      "mergeStateStatus": "CLEAN",
+      "reviewDecision": "",
+      "checks": {
+        "SUCCESS": 25
+      },
+      "non_success_checks": []
+    },
+    "pr221": {
+      "returncode": 0,
+      "bytes": 11273,
+      "sha256": "09582e3437bf9ff7bb9a652ad8e78695b2af6a74aaef5c3f6c0f429029237f01",
+      "number": 221,
+      "state": "OPEN",
+      "isDraft": true,
+      "headRefOid": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "headRefName": "integration/community-release-20261008",
+      "baseRefName": "community",
+      "mergeStateStatus": "CLEAN",
+      "reviewDecision": null,
+      "checks": {
+        "SUCCESS": 33,
+        "SKIPPED": 1
+      },
+      "non_success_checks": []
+    },
+    "target": {
+      "returncode": 0,
+      "bytes": 448,
+      "sha256": "af9cbd68597b9c1cfdb46ea56afafb0e366d28cf93a82910a2203c44acf0339d",
+      "sha": "a54c982462d1e7ad011d8152bfc299d997503fb3"
+    }
+  }
+}

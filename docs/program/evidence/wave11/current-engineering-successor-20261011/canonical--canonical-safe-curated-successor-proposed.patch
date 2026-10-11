@@ -1,0 +1,9 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@
+ paths. Preserve running and skipped CI states separately from passing results.
++Curate a successor by exact body identity and declared scope, not filename or
++timestamp. Copy only reviewed safe summaries and patches; a summary's binding
++to private API, provider, process-census or log bytes does not authorize copying
++that payload. Retain failed and conditional predecessors separately from
++accepted successors, including their original identities and remaining holds.

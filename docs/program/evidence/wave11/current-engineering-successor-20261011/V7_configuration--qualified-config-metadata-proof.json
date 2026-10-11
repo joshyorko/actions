@@ -1,0 +1,28 @@
+{
+  "actual_once_root_absent": true,
+  "cache_plan_sha256": "ae6b9828c72331c3a30e072c07e238f43be5cdc4738ecb9120ab387dc6c2bb41",
+  "clean": true,
+  "concrete_own_origins": 5,
+  "config": {
+    "bytes": 797131,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-current-e4ff-qualified-config-successor/FROZEN-current-e4ff-control3-owned-cache-SOURCE-QUALIFIED-v4.json",
+    "sha256": "1411879501e1ef2bd5aec7fbf9627457aa840badc8e86be980c25b207ee9d5dc"
+  },
+  "config_bindings_reverified": 237,
+  "gateway": "NOT_RUN",
+  "native_execution": "NOT_RUN",
+  "native_original_member_rows": 1192,
+  "operations": [
+    "Git read-only",
+    "filesystem/body/SHA/mode reads",
+    "pure metadata validation"
+  ],
+  "prepared_input_rows": 30,
+  "product_imports": "NONE",
+  "root_and_current_config_review_still_required": true,
+  "source": "e4ff080375a8422bb656e52d218f198521dda078",
+  "source_body_mode_files": 1423,
+  "status": "CURRENT_CONFIG_SOURCE_QUALIFIED_NATIVE_NOT_RUN",
+  "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+}

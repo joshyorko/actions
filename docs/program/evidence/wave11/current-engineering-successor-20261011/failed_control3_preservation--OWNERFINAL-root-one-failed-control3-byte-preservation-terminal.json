@@ -1,0 +1,23 @@
+{
+  "status": "PRESERVATION_ONLY_TERMINAL_NO_REQUALIFICATION",
+  "returncode": 0,
+  "elapsed_seconds": 83.89864118900005,
+  "attempts": 1,
+  "original_status": "FAIL_HOLD_UNCHANGED",
+  "independent_review": {
+    "path": "/workspace/engineering/rcc-control3-failed-owned-preservation-independent-review/OWNERFINAL-independent-failed-control3-v3-HOLD-and-v4-source-progress-preservation-preexecution-review.json",
+    "bytes": 10767,
+    "sha256": "69ac750b9571507701540bab161ec9406f1664b4b3edbad0ebaaa0ea7d487d4d"
+  },
+  "authorization": {
+    "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-one-distinct-byte-preservation-release.json",
+    "bytes": 540,
+    "sha256": "0fa2930b76db88b5204d6f5a3165ecd150d8d44f39fbc0a7c07164f2c92b0911"
+  },
+  "original_output": {
+    "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/original-one-preservation-process.private.log",
+    "bytes": 313,
+    "sha256": "47dd44878e2c419f5cb37c128a13662bce577174fa8cfb32908b48ac1db65d26"
+  },
+  "devshm_available_bytes": 3942780928
+}

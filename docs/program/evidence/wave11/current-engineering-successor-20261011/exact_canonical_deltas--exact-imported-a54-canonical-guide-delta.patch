@@ -1,0 +1,129 @@
+diff --git a/docs/skills/provenance-observability.md b/docs/skills/provenance-observability.md
+index 8a542d5d..75fd2a2e 100644
+--- a/docs/skills/provenance-observability.md
++++ b/docs/skills/provenance-observability.md
+@@ -182,6 +182,47 @@ Run lists, details, request-ID lookup, notifications, manifest fallback,
+ artifact APIs and analytics exclude pinned Runs rather than infer public
+ Workspace authorization.
+ 
++The optional server-only `RunOutputTransport` binding installs a bounded GET
++route at `/api/workspaces/{workspace_id}/outputs/{handle}` in the actual Runtime
++application. Without explicit trusted configuration that route is absent. The
++binding pairs the existing service with an authenticator that verifies its
++credential and returns a server-owned Actor; freezing the binding does not
++verify the authenticator or freeze its credential store. No CLI/environment
++mapping, default principal, browser/provider-OAuth session UUID, installation
++API token or caller-selected Actor ID supplies Workspace authority. When
++configured, installation-key authentication remains an outer gate. The trusted
++Actor authenticator and the shared resolver's current persisted read-grant
++checks are mandatory with or without an installation key and occur before
++provider acquisition. Present browser Origins must pass the existing trusted
++origin policy; an allowed Origin or a successful preflight never grants identity
++or access.
++
++This transport streams the measured opened descriptor in chunks of at most
++64 KiB and closes its resolver on completion, failure and disconnect. It serves
++`application/octet-stream` as an attachment using only the opaque handle as the
++filename, with `no-store` and `nosniff`; logical names/media types never enable
++inline active content. Handle-bearing headers are constructed only after shared
++resolution validates the canonical handle, so Unicode/control-character path
++inputs cannot turn a uniform denial into a header-encoding failure. Denied, revoked, cross-Workspace, malformed and unknown
++handles share an unavailable response before provider access. Storage acquisition
++failure returns 503; a failure after headers aborts the stream rather than
++claiming a complete artifact. Range requests return 416 explicitly and HEAD is
++not implemented. This is ASGI source evidence, not socket/native/CLI acceptance
++or the full #86 static-serving contract: HEAD, ETag, Last-Modified, single,
++suffix, multi and invalid Range behavior, Windows descriptor/reparse parity,
++shared/object providers, quotas and GC remain required. Production identity
++provider configuration and actual Canvas producer/consumer execution still need
++separate integration; a retrievable private-service output does not authorize
++changing a template's `artifact: null` without its own end-to-end proof.
++
++For assembled output-transport denials, count provider-open attempts before
++entering the reader context; a list of successfully opened readers alone cannot
++prove that storage was never touched. Take complete logical database and owned
++filesystem snapshots after legitimate publication or grant changes, then compare
++them across each request. Compare SQL rows rather than physical SQLite bytes:
++the resolver takes idempotent writer locks even for authorized reads. HEAD 405
++and Range 416 prove rejection, not method support or persisted-grant resolution.
++
+ The private filesystem provider requires Linux descriptor features and trusted
+ kernel procfs, borrows a verified service-owned root FD, and measures/seals actual
+ bounded bytes. It rejects special objects through an O_PATH pin before any
+@@ -191,8 +232,8 @@ runtime implementation. Initial bounds are 256 KiB inputs, 1 MiB result envelope
+ 64 output records per Run (including aborted records), 64 MiB per object,
+ 64 KiB chunks, leases up to one hour and retention up to one year. Full quotas,
+ GC, output-secret policy, compiler/provider admission, production actor/provider
+-wiring, adapters and Canvas transport remain separate gates; this private slice
+-does not accept whole #83/#86/#129/#127.
++wiring, adapters and Canvas execution integration remain separate gates; this
++private slice does not accept whole #83/#86/#129/#127.
+ 
+ ## Verification matrix
+ 
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index d6b4a612..165d7146 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -611,6 +611,14 @@ preflights as separate checked calls or stop the command sequence on failure.
+ Preserve failed probes and named successors, and distinguish observations made
+ after a gate starts from evidence checked before that gate.
+ 
++Verified reuse of package environments does not populate a new checkout's
++ignored Runtime RCC fixture asset. Before tests, bind `get_default_rcc_location()`
++to the package pin and verify the owned binary's digest and mode. A matching
++already prepared Bootstrap output can be copied with its source and byte identity
++retained; this is reuse, not a new Bootstrap run or binary build. Do not bypass
++the fixture, download a substitute, or borrow unrelated generated inputs to
++clear a missing-asset failure.
++
+ When running Action Server source tests from a detached checkout with a prepared
+ Runtime virtualenv, put that checkout's `action_server/src`, `actions/src`,
+ `actions-http-helper/src`, and `devutils/src` first on `PYTHONPATH`, and confirm
+@@ -1419,6 +1427,22 @@ use native `gh` and repeat the safe check; never print or transfer the value to
+ an agent. Follow the [upstream reporting procedure](upstream-reporting.md)
+ before attributing a tooling failure to a dependency.
+ 
++When qualifying generated Runtime frontend content, decode `_static_contents.py`
++as data and bind each asset's bytes to its builder checkout. The encoder reads
++`dist/index.html` as bytes and writes their representation; setting the generated
++module's newline to LF does not normalize the embedded asset. Keep outer module
++CRLF differences, decoded asset CR differences and semantic equivalence separate.
++A carriage-return-removal comparison is diagnostic evidence, not a source or
++content waiver. If the original frontend input and effective checkout newline
++setting were not retained, keep checkout-versus-compiler causation unknown.
++
++Include tracked non-Python package text in checkout-byte qualification. A
++Python-only rule leaves packaged README, HTML, YAML and other text differences
++unresolved; keep binary archives and intentional platform-specific line-ending
++fixtures outside any proposed text rule. A checkout-byte fix must also appear
++in affected builder and test workflow path filters. A passing census that
++excluded those workflows does not qualify its distribution bytes.
++
+ The generated macOS wheel matrix job sets `MACOSX_DEPLOYMENT_TARGET=12.0`
+ before cibuildwheel; Linux and Windows rows do not receive that platform-specific
+ environment setup.
+@@ -2735,7 +2759,8 @@ separately from RCC wrapper receipts. `ActionServerProcess.stop()` delegates to
+ can consume the direct child's wait status, so a later `Popen.poll()` value of 0
+ is not natural-exit evidence. A normal `start_server` return produces CLI exit
+ 0. The
+-explicit `/api/shutdown/` endpoint instead calls `_thread.interrupt_main()`;
++explicit `/api/shutdown/` endpoint schedules `_thread.interrupt_main()` as a
++response background task, after the final ASGI response-body send completes;
+ `_main_retcode` catches that `KeyboardInterrupt` and returns 1. Count exit 1 as
+ the expected controlled API-interrupt outcome only when the receipt also proves
+ that shutdown request and its successful 2xx response. An observed natural exit
+@@ -2747,6 +2772,13 @@ the captured natural result. Preserve any post-stop `Popen.poll()` value as
+ forced-cleanup-only evidence, never as natural exit. A `stop()` return is not
+ process-exit evidence, and a captured descendant set only reports that
+ observation; it does not prove complete tree reaping.
++The assembled route's service-free ordering controls require completed response
++start and final body sends before interruption; denied requests and failed
++sends must not interrupt. A server access-log status 200 does not prove that
++the client received the response. Keep client response delivery, natural exit
++and cleanup predicates separate; passing checkout-byte tests establishes no
++shutdown cause. ASGI send ordering still requires fresh platform client and
++natural-exit acceptance, and does not guarantee network delivery.
+ The bounded retirement result is one pool-lifecycle signal, separate from the
+ Action execution result and RCC terminal receipt. Preserve failed wrapper
+ receipts. Neither wrapper reaping nor stopped observed descendants establishes

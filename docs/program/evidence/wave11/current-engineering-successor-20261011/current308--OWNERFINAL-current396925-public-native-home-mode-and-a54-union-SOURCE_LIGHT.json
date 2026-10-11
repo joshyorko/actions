@@ -1,0 +1,332 @@
+{
+  "binding_count": 33,
+  "capacity": {
+    "SOURCEFULL_floor_bytes": 1200000000,
+    "tmp_storage": "pytest38 archiver accepted preexecution prerequisite before full",
+    "workspace_available_bytes": 1282621440
+  },
+  "complete_typed_union": {
+    "all_Git_FS_body_exec_modes": true,
+    "exact_public_patch3577_applied2058": true,
+    "generator_top_AST_exact_parent_union": {
+      "all_nodes_exact_one_parent": true,
+      "all_parent_node_keys_retained": true,
+      "source_only_definitions": [
+        "ClassDef:ActionServerRccProviderRollback"
+      ],
+      "target_only_definitions": [
+        "ClassDef:ActionServerTests",
+        "ClassDef:ActionServerPyPiRelease"
+      ],
+      "top_level_nodes": 32
+    },
+    "independent_union_proof": {
+      "bytes": 2010,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current3969-independent-source-union-review/independent-current3969-source-union-proof.json",
+      "sha256": "7d9daeac0467691ded737dd61813f827b54f7992fc504225bfc3d3d675de3cb2"
+    },
+    "leaves": 1426,
+    "sole_combined_paths": [
+      ".github/workflows/_gen_workflows.py",
+      "docs/skills/repository-operations.md"
+    ]
+  },
+  "construction_failures_preserved": {
+    "original_guide_only_inspector": "FAIL before gates: actual generator+guide combined; named corrected ASTunion proofPASS",
+    "retention_proof_source_label": "Raw retention source field is historicale4 qualifiedconfig; explicit current_source field is396925. Both retained, current owner uses exact currenttuple."
+  },
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md: adopted exact nine-line native-home-mode paragraph, bothparent guide blocks preserved.",
+    "Durable learning captured": "Native-managed home0700/0750 sameUID/GID is distinct from strict supervisor/cache0700/marker0600; no input repair; modifiedbinary/source equivalence unknown; rejectedhome proves no artifact/action/lease.",
+    "Evidence": "Exact2058 patch3577/current3969 adoption, originalmodefailure61506, source-supporteddiagnosis7f568, genuineRED7 and current47 permanent cache controls PASS.",
+    "Remaining uncertainty": "CurrentFULL/newnative3/5/7276 NOT_RUN; same-group nativebehavior and peak still require separate actual qualification.",
+    "Stale or ambiguous guidance removed": "Generic cache permission contract now differentiates native-managed home without weakening ownedroot/cache/marker. Exact historicalreceipt alias and current/historical source bindings retained separately."
+  },
+  "frozen_bindings": [
+    {
+      "bytes": 4073,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/current-generator8-allYAML30-roundtrip.json",
+      "sha256": "bd3e1b5dc27a5af51287d70d28bfd87e75c743c4b348c48539293d308eba349d"
+    },
+    {
+      "bytes": 1528,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/current-readonly-after-retention-proof.json",
+      "sha256": "173e5969d71ea2a3189087c186c0b06f8e6109d58249feb53c4fe4312a5595cb"
+    },
+    {
+      "bytes": 1529,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/current-readonly-before-retention-proof.json",
+      "sha256": "2f8e878b2643c5a978c6186c9eb9d5655f16eee8e3df3eefcca035c87c57bd15"
+    },
+    {
+      "bytes": 54315,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/current-scoped-source-junit.xml",
+      "sha256": "cf38c70f42edf2f2d93af4e2f84d621f2160a331c8832d870a6f6cdfaf4ac012"
+    },
+    {
+      "bytes": 10189,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/current396925-cached-LIGHT-original.private.log",
+      "sha256": "e1d3f19d649286d0794368468ab058f94f5fe9557e79031e17fe863de443445e"
+    },
+    {
+      "bytes": 1330,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/current396925-cached-LIGHT-terminal.json",
+      "sha256": "fe94eb949dc987db12ce21c4b2d5f266f4e27fb060e51e5e6d996608d81b036b"
+    },
+    {
+      "bytes": 3172,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/current396925-typed-parent-union-and-exact-public-patch-proof.json",
+      "sha256": "1c6b216da7abced167dad5757e4b1d17c4e6ad347b31eff9423c982f195a2b8b"
+    },
+    {
+      "bytes": 8737,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/freeze_current396925_SOURCE_LIGHT.py",
+      "sha256": "b6fec5a70e4cefe4a3b59e7dc4bcc1d77b04d43e395bf8e9e48d08015ca24d53"
+    },
+    {
+      "bytes": 2001,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/launch_current396925_cached_LIGHT.py",
+      "sha256": "c6f6f0ef3dada02857f09dd5363deceff10e2bf87713dc2e26a98b1a71da6c3f"
+    },
+    {
+      "bytes": 538,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/original-guide-only-novel-assumption-inspector-FAIL.json",
+      "sha256": "5521315424e8a732ae24638c2efcc7aec090f6e49be51d5acceab0191b3d7f8f"
+    },
+    {
+      "bytes": 4870,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/own-current30-input-and-five-concrete-origins-Bootstrap-reuse.json",
+      "sha256": "db1fcd59ab9ea7fe9cff7c14f6f51498556887e03965fceddb8fe26be7d0c58b"
+    },
+    {
+      "bytes": 283,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/own-origin-action_server.json",
+      "sha256": "f7a00c055eca6ebcd32e62cfa620b224f99ba834111d9d230937a29c9ede2f05"
+    },
+    {
+      "bytes": 264,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/own-origin-actions-http-helper.json",
+      "sha256": "d8ab3c61fcf9ed762629848de7f5974dc488f23d963f533e7032717d29b18f1c"
+    },
+    {
+      "bytes": 218,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/own-origin-actions.json",
+      "sha256": "5f39b76931c708942c66e5df09de5930082f14aa780bbbf57634c913cd0f5fef"
+    },
+    {
+      "bytes": 240,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/own-origin-devutils.json",
+      "sha256": "0f8a5be23e17e152e1bac26efa4e81c5a9cad12821a7422edf7ac15ad8d1e6a0"
+    },
+    {
+      "bytes": 249,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/own-origin-work-items.json",
+      "sha256": "d4da434483e01c6ca190a89eae5de51ca9b5a0ef9baa32722fd2382b05bab99d"
+    },
+    {
+      "bytes": 5023,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/prepare_current_source_proof.py",
+      "sha256": "7ff393027ca9d18c40f9d7e30d53027b49a1f55cb30c9e742cb98d089f50340a"
+    },
+    {
+      "bytes": 5972,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/prepare_current_source_proof_v2.py",
+      "sha256": "70017eadfd9b151f3c598b6c13d5660592734244f64cfa8c9ccef7f85914d21e"
+    },
+    {
+      "bytes": 427533,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/private-current396925-complete-source-body-mode-inventory.json",
+      "sha256": "082fff87c85968b3c830a9da6cdbdd067f8c57ce796dc6296a3210ea335efa49"
+    },
+    {
+      "bytes": 4556,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/read_only_current396925_guard.py",
+      "sha256": "4396488e0f1eeddfe8088720ae16f19f9434d8ecc72e8f993cf894cbb6c4c6e4"
+    },
+    {
+      "bytes": 3965,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/run_current396925_cached_LIGHT.py",
+      "sha256": "ab70f6fd9a3a25c1704fcacbb694c973cb72143e0b89da796c5e0d256837d386"
+    },
+    {
+      "bytes": 98325,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/typed-current-producer-and-five-selected-inventory.json",
+      "sha256": "9feb703e797f58a10d1c447c47142d40f8e5cf02dcd746d82c263deb1b70092b"
+    },
+    {
+      "bytes": 1062,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-pr308-public-home-mode-patch-ordinary-a54-adoption/OWNERFINAL-root-exact-public-home-mode-patch-and-ordinary-a54-adoption.json",
+      "sha256": "012e6f45673c20650e0fcb06e99052534117714d7b48f0e0b395501c73880cc4"
+    },
+    {
+      "bytes": 2010,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-current3969-independent-source-union-review/independent-current3969-source-union-proof.json",
+      "sha256": "7d9daeac0467691ded737dd61813f827b54f7992fc504225bfc3d3d675de3cb2"
+    },
+    {
+      "bytes": 12539,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/OWNERFINAL-PUBLIC-current-e4ff-native-managed-home-mode-fixture-and-guide-patch.json",
+      "sha256": "a5de4819d2a1458cdd331dd387daccd22f4101ef510e29328de5d17e3d840107"
+    },
+    {
+      "bytes": 5940,
+      "mode": "0o444",
+      "path": "/workspace/engineering/rcc-current-e4ff-cache-mode-private-v8-proposal/PUBLIC-e4ff-native-managed-home-mode-fixture-and-guide-proposed.patch",
+      "sha256": "35771648e1271447675b2f62edbe2fa6062a17c1efb2c4940039a5997543c05c"
+    },
+    {
+      "bytes": 8740,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-mode-source-diagnosis-owned/OWNERFINAL-independent-source-supported-current-control3-home-mode-diagnosis-and-minimal-proposal.json",
+      "sha256": "7f568821f3c1aa7ebd3bbf0c23fde2a18ce1307f31148bbd1091ea04e400266d"
+    },
+    {
+      "bytes": 7588,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-actual-independent-review/OWNERFINAL-independent-original-current-e4ff-control3-cache-mode-actual-failure-review.json",
+      "sha256": "61506cf064896dc750ccf47450d440170861cef4cf9a5c68060ac3ea3bedf5b1"
+    },
+    {
+      "bytes": 797131,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-current-e4ff-qualified-config-successor/FROZEN-current-e4ff-control3-owned-cache-SOURCE-QUALIFIED-v4.json",
+      "sha256": "1411879501e1ef2bd5aec7fbf9627457aa840badc8e86be980c25b207ee9d5dc"
+    },
+    {
+      "bytes": 2645,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/historical_failed_receipt_archive_v1.py",
+      "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+    },
+    {
+      "bytes": 1864,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json",
+      "sha256": "cc73027ce86ea0965f3bdd88ed3398c322dcf012b337a4ca161966f19ffee6c7"
+    },
+    {
+      "bytes": 6413,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-rcc-compatibility-source/own-Bootstrap-reuse-inputs-and-origins.json",
+      "sha256": "e111c3c4a155f6c9439795863e8c8d2b4878630112e693c3b1fe0e28b4b8fc40"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    }
+  ],
+  "gates": {
+    "Bootstrap": "30_INPUTS_EXACT_FIVE_CONCRETE_OWN_ORIGINS_REUSE_NO_INSTALL",
+    "Doctor": "PASS_CACHED_MANAGED_ACTIVATION_TOOLKIT",
+    "Toolkit": {
+      "passed": 96
+    },
+    "all_GitHub_YAML_parsed_preserved": 30,
+    "before_LIGHT_post_returncodes": [
+      0,
+      0,
+      0
+    ],
+    "configured_lint": "RuffCHECK_FORMAT_ISORT_PASS_316_FORMATTED_MARKDOWN_TOOL_ADVISORY_UNAVAILABLE",
+    "configured_typecheck": {
+      "source_files": 352,
+      "status": "PASS"
+    },
+    "full_source": "NOT_RUN_CONDITIONAL_DISTINCT_RELEASE",
+    "generator_outputs": 8,
+    "native_binary_or_gateway_or_installer": "NOT_RUN",
+    "scoped": {
+      "all_actual_XML_cases": 268,
+      "deselected": 3,
+      "passed": 267,
+      "permanent_owned_cache_controls": 47,
+      "seconds": 13.67,
+      "shutdown_response_order_controls": 10,
+      "skip_scope": "unchanged explicitly opted-in real_RCC test NOT_RUN",
+      "skipped": 1,
+      "warnings": 5
+    }
+  },
+  "producer": {
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/transport.py",
+      "action_server/src/actions/server/run_outputs/types.py"
+    ],
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/_server.py",
+      "action_server/src/actions/server/migrations/__init__.py"
+    ],
+    "current_producer_count": 275,
+    "deleted": [],
+    "five_selector_changes": [],
+    "match": 260,
+    "native_qualification": "UNQUALIFIED_CURRENT_SOURCE_NOT_ORIGINAL_BUILD",
+    "original_producer_count": 268
+  },
+  "remaining_HOLD": [
+    "CurrentSOURCEFULL+independent source/config review+acceptedpytest38 storage prerequisite+root exactonce execution release",
+    "Fresh current hosted CI after root normalpush; generator pins remainoldc103/source separatecontrol engineering",
+    "Native3current retry requires separate accepted config/root actualrelease; newer5/7276 NOT_RUN",
+    "Full134/private01f/frozen-v6/persistentreload/OAuth/release unqualified"
+  ],
+  "retention": {
+    "all_prior_qualified237_bindings": "235 current files exact;1 prior fixture remains exact historicale4 Gitblob;1 failed8dc receipt exact authorized archive alias. Original rows/hashes retained, no restoration/omission.",
+    "helpers0444_browser_Node_frontend_raw18_frozen50": "Exact original237 bindings read before/after; no execution or mutation.",
+    "original_e4_fixture_source": "Historical code not masquerading as current fixture; current patch bytes exact accepted proposal.",
+    "original_native1192": "Complete body/member/mode exact, UNQUALIFIED against current275 producer.",
+    "private_source_lease_context": "Conditional prototype only, unreached actualfailure, not adopted into config",
+    "private_v7_and_config141187": "Retained unchanged; original actualmodefailure remainsFAILED BEFOREpublication/action/lease"
+  },
+  "schema": 1,
+  "source": {
+    "clean": true,
+    "commit": "396925cb3d6527af1768b7f5333f9653c005fc55",
+    "parents": [
+      "2058b1b185a79c04b24eaf46a73d278ba4f689e5",
+      "a54c982462d1e7ad011d8152bfc299d997503fb3"
+    ],
+    "source_root": "/workspace/engineering/pr308",
+    "tree": "84f850f0d4e08b21afcd8220413ce94322370acf"
+  },
+  "status": "OWNER_CURRENT396925_SOURCE_LIGHT_PASS_FULL_AND_NEW_NATIVE_HOLD",
+  "upstream_disposition": "none"
+}

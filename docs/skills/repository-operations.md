@@ -1699,6 +1699,14 @@ when the agent has no plugin installer. RCC owns the outer toolchain, while
 Poetry owns package dependencies and lockfiles; a failed setup is not permission
 to replace that boundary with host pip/Poetry installations.
 
+Cloud launchers that reuse a prepared RCC environment must bind its reviewed
+`ROBOCORP_HOME` in the same process environment that launches RCC. Apply the
+managed activation profile there or pass its reviewed settings explicitly, and
+verify the pinned executable and allowlisted home/cache values before launch.
+An absolute pinned RCC executable can still select the default home and trigger
+fresh setup when those settings are absent. Preserve that setup failure; a
+terminal gateway failure before pytest collection does not qualify a test gate.
+
 Copilot's reserved `copilot-setup-steps` job installs the same checksum-pinned
 Josh RCC Linux asset as the primary developer-toolkit matrix, persists its PATH
 and writable `ROBOCORP_HOME` through GitHub environment files, and runs manifest
@@ -1979,6 +1987,42 @@ the worker setting and outer timeout before execution.
 
 ## RCC Environment Artifact execution
 
+An isolated, sequential RCC qualification may share only its once-owned `pkgs`
+download cache between publication and staged execution for the same source and
+binary tuple. Admit the operator configuration, root marker, ownership, modes,
+containment and publication receipt before mounting it; reject unknown or
+cross-version state. The first publication requires an empty package cache.
+Keep each case's Holotree, artifacts, provider and runtime origins separate.
+The staged case then uses the publication's warm package cache; this is not
+cold-registry or cold-install qualification. Identical retained cache bodies
+can identify duplicate storage, but do not prove a future peak or compatibility.
+Keep capacity thresholds and strict cleanup admission unchanged.
+
+A private qualification runner must bind the current source and fixture bytes,
+generate the isolated cache configuration itself, and create its seven-key
+ownership marker exclusively with mode `0600`. Refuse inherited cache selectors.
+A preserved receipt resolved from an approved archive retains its original
+path, hash and failure scope; that alias never supplies current-source acceptance.
+Require current full-source and independent configuration admission before
+root authorizes a new once-owned version attempt; previous source gates do not
+qualify a cache or source successor.
+
+RCC's private client home has a different permission contract from the
+supervisor-owned state root and package cache. The retained RCC revision's
+package initialization recursively applies mode `0750` before a `--version`
+probe returns. Admit only the explicitly reviewed `0700`/`0750` client-home
+modes with the exact owned path, owner and group; keep the state root and
+package cache at `0700` and the identity marker at `0600`. Never chmod an
+input to make admission pass. Bind observed permissions and native-source
+provenance separately: a modified build does not establish exact source
+equivalence, and a rejected home proves no publication, Action or lease result.
+
+Bind an intentional worker-disposal context to the independently authenticated
+current source commit and tree, rather than a historical fixture literal. Preserve
+the original lease status, exit code and reason separately from Action success.
+The legacy RCC 18.19.3 failed/-1/exact-child-reason exception does not admit newer
+versions; unavailable reader or cleanup observations remain unknown.
+
 Managed spec-v2 Action packages use the provisional RCC runtime adapter only
 when `ACTIONS_RUNTIME_RCC_PROVIDER` or `ACTIONS_REAL_RCC_ARTIFACT_TEST`
 explicitly opts into artifact mode. Without either opt-in, legacy bootstrap
@@ -2022,6 +2066,45 @@ timeout whose surviving identity and remaining cleanup budget were not
 recorded. Any improvement must retain the same deadline and exclusive
 Popen wrapper wait ownership, with live, zombie and observation-error
 states kept distinct.
+
+Record the exact provider-generated digest, Action result, and wrapper receipt
+from that run; do not reuse a digest from another disposable provider root. A
+mocked parser or RCC health/version check is not acceptance evidence.
+RCC v18.19.2 materializes `env exec` children with the artifact as their
+current directory, so import/discovery must pass the package source directory
+explicitly to `actions metadata`; `PYTHONPATH` alone does not make discovery
+scan the source tree. Record Action execution and RCC wrapper lifecycle as
+separate outcomes. An Action may return `PASS` while intentional pool
+termination produces `status: failed`, `exitCode: -1`, and
+`reason: child exited non-zero`. That receipt remains a wrapper lifecycle
+failure even when artifact identity, verification, and lease identity validate.
+For reload/recovery receipts, retain the Action Server `Popen` owner and poll
+its return code before any stop call; record that natural-exit observation
+separately from RCC wrapper receipts. `ActionServerProcess.stop()` delegates to
+`Process.stop()`, whose process-tree helper uses `psutil.wait_procs`; that helper
+can consume the direct child's wait status, so a later `Popen.poll()` value of 0
+is not natural-exit evidence. A normal `start_server` return produces CLI exit
+0. The
+explicit `/api/shutdown/` endpoint schedules `_thread.interrupt_main()` as a
+response background task, after the final ASGI response-body send completes;
+`_main_retcode` catches that `KeyboardInterrupt` and returns 1. Count exit 1 as
+the expected controlled API-interrupt outcome only when the receipt also proves
+that shutdown request and its successful 2xx response. An observed natural exit
+0 is acceptable only when captured before forced cleanup. Missing natural exit,
+an unsuccessful shutdown request, or unexplained exits such as 1 or -11 fail
+the shutdown receipt. If shutdown times out or the request fails, record
+`forced_stop_used: true`; the stop fallback is hygiene only and cannot replace
+the captured natural result. Preserve any post-stop `Popen.poll()` value as
+forced-cleanup-only evidence, never as natural exit. A `stop()` return is not
+process-exit evidence, and a captured descendant set only reports that
+observation; it does not prove complete tree reaping.
+The assembled route's service-free ordering controls require completed response
+start and final body sends before interruption; denied requests and failed
+sends must not interrupt. A server access-log status 200 does not prove that
+the client received the response. Keep client response delivery, natural exit
+and cleanup predicates separate; passing checkout-byte tests establishes no
+shutdown cause. ASGI send ordering still requires fresh platform client and
+natural-exit acceptance, and does not guarantee network delivery.
 
 The bounded process-tree result distinguishes wrapper reaping, observed live
 descendants, and zombie descendants. A zombie is reported and makes
@@ -2332,6 +2415,50 @@ recorded digest through the same provider and each returned the exact digest
 with `verification.valid: true`. After the provider's digest-addressed
 manifest was tampered with, a fresh consumer received a provider HTTP 500 and
 the adapter rejected the acquisition; the manifest was restored afterward.
+
+When verified archival removes a historical receipt's expanded path, retain its
+original binding and use an explicitly reviewed mapping to the exact archive
+member. Recheck archive bytes, unique member digest and metadata, and the original
+failure status. Do not recreate the old path or relabel its identity. This alias
+proves preservation; it does not qualify a failed execution.
+
+Curate a successor by exact body identity and declared scope, not filename or
+timestamp. Copy only reviewed safe summaries and patches; a summary's binding
+to private API, provider, process-census or log bytes does not authorize copying
+that payload. Retain failed and conditional predecessors separately from
+accepted successors, including their original identities and remaining holds.
+
+Before adopting a frozen command packet, verify every file path consumed by its
+constructor, launcher, guards and body, including paths stored only in its
+configuration. Hashing the listed bindings does not prove that a separately
+named source inventory exists or belongs to the intended commit and tree.
+Preserve a rejected packet and use a named successor with a checked dependency
+closure; do not backfill a copied filename or relabel the earlier packet.
+
+For completed pytest scratch, retain the exact root identity and its own
+completion evidence; an RCC recycle marker is not that proof. Names, timestamps,
+UID and an absent lock establish correlation, not exact launch origin. Record
+inaccessible process references as unknown. Bind two complete root/member
+inventories and verify nanosecond mtimes through exact PAX fields when retaining
+them. Bound compressed writes and reserve index/verification capacity before
+release. Overflow, changed membership or incomplete verification must preserve
+the original tree; save the complete private index before removing only the root.
+
+Give every preservation-sensitive pytest invocation its own unique, absent
+`--basetemp` outside the shared numbered pytest parent, and retain policy `all`.
+The installed pytest default retains three numbered roots and registers cleanup
+at process exit; a later invocation can delete an earlier completed test root.
+Explicit basetemp bypasses that numbered-root cleanup, but pytest removes an
+existing explicit target before using it. Never reuse a retained target or share
+one basetemp setting across sequential Toolkit and Runtime invocations. Policy
+`none` increases deletion; it does not disable cleanup. Before attributing a
+vanished root, bind recorded commands and installed cleanup source, distinguish
+scratch loss from independently retained logs and source receipts, and keep
+unobserved process attribution and broader evidence references unknown.
+
+An execution release must bind the exact proposal and scoped review decision.
+A source-only GO cannot admit a full run through a common success prefix.
+Require the reviewed parent, gate and postcheck commands before release.
 
 ## Pull Request Triage
 
@@ -2697,6 +2824,17 @@ published supported wheel with the required API. Do not waive the published-Core
 contract because a candidate preview passes. Update the supported floor only
 after the replacement registry artifact and its installed behavior are verified.
 
+The production template's exact published-Core 1.0.3 gate requires its own
+retained installed-worker and browser receipt after the published dependency
+prerequisite is verified. Producer proof alone does not qualify that consumer
+gate; name the executed candidate-source or published-dependency path and retain
+its corresponding source, module and browser identities.
+
+Preserve an original receipt's parent list, including an empty list. Authenticate
+the observed checkout SHA's ordered parents separately from the commit object;
+an empty receipt list does not establish a parentless commit or replace that
+readback, including for shallow CI checkouts.
+
 For live PostgreSQL acceptance, use a fresh task-owned service pinned by immutable
 image digest and bind its randomly allocated port to loopback only. Keep generated
 fixture credentials in a mode-0600 task file, pass them only to the test environment,
@@ -2878,6 +3016,11 @@ Create checkpoint destinations exclusively and reject an existing path even
 when it is a dangling symlink. Put corrections in a new, explicitly linked
 artifact. If original bytes were overwritten or deleted, retain their announced
 identity and report the loss; do not recreate purported original evidence.
+
+In a hash-bound unified patch, a single-space blank hunk context is payload.
+Verify diagnostic lines and original hashes before adding exact-basename local
+`-text whitespace=-blank-at-eol` attributes for those frozen patches; preserve
+authored Markdown and other whitespace checks.
 
 For a text receipt's digest, name the exact segment and hash its UTF-8 bytes.
 State whether the trailing newline is included, and report byte counts

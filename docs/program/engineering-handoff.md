@@ -599,3 +599,8 @@ Devsy remains parked. Pending request `apr_29be804c-94cd-4b62-9233-e91b5ec30774`
 Use the five ordered actions in the new-task checkpoint at the top of this handoff. The latest Windows failure takes precedence over earlier pending status.
 
 Resume from the live integration head, fetch all open issue/PR/check changes, reconcile worker status and retain the complete graph. Do not infer graph completion or publication readiness from green checkpoint PRs.
+
+
+## Current engineering successor — 2026-10-11
+
+Continue from the [curated successor](../handoffs/actions-swarm-mk3-20261011-current-engineering-successor.md) and its scoped source, actual and storage dispositions. The earlier snapshots remain historical. This documentation checkpoint preserves the original 54-contract graph and private evidence boundaries; it grants no native attempt, merge, closure, publication or infrastructure action.

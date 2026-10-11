@@ -1,0 +1,49 @@
+{
+  "added_function": "validate_qualification_documents",
+  "modified_constructor_function": "constructor qualification document bindings/admission only",
+  "native_execution": "NOT_RUN",
+  "old_conditional_owner_unchanged": {
+    "bytes": 25665,
+    "mode": "0o400",
+    "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/OWNERFINAL-current-e4ff-owned-cache-transport-v7-CONDITIONAL-preexecution-proposal.json",
+    "sha256": "2f4fb5d662a6b271ea7d3e360f9206ee27be16ced996dae88f886cc543141cca"
+  },
+  "prior_constructor_unchanged": {
+    "bytes": 9083,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/build_current_config_v5.py",
+    "sha256": "709d984f16bb77a2f1c806e66bf7dd3c57d670eea7ab50cff92204da9edab368"
+  },
+  "source_application_mutations": "NONE",
+  "status": "PASS_NAMED_METADATA_SUCCESSOR_SCOPE_ONLY",
+  "unchanged_cache_policy": {
+    "bytes": 5813,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_cache_policy_v1.py",
+    "sha256": "3cc13e17b4cebe5cbe0ba2d40cd27a8fcbada212f4ae2f8914efe66cf6c5bcf9"
+  },
+  "unchanged_constructor_functions": [
+    "bind",
+    "compatibility",
+    "nullable_binding",
+    "main"
+  ],
+  "unchanged_launcher": {
+    "bytes": 4820,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/launch_one_version_v1.py",
+    "sha256": "2e4d16c88744003c285757bde699e11c314b4ee6a992f42ebc93f0ecf6a626d4"
+  },
+  "unchanged_managed_gateway": {
+    "bytes": 505,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/managed_once_gateway_v1.sh",
+    "sha256": "5a1c5a95075933ed89cc0580f200b4f4f1c3de7cfad1c743bd9a739d6e969a94"
+  },
+  "unchanged_native_transport": {
+    "bytes": 24963,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/actual_transport_v7.py",
+    "sha256": "a8bad293dbb719ed8f5d9249761868ffd30cd59fd98bb886589f5833faa1c8c1"
+  }
+}

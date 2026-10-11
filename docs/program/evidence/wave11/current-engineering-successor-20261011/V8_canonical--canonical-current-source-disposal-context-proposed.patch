@@ -1,0 +1,15 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -161,6 +161,12 @@
+ proof. A historical synthetic build commit may have the accepted source tree
+ without being an ancestor of the current branch; retain those identities and
+ compare the production inputs separately.
++
++Bind an intentional worker-disposal context to the independently authenticated
++current source commit and tree, rather than a historical fixture literal. Preserve
++the original lease status, exit code and reason separately from Action success.
++The legacy RCC 18.19.3 failed/-1/exact-child-reason exception does not admit newer
++versions; unavailable reader or cleanup observations remain unknown.
+ 
+ At #311 head `c888fb4a`, Windows run `38099013706`, job `114350853595`,
+ timed out at the initial native startup in the watched-reload and resource

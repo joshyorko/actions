@@ -1,0 +1,197 @@
+{
+  "PR": 282,
+  "accepted_gate_scope": {
+    "current_complete_jobs": "25SUCCESS/9declared PR workflows, no stale jobs carried",
+    "current_original_published_Core_browser": "One actual Linux source Runtime/published Core1.0.3/browser case, 0skip/fail/error; three Core member hashes, strict bounded Runtime cleanup and browser temp removal only",
+    "original_Windows_integration": "131PASS21SKIP1364deselect",
+    "original_Windows_source": "1184PASS177SKIP15warnings",
+    "source_FULL": "1349PASS12SKIP16warnings; separate original Windows collection"
+  },
+  "actual_Git_object_authentication": "Exact SHA fetched with --no-write-fetch-head, no ref/HEAD changes; local commit object SHA1/header/ordered parents/tree verified; independent fresh GitHub API Git object agrees.",
+  "actual_integration": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "actual_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "bindings": [
+    {
+      "bytes": 1296,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/OWNERFINAL-root-one-normal-current1299-PR282-integration.json",
+      "sha256": "e451743ac05d361351e482af95159591246884c05fee0388e38930e3d69aae54"
+    },
+    {
+      "bytes": 9568,
+      "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/OWNERFINAL-independent-current1299-a54-scoped-PR282-merge-admission-GO-v2.json",
+      "sha256": "9f903031955f9117cfb4447c3dfd46cfe9bf3350b73373f634950fe87806147c"
+    },
+    {
+      "bytes": 18237,
+      "path": "/workspace/engineering/pr282-current1299-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current1299-SOURCE-LIGHT-review.json",
+      "sha256": "097d279bcaa111caef55f475422c6bca2ba282910869b6c07e054e6e3108b06a"
+    },
+    {
+      "bytes": 7707,
+      "path": "/workspace/engineering/pr282-current1299-independent-actual-SOURCEFULL-review/OWNERFINAL-independent-current1299-original-configured-SOURCEFULL-review.json",
+      "sha256": "d09e53afeaf6bbd379a1c65e42b11af5af0bb30abc7f204ac2083e83fd06c0d0"
+    },
+    {
+      "bytes": 12418,
+      "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/independent-current1299-complete-metadata-and-original-Windows-proof.json",
+      "sha256": "639c0705ddf3b0dbfe5609e075c85219504a219f9385437646a7b25313d5f228"
+    },
+    {
+      "bytes": 21477,
+      "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/safe-one-current1299-a54-complete-metadata-census.json",
+      "sha256": "5f60075b1e42184216ed233ec93aa293a1c35c2fc77e885863a3690519a897bd"
+    },
+    {
+      "bytes": 2751,
+      "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/independent-current1299-original-Canvas-artifact-proof.json",
+      "sha256": "3284893c013be9b981486b683fd129729a0de15939d7a9caffcd1609957e70a6"
+    },
+    {
+      "bytes": 1502,
+      "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/canonical-current-Canvas-consumer-and-parent-readback-proposed.patch",
+      "sha256": "a164f54111f3b75fdc7866ad555423358f56b2c21e71301425cde13b4c313319"
+    },
+    {
+      "bytes": 34544,
+      "path": "/workspace/engineering/pr282-actual-e2c81-independent-integration-review/fresh-PR.private.json",
+      "sha256": "fb5f5b0ae9d2b0be40460f93b1a97dd70c2cb4c4bb7db82e166f2c4a55b4c31f"
+    },
+    {
+      "bytes": 448,
+      "path": "/workspace/engineering/pr282-actual-e2c81-independent-integration-review/fresh-target.private.json",
+      "sha256": "f2c2b8fd2c72a1216a821bf59e4a463a1ebf07de91641183c0d302cd2026d615"
+    },
+    {
+      "bytes": 2734,
+      "path": "/workspace/engineering/pr282-actual-e2c81-independent-integration-review/fresh-actual-Git-commit.private.json",
+      "sha256": "96453956d5f574c3fdcc4f6d1a2b89b3f81aca50e805c5b1720907aea3d58a1b"
+    },
+    {
+      "bytes": 2734,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/actual-integration-Git-commit.private.json",
+      "sha256": "96453956d5f574c3fdcc4f6d1a2b89b3f81aca50e805c5b1720907aea3d58a1b"
+    },
+    {
+      "bytes": 448,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/actual-authentic-target-readback.private.json",
+      "sha256": "f2c2b8fd2c72a1216a821bf59e4a463a1ebf07de91641183c0d302cd2026d615"
+    },
+    {
+      "bytes": 34544,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/final-PR.private.json",
+      "sha256": "c7c2ab3ad7e3d65c9fc7ffd51f32ade7828bfc15105b607378d8d10680e65503"
+    },
+    {
+      "bytes": 109,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/one-normal-merge.private.json",
+      "sha256": "a5b3b69dbbf4795ea5f168d2562d9c55857e534d7219ed8f1f682b14b7f364b4"
+    },
+    {
+      "bytes": 757,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/root-one-normal-ready-and-merge-authorization.json",
+      "sha256": "b7750794c62f491b02a5212f66ee4578b39fe46dee65df5ef15d32ddc62f198e"
+    },
+    {
+      "bytes": 200,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/normal-ready.private.json",
+      "sha256": "fec3e19ded1542e7ea70a3c3dc4fec8450fe8cf81b3d8373e43332c16cf32e8c"
+    },
+    {
+      "bytes": 16897,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/previous-PR-body.private.txt",
+      "sha256": "b9591fb72b6a0e960974199d7a944a8d7354cb2e733401835c333c4f6836a5e7"
+    },
+    {
+      "bytes": 32780,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/before-ready-PR.private.json",
+      "sha256": "f52dc3c215bee4a26e504ddeb1ea25c2976f9f98a5926327b199922cc3eca38f"
+    },
+    {
+      "bytes": 448,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/before-ready-target.private.json",
+      "sha256": "af9cbd68597b9c1cfdb46ea56afafb0e366d28cf93a82910a2203c44acf0339d"
+    },
+    {
+      "bytes": 8431,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/before-ready-checks.private.json",
+      "sha256": "f2349a9540c150c0f27133c1cc74a3e1bf2f6e0433f5e3687dbd24e993f6fa43"
+    },
+    {
+      "bytes": 33565,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/after-ready-before-merge-PR.private.json",
+      "sha256": "6285a59dc3b8d055a5b1c9f120997f113dfc0759cba7392a35fc898dda1e011f"
+    },
+    {
+      "bytes": 448,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/after-ready-before-merge-target.private.json",
+      "sha256": "af9cbd68597b9c1cfdb46ea56afafb0e366d28cf93a82910a2203c44acf0339d"
+    },
+    {
+      "bytes": 8431,
+      "path": "/workspace/engineering/root-pr282-current1299-one-normal-ready-and-merge/after-ready-before-merge-checks.private.json",
+      "sha256": "f2349a9540c150c0f27133c1cc74a3e1bf2f6e0433f5e3687dbd24e993f6fa43"
+    },
+    {
+      "bytes": 454443,
+      "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/actual-tested-tree-private.json",
+      "sha256": "d7ace6796eab7d5065ea3367bbb4eac65c5f9259a4d786fae44608beba832511"
+    }
+  ],
+  "distinct_identity_disposition": "Original checkout f930 and receipt parent list remain immutable. API and locally authenticated actual commit e2 are separate identities with equal complete trees.",
+  "documentation_disposition": "Accepted exact existing 1502-byte a164 canonical proposal for root integration; not applied to source1299 by this read-only reviewer. Actual-vs-synthetic equality adds evidence to existing tuple guidance, no cosmetic child.",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; exactproposedconsumer/parent-readbackdelta plusverifiedowning1299imports.",
+    "Durable learning captured": "PublishedCoreproducerproofandactualtemplateconsumerreceiptareseparategates;preserveemptyreceiptparentlistandauthenticateobservedcheckoutorderedparentsindependently.",
+    "Evidence": "CanonicalpublishedCoreprerequisitealreadyverifieda709/8e088 vsolderblockedparagraph; current11708206027originalf930/afe receiptparents[]; actualf930APIordered[a54,1299]; original39-conjunctvalidator andcurrent1case39.973s.",
+    "Remaining uncertainty": "Currentconsumer isnarrowLinuxsource/published3member/browsergate;fullartifactretrieval/native/ChatGPT/private/release remainHOLD.",
+    "Stale or ambiguous guidance removed": "Removebroadstaleuntildependencyispublishedblock; avoidparentlesscommitclaimfromemptyshallow/localreceiptfield.",
+    "exact_delta": {
+      "bytes": 1502,
+      "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/canonical-current-Canvas-consumer-and-parent-readback-proposed.patch",
+      "sha256": "a164f54111f3b75fdc7866ad555423358f56b2c21e71301425cde13b4c313319"
+    },
+    "patch_apply_check": "PASSwithoutapplyingorindexwrites"
+  },
+  "engineering_graph": "Root retained 53 open contracts plus previously accepted closed210 unchanged; this review does not independently close or admit full54 graph.",
+  "full_typed_tree": {
+    "actual_vs_source_and_tested_API_tree": "EXACT_MODE_AND_GIT_BLOB_MATCH",
+    "current_FS": "ALL_BODY_SYMLINK_AND_EXEC_MODES_EXACT",
+    "entries": 1440,
+    "source_HEAD_and_tree": "UNCHANGED_CLEAN"
+  },
+  "normal_merge_readback": {
+    "fresh_PR": "merged true/closed/draftfalse/head1299/merge e2",
+    "fresh_named_target": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "previous_body": "COMPLETE_ORIGINAL_BODY_PRESERVED_AND_OLD_NEW_SHA_VERIFIED",
+    "ready": "Normal markReady response source1299/draftfalse",
+    "root_before_and_after_ready": "source1299/basea54/25COMPLETED_SUCCESS",
+    "root_expected_head_merge_response": "merged true/e2"
+  },
+  "ordered_actual_parents": [
+    "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "1299cc4bb6586f467d36ca124faaaaa77362695f"
+  ],
+  "policy": {
+    "normal_expected_head_API_merge": "SUCCEEDED",
+    "reviews_threads_closures": "0/0/[] at qualified capture; no issue closure",
+    "traditional_protection": "403UNKNOWN retained; no absence inference",
+    "visible_rulesets_and_active_rules": "[] at scoped admission capture"
+  },
+  "previous_target": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+  "qualified_original_receipt_parent_list": [],
+  "qualified_original_test_checkout": "f93036853f433961508b3c74cf2b8d501f0e6520",
+  "recorded_utc": "2026-10-11T17:01:42.897732+00:00",
+  "remaining_HOLD": [
+    "Full127/sharedsuccessfulArtifact.handle/artifactaccess binding/ChatGPT/frozenRuntime/native/browserotherplatform acceptance remainopen.",
+    "ThreeCoremembersdo notprovewholewheel/coldregistry/fullinstalleddistribution.",
+    "Runtime/browsercleanup boundedcapturedpoint-in-time,notuniversaldescendantdiscovery/adoption/reaping orallhostharnessreaders.",
+    "Private01f/frozenv6/OAuth/backend/fullengineeringgraph/issueclosure/tags/publication/release notadmitted.",
+    "OtherPRCI tuples including308396 areseparate; advancingtargetneedsnormalrefresh/newqualifiedunion."
+  ],
+  "reviewer_actions": "Owned review outputs, three fresh lightweight authenticated API reads, exact object fetch only. No source/index/branch/HEAD/gate/native/provider/browser/publish/merge mutation.",
+  "schema": 1,
+  "source": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+  "status": "PASS_SCOPED_NORMAL_PR282_ACTUAL_INTEGRATION_READBACK",
+  "target_ref": "integration/community-release-20261008",
+  "upstream_disposition": "none"
+}

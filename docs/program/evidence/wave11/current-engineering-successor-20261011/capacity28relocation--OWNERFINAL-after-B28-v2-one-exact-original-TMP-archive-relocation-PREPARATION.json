@@ -1,0 +1,103 @@
+{
+  "bounds": "Outer900TERM+10, copy/verification600TERM+10, serial after B28 completed and no conflicting archive/sourceFULL/native/installer job.",
+  "chosen_alternative": "Smallest existing /tmp archive >=128MiB is248921681 bytes; concrete bound fits only after actual400MiB B28 reclaim. Original128/256MiB single-relocationHOLD retained.",
+  "counts": {
+    "all_original_bodies_modes_UID_GID_link_targets_against_index": "PASS",
+    "internal_hardlink_headers": 3,
+    "root_headers": 1,
+    "unique_original_members": 14805,
+    "whole_compressed_SHA_before_after": "PASS",
+    "whole_gzip_EOF_CRC_ISIZE": "PASS"
+  },
+  "depends_on_B28_owner": {
+    "bytes": 11260,
+    "mode": "0o444",
+    "path": "/workspace/engineering/capacity-recovery-batch28-proposal-v2/OWNERFINAL-B28-v2-exact34-completed-400MiB-metadata-storage-preservation-PROPOSAL.json",
+    "sha256": "e4ed89f2fab5d0749c6232e45b9969feb34b1cb658b3d9806beb42b0efce6ada"
+  },
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md exact completed-scratch7d070 and reviewed historical archive-alias9dd800 lessons reused; no cosmetic source mutation",
+    "Durable_learning": "Byte-preserving relocation needs an exact reviewed new-path mapping before old archive-path removal, and per-volume fresh capacity; storage preservation never upgrades the old failure.",
+    "Evidence": "Original248921681 SHA28e391/immutable index14805members/whole gzip CRC, exact source file modeUIDGID/mtime/inode and separate B28 stable input preservation.",
+    "Remaining_uncertainty": "Actual capacity, new source, independent release/execution pending; original historical provenance/native/release limits unchanged.",
+    "Stale_guidance_removed": "No fictional100\u2013200MiB candidate or single<=48MiB sufficient relocation; no silent old-index rewrite or old physical alias treated current.",
+    "verified_reuse": [
+      {
+        "bytes": 1068,
+        "mode": "0o600",
+        "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+        "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+      },
+      {
+        "bytes": 846,
+        "mode": "0o600",
+        "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/canonical-exact-historical-receipt-archive-alias-proposed.patch",
+        "sha256": "9dd8008b4194f7cd9848796c7c7b5639862271e73ee222da46d5a59ef501d8ad"
+      }
+    ]
+  },
+  "minimal_future_source_plan_NOT_AUTHORED": [
+    "No glob selector: exact original archive+exact destination and old immutable index record only. Fresh original path lstat identities and completeSHA/index reference rechecked first.",
+    "Stream copy through bounded exclusive file, fsync copied file and owning directory; source remains untouched on copy/error/hash/cap/deadline failure and partial file+receipts retained.",
+    "Before any source removal, reread destination wholeSHA and full gzip EOF/CRC/ISIZE and all14805TAR body/type/modeUIDGID/link/internal-hardlink against unchanged original private index; compare source again.",
+    "Persist separate0600 exact-original-path to new-file mapping with source and destination hash/size/modeUIDGID/mtime plus original index binding and full verification receipt. Original index stays byte-identical; dependent readers explicitly resolve historical path via that reviewed mapping.",
+    "Only after verification/index/mapping/fresh postcopy capacity and finite accessible handle checks may ROOT unlink exact old archive file. No parent/index/member/source/cache/other archive removal. Original bytes retained at new location; no failed/native qualification upgrade.",
+    "On every outcome keep original primary failure+private stdout/stderr/postguards; distinct ROOT one release/script independent review required, no automatic retry."
+  ],
+  "mode_owner_metadata_contract": "Unused0700 destination root, original bytes copied O_EXCL0600, preserve UIDGID1000/1000 and file mtime_ns by exactinteger os.utime; verify final regular no-symlink type/body/size/modeowner/mtime. No reconstruction or payload extraction.",
+  "new_exact_destination": "/workspace/engineering/retained-capacity-archives-B28-relocation/dd09121ba364f685.tar.gz",
+  "no_requested100to200MiB_candidate": true,
+  "original_exact_archive": {
+    "allocated": 248922112,
+    "bytes": 248921681,
+    "device": 33,
+    "gid": 1000,
+    "inode": 36163,
+    "mode": 384,
+    "mtime_ns": 1791699730751885610,
+    "nlink": 1,
+    "path": "/tmp/actions-completed-scratch-recovery-batch3/dd09121ba364f685.tar.gz",
+    "sha256": "28e391747a904f4162e01a0b95ea67ea43bc4db8159f21345af65889ab4680b5",
+    "uid": 1000
+  },
+  "original_exact_index": {
+    "allocated": 13553664,
+    "bytes": 13551365,
+    "device": 33,
+    "gid": 1000,
+    "inode": 36164,
+    "mode": 384,
+    "mtime_ns": 1791699764843975716,
+    "nlink": 1,
+    "path": "/tmp/actions-completed-scratch-recovery-batch3/private-complete-inventory-and-recovery.json",
+    "sha256": "7976469c878721a9a8e27e42962ae9899628aad21b3463174f2aa9ef08cc7e2b",
+    "uid": 1000
+  },
+  "readonly_full_original_verification": {
+    "bytes": 1472,
+    "mode": "0o600",
+    "path": "/workspace/engineering/capacity-recovery-batch28-proposal-v2/private-optional-single-original-archive-relocation-readonly-full-member-proof.json",
+    "sha256": "f95e2613b2417a11505246c17d2b9bf00c8ff43b719dc9ff261b5fa0e0b0839d"
+  },
+  "readonly_inspector": {
+    "bytes": 3787,
+    "mode": "0o600",
+    "path": "/workspace/engineering/capacity-recovery-batch28-proposal-v2/inspect_optional_relocation_metadata.py",
+    "sha256": "10cb4cf18b2fad4c6248ce44c50e4f1f0b9e1cba61ccb236e2f904b6436923bc"
+  },
+  "remaining_unknown": "Actual B28 compression/reclaimed/free space and new copy-script review not performed; inaccessible handles/global aliases unknown. Exact original archive bytes proven only read-only; old TAR nanosecond precision not requalified.",
+  "resource_contract": {
+    "archive_copy_byte_cap": 268435456,
+    "checkpoint_reserve": 16777216,
+    "copy_allocated_ceil": 248922112,
+    "estimated_not_promised_TMP_after_source_archive_removal": 1423765504,
+    "estimated_not_promised_workspace_after_B28_then_copy": 1431703552,
+    "fresh_actual_capacity_required": true,
+    "fresh_workspace_required_before_copy": 1606618317,
+    "normal_growth_reserve": 52428800,
+    "workspace_floor": 1288490189
+  },
+  "schema": "B28-after400MiB-one-original-TMP-archive-relocation-readonly-proposal",
+  "status": "CONDITIONAL_PREPARATION_ONLY_NOT_RUN_REQUIRES_ACTUAL_B28_POSTCAPACITY_AND_SEPARATE_SCRIPT_INDEPENDENT_REVIEW_ROOT_ONE_RELEASE",
+  "upstream_disposition": "none"
+}

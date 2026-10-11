@@ -1,0 +1,136 @@
+{
+  "schema": "actions-independent-current2821299-original-configured-SOURCEFULL/v1",
+  "decision": "GO_EXACT_CURRENT1299_CONFIGURED_SOURCEFULL_NORMAL_EXISTING_BRANCH_SOURCE_PUSH_PREREQUISITE_ONLY",
+  "owner": {
+    "path": "/workspace/engineering/root-pr282-current1299-one-configured-sourcefull/OWNERFINAL-root-current1299-configured-SOURCEFULL-PASS.json",
+    "bytes": 3467,
+    "sha256": "e82889eb300600a4d2e6c6367881b4e9b22445b4285b268b935b746956b8b662",
+    "mode": "0o600"
+  },
+  "source": {
+    "head": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+    "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+    "ordered_parents": [
+      "c35ee2e279eaefe55b16aecdb80da04c590aff7c",
+      "a54c982462d1e7ad011d8152bfc299d997503fb3"
+    ],
+    "complete1440_typed_Git_FS_body_and_mode_equal": true
+  },
+  "one_original_execution": {
+    "root_release": {
+      "path": "/workspace/engineering/root-pr282-current1299-one-configured-sourcefull/root-one-release.json",
+      "bytes": 390,
+      "sha256": "15e7b54ca93812aa8d15b267be29b4c3a9aed8095f23d6198d2e3081cc623dbc",
+      "mode": "0o600"
+    },
+    "root_command": {
+      "path": "/workspace/engineering/root-pr282-current1299-one-configured-sourcefull/root-one-command.json",
+      "bytes": 1014,
+      "sha256": "d48b32179565946d364a58106124b8c138586432cdb8fad458d47680936f353d",
+      "mode": "0o600"
+    },
+    "root_outer_terminal": {
+      "bytes": 294,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-pr282-current1299-one-configured-sourcefull/OWNERFINAL-root-one-current1299-sourcefull-outer-terminal.json",
+      "sha256": "6fb1b1eabcaf5fd2d0d059773dbd85c4c1dcee2bfc5bd31d28807f4fa55d3c10"
+    },
+    "root_outer_returncode": 0,
+    "root_outer_seconds": 121.45446844599792,
+    "launcher_terminal": {
+      "bytes": 869,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current1299-SOURCEFULL-preexecution-v2/one-configured-full-once-owned/original-terminal.json",
+      "sha256": "64531f55986c8de124d432b5a3056293e6d0bf16f22294beb031d8dac8769ff7"
+    },
+    "original_log": {
+      "bytes": 347809,
+      "path": "/workspace/engineering/pr282-current1299-SOURCEFULL-preexecution-v2/one-configured-full-once-owned/original-configured-source-full.private.log",
+      "sha256": "81b9772fe8397f1d2cadab35e56dd4a25c91733267185e679761b02562d3c0b7"
+    },
+    "primary_pre_post_returncodes": [
+      0,
+      0,
+      0
+    ],
+    "primary_error": null,
+    "post_error": null,
+    "original_complete_node_census": {
+      "bytes": 251046,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-pr282-current1299-one-configured-sourcefull/original-complete-configured-full-node-census.private.json",
+      "sha256": "b8551a2e158157d6e51d1d29a297c47cc5000265a08aec8c74eedbeb9d56f4f9"
+    },
+    "independent_node_census": {
+      "path": "/workspace/engineering/pr282-current1299-independent-actual-SOURCEFULL-review/private-independent-all1361-complete-current-sourcefull-terminal-nodes.json",
+      "bytes": 272817,
+      "sha256": "d24b473455e6a8c02382c18eda4e529344d76661476fac44950c836384247c11",
+      "mode": "0o600"
+    },
+    "actual_workers": [
+      "gw0",
+      "gw1"
+    ],
+    "observed_nodes": 1361,
+    "unique_nodes": 1361,
+    "module_count": 95,
+    "PASS": 1349,
+    "SKIP": 12,
+    "FAIL": 0,
+    "ERROR": 0,
+    "warnings": 16,
+    "pytest_seconds": 111.49,
+    "deselected": "UNREPORTED",
+    "shutdown_source_PASS": 10,
+    "Linux_transport_source_PASS": 30,
+    "source_only_not_native_consumer_or_browser": true,
+    "single_attempt_no_replay": true
+  },
+  "fresh_independent_postactual_preservation": {
+    "path": "/workspace/engineering/pr282-current1299-independent-actual-SOURCEFULL-review/independent-postactual-source-and-original-payload-preservation-proof.json",
+    "bytes": 21745,
+    "sha256": "908e8a3e4f63b19850f55e9572188ba82bc81dcf92be128523253ae12f320546",
+    "mode": "0o600"
+  },
+  "native_process_cleanup_and_internal_readers": "UNKNOWN_NOT_INFERRED_FROM_SUITE_OR_FILE_PRESERVATION",
+  "root_owner_independent_actual_review_field_PENDING_preserved": "This named independent successor supplies actualreview; original3467B owner remains unchanged",
+  "remaining_HOLD": [
+    "Fresh exact1299/a54 fullhostedCI/reviews/policy and normalexistingbranch namedpush verification required before integration",
+    "Actualnative/browser/provider/installedconsumer/private/backend/full127/release remain HOLD; source configuredsuite does not admit their runtime gates",
+    "Current276producer258match10changed8added+5selectors remains UNQUALIFIED for92498; originalV5 and all old failures keep their identities",
+    "Before/after filepreservation is measured; full supervisor/native/process/readers cleanup remains UNKNOWN outside those selected source assertions",
+    "Actualaftercapacity1249505280B is below strictfreshfuturefloor1288490189B; this PASS does not release another heavy run",
+    "Original historical441/tenUNAVAILABLE and earlierzero-case selectionfailure unchanged; not reconstructed or relabeled"
+  ],
+  "Documentation_improvement": {
+    "Canonical_files_changed_or_proposed": [
+      "docs/skills/repository-operations.md",
+      "docs/skills/provenance-observability.md"
+    ],
+    "Exact_verified_import_reuse": {
+      "bytes": 8802,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr282-current-a54-source-LIGHT/exact-imported-a54-canonical-guide-delta.patch",
+      "sha256": "0fb4f0d3c528eb9a8718e2a422c77bfc7f479af357c5eb57c51de224a27aebc3"
+    },
+    "Durable_learning_captured": "Authenticate the complete whole-line node census, explicit rawpayload before/after fileguards and actualsource tuple separately. Two-worker configuredsource success and exact preservation do not establish native/browser/provider/process cleanup acceptance or release a next run below freshcapacityfloor.",
+    "Evidence": "Original347809B/81b977 log,1361completeunique terminalnodes95modules/1349PASS12SKIP16warnings; originalbefore+after PASS1440/1192 and independentfresh83payload/whole1192/source1440; exact8802B guideimport/bothparent lesson proof",
+    "Stale_or_ambiguous_guidance_removed": "Warnings measured16 from originalterminal, not guessed15. Full counts are unique wholeparameterized nodeIDs; original ownerPENDING is not rewritten, and originalfailed selection remainshistorical.",
+    "Remaining_uncertainty": [
+      "Fresh exact1299/a54 fullhostedCI/reviews/policy and normalexistingbranch namedpush verification required before integration",
+      "Actualnative/browser/provider/installedconsumer/private/backend/full127/release remain HOLD; source configuredsuite does not admit their runtime gates",
+      "Current276producer258match10changed8added+5selectors remains UNQUALIFIED for92498; originalV5 and all old failures keep their identities",
+      "Before/after filepreservation is measured; full supervisor/native/process/readers cleanup remains UNKNOWN outside those selected source assertions",
+      "Actualaftercapacity1249505280B is below strictfreshfuturefloor1288490189B; this PASS does not release another heavy run",
+      "Original historical441/tenUNAVAILABLE and earlierzero-case selectionfailure unchanged; not reconstructed or relabeled"
+    ]
+  },
+  "Upstream_disposition": "none",
+  "reviewer_no_guard_execution_tests_source_edits_native_provider_browser_download_install_branch_push_ready_merge": true,
+  "review_script": {
+    "path": "/workspace/engineering/pr282-current1299-independent-actual-SOURCEFULL-review/review-original-current1299-sourcefull-readonly.py",
+    "bytes": 11768,
+    "sha256": "74aa3596e69354d3e53dec83ba5846b9db2c1667fd0da468024d6c182c7258d2",
+    "mode": "0o600"
+  }
+}

@@ -1,0 +1,303 @@
+{
+  "configured_full_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/current_source_full_body_v2.py"
+  ],
+  "current_capacity_observation": {
+    "devshm_bytes": 3942780928,
+    "status": "FRESH_FLOOR_AND_SERIALIZED_ROOT_RELEASE_STILL_REQUIRED",
+    "workspace_bytes": 1199239168
+  },
+  "current_source_LIGHT": {
+    "bytes": 13921,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr308-cache-current-e3c-source/OWNERFINAL-current-e4ff-reviewed-cache-application-and-e3c-ordinary-source-LIGHT.json",
+    "sha256": "e18d871d9daf93e21e0b34610af31e9d4198bc4a1c93431d8799464954d37c6c"
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Exact archive member can satisfy historical byte preservation after verified removal, without recreating receipt paths or changing failed acceptance.",
+    "evidence": "Operator mapcc73027, original1696/8dc bytes and FAIL/cleanupFAIL found in ca557 gzip with exact uidgid/mode and stream/gzipEOF checks.",
+    "exact_new_alias_delta": {
+      "bytes": 846,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/canonical-exact-historical-receipt-archive-alias-proposed.patch",
+      "sha256": "9dd8008b4194f7cd9848796c7c7b5639862271e73ee222da46d5a59ef501d8ad"
+    },
+    "remaining_uncertainty": "Independent complete preservation review and current configuredFULL/ROOT serialized release remain pending; historical RCC failure unchanged.",
+    "stale_or_ambiguous_guidance_removed": "Do not mistake an intentionally absent expanded path for lost preserved bytes; never waive missing-row checks or infer actual qualification from an alias."
+  },
+  "execution_bounds": {
+    "always_post": "finally executes after any caught primary failure, including preflight failure; outer OS kill cannot guarantee Python finally completion and remains HOLD",
+    "always_post_guard_timeout_seconds": 60,
+    "max_normal_parent_envelope_seconds": 760,
+    "outer_GNU_timeout_seconds": 900,
+    "outer_KILL_grace_seconds": 10,
+    "parent_configured_subprocess_timeout_seconds": 640,
+    "pre_guard_timeout_seconds": 60,
+    "source_GNU_timeout_seconds": 600,
+    "source_KILL_grace_seconds": 10,
+    "terminal_emitted_by_parent": true
+  },
+  "frozen_input_bindings": [
+    {
+      "bytes": 1145,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/current_source_full_body_v2.py",
+      "sha256": "c0570efad53081f40172c23da6a12dba962c25c3084fd32e2e8e366d92a75b5e"
+    },
+    {
+      "bytes": 3598,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/current_source_prepost_guard_v2.py",
+      "sha256": "ca5be575dd0ae47ce5abab46c04651d419eb35e3faf1bf30732d2df762487d58"
+    },
+    {
+      "bytes": 3667,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/launch_current_source_full_once_v2.py",
+      "sha256": "9465dd02697b565369e5f21d8a54bf6ebce6f6c102f410ba9ada4fa3421e9c84"
+    },
+    {
+      "bytes": 2645,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/historical_failed_receipt_archive_v1.py",
+      "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+    },
+    {
+      "bytes": 5696,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/frozen-current-source-full-inputs-v2.json",
+      "sha256": "771823ea03648f2b39d594731f9ab359ad6aeca2d752b8d5e7de5bb5c5a7c6dc"
+    },
+    {
+      "bytes": 6631,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/freeze_full_preexecution_proposal_v2.py",
+      "sha256": "86861ea88827e75f0608610f81a388966dd6a691150df622c7fe51921ee3f56e"
+    },
+    {
+      "bytes": 7697,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/OWNERFINAL-current-e4ff-managed-configured-SOURCEFULL-preexecution-proposal.json",
+      "sha256": "bacae1a9c4998816b4422abf35686a49524c9f73669a7f739cc7c084ac140e96"
+    },
+    {
+      "bytes": 1070,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/named-v2-readonly-historical-member-resolution-proof.json",
+      "sha256": "583425ee8213090f43c381001d834c85a2c1d6f579d7d50758a145242f0f7a4d"
+    },
+    {
+      "bytes": 335,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/v2-readonly-historical-member-resolution.private.log",
+      "sha256": "df450378bc0c3acef7848e20c2df138c17f52d4032711dd84d5a974077aa96e8"
+    },
+    {
+      "bytes": 846,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/canonical-exact-historical-receipt-archive-alias-proposed.patch",
+      "sha256": "9dd8008b4194f7cd9848796c7c7b5639862271e73ee222da46d5a59ef501d8ad"
+    },
+    {
+      "bytes": 1864,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json",
+      "sha256": "cc73027ce86ea0965f3bdd88ed3398c322dcf012b337a4ca161966f19ffee6c7"
+    },
+    {
+      "bytes": 16449338,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-failed-control3-original-preservation-20261011-1/private-complete-inventory-and-preservation.json",
+      "sha256": "22112bb16590a4ec10b114872db7e30b51dd0c707e0cf6b8dd3b3997e74a4dd4"
+    },
+    {
+      "bytes": 156707,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-failed-control3-original-preservation-20261011-1/private-expanded-removal-final.json",
+      "sha256": "be2c9ec5cdc7a60b1f402ecd10bd67f9801dcaf748a6eb47b9079ead6adeae8f"
+    },
+    {
+      "bytes": 1075,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/OWNERFINAL-root-one-failed-control3-byte-preservation-terminal.json",
+      "sha256": "b5c85ac949bd07d7fa32c41cc8075b8e18dc5e88499d202569de8c13b0a97909"
+    },
+    {
+      "bytes": 13921,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/OWNERFINAL-current-e4ff-reviewed-cache-application-and-e3c-ordinary-source-LIGHT.json",
+      "sha256": "e18d871d9daf93e21e0b34610af31e9d4198bc4a1c93431d8799464954d37c6c"
+    },
+    {
+      "bytes": 752,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/actions/.venv/pyvenv.cfg",
+      "sha256": "5887cd61a71323e44a5900d37b3b7ab4940dc0a279015374402555a4f73300eb"
+    },
+    {
+      "bytes": 771,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/actions-http-helper/.venv/pyvenv.cfg",
+      "sha256": "2603504a110e897d67eeb04fe32c812b957d208d704208e7bc9eef13f040a8af"
+    },
+    {
+      "bytes": 763,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/devutils/.venv/pyvenv.cfg",
+      "sha256": "75e31b8fb8fa34018e18e841a434be5d23300aeeb260abb739d62e71f99af3a6"
+    },
+    {
+      "bytes": 761,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/work-items/.venv/pyvenv.cfg",
+      "sha256": "e4514f406dd690f91eaba4e511887e090072aececa648c887211e985dbdd3c01"
+    },
+    {
+      "bytes": 761,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/.venv/pyvenv.cfg",
+      "sha256": "5d4d9ced8bfa895cd4147194914e912fef36b0108a54c853249a44ad91aae3ca"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o700",
+      "path": "/workspace/actions-cloud/bin/rcc",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "bytes": 22282402,
+      "mode": "0o711",
+      "path": "/workspace/engineering/pr308/action_server/src/actions/server/bin/rcc-18.19.3",
+      "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+    },
+    {
+      "bytes": 987,
+      "mode": "0o600",
+      "path": "/workspace/actions-cloud/activate.sh",
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a"
+    }
+  ],
+  "gate_status": "SOURCEFULL_NOT_RUN",
+  "historical_binding_alias": {
+    "archive": {
+      "bytes": 972955038,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-failed-control3-original-preservation-20261011-1/actions-rcc-compatibility-actual-control3-20261011-1.tar.gz",
+      "sha256": "ca5579abb7851498317a7b85f068ae2c5154e4f24374eadfe522989497551b82"
+    },
+    "checks": "Stream compressed SHA, exact archive size/mode/nosymlink, all mapped metadata bindings; unique safe regular member/1696bytes/SHA/mode/uidgid/original FAIL and cleanup FAIL; gzip EOF/CRC/ISIZE; no path restoration or acceptance transfer.",
+    "complete_index": {
+      "bytes": 16449338,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-failed-control3-original-preservation-20261011-1/private-complete-inventory-and-preservation.json",
+      "sha256": "22112bb16590a4ec10b114872db7e30b51dd0c707e0cf6b8dd3b3997e74a4dd4"
+    },
+    "expanded_removal": {
+      "bytes": 156707,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-failed-control3-original-preservation-20261011-1/private-expanded-removal-final.json",
+      "sha256": "be2c9ec5cdc7a60b1f402ecd10bd67f9801dcaf748a6eb47b9079ead6adeae8f"
+    },
+    "mapping": {
+      "bytes": 1864,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json",
+      "sha256": "cc73027ce86ea0965f3bdd88ed3398c322dcf012b337a4ca161966f19ffee6c7"
+    },
+    "member": "actions-rcc-compatibility-actual-control3-20261011-1/OWNERFINAL-one-version-actual-result.json",
+    "member_gid": 1000,
+    "member_mode": "0o600",
+    "member_uid": 1000,
+    "original_binding": {
+      "bytes": 1696,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1/OWNERFINAL-one-version-actual-result.json",
+      "sha256": "8dc25bb1b99503af386d12d32c0637aa3503617c6f97d66a83f4643969934d4c"
+    },
+    "readonly_resolution_seconds": 11.983223483999609,
+    "root_original_terminal": {
+      "bytes": 1075,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/OWNERFINAL-root-one-failed-control3-byte-preservation-terminal.json",
+      "sha256": "b5c85ac949bd07d7fa32c41cc8075b8e18dc5e88499d202569de8c13b0a97909"
+    },
+    "verified_readonly_proof": {
+      "bytes": 1070,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/named-v2-readonly-historical-member-resolution-proof.json",
+      "sha256": "583425ee8213090f43c381001d834c85a2c1d6f579d7d50758a145242f0f7a4d"
+    }
+  },
+  "named_body_parent_AST_preservation": "EXACT after filename and early optimize guard normalization; commands/waits/pre60/full640/post60/outer900/600TERM10 unchanged",
+  "new_RCC_or_native_or_provider_actual": "NOT_RUN_NOT_AUTHORIZED",
+  "one_attempt": {
+    "must_be_absent": true,
+    "no_automatic_retry": true,
+    "original_log": "binary private retained before terminal",
+    "owned_output_directory": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/one-configured-full-once-owned-v2"
+  },
+  "optimization_guard": "unset PYTHONOPTIMIZE; fail before assert-dependent gate if sys.flags.optimize !=0 or PYTHONOPTIMIZE nonempty",
+  "outer_cwd": "/workspace/engineering/pr308",
+  "outer_managed_command": [
+    "source /workspace/actions-cloud/activate.sh",
+    "unset PYTHONOPTIMIZE",
+    "PATH primary/bin then exact cached toolkit/bin preserved",
+    "timeout --signal=TERM --kill-after=10s 900s /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/launch_current_source_full_once_v2.py --execute-root-authorized <new-root-release-path> <release-sha256>"
+  ],
+  "predecessor": {
+    "binding": {
+      "bytes": 7697,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/OWNERFINAL-current-e4ff-managed-configured-SOURCEFULL-preexecution-proposal.json",
+      "sha256": "bacae1a9c4998816b4422abf35686a49524c9f73669a7f739cc7c084ac140e96"
+    },
+    "disposition": "HISTORICAL_HOLD_0b902_DUE_TO_VERIFIED_EXPANDED_REMOVAL_NOT_NEW_SOURCE_FAILURE",
+    "unchanged": true
+  },
+  "resolver_module_interface": {
+    "binding": {
+      "bytes": 2645,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/historical_failed_receipt_archive_v1.py",
+      "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+    },
+    "call": "verify_exact_historical_receipt(original_row, mapping_binding)",
+    "returns": "safe original/archive/member bindings plus FAIL and historical-preservation-only scope; no raw JSON returned"
+  },
+  "root_release_exact_required_schema": {
+    "independent_source_and_preexecution_review_GO": true,
+    "proposal_sha256": "THIS_OWNER_SHA256_IN_DISTINCT_ROOT_RELEASE",
+    "schema": 1,
+    "serialized_no_other_heavy_or_installer": true,
+    "source": "e4ff080375a8422bb656e52d218f198521dda078",
+    "status": "ROOT_RELEASE_ONE_SERIALIZED_CONFIGURED_SOURCE_FULL",
+    "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+  },
+  "schema": 1,
+  "source": "e4ff080375a8422bb656e52d218f198521dda078",
+  "status": "OWNERFINAL_NAMED_V2_CURRENT_SOURCEFULL_PREEXECUTION_REVIEW_REQUIRED_NOT_RUN",
+  "strict_before_after_guards": {
+    "Git_HEAD_tree_FS_body_modes_and_clean": true,
+    "PATH": "primary RCC first before parent/preflight; toolkit child accepts canonical task PATH injection",
+    "XDIST": "2 before configured invoke task -n auto",
+    "activation_exports": 18,
+    "actual_operator_exports": "all five forbidden including new cache config",
+    "fresh_workspace_floor_bytes": 1288490188,
+    "frozen_native_members": 1192,
+    "helpers0444": "rehash through LIGHT frozen binding",
+    "historical_removed_receipt": "ONLY original8dc path/hash may resolve exact verified archived member; all other rows unchanged",
+    "own_concrete_origins": 5,
+    "own_ignored_RCC_fixture": "18.19.3 exact7e588/0711",
+    "prepared_inputs": 30,
+    "primary_RCC": "18.19.3 exact7e588/0700",
+    "source_complete_leaves": 1423
+  },
+  "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8",
+  "upstream_disposition": "none"
+}

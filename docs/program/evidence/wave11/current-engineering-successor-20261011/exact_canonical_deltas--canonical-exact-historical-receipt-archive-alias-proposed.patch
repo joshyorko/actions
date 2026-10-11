@@ -1,0 +1,15 @@
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -161,6 +161,12 @@
+ proof. A historical synthetic build commit may have the accepted source tree
+ without being an ancestor of the current branch; retain those identities and
+ compare the production inputs separately.
++
++When verified archival removes a historical receipt's expanded path, retain its
++original binding and use an explicitly reviewed mapping to the exact archive
++member. Recheck archive bytes, unique member digest and metadata, and the original
++failure status. Do not recreate the old path or relabel its identity. This alias
++proves preservation; it does not qualify a failed execution.
+ 
+ At #311 head `c888fb4a`, Windows run `38099013706`, job `114350853595`,
+ timed out at the initial native startup in the watched-reload and resource

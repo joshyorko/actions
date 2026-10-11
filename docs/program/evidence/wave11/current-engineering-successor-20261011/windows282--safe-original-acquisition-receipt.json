@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "status": "ONE_ORIGINAL_CONNECTOR_DECODED_LOG_ACQUIRED_NO_RETRY_NAMED_EXACT_BYTE_COPY",
+  "repo": "joshyorko/actions",
+  "job_id": 114513237570,
+  "run_id": 38154052443,
+  "source_head": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+  "original_decoded": {
+    "path": "/workspace/engineering/pr282-original1299-one-Windows-log-acquisition/original-decoded-Windows-job.private.log",
+    "bytes": 646331,
+    "sha256": "c3d3c876176dadda5a39e0fda8d0c2397ef8e081ccd32bc5ea0a8753673c9187",
+    "mode": "0o600"
+  },
+  "original_MCP_response_generated_JSON": {
+    "path": "/workspace/engineering/pr282-original1299-one-Windows-log-acquisition/original-MCP-response.private.json",
+    "bytes": 667910,
+    "sha256": "e6691e2a91d8b64248a123347c93b6937f56d84bef40e5362201bccb6499e395",
+    "mode": "0o600"
+  },
+  "original_local_copy_failure": {
+    "path": "/workspace/engineering/pr282-original1299-one-Windows-log-acquisition/original-local-copy-equality-FAIL.json",
+    "bytes": 587,
+    "sha256": "5243589bad4399aae71bd20beb9021efdcc53cdace593efcca2c230921832d92",
+    "mode": "0o600"
+  },
+  "connector_call_count": 1,
+  "wire_bytes": "UNKNOWN",
+  "source_or_integration_admission": "PENDING_INDEPENDENT_READONLY_REVIEW",
+  "no_native_release_or_issue_closure": true,
+  "retained_utc": "2026-10-11T16:40:33.743616+00:00"
+}

@@ -1,0 +1,43 @@
+{
+  "accepted_PUBLIC_review": {
+    "bytes": 6163,
+    "path": "/workspace/engineering/rcc-current-e4ff-public-mode-patch-independent-review/OWNERFINAL-independent-PUBLIC-current-e4ff-native-managed-home-mode-patch-review.json",
+    "sha256": "761b96061a9f5b3339bc576b336ce4a46eca338707332d8eeff1268a56baf856"
+  },
+  "complete_source_leaves": 1426,
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md, nine-line mode lesson applied byROOT2058 and retained in3969 ordinarymerge.",
+    "Disposition": "AcceptedexactROOT-appliedlesson; no cosmeticduplicate or sourceedit byreviewer.",
+    "Durable learning captured": "RCC's private client home has a different permission contract from the\nsupervisor-owned state root and package cache. The retained RCC revision's\npackage initialization recursively applies mode `0750` before a `--version`\nprobe returns. Admit only the explicitly reviewed `0700`/`0750` client-home\nmodes with the exact owned path, owner and group; keep the state root and\npackage cache at `0700` and the identity marker at `0600`. Never chmod an\ninput to make admission pass. Bind observed permissions and native-source\nprovenance separately: a modified build does not establish exact source\nequivalence, and a rejected home proves no publication, Action or lease result.",
+    "Evidence": "Verifiedexact3577 two-pathpatch\u21922058; source4148/7f568 andoriginal61506, public0750RED/GREEN68; all6sourceguide+3targetguide modifiedblocks preserved.",
+    "Remaining uncertainty": "FreshcurrentSOURCE/full/CI/native/private/release qualification pending; actualbinarymodifiedsource equivalenceUNKNOWN.",
+    "Stale or ambiguous guidance removed": "Native-managedhome700/750 exactUID/GID distinctfromsupervisorroot/cache700andmarker600; no repair ornative-source equivalence inference."
+  },
+  "parents": [
+    "2058b1b185a79c04b24eaf46a73d278ba4f689e5",
+    "a54c982462d1e7ad011d8152bfc299d997503fb3"
+  ],
+  "proof": {
+    "bytes": 2010,
+    "path": "/workspace/engineering/pr308-current3969-independent-source-union-review/independent-current3969-source-union-proof.json",
+    "sha256": "7d9daeac0467691ded737dd61813f827b54f7992fc504225bfc3d3d675de3cb2"
+  },
+  "remaining_HOLD": [
+    "Owner-announcedcurrentLIGHT/defaultcoupling/sourcefull-preexecution refs pending; this receipt grants no test/gateway/sourcepush/fullCI/integration/native release.",
+    "Olde4/b614 full/native failures andoriginalactual61506 retained; no oldpositivecarry.",
+    "Native5/candidate6NOTRUN; modifiedbinarysourceequivalenceUNKNOWN; privateV8/config/conditionalleasecontext notadmitted.",
+    "Freshfullsource andindependent actualgate readback requiredbefore sourcepush; no root release implied."
+  ],
+  "reviewer_executed_tests_imports_gate_native_or_mutations": false,
+  "schema": 1,
+  "source": "396925cb3d6527af1768b7f5333f9653c005fc55",
+  "source_inspector": {
+    "bytes": 6540,
+    "path": "/workspace/engineering/pr308-current3969-independent-source-union-review/inspect_current_union_readonly.py",
+    "sha256": "0f0a2ccf3832bd9afab34240e3c4dfc871e6a0749d4487e53fe8edf4d1858ba9"
+  },
+  "status": "GO_CURRENT3969_COMPLETE_STATIC_SOURCE_UNION_ONLY_FRESH_GATES_PENDING",
+  "tree": "84f850f0d4e08b21afcd8220413ce94322370acf",
+  "upstream_disposition": "none",
+  "verified_scope": "2058 solely applies acceptedfixture+guide; current3969 ordinaryactuala54 union preserves allparentchoices andcombinedwholegeneratorAST, bothguideparentblocks,1426fullGitFSbodiesexecmodes and1192originalnativebodiesmodes/member-set. DefaultproductionRCC3 andsourcefixtureold34/new13 predicates remain exactacceptedproposal."
+}

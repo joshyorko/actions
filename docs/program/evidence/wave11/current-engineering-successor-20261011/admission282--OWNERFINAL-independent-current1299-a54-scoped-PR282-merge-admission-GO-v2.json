@@ -1,0 +1,150 @@
+{
+  "PR": 282,
+  "actual_tested_runner_checkout": "f93036853f433961508b3c74cf2b8d501f0e6520",
+  "complete_current_hosted_gate_inventory": {
+    "Copilot": "CurrentPR-triggeredbydeveloperpaths, includedamong9;nohistoricalauxiliarycarry",
+    "Runtime_tests": {
+      "Linux_job": 114513237728,
+      "Mac_job": 114513237495,
+      "Windows_job": 114513237570,
+      "conclusion": "ALL_SUCCESS",
+      "run": 38154052443
+    },
+    "Windows_Canvas2": "POSIXpublished/candidatebrowserSKIP, separateLinuxactualqualified",
+    "Windows_shutdown10": "PASS",
+    "Windows_transport30": "ExplicitLinux-onlySKIP",
+    "all_checkruns_jobs_ID_match": true,
+    "all_current_jobs_and_checkruns": "SUCCESS",
+    "all_run_attempts": 1,
+    "declared_current_PR_workflows": 9,
+    "declared_jobs": 25,
+    "late_Runtime_publisher": {
+      "conclusion": "SUCCESS",
+      "job": 114514579799,
+      "needs": [
+        "build-sdist",
+        "build-wheels"
+      ],
+      "run": 38154052436
+    },
+    "original_Windows_integration": "152unique/131PASS21SKIP1364deselect1239.61s",
+    "original_Windows_source": "1361unique/1184PASS177SKIP15warn287.75s",
+    "other_commit_statuses": 0
+  },
+  "complete_matrix_and_original_Windows_proof": {
+    "bytes": 12418,
+    "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/independent-current1299-complete-metadata-and-original-Windows-proof.json",
+    "sha256": "639c0705ddf3b0dbfe5609e075c85219504a219f9385437646a7b25313d5f228"
+  },
+  "complete_metadata_snapshot": {
+    "bytes": 21477,
+    "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/safe-one-current1299-a54-complete-metadata-census.json",
+    "sha256": "5f60075b1e42184216ed233ec93aa293a1c35c2fc77e885863a3690519a897bd"
+  },
+  "current_original_published_Core_browser_gate": {
+    "JUnit_SHA256": "37490aa741f14ee165638a174b1adcd077fe8f9e63e0eca06760bc53afac824e",
+    "all_original_members_regular_count_CRC": 2,
+    "artifact": 11708206027,
+    "browser": "ExplicitfullChrome151/0b20;Playwright1.62.1/frontendlockdigest exact",
+    "case_seconds": 39.973,
+    "cases": 1,
+    "cleanup": "ThreeRuntimebooleans true andfour emptyarrays;browsertemporaryrootremovedtrue;point-in-time capturedscope only",
+    "exact_test": "tests.action_server_tests.mcp.test_canvas_query_template::test_canvas_template_runs_through_runtime_and_real_browser",
+    "ordered_parents_verified_separately": [
+      "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "1299cc4bb6586f467d36ca124faaaaa77362695f"
+    ],
+    "original_ZIP_bytes": 2098,
+    "original_ZIP_sha256": "2bb9ce2302d0a309e0718df767771b90b657a366f57fbd71dd773dca23c53de9",
+    "original_receipt_parents": [],
+    "published_Core": "1.0.3,declaredregistrywheel8e088;three790b/c944/c575 measuredmembers/prefix only",
+    "receipt_SHA256": "690476d9ef525e33e749aa405c98a9efd9c8b0f38fdf47cb1682389fe4a0f868",
+    "resource_template_manifest_Runtime_digests": "Matchcurrenttrackedsource,embeddedcanvas.html body exact",
+    "skips_failures_errors": 0,
+    "source_historical71f": "Preservedhistoricaldifferenttuple,nocarriedidentity",
+    "source_receipt_commit": "f93036853f433961508b3c74cf2b8d501f0e6520",
+    "source_receipt_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+    "strict_original_validator": "39conjuncts retained;originalgatecheckedabsolute paths before sanitizer;reviewcompares normalizedpaths,doesnotreexecute rawvalidator"
+  },
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md; exactproposedconsumer/parent-readbackdelta plusverifiedowning1299imports.",
+    "Durable learning captured": "PublishedCoreproducerproofandactualtemplateconsumerreceiptareseparategates;preserveemptyreceiptparentlistandauthenticateobservedcheckoutorderedparentsindependently.",
+    "Evidence": "CanonicalpublishedCoreprerequisitealreadyverifieda709/8e088 vsolderblockedparagraph; current11708206027originalf930/afe receiptparents[]; actualf930APIordered[a54,1299]; original39-conjunctvalidator andcurrent1case39.973s.",
+    "Remaining uncertainty": "Currentconsumer isnarrowLinuxsource/published3member/browsergate;fullartifactretrieval/native/ChatGPT/private/release remainHOLD.",
+    "Stale or ambiguous guidance removed": "Removebroadstaleuntildependencyispublishedblock; avoidparentlesscommitclaimfromemptyshallow/localreceiptfield.",
+    "exact_delta": {
+      "bytes": 1502,
+      "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/canonical-current-Canvas-consumer-and-parent-readback-proposed.patch",
+      "sha256": "a164f54111f3b75fdc7866ad555423358f56b2c21e71301425cde13b4c313319"
+    },
+    "patch_apply_check": "PASSwithoutapplyingorindexwrites"
+  },
+  "normal_policy": {
+    "active_branch_rules": [],
+    "closures": [],
+    "draft_at_capture": true,
+    "reviewDecision": null,
+    "reviewThreads": 0,
+    "reviews": 0,
+    "root_actions_required": [
+      "Freshnamedsource1299/targeta54 andcomplete25terminalcheckreadback immediatelybeforenormalready/merge;retainanychangedtupleHOLD.",
+      "Normalready mutation followedbyexpectedhead1299 normalmerge only;noadmin/force/bypass.",
+      "Aftermerge authenticateactualnamedtargetcommit/ordered[a54,1299]/treeafe andall1440typedleaves;donotrelabelsyntheticf930 receiptactualmergeidentity."
+    ],
+    "traditional_protection": "403UNKNOWN\u2014notproofabsence;normalAPIpolicyenforcement required",
+    "visible_branch_protected": false,
+    "visible_rulesets": []
+  },
+  "original_current_Canvas_proof": {
+    "bytes": 2751,
+    "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/independent-current1299-original-Canvas-artifact-proof.json",
+    "sha256": "3284893c013be9b981486b683fd129729a0de15939d7a9caffcd1609957e70a6"
+  },
+  "original_failures_and_repairs": {
+    "Windows_decoded_copy": "Initialapply-patchnormalizedcopyequalityFAIL retained;namedexactcopybyteequalsretainedstructuredMCP,oneconnectoracquisitiononly/wireUNKNOWN.",
+    "artifact_initial_CLI": "Oneinitialreturn1/0BZIP preserved;Forbiddentemporaryhost accordingROOT,exactHTTPstatus/causeremainUNKNOWN.",
+    "artifact_successor": "DistinctexplicitROOTconnectorrepair plusonefiletransfer,APIoriginaldigestexact;no secondghartifactcommand/actualretry.",
+    "review_inspectors": "InitialprivateSyntaxErrorandv2Windowsparseromitted2SKIPPEDreasonadjacentlines preserved;namedv3countsall152. InitialartifactinspectorSyntaxErrorpreserved;v2read-onlyproofpassed. No application/test failures or reruns introduced."
+  },
+  "preserved_unannounced_receipt_construction_v1": {
+    "binding": {
+      "bytes": 8777,
+      "path": "/workspace/engineering/pr282-current1299-a54-complete-CI-admission-review/OWNERFINAL-independent-current1299-a54-scoped-PR282-merge-admission-GO.json",
+      "sha256": "47d6f51d5982894550d9b7c87766e8b33586998fca2d39c7613c5a3317defe5f"
+    },
+    "disposition": "Allunderlyingproofsvalid;inlineconstructorcontainedsurplusconstant-trueassertion,neverusedtosatisfyrealbindingchecks. Namedv2explicitlyrehashesallfiveproofbindingsandcurrentGithead/tree/cleanstatus;originalv1retainedunannounced,nosourceoractualreplay."
+  },
+  "qualified_source_FULL": "ONEcurrent1299 full1349PASS12SKIP16warnings/1361uniquenodes; exactsource1440/native1192/83payloadpostguards; separatefromWindows platform collection andactualconsumer.",
+  "receipt_construction_v2_checks": "Allfiveboundproofreceipts exact bytes/hash/size andcurrent1299/afe/clean checked explicitly; no conditionalconstantassertion.",
+  "remaining_HOLD": [
+    "Full127/sharedsuccessfulArtifact.handle/artifactaccess binding/ChatGPT/frozenRuntime/native/browserotherplatform acceptance remainopen.",
+    "ThreeCoremembersdo notprovewholewheel/coldregistry/fullinstalleddistribution.",
+    "Runtime/browsercleanup boundedcapturedpoint-in-time,notuniversaldescendantdiscovery/adoption/reaping orallhostharnessreaders.",
+    "Private01f/frozenv6/OAuth/backend/fullengineeringgraph/issueclosure/tags/publication/release notadmitted.",
+    "OtherPRCI tuples including308396 areseparate; advancingtargetneedsnormalrefresh/newqualifiedunion."
+  ],
+  "reviewer_mutations": "Ownedreviewoutputs only;no source/index/ref/ready/merge/gate/import/native/provider/browserchanges",
+  "reviewer_network": "Onecompleteboundedmetadata snapshot andoneactualtree/artifactmetadataAPIread;no joblog/artifactdownload or productexecution",
+  "schema": 1,
+  "source": "1299cc4bb6586f467d36ca124faaaaa77362695f",
+  "source_FULL_independent": {
+    "bytes": 7707,
+    "path": "/workspace/engineering/pr282-current1299-independent-actual-SOURCEFULL-review/OWNERFINAL-independent-current1299-original-configured-SOURCEFULL-review.json",
+    "sha256": "d09e53afeaf6bbd379a1c65e42b11af5af0bb30abc7f204ac2083e83fd06c0d0"
+  },
+  "source_LIGHT_independent": {
+    "bytes": 18237,
+    "path": "/workspace/engineering/pr282-current1299-independent-SOURCE-LIGHT-review/OWNERFINAL-independent-current1299-SOURCE-LIGHT-review.json",
+    "sha256": "097d279bcaa111caef55f475422c6bca2ba282910869b6c07e054e6e3108b06a"
+  },
+  "status": "GO_SCOPED_NORMAL_READY_AND_EXPECTED_HEAD_PR282_MERGE_PREPARATION",
+  "target": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+  "target_ref": "integration/community-release-20261008",
+  "tested_complete_tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9",
+  "tested_ordered_parents": [
+    "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "1299cc4bb6586f467d36ca124faaaaa77362695f"
+  ],
+  "typed_source_entries": 1440,
+  "upstream_disposition": "none"
+}

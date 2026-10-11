@@ -1,0 +1,551 @@
+{
+  "actual_source_qualification_missing": [
+    "source_FULL_UNBOUND_NEW_NAMED_SUCCESSOR_REQUIRED",
+    "source_independent_UNBOUND_NEW_NAMED_SUCCESSOR_REQUIRED",
+    "source_FULL_independent_UNBOUND_NEW_NAMED_SUCCESSOR_REQUIRED"
+  ],
+  "actual_transport": {
+    "bytes": 24963,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/actual_transport_v7.py",
+    "sha256": "a8bad293dbb719ed8f5d9249761868ffd30cd59fd98bb886589f5833faa1c8c1"
+  },
+  "binding_count": 52,
+  "budgets": {
+    "cleanup_seconds": 10,
+    "fresh_capacity_and_exclusive_slot_required_at_release": true,
+    "fresh_devshm_min_bytes": 3865470567,
+    "hard_admission_bytes": 2576980377,
+    "helper_parent_seconds": 645,
+    "observed_devshm_bytes": 3942780928,
+    "observed_workspace_bytes": 1384652800,
+    "operational_stop_bytes": 2523293286,
+    "pre_post_each_seconds": 120,
+    "root_workspace_strict_floor_bytes": 1288490189,
+    "transport_kill_after": 10,
+    "transport_seconds": 660,
+    "whole_kill_after": 10,
+    "whole_parent_seconds": 900,
+    "worker_seconds": 600
+  },
+  "cache": {
+    "RCC_symlink_support_or_memory_reduction": "UNQUALIFIED_NOT_RUN",
+    "caller_inherited_value": "REJECT_BEFORE_STATE_OR_GATEWAY",
+    "child_keys": [
+      "schema",
+      "runtime_source_sha",
+      "runtime_source_tree",
+      "label",
+      "binary_sha256",
+      "state_root",
+      "package_cache_root",
+      "state_marker_sha256"
+    ],
+    "first": "empty owned pkgs publication",
+    "marker_create": "O_EXCL root-owned700 no overwrite",
+    "marker_keys": [
+      "schema",
+      "runtime_source_sha",
+      "runtime_source_tree",
+      "label",
+      "binary_sha256",
+      "state_root",
+      "package_cache_root"
+    ],
+    "marker_mode": "0o600",
+    "no_global_cache_alias": true,
+    "only_environment_key": "ACTIONS_RUNTIME_RCC_TEST_PACKAGE_CACHE_CONFIG",
+    "plan_sha256": "ae6b9828c72331c3a30e072c07e238f43be5cdc4738ecb9120ab387dc6c2bb41",
+    "provider_Holotree_origins": "per-case unchanged",
+    "roots": {
+      "candidate7276": "/dev/shm/actions-rcc-compatibility-actual-candidate7276-20261011-owned-pkgs-1",
+      "control3": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-2",
+      "released5": "/dev/shm/actions-rcc-compatibility-actual-released5-20261011-owned-pkgs-1"
+    },
+    "second": "prior same-source/binary PASS publication required; warm pkgs alias only"
+  },
+  "cache_policy": {
+    "bytes": 5813,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_cache_policy_v1.py",
+    "sha256": "3cc13e17b4cebe5cbe0ba2d40cd27a8fcbada212f4ae2f8914efe66cf6c5bcf9"
+  },
+  "conditional_config": {
+    "bytes": 793305,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/FROZEN-current-e4ff-control3-cache-config-CONDITIONAL-v3.json",
+    "sha256": "b20779153c3dc07f97452b15a17bc83164a4a7c0b1f2a9c56953361712c5f83b"
+  },
+  "conditional_config_binding_count": 226,
+  "constructor": {
+    "bytes": 9083,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/build_current_config_v5.py",
+    "sha256": "709d984f16bb77a2f1c806e66bf7dd3c57d670eea7ab50cff92204da9edab368"
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "Runner emits and binds private marker/current-source config; historical archive provenance cannot qualify new source or new cache; current full+ind config gates required",
+    "evidence": "source owner e18d cache schema, accepted private patch ae37, exact v6 code931b/ind6ba9, RED1/GREEN93, readonly scope proof and exact member resolver",
+    "exact_delta": {
+      "bytes": 747,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/canonical-current-cache-runner-proposed-delta.patch",
+      "sha256": "2f830d4bb79a9963c4e9f1bb189e52ce08a8b250fdba0bbe79cad991de4e2f93"
+    },
+    "remaining_uncertainty": "Current sourceFULL/ind config/root adoption and native cache support/peak/strict cleanup not qualified; persistent/reload/full134/private/OAuth/release remain HOLD",
+    "stale_or_ambiguous_guidance_removed": "old b614 FULL or archived failure receipt cannot fill current-source admission; warm pkgs is not cold-registry installation; original unknown reader/census stays unknown"
+  },
+  "frozen_bindings": [
+    {
+      "bytes": 793040,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/FROZEN-current-e4ff-control3-cache-config-CONDITIONAL-v2.json",
+      "sha256": "629c4423ee463f16c8ff3917d1ab3d4ba6cd598deac1b243f27d11f6d4a560f4"
+    },
+    {
+      "bytes": 793305,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/FROZEN-current-e4ff-control3-cache-config-CONDITIONAL-v3.json",
+      "sha256": "b20779153c3dc07f97452b15a17bc83164a4a7c0b1f2a9c56953361712c5f83b"
+    },
+    {
+      "bytes": 792773,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/FROZEN-current-e4ff-control3-cache-config-PREPARATION-v1.json",
+      "sha256": "668ce80c88fcbf002a0d13309829a04a63955b92130ed00e34507dd1237280d5"
+    },
+    {
+      "bytes": 23981,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/actual_transport_v6.py",
+      "sha256": "931b77f3dfc67643dee279f0a5538432d52f3fefaa0ddfe2e0f32e755d189d01"
+    },
+    {
+      "bytes": 24963,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/actual_transport_v7.py",
+      "sha256": "a8bad293dbb719ed8f5d9249761868ffd30cd59fd98bb886589f5833faa1c8c1"
+    },
+    {
+      "bytes": 9083,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/build_current_config_v5.py",
+      "sha256": "709d984f16bb77a2f1c806e66bf7dd3c57d670eea7ab50cff92204da9edab368"
+    },
+    {
+      "bytes": 50,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/cache-wiring-GREEN-terminal.json",
+      "sha256": "669e48a2f131ecd59c6bb0ad2812149653c87888f2272721b185ebbcaaac6f9e"
+    },
+    {
+      "bytes": 11213,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/cache-wiring-GREEN.private.log",
+      "sha256": "3e45cfc29e6a88680302e7b1c0455f2ca02ed2397ca95af5c2615650062f4ba1"
+    },
+    {
+      "bytes": 50,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/cache-wiring-RED-terminal.json",
+      "sha256": "6b9a50e116a2532ccb217ff268ca5a102988a83b210630655f2b075dfd39a8fb"
+    },
+    {
+      "bytes": 760,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/cache-wiring-RED.private.log",
+      "sha256": "297cf4fe6d5660848865d7c1e6610d69d1df625e8fac826cb780df96f2a0423d"
+    },
+    {
+      "bytes": 50,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/cache-wiring-final-GREEN-terminal.json",
+      "sha256": "669e48a2f131ecd59c6bb0ad2812149653c87888f2272721b185ebbcaaac6f9e"
+    },
+    {
+      "bytes": 12231,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/cache-wiring-final-GREEN.private.log",
+      "sha256": "0408c4403b593bc17b0bdd70b507bbc0663e04c8a30d6b3a9d12c3df835674eb"
+    },
+    {
+      "bytes": 50,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/cache-wiring-final2-GREEN-terminal.json",
+      "sha256": "669e48a2f131ecd59c6bb0ad2812149653c87888f2272721b185ebbcaaac6f9e"
+    },
+    {
+      "bytes": 12853,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/cache-wiring-final2-GREEN.private.log",
+      "sha256": "daa9488c6d8be5f7fd11a8a4859eaf79e7bba1b6e5c7950a6d8b2c176b717761"
+    },
+    {
+      "bytes": 747,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/canonical-current-cache-runner-proposed-delta.patch",
+      "sha256": "2f830d4bb79a9963c4e9f1bb189e52ce08a8b250fdba0bbe79cad991de4e2f93"
+    },
+    {
+      "bytes": 50,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/current-config-construction-terminal.json",
+      "sha256": "669e48a2f131ecd59c6bb0ad2812149653c87888f2272721b185ebbcaaac6f9e"
+    },
+    {
+      "bytes": 186,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/current-config-construction.private.log",
+      "sha256": "82cd6bc1218827f4d55fb398692a4a3b517d69619e7f466ba7901ab27c9ffde2"
+    },
+    {
+      "bytes": 50,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/current-config-final-construction-terminal.json",
+      "sha256": "669e48a2f131ecd59c6bb0ad2812149653c87888f2272721b185ebbcaaac6f9e"
+    },
+    {
+      "bytes": 186,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/current-config-final-construction.private.log",
+      "sha256": "3aaa04c6acf52fac240eda18757d7d01b89679c196803772aea7f529bae17560"
+    },
+    {
+      "bytes": 50,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/current-config-v3-construction-terminal.json",
+      "sha256": "669e48a2f131ecd59c6bb0ad2812149653c87888f2272721b185ebbcaaac6f9e"
+    },
+    {
+      "bytes": 186,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/current-config-v3-construction.private.log",
+      "sha256": "30cae207c50a9d0c7d77abfe4fbb09548bc9ca7a34793d5afb8a3c1fc61cd35b"
+    },
+    {
+      "bytes": 11504,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/fixture_records_v2.py",
+      "sha256": "ec6281e47ab7c2896cea27fbecb1f54c2106d65aa965db06b17999b2e21fd916"
+    },
+    {
+      "bytes": 2748,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/gateway_entry_v2.py",
+      "sha256": "679b1778ecaa87ffbcce876662d73e3ee4084f8cd477d53cd341cb38e9ffb882"
+    },
+    {
+      "bytes": 1072,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_binding_v1.py",
+      "sha256": "10eac48f020d4c1030bb0be26b3b283d896712b7e7b5095e08045b8192808215"
+    },
+    {
+      "bytes": 2645,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_failed_receipt_archive_v1.py",
+      "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+    },
+    {
+      "bytes": 4820,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/launch_one_version_v1.py",
+      "sha256": "2e4d16c88744003c285757bde699e11c314b4ee6a992f42ebc93f0ecf6a626d4"
+    },
+    {
+      "bytes": 1856,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/managed_metadata_only_preflight.py",
+      "sha256": "1cb4cbcc01ea3a1d4f0519150047e840717b586081774c0a938bf68a3840ae35"
+    },
+    {
+      "bytes": 505,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/managed_once_gateway_v1.sh",
+      "sha256": "5a1c5a95075933ed89cc0580f200b4f4f1c3de7cfad1c743bd9a739d6e969a94"
+    },
+    {
+      "bytes": 5813,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_cache_policy_v1.py",
+      "sha256": "3cc13e17b4cebe5cbe0ba2d40cd27a8fcbada212f4ae2f8914efe66cf6c5bcf9"
+    },
+    {
+      "bytes": 4632,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    {
+      "bytes": 50,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/private-new-code-ruff-F-v1-terminal.json",
+      "sha256": "6b9a50e116a2532ccb217ff268ca5a102988a83b210630655f2b075dfd39a8fb"
+    },
+    {
+      "bytes": 246,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/private-new-code-ruff-F-v1.log",
+      "sha256": "c96f13e4de565fb4df63b84bfed16a072c33ae2bea6b4714a12ad96711fa5594"
+    },
+    {
+      "bytes": 50,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/private-new-code-ruff-F-v2-terminal.json",
+      "sha256": "669e48a2f131ecd59c6bb0ad2812149653c87888f2272721b185ebbcaaac6f9e"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/private-new-code-ruff-F-v2.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1924,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/private-scope-and-current-config-proof.json",
+      "sha256": "462231ca1716d8eebcdc28965772ce367336652c20e78cd2bc50b564c86ce2ec"
+    },
+    {
+      "bytes": 50,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/private-scope-proof-original-terminal.json",
+      "sha256": "669e48a2f131ecd59c6bb0ad2812149653c87888f2272721b185ebbcaaac6f9e"
+    },
+    {
+      "bytes": 59,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/private-scope-proof-original.log",
+      "sha256": "106b5f0a552753728d8ed8be4ff39f1af9219477a22023c7847c9d210bfecd92"
+    },
+    {
+      "bytes": 5319,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/prove_private_scope_v1.py",
+      "sha256": "fa289d535e7370c2dc7e3224c01d373e197ff7c1a485792dc47885f3bd908be2"
+    },
+    {
+      "bytes": 3636,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/readonly_current_input_guard_v1.py",
+      "sha256": "53c654d89cdfb61d2a5bd40955f843dcfc4ae0ba6d6348b2b557f70be71363e9"
+    },
+    {
+      "bytes": 12959,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/runner_contracts_v3.py",
+      "sha256": "cbae3bb074d3995153ea5e6b694e7f9e61c047c6aa511b682959a63fedf7b726"
+    },
+    {
+      "bytes": 8218,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/test_actual_transport_failure_metadata_v6.py",
+      "sha256": "2f7302bec55c7435194b274b7035f5465f32337f6201d1e474f033bb0258c9d7"
+    },
+    {
+      "bytes": 5905,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/test_actual_transport_failure_metadata_v6_additional.py",
+      "sha256": "49ba7905f75ae51bfc4553858c28aca18fd54151a485228640d987ee50b14d1e"
+    },
+    {
+      "bytes": 1259,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/test_historical_alias_v1.py",
+      "sha256": "933dd24993156a58e38f028ab4e2604b6f40a4c197d9d913cbcb9b560bafa24b"
+    },
+    {
+      "bytes": 5123,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/test_launcher_boundary_v1.py",
+      "sha256": "c7b2b2c8db8a5a1dcbc5fd946afd2d391f83a67710689fde367e9cf43975592b"
+    },
+    {
+      "bytes": 11313,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/test_original_transport_inherited_v7.py",
+      "sha256": "63bfda0ac3280b1dd2de04cf262f3bbf3fd643b3c2cd6c79b1b6e26e1394950a"
+    },
+    {
+      "bytes": 10204,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/test_owned_cache_v7.py",
+      "sha256": "b5d6602c3d8aee885cb6f2a12c86fd9870b6af156e38896076cc90513fe4f3bd"
+    },
+    {
+      "bytes": 13921,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/OWNERFINAL-current-e4ff-reviewed-cache-application-and-e3c-ordinary-source-LIGHT.json",
+      "sha256": "e18d871d9daf93e21e0b34610af31e9d4198bc4a1c93431d8799464954d37c6c"
+    },
+    {
+      "bytes": 16754,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-compatibility-transport-failure-metadata-v6-private-source/OWNERFINAL-private-transport-v6-original-exception-and-observed-ownership-source.json",
+      "sha256": "aa052e89bf03bbfcd2009a5d962cad40086474d89d76956f2f206ea648e8a54d"
+    },
+    {
+      "bytes": 13481,
+      "mode": "0o600",
+      "path": "/workspace/engineering/rcc-transport-v6-independent-source-review/OWNERFINAL-independent-private-transport-v6-metadata-source-review.json",
+      "sha256": "6ba9ac757fb5ca61eb3e2850885c0725c3d730c936c7946921ea908eaa28b564"
+    },
+    {
+      "bytes": 7994,
+      "mode": "0o444",
+      "path": "/workspace/engineering/pr308-owned-package-cache-independent-private-patch-review/OWNERFINAL-independent-private-owned-package-cache-two-path-patch-review.json",
+      "sha256": "ae37fd270e8dd8755cd1774a0eb0cbcdf41d41aeb8f0fad8e394789b0a8a6878"
+    },
+    {
+      "bytes": 14742,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-SOURCEFULL-preexecution/OWNERFINAL-current-e4ff-managed-configured-SOURCEFULL-preexecution-proposal-v2.json",
+      "sha256": "776095153a1aa0120cf51644ae453296e124bf2d78ad15ba213263cf2c54a0eb"
+    },
+    {
+      "bytes": 1864,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json",
+      "sha256": "cc73027ce86ea0965f3bdd88ed3398c322dcf012b337a4ca161966f19ffee6c7"
+    }
+  ],
+  "gates_preserved": {
+    "exact_two_selectors": [
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair",
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime"
+    ],
+    "final_child_census_and_internal_worker_reader_join": "UNKNOWN_NOT_EXPOSED_BY_PINNED_HELPER, not inferred",
+    "lease_and_typed_cleanup": "unchanged original actual snapshots, missing stays null/HOLD",
+    "one_publication_identity_pair": "unchanged",
+    "outer_cleanup": "original returned dispositions separate from Runtime",
+    "sampler": "strict cancellation/termination originals",
+    "strict_JUnit": "2PASS0skip0failure0error"
+  },
+  "gateway": {
+    "bytes": 2748,
+    "mode": "0o600",
+    "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/gateway_entry_v2.py",
+    "sha256": "679b1778ecaa87ffbcce876662d73e3ee4084f8cd477d53cd341cb38e9ffb882"
+  },
+  "independent_cache_config_review_contract": {
+    "cache_plan_sha256": "ae6b9828c72331c3a30e072c07e238f43be5cdc4738ecb9120ab387dc6c2bb41",
+    "config_sha256": "FUTURE_FULL_BOUND_CONFIG_SHA_REQUIRED",
+    "label": "control3",
+    "schema": 1,
+    "source": "e4ff080375a8422bb656e52d218f198521dda078",
+    "status": "INDEPENDENT_CURRENT_CACHE_CONFIG_GO",
+    "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+  },
+  "legacy_control": {
+    "commit": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+    "external_SHA256_is_not_Git_control": true,
+    "tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb"
+  },
+  "preparation_failures_preserved": {
+    "config_v1_and_v2": "construction snapshots retained; v3 is final complete private-code binding; no actual attempt",
+    "initial_inventory_inspector": "list-versus-dict TypeError before current metadata, retained original tool event; corrected measured list1423",
+    "private_Ruff_v1": "2F401 imported legacy controls; corrected by explicit original legacy-control equality assertion"
+  },
+  "preservation": {
+    "archive_resolver": {
+      "copied_exact_from_source_owner": true,
+      "independent_review": "PENDING_SOURCE_FULL_GUARD_REVIEW",
+      "module": {
+        "bytes": 2645,
+        "mode": "0o600",
+        "path": "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/historical_failed_receipt_archive_v1.py",
+        "sha256": "a69291189f47812c41ce43d9d68a81a839780ce28a0a9dfc00c487c9acb26d69"
+      },
+      "payload_return": "None for historical read_bound, never fabricated bytes"
+    },
+    "current_fixture": {
+      "bytes": 48314,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308/action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "sha256": "af2f79ccd395c088076381f6681860cf8160f8fd0d9169e122634fe684c37c35"
+    },
+    "fixture_expected_literals": "old retained literal data; original two current fixture ASTs exact except reviewed cache helper calls",
+    "native_original_member_count": 1192,
+    "native_scope": "historical1192 rehash only; current275 producer UNQUALIFIED",
+    "old_v5_failure": "original FAIL/cleanupFAIL preserved only via exact historical archive member; never acceptance",
+    "original_helper": {
+      "mode": "0o444",
+      "path": "/workspace/actions-cloud/receipts/pr305-runner/frozen-helpers/verify_dakota_rcc_acceptance.py",
+      "sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659"
+    },
+    "private_persistent_reload_patch": "NOT_APPLIED_NOT_PART_OF_THIS_RUNNER",
+    "v6_execute_sampler_observer_and_error_facts": "exact AST proof; no added waits/readers/process API calls"
+  },
+  "proposed_first_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/bin/bash",
+    "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/managed_once_gateway_v1.sh",
+    "--config",
+    "/workspace/engineering/rcc-compatibility-owned-cache-runner-successor-preparation/FROZEN-current-e4ff-control3-cache-config-CONDITIONAL-v3.json",
+    "--config-sha256",
+    "b20779153c3dc07f97452b15a17bc83164a4a7c0b1f2a9c56953361712c5f83b",
+    "--release",
+    "ROOT_ONCE_CURRENT_CONFIG_RELEASE_PATH_REQUIRED",
+    "--release-sha256",
+    "ROOT_ANNOUNCED_CURRENT_CONFIG_RELEASE_SHA256_REQUIRED",
+    "--label",
+    "control3",
+    "--log-root",
+    "/workspace/engineering/root-rcc-owned-cache-one-control3-CURRENT_ONCE_NAME_REQUIRED"
+  ],
+  "required_first_root_release_body_UNEXECUTABLE_TEMPLATE": {
+    "cache_configuration_independent": {
+      "bytes": null,
+      "mode": null,
+      "path": null,
+      "sha256": null
+    },
+    "cache_plan_sha256": "ae6b9828c72331c3a30e072c07e238f43be5cdc4738ecb9120ab387dc6c2bb41",
+    "config_sha256": "b20779153c3dc07f97452b15a17bc83164a4a7c0b1f2a9c56953361712c5f83b",
+    "label": "control3",
+    "schema": 1,
+    "serialized_no_other_heavy_or_devshm_mutations": true,
+    "source": "e4ff080375a8422bb656e52d218f198521dda078",
+    "source_full_independent_sha256": null,
+    "source_full_sha256": null,
+    "source_independent_sha256": null,
+    "status": "ROOT_RELEASE_SINGLE_VERSION",
+    "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+  },
+  "schema": 1,
+  "sequence": "separate distinct root release: control3 then released5 then candidate7276; preceding same-source strict PASS_SCOPED required; no loop or retry",
+  "service_free_controls": {
+    "RED": {
+      "expected_failures": 1,
+      "old_v6_cacheless_admission": 1
+    },
+    "Ruff_F": "PASS; only private new code, not configured source-wide lint",
+    "components": {
+      "fixed_historical_alias": 6,
+      "inherited_original_transport_and_metadata": 50,
+      "launcher_completed_process": 6,
+      "new_cache_policy_and_release": 31
+    },
+    "final_GREEN": 93,
+    "native_gateway_install": "NOT_RUN",
+    "scope_proof": "PASS_READONLY_AST_AND_CURRENT_CONFIG"
+  },
+  "source": {
+    "LIGHT": {
+      "bytes": 13921,
+      "mode": "0o600",
+      "path": "/workspace/engineering/pr308-cache-current-e3c-source/OWNERFINAL-current-e4ff-reviewed-cache-application-and-e3c-ordinary-source-LIGHT.json",
+      "sha256": "e18d871d9daf93e21e0b34610af31e9d4198bc4a1c93431d8799464954d37c6c"
+    },
+    "SOURCEFULL": "NOT_RUN_NEW_SOURCE_FULL_AND_INDEPENDENT_REQUIRED",
+    "commit": "e4ff080375a8422bb656e52d218f198521dda078",
+    "leaves": 1423,
+    "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+  },
+  "status": "OWNER_CONDITIONAL_CURRENT_SOURCE_PINNED_CODE_AND_CONFIG_FROZEN_NOT_ACTUAL_RELEASE",
+  "upstream_disposition": "none"
+}

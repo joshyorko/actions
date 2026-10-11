@@ -1,0 +1,78 @@
+{
+  "construction_history": "Initialguide-onlyinspectorFAIL retained; correctedgenerator+guidecombinedproof current3969 exact; rawretention sourcee4 kept historical and current_source3969 separate.",
+  "documentation_improvement": {
+    "Canonical file changed or proposed": "docs/skills/repository-operations.md: ROOT-adoptedexactnine-linenativehomemodeparagraph in2058 retainedin3969, acceptedno cosmeticchild.",
+    "Durable learning captured": "RCC's private client home has a different permission contract from the\nsupervisor-owned state root and package cache. The retained RCC revision's\npackage initialization recursively applies mode `0750` before a `--version`\nprobe returns. Admit only the explicitly reviewed `0700`/`0750` client-home\nmodes with the exact owned path, owner and group; keep the state root and\npackage cache at `0700` and the identity marker at `0600`. Never chmod an\ninput to make admission pass. Bind observed permissions and native-source\nprovenance separately: a modified build does not establish exact source\nequivalence, and a rejected home proves no publication, Action or lease result.",
+    "Evidence": "Verifiedpublic3577patch/2058commit/current1426typedunion; immutable4148/7f568sourcechain; original61506FAIL; genuinepublic0750RED; current47permanentcachePASS;237historicalrefs correctlytyped.",
+    "Remaining uncertainty": "Actualclientgroup/nativecompatibility/capacitypeak/sourceFULL/CI/private/release awaitseparategates.",
+    "Stale or ambiguous guidance removed": "Separate nativeclient700/750 fromsupervisorroot/cache700/marker600; no inputrepair or modifiedbinarysourceequivalence inference; originalmodefailure beforepublication/action/lease unchanged."
+  },
+  "inspector": {
+    "bytes": 7430,
+    "path": "/workspace/engineering/pr308-current3969-independent-SOURCE-LIGHT-review/inspect_frozen_LIGHT_readonly.py",
+    "sha256": "4525d37e5125f875823c24138be2f17c721c9e0c03404d4005d90e229c4e7b10"
+  },
+  "owner": {
+    "bytes": 15663,
+    "path": "/workspace/engineering/pr308-native-home-mode-current-a54-SOURCE-LIGHT/OWNERFINAL-current396925-public-native-home-mode-and-a54-union-SOURCE_LIGHT.json",
+    "sha256": "7fe036c7ea9a42e5c652c2f33726a0a6d8d4964de4a007eb2a0e680eeef0f489"
+  },
+  "proof": {
+    "bytes": 1583,
+    "path": "/workspace/engineering/pr308-current3969-independent-SOURCE-LIGHT-review/independent-current3969-SOURCE-LIGHT-readonly-proof.json",
+    "sha256": "d5c99bd1a2501de5a7811bf0fed98fd3d72faeee1594d06b8aaf127cd5770c46"
+  },
+  "remaining_HOLD": [
+    "CurrentconfiguredSOURCEFULL NOTRUN; namedfullpreexecution anddistinctroot release requireindependentreview.",
+    "pytest38 originalroot nowabsent accordingroot; frozen LIGHT preexecution prerequisite ishistoricalmetadata, notproof of completedarchiving. No recoveryreceipt inferred.",
+    "OldC pinsc103/source216 stilloldcontrol; newcurrentactual/config sourcebindingmust bequalifiedseparately, no oldfull/CI/nativecarry.",
+    "Native3newactual/5/7276NOTRUN; modifiedcompiledsourceequivalenceUNKNOWN; privateV8 conditionalleaseprototype unadopted.",
+    "FreshcurrenthostedCI/sourcepush/integration/full134/private01f/frozenv6/OAuth/release remainHOLD."
+  ],
+  "reviewer_tests_imports_constructor_guard_gateway_native_or_source_mutations": false,
+  "schema": 1,
+  "source": {
+    "clean": true,
+    "commit": "396925cb3d6527af1768b7f5333f9653c005fc55",
+    "parents": [
+      "2058b1b185a79c04b24eaf46a73d278ba4f689e5",
+      "a54c982462d1e7ad011d8152bfc299d997503fb3"
+    ],
+    "source_root": "/workspace/engineering/pr308",
+    "tree": "84f850f0d4e08b21afcd8220413ce94322370acf"
+  },
+  "source_union_review": {
+    "bytes": 3679,
+    "path": "/workspace/engineering/pr308-current3969-independent-source-union-review/OWNERFINAL-independent-current3969-static-source-union-review.json",
+    "sha256": "13cb32bf4b35aa8e1956f1d71222c4739a09a8d645148f306bcf959e3390313e"
+  },
+  "status": "GO_CURRENT3969_SOURCE_LIGHT_ONLY_SOURCEFULL_AND_ACTUAL_REMAIN_HOLD",
+  "upstream_disposition": "none",
+  "verified": {
+    "Toolkit_passed": 96,
+    "default_RCC3_and_selector": "Alloldfixture/moduledefaultbranches preserved bywholeASTacceptedpatch; productionbinarypins unchanged; realRCC optin case skipped. Sourcecoupling tests are source evidence, notnative selector/version qualification.",
+    "deselected": 3,
+    "five_frozen_actual_origin_reports": "Ownprefix/sourceorigin checked, no import replay",
+    "fullconfigured_lint_type": "Owned original terminal0; format316/type352, Markdown advisory unavailable",
+    "generated8_tracked_YAML30": "Originalroundtripreceipt+currentfilehashes verified",
+    "historical_original_bindings": {
+      "current_files_exact": 235,
+      "old_e4_fixture_Git_body_exact": 1,
+      "original_failed8dc_receipt_authorized_archive_member_exact": 1,
+      "total": 237
+    },
+    "native_original_complete_entries": 1192,
+    "native_producer": "275 current:260originalmatch8changed7added/268old;5selected separateunchanged; UNQUALIFIED for original92498",
+    "optin_real_RCC_skipped": 1,
+    "original_archived_receipt_status": "FAIL",
+    "original_failed_archive_bytes_SHA_mode_verified": true,
+    "original_scoped_JUnit_unique": 268,
+    "owner_frozen_bindings": 33,
+    "permanent_cache_cases_passed": 47,
+    "prepared_inputs": 30,
+    "scoped_passed": 267,
+    "shutdown_cases_passed": 10,
+    "source_complete_Git_FS_body_modes": 1426,
+    "warnings": 5
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "status": "EXACT_ORDERED_101_PRIOR_PREFIX_AND_GRAPH_SUFFIX_PRESERVED",
+  "original_body_sha256": "28c1ab4e6293e45ce3af6ed2f738424bd7689bfcfc3f52aa91eff74562d85a89",
+  "original_prefix_bytes": 7918,
+  "original_prefix_sha256": "91ee8dab301f8cc566fe3b55f0984ce9052cf0ff415a96ca382f29616b4f17f2",
+  "prefix_exact_inside_retained_details": true,
+  "graph_suffix_bytes": 28075,
+  "graph_suffix_sha256": "d6aa504c67bb72508006751c65d0d575d2e108a1ae3f677034723ee8101843b7",
+  "suffix_exact_at_EOF": true,
+  "reconstructed_prior_body_SHA_equal": true,
+  "entire_prior_body_contiguous_in_new_body": false,
+  "clarification": "Only wrapper markup separates the exact retained prior prefix from the exact unmodified graph suffix; all prior content remains present in original order.",
+  "no_graph_regeneration_or_issue_closure": true
+}

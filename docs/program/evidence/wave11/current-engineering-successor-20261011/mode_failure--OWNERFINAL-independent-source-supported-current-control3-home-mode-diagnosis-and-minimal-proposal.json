@@ -1,0 +1,172 @@
+{
+  "application_writes": false,
+  "bindings": [
+    {
+      "bytes": 7588,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-actual-independent-review/OWNERFINAL-independent-original-current-e4ff-control3-cache-mode-actual-failure-review.json",
+      "sha256": "61506cf064896dc750ccf47450d440170861cef4cf9a5c68060ac3ea3bedf5b1"
+    },
+    {
+      "bytes": 3017,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-mode-source-diagnosis-owned/exact-source-snapshot-bindings.json",
+      "sha256": "1320cd225052ea7437978b02f8d3cea5a762ba32aa56fcd8b6d4095868937f17"
+    },
+    {
+      "bytes": 933,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-mode-source-diagnosis-owned/independent-readonly-source-mode-proof.json",
+      "sha256": "cf4c815e4b6abbbdd74c60277ad9d1a87885c1e5072bcecd1cb5f8d1bffed776"
+    },
+    {
+      "bytes": 4556,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-mode-source-diagnosis-owned/verify-source-mode-boundary-readonly.py",
+      "sha256": "f3f64f881a903a02832e1b4baaba681039fbf0f04128105e61f71da91ab9a0da"
+    },
+    {
+      "bytes": 672,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-mode-source-diagnosis-owned/canonical-native-managed-home-mode-boundary-proposed.md",
+      "sha256": "6cda8295363ecc44d0df0af2b67f0a2d47935aea979f3cbdc8424e32c4a9b2c4"
+    }
+  ],
+  "canonical_documentation": {
+    "disposition": "Exact nine-line durable source-backed proposal for root owning guide; original61506 pending-mutator proposal historical untouched",
+    "proposal": {
+      "bytes": 672,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-mode-source-diagnosis-owned/canonical-native-managed-home-mode-boundary-proposed.md",
+      "sha256": "6cda8295363ecc44d0df0af2b67f0a2d47935aea979f3cbdc8424e32c4a9b2c4"
+    },
+    "stale_ambiguity": "Strict700 client-home check conflicts with retained native initialization contract; state root/cache stay strict",
+    "uncertainty": "Modified compiled-source equivalence and fresh native acceptance remain unknown"
+  },
+  "evidence": {
+    "actual_boundary": "Both2 JUnit nodes fail PACKAGE_CACHE_CLIENT_MODE_OWNER before publication/Action/lease; owned client0750 UID1000 GID1000 and hololib descendants observed; originalFAIL preserved",
+    "approved_RCC3_binary_sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "binary_embedded_vcs_modified": true,
+    "fixture_version_probe_order": "Both cases verify RCC version before invoking cache helper; default control3 has no compatibility selector; subprocess inherits ROBOCORP_HOME.",
+    "retained_RCC_source_revision": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+    "source_mode_call_chain": [
+      "cmd imports htfs; Go package initialization precedes main and version handling",
+      "htfs init calls MakeSharedDir(HololibCatalogLocation())",
+      "Private HololibLocation is Product.Home()/hololib; catalog is hololib/catalog",
+      "privateSetup.MakeSharedDir calls makeModedDir(path,0750)",
+      "Absent hololib recursively invokes shared.MakeSharedDir(existing Product.Home())",
+      "existing0700 lacks required0750 bits; ensureCorrectMode calls os.Chmod(home,0750)"
+    ]
+  },
+  "limitations": [
+    "Static source-supported explanation; exact compiled-source equivalence UNKNOWN because modified=true",
+    "No deployed syscall trace, native experiment or precise timing attribution",
+    "No new5/7276/native publication/Action/lease/reuse/lifecycle acceptance",
+    "Original primaryFAIL/internal post-admissionFAIL retained; external post0 does not upgrade them"
+  ],
+  "native_executions": 0,
+  "next_minimal_implementation": {
+    "contract": "Native-managed client home exact0700 or0750, same current UID/GID, exact real path and no symlink, exact environment/source/binary/marker/root tuple. State root/cache remain strict0700 and marker0600. No chmod repairs or other modes.",
+    "controls": [
+      "Owned synthetic client exact700 and750 pass without mutation",
+      "Wrong UID/GID, symlink, root/cache750, client770/755/777/710/740 reject",
+      "All marker/source/binary/environment/cold-first/warm-stage poison controls retained",
+      "Absent opt-in keeps original fixture default behavior"
+    ],
+    "private_path": "named owned_cache_policy successor; originals immutable",
+    "public_fixture_path": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+    "public_function": "_prepare_owned_rcc_test_package_cache client-mode predicate only",
+    "unreached_lease_context": "b614 intentional-disposal literals are separate. Changing current context requires separate reviewed expected-source binding, exact RCC3 binary/version/nonreuse and unchanged strict lease/typed cleanup predicates; this diagnosis does not admit it."
+  },
+  "reviewer_constructor_event": "Initial in-memory receipt constructor had SyntaxError before any write; named corrected constructor generated this receipt. Source proof unaffected.",
+  "schema": 1,
+  "scope": "read-only source-supported diagnosis; no source application, native retry, constructor or gateway execution",
+  "source": "e4ff080375a8422bb656e52d218f198521dda078",
+  "source_blobs": [
+    {
+      "bytes": 1426,
+      "git_blob_sha": "f5757e306bb1bfb1ef014f40562f5861e176e27e",
+      "path": "common/strategies.go",
+      "ref": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "repository": "joshyorko/rcc",
+      "sha256": "19375a7ff79d22212fd0f99ad00424f4f1a2dba8388a56317b034da925aaa8cd",
+      "snapshot": "common-strategies.go"
+    },
+    {
+      "bytes": 9877,
+      "git_blob_sha": "c14b048ef512713415f47d3bc7fc7d5797a0762b",
+      "path": "common/variables.go",
+      "ref": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "repository": "joshyorko/rcc",
+      "sha256": "8ce23972affbbca0006436a6e35c03d7c05cf26bac41f163e62cbf4b7410ee6f",
+      "snapshot": "common-variables.go"
+    },
+    {
+      "bytes": 249,
+      "git_blob_sha": "f68462650bf8da708fb9cbf18733087dc16cf726",
+      "path": "pathlib/variables.go",
+      "ref": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "repository": "joshyorko/rcc",
+      "sha256": "0e0a3a4c65e4849486254b08484f340f674729ebb235ef1354ceee7352a28d52",
+      "snapshot": "pathlib-variables.go"
+    },
+    {
+      "bytes": 791,
+      "git_blob_sha": "c0d7deef61cf3a5321c7f9fe63fd7d0602cca80f",
+      "path": "pathlib/shared.go",
+      "ref": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "repository": "joshyorko/rcc",
+      "sha256": "c5ff4f0eb3096425ac2654e136f66efab2f76df0e832158b7ca8e251d58af951",
+      "snapshot": "pathlib-shared.go"
+    },
+    {
+      "bytes": 8304,
+      "git_blob_sha": "b1ecddbecb4a6d73e526fa06ad4cda9ad73273fd",
+      "path": "pathlib/functions.go",
+      "ref": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "repository": "joshyorko/rcc",
+      "sha256": "ba1e7697dcd2b1a239292def345391d0d5fcaf1d49f326dcc988728807f04dcc",
+      "snapshot": "pathlib-functions.go"
+    },
+    {
+      "bytes": 11301,
+      "git_blob_sha": "90e0ef94af8ab4b1adccb80e27b5cef778230e9d",
+      "path": "htfs/directory.go",
+      "ref": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "repository": "joshyorko/rcc",
+      "sha256": "8b3cf1f1c233e4f6a447e588ade54e04ec49b33e2fd93abbbd2b15a6e6d1ba3d",
+      "snapshot": "htfs-directory.go"
+    },
+    {
+      "bytes": 5481,
+      "git_blob_sha": "5021b964bd5c100e9047608d11b7c0cc2f08a757",
+      "path": "cmd/holotreeCatalogs.go",
+      "ref": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "repository": "joshyorko/rcc",
+      "sha256": "c1c5266c30b73534a181768e0833f094daee50d88bd537c381b66d4a2da1f7ba",
+      "snapshot": "cmd-holotreeCatalogs.go"
+    },
+    {
+      "bytes": 4064,
+      "git_blob_sha": "9140529fd2a19ba4ce269ec70137b1f7b9401e43",
+      "path": "cmd/rcc/main.go",
+      "ref": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "repository": "joshyorko/rcc",
+      "sha256": "aea6d63bba957580e25870af367a18053946efdcb2c1597cd6f967ff617fb119",
+      "snapshot": "cmd-rcc-main.go"
+    },
+    {
+      "bytes": 7561,
+      "git_blob_sha": "f1e4fc16badd4a33afd0e2df1222a29ae9168dcd",
+      "path": "cmd/root.go",
+      "ref": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+      "repository": "joshyorko/rcc",
+      "sha256": "e8444945dc26e79dc60250e2515d0ac2ad585d5f92cfae48bccd8d3c19c202d3",
+      "snapshot": "cmd-root.go"
+    }
+  ],
+  "status": "GO_BOUNDED_MODE_CONTRACT_SOURCE_PROPOSAL_ONLY_ACTUAL_REMAINS_HOLD",
+  "tests_rerun": 0,
+  "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "status": "EXACT_HISTORICAL_FAILED_MEMBER_PRESERVATION_MAPPING_NOT_ACTUAL_ACCEPTANCE",
+  "original_binding": {
+    "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-1/OWNERFINAL-one-version-actual-result.json",
+    "bytes": 1696,
+    "sha256": "8dc25bb1b99503af386d12d32c0637aa3503617c6f97d66a83f4643969934d4c",
+    "mode": "0o600"
+  },
+  "archive": {
+    "path": "/dev/shm/actions-failed-control3-original-preservation-20261011-1/actions-rcc-compatibility-actual-control3-20261011-1.tar.gz",
+    "bytes": 972955038,
+    "sha256": "ca5579abb7851498317a7b85f068ae2c5154e4f24374eadfe522989497551b82",
+    "mode": "0o600"
+  },
+  "member": "actions-rcc-compatibility-actual-control3-20261011-1/OWNERFINAL-one-version-actual-result.json",
+  "member_uid": 1000,
+  "member_gid": 1000,
+  "original_status": "FAIL",
+  "original_cleanup": "FAIL_UNCHANGED",
+  "complete_index": {
+    "path": "/dev/shm/actions-failed-control3-original-preservation-20261011-1/private-complete-inventory-and-preservation.json",
+    "bytes": 16449338,
+    "sha256": "22112bb16590a4ec10b114872db7e30b51dd0c707e0cf6b8dd3b3997e74a4dd4",
+    "mode": "0o600"
+  },
+  "expanded_removal": {
+    "path": "/dev/shm/actions-failed-control3-original-preservation-20261011-1/private-expanded-removal-final.json",
+    "bytes": 156707,
+    "sha256": "be2c9ec5cdc7a60b1f402ecd10bd67f9801dcaf748a6eb47b9079ead6adeae8f",
+    "mode": "0o600"
+  },
+  "root_original_terminal": {
+    "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/OWNERFINAL-root-one-failed-control3-byte-preservation-terminal.json",
+    "bytes": 1075,
+    "sha256": "b5c85ac949bd07d7fa32c41cc8075b8e18dc5e88499d202569de8c13b0a97909",
+    "mode": "0o600"
+  },
+  "all_original49132_members_preserved": true,
+  "original_path_absent": true,
+  "no_original_path_restoration": true
+}

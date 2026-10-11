@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "owner_announced_at_UTC": "2026-10-11T15:58:15.703638+00:00",
+  "status": "PREPARATION_ONLY_ONE_ORIGINAL_AGGREGATE_API_ACQUISITION_ROOT_RELEASE_REQUIRED_NOT_RUN",
+  "metadata_owner": {
+    "path": "/workspace/engineering/pr221-currenta54-metadata-source-artifact-review/OWNERFINAL-current-a54-PR221-metadata-source-artifact-readiness-review.json",
+    "bytes": 53144,
+    "sha256": "63c52cc4e8f14e1148a258a5c1b8028a7b1041da59f62eb44ef47cfbb18e9297",
+    "mode": "0o444"
+  },
+  "selected_original": {
+    "artifact_id": 11707021540,
+    "name": "actions-runtime-dist",
+    "ZIP_size_API_bytes": 78972874,
+    "ZIP_digest_API": "sha256:9d2f6717a6a8a6da12dfed34b984e815f5ec2a75e4622330ab8f06109868775c",
+    "expired": false,
+    "run_id": 38151577738,
+    "source_head": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "declared_producer_job_id": 114507030652,
+    "declared_producer_job_name": "publish (3.12)",
+    "producer_job_status": "completed",
+    "producer_job_conclusion": "success",
+    "association_limit": "upload name/job step source contract plus run/artifact metadata; original checkout/log not acquired"
+  },
+  "source": {
+    "head": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "full_tracked_leaves": 1426,
+    "tracked_Runtime_sources": 216,
+    "tracked_Python_sources": 202,
+    "actual_wheel_members": "UNKNOWN_NO_215_OR_202_WHEEL_COUNT_CARRY",
+    "intended_builder_synthetic": {
+      "sha": "188573163169e94474a424baacd5386ed4bcc366",
+      "ordered_parents": [
+        "a70993fafc99a9f94041485542d5a720797ca394",
+        "a54c982462d1e7ad011d8152bfc299d997503fb3"
+      ],
+      "tree": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+      "API_tree_equals_actual_source_tree": true,
+      "actual_producer_checkout": "UNKNOWN_NO_ORIGINAL_LOG_ACQUIRED"
+    },
+    "actual_builder_checkout": "UNKNOWN_NO_ORIGINAL_LOG_ACQUIRED"
+  },
+  "original_API_acquisition": {
+    "endpoint": "GET /repos/joshyorko/actions/actions/artifacts/11707021540/zip",
+    "exact_argv": [
+      "gh",
+      "api",
+      "--method",
+      "GET",
+      "repos/joshyorko/actions/actions/artifacts/11707021540/zip"
+    ],
+    "outer_bound_argv_prefix": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "120s"
+    ],
+    "once_only": true,
+    "no_second_attempt_or_automatic_fallback": true,
+    "no_other_artifact_ID": true,
+    "no_log_endpoint_acquisition_in_this_release": true,
+    "redirect_policy": "The original authenticated gh client follows GitHub redirect privately; do not print returned redirect or signed storage URL. API error/Forbidden retains failure/private stderr and stops; zero or partial original bytes stay failed."
+  },
+  "owned_private_outputs": {
+    "parent": "/tmp/actions-runtime-a54-original-11707021540-once-owned",
+    "parent_must_be_absent": true,
+    "parent_mode": "0o700",
+    "umask": "0o077",
+    "original_zip": "original-11707021540.zip",
+    "original_stdout": "stdout streamed as exact ZIP bytes only to newly exclusive0600 file",
+    "original_stderr": "original-download.private.stderr, exclusively0600 captured; never tool/stdout/Git",
+    "terminal": "original-download-terminal.json,0600 status/returncode/timing/bytes/SHA only; preserve original exception class and primary stderr privately on any failure",
+    "authorization": "Root creates distinct0600 hash-bound one-original API acquisition release before launch, binding this exact proposal, original artifact tuple and exclusive owned outputs."
+  },
+  "explicit_preflight": {
+    "no_existing_current_a54_original_reuse": "No current a54 artifact bytes exist in this frozen lane; inspect owner retained artifact references before release and reuse if another owner already acquired this exact tuple; never duplicate accepted acquisition.",
+    "activation": "source /workspace/actions-cloud/activate.sh explicitly; bind18 exact exports+PATH, ROBOCORP_HOME/XDG/Poetry/GOMAXPROCS/managed toolkit cache inputs, clear PYTHONOPTIMIZE; this API acquisition invokes gh only and never RCC/Poetry/product/native.",
+    "serialization": "Root alone releases this one network acquisition after no heavy installer/full/native conflict; current CI still bounded pending snapshot, no timer poll.",
+    "capacity": "Fresh /tmp free>=536870912 bytes before release, workspace source/evidence floor preserved without writing archive there; no new filesystem/infrastructure. Caller capacity/root release must be measured immediately, earlier sourcefull point-in-time bytes are not future permission."
+  },
+  "byte_limits": {
+    "original_expected_exact_ZIP_bytes": 78972874,
+    "original_expected_SHA256": "9d2f6717a6a8a6da12dfed34b984e815f5ec2a75e4622330ab8f06109868775c",
+    "compressed_stream_ceiling_bytes": 100663296,
+    "download_deadline_seconds": 120,
+    "TERM_KILL_grace_seconds": 10,
+    "outer_ZIP_declared_expanded_ceiling_bytes": 134217728,
+    "outer_ZIP_single_member_ceiling_bytes": 67108864,
+    "outer_expected_regular_member_count": 8,
+    "outer_expected_artifact_count": 7,
+    "member_count_unknown_until_original_bytes": "Expected from publisher contract6wheels+1sdist+manifest; any difference stops admission."
+  },
+  "safe_original_ZIP_data_inspection": {
+    "data_only_no_execute": "zipfile read-only central-directory and streamed-member CRC/SHA checks; no importing/executing wheel/package/helper/native binaries. Do not claim exact body or member mode before acquisition.",
+    "before_any_extraction": [
+      "Require original total bytes+SHA equal authenticated artifact metadata, finite ZIP member count/sizes and no encryption.",
+      "Require8 unique root-level relative regular names, no traversal/absolute/drive/backslash/NUL/directory/symlink/hardlink/special names; reject duplicate names including case-fold collision.",
+      "Require exactly6 version1.0.3 Runtime wheel slots(cp312/cp313 each manylinux/macOSARM64/WindowsAMD64),1 version1.0.3 Runtime sdist and actions-runtime-manifest.sha256. Use existing source publisher contract as authority; do not execute its publishing functions.",
+      "Stream every admitted outer member to validate CRC, exact expanded bytes/SHA before reporting. Require strict UTF8 manifest7unique filename/digest lines with exactly2-space separator and all7 bodies match.",
+      "Record observed outer creator/external_attr/mode metadata rather than inventing executable modes; retained output files remain0600.",
+      "No extraction necessary for original byte/provenance review. If separately root-authorized to materialize verified members, create exclusive0700 member directory and individually0600 O_EXCL files only after entire archive validation; never extractall/overwrite/followlinks."
+    ],
+    "nested_inspection": "Only if independently qualified after byte acquisition: bound each wheel ZIP separately before reading metadata/source/member inventories, retain strict path/body/CRC/size limits; package code/native and sdist contents never executed by acquisition. No actual installed member count or generatedOAuth inference from metadata alone.",
+    "existing_publisher_contract": {
+      "source": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+      "path": "action_server/scripts/publish_verified_runtime.py",
+      "source_bytes": 18453,
+      "source_SHA256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c",
+      "manifest": "actions-runtime-manifest.sha256",
+      "functions_to_reuse_or_read_as_authority": [
+        "_artifact_names",
+        "verify_artifacts"
+      ],
+      "execution_in_this_proposal": "NONE"
+    }
+  },
+  "producer_provenance_contract": {
+    "repository": "joshyorko/actions",
+    "workflow": ".github/workflows/actions_runtime_pypi_release.yml",
+    "run_id": 38151577738,
+    "publish_job_id": 114507030652,
+    "Linux_build_job_id": 114505954669,
+    "actual_run_head": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+    "synthetic_API_commit": "188573163169e94474a424baacd5386ed4bcc366",
+    "synthetic_ordered_parents": [
+      "a70993fafc99a9f94041485542d5a720797ca394",
+      "a54c982462d1e7ad011d8152bfc299d997503fb3"
+    ],
+    "synthetic_tree_equals_actual_source": "47a1e4fceb22fd15eaee1ca380ad6c005abfdde6",
+    "upload_association": "unique declared aggregate upload name and publisher successful step+run/artifact metadata; original producer checkout/log still UNKNOWN",
+    "archive_admission_does_not_establish_producer_checkout": true,
+    "original_producer_logs": "distinct future root ONE authorization needed; no log acquisition granted by this proposal",
+    "producer_not_consumer": "Successful inventory/Twine/registry-floor metadata steps are not independently installed consumer provenance or publication."
+  },
+  "subsequent_consumer_boundary": {
+    "no_consumer_execution_authorized": true,
+    "reuse": "Existing strict floor selector, public dependency/pip-report/origin verifier and wholewheel installed-member/privateCore guard; no helper replacement/rebuild.",
+    "isolated_Linux_pair": "After fresh original archive/source measurement, copy only exact Linuxcp312 wheel and corresponding measured manifest into exclusive platform input directory; preserve mixed original aggregate and reject foreign cp312 collision.",
+    "new_identity": "Bind all fresh originalwheel/RECORD/source216-derived bindings/generated exceptions actually measured, never assume old215 or count from another source.",
+    "dependencies": "Current unchanged release floor is public Core1.0.2+Helper1.0.3; a separate approved exact installedCore1.0.3 subject can only be admitted by its independent measured existing provenance. No dependency selection made or installed by this acquisition proposal.",
+    "actual": "Separate immutable runner/argv/activation/cleanup independent GO and distinct root ONE consumer release after source/artifact qualification/capacity. No automatic retry or imported predecessor consumer proof."
+  },
+  "release_HOLD": [
+    "#221 remains draft/currentCI3pending at frozen sample; no old33S1skip carry.",
+    "All current generated OAuth/sourceauthority/platform/native/privateCLI/full132133134139143/registrypublication/tag/release/issueclosures remain separate.",
+    "Old failure/predecessor releaseconsumer receipts remain historical exact identities."
+  ],
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md: verified exact existing complete installed-member scan/public registry/producer identity/paged-check lessons at a54 reused; no cosmetic source/doc change.",
+    "Durable_learning": "Authenticated artifact metadata selects a source-bound acquisition candidate but not wheel bytes/producer checkout or consumer provenance. Admission must bind the exact original archive and strict seven-artifact matrix before new count-driven installed proof.",
+    "Evidence": "Fresh13flows34matrixjobs and aggregate/API digest/publisher current metadata, current1426Git/216package/202Py source and immutable publisher6wheel+sdist+manifest functions; no acquisition performed.",
+    "Stale_guidance_removed": "No old215 source equivalence, successful metadata\u21d2OAuth/config/consumer inference, or source commit\u21d2actual checkout assumption.",
+    "Remaining_uncertainty": "Original artifactbytes/members/CRC/modes/generator exceptions/current innerwheel/hash/actual producercheckout and current consumer remain UNKNOWN."
+  },
+  "upstream_disposition": "none",
+  "preannouncement_constructor_correction": {
+    "predecessor_path": "/workspace/engineering/pr221-currenta54-one-original-aggregate-acquisition-preparation/OWNERFINAL-current-a54-one-original-aggregate-acquisition-PREPARATION.json",
+    "predecessor_bytes": 11503,
+    "predecessor_sha256": "d9e8af4d91d0056aaf703ebc12ebd5b8ba8d77a982331c32798d6bca8fc0c497",
+    "scope": "Two function labels corrected to actual AST names _artifact_names/verify_artifacts before owner announcement; no artifact/acquisition/source/execute changes."
+  }
+}

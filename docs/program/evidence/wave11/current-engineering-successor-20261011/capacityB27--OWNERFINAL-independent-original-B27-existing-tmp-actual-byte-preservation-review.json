@@ -1,0 +1,124 @@
+{
+  "bindings": [
+    {
+      "bytes": 1018,
+      "mode": "0o400",
+      "path": "/workspace/engineering/capacity-recovery-batch27-independent-actual-review/independent-B27-original-actual-stream-proof.json",
+      "sha256": "b57e505c91a338cd037ce483002b9ac365ca6e35141acd5e4d3a441bb5bed1fc"
+    },
+    {
+      "bytes": 7839,
+      "mode": "0o400",
+      "path": "/workspace/engineering/capacity-recovery-batch27-independent-actual-review/verify-actual-B27-streams-readonly.py",
+      "sha256": "4915e2f65e9879eb4dc922186286b5db0d1e01b1229f17c2fb4777e27bdd68ef"
+    },
+    {
+      "bytes": 473,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-B27-one-existing-tmp-recovery-named-v2/OWNERFINAL-root-one-B27-named-metadata-existing-tmp-terminal.json",
+      "sha256": "2a0d859cd511fc3bfdd7906d7a0131fca8ee88ff64bb5e320eff8242a2823e7b"
+    },
+    {
+      "bytes": 414,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-B27-one-existing-tmp-recovery/OWNERFINAL-root-one-B27-existing-tmp-volume-terminal.json",
+      "sha256": "19c8a6d42fe6f27edf0d79a32dd2402cc74a58559ac4776c5390d9ab938354ad"
+    },
+    {
+      "bytes": 6203,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-B27-one-existing-tmp-recovery/root_named_metadata_successor_v2.py",
+      "sha256": "fe9b8daa5da63dd2909c0c2d90c32e0357ccb5d22cf72a4f496dc9a272ecefae"
+    },
+    {
+      "bytes": 639,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-B27-one-existing-tmp-recovery-named-v2/root-one-authorization.json",
+      "sha256": "d6ddb90977f32bee4bc78aecd92e5088682cce0437a691f7555981e1e898f78d"
+    },
+    {
+      "bytes": 1864,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-failed-control3-one-byte-preservation-v4/root-exact-historical-failed-member-archive-mapping.json",
+      "sha256": "cc73027ce86ea0965f3bdd88ed3398c322dcf012b337a4ca161966f19ffee6c7"
+    },
+    {
+      "bytes": 7588,
+      "mode": "0o400",
+      "path": "/workspace/engineering/rcc-current-e4ff-control3-actual-independent-review/OWNERFINAL-independent-original-current-e4ff-control3-cache-mode-actual-failure-review.json",
+      "sha256": "61506cf064896dc750ccf47450d440170861cef4cf9a5c68060ac3ea3bedf5b1"
+    },
+    {
+      "bytes": 1068,
+      "mode": "0o600",
+      "path": "/workspace/engineering/capacity-recovery-independent-review/canonical-completed-scratch-preservation-proposed.patch",
+      "sha256": "7d07065b5bb7742698919997c8c6621cc20d00494741eb5365251ffb09f2d208"
+    }
+  ],
+  "canonical_documentation": {
+    "delta": "Existing exact11-line7d070 completed scratch preservation paragraph verified verbatim; no redundant new prose",
+    "evidence": "Byteexact c689 algorithm and15195 archive member bodies/metadata, all58prior archives26indices, current1423/source/native1192/prepared30 and failed receipts unchanged",
+    "owning_guide": "/workspace/engineering/campaign-checkpoint/docs/skills/repository-operations.md",
+    "remaining_uncertainty": "Nativequalification and future capacity are separate; original failed wrappers/actual failures preserved",
+    "stale_ambiguity": "Wrapper metadata failure before archive is separate from sole named actual archive invocation; no failure-to-native-success promotion"
+  },
+  "limitations": [
+    "No archive extraction, mutations, new process signals or native/gateway execution by reviewer",
+    "Original source origin UNREPORTED; recorded completion markers do not identify earlier source jobs",
+    "Accessible handle checks are historical scoped observations; currentotherUID/universalquiescence UNKNOWN",
+    "Unrecorded rootmetadata/ACL/xattr/inode equivalence/exact TAR mtime unknown",
+    "Recovered space measured at root terminal only; all future full/native capacity and input guards need fresh release; no source/native/lease/release gate promotion"
+  ],
+  "original_outcomes": {
+    "archive_root": "existing/tmp only;3new0600 gzip archives/private0600 index;15195 all TAR bodies/resolved-hardlinks/type/mode/UIDGID and gzipCRC/EOF verified",
+    "expanded_absence": "Exact3original expanded names absent; only preservation/removal scoped to recorded root algorithm",
+    "named_root_wrapper": "Distinct authorization, recorded primary0/post0/46.090845614s/archive_attempts1; rowkey archive vs path and exact failed-result hash corrected; no archive retry",
+    "original_root_wrapper": "KeyError before archive subprocess; primaryNULL/no command-terminal; originalFAIL preserved",
+    "space_recorded_only": {
+      "/dev/shm": 3942715392,
+      "/tmp": 485412864,
+      "/workspace": 1305722880
+    }
+  },
+  "retained_failures": {
+    "failed563": "exists only historical scope",
+    "historical_control3_archive_ca557_whole_hash_metadata_index_removal_terminal": "rehashed unchanged; oldFAIL+cleanupFAIL not promoted",
+    "small_new_control3_original_files": "all8original SHA/size rehashed exact61506; nativeFAILED_MODE_PRIMARY unchanged"
+  },
+  "reviewer_path_read_event": "Initial sed targeted namedwrapper folder instead of retained originalfolder; read failed only, no mutation; exact existing wrapper then inspected.",
+  "schema": 1,
+  "status": "GO_ORIGINAL_B27_ACTUAL_BYTE_PRESERVATION_ONLY",
+  "upstream_disposition": "none",
+  "verified": {
+    "archives": [
+      {
+        "bytes": 1827785,
+        "members": 7211,
+        "sha256": "435301dc08bb5619c54b85bdca71638702c0d35a7dbefbb7db02a444bf129262"
+      },
+      {
+        "bytes": 1827661,
+        "members": 7206,
+        "sha256": "7b525fab952f2bfae0c6c16489d0f6218d74b5c828a6b51b244b2c6c0e9497c3"
+      },
+      {
+        "bytes": 564611,
+        "members": 778,
+        "sha256": "1fc3f3e168981890280a0d3e6c992e621049d9a57a3bed77509ccb354cb4fae3"
+      }
+    ],
+    "current_source1423_body_modes": true,
+    "named_root_archive_attempts": 1,
+    "native1192_prepared30": true,
+    "new_members": 15195,
+    "no_extraction_or_mutation_or_native_by_reviewer": true,
+    "original_failed563_exists_only": true,
+    "original_rootwrapper_primary_not_started": true,
+    "prior_archives58_indices26_rehashed": true,
+    "recorded_primary0_post0": true,
+    "schema": 1,
+    "small_failed_RCC_original_unchanged": true,
+    "status": "INDEPENDENT_B27_PRESERVATION_ONLY_GO",
+    "unrecorded_root_metadata_and_exact_TAR_mtime_and_otherUID_quiescence": "UNKNOWN"
+  }
+}

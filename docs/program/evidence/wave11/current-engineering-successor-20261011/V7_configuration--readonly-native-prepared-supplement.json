@@ -1,0 +1,14 @@
+{
+  "bindings_reverified": 237,
+  "gateway": "NOT_RUN",
+  "guard_entry": "readonly_current_input_guard_v1.guard(config) function only; no CLI/release/process task",
+  "historical_native_current_equivalence": "UNQUALIFIED",
+  "native_execution": "NOT_RUN",
+  "native_historical_original_rows_body_mode_set": 1192,
+  "own_origin_rows_only_not_product_imports": 5,
+  "prepared_inputs_rehashed": 30,
+  "source": "e4ff080375a8422bb656e52d218f198521dda078",
+  "source_rows": 1423,
+  "status": "PASS_CURRENT_SOURCE_AND_HISTORICAL_NATIVE_BODY_MODE_READONLY",
+  "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+}

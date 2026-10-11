@@ -1,0 +1,11 @@
+# Preserve exact hash-bound unified-patch context bytes.
+# Scope only blank-at-eol exceptions to these immutable payloads.
+V8_canonical--canonical-current-source-disposal-context-proposed.patch -text whitespace=-blank-at-eol
+canonical--canonical-config-consumed-path-dependency-closure-proposed.patch -text whitespace=-blank-at-eol
+canonical--canonical-native-managed-home-mode-boundary-exact-proposed.patch -text whitespace=-blank-at-eol
+canonical282--canonical-current-Canvas-consumer-and-parent-readback-proposed.patch -text whitespace=-blank-at-eol
+exact_canonical_deltas--canonical-exact-historical-receipt-archive-alias-proposed.patch -text whitespace=-blank-at-eol
+exact_canonical_deltas--exact-accepted-owned-package-cache-canonical-delta.patch -text whitespace=-blank-at-eol
+exact_canonical_deltas--exact-imported-a54-canonical-guide-delta.patch -text whitespace=-blank-at-eol
+exact_canonical_deltas--exact-imported-e3-canonical-guide-delta.patch -text whitespace=-blank-at-eol
+exact_canonical_deltas--exact-scoped-execution-review-decision-canonical-proposed.patch -text whitespace=-blank-at-eol

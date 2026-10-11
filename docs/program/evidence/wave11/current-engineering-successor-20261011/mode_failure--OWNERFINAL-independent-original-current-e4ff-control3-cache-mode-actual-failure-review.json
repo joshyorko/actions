@@ -1,0 +1,171 @@
+{
+  "Documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "evidence": "Original2failed JUnitnodes/code, exactmodeUID snapshot, V7 initial700 validation and original helper/launcher/sampler outcomes; authoritative mutator still pending.",
+    "exact_additional_proposed_delta": [
+      "Private cache admission must distinguish the caller-owned state root and package",
+      "cache from RCC-managed client-home permissions. Retain the original failed",
+      "attempt and prove a mode transition from authoritative native source and caller",
+      "ordering before changing a strict mode predicate. Never repair permissions to",
+      "make a poisoned input pass, or infer Action, lease or cleanup success from",
+      "an earlier source or preparation gate."
+    ],
+    "remaining_uncertainty": "Native mutator/sourceequivalence, marker symlink reuse/peak, any Action/lease and hypotheticalcurrent-source intentionaldisposal gate not reached.",
+    "stale_ambiguity_removed": "Sourcepurecontrols/coldcache readiness are not native clientmode compatibility; externalpost source0 does not negate internal cacheguardFAIL."
+  },
+  "Upstream_disposition": "none",
+  "absent_raw_receipts": [
+    "publication.json",
+    "staged.json",
+    "original-worker-lease.json"
+  ],
+  "actual_outcomes": {
+    "JUnit": {
+      "both_failure_code": "PACKAGE_CACHE_CLIENT_MODE_OWNER",
+      "errors": 0,
+      "failures": 2,
+      "passed": 0,
+      "skipped": 0,
+      "tests": 2
+    },
+    "external_launcher_post_source_guard": 0,
+    "helper_cleanup": {
+      "code": "CLEAN_NO_DESCENDANTS",
+      "status": "PASS"
+    },
+    "helper_command_rc": 1,
+    "launcher_before_primary_after": [
+      0,
+      10,
+      0
+    ],
+    "original_helper_facts": {
+      "captured_child_census": null,
+      "cleanup_disposition": "clean_no_descendants",
+      "command_returncode": 1,
+      "missing_facts_scope": "UNKNOWN_NOT_EXPOSED_BY_PINNED_HELPER",
+      "reader_join_facts": null,
+      "reaped_descendants": 0,
+      "source": "original_completed"
+    },
+    "outer_primary": {
+      "code": "COMMAND_FAILED",
+      "status": "FAIL"
+    },
+    "root_outer_rc": 1,
+    "transport_internal_post_admission_guard": "FAIL"
+  },
+  "cache_mode_facts": {
+    "actions_home_mode_UID": [
+      "0o750",
+      1000
+    ],
+    "initial_runner_home700": "Sourcecreate_cache_marker explicitly validates ownedhome700 before subprocess; original retained metadata/source evidence, not a universal observation trace",
+    "marker_mode_UID": [
+      "0o600",
+      1000
+    ],
+    "mutator_attribution": "PENDING_AUTHORITATIVE_SOURCE_AND_CALL_ORDER_NO_NATIVE_REEXECUTION",
+    "package_cache_mode_UID": [
+      "0o700",
+      1000
+    ],
+    "root_mode_UID": [
+      "0o700",
+      1000
+    ]
+  },
+  "captured_UTC": "2026-10-11T15:54:18.558226+00:00",
+  "cleanup_limits": "Original returned clean_no_descendants/reaped0 fact retained. No complete worker/child census or reader join facts exposed; nullUNKNOWN remains. Sampler cancelled/notalive does not qualify unrelated processcleanup.",
+  "config_sha256": "1411879501e1ef2bd5aec7fbf9627457aa840badc8e86be980c25b207ee9d5dc",
+  "next_bounded_source_work": {
+    "allowed_fix_proposal": "Only after source evidence supports intentional750, prepare separately reviewed minimal fixture+privateclient-home mode contract for exactown700 root/UID/current source/tree/binary/cache marker; allow specific750 home only, retain0700pkgs and0600marker/no worlds/groupwrite/no symlinks. No repair/chmod masking poison.",
+    "authoritative_diagnosis": "Identify exactexisting RCC3/home/bootstrap source operation producing750 and original fixturecall order before any native experiment. Native binary/sourceequivalence limitations explicit.",
+    "current_tuple_lease_context": "Old b614-only intentional disposal admission is a separate unreached boundary; no preemptive lease acceptance or generalized new5/6 waiver."
+  },
+  "observed_identities": {
+    "captured_tree_stage": "sampled_only",
+    "command": [
+      596776,
+      1791733803.81
+    ],
+    "complete_final_census": false,
+    "sampled_count": 2,
+    "supervisor": [
+      596775,
+      1791733803.75
+    ]
+  },
+  "original_files": [
+    {
+      "bytes": 2887,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-2/OWNERFINAL-one-version-actual-result.json",
+      "sha256": "d4ebd4111e362d3ac3f8dc519d3826ad19c71e1d06dffe7dd959a4ebd2b45ca8"
+    },
+    {
+      "bytes": 15785,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-2/original-command.stdout",
+      "sha256": "57282d7a0c754d83d414fcf0ba30aa9236b57ec8fb09749a73f98a9c7a50a3a5"
+    },
+    {
+      "bytes": 0,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-2/original-command.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 14882,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-2/junit.xml",
+      "sha256": "948ce9673d1110a8aed005c6c7b244b8b09c5b4733538b3e9ac17279f6599ba0"
+    },
+    {
+      "bytes": 446,
+      "mode": "0o600",
+      "path": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-2/rcc-package-cache-owner.json",
+      "sha256": "3c67b220952daaf9b6c0423ae9246c47007129c833a54374112113e420cf441a"
+    },
+    {
+      "bytes": 84,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-rcc-owned-cache-one-control3-current-e4ff-qualified-v4/launcher-terminal.json",
+      "sha256": "8ed0692250a3ad1480f4e3e15c519be76ef8586593579e025c8dc58ff6b29ea6"
+    },
+    {
+      "bytes": 458,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-rcc-current-e4ff-control3-distinct-adoption/OWNERFINAL-root-one-current-control3-outer-terminal.json",
+      "sha256": "9eb21acc10e47623d2c0ab9c3a66b0da8837d138e406abf99dca9e092aad3b72"
+    },
+    {
+      "bytes": 1067,
+      "mode": "0o600",
+      "path": "/workspace/engineering/root-rcc-current-e4ff-control3-distinct-adoption/root-one-control3-authorization.json",
+      "sha256": "1d86f4fce29fb8afa777059e78a2f2b3ed52d60ec240478d231c238261f730ec"
+    }
+  ],
+  "reviewer": "acceptance_review",
+  "reviewer_execution_source_mutation_native_retry": false,
+  "root": "/dev/shm/actions-rcc-compatibility-actual-control3-20261011-owned-pkgs-2",
+  "sampler_facts": {
+    "inspection_error": false,
+    "kernel_quota": false,
+    "maximum_observed_bytes": 43704,
+    "peak_is_universal": false,
+    "sample_count": 17,
+    "sampler_alive": false,
+    "sampler_cancelled": true,
+    "stage": "final",
+    "threshold_triggered": false,
+    "workspace_minimum_observed_bytes": 1288007680
+  },
+  "sampler_signal": null,
+  "schema": 1,
+  "scoped_stage": "Both testfixtures failed owned-client mode/owner admission before env-publish/acquire/action and workerlease. RCCversion probes may precede that guard; no artifact/Action success claimed.",
+  "source": "e4ff080375a8422bb656e52d218f198521dda078",
+  "source_and_historical_scope": "Original e4ff source qualification unchanged, actualFAIL preserved; originalb614 capacity/cleanupFAIL archive8dc/ca557 remains historical distinct. New5/7276/persistence/reload/drain/recovery/fullprivate/release remainSTOP/HOLD.",
+  "status": "HOLD_ORIGINAL_CURRENT_CONTROL3_ACTUAL_FAILED_BEFORE_ARTIFACT_ACTION_LEASE",
+  "tree": "973ff38f49a17a896e4d90f829a72e2ea0ea15e8"
+}

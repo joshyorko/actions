@@ -1,0 +1,93 @@
+{
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Verify all configuration-consumed paths against the exact source tuple, beyond the explicit hash binding list; preserve rejected packets and use named executable successors rather than backfill copied filenames.",
+    "evidence": [
+      "Originalfbdaba and metadata-only0993 leave missing1299 input unchanged.",
+      "V4 fixes locator to measured5306 inventory, with195 visits/185 distinct paths and all1427 GitFS source entries checked."
+    ],
+    "exact_delta": {
+      "bytes": 954,
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/canonical-config-consumed-path-dependency-closure-proposed.patch",
+      "sha256": "c39564ff812d16f319723951057a1317f145ddcf6872fba95f0a59b07d7d9772"
+    },
+    "git_apply_check": "PASS without applying or index mutation",
+    "integration_disposition": "Accept exact six-line source-backed closure lesson; overlaps prior verified eight-line packet-admission proposal, parent should integrate coherent guidance without cosmetic duplicate.",
+    "remaining_uncertainty": "Actual gate and live imports not run; future root outcome needs original logs and postguard readback.",
+    "stale_or_ambiguous_guidance_removed": "Correct header hashes alone do not validate hidden config dependency strings; metadata-only correction cannot fix executable input."
+  },
+  "execution_conditions": {
+    "fresh_capacity_minimum_bytes": 1288490189,
+    "managed_activation": "18 exact exports plus primary PATH; clear PYTHONOPTIMIZE; cached Toolkit interpreter; worker bound2 retained through package environment copy",
+    "postcondition": "Recheck all configured source/native/helper/payload bindings on every reported outcome; OS hard-kill cannot guarantee finally, cleanup remains unknown without original evidence",
+    "serialization": "Distinct ROOT release; no other heavy test/native/installer; one fresh private0700 output directory",
+    "timeouts": "Source600TERM+10; parent640; pre60/post60; outer900TERM+10"
+  },
+  "independent_read_only_proof": {
+    "bytes": 1090,
+    "path": "/workspace/engineering/pr305-current5306-independent-executable-v4-review/independent-read-only-v4-dependency-source-native-proof.json",
+    "sha256": "426bef95c1765dc27967f69b155132ea4bed66d87103bd39d4b64fbe76a1955a"
+  },
+  "inspector": {
+    "bytes": 6584,
+    "path": "/workspace/engineering/pr305-current5306-independent-executable-v4-review/inspect_frozen_v4_readonly_v2.py",
+    "sha256": "96bd2fb10e15fc6538f31bd8436307024d75113aa9515136556a064c250a2da7"
+  },
+  "owner": {
+    "bytes": 15863,
+    "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/OWNERFINAL-current5306-managed-configured-SOURCEFULL-preexecution-proposal.json",
+    "sha256": "dbb636668ea7f27f4457ba7d1e3c0f005a14e4686b64b2b244b35e819dfe8d3e"
+  },
+  "preserved_inspector_v1": {
+    "binding": {
+      "bytes": 6536,
+      "path": "/workspace/engineering/pr305-current5306-independent-executable-v4-review/inspect_frozen_v4_readonly.py",
+      "sha256": "97508654bb100e3d86e6966bed9906607fb5e3dee381fe2a0904e96d16314348"
+    },
+    "disposition": "Initial assertion incorrectly conflated195 constructor path visits with185 deduplicated paths; preserved and corrected in named inspectorv2, no executable guard or test run."
+  },
+  "remaining_HOLD": [
+    "No constructor, guard, launcher, concrete-origin imports, tests, RCC or native execution by reviewer.",
+    "CurrentSOURCEFULL NOTRUN and current hostedCI/policy/actual/native/browser/provider/full99/private/release unqualified.",
+    "Historical3ec/92498V5 does not qualify5306; older584/e3 packets retain historical identities.",
+    "Fresh ROOT capacity and serialization checks required at release; observed capacity is not authorization."
+  ],
+  "root_command": [
+    "source /workspace/actions-cloud/activate.sh",
+    "unset PYTHONOPTIMIZE",
+    "PATH primary/bin then exact cached toolkit/bin preserved",
+    "timeout --signal=TERM --kill-after=10s 900s /workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python /workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/launch_current_source_full_once.py --execute-root-authorized <new-root-release-path> <release-sha256>"
+  ],
+  "root_release_required": {
+    "independent_source_and_preexecution_review_GO": true,
+    "proposal_sha256": "dbb636668ea7f27f4457ba7d1e3c0f005a14e4686b64b2b244b35e819dfe8d3e",
+    "schema": 1,
+    "serialized_no_other_heavy_or_installer": true,
+    "source": "5306eeb26595da4ce571b99812eb50f047cfc903",
+    "status": "ROOT_RELEASE_ONE_SERIALIZED_CONFIGURED_SOURCE_FULL",
+    "tree": "8418e9ffeeaaf2446771e34b5b4602bab3d357a5"
+  },
+  "schema": 1,
+  "source": "5306eeb26595da4ce571b99812eb50f047cfc903",
+  "status": "GO_STATIC_CURRENT5306_NAMED_EXECUTABLE_V4_PREEXECUTION_ONLY",
+  "target": "a54c982462d1e7ad011d8152bfc299d997503fb3",
+  "tree": "8418e9ffeeaaf2446771e34b5b4602bab3d357a5",
+  "upstream_disposition": "none",
+  "verified": {
+    "complete_Git_FS_body_modes": 1427,
+    "config_semantic_delta": "Only source_inventory and necessary named-directory implementation binding paths; normalization exactly equals original config.",
+    "constructor_constant_true_conditional_expressions": 0,
+    "constructor_path_visits": 195,
+    "distinct_existing_resolved_paths": 185,
+    "existing_origin_evidence": 5,
+    "old_fbdaba_metadata0993_and_unannouncedV3_preserved": true,
+    "old_missing_path_backfilled": false,
+    "once_output_directory_absent": true,
+    "original_native_member_set_body_modes": 1192,
+    "original_scripts_identical": 3,
+    "prepared_inputs": 30,
+    "source_clean": true,
+    "source_inventory_bytes": 379333,
+    "source_inventory_sha256": "b097508ed9b022a3b5cb0c93f71bf587c3ac7a00c843bf6612c2e35f02f16205"
+  }
+}
