@@ -526,8 +526,12 @@ outer acceptance receipt keeps `authorization_denial_ui` in `states_not_run`
 until that stage is attempted. An attempted failure moves it to `states_failed`
 and preserves the browser stage's `FAIL` receipt; only a `PASS` clears it from
 both maps. A normal-stage pass leaves the denial criterion `NOT_RUN`. This
-stage is implemented but has not yet produced a native artifact receipt; keep
-its acceptance pending until the exact packaged artifact run passes. Missing
+stage passed in retained Linux frozen and Go-wrapper receipts using build
+`856c0a47`, at harness heads `7c98534a` and `ec8bea13` respectively. Those
+bounded receipts establish normal, middleware-403/sign-in recovery and
+storage-503 behavior for their measured artifacts only. Importing later
+Runtime changes requires new current-source artifact admission and execution;
+the refreshed integration union has not established those native gates. Missing
 bundled support and generic HTTP 500 remain `NOT_RUN` until
 their separately owned or supported packaged fixtures run. Do not use response
 interception as backend evidence.
