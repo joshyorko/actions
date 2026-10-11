@@ -226,7 +226,7 @@ def _private_core_imports_in_file(path: Path) -> list[int]:
 
 
 def _private_core_imports_in_tree(root: Path) -> list[str]:
-    violations = []
+    violations: list[str] = []
     for path in sorted(root.rglob("*.py")):
         relative = path.relative_to(root).as_posix()
         violations.extend(
@@ -294,7 +294,7 @@ def _assert_installed_runtime_wheel_has_no_private_core_imports(
     bound_members = _assert_runtime_wheel_python_members_match(
         wheel, resolved_members
     )
-    violations = []
+    violations: list[str] = []
     for member, path, _ in bound_members:
         violations.extend(
             f"{member}:{line}" for line in _private_core_imports_in_file(path)
@@ -333,6 +333,29 @@ def test_installed_runtime_tree_scan_catches_unimported_private_core_modules(
         "actions/server/unimported_direct.py:1",
         "actions/server/unimported_dynamic.py:2",
     ]
+
+
+def _write_wheel_fixture_member(path: Path, content: str) -> None:
+    """Write the exact UTF-8 payload placed in a synthetic wheel member."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(content.encode("utf-8"))
+
+
+def test_wheel_fixture_member_writer_preserves_lf_bytes_on_windows(tmp_path: Path):
+    member = "actions/server/_protocols.py"
+    content = "JSONValue = object\n"
+    wheel_bytes = content.encode("utf-8")
+    windows_text_mode_bytes = content.replace("\n", "\r\n").encode("utf-8")
+    assert wheel_bytes != windows_text_mode_bytes
+
+    wheel = tmp_path / "actions_runtime-1.0.0-py3-none-any.whl"
+    with zipfile.ZipFile(wheel, "w") as archive:
+        archive.writestr(member, wheel_bytes)
+    installed = tmp_path / "site-packages" / member
+    _write_wheel_fixture_member(installed, content)
+
+    with zipfile.ZipFile(wheel) as archive:
+        assert installed.read_bytes() == archive.read(member) == wheel_bytes
 
 
 def test_runtime_wheel_member_binding_rejects_installed_byte_mismatch(tmp_path: Path):
@@ -399,7 +422,7 @@ def test_installed_runtime_wheel_scan_rejects_unimported_private_core_import(
     for name, content in members.items():
         path = site_packages / name
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
+        _write_wheel_fixture_member(path, content)
         installed_members[name] = path
 
     with pytest.raises(
@@ -431,7 +454,7 @@ def test_installed_runtime_wheel_scan_allows_public_core_and_runtime_json_module
     for name, content in members.items():
         path = site_packages / name
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
+        _write_wheel_fixture_member(path, content)
         installed_members[name] = path
 
     result = _assert_installed_runtime_wheel_has_no_private_core_imports(

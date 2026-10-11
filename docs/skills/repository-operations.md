@@ -176,7 +176,12 @@ AST guard over every member, including modules not imported by the smoke test.
 Keep the public Core API compatibility checks in those same clean installs;
 Runtime-owned modules such as `actions.server._protocols` remain valid. Report
 this boundary as passed only when the installed-member inventory is complete,
-all member bytes match the selected wheel, and the full scan succeeds.
+all member bytes match the selected wheel, and the full scan succeeds. Tests that
+construct a wheel ZIP and a matching installed-tree fixture must write the same
+encoded payload bytes to both: `Path.write_text` performs platform newline
+translation on Windows, so it can turn a valid LF wheel member into CRLF in the
+fixture and create a false byte-mismatch failure. Preserve the exact-byte
+comparison; fix the fixture writer instead of normalizing installed bytes.
 
 Poetry merges the matching Core source into the main/dev lock entry: a
 `poetry install --only main` using this checkout lock still selects local Core.
@@ -2761,6 +2766,14 @@ tests under distinct names. Compare complete function bodies and parameterizatio
 before consolidation, and capture `pytest --collect-only -q` counts before and
 after so collection changes are explicit. Then run the complete combined suite
 and lint.
+
+Test modules can contain expensive integration cases without an integration
+marker. Before running a bounded subset, enumerate test definitions and their
+parameterizations from the source AST, inspect the selected tests' helper call
+paths for build, install, service, or provider effects, and invoke only explicit
+test-node selectors. A marker-only filter or a whole-module invocation does
+not bound unmarked tests; record the exact selected nodes and excluded heavy
+node in the task receipt.
 
 Credential redaction must cover argparse-accepted long-option abbreviations
 for `--api-key`, in both separate and equals forms. HTTP header names are
