@@ -1046,6 +1046,25 @@ happens before the successful sanitized receipt is written. Require actual
 reason-code evidence before identifying the failed predicate. Earlier failures
 without those diagnostics retain unknown failed-predicate identity and unknown
 raw-receipt presence.
+A parsed failure report with `browser_version` FAIL records rejection of the
+receipt/preflight version equality for that invocation. Matching executable
+path and digest predicates do not identify the compared version strings or
+establish browser byte drift. The report omits those values, so preserve the
+failed code and unavailable comparison inputs without attributing a cause.
+Sanitized JUnit can contain a synthetic admission failure after the original
+pytest case passed; retain those two outcomes separately. A new measured reason
+code does not identify an earlier failure that lacked diagnostics or waive any
+source, browser, hash or cleanup predicate.
+
+Measure the expected browser version with the receipt's checked subprocess
+contract: the selected executable's `--version`, captured text output, a
+10-second bound and `stdout.strip()`. Reject nonzero, empty or timed-out
+measurements before admission. Shell command substitution removes trailing
+newlines but retains trailing spaces, so it can disagree with that receipt
+measurement even when executable bytes match. Normalize at the measurement
+boundary and keep the full branded version equality unchanged in admission.
+A local formatting reproduction establishes that mechanism; it does not
+identify unavailable version strings from an earlier hosted failure.
 A service-free test may relocate paths in an earlier measured receipt to test this
 validator, but it must preserve that receipt's executed source identity and must
 not relabel it as execution of a later workflow commit. When a measured receipt

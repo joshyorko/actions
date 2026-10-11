@@ -676,7 +676,7 @@ class ActionServerTests(BaseTests):
           export CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH="$(node -p 'require("./frontend/node_modules/@playwright/test").chromium.executablePath()')"
           test -x "$CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH"
           browser_sha256="$(poetry_cmd run python -c 'import hashlib, os; from pathlib import Path; print(hashlib.sha256(Path(os.environ["CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH"]).read_bytes()).hexdigest())')"
-          browser_version="$("$CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH" --version)"
+          browser_version="$(poetry_cmd run python -c 'import os, subprocess; browser_version = subprocess.run([os.environ["CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH"], "--version"], check=True, capture_output=True, text=True, timeout=10).stdout.strip(); assert browser_version, "Browser version is empty"; print(browser_version)')"
           poetry_cmd run python -c "import actions.server, pytest"
           junit_raw="$TMPDIR/canvas-query-published-core-junit.xml"
           junit_safe="$(dirname "$CANVAS_TEMPLATE_PUBLISHED_RECEIPT_PATH")/junit.xml"

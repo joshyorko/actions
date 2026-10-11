@@ -4,11 +4,14 @@ from __future__ import annotations
 
 import ast
 import importlib.util
+import io
 import json
 import os
+import shlex
 import subprocess
 import sys
 import xml.etree.ElementTree as ET
+from contextlib import redirect_stdout
 from copy import deepcopy
 from pathlib import Path
 
@@ -59,6 +62,7 @@ def _validate(
     *,
     input_repository: Path = ROOT,
     changed_input: str | None = None,
+    expected_browser_version: str | None = None,
 ):
     # Git checkout may convert text inputs to CRLF. Preserve the measured
     # fixture's byte contract with current Git blobs, not normalized work files.
@@ -169,7 +173,9 @@ def _validate(
         measured["source"]["tree"],
         " ".join(measured["source"]["parents"]),
         measured["browser"]["sha256"],
-        measured["browser"]["version"],
+        measured["browser"]["version"]
+        if expected_browser_version is None
+        else expected_browser_version,
     ]
     result = subprocess.run(
         command,
@@ -180,6 +186,123 @@ def _validate(
         timeout=10,
     )
     return result, safe_junit, safe_receipt
+
+
+def _browser_version_preflight(tmp_path: Path, stdout: bytes, exitcode: int = 0):
+    step = next(
+        step
+        for step in _steps()
+        if step["name"] == "Verify Canvas published-Core Runtime and browser acceptance"
+    )
+    assignment = next(
+        line for line in step["run"].splitlines() if line.startswith("browser_version=")
+    )
+    command = shlex.split(
+        assignment.removeprefix('browser_version="$(').removesuffix(')"')
+    )
+    assert command[:4] == ["poetry_cmd", "run", "python", "-c"]
+    browser = str(tmp_path / "synthetic-browser")
+    output = io.StringIO()
+
+    def measured(actual, **kwargs):
+        assert actual == [browser, "--version"]
+        assert kwargs == {
+            "check": True,
+            "capture_output": True,
+            "text": True,
+            "timeout": 10,
+        }
+        if exitcode:
+            raise subprocess.CalledProcessError(exitcode, actual, stdout.decode(), "")
+        return subprocess.CompletedProcess(actual, 0, stdout.decode(), "")
+
+    # Execute the generated Python measurement, substituting only the binary
+    # observation. This keeps developer controls portable and service-free.
+    with pytest.MonkeyPatch.context() as patch, redirect_stdout(output):
+        patch.setenv("CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH", browser)
+        patch.setattr(subprocess, "run", measured)
+        try:
+            exec(command[4], {})
+        except subprocess.CalledProcessError as error:
+            return subprocess.CompletedProcess(
+                command, error.returncode, "", str(error)
+            )
+        except AssertionError as error:
+            return subprocess.CompletedProcess(command, 1, "", str(error))
+    # The shell retains the printed value and removes only print's final LF.
+    return subprocess.CompletedProcess(
+        command, 0, output.getvalue().removesuffix("\n"), ""
+    )
+
+
+@pytest.mark.parametrize("ending", [b" \n", b" \r\n"])
+def test_browser_version_preflight_matches_receipt_measurement(tmp_path, ending):
+    version = json.loads(FIXTURE.read_text())["browser"]["version"]
+    observed = _browser_version_preflight(tmp_path, version.encode() + ending)
+    assert observed.returncode == 0, observed.stderr
+    result, _, _ = _validate(tmp_path, expected_browser_version=observed.stdout)
+    assert result.returncode == 0, result.stderr
+
+
+@pytest.mark.parametrize("change", ["brand", "version"])
+def test_browser_version_preflight_does_not_normalize_identity_changes(
+    tmp_path, change
+):
+    version = json.loads(FIXTURE.read_text())["browser"]["version"]
+    brand, number = version.split(" ", 1)
+    changed = f"OtherBrowser {number}" if change == "brand" else f"{brand} 0.0.0.0"
+    observed = _browser_version_preflight(tmp_path, changed.encode() + b" \r\n")
+    assert observed.returncode == 0, observed.stderr
+    result, _, _ = _validate(tmp_path, expected_browser_version=observed.stdout)
+    assert result.returncode != 0
+    diagnostic = json.loads(
+        (tmp_path / "published-core-failure-diagnostics.json").read_text()
+    )
+    assert any(
+        row["code"] == "browser_version" and row["status"] == "FAIL"
+        for row in diagnostic["checks"]
+    )
+
+
+@pytest.mark.parametrize("stdout,exitcode", [(b" \r\n", 0), (b"Chromium sample\n", 7)])
+def test_browser_version_preflight_rejects_empty_or_nonzero(tmp_path, stdout, exitcode):
+    observed = _browser_version_preflight(tmp_path, stdout, exitcode)
+    assert observed.returncode != 0
+
+
+def test_browser_version_preflight_uses_checked_bounded_receipt_measurement(
+    monkeypatch,
+):
+    step = next(
+        step
+        for step in _steps()
+        if step["name"] == "Verify Canvas published-Core Runtime and browser acceptance"
+    )
+    assignment = next(
+        line for line in step["run"].splitlines() if line.startswith("browser_version=")
+    )
+    command = shlex.split(
+        assignment.removeprefix('browser_version="$(').removesuffix(')"')
+    )
+    assert command[:4] == ["poetry_cmd", "run", "python", "-c"]
+    monkeypatch.setenv(
+        "CANVAS_PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH", "/synthetic/browser"
+    )
+    calls = []
+
+    def timed_out(actual, **kwargs):
+        calls.append((actual, kwargs))
+        raise subprocess.TimeoutExpired(actual, kwargs["timeout"])
+
+    monkeypatch.setattr(subprocess, "run", timed_out)
+    with pytest.raises(subprocess.TimeoutExpired):
+        exec(command[4], {})
+    assert calls == [
+        (
+            ["/synthetic/browser", "--version"],
+            {"check": True, "capture_output": True, "text": True, "timeout": 10},
+        )
+    ]
 
 
 POISONS = {
