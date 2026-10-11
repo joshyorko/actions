@@ -1225,6 +1225,81 @@ def record_supervisor_cleanup_failure(
         raise
 
 
+def _private_deadline_receipt_file(
+    payload: bytes, *, parent: Path, prefix: str
+) -> Path:
+    fd, temporary_path = tempfile.mkstemp(prefix=prefix, suffix=".json", dir=parent)
+    try:
+        with os.fdopen(fd, "wb") as stream:
+            if os.name == "posix":
+                os.fchmod(stream.fileno(), 0o600)
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+    except BaseException as exc:
+        try:
+            os.unlink(temporary_path)
+        except FileNotFoundError:
+            pass
+        except OSError:
+            exc.add_note("owned deadline temporary cleanup incomplete")
+        raise
+    return Path(temporary_path)
+
+
+def record_supervisor_deadline_failure(receipt_path: Path) -> str:
+    """Demote parent acceptance without changing the worker's measured cells."""
+    target = receipt_path.expanduser().resolve()
+    if not target.is_file():
+        return "unavailable"
+    try:
+        original = target.read_bytes()
+    except OSError:
+        return "read_failed"
+    try:
+        evidence = json.loads(original)
+    except (ValueError, UnicodeDecodeError):
+        return "invalid_json"
+    if not isinstance(evidence, dict) or not isinstance(evidence.get("cells"), dict):
+        return "invalid_shape"
+    # This is the only new top-level annotation; never overwrite worker fields.
+    if "supervisor_deadline" in evidence:
+        return "annotation_conflict"
+    try:
+        preserved = _private_deadline_receipt_file(
+            original, parent=target.parent, prefix=".rcc-worker-original-"
+        )
+    except Exception:
+        return "preservation_failed"
+    evidence["supervisor_deadline"] = {
+        "reason": "watchdog_timeout",
+        "cleanup_state": "unknown",
+        "worker_acceptance_status": evidence.get("acceptance_status"),
+        "worker_receipt_sha256": hashlib.sha256(original).hexdigest(),
+        "worker_receipt_file": preserved.name,
+    }
+    evidence["acceptance_status"] = "FAIL"
+    try:
+        payload = (json.dumps(evidence, sort_keys=True, indent=2) + "\n").encode()
+    except Exception:
+        return "encode_failed"
+    try:
+        temporary = _private_deadline_receipt_file(
+            payload, parent=target.parent, prefix=".rcc-deadline-"
+        )
+    except Exception:
+        return "write_failed"
+    try:
+        os.replace(temporary, target)
+    except Exception:
+        try:
+            os.unlink(temporary)
+        except OSError:
+            pass
+        return "replace_failed"
+    return "recorded"
+
+
 def acceptance_status(cells: dict[str, str]) -> str:
     return (
         "PASS" if cells and all(value == "PASS" for value in cells.values()) else "FAIL"
@@ -1448,7 +1523,6 @@ dependencies:
         os.environ.update(runtime_env)
         sys.path.insert(0, str(_source_root() / "src"))
         import requests
-
         from actions.server._models import ActionPackage, Run, RunStatus, load_db
         from actions.server._rcc_runtime_adapter import (
             RccRuntimeDescriptor,
@@ -2255,6 +2329,16 @@ def main(argv: list[str] | None = None) -> int:
             print(
                 f"Dakota RCC watchdog failed: {type(exc).__name__}: {exc}",
                 file=sys.stderr,
+            )
+            return 1
+        except subprocess.TimeoutExpired:
+            print("Dakota RCC watchdog failed: watchdog_timeout", file=sys.stderr)
+            try:
+                state = record_supervisor_deadline_failure(args.receipt)
+            except Exception:
+                state = "update_failed"
+            print(
+                f"Dakota RCC watchdog receipt: receipt_state={state}", file=sys.stderr
             )
             return 1
         except Exception as exc:
