@@ -225,6 +225,42 @@ not that the sampler stopped. Check `sampler_alive` separately after its bounded
 50 ms join. A pending OS query may leave that daemon alive; late observations
 are discarded after cancellation. Neither field proves Runtime process or
 stream cleanup, which remains owned by the unchanged starter.
+
+Keep the complete terminal failure census separate from this two-node observer
+coverage and from reached semantic assertions. Active owned RCC CPU/I/O at the
+sample times does not identify a preparation cause. Bind each original tested
+merge and native artifact separately from a later source union; missing marks
+cannot borrow another run's interval timings, and later observations cannot fill
+historical cleanup fields.
+
+The test-owned delivered-line observation uses the existing stdout/stderr
+callbacks, without another pipe reader, flush, process action or readiness hook.
+It retains at most 32 RCC v18.19.3 marks from lines of at most 8192 characters,
+with bounded numeric fields and no suffix or exception text. Only one complete,
+ordered 0..15 sequence from a single channel can supply the sum of intervals
+since the previous mark. Any loss, lock contention, overflow, truncation, cap or
+invalid mark permanently makes that sum unavailable, including after later
+valid marks. Probe exceptions are suppressed inside the probe before the
+existing callback logger can expose their text; original delegated startup and
+cleanup exceptions still propagate unchanged.
+
+Readiness observations use the starter's exact HTTP/HTTPS regex on the original
+line and retain channel, match counts and arrival offsets only. A stdout match
+cannot satisfy its stderr Future. Process-start return plus 90 seconds is a
+lower bound for the ready-wait deadline, not the observer's start time; a late
+match does not establish predeadline delivery. Future state, native ready-log
+emission and RCC internal pipe/forwarding state remain unavailable. Interactive
+RCC forwarding does not explicitly flush, so absent delivered lines cannot
+identify an internal or propagation failure.
+
+The owned cleanup call's original deadline, returned tuple and exception are
+unchanged. Its measured wrapper reap, execution stop, snapshot/reap predicates
+and live/zombie/error/active-reader counts are summarized without raw errors,
+reader names or PID identities. A missing result or probe failure remains
+unavailable. These fields do not initiate or prove another cleanup attempt;
+the 90-second readiness, 20-second failure cleanup, 80/88-second samples and
+50 ms sampler join remain unchanged.
+
 These synthetic observer checks do not establish Windows native acceptance
 or fix the original failure. Compare the next exact-head reports before
 changing production code; do not warm caches, retry RCC, or enlarge deadlines
