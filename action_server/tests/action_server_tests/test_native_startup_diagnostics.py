@@ -921,3 +921,46 @@ def test_mark_cap_and_state_size_are_explicit():
     report = probe.summary()
     assert report["mark_cap_reached"] is True and len(report["progress"]["marks"]) == 32
     assert len(json.dumps(report)) < 16 * 1024
+
+
+@pytest.mark.parametrize("origin", [0.0, 1000.125, 1048576.0, 1000000000.0])
+@pytest.mark.parametrize("delta", [-0.0001, 0.0, 0.0001])
+def test_ready_lower_bound_uses_exact_instants_not_rounded_display(origin, delta):
+    now = [origin + 2.06651]
+    probe = diagnostics.DeliveredObservations(began=origin, clock=lambda: now[0])
+    probe.process_start_returned()
+    exact_bound = now[0] + 90.0
+    now[0] = exact_bound + delta
+    probe.line("stderr", "Local Action Server: http://private:123")
+    ready = probe.summary()["readiness"]["stderr"]
+    expected = now[0] < exact_bound
+    assert ready["first_match_before_deadline_lower_bound"] is expected
+    assert ready["last_match_before_deadline_lower_bound"] is expected
+    assert ready["first_match_offset_seconds"] == round(now[0] - origin, 3)
+    assert "private" not in json.dumps(probe.summary())
+
+
+def test_reported_rounding_counterexample_stays_postbound():
+    now = [2.06651]
+    probe = delivered(clock=lambda: now[0])
+    probe.process_start_returned()
+    now[0] = 92.06661
+    probe.line("stderr", "Local Action Server: http://private:123")
+    report = probe.summary()
+    assert report["process_start_return_offset_seconds"] == 2.067
+    assert report["readiness"]["stderr"]["first_match_offset_seconds"] == 92.067
+    assert (
+        report["readiness"]["stderr"]["first_match_before_deadline_lower_bound"]
+        is False
+    )
+
+
+def test_unknown_start_return_clock_keeps_deadline_classification_unknown():
+    now = [float("nan")]
+    probe = delivered(clock=lambda: now[0])
+    probe.process_start_returned()
+    now[0] = 100.0
+    probe.line("stderr", "Local Action Server: http://private:123")
+    ready = probe.summary()["readiness"]["stderr"]
+    assert ready["first_match_before_deadline_lower_bound"] is None
+    assert ready["last_match_before_deadline_lower_bound"] is None

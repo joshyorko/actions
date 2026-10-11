@@ -40,6 +40,10 @@ class DeliveredObservations:
         self.marks = []
         self.progress_channel = None
         self.start_return_offset = None
+        self.start_return_instant = None
+        self.match_instants = {
+            channel: {"first": None, "last": None} for channel in ("stdout", "stderr")
+        }
         self.port_positive = None
         self.cleanup = {"status": "unavailable"}
         self.readiness = {
@@ -80,11 +84,12 @@ class DeliveredObservations:
             self.count_overflow.set()
         mapping[key] = min(value, 65535)
 
-    def _offset(self):
-        value = self.clock() - self.began
+    def _instant(self):
+        instant = self.clock()
+        value = instant - self.began
         if not math.isfinite(value) or not 0 <= value <= 3600:
             raise ValueError("invalid observation clock")
-        return round(value, 3)
+        return instant
 
     def line(self, channel, line):
         def record():
@@ -93,7 +98,8 @@ class DeliveredObservations:
                 self._count(self.counts, "truncated_lines")
                 self.loss.set()
                 return
-            offset = self._offset()
+            instant = self._instant()
+            offset = round(instant - self.began, 3)
             ready = self.readiness[channel]
             self._count(
                 ready, "literal_marker_count", line.count("Local Action Server:")
@@ -105,7 +111,9 @@ class DeliveredObservations:
                 self._count(ready, "exact_match_count", len(matches))
                 if ready["first_match_offset_seconds"] is None:
                     ready["first_match_offset_seconds"] = offset
+                    self.match_instants[channel]["first"] = instant
                 ready["last_match_offset_seconds"] = offset
+                self.match_instants[channel]["last"] = instant
             normalized = self.ANSI.sub("", line)
             if not re.match(r"^####\s*Progress:", normalized):
                 return
@@ -146,7 +154,12 @@ class DeliveredObservations:
         self._record(record)
 
     def process_start_returned(self):
-        self._record(lambda: setattr(self, "start_return_offset", self._offset()))
+        def record():
+            instant = self._instant()
+            self.start_return_instant = instant
+            self.start_return_offset = round(instant - self.began, 3)
+
+        self._record(record)
 
     def start_finished(self, server):
         self._record(lambda: setattr(self, "port_positive", server._port > 0))
@@ -188,12 +201,12 @@ class DeliveredObservations:
             ready = {
                 channel: dict(values) for channel, values in self.readiness.items()
             }
-            for values in ready.values():
+            for channel, values in ready.items():
                 for position in ("first", "last"):
-                    offset = values[position + "_match_offset_seconds"]
+                    instant = self.match_instants[channel][position]
                     values[position + "_match_before_deadline_lower_bound"] = (
-                        offset < self.start_return_offset + 90
-                        if offset is not None and self.start_return_offset is not None
+                        instant < self.start_return_instant + 90
+                        if instant is not None and self.start_return_instant is not None
                         else None
                     )
             lost = self.loss.is_set()

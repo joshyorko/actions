@@ -248,7 +248,12 @@ Readiness observations use the starter's exact HTTP/HTTPS regex on the original
 line and retain channel, match counts and arrival offsets only. A stdout match
 cannot satisfy its stderr Future. Process-start return plus 90 seconds is a
 lower bound for the ready-wait deadline, not the observer's start time; a late
-match does not establish predeadline delivery. Future state, native ready-log
+match does not establish predeadline delivery. Compare private, unrounded
+monotonic instants and round only displayed offsets: rounding before adding
+the budget can falsely classify an equal or later arrival as earlier. Exact
+equality is not before the lower bound. A positive comparison establishes only
+delivery before that conservative bound, not completion before the actual
+readiness deadline. Future state, native ready-log
 emission and RCC internal pipe/forwarding state remain unavailable. Interactive
 RCC forwarding does not explicitly flush, so absent delivered lines cannot
 identify an internal or propagation failure.
