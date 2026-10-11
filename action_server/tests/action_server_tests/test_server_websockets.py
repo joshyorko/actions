@@ -503,7 +503,7 @@ def test_summary_only_websocket_events_never_serialize_legacy_run_payloads(
     assert "error-secret" not in serialized
 
 
-def test_run_change_cache_snapshots_do_not_copy_large_payload_strings():
+def test_run_change_cache_snapshots_do_not_copy_large_payload_strings(tmp_path):
     from dataclasses import replace
 
     from action_server_tests.sample_data import RUN
@@ -514,20 +514,23 @@ def test_run_change_cache_snapshots_do_not_copy_large_payload_strings():
         RUN, inputs="input-secret" * 100_000, result="result-secret" * 100_000
     )
     changes = {"result": run.result, "status": 2}
-    state = RunsState(None)
-    events = []
-    with state.semaphore:
-        state.register(events.append)
+    from actions.server._models import create_db
 
-    state.on_run_inserted(run)
-    state.on_run_changed(run, changes)
+    with create_db(tmp_path / "events.db") as db:
+        state = RunsState(db)
+        events = []
+        with state.semaphore:
+            state.register(events.append)
 
-    assert events[0].run is not run
-    assert events[0].run.inputs is run.inputs
-    assert events[0].run.result is run.result
-    assert events[1].run.inputs is run.inputs
-    assert events[1].changes is not changes
-    assert events[1].changes["result"] is run.result
+        state.on_run_inserted(run)
+        state.on_run_changed(run, changes)
+
+        assert events[0].run is not run
+        assert events[0].run.inputs is run.inputs
+        assert events[0].run.result is run.result
+        assert events[1].run.inputs is run.inputs
+        assert events[1].changes is not changes
+        assert events[1].changes["result"] is run.result
 
 
 def test_summary_websocket_invalid_snapshot_reports_safe_unavailable_state(

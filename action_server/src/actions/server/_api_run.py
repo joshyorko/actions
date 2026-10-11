@@ -63,6 +63,10 @@ def get_run_by_id(run_id: str) -> Run:
         from ._runs_state_cache import get_global_runs_state
 
         global_runs_state = get_global_runs_state()
+        if global_runs_state.is_scoped_run(run_id):
+            from fastapi import HTTPException
+
+            raise HTTPException(status_code=404, detail=f"Unknown run id: {run_id}")
         with global_runs_state.semaphore:
             return global_runs_state.get_run_from_id(run_id)
     except KeyError as err:
