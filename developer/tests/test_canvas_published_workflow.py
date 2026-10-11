@@ -249,7 +249,7 @@ def test_browser_version_preflight_does_not_normalize_identity_changes(
     tmp_path, change
 ):
     version = json.loads(FIXTURE.read_text())["browser"]["version"]
-    brand, number = version.split(" ", 1)
+    brand, number = version.rsplit(" ", 1)
     changed = f"OtherBrowser {number}" if change == "brand" else f"{brand} 0.0.0.0"
     observed = _browser_version_preflight(tmp_path, changed.encode() + b" \r\n")
     assert observed.returncode == 0, observed.stderr
