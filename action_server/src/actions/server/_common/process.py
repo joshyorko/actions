@@ -556,6 +556,27 @@ def force_kill_process_tree_until(
         except Exception as exc:
             errors.append(f"wait wrapper pid {process.pid}: {exc}")
 
+    # A quick wrapper reap can leave most of the shared deadline unused while
+    # a killed descendant is still exiting. These are the captured psutil
+    # handles: is_running() checks identity, so never look up a PID afresh.
+    if wrapper_reaped and time.monotonic() < deadline:
+        pending = []
+        for child in descendants:
+            try:
+                if child.is_running() and child.status() != psutil.STATUS_ZOMBIE:
+                    pending.append(child)
+            except psutil.NoSuchProcess:
+                pass
+            except Exception as exc:
+                errors.append(f"inspect pid {child.pid}: {exc}")
+        if pending:
+            try:
+                psutil.wait_procs(
+                    pending, timeout=max(0.0, deadline - time.monotonic())
+                )
+            except Exception as exc:
+                errors.append(f"wait captured descendants: {exc}")
+
     live = []
     zombies = []
     for child in descendants:
