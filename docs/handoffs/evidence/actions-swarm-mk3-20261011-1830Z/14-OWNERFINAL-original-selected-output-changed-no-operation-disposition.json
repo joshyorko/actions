@@ -1,0 +1,58 @@
+{
+  "actual_archiver": "NOT_RUN_NOT_RELEASED",
+  "canonical_reuse": "Existing exact-original identity recheck/fail-closed preservation lessons reused; stale selected output never automatically retargeted. No cosmetic new prose.",
+  "capacity": {
+    "/dev/shm": 3901190144,
+    "/tmp": 1264189440,
+    "/workspace": 1296687104
+  },
+  "never_rebind_new_file": true,
+  "observed_current_adjacent": {
+    "bytes": 916385,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr308/action_server/output/log.html",
+    "sha256": "4a70c69c48bce408abb0f4f6f6acffc52d619bbb52fe7005e70c299104c235a7"
+  },
+  "observed_current_file": {
+    "bytes": 455856,
+    "mode": "0o600",
+    "path": "/workspace/engineering/pr308/action_server/output/output.robolog",
+    "sha256": "a7724d894c1d9f578eb83e26eb15c04d166e1f71211d8280e33eec8b83eba0f2"
+  },
+  "old10930091_bytes": "NO_COPY_RETAINED_BY_THIS_LANE; only originalSHA/metadata retained as authorized read-only preparation. Availability elsewhere UNKNOWN; no restoration/reconstruction performed.",
+  "original_archive_destination_absent": true,
+  "original_owned_outputs_absent": true,
+  "original_proposal": {
+    "bytes": 14752,
+    "mode": "0o400",
+    "path": "/workspace/engineering/one-current8d49-generated-robolog-preservation-PREPARATION/OWNERFINAL-one-current8d49-unbound-generated-robolog-preservation-PREEXECUTION.json",
+    "sha256": "92e864fa1bd9ab8a46368b7db86acf3d667a592330187a3e1fb73f752c13acc8"
+  },
+  "original_script": {
+    "bytes": 11800,
+    "mode": "0o400",
+    "path": "/workspace/engineering/one-current8d49-generated-robolog-preservation-PREPARATION/preserve_one_generated_robolog.py",
+    "sha256": "c6c420f4966228dbcc8a9a25df2babeb3bc3f3dcee2d0da7c1126b79dcfbb42e"
+  },
+  "original_selected": {
+    "allocated": 10932224,
+    "bytes": 10930091,
+    "device": 27,
+    "gid": 1000,
+    "inode": 1081293,
+    "mode": 384,
+    "mtime_ns": 1791742439736072602,
+    "nlink": 1,
+    "path": "/workspace/engineering/pr308/action_server/output/output.robolog",
+    "sha256": "67e99a41034c798580f72c3177e1e71c59aea41075052966c96d1e894571e4e3",
+    "uid": 1000
+  },
+  "root_reported_possible_cause": "Private persistent mock run regenerated shared untracked outputs; not independently attributed here",
+  "schema": "OWNERFINAL_ORIGINAL_SELECTED_GENERATED_OUTPUT_CHANGED_NO_OPERATION_DISPOSITION",
+  "selected_changed": true,
+  "source_and_receipts": "All20 original proposal bindings remain byte/mode exact; originalsource8d49 LIGHT proof remains separate",
+  "status": "HOLD_ORIGINAL92E864_SELECTED_IDENTITY_STALE_NOT_REBOUND",
+  "subsequent_FULL": "Requires distinct ROOTfreshcapacity/serialized release and existing currentfull independentproposal; no storage waiver",
+  "time_ns": 1791742933070054109,
+  "upstream_disposition": "none"
+}

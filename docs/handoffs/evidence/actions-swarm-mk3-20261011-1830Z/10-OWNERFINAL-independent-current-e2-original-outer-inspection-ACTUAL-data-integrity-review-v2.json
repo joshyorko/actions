@@ -1,0 +1,127 @@
+{
+  "actual_result_binding": {
+    "bytes": 631,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-current-e2-one-existing-original-outer-inspection-owned/OWNERFINAL-one-existing-original-outer-inspection-result.json",
+    "sha256": "51d8db07c502594f6144384fea4c7d9193c3957b4698f226bbc3262db405e2ec"
+  },
+  "actual_root_owner_binding": {
+    "bytes": 775,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-current-e2-one-existing-original-outer-inspection-outer-owned/OWNERFINAL-root-one-existing-original-outer-inspection.json",
+    "sha256": "0853bce059f52223b3bb46e58f927cc5716b4d3a4aa553a7675156ac94d6537a"
+  },
+  "consumed_root_release_binding": {
+    "bytes": 1252,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-current-e2-one-existing-original-outer-inspection-owned/consumed-one-root-release.json",
+    "sha256": "741bfefeca6dfbf3eca8dc5335ac105faaf9d7e17198fc39ded68f468b29649a"
+  },
+  "decision": "GO_CURRENT_E2_ORIGINAL_EXISTING_FILE_OUTER_DATA_INTEGRITY_ONLY",
+  "documentation_improvement": {
+    "Canonical_file_changed_or_proposed": "docs/skills/repository-operations.md; accepted narrowly proposed9-line phase-boundary lesson, with one wording precision below for root contextual adoption.",
+    "Disposition": "Useful source-backed new canonical lesson proposed; root owns context adaptation, no review source edit.",
+    "Durable_learning_captured": "A transfer can fail after all expected bytes exist. Distinct reviewed inspection can qualify those retained bytes while original transfer outcome and subsequent inner/consumer phases remain separate.",
+    "Evidence": [
+      {
+        "bytes": 2912,
+        "mode": "0o400",
+        "path": "/workspace/engineering/root-current-e2-one-aggregate-adoption/OWNERFINAL-root-original-one-current-e2-aggregate-transfer-failure-and-exact-retained-ZIP.json",
+        "sha256": "6bf0790738248804416229c4540130103758f820aa63f953e0ac97b6c0f65230"
+      },
+      {
+        "bytes": 2956,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-independent-review/independent-current-e2-existing-original-outer-static-proof.json",
+        "sha256": "1d554299c1e09c19a2bf443f6c61ff29bb9f0f1a97f0fe16f205c260c98d7ffb"
+      },
+      {
+        "bytes": 80745614,
+        "mode": "0o600",
+        "path": "/tmp/actions-pr221-e2-aggregate-11708952448-one-owned/actions-runtime-dist-11708952448-original.zip",
+        "sha256": "e16a414fefc1778ba49d09c466fd9d8054cfbf952e7766ee5cc6558f871f4def"
+      },
+      {
+        "bytes": 1491,
+        "mode": "0o400",
+        "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-independent-review/independent-original-e2-outer-actual-integrity-proof.json",
+        "sha256": "53b24bc4674fbf655d825d1a6181f2068234bdda69cd7fe2a2c2ae5afee30d97"
+      }
+    ],
+    "Exact_delta_binding": {
+      "bytes": 1101,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/canonical-existing-original-after-transfer-failure-proposed.patch",
+      "sha256": "b7952485a0d5c28fb42d4e61fe072e4b4b9039c38832742d35cebc88586acd5c"
+    },
+    "Exact_required_wording_precision": "Replace \"A socket-timeout error before a final EOF read proves\" with \"An error setting the socket timeout before a final EOF read proves\". The observed exception was OSError errno9 in sock.settimeout, not TimeoutError; this does not affect executable admission.",
+    "Remaining_uncertainty": "Actual outer eight-member CRC/SHA and seven-row manifest independently PASS. Original transfer FAIL/socketEOF unknown remains; inner RECORD/generated OAuth content authority/other builds/consumer/native/private/release remain HOLD.",
+    "Stale_or_ambiguous_guidance_removed": "Whole expected byte identity is not transfer EOF success or inner-package/source-content/consumer acceptance; no need for a duplicate acquisition."
+  },
+  "independent_outer_integrity_proof": {
+    "bytes": 1491,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-independent-review/independent-original-e2-outer-actual-integrity-proof.json",
+    "sha256": "53b24bc4674fbf655d825d1a6181f2068234bdda69cd7fe2a2c2ae5afee30d97"
+  },
+  "metadata_only_successor": {
+    "correction": "Replace reused PREEXEC documentation uncertainty outerNOTRUN with actual outerPASS/innerHOLD; original proof/data/code/source unchanged, no reread or execution.",
+    "predecessor_binding": {
+      "bytes": 7227,
+      "mode": "0o400",
+      "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-independent-review/OWNERFINAL-independent-current-e2-original-outer-inspection-ACTUAL-data-integrity-review.json",
+      "sha256": "485b89034700b9642a27fe8947a24df7c964d11c922075b43f8f8f96fedb2e0a"
+    }
+  },
+  "one_attempt_returncode": 0,
+  "original_failure_owner_binding": {
+    "bytes": 2912,
+    "mode": "0o400",
+    "path": "/workspace/engineering/root-current-e2-one-aggregate-adoption/OWNERFINAL-root-original-one-current-e2-aggregate-transfer-failure-and-exact-retained-ZIP.json",
+    "sha256": "6bf0790738248804416229c4540130103758f820aa63f953e0ac97b6c0f65230"
+  },
+  "original_inventory_binding": {
+    "bytes": 2185,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-current-e2-one-existing-original-outer-inspection-owned/private-original-eight-member-outer-inventory.json",
+    "sha256": "71ff9cdbe195d7ca462a798a66411c5919001283266016b830dc99979a30f6e3"
+  },
+  "preexecution_independent_binding": {
+    "bytes": 8281,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-independent-review/OWNERFINAL-independent-current-e2-existing-original-outer-inspection-PREEXECUTION-review.json",
+    "sha256": "ba0fdfa92f2e11ea676386ea4627cab77ebc52b1bdb48d3efb9bd5297b5e96f2"
+  },
+  "protected_originals": "All14packet refs and9original input bindings rehashed before and after manual data inspection; original transfer exception/failure/intent/connector bytes unchanged.",
+  "qualified_scope": "Original80745614-byte/SHAe16a outer archive, all8 complete outer member CRC/SHA/metadata, exact six-wheel+one-sdist policy and7-row manifest; no inner admission.",
+  "remaining_holds": [
+    "Original transfer staysFAIL/OSError9 with socketEOF unknown; separate outer PASS does not rewrite original receipt.",
+    "No new transfer, ZIP extraction or inner wheel/sdist METADATA/RECORD/source/generatedOAuth/HTML/authority/installedconsumer qualification.",
+    "No inference of Mac/Windows/sdist producer checkout from Linux; native/provider/private/issue/release/fullgraph acceptance remains HOLD.",
+    "Original readonly file fsync is a new distinct phase, not proof that failed transfer reached fsync."
+  ],
+  "reviewer_operations": "Manual stdlib read-only outer ZIP member SHA/CRC and inventory comparison; no inspector/module replay, extraction, inner parsing, fsync, network/download/test/source/native mutation.",
+  "root_release_binding": {
+    "bytes": 1252,
+    "mode": "0o600",
+    "path": "/workspace/engineering/root-current-e2-one-existing-original-outer-inspection-release.json",
+    "sha256": "d625df45b45bdb05c3905cc54796e912e5685acd55359abb46a8930bd1ec5216"
+  },
+  "schema": "INDEPENDENT_ACTUAL_ORIGINAL_CURRENT_E2_OUTER_DATA_ONLY_REVIEW",
+  "source_context": {
+    "Linux_original_checkout": "165c38920fe37dd81350ca8ca0419bc70a4739f2 ordered a709/e2; actual sourcee2/treeafe distinct",
+    "artifact_id": 11708952448,
+    "other_producer_checkout": "UNKNOWN",
+    "run_id": 38157482815,
+    "source": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "source217_Git_inputs_202Py15nonPy": "Derivation only, not measurement/admission of inner wheel bytes",
+    "tree": "afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9"
+  },
+  "unchanged_wrapper_binding": {
+    "bytes": 5766,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr221-current-e2-original-outer-inspection-PREPARATION/inspect_existing_original_outer_once.py",
+    "sha256": "dc608c8be11002e2900a34b601ee369b1bad47dcaece5f273b498a1f507065de"
+  },
+  "upstream_disposition": "none"
+}

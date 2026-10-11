@@ -1,0 +1,1 @@
+Count an include-only workflow matrix from its declared include rows. Supplemental rows must not become the original combinations for later includes. Bind the count to the exact event filters and changed paths, and count a triggered auxiliary push separately from PR jobs.

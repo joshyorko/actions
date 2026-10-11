@@ -1,0 +1,16 @@
+{
+  "status": "ONE_NORMAL_EXISTING_DRAFT_PR308_CURRENT8D49_SOURCE_PUSH_REMOTE_REF_AND_NAMED_POST_METADATA_VERIFIED",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "draft": true,
+  "base": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "normal_push_calls": 1,
+  "old_before_REST_base_e3": "RetainedoriginalprepushassertionHOLD/no mutation",
+  "original_immediate_after_GraphQL_head": "Retainede4staleoriginalmetadataassertionFAILafteronesuccessfulpush",
+  "original_push_stderr_sha256": "e4413d962342fb73088b31f3bfa37a250855935e60e77c7d2558cb00d2f6e41d",
+  "source_full_independent": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9",
+  "CI": "FRESH_CURRENT8D49_PENDING",
+  "native_3_5_7276": "NOT_RUN_OR_UNQUALIFIED",
+  "ready_merge_default_pin_publication": "NOT_RUN"
+}

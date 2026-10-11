@@ -1,0 +1,23 @@
+{
+  "status": "FAIL_OR_HOLD_NO_RETRY",
+  "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "release": {
+    "path": "/workspace/engineering/root-one-current8d49-source-FULL-release.json",
+    "bytes": 1332,
+    "sha256": "b85c05ec030e2d2748884e45591cfcf4c307b45b5aad28dae3625828b5f2abce",
+    "mode": "0o400"
+  },
+  "original_terminal": {
+    "path": "/workspace/engineering/pr308-current8d49-SOURCEFULL-preexecution/one-current8d49-configured-FULL-original-owned/original-terminal.json",
+    "bytes": 1278,
+    "sha256": "54292bf9c05c9921949ca7710aaf27842d2d1562f6b1ee4a9d86377c88f43472",
+    "mode": "0o600"
+  },
+  "outer_returncode": 0,
+  "outer_error": null,
+  "independent_ROOT_post": 1,
+  "ROOT_post_error": null,
+  "seconds": 154.93572496100387,
+  "native": "NOT_RUN"
+}

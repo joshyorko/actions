@@ -1,0 +1,234 @@
+{
+  "schema": "exact_two_completed8d49_owned_root_storage_preexecution_v1",
+  "status": "PREEXECUTION_ONLY_ROOT_AND_INDEPENDENT_GO_REQUIRED",
+  "source_head": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "source_tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+  "selected_root_labels": [
+    "ToolkitTest",
+    "robocorp-log"
+  ],
+  "selected_root_paths": {
+    "ToolkitTest": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/source-LIGHT-v3-basetemp-once/ToolkitTest",
+    "robocorp-log": "/workspace/engineering/rcc-current8d49-private-V8-content-preparation/pure-count-alias-GREEN-owned-once/robocorp-log"
+  },
+  "selected_member_count": 9022,
+  "selected_allocated_bytes": 111005696,
+  "selection": "Only exact completedToolkitTest root and completed27 GREEN robocorp-log subtree; bound parent log/JUnit/terminal remain in place",
+  "completion_semantics": "179PASS originalLIGHT owner and terminal0;27PASS0FAIL0ERROR0SKIP originalGREEN JUnit/terminal0 and exact logging-output argv. No fabricated RCC recycle marker; no universal origin/quiescence assertion",
+  "complete_stable_snapshots": 2,
+  "external_hardlinks": 0,
+  "critical_ordinary_bindings_checked": 279,
+  "critical_selected_binding_overlap": false,
+  "expanded_root_historical_alias_needed": "NONE_FOR_SCANNED_CRITICAL_ROWS; archive+complete index preserve exact selected paths and contents",
+  "live_handle_scope": {
+    "inaccessible_or_disappeared_links": 619,
+    "matched_selected_root_links": 0,
+    "observed_accessible_links": 35,
+    "universal_quiescence": "UNKNOWN"
+  },
+  "original_B28_source_and_review": [
+    {
+      "bytes": 19029,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-batch28-archiver-source/archive_exact_selected34_once.py",
+      "sha256": "9b47cb3d561ce16c1939ec4f1e70a49a6965f1b1f0dc3f72ede74c05d580aa1b"
+    },
+    {
+      "bytes": 8443,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-batch28-archiver-source/launch_once.py",
+      "sha256": "1e4382ca12ab998c009fb0ac4e8d80788f3f43332b218ed30e461d5727a6e47e"
+    },
+    {
+      "bytes": 13117,
+      "mode": "0o444",
+      "path": "/workspace/engineering/capacity-recovery-batch28-archiver-source/caps_and_prestage.py",
+      "sha256": "d9b67ed80b71cc3da8cbb7dda785a0c722da19627b84a6ab76461a4ee6e32959"
+    },
+    {
+      "bytes": 8318,
+      "mode": "0o400",
+      "path": "/workspace/engineering/capacity-recovery-batch28-independent-actual-review/OWNERFINAL-independent-original-B28-v2-actual-storage-preservation-review.json",
+      "sha256": "a26ca4f8970e4f08cbcd88698fc56c40fd2ce03efa0d774dc03575558c2d72a0"
+    },
+    {
+      "bytes": 9902,
+      "mode": "0o400",
+      "path": "/workspace/engineering/capacity-recovery-batch28-independent-preexecution-review/OWNERFINAL-independent-frozen-B28-v2-capped-all-root-preexecution-review.json",
+      "sha256": "8b438380a24d81d65d2fb5d7e27a0dcdd1cc8bc16ab80ee791015d30e6acabf3"
+    }
+  ],
+  "current_SOURCEFULL_independent": {
+    "bytes": 10038,
+    "mode": "0o400",
+    "path": "/workspace/engineering/pr308-current8d49-independent-SOURCEFULL-actual-review/OWNERFINAL-independent-current8d49-original-configured-SOURCEFULL-and-retained-ROOTpost-supplement-review.json",
+    "sha256": "073e235afffab50dee204bcaae236e77ceb8e23644db15a90a0e56d48dc8dca9"
+  },
+  "implementation_delta_proof": {
+    "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/private-final-archiver-completion-and-driver-protocol-proof-v2.json",
+    "bytes": 1666,
+    "sha256": "926d0441ad2667a53cb03cded02e1774391a4cd84a1b50d7ece7ffb45eaefa2a",
+    "mode": "0o400"
+  },
+  "root_release_template": {
+    "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/ROOT-exact-one-storage-release-template-NOTAUTHORIZATION.json",
+    "bytes": 1422,
+    "sha256": "667e29bbf41acb00d33feb36e6ec72012ba94b1f30d6d9ebb2cbb2ff4498af3b",
+    "mode": "0o400"
+  },
+  "required_independent_decision": "GO_EXACT_TWO_COMPLETED8D49_ROOTS_CAPPED_STORAGE_PREEXECUTION",
+  "exact_outer_argv": [
+    "/usr/bin/timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "900s",
+    "/bin/bash",
+    "--noprofile",
+    "--norc",
+    "-c",
+    "set -euo pipefail; source \"$1\"; unset PYTHONOPTIMIZE; export PYTHONDONTWRITEBYTECODE=1; exec \"$2\" \"$3\" --root-execute-reviewed-two-completed8d49-roots \"$4\"",
+    "root-one-storage",
+    "/workspace/actions-cloud/activate.sh",
+    "/workspace/actions-cloud/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/bin/python",
+    "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/launch_once.py",
+    "/workspace/engineering/root-completed8d49-two-root-storage-reviewed-release.json"
+  ],
+  "bounds": {
+    "aggregate_archive_actual_writes_including_close_footer": 50331648,
+    "complete_plus_maximum_progress_indices": 16777216,
+    "tmp_two_archive_copies_plus_indices_plus_reserve_before": 251658240,
+    "tmp_reserve_before_removal": 134217728,
+    "workspace_data_only_guard_floor": 16777216,
+    "shm_native_floor_not_allocated_or_waived": 3865470567,
+    "child_TERM": 600,
+    "child_KILL_after": 10,
+    "python_child_timeout": 615,
+    "outer_TERM": 900,
+    "outer_KILL_after": 10
+  },
+  "capacity_at_preparation": {
+    "/workspace": 1155563520,
+    "/tmp": 600211456,
+    "/dev/shm": 3901190144
+  },
+  "minimum_required_workspace_gain": 64000000,
+  "measured_allocated_gain_prospective_not_guaranteed": 111005696,
+  "compression_fit": "UNKNOWN_BEFORE_ACTUAL; capped overflow retains all originals and partial archives/index",
+  "alwayspost": "Current8d49 exact original stage-after guard before and every driver outcome; source1440/original237/native1192/prepared30/five metadata origins and accepted aliases. No actual test/gateway/native invokes. Metadata failure remains primary/secondary as applicable",
+  "archive_verify": "Every selected archive body/type/mode/uidgid/exact PAX mtime/hardlink partition/CRCISIZEEOF, fsync archives/staging dir/complete index/maxprogress budget before any exact expanded root removal",
+  "protected_semantics": "Source/native/prepared/default pins and historical failures remain unchanged; no source functional qualification",
+  "operation": "NOT_RUN_NO_ARCHIVE_NO_REMOVAL_NO_RESTORATION",
+  "storage_dirs_absent_checked": true,
+  "references": [
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/read-only-completion-snapshot-JSON-type-control.json",
+      "bytes": 559,
+      "sha256": "0c0647a4bc6ed6967cf2270f2f53ca30a6d1f0fba4bc1219d142997cc4ef4959",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/private-driver-protocol-delta-proof.json",
+      "bytes": 974,
+      "sha256": "712fe321fdb9a89e36e3c59b7643eec99b854b2e2c2aac8e0b2b008864be8064",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/private-archiver-address-completion-AST-delta-proof.json",
+      "bytes": 1394,
+      "sha256": "e219a46829a2c502a7671f11506de952dd19f84174e7d741309c6a27b64054e3",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/private-current8d49-data-only-source-guard-inputs.json",
+      "bytes": 13604,
+      "sha256": "d466da2bd387122eaf838495653309688b5b6e55f9e649c6c618502a5ba4296d",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/guard_readonly.py",
+      "bytes": 4195,
+      "sha256": "c2472cccf30914983362821cb926e9580a46ee92c0b665d4aa4a710c626f1588",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/private-exact-two-root-inputs.json",
+      "bytes": 2756613,
+      "sha256": "844ddad53f528088008866aa261e62c8895d0a56696718e53b0b0792a7f7c024",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/launch_once.py",
+      "bytes": 8576,
+      "sha256": "6e3b59bf29a27da68928d42ee974ee236ca3add910276dd3fd50b124710826e9",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/private-final-archiver-completion-and-driver-protocol-proof-v2.json",
+      "bytes": 1666,
+      "sha256": "926d0441ad2667a53cb03cded02e1774391a4cd84a1b50d7ece7ffb45eaefa2a",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/archive_exact_two_completed_roots_once.py",
+      "bytes": 20030,
+      "sha256": "dd683f6aa599250dbd827e2b803712dc19509f1390e09b1e5f5eeb14834eb9c5",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/current8d49_data_guard_reused.py",
+      "bytes": 7681,
+      "sha256": "72f9a57a368d3fd654f574a41aa898fbf9c969feefb63a42f8019b8ff3a72c9e",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/ROOT-exact-one-storage-release-template-NOTAUTHORIZATION.json",
+      "bytes": 1422,
+      "sha256": "667e29bbf41acb00d33feb36e6ec72012ba94b1f30d6d9ebb2cbb2ff4498af3b",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/retained-construction-before-JSON-identity-type-check/private-driver-protocol-delta-proof.json",
+      "bytes": 974,
+      "sha256": "712fe321fdb9a89e36e3c59b7643eec99b854b2e2c2aac8e0b2b008864be8064",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/retained-construction-before-JSON-identity-type-check/private-archiver-address-completion-AST-delta-proof.json",
+      "bytes": 1394,
+      "sha256": "e219a46829a2c502a7671f11506de952dd19f84174e7d741309c6a27b64054e3",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/retained-construction-before-JSON-identity-type-check/guard_readonly.py",
+      "bytes": 4171,
+      "sha256": "e170e771957fdf9dcdc793d8d7f578e8e49343088f78073a7a5ad66dec7fd7a2",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/retained-construction-before-JSON-identity-type-check/private-exact-two-root-inputs.json",
+      "bytes": 2756090,
+      "sha256": "669b39f3dce2a6fe30abcc904a19010e674332d0ae6b1c6b2fb4c797adbe0e81",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/retained-construction-before-JSON-identity-type-check/launch_once.py",
+      "bytes": 8485,
+      "sha256": "94a6a5c5a51ec89de30d916a4868358d9414d180e77af9e94ebfe13269b8d852",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/completed8d49-two-root-storage-PREPARATION/retained-construction-before-JSON-identity-type-check/archive_exact_two_completed_roots_once.py",
+      "bytes": 20006,
+      "sha256": "4479e814e9749b939529f4a4735f8ba6f5eca15b2f78e46de8df949385b90683",
+      "mode": "0o444"
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md",
+    "durable_learning_captured": "Exact reuse of accepted e15114-line capped all-root prestage/fsync/topology/PAX/error preservation lesson; bind completion for owned pytest roots to actual terminal and exact selected argv/root instead of inventing RCC recycle markers",
+    "evidence": "Accepted B28 actuala26ca4 and source9b47, syntax/AST13helpers preserved, two stable snapshots,179LIGHT and27GREEN original completion bindings",
+    "stale_or_ambiguous_guidance_removed": "RCC recycle marker applies only to RCC scratch; it is not completion proof for separate owned pytest/logging roots. No active or evidence-parent deletion",
+    "remaining_uncertainty": "Compression and current accessible-handle races remain prospective; source origin is only recorded completion association, universal quiescence unknown; operation requires root/independent release"
+  },
+  "upstream_disposition": "none"
+}

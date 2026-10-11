@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "status": "INDEPENDENT_CURRENT_SOURCE_LIGHT_GO",
+  "decision": "GO_CURRENT8D49_CONFIGURED_SOURCE_LIGHT_ONLY",
+  "source": {
+    "commit": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "parent": "095e25b6b2b2c8754184b0d26f77bc70a101cee4",
+    "typed_entries": 1440,
+    "clean": true
+  },
+  "source_LIGHT_binding": {
+    "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current8d49-configured-SOURCE_LIGHT-PASS.json",
+    "bytes": 7674,
+    "sha256": "d7f23a52d044195187992aeac80e692429e1a1a4af16ee9b37f1971cfbdc4104",
+    "mode": "0o400"
+  },
+  "independent_proof_binding": {
+    "path": "/workspace/engineering/pr308-current8d49-independent-SOURCE-LIGHT-review/independent-original-current8d49-LIGHT-byte-Git-JUnit-history-proof.json",
+    "bytes": 1165,
+    "sha256": "8ef9cb635e3b7f42452d6fd536d894b938146793bc0610e80ccf61e9018227c7",
+    "mode": "0o400"
+  },
+  "results": {
+    "Doctor": "PASS",
+    "prepared_reuse_inputs": 30,
+    "own_package_origins": 5,
+    "ToolkitTest_passed": 179,
+    "scoped_unique_JUnit_cases": 275,
+    "scoped_passed": 274,
+    "scoped_skipped": 1,
+    "scoped_deselected": 3,
+    "Ruff_check": "PASS",
+    "Ruff_format_formatted_files": 317,
+    "Isort": "PASS",
+    "Mypy_source_files": 353,
+    "generated_workflows_unchanged": 8,
+    "all_tracked_YAML_parsed_byte_unchanged": 30
+  },
+  "history": {
+    "original237_resolution": "234physical+1historicalGit+1archived8dcFAIL+1exactrelocateddd091",
+    "native1192_current_mode_kind_body": true,
+    "prepared30_and_observed5own_origins": true,
+    "whole_current1440_Git_FS_modes_bytes": true,
+    "original095_FAIL_preserved": true
+  },
+  "execution_capacity": "HOLD_WORKSPACE_BELOW1288490189_FLOOR; SOURCE_LIGHT_ACCEPTANCE_DOES_NOT_ADMIT_EXECUTION",
+  "FULL_native_private_release": "NOT_RUN_HOLD",
+  "canonical_improvement": {
+    "disposition": "REUSE_EXACT_CURRENT_INTEGRATED_FOUR_LINE_STARTUP_PROBE_LESSON_AND_CONFIGURED_RUNTIME_FORMATTER_PARAGRAPH; RETAIN_ACCEPTED_EXPLICIT_ABSENT_ISOLATED_BASETEMP_ALL_LESSON",
+    "current_startup_exact_delta": "Measure selected bytes before the isolated ten-second version probe and again\nbefore use. Default location and version wrappers must select that same probe;\nthe general command runner's 900-second budget is a separate operation limit.\nInjected runners are test seams, not native timeout evidence.",
+    "formatter_exact_existing_lesson": "Runtime's `inv lint` also checks test-file formatting with\n`ruff format --check --config ../devutils/ruff.toml`. When validating a focused\nRuntime test change, use that configuration as well as `ruff check`; passing\nthe tests or the lint rules alone does not establish formatter acceptance.",
+    "evidence": "Current seven wrapper spies are among275 JUnit cells; fresh Toolkit179/scoped274+1skip, configured Ruff317/Isort/Mypy353, generator8/YAML30 observed after preserved095 formatFAIL; full static body propagates worker2/addopts before Invoke and fails closed before base creation.",
+    "remaining_uncertainty": "No real3/5/7276 operation, full source/private/release, or universal reader/reaping acceptance supplied; retained01f/frozen-v6 missing.",
+    "guide_body_binding": {
+      "path": "/workspace/engineering/pr308/docs/skills/repository-operations.md",
+      "bytes": 272824,
+      "sha256": "9c4b91d1a7bf152ce7d1a17c71bbbcf03085b84b30f14ae352a96f85126199b0",
+      "mode": "0o600"
+    },
+    "upstream_disposition": "none"
+  },
+  "reviewer_tests_source_gates_native": "NOT_RUN"
+}

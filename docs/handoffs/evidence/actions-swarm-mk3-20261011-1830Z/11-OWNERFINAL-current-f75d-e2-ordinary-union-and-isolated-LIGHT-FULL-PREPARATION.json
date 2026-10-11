@@ -1,0 +1,244 @@
+{
+  "schema": 1,
+  "status": "CURRENT_F75D_E2_ORDINARY_UNION_PREPARATION_ONLY_LIGHT_AND_FULL_NOT_RUN",
+  "source": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+  "tree": "851834ae6cc87f42abfcf3c963542191e2815599",
+  "ordered_parents": [
+    "5306eeb26595da4ce571b99812eb50f047cfc903",
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+  ],
+  "branch": "test/canvas-runtime-cache-isolation-20261010",
+  "source_leaf_count": 1441,
+  "current_HEAD_index_FS": "CLEAN_EXACT_TYPED_COMPLETE_UNION",
+  "current_SOURCE_LIGHT": "NOT_RUN_ROOT_CAPACITY_AND_SERIALIZATION_RELEASE_REQUIRED",
+  "current_SOURCEFULL": "NOT_RUN_CURRENT_LIGHT_UNBOUND_HOLD_BEFORE_ATTEMPT",
+  "source_LIGHT": null,
+  "original_manifest_script": {
+    "path": "/workspace/engineering/pr305/action_server/scripts/write_native_artifact_manifest.py",
+    "bytes": 8499,
+    "sha256": "aaa6855bc6c0bccc41933703fbdb2e58d9f25a118a651d254a7dce34e5fd113b",
+    "mode": "0o600"
+  },
+  "complete_source_inventory": {
+    "path": "/workspace/engineering/pr305-actual-e2-refresh/private-current-f75d-complete-source-body-mode-inventory.json",
+    "bytes": 408887,
+    "sha256": "da5d8847c3af2b1710a07e82db797c9b10d9ebc55c66ffaf92b7e31240490d96",
+    "mode": "0o600"
+  },
+  "fresh_own_prepared30_and_five": "Read-only bytes/prefix existence bound; fresh concrete origins remain NOT_RUN until distinct LIGHT release. No Bootstrap install authorized.",
+  "frozen_input_bindings": [
+    {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/CONDITIONAL-current-f75d-isolated-managed-source-inputs.json",
+      "bytes": 29236,
+      "sha256": "8452f7184fb1cd6f63d4349195c2cde4b9cac8f1d2d21b9ee1fe42d218ef5bc2",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/OWNERFINAL-existing-PR305-current-e2-ordinary-union-guide-resolution-PROPOSAL.json",
+      "bytes": 3246,
+      "sha256": "409e278b3031d6749bea1129bdb528e848c8047c1e52fc2e02296e1f95c39d67",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/current_source_full_body.py",
+      "bytes": 1623,
+      "sha256": "6011007881aaaac9944691dae482c964a9f9b4d17ec9f1ed7653a7d0fa70dd76",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/current_source_prepost_guard.py",
+      "bytes": 3967,
+      "sha256": "4e6adffa24b66f0179b1f61c88199b8fc04c05b7ec5c994407792cb32929afc3",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/launch_current_source_full_once.py",
+      "bytes": 3824,
+      "sha256": "c97721afb93a05984d5692f8a0950e29fbef07d755f142caf6a991d9fba18728",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/private-current-f75d-complete-source-body-mode-inventory.json",
+      "bytes": 408887,
+      "sha256": "da5d8847c3af2b1710a07e82db797c9b10d9ebc55c66ffaf92b7e31240490d96",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/private-current-f75d-prepared30-and-five-prefixes-retained-proof.json",
+      "bytes": 28844,
+      "sha256": "351870d1606ad8d901706ac4be98460ce90f46e3c31d9370f0ef8fb5ca0175b3",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/private-current-f75d-production-and-separate-five-selector-inventory.json",
+      "bytes": 99426,
+      "sha256": "ef597d754648a138bea3c9ba841c0e1852cecf988498385898e9f2c64cfa233c",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/private-proposed-both-parent-canonical-guide-resolution.md",
+      "bytes": 274781,
+      "sha256": "dc5c04abfa51df9f9f88fc1b018c6b3ef41a672e6af304a524351177fa168d89",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/private-prospective-guide-conflict-original.txt",
+      "bytes": 274851,
+      "sha256": "d514bb667bb001e44315ebdffb99cb1a66c58f0d93576f53badba5cc6785dbf4",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/run_current_f75d_isolated_SOURCE_LIGHT_once.py",
+      "bytes": 8437,
+      "sha256": "4d7b4316449c796bb7458541b772893e0d1445ded62bb822dc27f630af275673",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/safe-current-f75d-committed-ordinary-union-and-protected-manifest.json",
+      "bytes": 1211,
+      "sha256": "6b4c9a6979ef1df5379718af4556b0d6c24a1a29eca7bbf0b5ecaea606895ebf",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr305-current5306-SOURCEFULL-preexecution-executable-v4/OWNERFINAL-current5306-managed-configured-SOURCEFULL-preexecution-proposal.json",
+      "bytes": 15863,
+      "sha256": "dbb636668ea7f27f4457ba7d1e3c0f005a14e4686b64b2b244b35e819dfe8d3e",
+      "mode": "0o600"
+    },
+    {
+      "path": "/workspace/engineering/pr305-current5306-independent-executable-v4-review/OWNERFINAL-independent-current5306-executable-v4-static-preexecution-review.json",
+      "bytes": 5942,
+      "sha256": "650cc012d59211fb29a54695ea0d4270c0504fa9fc25a8d4aa0d85fedefa6111",
+      "mode": "0o600"
+    }
+  ],
+  "producer_scope": {
+    "current_production_count": 276,
+    "old_production_count": 268,
+    "match": 258,
+    "changed": [
+      "action_server/src/actions/server/_actions_run.py",
+      "action_server/src/actions/server/_api_analytics.py",
+      "action_server/src/actions/server/_api_run.py",
+      "action_server/src/actions/server/_models.py",
+      "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "action_server/src/actions/server/_runs_state_cache.py",
+      "action_server/src/actions/server/_server.py",
+      "action_server/src/actions/server/migrations/__init__.py",
+      "action_server/src/actions/server/templates/action-templates.yaml",
+      "action_server/src/actions/server/templates/action-templates.zip"
+    ],
+    "added": [
+      "action_server/src/actions/server/migrations/migration_add_run_outputs.py",
+      "action_server/src/actions/server/run_outputs/__init__.py",
+      "action_server/src/actions/server/run_outputs/filesystem.py",
+      "action_server/src/actions/server/run_outputs/models.py",
+      "action_server/src/actions/server/run_outputs/service.py",
+      "action_server/src/actions/server/run_outputs/transport.py",
+      "action_server/src/actions/server/run_outputs/types.py",
+      "action_server/src/actions/server/templates/zips/canvas-query.zip"
+    ],
+    "deleted": [],
+    "five_selector_changes": [],
+    "native_qualification": "UNQUALIFIED_NO_OLD_PROOF_CARRY"
+  },
+  "producer_and_test_counts_separate": true,
+  "original_Canvas_RCC_fixture_and_generator_preservation": "Original five owned source bodies/modes match5306; whole generator equals accepted e2, no source implementation changes. All helper/native/browser old actual tuples remain historical.",
+  "LIGHT_preparation": {
+    "script": {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/run_current_f75d_isolated_SOURCE_LIGHT_once.py",
+      "bytes": 8437,
+      "sha256": "4d7b4316449c796bb7458541b772893e0d1445ded62bb822dc27f630af275673",
+      "mode": "0o600"
+    },
+    "once_owned_root": "/tmp/actions-pr305-f75d-SOURCE-LIGHT-once-owned",
+    "explicit_unique_absent_basetemps": {
+      "Toolkit": "/tmp/actions-pr305-f75d-SOURCE-LIGHT-once-owned/toolkit",
+      "devutils": "/tmp/actions-pr305-f75d-SOURCE-LIGHT-once-owned/devutils",
+      "Runtime_scoped": "/tmp/actions-pr305-f75d-SOURCE-LIGHT-once-owned/runtime-scoped"
+    },
+    "tmp_path_retention_policy": "all",
+    "reject_inherited_PYTEST_ADDOPTS": true,
+    "Doctor_Bootstrap_reuse_Toolkit_configured_scoped_lint_types_gen8_all30": "Prepared commands only, NOT_RUN",
+    "canonical_managed_activation": "Expected18 allowlisted exports+PATH (19), Python optimize cleared, original RCC3 bytes/pin, own cachedtoolkit prefix; no alternative installs or actual provider/browser/native selectors",
+    "distinct_root_release": "ROOT_RELEASE_ONE_SERIALIZED_CURRENT_F75D_SOURCE_LIGHT exact source/tree/script/config hashes and serializationTrue; root invokes script --execute-root-authorized RELEASE_PATH RELEASE_SHA256",
+    "future_guard_current_typed_source_retained_native1192_helpers": "Before/after functions prepared; actual guard execution NOT_RUN"
+  },
+  "configured_full_argv": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "600s",
+    "rcc",
+    "task",
+    "script",
+    "-r",
+    "developer/toolkit.yaml",
+    "--",
+    "python",
+    "/workspace/engineering/pr305-actual-e2-refresh/current_source_full_body.py"
+  ],
+  "FULL_conditional_preparation": {
+    "body": {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/current_source_full_body.py",
+      "bytes": 1623,
+      "sha256": "6011007881aaaac9944691dae482c964a9f9b4d17ec9f1ed7653a7d0fa70dd76",
+      "mode": "0o600"
+    },
+    "prepost_guard": {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/current_source_prepost_guard.py",
+      "bytes": 3967,
+      "sha256": "4e6adffa24b66f0179b1f61c88199b8fc04c05b7ec5c994407792cb32929afc3",
+      "mode": "0o600"
+    },
+    "launcher": {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/launch_current_source_full_once.py",
+      "bytes": 3824,
+      "sha256": "c97721afb93a05984d5692f8a0950e29fbef07d755f142caf6a991d9fba18728",
+      "mode": "0o600"
+    },
+    "config": {
+      "path": "/workspace/engineering/pr305-actual-e2-refresh/CONDITIONAL-current-f75d-isolated-managed-source-inputs.json",
+      "bytes": 29236,
+      "sha256": "8452f7184fb1cd6f63d4349195c2cde4b9cac8f1d2d21b9ee1fe42d218ef5bc2",
+      "mode": "0o600"
+    },
+    "once_owned_root": "/tmp/actions-pr305-f75d-configured-FULL-once-owned",
+    "explicit_unique_absent_basetemp": "/tmp/actions-pr305-f75d-configured-FULL-once-owned/pytest-basetemp",
+    "tmp_path_retention_policy": "all",
+    "reject_inherited_PYTEST_ADDOPTS": true,
+    "workers": 2,
+    "bounds": {
+      "command_TERM_seconds": 600,
+      "command_KILL_grace_seconds": 10,
+      "launcher_primary_parent_seconds": 640,
+      "prepost_each_seconds": 60,
+      "root_outer_TERM_seconds": 900,
+      "root_outer_KILL_grace_seconds": 10
+    },
+    "floor_bytes": 1288490189,
+    "always_post_after_primary": "Preserved original finally; primary failure and post failure recorded separately",
+    "current_root_release": "NOT_AUTHORIZED",
+    "ready_executable_NOW": false,
+    "required_named_successor": "After current LIGHT and independent review freeze, a distinct named config/body/guard/launcher/owner must bind that current LIGHT and complete dependency closure; do not overwrite this frozen null config. Never use historical5306 LIGHT as current full admission.",
+    "old_V4_subject": "Historical5306 executable dbb636/ind650cc retained; original V4 had no explicit basetemp and is not adopted as current."
+  },
+  "current_capacity_observation_bytes": 1382932480,
+  "scope": "Ordinary source merge and private preparation only; no LIGHT/FULL/gateway/native/provider/browser/consumer/install/download/push/merge-to-target/new-branch",
+  "historical_private_data_aliases": "No currently guarded retained row is missing; old8dc/futuredd091 archive maps must be independently hash-bound if later required. No omitted checks or recreated original roots.",
+  "documentation_improvement": {
+    "canonical_file_changed": "docs/skills/repository-operations.md",
+    "exact_delta": "Root-reviewed guide-only resolution409e keeps both conflict bodies exactly once; all accepted incoming canonical guide context retained.",
+    "durable_learning": "Bridge cache containment/public Core sample scope and Canvas Query strict receipt gate are separate contracts; both survive ordinary union. Reuse accepted unique absent basetemp/policyALL and consumed dependency-closure lessons in actual prepared scripts.",
+    "evidence": [
+      "409e root-reviewed resolution",
+      "Committed tree851834 actual ordered5306/e2",
+      "Complete1441 Git/FS modes",
+      "Four private script AST syntax checks only"
+    ],
+    "stale_or_ambiguous_guidance_removed": "No one-sided guide resolution, no inherited pytest options or numbered temporary retention, no old5306 current gate carry or nonexistent1299 inventory backfill.",
+    "remaining_uncertainty": "All current LIGHT/FULL/origin probes, CI, browser/native/provider/release qualification remain NOT_RUN/HOLD. Capacity and serialization require fresh root release."
+  },
+  "upstream_disposition": "none",
+  "writer_slot": "Preparation complete; no additional app edits"
+}

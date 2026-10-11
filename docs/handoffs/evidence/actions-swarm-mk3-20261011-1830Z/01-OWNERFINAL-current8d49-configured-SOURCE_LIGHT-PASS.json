@@ -1,0 +1,171 @@
+{
+  "status": "OWNER_CURRENT8D49_CONFIGURED_SOURCE_LIGHT_PASS_INDEPENDENT_REVIEW_PENDING",
+  "source": {
+    "commit": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+    "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+    "parent": "095e25b6b2b2c8754184b0d26f77bc70a101cee4",
+    "typed_entries": 1440,
+    "clean": true
+  },
+  "before_returncode": 0,
+  "primary_returncode": 0,
+  "post_returncode": 0,
+  "seconds": 76.26973016899865,
+  "results": {
+    "Doctor": "PASS",
+    "prepared_reuse_inputs": 30,
+    "own_package_origins": 5,
+    "ToolkitTest_passed": 179,
+    "scoped_unique_JUnit_cases": 275,
+    "scoped_passed": 274,
+    "scoped_skipped": 1,
+    "scoped_deselected": 3,
+    "Ruff_check": "PASS",
+    "Ruff_format_formatted_files": 317,
+    "Isort": "PASS",
+    "Mypy_source_files": 353,
+    "generated_workflows_unchanged": 8,
+    "all_tracked_YAML_parsed_byte_unchanged": 30
+  },
+  "before_after_guards": [
+    {
+      "stage": "before",
+      "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+      "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+      "source_count": 1440,
+      "old_originals": 237,
+      "native_originals": 1192,
+      "prepared": 30,
+      "origins": 5,
+      "dd091_physical_alias_verified": true,
+      "failed_history": "UNCHANGED",
+      "workspace_free": 1377550336,
+      "tmp_free": 1264193536,
+      "native": "NOT_RUN"
+    },
+    {
+      "stage": "after",
+      "source": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+      "tree": "a80600809d373038ca76e445ba0b7b79bb7eeaa6",
+      "source_count": 1440,
+      "old_originals": 237,
+      "native_originals": 1192,
+      "prepared": 30,
+      "origins": 5,
+      "dd091_physical_alias_verified": true,
+      "failed_history": "UNCHANGED",
+      "workspace_free": 1285701632,
+      "tmp_free": 1264193536,
+      "native": "NOT_RUN"
+    }
+  ],
+  "historical_preservation": {
+    "original_binding_rows": 237,
+    "native_members": 1192,
+    "missing_8dc_receipt": "EXACT_FAIL_ARCHIVE_MEMBER_ONLY_NO_RECREATION",
+    "dd091_original_archive": "EXACT_PHYSICAL_ALIAS_WITH_ORIGINAL_INDEX_NO_OMISSION",
+    "all_originals": "UNCHANGED"
+  },
+  "original_095_source_LIGHT": "FAIL_CONFIGURED_RUFF_FORMAT_PRESERVED_NO_RETRY",
+  "formatted_child": "ONE_blank_line_only_whole_AST_equal_fresh_source_attempt",
+  "source_FULL": "NOT_RUN",
+  "RCC_3_new_actual": "NOT_RUN",
+  "released_5_functionality": "NOT_RUN",
+  "candidate_727_6_functionality": "NOT_RUN",
+  "private_metadata_release": "HOLD",
+  "capacity_execution_admission": "FRESH_FULL_FLOORS_REQUIRED_CURRENT_WORKSPACE_BELOW_FLOOR",
+  "frozen_bindings": [
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current8d49-source-LIGHT-original-owned-v3/original-terminal.json",
+      "bytes": 1198,
+      "sha256": "a0a46e59ba28081562e02d1e888c74489731b5535748759a06f6fbb732e4e253",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current8d49-source-LIGHT-original-owned-v3/original-LIGHT-source.private.log",
+      "bytes": 11766,
+      "sha256": "d43e63c642527fa4e8c7acaf61d6382e60c1d1b74a07742e067d65c84f26acdc",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current8d49-source-LIGHT-original-owned-v3/current-scoped-source-junit.xml",
+      "bytes": 55592,
+      "sha256": "1f839efb94e5cd383882af11957391e3de1c1fb42e7245a37d6c1bb4b313cd76",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/one-current8d49-source-LIGHT-original-owned-v3/current-generator8-allYAML-roundtrip.json",
+      "bytes": 4040,
+      "sha256": "cd2a587de6af98661d2e6fa12870853ecf6f2e7fb8ce1c7e3e40f1f4555fe41a",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/frozen-current8d49-source-LIGHT-inputs-v3.json",
+      "bytes": 12996,
+      "sha256": "81f52920b50e67619b3bb418a7c1034a2106ec52f4badd71b9d85e29b7376820",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current8d49-LIGHT-execution-proposal-v3.json",
+      "bytes": 3759,
+      "sha256": "60121b80d3bbf17e59a0f05579d72b4ab8639b3bedf3813b788711b426e2fb0c",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/root-inline-one-current8d49-LIGHT-authorization-v3.json",
+      "bytes": 1628,
+      "sha256": "72ef82f704f2c057eff4fa6eefc44163877d1b965cdbc3007962515410e08917",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/OWNERFINAL-current095-original-SOURCE_LIGHT-formatter-FAIL.json",
+      "bytes": 3791,
+      "sha256": "41fe5885ee867622ea9f822711ab018f54f707a318fa0e561f539bfbb3cff5a3",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/current8d49_readonly_source_and_storage_guard_v3.py",
+      "bytes": 7234,
+      "sha256": "2012ddc87e897c14171d18dae2fa56c49458d0b14831eeb745c4ff08f9fa65ae",
+      "mode": "0o400"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/current8d49_cached_source_LIGHT_body_v3.py",
+      "bytes": 2846,
+      "sha256": "6deb5e5a38495f0d83e5dc020c4cb0c722292cc4aec898f66830fd6904590884",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/launch_current8d49_source_gate_once_v3.py",
+      "bytes": 4780,
+      "sha256": "c49bf4bc67271a09c07a5aefd313ab390cb69dbad56534b0fd55d514ee00c5b9",
+      "mode": "0o444"
+    },
+    {
+      "path": "/workspace/engineering/pr308-expectedEDF-fresh-gates-preparation/private-current8d49-source-body-mode-inventory-v3.json",
+      "bytes": 378602,
+      "sha256": "9843e9035fd7bfdf9577b9ba08f108365fbbc336ca00337f99328599b6204677",
+      "mode": "0o400"
+    },
+    {
+      "bytes": 885,
+      "mode": "0o400",
+      "path": "/workspace/engineering/root-pr308-e2-and-startup-probe-adoption/OWNERFINAL-root-ordinary-e2-and-startup-probe-source-adoption.json",
+      "sha256": "edf047d2aeaa3b74b42cfaa3879146dfee4ee740bb9797f0f6d47c821bd39107"
+    },
+    {
+      "path": "/workspace/engineering/pr308-current095-configured-Ruff-formatter-only-correction/root-approved-formatter-only-normal-child-source-adoption.json",
+      "bytes": 745,
+      "sha256": "edf034c9a880e625353a25d24d97400c24c04b2ffd40d8942bbb001d37c17f92",
+      "mode": "0o400"
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file_changed_or_proposed": "docs/skills/repository-operations.md integrated startup four-line probe boundary; existing Runtime configured formatter paragraph verified reuse; accepted explicit basetemp/ALL and disjoint generator union patches retained for root integration",
+    "durable_learning_captured": "Default approved compatibility routes now preserve10s probe instead of general900s command runner; configured formatter gate is independent; each pytest needs initially absent isolated basetemp+ALL.",
+    "evidence": "Current7 permanent startup controls included in275-case scoped XML, configured Ruff317 and actualsourcebeforeafter; old095 formatFAIL immutable.",
+    "stale_or_ambiguous_guidance_removed": "Default compatibility location/version routes no longer silently use900s probe; Black-only evidence is not configured Ruff acceptance.",
+    "remaining_uncertainty": "CurrentSOURCEFULL and fresh3/5/7276 realfunctionality remain unqualified; private01f/frozen-v6 missing."
+  },
+  "upstream_disposition": "none"
+}
