@@ -3216,6 +3216,26 @@ correctness failure. Controlled browser performance remains a separate proof.
 
 ## Common Run-output migration and verification
 
+Refreshing the common Run-output branch preserves its service and regression
+controls but creates a new source union requiring fresh CI. The retained Windows
+failure at `9cb61c52` occurred on the resource catalog test's **first** native
+startup, before rollback/collision assertions: readiness exhausted its 90-second
+budget while the RCC variables call took 89.28 seconds. RCC 18.19.3 source
+`4148c2b7` reports elapsed time **since the previous progress mark**; the complete
+16-mark series sums to 89.259 seconds. Neither the final 15.687-second interval
+nor the 66.491-second mark identifies total preparation time or UV install time.
+The separate 20-second cleanup reported an incomplete condition without enough
+evidence to identify a survivor, reader, or observation failure.
+
+The original `1151a0c8` Windows diagnostic branch retained six first-startup
+readiness failures; only two test nodes sampled owned RCC CPU/IO at 80 and 88
+seconds. Their activity proves those observed processes were doing work, not
+which preparation phase caused the timeout. No raw progress series was retained
+for that run. Preserve both failures and their source identities: a later source
+refresh or another branch's result does not establish their cause or waive the
+90/20-second readiness/cleanup boundaries. Actual returned cleanup fields and
+delivered-stream timing require separately reviewed observations.
+
 The private common Run-output service depends on migration 15, stacked after
 the MCP ownership and routing-history migrations 13/14. Register every model
 through `get_all_model_classes()` in fixtures that exercise Run reads or updates;
