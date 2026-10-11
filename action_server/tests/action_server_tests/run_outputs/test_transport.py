@@ -1,10 +1,15 @@
 """Real assembled Runtime app with durable grants and measured filesystem bytes."""
 
 import asyncio
+import hashlib
+import json
 import os
+import sqlite3
+import stat
 import sys
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 from dataclasses import FrozenInstanceError
+from pathlib import Path
 from types import SimpleNamespace
 from typing import cast
 from urllib.parse import quote
@@ -29,6 +34,137 @@ pytestmark = pytest.mark.skipif(
 
 INSTALLATION = {"Authorization": "Bearer installation-key"}
 AUTHORIZED = {**INSTALLATION, "X-Test-Credential": "server-held-reader-secret"}
+
+
+def _transport_state(datadir, db_path):
+    """Bound all logical SQLite rows and the test-owned filesystem separately."""
+    datadir = Path(datadir).resolve()
+    db_path = Path(db_path).resolve()
+    assert db_path.is_relative_to(datadir)
+    byte_count = 0
+    with closing(sqlite3.connect(db_path.as_uri() + "?mode=ro", uri=True)) as conn:
+        conn.execute("PRAGMA query_only=ON")
+        conn.execute("BEGIN")
+        schema = conn.execute(
+            "SELECT type, name, tbl_name, sql FROM sqlite_master ORDER BY type, name"
+        ).fetchmany(1001)
+        assert len(schema) <= 1000, "transport snapshot schema bound"
+        tables = []
+        row_count = 0
+        for kind, name, _, _ in schema:
+            if kind != "table":
+                continue
+            quoted = '"' + name.replace('"', '""') + '"'
+            cursor = conn.execute(f"SELECT * FROM {quoted}")
+            rows = cursor.fetchmany(1001 - row_count)
+            row_count += len(rows)
+            assert row_count <= 1000, "transport snapshot row bound"
+            tables.append(
+                (
+                    name,
+                    tuple(col[0] for col in cursor.description),
+                    tuple(sorted(rows, key=repr)),
+                )
+            )
+        logical_sql = (tuple(schema), tuple(tables))
+        byte_count += len(repr(logical_sql).encode())
+        assert byte_count <= 16 * 1024 * 1024, "transport snapshot byte bound"
+
+    # Only these exact regular SQLite files have logical rather than physical
+    # byte authority. Keep their names, types, modes and inode containment.
+    sqlite_files = {
+        db_path,
+        *(Path(str(db_path) + suffix) for suffix in ("-journal", "-wal", "-shm")),
+    }
+    filesystem = []
+    pending = [datadir]
+    while pending:
+        path = pending.pop()
+        before = path.lstat()
+        binding = (before.st_dev, before.st_ino, stat.S_IMODE(before.st_mode))
+        relative = path.relative_to(datadir).as_posix()
+        if stat.S_ISDIR(before.st_mode):
+            value = (relative, "directory", binding)
+            with os.scandir(path) as entries:
+                children = []
+                for entry in entries:
+                    children.append(Path(entry.path))
+                    assert (
+                        len(filesystem) + len(pending) + len(children) < 2048
+                    ), "transport snapshot entry bound"
+            children.sort(reverse=True)
+            pending.extend(children)
+        elif stat.S_ISLNK(before.st_mode):
+            assert path not in sqlite_files
+            assert path.resolve().is_relative_to(
+                datadir
+            ), "transport snapshot symlink escape"
+            target = os.readlink(path)
+            byte_count += len(target.encode())
+            value = (relative, "symlink", binding, target)
+        else:
+            assert stat.S_ISREG(before.st_mode), "transport snapshot special object"
+            if path in sqlite_files:
+                value = (relative, "sqlite-logical-authority", binding)
+            else:
+                byte_count += before.st_size
+                assert byte_count <= 16 * 1024 * 1024, "transport snapshot byte bound"
+                with os.fdopen(
+                    os.open(path, os.O_RDONLY | os.O_NOFOLLOW), "rb"
+                ) as stream:
+                    opened = os.fstat(stream.fileno())
+                    assert (
+                        opened.st_dev,
+                        opened.st_ino,
+                        opened.st_size,
+                        opened.st_mtime_ns,
+                        opened.st_mode,
+                    ) == (
+                        before.st_dev,
+                        before.st_ino,
+                        before.st_size,
+                        before.st_mtime_ns,
+                        before.st_mode,
+                    )
+                    measured = hashlib.sha256()
+                    measured_bytes = 0
+                    for chunk in iter(lambda: stream.read(65536), b""):
+                        measured_bytes += len(chunk)
+                        assert (
+                            measured_bytes <= before.st_size
+                        ), "transport snapshot file grew"
+                        measured.update(chunk)
+                    assert (
+                        measured_bytes == before.st_size
+                    ), "transport snapshot file truncated"
+                    after = os.fstat(stream.fileno())
+                    assert (after.st_size, after.st_mtime_ns, after.st_mode) == (
+                        opened.st_size,
+                        opened.st_mtime_ns,
+                        opened.st_mode,
+                    )
+                value = (
+                    relative,
+                    "file",
+                    binding,
+                    before.st_size,
+                    measured.hexdigest(),
+                )
+        assert byte_count <= 16 * 1024 * 1024, "transport snapshot byte bound"
+        filesystem.append(value)
+    assert len(filesystem) <= 2048, "transport snapshot entry bound"
+    return logical_sql, tuple(sorted(filesystem))
+
+
+@contextmanager
+def _unchanged_transport_state(runtime):
+    before = _transport_state(runtime.datadir, runtime.store[0].db_path)
+    try:
+        yield
+    finally:
+        after = _transport_state(runtime.datadir, runtime.store[0].db_path)
+        assert after[0] == before[0], "transport request changed logical SQL"
+        assert after[1] == before[1], "transport request changed owned filesystem"
 
 
 @pytest.fixture
@@ -63,6 +199,7 @@ def runtime(store, tmp_path, monkeypatch, request):
     _app.get_app.cache_clear()
     actors = {"server-held-reader-secret": actor}
     authentications = []
+    open_attempts = []
     opened = []
     original_open = provider.open
 
@@ -75,6 +212,7 @@ def runtime(store, tmp_path, monkeypatch, request):
 
     @contextmanager
     def observe_open(*args):
+        open_attempts.append(None)
         with original_open(*args) as reader:
             opened.append(reader)
             yield reader
@@ -101,25 +239,59 @@ def runtime(store, tmp_path, monkeypatch, request):
 
     client = build()
     path = f"/api/workspaces/{snap.workspace_id}/outputs/{output.handle}"
-    try:
-        yield SimpleNamespace(
-            client=client,
-            build=build,
-            actors=actors,
-            authentications=authentications,
-            opened=opened,
-            path=path,
-            store=store,
-            output=output,
-            config=config,
-            root=root,
+    requests = []
+    runtime = SimpleNamespace(
+        client=client,
+        build=build,
+        actors=actors,
+        authentications=authentications,
+        open_attempts=open_attempts,
+        opened=opened,
+        path=path,
+        store=store,
+        output=output,
+        config=config,
+        root=root,
+        datadir=tmp_path,
+        requests=requests,
+    )
+
+    def measured_request(method, *, expected_counts, path=None, client=None, **kwargs):
+        before = (len(authentications), len(open_attempts), len(opened))
+        with _unchanged_transport_state(runtime):
+            response = (client or runtime.client).request(
+                method, path or runtime.path, **kwargs
+            )
+        requests.append(
+            {
+                "method": method,
+                "status": response.status_code,
+                "actor_auth_calls": len(authentications) - before[0],
+                "provider_open_attempts": len(open_attempts) - before[1],
+                "successful_reader_opens": len(opened) - before[2],
+                "logical_SQL_and_owned_filesystem_unchanged": True,
+            }
         )
+        actual_counts = (
+            len(authentications) - before[0],
+            len(open_attempts) - before[1],
+            len(opened) - before[2],
+        )
+        assert actual_counts == expected_counts
+        return response
+
+    runtime.request = measured_request
+    try:
+        yield runtime
     finally:
+        request.node.user_properties.append(
+            ("transport_requests", json.dumps(requests, sort_keys=True))
+        )
         _app.get_app.cache_clear()
 
 
 def test_actual_runtime_authorized_handle_and_response_policy(runtime):
-    response = runtime.client.get(runtime.path, headers=AUTHORIZED)
+    response = runtime.request("GET", expected_counts=(1, 1, 1), headers=AUTHORIZED)
     assert response.status_code == 200
     assert response.content == b"measured result"
     assert response.headers["content-length"] == "15"
@@ -130,6 +302,7 @@ def test_actual_runtime_authorized_handle_and_response_policy(runtime):
     assert response.headers["cache-control"] == "no-store"
     assert response.headers["x-content-type-options"] == "nosniff"
     assert len(runtime.opened) == 1
+    assert len(runtime.open_attempts) == 1
     with pytest.raises(ValueError):
         runtime.opened[0].read(1)
     with pytest.raises(FrozenInstanceError):
@@ -137,37 +310,76 @@ def test_actual_runtime_authorized_handle_and_response_policy(runtime):
 
 
 @pytest.mark.parametrize(
-    "headers", [{}, INSTALLATION, {**INSTALLATION, "X-Actor-ID": "actor"}]
+    "headers, expected_status, expected_auth_calls",
+    [
+        ({}, 403, 0),
+        (INSTALLATION, 404, 1),
+        ({**INSTALLATION, "X-Actor-ID": "actor"}, 404, 1),
+    ],
 )
-def test_installation_auth_never_creates_actor(runtime, headers):
+def test_installation_auth_never_creates_actor(
+    runtime, headers, expected_status, expected_auth_calls
+):
     _, _, _, _, actor, _, _ = runtime.store
     headers = {k: actor.principal_id if v == "actor" else v for k, v in headers.items()}
-    response = runtime.client.get(runtime.path, headers=headers)
-    assert response.status_code in (403, 404)
-    assert not runtime.opened
+    response = runtime.request(
+        "GET", expected_counts=(expected_auth_calls, 0, 0), headers=headers
+    )
+    assert response.status_code == expected_status
+    assert not runtime.open_attempts and not runtime.opened
     if not headers:
         assert not runtime.authentications
 
 
-def test_outer_wrong_key_blocks_valid_actor_credential(runtime):
-    headers = {**AUTHORIZED, "Authorization": "Bearer wrong"}
-    assert runtime.client.get(runtime.path, headers=headers).status_code == 403
-    assert not runtime.authentications and not runtime.opened
+@pytest.mark.parametrize("key", [None, "wrong"])
+def test_outer_wrong_key_blocks_valid_actor_credential(runtime, key):
+    headers = {"X-Test-Credential": "server-held-reader-secret"}
+    if key is not None:
+        headers["Authorization"] = "Bearer " + key
+    assert (
+        runtime.request("GET", expected_counts=(0, 0, 0), headers=headers).status_code
+        == 403
+    )
+    assert (
+        not runtime.authentications and not runtime.open_attempts and not runtime.opened
+    )
+
+
+@pytest.mark.parametrize("method", ["HEAD", "GET"])
+@pytest.mark.parametrize("key", [None, "wrong"])
+def test_outer_key_rejection_precedes_unsupported_methods(runtime, method, key):
+    headers = {"X-Test-Credential": "server-held-reader-secret"}
+    if key is not None:
+        headers["Authorization"] = "Bearer " + key
+    if method == "GET":
+        headers["Range"] = "bytes=0-2"
+    assert (
+        runtime.request(method, expected_counts=(0, 0, 0), headers=headers).status_code
+        == 403
+    )
+    assert (
+        not runtime.authentications and not runtime.open_attempts and not runtime.opened
+    )
 
 
 def test_ungranted_actor_denied_before_provider(runtime):
     runtime.actors["server-held-reader-secret"] = Actor(principal_id=uid())
-    response = runtime.client.get(runtime.path, headers=AUTHORIZED)
+    response = runtime.request("GET", expected_counts=(1, 0, 0), headers=AUTHORIZED)
     assert response.status_code == 404
     assert response.text == "Output unavailable or access denied"
-    assert not runtime.opened
+    assert not runtime.open_attempts and not runtime.opened
 
 
 def test_revoked_grant_denied_before_provider(runtime):
     _, control, _, snap, actor, _, _ = runtime.store
     control.revoke(actor, snap.deployment)
-    assert runtime.client.get(runtime.path, headers=AUTHORIZED).status_code == 404
-    assert not runtime.opened
+    assert (
+        runtime.request(
+            "GET", expected_counts=(1, 0, 0), headers=AUTHORIZED
+        ).status_code
+        == 404
+    )
+    assert not runtime.open_attempts and not runtime.opened
 
 
 @pytest.mark.parametrize(
@@ -190,8 +402,10 @@ def test_cross_workspace_unknown_and_malformed_fail_before_provider(runtime, cha
     client = TestClient(
         _app.get_app(), base_url="http://127.0.0.1", raise_server_exceptions=False
     )
-    response = client.get(path, headers=AUTHORIZED)
-    assert not runtime.opened
+    response = runtime.request(
+        "GET", expected_counts=(1, 0, 0), client=client, path=path, headers=AUTHORIZED
+    )
+    assert not runtime.open_attempts and not runtime.opened
     assert response.status_code == 404
     assert response.text == "Output unavailable or access denied"
     assert "content-disposition" not in response.headers
@@ -246,23 +460,64 @@ def test_allowed_origin_and_preflight_do_not_replace_actor(runtime):
 
 
 def test_range_and_head_explicitly_unsupported(runtime):
-    response = runtime.client.get(
-        runtime.path, headers={**AUTHORIZED, "Range": "bytes=0-2"}
+    response = runtime.request(
+        "GET", expected_counts=(1, 0, 0), headers={**AUTHORIZED, "Range": "bytes=0-2"}
     )
     assert response.status_code == 416
     assert "unsupported" in response.text
-    assert runtime.client.head(runtime.path, headers=AUTHORIZED).status_code == 405
-    assert not runtime.opened
+    assert (
+        runtime.request(
+            "HEAD", expected_counts=(0, 0, 0), headers=AUTHORIZED
+        ).status_code
+        == 405
+    )
+    assert not runtime.open_attempts and not runtime.opened
 
 
 def test_missing_object_does_not_return_path_or_claim_success(runtime):
     for item in runtime.root.iterdir():
         item.unlink()
-    response = runtime.client.get(runtime.path, headers=AUTHORIZED)
+    response = runtime.request("GET", expected_counts=(1, 1, 0), headers=AUTHORIZED)
     assert response.status_code == 503
     assert response.text == "Output storage unavailable"
     assert str(runtime.root) not in response.text
+    assert len(runtime.open_attempts) == 1
     assert not runtime.opened
+
+
+@pytest.mark.parametrize("change", ["sql-row", "owned-file"])
+def test_transport_state_observer_detects_owned_mutation_and_restores(runtime, change):
+    db = runtime.store[0]
+    marker = runtime.datadir / "snapshot-sensitivity.txt"
+    marker.write_bytes(b"owned original")
+    baseline = _transport_state(runtime.datadir, db.db_path)
+    with closing(
+        sqlite3.connect(Path(db.db_path).as_uri() + "?mode=ro", uri=True)
+    ) as conn:
+        counter_id, original_value = conn.execute(
+            "SELECT id, value FROM counter ORDER BY id LIMIT 1"
+        ).fetchone()
+    try:
+        expected = "logical SQL" if change == "sql-row" else "owned filesystem"
+        with pytest.raises(AssertionError, match=expected):
+            with _unchanged_transport_state(runtime):
+                if change == "sql-row":
+                    with db.transaction():
+                        db.execute(
+                            "UPDATE counter SET value=value+1 WHERE id=?", [counter_id]
+                        )
+                else:
+                    marker.write_bytes(b"owned mutation")
+    finally:
+        if change == "sql-row":
+            with db.transaction():
+                db.execute(
+                    "UPDATE counter SET value=? WHERE id=?",
+                    [original_value, counter_id],
+                )
+        else:
+            marker.write_bytes(b"owned original")
+    assert _transport_state(runtime.datadir, db.db_path) == baseline
 
 
 @pytest.mark.parametrize("runtime", ["large"], indirect=True)
