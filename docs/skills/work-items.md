@@ -527,7 +527,7 @@ until that stage is attempted. An attempted failure moves it to `states_failed`
 and preserves the browser stage's `FAIL` receipt; only a `PASS` clears it from
 both maps. A normal-stage pass leaves the denial criterion `NOT_RUN`. This
 stage passed in retained Linux frozen and Go-wrapper receipts using build
-`856c0a47`, at harness heads `7c98534a` and `ec8bea13` respectively. Those
+`856c0a47`; the Go-wrapper receipt binds harness head `ec8bea13`. Those
 bounded receipts establish normal, middleware-403/sign-in recovery and
 storage-503 behavior for their measured artifacts only. Importing later
 Runtime changes requires new current-source artifact admission and execution;
