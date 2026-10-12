@@ -394,7 +394,8 @@ is diagnostic unless the repository's configured CI runs that target.
 RCC version-runner fixtures must derive expected command arguments with
 `str(Path(...))`, since Windows renders the same path with native separators.
 The Linux-only owned package-cache helper admits callable `getuid` and `getgid`
-features before reading configuration or accessing cache paths. Missing or
+features before calling either feature, reading configuration, or accessing
+cache paths. It measures each feature once for that admission. Missing or
 noncallable features fail with `PACKAGE_CACHE_POSIX_OWNER_FEATURES`; they do
 not skip owner verification. Keep the measured UID/GID checks and private
 0700 roots, 0600 markers, and explicitly allowed 0700/0750 client-home modes.
@@ -2486,6 +2487,25 @@ receipts under their original tuple; matching labels or trees do not relabel the
 The staged consumer fixture retains its worker's exact env-exec lease receipt
 and actual typed retirement/cleanup snapshots in private evidence. Missing
 snapshots stay null; testcase success does not prove lease release or reaping.
+
+Pooled worker retirement retains its existing stdout/stderr output threads and
+joins them together with the protocol reader using the caller's one deadline.
+Typed `WorkerReaderResult` values record each join, final alive state, and fixed
+error class. A live or unobserved reader or failed join keeps capacity pending.
+A successfully joined, inactive reader releases capacity even if its output
+callback failed; the error remains visible for acceptance and diagnosis.
+Retry observes the same retained thread objects; it
+does not replace readers or reset the deadline. These worker facts are separate
+from the Runtime server's existing `Process._stop_and_reap_until` readers and
+from provider startup readers. Thread closure does not prove lease release or
+complete descendant reaping; native admission must still check those facts.
+
+Source CLI gates must also set a task-owned writable `ROBOTS_HOME`, alongside
+their isolated `ACTIONS_HOME`, RCC home, temporary directory, and package caches.
+The CLI creates the Robot home before dispatching commands, so the default
+`~/.robots` can fail even project creation and package metadata tests in a
+read-only host home. Keep the Robot and Action homes separate; overriding the
+RCC developer home alone does not isolate either Runtime-owned home.
 
 An isolated, sequential RCC qualification may share only its once-owned `pkgs`
 download cache between publication and staged execution for the same source and

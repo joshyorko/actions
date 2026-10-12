@@ -42,11 +42,20 @@ _Key = namedtuple("_Key", "action_package_id, env, cwd")
 
 
 @dataclass(frozen=True)
+class WorkerReaderResult:
+    role: str
+    joined: bool
+    alive: bool | None
+    error: str | None = None
+
+
+@dataclass(frozen=True)
 class WorkerRetirementResult:
     state: Literal["execution_stopped", "crash_unverified", "pending"]
     descendant_snapshot_complete: bool
     reason: str = ""
     cleanup: object | None = None
+    readers: tuple[WorkerReaderResult, ...] | None = None
 
     @property
     def capacity_releasable(self) -> bool:
@@ -158,6 +167,8 @@ class ProcessHandle:
         self._retirement_result: WorkerRetirementResult | None = None
         self._retirement_descendants: list[object] | None = None
         self._retirement_snapshot_failed = False
+        self._output_readers: list[tuple[str, threading.Thread]] = []
+        self._output_reader_errors: dict[str, str] = {}
 
         # If kill was internally called, we'll just check it instead of waiting for
         # the process to exit when is_alive() is called.
@@ -218,18 +229,22 @@ class ProcessHandle:
         )
         self._cwd: str = str(cwd)
 
-        def _process_stream_reader(stderr_or_stdout):
-            while True:
-                line_bytes = stderr_or_stdout.readline()
-                if not line_bytes:
-                    break
-                line_as_str = line_bytes.decode("utf-8", "replace")
-                print(
-                    colored(f"output (pid: {pid}): ", attrs=["dark"])
-                    + f"{line_as_str.strip()}\n",
-                    end="",
-                )
-                self._on_output(line_bytes)
+        def _process_stream_reader(stderr_or_stdout, role):
+            try:
+                while True:
+                    line_bytes = stderr_or_stdout.readline()
+                    if not line_bytes:
+                        break
+                    line_as_str = line_bytes.decode("utf-8", "replace")
+                    print(
+                        colored(f"output (pid: {pid}): ", attrs=["dark"])
+                        + f"{line_as_str.strip()}\n",
+                        end="",
+                    )
+                    self._on_output(line_bytes)
+            except BaseException as error:
+                self._output_reader_errors[role] = type(error).__name__
+                raise
 
         self._read_queue: "Queue[dict]" = Queue()
 
@@ -325,15 +340,17 @@ class ProcessHandle:
                 stdout = self._process.stdout
 
                 t = threading.Thread(
-                    target=_process_stream_reader, args=(stderr,), daemon=True
+                    target=_process_stream_reader, args=(stderr, "stderr"), daemon=True
                 )
                 t.name = f"Stderr reader (pid: {pid})"
+                self._output_readers.append(("stderr", t))
                 t.start()
 
                 t = threading.Thread(
-                    target=_process_stream_reader, args=(stdout,), daemon=True
+                    target=_process_stream_reader, args=(stdout, "stdout"), daemon=True
                 )
                 t.name = f"Stdout reader (pid: {pid})"
+                self._output_readers.append(("stdout", t))
                 t.start()
             except BaseException:
                 cleanup_startup()
@@ -393,8 +410,9 @@ class ProcessHandle:
             pid = self._process.pid
 
             stderr = self._process.stderr
-            t = threading.Thread(target=_process_stream_reader, args=(stderr,))
+            t = threading.Thread(target=_process_stream_reader, args=(stderr, "stderr"))
             t.name = f"Stderr reader (pid: {pid})"
+            self._output_readers.append(("stderr", t))
             t.start()
 
             write_to = self._process.stdin
@@ -568,17 +586,19 @@ class ProcessHandle:
         if snapshot_failed:
             complete = False
         self._shutdown_retirement_socket()
-        remaining = max(0.0, deadline - time.monotonic())
-        self._reader.join(timeout=remaining)
-        if self._reader.is_alive():
+        readers = self._join_readers_until(deadline)
+        if any(item.alive is not False or not item.joined for item in readers):
             complete = False
-            log.warning("Worker reader thread remains alive after retirement deadline.")
+            log.warning(
+                "Worker reader shutdown remains unconfirmed after retirement deadline."
+            )
         if complete:
             self._retirement_complete = True
             result = WorkerRetirementResult(
                 "execution_stopped",
                 descendant_snapshot_complete=cleanup.descendant_snapshot_complete,
                 cleanup=cleanup,
+                readers=readers,
             )
         else:
             log.warning("Worker retirement remains pending: %s", cleanup)
@@ -587,6 +607,7 @@ class ProcessHandle:
                 descendant_snapshot_complete=cleanup.descendant_snapshot_complete,
                 reason="wrapper or descendant cleanup remains unconfirmed",
                 cleanup=cleanup,
+                readers=readers,
             )
         self._retirement_result = result
         return result
@@ -601,20 +622,44 @@ class ProcessHandle:
                 "pending", False, "crashed wrapper wait timed out"
             )
         self._shutdown_retirement_socket()
-        self._reader.join(timeout=max(0.0, deadline - time.monotonic()))
-        if self._reader.is_alive():
+        readers = self._join_readers_until(deadline)
+        if any(item.alive is not False or not item.joined for item in readers):
             return WorkerRetirementResult(
-                "pending", False, "crashed worker reader remains alive"
+                "pending",
+                False,
+                "crashed worker reader remains unconfirmed",
+                readers=readers,
             )
         result = WorkerRetirementResult(
             "crash_unverified",
             descendant_snapshot_complete=False,
             reason="wrapper exited before descendant snapshot; coverage not proven",
+            readers=readers,
         )
         log.error("Worker crashed before retirement snapshot: %s", result.reason)
         self._retirement_complete = True
         self._retirement_result = result
         return result
+
+    def _join_readers_until(self, deadline: float) -> tuple[WorkerReaderResult, ...]:
+        import time
+
+        results = []
+        readers = [*getattr(self, "_output_readers", ()), ("protocol", self._reader)]
+        errors = getattr(self, "_output_reader_errors", {})
+        for role, reader in readers:
+            joined = False
+            alive = None
+            error = None
+            try:
+                reader.join(timeout=max(0.0, deadline - time.monotonic()))
+                joined = True
+                alive = reader.is_alive()
+                error = errors.get(role)
+            except Exception as exception:
+                error = type(exception).__name__
+            results.append(WorkerReaderResult(role, joined, alive, error))
+        return tuple(results)
 
     def _shutdown_retirement_socket(self) -> None:
         sock = getattr(self, "_socket", None)
