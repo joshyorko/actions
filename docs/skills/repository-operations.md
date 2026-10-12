@@ -2691,7 +2691,11 @@ absolute cleanup endpoint even when process-tree birth capture is unconfirmed.
 A successful reader join measures only the reader; it does not grant process
 signal authority, confirm tree cleanup, or prove lease release. Missing or
 changed object bindings keep reader evidence unavailable. Join errors remain
-fixed secondary classes attached to the original startup failure.
+fixed secondary classes attached to the original startup failure. Classify
+`join()` and `is_alive()` exceptions in separate observation scopes. A one-shot
+liveness error remains a liveness error even if a subsequent probe sees the
+thread stopped; that attempt remains incomplete and preserves the primary
+startup exception.
 
 Provider startup failure tests retain the original `Popen` and the primary
 exception's typed cleanup result. Assert the observed cleanup facts before

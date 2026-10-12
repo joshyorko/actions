@@ -1475,9 +1475,13 @@ def cleanup_provider_until(
             error_class = reader.error
             try:
                 reader.thread.join(timeout=max(0.0, deadline - time.monotonic()))
-                joined = not reader.thread.is_alive()
             except Exception as error:
                 error_class = error_class or f"PROVIDER_JOIN_{type(error).__name__}"
+            else:
+                try:
+                    joined = not reader.thread.is_alive()
+                except Exception as error:
+                    error_class = error_class or f"PROVIDER_ALIVE_{type(error).__name__}"
             try:
                 alive = reader.thread.is_alive()
             except Exception as error:
