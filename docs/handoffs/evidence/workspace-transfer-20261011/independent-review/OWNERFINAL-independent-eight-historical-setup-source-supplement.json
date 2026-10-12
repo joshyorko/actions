@@ -1,0 +1,16 @@
+{
+  "bytes": 18928,
+  "capture_utc": "2026-10-12T00:44:29.268953+00:00",
+  "decision": "GO_EIGHT_EXACT_HISTORICAL_SETUP_TEXT_COPIES_PRIVACY_ONLY",
+  "exact_source_bodies": true,
+  "files": 8,
+  "manifest": {
+    "bytes": 2554,
+    "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/historical-setup-source/manifest.json",
+    "sha256": "8adc21ffd8dbe625d8df89040329d116e376448afdc74594ed3a21a848bab9dc"
+  },
+  "privacy_flags": [],
+  "schema": 1,
+  "scope": "Historical source text, not replacement infrastructure, current activation authority or runnable permission. No execution/import/install/source mutation. Bounded current-secret/high-confidence token/privatekey/signedURL scan.",
+  "upstream_disposition": "none"
+}

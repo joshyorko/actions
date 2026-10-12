@@ -17,8 +17,8 @@
       "qualification": "640 draft HOLD; OAuth work not started"
     },
     "windows_311": {
-      "state": "PRESERVATION_REVIEW_ONLY",
-      "next": "remote verification then STOP"
+      "state": "IMPLEMENTATION_STOPPED_FINAL_PRESERVATION_READBACK_ONLY",
+      "next": "Confirm final verification commit remotely, then STOP"
     },
     "merge_review": {
       "state": "STOPPED",

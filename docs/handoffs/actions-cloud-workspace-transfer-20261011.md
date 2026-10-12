@@ -9,6 +9,7 @@ This is the canonical recovery entry point for Jarvis. The operator retired Clou
 - Resolve the complete handoff commit with `git ls-remote origin refs/heads/handoff/actions-swarm-mk3-wave8-20261010`; the final operator receipt identifies the independently verified immutable commit. Do not infer an exact commit from the date in this filename.
 - Integration: `integration/community-release-20261008`, commit `e2c81adce7858d5a952991ba9a8b7f72e902038a`, tree `afe2679cc93bf27fa5021c7698ee7ad3ee21a1b9`.
 - Community: `a70993fafc99a9f94041485542d5a720797ca394`. Local branch `work` is only an alias for this already durable commit.
+- Complete preservation payload commit: `d87005f6cd62b2c45a153280ff9ede6f945f4023`, tree `9da32502a92211ade2e6dd898b47529656a94eba`. This final handoff revision adds remote verification receipts to that immutable payload.
 - Handoff parent before emergency preservation: `843cb16dc071fc764f11f1e0b3b07432dcd04a7d`.
 - Full machine manifests and source copies: [transfer evidence](evidence/workspace-transfer-20261011/). Start with `branch-heads-initial.json`, `worktree-inventory-before-checkpoint.json`, and each source-copy `manifest.json`. Later verification files supersede initial snapshots.
 
@@ -135,3 +136,9 @@ After genuine gates pass: validate integrated source, build and independently in
 All five old workers were instructed to stop new implementation and produce bounded preservation receipts: `acceptance_review` (writerB/640 draft/OAuth audit), `stack_299` (writerA/native/resource fixture), `windows_311` (independent source/privacy review), `merge_review` (branch/PR inventory), `rcc_acceptance` (OAuth/artifact audit). They are session objects, not successor infrastructure. Final worker receipts record their freeze state; the successor must not depend on their memory.
 
 No campaign feature is declared abandoned. No complete product or release acceptance is claimed by this handoff.
+
+## Verified preservation checkpoint
+
+Independent GitHub readback confirmed payload `d87005f6cd62b2c45a153280ff9ede6f945f4023`, its parent and tree; the complete6,632-leaf remote tree matched local object IDs and modes, including all2,862 manifest export blobs. All17 local branch identities were checked against remote refs (the `work` alias maps to `community`). The final child commit adds these remote/privacy receipts and historical setup-source copies; its exact SHA is provided in the operator final receipt and can be resolved from this branch. All product worktrees were clean. The independent receipt is under `evidence/workspace-transfer-20261011/independent-review/`.
+
+The eight `historical-setup-source` files preserve the original Cloud bootstrap tooling for reference only. Use repository setup in the successor; these files do not authorize infrastructure provisioning or supply a reusable installed environment. Raw API verification payloads remain local; the safe verification receipts retain their observed identities and limits.

@@ -1,0 +1,11 @@
+{
+  "method": "Fresh GitHub git-commit and contents API plus git ls-remote",
+  "payload_commit": "d87005f6cd62b2c45a153280ff9ede6f945f4023",
+  "tree": "9da32502a92211ade2e6dd898b47529656a94eba",
+  "canonical_document_blob": "60e953ac45b817764df402fc86092f2c259ed6eb",
+  "canonical_document_sha256": "4a2649c38d5e33c1ff7758b9cac97b5f487fb7679b38ff459f23354b4fed244f",
+  "canonical_document_bytes": 23818,
+  "exact_body_verified": true,
+  "remote_handoff_ref": "d87005f6cd62b2c45a153280ff9ede6f945f4023",
+  "integration": "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+}

@@ -1,0 +1,79 @@
+{
+  "canonical_disposition": "exact-byte and historical-grant/portable-path lessons retained in transfer document; no duplicate prose",
+  "capture_utc": "2026-10-12T00:42:14.546034+00:00",
+  "copies": {
+    "early-receipts": {
+      "bytes": 554541,
+      "exact_original_body_copies": 44,
+      "files": 44,
+      "mismatches": 0,
+      "source_derived_fixture_exports": 0
+    },
+    "root-source-snapshot": {
+      "bytes": 38567594,
+      "exact_original_body_copies": 2688,
+      "files": 2688,
+      "mismatches": 0,
+      "source_derived_fixture_exports": 0
+    },
+    "writer-a": {
+      "bytes": 1823807,
+      "exact_original_body_copies": 104,
+      "files": 106,
+      "mismatches": 0,
+      "source_derived_fixture_exports": 2
+    },
+    "writer-b": {
+      "bytes": 300299,
+      "exact_original_body_copies": 24,
+      "files": 24,
+      "mismatches": 0,
+      "source_derived_fixture_exports": 0
+    }
+  },
+  "decision": "GO_BOUNDED_EMERGENCY_SAFE_TEXT_TRANSFER_PRIVACY_AND_COPY_PRESERVATION_ONLY",
+  "document": {
+    "bytes": 23818,
+    "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/actions-cloud-workspace-transfer-20261011.md",
+    "sha256": "4a2649c38d5e33c1ff7758b9cac97b5f487fb7679b38ff459f23354b4fed244f"
+  },
+  "fixture_exports": "113-byte YAML and560-byte Action explicitly source-derived, not recovered historical fixture outputs; their announced hashes match. Action matches source AST literal; YAML transformation not independently executed.",
+  "manifests": [
+    {
+      "bytes": 1227589,
+      "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/manifest.json",
+      "sha256": "12fe9b65df9a3d02265b1f454d5704b9f75aa71b63ea91e3fd1b81ef5d818b13"
+    },
+    {
+      "bytes": 16352,
+      "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/early-receipts/manifest.json",
+      "sha256": "04a7661f801da4b0a4b0486a71bb4dd7b219902534eaeb5a76483da7b4a0d7ef"
+    },
+    {
+      "bytes": 60476,
+      "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/writer-a/exact-original-writer-a-safe-source-and-local-only-manifest.json",
+      "sha256": "3d115115818fbdea35c7bbdd9d2fa0834ceed55d2fa3e91fc3e8a9fbc3ece882"
+    },
+    {
+      "bytes": 17665,
+      "path": "/workspace/engineering/campaign-checkpoint/docs/handoffs/evidence/workspace-transfer-20261011/writer-b/exact-safe-writer-b-original-source-copy-manifest.json",
+      "sha256": "32799866b58a24474a2312ef2bdc275e0668fb44a3061a48190c19c4b7b8c348"
+    }
+  ],
+  "native_and_publication": "HOLD; no qualification promotion",
+  "next": "remote pushed-commit readback",
+  "privacy": {
+    "current_environment_secret_literal_matches": 0,
+    "high_confidence_credential_private_key_signed_URL_flags": 0,
+    "limitation": "bounded scan does not prove every undisclosed credential format absent",
+    "scope": "root2688+early44 text bodies; writer130; RCC5/merge6 notes; transfer document",
+    "synthetic_fixture_URL_literals": "classified test data; no actual credential identified"
+  },
+  "private_RCC_01f_and_frozen_v6": "UNRECOVERED",
+  "reviewer_construction": "two read-only inspector assertions stopped before receipt creation; first path resolution, then YAML literal-vs-derived classification; no source or gate failure inferred",
+  "reviewer_operations": "no product/source/Git/test/import/storage/native operation",
+  "schema": 1,
+  "source_and_config_exports": "historical absolute paths/consumed grants are not portable execution authorizations",
+  "three_Toolkit_preservation": "NOT_RUN; emergency stop supersedes unfinished review",
+  "upstream_disposition": "none"
+}
