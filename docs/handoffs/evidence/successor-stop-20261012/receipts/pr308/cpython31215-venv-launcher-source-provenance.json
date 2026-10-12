@@ -1,0 +1,12 @@
+{
+  "repository": "python/cpython",
+  "ref": "v3.12.15",
+  "path": "PC/launcher.c",
+  "git_blob": "dc265533740b6763124480162e791e6a9fd92e27",
+  "url": "https://github.com/python/cpython/blob/v3.12.15/PC/launcher.c",
+  "bytes": 67152,
+  "sha256": "5f22f9a9be91601e323d8ffc5e74279af4676acbc01daeeba0b92457f67590a1",
+  "local_only_source_copy": true,
+  "mechanism": "VENV_REDIRECT selects venv variant; run_child invokes CreateProcessW then WaitForSingleObjectEx on the created child handle",
+  "limits": "This public source establishes supported wrapper/child behavior, not exact source-byte attribution for the CI executable"
+}

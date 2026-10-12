@@ -1,0 +1,167 @@
+diff --git a/action_server/scripts/verify_dakota_rcc_acceptance.py b/action_server/scripts/verify_dakota_rcc_acceptance.py
+index 47fbf549..9099da77 100644
+--- a/action_server/scripts/verify_dakota_rcc_acceptance.py
++++ b/action_server/scripts/verify_dakota_rcc_acceptance.py
+@@ -1475,9 +1475,13 @@ def cleanup_provider_until(
+             error_class = reader.error
+             try:
+                 reader.thread.join(timeout=max(0.0, deadline - time.monotonic()))
+-                joined = not reader.thread.is_alive()
+             except Exception as error:
+                 error_class = error_class or f"PROVIDER_JOIN_{type(error).__name__}"
++            else:
++                try:
++                    joined = not reader.thread.is_alive()
++                except Exception as error:
++                    error_class = error_class or f"PROVIDER_ALIVE_{type(error).__name__}"
+             try:
+                 alive = reader.thread.is_alive()
+             except Exception as error:
+diff --git a/action_server/tests/action_server_tests/test_provider_startup_cleanup.py b/action_server/tests/action_server_tests/test_provider_startup_cleanup.py
+index e70a85b2..3036775a 100644
+--- a/action_server/tests/action_server_tests/test_provider_startup_cleanup.py
++++ b/action_server/tests/action_server_tests/test_provider_startup_cleanup.py
+@@ -824,3 +824,126 @@ def test_unknown_tree_never_joins_a_reader_with_changed_owner(monkeypatch, poiso
+     assert not joins
+     assert result.reader.error == "PROVIDER_READER_UNAVAILABLE"
+     assert not result.ownership_confirmed and not result.complete
++
++
++@pytest.mark.parametrize("tree_owned", [False, True])
++def test_one_shot_reader_liveness_failure_is_not_a_join_failure(
++    monkeypatch, tree_owned
++):
++    from actions.server._common import process as process_utils
++
++    harness = _harness()
++    original = SimpleNamespace(pid=123, poll=lambda: 0)
++    owner = harness._ProviderOwnership(original)
++    original._rcc_provider_owner = owner
++    if tree_owned:
++        owner.create_time = 10.0
++        owner.capture_verified = owner.snapshot_complete = True
++    harness._readline_with_timeout(io.StringIO("ready\n"), 0.2, owner=owner)
++    reader = owner.reader.thread
++    reader.join(timeout=1)
++    assert not reader.is_alive()
++    actual_join = reader.join
++    actual_alive = reader.is_alive
++    join_budgets = []
++    alive_calls = []
++    tree_calls = []
++
++    def join(timeout):
++        join_budgets.append(timeout)
++        actual_join(timeout=timeout)
++
++    def alive():
++        # Logging may call Thread.__repr__, which also probes is_alive().
++        # Inject/count only the two observations made by the cleanup helper.
++        if sys._getframe(1).f_code is not harness.cleanup_provider_until.__code__:
++            return actual_alive()
++        alive_calls.append(True)
++        if len(alive_calls) == 1:
++            raise OSError("private liveness details")
++        return actual_alive()
++
++    def clean_tree(*args):
++        tree_calls.append(args)
++        return process_utils.ProcessTreeCleanupResult(True, (), (), ())
++
++    monkeypatch.setattr(reader, "join", join)
++    monkeypatch.setattr(reader, "is_alive", alive)
++    monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 100.03))
++    monkeypatch.setattr(process_utils, "force_kill_process_tree_until", clean_tree)
++    result = harness.cleanup_provider_until(original, 100.2)
++    assert join_budgets == [pytest.approx(0.17)]
++    assert len(alive_calls) == 2
++    assert len(tree_calls) == int(tree_owned)
++    assert result.ownership_confirmed is tree_owned
++    assert result.reader.joined is False and result.reader.alive is False
++    assert result.reader.error == "PROVIDER_ALIVE_OSError"
++    assert not result.complete
++    assert owner.reader.thread is reader
++    assert "private liveness details" not in json.dumps(result.to_dict())
++
++
++def test_one_shot_liveness_failure_preserves_primary_startup_exception(
++    tmp_path, monkeypatch
++):
++    harness = _harness()
++    original = SimpleNamespace(
++        pid=123, stdout=io.StringIO("invalid\n"), poll=lambda: None
++    )
++    monkeypatch.setattr(
++        harness,
++        "subprocess",
++        SimpleNamespace(
++            **dict(vars(subprocess), Popen=lambda *args, **kwargs: original)
++        ),
++    )
++
++    def capture(process):
++        owner = harness._ProviderOwnership(process)
++        process._rcc_provider_owner = owner
++        return owner
++
++    actual_readline = harness._readline_with_timeout
++    actual_cleanup = harness.cleanup_provider_until
++    alive_calls = []
++
++    def poison_alive_after_read(*args, owner, **kwargs):
++        line = actual_readline(*args, owner=owner, **kwargs)
++        reader = owner.reader.thread
++        reader.join(timeout=1)
++        assert not reader.is_alive()
++        actual_alive = reader.is_alive
++
++        def alive():
++            if sys._getframe(1).f_code is not actual_cleanup.__code__:
++                return actual_alive()
++            alive_calls.append(True)
++            if len(alive_calls) == 1:
++                raise OSError("private liveness details")
++            return actual_alive()
++
++        monkeypatch.setattr(reader, "is_alive", alive)
++        return line
++
++    primary = []
++
++    def cleanup(*args):
++        primary.append(sys.exception())
++        return actual_cleanup(*args)
++
++    monkeypatch.setattr(harness, "_capture_provider_ownership", capture)
++    monkeypatch.setattr(harness, "_readline_with_timeout", poison_alive_after_read)
++    monkeypatch.setattr(harness, "cleanup_provider_until", cleanup)
++    with pytest.raises(RuntimeError, match="startup JSON") as caught:
++        harness.start_provider(
++            "/unused/rcc", tmp_path, {}, deadline=harness.Deadline.after(1)
++        )
++    assert primary == [caught.value]
++    assert primary[0] is caught.value
++    assert isinstance(caught.value.__cause__, json.JSONDecodeError)
++    assert len(alive_calls) == 2
++    result = caught.value.provider_cleanup_result
++    assert result.reader.error == "PROVIDER_ALIVE_OSError"
++    assert result.reader.joined is False and result.reader.alive is False
++    assert not result.complete
++    assert "private liveness details" not in json.dumps(result.to_dict())
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index 85e07f02..c3c8825a 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2691,7 +2691,11 @@ absolute cleanup endpoint even when process-tree birth capture is unconfirmed.
+ A successful reader join measures only the reader; it does not grant process
+ signal authority, confirm tree cleanup, or prove lease release. Missing or
+ changed object bindings keep reader evidence unavailable. Join errors remain
+-fixed secondary classes attached to the original startup failure.
++fixed secondary classes attached to the original startup failure. Classify
++`join()` and `is_alive()` exceptions in separate observation scopes. A one-shot
++liveness error remains a liveness error even if a subsequent probe sees the
++thread stopped; that attempt remains incomplete and preserves the primary
++startup exception.
+ 
+ Provider startup failure tests retain the original `Popen` and the primary
+ exception's typed cleanup result. Assert the observed cleanup facts before

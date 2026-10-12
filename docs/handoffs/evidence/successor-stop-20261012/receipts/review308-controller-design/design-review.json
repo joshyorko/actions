@@ -1,0 +1,93 @@
+{
+  "verdict": "GO_MINIMAL_SOURCE_SCHEMA_TRANSPORT_INCREMENT; HOLD_FULL_CONTROLLER_DESIGN",
+  "reviewed_source": {
+    "commit": "22f74384442647db313d630b27ec0a8da11f6f67",
+    "tree": "bc57b450d4242c02a9fc4b6ed68a108215f86dcd",
+    "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "sha256": "4cf5157364a151ace87735148873bc6f33aa4a27e3ec5f3defc639053b903f39"
+  },
+  "reviewed_plan": {
+    "path": "/workspace/successor-evidence/pr308/controller-census-c5643f82-v2-DESIGN-REVIEW-REQUIRED.md",
+    "sha256": "a1e36d756b3eb74cb034e5ecd59217d32c6aa3b02a757eba1b570d648e1c2309",
+    "stale_baseline": "c5643f828ba0b299c0c2a99a9755d90b39b04b3c",
+    "must_rebaseline_to": "22f74384442647db313d630b27ec0a8da11f6f67"
+  },
+  "scope": "read-only design/source review; no source edits, process launches, native/lease queries, builds or infrastructure",
+  "verified_existing_boundaries": {
+    "run_owned_process": {
+      "line": 325,
+      "sha256": "2b8bc3412ac2fd0d998d87e1e415abfc1b64606dbf164364174f5422aa59e9f8"
+    },
+    "_supervisor_children": {
+      "line": 426,
+      "sha256": "c08f21e393df012092e6494404e57cc9279291507b1819a93cc3ba97c321f122"
+    },
+    "_reap_adopted_children": {
+      "line": 446,
+      "sha256": "a75de0814af99b0d3e12b9acaeeed5fd9d18bc3546f1fab4c09a4a6cebbb9557"
+    },
+    "_proc_descendants": {
+      "line": 463,
+      "sha256": "fafcaa2d44eb6a3b0ea29216dd8fed91f1f028e5ff6bb9a2ad31fd89cc306df5"
+    },
+    "_fallback_reap_after_error": {
+      "line": 482,
+      "sha256": "8546db244a6642a2e869dc230fbc814aae820ce9c4319dac1ae031f2c2d47bf2"
+    },
+    "_stop_supervised_processes": {
+      "line": 514,
+      "sha256": "06da93a7c3a9ee0b3bcd05a235cee717e4b4cea67ff77b9f0562668550a335e8"
+    },
+    "_supervisor_main": {
+      "line": 592,
+      "sha256": "38265a8d54e879ad5462d5a9bac71e6a8e723505cd283122bf5dfb5db43e6abc"
+    },
+    "write_evidence": {
+      "line": 1303,
+      "sha256": "c61e8f4ea18ac726a550759c22118de68ddc8044fadd78a2037fbbed599fff6c"
+    },
+    "record_supervisor_deadline_failure": {
+      "line": 1374,
+      "sha256": "080b094293f171533080b911acde504d11dd95130a4142662221775f0ddc3405"
+    }
+  },
+  "existing_design_risks": [
+    "run_owned_process parent timeout enters legacy termination and later receipt persistence; it is not an independent all-operation hard watchdog",
+    "_fallback_reap_after_error uses numeric PID signals, drops enumeration errors to an empty list, and resets grace/reap deadlines",
+    "_supervisor_main materializes both full output files as decoded strings and then JSON, followed by another parent copy",
+    "_reap_adopted_children returns only count; observed PID/status events and terminal ECHILD must become separate facts without stealing direct Popen wait status"
+  ],
+  "approved_minimal_source_increment": {
+    "entry": "explicit opt-in source-control schema/transport seam on accepted22f; legacy default path and native flags unchanged",
+    "identity_type": "OwnedIdentity(pid, finite_create_time); keys use the entire pair, with verified root/capture provenance",
+    "census_row_type": "OwnedCensusRow(identity or unavailable observation, state live/zombie/absent/reused/unknown, observed_at, fixed error classes); unknown is not an owned identity",
+    "reap_event_type": "OwnedReapEvent(pid, raw_wait_status, observed_at, matched_identity or unavailable); count alone is not a reap ledger",
+    "cleanup_evidence_type": "OwnedCleanupEvidence(schema_version, scope, root identity, enumeration success/errors, full sorted ledger, reap events, terminal_echild True/False/unavailable, reader/sampler observations unavailable unless measured, deadline facts unavailable unless supplied)",
+    "completion_rule": "An empty ledger alone never establishes success. Completion requires explicit successful enumeration and root/reap evidence, with no live/zombie/unknown/reused rows or observation errors; missing/unavailable observations cannot be normalized to clean facts. Absence alone is not an observed reap event.",
+    "outcome_attachment": "Same cleanup_evidence field for CompletedProcess, TimeoutExpired and ProcessTreeCleanupError; preserve original object identity, returncode, existing stdout/stderr/output and primary exception; record fixed secondary errors separately",
+    "allowed_tests": "pure/injected more-than64 rows, same PID/different births, empty-vs-failed enumeration, no-signal unknown/reuse seams, result/timeout/error serialization and attachment identity, controlled deadline budgets; no RCC/provider/lease commands",
+    "disallowed_wiring": "native two-node execution, new signals/fallback changes, disk output creation, lease observation or watchdog implementation until the corresponding design is accepted"
+  },
+  "full_design_holds": [
+    "Name a genuinely independent guardian or admitted external endpoint covering controller plus subreaper, census, readers/sampler, raw-output hashing, fsync and final receipt persistence; no Python-thread watchdog inside the blocking process",
+    "Before any primary640 claim specify and qualify independent630TERM/640KILL or an explicitly admitted alternative; values remain proposals, not native authority",
+    "Define immutable absolute endpoint ordering and one origin; no native fallback may call legacy grace-reset/rawPID-signalling behavior",
+    "Choose native-only disk-output outcome contract with no-follow owned namespace and byte/hash verification; retain legacy in-memory output defaults, and do not silently replace stdout/stderr strings with references",
+    "Define failure publication including missing/partial output, malformed transport, census failure and blocked persistence; watchdog intervention can only FAIL with unavailable facts, never cleanup success",
+    "Pin exact accepted22f source/profile and exact2node/n0 dispatch; reject unset/unaccepted budgets, self-cgroup HOLD or missing resource admission before flags/process creation"
+  ],
+  "architecture_comparison": {
+    "same_process_deadline_only": "rejected as hard-bound design because blocking census/filesystem operations do not consult Python deadline",
+    "existing_subreaper_plus_independent_outer_endpoint": "preferred full shape, pending owner/identity/escalation/output contract and budget admission; reuse one supervisor for two serial nodes"
+  },
+  "documentation_proposal": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_text": "An absolute Python deadline limits only operations that consume its remaining budget. Final census, output hashing, fsync, and receipt persistence require an independently enforced outer endpoint before a whole-operation hard bound is claimed. Watchdog intervention is failure with explicitly unavailable cleanup facts; it is not evidence that owned processes were reaped.",
+    "learning": "hard deadline ownership must remain outside the operations it bounds",
+    "evidence": "accepted22f supervisor/fallback/output/persistence source and reviewed plan",
+    "stale_guidance": "c564 baseline and implied hard endpoint without concrete independent enforcer",
+    "uncertainty": "numeric native budgets, watchdog/transport wiring, resource/self-cgroup and passive lease observation remain unaccepted"
+  },
+  "native_execution": "HOLD; budgets unset/unaccepted and self-cgroup binding unqualified",
+  "upstream_disposition": "none"
+}

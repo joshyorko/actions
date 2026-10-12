@@ -1,0 +1,20 @@
+{
+  "schema": "actions-pr313-ordinary-refresh/v1",
+  "time": "2026-10-12T02:34:42.132809+00:00",
+  "head": "216ad55b5bcafaa54ba61fcc87982a57573adce7",
+  "tree": "4c124ca711b6acaea657a2b6b713fb906f176ff7",
+  "ordered_parents": [
+    "bd4f3f8397dd4563fe767484bf7de15ab99a0123",
+    "48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+  ],
+  "only_delta_from_target": [
+    "action_server/src/actions/server/_common/process.py",
+    "action_server/tests/action_server_tests/common_tests/test_captured_process_tree_deadline.py",
+    "action_server/tests/action_server_tests/common_tests/test_system_mutex.py",
+    "action_server/tests/action_server_tests/robo_utils/test_system_mutex.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "all4non_documentation_delta_blobs_exact_previous_313_source": true,
+  "conflict": "canonical docs append only; both parent lessons retained",
+  "qualification": "Overall313 shared deadline source exists only in featurebranch relativetarget48; complete tree/readers/lease gate unqualified. Newheadfocused/CI pending; originalbd4/e2 CI19SUCCESS preserved separately."
+}

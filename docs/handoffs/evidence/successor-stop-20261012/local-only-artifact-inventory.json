@@ -1,0 +1,4306 @@
+{
+  "observed_at": "2026-10-12T08:18:18.956140+00:00",
+  "files": [
+    {
+      "path": "pr306-bootstrap.log",
+      "bytes": 27458,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr313-refreshed48-mutex.log",
+      "bytes": 166,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-focused-final.log",
+      "bytes": 2622,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-red.log",
+      "bytes": 8426,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-focused-corrected.log",
+      "bytes": 2078,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr313-toolkit-test.log",
+      "bytes": 14489,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-runtime-green.log",
+      "bytes": 190,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr306-toolkit-vars.log",
+      "bytes": 1691,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr313-toolkit-vars.log",
+      "bytes": 1691,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-source-only-fix.log",
+      "bytes": 1234,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green.log",
+      "bytes": 295,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final.log",
+      "bytes": 261,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-build-green2.log",
+      "bytes": 176,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "toolkit-doctor.log",
+      "bytes": 15029,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr313-mutex-reviewed.log",
+      "bytes": 1369,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "toolkit-test-pr307.log",
+      "bytes": 14486,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "toolkit-bootstrap-pr307.log",
+      "bytes": 33087,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr306-toolkit-test.log",
+      "bytes": 14488,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-runtime-red.log",
+      "bytes": 7925,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2.log",
+      "bytes": 180,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-package-gateway-build.log",
+      "bytes": 164,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-focused-reviewed.log",
+      "bytes": 180,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr306-database-exact.log",
+      "bytes": 178,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr306-refreshed48-sqlite.log",
+      "bytes": 166,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr313-toolkit-bootstrap.log",
+      "bytes": 27459,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-package-gateway-final.log",
+      "bytes": 164,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable.log",
+      "bytes": 3563,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-toolkit-primary-failure.log",
+      "bytes": 0,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr313-toolkit-doctor.log",
+      "bytes": 12770,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-build-frontend.log",
+      "bytes": 3829,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr313-mutex-final.log",
+      "bytes": 175,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr313-mutex-static.log",
+      "bytes": 2650,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-focused-final3.log",
+      "bytes": 178,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-no-generated-final.log",
+      "bytes": 182,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr313-refreshed48-cleanup-mutex.log",
+      "bytes": 166,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-static.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-owned-issuer.log",
+      "bytes": 175,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr306-doctor.log",
+      "bytes": 12769,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-community-green.log",
+      "bytes": 178,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr313-mutex-focus.log",
+      "bytes": 175,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflow-regeneration.log",
+      "bytes": 771,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-windows-launcher/red.log",
+      "bytes": 5774,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-windows-launcher/green.log",
+      "bytes": 1361,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects2/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects2/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects2/actions_runtime-1.0.0-cp313.cp313-cp313-win_amd64.whl",
+      "bytes": 53,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects2/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects2/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects2/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects2/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects5/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects5/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects5/actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects5/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects5/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects5/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_binary_release_publishes_0/windows64/action-server.exe",
+      "bytes": 27,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_rejects_non_runtime_distr0/actions_runtime-1.0.3-cp312-cp312-manylinux_2_17_x86_64.whl",
+      "bytes": 234,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts1/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts1/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts1/actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts1/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts1/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts1/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts1/actions_runtime-1.0.0-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects4/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects4/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects4/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "bytes": 141,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects4/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects4/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects4/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects4/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_rejects_ambiguous_cp312_w0/actions_runtime-1.0.3-cp312-cp312-manylinux_2_17_x86_64.whl",
+      "bytes": 237,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_rejects_ambiguous_cp312_w0/actions_runtime-1.0.3-cp312-abi3-manylinux_2_17_x86_64.whl",
+      "bytes": 237,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects6/Windows-wheels/duplicate.whl",
+      "bytes": 3,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects6/Linux-wheels/duplicate.whl",
+      "bytes": 3,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects6/Linux-wheels/artifact-2.whl",
+      "bytes": 1,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects6/Linux-wheels/artifact-0.whl",
+      "bytes": 1,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects6/Linux-wheels/artifact-3.whl",
+      "bytes": 1,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects6/Linux-wheels/artifact-1.whl",
+      "bytes": 1,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects6/Linux-wheels/artifact-4.whl",
+      "bytes": 1,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts0/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts0/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts0/actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts0/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts0/actions_runtime-1.0.0-cp312-abi3-manylinux_2_28_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts0/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_accepts0/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_http_helper_artifact_inve0/actions-http-helper/dist/actions_http_helper-1.0.1-py3-none-any.whl",
+      "bytes": 20,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_http_helper_artifact_inve0/actions-http-helper/dist/actions_http_helper-1.0.1.tar.gz",
+      "bytes": 11,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_http_helper_inventory_rej0/actions-http-helper/dist/unexpected.bin",
+      "bytes": 10,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_http_helper_inventory_rej0/actions-http-helper/dist/actions_http_helper-1.0.1-py3-none-any.whl",
+      "bytes": 5,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_http_helper_inventory_rej0/actions-http-helper/dist/actions_http_helper-1.0.1.tar.gz",
+      "bytes": 5,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects3/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects3/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects3/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects3/actions_runtime-1.0.0-cp313-cp313.cp313-win_amd64.whl",
+      "bytes": 53,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects3/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects3/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects3/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_rejects_wrong_runtime_ver0/actions_runtime-1.0.2-cp312-cp312-manylinux_2_17_x86_64.whl",
+      "bytes": 237,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects1/actions_runtime-1.0.0-1-cp312-cp312-win_amd64.whl",
+      "bytes": 49,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects1/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects1/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects1/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects1/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects1/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects1/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_selects_one_cp312_runtime0/actions_runtime-1.0.3-cp312-cp312-manylinux_2_17_x86_64.whl",
+      "bytes": 237,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_selects_one_cp312_runtime0/actions_runtime-1.0.3-cp313-cp313-manylinux_2_17_x86_64.whl",
+      "bytes": 237,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_installer_rejects_foreign0/foreign.whl",
+      "bytes": 199,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_installer_requires_helper0/candidate.whl",
+      "bytes": 206,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects0/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects0/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects0/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects0/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects0/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects0/actions_runtime-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+      "bytes": 59,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_rejects0/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_verifie0/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_verifie0/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_verifie0/actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_verifie0/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_verifie0/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_verifie0/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_runtime_publisher_verifie0/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_installer_selects_only_on0/duplicate.whl",
+      "bytes": 206,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_installer_selects_only_on0/actions_core-1.0.2-py3-none-any.whl",
+      "bytes": 206,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_recovery_normalizes_only_0/binaries/windows/action-server.exe",
+      "bytes": 7,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "devutils-full-final/test_recovery_normalizes_only_0/release-assets/actions-runtime-1.0.3-windows64.exe",
+      "bytes": 7,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14441434,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/installed-idle-startup.log",
+      "bytes": 1388,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/actions_runtime-1.0.3-cp313-cp313-win_amd64.whl",
+      "bytes": 11891698,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/installed-pip-check.log",
+      "bytes": 30,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/download-connector-verified.zip",
+      "bytes": 80773117,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14441434,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/download-once.zip",
+      "bytes": 0,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/installed-consumer-install.log",
+      "bytes": 4060,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 13537099,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/installed-inventory.log",
+      "bytes": 346,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+      "bytes": 11891698,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/actions_runtime-1.0.3.tar.gz",
+      "bytes": 1281933,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 13537098,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/installed-real-template.log",
+      "bytes": 252,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/installed-oauth.log",
+      "bytes": 98,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/installed-minimum-core-consumer/startup-once2/stdout.log",
+      "bytes": 0,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/installed-minimum-core-consumer/startup-once2/stderr.log",
+      "bytes": 1264,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/installed-minimum-core-consumer/startup-once2/datadir/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-packaged/installed-minimum-core-consumer/startup-once2/datadir/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-launcher-static-final.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-helper-ruff.log",
+      "bytes": 0,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/real-callback-red.log",
+      "bytes": 13786,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/readers-red.log",
+      "bytes": 4695,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-wait-model-static-final.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-alive-classification-green.log",
+      "bytes": 5022,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/callback-api-red.log",
+      "bytes": 3038,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-startup-red.log",
+      "bytes": 11639,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-poison-helper-ruff.log",
+      "bytes": 0,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-startup-mypy-initial.log",
+      "bytes": 847,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/decoded-eeb-windows114674512952.log",
+      "bytes": 724363,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-schema-red.log",
+      "bytes": 17491,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/mac-provider-diagnostic.log",
+      "bytes": 253,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-focused-final.log",
+      "bytes": 1401,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/reader-error-red.log",
+      "bytes": 2367,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/callback-typed-windows-mypy.log",
+      "bytes": 1484,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/callback-typed-focused.log",
+      "bytes": 1243,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/readers-final-source-full.log",
+      "bytes": 383468,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/async-admission-red.log",
+      "bytes": 2167,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-identity-merged-helper-mypy.log",
+      "bytes": 846,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-identity-merged-focused.log",
+      "bytes": 1333,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-launcher-green.log",
+      "bytes": 929,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-configured-static.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/readers-green-final.log",
+      "bytes": 1240,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/readers-static.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-identity-green.log",
+      "bytes": 254,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/native-worker-admission-windows-mypy.log",
+      "bytes": 1714,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/decoded-cancelled-windows114656105418.log",
+      "bytes": 681511,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/callback-final-windows-mypy.log",
+      "bytes": 2306,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/async-admission-affected-final.log",
+      "bytes": 1492,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-configured-static.log",
+      "bytes": 333,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-poison-windows-mypy.log",
+      "bytes": 43,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-original.log",
+      "bytes": 0,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/rcc18.19.3-lifecycle-help.log",
+      "bytes": 2943,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-startup-focused-final.log",
+      "bytes": 1331,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-alive-caller-diagnostic-v3.log",
+      "bytes": 5348,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/rcc18.19.3-env-help.log",
+      "bytes": 3341,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/async-admission-static-final.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/owner-feature-red.log",
+      "bytes": 8960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/toolkit-doctor.log",
+      "bytes": 12768,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/readers-final-windows-mypy.log",
+      "bytes": 1484,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-alive-classification-red.log",
+      "bytes": 7884,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/mac-provider-static-final.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-launcher-eeb-red.log",
+      "bytes": 2194,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-identity-merged-configured-static.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-poison-focused.log",
+      "bytes": 1402,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/readers-green.log",
+      "bytes": 1237,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-alive-classification-static-v2.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/rcc18.19.3-binary-buildinfo.log",
+      "bytes": 2200,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-helper-mypy-final.log",
+      "bytes": 849,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/source-full-first.log",
+      "bytes": 551665,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/readers-windows-mypy.log",
+      "bytes": 1484,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-identity-helper-ruff.log",
+      "bytes": 0,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-schema-mypy-initial.log",
+      "bytes": 847,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/toolkit-test.log",
+      "bytes": 14486,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-unverified-reader-green.log",
+      "bytes": 263,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-alive-classification-red-v2.log",
+      "bytes": 11126,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-wait-model-green.log",
+      "bytes": 1405,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-wait-model-red.log",
+      "bytes": 18681,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-alive-classification-static-final.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-launcher-green-final.log",
+      "bytes": 259,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-wait-model-final.log",
+      "bytes": 1405,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-startup-green.log",
+      "bytes": 253,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/decoded-0546-macos114668292448.log",
+      "bytes": 1299567,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/callback-typed-static.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-poison-red.log",
+      "bytes": 5893,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/rcc18.19.3-lifecycle-inspect-help.log",
+      "bytes": 2967,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-identity-focused-final.log",
+      "bytes": 1332,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/toolkit-bootstrap.log",
+      "bytes": 33073,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-alive-classification-affected-v2.log",
+      "bytes": 367,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-launcher-mypy-win32.log",
+      "bytes": 43,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-wait-model-windows-mypy.log",
+      "bytes": 42,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/core-wheel-diagnostic.log",
+      "bytes": 110,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/native-worker-admission-red.log",
+      "bytes": 88788,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/native-worker-admission-green.log",
+      "bytes": 354,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-wait-birth-red.log",
+      "bytes": 1311,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-identity-configured-static.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-unverified-reader-red.log",
+      "bytes": 6149,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-windows-mypy.log",
+      "bytes": 43,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-launcher-affected-final.log",
+      "bytes": 1412,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/mac-provider-affected-final.log",
+      "bytes": 1408,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-windows-mypy.log",
+      "bytes": 43,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-helper-baseline-mypy.log",
+      "bytes": 1042,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/decoded-eeb-linux114674512992.log",
+      "bytes": 1492640,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/callback-final-static.log",
+      "bytes": 2844,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-alive-caller-diagnostic-v2.log",
+      "bytes": 5074,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/fixture-download.log",
+      "bytes": 1207,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-wire-green.log",
+      "bytes": 248,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-wait-model-static.log",
+      "bytes": 557,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/native-worker-admission-typed-windows-mypy.log",
+      "bytes": 42,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-configured-static-final.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/callback-final-source-full.log",
+      "bytes": 384784,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/readers-source-full.log",
+      "bytes": 383476,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-wire-mypy-initial.log",
+      "bytes": 1123,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-wait-model-windows-mypy-final.log",
+      "bytes": 42,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/readers-final-closure.log",
+      "bytes": 1242,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/portability-green.log",
+      "bytes": 1224,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-startup-focused.log",
+      "bytes": 1325,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-poison-green.log",
+      "bytes": 250,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-unverified-reader-affected-final.log",
+      "bytes": 367,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-poison-helper-mypy-initial.log",
+      "bytes": 849,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/mac-provider-teardown-red.log",
+      "bytes": 2415,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-unverified-reader-static-final.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/native-worker-admission-final.log",
+      "bytes": 1250,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/mac-provider-controls.log",
+      "bytes": 542,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-helper-ruff-final.log",
+      "bytes": 0,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/rcc18.19.3-cache-help.log",
+      "bytes": 2930,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/static-first.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-schema-green.log",
+      "bytes": 250,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/callback-typed-source-full.log",
+      "bytes": 384784,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/mac-provider-teardown-green.log",
+      "bytes": 257,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/readers-final-static.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-mypy-full.log",
+      "bytes": 1484,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/native-worker-admission-typed-final.log",
+      "bytes": 1256,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/mac-provider-controls-final.log",
+      "bytes": 257,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/native-worker-admission-mypy.log",
+      "bytes": 1714,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/async-admission-lifecycle-green.log",
+      "bytes": 262,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/source-full-owned-homes.log",
+      "bytes": 382190,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-alive-caller-diagnostic.log",
+      "bytes": 5023,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/mac-provider-deadline-model-red.log",
+      "bytes": 2454,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/real-callback-green.log",
+      "bytes": 250,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/toolkit-variables.log",
+      "bytes": 1689,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-focused.log",
+      "bytes": 1397,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-identity-merged-windows-mypy.log",
+      "bytes": 43,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/census-poison-configured-static.log",
+      "bytes": 2017,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-identity-red.log",
+      "bytes": 11181,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/native-worker-admission-typed-mypy.log",
+      "bytes": 42,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-alive-classification-green-v2.log",
+      "bytes": 283,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-alive-classification-affected-final.log",
+      "bytes": 5126,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/windows-mypy-first.log",
+      "bytes": 42,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/provider-identity-windows-mypy.log",
+      "bytes": 43,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/async-admission-first-green.log",
+      "bytes": 257,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/f949-platform-ci/job-114685788075-decoded-private.log",
+      "bytes": 747820,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/f949-platform-ci/job-114685788155-decoded-private.log",
+      "bytes": 1521746,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308/f949-platform-ci/job-114685787879-decoded-private.log",
+      "bytes": 1364027,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr305-primary640-successor/census-baseline-red.log",
+      "bytes": 6194,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr305-primary640-successor/census-candidate-green.log",
+      "bytes": 98,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-mac-diagnostic/red.log",
+      "bytes": 3840,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-mac-diagnostic/green.log",
+      "bytes": 1365,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_denied_shutdown_does_not_0/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_installed_runtime_wheel_s0/actions_runtime-1.0.0-py3-none-any.whl",
+      "bytes": 504,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_concurrent_processes_reta1/catalog.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_wrapper_verifier_rejects_1/wrapper.zip",
+      "bytes": 150,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_authorized_handle_is_retr0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_rejected_shutdown_request1/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_two_process_claims_have_o0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_concurrent_processes_reta0/catalog.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_concurrent_processes_seri1/actions.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_wrapper_verifier_rejects_5/wrapper.zip",
+      "bytes": 150,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/second/action-templates.zip",
+      "bytes": 169953,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/second/zips/mcp-v2-showcase.zip",
+      "bytes": 6391,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/second/zips/canvas-query.zip",
+      "bytes": 127242,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/second/zips/basic.zip",
+      "bytes": 11179,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/second/zips/advanced.zip",
+      "bytes": 13634,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/second/zips/minimal.zip",
+      "bytes": 10778,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/second/zips/workflow-producer-consumer.zip",
+      "bytes": 2995,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/first/action-templates.zip",
+      "bytes": 169953,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/first/zips/mcp-v2-showcase.zip",
+      "bytes": 6391,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/first/zips/canvas-query.zip",
+      "bytes": 127242,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/first/zips/basic.zip",
+      "bytes": 11179,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/first/zips/advanced.zip",
+      "bytes": 13634,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/first/zips/minimal.zip",
+      "bytes": 10778,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_template_bundle_generatio0/first/zips/workflow-producer-consumer.zip",
+      "bytes": 2995,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_shutdown_interrupt_follow1/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_shutdown_interrupt_follow0/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_two_process_publications_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_runtime_wheel_member_bind1/actions_runtime-1.0.0-py3-none-any.whl",
+      "bytes": 278,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_runtime_inliner_fails_on_0/dist/assets/unexpected.bin",
+      "bytes": 10,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_failed_shutdown_send_does0/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_wrapper_verifier_rejects_4/wrapper.zip",
+      "bytes": 150,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_installed_runtime_wheel_s1/actions_runtime-1.0.0-py3-none-any.whl",
+      "bytes": 339,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_build_artifact_records_pu0/frontend-dist.tar.gz",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_rejected_shutdown_request2/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_alias_ownership_survives_0/actions.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_wheel_fixture_member_writ0/actions_runtime-1.0.0-py3-none-any.whl",
+      "bytes": 173,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_nondurable_commit_failure0/state.db",
+      "bytes": 8192,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_run_summary_invalid_datab0/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_runtime_clean_wheels_inst0/wheelhouse/actions_work_items-0.4.4-py3-none-any.whl",
+      "bytes": 62717,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_runtime_clean_wheels_inst0/wheelhouse/actions_runtime-1.0.3-cp312-cp312-linux_x86_64.whl",
+      "bytes": 14435064,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_runtime_clean_wheels_inst0/wheelhouse/actions_http_helper-1.0.3-py3-none-any.whl",
+      "bytes": 14690,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_runtime_clean_wheels_inst0/wheelhouse/actions_core-1.0.3-py3-none-any.whl",
+      "bytes": 103809,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_denied_shutdown_does_not_1/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_wrapper_verifier_rejects_0/wrapper.zip",
+      "bytes": 156,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_batch_commit_failure_roll0/catalog.db",
+      "bytes": 36864,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_v12_migration_creates_emp0/old.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_wrapper_verifier_rejects_3/wrapper.zip",
+      "bytes": 251,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_runtime_wheel_member_bind0/actions_runtime-1.0.0-py3-none-any.whl",
+      "bytes": 284,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_run_change_cache_snapshot0/events.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_import_default_value0/.sema4ai-test-action-server/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_malformed_local_metadata_0/action-templates/mcp-v2-showcase.zip",
+      "bytes": 6391,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_malformed_local_metadata_0/action-templates/canvas-query.zip",
+      "bytes": 127242,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_malformed_local_metadata_0/action-templates/basic.zip",
+      "bytes": 11179,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_malformed_local_metadata_0/action-templates/advanced.zip",
+      "bytes": 13634,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_malformed_local_metadata_0/action-templates/minimal.zip",
+      "bytes": 10778,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_malformed_local_metadata_0/action-templates/workflow-producer-consumer.zip",
+      "bytes": 2995,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_wrapper_verifier_extracts0/wrapper.zip",
+      "bytes": 150,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_compute_sha256_is_determi0/frontend-dist.tar.gz",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_rollback_failure_preserve0/rollback-failure.db",
+      "bytes": 8192,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_resource_history_survives0/catalog.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_wrapper_verifier_rejects_6/wrapper.zip",
+      "bytes": 150,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_rejected_shutdown_request0/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_embedded_templates_are_av0/action-templates/mcp-v2-showcase.zip",
+      "bytes": 6391,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_embedded_templates_are_av0/action-templates/canvas-query.zip",
+      "bytes": 127242,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_embedded_templates_are_av0/action-templates/basic.zip",
+      "bytes": 11179,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_embedded_templates_are_av0/action-templates/advanced.zip",
+      "bytes": 13634,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_embedded_templates_are_av0/action-templates/minimal.zip",
+      "bytes": 10778,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_embedded_templates_are_av0/action-templates/workflow-producer-consumer.zip",
+      "bytes": 2995,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_runtime_wheel_digest_bind0/actions_runtime-1.0.0-py3-none-any.whl",
+      "bytes": 156,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_wrapper_verifier_rejects_2/wrapper.zip",
+      "bytes": 150,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_failed_shutdown_send_does1/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_build_artifact_requires_e0/frontend-dist.tar.gz",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_run_summary_state_selects0/server.db",
+      "bytes": 2822144,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_symlinked_template_cache_0/action-templates/mcp-v2-showcase.zip",
+      "bytes": 6391,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_symlinked_template_cache_0/action-templates/canvas-query.zip",
+      "bytes": 127242,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_symlinked_template_cache_0/action-templates/basic.zip",
+      "bytes": 11179,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_symlinked_template_cache_0/action-templates/advanced.zip",
+      "bytes": 13634,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_symlinked_template_cache_0/action-templates/minimal.zip",
+      "bytes": 10778,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_symlinked_template_cache_0/action-templates/workflow-producer-consumer.zip",
+      "bytes": 2995,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_v13_migration_preserves_e0/old.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_generated_template_archiv0/bundle/action-templates.zip",
+      "bytes": 377,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_generated_template_archiv0/bundle/zips/fixture.zip",
+      "bytes": 443,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_shutdown_interrupt_follow2/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw0/test_concurrent_processes_seri0/actions.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_candidate_wheel_inventory0/wheels/actions_core-1.0.2-py3-none-any.whl",
+      "bytes": 5,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_candidate_wheel_inventory0/wheels/actions_core-1.0.3-py3-none-any.whl",
+      "bytes": 228,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential37/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential37/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_stale_expired_owner_canno0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_analytics_summary_with_da0/test_populated.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential41/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential41/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential41/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential10/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential10/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential42/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential42/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential42/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential2/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential2/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential2/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential40/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential40/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential40/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_package_zip0/test_package/pack1-name.zip",
+      "bytes": 3039,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_cross_workspace_unknown_a0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_idempotency_reauthorizes_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_installation_auth_never_c0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_create_new_project_uses_e0/action-templates/mcp-v2-showcase.zip",
+      "bytes": 6391,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_create_new_project_uses_e0/action-templates/canvas-query.zip",
+      "bytes": 127242,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_create_new_project_uses_e0/action-templates/basic.zip",
+      "bytes": 11179,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_create_new_project_uses_e0/action-templates/advanced.zip",
+      "bytes": 13634,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_create_new_project_uses_e0/action-templates/minimal.zip",
+      "bytes": 10778,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_create_new_project_uses_e0/action-templates/workflow-producer-consumer.zip",
+      "bytes": 2995,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_ungranted_actor_denied_be0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_publication_uses_me0/robot.zip",
+      "bytes": 293,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_actual_app_disconnect_clo0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_admit_validates_actual_ac0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_success_wins_cancel_and_r0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_dispatch_denied_before_ow5/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_dispatch_denied_before_ow5/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_zip_rejects_raw_par0/parent-root.zip",
+      "bytes": 283,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_publication_revalid0/robot.zip",
+      "bytes": 293,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_corrupt_stored_payload_is0/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential25/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential25/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential50/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential50/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_cross_workspace_unknown_a1/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_import_action_server_stra1/.sema4ai-test-action-server/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_intentional_local_no_key_1/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_intentional_local_no_key_1/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_intentional_local_no_key_1/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_denied_origin_before_acto2/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_denied_origin_before_acto1/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_missing_object_does_not_r0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_lease_expiry_at_final_sta0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential27/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential27/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential48/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential48/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_dispatch_denied_before_ow4/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_dispatch_denied_before_ow4/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_database_concurrency0/test_database/my.db",
+      "bytes": 36864,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential16/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential16/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_intentional_public_bootst0/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_intentional_public_bootst0/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_authorized_handle_round_t0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential33/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential33/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_zip_enforces_actual0/too-large-input.zip",
+      "bytes": 293,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential19/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential19/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential14/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential14/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential8/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential8/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_dispatch_denied_before_ow3/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_dispatch_denied_before_ow3/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_seal_transaction_failure_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_asgi_websocket_aut0/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_asgi_websocket_aut0/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential1/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential1/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential1/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_package_yaml_public1/robot.zip",
+      "bytes": 432,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_cross_workspace_unknown_a4/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_forward_schema_repair_wit0/migration-repair-fresh.db",
+      "bytes": 8192,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential0/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential0/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_zip_rejects_ambiguo1/unsafe.zip",
+      "bytes": 269,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_zip_enforces_entry_0/too-many-bytes.zip",
+      "bytes": 411,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential5/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential5/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential5/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_local_storage_creates_and0/run-a/nested/data.bin",
+      "bytes": 6,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_asgi_websocket_aut4/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_asgi_websocket_aut4/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_zip_rejects_case_co0/duplicate.zip",
+      "bytes": 436,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential22/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential22/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential22/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_runs_by_day_with_data0/test_populated.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_legacy_analytics_excludes0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_forward_schema_repair_abo1/migration-repair-stderr-collision.db",
+      "bytes": 24576,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_zip_rejects_link_en0/link.zip",
+      "bytes": 398,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_foreign_keys_validation0/test_foreign_keys_validation.db",
+      "bytes": 16384,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_intentional_public_bootst1/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_intentional_public_bootst1/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_zip_accepts_ordinar1/valid.zip",
+      "bytes": 269,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_receipt_requires_complete2/rcc/wheels/actions_core-1.0.2-py3-none-any.whl",
+      "bytes": 228,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_allowed_origin_and_prefli0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_discard_failure_preserves0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential28/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential28/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential34/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential34/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_runs_by_action_empty_db0/test.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_analytics_summary_empty_d0/test.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential15/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential15/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_installation_auth_never_c2/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_revocation_and_other_work0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_nondurable_sqlite_commit_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_zip_rejects_case_co1/duplicate-root.zip",
+      "bytes": 281,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential21/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential21/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential21/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_outer_key_rejection_prece1/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_static_artifacts_preserve0/run-a/payload.bin",
+      "bytes": 10,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_all_legacy_read_and_event0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_ambiguous_seal_and_abort_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_asgi_websocket_aut5/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_asgi_websocket_aut5/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_abrupt_process_terminatio0/rcc/wheels/actions_core-1.0.2-py3-none-any.whl",
+      "bytes": 228,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential53/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential53/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_migrate_archives_legacy_o0/migration-v10-populated.db",
+      "bytes": 331776,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_counters0/test_counters.db",
+      "bytes": 12288,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential32/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential32/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_forward_schema_repair_rem0/migration-repair.db",
+      "bytes": 16384,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential29/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential29/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_forward_schema_repair_abo0/migration-repair-stdout-collision.db",
+      "bytes": 24576,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential11/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential11/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_assembled_mount_refuses_p1/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_assembled_mount_refuses_p1/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_control_plane_registratio0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential4/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential4/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential4/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_forward_schema_repair_arc0/migration-repair-populated.db",
+      "bytes": 24576,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_zip_rejects_ambiguo0/unsafe.zip",
+      "bytes": 273,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_frozen_runtime_copy_prese0/runtime-copy/action-server.exe",
+      "bytes": 17,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_frozen_runtime_copy_prese0/build-tree/action-server.exe",
+      "bytes": 17,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_asgi_websocket_aut2/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_asgi_websocket_aut2/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential51/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential51/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_denied_origin_before_acto0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_receipt_requires_complete1/rcc/wheels/actions_core-1.0.2-py3-none-any.whl",
+      "bytes": 228,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential46/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential46/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential26/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential26/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential24/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential24/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential24/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential20/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential20/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential20/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_failed_robot_publication_0/publication.zip",
+      "bytes": 293,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_outer_key_rejection_prece3/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_installation_auth_never_c1/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_outer_key_rejection_prece2/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential17/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential17/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_unregistered_snapshot_is_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential43/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential43/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_finalize_failure_rolls_ba0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_outer_key_rejection_prece0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_runtime_http_error_handle2/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_work_item_file_api_maps_a0/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential9/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential9/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_work_items_loader_failure0/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_runtime_http_error_handle0/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_outer_wrong_key_blocks_va1/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_stage_rechecks_grant_and_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_default_disabled_and_no_g0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_create_mcp_v2_showcase_fr0/action-templates/mcp-v2-showcase.zip",
+      "bytes": 6391,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_create_mcp_v2_showcase_fr0/action-templates/canvas-query.zip",
+      "bytes": 127242,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_create_mcp_v2_showcase_fr0/action-templates/basic.zip",
+      "bytes": 11179,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_create_mcp_v2_showcase_fr0/action-templates/advanced.zip",
+      "bytes": 13634,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_create_mcp_v2_showcase_fr0/action-templates/minimal.zip",
+      "bytes": 10778,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_create_mcp_v2_showcase_fr0/action-templates/workflow-producer-consumer.zip",
+      "bytes": 2995,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_zip_accepts_ordinar0/valid.zip",
+      "bytes": 293,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_browser_session_does_not_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_asgi_websocket_aut3/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_asgi_websocket_aut3/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_shared_static_artifacts_a0/run-a/payload.bin",
+      "bytes": 15,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_outer_wrong_key_blocks_va0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential49/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential49/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_assembled_mount_refuses_p2/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_assembled_mount_refuses_p2/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_actual_runtime_authorized0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_expired_output_and_unmapp0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_import_action_server_stra2/.sema4ai-test-action-server/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_assembled_mount_refuses_p0/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_assembled_mount_refuses_p0/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_provider_mutation_and_ove0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_actual_reload_closure_com0/catalog.db",
+      "bytes": 61440,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_zip_rejects_ambiguo2/unsafe.zip",
+      "bytes": 273,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential7/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential7/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_legacy_helper_cannot_chan0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential13/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential13/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential30/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential30/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential45/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential45/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential23/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential23/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential23/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_cancel_wins_before_publis0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_work_items_loader_failure1/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_runs_by_action_with_data0/test_populated.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential36/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential36/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_cancel_during_actual_stag0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_work_items_storage_error_0/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_asgi_websocket_aut1/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_asgi_websocket_aut1/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_rest_projects_non_object_0/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_runs_by_day_empty_db0/test.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_legacy_migration_preserve0/temp.db",
+      "bytes": 327680,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_legacy_migration_preserve0/fresh.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_idempotency_digest_collis0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_migrate_v10_schema_withou0/v10.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_range_and_head_explicitly0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_registered_snapshot_canno0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential18/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential18/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_successfully_published_ou0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_package_yaml_public0/robot.zip",
+      "bytes": 432,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential47/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential47/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_runtime_http_error_handle1/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_intentional_local_no_key_0/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_intentional_local_no_key_0/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_dispatch_denied_before_ow2/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_dispatch_denied_before_ow2/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_cross_workspace_unknown_a2/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_abort_receipt_does_not_di0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_stream_failure_closes_des0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_historical_migration_nine0/migration-nine.db",
+      "bytes": 16384,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_import_action_server_stra0/.sema4ai-test-action-server/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_independent_storage_api_r0/runs/run-a/payload.bin",
+      "bytes": 10,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_receipt_requires_complete0/rcc/wheels/actions_core-1.0.2-py3-none-any.whl",
+      "bytes": 228,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_robot_zip_rejects_ambiguo3/unsafe.zip",
+      "bytes": 281,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_dispatch_denied_before_ow1/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_dispatch_denied_before_ow1/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_authenticator_failure_and0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential39/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential39/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential39/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential44/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential44/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential12/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential12/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_dispatch_denied_before_ow0/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_dispatch_denied_before_ow0/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_installed_observer_hashes0/private-native.exe",
+      "bytes": 20,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_mutable_verbose_diagnosti0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_transport_state_observer_1/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential35/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential35/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_work_items_import_ignores0/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential38/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential38/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential38/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential52/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential52/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_transport_state_observer_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential31/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential31/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential3/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential3/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential3/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential6/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential6/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_real_assembled_credential6/artifacts/runs/owned-run/payload.bin",
+      "bytes": 22,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_cross_workspace_unknown_a3/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_sql_body_error_is_redacte0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_native_package_yaml_repla0/candidate wheels/actions_core-1.0.2-py3-none-any.whl",
+      "bytes": 20,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_migrate0/temp.db",
+      "bytes": 327680,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_migrate0/check.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_revoked_grant_denied_befo0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "oauth-full-portable/popen-gw1/test_registration_and_numbered0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects2/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects2/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects2/actions_runtime-1.0.0-cp313.cp313-cp313-win_amd64.whl",
+      "bytes": 53,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects2/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects2/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects2/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects2/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects5/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects5/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects5/actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects5/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects5/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects5/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_binary_release_publishes_0/windows64/action-server.exe",
+      "bytes": 27,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts1/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts1/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts1/actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts1/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts1/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts1/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts1/actions_runtime-1.0.0-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects4/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects4/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects4/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "bytes": 141,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects4/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects4/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects4/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects4/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects6/Windows-wheels/duplicate.whl",
+      "bytes": 3,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects6/Linux-wheels/duplicate.whl",
+      "bytes": 3,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects6/Linux-wheels/artifact-2.whl",
+      "bytes": 1,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects6/Linux-wheels/artifact-0.whl",
+      "bytes": 1,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects6/Linux-wheels/artifact-3.whl",
+      "bytes": 1,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects6/Linux-wheels/artifact-1.whl",
+      "bytes": 1,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects6/Linux-wheels/artifact-4.whl",
+      "bytes": 1,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts0/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts0/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts0/actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts0/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts0/actions_runtime-1.0.0-cp312-abi3-manylinux_2_28_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts0/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_accepts0/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects3/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects3/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects3/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects3/actions_runtime-1.0.0-cp313-cp313.cp313-win_amd64.whl",
+      "bytes": 53,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects3/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects3/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects3/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects1/actions_runtime-1.0.0-1-cp312-cp312-win_amd64.whl",
+      "bytes": 49,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects1/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects1/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects1/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects1/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects1/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects1/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_generated_runtime_invento0/repo/action_server/dist/actions_runtime-1.0.0-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects0/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects0/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects0/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects0/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects0/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects0/actions_runtime-1.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+      "bytes": 59,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_rejects0/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_verifie0/actions_runtime-1.0.0-cp312-cp312-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_verifie0/actions_runtime-1.0.0.tar.gz",
+      "bytes": 28,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_verifie0/actions_runtime-1.0.0-cp313-cp313-win_amd64.whl",
+      "bytes": 47,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_verifie0/actions_runtime-1.0.0-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_verifie0/actions_runtime-1.0.0-cp313-cp313-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_verifie0/actions_runtime-1.0.0-cp312-cp312-manylinux_2_17_x86_64.manylinux_2_5_x86_64.manylinux1_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 119,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_runtime_publisher_verifie0/actions_runtime-1.0.0-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 55,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_recovery_normalizes_only_0/binaries/windows/action-server.exe",
+      "bytes": 7,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "workflows-green2/test_recovery_normalizes_only_0/release-assets/actions-runtime-1.0.3-windows64.exe",
+      "bytes": 7,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-packaged/package-verification.log",
+      "bytes": 385,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14441714,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/installed-idle-startup.log",
+      "bytes": 1389,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/actions_runtime-1.0.3-cp313-cp313-win_amd64.whl",
+      "bytes": 11891984,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/installed-cancellation-admission.log",
+      "bytes": 98,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/installed-pip-check.log",
+      "bytes": 294,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/download-connector-verified.zip",
+      "bytes": 80775097,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14441715,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/installed-pip-check-owned-cache.log",
+      "bytes": 30,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 13537384,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/installed-inventory.log",
+      "bytes": 356,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/consumer-poetry-install.log",
+      "bytes": 4105,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+      "bytes": 11891984,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/actions_runtime-1.0.3.tar.gz",
+      "bytes": 1282217,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 13537383,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/installed-real-template.log",
+      "bytes": 257,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/installed-oauth.log",
+      "bytes": 98,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/installed-minimum-core-consumer/startup-once2/stdout.log",
+      "bytes": 0,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/installed-minimum-core-consumer/startup-once2/stderr.log",
+      "bytes": 1279,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/installed-minimum-core-consumer/startup-once2/datadir/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr308-f949-packaged/installed-minimum-core-consumer/startup-once2/datadir/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-transport/isolated-tests.log",
+      "bytes": 39143,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-mac-eeb-terminal/decoded-job-private.log",
+      "bytes": 1287197,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-windows-wait/red.log",
+      "bytes": 3925,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-windows-wait/green.log",
+      "bytes": 186,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-unverified-reader/green.log",
+      "bytes": 205,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-actions-home/action-server/action-templates/mcp-v2-showcase.zip",
+      "bytes": 6391,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-actions-home/action-server/action-templates/canvas-query.zip",
+      "bytes": 127242,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-actions-home/action-server/action-templates/basic.zip",
+      "bytes": 11179,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-actions-home/action-server/action-templates/advanced.zip",
+      "bytes": 13634,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-actions-home/action-server/action-templates/minimal.zip",
+      "bytes": 10778,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-actions-home/action-server/action-templates/workflow-producer-consumer.zip",
+      "bytes": 2995,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-actions-home/journals/stats_c2fd1aa_2026_42.log",
+      "bytes": 2764,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-actions-home/journals/event.log",
+      "bytes": 3015,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr306-database-exact/test_database_concurrency0/test_database/my.db",
+      "bytes": 36864,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr306-database-exact/test_foreign_keys_validation0/test_foreign_keys_validation.db",
+      "bytes": 16384,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr306-database-exact/test_counters0/test_counters.db",
+      "bytes": 12288,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr306-database-exact/test_migrate_v10_schema_withou0/v10.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr306-database-exact/test_migrate0/temp.db",
+      "bytes": 327680,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr306-database-exact/test_migrate0/check.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "diagnose306/decoded-current-windows114645811548.log",
+      "bytes": 684454,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/red.log",
+      "bytes": 1720,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/green.log",
+      "bytes": 189,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/red/temp/test_async_zero_admits_cancel_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/green/temp/test_submission_failure_preser1/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/green/temp/test_authorized_handle_round_t0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/green/temp/test_old_completion_cannot_ret0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/green/temp/test_finished_run_stays_uncanc0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/green/temp/test_async_zero_admits_cancel_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/green/temp/test_submission_failure_preser0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/green/temp/test_all_legacy_read_and_event0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/green/temp/test_scoped_run_rejection_does0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/green/temp/test_already_completed_future_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/green/temp/test_cancel_wins_before_publis0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-async-admission/green/temp/test_validation_failure_keeps_0/runs.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review307-packaged/installed-oauth.log",
+      "bytes": 197,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr305-fresh-toolkit/doctor.log",
+      "bytes": 12768,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr305-fresh-toolkit/toolkittest.log",
+      "bytes": 14489,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr305-fresh-toolkit/bootstrap.log",
+      "bytes": 27459,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-windows0546-terminal/decoded-job-private.log",
+      "bytes": 741199,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-installed-startup.log",
+      "bytes": 1371,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14438881,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-installed-startup-v2.log",
+      "bytes": 1348,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-dependency-lock.log",
+      "bytes": 213,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/actions_runtime-1.0.3-cp313-cp313-win_amd64.whl",
+      "bytes": 11889144,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/minimum-core-inventory.log",
+      "bytes": 326,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 14438881,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/minimum-core-oauth.log",
+      "bytes": 98,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/minimum-core-pip-check.log",
+      "bytes": 294,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-dependency-install.log",
+      "bytes": 3848,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/minimum-core-idle-startup.log",
+      "bytes": 1389,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/minimum-core-install.log",
+      "bytes": 3977,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/actions-runtime-dist.zip",
+      "bytes": 80754375,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/pip-check-verified.log",
+      "bytes": 294,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/version-verified.log",
+      "bytes": 6,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/installed-oauth-verified.log",
+      "bytes": 98,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-oauth-verified.log",
+      "bytes": 98,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-inventory-verified.log",
+      "bytes": 336,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl",
+      "bytes": 13534544,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+      "bytes": 11889144,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-pip-check-verified.log",
+      "bytes": 30,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/actions_runtime-1.0.3.tar.gz",
+      "bytes": 1278747,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/inventory-verified.log",
+      "bytes": 320,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl",
+      "bytes": 13534543,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-dependency-consumer/startup-once1/stdout.log",
+      "bytes": 0,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-dependency-consumer/startup-once1/stderr.log",
+      "bytes": 1249,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-dependency-consumer/startup-once1/datadir/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-dependency-consumer/startup-once1/datadir/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-dependency-consumer/startup-once2/stdout.log",
+      "bytes": 0,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-dependency-consumer/startup-once2/stderr.log",
+      "bytes": 1249,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-dependency-consumer/startup-once2/datadir/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/public-dependency-consumer/startup-once2/datadir/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/candidate-dependencies/actions_http_helper-1.0.3-py3-none-any.whl",
+      "bytes": 14690,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/candidate-dependencies/actions_core-1.0.3-py3-none-any.whl",
+      "bytes": 103809,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/minimum-core-consumer/startup-once2/stdout.log",
+      "bytes": 0,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/minimum-core-consumer/startup-once2/stderr.log",
+      "bytes": 1234,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/minimum-core-consumer/startup-once2/datadir/server.db",
+      "bytes": 323584,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "pr307-packaged/minimum-core-consumer/startup-once2/datadir/workitems.db",
+      "bytes": 40960,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-transport-fixed/red.log",
+      "bytes": 6561,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    },
+    {
+      "path": "review308-transport-fixed/green.log",
+      "bytes": 189,
+      "kind": "LOCAL_ONLY_NOT_TRANSFERRED"
+    }
+  ],
+  "files_count": 859,
+  "bytes": 581957956,
+  "environment_cache_roots": "Excluded entirely; no working environment/cache/activation transferred",
+  "known_reacquisition": "PublicRCC assets and Actions packages by exactIDs/checksums in preserved receipts; access/expiration notguaranteed",
+  "unrecoverable": "Private01f/frozen-v6rawsource andretiredrawlogs/rawbinarybytes absent; oldmanifestidentitiesnotrecoveredbytes",
+  "source_download_original": "Originalsigned-URLdownloaderlocal; oneplaceholder-redactedlogiccopy transferred"
+}

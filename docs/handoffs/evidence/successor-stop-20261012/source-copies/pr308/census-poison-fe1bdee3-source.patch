@@ -1,0 +1,197 @@
+diff --git a/action_server/scripts/verify_dakota_rcc_acceptance.py b/action_server/scripts/verify_dakota_rcc_acceptance.py
+index ffa1445d..677d15f8 100644
+--- a/action_server/scripts/verify_dakota_rcc_acceptance.py
++++ b/action_server/scripts/verify_dakota_rcc_acceptance.py
+@@ -213,9 +213,9 @@ class OwnedCleanupEvidence(NamedTuple):
+     @property
+     def census_reap_complete(self) -> bool:
+         """Scoped process facts only; unavailable readers/deadlines remain null."""
+-        reaped = {event.matched_identity for event in self.reap_events}
+         return (
+-            self.root is not None
++            self.schema_version == 1
++            and self.root is not None
+             and self.root_capture_verified
+             and self.root_wait_reaped is True
+             and self.enumeration_succeeded is True
+@@ -224,14 +224,16 @@ class OwnedCleanupEvidence(NamedTuple):
+             and not self.observation_errors
+             and any(row.identity == self.root for row in self.census)
+             and all(
+-                row.identity is not None and row.state == "absent" and row.error is None
++                row.identity == self.root
++                and row.observed_pid == self.root.pid
++                and row.state == "absent"
++                and row.current_create_time is None
++                and row.error is None
+                 for row in self.census
+             )
+-            and all(
+-                row.identity == self.root or row.identity in reaped
+-                for row in self.census
+-            )
+-            and all(event.matched_identity is not None for event in self.reap_events)
++            # Schema1 has no wait-birth witness. It cannot establish reaping
++            # of a captured child, even when a forged in-memory record says so.
++            and not self.reap_events
+         )
+ 
+     def to_dict(self) -> dict:
+@@ -309,6 +311,8 @@ class OwnedCleanupEvidence(NamedTuple):
+             pid = _evidence_int(item["observed_pid"])
+             if pid is not None and pid <= 0:
+                 raise ValueError("cleanup census PID")
++            if identity is not None and pid != identity.pid:
++                raise ValueError("cleanup census PID identity")
+             birth = item["current_create_time"]
+             birth = _evidence_number(birth) if birth is not None else None
+             if (birth is not None and birth <= 0) or (
+@@ -340,12 +344,14 @@ class OwnedCleanupEvidence(NamedTuple):
+             status = _evidence_int(item["raw_wait_status"])
+             if pid is None or pid <= 0 or status is None:
+                 raise ValueError("cleanup reap values")
++            if item["matched_identity"] is not None:
++                raise ValueError("cleanup reap unwitnessed birth")
+             reaps.append(
+                 OwnedReapEvent(
+                     pid,
+                     status,
+                     _evidence_number(item["observed_at"]),
+-                    _evidence_identity(item["matched_identity"]),
++                    None,
+                 )
+             )
+         deadlines = []
+@@ -453,6 +459,7 @@ class _OwnedCleanupObserver:
+                 )
+             except missing_error:
+                 state = "absent"
++                birth = None
+             except Exception as error:
+                 error_class = type(error).__name__
+             self.rows[identity] = OwnedCensusRow(
+diff --git a/action_server/tests/action_server_tests/test_owned_cleanup_evidence.py b/action_server/tests/action_server_tests/test_owned_cleanup_evidence.py
+index f1275df6..2296ed4f 100644
+--- a/action_server/tests/action_server_tests/test_owned_cleanup_evidence.py
++++ b/action_server/tests/action_server_tests/test_owned_cleanup_evidence.py
+@@ -539,3 +539,102 @@ def test_genuine_supervisor_failure_has_explicitly_unavailable_metadata(monkeypa
+     )
+     assert evidence.observation_errors == ("SupervisorFailure",)
+     assert not evidence.census_reap_complete
++
++
++def _absent_child_evidence(harness):
++    observer = _observer(harness)
++    observer.capture_snapshot([_process(1, 1.0), _process(2, 10.0)])
++
++    class Missing(Exception):
++        pass
++
++    def absent(_pid):
++        raise Missing()
++
++    observer.observe_final(absent, missing_error=Missing, observed_at=20.0)
++    observer.terminal_echild = True
++    return observer.freeze()
++
++
++@pytest.mark.parametrize("wait_pid", [2, 999])
++def test_schema1_rejects_every_unwitnessed_wait_birth_assertion(monkeypatch, wait_pid):
++    harness = _harness()
++    evidence = _absent_child_evidence(harness)
++    wire = evidence.to_dict()
++    wire["reap_events"] = [
++        {
++            "pid": wait_pid,
++            "raw_wait_status": 0,
++            "observed_at": 20.0,
++            "matched_identity": {"pid": 2, "create_time": 10.0},
++        }
++    ]
++    with pytest.raises(ValueError, match="unwitnessed"):
++        harness.OwnedCleanupEvidence.from_dict(wire)
++    payload = _wire_result(evidence)
++    payload["cleanup_evidence"] = wire
++    _transport(monkeypatch, harness, payload)
++    outcome = harness.run_owned_process(
++        ["command"], timeout_seconds=1, env={}, collect_cleanup_evidence=True
++    )
++    assert outcome.returncode == 7
++    assert (outcome.stdout, outcome.stderr) == ("command-stdout", "command-stderr")
++    assert not outcome.cleanup_evidence.census_reap_complete
++    assert outcome.cleanup_evidence.observation_errors == ("ValueError",)
++
++
++@pytest.mark.parametrize("observed_pid", [None, 999])
++def test_known_census_identity_requires_matching_observed_pid(observed_pid):
++    harness = _harness()
++    wire = _absent_child_evidence(harness).to_dict()
++    wire["census"][1]["observed_pid"] = observed_pid
++    with pytest.raises(ValueError, match="PID identity"):
++        harness.OwnedCleanupEvidence.from_dict(wire)
++
++
++def test_disappearance_after_birth_read_preserves_absent_census_without_reap():
++    harness = _harness()
++    observer = _observer(harness)
++    observer.capture_snapshot([_process(1, 1.0), _process(2, 10.0)])
++
++    class Missing(Exception):
++        pass
++
++    class Disappearing:
++        def __init__(self, birth):
++            self.birth = birth
++
++        def create_time(self):
++            return self.birth
++
++        def status(self):
++            raise Missing()
++
++    observer.observe_final(
++        lambda pid: Disappearing(1.0 if pid == 1 else 10.0),
++        missing_error=Missing,
++        observed_at=20.0,
++    )
++    observer.terminal_echild = True
++    evidence = observer.freeze()
++    assert all(
++        row.state == "absent" and row.current_create_time is None
++        for row in evidence.census
++    )
++    restored = harness.OwnedCleanupEvidence.from_dict(evidence.to_dict())
++    assert restored == evidence
++    assert len(restored.census) == 2
++    assert not restored.census_reap_complete
++    assert restored.reap_events == ()
++    assert restored.observation_errors == ()
++
++
++def test_schema1_in_memory_poison_cannot_claim_scoped_reaping():
++    harness = _harness()
++    evidence = _absent_child_evidence(harness)
++    forged = evidence._replace(
++        reap_events=(
++            harness.OwnedReapEvent(999, 0, 20.0, harness.OwnedIdentity(2, 10.0)),
++        )
++    )
++    assert not forged.census_reap_complete
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index b86fe309..ef961699 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2631,6 +2631,13 @@ verified live/birth capture. Existing `waitpid` calls retain raw PID/status even
+ and the actual terminal ECHILD observation without adding waits. A wait PID alone
+ does not establish birth identity, so these events leave `matched_identity` null.
+ Absence and legacy reap counts are not converted into observed identity reaps.
++Schema 1 rejects every nonnull wait-event `matched_identity`, including a
++matching numeric PID, because it contains no birth witness. Known census rows
++must record the same observed PID as their captured identity. If a process
++disappears between its birth and status reads, retain an absent row with null
++current birth; do not discard the whole census or invent a reap event. Schema 1
++can establish scoped root-only reaping from the separate Popen wait fact, but
++cannot establish reaping of captured children from these wait events.
+ 
+ The same typed `cleanup_evidence` is attached to command results, timeout, and
+ cleanup-error outcomes while retaining their existing output fields. Wait errors

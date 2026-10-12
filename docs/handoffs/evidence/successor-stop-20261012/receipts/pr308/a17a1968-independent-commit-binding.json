@@ -1,0 +1,35 @@
+{
+  "observed_at": "2026-10-12T07:35:24.195396+00:00",
+  "reviewed_commit": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+  "tree": "9dd420c0dbae72c5b6a724a77c009a4cfb65f0a0",
+  "parent": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+  "independent_candidate_review": {
+    "sha256": "651971d6cdb2e97173ae9b3c533551f06c29a91ca92a97475efe6cba35113663",
+    "exact_file_match": true
+  },
+  "files": [
+    {
+      "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "bytes": 110515,
+      "sha256": "7292fa26cce41e6b24fbcb7e1d2fc385a99c2f51d3181983e85d962fdf926608"
+    },
+    {
+      "path": "action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+      "bytes": 32682,
+      "sha256": "a0f6b32b43687932177ca11129dd15c61001605b0ceb24ca29af62b1115bfdaf"
+    },
+    {
+      "path": "docs/skills/repository-operations.md",
+      "bytes": 292025,
+      "sha256": "9a1c88e19470a404d1b2e836374138534fd84f33b100c767fa1f94fae1b05652"
+    }
+  ],
+  "target_changed_paths": [
+    "action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "source_go_scope": "Independent reader ownership scope plus diagnostic correction; normal preservation push/fresh CI only, no merge/native/release",
+  "worktree_clean": true,
+  "native_attempts": 0
+}

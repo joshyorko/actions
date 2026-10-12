@@ -1,0 +1,765 @@
+{
+  "scope": "One bounded read-only per-file DONTNEED hint under fresh owned toolkit package cache; no fsync/unlink/rename/chmod/content-write/global cache drop/cgroup-write",
+  "native_attempts": 0,
+  "completed": true,
+  "files": 107,
+  "candidate_bytes": 1623592039,
+  "errors": [],
+  "elapsed_seconds": 0.3844579650030937,
+  "visible_memory_before": 14698962944,
+  "visible_memory_after": 14015119360,
+  "visible_memory_max": 17179869184,
+  "evidence": "No guaranteed reclaim amount or attribution; file identity/size/timestamps unchanged; dirty/mapped page behavior is kernel-owned",
+  "native_admission": "NOT_ADMITTED; self-binding/accepted budget/controller/lease holds separate",
+  "rows": [
+    {
+      "path": "tk-8.6.13-noxft_h1df4ec4_4.conda",
+      "bytes": 3566806,
+      "device": 27,
+      "inode": 1850336,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "uv-0.9.26-h76e24b7_0.conda",
+      "bytes": 17900187,
+      "device": 27,
+      "inode": 1846499,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1.conda",
+      "bytes": 58494154,
+      "device": 27,
+      "inode": 1846501,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libgfortran5-16.2.0-h6b99dfc_7.conda",
+      "bytes": 2528180,
+      "device": 27,
+      "inode": 1852609,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libstdcxx-16.2.0-h934c35e_7.conda",
+      "bytes": 6615436,
+      "device": 27,
+      "inode": 1849359,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "nodejs-20.19.3-hc55a1b2_0.conda",
+      "bytes": 17238825,
+      "device": 27,
+      "inode": 1846502,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libgcc-16.2.0-ha9f2e26_7.conda",
+      "bytes": 1058444,
+      "device": 27,
+      "inode": 1853987,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "krb5-1.22.2-hbc21106_2.conda",
+      "bytes": 1394333,
+      "device": 27,
+      "inode": 1853242,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "icu-75.1-he02047a_0.conda",
+      "bytes": 12129203,
+      "device": 27,
+      "inode": 1846500,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libpython-3.12.15-h0c77377_1_cpython.conda",
+      "bytes": 8773616,
+      "device": 27,
+      "inode": 1848267,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "perl-5.44.0-1_h7cc23a3_perl5.conda",
+      "bytes": 11438995,
+      "device": 27,
+      "inode": 1846805,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "python-3.12.15-h5f976f7_1_cpython.conda",
+      "bytes": 23058586,
+      "device": 27,
+      "inode": 1846498,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0.conda",
+      "bytes": 10890019,
+      "device": 27,
+      "inode": 1847781,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "openssl-3.6.5-h781a0a9_0.conda",
+      "bytes": 3195299,
+      "device": 27,
+      "inode": 1853589,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "pip-25.0.1-pyh8b19718_0.conda",
+      "bytes": 1256460,
+      "device": 27,
+      "inode": 1853967,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libgfortran5-16.2.0-h6b99dfc_7/lib/libgfortran.so.5.0.0",
+      "bytes": 11532656,
+      "device": 27,
+      "inode": 1859040,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libcurl-8.21.0-hcf29cc6_1/lib/libcurl.so.4.8.0",
+      "bytes": 1091456,
+      "device": 27,
+      "inode": 1858317,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "ld_impl_linux-64-2.46.1-default_hbd61a6d_103/bin/x86_64-conda-linux-gnu-ld",
+      "bytes": 2966864,
+      "device": 27,
+      "inode": 1858965,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "cache/eb045dd1.solv",
+      "bytes": 100814572,
+      "device": 27,
+      "inode": 1846489,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "cache/88ec62ec.json",
+      "bytes": 454953262,
+      "device": 27,
+      "inode": 1846482,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "cache/eb045dd1.json",
+      "bytes": 190769764,
+      "device": 27,
+      "inode": 1846483,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "cache/88ec62ec.solv",
+      "bytes": 207895631,
+      "device": 27,
+      "inode": 1846488,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libgcc-16.2.0-ha9f2e26_7/lib/libitm.so.1.0.0",
+      "bytes": 1026536,
+      "device": 27,
+      "inode": 1857109,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libnghttp2-1.68.1-h74cf4be_1/bin/nghttpx",
+      "bytes": 1333240,
+      "device": 27,
+      "inode": 1862001,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libiconv-1.18-h0cb94f2_3/lib/libiconv.a",
+      "bytes": 1315482,
+      "device": 27,
+      "inode": 1856674,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libiconv-1.18-h0cb94f2_3/lib/libiconv.so.2.7.0",
+      "bytes": 1182640,
+      "device": 27,
+      "inode": 1856822,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "pcre2-10.44-hc749103_2/bin/pcre2test",
+      "bytes": 2059104,
+      "device": 27,
+      "inode": 1856531,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libpython-3.12.15-h0c77377_1_cpython/lib/libpython3.12.so.1.0",
+      "bytes": 31842144,
+      "device": 27,
+      "inode": 1852244,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libstdcxx-16.2.0-h934c35e_7/lib/libstdc++.so.6.0.36",
+      "bytes": 23874544,
+      "device": 27,
+      "inode": 1855252,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "icu-75.1-he02047a_0/lib/libicui18n.so.75.1",
+      "bytes": 4817400,
+      "device": 27,
+      "inode": 1846730,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "icu-75.1-he02047a_0/lib/libicuuc.so.75.1",
+      "bytes": 2585632,
+      "device": 27,
+      "inode": 1846610,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "icu-75.1-he02047a_0/lib/libicudata.so.75.1",
+      "bytes": 30741448,
+      "device": 27,
+      "inode": 1846534,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/src/internal/trace/traceviewer/static/trace_viewer_full.html",
+      "bytes": 2618942,
+      "device": 27,
+      "inode": 1868181,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/src/time/tzdata/zzipdata.go",
+      "bytes": 1351213,
+      "device": 27,
+      "inode": 1966374,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/src/cmd/compile/internal/ssa/opGen.go",
+      "bytes": 1097711,
+      "device": 27,
+      "inode": 1873492,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/src/crypto/internal/boring/syso/goboringcrypto_linux_arm64.syso",
+      "bytes": 1980296,
+      "device": 27,
+      "inode": 1875014,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/src/crypto/internal/boring/syso/goboringcrypto_linux_amd64.syso",
+      "bytes": 2555664,
+      "device": 27,
+      "inode": 1866311,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/bin/go",
+      "bytes": 13397343,
+      "device": 27,
+      "inode": 1966888,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/bin/gofmt",
+      "bytes": 2855408,
+      "device": 27,
+      "inode": 1966535,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/compile",
+      "bytes": 19803286,
+      "device": 27,
+      "inode": 1868098,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/trace",
+      "bytes": 12610862,
+      "device": 27,
+      "inode": 1877025,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/covdata",
+      "bytes": 2949849,
+      "device": 27,
+      "inode": 1865398,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/cgo",
+      "bytes": 4040817,
+      "device": 27,
+      "inode": 1864723,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/fix",
+      "bytes": 2866530,
+      "device": 27,
+      "inode": 1866992,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/test2json",
+      "bytes": 2300013,
+      "device": 27,
+      "inode": 1868367,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/buildid",
+      "bytes": 2280250,
+      "device": 27,
+      "inode": 1871385,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/preprofile",
+      "bytes": 2127765,
+      "device": 27,
+      "inode": 1868503,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/asm",
+      "bytes": 4111556,
+      "device": 27,
+      "inode": 1873146,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/pprof",
+      "bytes": 12387591,
+      "device": 27,
+      "inode": 1876938,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/distpack",
+      "bytes": 2402446,
+      "device": 27,
+      "inode": 1865737,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/nm",
+      "bytes": 2781456,
+      "device": 27,
+      "inode": 1877370,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/doc",
+      "bytes": 3401165,
+      "device": 27,
+      "inode": 1877369,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/cover",
+      "bytes": 4575841,
+      "device": 27,
+      "inode": 1876000,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/dist",
+      "bytes": 2988640,
+      "device": 27,
+      "inode": 1875637,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/pack",
+      "bytes": 2030757,
+      "device": 27,
+      "inode": 1870992,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/link",
+      "bytes": 5678932,
+      "device": 27,
+      "inode": 1864654,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/vet",
+      "bytes": 7194892,
+      "device": 27,
+      "inode": 1870424,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/addr2line",
+      "bytes": 2819123,
+      "device": 27,
+      "inode": 1872475,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/pkg/tool/linux_amd64/objdump",
+      "bytes": 3830843,
+      "device": 27,
+      "inode": 1869613,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/api/go1.txt",
+      "bytes": 1759838,
+      "device": 27,
+      "inode": 1877160,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/api/go1.1.txt",
+      "bytes": 2687115,
+      "device": 27,
+      "inode": 1866042,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/api/go1.2.txt",
+      "bytes": 1943664,
+      "device": 27,
+      "inode": 1867477,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/go/test/fixedbugs/bug257.go",
+      "bytes": 3022479,
+      "device": 27,
+      "inode": 1873955,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "go-1.23.6-hc4c73a6_1/info/paths.json",
+      "bytes": 2840928,
+      "device": 27,
+      "inode": 1877569,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "zstd-1.5.7-hb78ec9c_7/lib/libzstd.so.1.5.7",
+      "bytes": 1198840,
+      "device": 27,
+      "inode": 1859639,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/bin/git",
+      "bytes": 3899192,
+      "device": 27,
+      "inode": 1852744,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/bin/scalar",
+      "bytes": 1644960,
+      "device": 27,
+      "inode": 1849652,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/bin/git-shell",
+      "bytes": 1434712,
+      "device": 27,
+      "inode": 1851054,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/libexec/git-core/git",
+      "bytes": 3899192,
+      "device": 27,
+      "inode": 1853866,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/libexec/git-core/scalar",
+      "bytes": 1644960,
+      "device": 27,
+      "inode": 1853167,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/libexec/git-core/git-remote-http",
+      "bytes": 1543160,
+      "device": 27,
+      "inode": 1851147,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/libexec/git-core/git-http-backend",
+      "bytes": 1447384,
+      "device": 27,
+      "inode": 1854669,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/libexec/git-core/git-daemon",
+      "bytes": 1455256,
+      "device": 27,
+      "inode": 1849998,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/libexec/git-core/git-imap-send",
+      "bytes": 1484408,
+      "device": 27,
+      "inode": 1853711,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/libexec/git-core/git-shell",
+      "bytes": 1434712,
+      "device": 27,
+      "inode": 1852403,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/libexec/git-core/git-sh-i18n--envsubst",
+      "bytes": 1434680,
+      "device": 27,
+      "inode": 1850604,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/libexec/git-core/git-http-push",
+      "bytes": 1538424,
+      "device": 27,
+      "inode": 1849728,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "git-2.46.0-pl5321hb5640b7_0/libexec/git-core/git-http-fetch",
+      "bytes": 1509784,
+      "device": 27,
+      "inode": 1854216,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "nodejs-20.19.3-hc55a1b2_0/lib/libnode.so.115",
+      "bytes": 64114848,
+      "device": 27,
+      "inode": 1849030,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "krb5-1.22.2-hbc21106_2/lib/libkrb5.so.3.3",
+      "bytes": 1064752,
+      "device": 27,
+      "inode": 1856302,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "python-3.12.15-h5f976f7_1_cpython/bin/python3.12",
+      "bytes": 31903952,
+      "device": 27,
+      "inode": 1853284,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "python-3.12.15-h5f976f7_1_cpython/lib/python3.12/lib-dynload/_decimal.cpython-312-x86_64-linux-gnu.so",
+      "bytes": 1617184,
+      "device": 27,
+      "inode": 1856315,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "python-3.12.15-h5f976f7_1_cpython/lib/python3.12/lib-dynload/unicodedata.cpython-312-x86_64-linux-gnu.so",
+      "bytes": 1244528,
+      "device": 27,
+      "inode": 1853151,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "python-3.12.15-h5f976f7_1_cpython/lib/python3.12/lib-dynload/_sha2.cpython-312-x86_64-linux-gnu.so",
+      "bytes": 1180800,
+      "device": 27,
+      "inode": 1859195,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "python-3.12.15-h5f976f7_1_cpython/lib/python3.12/lib-dynload/_testcapi.cpython-312-x86_64-linux-gnu.so",
+      "bytes": 1423464,
+      "device": 27,
+      "inode": 1850299,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "python-3.12.15-h5f976f7_1_cpython/lib/python3.12/ensurepip/_bundled/pip-25.0.1-py3-none-any.whl",
+      "bytes": 1841526,
+      "device": 27,
+      "inode": 1856169,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "tk-8.6.13-noxft_h1df4ec4_4/lib/libtcl8.6.so",
+      "bytes": 1990448,
+      "device": 27,
+      "inode": 1853608,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "tk-8.6.13-noxft_h1df4ec4_4/lib/libtk8.6.so",
+      "bytes": 1636392,
+      "device": 27,
+      "inode": 1853771,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "tk-8.6.13-noxft_h1df4ec4_4/lib/sqlite3.40.0/libsqlite3.40.0.so",
+      "bytes": 1581720,
+      "device": 27,
+      "inode": 1853978,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "openssl-3.6.5-h781a0a9_0/bin/openssl",
+      "bytes": 1309928,
+      "device": 27,
+      "inode": 1857256,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "openssl-3.6.5-h781a0a9_0/lib/libcrypto.so.3",
+      "bytes": 7252896,
+      "device": 27,
+      "inode": 1856199,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "openssl-3.6.5-h781a0a9_0/lib/libssl.so.3",
+      "bytes": 1228008,
+      "device": 27,
+      "inode": 1857139,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "perl-5.44.0-1_h7cc23a3_perl5/lib/perl5/5.44/core_perl/auto/Encode/JP/JP.so",
+      "bytes": 2871504,
+      "device": 27,
+      "inode": 1851811,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "perl-5.44.0-1_h7cc23a3_perl5/lib/perl5/5.44/core_perl/auto/Encode/TW/TW.so",
+      "bytes": 2156592,
+      "device": 27,
+      "inode": 1853899,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "perl-5.44.0-1_h7cc23a3_perl5/lib/perl5/5.44/core_perl/auto/Encode/CN/CN.so",
+      "bytes": 2225000,
+      "device": 27,
+      "inode": 1853541,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "perl-5.44.0-1_h7cc23a3_perl5/lib/perl5/5.44/core_perl/auto/Encode/KR/KR.so",
+      "bytes": 2558920,
+      "device": 27,
+      "inode": 1853722,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "perl-5.44.0-1_h7cc23a3_perl5/lib/perl5/5.44/core_perl/auto/Unicode/Collate/Collate.so",
+      "bytes": 1588720,
+      "device": 27,
+      "inode": 1849348,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "perl-5.44.0-1_h7cc23a3_perl5/lib/perl5/5.44/core_perl/CORE/libperl.so",
+      "bytes": 4517720,
+      "device": 27,
+      "inode": 1853983,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "perl-5.44.0-1_h7cc23a3_perl5/lib/perl5/core_perl/Module/CoreList.pm",
+      "bytes": 1268265,
+      "device": 27,
+      "inode": 1853034,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "perl-5.44.0-1_h7cc23a3_perl5/lib/perl5/core_perl/pod/perlapi.pod",
+      "bytes": 1064915,
+      "device": 27,
+      "inode": 1850298,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "perl-5.44.0-1_h7cc23a3_perl5/lib/perl5/core_perl/unicore/Name.pl",
+      "bytes": 1186410,
+      "device": 27,
+      "inode": 1850335,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "perl-5.44.0-1_h7cc23a3_perl5/lib/perl5/core_perl/unicore/TestNorm.pl",
+      "bytes": 1198720,
+      "device": 27,
+      "inode": 1849747,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "perl-5.44.0-1_h7cc23a3_perl5/lib/perl5/core_perl/Unicode/Collate/allkeys.txt",
+      "bytes": 1939332,
+      "device": 27,
+      "inode": 1853384,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libgomp-16.2.0-he0feb66_7/lib/libgomp.so.1.0.0",
+      "bytes": 1674616,
+      "device": 27,
+      "inode": 1857520,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "libsqlite-3.53.4-h0737f62_102/lib/libsqlite3.so.3.53.4",
+      "bytes": 1770864,
+      "device": 27,
+      "inode": 1862116,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "uv-0.9.26-h76e24b7_0/bin/uv",
+      "bytes": 55058432,
+      "device": 27,
+      "inode": 1846917,
+      "metadata_unchanged": true
+    },
+    {
+      "path": "uv-0.9.26-h76e24b7_0/info/licenses/THIRDPARTY.yml",
+      "bytes": 5917786,
+      "device": 27,
+      "inode": 1849039,
+      "metadata_unchanged": true
+    }
+  ]
+}

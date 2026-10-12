@@ -1,0 +1,33 @@
+{
+  "campaign_completed_log_retrieval_calls": 2,
+  "cause": "Parent took over during capacity failure; original watch loop later resumed and fetched once independently",
+  "future_completed_log_retrieval": "NONE; no more calls authorized/needed",
+  "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "job": 114685788075,
+  "observed_at": 1791788753.3337874,
+  "original_owner_scoped_checkpoints_preserved": true,
+  "original_root_decoded_and_safe_receipt_changed": false,
+  "overwrite_attempt": "extract_decoded_log.py raised AssertionError Never overwrite retained decoded logs before writing",
+  "owner_calls": {
+    "rcc308": 1,
+    "root": 1
+  },
+  "retained_root_decoded_file": {
+    "bytes": 747820,
+    "path": "/workspace/successor-evidence/pr308/f949-platform-ci/job-114685788075-decoded-private.log",
+    "sha256": "680bf188563569775175b2c5217ee8d3b6603bd679875c32675ab97dc9f952c9"
+  },
+  "run": 38211281631,
+  "schema": 1,
+  "scope": "Additive count clarification, not global one-fetch claim",
+  "second_connector_file": {
+    "bytes": 771272,
+    "path": "/workspace/successor-evidence/pr308/f949-platform-ci/job-114685788075-decoded-connector-private.json",
+    "sha256": "a474af36cac167501d5fb90e21a5f0d0a791cf1ad0f99143933f7edd176e6072"
+  },
+  "second_decoded_utf8_exactly_matches_retained_root_bytes": true,
+  "times": {
+    "rcc308": "2026-10-12T06:59:36UTC poll37 resumed aftercapacitypause",
+    "root": "approximately2026-10-12T06:49UTC; retainedfilemtime1791787793.09777"
+  }
+}

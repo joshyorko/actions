@@ -1,0 +1,5 @@
+{
+  "failure": "no checkout candidate because parser required literal git log and Windows uses quoted git.exe",
+  "log_sha256": "e0ce04f9f2cd36c27d5e67c4942c2032eed9d391fac32532dbb76de996a022f7",
+  "ci_result_not_changed": true
+}

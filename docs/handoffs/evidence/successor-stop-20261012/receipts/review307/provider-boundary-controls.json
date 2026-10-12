@@ -1,0 +1,78 @@
+{
+  "head": "06086c63a681bb9cb117387675c98ca3824ce7cc",
+  "results": [
+    {
+      "module": "_common",
+      "case": "missing_provider",
+      "rejected": true,
+      "message": "Found no OAuth2 info for provider google in <private settings file>."
+    },
+    {
+      "module": "_common",
+      "case": "unsupported_hosted",
+      "rejected": true,
+      "message": "Found no OAuth2 info for provider google in actions settings (either the provider name is mistyped or it's an unsupported provider and thus must be 'custom')."
+    },
+    {
+      "module": "_common",
+      "case": "missing_clientId",
+      "rejected": true,
+      "message": "Expected 'clientId' to be in OAuth2 settings for google (mode: custom)."
+    },
+    {
+      "module": "_common",
+      "case": "nonstring_clientId",
+      "rejected": true,
+      "message": "Expected a nonblank registered clientId in OAuth2 settings for google (mode: custom)."
+    },
+    {
+      "module": "_common",
+      "case": "blank_clientId",
+      "rejected": true,
+      "message": "Expected a nonblank registered clientId in OAuth2 settings for google (mode: custom)."
+    },
+    {
+      "module": "_common",
+      "case": "public_endpoint_defaults",
+      "clientSecret_optional": true,
+      "resolved": true
+    },
+    {
+      "module": "vendored_deps",
+      "case": "missing_provider",
+      "rejected": true,
+      "message": "Found no OAuth2 info for provider google in <private settings file>."
+    },
+    {
+      "module": "vendored_deps",
+      "case": "unsupported_hosted",
+      "rejected": true,
+      "message": "Found no OAuth2 info for provider google in actions settings (either the provider name is mistyped or it's an unsupported provider and thus must be 'custom')."
+    },
+    {
+      "module": "vendored_deps",
+      "case": "missing_clientId",
+      "rejected": true,
+      "message": "Expected 'clientId' to be in OAuth2 settings for google (mode: custom)."
+    },
+    {
+      "module": "vendored_deps",
+      "case": "nonstring_clientId",
+      "rejected": true,
+      "message": "Expected a nonblank registered clientId in OAuth2 settings for google (mode: custom)."
+    },
+    {
+      "module": "vendored_deps",
+      "case": "blank_clientId",
+      "rejected": true,
+      "message": "Expected a nonblank registered clientId in OAuth2 settings for google (mode: custom)."
+    },
+    {
+      "module": "vendored_deps",
+      "case": "public_endpoint_defaults",
+      "clientSecret_optional": true,
+      "resolved": true
+    }
+  ],
+  "scope": "settings source boundary controls; no real provider credentials/services"
+}

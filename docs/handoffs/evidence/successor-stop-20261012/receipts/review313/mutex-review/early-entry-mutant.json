@@ -1,0 +1,23 @@
+{
+  "scope": "Linux local prepared interpreter; private temporary mutex files; mutation control of test proof only, not production/native/Windows acceptance",
+  "results": [
+    {
+      "lane": "_common",
+      "reviewed_source_sha256": "1e29223d9ef6be1a57cb644f3ec29b65a58a2f14887df741d531203132d123d5",
+      "mutant": "successor acquires a different inode while original owner remains held; release delayed until successor enters",
+      "entered_while_owner_undisposed": [
+        true
+      ],
+      "outcome": "FALSE_PASS"
+    },
+    {
+      "lane": "_robo_utils",
+      "reviewed_source_sha256": "6c4f3c980061fe1f3afbf79439f14360988f0d884e06569c833f1e9104afdc6f",
+      "mutant": "successor acquires a different inode while original owner remains held; release delayed until successor enters",
+      "entered_while_owner_undisposed": [
+        true
+      ],
+      "outcome": "FALSE_PASS"
+    }
+  ]
+}

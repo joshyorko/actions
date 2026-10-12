@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "verdict": "SUPPORTED_SHARED_VISIBLE_ANCESTOR_RESOURCE_SOURCE_NATIVE_HOLD",
+  "resource_source_supported": true,
+  "assessment_is_inference": true,
+  "scope": "Current audited process, descriptor-bound shared visible cgroup2 ancestor memory constraint; no capacity reservation or native launch acceptance",
+  "source_head_inspected": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "resource_binding": {
+    "audited_pid": 58303,
+    "membership_witness_samples": 2,
+    "own_pid_present_twice": true,
+    "child_directory": "/sys/fs/cgroup/init",
+    "child_directory_device": 24,
+    "child_directory_inode": 213,
+    "child_procs_device": 24,
+    "child_procs_inode": 215,
+    "parent_directory_device": 24,
+    "parent_directory_inode": 148,
+    "child_opened_relative_to_pinned_parent_fd": true,
+    "same_cgroup2_filesystem_device": "0:24",
+    "directories_files_and_mount_metadata_stable_during_one_audit": true,
+    "parent_memory_controller_enabled": true,
+    "visible_parent_cap_bytes": 17179869184,
+    "child_local_cap": "max",
+    "physical_hierarchy_inference": "Pinned child membership and parent openat relation identify the visible ancestor as an applicable memory-controller constraint; child max doesnotoverride ancestorrestriction.",
+    "parent_memory_current_samples": [
+      14701301760,
+      14701301760
+    ],
+    "child_memory_current_samples": [
+      14697975808,
+      14697975808
+    ],
+    "shared_parent_margin_bytes": [
+      2478567424,
+      2478567424
+    ],
+    "margin_scope": "shared parent accounting snapshot, one applicable constraint; notexclusive capacity, reservation, minimum guaranteed RAM or complete effective headroom"
+  },
+  "namespace_and_policy": {
+    "proc_self_cgroup": "0::/",
+    "mount_root": "/..",
+    "mount_metadata_retained_verbatim": true,
+    "lexical_rewrite_performed": false,
+    "lexical_normalization_required_for_this_fd_proof": false,
+    "mount_namespace_creation_history": "UNKNOWN; no remount or new namespace inferred as observed fact",
+    "path_mapping_history_remains_unknown_but_not_resource_binding_blocker": true,
+    "formal_canonical_only_runtime_policy_found": false,
+    "immutable_search_scope": "f949 action_server/src and action_server/scripts contain no cgroup/memory.max resource-validator references",
+    "earlier_interpretation_refined": "Initial canonical-policy HOLD is retained verbatim as previous scope assessment. Kernel semantics and source audit support this FD-bound shared resource source; canonical lexical reconstruction is not an additional required proof for it."
+  },
+  "primary_source": {
+    "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+    "independently_read_sections": [
+      "Introduction",
+      "Processes",
+      "Memory Interface Files",
+      "Namespace"
+    ],
+    "verified_primary_facts": [
+      "Namespace views use relative paths.",
+      "Enabled controllers apply through their subtrees.",
+      "memory.current includes descendants.",
+      "cgroup.procs reports process membership.",
+      "memory.max may be temporarily exceeded."
+    ],
+    "fd_source_binding_assessment": "INFERENCE from retained descriptor/membership audit and these documented semantics, not a quoted kernel admission policy",
+    "namespace_mapping_not_reconstructed": true,
+    "immutable_source_search": {
+      "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+      "command": "git grep -n -e cgroup -e memory.max f949bef2eeab518ffd34d9e69955938a007f8922 -- action_server/src action_server/scripts",
+      "matches": 0,
+      "formal_canonical_only_validator_found": false,
+      "scope_limit": "No formal cgroup launch policy found in these Runtime source/script paths; canonical prose is operational guidance."
+    }
+  },
+  "prior_root_failure": {
+    "preserved": true,
+    "root_direct_procs_entries": 0,
+    "interpretation": "Parent is not the directly witnessed current member cgroup; rootcandidate empty-membershipFAIL remains valid. It doesnotnegate child membership or ancestorconstraint."
+  },
+  "real_remaining_requirements": [
+    "fresh validated binding/scope during any future monitor or process migration",
+    "accepted numeric native peak/overhead/reserve budgets",
+    "independent guardian/whole-operation endpoint and qualified controller design",
+    "actual reader/sampler/census/lease qualification",
+    "other tighter ancestor or host constraints if claiming total effective capacity"
+  ],
+  "native_admission": "HOLD for these remaining requirements, not automatically because namespace-relative mount root text differs",
+  "no_cgroup_reread": true,
+  "new_cgroup_audits_in_this_refinement": 0,
+  "total_prior_independent_audits": 1,
+  "no_remount_namespace_escalation_or_writes": true,
+  "no_native_signals_tests_or_new_workers": true,
+  "native_attempts": 0,
+  "first_review_preservation": {
+    "path": "/workspace/successor-evidence/review308-cgroup-child/review.json",
+    "sha256": "4930ab18693eba56b844438daa66eae7df5cb3ae8d53f6c324bf6b0a2c99dce0",
+    "byte_identical": true
+  },
+  "inputs": {
+    "/workspace/successor-evidence/review308-cgroup-child/review.json": {
+      "bytes": 4779,
+      "sha256": "4930ab18693eba56b844438daa66eae7df5cb3ae8d53f6c324bf6b0a2c99dce0"
+    },
+    "/workspace/successor-evidence/review308-cgroup-child/audit-fields.json": {
+      "bytes": 8088,
+      "sha256": "d10695d4a1f860742fbf7381d2ef4329506e85de28d101782b19dc902913f534"
+    }
+  },
+  "evidence_files": {
+    "primary-and-source-interpretation.json": {
+      "bytes": 1104,
+      "sha256": "07150556bde35876f1002708bdb636fdf49d338cfb0a8e560f341afd773d9f25"
+    },
+    "documentation-proposal-resource-source.md": {
+      "bytes": 2120,
+      "sha256": "f8f9fbd812780d7748a56e548868f14ac7de8da14162e12d594307e937fbefa4"
+    }
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_proposal": "/workspace/successor-evidence/review308-cgroup-child/documentation-proposal-resource-source.md",
+    "durable_learning": "FD witnessed current membership plus physical hierarchy can validate a shared ancestor gauge without lexical namespace-path reconstruction.",
+    "evidence": "retained audit, primary Kernel docs and f949 immutable source search",
+    "stale_guidance_removed": "overbroad canonical-path rejection of an independently bound shared constraint and unproven formal sourcepolicy claim",
+    "remaining_uncertainty": "actualnamespacehistory/higherconstraints/futurebinding andnativebudgets/guardian/readers/leases remainunqualified"
+  },
+  "upstream_disposition": "none"
+}

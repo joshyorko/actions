@@ -1,0 +1,79 @@
+{
+  "schema": "provider-unverified-reader-independent-review-v1",
+  "observed_at_utc": "2026-10-12T07:17:57.019606+00:00",
+  "source": {
+    "repository": "joshyorko/actions",
+    "head": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+    "tree": "525083edecdf20ef0daf6d481b0b738935741d66",
+    "parent": "f949bef2eeab518ffd34d9e69955938a007f8922",
+    "expected_head": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+    "expected_tree": "525083edecdf20ef0daf6d481b0b738935741d66",
+    "changed_paths": [
+      "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "worktree_clean": true,
+    "diff_check": "PASS"
+  },
+  "scope_review": {
+    "core_behavior": "Reader guard is independently reached when process-tree birth ownership is unknown, only if owner still points to the exact caller Popen object and reader still points to the exact owner. It joins under remaining absolute cleanup deadline; it calls no process-tree cleanup helper on unknown ownership. Cleanup remains incomplete and tree remains null.",
+    "unknown_owner_errors_retained": true,
+    "signals_authorized_by_reader_path": false,
+    "absolute_endpoint_reused": true,
+    "primary_startup_exception_preserved": true,
+    "private_join_details_sanitized": true
+  },
+  "verification": {
+    "environment": "Existing action_server package .venv; no install/bootstrap. robocorp_log_pytest plugin disabled to avoid writing checkout output. Tests use real Thread objects and fake Popen/control streams; no RCC, Action, CI, lease, native fixture, infrastructure, or publication.",
+    "baseline_red": {
+      "script_source": "F949 exact script in isolated review overlay",
+      "script_sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c",
+      "test_source": "exact test file from immutable 3812 commit",
+      "test_sha256": "1f0b4cba241f6d705517cc699b795892609be875ea7783ca2e7e8a05a7ec5e26",
+      "selection": "original_finished_reader_is_observed, unknown_tree_reader_uses_remaining_absolute_deadline_and_same_thread (both deadline cases), unknown_tree_reader_failure_remains_secondary_to_startup_error",
+      "result": {
+        "tests": 4,
+        "failures": 4,
+        "errors": 0,
+        "skipped": 0
+      },
+      "xml": "red.xml",
+      "xml_sha256": "fa30f7af6e756969e163965bdd43c69f0adaa45fe8273e572f4d6a0b4a451c66"
+    },
+    "current_green": {
+      "head": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+      "selection": "original_finished_reader_is_observed, unknown_tree_reader_uses_remaining_absolute_deadline_and_same_thread (both deadline cases), unknown_tree_reader_failure_remains_secondary_to_startup_error, unknown_tree_never_joins_a_reader_with_changed_owner (both poison cases)",
+      "result": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "log": "green.log",
+      "log_sha256": "556af14958d272634804ff7d31f8765d89d80ea0ce167703f30afca03999c0d5",
+      "xml": "green.xml",
+      "xml_sha256": "44d6fecd9d3109c440a817a7ee276275c71b908af9175f9caa281d0c4ca8e8db"
+    },
+    "controlled_edge": "alive-classification-control.json"
+  },
+  "finding": {
+    "id": "R308-reader-alive-error-classification",
+    "severity": "P2 diagnostic correctness",
+    "status": "CONFIRMED",
+    "location": "action_server/scripts/verify_dakota_rcc_acceptance.py:1477-1485",
+    "detail": "join() and the first is_alive() are inside one try; if join succeeds and is_alive raises, the error is recorded as PROVIDER_JOIN_* even though the subsequent liveness probe may succeed. Independent actual-thread probe reproduced error=PROVIDER_JOIN_OSError with alive=false. The result still remains incomplete and no tree authority is gained.",
+    "minimal_fix": "Separate join() exception handling from the liveness query; classify errors from is_alive as PROVIDER_ALIVE_*, preserve joined=false when liveness cannot be observed, and add one actual-thread one-shot is_alive failure test.",
+    "disposition": "HOLD_FOR_NARROW_DIAGNOSTIC_CORRECTION"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "proposal_file": "documentation-proposal.md",
+    "durable_learning": "The current guide paragraph already documents the independent provider reader ownership checks, same endpoint, no signal authority, and fixed secondary error classes. After the error-class correction, make the diagnostic distinction explicit: join-call failures are PROVIDER_JOIN_*; liveness-query failures are PROVIDER_ALIVE_*; either leaves cleanup incomplete when state is unobserved.",
+    "evidence": "The 4-case F949 RED / 6-case 3812 GREEN controls and alive-classification-control.json.",
+    "stale_or_ambiguous_guidance": "Current guide says join errors remain fixed secondary classes but does not distinguish a liveness-query error that occurs after join returns.",
+    "remaining_uncertainty": "No full source suite or cross-platform CI was run; this was a bounded reader-control review only."
+  },
+  "upstream_disposition": "none",
+  "no_product_source_changes": true
+}

@@ -1,0 +1,63 @@
+{
+  "verdict": "GO_INTEGRATION_RECEIPT",
+  "observed_at_utc": "2026-10-12 02:36:39 UTC",
+  "pr": 307,
+  "state": "closed",
+  "merged": true,
+  "merged_at": "2026-10-12T02:30:54Z",
+  "accepted_head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "target": "integration/community-release-20261008",
+  "merge_commit": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+  "merge_tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+  "ordered_parents": [
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "23a6be5044f7a9377180f7ec7d33c50ad8c4c364"
+  ],
+  "live_target_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+  "community_sha": "a70993fafc99a9f94041485542d5a720797ca394",
+  "accepted_candidate_tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+  "actual_producer_commit": "500d640f6ab398efe4bcab6ccfda7a10db49d26e",
+  "accepted_candidate_producer_merge_trees_equal": true,
+  "exact_head_check_count": 23,
+  "checks_all_completed_success": true,
+  "workflow_count": 7,
+  "jobs_count": 23,
+  "all_workflows_and_jobs_completed_success": true,
+  "commit_status_count": 0,
+  "pagination": {
+    "checks": "filter=all; page1 total23/count23, page2 empty",
+    "statuses": "page1 empty; page2 empty",
+    "workflows": "head_sha23a; page1 total7/count7, page2 empty",
+    "jobs": "seven complete total_count inventories under100; exactly23 IDs match check-run IDs"
+  },
+  "publication": {
+    "run": 38193048649,
+    "event": "pull_request",
+    "job": 114632151959,
+    "publish_credential_step": "skipped",
+    "publish_artifacts_step": "skipped",
+    "candidate_artifact_upload": "success",
+    "claim": "This PR run did not execute PyPI publication; no broader release/registry audit performed."
+  },
+  "merge_path": {
+    "parent_execution_receipt": "gh pr merge --merge --match-head-commit23a; noadmin/no force/no branch deletion",
+    "independent_remote_evidence": "Normal two-parent merge into the named integration target, matching expected source and prior target.",
+    "limitation": "GitHub PR/ref/commit endpoints do not attest merge-command flags or prove absence of administration elsewhere. Premerge receipt records classic protection visibility403 and no bypass authority; this reviewer performed no external mutations or permission changes."
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "proposal_disposition": "REJECTED_REDUNDANT_NO_SOURCE_EDIT",
+    "candidate_delta": "Record the named target, live target ref, actual merge parents/tree and downstream community ref separately; integration and exact tree equality do not establish publication or release acceptance.",
+    "reason": "Already explicitly covered by current guide paragraph Classify a merge against the PR's named target and Live pull-request base identity; adding current PR identities would create a per-run diary.",
+    "durable_learning": "Existing guide is correct for this actual merged-target and stale PR-base observation; no new canonical rule needed.",
+    "evidence": "Independent PR/ref/Git commit reads, exact-head complete check/run/job inventory and skipped publication-step metadata.",
+    "stale_or_ambiguous_guidance_removed": "None found; retain existing target/scope and pagination guidance.",
+    "remaining_uncertainty": "Whole Runtime1.0.3 release, required native/installed/platform gates and other branches remain outside this receipt."
+  },
+  "upstream_disposition": "none",
+  "limitations": [
+    "Integration identity/check readback only; not Runtime1.0.3 release acceptance.",
+    "Success is attached to accepted23a source head and equal candidate/producer/merge trees; fresh merge-head48 CI not claimed.",
+    "No repository, issue, message, infrastructure, permission, publication or source mutation was performed by this lane."
+  ]
+}

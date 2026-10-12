@@ -1,0 +1,1 @@
+{"result": "FAIL", "control": "exact LF equality against all platforms", "reason": "Windows generated public inputs carry CRLF checkout bytes; raw hashes differ, not yet classified at initial attempt", "retained": true}

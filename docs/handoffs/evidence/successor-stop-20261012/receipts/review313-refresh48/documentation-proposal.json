@@ -1,0 +1,13 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "insertion_point": "Live pull-request base identity, after the paragraph beginning For an ordinary stacked-branch refresh",
+  "exact_delta": "Inventory the complete diff from the live target before describing the refreshed PR's scope. Retained feature changes can still add production code and tests to that target even when the refresh resolved only documentation.",
+  "durable_learning": "Resolution scope and integration scope differ: only documentation may require conflict resolution while the actual target diff still carries production and regression changes.",
+  "evidence": [
+    "pr313-refreshed48-first-composition-control-FAIL.json retained the incorrect expectation of only mutex tests and documentation",
+    "immutable-composition.json independently enumerates five actual target-delta files, including process.py and the captured-deadline test",
+    "All four non-documentation target-delta blobs and modes match bd4; all other non-documentation entries match48"
+  ],
+  "stale_or_ambiguous_guidance_removed": "Clarify that a documentation-only conflict resolution does not make the complete refreshed PR documentation-only or test-only.",
+  "remaining_uncertainty": "Fresh exact216 CI and whole313 native process-tree/reader/lease acceptance remain pending. This proposal records a general scope check, not per-run identities in the canonical guide."
+}

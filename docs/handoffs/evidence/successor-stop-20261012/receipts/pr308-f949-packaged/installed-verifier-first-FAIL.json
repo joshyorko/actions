@@ -1,0 +1,8 @@
+{
+  "result": "FAIL",
+  "scope": "verifier exact-output assertion, not dependency check",
+  "actual_pip_command_exit": 0,
+  "cause": "Healthy requirements output preceded by default unwritable pip cache warning",
+  "old_output_sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313",
+  "remedy": "new owned task-local pip cache; no HOME/cache chmod, install or package changes; retain original6commandreceipt"
+}

@@ -1,0 +1,53 @@
+{
+  "baseline_binary": {
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "18.19.3"
+  },
+  "execution_authority": "Evidence only; no native launch authority",
+  "head": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+  "lease_commands_executed": false,
+  "memory_contract_review": {
+    "bytes": 16837,
+    "path": "/workspace/successor-evidence/review308-native-memory-contract/review.json",
+    "sha256": "b853ddb97d8af33c4d84a2b21e2b3e2b5d7270ccbc698e86cc8ae2970705f478"
+  },
+  "native_attempts_consumed": 0,
+  "optional_versions_launched": false,
+  "previous_profile": {
+    "bytes": 2413,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-3812a177-v13-READER-SOURCE-NOTADMITTED.json",
+    "sha256": "c47bdc47c8d256cb2be83b1b544ce39c9d78e39a10945c72b8caf9faa09f1ef2"
+  },
+  "rcc18_19_6_publication": "ABSOLUTE HOLD",
+  "remaining_holds": [
+    "Whole-test 640-second endpoint controller, native-only disk output retention/final census not implemented/admitted",
+    "Canonical self-cgroup child-init/finite ancestor mapping unresolved",
+    "Memory contract and adopted sampler incomplete: proposed3113851289 already INCLUDES536870912 reserve, base2.4GiB filesystem state is not measured nativeRSS; numeric proposal unaccepted",
+    "Passive same-lease identity/release observer not implemented/admitted; no lease query or writes",
+    "One genuine source/hash-bound18.19.3 Action acquisition/result/artifacts/leases/terminal cleanup remains NOT RUN"
+  ],
+  "resolved_component_delta": "Retained reader join and liveness exceptions observed in separate scopes; first liveness error remains typed ALIVE and incomplete despite later stopped observation. Unknown process ownership never gains signal authority.",
+  "resource": {
+    "/dev/shm": {
+      "free_bytes": 9441349632
+    },
+    "/tmp": {
+      "free_bytes": 9441144832
+    },
+    "/workspace": {
+      "free_bytes": 11536572416
+    },
+    "memory.current": "15188467712",
+    "memory.events": "low 0\nhigh 0\nmax 36423\noom 0\noom_kill 0\noom_group_kill 0",
+    "memory.max": "17179869184",
+    "scope": "visible cgroup counters only; namespace/ancestor mapping and memory contract unaccepted",
+    "time_unix": 1791790255.494093,
+    "visible_headroom_bytes": 1991401472
+  },
+  "runtime_release": "HOLD",
+  "schema": 1,
+  "source_acceptance": "Corrective exact-head independent review pending; no CI acceptance inherited from f949",
+  "source_controls": "Exact381 copied source:3 RED; corrected3 GREEN;139 affected PASS/1 native deselected; configured Ruff/format/Isort and mypy361 PASS",
+  "status": "NOT_ADMITTED",
+  "tree": "9dd420c0dbae72c5b6a724a77c009a4cfb65f0a0"
+}

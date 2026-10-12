@@ -1,0 +1,26 @@
+[
+  {
+    "manifest": "early-receipts/manifest.json",
+    "checked": 44,
+    "rows": 44,
+    "errors": []
+  },
+  {
+    "manifest": "root-source-snapshot/manifest.json",
+    "checked": 2688,
+    "rows": 2688,
+    "errors": []
+  },
+  {
+    "manifest": "writer-a/exact-original-writer-a-safe-source-and-local-only-manifest.json",
+    "checked": 106,
+    "rows": 106,
+    "errors": []
+  },
+  {
+    "manifest": "writer-b/exact-safe-writer-b-original-source-copy-manifest.json",
+    "checked": 24,
+    "rows": 24,
+    "errors": []
+  }
+]

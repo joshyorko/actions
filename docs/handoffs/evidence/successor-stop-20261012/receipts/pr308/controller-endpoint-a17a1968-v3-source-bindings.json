@@ -1,0 +1,29 @@
+{
+  "head": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+  "tree": "9dd420c0dbae72c5b6a724a77c009a4cfb65f0a0",
+  "helper_sha256": "7292fa26cce41e6b24fbcb7e1d2fc385a99c2f51d3181983e85d962fdf926608",
+  "plan_sha256": "4b81b34cbd22eb1eb2ca969b7729c1dcdee624b11943b734993d4a5398cda82c",
+  "function_bindings": {
+    "run_owned_process": {
+      "line": 759,
+      "ast_sha256": "0750bb54cd6a4b9e54b0196434fd57e203be07e9e007ccf58d549027da584b0f"
+    },
+    "_reap_adopted_children": {
+      "line": 924,
+      "ast_sha256": "800ad46926fd79e4b18c328c7eef543cf1099b82a5c01ac867922c016620bdac"
+    },
+    "_stop_supervised_processes": {
+      "line": 1009,
+      "ast_sha256": "ce60a0bc54b682d180e1297179287a56a1362c421620dd20f942357003130088"
+    },
+    "_supervisor_main": {
+      "line": 1098,
+      "ast_sha256": "066514c8062ab9be99cd9d0d299a96ab115507d7a7bc3f7bf1f124b306c7f47e"
+    },
+    "main": {
+      "line": 2819,
+      "ast_sha256": "5c2e0b0962564f24b37ac4320d8f8a9240b31709a96bf518f3419a99004ebec1"
+    }
+  },
+  "navigation_errata": "Design navigation lines were approximate; authoritative actual AST lines here: _stop_supervised_processes1009,_reap_adopted_children924,main2819. Source identity/diff unchanged; no implementation/admission claim."
+}

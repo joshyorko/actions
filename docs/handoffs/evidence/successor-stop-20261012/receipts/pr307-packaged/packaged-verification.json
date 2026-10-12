@@ -1,0 +1,205 @@
+{
+  "schema": "actions-runtime-packaged-input-verification/v1",
+  "head_sha": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "run_id": 38193048649,
+  "artifact_id": 11722158889,
+  "archive_sha256": "85d82c02bcfac718ac822b5f53308f5662dab222a6d97f767ecba4ae86bb106a",
+  "publication": false,
+  "windows_provenance": "Explicit CRLF derived checkout bytes and declared hashes verified; raw LF blob equality is false for Windows, retained as distinct source inputs.",
+  "members": [
+    {
+      "file": "actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl",
+      "sha256": "5bea3da441b6619f140da137dd95da3e86202680647afe157bac83d0899d8fb2",
+      "size": 13534544,
+      "public_inputs": [
+        {
+          "input": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "checkout_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "line_endings": "LF",
+          "exact_git_blob_bytes": true,
+          "exact_expected_checkout_bytes": true
+        },
+        {
+          "input": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "checkout_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "line_endings": "LF",
+          "exact_git_blob_bytes": true,
+          "exact_expected_checkout_bytes": true
+        }
+      ],
+      "runtime_oauth_source_exact": true,
+      "rcc": [
+        {
+          "member": "actions/server/bin/rcc-18.19.3",
+          "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
+          "size": 20886722
+        }
+      ]
+    },
+    {
+      "file": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "ff31635de80d6c30762bf86754d8d88c0102f5a66ade5bd32673adf63dee8efc",
+      "size": 14438881,
+      "public_inputs": [
+        {
+          "input": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "checkout_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "line_endings": "LF",
+          "exact_git_blob_bytes": true,
+          "exact_expected_checkout_bytes": true
+        },
+        {
+          "input": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "checkout_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "line_endings": "LF",
+          "exact_git_blob_bytes": true,
+          "exact_expected_checkout_bytes": true
+        }
+      ],
+      "runtime_oauth_source_exact": true,
+      "rcc": [
+        {
+          "member": "actions/server/bin/rcc-18.19.3",
+          "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+          "size": 22282402
+        }
+      ]
+    },
+    {
+      "file": "actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+      "sha256": "d1380b2facacdfb83a5ec39e043a4dcb24e058cd54e420d67ba48260d80cf860",
+      "size": 11889144,
+      "public_inputs": [
+        {
+          "input": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "checkout_sha256": "1e0b41540b3b47237da389650a13442ac9077097d8e9e483d578133752eaf84a",
+          "line_endings": "CRLF",
+          "exact_git_blob_bytes": false,
+          "exact_expected_checkout_bytes": true
+        },
+        {
+          "input": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "checkout_sha256": "010885793045b41f294f49200925fbc550830716570741c4604c6bce785868ce",
+          "line_endings": "CRLF",
+          "exact_git_blob_bytes": false,
+          "exact_expected_checkout_bytes": true
+        }
+      ],
+      "runtime_oauth_source_exact": true,
+      "rcc": [
+        {
+          "member": "actions/server/bin/rcc-18.19.3.exe",
+          "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+          "size": 19985408
+        }
+      ]
+    },
+    {
+      "file": "actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl",
+      "sha256": "a35783bc59cb584dd9e9ed3684ba50d16df574ee903fc6c2141b2b214c00cbda",
+      "size": 13534543,
+      "public_inputs": [
+        {
+          "input": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "checkout_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "line_endings": "LF",
+          "exact_git_blob_bytes": true,
+          "exact_expected_checkout_bytes": true
+        },
+        {
+          "input": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "checkout_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "line_endings": "LF",
+          "exact_git_blob_bytes": true,
+          "exact_expected_checkout_bytes": true
+        }
+      ],
+      "runtime_oauth_source_exact": true,
+      "rcc": [
+        {
+          "member": "actions/server/bin/rcc-18.19.3",
+          "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
+          "size": 20886722
+        }
+      ]
+    },
+    {
+      "file": "actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "f27b83e56a0df85e54c5658ab115b6cbc2c225b3400b412534668440d245a4e0",
+      "size": 14438881,
+      "public_inputs": [
+        {
+          "input": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "checkout_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "line_endings": "LF",
+          "exact_git_blob_bytes": true,
+          "exact_expected_checkout_bytes": true
+        },
+        {
+          "input": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "checkout_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "line_endings": "LF",
+          "exact_git_blob_bytes": true,
+          "exact_expected_checkout_bytes": true
+        }
+      ],
+      "runtime_oauth_source_exact": true,
+      "rcc": [
+        {
+          "member": "actions/server/bin/rcc-18.19.3",
+          "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+          "size": 22282402
+        }
+      ]
+    },
+    {
+      "file": "actions_runtime-1.0.3-cp313-cp313-win_amd64.whl",
+      "sha256": "304445a416d6d1dd67e1485f65835eb915604d5e7cea7628f587ee43c3b43910",
+      "size": 11889144,
+      "public_inputs": [
+        {
+          "input": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "checkout_sha256": "1e0b41540b3b47237da389650a13442ac9077097d8e9e483d578133752eaf84a",
+          "line_endings": "CRLF",
+          "exact_git_blob_bytes": false,
+          "exact_expected_checkout_bytes": true
+        },
+        {
+          "input": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "checkout_sha256": "010885793045b41f294f49200925fbc550830716570741c4604c6bce785868ce",
+          "line_endings": "CRLF",
+          "exact_git_blob_bytes": false,
+          "exact_expected_checkout_bytes": true
+        }
+      ],
+      "runtime_oauth_source_exact": true,
+      "rcc": [
+        {
+          "member": "actions/server/bin/rcc-18.19.3.exe",
+          "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+          "size": 19985408
+        }
+      ]
+    },
+    {
+      "file": "actions_runtime-1.0.3.tar.gz",
+      "sha256": "e82ba23aa613a56ed9cdea50c6ad1d07685b62e68b591ce1d45cc8f786643208",
+      "size": 1278747,
+      "public_inputs_runtime_and_generated_bundle_exact": true,
+      "builder_script_included": false,
+      "builder_script_requirement": "source verifier initially assumed inclusion; shipped sdist uses pre-generated exact bundled module and build.py RCC acquisition, not regeneration"
+    }
+  ]
+}

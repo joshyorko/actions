@@ -1,0 +1,14 @@
+oauth2Config:
+  providers:
+    custom:
+      authorizationEndpoint: /auth
+      clientId: f
+      clientSecret: b
+      mode: custom
+      server: http://server/
+      tokenEndpoint: /end
+    google:
+      clientId: foo
+      clientSecret: bar
+      mode: custom
+      tokenEndpoint: <end>

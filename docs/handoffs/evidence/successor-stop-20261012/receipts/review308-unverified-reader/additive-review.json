@@ -1,0 +1,117 @@
+{
+  "schema": "provider-unverified-reader-additive-review-v1",
+  "observed_at_utc": "2026-10-12T07:29:17.083828+00:00",
+  "review": "Read-only additive review of the one-shot provider reader liveness error classification correction. Prior 3812 HOLD receipt and earlier failed-green artifacts remain unmodified.",
+  "candidate": {
+    "base_head": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+    "base_tree": "525083edecdf20ef0daf6d481b0b738935741d66",
+    "base_parent": "f949bef2eeab518ffd34d9e69955938a007f8922",
+    "candidate_scope": "uncommitted working tree diff; no source checkout edits by reviewer",
+    "patch_sha256": "1d88c6243dccbce9082f1b075322114e5ec45bee29bb12ae7cff71a07090db13",
+    "patch_bytes": 7391,
+    "changed_paths": [
+      "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+      "docs/skills/repository-operations.md"
+    ],
+    "file_fingerprints": {
+      "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+        "path": "/workspace/actions-pr308/action_server/scripts/verify_dakota_rcc_acceptance.py",
+        "bytes": 110515,
+        "sha256": "7292fa26cce41e6b24fbcb7e1d2fc385a99c2f51d3181983e85d962fdf926608"
+      },
+      "action_server/tests/action_server_tests/test_provider_startup_cleanup.py": {
+        "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+        "bytes": 32682,
+        "sha256": "a0f6b32b43687932177ca11129dd15c61001605b0ceb24ca29af62b1115bfdaf"
+      },
+      "docs/skills/repository-operations.md": {
+        "path": "/workspace/actions-pr308/docs/skills/repository-operations.md",
+        "bytes": 292025,
+        "sha256": "9a1c88e19470a404d1b2e836374138534fd84f33b100c767fa1f94fae1b05652"
+      }
+    },
+    "worktree_clean": false,
+    "diff_check": "PASS"
+  },
+  "reviewed_behavior": {
+    "join_failures": "Remain PROVIDER_JOIN_*; joined stays false.",
+    "liveness_failures": "First post-join is_alive exception maps to PROVIDER_ALIVE_*; subsequent liveness may be false, but joined remains false and the result remains incomplete.",
+    "exception_details": "Only class names are retained; injected private exception text is not serialized.",
+    "absolute_deadline": "The join call still receives max(0, deadline - time.monotonic()).",
+    "authority": "Unknown tree ownership still avoids tree cleanup; with tree-owned control, only the test stub is called. No test or code path launched a provider/RCC process or exercised native signals.",
+    "primary_exception": "Startup JSON error remains the raised primary exception and cleanup result is attached."
+  },
+  "source_bound_red_green": {
+    "red_baseline": {
+      "helper_is_exact_base_script": true,
+      "helper_sha256": "7c6499fda0a0f9c5e22cbc64c53d1aa8f3a8152e5539a0dabd30a1ee376b6e8e",
+      "test_is_candidate_test": true,
+      "test_sha256": "a0f6b32b43687932177ca11129dd15c61001605b0ceb24ca29af62b1115bfdaf",
+      "source_binding_receipt": {
+        "path": "/workspace/successor-evidence/pr308/provider-alive-classification-red-v2-source-binding.json",
+        "bytes": 510,
+        "sha256": "5fb0ab0422070da11f0b914caf022f9f85dcf6a1135e9be4a944f2c6345703b6"
+      },
+      "run_log": {
+        "path": "/workspace/successor-evidence/pr308/provider-alive-classification-red-v2.log",
+        "bytes": 11126,
+        "sha256": "e339b62bd9858e5618f0510306ad40a31ddf64f36e0122e082760b71c78feda2"
+      },
+      "junit": {
+        "path": "/workspace/successor-evidence/pr308/provider-alive-classification-red-v2.xml",
+        "bytes": 9850,
+        "sha256": "a4eed52fd8755dfc1d549280768db32fab42ade4d3c48feaa4c4bf5664c84a64"
+      },
+      "result": {
+        "tests": 3,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "meaning": "All three new controls fail against the exact 3812 helper while using the candidate test bytes."
+    },
+    "green_candidate": {
+      "helper_sha256": "7292fa26cce41e6b24fbcb7e1d2fc385a99c2f51d3181983e85d962fdf926608",
+      "test_sha256": "a0f6b32b43687932177ca11129dd15c61001605b0ceb24ca29af62b1115bfdaf",
+      "run_log": {
+        "path": "/workspace/successor-evidence/pr308/provider-alive-classification-green-v2.log",
+        "bytes": 283,
+        "sha256": "6199d3406fe26f884df864059662ffadbc0842c0b3dae08821084ae36fb5fb9d"
+      },
+      "junit": {
+        "path": "/workspace/successor-evidence/pr308/provider-alive-classification-green-v2.xml",
+        "bytes": 748,
+        "sha256": "d0ef60159a9a8c5a4f79dfd77846cd88ffdb7e7474d43cd4fa61c948c1c90afe"
+      },
+      "result": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "meaning": "The same three controls pass on the candidate; 38 earlier source-only controls are deselected."
+    }
+  },
+  "previous_finding": {
+    "id": "R308-reader-alive-error-classification",
+    "prior_receipt": "/workspace/successor-evidence/review308-unverified-reader/review.json",
+    "status": "CLOSED_IN_CANDIDATE",
+    "basis": "Separating join() from the first is_alive() query now reports PROVIDER_ALIVE_OSError while keeping cleanup incomplete, alive=false, and no private details."
+  },
+  "review_disposition": "GO_ADDITIVE_READER_DIAGNOSTIC_CORRECTION_ONLY",
+  "remaining_scope_limits": [
+    "No package-full suite or cross-platform CI rerun.",
+    "No RCC, Action, native fixture, lease, publication, or process launch.",
+    "This is a worktree candidate, not a commit/remote/merge approval."
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "candidate_update": "Present in this three-file worktree diff: explicitly separate join() and is_alive() exception classes and state one-shot liveness errors preserve incompleteness and the original startup exception.",
+    "durable_learning": "Reader join and liveness observations are distinct facts; a successful subsequent liveness read cannot reclassify the first liveness failure as a join failure or establish join completion.",
+    "evidence": "Candidate-specific 3/3 RED on exact 3812 helper, 3/3 GREEN on candidate, plus primary-exception control.",
+    "stale_or_ambiguous_guidance_removed": "The former text only described join errors; updated paragraph distinguishes join() and is_alive() errors.",
+    "remaining_uncertainty": "The guide is candidate worktree content only; no push or integration was reviewed."
+  },
+  "upstream_disposition": "none"
+}

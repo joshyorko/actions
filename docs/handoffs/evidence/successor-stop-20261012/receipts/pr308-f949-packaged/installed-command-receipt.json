@@ -1,0 +1,109 @@
+{
+  "observed_at": "2026-10-12T06:25:53.154386+00:00",
+  "source_head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "source_tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+  "artifact": 11728534466,
+  "run": 38211281718,
+  "results": [
+    {
+      "label": "installed-inventory",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr308-f949-packaged/installed-minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "consumer_inventory.py"
+      ],
+      "exit_code": 0,
+      "bytes": 356,
+      "output_sha256": "8504946acd20c90444fd3a3c8c2127576ec6f422e0f98dcb9afb3589142d8c40"
+    },
+    {
+      "label": "installed-oauth",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr308-f949-packaged/installed-minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test_installed_oauth.py"
+      ],
+      "exit_code": 0,
+      "bytes": 98,
+      "output_sha256": "e6f89f40290a2e5fe34e1216f7a4777227b5c4b0ab7e3d4aea5fea3ea9a3b8fa"
+    },
+    {
+      "label": "installed-cancellation-admission",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr308-f949-packaged/installed-minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "test_async_run_cancellation_admission.py"
+      ],
+      "exit_code": 0,
+      "bytes": 98,
+      "output_sha256": "1558b4d8f56605cb75539366aacdb2b0fb3a49bc2fc2d93cef48055fc5408786"
+    },
+    {
+      "label": "installed-pip-check",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr308-f949-packaged/installed-minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "bytes": 294,
+      "output_sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313"
+    },
+    {
+      "label": "installed-real-template",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr308-f949-packaged/installed-minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "real_bundled_template.py"
+      ],
+      "exit_code": 0,
+      "bytes": 257,
+      "output_sha256": "8423e6be10ec30218bfdd0263608a363eb93d2cd2a805bb3ca57c10037de147c"
+    },
+    {
+      "label": "installed-idle-startup",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr308-f949-packaged/installed-minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "check_installed_startup.py"
+      ],
+      "exit_code": 0,
+      "bytes": 1389,
+      "output_sha256": "f1d4298fd99f1cc8e4ecc8f5553091059f608c08a5740270cfde767f052ce510"
+    }
+  ],
+  "managed_actions": 0,
+  "scope": "installed Linux minimum-Core OAuth, held-executor admission, template, dependency and idle startup only; no managed Action/MCP/native/whole reader/lease qualification"
+}

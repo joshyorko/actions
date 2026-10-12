@@ -1,0 +1,186 @@
+{
+  "accepted_integration_merge_parent": {
+    "commit": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+    "merge_strategy": "ordinary ort merge; no conflicts; accepted OAuth and provider canonical lessons preserved",
+    "source_fix_commit": "6e2d7d7697c108ca7bdb7170743e3e620c2426ef",
+    "source_fix_tree": "9305cf0ea7784dc44d4f4bdc79961a81e9a4300a",
+    "tree": "137468f137d64091838d56515c826c2d4ed6b76f"
+  },
+  "commands": {
+    "extended_helper_mypy": "six exact pre-existing b0a diagnostics unchanged;exit1 separately retained; no new helper errors",
+    "first_green": "prepared .venv/bin/python -m pytest -n0 -q provider_startup_cleanup.py + existing provider startup kill fallback;23PASS exit0",
+    "git_diff_check": "PASS",
+    "helper_ruff": "PASS exit0",
+    "identity_red": "prepared .venv/bin/python -m pytest -n0 -q tests/action_server_tests/test_provider_startup_cleanup.py -k \"transactional or verified_descendants or reused_captured\";4 expectedFAIL/1PASS/17DESELECTED on heldc564,exit1",
+    "merged_focused": "prepared .venv/bin/python -m pytest -n0 -q tests/action_server_tests/test_provider_startup_cleanup.py tests/action_server_tests/test_dakota_rcc_acceptance.py tests/action_server_tests/test_source_staging_rcc_consumer.py tests/action_server_tests/test_rcc_runtime_adapter.py -m \"not integration_test\" --basetemp=/workspace/successor-pr308/provider-identity-merged --junitxml=/workspace/successor-evidence/pr308/provider-identity-merged-focused.xml;287PASS/1SKIP/3nativeDESELECTED/4warnings7.99s exit0",
+    "merged_static": "fresh pinned gateway holotree PATH, own homes/caches: poetry run invoke lint typecheck; Ruff/format/IsortPASS,mypy359filesPASS,exit0; markdownlint unavailable",
+    "merged_windows_mypy": "prepared package python -m mypy --platform win32 --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases two affected fixture files;PASS2files diagnostic"
+  },
+  "controller_implementation": "NOT_IMPLEMENTED; independent design review required; exact plan retained separately",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md:2592",
+    "durable_learning": [
+      "verified root birth/liveness transactional capture; failed capture never grants descendant signal authority",
+      "captured descendant PID/birth validation; previous proven descendants remain owned after original owner exits",
+      "public lifecycle Inspect reconciles and can remove records; dirty shipped source/schema not established by public tag; passive lease evidence separately admitted"
+    ],
+    "evidence": "independent no-OS-signal model,4RED then23GREEN/merged287PASS and exact6publicGitblob receipt",
+    "remaining_uncertainty": [
+      "exact22f ownership fix/merged source independent review and exact-head required CI pending",
+      "current provider ownership/cleanup controls are source-only; actual shipped18.19.3 provider reader and lease execution facts absent",
+      "single global primary deadline and bounded terminal cleanup require independent controller design review and source/control qualification; no old ROOT/script grant applies",
+      "existing supervisor returned data lacks uncapped final PID/create-time census and robust failed/timeout evidence propagation",
+      "actual passive same-lease creation/release observation remains missing; lifecycle inspect public source can reconcile/delete records and is not admitted as read-only observation",
+      "actual self-cgroup endpoint unproven: route0::/, mountroot/.., visible cgroup.procs empty on two bounded reads; strict retained reader rejects mount root",
+      "proposed conservative3113851289 initial headroom/536870912 reserve remain unaccepted and uncalibrated, regardless visible mount free memory",
+      "fresh native namespace, overhead budget, before/during/after observer and terminal output retention not yet admitted"
+    ],
+    "stale_or_ambiguous_guidance_removed": "unbracketed strict ownership claim corrected; lifecycle inspect cannot be called read-only from help/name"
+  },
+  "evidence_files": {
+    "provider-identity-configured-static.log": {
+      "bytes": 2017,
+      "sha256": "854076dac7b3fb4fd59a003a1eeaa037d0a4e917fd68b14870c898cfb57c9653"
+    },
+    "provider-identity-focused-final.log": {
+      "bytes": 1332,
+      "sha256": "c0a57beea710935219352f2ec2c63a3b1e8241cdecadb3bd451ae5785079defb"
+    },
+    "provider-identity-green.log": {
+      "bytes": 254,
+      "sha256": "23e408daf26b695c7a89db109e3f53dfdc021c362f92bb1f5b3c2a9c5eeb0b5b"
+    },
+    "provider-identity-green.xml": {
+      "bytes": 4216,
+      "sha256": "ee486fb526471e026ff2d9ed68bcb8a863ef10391b848d8f9250861c6661114b"
+    },
+    "provider-identity-helper-ruff.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "provider-identity-merged-configured-static.log": {
+      "bytes": 2017,
+      "sha256": "df3a4bb62fba8d71ffdef9a846c39562ac582974e3a26a5fedf2cc2fb9b90482"
+    },
+    "provider-identity-merged-focused.log": {
+      "bytes": 1333,
+      "sha256": "e84f7be594c7ab7418bc0f1f458d026ae072f39c2e8e0a8c472029a53d3409e5"
+    },
+    "provider-identity-merged-focused.xml": {
+      "bytes": 51583,
+      "sha256": "8cbcb9bd2ff5274cf16ab936882fcd74715e54c9efc1b70a5e7285c5c59a9dd1"
+    },
+    "provider-identity-merged-helper-mypy.log": {
+      "bytes": 846,
+      "sha256": "40f488b664a5f94ccba1d3c3159d10f33583c13a48bd70aa974214d3225ca461"
+    },
+    "provider-identity-merged-windows-mypy.log": {
+      "bytes": 43,
+      "sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8"
+    },
+    "provider-identity-red.log": {
+      "bytes": 11181,
+      "sha256": "0d041fbdecd3f61b3b8e52569f6106c8b9a9d2d8abd7e66414b88c193b012bbf"
+    },
+    "provider-identity-red.xml": {
+      "bytes": 13993,
+      "sha256": "d0d75bda348920e24a145c8319497f59e6f7cf36a7abf0c133dc1c8ce904e814"
+    }
+  },
+  "head": "22f74384442647db313d630b27ec0a8da11f6f67",
+  "held_predecessor": "c5643f828ba0b299c0c2a99a9755d90b39b04b3c",
+  "independent_finding": {
+    "bytes": 1908,
+    "sha256": "dd281d5237a7b0e233753041def794b961fc1906db3cd54328cd4634abbb2b6d"
+  },
+  "inspect_verify_repair_executed": false,
+  "lease_writes_executed": false,
+  "native_attempts_consumed": 0,
+  "native_launch_permitted": false,
+  "profile": {
+    "bytes": 13071,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-22f74384-v4-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "72d469205a5595e7d2a87c8fb94d7c5a3fe95c6953d3a8fef440c0a3e5f2eb2f"
+  },
+  "resource": {
+    "filesystems": {
+      "/dev/shm": {
+        "device": 36,
+        "free_bytes": 9441349632
+      },
+      "/tmp": {
+        "device": 33,
+        "free_bytes": 9441173504
+      },
+      "/workspace": {
+        "device": 27,
+        "free_bytes": 13353521152
+      }
+    },
+    "memory.events": {
+      "high": 0,
+      "low": 0,
+      "max": 25204,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory.events.local": {
+      "high": 0,
+      "low": 0,
+      "max": 25204,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory_current": 14382530560,
+    "memory_max": 17179869184,
+    "scope": "visible_cgroup_mount_diagnostic_only; self binding unproven",
+    "time_unix": 1791772914.2947762,
+    "visible_headroom_bytes": 2797338624
+  },
+  "schema": 1,
+  "source_files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes": 89915,
+      "sha256": "4cf5157364a151ace87735148873bc6f33aa4a27e3ec5f3defc639053b903f39"
+    },
+    "action_server/src/actions/server/_actions_process_pool.py": {
+      "bytes": 60974,
+      "sha256": "af2090208ebff767dc40af6d40501d813c570d1171ce031dcb75276ac6a5fef5"
+    },
+    "action_server/src/actions/server/_common/process.py": {
+      "bytes": 31134,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    "action_server/src/actions/server/_rcc_runtime_adapter.py": {
+      "bytes": 36123,
+      "sha256": "c1884571a572277beef50e359f8b5e71abf593e1ebdee4bea2e47290c8da81f2"
+    },
+    "action_server/src/actions/server/_robo_utils/callback.py": {
+      "bytes": 2092,
+      "sha256": "fa24e22f0fe04453b71b0f25ac8fa9f113511a9adc6d701d1e648f0931c3c441"
+    },
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py": {
+      "bytes": 15263,
+      "sha256": "9862a0a7fa5b7155c595a9f46c9d936a2822682082ef9ba97244d54233a93e3e"
+    },
+    "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py": {
+      "bytes": 62712,
+      "sha256": "5e090e16552aef53b2c4f066790914b3700c6e89b856ca965d423c8056b3be26"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 285353,
+      "sha256": "b1af0f4976f1b3dbff9750e0f2873b64102b27ff86933029dadc5b4ff66d8876"
+    }
+  },
+  "source_fix_commit": "6e2d7d7697c108ca7bdb7170743e3e620c2426ef",
+  "source_fix_patch": {
+    "bytes": 16126,
+    "sha256": "92c2383edfab52a1eb78ec692dd661e42d2925cb5e17e9cb422e1770699d9c56"
+  },
+  "source_fix_tree": "9305cf0ea7784dc44d4f4bdc79961a81e9a4300a",
+  "tree": "bc57b450d4242c02a9fc4b6ed68a108215f86dcd",
+  "upstream_disposition": "none",
+  "worktree_clean": true
+}

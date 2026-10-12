@@ -1,0 +1,45 @@
+{
+  "base": "8d49d0865ad5ad27b2d4e325ec135212080625e8",
+  "head": "534bab2b7525c4e4482d6f1797a6785fb71da0fc",
+  "tree": "3cb205147b8b18b3af0edba416efc3ea5aa081db",
+  "scope": "immutable AST controls, no RCC or builds; Windows path simulation only",
+  "guard_cases": [
+    {
+      "feature": "getuid",
+      "unavailable": "absent",
+      "config_reads": 0,
+      "identity_calls": 0,
+      "status": "PASS"
+    },
+    {
+      "feature": "getuid",
+      "unavailable": "noncallable",
+      "config_reads": 0,
+      "identity_calls": 0,
+      "status": "PASS"
+    },
+    {
+      "feature": "getgid",
+      "unavailable": "absent",
+      "config_reads": 0,
+      "identity_calls": 0,
+      "status": "PASS"
+    },
+    {
+      "feature": "getgid",
+      "unavailable": "noncallable",
+      "config_reads": 0,
+      "identity_calls": 0,
+      "status": "PASS"
+    }
+  ],
+  "identity_calls_before_config": [
+    "uid",
+    "gid"
+  ],
+  "remaining_helper_ast_unchanged_after_measured_owner_substitution": true,
+  "windows_path": "\\service-free\\rcc",
+  "native_windows": "NOT_RUN",
+  "rcc_18_19_3": "NOT_RUN",
+  "status": "PASS"
+}

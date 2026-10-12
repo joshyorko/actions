@@ -1,0 +1,102 @@
+Provider and worker cleanup now retain their original readers, verify process birth identities before signal authority, and report typed ownership evidence. Opt-in Linux supervisor metadata preserves raw wait observations, uncapped captured identity census and unavailable facts; it rejects unsupported birth matches and contradictory PID bindings without replacing the primary outcome. Production RCC remains pinned to18.19.3.
+
+Current head: `eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5`, tree `ce7ae02d6c7db06ceffedf771c6eb365d11517b9`, based on accepted integration `48eeaf171e695d9b8ac140ea53239eaeb6eff331`. The latest diagnostic slice preserves the same3-second startup/.2-second cleanup budget and strict stopped/complete assertions. It captures typed startup cleanup facts and reaps/closes only its original child in emergency test teardown. The production helper and common process implementation are unchanged from0546. Independent controls reproduce the old teardown defect, then pass four diagnostic/deadline controls; affected source tests329PASS/1SKIP/3nativeDESELECT and configured static checks pass. The final additive documentation correction changes no tested source bytes.
+
+Retained fe1 Windows source CI was cancelled once after a bounded reproduction proved its fake waitpid backend omitted WNOHANG and entered a constant-clock fallback. Corrective0546 changes test models only. Its observed CI has22 successful checks, one macOS failure and Windows integration still running. macOS source units report1420PASS/216SKIP/1FAIL in the provider-stopped assertion. Historical typed facts were unavailable, so actual cause remains UNKNOWN. Controlled scheduler overshoot demonstrates a possible route, not the actual macOS cause. This new head requires its own CI; no identical failing CI was replayed.
+
+The independently verified fe1 sdist/six-wheel package set and fresh public Core1.0.2/Helper1.0.3 consumer pass complete Runtime Python membership/provenance, nine installed OAuth controls, dependency checks, template creation and idle HTTP200/403/200. This scope does not qualify later whole source heads or installed native/MCP/platform/lease behavior.
+
+PR remains draft and unmerged. Genuine managed18.19.3 Action baseline attempts remain ZERO. Complete controller/deadline/reader/descendant/lease admission, usable self-cgroup binding, accepted resources, exact-head CI and native platforms remain HOLD. The eeb-v9 native profile is SOURCE-PREPARED-NOTRUN. Optional18.19.5 then exact727 are unexecuted and require baselinePASS first. Runtime1.0.3 and separate RCC18.19.6 publication remain HOLD. No pin/tag/release change, timeout increase, broad permission relaxation, bypass or publication occurred.
+
+<details>
+<summary>Retained prior source and acceptance history</summary>
+
+Engineering update2026-10-11 23:33UTC: exact source8d49/treea806 retained. Controlled descriptor35PASS23236537, stop-attempt original16GREEN→RED1→RED1→20GREEN6365b09d and capacity-source18PASSdd9fa827 now accepted. No real environment preservation yet; latestworkspace636653568 is below unchanged746586112 archival threshold. Completed test scratch preservation is next engineering dependency. First supported newer RCC:NONE; released18.19.5 and exact727c1ff8b679cdbbe12836e53c87734a1edb0071 test binaries neverexecuted/native functionality unqualified. Production/download/build18.19.3 unchanged. Windows/source-portability/native resource/calibration/full tuple gates held; no waiver. Existing RCC125/118 comments carry scoped tested contract/failures, prior text preserved.
+
+--- Prior retained history (unchanged) ---
+
+**Current source/qualification state — 2026-10-11 19:25 UTC.** Existing draft branch head is `8d49d0865ad5ad27b2d4e325ec135212080625e8`, tree `a80600809d373038ca76e445ba0b7b79bb7eeaa6`, based on actual integratione2c81. One normal push preserved existing accepted work. Fresh configured LIGHT passed; fresh configured FULL measured1470 passes/13 skips. Independent FULL decision `073e235a` accepts the original inner FULL separately from the retained extra parent-post failure and read-only supplement.
+
+Current Windows original log proves1257 passes/224 skips/two test path assertion failures plus seven POSIX-only type-stub errors; integration was skipped. A minimal private two-path portability patch has independent source-only GO `3cb83d18` and nine passing controls; it is not adopted and current native source remains frozen. No all-CI-green or merge qualification claim.
+
+RCC version admission is explicit, isolated and test-only for exact approved released18.19.5 and candidate727c1ff8 binary/source tuples. Production downloader/build pins remain18.19.3. V8 control3 configuration binds current complete1440 source, real source LIGHT/FULL, historical237 inputs and separate current fixture/logger rows; independent PREEXEC GO `3860e929` is conditional on distinct ROOT release, capacity and serialization. Actual current3/5/7276 acceptance remains NOT RUN/unqualified; no ready/merge/pin/publication. Existing persistent/reload/drain/provider source checkpoints are preserved and remain under their retained contracts.
+
+<details>
+<summary>Prior receipts and acceptance requirements (preserved verbatim)</summary>
+
+Current RCC compatibility source and actual control — 2026-10-11
+
+This existing implementation lane serves #133/#134/#139/#143 and retained #221 ownership. Current source `e4ff080375a8422bb656e52d218f198521dda078`, tree `973ff38f49a17a896e4d90f829a72e2ea0ea15e8`, replaces the isolated test path's RCC18.19.3-only coupling with approved exact source/binary/platform/build/feature identities, hash validation before a bounded version probe, descriptor/cache partitioning and fail-closed selection. Operator-supplied paths require explicit isolated selection and exact approved bytes. Unknown, unqualified and mismatched identities fail closed. Production downloads, build packaging and default RCC18.19.3 pins remain unchanged.
+
+SOURCEFULL is independently accepted:1427PASS/13existing SKIP, complete1440 unique nodes; LIGHT/static/type/template gates passed. Root full owner SHA256 `fb8a58b643957e72ba1d53d2216d4b73ac42b5e57235b2510f3159f667a2c1a0`, independent full `16d6709b835e1e4f16be8916b3f10eeb852c195845ebd64c5ac8fd08b19595b9`. The normal source push is verified and remains draft. This source basis is e3; actual target has advanced to a54, requiring ordinary refresh and fresh gates before integration.
+
+Released18.19.5 Linux binary SHA256 `1a617ad7c736fa67c605e20e5ebe3c7d54b02cd548f733e05c809cf49a48db1e` and exact18.19.6 source727c1ff8/native SHA256 `be55dadc391ae4ac7dd38356755a1698c595fdf41bd4a0141f8df7cc9d29f00e` are acquired and explicitly approved TEST_ONLY; no newer native binary has executed or been qualified. Released5 reports modified=true, so clean source equivalence remains UNKNOWN. This is not a released18.19.6 claim.
+
+One current-source RCC3 control stopped at both cache-client permission assertions before real artifact acquisition/Action/lease. The isolated client was observed0750 versus required0700; root0700/cache0700/marker0600 stayed exact. Helper command1/clean_no_descendants/reaped0, root1, pre/gateway/post0/10/0; reader joins/complete final census UNKNOWN. Original independent FAIL receipt `61506cf064896dc750ccf47450d440170861cef4cf9a5c68060ac3ea3bedf5b1` remains immutable. Static RCC source explains native home0750 normalization before version; deployed modified-binary/source equivalence remains UNKNOWN. A narrow exact-owner/primaryGID700-or750 client contract is being qualified; no chmod repair or acceptance waiver.
+
+First supported newer RCC: NONE. The next sequence is reviewed minimal source correction, current source gates, one distinct current control, then released5 and exact7276; persistent reuse/reload/generation drain/provider recovery and private supervisor/metadata acceptance remain retained. Existing RCC125/118 comments carry this contract and failure. Runtime1.0.3 publication remains HOLD. All earlier accepted work and original failures remain below.
+
+<details>
+<summary>Preserved prior implementation, requirements and acceptance evidence</summary>
+
+Current source/control engineering checkpoint, 2026-10-11 UTC: independently accepted SOURCE `c10380a4d2ebc6f0aca63eb85c8f84a337da4962` / tree `21676c626a933c2d55761ec85ecf26fe0eef26bb`, ordered prior CONTROL `b673ddd761ba4ccd68e9baa8faaa9ab666df794e` then actual integration `6181b044c75de35386f1ae30e71725398b6a7feb`. Separate sole-parent CONTROL `d5a3d2f53737f4f5380b6ecb7fb93d1a651f005d` / tree `fa3f7728d315c9a192f88e17acf15f164d4eee13` changes exactly three pin files; all 1,416 other files remain exact SOURCE. Normal existing-branch push is authenticated by `fc8542f206532ed0833c4b8eb21fd73cd9ccea97e4aa187befa81f3ef56103ae`.
+
+SOURCE full run **1240 passed, 13 skipped**, 15 warnings, 137.04s, independently reviewed `9480a381`; CONTROL 55 passed, Toolkit 96, static and all eight generated/thirty GitHub workflow checks passed, independently reviewed `5ce5b68a`. The pin RED has one failure/four passes; branch omission has two failures/three passes. The mistaken expected count, failed result collector and GREEN launch before that readback are preserved, with the corrected result derived from the original log. Generator checks observed prepared CONTROL bytes before the child commit; complete precommit/staged/postcommit proofs bind those exact bytes to the final tree. Source full results are inherited only within their SOURCE scope, without a repeated full run claim.
+
+All 188 final references, 147 original SOURCE references and seven prior hosted members remain bound. Current pins name SOURCE c103/tree216. Candidate guards, negative opt-in contract, source-first build, three permitted branches, eight path filters, matrices, needs, publication guards and deadlines retain their accepted semantics. The guide has the exact meaningful three-branch correction and both-parent imports; upstream disposition: none.
+
+Draft retained. Fresh current SOURCE/CONTROL hosted three-case execution, original runner checkout proof, complete CI and policy review remain **HOLD**. The old 776/7eb/b673 hosted receipt is historical. Positive 2510-second CLI-parent acceptance, private RCC01f/frozen-v6, whole #639/#134, current native producer qualification, backend/provider scopes and Runtime publication/release are not admitted by this source/control push.
+
+<details>
+<summary>Preserved complete preceding acceptance context</summary>
+
+Current control `b673ddd761ba4ccd68e9baa8faaa9ab666df794e`, tree `56d108fcdb5d43f7f27a8f2554fec51b702519f4`, is normally pushed on this existing branch after independent control review `31779bad488b43b88d7bb81b3f2c5d75edabf7519f5765bd90d86c66569d6f9b`. Its sole parent is separately reviewed SOURCE `7eb5bce946750555ab009f77592862920a901506`, tree `3ff76037779763d0461ff3a755b900c9ed83dcf8`, which ordinarily refreshes preserved source4ca onto actual accepted target776. This PR remains draft pending complete fresh current-tuple hosted CI and actual three-case acceptance; old4ca/774 checks are historical.
+
+SOURCE imports only the accepted public parent-deadline receipt guard,19 controls and canonical scope guidance. Original candidate identities/verification helpers, positive and negative assertions,2465-second parent watchdog,2510-second opt-in test envelope and10-second cleanup grace remain unchanged. Guard RED16 failed/3 passed preceded GREEN19. SOURCE full Runtime1190 passed/13 skipped; scoped133 passed/1 existing actual skip/3 integration deselected; Toolkit96, configured lint/format/type337 and all workflow/YAML checks passed. The guard preserves original private worker bytes and measured cells, marks parent timeout failure, handles malformed/unavailable evidence and persistence failures without exposing arbitrary raw exception or command text.
+
+CONTROL changes only the generator, its control test and one generated RCC workflow: two candidate identity pins select reviewed SOURCE7eb/3ff, and the existing308 branch is explicitly opted in. Pin and branch negatives each failed as intended before55 controls passed. The other1406 file bodies/modes, all9 candidate Git body/mode pins and current268 producer inputs plus5 selected tests stay exact SOURCE. The old92498 native artifact remains unqualified for the accepted adapter delta.
+
+The retained opt-in candidate-wheel test expects overall failure and failed offline-warm cells; its green negative contract is not a successful candidate lifecycle. The hosted three-case provider control does not exercise the CLI parent's timeout path or the2510-second envelope. Full private RCC01f/frozen-v6 recovery, metadata/provider/native/full134 and release acceptance remain HOLD. No actual native/CLI retry, publication, #221 integration or issue closure is claimed. SOURCE canonical delta2bd81847 is preserved; the stale two-branch guide list has a separately reviewed next-batch correction proposalcd97355e. Upstream disposition: none.
+
+<details><summary>Preserved prior candidate-identity source and hosted context</summary>
+
+Current refreshed source is independently reviewed and normally pushed at `4ca431b51b018b947fac6f096ca3cdc21028dd28`, tree `3726baf58c5b7caac1fbb1339e17b9d083b40fa4`, ordinary ordered9025/actual774. Source review `db8780bb`; verified push `25e6b816`. All1,409 leaves match the accepted both-parent union, including original verifier/tests and current workflows. Source has1,155 PASS/13 SKIP, scoped37 PASS/1 actual RCC deselection, Toolkit69, configured type337/lint/format and8 generator roundtrips/all30 YAML PASS. Own package environments and concrete source origins are verified.
+
+All268 producer inputs and five selectors remain exact versus the current target and recorded92498 inputs. This is narrow producer preservation; it does not qualify whole #134, actual provider/metadata/native execution or release. Old9025/1c75 nineteen green jobs remain historical. Fresh exact-head/actual774 synthetic merge hosted gates and all retained actual acceptance requirements remain open. No integration or manual actual retry occurred.
+
+Historical source checkpoints follow.
+
+Current source `9025a1e44bb05992e9f220842bfaf16a99ebd04f`, tree `b658453c78785aaaf5b998ef1e1aaade4174377d`, is normally pushed on the existing branch after independent exact-union source review `e46fdd1d7ed7b7073b9cc3d1fdaed29fdd1e314f674257ea1a9c1260c75b867d`. It ordinarily merges the original source with actual integration `1c7585fe8bb3cb9476c3997570bd3f04466f2bbc`; all original implementation/history/receipts remain preserved. Full configured Runtime1152 passed/13 skipped; scoped37 passed/1 realRCC deselected; type337, Doctor, verified prepared Bootstrap reuse, Toolkit69, full configured lint and26YAML workflow regeneration passed. All268 historical native producer inputs and five selected tests are unchanged. Novel final changes are canonical guidance only.
+
+Scope: candidate filename and exactly-one UTF8 METADATA Name/Version identity; source controls are not an actual provider/build/lifecycle or full134 acceptance. Old fbde-target hosted proofs are historical. Fresh complete current-head/current-target CI, reviews, policy and merge admission remain required. Source acceptance does not establish native/private/release acceptance. Upstream disposition: none.
+
+Historical checkpoints below retain their original identities and statuses.
+
+Current candidate `483e3e735c268b08acba1fd3930a9a34e0deaa91`, tree `9b69d78117e0e5cade3f59fcacc6db56a747b61f`, retains original `94716b90` through ordinary merge `493ecbd2` with accepted integration `fbde0d3a`. Original candidate-verifier/control blobs and formatter correction are exact; only the follow-up canonical clarification is new. All1,405 unrelated blob/mode pairs,268 tracked native producer inputs and five selected test bodies are preserved.
+
+Fresh source validation: Doctor/Bootstrap,Toolkit69,37 scoped version/metadata tests passed with one real-RCC gate deselected,1,134 package tests passed with13 existing skips,complete configured lint/Isort/type334 and all eight workflow roundtrips passed. Independent source GO SHA256 `010f01b9673d9d80e5b898f18f9c7ec2ac69a268d21a2dca6bcaaf92dea21631` authorizes normal push and fresh CI. Earlier19-success checks remain historical; complete new-head declared jobs are required before merge.
+
+The canonical guide distinguishes synthetic wheel Name/Version admission from actual wheel builds, provider-unavailable warm reuse, public-registry provenance and native execution. Historical failed wrapper-exit receipts retain their original labels. Actual RCC/private/native/full134 acceptance remains HOLD, without a new CLI/provider/cache invocation or release claim. Upstream disposition: none.
+
+Original repair and evidence follow:
+
+The RCC acceptance verifier previously assumed Core 1.0.2 when building and inspecting candidate wheels. It now reads Core and HTTP Helper versions from the checked-out Poetry metadata, validates wheel filenames against METADATA, and carries those versions into the fixture result and receipt. Production dependency floors are unchanged.
+
+Current head: `94716b90d85a171872e46b1efa8a1fb419e8a0c7`, tree `7ab1ba4642ee41a6254c9a56e388ea63a1623a9f`, based on accepted integration `19380993`. The final correction formats the new test helper with the repository configuration; its Python AST is unchanged. The guide now states the Runtime formatter check explicitly.
+
+Validation: the candidate-version regressions passed, followed by the canonical RCC test-file gate with 37 passed and 1 real-RCC test deselected. The retained source and union reviews are GO. Ubuntu CI on prior head `76e7f64a` passed tests, type checks and docs, but failed `inv lint` on two wrapping differences. That formatter failure was reproduced and corrected through the canonical RCC gateway; the configured format check now passes. Independent formatting review: SHA-256 `f2afa47dc2ef23fb1c9d901b7de22211bef34cec3fc8cdf03981eca90c5cc44d`.
+
+New-head CI is required. Earlier setup failures and corrections remain in the campaign evidence; they are not relabeled as passing runs.
+
+This verifier currently launches source Runtime only. These tests do not establish actual RCC execution, provider-unavailable warm reuse, frozen/Go acceptance, or completion of #134. The original offline positive gates remain required. Upstream disposition: none.
+</details>
+
+
+</details>
+
+</details>
+
+</details>
+
+
+</details>

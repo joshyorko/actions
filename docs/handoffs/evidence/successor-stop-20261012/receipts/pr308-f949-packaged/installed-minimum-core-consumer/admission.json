@@ -1,0 +1,13 @@
+{
+  "observed_at": "2026-10-12T06:23:19.181211+00:00",
+  "memory_current": 14527197184,
+  "memory_max": 17179869184,
+  "visible_headroom_bytes": 2652672000,
+  "disk_free": 12667203584,
+  "self_binding": "UNQUALIFIED",
+  "scope": "fresh installed source-only OAuth/admission controls and idle startup minworkers0; no Action/native",
+  "source_head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "source_floor_memory": 1073741824,
+  "source_floor_disk": 3221225472,
+  "native_admitted": false
+}

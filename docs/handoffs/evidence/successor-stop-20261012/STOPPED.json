@@ -1,0 +1,19 @@
+{
+  "workers": [
+    "rcc308",
+    "release_audit",
+    "review307",
+    "review308"
+  ],
+  "platform_states": "allCOMPLETED_INACTIVE observed via list_agents;interrupt controls applied whilecompleted",
+  "new_workers": 0,
+  "local_owned_live_runtime_or_test": 0,
+  "remote_owned_a17_runtime_CI": "38218598210 CANCELLED once byexplicitstopinstruction; sevenotherworkflows terminalSUCCESS",
+  "root": "handoffpreservationonly,thenstop; do not autoresume",
+  "unreapable_global_zombies": 117,
+  "zombie_limit": "PPID1; no recovered originalbirth/ownershipledger; cannotreap fromthisagent; no signals toPID1/infrastructure",
+  "source_preservation_pushes": "30559d49c18,30762a39720 skipCI;308a17 pre-stop; allnormal",
+  "native_attempts": 0,
+  "runtime1_0_3": "HOLD",
+  "rcc18_19_6": "ABSOLUTE_HOLD"
+}

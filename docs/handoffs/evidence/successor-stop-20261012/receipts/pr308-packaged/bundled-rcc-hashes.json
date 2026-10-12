@@ -1,0 +1,66 @@
+{
+  "source": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "scope": "staticpublicpackagedbinaryhashes only; no execution/lease/sourceequivalence qualification",
+  "wheels": [
+    {
+      "wheel": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "rcc": [
+        {
+          "path": "actions/server/bin/rcc-18.19.3",
+          "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+          "size": 22282402
+        }
+      ]
+    },
+    {
+      "wheel": "actions_runtime-1.0.3-cp313-cp313-win_amd64.whl",
+      "rcc": [
+        {
+          "path": "actions/server/bin/rcc-18.19.3.exe",
+          "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+          "size": 19985408
+        }
+      ]
+    },
+    {
+      "wheel": "actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "rcc": [
+        {
+          "path": "actions/server/bin/rcc-18.19.3",
+          "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+          "size": 22282402
+        }
+      ]
+    },
+    {
+      "wheel": "actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl",
+      "rcc": [
+        {
+          "path": "actions/server/bin/rcc-18.19.3",
+          "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
+          "size": 20886722
+        }
+      ]
+    },
+    {
+      "wheel": "actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+      "rcc": [
+        {
+          "path": "actions/server/bin/rcc-18.19.3.exe",
+          "sha256": "523a6be8ad92235fbe0a4e4732699f2cd66f9ef6ad57e045df434257c46112e4",
+          "size": 19985408
+        }
+      ]
+    },
+    {
+      "wheel": "actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl",
+      "rcc": [
+        {
+          "path": "actions/server/bin/rcc-18.19.3",
+          "sha256": "778402ccdb7c10e10fbdad7baa7c27b44563c1a90a9527e096101a21178e0266",
+          "size": 20886722
+        }
+      ]
+    }
+  ]
+}

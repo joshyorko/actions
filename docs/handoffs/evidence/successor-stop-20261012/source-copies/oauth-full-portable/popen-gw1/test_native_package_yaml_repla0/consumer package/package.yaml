@@ -1,0 +1,10 @@
+version: 1
+spec-version: v2
+dependencies:
+  conda-forge:
+    - python=3.12
+    - uv=0.9.26
+  pypi:
+    - actions-work-items=0.4.4
+post-install:
+  - python -m pip install --force-reinstall --report '/workspace/successor-evidence/oauth-full-portable/popen-gw1/test_native_package_yaml_repla0/consumer package/core install report.json' '/workspace/successor-evidence/oauth-full-portable/popen-gw1/test_native_package_yaml_repla0/candidate wheels/actions_core-1.0.2-py3-none-any.whl'

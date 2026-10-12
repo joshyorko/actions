@@ -1,0 +1,82 @@
+{
+  "observed_at": "2026-10-12T08:08:50.914030+00:00",
+  "repository": "joshyorko/actions",
+  "refs": [
+    {
+      "branch": "test/canvas-runtime-cache-isolation-20261010",
+      "sha": "59d49c18f0615e51b1ff0cc3cd7f1ebe4d2729fa",
+      "tree": "13ee4255bfc789f2722a8d11774b7546c2c7b7f8",
+      "parents": [
+        "3e3e5b0d4c7fcae578a3ec89ff9f2d1d054f657e"
+      ],
+      "independent_api_commit_tree_matches_local": true
+    },
+    {
+      "branch": "fix/database-savepoint-admission-20261010",
+      "sha": "eb0df4f97f390b413e364fe68364b81a65663f02",
+      "tree": "f8e4e760733f6b16f6dcc66ff057d1f2fad87bc2",
+      "parents": [
+        "b3defc66e7e127b071511f0ac1940847054dcaea",
+        "48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+      ],
+      "independent_api_commit_tree_matches_local": true
+    },
+    {
+      "branch": "fix/runtime-release-changelog-selection-20261010",
+      "sha": "62a3972083507b70862cfc3bf9678ffd9e313f9e",
+      "tree": "088d1e1c30260e7aa18a79bfaa0ba4f02cfdd577",
+      "parents": [
+        "23a6be5044f7a9377180f7ec7d33c50ad8c4c364"
+      ],
+      "independent_api_commit_tree_matches_local": true
+    },
+    {
+      "branch": "fix/rcc-candidate-wheel-identities-20261010",
+      "sha": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+      "tree": "9dd420c0dbae72c5b6a724a77c009a4cfb65f0a0",
+      "parents": [
+        "3812a1773c512a1088c7778b6a2b07aae2e358da"
+      ],
+      "independent_api_commit_tree_matches_local": true
+    },
+    {
+      "branch": "fix/captured-child-cleanup-deadline-20261011",
+      "sha": "216ad55b5bcafaa54ba61fcc87982a57573adce7",
+      "tree": "4c124ca711b6acaea657a2b6b713fb906f176ff7",
+      "parents": [
+        "bd4f3f8397dd4563fe767484bf7de15ab99a0123",
+        "48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+      ],
+      "independent_api_commit_tree_matches_local": true
+    },
+    {
+      "branch": "integration/community-release-20261008",
+      "sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+      "parents": [
+        "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+        "23a6be5044f7a9377180f7ec7d33c50ad8c4c364"
+      ],
+      "independent_api_commit_tree_matches_local": true
+    },
+    {
+      "branch": "community",
+      "sha": "a70993fafc99a9f94041485542d5a720797ca394",
+      "tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+      "parents": [
+        "36b8192dbb8143e016af3351f7d25b22a35c9944",
+        "c2733957b047a2acf3d38c1cad7704a4bc69f15b"
+      ],
+      "independent_api_commit_tree_matches_local": true
+    },
+    {
+      "branch": "handoff/actions-swarm-mk3-wave8-20261010",
+      "sha": "62bab755c87b46ff8140ec8ac17bd377b47dc258",
+      "tree": "469cb3c1b60229cb0ccda1627e2ed0916996935e",
+      "parents": [
+        "3b86163240e3527244dcc8501e2a1f32fb5ac546"
+      ],
+      "independent_api_commit_tree_matches_local": true
+    }
+  ]
+}

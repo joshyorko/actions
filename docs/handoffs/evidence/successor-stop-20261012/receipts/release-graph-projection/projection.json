@@ -1,0 +1,4597 @@
+{
+  "schema": "readonly-retained-54-release-projection/v1",
+  "generated_from": {
+    "handoff_repo_head": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+    "handoff_clean_at_read": true,
+    "handoff_path": "docs/handoffs/actions-swarm-mk3-20261011-ledger-verified.md",
+    "matrix_path": "docs/program/evidence/issue-closure-audit-20261010/issue-delivery-matrix.json",
+    "matrix_sha256": "f90fc32a4cdf065f6066e24e6a6f9eb98c635a7f5375f166efd10577b5d87c5d",
+    "matrix_observed_at_utc": "2026-10-10T22:44:44Z",
+    "source_contracts_commit": "19380993febaa71238eaee3026b5c808773283ff"
+  },
+  "counts": {
+    "retained_open_matrix_rows": 53,
+    "retained_closed_contracts": 1,
+    "retained_graph_total": 54,
+    "retained_open": 53,
+    "retained_closed": 1,
+    "nonretained_open_rows": 5,
+    "explicit_human_hold_no_dispatch": [
+      293,
+      294,
+      295,
+      296
+    ]
+  },
+  "snapshot_limit": "Read-only historical evidence snapshot. Matrix observed 2026-10-10T22:44:44Z and handoff is an immutable source snapshot. Not a live GitHub refresh. Every original contract hash/status is preserved; projection does not change issue graph, status, closure, release authorization, or dispatch.",
+  "current_release_candidate_projection": {
+    "name": "Actions Runtime 1.0.3 community/native delivery slice",
+    "boundary": "One local/community Runtime release candidate with existing Core/Helper 1.0.3 pairing; exact #211 external native distribution contract remains required. Keep released-product safety, configured admin authorization, public package compatibility, shipped UI and actual standalone Work Items defect criteria as release gates where the corresponding surface ships. Keep local SQLite and the bounded local RCC consumer releasable; do not require PostgreSQL, independent workers, Package v3, a second adapter, durable Work Item redesign, MCP Canvas, or Control Room for this slice. This is a projection, not acceptance or release approval.",
+    "required_retained_contracts": [
+      151,
+      152,
+      153,
+      195,
+      208,
+      211,
+      212,
+      96,
+      97,
+      98,
+      84,
+      125,
+      134
+    ],
+    "already_accepted": [
+      210
+    ],
+    "no_claims": [
+      "Core/Helper 1.0.3 publication is not Runtime 1.0.3 publication.",
+      "Homebrew tap migration issue #103 is closed; #211 is the Actions-side caller and native distribution delivery, not a request to reopen the tap issue.",
+      "The #208 three-OS packaged subgate and Linux denial subgate are not whole acceptance.",
+      "#153 Linux subgate is not whole acceptance.",
+      "Narrow close-ready recommendations #162/#194/#209 require owner confirmation; they are not blockers absent an explicit release relation.",
+      "An open issue means retained acceptance remains not established; it does not prove implementation absent or make it a release blocker without contract/relation."
+    ]
+  },
+  "retained_issue_projection": [
+    {
+      "issue": 71,
+      "title": "Add Action Canvas: a native MCP App foundry inside Action Server",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "813ccb6edbe5c9fb7e71e5a12c215fbf5a7cb5f3066b7f35a071e2d1c4ceea2b",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Later Canvas foundry/MCP App lifecycle and package-revision integration.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-10-09T19:36:33Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 82,
+      "title": "Evolve Actions Runtime into a pluggable MCP-native capability runtime and lightweight control room",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "34581397b7cfa3c1bfae34e00ba2cf69808193381bc2d06c7d5d35543cc19dcd",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Parent architecture roadmap/control-room umbrella; sequencing only, not standalone release checklist.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T19:17:55Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 22,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 23,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 24,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 25,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 26,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 27,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 28,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 29,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 30,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 31,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 32,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 33,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 34,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 35,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 36,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 37,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 38,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 39,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 40,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 41,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 42,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 43,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 44,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 45,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 46,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 47,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 48,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 49,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 50,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 51,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 52,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 53,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 54,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 55,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 83,
+      "title": "Make capability Run and Attempt ownership replica-safe across runtime adapters",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "scoped live PR work exists; not equal to whole implementation",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "1298aa79f3f97b620b657c08bd5eea2a8dcec0c82e84fbe4cc2125e846f80066",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Later durable replica-safe Run/Attempt authority, lease/fencing/recovery.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_ISSUE_WITH_DIRECT_SCOPED_PR",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-10-10T15:59:21Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 22,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 23,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 24,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 25,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 26,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 27,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 28,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 29,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 30,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 31,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 32,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 33,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 34,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 35,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 36,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 37,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 38,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 39,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 84,
+      "title": "Support one shared SQLite/PostgreSQL Database abstraction in actions-runtime",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "scoped live PR work exists; not equal to whole implementation",
+      "operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "acceptance_contract_sha256": "17ae88bde7fa1006dd181d3ade0c8aefd87ffbf777ca31174674e4ddb46a62e6",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "SQLite is current zero-configuration default and must keep shared behavior; PostgreSQL replica/migration/concurrency matrix is broader multi-runtime delivery, not assumed required for a single local release.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_ISSUE_WITH_DIRECT_SCOPED_PR",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-08-25T22:32:30Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 85,
+      "title": "Back MCP Tasks with pinned capability Runs and runtime plans",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "7be3c40e2573938c1cf45e8c15e98bacb4ab56740c552b07ee90696551abb72b",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Later MCP Tasks on pinned durable Runs.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:45:43Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 86,
+      "title": "Make capability artifacts and large-result handles replica-safe",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "scoped live PR work exists; not equal to whole implementation",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "b6e41d5fd4a6477cc176545a7f75dee33ba5b4b74f6b9478272a3324553eadc9",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Later replica-safe output/artifact providers and handles.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_ISSUE_WITH_DIRECT_SCOPED_PR",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:45:35Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 87,
+      "title": "Separate request context from Workspace-scoped bindings and runtime grants",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "e22809c4dd9d6b4504f7a1a91b01da2cf14e709ec595e67e3f22a7345100424e",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Later Workspace bindings/secrets/grants/context lifecycle.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-10-10T14:01:41Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 90,
+      "title": "Separate capability execution ownership from Runtime request handling across adapters and placements",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "a5ba8d028a061a1412bd70aaf2d68565fd288a3b31bbd2d2b990d55eeaa66a58",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Later independent worker/placement execution.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:45:24Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 22,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 23,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 24,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 25,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 26,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 27,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 28,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 29,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 30,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 31,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 32,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 33,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 34,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 91,
+      "title": "Add MCP-native authorization and CIMD support",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "acceptance_contract_sha256": "b4c0d0313994dcd6e7c8bc0c37a0f8efd73e61bf0c5bf2edb7970d09f72137d6",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Later MCP client auth/CIMD modernization; distinct from existing configured API-key admin gate #152.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:45:15Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 92,
+      "title": "Implement durable capability interaction and human-review flows",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "bfceb5112808c598ea83bd4456491fcebe37b21fdf9a06c69c919582bee6c6b9",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Later durable interactive/human-review flows.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:45:03Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 93,
+      "title": "Run the Actions Runtime frontend and product factory",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "170c3a3a09b949fe5ad344b5ffe9355459ae3b982f61750e453b7851f1ac99f6",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Product factory umbrella; use concrete #96-100 contracts and milestones.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-10-09T19:37:45Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 96,
+      "title": "Refresh the Actions Runtime product shell and overview",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "acceptance_contract_sha256": "95f3a6926f1c808ce2bfacf77dd6e8562138df82c53f7cc99956a58afbf0a095",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "Existing Community UI route/deep-link and truthful-state compatibility, packaged/frozen verification. Current product slice; coordinate with #208/#97 and actual APIs.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_HISTORICAL_PARTIAL_OR_UNVERIFIED_LEDGER_STATE_NO_CURRENT_ACCEPTANCE_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T19:18:34Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 97,
+      "title": "Establish the Actions UI system and offline visual quality gates",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "acceptance_contract_sha256": "9a404411dcc26dcb377e0b127d4579f1db3eb6f1fa3bcf16b09df6eb595224e1",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "Existing product UI accessibility/responsive/visual quality, offline/CSP-safe gate. Coordinate with #96/#208; full design system quality remains broader than release bug fix.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_HISTORICAL_PARTIAL_OR_UNVERIFIED_LEDGER_STATE_NO_CURRENT_ACCEPTANCE_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T19:18:35Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 98,
+      "title": "Modernize the frontend toolchain and multi-artifact build pipeline",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "acceptance_contract_sha256": "e5d6366ca768bcd85aa66a2be438c50e202c9927c06e8305c845b7d417a46924",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "Runtime/frontend artifact build/reproducibility/manifest/SBOM and embedded/frozen compatibility. Treat strict shipping validation criteria as gates when shipping affected artifacts; do not claim whole acceptance from frontend foundation.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_HISTORICAL_PARTIAL_OR_UNVERIFIED_LEDGER_STATE_NO_CURRENT_ACCEPTANCE_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-05T11:23:50Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 99,
+      "title": "Build the shared CanvasSpec renderer and MCP App View foundation",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "scoped live PR work exists; not equal to whole implementation",
+      "operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "acceptance_contract_sha256": "172e91b203ab4b35ffd96a52bf7cd69a3faf08e050a960360246c20a9e24562e",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "SCOPED_BROWSER_PROOF_PASS_BUT_RENDERER_ISSUE_OPEN",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Canvas renderer and MCP App View; future feature dependent on backend/authoring contract.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_ISSUE_WITH_DIRECT_SCOPED_PR",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-10-09T19:35:07Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 100,
+      "title": "Define Canvas authoring contracts in actions-core without package proliferation",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "PR301 serialization fixture slice integrated; other #100 implementation scope remains unverified",
+      "operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "PR301_SERIALIZATION_SLICE_ACCEPTED; CORE_1_0_3_PUBLISHED_VERIFIED; WHOLE_100_OPEN",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Canvas Python authoring and public MCP Apps; bounded serialization slice and Core 1.0.3 do not close full issue.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "PR301 serialization slice merged at 4e8a26296608c232ce3dbd1f250ddb709b9459c9; this does not accept whole #100",
+      "raw_publication_state": {
+        "state": "ACTIONS_CORE_1_0_3_PUBLISHED_VERIFIED",
+        "evidence": "/workspace/work/actions-mk3-evidence/core-publication/publication-readback.json",
+        "sha256": "59e553c61ae82bfcc29d89c5aafec5bcee7f30539d2b73c33ef86ca286748c39",
+        "note": "Separate component publication; no whole #100 acceptance."
+      },
+      "raw_operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-10-09T19:34:29Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 101,
+      "title": "Run the Actions Runtime product, runtime-adapter, and control-room factory",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "active broad integration checkpoint",
+      "operational_primary_bucket": "COORDINATION_CHECKPOINT",
+      "acceptance_contract_sha256": "c62913f5aea92a03d5f39394be66a4ad529240d63dc60bb7c7ea06b2a028e240",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "READ_ONLY_AGENT_AUDIT_COMPLETED; COORDINATOR_BOOKKEEPING_AUTHORIZED",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Coordination/execution ledger, not an additional implementation acceptance contract.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "ACTIVE_PROGRAM_COORDINATION_CHECKPOINT",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "COORDINATION_CHECKPOINT",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; program aggregation/coordination issue with broad remaining gates",
+      "updated_at": "2026-10-10T19:28:31Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 125,
+      "title": "cleanup: remove Data Server and private-tier product surfaces",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "acceptance_contract_sha256": "84c024b2fe240e3e0f01f914bdba3ffd9613a69e04cea7f81a4b84512fa49238",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "Community-only product/dependency boundary: public dependencies, no proprietary/private tier; maintain as release packaging compatibility. Full repository-wide cleanup acceptance remains open in the matrix.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_HISTORICAL_PARTIAL_OR_UNVERIFIED_LEDGER_STATE_NO_CURRENT_ACCEPTANCE_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-08-18T07:17:41Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 126,
+      "title": "feat: add an MCP v2 capabilities showcase template",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "acceptance_contract_sha256": "53600f63e66ab58a1281a9a43a85b8a9b431a16f86131a551cc974b87380214f",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "MCP v2 showcase template; shipped stateless MCP endpoint does not satisfy showcase.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-10-09T19:37:10Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 127,
+      "title": "feat: add a community Canvas template",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "scoped live PR work exists; not equal to whole implementation",
+      "operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "acceptance_contract_sha256": "2774964a1beb023f33ce00b4ddd2836db0d15d2472fd1dad77a998eaeb5879d0",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "CANVAS_TEMPLATE_SCOPE_OPEN_SELECTOR_SOURCE_HOLD",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Working community Canvas template after renderer/authoring prerequisites.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_ISSUE_WITH_DIRECT_SCOPED_PR",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-10-09T19:35:38Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 129,
+      "title": "Define workspace-scoped capability deployments, runtime-plan selection, immutable revisions, and bindings",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "scoped live PR work exists; not equal to whole implementation",
+      "operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "acceptance_contract_sha256": "8b0b49ade2f5cd29dfa9dab0babc91c2fd7ebd36098ed3fad7ac32daaf9f7ff5",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Workspace deployments, immutable runtime plans and bindings.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_ISSUE_WITH_DIRECT_SCOPED_PR",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-10-10T06:55:00Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 130,
+      "title": "Design Package v3 as an immutable capability bundle with pluggable runtime plans and exposure projections",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "5fea0f4828c20faa32298d60083ca684b3b8225f0af6baea0d8fa4363dae4277",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Package v3 immutable capability bundles/runtime plans.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-10-10T05:00:48Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 131,
+      "title": "Define an open provider-based data and knowledge plane for Actions",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "4aaf54cce742b4133a45ee948148a22c313df8097e22ad65485b0a865a99d1ae",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Open data/knowledge provider plane.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:44:34Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 132,
+      "title": "Define durable Work Item queue, lease, review, and workflow semantics over capability Runs",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "1db3e8aee4c298fc35aee568eb5f142005fd9393919aea947e8818caa69056ee",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Durable Work Item queue/review/workflow semantics; do not conflate with #208 current bundled Work Items defect.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:44:29Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 133,
+      "title": "Use RCC/Holotree as the first full environment and execution adapter for Actions workers",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "7cfcdb618fc35203a0cacf64e37fc2696ad003f133c4391abbf3ec8b034d4c4c",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Full RCC/Holotree worker adapter/substrate.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:44:24Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 134,
+      "title": "Integrate RCC Environment Artifacts and execution as the first local Runtime Adapter",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "scoped live PR work exists; not equal to whole implementation",
+      "operational_primary_bucket": "EXISTING_ENGINEERING_ACCEPTANCE_OPEN",
+      "acceptance_contract_sha256": "d4160af19d7a80b467f101d7414134406fa051d6ed4ad935accd1fe51252369d",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "ACTIVE_PARTIAL_RCC_WORK_WHOLE_ISSUE_OPEN",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "First local RCC consumer proof is an already scoped releasable capability: local process/current package/SQLite/filesystem and supported RCC, with no PostgreSQL/remote worker/package-v3 prerequisite. Full RCC provider/lifecycle and remote matrix remain open.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_ISSUE_WITH_DIRECT_SCOPED_PR",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "EXISTING_ENGINEERING_ACCEPTANCE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:44:19Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 22,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 23,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 24,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 25,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 26,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 27,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 28,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 29,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 30,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 31,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 32,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 33,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 34,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 135,
+      "title": "Compile current package directories into deterministic Package Revisions and runtime plans",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "07b4524b30c0dabdf990a374a4c78ad6c9afdb2642796b8cb083be6eb866eaa7",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Immutable package compiler/revisions/runtime plans.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:44:15Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 22,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 23,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 24,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 25,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 26,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 27,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 28,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 29,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 30,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 31,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 32,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 136,
+      "title": "Define an immutable Package Revision registry/provider and worker-local source cache",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "8812f36639e9ead075dc7fe826ada97d0026ae1690f6c8e06de758d03d1f8a7f",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Immutable package registry/provider and worker source cache.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:44:00Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 138,
+      "title": "Define a versioned Runtime-to-worker protocol for pinned runtime plans, adapters, and placements",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "9afdd59ce5c4203be48761ea82304282b75596bf792a92d2ea7b730f00d45edf",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Runtime-worker pinned-plan protocol.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:43:55Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 139,
+      "title": "Build exact-subject capability, runtime-adapter, admission, Deployment, and worker conformance",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "f522d635575963ab26eaf73c66bbdd438cb199a9a2d92820e374dd8e9da73d21",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Package/adapter/deployment/worker conformance matrix.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:43:49Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 140,
+      "title": "Package and operate collapsed and split capability Runtime deployments safely",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "a83da2aee36817f0851bdee6bfc3673351c2be82e192b8c21fca8f385d39c2cc",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Collapsed/split deployment packaging/operations.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:43:38Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 22,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 23,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 141,
+      "title": "Define deterministic capability workflows over pinned runtime plans and Work Items",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "b5c29cba880f014805832ef598f28264d7e9902126d13dcef109b42b6f73a993",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Deterministic workflows over pinned plans and Work Items.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:43:34Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 22,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 23,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 142,
+      "title": "Prove Robot Task execution across runtime adapters and local, container, and worker placements",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "33cbac7943a286bf33d76ede684e83d46c39e33d87befdeac0e9f1e0bb6ca7e1",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Robot Task execution across adapters and local/container/worker placement.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:43:29Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 143,
+      "title": "Define pluggable capability runtime adapters, shared admission, execution requirements, and preflight",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "a7a0bbc131ae212e7cd1c0cc7a8a37249ad26e65d2ea553857fb565bc1431959",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Generic adapter/admission/preflight plus second adapter.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:43:25Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 22,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 23,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 24,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 25,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 26,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 27,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 28,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 29,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 30,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 31,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 32,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 33,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 144,
+      "title": "Make Robot Tasks a first-class capability kind independent of runtime adapter",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "f590b8962d8668fdcfebd556fbdfdc5a967d9e2495be3520264f607fde5a6032",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Robot Tasks as adapter-independent first-class capabilities.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:43:18Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 145,
+      "title": "Evolve Actions Runtime into a lightweight control room with a unified Run Composer",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "7ab0e82f0774b0a96cb2050ef6ef326f3920cf07e554e7acf1a892f77f9dc610",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Future lightweight Control Room/Run Composer on durable contracts.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:43:11Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 146,
+      "title": "Add one adapter-aware Actions Runtime CLI for capabilities, Robots, and development tasks",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "eefac147b16763e4802dbbd16df770d4b651aa38f0a400b9d49551db6b2b400a",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Adapter-aware CLI.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:43:03Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 147,
+      "title": "Add typed internal capability invocation with pinned runtime plans and parent-child Runs",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "93ca82e88727777675017c6711b7dbbc237f7704e8101863ede6b4f6fe6d3fb9",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Typed internal invocation and parent-child Runs.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:42:58Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 22,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 148,
+      "title": "Harden package import and compile Robot/runtime metadata into immutable Package Revisions",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "d43ca044e8ce9ce905a34470bb2f6568befb2622becb43074515d7550361c8f6",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Full safe source admission/compiler/migration lifecycle; #151 immediate importer correction must ship without waiting for it.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-10-10T15:59:23Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 22,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 23,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 24,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 25,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 26,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 27,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 28,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 29,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 30,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 31,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 32,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 149,
+      "title": "🐝 Hive Advisory Report",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "RETAINED_ADVISORY_OR_SCANNER_ORIGIN",
+      "acceptance_contract_sha256": "7f339f2e3378bf0572f6535738aba3029f51554dbd65d749ce4a433038ce4513",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Retained advisory/scanner origin; not implementation dispatch.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "RETAINED_ADVISORY_OR_SCANNER_ORIGIN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-08-26T15:37:59Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 151,
+      "title": "[security] Reject unsafe Robot ZIP package-root selection and bound archive staging",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "acceptance_contract_sha256": "e8f594671959e82db87ed8ea7de966295c827f3cb39daadf240fe8a0127b2d03",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "Current importer safety gate: P0 source admission for shipped Robot ZIP import. Exact issue says do not defer to Package v3; acceptance still requires safe staging/path/size behavior and native path evidence.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_HISTORICAL_PARTIAL_OR_UNVERIFIED_LEDGER_STATE_NO_CURRENT_ACCEPTANCE_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:52:06Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 152,
+      "title": "[security] Enforce configured API-key authorization across admin routers and artifact delivery",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "scoped live PR work exists; not equal to whole implementation",
+      "operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "acceptance_contract_sha256": "c58dd4c2ac0b665f6cd67ad51f0629f30670bf0c0df603823b68d462fd222970",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "AUTH_ROUTE_CENSUS_SOURCE_GO_SERVICE_NOT_RUN",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "Current configured-auth gate for administrative routes/mounts/artifacts. Contract explicitly blocks externally reachable admin/provider hosting until every protected surface is covered; preserve local-mode exception.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_ISSUE_WITH_DIRECT_SCOPED_PR",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "INTEGRATED_FOUNDATION_WITH_SCOPE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:52:00Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 153,
+      "title": "[security] Constrain browser origins and credentialed CORS with explicit deployment policy",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "scoped live PR work exists; not equal to whole implementation",
+      "operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "acceptance_contract_sha256": "f87bd84a74eef446e1a67cbcc5e067aca5bb1080d1e21fb76463f6a7ed8f111a",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "LINUX_BROWSER_ORIGIN_AMBIENT_SESSION_SUBGATE_PASS; WHOLE_153_OPEN",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "Current browser-origin boundary for shipped UI/WebSocket and any remote deployment. Retain exact origin/auth diagnostics; Linux subgate is not whole acceptance.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_ISSUE_WITH_DIRECT_SCOPED_PR",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T19:18:39Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "SCOPED_PASS_LINUX_FROZEN_AND_GO_WRAPPER_ONLY"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 155,
+      "title": "[strategist] Establish a release and compatibility roadmap for the expanding runtime architecture",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "RETAINED_ADVISORY_OR_SCANNER_ORIGIN",
+      "acceptance_contract_sha256": "3ba8fdca26f2761fcaa820a22a10d9c23367393f36735c95c376adcda318e395",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Strategic release/compatibility roadmap policy; roadmap deliverable is unresolved in current matrix and requires explicit owner interpretation.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_HISTORICAL_PARTIAL_OR_UNVERIFIED_LEDGER_STATE_NO_CURRENT_ACCEPTANCE_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "RETAINED_ADVISORY_OR_SCANNER_ORIGIN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:51:32Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 162,
+      "title": "[ACMM L0] Add Coverage gate",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "NARROW_CONTRACT_ACCEPTED_CLOSE_READY_CANDIDATE_FOR_HUMAN_CONFIRMATION",
+      "raw_issue_implementation_state": "narrow exact contract is satisfied by source/tests/docs present at integration; no new PR or source edit was made in this audit",
+      "operational_primary_bucket": "NARROW_CLOSE_READY_CANDIDATE",
+      "acceptance_contract_sha256": "09725e2a6edb5b7b9c0773df8eaa1bf49508b546898b6a7fcee8a8f5022c77ad",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": null,
+      "projection": "narrow_contract_close_ready_recommendation",
+      "release_boundary_rationale": "Narrow coverage-gate criterion accepted by independent review; owner confirmation to close remains, not a release blocker/full issue acceptance.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "NARROW_ISSUE_CLOSE_READY_CANDIDATE",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "NARROW_CLOSE_READY_CANDIDATE",
+      "raw_open_close_or_human_decision": "CLOSE_READY_CANDIDATE; issue remains open pending owner confirmation/closure; no GitHub mutation performed",
+      "updated_at": "2026-08-22T22:15:14Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "SCOPED_PASS"
+        }
+      ]
+    },
+    {
+      "issue": 194,
+      "title": "[quality] Add coverage for command dispatch and variable-scope error paths",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "NARROW_CONTRACT_ACCEPTED_CLOSE_READY_CANDIDATE_FOR_HUMAN_CONFIRMATION",
+      "raw_issue_implementation_state": "narrow exact contract is satisfied by source/tests/docs present at integration; no new PR or source edit was made in this audit",
+      "operational_primary_bucket": "NARROW_CLOSE_READY_CANDIDATE",
+      "acceptance_contract_sha256": "43496e2b9e8e7c8b9e1d9fceff7fc3be1ed3f9a79677552811ab6e27c391f4f5",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": null,
+      "projection": "narrow_contract_close_ready_recommendation",
+      "release_boundary_rationale": "Narrow command/variable-scope test criterion accepted; owner confirmation to close remains, not release blocker/full issue acceptance.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "NARROW_ISSUE_CLOSE_READY_CANDIDATE",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "NARROW_CLOSE_READY_CANDIDATE",
+      "raw_open_close_or_human_decision": "CLOSE_READY_CANDIDATE; issue remains open pending owner confirmation/closure; no GitHub mutation performed",
+      "updated_at": "2026-09-07T14:51:26Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "SCOPED_PASS"
+        }
+      ]
+    },
+    {
+      "issue": 195,
+      "title": "[architect] Action Server depends on private actions-core modules across a versioned package boundary",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "RETAINED_ADVISORY_OR_SCANNER_ORIGIN",
+      "acceptance_contract_sha256": "5dc53629cfcf1348b2cfafff5c4ee09ba50a5a1e8acde0292b2f61f16da24274",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "HOLD_ONE_REMAINING_CLEAN_RUNTIME_WHEEL_PROOF",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "Public versioned Core/Runtime package-boundary compatibility. Contract requires clean installed Runtime-wheel proof against private actions._ imports; source guard/Core wheel are not enough.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_HISTORICAL_PARTIAL_OR_UNVERIFIED_LEDGER_STATE_NO_CURRENT_ACCEPTANCE_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "RETAINED_ADVISORY_OR_SCANNER_ORIGIN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T14:51:20Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 196,
+      "title": "Make Actions Runtime a one-click host for the RCC Environment Artifact provider",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "acceptance_contract_sha256": "13ec0d086e569fc55992151a649debcf3ad6eac3492991b9acb5be3489f2a6d7",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "RCC provider lifecycle, public-edge security and packaged provider UX. Keep future/provider acceptance separate from local #134 consumer proof.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_NO_CURRENT_ISSUE_SPECIFIC_DELIVERY_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "TYPED_SUCCESSOR_OR_OTHER_OPEN_SCOPE",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-08-25T19:13:58Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 22,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 23,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 24,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 25,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 26,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 208,
+      "title": "fix(work-items): restore standalone loading and truthful Work Items error UX",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "Three-OS native subgate accepted; new Linux-only authorization-denial UI cases passed; whole issue open",
+      "operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "acceptance_contract_sha256": "25cada9cee4ac8ca8aad7e47df4fbe58b010239d88dc3bd64f40cc2c97d26b9c",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "THREE_OS_NATIVE_SUBGATE_ACCEPTED; NEW_AUTHORIZATION_DENIAL_CASES_LINUX_ONLY; WHOLE_208_OPEN",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "Confirmed released standalone Work Items defect. Preserve 3-OS native consumer subgate as accepted, with Linux-only auth-denial UI cases; remaining backend/UI/error/accessibility gates remain open. Do not make #132/#145 prerequisites.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_ISSUE_WITH_DIRECT_SCOPED_PR",
+      "raw_integration_state": "PR304 was merged as integration commit 19380993febaa71238eaee3026b5c808773283ff; the tested three-OS subgate is integrated evidence, not full #208 acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T19:09:10Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "SCOPED_PASS_THREE_OS_NATIVE_CONSUMER_SUBGATE"
+        },
+        {
+          "index": 8,
+          "status": "SCOPED_PASS_THREE_OS_WITH_CRASH_RECOVERY_LIMIT"
+        },
+        {
+          "index": 9,
+          "status": "PARTIAL_SCOPED_PASS_THREE_OS_BASELINE_PLUS_LINUX_DENIAL"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 209,
+      "title": "fix(ci): diagnose unexpected disconnect in assembled WebSocket Origin test",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "NARROW_CONTRACT_ACCEPTED_CLOSE_READY_CANDIDATE_FOR_HUMAN_CONFIRMATION",
+      "raw_issue_implementation_state": "narrow exact contract is satisfied by source/tests/docs present at integration; no new PR or source edit was made in this audit",
+      "operational_primary_bucket": "NARROW_CLOSE_READY_CANDIDATE",
+      "acceptance_contract_sha256": "c9cbf271124d20fac773f4203ba474cc167341e5d33aae0cbfa2966c9676ce92",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": null,
+      "projection": "narrow_contract_close_ready_recommendation",
+      "release_boundary_rationale": "Narrow WebSocket import-order/lifecycle regression slice accepted as close-ready recommendation; does not settle unrelated #153 whole origin policy or current release criteria.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "NARROW_ISSUE_CLOSE_READY_CANDIDATE",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "NARROW_CLOSE_READY_CANDIDATE",
+      "raw_open_close_or_human_decision": "CLOSE_READY_CANDIDATE; issue remains open pending owner confirmation/closure; no GitHub mutation performed",
+      "updated_at": "2026-10-09T18:46:19Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "SCOPED_PASS"
+        }
+      ]
+    },
+    {
+      "issue": 210,
+      "title": "fix(release): repair HTTP helper workflow credential delivery",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "closed and accepted per retained graph/ledger record; no live open issue object in current collection",
+      "raw_issue_implementation_state": "IMPLEMENTED_UNVERIFIED",
+      "operational_primary_bucket": "closed_retained_contract",
+      "acceptance_contract_sha256": "85e9108709d3bb98d09f21b476be2c768491f9ee11267915948b2e11450a283d",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "retained accepted closure; the source matrix records underlying source/wheel/native/packaged-browser proof as NOT_RUN",
+      "projection": "already_accepted_retained_contract",
+      "release_boundary_rationale": "Preserve accepted closure and historical raw intake state. Future safe publication credential delivery is distinct from already-published Helper 1.0.1; no republication or assumption of CI repair.",
+      "raw_issue_state": "closed and accepted per retained graph/ledger record; no live open issue object in current collection",
+      "raw_primary_state": "closed and accepted per retained graph/ledger record; no live open issue object in current collection",
+      "raw_integration_state": null,
+      "raw_publication_state": null,
+      "raw_operational_primary_bucket": "closed_retained_contract",
+      "raw_open_close_or_human_decision": null,
+      "updated_at": null,
+      "acceptance_criteria_statuses": []
+    },
+    {
+      "issue": 211,
+      "title": "fix(release): align Actions-side native handoffs with community distribution",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "scoped live PR work exists; not equal to whole implementation",
+      "operational_primary_bucket": "DISTRIBUTION_AND_PUBLICATION",
+      "acceptance_contract_sha256": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "CORE_1_0_3_PUBLISHED_VERIFIED; RUNTIME_1_0_3_ABSENT; NATIVE_HOMEBREW_GATES_OPEN",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "Explicit Runtime 1.0.3 native/community distribution release gate. Must align generator caller with community tap live workflow contract, settle/retire or replace S3/CDN target, bind real native assets/version/source/downloaded hashes, preserve unsigned/fail-closed signing, and verify external workflow/hashes. Do not retag/rebuild/reupload unnecessarily.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_ISSUE_WITH_DIRECT_SCOPED_PR",
+      "raw_integration_state": "open PRs are scoped work only; no whole-issue integration inferred",
+      "raw_publication_state": {
+        "state": "CORE_1.0.3_PUBLISHED_VERIFIED; ACTIONS_RUNTIME_1.0.3_ABSENT; NATIVE_HOMEBREW_GATED",
+        "evidence": [
+          "/workspace/work/actions-mk3-evidence/core-publication/publication-readback.json",
+          "/workspace/work/actions-mk3-evidence/core-release-readiness/runtime-readiness-corrected.json"
+        ],
+        "note": "Component publication is separate from #211 Actions Runtime distribution acceptance."
+      },
+      "raw_operational_primary_bucket": "DISTRIBUTION_AND_PUBLICATION",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-07T19:16:38Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 212,
+      "title": "bug(ui): Runtime 1.0.1 Runs fails JSON parsing; oversized run list and same-origin WebSocket 403",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "acceptance_contract_sha256": "5d7d93486a73760e299fb77de1eb2f69f282b8253603b02cc7708373cb307a31",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "current_release_or_installed_compatibility_gate",
+      "release_boundary_rationale": "Tracked installed Runtime 1.0.1 Runs/JSON-size/WebSocket UI defect contract. Keep as unresolved current-product regression until exact installed-artifact reproduction and fixes/acceptance are evidenced; this matrix has no new receipt.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_HISTORICAL_PARTIAL_OR_UNVERIFIED_LEDGER_STATE_NO_CURRENT_ACCEPTANCE_RECEIPT",
+      "raw_integration_state": "no issue-owned merged implementation proven in this bounded pass",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-09-08T12:04:02Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    },
+    {
+      "issue": 214,
+      "title": "feat(expose): make tunnel providers a first-class Runtime lifecycle",
+      "retained_graph_membership": true,
+      "raw_issue_acceptance_state": "OPEN_WHOLE_ACCEPTANCE_NOT_ESTABLISHED",
+      "raw_issue_implementation_state": "no current exact issue implementation established",
+      "operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "acceptance_contract_sha256": "408f3eae150a25fc660b5b4b86e283a47c66e30dd8b13ddbe62ba269be08f347",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "acceptance_source_path": "docs/program/community-program-ledger.json",
+      "current_evidence_status": "NO_NEW_ISSUE_SPECIFIC_ACCEPTANCE_RECEIPT_RECONCILED_IN_THIS_BOUNDED_PASS",
+      "projection": "later_full_contract_or_policy",
+      "release_boundary_rationale": "Tunnel provider/exposure lifecycle and externally reachable edge semantics; follows explicit auth/origin policy.",
+      "raw_issue_state": "open",
+      "raw_primary_state": "OPEN_WITH_HISTORICAL_PARTIAL_OR_UNVERIFIED_LEDGER_STATE_NO_CURRENT_ACCEPTANCE_RECEIPT",
+      "raw_integration_state": "some merged PRs mention this issue; mention alone does not establish ownership or acceptance",
+      "raw_publication_state": {
+        "note": "If this contract requires a published artifact or distribution surface, its exact evidence remains a separate gate unless the scoped current evidence above says otherwise.",
+        "state": "NOT_INFERRED_FROM_SOURCE_OR_MERGE"
+      },
+      "raw_operational_primary_bucket": "SCOPED_REVIEW_OR_ACCEPTANCE_OPEN",
+      "raw_open_close_or_human_decision": "MUST_REMAIN_OPEN; no whole-issue acceptance or owner closure evidence established by this bounded pass",
+      "updated_at": "2026-10-05T12:46:07Z",
+      "acceptance_criteria_statuses": [
+        {
+          "index": 1,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 2,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 3,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 4,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 5,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 6,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 7,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 8,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 9,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 10,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 11,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 12,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 13,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 14,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 15,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 16,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 17,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 18,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 19,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 20,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        },
+        {
+          "index": 21,
+          "status": "NOT_VERIFIED_BY_AVAILABLE_CURRENT_RECEIPTS"
+        }
+      ]
+    }
+  ],
+  "nonretained_open_rows_preserved_outside_graph": [
+    {
+      "issue": 279,
+      "title": "Preserve sibling packages during multi-directory actions-sync startup",
+      "retained_graph_membership": false,
+      "raw_primary_state": "NARROW_ISSUE_CLOSE_READY_CANDIDATE",
+      "operational_primary_bucket": "NARROW_CLOSE_READY_CANDIDATE",
+      "decision": "CLOSE_READY_CANDIDATE; human/issue owner should confirm this exact narrow contract and close; no mutation performed"
+    },
+    {
+      "issue": 293,
+      "title": "Acknowledge successful 2xx asynchronous callback responses",
+      "retained_graph_membership": false,
+      "raw_primary_state": "HUMAN_REVIEW_HOLD_DO_NOT_DISPATCH",
+      "operational_primary_bucket": "EXPLICIT_HUMAN_HOLD_NO_DISPATCH",
+      "decision": "MUST_REMAIN_OPEN; explicit human-review hold precedes any dispatch"
+    },
+    {
+      "issue": 294,
+      "title": "Preserve socket constructor failures in worker listener setup",
+      "retained_graph_membership": false,
+      "raw_primary_state": "HUMAN_REVIEW_HOLD_DO_NOT_DISPATCH",
+      "operational_primary_bucket": "EXPLICIT_HUMAN_HOLD_NO_DISPATCH",
+      "decision": "MUST_REMAIN_OPEN; explicit human-review hold precedes any dispatch"
+    },
+    {
+      "issue": 295,
+      "title": "Clear the process-pool reference after exceptional context exit",
+      "retained_graph_membership": false,
+      "raw_primary_state": "HUMAN_REVIEW_HOLD_DO_NOT_DISPATCH",
+      "operational_primary_bucket": "EXPLICIT_HUMAN_HOLD_NO_DISPATCH",
+      "decision": "MUST_REMAIN_OPEN; explicit human-review hold precedes any dispatch"
+    },
+    {
+      "issue": 296,
+      "title": "Deliver completion callbacks whenever the client receives an async response",
+      "retained_graph_membership": false,
+      "raw_primary_state": "HUMAN_REVIEW_HOLD_DO_NOT_DISPATCH",
+      "operational_primary_bucket": "EXPLICIT_HUMAN_HOLD_NO_DISPATCH",
+      "decision": "MUST_REMAIN_OPEN; explicit human-review hold precedes any dispatch"
+    }
+  ],
+  "ambiguous_policy_obligations": [
+    {
+      "issue": 155,
+      "question": "The contract requests a public vertical-slice roadmap, support/experimental adapter policy, compatibility guarantees, cadence and changelog practice. Is this a required policy gate before 1.0.3 or a follow-on documentation obligation? Retained ledger labels it advisory/scanner origin; do not auto-dispatch or treat open state as blocker without owner decision."
+    },
+    {
+      "issue": 149,
+      "question": "Hive advisory origin with no acceptance bullets; no implementation/release scope can be inferred from title alone."
+    },
+    {
+      "issue": 101,
+      "question": "Parent operational factory ledger is authority for sequencing/receipts, not another product feature acceptance or automatic release gate."
+    },
+    {
+      "issue": 84,
+      "question": "Contract contains SQLite default and source/wheel/frozen compatibility plus PostgreSQL multi-process/migration requirements. Single local release needs first compatibility slice; decide explicitly whether PostgreSQL is within 1.0.3 support policy."
+    },
+    {
+      "issue": 134,
+      "question": "Issue explicitly calls local RCC proof independently releasable and excludes PostgreSQL/remote workers/package v3; handoff says RCC code GO_COMPONENT, metadata NOT RUN and whole lifecycle held. Keep bounded local slice distinct from claiming full RCC acceptance."
+    },
+    {
+      "issue": 195,
+      "question": "Current evidence says one clean Runtime-wheel proof is missing. Determine whether this blocks all Runtime 1.0.3 packages or is addressed by a release-specific compatibility test in #98/#211; do not waive public interface risk."
+    }
+  ]
+}

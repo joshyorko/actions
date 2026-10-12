@@ -1,0 +1,7 @@
+{
+  "commit": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+  "helper_sha256": "7c6499fda0a0f9c5e22cbc64c53d1aa8f3a8152e5539a0dabd30a1ee376b6e8e",
+  "test_sha256": "a0f6b32b43687932177ca11129dd15c61001605b0ceb24ca29af62b1115bfdaf",
+  "helper_copy": "/workspace/successor-pr308/provider-alive-classification-red-v2-source/scripts/verify_dakota_rcc_acceptance.py",
+  "test_copy": "/workspace/successor-pr308/provider-alive-classification-red-v2-source/tests/action_server_tests/test_provider_startup_cleanup.py"
+}

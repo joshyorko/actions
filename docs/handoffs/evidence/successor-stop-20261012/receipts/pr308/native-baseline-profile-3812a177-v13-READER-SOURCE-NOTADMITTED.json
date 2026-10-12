@@ -1,0 +1,48 @@
+{
+  "baseline_binary": {
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "18.19.3"
+  },
+  "execution_authority": "Evidence profile only; not a launchgrant",
+  "head": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+  "lease_commands_executed": false,
+  "native_attempts_consumed": 0,
+  "optional_versions_launched": false,
+  "previous_profile": {
+    "bytes": 2062,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-f949bef2-v12-CI-PASS-NOTADMITTED.json",
+    "sha256": "a58ef605c3a0c47d2bdcd669c0145cbb789c6716f61e4b0bb0eeb5b3aae72d29"
+  },
+  "rcc18_19_6_publication": "ABSOLUTE HOLD",
+  "remaining_holds": [
+    "Whole independent640-second outercontroller and native-only outputretention/finalcensus not implemented/admitted",
+    "Canonical self-cgroup child-init/finiteancestor binding remains unaccepted; visible counters diagnostic only",
+    "Memory floor3113851289/reserve536870912 proposed/unaccepted/uncalibrated; no nativeadmission inferred from latestcounter",
+    "Passive same-lease/root/artifact identity creation/release observer design not admitted; no inspection/query/writes",
+    "One genuine source/hash-bound18.19.3 Action withacquisition/result/artifacts/leases/terminal cleanup remainsNOTRUN"
+  ],
+  "resolved_component_delta": "Existing retained providerreader safely joined/observed independently of treebirthcapture with exact originalprocess/readerowner object bindings; no newloop/signals/deadlines",
+  "resource": {
+    "/dev/shm": {
+      "free_bytes": 9441349632
+    },
+    "/tmp": {
+      "free_bytes": 9441153024
+    },
+    "/workspace": {
+      "free_bytes": 12526329856
+    },
+    "memory.current": "14017937408",
+    "memory.events": "low 0\nhigh 0\nmax 34411\noom 0\noom_kill 0\noom_group_kill 0",
+    "memory.max": "17179869184",
+    "scope": "visible cgroup mount diagnostic; child/init membership discovery not canonically admitted",
+    "time_unix": 1791789290.1917903,
+    "visible_headroom_bytes": 3161931776
+  },
+  "runtime_release": "HOLD",
+  "schema": 1,
+  "source_acceptance": "Independent new exactsource review pending; ancestor f949 platformCI allPASS does not qualify currenthead",
+  "source_controls": "3RED onimmutablef949;6newrealThreadcontrols +38providerPASS;136affectedPASS/1nativeDESEL;static361PASS",
+  "status": "NOT_ADMITTED",
+  "tree": "525083edecdf20ef0daf6d481b0b738935741d66"
+}

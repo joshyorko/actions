@@ -1,0 +1,46 @@
+{
+  "schema": "actions-primary640-census-repair-source-controls/v1",
+  "created_at_utc": "2026-10-12T02:21:36.766843+00:00",
+  "public305head": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+  "public305tree": "851834ae6cc87f42abfcf3c963542191e2815599",
+  "public_helper_sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+  "retained_source_artifact": "docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN/owned_primary_boundary_NOTRUN.py",
+  "candidate_scope": "fresh psutil Process(pid) identity/status before classifying retained PID; no other code changes, no old grant executed",
+  "controls": {
+    "baseline": "4EXPECTED_RED",
+    "candidate": "4PASS",
+    "real_child_launches": 0,
+    "RCCnative_attempts": 0,
+    "primary640": "NOT_EXECUTED_HOLD",
+    "actual_RCC_lease_release": "NOT_OBSERVED_HOLD"
+  },
+  "toolchain": "fresh pinned RCC18.19.3 outertoolchain/Poetry2.1.1 isolated installedconsumer pytest sourceonly",
+  "files": [
+    {
+      "path": "census-baseline-red.log",
+      "bytes": 6194,
+      "sha256": "59796e4bb4948969f5cba2b5ff1812f6ff2369083cbd4589664e2d255f88c196"
+    },
+    {
+      "path": "census-candidate-green.log",
+      "bytes": 98,
+      "sha256": "988344a7589dd35ded61b8e784dcd5bc43cb64ba0f19a2bda1a7ec44b380abcb"
+    },
+    {
+      "path": "fresh-owner-census-candidate.py",
+      "bytes": 12043,
+      "sha256": "933fcc8461c4e2047759f44833404138162e02724935f1dc6c7e657c77e95f36"
+    },
+    {
+      "path": "retained-owner-baseline.py",
+      "bytes": 11922,
+      "sha256": "7d0b24e76d4e632719450ffea641ce858cc891edabddcbbed9c1c4bcfa5942bc"
+    },
+    {
+      "path": "test_census_identity.py",
+      "bytes": 4153,
+      "sha256": "f1b8e2c6a1a0bfdec292f9437fa4d6c16fb240e3ab46efda41fcb29778ad89bb"
+    }
+  ],
+  "upstream_disposition": "none"
+}

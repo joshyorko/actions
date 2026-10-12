@@ -1,0 +1,17 @@
+{
+  "time": "2026-10-12T02:13:27.711932+00:00",
+  "host": "9e619bc297a7",
+  "boot_id": "22d23245-c9c1-4789-8cbd-70bfa9b3b274",
+  "uid": 1000,
+  "gid": 1000,
+  "memory_current": 14376935424,
+  "memory_max": 17179869184,
+  "memory_events": "low 0\nhigh 0\nmax 25204\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "cgroup_identity_status": "UNQUALIFIED",
+  "disk_available": {
+    "/workspace": 13350199296,
+    "/tmp": 9441202176,
+    "/dev/shm": 9441349632
+  },
+  "visible_headroom_bytes": 2802933760
+}

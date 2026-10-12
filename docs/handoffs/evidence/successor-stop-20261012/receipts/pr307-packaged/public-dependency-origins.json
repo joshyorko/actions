@@ -1,0 +1,36 @@
+{
+  "schema": "actions-runtime-public-dependency-provenance/v1",
+  "runtime_head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "dependencies": [
+    {
+      "name": "actions-core",
+      "version": "1.0.3",
+      "poetry_source": "default public PyPI; exactversion; no source override",
+      "files": [
+        {
+          "file": "actions_core-1.0.3-py3-none-any.whl",
+          "sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265",
+          "size": 103809,
+          "public_url": "https://files.pythonhosted.org/packages/25/b9/86adaaf08f60deb47c749f8dc2b59a0c672b9278daf917304bffd613ba90/actions_core-1.0.3-py3-none-any.whl",
+          "installed_python_files_exact": 48
+        }
+      ],
+      "local_direct_url_present": false
+    },
+    {
+      "name": "actions-http-helper",
+      "version": "1.0.3",
+      "poetry_source": "default public PyPI; exactversion; no source override",
+      "files": [
+        {
+          "file": "actions_http_helper-1.0.3-py3-none-any.whl",
+          "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+          "size": 14690,
+          "public_url": "https://files.pythonhosted.org/packages/53/3b/cefc0608e6ec71697c60c68ede2efa306fd7d50b1736c4b6b094b3424dc6/actions_http_helper-1.0.3-py3-none-any.whl",
+          "installed_python_files_exact": 2
+        }
+      ],
+      "local_direct_url_present": false
+    }
+  ]
+}

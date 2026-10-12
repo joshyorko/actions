@@ -1,0 +1,130 @@
+{
+  "actual_named_regressions": "Windowsstrictprovider/launcher/diagnosticguards and Linuxfrozenqueuedcancel allPASSED inretainedlogs; perjobnamedexact events retained",
+  "additive_windows_count_correction": {
+    "bytes": 1502,
+    "path": "/workspace/successor-evidence/pr308/f949-platform-ci/windows-second-retrieval-count-correction.json",
+    "sha256": "c44a5793cbbdc4d3df3abea711d6a1a6a6fc5e875b2c9786f91cc7084b9ec422"
+  },
+  "all3platform_fulljobs_terminal": "SUCCESS",
+  "canonical_doc_proposal": {
+    "bytes": 819,
+    "path": "/workspace/successor-evidence/pr308/f949-platform-ci/canonical-log-preservation-proposal.md",
+    "sha256": "c574372e8d569dee911755ca386a5d1e7fc89a37476b13bd722562e1d2485a6c"
+  },
+  "completed_log_retrieval_counts": {
+    "Linux": {
+      "campaign": 1,
+      "rcc308": 1
+    },
+    "Windows": {
+      "campaign": 2,
+      "rcc308": 1,
+      "root": 1
+    },
+    "campaign_total": 4,
+    "macOS": {
+      "campaign": 1,
+      "rcc308": 1
+    }
+  },
+  "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "jobs": [
+    {
+      "conclusion": "success",
+      "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+      "job": 114685787879,
+      "receipt": {
+        "bytes": 11699,
+        "path": "/workspace/successor-evidence/pr308/f949-platform-ci/job-114685787879-safe-receipt.json",
+        "sha256": "c54f229a242c68728024e54847bd90c3fc4e04805c053ff54c934e5bfe83ce55"
+      },
+      "source_producer": {
+        "checkout_commit": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+        "checkout_log_proof": [
+          "2026-10-12T06:11:02.5793430Z HEAD is now at d663b19 Merge f949bef2eeab518ffd34d9e69955938a007f8922 into 48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+        ],
+        "complete_git_tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+        "matches_reviewed_f949_tree": true,
+        "metadata": {
+          "bytes": 2648,
+          "path": "/workspace/successor-evidence/pr308/f949-platform-ci/producer-d663b19f-git-commit.json",
+          "sha256": "e747c968a3937377c70685ee7977d60e58c9128c9b1888ed85973dc0274c99b5"
+        },
+        "ordered_parents": [
+          "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+          "f949bef2eeab518ffd34d9e69955938a007f8922"
+        ]
+      },
+      "summary": [
+        "2026-10-12T06:16:40.2841700Z ========== 1439 passed, 216 skipped, 16 warnings in 178.30s (0:02:58) ==========",
+        "2026-10-12T06:31:13.5236260Z ========= 132 passed, 20 skipped, 1658 deselected in 860.66s (0:14:20) ========="
+      ]
+    },
+    {
+      "conclusion": "success",
+      "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+      "job": 114685788075,
+      "receipt": {
+        "bytes": 7407,
+        "path": "/workspace/successor-evidence/pr308/f949-platform-ci/job-114685788075-safe-receipt.json",
+        "sha256": "47c5412cfa048091d7f7fefb68356b200c1799c992a27848e7e84563e6ce284f"
+      },
+      "source_producer": {
+        "checkout_commit": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+        "checkout_log_proof": [
+          "2026-10-12T06:10:59.5429508Z HEAD is now at d663b19 Merge f949bef2eeab518ffd34d9e69955938a007f8922 into 48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+        ],
+        "matches_reviewed_tree": true,
+        "ordered_parents": [
+          "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+          "f949bef2eeab518ffd34d9e69955938a007f8922"
+        ],
+        "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99"
+      },
+      "summary": [
+        "2026-10-12T06:19:51.0479362Z ========= 1430 passed, 225 skipped, 15 warnings in 328.46s (0:05:28) ==========\r",
+        "2026-10-12T06:47:12.5039737Z ======== 131 passed, 21 skipped, 1658 deselected in 1621.38s (0:27:01) ========\r"
+      ]
+    },
+    {
+      "conclusion": "success",
+      "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+      "job": 114685788155,
+      "receipt": {
+        "bytes": 11701,
+        "path": "/workspace/successor-evidence/pr308/f949-platform-ci/job-114685788155-safe-receipt.json",
+        "sha256": "3a2315deb33fd6918c7e3ec3e78762d6cf18d77d6769c42a9b04d73e816d7dc7"
+      },
+      "source_producer": {
+        "checkout_commit": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+        "checkout_log_proof": [
+          "2026-10-12T06:10:55.9707535Z HEAD is now at d663b19 Merge f949bef2eeab518ffd34d9e69955938a007f8922 into 48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+        ],
+        "complete_git_tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+        "matches_reviewed_f949_tree": true,
+        "metadata": {
+          "bytes": 2648,
+          "path": "/workspace/successor-evidence/pr308/f949-platform-ci/producer-d663b19f-git-commit.json",
+          "sha256": "e747c968a3937377c70685ee7977d60e58c9128c9b1888ed85973dc0274c99b5"
+        },
+        "ordered_parents": [
+          "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+          "f949bef2eeab518ffd34d9e69955938a007f8922"
+        ]
+      },
+      "summary": [
+        "2026-10-12T06:15:36.2187916Z ========== 1643 passed, 12 skipped, 16 warnings in 161.68s (0:02:41) ===========",
+        "2026-10-12T06:29:38.8347560Z ========= 132 passed, 20 skipped, 1658 deselected in 782.06s (0:13:02) ========="
+      ]
+    }
+  ],
+  "native_baseline_attempts": 0,
+  "no_ci_rerun_cancel_native_source_edit_by_watch": true,
+  "original_root_log_and_safe_receipt_preserved": true,
+  "run": 38211281631,
+  "schema": 1,
+  "source_acceptance_scope": "AllCI evidence bound tof949 fulltree only, not later3812source",
+  "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+  "upstream_disposition": "none",
+  "watch_capacity_interruption": "Poll36 at06:42:20 then resumedpoll37 at06:59:36; rootretrievedcompletedWindowsonce duringcapacityfailure. No steady45s polling claim duringinterruption. Thisloop then independently fetchedonce; decoded bytesexactmatch"
+}

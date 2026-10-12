@@ -1,0 +1,14 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "insertion_point": "Runtime installed-member/source inventory guidance",
+  "exact_delta": "Apply complete Python membership and byte checks to the sdist source tree as well as every wheel. An installed wheel's passing source or regression test does not prove the sdist retained those files. Bind installed behavioral tests to their exact committed test bytes and describe their execution seam: a held executor with persisted Runs can prove cancellation admission before dispatch while leaving actual managed worker execution unqualified.",
+  "durable_learning": "Sdist membership is independently testable; installed seam tests qualify specific behavior without qualifying nativeworker lifecycle.",
+  "evidence": [
+    "extra-controls.json independently checks six complete wheel Python sets and complete sdist srcPython set",
+    "sdist-complete-source-verification.json verifies all202 immutable tracked files plusgenerated module",
+    "Exactcommitted heldexecutor test bytes with installed8PASS/.75s; realRun models/state and no workeracquisition seam observed"
+  ],
+  "stale_or_ambiguous_guidance_removed": "Avoid wheel evidence being transferred to omitted sdist source or heldexecutor cancellation evidence being called managedAction/native proof.",
+  "remaining_uncertainty": "No sdist rebuild/installedMCP/managedAction/globalnative/readers/lease/platform/startup orRuntimepublication qualification. Exacthead fullCI remains separate.",
+  "upstream_disposition": "none"
+}

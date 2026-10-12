@@ -1,0 +1,11 @@
+[tool.poetry]
+name="successor-runtime-minimum-core-consumer"
+version="0.0.0"
+package-mode=false
+
+[tool.poetry.dependencies]
+python=">=3.12,<3.13"
+actions-runtime={path="/workspace/successor-evidence/pr307-packaged/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"}
+actions-core="1.0.2"
+actions-http-helper="1.0.3"
+pytest="8.4.2"

@@ -1,0 +1,13 @@
+{
+  "time": "2026-10-12T03:55:29.233663+00:00",
+  "head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "tree": "c0371a7a0fa113be56199f260029ee1c09f63d1a",
+  "parent": "89a599d92aa17a9065c9fc98b62bee0adb0b4cf2",
+  "remote_ref": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "pr_head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "base": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+  "state": "open",
+  "draft": true,
+  "normal_fastforward": true,
+  "scope": "GO_SOURCE minimalmetadataonly; requirednewheadCI separate; native0"
+}

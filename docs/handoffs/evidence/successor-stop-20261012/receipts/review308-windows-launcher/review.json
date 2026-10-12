@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "verdict": "GO_SOURCE",
+  "existing_feature_branch_push_disposition": "GO_SOURCE_PUSH",
+  "head": "d358f9c2b41b9575a286e6a98cacf7425d694ea6",
+  "tree": "eb5cd67bb1d4628b7958608d8d6e5ceb160d10ed",
+  "parent": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+  "scope": "test-only launcher fixture correction; no production/native/merge/publication approval",
+  "blocking_findings": [],
+  "independent_verification": {
+    "red": "exactimmutableeeb acceptance under harmless waiting Pythonlauncher:1expectedPIDequalityfailure0.60s",
+    "green": "exactimmutabled358 providercontrols+strictacceptance:33PASS0SKIP1.75s",
+    "gateway": "fresh run-prepared-package.py ABSOLUTEpackage Poetryboundary, own immutablecopies andbasetemps,45s invocationbound; no installs",
+    "ownership_models": "16PASS exactcapture/finally AST withfake processmethods only; verified/snapshot false, rootchangedaftercapture, unreadableroot, same/reused/missing/unreadable descendant cases",
+    "identity_capture": "liveoriginalPopen, verifiedowner andcomplete snapshot required; rootbirth checkedbefore/after descendantsnapshot andoriginalpollafter; reportedPID must matchverifiedroot/descendant; childbirth freshverified beforecleanup",
+    "strict_acceptance": "originalPopenreaped AND capturedreportedchildstopped AND typedtree/readercomplete beforeemergencyfinally; no inferredsignal authority fromPIDfile",
+    "emergency_cleanup": "signalsonlyunchangedcaptured descendantbirths andoriginalPopen; unreadablebirth failswithoutdescendantsignal; nestedfinallystillattemptsoriginalPopenkill/wait andclosepipes",
+    "deadline_and_interpreter": "startupcallASTidenticaleeb:3sdeadline/.2grace andpackagesys.executable preserved; no testskips or deadline extension",
+    "production_identity": "only2tests+canonicalguidechanged; helper9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c andcommonprocessf432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082 byte-identicaleeb",
+    "artifact_hashes": "all17writerartifact/source/rawWindows/primarysource checks match; CPythonblob matchespinnedprovenance",
+    "diff_check": "PASS",
+    "checkout": "cleanexactd358"
+  },
+  "actual_windows_evidence": {
+    "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+    "raw_log_sha256": "83e9ac325f90956aaaabd1b2849bc658299e1344aaa413987ed26faae13b5495",
+    "raw_log_bytes": 724363,
+    "summary_directly_seen": "2FAIL1413PASS225SKIP301.50s",
+    "unsupported_equality_directly_seen": [
+      "reportedchild6976 vsoriginalPopen5536",
+      "reportedchild5392 vsoriginalPopen6312"
+    ],
+    "confirmed_defect": "testfixtureassumedchildgetpid==originalPopenPID; waitinglauncher controlreproducesit",
+    "primary_source": "savedpython/cpython v3.12.15 PC/launcher.c blobdc265533740b6763124480162e791e6a9fd92e27 supportsredirectorcreates+waitschild; thisisnotexactCIbinaryattribution",
+    "corrected_windows_runtime": "PENDING"
+  },
+  "writer_retained_gates": {
+    "focused": "33PASS0.96s",
+    "affected": "336PASS/1SKIP/3nativeDESELECTED8.64s",
+    "configured_static": "360filesPASS",
+    "windows_type_diagnostic": "2filesPASS"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "current_delta": "new12line launcher/child guidanceaccuratelyreplacesfalsePIDequalitywithmembership/birth bindingandstrictseparateoutcomes",
+    "exact_proposal": "/workspace/successor-evidence/review308-windows-launcher/documentation-proposal.md",
+    "durable_learning": "descendantbirthlookupfailure doesnotgrantauthority or bypassoriginal-child disposal; acceptance precedesemergencyteardown",
+    "evidence": "exactASTownershipmodels andfreshPoetry RED/GREEN",
+    "stale_guidance_removed": "samePIDassumption; proposednewparagraphclarifiesfailure isolation",
+    "uncertainty": "actualnewWindowsCI andhistoricalMacrootcauseunknown"
+  },
+  "remaining_gates": [
+    "fresh exactd358 requiredCI",
+    "historicalMac0546causeUNKNOWN",
+    "full native/controller/hardbounddesign HOLD",
+    "RCCproviderreader/sampler,passivelease,cgroupadmissionunqualified"
+  ],
+  "evidence_files": {
+    "immutable-source-check.json": {
+      "bytes": 810,
+      "sha256": "46941bcea4395436ef211aa30f5b30affc9f3cb525b32d7f6546576628abed8b"
+    },
+    "ownership-model.py": {
+      "bytes": 4340,
+      "sha256": "940caf2c16ea4b77ef85c1335a68f09eb823c982ea8c628a4e0d0c1ff06d51c0"
+    },
+    "ownership-model.json": {
+      "bytes": 1634,
+      "sha256": "621b1fa5992aeb4d977aad8eeb6b884e0967266b85bba3cd466e516fe2c5e516"
+    },
+    "writer-receipt-verification.json": {
+      "bytes": 2385,
+      "sha256": "2c098247e49b173835ce4f341abaf6d2bf74ecd9175e09a1be998f38a1cb3cbe"
+    },
+    "replay-commands.json": {
+      "bytes": 1532,
+      "sha256": "e0322e592a7b725664c84303e3b2bbc210d472b9cef138fa198c0b81de012415"
+    },
+    "red.xml": {
+      "bytes": 4780,
+      "sha256": "0c3c0e9d79f39b1ac2daa9d86fa653c448dd6143e8df65e5c641712176b1f1c6"
+    },
+    "red.log": {
+      "bytes": 5774,
+      "sha256": "94906dcc5f98f54dbf1bf41b873261c3859de9975192df788744537bab95cd89"
+    },
+    "green.xml": {
+      "bytes": 8114,
+      "sha256": "4b929c37e3464e0a6b4cef2107b6e440468b3327995532b22c2721cef96dc074"
+    },
+    "green.log": {
+      "bytes": 1361,
+      "sha256": "ef0f95b0a98235d6235b90cd5c468106628f4d82e8f674d95acc81eee15e8520"
+    },
+    "documentation-proposal.md": {
+      "bytes": 1586,
+      "sha256": "0e0c6d841d92c42089301b61f780e1de8e072cc6fa6227227725c46e4f66f0cc"
+    }
+  },
+  "no_product_edits_by_review": true,
+  "native_rcc_attempts": 0,
+  "lease_commands": 0,
+  "no_broad_signals": true,
+  "upstream_disposition": "none"
+}

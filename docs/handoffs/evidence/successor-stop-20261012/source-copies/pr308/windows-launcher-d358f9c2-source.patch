@@ -1,0 +1,274 @@
+diff --git a/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py b/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py
+index 5b288f31..1c945177 100644
+--- a/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py
++++ b/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py
+@@ -1075,7 +1075,43 @@ def test_success_reaps_fast_exit_detached_child_before_echild(tmp_path):
+                 pass
+ 
+ 
+-def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypatch):
++def _capture_provider_fixture_child(owner, reported_pid):
++    """Bind a fixture report to a live, verified root or descendant identity."""
++    import psutil
++
++    assert owner.capture_verified and owner.snapshot_complete
++    assert owner.process.poll() is None
++    root = psutil.Process(owner.pid)
++    assert root.create_time() == owner.create_time
++    descendants = tuple(
++        (child, child.create_time()) for child in root.children(recursive=True)
++    )
++    candidates = ((root, owner.create_time),) + descendants
++    matches = [
++        (child, birth) for child, birth in candidates if child.pid == reported_pid
++    ]
++    assert len(matches) == 1, "PROVIDER_FIXTURE_CHILD_UNOWNED"
++    assert psutil.Process(owner.pid).create_time() == owner.create_time
++    assert owner.process.poll() is None
++    child, birth = matches[0]
++    assert psutil.Process(child.pid).create_time() == birth
++    return child, birth, descendants
++
++
++def _provider_fixture_child_stopped(child, birth):
++    import psutil
++
++    try:
++        current = psutil.Process(child.pid)
++        assert current.create_time() == birth, "PROVIDER_FIXTURE_CHILD_REUSED"
++        return not current.is_running() or current.status() == psutil.STATUS_ZOMBIE
++    except psutil.NoSuchProcess:
++        return True
++
++
++def test_provider_startup_failure_uses_bounded_kill_fallback(
++    tmp_path, monkeypatch, launcher=False
++):
+     harness = _harness()
+     pid_file = tmp_path / "provider.pid"
+     fake_server = (
+@@ -1084,6 +1120,14 @@ def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypat
+         f"Path({str(pid_file)!r}).write_text(str(os.getpid())); "
+         "print('not-json', flush=True); time.sleep(60)"
+     )
++    if launcher:
++        # Model a redirector that waits for its distinct Python child.
++        fake_server = (
++            "import signal,subprocess,sys; "
++            "signal.signal(signal.SIGTERM, signal.SIG_IGN); "
++            f"child=subprocess.Popen([sys.executable,'-c',{fake_server!r}]); "
++            "child.wait()"
++        )
+     monkeypatch.setattr(
+         harness,
+         "_provider_command",
+@@ -1092,6 +1136,20 @@ def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypat
+ 
+     captured = []
+     actual_popen = subprocess.Popen
++    fixture_child = []
++    fixture_descendants = []
++    original_readline = harness._readline_with_timeout
++
++    def capture_startup_child(*args, owner, **kwargs):
++        line = original_readline(*args, owner=owner, **kwargs)
++        child, birth, descendants = _capture_provider_fixture_child(
++            owner, int(pid_file.read_text())
++        )
++        fixture_child.append((child, birth))
++        fixture_descendants.extend(descendants)
++        return line
++
++    monkeypatch.setattr(harness, "_readline_with_timeout", capture_startup_child)
+ 
+     def owned_popen(*args, **kwargs):
+         process = actual_popen(*args, **kwargs)
+@@ -1117,19 +1175,35 @@ def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypat
+         process = captured[0]
+         result = caught.value.provider_cleanup_result
+         diagnostic = json.dumps(result.to_dict(), sort_keys=True)
+-        assert int(pid_file.read_text()) == process.pid
++        assert len(fixture_child) == 1
++        child, birth = fixture_child[0]
+         assert process.poll() is not None, diagnostic
++        assert _provider_fixture_child_stopped(child, birth), diagnostic
+         assert result.complete, diagnostic
+     finally:
+         # Only the original Popen owns this wait and emergency test teardown.
+         # Preserve the cleanup result above; teardown is not acceptance evidence.
+-        for process in captured:
+-            if process.poll() is None:
+-                process.kill()
+-            process.wait(timeout=2)
+-            for stream in (process.stdout, process.stderr):
+-                if stream is not None:
+-                    stream.close()
++        # PID-file contents never grant signal authority. Only the verified
++        # root's captured descendants, with unchanged births, may be killed.
++        import psutil
++
++        try:
++            for child, birth in reversed(fixture_descendants):
++                try:
++                    if psutil.Process(child.pid).create_time() == birth:
++                        child.kill()
++                except psutil.NoSuchProcess:
++                    pass
++        finally:
++            for process in captured:
++                try:
++                    if process.poll() is None:
++                        process.kill()
++                    process.wait(timeout=2)
++                finally:
++                    for stream in (process.stdout, process.stderr):
++                        if stream is not None:
++                            stream.close()
+ 
+ 
+ def test_public_harness_uses_shared_test_only_binary_admission(tmp_path, monkeypatch):
+diff --git a/action_server/tests/action_server_tests/test_provider_startup_cleanup.py b/action_server/tests/action_server_tests/test_provider_startup_cleanup.py
+index 3a2c9793..ccf0130c 100644
+--- a/action_server/tests/action_server_tests/test_provider_startup_cleanup.py
++++ b/action_server/tests/action_server_tests/test_provider_startup_cleanup.py
+@@ -543,8 +543,9 @@ def test_provider_wait_overshoot_preserves_incomplete_cleanup_fact(
+     assert process._rcc_provider_cleanup is result
+ 
+ 
++@pytest.mark.parametrize("launcher", [False, True])
+ def test_startup_regression_reports_failed_cleanup_and_disposes_original_child(
+-    tmp_path, monkeypatch
++    tmp_path, monkeypatch, launcher
+ ):
+     from action_server_tests import test_dakota_rcc_acceptance as acceptance_tests
+ 
+@@ -572,7 +573,7 @@ def test_startup_regression_reports_failed_cleanup_and_disposes_original_child(
+     try:
+         with pytest.raises(AssertionError) as caught:
+             acceptance_tests.test_provider_startup_failure_uses_bounded_kill_fallback(
+-                tmp_path, monkeypatch
++                tmp_path, monkeypatch, launcher=launcher
+             )
+         assert len(captured) == 1
+         assert captured[0].poll() is not None
+@@ -583,3 +584,97 @@ def test_startup_regression_reports_failed_cleanup_and_disposes_original_child(
+         # Keep the RED control safe even when the acceptance test lacks teardown.
+         for process in captured:
+             _dispose(process)
++
++
++def test_regression_handles_reported_child_distinct_from_original_popen(
++    tmp_path, monkeypatch
++):
++    from action_server_tests import test_dakota_rcc_acceptance as acceptance_tests
++
++    actual_popen = subprocess.Popen
++    captured = []
++
++    def launcher(command, **kwargs):
++        code = (
++            "import signal,subprocess; "
++            "signal.signal(signal.SIGTERM, signal.SIG_IGN); "
++            f"child=subprocess.Popen({command!r}); child.wait()"
++        )
++        process = actual_popen([sys.executable, "-c", code], **kwargs)
++        captured.append(process)
++        return process
++
++    monkeypatch.setattr(
++        acceptance_tests,
++        "subprocess",
++        SimpleNamespace(**dict(vars(subprocess), Popen=launcher)),
++    )
++    acceptance_tests.test_provider_startup_failure_uses_bounded_kill_fallback(
++        tmp_path, monkeypatch
++    )
++    assert len(captured) == 1
++    assert int((tmp_path / "provider.pid").read_text()) != captured[0].pid
++    assert captured[0].poll() is not None
++
++
++@pytest.mark.parametrize(
++    "poison", ["unowned", "root_birth", "child_birth", "owner_exit"]
++)
++def test_fixture_child_capture_rejects_unknown_or_changed_identity(monkeypatch, poison):
++    from action_server_tests import test_dakota_rcc_acceptance as acceptance_tests
++
++    lookups = []
++    exited = [False]
++    original = SimpleNamespace(poll=lambda: 0 if exited[0] else None)
++    child = SimpleNamespace(pid=777, create_time=lambda: 20.0)
++
++    class Root:
++        pid = 123
++
++        def create_time(self):
++            return 99.0 if poison == "root_birth" else 10.0
++
++        def children(self, recursive):
++            assert recursive is True
++            exited[0] = poison == "owner_exit"
++            return [child]
++
++    def lookup(pid):
++        lookups.append(pid)
++        if pid == 123:
++            return Root()
++        assert pid == 777
++        return SimpleNamespace(
++            create_time=lambda: 99.0 if poison == "child_birth" else 20.0
++        )
++
++    owner = SimpleNamespace(
++        pid=123,
++        create_time=10.0,
++        process=original,
++        capture_verified=True,
++        snapshot_complete=True,
++    )
++    monkeypatch.setitem(sys.modules, "psutil", SimpleNamespace(Process=lookup))
++    with pytest.raises(AssertionError):
++        acceptance_tests._capture_provider_fixture_child(
++            owner, 999 if poison == "unowned" else 777
++        )
++
++
++def test_fixture_child_stop_check_rejects_reused_identity(monkeypatch):
++    from action_server_tests import test_dakota_rcc_acceptance as acceptance_tests
++
++    class MissingProcess(Exception):
++        pass
++
++    monkeypatch.setitem(
++        sys.modules,
++        "psutil",
++        SimpleNamespace(
++            Process=lambda pid: SimpleNamespace(create_time=lambda: 99.0),
++            NoSuchProcess=MissingProcess,
++        ),
++    )
++    with pytest.raises(AssertionError, match="PROVIDER_FIXTURE_CHILD_REUSED"):
++        acceptance_tests._provider_fixture_child_stopped(SimpleNamespace(pid=777), 20.0)
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index a72f2066..9faec3bd 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2695,6 +2695,18 @@ zero-budget wait still fails, it records an unreaped wrapper. Use injected clock
+ ownership capture; a live-child assertion without its typed result cannot
+ identify which path failed.
+ 
++A Windows virtual-environment Python executable may be a redirector that
++launches a distinct Python child. A fixture's reported PID therefore need not
++equal the original `Popen.pid`. Before provider cleanup, bind the reported child
++to the verified original root or one of its observed descendants and record its
++birth. Afterwards require the original launcher reaped, that child stopped, and
++typed tree/reader cleanup complete. Reject unknown membership or changed births.
++Emergency fixture teardown may signal only those verified captured identities;
++a PID file alone never grants authority. Exercise a distinct launcher/child
++fixture on every source platform, preserving the package interpreter and the
++cleanup deadline. A later source-suite pass does not identify the cause of an
++earlier cleanup failure whose typed diagnostic was discarded.
++
+ Source CLI gates must also set a task-owned writable `ROBOTS_HOME`, alongside
+ their isolated `ACTIONS_HOME`, RCC home, temporary directory, and package caches.
+ The CLI creates the Robot home before dispatching commands, so the default

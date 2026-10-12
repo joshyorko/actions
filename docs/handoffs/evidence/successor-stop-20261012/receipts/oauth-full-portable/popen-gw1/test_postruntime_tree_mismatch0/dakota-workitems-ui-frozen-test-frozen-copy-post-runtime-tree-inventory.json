@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "source_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "runtime_kind": "frozen",
+  "stage": "frozen-copy-post-runtime",
+  "platform": "Linux",
+  "executable_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "manifest_sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+  "package_tree_sha256": "e47bbdf7f773113c83a0e3d4fd24bdacc9123e8578080e409a7a4454405b2e25",
+  "entries": [
+    {
+      "path": "__pycache__",
+      "kind": "directory",
+      "mode": 448,
+      "link_target": null,
+      "content_sha256": null
+    },
+    {
+      "path": "__pycache__/module.pyc",
+      "kind": "file",
+      "mode": 384,
+      "link_target": null,
+      "content_sha256": "fd7d8d9d425335b6feb5278f39157f22ddc427dd9d1c6083100e23b834f1c15a"
+    },
+    {
+      "path": "module.py",
+      "kind": "file",
+      "mode": 384,
+      "link_target": null,
+      "content_sha256": "53e59725c96d49e080d5edeb4bfe09695d381519921278d25536f172207dd3a6"
+    }
+  ]
+}

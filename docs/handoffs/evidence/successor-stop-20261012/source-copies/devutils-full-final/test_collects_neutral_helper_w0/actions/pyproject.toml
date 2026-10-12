@@ -1,0 +1,5 @@
+[tool.poetry]
+name = "actions"
+version = "1.0.0"
+[tool.poetry.dependencies]
+actions-http-helper = "^1.0.0"

@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "status": "READONLY_SOURCE_AUDIT_COMPLETE_NOTRUN",
+  "source": {
+    "commit": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+    "tree": "851834ae6cc87f42abfcf3c963542191e2815599"
+  },
+  "public_source_findings": {
+    "current_runner": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "private_original_helper_sha256_matches_public_source": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+    "proof_timeout_seconds": 2400,
+    "cleanup_grace_seconds": 10,
+    "cli_watchdog_seconds": 2465,
+    "linux_supervisor_parent_timeout_formula": "command timeout + 4*cleanup grace + 5",
+    "integration_test_outer_timeout_formula": "CLI watchdog + 4*cleanup grace + 5 (2510 seconds at current constants)",
+    "runner_640_consumer": false,
+    "public_workflow_bounds": {
+      "ActionServerTests_job_timeout_minutes": 45,
+      "Canvas_published_acceptance_step_timeout_minutes": 15
+    },
+    "reader_gaps": [
+      "_readline_with_timeout starts a daemon reader thread but does not join or report its terminal state",
+      "private observation draft records inner_pool_provider_readers as NOT_MEASURED"
+    ],
+    "lease_scope": "Public helper checks leaseId presence; no observed release/closure proof in retained source-only observation."
+  },
+  "retained_source_only": {
+    "directory": "docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/pr305-pr313-primary640-owned-boundary-SOURCE-PREPARED-NOTRUN",
+    "primary_geometry": {
+      "child_cooperative_seconds": 600,
+      "owner_fallback_starts_seconds": 620,
+      "GNU_TERM_seconds": 630,
+      "GNU_KILL_after_seconds": 10,
+      "external_primary_total_seconds": 640,
+      "before_and_after_each": "60-second command, 80-second exclusive owner enclosure",
+      "ROOT_outer": "900-second TERM plus 10-second KILL grace; parent 930 seconds"
+    },
+    "files": [
+      "source_light_external_parent_NOTRUN.py",
+      "current_305_primary_only_phase_child_NOTRUN.py",
+      "owned_primary_boundary_NOTRUN.py",
+      "original_supervisor_observation_entry_NOTRUN.py",
+      "current_305_read_only_source_guard_NOTRUN.py",
+      "FROZEN-305-primary640-inputs-NOTRUN.json"
+    ],
+    "root_release": "NONE_NEW_EXECUTION",
+    "tests_or_controls": "NOT_RUN; no baseline-first admission/clock/capture/process/census/lease/post controls are included as completed evidence",
+    "specific_source_defect": "owned_primary_boundary_NOTRUN.py census tests cached Process.is_running before checking current PID create_time; a reused cached PID may be misclassified absent instead of reused/unknown",
+    "unmeasured": [
+      "inner pool/provider readers",
+      "actual Action/RCC lease closure"
+    ]
+  },
+  "missing_portable_inputs": [
+    "Referenced complete 1441-entry source/body/mode inventory is outside handoff under /workspace/engineering and absent in this workspace",
+    "Prepared private LIGHT attempt and cached RCC environment paths are absent in this workspace",
+    "Independent source/PREEXEC reviews and concrete ROOT release are absent",
+    "Executed baseline-first controls and actual source LIGHT/FULL/native receipts are absent"
+  ],
+  "proposed_minimal_repair": [
+    "Keep outer source-only phase loop at 600 seconds; enforce a dedicated external primary wrapper with GNU TERM at 630 and KILL at 640, plus exclusive owner fallback beginning at 620 and a single absolute 640 deadline for waits, drain, census, lease readback, and terminal receipt",
+    "Fix PID-reuse census by obtaining current PID identity before classifying the old handle; classify reused and inspection failures as reused/unknown, never absent",
+    "Use regular-file outer capture and explicitly observe/join every actual reader in the inner supervisor/provider path; include actual lease terminal state in the same 640-deadline receipt",
+    "Add baseline-first source-only controls against the exact functions for admission, timeout/TERM/KILL, leader/descendant/readers, lease identity/closure, and post-guard all-outcome behavior; preserve unknown on missed deadline"
+  ],
+  "operations": "No source/private grant execution, RCC/native/build, or tracked file mutation."
+}

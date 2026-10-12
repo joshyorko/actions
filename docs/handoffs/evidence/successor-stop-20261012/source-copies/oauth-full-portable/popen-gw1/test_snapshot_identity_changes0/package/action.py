@@ -1,0 +1,1 @@
+VALUE = 'mode-bound source'

@@ -1,0 +1,320 @@
+{
+  "schema": 1,
+  "audit_started_monotonic_ns": 22021852943321,
+  "audit_ended_monotonic_ns": 22021853424696,
+  "own_pid": 58303,
+  "self_cgroup_raw": "0::/\n",
+  "cgroup2_mounts": [
+    {
+      "raw": "90 89 0:24 /.. /sys/fs/cgroup ro,nosuid,nodev,noexec,relatime master:8 - cgroup2 cgroup2 rw,nsdelegate",
+      "mount_id": 90,
+      "parent_mount_id": 89,
+      "device_major_minor": "0:24",
+      "root": "/..",
+      "mount_point": "/sys/fs/cgroup",
+      "mount_options": [
+        "ro",
+        "nosuid",
+        "nodev",
+        "noexec",
+        "relatime"
+      ],
+      "optional_fields": [
+        "master:8"
+      ],
+      "filesystem": "cgroup2",
+      "mount_source": "cgroup2",
+      "super_options": [
+        "rw",
+        "nsdelegate"
+      ]
+    }
+  ],
+  "parent_path": "/sys/fs/cgroup",
+  "child_relative_open": "init",
+  "parent_fd_start": {
+    "device": 24,
+    "major": 0,
+    "minor": 24,
+    "inode": 148,
+    "mode_octal": "0o755",
+    "uid": 65534,
+    "gid": 65534,
+    "file_type": "directory"
+  },
+  "parent_fd_end": {
+    "device": 24,
+    "major": 0,
+    "minor": 24,
+    "inode": 148,
+    "mode_octal": "0o755",
+    "uid": 65534,
+    "gid": 65534,
+    "file_type": "directory"
+  },
+  "child_fd_start": {
+    "device": 24,
+    "major": 0,
+    "minor": 24,
+    "inode": 213,
+    "mode_octal": "0o755",
+    "uid": 65534,
+    "gid": 65534,
+    "file_type": "directory"
+  },
+  "child_fd_end": {
+    "device": 24,
+    "major": 0,
+    "minor": 24,
+    "inode": 213,
+    "mode_octal": "0o755",
+    "uid": 65534,
+    "gid": 65534,
+    "file_type": "directory"
+  },
+  "child_opened_via_pinned_parent_fd": true,
+  "dir_fd_names": {
+    "parent": "/sys/fs/cgroup",
+    "child": "/sys/fs/cgroup/init"
+  },
+  "child_memory_max": {
+    "raw": "max\n",
+    "bytes": 4,
+    "sha256": "dbe7218fd3953d71eac340668b850fe4b57278326a462a0cf0ad506efbf8b02e",
+    "fd_before": {
+      "device": 24,
+      "major": 0,
+      "minor": 24,
+      "inode": 247,
+      "mode_octal": "0o644",
+      "uid": 65534,
+      "gid": 65534,
+      "file_type": "regular"
+    },
+    "fd_after": {
+      "device": 24,
+      "major": 0,
+      "minor": 24,
+      "inode": 247,
+      "mode_octal": "0o644",
+      "uid": 65534,
+      "gid": 65534,
+      "file_type": "regular"
+    },
+    "fd_identity_unchanged": true
+  },
+  "parent_memory_max": {
+    "raw": "17179869184\n",
+    "bytes": 12,
+    "sha256": "c42316e609a7bc837c19fd213e9c8bb81b92613a194f5dab1f8cbc0efabb8f9b",
+    "fd_before": {
+      "device": 24,
+      "major": 0,
+      "minor": 24,
+      "inode": 182,
+      "mode_octal": "0o644",
+      "uid": 65534,
+      "gid": 65534,
+      "file_type": "regular"
+    },
+    "fd_after": {
+      "device": 24,
+      "major": 0,
+      "minor": 24,
+      "inode": 182,
+      "mode_octal": "0o644",
+      "uid": 65534,
+      "gid": 65534,
+      "file_type": "regular"
+    },
+    "fd_identity_unchanged": true
+  },
+  "parent_cgroup_stat": {
+    "raw": "nr_descendants 1\nnr_subsys_cpuset 2\nnr_subsys_cpu 2\nnr_subsys_io 2\nnr_subsys_memory 2\nnr_subsys_perf_event 2\nnr_subsys_hugetlb 2\nnr_subsys_pids 2\nnr_dying_descendants 0\nnr_dying_subsys_cpuset 0\nnr_dying_subsys_cpu 0\nnr_dying_subsys_io 0\nnr_dying_subsys_memory 0\nnr_dying_subsys_perf_event 0\nnr_dying_subsys_hugetlb 0\nnr_dying_subsys_pids 0\n",
+    "bytes": 340,
+    "sha256": "95bfff94a947e122b8afc6289e7d9732b2a8800bd11f291008bc4ccec9830b83",
+    "fd_before": {
+      "device": 24,
+      "major": 0,
+      "minor": 24,
+      "inode": 157,
+      "mode_octal": "0o444",
+      "uid": 65534,
+      "gid": 65534,
+      "file_type": "regular"
+    },
+    "fd_after": {
+      "device": 24,
+      "major": 0,
+      "minor": 24,
+      "inode": 157,
+      "mode_octal": "0o444",
+      "uid": 65534,
+      "gid": 65534,
+      "file_type": "regular"
+    },
+    "fd_identity_unchanged": true
+  },
+  "parent_subtree_control": {
+    "raw": "cpuset cpu io memory hugetlb pids\n",
+    "bytes": 34,
+    "sha256": "7705846fd66b27b90255284d08ddc804d01c49449134ec4ebddccc656fa068f6",
+    "fd_before": {
+      "device": 24,
+      "major": 0,
+      "minor": 24,
+      "inode": 153,
+      "mode_octal": "0o644",
+      "uid": 65534,
+      "gid": 65534,
+      "file_type": "regular"
+    },
+    "fd_after": {
+      "device": 24,
+      "major": 0,
+      "minor": 24,
+      "inode": 153,
+      "mode_octal": "0o644",
+      "uid": 65534,
+      "gid": 65534,
+      "file_type": "regular"
+    },
+    "fd_identity_unchanged": true
+  },
+  "samples": [
+    {
+      "sample": 1,
+      "monotonic_ns": 22021853334490,
+      "own_pid": 58303,
+      "child_procs": {
+        "bytes": 46,
+        "sha256": "0adb3f3670bee99673561cba5ae708a2b7d851111fa6350c3bf05f516160bb26",
+        "pid_count": 10,
+        "own_pid_present": true,
+        "fd_stat": {
+          "device": 24,
+          "major": 0,
+          "minor": 24,
+          "inode": 215,
+          "mode_octal": "0o644",
+          "uid": 65534,
+          "gid": 65534,
+          "file_type": "regular"
+        },
+        "same_original_fd_identity": true
+      },
+      "parent_procs": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "pid_count": 0,
+        "own_pid_present": false,
+        "fd_stat": {
+          "device": 24,
+          "major": 0,
+          "minor": 24,
+          "inode": 150,
+          "mode_octal": "0o644",
+          "uid": 65534,
+          "gid": 65534,
+          "file_type": "regular"
+        },
+        "same_original_fd_identity": true
+      },
+      "child_memory_current": 14697975808,
+      "parent_memory_current": 14701301760,
+      "child_current_fd": {
+        "device": 24,
+        "major": 0,
+        "minor": 24,
+        "inode": 242,
+        "mode_octal": "0o444",
+        "uid": 65534,
+        "gid": 65534,
+        "file_type": "regular"
+      },
+      "parent_current_fd": {
+        "device": 24,
+        "major": 0,
+        "minor": 24,
+        "inode": 177,
+        "mode_octal": "0o444",
+        "uid": 65534,
+        "gid": 65534,
+        "file_type": "regular"
+      },
+      "visible_parent_max_minus_current": 2478567424
+    },
+    {
+      "sample": 2,
+      "monotonic_ns": 22021853393259,
+      "own_pid": 58303,
+      "child_procs": {
+        "bytes": 46,
+        "sha256": "0adb3f3670bee99673561cba5ae708a2b7d851111fa6350c3bf05f516160bb26",
+        "pid_count": 10,
+        "own_pid_present": true,
+        "fd_stat": {
+          "device": 24,
+          "major": 0,
+          "minor": 24,
+          "inode": 215,
+          "mode_octal": "0o644",
+          "uid": 65534,
+          "gid": 65534,
+          "file_type": "regular"
+        },
+        "same_original_fd_identity": true
+      },
+      "parent_procs": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "pid_count": 0,
+        "own_pid_present": false,
+        "fd_stat": {
+          "device": 24,
+          "major": 0,
+          "minor": 24,
+          "inode": 150,
+          "mode_octal": "0o644",
+          "uid": 65534,
+          "gid": 65534,
+          "file_type": "regular"
+        },
+        "same_original_fd_identity": true
+      },
+      "child_memory_current": 14697975808,
+      "parent_memory_current": 14701301760,
+      "child_current_fd": {
+        "device": 24,
+        "major": 0,
+        "minor": 24,
+        "inode": 242,
+        "mode_octal": "0o444",
+        "uid": 65534,
+        "gid": 65534,
+        "file_type": "regular"
+      },
+      "parent_current_fd": {
+        "device": 24,
+        "major": 0,
+        "minor": 24,
+        "inode": 177,
+        "mode_octal": "0o444",
+        "uid": 65534,
+        "gid": 65534,
+        "file_type": "regular"
+      },
+      "visible_parent_max_minus_current": 2478567424
+    }
+  ],
+  "directory_identity_unchanged": true,
+  "proc_route_after": "0::/\n",
+  "mountinfo_same_at_end": true,
+  "membership_supported": true,
+  "prior_root_empty_failure_preserved": true,
+  "one_bounded_audit": true,
+  "read_bytes_cap_per_file": 1048576,
+  "cgroup_mutations": 0,
+  "signals": 0,
+  "native_attempts": 0
+}

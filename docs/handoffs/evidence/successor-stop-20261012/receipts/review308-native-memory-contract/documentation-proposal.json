@@ -1,0 +1,16 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "insertion_point": "Memory admission cgroup binding guidance",
+  "exact_delta": "Record a memory admission threshold's derivation and approval separately from a cgroup capacity observation. The retained proposed initial threshold of 3,113,851,289 bytes already includes its 536,870,912-byte stop reserve; do not add that reserve a second time. Its 2.4 GiB input was an owned filesystem-state envelope, not a measured process-memory requirement or cold-solver peak, so the memory policy remains uncalibrated and unadopted. A stable child-membership witness and descriptor-bound finite ancestor identify a shared accounting scope; memory.max minus memory.current is observed headroom, not reserved capacity. Namespace-path restrictions belong to the reader's supported model and must be reviewed before extending it. Retained private samplers and old execution grants do not constitute a current native controller or authorize their replay.",
+  "durable_learning": "Separate exact constant provenance, empirical shared-counter binding, policy adoption and current executable controller qualification.",
+  "evidence": [
+    "Originald2b3purepolicy constants/comment and proposal277539 explicitlyderive2.4GiBstate+0.5GiBreserve and labelNOTACCEPTED",
+    "OldCapacityState/FiniteSampler measures owned filesystembytes/statvfs, not RSS",
+    "Freshresourceaftercache and pinnedFDchild review provide sharedancestor observation only",
+    "Current3812source has existing subreaper but no memory.current/backend/FiniteSampler and nullsampler/wholeoperationenforcer metadata",
+    "Kernelprimary memory.current includes descendants and memory.max is hardlimit, not reservation"
+  ],
+  "stale_or_ambiguous_guidance_removed": "Correct profilev12 floor-plus-reserve wording, reject filesystem-budget-as-memorycalibration and canonical-onlyreader-as-kernelconstraint inference.",
+  "remaining_uncertainty": "Supportednamespace reader/currentcontroller/independentwatchdog/outputretention, numericbudgetadmission, workloadincrement/latency calibration, passivelease observation and realbaselineAction remainHOLD.",
+  "upstream_disposition": "none"
+}

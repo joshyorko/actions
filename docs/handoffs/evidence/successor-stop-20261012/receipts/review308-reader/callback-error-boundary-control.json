@@ -1,0 +1,26 @@
+{
+  "commit": "93731e1e36efba73c273de0685ee1a4fa21bdc38",
+  "pool_sha256": "194720bb8259441d2c91a41798b59e3d632ef9daba1cafa79b5512b1b9204f08",
+  "callback_sha256": "5b60f8b5906ef2714f630004d0913a24be2421c917dd51126ea73767450b6d85",
+  "scope": "exact immutable Callback and nested output-reader AST, BytesIO, no threads/native/builds/source edits",
+  "controls": [
+    {
+      "raise_exceptions": false,
+      "logged": 1,
+      "retained_errors": {},
+      "raised": null,
+      "status": "EXPECTED_RED: callback failure absent from retained reader facts"
+    },
+    {
+      "raise_exceptions": true,
+      "logged": 1,
+      "retained_errors": {
+        "stdout": "OSError"
+      },
+      "raised": "OSError",
+      "status": "PROTOTYPE_GREEN_ONLY: opt-in propagation records class and preserves rethrow"
+    }
+  ],
+  "finding": "default Callback swallows ordinary output callback errors before new reader capture",
+  "verdict": "HOLD_SOURCE for advertised callback-error evidence"
+}

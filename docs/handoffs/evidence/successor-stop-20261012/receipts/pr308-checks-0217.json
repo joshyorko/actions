@@ -1,0 +1,179 @@
+{
+  "time": "2026-10-12T02:13:27.711932+00:00",
+  "number": 308,
+  "head_sha": "b0a014512da9024003dcd4e09056a951c42c48c4",
+  "base_sha": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "url": "https://github.com/joshyorko/actions/pull/308",
+  "draft": true,
+  "checks": [
+    {
+      "name": "copilot-setup-steps",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114634433219,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194614351/job/114634433219"
+    },
+    {
+      "name": "Build Action Server binary without credentials (windows-2022)",
+      "status": "in_progress",
+      "conclusion": null,
+      "id": 114634433217,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194614279/job/114634433217"
+    },
+    {
+      "name": "Build Action Server binary without credentials (ubuntu-22.04)",
+      "status": "queued",
+      "conclusion": null,
+      "id": 114634433209,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194614279/job/114634433209"
+    },
+    {
+      "name": "Build Action Server binary without credentials (macos-15)",
+      "status": "queued",
+      "conclusion": null,
+      "id": 114634433054,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194614279/job/114634433054"
+    },
+    {
+      "name": "build-wheels (macos-15)",
+      "status": "in_progress",
+      "conclusion": null,
+      "id": 114634432552,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613978/job/114634432552"
+    },
+    {
+      "name": "build (windows-py3.12-devmode)",
+      "status": "in_progress",
+      "conclusion": null,
+      "id": 114634432504,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613959/job/114634432504"
+    },
+    {
+      "name": "coverage",
+      "status": "queued",
+      "conclusion": null,
+      "id": 114634432486,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613988/job/114634432486"
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, macos-15, rcc-macosarm64, 778402ccdb7c10e10fbdad7baa7c27b44563c1a90a95...",
+      "status": "queued",
+      "conclusion": null,
+      "id": 114634432477,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613982/job/114634432477"
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, ubuntu-22.04, rcc-linux64, 7e588c01751ca2ae15ba13ef67f2f4b7567697a5a83...",
+      "status": "queued",
+      "conclusion": null,
+      "id": 114634432471,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613982/job/114634432471"
+    },
+    {
+      "name": "build (macos-py3.12-devmode)",
+      "status": "queued",
+      "conclusion": null,
+      "id": 114634432463,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613959/job/114634432463"
+    },
+    {
+      "name": "build (macos-py3.10-devmode)",
+      "status": "queued",
+      "conclusion": null,
+      "id": 114634432460,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613953/job/114634432460"
+    },
+    {
+      "name": "toolkit (primary, 18.19.3, windows-2022, rcc-windows64.exe, 523a6be8ad92235fbe0a4e4732699f2cd66f9...",
+      "status": "queued",
+      "conclusion": null,
+      "id": 114634432459,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613982/job/114634432459"
+    },
+    {
+      "name": "build-wheels (windows-2022)",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114634432447,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613978/job/114634432447"
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, windows-2022, rcc-windows64.exe, 705e2a4ec70a8bc3881f042a2eae222ed07e39a83...",
+      "status": "in_progress",
+      "conclusion": null,
+      "id": 114634432431,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613982/job/114634432431"
+    },
+    {
+      "name": "build (windows-py3.10-devmode)",
+      "status": "in_progress",
+      "conclusion": null,
+      "id": 114634432430,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613953/job/114634432430"
+    },
+    {
+      "name": "build (ubuntu-py3.10-devmode)",
+      "status": "queued",
+      "conclusion": null,
+      "id": 114634432410,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613953/job/114634432410"
+    },
+    {
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114634432395,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613978/job/114634432395"
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, macos-15, rcc-macosarm64, 57d2fe4fb0dc54f2bd09ed0d1c3f3ace28d85a1370dc1984...",
+      "status": "queued",
+      "conclusion": null,
+      "id": 114634432381,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613982/job/114634432381"
+    },
+    {
+      "name": "toolkit (n-1, 18.18.1, ubuntu-22.04, rcc-linux64, ab6e25fe616878d79ed2d92ee9c5073d360d8cde637dcf0...",
+      "status": "in_progress",
+      "conclusion": null,
+      "id": 114634432358,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613982/job/114634432358"
+    },
+    {
+      "name": "build (ubuntu-py3.12-devmode)",
+      "status": "in_progress",
+      "conclusion": null,
+      "id": 114634432329,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613959/job/114634432329"
+    },
+    {
+      "name": "build-sdist (ubuntu-py3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114634432317,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613978/job/114634432317"
+    },
+    {
+      "name": "candidate-wheel",
+      "status": "in_progress",
+      "conclusion": null,
+      "id": 114634432312,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613953/job/114634432312"
+    },
+    {
+      "name": "audit",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114634432129,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194613946/job/114634432129"
+    },
+    {
+      "name": "build",
+      "status": "completed",
+      "conclusion": "success",
+      "id": 114634422444,
+      "url": "https://github.com/joshyorko/actions/actions/runs/38194610557/job/114634422444"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "verdict": "GO_SOURCE",
+  "base": "9760d5ec44876558c4941c4c3190abc8d92d14a1",
+  "head": "06086c63a681bb9cb117387675c98ca3824ce7cc",
+  "tree": "4605e41f2ae8d2530420ccf6f353f008827a620f",
+  "findings_remaining": [],
+  "resolved_findings": [
+    "Public operator template omitted trailing slash from exact emitted redirect URI; fixed06086c63.",
+    "Canonical old token-acquisition paragraph contradicted new offline build; fixed2d241e2e.",
+    "Default public operator template absent from initiald4c tracked tree; correcteddf000f0a and narrow Runtime ignore exceptiona53b1a19."
+  ],
+  "evidence": [
+    "boundary-controls.json",
+    "provider-boundary-controls.json",
+    "final-input-parity.json",
+    "../oauth-focused-reviewed.log"
+  ],
+  "limitations": [
+    "Source review only.",
+    "Full portable1400PASS13SKIP log is partial-source run evidence, not exact-final-head suite acceptance.",
+    "Actual wheel/sdist/native/installed/hosted platform acceptance pending.",
+    "POSIX mode0600 does not establish Windows ACL privacy.",
+    "Owned loopback issuer registrations do not establish live third-party provider service acceptance."
+  ],
+  "documentation_proposal": {
+    "file": "docs/skills/repository-operations.md",
+    "insert_after": "Missing optional client secrets preserve PKCE S256.",
+    "text": "Register the exact redirect URI emitted by Runtime, `<Runtime base URL>/actions/oauth2/`, including its trailing slash. The custom owned-issuer source test asserts this URI; the callback route alone does not define the value sent to the issuer.",
+    "evidence": "_api_oauth2.py:493 and test_custom_oauth_exchanges_with_owned_issuer redirect_uri assertion."
+  },
+  "upstream_disposition": "none"
+}

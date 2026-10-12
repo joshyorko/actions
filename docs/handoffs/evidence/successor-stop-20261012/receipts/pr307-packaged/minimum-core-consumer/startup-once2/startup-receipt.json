@@ -1,0 +1,46 @@
+{
+  "scope": "installed Linux cp312 idle CLI startup only",
+  "runtime_source": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "runtime_version": "1.0.3",
+  "public_core_helper_versions": {
+    "core": "1.0.2",
+    "helper": "1.0.3"
+  },
+  "visible_headroom_bytes": 2593128448,
+  "self_cgroup_binding": "UNQUALIFIED; no managed Action admission inferred",
+  "managed_actions": 0,
+  "rcc_feedback": "Normal CLI may launch shipped18.19.3 feedback metric; no environment/Action acquisition",
+  "startup": "HTTP_READY",
+  "http": [
+    {
+      "path": "/openapi.json",
+      "status": 200,
+      "body_sha256": "452f161128a76dea62066f7172ef6b1cde2eb26b21ea4928a306db5688ce9101"
+    },
+    {
+      "path": "/api/work-items/stats",
+      "authenticated": false,
+      "status": 403,
+      "body_sha256": "9a1ef7ec2858c93d364dbe0e455d321ed30f0ad6e706782ebe00aa6653e1462f"
+    },
+    {
+      "path": "/api/work-items/stats",
+      "authenticated": true,
+      "status": 200,
+      "body_sha256": "85b9fcdd3a8c9779471783a64c89adcf174f2bc79c6de1b9321e8cbe496a6fdd"
+    }
+  ],
+  "cleanup": {
+    "wrapper_reaped": true,
+    "live_descendant_pids": [],
+    "zombie_descendant_pids": [],
+    "errors": [],
+    "descendant_snapshot_complete": true
+  },
+  "owner": {
+    "pid": 38163,
+    "create_time": 1791776586.51
+  },
+  "elapsed_seconds": 2.1788845249993756,
+  "status": "PASS_IDLE_STARTUP_SCOPED"
+}

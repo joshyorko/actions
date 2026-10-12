@@ -1,0 +1,36 @@
+{
+  "expected_wrapper_sha256": "e1728cfc866951e0710a4ab343eb114800dd3e530909b8418e1658e9a8d4203f",
+  "expected_frozen_binary_sha256": "153ffa85fdf369416f99c8d14a1d25f5e10c6096f9e668825679b2b12b927b9e",
+  "selected_test_nodes": [
+    "selected-node"
+  ],
+  "process_lifecycles": [
+    {
+      "test_nodeid": "selected-node",
+      "identity_verified": false,
+      "wrapper_pid": 100,
+      "natural_exit": false,
+      "stop_observed": true,
+      "stop_failure": "startup identity check failed: direct wrapper child is not the single executable cached under its HOME"
+    }
+  ],
+  "per_node": {
+    "selected-node": {
+      "attempted": 1,
+      "natural_wrapper_and_child_exits": 0,
+      "failed": 1,
+      "status": "FAIL"
+    }
+  },
+  "natural_wrapper_and_child_shutdowns": 0,
+  "missing_test_nodes": [
+    "selected-node"
+  ],
+  "failures": [
+    "no wrapper lifecycle proof for selected nodes: ['selected-node']",
+    "wrapper lifecycle did not exit naturally for nodes: ['selected-node']",
+    "one or more wrapper children did not exit naturally",
+    "wrapper process lifecycle verification failed: ['selected-node: startup identity check failed: direct wrapper child is not the single executable cached under its HOME']"
+  ],
+  "status": "FAIL"
+}

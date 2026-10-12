@@ -1,0 +1,10 @@
+{
+  "id": 38218598210,
+  "head_sha": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+  "status_before": "in_progress",
+  "conclusion_before": null,
+  "reason": "Josh explicitly stops convergence and requests quiescence; owned CI spawned by own a17push only",
+  "cancel_exit": 0,
+  "response": "{}",
+  "observed_at": "2026-10-12T07:59:11.318073+00:00"
+}

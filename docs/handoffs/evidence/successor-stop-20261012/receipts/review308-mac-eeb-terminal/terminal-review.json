@@ -1,0 +1,128 @@
+{
+  "verdict": "GO_TERMINAL_MAC_EEB_RECEIPT_SCOPED",
+  "repository": "joshyorko/actions",
+  "run": {
+    "id": 38207623439,
+    "head_sha": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+    "status": "completed",
+    "conclusion": "failure",
+    "run_attempt": 1,
+    "path": ".github/workflows/actions_runtime_tests.yml"
+  },
+  "job": {
+    "id": 114674513097,
+    "name": "build (macos-py3.12-devmode)",
+    "status": "completed",
+    "conclusion": "success",
+    "run_id": 38207623439,
+    "started_at": "2026-10-12T05:22:11Z",
+    "completed_at": "2026-10-12T05:41:19Z"
+  },
+  "producer": {
+    "sha": "7ba382a61a5b27831f8eaf759dd5a10ae4a4b54a",
+    "tree": "ce7ae02d6c7db06ceffedf771c6eb365d11517b9",
+    "parents": [
+      "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5"
+    ],
+    "whole_tree_equals_recorded_head": true,
+    "authority": "oncefetched completed log actualcheckout plus independent RESTGitcommit metadata+immutablelocal tree"
+  },
+  "decoded_log": {
+    "private_path": "/workspace/successor-evidence/review308-mac-eeb-terminal/decoded-job-private.log",
+    "bytes": 1287197,
+    "sha256": "8fa2f81907a01f20b849c5a9261202f47a82594bd37e2727b4d7c34dc455936a",
+    "mode": "0600",
+    "ancestor_mode": "0700",
+    "BOM_preserved": true,
+    "carriage_return_count": 0,
+    "newline_conversion": "none; exactdecodedUTF8serializedtransport",
+    "fetches": 1,
+    "rawlog_or_signedURL_exported": false,
+    "digest_scope": "tooldecodedUTF8, not predecodeHTTPwirebytes"
+  },
+  "source_suite": {
+    "command": "uv run --no-project --python 3.12 poetry run inv test-not-integration",
+    "passed": 1424,
+    "skipped": 216,
+    "warnings": 16,
+    "seconds": 163.49
+  },
+  "frozen_suite": {
+    "command": "uv run --no-project --python 3.12 poetry run inv test-binary --jobs 0",
+    "passed": 132,
+    "skipped": 20,
+    "deselected": 1643,
+    "seconds": 772.94
+  },
+  "provider_regressions": [
+    {
+      "node": "test_dakota_rcc_acceptance.py::test_provider_startup_failure_uses_bounded_kill_fallback",
+      "outcome": "PASSED"
+    },
+    {
+      "node": "test_provider_startup_cleanup.py::test_startup_regression_reports_failed_cleanup_and_disposes_original_child",
+      "outcome": "PASSED"
+    },
+    {
+      "node": "test_provider_startup_cleanup.py::test_provider_wait_overshoot_preserves_incomplete_cleanup_fact[0.0]",
+      "outcome": "PASSED"
+    },
+    {
+      "node": "test_provider_startup_cleanup.py::test_provider_wait_overshoot_preserves_incomplete_cleanup_fact[0.15]",
+      "outcome": "PASSED"
+    }
+  ],
+  "immutable_source_bindings": [
+    {
+      "path": "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+      "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+      "bytes": 43540,
+      "sha256": "37bf41455f2278b0b78078cfed23a5c1dac21eddefae7a9fda15a0687e38f05d"
+    },
+    {
+      "path": "action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+      "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+      "bytes": 19528,
+      "sha256": "f8b4627141b68fee7087e7fa555b7a0994e141f52641429368446075b3f9673e"
+    }
+  ],
+  "regression_semantics": "Positive fake-provider requires actualtypedcleanup complete and originalPopenexit; negative injected diagnosticcontrol expectsfailure and checks originalchild disposed/streamsclosed. Emergency teardown is excluded from acceptance. Waitovershoot models preserve incompletefact. Not shippedRCCprovider/lease execution.",
+  "current_eeb_windows_failure_preserved": {
+    "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+    "run": 38207623439,
+    "job": 114674512952,
+    "unit": {
+      "failed": 2,
+      "passed": 1413,
+      "skipped": 225,
+      "seconds": 301.5
+    },
+    "conclusion": "failure",
+    "receipt_sha256": "404ad488208f1658a95052a589532293ce1aa821acd66d4c555e897b17bd15b2"
+  },
+  "historical_mac0546_cause": "UNKNOWN; no inference from latermacPASS",
+  "Linux_native_cancellation_race": "parentreported; not reverified in thisboundedMacreceipt; no currentnativegatewaiver",
+  "qualification_bounds": [
+    "exacteebMac terminalonly; notcurrentd358+asyncwriterhead",
+    "entireeebworkflowFAILURE retained",
+    "skip/deselections unverified",
+    "no actualshippedRCCprovider/nativebaseline/MCP/managedAction/uncappedcleanup/readers/lease acceptance",
+    "no publication/externalmutation/rerun/native dispatch by reviewer"
+  ],
+  "reviewer_actions": "One completedGitHubdecodedlog fetch; privateUTF8retention and readonly metadata/sourceparse only; no tests/install/build/RCC/native execution/newworkers.",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "insertion_point": "provider-startup cleanup/test qualification guidance",
+    "exact_delta": "A later passing platform run cannot identify the cause of an earlier failed run. Keep the earlier cause unknown unless its retained failure diagnostics isolate it. Name the assertion exercised by a provider regression: a passing diagnostic-failure control proves incomplete cleanup remains a failure and emergency teardown disposes the original child; teardown is not a measured cleanup success. A passing injected fake-provider test also does not establish shipped RCC provider or lease acceptance.",
+    "durable_learning": "Separate terminal platform recovery, failure diagnosis and actual cleanup/native qualification.",
+    "evidence": [
+      "terminal-review.json binds actualmacOS1424source/132frozenPASS and namedstrict+negative diagnosticcontrols to eeb whole tree",
+      "Immutableeebtest source requires result.complete in positive fake-provider control, tests incomplete diagnostic failure, and excludes emergency teardown as acceptance evidence"
+    ],
+    "stale_or_ambiguous_guidance_removed": "Prevent latergreen evidence from retroactively assigning historicalMac0546cause or labeling fake-provider/negativecontrolPASS as RCC lifecycle acceptance.",
+    "remaining_uncertainty": "HistoricalMac0546causeUNKNOWN; eebworkflowFAILWindows2 source assertions remain failed; Linuxnative cancellation race not independently qualified here; currentd358+async changes require ownexacthead CI.",
+    "upstream_disposition": "none"
+  },
+  "upstream_disposition": "none"
+}

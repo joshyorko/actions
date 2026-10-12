@@ -1,0 +1,14 @@
+{
+  "source_commit": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+  "source_tree": "525083edecdf20ef0daf6d481b0b738935741d66",
+  "control": "actual completed Thread; join returns; first is_alive raises OSError once; second is_alive returns false",
+  "observed": {
+    "reader_joined": false,
+    "reader_alive": false,
+    "reader_error": "PROVIDER_JOIN_OSError",
+    "cleanup_complete": false,
+    "tree_result": null,
+    "tree_cleanup_or_signals": false
+  },
+  "classification_finding": "The first is_alive error is caught by the join try block and mislabeled PROVIDER_JOIN_OSError; it should be PROVIDER_ALIVE_OSError. Cleanup stays incomplete, so this is diagnostic accuracy rather than excess authority."
+}

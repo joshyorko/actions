@@ -1,0 +1,155 @@
+{
+  "verdict": "GO_TERMINAL_WINDOWS_PREDECESSOR_RECEIPT_SCOPED",
+  "repository": "joshyorko/actions",
+  "workflow": ".github/workflows/actions_runtime_tests.yml",
+  "run": {
+    "id": 38205604794,
+    "head_sha": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+    "event": "pull_request",
+    "status": "completed",
+    "conclusion": "failure",
+    "run_attempt": 1
+  },
+  "job": {
+    "id": 114668292616,
+    "name": "build (windows-py3.12-devmode)",
+    "status": "completed",
+    "conclusion": "success",
+    "run_id": 38205604794,
+    "started_at": "2026-10-12T04:53:20Z",
+    "completed_at": "2026-10-12T05:33:48Z"
+  },
+  "producer": {
+    "sha": "6433af24a322be5f8a715934663b925d5b3cf044",
+    "tree": "cca24f6fd8f6c18034ef3a12b77dd37e5fe64a97",
+    "parents": [
+      "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "0546ef30a30ff8229cb8fa6268e492c5cd74134e"
+    ],
+    "whole_tree_equals_recorded_head": true,
+    "authority": "oncefetched completedlog checkout message; independent RESTgitcommit metadata and immutablelocalhead tree"
+  },
+  "decoded_log": {
+    "private_path": "/workspace/successor-evidence/review308-windows0546-terminal/decoded-job-private.log",
+    "bytes": 741199,
+    "sha256": "7a856e19801ba7f26795bfabfc48978088a794c8880c2acd8a2ed9ab46c782b8",
+    "mode": "0600",
+    "ancestor_mode": "0700",
+    "fetches": 1,
+    "raw_content_exported": false,
+    "digest_scope": "exact tool-decodedUTF8 content/BOM/CRLF; not predecodeHTTPwire bytes"
+  },
+  "source_suite": {
+    "command": "uv run --no-project --python 3.12 poetry run inv test-not-integration",
+    "passed": 1412,
+    "skipped": 225,
+    "warnings": 15,
+    "seconds": 399.99
+  },
+  "frozen_suite": {
+    "command": "uv run --no-project --python 3.12 poetry run inv test-binary --jobs 0",
+    "passed": 131,
+    "skipped": 21,
+    "deselected": 1640,
+    "seconds": 1754.39
+  },
+  "corrected_fake_wait_regressions": [
+    {
+      "node": "test_owned_cleanup_evidence.py::test_existing_wait_events_and_echild_are_observations_not_invented_reaps",
+      "outcome": "PASSED"
+    },
+    {
+      "node": "test_owned_cleanup_evidence.py::test_wait_timeout_keeps_primary_cleanup_error_and_unavailable_echild",
+      "outcome": "PASSED"
+    },
+    {
+      "node": "test_owned_cleanup_evidence.py::test_actual_supervisor_wires_observer_only_when_requested[False-False]",
+      "outcome": "PASSED"
+    },
+    {
+      "node": "test_owned_cleanup_evidence.py::test_actual_supervisor_wires_observer_only_when_requested[False-True]",
+      "outcome": "PASSED"
+    },
+    {
+      "node": "test_owned_cleanup_evidence.py::test_actual_supervisor_wires_observer_only_when_requested[True-False]",
+      "outcome": "PASSED"
+    },
+    {
+      "node": "test_owned_cleanup_evidence.py::test_actual_supervisor_wires_observer_only_when_requested[True-True]",
+      "outcome": "PASSED"
+    },
+    {
+      "node": "test_owned_cleanup_evidence.py::test_raw_wait_error_retains_original_exception_identity",
+      "outcome": "PASSED"
+    },
+    {
+      "node": "test_owned_cleanup_evidence.py::test_supervisor_model_setup_error_fails_without_real_fallback",
+      "outcome": "PASSED"
+    },
+    {
+      "node": "test_owned_cleanup_evidence.py::test_rejected_metadata_attachment_does_not_replace_wait_primary",
+      "outcome": "PASSED"
+    }
+  ],
+  "immutable_fake_wait_test_source_sha256": "e29d39003511665c785c9cdd62d56a7827a0cd442a596846c3216d4c7d797590",
+  "fake_wait_scope": "Injected Linux wait primitives/frozen-clock controls onWindows; no realLinuxwaitpid/provider/lease proof. Frozen counts bind actual0546 binaries only.",
+  "current_eeb_failed_receipt": {
+    "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+    "run": 38207623439,
+    "job": 114674512952,
+    "conclusion": "failure",
+    "unit": {
+      "failed": 2,
+      "passed": 1413,
+      "skipped": 225,
+      "seconds": 301.5
+    },
+    "failures": [
+      {
+        "node": "test_dakota_rcc_acceptance.py::test_provider_startup_failure_uses_bounded_kill_fallback",
+        "assertion": "reported Python PID equals original Popen PID",
+        "reported_pid": 6976,
+        "popen_pid": 5536
+      },
+      {
+        "node": "test_provider_startup_cleanup.py::test_startup_regression_reports_failed_cleanup_and_disposes_original_child",
+        "assertion": "expected CONTROLLED_OWNERSHIP_FAILURE diagnostic; actual failed at prior unsupported PID equality",
+        "reported_pid": 5392,
+        "popen_pid": 6312
+      }
+    ],
+    "receipt_sha256": "404ad488208f1658a95052a589532293ce1aa821acd66d4c555e897b17bd15b2"
+  },
+  "qualification_bounds": [
+    "predecessor0546 only, notcurrenteeb/newsource",
+    "overall0546 runFAILURE remainsFAILURE",
+    "skips/deselections unverified",
+    "no currentnativebaseline/managedAction/MCP/uncappedcleanup/readers/lease acceptance",
+    "no publication/externalmutation/retry/native dispatch by reviewer"
+  ],
+  "reviewer_actions": "One completeddecodedlog fetch; readonlymetadata/source parsing and ownprivate evidence only. Rawlogs/signedURLs excluded from safe export.",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "insertion_point": "Hosted pull-request validation provenance paragraph",
+    "exact_delta": "When retaining a tool-decoded hosted job log, write its exact UTF-8 content without newline or BOM normalization and label the digest as decoded-content identity. Preserve carriage returns through any serialization transport; a line-based text patch can drop them. Record the job and overall run conclusions separately: one completed successful platform job can provide terminal suite evidence while another platform causes the workflow run to fail. Bind suite counts and named regression outcomes to that job's actual checkout tree. Parse the explicit terminal outcome for each node; its start row is not an additional result.",
+    "durable_learning": "Decoded byte identity and terminal per-job results require separate controls from whole workflow success.",
+    "evidence": [
+      "log-transport-control.json retains initial byte and parser failures plus corrections",
+      "terminal-review.json binds Windows jobSUCCESS/whole runFAILURE to actual syntheticcheckout tree and namedregressions"
+    ],
+    "stale_or_ambiguous_guidance_removed": "Avoid normalized text hashes being labeled exact decoded content, start rows counted as outcomes, or job success labeled fullrun/currenthead acceptance.",
+    "remaining_uncertainty": "Currenteeb sourceFAIL2 and all outstanding native/managed/lease gates remain unqualified.",
+    "upstream_disposition": "none"
+  },
+  "initial_controls_preserved": {
+    "initial_private_log_transport": "FAIL_BYTE_IDENTITY: line-based patch writer dropped5371 carriage returns",
+    "initial_observed_bytes": 735828,
+    "initial_observed_sha256": "c560c6dd7ba62f664501c3f3c85761aff75ff1b24d50382a6d77212840e23a44",
+    "corrected_transport": "serialize JSON then encode exactUTF8 preservingBOM/CRLF",
+    "corrected_bytes": 741199,
+    "corrected_sha256": "7a856e19801ba7f26795bfabfc48978088a794c8880c2acd8a2ed9ab46c782b8",
+    "single_log_fetch": true,
+    "initial_result_parser": "FAIL: expected one node occurrence but log has start+terminal rows; corrected filter requires explicit terminal outcome"
+  },
+  "upstream_disposition": "none"
+}

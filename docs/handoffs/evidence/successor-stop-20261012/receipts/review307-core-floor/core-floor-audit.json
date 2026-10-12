@@ -1,0 +1,245 @@
+{
+  "classification": "NO_CONCRETE_RUNTIME_HOST_FLOOR_BLOCKER; minimum Core OAuth/idle now verified separately, MCP/managed full contract untested",
+  "runtime_head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "runtime_tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+  "production_requirement": "actions-core >=1.0.2,<2.0.0",
+  "registry_receipt": {
+    "commit": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+    "path": "docs/program/evidence/core-1.0.2-pypi-verification-20261009.json",
+    "git_blob": "086f4b01d2e7469a63be7e8ee7e32977e798903f",
+    "sha256": "b6ff119c82bcfdd35fabf85c00c621cda6c85eb66faba479d694c964a0e5bacf"
+  },
+  "registry_provenance": {
+    "Core_1_0_2_source": "011c5482285ea516f39292100c429a905e6e3e36",
+    "source_tree": "db3ecee9e9c2937a9912780a54bd5a1557562f50",
+    "public_wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+    "public_sdist_sha256": "99e7f10905c0fd50cf22b6b4b5d1700443092dd907293b348e4ac39d21c63c73",
+    "recorded_exact_sdist_source_members": 51
+  },
+  "runtime_direct_Core_import_inventory": [
+    {
+      "path": "action_server/src/actions/server/_action_package_handler.py",
+      "line": 151,
+      "module": "actions.server_integration",
+      "names": [
+        "DEFAULT_EXCLUSION_PATTERNS"
+      ]
+    },
+    {
+      "path": "action_server/src/actions/server/_actions_import.py",
+      "line": 16,
+      "module": "actions",
+      "names": [
+        "ActionsListActionTypedDict"
+      ]
+    },
+    {
+      "path": "action_server/src/actions/server/_actions_import.py",
+      "line": 458,
+      "module": "actions.server_integration",
+      "names": [
+        "format_lint_results"
+      ]
+    },
+    {
+      "path": "action_server/src/actions/server/_actions_process_pool.py",
+      "line": 17,
+      "module": "actions",
+      "names": [
+        "ActionContext"
+      ]
+    },
+    {
+      "path": "action_server/src/actions/server/_new_project.py",
+      "line": 62,
+      "module": "actions.server_integration",
+      "names": [
+        "DEFAULT_EXCLUSION_PATTERNS"
+      ]
+    },
+    {
+      "path": "action_server/src/actions/server/_preload_actions/preload_actions_server_main.py",
+      "line": 272,
+      "module": "actions.server_integration",
+      "names": [
+        "EPManagedParameters",
+        "ManagedParameters",
+        "PluginManager"
+      ]
+    },
+    {
+      "path": "action_server/src/actions/server/_preload_actions/preload_actions_server_main.py",
+      "line": 278,
+      "module": "actions",
+      "names": [
+        "Request"
+      ]
+    },
+    {
+      "path": "action_server/src/actions/server/_preload_actions/preload_actions_server_main.py",
+      "line": 193,
+      "module": "actions",
+      "names": [
+        "cli"
+      ]
+    },
+    {
+      "path": "action_server/src/actions/server/_preload_actions/preload_actions_teardown.py",
+      "line": 6,
+      "module": "actions",
+      "names": [
+        "IAction",
+        "teardown"
+      ]
+    },
+    {
+      "path": "action_server/src/actions/server/package/_package_metadata.py",
+      "line": 61,
+      "module": "actions",
+      "names": [
+        "ActionsListActionTypedDict"
+      ]
+    }
+  ],
+  "core_contract_source_bindings": [
+    {
+      "commit": "011c5482285ea516f39292100c429a905e6e3e36",
+      "path": "actions/src/actions/__init__.py",
+      "git_blob": "00254c1e7bbccecadfd2eeb32d59c216b40ccea8",
+      "sha256": "d12241ee635dfc81051b391bfd1904922ab4fe97b8bef4c3dfff29a1988f74cc"
+    },
+    {
+      "commit": "011c5482285ea516f39292100c429a905e6e3e36",
+      "path": "actions/src/actions/server_integration.py",
+      "git_blob": "7e4971b949a1b4f2bb7008d4c86b0d21d81cf0ea",
+      "sha256": "2054d9ed66d51859d9ba7f9dcb62b567f161cde4970c64425cfa03f1a5263f41"
+    },
+    {
+      "commit": "011c5482285ea516f39292100c429a905e6e3e36",
+      "path": "actions/src/actions/_action_context.py",
+      "git_blob": "7a0efa1368cff1d5fc66e6a0e601f1997a94394c",
+      "sha256": "c4386fe4db924b1e864954663b7a862d29b0bbc6d077567b2bce2d46c2042d65"
+    },
+    {
+      "commit": "011c5482285ea516f39292100c429a905e6e3e36",
+      "path": "actions/src/actions/_request.py",
+      "git_blob": "3a2a350de5e752656fa0a903d25a6ac65eb71b13",
+      "sha256": "2a13696bb5b0424f86f69ba8e89216e9ed803032693931a5f28fc99485279b10"
+    },
+    {
+      "commit": "011c5482285ea516f39292100c429a905e6e3e36",
+      "path": "actions/src/actions/_fixtures.py",
+      "git_blob": "9bfa49e411f3c12e700526ed6c8c9d05285b7038",
+      "sha256": "bbe6f711178b63ec8dbc413367a2ca426d7e272786089860629298cece3c9e07"
+    },
+    {
+      "commit": "011c5482285ea516f39292100c429a905e6e3e36",
+      "path": "actions/src/actions/_protocols.py",
+      "git_blob": "4e870f7557f5362a5b25c2957fc80717965f2542",
+      "sha256": "cd08607f47ae2c424f17aa99e81438fac0b27f9e7de68983f18e8e1cb0b04e97"
+    },
+    {
+      "commit": "011c5482285ea516f39292100c429a905e6e3e36",
+      "path": "actions/src/actions/cli.py",
+      "git_blob": "7f46a1a5a14aa0cefcb59dd50a0a2fca1e6e703d",
+      "sha256": "d732f1eaa5608a0fa810571ba0150a30c1886d2b5d244aa70f20ac181e3b110d"
+    },
+    {
+      "commit": "011c5482285ea516f39292100c429a905e6e3e36",
+      "path": "actions/src/actions/_customization/_plugin_manager.py",
+      "git_blob": "3dc4d3c12c0743c1509253fbfc7037d56741a833",
+      "sha256": "cc470a75507daf9cd53c7fe178e2cd471204e6197757831ca0cd5893050e4be5"
+    },
+    {
+      "commit": "011c5482285ea516f39292100c429a905e6e3e36",
+      "path": "actions/src/actions/_managed_parameters.py",
+      "git_blob": "8b2aa7b700e9924101477c414a9392e3109f9882",
+      "sha256": "61c66c876c0c86bbd340a54f83ec848e9ca1b8a1e4ce477c24d42ca6ff1d78ea"
+    },
+    {
+      "commit": "011c5482285ea516f39292100c429a905e6e3e36",
+      "path": "actions/src/actions/_lint_action.py",
+      "git_blob": "336bd32f08bc02bac505748abfaa30b809f993db",
+      "sha256": "7566e3bbd6303d4eb540c4c9bddd433e82ee516222216d8264902cf67df934bb"
+    },
+    {
+      "commit": "011c5482285ea516f39292100c429a905e6e3e36",
+      "path": "actions/src/actions/mcp/__init__.py",
+      "git_blob": "dbaf61bf818a8366f92034357c8ee91cd2f5d29d",
+      "sha256": "6d4093642ff68082a4690f02ac26ed9e016af78964ffc3c894c394697fbc9d28"
+    }
+  ],
+  "call_signature_audit": [
+    {
+      "contract": "ActionContext(data).value",
+      "result": "Core1.0.2 BaseContext constructor data, optionalenv; value property present"
+    },
+    {
+      "contract": "cli.main(args,exit=False,plugin_manager=pm)",
+      "result": "Core1.0.2 main(args=None,exit=True,plugin_manager=None) matches"
+    },
+    {
+      "contract": "PluginManager().set_instance(EPManagedParameters,ManagedParameters(mapping))",
+      "result": "Core1.0.2 no-arg PluginManager, set_instance(ep,instance,context=None), ManagedParameters(mapping) match"
+    },
+    {
+      "contract": "Request.model_validate(headers/cookies mapping)",
+      "result": "Core1.0.2 public classmethod delegates to RequestImpl.model_validate(dct)"
+    },
+    {
+      "contract": "format_lint_results(lint_result mapping)",
+      "result": "Core1.0.2 acceptsdict and returns optionalformatted result with message"
+    },
+    {
+      "contract": "IAction/teardown/ActionsListActionTypedDict/DEFAULT_EXCLUSION_PATTERNS",
+      "result": "Public1.0.2 exports present; ordinary teardown and optional action.options transport available"
+    }
+  ],
+  "mcp_meta_controls": [
+    {
+      "decorator": "tool",
+      "implementation_line": 90,
+      "meta_keyword_result": "ValueError: unconsumed meta keyword",
+      "source_AST_with_only_hook_stub": true
+    },
+    {
+      "decorator": "resource",
+      "implementation_line": 205,
+      "meta_keyword_result": "ValueError: unconsumed meta keyword",
+      "source_AST_with_only_hook_stub": true
+    }
+  ],
+  "mcp_limit_scope": "Core1.0.2 authoring decorators reject meta=. Runtime itself does not call those Core decorators; its MCP adapter reads optional options._meta and passes _meta to the separate MCP SDK. A package authoring metadata requires a newer managed Core.",
+  "relevant_runtime_source_bindings": [
+    {
+      "commit": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+      "path": "action_server/src/actions/server/mcp/setup_mcp_server_v2.py",
+      "git_blob": "9961a2064dede78f12e21295081b8702ecbe08f8",
+      "sha256": "953c99a1c67cb8cc508bd0079fb0869161b5f9192a724964562e90f34254701b"
+    },
+    {
+      "commit": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+      "path": "action_server/pyproject.toml",
+      "git_blob": "936f62f3bb6f0b92fe8c60f2e1bcd80ec9bab636",
+      "sha256": "33136a0486ac8cc5a63eccba65c95b10da2daf734be40e804f8cabe664b3cb66"
+    },
+    {
+      "commit": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+      "path": "templates/canvas-query/package.yaml",
+      "git_blob": "13e356268d773785d17f8e53db1e0d0972391025",
+      "sha256": "eec63118246ceb1c6b96bf787d77cce64bced6f3a5341ca574f75f7f614da146"
+    },
+    {
+      "commit": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+      "path": "templates/canvas-query/canvas_query.py",
+      "git_blob": "7924b80ebe3535adf78ee8ab54e7abfeb17c26ab",
+      "sha256": "78e6a14e9ffad62cd0b31949041e513c9774a25b210d69b122433c7796f74119"
+    }
+  ],
+  "canvas_template_requirement": "Managed package manifest already pins publicCore1.0.3 for meta authoring; this does not make Runtime-host Core1.0.2 impossible.",
+  "installed_minimum_Core_MCP_acceptance": "NOT_RUN; current publicCore1.0.3 OAuth/idle probes do not qualify Core1.0.2 MCP discovery/read/tool execution",
+  "source_control_scope": "Only immutable source/registry receipt and two extracted decorator AST controls with inert registration hook; no package download/install or Core1.0.2 installed execution",
+  "fixture_warning": "Filename-matched1.0.2 wheels under pytest temporary directories are not used as registry/API evidence.",
+  "upstream_disposition": "none",
+  "actual_minimum_installed_extension": "minimum-core-installed-review.json"
+}

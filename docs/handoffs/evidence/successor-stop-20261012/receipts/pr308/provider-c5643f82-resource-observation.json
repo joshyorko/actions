@@ -1,0 +1,37 @@
+{
+  "filesystems": {
+    "/dev/shm": {
+      "device": 36,
+      "free_bytes": 9441349632
+    },
+    "/tmp": {
+      "device": 33,
+      "free_bytes": 9441202176
+    },
+    "/workspace": {
+      "device": 27,
+      "free_bytes": 13409386496
+    }
+  },
+  "memory.events": {
+    "high": 0,
+    "low": 0,
+    "max": 25204,
+    "oom": 0,
+    "oom_group_kill": 0,
+    "oom_kill": 0
+  },
+  "memory.events.local": {
+    "high": 0,
+    "low": 0,
+    "max": 25204,
+    "oom": 0,
+    "oom_group_kill": 0,
+    "oom_kill": 0
+  },
+  "memory_current": 14315319296,
+  "memory_max": 17179869184,
+  "scope": "visible_cgroup_mount_diagnostic_only; self binding unproven",
+  "time_unix": 1791771719.1182556,
+  "visible_headroom_bytes": 2864549888
+}

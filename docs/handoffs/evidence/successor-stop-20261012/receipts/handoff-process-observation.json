@@ -1,0 +1,777 @@
+{
+  "observed_at": "2026-10-12T07:59:04.069307+00:00",
+  "rows": [
+    {
+      "pid": 1,
+      "ppid": 0,
+      "state": "S+",
+      "command": "tail"
+    },
+    {
+      "pid": 2,
+      "ppid": 1,
+      "state": "S+",
+      "command": "caas-prefix-tra"
+    },
+    {
+      "pid": 200,
+      "ppid": 1,
+      "state": "Ssl",
+      "command": "dockerd"
+    },
+    {
+      "pid": 251,
+      "ppid": 200,
+      "state": "Ssl",
+      "command": "containerd"
+    },
+    {
+      "pid": 516,
+      "ppid": 0,
+      "state": "Sl+",
+      "command": "codex"
+    },
+    {
+      "pid": 633,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 754,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 6127,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 6234,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 6969,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 7158,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 7421,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 7424,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 7969,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 8534,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 9008,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 9023,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 9282,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9289,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9307,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9318,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9324,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9336,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9346,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9352,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9363,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9372,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9382,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9388,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9400,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9411,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9421,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9430,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 9880,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 10575,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 11702,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 12505,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 12691,
+      "ppid": 1,
+      "state": "Z",
+      "command": "esbuild"
+    },
+    {
+      "pid": 12809,
+      "ppid": 1,
+      "state": "Z",
+      "command": "esbuild"
+    },
+    {
+      "pid": 13089,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 13114,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 13318,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 13349,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 14177,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 14470,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 14829,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 14851,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 15577,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 15668,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 15768,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 15996,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 16285,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 16405,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 16408,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 16834,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 17164,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 17736,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 21416,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 21419,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 21950,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 22129,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 22180,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 22408,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 23374,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 23670,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 23673,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 24105,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 24380,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 24942,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 25042,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 25150,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 25163,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 26964,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 27829,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 28000,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 28065,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 29080,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 29807,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 30215,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 31908,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 33138,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 33231,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 33504,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 33661,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 33677,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 33884,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 34288,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 34550,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 36180,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 36447,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 36969,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 38667,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 38969,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 40341,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 44055,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 44228,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 44417,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 44812,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "codex"
+    },
+    {
+      "pid": 44813,
+      "ppid": 1,
+      "state": "Z",
+      "command": "rg"
+    },
+    {
+      "pid": 45174,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 45213,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 46279,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 46986,
+      "ppid": 1,
+      "state": "Z",
+      "command": "git"
+    },
+    {
+      "pid": 47713,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 49360,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 49697,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 49708,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 49759,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 50312,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 51204,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 51215,
+      "ppid": 1,
+      "state": "Z",
+      "command": "sleep"
+    },
+    {
+      "pid": 51282,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 57506,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 59214,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 59472,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 59612,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 60350,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 60540,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 60672,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 63021,
+      "ppid": 1,
+      "state": "Z",
+      "command": "python"
+    },
+    {
+      "pid": 63143,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 63686,
+      "ppid": 1,
+      "state": "Zs",
+      "command": "git"
+    },
+    {
+      "pid": 63703,
+      "ppid": 516,
+      "state": "Ss",
+      "command": "codex-linux-san"
+    },
+    {
+      "pid": 63705,
+      "ppid": 63703,
+      "state": "S",
+      "command": "bwrap"
+    },
+    {
+      "pid": 63706,
+      "ppid": 63705,
+      "state": "Ss",
+      "command": "codex"
+    },
+    {
+      "pid": 63707,
+      "ppid": 63706,
+      "state": "S",
+      "command": "bash"
+    },
+    {
+      "pid": 63710,
+      "ppid": 63707,
+      "state": "S",
+      "command": "python"
+    },
+    {
+      "pid": 63711,
+      "ppid": 63710,
+      "state": "R",
+      "command": "ps"
+    }
+  ],
+  "zombies": 117,
+  "live_infrastructure": "PID1 tail,2 caas-prefix-tra,200dockerd,251containerd,516codex; unchanged/not signalled",
+  "owned_runtime_or_test_live_processes": 0,
+  "scope": "No command arguments read. Global zombie rows have no recovered original ownership ledger; PPID1 prevents reaping by this agent. No global clean/reaped claim."
+}

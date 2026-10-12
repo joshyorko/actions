@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-10-12T08:13:24.152917+00:00",
+  "source": "59d49c18f0615e51b1ff0cc3cd7f1ebe4d2729fa",
+  "purpose": "Incomplete readonlyresource-source preservation, not native admission",
+  "tests": {
+    "count": 14,
+    "passed": 14,
+    "seconds": 0.02,
+    "native": 0,
+    "evidence_kind": "Actual returned tool33055 stdout, no standalone raw stdout logfile persisted"
+  },
+  "not_run": [
+    "independent resource-code review",
+    "full Devutils package/static/platform gate",
+    "workload launch/sampler/accepted budget/controller wiring"
+  ],
+  "source_files": {
+    "devutils/src/devutils/native_resources.py": {
+      "bytes": 6377,
+      "sha256": "732015dff8ce7cbb4d352784d26a20bbd9c44706b3ec863c041d3c41f4689cb3"
+    },
+    "devutils/tests/test_native_resources.py": {
+      "bytes": 3414,
+      "sha256": "5607699a569750cb273d9a8c41a0cc009c79f2213ab1e6d421785a2f34feb6fb"
+    }
+  }
+}

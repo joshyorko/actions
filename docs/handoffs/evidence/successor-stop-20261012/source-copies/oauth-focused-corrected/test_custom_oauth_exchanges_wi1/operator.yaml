@@ -1,0 +1,8 @@
+oauth2Config:
+  providers:
+    owned-issuer:
+      authorizationEndpoint: http://127.0.0.1:46411/authorize
+      clientId: test-issuer-client
+      clientSecret: test-issuer-secret
+      mode: custom
+      tokenEndpoint: http://127.0.0.1:46411/token

@@ -1,0 +1,182 @@
+{
+  "schema": "actions-checkpoint-supplement2-review/v1",
+  "observed_at_utc": "2026-10-12T05:21:27Z",
+  "verdict": "GO_BOUNDED_SUPPLEMENT2_AFTER_SANITIZATION",
+  "scope": "Read-only audit of checkpoint documentation and additive evidence. No product/source changes, native/RCC/build/lease execution, or external writes.",
+  "checkpoint": {
+    "base_head": "363606398d536541599cc71a8cfd43ff09ad02d7",
+    "immutable_handoff_head": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+    "handoff_clean": true,
+    "checkpoint_expected_changes": [
+      " M docs/handoffs/actions-cloud-successor-checkpoint-20261012.md",
+      " M docs/skills/repository-operations.md",
+      "?? docs/handoffs/evidence/successor-20261012-supplement2/"
+    ]
+  },
+  "immutable_prior_payloads": {
+    "successor-20261012": {
+      "count": 37,
+      "bytes": 346659,
+      "baseline": "6088e6dbf81ff6aa212c7bebaf115534e885295d",
+      "unchanged": true,
+      "errors": []
+    },
+    "successor-20261012-supplement1": {
+      "count": 63,
+      "bytes": 298242,
+      "baseline": "363606398d536541599cc71a8cfd43ff09ad02d7",
+      "unchanged": true,
+      "errors": []
+    }
+  },
+  "current_supplement2": {
+    "payload_count": 39,
+    "payload_bytes": 109830,
+    "manifest_sha256": "7da9c20579fcef16ff8198e205c95c23e5d5915387e6dd131fefea9da402cadb",
+    "all_size_sha256_json_valid": true,
+    "hash_errors": [],
+    "invalid_json": [],
+    "non_json_payloads": [],
+    "file_uri_payloads": [],
+    "query_url_payloads": [],
+    "credential_marker_payloads": [],
+    "rawlog_or_binary_payload_paths": [],
+    "controlled_export_whitelist_manifest_matches_files": true
+  },
+  "export_selection_failure_and_correction": {
+    "first_candidate_count": 47,
+    "first_candidate_bytes": 417849,
+    "first_manifest_was_valid": true,
+    "cause": "recursive JSON selection included12freshpackageenvironment files; four carried local file URIs",
+    "removed_copy_count": 12,
+    "removed_paths_absent_from_export": true,
+    "removed_record_has_path_bytes_sha256_only": true,
+    "raw_uri_contents_retained_in_receipt": false,
+    "selection_only_uri_scan_clear": true,
+    "current_manifest_additions": [
+      "supplement2-export-selection-first-FAIL.json",
+      "supplement2-resource-observation.json",
+      "pr308/pr308-eeb806e7-doc-correction-receipt.json",
+      "pr308/native-baseline-profile-eeb806e7-v9-SOURCE-PREPARED-NOTRUN.json"
+    ],
+    "all_originally_removed_bytes_retained_local": true,
+    "local_retention_verification": {
+      "verified_file_count": 12,
+      "root": "/workspace/successor-evidence/pr308-packaged/installed-minimum-core-consumer/.venv",
+      "all_sizes_and_sha256_match_selection_receipt": true
+    }
+  },
+  "ci_snapshot": {
+    "head": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+    "observed_at": "2026-10-12T05:14:24.071052+00:00",
+    "counts": {
+      "success": 22,
+      "in_progress": 1,
+      "failure": 1
+    },
+    "matches_22_success_1_failure_1_in_progress": true
+  },
+  "mac_failure_diagnosis": {
+    "head": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+    "run": 38205604794,
+    "job": 114668292448,
+    "synthetic_producer": {
+      "parents": [
+        "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+        "0546ef30a30ff8229cb8fa6268e492c5cd74134e"
+      ],
+      "sha": "6433af24a322be5f8a715934663b925d5b3cf044",
+      "tree": "cca24f6fd8f6c18034ef3a12b77dd37e5fe64a97"
+    },
+    "test_counts": {
+      "failed": 1,
+      "passed": 1420,
+      "seconds": 141.71,
+      "skipped": 216
+    },
+    "failure_node": "test_dakota_rcc_acceptance.py::test_provider_startup_failure_uses_bounded_kill_fallback",
+    "actual_root_cause": "UNKNOWN: prior test discarded typed cleanup result; controlled scheduler overshoot is a viable route, not proof of actual macOS cause",
+    "native_attempts": 0
+  },
+  "b30_local_diagnostic": {
+    "head": "b30e220cbc458edaad605d36081c014e2cec190b",
+    "base": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+    "production_helper_unchanged": true,
+    "lane_pushed": false,
+    "focused_result": "Prepared package python -m pytest -n0 affected5files not integration_test;329PASS/1SKIP/3nativeDESEL4warnings7.46s exit0",
+    "actual_mac_cause": "NOT_CONFIRMED; old test discarded typed result. Ownership error and cooperative scheduler overshoot remain distinguishable candidates",
+    "native_attempts": 0
+  },
+  "eeb_documentation_correction": {
+    "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+    "parent": "b30e220cbc458edaad605d36081c014e2cec190b",
+    "tree": "ce7ae02d6c7db06ceffedf771c6eb365d11517b9",
+    "changed_paths": [
+      "docs/skills/repository-operations.md"
+    ],
+    "source_and_test_blobs_unchanged": true,
+    "worktree_clean": true,
+    "diff_check": "PASS",
+    "test_rerun": "Not run for documentation-only correction; source-bound b30 affected329PASS and static360PASS retained without new execution claim",
+    "statement": "After absolute deadline helper skips new kill; only if final zero-budget wait still fails does it record unreaped wrapper. Final wait can observe an already-exited wrapper successfully.",
+    "native_profile_status": "NOT_ADMITTED",
+    "native_attempts": 0,
+    "remote_push_by_lane": false
+  },
+  "packaged_fe1_gate": {
+    "verdict": "GO_PACKAGED_INSTALLED_OAUTH_TEMPLATE_IDLE_SCOPED",
+    "head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+    "explicit_exclusions": [
+      "currentnewhead fullCI acceptance",
+      "minimumCore installedMCP discovery/resource/read/tool execution",
+      "managedAction or native baseline",
+      "otherplatform installed startup",
+      "wholecleanup/readers/lease release",
+      "Runtime registry publication/fullrelease"
+    ]
+  },
+  "workspace_and_resource_receipts": {
+    "access_observation": {
+      "host": "9e619bc297a7",
+      "observed_at": "2026-10-12T05:14:24.071052+00:00",
+      "exit_status": 0,
+      "clean_checkout_then": true
+    },
+    "resource": {
+      "observed_at": "2026-10-12T05:17:57.471341+00:00",
+      "memory_headroom": 2865889280,
+      "native_admission": false,
+      "self_binding_unqualified": true
+    }
+  },
+  "documentation_claims_checked": {
+    "snapshot_matches_counts": true,
+    "mac_cause_unknown_preserved": true,
+    "b30_diagnostic_not_misrepresented_as_remote_push": true,
+    "package_fe1_not_promoted_to_later_source_or_native_acceptance": true,
+    "wheel_membership_set_equality_guidance": true,
+    "fake_WNOHANG_bounded_test_guidance": true,
+    "typed_Popen_exception_and_final_zero_wait_success_or_failure_guidance": true
+  },
+  "preexisting_immutable_uri_note": {
+    "path": "docs/handoffs/evidence/successor-20261012/review307-packaged/installed-real-bundle.json",
+    "file_uri_occurrences": 3,
+    "in_original37_unchanged_vs_6088": true,
+    "absent_from_current_supplement2": true
+  },
+  "remaining_limits": [
+    "The actual macOS failure cause remains unknown; scheduler overshoot is only a controlled possible route.",
+    "b30 remains a local diagnostic; its lane did not push it. eeb is a documentation-only successor with no test rerun or push in its receipt.",
+    "The fe1 packaged proof does not establish later-head CI, managed Action/native, minimum-Core MCP, full cleanup/readers/lease, platform or publication acceptance.",
+    "Native attempts remain zero and self-binding is unqualified."
+  ],
+  "evidence_paths": [
+    "docs/handoffs/evidence/successor-20261012-supplement2/manifest.json",
+    "docs/handoffs/evidence/successor-20261012-supplement2/supplement2-export-selection-first-FAIL.json",
+    "docs/handoffs/evidence/successor-20261012-supplement2/current-checks-supplement2.json",
+    "docs/handoffs/evidence/successor-20261012-supplement2/pr308/0546-macos-source-terminal-diagnosis.json",
+    "docs/handoffs/evidence/successor-20261012-supplement2/pr308/pr308-b30e220c-mac-provider-source-receipt.json",
+    "docs/handoffs/evidence/successor-20261012-supplement2/pr308/pr308-eeb806e7-doc-correction-receipt.json",
+    "docs/handoffs/evidence/successor-20261012-supplement2/native-baseline-profile-eeb806e7-v9-SOURCE-PREPARED-NOTRUN.json"
+  ]
+}

@@ -1,0 +1,9 @@
+# Private operator settings template. No providers are configured by default.
+# Register your own OAuth application, then add a provider with mode: custom,
+# a nonblank clientId, and authorizationEndpoint/tokenEndpoint or public defaults.
+# Omit clientSecret for PKCE S256 when the provider supports public clients.
+# Keep client secrets and tokens out of source control and public build inputs.
+# Register the redirect URI <Runtime base URL>/actions/oauth2/ with your provider.
+formatVersion: '1.0.0'
+oauth2Config:
+  providers: {}

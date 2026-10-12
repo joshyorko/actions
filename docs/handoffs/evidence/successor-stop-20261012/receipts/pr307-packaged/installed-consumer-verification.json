@@ -1,0 +1,85 @@
+{
+  "schema": "actions-runtime-installed-oauth-consumer/v1",
+  "observed_at_utc": "2026-10-12T02:17:16.249737+00:00",
+  "head_sha": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "artifact_id": 11722158889,
+  "runtime_wheel": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+  "consumer_environment": "/workspace/successor-evidence/pr307-packaged/installed-consumer/.venv",
+  "manager": "fresh pinned RCC18.19.3 toolchain Poetry2.1.1 owns isolated consumer .venv; no host pip or old activation used",
+  "consumer_pyproject_sha256": "b07f65f9c2e4972126ff879476cf367625d9060d0e45aab76475151130acdcd4",
+  "consumer_lock_sha256": "d030bbf7b5fe4ed12c74a10bcc18be15d5555e4e271486d0cd1e2814f982f8dc",
+  "control_source_sha256": "2b691ab93abbd25f0df9a8c632c3498e4ac6651473de6693091e17006a419b89",
+  "results": [
+    {
+      "label": "inventory",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr307-packaged/installed-consumer",
+        "poetry",
+        "run",
+        "python",
+        "consumer_inventory.py"
+      ],
+      "exit_code": 0,
+      "output_sha256": "3ef11d16673e139eb0c1031d35d23a626baedadd75f04eda22cc4e210c3f663f",
+      "output_bytes": 320
+    },
+    {
+      "label": "version",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr307-packaged/installed-consumer",
+        "poetry",
+        "run",
+        "python",
+        "-m",
+        "actions.server",
+        "version"
+      ],
+      "exit_code": 0,
+      "output_sha256": "f5e5c9534532840fcd45bb002e69ed85c61dba2753450e26b448b7df1481e24d",
+      "output_bytes": 6
+    },
+    {
+      "label": "installed-oauth",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr307-packaged/installed-consumer",
+        "poetry",
+        "run",
+        "pytest",
+        "-q",
+        "test_installed_oauth.py"
+      ],
+      "exit_code": 0,
+      "output_sha256": "2a031d57b22dcf4fa6414cbc235fd89f4f30bcfd3c974a4efcef3384d46eac19",
+      "output_bytes": 98
+    },
+    {
+      "label": "pip-check",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr307-packaged/installed-consumer",
+        "poetry",
+        "run",
+        "python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "output_sha256": "b5c689654c98c889a2d3072bad980df4e7ddb0cecec416d9b37ca9cd28de7e36",
+      "output_bytes": 294
+    }
+  ],
+  "oauth_controls": "9PASS actualbundledgetter/unsupportedhosted/customblank/privatecreation/symlink/ownedloopbackPKCE+secret exchange",
+  "native_action_executed": false,
+  "server_startup": "NOT_RUN: CLI start unconditionally starts RCC feedback subprocess; keep native admission separate",
+  "publication": false,
+  "release_acceptance": false,
+  "dependency_limitations": "Fresh consumer resolution includes registry dependencies; no broken requirements. Complete release dependency-content/security gate remains separate."
+}

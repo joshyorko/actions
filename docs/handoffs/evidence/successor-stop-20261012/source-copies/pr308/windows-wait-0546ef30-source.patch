@@ -1,0 +1,148 @@
+diff --git a/action_server/tests/action_server_tests/test_owned_cleanup_evidence.py b/action_server/tests/action_server_tests/test_owned_cleanup_evidence.py
+index 2296ed4f..91d86e2d 100644
+--- a/action_server/tests/action_server_tests/test_owned_cleanup_evidence.py
++++ b/action_server/tests/action_server_tests/test_owned_cleanup_evidence.py
+@@ -25,6 +25,11 @@ def _process(pid, birth, status="sleeping"):
+     return SimpleNamespace(pid=pid, create_time=lambda: birth, status=lambda: status)
+ 
+ 
++def _linux_wait_os(harness, waitpid):
++    """Model the Linux wait primitive even when the host is Windows."""
++    return SimpleNamespace(**{**vars(harness.os), "waitpid": waitpid, "WNOHANG": 1})
++
++
+ def _observer(harness):
+     observer = harness._OwnedCleanupObserver()
+     observer.root = harness.OwnedIdentity.from_values(1, 1.0)
+@@ -230,9 +235,7 @@ def test_existing_wait_events_and_echild_are_observations_not_invented_reaps(
+             raise value
+         return value
+ 
+-    monkeypatch.setattr(
+-        harness, "os", SimpleNamespace(**{**vars(harness.os), "waitpid": waitpid})
+-    )
++    monkeypatch.setattr(harness, "os", _linux_wait_os(harness, waitpid))
+     monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 12.0))
+     assert (
+         harness._reap_adopted_children(deadline=15.0, evidence_observer=observer) == 2
+@@ -255,7 +258,7 @@ def test_wait_timeout_keeps_primary_cleanup_error_and_unavailable_echild(monkeyp
+     monkeypatch.setattr(
+         harness,
+         "os",
+-        SimpleNamespace(**{**vars(harness.os), "waitpid": lambda *_: (0, 0)}),
++        _linux_wait_os(harness, lambda *_: (0, 0)),
+     )
+     monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 12.0))
+     with pytest.raises(harness.ProcessTreeCleanupError) as caught:
+@@ -276,12 +279,21 @@ def test_wait_pid_alone_cannot_match_a_stale_singleton_birth_capture():
+ 
+ 
+ @pytest.mark.parametrize("opt_in", [False, True])
++@pytest.mark.parametrize("without_posix_constants", [False, True])
+ def test_actual_supervisor_wires_observer_only_when_requested(
+-    tmp_path, monkeypatch, capsys, opt_in
++    tmp_path, monkeypatch, capsys, opt_in, without_posix_constants
+ ):
+     import io
+ 
+     harness = _harness()
++    if without_posix_constants:
++        harness.os = SimpleNamespace(
++            **{
++                key: value
++                for key, value in vars(harness.os).items()
++                if key != "WNOHANG"
++            }
++        )
+     polls = []
+     waits = []
+     lookups = []
+@@ -388,9 +400,14 @@ def test_actual_supervisor_wires_observer_only_when_requested(
+     def echild(*_):
+         raise ChildProcessError()
+ 
+-    monkeypatch.setattr(
+-        harness, "os", SimpleNamespace(**{**vars(harness.os), "waitpid": echild})
+-    )
++    def reject_fallback(*_args, **_kwargs):
++        # This model has a constant clock and fake child. A test setup failure
++        # must fail immediately, without Linux /proc reads or legacy signals.
++        raise AssertionError("source control unexpectedly entered real fallback")
++
++    monkeypatch.setattr(harness, "_fallback_reap_after_error", reject_fallback)
++
++    monkeypatch.setattr(harness, "os", _linux_wait_os(harness, echild))
+     monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 12.0))
+     assert harness._supervisor_main() == 0
+     output = json.loads(capsys.readouterr().out)
+@@ -425,9 +442,7 @@ def test_raw_wait_error_retains_original_exception_identity(monkeypatch):
+     def fail(*_):
+         raise original
+ 
+-    monkeypatch.setattr(
+-        harness, "os", SimpleNamespace(**{**vars(harness.os), "waitpid": fail})
+-    )
++    monkeypatch.setattr(harness, "os", _linux_wait_os(harness, fail))
+     monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 12.0))
+     with pytest.raises(OSError) as caught:
+         harness._reap_adopted_children(deadline=15.0, evidence_observer=observer)
+@@ -437,6 +452,28 @@ def test_raw_wait_error_retains_original_exception_identity(monkeypatch):
+     assert "private wait detail" not in json.dumps(original.cleanup_evidence.to_dict())
+ 
+ 
++def test_supervisor_model_setup_error_fails_without_real_fallback(
++    tmp_path, monkeypatch, capsys
++):
++    actual_model = _linux_wait_os
++    original = RuntimeError("injected wait model failure")
++
++    def broken_model(harness, _waitpid):
++        def fail(*_):
++            raise original
++
++        return actual_model(harness, fail)
++
++    monkeypatch.setitem(globals(), "_linux_wait_os", broken_model)
++    with pytest.raises(
++        AssertionError, match="unexpectedly entered real fallback"
++    ) as caught:
++        test_actual_supervisor_wires_observer_only_when_requested(
++            tmp_path, monkeypatch, capsys, False, True
++        )
++    assert caught.value.__context__ is original
++
++
+ @pytest.mark.parametrize(
+     "field,value",
+     [
+@@ -480,9 +517,7 @@ def test_rejected_metadata_attachment_does_not_replace_wait_primary(monkeypatch)
+     def fail(*_):
+         raise original
+ 
+-    monkeypatch.setattr(
+-        harness, "os", SimpleNamespace(**{**vars(harness.os), "waitpid": fail})
+-    )
++    monkeypatch.setattr(harness, "os", _linux_wait_os(harness, fail))
+     monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 12.0))
+     with pytest.raises(WaitError) as caught:
+         harness._reap_adopted_children(deadline=15.0, evidence_observer=observer)
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index ef961699..e6743c7d 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2657,6 +2657,15 @@ does not change native dispatch, fallback signals, disk-output retention, lease
+ observation, or watchdog behavior; those designs and native budgets require
+ separate admission.
+ 
++Injected Linux supervisor controls must supply every Linux primitive they use,
++including `WNOHANG=1` in a fake `waitpid` namespace; copying the host's `os`
++attributes is insufficient on Windows. When a control uses a constant monotonic
++clock and fake process, replace its unexpected legacy fallback with a failing
++sentinel. A missing model primitive must produce a bounded test failure, not
++enter Linux `/proc` enumeration or a grace loop whose clock never advances.
++Exercise the model with POSIX constants absent as well as present. These are
++test-only substitutions; production fallback and timeout contracts stay intact.
++
+ Pooled worker retirement retains its existing stdout/stderr output threads and
+ joins them together with the protocol reader using the caller's one deadline.
+ Typed `WorkerReaderResult` values record each join, final alive state, and fixed

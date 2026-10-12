@@ -1,0 +1,19 @@
+{
+  "scope": "Linux prepared interpreter; private temporary mutex files; mutation control of test proof only, not production/native/Windows acceptance",
+  "results": [
+    {
+      "lane": "_common",
+      "reviewed_source_sha256": "8cc28545a190ebe9151899f51575d28e8bb310a8910fa10953acd2617e703502",
+      "mutant": "successor acquires a different inode while original owner remains held; release delayed until successor enters",
+      "entered_while_owner_undisposed": [],
+      "outcome": "AssertionError: Successor acquired before owner release"
+    },
+    {
+      "lane": "_robo_utils",
+      "reviewed_source_sha256": "be8b531ec800c15866a38e606704e133605f440a3f36426bc8a750d7626b5a2c",
+      "mutant": "successor acquires a different inode while original owner remains held; release delayed until successor enters",
+      "entered_while_owner_undisposed": [],
+      "outcome": "AssertionError: Successor acquired before owner release"
+    }
+  ]
+}

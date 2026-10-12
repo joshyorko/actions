@@ -1,0 +1,369 @@
+diff --git a/action_server/scripts/verify_dakota_rcc_acceptance.py b/action_server/scripts/verify_dakota_rcc_acceptance.py
+index 2f875bf4..d2c367cd 100644
+--- a/action_server/scripts/verify_dakota_rcc_acceptance.py
++++ b/action_server/scripts/verify_dakota_rcc_acceptance.py
+@@ -818,6 +818,8 @@ class _ProviderOwnership:
+         self.pid = process.pid
+         self.create_time: float | None = None
+         self.descendants: list = []
++        self.descendant_births: tuple[tuple[int, float], ...] = ()
++        self.capture_verified = False
+         self.snapshot_complete = False
+         self.errors: tuple[str, ...] = ()
+         self.reader: _ProviderStartupReader | None = None
+@@ -837,11 +839,28 @@ def _capture_provider_ownership(process: subprocess.Popen) -> _ProviderOwnership
+ 
+     owner = _ProviderOwnership(process)
+     setattr(process, "_rcc_provider_owner", owner)
++    if process.poll() is not None:
++        owner.errors = ("PROVIDER_CAPTURE_OWNER_EXITED",)
++        return owner
+     try:
+         root = psutil.Process(process.pid)
+-        owner.create_time = root.create_time()
+-        owner.descendants = root.children(recursive=True)
++        birth = root.create_time()
++        descendants = root.children(recursive=True)
++        descendant_births = tuple(
++            (child.pid, child.create_time()) for child in descendants
++        )
++        if (
++            psutil.Process(owner.pid).create_time() != birth
++            or process.poll() is not None
++            or process.pid != owner.pid
++        ):
++            owner.errors = ("PROVIDER_CAPTURE_OWNER_CHANGED",)
++            return owner
++        owner.create_time = birth
++        owner.descendants = descendants
++        owner.descendant_births = descendant_births
+         owner.snapshot_complete = True
++        owner.capture_verified = True
+     except psutil.Error as error:
+         owner.errors = (f"PROVIDER_CAPTURE_{type(error).__name__}",)
+     return owner
+@@ -868,6 +887,9 @@ def cleanup_provider_until(
+         and owner.process is process
+         and owner.pid == process.pid
+         and owner.create_time is not None
++        and owner.capture_verified
++        and owner.snapshot_complete
++        and not owner.errors
+     )
+     if owned and process.poll() is None:
+         assert isinstance(owner, _ProviderOwnership)
+@@ -879,16 +901,41 @@ def cleanup_provider_until(
+     tree = None
+     reader_result = ProviderReaderResult(False, None, "PROVIDER_READER_UNAVAILABLE")
+     if not owned:
++        if isinstance(owner, _ProviderOwnership):
++            errors.extend(owner.errors)
+         errors.append("PROVIDER_OWNER_UNCONFIRMED")
+     else:
+         assert isinstance(owner, _ProviderOwnership)
+         errors.extend(owner.errors)
++        # The initial verified capture binds descendants to this owner's birth.
++        # Reuse or an unobserved identity is never fresh signal authority.
+         try:
+-            tree = force_kill_process_tree_until(
+-                process, owner.descendants, deadline, owner.snapshot_complete
+-            )
+-        except Exception as error:
+-            errors.append(f"PROVIDER_TREE_{type(error).__name__}")
++            if tuple(
++                (child.pid, child.create_time()) for child in owner.descendants
++            ) != owner.descendant_births:
++                errors.append("PROVIDER_DESCENDANT_CAPTURE_CHANGED")
++        except psutil.Error as error:
++            errors.append(f"PROVIDER_DESCENDANT_CAPTURE_{type(error).__name__}")
++        for pid, birth in owner.descendant_births:
++            try:
++                if psutil.Process(pid).create_time() != birth:
++                    errors.append("PROVIDER_DESCENDANT_IDENTITY_CHANGED")
++            except psutil.NoSuchProcess:
++                pass  # The original captured identity is already absent.
++            except psutil.Error as error:
++                errors.append(f"PROVIDER_DESCENDANT_{type(error).__name__}")
++        if not errors:
++            try:
++                tree = force_kill_process_tree_until(
++                    process, owner.descendants, deadline, owner.snapshot_complete
++                )
++                # The existing helper may append newly discovered descendants
++                # while the original owner is still live. Preserve that ledger.
++                owner.descendant_births = tuple(
++                    (child.pid, child.create_time()) for child in owner.descendants
++                )
++            except Exception as error:
++                errors.append(f"PROVIDER_TREE_{type(error).__name__}")
+         reader = owner.reader
+         if isinstance(reader, _ProviderStartupReader) and reader.owner is owner:
+             joined = False
+diff --git a/action_server/tests/action_server_tests/test_provider_startup_cleanup.py b/action_server/tests/action_server_tests/test_provider_startup_cleanup.py
+index 0af20989..4cb24570 100644
+--- a/action_server/tests/action_server_tests/test_provider_startup_cleanup.py
++++ b/action_server/tests/action_server_tests/test_provider_startup_cleanup.py
+@@ -73,7 +73,9 @@ def test_real_provider_retains_original_startup_reader_and_typed_cleanup(
+         _dispose(process)
+ 
+ 
+-def test_blocked_startup_reader_keeps_same_object_until_finite_retry(tmp_path):
++def test_blocked_startup_reader_keeps_same_object_until_finite_retry(
++    tmp_path, monkeypatch
++):
+     harness = _harness()
+     process = subprocess.Popen(
+         [sys.executable, "-c", "import time; time.sleep(60)"],
+@@ -86,9 +88,17 @@ def test_blocked_startup_reader_keeps_same_object_until_finite_retry(tmp_path):
+         with pytest.raises(TimeoutError, match="startup timed out"):
+             harness._readline_with_timeout(process.stdout, 0.02, owner=owner)
+         original = owner.reader.thread
+-        started = time.monotonic()
+-        result = harness.cleanup_provider_until(process, time.monotonic())
+-        assert time.monotonic() - started < 0.2
++        join_timeouts = []
++        actual_join = original.join
++
++        def record_join(timeout):
++            join_timeouts.append(timeout)
++            actual_join(timeout=timeout)
++
++        with monkeypatch.context() as control:
++            control.setattr(original, "join", record_join)
++            result = harness.cleanup_provider_until(process, time.monotonic())
++        assert join_timeouts == [0.0]
+         assert not result.complete
+         assert result.reader.alive is True
+         assert owner.reader.thread is original
+@@ -220,26 +230,35 @@ def test_tree_and_original_reader_share_the_supplied_absolute_deadline(monkeypat
+     process = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(60)"])
+     owner = harness._capture_provider_ownership(process)
+     seen = []
++    now = [100.0]
++    join_timeouts = []
+ 
+     def bounded_tree(_process, _descendants, deadline, _complete):
+         seen.append(deadline)
+-        time.sleep(0.03)
++        now[0] += 0.03
+         return process_utils.ProcessTreeCleanupResult(True, (), (), ())
+ 
+     monkeypatch.setattr(process_utils, "force_kill_process_tree_until", bounded_tree)
+     try:
+         with pytest.raises(TimeoutError):
+             harness._readline_with_timeout(BlockedStream(), 0.01, owner=owner)
+-        started = time.monotonic()
+-        deadline = started + 0.05
++        actual_join = owner.reader.thread.join
++
++        def record_join(timeout):
++            join_timeouts.append(timeout)
++            actual_join(timeout=0)
++
++        monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: now[0]))
++        monkeypatch.setattr(owner.reader.thread, "join", record_join)
++        deadline = 100.05
+         result = harness.cleanup_provider_until(process, deadline)
+-        elapsed = time.monotonic() - started
+         assert seen == [deadline]
+-        assert 0.03 <= elapsed < 0.08
++        assert join_timeouts == [pytest.approx(0.02)]
+         assert result.reader.alive is True and not result.complete
+     finally:
+         release.set()
+-        owner.reader.thread.join(timeout=1)
++        # The real reader is still owned; the injected join only observes budget.
++        threading.Thread.join(owner.reader.thread, timeout=1)
+         _dispose(process)
+ 
+ 
+@@ -286,3 +305,150 @@ def test_invalid_deadline_is_rejected_before_process_signalling(deadline):
+         assert process.poll() is None
+     finally:
+         _dispose(process)
++
++
++@pytest.mark.parametrize(
++    "race", ["already_exited", "exits_during_capture", "birth_changes"]
++)
++def test_root_capture_is_transactional_and_never_forwards_foreign_descendants(
++    monkeypatch, race
++):
++    from actions.server._common import process as process_utils
++
++    harness = _harness()
++    lookups = []
++    delegated = []
++    exited = [race == "already_exited"]
++    original = SimpleNamespace(pid=123, poll=lambda: 0 if exited[0] else None)
++    child = SimpleNamespace(pid=777, create_time=lambda: 150.0)
++
++    class ProcessError(Exception):
++        pass
++
++    class Root:
++        def create_time(self):
++            return 200.0 if race == "birth_changes" and len(lookups) > 1 else 100.0
++
++        def children(self, recursive):
++            assert recursive is True
++            if race == "exits_during_capture":
++                exited[0] = True
++            return [child]
++
++    def lookup(pid):
++        lookups.append(pid)
++        return Root()
++
++    monkeypatch.setitem(
++        sys.modules, "psutil", SimpleNamespace(Process=lookup, Error=ProcessError)
++    )
++
++    def forbidden_delegation(*args):
++        delegated.append(args)
++        return process_utils.ProcessTreeCleanupResult(True, (), (), ())
++
++    monkeypatch.setattr(
++        process_utils, "force_kill_process_tree_until", forbidden_delegation
++    )
++    owner = harness._capture_provider_ownership(original)
++    result = harness.cleanup_provider_until(original, time.monotonic() + 1)
++    assert not delegated
++    assert not owner.snapshot_complete
++    assert not owner.descendants
++    assert not result.ownership_confirmed and not result.complete
++    if race == "already_exited":
++        assert not lookups
++
++
++def test_verified_descendants_remain_owned_after_original_provider_exits(monkeypatch):
++    from actions.server._common import process as process_utils
++
++    harness = _harness()
++    exited = [False]
++    original = SimpleNamespace(pid=123, poll=lambda: 0 if exited[0] else None)
++    child = SimpleNamespace(pid=777, create_time=lambda: 150.0)
++    lookups = []
++    delegated = []
++
++    class ProcessError(Exception):
++        pass
++
++    class Root:
++        def create_time(self):
++            return 100.0
++
++        def children(self, recursive):
++            return [child]
++
++    def lookup(pid):
++        lookups.append(pid)
++        if pid == 123:
++            assert exited[0] is False, "exited root must not acquire a fresh PID's tree"
++            return Root()
++        assert pid == 777
++        return child
++
++    monkeypatch.setitem(
++        sys.modules, "psutil", SimpleNamespace(Process=lookup, Error=ProcessError)
++    )
++
++    def captured_cleanup(process, descendants, deadline, complete):
++        delegated.append((process, list(descendants), complete))
++        return process_utils.ProcessTreeCleanupResult(True, (), (), ())
++
++    monkeypatch.setattr(
++        process_utils, "force_kill_process_tree_until", captured_cleanup
++    )
++    owner = harness._capture_provider_ownership(original)
++    harness._readline_with_timeout(io.StringIO("ready\n"), 0.2, owner=owner)
++    owner.reader.thread.join(timeout=0.2)
++    exited[0] = True
++    result = harness.cleanup_provider_until(original, time.monotonic() + 1)
++    assert result.complete
++    assert delegated == [(original, [child], True)]
++
++
++def test_reused_captured_descendant_is_not_delegated_as_original_identity(monkeypatch):
++    from actions.server._common import process as process_utils
++
++    harness = _harness()
++    original = SimpleNamespace(pid=123, poll=lambda: None)
++    child = SimpleNamespace(pid=777, create_time=lambda: 150.0)
++    reuse = [False]
++    delegated = []
++
++    class ProcessError(Exception):
++        pass
++
++    class Root:
++        def create_time(self):
++            return 100.0
++
++        def children(self, recursive):
++            return [child]
++
++    def lookup(pid):
++        if pid == 123:
++            return Root()
++        assert pid == 777
++        return SimpleNamespace(create_time=lambda: 250.0 if reuse[0] else 150.0)
++
++    monkeypatch.setitem(
++        sys.modules, "psutil", SimpleNamespace(Process=lookup, Error=ProcessError)
++    )
++
++    def forbidden_delegation(*args):
++        delegated.append(args)
++        return process_utils.ProcessTreeCleanupResult(True, (), (), ())
++
++    monkeypatch.setattr(
++        process_utils, "force_kill_process_tree_until", forbidden_delegation
++    )
++    owner = harness._capture_provider_ownership(original)
++    harness._readline_with_timeout(io.StringIO("ready\n"), 0.2, owner=owner)
++    owner.reader.thread.join(timeout=0.2)
++    reuse[0] = True
++    result = harness.cleanup_provider_until(original, time.monotonic() + 1)
++    assert not delegated
++    assert not result.complete
++    assert result.errors
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index 21d2baf3..b11e762c 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2502,6 +2502,13 @@ The provider harness retains the original startup `readline` thread against its
+ exact `Popen` object, PID, and captured creation time. Stream failures cross the
+ existing queue with their original exception identity; private cleanup evidence
+ contains the fixed error class. A second startup reader is rejected.
++Owner capture must observe the original `Popen` still live before and after
++the root/descendant snapshot and confirm the root's creation time again before
++committing that snapshot. An already exited, changed, or failed capture retains
++no discovered descendants as signal authority. Cleanup validates each captured
++descendant's PID and creation time before delegating; reused or unknown
++identities prevent completion. Previously verified descendants remain owned
++after the original provider exits, without acquiring a fresh tree from its PID.
+ `cleanup_provider_until` checks that owner before signalling and uses the
+ existing process-tree cleanup routine and startup-thread join under one absolute
+ caller deadline. Missing or mismatched ownership, an unavailable or live reader,
+@@ -2512,6 +2519,20 @@ Its scope is the captured provider tree and startup reader: it does not prove
+ an uncapped supervisor census, a single whole-test deadline, or lease release.
+ The legacy `terminate_process_tree` routine remains a separate operation.
+ 
++The verified RCC binary help advertises `env lifecycle inspect --artifact ...
++--json`, but its name and help do not prove passive observation. In
++[public revision 4148c2b7](https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/admin.go#L79),
++`Inspect` invokes reconciliation; the
++[reconciler](https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/reconcile.go#L61)
++removes provisional journals and stale lease records. Do not use that operation
++as read-only evidence of natural lease release. The shipped binary with SHA256
++`7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428`
++embeds `vcs.modified=true`, so the public revision does not establish its exact
++source or lease schema. A passive lease observer needs separately admitted raw
++record paths, root/digest/lease identity, no-follow reads, stable bytes, and
++actual before/after observations. Help output and terminal process receipts
++alone do not provide those facts.
++
+ Pooled worker retirement retains its existing stdout/stderr output threads and
+ joins them together with the protocol reader using the caller's one deadline.
+ Typed `WorkerReaderResult` values record each join, final alive state, and fixed

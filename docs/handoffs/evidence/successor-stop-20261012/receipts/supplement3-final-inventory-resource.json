@@ -1,0 +1,73 @@
+{
+  "observed_at": "2026-10-12T06:53:44.974659+00:00",
+  "hostname": "9e619bc297a7",
+  "boot_id": "22d23245-c9c1-4789-8cbd-70bfa9b3b274",
+  "branches": {
+    "community": "a70993fafc99a9f94041485542d5a720797ca394",
+    "integration/community-release-20261008": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+    "handoff/actions-swarm-mk3-wave8-20261010": "3b86163240e3527244dcc8501e2a1f32fb5ac546"
+  },
+  "prs": [
+    {
+      "number": 305,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "head": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+      "base": "integration/community-release-20261008",
+      "base_sha": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "merge_commit_sha": "82df3718f99a8f92c2a37b230e41dd8987db4d4f"
+    },
+    {
+      "number": 306,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "head": "eb0df4f97f390b413e364fe68364b81a65663f02",
+      "base": "integration/community-release-20261008",
+      "base_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "merge_commit_sha": "fdaba3e7d29d9e8c3a8412fdd67fc5fb293ec8a6"
+    },
+    {
+      "number": 307,
+      "state": "closed",
+      "draft": false,
+      "merged": true,
+      "head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+      "base": "integration/community-release-20261008",
+      "base_sha": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "merge_commit_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+    },
+    {
+      "number": 308,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+      "base": "integration/community-release-20261008",
+      "base_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "merge_commit_sha": "d663b19f95139dbd6080cce3680e2a066f29eda5"
+    },
+    {
+      "number": 313,
+      "state": "open",
+      "draft": true,
+      "merged": false,
+      "head": "216ad55b5bcafaa54ba61fcc87982a57573adce7",
+      "base": "integration/community-release-20261008",
+      "base_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "merge_commit_sha": "73b09a8c0bb4c04bdfd919e938d9d135b2401df6"
+    }
+  ],
+  "memory_current": 14702800896,
+  "memory_max": 17179869184,
+  "memory_events": "low 0\nhigh 0\nmax 34411\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "self_binding": "UNQUALIFIED; existing bounded direct membership reads have no own PID",
+  "disk_free": 12519546880,
+  "tmp_free": 9441153024,
+  "shm_free": 9441349632,
+  "native_attempts": 0,
+  "private_01f_frozen_v6": "UNRECOVERED",
+  "runtime_release": "HOLD",
+  "rcc_18_19_6": "HOLD"
+}

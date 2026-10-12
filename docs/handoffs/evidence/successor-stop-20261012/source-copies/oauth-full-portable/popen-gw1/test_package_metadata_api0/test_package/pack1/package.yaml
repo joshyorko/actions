@@ -1,0 +1,16 @@
+name: pack1 name
+description: pack1 description
+version: 0.0.1
+dependencies:
+  conda-forge:
+    - python=3.11.11
+    - pip=24
+  pypi:
+    - actions-core=1.0.0
+
+packaging:
+  exclude:
+    - ignore/**
+    - not_ok.txt
+    - "*.foo"
+    - ./ignore_only_at_root

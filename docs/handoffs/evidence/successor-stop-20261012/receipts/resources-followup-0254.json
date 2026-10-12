@@ -1,0 +1,19 @@
+{
+  "time": "2026-10-12T02:52:08.196762+00:00",
+  "host": "9e619bc297a7",
+  "boot_id": "22d23245-c9c1-4789-8cbd-70bfa9b3b274",
+  "uid": 1000,
+  "memory_current": 14386954240,
+  "memory_max": 17179869184,
+  "visible_headroom_bytes": 2792914944,
+  "memory_events": "low 0\nhigh 0\nmax 25204\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "self_binding": "UNQUALIFIED",
+  "free_bytes": {
+    "/workspace": 13346594816,
+    "/tmp": 9441173504,
+    "/dev/shm": 9441349632
+  },
+  "workspace_matched_processes": [],
+  "proc_inspection_unavailable_count": 0,
+  "scope_warning": "Argument matches are not an uncapped ownership census or proof of reader/lease closure."
+}

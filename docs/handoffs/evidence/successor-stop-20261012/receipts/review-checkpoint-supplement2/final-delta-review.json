@@ -1,0 +1,126 @@
+{
+  "documentation_review": {
+    "0546_failure_and_windows_running_snapshot_explicitly_dated": true,
+    "guide_preserves_final_zero_budget_wait_may_succeed_and_records_wrapper_unreaped_only_if_wait_fails": true,
+    "handoff_table_and_narrative_reflect_eeb_normal_push_and_fresh_CI_pending": true,
+    "mac_actual_cause_unknown": true,
+    "native_admission_or_attempts": false
+  },
+  "eeb_remote_readback": {
+    "authenticated_push_exit": 0,
+    "evidence_path": "docs/handoffs/evidence/successor-20261012-supplement2/pr308/eeb806e7-remote-source-readback.json",
+    "force": false,
+    "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+    "initial_push_failure_before_credentials": "FAIL before credential acquisition",
+    "normal_push_verified": true,
+    "parents": [
+      "b30e220cbc458edaad605d36081c014e2cec190b"
+    ],
+    "remote_before_retry": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+    "tree": "ce7ae02d6c7db06ceffedf771c6eb365d11517b9"
+  },
+  "fresh_exact_eeb_ci": {
+    "disposition": "pending exact-head CI; no merge or release qualification",
+    "observed_at": "2026-10-12T05:24:52Z",
+    "workflow_runs": [
+      {
+        "conclusion": null,
+        "id": 38207623533,
+        "name": "Measured Python coverage gate",
+        "status": "in_progress"
+      },
+      {
+        "conclusion": null,
+        "id": 38207623506,
+        "name": "Actions Runtime PYPI Release",
+        "status": "in_progress"
+      },
+      {
+        "conclusion": null,
+        "id": 38207623439,
+        "name": "Action Server Tests",
+        "status": "in_progress"
+      },
+      {
+        "conclusion": null,
+        "id": 38207623544,
+        "name": "RCC developer toolkit",
+        "status": "in_progress"
+      },
+      {
+        "conclusion": "success",
+        "id": 38207623446,
+        "name": "AI audit evidence",
+        "status": "completed"
+      },
+      {
+        "conclusion": null,
+        "id": 38207623556,
+        "name": "Actions Core Tests",
+        "status": "in_progress"
+      },
+      {
+        "conclusion": null,
+        "id": 38207623437,
+        "name": "Action Server Build (Unauthenticated)",
+        "status": "in_progress"
+      },
+      {
+        "conclusion": "success",
+        "id": 38207623538,
+        "name": "Copilot Setup Steps",
+        "status": "completed"
+      }
+    ]
+  },
+  "historical_export_note": "Prior immutable old37 payload set includes one unchanged installed-bundle JSON with local file:// wheel-source references; that inherited set was not modified. Current supplement2 payloads contain no file:// URI.",
+  "observed_at": "2026-10-12T05:24:52Z",
+  "pr308": {
+    "actual_macos_failure_root_cause": "UNKNOWN: prior test discarded typed cleanup result; controlled scheduler overshoot is a viable route, not proof of actual macOS cause",
+    "base": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+    "draft": true,
+    "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+    "historical_0546_check_counts": {
+      "failure": 1,
+      "in_progress": 1,
+      "success": 22,
+      "total": 24
+    },
+    "historical_0546_snapshot_observed_at": "2026-10-12T05:14:24.071052+00:00",
+    "remote_body_equal": true,
+    "source_review_verdict": "GO_DIAGNOSTIC_SOURCE",
+    "state": "open"
+  },
+  "remaining_gates": [
+    "fresh exact-eeb CI completion and review",
+    "MacOS failure root cause remains unknown; 0546 was an older source head",
+    "Windows-py3.12-devmode check was in progress in the 0546 snapshot; the snapshot is historical",
+    "native/control/lease qualification and release gates remain outside this diagnostic-source verdict"
+  ],
+  "review": "bounded independent final-delta review of checkpoint supplement2",
+  "review_receipt_sha256_excludes_self": true,
+  "schema": 1,
+  "scope": {
+    "checkout_head": "363606398d536541599cc71a8cfd43ff09ad02d7",
+    "native_or_RCC_or_build_or_infrastructure_activity": false,
+    "product_source_changes": false,
+    "read_only": true,
+    "remote_mutations_by_reviewer": false,
+    "repository_checkout": "/workspace/actions-checkpoint"
+  },
+  "supplement": {
+    "manifest_path": "docs/handoffs/evidence/successor-20261012-supplement2/manifest.json",
+    "manifest_sha256": "394980c32a419fe04544e35ad673e37e14eb1261ea6edf3608df3d740ea78aa4",
+    "path": "docs/handoffs/evidence/successor-20261012-supplement2",
+    "payload_bytes": 122758,
+    "payload_count": 47,
+    "payload_validation": {
+      "all_json_parse": true,
+      "all_present": true,
+      "all_sha256_match": true,
+      "all_sizes_match": true,
+      "payload_file_uri_count": 0
+    }
+  },
+  "verdict": "GO_TO_COPY_INTO_CHECKPOINT"
+}

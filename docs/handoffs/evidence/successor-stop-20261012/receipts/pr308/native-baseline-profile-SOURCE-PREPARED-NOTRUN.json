@@ -1,0 +1,109 @@
+{
+  "execution_commit": null,
+  "existing_workflow": {
+    "candidate": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+    "candidate_tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb",
+    "extra_dispatch_performed": false,
+    "path": ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+    "qualifies_current_source": false
+  },
+  "holds": [
+    "current callback correction pending complete configured tests and independent review",
+    "actual current-head Windows CI pending; simulated-platform mypy is diagnostic only",
+    "provider startup reader is currently discarded by helper _readline_with_timeout",
+    "legacy provider terminate_process_tree returns None and resets separate grace/reap windows",
+    "existing Linux supervisor lacks uncapped final identity census in its returned evidence and timeout-error propagation",
+    "staged fixture writes PASS after Action success without strict inner retirement/readers/lease/tree admission",
+    "approved total deadline and current helper/fixture evidence changes still require implementation/control review",
+    "fresh cgroup headroom below proposed initial admission threshold; no native launch permitted"
+  ],
+  "literals": {
+    "action_bytes": {
+      "bytes": 560,
+      "sha256": "a554f7395fa4254e36ca28780a0edff940f208ca7409dfedcd829193b31c3898"
+    },
+    "manifest_bytes": {
+      "bytes": 113,
+      "sha256": "e160d068efc17467d8c43174bca8676208e33914ca9fc45d815a43b81ddbed1e"
+    }
+  },
+  "missing_private_inputs": "private RCC01f/frozen-v6 UNRECOVERED; not used or reinterpreted",
+  "native_attempts_authorized_after_admission": 1,
+  "optional_versions": "18.19.5 then exact7276 only after this actual baseline PASS, distinct profiles, stop first failure",
+  "ownership": {
+    "client_homes": "0700 or 0750 only with exact current UID/GID and source provenance",
+    "markers": "0600",
+    "state_root": "0700 exact current UID/GID, no symlink",
+    "temporary_paths": "disk only; no TMP to RAM move"
+  },
+  "predecessor_acceptance": "HOLD_CALLBACK_ERROR_BOUNDARY_REVIEW_CORRECTION_PENDING",
+  "predecessor_commit": "93731e1e36efba73c273de0685ee1a4fa21bdc38",
+  "proposed_memory_policy": {
+    "acceptance": "PROPOSAL_NOT_NATIVE_CALIBRATED",
+    "cadence_max_seconds": 0.2,
+    "do_not_subtract_file_cache_to_fabricate_headroom": true,
+    "identity": "self cgroup route plus directory device/inode and fixed max/current/global-local counters",
+    "initial_min_headroom_bytes": 3113851289,
+    "stop_reserve_bytes": 536870912
+  },
+  "rcc": {
+    "bytes": 22282402,
+    "production_pin_change": false,
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "v18.19.3"
+  },
+  "required_acceptance": [
+    "exact committed source, module origins, fixture/literal/binary hashes and genuine actual Windows/source gates",
+    "cold empty owned state and real acquisition; no substituted synthetic publication",
+    "publication JSON specificationDigest/artifactDigest from one actual invocation with verified raw byte hash",
+    "actual Action result, output files/artifacts, installed Core1.0.2 module and Python managed-prefix provenance",
+    "exact leaseId/artifact/status/exitCode receipt bytes and original terminal disposition; no inferred natural exit",
+    "typed worker tree cleanup, retained stdout/stderr/protocol readers with join/alive/error observations",
+    "provider startup reader object, owner PID/create-time, actual finite join and typed cleanup",
+    "uncapped final owned census with PID/create-time, live/zombie/absent/reused/unknown and errors, real reaping evidence",
+    "single primary deadline and bounded terminal cleanup; preserve command and secondary errors on every outcome",
+    "memory/disk before-during-after evidence with sampler cancellation and join before final observation"
+  ],
+  "schema": 1,
+  "shared_package_cache_config": null,
+  "source_files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes": 81503,
+      "sha256": "8f21502f64fed9ee5d26eb6a080a625ee575954e1f659c1f51ee1ea31bda57c7"
+    },
+    "action_server/src/actions/server/_actions_process_pool.py": {
+      "bytes": 60974,
+      "sha256": "af2090208ebff767dc40af6d40501d813c570d1171ce031dcb75276ac6a5fef5"
+    },
+    "action_server/src/actions/server/_common/process.py": {
+      "bytes": 31134,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    "action_server/src/actions/server/_rcc_runtime_adapter.py": {
+      "bytes": 36123,
+      "sha256": "c1884571a572277beef50e359f8b5e71abf593e1ebdee4bea2e47290c8da81f2"
+    },
+    "action_server/src/actions/server/_robo_utils/callback.py": {
+      "bytes": 2057,
+      "sha256": "e3ebe0077aa4b52a2371f2d8af1d25074108ea6a7e1c76657ba5b3e3afcab521"
+    },
+    "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py": {
+      "bytes": 53109,
+      "sha256": "20bb46fa899851deef17dbd6384d999d1959fc09aae9bc5470491469bfcb06b7"
+    }
+  },
+  "state_namespace": "NEW_ONCE_OWNED_0700_DISK_NAMESPACE_REQUIRED_AT_EXECUTION",
+  "state_root_parent": "/workspace/successor-pr308",
+  "status": "SOURCE_PREPARATION_ONLY_NATIVE_NOT_ADMITTED",
+  "storage": {
+    "additional_environment_artifact_and_evidence_overhead_required": true,
+    "shm_min_free_bytes": 3865470567,
+    "tmp_min_free_bytes": 1200000000,
+    "workspace_min_free_bytes": 1288490189
+  },
+  "test_nodes_in_order": [
+    "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair",
+    "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime"
+  ],
+  "upstream_disposition": "none"
+}

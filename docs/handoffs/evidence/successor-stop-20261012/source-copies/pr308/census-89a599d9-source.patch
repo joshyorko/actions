@@ -1,0 +1,1281 @@
+diff --git a/action_server/scripts/verify_dakota_rcc_acceptance.py b/action_server/scripts/verify_dakota_rcc_acceptance.py
+index d2c367cd..ffa1445d 100644
+--- a/action_server/scripts/verify_dakota_rcc_acceptance.py
++++ b/action_server/scripts/verify_dakota_rcc_acceptance.py
+@@ -117,6 +117,433 @@ class ProcessTreeCleanupError(RuntimeError):
+         self.command_stderr = command_stderr
+ 
+ 
++class OwnedIdentity(NamedTuple):
++    pid: int
++    create_time: float
++
++    @classmethod
++    def from_values(cls, pid, create_time) -> "OwnedIdentity":
++        if isinstance(pid, bool) or not isinstance(pid, int) or pid <= 0:
++            raise ValueError("owned identity PID")
++        birth = _evidence_number(create_time)
++        if birth <= 0:
++            raise ValueError("owned identity birth")
++        return cls(pid, birth)
++
++
++class OwnedCensusRow(NamedTuple):
++    identity: OwnedIdentity | None
++    state: str
++    observed_at: float
++    error: str | None
++    observed_pid: int | None
++    current_create_time: float | None
++
++
++class OwnedReapEvent(NamedTuple):
++    pid: int
++    raw_wait_status: int
++    observed_at: float
++    matched_identity: OwnedIdentity | None
++
++
++class OwnedDeadlineFact(NamedTuple):
++    phase: str
++    deadline: float
++    observed_at: float
++    remaining: float
++
++
++def _evidence_number(value) -> float:
++    if (
++        isinstance(value, bool)
++        or not isinstance(value, (int, float))
++        or not math.isfinite(value)
++    ):
++        raise ValueError("cleanup evidence number")
++    return float(value)
++
++
++def _evidence_bool(value):
++    if value is not None and not isinstance(value, bool):
++        raise ValueError("cleanup evidence boolean")
++    return value
++
++
++def _evidence_int(value):
++    if value is not None and (isinstance(value, bool) or not isinstance(value, int)):
++        raise ValueError("cleanup evidence integer")
++    return value
++
++
++def _evidence_errors(value) -> tuple[str, ...]:
++    if not isinstance(value, (list, tuple)) or any(
++        not isinstance(item, str) or not item.isidentifier() for item in value
++    ):
++        raise ValueError("cleanup evidence error classes")
++    return tuple(value)
++
++
++def _evidence_identity(value) -> OwnedIdentity | None:
++    if value is None:
++        return None
++    if not isinstance(value, dict) or set(value) != {"pid", "create_time"}:
++        raise ValueError("cleanup evidence identity")
++    return OwnedIdentity.from_values(value["pid"], value["create_time"])
++
++
++class OwnedCleanupEvidence(NamedTuple):
++    schema_version: int
++    scope: str
++    root: OwnedIdentity | None
++    root_capture_verified: bool
++    root_wait_reaped: bool | None
++    root_wait_returncode: int | None
++    enumeration_succeeded: bool | None
++    enumeration_errors: tuple[str, ...]
++    census: tuple[OwnedCensusRow, ...]
++    reap_events: tuple[OwnedReapEvent, ...]
++    terminal_echild: bool | None
++    observation_errors: tuple[str, ...]
++    deadline_facts: tuple[OwnedDeadlineFact, ...]
++    readers: None
++    sampler: None
++    whole_operation_enforcer: None
++
++    @property
++    def census_reap_complete(self) -> bool:
++        """Scoped process facts only; unavailable readers/deadlines remain null."""
++        reaped = {event.matched_identity for event in self.reap_events}
++        return (
++            self.root is not None
++            and self.root_capture_verified
++            and self.root_wait_reaped is True
++            and self.enumeration_succeeded is True
++            and self.terminal_echild is True
++            and not self.enumeration_errors
++            and not self.observation_errors
++            and any(row.identity == self.root for row in self.census)
++            and all(
++                row.identity is not None and row.state == "absent" and row.error is None
++                for row in self.census
++            )
++            and all(
++                row.identity == self.root or row.identity in reaped
++                for row in self.census
++            )
++            and all(event.matched_identity is not None for event in self.reap_events)
++        )
++
++    def to_dict(self) -> dict:
++        def encode(value):
++            if isinstance(value, tuple) and hasattr(value, "_asdict"):
++                return {key: encode(item) for key, item in value._asdict().items()}
++            if isinstance(value, tuple):
++                return [encode(item) for item in value]
++            return value
++
++        return encode(self)
++
++    @classmethod
++    def unavailable(cls, error: str | None = None) -> "OwnedCleanupEvidence":
++        return cls(
++            1,
++            "subreaper_source_observation_only",
++            None,
++            False,
++            None,
++            None,
++            None,
++            (),
++            (),
++            (),
++            None,
++            (error,) if error else (),
++            (),
++            None,
++            None,
++            None,
++        )
++
++    @classmethod
++    def from_dict(cls, value) -> "OwnedCleanupEvidence":
++        if not isinstance(value, dict) or set(value) != set(cls._fields):
++            raise ValueError("cleanup evidence fields")
++        if (
++            isinstance(value["schema_version"], bool)
++            or not isinstance(value["schema_version"], int)
++            or value["schema_version"] != 1
++            or value["scope"] != "subreaper_source_observation_only"
++        ):
++            raise ValueError("cleanup evidence version/scope")
++        root = _evidence_identity(value["root"])
++        verified = _evidence_bool(value["root_capture_verified"])
++        if verified is None or (verified and root is None):
++            raise ValueError("cleanup evidence root capture")
++        if any(
++            value[key] is not None
++            for key in ("readers", "sampler", "whole_operation_enforcer")
++        ):
++            raise ValueError("unmeasured cleanup facts")
++        root_reaped = _evidence_bool(value["root_wait_reaped"])
++        root_returncode = _evidence_int(value["root_wait_returncode"])
++        if (root_reaped is True and root_returncode is None) or (
++            root_reaped is not True and root_returncode is not None
++        ):
++            raise ValueError("cleanup root wait outcome")
++        census = []
++        for item in value["census"]:
++            if not isinstance(item, dict) or set(item) != set(OwnedCensusRow._fields):
++                raise ValueError("cleanup census fields")
++            identity = _evidence_identity(item["identity"])
++            state = item["state"]
++            if state not in ("live", "zombie", "absent", "reused", "unknown") or (
++                identity is None and state != "unknown"
++            ):
++                raise ValueError("cleanup census state")
++            error = item["error"]
++            if error is not None and (
++                not isinstance(error, str) or not error.isidentifier()
++            ):
++                raise ValueError("cleanup census error")
++            pid = _evidence_int(item["observed_pid"])
++            if pid is not None and pid <= 0:
++                raise ValueError("cleanup census PID")
++            birth = item["current_create_time"]
++            birth = _evidence_number(birth) if birth is not None else None
++            if (birth is not None and birth <= 0) or (
++                state == "absent" and birth is not None
++            ):
++                raise ValueError("cleanup census current birth")
++            if state in ("live", "zombie", "reused"):
++                if birth is None or identity is None:
++                    raise ValueError("cleanup census observed identity")
++                if state in ("live", "zombie") and birth != identity.create_time:
++                    raise ValueError("cleanup census matching birth")
++                if state == "reused" and birth == identity.create_time:
++                    raise ValueError("cleanup census reused birth")
++            census.append(
++                OwnedCensusRow(
++                    identity,
++                    state,
++                    _evidence_number(item["observed_at"]),
++                    error,
++                    pid,
++                    _evidence_number(birth) if birth is not None else None,
++                )
++            )
++        reaps = []
++        for item in value["reap_events"]:
++            if not isinstance(item, dict) or set(item) != set(OwnedReapEvent._fields):
++                raise ValueError("cleanup reap fields")
++            pid = _evidence_int(item["pid"])
++            status = _evidence_int(item["raw_wait_status"])
++            if pid is None or pid <= 0 or status is None:
++                raise ValueError("cleanup reap values")
++            reaps.append(
++                OwnedReapEvent(
++                    pid,
++                    status,
++                    _evidence_number(item["observed_at"]),
++                    _evidence_identity(item["matched_identity"]),
++                )
++            )
++        deadlines = []
++        for item in value["deadline_facts"]:
++            if (
++                not isinstance(item, dict)
++                or set(item) != set(OwnedDeadlineFact._fields)
++                or item["phase"] != "adopted_reap"
++            ):
++                raise ValueError("cleanup deadline fields")
++            deadline, at, remaining = (
++                _evidence_number(item[key])
++                for key in ("deadline", "observed_at", "remaining")
++            )
++            if remaining != max(0.0, deadline - at):
++                raise ValueError("cleanup remaining budget")
++            deadlines.append(OwnedDeadlineFact(item["phase"], deadline, at, remaining))
++        return cls(
++            1,
++            value["scope"],
++            root,
++            verified,
++            root_reaped,
++            root_returncode,
++            _evidence_bool(value["enumeration_succeeded"]),
++            _evidence_errors(value["enumeration_errors"]),
++            tuple(census),
++            tuple(reaps),
++            _evidence_bool(value["terminal_echild"]),
++            _evidence_errors(value["observation_errors"]),
++            tuple(deadlines),
++            None,
++            None,
++            None,
++        )
++
++
++class _OwnedCleanupObserver:
++    """Read-only metadata; this ledger is never supplied as signal authority."""
++
++    def __init__(self):
++        self.root = None
++        self.root_capture_verified = False
++        self.root_wait_reaped = None
++        self.root_wait_returncode = None
++        self.enumeration_succeeded = None
++        self.enumeration_errors = []
++        self.rows = {}
++        self.unknown_rows = []
++        self.reap_events = []
++        self.terminal_echild = None
++        self.observation_errors = []
++        self.deadline_facts = []
++
++    def capture_root(self, process):
++        owner = _capture_provider_ownership(process)
++        if owner.capture_verified:
++            self.root = OwnedIdentity.from_values(owner.pid, owner.create_time)
++            self.root_capture_verified = True
++            self.rows[self.root] = OwnedCensusRow(
++                self.root, "unknown", time.monotonic(), None, self.root.pid, None
++            )
++            self.capture_snapshot(owner.descendants)
++        else:
++            self.observation_errors.extend(owner.errors)
++
++    def capture_snapshot(self, processes):
++        self.enumeration_succeeded = True
++        at = time.monotonic()
++        for process in processes:
++            try:
++                identity = OwnedIdentity.from_values(process.pid, process.create_time())
++                self.rows.setdefault(
++                    identity,
++                    OwnedCensusRow(identity, "unknown", at, None, identity.pid, None),
++                )
++            except Exception as error:
++                pid = getattr(process, "pid", None)
++                if isinstance(pid, bool) or not isinstance(pid, int) or pid <= 0:
++                    pid = None
++                self.unknown_rows.append(
++                    OwnedCensusRow(None, "unknown", at, type(error).__name__, pid, None)
++                )
++
++    def record_enumeration_error(self, error):
++        self.enumeration_succeeded = False
++        self.enumeration_errors.append(type(error).__name__)
++
++    def observe_final(
++        self, lookup, *, missing_error, observed_at, zombie_status="zombie"
++    ):
++        for identity in list(self.rows):
++            state, error_class, birth = "unknown", None, None
++            try:
++                current = lookup(identity.pid)
++                birth = _evidence_number(current.create_time())
++                if birth <= 0:
++                    raise ValueError("cleanup observed birth")
++                state = (
++                    "reused"
++                    if birth != identity.create_time
++                    else "zombie"
++                    if current.status() == zombie_status
++                    else "live"
++                )
++            except missing_error:
++                state = "absent"
++            except Exception as error:
++                error_class = type(error).__name__
++            self.rows[identity] = OwnedCensusRow(
++                identity, state, observed_at, error_class, identity.pid, birth
++            )
++
++    def begin_reap(self, deadline):
++        at = time.monotonic()
++        self.terminal_echild = None
++        self.deadline_facts.append(
++            OwnedDeadlineFact("adopted_reap", deadline, at, max(0.0, deadline - at))
++        )
++
++    def record_reap(self, pid, status):
++        # waitpid supplies no birth identity. A single old ledger entry does
++        # not prove that a PID has not been reused before this wait event.
++        self.reap_events.append(
++            OwnedReapEvent(pid, status, time.monotonic(), None)
++        )
++
++    def finish(self, process, psutil_module):
++        self.root_wait_returncode = process.returncode
++        self.root_wait_reaped = process.returncode is not None
++        try:
++            self.capture_snapshot(_supervisor_children(psutil_module))
++        except Exception as error:
++            self.record_enumeration_error(error)
++        self.observe_final(
++            psutil_module.Process,
++            missing_error=psutil_module.NoSuchProcess,
++            observed_at=time.monotonic(),
++            zombie_status=psutil_module.STATUS_ZOMBIE,
++        )
++
++    def freeze(self) -> OwnedCleanupEvidence:
++        census = sorted(self.rows.values(), key=lambda row: row.identity)
++        census.extend(self.unknown_rows)
++        return OwnedCleanupEvidence(
++            1,
++            "subreaper_source_observation_only",
++            self.root,
++            self.root_capture_verified,
++            self.root_wait_reaped,
++            self.root_wait_returncode,
++            self.enumeration_succeeded,
++            tuple(self.enumeration_errors),
++            tuple(census),
++            tuple(self.reap_events),
++            self.terminal_echild,
++            tuple(self.observation_errors),
++            tuple(self.deadline_facts),
++            None,
++            None,
++            None,
++        )
++
++
++def _observe_cleanup(observer, method, *args):
++    try:
++        getattr(observer, method)(*args)
++    except Exception as error:
++        observer.observation_errors.append(type(error).__name__)
++
++
++def _attach_cleanup_evidence(outcome, evidence: OwnedCleanupEvidence):
++    setattr(outcome, "cleanup_evidence", evidence)
++    return outcome
++
++
++def _observer_cleanup_evidence(observer) -> OwnedCleanupEvidence:
++    try:
++        return OwnedCleanupEvidence.from_dict(observer.freeze().to_dict())
++    except Exception as error:
++        return OwnedCleanupEvidence.unavailable(type(error).__name__)
++
++
++def _attach_observed_cleanup(outcome, observer):
++    try:
++        _attach_cleanup_evidence(outcome, _observer_cleanup_evidence(observer))
++    except Exception as error:
++        observer.observation_errors.append(type(error).__name__)
++    return outcome
++
++
++def _transport_cleanup_evidence(result) -> OwnedCleanupEvidence:
++    try:
++        return OwnedCleanupEvidence.from_dict(result["cleanup_evidence"])
++    except (ValueError, TypeError, KeyError) as error:
++        return OwnedCleanupEvidence.unavailable(type(error).__name__)
++
++
+ def child_environment(
+     source: dict[str, str], *, task_root: Path, extra: dict[str, str] | None = None
+ ) -> dict[str, str]:
+@@ -329,18 +756,22 @@ def run_owned_process(
+     env: dict[str, str],
+     cwd: Path | None = None,
+     cleanup_grace_seconds: float = CLEANUP_GRACE_SECONDS,
++    collect_cleanup_evidence: bool = False,
+ ) -> subprocess.CompletedProcess:
++    if not isinstance(collect_cleanup_evidence, bool):
++        raise ValueError("collect_cleanup_evidence must be boolean")
+     command = [os.fspath(argument) for argument in command]
+     if sys.platform == "linux":
+-        payload = json.dumps(
+-            {
+-                "command": command,
+-                "cwd": str(cwd) if cwd else None,
+-                "env": env,
+-                "timeout_seconds": timeout_seconds,
+-                "cleanup_grace_seconds": cleanup_grace_seconds,
+-            }
+-        )
++        request = {
++            "command": command,
++            "cwd": str(cwd) if cwd else None,
++            "env": env,
++            "timeout_seconds": timeout_seconds,
++            "cleanup_grace_seconds": cleanup_grace_seconds,
++        }
++        if collect_cleanup_evidence:
++            request["collect_cleanup_evidence"] = True
++        payload = json.dumps(request)
+         supervisor = subprocess.Popen(
+             [sys.executable, str(Path(__file__).resolve()), "--_supervisor"],
+             stdin=subprocess.PIPE,
+@@ -354,27 +785,59 @@ def run_owned_process(
+         try:
+             stdout, stderr = supervisor.communicate(payload, timeout=parent_timeout)
+         except subprocess.TimeoutExpired as exc:
++            if collect_cleanup_evidence:
++                _attach_cleanup_evidence(
++                    exc, OwnedCleanupEvidence.unavailable("SupervisorTimeout")
++                )
+             terminate_process_tree(supervisor, grace_seconds=cleanup_grace_seconds)
+-            raise ProcessTreeCleanupError(
++            failure = ProcessTreeCleanupError(
+                 "Linux process supervisor exceeded its independent hard deadline"
+-            ) from exc
++            )
++            if collect_cleanup_evidence:
++                _attach_cleanup_evidence(
++                    failure, OwnedCleanupEvidence.unavailable("SupervisorTimeout")
++                )
++            raise failure from exc
+         if supervisor.returncode != 0:
+-            raise ProcessTreeCleanupError(
++            failure = ProcessTreeCleanupError(
+                 "Linux process supervisor failed: " + stderr[-2000:]
+             )
++            if collect_cleanup_evidence:
++                _attach_cleanup_evidence(
++                    failure, OwnedCleanupEvidence.unavailable("SupervisorFailure")
++                )
++            raise failure
+         try:
+             result = json.loads(stdout)
+         except json.JSONDecodeError as exc:
+-            raise ProcessTreeCleanupError(
++            failure = ProcessTreeCleanupError(
+                 "Linux process supervisor returned malformed output"
+-            ) from exc
+-        completed = subprocess.CompletedProcess(
+-            command, result["returncode"], result["stdout"], result["stderr"]
++            )
++            if collect_cleanup_evidence:
++                _attach_cleanup_evidence(
++                    failure, OwnedCleanupEvidence.unavailable("JSONDecodeError")
++                )
++            raise failure from exc
++        try:
++            completed = subprocess.CompletedProcess(
++                command, result["returncode"], result["stdout"], result["stderr"]
++            )
++            completed.cleanup_disposition = result["cleanup_disposition"]
++            completed.reaped_descendants = result["reaped_descendants"]
++        except (TypeError, KeyError) as primary_error:
++            if collect_cleanup_evidence:
++                _attach_cleanup_evidence(
++                    primary_error,
++                    OwnedCleanupEvidence.unavailable(type(primary_error).__name__),
++                )
++            raise
++        evidence = (
++            _transport_cleanup_evidence(result) if collect_cleanup_evidence else None
+         )
+-        completed.cleanup_disposition = result["cleanup_disposition"]
+-        completed.reaped_descendants = result["reaped_descendants"]
++        if evidence is not None:
++            _attach_cleanup_evidence(completed, evidence)
+         if result.get("unexpected_live_descendants") and not result["timed_out"]:
+-            raise ProcessTreeCleanupError(
++            failure = ProcessTreeCleanupError(
+                 "command exited while owned descendants were still live; "
+                 f"cleanup disposition={result['cleanup_disposition']}",
+                 command_returncode=completed.returncode,
+@@ -382,15 +845,23 @@ def run_owned_process(
+                 command_stdout=completed.stdout,
+                 command_stderr=completed.stderr,
+             )
++            if evidence is not None:
++                _attach_cleanup_evidence(failure, evidence)
++            raise failure
+         if result["timed_out"]:
+-            raise subprocess.TimeoutExpired(
++            timeout_failure = subprocess.TimeoutExpired(
+                 command,
+                 timeout_seconds,
+                 output=completed.stdout,
+                 stderr=completed.stderr,
+             )
++            if evidence is not None:
++                _attach_cleanup_evidence(timeout_failure, evidence)
++            raise timeout_failure
+         return completed
+ 
++    if collect_cleanup_evidence:
++        raise ValueError("cleanup evidence observation requires Linux subreaper")
+     process = subprocess.Popen(
+         command,
+         cwd=cwd,
+@@ -443,20 +914,37 @@ def _process_is_live(process, psutil_module) -> bool:
+         ) from exc
+ 
+ 
+-def _reap_adopted_children(*, deadline: float) -> int:
++def _reap_adopted_children(
++    *, deadline: float, evidence_observer: _OwnedCleanupObserver | None = None
++) -> int:
++    if evidence_observer is not None:
++        _observe_cleanup(evidence_observer, "begin_reap", deadline)
+     reaped = 0
+     while True:
+         try:
+             pid, _status = os.waitpid(-1, os.WNOHANG)
+         except ChildProcessError:  # waitpid(-1) confirmed ECHILD
++            if evidence_observer is not None:
++                evidence_observer.terminal_echild = True
+             return reaped
++        except OSError as error:
++            if evidence_observer is not None:
++                evidence_observer.observation_errors.append(type(error).__name__)
++                _attach_observed_cleanup(error, evidence_observer)
++            raise
+         if pid > 0:
++            if evidence_observer is not None:
++                _observe_cleanup(evidence_observer, "record_reap", pid, _status)
+             reaped += 1
+             continue
+         if time.monotonic() >= deadline:
+-            raise ProcessTreeCleanupError(
++            failure = ProcessTreeCleanupError(
+                 "subreaper could not reach ECHILD before the reap deadline"
+             )
++            if evidence_observer is not None:
++                evidence_observer.terminal_echild = False
++                _attach_observed_cleanup(failure, evidence_observer)
++            raise failure
+         time.sleep(0.01)
+ 
+ 
+@@ -511,7 +999,13 @@ def _fallback_reap_after_error(child, *, grace: float) -> None:
+     _reap_adopted_children(deadline=time.monotonic() + grace)
+ 
+ 
+-def _stop_supervised_processes(child, psutil_module, *, grace: float) -> str:
++def _stop_supervised_processes(
++    child,
++    psutil_module,
++    *,
++    grace: float,
++    evidence_observer: _OwnedCleanupObserver | None = None,
++) -> str:
+     descendants = _supervisor_children(psutil_module)
+     if child.poll() is not None and not any(
+         _process_is_live(process, psutil_module) for process in descendants
+@@ -575,7 +1069,12 @@ def _stop_supervised_processes(child, psutil_module, *, grace: float) -> str:
+         ) from exc
+ 
+     reap_deadline = time.monotonic() + grace
+-    _reap_adopted_children(deadline=reap_deadline)
++    if evidence_observer is None:
++        _reap_adopted_children(deadline=reap_deadline)
++    else:
++        _reap_adopted_children(
++            deadline=reap_deadline, evidence_observer=evidence_observer
++        )
+     if not descendants:
+         return (
+             "timed_out_owner_terminated"
+@@ -600,6 +1099,11 @@ def _supervisor_main() -> int:
+     import psutil
+ 
+     payload = json.load(sys.stdin)
++    evidence_observer = (
++        _OwnedCleanupObserver()
++        if payload.get("collect_cleanup_evidence") is True
++        else None
++    )
+     command = payload["command"]
+     grace = float(payload["cleanup_grace_seconds"])
+     command_deadline = time.monotonic() + float(payload["timeout_seconds"])
+@@ -622,17 +1126,30 @@ def _supervisor_main() -> int:
+                     stderr=stderr_file,
+                     start_new_session=True,
+                 )
++                if evidence_observer is not None:
++                    _observe_cleanup(evidence_observer, "capture_root", child)
+                 while child.poll() is None and time.monotonic() < command_deadline:
+                     time.sleep(0.02)
+                 timed_out = child.poll() is None
+                 descendants = _supervisor_children(psutil)
++                if evidence_observer is not None:
++                    _observe_cleanup(evidence_observer, "capture_snapshot", descendants)
+                 unexpected_live = any(
+                     _process_is_live(process, psutil) for process in descendants
+                 )
+-                disposition = _stop_supervised_processes(child, psutil, grace=grace)
+-                reaped_descendants = _reap_adopted_children(
+-                    deadline=time.monotonic() + grace
+-                )
++                if evidence_observer is None:
++                    disposition = _stop_supervised_processes(child, psutil, grace=grace)
++                    reaped_descendants = _reap_adopted_children(
++                        deadline=time.monotonic() + grace
++                    )
++                else:
++                    disposition = _stop_supervised_processes(
++                        child, psutil, grace=grace, evidence_observer=evidence_observer
++                    )
++                    reaped_descendants = _reap_adopted_children(
++                        deadline=time.monotonic() + grace,
++                        evidence_observer=evidence_observer,
++                    )
+                 # The second drain is deliberate: success, timeout, and cleanup
+                 # all require waitpid(-1) to observe ECHILD before evidence returns.
+                 if child.poll() is None:
+@@ -650,6 +1167,11 @@ def _supervisor_main() -> int:
+                     "reaped_descendants": reaped_descendants,
+                     "unexpected_live_descendants": unexpected_live,
+                 }
++                if evidence_observer is not None:
++                    _observe_cleanup(evidence_observer, "finish", child, psutil)
++                    result["cleanup_evidence"] = _observer_cleanup_evidence(
++                        evidence_observer
++                    ).to_dict()
+             except BaseException:
+                 if child is not None:
+                     _fallback_reap_after_error(child, grace=grace)
+diff --git a/action_server/tests/action_server_tests/test_owned_cleanup_evidence.py b/action_server/tests/action_server_tests/test_owned_cleanup_evidence.py
+new file mode 100644
+index 00000000..f1275df6
+--- /dev/null
++++ b/action_server/tests/action_server_tests/test_owned_cleanup_evidence.py
+@@ -0,0 +1,541 @@
++"""Injected source controls for opt-in supervisor cleanup metadata only."""
++
++import importlib.util
++import json
++import subprocess
++import sys
++from pathlib import Path
++from types import SimpleNamespace
++
++import pytest
++
++
++def _harness():
++    path = Path(__file__).parents[2] / "scripts/verify_dakota_rcc_acceptance.py"
++    spec = importlib.util.spec_from_file_location(
++        "owned_cleanup_evidence_control", path
++    )
++    assert spec is not None and spec.loader is not None
++    module = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(module)
++    return module
++
++
++def _process(pid, birth, status="sleeping"):
++    return SimpleNamespace(pid=pid, create_time=lambda: birth, status=lambda: status)
++
++
++def _observer(harness):
++    observer = harness._OwnedCleanupObserver()
++    observer.root = harness.OwnedIdentity.from_values(1, 1.0)
++    observer.root_capture_verified = True
++    observer.root_wait_reaped = True
++    observer.root_wait_returncode = 0
++    return observer
++
++
++def test_uncapped_identity_rows_preserve_same_pid_different_births():
++    harness = _harness()
++    observer = _observer(harness)
++    captured = [
++        _process(pid, float(birth)) for pid in range(2, 82) for birth in (10, 20)
++    ]
++    observer.capture_snapshot(captured)
++    evidence = observer.freeze()
++    assert len(evidence.census) == 160
++    assert len({row.identity for row in evidence.census}) == 160
++    assert not evidence.census_reap_complete
++    restored = harness.OwnedCleanupEvidence.from_dict(
++        json.loads(json.dumps(evidence.to_dict()))
++    )
++    assert restored == evidence
++    assert len(restored.census) > 64
++
++
++def test_empty_enumeration_and_failed_enumeration_are_distinct():
++    harness = _harness()
++    success = _observer(harness)
++    success.capture_snapshot([])
++    failed = _observer(harness)
++    failed.record_enumeration_error(OSError("private enumeration detail"))
++    assert success.freeze().enumeration_succeeded is True
++    assert failed.freeze().enumeration_succeeded is False
++    assert failed.freeze().enumeration_errors == ("OSError",)
++    assert not success.freeze().census_reap_complete
++    assert not failed.freeze().census_reap_complete
++    assert "private enumeration detail" not in json.dumps(failed.freeze().to_dict())
++
++
++def test_unknown_and_reused_observations_are_never_signal_targets():
++    harness = _harness()
++    observer = _observer(harness)
++    observer.capture_snapshot([_process(2, 10.0), _process(3, 10.0)])
++
++    class Missing(Exception):
++        pass
++
++    class Error(Exception):
++        pass
++
++    def lookup(pid):
++        if pid == 2:
++            return _process(pid, 20.0)
++        raise Error("private lookup detail")
++
++    observer.observe_final(lookup, missing_error=Missing, observed_at=4.0)
++    rows = observer.freeze().census
++    assert [row.state for row in rows] == ["reused", "unknown"]
++    assert rows[1].error == "Error"
++    assert not observer.freeze().census_reap_complete
++    assert "private lookup detail" not in json.dumps(observer.freeze().to_dict())
++
++
++@pytest.mark.parametrize(
++    "pid,birth", [(True, 1), (0, 1), (1, True), (1, float("nan")), (1, float("inf"))]
++)
++def test_invalid_identity_is_rejected_without_normalizing_unknown(pid, birth):
++    harness = _harness()
++    with pytest.raises(ValueError):
++        harness.OwnedIdentity.from_values(pid, birth)
++
++
++@pytest.mark.parametrize("kind", ["result", "timeout", "cleanup_error"])
++def test_attachment_preserves_primary_object_and_legacy_outputs(kind):
++    harness = _harness()
++    evidence = _observer(harness).freeze()
++    if kind == "result":
++        original = subprocess.CompletedProcess(["command"], 7, "stdout", "stderr")
++    elif kind == "timeout":
++        original = subprocess.TimeoutExpired(
++            ["command"], 1, output=b"stdout", stderr=b"stderr"
++        )
++    else:
++        original = harness.ProcessTreeCleanupError(
++            "primary",
++            command_returncode=7,
++            command_stdout="stdout",
++            command_stderr="stderr",
++        )
++    before = dict(vars(original))
++    assert harness._attach_cleanup_evidence(original, evidence) is original
++    assert original.cleanup_evidence is evidence
++    for name, value in before.items():
++        assert getattr(original, name) is value
++
++
++def _transport(monkeypatch, harness, payload):
++    calls = []
++
++    class Supervisor:
++        returncode = 0
++
++        def communicate(self, request, timeout):
++            calls.append((json.loads(request), timeout))
++            return json.dumps(payload), "supervisor-stderr"
++
++    monkeypatch.setattr(
++        harness,
++        "subprocess",
++        SimpleNamespace(
++            **{**vars(subprocess), "Popen": lambda *_args, **_kwargs: Supervisor()}
++        ),
++    )
++    monkeypatch.setattr(
++        harness, "sys", SimpleNamespace(**{**vars(sys), "platform": "linux"})
++    )
++    return calls
++
++
++def _wire_result(evidence):
++    return {
++        "returncode": 7,
++        "stdout": "command-stdout",
++        "stderr": "command-stderr",
++        "cleanup_disposition": "clean_no_descendants",
++        "reaped_descendants": 0,
++        "unexpected_live_descendants": False,
++        "timed_out": False,
++        "cleanup_evidence": evidence.to_dict(),
++    }
++
++
++@pytest.mark.parametrize(
++    "kind", ["result", "timeout", "cleanup_error", "malformed_evidence"]
++)
++def test_existing_result_transport_attaches_actual_metadata(monkeypatch, kind):
++    harness = _harness()
++    evidence = _observer(harness).freeze()
++    payload = _wire_result(evidence)
++    if kind == "timeout":
++        payload["timed_out"] = True
++    elif kind == "cleanup_error":
++        payload["unexpected_live_descendants"] = True
++    elif kind == "malformed_evidence":
++        payload["cleanup_evidence"]["root"] = {"pid": 1, "create_time": float("nan")}
++    calls = _transport(monkeypatch, harness, payload)
++    try:
++        outcome = harness.run_owned_process(
++            ["command"], timeout_seconds=1, env={}, collect_cleanup_evidence=True
++        )
++    except (subprocess.TimeoutExpired, harness.ProcessTreeCleanupError) as error:
++        outcome = error
++    assert calls[0][0]["collect_cleanup_evidence"] is True
++    if kind == "malformed_evidence":
++        assert outcome.cleanup_evidence.root is None
++        assert outcome.cleanup_evidence.enumeration_succeeded is None
++        assert outcome.cleanup_evidence.observation_errors == ("ValueError",)
++    else:
++        assert outcome.cleanup_evidence == evidence
++    if kind in ("result", "malformed_evidence"):
++        assert outcome.returncode == 7
++        assert (outcome.stdout, outcome.stderr) == ("command-stdout", "command-stderr")
++    elif kind == "timeout":
++        assert (outcome.output, outcome.stderr) == ("command-stdout", "command-stderr")
++    else:
++        assert (outcome.command_stdout, outcome.command_stderr) == (
++            "command-stdout",
++            "command-stderr",
++        )
++
++
++def test_default_transport_neither_requests_nor_attaches_metadata(monkeypatch):
++    harness = _harness()
++    payload = {
++        "returncode": 0,
++        "stdout": "out",
++        "stderr": "err",
++        "cleanup_disposition": "clean_no_descendants",
++        "reaped_descendants": 0,
++        "unexpected_live_descendants": False,
++        "timed_out": False,
++    }
++    calls = _transport(monkeypatch, harness, payload)
++    result = harness.run_owned_process(["command"], timeout_seconds=1, env={})
++    assert "collect_cleanup_evidence" not in calls[0][0]
++    assert not hasattr(result, "cleanup_evidence")
++    assert (result.stdout, result.stderr) == ("out", "err")
++
++
++def test_existing_wait_events_and_echild_are_observations_not_invented_reaps(
++    monkeypatch,
++):
++    harness = _harness()
++    observer = _observer(harness)
++    observer.capture_snapshot([_process(2, 10.0), _process(3, 10.0), _process(3, 20.0)])
++    waits = iter([(2, 512), (3, 0), ChildProcessError()])
++
++    def waitpid(*_):
++        value = next(waits)
++        if isinstance(value, Exception):
++            raise value
++        return value
++
++    monkeypatch.setattr(
++        harness, "os", SimpleNamespace(**{**vars(harness.os), "waitpid": waitpid})
++    )
++    monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 12.0))
++    assert (
++        harness._reap_adopted_children(deadline=15.0, evidence_observer=observer) == 2
++    )
++    evidence = observer.freeze()
++    assert evidence.terminal_echild is True
++    assert [(event.pid, event.raw_wait_status) for event in evidence.reap_events] == [
++        (2, 512),
++        (3, 0),
++    ]
++    assert evidence.reap_events[0].matched_identity is None
++    assert evidence.reap_events[1].matched_identity is None
++    assert evidence.deadline_facts[0].remaining == 3.0
++    assert not evidence.census_reap_complete
++
++
++def test_wait_timeout_keeps_primary_cleanup_error_and_unavailable_echild(monkeypatch):
++    harness = _harness()
++    observer = _observer(harness)
++    monkeypatch.setattr(
++        harness,
++        "os",
++        SimpleNamespace(**{**vars(harness.os), "waitpid": lambda *_: (0, 0)}),
++    )
++    monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 12.0))
++    with pytest.raises(harness.ProcessTreeCleanupError) as caught:
++        harness._reap_adopted_children(deadline=11.0, evidence_observer=observer)
++    assert caught.value.cleanup_evidence.terminal_echild is False
++    assert caught.value.cleanup_evidence.deadline_facts[0].remaining == 0.0
++    assert not caught.value.cleanup_evidence.census_reap_complete
++
++
++def test_wait_pid_alone_cannot_match_a_stale_singleton_birth_capture():
++    harness = _harness()
++    observer = _observer(harness)
++    observer.capture_snapshot([_process(2, 10.0)])
++    # Another owner could have reaped birth10 before a new birth reused PID2.
++    # waitpid reports PID/status, not the birth of the process just reaped.
++    observer.record_reap(2, 0)
++    assert observer.freeze().reap_events[0].matched_identity is None
++
++
++@pytest.mark.parametrize("opt_in", [False, True])
++def test_actual_supervisor_wires_observer_only_when_requested(
++    tmp_path, monkeypatch, capsys, opt_in
++):
++    import io
++
++    harness = _harness()
++    polls = []
++    waits = []
++    lookups = []
++
++    class ProcessError(Exception):
++        pass
++
++    class Missing(ProcessError):
++        pass
++
++    class Child:
++        pid = 1
++        returncode = None
++
++        def __init__(self, *_args, **kwargs):
++            kwargs["stdout"].write(b"command-out")
++            kwargs["stderr"].write(b"command-err")
++
++        def poll(self):
++            polls.append(True)
++            if len(polls) > (2 if opt_in else 0):
++                self.returncode = 0
++            return self.returncode
++
++        def wait(self, timeout=None):
++            waits.append(timeout)
++            assert self.returncode == 0
++            return self.returncode
++
++    child = Child.__new__(Child)
++
++    def create_child(*args, **kwargs):
++        child.__init__(*args, **kwargs)
++        return child
++
++    class Process:
++        def create_time(self):
++            return 1.0
++
++        def children(self, recursive=True):
++            return []
++
++    def lookup(pid):
++        lookups.append(pid)
++        if pid == 1 and child.returncode is not None:
++            raise Missing()
++        return Process()
++
++    class Scratch:
++        def __enter__(self):
++            return str(tmp_path)
++
++        def __exit__(self, *_args):
++            pass
++
++    request = {
++        "command": ["unused"],
++        "cwd": None,
++        "env": {},
++        "timeout_seconds": 1,
++        "cleanup_grace_seconds": 1,
++    }
++    if opt_in:
++        request["collect_cleanup_evidence"] = True
++    monkeypatch.setattr(
++        harness,
++        "sys",
++        SimpleNamespace(
++            **{
++                **vars(sys),
++                "platform": "linux",
++                "stdin": io.StringIO(json.dumps(request)),
++            }
++        ),
++    )
++    monkeypatch.setattr(
++        harness,
++        "ctypes",
++        SimpleNamespace(
++            CDLL=lambda *_args, **_kwargs: SimpleNamespace(prctl=lambda *_: 0)
++        ),
++    )
++    monkeypatch.setitem(
++        sys.modules,
++        "psutil",
++        SimpleNamespace(
++            Process=lookup,
++            Error=ProcessError,
++            NoSuchProcess=Missing,
++            STATUS_ZOMBIE="zombie",
++        ),
++    )
++    monkeypatch.setattr(
++        harness,
++        "subprocess",
++        SimpleNamespace(**{**vars(subprocess), "Popen": create_child}),
++    )
++    monkeypatch.setattr(
++        harness,
++        "tempfile",
++        SimpleNamespace(TemporaryDirectory=lambda **_kwargs: Scratch()),
++    )
++
++    def echild(*_):
++        raise ChildProcessError()
++
++    monkeypatch.setattr(
++        harness, "os", SimpleNamespace(**{**vars(harness.os), "waitpid": echild})
++    )
++    monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 12.0))
++    assert harness._supervisor_main() == 0
++    output = json.loads(capsys.readouterr().out)
++    assert (output["stdout"], output["stderr"], output["returncode"]) == (
++        "command-out",
++        "command-err",
++        0,
++    )
++    assert waits == [None]
++    if opt_in:
++        evidence = harness.OwnedCleanupEvidence.from_dict(output["cleanup_evidence"])
++        assert evidence.root == harness.OwnedIdentity(1, 1.0)
++        assert evidence.root_capture_verified and evidence.root_wait_reaped
++        assert evidence.terminal_echild is True
++        assert evidence.census_reap_complete
++        assert (
++            evidence.readers
++            is evidence.sampler
++            is evidence.whole_operation_enforcer
++            is None
++        )
++    else:
++        assert "cleanup_evidence" not in output
++        assert 1 not in lookups
++
++
++def test_raw_wait_error_retains_original_exception_identity(monkeypatch):
++    harness = _harness()
++    observer = _observer(harness)
++    original = OSError("private wait detail")
++
++    def fail(*_):
++        raise original
++
++    monkeypatch.setattr(
++        harness, "os", SimpleNamespace(**{**vars(harness.os), "waitpid": fail})
++    )
++    monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 12.0))
++    with pytest.raises(OSError) as caught:
++        harness._reap_adopted_children(deadline=15.0, evidence_observer=observer)
++    assert caught.value is original
++    assert original.cleanup_evidence.observation_errors == ("OSError",)
++    assert original.cleanup_evidence.terminal_echild is None
++    assert "private wait detail" not in json.dumps(original.cleanup_evidence.to_dict())
++
++
++@pytest.mark.parametrize(
++    "field,value",
++    [
++        ("root_wait_returncode", None),
++        ("root_wait_returncode", True),
++        ("readers", []),
++        ("schema_version", True),
++        ("observation_errors", ["private error detail"]),
++    ],
++)
++def test_serialized_poison_becomes_unavailable_and_preserves_result(
++    monkeypatch, field, value
++):
++    harness = _harness()
++    payload = _wire_result(_observer(harness).freeze())
++    payload["cleanup_evidence"][field] = value
++    _transport(monkeypatch, harness, payload)
++    result = harness.run_owned_process(
++        ["command"], timeout_seconds=1, env={}, collect_cleanup_evidence=True
++    )
++    assert result.returncode == 7
++    assert (result.stdout, result.stderr) == ("command-stdout", "command-stderr")
++    assert result.cleanup_evidence.root is None
++    assert result.cleanup_evidence.enumeration_succeeded is None
++    assert result.cleanup_evidence.observation_errors == ("ValueError",)
++    assert not result.cleanup_evidence.census_reap_complete
++
++
++def test_rejected_metadata_attachment_does_not_replace_wait_primary(monkeypatch):
++    harness = _harness()
++    observer = _observer(harness)
++
++    class WaitError(OSError):
++        def __setattr__(self, name, value):
++            if name == "cleanup_evidence":
++                raise RuntimeError("private attachment detail")
++            return super().__setattr__(name, value)
++
++    original = WaitError("primary")
++
++    def fail(*_):
++        raise original
++
++    monkeypatch.setattr(
++        harness, "os", SimpleNamespace(**{**vars(harness.os), "waitpid": fail})
++    )
++    monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 12.0))
++    with pytest.raises(WaitError) as caught:
++        harness._reap_adopted_children(deadline=15.0, evidence_observer=observer)
++    assert caught.value is original
++    assert observer.observation_errors == ["WaitError", "RuntimeError"]
++
++
++def test_failed_observer_serialization_does_not_replace_legacy_result(monkeypatch):
++    harness = _harness()
++    observer = _observer(harness)
++
++    def fail():
++        raise OSError("private serialization detail")
++
++    monkeypatch.setattr(observer, "freeze", fail)
++    original = subprocess.CompletedProcess(["command"], 7, "out", "err")
++    assert harness._attach_observed_cleanup(original, observer) is original
++    assert original.cleanup_evidence.observation_errors == ("OSError",)
++    assert original.cleanup_evidence.root is None
++    assert (original.stdout, original.stderr) == ("out", "err")
++
++
++def test_genuine_supervisor_failure_has_explicitly_unavailable_metadata(monkeypatch):
++    harness = _harness()
++
++    class Supervisor:
++        returncode = 2
++
++        def communicate(self, request, timeout):
++            return "not-a-success-report", "original supervisor failure"
++
++    monkeypatch.setattr(
++        harness,
++        "subprocess",
++        SimpleNamespace(
++            **{**vars(subprocess), "Popen": lambda *_args, **_kwargs: Supervisor()}
++        ),
++    )
++    monkeypatch.setattr(
++        harness, "sys", SimpleNamespace(**{**vars(sys), "platform": "linux"})
++    )
++    with pytest.raises(
++        harness.ProcessTreeCleanupError, match="original supervisor failure"
++    ) as caught:
++        harness.run_owned_process(
++            ["command"], timeout_seconds=1, env={}, collect_cleanup_evidence=True
++        )
++    evidence = caught.value.cleanup_evidence
++    assert (
++        evidence.root
++        is evidence.enumeration_succeeded
++        is evidence.terminal_echild
++        is None
++    )
++    assert evidence.observation_errors == ("SupervisorFailure",)
++    assert not evidence.census_reap_complete
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index b19bf02d..b86fe309 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2620,6 +2620,36 @@ record paths, root/digest/lease identity, no-follow reads, stable bytes, and
+ actual before/after observations. Help output and terminal process receipts
+ alone do not provide those facts.
+ 
++`run_owned_process(..., collect_cleanup_evidence=True)` is an opt-in Linux
++source-observation transport. The default command payload, outputs, termination,
++fallback, and grace behavior remain unchanged. The observer retains the full
++PID/creation-time ledger, including different births of one PID, and distinguishes
++successful empty enumeration from failed or unavailable enumeration. Census
++states retain live, zombie, absent, reused, and unknown observations; this ledger
++is never supplied as signal authority. Root identity requires the existing
++verified live/birth capture. Existing `waitpid` calls retain raw PID/status events
++and the actual terminal ECHILD observation without adding waits. A wait PID alone
++does not establish birth identity, so these events leave `matched_identity` null.
++Absence and legacy reap counts are not converted into observed identity reaps.
++
++The same typed `cleanup_evidence` is attached to command results, timeout, and
++cleanup-error outcomes while retaining their existing output fields. Wait errors
++retain their original exception object; metadata failures record fixed secondary
++classes and cannot replace that primary error. Malformed or missing metadata and
++supervisor failures before JSON publication have explicitly unavailable facts,
++not an empty clean census. Reader, sampler, and whole-operation enforcer facts
++remain null because this increment does not measure them. Scoped census/reap
++completion does not prove the whole native fixture or Runtime acceptance.
++
++An absolute Python deadline limits only operations that consume its remaining
++budget. Final census, output hashing, fsync, and receipt persistence require an
++independently enforced outer endpoint before a whole-operation hard bound is
++claimed. Watchdog intervention is failure with explicitly unavailable cleanup
++facts; it is not evidence that owned processes were reaped. The opt-in metadata
++does not change native dispatch, fallback signals, disk-output retention, lease
++observation, or watchdog behavior; those designs and native budgets require
++separate admission.
++
+ Pooled worker retirement retains its existing stdout/stderr output threads and
+ joins them together with the protocol reader using the caller's one deadline.
+ Typed `WorkerReaderResult` values record each join, final alive state, and fixed

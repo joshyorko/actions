@@ -1,0 +1,51 @@
+{
+  "observed_at": "2026-10-12T07:56:26.527383+00:00",
+  "worktrees": [
+    {
+      "path": "/workspace/actions",
+      "head": "a70993fafc99a9f94041485542d5a720797ca394",
+      "status": []
+    },
+    {
+      "path": "/workspace/actions-checkpoint",
+      "head": "62bab755c87b46ff8140ec8ac17bd377b47dc258",
+      "status": []
+    },
+    {
+      "path": "/workspace/actions-handoff",
+      "head": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+      "status": []
+    },
+    {
+      "path": "/workspace/actions-pr305",
+      "head": "3e3e5b0d4c7fcae578a3ec89ff9f2d1d054f657e",
+      "status": [
+        " M docs/skills/repository-operations.md",
+        "?? devutils/src/devutils/native_resources.py",
+        "?? devutils/tests/test_native_resources.py"
+      ]
+    },
+    {
+      "path": "/workspace/actions-pr306",
+      "head": "eb0df4f97f390b413e364fe68364b81a65663f02",
+      "status": []
+    },
+    {
+      "path": "/workspace/actions-pr307",
+      "head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+      "status": [
+        "?? action_server/src/actions/server/_oauth2_config.py"
+      ]
+    },
+    {
+      "path": "/workspace/actions-pr308",
+      "head": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+      "status": []
+    },
+    {
+      "path": "/workspace/actions-pr313",
+      "head": "216ad55b5bcafaa54ba61fcc87982a57573adce7",
+      "status": []
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "candidate_sha": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+  "candidate_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "native_build_source_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "native_build_source_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "native_build_workflow_run_id": "38098225250",
+  "native_build_workflow_run_attempt": "1",
+  "native_byte_verification_receipt_sha256": "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff",
+  "control_sha": "current-control",
+  "resource_history_test_blob": "534e51afbc75b4d3ce473dee37d7ac00d52dbc92",
+  "artifact_id": "11686643166",
+  "artifact_size": 59410740,
+  "artifact_sha256": "0905c4734d6b636a5a465e0a958cf8bc4521b5047a68da473830b95821b7c8c0",
+  "go_wrapper": "NOT_VERIFIED; separate wrapper artifact is not included in the measured provenance TAR",
+  "step_outcomes": {
+    "ARTIFACT": "success",
+    "FROZEN": "success",
+    "RCC": "success",
+    "DEPENDENCIES": "success",
+    "ACCEPTANCE": "success"
+  },
+  "status": "FAIL_OR_NOT_RUN"
+}

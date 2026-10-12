@@ -1,0 +1,7 @@
+packaging:
+  exclude:
+    - ./devdata/**
+    - ./output/**
+    - ./**/*.pyc
+    - ./**/__pycache__/**
+    - ./**/*_cache/**

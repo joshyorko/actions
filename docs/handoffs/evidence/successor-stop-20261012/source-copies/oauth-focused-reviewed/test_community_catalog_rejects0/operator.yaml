@@ -1,0 +1,4 @@
+oauth2Config:
+  providers:
+    google:
+      mode: actions

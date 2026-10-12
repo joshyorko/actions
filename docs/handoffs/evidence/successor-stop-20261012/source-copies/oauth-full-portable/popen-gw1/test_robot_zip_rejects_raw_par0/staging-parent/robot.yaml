@@ -1,0 +1,4 @@
+name: seeded
+tasks:
+  run:
+    shell: echo seeded

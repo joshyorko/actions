@@ -1,0 +1,96 @@
+{
+  "receipt_sha256": "2d94631a2a69b5ddf194bd21677c3ad9a08020517920e577cb96d43d793908f4",
+  "checks": {
+    "async-admission-red.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "async-admission-red.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "async-admission-first-green.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "async-admission-first-green.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "async-admission-lifecycle-green.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "async-admission-lifecycle-green.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "async-admission-affected-final.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "async-admission-affected-final.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "async-admission-static-final.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "native-baseline-profile-f949bef2-v11-SOURCE-PREPARED-NOTRUN.json": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "async-admission-f949bef2-source.patch": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "pr308-d358f9c2-windows-launcher-source-receipt.json": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "decoded-eeb-linux114674512992.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "actual-rootcause-review.json": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/src/actions/server/_actions_run.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/src/actions/server/_runs_state_cache.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/tests/action_server_tests/test_async_run_cancellation_admission.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/tests/action_server_tests/test_server_async.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes_match": true,
+      "sha256_match": true
+    }
+  },
+  "all_match": true,
+  "unchanged_state_methods": {
+    "create_run_runtime_info": true,
+    "cancel_run": true,
+    "is_scoped_run": true,
+    "on_run_changed": true
+  },
+  "accepted_launcher_fixture_and_helper_preserved": {
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": true,
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py": true,
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": true
+  },
+  "new_discard_api_callers": "Only _ActionsRunner submit-failure and Future.done; scheduler/fakeState unchanged create-only API",
+  "caller_lock_review": "GeneratedAPI invokes runner.run_in_thread outside stateSemaphore; no held lock on registration/submission/add_done_callback; state discard acquiresSemaphore once and compares objectidentity",
+  "runtime_access_scope": "Existing scoped check/cancel remains unchanged; no authorized-common Runner branch exists or added"
+}

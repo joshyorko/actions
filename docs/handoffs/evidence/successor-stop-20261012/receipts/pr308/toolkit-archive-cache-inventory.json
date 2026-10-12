@@ -1,0 +1,69 @@
+{
+  "scope": "Metadata-only archive inventory under fresh owned toolkit package cache; no advice issued",
+  "root": "/workspace/successor-toolkit/robocorp/pkgs",
+  "files": 16,
+  "bytes": 181380069,
+  "elapsed": 0.08273366800131043,
+  "largest": [
+    [
+      58494154,
+      "go-1.23.6-hc4c73a6_1.conda"
+    ],
+    [
+      23058586,
+      "python-3.12.15-h5f976f7_1_cpython.conda"
+    ],
+    [
+      17900187,
+      "uv-0.9.26-h76e24b7_0.conda"
+    ],
+    [
+      17238825,
+      "nodejs-20.19.3-hc55a1b2_0.conda"
+    ],
+    [
+      12129203,
+      "icu-75.1-he02047a_0.conda"
+    ],
+    [
+      11438995,
+      "perl-5.44.0-1_h7cc23a3_perl5.conda"
+    ],
+    [
+      10890019,
+      "git-2.46.0-pl5321hb5640b7_0.conda"
+    ],
+    [
+      8773616,
+      "libpython-3.12.15-h0c77377_1_cpython.conda"
+    ],
+    [
+      6615436,
+      "libstdcxx-16.2.0-h934c35e_7.conda"
+    ],
+    [
+      3566806,
+      "tk-8.6.13-noxft_h1df4ec4_4.conda"
+    ],
+    [
+      3195299,
+      "openssl-3.6.5-h781a0a9_0.conda"
+    ],
+    [
+      2528180,
+      "libgfortran5-16.2.0-h6b99dfc_7.conda"
+    ],
+    [
+      1841526,
+      "python-3.12.15-h5f976f7_1_cpython/lib/python3.12/ensurepip/_bundled/pip-25.0.1-py3-none-any.whl"
+    ],
+    [
+      1394333,
+      "krb5-1.22.2-hbc21106_2.conda"
+    ],
+    [
+      1256460,
+      "pip-25.0.1-pyh8b19718_0.conda"
+    ]
+  ]
+}

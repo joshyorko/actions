@@ -1,0 +1,146 @@
+{
+  "schema_version": 2,
+  "attempt_id": "9a488845-1213-421b-9f37-67d575237e02",
+  "source_sha_claim": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "build_version_claim": "test",
+  "build_claim_verification": "caller supplied; not verified against a retained build manifest",
+  "platform": "Linux",
+  "architecture": "x86_64",
+  "status": "PASS",
+  "consumer_execution": "Runtime action executed by the packaged Runtime worker",
+  "test_harness_sqlite_writes": [
+    "seed stale reservation fixture only"
+  ],
+  "recovery_fixture_limit": "stale persisted reservation seeded by harness; process crash not simulated",
+  "worker_dependencies": {
+    "actions-core": "1.0.2 candidate wheel installed by post-install",
+    "actions-work-items": "0.4.4"
+  },
+  "checks": [
+    "consumer_action_reserves_input_and_releases_completed_with_parent_linked_output",
+    "consumer_action_releases_failed_with_error_details_then_fails_run",
+    "consumer_action_recovers_seeded_stale_reservation_retries_and_completes",
+    "runtime_restart_state_and_output_persistence",
+    "consumer_action_verified_installed_actions_core_candidate_wheel"
+  ],
+  "cases": [
+    {
+      "kind": "frozen",
+      "executable_sha256": "92cc1ec0e05052a2e2b93aa448684bee2f4b37c92a44d60b0f361dda11b6bf9a",
+      "status": "PASS",
+      "consumer_actions": [
+        {
+          "scenario": "success",
+          "http_status": 200
+        },
+        {
+          "scenario": "failure",
+          "http_status": 500
+        },
+        {
+          "scenario": "recovery",
+          "http_status": 200
+        }
+      ],
+      "actions_core_installation": {
+        "actions_core_version": "1.0.2",
+        "actions_module_owned_by_distribution": true,
+        "install_source_matches_candidate": true,
+        "wheel_sha256": "c8f21f066fb3c7694a1d25f95f66a43256c88a248d4c5d7aa3b323ae2625b650",
+        "pip_report_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      "api_state_readbacks": {
+        "after_success": {
+          "input_state": "COMPLETED",
+          "output_state": "PENDING",
+          "output_queue": "default_output",
+          "parent_link_verified": true
+        },
+        "after_failure": {
+          "input_state": "FAILED",
+          "error_code": "SYNTHETIC_PROCESSOR_FAILURE",
+          "error_message": "synthetic consumer failure"
+        },
+        "after_recovery": {
+          "input_state": "COMPLETED",
+          "output_state": "PENDING",
+          "parent_link_verified": true
+        },
+        "after_restart": {
+          "success_state": "COMPLETED",
+          "failure_state": "FAILED",
+          "recovery_state": "COMPLETED",
+          "stats": {
+            "queue_name": "default",
+            "pending": 0,
+            "in_progress": 0,
+            "done": 2,
+            "failed": 1,
+            "total": 3
+          },
+          "output_parent_links_verified": true
+        }
+      }
+    },
+    {
+      "kind": "go-wrapper",
+      "executable_sha256": "7d8027781680651fcd5004fa1f5793def89d8ab56ff3b52af4d8ec044ddd74d2",
+      "status": "PASS",
+      "consumer_actions": [
+        {
+          "scenario": "success",
+          "http_status": 200
+        },
+        {
+          "scenario": "failure",
+          "http_status": 500
+        },
+        {
+          "scenario": "recovery",
+          "http_status": 200
+        }
+      ],
+      "actions_core_installation": {
+        "actions_core_version": "1.0.2",
+        "actions_module_owned_by_distribution": true,
+        "install_source_matches_candidate": true,
+        "wheel_sha256": "c8f21f066fb3c7694a1d25f95f66a43256c88a248d4c5d7aa3b323ae2625b650",
+        "pip_report_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      "api_state_readbacks": {
+        "after_success": {
+          "input_state": "COMPLETED",
+          "output_state": "PENDING",
+          "output_queue": "default_output",
+          "parent_link_verified": true
+        },
+        "after_failure": {
+          "input_state": "FAILED",
+          "error_code": "SYNTHETIC_PROCESSOR_FAILURE",
+          "error_message": "synthetic consumer failure"
+        },
+        "after_recovery": {
+          "input_state": "COMPLETED",
+          "output_state": "PENDING",
+          "parent_link_verified": true
+        },
+        "after_restart": {
+          "success_state": "COMPLETED",
+          "failure_state": "FAILED",
+          "recovery_state": "COMPLETED",
+          "stats": {
+            "queue_name": "default",
+            "pending": 0,
+            "in_progress": 0,
+            "done": 2,
+            "failed": 1,
+            "total": 3
+          },
+          "output_parent_links_verified": true
+        }
+      }
+    }
+  ],
+  "actions_core_wheel_sha256": "c8f21f066fb3c7694a1d25f95f66a43256c88a248d4c5d7aa3b323ae2625b650",
+  "pytest_output": "2 passed, 0 failed"
+}

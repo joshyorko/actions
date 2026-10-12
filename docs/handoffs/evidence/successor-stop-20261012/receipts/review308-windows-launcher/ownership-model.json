@@ -1,0 +1,72 @@
+{
+  "head": "d358f9c2b41b9575a286e6a98cacf7425d694ea6",
+  "test_source_sha256": "462e73e44b0cff04778404ab331aa4f6a5ac44b6c82ba0c273c03689f4728909",
+  "scope": "AST of exact capture and finally, fake process facts/methods only; no signals/native/real child",
+  "controls": [
+    {
+      "name": "capture_verified_false",
+      "pass": true
+    },
+    {
+      "name": "capture_verified_false_no_process_lookup",
+      "pass": true
+    },
+    {
+      "name": "capture_snapshot_false",
+      "pass": true
+    },
+    {
+      "name": "capture_snapshot_false_no_process_lookup",
+      "pass": true
+    },
+    {
+      "name": "capture_root_changed_after_snapshot",
+      "pass": true
+    },
+    {
+      "name": "capture_root_error",
+      "pass": true
+    },
+    {
+      "name": "capture_valid",
+      "pass": true
+    },
+    {
+      "name": "teardown_same_birth_descendant_authority",
+      "pass": true
+    },
+    {
+      "name": "teardown_same_birth_original_popen_finally",
+      "pass": true
+    },
+    {
+      "name": "teardown_reused_descendant_authority",
+      "pass": true
+    },
+    {
+      "name": "teardown_reused_original_popen_finally",
+      "pass": true
+    },
+    {
+      "name": "teardown_missing_descendant_authority",
+      "pass": true
+    },
+    {
+      "name": "teardown_missing_original_popen_finally",
+      "pass": true
+    },
+    {
+      "name": "teardown_unreadable_descendant_authority",
+      "pass": true
+    },
+    {
+      "name": "teardown_unreadable_original_popen_finally",
+      "pass": true
+    },
+    {
+      "name": "teardown_unreadable_remains_failure",
+      "pass": true
+    }
+  ],
+  "passed": 16
+}

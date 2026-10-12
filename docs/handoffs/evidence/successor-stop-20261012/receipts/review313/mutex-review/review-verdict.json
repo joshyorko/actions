@@ -1,0 +1,36 @@
+{
+  "verdict": "GO_SOURCE",
+  "scope": "bounded mutex-test correction only",
+  "base": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+  "head": "bd4f3f8397dd4563fe767484bf7de15ab99a0123",
+  "tree": "1350dbf96a2fb50df22397f5bb7e35f99e411af6",
+  "changed_files": [
+    "action_server/tests/action_server_tests/common_tests/test_system_mutex.py",
+    "action_server/tests/action_server_tests/robo_utils/test_system_mutex.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "remaining_substantive_findings": [],
+  "resolved_finding": "First revision joined owner release thread before checking owner disposal, hiding early successor entry. Independent real Linux inode-swap mutation passed both first-revision tests. Corrected constructor-success and immediate-entry assertions reject that same exclusion defect before entry.",
+  "evidence": [
+    "early-entry-mutant.json retains original FALSE_PASS for both first-revision test hashes",
+    "early-entry-mutant-current.json rejects mutant for both exact final committed test hashes",
+    "acquisition-error-cleanup.json proves original acquisition error preserved, observed owners disposed or collected and no new live thread",
+    "../../pr313-mutex-final.log records11PASS",
+    "git diff --check base..head passes; worktree clean"
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "proposed_delta_integrated_in_parent_commit": "Check owner disposal immediately when the successor acquires and enters, before joining the release thread. A join can let an early-entry defect wait for owner release and pass later assertions. Keep thread-completion and error assertions as separate cleanup checks.",
+    "durable_learning": "Separate exclusion ordering from thread completion; joining before ordering assertions can conceal an exclusion regression.",
+    "evidence": "Independent first-revision FALSE_PASS and final-revision rejection controls; direct changed test-source inspection.",
+    "stale_or_ambiguous_guidance_removed": "The old strict elapsed lower bound did not prove mutual exclusion; the initial replacement also needed pre-join exclusion assertions.",
+    "remaining_uncertainty": "Hosted exact-head Windows execution and overall#313 process-tree/reader/lease cleanup acceptance remain unverified."
+  },
+  "limitations": [
+    "Source acceptance of test correction only; no production files changed.",
+    "No current full package/native/installed or release acceptance.",
+    "Raw historical Windows job logs remain unavailable403; historical immutable counterexamples establish structural test flaw, not complete diagnosis of reported hosted failure.",
+    "Initial focused11PASS, subsequent transient missing-uuid1FAIL10PASS, and final11PASS logs remain separate evidence."
+  ],
+  "upstream_disposition": "none"
+}

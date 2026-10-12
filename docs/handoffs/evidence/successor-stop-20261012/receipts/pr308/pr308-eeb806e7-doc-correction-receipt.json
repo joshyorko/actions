@@ -1,0 +1,63 @@
+{
+  "base": "b30e220cbc458edaad605d36081c014e2cec190b",
+  "checks": {
+    "changed_files": [
+      "docs/skills/repository-operations.md"
+    ],
+    "git_diff_check": "PASS",
+    "source_blob_identity_to_b30": "PASS4files",
+    "test_rerun": "Not run for documentation-only correction; source-bound b30 affected329PASS and static360PASS retained without new execution claim"
+  },
+  "documentation_improvement": {
+    "actual_mac_cause": "UNKNOWN",
+    "canonical_file": "docs/skills/repository-operations.md",
+    "evidence": "common/process.py existing finalwait try branch and independent review of immutable b30",
+    "verified_correction": "After absolute deadline helper skips new kill; only if final zero-budget wait still fails does it record unreaped wrapper. Final wait can observe an already-exited wrapper successfully."
+  },
+  "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+  "lease_commands_executed": false,
+  "native_attempts_consumed": 0,
+  "native_profile": {
+    "bytes": 1820,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-eeb806e7-v9-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "90f3e23155fab8f33f727f7271f8342e22feb65726d511e86c86d09dd6d3a93d"
+  },
+  "patch": {
+    "bytes": 1019,
+    "path": "/workspace/successor-evidence/pr308/provider-eeb806e7-doc-correction.patch",
+    "sha256": "feebb61b161d552d93d73ae833f95146557b3481ae4e35cec3169c179cb7ddde"
+  },
+  "previous_source_receipt": {
+    "bytes": 7497,
+    "path": "/workspace/successor-evidence/pr308/pr308-b30e220c-mac-provider-source-receipt.json",
+    "sha256": "659221ea3a8c1fd5e179e8904480675767b914730ee6db001ac9716801027629"
+  },
+  "push_by_this_lane": false,
+  "schema": 1,
+  "scope": "One canonical doc-only correction; implementation and tests byte-identical to reviewed b30",
+  "source_files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes": 110032,
+      "path": "/workspace/actions-pr308/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c"
+    },
+    "action_server/src/actions/server/_common/process.py": {
+      "bytes": 31134,
+      "path": "/workspace/actions-pr308/action_server/src/actions/server/_common/process.py",
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": {
+      "bytes": 43540,
+      "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+      "sha256": "37bf41455f2278b0b78078cfed23a5c1dac21eddefae7a9fda15a0687e38f05d"
+    },
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py": {
+      "bytes": 19528,
+      "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+      "sha256": "f8b4627141b68fee7087e7fa555b7a0994e141f52641429368446075b3f9673e"
+    }
+  },
+  "tree": "ce7ae02d6c7db06ceffedf771c6eb365d11517b9",
+  "upstream_disposition": "none",
+  "worktree_clean": true
+}

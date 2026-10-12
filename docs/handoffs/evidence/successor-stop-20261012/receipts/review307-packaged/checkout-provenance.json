@@ -1,0 +1,53 @@
+{
+  "synthetic_commit": "500d640f6ab398efe4bcab6ccfda7a10db49d26e",
+  "synthetic_tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+  "ordered_parents": [
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "23a6be5044f7a9377180f7ec7d33c50ad8c4c364"
+  ],
+  "accepted_source_head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "accepted_source_tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+  "tree_equal": true,
+  "jobs": [
+    {
+      "job_id": 114629721094,
+      "checkout_sha": "500d640f6ab398efe4bcab6ccfda7a10db49d26e",
+      "oauth_generated": true,
+      "checkout_lines": [
+        "2026-10-12T01:45:17.3951359Z [command]/usr/bin/git log -1 --format=%H",
+        "2026-10-12T01:45:17.3978486Z 500d640f6ab398efe4bcab6ccfda7a10db49d26e",
+        "2026-10-12T01:45:17.4397601Z ##[group]Run astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081"
+      ]
+    },
+    {
+      "job_id": 114629721207,
+      "checkout_sha": "500d640f6ab398efe4bcab6ccfda7a10db49d26e",
+      "oauth_generated": true,
+      "checkout_lines": [
+        "2026-10-12T01:46:24.1124884Z [command]/usr/bin/git log -1 --format=%H",
+        "2026-10-12T01:46:24.1147172Z 500d640f6ab398efe4bcab6ccfda7a10db49d26e",
+        "2026-10-12T01:46:24.1367406Z ##[group]Run astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081"
+      ]
+    },
+    {
+      "job_id": 114629721219,
+      "checkout_sha": "500d640f6ab398efe4bcab6ccfda7a10db49d26e",
+      "oauth_generated": true,
+      "checkout_lines": [
+        "2026-10-12T01:45:55.3648861Z [command]\"C:\\Program Files\\Git\\bin\\git.exe\" log -1 --format=%H\r",
+        "2026-10-12T01:45:55.3933622Z 500d640f6ab398efe4bcab6ccfda7a10db49d26e\r",
+        "2026-10-12T01:45:55.4342146Z ##[group]Run astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081\r"
+      ]
+    },
+    {
+      "job_id": 114629721225,
+      "checkout_sha": "500d640f6ab398efe4bcab6ccfda7a10db49d26e",
+      "oauth_generated": true,
+      "checkout_lines": [
+        "2026-10-12T01:54:27.1310300Z [command]/opt/homebrew/bin/git log -1 --format=%H",
+        "2026-10-12T01:54:27.1385880Z 500d640f6ab398efe4bcab6ccfda7a10db49d26e",
+        "2026-10-12T01:54:27.1689310Z ##[group]Run astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081"
+      ]
+    }
+  ]
+}

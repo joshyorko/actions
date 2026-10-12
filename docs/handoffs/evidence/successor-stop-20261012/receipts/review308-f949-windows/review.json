@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "verdict": "PASS_TERMINAL_WINDOWS_CI_EVIDENCE",
+  "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+  "job": 114685788075,
+  "run": 38211281631,
+  "scope": "bounded independent review of once-fetched saved Windows decoded log and terminal24check snapshot; no new fetch/execution/mutation",
+  "log_identity": {
+    "bytes": 747820,
+    "sha256": "680bf188563569775175b2c5217ee8d3b6603bd679875c32675ab97dc9f952c9",
+    "leading_utf8_bom": true,
+    "crlf_count": 5409,
+    "lf_count": 5411,
+    "isolated_lf_count": 2,
+    "utf8_roundtrip_exact": true,
+    "unchanged_saved_artifact": true,
+    "original_HTTP_or_archive_proof": false
+  },
+  "producer": {
+    "commit": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+    "ordered_parents": [
+      "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "f949bef2eeab518ffd34d9e69955938a007f8922"
+    ],
+    "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+    "matches_reviewed_whole_tree": true,
+    "proof": "exact checkout line plus saved authoritative GitAPI commit record; f949 localtree independently matches; producercommitnotlocal andnofetchperformed"
+  },
+  "terminal_job": {
+    "status": "completed",
+    "conclusion": "success",
+    "completed_at": "2026-10-12T06:47:51Z",
+    "recorded_completed_log_retrievals_by_parent": 1,
+    "log_retrievals_by_this_review": 0
+  },
+  "actual_suites": {
+    "source": {
+      "passed": 1430,
+      "skipped": 225,
+      "warnings": 15,
+      "seconds": 328.46
+    },
+    "frozen": {
+      "passed": 131,
+      "skipped": 21,
+      "deselected": 1658,
+      "seconds": 1621.38,
+      "selection": "integration_test and not native_artifact_test"
+    }
+  },
+  "named_test_verification": {
+    "strict_provider": true,
+    "distinct_launcher_child": true,
+    "capture_identity_guards": [
+      "unowned",
+      "root_birth",
+      "child_birth",
+      "owner_exit"
+    ],
+    "reused_child_rejection": true,
+    "typed_failure_diagnostic_direct_and_launcher": true,
+    "held_queued_cancel": true,
+    "unchanged_original_queued_cancel_actual_integration": true,
+    "selected_exact_terminal_pass_events": 11,
+    "all_present_and_passed": true
+  },
+  "whole_head_checks": {
+    "snapshot_observed_at": "2026-10-12T06:51:06.931737+00:00",
+    "count": 24,
+    "all_completed_success": true,
+    "runtime_run_completed_success": true,
+    "scope": "general exact-head CI; a check name such as publish does not itself prove registry publication"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_proposal": "/workspace/successor-evidence/review308-f949-windows/documentation-proposal.md",
+    "durable_learning": "BOM andmixednewlines belongto decodedartifact identity; eventextraction andraw-bytepreservation areseparate proofs",
+    "evidence": "747820exactbytes with5409CRLF/5411LF+BOM and11matchedPASS events",
+    "stale_guidance_removed": "decodedtext provenance doesnotestablishoriginaltransport/archivebytes; uniformlineendingassumptioninvalid",
+    "remaining_uncertainty": "originaltransportbytesunavailable; separatelyadmittednative/releaseholdsretained"
+  },
+  "retained_input_receipts": {
+    "/workspace/successor-evidence/pr308/f949-platform-ci/job-114685788075-safe-receipt.json": {
+      "bytes": 7407,
+      "sha256": "47c5412cfa048091d7f7fefb68356b200c1799c992a27848e7e84563e6ce284f"
+    },
+    "/workspace/successor-evidence/pr308/f949-platform-ci/producer-d663b19f-git-commit.json": {
+      "bytes": 2648,
+      "sha256": "e747c968a3937377c70685ee7977d60e58c9128c9b1888ed85973dc0274c99b5"
+    },
+    "/workspace/successor-evidence/current-checks-f949-terminal.json": {
+      "bytes": 5946,
+      "sha256": "a3b11c18e843fd415331d6a1b224abc96b1c6e9e4e0d26ef93e7686528e85328"
+    },
+    "/workspace/successor-evidence/review308-async-admission/review.json": {
+      "bytes": 6237,
+      "sha256": "e552441dbfceec684352cac518c0711ac3b37dd05eaa0f0ea67606332f7d7e06"
+    }
+  },
+  "evidence_files": {
+    "bounded-verification.json": {
+      "bytes": 3403,
+      "sha256": "05e00268fdc2576e55db1e887e4f3891bd2bac735dd02dd7d9ad70939a75d820"
+    },
+    "documentation-proposal.md": {
+      "bytes": 1642,
+      "sha256": "abd17a9e5f52eaec35ae9976142406d882ff80a35f45fe5dd5fe2be084b092f9"
+    }
+  },
+  "no_tests_run": true,
+  "no_ci_or_lease_mutations": true,
+  "no_new_workers_or_agents": true,
+  "native_baseline_attempts": 0,
+  "source_review_disposition": "previous exactf949 GO_SOURCE preserved; Windowshosted verification nowPASS",
+  "native_and_release_disposition": "HOLD: generalCI/source/frozenPASS doesnotestablishadmittednativeAction/reader/sampler/lease/resource acceptance; Runtime1.0.3/RCC18.19.6 remainHOLD",
+  "historical_mac_rootcause": "UNKNOWN; subsequentgeneralCI success doesnotrecoverdiscardedtypedfacts",
+  "upstream_disposition": "none"
+}

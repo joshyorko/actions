@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "verdict": "GO_SOURCE",
+  "existing_feature_branch_push_disposition": "GO_SOURCE_PUSH",
+  "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+  "parent": "d358f9c2b41b9575a286e6a98cacf7425d694ea6",
+  "scope": "bounded runtime-registration/cancellation source and security review; combined accepted launcher fixture preserved; no native/integration/merge/publication approval",
+  "blocking_findings": [],
+  "independent_verification": {
+    "red": "Immutable d358 persistedRun+heldFuture+realcancelAPI:1expectedFAIL0.18s, acceptedasync0cancelreturnsnot-running beforeworkerentry",
+    "green": "Immutable f949:8newadmissioncontrols+3genuinecommonservice/RunPincontrols=11PASS0FAIL0SKIP0.43s",
+    "gateway": "Fresh run-prepared-package.py ABSOLUTEpackage Poetryrunpythonpytest; own copied exactproductionmodules andtests; per-invocation namespaceoverlay,45s bound; no installs/Action execution",
+    "identity": "OneRuntimeInfo registeredbeforeworkerdispatch/asyncresponse; exactobject passedthrough_run_action and_impl; no secondcreation orreplacement byworker",
+    "cancellation": "Validpre-worker canceledRun persistsCANCELLED viaexistingterminalpath withoutPool.obtain orprocessallocation; finishedRun cancelreturnsnot-running",
+    "failure_cleanup": "SubmissionRuntimeErrorandBaseException retainoriginalexceptionidentity; Future completion includingvalidationretiresonlyexactowner; immediateFuture/stalecallbackcontrols pass",
+    "validation_policy": "RequestValidationError and persistedNOT_RUN policy retained, no poolcalls orregistryentry leak",
+    "lock_callers": "GeneratedAPI invokesrunneroutsideRunsState.semaphore. Identitydiscardacquiressemaphoreonce. Creation lockingunchanged; onlynewcaller submitfailure/FutureDone use discard; scheduler andfakeState retaincreate-onlyAPI",
+    "scope_security": "is_scoped_run,legacycancel,createScopedrejection,on_run_changed AST unchanged; realRunPin/commonService authorization and legacyisolation tests pass. No new imagined commonRunnerbranch orgrant widening",
+    "frozen_test": "test_server_async.py byte-identical d358 SHA91cef6aa358777e433b9af39bf7a42a823141ef897846a517954a68a96e5c92a; sleep/assertions untouched",
+    "accepted_fixture": "d358 launcher tests/helper byte-identical; earlierfixtureGO preserved",
+    "hash_verification": "All19retainedartifact/source/rawLinux/rootcause hashes match",
+    "diff_check": "PASS",
+    "checkout": "cleanexactf949"
+  },
+  "source_sha256": {
+    "action_server/src/actions/server/_actions_run.py": "fb0dd99550245f9a48b37eba6f7848eac6cd51715f20e6f1c0f0e9f531101c73",
+    "action_server/src/actions/server/_runs_state_cache.py": "c6324900bfb991db5539638287fcec6cee9adb030dc07869b841dd32d5949845"
+  },
+  "cause_evidence": {
+    "actual_eeb_linux_raw_log_sha256": "836e3193d596883a0569b40279780729aa3bbacd50e6ca17e559afc8ad611633",
+    "independent_actual_rootcause_receipt_sha256": "35797235277ef86731b5630cd8e378ac09d407ad09a8f08f9630c31f8dddea87",
+    "causal_boundary_supported": "Actual log records acceptedsecondasync response thennoRuntimeInfo cancel lookup beforequeuedworkerentry; ownpersistedgate reproduces oldabsence and corrects registration beforeacceptedreturn",
+    "not_claimed": "exacthostscheduler timing or repairedhostedintegration result"
+  },
+  "writer_retained_validation": {
+    "affected": "373PASS/1SKIP/3nativeDESELECTED10.67s",
+    "configured_static": "361filesPASS"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "current_delta": "new14lines accurately captureearlylegacy admission,sameinstance/prepoolcancel,identitycleanup,validationseparation,scopedcommon authority andheld-executorproof",
+    "exact_proposal": "/workspace/successor-evidence/review308-async-admission/documentation-proposal.md",
+    "durable_learning": "Future donecallbackcanexecute inline; caller must remainoutside non-reentrant stateSemaphore whileattaching lock-takingidentitycleanup",
+    "evidence": "sourcecaller/lockreview andrealimmediate/heldFuture GREEN",
+    "stale_guidance_removed": "worker-entry-only cancellationregistration; proposalclarifies inlinecompletionlocking",
+    "uncertainty": "newrequiredhostCI/frozenintegrationpending; native/lease/controllerunqualified"
+  },
+  "remaining_gates": [
+    "fresh exactf949 requiredplatformCI and frozenasyncintegration",
+    "correctedWindowsfixtureactualCI pending",
+    "historicalMac0546causeUNKNOWN",
+    "full native/controller/hardbounddesign HOLD",
+    "RCCproviderreader/sampler,passivelease,cgroupadmissionunqualified"
+  ],
+  "evidence_files": {
+    "immutable-source-check.json": {
+      "bytes": 1027,
+      "sha256": "b1136613ef740cd49ecbab3df0474ee3400a8fd16e066252086847afa401cfd8"
+    },
+    "source-security-and-receipt-check.json": {
+      "bytes": 3167,
+      "sha256": "0f40f0f3e7bbbd3c7f2957cf70bd6fb3978fbf01610bf9655e8385a0c5a04799"
+    },
+    "replay-commands.json": {
+      "bytes": 1927,
+      "sha256": "b5953ed6b47a1c1fe7d7fa1c51653ff1980f1c8c92855aaffc2b7361e464f7f8"
+    },
+    "red.xml": {
+      "bytes": 1720,
+      "sha256": "0cf309cae7e1492d1dbf70c41c63d83d3f43d419da1e59e7d45390dab6217baf"
+    },
+    "red.log": {
+      "bytes": 1720,
+      "sha256": "e3f7050b53a9b786166599ea13f8c44fad928db719eee7c1d5d827f666b5a0e8"
+    },
+    "green.xml": {
+      "bytes": 2789,
+      "sha256": "0bd6a4e938f292748f597f4538014303952c365399dd615eee2ea33089adbbc5"
+    },
+    "green.log": {
+      "bytes": 189,
+      "sha256": "dba79ceff16bd588883eb5d08b5c747023145df0d2be612b904f78203c02eaa6"
+    },
+    "documentation-proposal.md": {
+      "bytes": 1576,
+      "sha256": "29184d2162c965dbe6895bdc2d73d63627c370ae46b24de076b86d164f60abd9"
+    },
+    "red/conftest.py": {
+      "bytes": 481,
+      "sha256": "ec461abdacf8c9c8726b39ee33b36ba88187da30c55b9c7c53334c1421f4b48c"
+    },
+    "green/conftest.py": {
+      "bytes": 481,
+      "sha256": "ec461abdacf8c9c8726b39ee33b36ba88187da30c55b9c7c53334c1421f4b48c"
+    }
+  },
+  "no_product_edits_by_review": true,
+  "no_real_actions_launched": true,
+  "native_rcc_attempts": 0,
+  "lease_commands": 0,
+  "no_new_workers_or_agents": true,
+  "upstream_disposition": "none"
+}

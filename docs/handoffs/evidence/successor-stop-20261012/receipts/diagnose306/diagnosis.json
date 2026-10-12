@@ -1,0 +1,117 @@
+{
+  "canonical_documentation_delta_proposed": {
+    "anchor": "Windows native startup diagnostics near current lines 3174-3189",
+    "file": "docs/skills/repository-operations.md",
+    "text": "Record PR306's original Windows failure against synthetic checkout 522b7bc6e7e9207dac0c745b49d90907ecdf3080 (tree a31db4434c7bbe69bf572626d2174f64f9ff2f39; ordered parents 6181b044c75de35386f1ae30e71725398b6a7feb and fada8e068f61f6e0e380ec4685eed2f4cf0b9ade). Its five integration failures timed out in the first 90-second ready-port wait before the catalog/history/generation assertions. One instrumented failure had no ready marker at 80/88 seconds and, after the separate 20-second cleanup, one live descendant with execution_stopped=false and descendant_reap_complete=false. A separate caller reported holotree variables at 87.2 seconds. These observations do not establish the readiness cause or connect the child to it; retain startup and cleanup as separate unresolved gates, and qualify the refreshed e2-based head independently."
+  },
+  "current_integration": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "failed_nodes": [
+    "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+    "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+    "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]",
+    "action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart",
+    "action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot"
+  ],
+  "failure_classification": {
+    "cleanup": "Two failing tests emitted incomplete 20-second startup-cleanup notes; the other three cleanup states are UNKNOWN. One instrumented failure snapshot shows wrapper reaped, zero host readers active, one observed live descendant, execution_stopped=false, descendant_reap_complete=false. This does not establish that the child caused the readiness timeout.",
+    "cleanup_is_separate": true,
+    "primary": "five 90-second first-ready-port wait timeouts before the tested catalog/history/generation/drain assertions",
+    "readiness_cause": "UNKNOWN",
+    "semantic_stage": "initial managed package preparation/action collection; no ready port was observed",
+    "trace_site": "ActionServerProcess.start awaits ready-port future; concurrent.futures.TimeoutError at _selftest.py:202"
+  },
+  "failure_log_timestamps_utc": [
+    {
+      "node": "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+      "time": "2026-10-11T10:14:09.5339461Z"
+    },
+    {
+      "node": "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[template]",
+      "time": "2026-10-11T10:15:40.6951404Z"
+    },
+    {
+      "node": "action_server_tests/test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[prompt]",
+      "time": "2026-10-11T10:17:11.7295267Z"
+    },
+    {
+      "node": "action_server_tests/test_cli_mcp_resource_history.py::test_cli_resource_owner_history_across_reload_and_restart",
+      "time": "2026-10-11T10:18:43.0890396Z"
+    },
+    {
+      "node": "action_server_tests/test_cli_successful_generation_drain.py::test_successful_generation_switch_drains_old_run_on_its_source_snapshot",
+      "time": "2026-10-11T10:23:17.3438129Z"
+    }
+  ],
+  "finding": "No specific root cause is proven. The run proves first-readiness timeouts on a 6181+fada synthetic checkout, plus a separate incomplete child cleanup observation. It does not prove a defect in the SQLite savepoint change, a general Windows infrastructure cause, or that the survivor caused the startup timeout.",
+  "instrumented_artifact": {
+    "id": 11699761944,
+    "identity_bound_failed_test": "test_cli_mcp_catalog_rollback.py::test_duplicate_mcp_key_rejects_complete_cli_batch_and_preserves_last_good[resource]",
+    "members": 7,
+    "name": "native-startup-diagnostics-38130109466-1",
+    "post_cleanup": "One live child remained after wrapper reap; no cleanup error was reported by the observer, but execution stop and descendant reap were false.",
+    "sample_offsets_seconds": [
+      80.062,
+      88.109
+    ],
+    "samples": "No stdout lines or exact ready marker on either stream; 18 stderr lines; no delivered progress marks; process-tree snapshots complete at the sample points. Readiness future and RCC-internal reader state are unavailable to the host observer.",
+    "separate_comparator": "A different test, test_cli_live_reload_multi_package::test_failed_watched_reload_keeps_both_packages_and_recovers, passed with ready offset 85.453 seconds; it is not a pass for the five failed cases.",
+    "sha256": "92219c8a6699d6cdd03590f5820ad837552a8ab0b385051e9f68d215a4319d4a",
+    "size_bytes": 6951
+  },
+  "job": {
+    "checkout_is_current_e2_base": false,
+    "conclusion": "failure",
+    "job_id": 114442488607,
+    "name": "build (windows-py3.12-devmode)",
+    "run_id": 38130109466,
+    "runner_checkout_ordered_parents": [
+      "6181b044c75de35386f1ae30e71725398b6a7feb",
+      "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade"
+    ],
+    "runner_checkout_sha": "522b7bc6e7e9207dac0c745b49d90907ecdf3080",
+    "runner_checkout_tree": "a31db4434c7bbe69bf572626d2174f64f9ff2f39"
+  },
+  "limitations": [
+    "This is fresh GitHub connector retrieval of the remotely retained workflow logs/artifact, not recovery of retired local raw log bytes or private RCC data.",
+    "No source edits, check reruns, native builds, RCC/private data access, issue mutations, or infrastructure actions were performed."
+  ],
+  "next_gate_proposal": [
+    "Keep the original failure bound to runner commit 522b7bc6e7e9207dac0c745b49d90907ecdf3080 and preserve its 6181 base; do not relabel it as an e2 run.",
+    "Refresh the existing PR branch normally to e2 before adoption, then qualify the exact new Windows head under repository CI policy.",
+    "If an unchanged first-readiness failure recurs, use one current-head bounded diagnostic run to distinguish RCC environment preparation, readiness-marker delivery, and application startup; keep the existing 90-second readiness and 20-second cleanup budgets.",
+    "Treat startup readiness and descendant cleanup as independent predicates. Do not propose a product fix from the observed survivor or raise the timeout without causal evidence."
+  ],
+  "observed_at_utc": "2026-10-12",
+  "phase_results": {
+    "binary_integration": {
+      "deselected": 1299,
+      "failed": 5,
+      "passed": 126,
+      "result": "fail",
+      "skipped": 19
+    },
+    "post_failure_lint_typecheck_docs": "pass",
+    "source": {
+      "passed": 1154,
+      "result": "pass",
+      "skipped": 142,
+      "total": 1296
+    }
+  },
+  "pr": 306,
+  "pr_head": "fada8e068f61f6e0e380ec4685eed2f4cf0b9ade",
+  "pr_state_at_read": "OPEN_DRAFT_UNSTABLE",
+  "repository": "joshyorko/actions",
+  "schema": "actions-pr306-windows-readonly-diagnostic/v1",
+  "single_call_observation": "One caller holotree-variables duration was reported as 87.2 seconds in the prompt scenario; this duration alone does not prove the source of any timeout or generalize to the other four failures.",
+  "source_comparison_fada_vs_e2": {
+    "diagnostics_difference": "The later e2 test observer is a different, slimmer diagnostics module. The runtime start/RCC/process implementations and failed test body are unchanged. The current source observer retains 80/88-second samples but does not add enough internal phase evidence to resolve this cause.",
+    "diagnostics_module_e2_blob": "4729a7d01cca6d0920fe0e91bc376fa6cf3ed081",
+    "diagnostics_module_fada_blob": "82c78389b43c01d742093593d61c04b2dac0fcbd",
+    "runtime_process_blob": "5c10630a44bdee21f570ebbbd199c188e0837994 (same at both refs)",
+    "runtime_rcc_blob": "1a310407efe52091194e4d121ac7bece15ea5b70 (same at both refs)",
+    "runtime_selftest_blob": "ee3268ae80b424f42f341770afad86bf72ee717f (same at both refs)",
+    "test_cli_mcp_catalog_rollback_blob": "0e1ab11bdd4b52e2d35d06b42dd17996dd082022 (same at both refs)"
+  },
+  "upstream_disposition": "none"
+}

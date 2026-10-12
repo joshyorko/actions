@@ -1,0 +1,40 @@
+{
+  "existing_assertions_preserved": true,
+  "per_function": {
+    "_harness": true,
+    "_process": true,
+    "_observer": true,
+    "test_uncapped_identity_rows_preserve_same_pid_different_births": true,
+    "test_empty_enumeration_and_failed_enumeration_are_distinct": true,
+    "test_unknown_and_reused_observations_are_never_signal_targets": true,
+    "test_invalid_identity_is_rejected_without_normalizing_unknown": true,
+    "test_attachment_preserves_primary_object_and_legacy_outputs": true,
+    "_transport": true,
+    "_wire_result": true,
+    "test_existing_result_transport_attaches_actual_metadata": true,
+    "test_default_transport_neither_requests_nor_attaches_metadata": true,
+    "test_existing_wait_events_and_echild_are_observations_not_invented_reaps": true,
+    "test_wait_timeout_keeps_primary_cleanup_error_and_unavailable_echild": true,
+    "test_wait_pid_alone_cannot_match_a_stale_singleton_birth_capture": true,
+    "test_actual_supervisor_wires_observer_only_when_requested": true,
+    "test_raw_wait_error_retains_original_exception_identity": true,
+    "test_serialized_poison_becomes_unavailable_and_preserves_result": true,
+    "test_rejected_metadata_attachment_does_not_replace_wait_primary": true,
+    "test_failed_observer_serialization_does_not_replace_legacy_result": true,
+    "test_genuine_supervisor_failure_has_explicitly_unavailable_metadata": true,
+    "_absent_child_evidence": true,
+    "test_schema1_rejects_every_unwitnessed_wait_birth_assertion": true,
+    "test_known_census_identity_requires_matching_observed_pid": true,
+    "test_disappearance_after_birth_read_preserves_absent_census_without_reap": true,
+    "test_schema1_in_memory_poison_cannot_claim_scoped_reaping": true
+  },
+  "fake_wait_os_calls": [
+    238,
+    261,
+    410,
+    445,
+    520
+  ],
+  "count": 5,
+  "new_skip_calls_or_markers": false
+}

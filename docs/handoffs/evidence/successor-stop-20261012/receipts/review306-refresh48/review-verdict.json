@@ -1,0 +1,81 @@
+{
+  "verdict": "GO_REFRESH_SOURCE",
+  "scope": "exact ordered-parent refresh composition; no whole-issue, native-readiness cause or new CI acceptance",
+  "head": "eb0df4f97f390b413e364fe68364b81a65663f02",
+  "tree": "f8e4e760733f6b16f6dcc66ff057d1f2fad87bc2",
+  "ordered_parents": [
+    "b3defc66e7e127b071511f0ac1940847054dcaea",
+    "48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+  ],
+  "new_target": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+  "complete_target_delta": [
+    "action_server/src/actions/server/_database.py",
+    "action_server/tests/action_server_tests/mcp/test_resource_history.py",
+    "action_server/tests/action_server_tests/native_startup_diagnostics.py",
+    "action_server/tests/action_server_tests/test_cli_mcp_resource_history.py",
+    "action_server/tests/action_server_tests/test_database.py",
+    "action_server/tests/action_server_tests/test_native_startup_diagnostics.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "all6_non_doc_target_delta_blobs_and_modes_exact_b3def": true,
+  "every_other_non_doc_entry_exact_target48": true,
+  "complete_non_doc_tree_composition_verified": true,
+  "all_added_documentation_blocks_of_both_parents_retained": [
+    {
+      "parent": "b3defc66e7e127b071511f0ac1940847054dcaea",
+      "all_added_doc_blocks_retained_exactly": true,
+      "verified_block_count": 4
+    },
+    {
+      "parent": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "all_added_doc_blocks_retained_exactly": true,
+      "verified_block_count": 6
+    }
+  ],
+  "remaining_refresh_findings": [],
+  "scoped_sqlite_evidence": {
+    "file": "/workspace/successor-evidence/pr306-refreshed48-sqlite.log",
+    "sha256": "6bba190a933e3c80e0c16cb0a982ac5077bc13732b873140ae0d22428f0c89eb",
+    "result": "16 passed in6.39s",
+    "classification": "Parent execution log independently read; focused SQLite evidence only."
+  },
+  "historical_ci": {
+    "b3def": "Parent reports20successful checks including Windows before target advancement; retained at exactb3def source, not carried as new-head CI.",
+    "original6181": "Original Windows failure remains failed; no raw historical readiness cause inferred from later success."
+  },
+  "new_exact_head_ci_required": true,
+  "whole_issue_acceptance": "NOT_CLAIMED",
+  "raw_historical_native_readiness_cause": "UNKNOWN",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "insertion_point": "Live pull-request base identity, after the paragraph beginning For an ordinary stacked-branch refresh",
+    "disposition": "REUSE_PREVIOUS_REFRESH_SCOPE_PROPOSAL_ONCE",
+    "previous_proposal": "/workspace/successor-evidence/review313-refresh48/documentation-proposal.json",
+    "exact_delta": "Inventory the complete diff from the live target before describing the refreshed PR's scope. Retained feature changes can still add production code and tests to that target even when the refresh resolved only documentation.",
+    "durable_learning": "Conflict-resolution scope does not define the complete union: this conflict-free refresh carries six feature source/test blobs into the new target. Retain existing fresh-CI guidance and add the proposed target-diff inventory clarification once.",
+    "evidence": [
+      "immutable-composition.json independently validates every tree entry against ordered parents[b3defc66,48eeaf]",
+      "Six non-documentation target-delta blobs and modes are exactb3def; all others are exact48",
+      "All four added documentation blocks fromb3def and six from48 are retained exactly"
+    ],
+    "stale_or_ambiguous_guidance_removed": "Avoid labeling a refresh's complete scope from the presence or absence of merge conflicts. Do not duplicate the already-proposed clarification or repeat the existing fresh-CI requirement as a new rule.",
+    "remaining_uncertainty": "Fresh exacteb0 CI remains pending; priorb3def CI and original6181 Windows failure remain separate historical evidence."
+  },
+  "evidence": [
+    "immutable-composition.json",
+    "documentation-proposal.json",
+    "/workspace/successor-evidence/pr306-refreshed48-sqlite.log"
+  ],
+  "checks": {
+    "git_diff_check": "PASS",
+    "worktree": "CLEAN",
+    "source_instructions": "AGENTS.md and repository SKILL.md exact same SHA256 as already-read PR307 guidance"
+  },
+  "limitations": [
+    "This gate verifies the composition of the new combined tree; retained blob identity does not replace fresh exact-head CI.",
+    "Production SAVEPOINT adjustment is retained exactly fromb3def; its nesting-count increment follows successful SAVEPOINT acquisition.",
+    "Resource-history and startup diagnostic test changes are retained without new native execution or historical diagnosis.",
+    "No git, native, build, host-install, external-app, issue, publication, infrastructure or permission mutation performed in this lane."
+  ],
+  "upstream_disposition": "none"
+}

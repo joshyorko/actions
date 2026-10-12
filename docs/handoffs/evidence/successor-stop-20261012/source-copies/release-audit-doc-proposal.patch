@@ -1,0 +1,31 @@
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index e597f999..168af435 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -937,6 +937,26 @@ Actions assets, and record clean install and upgrade proof on each supported
+ Cask platform. A tap source change or green Actions release does not prove
+ consumer installation. The current 1.0.1 Cask/hash match is only a baseline;
+ Runtime 1.0.3 native assets and its Cask consumer proof remain pending.
++
++The Actions producer and Homebrew consumer are separate workflows. At the
++reviewed Runtime source `9760d5ec44876558c4941c4c3190abc8d92d14a1`,
++`.github/workflows/_gen_workflows.py` generates the normal native release and
++recovery workflows to publish on `joshyorko/actions` GitHub Releases; the
++generated `actions_runtime_binary_release.yml` and
++`actions_runtime_recovery.yml` contain no Homebrew dispatch and no native
++S3/CDN upload. The live community tap instead exposes `Tap Manual` inputs
++`action` and `package_id` (`action=ci` then `action=release` for
++`package_id=action-server`) and `Tap Auto Update` input `slot_id` (the
++`action-server-daily` slot). Its package registry resolves stable
++`actions-runtime-*` releases from `joshyorko/actions`, verifies the upstream
++asset digests, then produces the tap release and Cask mirror. These contracts
++identify how to deliver an update; they do not show a dispatch or completed
++consumer run. For #211, retain the actual source release/tag, workflow run IDs,
++published asset digests, generated Cask revision and clean install/upgrade
++results for Linux x86_64 and macOS arm64. At tap `main` commit
++`47f5d9a84d101d79348689d4dde49a5561b13d2e` on 2026-10-12,
++`Casks/action-server.rb` was still version `1.0.1`; a `1.0.3` producer or green
++PR workflow alone does not satisfy the distribution gate.
+ The normal binary job creates a published release before downloading/uploading
+ the assets: `Roang-zero1/github-create-release-action@57eb9bdce7a964e48788b9e78b5ac766cb684803`
+ defaults to `create_draft=false` and `update_existing=false`. It then uploads

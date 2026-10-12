@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-10-12T06:37:50.722667+00:00",
+  "command": [
+    "python",
+    "/workspace/successor-evidence/run-prepared-package.py",
+    "/workspace/successor-evidence/pr308-f949-packaged/installed-minimum-core-consumer",
+    "poetry",
+    "run",
+    "python",
+    "-m",
+    "pip",
+    "check"
+  ],
+  "PIP_CACHE_DIR": "/workspace/successor-evidence/pr308-f949-packaged/installed-minimum-core-consumer/pip-cache",
+  "cache_mode": "0o700",
+  "cache_uid": 1000,
+  "current_uid": 1000,
+  "exit_code": 0,
+  "output_sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+  "bytes": 30,
+  "package_install_performed": false
+}

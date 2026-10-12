@@ -1,0 +1,146 @@
+{
+  "verdict": "GO_INSTALLED_MINIMUM_CORE_OAUTH_TEMPLATE_IDLE_SCOPED",
+  "runtime_source": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "artifact_id": 11725299041,
+  "consumer_root": "/workspace/successor-evidence/pr308-packaged/installed-minimum-core-consumer",
+  "consumer_lock": {
+    "path": "/workspace/successor-evidence/pr308-packaged/installed-minimum-core-consumer/poetry.lock",
+    "sha256": "85916218adad370ef01654b176f9c2f80c50975214b00ee71038a35257dd0ebe",
+    "bytes": 308309
+  },
+  "dependencies": [
+    {
+      "name": "actions-core",
+      "version": "1.0.2",
+      "wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+      "installed_python_members_exact": 47,
+      "default_public_lock_and_no_direct_url": true
+    },
+    {
+      "name": "actions-http-helper",
+      "version": "1.0.3",
+      "wheel_sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "installed_python_members_exact": 2,
+      "default_public_lock_and_no_direct_url": true
+    },
+    {
+      "name": "actions-runtime",
+      "version": "1.0.3",
+      "wheel_sha256": "db0f4f60f4cd46c3ac8f11dc824582e5d4b77d651bfd66e9d94b006b4dea0be4",
+      "installed_python_members_exact": 203,
+      "default_public_lock_and_no_direct_url": false
+    }
+  ],
+  "commands": [
+    {
+      "label": "installed-inventory",
+      "exit_code": 0,
+      "path": "/workspace/successor-evidence/pr308-packaged/installed-inventory.log",
+      "sha256": "d5af9fb6aee96e8c1f7760749dfed0370ae3147ac2a0be02d61741e7c598895a",
+      "bytes": 346
+    },
+    {
+      "label": "installed-oauth",
+      "exit_code": 0,
+      "path": "/workspace/successor-evidence/pr308-packaged/installed-oauth.log",
+      "sha256": "fb8bec9fc58f3d954b791ced932a7ded6b6f9cc0a34884363a5d688f90a75235",
+      "bytes": 98
+    },
+    {
+      "label": "installed-pip-check",
+      "exit_code": 0,
+      "path": "/workspace/successor-evidence/pr308-packaged/installed-pip-check.log",
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+      "bytes": 30
+    },
+    {
+      "label": "installed-real-template",
+      "exit_code": 0,
+      "path": "/workspace/successor-evidence/pr308-packaged/installed-real-template.log",
+      "sha256": "ac9c15ec7da459eb47798a9f6a0a2e6bee53501df0e69c9b8f4e1972214084d7",
+      "bytes": 252
+    },
+    {
+      "label": "installed-idle-startup",
+      "exit_code": 0,
+      "path": "/workspace/successor-evidence/pr308-packaged/installed-idle-startup.log",
+      "sha256": "e8068e310c7bdc7fa25b4cf4fd6cf02ece3888263617750cb8cf634e4da41cf4",
+      "bytes": 1388
+    }
+  ],
+  "template": {
+    "path": "/workspace/successor-evidence/pr308-packaged/installed-minimum-core-consumer/real-private-template/oauth2_config.yaml",
+    "sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+    "bytes": 532,
+    "mode": "0o600",
+    "exact_tracked_public_template": true
+  },
+  "startup": {
+    "scope": "installed Linux cp312 idle CLI startup only",
+    "runtime_source": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+    "runtime_version": "1.0.3",
+    "public_core_helper_versions": {
+      "core": "1.0.2",
+      "helper": "1.0.3"
+    },
+    "visible_headroom_bytes": 2230697984,
+    "self_cgroup_binding": "UNQUALIFIED; no managed Action admission inferred",
+    "managed_actions": 0,
+    "rcc_feedback": "Normal CLI may launch shipped18.19.3 feedback metric; no environment/Action acquisition",
+    "startup": "HTTP_READY",
+    "http": [
+      {
+        "path": "/openapi.json",
+        "status": 200,
+        "body_sha256": "18239f98106aff52e7b40b05f11c5312e6376bc64f7b728614e2e191c8befd35"
+      },
+      {
+        "path": "/api/work-items/stats",
+        "authenticated": false,
+        "status": 403,
+        "body_sha256": "9a1ef7ec2858c93d364dbe0e455d321ed30f0ad6e706782ebe00aa6653e1462f"
+      },
+      {
+        "path": "/api/work-items/stats",
+        "authenticated": true,
+        "status": 200,
+        "body_sha256": "85b9fcdd3a8c9779471783a64c89adcf174f2bc79c6de1b9321e8cbe496a6fdd"
+      }
+    ],
+    "cleanup": {
+      "wrapper_reaped": true,
+      "live_descendant_pids": [],
+      "zombie_descendant_pids": [],
+      "errors": [],
+      "descendant_snapshot_complete": true
+    },
+    "owner": {
+      "pid": 42188,
+      "create_time": 1791778595.95
+    },
+    "elapsed_seconds": 2.312298769998961,
+    "status": "PASS_IDLE_STARTUP_SCOPED"
+  },
+  "poststartup_modes": {
+    ".": "0o700",
+    "datadir": "0o700",
+    "actions-home": "0o750",
+    "robots-home": "0o700",
+    "tmp": "0o700",
+    "stdout.log": "0o600",
+    "stderr.log": "0o600"
+  },
+  "inputs": [
+    {
+      "path": "/workspace/successor-evidence/pr308-packaged/installed-verification.json",
+      "sha256": "8deb26721227cbf21e4d289ee7c748198f33cabb7745b52d360372d9064fa753",
+      "bytes": 2821
+    },
+    {
+      "path": "/workspace/successor-evidence/pr308-packaged/installed-command-receipt.json",
+      "sha256": "fc128ea68a2f5d477dc6ccd644333062575ff49e9dc1cd45c49e6c0616a4759b",
+      "bytes": 2637
+    }
+  ],
+  "bounds": "No reviewer CLI, RCC, OAuth rerun, installs or downloads. Prior commands are verified receipts. Idle uses synthetic API key/no sync/min-processes0; captured cleanup only, not uncapped census/readers/leases/native/MCP/managed Action/publication."
+}

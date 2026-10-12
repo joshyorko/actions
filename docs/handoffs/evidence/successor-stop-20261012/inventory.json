@@ -1,0 +1,1097 @@
+{
+  "schema": 1,
+  "observed_at": "2026-10-12T08:12:14.917746+00:00",
+  "repository": "joshyorko/actions",
+  "handoff_branch": "handoff/actions-swarm-mk3-wave8-20261010",
+  "handoff_predecessor": "62bab755c87b46ff8140ec8ac17bd377b47dc258",
+  "authoritative_predecessor": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+  "branches": [
+    {
+      "ref": "refs/heads/acmm/actions-governance",
+      "sha": "ee7e8186d9748e720d83a15fc17f672527b34fd7"
+    },
+    {
+      "ref": "refs/heads/acmm/actions-quality-observability",
+      "sha": "2e2e31c803770a28faca4a6129c3e0fdcf793890"
+    },
+    {
+      "ref": "refs/heads/automatic-brew",
+      "sha": "85b37e33473ecd7ee89666115774c9858561a937"
+    },
+    {
+      "ref": "refs/heads/bugfix/set-secret-api-oauth",
+      "sha": "62efd17482fc746f6293a8ed18f7ed0c5c3241c6"
+    },
+    {
+      "ref": "refs/heads/checkpoint/cloud-handoff-21038a5b3f-20261010",
+      "sha": "0a05b9bce5c3680d8d3c44b3350f8004c0cefd1b"
+    },
+    {
+      "ref": "refs/heads/checkpoint/cloud-handoff-2abcea4fc7-20261010",
+      "sha": "d32241bbecb1fe09235f05bd1934b98163d3f844"
+    },
+    {
+      "ref": "refs/heads/checkpoint/cloud-handoff-41862a1ff0-20261010",
+      "sha": "15abbada6a24d4259fe532cbc36445f62ba86561"
+    },
+    {
+      "ref": "refs/heads/checkpoint/cloud-handoff-5420dc41db-20261010",
+      "sha": "244b5604bd1d67db1cab73c31b38ad594c0cd1c5"
+    },
+    {
+      "ref": "refs/heads/checkpoint/cloud-handoff-874b304675-20261010",
+      "sha": "2ef9023698e4ec6c906fb98d266516cfe817586d"
+    },
+    {
+      "ref": "refs/heads/checkpoint/cloud-handoff-a150ec1508-20261010",
+      "sha": "1d8722f1ff56ff8cb230cea189aed728fd559cca"
+    },
+    {
+      "ref": "refs/heads/checkpoint/cloud-handoff-a783f2f83b-20261010",
+      "sha": "1010659b3342a6ff70cc46c2b53ea75694bd1d03"
+    },
+    {
+      "ref": "refs/heads/checkpoint/cloud-handoff-ca9c74aba3-20261010",
+      "sha": "734795cb9ea3d1e7daeedc9efbd2a0345ed990ab"
+    },
+    {
+      "ref": "refs/heads/checkpoint/rcc-inspection-preparation-20261010",
+      "sha": "7eca36abce160b68f616eab9b7fdc9c4e7f2b053"
+    },
+    {
+      "ref": "refs/heads/checkpoint/rcc-inspection-unreviewed-20261010",
+      "sha": "4cfd8edd5c97b4eb14db0635595d50dd9b89b091"
+    },
+    {
+      "ref": "refs/heads/chore/0.19.0",
+      "sha": "cb8eae681a1fcad2ce3f5a2b3a9e3e9ce3091a82"
+    },
+    {
+      "ref": "refs/heads/chore/community-product-surface-cleanup",
+      "sha": "2c746ab6a7a689a6ad8d45e25ba72014212d8dfe"
+    },
+    {
+      "ref": "refs/heads/chore/update-versions",
+      "sha": "a83c3dcdbbabf12038667d1c274e9e812c31dc86"
+    },
+    {
+      "ref": "refs/heads/codex/actions-work-items-0.3.0-release",
+      "sha": "6324f17c3e6a400c608600b3c6ae04e1b739a837"
+    },
+    {
+      "ref": "refs/heads/codex/actions-work-items-0.4.0",
+      "sha": "b72a6dab273576d9311b88f03212c4c3c84861c3"
+    },
+    {
+      "ref": "refs/heads/codex/actions-work-items-0.4.1-direct-file",
+      "sha": "f691e6e4c110218513059383120500da2a69a795"
+    },
+    {
+      "ref": "refs/heads/codex/work-items-readme-model",
+      "sha": "b03ea27d13fe4dec2f47eb92510704a7800dc2b3"
+    },
+    {
+      "ref": "refs/heads/community",
+      "sha": "a70993fafc99a9f94041485542d5a720797ca394"
+    },
+    {
+      "ref": "refs/heads/convergence/actions-full-graph-20261008",
+      "sha": "d07f79b355f976f97948720474fd050d0a32ea16"
+    },
+    {
+      "ref": "refs/heads/dependabot/npm_and_yarn/action_server/frontend/npm_and_yarn-af93afb32e",
+      "sha": "8d3b9f23d39003997a9a945ea008482bcd149e7b"
+    },
+    {
+      "ref": "refs/heads/dependabot/pip/actions/pip-1099dc578e",
+      "sha": "f5c881f09e3ea5ad07be69f4c59599abdc41bd56"
+    },
+    {
+      "ref": "refs/heads/devsy/coordinator-20261009",
+      "sha": "655b044a7bbe464eeebccb1a61a2833992e12d8a"
+    },
+    {
+      "ref": "refs/heads/devsy/native-auth-acceptance-20261009",
+      "sha": "a63f714baf6bedb22dbadb65017c0a0a658e892e"
+    },
+    {
+      "ref": "refs/heads/devsy/native-distribution-20261009",
+      "sha": "29decdcb4ac6712f278b61e3722e0ad9217c60ba"
+    },
+    {
+      "ref": "refs/heads/devsy/rcc-generation-lifecycle-20261009",
+      "sha": "ab74fedc658421d368dd1b1158b39973962ddd3c"
+    },
+    {
+      "ref": "refs/heads/devsy/rcc-local-acceptance-20261009",
+      "sha": "6a0db09d2623d084ae0de43f7ec7737bd28ea157"
+    },
+    {
+      "ref": "refs/heads/devsy/rcc-narrow-acceptance-20261010",
+      "sha": "969219e7aa398f61b11466a2dc16ac3143568ff5"
+    },
+    {
+      "ref": "refs/heads/devsy/workitems-consumer-acceptance-20261009",
+      "sha": "524e503b384a56bf854326c1f7f03833c60e6c53"
+    },
+    {
+      "ref": "refs/heads/docs/api-source-links-20261009",
+      "sha": "25026da07d6d8cb01ef2badbc21c059380bf6060"
+    },
+    {
+      "ref": "refs/heads/docs/issue-100-authoring-decision-20261009",
+      "sha": "a7eec7b1644183dc81e37e1ed9b7be20fa20c87e"
+    },
+    {
+      "ref": "refs/heads/docs/runtime-1.0.3-release-notes-20261009",
+      "sha": "526c8cf4736213b85e8aeda95e9837cc8cd80096"
+    },
+    {
+      "ref": "refs/heads/docs/upstream-reporting-policy-20261009",
+      "sha": "57399b60496b98fea020f26e576d47bcb0d440bf"
+    },
+    {
+      "ref": "refs/heads/evidence/issue-80-accepted-source-1a6e4829",
+      "sha": "1a6e482988fdc87a37ff30f6ef85e2b1815b559e"
+    },
+    {
+      "ref": "refs/heads/evidence/issue-96-direction-a-d8f0244f",
+      "sha": "430eec3645b898c95bd469a825b81e45857d26ee"
+    },
+    {
+      "ref": "refs/heads/evidence/issue-96-direction-b-112eb5e3-r2",
+      "sha": "1eabc6de33f42d48d847d538505639d8c0ce304b"
+    },
+    {
+      "ref": "refs/heads/evidence/issue-96-direction-b-7171d899",
+      "sha": "c0ee6c63d0ca09cae07bc2e9f5e2814b173ccca0"
+    },
+    {
+      "ref": "refs/heads/evidence/pr-114-visual-receipts",
+      "sha": "a7a01392c28c41ae40d6be561652894be18e99c3"
+    },
+    {
+      "ref": "refs/heads/factory/actions-runtime-release-convergence",
+      "sha": "f24effb18bdc9328ec929102e04af9e827bbe747"
+    },
+    {
+      "ref": "refs/heads/factory/actions-runtime-release-hardening",
+      "sha": "5c8738c292baca534ec9653375c40086714b4832"
+    },
+    {
+      "ref": "refs/heads/factory/issue-101-unsigned-recovery",
+      "sha": "a086c56a91c82ef7fee0c16383a8e103e2014d02"
+    },
+    {
+      "ref": "refs/heads/factory/issue-102-prerequisites",
+      "sha": "c2b58675cbcaff4461fd5f2bfd6c421f6531c37a"
+    },
+    {
+      "ref": "refs/heads/factory/issue-134-rcc-runtime-adapter",
+      "sha": "1a556431f2be605d2b4b928e0596eb43718752d7"
+    },
+    {
+      "ref": "refs/heads/factory/issue-148-safe-staging",
+      "sha": "8c30779fd284c22c3fc978ca0850d8faacc43f94"
+    },
+    {
+      "ref": "refs/heads/factory/issue-153-origin-policy",
+      "sha": "3c5d9c82999e4d672c8d0ee8ba51733062bbf142"
+    },
+    {
+      "ref": "refs/heads/factory/issue-83-action-run-ownership",
+      "sha": "345aa907b3d62e8ca98bfb981e38e8e178754e7c"
+    },
+    {
+      "ref": "refs/heads/factory/issue-84-shared-database",
+      "sha": "ba8fabf4a176776a115710b9a9932b91919084c0"
+    },
+    {
+      "ref": "refs/heads/factory/issue-86-artifact-storage",
+      "sha": "5bf35d2be87ff9e02f736a13dc28dd21898b9d35"
+    },
+    {
+      "ref": "refs/heads/factory/issue-88-mcp-gateway-metadata",
+      "sha": "f33f427df2410151c6a1388176677d01fea060ab"
+    },
+    {
+      "ref": "refs/heads/factory/issue-89-catalog-revisions",
+      "sha": "acaf09833cb7b5e8f37b6f532efac088ebf2ac63"
+    },
+    {
+      "ref": "refs/heads/factory/issue-94-frontend-topology",
+      "sha": "014f0591c315c5b0f3bd80f8c4d63030663537f5"
+    },
+    {
+      "ref": "refs/heads/factory/issue-95-runtime-data-access",
+      "sha": "eb817cdc5481529cbe0e6e976c13725088d966db"
+    },
+    {
+      "ref": "refs/heads/factory/issue-96-direction-a-instrument-console",
+      "sha": "d8f0244f437d8b26001c829e515117f838884e11"
+    },
+    {
+      "ref": "refs/heads/factory/issue-96-direction-b-calm-workbench",
+      "sha": "112eb5e38fe2dd88863501878f5fb75af6fa6cff"
+    },
+    {
+      "ref": "refs/heads/factory/issue-96-product-evidence-harness",
+      "sha": "3c215a89bc14bfe00b4cd0e3936bdb451d0a1e30"
+    },
+    {
+      "ref": "refs/heads/factory/issue-96-runtime-shell",
+      "sha": "b8f1ba19434e38d98cec997fdc95377d01b767da"
+    },
+    {
+      "ref": "refs/heads/factory/issue-97-ui-system",
+      "sha": "318c0996baa0e969309506005592c1679a9fc86b"
+    },
+    {
+      "ref": "refs/heads/factory/issue-98-frontend-build",
+      "sha": "d666f57dd21ae4964af54fb9083cf7bfce46ce48"
+    },
+    {
+      "ref": "refs/heads/factory/runtime-1.0.0-recovery-run-fix",
+      "sha": "1e85622775695b0d0f0050372a066c734c68ed9c"
+    },
+    {
+      "ref": "refs/heads/factory/runtime-1.0.0-recovery-run2-fix",
+      "sha": "3abce8d6d17b987d33d8d9b64f644c142402e61d"
+    },
+    {
+      "ref": "refs/heads/factory/runtime-1.0.0-tag-recovery",
+      "sha": "1b3ba27ca3bb1f820a0400f6f9843080134d08fa"
+    },
+    {
+      "ref": "refs/heads/feat/actions-clean-break-core-runtime",
+      "sha": "dc87e632102de03152777fc7db2c6be2b5f3ad9a"
+    },
+    {
+      "ref": "refs/heads/feat/add-sema4-http-library",
+      "sha": "5a4326b8d1a88982464c0eecfbac74705e52e3b0"
+    },
+    {
+      "ref": "refs/heads/feat/canvas-100b-typescript-roundtrip-20261010",
+      "sha": "c734b9f850ec7b6bea8561b70312aca5c93dd6c1"
+    },
+    {
+      "ref": "refs/heads/feat/canvas-template-20261010",
+      "sha": "1299cc4bb6586f467d36ca124faaaaa77362695f"
+    },
+    {
+      "ref": "refs/heads/feat/community-robots-workitems",
+      "sha": "2e0b1479892b77d159da7866f917b2b768e965c5"
+    },
+    {
+      "ref": "refs/heads/feat/controlled-v2-compilation-20261010",
+      "sha": "01ca087a8cb58798cbce729a107c55f4dab75cf1"
+    },
+    {
+      "ref": "refs/heads/feat/deployment-values-20261010",
+      "sha": "58a7dcabb94ce7012f99446902bd4e5128cadb79"
+    },
+    {
+      "ref": "refs/heads/feat/dev-680",
+      "sha": "fdc1b5480152cf94ec7ac23078abe277910510f6"
+    },
+    {
+      "ref": "refs/heads/feat/display-name",
+      "sha": "bf6218d5a3978321f8157ed166ad8ea680928ed9"
+    },
+    {
+      "ref": "refs/heads/feat/oauth2-v2",
+      "sha": "9eb3d3f268ae47aecebf02ec6965564cc2393ea2"
+    },
+    {
+      "ref": "refs/heads/feat/package-revision-schema-20261010",
+      "sha": "0357585b51864e158f50c7479af001ba6daf5b06"
+    },
+    {
+      "ref": "refs/heads/feat/portable-source-policy-20261010",
+      "sha": "e7c42e94196beba04dbae85d8a38da78efd9767f"
+    },
+    {
+      "ref": "refs/heads/feat/rcc-source-inspection-20261010",
+      "sha": "2ffcbd5a29795e4cce99f299f5897d0e015a1477"
+    },
+    {
+      "ref": "refs/heads/feat/revoke",
+      "sha": "7d0753eb03a480329bcef754f0c778d25a95bc74"
+    },
+    {
+      "ref": "refs/heads/feat/roboto",
+      "sha": "eaf2d505340eacfd3883a7b541fa7dec701fb91f"
+    },
+    {
+      "ref": "refs/heads/feat/run-output-transport-20261010",
+      "sha": "74beef4d220c3a1e8f983cecd42b9bb84ac75e79"
+    },
+    {
+      "ref": "refs/heads/feat/set-secrets-post",
+      "sha": "a116d597ed03bab5acd4986026b7430179d39b25"
+    },
+    {
+      "ref": "refs/heads/feat/shared-run-output-20261010",
+      "sha": "3155fc55ea7d47afbc547fddc963b5860462924b"
+    },
+    {
+      "ref": "refs/heads/feat/source-confined-read-20261010",
+      "sha": "375614e53f3120c74caf3b732306b13eab99ffee"
+    },
+    {
+      "ref": "refs/heads/feat/source-confined-staging-20261010",
+      "sha": "fc582797cc754ae6dcf7602d98d6079f0004b29d"
+    },
+    {
+      "ref": "refs/heads/feat/temporal-integration",
+      "sha": "b7ee6682e4d137eb5bd6ec408320751d7710ecc8"
+    },
+    {
+      "ref": "refs/heads/feat/ui-oauth2",
+      "sha": "46b21dede67530f90a6d247949357320dfb154f3"
+    },
+    {
+      "ref": "refs/heads/feat/ui-oauth2-no-backend",
+      "sha": "7acdad052cbb3d6cb7bad78267a119efac9a1457"
+    },
+    {
+      "ref": "refs/heads/feature/coverage-20261008",
+      "sha": "fc09d0b26a80201587de310e24042787252ae3af"
+    },
+    {
+      "ref": "refs/heads/feature/dakota-rcc-acceptance-20261008",
+      "sha": "79b95e85c6fc2e0dc335e1b6ca93f2c59a5091bd"
+    },
+    {
+      "ref": "refs/heads/feature/dakota-workitems-acceptance-20261008",
+      "sha": "49becb96767d4fc225fb9cb79162db9a9d1dafd8"
+    },
+    {
+      "ref": "refs/heads/feature/database-acceptance-20261008",
+      "sha": "8524e9c3e9bc35bfc17f70f887d9d0b680856af3"
+    },
+    {
+      "ref": "refs/heads/feature/deployment-20261008",
+      "sha": "e4e54d31647b7d44cdd7c07d6006596186db8317"
+    },
+    {
+      "ref": "refs/heads/feature/deployment-admission-20261009",
+      "sha": "6e94860c0b8fc2692727982a57ce635063c86ce4"
+    },
+    {
+      "ref": "refs/heads/feature/issue-100a-public-mcp-app-authoring-20261009",
+      "sha": "948df916ebe8750caebc71cc821bb5b76f16c273"
+    },
+    {
+      "ref": "refs/heads/feature/issue-91-issuer-guard-20261009",
+      "sha": "4cc65b3eaa7558952391b085d147f8ce2f604fbd"
+    },
+    {
+      "ref": "refs/heads/feature/issue-99a-query-renderer-20261009",
+      "sha": "8e2655534e4f2eaaf8e5eb4e07fb033f2152e1d7"
+    },
+    {
+      "ref": "refs/heads/feature/mcp-v2-showcase-template-20261009",
+      "sha": "9193989985de15dc6d5fecfd655042957cf9926c"
+    },
+    {
+      "ref": "refs/heads/feature/metadata",
+      "sha": "7b13bb77601c917102e913f00f3faa27e78e22ea"
+    },
+    {
+      "ref": "refs/heads/feature/native-job-drain-20261008",
+      "sha": "f8ccace43feaa52fd3bf376715efa9fa8cbcc5bb"
+    },
+    {
+      "ref": "refs/heads/feature/oauth2",
+      "sha": "03357c0b6edb84f3a6fd0f515e858c6dbfaf8100"
+    },
+    {
+      "ref": "refs/heads/feature/product-cleanup-20261008",
+      "sha": "28b021c6307c5c993f0ba2859d0da2ae3d9e8c94"
+    },
+    {
+      "ref": "refs/heads/feature/roadmap-20261008",
+      "sha": "2bbf3afceda39a0d8dfa4b9e1a3ed96f3ad9b61f"
+    },
+    {
+      "ref": "refs/heads/feature/tunnel-20261008",
+      "sha": "554630899c6eab23b922ba6558347e7f2c439c00"
+    },
+    {
+      "ref": "refs/heads/feature/tunnel-edge-verification-20261009",
+      "sha": "82f526efc741781b0a08649cd1ecf0f8d2579f0c"
+    },
+    {
+      "ref": "refs/heads/feature/workitems-native-artifact-manifest-20261009",
+      "sha": "8013d17256f4b4c20cc4d36141c08bca2c964354"
+    },
+    {
+      "ref": "refs/heads/files-headers",
+      "sha": "d21aa370922ae9b63139c45eebfac63377c727a6"
+    },
+    {
+      "ref": "refs/heads/fix/captured-child-cleanup-deadline-20261011",
+      "sha": "216ad55b5bcafaa54ba61fcc87982a57573adce7"
+    },
+    {
+      "ref": "refs/heads/fix/clear-stale-workitem-queue-env",
+      "sha": "639d61deebf00175e72da5b1cef2e5ab75df1326"
+    },
+    {
+      "ref": "refs/heads/fix/core-overload-format-20261009",
+      "sha": "961a813d34c39dc6b3820420f83268c0e708f319"
+    },
+    {
+      "ref": "refs/heads/fix/dakota-native-core-wheel-version-20261010",
+      "sha": "077a2736c23cc5332ae9f8277de4ede1c5c8ae8e"
+    },
+    {
+      "ref": "refs/heads/fix/database-savepoint-admission-20261010",
+      "sha": "eb0df4f97f390b413e364fe68364b81a65663f02"
+    },
+    {
+      "ref": "refs/heads/fix/frozen-parent-pid-test-topology-20261010",
+      "sha": "96da42fcfbb62f98f31ec11ab8871b55da422c05"
+    },
+    {
+      "ref": "refs/heads/fix/list-templates-contract-20261010",
+      "sha": "553e20c45d7e5f49ac71876c97a35579acb33c73"
+    },
+    {
+      "ref": "refs/heads/fix/mcp-alias-identity-20261010",
+      "sha": "7ca665aaa4b180a78f532a4419e4d17bf4ced801"
+    },
+    {
+      "ref": "refs/heads/fix/mcp-colliding-action-names-20261010",
+      "sha": "d506a53f12c231bcc5902b6562c3de2c7ca6591f"
+    },
+    {
+      "ref": "refs/heads/fix/mcp-metadata-lint-docs-20261009",
+      "sha": "5efcfebf1c572808a441e2360d1c1e68a77020a9"
+    },
+    {
+      "ref": "refs/heads/fix/mcp-resource-routing-history-20261010",
+      "sha": "2f631e5403ae3ff0b37af2416dc19a98bdc04a84"
+    },
+    {
+      "ref": "refs/heads/fix/multipackage-import-repro-20261010",
+      "sha": "78969ac65cea0576f9584d6a136cec6bebe0032b"
+    },
+    {
+      "ref": "refs/heads/fix/pypi-project-identity",
+      "sha": "6f9b84867a4021e791a46c2c22f15f1b31fc7c2d"
+    },
+    {
+      "ref": "refs/heads/fix/rcc-candidate-wheel-identities-20261010",
+      "sha": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d"
+    },
+    {
+      "ref": "refs/heads/fix/rcc-harness-portability-20261010",
+      "sha": "c1c33ce77895d7b522f2229524d386ed72f8ba3b"
+    },
+    {
+      "ref": "refs/heads/fix/rcc-published-artifact-details-20261010",
+      "sha": "a346fd7dfca7a6490e6968d16c809a85814ff5b0"
+    },
+    {
+      "ref": "refs/heads/fix/retire-robocorp-cloud-gate-20261010",
+      "sha": "42f9b8ef6575a8b955763d0000a6cdab4b8bf5eb"
+    },
+    {
+      "ref": "refs/heads/fix/runtime-checkout-eol-20261011",
+      "sha": "ec70a2928461941c129b1c05332dc441070e0184"
+    },
+    {
+      "ref": "refs/heads/fix/runtime-golden-contracts-20261010",
+      "sha": "c6fd7c0089f588fa04d1087d5e454efb35143187"
+    },
+    {
+      "ref": "refs/heads/fix/runtime-recovery-publication",
+      "sha": "5b9c07176d41673832c23f0c7ea609931fa4223d"
+    },
+    {
+      "ref": "refs/heads/fix/runtime-release-changelog-selection-20261010",
+      "sha": "62a3972083507b70862cfc3bf9678ffd9e313f9e"
+    },
+    {
+      "ref": "refs/heads/fix/runtime-tests-integration-triggers-20261010",
+      "sha": "f7c6ed61f24fd9e98d1465c83042c5446466311b"
+    },
+    {
+      "ref": "refs/heads/fix/runtime-watcher-shutdown-20261010",
+      "sha": "90f0d09e1da70e711e30352315797c74363dbba5"
+    },
+    {
+      "ref": "refs/heads/fix/runtime-wheel-test-interpreter-20261010",
+      "sha": "bf435498de94acc5e64f89dfe3dcd3916b5046f3"
+    },
+    {
+      "ref": "refs/heads/fix/runtime-wrapper-exit-code-20261010",
+      "sha": "47f036c38a73532f51e270dccba37c822c85384a"
+    },
+    {
+      "ref": "refs/heads/fix/templates-published-core",
+      "sha": "cce2ae20deb000d44999ec79cc16d824b0b839fa"
+    },
+    {
+      "ref": "refs/heads/fix/tls-long-hostname-certificate-20261010",
+      "sha": "54dae1c0a8383797fa99ba5c50e2a2cf2d829302"
+    },
+    {
+      "ref": "refs/heads/fix/tls-windows-proactor-teardown-20261010",
+      "sha": "b67b99c15d77b213d0ea34eda0444b6a18b1c3d3"
+    },
+    {
+      "ref": "refs/heads/fix/windows-artifact-binding-lock-20261009",
+      "sha": "653e1dc9597a120a4b3a7a21645f8a1e731c6695"
+    },
+    {
+      "ref": "refs/heads/fix/windows-artifact-drive-containment-20261010",
+      "sha": "369839b9c85f3be8ab8dd33024ae9b38d4ef14f7"
+    },
+    {
+      "ref": "refs/heads/fix/windows-rcc-bundle-boundary-20261010",
+      "sha": "6ece09c439d12e02bcbde9dcd2164956b97829e2"
+    },
+    {
+      "ref": "refs/heads/fix/windows-runtime-contract-tests-20261010",
+      "sha": "c6af71b8e3880b9d99f351ac4d17a99744114365"
+    },
+    {
+      "ref": "refs/heads/fix/windows-runtime-typecheck-20261010",
+      "sha": "dc610f3ba14b9a64b7fd4b4bcb6ec1fccb00beab"
+    },
+    {
+      "ref": "refs/heads/fix/windows-test-portability-20261010",
+      "sha": "e4d7f19ba40b3ec5d898ac3a869ca122ec79e6b0"
+    },
+    {
+      "ref": "refs/heads/fix/workitems-acceptance-typecheck-20261010",
+      "sha": "def1a6bd07822ef8f45db45cd4e4eaa7fa628989"
+    },
+    {
+      "ref": "refs/heads/fix/workitems-reservation-test-barrier-20261009",
+      "sha": "5000fac1b43f7318cbbcccc470597d4c2ba1a298"
+    },
+    {
+      "ref": "refs/heads/fix/workitems-windows-acceptance-20261010",
+      "sha": "2ca38b8dd4932e8d3f00363dae1d9cb23f8e5681"
+    },
+    {
+      "ref": "refs/heads/handoff/actions-closure-audit-20261010",
+      "sha": "7a593cd645066c29e138c03a47ac174a6f95b101"
+    },
+    {
+      "ref": "refs/heads/handoff/actions-swarm-20261010-cloud",
+      "sha": "9fd9eaa70ef02727ed82ecd1d5a967ada4ddd4e5"
+    },
+    {
+      "ref": "refs/heads/handoff/actions-swarm-mk3-20261010",
+      "sha": "1b040bd9f6b34012e2581ac1d3b5f7576325e44d"
+    },
+    {
+      "ref": "refs/heads/handoff/actions-swarm-mk3-wave8-20261010",
+      "sha": "62bab755c87b46ff8140ec8ac17bd377b47dc258"
+    },
+    {
+      "ref": "refs/heads/hive/issue-129-capability-deployments",
+      "sha": "f3c120fce1afa40da702eb771e62346214f81450"
+    },
+    {
+      "ref": "refs/heads/hive/issue-137-provenance-observability",
+      "sha": "8af0e5627245d795a8ec6e2ddb3560d17fd42ca7"
+    },
+    {
+      "ref": "refs/heads/hive/issue-139-exact-subject-conformance",
+      "sha": "cad7a9b4cdf1e918faac8e932d277f78d6a7329d"
+    },
+    {
+      "ref": "refs/heads/integration/cloud-admission-20261009",
+      "sha": "134dfbee08ef5a06664bcd1ed37bca0ea1a573b9"
+    },
+    {
+      "ref": "refs/heads/integration/cloud-convergence-20261009",
+      "sha": "e032e95d38c91aead08d30b42ec7620b8ea726a4"
+    },
+    {
+      "ref": "refs/heads/integration/cloud-followup-admission-20261009",
+      "sha": "5c3c4a6abb63a40bf00af49d16ade04c59e7cf63"
+    },
+    {
+      "ref": "refs/heads/integration/cloud-native-checkpoints-20261009",
+      "sha": "bd1661393b71d92779bb405cfb92372442b340ac"
+    },
+    {
+      "ref": "refs/heads/integration/community-release-20261008",
+      "sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+    },
+    {
+      "ref": "refs/heads/integration/runtime-release-final-20261009",
+      "sha": "6a53578fac029a0696834c30438c858f5f0003be"
+    },
+    {
+      "ref": "refs/heads/issue/96",
+      "sha": "93818e315c6215d2641c6c01f635ad2e9e761ca2"
+    },
+    {
+      "ref": "refs/heads/master",
+      "sha": "9d9479e842effbcb56d2ec0017c23593d192a56d"
+    },
+    {
+      "ref": "refs/heads/matti/fix_keyring_issue_for_win",
+      "sha": "45e5c60635fa5da5dcc571d7880854d4d8130d4a"
+    },
+    {
+      "ref": "refs/heads/mk3/core-union-20261010",
+      "sha": "73605934c1c948895410a5abaed6c225a396e038"
+    },
+    {
+      "ref": "refs/heads/mk3/wave9-rcc-public-source-union-20261010",
+      "sha": "639b591a19d80688afcfabf62d6f4bff8b8a0d69"
+    },
+    {
+      "ref": "refs/heads/noop",
+      "sha": "77a50508a52d55de4570bf973dd43428048b8802"
+    },
+    {
+      "ref": "refs/heads/patchraptor/fix-issue-78",
+      "sha": "63135817c0f57d01aa15838581d3fee9cfde8629"
+    },
+    {
+      "ref": "refs/heads/patchraptor/fix-template-package-script-mode",
+      "sha": "7b4c9253ff35be15f899adb31f2a50d9b397b8d9"
+    },
+    {
+      "ref": "refs/heads/patchraptor/issue-152-authorization",
+      "sha": "fce1da2fcd048a678cdb2e8f16935fd69082bd02"
+    },
+    {
+      "ref": "refs/heads/poc/async-actions",
+      "sha": "189ae87a137754e84781ae8856ac61ccbee47302"
+    },
+    {
+      "ref": "refs/heads/readme-update",
+      "sha": "02639fd20b8b5ee09a635c04e8cf2fed5ccccc9c"
+    },
+    {
+      "ref": "refs/heads/release/actions-core-1.0.2-20261009",
+      "sha": "71f55ddd1ce34720db0e13433a2f1f5c9eed70a0"
+    },
+    {
+      "ref": "refs/heads/release/actions-core-1.0.3-20261010",
+      "sha": "3c5278bbc0d12efa7b9108c713bdc6c982fc54d9"
+    },
+    {
+      "ref": "refs/heads/release/core-1.0.3-community-20261010",
+      "sha": "c2733957b047a2acf3d38c1cad7704a4bc69f15b"
+    },
+    {
+      "ref": "refs/heads/release/http-helper-1.0.2-20261009",
+      "sha": "7fffa3a53c321a1990819bbe3fc08dca4115e74d"
+    },
+    {
+      "ref": "refs/heads/release/http-helper-credential-check-20261009",
+      "sha": "1abafea4e08766a71a4f4fe8173101af1e368428"
+    },
+    {
+      "ref": "refs/heads/release/http-helper-redirect-fix-20261009",
+      "sha": "f2dd54cc35798f7b689f0855b5e3d81263b1b24e"
+    },
+    {
+      "ref": "refs/heads/release/package-credential-availability-20261009",
+      "sha": "7501198b3cbd834a79c132d398abb5e05c852582"
+    },
+    {
+      "ref": "refs/heads/release/pypi-identity-patches",
+      "sha": "17f550ba1fc0c2816b2bcda4a00c69f5691d814c"
+    },
+    {
+      "ref": "refs/heads/release/runtime-registry-compatibility-20261009",
+      "sha": "85f7c91252a49d454a47983d88c942163ff030ba"
+    },
+    {
+      "ref": "refs/heads/repair/browser-session-20261008",
+      "sha": "15696d85bfbfa88938430c9e6a167ea6d02f9ae2"
+    },
+    {
+      "ref": "refs/heads/repair/rcc-graceful-retirement-20261009",
+      "sha": "ddbbfb68e3431878f01ebfd61de461ff749dc498"
+    },
+    {
+      "ref": "refs/heads/repair/rcc-trust-context-20261009",
+      "sha": "290e469c35447c7472bcb8ab3241bfa5a63a850d"
+    },
+    {
+      "ref": "refs/heads/repair/robot-cleanup-ownership-20261009",
+      "sha": "72a60344c40e6f153dab0f71b30b073e9b259226"
+    },
+    {
+      "ref": "refs/heads/repair/robot-final-copy-validation-20261009",
+      "sha": "7d2563925b03bc586cef6d61876960ec1a55d4f0"
+    },
+    {
+      "ref": "refs/heads/repair/robot-private-staging-20261009",
+      "sha": "5f3fbbb5d6b486373032f6136090eeb89434844e"
+    },
+    {
+      "ref": "refs/heads/repair/worker-exit-protocol-20261009",
+      "sha": "80764aca73d50ff7325f581bb87d732af84df914"
+    },
+    {
+      "ref": "refs/heads/resume/community-blockers-20261009",
+      "sha": "a8eb7b46f536202f71484d3933d7ed70be103e5c"
+    },
+    {
+      "ref": "refs/heads/resume/community-evidence-20261009",
+      "sha": "5203ea848e14462f546da9c03e73beab406f5863"
+    },
+    {
+      "ref": "refs/heads/resume/rcc-review-20261009",
+      "sha": "3dbfb1bed23834353f5fa7b7b69ca0447898c847"
+    },
+    {
+      "ref": "refs/heads/resume/robot-native-gates-20261009",
+      "sha": "b690b262c564ed9f085e2df3863af500ff29fddf"
+    },
+    {
+      "ref": "refs/heads/resume/tunnel-20261009",
+      "sha": "554630899c6eab23b922ba6558347e7f2c439c00"
+    },
+    {
+      "ref": "refs/heads/resume/workitems-review-20261009",
+      "sha": "49becb96767d4fc225fb9cb79162db9a9d1dafd8"
+    },
+    {
+      "ref": "refs/heads/review/community-ledger-20261008",
+      "sha": "bdc88f38af21046a2d905e90b2a21a9769152a87"
+    },
+    {
+      "ref": "refs/heads/review/core-checkpoint-20261008",
+      "sha": "9b3c1a4bf7bbdf06481e60929ff1b40ad55a9ac2"
+    },
+    {
+      "ref": "refs/heads/review/design-checkpoints-20261008",
+      "sha": "65bbc11f2d1ea9a3521d3af5ee908f151861cf25"
+    },
+    {
+      "ref": "refs/heads/review/runtime-checkpoint-20261008",
+      "sha": "d26fa423080cec22522402f2193b17a5f32b336a"
+    },
+    {
+      "ref": "refs/heads/review/workitems-checkpoint-20261008",
+      "sha": "95ddbe88106be594ea9954bdb36909702c5e2869"
+    },
+    {
+      "ref": "refs/heads/strategy/release-compatibility-roadmap",
+      "sha": "f6a3a92192620dec7dafa057975b39856f4f7909"
+    },
+    {
+      "ref": "refs/heads/test/auth-route-census-20261010",
+      "sha": "83123ff42c21587e3eb944e20af89f1a9e9ff0ea"
+    },
+    {
+      "ref": "refs/heads/test/canvas-runtime-bridge-acceptance-20261010",
+      "sha": "13db7030416f7b64f9a577b800a629549e23903e"
+    },
+    {
+      "ref": "refs/heads/test/canvas-runtime-cache-isolation-20261010",
+      "sha": "59d49c18f0615e51b1ff0cc3cd7f1ebe4d2729fa"
+    },
+    {
+      "ref": "refs/heads/test/frontend-update-benchmark-20261010",
+      "sha": "4d9c348a65365ef4e4c26baddada79c754bc8dd1"
+    },
+    {
+      "ref": "refs/heads/test/frozen-catalog-rollback-20261010",
+      "sha": "8ef0cce463d1eb9f3228d7658c113ceb6a18d554"
+    },
+    {
+      "ref": "refs/heads/test/frozen-generation-drain-20261010",
+      "sha": "4e5f8200628572d5308b0d3abd5ff16353600036"
+    },
+    {
+      "ref": "refs/heads/test/issue-100b-fixture-roundtrip-20261009",
+      "sha": "feeffc29a33fad20b5497d3e8f5e1f06cd8c8369"
+    },
+    {
+      "ref": "refs/heads/test/mcp-alias-frozen-control-20261010",
+      "sha": "5c8084c61389e293eb992c24bc0f2962f705378e"
+    },
+    {
+      "ref": "refs/heads/test/mcp-v2-showcase-protocol-20261009",
+      "sha": "04b23ea34e1e4525b4dbbc329841b1d13445af30"
+    },
+    {
+      "ref": "refs/heads/test/native-workitems-ci-20261009",
+      "sha": "1b0217c810b7522416003ef8e6d5ded3016d3735"
+    },
+    {
+      "ref": "refs/heads/test/rcc-provider-dead-warm-20261009",
+      "sha": "2eaac1c1fe5c53320d647a35dd137f8fd9411f3b"
+    },
+    {
+      "ref": "refs/heads/test/rcc-provider-rollback-hosted-20261010",
+      "sha": "20bfbfd14fd554a594517dc567f7342da7ce7022"
+    },
+    {
+      "ref": "refs/heads/test/robot-package-yaml-admission-20261009",
+      "sha": "711165f31fe1b463cd0ca73353c2e6666847a7ec"
+    },
+    {
+      "ref": "refs/heads/test/runtime-installed-wheel-import-guard-20261010",
+      "sha": "d75b25fb4c354e5c95bc0f639b426d6ff402104b"
+    },
+    {
+      "ref": "refs/heads/test/sqlite-commit-admission-regression-20261010",
+      "sha": "9c2f0df6f54a78d98842082c311f130c6d809797"
+    },
+    {
+      "ref": "refs/heads/test/staged-rcc-source-candidate-20261010",
+      "sha": "1e795c6c4dbf9ffcb46c0076b08fc5b4908750e6"
+    },
+    {
+      "ref": "refs/heads/test/tunnel-tls-acceptance-20261009",
+      "sha": "274042cd555d0340dc07e86f651986ab49ba85a7"
+    },
+    {
+      "ref": "refs/heads/test/workitems-ui-errors-20261010",
+      "sha": "dfca3f8e63465595acff421f37f34d2a9d0a1b39"
+    },
+    {
+      "ref": "refs/heads/wip2",
+      "sha": "30bd85ab60b83c46bb9b722ea98036b1e188616e"
+    }
+  ],
+  "all_open_prs_and_307": [
+    {
+      "number": 313,
+      "title": "Wait for captured descendants within the shared cleanup deadline",
+      "state": "open",
+      "draft": true,
+      "head_branch": "fix/captured-child-cleanup-deadline-20261011",
+      "head_sha": "216ad55b5bcafaa54ba61fcc87982a57573adce7",
+      "base_branch": "integration/community-release-20261008",
+      "base_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "merge_commit_sha": "73b09a8c0bb4c04bdfd919e938d9d135b2401df6",
+      "url": "https://github.com/joshyorko/actions/pull/313"
+    },
+    {
+      "number": 308,
+      "title": "fix(runtime): preserve owned cleanup and queued cancellation",
+      "state": "open",
+      "draft": true,
+      "head_branch": "fix/rcc-candidate-wheel-identities-20261010",
+      "head_sha": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+      "base_branch": "integration/community-release-20261008",
+      "base_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "merge_commit_sha": "868265ccbfb5d7d2d2df0c12f76fb2e70ed695a4",
+      "url": "https://github.com/joshyorko/actions/pull/308"
+    },
+    {
+      "number": 306,
+      "title": "fix: preserve database state when nested SAVEPOINT creation fails",
+      "state": "open",
+      "draft": true,
+      "head_branch": "fix/database-savepoint-admission-20261010",
+      "head_sha": "eb0df4f97f390b413e364fe68364b81a65663f02",
+      "base_branch": "integration/community-release-20261008",
+      "base_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "merge_commit_sha": "fdaba3e7d29d9e8c3a8412fdd67fc5fb293ec8a6",
+      "url": "https://github.com/joshyorko/actions/pull/306"
+    },
+    {
+      "number": 305,
+      "title": "Keep Canvas acceptance build caches outside synchronized package source",
+      "state": "open",
+      "draft": true,
+      "head_branch": "test/canvas-runtime-cache-isolation-20261010",
+      "head_sha": "59d49c18f0615e51b1ff0cc3cd7f1ebe4d2729fa",
+      "base_branch": "integration/community-release-20261008",
+      "base_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "merge_commit_sha": "4ac9685185f75e0d035cbc13c723f3375fa4c9bb",
+      "url": "https://github.com/joshyorko/actions/pull/305"
+    },
+    {
+      "number": 221,
+      "title": "Integrate Actions Runtime 1.0.3 security, execution, and native acceptance work",
+      "state": "open",
+      "draft": true,
+      "head_branch": "integration/community-release-20261008",
+      "head_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "base_branch": "community",
+      "base_sha": "a70993fafc99a9f94041485542d5a720797ca394",
+      "merge_commit_sha": "56d0248644b44cedf486f963a993bb695e933678",
+      "url": "https://github.com/joshyorko/actions/pull/221"
+    },
+    {
+      "number": 307,
+      "title": "fix: package community OAuth inputs and Runtime release notes",
+      "state": "closed",
+      "draft": false,
+      "head_branch": "fix/runtime-release-changelog-selection-20261010",
+      "head_sha": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+      "base_branch": "integration/community-release-20261008",
+      "base_sha": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+      "merge_commit_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "url": "https://github.com/joshyorko/actions/pull/307"
+    }
+  ],
+  "owned_worktrees": [
+    {
+      "path": "/workspace/actions",
+      "head": "a70993fafc99a9f94041485542d5a720797ca394",
+      "tree": "562b49fc03bc4a16ef8a0b7b6f50b9bec88de959",
+      "status": []
+    },
+    {
+      "path": "/workspace/actions-checkpoint",
+      "head": "62bab755c87b46ff8140ec8ac17bd377b47dc258",
+      "tree": "469cb3c1b60229cb0ccda1627e2ed0916996935e",
+      "status": [
+        "?? docs/handoffs/evidence/successor-stop-20261012/"
+      ]
+    },
+    {
+      "path": "/workspace/actions-handoff",
+      "head": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+      "tree": "2d979a6b4b4521ec475f32f469677bce2977fddd",
+      "status": []
+    },
+    {
+      "path": "/workspace/actions-pr305",
+      "head": "59d49c18f0615e51b1ff0cc3cd7f1ebe4d2729fa",
+      "tree": "13ee4255bfc789f2722a8d11774b7546c2c7b7f8",
+      "status": []
+    },
+    {
+      "path": "/workspace/actions-pr306",
+      "head": "eb0df4f97f390b413e364fe68364b81a65663f02",
+      "tree": "f8e4e760733f6b16f6dcc66ff057d1f2fad87bc2",
+      "status": []
+    },
+    {
+      "path": "/workspace/actions-pr307",
+      "head": "62a3972083507b70862cfc3bf9678ffd9e313f9e",
+      "tree": "088d1e1c30260e7aa18a79bfaa0ba4f02cfdd577",
+      "status": []
+    },
+    {
+      "path": "/workspace/actions-pr308",
+      "head": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+      "tree": "9dd420c0dbae72c5b6a724a77c009a4cfb65f0a0",
+      "status": []
+    },
+    {
+      "path": "/workspace/actions-pr313",
+      "head": "216ad55b5bcafaa54ba61fcc87982a57573adce7",
+      "tree": "4c124ca711b6acaea657a2b6b713fb906f176ff7",
+      "status": []
+    }
+  ],
+  "workers": [
+    {
+      "name": "rcc308",
+      "state": "COMPLETED_INACTIVE",
+      "stop_control": "interrupt applied after observed completion",
+      "old_workers_resumed": false
+    },
+    {
+      "name": "release_audit",
+      "state": "COMPLETED_INACTIVE",
+      "stop_control": "interrupt applied after observed completion",
+      "old_workers_resumed": false
+    },
+    {
+      "name": "review307",
+      "state": "COMPLETED_INACTIVE",
+      "stop_control": "interrupt applied after observed completion",
+      "old_workers_resumed": false
+    },
+    {
+      "name": "review308",
+      "state": "COMPLETED_INACTIVE",
+      "stop_control": "interrupt applied after observed completion",
+      "old_workers_resumed": false
+    }
+  ],
+  "root_state": "PRESERVATION_ONLY_THEN_STOP",
+  "owned_ci": [
+    {
+      "id": 38218598232,
+      "name": "Actions Core Tests",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38218598232"
+    },
+    {
+      "id": 38218598247,
+      "name": "AI audit evidence",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38218598247"
+    },
+    {
+      "id": 38218598388,
+      "name": "Copilot Setup Steps",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38218598388"
+    },
+    {
+      "id": 38218598270,
+      "name": "RCC developer toolkit",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38218598270"
+    },
+    {
+      "id": 38218598318,
+      "name": "Measured Python coverage gate",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38218598318"
+    },
+    {
+      "id": 38218598376,
+      "name": "Action Server Build (Unauthenticated)",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38218598376"
+    },
+    {
+      "id": 38218598213,
+      "name": "Actions Runtime PYPI Release",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38218598213"
+    },
+    {
+      "id": 38218598210,
+      "name": "Action Server Tests",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "head_sha": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+      "html_url": "https://github.com/joshyorko/actions/actions/runs/38218598210"
+    }
+  ],
+  "native_attempts": 0,
+  "runtime1_0_3": "HOLD",
+  "rcc18_19_6": "ABSOLUTE_HOLD",
+  "resource": {
+    "memory_current": 15218135040,
+    "memory_max": 17179869184,
+    "disk_free": 11510812672,
+    "tmp_free": 9441144832,
+    "shm_free": 9441349632
+  },
+  "host": "9e619bc297a7",
+  "boot_id": "22d23245-c9c1-4789-8cbd-70bfa9b3b274"
+}

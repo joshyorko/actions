@@ -1,0 +1,30 @@
+{
+  "source": "3e3e5b0d4c7fcae578a3ec89ff9f2d1d054f657e",
+  "tasks": [
+    {
+      "task": "Doctor",
+      "exit_code": 0,
+      "elapsed_seconds": 4.178997131999495,
+      "log": "/workspace/successor-evidence/pr305-fresh-toolkit/doctor.log",
+      "bytes": 12768,
+      "sha256": "3bc240af97b768f539f5b48819c8d49370420b1fa2581a4c4812107740b5dde9"
+    },
+    {
+      "task": "Bootstrap",
+      "exit_code": 0,
+      "elapsed_seconds": 39.483991070999764,
+      "log": "/workspace/successor-evidence/pr305-fresh-toolkit/bootstrap.log",
+      "bytes": 27459,
+      "sha256": "ae8bc39b6ecb0644e276183a61f3f4633a4333bbc95522eea5623f7ec1636012"
+    },
+    {
+      "task": "ToolkitTest",
+      "exit_code": 0,
+      "elapsed_seconds": 42.41301149100036,
+      "log": "/workspace/successor-evidence/pr305-fresh-toolkit/toolkittest.log",
+      "bytes": 14489,
+      "sha256": "bc0a9d9affd8af20b7e5c2d7d7710d4db770e80dd707fdb93a31edeb0ed78daf"
+    }
+  ],
+  "native_baseline_attempts": 0
+}

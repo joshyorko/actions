@@ -1,0 +1,13 @@
+{
+  "head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+  "test_sha256": "e69dc642c87b6a5b99f47e05df40d65f4377ed6ff58e75ed0d4a4615a7dce17a",
+  "real_test_passes_with_generated_imports_forbidden": true,
+  "generated_import_attempts": [],
+  "tracked_catalog_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+  "scope": "single exact source test; no source edits or real generated-file rename",
+  "prior06086_test_generated_import_blocked_EXPECTED_RED": true,
+  "prior_generated_import_attempts": [
+    "_oauth2_config"
+  ]
+}

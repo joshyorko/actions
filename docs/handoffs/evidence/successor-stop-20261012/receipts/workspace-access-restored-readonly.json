@@ -1,0 +1,14 @@
+{
+  "actual_command": "hostname\npwd\ngit -C /workspace/actions-pr308 rev-parse HEAD\ngit -C /workspace/actions-pr308 branch --show-current\ngit -C /workspace/actions-pr308 status --short",
+  "branch": "fix/rcc-candidate-wheel-identities-20261010",
+  "checkout_head": "b30e220cbc458edaad605d36081c014e2cec190b",
+  "cwd": "/workspace",
+  "existing_workspace_retained": true,
+  "exit_status": 0,
+  "hostname": "9e619bc297a7",
+  "observed_at": "2026-10-12T05:14:24.071052+00:00",
+  "requested_after_disconnect": "05:10 UTC",
+  "work_can_continue": true,
+  "workers_preserved": true,
+  "worktree_clean": true
+}

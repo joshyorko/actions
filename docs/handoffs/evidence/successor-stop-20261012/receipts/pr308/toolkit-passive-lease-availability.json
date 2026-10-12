@@ -1,0 +1,11 @@
+{
+  "scope": "Read-only metadata lookup of fresh toolkit home only, no lifecycle CLI/reconciliation/lease mutation",
+  "artifact_materialization_root": "/workspace/successor-toolkit/robocorp/artifacts/v1/materializations",
+  "exists": false,
+  "legacy_catalog_root_exists": true,
+  "producer": "Pinned measured18.19.3 Doctor/Bootstrap/ToolkitTest uses legacy toolkit environment; not native Action",
+  "conclusion": "No toolkit artifact materialization/lease records available to admit passive native lease schema or natural release",
+  "actual_shipped_source_equivalence": "UNKNOWN (18.19.3buildinfo modifiedTRUE); public4148 lease schema remains source evidence only",
+  "native_attempts": 0,
+  "runtime_release": "HOLD"
+}

@@ -1,0 +1,98 @@
+{
+  "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+  "log_identity": {
+    "bytes": 747820,
+    "sha256": "680bf188563569775175b2c5217ee8d3b6603bd679875c32675ab97dc9f952c9",
+    "bom": true,
+    "crlf_count": 5409,
+    "carriage_returns": 5409,
+    "linefeeds": 5411,
+    "utf8_roundtrip_exact": true,
+    "matches_expected": true
+  },
+  "named_events": {
+    "test_async_zero_admits_cancel_before_held_worker_runs": {
+      "events": 1,
+      "all_exact_events_present": true,
+      "all_terminal_passed": true
+    },
+    "test_fixture_child_capture_rejects_unknown_or_changed_identity": {
+      "events": 4,
+      "all_exact_events_present": true,
+      "all_terminal_passed": true
+    },
+    "test_fixture_child_stop_check_rejects_reused_identity": {
+      "events": 1,
+      "all_exact_events_present": true,
+      "all_terminal_passed": true
+    },
+    "test_provider_startup_failure_uses_bounded_kill_fallback": {
+      "events": 1,
+      "all_exact_events_present": true,
+      "all_terminal_passed": true
+    },
+    "test_regression_handles_reported_child_distinct_from_original_popen": {
+      "events": 1,
+      "all_exact_events_present": true,
+      "all_terminal_passed": true
+    },
+    "test_server_async_process_poll_with_cancel": {
+      "events": 1,
+      "all_exact_events_present": true,
+      "all_terminal_passed": true
+    },
+    "test_startup_regression_reports_failed_cleanup_and_disposes_original_child": {
+      "events": 2,
+      "all_exact_events_present": true,
+      "all_terminal_passed": true
+    }
+  },
+  "suite_summaries": [
+    {
+      "summary": "2026-10-12T06:19:51.0479362Z ========= 1430 passed, 225 skipped, 15 warnings in 328.46s (0:05:28) ==========",
+      "present": true
+    },
+    {
+      "summary": "2026-10-12T06:47:12.5039737Z ======== 131 passed, 21 skipped, 1658 deselected in 1621.38s (0:27:01) ========",
+      "present": true
+    }
+  ],
+  "producer": {
+    "producer": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+    "parents": [
+      "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "f949bef2eeab518ffd34d9e69955938a007f8922"
+    ],
+    "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+    "checkout_proof_matches": true,
+    "matches_reviewed_source": true,
+    "proof_source": "Saved GitAPI commit JSON plus exact checkout line; producer git object not locally present, no fetch performed"
+  },
+  "terminal_job_metadata": {
+    "job": 114685788075,
+    "run": 38211281631,
+    "status": "completed",
+    "conclusion": "success",
+    "completed_at": "2026-10-12T06:47:51Z",
+    "single_log_retrieval_recorded": true
+  },
+  "whole_head_snapshot": {
+    "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+    "count": 24,
+    "all_terminal_success": true,
+    "runtime_run": {
+      "id": 38211281631,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "observed_at": "2026-10-12T06:51:06.931737+00:00",
+    "valid": true
+  },
+  "scope": "saved connector-decoded UTF8 bytes only, not original HTTP/archive; no network fetch or execution",
+  "suite_mode_proof": {
+    "source": "exact saved invocation inv test-not-integration then pytest -m not integration_test",
+    "frozen": "exact saved invocation inv test-binary --jobs0 then pytest -m integration_test and not native_artifact_test",
+    "native_artifact_tests": "explicitly excluded from frozen suite"
+  }
+}

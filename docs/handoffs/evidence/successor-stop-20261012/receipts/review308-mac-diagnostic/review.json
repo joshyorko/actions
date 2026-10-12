@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "verdict": "GO_DIAGNOSTIC_SOURCE",
+  "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+  "tree": "ce7ae02d6c7db06ceffedf771c6eb365d11517b9",
+  "parent": "b30e220cbc458edaad605d36081c014e2cec190b",
+  "diagnostic_source_reviewed": "b30e220cbc458edaad605d36081c014e2cec190b",
+  "diagnostic_source_tree": "f0ec0c48365fe4b36c054339c906f01889ce107c",
+  "scope": "diagnostic-only tests plus canonical correction; existing feature-branch push, no actual macOS repair, merge, publication or native approval",
+  "independent_verification": {
+    "red": "immutable0546 acceptance test under injected incomplete cleanup:1expectedFAIL0.25s; outercontrolfinallydisposes originalchild",
+    "green": "immutableb30:4PASS81deselected0.87s, timely/overshoot models, incomplete-cleanup diagnostic+originalPopenwait/closedpipes, strictrealchildsmoke",
+    "gateway": "fresh run-prepared-package.py /workspace/actions-pr308/action_server poetry run python -m pytest; noinstall, own copied immutable tests/helper and basetemps;45s invocationbound",
+    "strict_assertions": "originalPopen.poll notNone AND typedresult.complete required before emergencyfinally; startupcallASTidentical to0546 with3sdeadline/.2grace",
+    "typed_observation": "incomplete capture result appears in assertiondiagnostic; emergencyteardown cannot alter acceptance; fakeclock+.15 overshoot retains ownershipConfirmed/readerJoined but wrapperReapedFalse, no newkill afterexpireddeadline",
+    "runtime_identity": "helper SHA9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c; commonprocess SHA f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082, bothbyteidentical0546",
+    "writer_artifacts": "all20b30 artifact/source hashes match; alleeb7 artifact/source identitiesmatch",
+    "eeb_doc_only": "onlycanonicalguidechanged; both implementation andboth testfilesbyteidenticalb30; no further tests rerun fordocs",
+    "diff_check": "PASS",
+    "checkout": "clean exact eeb after writer documentation correction"
+  },
+  "actual_mac_evidence": {
+    "source": "0546ef30a30ff8229cb8fa6268e492c5cd74134e",
+    "raw_log_sha256": "64683c5c6b0ab50d6bc0a679dd3ff3745ae9543dc7b48d4f8827bbd46dcbc0c6",
+    "raw_log_bytes": 1299567,
+    "directly_verified_summary": "1420PASS216SKIP1FAIL141.71s",
+    "directly_verified_failure": "provider_stopped=False",
+    "historical_cause": "UNKNOWN; oldtestdoesnotprinttypedcleanupresult; controlledovershootisviable route only",
+    "fresh_exact_head_mac_result": "PENDING"
+  },
+  "writer_retained_validation": {
+    "affected": "329PASS/1SKIP/3nativeDESELECTED7.46s",
+    "configured_static": "360filesPASS"
+  },
+  "blocking_source_findings": [],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "proposed_exact_delta": "Expireddeadline skipsnewkill. Onlyif finalzero-budgetwaitstillfails doesitrecordunreapedwrapper.",
+    "disposition": "proposedbyreadonlyreview andimplementedbyintegrationwriterineeb; exactdiffindocumentation-disposition.md",
+    "durable_learning": "deadlineexpiry andfinalwaitoutcome aredistinctobservations; teardown doesnotqualifyfailedcleanup andtypedfactsareessentialforrootcausediagnosis",
+    "stale_guidance_removed": "unconditional unreapedwrapper claimafterdeadlineexpiry",
+    "evidence": "existingcommonprocess finalwaitbranch,2controlledclockoutcomes,RED/GREENteardowncontrols,docs-only successor identity",
+    "uncertainty": "historicalMacrootcauseunknown; newCIandnativeadmissionnotqualified"
+  },
+  "remaining_gates": [
+    "fresh exacteeb required CI",
+    "historicalmacOS rootcause remainsUNKNOWN",
+    "native/controller/whole-operationenforcement HOLD",
+    "RCC18.19.3provider reader/sampler,passiveleaseandcgroupadmissionunqualified"
+  ],
+  "evidence_files": {
+    "immutable-source-check.json": {
+      "bytes": 772,
+      "sha256": "a2be2994557dffa2944a79d07e95ed49f9c6efa4994fe7e42dd97d2a774234c5"
+    },
+    "writer-receipt-verification.json": {
+      "bytes": 2685,
+      "sha256": "8fe0a05741d79d7194b003b7418748a11a12b6a6dda0b090769f90ba459a6ec4"
+    },
+    "doc-successor-check.json": {
+      "bytes": 1306,
+      "sha256": "d9cb7dd2c14f494228c9295e17071815797ba470cf15961489789cf6c682cddb"
+    },
+    "poetry-entrypoint.json": {
+      "bytes": 339,
+      "sha256": "ec0096ff862d5c498b88b3cf5593b8ca594ef9e293de258531d3a6938f1f79be"
+    },
+    "replay-commands.json": {
+      "bytes": 1597,
+      "sha256": "5f1e874e501aac93db5fb16682bc78834ad1b7325b5e02d70e7dac98fe513754"
+    },
+    "red.xml": {
+      "bytes": 2628,
+      "sha256": "9f1cb25f8b1496ef5ba281045b516d064f15bdc4424aa8bc7f4c9e19f6af7dd3"
+    },
+    "red.log": {
+      "bytes": 3840,
+      "sha256": "24f31ed7185160b3dced70ab6a557fe31b53bde53c890927f8d55a4251c38e21"
+    },
+    "green.xml": {
+      "bytes": 1170,
+      "sha256": "af2f62cb252c74d879dfff464cea36b6b20cd67ce663041add32a67394c8712b"
+    },
+    "green.log": {
+      "bytes": 1365,
+      "sha256": "41592c14f54ae3363ae2b26f01f12d61ba940a7d745c11f192eb881ea58a505a"
+    },
+    "documentation-disposition.md": {
+      "bytes": 2187,
+      "sha256": "b4c9e344940cade87d3478da0683f65f79268ef04001658b3b1f769969b277a6"
+    }
+  },
+  "no_product_edits_by_review": true,
+  "native_attempts": 0,
+  "lease_commands": 0,
+  "no_broad_signals": true,
+  "upstream_disposition": "none",
+  "existing_feature_branch_push_disposition": "GO_SOURCE_PUSH"
+}

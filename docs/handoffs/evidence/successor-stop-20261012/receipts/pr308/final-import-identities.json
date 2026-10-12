@@ -1,0 +1,23 @@
+{
+  "python": "3.12.15 (main, Oct  6 2026, 23:50:18) [GCC 15.3.0]",
+  "prefix": "/workspace/actions-pr308/action_server/.venv",
+  "modules": {
+    "actions.server._actions_process_pool": {
+      "path": "/workspace/actions-pr308/action_server/src/actions/server/_actions_process_pool.py",
+      "sha256": "194720bb8259441d2c91a41798b59e3d632ef9daba1cafa79b5512b1b9204f08"
+    },
+    "actions.server._rcc_runtime_adapter": {
+      "path": "/workspace/actions-pr308/action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "sha256": "c1884571a572277beef50e359f8b5e71abf593e1ebdee4bea2e47290c8da81f2"
+    },
+    "devutils.invoke_utils": {
+      "path": "/workspace/actions-pr308/devutils/src/devutils/invoke_utils.py",
+      "sha256": "7892303d075b2755b490b507c444d9aebc2f0d3089c8812df40d7f0c0fc195b5"
+    }
+  },
+  "distributions": {
+    "actions-runtime": "1.0.3",
+    "actions-core": "1.0.3",
+    "actions-http-helper": "1.0.3"
+  }
+}

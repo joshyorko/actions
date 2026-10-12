@@ -1,0 +1,90 @@
+{
+  "verdict": "GO_F949_PACKAGED_INSTALLED_OAUTH_CANCELLATION_TEMPLATE_IDLE_SCOPED",
+  "source_head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "source_tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+  "producer_checkout": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+  "producer_whole_tree_equal_to_source": true,
+  "run_id": 38211281718,
+  "artifact_id": 11728534466,
+  "archive_bytes": 80775097,
+  "archive_sha256": "f2e116426e40f84ddfb6fd88d96bf2280f169801f91d1820480cbcbb5668bbf6",
+  "package_gate": "7manifest distributions; sixfullwheelRECORD/sourcePythonsets202tracked+generated1; complete203sdistsrcPythonset/sourcebytes; generatedpublicpairINPUTSHA/WindowsCRLF verified; no sdistbuild",
+  "installed_gate": "Runtime203/Core47/Helper2exactbyteparity; public Core1.0.2/Helper1.0.3defaultlock/noSDKdirectURL; all6commandhash/size/exit0;9OAuth/.83s+8exactcommittedheldexecutoradmission/.75s;template600;idleHTTP200/403/200",
+  "cleanup_scope": "Actual wrapperreaped/capturedlive,zombies,errors empty/snapshottrue/2.3424382850025722s; captured facts only. SelfcgroupUNQUALIFIED; normalshipped18.19.3feedbackpossible; managedAction0/noenvacquisition.",
+  "postmodes": "ownedancestor/datadir/robotshome/tmp700;Actionshome750;stdout/stderr600",
+  "prior_failures": "FirstverifierexactpiplineFAIL retained; actualinitialpipexit0healthywarning and separateownedcache700uid1000pipcheckexit0/noinstall verified. Older source/native/artifact/platform failures preserve identities.",
+  "publication": "actualpublicationcredential andPublishstepsSKIPPED; artifactuploadPASS; noregistryRuntimepublication",
+  "reviewer_actions": "Own read-only static verifiers viaexistingconsumerPython, byte/metadata/gitsource controls; independentremoteartifact/jobs/producerGitreadback and fourcompletedjoblogs fetchedonce each. No rawlog/signedURL export, installs, Runtime/OAuth/CLI/RCC/test reruns, builds, sourceedits,newworkers or externalmutations.",
+  "excluded_gates": [
+    "wholef949source/securitydiffapproval",
+    "currentexacthead fullCI reconciliation",
+    "installedMCPdiscovery/resource/read/tool",
+    "actualmanagedAction/worker/nativebaseline",
+    "globaluncappedcleanup/readers/lease",
+    "otherplatforminstalledstartup",
+    "sdistrebuild",
+    "Runtimepublication/fullrelease"
+  ],
+  "evidence": [
+    {
+      "path": "/workspace/successor-evidence/review308-f949-packaged/independent-package-verification.json",
+      "bytes": 14493,
+      "sha256": "803706bbbd339b956adebf6b6bda2f8e9889670967100fea4356d253568bc926"
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-f949-packaged/sdist-complete-source-verification.json",
+      "bytes": 472,
+      "sha256": "1feaa9f95c7ab42cd855c2a3095a513a708a259f038dcc8b9cf8938f16d32b38"
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-f949-packaged/reviewer-installed-verification.json",
+      "bytes": 4027,
+      "sha256": "a8326ed85dd1da590425584f33c07fe3c0cb3965e21d9f8373230762835d0bd5"
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-f949-packaged/producer-provenance.json",
+      "bytes": 2575,
+      "sha256": "ef7253eec631ef42b872e217a5f9677e0d6bcbf15cf61154eaefdf597defbe1c"
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-f949-packaged/extra-controls.json",
+      "bytes": 3287,
+      "sha256": "87c681f81f269cb176547dd36c8aac8784295c051a9627b030f1747679f9c94d"
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-f949-packaged/documentation-proposal.json",
+      "bytes": 1545,
+      "sha256": "9227d0d2331fca78792d42df416cc4b761ba0056c5e3ef85005f3ce878d5727d"
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-f949-packaged/verify_packages.py",
+      "bytes": 8801,
+      "sha256": "548f4400f75013953d524c2af5ec087f8fae471b65ad1f4ea4e56ab416aefc46"
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-f949-packaged/verify_sdist_membership.py",
+      "bytes": 1544,
+      "sha256": "02b80b5c29daf9f6dd25067c3ccdacea394b546d67d5e45ad428a996f9cf17c9"
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-f949-packaged/verify_installed.py",
+      "bytes": 5199,
+      "sha256": "b14d39e9bfcbe9dba424d8b7168506b84532237d0d59951ac068e544b467489a"
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "insertion_point": "Runtime installed-member/source inventory guidance",
+    "exact_delta": "Apply complete Python membership and byte checks to the sdist source tree as well as every wheel. An installed wheel's passing source or regression test does not prove the sdist retained those files. Bind installed behavioral tests to their exact committed test bytes and describe their execution seam: a held executor with persisted Runs can prove cancellation admission before dispatch while leaving actual managed worker execution unqualified.",
+    "durable_learning": "Sdist membership is independently testable; installed seam tests qualify specific behavior without qualifying nativeworker lifecycle.",
+    "evidence": [
+      "extra-controls.json independently checks six complete wheel Python sets and complete sdist srcPython set",
+      "sdist-complete-source-verification.json verifies all202 immutable tracked files plusgenerated module",
+      "Exactcommitted heldexecutor test bytes with installed8PASS/.75s; realRun models/state and no workeracquisition seam observed"
+    ],
+    "stale_or_ambiguous_guidance_removed": "Avoid wheel evidence being transferred to omitted sdist source or heldexecutor cancellation evidence being called managedAction/native proof.",
+    "remaining_uncertainty": "No sdist rebuild/installedMCP/managedAction/globalnative/readers/lease/platform/startup orRuntimepublication qualification. Exacthead fullCI remains separate.",
+    "upstream_disposition": "none"
+  },
+  "upstream_disposition": "none"
+}

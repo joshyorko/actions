@@ -1,0 +1,24 @@
+{
+  "time": "2026-10-12T04:44:00.691510+00:00",
+  "source": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "run": 38201632027,
+  "job": 114656105418,
+  "terminal": "CANCELLED ownerrequested afterboundedreproduction",
+  "log_sha256": "17c797db2868b0c16b1e7f34bdf205b5a3541c446c45bc2117498dca017e188e",
+  "decoded_log_bytes": 681511,
+  "failed_owned_metadata_nodes": [
+    "action_server_tests\\test_owned_cleanup_evidence.py::test_existing_wait_events_and_echild_are_observations_not_invented_reaps",
+    "action_server_tests\\test_owned_cleanup_evidence.py::test_wait_timeout_keeps_primary_cleanup_error_and_unavailable_echild"
+  ],
+  "missing_primitive_errors": [
+    "E               AttributeError: 'types.SimpleNamespace' object has no attribute 'WNOHANG'",
+    "E               AttributeError: 'types.SimpleNamespace' object has no attribute 'WNOHANG'"
+  ],
+  "uncompleted_actual_supervisor_false_case_started": [
+    "2026-10-12T04:00:44.0561999Z"
+  ],
+  "diagnosis": "injectedLinux model copiedWindows osnamespace lackingWNOHANG; AttributeError enterslegacyfallback with constantfake clock; boundedcounterfactual independentlyobservesoriginalerror withoutenteringfallback. Actuallog confirmsnamedtwofailures anduncompletedfalsecase; no finalsuite totals or native integration accepted.",
+  "source_correction": "tests mustinjectcompleteLinuxprimitive interface andguardunexpectedfallback; productionfallback/timeouts/signals unchanged",
+  "native_attempts": 0,
+  "raw_log": "fresh GitHubconnectordecodedtext retainedlocalprivate only"
+}

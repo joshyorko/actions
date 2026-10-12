@@ -1,0 +1,43 @@
+[
+  {
+    "label": "red",
+    "returncode": 1,
+    "command": [
+      "python3",
+      "/workspace/successor-evidence/run-prepared-package.py",
+      "/workspace/actions-pr308/action_server",
+      "poetry",
+      "run",
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "/workspace/successor-evidence/review308-mac-diagnostic/red/action_server/tests/action_server_tests/test_provider_startup_cleanup.py::test_startup_regression_reports_failed_cleanup_and_disposes_original_child",
+      "--basetemp=/workspace/successor-evidence/review308-mac-diagnostic/red/temp",
+      "--junitxml=/workspace/successor-evidence/review308-mac-diagnostic/red.xml"
+    ],
+    "timeout_seconds": 45
+  },
+  {
+    "label": "green",
+    "returncode": 0,
+    "command": [
+      "python3",
+      "/workspace/successor-evidence/run-prepared-package.py",
+      "/workspace/actions-pr308/action_server",
+      "poetry",
+      "run",
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "/workspace/successor-evidence/review308-mac-diagnostic/green/action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+      "/workspace/successor-evidence/review308-mac-diagnostic/green/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+      "-k",
+      "provider_wait_overshoot or startup_regression_reports or provider_startup_failure_uses_bounded_kill_fallback",
+      "--basetemp=/workspace/successor-evidence/review308-mac-diagnostic/green/temp",
+      "--junitxml=/workspace/successor-evidence/review308-mac-diagnostic/green.xml"
+    ],
+    "timeout_seconds": 45
+  }
+]

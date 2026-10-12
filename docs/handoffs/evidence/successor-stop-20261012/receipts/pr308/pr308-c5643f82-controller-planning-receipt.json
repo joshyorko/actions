@@ -1,0 +1,22 @@
+{
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "durable_learning": "public Inspect reconciliation can itself remove stale leases; never infer passive natural release; dirty shipped source is not recovered by public tag",
+    "evidence": "verified6 public gitblob identities and advertised actual binary help/buildinfo",
+    "exact_delta": "/workspace/successor-evidence/pr308/canonical-lifecycle-passive-observation-proposed-delta.md",
+    "remaining_uncertainty": "actual shipped dirty source and passive lease schema, controller design/admission",
+    "sha256": "2a320cfd0731ed0c1d5462581d4ca2df5b50ca4ee8de8e59e5c7eb391d92cc8b",
+    "stale_or_ambiguous_guidance_removed": "candidate lifecycle inspect cannot be labeled readonly from help/name"
+  },
+  "lease_writes_executed": false,
+  "lifecycle_inspect_verify_repair_executed": false,
+  "native_attempts_consumed": 0,
+  "plan": {
+    "path": "/workspace/successor-evidence/pr308/controller-census-c5643f82-DESIGN-REVIEW-REQUIRED.md",
+    "sha256": "d2c1e3fca6a98574d2a74b4814b802ff337d5b3d8cca8131972ad416cbe62cf4"
+  },
+  "scope": "readonly planning/provenance lane; repository clean and code unchanged",
+  "source_commit": "c5643f828ba0b299c0c2a99a9755d90b39b04b3c",
+  "source_tree": "5fd6b2a52a6dffb0df8df6b5d6387e94195a0e06",
+  "upstream_disposition": "none"
+}

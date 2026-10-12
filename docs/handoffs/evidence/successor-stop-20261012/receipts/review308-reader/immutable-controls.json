@@ -1,0 +1,96 @@
+{
+  "commit": "93731e1e36efba73c273de0685ee1a4fa21bdc38",
+  "tree": "005a96f80a43121778130210c57c872a23c40e87",
+  "pool_sha256": "194720bb8259441d2c91a41798b59e3d632ef9daba1cafa79b5512b1b9204f08",
+  "scope": "immutable AST methods with synthetic process/cleanup/readers; no process launches, builds, native execution, or repository changes",
+  "controls": [
+    {
+      "case": "cleanup_and_all_readers_share_deadline",
+      "cleanup_elapsed": 0.5,
+      "joins": [
+        [
+          "stdout",
+          1.5
+        ],
+        [
+          "stderr",
+          1.25
+        ],
+        [
+          "protocol",
+          1.0
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "expired_deadline_no_new_join_budget",
+      "joins": [
+        [
+          "stdout",
+          0.0
+        ],
+        [
+          "stderr",
+          0.0
+        ],
+        [
+          "protocol",
+          0.0
+        ]
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "unstarted_thread",
+      "state": "pending",
+      "reader": {
+        "role": "stderr",
+        "joined": false,
+        "alive": null,
+        "error": "RuntimeError"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "alive_query_failure",
+      "state": "pending",
+      "reader": {
+        "role": "stderr",
+        "joined": true,
+        "alive": null,
+        "error": "OSError"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "crash_live_then_same_reader_retry",
+      "states": [
+        "pending",
+        "crash_unverified"
+      ],
+      "descendant_snapshot_complete": false,
+      "pending_snapshot_stays_unavailable": true,
+      "status": "PASS"
+    },
+    {
+      "case": "stopped_output_failure_visible_capacity_released",
+      "reader": {
+        "role": "stdout",
+        "joined": true,
+        "alive": false,
+        "error": "OSError"
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "default_retry_gets_fresh_per_attempt_deadline",
+      "deadlines": [
+        30.0,
+        35.0
+      ],
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS"
+}

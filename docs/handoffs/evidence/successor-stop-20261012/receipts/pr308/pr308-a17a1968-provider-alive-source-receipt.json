@@ -1,0 +1,200 @@
+{
+  "affected": "139PASS/1nativeDESEL5.03s",
+  "base": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+  "base_helper_sha256": "7c6499fda0a0f9c5e22cbc64c53d1aa8f3a8152e5539a0dabd30a1ee376b6e8e",
+  "commands": {
+    "affected": ".venv/bin/python -m pytest -q -n0 tests/action_server_tests/test_provider_startup_cleanup.py tests/action_server_tests/test_dakota_rcc_acceptance.py tests/action_server_tests/test_owned_cleanup_evidence.py -m \"not integration_test\" --basetemp=/workspace/successor-pr308/provider-alive-classification-affected-v2 --junitxml=/workspace/successor-evidence/pr308/provider-alive-classification-affected-v2.xml",
+    "green": ".venv/bin/python -m pytest -q -n0 tests/action_server_tests/test_provider_startup_cleanup.py -k one_shot --basetemp=/workspace/successor-pr308/provider-alive-classification-green-v2 --junitxml=/workspace/successor-evidence/pr308/provider-alive-classification-green-v2.xml",
+    "red": ".venv/bin/python -m pytest -q -n0 /workspace/successor-pr308/provider-alive-classification-red-v2-source/tests/action_server_tests/test_provider_startup_cleanup.py -k one_shot --basetemp=/workspace/successor-pr308/provider-alive-classification-red-v2 --junitxml=/workspace/successor-evidence/pr308/provider-alive-classification-red-v2.xml",
+    "static": "Prepared toolkit PATH/ROBOCORP_HOME/own Poetry UV TMP caches: poetry run invoke lint typecheck"
+  },
+  "diff_check": "PASS",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Classify join and liveness exceptions separately; one-shot liveness failure remains ALIVE/incomplete despite subsequent stopped observation; preserve primary startup error",
+    "evidence": "Source-bound3 RED/3 GREEN, actual retained Thread, strict2 helper probes, absolute.17s remaining budget, primary JSONDecodeError cause/object identity,139affectedPASS",
+    "remaining_uncertainty": "Full controller/native admission incomplete; new exact-head review and CI pending",
+    "stale_or_ambiguous_guidance_removed": "Joined-thread liveness failure could be mislabeled as join failure"
+  },
+  "evidence_files": [
+    {
+      "bytes": 7884,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-red.log",
+      "sha256": "dedfb0b3d89bc25046f02060d76fe3ca24b42efcdf8b0b5b3021be620cb60022"
+    },
+    {
+      "bytes": 8019,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-red.xml",
+      "sha256": "fbefc0f42c2954f436ef7d5da68208d0956ae4be6f61be619f687c15c01aac43"
+    },
+    {
+      "bytes": 5022,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-green.log",
+      "sha256": "aab9ed3e79e288e2ebe9f0ea889c370dbb38024c6fdd01b09d5e0d79511d1a31"
+    },
+    {
+      "bytes": 11775,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-green.xml",
+      "sha256": "4245d51e1cdffd8e946f5250cb6a217fbb8120f3f28e076ac5da00af08f179d7"
+    },
+    {
+      "bytes": 5126,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-affected-final.log",
+      "sha256": "8bb1a65f58d3ed9911590487b3ccd6970ed8d2bb0c065f97b10dfb9d52a52f8e"
+    },
+    {
+      "bytes": 28392,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-affected-final.xml",
+      "sha256": "b6058c661d34abc35d1690ec4bc193938bbb0ee0ea48f2d9dc6b4fdbb8046873"
+    },
+    {
+      "bytes": 5348,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-caller-diagnostic-v3.log",
+      "sha256": "6f86fec8b13795baef8b37a67ac034c6623c8ea02b0c8293a60a52a3fdfc5439"
+    },
+    {
+      "bytes": 510,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-red-v2-source-binding.json",
+      "sha256": "5fb0ab0422070da11f0b914caf022f9f85dcf6a1135e9be4a944f2c6345703b6"
+    },
+    {
+      "bytes": 11126,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-red-v2.log",
+      "sha256": "e339b62bd9858e5618f0510306ad40a31ddf64f36e0122e082760b71c78feda2"
+    },
+    {
+      "bytes": 9850,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-red-v2.xml",
+      "sha256": "a4eed52fd8755dfc1d549280768db32fab42ade4d3c48feaa4c4bf5664c84a64"
+    },
+    {
+      "bytes": 283,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-green-v2.log",
+      "sha256": "6199d3406fe26f884df864059662ffadbc0842c0b3dae08821084ae36fb5fb9d"
+    },
+    {
+      "bytes": 748,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-green-v2.xml",
+      "sha256": "d0ef60159a9a8c5a4f79dfd77846cd88ffdb7e7474d43cd4fa61c948c1c90afe"
+    },
+    {
+      "bytes": 367,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-affected-v2.log",
+      "sha256": "9e7e87b1553ece41c3d46d00e1a278f01b4022f7552a26323f79461eacb3913e"
+    },
+    {
+      "bytes": 23957,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-affected-v2.xml",
+      "sha256": "af225af910d0b2913850197d1d61f1a02a548e43de98db05f4933db951105f5e"
+    },
+    {
+      "bytes": 2017,
+      "path": "/workspace/successor-evidence/pr308/provider-alive-classification-static-v2.log",
+      "sha256": "dc39c1a0e95b8a3a5dbc7cdf822b6667f1fcebe9e2c9057952e8e725f87aa83e"
+    }
+  ],
+  "green": "3PASS/38DESEL0.20s",
+  "head": "a17a1968b02e5bfd10acd89dba3fed17ca4ee37d",
+  "held_review": {
+    "bytes": 5197,
+    "path": "/workspace/successor-evidence/review308-unverified-reader/review.json",
+    "sha256": "720e0c1231f6be5be0234af8c6d22ae970ce8f6eb32d5e545a773286b0b8670b"
+  },
+  "helper_compile": "PASS",
+  "lease_queries_or_writes": false,
+  "native_attempts_consumed": 0,
+  "native_profile": {
+    "bytes": 2702,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-a17a1968-v14-READER-CLASSIFICATION-NOTADMITTED.json",
+    "sha256": "67edb5923772f6e3e19637f7d52ca3c526bb0c92b8af1155afc3a869c0e69a5b"
+  },
+  "optional_versions_launched": false,
+  "original_review_control": {
+    "bytes": 712,
+    "path": "/workspace/successor-evidence/review308-unverified-reader/alive-classification-control.json",
+    "sha256": "f9306bd32588c18c852598544793a47a3f09f9b3443bb77cf2ac65914046d888"
+  },
+  "patch": {
+    "bytes": 7391,
+    "path": "/workspace/successor-evidence/pr308/provider-alive-classification-a17a1968-source.patch",
+    "sha256": "1d88c6243dccbce9082f1b075322114e5ec45bee29bb12ae7cff71a07090db13"
+  },
+  "prior_failed_controls_preserved": "Original381 HOLD and first failed GREEN 2FAIL39PASS plus affected2FAIL137PASS untouched. Caller diagnostic proves four Thread.__repr__ probes; strict2 helper-code-identity observations retained.",
+  "push_by_this_lane": false,
+  "red": "3FAIL/38DESEL against immutable381; errors JOIN where ALIVE required",
+  "resource": {
+    "/dev/shm": {
+      "free_bytes": 9441349632
+    },
+    "/tmp": {
+      "free_bytes": 9441144832
+    },
+    "/workspace": {
+      "free_bytes": 11536572416
+    },
+    "memory.current": "15188467712",
+    "memory.events": "low 0\nhigh 0\nmax 36423\noom 0\noom_kill 0\noom_group_kill 0",
+    "memory.max": "17179869184",
+    "scope": "visible cgroup counters only; namespace/ancestor mapping and memory contract unaccepted",
+    "time_unix": 1791790255.494093,
+    "visible_headroom_bytes": 1991401472
+  },
+  "schema": 1,
+  "source_ast_declarations_changed": [
+    "cleanup_provider_until"
+  ],
+  "source_delta": "Separate join() try from first is_alive() probe. Preserve same original Thread/deadline, both liveness probes, incomplete result and primary exception.",
+  "source_files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes": 110515,
+      "path": "/workspace/actions-pr308/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "7292fa26cce41e6b24fbcb7e1d2fc385a99c2f51d3181983e85d962fdf926608"
+    },
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py": {
+      "bytes": 32682,
+      "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+      "sha256": "a0f6b32b43687932177ca11129dd15c61001605b0ceb24ca29af62b1115bfdaf"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 292025,
+      "path": "/workspace/actions-pr308/docs/skills/repository-operations.md",
+      "sha256": "9a1c88e19470a404d1b2e836374138534fd84f33b100c767fa1f94fae1b05652"
+    }
+  },
+  "static": "Configured package Poetry invoke lint typecheck via prepared pinned RCC toolkit; Ruff/format323files/IsortPASS,mypy361PASS; markdownlint unavailable",
+  "tree": "9dd420c0dbae72c5b6a724a77c009a4cfb65f0a0",
+  "upstream_disposition": "none",
+  "worktree_clean": true,
+  "xml_results": {
+    "affected-v2": {
+      "errors": "0",
+      "failures": "0",
+      "hostname": "9e619bc297a7",
+      "name": "pytest",
+      "skipped": "0",
+      "tests": "139",
+      "time": "5.025",
+      "timestamp": "2026-10-12T07:29:07.369458+00:00"
+    },
+    "green-v2": {
+      "errors": "0",
+      "failures": "0",
+      "hostname": "9e619bc297a7",
+      "name": "pytest",
+      "skipped": "0",
+      "tests": "3",
+      "time": "0.205",
+      "timestamp": "2026-10-12T07:27:28.990884+00:00"
+    },
+    "red-v2": {
+      "errors": "0",
+      "failures": "3",
+      "hostname": "9e619bc297a7",
+      "name": "pytest",
+      "skipped": "0",
+      "tests": "3",
+      "time": "0.311",
+      "timestamp": "2026-10-12T07:27:54.998713+00:00"
+    }
+  }
+}

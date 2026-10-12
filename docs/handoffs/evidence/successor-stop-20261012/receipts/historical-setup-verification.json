@@ -1,0 +1,55 @@
+{
+  "head": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+  "rows": [
+    {
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/historical-setup-source/Dockerfile.trusted",
+      "bytes": 2250,
+      "sha256": "e476c2bc3e314a9e18986a58921d6e0099a1db64b22beb6aa600215d143e9269",
+      "match": true
+    },
+    {
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/historical-setup-source/activate.sh",
+      "bytes": 987,
+      "sha256": "6478b7b31155b8594e4dbd66f79d8a9e94e63543740d81508af8b635056f646a",
+      "match": true
+    },
+    {
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/historical-setup-source/configure-network.py",
+      "bytes": 1495,
+      "sha256": "c7cf640f70f9a30e58eef3d8dc4ea47a8bb300ecadb51d3f01c17119b10bf10b",
+      "match": true
+    },
+    {
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/historical-setup-source/install.sh",
+      "bytes": 7741,
+      "sha256": "e79435e448c3313434b9a41ebd60fdcc8f6e856fa7aab446459aab4550c2b812",
+      "match": true
+    },
+    {
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/historical-setup-source/package-command.py",
+      "bytes": 554,
+      "sha256": "871cac9ad7a4f6179cb80c5f616ba7fd39570512f56774db682427fb7c7036f9",
+      "match": true
+    },
+    {
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/historical-setup-source/smoke-server.py",
+      "bytes": 3841,
+      "sha256": "097c04c34e90e389bf1d6e8014b492a28b7ea292bad8846f6d692d568bad26df",
+      "match": true
+    },
+    {
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/historical-setup-source/toolchain-freeze.yaml",
+      "bytes": 2008,
+      "sha256": "90fc0205b1cf24c39ac0ea41cf3def46fcc1a2a000481413a191427ef601dc22",
+      "match": true
+    },
+    {
+      "copy": "docs/handoffs/evidence/workspace-transfer-20261011/historical-setup-source/validation-source.txt",
+      "bytes": 52,
+      "sha256": "19ea0688d40f4acb39626e60fcdda952189f7cfe6dc23f926b8f77bf6de10c16",
+      "match": true
+    }
+  ],
+  "checked": 8,
+  "executed_historical_setup": false
+}

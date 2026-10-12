@@ -1,0 +1,27 @@
+{
+  "schema_version": 2,
+  "attempt_id": "b6075a93-95e8-4544-8034-958cf8bf94a4",
+  "source_sha_claim": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "build_version_claim": "test",
+  "build_claim_verification": "caller supplied; not verified against a retained build manifest",
+  "platform": "Linux",
+  "architecture": "x86_64",
+  "status": "IN_PROGRESS",
+  "consumer_execution": "Runtime action executed by the packaged Runtime worker",
+  "test_harness_sqlite_writes": [
+    "seed stale reservation fixture only"
+  ],
+  "recovery_fixture_limit": "stale persisted reservation seeded by harness; process crash not simulated",
+  "worker_dependencies": {
+    "actions-core": "uninspected candidate wheel installed by post-install",
+    "actions-work-items": "0.4.4"
+  },
+  "checks": [
+    "consumer_action_reserves_input_and_releases_completed_with_parent_linked_output",
+    "consumer_action_releases_failed_with_error_details_then_fails_run",
+    "consumer_action_recovers_seeded_stale_reservation_retries_and_completes",
+    "runtime_restart_state_and_output_persistence",
+    "consumer_action_verified_installed_actions_core_candidate_wheel"
+  ],
+  "cases": []
+}

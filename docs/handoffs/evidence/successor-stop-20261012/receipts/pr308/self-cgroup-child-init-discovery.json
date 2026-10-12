@@ -1,0 +1,41 @@
+{
+  "pid": 56979,
+  "self_cgroup": "0::/\n",
+  "mountinfo": [
+    "90 89 0:24 /.. /sys/fs/cgroup ro,nosuid,nodev,noexec,relatime master:8 - cgroup2 cgroup2 rw,nsdelegate"
+  ],
+  "child_directory": "/sys/fs/cgroup/init",
+  "samples": [
+    {
+      "time_ns": 21788496057536,
+      "device": 24,
+      "inode": 215,
+      "uid": 65534,
+      "bytes": 46,
+      "sha256": "6366daf3f729bb5decc6268cb27b5d0767db1b607ec32ae29484458c5342e837",
+      "own_pid_present": true,
+      "pid_count": 10,
+      "child_current": 14691467264,
+      "child_max": "max",
+      "parent_current": 14694793216,
+      "parent_max": 17179869184
+    },
+    {
+      "time_ns": 21788496209214,
+      "device": 24,
+      "inode": 215,
+      "uid": 65534,
+      "bytes": 46,
+      "sha256": "6366daf3f729bb5decc6268cb27b5d0767db1b607ec32ae29484458c5342e837",
+      "own_pid_present": true,
+      "pid_count": 10,
+      "child_current": 14691467264,
+      "child_max": "max",
+      "parent_current": 14694793216,
+      "parent_max": 17179869184
+    }
+  ],
+  "result": "OWN_PID_WITNESSED_IN_CHILD; canonical namespace-path mapping unresolved",
+  "scope": "Bounded read-only discovery; not admitted native controller or accepted memory budget",
+  "native_attempts": 0
+}

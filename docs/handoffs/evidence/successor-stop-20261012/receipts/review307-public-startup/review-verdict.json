@@ -1,0 +1,48 @@
+{
+  "verdict": "GO_PUBLIC_DEPENDENCY_AND_IDLE_INSTALLED_STARTUP_SCOPED",
+  "runtime_source": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "runtime_artifact": 11722158889,
+  "runtime_wheel_sha256": "ff31635de80d6c30762bf86754d8d88c0102f5a66ade5bd32673adf63dee8efc",
+  "consumer_root": "/workspace/successor-evidence/pr307-packaged/public-dependency-consumer",
+  "public_dependency_gate": "PASS: live public PyPI1.0.3 metadata, default-source exact Poetry lock and cached wheel hashes/sizes agree; public Core48/HTTPHelper2 installed Python files match. No Core/Helper direct_url or source override.",
+  "runtime_origin_gate": "PASS: Runtime artifact wheel direct_url digest and all203installedPythonfiles exact measured23a artifact; installed configured API-key source matches accepted source403.",
+  "oauth_and_requirement_evidence": "Parent public namespace commands recorded and each exit0/log byte count/SHA verified:9OAuthPASS in0.71s; pip checkNoBrokenRequirements. No rerun by this reviewer.",
+  "idle_startup_gate": "PASS_SCOPED: actual installedCLI actions-sync=false,minworkers0,auth enabled with secrets.token_urlsafe synthetic key; OpenAPI200, protectedWorkItemsstats no-key403/key200. Observed wrapper reaped, captured live/zombie/error lists empty, snapshot flagtrue; elapsed1.02s.",
+  "privacy_boundary": "Actual enclosing root/datadir/robots-home/tmp0700, ACTIONS_HOME0750, stdout/stderr0600. Do not repeat blanket0700home claim; enclosing root remainsprivate. No actual operator/provider credential supplied or recorded in reviewer receipts.",
+  "original_failures": {
+    "once1": "FAIL preserved. Expected401 assertion conflicted with actual accepted middleware403. v2 changes only fresh run directory and expected status403; no auth-source relaxation.",
+    "review_permission_control": "FAIL preserved. Initial assumption all post-start homes remained0700 was incorrect; observed ACTIONS_HOME0750. No source/mode/receipt changes and no startup rerun performed."
+  },
+  "remaining_scoped_findings": [],
+  "control_limitation": "Startup PASS expression does not itself require snapshot_complete; the actual receipt includes true and this review verifies it. That flag is not an uncapped final census.",
+  "still_hold": [
+    "Whole208/native managed Action/environment acquisition and genuine RCC18.19.3 baseline",
+    "Full final descendant/create-time/reader census and lease acceptance",
+    "Other-platform and public Runtime registry publication/fullrelease/signing acceptance",
+    "Self-cgroup resource-admission qualification"
+  ],
+  "native_Action_baseline_attempts": 0,
+  "reviewer_actions": "Read-only existing environment metadata/files and public registry API; no CLI/RCC/Action/OAuth rerun, installs, infrastructure or external mutations.",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "insertion_point": "Installed-consumer qualification guidance near Core and Runtime compatibility",
+    "exact_delta": "For an installed idle CLI probe with a configured API key, ordinary protected HTTP without a key returns 403 from `_ConfiguredAPIKeyMiddleware`; test valid bearer access separately. Keep `--actions-sync=false`, zero minimum workers, and any normal shipped RCC feedback explicit in the scope. Public dependency origins, HTTP readiness and captured-set wrapper cleanup establish idle installed behavior; managed Action/environment acquisition, active-reader census and RCC lease acceptance require separate gates.\n\nVerify directory permissions after startup, rather than relying only on the creation mode. Record actual child-directory modes and the private ancestor boundary; a child home can be `0750` while the enclosing run root remains `0700`. Treat a true captured snapshot flag as an observed condition for the scoped receipt, not a final uncapped process/reader/lease census.",
+    "durable_learning": "Use the installed source's precise missing-key status, distinguish idle startup from managed/native acceptance, and verify post-start rather than initial permissions.",
+    "evidence": [
+      "independent-public-origin-verification.json verifies exact installed accepted middleware403 and public Core48/Helper2/Runtime203 Python-member parity",
+      "startup-and-command-bounds.json binds the original failed401 assertion and revised403 expectation to otherwise unchanged control code",
+      "Actual once2 root/datadir/robots-home/tmp remain0700, ACTIONS_HOME is0750, output logs0600; initial blanket0700 verifier failure is retained",
+      "Public command receipt/log hashes independently match9OAuthPASS and NoBrokenRequirements"
+    ],
+    "stale_or_ambiguous_guidance_removed": "Avoid assuming401 for this configured-key middleware, treating a mkdir0700 call as the final mode, or describing idle HTTP/captured cleanup as a genuine native Action/RCC lease gate.",
+    "remaining_uncertainty": "The cause of ACTIONS_HOME's post-start0750 mode was not independently traced. Managed Action acquisition/baseline, final uncapped descendant/reader census, RCC lease queries, other platforms and whole208/fullrelease/publicRuntimepublication remain unqualified."
+  },
+  "evidence": [
+    "independent-public-origin-verification.json",
+    "startup-and-command-bounds.json",
+    "initial-poststartup-permission-control-FAIL.json",
+    "documentation-proposal.json",
+    "/workspace/successor-evidence/pr307-packaged/public-installed-consumer-verification.json"
+  ],
+  "upstream_disposition": "none"
+}

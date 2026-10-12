@@ -1,0 +1,121 @@
+{
+  "schema": "actions-installed-idle-startup-post-permissions/v1",
+  "time": "2026-10-12T03:20:54.226265+00:00",
+  "rows": [
+    {
+      "attempt": "startup-once1",
+      "path": ".",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o700",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once1",
+      "path": "datadir",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o700",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once1",
+      "path": "actions-home",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o750",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once1",
+      "path": "robots-home",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o700",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once1",
+      "path": "tmp",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o700",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once1",
+      "path": "stdout.log",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o600",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once1",
+      "path": "stderr.log",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o600",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once2",
+      "path": ".",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o700",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once2",
+      "path": "datadir",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o700",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once2",
+      "path": "actions-home",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o750",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once2",
+      "path": "robots-home",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o700",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once2",
+      "path": "tmp",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o700",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once2",
+      "path": "stdout.log",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o600",
+      "symlink": false
+    },
+    {
+      "attempt": "startup-once2",
+      "path": "stderr.log",
+      "uid": 1000,
+      "gid": 1000,
+      "mode": "0o600",
+      "symlink": false
+    }
+  ],
+  "qualified_scope": "Outer per-attempt root0700, Actions home observed0750, othercreateddirectories0700, captures0600. Do notlabelallhomes0700 orrelaxdifferentnativefixtureexpectations.",
+  "RCC_cause": "Normal CLI shippedRCC feedbackmaychangeACTIONS_HOME; causalimplementationnottraced inthisreceipt",
+  "managed_Action_baseline": "NOT_RUN"
+}

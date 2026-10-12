@@ -1,0 +1,15 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "insertion_point": "Core and Runtime compatibility, after the paragraph describing the Core1.0.2 registry contract and newer MCP meta surface",
+  "exact_delta": "Separate the Runtime host's Core floor from the managed Action package's feature pin. Runtime reads MCP `options.get(\"_meta\")` as optional catalog data; it does not call Core's authoring decorators. Verified public Core 1.0.2 rejects `meta=` in those decorators, while the Canvas package manifest pins Core 1.0.3. Assess a dependency-floor blocker from the APIs the consuming component actually calls.\n\nAn installed minimum-Core OAuth and idle HTTP probe does not qualify minimum-Core MCP discovery, resource reads or tool execution. Record those paths as untested until their own installed-consumer gate runs; a later Core version's passing probe cannot substitute for it.",
+  "durable_learning": "A missing authoring API is a managed-package feature-version limitation, not automatically a Runtime-host floor incompatibility. Keep minimum-floor installed paths distinct.",
+  "evidence": [
+    "core-floor-audit.json: ten direct Core import sites, public1.0.2 source/sdist provenance and matching integration signatures",
+    "Extracted exactCore1.0.2 decorator AST controls reject meta with ValueError; ordinary decorators accept without it",
+    "Core1.0.2 cached wheel47 installed Python members match public digest and selected immutable public source files",
+    "Runtime MCP adapter optional _meta lookup and Canvas package1.0.3 feature pin are bound to exact23a Git blobs",
+    "minimum-core-installed-review.json verifies minimum-Core9OAuth/idle command hashes and limits"
+  ],
+  "stale_or_ambiguous_guidance_removed": "Avoid attributing the absence of Core1.0.2 meta authoring to an unconditional Runtime-host import/call failure, or presenting OAuth/idle startup as minimum-floor MCP execution acceptance.",
+  "remaining_uncertainty": "Minimum-Core installed MCP discovery/read/tool execution and managed Action/native/reader/lease/full195 acceptance remain untested; no floor-change implementation is justified solely by this audit."
+}

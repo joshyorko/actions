@@ -1,0 +1,14 @@
+{
+  "observed_at": "2026-10-12T07:19:38.940425+00:00",
+  "supersedes_current_projection_only": "v12/v13 proposals and root comment floor-plus-reserve; original receipts unchanged",
+  "owned_state_envelope": 2576980377,
+  "shared_memory_stop_reserve": 536870912,
+  "initial_memory_floor": 3113851289,
+  "arithmetic": "2576980377+536870912=3113851289; reserve is already included",
+  "observed_post_advice_margin": 3166076928,
+  "margin_above_proposal": 52225639,
+  "memory_floor_accepted": false,
+  "calibrated_native_peak": false,
+  "scope": "Independent provenance audit states envelope is owned filesystem state, not measured cold solver/RSS requirement. No budget approval or native launch inferred from exceeding arithmeticproposal. Await exactsource-bound independentreceipt",
+  "native_attempts": 0
+}

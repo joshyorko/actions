@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-12T01:55:04.174162+00:00",
+  "operation": "bounded per-file os.posix_fadvise(DONTNEED) on fresh completed parent actions-home and pytest scratch",
+  "terminal": "FAIL_BOUNDED_LIMIT",
+  "reason": "50s/file-count/6GiB stop; exception before final rows/count retention; exact touched count unavailable",
+  "scope": "read-only fds; fsync and cache advice; no unlink/rename/chmod/content write/globaldropcache",
+  "visible_memory_current_after": 12879835136,
+  "visible_memory_max": 17179869184,
+  "native_admission": "HOLD namespace/fixture/source; no attribution claim for exact amount reclaimed"
+}

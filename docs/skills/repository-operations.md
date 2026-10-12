@@ -3855,3 +3855,29 @@ configuration does not select pip's cache: use a task-owned 0700 PIP_CACHE_DIR
 for read-only installed dependency checks. Retain original command exit/output
 and parser failures separately; do not change HOME permissions or relabel a
 healthy dependency command as failed because an output parser rejected a warning.
+
+
+For a stopped-workspace handoff, distinguish accepted source from preservation
+heads and ancestor CI from current-head acceptance. Confirm every worker is
+inactive and record terminal owned operations before exporting. Preserve source
+on existing branches with normal pushes; CI-skip preservation commits are not
+tested release candidates. Independently read back complete remote tree and
+source manifests. Do not export decoded transport metadata, signed URLs, raw
+logs, credentials or environments; mark a redacted downloader and its original
+hash separately. Retained owner names and scripts are not runnable resume grants.
+
+A cgroup mount's namespace-relative root is not a filesystem path to normalize
+against /proc/self/cgroup. Current-PID membership and a pinned physical child/
+ancestor route can establish shared visible counters without proving exclusive
+capacity or an entire effective host limit. Record numeric admission provenance
+separately: the historical3113851289 entry proposal already includes536870912
+reserve, and its2576980377 input described filesystem state, not native RSS.
+Do not add its reserve twice or call it an operator-approved cold-solver budget.
+The preserved read-only backend is incomplete and cannot launch/admit work.
+
+Feature accounting must preserve whole-contract UNKNOWN states and distinguish
+partial foundations from missing implementation. Five coordination/advisory/
+policy records are separate from49 delivery contracts;1accepted,3close-ready,
+15partial and30unknown is the bounded stopped-workspace reconciliation, not a
+claim that48 user-facing features remain to build. Retain exact criterion hashes,
+dependencies and existing source/PR owners when a feature is picked individually.

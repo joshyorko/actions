@@ -1,0 +1,189 @@
+diff --git a/action_server/scripts/verify_dakota_rcc_acceptance.py b/action_server/scripts/verify_dakota_rcc_acceptance.py
+index 677d15f8..47fbf549 100644
+--- a/action_server/scripts/verify_dakota_rcc_acceptance.py
++++ b/action_server/scripts/verify_dakota_rcc_acceptance.py
+@@ -1465,6 +1465,10 @@ def cleanup_provider_until(
+                 )
+             except Exception as error:
+                 errors.append(f"PROVIDER_TREE_{type(error).__name__}")
++    # The original pipe reader has independent ownership from the process tree.
++    # Observe it under the same endpoint even when root birth is unconfirmed;
++    # this grants neither process signals nor overall cleanup completion.
++    if isinstance(owner, _ProviderOwnership) and owner.process is process:
+         reader = owner.reader
+         if isinstance(reader, _ProviderStartupReader) and reader.owner is owner:
+             joined = False
+diff --git a/action_server/tests/action_server_tests/test_provider_startup_cleanup.py b/action_server/tests/action_server_tests/test_provider_startup_cleanup.py
+index ccf0130c..e70a85b2 100644
+--- a/action_server/tests/action_server_tests/test_provider_startup_cleanup.py
++++ b/action_server/tests/action_server_tests/test_provider_startup_cleanup.py
+@@ -678,3 +678,149 @@ def test_fixture_child_stop_check_rejects_reused_identity(monkeypatch):
+     )
+     with pytest.raises(AssertionError, match="PROVIDER_FIXTURE_CHILD_REUSED"):
+         acceptance_tests._provider_fixture_child_stopped(SimpleNamespace(pid=777), 20.0)
++
++
++def test_original_finished_reader_is_observed_when_tree_ownership_is_unknown(
++    monkeypatch,
++):
++    from actions.server._common import process as process_utils
++
++    harness = _harness()
++    original = SimpleNamespace(pid=123, poll=lambda: None)
++    owner = harness._ProviderOwnership(original)
++    owner.errors = ("CONTROLLED_CAPTURE_UNAVAILABLE",)
++    original._rcc_provider_owner = owner
++    harness._readline_with_timeout(io.StringIO("ready\n"), 0.2, owner=owner)
++    reader = owner.reader.thread
++    reader.join(timeout=1)
++    delegated = []
++    monkeypatch.setattr(
++        process_utils,
++        "force_kill_process_tree_until",
++        lambda *args: delegated.append(args),
++    )
++    result = harness.cleanup_provider_until(original, time.monotonic() + 0.2)
++    assert not delegated and not result.ownership_confirmed and not result.complete
++    assert result.reader.joined is True
++    assert result.reader.alive is False
++    assert result.reader.error is None
++    assert result.errors == (
++        "CONTROLLED_CAPTURE_UNAVAILABLE",
++        "PROVIDER_OWNER_UNCONFIRMED",
++    )
++    assert owner.reader.thread is reader
++
++
++@pytest.mark.parametrize("deadline, expected_timeout", [(100.05, 0.02), (100.0, 0.0)])
++def test_unknown_tree_reader_uses_remaining_absolute_deadline_and_same_thread(
++    monkeypatch, deadline, expected_timeout
++):
++    from actions.server._common import process as process_utils
++
++    harness = _harness()
++    original = SimpleNamespace(pid=123, poll=lambda: None)
++    owner = harness._ProviderOwnership(original)
++    original._rcc_provider_owner = owner
++    release = threading.Event()
++
++    class BlockedStream:
++        def readline(self):
++            assert release.wait(timeout=2)
++            return "ready\n"
++
++    reader = None
++    try:
++        with pytest.raises(TimeoutError):
++            harness._readline_with_timeout(BlockedStream(), 0.01, owner=owner)
++        reader = owner.reader.thread
++        timeouts = []
++        actual_join = reader.join
++
++        def record_join(timeout):
++            timeouts.append(timeout)
++            actual_join(timeout=0)
++
++        monkeypatch.setattr(reader, "join", record_join)
++        monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 100.03))
++        monkeypatch.setattr(
++            process_utils,
++            "force_kill_process_tree_until",
++            lambda *args: pytest.fail("unknown tree must not receive signal authority"),
++        )
++        result = harness.cleanup_provider_until(original, deadline)
++        assert timeouts == [pytest.approx(expected_timeout)]
++        assert result.reader.alive is True and result.reader.joined is False
++        assert not result.complete and not result.ownership_confirmed
++        assert owner.reader.thread is reader
++    finally:
++        release.set()
++        if reader is not None:
++            threading.Thread.join(reader, timeout=1)
++            assert not reader.is_alive()
++
++
++def test_unknown_tree_reader_failure_remains_secondary_to_startup_error(
++    tmp_path, monkeypatch
++):
++    harness = _harness()
++    original = SimpleNamespace(
++        pid=123, stdout=io.StringIO("invalid\n"), poll=lambda: None
++    )
++    monkeypatch.setattr(
++        harness,
++        "subprocess",
++        SimpleNamespace(
++            **dict(vars(subprocess), Popen=lambda *args, **kwargs: original)
++        ),
++    )
++
++    def unverified_capture(process):
++        owner = harness._ProviderOwnership(process)
++        process._rcc_provider_owner = owner
++        return owner
++
++    actual_readline = harness._readline_with_timeout
++
++    def fail_join_after_read(*args, owner, **kwargs):
++        line = actual_readline(*args, owner=owner, **kwargs)
++        owner.reader.thread.join(timeout=1)
++        monkeypatch.setattr(
++            owner.reader.thread,
++            "join",
++            lambda timeout: (_ for _ in ()).throw(OSError("private join details")),
++        )
++        return line
++
++    monkeypatch.setattr(harness, "_capture_provider_ownership", unverified_capture)
++    monkeypatch.setattr(harness, "_readline_with_timeout", fail_join_after_read)
++    with pytest.raises(RuntimeError, match="startup JSON") as caught:
++        harness.start_provider(
++            "/unused/rcc", tmp_path, {}, deadline=harness.Deadline.after(1)
++        )
++    assert isinstance(caught.value.__cause__, json.JSONDecodeError)
++    result = caught.value.provider_cleanup_result
++    assert result.reader.error == "PROVIDER_JOIN_OSError"
++    assert result.reader.alive is False
++    assert not result.complete and not result.ownership_confirmed
++    assert "private join details" not in json.dumps(result.to_dict())
++
++
++@pytest.mark.parametrize("poison", ["owner_process", "reader_owner"])
++def test_unknown_tree_never_joins_a_reader_with_changed_owner(monkeypatch, poison):
++    harness = _harness()
++    original = SimpleNamespace(pid=123, poll=lambda: None)
++    owner = harness._ProviderOwnership(original)
++    original._rcc_provider_owner = owner
++    harness._readline_with_timeout(io.StringIO("ready\n"), 0.2, owner=owner)
++    reader = owner.reader.thread
++    reader.join(timeout=1)
++    if poison == "owner_process":
++        owner.process = object()
++    else:
++        owner.reader.owner = object()
++    joins = []
++    monkeypatch.setattr(reader, "join", lambda timeout: joins.append(timeout))
++    result = harness.cleanup_provider_until(original, time.monotonic() + 0.2)
++    assert not joins
++    assert result.reader.error == "PROVIDER_READER_UNAVAILABLE"
++    assert not result.ownership_confirmed and not result.complete
+diff --git a/docs/skills/repository-operations.md b/docs/skills/repository-operations.md
+index b20b3146..85e07f02 100644
+--- a/docs/skills/repository-operations.md
++++ b/docs/skills/repository-operations.md
+@@ -2684,6 +2684,15 @@ from the Runtime server's existing `Process._stop_and_reap_until` readers and
+ from provider startup readers. Thread closure does not prove lease release or
+ complete descendant reaping; native admission must still check those facts.
+ 
++The retained provider startup reader has its own ownership checks: its original
++owner must still refer to the caller's exact process object, and the reader must
++still refer to that exact owner. Observe that same thread using the existing
++absolute cleanup endpoint even when process-tree birth capture is unconfirmed.
++A successful reader join measures only the reader; it does not grant process
++signal authority, confirm tree cleanup, or prove lease release. Missing or
++changed object bindings keep reader evidence unavailable. Join errors remain
++fixed secondary classes attached to the original startup failure.
++
+ Provider startup failure tests retain the original `Popen` and the primary
+ exception's typed cleanup result. Assert the observed cleanup facts before
+ emergency test teardown, and report those facts on failure. Always kill, wait,

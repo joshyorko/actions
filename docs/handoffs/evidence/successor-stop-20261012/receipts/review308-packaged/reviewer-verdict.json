@@ -1,0 +1,82 @@
+{
+  "verdict": "GO_PACKAGED_INSTALLED_OAUTH_TEMPLATE_IDLE_SCOPED",
+  "source_head": "fe1bdee3d5014d39a763d088535c29d65b38315d",
+  "source_tree": "c0371a7a0fa113be56199f260029ee1c09f63d1a",
+  "actual_producer_checkout": "fc2f1e747a6b417d19e82916eb88ad76f27a6472",
+  "producer_complete_tree_equals_source": true,
+  "run_id": 38201632080,
+  "artifact_id": 11725299041,
+  "archive_sha256": "db54fbcf04ac43261f6174b7f1e3444604785ce2d746c8273b183f0ac8f455f6",
+  "archive_bytes": 80773117,
+  "package_gate": "7manifest entries,6wheels RECORD/allPython set/source202 plus generated1/public pair provenance PASS; sdist OAuth/source inputs/build metadata exact; no sdist rebuild",
+  "installed_gate": "PublicCore1.0.2 Helper1.0.3; Runtime203/Core47/Helper2 byte equality+lock/no SDK direct_url;5 command hashes/sizes/exits verified;9OAuthPASS/.70s,pipcheckPASS,realtemplate0600,idle200/403/200",
+  "cleanup_scope": "Actual wrapper reaped and captured descendants empty/noerrors/snapshottrue;2.312298769998961sec. No uncapped final census, readers or leases proof. Normal18.19.3 CLI feedback may launch; no managedAction/env acquisition. Selfcgroupbinding UNQUALIFIED.",
+  "postmodes": "owned ancestor/datadir/robots-home/tmp0700;ACTIONS_HOME0750;stdout/stderr0600",
+  "security_scope": "Actual bundled secret-free public provider pair and synthetic API key reviewed. This review does not qualify the full fe production source/security diff.",
+  "excluded_gates": [
+    "currentnewhead fullCI acceptance",
+    "minimumCore installedMCP discovery/resource/read/tool execution",
+    "managedAction or native baseline",
+    "otherplatform installed startup",
+    "wholecleanup/readers/lease release",
+    "Runtime registry publication/fullrelease"
+  ],
+  "historical_failures_preserved": [
+    "initial ghAPI artifact zero-byte403 receipt remains FAIL",
+    "earlier source/artifact/native/idle failed controls retain original tuple"
+  ],
+  "reviewer_actions": "Existing file/metadata/hash/archive/gitsource controls only; independent remote read-only artifact/jobs/producer commit metadata and completed checkout logs once; rawlogs/signedURLs not exported; no installs, Runtime/OAuth/CLI/RCC/native reruns, builds,sourceedits or external mutations",
+  "evidence": [
+    {
+      "path": "/workspace/successor-evidence/review308-packaged/independent-package-verification.json",
+      "sha256": "b145319cbedad5efba3ef3c68950fa311520330700d15b24fcd7d2bb9bc9c811",
+      "bytes": 14493
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-packaged/verify_packages.py",
+      "sha256": "9587005ce4345aaac604156e680d2c3a1acf7b98c1c4fd954b5397abfa4e72da",
+      "bytes": 8791
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-packaged/reviewer_installed.py",
+      "sha256": "b1f27ad33baf35f371b31ebf890c7594dfa5a5d8791552329fdd4b9bd3097c27",
+      "bytes": 5869
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-packaged/reviewer-installed-verification.json",
+      "sha256": "d16e5d0d469724b5beedd190bc1b51145141454c76b3f601d0103dd751990fe0",
+      "bytes": 5338
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-packaged/reviewer-producer-provenance.json",
+      "sha256": "4b863ca034c4ce19be2b39649380c371d92bd1fd1dc7ba550da10edc243cfdd1",
+      "bytes": 2664
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-packaged/reviewer-complete-python-membership.json",
+      "sha256": "e06dc666ad9e07e64a78e96e1ee5c74860853c177f41bd5bab1e7b711b48c5ac",
+      "bytes": 1057
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-packaged/documentation-proposal.json",
+      "sha256": "1f88a8c0d8ced997d8dea9bbc675b075856819187cbd362e0c408ad0b3ebf459",
+      "bytes": 1726
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "insertion_point": "after Installed-member byte equality paragraph near Runtime artifact inventory",
+    "exact_delta": "For each retained Runtime wheel, compare the complete set of Python archive paths with the tracked Runtime Python paths from the exact producer tree plus the explicitly admitted generated modules. Require set equality before checking member bytes; iterating only present tracked members cannot detect an omitted file. Record generated configuration input hashes against the actual checkout bytes, including an explicit LF-to-CRLF transform for Windows when applicable.",
+    "durable_learning": "Source-byte parity needs complete membership, and generated input provenance may legitimately differ from Git LF bytes on Windows.",
+    "evidence": [
+      "Independent verifier reread seven manifest distributions and all six wheel RECORDs, with all202 tracked members present/exact and only the203rd generated module",
+      "reviewer-complete-python-membership.json independently checks every Python archive path across all six wheels",
+      "reviewer-producer-provenance.json establishes synthetic checkout fc2f1e7 has complete tree equal to fe source",
+      "Windows generated strings and INPUT_SHA256 match explicit CRLF transforms of the two public Git YAML blobs"
+    ],
+    "stale_or_ambiguous_guidance_removed": "Closes ambiguity between byte equality for observed members and completeness of the expected source inventory.",
+    "remaining_uncertainty": "These source/resource checks do not establish installed behavior on Windows/macOS, native managed Action/MCP/lease acceptance, full new-head CI or publication.",
+    "upstream_disposition": "none"
+  },
+  "upstream_disposition": "none"
+}

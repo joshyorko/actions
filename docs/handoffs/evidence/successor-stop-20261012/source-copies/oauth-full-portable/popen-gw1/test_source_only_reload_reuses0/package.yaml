@@ -1,0 +1,4 @@
+spec-version: v2
+dependencies:
+  conda-forge:
+    - python=3.11

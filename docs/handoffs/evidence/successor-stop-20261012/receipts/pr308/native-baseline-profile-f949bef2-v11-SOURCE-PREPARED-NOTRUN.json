@@ -1,0 +1,44 @@
+{
+  "baseline_binary": {
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "18.19.3"
+  },
+  "controls": "Genuineheldexecutor/persistedRun/APIcancel RED1 thenGREEN,8newcontrols +fullcommonservice and affectedsuite373PASS",
+  "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "lease_commands_executed": false,
+  "native_attempts_consumed": 0,
+  "native_launched": false,
+  "previous_profile": {
+    "bytes": 1975,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-d358f9c2-v10-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "568b654b3bd9c69f40bcc74c81a9dedc8be952a3d223f221c9b04d73d89cb584"
+  },
+  "remaining_holds": [
+    "Exact source independent review and exact-head requiredplatformCI including frozen asyncintegration and Windowsfixture",
+    "Actual single native18.19.3 source/platform/provider/readers/uncappedcensus/output/lease qualification remains unrun",
+    "Wholecontroller and harddeadline budgets not implemented/admitted",
+    "Self-cgroup binding missing; visible counters unqualified",
+    "Resource floor/reserve remain proposed/unaccepted/uncalibrated"
+  ],
+  "resource": {
+    "/dev/shm": {
+      "free_bytes": 9441349632
+    },
+    "/tmp": {
+      "free_bytes": 9441153024
+    },
+    "/workspace": {
+      "free_bytes": 12833722368
+    },
+    "memory.current": "14361112576",
+    "memory.events": "low 0\nhigh 0\nmax 34411\noom 0\noom_kill 0\noom_group_kill 0",
+    "memory.max": "17179869184",
+    "scope": "visible cgroup mount only; actual self-binding unproven",
+    "time_unix": 1791784746.7200704,
+    "visible_headroom_bytes": 2818756608
+  },
+  "schema": 1,
+  "source_delta": "Legacy RunRuntimeInfo registered before worker dispatch and async-return; same info passed throughworker; submissionfailure/Futuredone retire identity; cancellation prepool check",
+  "status": "NOT_ADMITTED",
+  "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99"
+}

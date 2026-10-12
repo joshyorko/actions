@@ -1,0 +1,81 @@
+{
+  "scope": "read-only independent verification",
+  "checkpoint": {
+    "sha": "6088e6dbf81ff6aa212c7bebaf115534e885295d",
+    "tree": "9e9e81cbf23d6f4e5ab65ec67d15835f5d75de15",
+    "parents": [
+      "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934"
+    ],
+    "remote_branch": "handoff/actions-swarm-mk3-wave8-20261010",
+    "remote_branch_head": "6088e6dbf81ff6aa212c7bebaf115534e885295d",
+    "github_recursive_tree_truncated": false,
+    "github_recursive_entry_count": 7818,
+    "github_blob_leaf_count": 6685,
+    "local_ls_tree_blob_leaf_count": 6685
+  },
+  "tree_compare": {
+    "result": "all recursive remote blob leaves equal local commit ls-tree leaves by path/mode/Git blob SHA/size",
+    "remote_leaf_count": 6685,
+    "local_leaf_count": 6685,
+    "missing_local": 0,
+    "missing_remote": 0,
+    "mismatches": 0
+  },
+  "handoff_parent": {
+    "sha": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+    "tree": "2d979a6b4b4521ec475f32f469677bce2977fddd",
+    "parents": [
+      "d87005f6cd62b2c45a153280ff9ede6f945f4023"
+    ],
+    "local_handoff_HEAD": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+    "handoff_worktree_clean": true
+  },
+  "release_projection": {
+    "source_matrix_sha256": "f90fc32a4cdf065f6066e24e6a6f9eb98c635a7f5375f166efd10577b5d87c5d",
+    "projection_sha256": "aa6f89802e8ad505e29c59bcb6d18865245af37881932925ad8316c06e649d7c",
+    "retained_open": 53,
+    "retained_closed": 1,
+    "rows_matched_hash_and_original_states": true,
+    "ledger_diff": "Additive release-boundary section; original ledger content follows unchanged. Matrix reconciliation remains 54 contracts: 53 open, #210 accepted closed.",
+    "mandatory_release_inputs": "Overlay says RCC 18.19.3 execution, descendants, readers, leases and resource admission mandatory; actual installed Runtime consumers required before publication, including released Core/Helper compatibility. Newer RCC optional absent explicit release contract."
+  },
+  "manifest_payloads": {
+    "manifest": "docs/handoffs/evidence/successor-20261012/manifest.json",
+    "entry_count": 37,
+    "all_present_hash_size_and_remote_blob_checked": true,
+    "result_path": "payload-manifest-verification.json"
+  },
+  "pr307": {
+    "remote_pr": {
+      "base": "integration/community-release-20261008",
+      "head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+      "merge_commit_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "merged": true,
+      "number": 307,
+      "state": "closed"
+    },
+    "remote_merge_commit": {
+      "message": "Merge pull request #307 from joshyorko/fix/runtime-release-changelog-selection-20261010\n\nfix: select dedicated Runtime changelog for native release notes",
+      "parents": [
+        "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+        "23a6be5044f7a9377180f7ec7d33c50ad8c4c364"
+      ],
+      "sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "tree": "137468f137d64091838d56515c826c2d4ed6b76f"
+    },
+    "remote_target_branch": {
+      "name": "integration/community-release-20261008",
+      "sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+    },
+    "acceptance_boundaries": "PR #307 head 23a6be5; 23 checks and scoped independent OAuth package/source acceptance are recorded. Normal two-parent merge 48eeaf1/tree 137468f to integration target is verified by GitHub API. This merge proves integration only; PR run publication steps were skipped; Runtime release remains HOLD."
+  },
+  "guide_audit": {
+    "updated_accepted_contract": "Current section at docs/skills/repository-operations.md:1111\u20131173 documents offline owned YAML pair, no cross-repo token, explicit empty hosted catalog, custom mode, packaged bytes and actual consumer; it replaces prior vendor-acquisition decision branch.",
+    "stale_or_ambiguous_residuals": [
+      "Historical predecessor paragraph near line 3222 ends by saying owner-approved release content is a separate open gate, which can be misread as current 1.0.3 pair approval still missing.",
+      "Generic wheel paragraph near line 3438 does not distinguish deliberately empty providers mapping from missing/empty generated FILE_CONTENTS payloads."
+    ],
+    "proposal": "docs-improvement-proposal.md"
+  },
+  "upstream_mutations": "None. Read-only GitHub API and local tree inspection only. No source edits, pushes, merges, or issue changes."
+}

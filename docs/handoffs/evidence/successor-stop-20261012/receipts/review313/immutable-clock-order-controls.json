@@ -1,0 +1,43 @@
+{
+  "commit": "2d86c5cf92d3acb274a8ceb5d57bfb8b12c779b6",
+  "tree": "653a9e73e4d27641ec86de94b90f35d41e0f24f8",
+  "scope": "stdlib-only immutable AST clock/order fragments and modeled mutex; no actual Windows/OS mutex/native execution",
+  "test_source_sha256": "44ccb9a9c7016785fd25f547f3a29f40cb8e0d3d7372a95e3214504102b0c203",
+  "release_thread_start_line": 67,
+  "initial_time_line": 86,
+  "elapsed_assert_line": 117,
+  "clock_counterexamples": [
+    {
+      "case": "exact_boundary",
+      "initial_time": 100.0,
+      "acquired_time": 102.0,
+      "elapsed": 2.0,
+      "released_before_entry": true,
+      "result": "EXPECTED_RED"
+    },
+    {
+      "case": "holder_started_before_observation",
+      "initial_time": 100.125,
+      "acquired_time": 102.0,
+      "elapsed": 1.875,
+      "released_before_entry": true,
+      "result": "EXPECTED_RED"
+    }
+  ],
+  "modeled_helper_exclusion_sequence": {
+    "held": false,
+    "attempts": 2,
+    "failed_while_held": 1,
+    "release_complete": true,
+    "now": 100.15,
+    "handle_released": true
+  },
+  "source_issue": "clock interval begins after release thread starts; strict elapsed lower bound is not an exclusion invariant",
+  "raw_windows_log": "UNAVAILABLE",
+  "parent_reported_summary": {
+    "failed": 1,
+    "passed": 1193,
+    "skipped": 177
+  },
+  "status": "CONTROLS_PASS"
+}

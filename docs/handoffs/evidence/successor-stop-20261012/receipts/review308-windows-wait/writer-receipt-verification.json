@@ -1,0 +1,66 @@
+{
+  "receipt_sha256": "6be7205e43737e141888bc36704a007a8d92ed3cac0d2a1e07cbc99a3d237136",
+  "checks": {
+    "windows-fe1-job-current.json": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-fe1-missing-wnohang-bounded-reproduction.json": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-wait-model-final.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-wait-model-final.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-wait-model-green.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-wait-model-red.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-wait-model-red.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-wait-model-static-final.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-wait-model-static.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-wait-model-windows-mypy-final.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "native_profile": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "patch": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/tests/action_server_tests/test_owned_cleanup_evidence.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes_match": true,
+      "sha256_match": true
+    }
+  },
+  "all_match": true
+}

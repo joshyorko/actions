@@ -1,0 +1,231 @@
+{
+  "bounded_next_implementation_slice": [
+    "independent design review first for extending existing _supervisor_main/run_owned_process with full uncapped owned identity census and absolute primary/terminal deadline transport",
+    "source-only controls: >64 identities, PID reuse/absent/zombie/live/unknown/error classification, no unrelated process dump or signaling from unknown authority, ECHILD and primary+cleanup error preservation",
+    "one existing supervisor invocation around exactly the two serial pytest native nodes using bounded disk stdout/stderr/evidence; no duplicate subreaper framework or broad native workflow dispatch",
+    "separate root/digest/lease-bound passive raw record design; lifecycle inspect/verify/repair are not readonly qualification tools",
+    "bind accepted profile to final exact reviewed committed source, actual Windows/required CI, namespace/resource/selfcgroup admission before native launch"
+  ],
+  "controller_approval_scope": "minimal source schema/transport only; full guardian, native two-node dispatch, new signals/fallback/budgets/disksink/watchdog/lease observation remain unapproved and NOT_IMPLEMENTED",
+  "current_resource_observation": {
+    "filesystems": {
+      "/dev/shm": {
+        "device": 36,
+        "free_bytes": 9441349632
+      },
+      "/tmp": {
+        "device": 33,
+        "free_bytes": 9441173504
+      },
+      "/workspace": {
+        "device": 27,
+        "free_bytes": 13327372288
+      }
+    },
+    "memory.events": {
+      "high": 0,
+      "low": 0,
+      "max": 25204,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory.events.local": {
+      "high": 0,
+      "low": 0,
+      "max": 25204,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory_current": 14426263552,
+    "memory_max": 17179869184,
+    "scope": "visible_cgroup_mount_diagnostic_only; self binding unproven",
+    "time_unix": 1791776120.3477807,
+    "visible_headroom_bytes": 2753605632
+  },
+  "direct_self_membership_probe": {
+    "direct_entry_count": 0,
+    "direct_raw_bytes": 0,
+    "directory_device": 24,
+    "directory_inode": 148,
+    "other_process_ids_emitted": false,
+    "procs_device": 24,
+    "procs_inode": 150,
+    "receipt_sha256": "c48321cb4d7c0f8b9a43ff457af6d51bc1305a68c71d147e0b61796a95bbb36b",
+    "self_binding_proven": false
+  },
+  "execution_commit": "89a599d92aa17a9065c9fc98b62bee0adb0b4cf2",
+  "execution_tree": "84617bea63a662822056c1b4ecc5d9e126c0feb9",
+  "existing_workflow": {
+    "candidate": "c10380a4d2ebc6f0aca63eb85c8f84a337da4962",
+    "candidate_tree": "21676c626a933c2d55761ec85ecf26fe0eef26bb",
+    "extra_dispatch_performed": false,
+    "path": ".github/workflows/actions_runtime_rcc_provider_rollback.yml",
+    "qualifies_current_source": false
+  },
+  "holds": [
+    "exact89a schema/transport increment source independent review and exact-head required CI pending",
+    "current provider ownership/cleanup controls are source-only; actual shipped18.19.3 provider reader and lease execution facts absent",
+    "single global primary deadline and bounded terminal cleanup require independent controller design review and source/control qualification; no old ROOT/script grant applies",
+    "opt-in census metadata source seam is prepared; actual final native uncapped census/reaping/reader/sampler observations and robust failure publication remain unqualified; escaping pre-JSON supervisor failures attach unavailable facts only",
+    "actual passive same-lease creation/release observation remains missing; lifecycle inspect public source can reconcile/delete records and is not admitted as read-only observation",
+    "actual self-cgroup endpoint unproven: route0::/, mountroot/.., visible cgroup.procs empty on two bounded reads; strict retained reader rejects mount root",
+    "proposed conservative3113851289 initial headroom/536870912 reserve remain unaccepted and uncalibrated, regardless visible mount free memory",
+    "fresh native namespace, overhead budget, before/during/after observer and terminal output retention not yet admitted"
+  ],
+  "integration_parent": {
+    "commit": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+    "merge_strategy": "ordinary ort merge; no conflicts; accepted OAuth and provider canonical lessons preserved",
+    "source_fix_commit": "6e2d7d7697c108ca7bdb7170743e3e620c2426ef",
+    "source_fix_tree": "9305cf0ea7784dc44d4f4bdc79961a81e9a4300a",
+    "tree": "137468f137d64091838d56515c826c2d4ed6b76f"
+  },
+  "lease_inspection_discovery": {
+    "actual_inspection_executed": false,
+    "advertised_command_prefix": [
+      "rcc",
+      "env",
+      "lifecycle",
+      "inspect",
+      "--artifact",
+      "<actual-canonical-artifact-digest>",
+      "--json"
+    ],
+    "binary_help_verified": true,
+    "help_sha256": "c6a706de9c301e59d76d820b51eb158d0db40fe8ae9bd95f41a1752c71ee4982",
+    "invocation_authorized_as_readonly": false,
+    "public_revision": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+    "public_source_receipt_sha256": "57d039865ed0aa0577d9d98e53522de5c0a72b68e4dae16765a41c7965c68dca",
+    "public_source_semantics": "Inspect invokes reconcileLocked; it removes provisional journal files and stale lease records. Inspection cannot establish passive natural release.",
+    "release_proven": false,
+    "repair_or_verify_executed": false,
+    "required_passive_observer": "separately designed and admitted root/digest/lease-bound nofollow raw-file observation, unchanged bytes/hash/schema and before/after parent identity; no inferred path/schema authority from public source alone",
+    "shipped_byte_equivalence": "UNVERIFIED;7e588 buildinfo embeds vcs.modified=true"
+  },
+  "literals": {
+    "action_bytes": {
+      "bytes": 560,
+      "sha256": "a554f7395fa4254e36ca28780a0edff940f208ca7409dfedcd829193b31c3898"
+    },
+    "manifest_bytes": {
+      "bytes": 113,
+      "sha256": "e160d068efc17467d8c43174bca8676208e33914ca9fc45d815a43b81ddbed1e"
+    }
+  },
+  "missing_private_inputs": "private RCC01f/frozen-v6 UNRECOVERED; not used or reinterpreted",
+  "native_attempts_authorized_after_admission": 1,
+  "native_attempts_consumed": 0,
+  "native_launch_permitted": false,
+  "optional_versions": "18.19.5 then exact7276 only after this actual baseline PASS, distinct profiles, stop first failure",
+  "ownership": {
+    "client_homes": "0700 or 0750 only with exact current UID/GID and source provenance",
+    "markers": "0600",
+    "state_root": "0700 exact current UID/GID, no symlink",
+    "temporary_paths": "disk only; no TMP to RAM move"
+  },
+  "predecessor_acceptance": "PARENT_SOURCE_REVIEWED_REMOTE_VERIFIED_ALL25CI_SUCCESS; exact earlier source only, no carry to89a native or current CI",
+  "predecessor_commit": "22f74384442647db313d630b27ec0a8da11f6f67",
+  "profile_predecessor_sha256": "72d469205a5595e7d2a87c8fb94d7c5a3fe95c6953d3a8fef440c0a3e5f2eb2f",
+  "proposed_memory_policy": {
+    "acceptance": "PROPOSAL_NOT_NATIVE_CALIBRATED",
+    "cadence_max_seconds": 0.2,
+    "do_not_subtract_file_cache_to_fabricate_headroom": true,
+    "identity": "self cgroup route plus directory device/inode and fixed max/current/global-local counters",
+    "initial_min_headroom_bytes": 3113851289,
+    "stop_reserve_bytes": 536870912
+  },
+  "rcc": {
+    "buildinfo": {
+      "clean_public_source_equivalence": "UNVERIFIED",
+      "frozen7945_shipping_source_identity": "RETAINED_SEPARATELY; no replacement inferred",
+      "go": "go1.26.5",
+      "private01f_frozen_v6": "UNRECOVERED",
+      "vcs_modified": true,
+      "vcs_revision": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f"
+    },
+    "bytes": 22282402,
+    "production_pin_change": false,
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "v18.19.3"
+  },
+  "required_acceptance": [
+    "exact committed source, module origins, fixture/literal/binary hashes and genuine actual Windows/source gates",
+    "cold empty owned state and real acquisition; no substituted synthetic publication",
+    "publication JSON specificationDigest/artifactDigest from one actual invocation with verified raw byte hash",
+    "actual Action result, output files/artifacts, installed Core1.0.2 module and Python managed-prefix provenance",
+    "exact leaseId/artifact/status/exitCode receipt bytes and original terminal disposition; no inferred natural exit",
+    "typed worker tree cleanup, retained stdout/stderr/protocol readers with join/alive/error observations",
+    "provider startup reader object, owner PID/create-time, actual finite join and typed cleanup",
+    "uncapped final owned census with PID/create-time, live/zombie/absent/reused/unknown and errors, real reaping evidence",
+    "single primary deadline and bounded terminal cleanup; preserve command and secondary errors on every outcome",
+    "memory/disk before-during-after evidence with sampler cancellation and join before final observation"
+  ],
+  "resolved_source_controls": {
+    "fixtures": "Action560 bytes sha a554f7395fa4254e36ca28780a0edff940f208ca7409dfedcd829193b31c3898; manifest113bytes sha e160d068efc17467d8c43174bca8676208e33914ca9fc45d815a43b81ddbed1e unchanged",
+    "optin_census_metadata": "89a source-only opt-in observer typed identity/census/wait/budget facts;160 uncapped identity rows, same PID/different births, empty-vs-failed enumeration, unknown/reuse, actual injected supervisor default/opt-in and actual parent result/timeout/cleanup-error transport.17RED +1 defaultPASS; stale-PID wait matching1RED then fixed matched birth unavailable.317focusedPASS/1SKIP/3nativeDESELECTED8.44s, configured360filePASS, Windows3file diagnosticPASS. No native fixture opts into new metadata.",
+    "pinned_toolkit_gateway": "Doctor, Bootstrap, ToolkitTest completed in fresh308 namespace; RCC18.19.3 remains production pin",
+    "provider_deadline_control": "deterministic helper-local monotonic clock records one absolute tree deadline and remaining reader join timeout; real expired-reader control observes0 join budget, no strict wallclock ceiling",
+    "provider_fixture_cleanup": "both native fixture nodes now retain ProviderCleanupResult and require complete captured tree+startup reader cleanup; actual RCC/native fixtures NOT_RUN; no uncapped census/global deadline/lease release equivalence",
+    "provider_startup_reader": "22f retains sole original Thread/queue, verified transaction: original Popen live before/after consistent root birth+descendant capture; failed capture commits no descendant authority; captured descendant PID/birth validation before cleanup. Identity RED4/positive1 against c564 then23GREEN. Merged focused287PASS/1SKIP/3nativeDESELECTED7.99s and configured359file staticPASS; Windows2file mypy diagnosticPASS.",
+    "real_callback_boundary": "actual Callback swallowing ordinary exceptions corrected with optional observer; unchanged default continuation/order and raiseTrue original exception identity",
+    "strict_worker_fixture": "b0a guards worker tree/readers/terminal lease shape;27 synthetic RED controls then206 adapter+stagingPASS/1SKIP/2nativeDESELECTED; genuine native remains NOT_RUN",
+    "windows_portability": "534bab2 native paths/callable POSIX feature admission accepted; parent observed its25 hosted checks SUCCESS; does not transfer to b0a",
+    "worker_readers": "3156 ancestor retains actual existing stdout/stderr/protocol Thread objects, joins within each caller attempt deadline, preserves error classes and unknown ownership;1484PASS/13SKIP full source and194 focusedPASS"
+  },
+  "schema": 2,
+  "scope": "One future admitted 18.19.3 artifact publication plus staged Action, two serial test nodes, no browser/reload/newer-version qualification",
+  "shared_package_cache_config": null,
+  "source_files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes": 109724,
+      "sha256": "eba6fd546cbbc7061ebb082b1157e1b5807e857aa19defcea6538eade2230363"
+    },
+    "action_server/src/actions/server/_actions_process_pool.py": {
+      "bytes": 60974,
+      "sha256": "af2090208ebff767dc40af6d40501d813c570d1171ce031dcb75276ac6a5fef5"
+    },
+    "action_server/src/actions/server/_common/process.py": {
+      "bytes": 31134,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    "action_server/src/actions/server/_rcc_runtime_adapter.py": {
+      "bytes": 36123,
+      "sha256": "c1884571a572277beef50e359f8b5e71abf593e1ebdee4bea2e47290c8da81f2"
+    },
+    "action_server/src/actions/server/_robo_utils/callback.py": {
+      "bytes": 2092,
+      "sha256": "fa24e22f0fe04453b71b0f25ac8fa9f113511a9adc6d701d1e648f0931c3c441"
+    },
+    "action_server/tests/action_server_tests/test_owned_cleanup_evidence.py": {
+      "bytes": 18004,
+      "sha256": "a99314a6122b6d2e8e45e10a73c7e3a9d02ae2ca0c6ced4fe4f1978d5e2cf8d3"
+    },
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py": {
+      "bytes": 15263,
+      "sha256": "9862a0a7fa5b7155c595a9f46c9d936a2822682082ef9ba97244d54233a93e3e"
+    },
+    "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py": {
+      "bytes": 62712,
+      "sha256": "5e090e16552aef53b2c4f066790914b3700c6e89b856ca965d423c8056b3be26"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 287431,
+      "sha256": "d3c04c03ac2584df575b574eb7be1b5760026dc1204776f73187da249a8766d3"
+    }
+  },
+  "state_namespace": "NEW_ONCE_OWNED_0700_DISK_NAMESPACE_REQUIRED_AT_EXECUTION",
+  "state_root_parent": "/workspace/successor-pr308",
+  "status": "IMMUTABLE_SOURCE_PREPARATION_NATIVE_NOT_ADMITTED",
+  "storage": {
+    "additional_environment_artifact_and_evidence_overhead_required": true,
+    "shm_min_free_bytes": 3865470567,
+    "tmp_min_free_bytes": 1200000000,
+    "workspace_min_free_bytes": 1288490189
+  },
+  "test_nodes_in_order": [
+    "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair",
+    "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime"
+  ],
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "verdict": "EMPIRICAL_CHILD_MEMBERSHIP_CONFIRMED_CANONICAL_POLICY_HOLD",
+  "scope": "one bounded independent read-only selfPID/child-parent pinnedFD audit; no launchadmission or native/resource-budget approval",
+  "own_pid": 58303,
+  "audit_duration_ns": 481375,
+  "membership": {
+    "child_path": "/sys/fs/cgroup/init",
+    "own_pid_present_two_samples": true,
+    "same_file_fd_twice": true,
+    "child_procs_device": 24,
+    "child_procs_inode": 215,
+    "child_directory_device": 24,
+    "child_directory_inode": 213,
+    "parent_directory_device": 24,
+    "parent_directory_inode": 148,
+    "child_opened_relative_to_pinned_parent_fd": true,
+    "root_discovery_same_child_file_identity": true,
+    "direct_parent_membership": false,
+    "parent_procs_device": 24,
+    "parent_procs_inode": 150,
+    "parent_procs_entries_both_samples": 0,
+    "identities_and_route_stable": true
+  },
+  "actual_visible_memory_facts": {
+    "child_memory_max": "max",
+    "visible_parent_memory_max_bytes": 17179869184,
+    "visible_parent_memory_max_GiB": 16,
+    "child_memory_current_samples": [
+      14697975808,
+      14697975808
+    ],
+    "parent_memory_current_samples": [
+      14701301760,
+      14701301760
+    ],
+    "visible_parent_max_minus_current_samples": [
+      2478567424,
+      2478567424
+    ],
+    "parent_memory_controller_enabled": true,
+    "parent_nr_descendants": 1,
+    "interpretation": "finite configured visibleancestor memory limit with memorycontroller enabled; child reportsnoownfinite max; parentcounter/headroomshared with allcharged subtree activity, not reservedcapacity or a validated wholeeffective hostlimit"
+  },
+  "canonical_metadata": {
+    "proc_self_cgroup": "0::/",
+    "mount_id": 90,
+    "parent_mount_id": 89,
+    "device_major_minor": "0:24",
+    "filesystem": "cgroup2",
+    "mount_root": "/..",
+    "mount_point": "/sys/fs/cgroup",
+    "mount_options": [
+      "ro",
+      "nosuid",
+      "nodev",
+      "noexec",
+      "relatime"
+    ],
+    "super_options": [
+      "rw",
+      "nsdelegate"
+    ],
+    "namespace_path_mapping": "UNRESOLVED",
+    "existing_launch_policy": "NOT_AUTO_ACCEPTED; strictunsupportedmount-root checks remain"
+  },
+  "prior_failed_root_probe": {
+    "status": "DIRECT_SELF_BINDING_UNPROVEN_NATIVE_HOLD",
+    "prior_probe_failure": "CGROUP_PROCS_SCHEMA, no successful receipt emitted",
+    "empty_direct_member_evidence_preserved": true,
+    "receipt_unchanged": true,
+    "scope": "failureofrootdirectorydirectselfwitness only; childpositive doesnotrewrite rootfailure"
+  },
+  "supported_conclusion": "Auditprocess empiricallybelongs toinit child ofthevisiblepinnedcgroup2 hierarchy; aconfiguredfinite16GiB visibleparent limit wasobserved. Thisaddspositive directmembership evidence while retainingcanonical namespace/launch policyHOLD.",
+  "not_claimed": [
+    "canonicalnamespace-to-mountedpath resolution",
+    "allhigherancestorsknown orentireeffectivehostlimit",
+    "futureNativeprovider/Actioncgroupbinding",
+    "exclusiveheadroom oracceptedpeak/overheadbudget",
+    "permissiontoaltercgroup orlaunchnative",
+    "native/controller/whole-operationqualification"
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "exact_proposal": "/workspace/successor-evidence/review308-cgroup-child/documentation-proposal.md",
+    "durable_learning": "parentdirectmembershipnegative doesnotprecludechildselfPIDwitness; reportancestorlimitseparatelyfromcanonicalmapping",
+    "evidence": "twoindependent ownPID witnesses rootandreviewer withsamechildfileFDidentity; ownparentstillEMPTY andownmemory/mountobservations",
+    "stale_guidance_removed": "hierarchy-wide absence inference fromparent-only empty probe",
+    "remaining_uncertainty": "namespacepathmapping/resourcepolicy/nativeadmission unresolved"
+  },
+  "retained_input_receipts": {
+    "/workspace/successor-evidence/pr308/self-cgroup-child-init-discovery.json": {
+      "bytes": 1239,
+      "sha256": "80546838f80e736e399ea5a1d0e5bed8a5fd26d1a377b990a5cd397b6c86bb14"
+    },
+    "/workspace/successor-evidence/pr308/self-cgroup-visible-direct-membership.json": {
+      "bytes": 1540,
+      "sha256": "c48321cb4d7c0f8b9a43ff457af6d51bc1305a68c71d147e0b61796a95bbb36b"
+    }
+  },
+  "evidence_files": {
+    "audit-fields.json": {
+      "bytes": 8088,
+      "sha256": "d10695d4a1f860742fbf7381d2ef4329506e85de28d101782b19dc902913f534"
+    },
+    "documentation-proposal.md": {
+      "bytes": 1834,
+      "sha256": "abd8d9f125469f63b6b56186fa9234b875820de0ed4a5910a25c57eacb3fa673"
+    }
+  },
+  "new_cgroup_audits": 1,
+  "cgroup_writes": 0,
+  "permission_changes": 0,
+  "signals": 0,
+  "native_attempts": 0,
+  "tests": 0,
+  "new_workers_or_agents": 0,
+  "upstream_disposition": "none"
+}

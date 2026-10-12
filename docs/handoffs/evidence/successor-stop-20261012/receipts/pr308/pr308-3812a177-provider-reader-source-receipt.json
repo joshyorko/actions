@@ -1,0 +1,121 @@
+{
+  "affected_final": "Preparedpackage pytest -n0 provider+acceptance+ownedcleanup -m not integration_test;136PASS/1nativeDESEL3.71s exit0",
+  "base": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "base_helper_sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c",
+  "diff_check": "PASS",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Provider reader ownership independently requires originalprocess/ownerobject bindings; observe sameThread under existingabsoluteendpoint despiteunconfirmedtreebirth; joinedreader isnotprocesssignal/cleanup/leaseauthority; preservefixedsecondaryerrors",
+    "evidence": "Actual3RED and6newrealThread controls/136affected/static361PASS",
+    "remaining_uncertainty": "Full640controller, native-only output/census, passivelease, memory/cgroup/threshold admission remain unresolved; exactnewheadsource review/CIpending"
+  },
+  "evidence_files": [
+    {
+      "bytes": 6149,
+      "path": "/workspace/successor-evidence/pr308/provider-unverified-reader-red.log",
+      "sha256": "cfb4446b5559690928a9816dc1d0019edfc364407cc77623eff3733a4807d8f5"
+    },
+    {
+      "bytes": 6360,
+      "path": "/workspace/successor-evidence/pr308/provider-unverified-reader-red.xml",
+      "sha256": "0b840f54cddaaf32615f17606a0066f1cb4f98155b7a8ded241791d7e4a9f320"
+    },
+    {
+      "bytes": 263,
+      "path": "/workspace/successor-evidence/pr308/provider-unverified-reader-green.log",
+      "sha256": "ccdca344a6a6a436e507eee019123c6703c0b44c1dbfc9dfd5a2ab111e21d95a"
+    },
+    {
+      "bytes": 6840,
+      "path": "/workspace/successor-evidence/pr308/provider-unverified-reader-green.xml",
+      "sha256": "68ec33e86b673124be5fd7ede3d1afa4065c40934d531207f3b7ffac0ae209b5"
+    },
+    {
+      "bytes": 367,
+      "path": "/workspace/successor-evidence/pr308/provider-unverified-reader-affected-final.log",
+      "sha256": "78b25bae3a13f3218c1c5d4f76e92217ecf5575dd2d4c047b0bba3fac9301f6f"
+    },
+    {
+      "bytes": 23457,
+      "path": "/workspace/successor-evidence/pr308/provider-unverified-reader-affected-final.xml",
+      "sha256": "cae8e593f13cd54e392cb25ea8e9a57c49e8f545cfeaf51a5f49b77db6247e8e"
+    },
+    {
+      "bytes": 2017,
+      "path": "/workspace/successor-evidence/pr308/provider-unverified-reader-static-final.log",
+      "sha256": "dc39c1a0e95b8a3a5dbc7cdf822b6667f1fcebe9e2c9057952e8e725f87aa83e"
+    }
+  ],
+  "green": "38PASS0.69s including6newrealThread controls: finishedunknownroot, positiveandzero remaining absolutebudgets, sameobject, OSErrorsecondarywith originalJSONDecodeErrorcause, changedprocess/readerowner notjoined",
+  "head": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+  "lease_queries_or_writes": false,
+  "native_attempts_consumed": 0,
+  "native_profile": {
+    "bytes": 2413,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-3812a177-v13-READER-SOURCE-NOTADMITTED.json",
+    "sha256": "c47bdc47c8d256cb2be83b1b544ce39c9d78e39a10945c72b8caf9faa09f1ef2"
+  },
+  "optional_versions_launched": false,
+  "patch": {
+    "bytes": 8508,
+    "path": "/workspace/successor-evidence/pr308/provider-reader-3812a177-source.patch",
+    "sha256": "eb0aba9883d38c974678b96d032f1a7fea7a1467713498ef03da4bfa99140c50"
+  },
+  "preserved_contracts": [
+    "Unknown root never delegates process-tree kill",
+    "Unknownownership/errors remainFalse/incomplete even ifreaderjoined",
+    "Changed originalprocess orreaderowner staysunavailable",
+    "Existing absoluteendpoint and fixed secondaryjoin/aliveclasses remain",
+    "Original startupJSONError/cause preserved; no replacementThread/loop/guardian",
+    "ProductionRCC18.19.3 pin/default/modes untouched"
+  ],
+  "push_by_this_lane": false,
+  "red": "3FAIL/32DESEL1.26s againstexactf949: finishedreader unavailable, blockedreader neverjoined, joinerror hidden",
+  "resource": {
+    "/dev/shm": {
+      "free_bytes": 9441349632
+    },
+    "/tmp": {
+      "free_bytes": 9441153024
+    },
+    "/workspace": {
+      "free_bytes": 12526329856
+    },
+    "memory.current": "14017937408",
+    "memory.events": "low 0\nhigh 0\nmax 34411\noom 0\noom_kill 0\noom_group_kill 0",
+    "memory.max": "17179869184",
+    "scope": "visible cgroup mount diagnostic; child/init membership discovery not canonically admitted",
+    "time_unix": 1791789290.1917903,
+    "visible_headroom_bytes": 3161931776
+  },
+  "schema": 1,
+  "session_authorization": "Root explicitly authorized minimal independent originalThread observation under unknown treeownership; no native/controller/watchdog/lease grant",
+  "source_delta": "4inserted guard/comment lines at existing readerblock. Originalprocess/readerowner exactbinding guards, same absoluteendpoint, same originalThread. Treeowned/signals/overallcomplete logic unchanged",
+  "source_design": {
+    "bytes": 2367,
+    "path": "/workspace/successor-evidence/pr308/provider-reader-f949bef2-source-design.md",
+    "sha256": "3a843bbd25c0e4708bd51f9ce7425c5168e170fbc4f50156de0792b807326d0e"
+  },
+  "source_files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes": 110339,
+      "path": "/workspace/actions-pr308/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "7c6499fda0a0f9c5e22cbc64c53d1aa8f3a8152e5539a0dabd30a1ee376b6e8e"
+    },
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py": {
+      "bytes": 28104,
+      "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+      "sha256": "1f0b4cba241f6d705517cc699b795892609be875ea7783ca2e7e8a05a7ec5e26"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 291767,
+      "path": "/workspace/actions-pr308/docs/skills/repository-operations.md",
+      "sha256": "4accb23b85aa0dcbc1e3b9e7e8c6a3482e74a22b875165f3440ecdbfa58527aa"
+    }
+  },
+  "static": "Freshpinnedtoolkit PATH/owncaches packagePoetry invoke lint typecheck;Ruff/format/IsortPASS,mypy361filesPASS;markdownlint unavailable",
+  "thread_cleanup": "BlockedactualThread releasedandjoined in boundedfinally; finishedcontrols completed beforeobservation; no actualprocess signals innewcontrols",
+  "tree": "525083edecdf20ef0daf6d481b0b738935741d66",
+  "upstream_disposition": "none",
+  "worktree_clean": true
+}

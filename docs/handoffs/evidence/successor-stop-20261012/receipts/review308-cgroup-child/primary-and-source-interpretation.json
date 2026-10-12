@@ -1,0 +1,25 @@
+{
+  "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+  "independently_read_sections": [
+    "Introduction",
+    "Processes",
+    "Memory Interface Files",
+    "Namespace"
+  ],
+  "verified_primary_facts": [
+    "Namespace views use relative paths.",
+    "Enabled controllers apply through their subtrees.",
+    "memory.current includes descendants.",
+    "cgroup.procs reports process membership.",
+    "memory.max may be temporarily exceeded."
+  ],
+  "fd_source_binding_assessment": "INFERENCE from retained descriptor/membership audit and these documented semantics, not a quoted kernel admission policy",
+  "namespace_mapping_not_reconstructed": true,
+  "immutable_source_search": {
+    "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+    "command": "git grep -n -e cgroup -e memory.max f949bef2eeab518ffd34d9e69955938a007f8922 -- action_server/src action_server/scripts",
+    "matches": 0,
+    "formal_canonical_only_validator_found": false,
+    "scope_limit": "No formal cgroup launch policy found in these Runtime source/script paths; canonical prose is operational guidance."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "verdict": "NO_CONCRETE_RUNTIME_CORE_FLOOR_BLOCKER_FOUND",
+  "runtime_source": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "runtime_tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+  "production_core_requirement": "actions-core >=1.0.2,<2.0.0",
+  "static_API_gate": "Runtime direct public Core symbols and observed call signatures are present in verified public1.0.2 source011c5482. No unconditional Core1.0.3-only import/call identified.",
+  "minimum_installed_gate": "GO_MINIMUM_CORE_OAUTH_IDLE_SCOPED: all47CorePythonmembers match the verified public source011c and all installed Core47/Helper2/Runtime203Pythonbytes match public/producer wheels; lock/origin and recorded four command/log hashes verified;9OAuthPASS,pipcheckPASS,idleHTTP200/403/200.",
+  "mcp_meta_limitation": "Concrete Core1.0.2 authoring limitation: tool/resource meta kwargs raiseValueError. Runtime consumes optional catalog._meta; this does not establish a host floor incompatibility. Canvas managed manifest pinsCore1.0.3.",
+  "minimum_MCP_gate": "UNTESTED: no installed minimum-Core MCP discovery/resource-read/tool-call or managed Action gate; not erased by current basic minimum-Core consumer success.",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "insertion_point": "Core and Runtime compatibility, after the paragraph describing the Core1.0.2 registry contract and newer MCP meta surface",
+    "exact_delta": "Separate the Runtime host's Core floor from the managed Action package's feature pin. Runtime reads MCP `options.get(\"_meta\")` as optional catalog data; it does not call Core's authoring decorators. Verified public Core 1.0.2 rejects `meta=` in those decorators, while the Canvas package manifest pins Core 1.0.3. Assess a dependency-floor blocker from the APIs the consuming component actually calls.\n\nAn installed minimum-Core OAuth and idle HTTP probe does not qualify minimum-Core MCP discovery, resource reads or tool execution. Record those paths as untested until their own installed-consumer gate runs; a later Core version's passing probe cannot substitute for it.",
+    "durable_learning": "A missing authoring API is a managed-package feature-version limitation, not automatically a Runtime-host floor incompatibility. Keep minimum-floor installed paths distinct.",
+    "evidence": [
+      "core-floor-audit.json: ten direct Core import sites, public1.0.2 source/sdist provenance and matching integration signatures",
+      "Extracted exactCore1.0.2 decorator AST controls reject meta with ValueError; ordinary decorators accept without it",
+      "Core1.0.2 cached wheel47 installed Python members match public digest and selected immutable public source files",
+      "Runtime MCP adapter optional _meta lookup and Canvas package1.0.3 feature pin are bound to exact23a Git blobs",
+      "minimum-core-installed-review.json verifies minimum-Core9OAuth/idle command hashes and limits"
+    ],
+    "stale_or_ambiguous_guidance_removed": "Avoid attributing the absence of Core1.0.2 meta authoring to an unconditional Runtime-host import/call failure, or presenting OAuth/idle startup as minimum-floor MCP execution acceptance.",
+    "remaining_uncertainty": "Minimum-Core installed MCP discovery/read/tool execution and managed Action/native/reader/lease/full195 acceptance remain untested; no floor-change implementation is justified solely by this audit."
+  },
+  "Windows308_terminal_gate": {
+    "head": "22f74384442647db313d630b27ec0a8da11f6f67",
+    "run": 38197295365,
+    "job": 114642702420,
+    "actual_checkout": "5e1216bae2f8afd97e9f7158c85f5ec6d9ebb3e3",
+    "tree_equal_to_22_head": true,
+    "status": "SUCCESS",
+    "unit": "1373PASS225SKIP15warnings in364.03s",
+    "frozen_binary": "131PASS21SKIP1601DESELECT in1642.02s",
+    "scope": "Source-bound terminal Windows CI outcome only. No Linux baseline, minimum-Core MCP or uncapped process/readers/lease acceptance inferred."
+  },
+  "source_actions": "Read-only existing registry receipts, immutable Git source, existing cache/environment bytes and terminal GitHub metadata/log. No source edits, package downloads/installs, native/RCC/Action executions or service-test reruns by this reviewer.",
+  "evidence": [
+    "core-floor-audit.json",
+    "minimum-core-installed-review.json",
+    "windows308-terminal-summary.json",
+    "documentation-proposal.json"
+  ],
+  "historical_failures": "Prior Windows/native/idle control failures remain bound to their original receipts. Filename-matched synthetic1.0.2 pytest wheels are excluded from registry authority; later outcomes do not relabel earlier failures.",
+  "still_unqualified": [
+    "Whole195/208 and complete Runtime1.0.3 release",
+    "Managed/native Action baseline, environment acquisition, uncapped descendant/reader/lease proof",
+    "Minimum-Core MCP execution and other-platform minimum-floor installed execution"
+  ],
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,19 @@
+{
+  "scope": "independent Linux real source error-path control, private files, no product source edits",
+  "results": [
+    {
+      "lane": "_common",
+      "test_sha256": "8cc28545a190ebe9151899f51575d28e8bb310a8910fa10953acd2617e703502",
+      "original_acquisition_error_preserved": true,
+      "all_observed_real_owners_disposed_or_collected": true,
+      "no_new_live_thread": true
+    },
+    {
+      "lane": "_robo_utils",
+      "test_sha256": "be8b531ec800c15866a38e606704e133605f440a3f36426bc8a750d7626b5a2c",
+      "original_acquisition_error_preserved": true,
+      "all_observed_real_owners_disposed_or_collected": true,
+      "no_new_live_thread": true
+    }
+  ]
+}

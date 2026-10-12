@@ -1,0 +1,60 @@
+{
+  "accepted_source_head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "runtime_version": "1.0.3",
+  "python": "/workspace/successor-evidence/pr307-packaged/installed-consumer/.venv/bin/python",
+  "sys_path": [
+    "",
+    "/workspace/successor-toolkit/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python312.zip",
+    "/workspace/successor-toolkit/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12",
+    "/workspace/successor-toolkit/robocorp/holotree/c2fd1aa_5a1fac3_9fcd2534/lib/python3.12/lib-dynload",
+    "/workspace/successor-evidence/pr307-packaged/installed-consumer/.venv/lib/python3.12/site-packages"
+  ],
+  "runtime_direct_url": {
+    "url": "file:///workspace/successor-evidence/pr307-packaged/actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+    "archive_info": {
+      "hashes": {
+        "sha256": "ff31635de80d6c30762bf86754d8d88c0102f5a66ade5bd32673adf63dee8efc"
+      }
+    }
+  },
+  "runtime_wheel_sha256": "ff31635de80d6c30762bf86754d8d88c0102f5a66ade5bd32673adf63dee8efc",
+  "module_paths": {
+    "actions.server": "/workspace/successor-evidence/pr307-packaged/installed-consumer/.venv/lib/python3.12/site-packages/actions/server/__init__.py",
+    "actions.server._oauth2": "/workspace/successor-evidence/pr307-packaged/installed-consumer/.venv/lib/python3.12/site-packages/actions/server/_oauth2.py",
+    "actions.server._oauth2_config": "/workspace/successor-evidence/pr307-packaged/installed-consumer/.venv/lib/python3.12/site-packages/actions/server/_oauth2_config.py",
+    "actions.server._common.oauth2_settings": "/workspace/successor-evidence/pr307-packaged/installed-consumer/.venv/lib/python3.12/site-packages/actions/server/_common/oauth2_settings.py",
+    "actions.server.vendored_deps.oauth2_settings": "/workspace/successor-evidence/pr307-packaged/installed-consumer/.venv/lib/python3.12/site-packages/actions/server/vendored_deps/oauth2_settings.py"
+  },
+  "module_bytes_match_installed_wheel": true,
+  "real_bundled_default_template_created_exactly": true,
+  "new_template_mode": "0600",
+  "real_bundled_hosted_getter_exact": true,
+  "both_input_hashes_match_exact_source": true,
+  "candidate_dependency_origin": [
+    {
+      "name": "actions-core",
+      "version": "1.0.3",
+      "direct_url": {
+        "url": "file:///workspace/successor-evidence/pr307-packaged/candidate-dependencies/actions_core-1.0.3-py3-none-any.whl",
+        "archive_info": {
+          "hashes": {
+            "sha256": "8e088b40c39fa3badf581e584e466d0aef3371aed220f6dc7dce130fd11c1265"
+          }
+        }
+      }
+    },
+    {
+      "name": "actions-http-helper",
+      "version": "1.0.3",
+      "direct_url": {
+        "url": "file:///workspace/successor-evidence/pr307-packaged/candidate-dependencies/actions_http_helper-1.0.3-py3-none-any.whl",
+        "archive_info": {
+          "hashes": {
+            "sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9"
+          }
+        }
+      }
+    }
+  ],
+  "limitations": "Linux cp312 local candidate wheel with local Core/HTTP helper1.0.3 dependency wheels; not public-registry origin, native executable, Windows/macOS or signed/publication acceptance"
+}

@@ -1,0 +1,45 @@
+{
+  "state": "STOPPED",
+  "observed_at_utc": "2026-10-12T07:54:54.325633+00:00",
+  "task": "Bounded54contractfeatureledgerreconciliation",
+  "stop_authority": "Parent \uc804\ub2ec: Joshhandoff STOP; completeonlyinflightledger and stop",
+  "result": "RecoverableJSON+Markdown+exactdocumentationproposal completed; no integrationorissue acceptance",
+  "counts": {
+    "retained": 54,
+    "umbrella_advisory_policy": 5,
+    "delivery": 49,
+    "accepted_complete": 1,
+    "implemented_closure_ready": 3,
+    "partial": 15,
+    "UNKNOWN": 30
+  },
+  "owned_files": [
+    {
+      "path": "/workspace/successor-evidence/full-feature-reconciliation-20261012/reconciliation.json",
+      "bytes": 75666,
+      "sha256": "f9bea0a0e0d72ae983f6011328c5eac3498b843862457673009fc132e59147c4"
+    },
+    {
+      "path": "/workspace/successor-evidence/full-feature-reconciliation-20261012/reconciliation.md",
+      "bytes": 11953,
+      "sha256": "881c14b7087d2f0b92157ccb2bf5dcef9f9f1e438aa7f187b6d28f8e6c598237"
+    },
+    {
+      "path": "/workspace/successor-evidence/full-feature-reconciliation-20261012/documentation-proposal.json",
+      "bytes": 1268,
+      "sha256": "f3685e4c82ce67c6e580d935c5b4b03686dd625e1a7592c121e0c46b9268263e"
+    }
+  ],
+  "process_and_task_state": {
+    "active_reviewer_commands": 0,
+    "longrunning_exec_sessions_owned": 0,
+    "native_Rcc_processes_started_by_this_task": 0,
+    "agents_or_workers_spawned": 0,
+    "remote_CI_dispatched": 0,
+    "scope": "Allreviewerledgercommandsreturned synchronously. No processsignal/newCI/test/native cleanup needed. Otherroot/childsourcewritersandpreexistingremoteCIareoutside thisreviewer ownership; root coordinates stopping them."
+  },
+  "mutations": "Own evidence directory JSON/Markdown only; no product/issues/refs/handoff changes",
+  "task_expansion": "None; no newsource/repo-wideaudit/liveissuequeries/tests/CI/native/workers",
+  "remaining_uncertainty": "UNKNOWN30contractstatuses, broaderproductacceptanceandreleaseHOLD retained; current305partial and308a17CIpending not accepted",
+  "upstream_disposition": "none"
+}

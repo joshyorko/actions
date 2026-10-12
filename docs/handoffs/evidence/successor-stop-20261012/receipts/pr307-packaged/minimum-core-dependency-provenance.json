@@ -1,0 +1,26 @@
+{
+  "time": "2026-10-12T03:43:42.860171+00:00",
+  "runtime_source": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "core_authority": "accepted23a docs/program/evidence/core-1.0.2-pypi-verification-20261009.json digest9d527... andtag011c5482",
+  "dependencies": [
+    {
+      "name": "actions-core",
+      "version": "1.0.2",
+      "wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+      "installed_python_members_exact": 47,
+      "local_direct_url": false,
+      "source": "defaultpublicPyPI Poetry project; no overrides"
+    },
+    {
+      "name": "actions-http-helper",
+      "version": "1.0.3",
+      "wheel_sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "installed_python_members_exact": 2,
+      "local_direct_url": false,
+      "source": "defaultpublicPyPI Poetry project; no overrides"
+    }
+  ],
+  "lock_sha256": "6effe860a77ab9ec09929af875a7d5cfa90b695cb745b21bde2f5e7deda4f51c",
+  "productionpath_overrides": false,
+  "scope": "dependencyinstalledmember/origin checks; Runtime sourcedfrommeasured localGHartifact,no RuntimepublicPyPIpublication"
+}

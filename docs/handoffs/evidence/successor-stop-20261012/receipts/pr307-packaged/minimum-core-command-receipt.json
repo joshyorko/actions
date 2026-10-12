@@ -1,0 +1,70 @@
+{
+  "time": "2026-10-12T03:43:09.381500+00:00",
+  "runtime_source": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "scope": "publicminimumCore1.0.2/Helper1.0.3 OAuth andidleHTTP only; no managedAction/MCPauthoring/fullnative lease gate",
+  "results": [
+    {
+      "label": "minimum-core-inventory",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr307-packaged/minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "consumer_inventory.py"
+      ],
+      "exit_code": 0,
+      "output_sha256": "d569c16e26592a535ecd7054cc0ee371a7ddd556968dbcab1e633e374384cda4",
+      "bytes": 326
+    },
+    {
+      "label": "minimum-core-oauth",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr307-packaged/minimum-core-consumer",
+        "poetry",
+        "run",
+        "pytest",
+        "-q",
+        "test_installed_oauth.py"
+      ],
+      "exit_code": 0,
+      "output_sha256": "fb8bec9fc58f3d954b791ced932a7ded6b6f9cc0a34884363a5d688f90a75235",
+      "bytes": 98
+    },
+    {
+      "label": "minimum-core-pip-check",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr307-packaged/minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "output_sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313",
+      "bytes": 294
+    },
+    {
+      "label": "minimum-core-idle-startup",
+      "command": [
+        "python",
+        "/workspace/successor-evidence/run-prepared-package.py",
+        "/workspace/successor-evidence/pr307-packaged/minimum-core-consumer",
+        "poetry",
+        "run",
+        "python",
+        "check_installed_startup.py"
+      ],
+      "exit_code": 0,
+      "output_sha256": "777881024a7f16d5f960e525d84b4e777af64ccd4ce1b8d70ef975de0f5e9cd2",
+      "bytes": 1389
+    }
+  ]
+}

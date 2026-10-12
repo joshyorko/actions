@@ -1,0 +1,55 @@
+{
+  "connector_json": "/workspace/successor-evidence/pr308/f949-platform-ci/job-114685788155-decoded-connector-private.json",
+  "connector_json_sha256": "5d28239354d1e32c2c118c0f7e20a12a8307a101de5b183b4b140fe7cdbdc950",
+  "crlf_count": 0,
+  "decoded_field": [
+    "structuredContent",
+    "content"
+  ],
+  "decoded_log": "/workspace/successor-evidence/pr308/f949-platform-ci/job-114685788155-decoded-private.log",
+  "decoded_log_bytes": 1521746,
+  "decoded_log_sha256": "6ff23e9db107071e80159aab61bf105d864ceb50b56b1f0d197b48811a6ec117",
+  "job": 114685788155,
+  "leading_utf8_bom": true,
+  "lf_count": 10407,
+  "named_test_events": {
+    "test_async_zero_admits_cancel_before_held_worker_runs": [
+      "2026-10-12T06:13:19.6046275Z [gw1] [ 13%] PASSED action_server_tests/test_async_run_cancellation_admission.py::test_async_zero_admits_cancel_before_held_worker_runs "
+    ],
+    "test_fixture_child_capture_rejects_unknown_or_changed_identity": [
+      "2026-10-12T06:15:13.3839397Z [gw1] [ 78%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_fixture_child_capture_rejects_unknown_or_changed_identity[unowned] ",
+      "2026-10-12T06:15:13.3866112Z [gw1] [ 78%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_fixture_child_capture_rejects_unknown_or_changed_identity[root_birth] ",
+      "2026-10-12T06:15:13.3895214Z [gw1] [ 79%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_fixture_child_capture_rejects_unknown_or_changed_identity[child_birth] ",
+      "2026-10-12T06:15:13.3923609Z [gw1] [ 79%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_fixture_child_capture_rejects_unknown_or_changed_identity[owner_exit] "
+    ],
+    "test_fixture_child_stop_check_rejects_reused_identity": [
+      "2026-10-12T06:15:13.3949357Z [gw1] [ 79%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_fixture_child_stop_check_rejects_reused_identity "
+    ],
+    "test_provider_startup_failure_uses_bounded_kill_fallback": [
+      "2026-10-12T06:13:49.5763374Z [gw0] [ 48%] PASSED action_server_tests/test_dakota_rcc_acceptance.py::test_provider_startup_failure_uses_bounded_kill_fallback "
+    ],
+    "test_regression_handles_reported_child_distinct_from_original_popen": [
+      "2026-10-12T06:15:13.3805709Z [gw1] [ 78%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_regression_handles_reported_child_distinct_from_original_popen "
+    ],
+    "test_server_async_process_poll_with_cancel": [
+      "2026-10-12T06:28:08.4703422Z action_server_tests/test_server_async.py::test_server_async_process_poll_with_cancel PASSED [ 76%]"
+    ],
+    "test_startup_regression_reports_failed_cleanup_and_disposes_original_child": [
+      "2026-10-12T06:15:13.1875076Z [gw1] [ 78%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_startup_regression_reports_failed_cleanup_and_disposes_original_child[False] ",
+      "2026-10-12T06:15:13.2470103Z [gw1] [ 78%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_startup_regression_reports_failed_cleanup_and_disposes_original_child[True] "
+    ]
+  },
+  "native_baseline_attempts": 0,
+  "producer_checkout_lines": [
+    "2026-10-12T06:10:55.9707535Z HEAD is now at d663b19 Merge f949bef2eeab518ffd34d9e69955938a007f8922 into 48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+  ],
+  "producer_sha_candidates": [
+    "d663b19f95139dbd6080cce3680e2a066f29eda5"
+  ],
+  "retrieval": "One connector fetch of completed job; exact UTF-8 encoding of received decoded text, not original HTTP/archive bytes",
+  "schema": 1,
+  "suite_summaries": [
+    "2026-10-12T06:15:36.2187916Z ========== 1643 passed, 12 skipped, 16 warnings in 161.68s (0:02:41) ===========",
+    "2026-10-12T06:29:38.8347560Z ========= 132 passed, 20 skipped, 1658 deselected in 782.06s (0:13:02) ========="
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "artifact": {
+    "id": 11728534466,
+    "run_id": 38211281718,
+    "head_sha": "f949bef2eeab518ffd34d9e69955938a007f8922",
+    "size": 80775097,
+    "digest": "sha256:f2e116426e40f84ddfb6fd88d96bf2280f169801f91d1820480cbcbb5668bbf6",
+    "expired": false
+  },
+  "jobs": [
+    {
+      "id": 114685788750,
+      "name": "build-sdist (ubuntu-py3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "publication_steps": []
+    },
+    {
+      "id": 114685788814,
+      "name": "build-wheels (macos-15)",
+      "status": "completed",
+      "conclusion": "success",
+      "publication_steps": []
+    },
+    {
+      "id": 114685788929,
+      "name": "build-wheels (windows-2022)",
+      "status": "completed",
+      "conclusion": "success",
+      "publication_steps": []
+    },
+    {
+      "id": 114685788943,
+      "name": "build-wheels (ubuntu-22.04)",
+      "status": "completed",
+      "conclusion": "success",
+      "publication_steps": []
+    },
+    {
+      "id": 114686845216,
+      "name": "publish (3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "publication_steps": [
+        {
+          "name": "Check Runtime publish credential",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Publish verified artifacts",
+          "conclusion": "skipped"
+        }
+      ]
+    }
+  ],
+  "checkout_logs": [
+    {
+      "job_id": 114685788750,
+      "fetches": 1,
+      "completed_checkout_match": true,
+      "actual_checkout_sha": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+      "rawlogs_exported": false
+    },
+    {
+      "job_id": 114685788814,
+      "fetches": 1,
+      "completed_checkout_match": true,
+      "actual_checkout_sha": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+      "rawlogs_exported": false
+    },
+    {
+      "job_id": 114685788929,
+      "fetches": 1,
+      "completed_checkout_match": true,
+      "actual_checkout_sha": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+      "rawlogs_exported": false
+    },
+    {
+      "job_id": 114685788943,
+      "fetches": 1,
+      "completed_checkout_match": true,
+      "actual_checkout_sha": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+      "rawlogs_exported": false
+    }
+  ],
+  "actual_checkout": {
+    "sha": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+    "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+    "parents": [
+      "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "f949bef2eeab518ffd34d9e69955938a007f8922"
+    ],
+    "whole_tree_equals_accepted_head": true,
+    "authority": "independent gh API git commit readback"
+  }
+}

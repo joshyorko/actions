@@ -1,0 +1,21 @@
+{
+  "candidate_sha": "ba85aac7324ea4463bfba8c5f8586e27706dc2fe",
+  "candidate_tree": "80e5c77513f6abf5d07005ee3aee47d49efd927f",
+  "native_build_source_sha": "92498aff4edbfc6ddaf7975a6c4b0ddfee52a37e",
+  "workflow_run_id": "38098225250",
+  "workflow_run_attempt": "1",
+  "wrapper_artifact_id": "11686533628",
+  "wrapper_archive_size": 150,
+  "wrapper_archive_sha256": "068d7ac84e02ca8620f86af64017b0490422f3299c59d0cc401d04324a4b0129",
+  "wrapper_source_sha256": "10c6f86e5c731c7106317abb57d24dc70df405828c4986624f66c567827b2239",
+  "wrapper_source_sha256_checked": "10c6f86e5c731c7106317abb57d24dc70df405828c4986624f66c567827b2239",
+  "wrapper_measurement_receipt_sha256": "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff",
+  "native_measurement_receipt_sha256": "07b6799026a26ec985d0cf7835b3fddd2105304c09d4102ed69c51f9d5c8c2ff",
+  "member_path": "action-server",
+  "member_mode": 493,
+  "member_size": 26,
+  "binary_sha256": "ad7000cf570b4e13fd73a017e9b01cbb04adc3c39fc2de41ed70b919925f6e5c",
+  "frozen_binary_sha256": "067a27c24b55690410beeb1b95e97fb098edf8e02779b36b69bbead2227433fb",
+  "archive_and_member_verified": true,
+  "binary_path": "/workspace/successor-evidence/oauth-full-portable/popen-gw0/test_wrapper_verifier_extracts0/unpacked/action-server"
+}

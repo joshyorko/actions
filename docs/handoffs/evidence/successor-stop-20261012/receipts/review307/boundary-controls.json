@@ -1,0 +1,44 @@
+{
+  "head": "2d241e2e48ceacb5671cfec2c0edc2769b036e1e",
+  "builder_sha256": "9c52be7c0297174504eaf1f3bf66775a73f2651ccf707b9ee8659840f331ec25",
+  "results": {
+    "oversize": {
+      "rejected": true,
+      "old_preserved": true,
+      "safe_message": "OAuth2 input is too large: oauth-config.yaml"
+    },
+    "duplicate_nested": {
+      "rejected": true,
+      "old_preserved": true,
+      "safe_message": "OAuth2 input is malformed YAML: oauth-config.yaml"
+    },
+    "invalid_utf8": {
+      "rejected": true,
+      "old_preserved": true,
+      "safe_message": "OAuth2 input is not UTF-8: oauth-config.yaml"
+    },
+    "input_symlink": {
+      "rejected": true,
+      "old_preserved": true,
+      "safe_message": "OAuth2 input must be a regular file: oauth-config.yaml"
+    },
+    "exact_64KiB": {
+      "accepted": true,
+      "sha256_matches": true
+    },
+    "exclusive_link_race": {
+      "existing_winner_preserved": true,
+      "temporary_cleanup": true
+    },
+    "fsync_failure": {
+      "no_publication": true,
+      "temporary_cleanup": true
+    },
+    "12_concurrent_creators": {
+      "complete_bytes": true,
+      "mode0600": true,
+      "temporary_cleanup": true
+    }
+  },
+  "scope": "Linux prepared Runtime interpreter; independent boundary controls, not provider/native/package acceptance"
+}

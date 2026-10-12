@@ -1,0 +1,45 @@
+{
+  "expected_wrapper_sha256": "e1728cfc866951e0710a4ab343eb114800dd3e530909b8418e1658e9a8d4203f",
+  "expected_frozen_binary_sha256": "153ffa85fdf369416f99c8d14a1d25f5e10c6096f9e668825679b2b12b927b9e",
+  "selected_test_nodes": [
+    "selected-node"
+  ],
+  "process_lifecycles": [
+    {
+      "test_nodeid": "selected-node",
+      "identity_verified": true,
+      "wrapper_pid": 100,
+      "wrapper_create_time": 1.0,
+      "wrapper_path": "/workspace/successor-evidence/oauth-full-portable/popen-gw1/test_stop_failure_cannot_be_ov0/action-server",
+      "wrapper_sha256": "e1728cfc866951e0710a4ab343eb114800dd3e530909b8418e1658e9a8d4203f",
+      "frozen_child_pid": 101,
+      "frozen_child_create_time": 2.0,
+      "frozen_child_path": "/workspace/successor-evidence/oauth-full-portable/popen-gw1/test_stop_failure_cannot_be_ov0/home/.actions/bin/action-server/internal/1.0.3/action-server",
+      "frozen_child_sha256": "153ffa85fdf369416f99c8d14a1d25f5e10c6096f9e668825679b2b12b927b9e",
+      "frozen_child_parent_pid": 100,
+      "child_home": "/workspace/successor-evidence/oauth-full-portable/popen-gw1/test_stop_failure_cannot_be_ov0/home",
+      "natural_exit": true,
+      "stop_observed": true,
+      "stop_failure": "previous lifecycle verification failed"
+    }
+  ],
+  "per_node": {
+    "selected-node": {
+      "attempted": 1,
+      "natural_wrapper_and_child_exits": 0,
+      "failed": 0,
+      "status": "FAIL"
+    }
+  },
+  "natural_wrapper_and_child_shutdowns": 0,
+  "missing_test_nodes": [
+    "selected-node"
+  ],
+  "failures": [
+    "no wrapper lifecycle proof for selected nodes: ['selected-node']",
+    "wrapper lifecycle did not exit naturally for nodes: ['selected-node']",
+    "one or more wrapper children did not exit naturally",
+    "wrapper process lifecycle verification failed: ['selected-node: previous lifecycle verification failed']"
+  ],
+  "status": "FAIL"
+}

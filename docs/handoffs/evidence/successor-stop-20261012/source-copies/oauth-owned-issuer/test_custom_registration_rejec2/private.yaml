@@ -1,0 +1,5 @@
+oauth2Config:
+  providers:
+    google:
+      clientId: " \t\n"
+      mode: custom

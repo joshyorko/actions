@@ -1,0 +1,90 @@
+{
+  "verdict": "GO_MINIMUM_CORE_OAUTH_IDLE_SCOPED",
+  "runtime_source": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "runtime_wheel_sha256": "ff31635de80d6c30762bf86754d8d88c0102f5a66ade5bd32673adf63dee8efc",
+  "runtime_installed_python_members_exact": 203,
+  "consumer_root": "/workspace/successor-evidence/pr307-packaged/minimum-core-consumer",
+  "consumer_lock_sha256": "6effe860a77ab9ec09929af875a7d5cfa90b695cb745b21bde2f5e7deda4f51c",
+  "dependencies": [
+    {
+      "name": "actions-core",
+      "version": "1.0.2",
+      "wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+      "installed_python_members_exact": 47,
+      "lock_default_source_and_hash_verified": true,
+      "no_direct_url": true
+    },
+    {
+      "name": "actions-http-helper",
+      "version": "1.0.3",
+      "wheel_sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "installed_python_members_exact": 2,
+      "lock_default_source_and_hash_verified": true,
+      "no_direct_url": true
+    }
+  ],
+  "selected_Core_API_files_exact_011c_public_source": true,
+  "all_recorded_command_log_hashes_sizes_exit_codes_verified": true,
+  "oauth": "9PASS in0.70s",
+  "pip_check": "PASS NoBrokenRequirements; prior cache-warning bytes remain retained",
+  "idle_startup": {
+    "scope": "installed Linux cp312 idle CLI startup only",
+    "runtime_source": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+    "runtime_version": "1.0.3",
+    "public_core_helper_versions": {
+      "core": "1.0.2",
+      "helper": "1.0.3"
+    },
+    "visible_headroom_bytes": 2593128448,
+    "self_cgroup_binding": "UNQUALIFIED; no managed Action admission inferred",
+    "managed_actions": 0,
+    "rcc_feedback": "Normal CLI may launch shipped18.19.3 feedback metric; no environment/Action acquisition",
+    "startup": "HTTP_READY",
+    "http": [
+      {
+        "path": "/openapi.json",
+        "status": 200,
+        "body_sha256": "452f161128a76dea62066f7172ef6b1cde2eb26b21ea4928a306db5688ce9101"
+      },
+      {
+        "path": "/api/work-items/stats",
+        "authenticated": false,
+        "status": 403,
+        "body_sha256": "9a1ef7ec2858c93d364dbe0e455d321ed30f0ad6e706782ebe00aa6653e1462f"
+      },
+      {
+        "path": "/api/work-items/stats",
+        "authenticated": true,
+        "status": 200,
+        "body_sha256": "85b9fcdd3a8c9779471783a64c89adcf174f2bc79c6de1b9321e8cbe496a6fdd"
+      }
+    ],
+    "cleanup": {
+      "wrapper_reaped": true,
+      "live_descendant_pids": [],
+      "zombie_descendant_pids": [],
+      "errors": [],
+      "descendant_snapshot_complete": true
+    },
+    "owner": {
+      "pid": 38163,
+      "create_time": 1791776586.51
+    },
+    "elapsed_seconds": 2.1788845249993756,
+    "status": "PASS_IDLE_STARTUP_SCOPED"
+  },
+  "poststartup_modes": {
+    "root": "0o700",
+    "datadir": "0o700",
+    "actions-home": "0o750",
+    "robots-home": "0o700",
+    "tmp": "0o700",
+    "stdout.log": "0o600",
+    "stderr.log": "0o600"
+  },
+  "synthetic_api_key": "generated secrets.token_urlsafe(32); no operator credential input",
+  "minimum_Core_MCP_authoring_or_discovery_read_tool_calls": "NOT_RUN",
+  "control_and_cleanup_bounds": "Idle/no sync/no managed Action; observed wrapper/captured descendants only; no uncapped process/reader/lease census",
+  "reviewer_actions": "Read-only existing environment member/metadata/lock/receipt/source verification; no installs, CLI/RCC/Action/OAuth reruns",
+  "all_47_Core_python_members_exact_verified_public_source011c": true
+}

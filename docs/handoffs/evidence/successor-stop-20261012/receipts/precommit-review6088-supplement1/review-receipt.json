@@ -1,0 +1,46 @@
+{
+  "schema": "precommit-readonly-review/supplement1-v1",
+  "checkout_state": {
+    "checkpoint_head": "6088e6dbf81ff6aa212c7bebaf115534e885295d",
+    "expected_checkpoint_head": "6088e6dbf81ff6aa212c7bebaf115534e885295d",
+    "handoff_head": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+    "expected_handoff_head": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+    "handoff_clean": true,
+    "checkpoint_changes": [
+      "M docs/handoffs/actions-cloud-successor-checkpoint-20261012.md",
+      " M docs/skills/repository-operations.md",
+      "?? docs/handoffs/evidence/successor-20261012-supplement1/"
+    ]
+  },
+  "old_immutable_evidence": {
+    "manifest": "docs/handoffs/evidence/successor-20261012/manifest.json",
+    "count": 37,
+    "bytes": 346659,
+    "all_local_files_match_recorded_sha_and_size": true,
+    "all_references_present_in_6088_tree_with_size": true,
+    "manifest_sha256": "19f7a5261becd8081966d945f9c64782ea7eb44d6dfd4faa829867a92b8896a4"
+  },
+  "new_supplement": {
+    "manifest": "docs/handoffs/evidence/successor-20261012-supplement1/manifest.json",
+    "count": 28,
+    "bytes": 140081,
+    "all_local_files_match_recorded_sha_and_size": true,
+    "manifest_sha256": "3387b163b5789feb1025ec1014506b621a41416bb7c105ad5d09f49493432ab0",
+    "suspicious_private_or_signed_url_findings": []
+  },
+  "claim_checks": {
+    "pr307_public_origins": "Core/Helper 1.0.3 originate from public PyPI, exact wheel hashes and installed Python member counts recorded; local direct_url absent. Scope is independent receipt, no new registry call performed in this lane.",
+    "pr307_idle_startup": "First startup FAIL (expected401, actual403); subsequent measured startup scoped PASS with no-key 403 and valid bearer 200. Keep first failure. Both runs zero managed actions; cgroup binding unqualified; no env acquisition/lease query/native baseline.",
+    "permissions": "Observed per-attempt root/data/robots/tmp 0700, actions-home 0750, logs 0600. Initial assumption that all homes were 0700 remains FAIL; cause is not independently traced. Do not attribute 0750 causally to RCC beyond receipt wording.",
+    "cleanup": "Captured wrapper/descendant set only; actual receipt has complete captured snapshot and empty live/zombie arrays, but reviewer says PASS expression does not require snapshot_complete; not an uncapped PID/create-time, reader or lease census.",
+    "pr308": "22f74384 exact-head check snapshot 25/25 success; focused 287 pass is scoped; controller/deadline/census/lease, self-cgroup, native Action remain open. Source-prepared native profile is NOTRUN; child #308 opt-in work not whole acceptance.",
+    "pr313": "216ad55b exact refreshed-head snapshot 19/19; 21 cleanup/mutex tests scoped. First composition control FAIL retained; whole process-tree/reader/lease cleanup HOLD.",
+    "pr306": "eb0df4f9 exact refreshed-head snapshot at 2026-10-12T03:32:11.889219Z: 18/19 success, Windows devmode in_progress. Earlier readiness/cleanup causes remain UNKNOWN; no stale results transferred."
+  },
+  "documentation_review": {
+    "oauth_guide": "Current updated guide accurately scopes accepted offline owned pair, intentional empty hosted catalog, package digest/source checks, public dependency proof and actual idle consumer; obsolete vendor-acquisition branch replaced.",
+    "precise_suggestion": "doc-corrections.md: add the 03:32:11.889219Z exact-head census link for #306; optionally record that #313\u2019s first composition review failed due to an over-narrow expected-delta check, then corrected without source changes. Neither is a CI test failure.",
+    "other_corrections": "No additional correction identified in the reviewed text. Existing first 401 assertion failure, permission-control failure, captured-set limitation, and #308/#313 outstanding gates remain explicit."
+  },
+  "upstream_disposition": "none; this lane performed no upstream calls, edits, pushes, merges, issue changes or source mutations."
+}

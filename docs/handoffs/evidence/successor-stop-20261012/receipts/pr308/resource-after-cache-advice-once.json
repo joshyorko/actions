@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-10-12T07:05:16.337786+00:00",
+  "memory_current": 14013792256,
+  "memory_max": 17179869184,
+  "disk_free": 12517965824,
+  "tmp_free": 9441153024,
+  "shm_free": 9441349632,
+  "native_attempts": 0,
+  "scope": "Visible finite parent diagnostics, child membership independently witnessed; canonical mapping and admission budget remain unresolved",
+  "cache_advice_once": "Toolkit cache107files1623592039candidatebytes0.384s; metadata unchanged, no content write/deletion/globaldropcache; no guaranteed reclaim",
+  "memory_proposal": {
+    "floor": 3113851289,
+    "reserve": 536870912,
+    "accepted": false,
+    "calibrated": false
+  },
+  "visible_headroom": 3166076928
+}

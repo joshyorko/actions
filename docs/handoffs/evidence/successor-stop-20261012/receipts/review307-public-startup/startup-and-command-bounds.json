@@ -1,0 +1,69 @@
+{
+  "accepted_runtime_source": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "artifact_id": 11722158889,
+  "first_attempt": {
+    "status": "FAIL",
+    "primary_error_class": "AssertionError",
+    "receipt_sha256": "3020f31a02056ffe5dc3d4f9f748b902271d2046df1ac41b4111443081d17dde",
+    "retained_as_failed": true
+  },
+  "second_attempt": {
+    "status": "PASS_IDLE_STARTUP_SCOPED",
+    "receipt_sha256": "8d15a078fcd58efdeea80471636256dd60a7bf056ac5d7652a2e6126ae2f8c40",
+    "elapsed_seconds": 1.0201048769995396,
+    "http": [
+      {
+        "path": "/openapi.json",
+        "status": 200,
+        "body_sha256": "78a825e2697ce717a230f7b1f576d75a3da651d04fdd3ccf8471903a48a53b5c"
+      },
+      {
+        "path": "/api/work-items/stats",
+        "authenticated": false,
+        "status": 403,
+        "body_sha256": "9a1ef7ec2858c93d364dbe0e455d321ed30f0ad6e706782ebe00aa6653e1462f"
+      },
+      {
+        "path": "/api/work-items/stats",
+        "authenticated": true,
+        "status": 200,
+        "body_sha256": "85b9fcdd3a8c9779471783a64c89adcf174f2bc79c6de1b9321e8cbe496a6fdd"
+      }
+    ],
+    "cleanup": {
+      "wrapper_reaped": true,
+      "live_descendant_pids": [],
+      "zombie_descendant_pids": [],
+      "errors": [],
+      "descendant_snapshot_complete": true
+    }
+  },
+  "control_delta_only_fresh_directory_and401_to403_expectation": true,
+  "middleware_contract_exact_accepted_source403": true,
+  "missing_key_body_hash_exact_middleware_message": true,
+  "poststartup_directory_modes": {
+    "root": "0o700",
+    "datadir": "0o700",
+    "actions-home": "0o750",
+    "robots-home": "0o700",
+    "tmp": "0o700"
+  },
+  "stdout_stderr_mode": "0600",
+  "private_ancestor_mode": "0700",
+  "actions_home_poststartup_mode": "0750; mode-change cause not independently traced",
+  "synthetic_api_key_source": "secrets.token_urlsafe(32); no operator credential input",
+  "auth_enabled_cli": true,
+  "managed_action_scope": "zero minimum workers/actions-sync false/no Action call; not an independently measured uncapped worker/lease census",
+  "bounded_control": "25second ready loop, per-request timeouts0.5/2seconds, fresh10second cleanup deadline; no rerun performed by reviewer",
+  "recorded_public_commands_and_log_hashes_verified": true,
+  "public_oauth_result": "9PASS in0.71s",
+  "pip_check_result": "No broken requirements found",
+  "startup_control_sha256": "9fd7260da41c57aded629afa0c703a6ed836e076004dfbade3fbf3f7170afff6",
+  "source_server_sha256": "0954b062ba7931609dddfd8b1f068dbac83967691e1194b6ac250a51befa20ff",
+  "limitations": [
+    "Captured-set cleanup only; no final uncapped PID/create-time descendant census, active Runtime reader census, lease query or resource/platform/native acceptance.",
+    "No native Action or environment acquisition was invoked; normal CLI may launch shipped18.19.3 feedback.",
+    "Control PASS expression does not itself require descendant_snapshot_complete, but this actual receipt has that field true and it was verified here.",
+    "No public Runtime registry publication or whole208/fullrelease acceptance inferred."
+  ]
+}

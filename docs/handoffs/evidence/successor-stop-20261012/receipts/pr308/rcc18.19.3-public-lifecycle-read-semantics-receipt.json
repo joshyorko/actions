@@ -1,0 +1,58 @@
+{
+  "commands_inspect_verify_repair_executed": false,
+  "files": [
+    {
+      "bytes": 2291,
+      "git_blob": "f887279e0aba2f28708afc32610ff4feaeb56ff5",
+      "local_copy": "/workspace/successor-evidence/pr308/rcc18.19.3-public-4148-cmd_environmentLifecycle.go",
+      "path": "cmd/environmentLifecycle.go",
+      "sha256": "1188096cb596c61a7e814354fb5e2c91b009f0fd8c9d7daec20df872bf2e10a4",
+      "url": "https://raw.githubusercontent.com/joshyorko/rcc/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/cmd/environmentLifecycle.go"
+    },
+    {
+      "bytes": 7643,
+      "git_blob": "f81718a3138e4359bb75684aa35e3701bc529d84",
+      "local_copy": "/workspace/successor-evidence/pr308/rcc18.19.3-public-4148-environmentlifecycle_admin.go",
+      "path": "environmentlifecycle/admin.go",
+      "sha256": "724383f9637111ab02fafa5e9ea9de8d30495fc4e7b22aabb5105a5c0881bc19",
+      "url": "https://raw.githubusercontent.com/joshyorko/rcc/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/admin.go"
+    },
+    {
+      "bytes": 3643,
+      "git_blob": "1c54b551c0f40096eabbfee90c72b38b0fdd5ad4",
+      "local_copy": "/workspace/successor-evidence/pr308/rcc18.19.3-public-4148-environmentlifecycle_reconcile.go",
+      "path": "environmentlifecycle/reconcile.go",
+      "sha256": "ac96e010c5d984f32c36ea610a525b0490b56e930637527e41b276677713d7cf",
+      "url": "https://raw.githubusercontent.com/joshyorko/rcc/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/reconcile.go"
+    },
+    {
+      "bytes": 6545,
+      "git_blob": "614e90f87bc4f58b53cdee610f714778ac7c34ff",
+      "local_copy": "/workspace/successor-evidence/pr308/rcc18.19.3-public-4148-environmentlifecycle_lease.go",
+      "path": "environmentlifecycle/lease.go",
+      "sha256": "6ba204bbbfe2f87e3e757b045e8fa355e5656bedc3ca843d84dc7dd7a6c47b51",
+      "url": "https://raw.githubusercontent.com/joshyorko/rcc/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/lease.go"
+    },
+    {
+      "bytes": 3719,
+      "git_blob": "b9a3de9602ef52d48aa740c3fa00817f19940032",
+      "local_copy": "/workspace/successor-evidence/pr308/rcc18.19.3-public-4148-environmentlifecycle_record.go",
+      "path": "environmentlifecycle/record.go",
+      "sha256": "3a06628d9ad773f367fec26a7e8d9a15ccde69f618edbf07affbd1f8e29b5a53",
+      "url": "https://raw.githubusercontent.com/joshyorko/rcc/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/record.go"
+    },
+    {
+      "bytes": 6305,
+      "git_blob": "0079c7898b4d60a5d95c0704cb51ecc9a1a016d7",
+      "local_copy": "/workspace/successor-evidence/pr308/rcc18.19.3-public-4148-environmentlifecycle_coordination.go",
+      "path": "environmentlifecycle/coordination.go",
+      "sha256": "ecf668e7fc63d825b0c604540294ee13560b0214bfefc2143876fb377ebbb736",
+      "url": "https://raw.githubusercontent.com/joshyorko/rcc/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/coordination.go"
+    }
+  ],
+  "finding": "Inspect invokes reconcileLocked which removes provisional records and stale leases; not admitted as a passive lease observation",
+  "lease_writes_executed": false,
+  "revision": "4148c2b71705c9d2baf0e88b48d08a79cb7bda0f",
+  "scope": "public immutable source metadata only; shipped7e588 vcs.modified=true; byte/source equivalence UNVERIFIED",
+  "upstream_disposition": "none"
+}

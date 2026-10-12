@@ -1,0 +1,167 @@
+{
+  "commands": {
+    "configured_static": {
+      "command": "fresh gateway pinned holotree PATH and own caches poetry run invoke lint typecheck",
+      "status": "PASS Ruff, canonical format320files, Isort, mypy356files exit0; markdownlint unavailable"
+    },
+    "diff_check": {
+      "command": "git diff --check",
+      "status": "PASS"
+    },
+    "focused_final": {
+      "command": "same prepared environment .venv/bin/python -m pytest -n0 -q tests/action_server_tests/test_provider_startup_cleanup.py tests/action_server_tests/test_dakota_rcc_acceptance.py tests/action_server_tests/test_source_staging_rcc_consumer.py tests/action_server_tests/test_rcc_runtime_adapter.py -m \"not integration_test\" --basetemp=/workspace/successor-pr308/provider-final-typed --junitxml=/workspace/successor-evidence/pr308/provider-startup-focused-final.xml",
+      "status": "282PASS/1SKIP/3nativeDESELECTED/4warnings7.10s exit0"
+    },
+    "helper_mypy_extended": {
+      "baseline_sha256": "8f21502f64fed9ee5d26eb6a080a625ee575954e1f659c1f51ee1ea31bda57c7",
+      "status": "same6 pre-existing errors as exact b0a source; no new errors; extended diagnostic exit1"
+    },
+    "helper_ruff": {
+      "status": "PASS exit0"
+    },
+    "red": {
+      "command": "TMPDIR=/workspace/successor-pr308/tmp ROBOTS_HOME=/workspace/successor-pr308/robots ACTIONS_HOME=/workspace/successor-pr308/actions POETRY_CACHE_DIR=/workspace/successor-pr308/poetry-cache .venv/bin/python -m pytest -n0 -q tests/action_server_tests/test_provider_startup_cleanup.py --basetemp=/workspace/successor-pr308/provider-red --junitxml=/workspace/successor-evidence/pr308/provider-startup-red.xml",
+      "status": "11 expected failures missing APIs; exit1"
+    },
+    "windows_mypy": {
+      "command": ".venv/bin/python -m mypy --platform win32 --follow-imports=silent --show-column-numbers --namespace-packages --explicit-package-bases tests/action_server_tests/test_provider_startup_cleanup.py tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "status": "PASS2files diagnostic; actual Windows CI pending"
+    }
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md:2501",
+    "durable_learning": "existing provider startup Thread owner, original stream-error propagation, fixed error class, duplicate prevention, exact owner gate before signal, typed tree+reader cleanup under one caller deadline, primary failure preservation and explicit captured-scope exclusions",
+    "evidence": "17 new boundary controls plus existing provider kill fallback and282 focused PASS",
+    "remaining_uncertainty": "actual RCC/native source and resource qualification not run",
+    "stale_or_ambiguous_guidance_removed": "provider startup reader observation no longer missing in this harness; full census/global deadline/lease release remain distinct"
+  },
+  "evidence_files": {
+    "provider-configured-static-final.log": {
+      "bytes": 2017,
+      "sha256": "854076dac7b3fb4fd59a003a1eeaa037d0a4e917fd68b14870c898cfb57c9653"
+    },
+    "provider-configured-static.log": {
+      "bytes": 333,
+      "sha256": "05c58bbba663607787983e63c2a391f2acacece6b9d3f61c65ffc24be424bc9f"
+    },
+    "provider-helper-baseline-mypy.log": {
+      "bytes": 1042,
+      "sha256": "12a0846b310f6c9cd09350fb96aefde37098cbd51fb9a43b9a52301c44ad5cde"
+    },
+    "provider-helper-ruff.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "provider-startup-focused-final.log": {
+      "bytes": 1331,
+      "sha256": "2047478292ab84071f50db6ab84982c20da6b48f90a52544afd68e402020da3c"
+    },
+    "provider-startup-focused-final.xml": {
+      "bytes": 50669,
+      "sha256": "63a5b758b31461f0ec80250cf01612bf186c7ffff8b77b788beb945cc82c76d7"
+    },
+    "provider-startup-focused.log": {
+      "bytes": 1325,
+      "sha256": "43f55065c05bfadb540e1355060c76baceacdeb1119fdf1c74c7177ee77e62fd"
+    },
+    "provider-startup-green.log": {
+      "bytes": 253,
+      "sha256": "2934ea6ab01bf7aae7b30c58ca269ef4b77ddcd763659166bb6dd7e8ba112d18"
+    },
+    "provider-startup-mypy-initial.log": {
+      "bytes": 847,
+      "sha256": "a0cc09ca0867cef5436c7b4c7d95732dd42fad1450b2a64159f835824dc495ce"
+    },
+    "provider-startup-red.log": {
+      "bytes": 11639,
+      "sha256": "5fecb088b71f1af845505bb983019f24e7b6f008a64c906570690b8c39f15dba"
+    },
+    "provider-startup-red.xml": {
+      "bytes": 12375,
+      "sha256": "7ddd4e0d339ca32feeffd4c4771cfe52e2fd321235549c672f08806cf94e0bbd"
+    },
+    "provider-windows-mypy.log": {
+      "bytes": 43,
+      "sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8"
+    }
+  },
+  "head": "c5643f828ba0b299c0c2a99a9755d90b39b04b3c",
+  "native_attempts_consumed": 0,
+  "native_launch_permitted": false,
+  "patch": {
+    "bytes": 23578,
+    "sha256": "031609e9c4b7973e53766972f359ba5a3a8c92a4f34db694d081dba16b3a5756"
+  },
+  "predecessor": "b0a014512da9024003dcd4e09056a951c42c48c4",
+  "required_followup": [
+    "independent exact c564 source/fixture review and actual exact-head required CI",
+    "uncapped full owned PID/create-time census and failed/timeout evidence propagation",
+    "one whole-native-operation primary deadline and terminal cleanup controller",
+    "actual lease lifecycle observations using verified18.19.3 bytes; no lease writes/inferred release",
+    "independently proven self-cgroup endpoint; visible direct membership remained empty",
+    "accepted calibrated resource policy and fresh namespace before/during/after observer"
+  ],
+  "resource_file": {
+    "bytes": 730,
+    "sha256": "9d67ef9ce9dae9711951ed0458894185557cc3b1341731c0f43a79a69821d0c3"
+  },
+  "resource_observation": {
+    "filesystems": {
+      "/dev/shm": {
+        "device": 36,
+        "free_bytes": 9441349632
+      },
+      "/tmp": {
+        "device": 33,
+        "free_bytes": 9441202176
+      },
+      "/workspace": {
+        "device": 27,
+        "free_bytes": 13409386496
+      }
+    },
+    "memory.events": {
+      "high": 0,
+      "low": 0,
+      "max": 25204,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory.events.local": {
+      "high": 0,
+      "low": 0,
+      "max": 25204,
+      "oom": 0,
+      "oom_group_kill": 0,
+      "oom_kill": 0
+    },
+    "memory_current": 14315319296,
+    "memory_max": 17179869184,
+    "scope": "visible_cgroup_mount_diagnostic_only; self binding unproven",
+    "time_unix": 1791771719.1182556,
+    "visible_headroom_bytes": 2864549888
+  },
+  "schema": 1,
+  "source_files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes": 87695,
+      "sha256": "11f3fda89a60174905be4e1db92f7d025fe110cba838a242b862f0c290ed3ed0"
+    },
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py": {
+      "bytes": 9928,
+      "sha256": "c714600a458dc72982adcba62290d23d9b188e02172d4535d83b5f41db4c37e0"
+    },
+    "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py": {
+      "bytes": 62712,
+      "sha256": "5e090e16552aef53b2c4f066790914b3700c6e89b856ca965d423c8056b3be26"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 277466,
+      "sha256": "879159fd30d00ae73cb235c10e6c1e0733bbe23053e1354cc7cffb4195e78607"
+    }
+  },
+  "tree": "5fd6b2a52a6dffb0df8df6b5d6387e94195a0e06",
+  "upstream_disposition": "none",
+  "worktree_clean": true
+}

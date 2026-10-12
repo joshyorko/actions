@@ -1,0 +1,1309 @@
+{
+  "schema": 1,
+  "date": "2026-10-12",
+  "scope": "Boundedexisting54contractledger/projection/immutablecriteria/sourceacceptance reconciliation; no liveissues/source scan/tests/newworkers",
+  "denominator": {
+    "retained_contracts": 54,
+    "administrative_umbrella_policy_records": 5,
+    "nonumbrella_delivery_contracts": 49,
+    "end_user_feature_count": "NOT_DETERMINABLE_FROM_ISSUE_COUNT; deliverycontractsincludequality/security/build/distribution work",
+    "excluded_records": [
+      {
+        "issue": 82,
+        "title": "Evolve Actions Runtime into a pluggable MCP-native capability runtime and lightweight control room",
+        "reason": "Architecture umbrella: contract explicitly calls itself an umbrella roadmap"
+      },
+      {
+        "issue": 93,
+        "title": "Run the Actions Runtime frontend and product factory",
+        "reason": "Frontend/product umbrella: explicitly umbrella factory, not one giant PR"
+      },
+      {
+        "issue": 101,
+        "title": "Run the Actions Runtime product, runtime-adapter, and control-room factory",
+        "reason": "Execution ledger/coordination: owns sequencing and receipts, children retain contracts"
+      },
+      {
+        "issue": 149,
+        "title": "\ud83d\udc1d Hive Advisory Report",
+        "reason": "Living advisory report, explicitly do not close"
+      },
+      {
+        "issue": 155,
+        "title": "[strategist] Establish a release and compatibility roadmap for the expanding runtime architecture",
+        "reason": "Release roadmap/compatibility policy obligation, not an implementation feature; remains a separate obligation"
+      }
+    ]
+  },
+  "counts": {
+    "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION": 30,
+    "PARTIALLY_IMPLEMENTED": 15,
+    "IMPLEMENTED_CLOSE_READY": 3,
+    "ACCEPTED_COMPLETE": 1
+  },
+  "genuinely_missing_whole_feature_contracts_proven": 0,
+  "zero_missing_interpretation": "No wholecontract proveduntouched intheseinputs; doesNOT meanzeroworkleft. Knownmissing/unfinishedslices listedseparately.",
+  "known_not_accepted_contracts_with_proven_implementation": 18,
+  "not_accepted_nonumbrella_contracts": 48,
+  "unknown_contracts": 30,
+  "projection_reconciliation": {
+    "originalprojection": {
+      "complete": 1,
+      "ready": 3,
+      "partial": 12,
+      "UNKNOWNnonumbrella": 33
+    },
+    "source_bound_partial_promotions": [
+      {
+        "issue": 135,
+        "basis": "Exactmergedsourcepolicy/read/staging prerequisites in immutableledgeractive_substages; fullcompiler/importer incomplete"
+      },
+      {
+        "issue": 148,
+        "basis": "Exactmergedsourcepolicy/read/staging prerequisites in immutableledgeractive_substages; fullcompiler/importer incomplete"
+      },
+      {
+        "issue": 195,
+        "basis": "Exact23aRuntime/Corefloorimport/sourceAPI audit plus newf949installedRuntime203/publicCore47/Helper2byteproof; migration/consumer slice verified, whole195notaccepted"
+      }
+    ],
+    "151_212_disposition": "RemainUNKNOWNcurrentwhole inthisboundedcount; historicalmerged/checkpoint foundations acknowledged, not falselycalledmissing; no freshsourceboundcompleteauditreconciled"
+  },
+  "contracts": [
+    {
+      "issue": 71,
+      "url": "https://github.com/joshyorko/actions/issues/71",
+      "title": "Add Action Canvas: a native MCP App foundry inside Action Server",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "813ccb6edbe5c9fb7e71e5a12c215fbf5a7cb5f3066b7f35a071e2d1c4ceea2b",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "813ccb6edbe5c9fb7e71e5a12c215fbf5a7cb5f3066b7f35a071e2d1c4ceea2b",
+      "criteria_count": 17,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 82,
+      "url": "https://github.com/joshyorko/actions/issues/82",
+      "title": "Evolve Actions Runtime into a pluggable MCP-native capability runtime and lightweight control room",
+      "classification": "ADMIN_UMBRELLA_POLICY",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "Architecture umbrella: contract explicitly calls itself an umbrella roadmap",
+      "acceptance_contract_sha256": "34581397b7cfa3c1bfae34e00ba2cf69808193381bc2d06c7d5d35543cc19dcd",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "34581397b7cfa3c1bfae34e00ba2cf69808193381bc2d06c7d5d35543cc19dcd",
+      "criteria_count": 55,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 83,
+      "url": "https://github.com/joshyorko/actions/issues/83",
+      "title": "Make capability Run and Attempt ownership replica-safe across runtime adapters",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "scoped live PR work exists; not equal to whole implementation",
+      "basis": "DirectscopedPR or explicitserialization slice in retainedprojection, not wholeacceptance",
+      "acceptance_contract_sha256": "1298aa79f3f97b620b657c08bd5eea2a8dcec0c82e84fbe4cc2125e846f80066",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "1298aa79f3f97b620b657c08bd5eea2a8dcec0c82e84fbe4cc2125e846f80066",
+      "criteria_count": 39,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 84,
+      "url": "https://github.com/joshyorko/actions/issues/84",
+      "title": "Support one shared SQLite/PostgreSQL Database abstraction in actions-runtime",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "/root/luna_deployment; integration /root",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "scoped live PR work exists; not equal to whole implementation",
+      "basis": "DirectscopedPR or explicitserialization slice in retainedprojection, not wholeacceptance",
+      "acceptance_contract_sha256": "17ae88bde7fa1006dd181d3ade0c8aefd87ffbf777ca31174674e4ddb46a62e6",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "17ae88bde7fa1006dd181d3ade0c8aefd87ffbf777ca31174674e4ddb46a62e6",
+      "criteria_count": 11,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": 109
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 85,
+      "url": "https://github.com/joshyorko/actions/issues/85",
+      "title": "Back MCP Tasks with pinned capability Runs and runtime plans",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "7be3c40e2573938c1cf45e8c15e98bacb4ab56740c552b07ee90696551abb72b",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "7be3c40e2573938c1cf45e8c15e98bacb4ab56740c552b07ee90696551abb72b",
+      "criteria_count": 11,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 86,
+      "url": "https://github.com/joshyorko/actions/issues/86",
+      "title": "Make capability artifacts and large-result handles replica-safe",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "scoped live PR work exists; not equal to whole implementation",
+      "basis": "DirectscopedPR or explicitserialization slice in retainedprojection, not wholeacceptance",
+      "acceptance_contract_sha256": "b6e41d5fd4a6477cc176545a7f75dee33ba5b4b74f6b9478272a3324553eadc9",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "b6e41d5fd4a6477cc176545a7f75dee33ba5b4b74f6b9478272a3324553eadc9",
+      "criteria_count": 21,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 87,
+      "url": "https://github.com/joshyorko/actions/issues/87",
+      "title": "Separate request context from Workspace-scoped bindings and runtime grants",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "e22809c4dd9d6b4504f7a1a91b01da2cf14e709ec595e67e3f22a7345100424e",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "e22809c4dd9d6b4504f7a1a91b01da2cf14e709ec595e67e3f22a7345100424e",
+      "criteria_count": 12,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 90,
+      "url": "https://github.com/joshyorko/actions/issues/90",
+      "title": "Separate capability execution ownership from Runtime request handling across adapters and placements",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "a5ba8d028a061a1412bd70aaf2d68565fd288a3b31bbd2d2b990d55eeaa66a58",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "a5ba8d028a061a1412bd70aaf2d68565fd288a3b31bbd2d2b990d55eeaa66a58",
+      "criteria_count": 34,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 91,
+      "url": "https://github.com/joshyorko/actions/issues/91",
+      "title": "Add MCP-native authorization and CIMD support",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "b4c0d0313994dcd6e7c8bc0c37a0f8efd73e61bf0c5bf2edb7970d09f72137d6",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "b4c0d0313994dcd6e7c8bc0c37a0f8efd73e61bf0c5bf2edb7970d09f72137d6",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 92,
+      "url": "https://github.com/joshyorko/actions/issues/92",
+      "title": "Implement durable capability interaction and human-review flows",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "bfceb5112808c598ea83bd4456491fcebe37b21fdf9a06c69c919582bee6c6b9",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "bfceb5112808c598ea83bd4456491fcebe37b21fdf9a06c69c919582bee6c6b9",
+      "criteria_count": 10,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 93,
+      "url": "https://github.com/joshyorko/actions/issues/93",
+      "title": "Run the Actions Runtime frontend and product factory",
+      "classification": "ADMIN_UMBRELLA_POLICY",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "Frontend/product umbrella: explicitly umbrella factory, not one giant PR",
+      "acceptance_contract_sha256": "170c3a3a09b949fe5ad344b5ffe9355459ae3b982f61750e453b7851f1ac99f6",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "170c3a3a09b949fe5ad344b5ffe9355459ae3b982f61750e453b7851f1ac99f6",
+      "criteria_count": 15,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 96,
+      "url": "https://github.com/joshyorko/actions/issues/96",
+      "title": "Refresh the Actions Runtime product shell and overview",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "95f3a6926f1c808ce2bfacf77dd6e8562138df82c53f7cc99956a58afbf0a095",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "95f3a6926f1c808ce2bfacf77dd6e8562138df82c53f7cc99956a58afbf0a095",
+      "criteria_count": 8,
+      "historical_implementation": {
+        "checkpoint_pr": 216,
+        "merged_foundation_pr": 112
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 97,
+      "url": "https://github.com/joshyorko/actions/issues/97",
+      "title": "Establish the Actions UI system and offline visual quality gates",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "9a404411dcc26dcb377e0b127d4579f1db3eb6f1fa3bcf16b09df6eb595224e1",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "9a404411dcc26dcb377e0b127d4579f1db3eb6f1fa3bcf16b09df6eb595224e1",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": 216,
+        "merged_foundation_pr": 119
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 98,
+      "url": "https://github.com/joshyorko/actions/issues/98",
+      "title": "Modernize the frontend toolchain and multi-artifact build pipeline",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "e5d6366ca768bcd85aa66a2be438c50e202c9927c06e8305c845b7d417a46924",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "e5d6366ca768bcd85aa66a2be438c50e202c9927c06e8305c845b7d417a46924",
+      "criteria_count": 12,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": 115
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 99,
+      "url": "https://github.com/joshyorko/actions/issues/99",
+      "title": "Build the shared CanvasSpec renderer and MCP App View foundation",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "scoped live PR work exists; not equal to whole implementation",
+      "basis": "DirectscopedPR or explicitserialization slice in retainedprojection, not wholeacceptance",
+      "acceptance_contract_sha256": "172e91b203ab4b35ffd96a52bf7cd69a3faf08e050a960360246c20a9e24562e",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "172e91b203ab4b35ffd96a52bf7cd69a3faf08e050a960360246c20a9e24562e",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 100,
+      "url": "https://github.com/joshyorko/actions/issues/100",
+      "title": "Define Canvas authoring contracts in actions-core without package proliferation",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "PR301 serialization fixture slice integrated; other #100 implementation scope remains unverified",
+      "basis": "DirectscopedPR or explicitserialization slice in retainedprojection, not wholeacceptance",
+      "acceptance_contract_sha256": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "9f6337e6dae4fc845ae6a0da5ba0fe2efecfda0e97b4f3cce226be2a37fc7198",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 101,
+      "url": "https://github.com/joshyorko/actions/issues/101",
+      "title": "Run the Actions Runtime product, runtime-adapter, and control-room factory",
+      "classification": "ADMIN_UMBRELLA_POLICY",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IN_PROGRESS",
+      "projection_raw_implementation": "active broad integration checkpoint",
+      "basis": "Execution ledger/coordination: owns sequencing and receipts, children retain contracts",
+      "acceptance_contract_sha256": "c62913f5aea92a03d5f39394be66a4ad529240d63dc60bb7c7ea06b2a028e240",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "c62913f5aea92a03d5f39394be66a4ad529240d63dc60bb7c7ea06b2a028e240",
+      "criteria_count": 16,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 125,
+      "url": "https://github.com/joshyorko/actions/issues/125",
+      "title": "cleanup: remove Data Server and private-tier product surfaces",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "/root/luna_roadmap; integration /root",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "84c024b2fe240e3e0f01f914bdba3ffd9613a69e04cea7f81a4b84512fa49238",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "84c024b2fe240e3e0f01f914bdba3ffd9613a69e04cea7f81a4b84512fa49238",
+      "criteria_count": 14,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": 128
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 126,
+      "url": "https://github.com/joshyorko/actions/issues/126",
+      "title": "feat: add an MCP v2 capabilities showcase template",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "53600f63e66ab58a1281a9a43a85b8a9b431a16f86131a551cc974b87380214f",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "53600f63e66ab58a1281a9a43a85b8a9b431a16f86131a551cc974b87380214f",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": 219,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 127,
+      "url": "https://github.com/joshyorko/actions/issues/127",
+      "title": "feat: add a community Canvas template",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "Cloud root integration / PR282; prior writer reused on #129",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "scoped live PR work exists; not equal to whole implementation",
+      "basis": "DirectscopedPR or explicitserialization slice in retainedprojection, not wholeacceptance",
+      "acceptance_contract_sha256": "2774964a1beb023f33ce00b4ddd2836db0d15d2472fd1dad77a998eaeb5879d0",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "2774964a1beb023f33ce00b4ddd2836db0d15d2472fd1dad77a998eaeb5879d0",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 129,
+      "url": "https://github.com/joshyorko/actions/issues/129",
+      "title": "Define workspace-scoped capability deployments, runtime-plan selection, immutable revisions, and bindings",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "root integration; luna_release_notes exact-head monitoring",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "scoped live PR work exists; not equal to whole implementation",
+      "basis": "DirectscopedPR or explicitserialization slice in retainedprojection, not wholeacceptance",
+      "acceptance_contract_sha256": "8b0b49ade2f5cd29dfa9dab0babc91c2fd7ebd36098ed3fad7ac32daaf9f7ff5",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "8b0b49ade2f5cd29dfa9dab0babc91c2fd7ebd36098ed3fad7ac32daaf9f7ff5",
+      "criteria_count": 12,
+      "historical_implementation": {
+        "checkpoint_pr": 219,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 130,
+      "url": "https://github.com/joshyorko/actions/issues/130",
+      "title": "Design Package v3 as an immutable capability bundle with pluggable runtime plans and exposure projections",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; no Devsy assignment or supervisor dispatch is active.",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "5fea0f4828c20faa32298d60083ca684b3b8225f0af6baea0d8fa4363dae4277",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "5fea0f4828c20faa32298d60083ca684b3b8225f0af6baea0d8fa4363dae4277",
+      "criteria_count": 16,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 131,
+      "url": "https://github.com/joshyorko/actions/issues/131",
+      "title": "Define an open provider-based data and knowledge plane for Actions",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "4aaf54cce742b4133a45ee948148a22c313df8097e22ad65485b0a865a99d1ae",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "4aaf54cce742b4133a45ee948148a22c313df8097e22ad65485b0a865a99d1ae",
+      "criteria_count": 2,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 132,
+      "url": "https://github.com/joshyorko/actions/issues/132",
+      "title": "Define durable Work Item queue, lease, review, and workflow semantics over capability Runs",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "1db3e8aee4c298fc35aee568eb5f142005fd9393919aea947e8818caa69056ee",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "1db3e8aee4c298fc35aee568eb5f142005fd9393919aea947e8818caa69056ee",
+      "criteria_count": 20,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 133,
+      "url": "https://github.com/joshyorko/actions/issues/133",
+      "title": "Use RCC/Holotree as the first full environment and execution adapter for Actions workers",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "7cfcdb618fc35203a0cacf64e37fc2696ad003f133c4391abbf3ec8b034d4c4c",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "7cfcdb618fc35203a0cacf64e37fc2696ad003f133c4391abbf3ec8b034d4c4c",
+      "criteria_count": 20,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 134,
+      "url": "https://github.com/joshyorko/actions/issues/134",
+      "title": "Integrate RCC Environment Artifacts and execution as the first local Runtime Adapter",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "root integration with RCC/frozen platform repair and bounded independent review",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "scoped live PR work exists; not equal to whole implementation",
+      "basis": "DirectscopedPR or explicitserialization slice in retainedprojection, not wholeacceptance",
+      "acceptance_contract_sha256": "d4160af19d7a80b467f101d7414134406fa051d6ed4ad935accd1fe51252369d",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "d4160af19d7a80b467f101d7414134406fa051d6ed4ad935accd1fe51252369d",
+      "criteria_count": 34,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": 197
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 135,
+      "url": "https://github.com/joshyorko/actions/issues/135",
+      "title": "Compile current package directories into deterministic Package Revisions and runtime plans",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "Exactmergedsourcepolicy/read/staging prerequisites in immutableledgeractive_substages; fullcompiler/importer incomplete",
+      "acceptance_contract_sha256": "07b4524b30c0dabdf990a374a4c78ad6c9afdb2642796b8cb083be6eb866eaa7",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "07b4524b30c0dabdf990a374a4c78ad6c9afdb2642796b8cb083be6eb866eaa7",
+      "criteria_count": 32,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 136,
+      "url": "https://github.com/joshyorko/actions/issues/136",
+      "title": "Define an immutable Package Revision registry/provider and worker-local source cache",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "8812f36639e9ead075dc7fe826ada97d0026ae1690f6c8e06de758d03d1f8a7f",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "8812f36639e9ead075dc7fe826ada97d0026ae1690f6c8e06de758d03d1f8a7f",
+      "criteria_count": 18,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 138,
+      "url": "https://github.com/joshyorko/actions/issues/138",
+      "title": "Define a versioned Runtime-to-worker protocol for pinned runtime plans, adapters, and placements",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "9afdd59ce5c4203be48761ea82304282b75596bf792a92d2ea7b730f00d45edf",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "9afdd59ce5c4203be48761ea82304282b75596bf792a92d2ea7b730f00d45edf",
+      "criteria_count": 16,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 139,
+      "url": "https://github.com/joshyorko/actions/issues/139",
+      "title": "Build exact-subject capability, runtime-adapter, admission, Deployment, and worker conformance",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "f522d635575963ab26eaf73c66bbdd438cb199a9a2d92820e374dd8e9da73d21",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "f522d635575963ab26eaf73c66bbdd438cb199a9a2d92820e374dd8e9da73d21",
+      "criteria_count": 21,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 140,
+      "url": "https://github.com/joshyorko/actions/issues/140",
+      "title": "Package and operate collapsed and split capability Runtime deployments safely",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "a83da2aee36817f0851bdee6bfc3673351c2be82e192b8c21fca8f385d39c2cc",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "a83da2aee36817f0851bdee6bfc3673351c2be82e192b8c21fca8f385d39c2cc",
+      "criteria_count": 23,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 141,
+      "url": "https://github.com/joshyorko/actions/issues/141",
+      "title": "Define deterministic capability workflows over pinned runtime plans and Work Items",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "b5c29cba880f014805832ef598f28264d7e9902126d13dcef109b42b6f73a993",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "b5c29cba880f014805832ef598f28264d7e9902126d13dcef109b42b6f73a993",
+      "criteria_count": 23,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 142,
+      "url": "https://github.com/joshyorko/actions/issues/142",
+      "title": "Prove Robot Task execution across runtime adapters and local, container, and worker placements",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "33cbac7943a286bf33d76ede684e83d46c39e33d87befdeac0e9f1e0bb6ca7e1",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "33cbac7943a286bf33d76ede684e83d46c39e33d87befdeac0e9f1e0bb6ca7e1",
+      "criteria_count": 18,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 143,
+      "url": "https://github.com/joshyorko/actions/issues/143",
+      "title": "Define pluggable capability runtime adapters, shared admission, execution requirements, and preflight",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "a7a0bbc131ae212e7cd1c0cc7a8a37249ad26e65d2ea553857fb565bc1431959",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "a7a0bbc131ae212e7cd1c0cc7a8a37249ad26e65d2ea553857fb565bc1431959",
+      "criteria_count": 33,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 144,
+      "url": "https://github.com/joshyorko/actions/issues/144",
+      "title": "Make Robot Tasks a first-class capability kind independent of runtime adapter",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "f590b8962d8668fdcfebd556fbdfdc5a967d9e2495be3520264f607fde5a6032",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "f590b8962d8668fdcfebd556fbdfdc5a967d9e2495be3520264f607fde5a6032",
+      "criteria_count": 15,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 145,
+      "url": "https://github.com/joshyorko/actions/issues/145",
+      "title": "Evolve Actions Runtime into a lightweight control room with a unified Run Composer",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "7ab0e82f0774b0a96cb2050ef6ef326f3920cf07e554e7acf1a892f77f9dc610",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "7ab0e82f0774b0a96cb2050ef6ef326f3920cf07e554e7acf1a892f77f9dc610",
+      "criteria_count": 14,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 146,
+      "url": "https://github.com/joshyorko/actions/issues/146",
+      "title": "Add one adapter-aware Actions Runtime CLI for capabilities, Robots, and development tasks",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "eefac147b16763e4802dbbd16df770d4b651aa38f0a400b9d49551db6b2b400a",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "eefac147b16763e4802dbbd16df770d4b651aa38f0a400b9d49551db6b2b400a",
+      "criteria_count": 15,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 147,
+      "url": "https://github.com/joshyorko/actions/issues/147",
+      "title": "Add typed internal capability invocation with pinned runtime plans and parent-child Runs",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "93ca82e88727777675017c6711b7dbbc237f7704e8101863ede6b4f6fe6d3fb9",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "93ca82e88727777675017c6711b7dbbc237f7704e8101863ede6b4f6fe6d3fb9",
+      "criteria_count": 22,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 148,
+      "url": "https://github.com/joshyorko/actions/issues/148",
+      "title": "Harden package import and compile Robot/runtime metadata into immutable Package Revisions",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "Exactmergedsourcepolicy/read/staging prerequisites in immutableledgeractive_substages; fullcompiler/importer incomplete",
+      "acceptance_contract_sha256": "d43ca044e8ce9ce905a34470bb2f6568befb2622becb43074515d7550361c8f6",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "d43ca044e8ce9ce905a34470bb2f6568befb2622becb43074515d7550361c8f6",
+      "criteria_count": 32,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 149,
+      "url": "https://github.com/joshyorko/actions/issues/149",
+      "title": "\ud83d\udc1d Hive Advisory Report",
+      "classification": "ADMIN_UMBRELLA_POLICY",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "Living advisory report, explicitly do not close",
+      "acceptance_contract_sha256": "7f339f2e3378bf0572f6535738aba3029f51554dbd65d749ce4a433038ce4513",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "7f339f2e3378bf0572f6535738aba3029f51554dbd65d749ce4a433038ce4513",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 151,
+      "url": "https://github.com/joshyorko/actions/issues/151",
+      "title": "[security] Reject unsafe Robot ZIP package-root selection and bound archive staging",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "e8f594671959e82db87ed8ea7de966295c827f3cb39daadf240fe8a0127b2d03",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "e8f594671959e82db87ed8ea7de966295c827f3cb39daadf240fe8a0127b2d03",
+      "criteria_count": 8,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": 200
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 152,
+      "url": "https://github.com/joshyorko/actions/issues/152",
+      "title": "[security] Enforce configured API-key authorization across admin routers and artifact delivery",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "scoped live PR work exists; not equal to whole implementation",
+      "basis": "DirectscopedPR or explicitserialization slice in retainedprojection, not wholeacceptance",
+      "acceptance_contract_sha256": "c58dd4c2ac0b665f6cd67ad51f0629f30670bf0c0df603823b68d462fd222970",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "c58dd4c2ac0b665f6cd67ad51f0629f30670bf0c0df603823b68d462fd222970",
+      "criteria_count": 8,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": 199
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 153,
+      "url": "https://github.com/joshyorko/actions/issues/153",
+      "title": "[security] Constrain browser origins and credentialed CORS with explicit deployment policy",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IN_PROGRESS",
+      "projection_raw_implementation": "scoped live PR work exists; not equal to whole implementation",
+      "basis": "DirectscopedPR or explicitserialization slice in retainedprojection, not wholeacceptance",
+      "acceptance_contract_sha256": "f87bd84a74eef446e1a67cbcc5e067aca5bb1080d1e21fb76463f6a7ed8f111a",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "f87bd84a74eef446e1a67cbcc5e067aca5bb1080d1e21fb76463f6a7ed8f111a",
+      "criteria_count": 8,
+      "historical_implementation": {
+        "checkpoint_pr": 216,
+        "merged_foundation_pr": 201
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 155,
+      "url": "https://github.com/joshyorko/actions/issues/155",
+      "title": "[strategist] Establish a release and compatibility roadmap for the expanding runtime architecture",
+      "classification": "ADMIN_UMBRELLA_POLICY",
+      "owner_retained_exact": "/root/luna_roadmap; integration /root",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "Release roadmap/compatibility policy obligation, not an implementation feature; remains a separate obligation",
+      "acceptance_contract_sha256": "3ba8fdca26f2761fcaa820a22a10d9c23367393f36735c95c376adcda318e395",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "3ba8fdca26f2761fcaa820a22a10d9c23367393f36735c95c376adcda318e395",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 162,
+      "url": "https://github.com/joshyorko/actions/issues/162",
+      "title": "[ACMM L0] Add Coverage gate",
+      "classification": "IMPLEMENTED_CLOSE_READY",
+      "owner_retained_exact": "/root/luna_coverage; integration /root",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "narrow exact contract is satisfied by source/tests/docs present at integration; no new PR or source edit was made in this audit",
+      "basis": "Exactsource close-ready recommendation in retainedmatrix/projection, issueclosurenotperformed",
+      "acceptance_contract_sha256": "09725e2a6edb5b7b9c0773df8eaa1bf49508b546898b6a7fcee8a8f5022c77ad",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "09725e2a6edb5b7b9c0773df8eaa1bf49508b546898b6a7fcee8a8f5022c77ad",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 194,
+      "url": "https://github.com/joshyorko/actions/issues/194",
+      "title": "[quality] Add coverage for command dispatch and variable-scope error paths",
+      "classification": "IMPLEMENTED_CLOSE_READY",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "narrow exact contract is satisfied by source/tests/docs present at integration; no new PR or source edit was made in this audit",
+      "basis": "Exactsource close-ready recommendation in retainedmatrix/projection, issueclosurenotperformed",
+      "acceptance_contract_sha256": "43496e2b9e8e7c8b9e1d9fceff7fc3be1ed3f9a79677552811ab6e27c391f4f5",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "43496e2b9e8e7c8b9e1d9fceff7fc3be1ed3f9a79677552811ab6e27c391f4f5",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": 217,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 195,
+      "url": "https://github.com/joshyorko/actions/issues/195",
+      "title": "[architect] Action Server depends on private actions-core modules across a versioned package boundary",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "Exact23aRuntime/Corefloorimport/sourceAPI audit plus newf949installedRuntime203/publicCore47/Helper2byteproof; migration/consumer slice verified, whole195notaccepted",
+      "acceptance_contract_sha256": "5dc53629cfcf1348b2cfafff5c4ee09ba50a5a1e8acde0292b2f61f16da24274",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "5dc53629cfcf1348b2cfafff5c4ee09ba50a5a1e8acde0292b2f61f16da24274",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": 217,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 196,
+      "url": "https://github.com/joshyorko/actions/issues/196",
+      "title": "Make Actions Runtime a one-click host for the RCC Environment Artifact provider",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "NOT_STARTED",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "13ec0d086e569fc55992151a649debcf3ad6eac3492991b9acb5be3489f2a6d7",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "13ec0d086e569fc55992151a649debcf3ad6eac3492991b9acb5be3489f2a6d7",
+      "criteria_count": 26,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 208,
+      "url": "https://github.com/joshyorko/actions/issues/208",
+      "title": "fix(work-items): restore standalone loading and truthful Work Items error UX",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "Three-OS native subgate accepted; new Linux-only authorization-denial UI cases passed; whole issue open",
+      "basis": "DirectscopedPR or explicitserialization slice in retainedprojection, not wholeacceptance",
+      "acceptance_contract_sha256": "25cada9cee4ac8ca8aad7e47df4fbe58b010239d88dc3bd64f40cc2c97d26b9c",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "25cada9cee4ac8ca8aad7e47df4fbe58b010239d88dc3bd64f40cc2c97d26b9c",
+      "criteria_count": 13,
+      "historical_implementation": {
+        "checkpoint_pr": 218,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 209,
+      "url": "https://github.com/joshyorko/actions/issues/209",
+      "title": "fix(ci): diagnose unexpected disconnect in assembled WebSocket Origin test",
+      "classification": "IMPLEMENTED_CLOSE_READY",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IN_PROGRESS",
+      "projection_raw_implementation": "narrow exact contract is satisfied by source/tests/docs present at integration; no new PR or source edit was made in this audit",
+      "basis": "Exactsource close-ready recommendation in retainedmatrix/projection, issueclosurenotperformed",
+      "acceptance_contract_sha256": "c9cbf271124d20fac773f4203ba474cc167341e5d33aae0cbfa2966c9676ce92",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "c9cbf271124d20fac773f4203ba474cc167341e5d33aae0cbfa2966c9676ce92",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": 216,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 210,
+      "url": "https://github.com/joshyorko/actions/issues/210",
+      "title": "fix(release): repair HTTP helper workflow credential delivery",
+      "classification": "ACCEPTED_COMPLETE",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "IMPLEMENTED_UNVERIFIED",
+      "basis": "Retained complete acceptance/closure210; publicationcredentialcontract",
+      "acceptance_contract_sha256": "85e9108709d3bb98d09f21b476be2c768491f9ee11267915948b2e11450a283d",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "85e9108709d3bb98d09f21b476be2c768491f9ee11267915948b2e11450a283d",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": 215,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": true
+    },
+    {
+      "issue": 211,
+      "url": "https://github.com/joshyorko/actions/issues/211",
+      "title": "fix(release): align Actions-side native handoffs with community distribution",
+      "classification": "PARTIALLY_IMPLEMENTED",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IMPLEMENTED_UNVERIFIED",
+      "projection_raw_implementation": "scoped live PR work exists; not equal to whole implementation",
+      "basis": "DirectscopedPR or explicitserialization slice in retainedprojection, not wholeacceptance",
+      "acceptance_contract_sha256": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "72db1076180854433aa86c99ea8a8f0bc7df0e9f1961e8a65df100cfd824c4a4",
+      "criteria_count": 0,
+      "historical_implementation": {
+        "checkpoint_pr": 215,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 212,
+      "url": "https://github.com/joshyorko/actions/issues/212",
+      "title": "bug(ui): Runtime 1.0.1 Runs fails JSON parsing; oversized run list and same-origin WebSocket 403",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IN_PROGRESS",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "5d7d93486a73760e299fb77de1eb2f69f282b8253603b02cc7708373cb307a31",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "5d7d93486a73760e299fb77de1eb2f69f282b8253603b02cc7708373cb307a31",
+      "criteria_count": 4,
+      "historical_implementation": {
+        "checkpoint_pr": 216,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    },
+    {
+      "issue": 214,
+      "url": "https://github.com/joshyorko/actions/issues/214",
+      "title": "feat(expose): make tunnel providers a first-class Runtime lifecycle",
+      "classification": "UNKNOWN_CURRENT_WHOLE_IMPLEMENTATION",
+      "owner_retained_exact": "/root/luna_tunnel; integration /root",
+      "owner_freshness": "Retainedledgerowner field, not a newcurrentwriterassignment",
+      "raw_retained_state": "IN_PROGRESS",
+      "projection_raw_implementation": "no current exact issue implementation established",
+      "basis": "No currentwholeimplementation/acceptance established in boundedprojection; NOT proofmissing/untouched",
+      "acceptance_contract_sha256": "408f3eae150a25fc660b5b4b86e283a47c66e30dd8b13ddbe62ba269be08f347",
+      "acceptance_source_commit": "19380993febaa71238eaee3026b5c808773283ff",
+      "ledger_contract_sha256_current_retained_file": "408f3eae150a25fc660b5b4b86e283a47c66e30dd8b13ddbe62ba269be08f347",
+      "criteria_count": 21,
+      "historical_implementation": {
+        "checkpoint_pr": null,
+        "merged_foundation_pr": null
+      },
+      "whole_issue_acceptance": false
+    }
+  ],
+  "known_missing_or_unfinished_slices": [
+    {
+      "issues": [
+        134
+      ],
+      "owner_retained": "root integration with RCC/frozen platform repair and bounded independent review",
+      "slice": "Current independently enforced whole-operation native controller, full owned output retention and terminal census/reader/sampler accounting",
+      "kind": "MISSING_IMPLEMENTATION_ADOPTION",
+      "evidence": "/workspace/successor-evidence/review308-native-memory-contract/review.json",
+      "limit": "Perobject source/subreaper/providerreaders exist; wholecontroller not implemented/admitted at3812, lateractive308source still requires its exactreview; do not call entire134unbuilt"
+    },
+    {
+      "issues": [
+        134
+      ],
+      "owner_retained": "root integration with RCC/frozen platform repair and bounded independent review",
+      "slice": "Supported child/finite-ancestor memory reader and admitted current native memory policy/model",
+      "kind": "MISSING_IMPLEMENTATION_AND_RESOURCE_ADMISSION",
+      "evidence": "/workspace/successor-evidence/review308-native-memory-contract/review.json",
+      "limit": "FDchildmembership is witnessed; floor/stopreserve unadopted/uncalibrated, filesystembudget notRAMfit"
+    },
+    {
+      "issues": [
+        134
+      ],
+      "owner_retained": "root integration with RCC/frozen platform repair and bounded independent review",
+      "slice": "Passive same-root/digest/lease identity creation/release observer",
+      "kind": "MISSING_DESIGN_ADMISSION_AND_PROOF",
+      "evidence": "/workspace/successor-evidence/review308-native-memory-contract/review.json",
+      "limit": "Reconciliating lifecycle inspect is not passive; no freshleases/nativeallowed"
+    },
+    {
+      "issues": [
+        135,
+        148
+      ],
+      "owner_retained": "Root integration owner; implementation lane assigned only for bounded disjoint work",
+      "slice": "Complete coherent source snapshot/selection, immutable Package Revision/compiler/runtime-plan capability/generation proof beyond accepted selected-file foundations",
+      "kind": "EXPLICIT_RETAINED_UNFINISHED_SCOPE",
+      "evidence": "/workspace/actions-handoff/docs/program/community-program-ledger.json active_substages owner_issue135 whole_issue_effect",
+      "limit": "Policy/source reader/staging prerequisites have exactmergedsource and partialconsumer evidence; no fullcompilercontractaccepted"
+    }
+  ],
+  "acceptance_gates_distinct_from_features": [
+    {
+      "issues": [
+        127,
+        134
+      ],
+      "gate": "Fresh genuinelymanagedAction/RCCbaseline18.19.3 acquisition+result/artifact+passivelease/fullcleanup, then gated newerbinary profiles",
+      "kind": "ACCEPTANCE_EXECUTION_GATE",
+      "evidence": "/workspace/successor-evidence/review308-native-memory-contract/review.json",
+      "status": "HOLD/native0; not automatically anotherfeature"
+    },
+    {
+      "issues": [
+        99,
+        127,
+        208,
+        152,
+        153
+      ],
+      "gate": "Exactpackaged browser/native/auth/origin/template scope and requiredplatform/host acceptance",
+      "kind": "ACCEPTANCE_GATE",
+      "evidence": "/workspace/successor-evidence/release-graph-projection/projection.json",
+      "status": "Scoped successes exist; wholecontractsopen; no blanket claimallpaths unbuilt"
+    },
+    {
+      "issues": [
+        195
+      ],
+      "gate": "Remaining completepublicRuntime/Corecontract and installedMCP/managed acceptance where required",
+      "kind": "ACCEPTANCE_RECONCILIATION_GATE",
+      "evidence": [
+        "/workspace/successor-evidence/review307-core-floor/core-floor-audit.json",
+        "/workspace/successor-evidence/review308-f949-packaged/review-verdict.json"
+      ],
+      "status": "OAuth/idle minimumCore1.0.2proofPASS; minimumCoreMCP/managedUNTES\u00adTED; no whole195closure"
+    },
+    {
+      "issues": [
+        211
+      ],
+      "gate": "Community Runtime/native distribution caller/Homebrew/install/publication proof",
+      "kind": "DISTRIBUTION_ACCEPTANCE",
+      "evidence": "/workspace/successor-evidence/release-graph-projection/projection.json",
+      "status": "Core/Helperpublished; Runtime1.0.3notpublished; no whole211closure"
+    }
+  ],
+  "Runtime1_0_3_checkpoint": {
+    "307": "Acceptedmerged48eeaf; scopedOAuthsource/package/publicminCoreidle proofs",
+    "306_313": "Parentreported19CIpass butunmergeddependent; do not count merge/issueacceptance",
+    "308": "Parentreportedcurrenta17freshCIrunning; f949ancestor24PASS andnewpackage/installedboundedGO retained; nativeglobalcontroller/resource/lease gateunqualified",
+    "305": "Parentreportedlocalmerge3e unpushed/sourcebackendWIPnotqualified",
+    "status_freshness": "Latestcoordination statements fromparent, not newdynamicremotequery; current305/308work continues",
+    "Runtime_release": "HOLD",
+    "RCC18_19_6_publication": "ABSOLUTEHOLD",
+    "nativebaseline_attempts": 0
+  },
+  "evidence": [
+    {
+      "path": "/workspace/actions-handoff/docs/program/community-program-ledger.json",
+      "bytes": 3897771,
+      "sha256": "c5e51e37e7a989a8c4946bde52655d2feae6bd610118760e4440c9c8be67ba00"
+    },
+    {
+      "path": "/workspace/successor-evidence/release-graph-projection/projection.json",
+      "bytes": 188449,
+      "sha256": "aa6f89802e8ad505e29c59bcb6d18865245af37881932925ad8316c06e649d7c"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/program/evidence/issue-closure-audit-20261010/issue-delivery-matrix.json",
+      "bytes": 2413628,
+      "sha256": "f90fc32a4cdf065f6066e24e6a6f9eb98c635a7f5375f166efd10577b5d87c5d"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/actions-swarm-mk3-20261011-ledger-verified.md",
+      "bytes": 2279,
+      "sha256": "160ca8b19c4b133a2c355139557bcff67b094b9efd73eddc32959041c5345885"
+    },
+    {
+      "path": "/workspace/successor-evidence/review307-core-floor/core-floor-audit.json",
+      "bytes": 9931,
+      "sha256": "249ed02bcfb13925b46a26637dab09a73bfa0ef84ce8e00f4190b4c03e1d65b2"
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-native-memory-contract/review.json",
+      "bytes": 16837,
+      "sha256": "b853ddb97d8af33c4d84a2b21e2b3e2b5d7270ccbc698e86cc8ae2970705f478"
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-f949-packaged/review-verdict.json",
+      "bytes": 5899,
+      "sha256": "250389b44d14f3a816e67686a5db0d197c50b1fc1426c2e555826685f6132e5c"
+    },
+    {
+      "path": "/workspace/successor-evidence/review307-integration/review-verdict.json",
+      "bytes": 3802,
+      "sha256": "94c801cd5aca4f0d7b789bacd0287593d70aec494b268dc27b44e3591186f7c0"
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "insertion_point": "Program ledger/acceptance accounting guidance",
+    "exact_delta": "Report retained contracts, implementation slices and acceptance gates as separate counts. Exclude explicitly identified umbrella/factory/advisory/policy records from a delivery-contract denominator while retaining their obligations. Preserve UNKNOWN when a bounded audit has no current whole-contract proof; absence of a reconciled receipt is not proof that a feature is missing. A merged source prerequisite establishes partial implementation even when the whole-issue projection remains unknown. Keep closure-ready narrow contracts and release verification/integration gates separate from features still requiring code.",
+    "evidence": [
+      "54retainedrows/projection + immutablecontract82/93/101/149/155 definitions",
+      "Exactmerged135/148active_substages comparedwith projectionunknownwholeimplementation",
+      "3close-ready162194209 and1accepted210",
+      "Currenthashbound134nativecontract andf949installedscope evidence"
+    ],
+    "remaining_uncertainty": "30nonumbrella contracts retainunknowncurrentwholeimplementation; no repo-wideaudit/newissue/CI/nativequery performed.",
+    "upstream_disposition": "none"
+  },
+  "upstream_disposition": "none"
+}

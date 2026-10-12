@@ -1,0 +1,262 @@
+{
+  "verdict": "HOLD_NATIVE_MEMORY_ADMISSION_INTERNAL_MODEL_AND_EXECUTION_GATE_INCOMPLETE",
+  "source_head": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+  "source_tree": "525083edecdf20ef0daf6d481b0b738935741d66",
+  "authority_provenance": {
+    "memory_floor": 3113851289,
+    "stop_reserve": 536870912,
+    "exact_arithmetic": {
+      "existing_owned_filesystem_hard_envelope": 2576980377,
+      "additional_shared_memory_stop_reserve": 536870912,
+      "sum_initial_floor": 3113851289
+    },
+    "original_policy_sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260",
+    "original_proposal_sha256": "277539befd07ebe3253a06d9fccb250f8a454b5d47c20390e247f39c2821dc55",
+    "origin": "Old8d49privateSOURCEproposal d2b3 purememorypolicy; no user/operatoraccepted memoryvalue recovered. 2.4GiB derives filesystemownedstatehardbudget, not measuredRAM/RSS/coldsolver.",
+    "acceptance": "UNACCEPTED_UNCALIBRATED_NOT_ADOPTED",
+    "historical_actual_controls": "17pureMemoryState cases accepted for schema/latchedpredicates only; reader28/preparedcomposition/stop controls and native adoption remain independently scoped",
+    "numeric_correction": "3113851289 already includes536870912; v12floorplusreserve phrasing doublecounts relative to actualpolicy. No policywaiver suggested."
+  },
+  "resource_observation": {
+    "authority": "resource-after-cache-advice-once.json retained timestamp; no newcgroupread performed by reviewer",
+    "limit_bytes": 17179869184,
+    "current_bytes": 14013792256,
+    "headroom_bytes": 3166076928,
+    "excess_over_proposed_initial_floor": 52225639,
+    "observed_headroom_is_reserved_capacity": false,
+    "new_memory_limit_or_policy": false,
+    "cache_advice": "Retained107filesDONTNEEDonce with unchangedmetadata/no contentdelete/write; no guaranteed future reclaim/capacity",
+    "disk_floors": {
+      "workspace": 1288490189,
+      "shm": 3865470567,
+      "temp": 1200000000,
+      "retained_observations": {
+        "disk_free": 12517965824,
+        "tmp_free": 9441153024,
+        "shm_free": 9441349632
+      },
+      "status": "observedexceedfloor, pluscontroller/toolkit/outputoverhead stillrequiresadmission; notmemoryproof"
+    }
+  },
+  "cgroup_binding": {
+    "empirical": "IndependentownPIDfoundininit child openedrelative pinnedparentFD; finite16GiBparentobserved; positive directmembership/ancestralevidence",
+    "namespace": "self0::/ and visiblemountroot/.. differ; oldreadermount_identity requires root/ so rejectsactualnamespace",
+    "policy_scope": "Canonical-onlyrestriction is oldimplementation supportedmodel, not kernelmandated resource rule or explicituser requirement. Extend a supportedverifiedsharedancestor model instead of declaring impossiblebinding or waivingidentitychecks.",
+    "remaining": "Need exactpinnedFD ancestry,membership/birth/mount/dev/inode stability acrossactualbefore/during/after andevents baselines; parentsharedlimit canchange andsiblingsconsumeheadroom."
+  },
+  "current_executable_source": {
+    "implemented": [
+      "DedicatedLinuxsubreapertransport",
+      "Optincensus/identity/schema/resulttimeoutcleanupattachment",
+      "Provideroriginalreader/treeperobjectfinitecleanup",
+      "Parentworkerreceipt failureannotation"
+    ],
+    "not_implemented_or_adopted": [
+      "Currentnativecgroupfilesystemreader and calibratedmemoryadmission backend",
+      "CurrentFiniteSampler memoryintegration",
+      "Genuinelyindependentwhole640enforcer including reader/sampler/census/hash/fsync/receipt",
+      "Nativeonlyownedfulloutputdiskretention without secondinmemorycopy",
+      "Currenttwo-node exactnativecontroller/profilebudgetdispatch admission",
+      "Passive samelease creation/release observer"
+    ],
+    "observable_source_limits": "Existing parent.communicate timeout then legacy grace-reset cleanup; fullstdout/stderr decoded intoJSON/inmemory; metadata sampler/whole_operation_enforcer null. Currentreaderfix isperobject slice not wholecontroller.",
+    "private_history": "ExecutableoldFiniteSampler/cgroupreader/composition classes exist in handed-offprivatefiles with oldabsolute paths/reviewclosures; unadoptedNOTRUN/HOLDdescriptors are notcurrentinstalledimplementation orportableROOTgrant.",
+    "function_bindings": [
+      {
+        "name": "OwnedCleanupEvidence",
+        "line": 195,
+        "sha256": "0b18ff02e8740c2e3b4d672a20c5190be178d72aae4eb7a1ad1699330b485e3a"
+      },
+      {
+        "name": "terminate_process_tree",
+        "line": 645,
+        "sha256": "a797e632d7bf99c868c9cf5a446a4406f4e96528cc0596ead1877c936bb6c1b2"
+      },
+      {
+        "name": "run_owned_process",
+        "line": 759,
+        "sha256": "f6ff7e876ec95cd04a2b3b8f1f395f559cae2746f960543a8d75aea7b36e69de"
+      },
+      {
+        "name": "_fallback_reap_after_error",
+        "line": 977,
+        "sha256": "8546db244a6642a2e869dc230fbc814aae820ce9c4319dac1ae031f2c2d47bf2"
+      },
+      {
+        "name": "_supervisor_main",
+        "line": 1098,
+        "sha256": "4c3b8edb11308e5ca32452d56f1f8bac2694088ef210d1de2f3a76fc063d35c6"
+      },
+      {
+        "name": "cleanup_provider_until",
+        "line": 1398,
+        "sha256": "cc1927d6c07f6fbce86da37effdb0cda38cf5222dfac1cdde6b641f9790a5111"
+      },
+      {
+        "name": "record_supervisor_deadline_failure",
+        "line": 1907,
+        "sha256": "080b094293f171533080b911acde504d11dd95130a4142662221775f0ddc3405"
+      }
+    ]
+  },
+  "operator_boundary_assessment": {
+    "internal_missing_work": "Source/controller/reader mapping and budgetmodel can be prepared and reviewed within authorized repair scope. Missinginternalimplementation/calibration is not evidence anoperator must waive it.",
+    "genuine_execution_gate": "Before realRCC/native, concrete currentprofile/source/hash/budget/resources/ownedpaths/deadline/output/observer tuple requires independent admission and applicable fresh executionauthority. Oldrelease files/17pureGO/currentheadroom do notprovide thatauthority.",
+    "numeric_policy_decision": "A reserve/minimum may be explicitconservative policy, but must be adopted as such without claiming measuredfit; currentsource provides no approvednewfloor or memoryguarantee."
+  },
+  "precise_next_gate": [
+    "Implementandindependentlyreview supported readonlychild/finiteancestor reader preserving oldidentity/no-follow/fixedcounterchecks; pinactualbefore/during/afterdevice/inode/membership and bothglobal/localevents",
+    "Specifyoneorigin primary/cleanup/finalhardouter endpoints plusgenuinelyindependent enforcer andownedrawoutput/failurepublication contract; wireexacttwo serialnative nodes only after sourcecontrolqualification",
+    "Producebudget provenance for additionalmemory byscope: acquisition/coldsolver/interpreter/Action/toolkit/controller/readers/sampler/output/tmpfs/sharedsiblings; bindoverhead/margin/cadence/join rationale. Do not infer coldsolverfits from old2.4GiBdisk cap",
+    "Resolveandrecordinitialfloorincludesreserve predicate andscope ofsharedcounterstop; adopt numericpolicy separately frommeasured workload fit; refreshresources at actualexecutionadmission",
+    "Admitpassive samelease/root/digest/recordidentity observer (no reconciliatinglifecycleinspect); completefreshcontrolled18.19.3nativeacquisition+Actionresult/artifact+lease+fullcleanup before released5/candidate7276 orrelease claims"
+  ],
+  "held_acceptance": {
+    "native_attempts_consumed": 0,
+    "Runtime1.0.3": "HOLD",
+    "RCC18.19.6": "ABSOLUTE_HOLD",
+    "oldoriginalkillcause": "UNKNOWN",
+    "pure_controls_substitute_for_managedAction": false
+  },
+  "kernel_primary": {
+    "url": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+    "sections": [
+      "Processes",
+      "MemoryInterfaceFiles:memory.current/memory.max/memory.min"
+    ],
+    "supported_facts": "Controllers hierarchical; descendants counted in current; maxhardlimit canbe temporarilyexceeded andOOMifusagecannotreduced; namespacePIDmembership and stableFD evidence identifyaccountingscope, notexclusive reservation. Pagecacheisinmemoryaccounting."
+  },
+  "evidence_bindings": [
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/proposed_cgroup_memory_state_v1_NOTRUN.py",
+      "bytes": 3330,
+      "sha256": "d2b3e6684898ab1b64f84ac7712a1f2f355d7ea5d680eb6ded0699cc090f5260"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/rcc-next-native-cgroup-admission-source-PREPARED-NOTRUN/OWNERFINAL-next-native-finite-cgroup-memory-admission-and-retained-version-rule-proposal-NOTRUN.json",
+      "bytes": 7205,
+      "sha256": "277539befd07ebe3253a06d9fccb250f8a454b5d47c20390e247f39c2821dc55"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/rcc-next-native-memory-plan-independent-review/OWNERFINAL-independent-memory17-prepared-source-and-executable-HOLD-v2.json",
+      "bytes": 6603,
+      "sha256": "d7068aab83b03c9495e5bd80a93ca750b7d66df818fee93869b5b52b3fd66ece"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/rcc-memory17-managed700-once2-independent-ACTUAL-review/OWNERFINAL-independent-original-managed700-fresh-once2-memory17-ACTUAL-pure-controls-GO.json",
+      "bytes": 12879,
+      "sha256": "8c294e6731287ab8aa263a520be910915170cd0abafee4ceb79898852357d14e"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/rcc-compatibility-owned-cache-runner-successor-preparation/OWNERFINAL-current-e4ff-owned-cache-transport-v7-CONDITIONAL-preexecution-proposal.json",
+      "bytes": 25665,
+      "sha256": "2f4fb5d662a6b271ea7d3e360f9206ee27be16ced996dae88f886cc543141cca"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/rcc-compatibility-owned-cache-runner-successor-preparation/owned_monitor_v1.py",
+      "bytes": 4632,
+      "sha256": "834a7fe402e34b170f414df5dfe79762c0b49ed311a6222ba2f7bca5d87020a5"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/rcc-current8d49-private-V8-real-fixture-mode-successor/actual_transport_v8.py",
+      "bytes": 27889,
+      "sha256": "33dda17140ef749e22f086cc91b92ed8c3230fddfde8a4a369769e2183f695a1"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/rcc-current8d49-cgroup-reader-observer-private-SOURCE-PREPARED-NOTRUN/cgroup_memory_reader_observer_v1_NOTRUN.py",
+      "bytes": 14600,
+      "sha256": "24e38634118730ba9d222179518d13818c094c5a6ccfd368afd56521e964d014"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/rcc-current8d49-memory-native-composition-SOURCE-PREPARED-NOTRUN/native_memory_entry_v1_NOTRUN.py",
+      "bytes": 9637,
+      "sha256": "ae5e2220a33a8680dce308f1da119b79e856944bbbf45e101cf353e07589e620"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/evidence/workspace-transfer-20261011/root-source-snapshot/rcc-current8d49-memory-stop-attempt-successor-SOURCE-NOTRUN/native_memory_sampler_overlay_v1_NOTRUN.py",
+      "bytes": 6688,
+      "sha256": "b76adb2e93b92be0ae5ddab794f0d90078649a95a271c00d79fb95ed35d34d5f"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/actions-cloud-workspace-transfer-20261011.md",
+      "bytes": 25089,
+      "sha256": "8790f0ce6409f97f1ed2297cc460376780553e8693a1d9853d16f4e761410cf7"
+    },
+    {
+      "path": "/workspace/actions-handoff/docs/handoffs/actions-swarm-mk3-20261011-engineering-continuation-successor.md",
+      "bytes": 32815,
+      "sha256": "1890c7e81867dde196d49e019b4bc2e391d7920b6b3474fac931cc18dca2fed3"
+    },
+    {
+      "path": "/workspace/successor-evidence/pr308/controller-census-c5643f82-v2-DESIGN-REVIEW-REQUIRED.md",
+      "bytes": 5756,
+      "sha256": "a1e36d756b3eb74cb034e5ecd59217d32c6aa3b02a757eba1b570d648e1c2309"
+    },
+    {
+      "path": "/workspace/successor-evidence/pr308/native-baseline-profile-3812a177-v13-READER-SOURCE-NOTADMITTED.json",
+      "bytes": 2413,
+      "sha256": "c47bdc47c8d256cb2be83b1b544ce39c9d78e39a10945c72b8caf9faa09f1ef2"
+    },
+    {
+      "path": "/workspace/successor-evidence/pr308/native-baseline-profile-f949bef2-v12-CI-PASS-NOTADMITTED.json",
+      "bytes": 2062,
+      "sha256": "a58ef605c3a0c47d2bdcd669c0145cbb789c6716f61e4b0bb0eeb5b3aae72d29"
+    },
+    {
+      "path": "/workspace/successor-evidence/pr308/resource-after-cache-advice-once.json",
+      "bytes": 694,
+      "sha256": "a7da6f37bcd875d23cbd156f33739a687a7913c2e8efe1e46f19749992dc97a1"
+    },
+    {
+      "path": "/workspace/successor-evidence/pr308/self-cgroup-child-init-discovery.json",
+      "bytes": 1239,
+      "sha256": "80546838f80e736e399ea5a1d0e5bed8a5fd26d1a377b990a5cd397b6c86bb14"
+    },
+    {
+      "path": "/workspace/successor-evidence/review308-cgroup-child/review.json",
+      "bytes": 4779,
+      "sha256": "4930ab18693eba56b844438daa66eae7df5cb3ae8d53f6c324bf6b0a2c99dce0"
+    }
+  ],
+  "immutable_product_bindings": [
+    {
+      "head": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+      "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "blob": "47fbf54926b96bdf6ad1be8f4c66e21a9162f0aa",
+      "bytes": 110339,
+      "sha256": "7c6499fda0a0f9c5e22cbc64c53d1aa8f3a8152e5539a0dabd30a1ee376b6e8e"
+    },
+    {
+      "head": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+      "path": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "blob": "93a2e601676adbc37b7cffb82366f3c083f55e05",
+      "bytes": 62712,
+      "sha256": "5e090e16552aef53b2c4f066790914b3700c6e89b856ca965d423c8056b3be26"
+    },
+    {
+      "head": "3812a1773c512a1088c7778b6a2b07aae2e358da",
+      "path": "docs/skills/repository-operations.md",
+      "blob": "85e07f02d537950d8cea709ef6ee4c0cc5943170",
+      "bytes": 291767,
+      "sha256": "4accb23b85aa0dcbc1e3b9e7e8c6a3482e74a22b875165f3440ecdbfa58527aa"
+    }
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "insertion_point": "Memory admission cgroup binding guidance",
+    "exact_delta": "Record a memory admission threshold's derivation and approval separately from a cgroup capacity observation. The retained proposed initial threshold of 3,113,851,289 bytes already includes its 536,870,912-byte stop reserve; do not add that reserve a second time. Its 2.4 GiB input was an owned filesystem-state envelope, not a measured process-memory requirement or cold-solver peak, so the memory policy remains uncalibrated and unadopted. A stable child-membership witness and descriptor-bound finite ancestor identify a shared accounting scope; memory.max minus memory.current is observed headroom, not reserved capacity. Namespace-path restrictions belong to the reader's supported model and must be reviewed before extending it. Retained private samplers and old execution grants do not constitute a current native controller or authorize their replay.",
+    "durable_learning": "Separate exact constant provenance, empirical shared-counter binding, policy adoption and current executable controller qualification.",
+    "evidence": [
+      "Originald2b3purepolicy constants/comment and proposal277539 explicitlyderive2.4GiBstate+0.5GiBreserve and labelNOTACCEPTED",
+      "OldCapacityState/FiniteSampler measures owned filesystembytes/statvfs, not RSS",
+      "Freshresourceaftercache and pinnedFDchild review provide sharedancestor observation only",
+      "Current3812source has existing subreaper but no memory.current/backend/FiniteSampler and nullsampler/wholeoperationenforcer metadata",
+      "Kernelprimary memory.current includes descendants and memory.max is hardlimit, not reservation"
+    ],
+    "stale_or_ambiguous_guidance_removed": "Correct profilev12 floor-plus-reserve wording, reject filesystem-budget-as-memorycalibration and canonical-onlyreader-as-kernelconstraint inference.",
+    "remaining_uncertainty": "Supportednamespace reader/currentcontroller/independentwatchdog/outputretention, numericbudgetadmission, workloadincrement/latency calibration, passivelease observation and realbaselineAction remainHOLD.",
+    "upstream_disposition": "none"
+  },
+  "reviewer_actions": "Read-only source/retainedreceipt inspection and primarykernel documentation; own safeJSON/docsproposal writes only. No cgroupwrites/reads beyondretainedreceipts, native/RCC/leases/CI/install/tests/sourceedits/newworkers.",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,13 @@
+{
+  "head": "06086c63a681bb9cb117387675c98ca3824ce7cc",
+  "results": {
+    "actions-oauth-config.yaml": {
+      "sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+      "exact_committed_bytes_in_generated_module": true
+    },
+    "oauth-config.yaml": {
+      "sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+      "exact_committed_bytes_in_generated_module": true
+    }
+  }
+}

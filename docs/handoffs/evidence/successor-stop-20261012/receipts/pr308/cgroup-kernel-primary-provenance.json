@@ -1,0 +1,24 @@
+{
+  "source": "https://docs.kernel.org/admin-guide/cgroup-v2.html",
+  "sections": [
+    "Introduction",
+    "Processes",
+    "Namespace / The Root and Views"
+  ],
+  "verified_claims": [
+    "A PID in cgroup.procs witnesses membership in that cgroup",
+    "Parent memory-controller limits apply hierarchically to the inclusive subtree",
+    "Proc cgroup paths are namespace-relative and may differ from an inherited mount view"
+  ],
+  "local_evidence": [
+    "pr308/self-cgroup-child-init-discovery.json",
+    "review308-cgroup-child/audit-fields.json"
+  ],
+  "inference": "Pinned same-filesystem child membership and ancestor route support a conservative shared visible ancestor counter without lexical dotdot normalization; namespace/mount history not inferred",
+  "not_claimed": [
+    "Exclusive/effective entire host capacity",
+    "Future Action self binding without fresh monitor validation",
+    "Accepted/calibrated peak budget or native admission"
+  ],
+  "native_attempts": 0
+}

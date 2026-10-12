@@ -1,0 +1,13 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "insertion_point": "Program ledger/acceptance accounting guidance",
+  "exact_delta": "Report retained contracts, implementation slices and acceptance gates as separate counts. Exclude explicitly identified umbrella/factory/advisory/policy records from a delivery-contract denominator while retaining their obligations. Preserve UNKNOWN when a bounded audit has no current whole-contract proof; absence of a reconciled receipt is not proof that a feature is missing. A merged source prerequisite establishes partial implementation even when the whole-issue projection remains unknown. Keep closure-ready narrow contracts and release verification/integration gates separate from features still requiring code.",
+  "evidence": [
+    "54retainedrows/projection + immutablecontract82/93/101/149/155 definitions",
+    "Exactmerged135/148active_substages comparedwith projectionunknownwholeimplementation",
+    "3close-ready162194209 and1accepted210",
+    "Currenthashbound134nativecontract andf949installedscope evidence"
+  ],
+  "remaining_uncertainty": "30nonumbrella contracts retainunknowncurrentwholeimplementation; no repo-wideaudit/newissue/CI/nativequery performed.",
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,122 @@
+{
+  "commit": "cc41795d646a504835d8c552550c54ddcc7503f3",
+  "tree": "9fec0ee6a3056f20afa92350ac9a5063c783e039",
+  "docs_successor": "3156d32c1a69846d46229b76c09725bfcfa5772f",
+  "docs_successor_tree": "cb6c6258a126202e9e1b058ce914fe0f7626fd35",
+  "pool_sha256": "af2090208ebff767dc40af6d40501d813c570d1171ce031dcb75276ac6a5fef5",
+  "callback_sha256": "fa24e22f0fe04453b71b0f25ac8fa9f113511a9adc6d701d1e648f0931c3c441",
+  "scope": "exact immutable AST classes/methods, BytesIO, synthetic thread observations; no process/thread launches or native/build/source edits",
+  "controls": [
+    {
+      "case": "subscriber_order",
+      "reversed": false,
+      "events": [
+        "first",
+        "observed",
+        "next"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "subscriber_order",
+      "reversed": true,
+      "events": [
+        "next",
+        "first",
+        "observed"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "observer_failure",
+      "raise_exceptions": false,
+      "original_exception_identity_preserved": true,
+      "observer_log_arguments": [
+        "Callback error observation failed (%s).",
+        "OSError"
+      ],
+      "status": "PASS",
+      "observer_calls": 1,
+      "later_consumer_calls": 1
+    },
+    {
+      "case": "observer_failure",
+      "raise_exceptions": true,
+      "original_exception_identity_preserved": true,
+      "observer_log_arguments": [
+        "Callback error observation failed (%s).",
+        "OSError"
+      ],
+      "status": "PASS",
+      "observer_calls": 1,
+      "later_consumer_calls": 0
+    },
+    {
+      "case": "actual_callback_reader_owner_first_error",
+      "events": [
+        [
+          "failed",
+          "one"
+        ],
+        [
+          "next",
+          "one"
+        ],
+        [
+          "failed",
+          "two"
+        ],
+        [
+          "next",
+          "two"
+        ]
+      ],
+      "retained_errors": {
+        "stdout": "OSError"
+      },
+      "reader_facts": [
+        {
+          "role": "stdout",
+          "joined": true,
+          "alive": false,
+          "error": "OSError"
+        },
+        {
+          "role": "protocol",
+          "joined": true,
+          "alive": false,
+          "error": null
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "same_name_ident_different_thread_object_unknown",
+      "unowned": {
+        "role": "unowned-output",
+        "joined": false,
+        "alive": null,
+        "error": "OSError"
+      },
+      "capacity_predicate_pending": true,
+      "status": "PASS"
+    },
+    {
+      "case": "observer_baseexception_keeps_control_flow_propagation",
+      "observer_calls": 1,
+      "later_consumer_calls": 0,
+      "propagated": "KeyboardInterrupt",
+      "scope": "ordinary Exception suppression does not include BaseException",
+      "status": "PASS"
+    }
+  ],
+  "unchanged_deadline_and_lifecycle_methods": [
+    "retire",
+    "_retire_locked",
+    "_record_unverified_crash",
+    "_shutdown_retirement_socket",
+    "kill"
+  ],
+  "docs_successor_product_bytes_identical": true,
+  "status": "PASS"
+}

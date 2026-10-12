@@ -1,0 +1,11 @@
+{
+  "acceptance_status": "FAIL",
+  "cells": {
+    "authenticated_action": "PASS",
+    "process_cleanup": "FAIL"
+  },
+  "supervisor_cleanup": {
+    "command_returncode": 0,
+    "disposition": "killed_unexpected_descendants"
+  }
+}

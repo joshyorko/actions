@@ -1,0 +1,15 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "insertion_point": "After the OAuth paragraph beginning Both owned inputs must validate",
+  "exact_delta": "Record both the Git blob digest and the actual checkout-input digest when validating packaged OAuth. Runtime Python sources are pinned to LF by `.gitattributes`; the OAuth YAML inputs use automatic text conversion and can be CRLF in Windows builds. Compare those strings with explicitly derived Windows checkout bytes and verify `INPUT_SHA256` against the packaged bytes. Retain the distinct raw digests instead of describing CRLF bytes as exact Git blob bytes.\n\nThe Runtime sdist carries the public YAML pair and pre-generated `_oauth2_config.py`; it does not carry `scripts/build_oauth2_config.py`. Its `build.py` obtains RCC without regenerating OAuth. Inspect the pre-generated module and both YAML inputs against the accepted source; builder execution remains a separate checkout test.\n\nInstalled-consumer OAuth proof must use the real bundled getter and template. A fixture replacing `_oauth2_config.FILE_CONTENTS` proves file-creation behavior but cannot prove packaged template contents. Bind imports and `direct_url.json` to the measured wheel, and record local candidate dependency wheels separately from public-registry dependencies.",
+  "durable_learning": "Preserve checkout conversion provenance; distinguish sdist bundled inputs from builder execution; distinguish real installed bundle evidence from mocked template controls and public dependency origins.",
+  "evidence": [
+    "independent-package-verification.json: all seven distributions and exact Windows CRLF/LF hashes",
+    "verify_packages.py: reproducible package and RECORD comparisons",
+    "checkout-provenance.json: actual synthetic checkout500d640f equals complete accepted tree137468f1",
+    "installed-real-bundle.json: actual installed imports, local wheel origin, real template bytes0600 and actual hosted getter",
+    "installed-oauth.junit.xml: nine installed tests passed; source inspection shows template-creation fixture replaces FILE_CONTENTS"
+  ],
+  "stale_or_ambiguous_guidance_removed": "Avoid claiming all platform input strings are exact LF Git bytes; avoid implying sdist includes the generator; avoid labeling mocked creation tests as proof of real bundled template contents or local candidate dependencies as public-registry installs.",
+  "remaining_uncertainty": "No sdist rebuild/install, Linuxcp313 installed execution, Windows/macOS installed execution, native executable acceptance, public-registry dependency-origin acceptance, signing, or publication was performed in this lane."
+}

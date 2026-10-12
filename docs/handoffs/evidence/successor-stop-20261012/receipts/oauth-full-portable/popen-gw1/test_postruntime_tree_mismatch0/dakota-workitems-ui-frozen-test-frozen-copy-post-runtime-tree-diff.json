@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "source_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "runtime_kind": "frozen",
+  "runtime_tree_kind": "task_owned_frozen_copy",
+  "platform": "Linux",
+  "executable_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "manifest_sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+  "expected_runtime_tree_sha256": "8895ce97d6a873f2644a767bbdfe33d4a3c0ca8e22ca812a86ab0d42d03dbac0",
+  "observed_package_tree_sha256": "e47bbdf7f773113c83a0e3d4fd24bdacc9123e8578080e409a7a4454405b2e25",
+  "expected_immutable_build_tree_sha256": "8895ce97d6a873f2644a767bbdfe33d4a3c0ca8e22ca812a86ab0d42d03dbac0",
+  "observed_immutable_build_tree_sha256": "8895ce97d6a873f2644a767bbdfe33d4a3c0ca8e22ca812a86ab0d42d03dbac0",
+  "immutable_build_tree_unchanged": true,
+  "runtime_delta_valid": false,
+  "runtime_delta_failure_reason": "unrecognized_runtime_generated_entry",
+  "runtime_generated_contract": {
+    "rcc_version": "18.19.3",
+    "rcc_path": "_internal/actions/server/bin/rcc-18.19.3"
+  },
+  "runtime_generated_state": [],
+  "added": [
+    {
+      "path": "__pycache__",
+      "kind": "directory",
+      "mode": 448,
+      "link_target": null,
+      "content_sha256": null
+    },
+    {
+      "path": "__pycache__/module.pyc",
+      "kind": "file",
+      "mode": 384,
+      "link_target": null,
+      "content_sha256": "fd7d8d9d425335b6feb5278f39157f22ddc427dd9d1c6083100e23b834f1c15a"
+    }
+  ],
+  "removed": [],
+  "changed": []
+}
