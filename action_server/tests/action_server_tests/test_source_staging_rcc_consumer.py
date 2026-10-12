@@ -727,6 +727,11 @@ def _prepare_owned_rcc_test_package_cache(
     """Share only serial-case package downloads within one admitted task root."""
     import json
 
+    getuid = getattr(os, "getuid", None)
+    getgid = getattr(os, "getgid", None)
+    assert callable(getuid) and callable(getgid), "PACKAGE_CACHE_POSIX_OWNER_FEATURES"
+    owner_uid, owner_gid = getuid(), getgid()
+
     def object_pairs(pairs):
         result = {}
         for key, value in pairs:
@@ -805,13 +810,13 @@ def _prepare_owned_rcc_test_package_cache(
         not root.is_symlink() and root.resolve(strict=True) == root
     ), "PACKAGE_CACHE_ROOT_LINK"
     assert (
-        stat.S_IMODE(root.stat().st_mode) == 0o700 and root.stat().st_uid == os.getuid()
+        stat.S_IMODE(root.stat().st_mode) == 0o700 and root.stat().st_uid == owner_uid
     ), "PACKAGE_CACHE_ROOT_MODE_OWNER"
     marker = root / "rcc-package-cache-owner.json"
     assert not marker.is_symlink() and marker.is_file(), "PACKAGE_CACHE_MARKER_FILE"
     assert (
         stat.S_IMODE(marker.stat().st_mode) == 0o600
-        and marker.stat().st_uid == os.getuid()
+        and marker.stat().st_uid == owner_uid
     ), "PACKAGE_CACHE_MARKER_MODE_OWNER"
     raw_marker = marker.read_bytes()
     assert (
@@ -837,8 +842,8 @@ def _prepare_owned_rcc_test_package_cache(
     client_metadata = client.stat()
     assert (
         stat.S_IMODE(client_metadata.st_mode) in (0o700, 0o750)
-        and client_metadata.st_uid == os.getuid()
-        and client_metadata.st_gid == os.getgid()
+        and client_metadata.st_uid == owner_uid
+        and client_metadata.st_gid == owner_gid
     ), "PACKAGE_CACHE_CLIENT_MODE_OWNER"
     assert all(
         Path(os.environ.get(key, "")).resolve() == client
@@ -848,7 +853,7 @@ def _prepare_owned_rcc_test_package_cache(
         assert cache.is_dir() and not cache.is_symlink(), "PACKAGE_CACHE_TARGET_LINK"
         assert (
             stat.S_IMODE(cache.stat().st_mode) == 0o700
-            and cache.stat().st_uid == os.getuid()
+            and cache.stat().st_uid == owner_uid
         ), "PACKAGE_CACHE_TARGET_MODE_OWNER"
     if managed_home is None:
         assert not cache.exists() or not any(
@@ -868,7 +873,7 @@ def _prepare_owned_rcc_test_package_cache(
         ), "PACKAGE_CACHE_PUBLICATION_PATH"
         assert (
             stat.S_IMODE(receipt.stat().st_mode) == 0o600
-            and receipt.stat().st_uid == os.getuid()
+            and receipt.stat().st_uid == owner_uid
         ), "PACKAGE_CACHE_PUBLICATION_MODE_OWNER"
         publication = parse(receipt.read_bytes())
         assert (
@@ -898,7 +903,7 @@ def _prepare_owned_rcc_test_package_cache(
         ), "PACKAGE_CACHE_MANAGED_HOME_IDENTITY"
         assert (
             stat.S_IMODE(managed_home.stat().st_mode) == 0o700
-            and managed_home.stat().st_uid == os.getuid()
+            and managed_home.stat().st_uid == owner_uid
         ), "PACKAGE_CACHE_MANAGED_HOME_MODE_OWNER"
         link = managed_home / "pkgs"
         assert (
@@ -1266,6 +1271,21 @@ def test_owned_rcc_package_cache_rejects_wrong_owner(
         )
     assert calls == []
     assert not (managed / "pkgs").is_symlink()
+
+
+@pytest.mark.parametrize("feature", ["getuid", "getgid"])
+@pytest.mark.parametrize("available", [False, True])
+def test_owned_rcc_package_cache_rejects_missing_posix_owner_features(
+    monkeypatch, tmp_path, feature, available
+):
+    """Reject unavailable owner checks before parsing or touching a cache."""
+    monkeypatch.delenv("ACTIONS_RUNTIME_RCC_TEST_PACKAGE_CACHE_CONFIG", raising=False)
+    if available:
+        monkeypatch.setattr(os, feature, None, raising=False)
+    else:
+        monkeypatch.delattr(os, feature, raising=False)
+    with pytest.raises(AssertionError, match="PACKAGE_CACHE_POSIX_OWNER_FEATURES"):
+        _prepare_owned_rcc_test_package_cache(tmp_path, "v18.19.3", "a" * 64)
 
 
 @pytest.mark.parametrize("mode", [0o700, 0o750])

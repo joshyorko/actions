@@ -2497,7 +2497,7 @@ def test_legacy_default_version_route_keeps_general_command_budget(monkeypatch):
 
     monkeypatch.setattr(adapter.subprocess, "run", completed)
     assert adapter.verify_rcc_version(Path("/service-free/rcc")) == "v18.19.3"
-    assert calls == [(["/service-free/rcc", "--version"], 900)]
+    assert calls == [([str(Path("/service-free/rcc")), "--version"], 900)]
 
 
 def test_isolated_explicit_injected_version_runner_is_preserved(monkeypatch):
@@ -2522,7 +2522,7 @@ def test_isolated_explicit_injected_version_runner_is_preserved(monkeypatch):
     assert (
         adapter.verify_rcc_version(Path("/service-free/rcc"), runner) == policy.version
     )
-    assert calls == [("/service-free/rcc", "--version")]
+    assert calls == [(str(Path("/service-free/rcc")), "--version")]
 
 
 def test_isolated_default_version_timeout_uses_fixed_error(monkeypatch):

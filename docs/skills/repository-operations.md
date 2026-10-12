@@ -391,6 +391,16 @@ Check both the affected Windows target and the native target, then run the
 existing platform behavior tests. A focused `mypy --platform win32` invocation
 is diagnostic unless the repository's configured CI runs that target.
 
+RCC version-runner fixtures must derive expected command arguments with
+`str(Path(...))`, since Windows renders the same path with native separators.
+The Linux-only owned package-cache helper admits callable `getuid` and `getgid`
+features before reading configuration or accessing cache paths. Missing or
+noncallable features fail with `PACKAGE_CACHE_POSIX_OWNER_FEATURES`; they do
+not skip owner verification. Keep the measured UID/GID checks and private
+0700 roots, 0600 markers, and explicitly allowed 0700/0750 client-home modes.
+Tests exercise unavailable features without creating a cache, and the existing
+cache poison tests retain containment, ownership, and mode rejection.
+
 The Dakota RCC candidate acceptance script fails closed outside Linux. Its
 receipt cleanup uses POSIX `fchmod`; keep cleanup-demotion and permission-mode
 assertions limited to platforms that provide that contract. On Windows, retain
