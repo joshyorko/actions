@@ -62,6 +62,3 @@ test-actions/
 .codex
 .serena
 .clawpatch
-
-# Public, secret-free OAuth operator template is an owned build input.
-!action_server/oauth2/oauth-config.yaml
