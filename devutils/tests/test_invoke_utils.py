@@ -2,8 +2,8 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock
 
-import tomlkit
 import pytest
+import tomlkit
 from invoke import Context
 
 from devutils.invoke_utils import (

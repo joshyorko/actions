@@ -1,11 +1,11 @@
 from devutils.runtime_conformance import (
     DeploymentRevision,
+    RuntimePlan,
     WorkerProfile,
     admit,
     assert_execution_subject,
     subject_fingerprint,
 )
-from devutils.runtime_conformance import RuntimePlan
 
 
 def test_exact_subject_is_order_independent_and_detects_changes():

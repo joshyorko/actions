@@ -1393,7 +1393,15 @@ GitHub `get-virtualenv` blob URL with the supported `bootstrap.pypa.io` URL
 The clean-break distribution identity is `actions-runtime`; its package version,
 `actions.server.__version__`, Runtime changelog, and `actions-runtime-X.Y.Z` tag
 must agree. Native release notes come from
-`action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md`; the historical
+`action_server/docs/ACTIONS_RUNTIME_CHANGELOG.md`. The generated native
+workflow must leave `release_text` unset so the pinned release action reads
+that file; a non-empty `release_text` bypasses changelog parsing. The action's
+default heading level is H2 and its pinned `submark -O --h2 "$TAG"` lookup
+requires an exact heading such as `## actions-runtime-1.0.3` (a date suffix
+does not match). The selected section runs through the next H1 or H2, includes
+any H3 subsections, and omits its matched heading. The generic `inv set-version`
+helper updates the legacy `action_server/docs/CHANGELOG.md` using a dated H2;
+it does not prepare the dedicated Runtime changelog. The historical
 `action_server/docs/CHANGELOG.md` and `action-server-v1.2.x` tags remain a
 separate legacy delivery line. Tagged PyPI runs fail closed when
 `PYPI_TOKEN_ACTIONS_RUNTIME` is absent rather than reporting successful release
@@ -1480,7 +1488,9 @@ is executable only through `action_server/scripts/publish_verified_runtime.py`:
 it downloads the retained `actions-runtime-dist` for an explicit run ID,
 repository, immutable ref, and full SHA, or accepts an already downloaded directory; it
 never rebuilds. It verifies the exact seven artifacts and retained
-`actions-runtime-manifest.sha256` before running Twine 6.2.0. With `--publish`,
+`actions-runtime-manifest.sha256`. `--dry-run` then returns without running
+Twine or reading publication credentials; retain a separate strict Twine
+result when admitting metadata. The publishing path requires Twine 6.2.0. With `--publish`,
 the script reads only `PYPI` from the process environment or ignored repo-root
 `.env`, never prints or puts the token in arguments, and injects it only into
 Twine's child environment. Example commands are:
@@ -1501,6 +1511,33 @@ not an identity binding. Binary signing selection is split into expression-gated
 and unsigned steps so POSIX test syntax is never sent to the Windows PowerShell shell.
 Binary release names use GitHub expressions containing `${{ github.ref_name }}`; shell
 literals such as `$tag-linux64` are not valid action inputs.
+
+The `--run-id` provenance gate also applies to dry runs and rejects pull-request
+producers. For nonpublishing admission of independently verified PR artifacts,
+measure the downloaded ZIP and every manifest member, retain the repository,
+workflow, run and artifact identity and actual checkout SHA, tree and ordered
+parents, then use `--dist-dir DIRECTORY --dry-run`. This proves the seven-artifact
+byte inventory; it does not grant tag or publication provenance. A run's API head
+can differ from its actual synthetic merge checkout, so record both identities.
+
+Stage only the selected host cp312 wheel when calling
+`verify_published_runtime_floor.py`: the complete release inventory contains
+three cp312 platform wheels and its selector requires exactly one. Its isolated
+public install and import verification checks loaded imports and exact public
+dependency URLs and digests. Combine that result with the installed-wheel
+contract's full Python-member byte and private-Core import guard. Derive the
+member inventory from the selected wheel, retain it before removing the clean
+environment, and bind each receipt to that wheel and producer. An older wheel's
+member count, source or passing receipt cannot qualify a newer artifact.
+
+Installed-member byte equality proves the installed files match the selected
+wheel; it does not prove that build-generated payloads are complete. Bind tracked
+Python members to the producer tree and record generated members separately.
+Check each generator's acquisition exit status and resulting payload in the
+retained wheel. A successful wheel build, import smoke and private-Core scan can
+coexist with empty generated configuration when acquisition failure is ignored.
+Keep generated-payload admission separate from installed-wheel identity and
+dependency-floor admission.
 
 The generated `actions_runtime_recovery.yml` workflow is the only recovery lane for an
 immutable Runtime tag. Its required `release_ref` and full 40-hex `release_sha` inputs
@@ -1566,10 +1603,60 @@ after manifest creation and Twine checking, before artifact retention or upload.
 The verifier accepts cibuildwheel's interpreter-plus-ABI wheel names for the
 cp312/cp313 manylinux x86_64, macOS 12 arm64, and Windows amd64 set while
 rejecting mismatched ABI tags. The sdist and wheel build steps expose only
-`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR builds run equivalent frontend and
-OAuth generation without credentials; PAT-bearing variants are limited to tag
-pushes. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
+`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR and tag builds generate the owned
+OAuth inputs offline with no acquisition token. Matching command names alone
+do not establish matching generated payloads; inspect the input digests.
+Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
 from the child environment, while upload receives only the exact PyPI token.
+
+`inv build-oauth2-config` delegates to Runtime's installed Poetry environment.
+Generated and manual OAuth artifact producers install Runtime through `inv install`
+or `inv devinstall` before invoking the task. PyYAML is a Runtime dependency;
+repository-root devutils requirements do not guarantee it in the outer Invoke
+interpreter. The task removes outer virtualenv, Conda and Python activation hints
+from the replacement child environment so Poetry selects Runtime's environment.
+Removing only `VIRTUAL_ENV` leaves an active RCC `CONDA_PREFIX` able to select the
+toolchain interpreter. Verify the actual
+Invoke-to-Poetry boundary with owned input reading, including failure, rather
+than qualifying only direct helper calls.
+
+The public OAuth build is offline. Its tracked inputs are
+`action_server/oauth2/actions-oauth-config.yaml` and
+`action_server/oauth2/oauth-config.yaml`; both must be regular files, at most
+64 KiB, strict UTF-8, unique-key safe YAML, and exactly the versioned
+`formatVersion: '1.0.0'` / `oauth2Config.providers: {}` document. Comments are
+preserved. The explicit empty hosted catalog means the community ships no
+hosted application registrations. It supplies no client credentials and does
+not advertise provider support. Operators keep their registered applications
+in private `--oauth2-settings` files with `mode: custom`. Public endpoint
+metadata remains in the existing settings resolver. `mode: actions` for an
+absent provider fails clearly; blank custom client IDs are rejected. Missing
+optional client secrets preserve PKCE S256. Register the exact redirect URI
+`<Runtime base URL>/actions/oauth2/`, including its trailing slash. The callback
+route alone does not define the URI emitted to the issuer. Outbound provider OAuth, Runtime
+API-key/browser sessions, and inbound MCP client authorization remain separate
+contracts.
+
+Both owned inputs must validate before same-directory atomic module replacement.
+Generated `FILE_CONTENTS` preserves their original strings and `INPUT_SHA256`
+binds each filename to its exact UTF-8 bytes. Failure preserves the previous
+module and reports only fixed input names and reason categories, never input
+bodies. New user configs are written as private mode-0600 temporary files and
+published exclusively after flush/fsync, preserving an existing regular operator
+file. Symlinks and other special destinations fail; POSIX mode evidence does
+not establish Windows ACL privacy. Unsupported hardlink publication fails
+without overwriting an operator file.
+
+The generator and generated OAuth steps require no cross-repository token.
+Keep release upload credentials scoped to their own publication steps. The
+source tests exercise actual owned-issuer token exchange for custom PKCE and
+client-secret configurations; those synthetic registrations do not prove live
+provider service acceptance. Qualify wheel, sdist, native and installed startup
+contents separately, including the exact generated input hashes and explicit
+missing/unsupported-provider failures. Historical vendor acquisition failures
+and empty-string artifacts remain failed or unqualified; new source does not
+repair those bytes. Recovery runs tasks from immutable `release-source`, so
+older release targets still use their original builder and input authority.
 
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The
@@ -4024,3 +4111,9 @@ ancestry, and absence of both the remote tag and registry version. A successful
 tag workflow must still be followed by registry file/hash and installed public
 API verification. Never move a tag or replace a published distribution to recover
 a failed release.
+
+Portable source tests read the tracked public hosted catalog through the getter
+boundary, without requiring a pre-existing generated `_oauth2_config` module.
+Test the real builder separately and inspect generated bytes in package and
+installed consumers; a locally generated module can hide a clean-checkout
+source-test dependency until toolkit package smoke runs in CI.

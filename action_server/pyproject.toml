@@ -9,6 +9,7 @@ repository = "https://github.com/joshyorko/actions/tree/community"
 license = "Apache-2.0"
 packages = [{ include = "actions", from = "src" }]
 include = [
+	{ path = "oauth2/*.yaml", format = "sdist" },
 	"src/actions/server/_static_contents.py",
 	"src/actions/server/_oauth2_config.py",
 	"src/actions/server/bin/rcc*",
