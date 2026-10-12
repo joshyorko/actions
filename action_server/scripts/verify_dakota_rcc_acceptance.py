@@ -763,14 +763,186 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _readline_with_timeout(stream, timeout_seconds: float) -> str:
-    result: queue.Queue[str] = queue.Queue(maxsize=1)
-    reader = threading.Thread(target=lambda: result.put(stream.readline()), daemon=True)
-    reader.start()
+class ProviderReaderResult(NamedTuple):
+    joined: bool
+    alive: bool | None
+    error: str | None
+
+
+class ProviderCleanupResult(NamedTuple):
+    pid: int
+    create_time: float | None
+    ownership_confirmed: bool
+    tree: object | None
+    reader: ProviderReaderResult
+    errors: tuple[str, ...]
+
+    @property
+    def complete(self) -> bool:
+        from actions.server._common.process import ProcessTreeCleanupResult
+
+        return (
+            self.ownership_confirmed
+            and isinstance(self.tree, ProcessTreeCleanupResult)
+            and self.tree.descendant_reap_complete
+            and self.reader.joined
+            and self.reader.alive is False
+            and self.reader.error is None
+            and not self.errors
+        )
+
+    def to_dict(self) -> dict[str, object]:
+        from dataclasses import asdict
+
+        from actions.server._common.process import ProcessTreeCleanupResult
+
+        return {
+            "scope": "captured_provider_tree_and_startup_reader_only",
+            "pid": self.pid,
+            "create_time": self.create_time,
+            "ownership_confirmed": self.ownership_confirmed,
+            "tree": (
+                asdict(self.tree)
+                if isinstance(self.tree, ProcessTreeCleanupResult)
+                else None
+            ),
+            "reader": self.reader._asdict(),
+            "errors": list(self.errors),
+            "complete": self.complete,
+        }
+
+
+class _ProviderOwnership:
+    def __init__(self, process: subprocess.Popen):
+        self.process = process
+        self.pid = process.pid
+        self.create_time: float | None = None
+        self.descendants: list = []
+        self.snapshot_complete = False
+        self.errors: tuple[str, ...] = ()
+        self.reader: _ProviderStartupReader | None = None
+
+
+class _ProviderStartupReader:
+    def __init__(self, owner: _ProviderOwnership, target):
+        self.owner = owner
+        self.error: str | None = None
+        self.thread = threading.Thread(
+            target=target, daemon=True, name="rcc_provider_startup_reader"
+        )
+
+
+def _capture_provider_ownership(process: subprocess.Popen) -> _ProviderOwnership:
+    import psutil
+
+    owner = _ProviderOwnership(process)
+    setattr(process, "_rcc_provider_owner", owner)
     try:
-        return result.get(timeout=timeout_seconds)
+        root = psutil.Process(process.pid)
+        owner.create_time = root.create_time()
+        owner.descendants = root.children(recursive=True)
+        owner.snapshot_complete = True
+    except psutil.Error as error:
+        owner.errors = (f"PROVIDER_CAPTURE_{type(error).__name__}",)
+    return owner
+
+
+def cleanup_provider_until(
+    process: subprocess.Popen, deadline: float
+) -> ProviderCleanupResult:
+    """Observe the captured provider tree and original reader under one deadline.
+
+    This deliberately does not claim a full supervisor census or lease release.
+    Unknown ownership is never authority to signal a process.
+    """
+    import psutil
+
+    from actions.server._common.process import force_kill_process_tree_until
+
+    if isinstance(deadline, bool) or not math.isfinite(deadline):
+        raise ValueError("PROVIDER_CLEANUP_DEADLINE")
+    owner = getattr(process, "_rcc_provider_owner", None)
+    errors = []
+    owned = (
+        isinstance(owner, _ProviderOwnership)
+        and owner.process is process
+        and owner.pid == process.pid
+        and owner.create_time is not None
+    )
+    if owned and process.poll() is None:
+        assert isinstance(owner, _ProviderOwnership)
+        try:
+            owned = psutil.Process(process.pid).create_time() == owner.create_time
+        except psutil.Error as error:
+            owned = False
+            errors.append(f"PROVIDER_IDENTITY_{type(error).__name__}")
+    tree = None
+    reader_result = ProviderReaderResult(False, None, "PROVIDER_READER_UNAVAILABLE")
+    if not owned:
+        errors.append("PROVIDER_OWNER_UNCONFIRMED")
+    else:
+        assert isinstance(owner, _ProviderOwnership)
+        errors.extend(owner.errors)
+        try:
+            tree = force_kill_process_tree_until(
+                process, owner.descendants, deadline, owner.snapshot_complete
+            )
+        except Exception as error:
+            errors.append(f"PROVIDER_TREE_{type(error).__name__}")
+        reader = owner.reader
+        if isinstance(reader, _ProviderStartupReader) and reader.owner is owner:
+            joined = False
+            error_class = reader.error
+            try:
+                reader.thread.join(timeout=max(0.0, deadline - time.monotonic()))
+                joined = not reader.thread.is_alive()
+            except Exception as error:
+                error_class = error_class or f"PROVIDER_JOIN_{type(error).__name__}"
+            try:
+                alive = reader.thread.is_alive()
+            except Exception as error:
+                alive = None
+                error_class = error_class or f"PROVIDER_ALIVE_{type(error).__name__}"
+            reader_result = ProviderReaderResult(
+                joined, alive, error_class or reader.error
+            )
+    result = ProviderCleanupResult(
+        process.pid,
+        owner.create_time if isinstance(owner, _ProviderOwnership) else None,
+        owned,
+        tree,
+        reader_result,
+        tuple(errors),
+    )
+    setattr(process, "_rcc_provider_cleanup", result)
+    return result
+
+
+def _readline_with_timeout(
+    stream, timeout_seconds: float, *, owner: _ProviderOwnership
+) -> str:
+    if owner.reader is not None:
+        raise RuntimeError("PROVIDER_READER_ALREADY_STARTED")
+    result: queue.Queue[tuple[str | None, BaseException | None]] = queue.Queue(maxsize=1)
+
+    def read_line():
+        try:
+            result.put((stream.readline(), None))
+        except BaseException as error:
+            reader.error = type(error).__name__
+            result.put((None, error))
+
+    reader = _ProviderStartupReader(owner, read_line)
+    owner.reader = reader
+    reader.thread.start()
+    try:
+        line, error = result.get(timeout=timeout_seconds)
     except queue.Empty as exc:
         raise TimeoutError("RCC cache serve startup timed out") from exc
+    if error is not None:
+        raise error
+    assert line is not None
+    return line
 
 
 def _provider_command(rcc_binary: str, provider_root: Path) -> list[str]:
@@ -804,9 +976,12 @@ def start_provider(
         stdin=subprocess.DEVNULL,
     )
     try:
+        owner = _capture_provider_ownership(process)
         if process.stdout is None:
             raise RuntimeError("RCC cache serve stdout is unavailable")
-        startup = _readline_with_timeout(process.stdout, deadline.remaining(cap=10))
+        startup = _readline_with_timeout(
+            process.stdout, deadline.remaining(cap=10), owner=owner
+        )
         try:
             payload = json.loads(startup)
         except json.JSONDecodeError as exc:
@@ -825,8 +1000,14 @@ def start_provider(
                 "RCC cache serve did not bind to credential-free loopback"
             )
         return process, url
-    except BaseException:
-        terminate_process_tree(process, grace_seconds=cleanup_grace_seconds)
+    except BaseException as primary_error:
+        try:
+            result = cleanup_provider_until(
+                process, time.monotonic() + 2 * cleanup_grace_seconds
+            )
+            setattr(primary_error, "provider_cleanup_result", result)
+        except Exception as cleanup_error:
+            setattr(primary_error, "provider_cleanup_error", type(cleanup_error).__name__)
         raise
 
 

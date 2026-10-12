@@ -10,6 +10,7 @@ import sqlite3
 import stat
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 import pytest
@@ -288,8 +289,19 @@ def test_published_artifact_details_preserves_one_rcc_identity_pair(tmp_path: Pa
         assert payload["specificationDigest"] == details.specification_digest
         assert payload["artifactDigest"] == details.artifact_digest
     finally:
-        provider_harness.terminate_process_tree(provider)
-        assert provider.poll() is not None
+        primary_error = sys.exc_info()[1]
+        try:
+            provider_cleanup = provider_harness.cleanup_provider_until(
+                provider, time.monotonic() + 20
+            )
+            if not provider_cleanup.complete:
+                raise RuntimeError("publication provider cleanup unconfirmed")
+        except Exception as cleanup_error:
+            if primary_error is None:
+                raise
+            setattr(
+                primary_error, "provider_cleanup_error", type(cleanup_error).__name__
+            )
 
     repository_root = Path(__file__).resolve().parents[3]
     source_commit = subprocess.check_output(
@@ -314,6 +326,7 @@ def test_published_artifact_details_preserves_one_rcc_identity_pair(tmp_path: Pa
         "source": {"commit": source_commit, "tree": source_tree},
         "control": {"commit": control_commit, "tree": control_tree},
         "rcc": {"version": rcc_version, "sha256": rcc_sha256},
+        "provider_cleanup": provider_cleanup.to_dict(),
         "publication": {
             "invocation_count": len(invocations),
             "provider": provider_url,
@@ -588,9 +601,12 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
                 cleanup_errors.append(f"Runtime pool cleanup: {type(error).__name__}")
         if provider is not None:
             try:
-                provider_harness.terminate_process_tree(provider)
-                if provider.poll() is None:
-                    cleanup_errors.append("selected RCC provider was not reaped")
+                provider_cleanup = provider_harness.cleanup_provider_until(
+                    provider, time.monotonic() + 20
+                )
+                evidence["provider_cleanup"] = provider_cleanup.to_dict()
+                if not provider_cleanup.complete:
+                    cleanup_errors.append("selected RCC provider cleanup unconfirmed")
             except Exception as error:
                 cleanup_errors.append(
                     f"selected RCC provider cleanup: {type(error).__name__}"

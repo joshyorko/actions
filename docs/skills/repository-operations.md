@@ -2498,6 +2498,20 @@ This gate covers worker cleanup and the already verified lease receipt's
 terminal shape. Provider reader cleanup, full ownership census, and independent
 lease-release observation remain separate native admission requirements.
 
+The provider harness retains the original startup `readline` thread against its
+exact `Popen` object, PID, and captured creation time. Stream failures cross the
+existing queue with their original exception identity; private cleanup evidence
+contains the fixed error class. A second startup reader is rejected.
+`cleanup_provider_until` checks that owner before signalling and uses the
+existing process-tree cleanup routine and startup-thread join under one absolute
+caller deadline. Missing or mismatched ownership, an unavailable or live reader,
+and observation errors cannot produce a complete cleanup result. Startup
+failure remains primary when cleanup observation also fails. The two native
+fixtures retain this typed result and require completion before reporting PASS.
+Its scope is the captured provider tree and startup reader: it does not prove
+an uncapped supervisor census, a single whole-test deadline, or lease release.
+The legacy `terminate_process_tree` routine remains a separate operation.
+
 Pooled worker retirement retains its existing stdout/stderr output threads and
 joins them together with the protocol reader using the caller's one deadline.
 Typed `WorkerReaderResult` values record each join, final alive state, and fixed
