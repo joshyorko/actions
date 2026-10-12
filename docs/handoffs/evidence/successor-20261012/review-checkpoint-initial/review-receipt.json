@@ -1,0 +1,111 @@
+{
+  "scope": "readonly successor checkpoint inventory/source/remote/doc review; no repository edits/native/build/infrastructure",
+  "checkpoint_base": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+  "historical_handoff_clean": true,
+  "payload_leaves": 6632,
+  "manifest_rows": 25,
+  "payload_bytes": 105553,
+  "manifest_sha256": "c88dec67a55491e92829a20cd8ed73096f27d37de659074498f155708a44081d",
+  "all_manifest_bytes_hashes_match": true,
+  "remote_heads": {
+    "refs/heads/community": "a70993fafc99a9f94041485542d5a720797ca394",
+    "refs/heads/fix/captured-child-cleanup-deadline-20261011": "bd4f3f8397dd4563fe767484bf7de15ab99a0123",
+    "refs/heads/fix/database-savepoint-admission-20261010": "b3defc66e7e127b071511f0ac1940847054dcaea",
+    "refs/heads/fix/rcc-candidate-wheel-identities-20261010": "b0a014512da9024003dcd4e09056a951c42c48c4",
+    "refs/heads/fix/runtime-release-changelog-selection-20261010": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+    "refs/heads/handoff/actions-swarm-mk3-wave8-20261010": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+    "refs/heads/integration/community-release-20261008": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "refs/heads/test/canvas-runtime-cache-isolation-20261010": "f75dcae52fcd78c5c382d3903b012e5b049ca48b"
+  },
+  "ci_snapshots": [
+    {
+      "pr": 305,
+      "head": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+      "snapshot_time": "2026-10-12T02:13:27.711932+00:00",
+      "pending": 0,
+      "success": 20
+    },
+    {
+      "pr": 306,
+      "head": "b3defc66e7e127b071511f0ac1940847054dcaea",
+      "snapshot_time": "2026-10-12T02:13:27.711932+00:00",
+      "pending": 8,
+      "success": 11
+    },
+    {
+      "pr": 307,
+      "head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+      "snapshot_time": "2026-10-12T02:13:27.711932+00:00",
+      "pending": 1,
+      "success": 22
+    },
+    {
+      "pr": 308,
+      "head": "b0a014512da9024003dcd4e09056a951c42c48c4",
+      "snapshot_time": "2026-10-12T02:13:27.711932+00:00",
+      "pending": 18,
+      "success": 6
+    },
+    {
+      "pr": 313,
+      "head": "bd4f3f8397dd4563fe767484bf7de15ab99a0123",
+      "snapshot_time": "2026-10-12T02:13:27.711932+00:00",
+      "pending": 1,
+      "success": 18
+    }
+  ],
+  "profile_source_files": [
+    {
+      "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "bytes": 81503,
+      "sha256": "8f21502f64fed9ee5d26eb6a080a625ee575954e1f659c1f51ee1ea31bda57c7",
+      "match": true
+    },
+    {
+      "path": "action_server/src/actions/server/_actions_process_pool.py",
+      "bytes": 60974,
+      "sha256": "af2090208ebff767dc40af6d40501d813c570d1171ce031dcb75276ac6a5fef5",
+      "match": true
+    },
+    {
+      "path": "action_server/src/actions/server/_common/process.py",
+      "bytes": 31134,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082",
+      "match": true
+    },
+    {
+      "path": "action_server/src/actions/server/_rcc_runtime_adapter.py",
+      "bytes": 36123,
+      "sha256": "c1884571a572277beef50e359f8b5e71abf593e1ebdee4bea2e47290c8da81f2",
+      "match": true
+    },
+    {
+      "path": "action_server/src/actions/server/_robo_utils/callback.py",
+      "bytes": 2092,
+      "sha256": "fa24e22f0fe04453b71b0f25ac8fa9f113511a9adc6d701d1e648f0931c3c441",
+      "match": true
+    },
+    {
+      "path": "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py",
+      "bytes": 62042,
+      "sha256": "cac4b36e157bea407b3943ff5b91d0cca6b29a2b86249a736563256c300cda8f",
+      "match": true
+    }
+  ],
+  "native_launch_permitted": false,
+  "native_attempts_consumed": 0,
+  "resource_headroom": 2802933760,
+  "proposed_floor": 3113851289,
+  "resource_admission": "HOLD self-binding unqualified; floor proposal unaccepted",
+  "safe_screen": "all files JSON, no symlinks/extras, credential/signedURL/rawlog-field patterns absent; manual receipt content inspection performed",
+  "finding": "Archived source-review hold clarified by explicit current projection; original bytes retained",
+  "documentation_proposal": "Keep historical receipts byte-identical; record later resolution in a separate current projection with exact source, evidence and remaining gates",
+  "verdict": "GO_CHECKPOINT_CONTENT",
+  "upstream_disposition": "none",
+  "checkpoint_document_sha256": "d0df77ca9df80cfc38aa88907e23177db2cf18f3cd2eabc9eda366c7224e6455",
+  "current_projection": {
+    "pr308_b0a_source_review": "RESOLVED GO_SOURCE by independent64controls; historical b0a profile/source receipt pre-review wording remains immutable",
+    "pr308_b0a_ci_native": "CI pending, native HOLD; no execution authorization inferred",
+    "pr308_local_c564_provider_delta": "SOURCE_CHECKPOINT_NOT_PUSHED_NOT_ACCEPTED pending independent review; b0a remains remote snapshot head"
+  }
+}

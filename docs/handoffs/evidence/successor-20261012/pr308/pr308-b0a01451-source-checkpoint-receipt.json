@@ -1,0 +1,86 @@
+{
+  "commands": {
+    "linux_mypy": {
+      "log": "native-worker-admission-typed-mypy.log",
+      "result": "PASS1file"
+    },
+    "native_execution": {
+      "result": "NOT_RUN,0attempts"
+    },
+    "native_worker_admission_final": {
+      "command": "prepared package python -m pytest -n0 -q -m not-integration staging+adapter, isolated basetemp/JUnit",
+      "log": "native-worker-admission-typed-final.log",
+      "result": "206 passed,1skipped,2deselected,4warnings;exit0"
+    },
+    "native_worker_admission_red": {
+      "log": "native-worker-admission-red.log",
+      "result": "27 failed expected missing guard"
+    },
+    "ruff_format_isort": {
+      "result": "PASSaffectedfixture"
+    },
+    "windows_mypy": {
+      "log": "native-worker-admission-typed-windows-mypy.log",
+      "result": "PASS1file diagnostic"
+    }
+  },
+  "evidence_files": {
+    "callback-typed-focused.xml": {
+      "bytes": 35006,
+      "sha256": "c03b21a09405475bc10834965d448fbb938ef9fc602bf2cc0570047a74789f62"
+    },
+    "callback-typed-source-full.log": {
+      "bytes": 384784,
+      "sha256": "f1acf9e77ff81bcb7e3a79dffe99b9bdf8b9a8ec815b1f1bae6f89a53f48bcf6"
+    },
+    "native-b0a01451-v2-resource-observation.json": {
+      "bytes": 715,
+      "sha256": "cd74ff4f8558be9464d78d94b29a0e479a1dc9d9e2be5a08a8e826f8b57716ff"
+    },
+    "native-baseline-profile-b0a01451-v2-SOURCE-PREPARED-NOTRUN.json": {
+      "bytes": 10596,
+      "sha256": "a92b5eb3a14a47e9f5fddfbf5edbdcd149be50c0ff77d6b7d4a0916c0d45f6ff"
+    },
+    "native-worker-admission-red.log": {
+      "bytes": 88788,
+      "sha256": "89187101e6aef8d9c4e7d8349a141ba87cdb5ec4bb510c98f303c58aade1bf14"
+    },
+    "native-worker-admission-typed-final.log": {
+      "bytes": 1256,
+      "sha256": "35cde160b1cc20b4b11872745098aa05aaeb1b108b76cdd7ef9397713e90d3e2"
+    },
+    "native-worker-admission-typed-final.xml": {
+      "bytes": 37682,
+      "sha256": "bc898efbab4ae39f55857871095ee137d37354ad17f91e1270a3de12057bc476"
+    },
+    "native-worker-admission-typed-mypy.log": {
+      "bytes": 42,
+      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    },
+    "native-worker-admission-typed-windows-mypy.log": {
+      "bytes": 42,
+      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    },
+    "self-cgroup-visible-direct-membership.json": {
+      "bytes": 1540,
+      "sha256": "c48321cb4d7c0f8b9a43ff457af6d51bc1305a68c71d147e0b61796a95bbb36b"
+    }
+  },
+  "head": "b0a014512da9024003dcd4e09056a951c42c48c4",
+  "profile_sha256": "a92b5eb3a14a47e9f5fddfbf5edbdcd149be50c0ff77d6b7d4a0916c0d45f6ff",
+  "remaining_blockers": [
+    "b0a exact source/fixture independent review and exact-head required CI are not yet accepted",
+    "provider startup reader is currently discarded by helper _readline_with_timeout; actual per-object join/error evidence missing",
+    "legacy provider terminate_process_tree returns None, resets grace/reap windows, and lacks typed provider cleanup/census",
+    "single global primary deadline and bounded terminal cleanup require current helper/fixture source/control qualification; no old ROOT/script grant applies",
+    "existing supervisor returned data lacks uncapped final PID/create-time census and robust failed/timeout evidence propagation",
+    "worker terminal receipt is not actual lease creation/release observation; lifecycle inspect help exposes a possible readonly path whose real bytes/semantics remain unqualified",
+    "actual self-cgroup endpoint unproven: route0::/, mountroot/.., visible cgroup.procs empty on two bounded reads; strict retained reader rejects mount root",
+    "proposed conservative3113851289 initial headroom/536870912 reserve remain unaccepted and uncalibrated, regardless visible mount free memory",
+    "fresh native namespace, overhead budget, before/during/after observer and terminal output retention not yet admitted"
+  ],
+  "schema": 1,
+  "tree": "cd59078ba05a78869f0b0d0ecd40410b6303e2e6",
+  "upstream_disposition": "none",
+  "worktree_clean": true
+}

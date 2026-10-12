@@ -1,0 +1,48 @@
+{
+  "verdict": "GO_PACKAGED_OAUTH_SCOPED",
+  "accepted_source_head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "accepted_source_tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+  "actual_producer_checkout": "500d640f6ab398efe4bcab6ccfda7a10db49d26e",
+  "producer_tree_equal_to_accepted_source": true,
+  "run_id": 38193048649,
+  "artifact_id": 11722158889,
+  "archive_sha256": "85d82c02bcfac718ac822b5f53308f5662dab222a6d97f767ecba4ae86bb106a",
+  "archive_size": 80754375,
+  "source_security_verdict": "GO_SOURCE_SECURITY_SCOPED: retained independent exact OAuth diff review against9760d5ec plus final23a source-test delta; all202trackedRuntimePythonfiles match accepted source in all6wheels; generated module is exactly2literalassignments containing the accepted secret-free input pair and hashes. No substantive remaining scoped source/security finding. This is a manual scoped review, not a blanket automated scan or release waiver.",
+  "package_contents": "Seven distributions verified independently against artifact API digest, aggregate archive, manifest, wheel RECORD hashes/sizes, accepted sources and inputs. Windows input CRLF digests retained separately from LF Git blobs. Sdist contains exact public inputs/pre-generated module/build.py/pyproject; no generator script and no rebuild was executed.",
+  "installed_consumer": "Existing isolated Poetry Linuxcp312 consumer version1.0.3, actual wheel direct_url hash/import ownership verified; nine tests passed independently, including real hosted getter rejection and real loopback PKCES256/client-secret exchange. Additional real bundled template probe created exact0600 bytes without mocking FILE_CONTENTS.",
+  "findings_remaining": [],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "insertion_point": "After the OAuth paragraph beginning Both owned inputs must validate",
+    "exact_delta": "Record both the Git blob digest and the actual checkout-input digest when validating packaged OAuth. Runtime Python sources are pinned to LF by `.gitattributes`; the OAuth YAML inputs use automatic text conversion and can be CRLF in Windows builds. Compare those strings with explicitly derived Windows checkout bytes and verify `INPUT_SHA256` against the packaged bytes. Retain the distinct raw digests instead of describing CRLF bytes as exact Git blob bytes.\n\nThe Runtime sdist carries the public YAML pair and pre-generated `_oauth2_config.py`; it does not carry `scripts/build_oauth2_config.py`. Its `build.py` obtains RCC without regenerating OAuth. Inspect the pre-generated module and both YAML inputs against the accepted source; builder execution remains a separate checkout test.\n\nInstalled-consumer OAuth proof must use the real bundled getter and template. A fixture replacing `_oauth2_config.FILE_CONTENTS` proves file-creation behavior but cannot prove packaged template contents. Bind imports and `direct_url.json` to the measured wheel, and record local candidate dependency wheels separately from public-registry dependencies.",
+    "durable_learning": "Preserve checkout conversion provenance; distinguish sdist bundled inputs from builder execution; distinguish real installed bundle evidence from mocked template controls and public dependency origins.",
+    "evidence": [
+      "independent-package-verification.json: all seven distributions and exact Windows CRLF/LF hashes",
+      "verify_packages.py: reproducible package and RECORD comparisons",
+      "checkout-provenance.json: actual synthetic checkout500d640f equals complete accepted tree137468f1",
+      "installed-real-bundle.json: actual installed imports, local wheel origin, real template bytes0600 and actual hosted getter",
+      "installed-oauth.junit.xml: nine installed tests passed; source inspection shows template-creation fixture replaces FILE_CONTENTS"
+    ],
+    "stale_or_ambiguous_guidance_removed": "Avoid claiming all platform input strings are exact LF Git bytes; avoid implying sdist includes the generator; avoid labeling mocked creation tests as proof of real bundled template contents or local candidate dependencies as public-registry installs.",
+    "remaining_uncertainty": "No sdist rebuild/install, Linuxcp313 installed execution, Windows/macOS installed execution, native executable acceptance, public-registry dependency-origin acceptance, signing, or publication was performed in this lane."
+  },
+  "evidence": [
+    "github-metadata.json",
+    "checkout-provenance.json",
+    "verify_packages.py",
+    "independent-package-verification.json",
+    "installed-real-bundle.json",
+    "installed-oauth.log",
+    "installed-oauth.junit.xml",
+    "documentation-proposal.json"
+  ],
+  "limitations": [
+    "Linuxcp312 consumer uses measured local Core/HTTP helper1.0.3 candidate wheels; public-registry origins remain unverified.",
+    "No sdist rebuild/install, Linuxcp313 installed execution, Windows/macOS installed execution, native executable qualification, WindowsACL privacy, full release, signing or publication acceptance.",
+    "Actual live provider registrations/services remain untested; synthetic loopback issuer does not establish them.",
+    "Original historical vendor acquisition/empty-string distribution failures remain failed or unqualified.",
+    "Parent initial LF-only and builder-inclusion verifier failures retained; independent first RECORD-directory and generated-module classification verifier failures also retained and corrected without altering package/source bytes."
+  ],
+  "upstream_disposition": "none"
+}

@@ -1,0 +1,359 @@
+{
+  "accepted_source_head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "accepted_source_tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+  "artifact_id": 11722158889,
+  "run_id": 38193048649,
+  "archive_sha256": "85d82c02bcfac718ac822b5f53308f5662dab222a6d97f767ecba4ae86bb106a",
+  "archive_size": 80754375,
+  "scope": "OAuth package/source/resource provenance and wheel RECORD integrity; no native execution or publication",
+  "members": [
+    {
+      "file": "actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl",
+      "sha256": "5bea3da441b6619f140da137dd95da3e86202680647afe157bac83d0899d8fb2",
+      "size": 13534544,
+      "record_entries_verified": 223,
+      "tracked_runtime_python_files_exact": 202,
+      "generated_python_files": [
+        "actions/server/_oauth2_config.py"
+      ],
+      "oauth_source_exact": true,
+      "public_inputs": [
+        {
+          "name": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "packaged_input_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "checkout_conversion": "none",
+          "exact_git_blob_bytes": true
+        },
+        {
+          "name": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "packaged_input_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "checkout_conversion": "none",
+          "exact_git_blob_bytes": true
+        }
+      ],
+      "requires_dist": [
+        "actions-core (>=1.0.2,<2.0.0)",
+        "actions-http-helper (>=1.0.3,<2.0.0)",
+        "actions-work-items (>=0.4.4,<0.5.0)",
+        "aiohttp (>=3.13.2,<4.0.0)",
+        "aiosmtplib (>=3.0.0,<4.0.0)",
+        "croniter (>=2.0.0,<3.0.0)",
+        "cryptography (>=46.0.3,<47.0.0)",
+        "fastapi-slim (>=0.121.1,<0.122.0)",
+        "jsonschema (>=4.23.0,<5.0.0)",
+        "jsonschema-specifications (>=2024.10.1,<2025.0.0)",
+        "mcp (>=2.0.0,<3.0.0)",
+        "msgspec (>=0.19,<0.20)",
+        "psutil (>=5.0,<8.0)",
+        "psycopg[binary] (>=3.2.0,<4.0.0)",
+        "pydantic (>=2.12.4,<3.0.0)",
+        "pytz (>=2024.1,<2025.0)",
+        "pyyaml (>=6.0.3,<7.0.0)",
+        "redis (>=5.0.0,<6.0.0)",
+        "requests (>=2,<3)",
+        "requests_oauthlib (>=2.0,<3.0)",
+        "rfc8785 (==0.1.4)",
+        "termcolor (>=3.2.0,<4.0.0)",
+        "uvicorn (>=0.38.0,<0.39.0)",
+        "watchfiles (>=1.1.1,<2.0.0)",
+        "websockets (>=15.0.1,<16.0.0)"
+      ]
+    },
+    {
+      "file": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "ff31635de80d6c30762bf86754d8d88c0102f5a66ade5bd32673adf63dee8efc",
+      "size": 14438881,
+      "record_entries_verified": 223,
+      "tracked_runtime_python_files_exact": 202,
+      "generated_python_files": [
+        "actions/server/_oauth2_config.py"
+      ],
+      "oauth_source_exact": true,
+      "public_inputs": [
+        {
+          "name": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "packaged_input_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "checkout_conversion": "none",
+          "exact_git_blob_bytes": true
+        },
+        {
+          "name": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "packaged_input_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "checkout_conversion": "none",
+          "exact_git_blob_bytes": true
+        }
+      ],
+      "requires_dist": [
+        "actions-core (>=1.0.2,<2.0.0)",
+        "actions-http-helper (>=1.0.3,<2.0.0)",
+        "actions-work-items (>=0.4.4,<0.5.0)",
+        "aiohttp (>=3.13.2,<4.0.0)",
+        "aiosmtplib (>=3.0.0,<4.0.0)",
+        "croniter (>=2.0.0,<3.0.0)",
+        "cryptography (>=46.0.3,<47.0.0)",
+        "fastapi-slim (>=0.121.1,<0.122.0)",
+        "jsonschema (>=4.23.0,<5.0.0)",
+        "jsonschema-specifications (>=2024.10.1,<2025.0.0)",
+        "mcp (>=2.0.0,<3.0.0)",
+        "msgspec (>=0.19,<0.20)",
+        "psutil (>=5.0,<8.0)",
+        "psycopg[binary] (>=3.2.0,<4.0.0)",
+        "pydantic (>=2.12.4,<3.0.0)",
+        "pytz (>=2024.1,<2025.0)",
+        "pyyaml (>=6.0.3,<7.0.0)",
+        "redis (>=5.0.0,<6.0.0)",
+        "requests (>=2,<3)",
+        "requests_oauthlib (>=2.0,<3.0)",
+        "rfc8785 (==0.1.4)",
+        "termcolor (>=3.2.0,<4.0.0)",
+        "uvicorn (>=0.38.0,<0.39.0)",
+        "watchfiles (>=1.1.1,<2.0.0)",
+        "websockets (>=15.0.1,<16.0.0)"
+      ]
+    },
+    {
+      "file": "actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+      "sha256": "d1380b2facacdfb83a5ec39e043a4dcb24e058cd54e420d67ba48260d80cf860",
+      "size": 11889144,
+      "record_entries_verified": 223,
+      "tracked_runtime_python_files_exact": 202,
+      "generated_python_files": [
+        "actions/server/_oauth2_config.py"
+      ],
+      "oauth_source_exact": true,
+      "public_inputs": [
+        {
+          "name": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "packaged_input_sha256": "1e0b41540b3b47237da389650a13442ac9077097d8e9e483d578133752eaf84a",
+          "checkout_conversion": "LF-to-CRLF",
+          "exact_git_blob_bytes": false
+        },
+        {
+          "name": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "packaged_input_sha256": "010885793045b41f294f49200925fbc550830716570741c4604c6bce785868ce",
+          "checkout_conversion": "LF-to-CRLF",
+          "exact_git_blob_bytes": false
+        }
+      ],
+      "requires_dist": [
+        "actions-core (>=1.0.2,<2.0.0)",
+        "actions-http-helper (>=1.0.3,<2.0.0)",
+        "actions-work-items (>=0.4.4,<0.5.0)",
+        "aiohttp (>=3.13.2,<4.0.0)",
+        "aiosmtplib (>=3.0.0,<4.0.0)",
+        "croniter (>=2.0.0,<3.0.0)",
+        "cryptography (>=46.0.3,<47.0.0)",
+        "fastapi-slim (>=0.121.1,<0.122.0)",
+        "jsonschema (>=4.23.0,<5.0.0)",
+        "jsonschema-specifications (>=2024.10.1,<2025.0.0)",
+        "mcp (>=2.0.0,<3.0.0)",
+        "msgspec (>=0.19,<0.20)",
+        "psutil (>=5.0,<8.0)",
+        "psycopg[binary] (>=3.2.0,<4.0.0)",
+        "pydantic (>=2.12.4,<3.0.0)",
+        "pytz (>=2024.1,<2025.0)",
+        "pyyaml (>=6.0.3,<7.0.0)",
+        "redis (>=5.0.0,<6.0.0)",
+        "requests (>=2,<3)",
+        "requests_oauthlib (>=2.0,<3.0)",
+        "rfc8785 (==0.1.4)",
+        "termcolor (>=3.2.0,<4.0.0)",
+        "uvicorn (>=0.38.0,<0.39.0)",
+        "watchfiles (>=1.1.1,<2.0.0)",
+        "websockets (>=15.0.1,<16.0.0)"
+      ]
+    },
+    {
+      "file": "actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl",
+      "sha256": "a35783bc59cb584dd9e9ed3684ba50d16df574ee903fc6c2141b2b214c00cbda",
+      "size": 13534543,
+      "record_entries_verified": 223,
+      "tracked_runtime_python_files_exact": 202,
+      "generated_python_files": [
+        "actions/server/_oauth2_config.py"
+      ],
+      "oauth_source_exact": true,
+      "public_inputs": [
+        {
+          "name": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "packaged_input_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "checkout_conversion": "none",
+          "exact_git_blob_bytes": true
+        },
+        {
+          "name": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "packaged_input_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "checkout_conversion": "none",
+          "exact_git_blob_bytes": true
+        }
+      ],
+      "requires_dist": [
+        "actions-core (>=1.0.2,<2.0.0)",
+        "actions-http-helper (>=1.0.3,<2.0.0)",
+        "actions-work-items (>=0.4.4,<0.5.0)",
+        "aiohttp (>=3.13.2,<4.0.0)",
+        "aiosmtplib (>=3.0.0,<4.0.0)",
+        "croniter (>=2.0.0,<3.0.0)",
+        "cryptography (>=46.0.3,<47.0.0)",
+        "fastapi-slim (>=0.121.1,<0.122.0)",
+        "jsonschema (>=4.23.0,<5.0.0)",
+        "jsonschema-specifications (>=2024.10.1,<2025.0.0)",
+        "mcp (>=2.0.0,<3.0.0)",
+        "msgspec (>=0.19,<0.20)",
+        "psutil (>=5.0,<8.0)",
+        "psycopg[binary] (>=3.2.0,<4.0.0)",
+        "pydantic (>=2.12.4,<3.0.0)",
+        "pytz (>=2024.1,<2025.0)",
+        "pyyaml (>=6.0.3,<7.0.0)",
+        "redis (>=5.0.0,<6.0.0)",
+        "requests (>=2,<3)",
+        "requests_oauthlib (>=2.0,<3.0)",
+        "rfc8785 (==0.1.4)",
+        "termcolor (>=3.2.0,<4.0.0)",
+        "uvicorn (>=0.38.0,<0.39.0)",
+        "watchfiles (>=1.1.1,<2.0.0)",
+        "websockets (>=15.0.1,<16.0.0)"
+      ]
+    },
+    {
+      "file": "actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "f27b83e56a0df85e54c5658ab115b6cbc2c225b3400b412534668440d245a4e0",
+      "size": 14438881,
+      "record_entries_verified": 223,
+      "tracked_runtime_python_files_exact": 202,
+      "generated_python_files": [
+        "actions/server/_oauth2_config.py"
+      ],
+      "oauth_source_exact": true,
+      "public_inputs": [
+        {
+          "name": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "packaged_input_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "checkout_conversion": "none",
+          "exact_git_blob_bytes": true
+        },
+        {
+          "name": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "packaged_input_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "checkout_conversion": "none",
+          "exact_git_blob_bytes": true
+        }
+      ],
+      "requires_dist": [
+        "actions-core (>=1.0.2,<2.0.0)",
+        "actions-http-helper (>=1.0.3,<2.0.0)",
+        "actions-work-items (>=0.4.4,<0.5.0)",
+        "aiohttp (>=3.13.2,<4.0.0)",
+        "aiosmtplib (>=3.0.0,<4.0.0)",
+        "croniter (>=2.0.0,<3.0.0)",
+        "cryptography (>=46.0.3,<47.0.0)",
+        "fastapi-slim (>=0.121.1,<0.122.0)",
+        "jsonschema (>=4.23.0,<5.0.0)",
+        "jsonschema-specifications (>=2024.10.1,<2025.0.0)",
+        "mcp (>=2.0.0,<3.0.0)",
+        "msgspec (>=0.19,<0.20)",
+        "psutil (>=5.0,<8.0)",
+        "psycopg[binary] (>=3.2.0,<4.0.0)",
+        "pydantic (>=2.12.4,<3.0.0)",
+        "pytz (>=2024.1,<2025.0)",
+        "pyyaml (>=6.0.3,<7.0.0)",
+        "redis (>=5.0.0,<6.0.0)",
+        "requests (>=2,<3)",
+        "requests_oauthlib (>=2.0,<3.0)",
+        "rfc8785 (==0.1.4)",
+        "termcolor (>=3.2.0,<4.0.0)",
+        "uvicorn (>=0.38.0,<0.39.0)",
+        "watchfiles (>=1.1.1,<2.0.0)",
+        "websockets (>=15.0.1,<16.0.0)"
+      ]
+    },
+    {
+      "file": "actions_runtime-1.0.3-cp313-cp313-win_amd64.whl",
+      "sha256": "304445a416d6d1dd67e1485f65835eb915604d5e7cea7628f587ee43c3b43910",
+      "size": 11889144,
+      "record_entries_verified": 223,
+      "tracked_runtime_python_files_exact": 202,
+      "generated_python_files": [
+        "actions/server/_oauth2_config.py"
+      ],
+      "oauth_source_exact": true,
+      "public_inputs": [
+        {
+          "name": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "packaged_input_sha256": "1e0b41540b3b47237da389650a13442ac9077097d8e9e483d578133752eaf84a",
+          "checkout_conversion": "LF-to-CRLF",
+          "exact_git_blob_bytes": false
+        },
+        {
+          "name": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "packaged_input_sha256": "010885793045b41f294f49200925fbc550830716570741c4604c6bce785868ce",
+          "checkout_conversion": "LF-to-CRLF",
+          "exact_git_blob_bytes": false
+        }
+      ],
+      "requires_dist": [
+        "actions-core (>=1.0.2,<2.0.0)",
+        "actions-http-helper (>=1.0.3,<2.0.0)",
+        "actions-work-items (>=0.4.4,<0.5.0)",
+        "aiohttp (>=3.13.2,<4.0.0)",
+        "aiosmtplib (>=3.0.0,<4.0.0)",
+        "croniter (>=2.0.0,<3.0.0)",
+        "cryptography (>=46.0.3,<47.0.0)",
+        "fastapi-slim (>=0.121.1,<0.122.0)",
+        "jsonschema (>=4.23.0,<5.0.0)",
+        "jsonschema-specifications (>=2024.10.1,<2025.0.0)",
+        "mcp (>=2.0.0,<3.0.0)",
+        "msgspec (>=0.19,<0.20)",
+        "psutil (>=5.0,<8.0)",
+        "psycopg[binary] (>=3.2.0,<4.0.0)",
+        "pydantic (>=2.12.4,<3.0.0)",
+        "pytz (>=2024.1,<2025.0)",
+        "pyyaml (>=6.0.3,<7.0.0)",
+        "redis (>=5.0.0,<6.0.0)",
+        "requests (>=2,<3)",
+        "requests_oauthlib (>=2.0,<3.0)",
+        "rfc8785 (==0.1.4)",
+        "termcolor (>=3.2.0,<4.0.0)",
+        "uvicorn (>=0.38.0,<0.39.0)",
+        "watchfiles (>=1.1.1,<2.0.0)",
+        "websockets (>=15.0.1,<16.0.0)"
+      ]
+    },
+    {
+      "file": "actions_runtime-1.0.3.tar.gz",
+      "sha256": "e82ba23aa613a56ed9cdea50c6ad1d07685b62e68b591ce1d45cc8f786643208",
+      "size": 1278747,
+      "oauth_source_inputs_build_py_pyproject_exact": true,
+      "public_inputs": [
+        {
+          "name": "actions-oauth-config.yaml",
+          "git_blob_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "packaged_input_sha256": "1e44d4f0632e3456c5e50c48ece2927b1272c2a9d10708290e6e78319665d95c",
+          "checkout_conversion": "none",
+          "exact_git_blob_bytes": true
+        },
+        {
+          "name": "oauth-config.yaml",
+          "git_blob_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "packaged_input_sha256": "9cf0190ac3abc0ebcc86e655c34be70073680fa4e83cbd674c803434d8c58a07",
+          "checkout_conversion": "none",
+          "exact_git_blob_bytes": true
+        }
+      ],
+      "builder_script_distributed": false,
+      "note": "sdist contains exact pre-generated OAuth bundle; build.py performs RCC acquisition and does not regenerate it"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "verdict": "GO_SOURCE",
+  "base": "06086c63a681bb9cb117387675c98ca3824ce7cc",
+  "head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+  "scope": "two-file source-test and canonical documentation delta only",
+  "findings_remaining": [],
+  "evidence": [
+    "source-only-delta-control.json binds exact final test blob and records priorEXPECTED_RED/newPASS with generated imports forbidden",
+    "../oauth-no-generated-final.log records52PASS; parent reports generated module physically absent for this run",
+    "git diff --check base..head passes",
+    "independent local generated module FILE_CONTENTS/INPUT_SHA256 still match both exact committed inputs"
+  ],
+  "historical_failures_preserved": [
+    "06086 toolkit failure parent reports ModuleNotFoundError in clean source test; reviewer did not independently retrieve hosted raw log, local pr307-toolkit-primary-failure.log is empty",
+    "oauth-source-only-fix.log retains intermediate missingPath1FAIL8PASS"
+  ],
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "previous_proposal_disposition": "Exact trailing-slash registration lesson is integrated in23a6be50.",
+    "durable_learning": "Portable source tests use tracked public catalog through getter boundary; builder and generated package/installed behavior remain separate checks.",
+    "evidence": "Independent prior/new import-blocking controls; final52PASS log; direct two-file diff.",
+    "stale_or_ambiguous_guidance_removed": "Source test no longer silently depends on a locally generated build module.",
+    "remaining_uncertainty": "Fresh exact-head hosted CI, package/native/installed acceptance remain pending."
+  },
+  "upstream_disposition": "none"
+}

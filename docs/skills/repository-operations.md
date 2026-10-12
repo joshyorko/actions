@@ -937,6 +937,11 @@ Actions assets, and record clean install and upgrade proof on each supported
 Cask platform. A tap source change or green Actions release does not prove
 consumer installation. The current 1.0.1 Cask/hash match is only a baseline;
 Runtime 1.0.3 native assets and its Cask consumer proof remain pending.
+The tap's manual contract takes `package_id=action-server`, with `action=ci`
+before `action=release`; auto-update takes `slot_id=action-server-daily`.
+Verify these inputs at the actual tap revision before dispatch. The Actions
+producer and tap consumer have separate run identities: retain both, the
+upstream asset digests, the resulting Cask revision, and install/upgrade evidence.
 The normal binary job creates a published release before downloading/uploading
 the assets: `Roang-zero1/github-create-release-action@57eb9bdce7a964e48788b9e78b5ac766cb684803`
 defaults to `create_draft=false` and `update_existing=false`. It then uploads
@@ -1106,33 +1111,11 @@ after manifest creation and Twine checking, before artifact retention or upload.
 The verifier accepts cibuildwheel's interpreter-plus-ABI wheel names for the
 cp312/cp313 manylinux x86_64, macOS 12 arm64, and Windows amd64 set while
 rejecting mismatched ABI tags. The sdist and wheel build steps expose only
-`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR frontend and OAuth steps omit release credentials, but the OAuth step
-still invokes the same external acquisition task. Secret isolation does not prove
-equivalent generated configuration: the pre-guard task ignored acquisition exit
-codes and embeds stdout, so authentication failure can yield empty strings and
-a GitHub API error response can yield nonempty YAML mappings. PAT-bearing PyPI
-build variants are limited to tag pushes; that condition does not qualify their
-configuration source or payload.
-
-Installed-wheel member equality and successful CLI imports do not establish
-generated OAuth content. Qualify `actions_config` and `default_user_config`
-separately against an owner-approved immutable source pair. The consumer expects
-`oauth2Config.providers` mappings; default user provider selection also requires
-`mode` (`actions` or `custom`), and selected settings require `clientId` plus valid
-authorization/token endpoints after defaults are resolved. An empty string, or an
-API error mapping with `message`, `documentation_url`, and `status`, does not meet
-that contract. Retain source identities, acquisition status and content digests
-without publishing configuration or credentials. Missing source or failed
-admission keeps OAuth/release qualification on hold even when a narrower wheel
-consumer passes. A repository metadata 404 establishes only that the current
-connection could not resolve it; it does not establish private, missing, retired,
-or replacement-source status. Recovery executes build tasks from immutable
-`release-source`, so a current task fix does not repair an older release target
-without a separately reviewed acquisition/admission boundary. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
+`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR and tag builds generate the owned
+OAuth inputs offline with no acquisition token. Matching command names alone
+do not establish matching generated payloads; inspect the input digests.
+Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
 from the child environment, while upload receives only the exact PyPI token.
-
-The reviewed PR307 guard has the following source contract; current integration
-and hosted admission remain separate gates until it is accepted.
 
 `inv build-oauth2-config` delegates to Runtime's installed Poetry environment.
 Generated and manual OAuth artifact producers install Runtime through `inv install`
@@ -1142,42 +1125,52 @@ interpreter. The task removes outer virtualenv, Conda and Python activation hint
 from the replacement child environment so Poetry selects Runtime's environment.
 Removing only `VIRTUAL_ENV` leaves an active RCC `CONDA_PREFIX` able to select the
 toolchain interpreter. Verify the actual
-Invoke-to-Poetry boundary with controlled acquisition, including failure, rather
+Invoke-to-Poetry boundary with owned input reading, including failure, rather
 than qualifying only direct helper calls.
 
-The OAuth build guard checks each binary acquisition's exit status and bounds it
-to 30 seconds. It rejects invalid UTF-8, blank bodies, malformed safe YAML and
-documents lacking mapping root, `oauth2Config` and `providers` values. Both inputs
-must pass before a same-directory atomic module replacement. The module retains
-the original strings, including their line endings; failure preserves the previous
-module and primary exception while attempting to remove only task-owned temporary
-files. A cleanup failure is reported separately without replacing the primary error.
-CLI failures expose fixed input names and reason categories, never raw acquisition
-stdout, stderr, configuration or credentials.
+The public OAuth build is offline. Its tracked inputs are
+`action_server/oauth2/actions-oauth-config.yaml` and
+`action_server/oauth2/oauth-config.yaml`; both must be regular files, at most
+64 KiB, strict UTF-8, unique-key safe YAML, and exactly the versioned
+`formatVersion: '1.0.0'` / `oauth2Config.providers: {}` document. Comments are
+preserved. The explicit empty hosted catalog means the community ships no
+hosted application registrations. It supplies no client credentials and does
+not advertise provider support. Operators keep their registered applications
+in private `--oauth2-settings` files with `mode: custom`. Public endpoint
+metadata remains in the existing settings resolver. `mode: actions` for an
+absent provider fails clearly; blank custom client IDs are rejected. Missing
+optional client secrets preserve PKCE S256. Register the exact redirect URI
+`<Runtime base URL>/actions/oauth2/`, including its trailing slash. The callback
+route alone does not define the URI emitted to the issuer. Outbound provider OAuth, Runtime
+API-key/browser sessions, and inbound MCP client authorization remain separate
+contracts.
 
-A hosted fixed-input acquisition failure identifies checked acquisition, not
-malformed YAML, provider shape or atomic replacement. Classify the first failed
-step: skipped downstream builds/tests are unexecuted, and a cancelled sibling
-does not establish the same cause. The first input must succeed before the second
-is requested or either replaces the generated module. Numeric exit codes do not
-identify authentication, transport or repository-access cause when stderr stays
-private. Inspect each actual producer workflow separately: package-release PR
-steps have no acquisition-token declaration, Runtime tests declare a secret-backed
-token, and unsigned binary steps declare the workflow token. A declaration does
-not prove availability or permission. Preserve the guard and release HOLD until
-the approved pair and authorized acquisition context are established.
+Both owned inputs must validate before same-directory atomic module replacement.
+Generated `FILE_CONTENTS` preserves their original strings and `INPUT_SHA256`
+binds each filename to its exact UTF-8 bytes. Failure preserves the previous
+module and reports only fixed input names and reason categories, never input
+bodies. New user configs are written as private mode-0600 temporary files and
+published exclusively after flush/fsync, preserving an existing regular operator
+file. Symlinks and other special destinations fail; POSIX mode evidence does
+not establish Windows ACL privacy. Unsupported hardlink publication fails
+without overwriting an operator file.
 
-These checks establish acquisition and consumer-compatible structural shape only.
-They do not establish an approved source pair or revision, supported provider
-policy, or actual OAuth behavior. An empty providers mapping is structurally
-admissible, without qualifying it as release content. The existing unpinned
-`Sema4AI/oauth-public-configs` authority remains unchanged; full OAuth and release
-source admission remain on hold until the owner identifies the authoritative pair.
-Do not replace unavailable input with a guessed repository, provider stub,
-successful skip or disabled-provider policy. Recovery invokes the task from
-immutable `release-source/action_server`, so the installed environment and task
-version belong to that source; a current helper fix does not repair an older
-release target.
+The generator and generated OAuth steps require no cross-repository token.
+Keep release upload credentials scoped to their own publication steps. The
+source tests exercise actual owned-issuer token exchange for custom PKCE and
+client-secret configurations; those synthetic registrations do not prove live
+provider service acceptance. Qualify wheel, sdist, native and installed startup
+contents separately, including the exact generated input hashes and explicit
+missing/unsupported-provider failures. Historical vendor acquisition failures
+and empty-string artifacts remain failed or unqualified; new source does not
+repair those bytes. Recovery runs tasks from immutable `release-source`, so
+older release targets still use their original builder and input authority.
+
+Record both the Git blob digest and the actual checkout-input digest when validating packaged OAuth. Runtime Python sources are pinned to LF by `.gitattributes`; the OAuth YAML inputs use automatic text conversion and can be CRLF in Windows builds. Compare those strings with explicitly derived Windows checkout bytes and verify `INPUT_SHA256` against the packaged bytes. Retain the distinct raw digests instead of describing CRLF bytes as exact Git blob bytes.
+
+The Runtime sdist carries the public YAML pair and pre-generated `_oauth2_config.py`; it does not carry `scripts/build_oauth2_config.py`. Its `build.py` obtains RCC without regenerating OAuth. Inspect the pre-generated module and both YAML inputs against the accepted source; builder execution remains a separate checkout test.
+
+Installed-consumer OAuth proof must use the real bundled getter and template. A fixture replacing `_oauth2_config.FILE_CONTENTS` proves file-creation behavior but cannot prove packaged template contents. Bind imports and `direct_url.json` to the measured wheel, and record local candidate dependency wheels separately from public-registry dependencies.
 
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The
@@ -3198,6 +3191,28 @@ and require complete current-target merge gates before integration. A reviewed
 diagnostic design can remain deferred when no current failure requires it; design
 review does not establish implemented instrumentation or authorize another run.
 
+Bind a hosted PR failure to the runner's actual synthetic merge commit and
+ordered parents. A retained PR head and an updated target branch do not identify
+that checkout. Refresh a stale base with an ordinary merge, then qualify the new
+head independently. Keep a first-readiness timeout separate from a later
+incomplete descendant cleanup observation; neither establishes the other's cause.
+
+Native admission requires a verified self-cgroup identity as well as resource
+headroom. A visible cgroup mount rooted at `/..` and an empty `cgroup.procs`
+observation do not prove that the budget belongs to the current process. Retain
+the failed binding and keep native execution on hold; do not replace the strict
+mount-root check with an assumption based on plausible memory counters.
+
+Reader error observers preserve ordinary callback dispatch order and isolate
+ordinary `Exception` failures once, without retry. `BaseException` control flow
+continues to propagate. Attribute errors to the retained thread object, rather
+than its reusable name or numeric identity; unmatched owners remain unverified.
+Each retirement attempt shares one caller deadline across tree and reader waits.
+A later retry may receive a new deadline but must observe the same retained
+readers. Keep cleanup flags as exact booleans: numeric aliases do not establish
+clean observations. Missing or null cleanup collections remain rejection cases;
+only explicitly empty lists or tuples report no survivors or errors.
+
 Published Runtime wheels can supply historical generated bytes for inspection,
 but publication does not identify an approved configuration source pair, immutable
 revision or provider policy. Authenticate the public metadata and whole wheel,
@@ -3687,3 +3702,20 @@ For a namespace package declared with `from = "src"`, align a separately authori
 Validate output addresses selected by every executable config field, not only the launcher's CONFIG filename and attempt root. A cloned generator/origin probe may retain a prior attempt's output literals even when all current source and immutable input hashes match. Bind output bases to the fresh current phase directories; keep historical read-only input addresses unchanged. Inspect nested Python code strings as well as outer code. Retain a failure that occurs before generator execution as an executor address failure, not a generated-workflow mismatch. Before claiming historical outputs were preserved, require a recorded body baseline; successful guards protect only the rows they actually checked.
 
 At the selected process-launch boundary, derive the command timeout and parent fallback from the same fresh remaining-deadline measurement. A later positive-only check does not preserve a grace reserve computed before output setup. Refuse a new stage when the final remainder cannot cover its reserved kill and fallback handling.
+
+Keep archived receipts byte-identical when later evidence resolves a hold.
+Record the superseding source identity, evidence, acceptance scope, and
+remaining gates in a separate current projection. Historical FAIL and
+NOT_RUN results retain their original meaning.
+
+For an owned-process census, inspect each retained PID through a fresh handle
+and compare creation time before status. NoSuchProcess reports absence;
+a changed creation time reports reuse; denied inspection remains unknown.
+An incomplete snapshot or reused/unknown identity is not signal authority.
+This observation rule does not prove a hard deadline, reader shutdown,
+descendant reaping, or application-lease closure. Record those separately.
+A declared 640-second budget is not an enforced boundary: the independent
+TERM-at-630/KILL-at-640 mechanism must cover a stalled cooperative clock,
+while the owner deadline covers waits, final observations and terminal evidence.
+Before/after guards have separately bounded lifetimes; Python census/fsync
+or terminal writes cannot establish an independent hard deadline.

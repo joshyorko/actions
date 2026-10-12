@@ -1,0 +1,48 @@
+{
+  "after": {
+    "cgroup_directory_device": 24,
+    "cgroup_directory_inode": 148,
+    "namespace_device": 4,
+    "namespace_inode": 4026532205,
+    "own_create_time": 1791770193.49,
+    "own_pid": 25912,
+    "self_route_sha256": "e57fd7b21104f091de366ace1464596378a498b0a5e63f1b21147a8998c20107"
+  },
+  "before": {
+    "cgroup_directory_device": 24,
+    "cgroup_directory_inode": 148,
+    "namespace_device": 4,
+    "namespace_inode": 4026532205,
+    "own_create_time": 1791770193.49,
+    "own_pid": 25912,
+    "self_route_sha256": "e57fd7b21104f091de366ace1464596378a498b0a5e63f1b21147a8998c20107"
+  },
+  "first": {
+    "cap_exceeded": false,
+    "descriptor_device": 24,
+    "descriptor_inode": 150,
+    "elapsed_seconds": 5.637999947794015e-06,
+    "entry_count": 0,
+    "invalid_token_count": 0,
+    "own_pid_directly_present": false,
+    "raw_bytes": 0,
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "guard_changes": false,
+  "identity_stable": true,
+  "other_process_ids_emitted": false,
+  "prior_probe_failure": "CGROUP_PROCS_SCHEMA, no successful receipt emitted",
+  "schema": 1,
+  "second": {
+    "cap_exceeded": false,
+    "descriptor_device": 24,
+    "descriptor_inode": 150,
+    "elapsed_seconds": 8.810002327663824e-07,
+    "entry_count": 0,
+    "invalid_token_count": 0,
+    "own_pid_directly_present": false,
+    "raw_bytes": 0,
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "status": "DIRECT_SELF_BINDING_UNPROVEN_NATIVE_HOLD"
+}

@@ -1,4 +1,50 @@
 # Community engineering ledger
+
+## Runtime 1.0.3 release boundary
+
+The retained 54 contracts describe the full platform mission. The release
+projection preserves their contract hashes, raw states and criterion assessments;
+it neither closes issues nor changes accepted historical attribution. See the
+[source-bound per-issue projection](../handoffs/evidence/successor-20261012/release-graph-projection/projection.json).
+Open status alone establishes neither missing implementation nor a release blocker.
+
+The community Runtime release must qualify its affected security/import/auth/origin
+boundaries (#151–153), public-package and installed-consumer compatibility (#195),
+released Work Items and Runs defects (#208/#212), embedded/frozen UI and resources
+(#96–98), public dependencies/templates (#125), and native/community distribution
+(#211). Existing narrowed proofs remain scoped; none replaces full acceptance of
+an issue or a promised shipping surface. Package, source, native and consumer
+proofs have distinct identities. RCC 18.19.3 execution, descendants, readers,
+leases and resource admission are mandatory; newer RCC versions are optional
+unless an existing explicit release contract requires them. Actual installed
+Runtime consumers are required before publication, including compatibility with
+the released Core/Helper prerequisites.
+
+Keep current supported SQLite and any advertised PostgreSQL behavior in the
+release support matrix. The full split-runtime, migration-race and rolling-upgrade
+contract in #84 is a later slice unless explicitly promised for this release;
+this distinction does not silently remove advertised modes. Preserve the local
+RCC slice in #134 separately from its full provider/lifecycle contract. The #155
+roadmap remains open: this projection records a delivery boundary, not complete
+compatibility or experimental-adapter policy acceptance.
+
+Later full contracts remain in the existing graph: immutable Package/Deployment
+identity and compilation (#129/#130/#135/#136/#148), durable Runs/Attempts,
+outputs, bindings and review (#83/#86/#87/#92), execution/adapters/placements
+(#90/#133/#138/#139/#142/#143), MCP Tasks, Robot Tasks and durable Work Items
+(#85/#132/#144), providers/exposure (#131/#196/#214), Canvas/authoring/templates
+(#71/#99/#100/#127), and Control Room/CLI/workflows (#145/#146/#147/#141).
+They are subsequent delivery slices, with current shipping obligations retained
+in the projection. #82/#93/#101 continue coordinating this mission. #210 remains
+the accepted closure; preserve narrow #162/#194/#209 recommendations without
+closing them on a release shortcut. #279 remains separately tracked outside
+the retained graph, and #293–296 remain human-held and undispatched.
+
+No release follows from this projection. Runtime 1.0.3 stays on HOLD until its
+real source/security/CI, OAuth, native/platform, installed/resource/dependency,
+metadata/checksum/signing-label, distribution and publication-authority gates
+pass. RCC 18.19.6 publication HOLD remains separate and absolute.
+
 [Previous convergence snapshot](community-resume-20261009.json): at 2026-10-10T04:41:32Z, 20/28 PRs target-integrated, 8 open/blocked, 0 ready; integration `6d438feb`. PR273 `84b8c70a` has 17/21 checks success, 3 failures, 1 skipped: the same credential assertion fails on each OS before network access because both secret inputs are empty. Native, wheel/sdist, toolkit, coverage, verify, audit and all-OS lint/type/docs pass; no package was published. The d8 bounded RCC consumer proof is accepted after raw receipt readback; missing child/Core provenance and the unexplained older -11 remain. [Dated receipt](evidence/convergence-followup-20261010T0441Z.json).
 54 contracts retained; 53 currently open, 1 accepted/closed (#210), 0 whole-issue review-ready. Whole-issue stage counts are unchanged.
 

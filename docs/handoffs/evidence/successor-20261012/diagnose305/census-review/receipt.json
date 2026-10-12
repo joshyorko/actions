@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "status": "SOURCE_ONLY_CENSUS_REVIEW_PASS_PRIMARY640_HOLD",
+  "scope": "/workspace/successor-evidence/pr305-primary640-successor",
+  "source_artifact_binding": {
+    "baseline": {
+      "file": "retained-owner-baseline.py",
+      "sha256": "7d0b24e76d4e632719450ffea641ce858cc891edabddcbbed9c1c4bcfa5942bc"
+    },
+    "candidate": {
+      "file": "fresh-owner-census-candidate.py",
+      "sha256": "933fcc8461c4e2047759f44833404138162e02724935f1dc6c7e657c77e95f36"
+    },
+    "diff_review": "Only census() changed: it obtains a fresh Process(pid), compares create_time first, then classifies zombie/live. No authority, launcher, inputs, timeout geometry, or execution path changes in the candidate source."
+  },
+  "census_mapping": {
+    "reused_pid": "fresh creation time differs -> reused",
+    "current_absence": "fresh Process(pid) raises NoSuchProcess -> absent",
+    "identity_denied": "inspection error -> unknown",
+    "zombie": "matching creation time and current status STATUS_ZOMBIE -> zombie",
+    "live": "matching creation time and non-zombie status -> live",
+    "enumeration_failure": "snapshot_complete remains false and errors records enumeration exception",
+    "signal_gate": "signal_owned rejects incomplete/error/unknown/reused snapshots before sending signals"
+  },
+  "controls": {
+    "prior_baseline_log": "census-baseline-red.log (4 failed cases)",
+    "prior_candidate_log": "census-candidate-green.log (4 passed cases)",
+    "new_evidence_only_controls_added": [
+      "current absent PID maps to absent",
+      "child-enumeration PermissionError remains an incomplete snapshot",
+      "signal_owned fails closed without signaling for reused and denied identities"
+    ],
+    "synthetic_no_process_manual_run": "PASS reused, zombie, live, absent, denied, enumeration-failure, no-signal-reused, no-signal-denied",
+    "AST_parse": "PASS for candidate and test source",
+    "pytest_rerun": "NOT RUN: current host Python reports No module named pytest; existing 4-RED/4-GREEN logs were inspected, not regenerated"
+  },
+  "primary640_gate": {
+    "decision": "HOLD",
+    "reason": "The candidate file has cooperative 600 seconds and parent fallback 620/absolute 640 values, but this source-only package does not include the complete independent GNU TERM-at-630/KILL-at-640 consumer/profile or portable executed controls proving the clock. The Python owner deadline can be exceeded by stalls in final census/fsync/receipt writes; the independent outer kill remains required.",
+    "reader_gap": "Regular-file stdio proves no outer Popen reader threads only; original helper/provider thread inventory and joined reader terminal states are not measured by this candidate.",
+    "descendant_gap": "Synthetic census controls do not exercise owner subreaper, process descendants, waitpid drain, PID reuse under a real process, or cleanup timing.",
+    "lease_gap": "lease_identity_matches verifies only the synthetic owner lease JSON; it does not prove actual RCC/Action lease closure.",
+    "adoption_boundary": "Keep as a new successor checkpoint artifact; do not place in #305 production until portable 640 control profile is independently qualified."
+  },
+  "documentation_improvement": {
+    "canonical_file_proposed": "docs/skills/repository-operations.md",
+    "exact_delta": "For an owned-process census, classify each retained (PID, creation-time) identity by opening a fresh process handle and comparing creation time before status. Map NoSuchProcess to absent, a changed creation time to reused, zombie status to zombie, and denied or other inspection errors to unknown. Do not signal when the snapshot is incomplete or any identity is reused/unknown. This census rule does not prove hard-deadline enforcement, reader shutdown, descendant reaping, or application-lease closure; record those predicates separately.",
+    "evidence": "Baseline/candidate source diff, existing 4-failure/4-pass logs, and the added evidence-only absent/enumeration/fail-closed controls; no execution of run_exclusive or old authority."
+  },
+  "upstream_disposition": "none",
+  "operations": "No old grants, run_exclusive, native/RCC, or process-launch paths executed; no product or tracked Git files modified."
+}

@@ -1,0 +1,18 @@
+{
+  "observed_at_utc": "2026-10-12T02:31:32.482751+00:00",
+  "pr": 307,
+  "state": "closed",
+  "merged": true,
+  "merged_at": "2026-10-12T02:30:54Z",
+  "source_head": "23a6be5044f7a9377180f7ec7d33c50ad8c4c364",
+  "target": "integration/community-release-20261008",
+  "merge_commit": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+  "merge_tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+  "ordered_parents": [
+    "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+    "23a6be5044f7a9377180f7ec7d33c50ad8c4c364"
+  ],
+  "remote_target_sha": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+  "normal_merge_path": "gh pr merge --merge --match-head-commit23a (noadmin/no force/no branchdeletion)",
+  "runtime_release": "HOLD"
+}

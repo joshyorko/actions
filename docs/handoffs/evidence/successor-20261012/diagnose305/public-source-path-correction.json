@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "status": "READONLY_PUBLIC_SOURCE_PATH_CORRECTION",
+  "supersedes_interpretation_not_original_receipt": "/workspace/successor-evidence/diagnose305/readonly-source-audit.json",
+  "verification": {
+    "repository": "joshyorko/actions",
+    "commit": "f75dcae52fcd78c5c382d3903b012e5b049ca48b",
+    "tree": "851834ae6cc87f42abfcf3c963542191e2815599",
+    "commit_parents": [
+      "5306eeb26595da4ce571b99812eb50f047cfc903",
+      "e2c81adce7858d5a952991ba9a8b7f72e902038a"
+    ],
+    "path": "action_server/scripts/verify_dakota_rcc_acceptance.py",
+    "mode": "100644",
+    "git_blob": "4f155d2f63e86b38697c12557dd8a6550b9d36a3",
+    "bytes": 74274,
+    "raw_sha256": "60acf72569c2dfe5748f45ac6c3bf4cc8621e28955a4afa3dbf2f417d7290659",
+    "private_binding_sha256_match": true,
+    "evidence": [
+      "GitHub commit REST response names exact commit and tree tuple above.",
+      "GitHub tree REST response for tree 851834ae6cc87f42abfcf3c963542191e2815599 includes this exact path, regular blob mode, blob SHA, and size.",
+      "GitHub Contents API with ref=f75dcae52fcd78c5c382d3903b012e5b049ca48b serves this path.",
+      "Exact-ref raw GitHub download SHA-256 matches the private helper binding in the preserved source-only observation entry."
+    ]
+  },
+  "local_clone_discrepancy": {
+    "path": "/workspace/actions",
+    "head": "a70993fafc99a9f94041485542d5a720797ca394",
+    "observation": "f75 is not present as a local Git object in this clone; git cat-file -e f75^{tree} returns bad object.",
+    "interpretation": "A local git show against this unhydrated clone cannot establish that the path is absent from public commit f75. The exact public tree and Contents API establish that the path is present. Recheck using the repository/object database that produced the reported fatal path result if it differs from /workspace/actions."
+  },
+  "corrected_conclusion": "The private helper source is not missing from the public f75 tree; it is tracked at action_server/scripts/verify_dakota_rcc_acceptance.py. The earlier analysis of its 2400/2465/2510-second public bounds is correctly bound to this exact helper. The retained 630/10/640 wrapper remains separate, source-only, and unexecuted.",
+  "operations": "Read-only GitHub API/raw-source reads only; no source mutation, grant execution, native/RCC/build, or tracked file changes."
+}

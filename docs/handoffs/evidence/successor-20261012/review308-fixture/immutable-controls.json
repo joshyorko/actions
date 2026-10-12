@@ -1,0 +1,470 @@
+{
+  "base": "3156d32c1a69846d46229b76c09725bfcfa5772f",
+  "commit": "b0a014512da9024003dcd4e09056a951c42c48c4",
+  "tree": "cd59078ba05a78869f0b0d0ecd40410b6303e2e6",
+  "scope": "immutable helper/fixture/error AST only; no RCC/provider/process launches, builds, or source edits",
+  "source_sha256": {
+    "action_server/tests/action_server_tests/test_source_staging_rcc_consumer.py": "cac4b36e157bea407b3943ff5b91d0cca6b29a2b86249a736563256c300cda8f",
+    "docs/skills/repository-operations.md": "411f48602c8f56a48c7ba5187c5e2b978861d83744f14e8e9ed7b2987dc1931b",
+    "action_server/src/actions/server/_actions_process_pool.py": "af2090208ebff767dc40af6d40501d813c570d1171ce031dcb75276ac6a5fef5",
+    "action_server/src/actions/server/_robo_utils/callback.py": "fa24e22f0fe04453b71b0f25ac8fa9f113511a9adc6d701d1e648f0931c3c441",
+    "action_server/src/actions/server/_rcc_runtime_adapter.py": "c1884571a572277beef50e359f8b5e71abf593e1ebdee4bea2e47290c8da81f2"
+  },
+  "unchanged_permission_and_raw_evidence_helpers": [
+    "_staged_worker_evidence",
+    "_prepare_owned_rcc_test_package_cache",
+    "_verify_selected_rcc_fixture"
+  ],
+  "cases": 64,
+  "controls": [
+    {
+      "case": "clean_completed",
+      "status": "ADMIT",
+      "code": null,
+      "disposition": "completed",
+      "input_unchanged": true
+    },
+    {
+      "case": "retirement_descendant_snapshot_complete_numeric_alias",
+      "status": "REJECT",
+      "code": "STAGED_RETIREMENT_INCOMPLETE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "cleanup_wrapper_reaped_numeric_alias",
+      "status": "REJECT",
+      "code": "STAGED_TREE_REAP_UNCONFIRMED",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "cleanup_descendant_snapshot_complete_numeric_alias",
+      "status": "REJECT",
+      "code": "STAGED_TREE_REAP_UNCONFIRMED",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "cleanup_live_descendant_pids_null",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "cleanup_live_descendant_pids_mapping",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "cleanup_live_descendant_pids_nonempty",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "cleanup_zombie_descendant_pids_null",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "cleanup_zombie_descendant_pids_mapping",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "cleanup_zombie_descendant_pids_nonempty",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "cleanup_errors_null",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "cleanup_errors_mapping",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "cleanup_errors_nonempty",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "wrapper_cleanup_result_wrapper_reaped_numeric_alias",
+      "status": "REJECT",
+      "code": "STAGED_TREE_REAP_UNCONFIRMED",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "wrapper_cleanup_result_descendant_snapshot_complete_numeric_alias",
+      "status": "REJECT",
+      "code": "STAGED_TREE_REAP_UNCONFIRMED",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "wrapper_cleanup_result_live_descendant_pids_null",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "wrapper_cleanup_result_live_descendant_pids_mapping",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "wrapper_cleanup_result_live_descendant_pids_nonempty",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "wrapper_cleanup_result_zombie_descendant_pids_null",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "wrapper_cleanup_result_zombie_descendant_pids_mapping",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "wrapper_cleanup_result_zombie_descendant_pids_nonempty",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "wrapper_cleanup_result_errors_null",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "wrapper_cleanup_result_errors_mapping",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "wrapper_cleanup_result_errors_nonempty",
+      "status": "REJECT",
+      "code": "STAGED_TREE_SURVIVOR_OR_ERROR",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "reader_joined_alias_or_unknown",
+      "status": "REJECT",
+      "code": "STAGED_READER_NOT_CLEAN",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "reader_alive_alias_or_unknown",
+      "status": "REJECT",
+      "code": "STAGED_READER_NOT_CLEAN",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "reader_error_alias_or_unknown",
+      "status": "REJECT",
+      "code": "STAGED_READER_NOT_CLEAN",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "reader_role_alias_or_unknown",
+      "status": "REJECT",
+      "code": "STAGED_READER_NOT_CLEAN",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "reader_extra_field",
+      "status": "REJECT",
+      "code": "STAGED_READER_SCHEMA",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "reader_duplicate_role",
+      "status": "REJECT",
+      "code": "STAGED_READER_ROLES",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "reader_unowned_role",
+      "status": "REJECT",
+      "code": "STAGED_READER_ROLES",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "reader_missing",
+      "status": "REJECT",
+      "code": "STAGED_READER_CENSUS",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "retirement_crash_unverified",
+      "status": "REJECT",
+      "code": "STAGED_RETIREMENT_INCOMPLETE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "completed_noninteger_True",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_TERMINAL_SCHEMA",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "completed_noninteger_0.0",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_TERMINAL_SCHEMA",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "completed_noninteger_'0'",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_TERMINAL_SCHEMA",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "completed_nonzero",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_COMPLETED_NONZERO",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "lease_invalid_''",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_TERMINAL_SCHEMA",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "lease_invalid_None",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_TERMINAL_SCHEMA",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "lease_invalid_123",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_TERMINAL_SCHEMA",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "failed_v18.19.3_False",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "failed_v18.19.3_True",
+      "status": "ADMIT",
+      "code": null,
+      "disposition": "legacy3_failed_intentional_nonreuse",
+      "input_unchanged": true
+    },
+    {
+      "case": "failed_v18.19.3_1",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "failed_v18.19.5_False",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "failed_v18.19.5_True",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "failed_v18.19.5_1",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "failed_v18.19.6_False",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "failed_v18.19.6_True",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "failed_v18.19.6_1",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "failed_v18.19.30_False",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "failed_v18.19.30_True",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "failed_v18.19.30_1",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "legacy_reason_''",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "legacy_reason_None",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "legacy_reason_'child exited non-zero '",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "legacy_reason_'child killed'",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "legacy_wrong_exit",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "killed_context_False",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_FORCED_DISPOSAL_CONTEXT",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "killed_context_True",
+      "status": "ADMIT",
+      "code": null,
+      "disposition": "killed_intentional_nonreuse",
+      "input_unchanged": true
+    },
+    {
+      "case": "killed_context_1",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_FORCED_DISPOSAL_CONTEXT",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "nonterminal_'running'",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_NOT_TERMINAL",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "nonterminal_'acquired'",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_NOT_TERMINAL",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "nonterminal_''",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_NOT_TERMINAL",
+      "disposition": null,
+      "input_unchanged": true
+    },
+    {
+      "case": "nonterminal_None",
+      "status": "REJECT",
+      "code": "STAGED_LEASE_NOT_TERMINAL",
+      "disposition": null,
+      "input_unchanged": true
+    }
+  ],
+  "status": "PASS"
+}

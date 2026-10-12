@@ -1,0 +1,136 @@
+{
+  "schema": "actions-fresh-successor-checkpoint/v1",
+  "created_at_utc": "2026-10-12T02:16:38.369071+00:00",
+  "authoritative_handoff": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+  "immutable_checkout": "/workspace/actions-handoff",
+  "payload_tree": "9da32502a92211ade2e6dd898b47529656a94eba",
+  "payload_leaves": 6632,
+  "manifest_verified_rows": 2862,
+  "historical_setup_supplement_verified_rows": 8,
+  "environment": {
+    "time": "2026-10-12T02:13:27.711932+00:00",
+    "host": "9e619bc297a7",
+    "boot_id": "22d23245-c9c1-4789-8cbd-70bfa9b3b274",
+    "uid": 1000,
+    "gid": 1000,
+    "memory_current": 14376935424,
+    "memory_max": 17179869184,
+    "memory_events": "low 0\nhigh 0\nmax 25204\noom 0\noom_kill 0\noom_group_kill 0\n",
+    "cgroup_identity_status": "UNQUALIFIED",
+    "disk_available": {
+      "/workspace": 13350199296,
+      "/tmp": 9441202176,
+      "/dev/shm": 9441349632
+    },
+    "visible_headroom_bytes": 2802933760
+  },
+  "integration_unchanged": "e2c81adce7858d5a952991ba9a8b7f72e902038a",
+  "community_unchanged": "a70993fafc99a9f94041485542d5a720797ca394",
+  "source_acceptance": "Scoped independent GO_SOURCE receipts only; no overall merge/native/release acceptance",
+  "native_attempts": 0,
+  "runtime_1_0_3": "HOLD",
+  "rcc_18_19_6_publication": "ABSOLUTE_HOLD",
+  "optional_newer_rcc": "NOT_EXECUTED:18.19.3 baseline must PASS first; released18.19.5 then exact727c1ff8 separately, stop at first failure",
+  "missing_unrecoverable": [
+    "retired local raw logs not remotely reacquired",
+    "retired prepared environments and activation scripts",
+    "old private RCC01f/frozen-v6 raw source",
+    "private source/body/mode inventory and old execution grants are not portable authority"
+  ],
+  "graph": {
+    "contracts_retained": 54,
+    "open_at_handoff": 53,
+    "accepted_closed": 210,
+    "new_issues_created": 0,
+    "issues_closed": 0,
+    "release_gates": [
+      "exact integrated source/review/security/CI",
+      "legitimate packaged OAuth",
+      "native18.19.3 and supported platforms",
+      "actual installed consumers",
+      "package resource/dependency contents",
+      "metadata/changelog/checksums/signing labels",
+      "community distribution",
+      "distinct publication authority where retained policy requires it"
+    ],
+    "later_slices": [
+      "Package/Deployment lifecycle",
+      "adapters and control room",
+      "durable runs/attempts/retries/recovery",
+      "database/provider integrations",
+      "Robot Framework/Work Items product acceptance",
+      "MCP authorization and endpoints",
+      "Canvas/MCP App/host/user workflows",
+      "deployment/install acceptance"
+    ]
+  },
+  "documentation_dispositions": [
+    {
+      "lane": "release_audit distribution",
+      "decision": "integrated compact actual manual/slot contracts into existing canonical distribution paragraph; exact live taprevision retained in audit receipt rather than per-run canonical prose"
+    },
+    {
+      "lane": "release_audit Windows306",
+      "decision": "integrated runner merge-parent binding and readiness/cleanup independence lesson; exact old failure retained in diagnosis.json"
+    },
+    {
+      "lane": "review308 callback",
+      "decision": "integrated ordinaryException/BaseException, retainedThreadidentity and per-attemptdeadline qualification"
+    },
+    {
+      "lane": "review308 fixture",
+      "decision": "integrated exact booleans and explicit empty collections; product b0a already contains strict admission lesson"
+    },
+    {
+      "lane": "review307 OAuth",
+      "decision": "integrated source-only getter/trailing slash lesson in23a; package acceptance remains scoped"
+    },
+    {
+      "lane": "review313 mutex",
+      "decision": "integrated ordering-before-join lesson inbd4; no overall cleanup claim"
+    },
+    {
+      "lane": "release_audit305",
+      "decision": "pending primary640 source-control slice, audit retained and exact public-source object absence corrected"
+    },
+    {
+      "lane": "review307 packaged",
+      "decision": "integrated Windowsactualcheckoutdigests, prebuilt sdistbundle/generatorabsence, realtemplate/publicdependencyorigin boundaries into canonicalguide"
+    },
+    {
+      "lane": "review307 integration",
+      "decision": "exactremoteintegrationreceipt preserved; newguidance explicitlyrejected as redundant with existingtarget/scope guide"
+    },
+    {
+      "lane": "review-checkpoint-initial",
+      "decision": "integrated immutable archivedreceipt/currentprojection lesson"
+    },
+    {
+      "lane": "release_audit305 census",
+      "decision": "integrated freshPIDidentitybeforestatus/failclosedsignals andindependentharddeadline warning; candidate artifactnotproductionaccepted"
+    },
+    {
+      "lane": "releasegraph",
+      "decision": "retainedcandidateprojection; finalexplicit releaseoverlay/sourcepolicy audit follows, nocontractclosed"
+    },
+    {
+      "lane": "review308 provider",
+      "decision": "HOLD source and actualcounterexample preserved privately; additivecorrectioninprogress, noheldnativeauthority"
+    }
+  ],
+  "upstream_disposition": "none",
+  "current_projection": {
+    "pr308_b0a_source_review": "RESOLVED GO_SOURCE by independent64controls; historical b0a profile/source receipt pre-review wording remains immutable",
+    "pr308_b0a_ci_native": "CI pending, native HOLD; no execution authorization inferred",
+    "pr308_local_c564_provider_delta": "SOURCE_CHECKPOINT_NOT_PUSHED_NOT_ACCEPTED pending independent review; b0a remains remote snapshot head",
+    "integration_after_pr307": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+    "integration_tree": "137468f137d64091838d56515c826c2d4ed6b76f",
+    "pr307": "NORMAL_MERGED accepted23a; all23headchecksPASS +independentsource/security/packagedreview, complete merge tree matchesactualproducer",
+    "pr313": "bd4CI19SUCCESS beforetargetadvance; refreshedlocal216ad55b codeblobs preserved; wholeprocess/readers/leaseHOLD",
+    "pr306": "b3defCI19SUCCESS+WindowsRUNNING beforetargetadvance",
+    "pr308": "b0aCI24SUCCESS+WindowsRUNNING beforetargetadvance; c564providerHOLD_SOURCE independentrootownershipcounterexample; notpushed",
+    "primary640": "census4RED\u21924PASS scopedcandidate only; independentlyreviewed8syntheticcases; actualclock/descendant/readers/leaseHOLD",
+    "graph": "54-retainedprojection preservesallcontracthashes/rawstates; candidate releaseoverlay and ambiguoussupportpromises notaccepted releasewaiver"
+  },
+  "local_only_evidence": "Full raw logs, environments, binaries, downloaded distributions and local control scripts remain local-only unless individually listed in the manifest. Copied reviews can reference local-only supporting files; their references/hashes do not claim those bytes were exported or recovered."
+}

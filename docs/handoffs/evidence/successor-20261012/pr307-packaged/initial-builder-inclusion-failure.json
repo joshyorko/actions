@@ -1,0 +1,1 @@
+{"result": "FAIL", "control": "expected builder script in sdist", "reason": "builder script not distributed; sdist includes tracked yaml and exact pre-generated bundled module", "requirement_reassessment": "source verifier expectation corrected, no source or package bytes changed"}
