@@ -1,4 +1,7 @@
 import logging
+import os
+import stat
+import tempfile
 import typing
 from pathlib import Path
 
@@ -32,6 +35,50 @@ def _print_actions_oauth2_config() -> int:
     return 0
 
 
+def _ensure_user_config(config_path: Path) -> None:
+    """Publish a private template without overwriting an operator's file."""
+    try:
+        existing = config_path.lstat()
+    except FileNotFoundError:
+        existing = None
+    if existing is not None:
+        if not stat.S_ISREG(existing.st_mode):
+            raise RuntimeError("OAuth2 user config must be a regular, nonsymlink file")
+        return
+
+    from ._oauth2_config import FILE_CONTENTS
+
+    # Same-directory exclusive link publication avoids partial reader-visible bytes.
+    # NamedTemporaryFile starts private; an existing destination always wins the race.
+    with tempfile.NamedTemporaryFile(
+        mode="w",
+        encoding="utf-8",
+        newline="",
+        dir=config_path.parent,
+        prefix=".oauth2-user-",
+        delete=False,
+    ) as stream:
+        temporary_path = Path(stream.name)
+        try:
+            stream.write(FILE_CONTENTS["default_user_config"])
+            stream.flush()
+            os.fsync(stream.fileno())
+        except BaseException:
+            stream.close()
+            temporary_path.unlink()
+            raise
+    try:
+        try:
+            os.link(temporary_path, config_path)
+        except FileExistsError:
+            if not stat.S_ISREG(config_path.lstat().st_mode):
+                raise RuntimeError(
+                    "OAuth2 user config must be a regular, nonsymlink file"
+                )
+    finally:
+        temporary_path.unlink()
+
+
 def print_user_oauth2_config_path(output_json: bool = False) -> int:
     """
     Note that besides printing it may also generate the configuration if it's not
@@ -48,11 +95,7 @@ def print_user_oauth2_config_path(output_json: bool = False) -> int:
     config_path: Path = get_default_settings_dir() / USER_CONFIG_FILE_NAME
 
     try:
-        if not config_path.exists():
-            with open(config_path, "w+") as f:
-                from ._oauth2_config import FILE_CONTENTS
-
-                f.write(FILE_CONTENTS["default_user_config"])
+        _ensure_user_config(config_path)
 
         if output_json:
             sys.stdout.buffer.write(

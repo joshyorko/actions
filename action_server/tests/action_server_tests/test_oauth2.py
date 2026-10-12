@@ -286,14 +286,14 @@ def test_oauth2_provider_settings():
 @mock.patch("sys.stdout.buffer.write")
 @pytest.mark.integration_test
 def test_print_user_oauth2_config_path(
-    print_mock: mock.MagicMock, buffer_write_mock: mock.MagicMock, tmpdir
+    buffer_write_mock: mock.MagicMock, print_mock: mock.MagicMock, tmpdir
 ) -> None:
     from actions.server._oauth2 import (
         USER_CONFIG_FILE_NAME,
         print_user_oauth2_config_path,
     )
 
-    mock_settings_dir: Path = tmpdir / "action-server"
+    mock_settings_dir = Path(tmpdir) / "action-server"
     mock_config_path: Path = mock_settings_dir / USER_CONFIG_FILE_NAME
 
     # Make sure all the directories in the mocked config path exist.
@@ -312,17 +312,18 @@ def test_print_user_oauth2_config_path(
         assert mock_config_path.exists() is True
 
         # Get latest print args
-        print_args = buffer_write_mock.mock_calls[-1].args
+        print_args = print_mock.mock_calls[-1].args
 
         assert print_args[0] == mock_config_path
+        buffer_write_mock.assert_not_called()
 
         retcode = print_user_oauth2_config_path(output_json=True)
 
         assert retcode == 0
         assert mock_config_path.exists() is True
 
-        print_args = print_mock.mock_calls[-1].args
+        print_args = buffer_write_mock.mock_calls[-1].args
 
         json_data = json.loads(print_args[0])
 
-        assert json_data["path"] == mock_config_path
+        assert json_data["path"] == str(mock_config_path)
