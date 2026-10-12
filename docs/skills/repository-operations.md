@@ -1607,38 +1607,44 @@ interpreter. The task removes outer virtualenv, Conda and Python activation hint
 from the replacement child environment so Poetry selects Runtime's environment.
 Removing only `VIRTUAL_ENV` leaves an active RCC `CONDA_PREFIX` able to select the
 toolchain interpreter. Verify the actual
-Invoke-to-Poetry boundary with controlled acquisition, including failure, rather
+Invoke-to-Poetry boundary with owned input reading, including failure, rather
 than qualifying only direct helper calls.
 
-The OAuth build guard checks each binary acquisition's exit status and bounds it
-to 30 seconds. It rejects invalid UTF-8, blank bodies, malformed safe YAML and
-documents lacking mapping root, `oauth2Config` and `providers` values. Both inputs
-must pass before a same-directory atomic module replacement. The module retains
-the original strings, including their line endings; failure preserves the previous
-module and primary exception while attempting to remove only task-owned temporary
-files. A cleanup failure is reported separately without replacing the primary error.
-CLI failures expose fixed input names and reason categories, never raw acquisition
-stdout, stderr, configuration or credentials.
+The public OAuth build is offline. Its tracked inputs are
+`action_server/oauth2/actions-oauth-config.yaml` and
+`action_server/oauth2/oauth-config.yaml`; both must be regular files, at most
+64 KiB, strict UTF-8, unique-key safe YAML, and exactly the versioned
+`formatVersion: '1.0.0'` / `oauth2Config.providers: {}` document. Comments are
+preserved. The explicit empty hosted catalog means the community ships no
+hosted application registrations. It supplies no client credentials and does
+not advertise provider support. Operators keep their registered applications
+in private `--oauth2-settings` files with `mode: custom`. Public endpoint
+metadata remains in the existing settings resolver. `mode: actions` for an
+absent provider fails clearly; blank custom client IDs are rejected. Missing
+optional client secrets preserve PKCE S256. Outbound provider OAuth, Runtime
+API-key/browser sessions, and inbound MCP client authorization remain separate
+contracts.
 
-These checks establish acquisition and consumer-compatible structural shape only.
-They do not establish an approved source pair or revision, supported provider
-policy, or actual OAuth behavior. An empty providers mapping is structurally
-admissible, without qualifying it as release content. The existing unpinned
-`Sema4AI/oauth-public-configs` authority remains unchanged; full OAuth and release
-source admission remain on hold until the owner identifies the authoritative pair.
-An authenticated repository-metadata 404 does not establish that an OAuth source
-is public, deleted or inaccessible to every credential. Preserve that ambiguity
-and the exact failed acquisition separately. A PR step's built-in GitHub token
-and a tag-only cross-repository PAT are different credential contracts; wiring
-`GH_TOKEN` does not approve an input pair or establish cross-repository access.
-Keep the checked acquisition, immutable content authority and provider admission
-separate; never promote token wiring into successful content or release proof.
+Both owned inputs must validate before same-directory atomic module replacement.
+Generated `FILE_CONTENTS` preserves their original strings and `INPUT_SHA256`
+binds each filename to its exact UTF-8 bytes. Failure preserves the previous
+module and reports only fixed input names and reason categories, never input
+bodies. New user configs are written as private mode-0600 temporary files and
+published exclusively after flush/fsync, preserving an existing regular operator
+file. Symlinks and other special destinations fail; POSIX mode evidence does
+not establish Windows ACL privacy. Unsupported hardlink publication fails
+without overwriting an operator file.
 
-Do not replace unavailable input with a guessed repository, provider stub,
-successful skip or disabled-provider policy. Recovery invokes the task from
-immutable `release-source/action_server`, so the installed environment and task
-version belong to that source; a current helper fix does not repair an older
-release target.
+The generator and generated OAuth steps require no cross-repository token.
+Keep release upload credentials scoped to their own publication steps. The
+source tests exercise actual owned-issuer token exchange for custom PKCE and
+client-secret configurations; those synthetic registrations do not prove live
+provider service acceptance. Qualify wheel, sdist, native and installed startup
+contents separately, including the exact generated input hashes and explicit
+missing/unsupported-provider failures. Historical vendor acquisition failures
+and empty-string artifacts remain failed or unqualified; new source does not
+repair those bytes. Recovery runs tasks from immutable `release-source`, so
+older release targets still use their original builder and input authority.
 
 The source migration PR contains the helper and its direct consumers together;
 the helper commit is not independently mergeable or release-ready. The

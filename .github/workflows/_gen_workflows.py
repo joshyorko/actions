@@ -389,7 +389,7 @@ class BaseWorkflow:
         return {
             "name": "Build OAuth2 config",
             "run": f"{run_in_env}inv build-oauth2-config",
-            "env": {"GH_TOKEN": "${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}"},
+            "env": {},
         }
 
     def checkout_repo(self, pinned=False):
@@ -2606,7 +2606,7 @@ rm src/actions/server/bin/rcc* -f
             "name": "Build OAuth2 config (PR)",
             "run": release_step["run"],
             "if": "github.event_name == 'pull_request'",
-            "env": {"GH_TOKEN": "${{ github.token }}"},
+            "env": {},
         }
         return [release_step, canary_step]
 

@@ -1861,7 +1861,7 @@ else: sys.exit(1)
 
 
 @pytest.mark.parametrize("job_name", ["build-sdist", "build-wheels"])
-def test_generated_pypi_oauth_credentials_are_scoped_to_exact_event(job_name):
+def test_generated_pypi_oauth_builds_are_offline_for_both_events(job_name):
     workflow = yaml.safe_load(
         repository_text(".github/workflows/actions_runtime_pypi_release.yml")
     )
@@ -1873,15 +1873,15 @@ def test_generated_pypi_oauth_credentials_are_scoped_to_exact_event(job_name):
     release, canary = oauth_steps
     assert release["name"] == "Build OAuth2 config"
     assert release["if"] == "github.event_name == 'push'"
-    assert release["env"] == {"GH_TOKEN": "${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}"}
+    assert release["env"] == {}
     assert canary["name"] == "Build OAuth2 config (PR)"
     assert canary["if"] == "github.event_name == 'pull_request'"
-    assert canary.get("env") == {"GH_TOKEN": "${{ github.token }}"}
+    assert canary.get("env") == {}
     assert canary["run"] == release["run"]
     assert "inv build-oauth2-config" in canary["run"]
-    # Acquisition alone receives the credential; packaging cannot inherit it.
+    # Public OAuth packaging requires no cross-repository credentials.
     credential_steps = [step for step in steps if "GH_TOKEN" in step.get("env", {})]
-    assert credential_steps == oauth_steps
+    assert credential_steps == []
     generated = load_workflow_generator().ActionServerPyPiRelease().full
     assert generated == workflow
 
