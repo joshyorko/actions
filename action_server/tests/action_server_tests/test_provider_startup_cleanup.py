@@ -543,8 +543,9 @@ def test_provider_wait_overshoot_preserves_incomplete_cleanup_fact(
     assert process._rcc_provider_cleanup is result
 
 
+@pytest.mark.parametrize("launcher", [False, True])
 def test_startup_regression_reports_failed_cleanup_and_disposes_original_child(
-    tmp_path, monkeypatch
+    tmp_path, monkeypatch, launcher
 ):
     from action_server_tests import test_dakota_rcc_acceptance as acceptance_tests
 
@@ -572,7 +573,7 @@ def test_startup_regression_reports_failed_cleanup_and_disposes_original_child(
     try:
         with pytest.raises(AssertionError) as caught:
             acceptance_tests.test_provider_startup_failure_uses_bounded_kill_fallback(
-                tmp_path, monkeypatch
+                tmp_path, monkeypatch, launcher=launcher
             )
         assert len(captured) == 1
         assert captured[0].poll() is not None
@@ -583,3 +584,97 @@ def test_startup_regression_reports_failed_cleanup_and_disposes_original_child(
         # Keep the RED control safe even when the acceptance test lacks teardown.
         for process in captured:
             _dispose(process)
+
+
+def test_regression_handles_reported_child_distinct_from_original_popen(
+    tmp_path, monkeypatch
+):
+    from action_server_tests import test_dakota_rcc_acceptance as acceptance_tests
+
+    actual_popen = subprocess.Popen
+    captured = []
+
+    def launcher(command, **kwargs):
+        code = (
+            "import signal,subprocess; "
+            "signal.signal(signal.SIGTERM, signal.SIG_IGN); "
+            f"child=subprocess.Popen({command!r}); child.wait()"
+        )
+        process = actual_popen([sys.executable, "-c", code], **kwargs)
+        captured.append(process)
+        return process
+
+    monkeypatch.setattr(
+        acceptance_tests,
+        "subprocess",
+        SimpleNamespace(**dict(vars(subprocess), Popen=launcher)),
+    )
+    acceptance_tests.test_provider_startup_failure_uses_bounded_kill_fallback(
+        tmp_path, monkeypatch
+    )
+    assert len(captured) == 1
+    assert int((tmp_path / "provider.pid").read_text()) != captured[0].pid
+    assert captured[0].poll() is not None
+
+
+@pytest.mark.parametrize(
+    "poison", ["unowned", "root_birth", "child_birth", "owner_exit"]
+)
+def test_fixture_child_capture_rejects_unknown_or_changed_identity(monkeypatch, poison):
+    from action_server_tests import test_dakota_rcc_acceptance as acceptance_tests
+
+    lookups = []
+    exited = [False]
+    original = SimpleNamespace(poll=lambda: 0 if exited[0] else None)
+    child = SimpleNamespace(pid=777, create_time=lambda: 20.0)
+
+    class Root:
+        pid = 123
+
+        def create_time(self):
+            return 99.0 if poison == "root_birth" else 10.0
+
+        def children(self, recursive):
+            assert recursive is True
+            exited[0] = poison == "owner_exit"
+            return [child]
+
+    def lookup(pid):
+        lookups.append(pid)
+        if pid == 123:
+            return Root()
+        assert pid == 777
+        return SimpleNamespace(
+            create_time=lambda: 99.0 if poison == "child_birth" else 20.0
+        )
+
+    owner = SimpleNamespace(
+        pid=123,
+        create_time=10.0,
+        process=original,
+        capture_verified=True,
+        snapshot_complete=True,
+    )
+    monkeypatch.setitem(sys.modules, "psutil", SimpleNamespace(Process=lookup))
+    with pytest.raises(AssertionError):
+        acceptance_tests._capture_provider_fixture_child(
+            owner, 999 if poison == "unowned" else 777
+        )
+
+
+def test_fixture_child_stop_check_rejects_reused_identity(monkeypatch):
+    from action_server_tests import test_dakota_rcc_acceptance as acceptance_tests
+
+    class MissingProcess(Exception):
+        pass
+
+    monkeypatch.setitem(
+        sys.modules,
+        "psutil",
+        SimpleNamespace(
+            Process=lambda pid: SimpleNamespace(create_time=lambda: 99.0),
+            NoSuchProcess=MissingProcess,
+        ),
+    )
+    with pytest.raises(AssertionError, match="PROVIDER_FIXTURE_CHILD_REUSED"):
+        acceptance_tests._provider_fixture_child_stopped(SimpleNamespace(pid=777), 20.0)

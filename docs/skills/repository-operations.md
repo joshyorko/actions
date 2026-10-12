@@ -2695,6 +2695,18 @@ zero-budget wait still fails, it records an unreaped wrapper. Use injected clock
 ownership capture; a live-child assertion without its typed result cannot
 identify which path failed.
 
+A Windows virtual-environment Python executable may be a redirector that
+launches a distinct Python child. A fixture's reported PID therefore need not
+equal the original `Popen.pid`. Before provider cleanup, bind the reported child
+to the verified original root or one of its observed descendants and record its
+birth. Afterwards require the original launcher reaped, that child stopped, and
+typed tree/reader cleanup complete. Reject unknown membership or changed births.
+Emergency fixture teardown may signal only those verified captured identities;
+a PID file alone never grants authority. Exercise a distinct launcher/child
+fixture on every source platform, preserving the package interpreter and the
+cleanup deadline. A later source-suite pass does not identify the cause of an
+earlier cleanup failure whose typed diagnostic was discarded.
+
 Source CLI gates must also set a task-owned writable `ROBOTS_HOME`, alongside
 their isolated `ACTIONS_HOME`, RCC home, temporary directory, and package caches.
 The CLI creates the Robot home before dispatching commands, so the default

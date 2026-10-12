@@ -1075,7 +1075,43 @@ def test_success_reaps_fast_exit_detached_child_before_echild(tmp_path):
                 pass
 
 
-def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypatch):
+def _capture_provider_fixture_child(owner, reported_pid):
+    """Bind a fixture report to a live, verified root or descendant identity."""
+    import psutil
+
+    assert owner.capture_verified and owner.snapshot_complete
+    assert owner.process.poll() is None
+    root = psutil.Process(owner.pid)
+    assert root.create_time() == owner.create_time
+    descendants = tuple(
+        (child, child.create_time()) for child in root.children(recursive=True)
+    )
+    candidates = ((root, owner.create_time),) + descendants
+    matches = [
+        (child, birth) for child, birth in candidates if child.pid == reported_pid
+    ]
+    assert len(matches) == 1, "PROVIDER_FIXTURE_CHILD_UNOWNED"
+    assert psutil.Process(owner.pid).create_time() == owner.create_time
+    assert owner.process.poll() is None
+    child, birth = matches[0]
+    assert psutil.Process(child.pid).create_time() == birth
+    return child, birth, descendants
+
+
+def _provider_fixture_child_stopped(child, birth):
+    import psutil
+
+    try:
+        current = psutil.Process(child.pid)
+        assert current.create_time() == birth, "PROVIDER_FIXTURE_CHILD_REUSED"
+        return not current.is_running() or current.status() == psutil.STATUS_ZOMBIE
+    except psutil.NoSuchProcess:
+        return True
+
+
+def test_provider_startup_failure_uses_bounded_kill_fallback(
+    tmp_path, monkeypatch, launcher=False
+):
     harness = _harness()
     pid_file = tmp_path / "provider.pid"
     fake_server = (
@@ -1084,6 +1120,14 @@ def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypat
         f"Path({str(pid_file)!r}).write_text(str(os.getpid())); "
         "print('not-json', flush=True); time.sleep(60)"
     )
+    if launcher:
+        # Model a redirector that waits for its distinct Python child.
+        fake_server = (
+            "import signal,subprocess,sys; "
+            "signal.signal(signal.SIGTERM, signal.SIG_IGN); "
+            f"child=subprocess.Popen([sys.executable,'-c',{fake_server!r}]); "
+            "child.wait()"
+        )
     monkeypatch.setattr(
         harness,
         "_provider_command",
@@ -1092,6 +1136,20 @@ def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypat
 
     captured = []
     actual_popen = subprocess.Popen
+    fixture_child = []
+    fixture_descendants = []
+    original_readline = harness._readline_with_timeout
+
+    def capture_startup_child(*args, owner, **kwargs):
+        line = original_readline(*args, owner=owner, **kwargs)
+        child, birth, descendants = _capture_provider_fixture_child(
+            owner, int(pid_file.read_text())
+        )
+        fixture_child.append((child, birth))
+        fixture_descendants.extend(descendants)
+        return line
+
+    monkeypatch.setattr(harness, "_readline_with_timeout", capture_startup_child)
 
     def owned_popen(*args, **kwargs):
         process = actual_popen(*args, **kwargs)
@@ -1117,19 +1175,35 @@ def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypat
         process = captured[0]
         result = caught.value.provider_cleanup_result
         diagnostic = json.dumps(result.to_dict(), sort_keys=True)
-        assert int(pid_file.read_text()) == process.pid
+        assert len(fixture_child) == 1
+        child, birth = fixture_child[0]
         assert process.poll() is not None, diagnostic
+        assert _provider_fixture_child_stopped(child, birth), diagnostic
         assert result.complete, diagnostic
     finally:
         # Only the original Popen owns this wait and emergency test teardown.
         # Preserve the cleanup result above; teardown is not acceptance evidence.
-        for process in captured:
-            if process.poll() is None:
-                process.kill()
-            process.wait(timeout=2)
-            for stream in (process.stdout, process.stderr):
-                if stream is not None:
-                    stream.close()
+        # PID-file contents never grant signal authority. Only the verified
+        # root's captured descendants, with unchanged births, may be killed.
+        import psutil
+
+        try:
+            for child, birth in reversed(fixture_descendants):
+                try:
+                    if psutil.Process(child.pid).create_time() == birth:
+                        child.kill()
+                except psutil.NoSuchProcess:
+                    pass
+        finally:
+            for process in captured:
+                try:
+                    if process.poll() is None:
+                        process.kill()
+                    process.wait(timeout=2)
+                finally:
+                    for stream in (process.stdout, process.stderr):
+                        if stream is not None:
+                            stream.close()
 
 
 def test_public_harness_uses_shared_test_only_binary_admission(tmp_path, monkeypatch):
