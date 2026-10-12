@@ -678,3 +678,149 @@ def test_fixture_child_stop_check_rejects_reused_identity(monkeypatch):
     )
     with pytest.raises(AssertionError, match="PROVIDER_FIXTURE_CHILD_REUSED"):
         acceptance_tests._provider_fixture_child_stopped(SimpleNamespace(pid=777), 20.0)
+
+
+def test_original_finished_reader_is_observed_when_tree_ownership_is_unknown(
+    monkeypatch,
+):
+    from actions.server._common import process as process_utils
+
+    harness = _harness()
+    original = SimpleNamespace(pid=123, poll=lambda: None)
+    owner = harness._ProviderOwnership(original)
+    owner.errors = ("CONTROLLED_CAPTURE_UNAVAILABLE",)
+    original._rcc_provider_owner = owner
+    harness._readline_with_timeout(io.StringIO("ready\n"), 0.2, owner=owner)
+    reader = owner.reader.thread
+    reader.join(timeout=1)
+    delegated = []
+    monkeypatch.setattr(
+        process_utils,
+        "force_kill_process_tree_until",
+        lambda *args: delegated.append(args),
+    )
+    result = harness.cleanup_provider_until(original, time.monotonic() + 0.2)
+    assert not delegated and not result.ownership_confirmed and not result.complete
+    assert result.reader.joined is True
+    assert result.reader.alive is False
+    assert result.reader.error is None
+    assert result.errors == (
+        "CONTROLLED_CAPTURE_UNAVAILABLE",
+        "PROVIDER_OWNER_UNCONFIRMED",
+    )
+    assert owner.reader.thread is reader
+
+
+@pytest.mark.parametrize("deadline, expected_timeout", [(100.05, 0.02), (100.0, 0.0)])
+def test_unknown_tree_reader_uses_remaining_absolute_deadline_and_same_thread(
+    monkeypatch, deadline, expected_timeout
+):
+    from actions.server._common import process as process_utils
+
+    harness = _harness()
+    original = SimpleNamespace(pid=123, poll=lambda: None)
+    owner = harness._ProviderOwnership(original)
+    original._rcc_provider_owner = owner
+    release = threading.Event()
+
+    class BlockedStream:
+        def readline(self):
+            assert release.wait(timeout=2)
+            return "ready\n"
+
+    reader = None
+    try:
+        with pytest.raises(TimeoutError):
+            harness._readline_with_timeout(BlockedStream(), 0.01, owner=owner)
+        reader = owner.reader.thread
+        timeouts = []
+        actual_join = reader.join
+
+        def record_join(timeout):
+            timeouts.append(timeout)
+            actual_join(timeout=0)
+
+        monkeypatch.setattr(reader, "join", record_join)
+        monkeypatch.setattr(harness, "time", SimpleNamespace(monotonic=lambda: 100.03))
+        monkeypatch.setattr(
+            process_utils,
+            "force_kill_process_tree_until",
+            lambda *args: pytest.fail("unknown tree must not receive signal authority"),
+        )
+        result = harness.cleanup_provider_until(original, deadline)
+        assert timeouts == [pytest.approx(expected_timeout)]
+        assert result.reader.alive is True and result.reader.joined is False
+        assert not result.complete and not result.ownership_confirmed
+        assert owner.reader.thread is reader
+    finally:
+        release.set()
+        if reader is not None:
+            threading.Thread.join(reader, timeout=1)
+            assert not reader.is_alive()
+
+
+def test_unknown_tree_reader_failure_remains_secondary_to_startup_error(
+    tmp_path, monkeypatch
+):
+    harness = _harness()
+    original = SimpleNamespace(
+        pid=123, stdout=io.StringIO("invalid\n"), poll=lambda: None
+    )
+    monkeypatch.setattr(
+        harness,
+        "subprocess",
+        SimpleNamespace(
+            **dict(vars(subprocess), Popen=lambda *args, **kwargs: original)
+        ),
+    )
+
+    def unverified_capture(process):
+        owner = harness._ProviderOwnership(process)
+        process._rcc_provider_owner = owner
+        return owner
+
+    actual_readline = harness._readline_with_timeout
+
+    def fail_join_after_read(*args, owner, **kwargs):
+        line = actual_readline(*args, owner=owner, **kwargs)
+        owner.reader.thread.join(timeout=1)
+        monkeypatch.setattr(
+            owner.reader.thread,
+            "join",
+            lambda timeout: (_ for _ in ()).throw(OSError("private join details")),
+        )
+        return line
+
+    monkeypatch.setattr(harness, "_capture_provider_ownership", unverified_capture)
+    monkeypatch.setattr(harness, "_readline_with_timeout", fail_join_after_read)
+    with pytest.raises(RuntimeError, match="startup JSON") as caught:
+        harness.start_provider(
+            "/unused/rcc", tmp_path, {}, deadline=harness.Deadline.after(1)
+        )
+    assert isinstance(caught.value.__cause__, json.JSONDecodeError)
+    result = caught.value.provider_cleanup_result
+    assert result.reader.error == "PROVIDER_JOIN_OSError"
+    assert result.reader.alive is False
+    assert not result.complete and not result.ownership_confirmed
+    assert "private join details" not in json.dumps(result.to_dict())
+
+
+@pytest.mark.parametrize("poison", ["owner_process", "reader_owner"])
+def test_unknown_tree_never_joins_a_reader_with_changed_owner(monkeypatch, poison):
+    harness = _harness()
+    original = SimpleNamespace(pid=123, poll=lambda: None)
+    owner = harness._ProviderOwnership(original)
+    original._rcc_provider_owner = owner
+    harness._readline_with_timeout(io.StringIO("ready\n"), 0.2, owner=owner)
+    reader = owner.reader.thread
+    reader.join(timeout=1)
+    if poison == "owner_process":
+        owner.process = object()
+    else:
+        owner.reader.owner = object()
+    joins = []
+    monkeypatch.setattr(reader, "join", lambda timeout: joins.append(timeout))
+    result = harness.cleanup_provider_until(original, time.monotonic() + 0.2)
+    assert not joins
+    assert result.reader.error == "PROVIDER_READER_UNAVAILABLE"
+    assert not result.ownership_confirmed and not result.complete

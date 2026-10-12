@@ -1465,6 +1465,10 @@ def cleanup_provider_until(
                 )
             except Exception as error:
                 errors.append(f"PROVIDER_TREE_{type(error).__name__}")
+    # The original pipe reader has independent ownership from the process tree.
+    # Observe it under the same endpoint even when root birth is unconfirmed;
+    # this grants neither process signals nor overall cleanup completion.
+    if isinstance(owner, _ProviderOwnership) and owner.process is process:
         reader = owner.reader
         if isinstance(reader, _ProviderStartupReader) and reader.owner is owner:
             joined = False

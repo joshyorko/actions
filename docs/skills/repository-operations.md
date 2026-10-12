@@ -2684,6 +2684,15 @@ from the Runtime server's existing `Process._stop_and_reap_until` readers and
 from provider startup readers. Thread closure does not prove lease release or
 complete descendant reaping; native admission must still check those facts.
 
+The retained provider startup reader has its own ownership checks: its original
+owner must still refer to the caller's exact process object, and the reader must
+still refer to that exact owner. Observe that same thread using the existing
+absolute cleanup endpoint even when process-tree birth capture is unconfirmed.
+A successful reader join measures only the reader; it does not grant process
+signal authority, confirm tree cleanup, or prove lease release. Missing or
+changed object bindings keep reader evidence unavailable. Join errors remain
+fixed secondary classes attached to the original startup failure.
+
 Provider startup failure tests retain the original `Popen` and the primary
 exception's typed cleanup result. Assert the observed cleanup facts before
 emergency test teardown, and report those facts on failure. Always kill, wait,
