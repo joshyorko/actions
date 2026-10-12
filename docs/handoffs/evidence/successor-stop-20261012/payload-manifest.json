@@ -10936,5 +10936,11 @@
     "bytes": 18453,
     "sha256": "236ed21dcb50b3c3934f5e15b29e61d6a7b712ed65e7dcf7cd72785d4f8fa26c",
     "mode": "100644"
+  },
+  {
+    "path": "ignored-export-correction.json",
+    "bytes": 7290,
+    "sha256": "fcbfbcd3a414edc956a2d25408cd41ce0a93a61fc73ff2f1024cea5a67ca4a90",
+    "mode": "100644"
   }
 ]
