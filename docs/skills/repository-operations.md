@@ -2657,6 +2657,15 @@ does not change native dispatch, fallback signals, disk-output retention, lease
 observation, or watchdog behavior; those designs and native budgets require
 separate admission.
 
+Injected Linux supervisor controls must supply every Linux primitive they use,
+including `WNOHANG=1` in a fake `waitpid` namespace; copying the host's `os`
+attributes is insufficient on Windows. When a control uses a constant monotonic
+clock and fake process, replace its unexpected legacy fallback with a failing
+sentinel. A missing model primitive must produce a bounded test failure, not
+enter Linux `/proc` enumeration or a grace loop whose clock never advances.
+Exercise the model with POSIX constants absent as well as present. These are
+test-only substitutions; production fallback and timeout contracts stay intact.
+
 Pooled worker retirement retains its existing stdout/stderr output threads and
 joins them together with the protocol reader using the caller's one deadline.
 Typed `WorkerReaderResult` values record each join, final alive state, and fixed
