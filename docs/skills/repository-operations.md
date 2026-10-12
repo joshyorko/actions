@@ -2488,6 +2488,16 @@ The staged consumer fixture retains its worker's exact env-exec lease receipt
 and actual typed retirement/cleanup snapshots in private evidence. Missing
 snapshots stay null; testcase success does not prove lease release or reaping.
 
+The staged consumer now rejects absent or pending worker retirement, incomplete
+wrapper/descendant cleanup, live or zombie descendants, errors, and missing or
+unjoined stdout/stderr/protocol readers before writing a passing fixture receipt.
+It preserves the original lease terminal status. The exact legacy 18.19.3
+`failed`/`-1`/`child exited non-zero` shape requires the successful Action's
+intentional nonreuse disposal context; it is not generalized to newer RCCs.
+This gate covers worker cleanup and the already verified lease receipt's
+terminal shape. Provider reader cleanup, full ownership census, and independent
+lease-release observation remain separate native admission requirements.
+
 Pooled worker retirement retains its existing stdout/stderr output threads and
 joins them together with the protocol reader using the caller's one deadline.
 Typed `WorkerReaderResult` values record each join, final alive state, and fixed

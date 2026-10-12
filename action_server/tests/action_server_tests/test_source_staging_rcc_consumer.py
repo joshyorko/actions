@@ -77,6 +77,93 @@ def _staged_worker_evidence(handle: object, artifact_digest: str) -> dict[str, o
     }
 
 
+def _require_staged_worker_cleanup(
+    worker: dict, *, rcc_version: str, intentional_disposal: bool
+) -> dict[str, str]:
+    """Admit terminal shape after the raw worker receipt has been verified."""
+    from actions.server._rcc_runtime_adapter import RccRuntimeError
+
+    def require(condition, code):
+        if not condition:
+            raise RccRuntimeError("receipt", code)
+
+    def mapping(value: object, code: str) -> dict:
+        if not isinstance(value, dict):
+            raise RccRuntimeError("receipt", code)
+        return value
+
+    retirement = mapping(
+        worker.get("retirement_result"), "STAGED_RETIREMENT_UNAVAILABLE"
+    )
+    require(
+        retirement.get("state") == "execution_stopped"
+        and retirement.get("descendant_snapshot_complete") is True,
+        "STAGED_RETIREMENT_INCOMPLETE",
+    )
+    for cleanup in (retirement.get("cleanup"), worker.get("wrapper_cleanup_result")):
+        cleanup = mapping(cleanup, "STAGED_TREE_CLEANUP_UNAVAILABLE")
+        require(
+            cleanup.get("wrapper_reaped") is True
+            and cleanup.get("descendant_snapshot_complete") is True,
+            "STAGED_TREE_REAP_UNCONFIRMED",
+        )
+        for key in ("live_descendant_pids", "zombie_descendant_pids", "errors"):
+            require(
+                isinstance(cleanup.get(key), (list, tuple)) and not cleanup[key],
+                "STAGED_TREE_SURVIVOR_OR_ERROR",
+            )
+    readers = retirement.get("readers")
+    if not isinstance(readers, (list, tuple)):
+        raise RccRuntimeError("receipt", "STAGED_READERS_UNAVAILABLE")
+    require(len(readers) == 3, "STAGED_READER_CENSUS")
+    roles = []
+    for reader in readers:
+        reader = mapping(reader, "STAGED_READER_SCHEMA")
+        require(
+            set(reader) == {"role", "joined", "alive", "error"},
+            "STAGED_READER_SCHEMA",
+        )
+        require(
+            isinstance(reader["role"], str)
+            and reader["joined"] is True
+            and reader["alive"] is False
+            and reader["error"] is None,
+            "STAGED_READER_NOT_CLEAN",
+        )
+        roles.append(reader["role"])
+    require(sorted(roles) == ["protocol", "stderr", "stdout"], "STAGED_READER_ROLES")
+    receipt = mapping(worker.get("runtime_receipt"), "STAGED_LEASE_TERMINAL_SCHEMA")
+    require(
+        isinstance(receipt.get("leaseId"), str)
+        and bool(receipt["leaseId"])
+        and isinstance(receipt.get("exitCode"), int)
+        and not isinstance(receipt.get("exitCode"), bool),
+        "STAGED_LEASE_TERMINAL_SCHEMA",
+    )
+    status = receipt.get("status")
+    if status == "completed":
+        require(receipt["exitCode"] == 0, "STAGED_LEASE_COMPLETED_NONZERO")
+        disposition = "completed"
+    elif status == "failed":
+        require(
+            intentional_disposal is True
+            and rcc_version == "v18.19.3"
+            and receipt["exitCode"] == -1
+            and receipt.get("reason") == "child exited non-zero",
+            "STAGED_LEASE_LEGACY_DISPOSAL_SHAPE",
+        )
+        disposition = "legacy3_failed_intentional_nonreuse"
+    elif status == "killed":
+        require(intentional_disposal is True, "STAGED_LEASE_FORCED_DISPOSAL_CONTEXT")
+        disposition = "killed_intentional_nonreuse"
+    else:
+        raise RccRuntimeError("receipt", "STAGED_LEASE_NOT_TERMINAL")
+    return {
+        "scope": "worker_cleanup_and_lease_receipt_only",
+        "lease_disposition": disposition,
+    }
+
+
 def _create_runtime_catalog_database(data_dir: Path):
     """Create the consumer test catalog using the complete Runtime registry."""
     from actions.server._database import Database
@@ -511,8 +598,14 @@ def test_staged_package_executes_in_managed_rcc_runtime(tmp_path: Path, monkeypa
         if worker_handle is not None:
             try:
                 assert worker_artifact_digest is not None
-                evidence["worker"] = _staged_worker_evidence(
+                worker_evidence = _staged_worker_evidence(
                     worker_handle, worker_artifact_digest
+                )
+                evidence["worker"] = worker_evidence
+                evidence["worker_cleanup_admission"] = _require_staged_worker_cleanup(
+                    worker_evidence,
+                    rcc_version=rcc_version,
+                    intentional_disposal=execution_passed,
                 )
             except Exception as error:
                 cleanup_errors.append(f"worker lease evidence: {type(error).__name__}")
@@ -719,6 +812,152 @@ def test_staged_worker_evidence_preserves_actual_pending_zombie_and_error_fields
     assert evidence["wrapper_cleanup_result"] == asdict(cleanup)
     assert evidence["retirement_result"] == asdict(retirement)
     assert evidence["runtime_receipt"] == json.loads(path.read_text())
+
+
+@pytest.fixture
+def staged_worker_cleanup_admission_control():
+    cleanup = {
+        "wrapper_reaped": True,
+        "live_descendant_pids": (),
+        "zombie_descendant_pids": (),
+        "errors": (),
+        "descendant_snapshot_complete": True,
+    }
+    return {
+        "runtime_receipt": {
+            "status": "completed",
+            "exitCode": 0,
+            "leaseId": "synthetic-lease",
+        },
+        "retirement_result": {
+            "state": "execution_stopped",
+            "descendant_snapshot_complete": True,
+            "reason": "",
+            "cleanup": dict(cleanup),
+            "readers": tuple(
+                {"role": role, "joined": True, "alive": False, "error": None}
+                for role in ("stdout", "stderr", "protocol")
+            ),
+        },
+        "wrapper_cleanup_result": dict(cleanup),
+    }
+
+
+def test_native_worker_admission_preserves_completed_lease_and_stopped_readers(
+    staged_worker_cleanup_admission_control,
+):
+    value = staged_worker_cleanup_admission_control
+    original = json.dumps(value, sort_keys=True)
+    observed = _require_staged_worker_cleanup(
+        value, rcc_version="v18.19.3", intentional_disposal=False
+    )
+    assert observed["scope"] == "worker_cleanup_and_lease_receipt_only"
+    assert observed["lease_disposition"] == "completed"
+    assert json.dumps(value, sort_keys=True) == original
+
+
+@pytest.mark.parametrize(
+    "poison",
+    [
+        "retirement_null",
+        "retirement_pending",
+        "retirement_snapshot",
+        "wrapper_null",
+        "wrapper_reap",
+        "wrapper_snapshot",
+        "live",
+        "zombie",
+        "cleanup_error",
+        "readers_null",
+        "reader_missing",
+        "reader_duplicate",
+        "reader_unknown",
+        "reader_live",
+        "reader_alive_unknown",
+        "reader_join",
+        "reader_callback_error",
+        "lease_status",
+        "lease_bool_exit",
+        "lease_missing",
+    ],
+)
+def test_native_worker_admission_rejects_incomplete_or_unknown_cleanup(
+    staged_worker_cleanup_admission_control, poison
+):
+    from actions.server._rcc_runtime_adapter import RccRuntimeError
+
+    value = staged_worker_cleanup_admission_control
+    retirement = value["retirement_result"]
+    wrapper = value["wrapper_cleanup_result"]
+    readers = list(retirement["readers"])
+    if poison == "retirement_null":
+        value["retirement_result"] = None
+    elif poison == "retirement_pending":
+        retirement["state"] = "pending"
+    elif poison == "retirement_snapshot":
+        retirement["descendant_snapshot_complete"] = False
+    elif poison == "wrapper_null":
+        value["wrapper_cleanup_result"] = None
+    elif poison == "wrapper_reap":
+        wrapper["wrapper_reaped"] = False
+    elif poison == "wrapper_snapshot":
+        wrapper["descendant_snapshot_complete"] = False
+    elif poison == "live":
+        retirement["cleanup"]["live_descendant_pids"] = (123,)
+    elif poison == "zombie":
+        wrapper["zombie_descendant_pids"] = (123,)
+    elif poison == "cleanup_error":
+        wrapper["errors"] = ("synthetic-error",)
+    elif poison == "readers_null":
+        retirement["readers"] = None
+    elif poison == "reader_missing":
+        retirement["readers"] = readers[:-1]
+    elif poison == "reader_duplicate":
+        readers[0]["role"] = "stderr"
+    elif poison == "reader_unknown":
+        readers[0]["role"] = "unowned-output"
+    elif poison == "reader_live":
+        readers[0]["alive"] = True
+    elif poison == "reader_alive_unknown":
+        readers[0]["alive"] = None
+    elif poison == "reader_join":
+        readers[0]["joined"] = False
+    elif poison == "reader_callback_error":
+        readers[0]["error"] = "OSError"
+    elif poison == "lease_status":
+        value["runtime_receipt"]["status"] = "running"
+    elif poison == "lease_bool_exit":
+        value["runtime_receipt"]["exitCode"] = True
+    elif poison == "lease_missing":
+        value["runtime_receipt"].pop("leaseId")
+    with pytest.raises(RccRuntimeError):
+        _require_staged_worker_cleanup(
+            value, rcc_version="v18.19.3", intentional_disposal=True
+        )
+
+
+@pytest.mark.parametrize("version", ["v18.19.3", "v18.19.5", "v18.19.6"])
+@pytest.mark.parametrize("intentional", [False, True])
+def test_native_worker_admission_keeps_legacy_failed_disposal_specific(
+    staged_worker_cleanup_admission_control, version, intentional
+):
+    from actions.server._rcc_runtime_adapter import RccRuntimeError
+
+    value = staged_worker_cleanup_admission_control
+    value["runtime_receipt"].update(
+        status="failed", exitCode=-1, reason="child exited non-zero"
+    )
+    if version == "v18.19.3" and intentional:
+        observed = _require_staged_worker_cleanup(
+            value, rcc_version=version, intentional_disposal=intentional
+        )
+        assert observed["lease_disposition"] == "legacy3_failed_intentional_nonreuse"
+        assert value["runtime_receipt"]["status"] == "failed"
+    else:
+        with pytest.raises(RccRuntimeError):
+            _require_staged_worker_cleanup(
+                value, rcc_version=version, intentional_disposal=intentional
+            )
 
 
 def _prepare_owned_rcc_test_package_cache(
