@@ -452,3 +452,134 @@ def test_reused_captured_descendant_is_not_delegated_as_original_identity(monkey
     assert not delegated
     assert not result.complete
     assert result.errors
+
+
+@pytest.mark.parametrize("wait_overshoot", [0.0, 0.15])
+def test_provider_wait_overshoot_preserves_incomplete_cleanup_fact(
+    monkeypatch, wait_overshoot
+):
+    from actions.server._common import process as process_utils
+
+    harness = _harness()
+    now = [100.0]
+    calls = []
+    exited = [False]
+
+    class ProcessError(Exception):
+        pass
+
+    class MissingProcess(ProcessError):
+        pass
+
+    class Original:
+        pid = 123
+
+        def poll(self):
+            return -9 if exited[0] else None
+
+        def kill(self):
+            calls.append(("kill", now[0]))
+            exited[0] = True
+
+        def wait(self, timeout):
+            calls.append(("wait", timeout))
+            if exited[0]:
+                return -9
+            if timeout > 0:
+                now[0] += timeout + wait_overshoot
+            raise subprocess.TimeoutExpired("owned model", timeout)
+
+    class Root:
+        pid = 123
+
+        def create_time(self):
+            return 10.0
+
+        def children(self, recursive):
+            assert recursive is True
+            return []
+
+        def terminate(self):
+            calls.append(("terminate", now[0]))
+
+    def lookup(pid):
+        assert pid == 123
+        return Root()
+
+    monkeypatch.setitem(
+        sys.modules,
+        "psutil",
+        SimpleNamespace(
+            Process=lookup,
+            Error=ProcessError,
+            NoSuchProcess=MissingProcess,
+            wait_procs=lambda processes, timeout: ([], []),
+            STATUS_ZOMBIE="zombie",
+        ),
+    )
+    clock = SimpleNamespace(monotonic=lambda: now[0])
+    monkeypatch.setattr(process_utils, "time", clock)
+    monkeypatch.setattr(harness, "time", clock)
+    process = Original()
+    owner = harness._capture_provider_ownership(process)
+    harness._readline_with_timeout(io.StringIO("not-json\n"), 0.2, owner=owner)
+    owner.reader.thread.join(timeout=1)
+    result = harness.cleanup_provider_until(process, 100.4)
+    assert result.ownership_confirmed and result.reader.joined
+    assert calls[:2] == [("terminate", 100.0), ("wait", pytest.approx(0.3))]
+    if wait_overshoot:
+        assert now[0] > 100.4
+        assert calls[2:] == [("wait", 0.0)]
+        assert not result.complete and not result.tree.wrapper_reaped
+        assert result.tree.errors == ("wrapper pid 123 was not reaped before deadline",)
+        assert process.poll() is None
+    else:
+        assert calls[2:] == [
+            ("kill", pytest.approx(100.3)),
+            ("wait", pytest.approx(0.1)),
+        ]
+        assert result.complete and result.tree.wrapper_reaped
+        assert process.poll() == -9
+    assert process._rcc_provider_cleanup is result
+
+
+def test_startup_regression_reports_failed_cleanup_and_disposes_original_child(
+    tmp_path, monkeypatch
+):
+    from action_server_tests import test_dakota_rcc_acceptance as acceptance_tests
+
+    harness = _harness()
+    captured = []
+    original_capture = harness._capture_provider_ownership
+
+    def capture(process):
+        captured.append(process)
+        return original_capture(process)
+
+    def incomplete_cleanup(process, deadline):
+        return harness.ProviderCleanupResult(
+            process.pid,
+            process._rcc_provider_owner.create_time,
+            False,
+            None,
+            harness.ProviderReaderResult(True, False, None),
+            ("CONTROLLED_OWNERSHIP_FAILURE",),
+        )
+
+    monkeypatch.setattr(acceptance_tests, "_harness", lambda: harness)
+    monkeypatch.setattr(harness, "_capture_provider_ownership", capture)
+    monkeypatch.setattr(harness, "cleanup_provider_until", incomplete_cleanup)
+    try:
+        with pytest.raises(AssertionError) as caught:
+            acceptance_tests.test_provider_startup_failure_uses_bounded_kill_fallback(
+                tmp_path, monkeypatch
+            )
+        assert len(captured) == 1
+        assert captured[0].poll() is not None
+        assert captured[0].stdout.closed and captured[0].stderr.closed
+        assert "CONTROLLED_OWNERSHIP_FAILURE" in str(caught.value)
+        assert '"ownership_confirmed": false' in str(caught.value)
+    finally:
+        # Keep the RED control safe even when the acceptance test lacks teardown.
+        for process in captured:
+            _dispose(process)

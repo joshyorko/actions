@@ -2684,6 +2684,17 @@ from the Runtime server's existing `Process._stop_and_reap_until` readers and
 from provider startup readers. Thread closure does not prove lease release or
 complete descendant reaping; native admission must still check those facts.
 
+Provider startup failure tests retain the original `Popen` and the primary
+exception's typed cleanup result. Assert the observed cleanup facts before
+emergency test teardown, and report those facts on failure. Always kill, wait,
+and close that original child's pipes in `finally`; successful teardown cannot
+retroactively qualify a failed cleanup. A cooperative `Popen.wait` may resume
+after its requested timeout because of scheduler delay. If the absolute cleanup
+deadline has expired, the current helper skips a new kill and records an unreaped
+wrapper. Use injected clock controls to distinguish that outcome from failed
+ownership capture; a live-child assertion without its typed result cannot
+identify which path failed.
+
 Source CLI gates must also set a task-owned writable `ROBOTS_HOME`, alongside
 their isolated `ACTIONS_HOME`, RCC home, temporary directory, and package caches.
 The CLI creates the Robot home before dispatching commands, so the default

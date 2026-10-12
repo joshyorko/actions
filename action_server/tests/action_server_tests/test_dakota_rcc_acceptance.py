@@ -1090,26 +1090,46 @@ def test_provider_startup_failure_uses_bounded_kill_fallback(tmp_path, monkeypat
         lambda _rcc, _root: [sys.executable, "-c", fake_server],
     )
 
-    with pytest.raises(RuntimeError, match="startup JSON"):
-        harness.start_provider(
-            "/unused/rcc",
-            tmp_path / "provider-root",
-            harness.child_environment(os.environ, task_root=tmp_path / "runtime"),
-            deadline=harness.Deadline.after(3),
-            cleanup_grace_seconds=0.2,
-        )
+    captured = []
+    actual_popen = subprocess.Popen
 
-    import psutil
+    def owned_popen(*args, **kwargs):
+        process = actual_popen(*args, **kwargs)
+        captured.append(process)
+        return process
 
-    provider_pid = int(pid_file.read_text())
+    monkeypatch.setattr(
+        harness,
+        "subprocess",
+        SimpleNamespace(**dict(vars(subprocess), Popen=owned_popen)),
+    )
     try:
-        provider_stopped = (
-            not psutil.Process(provider_pid).is_running()
-            or psutil.Process(provider_pid).status() == psutil.STATUS_ZOMBIE
-        )
-    except psutil.NoSuchProcess:
-        provider_stopped = True
-    assert provider_stopped
+        with pytest.raises(RuntimeError, match="startup JSON") as caught:
+            harness.start_provider(
+                "/unused/rcc",
+                tmp_path / "provider-root",
+                harness.child_environment(os.environ, task_root=tmp_path / "runtime"),
+                deadline=harness.Deadline.after(3),
+                cleanup_grace_seconds=0.2,
+            )
+
+        assert len(captured) == 1
+        process = captured[0]
+        result = caught.value.provider_cleanup_result
+        diagnostic = json.dumps(result.to_dict(), sort_keys=True)
+        assert int(pid_file.read_text()) == process.pid
+        assert process.poll() is not None, diagnostic
+        assert result.complete, diagnostic
+    finally:
+        # Only the original Popen owns this wait and emergency test teardown.
+        # Preserve the cleanup result above; teardown is not acceptance evidence.
+        for process in captured:
+            if process.poll() is None:
+                process.kill()
+            process.wait(timeout=2)
+            for stream in (process.stdout, process.stderr):
+                if stream is not None:
+                    stream.close()
 
 
 def test_public_harness_uses_shared_test_only_binary_admission(tmp_path, monkeypatch):
