@@ -2499,8 +2499,9 @@ continues to later consumers. Its optional error observer records the first
 fixed exception class against the actual retained output thread. Observer
 failure does not replace the original exception or change dispatch ordering;
 an unmatched thread is recorded as unowned and leaves cleanup unconfirmed.
-Retry observes the same retained thread objects; it
-does not replace readers or reset the deadline. These worker facts are separate
+Each retirement attempt shares its caller's deadline across all reader joins.
+A later retry may receive a new caller deadline and observes the same retained
+thread objects. These worker facts are separate
 from the Runtime server's existing `Process._stop_and_reap_until` readers and
 from provider startup readers. Thread closure does not prove lease release or
 complete descendant reaping; native admission must still check those facts.
