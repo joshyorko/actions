@@ -213,9 +213,9 @@ class OwnedCleanupEvidence(NamedTuple):
     @property
     def census_reap_complete(self) -> bool:
         """Scoped process facts only; unavailable readers/deadlines remain null."""
-        reaped = {event.matched_identity for event in self.reap_events}
         return (
-            self.root is not None
+            self.schema_version == 1
+            and self.root is not None
             and self.root_capture_verified
             and self.root_wait_reaped is True
             and self.enumeration_succeeded is True
@@ -224,14 +224,16 @@ class OwnedCleanupEvidence(NamedTuple):
             and not self.observation_errors
             and any(row.identity == self.root for row in self.census)
             and all(
-                row.identity is not None and row.state == "absent" and row.error is None
+                row.identity == self.root
+                and row.observed_pid == self.root.pid
+                and row.state == "absent"
+                and row.current_create_time is None
+                and row.error is None
                 for row in self.census
             )
-            and all(
-                row.identity == self.root or row.identity in reaped
-                for row in self.census
-            )
-            and all(event.matched_identity is not None for event in self.reap_events)
+            # Schema1 has no wait-birth witness. It cannot establish reaping
+            # of a captured child, even when a forged in-memory record says so.
+            and not self.reap_events
         )
 
     def to_dict(self) -> dict:
@@ -309,6 +311,8 @@ class OwnedCleanupEvidence(NamedTuple):
             pid = _evidence_int(item["observed_pid"])
             if pid is not None and pid <= 0:
                 raise ValueError("cleanup census PID")
+            if identity is not None and pid != identity.pid:
+                raise ValueError("cleanup census PID identity")
             birth = item["current_create_time"]
             birth = _evidence_number(birth) if birth is not None else None
             if (birth is not None and birth <= 0) or (
@@ -340,12 +344,14 @@ class OwnedCleanupEvidence(NamedTuple):
             status = _evidence_int(item["raw_wait_status"])
             if pid is None or pid <= 0 or status is None:
                 raise ValueError("cleanup reap values")
+            if item["matched_identity"] is not None:
+                raise ValueError("cleanup reap unwitnessed birth")
             reaps.append(
                 OwnedReapEvent(
                     pid,
                     status,
                     _evidence_number(item["observed_at"]),
-                    _evidence_identity(item["matched_identity"]),
+                    None,
                 )
             )
         deadlines = []
@@ -453,6 +459,7 @@ class _OwnedCleanupObserver:
                 )
             except missing_error:
                 state = "absent"
+                birth = None
             except Exception as error:
                 error_class = type(error).__name__
             self.rows[identity] = OwnedCensusRow(

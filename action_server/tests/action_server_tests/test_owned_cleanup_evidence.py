@@ -539,3 +539,102 @@ def test_genuine_supervisor_failure_has_explicitly_unavailable_metadata(monkeypa
     )
     assert evidence.observation_errors == ("SupervisorFailure",)
     assert not evidence.census_reap_complete
+
+
+def _absent_child_evidence(harness):
+    observer = _observer(harness)
+    observer.capture_snapshot([_process(1, 1.0), _process(2, 10.0)])
+
+    class Missing(Exception):
+        pass
+
+    def absent(_pid):
+        raise Missing()
+
+    observer.observe_final(absent, missing_error=Missing, observed_at=20.0)
+    observer.terminal_echild = True
+    return observer.freeze()
+
+
+@pytest.mark.parametrize("wait_pid", [2, 999])
+def test_schema1_rejects_every_unwitnessed_wait_birth_assertion(monkeypatch, wait_pid):
+    harness = _harness()
+    evidence = _absent_child_evidence(harness)
+    wire = evidence.to_dict()
+    wire["reap_events"] = [
+        {
+            "pid": wait_pid,
+            "raw_wait_status": 0,
+            "observed_at": 20.0,
+            "matched_identity": {"pid": 2, "create_time": 10.0},
+        }
+    ]
+    with pytest.raises(ValueError, match="unwitnessed"):
+        harness.OwnedCleanupEvidence.from_dict(wire)
+    payload = _wire_result(evidence)
+    payload["cleanup_evidence"] = wire
+    _transport(monkeypatch, harness, payload)
+    outcome = harness.run_owned_process(
+        ["command"], timeout_seconds=1, env={}, collect_cleanup_evidence=True
+    )
+    assert outcome.returncode == 7
+    assert (outcome.stdout, outcome.stderr) == ("command-stdout", "command-stderr")
+    assert not outcome.cleanup_evidence.census_reap_complete
+    assert outcome.cleanup_evidence.observation_errors == ("ValueError",)
+
+
+@pytest.mark.parametrize("observed_pid", [None, 999])
+def test_known_census_identity_requires_matching_observed_pid(observed_pid):
+    harness = _harness()
+    wire = _absent_child_evidence(harness).to_dict()
+    wire["census"][1]["observed_pid"] = observed_pid
+    with pytest.raises(ValueError, match="PID identity"):
+        harness.OwnedCleanupEvidence.from_dict(wire)
+
+
+def test_disappearance_after_birth_read_preserves_absent_census_without_reap():
+    harness = _harness()
+    observer = _observer(harness)
+    observer.capture_snapshot([_process(1, 1.0), _process(2, 10.0)])
+
+    class Missing(Exception):
+        pass
+
+    class Disappearing:
+        def __init__(self, birth):
+            self.birth = birth
+
+        def create_time(self):
+            return self.birth
+
+        def status(self):
+            raise Missing()
+
+    observer.observe_final(
+        lambda pid: Disappearing(1.0 if pid == 1 else 10.0),
+        missing_error=Missing,
+        observed_at=20.0,
+    )
+    observer.terminal_echild = True
+    evidence = observer.freeze()
+    assert all(
+        row.state == "absent" and row.current_create_time is None
+        for row in evidence.census
+    )
+    restored = harness.OwnedCleanupEvidence.from_dict(evidence.to_dict())
+    assert restored == evidence
+    assert len(restored.census) == 2
+    assert not restored.census_reap_complete
+    assert restored.reap_events == ()
+    assert restored.observation_errors == ()
+
+
+def test_schema1_in_memory_poison_cannot_claim_scoped_reaping():
+    harness = _harness()
+    evidence = _absent_child_evidence(harness)
+    forged = evidence._replace(
+        reap_events=(
+            harness.OwnedReapEvent(999, 0, 20.0, harness.OwnedIdentity(2, 10.0)),
+        )
+    )
+    assert not forged.census_reap_complete

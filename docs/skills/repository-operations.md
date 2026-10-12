@@ -2631,6 +2631,13 @@ verified live/birth capture. Existing `waitpid` calls retain raw PID/status even
 and the actual terminal ECHILD observation without adding waits. A wait PID alone
 does not establish birth identity, so these events leave `matched_identity` null.
 Absence and legacy reap counts are not converted into observed identity reaps.
+Schema 1 rejects every nonnull wait-event `matched_identity`, including a
+matching numeric PID, because it contains no birth witness. Known census rows
+must record the same observed PID as their captured identity. If a process
+disappears between its birth and status reads, retain an absent row with null
+current birth; do not discard the whole census or invent a reap event. Schema 1
+can establish scoped root-only reaping from the separate Popen wait fact, but
+cannot establish reaping of captured children from these wait events.
 
 The same typed `cleanup_evidence` is attached to command results, timeout, and
 cleanup-error outcomes while retaining their existing output fields. Wait errors
