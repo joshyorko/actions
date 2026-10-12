@@ -243,7 +243,7 @@ class ProcessHandle:
                     )
                     self._on_output(line_bytes)
             except BaseException as error:
-                self._output_reader_errors[role] = type(error).__name__
+                self._output_reader_errors.setdefault(role, type(error).__name__)
                 raise
 
         self._read_queue: "Queue[dict]" = Queue()
@@ -332,7 +332,7 @@ class ProcessHandle:
                     if runtime_descriptor is not None
                     else None
                 )
-                self._on_output = Callback()
+                self._on_output = Callback(on_error=self._record_output_callback_error)
 
                 pid = self._process.pid
 
@@ -405,7 +405,7 @@ class ProcessHandle:
                 if runtime_descriptor is not None
                 else None
             )
-            self._on_output = Callback()
+            self._on_output = Callback(on_error=self._record_output_callback_error)
 
             pid = self._process.pid
 
@@ -641,6 +641,14 @@ class ProcessHandle:
         self._retirement_result = result
         return result
 
+    def _record_output_callback_error(self, error: Exception) -> None:
+        current = threading.current_thread()
+        for role, reader in self._output_readers:
+            if reader is current:
+                self._output_reader_errors.setdefault(role, type(error).__name__)
+                return
+        self._output_reader_errors.setdefault("unowned-output", type(error).__name__)
+
     def _join_readers_until(self, deadline: float) -> tuple[WorkerReaderResult, ...]:
         import time
 
@@ -659,6 +667,12 @@ class ProcessHandle:
             except Exception as exception:
                 error = type(exception).__name__
             results.append(WorkerReaderResult(role, joined, alive, error))
+        if "unowned-output" in errors:
+            results.append(
+                WorkerReaderResult(
+                    "unowned-output", False, None, errors["unowned-output"]
+                )
+            )
         return tuple(results)
 
     def _shutdown_retirement_socket(self) -> None:

@@ -2494,6 +2494,11 @@ Typed `WorkerReaderResult` values record each join, final alive state, and fixed
 error class. A live or unobserved reader or failed join keeps capacity pending.
 A successfully joined, inactive reader releases capacity even if its output
 callback failed; the error remains visible for acceptance and diagnosis.
+The existing callback dispatcher still logs ordinary consumer exceptions and
+continues to later consumers. Its optional error observer records the first
+fixed exception class against the actual retained output thread. Observer
+failure does not replace the original exception or change dispatch ordering;
+an unmatched thread is recorded as unowned and leaves cleanup unconfirmed.
 Retry observes the same retained thread objects; it
 does not replace readers or reset the deadline. These worker facts are separate
 from the Runtime server's existing `Process._stop_and_reap_until` readers and
@@ -2506,6 +2511,13 @@ The CLI creates the Robot home before dispatching commands, so the default
 `~/.robots` can fail even project creation and package metadata tests in a
 read-only host home. Keep the Robot and Action homes separate; overriding the
 RCC developer home alone does not isolate either Runtime-owned home.
+
+Memory admission must bind the process's cgroup membership to the visible
+cgroup2 mount and exact counter directory before describing counters as its
+self-cgroup limit. A namespace route of `0::/` alone does not establish that
+binding when the mount's root is different. Preserve an unsupported mount
+identity as an admission hold; a visible mount's free headroom and filesystem
+capacity cannot replace the missing ownership/scope check.
 
 An isolated, sequential RCC qualification may share only its once-owned `pkgs`
 download cache between publication and staged execution for the same source and

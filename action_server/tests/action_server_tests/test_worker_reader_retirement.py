@@ -108,3 +108,16 @@ def test_output_error_remains_visible_after_reader_has_stopped(monkeypatch):
     assert result.readers[0].joined is True
     assert result.readers[0].alive is False
     assert result.readers[0].error == "OSError"
+
+
+def test_output_error_from_unretained_thread_leaves_cleanup_unconfirmed(monkeypatch):
+    handle = _cancelled_handle(monkeypatch, [])
+    handle._record_output_callback_error(OSError("private callback failure"))
+    result = handle.retire(time.monotonic() + 1)
+    assert result.state == "pending"
+    assert not result.capacity_releasable
+    unowned = result.readers[-1]
+    assert unowned.role == "unowned-output"
+    assert unowned.joined is False
+    assert unowned.alive is None
+    assert unowned.error == "OSError"
