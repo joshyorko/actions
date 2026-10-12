@@ -2690,8 +2690,8 @@ emergency test teardown, and report those facts on failure. Always kill, wait,
 and close that original child's pipes in `finally`; successful teardown cannot
 retroactively qualify a failed cleanup. A cooperative `Popen.wait` may resume
 after its requested timeout because of scheduler delay. If the absolute cleanup
-deadline has expired, the current helper skips a new kill and records an unreaped
-wrapper. Use injected clock controls to distinguish that outcome from failed
+deadline has expired, the current helper skips a new kill. If its final
+zero-budget wait still fails, it records an unreaped wrapper. Use injected clock controls to distinguish that outcome from failed
 ownership capture; a live-child assertion without its typed result cannot
 identify which path failed.
 
