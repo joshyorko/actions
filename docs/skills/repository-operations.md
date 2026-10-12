@@ -2502,6 +2502,13 @@ The provider harness retains the original startup `readline` thread against its
 exact `Popen` object, PID, and captured creation time. Stream failures cross the
 existing queue with their original exception identity; private cleanup evidence
 contains the fixed error class. A second startup reader is rejected.
+Owner capture must observe the original `Popen` still live before and after
+the root/descendant snapshot and confirm the root's creation time again before
+committing that snapshot. An already exited, changed, or failed capture retains
+no discovered descendants as signal authority. Cleanup validates each captured
+descendant's PID and creation time before delegating; reused or unknown
+identities prevent completion. Previously verified descendants remain owned
+after the original provider exits, without acquiring a fresh tree from its PID.
 `cleanup_provider_until` checks that owner before signalling and uses the
 existing process-tree cleanup routine and startup-thread join under one absolute
 caller deadline. Missing or mismatched ownership, an unavailable or live reader,
@@ -2511,6 +2518,20 @@ fixtures retain this typed result and require completion before reporting PASS.
 Its scope is the captured provider tree and startup reader: it does not prove
 an uncapped supervisor census, a single whole-test deadline, or lease release.
 The legacy `terminate_process_tree` routine remains a separate operation.
+
+The verified RCC binary help advertises `env lifecycle inspect --artifact ...
+--json`, but its name and help do not prove passive observation. In
+[public revision 4148c2b7](https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/admin.go#L79),
+`Inspect` invokes reconciliation; the
+[reconciler](https://github.com/joshyorko/rcc/blob/4148c2b71705c9d2baf0e88b48d08a79cb7bda0f/environmentlifecycle/reconcile.go#L61)
+removes provisional journals and stale lease records. Do not use that operation
+as read-only evidence of natural lease release. The shipped binary with SHA256
+`7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428`
+embeds `vcs.modified=true`, so the public revision does not establish its exact
+source or lease schema. A passive lease observer needs separately admitted raw
+record paths, root/digest/lease identity, no-follow reads, stable bytes, and
+actual before/after observations. Help output and terminal process receipts
+alone do not provide those facts.
 
 Pooled worker retirement retains its existing stdout/stderr output threads and
 joins them together with the protocol reader using the caller's one deadline.

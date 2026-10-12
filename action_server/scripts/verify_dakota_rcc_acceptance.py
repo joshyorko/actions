@@ -818,6 +818,8 @@ class _ProviderOwnership:
         self.pid = process.pid
         self.create_time: float | None = None
         self.descendants: list = []
+        self.descendant_births: tuple[tuple[int, float], ...] = ()
+        self.capture_verified = False
         self.snapshot_complete = False
         self.errors: tuple[str, ...] = ()
         self.reader: _ProviderStartupReader | None = None
@@ -837,11 +839,28 @@ def _capture_provider_ownership(process: subprocess.Popen) -> _ProviderOwnership
 
     owner = _ProviderOwnership(process)
     setattr(process, "_rcc_provider_owner", owner)
+    if process.poll() is not None:
+        owner.errors = ("PROVIDER_CAPTURE_OWNER_EXITED",)
+        return owner
     try:
         root = psutil.Process(process.pid)
-        owner.create_time = root.create_time()
-        owner.descendants = root.children(recursive=True)
+        birth = root.create_time()
+        descendants = root.children(recursive=True)
+        descendant_births = tuple(
+            (child.pid, child.create_time()) for child in descendants
+        )
+        if (
+            psutil.Process(owner.pid).create_time() != birth
+            or process.poll() is not None
+            or process.pid != owner.pid
+        ):
+            owner.errors = ("PROVIDER_CAPTURE_OWNER_CHANGED",)
+            return owner
+        owner.create_time = birth
+        owner.descendants = descendants
+        owner.descendant_births = descendant_births
         owner.snapshot_complete = True
+        owner.capture_verified = True
     except psutil.Error as error:
         owner.errors = (f"PROVIDER_CAPTURE_{type(error).__name__}",)
     return owner
@@ -868,6 +887,9 @@ def cleanup_provider_until(
         and owner.process is process
         and owner.pid == process.pid
         and owner.create_time is not None
+        and owner.capture_verified
+        and owner.snapshot_complete
+        and not owner.errors
     )
     if owned and process.poll() is None:
         assert isinstance(owner, _ProviderOwnership)
@@ -879,16 +901,41 @@ def cleanup_provider_until(
     tree = None
     reader_result = ProviderReaderResult(False, None, "PROVIDER_READER_UNAVAILABLE")
     if not owned:
+        if isinstance(owner, _ProviderOwnership):
+            errors.extend(owner.errors)
         errors.append("PROVIDER_OWNER_UNCONFIRMED")
     else:
         assert isinstance(owner, _ProviderOwnership)
         errors.extend(owner.errors)
+        # The initial verified capture binds descendants to this owner's birth.
+        # Reuse or an unobserved identity is never fresh signal authority.
         try:
-            tree = force_kill_process_tree_until(
-                process, owner.descendants, deadline, owner.snapshot_complete
-            )
-        except Exception as error:
-            errors.append(f"PROVIDER_TREE_{type(error).__name__}")
+            if tuple(
+                (child.pid, child.create_time()) for child in owner.descendants
+            ) != owner.descendant_births:
+                errors.append("PROVIDER_DESCENDANT_CAPTURE_CHANGED")
+        except psutil.Error as error:
+            errors.append(f"PROVIDER_DESCENDANT_CAPTURE_{type(error).__name__}")
+        for pid, birth in owner.descendant_births:
+            try:
+                if psutil.Process(pid).create_time() != birth:
+                    errors.append("PROVIDER_DESCENDANT_IDENTITY_CHANGED")
+            except psutil.NoSuchProcess:
+                pass  # The original captured identity is already absent.
+            except psutil.Error as error:
+                errors.append(f"PROVIDER_DESCENDANT_{type(error).__name__}")
+        if not errors:
+            try:
+                tree = force_kill_process_tree_until(
+                    process, owner.descendants, deadline, owner.snapshot_complete
+                )
+                # The existing helper may append newly discovered descendants
+                # while the original owner is still live. Preserve that ledger.
+                owner.descendant_births = tuple(
+                    (child.pid, child.create_time()) for child in owner.descendants
+                )
+            except Exception as error:
+                errors.append(f"PROVIDER_TREE_{type(error).__name__}")
         reader = owner.reader
         if isinstance(reader, _ProviderStartupReader) and reader.owner is owner:
             joined = False
