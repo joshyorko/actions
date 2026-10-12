@@ -3851,3 +3851,15 @@ ancestry, and absence of both the remote tag and registry version. A successful
 tag workflow must still be followed by registry file/hash and installed public
 API verification. Never move a tag or replace a published distribution to recover
 a failed release.
+
+Mutex exclusion tests synchronize release with an observed failed real mutex
+acquisition while the owner still holds the lock. Assert eventual acquisition,
+owner disposal, and bounded release-thread cleanup; retain reentrant and
+cross-process exclusion checks. A release thread started before the observation
+timestamp can consume part of its sleep outside the measured interval, so elapsed
+time strictly greater than that sleep is not an exclusion invariant. Use a
+process-qualified unique mutex name in both parent and child to isolate xdist.
+Check owner disposal immediately when the successor acquires and enters,
+before joining the release thread. A join can let an early-entry defect wait
+for owner release and pass later assertions. Keep thread-completion and error
+assertions as separate cleanup checks.
