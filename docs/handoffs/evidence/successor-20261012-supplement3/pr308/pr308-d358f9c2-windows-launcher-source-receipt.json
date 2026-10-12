@@ -1,0 +1,168 @@
+{
+  "actual_failure_preserved": {
+    "conclusion": "FAILURE",
+    "failures": [
+      "Provider test fixture reportedPID6976 differs originalPopen5536",
+      "Injected ownershipdiagnostic test report5392 differs originalPopen6312, so unsupported equality hides intended diagnostic"
+    ],
+    "job": 114674512952,
+    "log": {
+      "bytes": 724363,
+      "path": "/workspace/successor-evidence/pr308/decoded-eeb-windows114674512952.log",
+      "sha256": "83e9ac325f90956aaaabd1b2849bc658299e1344aaa413987ed26faae13b5495"
+    },
+    "log_retrieval": "Parent fetched completeddecodedlog once; this lane only read savedbytes",
+    "producer_checkout_proof": [
+      "2026-10-12T05:22:18.1591723Z HEAD is now at 7ba382a Merge eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5 into 48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+    ],
+    "run": 38207623439,
+    "source_head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+    "unit": "2FAIL/1413PASS/225SKIP301.50s"
+  },
+  "base": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Windowsvenv mayredirect to distinctPythonchild; capture verifiedreportedchild birth/membership and assertchild/root/typedcompletion separately; pidfile never signal authority. Laterpassing diagnostics cannotretrospectively identify oldmissingfacts",
+    "evidence": "ActualWindowsfailedproducerlog, exactCPython31215 source, exacteeb launcherRED and336sourceGREEN",
+    "remaining_uncertainty": "Actual corrected WindowsCI pending; historicalMac causeunknown; native/controller/selfbinding/lease holds unchanged"
+  },
+  "evidence_files": [
+    {
+      "bytes": 2194,
+      "path": "/workspace/successor-evidence/pr308/windows-launcher-eeb-red.log",
+      "sha256": "51c85835ac1bbb2b1513d5f71024713f9b10e8ffcd47178b5d403be72eca3c14"
+    },
+    {
+      "bytes": 2047,
+      "path": "/workspace/successor-evidence/pr308/windows-launcher-eeb-red.xml",
+      "sha256": "faf9168ae25c0fa55055d282e8cc54ed713135d215f2899ffdc93e0a13a1e0d3"
+    },
+    {
+      "bytes": 259,
+      "path": "/workspace/successor-evidence/pr308/windows-launcher-green-final.log",
+      "sha256": "561e29a2ddd420823d506f608aad777c1abef02be1f2df843aa974c0f59198c3"
+    },
+    {
+      "bytes": 5936,
+      "path": "/workspace/successor-evidence/pr308/windows-launcher-green-final.xml",
+      "sha256": "13aa714bc30d7b66064c2e4a383616afe4c31b1b5b828b03c8ba7cb1f7fb1c5c"
+    },
+    {
+      "bytes": 1412,
+      "path": "/workspace/successor-evidence/pr308/windows-launcher-affected-final.log",
+      "sha256": "ec4eb6bcaeb917732e20e090f16e59f6283fca42654db831ec7614402635a959"
+    },
+    {
+      "bytes": 59831,
+      "path": "/workspace/successor-evidence/pr308/windows-launcher-affected-final.xml",
+      "sha256": "170f874a602d4eb0011202d2ecd8c1bb80265288a13b60b650bc74abcf06dc4b"
+    },
+    {
+      "bytes": 2017,
+      "path": "/workspace/successor-evidence/pr308/windows-launcher-static-final.log",
+      "sha256": "778e1a5579507144667e47736eafc8ebbbbfc3bfd84d0a4321060c657185ed33"
+    },
+    {
+      "bytes": 43,
+      "path": "/workspace/successor-evidence/pr308/windows-launcher-mypy-win32.log",
+      "sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8"
+    }
+  ],
+  "head": "d358f9c2b41b9575a286e6a98cacf7425d694ea6",
+  "lease_commands_executed": false,
+  "mac_watch_handoff": {
+    "completed_log_fetches_by_this_lane": 0,
+    "owner": "Parent root continues Mac watch",
+    "watch_suspended_at": "2026-10-12T05:31:42Z lastpoll10 integrationrunning; source stepPASS from parentAPI"
+  },
+  "native_attempts_consumed": 0,
+  "native_profile": {
+    "bytes": 1975,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-d358f9c2-v10-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "568b654b3bd9c69f40bcc74c81a9dedc8be952a3d223f221c9b04d73d89cb584"
+  },
+  "patch": {
+    "bytes": 11562,
+    "path": "/workspace/successor-evidence/pr308/windows-launcher-d358f9c2-source.patch",
+    "sha256": "bb8670296c8957861a9a77131ede53bfda322e9805e9887a8f4e309e8fc8a05d"
+  },
+  "production_helper_and_process_unchanged": true,
+  "push_by_this_lane": false,
+  "resource": {
+    "/dev/shm": {
+      "free_bytes": 9441349632
+    },
+    "/tmp": {
+      "free_bytes": 9441153024
+    },
+    "/workspace": {
+      "free_bytes": 12866011136
+    },
+    "memory.current": "14330974208",
+    "memory.events": "low 0\nhigh 0\nmax 34411\noom 0\noom_kill 0\noom_group_kill 0",
+    "memory.max": "17179869184",
+    "scope": "visible cgroup mount diagnostic only; actual self-binding unproven",
+    "time_unix": 1791783619.1762755,
+    "visible_headroom_bytes": 2848894976
+  },
+  "rootcause": {
+    "actual_windows_postfix": "PENDING freshrequiredCI",
+    "confirmed_fixture_defect": "Assumed child getpid equals originalPopenpid; live supported Pythonredirector model reproduces exacteeb1120 equalityfailure",
+    "historical_mac0546_cause": "UNKNOWN",
+    "mechanism": "VENV_REDIRECT locates originalpython.exe, run_child CreateProcessW then WaitForSingleObjectEx, so wrapper and actualPython getpid distinct",
+    "primary_source": {
+      "bytes": 67152,
+      "path": "/workspace/successor-evidence/pr308/cpython31215-launcher.c",
+      "sha256": "5f22f9a9be91601e323d8ffc5e74279af4676acbc01daeeba0b92457f67590a1"
+    },
+    "primary_source_url": "https://github.com/python/cpython/blob/v3.12.15/PC/launcher.c"
+  },
+  "schema": 1,
+  "scope": "Test-only launcher/child fixture correction, no production/native/deadline change",
+  "source_files": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes": 110032,
+      "path": "/workspace/actions-pr308/action_server/scripts/verify_dakota_rcc_acceptance.py",
+      "sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c"
+    },
+    "action_server/src/actions/server/_common/process.py": {
+      "bytes": 31134,
+      "path": "/workspace/actions-pr308/action_server/src/actions/server/_common/process.py",
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    },
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": {
+      "bytes": 46376,
+      "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+      "sha256": "462e73e44b0cff04778404ab331aa4f6a5ac44b6c82ba0c273c03689f4728909"
+    },
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py": {
+      "bytes": 22593,
+      "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+      "sha256": "a45697330b31cf54c5cfd62b1cd0c2d242dee130d6d8f057a248341322f2e914"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 290206,
+      "path": "/workspace/actions-pr308/docs/skills/repository-operations.md",
+      "sha256": "635662cec39959b649fa97db49acc1d7e4d761e6cba68d407038ad384d4c0ab0"
+    }
+  },
+  "strict_acceptance": [
+    "Reportedchild birth bound to verifiedroot or captured descendant membership beforecleanup",
+    "Rootbirth/liveness and reportedchildbirth bracketed; unknown/unowned/reused fail",
+    "OriginalPopenpoll nonNone AND capturedreportedchildstopped AND typed tree/readercomplete beforeemergencyfinally",
+    "Same deadline3s and cleanup_grace.2; legitimate package sys.executable retained",
+    "Emergencyfinally signals only unchanged verifiedcaptured descendants plus originalPopen, no arbitraryPIDfilesignal"
+  ],
+  "tree": "eb5cd67bb1d4628b7958608d8d6e5ceb160d10ed",
+  "upstream_disposition": "none",
+  "verification": {
+    "affected_final": "Prepared package Python pytest -n0 affected5files -m not integration_test;336PASS/1SKIP/3nativeDESEL4warnings8.64s exit0",
+    "configured_static": "Fresh pinned toolkit PATH ownnamespaces Poetryinvoke lint typecheck;Ruff/format/IsortPASS,mypy360PASS;markdownlint unavailable",
+    "diff_check": "PASS",
+    "focused_green": "33PASS0.96s; distinctlauncher +direct provider +typed diagnostic bothfixturevariants +unknown/rootbirth/childbirth/ownerexit/reuse guards",
+    "immutable_red": "Exacteeb function AST executed with real harmless waitinglauncher fixture;1FAIL atoldline1120 PIDequality, originalPopenfinally ran",
+    "initial_recoverable_collection_error": "Parametrizedlauncher argument also haddefault, pytest rejectedcollection; removedmark and keptdirect defaultcase +dedicatedlaunchercontrols before finalgates",
+    "windows_mypy": "Prepared package mypy --platformwin32 affected2files PASS diagnostic only"
+  },
+  "worktree_clean": true
+}

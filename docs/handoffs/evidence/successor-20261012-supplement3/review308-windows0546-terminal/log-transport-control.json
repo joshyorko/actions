@@ -1,0 +1,10 @@
+{
+  "initial_private_log_transport": "FAIL_BYTE_IDENTITY: line-based patch writer dropped5371 carriage returns",
+  "initial_observed_bytes": 735828,
+  "initial_observed_sha256": "c560c6dd7ba62f664501c3f3c85761aff75ff1b24d50382a6d77212840e23a44",
+  "corrected_transport": "serialize JSON then encode exactUTF8 preservingBOM/CRLF",
+  "corrected_bytes": 741199,
+  "corrected_sha256": "7a856e19801ba7f26795bfabfc48978088a794c8880c2acd8a2ed9ab46c782b8",
+  "single_log_fetch": true,
+  "initial_result_parser": "FAIL: expected one node occurrence but log has start+terminal rows; corrected filter requires explicit terminal outcome"
+}

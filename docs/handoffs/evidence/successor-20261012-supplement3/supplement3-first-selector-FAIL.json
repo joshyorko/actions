@@ -1,0 +1,9 @@
+{
+  "result": "FAIL_RETAINED",
+  "phase": "pre-export selector/scanner",
+  "path": "review308-mac-eeb-terminal/decoded-private-transport.json",
+  "bytes": 1560789,
+  "sha256": "e1b2566638f89354cd5186d3dfc8e16456293f9fc93bb1943762b0423ffaee6f",
+  "cause": "Private transport metadata excluded before export; no scanner relaxation; local original retained",
+  "remote_mutation": false
+}

@@ -1,0 +1,46 @@
+{
+  "observed_at": "2026-10-12T05:35:14.305774+00:00",
+  "run": 38207623439,
+  "job": 114674512952,
+  "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+  "producer": {
+    "sha": "7ba382a61a5b27831f8eaf759dd5a10ae4a4b54a",
+    "tree": "ce7ae02d6c7db06ceffedf771c6eb365d11517b9",
+    "parents": [
+      "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5"
+    ]
+  },
+  "conclusion": "failure",
+  "unit": {
+    "failed": 2,
+    "passed": 1413,
+    "skipped": 225,
+    "seconds": 301.5
+  },
+  "failures": [
+    {
+      "node": "test_dakota_rcc_acceptance.py::test_provider_startup_failure_uses_bounded_kill_fallback",
+      "assertion": "reported Python PID equals original Popen PID",
+      "reported_pid": 6976,
+      "popen_pid": 5536
+    },
+    {
+      "node": "test_provider_startup_cleanup.py::test_startup_regression_reports_failed_cleanup_and_disposes_original_child",
+      "assertion": "expected CONTROLLED_OWNERSHIP_FAILURE diagnostic; actual failed at prior unsupported PID equality",
+      "reported_pid": 5392,
+      "popen_pid": 6312
+    }
+  ],
+  "actual_cause": "Both test failures are the new unsupported wrapper/child PID equality assertion. CPython Windows venv redirectors support a distinct child process. Cleanup completeness was not reached by these assertions and remains unqualified.",
+  "python": "3.12.15; actual Poetry virtualenv Scripts/python.exe",
+  "raw_log": {
+    "path": "/workspace/successor-evidence/pr308/decoded-eeb-windows114674512952.log",
+    "bytes": 724363,
+    "sha256": "83e9ac325f90956aaaabd1b2849bc658299e1344aaa413987ed26faae13b5495",
+    "local_only": true
+  },
+  "production_change": false,
+  "native_baseline_attempts": 0,
+  "historical_mac_cause": "UNKNOWN"
+}

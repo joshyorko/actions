@@ -1,0 +1,45 @@
+{
+  "baseline_binary": {
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428",
+    "version": "18.19.3"
+  },
+  "head": "d358f9c2b41b9575a286e6a98cacf7425d694ea6",
+  "lease_commands_executed": false,
+  "native_attempts_consumed": 0,
+  "native_launched": false,
+  "previous_profile": {
+    "bytes": 1820,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-eeb806e7-v9-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "90f3e23155fab8f33f727f7271f8342e22feb65726d511e86c86d09dd6d3a93d"
+  },
+  "production_helper_and_process_unchanged": true,
+  "remaining_holds": [
+    "Exact independent source review and fresh exact-head required platformCI incl actualWindows",
+    "Actual historical0546Mac cause UNKNOWN; currenteeb sourcePASS does not recover discarded diagnostic",
+    "Self-cgroup binding missing; visible counters cannot qualify actualselfendpoint",
+    "Resource memoryfloor/reserve unaccepted and uncalibrated",
+    "Whole nativecontroller/deadline/census/output retention design remains unimplemented/admissionHOLD",
+    "Actual shipped18.19.3 provider reader and samelease creation/release/nativeoutputs not qualified"
+  ],
+  "resource": {
+    "/dev/shm": {
+      "free_bytes": 9441349632
+    },
+    "/tmp": {
+      "free_bytes": 9441153024
+    },
+    "/workspace": {
+      "free_bytes": 12866011136
+    },
+    "memory.current": "14330974208",
+    "memory.events": "low 0\nhigh 0\nmax 34411\noom 0\noom_kill 0\noom_group_kill 0",
+    "memory.max": "17179869184",
+    "scope": "visible cgroup mount diagnostic only; actual self-binding unproven",
+    "time_unix": 1791783619.1762755,
+    "visible_headroom_bytes": 2848894976
+  },
+  "schema": 1,
+  "source_delta": "Test-only provider reportedchild PID+birth verifiedroot/descendant membership before cleanup; originallauncherreap+reportedchildstopped+typedcomplete before emergencyfinally",
+  "status": "NOT_ADMITTED",
+  "tree": "eb5cd67bb1d4628b7958608d8d6e5ceb160d10ed"
+}

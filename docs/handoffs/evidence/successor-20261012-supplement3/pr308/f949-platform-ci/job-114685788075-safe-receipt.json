@@ -1,0 +1,205 @@
+{
+  "schema": 1,
+  "job": 114685788075,
+  "run": 38211281631,
+  "head_sha": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "status": "completed",
+  "conclusion": "success",
+  "completed_at": "2026-10-12T06:47:51Z",
+  "completed_log_fetch_calls": 1,
+  "log_scope": "Exact UTF-8 encoding of received connector-decoded text, not original HTTP/archive bytes",
+  "log_identity": {
+    "decoded_log": "/workspace/successor-evidence/pr308/f949-platform-ci/job-114685788075-decoded-private.log",
+    "bytes": 747820,
+    "sha256": "680bf188563569775175b2c5217ee8d3b6603bd679875c32675ab97dc9f952c9",
+    "leading_utf8_bom": true,
+    "crlf_count": 5409
+  },
+  "source_producer": {
+    "checkout_commit": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+    "ordered_parents": [
+      "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "f949bef2eeab518ffd34d9e69955938a007f8922"
+    ],
+    "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+    "matches_reviewed_tree": true,
+    "checkout_log_proof": [
+      "2026-10-12T06:10:59.5429508Z HEAD is now at d663b19 Merge f949bef2eeab518ffd34d9e69955938a007f8922 into 48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+    ]
+  },
+  "named_test_events": {
+    "test_async_zero_admits_cancel_before_held_worker_runs": [
+      "2026-10-12T06:14:47.0283559Z [gw1] [ 12%] PASSED action_server_tests\\test_async_run_cancellation_admission.py::test_async_zero_admits_cancel_before_held_worker_runs "
+    ],
+    "test_fixture_child_capture_rejects_unknown_or_changed_identity": [
+      "2026-10-12T06:19:45.4683719Z [gw0] [ 80%] PASSED action_server_tests\\test_provider_startup_cleanup.py::test_fixture_child_capture_rejects_unknown_or_changed_identity[unowned] ",
+      "2026-10-12T06:19:45.4727541Z [gw0] [ 81%] PASSED action_server_tests\\test_provider_startup_cleanup.py::test_fixture_child_capture_rejects_unknown_or_changed_identity[root_birth] ",
+      "2026-10-12T06:19:45.4780225Z [gw0] [ 81%] PASSED action_server_tests\\test_provider_startup_cleanup.py::test_fixture_child_capture_rejects_unknown_or_changed_identity[child_birth] ",
+      "2026-10-12T06:19:45.4819720Z [gw0] [ 81%] PASSED action_server_tests\\test_provider_startup_cleanup.py::test_fixture_child_capture_rejects_unknown_or_changed_identity[owner_exit] "
+    ],
+    "test_fixture_child_stop_check_rejects_reused_identity": [
+      "2026-10-12T06:19:45.4854498Z [gw0] [ 81%] PASSED action_server_tests\\test_provider_startup_cleanup.py::test_fixture_child_stop_check_rejects_reused_identity "
+    ],
+    "test_provider_startup_failure_uses_bounded_kill_fallback": [
+      "2026-10-12T06:15:28.9917365Z [gw0] [ 38%] PASSED action_server_tests\\test_dakota_rcc_acceptance.py::test_provider_startup_failure_uses_bounded_kill_fallback "
+    ],
+    "test_regression_handles_reported_child_distinct_from_original_popen": [
+      "2026-10-12T06:19:45.4633354Z [gw0] [ 80%] PASSED action_server_tests\\test_provider_startup_cleanup.py::test_regression_handles_reported_child_distinct_from_original_popen "
+    ],
+    "test_server_async_process_poll_with_cancel": [
+      "2026-10-12T06:43:20.0389042Z action_server_tests\\test_server_async.py::test_server_async_process_poll_with_cancel PASSED [ 76%]"
+    ],
+    "test_startup_regression_reports_failed_cleanup_and_disposes_original_child": [
+      "2026-10-12T06:19:45.1720377Z [gw0] [ 80%] PASSED action_server_tests\\test_provider_startup_cleanup.py::test_startup_regression_reports_failed_cleanup_and_disposes_original_child[False] ",
+      "2026-10-12T06:19:45.3173068Z [gw0] [ 80%] PASSED action_server_tests\\test_provider_startup_cleanup.py::test_startup_regression_reports_failed_cleanup_and_disposes_original_child[True] "
+    ]
+  },
+  "suite_summaries": [
+    "2026-10-12T06:19:51.0479362Z ========= 1430 passed, 225 skipped, 15 warnings in 328.46s (0:05:28) ==========\r",
+    "2026-10-12T06:47:12.5039737Z ======== 131 passed, 21 skipped, 1658 deselected in 1621.38s (0:27:01) ========\r"
+  ],
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Checkout repository and submodules",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install the latest version of uv",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install Python 3.12",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install devutils requirements",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install project (not dev)",
+      "status": "completed",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Install project (dev)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Setup go",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Setup node",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build frontend",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build OAuth2 config",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Test Go wrapper child lifecycle",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Build binary",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Upload artifact: action_server/dist/final/",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Test (not integration)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Install Playwright Chromium for Runtime browser acceptance",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Verify Canvas published-Core Runtime and browser acceptance",
+      "status": "completed",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Upload Canvas published-Core receipt",
+      "status": "completed",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Test (integration)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Retain Windows native startup diagnostics",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "`inv lint`, potentially fixed with `inv pretty`",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "`inv typecheck`",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "`inv docs` with checking on files changed",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Setup node",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Setup go",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Install the latest version of uv",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Post Checkout repository and submodules",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "native_baseline_attempts": 0,
+  "release_scope": "General CI success, not admitted native Action/readers/lease/resource acceptance; Runtime1.0.3 and RCC18.19.6 HOLD"
+}

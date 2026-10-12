@@ -1,0 +1,16 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "accepted": [
+    "review308-windows-launcher original-Popen finally isolation",
+    "review308-async-admission inline Future completion outside nonreentrant semaphore",
+    "review308-windows0546-terminal exact decoded BOM/CRLF and per-job/per-run terminal outcomes",
+    "review308-mac-eeb-terminal historical cause remains UNKNOWN and diagnostic scope",
+    "review308-f949-packaged complete sdist membership and installed held-executor seam"
+  ],
+  "additional": [
+    "task-owned pip cache and separate parser versus command outcome",
+    "one completed-log retrieval owner"
+  ],
+  "scope": "Documentation/evidence checkout only; no source change/CI rerun/native admission/release waiver",
+  "upstream_disposition": "none"
+}

@@ -3808,3 +3808,50 @@ helper skips a new kill. If its final zero-budget wait still fails, it records
 an unreaped wrapper. Injected clock controls distinguish that outcome from failed
 ownership capture. An old live-child
 assertion without typed facts cannot identify which path failed.
+
+
+A prepared Windows Python executable may be a launcher whose executing child
+reports a different PID. Bind that reported PID and creation time to the live
+original Popen tree at the readiness boundary, before cleanup; do not equate
+numeric PIDs or trust a PID file as signal authority. Bracket enumeration with
+the original root's unchanged birth, reject unowned/reused/unknown identities,
+and require both the original wrapper and verified executing child stopped.
+Assert measured cleanup before emergency teardown. Keep original-child teardown
+in `finally` around descendant teardown: an unreadable or changed descendant
+birth cannot authorize a signal, and its inspection failure must still attempt
+original-child teardown and pipe closure. Public launcher source explains a
+possible layout without byte-attributing the CI executable. A later platform
+PASS cannot identify an earlier failure whose typed diagnostics were discarded.
+
+For async-zero cancellation, register the actual runtime entry before submission
+and response, then pass that same entry to the worker. Check cancellation before
+pool acquisition inside the existing terminal-status handling. Retire only the
+expected object identity on submission failure or Future completion; an old
+completion cannot delete a successor's entry. Exercise held, cancelled, failed
+and already-completed Futures with real persisted Runs and the API boundary.
+An already completed Future invokes a newly added done callback inline; attach
+that callback outside `RunsState.semaphore`, because identity cleanup acquires
+that non-reentrant semaphore itself. Preserve validation/scoped/finished-run
+policy and the original integration regression's sleeps and assertions. A
+queued cancellation failing before worker entry requires admission-transition
+diagnosis before an assertion or timeout change.
+
+Retain tool-decoded hosted logs as exact UTF-8 content without BOM or newline
+normalization; preserve CRLF through serialization. Label the digest as decoded
+content identity, not original HTTP/archive identity. Assign one completed-log
+retrieval owner and reuse those local bytes. Record per-job and whole-run
+conclusions separately and bind counts and named tests to actual producer tree.
+Parse each explicit terminal node outcome; a start row is not another result.
+A passing diagnostic-failure control proves failure remains visible and emergency
+teardown disposes the original child; it is not measured cleanup success or
+shipped RCC/lease acceptance.
+
+Check complete Python membership and source bytes in the sdist as well as every
+wheel; wheel evidence does not prove sdist contents. Bind installed behavioral
+tests to exact committed test bytes and name their execution seam. A held
+executor with persisted Runs proves cancellation admission before dispatch,
+while actual managed worker execution remains a separate gate. Poetry cache
+configuration does not select pip's cache: use a task-owned 0700 PIP_CACHE_DIR
+for read-only installed dependency checks. Retain original command exit/output
+and parser failures separately; do not change HOME permissions or relabel a
+healthy dependency command as failed because an output parser rejected a warning.

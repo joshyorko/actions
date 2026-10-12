@@ -1,0 +1,21 @@
+{
+  "head": "d358f9c2b41b9575a286e6a98cacf7425d694ea6",
+  "tree": "eb5cd67bb1d4628b7958608d8d6e5ceb160d10ed",
+  "parent": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+  "changed_files": [
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py",
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "product_blobs": {
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "identical": true,
+      "sha256": "9bd4e6fb0b4b04831bb7562e4ba9f32761ee33de3290482cd1afafc39cf08c3c"
+    },
+    "action_server/src/actions/server/_common/process.py": {
+      "identical": true,
+      "sha256": "f432e65a488bf06862e548dc45342d3c1fb5ea7fcc26f6371d98aae124ffc082"
+    }
+  },
+  "identical_startup_call_AST": true
+}

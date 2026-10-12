@@ -1,0 +1,132 @@
+{
+  "captured_failure": {
+    "assertion": "line 229 expected response.json() == \"cancelled\"; actual response.json() == \"not-running\"",
+    "log_bytes": 1492640,
+    "log_path": "/workspace/successor-evidence/pr308/decoded-eeb-linux114674512992.log",
+    "log_sha256": "836e3193d596883a0569b40279780729aa3bbacd50e6ca17e559afc8ad611633",
+    "observed_sequence": [
+      "The test starts the server with max_processes=1 and submits two asynchronous 20-second actions.",
+      "The first action obtains the only process slot and is logged RUNNING.",
+      "The second request receives HTTP 200; its cancellation is sent immediately afterward.",
+      "Before the failed cancel response, server log says no runtime info exists for that run; API returns not-running.",
+      "After the assertion aborts and teardown kills the first worker, the queued second action is logged starting; teardown then kills it too."
+    ],
+    "pytest_summary": {
+      "deselected": 1643,
+      "elapsed_seconds": 739.36,
+      "failed": 1,
+      "passed": 131,
+      "skipped": 20
+    },
+    "secondary_teardown_effects": "Worker-retirement-snapshot errors, missing result JSON, and failed run statuses occur after the assertion triggers teardown; these are consequences, not the original cancellation failure.",
+    "test": "action_server_tests/test_server_async.py::test_server_async_process_poll_with_cancel",
+    "timestamped_timeline": [
+      {
+        "event": "client observes first async action HTTP 200",
+        "server_local_timestamp": "2026-10-12 05:38:38,540"
+      },
+      {
+        "event": "client observes second async action HTTP 200",
+        "server_local_timestamp": "2026-10-12 05:38:38,633"
+      },
+      {
+        "event": "server logs cancel lookup: no runtime info found; cancel response is not-running",
+        "server_local_timestamp": "2026-10-12 05:38:38"
+      },
+      {
+        "event": "client observes cancel HTTP 200 response body",
+        "server_local_timestamp": "2026-10-12 05:38:38,717"
+      },
+      {
+        "event": "test teardown begins killing the server process after assertion failure",
+        "server_local_timestamp": "2026-10-12 05:38:38,801"
+      },
+      {
+        "event": "after shutdown begins and the first worker is killed, pool creates another process and logs run status=RUNNING for queued second action",
+        "server_local_timestamp": "2026-10-12 05:38:38"
+      }
+    ],
+    "timing_interpretation": "Second request returns then cancellation response is observed about 84 ms later; teardown starts about 84 ms after that. The action slot remained occupied by a 20-second action; the second worker starts only after teardown kills the first worker."
+  },
+  "classification": {
+    "20_second_fixture_sleep_is_root_cause": false,
+    "fixture_role": "A 20-second action plus max_processes=1 keeps the first slot occupied so the second remains pending; this exposes the gap. It does not naturally complete before cancellation.",
+    "integration_change_attribution": "The tested API route, cancel state, test, and runner path match base48; eeb is a documentation-only successor. Process-pool source changed after base48 but is identical between eeb and integration; the observed missing registry occurs before process-pool acquisition.",
+    "not_a_sleep_length_fix": "Increasing sleeps or rerunning the same CI job would not close request registration before cancellation."
+  },
+  "next_bounded_non_RCC_plan": {
+    "candidate_repair": "Create the per-run cancellation state synchronously at accepted run submission before dispatching the future, pass the same state into _run_action_impl, and check its canceled flag before acquiring a process slot. Keep terminal cleanup of the registry; add a regression that proves a queued run is marked canceled without starting its action.",
+    "repro": "Add a deterministic unit-level gate before the asynchronous runner enters _run_action_impl. Submit an async request, pause worker entry, cancel, then release the gate; assert the present behavior and ensure a later action cannot begin after an accepted cancellation.",
+    "verification": "Run only the focused deterministic test first; then one local source-mode integration using event-controlled actions, max_processes=1, no RCC/native runtime and no timing sleeps. Do not rerun the identical CI workflow until this deterministic gate proves the handoff."
+  },
+  "observed_at_utc": "2026-10-12T05:46:26.226996+00:00",
+  "remaining_uncertainty": [
+    "Exact thread scheduler delay is unknown.",
+    "Whether the API intends queued-not-running requests to be cancellable is strongly indicated by the test expectation and RunRuntimeInfo.cancel no-listener semantics, but should be confirmed as the contract during implementation review."
+  ],
+  "review": "source-bound root-cause audit of frozen eeb Linux Action Server failure",
+  "schema": 1,
+  "scope": {
+    "CI_rerun_or_cancel": false,
+    "native_or_RCC_or_infrastructure": false,
+    "raw_log_copied_into_receipt": false,
+    "read_only": true,
+    "source_edits": false
+  },
+  "source_identity": {
+    "eeb_tree": "ce7ae02d6c7db06ceffedf771c6eb365d11517b9",
+    "identity_comparison": "test, API route, RunsState cancellation registry, and _ActionsRunner blobs are byte-identical in base48, eeb, and integration 7ba; process-pool blob is identical eeb/integration and differs from base48.",
+    "integration_commit": "7ba382a61a5b27831f8eaf759dd5a10ae4a4b54a",
+    "integration_parents": [
+      "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5"
+    ],
+    "integration_tree": "ce7ae02d6c7db06ceffedf771c6eb365d11517b9",
+    "job": 114674512992,
+    "relevant_file_blob_ids": {
+      "cancel_endpoint": {
+        "blob_sha": "9f0bab96b6e65c0bd455cc4c8aaa8cc554a22c24",
+        "path": "action_server/src/actions/server/_api_run.py"
+      },
+      "cancel_state": {
+        "blob_sha": "3774e9a0e77d43e63a18733a4ff5652454ef06ce",
+        "path": "action_server/src/actions/server/_runs_state_cache.py"
+      },
+      "process_pool": {
+        "blob_sha": "7fbc3882475ec037d1e4f6a6cd46d5456ea39d42",
+        "path": "action_server/src/actions/server/_actions_process_pool.py"
+      },
+      "runner": {
+        "blob_sha": "24fc844ad99c658d70f6f5069f0df250bb72ad87",
+        "path": "action_server/src/actions/server/_actions_run.py"
+      },
+      "test": {
+        "blob_sha": "a2d42b716a07d2066f60af7431cb65bcb14f4757",
+        "path": "action_server/tests/action_server_tests/test_server_async.py"
+      }
+    },
+    "remote_run_job_readback": {
+      "job_completed_at": "2026-10-12T05:40:28Z",
+      "job_conclusion": "failure",
+      "job_head_sha": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+      "job_id": 114674512992,
+      "job_name": "build (ubuntu-py3.12-devmode)",
+      "job_started_at": "2026-10-12T05:22:06Z",
+      "job_status": "completed",
+      "run_conclusion": "failure",
+      "run_head_sha": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+      "run_id": 38207623439,
+      "run_status": "completed"
+    },
+    "run": 38207623439,
+    "run_head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5"
+  },
+  "source_mechanism": {
+    "cancel_lookup": "RunsState.cancel_run returns false when the run ID is absent from _run_id_to_runtime_info; _api_run.cancel_run maps that to not-running.",
+    "cause_scope": "The missing-runtime-info queue/registration window is evidenced. The precise scheduler/threadpool timing that left the worker unscheduled for about 80 ms is not instrumented and remains unknown.",
+    "conclusion": "If cancellation wins the submission-to-worker-registration window, the pending queued run has no cancellation token. The cancel request returns not-running and the run may start later. The captured log directly records this path.",
+    "late_registration": "_ActionsRunner._run_action_impl creates RunRuntimeInfo only after the worker enters that method (line 432 in the frozen file).",
+    "runner_async_dispatch": "_ActionsRunner.run_in_thread calls run_in_thread.run_in_thread(self._run_action); async request may return before worker runs."
+  },
+  "verdict": "CAUSE_SUPPORTED_HIGH_CONFIDENCE"
+}

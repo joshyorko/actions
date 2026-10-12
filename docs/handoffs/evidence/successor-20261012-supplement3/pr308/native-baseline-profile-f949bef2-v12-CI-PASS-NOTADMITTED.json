@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "observed_at": "2026-10-12T06:55:18.044142+00:00",
+  "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+  "previous_profile": {
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-f949bef2-v11-SOURCE-PREPARED-NOTRUN.json",
+    "bytes": 1942,
+    "sha256": "ffb4fb038baa67999f5024a55ec86a3203bad4bd85e20ea5e9b8309e2d322bbb"
+  },
+  "status": "NOT_ADMITTED",
+  "resolved_since_v11": [
+    "Independent exact-source/security GO",
+    "24 exact-head checks SUCCESS including actual Linux/macOS/Windows frozen and strict ownership/cancellation nodes",
+    "Independent measured packages and installed OAuth/held-executor/idle-template scope GO"
+  ],
+  "remaining_holds": [
+    "Whole-controller and independent640-second hard deadline not implemented/admitted",
+    "Uncapped final descendants/readers/application-lease and passive lease admission remain incomplete",
+    "Actual self-cgroup binding unavailable; visible counters UNQUALIFIED",
+    "Native memory floor/reserve proposed, unaccepted and uncalibrated; visibleheadroom2477068288bytes below proposedfloor3113851289plusreserve536870912",
+    "Single source/hash-bound genuine18.19.3 Action, acquisition, artifact/result/lease/terminalcleanup still NOTRUN"
+  ],
+  "exact_next_baseline_nodes": [
+    "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair",
+    "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime"
+  ],
+  "baseline_binary": {
+    "version": "18.19.3",
+    "sha256": "7e588c01751ca2ae15ba13ef67f2f4b7567697a5a8389737059a73936f509428"
+  },
+  "native_attempts_consumed": 0,
+  "lease_commands_executed": false,
+  "optional_versions_launched": false,
+  "runtime_release": "HOLD",
+  "rcc18_19_6_publication": "ABSOLUTE HOLD",
+  "execution_authority": "This projection is evidence, not a runnable launch grant; all remaining admission gates must be satisfied first"
+}

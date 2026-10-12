@@ -26,7 +26,7 @@ The original hosted snapshot is [timestamped 2026-10-12T03:32:11.889219Z](eviden
 | PR | Preserved successor head | Verified progress | Remaining gate |
 |---|---|---|---|
 | #307 | `23a6be5044f7a9377180f7ec7d33c50ad8c4c364` | All 23 checks passed; scoped independent source/security and packaged OAuth acceptance; normal merge into integration verified | Broader release installed/native/platform/dependency gates remain separate |
-| #308 | pushed `eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5` | Diagnostic source329 tests pass; independent old-test RED/four-control GREEN and documentation-only successor review accepted; normal remote push verified. Historical0546 had22 successful checks, macOS failed and Windows running at05:14 | Fresh exact-eeb CI; actual macOS cause remains unknown; full controller/deadline/census/lease controls, self-cgroup admission, genuine18.19.3 Action baseline |
+| #308 | `f949bef2eeab518ffd34d9e69955938a007f8922` | All 24 exact-head checks passed; independent Windows ownership and queued-cancellation source/security reviews accepted; 373 local affected tests pass; real packaged installed OAuth/cancellation scope accepted | Full controller/deadline/census/lease controls, self-cgroup admission and genuine18.19.3 Action baseline; historical0546 macOS cause remains unknown |
 | #313 | `216ad55b5bcafaa54ba61fcc87982a57573adce7` | All 19 refreshed-head checks passed; 21 cleanup/mutex controls pass; independent exact target-diff review preserves four feature source/test blobs | Complete shared-deadline process/reader/lease acceptance |
 | #306 | `eb0df4f97f390b413e364fe68364b81a65663f02` | Ordinary refresh onto accepted integration; six feature source/test blobs preserved; independent merge-tree review; 16 SQLite tests pass; all19 checks pass including Windows | Five original Windows failure nodes now pass; historical cause remains unknown; native/dependency/cleanup prerequisites remain open |
 | #305 | `f75dcae52fcd78c5c382d3903b012e5b049ca48b` | Exact public source and separate retained 640-second draft audited | Enforceable primary bound and actual browser/descendant/reader/lease cleanup |
@@ -78,12 +78,12 @@ budget, adds typed diagnostics and original-child teardown, and changes no
 production helper. Independent review accepts that diagnostic scope. The additive
 documentation-only successor eeb corrects the final zero-budget wait wording,
 preserves all tested source bytes, and was normally pushed and remotely verified.
-It requires fresh exact-head CI and remains distinct from failing0546.
+Its later exact-head CI failed on Windows launcher ownership assumptions and Linux queued cancellation. Both failures and their distinct actual causes are preserved below; macOS passed. This does not identify the historical0546 cause.
 
 The fe1 seven-file package set also passed independent complete Python-member,
 manifest, RECORD and generated-input provenance checks. A fresh public Core1.0.2/
 Helper1.0.3 consumer passes nine installed OAuth tests, dependency checks,
-bundled-template creation and idle HTTP200/403/200. This qualifies that package
+bundled-template creation and idle HTTP 200/403/200. This qualifies that package
 scope only; it does not qualify later complete source heads or native Action,
 MCP, reader/descendant/lease, platform or release acceptance.
 
@@ -93,11 +93,74 @@ workspace and workers were retained; no uncertain operation was replayed.
 
 A separate fresh minimum-Core consumer uses public Core1.0.2/Helper1.0.3. All
 203 Runtime,47 Core and2 Helper installed Python members match the measured
-wheels; nine OAuth controls, dependency checks and idle HTTP200/403/200 pass.
+wheels; nine OAuth controls, dependency checks and idle HTTP 200/403/200 pass.
 Independent audit found no concrete Runtime-host floor incompatibility. Minimum
 Core MCP discovery/read/tool execution and managed Action acceptance remain
 untested. The authoring `meta=` limitation does not justify raising a host floor
 when that host does not call the authoring decorators.
+
+## Current recovery and package evidence
+
+The [third additive supplement](evidence/successor-20261012-supplement3/manifest.json)
+preserves new source, diagnosis and package receipts. The prior 149 payloads remain
+byte-identical. The eeb Windows job failed because Poetry's Windows Python launcher
+and its reported executing child have different PIDs. Correction `d358f9c2` binds
+the reported child's birth to the original live process tree before cleanup and
+retains strict typed assertions before emergency teardown. Unknown, reused or
+unowned PIDs cannot authorize signals. Independent immutable-source reproduction
+was one RED followed by 33 GREEN, with 16 separate ownership/finally controls.
+
+The eeb Linux frozen integration failed the second queued cancellation. Both
+async responses preceded creation of RuntimeInfo, which occurred only on worker
+entry; the queued worker entered after teardown stopped the first run. The
+[independent diagnosis](evidence/successor-20261012-supplement3/review308-linux-async-failure/actual-rootcause-review.json)
+binds that transition to the actual log and unchanged API/test source. F949
+registers the actual RuntimeInfo before executor submission/async response,
+passes that same object into the worker, rejects cancellation before pool
+acquisition, and retires only that exact entry on submission failure or Future
+completion. The existing frozen test's sleeps and assertions remain unchanged.
+Persisted-Run/held-executor RED became 11 GREEN; the affected source suite passed 373
+with one skip and three native tests deselected. The independent source/security
+review covers pending and immediate Future completion, lock order, cancellation,
+validation and stale-owner rejection.
+
+The [terminal check snapshot](evidence/successor-20261012-supplement3/current-checks-f949-terminal.json)
+records all 24 checks successful at F949. Runtime run38211281631 used producer
+`d663b19f95139dbd6080cce3680e2a066f29eda5`, ordered parents `[48eeaf17,f949bef2]`,
+and the exact F949 tree `ce5a94a37f108438daa9d2d283ab575b1000ce99`.
+Linux passed 1,643 source and 132 frozen tests, macOS1439 and132, and Windows 1,430
+and 131. The original queued-cancellation test, corrected launcher guards and
+strict provider/diagnostic controls actually passed on all three. Skips and
+selection differ by platform and remain explicit in the per-job receipts.
+Standard platform CI does not qualify the separately admitted native baseline.
+
+Package run38211281718 produced artifact 11728534466: 80,775,097 bytes, SHA256
+`f2e116426e40f84ddfb6fd88d96bf2280f169801f91d1820480cbcbb5668bbf6`.
+The [independent review](evidence/successor-20261012-supplement3/review308-f949-packaged/review-verdict.json)
+verifies all seven distributions, complete Python membership/source bytes in
+all six wheels and the sdist, RECORD, generated provenance, and all four
+producer checkouts at the exact tree above. Publication credential and publication
+steps were SKIPPED; the successful artifact job did not publish Runtime.
+
+A fresh Poetry consumer resolves public Core 1.0.2 and Helper 1.0.3, installs the
+measured Runtime wheel, and imports only installed members. All 203 Runtime,
+47 Core and 2 Helper Python files match their measured wheels. Nine OAuth tests
+and eight exact-committed persisted-Run/held-executor cancellation tests pass;
+bundled template creation is 0600 and idle HTTP 200/403/200 passes with captured
+root reaped and no live/zombie/error observations. Root/data/robots/tmp remain 0700,
+Actions home 0750 and logs 0600. Dependency checks exit 0. An initial verifier
+rejected an additional pip cache-permission warning; that parser FAIL remains
+retained. A separate read-only check with a new owned 0700 pip cache passed,
+without changing HOME, source or dependency installation. This scope proves
+installed cancellation admission before dispatch, not real managed worker
+execution, MCP, sdist rebuild, global cleanup/readers/leases or other-platform
+installed startup.
+
+Private full logs, ZIPs, environments and public CPython source copies stay
+local. One supplement selector initially included private decoded transport
+metadata; the pre-export scanner rejected it. The corrected selector excludes
+that metadata without relaxing the scanner. Its FAIL receipt preserves only
+path, size and digest. No raw transport metadata or signed URL was exported.
 
 ## Native admission and resource evidence
 
@@ -114,6 +177,8 @@ latest visible memory headroom is below the retained proposed native floor,
 which itself has not been accepted or calibrated. A bounded read-only advice
 attempt on completed parent scratch files failed; it is retained as a failure,
 with no deletion, relocation, permission change, or global cache drop.
+
+The [v12 admission projection](evidence/successor-20261012-supplement3/pr308/native-baseline-profile-f949bef2-v12-CI-PASS-NOTADMITTED.json) marks current source/CI and bounded package holds resolved without altering v11. Whole-controller/independent640-second enforcement, uncapped reader/descendant census and passive application-lease admission remain internal engineering holds; self-binding and usable resource admission remain external/environment holds.
 
 Managed native Action baseline attempts remain zero. Read-only RCC metadata and
 toolkit commands, and ordinary idle-CLI RCC feedback, are separately observed. The exact next gate is complete source-bound

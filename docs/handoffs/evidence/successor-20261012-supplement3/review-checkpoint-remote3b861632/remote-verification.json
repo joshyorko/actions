@@ -1,0 +1,76 @@
+{
+  "checkout_states": {
+    "checkpoint_clean": true,
+    "checkpoint_head": "3b86163240e3527244dcc8501e2a1f32fb5ac546",
+    "checkpoint_path": "/workspace/actions-checkpoint",
+    "immutable_handoff_clean": true,
+    "immutable_handoff_expected": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+    "immutable_handoff_head": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+    "immutable_handoff_path": "/workspace/actions-handoff"
+  },
+  "full_tree_comparison": {
+    "canonical_local_path_mode_type_blobsha_sha256": "7f0e39ae1464dee151d987f72d68add36a06493cabdb02523972b634029fd8f5",
+    "canonical_remote_path_mode_type_blobsha_sha256": "7f0e39ae1464dee151d987f72d68add36a06493cabdb02523972b634029fd8f5",
+    "local_entry_count": 7963,
+    "remote_and_local_exact": true,
+    "remote_blob_count": 6799,
+    "remote_entry_count": 7963,
+    "remote_tree_count": 1164,
+    "remote_tree_truncated": false,
+    "source": "GitHub REST Git Trees API recursive response and local git ls-tree -rz -t"
+  },
+  "new_supplement2_49_remote_bindings": {
+    "all_49_remote_blob_path_mode_sha_and_size_match_manifest": true,
+    "errors": [],
+    "manifest_blob_committed_and_bound": true
+  },
+  "observed_at_utc": "2026-10-12T05:30:02.519061+00:00",
+  "payload_manifests": [
+    {
+      "bytes": 346659,
+      "count": 37,
+      "errors": [],
+      "manifest_sha256": "19f7a5261becd8081966d945f9c64782ea7eb44d6dfd4faa829867a92b8896a4",
+      "name": "original37"
+    },
+    {
+      "bytes": 298242,
+      "count": 63,
+      "errors": [],
+      "manifest_sha256": "1cc1105115e97e6e4bcbf490a8e03f1272616daa49fdb7e8a2f249a0c5193592",
+      "name": "supplement1-63"
+    },
+    {
+      "bytes": 135483,
+      "count": 49,
+      "errors": [],
+      "manifest_sha256": "d688d42697fa0a6f3aa642bb0f421cc9901d2c8d47432a31e2bfcf3456cf297e",
+      "name": "supplement2-49"
+    }
+  ],
+  "remote_commit": {
+    "commit_message": "docs: preserve successor diagnostics and restored workspace evidence",
+    "expected_parent": "363606398d536541599cc71a8cfd43ff09ad02d7",
+    "parents": [
+      "363606398d536541599cc71a8cfd43ff09ad02d7"
+    ],
+    "repository": "joshyorko/actions",
+    "sha": "3b86163240e3527244dcc8501e2a1f32fb5ac546",
+    "tree_sha": "f29cce866b3d7900ee00dec6a75912b43c261d45"
+  },
+  "result": {
+    "all_37_original_payloads_unchanged_vs_parent": true,
+    "all_49_supplement2_payloads_verified": true,
+    "all_63_supplement1_payloads_unchanged_vs_parent": true,
+    "all_checks_pass": true,
+    "remote_tree_matches_exact_local_commit": true
+  },
+  "schema": 1,
+  "scope": {
+    "local_source_mutations": false,
+    "native_or_RCC_or_build_activity": false,
+    "read_only": true,
+    "remote_mutations": false
+  },
+  "verdict": "REMOTE_CHECKPOINT_VERIFIED"
+}

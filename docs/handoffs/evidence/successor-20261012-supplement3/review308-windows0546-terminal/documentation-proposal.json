@@ -1,0 +1,13 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "insertion_point": "Hosted pull-request validation provenance paragraph",
+  "exact_delta": "When retaining a tool-decoded hosted job log, write its exact UTF-8 content without newline or BOM normalization and label the digest as decoded-content identity. Preserve carriage returns through any serialization transport; a line-based text patch can drop them. Record the job and overall run conclusions separately: one completed successful platform job can provide terminal suite evidence while another platform causes the workflow run to fail. Bind suite counts and named regression outcomes to that job's actual checkout tree. Parse the explicit terminal outcome for each node; its start row is not an additional result.",
+  "durable_learning": "Decoded byte identity and terminal per-job results require separate controls from whole workflow success.",
+  "evidence": [
+    "log-transport-control.json retains initial byte and parser failures plus corrections",
+    "terminal-review.json binds Windows jobSUCCESS/whole runFAILURE to actual syntheticcheckout tree and namedregressions"
+  ],
+  "stale_or_ambiguous_guidance_removed": "Avoid normalized text hashes being labeled exact decoded content, start rows counted as outcomes, or job success labeled fullrun/currenthead acceptance.",
+  "remaining_uncertainty": "Currenteeb sourceFAIL2 and all outstanding native/managed/lease gates remain unqualified.",
+  "upstream_disposition": "none"
+}

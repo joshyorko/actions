@@ -1,0 +1,18 @@
+{
+  "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+  "parent": "d358f9c2b41b9575a286e6a98cacf7425d694ea6",
+  "changed_files": [
+    "action_server/src/actions/server/_actions_run.py",
+    "action_server/src/actions/server/_runs_state_cache.py",
+    "action_server/tests/action_server_tests/test_async_run_cancellation_admission.py",
+    "docs/skills/repository-operations.md"
+  ],
+  "frozen_test_identical": true,
+  "frozen_test_sha256": "91cef6aa358777e433b9af39bf7a42a823141ef897846a517954a68a96e5c92a",
+  "production_source_sha256": {
+    "action_server/src/actions/server/_runs_state_cache.py": "c6324900bfb991db5539638287fcec6cee9adb030dc07869b841dd32d5949845",
+    "action_server/src/actions/server/_actions_run.py": "fb0dd99550245f9a48b37eba6f7848eac6cd51715f20e6f1c0f0e9f531101c73"
+  },
+  "test_overlay": "Each pytest invocation replaces only2module objects with copies from corresponding exactgitrevision; remaining prepared package dependencies unchanged"
+}

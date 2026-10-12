@@ -1,0 +1,166 @@
+{
+  "actual_linux_failure": {
+    "case": "test_server_async_process_poll_with_cancel line229 secondqueuedRuncancel not-running insteadcancelled",
+    "cause": "AsyncHTTP200 precedes _run_action_impl workerregistration; real cancellation lookup reports noRuntimeInfo, queuedsecond begins onlyafterteardownkillsfirst;20sfixture isnotcause",
+    "decoded_log": {
+      "bytes": 1492640,
+      "path": "/workspace/successor-evidence/pr308/decoded-eeb-linux114674512992.log",
+      "sha256": "836e3193d596883a0569b40279780729aa3bbacd50e6ca17e559afc8ad611633"
+    },
+    "head": "eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5",
+    "independent_rootcause": {
+      "bytes": 8193,
+      "path": "/workspace/successor-evidence/review308-linux-async-failure/actual-rootcause-review.json",
+      "sha256": "35797235277ef86731b5630cd8e378ac09d407ad09a8f08f9630c31f8dddea87"
+    },
+    "integration_summary": "1FAIL/131PASS/20SKIP/1643DESEL739.36s",
+    "job": 114674512992,
+    "run": 38207623439,
+    "source_producer_proof": [
+      "2026-10-12T05:22:11.0443203Z HEAD is now at 7ba382a Merge eeb806e7699d7f8e6878d5cc1dd83cd22e795ff5 into 48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+    ],
+    "terminal": "FAILURE"
+  },
+  "base": "d358f9c2b41b9575a286e6a98cacf7425d694ea6",
+  "ci_rerun_or_cancel_by_this_lane": false,
+  "controls": {
+    "affected_final": "Preparedpackagepython pytest -n0 newadmission +previous5affected +fullrun_outputs/test_service -m not integration_test;373PASS/1SKIP/3nativeDESEL4warnings10.67s exit0",
+    "diff_check": "PASS",
+    "immutable_integration_test": "test_server_async.py bytes identical to d358; no sleeps/asserts altered",
+    "initial_command_mistake": "FirstGREEN executable command issued fromrepositoryroot lacked .venv; packagecwd corrected beforeactualPASS",
+    "integration_execution": "Not locally run: source-mode genuineAction/native admission remains forbidden; actual requiredCI pending acceptedpush",
+    "new_lifecycle_green": "8newcases +3genuineexistingcommonservice/RunPin tests =11PASS2.12s",
+    "red": "Exactd358 heldgenuineFuture async0 returns beforetargetexecution, persistedNOT_RUN realAPIcancel returnsnot-running;1FAIL0.43s genuine missingstate log",
+    "static": "Freshpinned toolkitPATH owncache/homes packagePoetry invoke lint typecheck;Ruff/format/IsortPASS,mypy361filesPASS;markdownlint unavailable"
+  },
+  "documentation_improvement": {
+    "canonical_file": "docs/skills/repository-operations.md",
+    "durable_learning": "Register acceptedlegacyRun cancellation beforeasync dispatch; passsameinfo; prepoolcancellation; identitycheckedFuturecleanup/submitcleanup; validationstatus separate; scopedcommon authority unchanged; heldexecutor insteadsleepincrease",
+    "evidence": "ActualeebLinuxfailure +independentrootcause +genuineRED/GREEN and373affected/static361",
+    "remaining_uncertainty": "Exactacceptedhead hostedfullplatformCI and frozenintegration pending; historicalMac0546causeUNKNOWN; allnative holds retained"
+  },
+  "evidence_files": [
+    {
+      "bytes": 2167,
+      "path": "/workspace/successor-evidence/pr308/async-admission-red.log",
+      "sha256": "049da3f869e7f98b0b36a7b171cddb3fd7a6e349393cb8403930c771299e3a56"
+    },
+    {
+      "bytes": 1641,
+      "path": "/workspace/successor-evidence/pr308/async-admission-red.xml",
+      "sha256": "0f79a00dd346401badde621c49fa37b56a21b4f9a15cc1ff17dc2333a1e8e8cb"
+    },
+    {
+      "bytes": 257,
+      "path": "/workspace/successor-evidence/pr308/async-admission-first-green.log",
+      "sha256": "27537f116a7fca5eb0ac76c60f0d820644af55e888576c34d8216e8fd3124fb5"
+    },
+    {
+      "bytes": 410,
+      "path": "/workspace/successor-evidence/pr308/async-admission-first-green.xml",
+      "sha256": "a9881f9c3bd1546500f1eb8c94df8d2f5d711d5f9d9bb6156b6f0640224fefe2"
+    },
+    {
+      "bytes": 262,
+      "path": "/workspace/successor-evidence/pr308/async-admission-lifecycle-green.log",
+      "sha256": "c6c261af8d5e243623eb8544258cfaad15e6bf084e20d56b0f058cb7e773371c"
+    },
+    {
+      "bytes": 2074,
+      "path": "/workspace/successor-evidence/pr308/async-admission-lifecycle-green.xml",
+      "sha256": "b94e97f34d9f47eb1b077ff0bbc16d33dd40b68221f94287483b4b91d02edbf3"
+    },
+    {
+      "bytes": 1492,
+      "path": "/workspace/successor-evidence/pr308/async-admission-affected-final.log",
+      "sha256": "ee3392b93985c8a7f7cf0b00e2f3b18b32e1618f95708ef61c29ddcaba0c1ab1"
+    },
+    {
+      "bytes": 65802,
+      "path": "/workspace/successor-evidence/pr308/async-admission-affected-final.xml",
+      "sha256": "09261f541b0c808632d95ff4fc35d0ee6af5445d4fe9ac6919c608bd98bfc6c0"
+    },
+    {
+      "bytes": 2017,
+      "path": "/workspace/successor-evidence/pr308/async-admission-static-final.log",
+      "sha256": "dc39c1a0e95b8a3a5dbc7cdf822b6667f1fcebe9e2c9057952e8e725f87aa83e"
+    }
+  ],
+  "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "implementation": {
+    "caller_audit": "All _run_action/_impl calls migrated; scheduler820/fakeState928 useunchangedcreate-only API and nevernewdiscard; no unusedshim/defaultdisposal skip",
+    "identity": "One RunRuntimeInfo passed explicitly through _run_action into _run_action_impl, no workerduplicatecreation",
+    "lock": "create_run_runtime_info locking unchanged; avoided adding nested lock to existingSemaphore consumers",
+    "preacquisition": "Validcanceledinputs enter existing terminalexception/status path beforepool.obtain",
+    "registration": "run_in_thread after responseRunID but before helperthreadsubmission and async-return",
+    "retirement": "New RunsState.discard_run_runtime_info compares identity underexistingsemaphore; submission BaseException handler +Future done callback retire onlythatinfo",
+    "scope": "Existingactual legacycreate scopedPermissionError remains; no imaginedauthorizedRunner branch added; actualcommon service success/RunPin isolation exercised",
+    "validation": "Original RequestValidationError and persisted NOT_RUN policy retained; no new failure/status/response envelope"
+  },
+  "lease_commands_executed": false,
+  "native_attempts_consumed": 0,
+  "native_profile": {
+    "bytes": 1942,
+    "path": "/workspace/successor-evidence/pr308/native-baseline-profile-f949bef2-v11-SOURCE-PREPARED-NOTRUN.json",
+    "sha256": "ffb4fb038baa67999f5024a55ec86a3203bad4bd85e20ea5e9b8309e2d322bbb"
+  },
+  "patch": {
+    "bytes": 15171,
+    "path": "/workspace/successor-evidence/pr308/async-admission-f949bef2-source.patch",
+    "sha256": "74cccab71475489ccbe08f343baab5d0ee405350448d60eda7bfdecb771082ab"
+  },
+  "previous_fixture_checkpoint": {
+    "bytes": 8584,
+    "path": "/workspace/successor-evidence/pr308/pr308-d358f9c2-windows-launcher-source-receipt.json",
+    "sha256": "5196de1ad61d02ba6e1104ca4276396cdcaa4c998fe2d349797fc295d0814215"
+  },
+  "push_by_this_lane": false,
+  "resource": {
+    "/dev/shm": {
+      "free_bytes": 9441349632
+    },
+    "/tmp": {
+      "free_bytes": 9441153024
+    },
+    "/workspace": {
+      "free_bytes": 12833722368
+    },
+    "memory.current": "14361112576",
+    "memory.events": "low 0\nhigh 0\nmax 34411\noom 0\noom_kill 0\noom_group_kill 0",
+    "memory.max": "17179869184",
+    "scope": "visible cgroup mount only; actual self-binding unproven",
+    "time_unix": 1791784746.7200704,
+    "visible_headroom_bytes": 2818756608
+  },
+  "schema": 1,
+  "source_files": {
+    "action_server/src/actions/server/_actions_run.py": {
+      "bytes": 34973,
+      "path": "/workspace/actions-pr308/action_server/src/actions/server/_actions_run.py",
+      "sha256": "fb0dd99550245f9a48b37eba6f7848eac6cd51715f20e6f1c0f0e9f531101c73"
+    },
+    "action_server/src/actions/server/_runs_state_cache.py": {
+      "bytes": 9213,
+      "path": "/workspace/actions-pr308/action_server/src/actions/server/_runs_state_cache.py",
+      "sha256": "c6324900bfb991db5539638287fcec6cee9adb030dc07869b841dd32d5949845"
+    },
+    "action_server/tests/action_server_tests/test_async_run_cancellation_admission.py": {
+      "bytes": 8262,
+      "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_async_run_cancellation_admission.py",
+      "sha256": "20cb6b8a2cf53d9ba440e463866672fdde9a9ddbd3a9d6cf345feb7be2b1045a"
+    },
+    "action_server/tests/action_server_tests/test_server_async.py": {
+      "bytes": 10133,
+      "path": "/workspace/actions-pr308/action_server/tests/action_server_tests/test_server_async.py",
+      "sha256": "91cef6aa358777e433b9af39bf7a42a823141ef897846a517954a68a96e5c92a"
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes": 291154,
+      "path": "/workspace/actions-pr308/docs/skills/repository-operations.md",
+      "sha256": "ea22a0acda8f08f1b8acaa90a7ee74f8fff84d2643ff46b64845a5ddf193c430"
+    }
+  },
+  "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+  "upstream_disposition": "none",
+  "worktree_clean": true
+}

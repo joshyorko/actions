@@ -1,0 +1,10 @@
+{
+  "source_head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "source_tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+  "sdist_sha256": "dea8e769bb760b96d7e4766484df39075e96e86170bf331f1a0e81afba5b8c41",
+  "complete_python_member_set_equal": true,
+  "tracked_python_members_exact": 202,
+  "explicit_generated_member": "actions/server/_oauth2_config.py",
+  "build_executed": false,
+  "scope": "static sdist source membership; no install/build/native qualification"
+}

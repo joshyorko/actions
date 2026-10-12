@@ -1,0 +1,652 @@
+{
+  "checkpoint": {
+    "expected_parent": "3b86163240e3527244dcc8501e2a1f32fb5ac546",
+    "new_export_directory": "docs/handoffs/evidence/successor-20261012-supplement3",
+    "repo_head": "3b86163240e3527244dcc8501e2a1f32fb5ac546",
+    "tracked_changes": [
+      "docs/handoffs/actions-cloud-successor-checkpoint-20261012.md",
+      "docs/skills/repository-operations.md"
+    ]
+  },
+  "disposition": {
+    "bounded_evidence_review": "GO",
+    "remaining_native_release_authorization": "HOLD",
+    "unresolved_or_not_run": [
+      "self-cgroup and resource admission",
+      "independent whole-operation hard 640-second enforcement",
+      "uncapped final descendant/reader census and application lease",
+      "actual genuine RCC 18.19.3 managed Action baseline",
+      "Runtime 1.0.3 and RCC 18.19.6 publication"
+    ]
+  },
+  "documentation_review": {
+    "additional_canonical_document_delta": "none required; exact next baseline nodes and no-launch-grant boundary are carried in the linked v12 evidence. No upstream issue/PR changes by reviewer.",
+    "f949_24_success_claim_matches_live_api": true,
+    "guide_contains_durable_verified lessons": "queued cancellation admission, launcher-child identity binding, installed tests scoped to held-executor seam, complete sdist membership, owned pip-cache/parser distinction and exact log decoding rules",
+    "handoff_links_supplement3_and_current_v12_projection": true,
+    "historical0546_mac_cause_stays_unknown": true,
+    "package_acceptance_is_narrowly_scoped": true,
+    "pr308_body_readback_matches_live_remote": true,
+    "source_and_exact_head_ci_separated_from_native_baseline": true
+  },
+  "native_and_release_holds": {
+    "exact_next_nodes": [
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_published_artifact_details_preserves_one_rcc_identity_pair",
+      "tests/action_server_tests/test_source_staging_rcc_consumer.py::test_staged_package_executes_in_managed_rcc_runtime"
+    ],
+    "holds": [
+      "Whole-controller and independent640-second hard deadline not implemented/admitted",
+      "Uncapped final descendants/readers/application-lease and passive lease admission remain incomplete",
+      "Actual self-cgroup binding unavailable; visible counters UNQUALIFIED",
+      "Native memory floor/reserve proposed, unaccepted and uncalibrated; visibleheadroom2477068288bytes below proposedfloor3113851289plusreserve536870912",
+      "Single source/hash-bound genuine18.19.3 Action, acquisition, artifact/result/lease/terminalcleanup still NOTRUN"
+    ],
+    "launch_authority": "none; profile is evidence and not a launch grant",
+    "lease_commands": false,
+    "native_attempts": 0,
+    "profile_status": "NOT_ADMITTED",
+    "proposed_floor_bytes": 3113851289,
+    "proposed_reserve_bytes": 536870912,
+    "rcc_18_19_6": "ABSOLUTE HOLD",
+    "resolved_since_v11": [
+      "Independent exact-source/security GO",
+      "24 exact-head checks SUCCESS including actual Linux/macOS/Windows frozen and strict ownership/cancellation nodes",
+      "Independent measured packages and installed OAuth/held-executor/idle-template scope GO"
+    ],
+    "runtime_1_0_3": "HOLD",
+    "self_cgroup": "UNQUALIFIED",
+    "v12_profile_sha256": "a58ef605c3a0c47d2bdcd669c0145cbb789c6716f61e4b0bb0eeb5b3aae72d29",
+    "visible_headroom_bytes": 2477068288
+  },
+  "observed_at_utc": "2026-10-12T06:58:16.710156+00:00",
+  "package_scope": {
+    "artifact_bytes": 80775097,
+    "artifact_id": 11728534466,
+    "artifact_sha256": "f2e116426e40f84ddfb6fd88d96bf2280f169801f91d1820480cbcbb5668bbf6",
+    "installed_behavior": {
+      "core_python_members": 47,
+      "held_executor_cancellation_admission_passes": 8,
+      "helper_python_members": 2,
+      "idle_statuses": [
+        200,
+        403,
+        200
+      ],
+      "oauth_passes": 9,
+      "pip_check_exit0_owned_task_cache": true,
+      "runtime_python_members": 203,
+      "template_mode": "0o600"
+    },
+    "nonqualifying_scope": [
+      "managed Action/RCC/native execution",
+      "MCP discovery/read/tool",
+      "global descendants/readers/leases",
+      "sdist rebuild",
+      "other-platform installed startup",
+      "release publication"
+    ],
+    "publish_credentials_and_steps_skipped": true,
+    "review": "GO_F949_PACKAGED_INSTALLED_OAUTH_CANCELLATION_TEMPLATE_IDLE_SCOPED",
+    "run_id": 38211281718,
+    "seven_distributions_reviewed": true
+  },
+  "prior_immutable_payloads": {
+    "all_unchanged_vs_checkpoint_parent": true,
+    "immutable_handoff": {
+      "clean": true,
+      "expected_head": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934",
+      "head": "0d5424ee8ec7c0a0ccea42a91eeecea144aa2934"
+    },
+    "sets": [
+      {
+        "bytes": 346659,
+        "count": 37,
+        "manifest_sha256": "19f7a5261becd8081966d945f9c64782ea7eb44d6dfd4faa829867a92b8896a4",
+        "mismatch_count": 0,
+        "set": "successor-20261012",
+        "unchanged_vs_parent": true
+      },
+      {
+        "bytes": 298242,
+        "count": 63,
+        "manifest_sha256": "1cc1105115e97e6e4bcbf490a8e03f1272616daa49fdb7e8a2f249a0c5193592",
+        "mismatch_count": 0,
+        "set": "successor-20261012-supplement1",
+        "unchanged_vs_parent": true
+      },
+      {
+        "bytes": 135483,
+        "count": 49,
+        "manifest_sha256": "d688d42697fa0a6f3aa642bb0f421cc9901d2c8d47432a31e2bfcf3456cf297e",
+        "mismatch_count": 0,
+        "set": "successor-20261012-supplement2",
+        "unchanged_vs_parent": true
+      }
+    ],
+    "total": 149
+  },
+  "remote_readback": {
+    "branch_matches": {
+      "community": {
+        "expected": "a70993fafc99a9f94041485542d5a720797ca394",
+        "match": true,
+        "remote": "a70993fafc99a9f94041485542d5a720797ca394"
+      },
+      "handoff/actions-swarm-mk3-wave8-20261010": {
+        "expected": "3b86163240e3527244dcc8501e2a1f32fb5ac546",
+        "match": true,
+        "remote": "3b86163240e3527244dcc8501e2a1f32fb5ac546"
+      },
+      "integration/community-release-20261008": {
+        "expected": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+        "match": true,
+        "remote": "48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+      }
+    },
+    "exact_head_checks": {
+      "all_terminal_success": true,
+      "completed_success": 24,
+      "failures": 0,
+      "total": 24
+    },
+    "host_boot_matches_inventory": true,
+    "inventory_pr_matches": [
+      {
+        "base_match": true,
+        "draft_match": true,
+        "head_match": true,
+        "merged_match": true,
+        "number": 305,
+        "state_match": true
+      },
+      {
+        "base_match": true,
+        "draft_match": true,
+        "head_match": true,
+        "merged_match": true,
+        "number": 306,
+        "state_match": true
+      },
+      {
+        "base_match": true,
+        "draft_match": true,
+        "head_match": true,
+        "merged_match": true,
+        "number": 307,
+        "state_match": true
+      },
+      {
+        "base_match": true,
+        "draft_match": true,
+        "head_match": true,
+        "merged_match": true,
+        "number": 308,
+        "state_match": true
+      },
+      {
+        "base_match": true,
+        "draft_match": true,
+        "head_match": true,
+        "merged_match": true,
+        "number": 313,
+        "state_match": true
+      }
+    ],
+    "platform_producer": {
+      "parents": [
+        "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+        "f949bef2eeab518ffd34d9e69955938a007f8922"
+      ],
+      "sha": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+      "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99"
+    },
+    "pr308": {
+      "base": "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "body_exactly_matches_terminal_readback": true,
+      "draft": true,
+      "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+      "merged": false,
+      "state": "open"
+    },
+    "source_commit": {
+      "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+      "parents": [
+        "d358f9c2b41b9575a286e6a98cacf7425d694ea6"
+      ],
+      "tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99"
+    }
+  },
+  "review": "bounded independent review of additive successor supplement3 and canonical documentation",
+  "schema": 1,
+  "scope": {
+    "CI_reruns_or_cancellations": false,
+    "native_RCC_lease_or_worker_actions": false,
+    "only_reviewer_write": "this receipt under /workspace/successor-evidence/review-checkpoint-supplement3",
+    "product_source_edits": false,
+    "read_only": true
+  },
+  "source_scope": {
+    "frozen_failure": "eeb queued cancellation actual root cause receipt is bound by log SHA and source identities; no re-run",
+    "independent_review": "GO_SOURCE",
+    "red_green": "f949 review records immutable d358 persisted Run/held Future/real cancel API RED, then 11 GREEN lifecycle controls; affected suite 373 passed/1 skipped/3 native deselected",
+    "runtime_registration": "remote f949 registers RuntimeInfo before submitting async worker and response, passes same object, pre-pool cancel check, identity-scoped retirement"
+  },
+  "supplement3": {
+    "directory": "docs/handoffs/evidence/successor-20261012-supplement3",
+    "manifest_and_directory_exact": true,
+    "manifest_mode": "0o600",
+    "manifest_sha256": "08a047a86626f71d5ac6359590ab37afb423e807a2dabda97be7b75048ed2fe1",
+    "payload_bytes": 206378,
+    "payload_count": 54,
+    "payloads": [
+      {
+        "bytes": 5803,
+        "mode": "0o600",
+        "path": "current-checks-f949-supplement3.json",
+        "sha256": "5f827edd163b3ba313aeb60149facb1a5a5205d96772580a393efa1ccb43b0bc",
+        "valid_json": true
+      },
+      {
+        "bytes": 5946,
+        "mode": "0o600",
+        "path": "current-checks-f949-terminal.json",
+        "sha256": "a3b11c18e843fd415331d6a1b224abc96b1c6e9e4e0d26ef93e7686528e85328",
+        "valid_json": true
+      },
+      {
+        "bytes": 389,
+        "mode": "0o600",
+        "path": "pr308-f949-metadata-readback.json",
+        "sha256": "cdbdc14e3df43e8aa96b094107132ca5c6a9bb0b665cca3953048628a0f348e1",
+        "valid_json": true
+      },
+      {
+        "bytes": 721,
+        "mode": "0o600",
+        "path": "pr308-f949-packaged/artifact-metadata.json",
+        "sha256": "d68f75af64afa809934f9407c9e3e917776d53264d6e7d33f3340679266364dd",
+        "valid_json": true
+      },
+      {
+        "bytes": 382,
+        "mode": "0o600",
+        "path": "pr308-f949-packaged/download-connector-receipt.json",
+        "sha256": "4ea19cf009110b7672e89ed7c9899c30ba668eac48dff3cef2c9816a5febe13d",
+        "valid_json": true
+      },
+      {
+        "bytes": 3420,
+        "mode": "0o600",
+        "path": "pr308-f949-packaged/installed-command-receipt.json",
+        "sha256": "1b326260026b74a73de7146c2e13e1adeba6389eceb7c1274b9f1d7cd6b317a2",
+        "valid_json": true
+      },
+      {
+        "bytes": 494,
+        "mode": "0o600",
+        "path": "pr308-f949-packaged/installed-minimum-core-consumer/admission.json",
+        "sha256": "3033899128f106972857c06ca303b5376e30fe470dd20e1687c66d80d113c1c5",
+        "valid_json": true
+      },
+      {
+        "bytes": 1389,
+        "mode": "0o600",
+        "path": "pr308-f949-packaged/installed-minimum-core-consumer/startup-once2/startup-receipt.json",
+        "sha256": "f1d4298fd99f1cc8e4ecc8f5553091059f608c08a5740270cfde767f052ce510",
+        "valid_json": true
+      },
+      {
+        "bytes": 4027,
+        "mode": "0o600",
+        "path": "pr308-f949-packaged/installed-verification.json",
+        "sha256": "a8326ed85dd1da590425584f33c07fe3c0cb3965e21d9f8373230762835d0bd5",
+        "valid_json": true
+      },
+      {
+        "bytes": 432,
+        "mode": "0o600",
+        "path": "pr308-f949-packaged/installed-verifier-first-FAIL.json",
+        "sha256": "63351b59ea5e82d68f75f0ab8186c26222b8d811d4845ab0eccc5b6aac3508fa",
+        "valid_json": true
+      },
+      {
+        "bytes": 653,
+        "mode": "0o600",
+        "path": "pr308-f949-packaged/pip-owned-cache-receipt.json",
+        "sha256": "3fd82a5312fa127595b2d58d0dea96760965970c0decb0e0e777ed6250e9e054",
+        "valid_json": true
+      },
+      {
+        "bytes": 19728,
+        "mode": "0o600",
+        "path": "pr308-f949-terminal-metadata-readback.json",
+        "sha256": "728a4aed160a854e05d2d25515e7915316fcdaadb7c4d1992845c1334d724234",
+        "valid_json": true
+      },
+      {
+        "bytes": 627,
+        "mode": "0o600",
+        "path": "pr308/cpython31215-venv-launcher-source-provenance.json",
+        "sha256": "22b050fd7996f484aa40c1c5c1cc032e5230f4a63bbe8884de18276fe3573750",
+        "valid_json": true
+      },
+      {
+        "bytes": 1752,
+        "mode": "0o600",
+        "path": "pr308/eeb-windows-source-terminal-diagnosis.json",
+        "sha256": "404ad488208f1658a95052a589532293ce1aa821acd66d4c555e897b17bd15b2",
+        "valid_json": true
+      },
+      {
+        "bytes": 11699,
+        "mode": "0o600",
+        "path": "pr308/f949-platform-ci/job-114685787879-safe-receipt.json",
+        "sha256": "c54f229a242c68728024e54847bd90c3fc4e04805c053ff54c934e5bfe83ce55",
+        "valid_json": true
+      },
+      {
+        "bytes": 7407,
+        "mode": "0o600",
+        "path": "pr308/f949-platform-ci/job-114685788075-safe-receipt.json",
+        "sha256": "47c5412cfa048091d7f7fefb68356b200c1799c992a27848e7e84563e6ce284f",
+        "valid_json": true
+      },
+      {
+        "bytes": 11701,
+        "mode": "0o600",
+        "path": "pr308/f949-platform-ci/job-114685788155-safe-receipt.json",
+        "sha256": "3a2315deb33fd6918c7e3ec3e78762d6cf18d77d6769c42a9b04d73e816d7dc7",
+        "valid_json": true
+      },
+      {
+        "bytes": 437,
+        "mode": "0o600",
+        "path": "pr308/f949bef2-remote-source-readback.json",
+        "sha256": "24f516a3fdda0e0fed41f6e99783db8fb5f7fe75b97c6e8373d29bdeda6fe92a",
+        "valid_json": true
+      },
+      {
+        "bytes": 1975,
+        "mode": "0o600",
+        "path": "pr308/native-baseline-profile-d358f9c2-v10-SOURCE-PREPARED-NOTRUN.json",
+        "sha256": "568b654b3bd9c69f40bcc74c81a9dedc8be952a3d223f221c9b04d73d89cb584",
+        "valid_json": true
+      },
+      {
+        "bytes": 1942,
+        "mode": "0o600",
+        "path": "pr308/native-baseline-profile-f949bef2-v11-SOURCE-PREPARED-NOTRUN.json",
+        "sha256": "ffb4fb038baa67999f5024a55ec86a3203bad4bd85e20ea5e9b8309e2d322bbb",
+        "valid_json": true
+      },
+      {
+        "bytes": 2062,
+        "mode": "0o600",
+        "path": "pr308/native-baseline-profile-f949bef2-v12-CI-PASS-NOTADMITTED.json",
+        "sha256": "a58ef605c3a0c47d2bdcd669c0145cbb789c6716f61e4b0bb0eeb5b3aae72d29",
+        "valid_json": true
+      },
+      {
+        "bytes": 8584,
+        "mode": "0o600",
+        "path": "pr308/pr308-d358f9c2-windows-launcher-source-receipt.json",
+        "sha256": "5196de1ad61d02ba6e1104ca4276396cdcaa4c998fe2d349797fc295d0814215",
+        "valid_json": true
+      },
+      {
+        "bytes": 8838,
+        "mode": "0o600",
+        "path": "pr308/pr308-f949bef2-async-admission-source-receipt.json",
+        "sha256": "2d94631a2a69b5ddf194bd21677c3ad9a08020517920e577cb96d43d793908f4",
+        "valid_json": true
+      },
+      {
+        "bytes": 2748,
+        "mode": "0o600",
+        "path": "review-checkpoint-remote3b861632/remote-verification.json",
+        "sha256": "678eef578f06c4745ca8f993faef2fdc421a44fac1e7a64f5384bac53fd14c89",
+        "valid_json": true
+      },
+      {
+        "bytes": 1027,
+        "mode": "0o600",
+        "path": "review308-async-admission/immutable-source-check.json",
+        "sha256": "b1136613ef740cd49ecbab3df0474ee3400a8fd16e066252086847afa401cfd8",
+        "valid_json": true
+      },
+      {
+        "bytes": 1927,
+        "mode": "0o600",
+        "path": "review308-async-admission/replay-commands.json",
+        "sha256": "b5953ed6b47a1c1fe7d7fa1c51653ff1980f1c8c92855aaffc2b7361e464f7f8",
+        "valid_json": true
+      },
+      {
+        "bytes": 6237,
+        "mode": "0o600",
+        "path": "review308-async-admission/review.json",
+        "sha256": "e552441dbfceec684352cac518c0711ac3b37dd05eaa0f0ea67606332f7d7e06",
+        "valid_json": true
+      },
+      {
+        "bytes": 3167,
+        "mode": "0o600",
+        "path": "review308-async-admission/source-security-and-receipt-check.json",
+        "sha256": "0f40f0f3e7bbbd3c7f2957cf70bd6fb3978fbf01610bf9655e8385a0c5a04799",
+        "valid_json": true
+      },
+      {
+        "bytes": 1545,
+        "mode": "0o600",
+        "path": "review308-f949-packaged/documentation-proposal.json",
+        "sha256": "9227d0d2331fca78792d42df416cc4b761ba0056c5e3ef85005f3ce878d5727d",
+        "valid_json": true
+      },
+      {
+        "bytes": 3287,
+        "mode": "0o600",
+        "path": "review308-f949-packaged/extra-controls.json",
+        "sha256": "87c681f81f269cb176547dd36c8aac8784295c051a9627b030f1747679f9c94d",
+        "valid_json": true
+      },
+      {
+        "bytes": 909,
+        "mode": "0o600",
+        "path": "review308-f949-packaged/github-metadata.json",
+        "sha256": "975d9e11bfacf7143f3c532f69a5c55f8309cf0f9f87ebfdbc10233a57a2de16",
+        "valid_json": true
+      },
+      {
+        "bytes": 14493,
+        "mode": "0o600",
+        "path": "review308-f949-packaged/independent-package-verification.json",
+        "sha256": "803706bbbd339b956adebf6b6bda2f8e9889670967100fea4356d253568bc926",
+        "valid_json": true
+      },
+      {
+        "bytes": 2575,
+        "mode": "0o600",
+        "path": "review308-f949-packaged/producer-provenance.json",
+        "sha256": "ef7253eec631ef42b872e217a5f9677e0d6bcbf15cf61154eaefdf597defbe1c",
+        "valid_json": true
+      },
+      {
+        "bytes": 5899,
+        "mode": "0o600",
+        "path": "review308-f949-packaged/review-verdict.json",
+        "sha256": "250389b44d14f3a816e67686a5db0d197c50b1fc1426c2e555826685f6132e5c",
+        "valid_json": true
+      },
+      {
+        "bytes": 4027,
+        "mode": "0o600",
+        "path": "review308-f949-packaged/reviewer-installed-verification.json",
+        "sha256": "a8326ed85dd1da590425584f33c07fe3c0cb3965e21d9f8373230762835d0bd5",
+        "valid_json": true
+      },
+      {
+        "bytes": 472,
+        "mode": "0o600",
+        "path": "review308-f949-packaged/sdist-complete-source-verification.json",
+        "sha256": "1feaa9f95c7ab42cd855c2a3095a513a708a259f038dcc8b9cf8938f16d32b38",
+        "valid_json": true
+      },
+      {
+        "bytes": 8193,
+        "mode": "0o600",
+        "path": "review308-linux-async-failure/actual-rootcause-review.json",
+        "sha256": "35797235277ef86731b5630cd8e378ac09d407ad09a8f08f9630c31f8dddea87",
+        "valid_json": true
+      },
+      {
+        "bytes": 1582,
+        "mode": "0o600",
+        "path": "review308-mac-eeb-terminal/documentation-proposal.json",
+        "sha256": "c4c7e6aa92fafe49caa381919b1afb3f8b0ba65351f4ede1ab026b5d5ea2dd31",
+        "valid_json": true
+      },
+      {
+        "bytes": 6280,
+        "mode": "0o600",
+        "path": "review308-mac-eeb-terminal/terminal-review.json",
+        "sha256": "bdc63c9f767fea7f64d12aa5b847166edcb255af50e74bdd06fa4d9e397aa8cf",
+        "valid_json": true
+      },
+      {
+        "bytes": 810,
+        "mode": "0o600",
+        "path": "review308-windows-launcher/immutable-source-check.json",
+        "sha256": "46941bcea4395436ef211aa30f5b30affc9f3cb525b32d7f6546576628abed8b",
+        "valid_json": true
+      },
+      {
+        "bytes": 1634,
+        "mode": "0o600",
+        "path": "review308-windows-launcher/ownership-model.json",
+        "sha256": "621b1fa5992aeb4d977aad8eeb6b884e0967266b85bba3cd466e516fe2c5e516",
+        "valid_json": true
+      },
+      {
+        "bytes": 1532,
+        "mode": "0o600",
+        "path": "review308-windows-launcher/replay-commands.json",
+        "sha256": "e0322e592a7b725664c84303e3b2bbc210d472b9cef138fa198c0b81de012415",
+        "valid_json": true
+      },
+      {
+        "bytes": 5666,
+        "mode": "0o600",
+        "path": "review308-windows-launcher/review.json",
+        "sha256": "6336a10830d00ff270647f6786ad85a32d30bb01b196d0309376a6bd621896e8",
+        "valid_json": true
+      },
+      {
+        "bytes": 2385,
+        "mode": "0o600",
+        "path": "review308-windows-launcher/writer-receipt-verification.json",
+        "sha256": "2c098247e49b173835ce4f341abaf6d2bf74ecd9175e09a1be998f38a1cb3cbe",
+        "valid_json": true
+      },
+      {
+        "bytes": 1505,
+        "mode": "0o600",
+        "path": "review308-windows0546-terminal/documentation-proposal.json",
+        "sha256": "39b54e29efcedc44396a74366b16ce9d07ad0f54cf1242d1fe5b1ab5f7f840ea",
+        "valid_json": true
+      },
+      {
+        "bytes": 628,
+        "mode": "0o600",
+        "path": "review308-windows0546-terminal/log-transport-control.json",
+        "sha256": "1d62ccdeef9a450b063597a0c7ca54db2e4d9940ae8f07b2fcd63a293f8df228",
+        "valid_json": true
+      },
+      {
+        "bytes": 7330,
+        "mode": "0o600",
+        "path": "review308-windows0546-terminal/terminal-review.json",
+        "sha256": "2ff54a83c2ed33948b6aef2107f42208e773b3315649a82fb396ab9e034748c5",
+        "valid_json": true
+      },
+      {
+        "bytes": 794,
+        "mode": "0o600",
+        "path": "supplement3-documentation-disposition.json",
+        "sha256": "607773933fdc9714258bdc23efcffdca39f884a684dfa9dc666ae138ef43ef71",
+        "valid_json": true
+      },
+      {
+        "bytes": 2588,
+        "mode": "0o600",
+        "path": "supplement3-final-inventory-resource.json",
+        "sha256": "73da280fb85c357f95557069fe18c8c834a5fcb48e67385fae35cad15ecb6ffb",
+        "valid_json": true
+      },
+      {
+        "bytes": 385,
+        "mode": "0o600",
+        "path": "supplement3-first-selector-FAIL.json",
+        "sha256": "520673da0ddb7a0f92533a7741cbd672702dda150f489bc3337a9481f323a2a1",
+        "valid_json": true
+      },
+      {
+        "bytes": 471,
+        "mode": "0o600",
+        "path": "supplement3-resource-observation.json",
+        "sha256": "36e4d4a332a571be86be4471dee9e5c37e9103bed0518af89dac0750309abf38",
+        "valid_json": true
+      },
+      {
+        "bytes": 909,
+        "mode": "0o600",
+        "path": "verify-pr308-f949-packaged/github-metadata.json",
+        "sha256": "975d9e11bfacf7143f3c532f69a5c55f8309cf0f9f87ebfdbc10233a57a2de16",
+        "valid_json": true
+      },
+      {
+        "bytes": 14493,
+        "mode": "0o600",
+        "path": "verify-pr308-f949-packaged/independent-package-verification.json",
+        "sha256": "803706bbbd339b956adebf6b6bda2f8e9889670967100fea4356d253568bc926",
+        "valid_json": true
+      },
+      {
+        "bytes": 472,
+        "mode": "0o600",
+        "path": "verify-pr308-f949-packaged/sdist-complete-source-verification.json",
+        "sha256": "1feaa9f95c7ab42cd855c2a3095a513a708a259f038dcc8b9cf8938f16d32b38",
+        "valid_json": true
+      }
+    ],
+    "safety_scan": {
+      "file_uri": [],
+      "non_json_payload_files": [],
+      "pip_cache_path_metadata_refs": 4,
+      "private_log_path_metadata_refs": 9,
+      "query_url": [],
+      "signature_token": [],
+      "token_or_private_key": []
+    },
+    "validation_errors": []
+  },
+  "terminal_platform_evidence": {
+    "all_success": true,
+    "check_count": 24,
+    "counts": {
+      "linux_frozen": 132,
+      "linux_source": 1643,
+      "macos_frozen": 132,
+      "macos_source": 1439,
+      "windows_frozen": 131,
+      "windows_source": 1430
+    },
+    "head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+    "native_baseline_attempts": 0,
+    "observed_at": "2026-10-12T06:51:06.931737+00:00",
+    "per_job_receipts": "three safe JSON job receipts bind terminal source and frozen tests to exact F949 producer tree; frozen cancellation regression passed on all platforms",
+    "producer_checkout": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+    "producer_tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+    "runtime_run_id": 38211281631
+  },
+  "verdict": "GO_BOUNDED_REVIEW"
+}

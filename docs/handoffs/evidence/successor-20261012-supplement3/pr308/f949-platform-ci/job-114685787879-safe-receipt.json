@@ -1,0 +1,313 @@
+{
+  "ci_rerun_or_cancel_by_watch_lane": false,
+  "completed_at": "2026-10-12T06:31:40Z",
+  "completed_log_fetch_calls": 1,
+  "conclusion": "success",
+  "extraction_receipt": {
+    "bytes": 3839,
+    "path": "/workspace/successor-evidence/pr308/f949-platform-ci/job-114685787879-log-extraction-receipt.json",
+    "sha256": "2475dd46f5c9997bd09eb6c22dbd8c7a0302251bc499d0f70a23dd26249c5471"
+  },
+  "head_sha": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "historical_0546_macos_provider_failure_cause": "UNKNOWN; later passing test does not recover discarded typed diagnostic",
+  "job": 114685787879,
+  "lease_queries_or_writes": false,
+  "log_identity": {
+    "crlf_count": 0,
+    "decoded_log": "/workspace/successor-evidence/pr308/f949-platform-ci/job-114685787879-decoded-private.log",
+    "decoded_log_bytes": 1364027,
+    "decoded_log_sha256": "af5a4e17452905408845b79617235a86558161de8d52522012e439d80680b377",
+    "leading_utf8_bom": true,
+    "lf_count": 9201
+  },
+  "log_scope": "One connector fetch of completed job; exact UTF-8 encoding of received decoded text, not original HTTP/archive bytes",
+  "named_test_events": {
+    "test_async_zero_admits_cancel_before_held_worker_runs": [
+      "2026-10-12T06:13:53.7223670Z [gw1] [  8%] PASSED action_server_tests/test_async_run_cancellation_admission.py::test_async_zero_admits_cancel_before_held_worker_runs "
+    ],
+    "test_fixture_child_capture_rejects_unknown_or_changed_identity": [
+      "2026-10-12T06:16:38.2143100Z [gw1] [ 96%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_fixture_child_capture_rejects_unknown_or_changed_identity[unowned] ",
+      "2026-10-12T06:16:38.2162340Z [gw1] [ 96%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_fixture_child_capture_rejects_unknown_or_changed_identity[root_birth] ",
+      "2026-10-12T06:16:38.2182680Z [gw1] [ 96%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_fixture_child_capture_rejects_unknown_or_changed_identity[child_birth] ",
+      "2026-10-12T06:16:38.2200870Z [gw1] [ 96%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_fixture_child_capture_rejects_unknown_or_changed_identity[owner_exit] "
+    ],
+    "test_fixture_child_stop_check_rejects_reused_identity": [
+      "2026-10-12T06:16:38.2219040Z [gw1] [ 96%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_fixture_child_stop_check_rejects_reused_identity "
+    ],
+    "test_provider_startup_failure_uses_bounded_kill_fallback": [
+      "2026-10-12T06:14:14.1194640Z [gw2] [ 28%] PASSED action_server_tests/test_dakota_rcc_acceptance.py::test_provider_startup_failure_uses_bounded_kill_fallback "
+    ],
+    "test_regression_handles_reported_child_distinct_from_original_popen": [
+      "2026-10-12T06:16:38.2102930Z [gw1] [ 96%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_regression_handles_reported_child_distinct_from_original_popen "
+    ],
+    "test_server_async_process_poll_with_cancel": [
+      "2026-10-12T06:29:36.0181950Z action_server_tests/test_server_async.py::test_server_async_process_poll_with_cancel PASSED [ 76%]"
+    ],
+    "test_startup_regression_reports_failed_cleanup_and_disposes_original_child": [
+      "2026-10-12T06:16:38.0147780Z [gw1] [ 96%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_startup_regression_reports_failed_cleanup_and_disposes_original_child[False] ",
+      "2026-10-12T06:16:38.0790770Z [gw1] [ 96%] PASSED action_server_tests/test_provider_startup_cleanup.py::test_startup_regression_reports_failed_cleanup_and_disposes_original_child[True] "
+    ]
+  },
+  "native_baseline_attempts": 0,
+  "optional_rcc_18_19_5_or_727_candidate_launched": false,
+  "platform_job_name": "build (macos-py3.12-devmode)",
+  "release_or_rcc_publication_authority": "unchanged HOLD; general platform CI does not qualify admitted RCC native baseline",
+  "run": 38211281631,
+  "schema": 1,
+  "source_or_workflow_changes_by_watch_lane": false,
+  "source_producer": {
+    "checkout_commit": "d663b19f95139dbd6080cce3680e2a066f29eda5",
+    "checkout_log_proof": [
+      "2026-10-12T06:11:02.5793430Z HEAD is now at d663b19 Merge f949bef2eeab518ffd34d9e69955938a007f8922 into 48eeaf171e695d9b8ac140ea53239eaeb6eff331"
+    ],
+    "complete_git_tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+    "matches_reviewed_f949_tree": true,
+    "metadata": {
+      "bytes": 2648,
+      "path": "/workspace/successor-evidence/pr308/f949-platform-ci/producer-d663b19f-git-commit.json",
+      "sha256": "e747c968a3937377c70685ee7977d60e58c9128c9b1888ed85973dc0274c99b5"
+    },
+    "ordered_parents": [
+      "48eeaf171e695d9b8ac140ea53239eaeb6eff331",
+      "f949bef2eeab518ffd34d9e69955938a007f8922"
+    ]
+  },
+  "started_at": "2026-10-12T06:10:57Z",
+  "status": "completed",
+  "steps": [
+    {
+      "completed_at": "2026-10-12T06:11:00Z",
+      "conclusion": "success",
+      "name": "Set up job",
+      "number": 1,
+      "started_at": "2026-10-12T06:10:57Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:11:02Z",
+      "conclusion": "success",
+      "name": "Checkout repository and submodules",
+      "number": 2,
+      "started_at": "2026-10-12T06:11:00Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:11:05Z",
+      "conclusion": "success",
+      "name": "Install the latest version of uv",
+      "number": 3,
+      "started_at": "2026-10-12T06:11:02Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:11:07Z",
+      "conclusion": "success",
+      "name": "Install Python 3.12",
+      "number": 4,
+      "started_at": "2026-10-12T06:11:05Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:11:16Z",
+      "conclusion": "success",
+      "name": "Install devutils requirements",
+      "number": 5,
+      "started_at": "2026-10-12T06:11:07Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:11:17Z",
+      "conclusion": "skipped",
+      "name": "Install project (not dev)",
+      "number": 6,
+      "started_at": "2026-10-12T06:11:17Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:11:42Z",
+      "conclusion": "success",
+      "name": "Install project (dev)",
+      "number": 7,
+      "started_at": "2026-10-12T06:11:17Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:12:03Z",
+      "conclusion": "success",
+      "name": "Setup go",
+      "number": 8,
+      "started_at": "2026-10-12T06:11:42Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:12:09Z",
+      "conclusion": "success",
+      "name": "Setup node",
+      "number": 9,
+      "started_at": "2026-10-12T06:12:03Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:12:34Z",
+      "conclusion": "success",
+      "name": "Build frontend",
+      "number": 10,
+      "started_at": "2026-10-12T06:12:09Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:12:35Z",
+      "conclusion": "success",
+      "name": "Build OAuth2 config",
+      "number": 11,
+      "started_at": "2026-10-12T06:12:34Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:12:38Z",
+      "conclusion": "success",
+      "name": "Test Go wrapper child lifecycle",
+      "number": 12,
+      "started_at": "2026-10-12T06:12:35Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:13:34Z",
+      "conclusion": "success",
+      "name": "Build binary",
+      "number": 13,
+      "started_at": "2026-10-12T06:12:38Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:13:38Z",
+      "conclusion": "success",
+      "name": "Upload artifact: action_server/dist/final/",
+      "number": 14,
+      "started_at": "2026-10-12T06:13:34Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:16:40Z",
+      "conclusion": "success",
+      "name": "Test (not integration)",
+      "number": 15,
+      "started_at": "2026-10-12T06:13:38Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:16:50Z",
+      "conclusion": "success",
+      "name": "Install Playwright Chromium for Runtime browser acceptance",
+      "number": 16,
+      "started_at": "2026-10-12T06:16:40Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:16:50Z",
+      "conclusion": "skipped",
+      "name": "Verify Canvas published-Core Runtime and browser acceptance",
+      "number": 17,
+      "started_at": "2026-10-12T06:16:50Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:16:50Z",
+      "conclusion": "skipped",
+      "name": "Upload Canvas published-Core receipt",
+      "number": 18,
+      "started_at": "2026-10-12T06:16:50Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:31:14Z",
+      "conclusion": "success",
+      "name": "Test (integration)",
+      "number": 19,
+      "started_at": "2026-10-12T06:16:50Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:31:14Z",
+      "conclusion": "skipped",
+      "name": "Retain Windows native startup diagnostics",
+      "number": 20,
+      "started_at": "2026-10-12T06:31:14Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:31:18Z",
+      "conclusion": "success",
+      "name": "`inv lint`, potentially fixed with `inv pretty`",
+      "number": 21,
+      "started_at": "2026-10-12T06:31:14Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:31:32Z",
+      "conclusion": "success",
+      "name": "`inv typecheck`",
+      "number": 22,
+      "started_at": "2026-10-12T06:31:18Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:31:32Z",
+      "conclusion": "success",
+      "name": "`inv docs` with checking on files changed",
+      "number": 23,
+      "started_at": "2026-10-12T06:31:32Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:31:32Z",
+      "conclusion": "success",
+      "name": "Post Setup node",
+      "number": 43,
+      "started_at": "2026-10-12T06:31:32Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:31:32Z",
+      "conclusion": "success",
+      "name": "Post Setup go",
+      "number": 44,
+      "started_at": "2026-10-12T06:31:32Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:31:33Z",
+      "conclusion": "success",
+      "name": "Post Install the latest version of uv",
+      "number": 45,
+      "started_at": "2026-10-12T06:31:32Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:31:33Z",
+      "conclusion": "success",
+      "name": "Post Checkout repository and submodules",
+      "number": 46,
+      "started_at": "2026-10-12T06:31:33Z",
+      "status": "completed"
+    },
+    {
+      "completed_at": "2026-10-12T06:31:36Z",
+      "conclusion": "success",
+      "name": "Complete job",
+      "number": 47,
+      "started_at": "2026-10-12T06:31:33Z",
+      "status": "completed"
+    }
+  ],
+  "suite_summaries": [
+    "2026-10-12T06:16:40.2841700Z ========== 1439 passed, 216 skipped, 16 warnings in 178.30s (0:02:58) ==========",
+    "2026-10-12T06:31:13.5236260Z ========= 132 passed, 20 skipped, 1658 deselected in 860.66s (0:14:20) ========="
+  ],
+  "terminal_rest": {
+    "bytes": 5664,
+    "path": "/workspace/successor-evidence/pr308/f949-platform-ci/job-114685787879-terminal-rest.json",
+    "sha256": "5501a47404c25b5eede5db1e10e9832ab448a322027bd2df132b4766f8f6d948"
+  },
+  "upstream_disposition": "none"
+}

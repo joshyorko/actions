@@ -1,0 +1,14 @@
+{
+  "observed_at": "2026-10-12T06:42:49.598854+00:00",
+  "memory_current": 14710939648,
+  "memory_max": 17179869184,
+  "visible_headroom_bytes": 2468929536,
+  "memory_events": "low 0\nhigh 0\nmax 34411\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "disk_free": 12520734720,
+  "tmp_free": 9441153024,
+  "shm_free": 9441349632,
+  "self_binding": "UNQUALIFIED",
+  "native_admitted": false,
+  "native_baseline_attempts": 0,
+  "boot_id": "22d23245-c9c1-4789-8cbd-70bfa9b3b274"
+}

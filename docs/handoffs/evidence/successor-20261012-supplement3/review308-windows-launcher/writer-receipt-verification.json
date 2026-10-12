@@ -1,0 +1,78 @@
+{
+  "receipt_sha256": "5196de1ad61d02ba6e1104ca4276396cdcaa4c998fe2d349797fc295d0814215",
+  "checks": {
+    "windows-launcher-eeb-red.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-launcher-eeb-red.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-launcher-green-final.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-launcher-green-final.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-launcher-affected-final.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-launcher-affected-final.xml": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-launcher-static-final.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-launcher-mypy-win32.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "native-baseline-profile-d358f9c2-v10-SOURCE-PREPARED-NOTRUN.json": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "windows-launcher-d358f9c2-source.patch": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "decoded-eeb-windows114674512952.log": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "cpython31215-launcher.c": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/scripts/verify_dakota_rcc_acceptance.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/src/actions/server/_common/process.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/tests/action_server_tests/test_dakota_rcc_acceptance.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "action_server/tests/action_server_tests/test_provider_startup_cleanup.py": {
+      "bytes_match": true,
+      "sha256_match": true
+    },
+    "docs/skills/repository-operations.md": {
+      "bytes_match": true,
+      "sha256_match": true
+    }
+  },
+  "all_match": true,
+  "primary_source_git_blob_match": true,
+  "primary_source_scope": "saved v3.12.15 CPython source establishes supported redirector behavior; does not byte-attribute actual CI executable",
+  "actual_windows_summary_directly_seen": "2failed1413passed225skipped301.50s; equalityPID6976vs5536 and5392vs6312",
+  "actual_corrected_windows_result": "PENDING"
+}

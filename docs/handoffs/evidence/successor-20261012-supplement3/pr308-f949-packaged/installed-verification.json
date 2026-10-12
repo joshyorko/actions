@@ -1,0 +1,113 @@
+{
+  "source_head": "f949bef2eeab518ffd34d9e69955938a007f8922",
+  "source_tree": "ce5a94a37f108438daa9d2d283ab575b1000ce99",
+  "artifact": 11728534466,
+  "runtime_wheel_sha256": "d0a51a4fa59149b3b150435b626853f60fe2282076c2f8b2991b99b4d6f90176",
+  "dependencies": [
+    {
+      "name": "actions-core",
+      "version": "1.0.2",
+      "wheel_sha256": "9d527edf540978172178894546add75f117f240786aec804cb75c308615a7e80",
+      "installed_python_members_exact": 47,
+      "default_public_lock_and_no_direct_url": true
+    },
+    {
+      "name": "actions-http-helper",
+      "version": "1.0.3",
+      "wheel_sha256": "46ed7ce0e0d3e2e05456d937b5b24bc9dfa0d7d4b98f8119b9fdf00d4fa7e9f9",
+      "installed_python_members_exact": 2,
+      "default_public_lock_and_no_direct_url": true
+    },
+    {
+      "name": "actions-runtime",
+      "version": "1.0.3",
+      "wheel_sha256": "d0a51a4fa59149b3b150435b626853f60fe2282076c2f8b2991b99b4d6f90176",
+      "installed_python_members_exact": 203,
+      "default_public_lock_and_no_direct_url": false
+    }
+  ],
+  "lock_sha256": "21b13609360dd96fabe2d4fe0c392dd8b59dd591f521d7bfe74f08d3fcaaf101",
+  "commands_verified": 6,
+  "pip_owned_cache_recheck": {
+    "observed_at": "2026-10-12T06:37:50.722667+00:00",
+    "command": [
+      "python",
+      "/workspace/successor-evidence/run-prepared-package.py",
+      "/workspace/successor-evidence/pr308-f949-packaged/installed-minimum-core-consumer",
+      "poetry",
+      "run",
+      "python",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "PIP_CACHE_DIR": "/workspace/successor-evidence/pr308-f949-packaged/installed-minimum-core-consumer/pip-cache",
+    "cache_mode": "0o700",
+    "cache_uid": 1000,
+    "current_uid": 1000,
+    "exit_code": 0,
+    "output_sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+    "bytes": 30,
+    "package_install_performed": false
+  },
+  "initial_verifier_failure": "healthy pip-check output had additional default-cache warning; failed exact-line assertion retained separately",
+  "installed_oauth_passes": 9,
+  "installed_cancellation_admission_passes": 8,
+  "template_mode": "0o600",
+  "startup": {
+    "scope": "installed Linux cp312 idle CLI startup only",
+    "runtime_source": "f949bef2eeab518ffd34d9e69955938a007f8922",
+    "runtime_version": "1.0.3",
+    "public_core_helper_versions": {
+      "core": "1.0.2",
+      "helper": "1.0.3"
+    },
+    "visible_headroom_bytes": 2478616576,
+    "self_cgroup_binding": "UNQUALIFIED; no managed Action admission inferred",
+    "managed_actions": 0,
+    "rcc_feedback": "Normal CLI may launch shipped18.19.3 feedback metric; no environment/Action acquisition",
+    "startup": "HTTP_READY",
+    "http": [
+      {
+        "path": "/openapi.json",
+        "status": 200,
+        "body_sha256": "5034f5daf0085617818fdb4a0dd6c6c9fbe64c2c6a09f011bb1dff2bfa5b949c"
+      },
+      {
+        "path": "/api/work-items/stats",
+        "authenticated": false,
+        "status": 403,
+        "body_sha256": "9a1ef7ec2858c93d364dbe0e455d321ed30f0ad6e706782ebe00aa6653e1462f"
+      },
+      {
+        "path": "/api/work-items/stats",
+        "authenticated": true,
+        "status": 200,
+        "body_sha256": "85b9fcdd3a8c9779471783a64c89adcf174f2bc79c6de1b9321e8cbe496a6fdd"
+      }
+    ],
+    "cleanup": {
+      "wrapper_reaped": true,
+      "live_descendant_pids": [],
+      "zombie_descendant_pids": [],
+      "errors": [],
+      "descendant_snapshot_complete": true
+    },
+    "owner": {
+      "pid": 53630,
+      "create_time": 1791786350.07
+    },
+    "elapsed_seconds": 2.3424382850025722,
+    "status": "PASS_IDLE_STARTUP_SCOPED"
+  },
+  "poststartup_modes": {
+    ".": "0o700",
+    "datadir": "0o700",
+    "actions-home": "0o750",
+    "robots-home": "0o700",
+    "tmp": "0o700",
+    "stdout.log": "0o600",
+    "stderr.log": "0o600"
+  },
+  "scope": "installed minimum-Core OAuth/admission/template/dependencies/idle only; no MCP discovery/read/tool, managed Action, whole reader/census/lease cleanup, platform or release qualification"
+}

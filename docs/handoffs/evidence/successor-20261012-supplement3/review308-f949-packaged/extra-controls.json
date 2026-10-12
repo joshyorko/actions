@@ -1,0 +1,85 @@
+{
+  "complete_membership": [
+    {
+      "distribution": "actions_runtime-1.0.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "Python_member_set_exact": true,
+      "count": 203
+    },
+    {
+      "distribution": "actions_runtime-1.0.3-cp313-cp313-win_amd64.whl",
+      "Python_member_set_exact": true,
+      "count": 203
+    },
+    {
+      "distribution": "actions_runtime-1.0.3-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "Python_member_set_exact": true,
+      "count": 203
+    },
+    {
+      "distribution": "actions_runtime-1.0.3-cp312-cp312-macosx_12_0_arm64.whl",
+      "Python_member_set_exact": true,
+      "count": 203
+    },
+    {
+      "distribution": "actions_runtime-1.0.3-cp312-cp312-win_amd64.whl",
+      "Python_member_set_exact": true,
+      "count": 203
+    },
+    {
+      "distribution": "actions_runtime-1.0.3-cp313-cp313-macosx_12_0_arm64.whl",
+      "Python_member_set_exact": true,
+      "count": 203
+    },
+    {
+      "distribution": "actions_runtime-1.0.3.tar.gz",
+      "complete_src_Python_member_set_exact": true,
+      "count": 203
+    }
+  ],
+  "installed_cancellation_tests_exact_immutable_source_sha256": "20cb6b8a2cf53d9ba440e463866672fdde9a9ddbd3a9d6cf345feb7be2b1045a",
+  "held_executor_test_semantics": "Persisted realRun models/state/SQLite with realFuture heldexecutor; no actualworker acquisition; Pool rejects unexpected dispatch. Queuecancel/submissionfailure/validationfailure/identityreplacement/completed/scoped boundaries covered, not managedAction execution.",
+  "commands_all_cwd_consumer_verified": true,
+  "installed_log_counts": {
+    "OAuth": {
+      "passed": 9,
+      "seconds": 0.83
+    },
+    "cancellation_admission": {
+      "passed": 8,
+      "seconds": 0.75
+    }
+  },
+  "pip_initial_verifier_FAIL_retained": {
+    "result": "FAIL",
+    "scope": "verifier exact-output assertion, not dependency check",
+    "actual_pip_command_exit": 0,
+    "cause": "Healthy requirements output preceded by default unwritable pip cache warning",
+    "old_output_sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313",
+    "remedy": "new owned task-local pip cache; no HOME/cache chmod, install or package changes; retain original6commandreceipt"
+  },
+  "pip_owned_cache_metadata_and_no_install_verified": {
+    "observed_at": "2026-10-12T06:37:50.722667+00:00",
+    "command": [
+      "python",
+      "/workspace/successor-evidence/run-prepared-package.py",
+      "/workspace/successor-evidence/pr308-f949-packaged/installed-minimum-core-consumer",
+      "poetry",
+      "run",
+      "python",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "PIP_CACHE_DIR": "/workspace/successor-evidence/pr308-f949-packaged/installed-minimum-core-consumer/pip-cache",
+    "cache_mode": "0o700",
+    "cache_uid": 1000,
+    "current_uid": 1000,
+    "exit_code": 0,
+    "output_sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+    "bytes": 30,
+    "package_install_performed": false
+  },
+  "template_exact_tracked_bytes_and0600": true,
+  "idle_log_matches_actual_startup_receipt": true,
+  "scope": "Extra readonlystatic admission and receipt controls, no Runtime/OAuth/RCC/test reruns"
+}

@@ -1,0 +1,43 @@
+[
+  {
+    "label": "red",
+    "returncode": 1,
+    "command": [
+      "python3",
+      "/workspace/successor-evidence/run-prepared-package.py",
+      "/workspace/actions-pr308/action_server",
+      "poetry",
+      "run",
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "/workspace/successor-evidence/review308-async-admission/red/action_server/tests/action_server_tests/test_async_run_cancellation_admission.py::test_async_zero_admits_cancel_before_held_worker_runs",
+      "--basetemp=/workspace/successor-evidence/review308-async-admission/red/temp",
+      "--junitxml=/workspace/successor-evidence/review308-async-admission/red.xml"
+    ],
+    "timeout_seconds": 45
+  },
+  {
+    "label": "green",
+    "returncode": 0,
+    "command": [
+      "python3",
+      "/workspace/successor-evidence/run-prepared-package.py",
+      "/workspace/actions-pr308/action_server",
+      "poetry",
+      "run",
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "/workspace/successor-evidence/review308-async-admission/green/action_server/tests/action_server_tests/test_async_run_cancellation_admission.py",
+      "/workspace/successor-evidence/review308-async-admission/green/action_server/tests/action_server_tests/run_outputs/test_service.py::test_authorized_handle_round_trip_and_existing_run_authority",
+      "/workspace/successor-evidence/review308-async-admission/green/action_server/tests/action_server_tests/run_outputs/test_service.py::test_all_legacy_read_and_event_seams_isolate_scoped_runs",
+      "/workspace/successor-evidence/review308-async-admission/green/action_server/tests/action_server_tests/run_outputs/test_service.py::test_cancel_wins_before_publish_and_provisional_not_readable",
+      "--basetemp=/workspace/successor-evidence/review308-async-admission/green/temp",
+      "--junitxml=/workspace/successor-evidence/review308-async-admission/green.xml"
+    ],
+    "timeout_seconds": 45
+  }
+]

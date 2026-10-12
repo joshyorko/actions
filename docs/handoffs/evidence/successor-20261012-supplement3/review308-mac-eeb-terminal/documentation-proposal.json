@@ -1,0 +1,13 @@
+{
+  "canonical_file": "docs/skills/repository-operations.md",
+  "insertion_point": "provider-startup cleanup/test qualification guidance",
+  "exact_delta": "A later passing platform run cannot identify the cause of an earlier failed run. Keep the earlier cause unknown unless its retained failure diagnostics isolate it. Name the assertion exercised by a provider regression: a passing diagnostic-failure control proves incomplete cleanup remains a failure and emergency teardown disposes the original child; teardown is not a measured cleanup success. A passing injected fake-provider test also does not establish shipped RCC provider or lease acceptance.",
+  "durable_learning": "Separate terminal platform recovery, failure diagnosis and actual cleanup/native qualification.",
+  "evidence": [
+    "terminal-review.json binds actualmacOS1424source/132frozenPASS and namedstrict+negative diagnosticcontrols to eeb whole tree",
+    "Immutableeebtest source requires result.complete in positive fake-provider control, tests incomplete diagnostic failure, and excludes emergency teardown as acceptance evidence"
+  ],
+  "stale_or_ambiguous_guidance_removed": "Prevent latergreen evidence from retroactively assigning historicalMac0546cause or labeling fake-provider/negativecontrolPASS as RCC lifecycle acceptance.",
+  "remaining_uncertainty": "HistoricalMac0546causeUNKNOWN; eebworkflowFAILWindows2 source assertions remain failed; Linuxnative cancellation race not independently qualified here; currentd358+async changes require ownexacthead CI.",
+  "upstream_disposition": "none"
+}
