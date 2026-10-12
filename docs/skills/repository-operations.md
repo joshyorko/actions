@@ -2883,6 +2883,20 @@ non-reusable; an action finalizer retains its one semaphore token until the
 wrapper is reaped and no observed live descendant remains. Retry is in-band,
 and a genuinely free additional capacity slot remains usable.
 
+An accepted asynchronous legacy Run registers its cancellation state before
+submitting the worker and before returning `async-return`. Pass that same
+`RunRuntimeInfo` into execution; creating it only on worker entry leaves a
+queued, persisted Run temporarily uncancellable. Check cancellation before
+process acquisition and use the existing terminal transition for valid canceled
+inputs. Retire only the dispatch's own state identity on submission failure or
+Future completion, including validation failure; a stale Future cleanup callback
+cannot remove a replacement entry. Input validation response and persisted-status
+policy remain separate from cancellation admission. Scoped Runs still reject
+legacy registration and cancellation and use the authorized common lifecycle.
+Prove this boundary with a held executor, genuine Run storage and cancellation
+state, rather than increasing an action fixture's sleep or weakening its cancel
+assertion.
+
 For lock-deadline tests, control the monotonic clock and use a recording lock to
 assert the exact remaining timeout, including zero after expiry. Keep real-lock
 contention as an outcome-only smoke test; hosted scheduler delay makes elapsed

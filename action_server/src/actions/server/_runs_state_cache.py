@@ -198,6 +198,16 @@ class RunsState:
         self._run_id_to_runtime_info[run_id] = runtime_info
         return runtime_info
 
+    def discard_run_runtime_info(
+        self, run_id: str, runtime_info: RunRuntimeInfo
+    ) -> bool:
+        """Retire only the cancellation state owned by this completed dispatch."""
+        with self.semaphore:
+            if self._run_id_to_runtime_info.get(run_id) is not runtime_info:
+                return False
+            del self._run_id_to_runtime_info[run_id]
+            return True
+
     def on_run_changed(self, run: "Run", changes: Dict[str, Any]):
         from actions.server._models import RunStatus
 
