@@ -536,8 +536,7 @@ jobs:
       working-directory: release-source/action_server
     - name: Build OAuth2 config from immutable source
       run: uv run --no-project --python ${{ matrix.python }} inv build-oauth2-config
-      env:
-        GH_TOKEN: ${{ secrets.GH_PAT_GHA_TO_ANOTHER_REPO }}
+      env: {}
       working-directory: release-source/action_server
     - name: Verify immutable Runtime source version
       shell: bash

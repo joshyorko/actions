@@ -1744,9 +1744,7 @@ def test_recovery_normalizes_only_the_three_native_binaries(tmp_path):
 
     env = os.environ.copy()
     env["RELEASE_REF"] = "actions-runtime-1.0.3"
-    result = run_shell_step(
-        recovery.binary_release_normalize()["run"], tmp_path, env
-    )
+    result = run_shell_step(recovery.binary_release_normalize()["run"], tmp_path, env)
 
     assert result.returncode == 0, result.stderr
     assert sorted(path.name for path in (tmp_path / "release-assets").iterdir()) == [
@@ -1860,6 +1858,32 @@ else: sys.exit(1)
         assert not any(call[0] == "release" for call in calls)
         assert not any("--clobber" in call for call in calls)
     assert not any("/releases/tags/" in arg for call in calls for arg in call)
+
+
+@pytest.mark.parametrize("job_name", ["build-sdist", "build-wheels"])
+def test_generated_pypi_oauth_builds_are_offline_for_both_events(job_name):
+    workflow = yaml.safe_load(
+        repository_text(".github/workflows/actions_runtime_pypi_release.yml")
+    )
+    assert workflow["permissions"] == {"contents": "read"}
+    assert "pull_request_target" not in workflow["on"]
+    steps = workflow["jobs"][job_name]["steps"]
+    oauth_steps = [step for step in steps if "OAuth2 config" in step.get("name", "")]
+    assert len(oauth_steps) == 2
+    release, canary = oauth_steps
+    assert release["name"] == "Build OAuth2 config"
+    assert release["if"] == "github.event_name == 'push'"
+    assert release["env"] == {}
+    assert canary["name"] == "Build OAuth2 config (PR)"
+    assert canary["if"] == "github.event_name == 'pull_request'"
+    assert canary.get("env") == {}
+    assert canary["run"] == release["run"]
+    assert "inv build-oauth2-config" in canary["run"]
+    # Public OAuth packaging requires no cross-repository credentials.
+    credential_steps = [step for step in steps if "GH_TOKEN" in step.get("env", {})]
+    assert credential_steps == []
+    generated = load_workflow_generator().ActionServerPyPiRelease().full
+    assert generated == workflow
 
 
 def test_generated_recovery_is_rendered_and_byte_identical_to_generator(tmp_path):

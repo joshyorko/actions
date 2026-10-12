@@ -9,3 +9,5 @@ sema4ai-oauth-config.yaml
 oauth-config.yaml
 src/**/bin/data-server-cli-*
 go-wrapper/action-server-unsigned*
+# This public template contains no provider credentials.
+!oauth2/oauth-config.yaml

@@ -227,6 +227,10 @@ def get_oauthlib2_provider_settings(
         raise RuntimeError(
             f"Expected 'clientId' to be in OAuth2 settings for {provider} (mode: {mode})."
         )
+    if not isinstance(settings["clientId"], str) or not settings["clientId"].strip():
+        raise RuntimeError(
+            f"Expected a nonblank registered clientId in OAuth2 settings for {provider} (mode: {mode})."
+        )
 
     # clientSecret is optional (if not given uses pkce to make the authentication)
     # if "clientSecret" not in settings:
