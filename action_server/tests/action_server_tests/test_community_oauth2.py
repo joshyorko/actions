@@ -4,6 +4,7 @@ import importlib
 import os
 import stat
 import sys
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -83,11 +84,17 @@ def test_default_config_refuses_symlink(tmp_path, monkeypatch):
     assert target.read_bytes() == b"private\n"
 
 
-def test_community_catalog_rejects_hosted_registration(tmp_path):
+def test_community_catalog_rejects_hosted_registration(tmp_path, monkeypatch):
     from actions.server.vendored_deps.oauth2_settings import (
         get_oauthlib2_provider_settings,
     )
 
+    # Source-only suites need no pre-existing generated build module.
+    catalog = Path(__file__).resolve().parents[2] / "oauth2/actions-oauth-config.yaml"
+    monkeypatch.setattr(
+        "actions.server._oauth2.get_actions_provided_oauth2_config",
+        lambda: catalog.read_text(encoding="utf-8"),
+    )
     path = tmp_path / "operator.yaml"
     path.write_text(
         "oauth2Config:\n  providers:\n    google:\n      mode: actions\n",
