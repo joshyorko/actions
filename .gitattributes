@@ -16,6 +16,9 @@ docs/program/evidence/canvas-execution-graph-amendment-20261009-v* -text
 docs/program/evidence/rcc-provider-rollback-38034464513/* -text
 docs/program/evidence/rcc-provider-rollback-38034105493/* -text
 
+# This byte-verified generated resource intentionally retains its proven build bytes.
+templates/canvas-query/canvas.html -whitespace linguist-generated
+
 # Native provenance hashes these Go inputs as exact source bytes on every OS.
 action_server/go-wrapper/main.go text eol=lf
 action_server/go-wrapper/process.go text eol=lf
@@ -28,3 +31,12 @@ docs/program/evidence/rcc-control-772-bootstrap-failure.log -text
 
 # Package Revision fixtures assert canonical JSON bytes, including LF endings.
 docs/design/fixtures/package-revision-v1/*.json text eol=lf
+
+# Preserve exact Runtime distribution source and HTML scaffold checkout bytes.
+action_server/src/**/*.py text eol=lf
+action_server/frontend/apps/runtime/index.html text eol=lf
+action_server/src/actions/server/README.md text eol=lf
+action_server/src/actions/server/bin/.gitignore text eol=lf
+action_server/src/actions/server/index.html text eol=lf
+action_server/src/actions/server/templates/action-templates.yaml text eol=lf
+action_server/src/actions/server/vendored_deps/README.md text eol=lf

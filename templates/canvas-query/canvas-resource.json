@@ -1,0 +1,13 @@
+{
+  "uri": "ui://action-canvas/v1/canvas.html?query-fixture=0.1",
+  "mime_type": "text/html;profile=mcp-app",
+  "sha256": "fe8155dcd952c7cf60d0b57cfcfad70a9df4c1d14d655d9f822858cf8053c852",
+  "source_head": "13db7030416f7b64f9a577b800a629549e23903e",
+  "build_command": "cd action_server/frontend && npm run build:canvas",
+  "source_files": [
+    "action_server/frontend/apps/canvas-view/src/main.tsx",
+    "action_server/frontend/apps/canvas-view/src/McpCanvasView.tsx",
+    "action_server/frontend/apps/canvas-view/src/query-results/QueryResultsView.tsx",
+    "action_server/frontend/apps/canvas-view/src/query-results/query-results.css"
+  ]
+}

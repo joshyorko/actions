@@ -5,6 +5,7 @@ from __future__ import annotations
 import os
 import sys
 from contextlib import contextmanager
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -500,17 +501,14 @@ def test_staged_bytes_are_rechecked_and_mutation_cleans_owned_tree(
 
     def mutate_staged_read(fd: int, size: int) -> bytes:
         nonlocal mutated
-        chunk = real_read(fd, size)
         current = os.fstat(fd)
         staged_path = destination_path / "input"
-        if (
-            not mutated
-            and staged_path.exists()
-            and current.st_ino == staged_path.stat().st_ino
-        ):
-            mutated = True
-            staged_path.write_bytes(b"modified")
-        return chunk
+        if not mutated and staged_path.exists():
+            named = staged_path.stat()
+            if (current.st_dev, current.st_ino) == (named.st_dev, named.st_ino):
+                mutated = True
+                staged_path.write_bytes(b"modified")
+        return real_read(fd, size)
 
     monkeypatch.setattr(stager.os, "read", mutate_staged_read)
     with pytest.raises(ValueError, match="staged.*changed"):
@@ -518,6 +516,67 @@ def test_staged_bytes_are_rechecked_and_mutation_cleans_owned_tree(
             root_fd, destination_fd, ["input"], protected_input_names=[]
         )
     assert mutated
+    assert list(destination_path.iterdir()) == []
+
+
+@pytest.mark.parametrize("mutate", [False, True])
+def test_staged_byte_verification_with_constant_timestamp_observations(
+    tmp_path, root_fd, destination, monkeypatch, mutate
+):
+    stager = _stager()
+    real_observation = stager.source_read._observation
+
+    def constant_timestamps(value):
+        return replace(real_observation(value), mtime_ns=0, ctime_ns=0)
+
+    monkeypatch.setattr(stager.source_read, "_observation", constant_timestamps)
+    if mutate:
+        test_staged_bytes_are_rechecked_and_mutation_cleans_owned_tree(
+            tmp_path, root_fd, destination, monkeypatch
+        )
+    else:
+        test_stages_exact_measured_bytes_with_portable_modes_and_borrowed_fds(
+            tmp_path, root_fd, destination
+        )
+
+
+def test_staged_metadata_change_after_read_cleans_owned_tree(
+    tmp_path, root_fd, destination, monkeypatch
+):
+    stager = _stager()
+    destination_path, destination_fd = destination
+    (tmp_path / "input").write_bytes(b"original")
+    real_read = os.read
+    mutated = False
+    metadata_changed = False
+
+    def mutate_staged_metadata_after_read(fd: int, size: int) -> bytes:
+        nonlocal mutated, metadata_changed
+        chunk = real_read(fd, size)
+        before = os.fstat(fd)
+        staged_path = destination_path / "input"
+        if not mutated and staged_path.exists():
+            named = staged_path.stat()
+            if (before.st_dev, before.st_ino) == (named.st_dev, named.st_ino):
+                assert chunk == b"original"
+                staged_path.write_bytes(b"modified")
+                os.utime(
+                    fd, ns=(before.st_atime_ns, before.st_mtime_ns + 1_000_000_000)
+                )
+                after = os.fstat(fd)
+                assert before.st_size == after.st_size == len(b"original")
+                metadata_changed = before.st_mtime_ns != after.st_mtime_ns
+                assert metadata_changed
+                mutated = True
+        return chunk
+
+    monkeypatch.setattr(stager.os, "read", mutate_staged_metadata_after_read)
+    with pytest.raises(ValueError, match="staged.*changed"):
+        stager.stage_selected_files(
+            root_fd, destination_fd, ["input"], protected_input_names=[]
+        )
+    assert mutated
+    assert metadata_changed
     assert list(destination_path.iterdir()) == []
 
 
