@@ -1826,6 +1826,18 @@ candidate gate.
 
 ## Development Loop
 
+Give every preservation-sensitive pytest invocation its own unique, absent
+`--basetemp` outside the shared numbered pytest parent, and retain policy `all`.
+The installed pytest default retains three numbered roots and registers cleanup
+at process exit; a later invocation can delete an earlier completed test root.
+Explicit basetemp bypasses that numbered-root cleanup, but pytest removes an
+existing explicit target before using it. Never reuse a retained target or share
+one basetemp setting across sequential Toolkit and Runtime invocations. Policy
+`none` increases deletion; it does not disable cleanup. Before attributing a
+vanished root, bind recorded commands and installed cleanup source, distinguish
+scratch loss from independently retained logs and source receipts, and keep
+unobserved process attribution and broader evidence references unknown.
+
 1. Inspect branch/status and package configuration.
 2. Reproduce the failure or establish a clean baseline.
 3. Add a regression before behavioral code.
@@ -2693,6 +2705,18 @@ remains false after a failed refresh if the wrapper has exited; only a
 successful refresh while that owner is observable can restore it. An
 unexpected exit before controlled retirement starts keeps its distinct
 `crash_unverified` classification across retries until the reader is joined.
+
+A captured-tree cleanup can report an observed live child before its shared
+deadline is exhausted. A deterministic control of the original function
+returned after 0.41 seconds following two 0.2-second descendant waits and a
+quick wrapper reap, while a captured child was modeled absent at 0.75 seconds
+within the unchanged 18-second tree budget. Keep the reported incomplete
+result false; wrapper reaping does not establish descendant completion.
+This control establishes an early-return case, not the cause of a hosted
+timeout whose surviving identity and remaining cleanup budget were not
+recorded. Any improvement must retain the same deadline and exclusive
+Popen wrapper wait ownership, with live, zombie and observation-error
+states kept distinct.
 
 The bounded process-tree result distinguishes wrapper reaping, observed live
 descendants, and zombie descendants. A zombie is reported and makes
@@ -3914,6 +3938,18 @@ ancestry, and absence of both the remote tag and registry version. A successful
 tag workflow must still be followed by registry file/hash and installed public
 API verification. Never move a tag or replace a published distribution to recover
 a failed release.
+
+Mutex exclusion tests synchronize release with an observed failed real mutex
+acquisition while the owner still holds the lock. Assert eventual acquisition,
+owner disposal, and bounded release-thread cleanup; retain reentrant and
+cross-process exclusion checks. A release thread started before the observation
+timestamp can consume part of its sleep outside the measured interval, so elapsed
+time strictly greater than that sleep is not an exclusion invariant. Use a
+process-qualified unique mutex name in both parent and child to isolate xdist.
+Check owner disposal immediately when the successor acquires and enters,
+before joining the release thread. A join can let an early-entry defect wait
+for owner release and pass later assertions. Keep thread-completion and error
+assertions as separate cleanup checks.
 
 Portable source tests read the tracked public hosted catalog through the getter
 boundary, without requiring a pre-existing generated `_oauth2_config` module.

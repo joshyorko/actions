@@ -1,23 +1,26 @@
 import logging
 
 
-def test_system_mutex():
+def test_system_mutex(monkeypatch):
+    import os
     import subprocess
     import sys
+    import textwrap
     import threading
-    import time
+    import uuid
     import weakref
 
     import pytest
     from _pytest.outcomes import Failed
 
+    from actions.server._robo_utils import system_mutex as mutex_module
     from actions.server._robo_utils.system_mutex import (
         SystemMutex,
         _mutex_name_to_info,
         timed_acquire_mutex,
     )
 
-    mutex_name = "mutex_name_test_system_mutex"
+    mutex_name = f"test_system_mutex_{os.getpid()}_{uuid.uuid4().hex}"
 
     system_mutex = SystemMutex(mutex_name)
     assert system_mutex.get_mutex_aquired()
@@ -55,15 +58,30 @@ def test_system_mutex():
     with pytest.raises(AssertionError):
         SystemMutex("mutex/")  # Invalid name
 
-    time_to_release_mutex = 2
-    released_mutex = [False]
+    failed_attempt = threading.Event()
+    released = threading.Event()
+    abort_release = threading.Event()
+    release_errors = []
+
+    def observe_acquisition(*args, **kwargs):
+        candidate = SystemMutex(*args, **kwargs)
+        if not candidate.get_mutex_aquired():
+            # The owner is still holding the real OS mutex at this boundary.
+            failed_attempt.set()
+        else:
+            assert mutex4.disposed, "Successor acquired before owner release"
+        return candidate
 
     def release_mutex():
-        time.sleep(time_to_release_mutex)
-        released_mutex[0] = True
-        mutex4.release_mutex()
+        try:
+            assert failed_attempt.wait(5), "No failed real acquisition observed"
+            if not abort_release.is_set():
+                mutex4.release_mutex()
+                released.set()
+        except BaseException as error:
+            release_errors.append(error)
 
-    t = threading.Thread(target=release_mutex)
+    t = threading.Thread(target=release_mutex, daemon=True)
     t.start()
 
     def raise_assertion_info_if_prev_acquired_not_detected(mutex_name):
@@ -83,38 +101,61 @@ def test_system_mutex():
             f"  get_tid(): {threading.get_ident()}\n"
         )
 
-    initial_time = time.monotonic()
-    with timed_acquire_mutex(
-        mutex_name, check_reentrant=False, raise_error_on_timeout=True
-    ):  # The current mutex will be released in a thread, so, check_reentrant=False.
-        assert released_mutex[0], "Error: entered before mutex was released!"
-        acquired_time = time.monotonic()
+    try:
+        with monkeypatch.context() as patch:
+            patch.setattr(mutex_module, "SystemMutex", observe_acquisition)
+            handle = timed_acquire_mutex(
+                mutex_name,
+                timeout=5,
+                check_reentrant=False,
+                raise_error_on_timeout=True,
+            )
+        with handle:
+            assert mutex4.disposed, "Successor entered before owner release"
+            t.join(5)
+            assert failed_attempt.is_set(), "Mutex must reject acquisition while held"
+            assert released.is_set(), "Owner release must complete before entry"
+            assert mutex4.disposed
+            assert not release_errors
+            assert not t.is_alive()
 
-        # At this point the lock is acquired (and it was done in this thread).
-        # So, check that we get the error saying that it's not possible to get
-        # a reentrant lock.
-        try:
-            with pytest.raises(RuntimeError) as exc:
-                with timed_acquire_mutex(
-                    mutex_name, timeout=1, raise_error_on_timeout=True
-                ):
-                    pass
-        except Failed:
-            raise_assertion_info_if_prev_acquired_not_detected(mutex_name)
-        else:
-            assert "not a reentrant mutex" in str(exc)
+            # At this point the lock is acquired (and it was done in this thread).
+            # So, check that we get the error saying that it's not possible to get
+            # a reentrant lock.
+            try:
+                with pytest.raises(RuntimeError) as exc:
+                    with timed_acquire_mutex(
+                        mutex_name, timeout=1, raise_error_on_timeout=True
+                    ):
+                        pass
+            except Failed:
+                raise_assertion_info_if_prev_acquired_not_detected(mutex_name)
+            else:
+                assert "not a reentrant mutex" in str(exc)
 
-        # Must also fail from another process.
-        code = """
-from actions.server._robo_utils.system_mutex import timed_acquire_mutex
-mutex_name = "mutex_name_test_system_mutex"
-with timed_acquire_mutex(mutex_name, timeout=1, raise_error_on_timeout=True):
-    pass
-"""
-        with pytest.raises(subprocess.CalledProcessError):
-            subprocess.check_call([sys.executable, "-c", code], stderr=subprocess.PIPE)
+            # Must also fail from another process.
+            code = f"""
+    from actions.server._robo_utils.system_mutex import timed_acquire_mutex
+    mutex_name = {mutex_name!r}
+    with timed_acquire_mutex(mutex_name, timeout=1, raise_error_on_timeout=True):
+        pass
+    """
+            with pytest.raises(subprocess.CalledProcessError) as child_error:
+                subprocess.run(
+                    [sys.executable, "-c", textwrap.dedent(code)],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    check=True,
+                    timeout=5,
+                )
+            assert b"Could not get mutex" in child_error.value.stderr
 
-    assert acquired_time - initial_time > time_to_release_mutex
+    finally:
+        abort_release.set()
+        failed_attempt.set()
+        t.join(5)
+        mutex4.release_mutex()
+        assert not t.is_alive(), "Owned release thread did not stop"
 
 
 def test_gen_mutex_name_from_path():
