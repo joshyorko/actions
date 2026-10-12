@@ -1,0 +1,23 @@
+{
+  "verified_source_payload": "6f1a5556adc8b99287a6f2770b92ac9efe327aff",
+  "verification_receipt": {
+    "bytes": 604579,
+    "sha256": "370270cf409007e5262c0b54341e0c36e7da8da4412949d987676c82c8b3c7dd"
+  },
+  "late_verifier_source": {
+    "path": "source-copies/verify-final-remote-source.py.txt",
+    "bytes": 3244,
+    "sha256": "c4abba36ed9deec726a8b30ef8ac1d79c25b78d7fffe1fcb551be7c676df4713"
+  },
+  "final_delivery_commit_scope": "Receipt/inert verifier source/identity only; all prior source payload manifest unchanged",
+  "workers": "STOPPED_INACTIVE",
+  "live_owned_runtime_tests": 0,
+  "unrecoverable_or_unexported": [
+    "117 PID1-parented exited zombie ownership/reaping records",
+    "Private01f/frozen-v6 source and absent retired rawlogs",
+    "Local rawlogs/binaries/archives/environments/caches and original signed URL bytes"
+  ],
+  "runtime_release": "HOLD",
+  "rcc18_19_6": "ABSOLUTE_HOLD",
+  "do_not_autoresume": true
+}

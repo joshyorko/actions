@@ -9,7 +9,11 @@ historical scripts are review evidence, not portable execution grants.
 Repository: `joshyorko/actions`. Handoff branch:
 `handoff/actions-swarm-mk3-wave8-20261010`. The exact immutable delivery SHA/URL is
 in the final handoff receipt; this document's verified source payload and terminal
-remote-verification receipt are preserved on that existing branch. Predecessor
+remote-verification receipt are preserved on that existing branch. Verified complete source payload: `6f1a5556adc8b99287a6f2770b92ac9efe327aff`,
+tree `c82f72ff00bcb72dcd2a7534967925339635a5e0`. The final delivery commit adds
+[remote source verification](evidence/successor-stop-20261012/remote-source-verification.json)
+and this identity; its own SHA is supplied in the terminal delivery receipt.
+Predecessor
 checkpoint: `62bab755c87b46ff8140ec8ac17bd377b47dc258`. Original immutable recovery
 entry remains `0d5424ee8ec7c0a0ccea42a91eeecea144aa2934`; its detached checkout is
 clean. Its full6,632-leaf tree/source manifests were verified in this successor;

@@ -1,0 +1,25 @@
+import subprocess,json,hashlib,datetime
+from pathlib import Path
+repo=Path('/workspace/actions-checkpoint');base=repo/'docs/handoffs/evidence/successor-stop-20261012';head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=repo,text=True).strip()
+def api(p):return json.loads(subprocess.check_output(['gh','api','repos/joshyorko/actions/'+p]))
+ref=api('git/ref/heads/handoff/actions-swarm-mk3-wave8-20261010');assert ref['object']['sha']==head
+commit=api('git/commits/'+head);tree=commit['tree']['sha'];remote=api('git/trees/'+tree+'?recursive=1');assert not remote['truncated'];remote_rows={v['path']:(v['mode'],v['type'],v['sha']) for v in remote['tree']}
+local={}
+for row in subprocess.check_output(['git','ls-tree','-r','-t','-z',head],cwd=repo).split(b'\0'):
+ if not row:continue
+ fields,path=row.split(b'\t',1);mode,kind,sha=fields.decode().split();local[path.decode()]=(mode,kind,sha)
+assert local==remote_rows
+manifest=json.loads((base/'payload-manifest.json').read_text());verified=[]
+for v in manifest:
+ p=base/v['path'];b=p.read_bytes();assert len(b)==v['bytes'] and hashlib.sha256(b).hexdigest()==v['sha256'];relative=str(p.relative_to(repo));gitsha=hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest();assert remote_rows[relative]==('100644','blob',gitsha);verified.append({'path':relative,'bytes':len(b),'sha256':v['sha256'],'git_blob':gitsha})
+old=0
+for g in ['successor-20261012','successor-20261012-supplement1','successor-20261012-supplement2','successor-20261012-supplement3']:
+ p=base.parent/g
+ for v in json.loads((p/'manifest.json').read_text()):
+  b=(p/v['path']).read_bytes();assert len(b)==v['bytes'] and hashlib.sha256(b).hexdigest()==v['sha256'];old+=1
+states=[]
+for row in subprocess.check_output(['git','worktree','list','--porcelain'],cwd=repo,text=True).splitlines():
+ if row.startswith('worktree '):
+  p=row[9:];dirty=subprocess.check_output(['git','status','--porcelain'],cwd=p,text=True);assert not dirty;states.append({'path':p,'clean':True,'head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=p,text=True).strip()})
+r={'schema':1,'observed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'verdict':'PASS_COMPLETE_REMOTE_SOURCE_PAYLOAD','handoff_payload_sha':head,'branch':'handoff/actions-swarm-mk3-wave8-20261010','tree':tree,'parents':[p['sha'] for p in commit['parents']],'remote_tree_untruncated':True,'remote_entries':len(remote_rows),'remote_blob_leaves':sum(v[1]=='blob' for v in remote_rows.values()),'complete_path_mode_type_blob_match':True,'canonical_tree_digest':hashlib.sha256(json.dumps(sorted(local.items()),separators=(',',':')).encode()).hexdigest(),'new_manifest_payloads':len(verified),'new_payload_verified':verified,'prior_payloads_unchanged':old,'owned_worktrees':states,'source_scope':'Git source/configuration/safe receipt bytes only; no rawlogs/binaries/environments/privateRCC recovery inferred','runtime_release':'HOLD','rcc18_19_6':'ABSOLUTE_HOLD'}
+Path('/workspace/successor-evidence/handoff-complete-remote-source-verification.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps({k:r[k] for k in ['verdict','handoff_payload_sha','tree','remote_entries','remote_blob_leaves','new_manifest_payloads','prior_payloads_unchanged']}))
