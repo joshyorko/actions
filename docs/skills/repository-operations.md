@@ -1592,11 +1592,10 @@ after manifest creation and Twine checking, before artifact retention or upload.
 The verifier accepts cibuildwheel's interpreter-plus-ABI wheel names for the
 cp312/cp313 manylinux x86_64, macOS 12 arm64, and Windows amd64 set while
 rejecting mismatched ABI tags. The sdist and wheel build steps expose only
-`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR builds run frontend and OAuth
-generation without cross-repository PATs; the PR OAuth acquisition step receives
-only the built-in `${{ github.token }}` under `contents: read`. Matching command
-names do not establish matching generated payloads or successful source acquisition.
-PAT-bearing variants are limited to tag pushes. Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
+`ACTION_SERVER_SKIP_DOWNLOAD_IN_BUILD`. PR and tag builds generate the owned
+OAuth inputs offline with no acquisition token. Matching command names alone
+do not establish matching generated payloads; inspect the input digests.
+Twine version and metadata checks run with `PYPI` and `TWINE_*` removed
 from the child environment, while upload receives only the exact PyPI token.
 
 `inv build-oauth2-config` delegates to Runtime's installed Poetry environment.
