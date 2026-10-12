@@ -32,3 +32,9 @@ pytest-cov = "5.0.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+use_parentheses = true
